@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<stx:transform version="1.0"
+               xmlns="http://www.w3.org/1999/xhtml"
+               xmlns:slim="http://www.loc.gov/MARC21/slim"
+               xmlns:stx="http://stx.sourceforge.net/2002/ns"
+               exclude-result-prefixes="slim"
+               pass-through="all">
+  
+  
+  <stx:variable name="text"/>
+  <stx:variable name="ind2"/>
+  
+  <stx:template match="slim:collection[1]">
+    <ul class="bib">
+    <stx:process-children group="bib"/>
+    </ul>
+  </stx:template>
+  
+  <stx:template match="slim:collection[2]">
+    <ul class="mfhd">
+    <stx:process-children group="mfhd"/>
+    </ul>
+  </stx:template>
+
+ <stx:group name="mfhd" pass-through="none">           
+                                                                                                                                                                                                                                                           
+  <stx:template match="slim:subfield[../@tag='655' and @code='a']">
+      <stx:if test=".='Subset, Noproxy'">
+          <li class="noproxy"/>
+      </stx:if>
+  </stx:template>
+     
+  <stx:template match="slim:subfield[../@tag='844' and @code='a']">
+    <li class="_844a">
+      <stx:value-of select="."/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:subfield[../@tag='856' and @code='u']">
+    <li class="_856u">
+      <stx:value-of select="."/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:subfield[../@tag='856' and @code='i']">
+    <li class="_856i">
+      <stx:value-of select="."/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:subfield[../@tag='856' and @code='q']">
+    <li class="_856q">
+      <stx:value-of select="."/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:subfield[../@tag='856' and @code='z']">
+    <li class="_856z">
+      <stx:value-of select="."/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:subfield[../@tag='866' and @code='v']">
+    <li class="_866v">
+      <stx:value-of select="."/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:subfield[../@tag='866' and @code='y']">
+    <li class="_866y">
+      <stx:value-of select="."/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:subfield[../@tag='866' and @code='z']">
+    <li class="_866z">
+      <stx:value-of select="."/>
+    </li>
+  </stx:template>
+
+  <stx:template match="slim:subfield[../@tag='907' and @code='a']">
+    <li class="_907"><stx:value-of select="."/></li>
+  </stx:template>
+                                                                                                                                                         
+  <stx:template match="slim:datafield[@tag='856']">
+    <li class="_856">
+      <ul>
+      <stx:process-children/>
+      </ul>
+    </li>
+  </stx:template>
+
+</stx:group>
+  
+  <stx:group name="bib" pass-through="none">
+
+  <stx:template match="slim:datafield[@tag='245']">
+    <li class="_245">
+      <stx:assign name="ind2" select="number(@ind2)"/>
+      <stx:assign name="text"/>
+      <stx:process-children/>
+      <stx:if test="$ind2 > 0">
+          <stx:value-of select="substring($text,1,$ind2)"/>
+      </stx:if>
+      <span class="filing">
+      <stx:choose>
+          <stx:when test="substring($text, string-length($text)-1, string-length($text))=' /'">
+              <stx:value-of select="substring($text,$ind2+1, string-length($text)-1-$ind2)"/>
+          </stx:when>
+          <stx:otherwise>
+              <stx:value-of select="substring($text,$ind2+1)"/>
+          </stx:otherwise>
+      </stx:choose>
+      </span>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:datafield[@tag='246']">
+<stx:text>
+</stx:text>
+    <li class="_246">
+      <stx:assign name="text"/>
+      <stx:process-children/>
+      <stx:value-of select="$text"/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:datafield[@tag='247']">
+    <li class="_247">
+      <stx:assign name="text"/>
+      <stx:process-children/>
+      <stx:value-of select="$text"/>
+    </li>
+  </stx:template>
+
+   <stx:template match="slim:datafield[@tag='249']">
+    <li class="_249"><span class="filing">
+      <stx:assign name="text"/>
+      <stx:process-children/>
+      <stx:value-of select="$text"/>
+    </span></li>
+  </stx:template>
+ 
+  <stx:template match="slim:datafield[@tag='210']">
+    <li class="_210">
+      <stx:assign name="text"/>
+      <stx:process-children/>
+      <stx:value-of select="$text"/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:datafield[@tag='500']">
+    <li class="_500">
+      <stx:assign name="text"/>
+      <stx:process-children/>
+      <stx:value-of select="$text"/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:datafield[@tag='520']">
+    <li class="_520">
+      <stx:assign name="text"/>
+      <stx:process-children/>
+      <stx:value-of select="$text"/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:datafield[@tag='650' and @ind1='4' and (@ind2='2' or @ind2='7')]">
+    <li class="_650">
+      <stx:assign name="text"/>
+      <stx:process-children/>
+     <stx:value-of select="$text"/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:datafield[@tag='650' and @ind1!='4' and (@ind2='2' or @ind2='7')]">
+    <li class="_650_m">
+      <stx:assign name="text"/>
+      <stx:process-children/>
+     <stx:value-of select="$text"/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:datafield[@tag='653']">
+    <li class="_653">
+      <stx:assign name="text"/>
+      <stx:process-children/>
+      <stx:value-of select="$text"/>
+    </li>
+  </stx:template>
+  
+  <stx:template match="slim:datafield[@tag='655']">
+      <stx:assign name="text"/>
+      <stx:process-children/>
+      <stx:if test="$text='Selected Web Resource'">
+      <li class="selected"/>
+      </stx:if>
+      <stx:if test="$text='Core Material'">
+          <li class="core"/>
+      </stx:if>
+  </stx:template>
+
+  <stx:template match="slim:subfield[@code != 'h' and @code!='c']">
+    <stx:if test="string-length($text) > 0">
+      <stx:assign name="text" select="concat($text,' ')"/>
+    </stx:if>
+    <stx:assign name="text" select="concat($text,.)"/>
+  </stx:template>
+  
+  <!--stx:template match="slim:subfield[../@tag='035' and @code='a']">
+      <li class="_0359"><stx:value-of select="."/></li>
+  </stx:template-->
+ 
+  </stx:group>
+
+</stx:transform>

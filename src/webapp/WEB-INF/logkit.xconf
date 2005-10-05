@@ -1,0 +1,406 @@
+<?xml version="1.0"?>
+
+<logkit>
+  <factories>
+    <factory type="priority-filter" class="org.apache.avalon.excalibur.logger.factory.PriorityFilterTargetFactory"/>
+    <factory type="servlet" class="org.apache.avalon.excalibur.logger.factory.ServletTargetFactory"/>
+    <factory type="cocoon" class="org.apache.cocoon.util.log.CocoonTargetFactory"/>
+  </factories>
+
+  <targets>
+    <cocoon id="core">
+      <filename>${context-root}/WEB-INF/logs/core.log</filename>
+      <format type="cocoon">
+        %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <!--
+        append=false: Will override existing log files on Cocoon startup
+        append=true: Will append to the existing log files
+      -->
+      <append>false</append>
+      <!--
+        rotation: allows you to rotate log files one they meet certain
+                  criteria. In example below, files are rotated once they
+                  are one hour old or bigger than 100 Mb.
+      -->
+      <rotation type="revolving" init="1" max="4">
+        <or>
+          <size>100m</size>
+          <time>24:00:00</time>
+        </or>
+      </rotation>
+    </cocoon>
+
+    <cocoon id="sitemap">
+      <filename>${context-root}/WEB-INF/logs/sitemap.log</filename>
+
+      <format type="cocoon">
+        %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+      <rotation type="revolving" init="1" max="4">
+        <or>
+          <size>100m</size>
+          <time>24:00:00</time>
+        </or>
+      </rotation>
+    </cocoon>
+
+    <cocoon id="access">
+      <filename>${context-root}/WEB-INF/logs/access.log</filename>
+      <format type="cocoon">
+        %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+      <rotation type="revolving" init="1" max="4">
+        <or>
+          <size>100m</size>
+          <time>24:00:00</time>
+        </or>
+      </rotation>
+    </cocoon>
+
+    <!-- The logger for the flow layer -->
+    <!--cocoon id="flow">
+      <filename>${context-root}/WEB-INF/logs/flow.log</filename>
+      <format type="cocoon">
+        %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+      <rotation type="revolving" init="1" max="4">
+        <or>
+          <size>100m</size>
+          <time>24:00:00</time>
+        </or>
+      </rotation>
+    </cocooni-->
+
+    <!-- The logger for the xmlform components -->
+    <!--cocoon id="xmlform">
+      <filename>${context-root}/WEB-INF/logs/xmlform.log</filename>
+      <format type="cocoon">
+        %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+      <rotation type="revolving" init="1" max="4">
+        <or>
+          <size>100m</size>
+          <time>24:00:00</time>
+        </or>
+      </rotation>
+    </cocoon-->
+
+    <cocoon id="laneweb">
+      <filename>${context-root}/WEB-INF/logs/laneweb.log</filename>
+     
+      <format type="cocoon">
+        %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+      </format>
+      <append>false</append>
+      <rotation type="revolving" init="1" max="4">
+        <or>
+          <size>100m</size>
+          <time>24:00:00</time>
+        </or>
+      </rotation>
+    </cocoon>
+
+    <!--
+      This log file gets only messages with log level ERROR and below.
+    -->
+    <priority-filter id="error" log-level="ERROR">
+      <cocoon>
+        <filename>${context-root}/WEB-INF/logs/error.log</filename>
+        <format type="cocoon">
+          %7.7{priority} %{time}   [%{category}] (%{uri}) %{thread}/%{class:short}: %{message}\n%{throwable}
+        </format>
+        <append>false</append>
+      <rotation type="revolving" init="1" max="4">
+        <or>
+          <size>100m</size>
+          <time>24:00:00</time>
+        </or>
+      </rotation>
+      </cocoon>
+    </priority-filter>
+  </targets>
+
+  <categories>
+    <!--
+      log-level: One of INFO, INFO, WARN, ERROR, FATAL_ERROR.
+      Log level could be different for every category and subcategory.
+
+      Not all subcategories are defined in this file. Not defined
+      subcategories will be created automatically inheriting settings
+      of the parent subcategory.
+      When defining subcategory manually, it is required to specify log
+      targets, because they are not inherited in this case.
+    -->
+    
+      <category name="" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+       </category>
+    
+    <category name="core" log-level="INFO">
+      <!-- Startup component manager logger -->
+      <category name="startup" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="roles" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+        <category name="user" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+      </category>
+
+      <category name="instrument" log-level="INFO">
+        <category name="values" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <!-- Cocoon component manager logger -->
+      <category name="manager" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="modules" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="source-resolver" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <!-- Cocoon source repository logger -->
+      <category name="source" log-level="INFO">
+        <category name="resource" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="context" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="sitemap" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="cacheable" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="http" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="file" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="thread" log-level="INFO">
+        <category name="manager" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <!-- Cocoon store logger -->
+      <category name="store" log-level="DEBUG">
+        <category name="janitor" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="transient" log-level="INFO">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+        </category>
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+      
+      <category name="cache" log-level="DEBUG">
+          <log-target id-ref="core"/>
+          <log-target id-ref="error"/>
+      </category>
+
+      <category name="xml-parser" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="xml-serializer" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="xml-deserializer" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="xmlizer" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="xslt-processor" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="datasources" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="stream-pipeline" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <category name="event-pipeline" log-level="INFO">
+        <log-target id-ref="core"/>
+        <log-target id-ref="error"/>
+      </category>
+
+      <log-target id-ref="core"/>
+      <log-target id-ref="error"/>
+    </category>
+
+    <category name="sitemap" log-level="INFO">
+      <category name="acting" log-level="INFO">
+        <category name="laneweb-param" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>                                                                                                                                                                                 
+        <category name="resource-exists" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>
+        <log-target id-ref="sitemap"/>
+        <log-target id-ref="error"/>
+      </category>
+      <category name="generator" log-level="INFO">
+        <category name="file" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>
+        <log-target id-ref="sitemap"/>
+        <log-target id-ref="error"/>
+      </category>
+      <category name="pipeline" log-level="INFO">
+        <category name="caching" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>
+        <log-target id-ref="sitemap"/>
+        <log-target id-ref="error"/>
+      </category>
+      <category name="serializer" log-level="INFO">
+        <category name="xml" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="xhtml" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>
+        <log-target id-ref="sitemap"/>
+        <log-target id-ref="error"/>
+      </category>
+      <category name="transformer" log-level="INFO">
+        <category name="eresource" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="sql" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="stx" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="xinclude" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="xsltc" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>
+        <category name="xslt" log-level="INFO">
+          <log-target id-ref="sitemap"/>
+          <log-target id-ref="error"/>
+        </category>
+        <log-target id-ref="sitemap"/>
+        <log-target id-ref="error"/>
+      </category>
+      <log-target id-ref="sitemap"/>
+      <log-target id-ref="error"/>
+    </category>
+
+    <category name="access" log-level="INFO">
+      <log-target id-ref="access"/>
+      <log-target id-ref="error"/>
+    </category>
+
+    <!--category name="flow" log-level="INFO">
+      <log-target id-ref="flow"/>
+      <log-target id-ref="error"/>
+    </category>
+
+    <category name="xmlform" log-level="INFO">
+      <log-target id-ref="xmlform"/>
+      <log-target id-ref="error"/>
+    </category-->
+
+    <category name="laneweb" log-level="INFO">
+      <log-target id-ref="laneweb"/>
+      <log-target id-ref="error"/>
+      <category name="lmldb" log-level="INFO">
+        <log-target id-ref="laneweb"/>
+        <log-target id-ref="error"/>
+      </category>
+      <category name="irtdb" log-level="INFO">
+        <log-target id-ref="laneweb"/>
+        <log-target id-ref="error"/>
+      </category>
+      <category name="blob" log-level="INFO">
+        <log-target id-ref="laneweb"/>
+        <log-target id-ref="error"/>
+      </category>
+      <category name="generator" log-level="INFO">
+        <log-target id-ref="laneweb"/>
+        <log-target id-ref="error"/>
+      </category>
+      <category name="reader" log-level="INFO">
+        <log-target id-ref="laneweb"/>
+        <log-target id-ref="error"/>
+      </category>
+      <category name="model" log-level="INFO">
+        <log-target id-ref="laneweb"/>
+        <log-target id-ref="error"/>
+      </category>
+    </category>
+
+  </categories>
+</logkit>

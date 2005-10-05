@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cocoon version="2.1" user-roles="/WEB-INF/roles.xml">
+    
+  <sitemap check-reload="no" file="context://laneweb.xmap" logger="sitemap"/>
+ 
+  <input-modules>
+    <component-instance logger="core.modules.input.laneweb" name="laneweb" class="edu.stanford.laneweb.LanewebInputModule">
+        <parameter name="ip-source" value="context://WEB-INF/staff-ips.xml"/>
+        <parameter name="include-regex" value="^1(71\.6[4-7]\.|0\.25[23])\S+"/>
+        <parameter name="exclude-regex" value="^171\.66\.(1[6-9]|2[0-3])\.\S+"/>
+    </component-instance>
+    <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
+    <component-instance logger="core.modules.input" name="uriencode-request-param" class="edu.stanford.laneweb.URIEncodedParameterModule" />
+    <component-instance logger="core.modules.input" name="request-uri" class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
+    <component-instance logger="core.modules.input" name="request" class="org.apache.cocoon.components.modules.input.RequestModule"/>
+    <component-instance logger="core.modules.input" name="chain" class="org.apache.cocoon.components.modules.input.ChainMetaModule">
+      <input-module name="request-param"/>
+      <input-module name="defaults"/>
+    </component-instance>
+    <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
+      <values>
+        <template>irt</template>
+        <new-search-url>***laneweb.new-search.url***</new-search-url>
+        <live-base>***laneweb.live.base***</live-base>
+        <stage-base>***laneweb.stage.base***</stage-base>
+        <devel-base>***laneweb.devel.base***</devel-base>
+        <timeout>***laneweb.new-search.timeout***</timeout>
+      </values>
+    </component-instance>
+    <component-instance logger="core.modules.input" name="session-attr"  class="org.apache.cocoon.components.modules.input.SessionAttributeModule"/>
+  </input-modules> 
+    
+  <xml-parser class="org.apache.excalibur.xml.impl.JaxpParser" logger="core.xml-parser" pool-max="32">
+    <parameter name="validate" value="false"/>
+    <parameter name="namespace-prefixes" value="false"/>
+    <parameter name="stop-on-warning" value="true"/>
+    <parameter name="stop-on-recoverable-error" value="true"/>
+    <parameter name="reuse-parsers" value="false"/>
+    <parameter name="drop-dtd-comments" value="true"/>
+  </xml-parser>
+  
+  <store logger="core.store">
+     <parameter name="maxobjects" value="***laneweb.store.maxobjects***"/>
+    <parameter name="use-cache-directory" value="true"/>
+  </store>
+                                                                                                                                                                                                    
+  <transient-store logger="core.store.transient">
+     <parameter name="maxobjects" value="50"/>
+  </transient-store>
+
+  <store-janitor logger="core.store.janitor">  
+     <parameter name="freememory" value="***laneweb.store.freememory***"/>
+     <parameter name="heapsize" value="***laneweb.store.heapsize***"/>
+     <parameter name="cleanupthreadinterval" value="10"/>
+     <parameter name="percent_to_free" value="10"/>
+  </store-janitor>
+
+  <source-factories logger="core.source">
+    <component-instance class="org.apache.excalibur.source.impl.ResourceSourceFactory" name="resource" logger="core.source.resource"/>
+    <component-instance class="org.apache.cocoon.components.source.impl.ContextSourceFactory" name="context" logger="core.source.context"/>
+    <component-instance class="org.apache.cocoon.components.source.impl.SitemapSourceFactory" name="cocoon" logger="core.source.sitemap"/>
+    <!--<component-instance class="org.apache.excalibur.source.impl.HTTPClientSourceFactory" name="http" logger="core.source.http"/>-->
+    <component-instance class="org.apache.excalibur.source.impl.FileSourceFactory" name="file" logger="core.source.file"/>
+    <component-instance class="org.apache.excalibur.source.impl.URLSourceFactory" name="*"/>
+  </source-factories>
+
+  <source-resolver logger="core.source-resolver"/>
+
+  <xml-serializer class="org.apache.cocoon.components.sax.XMLByteStreamCompiler" logger="core.xml-serializer" pool-max="32"/>
+  
+  <xml-deserializer class="org.apache.cocoon.components.sax.XMLByteStreamInterpreter" logger="core.xml-deserializer" pool-max="32"/>
+
+  <xmlizer role="org.apache.excalibur.xml.sax.SAXParser" logger="core.xmlizer"/>
+
+  <component logger="core.xslt-processor"
+             role="org.apache.excalibur.xml.xslt.XSLTProcessor/xsltc"
+             class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl">
+     <parameter name="use-store" value="true"/>
+     <parameter name="incremental-processing" value="false"/>
+     <parameter name="transformer-factory" value="org.apache.xalan.xsltc.trax.TransformerFactoryImpl"/>
+  </component>
+  
+    <component class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl" logger="core.xslt-processor"
+    role="org.apache.excalibur.xml.xslt.XSLTProcessor/xalan">
+     <parameter name="use-store" value="true"/>
+     <parameter name="incremental-processing" value="false"/>
+     <parameter name="transformer-factory" value="org.apache.xalan.processor.TransformerFactoryImpl"/>
+  </component>
+  
+  <classloader class="org.apache.cocoon.components.classloader.ClassLoaderManagerImpl" logger="core.classloader"/>
+
+  <cache logger="core.cache"/>
+  
+  <runnable-manager logger="core.runnable">
+  <thread-factory>org.apache.cocoon.components.thread.DefaultThreadFactory</thread-factory>
+    <thread-pools>
+      <thread-pool>
+        <name>default</name>
+        <priority>NORM</priority>
+        <daemon>false</daemon>
+        <queue-size>-1</queue-size>
+        <max-pool-size>5</max-pool-size>
+        <min-pool-size>5</min-pool-size>
+        <keep-alive-time-ms>60000</keep-alive-time-ms>
+        <block-policy>RUN</block-policy>
+        <shutdown-graceful>false</shutdown-graceful>
+        <shutdown-wait-time-ms>-1</shutdown-wait-time-ms>
+      </thread-pool>
+      <thread-pool>
+        <name>daemon</name>
+        <priority>NORM</priority>
+        <daemon>true</daemon>
+        <queue-size>0</queue-size>
+        <max-pool-size>-1</max-pool-size>
+        <min-pool-size>1</min-pool-size>
+        <keep-alive-time-ms>60000</keep-alive-time-ms>
+        <block-policy>ABORT</block-policy>
+        <shutdown-graceful>false</shutdown-graceful>
+        <shutdown-wait-time-ms>-1</shutdown-wait-time-ms>
+      </thread-pool>
+    </thread-pools>
+  </runnable-manager>
+
+  <datasources logger="core.datasources">
+    <jdbc logger="laneweb.lmldb" name="voyager">
+      <pool-controller min="2" max="8" grow="2">
+        <keep-alive>SELECT 1 FROM DUAL</keep-alive>
+      </pool-controller>
+      <driver>oracle.jdbc.driver.OracleDriver</driver>
+      <dburl>***laneweb.voyager.url***</dburl>
+      <user>***laneweb.voyager.user***</user>
+      <password>***laneweb.voyager.password***</password>
+    </jdbc>
+    <jdbc logger="laneweb.irtdb" name="laneweb">
+      <pool-controller min="2" max="8" grow="2">
+        <keep-alive>SELECT 1 FROM DUAL</keep-alive>
+      </pool-controller>
+      <driver>oracle.jdbc.driver.OracleDriver</driver>
+      <dburl>***laneweb.irtdb.url***</dburl>
+      <user>***laneweb.irtdb.user***</user>
+      <password>***laneweb.irtdb.password***</password>
+    </jdbc>
+  </datasources>
+  
+  <blob logger="laneweb.blob">
+    <parameter name="db-name" value="voyager"/>
+  </blob>
+
+  <marcReader logger="laneweb.reader"/>
+   
+</cocoon>

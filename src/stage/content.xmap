@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+    <!-- =========================== Components ================================ -->
+    <map:components>
+        <map:generators default="html">
+            <map:generator name="html" logger="sitemap.generator.html"
+                src="org.apache.cocoon.generation.HTMLGenerator" pool-max="32"
+                pool-min="16" pool-grow="4">
+                <jtidy-config>context://WEB-INF/jtidy.properties</jtidy-config>
+            </map:generator>
+            <map:generator name="web-service" logger="sitemap.generator.web-service"
+                src="edu.stanford.laneweb.SearchProxyGenerator"
+                pool-max="32" pool-min="16" pool-grow="4"/>
+        </map:generators>
+        <map:transformers default="xinclude">
+            <map:transformer logger="sitemap.transformer.xinclude"
+                name="xinclude"
+                src="org.apache.cocoon.transformation.XIncludeTransformer"
+                pool-max="32" pool-min="16" pool-grow="4"/>
+        </map:transformers>
+        <map:serializers default="xml"/>
+        <map:selectors default="simple">
+            <map:selector name="simple"
+                src="org.apache.cocoon.selection.SimpleSelector" logger="sitemap.selector.simple">
+            </map:selector>
+        </map:selectors>
+        <map:matchers default="wildcard"/>
+        <map:pipes default="noncaching"/>
+    </map:components>
+    <map:pipelines>
+        <map:pipeline type="noncaching">
+            <map:match type="wildcard" pattern="online/auth.html">
+                <map:generate type="html" src="{defaults:stage-base}/xdocs/online/auth.html"/>
+                <map:transform type="xsltc" src="context://xsl/auth.xsl">
+                    <map:parameter name="url" value="{request-param:url}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="search-proxy">
+                <map:generate type="web-service" src="{defaults:new-search-url}search?id={request-param:id}&amp;w={chain:timeout}&amp;q={uriencode-request-param:keywords}"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="new-search.html">
+                <map:aggregate element="aggregate">
+                    <map:part src="cocoon:/search-proxy"/>
+                    <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>
+                </map:aggregate>
+                <map:transform type="xslt" src="context://xsl/synchronous-search.xsl">
+                    <map:parameter name="template" value="{request-param:source}"/>
+                    <map:parameter name="search-url" value="{defaults:new-search-url}"/>
+                    <map:parameter name="keywords" value="{request-param:keywords}"/>
+                    <map:parameter name="view" value="{request-param:view}"/>
+                    <map:parameter name="debug" value="{request-param:debug}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="news/index.html">
+                <map:generate type="html" src="{defaults:stage-base}/xdocs/news/index.html"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="xsltc" src="context://xsl/rss2html.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="howto/index.html">
+                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
+                <map:transform type="xsltc" src="context://xsl/faq.xsl">
+                    <map:parameter name="id" value="{request-param:id}"/>
+                    <map:parameter name="category" value="{request-param:category}"/>
+                    <map:parameter name="keywords" value="{request-param:keywords}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="blog2list.html">
+                <map:generate type="html" src="{request-param:u}"/>
+                <map:transform type="xsltc" src="context://xsl/blog2list.xsl">
+                    <map:parameter name="keywords" value="{request-param:keywords}"/>
+                    <map:parameter name="label-element" value="{request-param:le}"/>
+                    <map:parameter name="label" value="{request-param:l}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="blog/*">
+                <map:generate type="html" src="http://medblog.stanford.edu/lane-news/lane-news.html"/>
+                <map:transform type="xsltc" src="context://xsl/news-blog.xsl">
+                    <map:parameter name="type" value="{1}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="online/*all.html">
+                <map:generate src="cocoon://content/online/{1}.html?all=y"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="online/databases/index.html">
+                <map:generate src="cocoon://content/online/db.html"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="templates/**.xml">
+                <map:generate type="file" src="{defaults:stage-base}/resources/templates/{1}.xml"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="**">
+                <map:generate type="html" src="{defaults:stage-base}/xdocs/{1}"/>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>

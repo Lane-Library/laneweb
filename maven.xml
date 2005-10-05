@@ -1,0 +1,27 @@
+<project default="war:war" xmlns:j="jelly:core">
+    <postGoal name="war:webapp">
+        <available file="../laneweb.properties" property="laneweb.production"/>
+        <copy todir="target/laneweb/WEB-INF">
+            <fileset dir="src/conf">
+                <includes name="cocoon.xconf,log4j.xconf"/>
+            </fileset>
+            <j:choose>
+                <j:when test="${laneweb.production}">
+                    <filterset filtersfile="../laneweb.properties" begintoken="***" endtoken="***"/>
+                </j:when>
+                <j:otherwise>
+                    <filterset filtersfile="project.properties" begintoken="***" endtoken="***"/>
+                </j:otherwise>
+            </j:choose>
+        </copy>
+        <j:forEach var="lib" items="${pom.artifacts}">
+            <j:set var="dep" value="${lib.dependency}"/>
+            <j:if test="${dep.getProperty('endorsed')=='true'}">
+                <j:if test="${dep.type =='jar'}">
+                    <copy todir="${maven.build.dir}/endorsed" file="${lib.path}"/>
+                </j:if>
+            </j:if>
+        </j:forEach>
+    </postGoal>
+    
+</project>

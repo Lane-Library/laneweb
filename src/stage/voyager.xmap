@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+    <map:components>
+        <map:generators default="marc">
+            <map:generator name="marc" logger="sitemap.generator.marc"
+                src="edu.stanford.laneweb.MARCGenerator" pool-max="4"
+                pool-min="2" pool-grow="2">
+                <map:parameter name="db-name" value="voyager"/>
+            </map:generator>
+        </map:generators>
+        <map:transformers default="xsltc"/>
+        <map:serializers default="xml"/>
+        <map:matchers default="wildcard"/>
+        <map:pipes default="noncaching"/>
+    </map:components>
+    <map:pipelines>
+        <map:pipeline type="noncaching">
+            <map:match type="wildcard" pattern="marc.xml">
+                <map:generate type="marc">
+                    <map:parameter name="db" value="{request-param:db}"/>
+                    <map:parameter name="type" value="{request-param:type}"/>
+                    <map:parameter name="id" value="{request-param:id}"/>
+                </map:generate>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="marc.html">
+                <map:generate type="file" src="cocoon:/marc.xml"/>
+                <map:transform type="xsltc" src="context://xsl/marc.xsl">
+                    <map:parameter name="db" value="{request-param:db}"/>
+                    <map:parameter name="type" value="{request-param:type}"/>
+                    <map:parameter name="id" value="{request-param:id}"/>
+                </map:transform>
+                <map:serialize type="xhtml"/>
+            </map:match>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>

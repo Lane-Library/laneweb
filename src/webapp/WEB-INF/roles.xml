@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<role-list>
+    <role
+        name="edu.stanford.lane.catalog.BLOBSource"
+        shorthand="blob"
+        default-class="edu.stanford.laneweb.BLOBSourceImpl"/>
+    <role
+        name="edu.stanford.lane.catalog.MarcReader"
+        shorthand="marcReader"
+        default-class="edu.stanford.laneweb.MarcReaderImpl"/>
+</role-list>
+
