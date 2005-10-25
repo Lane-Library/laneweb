@@ -42,7 +42,7 @@ public class MARCGenerator extends ServiceableGenerator implements Initializable
         db = par.getParameter(DB, "lmldb");
     }
     
-    public void generate() throws IOException, SAXException, ProcessingException {
+    public void generate() throws IOException, ProcessingException {
         if ( getLogger().isDebugEnabled() ) {
             getLogger().debug( "generate()" );
         }

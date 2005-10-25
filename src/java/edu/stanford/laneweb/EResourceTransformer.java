@@ -56,11 +56,10 @@ public class EResourceTransformer extends AbstractSAXTransformer implements Init
 		String name,
 		String raw,
 		Attributes attr)
-		throws ProcessingException, IOException, SAXException {
+		throws IOException, SAXException {
 		this.xmlConsumer.startElement(uri, name, raw, attr);
 		if (name.equals("li")) {
 			voyagerDoc = true;
-			String ids = attr.getValue("id");
 			String bibid = null;
 			String mfhdid = null;
 			String authid = null;
@@ -102,7 +101,7 @@ public class EResourceTransformer extends AbstractSAXTransformer implements Init
 	}
 	
 	public void endTransformingElement(String uri, String name, String raw)
-		throws SAXException, ProcessingException {
+		throws SAXException {
 			if (name.equals("li")) {
 				voyagerDoc = false;
 			}

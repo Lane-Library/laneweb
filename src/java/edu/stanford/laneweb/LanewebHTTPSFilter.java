@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LanewebHTTPSFilter implements Filter {
 
-	public void init(FilterConfig arg0) throws ServletException {
+	public void init(FilterConfig arg0) {
 	}
 
 	/*

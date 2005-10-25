@@ -235,9 +235,8 @@ implements Configurable, Disposable {
             StringBuffer buffer = new StringBuffer(this.inputSource.getURI());
             buffer.append(':').append(this.xpath);
             return buffer.toString();
-        } else {
-            return this.inputSource.getURI();
         }
+        return this.inputSource.getURI();
     }
 
     /**
@@ -258,7 +257,7 @@ implements Configurable, Disposable {
      * Generate XML data.
      */
     public void generate()
-    throws IOException, SAXException, ProcessingException {
+    throws SAXException, ProcessingException {
         try {
             // Setup an instance of Tidy.
             Tidy tidy = new Tidy();

@@ -15,10 +15,8 @@ import java.util.Iterator;
 
 import org.apache.avalon.excalibur.datasource.DataSourceComponent;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.ServiceSelector;
 import org.apache.avalon.framework.service.Serviceable;
@@ -51,7 +49,7 @@ public class BLOBSourceImpl extends AbstractLogEnabled implements Serviceable, B
     
     private String myDBName;
     
-    public void parameterize( Parameters params ) throws ParameterException {
+    public void parameterize( Parameters params ) {
         myDBName = params.getParameter("db-name", "voyager");
     }
     
@@ -170,7 +168,7 @@ public class BLOBSourceImpl extends AbstractLogEnabled implements Serviceable, B
 	/* (non-Javadoc)
 	 * @see org.apache.avalon.framework.component.Composable#compose(org.apache.avalon.framework.component.ComponentManager)
 	 */
-	public void service(ServiceManager aManager) throws ServiceException {
+	public void service(ServiceManager aManager) {
 		myManager = aManager;
 	}
     

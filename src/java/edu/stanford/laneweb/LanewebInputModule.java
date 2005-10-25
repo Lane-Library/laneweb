@@ -13,9 +13,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.thread.ThreadSafe;
@@ -56,8 +54,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 
     private String excludeRegex;
     
-    public Object getAttribute(String key, Configuration config, Map objectModel)
-            throws ConfigurationException {
+    public Object getAttribute(String key, Configuration config, Map objectModel) {
         String result = null;
         Request request = ObjectModelHelper.getRequest(objectModel);
         String ip = request.getRemoteAddr();
@@ -211,19 +208,18 @@ public class LanewebInputModule extends AbstractLogEnabled implements
         return OTHER;
     }
     
-    public Iterator getAttributeNames(Configuration key, Map config)
-            throws ConfigurationException {
+    public Iterator getAttributeNames(Configuration key, Map config) {
        throw new UnsupportedOperationException();
     }
 
     public Object[] getAttributeValues(String key, Configuration config,
-            Map objectModel) throws ConfigurationException {
+            Map objectModel) {
         Object[] result = new Object[1];
         result[0] = getAttribute(key, config, objectModel);
         return result;
     }
 
-    public void parameterize(Parameters params) throws ParameterException {
+    public void parameterize(Parameters params) {
         this.includeRegex = params.getParameter("include-regex", "");
         this.excludeRegex = params.getParameter("exclude-regex", "");
 
