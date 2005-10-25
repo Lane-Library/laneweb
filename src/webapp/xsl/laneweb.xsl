@@ -1,4 +1,5 @@
 <xsl:stylesheet version="1.0"
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xi="http://www.w3.org//2001/XInclude"
@@ -14,7 +15,7 @@
     <!-- the query part of the request -->
     <xsl:param name="requestQuery"/>
     <!-- whether the remote page should get a intranet link -->
-    <xsl:param name="intranetLink"/>
+    <xsl:param name="intranetLink"/> 
     <!-- whether debugging is on or not -->
     <xsl:param name="debug"/>
     <!-- the authentication string -->
@@ -65,16 +66,26 @@
     
     <!-- default element match, copies the element and applies templates on all childeren and attributes -->
     <xsl:template match="*">
+        <!--
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+        -->
         <xsl:element name="{name()}">
             <xsl:apply-templates select="@*|node()"/>
         </xsl:element>
     </xsl:template>
+  
     
     <!-- default attribute match, copies the attribute -->
     <xsl:template match="@*">
         <xsl:attribute name="{name()}"><xsl:value-of select="."/></xsl:attribute>
     </xsl:template>
     
+    <xsl:template match="comment()">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+   
     <xsl:template match="h:a">
         <xsl:choose>
             <xsl:when test="starts-with(@href, '/')">
@@ -86,6 +97,11 @@
                         <xsl:apply-templates select="node()"/>
                     </xsl:when>
                     <xsl:otherwise>
+                        <!--
+                        <xsl:copy>
+                            <xsl:apply-templates select="@*|node()"/>
+                        </xsl:copy>
+                        -->
                         <xsl:element name="{name()}">
                             <xsl:apply-templates select="@*|node()"/>
                         </xsl:element>
@@ -94,6 +110,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:element name="{name()}">
+                <!--<xsl:copy>-->
                     <xsl:apply-templates select="@*"/>
                     <xsl:if test="$responseTemplate='irt' and (@class='proxy') and ancestor::h:div[@id='searchResults']">
                         <xsl:attribute name="onclick">
@@ -111,6 +128,7 @@
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:apply-templates select="node()"/>
+                    <!--</xsl:copy>-->
                 </xsl:element>
             </xsl:otherwise>
         </xsl:choose>
@@ -120,7 +138,7 @@
     <!-- href and src attributes template -->
     <xsl:template match="@href">
         <xsl:choose>
-            <xsl:when test="parent::h:a[@class='lw:proxy' or @class='proxy'] and $proxy-links">
+            <xsl:when test="parent::h:a[@class='proxy'] and $proxy-links">
                 <xsl:variable name="title">
                     <xsl:choose>
                         <xsl:when test="parent::h:a/@title">
@@ -207,18 +225,18 @@
         </title>
     </xsl:template>
     
-    <xsl:template match="@class[starts-with(.,'lw:')]|@id[starts-with(.,'lw:')]"/>
-    <xsl:template match="h:div[@id='lw:sidebar']"/>
-    <xsl:template match="h:div[@id='lw:highlights']"/>
-    <xsl:template match="*[@id='lw:alt-title']"/>
-    <xsl:template match="*[@id='lw:title']">
+    <xsl:template match="@class[starts-with(.,'lw:') or starts-with(.,'lw_')]|@id[starts-with(.,'lw:') or starts-with(.,'lw_')]"/>
+    <xsl:template match="@class[.='proxy']"/>
+    <xsl:template match="h:div[@id='lw:sidebar' or @id='lw_sidebar' or @id='lw:highlights' or @id='lw_highlights']"/>
+    <xsl:template match="*[@id='lw:alt-title' or @id='lw_alt-title']"/>
+    <xsl:template match="*[@id='lw:title' or @id='lw_title']">
           <xsl:choose>
-              <xsl:when test="$source//*[@id='lw:alt-title']/node()">
+              <xsl:when test="$source//*[@id='lw:alt-title' or @id='lw_alt-title']/node()">
                   <xsl:element name="{name()}">
-                      <xsl:apply-templates select="$source//*[@id='lw:alt-title']/node()"/>
+                      <xsl:apply-templates select="$source//*[@id='lw:alt-title' or @id='lw_alt-title']/node()"/>
                   </xsl:element>
               </xsl:when>
-              <xsl:when test="$source//*[@id='lw:alt-title']"/>
+              <xsl:when test="$source//*[@id='lw:alt-title' or @id='lw_alt-title']"/>
               <xsl:otherwise>
                   <xsl:element name="{name()}">
                   <xsl:value-of select="$source/h:head/h:title/text()"/>
@@ -227,7 +245,7 @@
             </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="h:input[@id='lw:search-keywords']">
+    <xsl:template match="h:input[@id='lw:search-keywords' or @id='lw_search-keywords']">
         <xsl:element name="{name()}">
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="value"><xsl:value-of select="$keywords"/></xsl:attribute>
@@ -261,13 +279,13 @@
        </xsl:element>
    </xsl:template>
    
-   <xsl:template match="h:span[@class='lw:keywords']">
+   <xsl:template match="h:span[@class='lw:keywords' or @class='lw_keywords']">
        <xsl:value-of select="$keywords"/>
    </xsl:template>
     
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
     <!-- puts in the current document's content, -->
-    <xsl:template match="h:div[@id='lw:content']">
+    <xsl:template match="h:div[@id='lw:content' or @id='lw_content']">
         <xsl:apply-templates select="$source/h:body/node()"/>
         <xsl:if test="$debug='y'">
             <div id="debug">
@@ -286,12 +304,12 @@
     </xsl:template>
     
     <!-- sidebar -->
-    <xsl:template match="h:div[@id='lw:side-bar']">
+    <xsl:template match="h:div[@id='lw:side-bar' or @id='lw_side-bar']">
         <div id="sidebar">
             <xsl:apply-templates select="node()"/>
             <xsl:choose>
-                <xsl:when test="$source//h:div[@id='lw:sidebar']">
-                    <xsl:apply-templates select="$source//h:div[@id='lw:sidebar']/*"/>
+                <xsl:when test="$source//h:div[@id='lw:sidebar' or @id='lw_sidebar']">
+                    <xsl:apply-templates select="$source//h:div[@id='lw:sidebar' or @id='lw_sidebar']/*"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="$sidebar/h:body/node()"/>
@@ -301,7 +319,7 @@
     </xsl:template>
     
     <!-- creates a a element with the current url and a different template -->
-    <xsl:template match="h:span[@class='lw:thisLink']">
+    <xsl:template match="h:span[@class='lw:thisLink' or @class='lw_thisLink']">
         <a>
             <xsl:attribute name="href">
                 <xsl:value-of select="concat($context,'/',$requestURI)"/>
@@ -310,15 +328,14 @@
                         <xsl:choose>
                             <xsl:when test="contains($requestQuery, 'template=')">
                                 <xsl:value-of select="substring-before($requestQuery, 'template=')"/>
-                                <xsl:value-of select="concat('template=', h:span[@class='lw:template'])"/>
+                                <xsl:value-of select="concat('template=', h:span[@class='lw:template' or @class='lw_template'])"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="concat($requestQuery, '&amp;template=', h:span[@class='lw:template'])"/>
+                                <xsl:value-of select="concat($requestQuery, '&amp;template=', h:span[@class='lw:template' or @class='lw_template'])"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
-                    <xsl:otherwise>?template=<xsl:value-of select="h:span[@class='lw:template']"/>
-                    </xsl:otherwise>
+                    <xsl:otherwise>?template=<xsl:value-of select="h:span[@class='lw:template' or @class='lw_template']"/></xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
             <xsl:value-of select="text()"/>
@@ -326,16 +343,16 @@
     </xsl:template>
     
     <!-- generates the breadcrumb -->
-    <xsl:template match="h:span[@id='lw:breadcrumb']">
+    <xsl:template match="h:span[@id='lw:breadcrumb' or @id='lw_breadcrumb']">
         <xsl:call-template name="breadcrumb"/>
     </xsl:template>
 
     <!-- higlights -->
-    <xsl:template match="h:div[@id='lw:high-lights']">
-        <xsl:if test="$source//h:div[@id='lw:highlights']">
+    <xsl:template match="h:div[@id='lw:high-lights' or @id='lw_high-lights']">
+        <xsl:if test="$source//h:div[@id='lw:highlights' or @id='lw_highlights']">
             <div id="highlights">
                 <xsl:apply-templates select="node()"/>
-                <xsl:apply-templates select="$source//h:div[@id='lw:highlights']/node()"/>
+                <xsl:apply-templates select="$source//h:div[@id='lw:highlights' or @id='lw_highlights']/node()"/>
             </div>
         </xsl:if>
     </xsl:template>
