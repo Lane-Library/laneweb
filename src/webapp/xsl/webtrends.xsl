@@ -98,7 +98,7 @@
     </xsl:attribute>
   </xsl:template>
   
-    <xsl:template match="@onclick"/>
+    <xsl:template match="@onclick[parent::*/@href]"/>
     
     <xsl:template match="@href[not(contains(.,'://')) and (contains(.,'.pdf') or contains(.,'.camv')
                                            or contains(.,'.smil') or contains(.,'.doc') or contains(.,'.ppt')
