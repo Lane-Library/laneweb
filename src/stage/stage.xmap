@@ -22,7 +22,7 @@
             <map:match type="wildcard" pattern="TMP**">
                 <map:read src="xdocs/TMP{1}" mime-type="text/html"/>
             </map:match>
-            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|camv|smil|xls|doc|ppt|ico)$">
+            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|camv|smil|xls|doc|ppt|ico|swf)$">
                 <map:mount uri-prefix="" check-reload="yes" src="static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="eresources/**">

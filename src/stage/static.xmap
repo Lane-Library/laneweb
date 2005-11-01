@@ -57,6 +57,9 @@
             <map:match type="wildcard" pattern="**.ppt">
                 <map:read src="xdocs/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
             </map:match>
+            <map:match type="wildcard" pattern="**.swf">
+                <map:read src="xdocs/{1}.swf" mime-type="application/x-shockwave-flash"/>
+            </map:match>
             <map:match type="wildcard" pattern="robots.txt">
                 <map:read src="robots.txt" mime-type="text/plain"/>
             </map:match>

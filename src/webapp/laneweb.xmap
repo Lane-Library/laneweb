@@ -122,7 +122,7 @@
             <map:match type="wildcard" pattern="olgary/**">
                 <map:mount uri-prefix="olgary" check-reload="yes" src="file:/afs/ir/users/o/l/olgary/laneweb/laneweb.xmap"/>
             </map:match>
-            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|camv|smil|xls|doc|ppt|ico)$">
+            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|camv|smil|xls|doc|ppt|ico|swf)$">
                 <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="robots.txt">
