@@ -332,7 +332,7 @@
         <dependency>
             <groupId>jtidy</groupId>
             <artifactId>jtidy</artifactId>
-            <version>04aug2000r7-dev</version>
+            <version>4aug2000r7-dev</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -384,7 +384,7 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>servlet-api</groupId>
+            <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.4</version>
             <type>jar</type>
