@@ -103,93 +103,89 @@
         </javadoc>
     </target>
     <target name="get-deps" unless="noget" depends="init">
-        <get dest="${libdir}/avalon-framework-api-4.1.5.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/avalon-framework/jars/avalon-framework-api-4.1.5.jar"/>
-        <get dest="${libdir}/avalon-framework-impl-4.1.5.jar" usetimestamp="true"
-            ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/avalon-framework/jars/avalon-framework-impl-4.1.5.jar"/>
-        <get dest="${libdir}/cocoon-2.1.7.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-2.1.7.jar"/>
-        <get dest="${libdir}/cocoon-databases-2.1.7.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-databases-2.1.7.jar"/>
-        <get dest="${libdir}/cocoon-html-2.1.7.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-html-2.1.7.jar"/>
-        <get dest="${libdir}/cocoon-paranoid-2.1.7.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-paranoid-2.1.7.jar"/>
-        <get dest="${libdir}/cocoon-proxy-2.1.7.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-proxy-2.1.7.jar"/>
-        <get dest="${libdir}/commons-collections-3.1.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/commons-collections/jars/commons-collections-3.1.jar"/>
-        <get dest="${libdir}/commons-httpclient-3.0-rc4-log4j.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/commons-httpclient/jars/commons-httpclient-3.0-rc4-log4j.jar"/>
-        <get dest="${libdir}/commons-codec-1.3.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/commons-codec/jars/commons-codec-1.3.jar"/>
-        <get dest="${libdir}/commons-jxpath-1.2.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/commons-jxpath/jars/commons-jxpath-1.2.jar"/>
-        <get dest="${libdir}/commons-lang-2.0-20041007T2305.jar" usetimestamp="true"
-            ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/commons-lang/jars/commons-lang-2.0-20041007T2305.jar"/>
-        <get dest="${libdir}/concurrent-1.3.4.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/concurrent/jars/concurrent-1.3.4.jar"/>
-        <get dest="${libdir}/excalibur-component-1.2.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/excalibur-component/jars/excalibur-component-1.2.jar"/>
-        <get dest="${libdir}/excalibur-datasource-1.1.1.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/excalibur-datasource/jars/excalibur-datasource-1.1.1.jar"/>
-        <get dest="${libdir}/excalibur-i18n-1.1.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/excalibur-i18n/jars/excalibur-i18n-1.1.jar"/>
-        <get dest="${libdir}/excalibur-instrument-1.0.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/excalibur-instrument/jars/excalibur-instrument-1.0.jar"/>
-        <get dest="${libdir}/excalibur-instrument-manager-1.0.jar" usetimestamp="true"
-            ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/excalibur-instrument-manager/jars/excalibur-instrument-manager-1.0.jar"/>
-        <get dest="${libdir}/excalibur-instrument-manager-interfaces-1.0.jar" usetimestamp="true"
-            ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/excalibur-instrument-manager-interfaces/jars/excalibur-instrument-manager-interfaces-1.0.jar"/>
-        <get dest="${libdir}/excalibur-logger-1.1.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/excalibur-logger/jars/excalibur-logger-1.1.jar"/>
-        <get dest="${libdir}/excalibur-pool-1.2.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/excalibur-pool/jars/excalibur-pool-1.2.jar"/>
-        <get dest="${libdir}/excalibur-sourceresolve-1.1.jar" usetimestamp="true"
-            ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/excalibur-sourceresolve/jars/excalibur-sourceresolve-1.1.jar"/>
-        <get dest="${libdir}/excalibur-store-1.0.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/excalibur-store/jars/excalibur-store-1.0.jar"/>
-        <get dest="${libdir}/excalibur-xmlutil-1.0.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/excalibur-xmlutil/jars/excalibur-xmlutil-1.0.jar"/>
-        <get dest="${libdir}/joost-20040330.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/joost/jars/joost-20040330.jar"/>
-        <get dest="${libdir}/jtidy-04aug2000r7-dev.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/jtidy/jars/jtidy-04aug2000r7-dev.jar"/>
-        <get dest="${libdir}/logkit-1.2.2-nomanifest.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/logkit/jars/logkit-1.2.2-nomanifest.jar"/>
-        <get dest="${libdir}/marc4j-b7.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/marc4j/jars/marc4j-b7.jar"/>
-        <get dest="${endorseddir}/medlane-ansel-0.1.1.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/medlane-ansel/jars/medlane-ansel-0.1.1.jar"/>
-        <get dest="${libdir}/oracle-jdbc-1.4.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/oracle-jdbc/jars/oracle-jdbc-1.4.jar"/>
-        <get dest="${libdir}/servlet-api-5.0.18.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/tomcat/jars/servlet-api-5.0.18.jar"/>
-        <get dest="${libdir}/xalan-2.6.1-dev-20041008T0304.jar" usetimestamp="true"
-            ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/xalan/jars/xalan-2.6.1-dev-20041008T0304.jar"/>
-        <get dest="${libdir}/xercesImpl-2.6.2.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/xerces/jars/xercesImpl-2.6.2.jar"/>
-        <get dest="${libdir}/xml-apis-1.0.b2.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/xml-apis/jars/xml-apis-1.0.b2.jar"/>
-        <get dest="${libdir}/ehcache-1.1.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/ehcache/jars/ehcache-1.1.jar"/>
-        <get dest="${libdir}/regexp-1.3.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.ibiblio.org/maven/regexp/jars/regexp-1.3.jar"/>
-        <get dest="${libdir}/bcel-20040329.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/bcel/jars/bcel-20040329.jar"/>
-        <get dest="${libdir}/log4j-1.2.9.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/log4j/jars/log4j-1.2.9.jar"/>
-        <get dest="${libdir}/javamail-1.3.1.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/javamail/jars/javamail-1.3.1.jar"/>
-        <get dest="${libdir}/jaf-1.0.2.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/activation/jars/jaf-1.0.2.jar"/>
-        <get dest="${libdir}/saxon-B8.4-nomanifest.jar" usetimestamp="true" ignoreerrors="true"
-            src="http://www.stanford.edu/~ceyates/maven/saxon/jars/saxon-B8.4-nomanifest.jar"/>
+        <get dest="${libdir}/activation-1.0.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/javax.activation/jars/activation-1.0.2.jar">
+        </get>
+        <get dest="${libdir}/avalon-framework-api-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/avalon-framework/jars/avalon-framework-api-4.3.jar">
+        </get>
+        <get dest="${libdir}/avalon-framework-impl-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/avalon-framework/jars/avalon-framework-impl-4.3.jar">
+        </get>
+        <get dest="${libdir}/avalon-logkit-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/avalon-logkit/jars/avalon-logkit-2.1.jar">
+        </get>
+        <get dest="${libdir}/cocoon-2.1.8.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-2.1.8.jar">
+        </get>
+        <get dest="${libdir}/cocoon-html-2.1.8.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-html-2.1.8.jar">
+        </get>
+        <get dest="${libdir}/cocoon-databases-2.1.8.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-databases-2.1.8.jar">
+        </get>
+        <get dest="${libdir}/cocoon-paranoid-2.1.8.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-paranoid-2.1.8.jar">
+        </get>
+        <get dest="${libdir}/cocoon-proxy-2.1.8.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-proxy-2.1.8.jar">
+        </get>
+        <get dest="${libdir}/commons-codec-1.3.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-codec/jars/commons-codec-1.3.jar">
+        </get>
+        <get dest="${libdir}/commons-collections-3.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-collections/jars/commons-collections-3.1.jar">
+        </get>
+        <get dest="${libdir}/commons-httpclient-3.0-rc4-log4j.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/commons-httpclient/jars/commons-httpclient-3.0-rc4-log4j.jar">
+        </get>
+        <get dest="${libdir}/commons-jxpath-1.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-jxpath/jars/commons-jxpath-1.2.jar">
+        </get>
+        <get dest="${libdir}/commons-lang-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-lang/jars/commons-lang-2.1.jar">
+        </get>
+        <get dest="${libdir}/concurrent-1.3.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/concurrent/jars/concurrent-1.3.4.jar">
+        </get>
+        <get dest="${libdir}/ehcache-1.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/ehcache/jars/ehcache-1.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-component-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-component/jars/excalibur-component-2.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-datasource-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-datasource/jars/excalibur-datasource-2.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-i18n-1.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-i18n/jars/excalibur-i18n-1.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-instrument-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-instrument/jars/excalibur-instrument-api-2.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-instrument-mgr-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-instrument/jars/excalibur-instrument-mgr-api-2.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-instrument-mgr-impl-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-instrument/jars/excalibur-instrument-mgr-impl-2.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-logger-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-logger/jars/excalibur-logger-2.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-pool-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-pool/jars/excalibur-pool-api-2.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-pool-impl-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-pool/jars/excalibur-pool-impl-2.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-pool-instrumented-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-pool/jars/excalibur-pool-instrumented-2.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-sourceresolve-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-sourceresolve/jars/excalibur-sourceresolve-2.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-store-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-store/jars/excalibur-store-2.1.jar">
+        </get>
+        <get dest="${libdir}/excalibur-xmlutil-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/excalibur-xmlutil/jars/excalibur-xmlutil-2.1.jar">
+        </get>
+        <get dest="${libdir}/jakarta-bcel-20040329.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/jakarta-bcel/jars/jakarta-bcel-20040329.jar">
+        </get>
+        <get dest="${libdir}/jakarta-regexp-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/jakarta-regexp/jars/jakarta-regexp-1.4.jar">
+        </get>
+        <get dest="${libdir}/joost-20040330.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/joost/jars/joost-20040330.jar">
+        </get>
+        <get dest="${libdir}/jtidy-4aug2000r7-dev.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/jtidy/jars/jtidy-4aug2000r7-dev.jar">
+        </get>
+        <get dest="${libdir}/log4j-1.2.9.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/log4j/jars/log4j-1.2.9.jar">
+        </get>
+        <get dest="${libdir}/mail-1.3.3.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/javax.mail/jars/mail-1.3.3.jar">
+        </get>
+        <get dest="${libdir}/marc4j-b7.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/marc4j/jars/marc4j-b7.jar">
+        </get>
+        <get dest="${libdir}/oracle-jdbc-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/oracle-jdbc/jars/oracle-jdbc-1.4.jar">
+        </get>
+        <get dest="${libdir}/saxon-B8.4-nomanifest.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/saxon/jars/saxon-B8.4-nomanifest.jar">
+        </get>
+        <get dest="${libdir}/servlet-api-2.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/javax.servlet/jars/servlet-api-2.4.jar">
+        </get>
+        <get dest="${libdir}/xalan-2.7.0.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/xalan/jars/xalan-2.7.0.jar">
+        </get>
+        <get dest="${libdir}/xml-apis-1.3.02.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/xml-apis/jars/xml-apis-1.3.02.jar">
+        </get>
+        <get dest="${libdir}/xercesImpl-2.7.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/xerces/jars/xercesImpl-2.7.1.jar">
+        </get>
     </target>
 </project>
