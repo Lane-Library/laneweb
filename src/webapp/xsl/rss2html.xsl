@@ -6,32 +6,31 @@
     exclude-result-prefixes="rdf rss"
     version="1.0">
     
-    <xsl:template match="node()">
-        <xsl:copy>
-            <xsl:apply-templates select="node()|@*"/>
-        </xsl:copy>
-    </xsl:template>
+  <xsl:template match="node()">
+    <xsl:copy>
+      <xsl:apply-templates select="node()|@*"/>
+    </xsl:copy>
+  </xsl:template>
     
-    <xsl:template match="@*">
-        <xsl:copy-of select="."/>
-    </xsl:template>
+  <xsl:template match="@*">
+    <xsl:copy-of select="."/>
+  </xsl:template>
     
-    <xsl:template match="rdf:RDF">
-        <h2>
-            <xsl:value-of select="rss:channel/rss:title"/>
-        </h2>
-        <ul>
-            <!-- <xsl:apply-templates select="rss:item[not(self::node()=following-sibling::rss:item)]"/> -->
-            <xsl:apply-templates select="rss:item"/>
-        </ul>
-    </xsl:template>
+  <xsl:template match="rdf:RDF|rss">
+    <h2>
+      <xsl:value-of select="rss:channel/rss:title|channel/title"/>
+    </h2>
+    <ul>
+      <xsl:apply-templates select="rss:item|channel/item"/>
+    </ul>
+  </xsl:template>
     
-    <xsl:template match="rss:item">
-        <li>
-            <a href="{rss:link}">
-                <xsl:value-of select="rss:title"/>
-            </a>
-        </li>
-    </xsl:template>
+  <xsl:template match="rss:item|item">
+    <li>
+      <a href="{rss:link|link}">
+        <xsl:value-of select="rss:title|title"/>
+      </a>
+    </li>
+  </xsl:template>
 
 </xsl:stylesheet>
