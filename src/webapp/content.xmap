@@ -55,12 +55,6 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="news/index.html">
-                <map:generate type="html" src="{defaults:live-base}/xdocs/news/index.html"/>
-                <map:transform type="xinclude"/>
-                <map:transform type="xsltc" src="context://xsl/rss2html.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="howto/index.html">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
                 <map:transform type="xsltc" src="context://xsl/faq.xsl">
@@ -103,6 +97,7 @@
             <map:match type="wildcard" pattern="**">
                 <map:generate type="html" src="{defaults:live-base}/xdocs/{1}"/>
                 <map:transform type="xinclude"/>
+                <map:transform type="xsltc" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
