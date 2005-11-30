@@ -16,7 +16,7 @@
         <map:transformers default="xinclude">
             <map:transformer logger="sitemap.transformer.xinclude"
                 name="xinclude"
-                src="org.apache.cocoon.transformation.XIncludeTransformer"
+                src="edu.stanford.laneweb.XIncludeTransformer"
                 pool-max="32" pool-min="16" pool-grow="4"/>
         </map:transformers>
         <map:serializers default="xml"/>
