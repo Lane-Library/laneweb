@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Bioresearch Search Results</title>
+    </head>
+    <body>
+        <div id="lw_alt-title"><img src="/images/icons/helix-tiny.gif" alt="" align="middle"/> BioResearch Core Metasearch</div>
+        <div id="searchHeader">
+            Results for <strong><span class="keywords"/></strong> in <a id="nonzero" href="new-search.html?source=research&amp;id={$id}"/> of
+            <a id="total" href="new-search.html?source=research&amp;id={$id}&amp;view=all"/> sources.
+            <span id="searchRefresh"><span class="stillRunningCount"/> resources still running: <a href="new-search.html?source=research&amp;id={$id}">refresh</a>.</span>
+        </div>
+        <div>
+            <div id="searchResults">
+                <div>
+                    <div class="searchCategory" id="literature_databases">
+                        <h3>Literature Databases</h3>
+                        <ul>
+                            <li id="pubmed">PubMed@Stanford</li>
+                            <li id="faculty1000">Faculty of 1000</li>
+                            <li id="flashpoint_sci_plus_0">SciSearch+BIOSIS+Engineering</li>
+                            <li id="crossdb_omim">OMIM</li>
+                        </ul>
+                    </div>
+                    <div class="searchCategory" id="protocols">
+                        <h3>Protocols &amp; Methods</h3>
+                        <ul>
+                            <li id="wiley_0">Current Protocols</li>
+                            <li id="enzymology">Methods in Enzymology</li>
+                            <li id="protocolonline">Protocol Online</li>
+                        </ul>
+                    </div>
+                    <div class="searchCategory" id="gene_databases">
+                        <h3>Gene Databases</h3>
+                        <ul>
+                            <li id="crossdb_nucleotide">NCBI Nucleotide sequence database (Genbank)</li>
+                            <li id="crossdb_protein">NCBI Protein sequence database </li>
+                            <li id="crossdb_genome">NCBI Genome whole genome sequences</li>
+                            <li id="crossdb_structure">NCBI Structure three-dimensional macromolecular</li>
+                            <li id="crossdb_snp">NCBI SNP single nucleotide polymorphism</li>
+                            <li id="crossdb_taxonomy">NCBI Taxonomy: organisms in Genbank</li>
+                            <li id="crossdb_gene">NCBI Gene gene-centered information</li>
+                            <li id="crossdb_homologene">NCBI HomoloGene eukaryotic homology groups</li>
+                            <li id="crossdb_unigene">NCBI UniGene: gene-oriented clusters of transcript sequences</li>
+                            <li id="crossdb_cdd">NCBI CDD conserved protein domain database</li>
+                            <li id="crossdb_3d">NCBI 3D Domains domains from Entrez structure</li>
+                            <li id="crossdb_unists">NCBI UniSTS markers and mapping data</li>
+                            <li id="crossdb_cancer">NCBI Cancer Chromosomes cytogenetic databases</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="lw_sidebar">
+            <div>
+                <h4>Try another source</h4>
+                <p>Find <strong><span class="keywords"/></strong> in:</p>
+                <ul>
+                    <!--<li><a class="proxy" target="_blank" href="http://flashpoint.lanl.gov/cgi-bin/flashpoint.cgi?Quick=Search&amp;search_type=Quick&amp;search_term1=tisuab&amp;database=all&amp;search_word1={keywords}">LANL FlashPoint</a></li>-->
+                    <li><a class="proxy" target="_blank" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?CMD=search&amp;DB=books&amp;term={keywords}" >NCBI Bookshelf</a></li>
+                    <li><a class="proxy" target="_blank" href="http://www.ncbi.nlm.nih.gov/gquery/gquery.fcgi?term={keywords}">NCBI Global Search</a></li>
+                    <li><a class="proxy" target="_blank" href="http://genome-www.stanford.edu/cgi-bin/genecards_v2.31/cardsearch.pl?search={keywords}&amp;search_type=keyword%28s%29">GeneCards</a></li>
+                    <li><a href="/online/er.html?keywords={keywords}">Lane eResources</a></li>
+                    <li><a href="new-search.html?source=clinical&amp;id={$id}">Clinical Core</a></li>
+                    <li><a href="new-search.html?source=peds&amp;id={$id}">Pediatric Core</a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
