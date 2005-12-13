@@ -71,6 +71,31 @@
                         </map:when>
                     </map:select>
                 </map:match>
+                <map:match type="wildcard" pattern="beta/**">
+                    <map:aggregate element="doc" label="content">
+                        <map:part src="cocoon:/content/{1}"/>
+                        <map:part src="cocoon:/content/sitemap.html"/>
+                        <map:part src="cocoon:/content/templates/new.xml"/>
+                        <map:part src="cocoon:/sidebar/{1}"/>
+                    </map:aggregate>
+                    <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                        <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
+                        <map:parameter name="context" value="{request:contextPath}/stage"/>
+                        <map:parameter name="requestQuery" value="{request:queryString}"/>
+                        <map:parameter name="template" value="{request-param:template}"/>
+                        <map:parameter name="keywords" value="{request-param:keywords}"/>
+                        <map:parameter name="selection" value="{request-param:source}"/>
+                        <map:parameter name="stanford" value="{laneweb:stanford}"/>
+                        <map:parameter name="debug" value="{request-param:debug}"/>
+                    </map:transform>
+                    <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
+                        <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                        <map:parameter name="source" value="{request-param:source}"/>
+                        <map:parameter name="keywords" value="{request-param:keywords}"/>
+                        <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
+                    </map:transform>
+                    <map:serialize type="xhtml"/>
+                </map:match>
                 <map:match type="wildcard" pattern="**">
                     <map:aggregate element="doc" label="content">
                         <map:part src="cocoon:/content/{1}"/>
