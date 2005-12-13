@@ -29,7 +29,13 @@
     
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
-    <xsl:variable name="defaultTemplate" select="'irt'"/>
+    <!--<xsl:variable name="defaultTemplate" select="'irt'"/>-->
+    <xsl:variable name="defaultTemplate">
+        <xsl:choose>
+            <xsl:when test="contains($context,'/beta')">new</xsl:when>
+            <xsl:otherwise>irt</xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     <!-- the requested template -->
     <xsl:variable name="requestTemplate" select="$template"/>
     <!-- the template that will be used in the response -->
