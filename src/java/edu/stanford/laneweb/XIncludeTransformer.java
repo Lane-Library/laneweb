@@ -413,11 +413,15 @@ public class XIncludeTransformer extends AbstractTransformer implements Servicea
                         fallBackException.fillInStackTrace();
                         getLogger().error("Error parsing XPointer expression, will try to use fallback.", e);
                     } catch(SAXException e) {
+                        useFallback = true;
+                        fallBackException = e;
                         getLogger().error("Error in processXIncludeElement", e);
-                        throw e;
+                        //throw e;
                     } catch(ProcessingException e) {
+                        useFallback = true;
+                        fallBackException = e;
                         getLogger().error("Error in processXIncludeElement", e);
-                        throw e;
+                        //throw e;
                     } catch(MalformedURLException e) {
                         useFallback = true;
                         fallBackException = e;
