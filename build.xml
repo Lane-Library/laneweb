@@ -125,7 +125,7 @@
         </get>
         <get dest="${libdir}/commons-collections-3.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-collections/jars/commons-collections-3.1.jar">
         </get>
-        <get dest="${libdir}/commons-httpclient-3.0-rc4-log4j.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/commons-httpclient/jars/commons-httpclient-3.0-rc4-log4j.jar">
+        <get dest="${libdir}/commons-httpclient-3.0-log4j.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/commons-httpclient/jars/commons-httpclient-3.0-log4j.jar">
         </get>
         <get dest="${libdir}/commons-jxpath-1.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/commons-jxpath/jars/commons-jxpath-1.2.jar">
         </get>
