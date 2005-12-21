@@ -110,41 +110,41 @@ border="0" alt=" " /></td>
 </tr>
 <tr>
 <td><a
-href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000&amp;lmls=grn" class="proxy" title="PubMed"
+href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000" class="proxy" title="PubMed"
  onmouseout="MM_swapImgRestore()"
 onmouseover="MM_swapImage('pubmed','',imagePath+'pubmed_f2.gif',1);">
 <img name="pubmed" src="/images/irt/pubmed.gif" width="57"
 height="20" border="0" alt="PubMed" /></a></td>
-<td colspan="3"><a href="/online/ej.html?lmls=grn" title="eJournals"
+<td colspan="3"><a href="/online/ej.html" title="eJournals"
 onmouseout="MM_swapImgRestore()"
 onmouseover="MM_swapImage('ejournals','',imagePath+'ejournals_f2.gif',1);">
 <img name="ejournals" src="/images/irt/ejournals.gif"
 width="69" height="20" border="0" alt="e-Journals" /></a></td>
 <td colspan="3"><a
-href="http://www.utdol.com/?lmls=grn" class="proxy" title="UpToDate"
+href="http://www.utdol.com/" class="proxy" title="UpToDate"
 onmouseout="MM_swapImgRestore()"
 onmouseover="MM_swapImage('uptodate','',imagePath+'uptodate_f2.gif',1);">
 <img name="uptodate" src="/images/irt/uptodate.gif" width="66"
 height="20" border="0" alt="UpToDate" /></a></td>
 <td colspan="2"><a
-href="http://home.mdconsult.com/start_session?autologin=true&amp;user=stanforduniv&amp;password=shared&amp;login_change=false&amp;subs_change=false&amp;lmls=grn" class="proxy" title="MDConsult"
+href="http://home.mdconsult.com/start_session?autologin=true&amp;user=stanforduniv&amp;password=shared&amp;login_change=false&amp;subs_change=false" class="proxy" title="MDConsult"
 onmouseout="MM_swapImgRestore()"
 onmouseover="MM_swapImage('mdconsult','',imagePath+'mdconsult_f2.gif',1);">
 <img name="mdconsult" src="/images/irt/mdconsult.gif"
 width="72" height="20" border="0" alt="MDConsult" /></a></td>
 <td><a
-href="http://md.skolar.com/gateway?affilid=stanford&amp;uid=stanford&amp;lmls=grn" class="proxy" title="Skolar"
+href="http://md.skolar.com/gateway?affilid=stanford&amp;uid=stanford" class="proxy" title="Skolar"
  onmouseout="MM_swapImgRestore()"
 onmouseover="MM_swapImage('skolar','',imagePath+'skolar_f2.gif',1);">
 <img name="skolar" src="/images/irt/skolar.gif" width="60"
 height="20" border="0" alt="SKOLAR" /></a></td>
 <td colspan="3"><a
-href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;PAGE=First&amp;lmls=grn" title="Lane Catalog" class="proxy"
+href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;PAGE=First" title="Lane Catalog" class="proxy"
  onmouseout="MM_swapImgRestore()"
 onmouseover="MM_swapImage('lanecat','',imagePath+'lanecat_f2.gif',1);">
 <img name="lanecat" src="/images/irt/lanecat.gif" width="83"
 height="20" border="0" alt="Lane Catalog" /></a></td>
-<td colspan="2"><a href="/askus.html?lmls=grn" title="Ask Us"
+<td colspan="2"><a href="/askus.html" title="Ask Us"
 onmouseout="MM_swapImgRestore()"
 onmouseover="MM_swapImage('askus','',imagePath+'askus_f2.gif',1);">
 <img name="askus" src="/images/irt/askus.gif" width="65"
@@ -162,20 +162,20 @@ border="0" alt=" " /></td>
 
 <tr>
 <td colspan="2" id="tab_clinician" class="hidden"><ul>
-<li><a href="/clinician/index.html?lmls=clintab">&#160;Clinician Home</a></li>
-<li><a href="/clinician/peds.html?lmls=clintab">&#160;Pediatrician Portal</a></li>
-<li><a href="/clinician/specialist/anesthesia.html?lmls=clintab">&#160;Anesthesia</a></li>
-<li><a href="/clinician/specialist/cardiovascular.html?lmls=clintab">&#160;Cardiovascular</a></li>
-<li><a href="/clinician/specialist/oncology.html?lmls=clintab">&#160;Hematology/Oncology</a></li>
-<li><a href="/clinician/specialist/neonatology.html?lmls=clintab">&#160;Neonatology/Perinatology</a></li>
-<li><a href="/clinician/specialist/neuroscience.html?lmls=clintab">&#160;Neuroscience</a></li>
-<li><a href="/clinician/specialist/nursing.html?lmls=clintab">&#160;Nursing</a></li>
-<li><a href="/clinician/specialist/ophthalmology.html?lmls=clintab">&#160;Ophthalmology</a></li>
-<li><a href="/clinician/specialist/pulmonary.html?lmls=clintab">&#160;Pulmonary &amp; Critical Care</a></li>
-<li><a href="/clinician/specialist/radiology.html?lmls=clintab">&#160;Radiology</a></li>
-<li><a href="/clinician/specialist/transplantation.html?lmls=clintab">&#160;Transplantation</a></li>
-<li><a href="/clinician/specialist/women.html?lmls=clintab">&#160;Women's Health</a></li>
-</ul><a href="/clinician/index.html?lmls=clin"
+<li><a href="/clinician/index.html">&#160;Clinician Home</a></li>
+<li><a href="/clinician/peds.html">&#160;Pediatrician Portal</a></li>
+<li><a href="/clinician/specialist/anesthesia.html">&#160;Anesthesia</a></li>
+<li><a href="/clinician/specialist/cardiovascular.html">&#160;Cardiovascular</a></li>
+<li><a href="/clinician/specialist/oncology.html">&#160;Hematology/Oncology</a></li>
+<li><a href="/clinician/specialist/neonatology.html">&#160;Neonatology/Perinatology</a></li>
+<li><a href="/clinician/specialist/neuroscience.html">&#160;Neuroscience</a></li>
+<li><a href="/clinician/specialist/nursing.html">&#160;Nursing</a></li>
+<li><a href="/clinician/specialist/ophthalmology.html">&#160;Ophthalmology</a></li>
+<li><a href="/clinician/specialist/pulmonary.html">&#160;Pulmonary &amp; Critical Care</a></li>
+<li><a href="/clinician/specialist/radiology.html">&#160;Radiology</a></li>
+<li><a href="/clinician/specialist/transplantation.html">&#160;Transplantation</a></li>
+<li><a href="/clinician/specialist/women.html">&#160;Women's Health</a></li>
+</ul><a href="/clinician/index.html"
 onmouseover="MM_swapImage('tab_clinician','',imagePath+'tab_clinician_f2.gif',1);"
  onmouseout="if (clinician == 0) MM_swapImgRestore();">
 <img name="tab_clinician" src="/images/irt/tab_clinician.gif"
@@ -183,12 +183,12 @@ width="84" height="26" border="0" alt="Clinician" /></a></td>
 <td><img name="intertab1" src="/images/irt/intertab1.gif"
 width="4" height="26" border="0" alt=" " /></td>
 <td colspan="2" id="tab_researcher" class="hidden"><ul>
-<li><a href="/researcher/index.html?lmls=restab">&#160;Researcher Home</a></li>
-<li><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000&amp;lmls=restab" class="proxy">&#160;PubMed@Stanford</a></li>
-<li><a href="http://med.stanford.edu/rmg/funding/?lmls=restab">&#160;Grants</a></li>
-<li><a href="http://www.ncbi.nlm.nih.gov/gquery/gquery.fcgi?itool=toolbar&amp;lmls=restab" class="proxy">&#160;NCBI Entrez</a></li>
+<li><a href="/researcher/index.html">&#160;Researcher Home</a></li>
+<li><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000" class="proxy">&#160;PubMed@Stanford</a></li>
+<li><a href="http://med.stanford.edu/rmg/funding/">&#160;Grants</a></li>
+<li><a href="http://www.ncbi.nlm.nih.gov/gquery/gquery.fcgi?itool=toolbar" class="proxy">&#160;NCBI Entrez</a></li>
 </ul><a
-href="/researcher/index.html?lmls=res"
+href="/researcher/index.html"
 onmouseover="MM_swapImage('tab_researcher','',imagePath+'tab_researcher_f2.gif',1);"
  onmouseout="if (researcher == 0) MM_swapImgRestore();">
 <img name="tab_researcher" src="/images/irt/tab_researcher.gif"
@@ -196,14 +196,14 @@ width="84" height="26" border="0" alt="Researcher" /></a></td>
 <td><img name="intertab2" src="/images/irt/intertab2.gif"
 width="4" height="26" border="0" alt=" " /></td>
 <td colspan="2" id="tab_instructor" class="hidden"><ul>
-<li><a href="/edtech/index.html?lmls=instab">&#160;EdTech Services</a></li>
-<li><a href="/edtech/workshops/faculty_workshops.html?lmls=instab">&#160;Faculty Support</a></li>
-<li><a href="/edtech/workshops/ta_workshops.html?lmls=instab">&#160;TA Support</a></li>
-<li><a href="/edtech/policies/electronic_media.html?lmls=instab">&#160;Use of Electronic Media</a></li>
-<li><a href="/edtech/workshops/handbook.html?lmls=instab">&#160;Course Support</a></li>
-<li><a href="/edtech/learning_spaces/reserve.html?lmls=instab">&#160;Reserve a Classroom</a></li>
+<li><a href="/edtech/index.html">&#160;EdTech Services</a></li>
+<li><a href="/edtech/workshops/faculty_workshops.html">&#160;Faculty Support</a></li>
+<li><a href="/edtech/workshops/ta_workshops.html">&#160;TA Support</a></li>
+<li><a href="/edtech/policies/electronic_media.html">&#160;Use of Electronic Media</a></li>
+<li><a href="/edtech/workshops/handbook.html">&#160;Course Support</a></li>
+<li><a href="/edtech/learning_spaces/reserve.html">&#160;Reserve a Classroom</a></li>
 </ul><a
-href="/instructor/index.html?lmls=ins"
+href="/instructor/index.html"
 onmouseover="MM_swapImage('tab_instructor','',imagePath+'tab_instructor_f2.gif',1);"
  onmouseout="if (instructor == 0) MM_swapImgRestore();">
 <img name="tab_instructor" src="/images/irt/tab_instructor.gif"
@@ -211,13 +211,13 @@ width="84" height="26" border="0" alt="Instructor" /></a></td>
 <td><img name="intertab3" src="/images/irt/intertab3.gif"
 width="4" height="26" border="0" alt=" " /></td>
 <td colspan="2" id="tab_student" class="hidden"><ul>
-<li><a href="/student/index.html?lmls=stutab">&#160;Student Home</a></li>
-<li><a href="http://wrinkle.stanford.edu:9000/frontpage/index.html?lmls=stutab">&#160;CWP (Course Materials)</a></li>
-<li><a href="https://axess.stanford.edu/?lmls=stutab">&#160;Axess</a></li>
-<li><a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;PAGE=rbSearch&amp;lmls=stutab">&#160;Course Reserves</a></li>
-<li><a href="/computerlab/index.html?lmls=stutab">&#160;Computing Labs</a></li>
+<li><a href="/student/index.html">&#160;Student Home</a></li>
+<li><a href="http://wrinkle.stanford.edu:9000/frontpage/index.html">&#160;CWP (Course Materials)</a></li>
+<li><a href="https://axess.stanford.edu/">&#160;Axess</a></li>
+<li><a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;PAGE=rbSearch">&#160;Course Reserves</a></li>
+<li><a href="/computerlab/index.html">&#160;Computing Labs</a></li>
 </ul><a
-href="/student/index.html?lmls=stu"
+href="/student/index.html"
 onmouseover="MM_swapImage('tab_student','',imagePath+'tab_student_f2.gif',1);"
  onmouseout="if (student ==0) MM_swapImgRestore();">
 <img name="tab_student" src="/images/irt/tab_student.gif"
@@ -225,13 +225,13 @@ width="84" height="26" border="0" alt="Student" /></a></td>
 <td><img name="intertab4" src="/images/irt/intertab4.gif"
 width="4" height="26" border="0" alt=" " /></td>
 <td colspan="2" id="tab_patient" class="hidden"><ul>
-<li><a href="/patient/index.html?lmls=pattab">&#160;Patient Home</a></li>
-<li><a href="http://med.stanford.edu/patient_care/?lmls=pattab">&#160;Patient Care@Stanford</a></li>
-<li><a href="http://healthlibrary.stanford.edu/?lmls=pattab">&#160;Stanford Health Library</a></li>
-<li><a href="http://www.lpch.org/HealthLibrary/index.html?lmls=pattab">&#160;Lucile Packard Health Library</a></li>
-<li><a href="http://www.medlineplus.gov/?lmls=pattab">&#160;MedlinePlus</a></li>
+<li><a href="/patient/index.html">&#160;Patient Home</a></li>
+<li><a href="http://med.stanford.edu/patient_care/">&#160;Patient Care@Stanford</a></li>
+<li><a href="http://healthlibrary.stanford.edu/">&#160;Stanford Health Library</a></li>
+<li><a href="http://www.lpch.org/HealthLibrary/index.html">&#160;Lucile Packard Health Library</a></li>
+<li><a href="http://www.medlineplus.gov/">&#160;MedlinePlus</a></li>
 </ul><a
-href="/patient/index.html?lmls=pat"
+href="/patient/index.html"
 onmouseover="MM_swapImage('tab_patient','',imagePath+'tab_patient_f2.gif',1);"
  onmouseout="if (patient == 0) MM_swapImgRestore();">
 <img name="tab_patient" src="/images/irt/tab_patient.gif"
@@ -247,11 +247,21 @@ border="0" alt=" " /></td>
 <td width="10"><img src="/images/irt/shim.gif" alt=" " width="1" height="5" /></td>
 <td><img src="/images/irt/shim.gif" alt=" " width="1" height="5" /></td>
 </tr>
+
+
 <tr valign="top">
 <td width="10"><img src="/images/irt/shim.gif" alt=" " width="10" height="1" /></td>
-<td><a href="http://med.stanford.edu/">School Home</a> &gt; <a
-href="http://med.stanford.edu/irt/">IRT</a> &gt; <span id="lw_breadcrumb"/></td>
+<td>
+<span style="float: right">
+<img src="/images/snowflake.gif" alt="snowflake" style="vertical-align:middle"/>
+<a href="/about/holidayhours.html"><b>Winter Holiday Hours</b></a></span>
+<a href="http://med.stanford.edu/">School Home</a> &gt; <a
+href="http://med.stanford.edu/irt/">IRT</a> &gt; <span id="lw_breadcrumb"/>
+</td>
 </tr>
+
+
+
 <tr>
 <td width="10"><img src="/images/irt/shim.gif" alt=" " width="1" height="5" /></td>
 <td><img src="/images/irt/shim.gif" alt=" " width="1" height="5" /></td>
@@ -261,7 +271,11 @@ href="http://med.stanford.edu/irt/">IRT</a> &gt; <span id="lw_breadcrumb"/></td>
 <td style="background-image:url(/laneweb/images/irt/dashed-line-olive.gif)"><img src="/images/irt/shim.gif" alt=" " width="740"
 height="1" /></td>
 </tr>
+
 </table>
+
+
+
 <table width="750" border="0" cellpadding="0" cellspacing="0" id="main">
 <tr>
 <td width="88"><img src="/images/irt/shim.gif" alt=" " width="10" height="1" /></td>
@@ -387,7 +401,7 @@ height="19" border="0" /></a></td>
 <tr>
  <td nowrap="nowrap"><img src="/images/irt/shim.gif" alt=" " width="10" height="1"/></td>
  <td nowrap="nowrap">
-     © 2004
+     © 2006
      <a href="http://med.stanford.edu/">Stanford
         University School of Medicine</a>
  </td>
@@ -407,11 +421,9 @@ height="19" border="0" /></a></td>
 
  <tr>
 <td colspan="5" align="center">
-phone: (650) 723-6831
-<span style="color: #666666;">&#8226;</span>
-300 Pasteur Drive Rm L109, Stanford CA 94305-5123
-<span style="color: #666666;">&#8226;</span>
-<a href="mailto:lanelibrary@stanford.edu">lanelibrary@stanford.edu</a>
+<a href="mailto:LaneAskUs@stanford.edu">LaneAskUs@stanford.edu</a> |
+(650) 723-6831 |
+ <a href="http://laneintranet.stanford.edu/">Staff Intranet</a>
 </td>
 </tr>
 
