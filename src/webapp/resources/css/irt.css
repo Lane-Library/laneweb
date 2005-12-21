@@ -68,13 +68,13 @@ body {
 }
 #sidebar li {
 	padding-left: .6em;
-	background-image: url(/laneweb/images/irt/list-background-arrow.gif);
+	background-image: url(/images/irt/list-background-arrow.gif);
 	background-repeat: no-repeat;
 	background-position: 0 0;
 }
 #highlights li {
 	padding-left: .5em;
-	background-image: url(/laneweb/images/irt/list-background-arrow.gif);
+	background-image: url(/images/irt/list-background-arrow.gif);
 	background-repeat: no-repeat;
 	background-position: 0 0;
 }
@@ -92,7 +92,7 @@ ul  {
 }
 li {
 	padding-left: .6em;
-	background-image: url(/laneweb/images/irt/list-background-line.gif);
+	background-image: url(/images/irt/list-background-line.gif);
 	background-repeat: no-repeat;
 	background-position: 0 0;
 }
