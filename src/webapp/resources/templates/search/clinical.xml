@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Clinical Core Search Results</title>
@@ -18,7 +18,7 @@
             <li id="uptodate_0">UpToDate</li>
             <li id="skolar_harrison">Harrison's</li>
             <li id="skolar_clin">Clin-eguide</li>
-            <!--li id="accessmedicine">AccessMedicine</li-->
+            <li id="emedicine">eMedicine</li>
           </ul>
           </div>
           <div class="searchCategory" id="handbooks">
@@ -31,14 +31,12 @@
                   -->
                   <li id="aapredbook">AAP Red Book</li>            
                   <li id="mdc_goldberger">Clinical Electrocardiography</li>
-                  <!-- CHARLES - - this one needs an ID 
-                  this one is available this is same as 'Roberts'' cy -->
                   <li id="mdc_roberts">Clinical Procedures in ER Medicine</li>
                   <li id="mdc_rakel_cct">Conn's Current Therapy</li>
-                  <!--li id="skolar_tierney">Current Medical Dx &amp; Tx</li-->
                   <li id="am_cmdt">Current Dx &amp; Tx: Medical</li>
                   <li id="am_crawford">Current Dx &amp; Tx: Cardiology</li>
                   <li id="am_decherney">Current Dx &amp; Tx: ObGyn</li>
+				  <li id="am_orthopedic">Current Dx &amp; Tx: Orthopedics</li>
                   <li id="am_otolaryngology">Current Dx &amp; Tx: Otolaryngology</li>
                   <li id="am_hay">Current Dx &amp; Tx: Pediatric</li>
                   <li id="am_ebert">Current Dx &amp; Tx: Psychiatry</li>
@@ -86,6 +84,7 @@
                   <li id="skolar_freedberg">Fitzpatrick's Dermatology</li>
                   <li id="mdc_gabbe">Gabbe's Obstetrics</li>
                   <li id="mdc_feldman">Gastrointestinal &amp; Liver Disease</li>
+				  <li id="am_ophthalmology">General Ophthalmology</li>
                   <li id="mdc_habif">Habif's Clinical Dermatology</li>
                   <li id="mdc_hoffman">Hematology: principles &amp; practice</li>
                   <li id="skolar_wachter">Hospital Medicine</li>
@@ -194,7 +193,8 @@
           <div class="searchCategory" id="patent_handouts">
           <h3>Patient Handouts</h3>
           <ul>
-            <li id="skolar_aafp">AAFP</li>
+            <li id="aappatient">AAP Patient Handouts</li>
+			<li id="skolar_aafp">AAFP</li>
             <li id="mdchandout">MD Consult</li>
             <li id="skolar_medfacts">MedFacts</li>
             <li id="medlineplus_2">MedlinePlus: drug</li>
@@ -208,7 +208,7 @@
           <div class="searchCategory" id="images">
           <h3>Images</h3>
           <ul>
-            <li id="imagesmd_0">Images.MD</li>
+            <li id="imagesmd">Images.MD</li>
           </ul>
         </div>
      </div>

@@ -22,6 +22,7 @@
                         <li id="skolar_rudolph">Rudolph's Pediatrics</li>
                         <li id="uptodate_0">UpToDate</li>
                         <li id="crossdb_omim">OMIM</li>
+						<li id="emedicine">eMedicine</li>
                     </ul>
                 </div>
                 <div class="searchCategory" id="texts">
@@ -70,7 +71,8 @@
                 <div class="searchCategory" id="handouts">
                     <h3>Patient Handouts</h3>
                     <ul>
-                        <li id="skolar_aafp">AAFP</li>
+                        <li id="aappatient">AAP Patient Handouts</li>
+						<li id="skolar_aafp">AAFP</li>
                         <li id="mdchandout">MDConsult</li>
                         <li id="skolar_medfacts">Med Facts</li>
                         <li id="medlineplus_1">MedlinePlus: drug</li>
