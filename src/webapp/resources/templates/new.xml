@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Lane Medical Library, Stanford University Medical Center</title>
+        <link href="/style/new.css" rel="stylesheet" type="text/css"/>
+        <meta name="WT.seg_1" content="{affiliation}"/>
+        <script src="/javascript/laneweb.js" type="text/javascript"> </script>
+        <script src="/javascript/webtrends.js" type="text/javascript"> </script>
+    </head>
+    <body
+        onload="MM_preloadImages('/images/new/eJournOn.jpg','/images/new/clinOn.jpg','/images/new/researchOn.jpg','/images/new/learnOn.jpg','/images/new/servicesOn.jpg','/images/new/pubMedon.jpg','/images/new/googleOn.jpg')">
+        <div id="headerContainer">
+            <div id="somLogoContainer">
+                <img src="/images/new/som_logo.jpg" width="138" height="39"/>
+            </div>
+            <div id="outsideSiteLinksContainer">
+                <div id="redCornerTL">
+                    <ul id="outsideSiteLinks">
+                        <li>
+                            <a href="http://www.stanford.edu/" target="_blank"
+                                >Stanford University</a>
+                        </li>
+                        <li>&#8226; &#160;<a href="">Stanford Hospital
+                                Clinics</a></li>
+                        <li>&#8226; &#160;<a href="">Lucile Packard
+                                Children Hospital</a></li>
+                        <li>&#8226; &#160;<a href="">VA Palo Alto</a></li>
+                        <li>&#8226; &#160;<a
+                                href="/images/new/som_logo.jpg" target="_blank"
+                                >Santa Clara Valley Medical</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="laneConnexContainer">
+                <img src="/images/new/laneConnex.gif" alt="lane connex image"
+                    height="33"/>
+            </div>
+            <div id="behindLaneConnexContainer">&#160;</div>
+            <div id="panoramicView">
+                <img src="/images/new/rightPanorama.jpg" alt=""
+                    id="rightPanorama"/>
+            </div>
+            <div id="searchContainer">
+                <div style="position: relative; top:0px; width: 100%; height:
+                    auto; overflow: hidden;">
+                    <span style="width: 70em; height:26px;">
+                        <!--<ul id="searchDbs">
+								<li><a href="eLibrary.html">eLibrary</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">Google</a></li>
+							</ul>-->
+                        <!--start image version-->
+                        <a href="online/index.html">
+                            <img src="/images/new/eLibon.jpg"
+                                width="65" height="26" border="0"/>
+                        </a>
+                        <a href="online/ej.html"
+                            onmouseout="MM_swapImgRestore()"
+                            onmouseover="MM_swapImage('eJourn','','/images/new/eJournOn.jpg',1)">
+                            <img src="/images/new/eJournOff.jpg"
+                                name="eJourn" width="73" height="26" border="0"
+                                id="eJourn"/>
+                        </a>
+                        <a href="clinical.html" onmouseout="MM_swapImgRestore()"
+                            onmouseover="MM_swapImage('clin','','/images/new/clinOn.jpg',1)">
+                            <img src="/images/new/clinOff.jpg"
+                                name="clin" width="61" height="26" border="0"
+                                id="clin"/>
+                        </a>
+                        <a href="#" onmouseout="MM_swapImgRestore()"
+                            onmouseover="MM_swapImage('research','','/images/new/researchOn.jpg',1)">
+                            <img src="/images/new/researchOff.jpg"
+                                name="research" width="69" height="26"
+                                border="0" id="research"/>
+                        </a>
+                        <a href="#" onmouseout="MM_swapImgRestore()"
+                            onmouseover="MM_swapImage('services','','/images/new/servicesOn.jpg',1)">
+                            <img src="/images/new/servicesOff.jpg"
+                                name="services" width="64" height="26"
+                                border="0" id="services"/>
+                        </a>
+                        <a href="#" onmouseout="MM_swapImgRestore()"
+                            onmouseover="MM_swapImage('pubmed','','/images/new/pubMedon.jpg',1)">
+                            <img src="/images/new/pubMedoff.jpg"
+                                name="pubmed" width="66" height="26" border="0"
+                                id="pubmed"/>
+                        </a>
+                        <a href="#" onmouseout="MM_swapImgRestore()"
+                            onmouseover="MM_swapImage('google','','/images/new/googleOn.jpg',1)">
+                            <img src="/images/new/googleOff.jpg"
+                                name="google" width="53" height="26" border="0"
+                                id="google"/>
+                        </a>
+                        <!--end image version-->
+                        <!--<a href="" class="searchLink"><span class="searchLinkText">PubMed</span><span class="searchLinkDivider">&#160;</span></a><a href="" class="searchLink"><span class="searchLinkText">Google</span><span class="searchLinkDividerEnd">&#160;</span></a>-->
+                    </span>
+                    <span id="searchFormContainer">
+                        <form name="searchForm" id="searchForm" method="post"
+                            action="" onSubmit="javascript:alert('Just tried to
+                            submit a search...');">
+                            <span class="searchText">Search</span>
+                            <select name="select" size="1">
+                                <option>eLibrary</option>
+                                <option>eJournals</option>
+                                <option>Clinical</option>
+                                <option>Pediatrician</option>
+                                <option>Research</option>
+                                <option>Learning</option>
+                                <option>Lane Services</option>
+                                <option>Seminars</option>
+                                <option>Stanford.Who</option>
+                                <option>PubMed</option>
+                                <option>Google</option>
+                            </select>
+                            <span class="searchText">for</span>
+                            <input name="search_query" type="text"
+                                id="searchQuery"/>
+                            <input type="submit" value=""
+                                id="searchFormSubmitButton"/>
+                            <div style="margin: 10px 0px 0px 0px; color: #555;
+                                font-weight:400;">Search for eJournals, eBooks,
+                                databases, calculators, tools, and
+                            more....</div>
+                        </form>
+                    </span>
+                </div>
+                <div id="searchContainerRoundedCorners">
+                    <img src="/images/new/searchBL.gif" alt="bottom negative
+                        rounded corner of search container" id="searchCornerBL"
+                    />
+                </div>
+            </div>
+            <div id="contentBody">
+                <div id="breadCrumb">
+                    <span style="width: 70em;"><a
+                            href="http://med.stanford.edu/">School Home</a>
+                        &gt; <a>IRT</a> &gt; <span id="lw_breadcrumb"
+                    /></span>
+                </div>
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="166" valign="top">
+                            <div class="leftSideBarComponent">
+                                <div class="leftSideBarTitle"
+                                    id="frequentlyUsed">Frequently Used</div>
+                                <div class="sideBarContent">sthg used or
+                                other</div>
+                            </div>
+                            <div class="leftSideBarComponent" id="featured">
+                                <div class="leftSideBarTitle" id="featured"
+                                    >Featured</div>
+                                <div class="sideBarContent">featured or
+                                not</div>
+                            </div>
+                        </td>
+                        <td align="left" valign="top">
+                            <div style="width:428px; height: 11px;">&#160;</div>
+                            <div id="lw_content"/>
+                        </td>
+                        <td width="203" align="right" valign="top">
+                            <div class="rightSideBarComponent">
+                                <div class="rightSideBarTitle" id="upcoming"
+                                    >Upcoming Events</div>
+                                <div class="sideBarContent">
+                                    sidebar content
+                                </div>
+                            </div>
+                            <div class="rightSideBarComponent">
+                                <div class="rightSideBarTitle" id="news">News</div>
+                                <div class="sideBarContent">Wow! New!</div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Lane Medical Library, Stanford University Medical Center</title>
+        <link href="/style/irt.css" rel="stylesheet" type="text/css"
+            media="screen,print"/>
+        <link href="/style/100years.css" rel="stylesheet" type="text/css"
+            media="screen,print"/>
+<!--[if IE 6]>
+<link rel="stylesheet" href="/style/100yearsIE6.css" type="text/css" />
+<![endif]-->
+        <meta name="WT.seg_1" content="{affiliation}"/>
+        <script src="/javascript/laneweb.js" type="text/javascript"> </script>
+        <script src="/javascript/webtrends.js" type="text/javascript"> </script>
+    </head>
+    <body onload="MM_preloadImages('/images/centennial/exhibits_top.jpg')">
+        <div id="headerContainer">
+            <div id="header">
+                <img src="/images/centennial/exhibits_top.jpg" width="900"
+                    height="188"/>
+            </div>
+        </div>
+        <div id="contentContainer">
+            <div id="middleFrame">
+                <div id="sidebar"> sidebar content </div>
+                <div id="content">
+                    <div id="lw_content"/>
+                </div>
+            </div>
+        </div>
+        <div id="footerContainer">
+            <div id="footer">
+                <img src="/images/centennial/exhibits_bottom.gif" width="900"
+                    height="85"/>
+            </div>
+        </div>
+    </body>
+</html>
