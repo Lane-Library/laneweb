@@ -49,21 +49,19 @@
 							</ul>-->
                         <!--start image version-->
                         <a href="online/index.html">
-                            <img src="/images/new/eLibon.jpg"
-                                width="65" height="26" border="0"/>
+                            <img src="/images/new/eLibon.jpg" width="65"
+                                height="26" border="0"/>
                         </a>
                         <a href="online/ej.html"
                             onmouseout="MM_swapImgRestore()"
                             onmouseover="MM_swapImage('eJourn','','/images/new/eJournOn.jpg',1)">
-                            <img src="/images/new/eJournOff.jpg"
-                                name="eJourn" width="73" height="26" border="0"
-                                id="eJourn"/>
+                            <img src="/images/new/eJournOff.jpg" name="eJourn"
+                                width="73" height="26" border="0" id="eJourn"/>
                         </a>
                         <a href="clinical.html" onmouseout="MM_swapImgRestore()"
                             onmouseover="MM_swapImage('clin','','/images/new/clinOn.jpg',1)">
-                            <img src="/images/new/clinOff.jpg"
-                                name="clin" width="61" height="26" border="0"
-                                id="clin"/>
+                            <img src="/images/new/clinOff.jpg" name="clin"
+                                width="61" height="26" border="0" id="clin"/>
                         </a>
                         <a href="#" onmouseout="MM_swapImgRestore()"
                             onmouseover="MM_swapImage('research','','/images/new/researchOn.jpg',1)">
@@ -79,15 +77,13 @@
                         </a>
                         <a href="#" onmouseout="MM_swapImgRestore()"
                             onmouseover="MM_swapImage('pubmed','','/images/new/pubMedon.jpg',1)">
-                            <img src="/images/new/pubMedoff.jpg"
-                                name="pubmed" width="66" height="26" border="0"
-                                id="pubmed"/>
+                            <img src="/images/new/pubMedoff.jpg" name="pubmed"
+                                width="66" height="26" border="0" id="pubmed"/>
                         </a>
                         <a href="#" onmouseout="MM_swapImgRestore()"
                             onmouseover="MM_swapImage('google','','/images/new/googleOn.jpg',1)">
-                            <img src="/images/new/googleOff.jpg"
-                                name="google" width="53" height="26" border="0"
-                                id="google"/>
+                            <img src="/images/new/googleOff.jpg" name="google"
+                                width="53" height="26" border="0" id="google"/>
                         </a>
                         <!--end image version-->
                         <!--<a href="" class="searchLink"><span class="searchLinkText">PubMed</span><span class="searchLinkDivider">&#160;</span></a><a href="" class="searchLink"><span class="searchLinkText">Google</span><span class="searchLinkDividerEnd">&#160;</span></a>-->
@@ -135,42 +131,33 @@
                         &gt; <a>IRT</a> &gt; <span id="lw_breadcrumb"
                     /></span>
                 </div>
-                <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td width="166" valign="top">
-                            <div class="leftSideBarComponent">
-                                <div class="leftSideBarTitle"
-                                    id="frequentlyUsed">Frequently Used</div>
-                                <div class="sideBarContent">sthg used or
-                                other</div>
-                            </div>
-                            <div class="leftSideBarComponent" id="featured">
-                                <div class="leftSideBarTitle" id="featured"
-                                    >Featured</div>
-                                <div class="sideBarContent">featured or
-                                not</div>
-                            </div>
-                        </td>
-                        <td align="left" valign="top">
-                            <div style="width:428px; height: 11px;">&#160;</div>
-                            <div id="lw_content"/>
-                        </td>
-                        <td width="203" align="right" valign="top">
-                            <div class="rightSideBarComponent">
-                                <div class="rightSideBarTitle" id="upcoming"
-                                    >Upcoming Events</div>
-                                <div class="sideBarContent">
-                                    sidebar content
-                                </div>
-                            </div>
-                            <div class="rightSideBarComponent">
-                                <div class="rightSideBarTitle" id="news">News</div>
-                                <div class="sideBarContent">Wow! New!</div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                <div style="float:left;width:20%">
+                    <div class="leftSideBarComponent">
+                        <div class="leftSideBarTitle" id="frequentlyUsed"
+                            >Frequently Used</div>
+                        <div class="sideBarContent">sthg used or other</div>
+                    </div>
+                    <div class="leftSideBarComponent" id="featured">
+                        <div class="leftSideBarTitle" id="featured">Featured</div>
+                        <div class="sideBarContent">featured or not</div>
+                    </div>
+                </div>
+                <div style="float:left;width:60%">
+                    <div id="lw_content"/>
+                </div>
+                <div style="float:left;width:20%">
+                    <div class="rightSideBarComponent">
+                        <div class="rightSideBarTitle" id="upcoming">Upcoming
+                            Events</div>
+                        <div class="sideBarContent"> sidebar content </div>
+                    </div>
+                    <div class="rightSideBarComponent">
+                        <div class="rightSideBarTitle" id="news">News</div>
+                        <div class="sideBarContent">Wow! New!</div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div style="clear:both;text-align:center"><h1>Here is the footer!</h1></div>
     </body>
 </html>
