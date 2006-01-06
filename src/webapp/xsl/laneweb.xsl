@@ -212,7 +212,7 @@
     <!-- get all the head elements from template and all non title head elements from source (with some exceptions)-->
     <xsl:template match="h:head">
         <head>
-            <xsl:apply-templates select="*"/>
+            <xsl:apply-templates select="node()"/>
             <xsl:apply-templates select="$source/h:head/*[not(self::h:title or @rel='stylesheet' or @http-equiv)]"/>
         </head>
     </xsl:template>
