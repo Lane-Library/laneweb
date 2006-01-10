@@ -6,7 +6,18 @@
         </map:generators>
         <map:transformers default="xsltc">
         </map:transformers>
-        <map:serializers default="xhtml">
+      <map:serializers default="xhtml">
+          <map:serializer name="noprolog" mime-type="text/html"
+              logger="sitemap.serializer.xhtml"
+              src="org.apache.cocoon.serialization.XMLSerializer"
+              pool-max="32" pool-min="16" pool-grow="4">
+              <doctype-public>-//W3C//DTD XHTML 1.0 Transitional//EN</doctype-public>
+              <doctype-system>http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd</doctype-system>
+              <encoding>UTF-8</encoding>
+              <indent>no</indent>
+              <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
+              <omit-xml-declaration>yes</omit-xml-declaration>
+          </map:serializer>
         </map:serializers>
         <map:selectors default="source-parameter">
         </map:selectors>
@@ -73,10 +84,10 @@
                 </map:match>
                 <map:match type="wildcard" pattern="beta/**">
                     <map:aggregate element="doc" label="content">
-                        <map:part src="cocoon:/content/{1}"/>
+                        <map:part src="cocoon:/content/beta/{1}"/>
                         <map:part src="cocoon:/content/sitemap.html"/>
                         <map:part src="cocoon:/content/templates/new.xml"/>
-                        <map:part src="cocoon:/sidebar/{1}"/>
+                        <map:part src="cocoon:/sidebar/beta/{1}"/>
                     </map:aggregate>
                     <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
                         <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
@@ -95,6 +106,31 @@
                         <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
                     </map:transform>
                     <map:serialize type="xhtml"/>
+                </map:match>
+                <map:match type="wildcard" pattern="100years/**">
+                    <map:aggregate element="doc" label="content">
+                        <map:part src="cocoon:/content/100years/{1}"/>
+                        <map:part src="cocoon:/content/sitemap.html"/>
+                        <map:part src="cocoon:/content/templates/100years.xml"/>
+                        <map:part src="cocoon:/sidebar/100years/{1}"/>
+                    </map:aggregate>
+                    <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                        <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
+                        <map:parameter name="context" value="{request:contextPath}/stage"/>
+                        <map:parameter name="requestQuery" value="{request:queryString}"/>
+                        <map:parameter name="template" value="{request-param:template}"/>
+                        <map:parameter name="keywords" value="{request-param:keywords}"/>
+                        <map:parameter name="selection" value="{request-param:source}"/>
+                        <map:parameter name="stanford" value="{laneweb:stanford}"/>
+                        <map:parameter name="debug" value="{request-param:debug}"/>
+                    </map:transform>
+                    <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
+                        <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                        <map:parameter name="source" value="{request-param:source}"/>
+                        <map:parameter name="keywords" value="{request-param:keywords}"/>
+                        <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
+                    </map:transform>
+                    <map:serialize type="noprolog"/>
                 </map:match>
                 <map:match type="wildcard" pattern="**">
                     <map:aggregate element="doc" label="content">
