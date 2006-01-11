@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
     <map:components>
-        <map:generators default="file"/>
+        <map:generators default="file">
+            <map:generator name="eresources" src="edu.stanford.laneweb.EresourcesQueryGenerator"/>
+        </map:generators>
         <map:transformers default="xsltc">
             <map:transformer name="eresource"
                 logger="sitemap.transformer.eresource"
@@ -49,6 +51,14 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching">
+            <map:match pattern="erdb">
+                <map:generate type="eresources"/>
+                <map:transform type="sql">
+                    <map:parameter name="use-connection" value="laneweb"/>
+                </map:transform>
+                <map:transform type="xsltc" src="context://xsl/ersql2html.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match type="wildcard" pattern="subject/*.xml">
                 <map:generate type="file" src="cocoon:/cached/raw/{1}.xml"/>
                 <map:transform type="xsltc" src="context://xsl/subject.xsl">
