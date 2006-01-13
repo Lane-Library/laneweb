@@ -8,6 +8,7 @@ package edu.stanford.laneweb;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
@@ -103,7 +104,9 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     }
 
     public void generate() throws SAXException {
-        StringBuffer query = new StringBuffer(SELECT_FROM);
+        StringBuffer query = null;
+        if (this.text == null) {
+        query = new StringBuffer(SELECT_FROM);
         if (this.type != null) {
             query.append(", TYPE");
         }
@@ -152,6 +155,22 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             query.append(" AND lower(ERESOURCE.PREFERRED_TITLE) LIKE '").append(this.alpha).append("%'");
         }
         query.append(ORDER);
+        } else {
+            query = new StringBuffer("SELECT " +
+                    "DISTINCT LINK.LINK_ID, SCORE(1), ERESOURCE.ERESOURCE_ID, VERSION.VERSION_ID, ERESOURCE.TITLE, lower(ERESOURCE.TITLE) as LTITLE, VERSION.PUBLISHER, VERSION.HOLDINGS, VERSION.DATES, VERSION.DESCRIPTION, VERSION.PROXY, LINK.URL, LINK.LABEL, LINK.INSTRUCTION " +
+                    "FROM " +
+                    "ERESOURCE, VERSION, LINK, ERESOURCE_VERSION, VERSION_LINK");
+            query.append(WHERE);
+             query.append(" AND CONTAINS(TEXT,'");
+            StringTokenizer st = new StringTokenizer(this.text);
+            while (st.hasMoreTokens()) {
+                query.append(st.nextToken());
+                if (st.hasMoreTokens()) {
+                    query.append(" AND ");
+                }
+            }
+            query.append("', 1) > 0 ORDER BY SCORE(1) DESC, TITLE");
+        }
         char[] queryArray = query.toString().toCharArray();
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(XMLNS,EXECUTE_QUERY,EXECUTE_QUERY,EMPTY_ATTS);
