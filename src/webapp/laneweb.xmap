@@ -138,7 +138,7 @@
                 <map:mount uri-prefix="olgary" check-reload="yes" src="file:/afs/ir/users/o/l/olgary/laneweb/laneweb.xmap"/>
             </map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|camv|smil|xls|doc|ppt|ico|swf)$">
-                <map:mount uri-prefix="" check-reload="no" src="{defaults:live-base}/static.xmap"/>
+                <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="robots.txt">
                 <map:read src="robots.txt" mime-type="text/plain"/>
@@ -215,7 +215,7 @@
                     </map:select>
                     <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
                         <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
-                        <map:parameter name="context" value="{request:contextPath}/"/>
+                        <map:parameter name="context" value="{request:contextPath}"/>
                         <map:parameter name="requestQuery" value="{request:queryString}"/>
                         <map:parameter name="template" value="{request-param:template}"/>
                         <map:parameter name="keywords" value="{request-param:keywords}"/>
