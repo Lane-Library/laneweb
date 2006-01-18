@@ -1,38 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Lane Medical Library, Stanford University Medical Center</title>
-        <link href="/style/irt.css" rel="stylesheet" type="text/css"
-            media="screen,print"/>
-        <link href="/style/100years.css" rel="stylesheet" type="text/css"
-            media="screen,print"/>
-<!--[if IE 6]>
-<link rel="stylesheet" href="/style/100yearsIE6.css" type="text/css" />
-<![endif]-->
-        <meta name="WT.seg_1" content="{affiliation}"/>
-        <script src="/javascript/laneweb.js" type="text/javascript"> </script>
-        <script src="/javascript/webtrends.js" type="text/javascript"> </script>
-    </head>
-    <body onload="MM_preloadImages('/images/centennial/exhibits_top.jpg')">
-        <div id="headerContainer">
-            <div id="header">
-                <img src="/images/centennial/exhibits_top.jpg" width="900"
-                    height="188"/>
-            </div>
-        </div>
-        <div id="contentContainer">
-            <div id="middleFrame">
-                <div id="sidebar"> sidebar content </div>
-                <div id="content">
-                    <div id="lw_content"/>
-                </div>
-            </div>
-        </div>
-        <div id="footerContainer">
-            <div id="footer">
-                <img src="/images/centennial/exhibits_bottom.gif" width="900"
-                    height="85"/>
-            </div>
-        </div>
-    </body>
+	<head>
+		<title>Lane Medical Library Celebrating 100 Years</title>
+		<link href="/style/irt.css" rel="stylesheet" type="text/css" media="screen,print"/>
+		<link href="/style/100years.css" rel="stylesheet" type="text/css" media="screen,print"/>
+
+		<meta name="WT.seg_1" content="{affiliation}"/>
+		<script src="/javascript/laneweb.js" type="text/javascript"> </script>
+		<script src="/javascript/webtrends.js" type="text/javascript"> </script>
+		<script type="text/javascript">
+		<!--
+			function titleLoad() {
+				var currentURL = window.location.href;
+				var pages = ["events", "exhibits", "history", "vignettes"];
+				for (var i=0; i < pages.length; i++) {
+					if (currentURL.indexOf(pages[i]) != -1) {
+						document.getElementById(pages[i] + "SidebarItem").style.fontWeight="bold";
+						document.getElementById(pages[i] + "SidebarItem").style.color="#f60";
+					}
+				}
+			} 
+		//-->
+		</script>
+	</head>
+	
+	<body onload="MM_preloadImages('/images/centennial/topCollage.jpg'); titleLoad();">
+		<div id="headerContainer">
+			<div id="header">
+				<div id="headerTop">
+					<a href="http://med.stanford.edu/" target="_blank"><img id="somLogo" src="/images/centennial/somLogo.gif" alt="Stanford School of Medicine logo" width="151" height="32"/></a>
+					<img id="laneSlogan" alt="Lane Medical Library Celebrating 100 Years" src="/images/centennial/laneSlogan.gif" width="547" height="30"/><br/>
+					<img id="100years" style="position: relative; top: 8px; left: 53px; width: 116px; height: 27px;" src="/images/centennial/years.gif" width="116" height="27" alt="[image]"/>
+				</div>
+				<img id="topCollage" src="/images/centennial/topCollage.jpg" width="870" height="97" alt="[image]"/>
+				<div id="centennialBreadCrumb" style="width: auto; border-top: 1px solid #fff; padding-left: 35px; padding-top: 3px; padding-bottom: 3px; background: #e8e5d9;"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &gt; <a href="http://lane.stanford.edu/" target="_blank">Lane</a> &gt; Celebrating 100 Years</div>
+			</div>
+		</div>
+		<div id="contentContainer">
+			<div id="middleFrame">
+				<div id="centennialSidebar">
+					<a href="index.html"><img id="seal" style="border: 0px; padding-top: 30px; padding-bottom: 15px; width: 86px; height: 90px;" src="/images/centennial/seal.gif" width="86" height="90" alt="[image]"/></a><br/>
+					<div id="menuList" style="text-align: left; padding-left: 45px; border: 0px;">
+						<div id="lw_side-bar"/><br/>
+						<ul>
+							<li><a href="memorylane.html"><img src="/images/centennial/memoryLaneOff.gif" height="12" width="66" alt="Memory Lane"/></a></li>
+							<li><a href="http://elane.stanford.edu/wilson/indexphoto.html" target="_blank"><img src="/images/centennial/oldPhotoOff.gif" height="12" width="58" alt="Old Photos"/></a></li>
+							<!--
+							<li><a href="mysteryitems.html"><img src="/images/centennial/mystItemsOff.gif" height="12" width="72" alt="Mystery Items"/></a></li>
+							<li><a href="timecapsule.html"><img src="/images/centennial/timeCapsuleOff.gif" height="11" width="65" alt="Time Capsule"/></a></li>
+							-->
+						</ul>
+					</div>
+				</div>
+				<div id="content">
+							<div id="lw_content"></div>
+				</div>
+			</div>
+			<div id="footer">
+				<div style="width: auto; height: 10px; background: #c5bd9f; margin-bottom: 5px;">&#160;</div>
+				<table width="100%">
+					<tr>
+						<td width="30%" align="center" valign="top">&#169;2006 <a href="http://med.stanford.edu/" target="_blank">Stanford University School of Medicine</a><br/>
+							<a href="http://www.stanford.edu/" target="_blank">Stanford University</a>
+						</td>
+						<td width="50%" align="center" valign="top">&#8226; <a href="http://lane.stanford.edu/" target="_blank">Lane Medical Library &#38; Knowledge Management Center</a> &#8226;<br/>
+							<a href="mailto:LaneAskUs@stanford.edu">LaneAskUs@stanford.edu</a> | (650) 723-6831 | <a href="http://laneintranet.stanford.edu/" target="_blank">Staff Intranet</a></td>
+						<td width="20%" align="center" valign="top">Powered by <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &#8226; <a href="http://www.stanford.edu/home/atoz/terms.html" target="_blank">Terms of Use</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
 </html>
