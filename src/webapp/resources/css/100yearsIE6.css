@@ -1,0 +1,12 @@
+html {
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  overflow: auto;
+}
+
+#footerContainer {
+  bottom: -1px;
+}
