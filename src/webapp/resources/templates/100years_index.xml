@@ -76,7 +76,7 @@
 		</script>
 	</head>
 	
-	<body onload="MM_preloadImages('/images/centennial/gradTopBackgr.jpg','/images/centennial/flashPlaceholder.jpg'); flashLoad();">
+	<body onload="MM_preloadImages('../centennial/gradTopBackgr.jpg','../centennial/flashPlaceholder.jpg'); flashLoad();">
 		<div id="indexHeaderContainer">
 			<div id="indexHeader">
 				<img id="indexCollageTopPart" src="/images/centennial/gradTopBackgr.jpg" width="870" height="100" alt="[image]"/>
@@ -90,7 +90,7 @@
 					</object>
 				</div>
 				<img id="indexCollageBottomPart" src="/images/centennial/flashPlaceholder.jpg" width="870" height="162" alt="[image]"/>
-				<div id="centennialBreadCrumb" style="width: auto; border-top: 1px solid #fff; padding-left: 35px; padding-top: 3px; padding-bottom: 3px; background: #e8e5d9;"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &gt; <a href="http://lane.stanford.edu/" target="_blank">Lane</a> &gt; Celebrating 100 Years</div>
+				<div id="centennialBreadCrumb" style="width: auto; border-top: 1px solid #fff; padding-left: 35px; padding-top: 3px; padding-bottom: 3px; background-color: #e8e5d9;"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &gt; <a href="http://lane.stanford.edu/" target="_blank">Lane</a> &gt; Celebrating 100 Years</div>
 			</div>
 		</div>
 		<div id="indexContentContainer">
@@ -102,7 +102,7 @@
 				<div id="content"><div id="lw_content"/></div>
 			</div>
 			<div id="footer">
-				<div style="width: auto; height: 10px; background: #c5bd9f; margin-bottom: 5px;">&#160;</div>
+				<div style="width: auto; height: 10px; background-color: #c5bd9f; margin-bottom: 5px;">&#160;</div>
 				<table width="100%">
 					<tr>
 						<td width="30%" align="center" valign="top">&#169;2006 <a href="http://med.stanford.edu/" target="_blank">Stanford University School of Medicine</a><br/>

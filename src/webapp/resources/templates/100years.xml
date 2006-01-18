@@ -24,7 +24,7 @@
 		</script>
 	</head>
 	
-	<body onload="MM_preloadImages('/images/centennial/topCollage.jpg'); titleLoad();">
+	<body onload="MM_preloadImages('../centennial/topCollage.jpg'); titleLoad();">
 		<div id="headerContainer">
 			<div id="header">
 				<div id="headerTop">
@@ -33,7 +33,7 @@
 					<img id="100years" style="position: relative; top: 8px; left: 53px; width: 116px; height: 27px;" src="/images/centennial/years.gif" width="116" height="27" alt="[image]"/>
 				</div>
 				<img id="topCollage" src="/images/centennial/topCollage.jpg" width="870" height="97" alt="[image]"/>
-				<div id="centennialBreadCrumb" style="width: auto; border-top: 1px solid #fff; padding-left: 35px; padding-top: 3px; padding-bottom: 3px; background: #e8e5d9;"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &gt; <a href="http://lane.stanford.edu/" target="_blank">Lane</a> &gt; Celebrating 100 Years</div>
+				<div id="centennialBreadCrumb" style="width: auto; border-top: 1px solid #fff; padding-left: 35px; padding-top: 3px; padding-bottom: 3px; background-color: #e8e5d9;"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &gt; <a href="http://lane.stanford.edu/" target="_blank">Lane</a> &gt; Celebrating 100 Years</div>
 			</div>
 		</div>
 		<div id="contentContainer">
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<div id="footer">
-				<div style="width: auto; height: 10px; background: #c5bd9f; margin-bottom: 5px;">&#160;</div>
+				<div style="width: auto; height: 10px; background-color: #c5bd9f; margin-bottom: 5px;">&#160;</div>
 				<table width="100%">
 					<tr>
 						<td width="30%" align="center" valign="top">&#169;2006 <a href="http://med.stanford.edu/" target="_blank">Stanford University School of Medicine</a><br/>
