@@ -28,7 +28,7 @@
                 <map:read src="resources/images/{1}.png" mime-type="image/png"/>
             </map:match>
             <map:match type="wildcard" pattern="pdf/**.pdf">
-                <map:read src="resources/pdf/{1}.pdf" mime-type="application/pdf"/>
+                <map:read type="no-byte-range" src="resources/pdf/{1}.pdf" mime-type="application/pdf"/>
             </map:match>
             <map:match type="wildcard" pattern="**.gif">
                 <map:read src="xdocs/{1}.gif" mime-type="image/gif"/>
@@ -37,7 +37,7 @@
                 <map:read src="xdocs/{1}.jpg" mime-type="image/jpeg"/>
             </map:match>
             <map:match type="wildcard" pattern="**.pdf">
-                <map:read src="xdocs/{1}.pdf" mime-type="application/pdf"/>
+                <map:read type="no-byte-range" src="xdocs/{1}.pdf" mime-type="application/pdf"/>
             </map:match>
             <map:match type="wildcard" pattern="**.rm">
                 <map:read src="xdocs/{1}.rm" mime-type="audio/x-pn-realaudio"/>
