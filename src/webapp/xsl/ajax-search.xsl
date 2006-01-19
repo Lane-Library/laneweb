@@ -38,7 +38,7 @@
       
     <xsl:template match="h:div[@id='spellResults']">
         <xsl:if test="$spell">
-	            <div><p>Did you mean: <a href="new-search.html?source={$template}&amp;keywords={$spell}"><strong><i><xsl:value-of select="$spell"/></i></strong></a></p></div>
+	            <p>Did you mean: <a href="new-search.html?source={$template}&amp;keywords={$spell}"><strong><i><xsl:value-of select="$spell"/></i></strong></a></p>
         </xsl:if>
         <xsl:copy>
             <xsl:copy-of select="@*"/>
