@@ -79,7 +79,7 @@
 	<body onload="MM_preloadImages('../centennial/gradTopBackgr.jpg','../centennial/flashPlaceholder.jpg'); flashLoad();">
 		<div id="indexHeaderContainer">
 			<div id="indexHeader">
-				<img id="indexCollageTopPart" src="/images/centennial/gradTopBackgr.jpg" width="870" height="100" alt="[image]"/>
+				<img id="indexCollageTopPart" src="/images/centennial/gradTopBackgr.jpg" width="870" height="100" alt="Lane Medical Library Celebrating 100 Years"/>
 				<div id="indexFlashTimeline">
 					<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="870" height="162" id="timeline" align="middle">
 						<param name="allowScriptAccess" value="sameDomain" />
@@ -96,7 +96,7 @@
 		<div id="indexContentContainer">
 			<div id="middleFrame">
 				<div id="centennialSidebar">
-					<a href="index.html"><img id="seal" style="border: 0px; padding-top: 30px; padding-bottom: 15px; width: 86px; height: 90px;" src="/images/centennial/seal.gif" width="86" height="90" alt="[image]"/></a><br/>
+					<a href="index.html"><img id="seal" style="border: 0px; padding-top: 30px; padding-bottom: 15px; width: 86px; height: 90px;" src="/images/centennial/seal.gif" width="86" height="90" alt="Lane Centennial Seal"/></a><br/>
 					<div id="menuList" style="text-align: left; padding-left: 45px; border: 0px;"><div id="lw_side-bar"/></div>
 				</div>
 				<div id="content"><div id="lw_content"/></div>
