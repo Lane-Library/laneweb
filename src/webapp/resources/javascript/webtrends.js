@@ -1,8 +1,4 @@
-var gService = true;
 var gTimeZone = -8;
-if (gService){
-	var gConvert=true;
-}
 
 function dcsAdv(){
 	dcsFunc("dcsET");
