@@ -85,6 +85,9 @@
         </map:selectors>
         <map:readers default="resource">
             <map:reader name="resource" logger="sitemap.reader.resource" src="org.apache.cocoon.reading.ResourceReader"/>
+            <map:reader name="no-byte-range" logger="sitemap.reader.nobyterange" src="org.apache.cocoon.reading.ResourceReader">
+                <byte-ranges>false</byte-ranges>
+            </map:reader>            
         </map:readers>
         <map:matchers default="wildcard">
             <map:matcher name="wildcard" logger="sitemap.matcher.wildcard" src="org.apache.cocoon.matching.WildcardURIMatcher"/>
