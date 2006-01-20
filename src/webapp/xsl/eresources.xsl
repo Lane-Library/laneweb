@@ -65,25 +65,25 @@
                             </xsl:if>
                         <xsl:if test="$ejournals!=''">
                             <h3>eJournals</h3>
-                            <ul>
+                            <ul class="ej">
                                 <xsl:copy-of select="$ejournals"/>
                             </ul>
                         </xsl:if>
                         <xsl:if test="$databases!=''">
                             <h3>Databases</h3>
-                            <ul>
+                            <ul class="db">
                                 <xsl:copy-of select="$databases"/>
                             </ul>
                         </xsl:if>
                         <xsl:if test="$ebooks!=''">
                             <h3>eBooks</h3>
-                            <ul>
+                            <ul class="eb">
                                 <xsl:copy-of select="$ebooks"/>
                             </ul>
                         </xsl:if>
                         <xsl:if test="$calculators!=''">
                             <h3>Calculators</h3>
-                            <ul>
+                            <ul class="calc">
                                 <xsl:copy-of select="$calculators"/>
                             </ul>
                         </xsl:if>
