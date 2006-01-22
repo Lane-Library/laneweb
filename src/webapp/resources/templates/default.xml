@@ -2,7 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Lane Medical Library, Stanford University Medical Center</title>
-				<link href="/style/irt.css" rel="stylesheet" type="text/css"/>
 				<link href="/style/search-slicing.css" rel="stylesheet" type="text/css" />
         <link href="/style/default.css" rel="stylesheet" type="text/css"/>
         <meta name="WT.seg_1" content="{affiliation}"/>
