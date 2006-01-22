@@ -73,7 +73,6 @@
                         <map:part src="cocoon:/content/{1}"/>
                         <map:part src="cocoon:/content/sitemap.html"/>
                         <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
-                        <map:part src="cocoon:/sidebar/{1}"/>
                     </map:aggregate>
                     <map:transform type="xsltc" src="{defaults:stage-base}/xsl/laneweb.xsl">
                         <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
