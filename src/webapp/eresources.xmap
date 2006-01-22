@@ -24,7 +24,7 @@
                 <map:transform type="sql">
                     <map:paramter name="use-connection" value="eresources"/>
                 </map:transform>
-                <map:transform type="xsltc" src="context://xsl/ersqsl2html.xsl"/>
+                <map:transform type="xsltc" src="{defaults:live-base}/xsl/ersqsl2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>

@@ -25,7 +25,7 @@
             </map:match>
             <map:match type="wildcard" pattern="marc.html">
                 <map:generate type="file" src="cocoon:/marc.xml"/>
-                <map:transform type="xsltc" src="context://xsl/marc.xsl">
+                <map:transform type="xsltc" src="{defaults:live-base}/xsl/marc.xsl">
                     <map:parameter name="db" value="{request-param:db}"/>
                     <map:parameter name="type" value="{request-param:type}"/>
                     <map:parameter name="id" value="{request-param:id}"/>

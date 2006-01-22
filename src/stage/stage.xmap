@@ -81,7 +81,7 @@
                         <map:part src="cocoon:/content/templates/new.xml"/>
                         <map:part src="cocoon:/sidebar/beta/{1}"/>
                     </map:aggregate>
-                    <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                    <map:transform type="xsltc" src="{defaults:stage-base}/xsl/laneweb.xsl">
                         <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
                         <map:parameter name="context" value="{request:contextPath}/stage"/>
                         <map:parameter name="requestQuery" value="{request:queryString}"/>
@@ -91,7 +91,7 @@
                         <map:parameter name="stanford" value="{laneweb:stanford}"/>
                         <map:parameter name="debug" value="{request-param:debug}"/>
                     </map:transform>
-                    <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
+                    <map:transform type="xsltc" src="{defaults:stage-base}/xsl/webtrends.xsl">
                         <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                         <map:parameter name="source" value="{request-param:source}"/>
                         <map:parameter name="keywords" value="{request-param:keywords}"/>
@@ -119,7 +119,7 @@
                             </map:aggregate>
                         </map:otherwise>
                     </map:select>
-                    <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                    <map:transform type="xsltc" src="{defaults:stage-base}/xsl/laneweb.xsl">
                         <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
                         <map:parameter name="context" value="{request:contextPath}/stage"/>
                         <map:parameter name="requestQuery" value="{request:queryString}"/>
@@ -129,7 +129,7 @@
                         <map:parameter name="stanford" value="{laneweb:stanford}"/>
                         <map:parameter name="debug" value="{request-param:debug}"/>
                     </map:transform>
-                    <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
+                    <map:transform type="xsltc" src="{defaults:stage-base}/xsl/webtrends.xsl">
                         <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                         <map:parameter name="source" value="{request-param:source}"/>
                         <map:parameter name="keywords" value="{request-param:keywords}"/>
@@ -144,7 +144,7 @@
                         <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                         <map:part src="cocoon:/sidebar/{1}"/>
                     </map:aggregate>
-                    <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                    <map:transform type="xsltc" src="{defaults:stage-base}/xsl/laneweb.xsl">
                         <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
                         <map:parameter name="context" value="{request:contextPath}/stage"/>
                         <map:parameter name="requestQuery" value="{request:queryString}"/>
@@ -154,7 +154,7 @@
                         <map:parameter name="stanford" value="{laneweb:stanford}"/>
                         <map:parameter name="debug" value="{request-param:debug}"/>
                     </map:transform>
-                    <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
+                    <map:transform type="xsltc" src="{defaults:stage-base}/xsl/webtrends.xsl">
                         <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                         <map:parameter name="source" value="{request-param:source}"/>
                         <map:parameter name="keywords" value="{request-param:keywords}"/>

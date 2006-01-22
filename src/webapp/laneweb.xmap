@@ -9,7 +9,7 @@
             <map:generator name="html" logger="sitemap.generator.html"
                 src="org.apache.cocoon.generation.HTMLGenerator" pool-max="32"
                 pool-min="16" pool-grow="4">
-                <jtidy-config>context://WEB-INF/jtidy.properties</jtidy-config>
+                <jtidy-config>{defaults:live-base}/WEB-INF/jtidy.properties</jtidy-config>
             </map:generator>
             <map:generator name="search-proxy" src="edu.stanford.laneweb.SearchProxyGenerator" logger="sitemap.generator.search-proxy" pool-min="16" pool-max="32" pool-grow="4"></map:generator>
         </map:generators>
@@ -184,7 +184,7 @@
                         <map:part src="cocoon:/content/sitemap.html"/>
                         <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                     </map:aggregate>
-                    <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                    <map:transform type="xsltc" src="{defaults:live-base}/xsl/laneweb.xsl">
                         <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
                         <map:parameter name="context" value="{request:contextPath}"/>
                         <map:parameter name="requestQuery" value="{request:queryString}"/>
@@ -194,7 +194,7 @@
                         <map:parameter name="stanford" value="{laneweb:stanford}"/>
                         <map:parameter name="debug" value="{request-param:debug}"/>
                     </map:transform>
-                    <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
+                    <map:transform type="xsltc" src="{defaults:live-base}/xsl/webtrends.xsl">
                         <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                         <map:parameter name="source" value="{request-param:source}"/>
                         <map:parameter name="keywords" value="{request-param:keywords}"/>
