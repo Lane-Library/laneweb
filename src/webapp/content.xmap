@@ -12,7 +12,7 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="online/auth.html">
-                <map:generate type="html" src="{defaults:live-base}/docs/online/auth.html"/>
+                <map:generate type="html" src="{defaults:live-base}/content/online/auth.html"/>
                 <map:transform type="xsltc" src="{defaults:live-base}/xsl/auth.xsl">
                     <map:parameter name="url" value="{request-param:url}"/>
                 </map:transform>
@@ -68,7 +68,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="**">
-                <map:generate type="html" src="{defaults:live-base}/docs/{1}"/>
+                <map:generate type="html" src="{defaults:live-base}/content/{1}"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="xsltc" src="{defaults:live-base}/xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>

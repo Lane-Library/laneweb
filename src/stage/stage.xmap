@@ -20,7 +20,7 @@
     <map:pipelines>
         <map:pipeline>
             <map:match type="wildcard" pattern="TMP**">
-                <map:read src="xdocs/TMP{1}" mime-type="text/html"/>
+                <map:read src="content/TMP{1}" mime-type="text/html"/>
             </map:match>
             <map:match type="wildcard" pattern="beta/**">
             	<map:mount uri-prefix="beta" src="beta/beta-stage.xmap" check-reload="yes"/>

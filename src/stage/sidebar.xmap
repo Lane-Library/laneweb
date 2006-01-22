@@ -10,13 +10,13 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="*">
-                <map:generate type="html" src="{defaults:stage-base}/xdocs/sidebar.html"/>
+                <map:generate type="html" src="{defaults:stage-base}/content/sidebar.html"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="**/*">
                 <map:select type="resource-exists">
-                    <map:when test="{defaults:stage-base}/xdocs/{1}/sidebar.html">
-                        <map:generate type="html" src="{defaults:stage-base}/xdocs/{1}/sidebar.html"/>
+                    <map:when test="{defaults:stage-base}/content/{1}/sidebar.html">
+                        <map:generate type="html" src="{defaults:stage-base}/content/{1}/sidebar.html"/>
                     </map:when>
                     <map:otherwise>
                         <map:generate type="file" src="cocoon:/{1}"/>
