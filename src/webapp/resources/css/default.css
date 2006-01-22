@@ -58,7 +58,7 @@ body {
 	margin: 0px;
 	color: white;
 	font-size: 0.8em;
-	background: #900 url(/images/templates/default/redcornerTR.gif) no-repeat top right;
+	background: #900 url(/beta/images/templates/default/redcornerTR.gif) no-repeat top right;
 }
 /*
 #redCornerTL {
@@ -88,7 +88,7 @@ body {
 	text-align: center;
 	vertical-align: middle;
 	/*display: inline;*/
-	background: transparent url(/images/templates/default/redcornerTL.gif) no-repeat 0px 0px;
+	background: transparent url(/beta/images/templates/default/redcornerTL.gif) no-repeat 0px 0px;
 }
 
 ul#outsideSiteLinks {
@@ -140,7 +140,7 @@ ul#outsideSiteLinks *{
 	border: 0px;
 	border-left: 1px solid #ddd;
 	z-index: 3;
-	background: #ddc url(/images/templates/default/searchGradient.jpg) repeat-x top left;
+	background: #ddc url(/beta/images/templates/default/searchGradient.jpg) repeat-x top left;
 }
 
 #panoramicView {
@@ -150,7 +150,7 @@ ul#outsideSiteLinks *{
 	 width: 100%;
 	 height: 56px;
 	 overflow: hidden;
-	 background: url(/images/templates/default/leftPanorama.jpg) repeat-x top left;
+	 background: url(/beta/images/templates/default/leftPanorama.jpg) repeat-x top left;
 	 text-align: right;
 	 z-index: 1;
 	 border-left: 2px solid #fff; /* added to preserve width with searchContainer */
@@ -178,7 +178,7 @@ ul#outsideSiteLinks *{
 	 border-top: 0px;
 	 margin: 0px;
 	 padding: 0px;
-	 background: #ddc url(/images/new/searchGradient.jpg) repeat-x top left;
+	 background: #ddc url(/beta/images/new/searchGradient.jpg) repeat-x top left;
 	 text-align: center;
 	 font-weight:700;
 	 letter-spacing: 1px;
@@ -253,7 +253,7 @@ ul#searchDbs a:link, ul#searchDbs a:visited, ul#searchDbs a:hover, ul#searchDbs 
 ul#searchDbs a:hover, ul#searchDbs a:active {
 	color: black;
 	/*background: red;*/
-	background-image: url(/images/templates/default/searchLinkRolloverBg.jpg);
+	background-image: url(/beta/images/templates/default/searchLinkRolloverBg.jpg);
 	background-attachment: fixed;
 	background-repeat: repeat-x;
 	background-position:  0px -1px;
@@ -284,7 +284,7 @@ a.searchLink,  a.searchLink:link,  a.searchLink:visited, a.searchLink:hover, a.s
 
 a.searchLink:hover, a.searchLink:active {
 	font-weight: 800;
-	background: url(/images/templates/default/searchLinkRolloverBg.jpg) repeat fixed left top;
+	background: url(/beta/images/templates/default/searchLinkRolloverBg.jpg) repeat fixed left top;
 	overflow: hidden;
 	z-index: 30;
 }
@@ -347,7 +347,7 @@ a.searchLink:hover, a.searchLink:active {
 	border: 0px;
 	padding: 0px;
 	background-color: transparent;
-	background-image: url(/images/templates/default/searchBL.gif);
+	background-image: url(/beta/images/templates/default/searchBL.gif);
 	background-repeat: no-repeat;
 	background-position: 0px -7px;
 }
@@ -382,7 +382,7 @@ a.searchLink:hover, a.searchLink:active {
 	border:0px;
 	margin: 0px;
 	padding: 0px;
-	background: transparent url(/images/templates/default/go.jpg) no-repeat top center;
+	background: transparent url(/beta/images/templates/default/go.jpg) no-repeat top center;
 }
 
 #breadCrumb {
