@@ -61,14 +61,6 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="online/*all.html">
-                <map:generate src="cocoon://content/online/{1}.html?all=y"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="online/databases/index.html">
-                <map:generate src="cocoon://content/online/db.html"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="templates/**.xml">
                 <map:generate type="file" src="{defaults:stage-base}/resources/templates/{1}.xml"/>
                 <map:serialize type="xml"/>

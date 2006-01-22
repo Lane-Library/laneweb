@@ -22,9 +22,6 @@
             <map:match type="wildcard" pattern="TMP**">
                 <map:read src="content/TMP{1}" mime-type="text/html"/>
             </map:match>
-            <map:match type="wildcard" pattern="beta/**">
-            	<map:mount uri-prefix="beta" src="beta/beta-stage.xmap" check-reload="yes"/>
-            </map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|camv|smil|xls|doc|ppt|ico|swf)$">
                 <map:mount uri-prefix="" check-reload="yes" src="static.xmap"/>
             </map:match>
@@ -39,9 +36,6 @@
             </map:match>
             <map:match type="wildcard" pattern="admin/**">
                 <map:mount uri-prefix="admin" check-reload="yes" src="admin.xmap"/>
-            </map:match>
-            <map:match type="wildcard" pattern="sidebar/**">
-                <map:mount uri-prefix="sidebar" check-reload="yes" src="sidebar.xmap"/>
             </map:match>
             <!-- ========================================================== -->
             <map:match type="wildcard" pattern="online/ebooks.html">
@@ -73,69 +67,6 @@
                             <map:redirect-to uri="howto/index.html?source=faq&amp;keywords={request-param:keywords}&amp;template={chain:template}"/>
                         </map:when>
                     </map:select>
-                </map:match>
-                <map:match type="wildcard" pattern="beta/**">
-                    <map:aggregate element="doc" label="content">
-                        <map:part src="cocoon:/content/beta/{1}"/>
-                        <map:part src="cocoon:/content/sitemap.html"/>
-                        <map:part src="cocoon:/content/templates/new.xml"/>
-                        <map:part src="cocoon:/sidebar/beta/{1}"/>
-                    </map:aggregate>
-                    <map:transform type="xsltc" src="{defaults:stage-base}/xsl/laneweb.xsl">
-                        <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
-                        <map:parameter name="context" value="{request:contextPath}/stage"/>
-                        <map:parameter name="requestQuery" value="{request:queryString}"/>
-                        <map:parameter name="template" value="{request-param:template}"/>
-                        <map:parameter name="keywords" value="{request-param:keywords}"/>
-                        <map:parameter name="selection" value="{request-param:source}"/>
-                        <map:parameter name="stanford" value="{laneweb:stanford}"/>
-                        <map:parameter name="debug" value="{request-param:debug}"/>
-                    </map:transform>
-                    <map:transform type="xsltc" src="{defaults:stage-base}/xsl/webtrends.xsl">
-                        <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                        <map:parameter name="source" value="{request-param:source}"/>
-                        <map:parameter name="keywords" value="{request-param:keywords}"/>
-                        <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
-                    </map:transform>
-                    <map:serialize type="xhtml"/>
-                </map:match>
-                <map:match type="wildcard" pattern="100years/**">
-                    <map:select type="parameter">
-                        <map:parameter name="parameter-selector-test" value="{1}"/>
-                        <map:when test="index.html">
-                            <map:aggregate element="doc" label="content">
-                                <map:part src="cocoon:/content/100years/{1}"/>
-                                <map:part src="cocoon:/content/sitemap.html"/>
-                                <map:part src="cocoon:/content/templates/100years_index.xml"/>
-                                <map:part src="cocoon:/sidebar/100years/{1}"/>
-                            </map:aggregate>
-                        </map:when>
-                        <map:otherwise>
-                            <map:aggregate element="doc" label="content">
-                                <map:part src="cocoon:/content/100years/{1}"/>
-                                <map:part src="cocoon:/content/sitemap.html"/>
-                                <map:part src="cocoon:/content/templates/100years.xml"/>
-                                <map:part src="cocoon:/sidebar/100years/{1}"/>
-                            </map:aggregate>
-                        </map:otherwise>
-                    </map:select>
-                    <map:transform type="xsltc" src="{defaults:stage-base}/xsl/laneweb.xsl">
-                        <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
-                        <map:parameter name="context" value="{request:contextPath}/stage"/>
-                        <map:parameter name="requestQuery" value="{request:queryString}"/>
-                        <map:parameter name="template" value="{request-param:template}"/>
-                        <map:parameter name="keywords" value="{request-param:keywords}"/>
-                        <map:parameter name="selection" value="{request-param:source}"/>
-                        <map:parameter name="stanford" value="{laneweb:stanford}"/>
-                        <map:parameter name="debug" value="{request-param:debug}"/>
-                    </map:transform>
-                    <map:transform type="xsltc" src="{defaults:stage-base}/xsl/webtrends.xsl">
-                        <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                        <map:parameter name="source" value="{request-param:source}"/>
-                        <map:parameter name="keywords" value="{request-param:keywords}"/>
-                        <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
-                    </map:transform>
-                    <map:serialize type="noprolog"/>
                 </map:match>
                 <map:match type="wildcard" pattern="**">
                     <map:aggregate element="doc" label="content">
