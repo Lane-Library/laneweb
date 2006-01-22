@@ -1,0 +1,207 @@
+.hide {
+	display: none;
+}
+
+#tabs { /* fixes width, but makes results odd width:900px; */
+	display: inline;
+	white-space: nowrap;
+}
+
+#tabs ul {
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+	display: inline;
+	white-space: nowrap;
+}
+
+#tabs li {
+	display: inline;
+	white-space: nowrap;
+	background-image: none;
+}
+
+#tabs ul li span:hover {
+	text-decoration: underline;
+}
+
+#tabs ul li span {
+	background: #d3cebf;
+	padding: 0.25em 0.5em 0.32em 0.5em;
+	margin-left: -7px;
+	margin-right: 1px;
+	margin-bottom: 0px;
+	cursor: pointer;
+	color: #980202;
+	display: inline;
+	white-space: nowrap;
+}
+
+#tabs ul li span.active {
+	background: #99987a;
+	padding: 0.25em 0.5em 0.25em 0.5em;
+	margin-left: -8px;
+	margin-right: 1px;
+	margin-bottom: -1px;
+	border-bottom: 1px solid #99987a;
+	cursor: default;
+	text-decoration: none;
+	/*color: #fbf5e6;*/
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 100%;
+	display: inline;
+	white-space: nowrap;
+}
+
+#tabs ul.metaSearchResults {
+	/*padding-right: 25px;*/
+	display: inline;
+	white-space: nowrap;
+}
+
+#tabs ul.metaSearchResults li span {
+	background: #ecece8;
+	display: inline;
+	white-space: nowrap;
+	margin-left: -7px;
+	margin-right: -1px;
+}
+
+#tabs ul.metaSearchResultsRight {
+	display: inline;
+	white-space: nowrap;
+	background: url(/ryanmax/images/meta_right_top.gif) top right no-repeat;
+	background-color:#ecece8;
+	padding: 0.25em 0.2em 0.32em 0.7em;
+	margin-left: -7px;
+	margin-right: 1px;
+}
+
+#tabs p.metaHitCount {
+	color: #393838;
+	display: inline;
+	white-space: nowrap;
+}
+
+#tabs span p.hitCount {
+	color: #393838;
+	background: #d3cebf;
+	display: inline;
+	white-space: nowrap;
+}
+
+#tabs span.active p.hitCount {
+	color: #ffffff;
+	background: #99987a;
+	display: inline;
+	white-space: nowrap;
+}
+
+div#newResults,div#searchResults {
+	background: #f6f4ec;
+	border-top: 1px solid #99987a;
+	width: 97%;
+	padding: 0.25em 0em 2.25em 2.25em;
+	margin-top: 0.35em;
+	margin-bottom: 0.5em;
+}
+
+div#incrementalSearchResults{
+/*	width: 92%; */
+	padding-top: 0em;
+	padding-right:0em;
+	padding-bottom:2.25em;
+	padding-left:2.25em;
+	margin-top: 0em;
+	margin-bottom: 0.5em;
+}
+
+td.berryContent {
+	border-top: 1px solid #99987a;
+	background: #e0e0d1;
+	padding-top: 0.5em;
+	padding-right:0em;
+	padding-bottom:0.5em;
+	padding-left:2.25em;
+	margin-top: -0.25em;
+	margin-right: 0em;
+	margin-bottom: 0em;
+	margin-left: -2.25em;
+}
+
+div.berryContent {
+	background: #e0e0d1;
+	padding-top: 0.5em;
+	padding-right:0em;
+	padding-bottom:0.5em;
+	padding-left:2.25em;
+	margin-top: -0.25em;
+	margin-right: 0em;
+	margin-bottom: 0em;
+	margin-left: -2.25em;
+}
+
+div.berryContent img {
+	margin-bottom:-3px;
+}
+
+.indent {
+	padding-left: 1.6em;
+}
+
+.searchHeader {
+	margin-bottom:1em;
+}
+#searchHeader table {
+	width:100%;
+	border-spacing:0px;
+}
+.resultsTitle {
+	padding-left: .5em;
+	font-weight: bold;
+	font-size:125%;
+	white-space: nowrap;
+}
+.resultsHeader {
+	background-color:#e7e2cd;
+	padding:0.6em 1.25em 0.6em 0.6em;
+	white-space: nowrap;
+}
+.resultsHeaderRight {
+	background: url(/ryanmax/images/header_right_top.gif) top right no-repeat;
+	background-color:#e7e2cd;
+	padding:0.6em 1.25em 0.65em 0.6em;
+	white-space: nowrap;
+}
+.resultsHeaderLeft {
+	background: url(/ryanmax/images/header_left_top.gif) top left no-repeat;
+	background-color:#e7e2cd;
+	padding:.6em 0.2em 0.65em 0em;
+	white-space: nowrap;
+}
+.SpellResults {
+	padding-left: 1.6em;
+}
+
+/* used on incremental results page to make micromedex static result look like incremental */
+p.micromedex {
+        padding-left: .6em;
+        background-image: url(/laneweb/images/irt/list-background-line.gif);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        margin-bottom: -0.95em;
+}
+/* next 5 override irt.css styles */
+#searchResults h3 { color: #003163; margin:1em 0 0 0;}
+.searchColumn { float:left; width:49%;margin:0;padding:0}
+.searchColumn3 { float:left; width:31%;margin:0;padding:0}
+#searchResults ul { margin:0;padding:0 }
+#searchHeader {background-color:#E7F0F9;padding:.5em;width:97%;margin-bottom:.5em;}
+
+/*CY's search results*/
+dt {font-weight:bolder}
+dd {margin:0; padding:0 0 0 2em}
+.provider {color:gray}
+dl ul {padding:0;margin:0;list-item-position:outside}
+dl li {background-image:none} 
