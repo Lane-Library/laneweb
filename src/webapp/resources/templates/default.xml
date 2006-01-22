@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xi="http://www.w3.org/2001/XInclude">
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Lane Medical Library, Stanford University Medical Center</title>
 				<link href="/style/irt.css" rel="stylesheet" type="text/css"/>
@@ -33,7 +33,7 @@
 				<div id="pageContainer">
 				<div id="pageHolder">
             <div id="somLogoContainer">
-                <img src="/images/new/som_logo.jpg" width="138" height="39"/>
+                <img src="/images/templates/default/som_logo.jpg" width="138" height="39"/>
             </div>
             <div id="outsideSiteLinksContainer">
                 <div id="redCornerTL">
@@ -44,16 +44,16 @@
                         <li>&#8226; &#160;<a href="">Stanford Hospital Clinics</a></li>
                         <li>&#8226; &#160;<a href="">Lucile Packard Children Hospital</a></li>
                         <li>&#8226; &#160;<a href="">VA Palo Alto</a></li>
-                        <li>&#8226; &#160;<a href="/images/new/som_logo.jpg" target="_blank">Santa Clara Valley Medical</a></li>
+                        <li>&#8226; &#160;<a href="/images/templates/default/som_logo.jpg" target="_blank">Santa Clara Valley Medical</a></li>
                     </ul>
                 </div>
             </div>
             <div id="laneConnexContainer">
-                <img src="/images/new/laneConnex.gif" alt="lane connex image" height="33"/>
+                <img src="/images/templates/default/laneConnex.gif" alt="lane connex image" height="33"/>
             </div>
             <div id="behindLaneConnexContainer">&#160;</div>
             <div id="panoramicView">
-                <img src="/images/new/rightPanorama.jpg" alt="" id="rightPanorama"/>
+                <img src="/images/templates/default/rightPanorama.jpg" alt="" id="rightPanorama"/>
             </div>
             <div id="searchContainer">
                 <div style="position: relative; top:0px; width: 100%; height: auto; overflow: hidden;">
@@ -63,7 +63,7 @@
 							</ul>-->
               <!--start image version-->
 
-								<a href="online/index.html"><img src="/images/new/eLibon.jpg" width="65" height="26" border="0"/></a><a href="online/ej.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('eJourn','','/images/new/eJournOn.jpg',1)"><img src="/images/new/eJournOff.jpg" name="eJourn" width="73" height="26" border="0" id="eJourn"/></a><a href="clinical.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('clin','','/images/new/clinOn.jpg',1)"><img src="/images/new/clinOff.jpg" name="clin" width="61" height="26" border="0" id="clin"/></a><a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('research','','/images/new/researchOn.jpg',1)"><img src="/images/new/researchOff.jpg" name="research" width="69" height="26" border="0" id="research"/></a><a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('services','','/images/new/servicesOn.jpg',1)"><img src="/images/new/servicesOff.jpg" name="services" width="64" height="26" border="0" id="services"/></a><a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('pubmed','','/images/new/pubMedon.jpg',1)"><img src="/images/new/pubMedoff.jpg" name="pubmed" width="66" height="26" border="0" id="pubmed"/></a><a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('google','','/images/new/googleOn.jpg',1)"><img src="/images/new/googleOff.jpg" name="google" width="53" height="26" border="0" id="google"/></a>
+								<a href="online/index.html"><img src="/images/templates/default/eLibon.jpg" width="65" height="26" border="0"/></a><a href="online/ej.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('eJourn','','/images/templates/default/eJournOn.jpg',1)"><img src="/images/templates/default/eJournOff.jpg" name="eJourn" width="73" height="26" border="0" id="eJourn"/></a><a href="clinical.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('clin','','/images/templates/default/clinOn.jpg',1)"><img src="/images/templates/default/clinOff.jpg" name="clin" width="61" height="26" border="0" id="clin"/></a><a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('research','','/images/templates/default/researchOn.jpg',1)"><img src="/images/templates/default/researchOff.jpg" name="research" width="69" height="26" border="0" id="research"/></a><a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('services','','/images/templates/default/servicesOn.jpg',1)"><img src="/images/templates/default/servicesOff.jpg" name="services" width="64" height="26" border="0" id="services"/></a><a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('pubmed','','/images/templates/default/pubMedon.jpg',1)"><img src="/images/templates/default/pubMedoff.jpg" name="pubmed" width="66" height="26" border="0" id="pubmed"/></a><a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('google','','/images/templates/default/googleOn.jpg',1)"><img src="/images/templates/default/googleOff.jpg" name="google" width="53" height="26" border="0" id="google"/></a>
 
                         <!--end image version-->
                         <!--<a href="" class="searchLink"><span class="searchLinkText">PubMed</span><span class="searchLinkDivider">&#160;</span></a><a href="" class="searchLink"><span class="searchLinkText">Google</span><span class="searchLinkDividerEnd">&#160;</span></a>-->
@@ -99,7 +99,7 @@
                             more....</span>
                     </div>
                 <div id="searchContainerRoundedCorners">
-                    <img src="/images/new/searchBR.gif" alt="bottom negative rounded corner of search container" id="searchBottomCorner"/>&#160;
+                    <img src="/images/templates/default/searchBR.gif" alt="bottom negative rounded corner of search container" id="searchBottomCorner"/>&#160;
                 </div>
             </div>
 <!--[if IE]>
