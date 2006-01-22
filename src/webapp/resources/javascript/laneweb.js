@@ -3,7 +3,7 @@ var researcher = 0;
 var instructor = 0;
 var student = 0;
 var patient = 0;
-var imagePath = '/images/templates/default';
+var imagePath = '/beta/images/templates/default';
 var nokeywords = 'Please enter one or more search terms.';
 var searching = false;
 
