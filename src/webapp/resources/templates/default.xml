@@ -4,7 +4,7 @@
         <title>Lane Medical Library, Stanford University Medical Center</title>
 				<link href="/style/irt.css" rel="stylesheet" type="text/css"/>
 				<link href="/style/search-slicing.css" rel="stylesheet" type="text/css" />
-        <link href="/style/new.css" rel="stylesheet" type="text/css"/>
+        <link href="/style/default.css" rel="stylesheet" type="text/css"/>
         <meta name="WT.seg_1" content="{affiliation}"/>
         <script src="/javascript/laneweb.js" type="text/javascript"> </script>
 <!--
@@ -29,7 +29,7 @@
 	</style>
 <![endif]-->
     </head>
-    <body onload="MM_preloadImages('../new/eJournOn.jpg','../new/clinOn.jpg','../new/researchOn.jpg','../new/learnOn.jpg','../new/servicesOn.jpg','../new/pubMedon.jpg','../new/googleOn.jpg')">
+    <body onload="MM_preloadImages('eJournOn.jpg','clinOn.jpg','researchOn.jpg','learnOn.jpg','servicesOn.jpg','pubMedon.jpg','googleOn.jpg')">
 				<div id="pageContainer">
 				<div id="pageHolder">
             <div id="somLogoContainer">
