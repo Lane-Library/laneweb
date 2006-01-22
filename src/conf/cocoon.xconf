@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cocoon version="2.1" user-roles="/WEB-INF/roles.xml">
     
-  <sitemap check-reload="no" file="context://laneweb.xmap" logger="sitemap"/>
+  <sitemap check-reload="yes" file="context://laneweb.xmap" logger="sitemap"/>
  
   <input-modules>
     <component-instance logger="core.modules.input.laneweb" name="laneweb" class="edu.stanford.laneweb.LanewebInputModule">
-        <parameter name="ip-source" value="context://WEB-INF/staff-ips.xml"/>
         <parameter name="include-regex" value="^1(71\.6[4-7]\.|0\.25[23])\S+"/>
         <parameter name="exclude-regex" value="^171\.66\.(1[6-9]|2[0-3])\.\S+"/>
     </component-instance>
@@ -19,12 +18,12 @@
     </component-instance>
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
       <values>
-        <template>irt</template>
-        <new-search-url>***laneweb.new-search.url***</new-search-url>
+        <template>default</template>
+        <new-search-url>***laneweb.search.url***</new-search-url>
         <live-base>***laneweb.live.base***</live-base>
         <stage-base>***laneweb.stage.base***</stage-base>
         <devel-base>***laneweb.devel.base***</devel-base>
-        <timeout>***laneweb.new-search.timeout***</timeout>
+        <search-timeout>***laneweb.search.timeout***</search-timeout>
       </values>
     </component-instance>
     <component-instance logger="core.modules.input" name="session-attr"  class="org.apache.cocoon.components.modules.input.SessionAttributeModule"/>
@@ -131,14 +130,14 @@
       <user>***laneweb.voyager.user***</user>
       <password>***laneweb.voyager.password***</password>
     </jdbc>
-    <jdbc logger="laneweb.irtdb" name="laneweb">
+    <jdbc logger="laneweb.irtdb" name="eresources">
       <pool-controller min="2" max="8" grow="2">
         <keep-alive>SELECT 1 FROM DUAL</keep-alive>
       </pool-controller>
       <driver>oracle.jdbc.driver.OracleDriver</driver>
-      <dburl>***laneweb.irtdb.url***</dburl>
-      <user>***laneweb.irtdb.user***</user>
-      <password>***laneweb.irtdb.password***</password>
+      <dburl>***laneweb.eresourcesdb.url***</dburl>
+      <user>***laneweb.eresourcesdb.user***</user>
+      <password>***laneweb.eresourcesdb.password***</password>
     </jdbc>
   </datasources>
   

@@ -3,7 +3,7 @@ var researcher = 0;
 var instructor = 0;
 var student = 0;
 var patient = 0;
-var imagePath = '/laneweb/images/irt/';
+var imagePath = '/images/irt/';
 var nokeywords = 'Please enter one or more search terms.';
 var searching = false;
 
@@ -120,10 +120,4 @@ function submitSearch() {
   }
   searching = true;
   return true;
-}
-
-function medlineplusSearch() {
-  var mpwords = document.medlineplus.mpwords.value;
-  openLink('http://search.nlm.nih.gov/medlineplus/query?DISAMBIGUATION=true&FUNCTION=search&SERVER2=server2&SERVER1=server1&PARAMETER=' + mpwords);
-  return false;
 }

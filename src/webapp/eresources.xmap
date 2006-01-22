@@ -1,98 +1,31 @@
 <?xml version="1.0"?>
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
     <map:components>
-        <map:generators default="file"/>
+        <map:generators default="eresource">
+            <map:generator name="eresource" logger="sitemap.generation.eresource"
+                src="edu.stanford.laneweb.EresourceQueryGenerator"/>
+        </map:generators>
         <map:transformers default="xsltc">
-            <map:transformer name="eresource"
-                logger="sitemap.transformer.eresource"
-                src="edu.stanford.laneweb.EResourceTransformer" pool-max="4"
-                pool-min="2" pool-grow="2"/>
             <map:transformer name="sql" logger="sitemap.transformer.sql"
                 src="org.apache.cocoon.transformation.SQLTransformer"
                 pool-max="4" pool-min="2" pool-grow="2"/>
-            <map:transformer name="stx"
-                src="org.apache.cocoon.transformation.TraxTransformer" logger="sitemap.transformer.stx">
-                <transformer-factory>net.sf.joost.trax.TransformerFactoryImpl</transformer-factory>
-            </map:transformer>
         </map:transformers>
         <map:serializers default="xml">
-            <map:serializer name="text" mime-type="text/plain"
-                logger="sitemap.serializer.xhtml"
-                src="org.apache.cocoon.serialization.TextSerializer"
-                pool-max="32" pool-min="16" pool-grow="4"/>
         </map:serializers>
         <map:matchers default="wildcard"/>
-        <map:pipes default="noncaching">
+        <map:pipes default="throttling">
             <map:pipe name="throttling" logger="sitemap.pipeline.throttling" src="edu.stanford.laneweb.ThrottlingPipeline"/>
         </map:pipes>
     </map:components>
     <map:pipelines>
         <map:pipeline type="throttling">
-            <map:match type="wildcard" pattern="cached/*.xml">
-                <map:generate type="file" src="{defaults:live-base}/eresources/{1}.xml"/>
-                <map:transform type="xsltc" src="context://xsl/eresources.xsl">
-                    <map:parameter name="alpha" value="{request-param:alpha}"/>
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
-                    <map:parameter name="debug" value="{request-param:debug}"/>
-                    <map:parameter name="subject" value="{request-param:subject}"/>
-                    <map:parameter name="all" value="{request-param:all}"/>
-                    <map:parameter name="core" value="{request-param:core}"/>
-                    <map:parameter name="selected" value="{request-param:selected}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
-        </map:pipeline>
-        <map:pipeline type="caching">
-            <map:match type="wildcard" pattern="cached/subject/*.xml">
-                <map:generate type="file" src="{defaults:live-base}/eresources/{1}subject.xml"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="cached/raw/*.xml">
-                <map:generate type="file" src="{defaults:live-base}/eresources/{1}.xml"/>
-                <map:serialize type="xml"/>
-            </map:match>
-        </map:pipeline>
-        <map:pipeline type="noncaching">
-            <map:match type="wildcard" pattern="subject/*.xml">
-                <map:generate type="file" src="cocoon:/cached/raw/{1}.xml"/>
-                <map:transform type="xsltc" src="context://xsl/subject.xsl">
-                    <map:parameter name="type" value="{1}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="*.html">
-                <map:generate type="file" src="cocoon:/cached/raw/{1}.xml"/>
-                <map:transform type="xsltc" src="context://xsl/eresource2html.xsl"/>
-                <map:serialize type="xhtml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="ezproxy-servers.txt">
-                <map:generate type="file" src="cocoon:/cached/raw/er.xml"/>
-                <!-- xslt c doesn't work with this stylesheet for reasons I haven't been able to figure out -->
-                <!-- most likey because of the exslt extension -->
-                <map:transform type="xslt" src="context://xsl/ezproxy-servers.xsl"/>
-                <map:serialize type="text"/>
-            </map:match>
-            <map:match type="wildcard" pattern="er.xml">
-                <map:aggregate element="agg">
-                    <map:part src="cocoon:/cached/raw/ej.xml"/>
-                    <map:part src="cocoon:/cached/raw/db.xml"/>
-                    <map:part src="cocoon:/cached/raw/cc.xml"/>
-                    <map:part src="cocoon:/cached/raw/eb.xml"/>
-                </map:aggregate>
-                <map:transform type="xsltc" src="context://xsl/agg-sort.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="*.xml">
-                <map:generate type="file" src="{defaults:live-base}/eresources/{1}query.xml"/>
+            <map:match pattern="erdb">
+                <map:generate type="eresources"/>
                 <map:transform type="sql">
-                    <map:parameter name="use-connection" value="voyager"/>
+                    <map:paramter name="use-connection" value="eresources"/>
                 </map:transform>
-                <map:transform type="xsltc" src="context://xsl/sql2eresource.xsl"/>
-                <map:transform type="eresource"/>
-                <map:transform type="stx" src="context://xsl/ej.stx"/>
-                <map:transform type="xsltc" src="context://xsl/alternates.xsl"/>
-                <map:transform type="xsltc" src="context://xsl/sort.xsl"/>
-                <map:serialize/>
+                <map:transform type="xsltc" src="context://xsl/ersqsl2html.xsl"/>
+                <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
     </map:pipelines>

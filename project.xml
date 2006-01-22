@@ -321,15 +321,6 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>joost</groupId>
-            <artifactId>joost</artifactId>
-            <version>20040330</version>
-            <type>jar</type>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
             <groupId>jtidy</groupId>
             <artifactId>jtidy</artifactId>
             <version>4aug2000r7-dev</version>

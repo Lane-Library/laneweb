@@ -31,34 +31,34 @@
                 <map:read type="no-byte-range" src="{defaults:live-base}/resources/pdf/{1}.pdf" mime-type="application/pdf"/>
             </map:match>
             <map:match type="wildcard" pattern="**.gif">
-                <map:read src="{defaults:live-base}/xdocs/{1}.gif" mime-type="image/gif"/>
+                <map:read src="{defaults:live-base}/docs/{1}.gif" mime-type="image/gif"/>
             </map:match>
             <map:match type="wildcard" pattern="**.jpg">
-                <map:read src="{defaults:live-base}/xdocs/{1}.jpg" mime-type="image/jpeg"/>
+                <map:read src="{defaults:live-base}/docs/{1}.jpg" mime-type="image/jpeg"/>
             </map:match>
             <map:match type="wildcard" pattern="**.pdf">
-                <map:read type="no-byte-range" src="{defaults:live-base}/xdocs/{1}.pdf" mime-type="application/pdf"/>
+                <map:read type="no-byte-range" src="{defaults:live-base}/docs/{1}.pdf" mime-type="application/pdf"/>
             </map:match>
             <map:match type="wildcard" pattern="**.rm">
-                <map:read src="{defaults:live-base}/xdocs/{1}.rm" mime-type="audio/x-pn-realaudio"/>
+                <map:read src="{defaults:live-base}/docs/{1}.rm" mime-type="audio/x-pn-realaudio"/>
             </map:match>
             <map:match type="wildcard" pattern="**.camv">
-                <map:read src="{defaults:live-base}/xdocs/{1}.camv" mime-type="application/x-camtasia_video"/>
+                <map:read src="{defaults:live-base}/docs/{1}.camv" mime-type="application/x-camtasia_video"/>
             </map:match>
             <map:match type="wildcard" pattern="**.smil">
-                <map:read src="{defaults:live-base}/xdocs/{1}.smil" mime-type="application/smil"/>
+                <map:read src="{defaults:live-base}/docs/{1}.smil" mime-type="application/smil"/>
             </map:match>
             <map:match type="wildcard" pattern="**.xls">
-                <map:read src="{defaults:live-base}/xdocs/{1}.xls" mime-type="application/vnd.ms-excel"/>
+                <map:read src="{defaults:live-base}/docs/{1}.xls" mime-type="application/vnd.ms-excel"/>
             </map:match>
             <map:match type="wildcard" pattern="**.doc">
-                <map:read src="{defaults:live-base}/xdocs/{1}.doc" mime-type="application/msword"/>
+                <map:read src="{defaults:live-base}/docs/{1}.doc" mime-type="application/msword"/>
             </map:match>
             <map:match type="wildcard" pattern="**.ppt">
-                <map:read src="{defaults:live-base}/xdocs/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
+                <map:read src="{defaults:live-base}/docs/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
             </map:match>
             <map:match type="wildcard" pattern="**.swf">
-                <map:read src="{defaults:live-base}/xdocs/{1}.swf" mime-type="application/x-shockwave-flash"/>
+                <map:read src="{defaults:live-base}/docs/{1}.swf" mime-type="application/x-shockwave-flash"/>
             </map:match>
             <map:match type="wildcard" pattern="robots.txt">
                 <map:read src="robots.txt" mime-type="text/plain"/>

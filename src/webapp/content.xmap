@@ -12,7 +12,7 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="online/auth.html">
-                <map:generate type="html" src="{defaults:live-base}/xdocs/online/auth.html"/>
+                <map:generate type="html" src="{defaults:live-base}/docs/online/auth.html"/>
                 <map:transform type="xsltc" src="context://xsl/auth.xsl">
                     <map:parameter name="url" value="{request-param:url}"/>
                 </map:transform>
@@ -22,7 +22,7 @@
                 <map:generate type="search-proxy" src="{defaults:new-search-url}search?id={request-param:id}&amp;w={chain:timeout}&amp;q={uriencode-request-param:keywords}"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="new-search.html">
+            <map:match type="wildcard" pattern="search.html">
                 <map:aggregate element="aggregate">
                     <map:part src="cocoon:/search-proxy"/>
                     <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>
@@ -63,20 +63,12 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="online/*all.html">
-                <map:generate type="file" src="cocoon://content/online/{1}.html?all=y"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="online/databases/index.html">
-                <map:generate type="file" src="cocoon://content/online/db.html"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="templates/**.xml">
                 <map:generate type="file" src="{defaults:live-base}/resources/templates/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="**">
-                <map:generate type="html" src="{defaults:live-base}/xdocs/{1}"/>
+                <map:generate type="html" src="{defaults:live-base}/docs/{1}"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="xsltc" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
