@@ -179,7 +179,7 @@
     -->
     <init-param>
       <param-name>allow-reload</param-name>
-      <param-value>no</param-value>
+      <param-value>yes</param-value>
     </init-param>
 
     <!--

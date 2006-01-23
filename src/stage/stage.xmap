@@ -55,16 +55,16 @@
             </map:match>
             <!-- ========================================================== -->
             <map:match type="wildcard" pattern="**.html">
-                <map:match type="regex" pattern="(search.html|new-search.html)">
+                <map:match type="wildcard" pattern="search.html">
                     <map:select type="source-parameter">
                         <map:when test="eResources">
-                            <map:redirect-to uri="online/er.html?source=eResources&amp;keywords={request-param:keywords}&amp;template={chain:template}"/>
+                            <map:redirect-to uri="online/er.html?source=eResources&amp;keywords={request-param:keywords}"/>
                         </map:when>
                         <map:when test="eJournals">
-                            <map:redirect-to uri="online/searchej.html?source=eJournals&amp;keywords={request-param:keywords}&amp;template={chain:template}"/>
+                            <map:redirect-to uri="online/searchej.html?source=eJournals&amp;keywords={request-param:keywords}"/>
                         </map:when>
                         <map:when test="faq">
-                            <map:redirect-to uri="howto/index.html?source=faq&amp;keywords={request-param:keywords}&amp;template={chain:template}"/>
+                            <map:redirect-to uri="howto/index.html?source=faq&amp;keywords={request-param:keywords}"/>
                         </map:when>
                     </map:select>
                 </map:match>

@@ -5,10 +5,6 @@
             <map:generator name="eresources" src="edu.stanford.laneweb.EresourcesQueryGenerator"/>
         </map:generators>
         <map:transformers default="xsltc">
-            <map:transformer name="eresource"
-                logger="sitemap.transformer.eresource"
-                src="edu.stanford.laneweb.EResourceTransformer" pool-max="4"
-                pool-min="2" pool-grow="2"/>
             <map:transformer name="sql" logger="sitemap.transformer.sql"
                 src="org.apache.cocoon.transformation.SQLTransformer"
                 pool-max="4" pool-min="2" pool-grow="2"/>
@@ -54,7 +50,7 @@
             <map:match pattern="erdb">
                 <map:generate type="eresources"/>
                 <map:transform type="sql">
-                    <map:parameter name="use-connection" value="laneweb"/>
+                    <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/ersql2html.xsl"/>
                 <map:serialize type="xml"/>
@@ -77,28 +73,6 @@
                 <!-- most likey because of the exslt extension -->
                 <map:transform type="xslt" src="{defaults:stage-base}/xsl/ezproxy-servers.xsl"/>
                 <map:serialize type="text"/>
-            </map:match>
-            <map:match type="wildcard" pattern="er.xml">
-                <map:aggregate element="agg">
-                    <map:part src="cocoon:/cached/raw/ej.xml"/>
-                    <map:part src="cocoon:/cached/raw/db.xml"/>
-                    <map:part src="cocoon:/cached/raw/cc.xml"/>
-                    <map:part src="cocoon:/cached/raw/eb.xml"/>
-                </map:aggregate>
-                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/agg-sort.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="*.xml">
-                <map:generate type="file" src="{defaults:stage-base}/eresources/{1}query.xml"/>
-                <map:transform type="sql">
-                    <map:parameter name="use-connection" value="voyager"/>
-                </map:transform>
-                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/sql2eresource.xsl"/>
-                <map:transform type="eresource"/>
-                <map:transform type="stx" src="{defaults:stage-base}/xsl/ej.stx"/>
-                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/alternates.xsl"/>
-                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/sort.xsl"/>
-                <map:serialize/>
             </map:match>
         </map:pipeline>
     </map:pipelines>

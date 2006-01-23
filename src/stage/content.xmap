@@ -19,10 +19,10 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="search-proxy">
-                <map:generate type="search-proxy" src="{defaults:new-search-url}search?id={request-param:id}&amp;w={chain:timeout}&amp;q={uriencode-request-param:keywords}"/>
+                <map:generate type="search-proxy" src="{defaults:search-url}search?id={request-param:id}&amp;w={chain:search-timeout}&amp;q={uriencode-request-param:keywords}"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="new-search.html">
+            <map:match type="wildcard" pattern="search.html">
                 <map:aggregate element="aggregate">
                     <map:part src="cocoon:/search-proxy"/>
                     <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>

@@ -55,12 +55,12 @@
         </layout>
     </appender>
     <category name="sitemap.handled-errors" additivity="false">
-        <appender-ref ref="HANDLED_ERRORS"/>
+        <!--<appender-ref ref="HANDLED_ERRORS"/>-->
         <appender-ref ref="LOG"/>
     </category>
     <root>
         <priority value="***laneweb.log4j.level***"/>
         <appender-ref ref="LOG"/>
-        <appender-ref ref="EMAIL"/>
+        <!--<appender-ref ref="EMAIL"/>-->
     </root>
 </log4j:configuration>

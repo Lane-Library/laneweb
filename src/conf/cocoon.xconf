@@ -22,7 +22,6 @@
         <new-search-url>***laneweb.search.url***</new-search-url>
         <live-base>***laneweb.live.base***</live-base>
         <stage-base>***laneweb.stage.base***</stage-base>
-        <devel-base>***laneweb.devel.base***</devel-base>
         <search-timeout>***laneweb.search.timeout***</search-timeout>
       </values>
     </component-instance>
@@ -120,17 +119,17 @@
     </thread-pools>
   </runnable-manager>
 
-<!--  <datasources logger="core.datasources">
-    <jdbc logger="laneweb.lmldb" name="voyager">
+  <datasources logger="core.datasources">
+    <jdbc logger="laneweb.voyagerdb" name="voyager">
       <pool-controller min="2" max="8" grow="2">
         <keep-alive>SELECT 1 FROM DUAL</keep-alive>
       </pool-controller>
       <driver>oracle.jdbc.driver.OracleDriver</driver>
-      <dburl>***laneweb.voyager.url***</dburl>
-      <user>***laneweb.voyager.user***</user>
-      <password>***laneweb.voyager.password***</password>
+      <dburl>***laneweb.voyagedbr.url***</dburl>
+      <user>***laneweb.voyagerdb.user***</user>
+      <password>***laneweb.voyagerdb.password***</password>
     </jdbc>
-    <jdbc logger="laneweb.irtdb" name="eresources">
+    <jdbc logger="laneweb.eresourcesdb" name="eresources">
       <pool-controller min="2" max="8" grow="2">
         <keep-alive>SELECT 1 FROM DUAL</keep-alive>
       </pool-controller>
@@ -139,7 +138,7 @@
       <user>***laneweb.eresourcesdb.user***</user>
       <password>***laneweb.eresourcesdb.password***</password>
     </jdbc>
-  </datasources>-->
+  </datasources>
   
   <blob logger="laneweb.blob">
     <parameter name="db-name" value="voyager"/>

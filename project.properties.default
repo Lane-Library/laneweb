@@ -1,17 +1,15 @@
 maven.repo.remote=http://www.ibiblio.org/maven,http://www.stanford.edu/~ceyates/maven
 
-laneweb.voyager.user=
-laneweb.voyager.password=
-laneweb.voyager.url=
-laneweb.irtdb.user=
-laneweb.irtdb.password=
-laneweb.irtdb.url=
-laneweb.live.base=file:/afs/ir/group/lane/live
-laneweb.stage..base=file:/afs/ir/group/lane/stage
-laneweb.devel.base=file:/afs/ir/group/lane/devel
+laneweb.voyagerdb.user=
+laneweb.voyagerdb.password=
+laneweb.voyagedbr.url=
+laneweb.eresourcesdb.user=
+laneweb.eresourcesdb.password=
+laneweb.eresourcesdb.url=
+laneweb.live.base=file:/afs/ir/group/lane/beta/live
+laneweb.stage..base=file:/afs/ir/group/lanebeta/stage
 laneweb.search.url=
-laneweb.new-search.url=
-laneweb.new-search.timeout=5500
+laneweb.search.timeout=5500
 laneweb.store.maxobjects=2000
 laneweb.store.freememory=
 laneweb.store.heapsize=
