@@ -3,7 +3,7 @@
     <map:components>
         <map:generators default="eresource">
             <map:generator name="eresource" logger="sitemap.generation.eresource"
-                src="edu.stanford.laneweb.EresourceQueryGenerator"/>
+                src="edu.stanford.laneweb.EresourcesQueryGenerator"/>
         </map:generators>
         <map:transformers default="xsltc">
             <map:transformer name="sql" logger="sitemap.transformer.sql"
@@ -20,11 +20,11 @@
     <map:pipelines>
         <map:pipeline type="throttling">
             <map:match pattern="erdb">
-                <map:generate type="eresources"/>
+                <map:generate type="eresource"/>
                 <map:transform type="sql">
-                    <map:paramter name="use-connection" value="eresources"/>
+                    <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/ersqsl2html.xsl"/>
+                <map:transform type="xsltc" src="{defaults:live-base}/xsl/ersql2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
