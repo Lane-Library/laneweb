@@ -19,7 +19,7 @@
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
       <values>
         <template>default</template>
-        <new-search-url>***laneweb.search.url***</new-search-url>
+        <search-url>***laneweb.search.url***</search-url>
         <live-base>***laneweb.live.base***</live-base>
         <stage-base>***laneweb.stage.base***</stage-base>
         <search-timeout>***laneweb.search.timeout***</search-timeout>
@@ -125,7 +125,7 @@
         <keep-alive>SELECT 1 FROM DUAL</keep-alive>
       </pool-controller>
       <driver>oracle.jdbc.driver.OracleDriver</driver>
-      <dburl>***laneweb.voyagedbr.url***</dburl>
+      <dburl>***laneweb.voyagerdb.url***</dburl>
       <user>***laneweb.voyagerdb.user***</user>
       <password>***laneweb.voyagerdb.password***</password>
     </jdbc>
