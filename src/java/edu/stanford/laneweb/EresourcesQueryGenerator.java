@@ -136,19 +136,8 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     
     private char[] getSelectStatmentChars() {
         StringBuffer query = new StringBuffer(SELECT);
-        String textAnd = null;
         if (this.text != null) {
-            query.append(", SCORE(1) AS SCORE");
-            StringTokenizer st = new StringTokenizer(this.text);
-            StringBuffer textAndBuffer = new StringBuffer(" AND CONTAINS(TEXT,'");
-            while (st.hasMoreTokens()) {
-                textAndBuffer.append("fuzzy(").append(st.nextToken()).append(",,,W)");
-                if (st.hasMoreTokens()) {
-                    textAndBuffer.append(" AND ");
-                }
-            }
-            textAndBuffer.append("', 1) > 0");
-            textAnd = textAndBuffer.toString();
+            query.append(", SCORE(1) AS SCORE_TITLE, SCORE(2) AS SCORE_ALL");
         }
         query.append(FROM);
         if (this.type != null) {
@@ -174,12 +163,29 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             query.append(" AND lower(ERESOURCE.TITLE) LIKE '").append(this.alpha).append("%'");
         }
         if (this.text != null) {
-            query.append(textAnd);
+            query.append(" AND (CONTAINS(TITLE,'");
+            StringTokenizer st = new StringTokenizer(this.text);
+            while (st.hasMoreTokens()) {
+                query.append("fuzzy(").append(st.nextToken()).append(",,,W)");
+                if (st.hasMoreTokens()) {
+                    query.append(" AND ");
+                }
+            }
+            query.append("', 1) > 0 OR CONTAINS(TEXT,'");
+            st = new StringTokenizer(this.text);
+            while (st.hasMoreTokens()) {
+                query.append("fuzzy(").append(st.nextToken()).append(",,,W)");
+                if (st.hasMoreTokens()) {
+                    query.append(" AND ");
+                }
+            }
+
+            query.append("', 2) > 0) ");
         }
         query.append(UNION);
         query.append(ALT_SELECT);
         if (this.text != null) {
-            query.append(", SCORE(1) AS SCORE");
+            query.append(", SCORE(1) AS SCORE_TITLE, SCORE(2) AS SCORE_ALL");
         }
         query.append(FROM);
         if (this.type != null) {
@@ -206,11 +212,28 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             query.append(" AND lower(ERESOURCE.PREFERRED_TITLE) LIKE '").append(this.alpha).append("%'");
         }
         if (this.text != null) {
-            query.append(textAnd);
+            query.append(" AND (CONTAINS(PREFERRED_TITLE,'");
+            StringTokenizer st = new StringTokenizer(this.text);
+            while (st.hasMoreTokens()) {
+                query.append("fuzzy(").append(st.nextToken()).append(",,,W)");
+                if (st.hasMoreTokens()) {
+                    query.append(" AND ");
+                }
+            }
+            query.append("', 1) > 0 OR CONTAINS(TEXT,'");
+            st = new StringTokenizer(this.text);
+            while (st.hasMoreTokens()) {
+                query.append("fuzzy(").append(st.nextToken()).append(",,,W)");
+                if (st.hasMoreTokens()) {
+                    query.append(" AND ");
+                }
+            }
+
+            query.append("', 2) > 0) ");
         }
         query.append(ORDER_BY);
         if (this.text != null) {
-            query.append("SCORE DESC,");
+            query.append("SCORE_TITLE DESC, SCORE_ALL DESC, ");
         }
         query.append(ORDER);
         return  query.toString().toCharArray();
