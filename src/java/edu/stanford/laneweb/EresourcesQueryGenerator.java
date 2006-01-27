@@ -25,8 +25,9 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     private static final String TYPE = "t";
     private static final String MESH = "m";
     private static final String ALPHA = "a";
-    private static final String TEXT = "q";
+    private static final String TEXT = "keywords";
     private static final String SUBSET = "s";
+    private static final String FUZZY = "f";
     private static final String XMLNS = "http://apache.org/cocoon/SQL/2.0";
     private static final String EXECUTE_QUERY = "execute-query";
     private static final String QUERY = "query";
@@ -56,6 +57,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     private String subset; 
     private String alpha;
     private String text;
+    private String fuzzy;
     private boolean haveParameters;
 
     public void setup(SourceResolver resolver, Map objectModel, String src,
@@ -108,6 +110,14 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
                 this.haveParameters = true;
             }
         }
+        this.fuzzy = request.getParameter(FUZZY);
+        if (this.fuzzy != null) {
+        	if (this.fuzzy.length() == 0) {
+        		this.fuzzy = "60";
+        	}
+        } else {
+        	this.fuzzy = "60";
+        }
     }
 
     public void generate() throws SAXException {
@@ -132,6 +142,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
         this.subset = null;
         this.alpha = null;
         this.text = null;
+        this.fuzzy = null;
     }
     
     private char[] getSelectStatmentChars() {
@@ -166,7 +177,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             query.append(" AND (CONTAINS(TITLE,'");
             StringTokenizer st = new StringTokenizer(this.text);
             while (st.hasMoreTokens()) {
-                query.append("fuzzy(").append(st.nextToken()).append(",,,W)");
+                query.append("fuzzy(").append(st.nextToken()).append(",").append(this.fuzzy).append(",,W)");
                 if (st.hasMoreTokens()) {
                     query.append(" AND ");
                 }
@@ -174,7 +185,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             query.append("', 1) > 0 OR CONTAINS(TEXT,'");
             st = new StringTokenizer(this.text);
             while (st.hasMoreTokens()) {
-                query.append("fuzzy(").append(st.nextToken()).append(",,,W)");
+                query.append("fuzzy(").append(st.nextToken()).append(",").append(this.fuzzy).append(",,W)");
                 if (st.hasMoreTokens()) {
                     query.append(" AND ");
                 }
@@ -215,7 +226,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             query.append(" AND (CONTAINS(PREFERRED_TITLE,'");
             StringTokenizer st = new StringTokenizer(this.text);
             while (st.hasMoreTokens()) {
-                query.append("fuzzy(").append(st.nextToken()).append(",,,W)");
+                query.append("fuzzy(").append(st.nextToken()).append(",").append(this.fuzzy).append(",,W)");
                 if (st.hasMoreTokens()) {
                     query.append(" AND ");
                 }
@@ -223,7 +234,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             query.append("', 1) > 0 OR CONTAINS(TEXT,'");
             st = new StringTokenizer(this.text);
             while (st.hasMoreTokens()) {
-                query.append("fuzzy(").append(st.nextToken()).append(",,,W)");
+                query.append("fuzzy(").append(st.nextToken()).append(",").append(this.fuzzy).append(",,W)");
                 if (st.hasMoreTokens()) {
                     query.append(" AND ");
                 }
