@@ -8,7 +8,6 @@ package edu.stanford.laneweb;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
@@ -25,12 +24,13 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     private static final String TYPE = "t";
     private static final String MESH = "m";
     private static final String ALPHA = "a";
-    private static final String TEXT = "keywords";
+    private static final String KEYWORDS = "keywords";
+    private static final String QUERY = "q";
     private static final String SUBSET = "s";
     private static final String FUZZY = "f";
     private static final String XMLNS = "http://apache.org/cocoon/SQL/2.0";
-    private static final String EXECUTE_QUERY = "execute-query";
-    private static final String QUERY = "query";
+    private static final String EXECUTE_QUERY_ELEMENT = "execute-query";
+    private static final String QUERY_ELEMENT = "query";
     private static final String SELECT = "SELECT " +
 "DISTINCT LINK.LINK_ID, ERESOURCE.ERESOURCE_ID, VERSION.VERSION_ID, ERESOURCE.TITLE, lower(ERESOURCE.TITLE) as LTITLE, VERSION.PUBLISHER, VERSION.HOLDINGS, VERSION.DATES, VERSION.DESCRIPTION, VERSION.PROXY, LINK.URL, LINK.LABEL, LINK.INSTRUCTION";
     private static final String FROM = " FROM " +
@@ -56,9 +56,10 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     private String mesh;
     private String subset; 
     private String alpha;
-    private String text;
+    private String query;
     private String fuzzy;
     private boolean haveParameters;
+    private QueryTranslator queryTranslator = new QueryTranslator();
 
     public void setup(SourceResolver resolver, Map objectModel, String src,
             Parameters par) throws ProcessingException, SAXException,
@@ -102,14 +103,24 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
                 this.haveParameters = true;
             }
         }
-        this.text = request.getParameter(TEXT);
-        if (this.text != null) {
-            if (this.text.length() ==0) {
-                this.text = null;
+        this.query = request.getParameter(QUERY);
+        if (this.query != null) {
+            if (this.query.length() ==0) {
+                this.query = null;
             } else {
                 this.haveParameters = true;
             }
         }
+        if (this.query == null) {
+			this.query = request.getParameter(KEYWORDS);
+			if (this.query != null) {
+				if (this.query.length() == 0) {
+					this.query = null;
+				} else {
+					this.haveParameters = true;
+				}
+			}
+		}
         this.fuzzy = request.getParameter(FUZZY);
         if (this.fuzzy != null) {
         	if (this.fuzzy.length() == 0) {
@@ -128,11 +139,11 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             selectStatmentChars = new char[0];
         }
         this.xmlConsumer.startDocument();
-        this.xmlConsumer.startElement(XMLNS,EXECUTE_QUERY,EXECUTE_QUERY,EMPTY_ATTS);
-        this.xmlConsumer.startElement(XMLNS,QUERY,QUERY,EMPTY_ATTS);
+        this.xmlConsumer.startElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT,EMPTY_ATTS);
+        this.xmlConsumer.startElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT,EMPTY_ATTS);
         this.xmlConsumer.characters(selectStatmentChars,0,selectStatmentChars.length);
-        this.xmlConsumer.endElement(XMLNS,QUERY,QUERY);
-        this.xmlConsumer.endElement(XMLNS,EXECUTE_QUERY,EXECUTE_QUERY);
+        this.xmlConsumer.endElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT);
+        this.xmlConsumer.endElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT);
         this.xmlConsumer.endDocument();
     }
     
@@ -141,113 +152,89 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
         this.mesh = null;
         this.subset = null;
         this.alpha = null;
-        this.text = null;
+        this.query = null;
         this.fuzzy = null;
     }
     
     private char[] getSelectStatmentChars() {
-        StringBuffer query = new StringBuffer(SELECT);
-        if (this.text != null) {
-            query.append(", SCORE(1) AS SCORE_TITLE, SCORE(2) AS SCORE_ALL");
+        StringBuffer queryBuffer = new StringBuffer(SELECT);
+        String translatedQuery = null;
+        if (this.query != null) {
+            queryBuffer.append(", SCORE(1) AS SCORE_TITLE, SCORE(2) AS SCORE_ALL");
+            translatedQuery = queryTranslator.translate(this.query);
         }
-        query.append(FROM);
+        queryBuffer.append(FROM);
         if (this.type != null) {
-            query.append(", TYPE");
+            queryBuffer.append(", TYPE");
         }
         if (this.mesh != null) {
-            query.append(", MESH");
+            queryBuffer.append(", MESH");
         }
         if (this.subset != null) {
-            query.append(", SUBSET");
+            queryBuffer.append(", SUBSET");
         }
-        query.append(WHERE);
+        queryBuffer.append(WHERE);
         if (this.type != null) {
-            query.append(" AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE.TYPE = '").append(this.type).append("'");
+            queryBuffer.append(" AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE.TYPE = '").append(this.type).append("'");
         }
         if (this.mesh != null) {
-            query.append(" AND MESH.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND MESH.TERM = '").append(this.mesh).append("'");
+            queryBuffer.append(" AND MESH.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND MESH.TERM = '").append(this.mesh).append("'");
         }
         if (this.subset != null) {
-            query.append(" AND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET.SUBSET = '").append(this.subset).append("'");
+            queryBuffer.append(" AND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET.SUBSET = '").append(this.subset).append("'");
         }
         if (this.alpha != null) {
-            query.append(" AND lower(ERESOURCE.TITLE) LIKE '").append(this.alpha).append("%'");
+            queryBuffer.append(" AND lower(ERESOURCE.TITLE) LIKE '").append(this.alpha).append("%'");
         }
-        if (this.text != null) {
-            query.append(" AND (CONTAINS(TITLE,'");
-            StringTokenizer st = new StringTokenizer(this.text);
-            while (st.hasMoreTokens()) {
-                query.append("fuzzy(").append(st.nextToken()).append(",").append(this.fuzzy).append(",,W)");
-                if (st.hasMoreTokens()) {
-                    query.append(" AND ");
-                }
-            }
-            query.append("', 1) > 0 OR CONTAINS(TEXT,'");
-            st = new StringTokenizer(this.text);
-            while (st.hasMoreTokens()) {
-                query.append("fuzzy(").append(st.nextToken()).append(",").append(this.fuzzy).append(",,W)");
-                if (st.hasMoreTokens()) {
-                    query.append(" AND ");
-                }
-            }
-
-            query.append("', 2) > 0) ");
+        if (this.query != null) {
+            queryBuffer.append(" AND (CONTAINS(TITLE,'");
+            queryBuffer.append(translatedQuery);
+            queryBuffer.append("', 1) > 0 OR CONTAINS(TEXT,'");
+            queryBuffer.append(translatedQuery);
+            queryBuffer.append("', 2) > 0) ");
         }
-        query.append(UNION);
-        query.append(ALT_SELECT);
-        if (this.text != null) {
-            query.append(", SCORE(1) AS SCORE_TITLE, SCORE(2) AS SCORE_ALL");
+        queryBuffer.append(UNION);
+        queryBuffer.append(ALT_SELECT);
+        if (this.query != null) {
+            queryBuffer.append(", SCORE(1) AS SCORE_TITLE, SCORE(2) AS SCORE_ALL");
         }
-        query.append(FROM);
+        queryBuffer.append(FROM);
         if (this.type != null) {
-            query.append(", TYPE");
+            queryBuffer.append(", TYPE");
         }
         if (this.mesh != null) {
-            query.append(", MESH");
+            queryBuffer.append(", MESH");
         }
         if (this.subset != null) {
-            query.append(", SUBSET");
+            queryBuffer.append(", SUBSET");
         }
-        query.append(WHERE);
-        query.append(ALT_AND);
+        queryBuffer.append(WHERE);
+        queryBuffer.append(ALT_AND);
         if (this.type != null) {
-            query.append(" AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE.TYPE = '").append(this.type).append("'");
+            queryBuffer.append(" AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE.TYPE = '").append(this.type).append("'");
         }
         if (this.mesh != null) {
-            query.append(" AND MESH.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND MESH.TERM = '").append(this.mesh).append("'");
+            queryBuffer.append(" AND MESH.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND MESH.TERM = '").append(this.mesh).append("'");
         }
         if (this.subset != null) {
-            query.append(" AND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET.SUBSET = '").append(this.subset).append("'");
+            queryBuffer.append(" AND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET.SUBSET = '").append(this.subset).append("'");
         }
         if (this.alpha != null) {
-            query.append(" AND lower(ERESOURCE.PREFERRED_TITLE) LIKE '").append(this.alpha).append("%'");
+            queryBuffer.append(" AND lower(ERESOURCE.PREFERRED_TITLE) LIKE '").append(this.alpha).append("%'");
         }
-        if (this.text != null) {
-            query.append(" AND (CONTAINS(PREFERRED_TITLE,'");
-            StringTokenizer st = new StringTokenizer(this.text);
-            while (st.hasMoreTokens()) {
-                query.append("fuzzy(").append(st.nextToken()).append(",").append(this.fuzzy).append(",,W)");
-                if (st.hasMoreTokens()) {
-                    query.append(" AND ");
-                }
-            }
-            query.append("', 1) > 0 OR CONTAINS(TEXT,'");
-            st = new StringTokenizer(this.text);
-            while (st.hasMoreTokens()) {
-                query.append("fuzzy(").append(st.nextToken()).append(",").append(this.fuzzy).append(",,W)");
-                if (st.hasMoreTokens()) {
-                    query.append(" AND ");
-                }
-            }
-
-            query.append("', 2) > 0) ");
+        if (this.query != null) {
+            queryBuffer.append(" AND (CONTAINS(PREFERRED_TITLE,'");
+            queryBuffer.append(translatedQuery);
+            queryBuffer.append("', 1) > 0 OR CONTAINS(TEXT,'");
+            queryBuffer.append(translatedQuery);
+            queryBuffer.append("', 2) > 0) ");
         }
-        query.append(ORDER_BY);
-        if (this.text != null) {
-            query.append("SCORE_TITLE DESC, SCORE_ALL DESC, ");
+        queryBuffer.append(ORDER_BY);
+        if (this.query != null) {
+            queryBuffer.append("SCORE_TITLE DESC, SCORE_ALL DESC, ");
         }
-        query.append(ORDER);
-        return  query.toString().toCharArray();
+        queryBuffer.append(ORDER);
+        return  queryBuffer.toString().toCharArray();
     }
 
 }
