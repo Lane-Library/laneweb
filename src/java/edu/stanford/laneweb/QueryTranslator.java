@@ -1,0 +1,212 @@
+//stolen from oracle web site.
+package edu.stanford.laneweb;
+
+import java.util.Vector;
+
+class WordData {
+	String text;
+
+	String fieldName;
+}
+
+public class QueryTranslator {
+
+	Vector reqWords = new Vector();
+
+	Vector optWords = new Vector();
+
+	Vector notWords = new Vector();
+
+	public static final int required = 1;
+
+	public static final int optional = 2;
+
+	public static final int notwanted = 3;
+
+	public String translate(String input) {
+		processString(input);
+		return getQuery();
+	}
+
+	private void addWord(String word, int wordType, String field) {
+
+		WordData wd = new WordData();
+
+		wd.text = word;
+		wd.fieldName = field;
+
+		switch (wordType) {
+		case required:
+			reqWords.addElement(wd);
+			break;
+		case optional:
+			optWords.addElement(wd);
+			break;
+		case notwanted:
+			notWords.addElement(wd);
+			break;
+		}
+	}
+
+	public void processString(String input) {
+		int p = 0;
+		int pp;
+		int startWord;
+		int flag;
+		String theWord;
+		String fieldName;
+
+		reqWords = new Vector();
+		optWords = new Vector();
+		notWords = new Vector();
+
+		while (true) { // Loop over all words
+
+			startWord = p;
+			while (p < input.length() && input.charAt(p) != ' ') {
+				// Check for quoted phrase
+				if (input.charAt(p) == '"') { // Quote - skip to next or end
+					p++; // skip the actual quote
+					while (p < input.length() && input.charAt(p) != '"') {
+						p++;
+					}
+					if (p < input.length())
+						p++; // Skip the final quote if found
+				} else {
+					p++;
+				}
+			}
+
+			// Got a word. Check for required/not wanted flags (+-)
+
+			theWord = input.substring(startWord, p);
+
+			flag = optional;
+			fieldName = "";
+
+			if (theWord.charAt(0) == '+') {
+				flag = required;
+				theWord = theWord.substring(1);
+			}
+
+			else if (theWord.charAt(0) == '-') {
+				flag = notwanted;
+				theWord = theWord.substring(1);
+			}
+
+			// Replace * wild cards with %
+
+			theWord = theWord.replace('*', '%');
+
+			// Find field indicator ":"
+
+			pp = theWord.indexOf(":");
+			if (pp > 0) {
+				fieldName = theWord.substring(0, pp);
+				theWord = theWord.substring(pp + 1, theWord.length());
+			}
+
+			addWord(theWord, flag, fieldName);
+
+			p++;
+			if (p >= input.length())
+				break;
+		}
+	}
+
+	// Get word gets a single word from the "words" vector,
+	// surrounds it in braces (to avoid reserved words)
+	// and attaches a WITHIN clause if appropriate.
+
+	private String getWord(Vector words, int pos) {
+		String ts = "{" + ((WordData) words.elementAt(pos)).text + "}";
+		if (((WordData) words.elementAt(pos)).fieldName.length() > 0) {
+			ts += " WITHIN " + ((WordData) words.elementAt(pos)).fieldName;
+		}
+		return ts;
+	}
+
+	// getQuery returns a formatted, ready-to-run ConText query.
+	// In order to satisfy the altavista syntax, we have to generate
+	// the following query:
+
+	// ( req1 & req2 & ... reqN)
+	// | ( (req1 & req2 & .. reqN)*10*10
+	// & (req1, req2 , ... reqN , opt1 , opt2 , ... optN) )
+	// NOT (not1 | not2 | ... notN)
+
+	public String getQuery() {
+		String tempString = "";
+
+		String boolOp = ""; // AND, OR, NOT operator
+		int reqCount; // Count of required words
+		int optCount; // Count of optional words
+		int notCount; // Count of not wanted words
+		int i; // Loop control
+
+		boolOp = "";
+		reqCount = reqWords.size();
+		optCount = optWords.size();
+		notCount = notWords.size();
+
+		if (reqWords.size() > 0) {
+			// Required words - first time
+
+			tempString = "((";
+			for (i = 0; i < reqCount; i++) {
+				tempString += boolOp + getWord(reqWords, i);
+				boolOp = " & ";
+			}
+
+			if (reqCount > 0 && optCount > 0) {
+				tempString += ") | ";
+				tempString += "((";
+				// Required words - second time (anded with optional words)
+				boolOp = "";
+				for (i = 0; i < reqCount; i++) {
+					tempString += boolOp + getWord(reqWords, i);
+					boolOp = " & ";
+				}
+				tempString += ")*10*10";
+
+				tempString += " & (";
+
+				// Required words - third time as part of accumulate
+				boolOp = "";
+				for (i = 0; i < reqCount; i++) {
+					tempString += boolOp + getWord(reqWords, i);
+					// tempString += "*2";// Uncomment to double weight of
+					// required words
+					boolOp = " , ";
+				}
+			}
+		} else
+			tempString = "(";
+
+		// Optional words
+		// Don't reset boolOp
+		for (i = 0; i < optCount; i++) {
+			tempString += boolOp + getWord(optWords, i);
+			boolOp = " , "; // Accumulate
+		}
+
+		if (reqCount > 0)
+			if (optCount > 0)
+				tempString += ")) )";
+			else
+				tempString += ")) ";
+		else
+			tempString += ")";
+
+		if (tempString.length() > 0)
+			boolOp = " NOT ";
+		else
+			boolOp = "";
+
+		for (i = 0; i < notCount; i++) {
+			tempString += boolOp + getWord(notWords, i);
+			boolOp = " NOT ";
+		}
+		return tempString;
+	}
+}
