@@ -185,9 +185,9 @@
                         <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                     </map:aggregate>
                     <map:transform type="xsltc" src="{defaults:live-base}/xsl/laneweb.xsl">
-                        <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
+                        <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         <map:parameter name="context" value="{request:contextPath}"/>
-                        <map:parameter name="requestQuery" value="{request:queryString}"/>
+                        <map:parameter name="query-string" value="{request:queryString}"/>
                         <map:parameter name="template" value="{request-param:template}"/>
                         <map:parameter name="keywords" value="{request-param:keywords}"/>
                         <map:parameter name="selection" value="{request-param:source}"/>
@@ -203,7 +203,7 @@
                         <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                         <map:parameter name="source" value="{request-param:source}"/>
                         <map:parameter name="keywords" value="{request-param:keywords}"/>
-                        <map:parameter name="requestURI" value="{request-uri:requestURI}"/>
+                        <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     </map:transform>
                     <map:serialize type="xhtml"/>
                 </map:match>
