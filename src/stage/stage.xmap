@@ -84,6 +84,11 @@
                         <map:parameter name="stanford" value="{laneweb:stanford}"/>
                         <map:parameter name="debug" value="{request-param:debug}"/>
                     </map:transform>
+                    <map:select type="resource-exists">
+                        <map:when test="{defaults:stage-base}/resources/templates/{chain:template}.xsl">
+                            <map:transform type="xsltc" src="{defaults:stage-base}/resources/templates/{chain:template}.xsl"/>
+                        </map:when>
+                    </map:select>
                     <map:transform type="xsltc" src="{defaults:stage-base}/xsl/webtrends.xsl">
                         <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                         <map:parameter name="source" value="{request-param:source}"/>
