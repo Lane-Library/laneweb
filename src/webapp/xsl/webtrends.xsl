@@ -8,7 +8,7 @@
   <xsl:param name="affiliation"/>
   <xsl:param name="source"/>
   <xsl:param name="keywords"/>
-  <xsl:param name="requestURI"/>
+  <xsl:param name="request-uri"/>
   
   <xsl:template match="@content[.='{affiliation}']">
     <xsl:attribute name="content">
@@ -117,7 +117,7 @@
                 <xsl:when test="not(starts-with(.,'/'))">
                     <xsl:text>/</xsl:text>
                     <xsl:call-template name="strip-doc">
-                        <xsl:with-param name="uri" select="$requestURI"/>
+                        <xsl:with-param name="uri" select="$request-uri"/>
                     </xsl:call-template>
                     <xsl:choose>
                         <xsl:when test="not(contains(.,'?'))">
