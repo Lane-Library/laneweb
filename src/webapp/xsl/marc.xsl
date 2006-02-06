@@ -20,34 +20,34 @@
         <p>
           <input type="radio" name="db" value="lmldb">
             <xsl:if test="$db='lmldb' or $db=''">
-              <xsl:attribute name="checked" selected="'checked'"/>
+              <xsl:attribute name="checked">checked</xsl:attribute>
             </xsl:if>
           </input>lmldb
           <input type="radio" name="db" value="cifdb">
             <xsl:if test="$db='cifdb'">
-              <xsl:attribute name="checked" selected="'checked'"/>
+              <xsl:attribute name="checked">checked</xsl:attribute>
             </xsl:if>
           </input>cifdb
           <input type="radio" name="db" value="jbldb">
             <xsl:if test="$db='jbldb'">
-              <xsl:attribute name="checked" selected="'checked'"/>
+              <xsl:attribute name="checked">checked</xsl:attribute>
             </xsl:if>
           </input>jbldb
        </p>
        <p>
           <input type="radio" name="type" value="bib">
             <xsl:if test="$type='bib' or $type=''">
-              <xsl:attribute name="checked" selected="'checked'"/>
+              <xsl:attribute name="checked">checked</xsl:attribute>
             </xsl:if>
           </input>bib
           <input type="radio" name="type" value="auth">
              <xsl:if test="$type='auth'">
-              <xsl:attribute name="checked" selected="'checked'"/>
+              <xsl:attribute name="checked">checked</xsl:attribute>
             </xsl:if>
           </input>auth
           <input type="radio" name="type" value="mfhd">
              <xsl:if test="$type='mfhd'">
-              <xsl:attribute name="checked" selected="'checked'"/>
+              <xsl:attribute name="checked">checked</xsl:attribute>
             </xsl:if>
           </input>mfhd
       </p>
