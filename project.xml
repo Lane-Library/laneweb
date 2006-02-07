@@ -321,6 +321,15 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>joost</groupId>
+            <artifactId>joost</artifactId>
+            <version>20050521</version>
+            <type>jar</type>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>jtidy</groupId>
             <artifactId>jtidy</artifactId>
             <version>4aug2000r7-dev</version>
@@ -360,15 +369,6 @@
             <groupId>oracle-jdbc</groupId>
             <artifactId>oracle-jdbc</artifactId>
             <version>1.4</version>
-            <type>jar</type>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>saxon</groupId>
-            <artifactId>saxon</artifactId>
-            <version>B8.4-nomanifest</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
