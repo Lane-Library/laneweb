@@ -81,7 +81,8 @@ public class QueryTranslator {
 
 			theWord = input.substring(startWord, p);
 
-			flag = optional;
+			//CY changed this to requred from optional to make it AND logic
+			flag = required;
 			fieldName = "";
 
 			if (theWord.charAt(0) == '+') {
@@ -208,5 +209,9 @@ public class QueryTranslator {
 			boolOp = " NOT ";
 		}
 		return tempString;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(new QueryTranslator().translate("foo bar"));
 	}
 }
