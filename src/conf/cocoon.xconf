@@ -5,10 +5,11 @@
  
   <input-modules>
     <component-instance logger="core.modules.input.laneweb" name="laneweb" class="edu.stanford.laneweb.LanewebInputModule">
-        <parameter name="include-regex" value="^1(71\.6[4-7]\.|0\.25[23])\S+"/>
+        <parameter name="include-regex" value="^1(71\.6[4-7]\.|0\.(25[23]|50))\S+"/>
         <parameter name="exclude-regex" value="^171\.66\.(1[6-9]|2[0-3])\.\S+"/>
     </component-instance>
     <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
+    <component-instance logger="core.modules.input" name="request-header"   class="org.apache.cocoon.components.modules.input.HeaderAttributeModule"/>
     <component-instance logger="core.modules.input" name="uriencode-request-param" class="edu.stanford.laneweb.URIEncodedParameterModule" />
     <component-instance logger="core.modules.input" name="request-uri" class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
     <component-instance logger="core.modules.input" name="request" class="org.apache.cocoon.components.modules.input.RequestModule"/>
