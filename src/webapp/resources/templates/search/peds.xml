@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Pediatrics MetaSearch Results</title>
+        <title>Pediatrics Search</title>
     </head>
     <body>
-        <div id="lw_alt-title"><img src="/images/icons/lpch-tiny.jpg" alt="" align="middle"/> Pediatric Core Metasearch</div>
-        <div id="searchHeader">
-            Results for <strong><span class="keywords"/></strong> in <a id="nonzero" href="new-search.html?source=peds&amp;id={$id}"/> of
-            <a id="total" href="new-search.html?source=peds&amp;id={$id}&amp;view=all"/> sources.
-            <span id="searchRefresh"><span class="stillRunningCount"/> resources still running: <a href="new-search.html?source=peds&amp;id={$id}">refresh</a>.</span>
-            Expand search to <a href="new-search.html?source=clinical&amp;id={$id}">Clinical Core</a>.
+	<br/>
+	<!--  carfeul about moving elements here ... search.js looks for div[3], not named -->
+        <div id="lw_alt-title"><img src="/images/icons/lpch-tiny.jpg" alt="" align="middle"/> Pediatrics Search</div>
+        <div class="searchHeader">
+ 			<table id="searchHeaderTable" width="100%" cellspacing="0">
+				<tr>
+					<td class="searchHeaderLeft"><span class="searchHeaderTitle">Pediatrics Search</span></td>
+					<td id="incrementalResultsProgressBar" class="searchHeaderMiddle"> <!--  --></td>
+					<td id="incrementalResultsDetails" class="searchHeaderRight"> <!--  original spec put final details here ... not currenty used--></td>
+				</tr>
+				<tr>
+					<td class="popInContent" colspan="3">
+				        <div id="spellResults"><img border="0" src="/images/templates/default/smallLaneX.gif" alt="X" /> Also try <a href="search.html?source=clinical&amp;id={$id}">Clinical Search</a></div>
+					</td>
+				</tr>
+			</table>
         </div>
-        <div id="searchResults">
+        <div id="incrementalSearchResults" class="hide">
             <div class="searchColumn">
                 <div class="searchCategory" id="firstbets">
-                    <h3>First Bets</h3>
+                    <h3 class="hide">First Bets</h3>
                     <ul>
                         <li id="aapredbook">AAP Red Book</li>
                         <li id="mdc_hlh">Harriet Lane Handbook</li>
@@ -26,7 +36,7 @@
                     </ul>
                 </div>
                 <div class="searchCategory" id="texts">
-                    <h3>Texts</h3>
+                    <h3 class="hide">Texts</h3>
                     <ul>
                         <li id="am_hay">Current Pediatric Dx &amp; Tx</li>
                         <li id="skolar_scott">Danforth's Obstetrics &amp; Gynecology</li>
@@ -43,33 +53,33 @@
                 <div class="searchCategory" id="drugs">
                     <h3>Drugs</h3>
                     <ul>
-                        <li><a href="http://www.thomsonhc.com/hcs/librarian/" class="proxy">Micromedex</a>: go direct to new version</li>
 <!--
+                        <li><a href="http://www.thomsonhc.com/hcs/librarian/" class="proxy">Micromedex</a>: go direct to new version</li>
                         <li id="micromedex_0">Micromedex</li>
 -->
                         <li id="naturalstandard">Natural Standard</li>
                     </ul>
                 </div>
                 <div class="searchCategory" id="calculators">
-                    <h3>Calculators</h3>
+                    <h3 class="hide">Calculators</h3>
                     <ul>
                         <li id="lane_cc">Lane List</li>
                     </ul>
                 </div>
                 <div class="searchCategory" id="literature_databases">
-                    <h3>Literature Databases</h3>
+                    <h3 class="hide">Literature Databases</h3>
                     <ul>
                         <li id="pubmed">PubMed@Stanford</li>
                     </ul>
                 </div>
                 <div class="searchCategory" id="ebm">
-                    <h3>EBM &amp; Guidelines</h3>
+                    <h3 class="hide">EBM &amp; Guidelines</h3>
                     <ul>
                         <li id="aapguidelines">AAP Guidelines</li>
                     </ul>
                 </div>
                 <div class="searchCategory" id="handouts">
-                    <h3>Patient Handouts</h3>
+                    <h3 class="hide">Patient Handouts</h3>
                     <ul>
                         <li id="aappatient">AAP Patient Handouts</li>
 						<li id="skolar_aafp">AAFP</li>
@@ -84,18 +94,10 @@
                 </div>
             </div>
         </div>
-        <div id="lw_sidebar">
-            <div>
-                <h4>Try another source</h4>
-                <p>Find <strong><span class="keywords"/></strong> in:</p>
-                <ul>
-                    <li><a class="proxy" target="_blank" href="http://www.cdc.gov/search.do?action=search&amp;queryText={keywords}">CDC</a></li>
-                    <li><a class="proxy" target="_blank" href="http://dermatlas.med.jhmi.edu/derm/resultNoCache.cfm?BO=AND&amp;keywords={keywords}">Dermatlas</a></li>
-                    <li><a href="/online/er.html?keywords={keywords}">Lane eResources</a></li>
-                    <li><a href="new-search.html?source=clinical&amp;id={$id}">Clinical Core</a></li>
-                    <li><a href="new-search.html?source=research&amp;id={$id}">Bioresearch Core</a></li>
-                </ul>
-            </div>
-        </div>
+		<script type="text/javascript">
+			// only load getIncrementalResults() after page is completely loaded
+			var onloadEvent = window.onload;
+			window.onload = function() { if (onloadEvent) onloadEvent(); getIncrementalResults(); }
+		</script>
     </body>
 </html>

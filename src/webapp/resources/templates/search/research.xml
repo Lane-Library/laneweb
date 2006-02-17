@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>Bioresearch Search Results</title>
+        <title>Bioresearch Search</title>
     </head>
     <body>
-        <div id="lw_alt-title"><img src="/images/icons/helix-tiny.gif" alt="" align="middle"/> BioResearch Core Metasearch</div>
-        <div id="searchHeader">
-            Results for <strong><span class="keywords"/></strong> in <a id="nonzero" href="new-search.html?source=research&amp;id={$id}"/> of
-            <a id="total" href="new-search.html?source=research&amp;id={$id}&amp;view=all"/> sources.
-            <span id="searchRefresh"><span class="stillRunningCount"/> resources still running: <a href="new-search.html?source=research&amp;id={$id}">refresh</a>.</span>
+	<br/>
+	<!--  carfeul about moving elements here ... search.js looks for div[3], not named -->
+        <div id="lw_alt-title"><img src="/images/icons/helix-tiny.gif" alt="" align="middle"/> Bioresearch Search</div>
+        <div class="searchHeader">
+ 			<table id="searchHeaderTable" width="100%" cellspacing="0">
+				<tr>
+					<td class="searchHeaderLeft"><span class="searchHeaderTitle">Bioresearch Search</span></td>
+					<td id="incrementalResultsProgressBar" class="searchHeaderMiddle"> <!--  --></td>
+					<td id="incrementalResultsDetails" class="searchHeaderRight"> <!--  original spec put final details here ... not currenty used--></td>
+				</tr>
+				<tr>
+					<td class="popInContent" colspan="3">
+				        <div id="spellResults"><img border="0" src="/images/templates/default/smallLaneX.gif" alt="X" /> Also try <a href="search.html?source=clinical&amp;id={$id}">Clinical Search</a></div>
+					</td>
+				</tr>
+			</table>
         </div>
-        <div>
-            <div id="searchResults">
-                <div>
+            <div id="incrementalSearchResults" class="hide">
+	            <div class="searchColumn">
                     <div class="searchCategory" id="literature_databases">
-                        <h3>Literature Databases</h3>
+                        <h3 class="hide">Literature Databases</h3>
                         <ul>
                             <li id="pubmed">PubMed@Stanford</li>
                             <li id="faculty1000">Faculty of 1000</li>
@@ -23,15 +33,17 @@
                         </ul>
                     </div>
                     <div class="searchCategory" id="protocols">
-                        <h3>Protocols &amp; Methods</h3>
+                        <h3 class="hide">Protocols &amp; Methods</h3>
                         <ul>
                             <li id="wiley_0">Current Protocols</li>
                             <li id="enzymology">Methods in Enzymology</li>
                             <li id="protocolonline">Protocol Online</li>
                         </ul>
                     </div>
+				</div>
+	            <div class="searchColumn">
                     <div class="searchCategory" id="gene_databases">
-                        <h3>Gene Databases</h3>
+                        <h3 class="hide">Gene Databases</h3>
                         <ul>
                             <li id="crossdb_nucleotide">NCBI Nucleotide sequence database (Genbank)</li>
                             <li id="crossdb_protein">NCBI Protein sequence database </li>
@@ -48,23 +60,12 @@
                             <li id="crossdb_cancer">NCBI Cancer Chromosomes cytogenetic databases</li>
                         </ul>
                     </div>
-                </div>
+				</div>
             </div>
-        </div>
-        <div id="lw_sidebar">
-            <div>
-                <h4>Try another source</h4>
-                <p>Find <strong><span class="keywords"/></strong> in:</p>
-                <ul>
-                    <!--<li><a class="proxy" target="_blank" href="http://flashpoint.lanl.gov/cgi-bin/flashpoint.cgi?Quick=Search&amp;search_type=Quick&amp;search_term1=tisuab&amp;database=all&amp;search_word1={keywords}">LANL FlashPoint</a></li>-->
-                    <li><a class="proxy" target="_blank" href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?CMD=search&amp;DB=books&amp;term={keywords}" >NCBI Bookshelf</a></li>
-                    <li><a class="proxy" target="_blank" href="http://www.ncbi.nlm.nih.gov/gquery/gquery.fcgi?term={keywords}">NCBI Global Search</a></li>
-                    <li><a class="proxy" target="_blank" href="http://genome-www.stanford.edu/cgi-bin/genecards_v2.31/cardsearch.pl?search={keywords}&amp;search_type=keyword%28s%29">GeneCards</a></li>
-                    <li><a href="/online/er.html?keywords={keywords}">Lane eResources</a></li>
-                    <li><a href="new-search.html?source=clinical&amp;id={$id}">Clinical Core</a></li>
-                    <li><a href="new-search.html?source=peds&amp;id={$id}">Pediatric Core</a></li>
-                </ul>
-            </div>
-        </div>
+		<script type="text/javascript">
+			// only load getIncrementalResults() after page is completely loaded
+			var onloadEvent = window.onload;
+			window.onload = function() { if (onloadEvent) onloadEvent(); getIncrementalResults(); }
+		</script>
     </body>
 </html>

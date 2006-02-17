@@ -1,50 +1,148 @@
+//**************************
+// create GLOBAL object and attributes
+//
 var GLOBALS = new Object();
-GLOBALS.basePath = '/stage/beta';
-GLOBALS.baseImagePath = '/stage/beta/images';
-GLOBALS.lanewebTemplate = 'irt';
+GLOBALS.basePath = '/beta';
+GLOBALS.baseImagePath = '/beta/images/templates/default';
+GLOBALS.lanewebTemplate = 'default';
 GLOBALS.proxyPrefix = 'http://laneproxy.stanford.edu/login?url=';
+GLOBALS.needsProxy = getMetaContent(document,'lw_proxyLinks');
 
-// clean up keywords string: 
-// 	replace &amp; w/ & (i.e. undo JTidy)
-//  URIescape
-function cleanKW(keywords){
-	keywords = escape(keywords.replace(/&amp;/g,'&'));
-	return keywords;
+
+//**************************
+// slice results into format tabs
+//
+var eLibraryTabLabels 	= new Array('All','eJournals','Databases','eBooks','Calculators','Lane Services');
+var eLibraryTabDivs = new Array('all','ej','database','book','cc','faq');
+var eLibraryResultCounts	= new Array();
+
+function geteLibraryTabCount(limitType){
+	var staticResults = document.getElementById('eLibraryStaticSearchResults');
+	var staticResultDivs = staticResults.getElementsByTagName('div');
+	var staticResultLinks = new Array();
+	var count = 0;
+
+	for (var i = 0; i < staticResultDivs.length; i++){
+		if(staticResultDivs[i].getAttribute('id') == limitType){
+			staticResultLinks = staticResultDivs[i].getElementsByTagName('a');
+		}
+	}
+
+	for (var y = 0; y < staticResultLinks.length; y++){
+			count++
+	}
+
+	if(document.getElementById('keywordresult')){
+		var keyword = document.getElementById('keywordresult').innerHTML;
+		var keywordUri = cleanKW(keyword);
+	}
+	
+	//if count is zero, we want to create popIn content
+	if(!staticResultLinks.length && !document.getElementById('popIn-' + limitType)){
+		var body = document.getElementsByTagName("body").item(0);
+		var bC = document.createElement('div');
+		bC.className = 'hide';
+		bC.innerHTML = '<img border="0" src="' + GLOBALS.baseImagePath + '/smallLaneX.gif" alt="X" /> Also try <a href="' + GLOBALS.basePath + '/search.html?source=clinical&template=' + GLOBALS.lanewebTemplate + '&keywords=' + keywordUri +'">Clinical Search</a>';
+		bC.setAttribute('id','popIn-' + limitType);
+		body.appendChild(bC);
+	}
+	return count;
 }
 
-//getMetaContent Usage:
-// <meta name="lw_parameters" content="foo=bar;bar=foo;x=y"/>
-// <meta name="search_id" content="12"/>
-// getMetaContent(document,'search_id')
-// getMetaContent(document,'lw_parameters','foo', ';', '=')
-//
-function getMetaContent(node, name, paramName, paramDelim, valueDelim) {
-  var value = '';
-  var metaTags = node.getElementsByTagName('meta');
-  for (var i = 0; i < metaTags.length; i++) {
-    if (metaTags[i].getAttribute('name') == name) {
+function painteLibraryTabs(){
+	//var all = 0;
+	for(var i = 1; i < eLibraryTabDivs.length; i++){
+		eLibraryResultCounts[i] = geteLibraryTabCount(eLibraryTabDivs[i]);
+		//all = all + eLibraryResultCounts[i];
+	}
+	//eLibraryResultCounts[0] = all;
+	eLibraryResultCounts[0] = geteLibraryTabCount('all');
 
-      if (paramName){
-		var pairs = new Array();
-		pairs = metaTags[i].getAttribute('content').split(paramDelim);
-		for (var y = 0; y < pairs.length; y++){
-			var pair = new Array();
-			pair = pairs[y].split(valueDelim);
-			if (pair[0] == paramName){
-		      	value = pair[1];
+	var bar = '';
+	for(var i = 0; i < eLibraryTabLabels.length; i++){
+		bar = bar + '<li><span class="' + eLibraryTabDivs[i] + '" name="' + eLibraryTabDivs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabDivs[i] + '\');">' + eLibraryTabLabels[i] + ': <p class="hitCount">' + eLibraryResultCounts[i] + '</p></span></li>';
+	}
+
+	if(document.getElementById('metaSearchResultContainer')){
+		document.getElementById('eLibraryTabs').innerHTML = '<ul>' + bar + '</ul><ul id="metaSearchResultContainer">' + document.getElementById('metaSearchResultContainer').innerHTML + '</ul><ul class="metaSearchResultsRight">&nbsp; </ul>';
+	}
+	else{
+		//document.getElementById('eLibraryTabs').innerHTML = '<ul>' + bar + '</ul><ul id="faqSearchResults" class="metaSearchResults"></ul><ul id="loisSearchResults" class="metaSearchResults"></ul><ul id="pubmedSearchResults" class="metaSearchResults"></ul><ul id="googleSearchResults" class="metaSearchResults"></ul><ul class="metaSearchResultsRight">&nbsp; </ul>';
+		document.getElementById('eLibraryTabs').innerHTML = '<ul>' + bar + '</ul><ul id="metaSearchResultContainer"><ul id="faqSearchResults" class="metaSearchResults"></ul><ul id="loisSearchResults" class="metaSearchResults"></ul><ul id="pubmedSearchResults" class="metaSearchResults"></ul><ul id="googleSearchResults" class="metaSearchResults"></ul></ul><ul class="metaSearchResultsRight">&nbsp; </ul>';
+	}
+}
+
+function showeLibraryTab(limitType){
+
+	// if tab parameter sent in URL, default to specified tab
+	// otherwise, default to 'all'
+	if (limitType == 'default'){
+		for (var i = 0; i < eLibraryTabDivs.length; i++){
+			if (getQueryContent('tab') == eLibraryTabDivs[i]){
+				limitType = eLibraryTabDivs[i];
 			}
 		}
-      }
-      else{
-	      value = metaTags[i].getAttribute('content');
-	  }
-    }
-  }
-  return value;
+		if (limitType == 'default') {
+			limitType = 'all';
+		}
+	}
+
+	// swap active tab link out
+	var tabs = document.getElementById('eLibraryTabs');
+	tabLinks = tabs.getElementsByTagName('span');
+	var activeLabel = '';
+
+	for (var i = 0; i < tabLinks.length; i++){
+
+		// activate link if it has a className of limitType
+		if( tabLinks[i].className == 'active' && tabLinks[i].getAttribute('name') == limitType) {
+		}
+		else if(tabLinks[i].className == limitType){
+			tabLinks[i].className = 'active';
+			activeLabel = eLibraryTabLabels[i];
+		}
+		else{
+			tabLinks[i].className = eLibraryTabDivs[i];
+		}
+	}
+
+	var staticResults = document.getElementById('eLibraryStaticSearchResults');
+	staticResults.className = 'hide';
+
+	var staticResultDivs = staticResults.getElementsByTagName('div');
+
+	// newResults div is empty placeholder for dynamically sliced results
+	var newResults = document.getElementById('eLibraryNewSearchResults');
+	newResults.innerHTML = '';
+
+	if(limitType == 'all'){
+			staticResults.className = '';
+			newResults.className = 'hide';
+	}
+	else{
+		newResults.className = '';
+		for (var i = 0; i < staticResultDivs.length; i++){
+			if(staticResultDivs[i].getAttribute('id') == limitType){
+				newResults.innerHTML = staticResultDivs[i].innerHTML;
+			}
+		}
+	}
+
+	//get popIn content, if any
+	var popInContent;
+	if(document.getElementById('popIn-' + limitType)){
+		popInContent = document.getElementById('popIn-' + limitType);
+		newResults.innerHTML = '<div id="popIn" class="popInContent">' + popInContent.innerHTML + '</div>' + newResults.innerHTML;
+	}
+
 }
+// end slice results into format tabs
 
 
-
+//**************************
+// XMLHttpRequest handler class
+// includes results processing and display
+//
 function XMLClient() {};
 
 XMLClient.prototype = {
@@ -52,13 +150,13 @@ XMLClient.prototype = {
 	request: null,
 	type: null,
 	url: null,
-	needsProxy: null,
+//	needsProxy: null,
 
 	init: function (type, url, template) {
 		this.template = template;
 		this.type = type;
 		this.url = url.replace(/&amp;/g,'&'); // JTidy replaces & w/ &amp;
-		this.needsProxy = getMetaContent(document,'LW.proxy');
+		//this.needsProxy = getMetaContent(document,'lw_proxyLinks');
 
 		//sniff for IE/Mac
 		if ( navigator.userAgent.indexOf('Mac') > -1 && (navigator.appVersion.indexOf('MSIE 5') > -1 || navigator.appVersion.indexOf('MSIE 6') > -1) ){
@@ -105,6 +203,59 @@ XMLClient.prototype = {
 		switch(this.type){
 
 			//**************************
+			//
+			//
+			case "erdb":
+				var erdbLabels = new Object();
+				erdbLabels['article'] = 'Articles';
+				erdbLabels['book review'] = 'Book Reviews';
+				erdbLabels['person, male'] = 'Men';
+				erdbLabels['organization'] = 'Organizations';
+				erdbLabels['person'] = 'People';
+				erdbLabels['person, female'] = 'Women';
+				erdbLabels['statistics'] = 'Statistics';
+
+				var response = this.request.responseXML.documentElement;
+				var dts = response.getElementsByTagName('dt');
+				var dds = response.getElementsByTagName('dd');
+
+				if(response && dds){
+					var resultsHTML = '';
+
+					for(var i = 0; i < dds.length; i++){
+						var linksHTML = '';
+						var links = dds[i].getElementsByTagName('a');
+						for(var j = 0; j < links.length; j++){
+							var linkText = ''; //link text not always present, so need to check before building into link
+							if(links[j].childNodes[0]){
+								linkText = links[j].childNodes[0].nodeValue;
+							}
+							linksHTML += '<li><a href="' + links[j].getAttribute('href') + '" class="' + links[j].getAttribute('class') + '" title="' + links[j].getAttribute('title') + '">' + linkText + '</a></li>';
+						}
+						resultsHTML += '<dt>' + dts[i].childNodes[0].nodeValue + '</dt>' +
+								'<dd>' +
+										'<ul>' +
+											linksHTML + 
+										'</ul>' +
+								'</dd>';
+					}
+
+					var type = getQueryContent('t',this.url);
+
+					var eLibraryStaticSearchResults = document.getElementById("eLibraryStaticSearchResults");
+					var erdbContent = document.createElement('div');
+					erdbContent.innerHTML = '<h3>' + erdbLabels[type] + '</h3><dl>' + resultsHTML + '</dl>';
+					erdbContent.setAttribute('id','erdb-' + type);
+					eLibraryStaticSearchResults.appendChild(erdbContent);
+
+					eLibraryTabLabels[eLibraryTabLabels.length] = erdbLabels[type];
+					eLibraryTabDivs[eLibraryTabDivs.length] = 'erdb-' + type;
+					painteLibraryTabs();
+					showeLibraryTab('erdb-' + type);
+				}
+			break;
+
+			//**************************
 			// Lane FAQs
 			//
 			case "faq":
@@ -135,10 +286,10 @@ XMLClient.prototype = {
 				var oldResults = document.getElementById('incrementalSearchResults').getElementsByTagName('li');
 				document.getElementById('incrementalSearchResults').className = 'unhide'; //display results
 								
-				var searchStatus = getMetaContent(response,'search_status');
-				var searchTerm = getMetaContent(response, 'search_query');
-				var resultsProgressBar = document.getElementById('resultsProgressBar');
-				var resultsDetails = document.getElementById('resultsDetails');
+				var searchStatus = getMetaContent(response,'lw_searchParameters','status');
+				var searchTerm = getMetaContent(response,'lw_searchParameters','query');
+				var resultsProgressBar = document.getElementById('incrementalResultsProgressBar');
+				var resultsDetails = document.getElementById('incrementalResultsDetails');
 
 				var foundCount = 0;
 				var doneCount = 0;
@@ -173,7 +324,7 @@ XMLClient.prototype = {
 				  if (oldAnchor.className != newStatus) {
 				    oldAnchor.className = newStatus;
 
-					if(this.needsProxy){
+					if(GLOBALS.needsProxy != 'false'){
 						oldAnchor.setAttribute('href',GLOBALS.proxyPrefix + oldAnchor.getAttribute('href') );
 					}
 
@@ -200,15 +351,16 @@ XMLClient.prototype = {
 					else{
 						var width = 1;
 					}
-					resultsProgressBar.innerHTML = '<table><tr><td nowrap>Still searching...</td><td nowrap><div style="position:relative;left:2px;top:2px;border:1px solid #b2b193; width:200px;"><img width="' + width + '%" height="15" src="' + GLOBALS.baseImagePath + '/progress_bar_grad.gif" alt="progress bar" /></div></td><td nowrap>&nbsp;' + doneCount + ' of ' + newResults.length + ' sources searched. <a href="javascript:haltIncremental=true;void(0);">Stop Search</a></td></tr></table>';
+					resultsProgressBar.innerHTML = '<table><tr><td nowrap>Still searching...</td><td nowrap><div style="position:relative;left:2px;top:2px;border:1px solid #b2b193; width:200px;"><img width="' + width + '%" height="15" src="' + GLOBALS.baseImagePath + '/incrementalResultsProgressBar.gif" alt="progress bar" /></div></td><td nowrap>&nbsp;' + doneCount + ' of ' + newResults.length + ' sources searched. <a href="javascript:haltIncremental=true;void(0);">Stop Search</a></td></tr></table>';
 				}
 				else{
 					resultsProgressBar.innerHTML = '';
 					if(newResults.length > foundCount){
-				  		resultsDetails.innerHTML = 'Results <strong>' + foundCount + '</strong> of <strong><a href="javascript:displayIncrementalZeros(\'true\');">' + newResults.length + '</a></strong> sources contain <strong>' + searchTerm + '</strong> [<a id="zerotoggle" href="javascript:displayIncrementalZeros(\'true\');">Show Details</a>]';
+				  		//resultsDetails.innerHTML = 'Results <strong>' + foundCount + '</strong> of <strong><a href="javascript:displayIncrementalZeros(\'true\');">' + newResults.length + '</a></strong> sources contain <strong>' + searchTerm + '</strong> [<a id="zerotoggle" href="javascript:displayIncrementalZeros(\'true\');">Show Details</a>]';
+				  		resultsProgressBar.innerHTML = 'Results in <strong>' + foundCount + '</strong> of <strong>' + newResults.length + '</strong> sources for <strong>' + searchTerm + '</strong> [<a id="zerotoggle" href="javascript:displayIncrementalZeros(\'true\');">Show Details</a>]';
 				  	}
 				  	else if(newResults.length == foundCount){
-						resultsDetails.innerHTML = 'Results <strong>' + foundCount + '</strong> of <strong>' + newResults.length + '</strong> sources contain <strong>' + searchTerm + '</strong>';
+						resultsProgressBar.innerHTML = 'Results in <strong>' + foundCount + '</strong> of <strong>' + newResults.length + '</strong> sources contain <strong>' + searchTerm + '</strong>';
 				  	}
 				}
 				
@@ -229,7 +381,8 @@ XMLClient.prototype = {
 				var status = xmlObj.getAttribute('status');
 				var queryContents = xmlObj.getElementsByTagName('query')[0].firstChild.data;
 
-				var newMetaUrl = '/search/search?id=' + sessionID;
+				var date = new Date();
+				var newMetaUrl = '/search/search?id=' + sessionID + "&secs=" + date.getSeconds();
 
 				if(status == "successful" || status =="running"){
 					var engines = xmlObj.getElementsByTagName('engine');
@@ -243,7 +396,7 @@ XMLClient.prototype = {
 						results.url = resource[0].getElementsByTagName('url')[0].firstChild.data;
 						results.name = resource[0].getElementsByTagName('description')[0].firstChild.data;
 
-						if(this.needsProxy){
+						if(GLOBALS.needsProxy != 'false'){
 							results.url = GLOBALS.proxyPrefix + results.url;
 						}
 
@@ -273,7 +426,6 @@ XMLClient.prototype = {
 					Object.secondRequest.init('meta',newMetaUrl);
 
 					setTimeout("Object.secondRequest.get();",1000);
-
 					return 0;
 				}
 			break;
@@ -287,18 +439,29 @@ XMLClient.prototype = {
 				var result = response.getElementsByTagName('result')[0].firstChild.data;
 
 				if(result != 0 ){
-					var html = '<img border="0" src="' + GLOBALS.baseImagePath + '/X_med.gif" /> Try FindIt@Stanford: <a target="new" href="' + openurl + '">' + result + '</a>';
+					var html = '<img border="0" src="' + GLOBALS.baseImagePath + '/smallLaneX.gif" /> Try FindIt@Stanford: <a target="new" href="' + openurl + '">' + result + '</a>';
 
+					// results can be placed in three different places:
+					// 1) popIn-ej div (for when client not on "ej" tab when SFX results returned
 					var body = document.getElementsByTagName("body").item(0);
 					var bC = document.createElement('div');
 					bC.className = 'hide';
 					bC.innerHTML = html;
-					bC.setAttribute('id','berry-ej');
+					bC.setAttribute('id','popIn-ej');
 					body.appendChild(bC);
 
+					// 2) SFXResults div ("all" tab)
 					if(document.getElementById('SFXResults')){
-						document.getElementById('SFXResults').className = 'berryContent';
+						document.getElementById('SFXResults').className = 'popInContent';
 						document.getElementById('SFXResults').innerHTML = html;
+					}
+
+					// 3) SFXResultsEjTab div (tab "ej" specified in URL request)
+					if(getQueryContent('tab') == 'ej'){
+						var newResults = document.getElementById("eLibraryNewSearchResults");
+						if(newResults){
+							newResults.innerHTML = '<div id="SFXResultsEjTab" class="popInContent">' + html + '</div>' + newResults.innerHTML;
+						}
 					}
 				}
 			break;
@@ -312,6 +475,7 @@ XMLClient.prototype = {
 				if(response.firstChild){
 					var spellSuggestion = response.firstChild.data;
 
+					// probably only used on er.html page ... can we remove this part?
 					var baseUrl = null;
 					switch(this.template){ 
 						case "eResources":
@@ -330,8 +494,17 @@ XMLClient.prototype = {
 					var html = 'Did you mean: <a href="' + baseUrl + spellSuggestion + '"><i><strong>' + spellSuggestion + '</strong></i></a>';
 
 					if(document.getElementById('SpellResults')){
-						document.getElementById('SpellResults').className = 'berryContent';
+						document.getElementById('SpellResults').className = 'popInContent';
 						document.getElementById('SpellResults').innerHTML = html;
+					}
+
+					// also check to see if we should pop this into a tab specified in query string
+					if(getQueryContent('tab')){
+						var newResults = document.getElementById("eLibraryNewSearchResults");
+						document.getElementById('popIn').className = 'hide';
+						if(newResults){
+							newResults.innerHTML = '<div id="SpellResults" class="popInContent">' + html + '</div>' + newResults.innerHTML;
+						}
 					}
 				}
 			break;
@@ -351,25 +524,30 @@ XMLClient.prototype = {
 							var link = response.getElementsByTagName('link')[i].firstChild.data;
 							var name = response.getElementsByTagName('name')[i].firstChild.data;
 
-							if(this.needsProxy){
+							if(GLOBALS.needsProxy != 'false'){
 								link = GLOBALS.proxyPrefix + link;
 							}
 
 							html += '<a class="indent" target="new" href="' + link + '">' + name + '</a><br />';
 					}
 
-					html = '<img border="0" src="' + GLOBALS.baseImagePath + '/X_med.gif" /> Try other Stanford databases:<br/>' + html;
+					html = '<img border="0" src="' + GLOBALS.baseImagePath + '/smallLaneX.gif" /> Try other Stanford databases:<br/>' + html;
 
+					// results can be placed in three different places:
+					// 1) popIn-database div (for when client not on "database" tab when SUL results returned
 					var body = document.getElementsByTagName("body").item(0);
 					var bC = document.createElement('div');
 					bC.className = 'hide';
 					bC.innerHTML = html;
-					bC.setAttribute('id','berry-db');
+					bC.setAttribute('id','popIn-database');
 					body.appendChild(bC);
-
-					if(document.getElementById('SULResults')){
-						document.getElementById('SULResults').className = 'berryContent';
-						document.getElementById('SULResults').innerHTML = html;
+					
+					// 2) SULResultsDbTab div (tab "database" specified in query string)
+					if(getQueryContent('tab') == 'database'){
+						var newResults = document.getElementById("eLibraryNewSearchResults");
+						if(newResults){
+							newResults.innerHTML = '<div id="SULResultsDbTab" class="popInContent">' + html + '</div>' + newResults.innerHTML;
+						}
 					}
 				}
 
@@ -380,20 +558,94 @@ XMLClient.prototype = {
 }
 
 
+//**************************
+// useful functions
+//
+
+// clean up keywords string: 
+// 	replace &amp; w/ & (i.e. undo JTidy)
+//  URIescape
+function cleanKW(keywords){
+	keywords = escape(keywords.replace(/&amp;/g,'&'));
+	return keywords;
+}
+
+//getMetaContent Usage:
+// <meta name="lw_parameters" content="foo=bar;bar=foo;x=y"/>
+// <meta name="search_id" content="12"/>
+// getMetaContent(document,'search_id')
+// getMetaContent(document,'lw_parameters','foo', ';', '=')
+//
+function getMetaContent(node, name, paramName, paramDelim, valueDelim) {
+  var value = '';
+  if(!paramDelim){
+  	paramDelim = ';';
+  }
+  else if(paramDelim == '&amp;'){
+  	paramDelim = '&';
+  }
+  if(!valueDelim){
+  	valueDelim = '=';
+  }
+  var metaTags = node.getElementsByTagName('meta');
+  for (var i = 0; i < metaTags.length; i++) {
+    if (metaTags[i].getAttribute('name') == name) {
+
+      if (paramName){
+		var pairs = new Array();
+		pairs = metaTags[i].getAttribute('content').split(paramDelim);
+		for (var y = 0; y < pairs.length; y++){
+			var pair = new Array();
+			pair = pairs[y].split(valueDelim);
+			if (pair[0] == paramName){
+		      	value = pair[1];
+			}
+		}
+      }
+      else{
+	      value = metaTags[i].getAttribute('content');
+	  }
+    }
+  }
+  return value;
+}
+
+function getQueryContent(paramName,queryString) {
+	if(!queryString){
+		queryString = location.search;
+	}
+	var paramName = paramName + "=";
+
+	if ( queryString.length > 0 ) {
+		startParam = queryString.indexOf ( paramName );
+		if ( startParam != -1 ) {
+			startParam += paramName.length;
+			endParam = queryString.indexOf ( "&" , startParam );
+			if ( endParam == -1 ) {
+				endParam = queryString.length
+			}
+			return unescape ( queryString.substring ( startParam, endParam) );
+		}
+	}
+
+	return 0;
+}
+// end useful functions
 
 
 
-
-//additional incremental vars and funcs
+//**************************
+// additional vars and methods used w/ incremental search
+//
 var haltIncremental = false;
 var date = new Date();
 var startTime = date.getTime();
 
 function getIncrementalResults() {
-	var id = getMetaContent(document,'search_id');
-	var template = getMetaContent(document,'search_template');
+	var id = getMetaContent(document,'lw_searchParameters','id');
+	var template = getMetaContent(document,'lw_searchParameters','template');
 	var date = new Date();
-	var url = GLOBALS.basePath + '/content/new-search.html?id='+id+'&source='+template+'&secs='+date.getSeconds();
+	var url = GLOBALS.basePath + '/content/search.html?id='+id+'&source='+template+'&secs='+date.getSeconds();
 
 	var incremental = new XMLClient();
 	incremental.init('incremental',url);
@@ -435,32 +687,37 @@ function displayIncrementalZeros(toggle){
     }  
   }
 }
-// end additional incremental vars and funcs
+// end additional incremental vars and methods
 
 
-
-// from temp.js: move to laneweb.js when ready
+//**************************
+// move to laneweb.js when ready
 function submitSearchTemp() {
   var source = document.searchForm.source.options[document.searchForm.source.selectedIndex].value;
   var keywords = document.searchForm.keywords.value;
+  var nokeywords = 'Please enter one or more search terms.';
 
   if (keywords == '') {
     alert(nokeywords);
     return false;
   }
-
-  else if (source == 'db') {
-	var dest = GLOBALS.basePath + '/online/er.html?source=eResources&template=' + GLOBALS.lanewebTemplate + '&slice=db&keywords=' + keywords;
+  else if (source == 'ej') {
+	var dest = GLOBALS.basePath + '/online/er.html?tab=ej&keywords=' + keywords;
     window.location.replace(dest);
 	return false;
   }
-  else if (source == 'eb') {
-	var dest = GLOBALS.basePath + '/online/er.html?source=eResources&template=' + GLOBALS.lanewebTemplate + '&slice=eb&keywords=' + keywords;
+  else if (source == 'database') {
+	var dest = GLOBALS.basePath + '/online/er.html?tab=database&keywords=' + keywords;
     window.location.replace(dest);
 	return false;
   }
-  else if (source == 'calc') {
-	var dest = GLOBALS.basePath + '/online/er.html?source=eResources&template=' + GLOBALS.lanewebTemplate + '&slice=calc&keywords=' + keywords;
+  else if (source == 'book') {
+	var dest = GLOBALS.basePath + '/online/er.html?tab=book&keywords=' + keywords;
+    window.location.replace(dest);
+	return false;
+  }
+  else if (source == 'cc') {
+	var dest = GLOBALS.basePath + '/online/er.html?tab=cc&keywords=' + keywords;
     window.location.replace(dest);
 	return false;
   }
@@ -473,7 +730,12 @@ function submitSearchTemp() {
     return false;
   }
   else if (source == 'faq') {
-	var dest = GLOBALS.basePath + '/howto/index.html?template=' + GLOBALS.lanewebTemplate + '&keywords=' + keywords;
+	var dest = GLOBALS.basePath + '/howto/index.html?keywords=' + keywords;
+    window.location.replace(dest);
+	return false;
+  }
+  else if (source == 'eResources') {
+	var dest = GLOBALS.basePath + '/online/er.html?keywords=' + keywords;
     window.location.replace(dest);
 	return false;
   }
@@ -494,7 +756,7 @@ function submitSearchTemp() {
 }
 
 //IE ignores disabled attribute of option tag
-// store last index and if current value is a disbaled option, return to previous option selected
+// store last index and if current value is a disabled option, return to previous option selected
 var lastIndex = 0;
 function lastSelectValue(select){
 	var val = select.options[select.selectedIndex].value;
@@ -511,5 +773,4 @@ function lastSelectValue(select){
 		lastIndex = select.selectedIndex
 	}
 }
-
-// end temp.js 
+// end adds to laneweb.js 
