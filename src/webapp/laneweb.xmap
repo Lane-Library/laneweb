@@ -11,8 +11,10 @@
                 pool-min="16" pool-grow="4">
                 <jtidy-config>context://WEB-INF/jtidy.properties</jtidy-config>
             </map:generator>
-            <map:generator name="search-proxy" src="edu.stanford.laneweb.SearchProxyGenerator" logger="sitemap.generator.search-proxy" pool-min="16" pool-max="32" pool-grow="4"></map:generator>
-            <map:generator name="request" src="org.apache.cocoon.generation.RequestGenerator" logger="sitemap.generator.request"/>
+            <map:generator name="search-proxy" src="edu.stanford.laneweb.SearchProxyGenerator"
+            logger="sitemap.generator.search-proxy" pool-min="16" pool-max="32" pool-grow="4"/>
+            <map:generator name="request" src="org.apache.cocoon.generation.RequestGenerator"
+                logger="sitemap.generator.request" pool-min="16" pool-max="32" pool-grow="4"/>
         </map:generators>
         <map:transformers default="xsltc">
             <map:transformer name="xsltc" logger="sitemap.transformer.xsltc"
@@ -33,7 +35,13 @@
                 <xslt-processor-role>xalan</xslt-processor-role>
                 <check-includes>false</check-includes>
             </map:transformer>
-            <map:transformer name="xinclude" src="edu.stanford.laneweb.XIncludeTransformer" pool-min="16" pool-max="32" pool-grow="4" logger="sitemap.transformer.xinclude"></map:transformer>
+            <map:transformer name="sendmail" src="org.apache.cocoon.mail.transformation.SendMailTransformer">
+                <smtphost>smtp.stanford.edu</smtphost>
+                <smtpport>25</smtpport>
+                <from>laneweb@stanford.edu</from>
+            </map:transformer>
+            <map:transformer name="xinclude" src="edu.stanford.laneweb.XIncludeTransformer"
+            pool-min="16" pool-max="32" pool-grow="4" logger="sitemap.transformer.xinclude"/>
         </map:transformers>
         <map:serializers default="xhtml">
             <map:serializer name="xhtml" mime-type="text/html"

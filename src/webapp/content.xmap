@@ -72,6 +72,10 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match type="wildcard" pattern="request.html">
+                <map:generate type="request"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
             <map:match type="wildcard" pattern="blog/*">
