@@ -11,6 +11,22 @@
     </map:components>
     <map:pipelines>
         <map:pipeline type="noncaching">
+<map:match pattern="askus_response.html">
+<map:generate type="file" src="content/askus_response.html"/>
+  <map:transform type="xsltc" src="xsl/sendmail.xsl">
+    <map:parameter name="name" value="{request-param:name}"/>
+    <map:parameter name="email" value="{request-param:email}"/>
+    <map:parameter name="textarea" value="{request-param:textarea}"/>
+    <map:parameter name="phone" value="{request-param:phone}"/>
+    <map:parameter name="affiliation" value="{request-param:affiliation}"/>
+    <map:parameter name="remote-host" value="{request:remoteHost}"/>
+    <map:parameter name="user-agent" value="{request-header:User-Agent}"/>
+    <map:parameter name="date" value="{date:currentDate}"/>
+  </map:transform>
+<map:transform type="sendmail">
+</map:transform>
+<map:serialize type="xml"/>
+</map:match>
             <map:match type="wildcard" pattern="online/auth.html">
                 <map:generate type="html" src="{defaults:stage-base}/content/online/auth.html"/>
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/auth.xsl">
@@ -19,9 +35,14 @@
                 <map:serialize type="xml"/>
             </map:match>
 			<!--  ryanmax -->
+            <map:match type="wildcard" pattern="search-proxy">
+                <map:generate type="search-proxy" src="{defaults:search-url}search?id={request-param:id}&amp;w=2500&amp;q={uriencode-request-param:keywords}"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="search.html">
                 <map:aggregate element="aggregate">
-                    <map:part type="http" src="{defaults:search-url}search?id={request-param:id}&amp;w=1500&amp;q={uriencode-request-param:keywords}"/>
+<!--                    <map:part type="http" src="{defaults:search-url}search?id={request-param:id}&amp;w=1500&amp;q={uriencode-request-param:keywords}"/> -->
+                    <map:part src="cocoon:/search-proxy"/>
                     <map:part type="xml" src="cocoon:/templates/search/{request-param:source}.xml"/>
                 </map:aggregate>
                 <map:transform type="xslt" src="{defaults:stage-base}/xsl/ajax-search.xsl">
@@ -33,13 +54,13 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="search-proxy">
+            <map:match type="wildcard" pattern="synchronous-search-proxy">
                 <map:generate type="search-proxy" src="{defaults:search-url}search?id={request-param:id}&amp;w={chain:search-timeout}&amp;q={uriencode-request-param:keywords}"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="synchronous-search.html">
                 <map:aggregate element="aggregate">
-                    <map:part src="cocoon:/search-proxy"/>
+                    <map:part src="cocoon:/synchronous-search-proxy"/>
                     <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>
                 </map:aggregate>
                 <map:transform type="xslt" src="{defaults:stage-base}/xsl/synchronous-search.xsl">
@@ -74,6 +95,11 @@
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/news-blog.xsl">
                     <map:parameter name="type" value="{1}"/>
                 </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="request.html">
+                <map:generate type="request"/>
+                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/request2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- ryanmax: faq, sfx & suldb -->
