@@ -30,7 +30,7 @@ import org.apache.cocoon.environment.Request;
  */
 public class LanewebInputModule extends AbstractLogEnabled implements
         InputModule, ThreadSafe, Parameterizable {
-    static final String STANFORD = "stanford";
+    static final String PROXY_LINKS = "proxy-links";
     
     static final String AFFILIATION = "affiliation";
     
@@ -46,13 +46,13 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 
     static final List ATTRS = new ArrayList();
     static {
-        ATTRS.add(STANFORD);
+        ATTRS.add(PROXY_LINKS);
         ATTRS.add(AFFILIATION);
     }
 
-    private String includeRegex;
+    private String noProxyRegex;
 
-    private String excludeRegex;
+    private String proxyRegex;
     
     public Object getAttribute(String key, Configuration config, Map objectModel) {
         String result = null;
@@ -65,16 +65,16 @@ public class LanewebInputModule extends AbstractLogEnabled implements
             ip = header;
         }
         // }
-        if (key.equals(STANFORD)) {
-            result = getIsStanford(ip);
+        if (key.equals(PROXY_LINKS)) {
+            result = proxyLinks(ip);
         } else if (key.equals(AFFILIATION)) {
             result = getAffiliation(ip);
         }
         return result;
     }
     
-    protected String getIsStanford(final String ip) {
-        return Boolean.toString(ip.matches(this.includeRegex) && ! ip.matches(this.excludeRegex));
+    protected String proxyLinks(final String ip) {
+        return Boolean.toString(!ip.matches(this.noProxyRegex) ||  ip.matches(this.proxyRegex));
     }
     
     protected String getAffiliation(final String ip) {
@@ -220,8 +220,8 @@ public class LanewebInputModule extends AbstractLogEnabled implements
     }
 
     public void parameterize(Parameters params) {
-        this.includeRegex = params.getParameter("include-regex", "");
-        this.excludeRegex = params.getParameter("exclude-regex", "");
+        this.noProxyRegex = params.getParameter("noproxy-regex", "");
+        this.proxyRegex = params.getParameter("proxy-regex", "");
 
     }
 

@@ -20,7 +20,7 @@
     
     <xsl:param name="selection"/>
     
-    <xsl:param name="stanford"/>
+    <xsl:param name="proxy-links"/>
   
     
     <!-- ==========================  VARIABLES  ========================== -->
@@ -50,8 +50,6 @@
     <!-- note: for the devel area this needs to be 'cocoon://devel/sitemap.xml' -->
     <xsl:variable name="sitemap" select="/*/h:html[2]"/>
     <xsl:variable name="sidebar" select="/*/h:html[4]"/>
-    <!-- whether to use proxy links or not -->
-    <xsl:variable name="proxy-links" select="$stanford='false' or $debug = 'y'"/>
     
     <!-- ====================  DEFAULT TEMPLATES ============================= -->
     <!-- root template applies templates on the template document -->
@@ -110,7 +108,7 @@
                         <xsl:attribute name="onclick">
                             <xsl:text>openSearchResult('</xsl:text>
                             <xsl:choose>
-                                <xsl:when test="$proxy-links">
+                                <xsl:when test="proxy-links">
                                     <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
                                     <xsl:value-of select="@href"/>
                                 </xsl:when>
@@ -325,7 +323,6 @@
                 <li>request-uri=<xsl:value-of select="$request-uri"/></li>
                 <li>query-string=<xsl:value-of select="$query-string"/></li>
                 <li>href=<xsl:value-of select="concat($context,'/',$request-uri,'?',$query-string)"/></li>
-                <li>stanford=<xsl:value-of select="$stanford"/></li>
                 <li>proxy-links=<xsl:value-of select="$proxy-links"/></li>
                 </ul>
             </div>
