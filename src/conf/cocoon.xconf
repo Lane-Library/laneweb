@@ -6,7 +6,7 @@
   <input-modules>
     <component-instance logger="core.modules.input.laneweb" name="laneweb" class="edu.stanford.laneweb.LanewebInputModule">
         <parameter name="include-regex" value="^171\.6[4-7]\.\S+"/>
-        <parameter name="exclude-regex" value="^171\.66\.(1[6-9]|2[0-3])\.\S+"/>
+        <parameter name="exclude-regex" value="^171\.6(6\.(1[6-9]|2[0-3])|5\.(4[4-5]|(12[8-9]|2[0-9][0-9])))\.\S+"/>
     </component-instance>
     <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
     <component-instance logger="core.modules.input" name="request-header"   class="org.apache.cocoon.components.modules.input.HeaderAttributeModule"/>
