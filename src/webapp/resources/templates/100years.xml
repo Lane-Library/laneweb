@@ -28,18 +28,18 @@
 		<div id="headerContainer">
 			<div id="header">
 				<div id="headerTop">
-					<a href="http://med.stanford.edu/" target="_blank"><img id="somLogo" src="/images/centennial/somLogo.gif" alt="Stanford School of Medicine logo" width="151" height="32"/></a>
-					<img id="laneSlogan" alt="Lane Medical Library Celebrating 100 Years" src="/images/centennial/laneSlogan.gif" width="547" height="30"/><br/>
-					<img id="100years" style="position: relative; top: 8px; left: 53px; width: 116px; height: 27px;" src="/images/centennial/years.gif" width="116" height="27" alt="1906-2006"/>
+					<a href="http://med.stanford.edu/" target="_blank"><img id="somLogo" src="/images/templates/100years/somLogo.gif" alt="Stanford School of Medicine logo" width="151" height="32"/></a>
+					<img id="laneSlogan" alt="Lane Medical Library Celebrating 100 Years" src="/images/templates/100years/laneSlogan.gif" width="547" height="30"/><br/>
+					<img id="100years" style="position: relative; top: 8px; left: 53px; width: 116px; height: 27px;" src="/images/templates/100years/years.gif" width="116" height="27" alt="1906-2006"/>
 				</div>
-				<img id="topCollage" src="/images/centennial/topCollage.jpg" width="870" height="97" alt="Lane History in JPEG form"/>
+				<img id="topCollage" src="/images/templates/100years/topCollage.jpg" width="870" height="97" alt="Lane History in JPEG form"/>
 				<div id="centennialBreadCrumb" style="width: auto; border-top: 1px solid #fff; padding-left: 35px; padding-top: 3px; padding-bottom: 3px; background-color: #e8e5d9;"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &gt; <a href="http://lane.stanford.edu/" target="_blank">Lane</a> &gt; <a href="index.html" target="_blank">Celebrating 100 Years</a></div>
 			</div>
 		</div>
 		<div id="contentContainer">
 			<div id="middleFrame">
 				<div id="centennialSidebar">
-					<a href="index.html"><img id="seal" style="border: 0px; padding-top: 30px; padding-bottom: 15px; width: 86px; height: 90px;" src="/images/centennial/seal.gif" width="86" height="90" alt="Lane Centennial Seal"/></a><br/>
+					<a href="index.html"><img id="seal" style="border: 0px; padding-top: 30px; padding-bottom: 15px; width: 86px; height: 90px;" src="/images/templates/100years/seal.gif" width="86" height="90" alt="Lane Centennial Seal"/></a><br/>
 					<div id="menuList" style="text-align: left; padding-left: 45px; border: 0px;">
 					    <ul>
 					        <li> <a href="events.html" id="eventsSidebarItem">Events</a></li>
@@ -52,11 +52,11 @@
 					    </ul>
 					    <br/>
 						<ul>
-							<li><a href="memorylane.html"><img src="/images/centennial/memoryLaneOff.gif" height="12" width="66" alt="Memory Lane"/></a></li>
-							<li><a href="http://elane.stanford.edu/wilson/indexphoto.html" target="_blank"><img src="/images/centennial/oldPhotoOff.gif" height="12" width="58" alt="Old Photos"/></a></li>
+							<li><a href="memorylane.html"><img src="/images/templates/100years/memoryLaneOff.gif" height="12" width="66" alt="Memory Lane"/></a></li>
+							<li><a href="http://elane.stanford.edu/wilson/indexphoto.html" target="_blank"><img src="/images/templates/100years/oldPhotoOff.gif" height="12" width="58" alt="Old Photos"/></a></li>
 							<!--
-							<li><a href="mysteryitems.html"><img src="/images/centennial/mystItemsOff.gif" height="12" width="72" alt="Mystery Items"/></a></li>
-							<li><a href="timecapsule.html"><img src="/images/centennial/timeCapsuleOff.gif" height="11" width="65" alt="Time Capsule"/></a></li>
+							<li><a href="mysteryitems.html"><img src="/images/templates/100years/mystItemsOff.gif" height="12" width="72" alt="Mystery Items"/></a></li>
+							<li><a href="timecapsule.html"><img src="/images/templates/100years/timeCapsuleOff.gif" height="11" width="65" alt="Time Capsule"/></a></li>
 							-->
 						</ul>
 					</div>
