@@ -79,7 +79,7 @@
 	<body onload="MM_preloadImages('../centennial/gradTopBackgr.jpg','../centennial/flashPlaceholder.jpg'); flashLoad();">
 		<div id="indexHeaderContainer">
 			<div id="indexHeader">
-				<img id="indexCollageTopPart" src="/images/centennial/gradTopBackgr.jpg" width="870" height="100" alt="Lane Medical Library Celebrating 100 Years"/>
+				<img id="indexCollageTopPart" src="/images/templates/100years/gradTopBackgr.jpg" width="870" height="100" alt="Lane Medical Library Celebrating 100 Years"/>
 				<div id="indexFlashTimeline">
 					<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="870" height="162" id="timeline" align="middle">
 						<param name="allowScriptAccess" value="sameDomain" />
@@ -89,14 +89,14 @@
 						<embed src="timeline.swf" quality="high" bgcolor="#f7eed1" width="870" height="162" name="timeline" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 					</object>
 				</div>
-				<img id="indexCollageBottomPart" src="/images/centennial/flashPlaceholder.jpg" width="870" height="162" alt="[image]"/>
+				<img id="indexCollageBottomPart" src="/images/templates/100years/flashPlaceholder.jpg" width="870" height="162" alt="[image]"/>
 				<div id="centennialBreadCrumb" style="width: auto; border-top: 1px solid #fff; padding-left: 35px; padding-top: 3px; padding-bottom: 3px; background-color: #e8e5d9;"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &gt; <a href="http://lane.stanford.edu/" target="_blank">Lane</a> &gt; Celebrating 100 Years</div>
 			</div>
 		</div>
 		<div id="indexContentContainer">
 			<div id="middleFrame">
 				<div id="centennialSidebar">
-					<a href="index.html"><img id="seal" style="border: 0px; padding-top: 30px; padding-bottom: 15px; width: 86px; height: 90px;" src="/images/centennial/seal.gif" width="86" height="90" alt="Lane Centennial Seal"/></a><br/>
+					<a href="index.html"><img id="seal" style="border: 0px; padding-top: 30px; padding-bottom: 15px; width: 86px; height: 90px;" src="/images/templates/100years/seal.gif" width="86" height="90" alt="Lane Centennial Seal"/></a><br/>
 				    <div id="menuList" style="text-align: left; padding-left: 45px; border: 0px;"> <ul>
 				        <li> <a href="events.html" id="eventsSidebarItem">Events</a></li>
 				        <li> <a href="exhibits.html" id="exhibitsSidebarItem">Exhibits</a></li>
