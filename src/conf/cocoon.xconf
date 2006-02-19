@@ -7,10 +7,8 @@
     <component-instance logger="core.modules.input.laneweb" name="laneweb" class="edu.stanford.laneweb.LanewebInputModule">
         <noproxy-regex>^171\.6[4-7]\.\S+</noproxy-regex>
         <proxy-regex>^171\.6(6\.(1[6-9]|2[0-3])|5\.(4[4-5]|(12[8-9]|2[0-9][0-9])))\.\S+</proxy-regex>
-        <template url="^/100years/index.html" value="100years_index"/>
-        <template url="^/stage/100years/index.html" value="100years_index"/>
-        <template url="^/100years/\S+" value="100years"/>
-        <template url="^/stage/100years/\S+" value="100years"/>
+        <template url="^(/stage/|/beta/|/beta/stage/|/)100years/index.html" value="100years_index"/>
+        <template url="^(/stage/|/beta/|/beta/stage/|/)100years/\S+" value="100years"/>
     </component-instance>
     <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
     <component-instance logger="core.modules.input" name="uriencode-request-param" class="edu.stanford.laneweb.URIEncodedParameterModule" />
