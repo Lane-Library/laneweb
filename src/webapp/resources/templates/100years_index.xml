@@ -97,7 +97,16 @@
 			<div id="middleFrame">
 				<div id="centennialSidebar">
 					<a href="index.html"><img id="seal" style="border: 0px; padding-top: 30px; padding-bottom: 15px; width: 86px; height: 90px;" src="/images/centennial/seal.gif" width="86" height="90" alt="Lane Centennial Seal"/></a><br/>
-					<div id="menuList" style="text-align: left; padding-left: 45px; border: 0px;"><div id="lw_side-bar"/></div>
+				    <div id="menuList" style="text-align: left; padding-left: 45px; border: 0px;"> <ul>
+				        <li> <a href="events.html" id="eventsSidebarItem">Events</a></li>
+				        <li> <a href="exhibits.html" id="exhibitsSidebarItem">Exhibits</a></li>
+				        <li> <a href="history.html" id="historySidebarItem">History</a></li>
+				        <li> <a href="vignettes.html" id="vignettesSidebarItem">Vignettes</a></li>
+				        <li> <a href="http://med.stanford.edu/alumni/" target="_blank">Alumni</a></li>
+				        <li> <a href="http://med.stanford.edu/center/development/" target="_blank">Make a Gift</a></li>
+				        <li> <a href="http://lane.stanford.edu/">Lane Home</a></li>
+				    </ul>
+				    </div>
 				</div>
 				<div id="content"><div id="lw_content"/></div>
 			</div>
