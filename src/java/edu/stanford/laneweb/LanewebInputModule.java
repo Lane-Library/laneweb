@@ -12,15 +12,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.parameters.Parameterizable;
-import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.components.modules.input.InputModule;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
-//import org.apache.regexp.RE;
 
 /**
  * @author ceyates
@@ -29,10 +28,12 @@ import org.apache.cocoon.environment.Request;
  * Preferences - Java - Code Generation - Code and Comments
  */
 public class LanewebInputModule extends AbstractLogEnabled implements
-        InputModule, ThreadSafe, Parameterizable {
+        InputModule, ThreadSafe, Configurable {
     static final String PROXY_LINKS = "proxy-links";
     
     static final String AFFILIATION = "affiliation";
+    
+    static final String TEMPLATE = "template";
     
     static final String SHC = "SHC";
     static final String LPCH = "LPCH";
@@ -48,29 +49,47 @@ public class LanewebInputModule extends AbstractLogEnabled implements
     static {
         ATTRS.add(PROXY_LINKS);
         ATTRS.add(AFFILIATION);
+        ATTRS.add(TEMPLATE);
     }
 
     private String noProxyRegex;
 
     private String proxyRegex;
     
-    public Object getAttribute(String key, Configuration config, Map objectModel) {
+    private Configuration[] templateConfig;
+    
+    public Object getAttribute(String key, Configuration config, Map objectModel) 
+    	throws ConfigurationException {
         String result = null;
         Request request = ObjectModelHelper.getRequest(objectModel);
-        String ip = request.getRemoteAddr();
-        // mod_proxy puts the real remote address in an x-forwarded-for header
-        // if (ip.equals("127.0.0.1")) {
-        String header = request.getHeader("x-forwarded-for");
-        if (header != null) {
-            ip = header;
-        }
-        // }
-        if (key.equals(PROXY_LINKS)) {
-            result = proxyLinks(ip);
-        } else if (key.equals(AFFILIATION)) {
-            result = getAffiliation(ip);
+        if (key.equals(PROXY_LINKS) || key.equals(AFFILIATION)) {
+            String ip = request.getRemoteAddr();
+            // mod_proxy puts the real remote address in an x-forwarded-for header
+            // if (ip.equals("127.0.0.1")) {
+            String header = request.getHeader("x-forwarded-for");
+            if (header != null) {
+                ip = header;
+            }
+            if (key.equals(PROXY_LINKS)) {
+                result = proxyLinks(ip);
+            } else if (key.equals(AFFILIATION)) {
+                result = getAffiliation(ip);
+            } 
+        	
+        }else if (key.equals(TEMPLATE)) {
+        		String uri = request.getRequestURI();
+        		result = getTemplateName(uri);
         }
         return result;
+    }
+    
+    protected String getTemplateName(final String url) throws ConfigurationException {
+     	for (int i = 0; i < this.templateConfig.length; i++) {
+     		if (url.matches(this.templateConfig[i].getAttribute("url"))) {
+     			return this.templateConfig[i].getAttribute("value");
+     		}
+		}
+    		return null;
     }
     
     protected String proxyLinks(final String ip) {
@@ -213,16 +232,18 @@ public class LanewebInputModule extends AbstractLogEnabled implements
     }
 
     public Object[] getAttributeValues(String key, Configuration config,
-            Map objectModel) {
-        Object[] result = new Object[1];
-        result[0] = getAttribute(key, config, objectModel);
-        return result;
+            Map objectModel) throws ConfigurationException {
+    	Object result = getAttribute(key, config, objectModel);
+    	if (result != null) {
+    		return new Object[] {result};
+    	}
+    	return null;
     }
 
-    public void parameterize(Parameters params) {
-        this.noProxyRegex = params.getParameter("noproxy-regex", "");
-        this.proxyRegex = params.getParameter("proxy-regex", "");
-
-    }
+	public void configure(Configuration config) throws ConfigurationException {
+		this.noProxyRegex = config.getChild("noproxy-regex").getValue();
+		this.proxyRegex = config.getChild("proxy-regex").getValue();
+		this.templateConfig = config.getChildren("template");
+	}
 
 }

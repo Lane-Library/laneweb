@@ -5,7 +5,6 @@
         <map:generators default="html"/>
         <map:transformers default="xinclude"/>
         <map:serializers default="xml"/>
-        <map:selectors default="simple"/>
         <map:matchers default="wildcard"/>
         <map:pipes default="caching"/>
     </map:components>

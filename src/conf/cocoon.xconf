@@ -5,17 +5,20 @@
  
   <input-modules>
     <component-instance logger="core.modules.input.laneweb" name="laneweb" class="edu.stanford.laneweb.LanewebInputModule">
-        <parameter name="noproxy-regex" value="^171\.6[4-7]\.\S+"/>
-        <parameter name="proxy-regex" value="^171\.6(6\.(1[6-9]|2[0-3])|5\.(4[4-5]|(12[8-9]|2[0-9][0-9])))\.\S+"/>
+        <noproxy-regex>^171\.6[4-7]\.\S+</noproxy-regex>
+        <proxy-regex>^171\.6(6\.(1[6-9]|2[0-3])|5\.(4[4-5]|(12[8-9]|2[0-9][0-9])))\.\S+</proxy-regex>
+        <template url="^/100years/index.html" value="100years_index"/>
+        <template url="^/stage/100years/index.html" value="100years_index"/>
+        <template url="^/100years/\S+" value="100years"/>
+        <template url="^/stage/100years/\S+" value="100years"/>
     </component-instance>
     <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
-    <component-instance logger="core.modules.input" name="request-header"   class="org.apache.cocoon.components.modules.input.HeaderAttributeModule"/>
-    <component-instance class="org.apache.cocoon.components.modules.input.DateInputModule" logger="core.modules.input" name="date"/>
     <component-instance logger="core.modules.input" name="uriencode-request-param" class="edu.stanford.laneweb.URIEncodedParameterModule" />
     <component-instance logger="core.modules.input" name="request-uri" class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
     <component-instance logger="core.modules.input" name="request" class="org.apache.cocoon.components.modules.input.RequestModule"/>
     <component-instance logger="core.modules.input" name="chain" class="org.apache.cocoon.components.modules.input.ChainMetaModule">
       <input-module name="request-param"/>
+      <input-module name="laneweb"/>
       <input-module name="defaults"/>
     </component-instance>
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">

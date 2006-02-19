@@ -8,7 +8,10 @@ package edu.stanford.laneweb;
 
 import junit.framework.TestCase;
 
-import org.apache.avalon.framework.parameters.Parameters;
+import org.apache.avalon.framework.configuration.Configuration;
+import org.apache.avalon.framework.configuration.ConfigurationException;
+import org.apache.avalon.framework.configuration.DefaultConfigurationBuilder;
+
 
 public class LanewebInputModuleTest extends TestCase {
     
@@ -17,10 +20,9 @@ public class LanewebInputModuleTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         this.module = new LanewebInputModule();
-        Parameters parameters = new Parameters();
-        parameters.setParameter("noproxy-regex","^171\\.6[4-7]\\.\\S+");
-        parameters.setParameter("proxy-regex","^171\\.6(6\\.(1[6-9]|2[0-3])|5\\.(4[4-5]|(12[8-9]|2[0-9][0-9])))\\.\\S+");
-        this.module.parameterize(parameters);
+        DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
+        Configuration config = builder.build("src/conf/cocoon.xconf").getChild("input-modules").getChildren()[0];
+        this.module.configure(config);
     }
     
     public void testProxyMyIP() {
@@ -39,8 +41,15 @@ public class LanewebInputModuleTest extends TestCase {
     	assertTrue("true".equals(this.module.proxyLinks("12.22.127.33")));
     }
     
-    public void testMyIPIsSU() {
+    public void testLPCHIP() {
         assertTrue("LPCH".equals(this.module.getAffiliation("10.252.31.112")));
+    }
+    
+    public void testTemplates() throws ConfigurationException {
+    		assertTrue("100years_index".equals(this.module.getTemplateName("/100years/index.html")));
+    		assertTrue("100years_index".equals(this.module.getTemplateName("/stage/100years/index.html")));
+    		assertTrue("100years".equals(this.module.getTemplateName("/100years/anotherpage.html")));
+    		assertTrue("100years".equals(this.module.getTemplateName("/stage/100years/anotherpage.html")));
     }
 
 }

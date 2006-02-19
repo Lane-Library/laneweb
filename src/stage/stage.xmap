@@ -96,7 +96,15 @@
                         <map:parameter name="keywords" value="{request-param:keywords}"/>
                         <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     </map:transform>
-                    <map:serialize type="xhtml"/>
+                    <map:select type="regex-parameter">
+                        <map:parameter name="parameter-selector-test" value="{request-uri:requestURI}"/>
+                        <map:when test="^stage/100years/\S+">
+                            <map:serialize type="noprolog"/>
+                        </map:when>
+                        <map:otherwise>
+                            <map:serialize type="xhtml"/>
+                        </map:otherwise>
+                    </map:select>
                 </map:match>
             </map:match>
             <map:match type="wildcard" pattern="**">
