@@ -76,7 +76,7 @@
 		</script>
 	</head>
 	
-	<body onload="MM_preloadImages('../centennial/gradTopBackgr.jpg','../centennial/flashPlaceholder.jpg'); flashLoad();">
+	<body onload="MM_preloadImages('../100years/gradTopBackgr.jpg','../100years/flashPlaceholder.jpg'); flashLoad();">
 		<div id="indexHeaderContainer">
 			<div id="indexHeader">
 				<img id="indexCollageTopPart" src="/images/templates/100years/gradTopBackgr.jpg" width="870" height="100" alt="Lane Medical Library Celebrating 100 Years"/>

@@ -24,7 +24,7 @@
 		</script>
 	</head>
 	
-	<body onload="MM_preloadImages('../centennial/topCollage.jpg'); titleLoad();">
+	<body onload="MM_preloadImages('../100years/topCollage.jpg'); titleLoad();">
 		<div id="headerContainer">
 			<div id="header">
 				<div id="headerTop">
