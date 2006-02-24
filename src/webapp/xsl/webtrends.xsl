@@ -170,8 +170,8 @@
       <xsl:when test="normalize-space(..)!=''">
         <xsl:value-of select="normalize-space(..)"/>
       </xsl:when>
-      <xsl:when test="../img/@alt">
-        <xsl:value-of select="../img/@alt"/>
+      <xsl:when test="../h:img/@alt">
+        <xsl:value-of select="../h:img/@alt"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:value-of select="'unknown'"/>
