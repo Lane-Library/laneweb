@@ -25,11 +25,11 @@ public class LanewebInputModuleTest extends TestCase {
         this.module.configure(config);
     }
     
-    public void testProxyMyIP() {
+    public void testProxyMyIP() throws ConfigurationException {
         assertTrue("false".equals(this.module.proxyLinks("171.65.28.158")));
     }
     
-    public void testAFewIPs() {
+    public void testAFewIPs() throws ConfigurationException {
     	assertTrue("true".equals(this.module.proxyLinks("171.65.44.22")));
     	assertTrue("true".equals(this.module.proxyLinks("171.65.45.22")));
     	assertTrue("false".equals(this.module.proxyLinks("171.65.46.22")));
@@ -39,8 +39,18 @@ public class LanewebInputModuleTest extends TestCase {
     	assertTrue("true".equals(this.module.proxyLinks("171.65.256.22")));
     	assertTrue("false".equals(this.module.proxyLinks("171.65.127.33")));
     	assertTrue("true".equals(this.module.proxyLinks("12.22.127.33")));
+    	assertTrue("true".equals(this.module.proxyLinks("171.65.56.1")));
+    	assertTrue("true".equals(this.module.proxyLinks("171.65.59.255")));
+    	assertTrue("true".equals(this.module.proxyLinks("171.65.124.1")));
+    	assertTrue("true".equals(this.module.proxyLinks("171.65.125.255")));
+    	assertTrue("false".equals(this.module.proxyLinks("171.65.55.255")));
+    	assertTrue("false".equals(this.module.proxyLinks("171.65.60.1")));
+    	assertTrue("false".equals(this.module.proxyLinks("171.65.123.255")));
+    	assertTrue("false".equals(this.module.proxyLinks("171.65.126.1")));
+    	assertTrue("true".equals(this.module.proxyLinks("171.65.195.4")));
+    	assertTrue("true".equals(this.module.proxyLinks("171.65.173.37")));
     }
-    
+
     public void testLPCHIP() {
         assertTrue("LPCH".equals(this.module.getAffiliation("10.252.31.112")));
     }
