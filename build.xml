@@ -117,6 +117,8 @@
         </get>
         <get dest="${libdir}/cocoon-databases-2.1.8.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-databases-2.1.8.jar">
         </get>
+        <get dest="${libdir}/cocoon-mail-2.1.8.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-mail-2.1.8.jar">
+        </get>
         <get dest="${libdir}/cocoon-paranoid-2.1.8.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-paranoid-2.1.8.jar">
         </get>
         <get dest="${libdir}/cocoon-proxy-2.1.8.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/cocoon/jars/cocoon-proxy-2.1.8.jar">

@@ -12,16 +12,6 @@
         <map:pipeline type="noncaching">
 <map:match pattern="askus_response.html">
 <map:generate type="file" src="content/askus_response.html"/>
-  <map:transform type="xsltc" src="xsl/sendmail.xsl">
-    <map:parameter name="name" value="{request-param:name}"/>
-    <map:parameter name="email" value="{request-param:email}"/>
-    <map:parameter name="textarea" value="{request-param:textarea}"/>
-    <map:parameter name="phone" value="{request-param:phone}"/>
-    <map:parameter name="affiliation" value="{request-param:affiliation}"/>
-    <map:parameter name="remote-host" value="{request:remoteHost}"/>
-    <map:parameter name="user-agent" value="{request-header:User-Agent}"/>
-    <map:parameter name="date" value="{date:currentDate}"/>
-  </map:transform>
 <map:transform type="sendmail">
 </map:transform>
 <map:serialize type="xml"/>

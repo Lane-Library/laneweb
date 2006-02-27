@@ -109,7 +109,7 @@
                         <xsl:attribute name="onclick">
                             <xsl:text>openSearchResult('</xsl:text>
                             <xsl:choose>
-                                <xsl:when test="proxy-links">
+                                <xsl:when test="proxy-links = 'true'">
                                     <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
                                     <xsl:value-of select="@href"/>
                                 </xsl:when>
@@ -131,7 +131,7 @@
     <!-- href and src attributes template -->
     <xsl:template match="@href">
         <xsl:choose>
-            <xsl:when test="parent::h:a[@class='proxy'] and $proxy-links">
+            <xsl:when test="parent::h:a[@class='proxy'] and $proxy-links = 'true'">
                 <xsl:variable name="title">
                     <xsl:choose>
                         <xsl:when test="parent::h:a/@title">
