@@ -52,9 +52,9 @@ public class LanewebInputModule extends AbstractLogEnabled implements
         ATTRS.add(TEMPLATE);
     }
 
-    private String noProxyRegex;
+    private Configuration[] noProxyRegex;
 
-    private String proxyRegex;
+    private Configuration[] proxyRegex;
     
     private Configuration[] templateConfig;
     
@@ -92,8 +92,26 @@ public class LanewebInputModule extends AbstractLogEnabled implements
     		return null;
     }
     
-    protected String proxyLinks(final String ip) {
-        return Boolean.toString(!ip.matches(this.noProxyRegex) ||  ip.matches(this.proxyRegex));
+    protected String proxyLinks(final String ip) throws ConfigurationException {
+        return Boolean.toString(!isNoProxy(ip) || isProxy(ip));
+    }
+    
+    private boolean isNoProxy(String ip) throws ConfigurationException {
+    	for (int i = 0; i < this.noProxyRegex.length; i++) {
+    		if (ip.matches(this.noProxyRegex[i].getValue())) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    private boolean isProxy(String ip) throws ConfigurationException {
+    	for (int i = 0; i < this.proxyRegex.length; i++) {
+    		if (ip.matches(this.proxyRegex[i].getValue())) {
+    			return true;
+    		}
+    	}
+    	return false;
     }
     
     protected String getAffiliation(final String ip) {
@@ -241,8 +259,8 @@ public class LanewebInputModule extends AbstractLogEnabled implements
     }
 
 	public void configure(Configuration config) throws ConfigurationException {
-		this.noProxyRegex = config.getChild("noproxy-regex").getValue();
-		this.proxyRegex = config.getChild("proxy-regex").getValue();
+		this.noProxyRegex = config.getChildren("noproxy-regex");
+		this.proxyRegex = config.getChildren("proxy-regex");
 		this.templateConfig = config.getChildren("template");
 	}
 
