@@ -156,8 +156,11 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
         StringBuffer queryBuffer = new StringBuffer(SELECT);
         String translatedQuery = null;
         if (this.query != null) {
-            queryBuffer.append(", SCORE(1) AS SCORE_TITLE, SCORE(2) AS SCORE_ALL");
             translatedQuery = queryTranslator.translate(this.query);
+            queryBuffer.append(", CONTAINS(ERESOURCE.TITLE,'")
+            .append(translatedQuery)
+            .append("',1) AS SCORE_TITLE")
+            .append(", SCORE(2) AS SCORE_TEXT");
         }
         queryBuffer.append(FROM);
         if (this.type != null) {
@@ -183,16 +186,17 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             queryBuffer.append(" AND lower(ERESOURCE.TITLE) LIKE '").append(this.alpha).append("%'");
         }
         if (this.query != null) {
-            queryBuffer.append(" AND (CONTAINS(TITLE,'");
-            queryBuffer.append(translatedQuery);
-            queryBuffer.append("', 1) > 0 OR CONTAINS(TEXT,'");
-            queryBuffer.append(translatedQuery);
-            queryBuffer.append("', 2) > 0) ");
+            queryBuffer.append(" AND  CONTAINS(ERESOURCE.TEXT,'")
+            .append(translatedQuery)
+            .append("', 2) > 0 ");
         }
         queryBuffer.append(UNION);
         queryBuffer.append(ALT_SELECT);
         if (this.query != null) {
-            queryBuffer.append(", SCORE(1) AS SCORE_TITLE, SCORE(2) AS SCORE_ALL");
+            queryBuffer.append(", CONTAINS(ERESOURCE.PREFERRED_TITLE,'")
+            .append(translatedQuery)
+            .append("',1) AS SCORE_TITLE")
+            .append(", SCORE(2) AS SCORE_TEXT");
         }
         queryBuffer.append(FROM);
         if (this.type != null) {
@@ -219,15 +223,13 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             queryBuffer.append(" AND lower(ERESOURCE.PREFERRED_TITLE) LIKE '").append(this.alpha).append("%'");
         }
         if (this.query != null) {
-            queryBuffer.append(" AND (CONTAINS(PREFERRED_TITLE,'");
-            queryBuffer.append(translatedQuery);
-            queryBuffer.append("', 1) > 0 OR CONTAINS(TEXT,'");
-            queryBuffer.append(translatedQuery);
-            queryBuffer.append("', 2) > 0) ");
+            queryBuffer.append(" AND CONTAINS(ERESOURCE.TEXT,'")
+            .append(translatedQuery)
+            .append("', 2) > 0 ");
         }
         queryBuffer.append(ORDER_BY);
         if (this.query != null) {
-            queryBuffer.append("SCORE_TITLE DESC, SCORE_ALL DESC, ");
+            queryBuffer.append("SCORE_TITLE DESC, SCORE_TEXT DESC, ");
         }
         queryBuffer.append(ORDER);
         return  queryBuffer.toString().toCharArray();
