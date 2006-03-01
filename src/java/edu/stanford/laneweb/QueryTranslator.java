@@ -120,10 +120,14 @@ public class QueryTranslator {
 	// and attaches a WITHIN clause if appropriate.
 
 	private String getWord(Vector words, int pos) {
-		String ts = "{" + ((WordData) words.elementAt(pos)).text + "}";
-		if (((WordData) words.elementAt(pos)).fieldName.length() > 0) {
-			ts += " WITHIN " + ((WordData) words.elementAt(pos)).fieldName;
-		}
+		//here I added stuff for handling the wildcard, which doesn't work if in {}
+		String word = ((WordData) words.elementAt(pos)).text;
+		String ts = word.indexOf('%') > -1 ? word : "{" + word + "}";
+//		String ts = "{" + ((WordData) words.elementAt(pos)).text + "}";
+		//not using fieldName at the moment
+//		if (((WordData) words.elementAt(pos)).fieldName.length() > 0) {
+//			ts += " WITHIN " + ((WordData) words.elementAt(pos)).fieldName;
+//		}
 		return ts;
 	}
 
@@ -212,6 +216,6 @@ public class QueryTranslator {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(new QueryTranslator().translate("foo bar"));
+		System.out.println(new QueryTranslator().translate("ophth* amer*"));
 	}
 }
