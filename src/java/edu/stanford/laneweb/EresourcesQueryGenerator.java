@@ -95,7 +95,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             if (this.alpha.length() == 0) {
                 this.alpha = null;
             } else {
-                this.alpha = this.alpha.toLowerCase();
+                this.alpha = this.alpha.substring(0,1).toLowerCase();
                 this.haveParameters = true;
             }
         }
@@ -134,6 +134,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
         } else {
             selectStatmentChars = new char[0];
         }
+        System.out.println("==>"+new String(selectStatmentChars));
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT,EMPTY_ATTS);
         this.xmlConsumer.startElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT,EMPTY_ATTS);
@@ -183,7 +184,12 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             queryBuffer.append(" AND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET.SUBSET = '").append(this.subset).append("'");
         }
         if (this.alpha != null) {
-            queryBuffer.append(" AND lower(ERESOURCE.TITLE) LIKE '").append(this.alpha).append("%'");
+        	queryBuffer.append(" AND LOWER(SUBSTR(ERESOURCE.TITLE,1,1)) ");
+        	if (this.alpha.equals("#")) {
+        		queryBuffer.append("< 'A' ");
+        	} else {
+        		queryBuffer.append("= '").append(this.alpha).append("'");
+        	}
         }
         if (this.query != null) {
             queryBuffer.append(" AND  CONTAINS(ERESOURCE.TEXT,'")
@@ -220,7 +226,12 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
             queryBuffer.append(" AND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET.SUBSET = '").append(this.subset).append("'");
         }
         if (this.alpha != null) {
-            queryBuffer.append(" AND lower(ERESOURCE.PREFERRED_TITLE) LIKE '").append(this.alpha).append("%'");
+        	queryBuffer.append(" AND LOWER(SUBSTR(ERESOURCE.PREFERRED_TITLE,1,1)) ");
+        	if (this.alpha.equals("#")) {
+        		queryBuffer.append("< 'A' ");
+        	} else {
+        		queryBuffer.append("= '").append(this.alpha).append("'");
+        	}
         }
         if (this.query != null) {
             queryBuffer.append(" AND CONTAINS(ERESOURCE.TEXT,'")
