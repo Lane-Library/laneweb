@@ -1,0 +1,491 @@
+/*** content CSS ***/
+
+body {
+  font-family: verdana, geneva, sans-serif;
+	font-size: 80%;
+  background-color: #fff;
+	margin-top: 5px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+#breadCrumb {
+	margin: 0px;
+	padding: 0px;
+	margin-left: 17px;
+	margin-bottom: 10px;
+	font-size: 80%;
+	color: #777;
+}
+
+#breadCrumb a:link, #breadCrumb a:visited {
+	text-decoration: none;
+	color: #990000;
+}
+#breadCrumb a:hover, #breadCrumb a:active  {
+	text-decoration: underline;
+	color: #990000;
+}
+
+#contentBody {
+	position: relative;
+	top:2px;
+	left: 0px;
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+	z-index: 3;
+}
+
+.sideBlueBox, .sideTanBox, .centerGreenBox, .whiteBox, .centerBlueBox {
+	height: auto;
+	margin: 0px;
+	margin-bottom: 15px;
+	padding: 0px;
+	overflow: hidden;
+}
+.sideBlueBox, .whiteBox, .centerBlueBox {
+	font-size: 90%;
+}
+
+.sideTanBox a:link {
+	font-size: 110%;
+}
+.sideTanBox {
+	font-size: 80%;
+}
+
+.sideBlueBox, .sideTanBox, .whiteBox  {
+	width: 170px;
+}
+
+.centerGreenBox, .centerBlueBox, .centralColumn .whiteBox {
+	width: auto;
+}
+
+.whiteBox {
+	border: 1px solid #ccc;
+	text-align: center; /* used to center the grey divider due to a bug in IE ignoring the auto margin */
+}
+
+.sideBlueBox h2, .sideBlueBox h2.SquareTitle,
+.sideTanBox h2, .centerGreenBox h2, .whiteBox h2, .centerBlueBox h2 {
+	font-size:90%;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	text-align: center;
+	font-weight: 800;
+	margin: 0px;
+}
+
+.sideBlueBox h2, .sideBlueBox h2.ImageTitle, .sideBlueBox h2.SquareTitle {
+	color: white;
+}
+
+#leftColumn .sideBlueBox h2 {
+	background-image: url(/beta/stage/images/templates/default/whiteCornerBlueBoxTL.gif);
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+#leftColumn .sideBlueBox h2 {
+	padding-left: 10px;
+	padding-right: 2px;
+}
+
+#rightColumn .sideBlueBox h2   {
+	background-image: url(/beta/stage/images/templates/default/whiteCornerBlueBoxTR.gif);
+	background-repeat: no-repeat;
+	background-position: top right;
+}
+
+#rightColumn .sideBlueBox h2 {
+	padding-left: 2px;
+	padding-right: 10px;
+}
+
+.sideBlueBox h2, .sideBlueBox h2.SquareTitle {
+	background-color: #6784A2;
+	text-transform: uppercase;
+}
+
+#leftColumn .sideBlueBox h2.SquareTitle, #rightColumn .sideBlueBox h2.SquareTitle {
+	background-image: none;
+}
+
+#leftColumn .sideBlueBox h2.ImageTitle, #rightColumn .sideBlueBox h2.ImageTitle  {
+	padding: 0px;
+}
+
+#leftColumn .sideTanBox h2 {
+	color: #535548;
+	text-transform: uppercase;
+	background: #d9d7b0 url(/beta/stage/images/templates/default/beigeTopLeftCorner.gif) no-repeat top left;
+}
+
+#rightColumn .sideTanBox h2 {
+	color: #535548;
+	text-transform: uppercase;
+	background: #d9d7b0 url(/beta/stage/images/templates/default/beigeTopRightCorner.gif) no-repeat top right;
+}
+
+.centerGreenBox h2 {
+	width: 12em;
+	padding-left: 2px;
+	padding-right: 15px;
+	color: white !important;
+	font-size: 90%;
+	font-weight: 650;
+	background: #996 url(/beta/stage/images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
+	border: 0px;
+	border-bottom: 3px solid #dbdbc9;
+}
+
+.centerBlueBox h2 {
+	width: 12em;
+	padding-left: 2px;
+	padding-right: 15px;
+	color: white !important;
+	font-size: 100%;
+	font-weight: 650;
+	background: #6784A2 url(/beta/stage/images/templates/default/whiteCornerBlueBoxTR.gif) no-repeat top right;
+	/* background: #6784A2 url(/beta/stage/images/templates/default/blueUpRightCorner.gif) no-repeat top right; */
+	border: 0px;
+	border-bottom: 1px solid #fff;
+}
+
+.whiteBox h2 {
+	padding: 6px;
+	padding-top: 10px;
+}
+
+.buttonBox {
+	background-color: #f2f3ed;
+	border: 1px solid #e0dfc2;
+}
+
+.whiteBoxDivider {
+	width: 90%;
+	height: 6px;
+	font-size: 6px; /* avoid default auto height in IE */
+	background-color: #e9e9e9/*#d7d7c3*/;
+	margin: 0 auto;
+}
+
+.sideBlueBoxShortContent, .sideBlueBoxLongContent, .sideTanBoxContent, .centerGreenBoxContent, .whiteBoxContent, .centerBlueBoxContent {
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	/*text-indent: 10px;*/
+	text-align: left;
+	/*background: yellow;*/
+}
+
+.sideBlueBoxShortContent h2, .sideBlueBoxLongContent h2, .sideTanBoxContent h2, .centerGreenBoxContent h2, .whiteBoxContent h2, .centerBlueBoxContent h2 {
+	display: none;
+}
+
+.sideBlueBoxShortContent {
+	margin-top: 1px;
+	border: 1px solid #ccc;
+	background: #fff;
+}
+
+.sideBlueBoxLongContent {
+	margin-top: 1px;
+	border: 1px solid #ccc;
+	background: #fff url(/beta/stage/images/templates/default/blueBoxGradient.jpg) repeat-x bottom left;
+}
+
+.centerGreenBoxContent {
+	border: 1px solid #dcdbdb;
+}
+
+#leftColumn .sideTanBoxContent {
+	background: #f2f3ed url(/beta/stage/images/templates/default/beigeBottomRightCorner.gif) no-repeat bottom right;
+}
+
+#rightColumn .sideTanBoxContent {
+	background: #f2f3ed url(/beta/stage/images/templates/default/beigeBottomLeftCorner.gif) no-repeat bottom left;
+}
+
+.centerBlueBoxContent {
+	background: url(/beta/stage/images/templates/default/blueToWhiteBoxGrad.jpg) repeat-x top left;
+}
+
+div#bottomCurvedCorner {
+	position:relative;
+	bottom:10px;
+	left:0px;
+	width:100%;
+	height: 10px;
+	margin: 0px;
+	border: 0px;
+	padding: 0px;
+	background-color: transparent;
+	background-image: url(/beta/stage/images/templates/default/searchBL.gif);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+
+#sampleBoxBottomCorner {
+	position:absolute;
+	bottom:0px;
+	right: -2px;
+	width: 17px;
+	height: 17px;
+	padding:0px;
+	margin: 0px;
+	border: 0px;
+}
+
+.topCurvedCorner{
+	position:absolute;
+	top:0px;
+	left: 0px;
+	width: 12px;
+	height: 12px;
+	padding:0px;
+	margin: 0px;
+	border: 0px;
+	z-index: 50;
+}
+
+#footer {
+	clear: both;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 15px;
+	border-top: 1px solid #ccc;
+	background: transparent url(/beta/stage/images/templates/default/footerBg.jpg) repeat-x top left;
+	font-size: 80%;
+}
+
+#footer td {
+	white-space: nowrap;
+}
+
+.footerComment {
+	font-style: italic;
+	color: #333;
+}
+
+#footer a:link, #footer a:visited, #footer a:hover, #footer a:active {
+	text-decoration: none;
+}
+
+.portalTitle {
+	padding-bottom: 15px;
+	font-family: serif;
+	font-size: 200%;
+	font-weight: 700;
+	color: #369;
+}
+
+/* Clinical trials -- testing */
+
+/*.sideBlueBoxShortContent ul, .sideBlueBoxLongContent ul, .sideTanBoxContent ul {*/
+ul {
+	padding: 0px;
+	margin: 0px;
+}
+
+ul ul {
+	padding-left: 1.2em;
+}
+li {
+	display: list-item;
+	background-image: url(/beta/stage/images/templates/default/list-background-line.gif);
+	background-repeat: no-repeat;
+	background-position: 0px -3px;
+	list-style: none;
+	padding-left: 5px;
+	padding-bottom: 4px;
+	margin: 0px;
+}
+
+img {
+	border: 0px !important;
+}
+
+li img {
+	margin-left: -5px; /* dealing w/ icons, eg DocXpress? */
+}
+
+/*
+.sideBlueBoxShortContent li, .sideBlueBoxLongContent li, .sideTanBoxContent li {
+	display: list-item;
+	background-image: none;
+	list-style: disc outside;
+	padding: 0px;
+	margin: 0px;
+}
+*/
+td.centralColumn {
+	width:auto;
+	padding-left: 20px;
+	padding-right: 20px;
+	text-align: center; /*exploiting IE hack to center column boxes*/
+}
+
+td.centralColumn div {
+	text-align: left; /*compensating for the above td.centralColumn settings*/
+}
+
+* html td.centralColumn .whiteBox{
+	width: 100%; /*IE weird doubling of padding problem fix - surreptitious */
+}
+
+div#otherPortalOptions {
+	position:relative;
+	top: 1em;
+	left: 0px;
+	width: 100%;
+	height: 1em;
+	background: /*red*/transparent;
+}
+
+#portalForm select{
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 15em;
+	height: auto;
+	z-index: 100;
+}
+
+/*button-like box experiment*/
+
+/* set the image to use and establish the lower-right position */
+.cssbox, .cssbox_body, .cssbox_head, .cssbox_head h2 {
+	background: transparent url(/beta/stage/images/templates/default/buttonLikeBox300px.jpg) no-repeat bottom right;
+}
+.cssbox {
+	width: 146px !important; /* intended total box width - padding-right(next) */
+	width: 144px; /* IE Win = width - padding */
+	padding-right: 2px; /* the gap on the right edge of the image (not content padding) */
+	margin: 20px auto; /* use to position the box */
+}
+/* set the top-right image */
+.cssbox_head {
+	background-position: top right;
+	margin-right: -2px; /* pull the right image over on top of border */
+	padding-right: 40px; /* right-image-gap + right-inside padding */
+}
+/* set the top-left image */
+.cssbox_head h2 {
+	background-position: top left;
+	margin: 0; /* reset main site styles*/
+	border: 0; /* ditto */
+	padding: 25px 0 2px 40px; /* padding-left = image gap + interior padding ... no padding-right */
+	height: auto !important;
+	height: 1%; /* IE Holly Hack */
+}
+/* set the lower-left corner image */
+.cssbox_body {
+	background-position: bottom left;
+	margin-right: 25px; /* interior-padding right */
+	padding: 5px 0 2px 40px; /* mirror .cssbox_head right/left */
+} 
+
+select {
+	font-family: verdana, geneva, sans-serif;
+}
+
+h1 {
+	font-family: serif;
+	font-size: 150%;
+	font-weight: 700;
+	color: #40668c;
+	margin-top:0;
+}
+h2 {
+	color: #000;
+	font-size: 100%;
+	font-weight: 600;
+}
+h1, h2, h3, h4, h5 {
+	padding-bottom: 0;
+	margin-bottom: 0;
+}
+.pList {
+	padding-top:0;
+	margin-top:0;
+}
+a {
+	color: #900;
+}
+a:link, a:visited {
+	color: #900;
+	text-decoration: none;
+}
+a:hover, a:active {
+	color: #036;
+	text-decoration: underline !important;
+}
+
+p a:link, p a:visited { 
+	text-decoration: underline;
+}
+p.pList a:link, p.pList a:visited { 
+	text-decoration: none;
+}
+/* Pam, this is a repeat, I think... */
+/*
+.sideTanBox h2 {
+	color: #996;
+	text-transform: uppercase;
+	background: #d9d7b0 url(/beta/stage/images/templates/default/beigeTopRightCorner.gif) no-repeat top right;
+}
+*/
+.centralColumn h2 {
+	color:#444;
+}
+
+/* eJournals */
+#alphabet {
+	margin-top: 8px;
+	margin-bottom: 8px;
+	padding-left:.5em;
+}
+#alphabet .letter  {
+	font-size: 1em;
+	font-weight: bold;
+	background: #d3cebf;
+	padding: 3px;
+	margin-right: 3px;
+	margin-top:0;
+	margin-bottom:0;
+	border: 1px #FFFFFF solid;
+/*
+#d3cebf 
+#99987a - selected color
+#ecece8
+
+orig
+#F3F4F8
+
+border -- #003163
+*/
+}
+
+.alphaExtras {
+	margin-left: 1em;
+}
+#alphaBrowse {
+	background-color:#e7e2cd;
+	padding:0.6em 1.25em 0.6em 0.6em;
+	margin-top:0;
+	margin-bottom: .5em;
+}
+#alphaBrowse p {
+	margin:0;
+	padding-left:.5em;
+	font-size: .9em;
+}
+
+.onlineBrowseHeader {
+	margin-top: 1.5em;
+	margin-bottom:0;
+}
