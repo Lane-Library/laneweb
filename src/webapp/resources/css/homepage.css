@@ -1,127 +1,20 @@
-/* default template CSS */
-#pageContainer {
-	position: relative;
-	width: 100%;
-	min-width: 800px;
-	max-width: 1200px;
-}
-
-#pageHolder {
-	display: block;
-	color: #000;
-}
-
-* html #pageContainer {
-	border-left: 800px solid #fff;
-}
-
-* html #pageHolder {
-	display: inline-block;
-	/*float: left;*/
-	position: relative;
-	margin-left: -800px;
-}
+/* homepage template CSS */
 
 #somLogoContainer {
-	position:absolute;
-	top: 0px;
-	left: 0px;
-	width: 138px;
-	height:20em;
-	border: 0px;
-	padding: 0px;
-	margin: 0px;
+	height:10em;
 	z-index: 2;
-	background: white;
 }
 
 #outsideSiteLinksContainer {
-	position: relative;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 2em;
-	overflow: hidden;
-	border: 0px; 
-	border-left: 2px solid #fff; /* added to preserve width with searchContainer */
 	border-bottom: 2px solid white;
-	padding: 0px;
-	margin: 0px;
-	color: white;
-	font-size: 0.7em;
-	background: #900 url(/beta/stage/images/templates/default/redcornerTR.gif) no-repeat top right;
-}
-/*
-#redCornerTL {
-	position:relative; 
-	top:0px; 
-	left: 0px; 
-	width: 19px; 
-	height: 15px; 
-	padding:0px; 
-	margin: 0px; 
-	border: 0px; 
-	display: inline;
-}
-*/
-
-#redCornerTL {
-	position:relative; 
-	top: 0px;
-	left: 136px; /*instead of 138px to match shift due to 1px border for other elements*/
-	width: 85%;
-	height: 2em;
-	overflow: hidden;
-	border: 0px; 
-	padding: 0px;
-	margin: 0px;
-	color: white;
-	text-align: center;
-	vertical-align: middle;
-	/*display: inline;*/
-	background: transparent url(/beta/stage/images/templates/default/redcornerTL.gif) no-repeat 0px 0px;
+	z-index: 1;
 }
 
-ul#outsideSiteLinks {
-	margin: 0px;
-	padding: 0px;
-	width: 80em;
-	list-style: none;
-	display: inline;
-	text-decoration: none;
-	text-align: center;
-	vertical-align: middle;
-}
-
-ul#outsideSiteLinks *{
-	margin: 0px;
-	padding: 1px;
-	border: 0px;
-	color: white;
-	font-weight: 550;
-	display: inline;
-	list-style: none;
-	text-decoration: none;
-	text-align: center;
-	vertical-align: middle;
-	background-image: none;
-}
-
-ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
-	text-decoration: underline;
-}
-
-#laneConnexContainer{
-	position:absolute;
+#laneConnexContainer{ /* overrides of default */
 	top:45px;
 	left: 0px;
 	width: 171px;
 	height: 35px;
-	padding:0px;
-	margin: 0px;
-	border: 0px;
-	z-index: 6;
-	background: transparent;
 }
 
 #behindLaneConnexContainer{
@@ -135,7 +28,7 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	border: 0px;
 	border-left: 1px solid #ddd;
 	z-index: 3;
-	background: #ddc url(/beta/stage/images/templates/default/searchGradient.jpg) repeat-x top left;
+	background: #ddc url(/beta/images/templates/default/searchGradient.jpg) repeat-x top left;
 }
 
 #panoramicView {
@@ -145,7 +38,7 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	 width: 100%;
 	 height: 56px;
 	 overflow: hidden;
-	 background: url(/beta/stage/images/templates/default/leftPanorama.jpg) repeat-x top left;
+	 background: url(/beta/images/templates/default/leftPanorama.jpg) repeat-x top left;
 	 text-align: right;
 	 z-index: 1;
 	 border-left: 2px solid #fff; /* added to preserve width with searchContainer */
@@ -164,227 +57,12 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	display: inline;
 }
 
-#searchContainer {
-	 position: relative;
-	 top: 0px;
-	 left: 0px;
-	 width: 100%;
-	 border: 1px solid #ddd;
-	 border-top: 0px;
-	 margin: 0px;
-	 padding: 0px;
-	 background: #ddc url(/beta/stage/images/templates/default/searchGradient.jpg) repeat-x top left;
-	 text-align: center;
-	 font-weight:700;
-	 letter-spacing: 1px;
-	 z-index: 3;
-}
-/*
-#searchLinksContainer {
-	position:relative;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 2em;
-	border: 0px;
-	padding: 0px;
-	margin: 0px;
-	margin-bottom: 5px;
-	text-indent: 100px;
-	text-align: center;
-	vertical-align: top;
-}
-*/
-
-ul#searchDbs {
-	clear: both;
-	height: 3em;
-	margin: 0px;
-	padding: 0px;
-	border: 0px;
-	list-style: none;
-	text-align: center;
-	text-indent: 150px;
-	background: yellow;
-	margin-bottom: 20px;
-}
-
-ul#searchDbs li {
-	display: inline;
-	position: relative;
-	top: 0px;
-	left: 0px;
-	padding-top: 10px;
-	padding-left: 0px;
-	padding-right: 0px;
-	background-image: none;
-	text-indent: 0px;
-}
-/*
-ul#searchDbs li *{
-	height: 2.5em;
-	margin: 0px;
-
-	border: 0px;
-	padding: 0px;
-	border-right: 1px solid #996;
-	font-size: 80%;
-}
-*/
-ul#searchDbs a:link, ul#searchDbs a:visited, ul#searchDbs a:hover, ul#searchDbs a:active {
-	height: 1em;
-	margin: 0px;
-	border: 0px;
-	padding: 0px;
-	border-right: 1px solid #996;
-	font-size: 80%;
-	padding-top: 10px;
-	padding-left: 10px;
-	padding-right:10px;
-	vertical-align: bottom;
-	text-decoration: none;
-}
-
-ul#searchDbs a:hover, ul#searchDbs a:active {
-	color: black;
-	/*background: red;*/
-	background-image: url(/beta/stage/images/templates/default/searchLinkRolloverBg.jpg);
-	background-attachment: fixed;
-	background-repeat: repeat-x;
-	background-position:  0px -1px;
-}
-
-/*
-a.searchLink,  a.searchLink:link,  a.searchLink:visited, a.searchLink:hover, a.searchLink:active {
-	position: relative;
-	top: 0px;
-	color: #900;
-	margin: 0px;
-	padding: 0px;
-	border: 0px;
-	font-size: 10px;
-	font-weight: 300;
-	letter-spacing: 1px;
-	vertical-align: middle;
-	text-decoration: none;
-	background: none;
-}
-
-.searchLinkText {
-	margin: 5px;
-	padding: 5px;
-	vertical-align: bottom;
-	background: none;
-}
-
-a.searchLink:hover, a.searchLink:active {
-	font-weight: 800;
-	background: url(/beta/stage/images/templates/default/searchLinkRolloverBg.jpg) repeat fixed left top;
-	overflow: hidden;
-	z-index: 30;
-}
-
-.searchLinkDivider, .searchLinkDividerEnd {
-	position: relative;
-	top: -2px;
-	height: 2.5em;
-	margin: 0px;
-	padding: 0px;
-	border-right: 1px solid #996;
-	vertical-align: top;
-}
-
-.searchLinkDividerEnd {
-	border-right: 0px solid transparent;
-}
-*/
-#searchFormContainer {
-	margin: 0 auto;
-	margin-bottom: 5px;
-	padding-top: 2px;
-	/*width: 75em;*/
-	height: auto;
-	color: #222;
-	vertical-align: middle;
-}
-
 /*
 #searchForm select {
 	 width:15em;
 	 height: auto;
-	 font-size: 80%;
 	 margin:0 px;
 	 padding: 0px;
 	 vertical-align: middle;
 }
 */
-.searchText {
-	margin: 0 5px;
-	vertical-align: middle;
-}
-
-#searchQuery {
-	 width: 30em;
-	 height: auto;
-	 font-size: 80%;
-	 margin:0px;
-	 padding: 0px;
-	 vertical-align: middle;
-}
-
-#searchContainerRoundedCorners {
-	position:relative;
-	top:2px;
-	left:-1px;
-	width:100%;
-	height: 10px;
-	margin: 0px;
-	border: 0px;
-	padding: 0px;
-	background-color: transparent;
-	background-image: url(/beta/stage/images/templates/default/searchBL.gif);
-	background-repeat: no-repeat;
-	background-position: 0px -5px;
-}
-
-#searchBottomCorner {
-	position:absolute;
-	bottom:0px;
-	right: -2px;
-	width: 17px;
-	height: 17px;
-	padding:0px;
-	margin: 0px;
-	border: 0px;
-}
-
-/*
-#searchCornerBL {
-	position:absolute;
-	bottom:0px;
-	left: -2px;
-	width: 17px;
-	height: 17px;
-	padding:0px;
-	margin: 0px;
-	border: 0px;
-}
-*/
-#searchFormSubmitButton {
-	width:55px;
-	height: 24px;
-	vertical-align: middle;
-	border:0px;
-	margin: 0px;
-	padding: 0px;
-	background: transparent url(/beta/stage/images/templates/default/go.gif) no-repeat top center;
-}
-
-#displaySearchTaglineText {
-	margin:0px; margin-top: 10px; padding: 0px; color: #555;font-weight:400; font-size: 80%;
-}
-
-#searchTaglineText {
-	display: none;
-}
-

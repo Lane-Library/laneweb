@@ -11,8 +11,6 @@
 
   <xsl:variable name="search-id" select="/aggregate/s:search/@id"/>
   <xsl:variable name="keywords" select="/aggregate/s:search/s:query/text()"/>
-  <xsl:variable name="spellUri" select="concat($search-url,'search?id=',/aggregate/s:search/@id)"/>
-  <xsl:variable name="spell" select="document($spellUri)/s:search/s:spell"/>
 
     <xsl:template match="/aggregate">
         <xsl:apply-templates select="h:html"/>
@@ -27,23 +25,20 @@
     <xsl:template match="h:head">
         <xsl:copy>
             <xsl:apply-templates/>
-            <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=iso-8859-1" />
-            <meta name="search_id" content="{/aggregate/s:search/@id}"/>
-            <meta name="search_status" content="{/aggregate/s:search/@status}"/>
-            <meta name="search_query" content="{/aggregate/s:search/s:query}"/>
-            <meta name="search_template" content="{$template}"/>
-            <meta name="spellURI" content="{$spellUri}"/>
-             </xsl:copy>
+			<meta name="lw_searchParameters" content="id={/aggregate/s:search/@id};status={/aggregate/s:search/@status};query={/aggregate/s:search/s:query};template={$template}"/>
+		</xsl:copy>
     </xsl:template>
       
     <xsl:template match="h:div[@id='spellResults']">
-        <xsl:if test="$spell">
-	            <p>Did you mean: <a href="new-search.html?source={$template}&amp;keywords={$spell}"><strong><i><xsl:value-of select="$spell"/></i></strong></a></p>
+        <xsl:if test="/aggregate/s:search/s:spell">
+	            Did you mean: <a href="{$search-url}?source={$template}&amp;keywords={/aggregate/s:search/s:spell/text()}"><strong><i><xsl:value-of select="/aggregate/s:search/s:spell/text()"/></i></strong></a>
         </xsl:if>
-        <xsl:copy>
-            <xsl:copy-of select="@*"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
+        <xsl:if test="not(/aggregate/s:search/s:spell)">
+	        <xsl:copy>
+	            <xsl:copy-of select="@*"/>
+	            <xsl:apply-templates/>
+	        </xsl:copy>
+		</xsl:if>
     </xsl:template>
 
     <xsl:template match="h:li">
@@ -60,7 +55,7 @@
             <a class="{$status}" href="{$resource/s:url}"><xsl:value-of select="."/></a><xsl:text>: </xsl:text>
             <xsl:choose>
                 <xsl:when test="$status='successful'">
-                    <span><xsl:value-of select="$resource/s:hits"/></span>
+                    <span><xsl:value-of select="format-number($resource/s:hits, '###,###')"/></span>
                 </xsl:when>
                 <xsl:when test="$status = 'canceled'">
                     <span>timed out</span>

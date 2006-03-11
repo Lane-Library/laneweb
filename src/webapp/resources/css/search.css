@@ -1,3 +1,5 @@
+/*#contentBody {font-size:85%;}*/
+
 /* t, r, b, l */
 .hide {
 	display: none;
@@ -9,13 +11,12 @@
 	color: #000000;
 	font-weight: bold;
 }
-.SpellResults {
-	padding-left: 1.6em;
-}
 
 /* searchHeader styles used across eLibrary and incremental pages */
 .searchHeader {
-	margin-bottom:1em;
+	margin-left:0;
+	/*margin-bottom: 1px;*/
+	margin-bottom:0.7em;
 }
 #searchHeaderTable {
 	width:100%;
@@ -26,7 +27,7 @@
 	margin-top: -2px;
 	font-size:1.25em;
 */
-	padding-left: 1em;
+	padding-left: 1.6em;
 	font-weight: bold;
 	white-space: nowrap;
 }
@@ -41,6 +42,7 @@
 	background-color:#e7e2cd;
 	padding:0.6em 1.25em 0.65em 0.6em;
 	white-space: nowrap;
+	margin-left:-1px;
 /*	width:30%; */
 }
 .searchHeaderLeft {
@@ -51,138 +53,183 @@
 /*	width:30%; */
 }
 
-/* popInContent styles used for did you mean, sfx, suldb content */
-td.popInContent {
+#tabTip h3 {
+	color: #980202;
+	font-weight:bold;
+	font-style: italic;
+	margin-top: 2px;
+	margin-bottom: 10px;
+}
+#tabTip{
+	position:absolute;
+	top:200px;
+	width:150px;
+	right: 0px;
+	padding-top:1px;
+	padding-left:5px;
+	padding-bottom:5px;
+	padding-right:5px;
+	border: 1px solid #99987a;
+	background: #e0e0d1;
+}
+
+
+/* popInContent styles used for did you mean, sfx, suldb content (eLibrary and incremental) */
+/* popInContent styles used for did you mean, sfx, suldb content (eLibrary and incremental) */
+.popInContent {
+	/*clear: both;*/
 	border-top: 1px solid #99987a;
 	background: #e0e0d1;
 	padding-top: 0.5em;
 	padding-right:0em;
 	padding-bottom:0.5em;
 	padding-left:2.25em;
-	margin-top: -0.25em;
+	/*margin-top: -0.25em;*/
 	margin-right: 0em;
 	margin-bottom: 0em;
 	margin-left: -2.25em;
-}
-div.popInContent {
-	background: #e0e0d1;
-	padding-top: 0.5em;
-	padding-right:0em;
-	padding-bottom:0.5em;
-	padding-left:2.25em;
-	margin-top: -0.25em;
-	margin-right: 0em;
-	margin-bottom: 0em;
-	margin-left: -2.25em;
-}
-div.popInContent img {
-	margin-bottom:-3px;
-}
-
-#eLibraryTabs {
-	 /* fixes width, but makes results odd width:900px; */
-	display: inline;
-	white-space: nowrap;
-}
-#eLibraryTabs ul {
-	padding: 0px;
-	margin: 0px;
-	list-style-type: none;
-	display: inline;
-	white-space: nowrap;
-}
-#eLibraryTabs li {
-	padding-left: .6em;
-	display: inline;
-	white-space: nowrap;
-	background-image: none;
-}
-#eLibraryTabs ul li span:hover {
-	text-decoration: underline;
-}
-#eLibraryTabs ul li span {
-	background: #d3cebf;
-	padding: 0.25em 0.5em 0.32em 0.5em;
-	margin-left: -7px;
-	margin-right: 1px;
-	margin-bottom: 0px;
-	cursor: pointer;
-	color: #980202;
-	display: inline;
-	white-space: nowrap;
-}
-#eLibraryTabs ul li span.active {
-	background: #99987a;
-	padding: 0.25em 0.5em 0.25em 0.5em;
-	margin-left: -8px;
-	margin-right: 1px;
-	margin-bottom: -1px;
+	border-top: 5px solid #99987a;
+	border-right: 1px solid #99987a;
+	border-left: 1px solid #99987a;
 	border-bottom: 1px solid #99987a;
-	cursor: default;
-	text-decoration: none;
-	/*color: #fbf5e6;*/
-	color: #ffffff;
-	font-weight: bold;
-	font-size: 100%;
-	display: inline;
-	white-space: nowrap;
 }
-#eLibraryTabs ul.metaSearchResults {
-	/*padding-right: 25px;*/
-	display: inline;
-	white-space: nowrap;
-}
-#eLibraryTabs ul.metaSearchResults li span {
-	background: #ecece8;
-	display: inline;
-	white-space: nowrap;
-	margin-left: -8px;
-	margin-right: 0px;
-}
-#eLibraryTabs ul.metaSearchResultsRight {
-	display: inline;
-	white-space: nowrap;
-	background: url(/beta/images/templates/default/metaSearchResultsRight.gif) top right no-repeat;
-	background-color:#ecece8;
-	padding: 0.25em 0.2em 0.32em 0.7em;
-	margin-left: -7px;
-	margin-right: 1px;
-}
-#eLibraryTabs p.metaHitCount {
-	color: #393838;
-	display: inline;
-	white-space: nowrap;
-}
-#eLibraryTabs span p.hitCount {
-	color: #393838;
-	background: #d3cebf;
-	display: inline;
-	white-space: nowrap;
-}
-#eLibraryTabs span.active p.hitCount {
-	color: #ffffff;
-	background: #99987a;
-	display: inline;
-	white-space: nowrap;
-}
-div#eLibraryNewSearchResults,div#eLibraryStaticSearchResults {
-
+div#eLibrarySearchResults {
+/*
 	background: #f6f4ec;
 	border-top: 1px solid #99987a;
 	width: 97%;
 	padding-bottom:10.25em;
-
 	font-size: 85%;
-	padding-top: 0.25em;
+*/
+	/*padding-top: 0.25em;*/
 	padding-right:0em;
 	padding-left:2.25em;
-	margin-top: 0.35em;
-	margin-bottom: 0.5em;
+	/*margin-top: 0.35em;*/
+	margin-bottom: 14.5em;
 }
-div#eLibraryNewSearchResults h3,div#eLibraryStaticSearchResults h3 {
-    font-size: 1em;
+
+/*div#eLibrarySearchResults h3{
+	font-size: 1em;
 	font-weight: bold;
 	color: #003163;
+}*/
+
+#eLibraryTabContainer{
+	/*margin-top: 2px;*/
+        min-width:850px;
+        white-space:nowrap;
+}
+#eLibraryTabs {
+	display: inline;
+	white-space: nowrap;
+}
+
+#eLibraryTabs div:hover {
+	text-decoration: underline;
+}
+.eLibraryTab {
+	background: #d3cebf;
+	cursor: pointer;
+	color: #980202;
+	position:relative;
+	float: left; 
+	text-align: center;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	/*
+	padding-top: 0.25em;
+	padding-right: 0.7em;
+	padding-bottom: 0.25em;
+	padding-left: 0.7em;
+	*/
+	margin-right: 2px;
+	/*margin-bottom: 0px;*/
+/*
+	display: inline;
+	white-space: nowrap;
+*/
+}
+
+
+.eLibraryTabActive {
+	background: #99987a;
+	cursor: default;
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: bold;
+/*	font-size: 100%;*/
+	position:relative;
+	float: left; 
+	text-align: center;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	/*
+	padding-top: 0.25em;
+	padding-right: 0.7em;
+	padding-bottom: 0.25em;
+	padding-left: 0.7em;
+	*/
+	margin-right: 2px;
+	/*margin-bottom: 0px;*/
+}
+
+span.tabHitCount {
+	color: #393838;
+}
+
+.eLibraryTabActive span.tabHitCount {
+	color: #ffffff;
+}
+
+#metaSearchResultsContainer {
+	float:left;
+	position:relative;
+	text-align: center;
+}
+.metaSearchResults {
+	background-color:#ecece8;
+	cursor: pointer;
+	color: #980202;
+	position:relative;
+	float: left;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+/*
+	padding-top: 0.25em;
+	padding-right: 0.7em;
+	padding-bottom: 0.25em;
+	padding-left: 0.7em;
+*/
+	margin-left: 0px;
+	margin-right: 1px;
+	/*margin-bottom: 0px;*/
+}
+.metaSearchResultsRightCorner {
+	background: url(/beta/images/templates/default/metaSearchResultsRight.gif) top right no-repeat;
+	background-color:#ecece8;
+	cursor: pointer;
+	color: #980202;
+	position:relative;
+	float: left;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+/*
+	padding-top: 0.25em;
+	padding-right: 0.7em;
+	padding-bottom: 0.25em;
+	padding-left: 0.7em;
+*/
+	margin-left: 0px;
+	margin-right: 1px;
+	/*margin-bottom: 0px;*/
 }
 
 div#incrementalSearchResults{
@@ -191,7 +238,7 @@ div#incrementalSearchResults{
 	padding-right:0em;
 	padding-bottom:2.25em;
 	padding-left:2.25em;
-	margin-top: 0em;
+	margin-top: -0.25em;
 	margin-bottom: 0.5em;
 }
 div#incrementalSearchResults ul  {
@@ -213,7 +260,7 @@ p.micromedex {
         background-image: url(/images/list-background-line.gif);
         background-repeat: no-repeat;
         background-position: 0 0;
-        margin-bottom: -0.95em;
+        margin-bottom: 0.15em;
 }
 
 /*CY's search results*/
@@ -229,4 +276,3 @@ dl li {background-image:none;}
 #searchResults ul { margin:0;padding:0 }
 #searchHeader, .searchHeader {background-color:#E7F0F9;padding:.5em;width:97%;margin-bottom:1em;}
 */
-

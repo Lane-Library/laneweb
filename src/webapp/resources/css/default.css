@@ -1,18 +1,10 @@
-body {
-  font-family: verdana, geneva, sans-serif;
-	font-size: 80%;
-  background-color: #fff;
-	margin-top: 5px;
-	margin-right: 10px;
-	margin-bottom: 5px;
-  margin-left: 10px;
-}
+/* default template CSS */
 
 #pageContainer {
 	position: relative;
 	width: 100%;
 	min-width: 800px;
-	max-width: 150em;
+	max-width: 1200px;
 }
 
 #pageHolder {
@@ -36,12 +28,43 @@ body {
 	top: 0px;
 	left: 0px;
 	width: 138px;
-	height:20em;
+	height:40px;
 	border: 0px;
 	padding: 0px;
 	margin: 0px;
-	z-index: 2;
+	z-index: 5;
 	background: white;
+}
+
+#somLogoRightBorder {
+	position:absolute;
+	top: 21px;
+	left: 138px;
+	height: 20px;
+	border-left: 1px solid #ddd;
+	z-index: 3;
+}
+
+#somLogoBottomBorder {
+	position:absolute;
+	top: 39px;
+	left: 1px;
+	width: 138px;
+	height: 1px;
+	font-size: 1px;
+	border-bottom: 1px solid #ddd;
+	z-index: 3;
+}
+
+#searchTopCorner {
+	position: absolute;
+	top: 0px; /* compensate for 1px searchTL.gif border */
+	left: -1px; /* compensate for 1px border of its searchContainer */
+	width: 17px;
+	height: 17px;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
 }
 
 #outsideSiteLinksContainer {
@@ -53,26 +76,13 @@ body {
 	overflow: hidden;
 	border: 0px; 
 	border-left: 2px solid #fff; /* added to preserve width with searchContainer */
-	border-bottom: 2px solid white;
 	padding: 0px;
 	margin: 0px;
 	color: white;
-	font-size: 0.7em;
-	background: #900 url(/beta/stage/images/templates/default/redcornerTR.gif) no-repeat top right;
+	font-family: verdana, geneva, sans-serif; /*arial ?*/
+	background: #900 url(/beta/images/templates/default/redcornerTR.gif) no-repeat top right;
+	z-index: 4;
 }
-/*
-#redCornerTL {
-	position:relative; 
-	top:0px; 
-	left: 0px; 
-	width: 19px; 
-	height: 15px; 
-	padding:0px; 
-	margin: 0px; 
-	border: 0px; 
-	display: inline;
-}
-*/
 
 #redCornerTL {
 	position:relative; 
@@ -88,7 +98,7 @@ body {
 	text-align: center;
 	vertical-align: middle;
 	/*display: inline;*/
-	background: transparent url(/beta/stage/images/templates/default/redcornerTL.gif) no-repeat 0px 0px;
+	background: transparent url(/beta/images/templates/default/redcornerTL.gif) no-repeat 0px 0px;
 }
 
 ul#outsideSiteLinks {
@@ -120,31 +130,20 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	text-decoration: underline;
 }
 
+.greenUnderline {position: relative; left: 0px; width: 100%; height: 4px; font-size: 4px; padding: 0px; padding-left: 1px; padding-right:1px; background: transparent url(/beta/images/templates/default/greenGradient.gif) repeat-x top left;
+}
+
 #laneConnexContainer{
 	position:absolute;
-	top:45px;
-	left: 0px;
-	width: 171px;
-	height: 35px;
+	top:55px;
+	left: 17px;
+	width: 123px;
+	height: 19px;
 	padding:0px;
 	margin: 0px;
 	border: 0px;
 	z-index: 6;
 	background: transparent;
-}
-
-#behindLaneConnexContainer{
-	position:absolute;
-	top:76px;
-	left: 0px;
-	width: 170px;
-	height: 5em;
-	padding:0px;
-	margin: 0px;
-	border: 0px;
-	border-left: 1px solid #ddd;
-	z-index: 3;
-	background: #ddc url(/beta/stage/images/templates/default/searchGradient.jpg) repeat-x top left;
 }
 
 #panoramicView {
@@ -154,7 +153,7 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	 width: 100%;
 	 height: 56px;
 	 overflow: hidden;
-	 background: url(/beta/stage/images/templates/default/leftPanorama.jpg) repeat-x top left;
+	 background: url(/beta/images/templates/default/leftPanorama.jpg) repeat-x top left;
 	 text-align: right;
 	 z-index: 1;
 	 border-left: 2px solid #fff; /* added to preserve width with searchContainer */
@@ -180,30 +179,16 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	 width: 100%;
 	 border: 1px solid #ddd;
 	 border-top: 0px;
+	 border-bottom: 0px;
 	 margin: 0px;
 	 padding: 0px;
-	 background: #ddc url(/beta/stage/images/templates/default/searchGradient.jpg) repeat-x top left;
+	 padding-bottom: 3px;
+	 background: #ddc url(/beta/images/templates/default/searchGradient.jpg) repeat-x top left;
 	 text-align: center;
 	 font-weight:700;
 	 letter-spacing: 1px;
-	 z-index: 3;
+	 z-index: 2;
 }
-/*
-#searchLinksContainer {
-	position:relative;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	height: 2em;
-	border: 0px;
-	padding: 0px;
-	margin: 0px;
-	margin-bottom: 5px;
-	text-indent: 100px;
-	text-align: center;
-	vertical-align: top;
-}
-*/
 
 ul#searchDbs {
 	clear: both;
@@ -213,8 +198,7 @@ ul#searchDbs {
 	border: 0px;
 	list-style: none;
 	text-align: center;
-	text-indent: 150px;
-	background: yellow;
+	text-indent: 160px;
 	margin-bottom: 20px;
 }
 
@@ -229,24 +213,13 @@ ul#searchDbs li {
 	background-image: none;
 	text-indent: 0px;
 }
-/*
-ul#searchDbs li *{
-	height: 2.5em;
-	margin: 0px;
 
-	border: 0px;
-	padding: 0px;
-	border-right: 1px solid #996;
-	font-size: 80%;
-}
-*/
 ul#searchDbs a:link, ul#searchDbs a:visited, ul#searchDbs a:hover, ul#searchDbs a:active {
 	height: 1em;
 	margin: 0px;
 	border: 0px;
 	padding: 0px;
 	border-right: 1px solid #996;
-	font-size: 80%;
 	padding-top: 10px;
 	padding-left: 10px;
 	padding-right:10px;
@@ -256,57 +229,12 @@ ul#searchDbs a:link, ul#searchDbs a:visited, ul#searchDbs a:hover, ul#searchDbs 
 
 ul#searchDbs a:hover, ul#searchDbs a:active {
 	color: black;
-	/*background: red;*/
-	background-image: url(/beta/stage/images/templates/default/searchLinkRolloverBg.jpg);
+	background-image: url(/beta/images/templates/default/searchLinkRolloverBg.jpg);
 	background-attachment: fixed;
 	background-repeat: repeat-x;
 	background-position:  0px -1px;
 }
 
-/*
-a.searchLink,  a.searchLink:link,  a.searchLink:visited, a.searchLink:hover, a.searchLink:active {
-	position: relative;
-	top: 0px;
-	color: #900;
-	margin: 0px;
-	padding: 0px;
-	border: 0px;
-	font-size: 10px;
-	font-weight: 300;
-	letter-spacing: 1px;
-	vertical-align: middle;
-	text-decoration: none;
-	background: none;
-}
-
-.searchLinkText {
-	margin: 5px;
-	padding: 5px;
-	vertical-align: bottom;
-	background: none;
-}
-
-a.searchLink:hover, a.searchLink:active {
-	font-weight: 800;
-	background: url(/beta/stage/images/templates/default/searchLinkRolloverBg.jpg) repeat fixed left top;
-	overflow: hidden;
-	z-index: 30;
-}
-
-.searchLinkDivider, .searchLinkDividerEnd {
-	position: relative;
-	top: -2px;
-	height: 2.5em;
-	margin: 0px;
-	padding: 0px;
-	border-right: 1px solid #996;
-	vertical-align: top;
-}
-
-.searchLinkDividerEnd {
-	border-right: 0px solid transparent;
-}
-*/
 #searchFormContainer {
 	margin: 0 auto;
 	margin-bottom: 5px;
@@ -317,68 +245,46 @@ a.searchLink:hover, a.searchLink:active {
 	vertical-align: middle;
 }
 
-/*
-#searchForm select {
-	 width:15em;
-	 height: auto;
-	 font-size: 80%;
-	 margin:0 px;
-	 padding: 0px;
-	 vertical-align: middle;
-}
-*/
 .searchText {
 	margin: 0 5px;
 	vertical-align: middle;
 }
-
+/* no longer used
 #searchQuery {
 	 width: 30em;
 	 height: auto;
-	 font-size: 80%;
 	 margin:0px;
 	 padding: 0px;
 	 vertical-align: middle;
 }
-
+*/
 #searchContainerRoundedCorners {
-	position:relative;
-	top:2px;
-	left:-1px;
-	width:100%;
-	height: 10px;
+	position: absolute;
+	bottom: -2px; /* compensate for 1px searchContainer border + 1px searchB?.gif border */
+	left: -1px; /* compensate for 1px searchContainer border */
+	width: 100%;
+	height: 17px;
 	margin: 0px;
 	border: 0px;
 	padding: 0px;
 	background-color: transparent;
-	background-image: url(/beta/stage/images/templates/default/searchBL.gif);
+	background-image: url(/beta/images/templates/default/searchBL.gif);
 	background-repeat: no-repeat;
-	background-position: 0px -5px;
+	background-position: 0px -1px; /* top left: compensate for 1px searchB?.gif border */
+	z-index: 30;
 }
 
 #searchBottomCorner {
-	position:absolute;
-	bottom:0px;
-	right: -2px;
+	position: absolute;
+	bottom: 1px; /* compensate for 1px searchB?.gif border */
+	right: -2px; /* compensate for 1px top bar borders on left and right */
 	width: 17px;
 	height: 17px;
-	padding:0px;
+	padding: 0px;
 	margin: 0px;
 	border: 0px;
 }
 
-/*
-#searchCornerBL {
-	position:absolute;
-	bottom:0px;
-	left: -2px;
-	width: 17px;
-	height: 17px;
-	padding:0px;
-	margin: 0px;
-	border: 0px;
-}
-*/
 #searchFormSubmitButton {
 	width:55px;
 	height: 24px;
@@ -386,489 +292,18 @@ a.searchLink:hover, a.searchLink:active {
 	border:0px;
 	margin: 0px;
 	padding: 0px;
-	background: transparent url(/beta/stage/images/templates/default/go.gif) no-repeat top center;
+	background: transparent url(/beta/images/templates/default/go.gif) no-repeat top center;
 }
 
-#breadCrumb {
-	margin: 0px;
-	padding: 0px;
-	margin-left: 20px;
-	margin-bottom: 10px;
-	font-size: 80%;
-	color: #777;
-}
-/*pam edits*/
-#breadCrumb a:link, #breadCrumb a:visited {
-	text-decoration: none;
-	color: #990000;
-}
-#breadCrumb a:hover, #breadCrumb a:active  {
-	text-decoration: underline;
-	color: #990000;
+#displaySearchTaglineText {
+	margin:0px; 
+	margin-top: 10px; 
+	padding: 0px; 
+	color: #555;
+	font-weight:400;
 }
 
-#contentBody {
-	position: relative;
-	top:2px;
-	left: 0px;
-	margin: 0px;
-	border: 0px;
-	padding: 0px;
-	z-index: 3;
-}
-
-.insideLaneBox, .outsideLaneBox, .centralTopicBox, .generalTopicBox, .additionalTopicBox {
-	height: auto;
-	margin: 0px;
-	margin-bottom: 15px;
-	padding: 0px;
-	/* color: #900; pm removed feb 6 */
-	overflow: hidden;
-}
-.insideLaneBox, .generalTopicBox, .additionalTopicBox {
-	font-size: 90%;
-}
-
-/* pm edits */
-.outsideLaneBox a:link {
-	font-size: 110%;
-}
-.outsideLaneBox {
-	font-size: 80%;
-}
-
-.centralTopicBox, .additionalTopicBox {
-	width: auto;
-}
-
-.insideLaneBox, .outsideLaneBox, .generalTopicBox  {
-	width: 146px;
-	/*background: transparent url(/beta/stage/images/templates/default/redcornerTR.gif) no-repeat top right;*/
-}
-
-.generalTopicBox {
-	border: 1px solid #ccc;
-}
-
-
-/*
-.insideLaneBoxTitle, .insideLaneBoxSquareTitle,
-.insideLaneBox369Title, .insideLaneBox9fb3c3Title, 
-.insideLaneBox03cTitle, .insideLaneBox06cTitle, .insideLaneBox36cTitle, .insideLaneBox69cTitle, .insideLaneBox36bTitle,
-.outsideLaneBoxTitle, .centralTopicBoxTitle, .generalTopicBoxTitle, .additionalTopicBoxTitle,
-.insideLaneBoxIRTTitle {
-	font-size:90%;
-	padding-left: 10px;
-	padding-right: 2px;
-	padding-top: 3px;
-	padding-bottom: 3px;
-	text-align: center;
-	font-weight: 800;
-}
-
-.insideLaneBoxTitle, .insideLaneBoxImageTitle, .insideLaneBoxSquareTitle, 
-.insideLaneBox369Title, .insideLaneBox9fb3c3Title, 
-.insideLaneBox03cTitle, .insideLaneBox06cTitle, .insideLaneBox36cTitle, .insideLaneBox69cTitle, .insideLaneBox36bTitle,
-.insideLaneBoxIRTTitle {
-	color: white;
-	background-image: url(/beta/stage/images/templates/default/whiteCornerBlueBox.gif);
-	background-repeat: no-repeat;
-	background-position: top left;
-}
-
-.insideLaneBoxTitle, .insideLaneBoxSquareTitle, .insideLaneBox369Title {
-	background-color: #369;
-}
-
-.insideLaneBox03cTitle {
-	background-color: #03c;
-}
-.insideLaneBox06cTitle {
-	background-color: #06c;
-}
-.insideLaneBox36bTitle {
-	background-color: #36b;
-}
-.insideLaneBox36cTitle {
-	background-color: #36c;
-}
-.insideLaneBox69cTitle {
-	background-color: #69c;
-}
-
-.insideLaneBoxIRTTitle {
-	background-color: #40668c;
-}
-
-.insideLaneBoxSquareTitle {
-	background-image: none;
-}
-
-.insideLaneBoxImageTitle {
-	padding: 0px;
-}
-
-.insideLaneBox9fb3c3Title {
-	background-color: #9fb3c3;
-}
-
-.outsideLaneBoxTitle {
-	color: #996;
-	text-transform: uppercase;
-	background: #d9d7b0 url(/beta/stage/images/templates/default/beigeUpRightCorner.gif) no-repeat top right;
-}
-
-.centralTopicBoxTitle {
-	width: 13em;
-	color: white;
-	font-size: 90%;
-	font-weight: 650;
-	background: #996 url(/beta/stage/images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
-	border: 0px;
-	border-bottom: 3px solid #dbdbc9;
-}
-
-.additionalTopicBoxTitle {
-	width: 13em;
-	color: white;
-	font-size: 90%;
-	font-weight: 650;
-	background: #9fb3c3 url(/beta/stage/images/templates/default/blueUpRightCorner.gif) no-repeat top right;
-	border: 0px;
-	border-bottom: 1px solid #fff;
-}
-
-.generalTopicBoxTitle {
-	padding: 6px;
-}
-*/
-
-.insideLaneBox h2, .insideLaneBox h2.SquareTitle,
-.insideLaneBox h2.title369, .insideLaneBox h2.title9fb3c3, 
-.insideLaneBox h2.title03c, .insideLaneBox h2.title06c, .insideLaneBox h2.title36c, .insideLaneBox h2.title69c, .insideLaneBox h2.title36b,
-.outsideLaneBox h2, .centralTopicBox h2, .generalTopicBox h2, .additionalTopicBox h2,
-.insideLaneBox h2.IRTTitle {
-	font-size:90%;
-	padding-left: 10px;
-	padding-right: 2px;
-	padding-top: 3px;
-	padding-bottom: 3px;
-	text-align: center;
-	font-weight: 800;
-	margin: 0px;
-}
-
-.insideLaneBox h2, .insideLaneBox h2.ImageTitle, .insideLaneBox h2.SquareTitle, 
-.insideLaneBox h2.title369, .insideLaneBox h2.title9fb3c3, 
-.insideLaneBox h2.title03c, .insideLaneBox h2.title06c, .insideLaneBox h2.title36c, .insideLaneBox h2.title69c, .insideLaneBox h2.title36b,
-.insideLaneBox h2.IRTTitle {
-	color: white;
-	background-image: url(/beta/stage/images/templates/default/whiteCornerBlueBox.gif);
-	background-repeat: no-repeat;
-	background-position: top left;
-}
-
-.insideLaneBox h2, .insideLaneBox h2.SquareTitle, .insideLaneBox h2.title369 {
-	background-color: #369;
-}
-
-.insideLaneBox h2.title03c {
-	background-color: #03c;
-}
-.insideLaneBox h2.title06c {
-	background-color: #06c;
-}
-.insideLaneBox h2.title36b {
-	background-color: #36b;
-}
-.insideLaneBox h2.title36c {
-	background-color: #36c;
-}
-.insideLaneBox h2.title69c {
-	background-color: #69c;
-}
-
-.insideLaneBox h2.IRTTitle {
-	background-color: #40668c;
-}
-
-.insideLaneBox h2.SquareTitle {
-	background-image: none;
-}
-
-.insideLaneBox h2.ImageTitle {
-	padding: 0px;
-}
-
-.insideLaneBox h2.title9fb3c3 {
-	background-color: #9fb3c3;
-}
-
-.outsideLaneBox h2 {
-	color: #996;
-	text-transform: uppercase;
-	background: #d9d7b0 url(/beta/stage/images/templates/default/beigeUpRightCorner.gif) no-repeat top right;
-}
-
-.centralTopicBox h2 {
-	width: 13em;
-	color: white;
-	font-size: 90%;
-	font-weight: 650;
-	background: #996 url(/beta/stage/images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
-	border: 0px;
-	border-bottom: 3px solid #dbdbc9;
-}
-
-.additionalTopicBox h2 {
-	width: 13em;
-	color: white;
-	font-size: 90%;
-	font-weight: 650;
-	background: #9fb3c3 url(/beta/stage/images/templates/default/blueUpRightCorner.gif) no-repeat top right;
-	border: 0px;
-	border-bottom: 1px solid #fff;
-}
-
-.generalTopicBox h2 {
-	padding: 6px;
-}
-
-.buttonBox {
-	background-color: #f2f3ed;
-	border: 1px solid #e0dfc2;
-}
-
-.generalTopicBoxDivider {
-	width: 124px;
-	height: 6px;
-	font-size: 6px; /* avoid default auto height in IE */
-	background-color: #e9e9e9/*#d7d7c3*/;
-	margin-right: 11px;
-	margin-left: 11px;
-	text-align: center;
-}
-
-.insideLaneBoxContent, .outsideLaneBoxContent, .centralTopicBoxContent, .generalTopicBoxContent, .additionalTopicBoxContent {
-	padding: 5px;
-	padding-left: 20px;
-	padding-right: 10px;
-	/*text-indent: 10px;*/
-	text-align: left;
-}
-
-.insideLaneBoxContent h2, .outsideLaneBoxContent h2, .centralTopicBoxContent h2, .generalTopicBoxContent h2, .additionalTopicBoxContent h2 {
+#searchTaglineText {
 	display: none;
-}
-
-.insideLaneBoxContent {
-	margin-top: 1px;
-	border: 1px solid #ccc;
-	background: #fff url(/beta/stage/images/templates/default/blueBoxGradient.jpg) repeat-x bottom left;
-}
-
-.centralTopicBoxContent {
-	border: 1px solid #dcdbdb;
-}
-
-.outsideLaneBoxContent {
-	background: #f2f3ed url(/beta/stage/images/templates/default/beigeLowLeftCorner.gif) no-repeat bottom left;
-}
-
-.additionalTopicBoxContent {
-	background: url(/beta/stage/images/templates/default/blueToWhiteBoxGrad.jpg) repeat-x top left;
-}
-
-div#bottomCurvedCorner {
-	position:relative;
-	bottom:10px;
-	left:0px;
-	width:100%;
-	height: 10px;
-	margin: 0px;
-	border: 0px;
-	padding: 0px;
-	background-color: transparent;
-	background-image: url(/beta/stage/images/templates/default/searchBL.gif);
-	background-repeat: no-repeat;
-	background-position: 0px 0px;
-}
-
-#sampleBoxBottomCorner {
-	position:absolute;
-	bottom:0px;
-	right: -2px;
-	width: 17px;
-	height: 17px;
-	padding:0px;
-	margin: 0px;
-	border: 0px;
-}
-
-.topCurvedCorner{
-	position:absolute;
-	top:0px;
-	left: 0px;
-	width: 12px;
-	height: 12px;
-	padding:0px;
-	margin: 0px;
-	border: 0px;
-	z-index: 50;
-}
-
-#footer {
-	clear: both;
-	height: auto;
-	margin: 0 auto;
-	margin-top: 15px;
-	border-top: 1px solid #ccc;
-	background: transparent url(/beta/stage/images/templates/default/footerBg.jpg) repeat-x top left;
-	font-size: 80%;
-}
-
-#footer td {
-	white-space: nowrap;
-}
-
-.footerComment {
-	font-style: italic;
-	color: #333;
-}
-
-#footer a:link, #footer a:visited, #footer a:hover, #footer a:active {
-	text-decoration: none;
-}
-
-.portalTitle {
-	/*padding-bottom: 15px;*/
-	font-family: serif;
-	font-size: 200%;
-	font-weight: 700;
-	color: #369;
-}
-
-/* Clinical trials -- testing */
-
-.insideLaneBoxContent ul, .outsideLaneBoxContent ul {
-	padding: 0px;
-	margin: 0px;
-}
-
-.insideLaneBoxContent li, .outsideLaneBoxContent li {
-	display: list-item;
-	background-image: none;
-	list-style: disc outside;
-	padding: 0px;
-	margin: 0px;
-}
-
-td#centralColumn {
-	padding-left: 20px;
-	padding-right: 20px;
-}
-
-div#otherPortalOptions {
-	position:relative;
-	top: 1em;
-	left: 0px;
-	width: 100%;
-	height: 1em;
-	background: /*red*/transparent;
-}
-
-#portalForm select{
-	position: absolute;
-	bottom: 0px;
-	right: 0px;
-	width: 15em;
-	height: auto;
-	z-index: 100;
-}
-
-/*button-like box experiment*/
-
-/* set the image to use and establish the lower-right position */
-.cssbox, .cssbox_body, .cssbox_head, .cssbox_head h2 {
-	background: transparent url(/beta/stage/images/templates/default/buttonLikeBox300px.jpg) no-repeat bottom right;
-}
-.cssbox {
-	width: 146px !important; /* intended total box width - padding-right(next) */
-	width: 131px; /* IE Win = width - padding */
-	padding-right: 15px; /* the gap on the right edge of the image (not content padding) */
-	margin: 20px auto; /* use to position the box */
-}
-/* set the top-right image */
-.cssbox_head {
-	background-position: top right;
-	margin-right: -15px; /* pull the right image over on top of border */
-	padding-right: 40px; /* right-image-gap + right-inside padding */
-}
-/* set the top-left image */
-.cssbox_head h2 {
-	background-position: top left;
-	margin: 0; /* reset main site styles*/
-	border: 0; /* ditto */
-	padding: 25px 0 15px 40px; /* padding-left = image gap + interior padding ... no padding-right */
-	height: auto !important;
-	height: 1%; /* IE Holly Hack */
-}
-/* set the lower-left corner image */
-.cssbox_body {
-	background-position: bottom left;
-	margin-right: 25px; /* interior-padding right */
-	padding: 15px 0 15px 40px; /* mirror .cssbox_head right/left */
-} 
-
-select {
-	font-family: verdana, geneva, sans-serif;
-}
-
-/*******************************
-pam adds below feb 6 
-*******************************/
-
-h1 {
-	font-family: serif;
-	font-size: 200%;
-	font-weight: 700;
-	color: #40668c;
-	margin-top:0;
-}
-h2 {
-	color: #000000;
-	font-size: 100%;
-	font-weight: 600;
-	padding-bottom: 0;
-	margin-bottom: 0;
-}
-.pList {
-	padding-top:0;
-	margin-top:0;
-}
-a {
-	color: #990000;
-}
-a:link, a:visited {
-	color: #990000;
-	text-decoration: none;
-}
-a:hover, a:active {
-	color: #003366;
-	text-decoration: underline;
-}
-
-p a:link, p a:visited { 
-	text-decoration: underline;
-}
-
-.outsideLaneBox h2 {
-	color: #996;
-	text-transform: uppercase;
-	background: #d9d7b0 url(/beta/stage/images/templates/default/beigeUpRightCorner.gif) no-repeat top right;
-}
-
-#centralColumn h2 {
-	color:#444444;
 }
 

@@ -25,6 +25,26 @@ function MM_swapImage() { //v3.0
   var i,j=0,x,a=arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
    if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(typeof x.oSrc == 'undefined') x.oSrc=x.src; x.src=a[i+2];}
 }
+
+function listSearchTagline(select) {
+	var elementId = select.options[select.selectedIndex].value;
+	var elementContainerForDisplayText = document.getElementById(elementId + "SearchTagline");
+	document.getElementById("displaySearchTaglineText").innerHTML = (elementContainerForDisplayText != null) ? elementContainerForDisplayText.innerHTML : document.getElementById("eResourcesSearchTagline").innerHTML;
+}
+
+function startState(url) {
+	var id, img;
+		if (url.indexOf('/online/') != -1 && (url.substring(url.indexOf('/online/') + "/online/".length, url.length)).indexOf('ej') != -1) { id='eJourn'; img='eJournOn.jpg'; }
+		else if (url.indexOf('/clinician/') != -1) { id='clin'; img='clinOn.jpg'; }
+		else if (url.indexOf('/researcher/') != -1) { id='research'; img='bioresearchOn.jpg'; }
+		else if (url.indexOf('/services/') != -1) { id='services'; img='laneServicesOn.jpg'; }
+		else {id='eLibrary'; img='eLibOn.jpg'; }
+		
+		MM_swapImage(id,'',imagePath+img,1);
+		listSearchTagline(document.getElementById("source"));
+}
+
+/*
 function startState(str) {
 	var id, img;
 	if (str == 'home') { 
@@ -40,6 +60,7 @@ function startState(str) {
 		MM_swapImage(id,'',imagePath+img,1);
 	}
 }
+*/
 function openLink(url) {
    openSearchResult(url);
 /*
@@ -55,6 +76,7 @@ function openSearchResult(url) {
     window.open(url, '', 'width=700,height=650,directories=yes,menubar=yes,location=yes,left=75,toolbar=yes,scrollbars=yes,resizable=yes,status=yes,top=100');
 }
 
+/*
 function submitSearch() {
   var source = document.searchForm.source.options[document.searchForm.source.selectedIndex].value;
   var keywords = document.searchForm.keywords.value;
@@ -99,3 +121,4 @@ function submitSearch() {
   searching = true;
   return true;
 }
+*/

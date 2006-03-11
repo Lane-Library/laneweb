@@ -1,13 +1,13 @@
 /*** content CSS ***/
 
 body {
-  font-family: verdana, geneva, sans-serif;
-	font-size: 80%;
-  background-color: #fff;
+	font-family: verdana, geneva, sans-serif;
+	font-size: 65%;
+	background-color: #fff;
 	margin-top: 5px;
 	margin-right: 10px;
 	margin-bottom: 5px;
-  margin-left: 10px;
+	margin-left: 10px;
 }
 
 #breadCrumb {
@@ -15,8 +15,8 @@ body {
 	padding: 0px;
 	margin-left: 17px;
 	margin-bottom: 10px;
-	font-size: 80%;
 	color: #777;
+	font-size: 0.9em;
 }
 
 #breadCrumb a:link, #breadCrumb a:visited {
@@ -36,6 +36,7 @@ body {
 	border: 0px;
 	padding: 0px;
 	z-index: 3;
+	font-size: 1.1em;
 }
 
 .sideBlueBox, .sideTanBox, .centerGreenBox, .whiteBox, .centerBlueBox {
@@ -45,15 +46,8 @@ body {
 	padding: 0px;
 	overflow: hidden;
 }
-.sideBlueBox, .whiteBox, .centerBlueBox {
-	font-size: 90%;
-}
-
-.sideTanBox a:link {
-	font-size: 110%;
-}
-.sideTanBox {
-	font-size: 80%;
+#leftColumn, #rightColumn {
+	font-size: 1em;
 }
 
 .sideBlueBox, .sideTanBox, .whiteBox  {
@@ -71,7 +65,6 @@ body {
 
 .sideBlueBox h2, .sideBlueBox h2.SquareTitle,
 .sideTanBox h2, .centerGreenBox h2, .whiteBox h2, .centerBlueBox h2 {
-	font-size:90%;
 	padding-top: 3px;
 	padding-bottom: 3px;
 	text-align: center;
@@ -84,7 +77,7 @@ body {
 }
 
 #leftColumn .sideBlueBox h2 {
-	background-image: url(/beta/stage/images/templates/default/whiteCornerBlueBoxTL.gif);
+	background-image: url(/beta/images/templates/default/whiteCornerBlueBoxTL.gif);
 	background-repeat: no-repeat;
 	background-position: top left;
 }
@@ -95,7 +88,7 @@ body {
 }
 
 #rightColumn .sideBlueBox h2   {
-	background-image: url(/beta/stage/images/templates/default/whiteCornerBlueBoxTR.gif);
+	background-image: url(/beta/images/templates/default/whiteCornerBlueBoxTR.gif);
 	background-repeat: no-repeat;
 	background-position: top right;
 }
@@ -121,13 +114,13 @@ body {
 #leftColumn .sideTanBox h2 {
 	color: #535548;
 	text-transform: uppercase;
-	background: #d9d7b0 url(/beta/stage/images/templates/default/beigeTopLeftCorner.gif) no-repeat top left;
+	background: #d9d7b0 url(/beta/images/templates/default/beigeTopLeftCorner.gif) no-repeat top left;
 }
 
 #rightColumn .sideTanBox h2 {
 	color: #535548;
 	text-transform: uppercase;
-	background: #d9d7b0 url(/beta/stage/images/templates/default/beigeTopRightCorner.gif) no-repeat top right;
+	background: #d9d7b0 url(/beta/images/templates/default/beigeTopRightCorner.gif) no-repeat top right;
 }
 
 .centerGreenBox h2 {
@@ -135,9 +128,7 @@ body {
 	padding-left: 2px;
 	padding-right: 15px;
 	color: white !important;
-	font-size: 90%;
-	font-weight: 650;
-	background: #996 url(/beta/stage/images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
+	background: #996 url(/beta/images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
 	border: 0px;
 	border-bottom: 3px solid #dbdbc9;
 }
@@ -147,10 +138,7 @@ body {
 	padding-left: 2px;
 	padding-right: 15px;
 	color: white !important;
-	font-size: 100%;
-	font-weight: 650;
-	background: #6784A2 url(/beta/stage/images/templates/default/whiteCornerBlueBoxTR.gif) no-repeat top right;
-	/* background: #6784A2 url(/beta/stage/images/templates/default/blueUpRightCorner.gif) no-repeat top right; */
+	background: #6784A2 url(/beta/images/templates/default/whiteCornerBlueBoxTR.gif) no-repeat top right;
 	border: 0px;
 	border-bottom: 1px solid #fff;
 }
@@ -195,7 +183,7 @@ body {
 .sideBlueBoxLongContent {
 	margin-top: 1px;
 	border: 1px solid #ccc;
-	background: #fff url(/beta/stage/images/templates/default/blueBoxGradient.jpg) repeat-x bottom left;
+	background: #fff url(/beta/images/templates/default/blueBoxGradient.jpg) repeat-x bottom left;
 }
 
 .centerGreenBoxContent {
@@ -203,15 +191,15 @@ body {
 }
 
 #leftColumn .sideTanBoxContent {
-	background: #f2f3ed url(/beta/stage/images/templates/default/beigeBottomRightCorner.gif) no-repeat bottom right;
+	background: #f2f3ed url(/beta/images/templates/default/beigeBottomRightCorner.gif) no-repeat bottom right;
 }
 
 #rightColumn .sideTanBoxContent {
-	background: #f2f3ed url(/beta/stage/images/templates/default/beigeBottomLeftCorner.gif) no-repeat bottom left;
+	background: #f2f3ed url(/beta/images/templates/default/beigeBottomLeftCorner.gif) no-repeat bottom left;
 }
 
 .centerBlueBoxContent {
-	background: url(/beta/stage/images/templates/default/blueToWhiteBoxGrad.jpg) repeat-x top left;
+	background: url(/beta/images/templates/default/blueToWhiteBoxGrad.jpg) repeat-x top left;
 }
 
 div#bottomCurvedCorner {
@@ -224,7 +212,7 @@ div#bottomCurvedCorner {
 	border: 0px;
 	padding: 0px;
 	background-color: transparent;
-	background-image: url(/beta/stage/images/templates/default/searchBL.gif);
+	background-image: url(/beta/images/templates/default/searchBL.gif);
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
 }
@@ -258,8 +246,7 @@ div#bottomCurvedCorner {
 	margin: 0 auto;
 	margin-top: 15px;
 	border-top: 1px solid #ccc;
-	background: transparent url(/beta/stage/images/templates/default/footerBg.jpg) repeat-x top left;
-	font-size: 80%;
+	background: transparent url(/beta/images/templates/default/footerBg.jpg) repeat-x top left;
 }
 
 #footer td {
@@ -275,20 +262,20 @@ div#bottomCurvedCorner {
 	text-decoration: none;
 }
 
-.portalTitle {
+h1, .portalTitle {
 	padding-bottom: 15px;
 	font-family: serif;
-	font-size: 200%;
 	font-weight: 700;
 	color: #369;
+	font-size: 1.2em;
 }
 
 /* Clinical trials -- testing */
 
 /*.sideBlueBoxShortContent ul, .sideBlueBoxLongContent ul, .sideTanBoxContent ul {*/
 ul {
-	padding: 0px;
-	margin: 0px;
+	padding: .2em;
+	margin: 0;
 }
 
 ul ul {
@@ -296,7 +283,7 @@ ul ul {
 }
 li {
 	display: list-item;
-	background-image: url(/beta/stage/images/templates/default/list-background-line.gif);
+	background-image: url(/beta/images/templates/default/list-background-line.gif);
 	background-repeat: no-repeat;
 	background-position: 0px -3px;
 	list-style: none;
@@ -324,9 +311,10 @@ li img {
 */
 td.centralColumn {
 	width:auto;
-	padding-left: 20px;
-	padding-right: 20px;
-	text-align: center; /*exploiting IE hack to center column boxes*/
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 1.1em;
+	/* text-align: center; exploiting IE hack to center column boxes*/
 }
 
 td.centralColumn div {
@@ -359,7 +347,7 @@ div#otherPortalOptions {
 
 /* set the image to use and establish the lower-right position */
 .cssbox, .cssbox_body, .cssbox_head, .cssbox_head h2 {
-	background: transparent url(/beta/stage/images/templates/default/buttonLikeBox300px.jpg) no-repeat bottom right;
+	background: transparent url(/beta/images/templates/default/buttonLikeBox300px.jpg) no-repeat bottom right;
 }
 .cssbox {
 	width: 146px !important; /* intended total box width - padding-right(next) */
@@ -395,20 +383,38 @@ select {
 
 h1 {
 	font-family: serif;
-	font-size: 150%;
+	font-size: 1.5em;
 	font-weight: 700;
 	color: #40668c;
-	margin-top:0;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	/*margin-top:0;*/
 }
+
 h2 {
-	color: #000;
-	font-size: 100%;
-	font-weight: 600;
+	color: #444;
+	font-weight: 700;
 }
-h1, h2, h3, h4, h5 {
+
+h2, h3, h4, h5 {
 	padding-bottom: 0;
 	margin-bottom: 0;
 }
+
+h2, h3 {
+	font-size: 0.9em;
+}
+
+.centralColumn h2 {
+	font-size: 1.0em;
+}
+
+.centralColumn .centerBlueBox h2, .centralColumn .whiteBox h2, .centralColumn .centerGreenBox h2 {
+	font-size: 0.9em;
+}
+
 .pList {
 	padding-top:0;
 	margin-top:0;
@@ -424,68 +430,83 @@ a:hover, a:active {
 	color: #036;
 	text-decoration: underline !important;
 }
-
 p a:link, p a:visited { 
 	text-decoration: underline;
 }
 p.pList a:link, p.pList a:visited { 
 	text-decoration: none;
 }
-/* Pam, this is a repeat, I think... */
-/*
-.sideTanBox h2 {
-	color: #996;
-	text-transform: uppercase;
-	background: #d9d7b0 url(/beta/stage/images/templates/default/beigeTopRightCorner.gif) no-repeat top right;
-}
-*/
-.centralColumn h2 {
-	color:#444;
+h2 a:link, h2 a:visited {
+	text-decoration: underline;
 }
 
 /* eJournals */
 #alphabet {
+	width: 100%;
+	padding-left: 0;
+	margin-top: 10px;
+	/*
 	margin-top: 8px;
 	margin-bottom: 8px;
-	padding-left:.5em;
+	
+	padding-left:.5em;*/
+}
+#alphabet .alphaExtras {
+	background: #ecece8;
+	padding: 3px;
+	margin-left: 0px;
+	margin-right: 1px;
+	margin-top: 0px;
+	margin-bottom:0px;
 }
 #alphabet .letter  {
-	font-size: 1em;
-	font-weight: bold;
 	background: #d3cebf;
 	padding: 3px;
-	margin-right: 3px;
-	margin-top:0;
-	margin-bottom:0;
-	border: 1px #FFFFFF solid;
+	margin-left: 0px;
+	margin-right: 1px;
+	margin-top: 0px;
+	margin-bottom:0px;
+}
 /*
-#d3cebf 
-#99987a - selected color
-#ecece8
 
-orig
-#F3F4F8
-
-border -- #003163
-*/
-}
-
-.alphaExtras {
-	margin-left: 1em;
-}
 #alphaBrowse {
 	background-color:#e7e2cd;
 	padding:0.6em 1.25em 0.6em 0.6em;
 	margin-top:0;
-	margin-bottom: .5em;
-}
-#alphaBrowse p {
-	margin:0;
+	margin-bottom: 15px;
+}*/
+.browseTagline {
+	clear: both;
+	margin-left:0;
 	padding-left:.5em;
-	font-size: .9em;
+	border-top: 4px #99987a solid;
+	border-right: 1px #99987a solid;
+	border-left: 1px #99987a solid;
+	border-bottom: 1px #99987a solid;
+	background: #e0e0d1;
+	margin-top: 0px;
+	padding-top: 2px;
+	padding-bottom: 2px;
 }
 
 .onlineBrowseHeader {
 	margin-top: 1.5em;
 	margin-bottom:0;
+}
+
+.taglineContainer{
+	clear: both;
+	width: 100%;
+	background: #e0e0d1;
+	padding-top:5px;
+	padding-right:0px;
+	padding-bottom:5px;
+	padding-left:20px;
+	margin-right: 0em;
+	margin-bottom: 15px;
+	margin-left: 0px;
+	border-top: 5px solid #99987a;
+	border-right: 1px solid #99987a;
+	border-left: 1px solid #99987a;
+	border-bottom: 1px solid #99987a;
 }

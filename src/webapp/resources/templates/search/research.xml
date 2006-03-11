@@ -16,7 +16,7 @@
 				</tr>
 				<tr>
 					<td class="popInContent" colspan="3">
-				        <div id="spellResults"><img border="0" src="/images/templates/default/smallLaneX.gif" alt="X" /> Also try <a href="search.html?source=clinical&amp;id={$id}">Clinical Search</a></div>
+				        <div id="spellResults">Go to the <a href="researcher/index.html">Bioresearch Portal</a> to find other tools or explore by category</div>
 					</td>
 				</tr>
 			</table>

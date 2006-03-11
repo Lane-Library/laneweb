@@ -16,7 +16,7 @@
 				</tr>
 				<tr>
 					<td class="popInContent" colspan="3">
-				        <div id="spellResults"><img border="0" src="/images/templates/default/smallLaneX.gif" alt="X" /> Also try <a href="search.html?source=peds&amp;id={$id}">Pediatrics Search</a></div>
+				        <div id="spellResults">Go to the  <a href="clinician/index.html">Clinical Portal</a> for sources not included in this search<br /> Limit to <a href="search.html?source=peds&amp;id={$id}">Pediatrics</a></div>
 					</td>
 				</tr>
 			</table>

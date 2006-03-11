@@ -3,7 +3,7 @@
 //
 var GLOBALS = new Object();
 GLOBALS.basePath = '/beta';
-GLOBALS.baseImagePath = '/beta/images/templates/default';
+GLOBALS.baseImagePath = GLOBALS.basePath + '/images/templates/default';
 GLOBALS.lanewebTemplate = 'default';
 GLOBALS.proxyPrefix = 'http://laneproxy.stanford.edu/login?url=';
 GLOBALS.needsProxy = getMetaContent(document,'lw_proxyLinks');
@@ -12,131 +12,130 @@ GLOBALS.needsProxy = getMetaContent(document,'lw_proxyLinks');
 //**************************
 // slice results into format tabs
 //
-var eLibraryTabLabels 	= new Array('All','eJournals','Databases','eBooks','Calculators','Lane Services');
-var eLibraryTabDivs = new Array('all','ej','database','book','cc','faq');
-var eLibraryResultCounts	= new Array();
+var eLibraryTabLabels = new Array('All','eJournals','Databases','eBooks','Calculators','Lane Services');
+var eLibraryTabIDs = new Array('all','ej','database','book','cc','faq');
+var eLibraryResultCounts = new Array();
 
-function geteLibraryTabCount(limitType){
-	var staticResults = document.getElementById('eLibraryStaticSearchResults');
-	var staticResultDivs = staticResults.getElementsByTagName('div');
-	var staticResultLinks = new Array();
-	var count = 0;
-
-	for (var i = 0; i < staticResultDivs.length; i++){
-		if(staticResultDivs[i].getAttribute('id') == limitType){
-			staticResultLinks = staticResultDivs[i].getElementsByTagName('a');
-		}
-	}
-
-	for (var y = 0; y < staticResultLinks.length; y++){
-			count++
-	}
-
-	if(document.getElementById('keywordresult')){
-		var keyword = document.getElementById('keywordresult').innerHTML;
-		var keywordUri = cleanKW(keyword);
-	}
-	
-	//if count is zero, we want to create popIn content
-	if(!staticResultLinks.length && !document.getElementById('popIn-' + limitType)){
-		var body = document.getElementsByTagName("body").item(0);
-		var bC = document.createElement('div');
-		bC.className = 'hide';
-		bC.innerHTML = '<img border="0" src="' + GLOBALS.baseImagePath + '/smallLaneX.gif" alt="X" /> Also try <a href="' + GLOBALS.basePath + '/search.html?source=clinical&template=' + GLOBALS.lanewebTemplate + '&keywords=' + keywordUri +'">Clinical Search</a>';
-		bC.setAttribute('id','popIn-' + limitType);
-		body.appendChild(bC);
-	}
-	return count;
+function geteLibraryTabCount(tabID){
+	var tabResultLinks = document.getElementById(tabID).getElementsByTagName('dt');
+	//var tabResultLinks = document.getElementById(tabID).getElementsByTagName('a');
+	return tabResultLinks.length;
 }
 
 function painteLibraryTabs(){
-	//var all = 0;
-	for(var i = 1; i < eLibraryTabDivs.length; i++){
-		eLibraryResultCounts[i] = geteLibraryTabCount(eLibraryTabDivs[i]);
-		//all = all + eLibraryResultCounts[i];
+
+	for(var i = 0; i < eLibraryTabIDs.length; i++){
+		eLibraryResultCounts[eLibraryTabIDs[i]] = geteLibraryTabCount(eLibraryTabIDs[i]);
 	}
-	//eLibraryResultCounts[0] = all;
-	eLibraryResultCounts[0] = geteLibraryTabCount('all');
 
 	var bar = '';
 	for(var i = 0; i < eLibraryTabLabels.length; i++){
-		bar = bar + '<li><span class="' + eLibraryTabDivs[i] + '" name="' + eLibraryTabDivs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabDivs[i] + '\');">' + eLibraryTabLabels[i] + ': <p class="hitCount">' + eLibraryResultCounts[i] + '</p></span></li>';
+		bar = bar + '<div id="' + eLibraryTabIDs[i] + 'Tab" class="eLibraryTab" name="' + eLibraryTabIDs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabIDs[i] + '\');">' + eLibraryTabLabels[i] + '<br /><span class="tabHitCount">' + intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]]) + '</span></div>';
 	}
-
-	if(document.getElementById('metaSearchResultContainer')){
-		document.getElementById('eLibraryTabs').innerHTML = '<ul>' + bar + '</ul><ul id="metaSearchResultContainer">' + document.getElementById('metaSearchResultContainer').innerHTML + '</ul><ul class="metaSearchResultsRight">&nbsp; </ul>';
-	}
-	else{
-		//document.getElementById('eLibraryTabs').innerHTML = '<ul>' + bar + '</ul><ul id="faqSearchResults" class="metaSearchResults"></ul><ul id="loisSearchResults" class="metaSearchResults"></ul><ul id="pubmedSearchResults" class="metaSearchResults"></ul><ul id="googleSearchResults" class="metaSearchResults"></ul><ul class="metaSearchResultsRight">&nbsp; </ul>';
-		document.getElementById('eLibraryTabs').innerHTML = '<ul>' + bar + '</ul><ul id="metaSearchResultContainer"><ul id="faqSearchResults" class="metaSearchResults"></ul><ul id="loisSearchResults" class="metaSearchResults"></ul><ul id="pubmedSearchResults" class="metaSearchResults"></ul><ul id="googleSearchResults" class="metaSearchResults"></ul></ul><ul class="metaSearchResultsRight">&nbsp; </ul>';
-	}
+	document.getElementById('eLibraryTabs').innerHTML = bar;
 }
 
-function showeLibraryTab(limitType){
+function showeLibraryTab(eLibraryActiveTab){
 
 	// if tab parameter sent in URL, default to specified tab
 	// otherwise, default to 'all'
-	if (limitType == 'default'){
-		for (var i = 0; i < eLibraryTabDivs.length; i++){
-			if (getQueryContent('tab') == eLibraryTabDivs[i]){
-				limitType = eLibraryTabDivs[i];
+	if (!eLibraryActiveTab){
+		eLibraryActiveTab = 'all'; // default to all
+		for (var i = 0; i < eLibraryTabIDs.length; i++){
+			if (getQueryContent('tab') == eLibraryTabIDs[i]){
+				eLibraryActiveTab = eLibraryTabIDs[i];
 			}
-		}
-		if (limitType == 'default') {
-			limitType = 'all';
 		}
 	}
 
 	// swap active tab link out
-	var tabs = document.getElementById('eLibraryTabs');
-	tabLinks = tabs.getElementsByTagName('span');
-	var activeLabel = '';
-
+	tabLinks = document.getElementById('eLibraryTabs').getElementsByTagName('div');
 	for (var i = 0; i < tabLinks.length; i++){
-
-		// activate link if it has a className of limitType
-		if( tabLinks[i].className == 'active' && tabLinks[i].getAttribute('name') == limitType) {
-		}
-		else if(tabLinks[i].className == limitType){
-			tabLinks[i].className = 'active';
-			activeLabel = eLibraryTabLabels[i];
+		if(tabLinks[i].getAttribute('id') == eLibraryActiveTab + 'Tab'){
+			tabLinks[i].className = 'eLibraryTabActive';
 		}
 		else{
-			tabLinks[i].className = eLibraryTabDivs[i];
+			tabLinks[i].className = 'eLibraryTab';
 		}
 	}
 
-	var staticResults = document.getElementById('eLibraryStaticSearchResults');
-	staticResults.className = 'hide';
+	Object.eLibraryActiveTab = eLibraryActiveTab;
+	var searchResults = document.getElementById('eLibrarySearchResults');
+	var searchResultDivs = document.getElementById('eLibrarySearchResults').getElementsByTagName('div');
 
-	var staticResultDivs = staticResults.getElementsByTagName('div');
+	for (var i = 0; i < searchResultDivs.length; i++){
+		if(searchResultDivs[i].getAttribute('id') == eLibraryActiveTab){
+			searchResultDivs[i].className = '';
+		}
+		else{
+			searchResultDivs[i].className = 'hide';
+		}
+	}
 
-	// newResults div is empty placeholder for dynamically sliced results
-	var newResults = document.getElementById('eLibraryNewSearchResults');
-	newResults.innerHTML = '';
-
-	if(limitType == 'all'){
-			staticResults.className = '';
-			newResults.className = 'hide';
+	// switch searchForm selected value to appropriate tab value
+	if(eLibraryActiveTab == 'all'){
+		document.searchForm.source.selectedIndex = 0; //default searchForm to eLibrary
 	}
 	else{
-		newResults.className = '';
-		for (var i = 0; i < staticResultDivs.length; i++){
-			if(staticResultDivs[i].getAttribute('id') == limitType){
-				newResults.innerHTML = staticResultDivs[i].innerHTML;
+		for(var i = 0; i < document.searchForm.source.options.length; i++){
+			if(document.searchForm.source.options[i].value == eLibraryActiveTab){
+				document.searchForm.source.selectedIndex = i;
 			}
 		}
 	}
 
-	//get popIn content, if any
-	var popInContent;
-	if(document.getElementById('popIn-' + limitType)){
-		popInContent = document.getElementById('popIn-' + limitType);
-		newResults.innerHTML = '<div id="popIn" class="popInContent">' + popInContent.innerHTML + '</div>' + newResults.innerHTML;
+	refreshPopInBar();
+}
+
+function refreshPopInBar(){
+
+	var popInContent = '';
+
+	if(document.getElementById('popInContent')){ 
+		document.getElementById('popInContent').className = 'hide';
 	}
 
+	if(document.getElementById(Object.eLibraryActiveTab + "TabAdditionalText")){
+		popInContent = document.getElementById(Object.eLibraryActiveTab + "TabAdditionalText").innerHTML;
+	}
+
+	// if zero results for active tab, display zeroResultsText
+	if(eLibraryResultCounts[Object.eLibraryActiveTab] == 0 && document.getElementById(Object.eLibraryActiveTab + "TabZeroResultsText")){
+		popInContent = document.getElementById(Object.eLibraryActiveTab + "TabZeroResultsText").innerHTML;
+	}
+
+	if(document.getElementById('suldbResults') && Object.eLibraryActiveTab == 'database'){ 
+		popInContent += document.getElementById('suldbResults').innerHTML;
+	}
+
+	if(document.getElementById('sfxResults') && (Object.eLibraryActiveTab == 'all' || Object.eLibraryActiveTab == 'ej') ){ 
+		popInContent += document.getElementById('sfxResults').innerHTML;
+	}
+
+	if(document.getElementById('spellResults')){ 
+		popInContent = document.getElementById('spellResults').innerHTML;
+	}
+
+	if(popInContent != ''){
+		if(popInContent.match('::::') ) popInContent = expandSpecialSyntax(popInContent);
+		document.getElementById('popInContent').innerHTML = popInContent;
+		document.getElementById('popInContent').className = 'popInContent';
+	}	
+
+	// show tabTip if any
+	if(document.getElementById(Object.eLibraryActiveTab + "TabTipText")){
+		var thisTabText = document.getElementById(Object.eLibraryActiveTab + "TabTipText").innerHTML;
+		if(thisTabText.match('::::')) thisTabText = expandSpecialSyntax(thisTabText);
+		document.getElementById("tabTip").innerHTML = thisTabText;
+		document.getElementById("tabTip").className = 'tabTip';
+	}
+	else{
+		document.getElementById("tabTip").className = 'hide';
+	}
 }
+
 // end slice results into format tabs
+
 
 
 //**************************
@@ -150,13 +149,11 @@ XMLClient.prototype = {
 	request: null,
 	type: null,
 	url: null,
-//	needsProxy: null,
 
 	init: function (type, url, template) {
 		this.template = template;
 		this.type = type;
 		this.url = url.replace(/&amp;/g,'&'); // JTidy replaces & w/ &amp;
-		//this.needsProxy = getMetaContent(document,'lw_proxyLinks');
 
 		//sniff for IE/Mac
 		if ( navigator.userAgent.indexOf('Mac') > -1 && (navigator.appVersion.indexOf('MSIE 5') > -1 || navigator.appVersion.indexOf('MSIE 6') > -1) ){
@@ -206,12 +203,13 @@ XMLClient.prototype = {
 			//
 			//
 			case "erdb":
-				var erdbLabels = new Object();
+				var erdbLabels = new Array();
 				erdbLabels['article'] = 'Articles';
 				erdbLabels['book review'] = 'Book Reviews';
 				erdbLabels['person, male'] = 'Men';
 				erdbLabels['organization'] = 'Organizations';
 				erdbLabels['person'] = 'People';
+				erdbLabels['photograph'] = 'Photographs';
 				erdbLabels['person, female'] = 'Women';
 				erdbLabels['statistics'] = 'Statistics';
 
@@ -242,14 +240,14 @@ XMLClient.prototype = {
 
 					var type = getQueryContent('t',this.url);
 
-					var eLibraryStaticSearchResults = document.getElementById("eLibraryStaticSearchResults");
+					var eLibrarySearchResults = document.getElementById("eLibrarySearchResults");
 					var erdbContent = document.createElement('div');
-					erdbContent.innerHTML = '<h3>' + erdbLabels[type] + '</h3><dl>' + resultsHTML + '</dl>';
+					erdbContent.innerHTML = '<dl>' + resultsHTML + '</dl>';
 					erdbContent.setAttribute('id','erdb-' + type);
-					eLibraryStaticSearchResults.appendChild(erdbContent);
+					eLibrarySearchResults.appendChild(erdbContent);
 
 					eLibraryTabLabels[eLibraryTabLabels.length] = erdbLabels[type];
-					eLibraryTabDivs[eLibraryTabDivs.length] = 'erdb-' + type;
+					eLibraryTabIDs[eLibraryTabIDs.length] = 'erdb-' + type;
 					painteLibraryTabs();
 					showeLibraryTab('erdb-' + type);
 				}
@@ -264,11 +262,8 @@ XMLClient.prototype = {
 				if(response.getElementsByTagName('li')){
 					var lis = response.getElementsByTagName('li');
 					var baseUrl = GLOBALS.basePath + '/howto/index.html?keywords=' + keywords;
-					var html = '<li>' +
-									'<span>' + 
-										'<a target="new" href="' + baseUrl + '">Services/FAQs:&nbsp;<p class="metaHitCount">' + lis.length + '</p></a>' +
-									'</span>' +
-								'</li>';
+					var html = '<a target="new" href="' + baseUrl + '">Lane Services<br /><span class="tabHitCount">' + lis.length + '</span></a>';
+
 					//ie having trouble finding this element ... TODO
 					if(document.getElementById('faqSearchResults')){
 						document.getElementById('faqSearchResults').innerHTML = html;
@@ -409,14 +404,14 @@ XMLClient.prototype = {
 					var html = '';
 
 					for(var j=0; j<metaSearchResults.length; j++){
-
 						if(document.getElementById(metaSearchResults[j].id + 'SearchResults')){
-							document.getElementById(metaSearchResults[j].id + 'SearchResults').innerHTML = 
-									'<li>' +
-										'<span>' +
-											'<a target="new" href="' + metaSearchResults[j].url + '">' + metaSearchResults[j].name + ':&nbsp;<p class="metaHitCount">' + metaSearchResults[j].hits + '</p></a>' +
-										'</span>' +
-									'</li>';
+							document.getElementById(metaSearchResults[j].id + 'SearchResults').innerHTML = "<a target='new' href='" + metaSearchResults[j].url + "'>" + metaSearchResults[j].name + '<br /><span class="tabHitCount">' + intToNumberString(metaSearchResults[j].hits) + '</span></a>';
+							if(metaSearchResults[j].id == 'google'){
+								document.getElementById(metaSearchResults[j].id + 'SearchResults').className = 'metaSearchResultsRightCorner';
+							}
+							else{
+								document.getElementById(metaSearchResults[j].id + 'SearchResults').className = 'metaSearchResults';
+							}
 						}
 					}
 				}
@@ -439,30 +434,17 @@ XMLClient.prototype = {
 				var result = response.getElementsByTagName('result')[0].firstChild.data;
 
 				if(result != 0 ){
-					var html = '<img border="0" src="' + GLOBALS.baseImagePath + '/smallLaneX.gif" /> Try FindIt@Stanford: <a target="new" href="' + openurl + '">' + result + '</a>';
+					var html = 'FindIt@Stanford result: <a target="new" href="' + openurl + '">' + result + '</a><br />';
 
-					// results can be placed in three different places:
-					// 1) popIn-ej div (for when client not on "ej" tab when SFX results returned
+					//create new sfxResults div (rely on refreshPopInBar to display)
 					var body = document.getElementsByTagName("body").item(0);
-					var bC = document.createElement('div');
-					bC.className = 'hide';
-					bC.innerHTML = html;
-					bC.setAttribute('id','popIn-ej');
-					body.appendChild(bC);
+					var sfxDiv = document.createElement('div');
+					sfxDiv.className = 'hide';
+					sfxDiv.innerHTML = html;
+					sfxDiv.setAttribute('id','sfxResults');
+					body.appendChild(sfxDiv);
 
-					// 2) SFXResults div ("all" tab)
-					if(document.getElementById('SFXResults')){
-						document.getElementById('SFXResults').className = 'popInContent';
-						document.getElementById('SFXResults').innerHTML = html;
-					}
-
-					// 3) SFXResultsEjTab div (tab "ej" specified in URL request)
-					if(getQueryContent('tab') == 'ej'){
-						var newResults = document.getElementById("eLibraryNewSearchResults");
-						if(newResults){
-							newResults.innerHTML = '<div id="SFXResultsEjTab" class="popInContent">' + html + '</div>' + newResults.innerHTML;
-						}
-					}
+					refreshPopInBar();
 				}
 			break;
 
@@ -474,37 +456,23 @@ XMLClient.prototype = {
 
 				if(response.firstChild){
 					var spellSuggestion = response.firstChild.data;
-
-					// probably only used on er.html page ... can we remove this part?
-					var baseUrl = null;
-					switch(this.template){ 
-						case "eResources":
-							baseUrl = './er.html?source=eResources&amp;template=' + GLOBALS.lanewebTemplate + '&amp;keywords=';
-						break;
-						
-						case "eJournals":
-							baseUrl = './searchej.html?source=eJournals&amp;template=' + GLOBALS.lanewebTemplate + '&amp;keywords=';
-						break;
-						
-						default:
-							baseUrl = './er.html?source=eResources&amp;template=' + GLOBALS.lanewebTemplate + '&amp;keywords=';
-						break;				
-					}
-
+					var baseUrl = baseUrl = './er.html?source=eResources&amp;template=' + GLOBALS.lanewebTemplate + '&amp;keywords=';
 					var html = 'Did you mean: <a href="' + baseUrl + spellSuggestion + '"><i><strong>' + spellSuggestion + '</strong></i></a>';
 
-					if(document.getElementById('SpellResults')){
-						document.getElementById('SpellResults').className = 'popInContent';
-						document.getElementById('SpellResults').innerHTML = html;
-					}
+					//create new spellResults div (rely on refreshPopInBar to display)
+					var body = document.getElementsByTagName("body").item(0);
+					var spellDiv = document.createElement('div');
+					spellDiv.className = 'hide';
+					spellDiv.innerHTML = html;
+					spellDiv.setAttribute('id','spellResults');
+					body.appendChild(spellDiv);
 
-					// also check to see if we should pop this into a tab specified in query string
-					if(getQueryContent('tab')){
-						var newResults = document.getElementById("eLibraryNewSearchResults");
-						document.getElementById('popIn').className = 'hide';
-						if(newResults){
-							newResults.innerHTML = '<div id="SpellResults" class="popInContent">' + html + '</div>' + newResults.innerHTML;
-						}
+					refreshPopInBar();
+
+					// hide tip box ... or should this go into refreshPopInBar?
+					//                  here only hides at popIn and if user continues to click, tip reappears (good?)
+					if (document.getElementById('tabTip')){
+						document.getElementById('tabTip').className = 'hide';
 					}
 				}
 			break;
@@ -512,43 +480,45 @@ XMLClient.prototype = {
 			//**************************
 			// SUL database results processing
 			//
-			case "sul":
+			case "suldb":
 				var response = this.request.responseXML.documentElement;
 				var names = response.getElementsByTagName('name');
 				var links = response.getElementsByTagName('link');
 
-				if(names.length){
+				if(links.length){
 					var html = '';
 
-					for(var i=0; i<names.length; i++){
+					for(var i=0; i<links.length; i++){
 							var link = response.getElementsByTagName('link')[i].firstChild.data;
 							var name = response.getElementsByTagName('name')[i].firstChild.data;
 
 							if(GLOBALS.needsProxy != 'false'){
 								link = GLOBALS.proxyPrefix + link;
 							}
-
+							// if i is 2, add div to hold hidden suldb links for expansion
+							if(i == 2){
+								html += '<div class="hide">';
+							}
 							html += '<a class="indent" target="new" href="' + link + '">' + name + '</a><br />';
 					}
 
-					html = '<img border="0" src="' + GLOBALS.baseImagePath + '/smallLaneX.gif" /> Try other Stanford databases:<br/>' + html;
-
-					// results can be placed in three different places:
-					// 1) popIn-database div (for when client not on "database" tab when SUL results returned
-					var body = document.getElementsByTagName("body").item(0);
-					var bC = document.createElement('div');
-					bC.className = 'hide';
-					bC.innerHTML = html;
-					bC.setAttribute('id','popIn-database');
-					body.appendChild(bC);
-					
-					// 2) SULResultsDbTab div (tab "database" specified in query string)
-					if(getQueryContent('tab') == 'database'){
-						var newResults = document.getElementById("eLibraryNewSearchResults");
-						if(newResults){
-							newResults.innerHTML = '<div id="SULResultsDbTab" class="popInContent">' + html + '</div>' + newResults.innerHTML;
-						}
+					// if more than 2 results, present expand-toggle
+					if(links.length > 2){
+						html = '<a href="javascript:void(0);" onclick="javascript:toggleNode(this, this.parentNode.getElementsByTagName(\'div\')[0],\'+\',\'-\',\'tabTip\');">+</a> Databases beyond biomedicine<br />' + html + '</div>';
 					}
+					else{
+						html = 'Databases beyond biomedicine<br />' + html;
+					}
+
+					//create new suldbResults div (rely on refreshPopInBar to display)
+					var body = document.getElementsByTagName("body").item(0);
+					var suldbDiv = document.createElement('div');
+					suldbDiv.className = 'hide';
+					suldbDiv.innerHTML = html;
+					suldbDiv.setAttribute('id','suldbResults');
+					body.appendChild(suldbDiv);
+
+					refreshPopInBar();
 				}
 
 			break;
@@ -630,6 +600,48 @@ function getQueryContent(paramName,queryString) {
 
 	return 0;
 }
+
+function intToNumberString(number){
+	number = number.toString();
+	var pattern = /(\d+)(\d{3})/;
+	while (pattern.test(number)) {
+		number = number.replace(pattern, '$1' + ',' + '$2');
+	}
+	return number;
+}
+
+function toggleNode(linkNode, toggleNode, onText, offText, additionalInvertedToggleID){
+	if(toggleNode.className != 'hide'){
+		toggleNode.className = 'hide';
+		linkNode.innerHTML = onText;
+		if(additionalInvertedToggleID){
+			document.getElementById(additionalInvertedToggleID).className = '';
+		}
+	}
+	else{
+		toggleNode.className = '';
+		linkNode.innerHTML = offText;
+		if(additionalInvertedToggleID){
+			document.getElementById(additionalInvertedToggleID).className = 'hide';
+		}
+	}
+}
+
+// expand "::::keywords::::  ::::basePath::::" to "dvt /beta", etc.
+function expandSpecialSyntax(string){
+	for (i in GLOBALS){
+		var pattern = '::::' + i + '::::';
+		while (string.match(pattern)) {
+			string = string.replace(pattern,GLOBALS[i]);
+		}
+	}
+
+        if (string.match('::::keywords::::') && keywords){
+                string = string.replace(/::::keywords::::/g,keywords);
+        }
+	return string;
+}
+
 // end useful functions
 
 
@@ -692,7 +704,7 @@ function displayIncrementalZeros(toggle){
 
 //**************************
 // move to laneweb.js when ready
-function submitSearchTemp() {
+function submitSearch() {
   var source = document.searchForm.source.options[document.searchForm.source.selectedIndex].value;
   var keywords = document.searchForm.keywords.value;
   var nokeywords = 'Please enter one or more search terms.';
@@ -703,22 +715,26 @@ function submitSearchTemp() {
   }
   else if (source == 'ej') {
 	var dest = GLOBALS.basePath + '/online/er.html?tab=ej&keywords=' + keywords;
-    window.location.replace(dest);
+    //window.location.replace(dest);
+    window.location = dest;
 	return false;
   }
   else if (source == 'database') {
 	var dest = GLOBALS.basePath + '/online/er.html?tab=database&keywords=' + keywords;
-    window.location.replace(dest);
+    //window.location.replace(dest);
+    window.location = dest;
 	return false;
   }
   else if (source == 'book') {
 	var dest = GLOBALS.basePath + '/online/er.html?tab=book&keywords=' + keywords;
-    window.location.replace(dest);
+    //window.location.replace(dest);
+    window.location = dest;
 	return false;
   }
   else if (source == 'cc') {
 	var dest = GLOBALS.basePath + '/online/er.html?tab=cc&keywords=' + keywords;
-    window.location.replace(dest);
+    //window.location.replace(dest);
+    window.location = dest;
 	return false;
   }
   else if (source == 'pubmed') {
@@ -730,18 +746,23 @@ function submitSearchTemp() {
     return false;
   }
   else if (source == 'faq') {
-	var dest = GLOBALS.basePath + '/howto/index.html?keywords=' + keywords;
-    window.location.replace(dest);
+	//var dest = GLOBALS.basePath + '/howto/index.html?keywords=' + keywords;
+	var dest = GLOBALS.basePath + '/online/er.html?tab=faq&keywords=' + keywords;
+    //window.location.replace(dest);
+    window.location = dest;
 	return false;
   }
   else if (source == 'eResources') {
 	var dest = GLOBALS.basePath + '/online/er.html?keywords=' + keywords;
-    window.location.replace(dest);
+    //window.location.replace(dest);
+    window.location = dest;
 	return false;
   }
   else if (source == 'catalog') {
-	var dest = 'http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&Search_Arg=' + keywords + '&SL=None&Search_Code=FT*&CNT=50';
-    window.location.replace(dest);
+	//var dest = 'http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&Search_Arg=' + keywords + '&SL=None&Search_Code=FT*&CNT=50';
+	var dest = GLOBALS.basePath + '/online/catalog.html?keywords=' + keywords;
+    //window.location.replace(dest);
+    window.location = dest;
 	return false;
   }
   else if (source == 'stanford_who') {
@@ -774,3 +795,13 @@ function lastSelectValue(select){
 	}
 }
 // end adds to laneweb.js 
+
+
+//test
+function loadCatIframe(){
+        var q = getQueryContent('keywords',location.href);
+        var frame = document.getElementById('catalog');
+        frame.src = 'http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&Search_Arg=' + q + '&SL=None&Search_Code=FT*&CNT=50';
+        frame.className = '';
+}
+

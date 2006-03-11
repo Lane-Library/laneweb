@@ -16,7 +16,7 @@
 				</tr>
 				<tr>
 					<td class="popInContent" colspan="3">
-				        <div id="spellResults"><img border="0" src="/images/templates/default/smallLaneX.gif" alt="X" /> Also try <a href="search.html?source=clinical&amp;id={$id}">Clinical Search</a></div>
+				        <div id="spellResults">Expand to <a href="search.html?source=clinical&amp;id={$id}">Clinical Search</a> or go to the <a href="peds/index.html">Pediatrics Portal</a></div>
 					</td>
 				</tr>
 			</table>
