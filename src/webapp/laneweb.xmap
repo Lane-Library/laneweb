@@ -90,8 +90,12 @@
         </map:selectors>
         <map:readers default="resource">
             <map:reader name="resource" logger="sitemap.reader.resource" src="org.apache.cocoon.reading.ResourceReader"/>
+            <map:reader name="txt-resource" logger="sitemap.reader.txtresource" src="edu.stanford.laneweb.TxtResourceReader">
+            	   <path>/</path>
+            	   <valueToSubtitute>/./.</valueToSubtitute>
+          </map:reader>        
             <map:reader name="no-byte-range" logger="sitemap.reader.nobyterange" src="org.apache.cocoon.reading.ResourceReader">
-                <byte-ranges>false</byte-ranges>
+              	<byte-ranges>false</byte-ranges>
             </map:reader>            
         </map:readers>
         <map:matchers default="wildcard">
