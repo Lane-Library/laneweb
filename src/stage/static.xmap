@@ -16,10 +16,14 @@
                     src="resources/images/favicon.ico" mime-type="image/x-icon"/>
             </map:match>
             <map:match type="wildcard" pattern="style/*.css">
-                <map:read src="resources/css/{1}.css"/>
+                <map:read type="txt-resource" src="resources/css/{1}.css">
+                    <map:parameter name="path" value="/beta/stage"/>
+                </map:read>
             </map:match>
             <map:match type="wildcard" pattern="javascript/*.js">
-                <map:read src="resources/javascript/{1}.js" mime-type="application/x-javascript"/>
+                <map:read type="txt-resource" src="resources/javascript/{1}.js" mime-type="application/x-javascript">
+                    <map:parameter name="path" value="/beta/stage"/>
+                </map:read>
             </map:match>
             <map:match type="wildcard" pattern="images/**.jpg">
                 <map:read src="resources/images/{1}.jpg" mime-type="image/jpeg"/>

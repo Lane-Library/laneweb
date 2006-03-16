@@ -26,13 +26,13 @@ public class TxtResourceReader extends ResourceReader {
 
 	String path = null;
 
-	String valueToSubtitute = null;
+	String valueToSubstitute = null;
 
 	public void configure(Configuration configuration)
 			throws ConfigurationException {
 		super.configure(configuration);
 		this.configuredPath = configuration.getChild("path").getValue();
-		this.valueToSubtitute = configuration.getChild("valueToSubtitute")
+		this.valueToSubstitute = configuration.getChild("valueToSubstitute")
 				.getValue();
 	}
 
@@ -64,7 +64,7 @@ public class TxtResourceReader extends ResourceReader {
 				page.append(line);
 				page.append("\n");
 			}
-			String pageToSend = page.toString().replaceAll(valueToSubtitute, path);
+			String pageToSend = page.toString().replaceAll(valueToSubstitute, path);
 			buffer = pageToSend.getBytes();
 			out.write(buffer, 0, buffer.length);
 			out.flush();
