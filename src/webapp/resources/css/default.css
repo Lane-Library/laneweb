@@ -80,7 +80,7 @@
 	margin: 0px;
 	color: white;
 	font-family: verdana, geneva, sans-serif; /*arial ?*/
-	background: #900 url(/beta/images/templates/default/redcornerTR.gif) no-repeat top right;
+	background: #900 url(/././images/templates/default/redcornerTR.gif) no-repeat top right;
 	z-index: 4;
 }
 
@@ -98,7 +98,7 @@
 	text-align: center;
 	vertical-align: middle;
 	/*display: inline;*/
-	background: transparent url(/beta/images/templates/default/redcornerTL.gif) no-repeat 0px 0px;
+	background: transparent url(/././images/templates/default/redcornerTL.gif) no-repeat 0px 0px;
 }
 
 ul#outsideSiteLinks {
@@ -130,7 +130,64 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	text-decoration: underline;
 }
 
-.greenUnderline {position: relative; left: 0px; width: 100%; height: 4px; font-size: 4px; padding: 0px; padding-left: 1px; padding-right:1px; background: transparent url(/beta/images/templates/default/greenGradient.gif) repeat-x top left;
+.greenUnderline {
+		position: relative;
+		left: 0px;
+		width: 100%;
+		height: 4px;
+		font-size: 4px;
+		border: 0px;
+		margin: 0px;
+		padding: 0px;
+		padding-left: 1px;
+		padding-right:1px;
+		background: transparent url(/././images/templates/default/greenGradient.gif) repeat-x top left;
+}
+
+#askUsContainer {
+	float: right;
+	height: auto;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	padding-left: 19px;
+	padding-right: 20px;
+	border-bottom: 1px solid #ddd;
+	background: transparent url(/././images/templates/default/askUsTallBg.gif) repeat top left;
+	/*background: transparent url(/././images/templates/default/askUsGreenBackNoOutline.gif) repeat top left;*/
+}
+
+
+#askUsCornerContainer {
+	position: relative;
+/*
+	bottom: 0px;
+	left: 0px;
+	height: auto;
+*/
+	bottom: -3px;
+	left: -19px;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+/*
+	background-color: red;
+	background-image: url(/././images/templates/default/askUsTallCorner.gif);
+	background-repeat: no-repeat;
+	background-position:  bottom right;
+	z-index: 60;*/
+}
+
+/* askUsText is necessary to accomodate link removal on the askus.html page*/
+#askUsText {
+	position: relative;
+	bottom: 5px;
+	left: 0px;
+	color: white;
+}
+
+#askUsContainer a:link, #askUsContainer a:visited, #askUsContainer a:hover, #askUsContainer a:active {
+	color: white;
 }
 
 #laneConnexContainer{
@@ -153,7 +210,7 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	 width: 100%;
 	 height: 56px;
 	 overflow: hidden;
-	 background: url(/beta/images/templates/default/leftPanorama.jpg) repeat-x top left;
+	 background: url(/././images/templates/default/leftPanorama.jpg) repeat-x top left;
 	 text-align: right;
 	 z-index: 1;
 	 border-left: 2px solid #fff; /* added to preserve width with searchContainer */
@@ -183,7 +240,7 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	 margin: 0px;
 	 padding: 0px;
 	 padding-bottom: 3px;
-	 background: #ddc url(/beta/images/templates/default/searchGradient.jpg) repeat-x top left;
+	 background: #ddc url(/././images/templates/default/searchGradient.jpg) repeat-x top left;
 	 text-align: center;
 	 font-weight:700;
 	 letter-spacing: 1px;
@@ -229,7 +286,7 @@ ul#searchDbs a:link, ul#searchDbs a:visited, ul#searchDbs a:hover, ul#searchDbs 
 
 ul#searchDbs a:hover, ul#searchDbs a:active {
 	color: black;
-	background-image: url(/beta/images/templates/default/searchLinkRolloverBg.jpg);
+	background-image: url(/././images/templates/default/searchLinkRolloverBg.jpg);
 	background-attachment: fixed;
 	background-repeat: repeat-x;
 	background-position:  0px -1px;
@@ -268,7 +325,7 @@ ul#searchDbs a:hover, ul#searchDbs a:active {
 	border: 0px;
 	padding: 0px;
 	background-color: transparent;
-	background-image: url(/beta/images/templates/default/searchBL.gif);
+	background-image: url(/././images/templates/default/searchBL.gif);
 	background-repeat: no-repeat;
 	background-position: 0px -1px; /* top left: compensate for 1px searchB?.gif border */
 	z-index: 30;
@@ -292,7 +349,7 @@ ul#searchDbs a:hover, ul#searchDbs a:active {
 	border:0px;
 	margin: 0px;
 	padding: 0px;
-	background: transparent url(/beta/images/templates/default/go.gif) no-repeat top center;
+	background: transparent url(/././images/templates/default/go.gif) no-repeat top center;
 }
 
 #displaySearchTaglineText {

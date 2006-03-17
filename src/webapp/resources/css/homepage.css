@@ -28,7 +28,7 @@
 	border: 0px;
 	border-left: 1px solid #ddd;
 	z-index: 3;
-	background: #ddc url(/beta/images/templates/default/searchGradient.jpg) repeat-x top left;
+	background: #ddc url(/././images/templates/default/searchGradient.jpg) repeat-x top left;
 }
 
 #panoramicView {
@@ -38,7 +38,7 @@
 	 width: 100%;
 	 height: 56px;
 	 overflow: hidden;
-	 background: url(/beta/images/templates/default/leftPanorama.jpg) repeat-x top left;
+	 background: url(/././images/templates/default/leftPanorama.jpg) repeat-x top left;
 	 text-align: right;
 	 z-index: 1;
 	 border-left: 2px solid #fff; /* added to preserve width with searchContainer */

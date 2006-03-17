@@ -77,7 +77,7 @@ body {
 }
 
 #leftColumn .sideBlueBox h2 {
-	background-image: url(/beta/images/templates/default/whiteCornerBlueBoxTL.gif);
+	background-image: url(/././images/templates/default/whiteCornerBlueBoxTL.gif);
 	background-repeat: no-repeat;
 	background-position: top left;
 }
@@ -88,7 +88,7 @@ body {
 }
 
 #rightColumn .sideBlueBox h2   {
-	background-image: url(/beta/images/templates/default/whiteCornerBlueBoxTR.gif);
+	background-image: url(/././images/templates/default/whiteCornerBlueBoxTR.gif);
 	background-repeat: no-repeat;
 	background-position: top right;
 }
@@ -114,13 +114,13 @@ body {
 #leftColumn .sideTanBox h2 {
 	color: #535548;
 	text-transform: uppercase;
-	background: #d9d7b0 url(/beta/images/templates/default/beigeTopLeftCorner.gif) no-repeat top left;
+	background: #d9d7b0 url(/././images/templates/default/beigeTopLeftCorner.gif) no-repeat top left;
 }
 
 #rightColumn .sideTanBox h2 {
 	color: #535548;
 	text-transform: uppercase;
-	background: #d9d7b0 url(/beta/images/templates/default/beigeTopRightCorner.gif) no-repeat top right;
+	background: #d9d7b0 url(/././images/templates/default/beigeTopRightCorner.gif) no-repeat top right;
 }
 
 .centerGreenBox h2 {
@@ -128,7 +128,7 @@ body {
 	padding-left: 2px;
 	padding-right: 15px;
 	color: white !important;
-	background: #996 url(/beta/images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
+	background: #996 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
 	border: 0px;
 	border-bottom: 3px solid #dbdbc9;
 }
@@ -138,7 +138,7 @@ body {
 	padding-left: 2px;
 	padding-right: 15px;
 	color: white !important;
-	background: #6784A2 url(/beta/images/templates/default/whiteCornerBlueBoxTR.gif) no-repeat top right;
+	background: #6784A2 url(/././images/templates/default/whiteCornerBlueBoxTR.gif) no-repeat top right;
 	border: 0px;
 	border-bottom: 1px solid #fff;
 }
@@ -183,7 +183,7 @@ body {
 .sideBlueBoxLongContent {
 	margin-top: 1px;
 	border: 1px solid #ccc;
-	background: #fff url(/beta/images/templates/default/blueBoxGradient.jpg) repeat-x bottom left;
+	background: #fff url(/././images/templates/default/blueBoxGradient.jpg) repeat-x bottom left;
 }
 
 .centerGreenBoxContent {
@@ -191,15 +191,16 @@ body {
 }
 
 #leftColumn .sideTanBoxContent {
-	background: #f2f3ed url(/beta/images/templates/default/beigeBottomRightCorner.gif) no-repeat bottom right;
+	background: #f2f3ed url(/././images/templates/default/beigeBottomRightCorner.gif) no-repeat bottom right;
 }
 
 #rightColumn .sideTanBoxContent {
-	background: #f2f3ed url(/beta/images/templates/default/beigeBottomLeftCorner.gif) no-repeat bottom left;
+	background: #f2f3ed url(/././images/templates/default/beigeBottomLeftCorner.gif) no-repeat bottom left;
 }
 
 .centerBlueBoxContent {
-	background: url(/beta/images/templates/default/blueToWhiteBoxGrad.jpg) repeat-x top left;
+	background: url(/././images/templates/default/blueToWhiteBoxGrad.jpg) repeat-x top left;
+	border: 1px solid #ccc;
 }
 
 div#bottomCurvedCorner {
@@ -212,7 +213,7 @@ div#bottomCurvedCorner {
 	border: 0px;
 	padding: 0px;
 	background-color: transparent;
-	background-image: url(/beta/images/templates/default/searchBL.gif);
+	background-image: url(/././images/templates/default/searchBL.gif);
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
 }
@@ -246,7 +247,7 @@ div#bottomCurvedCorner {
 	margin: 0 auto;
 	margin-top: 15px;
 	border-top: 1px solid #ccc;
-	background: transparent url(/beta/images/templates/default/footerBg.jpg) repeat-x top left;
+	background: transparent url(/././images/templates/default/footerBg.jpg) repeat-x top left;
 }
 
 #footer td {
@@ -281,16 +282,18 @@ ul {
 ul ul {
 	padding-left: 1.2em;
 }
+
 li {
 	display: list-item;
-	background-image: url(/beta/images/templates/default/list-background-line.gif);
+	background-image: url(/././images/templates/default/list-background-line.gif);
 	background-repeat: no-repeat;
 	background-position: 0px -3px;
 	list-style: none;
 	padding-left: 5px;
-	padding-bottom: 4px;
+	padding-bottom: 2px;
 	margin: 0px;
 }
+
 
 img {
 	border: 0px !important;
@@ -347,7 +350,7 @@ div#otherPortalOptions {
 
 /* set the image to use and establish the lower-right position */
 .cssbox, .cssbox_body, .cssbox_head, .cssbox_head h2 {
-	background: transparent url(/beta/images/templates/default/buttonLikeBox300px.jpg) no-repeat bottom right;
+	background: transparent url(/././images/templates/default/buttonLikeBox300px.jpg) no-repeat bottom right;
 }
 .cssbox {
 	width: 146px !important; /* intended total box width - padding-right(next) */
@@ -441,16 +444,22 @@ h2 a:link, h2 a:visited {
 }
 
 /* eJournals */
+/*
 #alphabet {
 	width: 100%;
 	padding-left: 0;
 	margin-top: 10px;
+*/
+	
 	/*
 	margin-top: 8px;
 	margin-bottom: 8px;
 	
 	padding-left:.5em;*/
+	
+/*	
 }
+
 #alphabet .alphaExtras {
 	background: #ecece8;
 	padding: 3px;
@@ -467,7 +476,7 @@ h2 a:link, h2 a:visited {
 	margin-top: 0px;
 	margin-bottom:0px;
 }
-/*
+
 
 #alphaBrowse {
 	background-color:#e7e2cd;
@@ -475,6 +484,7 @@ h2 a:link, h2 a:visited {
 	margin-top:0;
 	margin-bottom: 15px;
 }*/
+/*
 .browseTagline {
 	clear: both;
 	margin-left:0;
@@ -493,20 +503,18 @@ h2 a:link, h2 a:visited {
 	margin-top: 1.5em;
 	margin-bottom:0;
 }
-
+*/
 .taglineContainer{
 	clear: both;
-	width: 100%;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	width: 99%;
 	background: #e0e0d1;
-	padding-top:5px;
-	padding-right:0px;
-	padding-bottom:5px;
-	padding-left:20px;
-	margin-right: 0em;
+	padding:5px;
+	text-indent: 15px;
+	margin: 0px;
 	margin-bottom: 15px;
-	margin-left: 0px;
+	border: 1px solid #99987a;
 	border-top: 5px solid #99987a;
-	border-right: 1px solid #99987a;
-	border-left: 1px solid #99987a;
-	border-bottom: 1px solid #99987a;
 }

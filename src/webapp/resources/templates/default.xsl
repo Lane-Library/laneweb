@@ -6,7 +6,9 @@ xmlns="http://www.w3.org/1999/xhtml"
 exclude-result-prefixes="h xi">
 
 <xsl:param name="request-uri"/>
-<xsl:param name="alpha"/>
+<xsl:param name="a"/>
+
+<xsl:variable name="alpha"><xsl:value-of select="$a"/></xsl:variable>
 
 <xsl:variable name="eLibrary-type"><xsl:value-of select="substring(substring-after($request-uri, 'online/'), 1, 2)"/></xsl:variable>
 <xsl:variable name="eLibrary-search-code">

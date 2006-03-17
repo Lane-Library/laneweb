@@ -1,5 +1,5 @@
 
-var imagePath = '/beta/images/templates/default/';
+var imagePath = '/././images/templates/default/';
 var nokeywords = 'Please enter one or more search terms.';
 var searching = false;
 
@@ -34,14 +34,41 @@ function listSearchTagline(select) {
 
 function startState(url) {
 	var id, img;
-		if (url.indexOf('/online/') != -1 && (url.substring(url.indexOf('/online/') + "/online/".length, url.length)).indexOf('ej') != -1) { id='eJourn'; img='eJournOn.jpg'; }
-		else if (url.indexOf('/clinician/') != -1) { id='clin'; img='clinOn.jpg'; }
-		else if (url.indexOf('/researcher/') != -1) { id='research'; img='bioresearchOn.jpg'; }
-		else if (url.indexOf('/services/') != -1) { id='services'; img='laneServicesOn.jpg'; }
-		else {id='eLibrary'; img='eLibOn.jpg'; }
+	/***
+		legacy syntax: /online/er.html?tab=ej
+		new syntax: /search.html?source=clinical
+	***/
+	var legacyString = (url.indexOf('/online/er') != -1) ? url.substring(url.indexOf('/online') + "/online/er.html?".length, url.length) : "";
+	var newString = (url.indexOf('/search') != -1) ? url.substring(url.indexOf('/search') + "/search.html?".length, url.length) : "";
+	var paramString = legacyString + newString; /* mutually exclusive, OK to concatenate */
+	
+	if (url.indexOf('/online/') != -1 && (url.substring(url.indexOf('/online/') + "/online/".length, url.length)).indexOf('ej') != -1) /* accommodate ej.html, ejbrowse.html, ejsubject.html, etc. */{
+		id='eJourn'; img='eJournOn.jpg';
+	}
+	else if (url.indexOf('/portals/clinical') != -1 || 
+		url.indexOf('/portals/peds') != -1 || 
+		paramString.indexOf('clinical') != -1 || 
+		paramString.indexOf('peds') != -1) { 
+		id='clin'; img='clinOn.jpg';
+	}
+	else if (url.indexOf('/portals/bioresearch') != -1 || 
+		paramString.indexOf('research') != -1) {
+		id='research'; img='bioresearchOn.jpg';
+	}
+	else if (url.indexOf('/services/') != -1 || 
+		url.indexOf('/askus') != -1 ||
+		paramString.indexOf('faq') != -1
+		/*(url.indexOf('/search') != -1 && (url.substring(url.indexOf('/search') + "/search.html?".length, url.length)).indexOf('source=faq') != -1 ||
+			url.indexOf('/online') != -1 && (url.substring(url.indexOf('/online') + "/online/er.html?".length, url.length)).indexOf('tab=faq') != -1)*/
+		) {
+		id='services'; img='laneServicesOn.jpg';
+	}
+	else {
+		id='eLibrary'; img='eLibOn.jpg';
+	}
 		
-		MM_swapImage(id,'',imagePath+img,1);
-		listSearchTagline(document.getElementById("source"));
+	MM_swapImage(id,'',imagePath+img,1);
+	listSearchTagline(document.getElementById("source"));
 }
 
 /*

@@ -262,7 +262,9 @@ p.micromedex {
         background-position: 0 0;
         margin-bottom: 0.15em;
 }
-
+p.micromedex a:link, p.micromedex a:visited {
+	text-decoration: none;
+}
 /*CY's search results*/
 dt {font-weight:bolder}
 dd {margin:0; padding:0 0 0 2em}

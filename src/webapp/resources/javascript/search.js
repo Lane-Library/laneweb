@@ -627,7 +627,7 @@ function toggleNode(linkNode, toggleNode, onText, offText, additionalInvertedTog
 	}
 }
 
-// expand "::::keywords::::  ::::basePath::::" to "dvt /beta", etc.
+// expand "::::keywordsDisplay::::  ::::basePath::::" to "dvt /beta", etc.
 function expandSpecialSyntax(string){
 	for (i in GLOBALS){
 		var pattern = '::::' + i + '::::';
@@ -636,9 +636,12 @@ function expandSpecialSyntax(string){
 		}
 	}
 
-        if (string.match('::::keywords::::') && keywords){
-                string = string.replace(/::::keywords::::/g,keywords);
-        }
+	if (string.match('::::keywordsDisplay::::') && keywords){
+		string = unescape(string.replace(/::::keywordsDisplay::::/g,keywords));
+	}
+	if (string.match('::::keywordsUri::::') && keywords){
+		string = string.replace(/::::keywordsUri::::/g,keywords);
+	}
 	return string;
 }
 
@@ -797,7 +800,7 @@ function lastSelectValue(select){
 // end adds to laneweb.js 
 
 
-//test
+//testing catalog.html
 function loadCatIframe(){
         var q = getQueryContent('keywords',location.href);
         var frame = document.getElementById('catalog');

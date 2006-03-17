@@ -20,18 +20,18 @@
             <map:transformer name="xsltc" logger="sitemap.transformer.xsltc"
                 src="org.apache.cocoon.transformation.TraxTransformer"
                 pool-max="32" pool-min="16" pool-grow="4">
-                <use-request-parameters>false</use-request-parameters>
-                <use-session-parameters>false</use-session-parameters>
-                <use-cookie-parameters>false</use-cookie-parameters>
+								<use-request-parameters>true</use-request-parameters>
+                <use-session-parameters>true</use-session-parameters>
+                <use-cookie-parameters>true</use-cookie-parameters>
                 <xslt-processor-role>xsltc</xslt-processor-role>
                 <check-includes>false</check-includes>
             </map:transformer>
             <map:transformer name="xslt" logger="sitemap.transformer.xslt"
                 src="org.apache.cocoon.transformation.TraxTransformer"
                 pool-max="32" pool-min="16" pool-grow="4">
-                <use-request-parameters>false</use-request-parameters>
-                <use-session-parameters>false</use-session-parameters>
-                <use-cookie-parameters>false</use-cookie-parameters>
+                <use-request-parameters>true</use-request-parameters>
+                <use-session-parameters>true</use-session-parameters>
+                <use-cookie-parameters>true</use-cookie-parameters>
                 <xslt-processor-role>xalan</xslt-processor-role>
                 <check-includes>false</check-includes>
             </map:transformer>
@@ -197,11 +197,11 @@
                         <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         <map:parameter name="context" value="{request:contextPath}"/>
                         <map:parameter name="query-string" value="{request:queryString}"/>
-                        <map:parameter name="template" value="{request-param:template}"/>
-                        <map:parameter name="keywords" value="{request-param:keywords}"/>
+                        <!--<map:parameter name="template" value="{request-param:template}"/>
+                        <map:parameter name="keywords" value="{request-param:keywords}"/>-->
                         <map:parameter name="selection" value="{request-param:source}"/>
                         <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                        <map:parameter name="debug" value="{request-param:debug}"/>
+                        <!--<map:parameter name="debug" value="{request-param:debug}"/>-->
                     </map:transform>
 										<!--
                     <map:select type="resource-exists">
@@ -211,12 +211,12 @@
                     </map:select> -->
 										<map:transform type="xsltc" src="{defaults:live-base}/resources/templates/default.xsl">
 											<map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-											<map:parameter name="alpha" value="{request-param:a}"/>
+											<!--<map:parameter name="alpha" value="{request-param:a}"/>-->
 										</map:transform>
                     <map:transform type="xsltc" src="{defaults:live-base}/xsl/webtrends.xsl">
                         <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                        <map:parameter name="source" value="{request-param:source}"/>
-                        <map:parameter name="keywords" value="{request-param:keywords}"/>
+                        <!--<map:parameter name="source" value="{request-param:source}"/>
+                        <map:parameter name="keywords" value="{request-param:keywords}"/>-->
                         <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     </map:transform>
                     <map:select type="regex-parameter">
