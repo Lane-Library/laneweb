@@ -6,24 +6,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import java.util.Map;
-import java.util.Properties;
-
-import org.apache.excalibur.xml.sax.SAXParser;
-
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.parameters.ParameterException;
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.components.modules.input.PropertiesFileModule;
-import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.xml.XMLUtils;
 import org.apache.cocoon.xml.dom.DOMStreamer;
-import org.w3c.dom.NodeList;
+import org.apache.excalibur.xml.sax.SAXParser;
 import org.w3c.tidy.Tidy;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class HtmlProxyGenerator extends SearchProxyGenerator {
