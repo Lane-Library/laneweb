@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>eLibrary Search</title>
+</head>
+<body>
+
+<br />
+<div class="searchHeader"><span class="searchHeaderLeft"><span class="searchHeaderTitle">eLibrary Search</span> results for <span id="keywordresult" class="keywordresult"><span class="lw_keywords"/></span></span><span class="searchHeaderRight">&nbsp;</span>
+</div>
+
+<!-- where tabs and counts are written -->
+<div id="eLibraryTabContainer">
+	<div id="eLibraryTabs"><!--  --></div>
+	<div id="metaSearchResultsContainer">
+		<div id="faqSearchResults" class="hide"><!--  not used, but keep as placeholder --></div>
+		<div class="metaSearchResults"><a href="javascript:void(0);" onclick="javascript:window.location = GLOBALS.basePath + '/search.html?source=clinical&amp;keywords=' + keywords;">Search<br />Clinical</a></div>
+		<div class="metaSearchResults"><a href="javascript:void(0);" onclick="javascript:window.location = GLOBALS.basePath + '/search.html?source=research&amp;keywords=' + keywords;">Search<br />Bioresearch</a></div>
+		<div id="loisSearchResults" class="hide"><!--  --></div>
+		<div id="pubmedSearchResults" class="hide"><!--  --></div>
+		<div id="googleSearchResults" class="hide"><!--  --></div>
+	</div>
+	<br style="clear:both;" />
+</div>
+<div class="" id="eLibrarySearchResults">
+	<div id="popInContent" class="hide"><!--  --></div>
+	<div id="tabTip" class="hide"><!--  --></div>
+
+    <div id="all">
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://stage/eresources/erdb?t=er"><xi:fallback>please try again later</xi:fallback></xi:include>
+    </div>
+
+    <div id="ej" class="hide">
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://stage/eresources/erdb?t=ej"><xi:fallback>please try again later</xi:fallback></xi:include>
+    </div>
+
+    <div id="database" class="hide">
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://stage/eresources/erdb?t=database"><xi:fallback>please try again later</xi:fallback></xi:include>
+    </div>
+
+    <div id="book" class="hide">
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://stage/eresources/erdb?t=book"><xi:fallback>please try again later</xi:fallback></xi:include>
+    </div>
+
+    <div id="cc" class="hide">
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://stage/eresources/erdb?t=cc"><xi:fallback>please try again later</xi:fallback></xi:include>
+    </div>
+
+    <div id="faq" class="hide">
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://stage/eresources/erdb?t=lanefaq"><xi:fallback>please try again later</xi:fallback></xi:include>
+    </div>
+</div>
+
+<!--  editable by content developers -->
+<div id="allTabTipText" class="hide"><h3>Tip</h3>all tip</div>
+<div id="ejTabTipText" class="hide"><h3>Tip</h3>Searching for articles? Use <a href="javascript:void(0);" onclick="javascript:showeLibraryTab('database');">article databases</a> such as PubMed, Google Scholar and Science Citation Index<br /><br />Try Lane's <a href="::::basePath::::/search.html?source=research&amp;keywords=::::keywordsUri::::">Bioresearch Search</a> or <a href="::::basePath::::/search.html?source=clinical&amp;keywords=::::keywordsUri::::">Clinical Search</a> to search article databases, inside eBooks and more.</div>
+<div id="databaseTabTipText" class="hide"><h3>Tip</h3>db tip</div>
+<div id="faqTabTipText" class="hide"><h3>Tip</h3>faqs tip </div>
+
+<!-- original with long blurbs
+<span id="allTabBasicText" class="hide">Launch search in <a href="http://library.stanford.edu/searchcat?everything=::::keywordsUri::::">Socrates</a> to check print and other materials in Stanford libraries<br /><i>Search inside</i> databases, eBooks and more with <a href="::::basePath::::/search.html?source=research&keywords=::::keywordsUri::::">Bioresearch Search</a> or <a href="::::basePath::::/search.html?source=clinical&keywords=::::keywordsUri::::">Clinical Search</a><br /></span>
+<span id="ejTabBasicText" class="hide"><a href="::::basePath::::/online/ejbrowse.html">Browse A-Z: biomedical eJournals</a><br /><a href="http://library.stanford.edu/searchcat?everything=::::keywordsUri::::">Search all Stanford journals</a> beyond biomedicine and check print availability<br /></span>
+<span id="bookTabBasicText" class="hide"><a href="::::basePath::::/online/ebbrowse.html">Browse A-Z: biomedical eBooks</a><br /><i>Search inside</i> clinical reference books with Lane's <a href="::::basePath::::/search.html?source=clinical&keywords=::::keywordsUri::::">Clinical Search</a><br /><a href="http://library.stanford.edu/searchcat?everything=::::keywordsUri::::">Search all Stanford books</a> beyond biomedicine and check for a print copy<br />Launch a search for books in <a href="http://www.amazon.com/exec/obidos/external-search/?field-keywords=::::keywordsUri::::">Amazon</a>, <a href="http://books.google.com/books?q=::::keywordsUri::::">Google Books</a>, <a href="http://redlightgreen.com/ucwprod/web/busy.jsp?ACTION=search&MAXRECORDS=20&SOURCEID=portal&SRCHBY=keyword&SRCHTERM=::::keywordsUri::::">RedLightGreen</a>, or <a href="http://partneraccess.oclc.org/wcpa/servlet/OpenUrl?genre=book&title=::::keywordsUri::::">WorldCat Books</a><br /></span>
+<span id="databaseTabBasicText" class="hide"><a href="::::basePath::::/online/dbbrowse.html">Browse A-Z: biomedical databases</a><br /><i>Search inside</i> databases with <a href="::::basePath::::/search.html?source=research&keywords=::::keywordsUri::::">Bioresearch Search</a> or <a href="::::basePath::::/search.html?source=clinical&keywords=::::keywordsUri::::">Clinical Search</a><br /></span>
+<span id="ccTabBasicText" class="hide"><a href="::::basePath::::/online/ccbrowse.html">Browse A-Z: clinical calculators, algorithms, charts, and more</a><br /></span>
+<span id="faqTabBasicText" class="hide">faq additional<br /></span>
+-->
+
+<span id="allTabZeroResultsText" class="hide">Your search <strong>::::keywordsDisplay::::</strong> did not find any results.  Check for typos or try more general keywords.<br /></span>
+<span id="ejTabZeroResultsText" class="hide">No eJournals found.  Check Lane Catalog for print.<br /></span>
+<span id="databaseTabZeroResultsText" class="hide">No databases found.  Try Clinical or Bioresearch search.<br /></span>
+<span id="bookTabZeroResultsText" class="hide">No eBooks found.  Try Lane Catalog for print.<br /></span>
+<span id="ccTabZeroResultsText" class="hide">No calculators found. Try Clinical search.<br /></span>
+<span id="faqTabZeroResultsText" class="hide">No services or FAQs on <strong>::::keywordsDisplay::::</strong>.  Check for typos or try more general keywords.<br /></span>
+<!-- end editable content -->
+
+<script type="text/javascript">
+	// fetch keywords and initialize all XMLClient objects
+	var keywords = document.getElementById('keywordresult').innerHTML;
+	keywords = cleanKW(keywords);
+
+	var meta = new XMLClient();
+	var sfx = new XMLClient();
+	var spell = new XMLClient();
+	//var suldb = new XMLClient();
+
+	meta.init('meta','/search/search?e=pubmed&amp;e=lois&amp;e=google&amp;q=' + keywords);
+	sfx.init('sfx',GLOBALS.basePath + '/content/sfx?q=' + keywords);
+	spell.init('spell','/search/spell?q=' + keywords, 'eResources');
+	//suldb.init('suldb',GLOBALS.basePath + '/content/suldb?q=' + keywords);
+
+	// run all functions _after_ page is completely loaded (crutch for IE)
+	var onloadEvent = window.onload;
+	window.onload = function() { if (onloadEvent) onloadEvent(); painteLibraryTabs(); showeLibraryTab(); meta.get(); sfx.get(); spell.get();}
+</script>
+</body>
+</html>
