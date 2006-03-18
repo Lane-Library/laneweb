@@ -20,7 +20,8 @@
         <proxy-regex>^171\.65\.2[0-5][0-9]\.\S+</proxy-regex>
         <template url="^(/stage/|/beta/|/beta/stage/|/)100years/index.html" value="100years_index"/>
         <template url="^(/stage/|/beta/|/beta/stage/|/)100years/\S+" value="100years"/>
-				<template url="^(/stage/|/beta/|/beta/stage/|/)index\.html" value="homepage"/>
+	    <template url="^(/stage/|/beta/|/beta/stage/|/)index\.html" value="homepage"/>
+	    <ezproxy-key>***laneweb.ezproxy.key***</ezproxy-key>
     </component-instance>
     <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
     <component-instance logger="core.modules.input" name="uriencode-request-param" class="edu.stanford.laneweb.URIEncodedParameterModule" />

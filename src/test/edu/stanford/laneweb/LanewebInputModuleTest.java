@@ -25,6 +25,11 @@ public class LanewebInputModuleTest extends TestCase {
         this.module.configure(config);
     }
     
+    public void testTicket() {
+    		assertTrue(this.module.getTicket("ceyates").indexOf("user=ceyates&ticket=") == 0);
+    		assertTrue(this.module.getTicket("ceyates").length() == 66);
+    }
+    
     public void testProxyMyIP() throws ConfigurationException {
         assertTrue("false".equals(this.module.proxyLinks("171.65.28.158")));
     }
