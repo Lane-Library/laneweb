@@ -42,6 +42,8 @@ public class LanewebHTTPSFilter implements Filter {
 		String url = queryString == null ? req.getRequestURL().toString() : req
 				.getRequestURL().append('?').append(queryString).toString();
 		int colonIndex = url.indexOf(':');
+		String userName = req.getRemoteUser();
+		req.getSession().setAttribute("USER_NAME", userName);
 		//if (req.getRequestURI().indexOf("/secure") > -1) {
 			if (req.getHeader("gohttps") != null
 					|| req.getScheme().equals("https")) {

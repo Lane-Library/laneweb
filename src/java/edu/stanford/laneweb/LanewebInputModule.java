@@ -6,7 +6,11 @@
  */
 package edu.stanford.laneweb;
 
+import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +38,8 @@ public class LanewebInputModule extends AbstractLogEnabled implements
     static final String AFFILIATION = "affiliation";
     
     static final String TEMPLATE = "template";
+    static final  String TICKET = "ticket"; 
+    private final String  ezproxyKey = "L0nePr0xyP0SSK0y "; 
     
     static final String SHC = "SHC";
     static final String LPCH = "LPCH";
@@ -52,6 +58,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
         ATTRS.add(TEMPLATE);
     }
 
+  
     private Configuration[] noProxyRegex;
 
     private Configuration[] proxyRegex;
@@ -80,7 +87,12 @@ public class LanewebInputModule extends AbstractLogEnabled implements
         		String uri = request.getRequestURI();
         		result = getTemplateName(uri);
         }
-        return result;
+    	else if (key.equals(TICKET)) {
+     		String userName = (String)request.getSession().getAttribute("USER_NAME");
+     		if(userName != null)
+     			result = getTicket(userName);  
+     	 }
+         return result;
     }
     
     protected String getTemplateName(final String url) throws ConfigurationException {
@@ -258,10 +270,39 @@ public class LanewebInputModule extends AbstractLogEnabled implements
     	return null;
     }
 
+  
+    
 	public void configure(Configuration config) throws ConfigurationException {
 		this.noProxyRegex = config.getChildren("noproxy-regex");
 		this.proxyRegex = config.getChildren("proxy-regex");
 		this.templateConfig = config.getChildren("template");
 	}
+	
+    private String getKeyedDigest(String buffer)
+    {
+      try {
+        MessageDigest d = MessageDigest.getInstance("MD5");
+        byte [] b = d.digest(buffer.getBytes("UTF8"));
+        StringBuffer sb = new StringBuffer();
+	for (int i = 0; i < b.length; i++) {
+	  sb.append(Integer.toHexString((b[i] & 0xf0) >> 4) +
+	            Integer.toHexString(b[i] & 0x0f));
+	}
+	return sb.toString();
+      } catch (NoSuchAlgorithmException e) {
+      } catch (java.io.UnsupportedEncodingException e) {
+      }
+      return null;
+    }
+    
+    private String getTicket( String user)
+    {
+      String result = null;
+      Date now = new Date();
+      String packet = "$u" + ((int) (now.getTime() / 1000));
+      result = "user=" + URLEncoder.encode(user) +
+        "&ticket=" + URLEncoder.encode(getKeyedDigest(ezproxyKey + user + packet) + packet);
+      return result;
+    } 
 
 }
