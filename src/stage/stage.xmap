@@ -65,7 +65,6 @@
                         <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         <map:parameter name="context" value="{request:contextPath}/stage"/>
                         <map:parameter name="query-string" value="{request:queryString}"/>
-                        <map:parameter name="selection" value="{request-param:source}"/>
                         <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
                         <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     </map:transform>
