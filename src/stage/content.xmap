@@ -40,6 +40,20 @@
                         </map:transform>
                         <map:serialize type="xml"/>
                     </map:when>
+                    <map:when test="synchronous-clinical|synchronous-peds|synchronous-clinicalresearch">
+                        <map:aggregate element="aggregate">
+                            <map:part src="cocoon:/synchronous-search-proxy"/>
+                            <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>
+                        </map:aggregate>
+                        <map:transform type="xslt" src="{defaults:live-base}/xsl/synchronous-search.xsl">
+                            <map:parameter name="template" value="{request-param:source}"/>
+                            <map:parameter name="search-url" value="{defaults:new-search-url}"/>
+                            <map:parameter name="keywords" value="{request-param:keywords}"/>
+                            <map:parameter name="view" value="{request-param:view}"/>
+                            <map:parameter name="debug" value="{request-param:debug}"/>
+                        </map:transform>
+                        <map:serialize type="xml"/>
+                    </map:when>
                     <map:otherwise>
                         <map:generate type="file" src="{defaults:stage-base}/content/search.html"/>
                         <!--src="cocoon:/templates/search.xml?{request-uri:requestURI}"/-->
