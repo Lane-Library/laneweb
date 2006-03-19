@@ -9,63 +9,63 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="images/**.gif">
-                <map:read src="resources/images/{1}.gif" mime-type="image/gif"/>
+                <map:read src="{defaults:stage-base}/resources/images/{1}.gif" mime-type="image/gif"/>
             </map:match>
             <map:match type="wildcard" pattern="favicon.ico">
                 <map:read
-                    src="resources/images/favicon.ico" mime-type="image/x-icon"/>
+                    src="{defaults:stage-base}/resources/images/favicon.ico" mime-type="image/x-icon"/>
             </map:match>
             <map:match type="wildcard" pattern="style/*.css">
-                <map:read type="txt-resource" src="resources/css/{1}.css">
+                <map:read type="txt-resource" src="{defaults:stage-base}/resources/css/{1}.css">
                     <map:parameter name="path" value="/beta/stage"/>
                 </map:read>
             </map:match>
             <map:match type="wildcard" pattern="javascript/*.js">
-                <map:read type="txt-resource" src="resources/javascript/{1}.js" mime-type="application/x-javascript">
+                <map:read type="txt-resource" src="{defaults:stage-base}/resources/javascript/{1}.js" mime-type="application/x-javascript">
                     <map:parameter name="path" value="/beta/stage"/>
                 </map:read>
             </map:match>
             <map:match type="wildcard" pattern="images/**.jpg">
-                <map:read src="resources/images/{1}.jpg" mime-type="image/jpeg"/>
+                <map:read src="{defaults:stage-base}/resources/images/{1}.jpg" mime-type="image/jpeg"/>
             </map:match>
             <map:match type="wildcard" pattern="images/**.png">
-                <map:read src="resources/images/{1}.png" mime-type="image/png"/>
+                <map:read src="{defaults:stage-base}/resources/images/{1}.png" mime-type="image/png"/>
             </map:match>
             <map:match type="wildcard" pattern="pdf/**.pdf">
-                <map:read type="no-byte-range" src="resources/pdf/{1}.pdf" mime-type="application/pdf"/>
+                <map:read type="no-byte-range" src="{defaults:stage-base}/resources/pdf/{1}.pdf" mime-type="application/pdf"/>
             </map:match>
             <map:match type="wildcard" pattern="**.gif">
-                <map:read src="content/{1}.gif" mime-type="image/gif"/>
+                <map:read src="{defaults:stage-base}/content/{1}.gif" mime-type="image/gif"/>
             </map:match>
             <map:match type="wildcard" pattern="**.jpg">
-                <map:read src="content/{1}.jpg" mime-type="image/jpeg"/>
+                <map:read src="{defaults:stage-base}/content/{1}.jpg" mime-type="image/jpeg"/>
             </map:match>
             <map:match type="wildcard" pattern="**.pdf">
-                <map:read type="no-byte-range" src="content/{1}.pdf" mime-type="application/pdf"/>
+                <map:read type="no-byte-range" src="{defaults:stage-base}/content/{1}.pdf" mime-type="application/pdf"/>
             </map:match>
             <map:match type="wildcard" pattern="**.rm">
-                <map:read src="content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
+                <map:read src="{defaults:stage-base}/content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
             </map:match>
             <map:match type="wildcard" pattern="**.camv">
-                <map:read src="content/{1}.camv" mime-type="application/x-camtasia_video"/>
+                <map:read src="{defaults:stage-base}/content/{1}.camv" mime-type="application/x-camtasia_video"/>
             </map:match>
             <map:match type="wildcard" pattern="**.smil">
-                <map:read src="content/{1}.smil" mime-type="application/smil"/>
+                <map:read src="{defaults:stage-base}/content/{1}.smil" mime-type="application/smil"/>
             </map:match>
             <map:match type="wildcard" pattern="**.xls">
-                <map:read src="content/{1}.xls" mime-type="application/vnd.ms-excel"/>
+                <map:read src="{defaults:stage-base}/content/{1}.xls" mime-type="application/vnd.ms-excel"/>
             </map:match>
             <map:match type="wildcard" pattern="**.doc">
-                <map:read src="content/{1}.doc" mime-type="application/msword"/>
+                <map:read src="{defaults:stage-base}/content/{1}.doc" mime-type="application/msword"/>
             </map:match>
             <map:match type="wildcard" pattern="**.ppt">
-                <map:read src="content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
+                <map:read src="{defaults:stage-base}/content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
             </map:match>
             <map:match type="wildcard" pattern="**.swf">
-                <map:read src="content/{1}.swf" mime-type="application/x-shockwave-flash"/>
+                <map:read src="{defaults:stage-base}/content/{1}.swf" mime-type="application/x-shockwave-flash"/>
             </map:match>
             <map:match type="wildcard" pattern="robots.txt">
-                <map:read src="robots.txt" mime-type="text/plain"/>
+                <map:read src="{defaults:stage-base}/robots.txt" mime-type="text/plain"/>
             </map:match>
         </map:pipeline>
     </map:pipelines>
