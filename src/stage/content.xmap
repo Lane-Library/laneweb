@@ -11,73 +11,51 @@
     </map:components>
     <map:pipelines>
         <map:pipeline type="noncaching">
-<map:match pattern="askus_response.html">
-<map:generate type="file" src="content/askus_response.html"/>
-<map:transform type="sendmail">
-</map:transform>
-<map:serialize type="xml"/>
-</map:match>
+			<map:match pattern="askus_response.html">
+				<map:generate type="file" src="content/askus_response.html"/>
+				<map:transform type="sendmail"/>
+				<map:serialize type="xml"/>
+			</map:match>
             <map:match type="wildcard" pattern="online/auth.html">
                 <map:generate type="html" src="{defaults:stage-base}/content/online/auth.html"/>
-                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/auth.xsl">
-                    <map:parameter name="url" value="{request-param:url}"/>
-                </map:transform>
+                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/auth.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-			<!--  ryanmax -->
             <map:match type="wildcard" pattern="search-proxy">
-                <map:generate type="search-proxy" src="{defaults:search-url}search?id={request-param:id}&amp;w=2500&amp;q={uriencode-request-param:keywords}"/>
+                <map:generate type="search-proxy" src="{defaults:search-url}search"/>
+                <!--?id={request-param:id}&amp;w=2500&amp;q={uriencode-request-param:keywords}"/-->
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search.html">
-                <map:aggregate element="aggregate">
-<!--                    <map:part type="http" src="{defaults:search-url}search?id={request-param:id}&amp;w=1500&amp;q={uriencode-request-param:keywords}"/> -->
-                    <map:part src="cocoon:/search-proxy"/>
-                    <map:part type="xml" src="cocoon:/templates/search/{request-param:source}.xml"/>
-                </map:aggregate>
-                <map:transform type="xslt" src="{defaults:stage-base}/xsl/ajax-search.xsl">
-                    <map:parameter name="template" value="{request-param:source}"/>
-                    <map:parameter name="search-url" value="{defaults:new-search-url}"/>
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
-                    <map:parameter name="view" value="{request-param:view}"/>
-                    <map:parameter name="timeout" value="{chain:timeout}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="synchronous-search-proxy">
-                <map:generate type="search-proxy" src="{defaults:search-url}search?id={request-param:id}&amp;w={chain:search-timeout}&amp;q={uriencode-request-param:keywords}"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="synchronous-search.html">
-                <map:aggregate element="aggregate">
-                    <map:part src="cocoon:/synchronous-search-proxy"/>
-                    <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>
-                </map:aggregate>
-                <map:transform type="xslt" src="{defaults:stage-base}/xsl/synchronous-search.xsl">
-                    <map:parameter name="template" value="{request-param:source}"/>
-                    <map:parameter name="search-url" value="{defaults:new-search-url}"/>
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
-                    <map:parameter name="view" value="{request-param:view}"/>
-                    <map:parameter name="debug" value="{request-param:debug}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
+                <map:select type="regex-parameter">
+                    <map:parameter name="parameter-selector-test" value="{request-param:source}"/>
+                    <map:when test="clinical|peds|research">
+                        <map:aggregate element="aggregate">
+                            <map:part src="cocoon:/search-proxy"/>
+                            <map:part type="xml" src="cocoon:/templates/search/{request-param:source}.xml"/>
+                        </map:aggregate>
+                        <map:transform type="xslt" src="{defaults:stage-base}/xsl/ajax-search.xsl">
+                            <map:parameter name="search-url" value="{defaults:search-url}"/>
+                            <map:parameter name="timeout" value="{chain:timeout}"/>
+                        </map:transform>
+                        <map:serialize type="xml"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:generate type="file" src="{defaults:stage-base}/content/search.html"/>
+                        <!--src="cocoon:/templates/search.xml?{request-uri:requestURI}"/-->
+                        <map:transform type="xinclude"/>
+                        <map:serialize type="xml"/>
+                    </map:otherwise>
+                </map:select>
             </map:match>
             <map:match type="wildcard" pattern="howto/index.html">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
-                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/faq.xsl">
-                    <map:parameter name="id" value="{request-param:id}"/>
-                    <map:parameter name="category" value="{request-param:category}"/>
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
-                </map:transform>
+                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/faq.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="blog2list.html">
                 <map:generate type="html" src="{request-param:u}"/>
-                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/blog2list.xsl">
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
-                    <map:parameter name="label-element" value="{request-param:le}"/>
-                    <map:parameter name="label" value="{request-param:l}"/>
-                </map:transform>
+                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/blog2list.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="blog/*">
@@ -92,11 +70,9 @@
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/request2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- ryanmax: faq, sfx & suldb -->
             <map:match pattern="faq">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html#xpointer(/*[1]/*[2]/*)"/>
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/blog2list.xsl">
-					<map:parameter name="keywords" value="{request-param:keywords}"/>
 					<map:parameter name="label" value="Lane Services &amp;FAQs"/>
 					<map:parameter name="label-element" value="h3"/>
 				</map:transform>
@@ -111,9 +87,7 @@
             </map:match>
             <map:match pattern="suldb">
                 <map:generate type="html" src="http://library.stanford.edu/catdb/alldata.html"/>
-				<map:transform type="xsltc" src="{defaults:stage-base}/xsl/suldb.xsl">
-					<map:parameter name="q" value="{request-param:q}"/>
-				</map:transform>
+				<map:transform type="xsltc" src="{defaults:stage-base}/xsl/suldb.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="templates/**.xml">
