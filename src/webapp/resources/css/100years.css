@@ -28,7 +28,7 @@ body {
 #headerTop {
 	width: auto;
 	height:69px;
-	background: url(/beta/images/templates/100years/topGradBackgr.jpg) repeat-x top left;
+	background: url(/././images/templates/100years/topGradBackgr.jpg) repeat-x top left;
 	border-bottom: 20px solid #c5bd9f;
 }
 
@@ -106,7 +106,7 @@ body>#contentContainer {
 	color: #900;
 	text-align: center;
 	padding-top: 2px; /* cover empty space at top*/
-	background: url(/beta/images/templates/100years/leftColumnBackgr.jpg) repeat-x;
+	background: url(/././images/templates/100years/leftColumnBackgr.jpg) repeat-x;
 }
 	
 #content {
@@ -157,7 +157,7 @@ body>#contentContainer {
 /*following sidebar ... override lane standard*/
 #sidebar li {
 	padding-left: 12px;
-	background-image: url(/beta/images/templates/100years/bullet.gif);
+	background-image: url(/././images/templates/100years/bullet.gif);
 	background-repeat: no-repeat;
 	background-position: 0 0.3em;
 }

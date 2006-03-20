@@ -2,7 +2,7 @@
 // create GLOBAL object and attributes
 //
 var GLOBALS = new Object();
-GLOBALS.basePath = '/beta';
+GLOBALS.basePath = '/./.';
 GLOBALS.baseImagePath = GLOBALS.basePath + '/images/templates/default';
 GLOBALS.searchPath = GLOBALS.basePath + '/search.html';
 GLOBALS.lanewebTemplate = 'default';
