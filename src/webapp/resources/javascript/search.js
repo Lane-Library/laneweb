@@ -4,6 +4,7 @@
 var GLOBALS = new Object();
 GLOBALS.basePath = '/beta';
 GLOBALS.baseImagePath = GLOBALS.basePath + '/images/templates/default';
+GLOBALS.searchPath = GLOBALS.basePath + '/search.html';
 GLOBALS.lanewebTemplate = 'default';
 GLOBALS.proxyPrefix = 'http://laneproxy.stanford.edu/login?url=';
 GLOBALS.needsProxy = getMetaContent(document,'lw_proxyLinks');
@@ -42,7 +43,7 @@ function showeLibraryTab(eLibraryActiveTab){
 	if (!eLibraryActiveTab){
 		eLibraryActiveTab = 'all'; // default to all
 		for (var i = 0; i < eLibraryTabIDs.length; i++){
-			if (getQueryContent('tab') == eLibraryTabIDs[i]){
+			if (getQueryContent('source') == eLibraryTabIDs[i]){
 				eLibraryActiveTab = eLibraryTabIDs[i];
 			}
 		}
@@ -83,8 +84,82 @@ function showeLibraryTab(eLibraryActiveTab){
 			}
 		}
 	}
-
 	refreshPopInBar();
+}
+
+function sorteLibraryResults(select,divID){
+	if(!divID){
+		divID = Object.eLibraryActiveTab;
+	}
+	var div = document.getElementById(divID);
+	var dl = document.getElementById(divID).getElementsByTagName('dl');
+
+	if(div.getElementsByTagName('dt').length == 1){
+		return true;
+	}
+	else if(div.getElementsByTagName('dt').length > 1000){
+		//if(!confirm('Sorting large result sets can take time. Do you wish to continue?'))
+			//return false;
+	}
+	document.body.style.cursor='wait';
+
+	var resultsArray = new Array;
+	var resultsHTML = '';
+
+	if(dl[0].getAttribute('name') == 'orig'){
+		for(var p = 0; p < div.getElementsByTagName('dt').length; p++){
+			resultsArray[p]=[div.getElementsByTagName('dt')[p].getAttribute('order'),'<dt order="' + div.getElementsByTagName('dt')[p].getAttribute('order') + '">' + div.getElementsByTagName('dt')[p].innerHTML + '</dt>' + '<dd>' + div.getElementsByTagName('dd')[p].innerHTML + '</dd>'];
+		}
+		resultsArray.sort(sortArrayByOrder);
+		var nextIndex = 0;
+		var nextSort = 'alpha';
+		var newText = 'A-Z';
+	}
+	else {
+		for(var p = 0; p < div.getElementsByTagName('dt').length; p++){
+			resultsArray[p]=[div.getElementsByTagName('dt')[p].innerHTML.toLowerCase().replace(/[^a-z ]/,''),'<dt order="' + p + '">' + div.getElementsByTagName('dt')[p].innerHTML + '</dt>' + '<dd>' + div.getElementsByTagName('dd')[p].innerHTML + '</dd>'];
+		}
+		resultsArray.sort(sortArrayByTitle);
+		var nextIndex = 1;
+		var nextSort = 'orig';
+		var newText = 'Relevance';
+	}
+
+	for(p=0;p<resultsArray.length;p++){
+		resultsHTML = resultsHTML + resultsArray[p][1];
+	}
+	
+	div.innerHTML = '<dl name="' + nextSort + '">' + resultsHTML + '</dl>';
+	//select.innerHTML = newText;
+	select.selectedIndex = nextIndex;
+	document.body.style.cursor='auto';
+}
+
+function sortArrayByOrder(a, b) {
+	var filingPattern = /^\d+/;
+	var orderMatchA = a.toString().match(filingPattern);
+	var orderMatchB = b.toString().match(filingPattern);
+	return orderMatchA[0] - orderMatchB[0];
+}
+
+function sortArrayByTitle(a, b) {
+	var titlePattern = /[a-zA-Z ]+/;
+	var titleMatchA = a.toString().match(/[a-zA-Z ]+/);
+	var titleMatchB = b.toString().match(/[a-zA-Z ]+/);
+
+	var nonFilingChars = /^(a|an|the|de|die|la|le|los|las|les) /;
+	var titleBaseA = titleMatchA[0].toString().replace(nonFilingChars,'');
+	var titleBaseB = titleMatchB[0].toString().replace(nonFilingChars,'');
+
+	if(titleBaseA < titleBaseB){
+		return -1;
+	}
+	else if(titleBaseA > titleBaseB){
+		return 1;
+	}
+	else {
+		return 0;
+	}
 }
 
 function refreshPopInBar(){
@@ -95,8 +170,8 @@ function refreshPopInBar(){
 		document.getElementById('popInContent').className = 'hide';
 	}
 
-	if(document.getElementById(Object.eLibraryActiveTab + "TabAdditionalText")){
-		popInContent = document.getElementById(Object.eLibraryActiveTab + "TabAdditionalText").innerHTML;
+	if(document.getElementById(Object.eLibraryActiveTab + "TabBasicText")){
+		popInContent = document.getElementById(Object.eLibraryActiveTab + "TabBasicText").innerHTML;
 	}
 
 	// if zero results for active tab, display zeroResultsText
@@ -104,16 +179,19 @@ function refreshPopInBar(){
 		popInContent = document.getElementById(Object.eLibraryActiveTab + "TabZeroResultsText").innerHTML;
 	}
 
+	if(document.getElementById('sfxResults') && (Object.eLibraryActiveTab == 'all' || Object.eLibraryActiveTab == 'ej') ){ 
+		popInContent += document.getElementById('sfxResults').innerHTML;
+	}
+	if(document.getElementById('spellResults')){ 
+		popInContent = document.getElementById('spellResults').innerHTML;
+	}
 	if(document.getElementById('suldbResults') && Object.eLibraryActiveTab == 'database'){ 
 		popInContent += document.getElementById('suldbResults').innerHTML;
 	}
 
-	if(document.getElementById('sfxResults') && (Object.eLibraryActiveTab == 'all' || Object.eLibraryActiveTab == 'ej') ){ 
-		popInContent += document.getElementById('sfxResults').innerHTML;
-	}
-
-	if(document.getElementById('spellResults')){ 
-		popInContent = document.getElementById('spellResults').innerHTML;
+	// if results, add sort-by
+	if(eLibraryResultCounts[Object.eLibraryActiveTab] != 0){
+		 popInContent += 'Sorted by <select name="' + Object.eLibraryActiveTab + 'sortBy" onchange="sorteLibraryResults(this);" style="font-size: 95%; font-weight: 400;"> <option value="relevance">Relevance</option> <option value="alpha">A-Z</option> </select>';
 	}
 
 	if(popInContent != ''){
@@ -122,8 +200,8 @@ function refreshPopInBar(){
 		document.getElementById('popInContent').className = 'popInContent';
 	}	
 
-	// show tabTip if any
-	if(document.getElementById(Object.eLibraryActiveTab + "TabTipText")){
+	// show tabTip if any *and* more than zero results
+	if(document.getElementById(Object.eLibraryActiveTab + "TabTipText") && eLibraryResultCounts[Object.eLibraryActiveTab] != 0){
 		var thisTabText = document.getElementById(Object.eLibraryActiveTab + "TabTipText").innerHTML;
 		if(thisTabText.match('::::')) thisTabText = expandSpecialSyntax(thisTabText);
 		document.getElementById("tabTip").innerHTML = thisTabText;
@@ -153,7 +231,7 @@ XMLClient.prototype = {
 	init: function (type, url, template) {
 		this.template = template;
 		this.type = type;
-		this.url = url.replace(/&amp;/g,'&'); // JTidy replaces & w/ &amp;
+		this.url = url.replace(/amp;/g,''); // JTidy replaces & w/ &amp; ... &amp; becomes &amp;amp;
 
 		//sniff for IE/Mac
 		if ( navigator.userAgent.indexOf('Mac') > -1 && (navigator.appVersion.indexOf('MSIE 5') > -1 || navigator.appVersion.indexOf('MSIE 6') > -1) ){
@@ -409,6 +487,11 @@ XMLClient.prototype = {
 							if(metaSearchResults[j].id == 'google'){
 								document.getElementById(metaSearchResults[j].id + 'SearchResults').className = 'metaSearchResultsRightCorner';
 							}
+							// TESTING ... remove entire else if block once lmldb has updated design
+							else if(metaSearchResults[j].id == 'lois'){
+								document.getElementById(metaSearchResults[j].id + 'SearchResults').innerHTML = "<a href='" + GLOBALS.basePath + '/online/catalog.html?keywords=' + keywords + "'>" + metaSearchResults[j].name + '<br /><span class="tabHitCount">' + intToNumberString(metaSearchResults[j].hits) + '</span></a>';
+								document.getElementById(metaSearchResults[j].id + 'SearchResults').className = 'metaSearchResults';
+							}
 							else{
 								document.getElementById(metaSearchResults[j].id + 'SearchResults').className = 'metaSearchResults';
 							}
@@ -434,7 +517,7 @@ XMLClient.prototype = {
 				var result = response.getElementsByTagName('result')[0].firstChild.data;
 
 				if(result != 0 ){
-					var html = 'FindIt@Stanford result: <a target="new" href="' + openurl + '">' + result + '</a><br />';
+					var html = 'FindIt@Stanford eJournal: <a target="new" href="' + openurl + '">' + result.replace(/ \[.*\]/,'') + '</a><br />';
 
 					//create new sfxResults div (rely on refreshPopInBar to display)
 					var body = document.getElementsByTagName("body").item(0);
@@ -456,8 +539,7 @@ XMLClient.prototype = {
 
 				if(response.firstChild){
 					var spellSuggestion = response.firstChild.data;
-					var baseUrl = baseUrl = './er.html?source=eResources&amp;template=' + GLOBALS.lanewebTemplate + '&amp;keywords=';
-					var html = 'Did you mean: <a href="' + baseUrl + spellSuggestion + '"><i><strong>' + spellSuggestion + '</strong></i></a>';
+					var html = 'Did you mean: <a href="' + GLOBALS.searchPath + '?keywords=' + spellSuggestion + '"><i><strong>' + spellSuggestion + '</strong></i></a><br />';
 
 					//create new spellResults div (rely on refreshPopInBar to display)
 					var body = document.getElementsByTagName("body").item(0);
@@ -627,7 +709,7 @@ function toggleNode(linkNode, toggleNode, onText, offText, additionalInvertedTog
 	}
 }
 
-// expand "::::keywordsDisplay::::  ::::basePath::::" to "dvt /beta", etc.
+// expand "::::keywords::::  ::::basePath::::" to "dvt /beta/stage", etc.
 function expandSpecialSyntax(string){
 	for (i in GLOBALS){
 		var pattern = '::::' + i + '::::';
@@ -717,25 +799,29 @@ function submitSearch() {
     return false;
   }
   else if (source == 'ej') {
-	var dest = GLOBALS.basePath + '/online/er.html?tab=ej&keywords=' + keywords;
+	//var dest = GLOBALS.basePath + '/online/er.html?tab=ej&keywords=' + keywords;
+	var dest = GLOBALS.searchPath + '?source=ej&keywords=' + keywords;
     //window.location.replace(dest);
     window.location = dest;
 	return false;
   }
   else if (source == 'database') {
-	var dest = GLOBALS.basePath + '/online/er.html?tab=database&keywords=' + keywords;
+	//var dest = GLOBALS.basePath + '/online/er.html?tab=database&keywords=' + keywords;
+	var dest = GLOBALS.searchPath + '?source=database&keywords=' + keywords;
     //window.location.replace(dest);
     window.location = dest;
 	return false;
   }
   else if (source == 'book') {
-	var dest = GLOBALS.basePath + '/online/er.html?tab=book&keywords=' + keywords;
+	//var dest = GLOBALS.basePath + '/online/er.html?tab=book&keywords=' + keywords;
+	var dest = GLOBALS.searchPath + '?source=book&keywords=' + keywords;
     //window.location.replace(dest);
     window.location = dest;
 	return false;
   }
   else if (source == 'cc') {
-	var dest = GLOBALS.basePath + '/online/er.html?tab=cc&keywords=' + keywords;
+	//var dest = GLOBALS.basePath + '/online/er.html?tab=cc&keywords=' + keywords;
+	var dest = GLOBALS.searchPath + '?source=cc&keywords=' + keywords;
     //window.location.replace(dest);
     window.location = dest;
 	return false;
@@ -750,13 +836,15 @@ function submitSearch() {
   }
   else if (source == 'faq') {
 	//var dest = GLOBALS.basePath + '/howto/index.html?keywords=' + keywords;
-	var dest = GLOBALS.basePath + '/online/er.html?tab=faq&keywords=' + keywords;
+	//var dest = GLOBALS.basePath + '/online/er.html?tab=faq&keywords=' + keywords;
+	var dest = GLOBALS.searchPath + '?source=faq&keywords=' + keywords;
     //window.location.replace(dest);
     window.location = dest;
 	return false;
   }
   else if (source == 'eResources') {
-	var dest = GLOBALS.basePath + '/online/er.html?keywords=' + keywords;
+	//var dest = GLOBALS.basePath + '/online/er.html?keywords=' + keywords;
+	var dest = GLOBALS.searchPath + '?keywords=' + keywords;
     //window.location.replace(dest);
     window.location = dest;
 	return false;
@@ -801,10 +889,19 @@ function lastSelectValue(select){
 
 
 //testing catalog.html
-function loadCatIframe(){
+function loadCatalogIframe(){
         var q = getQueryContent('keywords',location.href);
         var frame = document.getElementById('catalog');
-        frame.src = 'http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&Search_Arg=' + q + '&SL=None&Search_Code=FT*&CNT=50';
+        //frame.src = 'http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&Search_Arg=' + q + '&SL=None&Search_Code=FT*&CNT=50';
+        frame.src = 'http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1=' + q + '&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50';
         frame.className = '';
 }
 
+// handle error events with errorLogger method 
+window.onerror = errorLogger;
+function errorLogger(message, url, line){
+	var errorImg = document.createElement('img');
+	errorImg.src = GLOBALS.basePath + '/javascript/ErrorLogger.js?url=' + url + '&line=' + line + '&msg=' + message;
+	errorImg.className = 'hide';
+	return false;
+}

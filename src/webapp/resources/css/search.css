@@ -72,9 +72,27 @@
 	border: 1px solid #99987a;
 	background: #e0e0d1;
 }
-
-
-/* popInContent styles used for did you mean, sfx, suldb content (eLibrary and incremental) */
+/* ryan I'm throwing these in temporarily.... -Pam */
+#tabTip h2 {
+	color: #40668c;
+	font-size: 1.5em;
+	font-weight:bold;
+	text-align:center;
+	margin-top: 2px;
+	margin-bottom: 10px;
+}
+#tabTip h4 {
+	color: #444;
+	font-size: 1.1em;
+	font-weight:bold;
+	font-style: italic;
+	margin-bottom: 0;
+	padding-bottom:0;
+}
+#tabTip p {
+	padding-top: 0;
+	margin-top:0;
+}
 /* popInContent styles used for did you mean, sfx, suldb content (eLibrary and incremental) */
 .popInContent {
 	/*clear: both;*/

@@ -14,8 +14,8 @@
 	<div id="eLibraryTabs"><!--  --></div>
 	<div id="metaSearchResultsContainer">
 		<div id="faqSearchResults" class="hide"><!--  not used, but keep as placeholder --></div>
-		<div class="metaSearchResults"><a href="javascript:void(0);" onclick="javascript:window.location = GLOBALS.basePath + '/search.html?source=clinical&amp;keywords=' + keywords;">Search<br />Clinical</a></div>
-		<div class="metaSearchResults"><a href="javascript:void(0);" onclick="javascript:window.location = GLOBALS.basePath + '/search.html?source=research&amp;keywords=' + keywords;">Search<br />Bioresearch</a></div>
+		<div class="metaSearchResults"><a onclick="javascript:window.location = GLOBALS.basePath + '/search.html?source=clinical&amp;keywords=' + keywords;">Search<br />Clinical</a></div>
+		<div class="metaSearchResults"><a onclick="javascript:window.location = GLOBALS.basePath + '/search.html?source=research&amp;keywords=' + keywords;">Search<br />Bioresearch</a></div>
 		<div id="loisSearchResults" class="hide"><!--  --></div>
 		<div id="pubmedSearchResults" class="hide"><!--  --></div>
 		<div id="googleSearchResults" class="hide"><!--  --></div>
@@ -52,19 +52,80 @@
 </div>
 
 <!--  editable by content developers -->
-<div id="allTabTipText" class="hide"><h3>Tip</h3>all tip</div>
-<div id="ejTabTipText" class="hide"><h3>Tip</h3>Searching for articles? Use <a href="javascript:void(0);" onclick="javascript:showeLibraryTab('database');">article databases</a> such as PubMed, Google Scholar and Science Citation Index<br /><br />Try Lane's <a href="::::basePath::::/search.html?source=research&amp;keywords=::::keywordsUri::::">Bioresearch Search</a> or <a href="::::basePath::::/search.html?source=clinical&amp;keywords=::::keywordsUri::::">Clinical Search</a> to search article databases, inside eBooks and more.</div>
-<div id="databaseTabTipText" class="hide"><h3>Tip</h3>db tip</div>
-<div id="faqTabTipText" class="hide"><h3>Tip</h3>faqs tip </div>
 
-<!-- original with long blurbs
-<span id="allTabBasicText" class="hide">Launch search in <a href="http://library.stanford.edu/searchcat?everything=::::keywordsUri::::">Socrates</a> to check print and other materials in Stanford libraries<br /><i>Search inside</i> databases, eBooks and more with <a href="::::basePath::::/search.html?source=research&keywords=::::keywordsUri::::">Bioresearch Search</a> or <a href="::::basePath::::/search.html?source=clinical&keywords=::::keywordsUri::::">Clinical Search</a><br /></span>
-<span id="ejTabBasicText" class="hide"><a href="::::basePath::::/online/ejbrowse.html">Browse A-Z: biomedical eJournals</a><br /><a href="http://library.stanford.edu/searchcat?everything=::::keywordsUri::::">Search all Stanford journals</a> beyond biomedicine and check print availability<br /></span>
-<span id="bookTabBasicText" class="hide"><a href="::::basePath::::/online/ebbrowse.html">Browse A-Z: biomedical eBooks</a><br /><i>Search inside</i> clinical reference books with Lane's <a href="::::basePath::::/search.html?source=clinical&keywords=::::keywordsUri::::">Clinical Search</a><br /><a href="http://library.stanford.edu/searchcat?everything=::::keywordsUri::::">Search all Stanford books</a> beyond biomedicine and check for a print copy<br />Launch a search for books in <a href="http://www.amazon.com/exec/obidos/external-search/?field-keywords=::::keywordsUri::::">Amazon</a>, <a href="http://books.google.com/books?q=::::keywordsUri::::">Google Books</a>, <a href="http://redlightgreen.com/ucwprod/web/busy.jsp?ACTION=search&MAXRECORDS=20&SOURCEID=portal&SRCHBY=keyword&SRCHTERM=::::keywordsUri::::">RedLightGreen</a>, or <a href="http://partneraccess.oclc.org/wcpa/servlet/OpenUrl?genre=book&title=::::keywordsUri::::">WorldCat Books</a><br /></span>
-<span id="databaseTabBasicText" class="hide"><a href="::::basePath::::/online/dbbrowse.html">Browse A-Z: biomedical databases</a><br /><i>Search inside</i> databases with <a href="::::basePath::::/search.html?source=research&keywords=::::keywordsUri::::">Bioresearch Search</a> or <a href="::::basePath::::/search.html?source=clinical&keywords=::::keywordsUri::::">Clinical Search</a><br /></span>
-<span id="ccTabBasicText" class="hide"><a href="::::basePath::::/online/ccbrowse.html">Browse A-Z: clinical calculators, algorithms, charts, and more</a><br /></span>
-<span id="faqTabBasicText" class="hide">faq additional<br /></span>
--->
+<div id="allTabTipText" class="hide">
+	<h2>What am I missing?</h2>
+	<h4>Print</h4>
+	<p>Search the
+	<a href="http://library.stanford.edu/searchcat?everything=::::keywordsUri::::" target="_blank">Stanford catalog</a> 
+	for print journals and books across the campus.</p>
+	
+	<h4>Browse all</h4>
+	<ul>
+		<li><a href="/online/ej.html">eJournals</a></li>
+		<li><a href="/online/eb.html">eBooks</a></li>
+		<li><a href="/online/reference.html">Reference</a></li>
+		<li><a href="/online/index.html">more</a></li>
+	</ul>
+	
+</div>
+
+<div id="ejTabTipText" class="hide">
+	<h2>What am I missing?</h2>
+	
+	<h4>Searching for journal articles?</h4>
+	<p>Use <a href="::::basePath::::/online/db.html">article databases</a> 
+	such as PubMed, Google Scholar and Science Citation Index
+	</p>
+	
+	<h4>Print journals</h4>
+	<p>Search the
+	<a href="http://library.stanford.edu/searchcat?everything=::::keywordsUri::::" target="_blank">Stanford catalog</a> 
+	for print journals across the campus.</p>
+
+	<h4>Browse all</h4>
+	<p><a href="::::basePath::::/online/ej.html">Biomedical eJournals</a></p>
+</div>
+
+
+<div id="databaseTabTipText" class="hide">
+	<h2>What am I missing?</h2>
+	
+	<h4>Browse all</h4>
+	<ul>
+		<li><a href="::::basePath::::/online/db.html">Biomedical databases</a></li>
+		<li><a href="http://library.stanford.edu/catdb/dbases_articles.html">Beyond biomedicine</a></li>
+	</ul>
+</div>
+
+<div id="bookTabTipText" class="hide">
+	<h2>What am I missing?</h2>
+	
+	<h4>Browse all</h4>
+	<ul>
+		<li><a href="::::basePath::::/online/eb.html">Biomedical eBooks</a></li>
+	</ul>
+	
+	<h4>Print books</h4>
+	<p>Search the
+	<a href="http://library.stanford.edu/searchcat?everything=::::keywordsUri::::" target="_blank">Stanford catalog</a> 
+	for print books across the campus.</p>
+
+	<h4>Search beyond Stanford</h4>
+	<ul>
+		<li><a href="http://www.amazon.com/exec/obidos/external-search/?field-keywords=::::keywordsUri::::" target="_blank">Amazon</a></li>
+		<li><a href="http://books.google.com/books?q=::::keywordsUri::::" target="_blank">Google Books</a></li>
+		<li><a href="http://redlightgreen.com/ucwprod/web/busy.jsp?ACTION=search&amp;MAXRECORDS=20&amp;SOURCEID=portal&amp;SRCHBY=keyword&amp;SRCHTERM=::::keywordsUri::::" target="_blank">RedLightGreen</a></li>
+		<li><a href="http://partneraccess.oclc.org/wcpa/servlet/OpenUrl?genre=book&amp;title=::::keywordsUri::::" target="_blank">WorldCat Books</a></li>
+	</ul>
+
+</div>
+<div id="faqTabTipText" class="hide"><h3>Tip</h3>calculators tip </div>
+<div id="ccTabTipText" class="hide"><h3>Tip</h3>faqs tip </div>
+
+
+
+
 
 <span id="allTabZeroResultsText" class="hide">Your search <strong>::::keywordsDisplay::::</strong> did not find any results.  Check for typos or try more general keywords.<br /></span>
 <span id="ejTabZeroResultsText" class="hide">No eJournals found.  Check Lane Catalog for print.<br /></span>
@@ -82,13 +143,15 @@
 	var meta = new XMLClient();
 	var sfx = new XMLClient();
 	var spell = new XMLClient();
-	//var suldb = new XMLClient();
 
 	meta.init('meta','/search/search?e=pubmed&amp;e=lois&amp;e=google&amp;q=' + keywords);
 	sfx.init('sfx',GLOBALS.basePath + '/content/sfx?q=' + keywords);
 	spell.init('spell','/search/spell?q=' + keywords, 'eResources');
-	//suldb.init('suldb',GLOBALS.basePath + '/content/suldb?q=' + keywords);
 
+	//suldb.init('suldb',GLOBALS.basePath + '/content/suldb?q=' + keywords);
+	//var suldb = new XMLClient();
+	//suldb.get();
+	
 	// run all functions _after_ page is completely loaded (crutch for IE)
 	var onloadEvent = window.onload;
 	window.onload = function() { if (onloadEvent) onloadEvent(); painteLibraryTabs(); showeLibraryTab(); meta.get(); sfx.get(); spell.get();}

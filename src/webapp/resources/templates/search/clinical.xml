@@ -27,7 +27,7 @@
           <div class="searchCategory" id="first_bets">
           <h3 class="hide">First Bets</h3>
           <ul>
-            <li id="uptodate_0">UpToDate</li>
+            <li id="uptodate">UpToDate</li>
             <li id="skolar_harrison">Harrison's</li>
             <li id="skolar_clin">Clin-eguide</li>
             <li id="emedicine">eMedicine</li>
