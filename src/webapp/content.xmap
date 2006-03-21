@@ -11,6 +11,9 @@
     </map:components>
     <map:pipelines>
         <map:pipeline type="noncaching">
+            <map:match type="wildcard" pattern="eresources/**">
+                <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
+            </map:match>
             <map:match type="wildcard" pattern="online/auth.html">
                 <map:generate type="html" src="{defaults:live-base}/content/online/auth.html"/>
                 <map:transform type="xsltc" src="{defaults:live-base}/xsl/auth.xsl">
