@@ -45,12 +45,10 @@
     <!-- whether or not the response template is the default template -->
     <xsl:variable name="template-is-default" select="$response-template = $default-template"/>
     <!-- the template document -->
-    <!-- note: for the devel area this needs to be 'cocoon://devel/templates/' -->
     <xsl:variable name="template-document" select="/*/h:html[3]"/>
     <!-- the root node of the requested content document -->
     <xsl:variable name="source" select="/*/h:html[1]"/>
     <!-- the sitemap document -->
-    <!-- note: for the devel area this needs to be 'cocoon://devel/sitemap.xml' -->
     <xsl:variable name="sitemap" select="/*/h:html[2]"/>
     <xsl:variable name="sidebar" select="/*/h:html[4]"/>
     
