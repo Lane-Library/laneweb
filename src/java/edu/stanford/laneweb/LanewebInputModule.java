@@ -8,6 +8,7 @@ package edu.stanford.laneweb;
 
 import java.net.URLEncoder;
 import java.security.MessageDigest;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -23,6 +24,7 @@ import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.components.modules.input.InputModule;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
+import org.apache.cocoon.environment.Session;
 
 /**
  * @author ceyates
@@ -84,14 +86,22 @@ public class LanewebInputModule extends AbstractLogEnabled implements
                 result = getAffiliation(ip);
             } 
         	
-        }else if (key.equals(TEMPLATE)) {
+        } else if (key.equals(TEMPLATE)) {
         		String uri = request.getRequestURI();
         		result = getTemplateName(uri);
-        }
-    	else if (key.equals(TICKET)) {
-     		String userName = (String)request.getSession().getAttribute("USER_NAME");
+        } else if (key.equals(TICKET)) {
+        	getLogger().error("getting ticket");
+        	String userName = request.getRemoteUser();
+//        	Session session = request.getSession();
+//     		String userName = (String) session.getAttribute("USER_NAME");
+//     		if (userName == null) {
+//     			userName = request.getRemoteUser();
+//     			session.setAttribute("USER_NAME", userName);
+//     		}
+     		getLogger().error("userName = " + userName);
      		if(userName != null)
      			result = getTicket(userName);  
+     		getLogger().error("ticket = " + result);
      	 }
          return result;
     }
