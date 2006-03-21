@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:sql="http://apache.org/cocoon/SQL/2.0">
+<xsl:stylesheet exclude-result-prefixes="sql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:sql="http://apache.org/cocoon/SQL/2.0">
 
   <xsl:template match="sql:rowset">
-    <dl>
+    <dl class="searchResults">
       <xsl:apply-templates select="sql:row[not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title)]"/>
     </dl>
   </xsl:template>
@@ -57,8 +57,9 @@
                         <xsl:value-of select="sql:url"/>
                     </xsl:otherwise>
                 </xsl:choose>
+                <xsl:apply-templates select="sql:description|sql:instruction"/>
             </a>
-            <xsl:apply-templates select="*[not(self::sql:holdings or self::sql:dates)]"/></li>
+            <xsl:apply-templates select="sql:publisher"/></li>
         </xsl:otherwise>
       </xsl:choose>
     </ul></dd>
@@ -79,6 +80,10 @@
                 <xsl:value-of select="."/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="sql:description|sql:instruction">
+        <xsl:text> </xsl:text><xsl:value-of select="."/>
     </xsl:template>
   
   <xsl:template match="node()"/>
@@ -117,8 +122,9 @@
                                   <xsl:value-of select="sql:url"/>
                               </xsl:otherwise>
                           </xsl:choose>
+                          <xsl:apply-templates select="sql:description|sql:instruction"/>
                       </a>
-                      <xsl:apply-templates select="*[not(self::sql:holdings or self::sql:dates)]"/>
+                      <xsl:apply-templates select="sql:publisher"/>
                   </li>
               </xsl:when>
               <xsl:otherwise>
@@ -131,8 +137,8 @@
                           </xsl:variable>
                           <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
                           <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
-                          <li><a href="{sql:url}" title="{sql:title}" class="{$proxy_class}"><xsl:value-of select="sql:label"/></a>
-                              <xsl:apply-templates select="*[not(self::sql:holdings or self::sql:dates)]"/>
+                          <li><a href="{sql:url}" title="{sql:title}" class="{$proxy_class}"><xsl:value-of select="sql:label"/><xsl:apply-templates select="sql:description|sql:instruction"/></a>
+                              <xsl:apply-templates select="sql:publisher"/>
                               <xsl:choose>
                                   <xsl:when test="preceding-sibling::sql:row[1]/sql:label = 'Get Password'">
                                       <a href="{preceding-sibling::sql:row[1]/sql:url}"> get password</a>
@@ -165,7 +171,8 @@
                         <xsl:value-of select="sql:url"/>
                     </xsl:otherwise>
                 </xsl:choose>
-            </a></li>
+                <xsl:apply-templates select="sql:description|sql:instruction"/>
+            </a><xsl:apply-templates select="sql:publisher"/></li>
         </xsl:for-each>
     </xsl:template>
     
