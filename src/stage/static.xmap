@@ -17,12 +17,12 @@
             </map:match>
             <map:match type="wildcard" pattern="style/*.css">
                 <map:read type="txt-resource" src="{defaults:stage-base}/resources/css/{1}.css">
-                    <map:parameter name="path" value="/beta/stage"/>
+                    <map:parameter name="path" value="{request:contextPath}/stage"/>
                 </map:read>
             </map:match>
             <map:match type="wildcard" pattern="javascript/*.js">
                 <map:read type="txt-resource" src="{defaults:stage-base}/resources/javascript/{1}.js" mime-type="application/x-javascript">
-                    <map:parameter name="path" value="/beta/stage"/>
+                    <map:parameter name="path" value="{request:contextPath}/stage"/>
                 </map:read>
             </map:match>
             <map:match type="wildcard" pattern="images/**.jpg">
