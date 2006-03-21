@@ -61,7 +61,7 @@
 							<map:serialize type="xml"/>
                         </map:when>
                         <map:otherwise>
-				                <map:generate type="file" src="cocoon:/templates/search.xml?{request-uri:requestURI}"/>
+				                <map:generate type="html" src="{defaults:live-base}/content/search.html"/>
 				                <map:transform type="xinclude"/>
 				                <map:serialize type="xml"/>
 						</map:otherwise>
