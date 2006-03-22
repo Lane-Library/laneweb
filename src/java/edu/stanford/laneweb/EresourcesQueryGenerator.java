@@ -20,6 +20,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 public class EresourcesQueryGenerator extends AbstractGenerator {
+	
+	//ERESOURCE.TITLE, lower(ERESOURCE.TITLE) as LTITLE, 
     
     private static final String TYPE = "t";
     private static final String MESH = "m";
@@ -27,16 +29,26 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     private static final String KEYWORDS = "keywords";
     private static final String QUERY = "q";
     private static final String SUBSET = "s";
-    private static final String FUZZY = "f";
     private static final String XMLNS = "http://apache.org/cocoon/SQL/2.0";
     private static final String EXECUTE_QUERY_ELEMENT = "execute-query";
     private static final String QUERY_ELEMENT = "query";
-    private static final String SELECT = "SELECT " +
-"DISTINCT LINK.LINK_ID, ERESOURCE.ERESOURCE_ID, VERSION.VERSION_ID, ERESOURCE.TITLE, lower(ERESOURCE.TITLE) as LTITLE, VERSION.PUBLISHER, VERSION.HOLDINGS, VERSION.DATES, VERSION.DESCRIPTION, VERSION.PROXY, LINK.URL, LINK.LABEL, LINK.INSTRUCTION";
-    private static final String FROM = " FROM " +
+    private static final String SELECT = 
+    	"SELECT " +
+    	"DISTINCT LINK.LINK_ID, " +
+    	"ERESOURCE.ERESOURCE_ID, " +
+    	"VERSION.VERSION_ID, " +
+    	"VERSION.PUBLISHER, " +
+    	"VERSION.HOLDINGS, " +
+    	"VERSION.DATES, " +
+    	"VERSION.DESCRIPTION, " +
+    	"VERSION.PROXY, " +
+    	"LINK.URL, " +
+    	"LINK.LABEL, " +
+    	"LINK.INSTRUCTION, ";
+    private static final String FROM = "FROM " +
 "ERESOURCE, VERSION, LINK";
     private static final String WHERE =
-" WHERE " +
+"WHERE " +
 "ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID " +
 "AND " + 
 "VERSION.VERSION_ID = LINK.VERSION_ID ";
@@ -44,7 +56,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     private static final String ALT_SELECT = "SELECT " +
     "DISTINCT LINK.LINK_ID, ERESOURCE.ERESOURCE_ID, VERSION.VERSION_ID, ERESOURCE.PREFERRED_TITLE, lower(ERESOURCE.PREFERRED_TITLE) as LTITLE, VERSION.PUBLISHER, VERSION.HOLDINGS, VERSION.DATES, VERSION.DESCRIPTION, VERSION.PROXY, LINK.URL, LINK.LABEL, LINK.INSTRUCTION";
     private static final String ALT_AND = " AND ERESOURCE.PREFERRED_TITLE IS NOT NULL";
-    private static final String ORDER_BY = " ORDER BY ";
+    private static final String ORDER_BY = "\nORDER BY ";
     private static final String ORDER = " LTITLE, LINK_ID";
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
     
@@ -53,14 +65,16 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     private String subset; 
     private String alpha;
     private String query;
-    private String fuzzy;
+    private String translatedQuery;
     private boolean haveParameters;
+    private String coreWeight;
     private QueryTranslator queryTranslator = new QueryTranslator();
 
     public void setup(SourceResolver resolver, Map objectModel, String src,
             Parameters par) throws ProcessingException, SAXException,
             IOException {
         super.setup(resolver, objectModel, src, par);
+        this.coreWeight = par.getParameter("core-weight", "3");
         Request request = ObjectModelHelper.getRequest(objectModel);
         this.haveParameters = false;
         this.type = request.getParameter(TYPE);
@@ -117,13 +131,8 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
 				}
 			}
 		}
-        this.fuzzy = request.getParameter(FUZZY);
-        if (this.fuzzy != null) {
-        	if (this.fuzzy.length() == 0) {
-        		this.fuzzy = "60";
-        	}
-        } else {
-        	this.fuzzy = "60";
+        if (this.query != null) {
+        	this.translatedQuery = this.queryTranslator.translate(this.query);
         }
     }
 
@@ -150,100 +159,134 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
         this.subset = null;
         this.alpha = null;
         this.query = null;
-        this.fuzzy = null;
+        this.translatedQuery = null;
     }
     
     private char[] getSelectStatmentChars() {
-        StringBuffer queryBuffer = new StringBuffer(SELECT);
-        String translatedQuery = null;
-        if (this.query != null) {
-            translatedQuery = queryTranslator.translate(this.query);
-            queryBuffer.append(", CONTAINS(ERESOURCE.TITLE,'")
-            .append(translatedQuery)
-            .append("',1) AS SCORE_TITLE")
-            .append(", SCORE(2) AS SCORE_TEXT");
-        }
-        queryBuffer.append(FROM);
-        if (this.type != null) {
-            queryBuffer.append(", TYPE");
-        }
-        if (this.mesh != null) {
-            queryBuffer.append(", MESH");
-        }
-        if (this.subset != null) {
-            queryBuffer.append(", SUBSET");
-        }
-        queryBuffer.append(WHERE);
-        if (this.type != null) {
-            queryBuffer.append(" AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE.TYPE = '").append(this.type).append("'");
-        }
-        if (this.mesh != null) {
-            queryBuffer.append(" AND MESH.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND MESH.TERM = '").append(this.mesh).append("'");
-        }
-        if (this.subset != null) {
-            queryBuffer.append(" AND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET.SUBSET = '").append(this.subset).append("'");
-        }
-        if (this.alpha != null) {
-        	queryBuffer.append(" AND LOWER(SUBSTR(ERESOURCE.TITLE,1,1)) ");
-        	if (this.alpha.equals("#")) {
-        		queryBuffer.append("< 'A' ");
-        	} else {
-        		queryBuffer.append("= '").append(this.alpha).append("'");
-        	}
-        }
-        if (this.query != null) {
-            queryBuffer.append(" AND  CONTAINS(ERESOURCE.TEXT,'")
-            .append(translatedQuery)
-            .append("', 2) > 0 ");
-        }
-        queryBuffer.append(UNION);
-        queryBuffer.append(ALT_SELECT);
-        if (this.query != null) {
-            queryBuffer.append(", CONTAINS(ERESOURCE.PREFERRED_TITLE,'")
-            .append(translatedQuery)
-            .append("',1) AS SCORE_TITLE")
-            .append(", SCORE(2) AS SCORE_TEXT");
-        }
-        queryBuffer.append(FROM);
-        if (this.type != null) {
-            queryBuffer.append(", TYPE");
-        }
-        if (this.mesh != null) {
-            queryBuffer.append(", MESH");
-        }
-        if (this.subset != null) {
-            queryBuffer.append(", SUBSET");
-        }
-        queryBuffer.append(WHERE);
-        queryBuffer.append(ALT_AND);
-        if (this.type != null) {
-            queryBuffer.append(" AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE.TYPE = '").append(this.type).append("'");
-        }
-        if (this.mesh != null) {
-            queryBuffer.append(" AND MESH.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND MESH.TERM = '").append(this.mesh).append("'");
-        }
-        if (this.subset != null) {
-            queryBuffer.append(" AND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET.SUBSET = '").append(this.subset).append("'");
-        }
-        if (this.alpha != null) {
-        	queryBuffer.append(" AND LOWER(SUBSTR(ERESOURCE.PREFERRED_TITLE,1,1)) ");
-        	if (this.alpha.equals("#")) {
-        		queryBuffer.append("< 'A' ");
-        	} else {
-        		queryBuffer.append("= '").append(this.alpha).append("'");
-        	}
-        }
-        if (this.query != null) {
-            queryBuffer.append(" AND CONTAINS(ERESOURCE.TEXT,'")
-            .append(translatedQuery)
-            .append("', 2) > 0 ");
-        }
-        queryBuffer.append(ORDER_BY);
-        if (this.query != null) {
-            queryBuffer.append("SCORE_TITLE DESC, SCORE_TEXT DESC, ");
-        }
-        queryBuffer.append(ORDER);
+    	StringBuffer queryBuffer = new StringBuffer();
+    	if (this.translatedQuery != null) {
+    		getScoredSelectSQL(queryBuffer, "ERESOURCE.TITLE", true);
+    		getFromSQL(queryBuffer);
+    		getScoredWhereSQL(queryBuffer, "ERESOURCE.TITLE", true);
+    		queryBuffer.append("\nUNION\n");
+    		getScoredSelectSQL(queryBuffer, "ERESOURCE.TITLE", false);
+    		getFromSQL(queryBuffer);
+    		getScoredWhereSQL(queryBuffer, "ERESOURCE.TITLE", false);
+    		queryBuffer.append("\nUNION\n");
+    		getScoredSelectSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE", true);
+    		getFromSQL(queryBuffer);
+    		getScoredWhereSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE", true);
+    		queryBuffer.append("\nUNION\n");
+    		getScoredSelectSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE", false);
+    		getFromSQL(queryBuffer);
+    		getScoredWhereSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE", false);
+    		getOrderBySQL(queryBuffer);
+    	} else {
+    		getSelectSQL(queryBuffer, "ERESOURCE.TITLE");
+    		getFromSQL(queryBuffer);
+    		getWhereSQL(queryBuffer, "ERESOURCE.TITLE");
+    		queryBuffer.append("\nUNION\n");
+    		getSelectSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE");
+    		getFromSQL(queryBuffer);
+    		getWhereSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE");
+    		getOrderBySQL(queryBuffer);
+    	}
         return  queryBuffer.toString().toCharArray();
+    }
+    
+    private void getScoredSelectSQL(StringBuffer queryBuffer, String titleTable, boolean coreWeighting) {
+    	getSelectSQL(queryBuffer, titleTable);
+        queryBuffer.append(", CONTAINS(").append(titleTable).append(",'")
+        .append(this.translatedQuery)
+        .append("',1)");
+        if (coreWeighting) {
+        	queryBuffer.append(" * ").append(this.coreWeight);
+        }
+        queryBuffer.append(" AS SCORE_TITLE")
+        .append(", SCORE(2) AS SCORE_TEXT");
+    }
+    
+    private void getSelectSQL(StringBuffer queryBuffer, String titleTable) {
+    	queryBuffer.append(SELECT);
+    	queryBuffer.append(titleTable).append(", lower(").append(titleTable).append(") AS LTITLE");
+    }
+    
+    private void getFromSQL(StringBuffer queryBuffer) {
+    	queryBuffer.append('\n');
+    	queryBuffer.append(FROM);
+      if (this.type != null) {
+			queryBuffer.append(", TYPE");
+		}
+		if (this.mesh != null) {
+			queryBuffer.append(", MESH");
+		}
+		if (this.subset != null) {
+			queryBuffer.append(", SUBSET");
+		}
+    }
+    private void getScoredWhereSQL(StringBuffer queryBuffer, String titleTable, boolean core) {
+    	getWhereSQL(queryBuffer, titleTable);
+    	queryBuffer.append("\nAND ERESOURCE.CORE ");
+    	if (core) {
+    		queryBuffer.append("= 'Y'");
+    	} else {
+    		queryBuffer.append("IS NULL");
+    	}
+    }
+    
+    private void getWhereSQL(StringBuffer queryBuffer, String titleTable) {
+		queryBuffer.append('\n');
+		queryBuffer.append(WHERE);
+		if (this.type != null) {
+			queryBuffer
+					.append(
+							"\nAND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE.TYPE = '")
+					.append(this.type).append("'");
+		}
+		if (this.mesh != null) {
+			queryBuffer
+					.append(
+							"\nAND MESH.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND MESH.TERM = '")
+					.append(this.mesh).append("'");
+		}
+		if (this.subset != null) {
+			queryBuffer
+					.append(
+							"\nAND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET.SUBSET = '")
+					.append(this.subset).append("'");
+		}
+		if (this.alpha != null) {
+			queryBuffer.append("\nAND LOWER(SUBSTR(").append(titleTable)
+					.append(",1,1)) ");
+			if (this.alpha.equals("#")) {
+				queryBuffer.append("< 'A' ");
+			} else {
+				queryBuffer.append("= '").append(this.alpha).append("'");
+			}
+		}
+		if (this.translatedQuery != null) {
+			queryBuffer.append("\nAND CONTAINS(ERESOURCE.TEXT,'").append(
+					translatedQuery).append("', 2) > 0 ");
+		}
+		if (titleTable.equals("ERESOURCE.PREFERRED_TITLE")) {
+			queryBuffer.append("\nAND ERESOURCE.PREFERRED_TITLE IS NOT NULL");
+		}
+	}
+    private void getOrderBySQL(StringBuffer queryBuffer) {
+        queryBuffer.append(ORDER_BY);
+		if (this.translatedQuery != null) {
+			queryBuffer.append("SCORE_TITLE DESC, SCORE_TEXT DESC, ");
+		}
+		queryBuffer.append(ORDER);
+    }
+    public static void main(String[] args) {
+    	EresourcesQueryGenerator gen = new EresourcesQueryGenerator();
+    	gen.translatedQuery = gen.queryTranslator.translate("surgery");
+    	gen.coreWeight = "3";
+    	gen.type = "lanefaq";
+    	//gen.mesh = "surgery";
+    	//gen.alpha = "z";
+    	System.out.println(new String(gen.getSelectStatmentChars()));
     }
 
 }
