@@ -52,10 +52,6 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
 "ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID " +
 "AND " + 
 "VERSION.VERSION_ID = LINK.VERSION_ID ";
-    private static String UNION = " UNION ";
-    private static final String ALT_SELECT = "SELECT " +
-    "DISTINCT LINK.LINK_ID, ERESOURCE.ERESOURCE_ID, VERSION.VERSION_ID, ERESOURCE.PREFERRED_TITLE, lower(ERESOURCE.PREFERRED_TITLE) as LTITLE, VERSION.PUBLISHER, VERSION.HOLDINGS, VERSION.DATES, VERSION.DESCRIPTION, VERSION.PROXY, LINK.URL, LINK.LABEL, LINK.INSTRUCTION";
-    private static final String ALT_AND = " AND ERESOURCE.PREFERRED_TITLE IS NOT NULL";
     private static final String ORDER_BY = "\nORDER BY ";
     private static final String ORDER = " LTITLE, LINK_ID";
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
@@ -278,15 +274,6 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
 			queryBuffer.append("SCORE_TITLE DESC, SCORE_TEXT DESC, ");
 		}
 		queryBuffer.append(ORDER);
-    }
-    public static void main(String[] args) {
-    	EresourcesQueryGenerator gen = new EresourcesQueryGenerator();
-    	gen.translatedQuery = gen.queryTranslator.translate("surgery");
-    	gen.coreWeight = "3";
-    	gen.type = "lanefaq";
-    	//gen.mesh = "surgery";
-    	//gen.alpha = "z";
-    	System.out.println(new String(gen.getSelectStatmentChars()));
     }
 
 }
