@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet exclude-result-prefixes="sql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:sql="http://apache.org/cocoon/SQL/2.0">
+    
+    <xsl:param name="keywords"/>
+    
+    <xsl:variable name="ltitle" select="translate($keywords,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
 
   <xsl:template match="sql:rowset">
-    <dl class="searchResults">
-      <xsl:apply-templates select="sql:row[not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title)]"/>
+      <dl class="searchResults">
+      <xsl:apply-templates select="sql:row[sql:ltitle = $ltitle and not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title)]"/>
+      <xsl:apply-templates select="sql:row[not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title) and sql:ltitle != $ltitle]"/>
     </dl>
   </xsl:template>
   
