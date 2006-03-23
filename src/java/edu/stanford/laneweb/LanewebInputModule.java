@@ -34,7 +34,8 @@ import org.apache.cocoon.environment.Session;
  */
 public class LanewebInputModule extends AbstractLogEnabled implements
         InputModule, ThreadSafe, Configurable {
-    static final String PROXY_LINKS = "proxy-links";
+	
+	static final String PROXY_LINKS = "proxy-links";
     
     static final String AFFILIATION = "affiliation";
     
@@ -90,14 +91,16 @@ public class LanewebInputModule extends AbstractLogEnabled implements
         		String uri = request.getRequestURI();
         		result = getTemplateName(uri);
         } else if (key.equals(TICKET)) {
+        	
         	getLogger().error("getting ticket");
-        	String userName = request.getRemoteUser();
-//        	Session session = request.getSession();
-//     		String userName = (String) session.getAttribute("USER_NAME");
-//     		if (userName == null) {
-//     			userName = request.getRemoteUser();
-//     			session.setAttribute("USER_NAME", userName);
-//     		}
+        	String userName = (String) request.getRemoteUser();
+        		if(userName == null)
+            	{
+            		userName = (String) request.getAttribute("WEBAUTH_USER");
+            	}
+        	
+     		/*Session session = request.getSession();
+     		String userName = (String) session.getAttribute(LoginHelper.USER_NAME);*/
      		getLogger().error("userName = " + userName);
      		if(userName != null)
      			result = getTicket(userName);  
@@ -291,29 +294,34 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 	}
 	
     private String getKeyedDigest(String buffer) {
-    		try {
-		MessageDigest d = MessageDigest.getInstance("MD5");
-		byte[] b = d.digest(buffer.getBytes("UTF8"));
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < b.length; i++) {
-			sb.append(Integer.toHexString((b[i] & 0xf0) >> 4)
-					+ Integer.toHexString(b[i] & 0x0f));
-		}
-		return sb.toString();
-    		} catch (Exception e) {
-    			throw new RuntimeException(e);
+    	StringBuffer sb = new StringBuffer();
+		try {
+			MessageDigest d = MessageDigest.getInstance("MD5");
+			byte[] b = d.digest(buffer.getBytes("UTF8"));
+			for (int i = 0; i < b.length; i++) {
+				sb.append(Integer.toHexString((b[i] & 0xf0) >> 4)
+						+ Integer.toHexString(b[i] & 0x0f));
+			}
+			} catch (Exception e) {
+    			getLogger().fatalError(e.getLocalizedMessage());
     		}
+    		return sb.toString();	
 	}
 
 	protected String getTicket(String user) {
 		String result = null;
 		Date now = new Date();
 		String packet = "$u" + ((int) (now.getTime() / 1000));
-		result = "user="
-				+ URLEncoder.encode(user)
+		try {
+			result = "user="
+				+ URLEncoder.encode(user,"UTF8")
 				+ "&ticket="
 				+ URLEncoder.encode(getKeyedDigest(ezproxyKey + user + packet)
-						+ packet);
+						+ packet, "UTF8");
+		
+		} catch (Exception e) {
+			getLogger().fatalError(e.getLocalizedMessage());
+		}
 		return result;
 	} 
 
