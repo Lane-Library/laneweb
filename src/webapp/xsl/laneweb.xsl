@@ -24,7 +24,7 @@
     <xsl:param name="proxy-links"/>
   
     <xsl:param name="tab"/>
-
+    <xsl:param name="ticket"/>
     
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
@@ -310,6 +310,8 @@
                 <li>query-string=<xsl:value-of select="$query-string"/></li>
                 <li>href=<xsl:value-of select="concat($context,'/',$request-uri,'?',$query-string)"/></li>
                 <li>proxy-links=<xsl:value-of select="$proxy-links"/></li>
+                <li>ticket=<xsl:value-of select="$ticket"/></li>
+                
                 </ul>
             </div>
         </xsl:if>

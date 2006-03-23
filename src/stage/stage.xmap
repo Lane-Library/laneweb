@@ -19,6 +19,9 @@
     </map:components>
     <map:pipelines>
         <map:pipeline>
+        <map:match pattern="secure/login.html">
+               <map:act type="loginAction"  />
+            </map:match>
             <map:match type="wildcard" pattern="TMP**">
                 <map:read src="{defaults:stage-base}/content/TMP{1}" mime-type="text/html"/>
             </map:match>
@@ -96,3 +99,4 @@
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>
+
