@@ -13,7 +13,6 @@ import org.apache.cocoon.environment.SourceResolver;
 
 public class LoginAction extends AbstractAction {
 	
-	static String USER_NAME = "USER_NAME";
 	
   public Map act (Redirector redirector, 
                   SourceResolver resolver, 
@@ -22,22 +21,9 @@ public class LoginAction extends AbstractAction {
                   Parameters params) {
   
     Request request = ObjectModelHelper.getRequest(objectModel);
-    String userWebAuth = (String) request.getAttribute("WEBAUTH_USER");
-    
-    String userName = request.getRemoteUser();
-    if(userName != null)
-    	request.getSession().setAttribute(USER_NAME, userName);
-    System.out.println("userName "+ userName+ "   webauth "+userWebAuth);
-    String url = request.getParameter("u");
-    if(url != null)
-    {
-	    try {
-	    	redirector.redirect(true, url);
-		} catch (Exception e) {
-			getLogger().error(e.getLocalizedMessage());
-		}
-    }
-   
+    String sunetid = (String) request.getAttribute("WEBAUTH_USER");
+    if(!"<UNSET>".equals(sunetid))
+    	request.getSession().setAttribute(LanewebInputModule.SUNETID, sunetid);
     return null;
   }
 }
