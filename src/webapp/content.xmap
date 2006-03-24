@@ -37,7 +37,7 @@
 			                    <map:part src="cocoon:/search-proxy"/>
 			                    <map:part type="xml" src="cocoon:/templates/search/{request-param:source}.xml"/>
 			                </map:aggregate>
-			                <map:transform type="xslt" src="{defaults:live-base}/xsl/ajax-search.xsl">
+			                <map:transform type="xsltc" src="{defaults:live-base}/xsl/ajax-search.xsl">
 			                    <map:parameter name="template" value="{request-param:source}"/>
 			                    <map:parameter name="search-url" value="{defaults:new-search-url}"/>
 			                    <map:parameter name="keywords" value="{request-param:keywords}"/>
@@ -51,7 +51,7 @@
                 			    <map:part src="cocoon:/synchronous-search-proxy"/>
                 			    <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>
 							</map:aggregate>
-							<map:transform type="xslt" src="{defaults:live-base}/xsl/synchronous-search.xsl">
+							<map:transform type="xsltc" src="{defaults:live-base}/xsl/synchronous-search.xsl">
 								<map:parameter name="template" value="{request-param:source}"/>
 								<map:parameter name="search-url" value="{defaults:new-search-url}"/>
 								<map:parameter name="keywords" value="{request-param:keywords}"/>
