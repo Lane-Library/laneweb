@@ -27,6 +27,7 @@
     <component-instance logger="core.modules.input" name="uriencode-request-param" class="edu.stanford.laneweb.URIEncodedParameterModule" />
     <component-instance logger="core.modules.input" name="request-uri" class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
     <component-instance logger="core.modules.input" name="request" class="org.apache.cocoon.components.modules.input.RequestModule"/>
+    <component-instance class="org.apache.cocoon.components.modules.input.RequestAttributeModule" logger="core.modules.input" name="request-attr"/>
     <component-instance logger="core.modules.input" name="chain" class="org.apache.cocoon.components.modules.input.ChainMetaModule">
       <input-module name="request-param"/>
       <input-module name="laneweb"/>
