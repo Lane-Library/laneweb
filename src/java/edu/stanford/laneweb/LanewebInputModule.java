@@ -101,7 +101,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 		} else if (key.equals(TEMPLATE)) {
 			String requestURI = request.getRequestURI();
 			int contextPathLength = request.getContextPath().length();
-			result = getTemplateName(requestURI.substring(contextPathLength));
+			result = getTemplateName(requestURI.substring(contextPathLength + 1));
 		} else if (key.equals(SUNETID)) {
 			Session session = request.getSession(false);
 			if (session != null) {
