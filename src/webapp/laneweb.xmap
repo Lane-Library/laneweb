@@ -98,6 +98,9 @@
               	<byte-ranges>false</byte-ranges>
             </map:reader>            
         </map:readers>
+        <map:actions>
+  			<map:action name="loginAction" src="edu.stanford.laneweb.LoginAction"/>
+		</map:actions>
         <map:matchers default="wildcard">
             <map:matcher name="wildcard" logger="sitemap.matcher.wildcard" src="org.apache.cocoon.matching.WildcardURIMatcher"/>
             <map:matcher name="regex" logger="sitemap.matcher.regex" src="org.apache.cocoon.matching.RegexpURIMatcher"/>
@@ -116,6 +119,9 @@
     <!-- =========================== Pipelines ================================= -->
     <map:pipelines>
         <map:pipeline type="noncaching">
+           <map:match pattern="secure/login.html">
+               <map:act type="loginAction"  />
+            </map:match>
             <map:match type="wildcard" pattern="">
                 <map:redirect-to uri="{request:contextPath}/index.html"/>
             </map:match>
