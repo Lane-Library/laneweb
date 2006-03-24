@@ -19,8 +19,9 @@
     </map:components>
     <map:pipelines>
         <map:pipeline>
-        <map:match pattern="secure/login.html">
-               <map:act type="loginAction"  />
+            <map:match pattern="secure/login.html">
+                <map:act type="loginAction"  />
+                <map:redirect-to  uri="{request:contextPath}/stage/index.html?debug=y"/>
             </map:match>
             <map:match type="wildcard" pattern="TMP**">
                 <map:read src="{defaults:stage-base}/content/TMP{1}" mime-type="text/html"/>
@@ -69,6 +70,7 @@
                         <map:parameter name="context" value="{request:contextPath}/stage"/>
                         <map:parameter name="query-string" value="{request:queryString}"/>
                         <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                        <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                         <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     </map:transform>
                      
