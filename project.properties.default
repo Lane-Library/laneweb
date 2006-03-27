@@ -16,4 +16,4 @@ laneweb.store.heapsize=
 laneweb.log4j.host=
 laneweb.log4j.email=
 laneweb.log4j.level=
-laneweb.ezproxy.ticket=
+laneweb.ezproxy.key=
