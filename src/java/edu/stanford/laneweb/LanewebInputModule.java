@@ -136,7 +136,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 		this.noProxyRegex = config.getChildren("noproxy-regex");
 		this.proxyRegex = config.getChildren("proxy-regex");
 		this.templateConfig = config.getChildren("template");
-		this.ezproxyKey = config.getValue("ezproxy-key");
+		this.ezproxyKey = config.getChild("ezproxy-key").getValue();
 	}
 
 	protected String getTemplateName(final String url)
