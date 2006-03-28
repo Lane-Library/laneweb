@@ -1,8 +1,5 @@
 maven.repo.remote=http://www.ibiblio.org/maven,http://www.stanford.edu/~ceyates/maven
 
-laneweb.voyagerdb.user=
-laneweb.voyagerdb.password=
-laneweb.voyagedbr.url=
 laneweb.eresourcesdb.user=
 laneweb.eresourcesdb.password=
 laneweb.eresourcesdb.url=

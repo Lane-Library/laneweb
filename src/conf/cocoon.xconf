@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cocoon version="2.1" user-roles="/WEB-INF/roles.xml">
+<cocoon version="2.1">
     
   <sitemap check-reload="yes" file="***laneweb.live.base***/laneweb.xmap" logger="sitemap"/>
  
@@ -137,15 +137,6 @@
   </runnable-manager>
 
   <datasources logger="core.datasources">
-    <jdbc logger="laneweb.voyagerdb" name="voyager">
-      <pool-controller min="2" max="8" grow="2">
-        <keep-alive>SELECT 1 FROM DUAL</keep-alive>
-      </pool-controller>
-      <driver>oracle.jdbc.driver.OracleDriver</driver>
-      <dburl>***laneweb.voyagerdb.url***</dburl>
-      <user>***laneweb.voyagerdb.user***</user>
-      <password>***laneweb.voyagerdb.password***</password>
-    </jdbc>
     <jdbc logger="laneweb.eresourcesdb" name="eresources">
       <pool-controller min="2" max="8" grow="2">
         <keep-alive>SELECT 1 FROM DUAL</keep-alive>
@@ -156,11 +147,5 @@
       <password>***laneweb.eresourcesdb.password***</password>
     </jdbc>
   </datasources>
-  
-  <blob logger="laneweb.blob">
-    <parameter name="db-name" value="voyager"/>
-  </blob>
-
-  <marcReader logger="laneweb.reader"/>
    
 </cocoon>
