@@ -119,8 +119,9 @@
     <!-- =========================== Pipelines ================================= -->
     <map:pipelines>
         <map:pipeline type="noncaching">
-           <map:match pattern="secure/login.html">
-               <map:act type="loginAction"  />
+            <map:match pattern="secure/login.html">
+                <map:act type="loginAction"  />
+                <map:redirect-to  uri="{request:contextPath}/index.html?debug=y"/>
             </map:match>
             <map:match type="wildcard" pattern="">
                 <map:redirect-to uri="{request:contextPath}/index.html"/>
@@ -154,9 +155,6 @@
             </map:match>
             <map:match type="wildcard" pattern="content/**">
                 <map:mount uri-prefix="content" check-reload="yes" src="content.xmap"/>
-            </map:match>
-            <map:match type="wildcard" pattern="voyager/**">
-                <map:mount uri-prefix="voyager" check-reload="yes" src="voyager.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="admin/**">
                 <map:mount uri-prefix="admin" check-reload="yes" src="admin.xmap"/>
@@ -209,8 +207,8 @@
                         <map:parameter name="keywords" value="{request-param:keywords}"/>-->
                         <map:parameter name="selection" value="{request-param:source}"/>
                         <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                        <map:parameter name="user" value="{request-attr:WEBAUTH_USER}"/>
-                        <map:parameter name="ticket" value="{laenweb:ticket}"/>
+                        <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                        <map:parameter name="ticket" value="{laneweb:ticket}"/>
                         <!--<map:parameter name="debug" value="{request-param:debug}"/>-->
                     </map:transform>
 										<!--

@@ -17,14 +17,14 @@
          <xsl:copy-of select="."/>
     </xsl:template>
     
-    <xsl:template match="@class[.='lw:webauth']">
+    <xsl:template match="@class[.='lw_webauth']">
         <xsl:attribute name="href">
             <xsl:value-of select="$webauth-url"/>
             <xsl:value-of select="$url"/>
         </xsl:attribute>
     </xsl:template>
     
-    <xsl:template match="@class[.='lw:direct']">
+    <xsl:template match="@class[.='lw_direct']">
         <xsl:attribute name="href">
             <xsl:value-of select="$url"/>
         </xsl:attribute>

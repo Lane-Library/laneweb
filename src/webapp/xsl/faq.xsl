@@ -3,13 +3,11 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:java="http://xml.apache.org/xalan/java/edu.stanford.laneweb.xslt.LanewebXSLTExtensions"
-    exclude-result-prefixes="h java"
+    exclude-result-prefixes="h"
     version="1.0">
     
     <xsl:param name="id"/>
     <xsl:param name="category"/>
-    <xsl:param name="keywords"/>
     
     <xsl:template match="@*|node()">
         <xsl:copy>
@@ -20,6 +18,9 @@
     <xsl:template match="h:head">
         <xsl:copy>
             <xsl:apply-templates select="h:title"/>
+            <xsl:if test="$id != ''">
+                <meta name="lw_faqCategory" content="{../h:body/h:ul/h:li[@id=$id]/h:ul/h:li[@class='primaryCategory']}"/>
+            </xsl:if>
         </xsl:copy>
     </xsl:template>
     
@@ -33,19 +34,13 @@
                 <xsl:value-of select="$category"/>
             </h2>
         </xsl:if>
-        <xsl:if test="$category = '' and $keywords = '' and $id = ''">
+        <xsl:if test="$category = '' and $id = ''">
             <h2>Hot Topics</h2>
         </xsl:if>
         <xsl:choose>
             <xsl:when test="$id=''">
                 <dl id="faq">
                     <xsl:choose>
-                        <xsl:when test="$keywords != '' and $category != ''">
-                            <xsl:apply-templates select="h:li[h:ul/h:li[@class='categories']/h:ul/h:li/text()=$category and java:contains(self::h:li,$keywords)]" mode="dl"/>
-                        </xsl:when>
-                        <xsl:when test="$keywords != ''">
-                                <xsl:apply-templates select="h:li[java:contains(self::h:li,$keywords)]" mode="dl"/>
-                        </xsl:when>
                         <xsl:when test="$category=''">
                             <xsl:apply-templates 
                                 select="h:li[h:ul/h:li[@class='categories']/h:ul/h:li/text() = 'Hot Topics']" mode="dl"/>
@@ -61,7 +56,7 @@
                 <xsl:apply-templates select="h:li[@id=$id]" mode="full"/>
             </xsl:otherwise>
         </xsl:choose>
-        <div id="lw:sidebar">
+        <div id="lw_sidebar">
             <div>
                 <h4>faq categories</h4>
                 <ul>
@@ -89,10 +84,58 @@
     </xsl:template>
     
     <xsl:template match="h:li[@class='faq']" mode="full">
-        <h2>
-            <xsl:value-of select="text()"/>
-        </h2>
-        <xsl:copy-of select="h:ul/h:li[@class='body']/node()"/>
+            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td valign="top" align="left" id="leftColumn">
+                        <div class="shortSideBlueBox">
+                            <h2>Books and Collections</h2>
+                            <ul>
+                                <li>
+                                    <a href="">Borrowing materials</a>
+                                    
+                                </li>
+                                <li>
+                                    <a href="">Course Reserves</a>
+                                </li>
+                                <li>
+                                    <a href="">Offsite Collections</a>
+                                </li>
+                                <li>
+                                    <a href="">Resource Core Grant Description</a>
+                                </li>
+                                <li>
+                                    <a href="">Reference Sources</a>
+                                </li>
+                                
+                                <li>
+                                    <a href="">Special Collections &amp; Archives</a>
+                                </li>
+                            </ul>
+                            <p>
+                                <a href="">All Services</a>
+                            </p>
+                        </div>
+                    </td>
+                    <td valign="top" align="left" class="centralColumn">
+                        <h1>
+                            <xsl:value-of select="text()"/>
+                        </h1>
+                        <xsl:copy-of select="h:ul/h:li[@class='body']/node()"/></td>
+                    <td valign="top" align="right" id="rightColumn">
+                        <div class="sideTanBox">
+                            <h2>FAQs on this topic</h2>
+                            <xsl:variable name="cat" select="h:ul/h:li[@class='primaryCategory']"/>
+                            <ul>
+                                <xsl:for-each select="parent::h:ul/h:li[$cat=h:ul/h:li[@class='primaryCategory'] and not(@id = current()/@id)]">
+                                    <li>
+                                        <a href="/howto/index.html?id={@id}"><xsl:value-of select="text()"/></a>
+                                    </li>
+                                </xsl:for-each>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </table>
     </xsl:template>
     
     

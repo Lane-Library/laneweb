@@ -16,7 +16,7 @@
     </xsl:attribute>
   </xsl:template>
   
-  <xsl:template match="@href[contains(.,'://')]">
+  <xsl:template match="@href[contains(.,'://') and not(parent::h:link)]">
     <xsl:copy-of select="."/>
     <xsl:variable name="noproxy">
       <xsl:choose>
@@ -161,7 +161,7 @@
     <xsl:copy-of select="."/>
   </xsl:template>
   
-  <!-- figures out what the title should be; priority: ../@title, ../text(), ../img/@alt, 'unknown' -->
+  <!-- figures out what the title should be; priority: ../@title, ../text(), ../h:img/@alt, 'unknown' -->
   <xsl:template name="title">
     <xsl:choose>
       <xsl:when test="../@title">

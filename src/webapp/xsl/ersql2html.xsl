@@ -28,6 +28,11 @@
                           <xsl:with-param name="links" select="$links"/>
                       </xsl:call-template>
                   </xsl:when>
+                  <xsl:when test="$link_count = 2 and $links/sql:label = 'Get Password'">
+                      <xsl:call-template name="one-and-password">
+                          <xsl:with-param name="links" select="$links"/>
+                      </xsl:call-template>
+                  </xsl:when>
                   <xsl:otherwise>
                       <xsl:call-template name="multiple-links">
                           <xsl:with-param name="links" select="$links"/>
@@ -142,16 +147,41 @@
                           </xsl:variable>
                           <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
                           <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
-                          <li><a href="{sql:url}" title="{sql:title}" class="{$proxy_class}"><xsl:value-of select="sql:label"/><xsl:apply-templates select="sql:description|sql:instruction"/></a>
-                              <xsl:apply-templates select="sql:publisher"/>
+                          <li><a href="{sql:url}" title="{sql:title}" class="{$proxy_class}">
                               <xsl:choose>
                                   <xsl:when test="preceding-sibling::sql:row[1]/sql:label = 'Get Password'">
-                                      <a href="{preceding-sibling::sql:row[1]/sql:url}"> get password</a>
+                                      <xsl:choose>
+                                          <xsl:when test="$holdings-length &gt; 0 and $dates-length &gt; 0">
+                                              <xsl:apply-templates select="sql:holdings"/>, <xsl:value-of select="sql:dates"/>
+                                          </xsl:when>
+                                          <xsl:when test="$holdings-length &gt; 0">
+                                              <xsl:apply-templates select="sql:holdings"/>
+                                          </xsl:when>
+                                          <xsl:when test="$dates-length &gt; 0">
+                                              <xsl:value-of select="sql:dates"/>
+                                          </xsl:when>
+                                          <xsl:when test="string-length(sql:label) &gt; 0">
+                                              <xsl:value-of select="sql:label"/>
+                                          </xsl:when>
+                                          <xsl:otherwise>
+                                              <xsl:value-of select="sql:url"/>
+                                          </xsl:otherwise>
+                                      </xsl:choose>
                                   </xsl:when>
-                                  <xsl:when test="following-sibling::sql:row[1]/sql:label = 'Get Password'">
+                                  <xsl:otherwise>
+                                      <xsl:value-of select="sql:label"/>
+                                  </xsl:otherwise>
+                              </xsl:choose>
+                              <xsl:apply-templates select="sql:description|sql:instruction"/></a>
+                              <xsl:apply-templates select="sql:publisher"/>
+                           <!--   <xsl:choose>-->
+                                  <xsl:if test="preceding-sibling::sql:row[1]/sql:label = 'Get Password'">
+                                      <a href="{preceding-sibling::sql:row[1]/sql:url}"> get password</a>
+                                  </xsl:if>
+                                  <!--<xsl:when test="following-sibling::sql:row[1]/sql:label = 'Get Password'">
                                       <a href="{following-sibling::sql:row[1]/sql:url}"> get password</a>
                                   </xsl:when>
-                              </xsl:choose></li>
+                              </xsl:choose>--></li>
                       </xsl:for-each>
               </xsl:otherwise>
           </xsl:choose>
@@ -177,7 +207,50 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:apply-templates select="sql:description|sql:instruction"/>
-            </a><xsl:apply-templates select="sql:publisher"/></li>
+            </a><xsl:apply-templates select="sql:publisher"/>
+                <xsl:if test="preceding-sibling::sql:row[1]/sql:label = 'Get Password'">
+                    <a href="{preceding-sibling::sql:row[1]/sql:url}"> get password</a>
+                </xsl:if>
+<!--                <xsl:if test="following-sibling::sql:row[1]/sql:label = 'Get Password'">
+                    <a href="{following-sibling::sql:row[1]/sql:url}"> get password</a>
+                </xsl:if>-->
+            </li>
+        </xsl:for-each>
+    </xsl:template>
+    
+    <xsl:template name="one-and-password">
+        <xsl:param name="links"/>
+        <xsl:for-each select="$links[not(sql:label = 'Get Password')]">
+        <xsl:variable name="proxy_class">
+            <xsl:choose>
+                <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
+                <xsl:otherwise>noproxy</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
+        <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
+            <li><a href="{sql:url}" title="{concat(sql:title,':',sql:label)}" class="{$proxy_class}">
+                <xsl:choose>
+                    <xsl:when test="$holdings-length &gt; 0 and $dates-length &gt; 0">
+                        <xsl:apply-templates select="sql:holdings"/>, <xsl:value-of select="sql:dates"/>
+                    </xsl:when>
+                    <xsl:when test="$holdings-length &gt; 0">
+                        <xsl:apply-templates select="sql:holdings"/>
+                    </xsl:when>
+                    <xsl:when test="$dates-length &gt; 0">
+                        <xsl:value-of select="sql:dates"/>
+                    </xsl:when>
+                    <xsl:when test="string-length(sql:label) &gt; 0">
+                        <xsl:value-of select="sql:label"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="sql:url"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:apply-templates select="sql:description|sql:instruction"/>
+            </a><xsl:apply-templates select="sql:publisher"/>
+                    <a href="{$links/sql:row[sql:label='Get Password']/sql:url}"> get password</a>
+            </li>
         </xsl:for-each>
     </xsl:template>
     

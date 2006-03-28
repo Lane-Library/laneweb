@@ -7,7 +7,7 @@
   exclude-result-prefixes="s h exslt">
 
 
-    <xsl:param name="template"/>
+    <xsl:param name="source"/>
     <xsl:param name="search-url"/>
     <xsl:param name="view"/>
     <xsl:param name="debug"/>
@@ -34,7 +34,7 @@
             <xsl:apply-templates/>
             <xsl:if test="$debug='y'">
             <div style="position:absolute;right:0;top:0">
-                <div><a href="/content/new-search.html?id={$search-id}&amp;source={$template}">content</a></div>
+                <div><a href="/content/new-search.html?id={$search-id}&amp;source={$source}">content</a></div>
                 <div><a href="{$search-url}search?id={$search-id}">search</a></div>
                 <div>running:<xsl:value-of select="$stillRunningCount"/></div>
             </div>
@@ -44,7 +44,7 @@
     
     <xsl:template match="h:div[@id='searchResults']">
         <xsl:if test="/aggregate/s:search/s:spell">
-            <div><p>Did you mean <a href="new-search.html?source={$template}&amp;keywords={/aggregate/s:search/s:spell/text()}"><strong><xsl:value-of select="/aggregate/s:search/s:spell/text()"/></strong></a>?</p></div>
+            <div><p>Did you mean <a href="new-search.html?source={$source}&amp;keywords={/aggregate/s:search/s:spell/text()}"><strong><xsl:value-of select="/aggregate/s:search/s:spell/text()"/></strong></a>?</p></div>
         </xsl:if>
         <xsl:copy>
             <xsl:copy-of select="@*"/>
@@ -121,7 +121,7 @@
     <xsl:template match="h:a[@id='refresh']">
         <xsl:copy>
             <xsl:attribute name="href">
-                <xsl:value-of select="concat('search.html?source=',$template,'&amp;keywords=',/aggregate/s:search/s:query/text(),'&amp;id=',$search-id)"/>
+                <xsl:value-of select="concat('search.html?source=',$source,'&amp;keywords=',/aggregate/s:search/s:query/text(),'&amp;id=',$search-id)"/>
             </xsl:attribute>
             <xsl:apply-templates/>
         </xsl:copy>
