@@ -51,13 +51,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
 /**
- * @cocoon.sitemap.component.documentation
  * Implementation of an XInclude transformer.
  * 
- * @cocoon.sitemap.component.name   xinclude
- * @cocoon.sitemap.component.logger sitemap.transformer.xinclude
- * 
- * @cocoon.sitemap.component.pooling.max  16
  * 
  * Implementation of an XInclude transformer. It supports xml:base attributes,
  * XPointer fragment identifiers (see the xpointer package to see what exactly is
