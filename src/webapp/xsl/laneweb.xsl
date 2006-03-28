@@ -19,12 +19,17 @@
     
     <xsl:param name="keywords"/>
     
-    <xsl:param name="selection"/>
+    <xsl:param name="source"/>
     
     <xsl:param name="proxy-links"/>
   
     <xsl:param name="tab"/>
+	
+    <xsl:param name="ticket"/>
 
+    <xsl:param name="sunetid"/>
+    
+    <xsl:param name="m"/>
     
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
@@ -47,10 +52,9 @@
     <!-- the template document -->
     <xsl:variable name="template-document" select="/*/h:html[3]"/>
     <!-- the root node of the requested content document -->
-    <xsl:variable name="source" select="/*/h:html[1]"/>
+    <xsl:variable name="source-doc" select="/*/h:html[1]"/>
     <!-- the sitemap document -->
     <xsl:variable name="sitemap" select="/*/h:html[2]"/>
-    <xsl:variable name="sidebar" select="/*/h:html[4]"/>
     
     <!-- ====================  DEFAULT TEMPLATES ============================= -->
     <!-- root template applies templates on the template document -->
@@ -99,6 +103,14 @@
                         <xsl:attribute name="onclick">
                             <xsl:text>openSearchResult('</xsl:text>
                             <xsl:choose>
+                                <xsl:when test="$proxy-links = 'true' and $ticket != '' and $sunetid != ''">
+                                    <xsl:text>http://laneproxy.stanford.edu/login?user=</xsl:text>
+                                    <xsl:value-of select="$sunetid"/>
+                                    <xsl:text>&amp;ticket=</xsl:text>
+                                    <xsl:value-of select="$ticket"/>
+                                    <xsl:text>&amp;url=</xsl:text>
+                                    <xsl:value-of select="@href"/>
+                                </xsl:when>
                                 <xsl:when test="$proxy-links = 'true'">
                                     <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
                                     <xsl:value-of select="@href"/>
@@ -136,7 +148,19 @@
                     </xsl:choose>
                 </xsl:variable>
                 <xsl:call-template name="make-link">
-                    <xsl:with-param name="link">http://laneproxy.stanford.edu/login?url=<xsl:value-of select="."/></xsl:with-param>
+                    <xsl:with-param name="link">
+                        <xsl:choose>
+                            <xsl:when test="$proxy-links = 'true' and $ticket != '' and $sunetid != ''">
+                                <xsl:text>http://laneproxy.stanford.edu/login?user=</xsl:text>
+                                <xsl:value-of select="$sunetid"/>
+                                <xsl:text>&amp;ticket=</xsl:text>
+                                <xsl:value-of select="$ticket"/>
+                                <xsl:text>&amp;url=</xsl:text>
+                                <xsl:value-of select="."/>
+                            </xsl:when>
+                            <xsl:otherwise>http://laneproxy.stanford.edu/login?url=<xsl:value-of select="."/></xsl:otherwise>
+                        </xsl:choose>
+                     </xsl:with-param>
                     <xsl:with-param name="attr" select="'href'"/>
                 </xsl:call-template>
             </xsl:when>
@@ -190,7 +214,7 @@
     <xsl:template match="h:head">
         <xsl:copy>
             <xsl:apply-templates select="node()"/>
-            <xsl:for-each select="$source/h:head/*[not(self::h:title or @rel='stylesheet' or @http-equiv)]">
+            <xsl:for-each select="$source-doc/h:head/*[not(self::h:title or @http-equiv)]">
                 <xsl:apply-templates select="self::node()"/>
                 <xsl:text>
       </xsl:text>
@@ -205,7 +229,7 @@
                     <xsl:value-of select="."/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="concat($source/h:head/h:title, ' - ', .)"/>
+                    <xsl:value-of select="concat($source-doc/h:head/h:title, ' - ', .)"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:copy>
@@ -213,19 +237,18 @@
     
     <xsl:template match="@class[starts-with(.,'lw_')]|@id[starts-with(.,'lw_')]"/>
     <xsl:template match="@class[.='proxy']"/>
-    <xsl:template match="h:div[@id='lw_sidebar' or @id='lw_highlights']"/>
     <xsl:template match="*[@id='lw_alt-title']"/>
     <xsl:template match="*[@id='lw_title']">
           <xsl:choose>
-              <xsl:when test="$source//*[@id='lw_alt-title']/node()">
+              <xsl:when test="$source-doc//*[@id='lw_alt-title']/node()">
                   <xsl:copy>
-                      <xsl:apply-templates select="$source//*[@id='lw_alt-title']/node()"/>
+                      <xsl:apply-templates select="$source-doc//*[@id='lw_alt-title']/node()"/>
                   </xsl:copy>
               </xsl:when>
-              <xsl:when test="$source//*[@id='lw_alt-title']"/>
+              <xsl:when test="$source-doc//*[@id='lw_alt-title']"/>
               <xsl:otherwise>
                   <xsl:copy>
-                      <xsl:value-of select="$source/h:head/h:title/text()"/>
+                      <xsl:value-of select="$source-doc/h:head/h:title/text()"/>
                   </xsl:copy>
               </xsl:otherwise>
             </xsl:choose>
@@ -266,7 +289,7 @@
                 <xsl:when test="@value='database' and $tab='database'">
                     <xsl:attribute name="selected">selected</xsl:attribute>
                 </xsl:when>
-                <xsl:when test="@value=$selection or (@value='clinical' and $selection='texts')">
+                <xsl:when test="@value=$source or (@value='clinical' and $source='texts')">
                 	<xsl:attribute name="selected">selected</xsl:attribute>
             	</xsl:when>
             </xsl:choose>
@@ -300,7 +323,7 @@
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
     <!-- puts in the current document's content, -->
     <xsl:template match="h:div[@id='lw_content']">
-        <xsl:apply-templates select="$source/h:body/node()"/>
+        <xsl:apply-templates select="$source-doc/h:body/node()"/>
         <xsl:if test="$debug='y'">
             <div id="debug">
                 <h3 style="padding:0;margin:0 0 1em 0">debugging information</h3>
@@ -309,25 +332,12 @@
                 <li>request-uri=<xsl:value-of select="$request-uri"/></li>
                 <li>query-string=<xsl:value-of select="$query-string"/></li>
                 <li>href=<xsl:value-of select="concat($context,'/',$request-uri,'?',$query-string)"/></li>
+                <li>ticket=<xsl:value-of select="$ticket"/></li>
+                <li>sunetid=<xsl:value-of select="$sunetid"/></li>
                 <li>proxy-links=<xsl:value-of select="$proxy-links"/></li>
                 </ul>
             </div>
         </xsl:if>
-    </xsl:template>
-    
-    <!-- sidebar -->
-    <xsl:template match="h:div[@id='lw_side-bar']">
-        <div id="sidebar">
-            <xsl:apply-templates select="node()"/>
-            <xsl:choose>
-                <xsl:when test="$source//h:div[@id='lw_sidebar']">
-                    <xsl:apply-templates select="$source//h:div[@id='lw_sidebar']/*"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates select="$sidebar/h:body/node()"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </div>
     </xsl:template>
     
     <!-- creates a a element with the current url and a different template -->
@@ -359,14 +369,12 @@
         <xsl:call-template name="breadcrumb"/>
     </xsl:template>
 
-    <!-- higlights -->
-    <xsl:template match="h:div[@id='lw_high-lights']">
-        <xsl:if test="$source//h:div[@id='lw_highlights']">
-            <div id="highlights">
-                <xsl:apply-templates select="node()"/>
-                <xsl:apply-templates select="$source//h:div[@id='lw_highlights']/node()"/>
-            </div>
-        </xsl:if>
+   <!-- insert the mesh term from the m parameter --> 
+    <xsl:template match="h:span[@class='lw_mesh']">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:value-of select="$m"/>
+        </xsl:copy>
     </xsl:template>
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
@@ -467,7 +475,7 @@
                 </xsl:variable>
                 <xsl:choose>
                     <xsl:when test="$title = ''">
-                        <xsl:value-of select="$source/h:head/h:title"/>
+                        <xsl:value-of select="$source-doc/h:head/h:title"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="$title"/>

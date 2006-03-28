@@ -26,7 +26,6 @@
             </map:match>
             <map:match type="wildcard" pattern="search-proxy">
                 <map:generate type="search-proxy" src="{defaults:search-url}search"/>
-                <!--?id={request-param:id}&amp;w=2500&amp;q={uriencode-request-param:keywords}"/-->
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="synchronous-search-proxy">
@@ -51,8 +50,6 @@
                         </map:aggregate>
                         <map:transform type="xsltc" src="{defaults:stage-base}/xsl/synchronous-search.xsl">
                             <map:parameter name="search-url" value="{defaults:search-url}"/>
-                            <map:parameter name="view" value="{request-param:view}"/>
-                            <map:parameter name="debug" value="{request-param:debug}"/>
                         </map:transform>
                         <map:serialize type="xml"/>
                     </map:when>
@@ -77,11 +74,6 @@
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/faq.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="blog2list.html">
-                <map:generate type="html" src="{request-param:u}"/>
-                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/blog2list.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="blog/*">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-news/lane-news.html"/>
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/news-blog.xsl">
@@ -92,14 +84,6 @@
             <map:match type="wildcard" pattern="request.html">
                 <map:generate type="request"/>
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/request2html.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="faq">
-                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html#xpointer(/*[1]/*[2]/*)"/>
-                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/blog2list.xsl">
-                    <map:parameter name="label" value="Lane Services &amp;FAQs"/>
-                    <map:parameter name="label-element" value="h3"/>
-                </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="sfx">

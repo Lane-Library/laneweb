@@ -35,9 +35,6 @@
             <map:match type="wildcard" pattern="content/**">
                 <map:mount uri-prefix="content" check-reload="yes" src="{defaults:stage-base}/content.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="voyager/**">
-                <map:mount uri-prefix="voyager" check-reload="yes" src="{defaults:stage-base}/voyager.xmap"/>
-            </map:match>
             <map:match type="wildcard" pattern="admin/**">
                 <map:mount uri-prefix="admin" check-reload="yes" src="{defaults:stage-base}/admin.xmap"/>
             </map:match>

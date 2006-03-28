@@ -76,15 +76,6 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="blog2list.html">
-                <map:generate type="html" src="{request-param:u}"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/blog2list.xsl">
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
-                    <map:parameter name="label-element" value="{request-param:le}"/>
-                    <map:parameter name="label" value="{request-param:l}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="request.html">
                 <map:generate type="request"/>
                 <map:transform type="xsltc" src="{defaults:live-base}/xsl/request2html.xsl"/>
@@ -97,15 +88,6 @@
                 <map:transform type="xsltc" src="{defaults:live-base}/xsl/news-blog.xsl">
                     <map:parameter name="type" value="{1}"/>
                 </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="faq">
-                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html#xpointer(/*[1]/*[2]/*)"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/blog2list.xsl">
-					<map:parameter name="keywords" value="{request-param:keywords}"/>
-					<map:parameter name="label" value="Lane Services &amp;FAQs"/>
-					<map:parameter name="label-element" value="h3"/>
-				</map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="sfx">
