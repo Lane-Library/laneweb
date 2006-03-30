@@ -4,55 +4,70 @@
 var GLOBALS = new Object();
 GLOBALS.basePath = '/./.';
 GLOBALS.baseImagePath = GLOBALS.basePath + '/images/templates/default';
-GLOBALS.searchPath = GLOBALS.basePath + '/search.html';
-GLOBALS.lanewebTemplate = 'default';
-GLOBALS.proxyPrefix = 'http://laneproxy.stanford.edu/login?url=';
+GLOBALS.incrementalSearchWait = '2500'; //time in ms between start of metasearch and initial response
 GLOBALS.needsProxy = getMetaContent(document,'lw_proxyLinks');
+GLOBALS.proxyPrefix = 'http://laneproxy.stanford.edu/login?url=';
+GLOBALS.searchPath = GLOBALS.basePath + '/search.html';
 
+var date = new Date();
+var haltIncremental = false;
+var searching = false;
+var startTime = date.getTime();
+
+// handle error events with errorLogger method 
+window.onerror = errorLogger;
+function errorLogger(message, url, line){
+	var errorImg = document.createElement('img');
+	errorImg.src = GLOBALS.basePath + '/javascript/ErrorLogger.js?url=' + url + '&line=' + line + '&msg=' + message;
+	errorImg.className = 'hide';
+	return false;
+}
 
 //**************************
 // slice results into format tabs
 //
 var eLibraryTabLabels = new Array('All','eJournals','Databases','eBooks','Calculators','Lane Services');
 var eLibraryTabIDs = new Array('all','ej','database','book','cc','faq');
-var eLibraryResultCounts = new Array();
+var eLibraryResultCounts = [];
+var eLibraryActiveTab = null;
 
 function geteLibraryTabCount(tabID){
 	var tabResultLinks = document.getElementById(tabID).getElementsByTagName('dt');
-	//var tabResultLinks = document.getElementById(tabID).getElementsByTagName('a');
 	return tabResultLinks.length;
 }
 
-function painteLibraryTabs(){
-
+function initeLibraryTabs(){
 	for(var i = 0; i < eLibraryTabIDs.length; i++){
 		eLibraryResultCounts[eLibraryTabIDs[i]] = geteLibraryTabCount(eLibraryTabIDs[i]);
 	}
 
 	var bar = '';
 	for(var i = 0; i < eLibraryTabLabels.length; i++){
-		bar = bar + '<div id="' + eLibraryTabIDs[i] + 'Tab" class="eLibraryTab" name="' + eLibraryTabIDs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabIDs[i] + '\');">' + eLibraryTabLabels[i] + '<br /><span class="tabHitCount">' + intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]]) + '</span></div>';
+		var elementContainerForDisplayText = '';
+		if(document.getElementById(eLibraryTabIDs[i] + "SearchTagline")){
+			elementContainerForDisplayText = document.getElementById(eLibraryTabIDs[i] + "SearchTagline").innerHTML;		
+		}
+		bar = bar + '<div id="' + eLibraryTabIDs[i] + 'Tab" class="eLibraryTab" title="' + elementContainerForDisplayText + '" name="' + eLibraryTabIDs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabIDs[i] + '\');">' + eLibraryTabLabels[i] + '<br /><span class="tabHitCount">' + intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]]) + '</span></div>';
 	}
 	document.getElementById('eLibraryTabs').innerHTML = bar;
 }
 
-function showeLibraryTab(eLibraryActiveTab){
-
-	// if tab parameter sent in URL, default to specified tab
-	// otherwise, default to 'all'
-	if (!eLibraryActiveTab){
-		eLibraryActiveTab = 'all'; // default to all
-		for (var i = 0; i < eLibraryTabIDs.length; i++){
-			if (getQueryContent('source') == eLibraryTabIDs[i]){
-				eLibraryActiveTab = eLibraryTabIDs[i];
-			}
+function showeLibraryTab(tab){
+	// if active tab not specified, cookie trumps, then source parameter in URL, then default to all
+	if (!tab){
+		tab = 'all'; // default to all
+		if( readCookie('LWeLibSource') && eLibraryTabIDs.contains(tab) ){
+			tab = readCookie('LWeLibSource');
+		}
+		else if( eLibraryTabIDs.contains(getQueryContent('source')) ){
+			tab = getQueryContent('source');
 		}
 	}
 
 	// swap active tab link out
 	tabLinks = document.getElementById('eLibraryTabs').getElementsByTagName('div');
 	for (var i = 0; i < tabLinks.length; i++){
-		if(tabLinks[i].getAttribute('id') == eLibraryActiveTab + 'Tab'){
+		if(tabLinks[i].getAttribute('id') == tab + 'Tab'){
 			tabLinks[i].className = 'eLibraryTabActive';
 		}
 		else{
@@ -60,12 +75,11 @@ function showeLibraryTab(eLibraryActiveTab){
 		}
 	}
 
-	Object.eLibraryActiveTab = eLibraryActiveTab;
 	var searchResults = document.getElementById('eLibrarySearchResults');
 	var searchResultDivs = document.getElementById('eLibrarySearchResults').getElementsByTagName('div');
 
 	for (var i = 0; i < searchResultDivs.length; i++){
-		if(searchResultDivs[i].getAttribute('id') == eLibraryActiveTab){
+		if(searchResultDivs[i].getAttribute('id') == tab){
 			searchResultDivs[i].className = '';
 		}
 		else{
@@ -74,136 +88,110 @@ function showeLibraryTab(eLibraryActiveTab){
 	}
 
 	// switch searchForm selected value to appropriate tab value
-	if(eLibraryActiveTab == 'all'){
+	if(tab == 'all'){
 		document.searchForm.source.selectedIndex = 0; //default searchForm to eLibrary
 	}
 	else{
 		for(var i = 0; i < document.searchForm.source.options.length; i++){
-			if(document.searchForm.source.options[i].value == eLibraryActiveTab){
+			if(document.searchForm.source.options[i].value == tab){
 				document.searchForm.source.selectedIndex = i;
 			}
 		}
 	}
+	document.searchForm.source.onchange();
+
+	eLibraryActiveTab = tab;
+	refreshPopInBar();
+	setCookie('LWeLibSource',tab);
+}
+
+var relevanceSortedResults;
+function sorteLibraryResults(){
+	var searchResults = document.getElementById('eLibrarySearchResults');
+	
+	if(searchResults.getAttribute('name') == 'relevance-sort'){
+		var nextSort = 'alpha-sort';
+		searchResults.innerHTML = relevanceSortedResults;
+		showeLibraryTab(eLibraryActiveTab);
+	}
+	else {
+		var nextSort = 'relevance-sort';
+		relevanceSortedResults = document.getElementById('eLibrarySearchResults').innerHTML;
+
+		for( var i = 0; i < eLibraryTabIDs.length; i++){
+			var divID = eLibraryTabIDs[i];
+			var div = document.getElementById(divID);
+			var dl = document.getElementById(divID).getElementsByTagName('dl');
+
+			var resultsArray = [];
+			var resultsHTML = '';
+
+			for(var p = 0; p < div.getElementsByTagName('dt').length; p++){
+				resultsArray[p]=[div.getElementsByTagName('dt')[p].innerHTML,'<dt>' + div.getElementsByTagName('dt')[p].innerHTML + '</dt>' + '<dd>' + div.getElementsByTagName('dd')[p].innerHTML + '</dd>'];
+			}
+			resultsArray = resultsArray.sortByAlpha();
+
+			for(p=0;p<resultsArray.length;p++){
+				resultsHTML = resultsHTML + resultsArray[p][1];
+			}
+			div.innerHTML = '<dl class="' + dl[0].className + '">' + resultsHTML + '</dl>';
+		}
+	}
+
+	searchResults.setAttribute('name',nextSort);
+	setCookie('LWeLibNextSort',nextSort);
 	refreshPopInBar();
 }
 
-function sorteLibraryResults(select,divID){
-	if(!divID){
-		divID = Object.eLibraryActiveTab;
-	}
-	var div = document.getElementById(divID);
-	var dl = document.getElementById(divID).getElementsByTagName('dl');
-
-	if(div.getElementsByTagName('dt').length == 1){
-		return true;
-	}
-	else if(div.getElementsByTagName('dt').length > 1000){
-		//if(!confirm('Sorting large result sets can take time. Do you wish to continue?'))
-			//return false;
-	}
-	document.body.style.cursor='wait';
-
-	var resultsArray = new Array;
-	var resultsHTML = '';
-
-	if(dl[0].getAttribute('name') == 'orig'){
-		for(var p = 0; p < div.getElementsByTagName('dt').length; p++){
-			resultsArray[p]=[div.getElementsByTagName('dt')[p].getAttribute('order'),'<dt order="' + div.getElementsByTagName('dt')[p].getAttribute('order') + '">' + div.getElementsByTagName('dt')[p].innerHTML + '</dt>' + '<dd>' + div.getElementsByTagName('dd')[p].innerHTML + '</dd>'];
-		}
-		resultsArray.sort(sortArrayByOrder);
-		var nextIndex = 0;
-		var nextSort = 'alpha';
-		var newText = 'A-Z';
-	}
-	else {
-		for(var p = 0; p < div.getElementsByTagName('dt').length; p++){
-			resultsArray[p]=[div.getElementsByTagName('dt')[p].innerHTML.toLowerCase().replace(/[^a-z ]/,''),'<dt order="' + p + '">' + div.getElementsByTagName('dt')[p].innerHTML + '</dt>' + '<dd>' + div.getElementsByTagName('dd')[p].innerHTML + '</dd>'];
-		}
-		resultsArray.sort(sortArrayByTitle);
-		var nextIndex = 1;
-		var nextSort = 'orig';
-		var newText = 'Relevance';
-	}
-
-	for(p=0;p<resultsArray.length;p++){
-		resultsHTML = resultsHTML + resultsArray[p][1];
-	}
-	
-	div.innerHTML = '<dl name="' + nextSort + '">' + resultsHTML + '</dl>';
-	//select.innerHTML = newText;
-	select.selectedIndex = nextIndex;
-	document.body.style.cursor='auto';
-}
-
-function sortArrayByOrder(a, b) {
-	var filingPattern = /^\d+/;
-	var orderMatchA = a.toString().match(filingPattern);
-	var orderMatchB = b.toString().match(filingPattern);
-	return orderMatchA[0] - orderMatchB[0];
-}
-
-function sortArrayByTitle(a, b) {
-	var titlePattern = /[a-zA-Z ]+/;
-	var titleMatchA = a.toString().match(/[a-zA-Z ]+/);
-	var titleMatchB = b.toString().match(/[a-zA-Z ]+/);
-
-	var nonFilingChars = /^(a|an|the|de|die|la|le|los|las|les) /;
-	var titleBaseA = titleMatchA[0].toString().replace(nonFilingChars,'');
-	var titleBaseB = titleMatchB[0].toString().replace(nonFilingChars,'');
-
-	if(titleBaseA < titleBaseB){
-		return -1;
-	}
-	else if(titleBaseA > titleBaseB){
-		return 1;
-	}
-	else {
-		return 0;
-	}
-}
-
 function refreshPopInBar(){
-
 	var popInContent = '';
 
 	if(document.getElementById('popInContent')){ 
 		document.getElementById('popInContent').className = 'hide';
 	}
 
-	if(document.getElementById(Object.eLibraryActiveTab + "TabBasicText")){
-		popInContent = document.getElementById(Object.eLibraryActiveTab + "TabBasicText").innerHTML;
+	if(document.getElementById(eLibraryActiveTab + "TabBasicText")){
+		popInContent = document.getElementById(eLibraryActiveTab + "TabBasicText").innerHTML;
 	}
 
 	// if zero results for active tab, display zeroResultsText
-	if(eLibraryResultCounts[Object.eLibraryActiveTab] == 0 && document.getElementById(Object.eLibraryActiveTab + "TabZeroResultsText")){
-		popInContent = document.getElementById(Object.eLibraryActiveTab + "TabZeroResultsText").innerHTML;
+	if(eLibraryResultCounts[eLibraryActiveTab] == 0 && document.getElementById(eLibraryActiveTab + "TabZeroResultsText")){
+		popInContent = document.getElementById(eLibraryActiveTab + "TabZeroResultsText").innerHTML;
 	}
 
-	if(document.getElementById('sfxResults') && (Object.eLibraryActiveTab == 'all' || Object.eLibraryActiveTab == 'ej') ){ 
+	if(document.getElementById('sfxResults') && (eLibraryActiveTab == 'all' || eLibraryActiveTab == 'ej') ){ 
 		popInContent += document.getElementById('sfxResults').innerHTML;
 	}
 	if(document.getElementById('spellResults')){ 
 		popInContent = document.getElementById('spellResults').innerHTML;
 	}
-	if(document.getElementById('suldbResults') && Object.eLibraryActiveTab == 'database'){ 
+	if(document.getElementById('suldbResults') && eLibraryActiveTab == 'database'){ 
 		popInContent += document.getElementById('suldbResults').innerHTML;
 	}
 
-	// if results, add sort-by
-	if(eLibraryResultCounts[Object.eLibraryActiveTab] != 0){
-		 popInContent += 'Sorted by <select name="' + Object.eLibraryActiveTab + 'sortBy" onchange="sorteLibraryResults(this);" style="font-size: 95%; font-weight: 400;"> <option value="relevance">Relevance</option> <option value="alpha">A-Z</option> </select>';
+	// if results, add sort-by drop-down
+	if(eLibraryResultCounts[eLibraryActiveTab] != 0){
+		var options = new Array('Relevance','A-Z');
+
+		if(document.getElementById('eLibrarySearchResults').getAttribute('name') == 'relevance-sort'){
+			var optionsHtml = '<option>' + options[0] + '</option><option selected="true">' + options[1] + '</option>';
+		}
+		else {
+			var optionsHtml = '<option selected="true">' + options[0] + '</option><option>' + options[1] + '</option>';
+		}
+		popInContent += 'Sorted by <select name="sortBy" onchange="sorteLibraryResults();" style="font-size: 95%; font-weight: 400;">' + optionsHtml + '</select>';
 	}
 
 	if(popInContent != ''){
-		if(popInContent.match('::::') ) popInContent = expandSpecialSyntax(popInContent);
+		popInContent = expandSpecialSyntax(popInContent);
 		document.getElementById('popInContent').innerHTML = popInContent;
 		document.getElementById('popInContent').className = 'popInContent';
 	}	
 
 	// show tabTip if any *and* more than zero results
-	if(document.getElementById(Object.eLibraryActiveTab + "TabTipText") && eLibraryResultCounts[Object.eLibraryActiveTab] != 0){
-		var thisTabText = document.getElementById(Object.eLibraryActiveTab + "TabTipText").innerHTML;
-		if(thisTabText.match('::::')) thisTabText = expandSpecialSyntax(thisTabText);
+	if(document.getElementById(eLibraryActiveTab + "TabTipText") && eLibraryResultCounts[eLibraryActiveTab] != 0){
+		var thisTabText = document.getElementById(eLibraryActiveTab + "TabTipText").innerHTML;
+		thisTabText = expandSpecialSyntax(thisTabText);
 		document.getElementById("tabTip").innerHTML = thisTabText;
 		document.getElementById("tabTip").className = 'tabTip';
 	}
@@ -211,7 +199,6 @@ function refreshPopInBar(){
 		document.getElementById("tabTip").className = 'hide';
 	}
 }
-
 // end slice results into format tabs
 
 
@@ -223,13 +210,13 @@ function refreshPopInBar(){
 function XMLClient() {};
 
 XMLClient.prototype = {
-	template: null,
+	source: null,
 	request: null,
 	type: null,
 	url: null,
 
-	init: function (type, url, template) {
-		this.template = template;
+	init: function (type, url, source) {
+		this.source = source;
 		this.type = type;
 		this.url = url.replace(/amp;/g,''); // JTidy replaces & w/ &amp; ... &amp; becomes &amp;amp;
 
@@ -274,14 +261,13 @@ XMLClient.prototype = {
 	},
 
 	processXML: function() {
-
 		switch(this.type){
 
 			//**************************
-			//
-			//
+			// dynamic generation of genre-based tabs
+			// TESTING only
 			case "erdb":
-				var erdbLabels = new Array();
+				var erdbLabels = [];
 				erdbLabels['article'] = 'Articles';
 				erdbLabels['book review'] = 'Book Reviews';
 				erdbLabels['person, male'] = 'Men';
@@ -326,7 +312,7 @@ XMLClient.prototype = {
 
 					eLibraryTabLabels[eLibraryTabLabels.length] = erdbLabels[type];
 					eLibraryTabIDs[eLibraryTabIDs.length] = 'erdb-' + type;
-					painteLibraryTabs();
+					initeLibraryTabs();
 					showeLibraryTab('erdb-' + type);
 				}
 			break;
@@ -342,20 +328,18 @@ XMLClient.prototype = {
 					var baseUrl = GLOBALS.basePath + '/howto/index.html?keywords=' + keywords;
 					var html = '<a target="new" href="' + baseUrl + '">Lane Services<br /><span class="tabHitCount">' + lis.length + '</span></a>';
 
-					//ie having trouble finding this element ... TODO
 					if(document.getElementById('faqSearchResults')){
 						document.getElementById('faqSearchResults').innerHTML = html;
 					}
 				}
 			break;
 
-
 			//**************************
-			// Incremental metasearch results
-			//
+			// Incremental metasearch results (clinical, peds, research searches)
+			// 
 			case "incremental":
 				var response = this.request.responseXML.documentElement;
-				var newResults = response.getElementsByTagName('div')[3].getElementsByTagName('li');
+				var newResults = response.getElementsByTagName('div')[2].getElementsByTagName('li');
 				var oldResults = document.getElementById('incrementalSearchResults').getElementsByTagName('li');
 				document.getElementById('incrementalSearchResults').className = 'unhide'; //display results
 								
@@ -364,8 +348,8 @@ XMLClient.prototype = {
 				var resultsProgressBar = document.getElementById('incrementalResultsProgressBar');
 				var resultsDetails = document.getElementById('incrementalResultsDetails');
 
-				var foundCount = 0;
-				var doneCount = 0;
+				var hitsFoundInSourceCount = 0;
+				var sourcesCompleteCount = 0;
 				var finished = true;
 				
 				for (var i = 0; i < newResults.length; i++) {
@@ -376,9 +360,8 @@ XMLClient.prototype = {
 				  if (newStatus == 'running') {
 				    finished = false;
 				  }
-				
-				  if ( newStatus != 'running' ){
-				  	doneCount++;
+				  else{
+				  	sourcesCompleteCount++;
 				  }
 					
 				  //hide result items if status is still running or the item returned a zero hit count
@@ -391,7 +374,7 @@ XMLClient.prototype = {
 				    // display parent h3 heading as well as result
 				    oldResults[i].parentNode.parentNode.getElementsByTagName('h3')[0].className = '';
 				    oldResults[i].className = '';
-				    foundCount++;
+				    hitsFoundInSourceCount++;
 				  }
 				
 				  if (oldAnchor.className != newStatus) {
@@ -418,35 +401,29 @@ XMLClient.prototype = {
 				}
 				
 				if(!finished){
-					if(newResults.length > 0 && doneCount > 0){
-				  		var width = 100 * (doneCount / newResults.length);
+					if(newResults.length > 0 && sourcesCompleteCount > 0){
+				  		var width = 100 * (sourcesCompleteCount / newResults.length);
 					}
 					else{
 						var width = 1;
 					}
-					resultsProgressBar.innerHTML = '<table><tr><td nowrap>Still searching...</td><td nowrap><div style="position:relative;left:2px;top:2px;border:1px solid #b2b193; width:200px;"><img width="' + width + '%" height="15" src="' + GLOBALS.baseImagePath + '/incrementalResultsProgressBar.gif" alt="progress bar" /></div></td><td nowrap>&nbsp;' + doneCount + ' of ' + newResults.length + ' sources searched. <a href="javascript:haltIncremental=true;void(0);">Stop Search</a></td></tr></table>';
-				}
-				else{
-					resultsProgressBar.innerHTML = '';
-					if(newResults.length > foundCount){
-				  		//resultsDetails.innerHTML = 'Results <strong>' + foundCount + '</strong> of <strong><a href="javascript:displayIncrementalZeros(\'true\');">' + newResults.length + '</a></strong> sources contain <strong>' + searchTerm + '</strong> [<a id="zerotoggle" href="javascript:displayIncrementalZeros(\'true\');">Show Details</a>]';
-				  		resultsProgressBar.innerHTML = 'Results in <strong>' + foundCount + '</strong> of <strong>' + newResults.length + '</strong> sources for <strong>' + searchTerm + '</strong> [<a id="zerotoggle" href="javascript:displayIncrementalZeros(\'true\');">Show Details</a>]';
-				  	}
-				  	else if(newResults.length == foundCount){
-						resultsProgressBar.innerHTML = 'Results in <strong>' + foundCount + '</strong> of <strong>' + newResults.length + '</strong> sources contain <strong>' + searchTerm + '</strong>';
-				  	}
-				}
-				
-				if (!finished) {
+					resultsProgressBar.innerHTML = '<table><tr><td nowrap>Still searching...</td><td nowrap><div style="position:relative;left:2px;top:2px;border:1px solid #b2b193; width:200px;"><img width="' + width + '%" height="15" src="' + GLOBALS.baseImagePath + '/incrementalResultsProgressBar.gif" alt="progress bar" /></div></td><td nowrap>&nbsp;' + sourcesCompleteCount + ' of ' + newResults.length + ' sources searched. <a href="javascript:haltIncremental=true;void(0);">Stop Search</a></td></tr></table>';
 					setTimeout("getIncrementalResults();",1500);
 					return 0;
 				}
-
+				else{
+					resultsProgressBar.innerHTML = '';
+					if(newResults.length > hitsFoundInSourceCount){
+				  		resultsProgressBar.innerHTML = 'Results in <strong>' + hitsFoundInSourceCount + '</strong> of <strong>' + newResults.length + '</strong> sources for <strong>' + searchTerm + '</strong> [<a id="zerotoggle" href="javascript:toggleIncrementalZeros(\'true\');">Show Details</a>]';
+				  	}
+				  	else if(newResults.length == hitsFoundInSourceCount){
+						resultsProgressBar.innerHTML = 'Results in <strong>' + hitsFoundInSourceCount + '</strong> of <strong>' + newResults.length + '</strong> sources contain <strong>' + searchTerm + '</strong>';
+				  	}
+				}
 			break;
 
-
 			//**************************
-			// metasearch (lane web) results processing
+			// metasearch (lane web search app) results processing for eLibrary search
 			//
 			case "meta":
 				var xmlObj = this.request.responseXML.documentElement;
@@ -459,11 +436,11 @@ XMLClient.prototype = {
 
 				if(status == "successful" || status =="running"){
 					var engines = xmlObj.getElementsByTagName('engine');
-					var metaSearchResults = new Array();
+					var metaSearchResults = [];
 
 					for(var i=0; i<engines.length; i++){
 						var resource = engines[i].getElementsByTagName('resource');
-						var results = new Array();
+						var results = [];
 
 						results.id = resource[0].getAttribute('id');
 						results.url = resource[0].getElementsByTagName('url')[0].firstChild.data;
@@ -487,7 +464,7 @@ XMLClient.prototype = {
 							if(metaSearchResults[j].id == 'google'){
 								document.getElementById(metaSearchResults[j].id + 'SearchResults').className = 'metaSearchResultsRightCorner';
 							}
-							// TESTING ... remove entire else if block once lmldb has updated design
+							// TESTING ... remove entire block once lmldb has updated design
 							else if(metaSearchResults[j].id == 'lois'){
 								document.getElementById(metaSearchResults[j].id + 'SearchResults').innerHTML = "<a href='" + GLOBALS.basePath + '/online/catalog.html?keywords=' + keywords + "'>" + metaSearchResults[j].name + '<br /><span class="tabHitCount">' + intToNumberString(metaSearchResults[j].hits) + '</span></a>';
 								document.getElementById(metaSearchResults[j].id + 'SearchResults').className = 'metaSearchResults';
@@ -509,7 +486,7 @@ XMLClient.prototype = {
 			break;
 
 			//**************************
-			// sfx results processing
+			// sfx results processing [eLibrary pop-in]
 			//
 			case "sfx":
 				var response = this.request.responseXML.documentElement;
@@ -517,7 +494,7 @@ XMLClient.prototype = {
 				var result = response.getElementsByTagName('result')[0].firstChild.data;
 
 				if(result != 0 ){
-					var html = 'FindIt@Stanford eJournal: <a target="new" href="' + openurl + '">' + result.replace(/ \[.*\]/,'') + '</a><br />';
+					var html = 'FindIt@Stanford eJournal: <a target="new" href="' + openurl + '"><b>' + result.replace(/ \[.*\]/,'') + '</b></a><br />';
 
 					//create new sfxResults div (rely on refreshPopInBar to display)
 					var body = document.getElementsByTagName("body").item(0);
@@ -532,7 +509,7 @@ XMLClient.prototype = {
 			break;
 
 			//**************************
-			// spelling suggestion (google) processing
+			// spelling suggestion (google) processing  [eLibrary pop-in]
 			//
 			case "spell":
 				var response = this.request.responseXML.documentElement;
@@ -560,7 +537,7 @@ XMLClient.prototype = {
 			break;
 
 			//**************************
-			// SUL database results processing
+			// SUL database results processing [eLibrary pop-in]
 			//
 			case "suldb":
 				var response = this.request.responseXML.documentElement;
@@ -606,13 +583,38 @@ XMLClient.prototype = {
 			break;
 		}
 	}
-
 }
 
 
 //**************************
 // useful functions
 //
+
+// extend Array class
+Array.prototype.contains = function(searchValue){
+	for (var i = 0, elms = this.length; i < elms && this[i] !== searchValue; i++) ;
+		return i < elms;
+}
+Array.prototype.sortByAlpha = function(){
+	var LCArray = [];
+	var hash = [];
+
+	var nonFilingChars = /^(a|an|the|de|die|la|le|los|las|les) /;
+
+	for(var i = 0; i < this.length; i++){
+		LCArray[LCArray.length] = this[i].toString().toLowerCase().replace(nonFilingChars,'');
+		hash[this[i].toString().toLowerCase().replace(nonFilingChars,'')] = i;
+	}
+
+	LCArray.sort();
+
+	var newArray = [];
+
+	for(var i = 0; i < LCArray.length; i++){
+		newArray[i] = this[hash[LCArray[i]]];
+	}
+	return newArray;
+} 
 
 // clean up keywords string: 
 // 	replace &amp; w/ & (i.e. undo JTidy)
@@ -629,37 +631,36 @@ function cleanKW(keywords){
 // getMetaContent(document,'lw_parameters','foo', ';', '=')
 //
 function getMetaContent(node, name, paramName, paramDelim, valueDelim) {
-  var value = '';
-  if(!paramDelim){
-  	paramDelim = ';';
-  }
-  else if(paramDelim == '&amp;'){
-  	paramDelim = '&';
-  }
-  if(!valueDelim){
-  	valueDelim = '=';
-  }
-  var metaTags = node.getElementsByTagName('meta');
-  for (var i = 0; i < metaTags.length; i++) {
-    if (metaTags[i].getAttribute('name') == name) {
-
-      if (paramName){
-		var pairs = new Array();
-		pairs = metaTags[i].getAttribute('content').split(paramDelim);
-		for (var y = 0; y < pairs.length; y++){
-			var pair = new Array();
-			pair = pairs[y].split(valueDelim);
-			if (pair[0] == paramName){
-		      	value = pair[1];
+	var value = '';
+	if(!paramDelim){
+		paramDelim = ';';
+	}
+	else if(paramDelim == '&amp;'){
+		paramDelim = '&';
+	}
+	if(!valueDelim){
+		valueDelim = '=';
+	}
+	var metaTags = node.getElementsByTagName('meta');
+	for (var i = 0; i < metaTags.length; i++) {
+		if (metaTags[i].getAttribute('name') == name) {
+			if (paramName){
+				var pairs = [];
+				pairs = metaTags[i].getAttribute('content').split(paramDelim);
+				for (var y = 0; y < pairs.length; y++){
+					var pair = [];
+					pair = pairs[y].split(valueDelim);
+					if (pair[0] == paramName){
+						value = pair[1];
+					}
+				}
+			}
+			else{
+				value = metaTags[i].getAttribute('content');
 			}
 		}
-      }
-      else{
-	      value = metaTags[i].getAttribute('content');
-	  }
-    }
-  }
-  return value;
+	}
+	return value;
 }
 
 function getQueryContent(paramName,queryString) {
@@ -711,13 +712,16 @@ function toggleNode(linkNode, toggleNode, onText, offText, additionalInvertedTog
 
 // expand "::::keywords::::  ::::basePath::::" to "dvt /beta/stage", etc.
 function expandSpecialSyntax(string){
+	if(!string.match(/::::/)){
+		return string;
+	}
+
 	for (i in GLOBALS){
 		var pattern = '::::' + i + '::::';
 		while (string.match(pattern)) {
 			string = string.replace(pattern,GLOBALS[i]);
 		}
 	}
-
 	if (string.match('::::keywordsDisplay::::') && keywords){
 		string = unescape(string.replace(/::::keywordsDisplay::::/g,keywords));
 	}
@@ -727,22 +731,43 @@ function expandSpecialSyntax(string){
 	return string;
 }
 
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var cookieArray = document.cookie.split(';');
+	for(var i=0;i<cookieArray.length;i++){
+		var c = cookieArray[i];
+		while (c.charAt(0)==' ') {
+			c = c.substring(1,c.length);
+		}
+		if (c.indexOf(nameEQ) == 0){
+			var value = c.substring(nameEQ.length,c.length);
+			return value;
+		}
+	}
+	return null;
+}
+function removeCookie(name){
+	if(readCookie(name)){
+		document.cookie = name + "=" + "; expires=Thu, 01-Jan-70 00:00:01 GMT";
+		return true;
+	}
+	return false;
+}
+function setCookie(name,value) {
+	document.cookie = name + "=" + value + "; path=/; ";
+}
 // end useful functions
 
 
 
 //**************************
-// additional vars and methods used w/ incremental search
+// additional incremental search functions
 //
-var haltIncremental = false;
-var date = new Date();
-var startTime = date.getTime();
-
 function getIncrementalResults() {
 	var id = getMetaContent(document,'lw_searchParameters','id');
-	var template = getMetaContent(document,'lw_searchParameters','template');
+	var source = getMetaContent(document,'lw_searchParameters','source');
 	var date = new Date();
-	var url = GLOBALS.basePath + '/content/search.html?id='+id+'&source='+template+'&secs='+date.getSeconds();
+	var url = GLOBALS.basePath + '/content/search.html?id='+id+'&source='+source+'&secs='+date.getSeconds();
 
 	var incremental = new XMLClient();
 	incremental.init('incremental',url);
@@ -750,121 +775,91 @@ function getIncrementalResults() {
 }
 
 //toggle display of zero results and associated h3 headings
-function displayIncrementalZeros(toggle){
-  var headings = document.getElementById('incrementalSearchResults').getElementsByTagName('h3');
-  var results = document.getElementById('incrementalSearchResults').getElementsByTagName('li');
-  var zerotoggle = document.getElementById("zerotoggle");
+function toggleIncrementalZeros(toggle){
+	var headings = document.getElementById('incrementalSearchResults').getElementsByTagName('h3');
+	var results = document.getElementById('incrementalSearchResults').getElementsByTagName('li');
+	var zerotoggle = document.getElementById("zerotoggle");
   
-  if(toggle == "true"){
-    zerotoggle.href = "javascript:displayIncrementalZeros('false');";
-    zerotoggle.innerHTML = "Hide Details";
-    for (var i = 0; i < headings.length; i++) {
-		if(headings[i].className == 'hide'){
-			headings[i].className = 'unhide';
+	if(toggle == "true"){
+		zerotoggle.href = "javascript:toggleIncrementalZeros('false');";
+		zerotoggle.innerHTML = "Hide Details";
+		for (var i = 0; i < headings.length; i++) {
+			if(headings[i].className == 'hide'){
+				headings[i].className = 'unhide';
+			}
+		}
+		for (var i = 0; i < results.length; i++) {
+			if(results[i].className == 'hide'){
+				results[i].className = 'unhide';
+			}
 		}
 	}
-    for (var i = 0; i < results.length; i++) {
-        if(results[i].className == 'hide'){
-			results[i].className = 'unhide';
+	else if(toggle == "false"){
+		zerotoggle.href = "javascript:toggleIncrementalZeros('true');";
+		zerotoggle.innerHTML = "Show Details";
+		for (var i = 0; i < headings.length; i++) {
+			if(headings[i].className == 'unhide'){
+				headings[i].className = 'hide';
+			}
 		}
-    }  
-  }
-  else if(toggle == "false"){
-    zerotoggle.href = "javascript:displayIncrementalZeros('true');";
-    zerotoggle.innerHTML = "Show Details";
-    for (var i = 0; i < headings.length; i++) {
-		if(headings[i].className == 'unhide'){
-			headings[i].className = 'hide';
+		for (var i = 0; i < results.length; i++) {
+			if(results[i].className == 'unhide'){
+				results[i].className = 'hide';
+			}
 		}
 	}
-    for (var i = 0; i < results.length; i++) {
-        if(results[i].className == 'unhide'){
-			results[i].className = 'hide';
-		}
-    }  
-  }
 }
-// end additional incremental vars and methods
+// end additional incremental functions
 
 
 //**************************
-// move to laneweb.js when ready
+// 
 function submitSearch() {
   var source = document.searchForm.source.options[document.searchForm.source.selectedIndex].value;
   var keywords = document.searchForm.keywords.value;
   var nokeywords = 'Please enter one or more search terms.';
 
+  if(eLibraryTabIDs.contains(source)){
+  	setCookie('LWeLibSource',source);
+  }
+  
   if (keywords == '') {
-    alert(nokeywords);
-    return false;
-  }
-  else if (source == 'ej') {
-	//var dest = GLOBALS.basePath + '/online/er.html?tab=ej&keywords=' + keywords;
-	var dest = GLOBALS.searchPath + '?source=ej&keywords=' + keywords;
-    //window.location.replace(dest);
-    window.location = dest;
+	alert(nokeywords);
 	return false;
   }
-  else if (source == 'database') {
-	//var dest = GLOBALS.basePath + '/online/er.html?tab=database&keywords=' + keywords;
-	var dest = GLOBALS.searchPath + '?source=database&keywords=' + keywords;
-    //window.location.replace(dest);
-    window.location = dest;
+  else if (source.match(/(research|clinical|peds)/)) {
+	var dest = GLOBALS.searchPath + '?source=' + source + '&keywords=' + keywords + '&w=' + GLOBALS.incrementalSearchWait;
+    	window.location = dest;
 	return false;
   }
-  else if (source == 'book') {
-	//var dest = GLOBALS.basePath + '/online/er.html?tab=book&keywords=' + keywords;
-	var dest = GLOBALS.searchPath + '?source=book&keywords=' + keywords;
-    //window.location.replace(dest);
-    window.location = dest;
-	return false;
-  }
-  else if (source == 'cc') {
-	//var dest = GLOBALS.basePath + '/online/er.html?tab=cc&keywords=' + keywords;
-	var dest = GLOBALS.searchPath + '?source=cc&keywords=' + keywords;
-    //window.location.replace(dest);
-    window.location = dest;
-	return false;
-  }
-  else if (source == 'pubmed') {
-    openLink('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term=' + keywords);
-    return false;
-  }
-  else if (source == 'google') {
-    openLink('http://www.google.com/search?hl=en&q=' + keywords);
-    return false;
-  }
-  else if (source == 'faq') {
-	//var dest = GLOBALS.basePath + '/howto/index.html?keywords=' + keywords;
-	//var dest = GLOBALS.basePath + '/online/er.html?tab=faq&keywords=' + keywords;
-	var dest = GLOBALS.searchPath + '?source=faq&keywords=' + keywords;
-    //window.location.replace(dest);
-    window.location = dest;
-	return false;
-  }
-  else if (source == 'eResources') {
-	//var dest = GLOBALS.basePath + '/online/er.html?keywords=' + keywords;
-	var dest = GLOBALS.searchPath + '?keywords=' + keywords;
-    //window.location.replace(dest);
-    window.location = dest;
+  else if (source == 'biomedsem') {
+	openLink('http://med.stanford.edu/seminars/searchresults.jsp?searchString=' + keywords + '&Submit=Go');
 	return false;
   }
   else if (source == 'catalog') {
-	//var dest = 'http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&Search_Arg=' + keywords + '&SL=None&Search_Code=FT*&CNT=50';
 	var dest = GLOBALS.basePath + '/online/catalog.html?keywords=' + keywords;
-    //window.location.replace(dest);
-    window.location = dest;
+    	window.location = dest;
+	return false;
+  }
+  else if (source == 'google') {
+	openLink('http://www.google.com/search?hl=en&q=' + keywords);
+	return false;
+  }
+  else if (source == 'pubmed') {
+	openLink('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term=' + keywords);
 	return false;
   }
   else if (source == 'stanford_who') {
-    openLink('https://stanfordwho.stanford.edu/lookup?search=' + keywords);
+	openLink('https://stanfordwho.stanford.edu/lookup?search=' + keywords);
+	return false;
+  }
+
+  if (searching) {
+    alert('a search is already in progress');
     return false;
   }
-  else if (source == 'biomedsem') {
-    openLink('http://med.stanford.edu/seminars/searchresults.jsp?searchString=' + keywords + '&Submit=Go');
-    return false;
-  }
- return true;
+  searching = true;
+  return true;
 }
 
 //IE ignores disabled attribute of option tag
@@ -885,23 +880,11 @@ function lastSelectValue(select){
 		lastIndex = select.selectedIndex
 	}
 }
-// end adds to laneweb.js 
 
-
-//testing catalog.html
+// catalog.html iframe
 function loadCatalogIframe(){
         var q = getQueryContent('keywords',location.href);
         var frame = document.getElementById('catalog');
-        //frame.src = 'http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&Search_Arg=' + q + '&SL=None&Search_Code=FT*&CNT=50';
         frame.src = 'http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1=' + q + '&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50';
         frame.className = '';
-}
-
-// handle error events with errorLogger method 
-window.onerror = errorLogger;
-function errorLogger(message, url, line){
-	var errorImg = document.createElement('img');
-	errorImg.src = GLOBALS.basePath + '/javascript/ErrorLogger.js?url=' + url + '&line=' + line + '&msg=' + message;
-	errorImg.className = 'hide';
-	return false;
 }

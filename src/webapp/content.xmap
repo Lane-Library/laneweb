@@ -22,50 +22,49 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="search-proxy">
-                <map:generate type="search-proxy" src="{defaults:search-url}search?id={request-param:id}&amp;w=2500&amp;q={uriencode-request-param:keywords}"/>
+                <map:generate type="search-proxy" src="{defaults:search-url}search"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="synchronous-search-proxy">
-                <map:generate type="search-proxy" src="{defaults:search-url}search?id={request-param:id}&amp;w={chain:search-timeout}&amp;q={uriencode-request-param:keywords}"/>
+                <map:generate type="search-proxy" src="{defaults:search-url}search"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search.html">
-                    <map:select type="regex-parameter">
-						<map:parameter name="parameter-selector-test" value="{request-param:source}"/>
-                        <map:when test="clinical|peds|research">
-			                <map:aggregate element="aggregate">
-			                    <map:part src="cocoon:/search-proxy"/>
-			                    <map:part type="xml" src="cocoon:/templates/search/{request-param:source}.xml"/>
-			                </map:aggregate>
-			                <map:transform type="xsltc" src="{defaults:live-base}/xsl/ajax-search.xsl">
-			                    <map:parameter name="template" value="{request-param:source}"/>
-			                    <map:parameter name="search-url" value="{defaults:new-search-url}"/>
-			                    <map:parameter name="keywords" value="{request-param:keywords}"/>
-			                    <map:parameter name="view" value="{request-param:view}"/>
-			                    <map:parameter name="timeout" value="{chain:timeout}"/>
-			                </map:transform>
-			                <map:serialize type="xml"/>
-                        </map:when>
-                        <map:when test="synchronous-clinical|synchronous-peds|synchronous-clinicalresearch">
-							<map:aggregate element="aggregate">
-                			    <map:part src="cocoon:/synchronous-search-proxy"/>
-                			    <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>
-							</map:aggregate>
-							<map:transform type="xsltc" src="{defaults:live-base}/xsl/synchronous-search.xsl">
-								<map:parameter name="template" value="{request-param:source}"/>
-								<map:parameter name="search-url" value="{defaults:new-search-url}"/>
-								<map:parameter name="keywords" value="{request-param:keywords}"/>
-								<map:parameter name="view" value="{request-param:view}"/>
-								<map:parameter name="debug" value="{request-param:debug}"/>
-							</map:transform>
-							<map:serialize type="xml"/>
-                        </map:when>
-                        <map:otherwise>
-				                <map:generate type="html" src="{defaults:live-base}/content/search.html"/>
-				                <map:transform type="xinclude"/>
-				                <map:serialize type="xml"/>
-						</map:otherwise>
-                    </map:select>
+                <map:select type="regex-parameter">
+                    <map:parameter name="parameter-selector-test" value="{request-param:source}"/>
+                    <map:when test="clinical|peds|research">
+                        <map:aggregate element="aggregate">
+                            <map:part src="cocoon:/search-proxy"/>
+                            <map:part type="xml" src="cocoon:/templates/search/{request-param:source}.xml"/>
+                        </map:aggregate>
+                        <map:transform type="xsltc" src="{defaults:live-base}/xsl/ajax-search.xsl"/>
+                        <map:serialize type="xml"/>
+                    </map:when>
+                    <map:when test="synchronous-clinical|synchronous-peds|synchronous-clinicalresearch">
+                        <map:aggregate element="aggregate">
+                            <map:part src="cocoon:/synchronous-search-proxy"/>
+                            <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>
+                        </map:aggregate>
+                        <map:transform type="xsltc" src="{defaults:live-base}/xsl/synchronous-search.xsl">
+                            <map:parameter name="search-url" value="{defaults:search-url}"/>
+                        </map:transform>
+                        <map:serialize type="xml"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:select type="regex-parameter">
+                            <map:parameter name="parameter-selector-test" value="{request-param:keywords}"/>
+                             <map:when test="">
+                                 <map:generate src="cocoon:/error.html"/>
+                                 <map:serialize type="xhtml" status-code="404"/>
+                             </map:when>
+                             <map:otherwise>
+                                 <map:generate type="html" src="{defaults:live-base}/content/search.html"/>
+                                 <map:transform type="xinclude"/>
+                                 <map:serialize type="xml"/>
+                             </map:otherwise>
+                        </map:select>
+                    </map:otherwise>
+                </map:select>
             </map:match>
             <map:match type="wildcard" pattern="howto/index.html">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>

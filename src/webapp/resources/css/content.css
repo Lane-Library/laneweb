@@ -16,7 +16,7 @@ body {
 	margin-left: 17px;
 	margin-bottom: 10px;
 	color: #777;
-	font-size: 0.9em;
+	/*font-size: 0.9em;*/
 }
 
 #breadCrumb a:link, #breadCrumb a:visited {
@@ -36,7 +36,6 @@ body {
 	border: 0px;
 	padding: 0px;
 	z-index: 3;
-	font-size: 1.1em;
 }
 
 .sideBlueBox, .sideTanBox, .centerGreenBox, .whiteBox, .centerBlueBox {
@@ -45,9 +44,6 @@ body {
 	margin-bottom: 15px;
 	padding: 0px;
 	overflow: hidden;
-}
-#leftColumn, #rightColumn {
-	font-size: 1em;
 }
 
 .sideBlueBox, .sideTanBox, .whiteBox  {
@@ -124,9 +120,10 @@ body {
 }
 
 .centerGreenBox h2 {
-	width: 12em;
-	padding-left: 2px;
-	padding-right: 15px;
+	float: left;
+	width: auto;
+	padding-left: 20px;
+	padding-right: 35px;
 	color: white !important;
 	background: #996 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
 	border: 0px;
@@ -134,9 +131,10 @@ body {
 }
 
 .centerBlueBox h2 {
-	width: 12em;
-	padding-left: 2px;
-	padding-right: 15px;
+	float: left;
+	width: auto;
+	padding-left: 20px;
+	padding-right: 35px;
 	color: white !important;
 	background: #6784A2 url(/././images/templates/default/whiteCornerBlueBoxTR.gif) no-repeat top right;
 	border: 0px;
@@ -162,6 +160,7 @@ body {
 }
 
 .sideBlueBoxShortContent, .sideBlueBoxLongContent, .sideTanBoxContent, .centerGreenBoxContent, .whiteBoxContent, .centerBlueBoxContent {
+	height: 1%; /* solves dissolving/vanishing borders in IE */
 	padding: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -188,6 +187,7 @@ body {
 
 .centerGreenBoxContent {
 	border: 1px solid #dcdbdb;
+	/*background-color: green;*/
 }
 
 #leftColumn .sideTanBoxContent {
@@ -268,19 +268,18 @@ h1, .portalTitle {
 	font-family: serif;
 	font-weight: 700;
 	color: #369;
-	font-size: 1.2em;
 }
 
 /* Clinical trials -- testing */
 
 /*.sideBlueBoxShortContent ul, .sideBlueBoxLongContent ul, .sideTanBoxContent ul {*/
 ul {
-	padding: .2em;
-	margin: 0;
+	padding: 3px;
+	margin: 0px;
 }
 
 ul ul {
-	padding-left: 1.2em;
+	padding-left: 6px;
 }
 
 li {
@@ -312,21 +311,27 @@ li img {
 	margin: 0px;
 }
 */
+
+td#leftColumn, td#rightColumn {
+	width: 180px;
+	overflow: hidden;
+}
+
 td.centralColumn {
 	width:auto;
-	padding-left: 10px;
-	padding-right: 10px;
-	font-size: 1.1em;
-	/* text-align: center; exploiting IE hack to center column boxes*/
+	padding-left: 15px;
+	padding-right: 15px;
+	/*text-align: center; exploiting IE hack to center column boxes*/
 }
 
 td.centralColumn div {
+	width: auto;
 	text-align: left; /*compensating for the above td.centralColumn settings*/
 }
-
-* html td.centralColumn .whiteBox{
-	width: 100%; /*IE weird doubling of padding problem fix - surreptitious */
-}
+/*
+* html td.centralColumn {
+	width: 100%;*//*IE weird doubling of padding problem fix - surreptitious */
+/*}*/
 
 div#otherPortalOptions {
 	position:relative;
@@ -336,16 +341,16 @@ div#otherPortalOptions {
 	height: 1em;
 	background: /*red*/transparent;
 }
-
+/*
 #portalForm select{
 	position: absolute;
 	bottom: 0px;
 	right: 0px;
-	width: 15em;
+	width: 15em; /* replace w/ percent*/
 	height: auto;
 	z-index: 100;
 }
-
+*/
 /*button-like box experiment*/
 
 /* set the image to use and establish the lower-right position */
@@ -378,15 +383,10 @@ div#otherPortalOptions {
 	background-position: bottom left;
 	margin-right: 25px; /* interior-padding right */
 	padding: 5px 0 2px 40px; /* mirror .cssbox_head right/left */
-} 
-
-select {
-	font-family: verdana, geneva, sans-serif;
 }
 
 h1 {
 	font-family: serif;
-	font-size: 1.5em;
 	font-weight: 700;
 	color: #40668c;
 	padding-top: 0px;
@@ -402,20 +402,13 @@ h2 {
 }
 
 h2, h3, h4, h5 {
-	padding-bottom: 0;
-	margin-bottom: 0;
+	padding: 0px;
+	margin: 0px;
+	margin-top: 10px;
 }
 
-h2, h3 {
-	font-size: 0.9em;
-}
-
-.centralColumn h2 {
-	font-size: 1.0em;
-}
-
-.centralColumn .centerBlueBox h2, .centralColumn .whiteBox h2, .centralColumn .centerGreenBox h2 {
-	font-size: 0.9em;
+h3 {
+	color: #444;
 }
 
 .pList {
@@ -439,7 +432,7 @@ p a:link, p a:visited {
 p.pList a:link, p.pList a:visited { 
 	text-decoration: none;
 }
-h2 a:link, h2 a:visited {
+h3 a:link, h3 a:visited {
 	text-decoration: underline;
 }
 
@@ -510,11 +503,305 @@ h2 a:link, h2 a:visited {
 	top: 0px;
 	left: 0px;
 	width: 99%;
-	background: #e0e0d1;
+	background-color: #e0e0d1;
 	padding:5px;
 	text-indent: 15px;
 	margin: 0px;
 	margin-bottom: 15px;
 	border: 1px solid #99987a;
 	border-top: 5px solid #99987a;
+}
+
+/* Ryan's styles*/
+
+
+.hide {
+	display: none;
+}
+.indent {
+	padding-left: 1.6em;
+}
+.keywordresult {
+	color: #000000;
+	font-weight: bold;
+}
+
+.searchHeader {
+	margin-left:0;
+	margin-bottom:0.7em;
+}
+#searchHeaderTable {
+	width:100%;
+	border-spacing:0px;
+}
+.searchHeaderTitle {
+	padding-left: 1.6em;
+	font-weight: bold;
+	white-space: nowrap;
+}
+.searchHeaderMiddle {
+	background-color:#e7e2cd;
+	padding:0.6em 1.25em 0.6em 0.6em;
+	white-space: nowrap;
+}
+.searchHeaderRight {
+	background: url(/././images/templates/default/searchHeaderTopRight.gif) top right no-repeat;
+	background-color:#e7e2cd;
+	padding:0.6em 1.25em 0.65em 0.6em;
+	white-space: nowrap;
+	margin-left:-1px;
+}
+.searchHeaderLeft {
+	background: url(/././images/templates/default/searchHeaderTopLeft.gif) top left no-repeat;
+	background-color:#e7e2cd;
+	padding:.6em 0.2em 0.65em 0em;
+	white-space: nowrap;
+}
+
+#tabTip h3 {
+	color: #980202;
+	font-weight:bold;
+	font-style: italic;
+	margin-top: 2px;
+	margin-bottom: 10px;
+}
+#tabTip{
+	float: right;
+	width:150px;
+	margin-top: 30px;
+	padding-top:1px;
+	padding-left:5px;
+	padding-bottom:5px;
+	padding-right:5px;
+	border: 1px solid #99987a;
+	background: #e0e0d1;
+}
+/* ryan I'm throwing these in temporarily.... -Pam */
+#tabTip h2 {
+	color: #40668c;
+	font-weight:bold;
+	text-align:center;
+	margin-top: 2px;
+	margin-bottom: 10px;
+}
+#tabTip h4 {
+	color: #444;
+	font-weight:bold;
+	font-style: italic;
+	margin-bottom: 0;
+	padding-bottom:0;
+}
+#tabTip p {
+	padding-top: 0;
+	margin-top:0;
+}
+/* popInContent styles used for did you mean, sfx, suldb content (eLibrary and incremental) */
+.popInContent {
+	clear: both;
+	background: #e0e0d1;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	margin: 0em;
+	margin-bottom: 10px;
+	border-top: 5px solid #99987a;
+	border-right: 1px solid #99987a;
+	border-left: 1px solid #99987a;
+	border-bottom: 1px solid #99987a;
+}
+div#eLibrarySearchResults {
+	padding-right:0px;
+	padding-left: 20px;
+	margin-bottom: 14.5em;
+}
+
+#eLibraryTabs {
+	display: inline;
+	white-space: nowrap;
+}
+
+#eLibraryTabs div:hover {
+	text-decoration: underline;
+}
+.eLibraryTab {
+	background: #d3cebf;
+	cursor: pointer;
+	color: #980202;
+	position:relative;
+	float: left; 
+	text-align: center;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	margin-right: 2px;
+}
+
+
+.eLibraryTabActive {
+	background: #99987a;
+	cursor: default;
+	text-decoration: none;
+	color: #ffffff;
+	font-weight: bold;
+	position:relative;
+	float: left; 
+	text-align: center;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	margin-right: 2px;
+}
+
+span.tabHitCount {
+	color: #393838;
+}
+
+.eLibraryTabActive span.tabHitCount {
+	color: #ffffff;
+}
+
+#metaSearchResultsContainer {
+	float:left;
+	position:relative;
+	text-align: center;
+}
+.metaSearchResults {
+	background-color:#ecece8;
+	cursor: pointer;
+	color: #980202;
+	position:relative;
+	float: left;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	margin-left: 0px;
+	margin-right: 1px;
+}
+.metaSearchResultsRightCorner {
+	background: url(/././images/templates/default/metaSearchResultsRight.gif) top right no-repeat;
+	background-color:#ecece8;
+	cursor: pointer;
+	color: #980202;
+	position:relative;
+	float: left;
+	padding-top: 3px;
+	padding-right: 5px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	margin-left: 0px;
+	margin-right: 1px;
+}
+
+div#incrementalSearchResults{
+	padding-top: 0.5em;
+	padding-right:0em;
+	padding-bottom:2.25em;
+	padding-left:2.25em;
+	margin-top: -0.25em;
+	margin-bottom: 0.5em;
+}
+div#incrementalSearchResults ul  {
+	margin-left:0em;
+	padding-left:0em;
+	list-style:none;
+}
+div#incrementalSearchResults li {
+	padding-left: .6em;
+	background-image: url(/images/list-background-line.gif);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	padding-bottom: .2em;
+}
+.searchColumn3 { float:left; width:31%;margin:0;padding:0}
+
+/* used on incremental results page to make micromedex static result look like incremental */
+p.micromedex {
+        padding-left: .6em;
+        background-image: url(/images/list-background-line.gif);
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        margin-bottom: 0.15em;
+}
+p.micromedex a:link, p.micromedex a:visited {
+	text-decoration: none;
+}
+
+/*CY's search results*/
+dt {font-weight:bolder}
+dd {margin:0; padding:0 0 0 2em}
+.provider {color:gray}
+dl ul {padding:0;margin:0;list-style-position:outside;list-style:none;}
+dl li {background-image:none;}
+
+.searchResults {
+	margin-right: 200px;
+}
+
+.leftColumnof2inBox, .rightColumnof2inBox {
+	float: left;
+	width: 45% !important; /*w/o the 'important' qualifier browsers don't accurately render the width*/
+	margin: 0px;
+	margin-right: 25px;
+	padding: 0px;
+	white-space: normal;
+}
+
+.leftColumnof3inBox, .centerColumnof3inBox, .rightColumnof3inBox {
+	float: left;
+	width: 29% !important; /*w/o the 'important' qualifier browsers don't accurately render the width*/
+	margin: 0px;
+	margin-right: 25px;
+	padding: 0px;
+	white-space: normal;
+}
+
+.rightColumnof2inBox, .rightColumnof3inBox {
+	margin-right: 0px;
+}
+
+
+/*font specifications*/
+.smallFont {
+	font-size: 0.9em;
+}
+
+.mediumFont {
+	font-size: 1.1em;
+}
+
+.largeFont {
+	font-size: 1.2em;
+}
+
+h1, .portalTitle {
+	font-size: 1.9em;
+	margin-bottom: 20px;
+}
+
+h2 {
+	font-size: 0.9em;
+}
+
+.centralColumn h2 {
+	font-size: 1.2em;
+}
+/*
+.centralColumn .centerBlueBox h2, .centralColumn .whiteBox h2, .centralColumn .centerGreenBox h2 {
+	font-size: 1.2em;
+}
+*/
+#tabTip h2 {
+	font-size: 1.5em;
+}
+
+h3 {
+	font-size: 1.0em;
+}
+
+#tabTip h4 {
+	font-size: 1.1em;
 }

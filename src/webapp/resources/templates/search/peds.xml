@@ -16,41 +16,25 @@
 				</tr>
 				<tr>
 					<td class="popInContent" colspan="3">
-				        <div id="spellResults">Expand to <a href="search.html?source=clinical&amp;id={$id}">Clinical Search</a> or go to the <a href="peds/index.html">Pediatrics Portal</a></div>
+				        <span id="spellResults">Expand to <a href="search.html?source=clinical&amp;id={$id}">Clinical Search</a> or Go to the <a href="peds/index.html">Pediatrics Portal</a></span>
 					</td>
 				</tr>
 			</table>
         </div>
         <div id="incrementalSearchResults" class="hide">
-            <div class="searchColumn">
+            <div class="searchColumn3">
                 <div class="searchCategory" id="firstbets">
-                    <h3 class="hide">First Bets</h3>
+                    <h3 class="hide">Most Popular</h3>
                     <ul>
-                        <li id="aapredbook">AAP Red Book</li>
-                        <li id="mdc_hlh">Harriet Lane Handbook</li>
+					    <li id="aapredbook">AAP Red Book</li>
+					    <li id="am_hay">Current Pediatric Dx &amp; Tx</li>
                         <li id="mdc_behrman">Nelson's Textbook of Pediatrics</li>
                         <li id="skolar_rudolph">Rudolph's Pediatrics</li>
-                        <li id="uptodate">UpToDate</li>
-                        <li id="crossdb_omim">OMIM</li>
 						<li id="emedicine">eMedicine</li>
+                        <li id="uptodate">UpToDate</li>
                     </ul>
                 </div>
-                <div class="searchCategory" id="texts">
-                    <h3 class="hide">Texts</h3>
-                    <ul>
-                        <li id="am_hay">Current Pediatric Dx &amp; Tx</li>
-                        <li id="skolar_scott">Danforth's Obstetrics &amp; Gynecology</li>
-                        <li id="mdc_gabbe">Gabbe's Obstetrics</li>
-                        <li id="mdc_gershon">Infectious Diseases of Children</li>
-                        <li id="mdc_miller">Miller's Anesthesia</li>
-                        <li id="mdc_park">Pediatric Cardiology</li>
-                        <li id="mdc_long">Pediatric Infectious Diseases</li>
-                        <li id="mdc_green">Skeletal Trauma in Children</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="searchColumn">
-                <div class="searchCategory" id="drugs">
+				                <div class="searchCategory" id="drugs">
                     <h3>Drugs</h3>
                     <ul>
 <!--
@@ -63,9 +47,11 @@
                 <div class="searchCategory" id="calculators">
                     <h3 class="hide">Calculators</h3>
                     <ul>
-                        <li id="lane_cc">Lane List</li>
+                        <li id="lane_cc">Web Interactive</li>
                     </ul>
                 </div>
+				</div>
+            <div class="searchColumn3">
                 <div class="searchCategory" id="literature_databases">
                     <h3 class="hide">Literature Databases</h3>
                     <ul>
@@ -92,6 +78,27 @@
                         <li id="skolar_pdq_pat">PDQ Cancer</li>
                     </ul>
                 </div>
+				</div>
+			<div class="searchColumn3">
+				<div class="searchCategory" id="texts">
+                    <h3 class="hide">Pediatric Texts</h3>
+                    <ul>
+						<li id="mdc_hlh">Harriet Lane Handbook</li>
+                        <li id="mdc_gershon">Infectious Diseases of Children</li>
+                        <li id="mdc_miller">Miller's Anesthesia</li>
+						<li id="crossdb_omim">OMIM</li>
+                        <li id="mdc_park">Pediatric Cardiology</li>
+                        <li id="mdc_long">Pediatric Infectious Diseases</li>
+                        <li id="mdc_green">Skeletal Trauma in Children</li>
+                    </ul>
+                </div>
+				<div class="searchCategory" id="texts">
+                    <h3 class="hide">ObGyn Texts</h3>
+                    <ul>
+                        <li id="skolar_scott">Danforth's ObGyn</li>
+                        <li id="mdc_gabbe">Gabbe's Obstetrics</li>
+                    </ul>
+                </div>          
             </div>
         </div>
 		<script type="text/javascript">

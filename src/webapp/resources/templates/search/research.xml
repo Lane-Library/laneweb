@@ -16,7 +16,7 @@
 				</tr>
 				<tr>
 					<td class="popInContent" colspan="3">
-				        <div id="spellResults">Go to the <a href="researcher/index.html">Bioresearch Portal</a> to find other tools or explore by category</div>
+				        <span id="spellResults">Go to the <a href="researcher/index.html">Bioresearch Portal</a> to find other tools or explore by category</span>
 					</td>
 				</tr>
 			</table>

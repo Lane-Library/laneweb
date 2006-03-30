@@ -2,25 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
     <title>Lane Medical Library, Stanford University Medical Center</title>
-    <link href="/style/search.css" rel="stylesheet" type="text/css" />
 		<!--
 		<link href="/style/irt.css" rel="stylesheet" type="text/css"/>
 		 -->
-		 		<link href="/style/default.css" rel="stylesheet" type="text/css"/>
-        <link href="/style/homepage.css" rel="stylesheet" type="text/css"/>
-				<link href="/style/content.css" rel="stylesheet" type="text/css"/>
+		 		<link href="/style/default.css" rel="stylesheet" type="text/css" media="screen, print"/>
+        <link href="/style/homepage.css" rel="stylesheet" type="text/css" media="screen, print"/>
+				<link href="/style/content.css" rel="stylesheet" type="text/css" media="screen, print"/>
         <meta name="WT.seg_1" content="{affiliation}"/>
         <meta name="lw_requestQuery" content="{query-string}"/>
         <meta name="lw_proxyLinks" content="{proxy-links}"/>
         <script src="/javascript/laneweb.js" type="text/javascript"> </script>
+        <script src="/javascript/search.js" type="text/javascript"> </script>
         <!--
             <script src="/javascript/webtrends.js" type="text/javascript"> </script>
         -->
-        <script src="/javascript/search.js" type="text/javascript"> </script>
         <!--[if IE]>
             <style type="text/css">
-						 table {font-size: 100%}
-            					#somLogoBottomBorder {
+						 table {
+						 	font-size: 100%
+						}
+            #somLogoBottomBorder {
 							top: 40px;
 						}
 						#searchTopCorner {
@@ -33,23 +34,11 @@
             	bottom: 0px;
 							right: -3px;
             }
-						/*
-            #searchContainerRoundedCorners {
-            top:5px;
-            }
-            #searchBottomCorner {
-            bottom: 4px;
-						right: -3px;
-            }
-            #contentBody{
-            top: -8px;
-            z-index: 80;
-            }*/
             </style>
             <![endif]-->
 						
     </head>
-    <body onload="startState(location.href);MM_preloadImages('eLibOn.jpg','eJournOn.jpg','clinOn.jpg','bioresearchOn.jpg','learnOn.jpg','laneServicesOn.jpg','pubMedon.jpg','googleOn.jpg')">
+    <body onload="startState(location.href);MM_preloadImages('eLibOn.jpg','eJournOn.jpg','clinOn.jpg','bioresearchOn.jpg','learnOn.jpg','laneServicesOn.jpg','pubMedon.jpg','googleOn.jpg')" onunload="searching = false;">
         <div id="pageContainer">
             <div id="pageHolder">
                 <div id="somLogoContainer">
@@ -75,13 +64,13 @@
                 </div>
                 <div id="searchContainer">
                     <div style="position: relative; top:0px; width: 100%; height: auto; overflow: hidden;">
-                        <span style="width: 70em; height:26px; margin-left: 115px;">
+                        <span style="width: 70em; height:25px; margin-left: 115px;">
                             <!--<ul id="searchDbs">
                                 <li><a href="eLibrary.html">eLibrary</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">Google</a></li>
                                 </ul>-->
                             <!--start image version-->
                             
-                                <a href="/online/index.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('eLibrary','',imagePath+'eLibOn.jpg',1)"><img src="/images/templates/default/eLibOff.jpg" width="65" height="26" border="0" name="eLibrary" id="eLibrary" alt="eLibrary"/></a><a href="/online/ej.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('eJourn','',imagePath+'eJournOn.jpg',1)"><img src="/images/templates/default/eJournOff.jpg" name="eJourn" width="73" height="26" border="0" id="eJourn" alt="eJournals"/></a><a href="/portals/clinical.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('clin','',imagePath+'clinOn.jpg',1)"><img src="/images/templates/default/clinOff.jpg" name="clin" width="61" height="26" border="0" id="clin" alt="clinical"/></a><a href="/portals/bioresearch.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('research','',imagePath+'bioresearchOn.jpg',1)"><img src="/images/templates/default/bioresearchOff.jpg" name="research" width="88" height="26" border="0" id="research" alt="research"/></a><a href="/services/index.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('services','',imagePath+'laneServicesOn.jpg',1)"><img src="/images/templates/default/laneServicesOff.jpg" name="services" width="100" height="26" border="0" id="services" alt="services"/></a><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000" target="_blank" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('pubmed','',imagePath+'pubMedon.jpg',1)"><img src="/images/templates/default/pubMedoff.jpg" name="pubmed" width="66" height="26" border="0" id="pubmed" alt="pubmed"/></a><a href="http://www.google.com/" target="_blank" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('google','',imagePath+'googleOn.jpg',1)"><img src="/images/templates/default/googleOff.jpg" name="google" width="53" height="26" border="0" id="google" alt="google"/></a>
+                                <a href="/online/index.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('eLibrary','',imagePath+'eLibOn.jpg',1)"><img src="/images/templates/default/eLibOff.jpg" width="65" height="25" border="0" name="eLibrary" id="eLibrary" alt="eLibrary"/></a><a href="/online/ej.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('eJourn','',imagePath+'eJournOn.jpg',1)"><img src="/images/templates/default/eJournOff.jpg" name="eJourn" width="73" height="25" border="0" id="eJourn" alt="eJournals"/></a><a href="/portals/clinical.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('clin','',imagePath+'clinOn.jpg',1)"><img src="/images/templates/default/clinOff.jpg" name="clin" width="61" height="25" border="0" id="clin" alt="clinical"/></a><a href="/portals/bioresearch.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('research','',imagePath+'bioresearchOn.jpg',1)"><img src="/images/templates/default/bioresearchOff.jpg" name="research" width="88" height="25" border="0" id="research" alt="research"/></a><a href="/services/index.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('services','',imagePath+'laneServicesOn.jpg',1)"><img src="/images/templates/default/laneServicesOff.jpg" name="services" width="100" height="25" border="0" id="services" alt="services"/></a><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000" target="_blank" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('pubmed','',imagePath+'pubMedon.jpg',1)"><img src="/images/templates/default/pubMedoff.jpg" name="pubmed" width="66" height="25" border="0" id="pubmed" alt="pubmed"/></a><a href="http://www.google.com/" target="_blank" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('google','',imagePath+'googleOn.jpg',1)"><img src="/images/templates/default/googleOff.jpg" name="google" width="53" height="25" border="0" id="google" alt="google"/></a>
                             
                             <!--end image version-->
                             <!--<a href="" class="searchLink"><span class="searchLinkText">PubMed</span><span class="searchLinkDivider">&#160;</span></a><a href="" class="searchLink"><span class="searchLinkText">Google</span><span class="searchLinkDividerEnd">&#160;</span></a>-->
@@ -90,7 +79,7 @@
                         <form id="searchFormContainer" method="get" action="/search.html" onsubmit="return submitSearch()" name="searchForm">
                             <span class="searchText">Search</span>
                             <select onchange="lastSelectValue(this); listSearchTagline(this);" name="source" id="source" style="font-weight: 400; width: 163px">
-                                <option value="eResources">eLibrary</option>
+                                <option value="all">eLibrary</option>
                                 <option value="ej">&#160;&#160;&#160;eJournals</option>
                                 <option value="database">&#160;&#160;&#160;Databases</option>
                                 <option value="book">&#160;&#160;&#160;eBooks</option>
@@ -112,14 +101,20 @@
                         </form>
                         <span id="displaySearchTaglineText">Search for eJournals, databases, eBooks, and services.</span>
 												<div id="searchTaglineText"><!-- ids below = "select[@id='source']/option/@value" +  "SearchTagline"-->
-													<span id="eResourcesSearchTagline">Search for eJournals, eBooks, databases, and services.</span>
-													<span id="ejSearchTagline">CHANGE-THIS-Search over 20,000 eJournal titles.</span>
-													<span id="databaseSearchTagline">CHANGE-THIS-Search over 200 Database titles.</span>
-													<span id="bookSearchTagline">CHANGE-THIS-Search over 200 eBook titles.</span>
-													<span id="ccSearchTagline">CHANGE-THIS-Search over 100 clinical decision support tools, algorithms, and tables.</span>
-													<span id="researchSearchTagline">Search inside PubMed, Google, protocols, seminars, NCBI databases, find bioinformatics tools and more.</span>
-													<span id="clinicalSearchTagline">Search inside UpToDate, eMedicine, SKOLAR, MD Consult, Micromedex, PubMed, patient handouts and more.</span>
-													<span id="pedsSearchTagline">Search inside UpToDate, eMedicine, SKOLAR, MD Consult, Micromedex, PubMed, patient handouts and more.</span>
+													<span id="allSearchTagline">Search for a journal, book, database, service or inside clinical and bioresearch reference sources.</span>
+													<span id="ejSearchTagline">Search for an online journal from 3000 biomedical titles and even more outside the field.</span>
+													<span id="databaseSearchTagline">Search for a database from 300 biomedical titles.</span>
+													<span id="bookSearchTagline">Search for an online book from 300 biomedical titles including a search of the Lane Catalog.</span>
+													<span id="ccSearchTagline">Search for an online clinical calculator from 300 titles, both web interactive and PDA applications.</span>
+													<span id="clinicalSearchTagline">Search inside texts and databases all at once, e.g., UpToDate, eMedicine, SKOLAR, MD Consult, Micromedex, PubMed, patient handouts.</span>
+													<span id="pedsSearchTagline">Search inside texts and databases all at once, e.g., UpToDate, eMedicine, SKOLAR, MD Consult, Micromedex, PubMed, patient handouts.</span>
+													<span id="researchSearchTagline">Search inside multiple literature and protocols databases all at once, e.g., PubMed, Science Citation, Current Protocols.</span>
+													<span id="pubmedSearchTagline">Launch a search in PubMed.</span>
+													<span id="googleSearchTagline">Launch a search in Google.</span>
+													<span id="faqSearchTagline">Search for a service or liaison or query frequently asked questions.</span>
+													<span id="catalogSearchTagline">Search the medical library catalog for online, print, archival and other materials.</span>
+													<span id="biomedsemSearchTagline">Search for an upcoming biomedical seminar or lecture at the medical center.</span>
+													<span id="stanford_whoSearchTagline">Search for faculty, staff and student in the Stanford directory.</span>
 												</div>
                     </div>
 										<div style="position: absolute; bottom: -1px; left: 0px; height: 1px; width: 100%; font-size: 1px; border-bottom: 1px solid #ddd; z-index: 29;">&#160;</div>

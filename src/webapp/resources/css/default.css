@@ -52,6 +52,7 @@
 	width: 138px;
 	height: 1px;
 	font-size: 1px;
+	background-color: transparent;
 	border-bottom: 1px solid #ddd;
 	z-index: 3;
 }
@@ -79,7 +80,7 @@
 	padding: 0px;
 	margin: 0px;
 	color: white;
-	font-family: verdana, geneva, sans-serif; /*arial ?*/
+	font-family: arial, verdana, geneva, sans-serif; 
 	background: #900 url(/././images/templates/default/redcornerTR.gif) no-repeat top right;
 	z-index: 4;
 }
@@ -88,13 +89,14 @@
 	position:relative; 
 	top: 0px;
 	left: 136px; /*instead of 138px to match shift due to 1px border for other elements*/
-	width: 85%;
-	height: 2em;
-	overflow: hidden;
+	width: 82%;
+	height: auto;
+	/*overflow: hidden;*/
 	border: 0px; 
 	padding: 0px;
 	margin: 0px;
 	color: white;
+	padding-top: 2px;
 	text-align: center;
 	vertical-align: middle;
 	/*display: inline;*/
@@ -104,7 +106,8 @@
 ul#outsideSiteLinks {
 	margin: 0px;
 	padding: 0px;
-	width: 80em;
+
+	width: 660px;
 	list-style: none;
 	display: inline;
 	text-decoration: none;
@@ -117,12 +120,12 @@ ul#outsideSiteLinks *{
 	padding: 1px;
 	border: 0px;
 	color: white;
-	font-weight: 550;
+	font-weight: 500;
 	display: inline;
-	list-style: none;
+	list-style: none;/*
 	text-decoration: none;
 	text-align: center;
-	vertical-align: middle;
+	vertical-align: middle;*/
 	background-image: none;
 }
 
@@ -134,14 +137,15 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 		position: relative;
 		left: 0px;
 		width: 100%;
-		height: 4px;
-		font-size: 4px;
+		height: 3px;
+		font-size: 2px; /*need a space for the div not to collapse; IE doesn't apply the above height to it unless font-size is reset to a pixel less than the height - annoying, I know */
 		border: 0px;
 		margin: 0px;
 		padding: 0px;
 		padding-left: 1px;
 		padding-right:1px;
-		background: transparent url(/././images/templates/default/greenGradient.gif) repeat-x top left;
+		background: url(/././images/templates/default/greenGradient.gif) repeat-x top left;
+		z-index: 2;
 }
 
 #askUsContainer {
@@ -183,6 +187,9 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	position: relative;
 	bottom: 5px;
 	left: 0px;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
 	color: white;
 }
 
@@ -203,32 +210,6 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	background: transparent;
 }
 
-#panoramicView {
-	 position: relative;
-	 left: 0px;
-	 top: 0px;
-	 width: 100%;
-	 height: 56px;
-	 overflow: hidden;
-	 background: url(/././images/templates/default/leftPanorama.jpg) repeat-x top left;
-	 text-align: right;
-	 z-index: 1;
-	 border-left: 2px solid #fff; /* added to preserve width with searchContainer */
-}
-
-#rightPanorama {
-	position:relative;
-	top:0px;
-	right: 0px;
-	text-indent: 180px;
-	width: 230px;
-	height: 56px;
-	padding:0px;
-	margin: 0px;
-	border: 0px;
-	display: inline;
-}
-
 #searchContainer {
 	 position: relative;
 	 top: 0px;
@@ -243,7 +224,7 @@ ul#outsideSiteLinks a:hover, ul#outsideSiteLinks a:active {
 	 background: #ddc url(/././images/templates/default/searchGradient.jpg) repeat-x top left;
 	 text-align: center;
 	 font-weight:700;
-	 letter-spacing: 1px;
+	 /*letter-spacing: 1px;*/
 	 z-index: 2;
 }
 
@@ -364,3 +345,6 @@ ul#searchDbs a:hover, ul#searchDbs a:active {
 	display: none;
 }
 
+select, input {
+	font-family: verdana, geneva, sans-serif; /* needed for some browsers */
+}
