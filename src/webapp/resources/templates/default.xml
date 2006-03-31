@@ -3,6 +3,7 @@
     <head>
         <title>Lane Medical Library, Stanford University Medical Center</title>
         <link href="/style/default.css" rel="stylesheet" type="text/css" media="screen, print"/>
+				<link href="/style/default-print.css" rel="stylesheet" type="text/css" media="print"/>
 				<link href="/style/content.css" rel="stylesheet" type="text/css" media="screen, print"/>
         <meta name="WT.seg_1" content="{affiliation}"/>
         <meta name="lw_requestQuery" content="{query-string}"/>
@@ -28,6 +29,7 @@
             	bottom: 0px;
 							right: -3px;
             }
+						
             </style>
             <![endif]-->
 						
@@ -72,8 +74,8 @@
                             
                         </span>
                         <form id="searchFormContainer" method="get" action="/search.html" onsubmit="return submitSearch()" name="searchForm">
-                            <span class="searchText largeFont">Search</span>
-                            <select onchange="lastSelectValue(this); listSearchTagline(this);" name="source" id="source" style="font-size: 100%; font-weight: 400; width: 163px">
+                            <span class="largeFont searchText">Search</span>
+                            <select onchange="lastSelectValue(this); listSearchTagline(this);" name="source" id="source" style="font-size: 100%; font-weight: 400; width: 140px">
                                 <option value="all">eLibrary</option>
                                 <option value="ej">&#160;&#160;&#160;eJournals</option>
                                 <option value="database">&#160;&#160;&#160;Databases</option>
@@ -91,7 +93,7 @@
                                 <option value="stanford_who">Stanford.Who</option>
                             </select>
                             <span class="searchText largeFont">for</span>
-                            <input name="keywords" type="text" id="lw_search-keywords" style="font-size: 100%; font-weight: 400; width: 163px"/>
+                            <input name="keywords" type="text" id="lw_search-keywords" style="font-size: 100%; font-weight: 400; width: 230px"/>
                             <input type="submit" value="" id="searchFormSubmitButton"/>
                         </form>
                         <span id="displaySearchTaglineText">Search for eJournals, databases, eBooks, and services.</span>

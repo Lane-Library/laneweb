@@ -275,6 +275,7 @@ ul#searchDbs a:hover, ul#searchDbs a:active {
 
 #searchFormContainer {
 	margin: 0 auto;
+	margin-left: 65px;
 	margin-bottom: 5px;
 	padding-top: 2px;
 	/*width: 75em;*/
@@ -336,6 +337,7 @@ ul#searchDbs a:hover, ul#searchDbs a:active {
 #displaySearchTaglineText {
 	margin:0px; 
 	margin-top: 10px; 
+	margin-left: 60px;
 	padding: 0px; 
 	color: #555;
 	font-weight:400;

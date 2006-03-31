@@ -1,4 +1,4 @@
-/*** content CSS ***/
+/* content CSS */
 
 body {
 	font-family: verdana, geneva, sans-serif;
@@ -341,16 +341,16 @@ div#otherPortalOptions {
 	height: 1em;
 	background: /*red*/transparent;
 }
-/*
+
 #portalForm select{
 	position: absolute;
 	bottom: 0px;
 	right: 0px;
-	width: 15em; /* replace w/ percent*/
+	width: 30%;
 	height: auto;
 	z-index: 100;
 }
-*/
+
 /*button-like box experiment*/
 
 /* set the image to use and establish the lower-right position */
@@ -766,7 +766,7 @@ dl li {background-image:none;}
 
 /*font specifications*/
 .smallFont {
-	font-size: 0.9em;
+	font-size: 1.0em;
 }
 
 .mediumFont {

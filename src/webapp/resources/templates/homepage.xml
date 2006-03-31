@@ -6,6 +6,7 @@
 		<link href="/style/irt.css" rel="stylesheet" type="text/css"/>
 		 -->
 		 		<link href="/style/default.css" rel="stylesheet" type="text/css" media="screen, print"/>
+				<link href="/style/default-print.css" rel="stylesheet" type="text/css" media="print"/>
         <link href="/style/homepage.css" rel="stylesheet" type="text/css" media="screen, print"/>
 				<link href="/style/content.css" rel="stylesheet" type="text/css" media="screen, print"/>
         <meta name="WT.seg_1" content="{affiliation}"/>
@@ -77,8 +78,8 @@
                             
                         </span>
                         <form id="searchFormContainer" method="get" action="/search.html" onsubmit="return submitSearch()" name="searchForm">
-                            <span class="searchText">Search</span>
-                            <select onchange="lastSelectValue(this); listSearchTagline(this);" name="source" id="source" style="font-weight: 400; width: 163px">
+                            <span class="searchText largeFont">Search</span>
+                            <select onchange="lastSelectValue(this); listSearchTagline(this);" name="source" id="source" style="font-weight: 400; width: 140px">
                                 <option value="all">eLibrary</option>
                                 <option value="ej">&#160;&#160;&#160;eJournals</option>
                                 <option value="database">&#160;&#160;&#160;Databases</option>
@@ -95,8 +96,8 @@
                                 <option value="biomedsem">Biomedical Seminars</option>
                                 <option value="stanford_who">Stanford.Who</option>
                             </select>
-                            <span class="searchText">for</span>
-                            <input name="keywords" type="text" id="lw_search-keywords"/>
+                            <span class="searchText largeFont">for</span>
+                            <input name="keywords" type="text" id="lw_search-keywords" style="font-size: 100%; font-weight: 400; width: 230px"/>
                             <input type="submit" value="" id="searchFormSubmitButton"/>
                         </form>
                         <span id="displaySearchTaglineText">Search for eJournals, databases, eBooks, and services.</span>

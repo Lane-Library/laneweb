@@ -15,6 +15,8 @@
             logger="sitemap.generator.search-proxy" pool-min="16" pool-max="32" pool-grow="4"/>
             <map:generator name="request" src="org.apache.cocoon.generation.RequestGenerator"
                 logger="sitemap.generator.request" pool-min="16" pool-max="32" pool-grow="4"/>
+            <map:generator name="html-proxy" src="edu.stanford.laneweb.HtmlProxyGenerator"
+                logger="sitemap.generator.search-proxy" pool-min="16" pool-max="32" pool-grow="4"/>
         </map:generators>
         <map:transformers default="xsltc">
             <map:transformer name="xsltc" logger="sitemap.transformer.xsltc"

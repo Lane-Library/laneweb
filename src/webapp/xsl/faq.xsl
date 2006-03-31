@@ -56,16 +56,16 @@
                 <xsl:apply-templates select="h:li[@id=$id]" mode="full"/>
             </xsl:otherwise>
         </xsl:choose>
-        <div id="lw_sidebar">
-            <div>
-                <h4>faq categories</h4>
+<!--
+            <div class="longSideBlueBox">
+                <h2>faq categories</h2>
                 <ul>
                     <xsl:apply-templates select="//h:li[@class='category'][not(following::h:li/text() = text())]">
                         <xsl:sort select="."/>
                     </xsl:apply-templates>
                 </ul>
             </div>
-        </div>
+-->
     </xsl:template>
     
     <xsl:template match="h:li">

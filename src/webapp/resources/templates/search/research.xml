@@ -22,17 +22,34 @@
 			</table>
         </div>
             <div id="incrementalSearchResults" class="hide">
-	            <div class="searchColumn">
+	            <div class="searchColumn3">
                     <div class="searchCategory" id="literature_databases">
-                        <h3 class="hide">Literature Databases</h3>
+                        <h3 class="hide">Journal Article Search</h3>
                         <ul>
                             <li id="pubmed">PubMed@Stanford</li>
-                            <li id="faculty1000">Faculty of 1000</li>
-                            <li id="flashpoint_sci_plus_0">SciSearch+BIOSIS+Engineering</li>
+	                        <li id="sciencecitation">Science Citation Index</li>						
+							<li id="flashpoint_sci_plus_0">LANL SearchPlus</li>
+                            <li id="faculty1000bio">Faculty of 1000 Biology</li>
+							<li id="faculty1000med">Faculty of 1000 Medicine</li>
+                            <li id="google">Google</li>
+		                    <li id="scirus">Scirus</li>					
+
                             <li id="crossdb_omim">OMIM</li>
                         </ul>
                     </div>
-                    <div class="searchCategory" id="protocols">
+					<div class="searchCategory" id="fulltext_articles">
+                        <h3 class="hide">Online Articles by Publisher</h3>
+                        <ul>
+                            <li id="highwire">HighWire</li>
+                            <li id="scirusjournal">Elsevier ScienceDirect</li>
+							<li id="ieeexplore">IEEE Xplore</li>
+							<li id="interscience">Wiley Interscience</li>
+                        </ul>
+                    </div>
+
+				</div>
+				<div class="searchColumn3">	
+	                    <div class="searchCategory" id="protocols">
                         <h3 class="hide">Protocols &amp; Methods</h3>
                         <ul>
                             <li id="wiley_0">Current Protocols</li>
@@ -40,26 +57,32 @@
                             <li id="protocolonline">Protocol Online</li>
                         </ul>
                     </div>
-				</div>
-	            <div class="searchColumn">
-                    <div class="searchCategory" id="gene_databases">
-                        <h3 class="hide">Gene Databases</h3>
+				<div class="searchCategory" id="stanford">
+                        <h3 class="hide">Stanford</h3>
                         <ul>
-                            <li id="crossdb_nucleotide">NCBI Nucleotide sequence database (Genbank)</li>
-                            <li id="crossdb_protein">NCBI Protein sequence database </li>
-                            <li id="crossdb_genome">NCBI Genome whole genome sequences</li>
-                            <li id="crossdb_structure">NCBI Structure three-dimensional macromolecular</li>
-                            <li id="crossdb_snp">NCBI SNP single nucleotide polymorphism</li>
-                            <li id="crossdb_taxonomy">NCBI Taxonomy: organisms in Genbank</li>
-                            <li id="crossdb_gene">NCBI Gene gene-centered information</li>
-                            <li id="crossdb_homologene">NCBI HomoloGene eukaryotic homology groups</li>
-                            <li id="crossdb_unigene">NCBI UniGene: gene-oriented clusters of transcript sequences</li>
-                            <li id="crossdb_cdd">NCBI CDD conserved protein domain database</li>
-                            <li id="crossdb_3d">NCBI 3D Domains domains from Entrez structure</li>
-                            <li id="crossdb_unists">NCBI UniSTS markers and mapping data</li>
-                            <li id="crossdb_cancer">NCBI Cancer Chromosomes cytogenetic databases</li>
+                            <li id="biomedseminars">Biomedical Seminars</li>
                         </ul>
-                    </div>
+                    </div>					
+				</div>
+	            <div class="searchColumn3">
+				
+				<div class="searchCategory" id="stanford">
+                        <h3 class="hide">Gene/Protein Hubs</h3>
+                        <ul>
+                            <li id="bioinformatics">Bioinformatics.net</li>
+                        </ul>
+				</div>
+				<div class="searchCategory" id="gene_databases">
+                        <h3 class="hide">NCBI Databases</h3>
+                        <ul>
+                            <li id="crossdb_genome">Genome</li>
+							<li id="crossdb_nucleotide">Nucleotide (aka Genbank)</li>
+                            <li id="crossdb_protein">Protein</li>
+	                        <li id="crossdb_snp">SNP</li>						
+                            <li id="crossdb_homologene">HomoloGene</li>
+                            <li id="crossdb_unigene">UniGene</li>
+                        </ul>
+                </div>
 				</div>
             </div>
 		<script type="text/javascript">

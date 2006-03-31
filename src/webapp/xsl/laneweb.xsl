@@ -265,13 +265,14 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:choose>
-                <xsl:when test="@value='peds' and contains($request-uri,'clinician/peds.html')">
+								<xsl:when test="@value='peds' and contains($request-uri,'portals/peds.html')">
+                <!--<xsl:when test="@value='peds' and contains($request-uri,'clinician/peds.html')">-->
                         <xsl:attribute name="selected">selected</xsl:attribute>
                 </xsl:when>
-                <xsl:when test="@value='clinical' and contains($request-uri,'clinician')">
+                <xsl:when test="@value='clinical' and contains($request-uri,'portals/clinical')">
                         <xsl:attribute name="selected">selected</xsl:attribute>
                 </xsl:when>
-                <xsl:when test="@value='research' and contains($request-uri,'researcher')">
+                <xsl:when test="@value='research' and contains($request-uri,'portals/bioresearch')">
                         <xsl:attribute name="selected">selected</xsl:attribute>
                 </xsl:when>
                 <xsl:when test="@value='ej' and (contains($request-uri,'online/ej') or $tab='ej')">

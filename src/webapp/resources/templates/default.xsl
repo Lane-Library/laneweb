@@ -49,6 +49,9 @@
 					
 					<xsl:copy-of select="h:h2[1] | h:h2[@class]" /><!-- avoid duplicate display of h2 in RSS feeds, but keep styling for SquareTitles, etc.-->
 					<xsl:if test="@class='centerGreenBox' or @class='centerBlueBox'">
+						<xsl:if test="child::h:div[@id='otherPortalOptions'] and contains($request-uri, 'portals')">
+							
+						</xsl:if>
 						<br style="clear: both;"/><!--clearance for floats-->
 					</xsl:if>
 					
@@ -81,6 +84,10 @@
 				</div>
 			</xsl:when>
 		</xsl:choose>
+	</xsl:template>
+	
+	<xsl:template match="h:div[@id='otherPortalOptions']">
+		<!--want it mapped to nothing; processed for top box in central column of portal pages-->
 	</xsl:template>
 
 <!--alphabet incorporation-->
