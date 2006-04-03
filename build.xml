@@ -11,7 +11,7 @@
     <property name="final.name" value="laneweb-2.1"/>
     <property name="builddir" value="build"/>
     <property name="docsdir" value="docs"/>
-    <available file="../laneweb.properties" property="laneweb.production"/>
+    <available file="../laneweb-beta.properties" property="laneweb.production"/>
     <target name="init" description="o Initializes some properties">
         <mkdir dir="${libdir}"/>
         <mkdir dir="${endorseddir}"/>
@@ -38,7 +38,7 @@
             <fileset dir="src/conf">
                 <include name="*.xconf"/>
             </fileset>
-            <filterset filtersfile="../laneweb.properties" begintoken="***" endtoken="***"/>
+            <filterset filtersfile="../laneweb-beta.properties" begintoken="***" endtoken="***"/>
         </copy>
     </target>
     <target name="stage" unless="laneweb.production">
@@ -176,8 +176,6 @@
         <get dest="${libdir}/marc4j-b7.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/marc4j/jars/marc4j-b7.jar">
         </get>
         <get dest="${libdir}/oracle-jdbc-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/oracle-jdbc/jars/oracle-jdbc-1.4.jar">
-        </get>
-        <get dest="${libdir}/saxon-B8.4-nomanifest.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/saxon/jars/saxon-B8.4-nomanifest.jar">
         </get>
         <get dest="${libdir}/servlet-api-2.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.ibiblio.org/maven/javax.servlet/jars/servlet-api-2.4.jar">
         </get>
