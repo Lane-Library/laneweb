@@ -38,6 +38,16 @@
             <map:match type="wildcard" pattern="admin/**">
                 <map:mount uri-prefix="admin" check-reload="yes" src="{defaults:stage-base}/admin.xmap"/>
             </map:match>
+             <map:match type="wildcard" pattern="cookiesFetch.html">
+               <map:generate type="file" src="{defaults:live-base}/content/cookiesFetch.html"/>
+		   <map:transform type="xsltc" src="{defaults:live-base}/xsl/cookiesFetch.xsl">
+		   	   <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+               <map:parameter name="ticket" value="{laneweb:ticket}"/>
+               <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+               </map:transform>
+               <map:serialize type="xhtml"/>
+            </map:match>
+      
             <!-- ========================================================== -->
             <!--<map:match type="wildcard" pattern="online/ebooks.html">
                 <map:redirect-to uri="{request:contextPath}/online/eb.html"/>
