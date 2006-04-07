@@ -17,7 +17,7 @@
   <xsl:template match="@*">
     <xsl:copy-of select="."/>
   </xsl:template>
-  http://www.thomsonhc.com/hcs/librarian/ND_PR/Main/PFPUI/aU3GLQ31fX3h4i/ND_PG/PRIH/CS/358EBF/ND_T/HCS/ND_P/Main/DUPLICATIONSHIELDSYNC/5E79A1/ND_B/HCS/PFActionId/hcs.Interactions
+
   <xsl:template match="h:head">
        <xsl:copy>
            <xsl:apply-templates/>
