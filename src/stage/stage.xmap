@@ -39,8 +39,8 @@
                 <map:mount uri-prefix="admin" check-reload="yes" src="{defaults:stage-base}/admin.xmap"/>
             </map:match>
              <map:match type="wildcard" pattern="cookiesFetch.html">
-               <map:generate type="file" src="{defaults:live-base}/content/cookiesFetch.html"/>
-		   <map:transform type="xsltc" src="{defaults:live-base}/xsl/cookiesFetch.xsl">
+               <map:generate type="file" src="{defaults:stage-base}/content/cookiesFetch.html"/>
+		   <map:transform type="xsltc" src="{defaults:stage-base}/xsl/cookiesFetch.xsl">
 		   	   <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                <map:parameter name="ticket" value="{laneweb:ticket}"/>
                <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
@@ -109,3 +109,5 @@
     </map:pipelines>
 </map:sitemap>
 
+
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/" xmlns:tns="http://www.example.org/"></schema>
