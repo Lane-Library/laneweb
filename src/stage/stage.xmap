@@ -108,6 +108,3 @@
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>
-
-
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/" xmlns:tns="http://www.example.org/"></schema>
