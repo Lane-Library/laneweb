@@ -6,7 +6,7 @@
     <body>
 	<br/>
 	<!--  carfeul about moving elements here ... search.js looks for div[3], not named -->
-        <div id="lw_alt-title"><img src="/images/icons/lpch-tiny.jpg" alt="" align="middle"/> Pediatrics Search</div>
+        <div id="lw_alt-title"><img src="/images/icons/lpch-tiny.jpg" alt="" align="middle"/> Inside Pediatrics</div>
         <div class="searchHeader">
  			<table id="searchHeaderTable" width="100%" cellspacing="0">
 				<tr>
@@ -16,74 +16,60 @@
 				</tr>
 				<tr>
 					<td class="popInContent" colspan="3">
-				        <span id="spellResults">Expand to <a href="search.html?source=clinical&amp;id={$id}">Clinical Search</a> or Go to the <a href="peds/index.html">Pediatrics Portal</a></span>
+				        <span id="spellResults">Go to <a href="portals/peds.html">Pediatrics Portal</a> or Search: 
+						<a href="search.html?source=clinical&amp;id={$id}">All Clinical </a> 
+						| <a href="search.html?source=research&amp;id={$id}">Bioresearch</a>
+						| <a href="search.html?source=eLibrary&amp;id={$id}">eLibrary</a></span>
+
+
 					</td>
 				</tr>
 			</table>
         </div>
         <div id="incrementalSearchResults" class="hide">
             <div class="searchColumn3">
-                <div class="searchCategory" id="firstbets">
+			
+                <div class="searchCategory">
                     <h3 class="hide">Most Popular</h3>
                     <ul>
-					    <li id="uptodate">UpToDate</li>
-						<li id="emedicine">eMedicine</li>
 					    <li id="am_hay">Current Pediatric Dx &amp; Tx</li>
+						<li id="aapredbook">AAP Red Book</li>
+						<li id="emedicine">eMedicine</li>
                         <li id="mdc_behrman">Nelson's Textbook of Pediatrics</li>
                         <li id="skolar_rudolph">Rudolph's Pediatrics</li>
+						<li id="uptodate">UpToDate</li>
                     </ul>
                 </div>
-				<div class="searchCategory" id="texts">
-                    <h3 class="hide">Pediatric Texts</h3>
-                    <ul>
-						<li id="mdc_hlh">Harriet Lane Handbook</li>
-                        <li id="mdc_gershon">Infectious Diseases of Children</li>
-                        <li id="mdc_miller">Miller's Anesthesia</li>
-						<li id="crossdb_omim">OMIM</li>
-                        <li id="mdc_park">Pediatric Cardiology</li>
-                        <li id="mdc_long">Pediatric Infectious Diseases</li>
-                        <li id="mdc_green">Skeletal Trauma in Children</li>
-                    </ul>
-                </div>
-				<div class="searchCategory" id="texts">
-                    <h3 class="hide">ObGyn Texts</h3>
-                    <ul>
-                        <li id="skolar_scott">Danforth's ObGyn</li>
-                        <li id="mdc_gabbe">Gabbe's Obstetrics</li>
-                    </ul>
-                </div>   
-				</div>
-            <div class="searchColumn3">
-			<div class="searchCategory" id="drugs">
-                    <h3>Drugs</h3>
-                    <ul>
-                        <li id="micromedex_web">Micromedex</li>
-                        <li id="naturalstandard">Natural Standard</li>
-                    </ul>
-                </div>
-                <div class="searchCategory" id="calculators">
-                    <h3 class="hide">Calculators</h3>
-                    <ul>
-                        <li id="lane_cc">Web Interactive</li>
-                    </ul>
-                </div>
-				                <div class="searchCategory" id="ebm">
-                    <h3 class="hide">Guidelines</h3>
+				 <div class="searchCategory">
+                    <h3 class="hide">Evidence  &amp; Guidelines</h3>
                     <ul>
                         <li id="aapguidelines">AAP Guidelines</li>
-						<li id="aapredbook">AAP Red Book</li>
+						<li id="skolar_dsr">Cochrane Reviews</li>
                     </ul>
                 </div>
-                <div class="searchCategory" id="literature_databases">
+				<div class="searchCategory">
                     <h3 class="hide">Journal Articles</h3>
                     <ul>
                         <li id="pubmed">PubMed@Stanford</li>
                     </ul>
                 </div>
-				</div>
-			<div class="searchColumn3">
 				
-                <div class="searchCategory" id="handouts">
+				</div>
+            <div class="searchColumn3">
+				<div class="searchCategory">
+                    <h3 class="hide">Drugs</h3>
+                    <ul>
+                        <li id="micromedex_web">Micromedex</li>
+                        <li id="naturalstandard">Natural Standard</li>
+                    </ul>
+                </div>
+				<div class="searchCategory">
+                    <h3 class="hide">Calculators</h3>
+                    <ul>
+                        <li id="lane_cc">Web Interactive</li>
+                    </ul>
+                </div>
+				<div class="searchCategory">
                     <h3 class="hide">Patient Handouts</h3>
                     <ul>
                         <li id="aappatient">AAP Patient Handouts</li>
@@ -96,12 +82,35 @@
                         <li id="skolar_pdq_pat">PDQ Cancer</li>
                     </ul>
                 </div>
-				<div class="searchCategory" id="images">
-					<h3 class="hide">Images</h3>
+
+				</div>
+			<div class="searchColumn3">
+			<div class="searchCategory">	
+                    <h3 class="hide">Pediatric Texts</h3>
+                    <ul>
+						<li id="mdc_hlh">Harriet Lane Handbook</li>
+                        <li id="mdc_gershon">Infectious Diseases of Children</li>
+                        <li id="mdc_miller">Miller's Anesthesia</li>
+						<li id="crossdb_omim">OMIM</li>
+                        <li id="mdc_park">Pediatric Cardiology</li>
+                        <li id="mdc_long">Pediatric Infectious Diseases</li>
+                        <li id="mdc_green">Skeletal Trauma in Children</li>
+                    </ul>
+                </div>
+				<div class="searchCategory">
+                    <h3 class="hide">ObGyn Texts</h3>
+                    <ul>
+                        <li id="skolar_scott">Danforth's ObGyn</li>
+                        <li id="mdc_gabbe">Gabbe's Obstetrics</li>
+                    </ul>
+                </div>  
+	
+				<div class="searchCategory">
+					<h3 class="hide">Teaching Images</h3>
 					<ul>
 					<li id="imagesmd">Images.MD</li>
 					</ul>
-				</div> 				
+				</div> 
             </div>
         </div>
 		<script type="text/javascript">

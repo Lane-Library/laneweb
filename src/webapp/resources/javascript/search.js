@@ -4,6 +4,7 @@
 var GLOBALS = new Object();
 GLOBALS.basePath = '/./.';
 GLOBALS.baseImagePath = GLOBALS.basePath + '/images/templates/default';
+GLOBALS.httpRequestInterval = '1500';
 GLOBALS.incrementalSearchWait = '2500'; //time in ms between start of metasearch and initial response
 GLOBALS.needsProxy = getMetaContent(document,'lw_proxyLinks');
 GLOBALS.proxyPrefix = 'http://laneproxy.stanford.edu/login?url=';
@@ -183,7 +184,6 @@ function refreshPopInBar(){
 	}
 
 	if(popInContent != ''){
-		popInContent = expandSpecialSyntax(popInContent);
 		document.getElementById('popInContent').innerHTML = popInContent;
 		document.getElementById('popInContent').className = 'popInContent';
 	}	
@@ -191,7 +191,6 @@ function refreshPopInBar(){
 	// show tabTip if any *and* more than zero results
 	if(document.getElementById(eLibraryActiveTab + "TabTipText") && eLibraryResultCounts[eLibraryActiveTab] != 0){
 		var thisTabText = document.getElementById(eLibraryActiveTab + "TabTipText").innerHTML;
-		thisTabText = expandSpecialSyntax(thisTabText);
 		document.getElementById("tabTip").innerHTML = thisTabText;
 		document.getElementById("tabTip").className = 'tabTip';
 	}
@@ -262,77 +261,6 @@ XMLClient.prototype = {
 
 	processXML: function() {
 		switch(this.type){
-
-			//**************************
-			// dynamic generation of genre-based tabs
-			// TESTING only
-			case "erdb":
-				var erdbLabels = [];
-				erdbLabels['article'] = 'Articles';
-				erdbLabels['book review'] = 'Book Reviews';
-				erdbLabels['person, male'] = 'Men';
-				erdbLabels['organization'] = 'Organizations';
-				erdbLabels['person'] = 'People';
-				erdbLabels['photograph'] = 'Photographs';
-				erdbLabels['person, female'] = 'Women';
-				erdbLabels['statistics'] = 'Statistics';
-
-				var response = this.request.responseXML.documentElement;
-				var dts = response.getElementsByTagName('dt');
-				var dds = response.getElementsByTagName('dd');
-
-				if(response && dds){
-					var resultsHTML = '';
-
-					for(var i = 0; i < dds.length; i++){
-						var linksHTML = '';
-						var links = dds[i].getElementsByTagName('a');
-						for(var j = 0; j < links.length; j++){
-							var linkText = ''; //link text not always present, so need to check before building into link
-							if(links[j].childNodes[0]){
-								linkText = links[j].childNodes[0].nodeValue;
-							}
-							linksHTML += '<li><a href="' + links[j].getAttribute('href') + '" class="' + links[j].getAttribute('class') + '" title="' + links[j].getAttribute('title') + '">' + linkText + '</a></li>';
-						}
-						resultsHTML += '<dt>' + dts[i].childNodes[0].nodeValue + '</dt>' +
-								'<dd>' +
-										'<ul>' +
-											linksHTML + 
-										'</ul>' +
-								'</dd>';
-					}
-
-					var type = getQueryContent('t',this.url);
-
-					var eLibrarySearchResults = document.getElementById("eLibrarySearchResults");
-					var erdbContent = document.createElement('div');
-					erdbContent.innerHTML = '<dl>' + resultsHTML + '</dl>';
-					erdbContent.setAttribute('id','erdb-' + type);
-					eLibrarySearchResults.appendChild(erdbContent);
-
-					eLibraryTabLabels[eLibraryTabLabels.length] = erdbLabels[type];
-					eLibraryTabIDs[eLibraryTabIDs.length] = 'erdb-' + type;
-					initeLibraryTabs();
-					showeLibraryTab('erdb-' + type);
-				}
-			break;
-
-			//**************************
-			// Lane FAQs
-			//
-			case "faq":
-				var response = this.request.responseXML.documentElement;
-
-				if(response.getElementsByTagName('li')){
-					var lis = response.getElementsByTagName('li');
-					var baseUrl = GLOBALS.basePath + '/howto/index.html?keywords=' + keywords;
-					var html = '<a target="new" href="' + baseUrl + '">Lane Services<br /><span class="tabHitCount">' + lis.length + '</span></a>';
-
-					if(document.getElementById('faqSearchResults')){
-						document.getElementById('faqSearchResults').innerHTML = html;
-					}
-				}
-			break;
 
 			//**************************
 			// Incremental metasearch results (clinical, peds, research searches)
@@ -408,7 +336,7 @@ XMLClient.prototype = {
 						var width = 1;
 					}
 					resultsProgressBar.innerHTML = '<table><tr><td nowrap>Still searching...</td><td nowrap><div style="position:relative;left:2px;top:2px;border:1px solid #b2b193; width:200px;"><img width="' + width + '%" height="15" src="' + GLOBALS.baseImagePath + '/incrementalResultsProgressBar.gif" alt="progress bar" /></div></td><td nowrap>&nbsp;' + sourcesCompleteCount + ' of ' + newResults.length + ' sources searched. <a href="javascript:haltIncremental=true;void(0);">Stop Search</a></td></tr></table>';
-					setTimeout("getIncrementalResults();",1500);
+					setTimeout("getIncrementalResults();",GLOBALS.httpRequestInterval);
 					return 0;
 				}
 				else{
@@ -423,64 +351,91 @@ XMLClient.prototype = {
 			break;
 
 			//**************************
-			// metasearch (lane web search app) results processing for eLibrary search
-			//
-			case "meta":
+			// elib-meta:
+			//	get spelling suggestions
+			//	fetch PubMed, LOIS and Google results
+			// 	write hit counts to clinicalMetaCount and researchMetaCount divs
+			//	times out after 60 seconds
+			case "elib-meta":
 				var xmlObj = this.request.responseXML.documentElement;
+				var engines = xmlObj.getElementsByTagName('engine');
+
 				var sessionID = xmlObj.getAttribute('id');
-				var status = xmlObj.getAttribute('status');
+				var searchStatus = xmlObj.getAttribute('status');
 				var queryContents = xmlObj.getElementsByTagName('query')[0].firstChild.data;
+				var spellSuggestion = (xmlObj.getElementsByTagName('spell').length > 0) ? xmlObj.getElementsByTagName('spell')[0].firstChild.data : null;
 
-				var date = new Date();
-				var newMetaUrl = '/search/search?id=' + sessionID + "&secs=" + date.getSeconds();
+				if(spellSuggestion && !document.getElementById('spellResults')){
+					var html = 'Did you mean: <a href="' + GLOBALS.searchPath + '?keywords=' + spellSuggestion + '"><i><strong>' + spellSuggestion + '</strong></i></a><br />';
 
-				if(status == "successful" || status =="running"){
-					var engines = xmlObj.getElementsByTagName('engine');
-					var metaSearchResults = [];
+					//create new spellResults div (rely on refreshPopInBar to display)
+					var body = document.getElementsByTagName("body").item(0);
+					var spellDiv = document.createElement('div');
+					spellDiv.className = 'hide';
+					spellDiv.innerHTML = html;
+					spellDiv.setAttribute('id','spellResults');
+					body.appendChild(spellDiv);
 
-					for(var i=0; i<engines.length; i++){
-						var resource = engines[i].getElementsByTagName('resource');
-						var results = [];
+					refreshPopInBar();
 
-						results.id = resource[0].getAttribute('id');
-						results.url = resource[0].getElementsByTagName('url')[0].firstChild.data;
-						results.name = resource[0].getElementsByTagName('description')[0].firstChild.data;
-
-						if(GLOBALS.needsProxy != 'false'){
-							results.url = GLOBALS.proxyPrefix + results.url;
-						}
-
-						if ( resource[0].getElementsByTagName('hits').length > 0) {
-							results.hits = resource[0].getElementsByTagName('hits')[0].firstChild.data;
-							metaSearchResults.push(results);
-						}
+					// hide tip box ... or should this go into refreshPopInBar?
+					//                  here only hides at popIn and if user continues to click, tip reappears (good?)
+					if (document.getElementById('tabTip')){
+						document.getElementById('tabTip').className = 'hide';
 					}
+				}
+				
+				if(searchStatus == "successful" || searchStatus =="running"){
+					var clinSuccessCount = 0;
+					var resSuccessCount = 0;
+					var clinHits = 0;
+					var resHits = 0;
 
-					var html = '';
+					for( var i = 0; i < engines.length; i++){
+						var resources = engines[i].getElementsByTagName('resource');
+						for( var j = 0; j < resources.length; j++){
 
-					for(var j=0; j<metaSearchResults.length; j++){
-						if(document.getElementById(metaSearchResults[j].id + 'SearchResults')){
-							document.getElementById(metaSearchResults[j].id + 'SearchResults').innerHTML = "<a target='new' href='" + metaSearchResults[j].url + "'>" + metaSearchResults[j].name + '<br /><span class="tabHitCount">' + intToNumberString(metaSearchResults[j].hits) + '</span></a>';
-							if(metaSearchResults[j].id == 'google'){
-								document.getElementById(metaSearchResults[j].id + 'SearchResults').className = 'metaSearchResultsRightCorner';
+							if(resources[j].getElementsByTagName('hits').length > 0 && resources[j].getElementsByTagName('hits')[0].firstChild.data > 0){
+								if(GLOBALS.clinicalEngines.contains(resources[j].getAttribute('id'))){
+									clinHits += parseInt(resources[j].getElementsByTagName('hits')[0].firstChild.data);
+									clinSuccessCount++;
+								}
+								if(GLOBALS.researchEngines.contains(resources[j].getAttribute('id'))){
+									resHits += parseInt(resources[j].getElementsByTagName('hits')[0].firstChild.data);
+									resSuccessCount++;
+								}
 							}
-							// TESTING ... remove entire block once lmldb has updated design
-							else if(metaSearchResults[j].id == 'lois'){
-								document.getElementById(metaSearchResults[j].id + 'SearchResults').innerHTML = "<a href='" + GLOBALS.basePath + '/online/catalog.html?keywords=' + keywords + "'>" + metaSearchResults[j].name + '<br /><span class="tabHitCount">' + intToNumberString(metaSearchResults[j].hits) + '</span></a>';
-								document.getElementById(metaSearchResults[j].id + 'SearchResults').className = 'metaSearchResults';
+
+							var status = engines[i].getAttribute('status');
+							if(status == 'successful' && (parseInt(clinHits) > 0||parseInt(resHits) > 0) ){
+								document.getElementById('clinicalMetaCount').innerHTML = intToNumberString(clinSuccessCount);
+								document.getElementById('researchMetaCount').innerHTML = intToNumberString(resSuccessCount);
 							}
-							else{
-								document.getElementById(metaSearchResults[j].id + 'SearchResults').className = 'metaSearchResults';
+
+							if(document.getElementById(resources[j].getAttribute('id') + 'SearchResults') && resources[j].getElementsByTagName('hits').length > 0){
+								document.getElementById(resources[j].getAttribute('id') + 'SearchResults').innerHTML = "<a target='new' href='" + resources[j].getElementsByTagName('url')[0].firstChild.data + "'>" + resources[j].getElementsByTagName('description')[0].firstChild.data + '<br /><span class="tabHitCount">' + intToNumberString(resources[j].getElementsByTagName('hits')[0].firstChild.data) + '</span></a>';
+								if(resources[j].getAttribute('id') == 'google'){
+									document.getElementById(resources[j].getAttribute('id') + 'SearchResults').className = 'metaSearchResultsRightCorner';
+								}
+								else{
+									document.getElementById(resources[j].getAttribute('id') + 'SearchResults').className = 'metaSearchResults';
+								}
 							}
 						}
 					}
 				}
 
-				if (status == "running" ){
-					Object.secondRequest = new XMLClient();
-					Object.secondRequest.init('meta',newMetaUrl);
+				//halt search after 60 seconds
+				var newDate = new Date();
+				if ( newDate.getTime()-startTime > 60*1000){
+					searchStatus = 'halted';
+				}
 
-					setTimeout("Object.secondRequest.get();",1000);
+				if (searchStatus == "running" ){
+					Object.neweLibMetaRequest = new XMLClient();
+					Object.neweLibMetaRequest.init('elib-meta','/search/search?id=' + sessionID + "&secs=" + newDate.getSeconds());
+
+					setTimeout("Object.neweLibMetaRequest.get();",GLOBALS.httpRequestInterval);
 					return 0;
 				}
 			break;
@@ -506,80 +461,6 @@ XMLClient.prototype = {
 
 					refreshPopInBar();
 				}
-			break;
-
-			//**************************
-			// spelling suggestion (google) processing  [eLibrary pop-in]
-			//
-			case "spell":
-				var response = this.request.responseXML.documentElement;
-
-				if(response.firstChild){
-					var spellSuggestion = response.firstChild.data;
-					var html = 'Did you mean: <a href="' + GLOBALS.searchPath + '?keywords=' + spellSuggestion + '"><i><strong>' + spellSuggestion + '</strong></i></a><br />';
-
-					//create new spellResults div (rely on refreshPopInBar to display)
-					var body = document.getElementsByTagName("body").item(0);
-					var spellDiv = document.createElement('div');
-					spellDiv.className = 'hide';
-					spellDiv.innerHTML = html;
-					spellDiv.setAttribute('id','spellResults');
-					body.appendChild(spellDiv);
-
-					refreshPopInBar();
-
-					// hide tip box ... or should this go into refreshPopInBar?
-					//                  here only hides at popIn and if user continues to click, tip reappears (good?)
-					if (document.getElementById('tabTip')){
-						document.getElementById('tabTip').className = 'hide';
-					}
-				}
-			break;
-
-			//**************************
-			// SUL database results processing [eLibrary pop-in]
-			//
-			case "suldb":
-				var response = this.request.responseXML.documentElement;
-				var names = response.getElementsByTagName('name');
-				var links = response.getElementsByTagName('link');
-
-				if(links.length){
-					var html = '';
-
-					for(var i=0; i<links.length; i++){
-							var link = response.getElementsByTagName('link')[i].firstChild.data;
-							var name = response.getElementsByTagName('name')[i].firstChild.data;
-
-							if(GLOBALS.needsProxy != 'false'){
-								link = GLOBALS.proxyPrefix + link;
-							}
-							// if i is 2, add div to hold hidden suldb links for expansion
-							if(i == 2){
-								html += '<div class="hide">';
-							}
-							html += '<a class="indent" target="new" href="' + link + '">' + name + '</a><br />';
-					}
-
-					// if more than 2 results, present expand-toggle
-					if(links.length > 2){
-						html = '<a href="javascript:void(0);" onclick="javascript:toggleNode(this, this.parentNode.getElementsByTagName(\'div\')[0],\'+\',\'-\',\'tabTip\');">+</a> Databases beyond biomedicine<br />' + html + '</div>';
-					}
-					else{
-						html = 'Databases beyond biomedicine<br />' + html;
-					}
-
-					//create new suldbResults div (rely on refreshPopInBar to display)
-					var body = document.getElementsByTagName("body").item(0);
-					var suldbDiv = document.createElement('div');
-					suldbDiv.className = 'hide';
-					suldbDiv.innerHTML = html;
-					suldbDiv.setAttribute('id','suldbResults');
-					body.appendChild(suldbDiv);
-
-					refreshPopInBar();
-				}
-
 			break;
 		}
 	}
@@ -710,27 +591,6 @@ function toggleNode(linkNode, toggleNode, onText, offText, additionalInvertedTog
 	}
 }
 
-// expand "::::keywords::::  ::::basePath::::" to "dvt /beta/stage", etc.
-function expandSpecialSyntax(string){
-	if(!string.match(/::::/)){
-		return string;
-	}
-
-	for (i in GLOBALS){
-		var pattern = '::::' + i + '::::';
-		while (string.match(pattern)) {
-			string = string.replace(pattern,GLOBALS[i]);
-		}
-	}
-	if (string.match('::::keywordsDisplay::::') && keywords){
-		string = unescape(string.replace(/::::keywordsDisplay::::/g,keywords));
-	}
-	if (string.match('::::keywordsUri::::') && keywords){
-		string = string.replace(/::::keywordsUri::::/g,keywords);
-	}
-	return string;
-}
-
 function readCookie(name) {
 	var nameEQ = name + "=";
 	var cookieArray = document.cookie.split(';');
@@ -837,8 +697,8 @@ function submitSearch() {
 	return false;
   }
   else if (source == 'catalog') {
-	var dest = GLOBALS.basePath + '/online/catalog.html?keywords=' + keywords;
-    	window.location = dest;
+	var dest = 'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1=' + keywords + '&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50';
+	openLink(dest);
 	return false;
   }
   else if (source == 'google') {

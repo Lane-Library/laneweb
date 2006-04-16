@@ -6,75 +6,113 @@
     <body>
 	<br/>
 	<!--  carfeul about moving elements here ... search.js looks for div[3], not named -->
-        <div id="lw_alt-title"><img src="/images/icons/helix-tiny.gif" alt="" align="middle"/> Bioresearch Search</div>
+        <div id="lw_alt-title"><img src="/images/icons/helix-tiny.gif" alt="" align="middle"/>Bioresearch</div>
         <div class="searchHeader">
  			<table id="searchHeaderTable" width="100%" cellspacing="0">
 				<tr>
-					<td class="searchHeaderLeft"><span class="searchHeaderTitle">Bioresearch Search</span></td>
+					<td class="searchHeaderLeft"><span class="searchHeaderTitle">Inside Bioresearch</span></td>
 					<td id="incrementalResultsProgressBar" class="searchHeaderMiddle"> <!--  --></td>
 					<td id="incrementalResultsDetails" class="searchHeaderRight"> <!--  original spec put final details here ... not currenty used--></td>
 				</tr>
 				<tr>
 					<td class="popInContent" colspan="3">
-				        <span id="spellResults">Go to the <a href="researcher/index.html">Bioresearch Portal</a> to find other tools or explore by category</span>
+				        <span id="spellResults">Go to <a href="portals/bioresearch.html">Bioresearch Portal</a> 
+						or Search: <a href="search.html?source=clinical&amp;id={$id}">Clinical</a> 
+						| <a href="search.html?source=elibrary&amp;id={$id}">eLibrary</a></span>
+
 					</td>
 				</tr>
 			</table>
         </div>
+		
             <div id="incrementalSearchResults" class="hide">
 	            <div class="searchColumn3">
-                    <div class="searchCategory" id="literature_databases">
-                        <h3 class="hide">Journal Article Search</h3>
+				
+				    <div class="searchCategory">
+                        <h3 class="hide">PubMed</h3>
                         <ul>
                             <li id="pubmed">PubMed@Stanford</li>
-	                        <li id="sciencecitation">Science Citation Index</li>						
-							<li id="flashpoint_sci_plus_0">LANL SearchPlus</li>
-                            <li id="faculty1000bio">Faculty of 1000 Biology</li>
-							<li id="faculty1000med">Faculty of 1000 Medicine</li>
-                            <li id="google">Google</li>
-		                    <li id="scirus">Scirus</li>					
-
-                            <li id="crossdb_omim">OMIM</li>
+                            <li id="">GoPubMed by gene ontology</li>				
+                            <li id="">IHOP for proteins</li>
                         </ul>
                     </div>
-					<div class="searchCategory" id="fulltext_articles">
-                        <h3 class="hide">Online Articles by Publisher</h3>
+					
+                    <div class="searchCategory">
+                        <h3 class="hide">Article Databases</h3>
                         <ul>
+	                        <li id="sciencecitation">Science Citation Index</li>								
+							<li id="flashpoint_sci_plus_0">SearchPlus@LANL</li>
+							<li id="">BIOSIS@LANL</li>							
+                            <li id="faculty1000bio">Faculty of 1000 Biology</li>
+							<li id="faculty1000med">Faculty of 1000 Medicine</li>			
+                        </ul>
+                    </div>
+									<div class="searchCategory">
+                        <h3 class="hide">Full Article Search by Publisher</h3>
+                        <ul>
+						    <li id="">BioMed Central</li>
                             <li id="highwire">HighWire</li>
                             <li id="scirusjournal">Elsevier ScienceDirect</li>
 							<li id="ieeexplore">IEEE Xplore</li>
+	                        <li id="">NIH PubMed Central</li>						
 							<li id="interscience">Wiley Interscience</li>
                         </ul>
-                    </div>
-
+                </div>
+				
 				</div>
 				<div class="searchColumn3">	
-	                    <div class="searchCategory" id="protocols">
-                        <h3 class="hide">Protocols &amp; Methods</h3>
+					
+	            <div class="searchCategory">
+                    <h3 class="hide">Protocols, Methods  &amp; Handbooks</h3>
+                    <ul>
+                        <li id="wiley_0">Current Protocols</li>
+                        <li id="enzymology">Methods in Enzymology</li>
+                        <li id="protocolonline">Protocol Online</li>
+	                     <li id="">PubChem Compound</li>	
+						 <li id="">PubChem Substance</li>	
+                    </ul>
+                </div>
+				
+				<div class="searchCategory">
+					<h3 class="hide">Clinical Trials</h3>
+					<ul>
+                  <!-- CHARLES - - need to add this one when you have time at http://clinicaltrials.gov/  and here the page
+                  on how to formulate the search request  http://clinicaltrials.gov/ct/info/help#Formula
+                  added cy -->
+                         <li id="clinicaltrials">ClinicalTrials.gov</li>
+                    </ul>
+				</div>
+				
+					<div class="searchCategory">
+                        <h3 class="hide">Search Engines</h3>
                         <ul>
-                            <li id="wiley_0">Current Protocols</li>
-                            <li id="enzymology">Methods in Enzymology</li>
-                            <li id="protocolonline">Protocol Online</li>
+                            <li id="google">Google</li>
+		                    <li id="scirus">Elsevier's Scirus</li>					
                         </ul>
                     </div>
-				<div class="searchCategory" id="stanford">
-                        <h3 class="hide">Stanford</h3>
-                        <ul>
-                            <li id="biomedseminars">Biomedical Seminars</li>
-                        </ul>
-                    </div>					
+				
 				</div>
 	            <div class="searchColumn3">
 				
-				<div class="searchCategory" id="stanford">
-                        <h3 class="hide">Gene/Protein Hubs</h3>
+				<div class="searchCategory">
+                        <h3 class="hide">Stanford</h3>
+                        <ul>
+                            <li id="biomedseminars">Biomedical Seminars</li>
+	                         <li id="">CAP Academic Profiles</li>						
+                        </ul>
+                    </div>
+					
+				<div class="searchCategory">
+                        <h3 class="hide">Gene/Protein InfoHubs</h3>
                         <ul>
                             <li id="bioinformatics">Bioinformatics.net</li>
                         </ul>
 				</div>
-				<div class="searchCategory" id="gene_databases">
+				
+				<div class="searchCategory">
                         <h3 class="hide">NCBI Databases</h3>
                         <ul>
+						    <li id="crossdb_omim">OMIM: Inherited Disease</li>
                             <li id="crossdb_genome">Genome</li>
 							<li id="crossdb_nucleotide">Nucleotide (aka Genbank)</li>
                             <li id="crossdb_protein">Protein</li>
@@ -83,6 +121,7 @@
                             <li id="crossdb_unigene">UniGene</li>
                         </ul>
                 </div>
+				
 				</div>
             </div>
 		<script type="text/javascript">
