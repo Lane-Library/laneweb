@@ -6,7 +6,7 @@
     <groupId>laneweb</groupId>
     <logo>http://lane.stanford.edu/images/logo.gif</logo>
     <id>laneweb:laneweb</id>
-    <currentVersion>2.1.8</currentVersion>
+    <currentVersion>1.4.0</currentVersion>
     <organization>
         <name>Lane Medical Library</name>
         <url>http://lane.stanford.edu/</url>
@@ -23,7 +23,7 @@
     <versions>
         <version>
             <id>0</id>
-            <name>2.1.8</name>
+            <name>1.4.0</name>
             <tag>HEAD</tag>
         </version>
     </versions>
@@ -75,7 +75,7 @@
         <dependency>
             <groupId>cocoon</groupId>
             <artifactId>cocoon</artifactId>
-            <version>2.1.8</version>
+            <version>2.1.9</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -84,7 +84,7 @@
         <dependency>
             <groupId>cocoon</groupId>
             <artifactId>cocoon-html</artifactId>
-            <version>2.1.8</version>
+            <version>2.1.9</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -93,7 +93,7 @@
         <dependency>
             <groupId>cocoon</groupId>
             <artifactId>cocoon-databases</artifactId>
-            <version>2.1.8</version>
+            <version>2.1.9</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -102,7 +102,7 @@
         <dependency>
             <groupId>cocoon</groupId>
             <artifactId>cocoon-mail</artifactId>
-            <version>2.1.8</version>
+            <version>2.1.9</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -111,7 +111,7 @@
         <dependency>
             <groupId>cocoon</groupId>
             <artifactId>cocoon-paranoid</artifactId>
-            <version>2.1.8</version>
+            <version>2.1.9</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -120,7 +120,7 @@
         <dependency>
             <groupId>cocoon</groupId>
             <artifactId>cocoon-proxy</artifactId>
-            <version>2.1.8</version>
+            <version>2.1.9</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
