@@ -155,7 +155,7 @@
             <map:match type="wildcard" pattern="tpod/**">
                 <map:mount uri-prefix="tpod" check-reload="yes" src="file:/afs/ir/users/t/p/tpod/laneweb/laneweb.xmap"/>
             </map:match>
-            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|camv|smil|xls|doc|ppt|ico|swf)$">
+            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|ram|camv|smil|xls|doc|ppt|ico|swf)$">
                 <map:mount uri-prefix="" check-reload="yes" src="static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="robots.txt">
