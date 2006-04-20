@@ -66,6 +66,13 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
+            <map:match type="wildcard" pattern="request.html">
+                <map:generate type="request"/>
+                <map:transform type="xsltc" src="{defaults:live-base}/xsl/request2html.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+        </map:pipeline>
+        <map:pipeline type="caching">
             <map:match type="wildcard" pattern="howto/index.html">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
                 <map:transform type="xsltc" src="{defaults:live-base}/xsl/faq.xsl">
@@ -75,13 +82,11 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="request.html">
-                <map:generate type="request"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/request2html.xsl"/>
+            <map:match pattern="faq-category-list.html">
+                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
+                <map:transform type="xsltc" src="{defaults:live-base}/xsl/faq-category-list.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-        </map:pipeline>
-        <map:pipeline type="caching">
             <map:match type="wildcard" pattern="blog/*">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-news/lane-news.html"/>
                 <map:transform type="xsltc" src="{defaults:live-base}/xsl/news-blog.xsl">

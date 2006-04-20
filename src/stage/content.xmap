@@ -22,6 +22,11 @@
 				</map:transform>
 				<map:serialize type="text" />
             </map:match>
+            <map:match pattern="faq-category-list.html">
+                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
+                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/faq-category-list.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="eresources/**">
