@@ -1,0 +1,320 @@
+/*
+body {
+    font-family: arial, helvetica, sans-serif;
+    background-color: #FFFFFF;
+    margin:0;
+}
+#main {
+    font-size: 80%;
+}
+#main table {
+    font-size: 1em;
+}
+#highlights {
+	float: right;
+	width: 175px;
+	background: #EDE7D3; 
+	border: 1px #5f6123 solid;
+	margin-left:1em;
+}
+#sidebar div {
+	background: #FFFFFF; 
+    border: 1px #5f6123 solid;
+    margin-bottom:1em;
+}
+#sidebar p, #highlights p {
+	padding:5px;
+	margin:5px;
+}
+#sidebar h5 {
+	padding-left:3px;
+	margin-left:3px;
+	padding-bottom:0;
+	margin-bottom:0;
+}
+#sidebar h4 {
+	font-style: normal;
+    color: #5f6123; 
+	text-transform: capitalize;
+	background: #EDE7D3;
+    padding: .25em;
+    margin:0;
+}
+#highlights h4 {
+	font-style: normal;
+    color: #5f6123; 
+	padding-left: .25em;
+	padding-right: .25em;
+	padding-top: .25em;
+    padding-bottom: .1em;
+    margin:0;
+}
+#highlights ul {
+    padding-top: 0;
+    margin-top:0;
+	margin-left:.3em;
+	padding-left:.3em;
+	margin-bottom:.2em;
+	padding-bottom:.2em;
+	list-style:none;
+	
+}
+#sidebar ul  {
+	margin:.3em;
+	padding:.3em;
+	list-style:none;
+}
+#sidebar li {
+	padding-left: .6em;
+	background-image: url(/laneweb/images/irt/list-background-arrow.gif);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	padding-bottom: 0;
+}
+#highlights li {
+	padding-left: .5em;
+	background-image: url(/laneweb/images/irt/list-background-arrow.gif);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+.seminars {
+	background: #E7F0F9;
+	margin-left: 1em;
+	padding-left: .5em;
+	padding-top: .2em;
+	padding-bottom: .5em;
+	margin-bottom: 1em;
+	border: 1px #003163 solid;
+}
+.seminars h2 {
+    color: #333333;
+	margin-bottom:0;
+	padding-bottom:0;
+	font-size: 1em;
+	font-weight: bold;
+	margin-top:0;
+	padding-top:.2em;
+}
+.seminars ul {
+	margin-top:0;
+	padding-top:0;
+	margin-bottom:0;
+	padding-bottom:0;
+	margin-left:.2em;
+}
+.seminars li {
+	padding-left: .6em;
+	background-image: url(/laneweb/images/irt/list-background-arrow.gif);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	padding-bottom: 0;
+}
+.homenews {
+	background: #EDE7D3; 
+	border: 1px #5f6123 solid;
+	margin-left:1em;
+	padding-left:.5em;
+	padding-right:.5em;
+	padding-top:0;
+	margin-bottom:1em;
+	margin-top:0;
+}
+.homenews h2 {
+    color: #003163;
+	margin-bottom:0;
+	padding-bottom:0;
+	font-size: 1em;
+	font-weight: bold;
+	margin-top:0;
+	padding-top:.2em;
+}
+.homenews ul {
+	margin-top:0;
+	padding-top:0;
+}
+.homenews li {
+	padding-top: .1em;
+	padding-bottom: 0;
+}
+.homefeature {
+	border: 1px #003163 solid;
+	width: 300px;
+	margin:0;
+	padding:.5em;
+}
+.homefeature h2 {
+	margin:.2em;
+	padding:.2em;
+}
+.homefeature p {
+	margin:.4em;
+}
+.homebrowse {
+	margin-bottom: 1em;
+	margin-top: 0;
+	padding-top: 0;
+}
+.homebrowse h4 {
+    color: #003163;
+	margin-bottom:0;
+	padding-bottom:0;
+}
+.homebrowse p {
+	margin-top:0;
+	padding-top:0;
+}
+*/
+ol li {
+	background-image: none;
+	padding-left: 0;
+}
+ul ul {
+	margin-left:1em;
+}
+ul  {
+	margin-left:0em;
+	padding-left:0em;
+	list-style:none;
+}
+li {
+	padding-left: .6em;
+	background-image: url(/laneweb/images/irt/list-background-line.gif);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	padding-bottom: .2em;
+}
+/*
+.proxy {
+	font-weight: normal;
+}
+.keywordresult {
+	color: #000000;
+	font-weight: bold;
+}
+
+.define {
+	color: #666666;
+	padding-bottom: 0;
+	margin-bottom: 0;
+	padding-top: 0;
+	margin-top: 0;
+}
+
+h1 {
+    font-size: 1.5em;
+    font-weight:normal;
+	color: #003163; 
+}
+h2 {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #003163;
+}
+h3 {
+    font-size: 1em;
+	font-weight: bold;
+	color: #003163;
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+h4 {
+    font-size: 1em;
+	font-weight: bold;
+	color: #666633;
+}
+
+h5 {
+    font-size: 1em;
+	padding-bottom: 0;
+	margin-bottom:0;
+	padding-top: .5em;
+	margin-top: .5em;
+}
+#searchresults { padding: 1px;}
+#searchresults h3 { color: #003163; margin:1em 0 0 0;}
+#searchColumnRight { float:right; width:45%; margin-left: 1em; }
+#searchresults ul { margin:0;padding:0 }
+#searchHeader {background-color:#E7F0F9;padding:.5em;width:100%}
+
+#searchResults h3 { color: #003163; margin:1em 0 0 0;}
+.searchColumn { float:left; width:49%;margin:0;padding:0}
+#searchResults ul { margin:0;padding:0 }
+
+.newsItem * {margin:0;}
+.newsItem p {margin-bottom:1.5em;}
+
+#faq dt { font-weight:bolder }
+#faq dd { padding:0;margin:0 0 1em 0;text-indent:1em }
+*/
+a {
+	color: #990000;
+}
+a:link {
+	color: #990000;
+	text-decoration: underline;
+}
+a:visited {
+	color: #990000;
+	text-decoration: underline;
+}
+a:hover {
+	color: #003366;
+	text-decoration: underline;
+}
+a:active {
+	color: #003399;
+	text-decoration: underline;
+}
+/*
+#breadcrumb td {
+	font-family: verdana, arial, helvetica, sans-serif;
+	text-decoration: none;
+	font-size: 60%;
+}
+#breadcrumb a {
+    text-decoration: none;
+    color: #990000;
+}
+#breadcrumb a:hover {
+	color: #003366;
+}
+#breadcrumb a:active {
+	color: #003399;
+}
+#breadcrumb a:visited {
+	color: #990000;
+}
+
+#footer {
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 55%;
+}
+th {
+	text-align: left;
+}
+span.bolded {
+    font-weight: bolder;
+}
+*/
+#debug {
+background-color:#EDE7D3;border:1px black solid;padding:1em;overflow:auto;clear:both;margin-top:1em;
+}
+/* ---------------------------------------------------------------- */
+/* NN4.x-specific rules */
+
+.ns4 {font-weight: bold; font-size: 125%;
+  border: 1px solid white; padding: 0.25em;}
+
+/* ---------------------------------------------------------------- */
+/* The following styles will be ignored by NN4.x */
+/*/*/
+
+*.ns4 {display: none;}
+
+
+.visible ul, .hidden:hover ul {font-size:75%;font-weight:bolder;font-family:Arial, Helvetica, sans-serif;display:block;position:absolute;border:1px #990000 solid;margin:26px 0 0 0;padding:0;background-color:white;}
+.hidden ul {display:none}
+.visible li, .hidden:hover li {display:block;margin:0;padding:0;background-image:none;white-space:nowrap;border-bottom:1px #990000 solid;}
+.visible li a, .hidden li a {margin:0;display:block;width:100%;text-decoration:none;color:black;padding:2px 7px 2px 0px;}
+.visible li a:hover, .hidden li:hover {color:black;background-color:#EEEED0;text-decoration:none;}
+.visible li a:visited {color:black;text-decoration:none;}

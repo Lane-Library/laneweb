@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Pediatrics MetaSearch Results</title>
+    </head>
+    <body>
+        <div id="lw_alt-title"><img src="/images/icons/lpch-tiny.jpg" alt="" align="middle"/> Pediatric Core Metasearch</div>
+        <div id="searchHeader">
+            Results for <strong><span class="keywords"/></strong> in <a id="nonzero" href="search.html?source=synchronous-peds&amp;id={$id}"/> of
+            <a id="total" href="search.html?source=synchronous-peds&amp;id={$id}&amp;view=all"/> sources.
+            <span id="searchRefresh"><span class="stillRunningCount"/> resources still running: <a href="search.html?source=synchronous-peds&amp;id={$id}">refresh</a>.</span>
+            Expand search to <a href="search.html?source=synchronous-clinical&amp;id={$id}">Clinical Core</a>.
+        </div>
+        <div id="searchResults">
+            <div class="searchColumn">
+                <div class="searchCategory" id="firstbets">
+                    <h3>First Bets</h3>
+                    <ul>
+                        <li id="aapredbook">AAP Red Book</li>
+                        <li id="mdc_hlh">Harriet Lane Handbook</li>
+                        <li id="mdc_behrman">Nelson's Textbook of Pediatrics</li>
+                        <li id="skolar_rudolph">Rudolph's Pediatrics</li>
+                        <li id="uptodate">UpToDate</li>
+                        <li id="crossdb_omim">OMIM</li>
+						<li id="emedicine">eMedicine</li>
+                    </ul>
+                </div>
+                <div class="searchCategory" id="texts">
+                    <h3>Texts</h3>
+                    <ul>
+                        <li id="am_hay">Current Pediatric Dx &amp; Tx</li>
+                        <li id="skolar_scott">Danforth's Obstetrics &amp; Gynecology</li>
+                        <li id="mdc_gabbe">Gabbe's Obstetrics</li>
+                        <li id="mdc_gershon">Infectious Diseases of Children</li>
+                        <li id="mdc_miller">Miller's Anesthesia</li>
+                        <li id="mdc_park">Pediatric Cardiology</li>
+                        <li id="mdc_long">Pediatric Infectious Diseases</li>
+                        <li id="mdc_green">Skeletal Trauma in Children</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="searchColumn">
+                <div class="searchCategory" id="drugs">
+                    <h3>Drugs</h3>
+                    <ul>
+                        <li><a href="http://www.thomsonhc.com/hcs/librarian/" class="proxy">Micromedex</a>: go direct to new version</li>
+<!--
+                        <li id="micromedex_0">Micromedex</li>
+-->
+                        <li id="naturalstandard">Natural Standard</li>
+                    </ul>
+                </div>
+                <div class="searchCategory" id="calculators">
+                    <h3>Calculators</h3>
+                    <ul>
+                        <li id="lane_cc">Lane List</li>
+                    </ul>
+                </div>
+                <div class="searchCategory" id="literature_databases">
+                    <h3>Literature Databases</h3>
+                    <ul>
+                        <li id="pubmed">PubMed@Stanford</li>
+                    </ul>
+                </div>
+                <div class="searchCategory" id="ebm">
+                    <h3>EBM &amp; Guidelines</h3>
+                    <ul>
+                        <li id="aapguidelines">AAP Guidelines</li>
+                    </ul>
+                </div>
+                <div class="searchCategory" id="handouts">
+                    <h3>Patient Handouts</h3>
+                    <ul>
+                        <li id="aappatient">AAP Patient Handouts</li>
+						<li id="skolar_aafp">AAFP</li>
+                        <li id="mdchandout">MDConsult</li>
+                        <li id="skolar_medfacts">Med Facts</li>
+                        <li id="medlineplus_1">MedlinePlus: drug</li>
+                        <li id="medlineplus_2">MedlinePlus: encyclopedia</li>
+                        <li id="medlineplus_0">MedlinePlus: topics</li>
+                        <li id="skolar_handouts">NIH-CDC-FDA</li>
+                        <li id="skolar_pdq_pat">PDQ Cancer</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="lw_sidebar">
+            <div>
+                <h4>Try another source</h4>
+                <p>Find <strong><span class="keywords"/></strong> in:</p>
+                <ul>
+                    <li><a class="proxy" target="_blank" href="http://www.cdc.gov/search.do?action=search&amp;queryText={keywords}">CDC</a></li>
+                    <li><a class="proxy" target="_blank" href="http://dermatlas.med.jhmi.edu/derm/resultNoCache.cfm?BO=AND&amp;keywords={keywords}">Dermatlas</a></li>
+                    <li><a href="/online/er.html?keywords={keywords}">Lane eResources</a></li>
+                    <li><a href="search.html?source=synchronous-clinical&amp;id={$id}">Clinical Core</a></li>
+                    <li><a href="search.html?source=synchronous-research&amp;id={$id}">Bioresearch Core</a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

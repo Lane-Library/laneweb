@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Clinical Search</title>
+    </head>
+    <body>
+	<br/>
+	<!--  carfeul about moving elements here ... search.js looks for div[3], not named -->
+        <div id="lw_alt-title"><img src="/images/icons/scope-tiny.gif" alt="" align="middle" />Clinical</div>
+        <div class="searchHeader">
+ 			<table id="searchHeaderTable" width="100%" cellspacing="0">
+				<tr>
+					<td class="searchHeaderLeft"><span class="searchHeaderTitle">Clinical Search</span></td>
+					<td id="incrementalResultsProgressBar" class="searchHeaderMiddle"> <!--  --></td>
+					<td id="incrementalResultsDetails" class="searchHeaderRight"> <!--  original spec put final details here ... not currenty used--></td>
+				</tr>
+				<tr>
+					<td class="popInContent" colspan="3">
+				        <span id="spellResults">Go to <a href="portals/clinical.html">Clinical Portal</a> or Search: <a href="search.html?source=peds&amp;id={$id}">Pediatrics</a> 
+						| <a href="search.html?source=research&amp;id={$id}">Bioresearch</a>
+						| <a href="search.html?source=eLibrary&amp;id={$id}">eLibrary</a></span>
+
+
+					</td>
+				</tr>
+			</table>
+        </div>
+	<!--  carfeul about moving elements here ... search.js looks for ordered elements, not named -->
+     <div id="incrementalSearchResults" class="hide">
+	 
+     <div class="searchColumn3">
+          <div class="searchCategory">
+          <h3 class="hide">Most Popular</h3>
+          <ul>
+		    <li id="skolar_clin">Clin-eguide</li>
+			<li id="emedicine">eMedicine</li>
+			<li id="skolar_harrison">Harrison's</li>
+            <li id="uptodate">UpToDate</li>
+          </ul>
+        </div>
+				  <div class="searchCategory">
+          <h3 class="hide">Calculators</h3>
+          <ul>
+            <li id="lane_cc">Web Interactive</li>
+          </ul>
+          </div>
+		  
+		<div class="searchCategory">
+          <h3 class="hide">Journal Articles</h3>
+          <ul>
+          <!--<li id="pubmed">PubMed: core clinical</li><li id="pubmed">PubMed: 1 year</li>-->
+            <li id="pubmed">PubMed@Stanford</li>
+          </ul>
+        </div>
+
+ 	    <div class="searchCategory">
+           <h3 class="hide">Evidence &amp; Guidelines</h3>
+           <ul>
+              <li id="skolar_dsr">Cochrane Reviews</li>
+              <li id="skolar_dare">Cochrane DARE</li>
+              <li id="skolar_cctr">Cochrane Trials</li>
+              <li id="skolar_clin">Clin-eguide</li>
+              <li id="skolar_ngc">NGC Guidelines</li>
+				<li id="aapguidelines">AAP Guidelines</li>
+			<li id="skolar_pdq_pro">PDQ Cancer Guidelines</li>
+			<li id="skolar_sag">SHC Guidelines</li>    
+           </ul>
+		</div>
+		<div class="searchCategory">
+              <h3 class="hide">Clinical Trials</h3>
+              <ul>
+                  <!-- CHARLES - - need to add this one when you have time at http://clinicaltrials.gov/  and here the page
+                  on how to formulate the search request  http://clinicaltrials.gov/ct/info/help#Formula
+                  added cy -->
+               <li id="clinicaltrials">ClinicalTrials.gov</li>
+              </ul>
+        </div>
+		
+				 <div class="searchCategory">
+          <h3 class="hide">Patient Handouts</h3>
+          <ul>
+            <li id="aappatient">AAP</li>
+			<li id="skolar_aafp">AAFP</li>
+            <li id="mdchandout">MD Consult</li>
+            <li id="skolar_medfacts">MedFacts</li>
+            <li id="medlineplus_2">MedlinePlus: drug</li>
+            <li id="medlineplus_1">MedlinePlus: encyclopedia</li>
+            <li id="medlineplus_0">MedlinePlus: topics</li>
+            <li id="skolar_handouts">NIH-CDC-FDA</li>
+            <li id="skolar_pdq_pat">PDQ Cancer</li>
+            <li id="am_patient">Postgraduate Medicine</li>
+          </ul>
+		  </div>
+				  
+		          <div class="searchCategory">
+			<h3 class="hide">Teaching Images</h3>
+			<ul>
+            <li id="imagesmd">Images.MD</li>
+			</ul>
+        </div> 
+		
+      </div>
+
+      <div class="searchColumn3">
+	  
+		  <div class="searchCategory">
+              <h3 class="hide">Drugs</h3>
+              <ul>
+                  <li id="micromedex_web">Micromedex</li>
+			      <li id="lexidrugid">LexiDrugID</li>	  
+                  <li id="skolar_atoz">A-Z Drug Facts</li>
+                  <li id="skolar_dfc">Drug Facts &amp; Comparisons</li>
+	   <!-- take this one out for now
+                  <li id="skolar_fdam">FDA MedWatch</li> --> 
+                  <li id="am_goodman">Goodman &amp; Gilman Pharmacology</li>
+                  <li id="skolar_sag">Stanford Antibiotic Guidelines</li>
+              </ul>
+          </div>
+		  
+		  <div class="searchCategory">
+              <h3 class="hide">Natural Medicines</h3>
+              <ul>
+                  <li id="naturalstandard">Natural Standard</li>
+                  <li id="skolar_rnp">Review of Natural Products</li>
+              </ul>
+          </div>
+		  
+		  <div class="searchCategory">
+              <h3 class="hide">Handbooks</h3>
+              <ul>
+                  <li id="skolar_dambro">5-Minute Clinical Consult</li>
+                  <!-- CHARLES - - this one needs an ID is available at MDC - - if you can't make it work leave for "to do" list
+                  cant' find this on mdconsult - cy
+                  <li id="noIDyet">5MCC: Diagnostic Algorithms</li>
+                  -->
+				  <li id="am_cmdt">Current Dx &amp; Tx: Medical</li>
+                  <li id="am_crawford">Current Dx &amp; Tx: Cardiology</li>
+                  <li id="am_decherney">Current Dx &amp; Tx: ObGyn</li>
+				  <li id="am_orthopedic">Current Dx &amp; Tx: Orthopedics</li>
+                  <li id="am_otolaryngology">Current Dx &amp; Tx: Otolaryngology</li>
+                  <li id="am_hay">Current Dx &amp; Tx: Pediatric</li>
+                  <li id="am_ebert">Current Dx &amp; Tx: Psychiatry</li>
+                  <li id="am_pulmonary">Current Dx &amp; Tx: Pulmonary</li>
+                  <li id="am_imboden">Current Dx &amp; Tx: Rheumatology</li>
+                  <li id="am_way">Current Dx &amp; Tx: Surgical</li>
+                  <li id="aapredbook">AAP Red Book</li>            
+                  <li id="mdc_goldberger">Clinical Electrocardiography</li>
+                  <li id="mdc_roberts">Clinical Procedures in ER Medicine</li>
+                  <li id="mdc_rakel_cct">Conn's Current Therapy</li>
+                  <li id="mdc_ferri_fbt">Ferri's Best Test</li>
+                  <li id="mdc_ferri_pg">Ferri's Care of the Medical Patient</li>
+                  <li id="mdc_ferri_fca">Ferri's Clinical Advisor</li>
+                  <li id="mdc_hlh">Harriet Lane Handbook</li>
+                  <li id="skolar_wallach">Interpretation of Diagnostic Tests</li>
+                  <li id="mdc_cheng-zaas">Osler Medical Handbook</li>
+                  <li id="mdc_jacobson">Psychiatric Secrets</li>
+                  <li id="skolar_wmt">Washington Manual</li>
+              </ul>
+          </div>
+
+		  			<div class="searchCategory">
+              <h3 class="hide">General &amp; Primary Care Texts</h3>
+              <ul>
+			      <li id="mdc_goldman">Cecil Textbook of Medicine</li>
+				  <li id="skolar_eisenberg">Clinical Imaging: Atlas DDx</li>
+				  <li id="skolar_goroll">Goroll's Primary Care Medicine</li>
+                  <li id="skolar_wachter">Hospital Medicine</li>
+                  <li id="mdc_rakel_ig">Integrative Medicine</li>
+                  <li id="skolar_irwin">Intensive Care Medicine</li>
+				  <li id="mdc_noble">Noble's Primary Care Medicine</li>		
+                  <li id="skolar_warrell">Oxford Textbook of Medicine</li>
+				  <li id="skolar_reichel">Reichel's Care of the Elderly</li> 
+                  <li id="mdc_kumar">Robbins Pathologic Basis Disease</li>
+                  <li id="mdc_rakel_tfp">Textbook of Family Practice</li>				  
+              </ul>
+          </div> 
+		  
+     </div>
+	 
+      <div class="searchColumn3">
+	 
+ 
+		<div class="searchCategory">
+              <h3 class="hide">Specialty Texts</h3>
+              <ul>
+                  <li id="skolar_koopman">Arthritis &amp; Allied Conditions</li>
+				<li id="am_endocrinology">Basic &amp; Clinical Endocrinology</li>
+                  <li id="skolar_loeser">Bonica's Management of Pain</li>
+                  <li id="mdc_braunwald">Braunwald's Heart Disease</li>
+                  <li id="mdc_brenner">Brenner &amp; Rector's The Kidney</li>
+                  <li id="mdc_canale">Campbell's Orthopaedics</li>
+                  <li id="mdc_walsh">Campbell's Urology</li>
+                  <li id="mdc_abeloff">Clinical Oncology</li>
+
+                  <li id="skolar_harwood-nuss">Clinical Emergency Medicine</li>
+				  <li id="mdc_ford">Clinical Toxicology</li>
+                  <li id="mdc_cohen">Cohen's Infectious Diseases</li>
+                  <li id="mdc_stenchever">Comprehensive Gynecology</li>
+                  <li id="skolar_sadock">Comp. Textbook of Psychiatry</li>
+                  <li id="skolar_scott">Danforth's Ob &amp; Gyn</li>
+                  <li id="mdc_delee">DeLee's Sports Medicine</li>
+                  <li id="skolar_devita">Devita's Cancer</li>
+                  <li id="mdc_grainger">Diagnostic Radiology</li>
+                  <li id="skolar_schrier">Diseases of Kidney &amp; Urinary Tract</li>
+                  <!-- see note about Roberts' above -->
+                  <!--<li id="mdc_roberts">Roberts' Emergency Medicine</li>-->
+                  <li id="skolar_becker">Endocrinology &amp; Metabolism</li>
+                  <li id="mdc_mettler">Essentials of Radiology</li>
+                  <li id="am_fitzpatrick">Fitzpatrick's Color Atlas</li>
+                  <li id="skolar_freedberg">Fitzpatrick's Dermatology</li>
+                  <li id="mdc_gabbe">Gabbe's Obstetrics</li>
+                  <li id="mdc_feldman">Gastrointestinal &amp; Liver Disease</li>
+				  <li id="am_ophthalmology">General Ophthalmology</li>
+                  <li id="mdc_habif">Habif's Clinical Dermatology</li>
+                  <li id="mdc_hoffman">Hematology: principles &amp; practice</li>
+                  <li id="am_hurst">Hurst's the Heart</li>
+                  <li id="mdc_gershon">Infectious Diseases of Children</li>
+                  <li id="mdc_harris">Kelley's Textbk of Rheumatology</li>
+                  <li id="mdc_mandell">Mandell's Infectious Diseases</li>
+                  <li id="skolar_rowland">Merritt's Neurology</li>
+				  <li id="mmbid">MMBID: Inherited Disease</li>
+                  <li id="mdc_adkinson">Middleton's Allergy</li>
+                  <li id="mdc_miller">Miller's Anesthesia</li>
+                  <li id="mdc_behrman">Nelson's Textbook of Pediatrics</li>		  
+	              <li id="crossdb_omim">OMIM: Mendelian Inheritance</li>			  
+                  <li id="mdc_khatri">Operative Surgery Manual</li>
+                  <li id="mdc_yanoff">Ophthalmology</li>
+                  <li id="mdc_cummings">Otolaryngology: Head &amp; Neck Surgery</li>		
+                  <li id="skolar_grammer">Patterson's Allergic Diseases</li>
+                  <li id="mdc_park">Pediatric Cardiology</li>
+                  <li id="mdc_long">Pediatric Infectious Diseases</li>
+                  <li id="mdc_frontera">Physical Medicine &amp; Rehabilitation</li>
+                  <li id="mdc_duthie">Practice of Geriatrics</li>
+                  <li id="mdc_moore">Psychiatry</li>
+                  <li id="skolar_rockwood">Rockwood's Fractures in Adults</li>
+                  <li id="mdc_marx">Rosen's Emergency Medicine</li>
+                  <li id="skolar_rudolph">Rudolph's Pediatrics</li>
+                  <li id="mdc_townsend">Sabiston Textbook of Surgery</li>
+                  <li id="mdc_browner">Skeletal Trauma</li>
+                  <li id="mdc_green">Skeletal Trauma in Children</li>
+                  <li id="skolar_schwartz">Schwartz's Principles of Surgery</li>
+                  <li id="am_smith">Smith's General Urology</li>
+                  <li id="skolar_topol">Textbk of Cardiovascular Medicine</li>
+                  <li id="mdc_goetz">Textbook of Clinical Neurology</li>
+                  <li id="skolar_yamada">Textbook of Gastroenterology</li>
+                  <li id="skolar_crapo">Textbook of Pulmonary Diseases</li>
+                  <li id="mdc_murray">Textbook of Respiratory Medicine</li>
+                  <li id="am_tintinalli">Tintinalli Emergency Medicine</li>
+                  <li id="mdc_auerbach">Wilderness Medicine</li>
+                  <li id="am_williams">Williams Obstetrics</li>
+                  <li id="mdc_larsen">Williams Textbook of Endocrinology</li>
+                  <li id="skolar_willis">Wills Eye Manual</li>
+                  <li id="skolar_greer">Wintrobe Clinical Hematology</li>
+              </ul>
+          </div>
+		  
+      </div>
+	  
+      </div>
+			<script type="text/javascript">
+				// only load getIncrementalResults() after page is completely loaded
+				var onloadEvent = window.onload;
+				window.onload = function() { if (onloadEvent) onloadEvent(); getIncrementalResults(); }
+			</script>
+    </body>
+</html>
