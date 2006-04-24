@@ -6,7 +6,7 @@
   <xsl:param name="sunetid"/>
   <xsl:param name="ticket"/>
   <xsl:param name="proxy-links"/>   
-  <xsl:variable name="proxy-url">http://laneproxy.stanford.edu/login?url=</xsl:variable> 
+  <xsl:variable name="proxy-url">http://irt-lane-proxy-fo.stanford.edu/login?url=</xsl:variable> 
 
   <xsl:template match="node()">
     <xsl:copy>
@@ -17,7 +17,7 @@
   <xsl:template match="@*">
     <xsl:copy-of select="."/>
   </xsl:template>
-  http://www.thomsonhc.com/hcs/librarian/ND_PR/Main/PFPUI/aU3GLQ31fX3h4i/ND_PG/PRIH/CS/358EBF/ND_T/HCS/ND_P/Main/DUPLICATIONSHIELDSYNC/5E79A1/ND_B/HCS/PFActionId/hcs.Interactions
+
   <xsl:template match="h:head">
        <xsl:copy>
            <xsl:apply-templates/>
@@ -34,10 +34,10 @@
                        <xsl:text>&amp;url=</xsl:text>
                        <xsl:value-of select="$path"/>
 			</xsl:when>
-                   <xsl:when test="$proxy-links = 'true'">
+<!--                   <xsl:when test="$proxy-links = 'true'">
                        <xsl:value-of select="$proxy-url"/>
                        <xsl:value-of select="$path"/>
-			</xsl:when>
+			</xsl:when>-->
                    <xsl:otherwise>
                        <xsl:value-of select="$path"/>
                    </xsl:otherwise>
@@ -55,10 +55,10 @@
                        <xsl:text>&amp;url=</xsl:text>
                        <xsl:value-of select="$entryUrl"/>
                    </xsl:when>
-                   <xsl:when test="$proxy-links = 'true'">
+<!--                   <xsl:when test="$proxy-links = 'true'">
                        <xsl:value-of select="$proxy-url"/>
                        <xsl:value-of select="$entryUrl"/>
-                   </xsl:when>
+                   </xsl:when>-->
                    <xsl:otherwise>
                        <xsl:value-of select="$entryUrl"/>
                    </xsl:otherwise>

@@ -20,7 +20,7 @@
     <xsl:copy-of select="."/>
     <xsl:variable name="noproxy">
       <xsl:choose>
-        <xsl:when test="starts-with(.,'http://laneproxy.stanford.edu/login?url=')">
+        <xsl:when test="starts-with(.,'http://irt-lane-proxy-fo.stanford.edu/login')">
           <xsl:value-of select="substring-after(.,'url=')"/>
         </xsl:when>
         <xsl:otherwise>
