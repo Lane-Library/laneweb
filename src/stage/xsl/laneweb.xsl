@@ -111,10 +111,11 @@
                                     <xsl:text>&amp;url=</xsl:text>
                                     <xsl:value-of select="@href"/>
                                 </xsl:when>
-<!--                                <xsl:when test="$proxy-links = 'true'">
-                                    <xsl:text>http://irt-lane-proxy-fo.stanford.edu/login?url=</xsl:text>
-                                    <xsl:value-of select="@href"/>
-                                </xsl:when>-->
+                                <xsl:when test="$proxy-links = 'true'">
+                                    <xsl:value-of select="concat('/',$context,'/secure/login.html?url=',@href)"/>
+                                    <!--<xsl:text>http://irt-lane-proxy-fo.stanford.edu/login?url=</xsl:text>
+                                    <xsl:value-of select="@href"/>-->
+                                </xsl:when>
                                 <xsl:otherwise>
                                     <xsl:value-of select="@href"/>
                                 </xsl:otherwise>
@@ -158,6 +159,10 @@
                                 <xsl:text>&amp;url=</xsl:text>
                                 <xsl:value-of select="."/>
                             </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat('/secure/login.html?url=',.)"/>
+                            </xsl:otherwise>
+                            
                             <!--<xsl:otherwise>http://irt-lane-proxy-fo.stanford.edu/login?url=<xsl:value-of select="."/></xsl:otherwise>-->
                         </xsl:choose>
                      </xsl:with-param>
@@ -429,7 +434,20 @@
         <xsl:param name="sitemap"/>
         <xsl:call-template name="breadcrumb-section">
             <xsl:with-param name="uri-before" select="'/'"/>
-            <xsl:with-param name="uri-remaining" select="$request-uri"/>
+            <xsl:with-param name="uri-remaining">
+                <xsl:choose>
+                    <xsl:when test="contains($request-uri,'portals/')">
+                        <xsl:value-of select="substring-after($request-uri,'portals/')"/>
+                    </xsl:when>
+                    <xsl:when test="contains($request-uri,'online/')">
+                        <xsl:value-of select="substring-after($request-uri,'online/')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="$request-uri"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:with-param>
+            <!--<xsl:with-param name="uri-remaining" select="$request-uri"/>-->
         </xsl:call-template>
     </xsl:template>
     <!-- does most of the breadcrumb work -->
@@ -458,6 +476,9 @@
             </xsl:when>
             <xsl:when test="$uri-before = '/' and $uri-remaining='index.html'">
                 <xsl:text>LaneConnex</xsl:text>
+            </xsl:when>
+            <xsl:when test="$uri-remaining = 'index.html' and $source-doc/h:head/h:meta[@name='lw_faqCategory']">
+                <xsl:value-of select="$source-doc/h:head/h:meta[@name='lw_faqCategory']/@content"/>
             </xsl:when>
             <xsl:when test="$uri-remaining = 'index.html'">
                 <xsl:value-of select="$label-current"/>

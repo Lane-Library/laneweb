@@ -221,14 +221,14 @@
     <xsl:template name="one-and-password">
         <xsl:param name="links"/>
         <xsl:for-each select="$links[not(sql:label = 'Get Password')]">
-        <xsl:variable name="proxy_class">
-            <xsl:choose>
-                <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
-                <xsl:otherwise>noproxy</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
-        <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
+            <xsl:variable name="proxy_class">
+                <xsl:choose>
+                    <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
+                    <xsl:otherwise>noproxy</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
+            <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
             <li><a href="{sql:url}" title="{concat(sql:title,':',sql:label)}" class="{$proxy_class}">
                 <xsl:choose>
                     <xsl:when test="$holdings-length &gt; 0 and $dates-length &gt; 0">
@@ -249,7 +249,7 @@
                 </xsl:choose>
                 <xsl:apply-templates select="sql:description|sql:instruction"/>
             </a><xsl:apply-templates select="sql:publisher"/>
-                    <a href="{$links/sql:row[sql:label='Get Password']/sql:url}"> get password</a>
+                    <a href="{$links[sql:label='Get Password']/sql:url}"> get password</a>
             </li>
         </xsl:for-each>
     </xsl:template>

@@ -101,7 +101,10 @@
             </map:reader>            
         </map:readers>
         <map:actions>
-  			<map:action logger="sitemap.action.login" name="loginAction" src="edu.stanford.laneweb.LoginAction"/>
+            <map:action logger="sitemap.action.login" name="loginAction" src="edu.stanford.laneweb.LoginAction">
+                <map:parameter name="ezproxy-key" value="L0nePr0xyP0SSK0y"/>
+                <map:parameter name="proxy-url" value="http://irt-lane-proxy-fo.stanford.edu/login?"/>
+            </map:action>
 		</map:actions>
         <map:matchers default="wildcard">
             <map:matcher name="wildcard" logger="sitemap.matcher.wildcard" src="org.apache.cocoon.matching.WildcardURIMatcher"/>

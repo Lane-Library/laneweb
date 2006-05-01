@@ -6,7 +6,7 @@
   <xsl:param name="sunetid"/>
   <xsl:param name="ticket"/>
   <xsl:param name="proxy-links"/>   
-  <xsl:variable name="proxy-url">http://irt-lane-proxy-fo.stanford.edu/login?url=</xsl:variable> 
+  <xsl:variable name="proxy-url">http://irt-lane-proxy-fo.stanford.edu/login?</xsl:variable> 
 
   <xsl:template match="node()">
     <xsl:copy>
@@ -28,7 +28,7 @@
                    <xsl:when test="$proxy-links = 'true' and $sunetid != '' and $ticket != ''">
                        <xsl:value-of select="$proxy-url"/>
                        <xsl:text>user=</xsl:text>
-                       <xsl:value-of select="sunetid"/>
+                       <xsl:value-of select="$sunetid"/>
                        <xsl:text>&amp;ticket=</xsl:text>
                        <xsl:value-of select="$ticket"/>
                        <xsl:text>&amp;url=</xsl:text>
@@ -49,7 +49,7 @@
                    <xsl:when test="$proxy-links = 'true' and $sunetid != '' and $ticket != ''">
                        <xsl:value-of select="$proxy-url"/>
                        <xsl:text>user=</xsl:text>
-                       <xsl:value-of select="sunetid"/>
+                       <xsl:value-of select="$sunetid"/>
                        <xsl:text>&amp;ticket=</xsl:text>
                        <xsl:value-of select="$ticket"/>
                        <xsl:text>&amp;url=</xsl:text>

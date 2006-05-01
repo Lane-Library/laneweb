@@ -20,7 +20,7 @@
     <map:pipelines>
         <map:pipeline>
         <map:match pattern="secure/login.html">
-               <map:act type="loginAction"  />
+               <map:act type="loginAction"/>
                 <map:redirect-to  uri="{request:contextPath}/stage/index.html?proxy-links=true"/>
             </map:match>
             <map:match type="wildcard" pattern="TMP**">

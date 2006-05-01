@@ -29,6 +29,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     private static final String KEYWORDS = "keywords";
     private static final String QUERY = "q";
     private static final String SUBSET = "s";
+    private static final String CORE = "c";
     private static final String XMLNS = "http://apache.org/cocoon/SQL/2.0";
     private static final String EXECUTE_QUERY_ELEMENT = "execute-query";
     private static final String QUERY_ELEMENT = "query";
@@ -60,6 +61,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     private String mesh;
     private String subset; 
     private String alpha;
+    private String core;
     private String query;
     private String translatedQuery;
     private boolean haveParameters;
@@ -73,6 +75,14 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
         this.coreWeight = par.getParameter("core-weight", "3");
         Request request = ObjectModelHelper.getRequest(objectModel);
         this.haveParameters = false;
+        this.core = request.getParameter(CORE);
+        if (this.core != null) {
+        	if (this.core.equals("y")) {
+        		this.haveParameters = true;
+        	} else {
+        		this.core = null;
+        	}
+        }
         this.type = request.getParameter(TYPE);
         if (this.type != null) {
             if (this.type.length() == 0) {
@@ -250,6 +260,9 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
 					.append(
 							"\nAND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET.SUBSET = '")
 					.append(this.subset).append("'");
+		}
+		if (this.core != null) {
+			queryBuffer.append("\nAND ERESOURCE.CORE = 'Y'");
 		}
 		if (this.alpha != null) {
 			queryBuffer.append("\nAND LOWER(SUBSTR(").append(titleTable)
