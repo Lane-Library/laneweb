@@ -67,7 +67,7 @@
             <!-- ========================================================== -->
             <map:match type="wildcard" pattern="**.html">
                  <map:match type="wildcard" pattern="**">
-                     <map:act type="laneweb-session"/>
+                     <map:act type="session-action"/>
                     <map:aggregate element="doc" label="content">
                         <map:part src="cocoon:/content/{1}"/>
                         <map:part src="cocoon:/content/sitemap.html"/>
@@ -82,18 +82,23 @@
                         <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     </map:transform>
                      
-                     <!--<map:select type="resource-exists">
+                     <map:select type="resource-exists">
                          <map:when test="{defaults:stage-base}/resources/templates/{chain:template}.xsl">
-                             <map:transform type="xsltc" src="{defaults:stage-base}/resources/templates/{chain:template}.xsl"/>
+                             <map:transform type="xsltc" src="{defaults:stage-base}/resources/templates/{chain:template}.xsl">
+														 	<map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+														</map:transform>
                          </map:when>
                          <map:otherwise>
-                             <map:transform type="xsltc" src="{defaults:stage-base}/resources/templates/default.xsl"/>
+                           <map:transform type="xsltc" src="{defaults:stage-base}/resources/templates/default.xsl">
+															<map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+													 </map:transform>
                          </map:otherwise>
-                     </map:select>-->
-                     
+                     </map:select>
+                     <!--
                      <map:transform type="xsltc" src="{defaults:stage-base}/resources/templates/default.xsl">
                          <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                      </map:transform>
+										 -->
 <!--
                     <map:transform type="xsltc" src="{defaults:stage-base}/xsl/webtrends.xsl">
                         <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
