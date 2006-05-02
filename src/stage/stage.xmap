@@ -67,6 +67,7 @@
             <!-- ========================================================== -->
             <map:match type="wildcard" pattern="**.html">
                  <map:match type="wildcard" pattern="**">
+                     <map:act type="laneweb-session"/>
                     <map:aggregate element="doc" label="content">
                         <map:part src="cocoon:/content/{1}"/>
                         <map:part src="cocoon:/content/sitemap.html"/>

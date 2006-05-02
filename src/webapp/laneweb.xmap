@@ -105,6 +105,7 @@
                 <map:parameter name="ezproxy-key" value="L0nePr0xyP0SSK0y"/>
                 <map:parameter name="proxy-url" value="http://irt-lane-proxy-fo.stanford.edu/login?"/>
             </map:action>
+            <map:action name="session-action" src="edu.stanford.laneweb.LanewebSessionAction"/>
 		</map:actions>
         <map:matchers default="wildcard">
             <map:matcher name="wildcard" logger="sitemap.matcher.wildcard" src="org.apache.cocoon.matching.WildcardURIMatcher"/>
@@ -208,6 +209,7 @@
                 </map:match>
 -->
                 <map:match type="wildcard" pattern="**">
+                    <map:act type="laneweb-session"/>
                     <map:aggregate element="doc" label="content">
                         <map:part src="cocoon:/content/{1}"/>
                         <map:part src="cocoon:/content/sitemap.html"/>
