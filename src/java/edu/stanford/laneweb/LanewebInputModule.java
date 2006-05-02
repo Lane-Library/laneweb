@@ -116,6 +116,9 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 				}
 			}
 		}
+		if (getLogger().isDebugEnabled()) {
+			getLogger().debug(key + " = " + result);
+		}
 		return result;
 	}
 
