@@ -209,7 +209,7 @@
                 </map:match>
 -->
                 <map:match type="wildcard" pattern="**">
-                    <map:act type="laneweb-session"/>
+                    <map:act type="session-action"/>
                     <map:aggregate element="doc" label="content">
                         <map:part src="cocoon:/content/{1}"/>
                         <map:part src="cocoon:/content/sitemap.html"/>
