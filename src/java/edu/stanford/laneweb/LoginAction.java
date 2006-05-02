@@ -23,17 +23,30 @@ public class LoginAction extends AbstractAction implements Parameterizable {
 	private String ezproxyKey;
 
 	public Map act(Redirector redirector, SourceResolver resolver,
-			Map objectModel, String source, Parameters params) throws ParameterException, ProcessingException, IOException {
+			Map objectModel, String source, Parameters params) throws ProcessingException, IOException {
 
 		Request request = ObjectModelHelper.getRequest(objectModel);
 		
 		String sunetid = (String) request.getAttribute("WEBAUTH_USER");
+		
+		if (getLogger().isDebugEnabled()) {
+			getLogger().debug("user = " + sunetid);
+		}
 		if (!"<UNSET>".equals(sunetid)) {
 			request.getSession().setAttribute(LanewebInputModule.SUNETID,
 					sunetid);
 			String url = request.getQueryString();
 			if (null != url) {
-				String ticket = getTicket(sunetid);
+				String ticket = null;
+				try {
+					ticket = getTicket(sunetid);
+				} catch (Exception e) {
+					getLogger().error(e.getLocalizedMessage(), e);
+				}
+				if (getLogger().isDebugEnabled()) {
+					getLogger().debug("ticket = " + ticket);
+					getLogger().debug("url = " + url);
+				}
 				String redirectURL = this.proxyURL + "user=" + sunetid + "&ticket=" + ticket + "&" + url;
 				redirector.redirect(true, redirectURL);
 			}
@@ -48,34 +61,25 @@ public class LoginAction extends AbstractAction implements Parameterizable {
 	
 
 
-	protected String getTicket(String user) {
+	protected String getTicket(String user) throws Exception {
 		String result = null;
 		Date now = new Date();
 		String packet = "$u" + ((int) (now.getTime() / 1000));
-		try {
-			result = URLEncoder.encode(getKeyedDigest(ezproxyKey + user
-					+ packet)
-					+ packet, "UTF8");
-
-		} catch (Exception e) {
-			getLogger().fatalError(e.getLocalizedMessage());
-		}
+		result = URLEncoder.encode(getKeyedDigest(ezproxyKey + user
+				+ packet)
+				+ packet, "UTF8");
 		return result;
 	}
 	
 
 
-	private String getKeyedDigest(String buffer) {
+	private String getKeyedDigest(String buffer) throws Exception {
 		StringBuffer sb = new StringBuffer();
-		try {
-			MessageDigest d = MessageDigest.getInstance("MD5");
-			byte[] b = d.digest(buffer.getBytes("UTF8"));
-			for (int i = 0; i < b.length; i++) {
-				sb.append(Integer.toHexString((b[i] & 0xf0) >> 4)
-						+ Integer.toHexString(b[i] & 0x0f));
-			}
-		} catch (Exception e) {
-			getLogger().fatalError(e.getLocalizedMessage());
+		MessageDigest d = MessageDigest.getInstance("MD5");
+		byte[] b = d.digest(buffer.getBytes("UTF8"));
+		for (int i = 0; i < b.length; i++) {
+			sb.append(Integer.toHexString((b[i] & 0xf0) >> 4)
+					+ Integer.toHexString(b[i] & 0x0f));
 		}
 		return sb.toString();
 	}
