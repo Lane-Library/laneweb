@@ -2,14 +2,34 @@
 <xsl:stylesheet exclude-result-prefixes="sql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:sql="http://apache.org/cocoon/SQL/2.0">
     
     <xsl:param name="keywords"/>
+    <xsl:param name="t"/>
+    <xsl:param name="a"/>
     
     <xsl:variable name="ltitle" select="translate($keywords,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
 
   <xsl:template match="sql:rowset">
-      <dl class="searchResults">
-      <xsl:apply-templates select="sql:row[sql:ltitle = $ltitle and not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title)]"/>
-      <xsl:apply-templates select="sql:row[not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title) and sql:ltitle != $ltitle]"/>
-    </dl>
+      <xsl:choose>
+          <xsl:when test="sql:row">
+              <dl class="searchResults">
+                  <xsl:apply-templates select="sql:row[sql:ltitle = $ltitle and not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title)]"/>
+                  <xsl:apply-templates select="sql:row[not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title) and sql:ltitle != $ltitle]"/>
+              </dl>
+          </xsl:when>
+          <xsl:when test="$a != ''"><div>
+              No results for 
+              <xsl:choose>
+                  <xsl:when test="$t = 'ej'">eJournals</xsl:when>
+                  <xsl:when test="$t = 'cc'">Calculators</xsl:when>
+                  <xsl:when test="$t = 'book'">Books</xsl:when>
+                  <xsl:when test="$t = 'database'">Databases</xsl:when>
+              </xsl:choose> beginning with
+              <xsl:choose>
+                  <xsl:when test="$a = '#'">non alpha character.</xsl:when>
+                  <xsl:otherwise><xsl:value-of select="$a"/>.</xsl:otherwise>
+              </xsl:choose>
+              Try the search box above or <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;PAGE=First">Lane's Catalog</a>
+          </div></xsl:when>
+      </xsl:choose>
   </xsl:template>
   
   <xsl:template match="sql:row">
