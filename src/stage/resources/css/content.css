@@ -429,7 +429,7 @@ h3 {
 	color: #444;
 }
 
-.pList {
+.pList, p.noTopPadding {
 	padding-top:0;
 	margin-top:0;
 }
@@ -449,7 +449,7 @@ p a:link, p a:visited {
 }
 p.pList a:link, p.pList a:visited { 
 	text-decoration: none;
-}
+} 
 h3 a:link, h3 a:visited {
 	text-decoration: underline;
 }
@@ -780,7 +780,10 @@ dl li {background-image:none;}
 .rightColumnof2inBox, .rightColumnof3inBox {
 	margin-right: 0px;
 }
-
+.tableWithSidePadding td {
+	padding-right: 1em;
+	padding-bottom: .4em;
+}
 
 /*font specifications*/
 .smallFont {
@@ -799,27 +802,30 @@ h1, .portalTitle {
 	font-size: 2em;
 	margin-bottom: 10px; /* pm changed from 20px Apr 20, let me know if I broke something */
 }
-
 h2 {
-	font-size: 0.9em;
+	font-size: 1.0em;
 }
-
+h3 {
+	font-size: 1.0em;
+}
+/*
 .centralColumn h2 {
 	font-size: 1.1em;
 }
-/*
 .centralColumn .centerBlueBox h2, .centralColumn .whiteBox h2, .centralColumn .centerGreenBox h2 {
 	font-size: 1.2em;
 }
 */
+
 #tabTip h2 {
 	font-size: 1.5em;
 }
-
-h3 {
-	font-size: 1.0em;
-}
-
 #tabTip h4 {
 	font-size: 1.1em;
+}
+.whiteBox h2 {
+	font-size: 1.2em;
+}
+.searchHeaderTitle {
+	font-size: 1.2em;
 }

@@ -27,7 +27,7 @@ function errorLogger(message, url, line){
 //**************************
 // slice results into format tabs
 //
-var eLibraryTabLabels = new Array('All','eJournals','Databases','eBooks','eCalcs','Lane Services');
+var eLibraryTabLabels = new Array('All','eJournals','Databases','eBooks','medCalcs','Lane Services');
 var eLibraryTabIDs = new Array('all','ej','database','book','cc','faq');
 var eLibraryResultCounts = [];
 var eLibraryActiveTab = null;
@@ -183,8 +183,9 @@ function refreshPopInBar(){
 		document.getElementById('popInContent').className = 'popInContent';
 	}	
 
-	// show tabTip if any *and* more than zero results
-	if(document.getElementById(eLibraryActiveTab + "TabTipText") && eLibraryResultCounts[eLibraryActiveTab] != 0){
+	// show tabTip if any [*and* more than zero results]
+	//if(document.getElementById(eLibraryActiveTab + "TabTipText") && eLibraryResultCounts[eLibraryActiveTab] != 0){
+	if(document.getElementById(eLibraryActiveTab + "TabTipText") ){
 		var thisTabText = document.getElementById(eLibraryActiveTab + "TabTipText").innerHTML;
 		document.getElementById("tabTip").innerHTML = thisTabText;
 		document.getElementById("tabTip").className = 'tabTip';
@@ -328,7 +329,7 @@ IOClient.prototype = {
 								//&& resources[j].getElementsByTagName('hits')[0].firstChild.data > 0){
 								//document.getElementById(resources[j].getAttribute('id') + 'SearchResults').innerHTML = "<a target='new' href='" + resources[j].getElementsByTagName('url')[0].firstChild.data + "'>" + resources[j].getElementsByTagName('description')[0].firstChild.data + '<br /><span class="tabHitCount">' + intToNumberString(resources[j].getElementsByTagName('hits')[0].firstChild.data) + '</span></a>';
 								var container = document.getElementById(resources[j].getAttribute('id') + 'SearchResults');
-								container.getElementsByTagName('a')[0].href = resources[j].getElementsByTagName('url')[0].firstChild.data;
+								//container.getElementsByTagName('a')[0].href = resources[j].getElementsByTagName('url')[0].firstChild.data;
 								container.getElementsByTagName('a')[0].innerHTML = resources[j].getElementsByTagName('description')[0].firstChild.data + '<br /><span class="tabHitCount">' + intToNumberString(resources[j].getElementsByTagName('hits')[0].firstChild.data) + '</span>';
 
 								if(resources[j].getAttribute('id') == 'google'){
@@ -361,8 +362,19 @@ IOClient.prototype = {
 			// Incremental metasearch results (clinical, peds, research searches)
 			// 
 			case "incremental":
-				var response = this.request.responseXML.documentElement;
-				var newResults = response.getElementsByTagName('div')[2].getElementsByTagName('li');
+				var dom = string2dom(this.request.responseText);
+				var response = dom.documentElement;
+
+				var divs = response.getElementsByTagName('div');
+
+				for (var d = 0; d < divs.length; d++){
+					if(divs[d].getAttribute('id') == 'incrementalSearchResults'){
+						var newResults = divs[d].getElementsByTagName('li');
+						break;
+					}
+				}
+				//var newResults = divs['17'].getElementsByTagName('li');
+
 				var oldResults = document.getElementById('incrementalSearchResults').getElementsByTagName('li');
 				document.getElementById('incrementalSearchResults').className = 'unhide'; //display results
 								
@@ -378,7 +390,7 @@ IOClient.prototype = {
 				for (var i = 0; i < newResults.length; i++) {
 				  var oldAnchor = oldResults[i].getElementsByTagName('a')[0];
 				  var newAnchor = newResults[i].getElementsByTagName('a')[0];
-				  var newStatus = newAnchor.getAttribute('class');
+				  var newStatus = newAnchor.getAttribute('type');
 				
 				  if (newStatus == 'running') {
 				    finished = false;
@@ -386,8 +398,18 @@ IOClient.prototype = {
 				  else{
 				  	sourcesCompleteCount++;
 				  }
-					
-				  //hide result items if status is still running or the item returned a zero hit count
+
+/*
+				  // grab href from metasearch app regardless of engine status
+				  // apply proxy prefix only if off campus (would like to remove this)
+				  if(GLOBALS.needsProxy != 'false'){
+					oldAnchor.setAttribute('href',GLOBALS.proxyPrefix + newAnchor.getAttribute('href') );
+				  }
+				  else{
+					oldAnchor.setAttribute('href',newAnchor.getAttribute('href'));
+				  }
+*/
+				  //hide result items if engine is still running or it returned a zero hit count
 				  if ( newStatus == 'running' 
 				  	|| newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue == "timed out"
 				  	|| newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue == 0){
@@ -399,20 +421,17 @@ IOClient.prototype = {
 				    oldResults[i].className = '';
 				    hitsFoundInSourceCount++;
 				  }
-				if (oldAnchor.className != newStatus){
-					oldAnchor.className = newStatus;
-					oldAnchor.setAttribute('href',newAnchor.getAttribute('href'));  
-					if(GLOBALS.needsProxy != 'false'){
-						oldAnchor.setAttribute('href',GLOBALS.proxyPrefix + newAnchor.getAttribute('href') );
-					}
 
-				    if (newResults[i].getElementsByTagName('span').length > 0) {
+				  // only write engine result count when status of engine has changed
+				  if (oldAnchor.getAttribute('type') != newStatus){
+					oldAnchor.setAttribute('type',newStatus);// = newStatus;
+					if (newResults[i].getElementsByTagName('span').length > 0) {
 						var hitCount = newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue;
 						if(hitCount == '0' && newStatus == 'successful') { 
 							hitCount = ' 0';
 						}
 						oldResults[i].appendChild(document.createTextNode(hitCount));
-				    }
+					}
 				  }
 				}
 
@@ -422,6 +441,7 @@ IOClient.prototype = {
 					finished = true;
 				}
 				
+				// progress bar writing
 				if(!finished){
 					if(newResults.length > 0 && sourcesCompleteCount > 0){
 				  		var width = 100 * (sourcesCompleteCount / newResults.length);
@@ -656,6 +676,30 @@ function searchFormSelect(value){
 	}
 	document.searchForm.source.onchange();
 }
+
+// create a dom object from a string of markup
+// borrowed heavily from dojo.dom.createDocumentFromText
+function string2dom(string, mimetype){
+	if(!mimetype) { mimetype = "text/xml"; }
+	if(isDefined('window','DOMParser')) {
+		var parser = new DOMParser();
+		return parser.parseFromString(string, mimetype);
+	}
+	else if(isDefined('window','ActiveXObject')){
+		var domDoc = new ActiveXObject("Microsoft.XMLDOM");
+		if(domDoc) {
+			domDoc.async = false;
+			domDoc.loadXML(string);
+			if(domDoc.parseError != 0){
+				alert("Document parse error\nCode:" + domDoc.parseError.errorCode + "\nLine:" + domDoc.parseError.line + "\nReason:" + domDoc.parseError.reason );
+			}
+			return domDoc;
+		}else{
+			alert("Error: can't create ActiveXObject('Microsoft.XMLDOM') object");
+		}
+	}
+	return null;
+}
 // end useful functions
 
 
@@ -667,7 +711,7 @@ function getIncrementalResults() {
 	var id = getMetaContent(document,'lw_searchParameters','id');
 	var source = getMetaContent(document,'lw_searchParameters','source');
 	var date = new Date();
-	var url = GLOBALS.basePath + '/content/search.html?id='+id+'&source='+source+'&secs='+date.getSeconds();
+	var url = GLOBALS.basePath + '/search.html?id='+id+'&source='+source+'&secs='+date.getSeconds();
 
 	var incremental = new IOClient();
 	incremental.init('incremental',url);
@@ -733,24 +777,24 @@ function submitSearch() {
 	return false;
   }
   else if (source == 'biomedsem') {
-	openLink('http://med.stanford.edu/seminars/searchresults.jsp?searchString=' + keywords + '&Submit=Go');
+	openSearchResult('http://med.stanford.edu/seminars/searchresults.jsp?searchString=' + keywords + '&Submit=Go');
 	return false;
   }
   else if (source == 'catalog') {
 	var dest = 'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1=' + keywords + '&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50';
-	openLink(dest);
+	openSearchResult(dest);
 	return false;
   }
   else if (source == 'google') {
-	openLink('http://www.google.com/search?hl=en&q=' + keywords);
+	openSearchResult('http://www.google.com/search?hl=en&q=' + keywords);
 	return false;
   }
   else if (source == 'pubmed') {
-	openLink('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term=' + keywords);
+	openSearchResult('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term=' + keywords);
 	return false;
   }
   else if (source == 'stanford_who') {
-	openLink('https://stanfordwho.stanford.edu/lookup?search=' + keywords);
+	openSearchResult('https://stanfordwho.stanford.edu/lookup?search=' + keywords);
 	return false;
   }
 
@@ -792,6 +836,7 @@ function loadCatalogIframe(){
         frame.className = '';
 }
 
+/*
 function openCitationMatcher(newWindow){
  	url = 'http://www.ncbi.nlm.nih.gov/entrez/query/static/citmatch.html';
  	var body = document.getElementsByTagName("body").item(0);
@@ -802,10 +847,11 @@ function openCitationMatcher(newWindow){
  		body.appendChild(iframe);
  	}
 	if(newWindow){
- 		setTimeout("openLink(url);",500);
+ 		setTimeout("openSearchResult(url);",500);
  		return false;
  	}
  	else {
  		setTimeout("window.location = url;",2500);
  	}
- }
+}
+*/

@@ -59,7 +59,7 @@
 								<div class="greenUnderline">&#160;</div>
                 <div id="searchContainer">
                     <!--<div style="position: relative; top:-1px; width: 100%; height: auto; overflow: hidden;">-->
-											<div id="askUsContainer"><!--<img src="/images/templates/default/askUsTallCorner.gif" height="26px" width="44px" id="askUsCornerContainer"/>--><img src="/images/templates/default/askUsCornerTransp.gif" height="17px" width="19px" id="askUsCornerContainer"/><span id="askUsText"><a href="/askus.html">Ask Us</a></span>
+											<div id="askUsContainer"><!--<img src="/images/templates/default/askUsTallCorner.gif" height="26px" width="44px" id="askUsCornerContainer"/>--><img src="/images/templates/default/askUsCornerTransp.gif" height="17px" width="19px" id="askUsCornerContainer" alt="AskUs"/><span id="askUsText"><a href="/askus.html">Ask Us</a></span>
 											</div>
                         <span style="top: 0px; width: 550px; height:25px; margin-left: 115px;">
                             <!--<ul id="searchDbs">
@@ -74,45 +74,44 @@
                             
                         </span>
                         <form id="searchFormContainer" method="get" action="/search.html" onsubmit="return submitSearch()" name="searchForm">
-                            <span class="largeFont searchText">Search</span>
-                            <select onchange="lastSelectValue(this); listSearchTagline(this);" name="source" id="source" style="font-size: 100%; font-weight: 400; width: 140px">
+                            <span class="searchText largeFont">Search</span>
+                            <select onchange="lastSelectValue(this); listSearchTagline(this);" name="source" id="source" style="font-weight: 400; width: 140px">
                                 <option value="all">Laneconnex</option>
-                                <option value="ej">eJournals</option>
-                                <option value="database">Databases</option>
-                                <option value="book">eBooks</option>
-                                <option value="cc">eCalcs</option>
-								<option disabled="disabled" >----------------</option>
-                                <option value="clinical">Clinical</option>
-                                <option value="peds">Pediatrics</option>
+                                <option value="ej">&#160;&#160;eJournals</option>
+                                <option value="database">&#160;&#160;Databases</option>
+                                <option value="book">&#160;&#160;eBooks</option>
+                                <option value="cc">&#160;&#160;medCalcs</option>
                                 <option value="research">Bioresearch</option>
+                                <option value="clinical">Clinical</option>
+                                <option value="peds">&#160;&#160;Pediatrics</option>
                                 <option value="pubmed">PubMed</option>
                                 <option value="google">Google</option>
-                                <option disabled="disabled" >----------------</option>
                                 <option value="faq">Lane Services</option>
                                 <option value="catalog">Lane Catalog</option>
-                                <option value="biomedsem">Biomedical Seminars</option>
+                                <option value="biomedsem">Biomed Seminars</option>
                                 <option value="stanford_who">Stanford.Who</option>
                             </select>
-
-                            <input name="keywords" type="text" id="lw_search-keywords" style="font-size: 100%; font-weight: 400; width: 230px"/>
+							
+                            <input name="keywords" type="text" id="lw_search-keywords" style="font-weight: 400; width: 230px"/>
                             <input type="submit" value="" id="searchFormSubmitButton"/>
                         </form>
                                                 <span id="displaySearchTaglineText">Find an eJournal, database, eBook, service, etc. or search inside reference sources.</span>
 												<div id="searchTaglineText"><!-- ids below = "select[@id='source']/option/@value" +  "SearchTagline"-->
 													<span id="allSearchTagline">Find an eJournal, database, eBook, service, etc. or search inside reference sources.</span>
-													<span id="ejSearchTagline">Find an eJournal from over 3000 online biomedical titles.</span>
+													<span id="ejSearchTagline">Find an eJournal from over 3000 biomedical titles.</span>
 													<span id="databaseSearchTagline">Find a database from over 300 biomedical titles.</span>
-													<span id="bookSearchTagline">Find an eBook from over 300 online biomedical titles.</span>
+													<span id="bookSearchTagline">Find an eBook from over 300 biomedical titles.</span>
 													<span id="ccSearchTagline">Find clinical algorithms, predictive calculators and interactive clinical guidelines.</span>
 													<span id="clinicalSearchTagline">Search inside 130+ clinical reference texts and databases all at once.</span>
 													<span id="pedsSearchTagline">Search inside 30+ pediatric reference texts and databases all at once.</span>
 													<span id="researchSearchTagline">Search inside 30+ literature and protocols databases all at once.</span>
+													<span id="pubmedSearchTagline">Launch your search in PubMed@Stanford with links to fulltext.</span>
 													<span id="googleSearchTagline">Launch your search in Google.</span>
 													<span id="faqSearchTagline">Find a service, how-to or frequently asked question at Lane.</span>
-													<span id="catalogSearchTagline">Use the catalog to look up print, digital and archival materials.</span>
-													<span id="biomedsemSearchTagline">Look for upcoming biomedical seminars or lectures at the medical center.</span>
+													<span id="catalogSearchTagline">Look up print, digital and archival materials at Lane.</span>
+													<span id="biomedsemSearchTagline">Look for upcoming biomedical seminars, grand rounds and symposia at Stanford.</span>
 													<span id="stanford_whoSearchTagline">Look up faculty, staff and students in the Stanford directory.</span>
-													</div>
+												</div>
                     <!--</div>-->
 										<div style="position: absolute; bottom: -1px; left: 0px; height: 1px; width: 100%; font-size: 1px; border-bottom: 1px solid #ddd; z-index: 29;">&#160;</div>
                     <div id="searchContainerRoundedCorners">
@@ -139,10 +138,9 @@
 						  
 						  
 						  
-						  <a href="http://lane.stanford.edu/" target="_blank">Lane Medical Library &#38; Knowledge Management Center</a><br/>
+						  <a href="http://lane.stanford.edu/index.html">Lane Medical Library &#38; Knowledge Management Center</a><br/>
 														<div class="footerComment">A division of Information Resources and Technology</div>
-														&#169;2006 <a href="http://med.stanford.edu/">Stanford University School of Medicine</a> &#8226; <a href="http://www.stanford.edu/home/atoz/terms.html" target="_blank">Terms of Use</a><br/>
-                            <a href="/services/hours.html">Hours</a> &#8226; <a href="/services/directions.html">Directions</a> &#8226; <a href="/askus.html">Contact Us</a> &#8226; <a href="/about.html">About Us</a> &#8226; <a href="http://laneintranet.stanford.edu/">Staff Intranet</a></td>
+														&#169;2006 <a href="http://med.stanford.edu/">Stanford University School of Medicine</a> &#8226; <a href="http://www.stanford.edu/home/atoz/terms.html" target="_blank">Terms of Use</a><br/></td>
                           <td width="25%" align="right" valign="top"><a href="http://irt.stanford.edu/" target="_blank"><img src="/images/templates/default/irtLogoFooter.gif" width="89" height="30" border="0" alt="IRT logo"/></a></td>
                         </tr>
                     </table>

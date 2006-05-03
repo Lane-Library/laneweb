@@ -5,6 +5,7 @@
   <xsl:param name="entryUrl"/>
   <xsl:param name="sunetid"/>
   <xsl:param name="ticket"/>
+  <xsl:param name="title"/>
   <xsl:param name="proxy-links"/>   
   <xsl:variable name="proxy-url">http://irt-lane-proxy-fo.stanford.edu/login?</xsl:variable> 
 
@@ -16,6 +17,19 @@
   
   <xsl:template match="@*">
     <xsl:copy-of select="."/>
+  </xsl:template>
+
+  <xsl:template match="h:title">
+       <xsl:copy>
+           <xsl:choose>
+               <xsl:when test="$title != ''">
+                   <xsl:value-of select="$title"/>
+               </xsl:when>
+               <xsl:otherwise>
+                   <xsl:value-of select="."/>
+               </xsl:otherwise>
+           </xsl:choose>
+       </xsl:copy>
   </xsl:template>
 
   <xsl:template match="h:head">

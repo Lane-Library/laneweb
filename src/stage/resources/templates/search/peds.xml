@@ -11,7 +11,7 @@
  			<table id="searchHeaderTable" width="100%" cellspacing="0">
 				<tr>
 					<td class="searchHeaderLeft"><span class="searchHeaderTitle">Pediatrics Search</span></td>
-					<td id="incrementalResultsProgressBar" class="searchHeaderMiddle"> <!--  --></td>
+					<td id="incrementalResultsProgressBar" class="searchHeaderMiddle"><span style="margin-right:200px;">Search starting ... </span></td>
 					<td id="incrementalResultsDetails" class="searchHeaderRight"> <!--  original spec put final details here ... not currenty used--></td>
 				</tr>
 				<tr>
@@ -19,7 +19,7 @@
 				        <span id="spellResults">Go to <a href="portals/peds.html">Pediatrics Portal</a> or Search: 
 						<a href="search.html?source=clinical&amp;id={$id}">All Clinical </a> 
 						| <a href="search.html?source=research&amp;id={$id}">Bioresearch</a>
-						| <a href="search.html?source=eLibrary&amp;id={$id}">eLibrary</a></span>
+						| <a href="search.html?source=eLibrary&amp;id={$id}">Laneconnex</a></span>
 
 
 					</td>
@@ -27,7 +27,7 @@
 			</table>
         </div>
         <div id="incrementalSearchResults" class="hide">
-            <div class="searchColumn3">
+            <div class="searchColumn3 largeFont">
 			
                 <div class="searchCategory">
                     <h3 class="hide">Most Popular</h3>
@@ -40,6 +40,7 @@
 						<li id="uptodate">UpToDate</li>
                     </ul>
                 </div>
+				
 				 <div class="searchCategory">
                     <h3 class="hide">Evidence  &amp; Guidelines</h3>
                     <ul>
@@ -47,6 +48,7 @@
 						<li id="skolar_dsr">Cochrane Reviews</li>
                     </ul>
                 </div>
+				
 				<div class="searchCategory">
                     <h3 class="hide">Journal Articles</h3>
                     <ul>
@@ -54,8 +56,8 @@
                     </ul>
                 </div>
 				
-				</div>
-            <div class="searchColumn3">
+			</div>
+            <div class="searchColumn3 largeFont">
 				<div class="searchCategory">
                     <h3 class="hide">Drugs</h3>
                     <ul>
@@ -75,16 +77,16 @@
                         <li id="aappatient">AAP Patient Handouts</li>
 						<li id="skolar_aafp">AAFP</li>
                         <li id="mdchandout">MDConsult</li>
-                        <li id="medlineplus_1">MedlinePlus: drug</li>
-                        <li id="medlineplus_2">MedlinePlus: encyclopedia</li>
-                        <li id="medlineplus_0">MedlinePlus: topics</li>
-                        <li id="skolar_handouts">NIH-CDC-FDA</li>
+                        <li id="medlineplus_1">MedlinePlus-drug</li>
+                        <li id="medlineplus_2">MedlinePlus-encyclopedia</li>
+                        <li id="medlineplus_0">MedlinePlus-topics</li>
+						<!--  delete this???? <li id="skolar_handouts">NIH-CDC-FDA</li>-->
                         <li id="skolar_pdq_pat">PDQ Cancer</li>
                     </ul>
                 </div>
 
 				</div>
-			<div class="searchColumn3">
+			<div class="searchColumn3 largeFont">
 			<div class="searchCategory">	
                     <h3 class="hide">Pediatric Texts</h3>
                     <ul>
@@ -108,7 +110,7 @@
 				<div class="searchCategory">
 					<h3 class="hide">Teaching Images</h3>
 					<ul>
-					<li id="imagesmd">Images.MD</li>
+					<li id="imagesmd">images.MD</li>
 					</ul>
 				</div> 
             </div>

@@ -8,7 +8,8 @@
     <xsl:template match="/aggregate">
         <xsl:apply-templates select="h:html"/>
     </xsl:template>
-     
+
+	<!--  copy arrays of metasearch engines as pulled from search templates -->     
     <xsl:template match="h:html//h:div[@id='lw_metaEngines']">
 		<xsl:element name="script">
 			<xsl:attribute name="type">text/javascript</xsl:attribute>

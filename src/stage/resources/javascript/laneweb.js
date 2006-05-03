@@ -63,8 +63,8 @@ function startState(url) {
 	listSearchTagline(document.getElementById("source"));
 }
 
-function openLink(url) {
-   openSearchResult(url);
+//function openLink(url) {
+//   openSearchResult(url);
 /*
   w = 700;
   h = 500;
@@ -72,9 +72,10 @@ function openLink(url) {
 
   window.open(url, '', features);
   */
-}
+//}
 
-function openSearchResult(url) {
-    window.open(url, '', 'width=700,height=650,directories=yes,menubar=yes,location=yes,left=75,toolbar=yes,scrollbars=yes,resizable=yes,status=yes,top=100');
+function openSearchResult(url,features) {
+	features = (features) ? features : 'width=700,height=650,directories=yes,menubar=yes,location=yes,left=75,toolbar=yes,scrollbars=yes,resizable=yes,status=yes,top=100';
+	window.open(url, '', features);
 }
 
