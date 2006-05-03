@@ -10,28 +10,27 @@
         <div class="searchHeader">
  			<table id="searchHeaderTable" width="100%" cellspacing="0">
 				<tr>
-					<td class="searchHeaderLeft"><span class="searchHeaderTitle">Inside Bioresearch</span></td>
-					<td id="incrementalResultsProgressBar" class="searchHeaderMiddle"> <!--  --></td>
+					<td class="searchHeaderLeft"><span class="searchHeaderTitle">Bioresearch</span></td>
+					<td id="incrementalResultsProgressBar" class="searchHeaderMiddle"><span style="margin-right:200px;">Search starting ... </span></td>
 					<td id="incrementalResultsDetails" class="searchHeaderRight"> <!--  original spec put final details here ... not currenty used--></td>
 				</tr>
 				<tr>
 					<td class="popInContent" colspan="3">
 				        <span id="spellResults">Go to <a href="portals/bioresearch.html">Bioresearch Portal</a> 
 						or Search: <a href="search.html?source=clinical&amp;id={$id}">Clinical</a> 
-						| <a href="search.html?source=elibrary&amp;id={$id}">eLibrary</a></span>
-
+						| <a href="search.html?source=elibrary&amp;id={$id}">Laneconnex</a></span>
 					</td>
 				</tr>
 			</table>
         </div>
 		
             <div id="incrementalSearchResults" class="hide">
-	            <div class="searchColumn3">
+	            <div class="searchColumn3 largeFont">
 				
 				    <div class="searchCategory">
                         <h3 class="hide">PubMed</h3>
                         <ul>
-                            <li id="pubmed">PubMed@Stanford</li>
+                            <li id="pubmed">PubMed @Stanford</li>
                             <li id="">GoPubMed by gene ontology</li>				
                             <li id="">IHOP for proteins</li>
                         </ul>
@@ -60,7 +59,7 @@
                 </div>
 				
 				</div>
-				<div class="searchColumn3">	
+				<div class="searchColumn3 largeFont">	
 					
 	            <div class="searchCategory">
                     <h3 class="hide">Protocols, Methods  &amp; Handbooks</h3>
@@ -92,7 +91,7 @@
                     </div>
 				
 				</div>
-	            <div class="searchColumn3">
+	            <div class="searchColumn3 largeFont">
 				
 				<div class="searchCategory">
                         <h3 class="hide">Stanford</h3>

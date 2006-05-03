@@ -59,7 +59,7 @@
 								<div class="greenUnderline">&#160;</div>
                 <div id="searchContainer">
                     <!--<div style="position: relative; top:-1px; width: 100%; height: auto; overflow: hidden;">-->
-											<div id="askUsContainer"><!--<img src="/images/templates/default/askUsTallCorner.gif" height="26px" width="44px" id="askUsCornerContainer"/>--><img src="/images/templates/default/askUsCornerTransp.gif" height="17px" width="19px" id="askUsCornerContainer"/><span id="askUsText"><a href="/askus.html">Ask Us</a></span>
+											<div id="askUsContainer"><!--<img src="/images/templates/default/askUsTallCorner.gif" height="26px" width="44px" id="askUsCornerContainer"/>--><img src="/images/templates/default/askUsCornerTransp.gif" height="17px" width="19px" id="askUsCornerContainer" alt="AskUs"/><span id="askUsText"><a href="/askus.html">Ask Us</a></span>
 											</div>
                         <span style="top: 0px; width: 550px; height:25px; margin-left: 115px;">
                             <!--<ul id="searchDbs">

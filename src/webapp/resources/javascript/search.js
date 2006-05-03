@@ -3,9 +3,9 @@
 //
 var GLOBALS = new Object();
 GLOBALS.basePath = '/./.';
-GLOBALS.baseImagePath = GLOBALS.basePath + '/images/templates/default';
 GLOBALS.httpRequestInterval = '1500';
 GLOBALS.incrementalSearchWait = '2500'; //time in ms between start of metasearch and initial response
+GLOBALS.metasearchProxyPath = GLOBALS.basePath + '/content/search-proxy';
 GLOBALS.needsProxy = getMetaContent(document,'lw_proxyLinks');
 GLOBALS.proxyPrefix = 'http://laneproxy.stanford.edu/login?url=';
 GLOBALS.searchPath = GLOBALS.basePath + '/search.html';
@@ -27,7 +27,7 @@ function errorLogger(message, url, line){
 //**************************
 // slice results into format tabs
 //
-var eLibraryTabLabels = new Array('All','eJournals','Databases','eBooks','Calculators','Lane Services');
+var eLibraryTabLabels = new Array('All','eJournals','Databases','eBooks','medCalcs','Lane Services');
 var eLibraryTabIDs = new Array('all','ej','database','book','cc','faq');
 var eLibraryResultCounts = [];
 var eLibraryActiveTab = null;
@@ -44,11 +44,15 @@ function initeLibraryTabs(){
 
 	var bar = '';
 	for(var i = 0; i < eLibraryTabLabels.length; i++){
-		var elementContainerForDisplayText = '';
+		var elementContainerForDisplayText = ''; // get text for title attribute
 		if(document.getElementById(eLibraryTabIDs[i] + "SearchTagline")){
 			elementContainerForDisplayText = document.getElementById(eLibraryTabIDs[i] + "SearchTagline").innerHTML;		
 		}
-		bar = bar + '<div id="' + eLibraryTabIDs[i] + 'Tab" class="eLibraryTab" title="' + elementContainerForDisplayText + '" name="' + eLibraryTabIDs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabIDs[i] + '\');">' + eLibraryTabLabels[i] + '<br /><span class="tabHitCount">' + intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]]) + '</span></div>';
+		var webtrendsCall = ''; // add webtrends call only if dcsMultiTrack() is defined
+		if(isDefined(window,'dcsMultiTrack')){
+			webtrendsCall = "dcsMultiTrack('WT.ti','eLibrary search " + eLibraryTabIDs[i] + " tab','DCSext.keywords','cancer','DCSext.tab_view','" + eLibraryTabIDs[i] + "');";
+		}
+		bar = bar + '<div id="' + eLibraryTabIDs[i] + 'Tab" class="eLibraryTab" title="' + elementContainerForDisplayText + '" name="' + eLibraryTabIDs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabIDs[i] + '\');' + webtrendsCall + '">' + eLibraryTabLabels[i] + '<br /><span class="tabHitCount">' + intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]]) + '</span></div>';
 	}
 	document.getElementById('eLibraryTabs').innerHTML = bar;
 }
@@ -89,17 +93,7 @@ function showeLibraryTab(tab){
 	}
 
 	// switch searchForm selected value to appropriate tab value
-	if(tab == 'all'){
-		document.searchForm.source.selectedIndex = 0; //default searchForm to eLibrary
-	}
-	else{
-		for(var i = 0; i < document.searchForm.source.options.length; i++){
-			if(document.searchForm.source.options[i].value == tab){
-				document.searchForm.source.selectedIndex = i;
-			}
-		}
-	}
-	document.searchForm.source.onchange();
+	searchFormSelect(tab);
 
 	eLibraryActiveTab = tab;
 	refreshPopInBar();
@@ -188,8 +182,8 @@ function refreshPopInBar(){
 		document.getElementById('popInContent').className = 'popInContent';
 	}	
 
-	// show tabTip if any *and* more than zero results
-	if(document.getElementById(eLibraryActiveTab + "TabTipText") && eLibraryResultCounts[eLibraryActiveTab] != 0){
+	// show tabTip if any
+	if(document.getElementById(eLibraryActiveTab + "TabTipText") ){
 		var thisTabText = document.getElementById(eLibraryActiveTab + "TabTipText").innerHTML;
 		document.getElementById("tabTip").innerHTML = thisTabText;
 		document.getElementById("tabTip").className = 'tabTip';
@@ -206,9 +200,9 @@ function refreshPopInBar(){
 // XMLHttpRequest handler class
 // includes results processing and display
 //
-function XMLClient() {};
+function IOClient() {};
 
-XMLClient.prototype = {
+IOClient.prototype = {
 	source: null,
 	request: null,
 	type: null,
@@ -254,101 +248,13 @@ XMLClient.prototype = {
 	readyStateChange: function(client) {
 		if (client.request.readyState == 4) {
 			if (client.request.status == 200) {
-				this.processXML();
+				this.process();
 			}
 		}
 	},
 
-	processXML: function() {
+	process: function() {
 		switch(this.type){
-
-			//**************************
-			// Incremental metasearch results (clinical, peds, research searches)
-			// 
-			case "incremental":
-				var response = this.request.responseXML.documentElement;
-				var newResults = response.getElementsByTagName('div')[2].getElementsByTagName('li');
-				var oldResults = document.getElementById('incrementalSearchResults').getElementsByTagName('li');
-				document.getElementById('incrementalSearchResults').className = 'unhide'; //display results
-								
-				var searchStatus = getMetaContent(response,'lw_searchParameters','status');
-				var searchTerm = getMetaContent(response,'lw_searchParameters','query');
-				var resultsProgressBar = document.getElementById('incrementalResultsProgressBar');
-				var resultsDetails = document.getElementById('incrementalResultsDetails');
-
-				var hitsFoundInSourceCount = 0;
-				var sourcesCompleteCount = 0;
-				var finished = true;
-				
-				for (var i = 0; i < newResults.length; i++) {
-				  var oldAnchor = oldResults[i].getElementsByTagName('a')[0];
-				  var newAnchor = newResults[i].getElementsByTagName('a')[0];
-				  var newStatus = newAnchor.getAttribute('class');
-				
-				  if (newStatus == 'running') {
-				    finished = false;
-				  }
-				  else{
-				  	sourcesCompleteCount++;
-				  }
-					
-				  //hide result items if status is still running or the item returned a zero hit count
-				  if ( newStatus == 'running' 
-				  	|| newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue == "timed out"
-				  	|| newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue == 0){
-				    oldResults[i].className = 'hide';
-				  }
-				  else{
-				    // display parent h3 heading as well as result
-				    oldResults[i].parentNode.parentNode.getElementsByTagName('h3')[0].className = '';
-				    oldResults[i].className = '';
-				    hitsFoundInSourceCount++;
-				  }
-				
-				  if (oldAnchor.className != newStatus) {
-				    oldAnchor.className = newStatus;
-
-					if(GLOBALS.needsProxy != 'false'){
-						oldAnchor.setAttribute('href',GLOBALS.proxyPrefix + oldAnchor.getAttribute('href') );
-					}
-
-				    if (newResults[i].getElementsByTagName('span').length > 0) {
-						var hitCount = newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue;
-						if(hitCount == '0' && newStatus == 'successful') { 
-							hitCount = ' 0';
-						}
-						oldResults[i].appendChild(document.createTextNode(hitCount));
-				    }
-				  }
-				}
-
-				//halt search after 60 seconds or if user halted
-				var newDate = new Date();
-				if ( newDate.getTime()-startTime > 60*1000 || haltIncremental ){
-					finished = true;
-				}
-				
-				if(!finished){
-					if(newResults.length > 0 && sourcesCompleteCount > 0){
-				  		var width = 100 * (sourcesCompleteCount / newResults.length);
-					}
-					else{
-						var width = 1;
-					}
-					resultsProgressBar.innerHTML = '<table><tr><td nowrap>Still searching...</td><td nowrap><div style="position:relative;left:2px;top:2px;border:1px solid #b2b193; width:200px;"><img width="' + width + '%" height="15" src="' + GLOBALS.baseImagePath + '/incrementalResultsProgressBar.gif" alt="progress bar" /></div></td><td nowrap>&nbsp;' + sourcesCompleteCount + ' of ' + newResults.length + ' sources searched. <a href="javascript:haltIncremental=true;void(0);">Stop Search</a></td></tr></table>';
-					setTimeout("getIncrementalResults();",GLOBALS.httpRequestInterval);
-					return 0;
-				}
-				else{
-					resultsProgressBar.innerHTML = '';
-					if(newResults.length > hitsFoundInSourceCount){
-				  		resultsProgressBar.innerHTML = 'Results in <strong>' + hitsFoundInSourceCount + '</strong> of <strong>' + newResults.length + '</strong> sources for <strong>' + searchTerm + '</strong> [<a id="zerotoggle" href="javascript:toggleIncrementalZeros(\'true\');">Show Details</a>]';
-				  	}
-				  	else if(newResults.length == hitsFoundInSourceCount){
-						resultsProgressBar.innerHTML = 'Results in <strong>' + hitsFoundInSourceCount + '</strong> of <strong>' + newResults.length + '</strong> sources contain <strong>' + searchTerm + '</strong>';
-				  	}
-				}
-			break;
 
 			//**************************
 			// elib-meta:
@@ -391,6 +297,10 @@ XMLClient.prototype = {
 					var clinHits = 0;
 					var resHits = 0;
 
+					// put metasearch session ID into clin/res links so search doesn't need to be re-executed
+					document.getElementById('clinicalMetaCount').parentNode.href = GLOBALS.basePath + '/search.html?source=clinical&id=' + sessionID + '&keywords=' + keywords;
+					document.getElementById('researchMetaCount').parentNode.href = GLOBALS.basePath + '/search.html?source=research&id=' + sessionID + '&keywords=' + keywords;
+
 					for( var i = 0; i < engines.length; i++){
 						var resources = engines[i].getElementsByTagName('resource');
 						for( var j = 0; j < resources.length; j++){
@@ -412,8 +322,11 @@ XMLClient.prototype = {
 								document.getElementById('researchMetaCount').innerHTML = intToNumberString(resSuccessCount);
 							}
 
-							if(document.getElementById(resources[j].getAttribute('id') + 'SearchResults') && resources[j].getElementsByTagName('hits').length > 0){
-								document.getElementById(resources[j].getAttribute('id') + 'SearchResults').innerHTML = "<a target='new' href='" + resources[j].getElementsByTagName('url')[0].firstChild.data + "'>" + resources[j].getElementsByTagName('description')[0].firstChild.data + '<br /><span class="tabHitCount">' + intToNumberString(resources[j].getElementsByTagName('hits')[0].firstChild.data) + '</span></a>';
+							if(document.getElementById(resources[j].getAttribute('id') + 'SearchResults') 
+								&& resources[j].getElementsByTagName('hits').length > 0 ){
+								var container = document.getElementById(resources[j].getAttribute('id') + 'SearchResults');
+								container.getElementsByTagName('a')[0].innerHTML = resources[j].getElementsByTagName('description')[0].firstChild.data + '<br /><span class="tabHitCount">' + intToNumberString(resources[j].getElementsByTagName('hits')[0].firstChild.data) + '</span>';
+
 								if(resources[j].getAttribute('id') == 'google'){
 									document.getElementById(resources[j].getAttribute('id') + 'SearchResults').className = 'metaSearchResultsRightCorner';
 								}
@@ -432,11 +345,119 @@ XMLClient.prototype = {
 				}
 
 				if (searchStatus == "running" ){
-					Object.neweLibMetaRequest = new XMLClient();
-					Object.neweLibMetaRequest.init('elib-meta','/search/search?id=' + sessionID + "&secs=" + newDate.getSeconds());
+					Object.neweLibMetaRequest = new IOClient();
+					Object.neweLibMetaRequest.init('elib-meta',GLOBALS.metasearchProxyPath + '?id=' + sessionID + "&secs=" + newDate.getSeconds());
 
 					setTimeout("Object.neweLibMetaRequest.get();",GLOBALS.httpRequestInterval);
 					return 0;
+				}
+			break;
+
+			//**************************
+			// Incremental metasearch results (clinical, peds, research searches)
+			// 
+			case "incremental":
+				var dom = string2dom(this.request.responseText);
+				var response = dom.documentElement;
+
+				var divs = response.getElementsByTagName('div');
+
+				for (var d = 0; d < divs.length; d++){
+					if(divs[d].getAttribute('id') == 'incrementalSearchResults'){
+						var newResults = divs[d].getElementsByTagName('li');
+						break;
+					}
+				}
+
+				var oldResults = document.getElementById('incrementalSearchResults').getElementsByTagName('li');
+				document.getElementById('incrementalSearchResults').className = 'unhide'; //display results
+								
+				var searchStatus = getMetaContent(response,'lw_searchParameters','status');
+				var searchTerm = getMetaContent(response,'lw_searchParameters','query');
+				var resultsProgressBar = document.getElementById('incrementalResultsProgressBar');
+				var resultsDetails = document.getElementById('incrementalResultsDetails');
+
+				var hitsFoundInSourceCount = 0;
+				var sourcesCompleteCount = 0;
+				var finished = true;
+				
+				for (var i = 0; i < newResults.length; i++) {
+				  var oldAnchor = oldResults[i].getElementsByTagName('a')[0];
+				  var newAnchor = newResults[i].getElementsByTagName('a')[0];
+				  var newStatus = newAnchor.getAttribute('type');
+				
+				  if (newStatus == 'running') {
+				    finished = false;
+				  }
+				  else{
+				  	sourcesCompleteCount++;
+				  }
+
+				  //hide result items if engine is still running or it returned a zero hit count
+				  if ( newStatus == 'running' 
+				  	|| newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue == "timed out"
+				  	|| newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue == 0){
+				    oldResults[i].className = 'hide';
+				  }
+				  else{
+				    // display parent h3 heading as well as result
+				    oldResults[i].parentNode.parentNode.getElementsByTagName('h3')[0].className = '';
+				    oldResults[i].className = '';
+				    hitsFoundInSourceCount++;
+				  }
+
+				  // only write engine result count when status of engine has changed
+				  if (oldAnchor.getAttribute('type') != newStatus){
+					oldAnchor.setAttribute('type',newStatus);// = newStatus;
+					if (newResults[i].getElementsByTagName('span').length > 0) {
+						var hitCount = newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue;
+						if(hitCount == '0' && newStatus == 'successful') { 
+							hitCount = ' 0';
+						}
+						oldResults[i].appendChild(document.createTextNode(hitCount));
+					}
+				  }
+				}
+
+				//halt search after 60 seconds or if user halted
+				var newDate = new Date();
+				if ( newDate.getTime()-startTime > 60*1000 || haltIncremental ){
+					finished = true;
+				}
+				
+				// progress bar writing
+				if(!finished){
+					if(newResults.length > 0 && sourcesCompleteCount > 0){
+				  		var width = 100 * (sourcesCompleteCount / newResults.length);
+					}
+					else{
+						var width = 1;
+					}
+					resultsProgressBar.innerHTML = '<table><tr><td nowrap>Still searching...</td><td nowrap><div style="position:relative;left:2px;top:2px;border:1px solid #b2b193; width:200px;"><img width="' + width + '%" height="15" src="' + GLOBALS.basePath + '/images/templates/default/incrementalResultsProgressBar.gif" alt="progress bar" /></div></td><td nowrap>&nbsp;' + sourcesCompleteCount + ' of ' + newResults.length + ' sources searched. <a href="javascript:haltIncremental=true;void(0);">Stop Search</a></td></tr></table>';
+					setTimeout("getIncrementalResults();",GLOBALS.httpRequestInterval);
+					return 0;
+				}
+				else{
+					resultsProgressBar.innerHTML = '';
+					if(newResults.length > hitsFoundInSourceCount){
+				  		resultsProgressBar.innerHTML = 'Results in <strong>' + hitsFoundInSourceCount + '</strong> of <strong>' + newResults.length + '</strong> sources for <strong>' + searchTerm + '</strong> [<a id="zerotoggle" href="javascript:toggleIncrementalZeros(\'true\');">Show Details</a>]';
+				  	}
+				  	else if(newResults.length == hitsFoundInSourceCount){
+						resultsProgressBar.innerHTML = 'Results in <strong>' + hitsFoundInSourceCount + '</strong> of <strong>' + newResults.length + '</strong> sources contain <strong>' + searchTerm + '</strong>';
+				  	}
+				}
+			break;
+
+			//**************************
+			// JavaScript Object Notation
+			//  if this.callback is present, eval it with data, otherwise just return data
+			case "json":
+				var data = this.request.responseText;
+				if(this.callback){
+					eval(this.callback(data));
+				}
+				else{
+					return data;
 				}
 			break;
 
@@ -449,7 +470,12 @@ XMLClient.prototype = {
 				var result = response.getElementsByTagName('result')[0].firstChild.data;
 
 				if(result != 0 ){
-					var html = 'FindIt@Stanford eJournal: <a target="new" href="' + openurl + '"><b>' + result.replace(/ \[.*\]/,'') + '</b></a><br />';
+					var webtrendsCall = ''; // add webtrends call only if dcsMultiTrack() is defined
+					if(isDefined(window,'dcsMultiTrack')){
+						var dcsquery = openurl.substring(openurl.indexOf('?')+1,openurl.length);
+						webtrendsCall = "onclick=\"dcsMultiTrack('DCS.dcssip','sfx.stanford.edu','DCS.dcsuri','local','DCS.dcsquery','" + dcsquery + "','WT.ti','SFX','DCSext.keywords','" + keywords + "','DCSext.offsite_link','1');";
+					}
+					var html = 'FindIt@Stanford eJournal: <a target="_blank" title="Fulltext access to ' + result + '" href="' + openurl + '" ' + webtrendsCall + '><b>' + result.replace(/ \[.*\]/,'') + '</b></a><br />';
 
 					//create new sfxResults div (rely on refreshPopInBar to display)
 					var body = document.getElementsByTagName("body").item(0);
@@ -496,6 +522,10 @@ Array.prototype.sortByAlpha = function(){
 	}
 	return newArray;
 } 
+
+function isDefined(object, variable){
+	return (typeof(eval(object)[variable]) == 'undefined')? false: true;
+}
 
 // clean up keywords string: 
 // 	replace &amp; w/ & (i.e. undo JTidy)
@@ -616,6 +646,44 @@ function removeCookie(name){
 function setCookie(name,value) {
 	document.cookie = name + "=" + value + "; path=/; ";
 }
+
+function searchFormSelect(value){
+	if(typeof(value) == "number"){
+		document.searchForm.source.selectedIndex = value;
+	}
+    else{
+        for(var i = 0; i < document.searchForm.source.options.length; i++){
+                if(document.searchForm.source.options[i].value == value || document.searchForm.source.options[i].text.indexOf(value) > -1){
+                        document.searchForm.source.selectedIndex = i;
+                }
+        }
+	}
+	document.searchForm.source.onchange();
+}
+
+// create a dom object from a string of markup
+// borrowed heavily from dojo.dom.createDocumentFromText
+function string2dom(string, mimetype){
+	if(!mimetype) { mimetype = "text/xml"; }
+	if(isDefined('window','DOMParser')) {
+		var parser = new DOMParser();
+		return parser.parseFromString(string, mimetype);
+	}
+	else if(isDefined('window','ActiveXObject')){
+		var domDoc = new ActiveXObject("Microsoft.XMLDOM");
+		if(domDoc) {
+			domDoc.async = false;
+			domDoc.loadXML(string);
+			if(domDoc.parseError != 0){
+				alert("Document parse error\nCode:" + domDoc.parseError.errorCode + "\nLine:" + domDoc.parseError.line + "\nReason:" + domDoc.parseError.reason );
+			}
+			return domDoc;
+		}else{
+			alert("Error: can't create ActiveXObject('Microsoft.XMLDOM') object");
+		}
+	}
+	return null;
+}
 // end useful functions
 
 
@@ -627,9 +695,9 @@ function getIncrementalResults() {
 	var id = getMetaContent(document,'lw_searchParameters','id');
 	var source = getMetaContent(document,'lw_searchParameters','source');
 	var date = new Date();
-	var url = GLOBALS.basePath + '/content/search.html?id='+id+'&source='+source+'&secs='+date.getSeconds();
+	var url = GLOBALS.basePath + '/search.html?id='+id+'&source='+source+'&secs='+date.getSeconds();
 
-	var incremental = new XMLClient();
+	var incremental = new IOClient();
 	incremental.init('incremental',url);
 	incremental.get();
 }
@@ -737,7 +805,10 @@ function lastSelectValue(select){
 		}
 	}
 	else{
-		lastIndex = select.selectedIndex
+		lastIndex = select.selectedIndex;
+		if (arguments.length > 1 && arguments[1] == "portals") { /* portals drop-down */
+			window.location= GLOBALS.basePath + select.options[select.selectedIndex].value;
+		}
 	}
 }
 

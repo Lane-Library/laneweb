@@ -6,19 +6,19 @@
     <body>
 	<br/>
 	<!--  carfeul about moving elements here ... search.js looks for div[3], not named -->
-        <div id="lw_alt-title"><img src="/images/icons/scope-tiny.gif" alt="" align="middle" /> Inside Clinical</div>
+        <div id="lw_alt-title"><img src="/images/icons/scope-tiny.gif" alt="" align="middle" />Clinical</div>
         <div class="searchHeader">
  			<table id="searchHeaderTable" width="100%" cellspacing="0">
 				<tr>
 					<td class="searchHeaderLeft"><span class="searchHeaderTitle">Clinical Search</span></td>
-					<td id="incrementalResultsProgressBar" class="searchHeaderMiddle"> <!--  --></td>
+					<td id="incrementalResultsProgressBar" class="searchHeaderMiddle"><span style="margin-right:200px;">Search starting ... </span></td>
 					<td id="incrementalResultsDetails" class="searchHeaderRight"> <!--  original spec put final details here ... not currenty used--></td>
 				</tr>
 				<tr>
 					<td class="popInContent" colspan="3">
 				        <span id="spellResults">Go to <a href="portals/clinical.html">Clinical Portal</a> or Search: <a href="search.html?source=peds&amp;id={$id}">Pediatrics</a> 
 						| <a href="search.html?source=research&amp;id={$id}">Bioresearch</a>
-						| <a href="search.html?source=eLibrary&amp;id={$id}">eLibrary</a></span>
+						| <a href="search.html?source=eLibrary&amp;id={$id}">Laneconnex</a></span>
 
 
 					</td>
@@ -28,7 +28,7 @@
 	<!--  carfeul about moving elements here ... search.js looks for ordered elements, not named -->
      <div id="incrementalSearchResults" class="hide">
 	 
-     <div class="searchColumn3">
+     <div class="searchColumn3 largeFont">
           <div class="searchCategory">
           <h3 class="hide">Most Popular</h3>
           <ul>
@@ -49,7 +49,7 @@
           <h3 class="hide">Journal Articles</h3>
           <ul>
           <!--<li id="pubmed">PubMed: core clinical</li><li id="pubmed">PubMed: 1 year</li>-->
-            <li id="pubmed">PubMed@Stanford</li>
+            <li id="pubmed">PubMed @Stanford</li>
           </ul>
         </div>
 
@@ -101,7 +101,7 @@
 		
       </div>
 
-      <div class="searchColumn3">
+      <div class="searchColumn3 largeFont">
 	  
 		  <div class="searchCategory">
               <h3 class="hide">Drugs</h3>
@@ -177,7 +177,7 @@
 		  
      </div>
 	 
-      <div class="searchColumn3">
+      <div class="searchColumn3 largeFont">
 	 
  
 		<div class="searchCategory">
