@@ -1,6 +1,9 @@
-//**************************
+var date = new Date();
+var startTime = date.getTime();
+
+/**************************
 // create GLOBAL object and attributes
-//
+*/
 var GLOBALS = new Object();
 GLOBALS.basePath = '/./.';
 GLOBALS.httpRequestInterval = '1500';
@@ -10,12 +13,10 @@ GLOBALS.needsProxy = getMetaContent(document,'lw_proxyLinks');
 GLOBALS.proxyPrefix = 'http://laneproxy.stanford.edu/login?url=';
 GLOBALS.searchPath = GLOBALS.basePath + '/search.html';
 
-var date = new Date();
-var haltIncremental = false;
-var searching = false;
-var startTime = date.getTime();
-
-// handle error events with errorLogger method 
+/**************************
+// send all error events to errorLogger 
+// errorLogger writes events to web log
+*/
 window.onerror = errorLogger;
 function errorLogger(message, url, line){
 	var errorImg = document.createElement('img');
@@ -24,19 +25,21 @@ function errorLogger(message, url, line){
 	return false;
 }
 
-//**************************
-// slice results into format tabs
-//
+/**************************
+// slice eLibrary (Laneconnex) results into format tabs
+*/
 var eLibraryTabLabels = new Array('All','eJournals','Databases','eBooks','medCalcs','Lane Services');
 var eLibraryTabIDs = new Array('all','ej','database','book','cc','faq');
 var eLibraryResultCounts = [];
 var eLibraryActiveTab = null;
 
+// returns number of dt tags foudn within tabID
 function geteLibraryTabCount(tabID){
 	var tabResultLinks = document.getElementById(tabID).getElementsByTagName('dt');
 	return tabResultLinks.length;
 }
 
+// writes format-based tabs to document
 function initeLibraryTabs(){
 	for(var i = 0; i < eLibraryTabIDs.length; i++){
 		eLibraryResultCounts[eLibraryTabIDs[i]] = geteLibraryTabCount(eLibraryTabIDs[i]);
@@ -52,12 +55,12 @@ function initeLibraryTabs(){
 		if(isDefined(window,'dcsMultiTrack')){
 			webtrendsCall = "dcsMultiTrack('WT.ti','eLibrary search " + eLibraryTabIDs[i] + " tab','DCSext.keywords','cancer','DCSext.tab_view','" + eLibraryTabIDs[i] + "');";
 		}
-		//bar = bar + '<div id="' + eLibraryTabIDs[i] + 'Tab" class="eLibraryTab" title="' + elementContainerForDisplayText + '" name="' + eLibraryTabIDs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabIDs[i] + '\');">' + eLibraryTabLabels[i] + '<br /><span class="tabHitCount">' + intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]]) + '</span></div>';
 		bar = bar + '<div id="' + eLibraryTabIDs[i] + 'Tab" class="eLibraryTab" title="' + elementContainerForDisplayText + '" name="' + eLibraryTabIDs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabIDs[i] + '\');' + webtrendsCall + '">' + eLibraryTabLabels[i] + '<br /><span class="tabHitCount">' + intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]]) + '</span></div>';
 	}
 	document.getElementById('eLibraryTabs').innerHTML = bar;
 }
 
+// makes "tab" active
 function showeLibraryTab(tab){
 	// if active tab not specified, cookie trumps, then source parameter in URL, then default to all
 	if (!tab){
@@ -97,21 +100,27 @@ function showeLibraryTab(tab){
 	searchFormSelect(tab);
 
 	eLibraryActiveTab = tab;
-	refreshPopInBar();
+	refreshPopInContent();
 	setCookie('LWeLibSource',tab);
 }
 
+// sort results
+//  relevance-sort = as returned by erdb 
+//  alpha-sort = alpha sort done by sortByAlpha (extension of Array class)
+//  relevance-sorted results are stored in relevanceSortedResults variable if alpha-sort is executed
+//  the LWeLibNextSort cookie is used to track the appropriate *next* sort scheme
 var relevanceSortedResults;
 function sorteLibraryResults(){
 	var searchResults = document.getElementById('eLibrarySearchResults');
 	
+	var nextSort = '';
 	if(searchResults.getAttribute('name') == 'relevance-sort'){
-		var nextSort = 'alpha-sort';
+		nextSort = 'alpha-sort';
 		searchResults.innerHTML = relevanceSortedResults;
 		showeLibraryTab(eLibraryActiveTab);
 	}
 	else {
-		var nextSort = 'relevance-sort';
+		nextSort = 'relevance-sort';
 		relevanceSortedResults = document.getElementById('eLibrarySearchResults').innerHTML;
 
 		for( var i = 0; i < eLibraryTabIDs.length; i++){
@@ -136,19 +145,23 @@ function sorteLibraryResults(){
 
 	searchResults.setAttribute('name',nextSort);
 	setCookie('LWeLibNextSort',nextSort);
-	refreshPopInBar();
+	refreshPopInContent();
 }
 
-function refreshPopInBar(){
+// determines and displays relevant content below format tabs
+//	content includes: SFX and spelling results if any; sort drop-down; TabTipText (box appearing right of results); zeroResultsText 
+function refreshPopInContent(){
 	var popInContent = '';
 
 	if(document.getElementById('popInContent')){ 
 		document.getElementById('popInContent').className = 'hide';
 	}
 
+	/* content developers deleted
 	if(document.getElementById(eLibraryActiveTab + "TabBasicText")){
 		popInContent = document.getElementById(eLibraryActiveTab + "TabBasicText").innerHTML;
 	}
+	*/
 
 	// if zero results for active tab, display zeroResultsText
 	if(eLibraryResultCounts[eLibraryActiveTab] == 0 && document.getElementById(eLibraryActiveTab + "TabZeroResultsText")){
@@ -161,19 +174,17 @@ function refreshPopInBar(){
 	if(document.getElementById('spellResults')){ 
 		popInContent = document.getElementById('spellResults').innerHTML;
 	}
-	if(document.getElementById('suldbResults') && eLibraryActiveTab == 'database'){ 
-		popInContent += document.getElementById('suldbResults').innerHTML;
-	}
 
 	// if results, add sort-by drop-down
 	if(eLibraryResultCounts[eLibraryActiveTab] != 0){
 		var options = new Array('Relevance','A-Z');
 
+		var optionsHtml = '';
 		if(document.getElementById('eLibrarySearchResults').getAttribute('name') == 'relevance-sort'){
-			var optionsHtml = '<option>' + options[0] + '</option><option selected="true">' + options[1] + '</option>';
+			optionsHtml = '<option>' + options[0] + '</option><option selected="true">' + options[1] + '</option>';
 		}
 		else {
-			var optionsHtml = '<option selected="true">' + options[0] + '</option><option>' + options[1] + '</option>';
+			optionsHtml = '<option selected="true">' + options[0] + '</option><option>' + options[1] + '</option>';
 		}
 		popInContent += 'Sorted by <select name="sortBy" onchange="sorteLibraryResults();" style="font-size: 95%; font-weight: 400;">' + optionsHtml + '</select>';
 	}
@@ -183,8 +194,8 @@ function refreshPopInBar(){
 		document.getElementById('popInContent').className = 'popInContent';
 	}	
 
-	// show tabTip if any [*and* more than zero results]
-	//if(document.getElementById(eLibraryActiveTab + "TabTipText") && eLibraryResultCounts[eLibraryActiveTab] != 0){
+	// show tabTip if any 
+	//if(document.getElementById(eLibraryActiveTab + "TabTipText") && eLibraryResultCounts[eLibraryActiveTab] != 0){ //[*and* more than zero results]
 	if(document.getElementById(eLibraryActiveTab + "TabTipText") ){
 		var thisTabText = document.getElementById(eLibraryActiveTab + "TabTipText").innerHTML;
 		document.getElementById("tabTip").innerHTML = thisTabText;
@@ -194,28 +205,25 @@ function refreshPopInBar(){
 		document.getElementById("tabTip").className = 'hide';
 	}
 }
-// end slice results into format tabs
+// end slice eLibrary (Laneconnex) results into format tabs
 
 
 
-//**************************
+/**************************
 // XMLHttpRequest handler class
-// includes results processing and display
-//
+// includes result processing and display
+*/
 function IOClient() {};
-
 IOClient.prototype = {
-	source: null,
 	request: null,
 	type: null,
 	url: null,
 
-	init: function (type, url, source) {
-		this.source = source;
+	init: function (type, url) {
 		this.type = type;
 		this.url = url.replace(/amp;/g,''); // JTidy replaces & w/ &amp; ... &amp; becomes &amp;amp;
 
-		//sniff for IE/Mac
+		//sniff for IE on the Mac
 		if ( navigator.userAgent.indexOf('Mac') > -1 && (navigator.appVersion.indexOf('MSIE 5') > -1 || navigator.appVersion.indexOf('MSIE 6') > -1) ){
 			alert("Unsupported browser");
 			window.location.href= GLOBALS.basePath + '/howto/index.html?id=_869';
@@ -258,12 +266,13 @@ IOClient.prototype = {
 	process: function() {
 		switch(this.type){
 
-			//**************************
+			/**************************
 			// elib-meta:
 			//	get spelling suggestions
 			//	fetch PubMed, LOIS and Google results
 			// 	write hit counts to clinicalMetaCount and researchMetaCount divs
 			//	times out after 60 seconds
+			*/
 			case "elib-meta":
 				var xmlObj = this.request.responseXML.documentElement;
 				var engines = xmlObj.getElementsByTagName('engine');
@@ -276,7 +285,7 @@ IOClient.prototype = {
 				if(spellSuggestion && !document.getElementById('spellResults')){
 					var html = 'Did you mean: <a href="' + GLOBALS.searchPath + '?keywords=' + spellSuggestion + '"><i><strong>' + spellSuggestion + '</strong></i></a><br />';
 
-					//create new spellResults div (rely on refreshPopInBar to display)
+					//create new spellResults div (rely on refreshPopInContent to display)
 					var body = document.getElementsByTagName("body").item(0);
 					var spellDiv = document.createElement('div');
 					spellDiv.className = 'hide';
@@ -284,9 +293,9 @@ IOClient.prototype = {
 					spellDiv.setAttribute('id','spellResults');
 					body.appendChild(spellDiv);
 
-					refreshPopInBar();
+					refreshPopInContent();
 
-					// hide tip box ... or should this go into refreshPopInBar?
+					// hide tip box ... or should this go into refreshPopInContent?
 					//                  here only hides at popIn and if user continues to click, tip reappears (good?)
 					if (document.getElementById('tabTip')){
 						document.getElementById('tabTip').className = 'hide';
@@ -358,9 +367,12 @@ IOClient.prototype = {
 				}
 			break;
 
-			//**************************
+			/**************************
 			// Incremental metasearch results (clinical, peds, research searches)
-			// 
+			//  processing for XHTML version of incremental search results
+			//  full display version of results (headers, footers, etc.) used so that proxy prefixes are applied correctly (could just add proxy logic to ajax-search.xsl) 
+			//  note: string2dom w/in IE engine requires strict XHTML validity
+			*/ 
 			case "incremental":
 				var dom = string2dom(this.request.responseText);
 				var response = dom.documentElement;
@@ -373,7 +385,6 @@ IOClient.prototype = {
 						break;
 					}
 				}
-				//var newResults = divs['17'].getElementsByTagName('li');
 
 				var oldResults = document.getElementById('incrementalSearchResults').getElementsByTagName('li');
 				document.getElementById('incrementalSearchResults').className = 'unhide'; //display results
@@ -399,16 +410,6 @@ IOClient.prototype = {
 				  	sourcesCompleteCount++;
 				  }
 
-/*
-				  // grab href from metasearch app regardless of engine status
-				  // apply proxy prefix only if off campus (would like to remove this)
-				  if(GLOBALS.needsProxy != 'false'){
-					oldAnchor.setAttribute('href',GLOBALS.proxyPrefix + newAnchor.getAttribute('href') );
-				  }
-				  else{
-					oldAnchor.setAttribute('href',newAnchor.getAttribute('href'));
-				  }
-*/
 				  //hide result items if engine is still running or it returned a zero hit count
 				  if ( newStatus == 'running' 
 				  	|| newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue == "timed out"
@@ -443,11 +444,12 @@ IOClient.prototype = {
 				
 				// progress bar writing
 				if(!finished){
+					var width = 0;
 					if(newResults.length > 0 && sourcesCompleteCount > 0){
-				  		var width = 100 * (sourcesCompleteCount / newResults.length);
+				  		width = 100 * (sourcesCompleteCount / newResults.length);
 					}
 					else{
-						var width = 1;
+						width = 1;
 					}
 					resultsProgressBar.innerHTML = '<table><tr><td nowrap>Still searching...</td><td nowrap><div style="position:relative;left:2px;top:2px;border:1px solid #b2b193; width:200px;"><img width="' + width + '%" height="15" src="' + GLOBALS.basePath + '/images/templates/default/incrementalResultsProgressBar.gif" alt="progress bar" /></div></td><td nowrap>&nbsp;' + sourcesCompleteCount + ' of ' + newResults.length + ' sources searched. <a href="javascript:haltIncremental=true;void(0);">Stop Search</a></td></tr></table>';
 					setTimeout("getIncrementalResults();",GLOBALS.httpRequestInterval);
@@ -464,22 +466,9 @@ IOClient.prototype = {
 				}
 			break;
 
-			//**************************
-			// JavaScript Object Notation
-			//  if this.callback is present, eval it with data, otherwise just return data
-			case "json":
-				var data = this.request.responseText;
-				if(this.callback){
-					eval(this.callback(data));
-				}
-				else{
-					return data;
-				}
-			break;
-
-			//**************************
+			/**************************
 			// sfx results processing [eLibrary pop-in]
-			//
+			*/
 			case "sfx":
 				var response = this.request.responseXML.documentElement;
 				var openurl = response.getElementsByTagName('openurl')[0].firstChild.data;
@@ -493,7 +482,7 @@ IOClient.prototype = {
 					}
 					var html = 'FindIt@Stanford eJournal: <a target="_blank" title="Fulltext access to ' + result + '" href="' + openurl + '" ' + webtrendsCall + '><b>' + result.replace(/ \[.*\]/,'') + '</b></a><br />';
 
-					//create new sfxResults div (rely on refreshPopInBar to display)
+					//create new sfxResults div (rely on refreshPopInContent to display)
 					var body = document.getElementsByTagName("body").item(0);
 					var sfxDiv = document.createElement('div');
 					sfxDiv.className = 'hide';
@@ -501,7 +490,7 @@ IOClient.prototype = {
 					sfxDiv.setAttribute('id','sfxResults');
 					body.appendChild(sfxDiv);
 
-					refreshPopInBar();
+					refreshPopInContent();
 				}
 			break;
 		}
@@ -509,205 +498,210 @@ IOClient.prototype = {
 }
 
 
-//**************************
+/**************************
 // useful functions
-//
-
-// extend Array class
-Array.prototype.contains = function(searchValue){
-	for (var i = 0, elms = this.length; i < elms && this[i] !== searchValue; i++) ;
-		return i < elms;
-}
-Array.prototype.sortByAlpha = function(){
-	var LCArray = [];
-	var hash = [];
-
-	var nonFilingChars = /^(a|an|the|de|die|la|le|los|las|les) /;
-
-	for(var i = 0; i < this.length; i++){
-		LCArray[LCArray.length] = this[i].toString().toLowerCase().replace(nonFilingChars,'');
-		hash[this[i].toString().toLowerCase().replace(nonFilingChars,'')] = i;
+*/
+	// extensions to Array class
+	Array.prototype.contains = function(searchValue){
+		for (var i = 0, elms = this.length; i < elms && this[i] !== searchValue; i++) ;
+			return i < elms;
 	}
-
-	LCArray.sort();
-
-	var newArray = [];
-
-	for(var i = 0; i < LCArray.length; i++){
-		newArray[i] = this[hash[LCArray[i]]];
+	Array.prototype.sortByAlpha = function(){
+		var LCArray = [];
+		var hash = [];
+	
+		var nonFilingChars = /^(a|an|the|de|die|la|le|los|las|les) /;
+	
+		for(var i = 0; i < this.length; i++){
+			LCArray[LCArray.length] = this[i].toString().toLowerCase().replace(nonFilingChars,'');
+			hash[this[i].toString().toLowerCase().replace(nonFilingChars,'')] = i;
+		}
+	
+		LCArray.sort();
+	
+		var newArray = [];
+	
+		for(var i = 0; i < LCArray.length; i++){
+			newArray[i] = this[hash[LCArray[i]]];
+		}
+		return newArray;
+	} 
+	
+	function isDefined(object, variable){
+		return (typeof(eval(object)[variable]) == 'undefined')? false: true;
 	}
-	return newArray;
-} 
-
-function isDefined(object, variable){
-	return (typeof(eval(object)[variable]) == 'undefined')? false: true;
-}
-
-// clean up keywords string: 
-// 	replace &amp; w/ & (i.e. undo JTidy)
-//  URIescape
-function cleanKW(keywords){
-	keywords = escape(keywords.replace(/&amp;/g,'&'));
-	return keywords;
-}
-
-//getMetaContent Usage:
-// <meta name="lw_parameters" content="foo=bar;bar=foo;x=y"/>
-// <meta name="search_id" content="12"/>
-// getMetaContent(document,'search_id')
-// getMetaContent(document,'lw_parameters','foo', ';', '=')
-//
-function getMetaContent(node, name, paramName, paramDelim, valueDelim) {
-	var value = '';
-	if(!paramDelim){
-		paramDelim = ';';
+	
+	// clean up keywords string: 
+	// 	replace &amp; w/ & (i.e. undo JTidy)
+	//  URIescape
+	function cleanKW(keywords){
+		keywords = escape(keywords.replace(/&amp;/g,'&'));
+		return keywords;
 	}
-	else if(paramDelim == '&amp;'){
-		paramDelim = '&';
-	}
-	if(!valueDelim){
-		valueDelim = '=';
-	}
-	var metaTags = node.getElementsByTagName('meta');
-	for (var i = 0; i < metaTags.length; i++) {
-		if (metaTags[i].getAttribute('name') == name) {
-			if (paramName){
-				var pairs = [];
-				pairs = metaTags[i].getAttribute('content').split(paramDelim);
-				for (var y = 0; y < pairs.length; y++){
-					var pair = [];
-					pair = pairs[y].split(valueDelim);
-					if (pair[0] == paramName){
-						value = pair[1];
+	
+	// getMetaContent Usage:
+	//  <meta name="lw_parameters" content="foo=bar;bar=foo;x=y"/>
+	//  <meta name="search_id" content="12"/>
+	//  getMetaContent(document,'lw_parameters','foo', ';', '=')
+	//  getMetaContent(document,'search_id')
+	//
+	function getMetaContent(node, name, paramName, paramDelim, valueDelim) {
+		var value = '';
+		if(!paramDelim){
+			paramDelim = ';';
+		}
+		else if(paramDelim == '&amp;'){
+			paramDelim = '&';
+		}
+		if(!valueDelim){
+			valueDelim = '=';
+		}
+		var metaTags = node.getElementsByTagName('meta');
+		for (var i = 0; i < metaTags.length; i++) {
+			if (metaTags[i].getAttribute('name') == name) {
+				if (paramName){
+					var pairs = [];
+					pairs = metaTags[i].getAttribute('content').split(paramDelim);
+					for (var y = 0; y < pairs.length; y++){
+						var pair = [];
+						pair = pairs[y].split(valueDelim);
+						if (pair[0] == paramName){
+							value = pair[1];
+						}
 					}
 				}
+				else{
+					value = metaTags[i].getAttribute('content');
+				}
 			}
-			else{
-				value = metaTags[i].getAttribute('content');
+		}
+		return value;
+	}
+	
+	// exract parameter value from a URI-like query string
+	// if no string passed, assume query string of document
+	function getQueryContent(paramName,queryString) {
+		if(!queryString){
+			queryString = location.search;
+		}
+		var paramName = paramName + "=";
+	
+		if ( queryString.length > 0 ) {
+			startParam = queryString.indexOf ( paramName );
+			if ( startParam != -1 ) {
+				startParam += paramName.length;
+				endParam = queryString.indexOf ( "&" , startParam );
+				if ( endParam == -1 ) {
+					endParam = queryString.length
+				}
+				return unescape ( queryString.substring ( startParam, endParam) );
+			}
+		}
+		return 0;
+	}
+	
+	// add formatting (commas when > 999) to integers
+	function intToNumberString(number){
+		number = number.toString();
+		var pattern = /(\d+)(\d{3})/;
+		while (pattern.test(number)) {
+			number = number.replace(pattern, '$1' + ',' + '$2');
+		}
+		return number;
+	}
+	
+	function toggleNode(linkNode, toggleNode, onText, offText, additionalInvertedToggleID){
+		if(toggleNode.className != 'hide'){
+			toggleNode.className = 'hide';
+			linkNode.innerHTML = onText;
+			if(additionalInvertedToggleID){
+				document.getElementById(additionalInvertedToggleID).className = '';
+			}
+		}
+		else{
+			toggleNode.className = '';
+			linkNode.innerHTML = offText;
+			if(additionalInvertedToggleID){
+				document.getElementById(additionalInvertedToggleID).className = 'hide';
 			}
 		}
 	}
-	return value;
-}
-
-function getQueryContent(paramName,queryString) {
-	if(!queryString){
-		queryString = location.search;
-	}
-	var paramName = paramName + "=";
-
-	if ( queryString.length > 0 ) {
-		startParam = queryString.indexOf ( paramName );
-		if ( startParam != -1 ) {
-			startParam += paramName.length;
-			endParam = queryString.indexOf ( "&" , startParam );
-			if ( endParam == -1 ) {
-				endParam = queryString.length
+	
+	// cookie read, set, remove
+	function readCookie(name) {
+		var nameEQ = name + "=";
+		var cookieArray = document.cookie.split(';');
+		for(var i=0;i<cookieArray.length;i++){
+			var c = cookieArray[i];
+			while (c.charAt(0)==' ') {
+				c = c.substring(1,c.length);
 			}
-			return unescape ( queryString.substring ( startParam, endParam) );
-		}
-	}
-
-	return 0;
-}
-
-function intToNumberString(number){
-	number = number.toString();
-	var pattern = /(\d+)(\d{3})/;
-	while (pattern.test(number)) {
-		number = number.replace(pattern, '$1' + ',' + '$2');
-	}
-	return number;
-}
-
-function toggleNode(linkNode, toggleNode, onText, offText, additionalInvertedToggleID){
-	if(toggleNode.className != 'hide'){
-		toggleNode.className = 'hide';
-		linkNode.innerHTML = onText;
-		if(additionalInvertedToggleID){
-			document.getElementById(additionalInvertedToggleID).className = '';
-		}
-	}
-	else{
-		toggleNode.className = '';
-		linkNode.innerHTML = offText;
-		if(additionalInvertedToggleID){
-			document.getElementById(additionalInvertedToggleID).className = 'hide';
-		}
-	}
-}
-
-function readCookie(name) {
-	var nameEQ = name + "=";
-	var cookieArray = document.cookie.split(';');
-	for(var i=0;i<cookieArray.length;i++){
-		var c = cookieArray[i];
-		while (c.charAt(0)==' ') {
-			c = c.substring(1,c.length);
-		}
-		if (c.indexOf(nameEQ) == 0){
-			var value = c.substring(nameEQ.length,c.length);
-			return value;
-		}
-	}
-	return null;
-}
-function removeCookie(name){
-	if(readCookie(name)){
-		document.cookie = name + "=" + "; expires=Thu, 01-Jan-70 00:00:01 GMT";
-		return true;
-	}
-	return false;
-}
-function setCookie(name,value) {
-	document.cookie = name + "=" + value + "; path=/; ";
-}
-
-function searchFormSelect(value){
-	if(typeof(value) == "number"){
-		document.searchForm.source.selectedIndex = value;
-	}
-    else{
-        for(var i = 0; i < document.searchForm.source.options.length; i++){
-                if(document.searchForm.source.options[i].value == value || document.searchForm.source.options[i].text.indexOf(value) > -1){
-                        document.searchForm.source.selectedIndex = i;
-                }
-        }
-	}
-	document.searchForm.source.onchange();
-}
-
-// create a dom object from a string of markup
-// borrowed heavily from dojo.dom.createDocumentFromText
-function string2dom(string, mimetype){
-	if(!mimetype) { mimetype = "text/xml"; }
-	if(isDefined('window','DOMParser')) {
-		var parser = new DOMParser();
-		return parser.parseFromString(string, mimetype);
-	}
-	else if(isDefined('window','ActiveXObject')){
-		var domDoc = new ActiveXObject("Microsoft.XMLDOM");
-		if(domDoc) {
-			domDoc.async = false;
-			domDoc.loadXML(string);
-			if(domDoc.parseError != 0){
-				alert("Document parse error\nCode:" + domDoc.parseError.errorCode + "\nLine:" + domDoc.parseError.line + "\nReason:" + domDoc.parseError.reason );
+			if (c.indexOf(nameEQ) == 0){
+				var value = c.substring(nameEQ.length,c.length);
+				return value;
 			}
-			return domDoc;
-		}else{
-			alert("Error: can't create ActiveXObject('Microsoft.XMLDOM') object");
 		}
+		return null;
 	}
-	return null;
-}
-// end useful functions
+	function removeCookie(name){
+		if(readCookie(name)){
+			document.cookie = name + "=" + "; expires=Thu, 01-Jan-70 00:00:01 GMT";
+			return true;
+		}
+		return false;
+	}
+	function setCookie(name,value) {
+		document.cookie = name + "=" + value + "; path=/; ";
+	}
+	
+	// set form "searchForm" to a given value and trigger its onchange event
+	function searchFormSelect(value){
+		var formName = 'searchForm';
+		if(typeof(value) == "number"){
+			document[formName].source.selectedIndex = value;
+		}
+	    else{
+	        for(var i = 0; i < document[formName].source.options.length; i++){
+	                if(document[formName].source.options[i].value == value || document[formName].source.options[i].text.indexOf(value) > -1){
+	                        document[formName].source.selectedIndex = i;
+	                }
+	        }
+		}
+		document[formName].source.onchange();
+	}
+	
+	// create a dom object from a string of markup
+	// borrowed heavily from dojo.dom.createDocumentFromText
+	function string2dom(string, mimetype){
+		if(!mimetype) { mimetype = "text/xml"; }
+		if(isDefined('window','DOMParser')) {
+			var parser = new DOMParser();
+			return parser.parseFromString(string, mimetype);
+		}
+		else if(isDefined('window','ActiveXObject')){
+			var domDoc = new ActiveXObject("Microsoft.XMLDOM");
+			if(domDoc) {
+				domDoc.async = false;
+				domDoc.loadXML(string);
+				if(domDoc.parseError != 0){
+					alert("Document parse error\nCode:" + domDoc.parseError.errorCode + "\nLine:" + domDoc.parseError.line + "\nReason:" + domDoc.parseError.reason );
+				}
+				return domDoc;
+			}else{
+				alert("Error: can't create ActiveXObject('Microsoft.XMLDOM') object");
+			}
+		}
+		return null;
+	}
+// end of useful functions
 
 
 
-//**************************
+/**************************
 // additional incremental search functions
-//
-function getIncrementalResults() {
+*/
+var haltIncremental = false;
+function getIncrementalResults() { // kick off IOClient requests
 	var id = getMetaContent(document,'lw_searchParameters','id');
 	var source = getMetaContent(document,'lw_searchParameters','source');
 	var date = new Date();
@@ -718,7 +712,7 @@ function getIncrementalResults() {
 	incremental.get();
 }
 
-//toggle display of zero results and associated h3 headings
+// toggle display of zero results and associated h3 headings
 function toggleIncrementalZeros(toggle){
 	var headings = document.getElementById('incrementalSearchResults').getElementsByTagName('h3');
 	var results = document.getElementById('incrementalSearchResults').getElementsByTagName('li');
@@ -756,15 +750,18 @@ function toggleIncrementalZeros(toggle){
 // end additional incremental functions
 
 
-//**************************
-// 
+/**************************
+// route form submissions according to 'source' value
+*/
+var searching = false;
 function submitSearch() {
-  var source = document.searchForm.source.options[document.searchForm.source.selectedIndex].value;
-  var keywords = document.searchForm.keywords.value;
+  var formName = 'searchForm';
+  var source = document[formName].source.options[document[formName].source.selectedIndex].value;
+  var keywords = document[formName].keywords.value;
   var nokeywords = 'Please enter one or more search terms.';
 
   if(eLibraryTabIDs.contains(source)){
-  	setCookie('LWeLibSource',source);
+  	setCookie('LWeLibSource',source); // set source cookie so we know which format tab to return to
   }
   
   if (keywords == '') {
@@ -773,7 +770,7 @@ function submitSearch() {
   }
   else if (source.match(/(research|clinical|peds)/)) {
 	var dest = GLOBALS.searchPath + '?source=' + source + '&keywords=' + keywords + '&w=' + GLOBALS.incrementalSearchWait;
-    	window.location = dest;
+    window.location = dest;
 	return false;
   }
   else if (source == 'biomedsem') {
@@ -828,6 +825,7 @@ function lastSelectValue(select){
 	}
 }
 
+/*
 // catalog.html iframe
 function loadCatalogIframe(){
         var q = getQueryContent('keywords',location.href);
@@ -836,7 +834,7 @@ function loadCatalogIframe(){
         frame.className = '';
 }
 
-/*
+
 function openCitationMatcher(newWindow){
  	url = 'http://www.ncbi.nlm.nih.gov/entrez/query/static/citmatch.html';
  	var body = document.getElementsByTagName("body").item(0);

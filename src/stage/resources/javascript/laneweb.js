@@ -79,3 +79,22 @@ function openSearchResult(url,features) {
 	window.open(url, '', features);
 }
 
+function loadTab(n, maxTabsPerBox) {
+	for (var i=1; i<=maxTabsPerBox; i++) {
+		var elem = document.getElementById("tab" + i);
+		var elemContent = document.getElementById("tab" + i + "Content");
+		var hideClassIndex = elemContent.className.indexOf('hide');
+		if (i == n) {
+			elem.className = "activeTab";
+			if (hideClassIndex != -1) {
+				elemContent.className = elemContent.className.substring(0, hideClassIndex - 1);
+			}
+		} else {
+			elem.className = "bgTab";
+			if (hideClassIndex == -1) {
+				elemContent.className = elemContent.className + ' hide';
+			}
+		}
+	}
+}
+

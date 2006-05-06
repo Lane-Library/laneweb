@@ -123,6 +123,7 @@ body {
 .centerGreenBox h2 {
 	float: left;
 	width: auto;
+	margin-right: 4px;
 	padding-left: 20px;
 	padding-right: 35px;
 	color: white !important;
@@ -131,6 +132,15 @@ body {
 	border: 0px;
 	border-bottom: 3px solid #dbdbc9;
 }
+
+h2.activeTab {
+	background: #900 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
+}
+
+h2.bgTab {
+	background: #996 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
+}
+
 /*
 * html .centerGreenBox {
 	height: 1%;
@@ -290,7 +300,7 @@ ul ul {
 	padding-left: 6px;
 }
 
-li {
+ul li {
 	display: list-item;
 	background-image: url(/././images/templates/default/list-background-line.gif);
 	background-repeat: no-repeat;
@@ -515,6 +525,9 @@ h3 a:link, h3 a:visited {
 	margin-bottom:0;
 }
 */
+
+/* below replaced w/ Ryan's popInContent class */
+/*
 .taglineContainer{
 	clear: both;
 	position: relative;
@@ -529,7 +542,7 @@ h3 a:link, h3 a:visited {
 	border: 1px solid #99987a;
 	border-top: 5px solid #99987a;
 }
-
+*/
 /* Ryan's styles*/
 
 
@@ -621,7 +634,7 @@ h3 a:link, h3 a:visited {
 	padding-right: 0px;
 	padding-bottom: 5px;
 	padding-left: 20px;
-	margin: 0em;
+	margin: 0px;
 	margin-bottom: 10px;
 	border-top: 5px solid #99987a;
 	border-right: 1px solid #99987a;
