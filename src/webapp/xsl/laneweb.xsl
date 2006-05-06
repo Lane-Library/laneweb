@@ -152,7 +152,7 @@
                     <xsl:with-param name="link">
                         <xsl:choose>
                             <xsl:when test="$proxy-links = 'true' and $ticket != '' and $sunetid != ''">
-                                <xsl:text>http://irt-lane-proxy-fo.stanford.edu/login?user=</xsl:text>
+                                <xsl:text>http://irt-lane-proxy.stanford.edu/login?user=</xsl:text>
                                 <xsl:value-of select="$sunetid"/>
                                 <xsl:text>&amp;ticket=</xsl:text>
                                 <xsl:value-of select="$ticket"/>

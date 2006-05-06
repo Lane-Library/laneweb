@@ -43,7 +43,7 @@ body {
 	margin: 0px;
 	margin-bottom: 15px;
 	padding: 0px;
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 .sideBlueBox, .sideTanBox, .whiteBox  {
@@ -95,7 +95,8 @@ body {
 }
 
 .sideBlueBox h2, .sideBlueBox h2.SquareTitle {
-	background-color: #6784A2;
+	/* background-color: #6784A2;  - blue.*/
+	background-color: #B7B5AB; /* grey from cancer center */
 	text-transform: uppercase;
 }
 
@@ -122,21 +123,37 @@ body {
 .centerGreenBox h2 {
 	float: left;
 	width: auto;
+	margin-right: 4px;
 	padding-left: 20px;
 	padding-right: 35px;
 	color: white !important;
-	background: #996 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
+	/*background: #996 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right; */
+	background: #990000 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
 	border: 0px;
 	border-bottom: 3px solid #dbdbc9;
 }
 
+h2.activeTab {
+	background: #900 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
+}
+
+h2.bgTab {
+	background: #996 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
+}
+
+/*
+* html .centerGreenBox {
+	height: 1%;
+}
+*/
 .centerBlueBox h2 {
 	float: left;
 	width: auto;
 	padding-left: 20px;
 	padding-right: 35px;
 	color: white !important;
-	background: #6784A2 url(/././images/templates/default/whiteCornerBlueBoxTR.gif) no-repeat top right;
+	/* background: #6784A2 url(/././images/templates/default/whiteCornerBlueBoxTR.gif) no-repeat top right;  -- blue*/
+	background: #B7B5AB url(/././images/templates/default/whiteCornerBlueBoxTR.gif) no-repeat top right;  /* grey from cancer center */
 	border: 0px;
 	border-bottom: 1px solid #fff;
 }
@@ -265,8 +282,9 @@ div#bottomCurvedCorner {
 
 h1, .portalTitle {
 	padding-bottom: 15px;
-	font-family: serif;
-	font-weight: 700;
+	/* font-family: serif; */
+	font-family: arial;
+	/* font-weight: 700; */
 	color: #369;
 }
 
@@ -332,22 +350,31 @@ td.centralColumn div {
 * html td.centralColumn {
 	width: 100%;*//*IE weird doubling of padding problem fix - surreptitious */
 /*}*/
-
+	/*
 div#otherPortalOptions {
+
 	position:relative;
 	top: 1em;
 	left: 0px;
 	width: 100%;
 	height: 1em;
-	background: /*red*/transparent;
-}
+	background: transparent;
 
+}
+	*/
+form#portalForm {
+	margin: 0px;
+	padding: 0px;
+}
+	
 #portalForm select{
-	position: absolute;
-	bottom: 0px;
-	right: 0px;
-	width: 30%;
+	/*position: absolute;*/
+	float:right;
+	/*bottom: 0px;
+	right: 0px;*/
+	width: 25%;
 	height: auto;
+	font-size: 100%;
 	z-index: 100;
 }
 
@@ -386,9 +413,10 @@ div#otherPortalOptions {
 }
 
 h1 {
-	font-family: serif;
-	font-weight: 700;
-	color: #40668c;
+	/* font-family: serif; */
+	font-weight: 500;
+	/* color: #40668c;  --original blue */
+	color: #8F6650;
 	padding-top: 0px;
 	padding-bottom: 0px;
 	margin-top: 5px;
@@ -411,7 +439,7 @@ h3 {
 	color: #444;
 }
 
-.pList {
+.pList, p.noTopPadding {
 	padding-top:0;
 	margin-top:0;
 }
@@ -431,7 +459,7 @@ p a:link, p a:visited {
 }
 p.pList a:link, p.pList a:visited { 
 	text-decoration: none;
-}
+} 
 h3 a:link, h3 a:visited {
 	text-decoration: underline;
 }
@@ -762,7 +790,10 @@ dl li {background-image:none;}
 .rightColumnof2inBox, .rightColumnof3inBox {
 	margin-right: 0px;
 }
-
+.tableWithSidePadding td {
+	padding-right: 1em;
+	padding-bottom: .4em;
+}
 
 /*font specifications*/
 .smallFont {
@@ -778,30 +809,33 @@ dl li {background-image:none;}
 }
 
 h1, .portalTitle {
-	font-size: 1.9em;
-	margin-bottom: 20px;
+	font-size: 2em;
+	margin-bottom: 10px; /* pm changed from 20px Apr 20, let me know if I broke something */
 }
-
 h2 {
-	font-size: 0.9em;
+	font-size: 1.0em;
 }
-
-.centralColumn h2 {
-	font-size: 1.2em;
+h3 {
+	font-size: 1.0em;
 }
 /*
+.centralColumn h2 {
+	font-size: 1.1em;
+}
 .centralColumn .centerBlueBox h2, .centralColumn .whiteBox h2, .centralColumn .centerGreenBox h2 {
 	font-size: 1.2em;
 }
 */
+
 #tabTip h2 {
 	font-size: 1.5em;
 }
-
-h3 {
-	font-size: 1.0em;
-}
-
 #tabTip h4 {
 	font-size: 1.1em;
+}
+.whiteBox h2 {
+	font-size: 1.2em;
+}
+.searchHeaderTitle {
+	font-size: 1.2em;
 }

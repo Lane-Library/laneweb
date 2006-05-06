@@ -7,7 +7,6 @@
 		 -->
 		 		<link href="/style/default.css" rel="stylesheet" type="text/css" media="screen, print"/>
 				<link href="/style/default-print.css" rel="stylesheet" type="text/css" media="print"/>
-        <link href="/style/homepage.css" rel="stylesheet" type="text/css" media="screen, print"/>
 				<link href="/style/content.css" rel="stylesheet" type="text/css" media="screen, print"/>
         <meta name="WT.seg_1" content="{affiliation}"/>
         <meta name="lw_requestQuery" content="{query-string}"/>
@@ -22,19 +21,11 @@
 						 table {
 						 	font-size: 100%
 						}
-            #somLogoBottomBorder {
-							top: 40px;
-						}
-						#searchTopCorner {
-							top: 1px;
-						}
-            #searchContainerRoundedCorners {
-            	bottom:-2px;
+            #somLogoContainer {
+							height: 49px;
             }
-            #searchBottomCorner {
-            	bottom: 0px;
-							right: -3px;
-            }
+						#rightPanorama {
+	right: 0px;
             </style>
             <![endif]-->
 						
@@ -43,108 +34,119 @@
         <div id="pageContainer">
             <div id="pageHolder">
                 <div id="somLogoContainer">
-                    <a href="http://med.stanford.edu/"><img src="/images/templates/default/som-med.gif" width="138" height="39" alt="Stanford School of Medicine logo"/></a>
+                    <a href="http://med.stanford.edu/"><img src="/images/templates/default/som_logo_redo.gif" width="138" height="32" alt="Stanford School of Medicine logo"/></a>
                 </div>
                 <div id="outsideSiteLinksContainer">
-                    <div id="redCornerTL">
-                        <ul id="outsideSiteLinks">
+									<img id="topLinks" alt="links" src="/images/templates/default/top_bar_links.gif" width="620" height="12" />
+									<!--<ul id="outsideSiteLinks">
                             <li><a href="http://www.stanford.edu/">Stanford University</a></li>
                             <li>&#8226;&#160;<a href="http://www.stanfordhospital.com/default">Stanford Hospital Clinics</a></li>
                             <li>&#8226;&#160;<a href="http://www.lpch.org/">Lucile Packard Children Hospital</a></li>
                             <li>&#8226;&#160;<a href="http://www.palo-alto.med.va.gov/">VA Palo Alto</a></li>
                             <li>&#8226;&#160;<a href="http://www.sccgov.org/portal/site/vmc/">Santa Clara Valley Medical</a></li>
-                        </ul>
-                    </div>
+                        </ul>-->
                 </div>
                 <div id="laneConnexContainer">
-                  <a href="http://lane.stanford.edu/"><img src="/images/templates/default/laneConnexIndex.gif" alt="lane connex image" height="33" width="171"/></a>
+                  <a href="http://lane.stanford.edu/"><img src="/images/templates/default/laneconnex_logo_redo.gif" alt="lane connex image" height="27" width="160"/></a>
                 </div>
-                <div id="behindLaneConnexContainer">&#160;</div>
-                <div id="panoramicView">
-                    <img src="/images/templates/default/rightPanorama.jpg" alt="Lane panoramic pictures" id="rightPanorama"/>
-                </div>
+                <!--<div id="behindLaneConnexContainer">&#160;</div>-->
+
                 <div id="searchContainer">
-                    <div style="position: relative; top:0px; width: 100%; height: auto; overflow: hidden;">
-                        <span style="width: 70em; height:25px; margin-left: 115px;">
-                            <!--<ul id="searchDbs">
-                                <li><a href="eLibrary.html">eLibrary</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">eJournals</a></li><li><a href="eJournal.html">Google</a></li>
-                                </ul>-->
-                            <!--start image version-->
-                            
-                                <a href="/online/index.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('eLibrary','',imagePath+'eLibOn.jpg',1)"><img src="/images/templates/default/eLibOff.jpg" width="65" height="25" border="0" name="eLibrary" id="eLibrary" alt="eLibrary"/></a><a href="/online/ej.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('eJourn','',imagePath+'eJournOn.jpg',1)"><img src="/images/templates/default/eJournOff.jpg" name="eJourn" width="73" height="25" border="0" id="eJourn" alt="eJournals"/></a><a href="/portals/clinical.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('clin','',imagePath+'clinOn.jpg',1)"><img src="/images/templates/default/clinOff.jpg" name="clin" width="61" height="25" border="0" id="clin" alt="clinical"/></a><a href="/portals/bioresearch.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('research','',imagePath+'bioresearchOn.jpg',1)"><img src="/images/templates/default/bioresearchOff.jpg" name="research" width="88" height="25" border="0" id="research" alt="research"/></a><a href="/services/index.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('services','',imagePath+'laneServicesOn.jpg',1)"><img src="/images/templates/default/laneServicesOff.jpg" name="services" width="100" height="25" border="0" id="services" alt="services"/></a><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000" target="_blank" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('pubmed','',imagePath+'pubMedon.jpg',1)"><img src="/images/templates/default/pubMedoff.jpg" name="pubmed" width="66" height="25" border="0" id="pubmed" alt="pubmed"/></a><a href="http://www.google.com/" target="_blank" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('google','',imagePath+'googleOn.jpg',1)"><img src="/images/templates/default/googleOff.jpg" name="google" width="53" height="25" border="0" id="google" alt="google"/></a>
-                            
-                            <!--end image version-->
-                            <!--<a href="" class="searchLink"><span class="searchLinkText">PubMed</span><span class="searchLinkDivider">&#160;</span></a><a href="" class="searchLink"><span class="searchLinkText">Google</span><span class="searchLinkDividerEnd">&#160;</span></a>-->
-                            
-                        </span>
+									<div style="position: absolute; top: -1px; left: 0px; height: 1px; width: 100%; font-size: 1px; border-top: 1px solid #ddd; z-index: 6;">&#160;</div>
+									<div id="topCurve">
+                        <img src="/images/templates/default/curve.gif" alt="top curved corner of search container" width="60" height="29" />
+                    </div>
+                    <div style="position: relative; top:0px; width: 100%; height: auto;">
+
                         <form id="searchFormContainer" method="get" action="/search.html" onsubmit="return submitSearch()" name="searchForm">
                             <span class="searchText largeFont">Search</span>
                             <select onchange="lastSelectValue(this); listSearchTagline(this);" name="source" id="source" style="font-weight: 400; width: 140px">
-                                <option value="all">eLibrary</option>
-                                <option value="ej">&#160;&#160;&#160;eJournals</option>
-                                <option value="database">&#160;&#160;&#160;Databases</option>
-                                <option value="book">&#160;&#160;&#160;eBooks</option>
-                                <option value="cc">&#160;&#160;&#160;Calculators</option>
+                                <option value="all">Laneconnex</option>
+                                <option value="ej">&#160;&#160;eJournals</option>
+                                <option value="database">&#160;&#160;Databases</option>
+                                <option value="book">&#160;&#160;eBooks</option>
+                                <option value="cc">&#160;&#160;medCalcs</option>
                                 <option value="clinical">Clinical</option>
-                                <option value="peds">&#160;&#160;&#160;Pediatrics</option>
+                                <option value="peds">&#160;&#160;Pediatrics</option>
                                 <option value="research">Bioresearch</option>
                                 <option value="pubmed">PubMed</option>
                                 <option value="google">Google</option>
-                                <option disabled="disabled" >----------------</option>
                                 <option value="faq">Lane Services</option>
                                 <option value="catalog">Lane Catalog</option>
-                                <option value="biomedsem">Biomedical Seminars</option>
+                                <option value="biomedsem">Biomed Seminars</option>
                                 <option value="stanford_who">Stanford.Who</option>
                             </select>
-                            <span class="searchText largeFont">for</span>
-                            <input name="keywords" type="text" id="lw_search-keywords" style="font-size: 100%; font-weight: 400; width: 230px"/>
+
+                            <input name="keywords" type="text" id="lw_search-keywords" style="font-weight: 400; width: 230px"/>
                             <input type="submit" value="" id="searchFormSubmitButton"/>
                         </form>
-                        <span id="displaySearchTaglineText">Search for eJournals, databases, eBooks, and services.</span>
+                        <span id="displaySearchTaglineText">Find an eJournal, database, eBook, service, etc. or search inside reference sources.</span>
 												<div id="searchTaglineText"><!-- ids below = "select[@id='source']/option/@value" +  "SearchTagline"-->
-													<span id="allSearchTagline">Search for a journal, book, database, service or inside clinical and bioresearch reference sources.</span>
-													<span id="ejSearchTagline">Search for an online journal from 3000 biomedical titles and even more outside the field.</span>
-													<span id="databaseSearchTagline">Search for a database from 300 biomedical titles.</span>
-													<span id="bookSearchTagline">Search for an online book from 300 biomedical titles including a search of the Lane Catalog.</span>
-													<span id="ccSearchTagline">Search for an online clinical calculator from 300 titles, both web interactive and PDA applications.</span>
-													<span id="clinicalSearchTagline">Search inside texts and databases all at once, e.g., UpToDate, eMedicine, SKOLAR, MD Consult, Micromedex, PubMed, patient handouts.</span>
-													<span id="pedsSearchTagline">Search inside texts and databases all at once, e.g., UpToDate, eMedicine, SKOLAR, MD Consult, Micromedex, PubMed, patient handouts.</span>
-													<span id="researchSearchTagline">Search inside multiple literature and protocols databases all at once, e.g., PubMed, Science Citation, Current Protocols.</span>
-													<span id="pubmedSearchTagline">Launch a search in PubMed.</span>
-													<span id="googleSearchTagline">Launch a search in Google.</span>
-													<span id="faqSearchTagline">Search for a service or liaison or query frequently asked questions.</span>
-													<span id="catalogSearchTagline">Search the medical library catalog for online, print, archival and other materials.</span>
-													<span id="biomedsemSearchTagline">Search for an upcoming biomedical seminar or lecture at the medical center.</span>
-													<span id="stanford_whoSearchTagline">Search for faculty, staff and student in the Stanford directory.</span>
+													<span id="allSearchTagline">Find an eJournal, database, eBook, service, etc. or search inside reference sources.</span>
+													<span id="ejSearchTagline">Find an eJournal from over 3000 biomedical titles.</span>
+													<span id="databaseSearchTagline">Find a database from over 300 biomedical titles.</span>
+													<span id="bookSearchTagline">Find an eBook from over 300 biomedical titles.</span>
+													<span id="ccSearchTagline">Find clinical algorithms, predictive calculators and interactive clinical guidelines.</span>
+													<span id="clinicalSearchTagline">Search inside 130+ clinical reference texts and databases all at once.</span>
+													<span id="pedsSearchTagline">Search inside 30+ pediatric reference texts and databases all at once.</span>
+													<span id="researchSearchTagline">Search inside 30+ literature and protocols databases all at once.</span>
+													<span id="pubmedSearchTagline">Launch your search in PubMed@Stanford with links to fulltext.</span>
+													<span id="googleSearchTagline">Launch your search in Google.</span>
+													<span id="faqSearchTagline">Find a service, how-to or frequently asked question at Lane.</span>
+													<span id="catalogSearchTagline">Look up print, digital and archival materials at Lane.</span>
+													<span id="biomedsemSearchTagline">Look for upcoming biomedical seminars, grand rounds and symposia at Stanford.</span>
+													<span id="stanford_whoSearchTagline">Look up faculty, staff and students in the Stanford directory.</span>
 												</div>
                     </div>
+										<!--
 										<div style="position: absolute; bottom: -1px; left: 0px; height: 1px; width: 100%; font-size: 1px; border-bottom: 1px solid #ddd; z-index: 29;">&#160;</div>
-                    <div id="searchContainerRoundedCorners">
-                        <img src="/images/templates/default/searchBR.gif" alt="bottom negative rounded corner of search container" id="searchBottomCorner"/>
-                    </div>
-<!--
                     <div id="searchContainerRoundedCorners">
                         <img src="/images/templates/default/searchBR.gif" alt="bottom negative rounded corner of search container" id="searchBottomCorner"/>
                     </div>-->
                 </div>
-                <!--
-                    <div style="position: relative; top: -1px; left: 0px; z-index:70; background-color: #fff; height: 1px; width: 100%;">&#160;</div>
-                    --><!--
-								<div style="position: relative; top: 0px; left: 0px; z-index:70; background-color: #fff; height: 1px; font-size: 1px; width: 100%;">&#160;</div>-->
+								<div id="siteLinksContainer">
+									<span id="askUsContainer"><a href="/askus.html"><img src="/images/templates/default/question_mark.gif" alt="question mark" width="14" height="15"/></a>&#160;&#160;<span id="askUsText"><a href="/askus.html">Ask Us</a></span></span>
+                        <span id="siteLinks">
+													<span><a href="/online/ej.html" title="eJournals">eJournals</a></span>
+													<span><a href="/portals/bioresearch.html" title="Bioresearch">Bioresearch</a></span>
+													<span><a href="/portals/clinical.html" title="Clinical">Clinical</a></span>
+													<span><a href="/services/index.html" title="Lane services">Lane Services</a></span>
+													<span><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000" target="_blank" title="PubMed">Pubmed</a></span>
+													<span><a href="http://www.google.com/" target="_blank" title="Google">Google</a></span>
+                        </span>
+												<br style="clear:both;"/>
+                </div>
+								<div id="collage">
+                	<div id="panoramicView">&#160;</div>
+										<img src="/images/templates/default/rightCollage.jpg" alt="Lane panoramic pictures" id="rightPanorama" width="469" height="57"/>
+								</div>
                 <div id="contentBody">
-                    <div id="breadCrumb"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="">IRT</a> &gt; Laneconnex</div>
+                    <div id="breadCrumb"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="">IRT</a> &gt; <span id="lw_breadcrumb"/></div>
+					<noscript><h3>Enable JavaScript for a better experience with Laneconnex.</h3><br/></noscript>
                     <div id="lw_content"/>
                 </div>
                 <div id="footer">
                     <!--<div style="width: auto; height: 10px; background: #c5bd9f; margin-bottom: 5px;">&#160;</div>-->
                     <table width="100%">
-                        <tr>
-													<td width="25%" align="left" valign="top"><a href="http://lane.stanford.edu/"><img src="/images/templates/default/laneLogoFooter.gif" width="82" height="29" border="0" alt="Lane logo"/></a></td>
-                          <td width="50%" align="center" valign="top"><a href="http://lane.stanford.edu/" target="_blank">Lane Medical Library &#38; Knowledge Management Center</a><br/>
-														<div class="footerComment">A division of Information Resources and Technology</div>
-														&#169;2006 <a href="http://med.stanford.edu/">Stanford University School of Medicine</a> &#8226; <a href="http://www.stanford.edu/home/atoz/terms.html" target="_blank">Terms of Use</a><br/>
-                            <a href="/services/hours.html">Hours</a> &#8226; <a href="/services/directions.html">Directions</a> &#8226; <a href="/askus.html">Contact Us</a> &#8226; <a href="http://laneintranet.stanford.edu/">Lane Intranet</a></td>
-                          <td width="25%" align="right" valign="top"><a href="http://irt.stanford.edu/" target="_blank"><img src="/images/templates/default/irtLogoFooter.gif" width="89" height="30" border="0" alt="IRT logo"/></a></td>
+                    <tr>
+					<td width="25%" align="left" valign="top"><a href="http://lane.stanford.edu/"><img src="/images/templates/default/laneLogoFooter.gif" width="82" height="29" border="0" alt="Lane logo"/></a></td>
+                    <td width="50%" align="center" valign="top">
+						<div style="padding-bottom:.3em; text-transform: uppercase;font-size:.9em;"><a href="/services/hours.html">Hours</a>  	&#160;&#160;&#160;&#160;
+							<a href="/services/directions.html">Directions</a> &#160;&#160;&#160;&#160;
+							<a href="/askus.html">Contact Us</a> &#160;&#160;&#160;&#160;
+							<a href="/about.html">About Us</a> &#160;&#160;&#160;&#160;
+							<a href="http://laneintranet.stanford.edu/">Staff Intranet</a></div>
+						
+						<a href="http://lane.stanford.edu/" target="_blank">Lane Medical Library &#38; Knowledge Management Center</a><br/>
+						
+						<div class="footerComment">A division of Information Resources and Technology</div>
+						
+						&#169;2006 <a href="http://med.stanford.edu/">Stanford University School of Medicine</a> &#8226; 
+							<a href="http://www.stanford.edu/home/atoz/terms.html" target="_blank">Terms of Use</a><br/>
+                        
+					</td>
+                    <td width="25%" align="right" valign="top"><a href="http://irt.stanford.edu/" target="_blank"><img src="/images/templates/default/irtLogoFooter.gif" width="89" height="30" border="0" alt="IRT logo"/></a>
+					</td>
 													<!--
                             <td width="25%" align="left" valign="top">&#169;2006 <a href="http://med.stanford.edu/" target="_blank">Stanford University School of Medicine</a><br/>
                                 <a href="http://www.stanford.edu/" target="_blank">Stanford University</a>

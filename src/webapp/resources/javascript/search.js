@@ -52,6 +52,7 @@ function initeLibraryTabs(){
 		if(isDefined(window,'dcsMultiTrack')){
 			webtrendsCall = "dcsMultiTrack('WT.ti','eLibrary search " + eLibraryTabIDs[i] + " tab','DCSext.keywords','cancer','DCSext.tab_view','" + eLibraryTabIDs[i] + "');";
 		}
+		//bar = bar + '<div id="' + eLibraryTabIDs[i] + 'Tab" class="eLibraryTab" title="' + elementContainerForDisplayText + '" name="' + eLibraryTabIDs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabIDs[i] + '\');">' + eLibraryTabLabels[i] + '<br /><span class="tabHitCount">' + intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]]) + '</span></div>';
 		bar = bar + '<div id="' + eLibraryTabIDs[i] + 'Tab" class="eLibraryTab" title="' + elementContainerForDisplayText + '" name="' + eLibraryTabIDs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabIDs[i] + '\');' + webtrendsCall + '">' + eLibraryTabLabels[i] + '<br /><span class="tabHitCount">' + intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]]) + '</span></div>';
 	}
 	document.getElementById('eLibraryTabs').innerHTML = bar;
@@ -182,7 +183,8 @@ function refreshPopInBar(){
 		document.getElementById('popInContent').className = 'popInContent';
 	}	
 
-	// show tabTip if any
+	// show tabTip if any [*and* more than zero results]
+	//if(document.getElementById(eLibraryActiveTab + "TabTipText") && eLibraryResultCounts[eLibraryActiveTab] != 0){
 	if(document.getElementById(eLibraryActiveTab + "TabTipText") ){
 		var thisTabText = document.getElementById(eLibraryActiveTab + "TabTipText").innerHTML;
 		document.getElementById("tabTip").innerHTML = thisTabText;
@@ -324,7 +326,10 @@ IOClient.prototype = {
 
 							if(document.getElementById(resources[j].getAttribute('id') + 'SearchResults') 
 								&& resources[j].getElementsByTagName('hits').length > 0 ){
+								//&& resources[j].getElementsByTagName('hits')[0].firstChild.data > 0){
+								//document.getElementById(resources[j].getAttribute('id') + 'SearchResults').innerHTML = "<a target='new' href='" + resources[j].getElementsByTagName('url')[0].firstChild.data + "'>" + resources[j].getElementsByTagName('description')[0].firstChild.data + '<br /><span class="tabHitCount">' + intToNumberString(resources[j].getElementsByTagName('hits')[0].firstChild.data) + '</span></a>';
 								var container = document.getElementById(resources[j].getAttribute('id') + 'SearchResults');
+								//container.getElementsByTagName('a')[0].href = resources[j].getElementsByTagName('url')[0].firstChild.data;
 								container.getElementsByTagName('a')[0].innerHTML = resources[j].getElementsByTagName('description')[0].firstChild.data + '<br /><span class="tabHitCount">' + intToNumberString(resources[j].getElementsByTagName('hits')[0].firstChild.data) + '</span>';
 
 								if(resources[j].getAttribute('id') == 'google'){
@@ -368,6 +373,7 @@ IOClient.prototype = {
 						break;
 					}
 				}
+				//var newResults = divs['17'].getElementsByTagName('li');
 
 				var oldResults = document.getElementById('incrementalSearchResults').getElementsByTagName('li');
 				document.getElementById('incrementalSearchResults').className = 'unhide'; //display results
@@ -393,6 +399,16 @@ IOClient.prototype = {
 				  	sourcesCompleteCount++;
 				  }
 
+/*
+				  // grab href from metasearch app regardless of engine status
+				  // apply proxy prefix only if off campus (would like to remove this)
+				  if(GLOBALS.needsProxy != 'false'){
+					oldAnchor.setAttribute('href',GLOBALS.proxyPrefix + newAnchor.getAttribute('href') );
+				  }
+				  else{
+					oldAnchor.setAttribute('href',newAnchor.getAttribute('href'));
+				  }
+*/
 				  //hide result items if engine is still running or it returned a zero hit count
 				  if ( newStatus == 'running' 
 				  	|| newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue == "timed out"
@@ -761,24 +777,24 @@ function submitSearch() {
 	return false;
   }
   else if (source == 'biomedsem') {
-	openLink('http://med.stanford.edu/seminars/searchresults.jsp?searchString=' + keywords + '&Submit=Go');
+	openSearchResult('http://med.stanford.edu/seminars/searchresults.jsp?searchString=' + keywords + '&Submit=Go');
 	return false;
   }
   else if (source == 'catalog') {
 	var dest = 'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1=' + keywords + '&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50';
-	openLink(dest);
+	openSearchResult(dest);
 	return false;
   }
   else if (source == 'google') {
-	openLink('http://www.google.com/search?hl=en&q=' + keywords);
+	openSearchResult('http://www.google.com/search?hl=en&q=' + keywords);
 	return false;
   }
   else if (source == 'pubmed') {
-	openLink('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term=' + keywords);
+	openSearchResult('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term=' + keywords);
 	return false;
   }
   else if (source == 'stanford_who') {
-	openLink('https://stanfordwho.stanford.edu/lookup?search=' + keywords);
+	openSearchResult('https://stanfordwho.stanford.edu/lookup?search=' + keywords);
 	return false;
   }
 
@@ -819,3 +835,23 @@ function loadCatalogIframe(){
         frame.src = 'http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1=' + q + '&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50';
         frame.className = '';
 }
+
+/*
+function openCitationMatcher(newWindow){
+ 	url = 'http://www.ncbi.nlm.nih.gov/entrez/query/static/citmatch.html';
+ 	var body = document.getElementsByTagName("body").item(0);
+  	if(body){
+ 		var iframe = document.createElement('iframe');
+ 		iframe.src = 'http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&holding=F1000';
+ 		iframe.setAttribute('style','display:none;');
+ 		body.appendChild(iframe);
+ 	}
+	if(newWindow){
+ 		setTimeout("openSearchResult(url);",500);
+ 		return false;
+ 	}
+ 	else {
+ 		setTimeout("window.location = url;",2500);
+ 	}
+}
+*/
