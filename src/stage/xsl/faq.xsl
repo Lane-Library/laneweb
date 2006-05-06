@@ -9,6 +9,8 @@
     <xsl:param name="id"/>
     <xsl:param name="category"/>
     
+    <xsl:variable name="category-map" select="/h:html/h:body/h:div[@id='category-map']"/>
+    
     <xsl:template match="@*|node()">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
@@ -68,9 +70,11 @@
 -->
     </xsl:template>
     
-    <xsl:template match="h:li">
+    <!--<xsl:template match="h:li">
         <li><a href="/howto/index.html?category={text()}"><xsl:value-of select="text()"/></a></li>
-    </xsl:template>
+    </xsl:template>-->
+    
+    <xsl:template match="h:div[@id='categories' or @id='category-map']"/>
     
     <xsl:template match="h:li[@class='faq']" mode="dl">
         <dt>
@@ -84,37 +88,16 @@
     </xsl:template>
     
     <xsl:template match="h:li[@class='faq']" mode="full">
+        <xsl:variable name="primary-category" select="/h:html/h:body/h:ul/h:li[@id=$id]/h:ul/h:li[@class='primaryCategory']"/>
+        <xsl:variable name="root-category" select="/h:html/h:body/h:div[@id='categories']/h:ul/h:li[descendant-or-self::h:li/text() = $primary-category]/text()"/>
+        <xsl:variable name="root-category-string" select="$category-map/h:div[h:span=$root-category]/h:span[2]"/>
             <table cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tr>
                     <td valign="top" align="left" id="leftColumn">
-                        <div class="shortSideBlueBox">
-                            <h2>Books and Collections</h2>
-                            <ul>
-                                <li>
-                                    <a href="">Borrowing materials</a>
-                                    
-                                </li>
-                                <li>
-                                    <a href="">Course Reserves</a>
-                                </li>
-                                <li>
-                                    <a href="">Offsite Collections</a>
-                                </li>
-                                <li>
-                                    <a href="">Resource Core Grant Description</a>
-                                </li>
-                                <li>
-                                    <a href="">Reference Sources</a>
-                                </li>
-                                
-                                <li>
-                                    <a href="">Special Collections &amp; Archives</a>
-                                </li>
-                            </ul>
-                            <p>
-                                <a href="">All Services</a>
-                            </p>
-                        </div>
+                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
+                                <xi:fallback/>
+                            </xi:include>
                     </td>
                     <td valign="top" align="left" class="centralColumn">
                         <h1>
