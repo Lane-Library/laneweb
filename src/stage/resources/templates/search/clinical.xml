@@ -5,7 +5,6 @@
     </head>
     <body>
 	<br/>
-	<!--  carfeul about moving elements here ... search.js looks for div[3], not named -->
         <div id="lw_alt-title"><img src="/images/icons/scope-tiny.gif" alt="" align="middle" />Clinical</div>
         <div class="searchHeader">
  			<table id="searchHeaderTable" width="100%" cellspacing="0">
