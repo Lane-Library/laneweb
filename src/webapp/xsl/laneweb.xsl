@@ -431,7 +431,6 @@
     </xsl:template>
     <!-- the breadcrumb -->
     <xsl:template name="breadcrumb">
-        <xsl:param name="sitemap"/>
         <xsl:call-template name="breadcrumb-section">
             <xsl:with-param name="uri-before" select="'/'"/>
             <xsl:with-param name="uri-remaining">
@@ -441,6 +440,9 @@
                     </xsl:when>
                     <xsl:when test="contains($request-uri,'online/')">
                         <xsl:value-of select="substring-after($request-uri,'online/')"/>
+                    </xsl:when>
+                    <xsl:when test="$source-doc/h:head/h:meta[@name='lw_faqCategory']">
+                        <xsl:value-of select="substring-after($sitemap//h:a[.=$source-doc/h:head/h:meta[@name='lw_faqCategory']/@content]/@href,'/')"/>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="$request-uri"/>
@@ -477,9 +479,6 @@
             <xsl:when test="$uri-before = '/' and $uri-remaining='index.html'">
                 <xsl:text>LaneConnex</xsl:text>
             </xsl:when>
-            <xsl:when test="$uri-remaining = 'index.html' and $source-doc/h:head/h:meta[@name='lw_faqCategory']">
-                <xsl:value-of select="$source-doc/h:head/h:meta[@name='lw_faqCategory']/@content"/>
-            </xsl:when>
             <xsl:when test="$uri-remaining = 'index.html'">
                 <xsl:value-of select="$label-current"/>
             </xsl:when>
@@ -506,4 +505,5 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
 </xsl:stylesheet>

@@ -91,10 +91,6 @@
         <xsl:variable name="primary-category" select="/h:html/h:body/h:ul/h:li[@id=$id]/h:ul/h:li[@class='primaryCategory']"/>
         <xsl:variable name="root-category" select="/h:html/h:body/h:div[@id='categories']/h:ul/h:li[descendant-or-self::h:li/text() = $primary-category]/text()"/>
         <xsl:variable name="root-category-string" select="$category-map/h:div[h:span=$root-category]/h:span[2]"/>
-        <div><xsl:for-each select="/h:html/h:body/h:div[@id='categories']//h:li[descendant::h:li/text() = $primary-category]">
-            <a href="/services/index.html"><xsl:value-of select="text()"/></a><xsl:text> &gt; </xsl:text>
-        </xsl:for-each>
-        <xsl:value-of select="$primary-category"/></div>
             <table cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tr>
                     <td valign="top" align="left" id="leftColumn">
