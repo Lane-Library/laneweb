@@ -5,7 +5,7 @@
     
   <xsl:param name="url"/>
     
-    <xsl:variable name="webauth-url">https://irt-lane-proxy-fo.stanford.edu/cgi-bin/ezp-webauth?url=</xsl:variable>
+    <xsl:variable name="webauth-url">https://laneproxy.stanford.edu/cgi-bin/ezp-webauth?url=</xsl:variable>
     
     <xsl:template match="node()">
         <xsl:copy>

@@ -7,7 +7,7 @@
   <xsl:param name="ticket"/>
   <xsl:param name="title"/>
   <xsl:param name="proxy-links"/>   
-  <xsl:variable name="proxy-url">http://irt-lane-proxy.stanford.edu/login?</xsl:variable> 
+  <xsl:variable name="proxy-url">http://laneproxy.stanford.edu/login?</xsl:variable> 
 
   <xsl:template match="node()">
     <xsl:copy>

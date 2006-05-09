@@ -104,7 +104,7 @@
                             <xsl:text>openSearchResult('</xsl:text>
                             <xsl:choose>
                                 <xsl:when test="$proxy-links = 'true' and $ticket != '' and $sunetid != ''">
-                                    <xsl:text>http://irt-lane-proxy.fo.stanford.edu/login?user=</xsl:text>
+                                    <xsl:text>http://laneproxy.fo.stanford.edu/login?user=</xsl:text>
                                     <xsl:value-of select="$sunetid"/>
                                     <xsl:text>&amp;ticket=</xsl:text>
                                     <xsl:value-of select="$ticket"/>
@@ -113,7 +113,7 @@
                                 </xsl:when>
                                 <xsl:when test="$proxy-links = 'true'">
                                     <xsl:value-of select="concat('/',$context,'/secure/login.html?url=',@href)"/>
-                                    <!--<xsl:text>http://irt-lane-proxy-fo.stanford.edu/login?url=</xsl:text>
+                                    <!--<xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
                                     <xsl:value-of select="@href"/>-->
                                 </xsl:when>
                                 <xsl:otherwise>
@@ -152,7 +152,7 @@
                     <xsl:with-param name="link">
                         <xsl:choose>
                             <xsl:when test="$proxy-links = 'true' and $ticket != '' and $sunetid != ''">
-                                <xsl:text>http://irt-lane-proxy.stanford.edu/login?user=</xsl:text>
+                                <xsl:text>http://laneproxy.stanford.edu/login?user=</xsl:text>
                                 <xsl:value-of select="$sunetid"/>
                                 <xsl:text>&amp;ticket=</xsl:text>
                                 <xsl:value-of select="$ticket"/>
@@ -163,7 +163,7 @@
                                 <xsl:value-of select="concat('/secure/login.html?url=',.)"/>
                             </xsl:otherwise>
                             
-                            <!--<xsl:otherwise>http://irt-lane-proxy-fo.stanford.edu/login?url=<xsl:value-of select="."/></xsl:otherwise>-->
+                            <!--<xsl:otherwise>http://laneproxy.stanford.edu/login?url=<xsl:value-of select="."/></xsl:otherwise>-->
                         </xsl:choose>
                      </xsl:with-param>
                     <xsl:with-param name="attr" select="'href'"/>
