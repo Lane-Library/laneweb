@@ -5,7 +5,6 @@
     </head>
     <body>
 	<br/>
-	<!--  carfeul about moving elements here ... search.js looks for div[3], not named -->
         <div id="lw_alt-title"><img src="/images/icons/scope-tiny.gif" alt="" align="middle" />Clinical</div>
         <div class="searchHeader">
  			<table id="searchHeaderTable" width="100%" cellspacing="0">
@@ -16,11 +15,10 @@
 				</tr>
 				<tr>
 					<td class="popInContent" colspan="3">
-				        <span id="spellResults">Go to <a href="portals/clinical.html">Clinical Portal</a> or Search: <a href="search.html?source=peds&amp;id={$id}">Pediatrics</a> 
-						| <a href="search.html?source=research&amp;id={$id}">Bioresearch</a>
-						| <a href="search.html?source=eLibrary&amp;id={$id}">Laneconnex</a></span>
-
-
+				        <span id="spellResults">Try query in: <a href="search.html?source=peds&amp;id={$id}">Pediatrics</a>,  
+						<a href="search.html?source=research&amp;id={$id}">Bioresearch</a> or 
+						<a href="search.html?source=eLibrary&amp;id={$id}">Laneconnex</a>
+						| More on: <a href="portals/clinical.html">Clinical Portal</a></span>
 					</td>
 				</tr>
 			</table>
@@ -29,21 +27,17 @@
      <div id="incrementalSearchResults" class="hide">
 	 
      <div class="searchColumn3 largeFont">
-          <div class="searchCategory">
+        
+		<div class="searchCategory">
           <h3 class="hide">Most Popular</h3>
           <ul>
+		    <li id="lane_cc">Calculators</li>
 		    <li id="skolar_clin">Clin-eguide</li>
 			<li id="emedicine">eMedicine</li>
 			<li id="skolar_harrison">Harrison's</li>
             <li id="uptodate">UpToDate</li>
           </ul>
         </div>
-				  <div class="searchCategory">
-          <h3 class="hide">Calculators</h3>
-          <ul>
-            <li id="lane_cc">Web Interactive</li>
-          </ul>
-          </div>
 		  
 		<div class="searchCategory">
           <h3 class="hide">Journal Articles</h3>
@@ -56,29 +50,27 @@
  	    <div class="searchCategory">
            <h3 class="hide">Evidence &amp; Guidelines</h3>
            <ul>
-              <li id="skolar_dsr">Cochrane Reviews</li>
-              <li id="skolar_dare">Cochrane DARE</li>
-              <li id="skolar_cctr">Cochrane Trials</li>
-              <li id="skolar_clin">Clin-eguide</li>
-              <li id="skolar_ngc">NGC Guidelines</li>
-				<li id="aapguidelines">AAP Guidelines</li>
+            <li id="skolar_dsr">Cochrane Reviews</li>
+            <li id="skolar_dare">Cochrane DARE</li>
+            <li id="skolar_cctr">Cochrane Trials</li>
+            <li id="skolar_clin">Clin-eguide</li>
+            <li id="skolar_ngc">NGC Guidelines</li>
+			<li id="aapguidelines">AAP Guidelines</li>
 			<li id="skolar_pdq_pro">PDQ Cancer Guidelines</li>
 			<li id="skolar_sag">SHC Guidelines</li>    
            </ul>
 		</div>
+		
 		<div class="searchCategory">
               <h3 class="hide">Clinical Trials</h3>
               <ul>
-                  <!-- CHARLES - - need to add this one when you have time at http://clinicaltrials.gov/  and here the page
-                  on how to formulate the search request  http://clinicaltrials.gov/ct/info/help#Formula
-                  added cy -->
-               <li id="clinicaltrials">ClinicalTrials.gov</li>
+              <li id="clinicaltrials">ClinicalTrials.gov</li>
               </ul>
         </div>
 		
-				 <div class="searchCategory">
-          <h3 class="hide">Patient Handouts</h3>
-          <ul>
+		<div class="searchCategory">
+			<h3 class="hide">Patient Handouts</h3>
+			<ul>
             <li id="aappatient">AAP</li>
 			<li id="skolar_aafp">AAFP</li>
             <li id="mdchandout">MD Consult</li>
@@ -89,10 +81,10 @@
             <li id="skolar_handouts">NIH-CDC-FDA</li>
             <li id="skolar_pdq_pat">PDQ Cancer</li>
             <li id="am_patient">Postgraduate Medicine</li>
-          </ul>
-		  </div>
+			</ul>
+		</div>
 				  
-		          <div class="searchCategory">
+		<div class="searchCategory">
 			<h3 class="hide">Teaching Images</h3>
 			<ul>
             <li id="imagesmd">Images.MD</li>
@@ -100,29 +92,28 @@
         </div> 
 		
       </div>
-
       <div class="searchColumn3 largeFont">
 	  
 		  <div class="searchCategory">
-              <h3 class="hide">Drugs</h3>
-              <ul>
-                  <li id="micromedex_web">Micromedex</li>
-			      <li id="lexidrugid">LexiDrugID</li>	  
-                  <li id="skolar_atoz">A-Z Drug Facts</li>
-                  <li id="skolar_dfc">Drug Facts &amp; Comparisons</li>
+            <h3 class="hide">Drugs</h3>
+            <ul>
+            <li id="micromedex_web">Micromedex</li>
+			<li id="lexidrugid">LexiDrugID</li>	  
+            <li id="skolar_atoz">A-Z Drug Facts</li>
+            <li id="skolar_dfc">Drug Facts &amp; Comparisons</li>
 	   <!-- take this one out for now
                   <li id="skolar_fdam">FDA MedWatch</li> --> 
-                  <li id="am_goodman">Goodman &amp; Gilman Pharmacology</li>
-                  <li id="skolar_sag">Stanford Antibiotic Guidelines</li>
-              </ul>
+            <li id="am_goodman">Goodman &amp; Gilman Pharmacology</li>
+            <li id="skolar_sag">Stanford Antibiotic Guidelines</li>
+            </ul>
           </div>
 		  
 		  <div class="searchCategory">
-              <h3 class="hide">Natural Medicines</h3>
-              <ul>
-                  <li id="naturalstandard">Natural Standard</li>
-                  <li id="skolar_rnp">Review of Natural Products</li>
-              </ul>
+            <h3 class="hide">Natural Medicines</h3>
+            <ul>
+             <li id="naturalstandard">Natural Standard</li>
+             <li id="skolar_rnp">Review of Natural Products</li>
+             </ul>
           </div>
 		  
 		  <div class="searchCategory">
@@ -158,7 +149,7 @@
               </ul>
           </div>
 
-		  			<div class="searchCategory">
+		  <div class="searchCategory">
               <h3 class="hide">General &amp; Primary Care Texts</h3>
               <ul>
 			      <li id="mdc_goldman">Cecil Textbook of Medicine</li>
@@ -176,41 +167,36 @@
           </div> 
 		  
      </div>
-	 
       <div class="searchColumn3 largeFont">
 	 
- 
 		<div class="searchCategory">
               <h3 class="hide">Specialty Texts</h3>
               <ul>
-                  <li id="skolar_koopman">Arthritis &amp; Allied Conditions</li>
+                <li id="skolar_koopman">Arthritis &amp; Allied Conditions</li>
 				<li id="am_endocrinology">Basic &amp; Clinical Endocrinology</li>
-                  <li id="skolar_loeser">Bonica's Management of Pain</li>
-                  <li id="mdc_braunwald">Braunwald's Heart Disease</li>
-                  <li id="mdc_brenner">Brenner &amp; Rector's The Kidney</li>
-                  <li id="mdc_canale">Campbell's Orthopaedics</li>
-                  <li id="mdc_walsh">Campbell's Urology</li>
-                  <li id="mdc_abeloff">Clinical Oncology</li>
-
-                  <li id="skolar_harwood-nuss">Clinical Emergency Medicine</li>
-				  <li id="mdc_ford">Clinical Toxicology</li>
-                  <li id="mdc_cohen">Cohen's Infectious Diseases</li>
-                  <li id="mdc_stenchever">Comprehensive Gynecology</li>
-                  <li id="skolar_sadock">Comp. Textbook of Psychiatry</li>
-                  <li id="skolar_scott">Danforth's Ob &amp; Gyn</li>
-                  <li id="mdc_delee">DeLee's Sports Medicine</li>
-                  <li id="skolar_devita">Devita's Cancer</li>
-                  <li id="mdc_grainger">Diagnostic Radiology</li>
-                  <li id="skolar_schrier">Diseases of Kidney &amp; Urinary Tract</li>
-                  <!-- see note about Roberts' above -->
-                  <!--<li id="mdc_roberts">Roberts' Emergency Medicine</li>-->
-                  <li id="skolar_becker">Endocrinology &amp; Metabolism</li>
-                  <li id="mdc_mettler">Essentials of Radiology</li>
-                  <li id="am_fitzpatrick">Fitzpatrick's Color Atlas</li>
-                  <li id="skolar_freedberg">Fitzpatrick's Dermatology</li>
-                  <li id="mdc_gabbe">Gabbe's Obstetrics</li>
-                  <li id="mdc_feldman">Gastrointestinal &amp; Liver Disease</li>
-				  <li id="am_ophthalmology">General Ophthalmology</li>
+                <li id="skolar_loeser">Bonica's Management of Pain</li>
+                <li id="mdc_braunwald">Braunwald's Heart Disease</li>
+                <li id="mdc_brenner">Brenner &amp; Rector's The Kidney</li>
+                <li id="mdc_canale">Campbell's Orthopaedics</li>
+                <li id="mdc_walsh">Campbell's Urology</li>
+                <li id="mdc_abeloff">Clinical Oncology</li>
+                <li id="skolar_harwood-nuss">Clinical Emergency Medicine</li>
+				<li id="mdc_ford">Clinical Toxicology</li>
+                <li id="mdc_cohen">Cohen's Infectious Diseases</li>
+                <li id="mdc_stenchever">Comprehensive Gynecology</li>
+                <li id="skolar_sadock">Comp. Textbook of Psychiatry</li>
+                <li id="skolar_scott">Danforth's Ob &amp; Gyn</li>
+                <li id="mdc_delee">DeLee's Sports Medicine</li>
+                <li id="skolar_devita">Devita's Cancer</li>
+                <li id="mdc_grainger">Diagnostic Radiology</li>
+                <li id="skolar_schrier">Diseases of Kidney &amp; Urinary Tract</li>
+                <li id="skolar_becker">Endocrinology &amp; Metabolism</li>
+                <li id="mdc_mettler">Essentials of Radiology</li>
+                <li id="am_fitzpatrick">Fitzpatrick's Color Atlas</li>
+                <li id="skolar_freedberg">Fitzpatrick's Dermatology</li>
+                <li id="mdc_gabbe">Gabbe's Obstetrics</li>
+                <li id="mdc_feldman">Gastrointestinal &amp; Liver Disease</li>
+				<li id="am_ophthalmology">General Ophthalmology</li>
                   <li id="mdc_habif">Habif's Clinical Dermatology</li>
                   <li id="mdc_hoffman">Hematology: principles &amp; practice</li>
                   <li id="am_hurst">Hurst's the Heart</li>
@@ -255,7 +241,6 @@
           </div>
 		  
       </div>
-	  
       </div>
 			<script type="text/javascript">
 				// only load getIncrementalResults() after page is completely loaded
