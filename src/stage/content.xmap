@@ -93,6 +93,11 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
+            <map:match type="wildcard" pattern="treemenu">
+                <map:generate type="file" src="{request-param:source}"/>
+                <map:transform type="xslt" src="{defaults:stage-base}/xsl/treemenu.xsl"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
             <map:match type="wildcard" pattern="howto/index.html">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq-test.html"/>
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/faq.xsl"/>

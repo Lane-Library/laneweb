@@ -72,7 +72,7 @@
 #topLinks {
 	position: relative;
 	top:0px;
-	left: 180px;
+	left: 185px;
 }
 
 #siteLinksContainer {
@@ -230,6 +230,12 @@
 
 #searchTaglineText {
 	display: none;
+}
+/* a container div need for img b/c of IE not displaying img otherwise when absolutely positioned.*/
+#irtLogoContainer {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
 }
 
 select, input {

@@ -35,7 +35,7 @@ _a=document.getElementById(eLibraryTabIDs[i]+"SearchTagline").innerHTML;
 }
 var _b="";
 if(isDefined(window,"dcsMultiTrack")){
-_b="dcsMultiTrack('WT.ti','eLibrary search "+eLibraryTabIDs[i]+" tab','DCSext.keywords','cancer','DCSext.tab_view','"+eLibraryTabIDs[i]+"');";
+_b="dcsMultiTrack('WT.ti','Laneconnex search "+eLibraryTabIDs[i]+" tab','DCSext.keywords','cancer','DCSext.tab_view','"+eLibraryTabIDs[i]+"');";
 }
 _8=_8+"<div id=\""+eLibraryTabIDs[i]+"Tab\" class=\"eLibraryTab\" title=\""+_a+"\" name=\""+eLibraryTabIDs[i]+"\" onclick=\"javascript:showeLibraryTab('"+eLibraryTabIDs[i]+"');"+_b+"\">"+eLibraryTabLabels[i]+"<br /><span class=\"tabHitCount\">"+intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]])+"</span></div>";
 }
@@ -111,15 +111,6 @@ var _1b="";
 if(document.getElementById("popInContent")){
 document.getElementById("popInContent").className="hide";
 }
-if(eLibraryResultCounts[eLibraryActiveTab]==0&&document.getElementById(eLibraryActiveTab+"TabZeroResultsText")){
-_1b=document.getElementById(eLibraryActiveTab+"TabZeroResultsText").innerHTML;
-}
-if(document.getElementById("sfxResults")&&(eLibraryActiveTab=="all"||eLibraryActiveTab=="ej")){
-_1b+=document.getElementById("sfxResults").innerHTML;
-}
-if(document.getElementById("spellResults")){
-_1b=document.getElementById("spellResults").innerHTML;
-}
 if(eLibraryResultCounts[eLibraryActiveTab]!=0){
 var _1c=new Array("Relevance","A-Z");
 var _1d="";
@@ -128,7 +119,17 @@ _1d="<option>"+_1c[0]+"</option><option selected=\"true\">"+_1c[1]+"</option>";
 }else{
 _1d="<option selected=\"true\">"+_1c[0]+"</option><option>"+_1c[1]+"</option>";
 }
-_1b+="Sorted by <select name=\"sortBy\" onchange=\"sorteLibraryResults();\" style=\"font-size: 95%; font-weight: 400;\">"+_1d+"</select>";
+_1b+="Sorted by <select name=\"sortBy\" onchange=\"sorteLibraryResults();\" style=\"font-size: 95%; font-weight: 400;\">"+_1d+"</select>&nbsp;&nbsp;&nbsp;&nbsp;";
+}else{
+if(document.getElementById(eLibraryActiveTab+"TabZeroResultsText")&&!(document.getElementById("sfxResults")&&(eLibraryActiveTab=="all"||eLibraryActiveTab=="ej"))){
+_1b=document.getElementById(eLibraryActiveTab+"TabZeroResultsText").innerHTML;
+}
+}
+if(document.getElementById("sfxResults")&&(eLibraryActiveTab=="all"||eLibraryActiveTab=="ej")){
+_1b+=document.getElementById("sfxResults").innerHTML;
+}
+if(document.getElementById("spellResults")){
+_1b=document.getElementById("spellResults").innerHTML;
 }
 if(_1b!=""){
 document.getElementById("popInContent").innerHTML=_1b;

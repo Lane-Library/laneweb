@@ -168,6 +168,7 @@ h2.bgTab {
 }
 
 .whiteBoxDivider {
+	clear: both;
 	width: 90%;
 	height: 6px;
 	font-size: 6px; /* avoid default auto height in IE */
@@ -175,6 +176,12 @@ h2.bgTab {
 	margin: 0 auto;
 }
 
+/* for search info boxes */
+/*
+.whiteBox ul {
+	text-align: left;
+}
+*/
 .sideBlueBoxShortContent, .sideBlueBoxLongContent, .sideTanBoxContent, .centerGreenBoxContent, .whiteBoxContent, .centerBlueBoxContent {
 	height: 1%; /* solves dissolving/vanishing borders in IE */
 	padding: 5px;
@@ -268,6 +275,7 @@ div#bottomCurvedCorner {
 
 #footer td {
 	white-space: nowrap;
+	line-height: 130%;
 }
 
 .footerComment {
@@ -331,6 +339,8 @@ li img {
 
 td#leftColumn, td#rightColumn {
 	width: 180px;
+	height: auto;
+	vertical-align: top;
 	overflow: hidden;
 }
 
@@ -338,6 +348,7 @@ td.centralColumn {
 	width:auto;
 	padding-left: 15px;
 	padding-right: 15px;
+	vertical-align: top;
 	/*text-align: center; exploiting IE hack to center column boxes*/
 }
 
@@ -706,19 +717,13 @@ div#incrementalSearchResults ul  {
 	padding-left:0em;
 	list-style:none;
 }
-div#incrementalSearchResults li {
-	padding-left: .6em;
-	background-image: url(/images/list-background-line.gif);
-	background-repeat: no-repeat;
-	background-position: 0 0;
-	padding-bottom: .2em;
-}
+
 .searchColumn3 { float:left; width:31%;margin:0;padding:0}
 
 /* used on incremental results page to make micromedex static result look like incremental */
 p.micromedex {
         padding-left: .6em;
-        background-image: url(/images/list-background-line.gif);
+        background-image: url(/././images/templates/default/list-background-line.gif);
         background-repeat: no-repeat;
         background-position: 0 0;
         margin-bottom: 0.15em;
@@ -795,9 +800,36 @@ h3 {
 	font-size: 1.2em;
 }
 */
+
+
 .whiteBox h2 {
 	font-size: 1.2em;
 }
-.searchHeaderTitle {
+.searchHeader {
 	font-size: 1.2em;
+}
+#tabTip .whiteBox {
+	font-size: 0.9em;
+}
+
+/* search info */
+#popInContent, .popInContent{
+	font-size: 1.1em;
+}
+
+#spellResults {
+	font-size: 0.8em;
+}
+
+/* Ryan's play stuff */
+.treemenuTrigger{
+	color: #990000;
+	cursor: pointer;
+	cursor: hand;
+	display: block;
+}
+.treemenuBranch{
+	display: none;
+	margin-left: 16px;
+	margin-bottom: -16px;
 }
