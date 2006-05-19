@@ -265,12 +265,19 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
 			queryBuffer.append("\nAND ERESOURCE.CORE = 'Y'");
 		}
 		if (this.alpha != null) {
-			queryBuffer.append("\nAND LOWER(SUBSTR(").append(titleTable)
-					.append(",1,1)) ");
+			queryBuffer.append("\nAND ");
 			if (this.alpha.equals("#")) {
-				queryBuffer.append("< 'A' ");
+				
 			} else {
-				queryBuffer.append("= '").append(this.alpha).append("'");
+				queryBuffer.append("LOWER(SUBSTR(").append(titleTable)
+				.append(",1,1)) = '").append(this.alpha).append("'");
+			}
+			if (this.alpha.equals("#")) {
+				queryBuffer.append("(SUBSTR(")
+				.append(titleTable)
+				.append(",1,1) < 'A' OR SUBSTR(")
+				.append(titleTable)
+				.append(",1,1) > 'z')");
 			}
 		}
 		if (this.translatedQuery != null) {
@@ -288,5 +295,4 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
 		}
 		queryBuffer.append(ORDER);
     }
-
 }
