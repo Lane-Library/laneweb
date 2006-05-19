@@ -24,6 +24,7 @@
 			</table>
         </div>
 	<!--  carfeul about moving elements here ... search.js looks for ordered elements, not named -->
+			Source will open in a new window.
      <div id="incrementalSearchResults" class="hide">
 	 
      <div class="searchColumn3 largeFont">
@@ -35,18 +36,19 @@
 		    <li id="skolar_clin">Clin-eguide</li>
 			<li id="emedicine">eMedicine</li>
 			<li id="skolar_harrison">Harrison's</li>
+			 <li id="pubmed">PubMed@Stanford</li>
             <li id="uptodate">UpToDate</li>
           </ul>
         </div>
-		  
+		 <!-- 
 		<div class="searchCategory">
           <h3 class="hide">Journal Articles</h3>
           <ul>
-          <!--<li id="pubmed">PubMed: core clinical</li><li id="pubmed">PubMed: 1 year</li>-->
-            <li id="pubmed">PubMed @Stanford</li>
+          <li id="pubmed">PubMed: core clinical</li><li id="pubmed">PubMed: 1 year</li>
+            <li id="pubmed">PubMed@Stanford</li>
           </ul>
         </div>
-
+	-->
  	    <div class="searchCategory">
            <h3 class="hide">Evidence &amp; Guidelines</h3>
            <ul>
@@ -60,13 +62,7 @@
 			<li id="skolar_sag">SHC Guidelines</li>    
            </ul>
 		</div>
-		
-		<div class="searchCategory">
-              <h3 class="hide">Clinical Trials</h3>
-              <ul>
-              <li id="clinicaltrials">ClinicalTrials.gov</li>
-              </ul>
-        </div>
+
 		
 		<div class="searchCategory">
 			<h3 class="hide">Patient Handouts</h3>
@@ -101,8 +97,6 @@
 			<li id="lexidrugid">LexiDrugID</li>	  
             <li id="skolar_atoz">A-Z Drug Facts</li>
             <li id="skolar_dfc">Drug Facts &amp; Comparisons</li>
-	   <!-- take this one out for now
-                  <li id="skolar_fdam">FDA MedWatch</li> --> 
             <li id="am_goodman">Goodman &amp; Gilman Pharmacology</li>
             <li id="skolar_sag">Stanford Antibiotic Guidelines</li>
             </ul>
@@ -169,7 +163,15 @@
      </div>
       <div class="searchColumn3 largeFont">
 	 
+
+				
 		<div class="searchCategory">
+              <h3 class="hide">Clinical Trials</h3>
+              <ul>
+              <li id="clinicaltrials">ClinicalTrials.gov</li>
+              </ul>
+        </div>
+				<div class="searchCategory">
               <h3 class="hide">Specialty Texts</h3>
               <ul>
                 <li id="skolar_koopman">Arthritis &amp; Allied Conditions</li>
@@ -226,7 +228,7 @@
                   <li id="mdc_green">Skeletal Trauma in Children</li>
                   <li id="skolar_schwartz">Schwartz's Principles of Surgery</li>
                   <li id="am_smith">Smith's General Urology</li>
-                  <li id="skolar_topol">Textbk of Cardiovascular Medicine</li>
+                  <li id="skolar_topol">Textbook Cardiovascular Medicine</li>
                   <li id="mdc_goetz">Textbook of Clinical Neurology</li>
                   <li id="skolar_yamada">Textbook of Gastroenterology</li>
                   <li id="skolar_crapo">Textbook of Pulmonary Diseases</li>
@@ -241,6 +243,7 @@
           </div>
 		  
       </div>
+      <div style="clear:both;height:3px;font-size:3px;">&#160;</div>
       </div>
 			<script type="text/javascript">
 				// only load getIncrementalResults() after page is completely loaded

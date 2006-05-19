@@ -196,9 +196,6 @@ _2b.innerHTML=_29;
 _2b.setAttribute("id","spellResults");
 _2a.appendChild(_2b);
 refreshPopInContent();
-if(document.getElementById("tabTip")){
-document.getElementById("tabTip").className="hide";
-}
 }
 if(_26=="successful"||_26=="running"){
 var _2c=0;
@@ -404,98 +401,98 @@ function getQueryContent(_68,_69){
 if(!_69){
 _69=location.search;
 }
-var _6a=_6a+"=";
+_68+="=";
 if(_69.length>0){
-startParam=_69.indexOf(_6a);
-if(startParam!=-1){
-startParam+=_6a.length;
-endParam=_69.indexOf("&",startParam);
-if(endParam==-1){
-endParam=_69.length;
+var _6a=_69.indexOf(_68);
+if(_6a!=-1){
+_6a+=_68.length;
+var _6b=_69.indexOf("&",_6a);
+if(_6b==-1){
+_6b=_69.length;
 }
-return unescape(_69.substring(startParam,endParam));
+return unescape(_69.substring(_6a,_6b));
 }
 }
 return 0;
 }
-function intToNumberString(_6b){
-_6b=_6b.toString();
-var _6c=/(\d+)(\d{3})/;
-while(_6c.test(_6b)){
-_6b=_6b.replace(_6c,"$1"+","+"$2");
+function intToNumberString(_6c){
+_6c=_6c.toString();
+var _6d=/(\d+)(\d{3})/;
+while(_6d.test(_6c)){
+_6c=_6c.replace(_6d,"$1"+","+"$2");
 }
-return _6b;
+return _6c;
 }
-function toggleNode(_6d,_6e,_6f,_70,_71){
-if(_6e.className!="hide"){
-_6e.className="hide";
-_6d.innerHTML=_6f;
-if(_71){
-document.getElementById(_71).className="";
+function toggleNode(_6e,_6f,_70,_71,_72){
+if(_6f.className!="hide"){
+_6f.className="hide";
+_6e.innerHTML=_70;
+if(_72){
+document.getElementById(_72).className="";
 }
 }else{
-_6e.className="";
-_6d.innerHTML=_70;
-if(_71){
-document.getElementById(_71).className="hide";
+_6f.className="";
+_6e.innerHTML=_71;
+if(_72){
+document.getElementById(_72).className="hide";
 }
 }
 }
-function readCookie(_72){
-var _73=_72+"=";
-var _74=document.cookie.split(";");
-for(var i=0;i<_74.length;i++){
-var c=_74[i];
+function readCookie(_73){
+var _74=_73+"=";
+var _75=document.cookie.split(";");
+for(var i=0;i<_75.length;i++){
+var c=_75[i];
 while(c.charAt(0)==" "){
 c=c.substring(1,c.length);
 }
-if(c.indexOf(_73)==0){
-var _77=c.substring(_73.length,c.length);
-return _77;
+if(c.indexOf(_74)==0){
+var _78=c.substring(_74.length,c.length);
+return _78;
 }
 }
 return null;
 }
-function removeCookie(_78){
-if(readCookie(_78)){
-document.cookie=_78+"="+"; expires=Thu, 01-Jan-70 00:00:01 GMT";
+function removeCookie(_79){
+if(readCookie(_79)){
+document.cookie=_79+"="+"; expires=Thu, 01-Jan-70 00:00:01 GMT";
 return true;
 }
 return false;
 }
-function setCookie(_79,_7a){
-document.cookie=_79+"="+_7a+"; path=/; ";
+function setCookie(_7a,_7b){
+document.cookie=_7a+"="+_7b+"; path=/; ";
 }
-function searchFormSelect(_7b){
-var _7c="searchForm";
-if(typeof (_7b)=="number"){
-document[_7c].source.selectedIndex=_7b;
+function searchFormSelect(_7c){
+var _7d="searchForm";
+if(typeof (_7c)=="number"){
+document[_7d].source.selectedIndex=_7c;
 }else{
-for(var i=0;i<document[_7c].source.options.length;i++){
-if(document[_7c].source.options[i].value==_7b||document[_7c].source.options[i].text.indexOf(_7b)>-1){
-document[_7c].source.selectedIndex=i;
+for(var i=0;i<document[_7d].source.options.length;i++){
+if(document[_7d].source.options[i].value==_7c||document[_7d].source.options[i].text.indexOf(_7c)>-1){
+document[_7d].source.selectedIndex=i;
 }
 }
 }
-document[_7c].source.onchange();
+document[_7d].source.onchange();
 }
-function string2dom(_7e,_7f){
-if(!_7f){
-_7f="text/xml";
+function string2dom(_7f,_80){
+if(!_80){
+_80="text/xml";
 }
 if(isDefined("window","DOMParser")){
-var _80=new DOMParser();
-return _80.parseFromString(_7e,_7f);
+var _81=new DOMParser();
+return _81.parseFromString(_7f,_80);
 }else{
 if(isDefined("window","ActiveXObject")){
-var _81=new ActiveXObject("MSXML.DOMDocument");
-if(_81){
-_81.async=false;
-_81.loadXML(_7e);
-if(_81.parseError!=0){
-alert("Document parse error\nCode:"+_81.parseError.errorCode+"\nLine:"+_81.parseError.line+"\nReason:"+_81.parseError.reason);
+var _82=new ActiveXObject("MSXML.DOMDocument");
+if(_82){
+_82.async=false;
+_82.loadXML(_7f);
+if(_82.parseError!=0){
+alert("Document parse error\nCode:"+_82.parseError.errorCode+"\nLine:"+_82.parseError.line+"\nReason:"+_82.parseError.reason);
 }
-return _81;
+return _82;
 }else{
 alert("Error: can't create ActiveXObject('MSXML.DOMDocument') object");
 }
@@ -506,42 +503,42 @@ return null;
 var haltIncremental=false;
 function getIncrementalResults(){
 var id=getMetaContent(document,"lw_searchParameters","id");
-var _83=getMetaContent(document,"lw_searchParameters","source");
-var _84=new Date();
-var url=GLOBALS.basePath+"/search.html?id="+id+"&source="+_83+"&secs="+_84.getSeconds();
-var _86=new IOClient();
-_86.init("incremental",url);
-_86.get();
+var _84=getMetaContent(document,"lw_searchParameters","source");
+var _85=new Date();
+var url=GLOBALS.basePath+"/search.html?id="+id+"&source="+_84+"&secs="+_85.getSeconds();
+var _87=new IOClient();
+_87.init("incremental",url);
+_87.get();
 }
-function toggleIncrementalZeros(_87){
-var _88=document.getElementById("incrementalSearchResults").getElementsByTagName("h3");
-var _89=document.getElementById("incrementalSearchResults").getElementsByTagName("li");
-var _8a=document.getElementById("zerotoggle");
-if(_87=="true"){
-_8a.href="javascript:toggleIncrementalZeros('false');";
-_8a.innerHTML="Hide Details";
-for(var i=0;i<_88.length;i++){
-if(_88[i].className=="hide"){
-_88[i].className="unhide";
-}
-}
+function toggleIncrementalZeros(_88){
+var _89=document.getElementById("incrementalSearchResults").getElementsByTagName("h3");
+var _8a=document.getElementById("incrementalSearchResults").getElementsByTagName("li");
+var _8b=document.getElementById("zerotoggle");
+if(_88=="true"){
+_8b.href="javascript:toggleIncrementalZeros('false');";
+_8b.innerHTML="Hide Details";
 for(var i=0;i<_89.length;i++){
 if(_89[i].className=="hide"){
 _89[i].className="unhide";
 }
 }
+for(var i=0;i<_8a.length;i++){
+if(_8a[i].className=="hide"){
+_8a[i].className="unhide";
+}
+}
 }else{
-if(_87=="false"){
-_8a.href="javascript:toggleIncrementalZeros('true');";
-_8a.innerHTML="Show Details";
-for(var i=0;i<_88.length;i++){
-if(_88[i].className=="unhide"){
-_88[i].className="hide";
-}
-}
+if(_88=="false"){
+_8b.href="javascript:toggleIncrementalZeros('true');";
+_8b.innerHTML="Show Details";
 for(var i=0;i<_89.length;i++){
 if(_89[i].className=="unhide"){
 _89[i].className="hide";
+}
+}
+for(var i=0;i<_8a.length;i++){
+if(_8a[i].className=="unhide"){
+_8a[i].className="hide";
 }
 }
 }
@@ -549,41 +546,41 @@ _89[i].className="hide";
 }
 var searching=false;
 function submitSearch(){
-var _8f="searchForm";
-var _90=document[_8f].source.options[document[_8f].source.selectedIndex].value;
-var _91=document[_8f].keywords.value;
-var _92="Please enter one or more search terms.";
-if(eLibraryTabIDs.contains(_90)){
-setCookie("LWeLibSource",_90);
+var _90="searchForm";
+var _91=document[_90].source.options[document[_90].source.selectedIndex].value;
+var _92=document[_90].keywords.value;
+var _93="Please enter one or more search terms.";
+if(eLibraryTabIDs.contains(_91)){
+setCookie("LWeLibSource",_91);
 }
-if(_91==""){
-alert(_92);
+if(_92==""){
+alert(_93);
 return false;
 }else{
-if(_90.match(/(research|clinical|peds)/)){
-var _93=GLOBALS.searchPath+"?source="+_90+"&keywords="+_91+"&w="+GLOBALS.incrementalSearchWait;
-window.location=_93;
+if(_91.match(/(research|clinical|peds)/)){
+var _94=GLOBALS.searchPath+"?source="+_91+"&keywords="+_92+"&w="+GLOBALS.incrementalSearchWait;
+window.location=_94;
 return false;
 }else{
-if(_90=="biomedsem"){
-openSearchResult("http://med.stanford.edu/seminars/searchresults.jsp?searchString="+_91+"&Submit=Go");
+if(_91=="biomedsem"){
+openSearchResult("http://med.stanford.edu/seminars/searchresults.jsp?searchString="+_92+"&Submit=Go");
 return false;
 }else{
-if(_90=="catalog"){
-var _94="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1="+_91+"&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50";
-openSearchResult(_94);
+if(_91=="catalog"){
+var _95="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1="+_92+"&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50";
+openSearchResult(_95);
 return false;
 }else{
-if(_90=="google"){
-openSearchResult("http://www.google.com/search?hl=en&q="+_91);
+if(_91=="google"){
+openSearchResult("http://www.google.com/search?hl=en&q="+_92);
 return false;
 }else{
-if(_90=="pubmed"){
-openSearchResult("http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term="+_91);
+if(_91=="pubmed"){
+openSearchResult("http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term="+_92);
 return false;
 }else{
-if(_90=="stanford_who"){
-openSearchResult("https://stanfordwho.stanford.edu/lookup?search="+_91);
+if(_91=="stanford_who"){
+openSearchResult("https://stanfordwho.stanford.edu/lookup?search="+_92);
 return false;
 }
 }
@@ -600,18 +597,17 @@ searching=true;
 return true;
 }
 var lastIndex=0;
-function lastSelectValue(_95){
-var val=_95.options[_95.selectedIndex].value;
+function lastSelectValue(_96){
+var val=_96.options[_96.selectedIndex].value;
 if((val=="----------------")||(val=="")){
 if(lastIndex){
-_95.selectedIndex=lastIndex;
+_96.selectedIndex=lastIndex;
 }else{
-_95.selectedIndex=0;
+_96.selectedIndex=0;
 }
 }else{
-lastIndex=_95.selectedIndex;
 if(arguments.length>1&&arguments[1]=="portals"){
-window.location=GLOBALS.basePath+_95.options[_95.selectedIndex].value;
+window.location=GLOBALS.basePath+_96.options[_96.selectedIndex].value;
 }
 }
 }

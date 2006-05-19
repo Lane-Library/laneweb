@@ -26,6 +26,7 @@
 				</tr>
 			</table>
         </div>
+			Source will open in a new window.
         <div id="incrementalSearchResults" class="hide">
 		
             <div class="searchColumn3 largeFont">
@@ -39,24 +40,25 @@
                         <li id="skolar_rudolph">Rudolph's Pediatrics</li>
 						<li id="emedicine">eMedicine</li>
 						<li id="uptodate">UpToDate</li>
+						<li id="pubmed">PubMed@Stanford</li>
                     </ul>
                 </div>
 				
 				<div class="searchCategory">
                     <h3 class="hide">Infectious Disease</h3>
                     <ul>
-					<li id="aapredbook">AAP Red Book</li>	
+					<li id="aapredbook">AAP Red Book</li>
                     <li id="mdc_gershon">Infectious Diseases of Children</li>
                     <li id="mdc_long">Pediatric Infectious Diseases</li>					
                     </ul>
                 </div>
 				
 				<div class="searchCategory">	
-                    <h3 class="hide">Other Texts</h3>
+                    <h3 class="hide">More Texts</h3>
                     <ul>
 						<li id="mdc_hlh">Harriet Lane Handbook</li>
                         <li id="mdc_miller">Miller's Anesthesia</li>
-						<li id="crossdb_omim">OMIM</li>
+						<li id="crossdb_omim">OMIM: Inherited Disease</li>
                         <li id="mdc_park">Pediatric Cardiology</li>
                         <li id="mdc_green">Skeletal Trauma in Children</li>
                         <li id="skolar_scott">Danforth's ObGyn</li>
@@ -68,21 +70,33 @@
 			
 			<div class="searchColumn3 largeFont">
 				
-				<div class="searchCategory">
-                    <h3 class="hide">Drugs</h3>
-                    <ul>
-                        <li id="micromedex_web">Micromedex</li>
-                        <li id="naturalstandard">Natural Standard</li>
-                    </ul>
-                </div>
+		  <div class="searchCategory">
+            <h3 class="hide">Drugs</h3>
+            <ul>
+            <li id="micromedex_web">Micromedex</li>
+			<li id="lexidrugid">LexiDrugID</li>	  
+            <li id="skolar_atoz">A-Z Drug Facts</li>
+            <li id="skolar_dfc">Drug Facts &amp; Comparisons</li>
+            </ul>
+          </div>
+		  
+		  <div class="searchCategory">
+            <h3 class="hide">Natural Medicines</h3>
+            <ul>
+             <li id="naturalstandard">Natural Standard</li>
+             <li id="skolar_rnp">Review of Natural Products</li>
+             </ul>
+          </div>
 
-				<div class="searchCategory">
-                    <h3 class="hide">Journal Articles</h3>
-                    <ul>
-                    <li id="pubmed">PubMed@Stanford</li>
-                    </ul>
-                </div>
-
+		 <!-- 
+		<div class="searchCategory">
+          <h3 class="hide">Journal Articles</h3>
+          <ul>
+          <li id="pubmed">PubMed: core clinical</li><li id="pubmed">PubMed: 1 year</li>
+            <li id="pubmed">PubMed@Stanford</li>
+          </ul>
+        </div>
+	-->
 				<div class="searchCategory">
                     <h3 class="hide">Evidence  &amp; Guidelines</h3>
                     <ul>
@@ -116,7 +130,7 @@
 				</div> 
 				
 				</div>
-
+        <div style="clear:both;height:3px;font-size:3px;">&#160;</div>
         </div>
 		<script type="text/javascript">
 			// only load getIncrementalResults() after page is completely loaded

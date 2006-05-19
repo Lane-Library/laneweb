@@ -80,12 +80,13 @@
         </map:pipeline>
         <map:pipeline type="caching">
             <map:match type="wildcard" pattern="howto/index.html">
-                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
+                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq-test.html"/>
                 <map:transform type="xsltc" src="{defaults:live-base}/xsl/faq.xsl">
                     <map:parameter name="id" value="{request-param:id}"/>
                     <map:parameter name="category" value="{request-param:category}"/>
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
                 </map:transform>
+                <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="faq-category-list.html">
