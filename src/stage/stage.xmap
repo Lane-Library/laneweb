@@ -99,12 +99,10 @@
                          <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                      </map:transform>
 										 -->
-<!--
                     <map:transform type="xsltc" src="{defaults:stage-base}/xsl/webtrends.xsl">
                         <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                         <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     </map:transform>
--->
                     <map:serialize type="xhtml"/>
                 </map:match>
             </map:match>

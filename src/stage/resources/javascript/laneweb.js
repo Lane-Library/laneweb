@@ -98,3 +98,12 @@ function loadTab(n, maxTabsPerBox) {
 	}
 }
 
+function resetFocus() {
+	window.focus();
+}
+
+function setFocusOnSearchBox() {
+	document.forms["searchForm"].elements["keywords"].focus();
+	document.forms["searchForm"].elements["keywords"].select();
+}
+

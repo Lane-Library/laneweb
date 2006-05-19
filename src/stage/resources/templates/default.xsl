@@ -112,6 +112,14 @@
 
 	<xsl:template match="h:table[ancestor::h:div[@id='contentBody']]/h:tr/h:td[contains(@id, 'Column') or contains(@class, 'Column')]">
 		<td valign="top"><!-- strangely, the vertical-align in the css appears insufficient for the right column to get top- aligned; investigate... -->
+		<xsl:if test="contains(@id, 'left') or contains(@id, 'right')">
+			<xsl:attribute name="align">
+				<xsl:choose>
+					<xsl:when test="contains(@id, 'left')">left</xsl:when>
+					<xsl:otherwise>right</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+			</xsl:if>
 			<xsl:copy-of select="@*[name()='id' or name()='class']"/>
 			<xsl:apply-templates />
 		</td>
@@ -221,8 +229,8 @@
 										</xsl:otherwise>
 									</xsl:choose>
 									<xsl:attribute name="id"><xsl:value-of select="concat('tab', position())"/></xsl:attribute>
-									<a href="#" style="color: white;">
-										<xsl:attribute name="onClick">javascript:loadTab(<xsl:value-of select="position()"/>, <xsl:value-of select="count(../h:h2)"/>);</xsl:attribute>
+									<a href="#">
+										<xsl:attribute name="onClick">javascript:loadTab(<xsl:value-of select="position()"/>, <xsl:value-of select="count(../h:h2)"/>);resetFocus();</xsl:attribute>
 										<xsl:value-of select="text()"/>
 									</a>
 								</h2>
@@ -243,11 +251,14 @@
 									<xsl:copy-of select="child::h:div[@id='otherPortalOptions']/h:form[@id='portalForm']/h:select/@*" />
 									<xsl:for-each select="child::h:div[@id='otherPortalOptions']/h:form[@id='portalForm']/h:select/h:option">
 										<xsl:choose>
-											<xsl:when test="@disabled or not(contains(@value, $request-uri))">
+											<xsl:when test="@disabled and not(@selected)"><!-- important to keep this first -->
+												<option disabled="disabled" style="color:#aaa;"><xsl:value-of select="text()"/></option>
+											</xsl:when>
+											<xsl:when test="not(contains(@value, $request-uri))">
 												<xsl:copy-of select="."/>
 											</xsl:when>
 											<xsl:otherwise>
-												<option disabled="disabled"><xsl:value-of select="text()"/></option>
+												<option disabled="disabled" style="color:#aaa;"><xsl:value-of select="text()"/></option>
 											</xsl:otherwise>
 										</xsl:choose>
 									</xsl:for-each>

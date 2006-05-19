@@ -93,9 +93,15 @@ body {
 	padding-right: 10px;
 }
 
-.sideBlueBox h2, .sideBlueBox h2.SquareTitle {
+.sideBlueBox h2 {
+	/* background-color: #6784A2;  - blue.        darker blue 7589a0;      lighter blue 879ab0;*/
+	background-color:  #B7B5AB; /* latest blue to use selectively elsewhere -- #7589a0; /*#879ab0; /*#7589a0;  #879ab0  * #69798c  #B7B5AB;  grey from cancer center */
+	text-transform: uppercase;
+}
+
+.sideBlueBox h2.SquareTitle {
 	/* background-color: #6784A2;  - blue.*/
-	background-color: #B7B5AB; /* grey from cancer center */
+	background-color: #B7B5AB;  /*grey from cancer center */
 	text-transform: uppercase;
 }
 
@@ -118,32 +124,41 @@ body {
 	text-transform: uppercase;
 	background: #d9d7b0 url(/././images/templates/default/beigeTopRightCorner.gif) no-repeat top right;
 }
-
+/* #e4e4c9*/
 .centerGreenBox h2 {
 	float: left;
 	width: auto;
 	margin-right: 4px;
 	padding-left: 20px;
 	padding-right: 35px;
-	color: white !important;
+	color: white;/*  pm removed important 5-16-06 for multi-tabl*/
 	/*background: #996 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right; */
 	background: #990000 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
 	border: 0px;
-	border-bottom: 3px solid #dbdbc9;
+	border-bottom: 3px solid #ccc; /*#dbdbc9;*/
 }
 
 h2.activeTab {
 	background: #900 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
 }
 
+h2.activeTab a, h2.activeTab a:link, h2.activeTab a:visited, h2.activeTab a:hover, h2.activeTab a:active {
+	color: white;
+}
+
 h2.bgTab {
-	background: #996 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
+	background: #ecece8 url(/././images/templates/default/oliveRightUpCorner.gif) no-repeat top right;
+}
+
+h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:active {
+	color: #8a604f;
 }
 
 /*
 * html .centerGreenBox {
 	height: 1%;
 }
+#6884a4
 */
 .centerBlueBox h2 {
 	float: left;
@@ -345,7 +360,7 @@ td#leftColumn, td#rightColumn {
 }
 
 td.centralColumn {
-	width:auto;
+	width: auto;
 	padding-left: 15px;
 	padding-right: 15px;
 	vertical-align: top;
@@ -356,10 +371,10 @@ td.centralColumn div {
 	width: auto;
 	text-align: left; /*compensating for the above td.centralColumn settings*/
 }
-/*
+
 * html td.centralColumn {
-	width: 100%;*//*IE weird doubling of padding problem fix - surreptitious */
-/*}*/
+	width: 100%;/*IE weird doubling of padding problem fix - surreptitious */
+}
 	/*
 div#otherPortalOptions {
 
@@ -460,16 +475,20 @@ a:link, a:visited {
 	color: #900;
 	text-decoration: none;
 }
+
 a:hover, a:active {
 	color: #036;
 	text-decoration: underline !important;
 }
+
 p a:link, p a:visited { 
 	text-decoration: underline;
 }
+
 p.pList a:link, p.pList a:visited { 
 	text-decoration: none;
-} 
+}
+
 h3 a:link, h3 a:visited {
 	text-decoration: underline;
 }
@@ -581,7 +600,7 @@ h3 a:link, h3 a:visited {
 	white-space: nowrap;
 }
 .searchHeaderMiddle {
-	background-color:#e7e2cd;
+	background-color: #e7e2cd;
 	padding:0.6em 1.25em 0.6em 0.6em;
 	white-space: nowrap;
 }
@@ -621,7 +640,7 @@ h3 a:link, h3 a:visited {
 div#eLibrarySearchResults {
 	padding-right:0px;
 	padding-left: 20px;
-	margin-bottom: 14.5em;
+	/*margin-bottom: 14.5em;*/
 }
 
 #eLibraryTabs {
@@ -707,10 +726,10 @@ span.tabHitCount {
 div#incrementalSearchResults{
 	padding-top: 0.5em;
 	padding-right:0em;
-	padding-bottom:2.25em;
+	/*padding-bottom:2.25em;*/
 	padding-left:2.25em;
 	margin-top: -0.25em;
-	margin-bottom: 0.5em;
+	margin-bottom: 0.25em;
 }
 div#incrementalSearchResults ul  {
 	margin-left:0em;
