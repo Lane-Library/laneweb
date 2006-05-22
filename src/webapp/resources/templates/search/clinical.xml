@@ -32,7 +32,7 @@
 		<div class="searchCategory">
           <h3 class="hide">Most Popular</h3>
           <ul>
-		    <li id="lane_cc">Calculators</li>
+		    <li id="calculators">Calculators</li>
 		    <li id="skolar_clin">Clin-eguide</li>
 			<li id="emedicine">eMedicine</li>
 			<li id="skolar_harrison">Harrison's</li>
