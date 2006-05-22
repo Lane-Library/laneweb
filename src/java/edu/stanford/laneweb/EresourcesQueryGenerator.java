@@ -138,6 +138,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
 			}
 		}
         if (this.query != null) {
+        	this.query = this.query.replaceAll("'","''");
         	this.translatedQuery = this.queryTranslator.translate(this.query);
         }
     }
