@@ -98,6 +98,9 @@ body {
 	background-color:  #B7B5AB; /* latest blue to use selectively elsewhere -- #7589a0; /*#879ab0; /*#7589a0;  #879ab0  * #69798c  #B7B5AB;  grey from cancer center */
 	text-transform: uppercase;
 }
+.sideBlueBox h2.attention {
+	background-color:  #7589a0;
+}
 
 .sideBlueBox h2.SquareTitle {
 	/* background-color: #6784A2;  - blue.*/
@@ -280,24 +283,39 @@ div#bottomCurvedCorner {
 }
 
 #footer {
+	position:relative;
+	top: 0px;
+	left:0px;
 	clear: both;
 	height: auto;
 	margin: 0 auto;
 	margin-top: 15px;
 	border-top: 1px solid #ccc;
+	padding-top: 2px;
 	background: transparent url(/././images/templates/default/footerBg.jpg) repeat-x top left;
 }
 
-#footer td {
-	white-space: nowrap;
-	line-height: 130%;
+#footer table {
+	width: 100%;
 }
+#footer  td {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	vertical-align: top;
+}	
 
+td#footerText {
+	white-space: nowrap;
+	line-height: 120%;
+	text-align: center;
+}
+/*
 .footerComment {
 	font-style: italic;
 	color: #333;
 }
-
+*/
 #footer a:link, #footer a:visited, #footer a:hover, #footer a:active {
 	text-decoration: none;
 }
@@ -844,7 +862,6 @@ h3 {
 .treemenuTrigger{
 	color: #990000;
 	cursor: pointer;
-	cursor: hand;
 	display: block;
 }
 .treemenuBranch{

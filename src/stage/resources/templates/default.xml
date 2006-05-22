@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-    <title>Lane Medical Library, Stanford University Medical Center</title>
+    <title>LaneConnex - Lane Medical Library &amp; Knowledge Management Center, Stanford University Medical Center</title>
 		<!--
 		<link href="/style/irt.css" rel="stylesheet" type="text/css"/>
 		 -->
@@ -139,12 +139,13 @@
 				
 				
 				
-                <div id="footer" style="text-align:center; padding-top:4px;">
-					<div style="float:left">			
-						<a href="http://lane.stanford.edu/"><img 
-							src="/images/templates/default/laneLogoFooter.gif" 
-							width="82" height="29" border="0" alt="Lane logo"/></a>
-					</div>
+        <div id="footer">
+					<table>
+						<tr>
+							<td width="25%">
+								<a href="http://lane.stanford.edu/"><img src="/images/templates/default/laneLogoFooter.gif" width="82" height="29" border="0" alt="Lane logo"/></a>
+							</td>
+						<td id="footerText" width="50%">
 					<a href="/howto/index.html?id=_48">Hours</a> &#160;&#160;&#8226;&#160;&#160;
 					<a href="/services/access/directions.html">Directions</a> &#160;&#160;&#8226;&#160;&#160;
 					<a href="/services/about.html">About Us</a> &#160;&#160;&#8226;&#160;&#160;
@@ -155,7 +156,12 @@
 					<!--  &#160;&#8226;&#160; <span class="footerComment">A division of Information Resources and Technology</span>--><br/>
 					
 					&#169;2006 <a href="http://med.stanford.edu/">Stanford University School of Medicine</a> &#160;&#8226;&#160;
-					<a href="http://www.stanford.edu/home/atoz/terms.html">Terms of Use</a><br/>
+					<a href="http://www.stanford.edu/home/atoz/terms.html">Terms of Use</a>
+				
+					</td>
+					<td width="25%">&#160;</td>
+					</tr>
+					</table>
 				</div>
 
 			</div>	

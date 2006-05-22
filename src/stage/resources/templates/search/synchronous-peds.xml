@@ -53,7 +53,7 @@
                 <div class="searchCategory" id="calculators">
                     <h3>Calculators</h3>
                     <ul>
-                        <li id="lane_cc">Lane List</li>
+                        <li id="calculators">Lane List</li>
                     </ul>
                 </div>
                 <div class="searchCategory" id="literature_databases">

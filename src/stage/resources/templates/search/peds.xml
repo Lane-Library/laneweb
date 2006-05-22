@@ -34,7 +34,7 @@
                 <div class="searchCategory">
                     <h3 class="hide">Most Popular</h3>
                     <ul>
-					    <li id="lane_cc">Calculators</li>
+					    <li id="calculators">Calculators</li>
 					    <li id="am_hay">Current Pediatric Dx &amp; Tx</li>
                         <li id="mdc_behrman">Nelson's Pediatrics</li>
                         <li id="skolar_rudolph">Rudolph's Pediatrics</li>
