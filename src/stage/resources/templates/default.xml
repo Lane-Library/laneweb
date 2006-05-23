@@ -88,7 +88,7 @@
                             </select>
 
                             <input name="keywords" type="text" id="lw_search-keywords" style="font-weight: 400; width: 230px"/>
-                            <input type="submit" value="" id="searchFormSubmitButton"/>
+                            <input type="submit" value="Go" />  <!--id="searchFormSubmitButton"-->
 														<div style="height: 5px; font-size: 5px;">&#160;</div>
 														<span id="displaySearchTaglineText">Find an eJournal, database, eBook, service, etc. or search inside reference sources.</span>
                         </form>
