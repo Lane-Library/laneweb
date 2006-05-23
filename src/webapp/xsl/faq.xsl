@@ -23,6 +23,9 @@
             <xsl:if test="$id != ''">
                 <meta name="lw_faqCategory" content="{../h:body/h:ul/h:li[@id=$id]/h:ul/h:li[@class='primaryCategory']}"/>
             </xsl:if>
+            <xsl:if test="$category != ''">
+                <meta name="lw_faqCategory" content="{$category}"/>
+            </xsl:if>
         </xsl:copy>
     </xsl:template>
     
@@ -31,28 +34,49 @@
     </xsl:template>
     
     <xsl:template match="h:body/h:ul">
-        <xsl:if test="$category != ''">
-            <h2>
-                <xsl:value-of select="$category"/>
-            </h2>
-        </xsl:if>
-        <xsl:if test="$category = '' and $id = ''">
-            <h2>Hot Topics</h2>
-        </xsl:if>
         <xsl:choose>
             <xsl:when test="$id=''">
-                <dl id="faq">
+                <xsl:variable name="cat">
                     <xsl:choose>
-                        <xsl:when test="$category=''">
-                            <xsl:apply-templates 
-                                select="h:li[h:ul/h:li[@class='categories']/h:ul/h:li/text() = 'Hot Topics']" mode="dl"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates
-                                select="h:li[h:ul/h:li[@class='categories']/h:ul/h:li/text() = $category]" mode="dl"/>
-                        </xsl:otherwise>
+                        <xsl:when test="$category = ''">Hot Topics</xsl:when>
+                        <xsl:otherwise><xsl:value-of select="$category"/></xsl:otherwise>
                     </xsl:choose>
-                </dl>
+                </xsl:variable>
+                <xsl:variable name="root-category" select="/h:html/h:body/h:div[@id='categories']/h:ul/h:li[descendant-or-self::h:li/text() = $cat]/text()"/>
+                <xsl:variable name="root-category-string" select="$category-map/h:div[h:span=$root-category]/h:span[2]"/>
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr>
+                        <td valign="top" align="left" id="leftColumn">
+                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
+                                <xi:fallback/>
+                            </xi:include>
+                        </td>
+                        <td valign="top" align="left" class="centralColumn">
+                            
+                            <xsl:if test="$category != ''">
+                                <h1>
+                                    <xsl:value-of select="$category"/> FAQs
+                                </h1>
+                            </xsl:if>
+                            <xsl:if test="$category = '' and $id = ''">
+                                <h1>Hot Topics</h1>
+                            </xsl:if>
+                            <dl id="faq">
+                                <xsl:choose>
+                                    <xsl:when test="$category=''">
+                                        <xsl:apply-templates 
+                                            select="h:li[h:ul/h:li[@class='categories']/h:ul/h:li/text() = 'Hot Topics']" mode="dl"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:apply-templates
+                                            select="h:li[h:ul/h:li[@class='categories']/h:ul/h:li/text() = $category]" mode="dl"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                            </dl>
+                        </td>
+                    </tr>
+                </table>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates select="h:li[@id=$id]" mode="full"/>

@@ -26,7 +26,8 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="search-proxy">
-                <map:generate type="search-proxy" src="{defaults:search-url}search"/>
+                <map:generate type="search-proxy" src="http://irt-lanelocal.stanford.edu/search/search"/>
+                <!--<map:generate type="search-proxy" src="{defaults:search-url}search"/>-->
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search.html">
@@ -46,7 +47,8 @@
                             <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>
                         </map:aggregate>
                         <map:transform type="xslt" src="{defaults:live-base}/xsl/synchronous-search.xsl">
-                            <map:parameter name="search-url" value="{defaults:search-url}"/>
+                            <map:parameter name="search-url" value="http://irt-lanelocal.stanford.edu/search/"/>
+                            <!--<map:parameter name="search-url" value="{defaults:search-url}"/>-->
                         </map:transform>
                         <map:serialize type="xml"/>
                     </map:when>
