@@ -201,7 +201,7 @@
 	margin: 0 auto;
 	padding-right: 40px; /* compensate for visual perception of uneven display due to top curve and laneconnex float */
 	height: auto;
-	color: #222;
+	/*color: #222;   tanya - we removed, looks like no longer used.  reducing colors in palette*/
 	vertical-align: middle;
 	z-index: 50;
 }
@@ -224,7 +224,7 @@
 #displaySearchTaglineText {
 	margin: 0 auto;
 	padding: 0px;
-	color: #555;
+	color: #444;
 	font-weight:400;
 }
 

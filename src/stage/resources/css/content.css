@@ -117,17 +117,17 @@ body {
 }
 
 #leftColumn .sideTanBox h2 {
-	color: #535548;
+	color: #444;
 	text-transform: uppercase;
 	background: #d9d7b0 url(/././images/templates/default/beigeTopLeftCorner.gif) no-repeat top left;
 }
 
 #rightColumn .sideTanBox h2 {
-	color: #535548;
+	color: #444;
 	text-transform: uppercase;
 	background: #d9d7b0 url(/././images/templates/default/beigeTopRightCorner.gif) no-repeat top right;
 }
-/* #e4e4c9*/
+
 .centerGreenBox h2 {
 	float: left;
 	width: auto;
@@ -320,13 +320,7 @@ td#footerText {
 	text-decoration: none;
 }
 
-h1, .portalTitle {
-	padding-bottom: 15px;
-	/* font-family: serif; */
-	font-family: arial;
-	/* font-weight: 700; */
-	color: #369;
-}
+
 
 /* Clinical trials -- testing */
 
@@ -456,15 +450,13 @@ form#portalForm {
 }
 
 h1 {
-	/* font-family: serif; */
 	font-weight: 500;
-	/* color: #40668c;  --original blue */
-	color: #8F6650;
+	color: #8a604f;
 	padding-top: 0px;
 	padding-bottom: 0px;
 	margin-top: 5px;
 	margin-bottom: 5px;
-	/*margin-top:0;*/
+	font-family: arial;
 }
 
 h2 {
@@ -618,7 +610,7 @@ h3 a:link, h3 a:visited {
 	white-space: nowrap;
 }
 .searchHeaderMiddle {
-	background-color: #e7e2cd;
+	background-color: #e7e2cd; 
 	padding:0.6em 1.25em 0.6em 0.6em;
 	white-space: nowrap;
 }
@@ -643,7 +635,7 @@ h3 a:link, h3 a:visited {
 /* popInContent styles used for did you mean, sfx, suldb content (eLibrary and incremental) */
 .popInContent {
 	clear: both;
-	background: #e0e0d1;
+	background: /*#e0e0d1;*/ #e2e2db;
 	padding-top: 5px;
 	padding-right: 0px;
 	padding-bottom: 5px;
@@ -654,6 +646,7 @@ h3 a:link, h3 a:visited {
 	border-right: 1px solid #99987a;
 	border-left: 1px solid #99987a;
 	border-bottom: 1px solid #99987a;
+
 }
 div#eLibrarySearchResults {
 	padding-right:0px;
@@ -714,7 +707,7 @@ span.tabHitCount {
 	text-align: center;
 }
 .metaSearchResults {
-	background-color:#ecece8;
+	background-color: #ecece8;
 	cursor: pointer;
 	color: #980202;
 	position:relative;
