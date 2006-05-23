@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<execute-query xmlns="http://apache.org/cocoon/SQL/2.0">
+<query>
+select distinct substr(url, 9, instr(url, '/', 1, 3) - 9) as server
+from link, eresource, version
+where url like 'https://%'
+and instr(url, '/', 1, 3) &gt; 0
+and eresource.eresource_id = version.eresource_id
+and version.version_id = link.version_id
+and version.proxy = 'T'
+union
+select distinct substr(url, 9) as server
+from link, eresource, version
+where url like 'https://%'
+and instr(url, '/', 1, 3) = 0
+and eresource.eresource_id = version.eresource_id
+and version.version_id = link.version_id
+and version.proxy = 'T'
+union
+select distinct substr(url, 8, instr(url, '/', 1, 3) - 8) as server
+from link, eresource, version
+where url like 'http://%'
+and instr(url, '/', 1, 3) &gt; 0
+and eresource.eresource_id = version.eresource_id
+and version.version_id = link.version_id
+and version.proxy = 'T'
+union
+select distinct substr(url, 8) as server
+from link, eresource, version
+where url like 'http://%'
+and instr(url, '/', 1, 3) = 0
+and eresource.eresource_id = version.eresource_id
+and version.version_id = link.version_id
+and version.proxy = 'T'
+</query>
+</execute-query>
+
