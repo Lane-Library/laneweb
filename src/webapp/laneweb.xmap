@@ -80,6 +80,9 @@
                 <indent>no</indent>
                 <omit-xml-declaration>yes</omit-xml-declaration>
             </map:serializer>
+             <map:serializer name="text" mime-type="text/plain" logger="sitemap.serializer.text"
+                src="org.apache.cocoon.serialization.TextSerializer"
+                pool-max="32" pool-min="16" pool-grow="4"/>
         </map:serializers>
         <map:selectors default="source-parameter">
             <map:selector name="source-parameter"
