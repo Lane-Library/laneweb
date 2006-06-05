@@ -20,7 +20,7 @@
     <xsl:copy-of select="."/>
     <xsl:variable name="noproxy">
       <xsl:choose>
-        <xsl:when test="starts-with(.,'http://laneproxy.stanford.edu/login')">
+        <xsl:when test="starts-with(.,'http://laneproxy.stanford.edu/login?')">
           <xsl:value-of select="substring-after(.,'url=')"/>
         </xsl:when>
         <xsl:otherwise>
@@ -98,8 +98,8 @@
     </xsl:attribute>
   </xsl:template>
   
-    <xsl:template match="@onclick[parent::*/@href]"/>
-    
+    <xsl:template match="@onclick[parent::*/@href and contains(parent::*/@href,'://')]"/>    
+
     <xsl:template match="@href[not(contains(.,'://')) and (contains(.,'.pdf') or contains(.,'.camv')
                                            or contains(.,'.smil') or contains(.,'.doc') or contains(.,'.ppt')
                                            or contains(.,'.xls') or contains(.,'.rm'))]">
