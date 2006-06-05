@@ -7,6 +7,7 @@
 		 -->
 		 		<link href="/style/default.css" rel="stylesheet" type="text/css" media="screen, print"/>
 				<link href="/style/default-print.css" rel="stylesheet" type="text/css" media="print"/>
+				<link href="/style/table-styles.css" rel="stylesheet" type="text/css" media="screen, print"/>
 				<link href="/style/content.css" rel="stylesheet" type="text/css" media="screen, print"/>
         <meta name="WT.seg_1" content="{affiliation}"/>
         <meta name="lw_requestQuery" content="{query-string}"/>
@@ -50,19 +51,15 @@
 									</map>
 									<img id="topLinks" alt="affiliate links" src="/images/templates/default/affiliateLinks.gif" width="600" height="12" usemap="#affiliateLinks" border="0" />
                 </div>
-<!--
-                <div id="laneConnexContainer">
-                  <a href="http://lane.stanford.edu/"><img src="/images/templates/default/laneconnex_logo_redo.gif" alt="lane connex image" height="27" width="160"/></a>
-                </div>  -->
+
                 <div id="searchContainer">
-									<div id="searchContainerTopBorder">&#160;</div>
 									<div id="topCurve">
                      <img src="/images/templates/default/curve.gif" alt="top curved corner of search container" width="60" height="29" />
                    </div>
 									 <div id="searchContainerTopRightRoundedCorner">
                       <img src="/images/templates/default/searchContainerTR.gif" alt="top negative rounded corner of search container" width="11" height="11"/>
                     </div>
-										
+										<div id="searchContainerTopBorder">&#160;</div>
 										<div id="laneConnexContainer">
 											<a href="http://lane.stanford.edu/"><img src="/images/templates/default/laneconnex_logo_redo.gif" alt="Laneconnex logo" height="27" width="160"/></a>
 										</div>
@@ -88,7 +85,7 @@
                             </select>
 
                             <input name="keywords" type="text" id="lw_search-keywords" style="font-weight: 400; width: 230px"/>
-                            <input type="submit" value="" id="searchFormSubmitButton"/>
+                            <input type="submit" value="Go" />  <!--id="searchFormSubmitButton"-->
 														<div style="height: 5px; font-size: 5px;">&#160;</div>
 														<span id="displaySearchTaglineText">Find an eJournal, database, eBook, service, etc. or search inside reference sources.</span>
                         </form>

@@ -11,6 +11,7 @@
 	<xsl:param name="a"/> <!-- alphabetical browse in online directory -->
 	<xsl:param name="c"/> <!-- core title -->
 	<xsl:param name="category"/> <!-- FAQ categories -->
+	<xsl:param name="loadTab" /> <!-- loading specific tab as active -->
 	
 	<xsl:variable name="alpha">
 		<xsl:value-of select="$a"/>
@@ -128,14 +129,16 @@
 <!-- central column w/o boxes gets large font -->
 
 	<xsl:template match="h:td[@class='centralColumn'][not(descendant::h:div[contains(@class, 'Box')])]">
+	<!--<xsl:template match="h:td[@class='centralColumn']">-->
 		<td class="centralColumn">
-			<xsl:for-each select="child::node()">
+		<xsl:for-each select="child::node()">
+			<!--<xsl:for-each select="child::node()[not(self::h:div[contains(@class, 'Box')])]">-->
 				<xsl:choose>
 					<xsl:when test="name()">
 						<xsl:choose>
 							<xsl:when test="normalize-space(string(.)) and name()!='h1'">
 								<xsl:element name="{name()}">
-									<xsl:copy-of select="@*[self::class]"/>
+									<xsl:copy-of select="@*[not(self::class)]"/>
 									<xsl:attribute name="class">
 										<xsl:choose>
 											<xsl:when test="@class">
@@ -210,7 +213,8 @@
 <!-- header H2 -->
 					<xsl:choose>
 <!--final version: <h2 class="activeTab" id="tab1"><a href="#" style="color: black;" onClick="javascript:loadTab(1, 3);">Tools</a></h2>-->
-						<xsl:when test="contains(h:h2/@class, 'Tab')">
+<!-- backward compatibility for tabs w/o ids -->
+						<xsl:when test="contains(h:h2/@class, 'Tab') and not(h:h2/@id)">
 							<xsl:for-each select="h:h2[contains(@class, 'Tab')]">
 								<h2>
 									<xsl:choose>
@@ -236,6 +240,37 @@
 								</h2>
 							</xsl:for-each>
 						</xsl:when>
+<!-- making tab linking an option -->
+						<xsl:when test="contains(h:h2/@class, 'Tab') and (h:h2/@id)">
+							<xsl:for-each select="h:h2[contains(@class, 'Tab')]">
+								<h2>
+									<xsl:choose>
+										<xsl:when test="$loadTab != '' and $loadTab = @id">
+											<xsl:attribute name="class">activeTab</xsl:attribute>
+										</xsl:when>
+										<xsl:when test="$loadTab = '' and contains(@class, 'activeTab')">
+											<xsl:attribute name="class">activeTab</xsl:attribute>
+										</xsl:when>
+										<xsl:otherwise>
+											<xsl:choose><!--if no tabs marked as active, make the first one active-->
+												<xsl:when test="$loadTab = '' and not(../h:h2[contains(@class, 'activeTab')]) and position()=1">
+													<xsl:attribute name="class">activeTab</xsl:attribute>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:attribute name="class">bgTab</xsl:attribute>
+												</xsl:otherwise>
+											</xsl:choose>
+										</xsl:otherwise>
+									</xsl:choose>
+									<xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
+									<a>
+										<xsl:attribute name="href">?loadTab=<xsl:value-of select="@id"/></xsl:attribute>
+										<!--<xsl:attribute name="onClick">javascript:loadTab(<xsl:value-of select="position()"/>, <xsl:value-of select="count(../h:h2)"/>);resetFocus();</xsl:attribute>-->
+										<xsl:value-of select="text()"/>
+									</a>
+								</h2>
+							</xsl:for-each>
+						</xsl:when>
 						<xsl:otherwise>
 							<xsl:copy-of select="h:h2[1] | h:h2[@class]" /><!-- avoid duplicate display of h2 in RSS feeds, but keep styling for SquareTitles, etc.-->
 						</xsl:otherwise>
@@ -255,7 +290,7 @@
 												<option disabled="disabled" style="color:#aaa;"><xsl:value-of select="text()"/></option>
 											</xsl:when>
 											<xsl:when test="not(contains(@value, $request-uri))">
-												<xsl:copy-of select="."/>
+												<xsl:apply-templates select="."/>
 											</xsl:when>
 											<xsl:otherwise>
 												<option disabled="disabled" style="color:#aaa;"><xsl:value-of select="text()"/></option>
@@ -280,12 +315,17 @@
 						<xsl:variable name="stop-point"><xsl:value-of select="last() - position()"/></xsl:variable>
 						<xsl:variable name="hide-or-not">
 							<xsl:choose>
-								<xsl:when test="contains(@class, 'activeTab') or (not(../h:h2[contains(@class, 'activeTab')]) and position()=1)"></xsl:when>
+								<xsl:when test="($loadTab != '' and $loadTab = @id) or ($loadTab = '' and contains(@class, 'activeTab')) or ($loadTab = '' and contains(@class, 'activeTab')) or ($loadTab = '' and not(../h:h2[contains(@class, 'activeTab')]) and position()=1)"></xsl:when>
 								<xsl:otherwise><xsl:text> hide</xsl:text></xsl:otherwise>
 							</xsl:choose>
 						</xsl:variable>
 					<div>
-						<xsl:attribute name="id"><xsl:value-of select="concat('tab', position(), 'Content')"/></xsl:attribute>
+						<xsl:attribute name="id">
+							<xsl:choose>
+								<xsl:when test="@id"><xsl:value-of select="concat(@id, 'Content')"/></xsl:when>
+								<xsl:otherwise><xsl:value-of select="concat('tab', position(), 'Content')"/></xsl:otherwise>
+							</xsl:choose>
+						</xsl:attribute>
 						<xsl:attribute name="class">
 							<xsl:choose>
 								<xsl:when test="contains(../@class,'long')">
@@ -441,7 +481,7 @@
 		</xsl:copy>
 	</xsl:template>
 	
-	<xsl:template match="@*">
+	<xsl:template match="@*[not(self::xmlns:xi)]">
 		<xsl:copy-of select="."/>
 	</xsl:template>
 
