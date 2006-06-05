@@ -5,6 +5,7 @@
     <xsl:output method="text"/>
     
     <xsl:template match="sql:server">
+        <xsl:text>HJ </xsl:text>
         <xsl:value-of select="."/>
         <xsl:text>&#10;</xsl:text>
     </xsl:template>

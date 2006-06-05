@@ -6,7 +6,7 @@ GLOBALS.httpRequestInterval="1500";
 GLOBALS.incrementalSearchWait="2500";
 GLOBALS.metasearchProxyPath=GLOBALS.basePath+"/content/search-proxy";
 GLOBALS.needsProxy=getMetaContent(document,"lw_proxyLinks");
-GLOBALS.proxyPrefix="http://laneproxy.stanford.edu/login?url=";
+GLOBALS.proxyPrefix=GLOBALS.basePath+"/secure/login.html?url=";
 GLOBALS.searchPath=GLOBALS.basePath+"/search.html";
 window.onerror=errorLogger;
 function errorLogger(_1,_2,_3){
@@ -35,7 +35,7 @@ _a=document.getElementById(eLibraryTabIDs[i]+"SearchTagline").innerHTML;
 }
 var _b="";
 if(isDefined(window,"dcsMultiTrack")){
-_b="dcsMultiTrack('WT.ti','Laneconnex search "+eLibraryTabIDs[i]+" tab','DCSext.keywords','cancer','DCSext.tab_view','"+eLibraryTabIDs[i]+"');";
+_b="dcsMultiTrack('WT.ti','LaneConnex search "+eLibraryTabIDs[i]+" tab','DCSext.keywords','cancer','DCSext.tab_view','"+eLibraryTabIDs[i]+"');";
 }
 _8=_8+"<div id=\""+eLibraryTabIDs[i]+"Tab\" class=\"eLibraryTab\" title=\""+_a+"\" name=\""+eLibraryTabIDs[i]+"\" onclick=\"javascript:showeLibraryTab('"+eLibraryTabIDs[i]+"');"+_b+"\">"+eLibraryTabLabels[i]+"<br /><span class=\"tabHitCount\">"+intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]])+"</span></div>";
 }
@@ -278,6 +278,9 @@ _3b[i].className="hide";
 }else{
 _3b[i].parentNode.parentNode.getElementsByTagName("h3")[0].className="";
 _3b[i].className="";
+if(_44.getAttribute("href")!=_45.getAttribute("href")){
+_44.setAttribute("href",_45.getAttribute("href"));
+}
 _40++;
 }
 if(_44.getAttribute("type")!=_46){
@@ -324,9 +327,9 @@ if(_4c!=0){
 var _4d="";
 if(isDefined(window,"dcsMultiTrack")){
 var _4e=_4b.substring(_4b.indexOf("?")+1,_4b.length);
-_4d="onclick=\"dcsMultiTrack('DCS.dcssip','sfx.stanford.edu','DCS.dcsuri','local','DCS.dcsquery','"+_4e+"','WT.ti','SFX','DCSext.keywords','"+keywords+"','DCSext.offsite_link','1');";
+_4d="onclick=\"dcsMultiTrack('DCS.dcssip','sfx.stanford.edu','DCS.dcsuri','local','DCS.dcsquery','"+_4e+"','WT.ti','SFX','DCSext.keywords','"+keywords+"','DCSext.offsite_link','1');\"";
 }
-var _4f="FindIt@Stanford eJournal: <a target=\"_blank\" title=\"Fulltext access to "+_4c+"\" href=\""+_4b+"\" "+_4d+"><b>"+_4c.replace(/ \[.*\]/,"")+"</b></a><br />";
+var _4f="FindIt@Stanford eJournal: <a title=\"Fulltext access to "+_4c+"\" href=\""+_4b+"\" "+_4d+"><b>"+_4c.replace(/ \[.*\]/,"")+"</b></a><br />";
 var _50=document.getElementsByTagName("body").item(0);
 var _51=document.createElement("div");
 _51.className="hide";
@@ -563,24 +566,34 @@ window.location=_94;
 return false;
 }else{
 if(_91=="biomedsem"){
-openSearchResult("http://med.stanford.edu/seminars/searchresults.jsp?searchString="+_92+"&Submit=Go");
+var _95="http://med.stanford.edu/seminars/searchresults.jsp?searchString="+_92+"&Submit=Go";
+window.location=_95;
 return false;
 }else{
 if(_91=="catalog"){
-var _95="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1="+_92+"&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50";
-openSearchResult(_95);
+var _96="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1="+_92+"&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50";
+window.location=_96;
 return false;
 }else{
 if(_91=="google"){
-openSearchResult("http://www.google.com/search?hl=en&q="+_92);
+var _97="http://www.google.com/search?hl=en&q="+_92;
+if(GLOBALS.needsProxy=="true"){
+_97=GLOBALS.proxyPrefix+_97;
+}
+window.location=_97;
 return false;
 }else{
 if(_91=="pubmed"){
-openSearchResult("http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term="+_92);
+var _98="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term="+_92;
+if(GLOBALS.needsProxy=="true"){
+_98=GLOBALS.proxyPrefix+_98;
+}
+window.location=_98;
 return false;
 }else{
 if(_91=="stanford_who"){
-openSearchResult("https://stanfordwho.stanford.edu/lookup?search="+_92);
+var _99="https://stanfordwho.stanford.edu/lookup?search="+_92;
+window.location=_99;
 return false;
 }
 }
@@ -597,17 +610,17 @@ searching=true;
 return true;
 }
 var lastIndex=0;
-function lastSelectValue(_96){
-var val=_96.options[_96.selectedIndex].value;
+function lastSelectValue(_9a){
+var val=_9a.options[_9a.selectedIndex].value;
 if((val=="----------------")||(val=="")){
 if(lastIndex){
-_96.selectedIndex=lastIndex;
+_9a.selectedIndex=lastIndex;
 }else{
-_96.selectedIndex=0;
+_9a.selectedIndex=0;
 }
 }else{
 if(arguments.length>1&&arguments[1]=="portals"){
-window.location=GLOBALS.basePath+_96.options[_96.selectedIndex].value;
+window.location=GLOBALS.basePath+_9a.options[_9a.selectedIndex].value;
 }
 }
 }

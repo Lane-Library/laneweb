@@ -24,7 +24,7 @@
 			</table>
         </div>
 	<!--  carfeul about moving elements here ... search.js looks for ordered elements, not named -->
-			Source will open in a new window.
+
      <div id="incrementalSearchResults" class="hide">
 	 
      <div class="searchColumn3 largeFont">
@@ -71,8 +71,8 @@
 			<li id="skolar_aafp">AAFP</li>
             <li id="mdchandout">MD Consult</li>
             <li id="skolar_medfacts">MedFacts</li>
-            <li id="medlineplus_2">MedlinePlus: drug</li>
-            <li id="medlineplus_1">MedlinePlus: encyclopedia</li>
+            <li id="medlineplus_1">MedlinePlus: drug</li>
+            <li id="medlineplus_2">MedlinePlus: encyclopedia</li>
             <li id="medlineplus_0">MedlinePlus: topics</li>
             <li id="skolar_handouts">NIH-CDC-FDA</li>
             <li id="skolar_pdq_pat">PDQ Cancer</li>
