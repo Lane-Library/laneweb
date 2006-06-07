@@ -5,7 +5,8 @@
     
     <xsl:template match="/h:html/h:body/h:ul">
         <xsl:copy>
-            <xsl:apply-templates select="h:li[h:ul/h:li[@class='primaryCategory'] = $category]"/>
+            <xsl:apply-templates select="h:li[h:ul/h:li[@class='primaryCategory'] = $category
+                                              and contains(h:ul/h:li[@class='keywords'],'_show_me_')]"/>
         </xsl:copy>
     </xsl:template>
     

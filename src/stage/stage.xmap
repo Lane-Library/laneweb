@@ -64,6 +64,9 @@
             <map:match type="wildcard" pattern="clinical">
                 <map:redirect-to uri="{request:contextPath}/clinician/index.html"/>
             </map:match>-->
+<map:match type="regex" pattern="^(classes|classes/index.html)">
+<map:redirect-to uri="{request:contextPath}/services/workshops/laneclasses.html"/>
+</map:match>
             <!-- ========================================================== -->
             <map:match type="wildcard" pattern="**.html">
                  <map:match type="wildcard" pattern="**">

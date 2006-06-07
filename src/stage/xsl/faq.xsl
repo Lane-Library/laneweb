@@ -133,7 +133,7 @@
                             <h2>FAQs on this topic</h2>
                             <xsl:variable name="cat" select="h:ul/h:li[@class='primaryCategory']"/>
                             <ul>
-                                <xsl:for-each select="parent::h:ul/h:li[$cat=h:ul/h:li[@class='primaryCategory'] and not(@id = current()/@id)]">
+                                <xsl:for-each select="parent::h:ul/h:li[$cat=h:ul/h:li[@class='primaryCategory'] and not(@id = current()/@id) and contains(h:ul/h:li[@class='keywords'],'_show_me_')]">
                                     <li>
                                         <a href="/howto/index.html?id={@id}"><xsl:value-of select="text()"/></a>
                                     </li>
