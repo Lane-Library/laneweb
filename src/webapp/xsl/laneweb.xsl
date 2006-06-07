@@ -169,12 +169,12 @@
                     <xsl:with-param name="attr" select="'href'"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="starts-with(.,'http://lane.stanford.edu')">
+<!--            <xsl:when test="starts-with(.,'http://lane.stanford.edu')">
                 <xsl:call-template name="make-link">
                     <xsl:with-param name="link" select="substring-after(.,'http://lane.stanford.edu')"/>
                     <xsl:with-param name="attr" select="name()"/>
                 </xsl:call-template>
-            </xsl:when>         
+            </xsl:when>         -->
             <xsl:when test="contains(., '://') and contains(.,'{keywords}')">
                 <xsl:attribute name="{name()}">
                     <xsl:value-of select="substring-before(.,'{keywords}')"/><xsl:value-of select="$keywords"/><xsl:value-of select="substring-after(.,'{keywords}')"/>

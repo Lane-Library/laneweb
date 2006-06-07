@@ -217,8 +217,8 @@
                     <h4>Try another source</h4>
                     <p>Find <strong><span class="keywords"/></strong> in:</p>
                     <ul>
-                        <li><a class="proxy" target="_blank" href="http://www.cdc.gov/search.do?action=search&amp;queryText={keywords}">CDC</a></li>
-                        <li><a class="proxy" target="_blank" href="http://dermatlas.med.jhmi.edu/derm/resultNoCache.cfm?BO=AND&amp;keywords={keywords}">Dermatlas</a></li>
+                        <li><a class="proxy" href="http://www.cdc.gov/search.do?action=search&amp;queryText={keywords}">CDC</a></li>
+                        <li><a class="proxy" href="http://dermatlas.med.jhmi.edu/derm/resultNoCache.cfm?BO=AND&amp;keywords={keywords}">Dermatlas</a></li>
                         <li><a href="/online/er.html?keywords={keywords}">Lane eResources</a></li>
                         <li><a href="search.html?source=synchronous-peds&amp;id={$id}">Pediatric Core</a></li>
                         <li><a href="search.html?source=synchronous-research&amp;id={$id}">Bioresearch Core</a></li>

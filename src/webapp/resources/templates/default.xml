@@ -49,7 +49,8 @@
 										<area shape="rect" coords="400,0,468,12" href="http://www.palo-alto.med.va.gov/" alt="VA Palo Alto link" />
 										<area shape="rect" coords="469,0,600,12" href="http://www.sccgov.org/portal/site/vmc/" alt="Santa Clara Valley Medical link" />
 									</map>
-									<img id="topLinks" alt="affiliate links" src="/images/templates/default/affiliateLinks.gif" width="600" height="12" usemap="#affiliateLinks" border="0" />
+									<!--img id="topLinks" alt="affiliate links" src="/images/templates/default/affiliateLinks.gif" width="600" height="12" usemap="#affiliateLinks" border="0" /-->
+									<img id="topLinks" alt="affiliate links" src="/images/templates/default/affiliateLinksNew.gif" width="638" height="12" usemap="#affiliateLinks" border="0" />
                 </div>
 
                 <div id="searchContainer">
@@ -85,7 +86,7 @@
                             </select>
 
                             <input name="keywords" type="text" id="lw_search-keywords" style="font-weight: 400; width: 230px"/>
-                            <input type="submit" value="Go" />  <!--id="searchFormSubmitButton"-->
+                            <input type="submit" value=" Go " class="button"/>  <!--id="searchFormSubmitButton"-->
 														<div style="height: 5px; font-size: 5px;">&#160;</div>
 														<span id="displaySearchTaglineText">Find an eJournal, database, eBook, service, etc. or search inside reference sources.</span>
                         </form>
@@ -108,7 +109,7 @@
 													<span id="stanford_whoSearchTagline">Look up faculty, staff and students in the Stanford directory.</span>
 												</div>
                     <!--</div>-->
-										<div id="irtLogoContainer"><a href="http://irt.stanford.edu/" target="_blank"><img id="irtLogo" title="Information Resources &amp; Technology, Stanford University School of Medicine" alt="IRT logo" src="/images/templates/default/divisionIRT.gif" width="69" height="11" border="0" /></a></div>
+										<div id="irtLogoContainer"><a href="http://irt.stanford.edu/"><img id="irtLogo" title="Information Resources &amp; Technology, Stanford University School of Medicine" alt="IRT logo" src="/images/templates/default/divisionIRT.gif" width="69" height="11" border="0" /></a></div>
 										<div style="clear: both; height: 2px; font-size: 2px;">&#160;</div>
                 </div>
 								<div id="siteLinksContainer">
@@ -118,8 +119,8 @@
 													<span><a href="/portals/bioresearch.html" title="Bioresearch">Bioresearch</a></span>
 													<span><a href="/portals/clinical.html" title="Clinical">Clinical</a></span>
 													<span><a href="/services/index.html" title="Lane services">Lane Services</a></span>
-													<span><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000" target="_blank" class="proxy" title="PubMed">PubMed</a></span>
-													<span><a href="http://www.google.com/" target="_blank" title="Google" class="proxy">Google</a></span>
+													<span><a href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000" class="proxy" title="PubMed">PubMed</a></span>
+													<span><a href="http://www.google.com/" title="Google" class="proxy">Google</a></span>
                         </span>
 												<br style="clear:both;"/>
                 </div>

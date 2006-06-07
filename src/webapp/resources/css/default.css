@@ -3,7 +3,7 @@
 #pageContainer {
 	position: relative;
 	width: 100%;
-	min-width: 800px;
+	min-width: 838px;
 	max-width: 1200px;
 }
 
@@ -20,7 +20,7 @@
 	display: inline-block;
 	/*float: left;*/
 	position: relative;
-	margin-left: -800px;
+	margin-left: -838px;
 }
 
 #somLogoContainer {
