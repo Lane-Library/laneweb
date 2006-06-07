@@ -6,9 +6,13 @@
 		<link href="/style/default.css" rel="stylesheet" type="text/css" />
 		<link rel="special icon" href="/favicon.ico"/>
 	</head>
-	<body>
+	<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+	<div style="border-top: 4px #990000 solid;
+		border-bottom: 4px #990000 solid;
+		margin:0; padding:0;">
 		<div style="padding:1em">
 		<div id="lw_content"/>
 		</div>
+	</div>
 	</body>
 </html>
