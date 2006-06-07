@@ -399,15 +399,20 @@ div#otherPortalOptions {
 
 }
 	*/
-form#portalForm {
-	margin: 0px;
-	padding: 0px;
-}
+
 form {
 	margin: 0px;
 	padding: 0px;
 }
-	
+input.button  {
+	cursor:pointer;
+	cursor:hand;
+	font-weight: bold;
+	font-size: 1em;
+	color:#000;
+	text-align:middle;
+}
+
 #portalForm select{
 	/*position: absolute;*/
 	float:right;

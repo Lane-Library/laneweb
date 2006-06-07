@@ -69,7 +69,19 @@
             </xsl:variable>
             <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
             <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
-            <li><a href="{sql:url}" title="{sql:title}" class="{$proxy_class}">
+            <!--this is to strip server from faqs, kind of a hack -->
+            <xsl:variable name="url">
+                <xsl:choose>
+                    <xsl:when test="starts-with(sql:url,'http://lane.stanford.edu')">
+                        <xsl:value-of select="substring-after(sql:url,'http://lane.stanford.edu')"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="sql:url"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            
+            <li><a href="{$url}" title="{sql:title}" class="{$proxy_class}">
                 <xsl:choose>
                     <xsl:when test="$holdings-length &gt; 0 and $dates-length &gt; 0">
                         <xsl:apply-templates select="sql:holdings"/>, <xsl:value-of select="sql:dates"/>
