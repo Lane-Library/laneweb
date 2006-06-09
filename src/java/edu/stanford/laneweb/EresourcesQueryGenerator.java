@@ -150,7 +150,6 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
         } else {
             selectStatmentChars = new char[0];
         }
-        System.out.println("==>"+new String(selectStatmentChars));
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT,EMPTY_ATTS);
         this.xmlConsumer.startElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT,EMPTY_ATTS);
