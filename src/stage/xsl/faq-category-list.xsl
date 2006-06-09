@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://www.w3.org/1999/xhtml" version="1.0">
     <xsl:param name="category"/>
     
@@ -7,6 +8,7 @@
         <xsl:copy>
             <xsl:apply-templates select="h:li[h:ul/h:li[@class='primaryCategory'] = $category
                                               and contains(h:ul/h:li[@class='keywords'],'_show_me_')]"/>
+            <li class="moreItem"><a href="/howto/index.html?category={$category}">More</a></li>
         </xsl:copy>
     </xsl:template>
     

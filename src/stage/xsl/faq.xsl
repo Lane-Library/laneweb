@@ -138,6 +138,7 @@
                                         <a href="/howto/index.html?id={@id}"><xsl:value-of select="text()"/></a>
                                     </li>
                                 </xsl:for-each>
+                                <li class="moreItem"><a href="/howto/index.html?category={$primary-category}">More</a></li>
                             </ul>
                         </div>
                     </td>
