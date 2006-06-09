@@ -115,6 +115,18 @@
         <xsl:variable name="primary-category" select="/h:html/h:body/h:ul/h:li[@id=$id]/h:ul/h:li[@class='primaryCategory']"/>
         <xsl:variable name="root-category" select="/h:html/h:body/h:div[@id='categories']/h:ul/h:li[descendant-or-self::h:li/text() = $primary-category]/text()"/>
         <xsl:variable name="root-category-string" select="$category-map/h:div[h:span=$root-category]/h:span[2]"/>
+        <xsl:variable name="more-category">
+            <xsl:choose>
+                <xsl:when test="contains($primary-category,'&amp;')">
+                    <xsl:value-of select="substring-before($primary-category,'&amp;')"/>
+                    <xsl:text>%26</xsl:text>
+                    <xsl:value-of select="substring-after($primary-category,'&amp;')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$primary-category"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
             <table cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tr>
                     <td valign="top" align="left" id="leftColumn">

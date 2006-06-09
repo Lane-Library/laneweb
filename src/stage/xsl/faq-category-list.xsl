@@ -5,10 +5,22 @@
     <xsl:param name="category"/>
     
     <xsl:template match="/h:html/h:body/h:ul">
+        <xsl:variable name="more-category">
+            <xsl:choose>
+                <xsl:when test="contains($category,'&amp;')">
+                    <xsl:value-of select="substring-before($category,'&amp;')"/>
+                    <xsl:text>%26</xsl:text>
+                    <xsl:value-of select="substring-after($category,'&amp;')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="$category"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <xsl:copy>
             <xsl:apply-templates select="h:li[h:ul/h:li[@class='primaryCategory'] = $category
                                               and contains(h:ul/h:li[@class='keywords'],'_show_me_')]"/>
-            <li class="moreItem"><a href="/howto/index.html?category={$category}">More</a></li>
+            <li class="moreItem"><a href="/howto/index.html?category={$more-category}">More</a></li>
         </xsl:copy>
     </xsl:template>
     
