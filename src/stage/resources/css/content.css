@@ -344,7 +344,10 @@ ul li {
 	padding-bottom: 2px;
 	margin: 0px;
 }
-
+.moreItem {
+	background-image: url(/././images/templates/default/list-background-chevron.gif);
+	padding-left: 8px;
+}
 
 img {
 	border: 0px !important;
