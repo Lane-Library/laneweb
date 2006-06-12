@@ -35,7 +35,7 @@
         <![endif]-->
 						
     </head>
-    <body onload="startState(location.href);resetFocus();MM_preloadImages('eLibOn.jpg','eJournOn.jpg','clinOn.jpg','bioresearchOn.jpg','learnOn.jpg','laneServicesOn.jpg','pubMedon.jpg','googleOn.jpg')" onunload="searching = false;">
+    <body onload="startState(location.href);resetFocus();" onunload="searching = false;">
         <div id="pageContainer">
             <div id="pageHolder">
                 <div id="somLogoContainer">
@@ -69,17 +69,18 @@
                         <form id="searchFormContainer" method="get" action="/search.html" onsubmit="return submitSearch()" name="searchForm">
                             <span class="searchText largeFont">Search</span>
                             <select onchange="lastSelectValue(this); listSearchTagline(this);" name="source" id="source" style="font-weight: 400; width: 140px">
-                                <option value="all">Laneconnex</option>
-                                <option value="ej">&#160;&#160;eJournals</option>
-                                <option value="database">&#160;&#160;Databases</option>
-                                <option value="book">&#160;&#160;eBooks</option>
-                                <option value="cc">&#160;&#160;medCalcs</option>
+                                <option value="all">LaneConnex</option>
+                                <option value="ej">eJournals</option>
+                                <option value="database">Databases</option>
+                                <option value="book">eBooks</option>
+                                <option value="cc">medCalcs</option>
+								<option value="faq">Lane Services</option>
+								<option disabled="disabled">----------------</option>
                                 <option value="clinical">Clinical</option>
-                                <option value="peds">&#160;&#160;Pediatrics</option>
+                                <option value="peds">Pediatrics</option>
                                 <option value="research">Bioresearch</option>
                                 <option value="pubmed">PubMed</option>
                                 <option value="google">Google</option>
-                                <option value="faq">Lane Services</option>
                                 <option value="catalog">Lane Catalog</option>
                                 <option value="biomedsem">Biomed Seminars</option>
                                 <option value="stanford_who">Stanford.Who</option>
@@ -124,10 +125,11 @@
                         </span>
 												<br style="clear:both;"/>
                 </div>
-								<div id="collage">
+				<div id="collage">
                 	<div id="panoramicView">&#160;</div>
-										<img src="/images/templates/default/rightCollage.jpg" alt="Lane panoramic pictures" id="rightPanorama" width="469" height="57"/>
-								</div>
+					<img src="/images/templates/default/rightCollage.jpg" alt="Lane panoramic pictures" 
+						id="rightPanorama" width="469" height="57"/>
+				</div>
                 <div id="contentBody">
                     <div id="breadCrumb"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/">IRT</a> &gt; <span id="lw_breadcrumb"/></div>
 					<noscript><h3>Enable JavaScript for a better experience with Laneconnex.</h3><br/></noscript>
@@ -146,8 +148,11 @@
 						<td id="footerText" width="50%">
 					<a href="/howto/index.html?id=_48">Hours</a> &#160;&#160;&#8226;&#160;&#160;
 					<a href="/services/access/directions.html">Directions</a> &#160;&#160;&#8226;&#160;&#160;
-					<a href="/services/about.html">About Us</a> &#160;&#160;&#8226;&#160;&#160;
+					<a href="/services/about/index.html">About Us</a> &#160;&#160;&#8226;&#160;&#160;
 					<a href="/services/access/contacts/index.html">Contact Us</a> &#160;&#160;&#8226;&#160;&#160;
+					<a href="/feedback_preview.html?template=none" 
+	onclick="openSearchResult(this.href,'width=625,height=720,menubar=no,toolbar=no,scrollbars=yes,resizable=yes');return false;">Feedback</a>
+					&#160;&#160;&#8226;&#160;&#160;
 					<a href="http://laneintranet.stanford.edu/">Intranet</a><br/>
 					
 					<a href="/index.html">Lane Medical Library &#38; Knowledge Management Center</a>
