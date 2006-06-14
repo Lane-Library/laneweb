@@ -76,10 +76,11 @@
                                 <option value="cc">medCalcs</option>
 								<option value="faq">Lane Services</option>
 								<option disabled="disabled">----------------</option>
-                                <option value="clinical">Clinical</option>
-                                <option value="peds">Pediatrics</option>
                                 <option value="research">Bioresearch</option>
-                                <option value="pubmed">PubMed</option>
+								<option value="clinical">Clinical</option>
+                                <option value="peds">Pediatrics</option>
+                                <option disabled="disabled">----------------</option>
+								<option value="pubmed">PubMed</option>
                                 <option value="google">Google</option>
                                 <option value="catalog">Lane Catalog</option>
                                 <option value="biomedsem">Biomed Seminars</option>
