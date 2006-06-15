@@ -3,7 +3,8 @@
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xi="http://www.w3.org//2001/XInclude"
-    exclude-result-prefixes="h xi">
+    xmlns:str="http://exslt.org/strings"
+    exclude-result-prefixes="h xi str">
 
     <!-- ===========================  PARAMETERS ========================= -->
     <!-- the template parameter from the request -->
@@ -95,6 +96,38 @@
                         </xsl:copy>
                     </xsl:otherwise>
                 </xsl:choose>
+            </xsl:when>
+			<!-- obfuscate email addresses with JavaSscript -->
+            <xsl:when test="starts-with(@href, 'mailto:')">
+				<xsl:variable name="address">
+					<text>'+'ma'+''+'il'+'to'+':'</text>
+			    	<xsl:for-each select="str:tokenize(substring-after(@href,'mailto:'),'')">
+							<text>+'<xsl:value-of select="."/>'</text>
+					</xsl:for-each>
+					<text>+'</text>
+				</xsl:variable>
+				<xsl:element name="script">
+					<xsl:attribute name="type">text/javascript</xsl:attribute>
+					var link = '<xsl:element name="a">
+						<xsl:attribute name="href">
+							<xsl:value-of select="$address"/>
+						</xsl:attribute>
+						<xsl:variable name="link-text">
+							<xsl:if test="contains(., '@')">
+								<text>'</text>
+						    	<xsl:for-each select="str:tokenize(.,'')">
+										<text>+'<xsl:value-of select="."/>'</text>
+								</xsl:for-each>
+								<text>+'</text>
+							</xsl:if>
+							<xsl:if test="not(contains(., '@'))">
+								<xsl:value-of select="."/>
+							</xsl:if>
+							</xsl:variable>
+						<xsl:value-of select="$link-text"/>
+					</xsl:element>';
+					document.write(link);
+				</xsl:element>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy>
