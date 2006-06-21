@@ -204,6 +204,7 @@ var _2e=0;
 var _2f=0;
 document.getElementById("clinicalMetaCount").parentNode.href=GLOBALS.basePath+"/search.html?source=clinical&id="+_25+"&keywords="+keywords;
 document.getElementById("researchMetaCount").parentNode.href=GLOBALS.basePath+"/search.html?source=research&id="+_25+"&keywords="+keywords;
+setCookie("LWeLibMetaState","id="+_25+"&keywords="+keywords);
 for(var i=0;i<_24.length;i++){
 var _31=_24[i].getElementsByTagName("resource");
 for(var j=0;j<_31.length;j++){
@@ -280,7 +281,11 @@ _3b[i].parentNode.parentNode.getElementsByTagName("h3")[0].className="";
 _3b[i].className="";
 if(_44.getAttribute("href")!=_45.getAttribute("href")){
 var _47=_44.innerHTML;
+if(navigator.appVersion.indexOf("Safari")>-1){
+_44.setAttribute("href",_45.getAttribute("href").replace(/&#38;/g,"&"));
+}else{
 _44.setAttribute("href",_45.getAttribute("href"));
+}
 _44.innerHTML=_47;
 }
 _40++;

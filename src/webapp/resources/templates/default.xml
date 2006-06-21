@@ -62,7 +62,7 @@
                     </div>
 										<div id="searchContainerTopBorder">&#160;</div>
 										<div id="laneConnexContainer">
-											<a href="http://lane.stanford.edu/"><img src="/images/templates/default/laneconnex_logo_redo.gif" alt="Laneconnex logo" height="27" width="160"/></a>
+											<a href="/index.html"><img src="/images/templates/default/laneconnex_logo_redo.gif" alt="Laneconnex logo" height="27" width="160"/></a>
 										</div>
                     <!--<div style="position: relative; top:0px; width: 100%; height: auto;">-->
 
@@ -74,12 +74,13 @@
                                 <option value="database">Databases</option>
                                 <option value="book">eBooks</option>
                                 <option value="cc">medCalcs</option>
-								<option value="faq">Lane Services</option>
-								<option disabled="disabled">----------------</option>
+																<option value="faq">Lane Services</option>
+																<option disabled="disabled">----------------</option>
                                 <option value="research">Bioresearch</option>
-								<option value="clinical">Clinical</option>
+																<option value="clinical">Clinical</option>
                                 <option value="peds">Pediatrics</option>
-                                <option value="pubmed">PubMed</option>
+                                <option disabled="disabled">----------------</option>
+																<option value="pubmed">PubMed</option>
                                 <option value="google">Google</option>
                                 <option value="catalog">Lane Catalog</option>
                                 <option value="biomedsem">Biomed Seminars</option>
@@ -87,7 +88,7 @@
                             </select>
 
                             <input name="keywords" type="text" id="lw_search-keywords" style="font-weight: 400; width: 230px"/>
-                            <input type="submit" value=" Go " class="button"/>  <!--id="searchFormSubmitButton"-->
+                            <input type="submit" value="Go" class="button"/>  <!--id="searchFormSubmitButton"-->
 														<div style="height: 5px; font-size: 5px;">&#160;</div>
 														<span id="displaySearchTaglineText">Find an eJournal, database, eBook, service, etc. or search inside reference sources.</span>
                         </form>
@@ -128,7 +129,7 @@
 				<div id="collage">
                 	<div id="panoramicView">&#160;</div>
 					<img src="/images/templates/default/rightCollage.jpg" alt="Lane panoramic pictures" 
-						id="rightPanorama" width="469" height="57"/>
+						id="rightPanorama" width="481" height="57"/>
 				</div>
                 <div id="contentBody">
                     <div id="breadCrumb"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/">IRT</a> &gt; <span id="lw_breadcrumb"/></div>
@@ -143,7 +144,7 @@
 					<table>
 						<tr>
 							<td width="25%">
-								<a href="http://lane.stanford.edu/"><img src="/images/templates/default/laneLogoFooter.gif" width="82" height="29" border="0" alt="Lane logo"/></a>
+								<a href="/index.html"><img src="/images/templates/default/laneLogoFooter.gif" width="82" height="29" border="0" alt="Lane logo"/></a>
 							</td>
 						<td id="footerText" width="50%">
 					<a href="/howto/index.html?id=_48">Hours</a> &#160;&#160;&#8226;&#160;&#160;

@@ -167,6 +167,9 @@
       <xsl:when test="../@title">
       <xsl:value-of select="../@title"/>
     </xsl:when>
+      <xsl:when test="../@alt">
+        <xsl:value-of select="../@alt"/>
+      </xsl:when>
       <xsl:when test="normalize-space(..)!=''">
         <xsl:value-of select="normalize-space(..)"/>
       </xsl:when>

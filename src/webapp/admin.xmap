@@ -3,12 +3,12 @@
     <map:components>
         <map:generators default="status">
             <map:generator name="status" logger="sitemap.generator.status"
-                src="org.apache.cocoon.generation.StatusGenerator" pool-max="4"
-                pool-min="2" pool-grow="2"/>
+                src="org.apache.cocoon.generation.StatusGenerator" pool-max="4" pool-min="2" pool-grow="2"/>
         </map:generators>
         <map:serializers default="xml"/>
         <map:actions default="clear-cache">
-            <map:action name="clear-cache" logger="sitemap.acting.clear-cache" src="org.apache.cocoon.acting.ClearCacheAction"/>
+            <map:action name="clear-cache" logger="sitemap.acting.clear-cache"
+                src="org.apache.cocoon.acting.ClearCacheAction"/>
         </map:actions>
         <map:matchers default="wildcard"/>
         <map:pipes default="noncaching"/>

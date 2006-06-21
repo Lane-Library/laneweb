@@ -778,7 +778,8 @@ p.micromedex a:link, p.micromedex a:visited {
 dt {font-weight:bolder}
 dd {margin:0; padding:0 0 0 2em}
 .provider {color:gray}
-dl ul {padding:0;margin:0;list-style-position:outside;list-style:none;}
+/*dl ul {padding:0;margin:0;list-style-position:outside;list-style:none;} IE7 fix below*/
+dl ul {padding:1px;margin:0;list-style-position:outside;list-style:none;}
 dl li {background-image:none;}
 
 .searchResults {

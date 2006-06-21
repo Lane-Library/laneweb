@@ -17,7 +17,7 @@
 					<td class="popInContent" colspan="3">
 				        <span id="spellResults">Try query in: <a href="search.html?source=clinical&amp;id={$id}">Clinical</a>, 
 						<a href="search.html?source=research&amp;id={$id}">Bioresearch</a> or  
-						<a href="search.html?source=eLibrary&amp;id={$id}">Laneconnex</a>
+						<a href="search.html?source=all&amp;id={$id}">Laneconnex</a>
 						| More on: <a href="portals/peds.html">Pediatrics Portal</a></span>
 
 

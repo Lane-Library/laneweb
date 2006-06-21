@@ -13,14 +13,14 @@
 }
 
 * html #pageContainer {
-	border-left: 800px solid #fff;
+	border-left: 838px solid #fff;
 }
 
 * html #pageHolder {
 	display: inline-block;
 	/*float: left;*/
 	position: relative;
-	margin-left: -800px;
+	margin-left: -838px;
 }
 
 #somLogoContainer {

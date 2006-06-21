@@ -12,8 +12,7 @@
                 <map:read src="{defaults:live-base}/resources/images/{1}.gif" mime-type="image/gif"/>
             </map:match>
             <map:match type="wildcard" pattern="favicon.ico">
-                <map:read
-                    src="{defaults:live-base}/resources/images/favicon.ico" mime-type="image/x-icon"/>
+                <map:read src="{defaults:live-base}/resources/images/favicon.ico" mime-type="image/x-icon"/>
             </map:match>
             <map:match type="wildcard" pattern="style/*.css">
                 <map:read type="txt-resource" src="{defaults:live-base}/resources/css/{1}.css">
@@ -21,7 +20,8 @@
                 </map:read>
             </map:match>
             <map:match type="wildcard" pattern="javascript/*.js">
-                <map:read type="txt-resource" src="{defaults:live-base}/resources/javascript/{1}.js" mime-type="application/x-javascript">
+                <map:read type="txt-resource" src="{defaults:live-base}/resources/javascript/{1}.js"
+                    mime-type="application/x-javascript">
                     <map:parameter name="path" value="{request:contextPath}"/>
                 </map:read>
             </map:match>
@@ -32,7 +32,8 @@
                 <map:read src="{defaults:live-base}/resources/images/{1}.png" mime-type="image/png"/>
             </map:match>
             <map:match type="wildcard" pattern="pdf/**.pdf">
-                <map:read type="no-byte-range" src="{defaults:live-base}/resources/pdf/{1}.pdf" mime-type="application/pdf"/>
+                <map:read type="no-byte-range" src="{defaults:live-base}/resources/pdf/{1}.pdf"
+                    mime-type="application/pdf"/>
             </map:match>
             <map:match type="wildcard" pattern="**.gif">
                 <map:read src="{defaults:live-base}/content/{1}.gif" mime-type="image/gif"/>
