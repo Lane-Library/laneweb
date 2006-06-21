@@ -18,10 +18,12 @@ body {
 	color: #777;
 	/*font-size: 0.9em;*/
 }
+
 #breadCrumb a:link, #breadCrumb a:visited {
 	text-decoration: none;
 	color: #990000;
 }
+
 #breadCrumb a:hover, #breadCrumb a:active  {
 	text-decoration: underline;
 	color: #990000;
@@ -98,6 +100,7 @@ body {
 	background-color:  #B7B5AB; /* latest blue to use selectively elsewhere -- #7589a0; /*#879ab0; /*#7589a0;  #879ab0  * #69798c  #B7B5AB;  grey from cancer center */
 	text-transform: uppercase;
 }
+
 .sideBlueBox h2.attention {
 	background-color:  #7589a0;
 }
@@ -163,6 +166,7 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 }
 #6884a4
 */
+
 .centerBlueBox h2 {
 	float: left;
 	width: auto;
@@ -200,6 +204,7 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 	text-align: left;
 }
 */
+
 .sideBlueBoxShortContent, .sideBlueBoxLongContent, .sideTanBoxContent, .centerGreenBoxContent, .whiteBoxContent, .centerBlueBoxContent {
 	height: 1%; /* solves dissolving/vanishing borders in IE */
 	padding: 5px;
@@ -298,6 +303,7 @@ div#bottomCurvedCorner {
 #footer table {
 	width: 100%;
 }
+
 #footer  td {
 	margin: 0px;
 	padding: 0px;
@@ -310,12 +316,14 @@ td#footerText {
 	line-height: 120%;
 	text-align: center;
 }
+
 /*
 .footerComment {
 	font-style: italic;
 	color: #333;
 }
 */
+
 #footer a:link, #footer a:visited, #footer a:hover, #footer a:active {
 	text-decoration: none;
 }
@@ -344,6 +352,7 @@ ul li {
 	padding-bottom: 2px;
 	margin: 0px;
 }
+
 .moreItem {
 	background-image: url(/././images/templates/default/list-background-chevron.gif);
 	padding-left: 8px;
@@ -407,6 +416,7 @@ form {
 	margin: 0px;
 	padding: 0px;
 }
+
 input.button  {
 	cursor:pointer;
 	cursor:hand;
@@ -414,6 +424,9 @@ input.button  {
 	font-size: 1em;
 	color:#000;
 	text-align:middle;
+	padding: 1px;
+	padding-left: 2px;
+	padding-right: 2px;
 }
 
 #portalForm select{
@@ -490,9 +503,11 @@ h3 {
 	padding-top:0;
 	margin-top:0;
 }
+
 a {
 	color: #900;
 }
+
 a:link, a:visited {
 	color: #900;
 	text-decoration: none;
@@ -778,7 +793,8 @@ p.micromedex a:link, p.micromedex a:visited {
 dt {font-weight:bolder}
 dd {margin:0; padding:0 0 0 2em}
 .provider {color:gray}
-dl ul {padding:0;margin:0;list-style-position:outside;list-style:none;}
+/*dl ul {padding:0;margin:0;list-style-position:outside;list-style:none;} IE7 fix below*/
+dl ul {padding:1px;margin:0;list-style-position:outside;list-style:none;}
 dl li {background-image:none;}
 
 .searchResults {
@@ -806,10 +822,15 @@ dl li {background-image:none;}
 .rightColumnof2inBox, .rightColumnof3inBox {
 	margin-right: 0px;
 }
+
+/* commented out by TP - doesn't appear to be used */
+
+/*
 .tableWithSidePadding td {
 	padding-right: 1em;
 	padding-bottom: .4em;
 }
+*/
 
 /*font specifications*/
 .smallFont {
@@ -875,12 +896,3 @@ h3 {
 	margin-bottom: -16px;
 }
 
-
-
-
-#button
-{
-color: #000;
-/*border: 2px outset #d7b9c9; */
-font-size: .9em;
-}

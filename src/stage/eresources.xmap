@@ -6,8 +6,7 @@
         </map:generators>
         <map:transformers default="xsltc">
             <map:transformer name="sql" logger="sitemap.transformer.sql"
-                src="org.apache.cocoon.transformation.SQLTransformer"
-                pool-max="4" pool-min="2" pool-grow="2"/>
+                src="org.apache.cocoon.transformation.SQLTransformer" pool-max="4" pool-min="2" pool-grow="2"/>
         </map:transformers>
         <map:serializers default="xml"/>
         <map:matchers default="wildcard"/>
@@ -30,7 +29,7 @@
                 </map:transform>
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/ezproxy-servers.xsl"/>
                 <map:serialize type="text"/>
-             </map:match>
+            </map:match>
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>

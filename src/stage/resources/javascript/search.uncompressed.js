@@ -324,6 +324,9 @@ IOClient.prototype = {
 					document.getElementById('clinicalMetaCount').parentNode.href = GLOBALS.basePath + '/search.html?source=clinical&id=' + sessionID + '&keywords=' + keywords;
 					document.getElementById('researchMetaCount').parentNode.href = GLOBALS.basePath + '/search.html?source=research&id=' + sessionID + '&keywords=' + keywords;
 
+					// put metasearch session ID and keywords into cookie so at browser back button, search session can be reused
+					setCookie('LWeLibMetaState','id='+sessionID+'&keywords='+keywords);
+
 					for( var i = 0; i < engines.length; i++){
 						var resources = engines[i].getElementsByTagName('resource');
 						for( var j = 0; j < resources.length; j++){
@@ -383,7 +386,8 @@ IOClient.prototype = {
 			// Incremental metasearch results (clinical, peds, research searches)
 			//  processing for XHTML version of incremental search results
 			//  full display version of results (headers, footers, etc.) used so that proxy prefixes are applied correctly (could just add proxy logic to ajax-search.xsl) 
-			//  note: string2dom w/in IE engine requires strict XHTML validity
+			//  NOTE: string2dom w/in IE engine requires strict XHTML validity
+			//  NOTE: all of this should be replaced with a version that works on XML version of metasearch results (with proxy links added via XSLT)
 			*/ 
 			case "incremental":
 				var dom = string2dom(this.request.responseText);
@@ -436,9 +440,18 @@ IOClient.prototype = {
 					// if old and new URLs differ, use new one
 					//oldAnchor.href = (oldAnchor.href != newAnchor.href) ? newAnchor.href : oldAnchor.href;
 					if(oldAnchor.getAttribute('href') != newAnchor.getAttribute('href')){
-						// retarded fix for IE 7: http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html 
+						// retarded fix for IE 7: http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
+						// grab innerHTML of anchor before setting href, then copy back to oldAnchor (below)
 						var text = oldAnchor.innerHTML;
-						oldAnchor.setAttribute('href',newAnchor.getAttribute('href'));	
+
+						// Safari doesn't decode ampersands in URLs
+						if(navigator.appVersion.indexOf("Safari")>-1){
+							oldAnchor.setAttribute('href',newAnchor.getAttribute("href").replace(/&#38;/g,'&'));	
+						}
+						else{
+							oldAnchor.setAttribute('href',newAnchor.getAttribute('href'));	
+						}
+
 						oldAnchor.innerHTML = text;
 					}
 

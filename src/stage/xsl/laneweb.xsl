@@ -100,11 +100,11 @@
 			<!-- obfuscate email addresses with JavaSscript -->
             <xsl:when test="starts-with(@href, 'mailto:')">
 				<xsl:variable name="address">
-					<text>'+'ma'+''+'il'+'to'+':'</text>
+					<xsl:text>'+'ma'+''+'il'+'to'+':'</xsl:text>
 			    	<xsl:for-each select="str:tokenize(substring-after(@href,'mailto:'),'')">
-							<text>+'<xsl:value-of select="."/>'</text>
+							<xsl:text>+'</xsl:text><xsl:value-of select="."/><xsl:text>'</xsl:text>
 					</xsl:for-each>
-					<text>+'</text>
+					<xsl:text>+'</xsl:text>
 				</xsl:variable>
 				<xsl:element name="script">
 					<xsl:attribute name="type">text/javascript</xsl:attribute>
@@ -114,11 +114,11 @@
 						</xsl:attribute>
 						<xsl:variable name="link-text">
 							<xsl:if test="contains(., '@')">
-								<text>'</text>
+								<xsl:text>'</xsl:text>
 						    	<xsl:for-each select="str:tokenize(.,'')">
-										<text>+'<xsl:value-of select="."/>'</text>
+										<xsl:text>+'</xsl:text><xsl:value-of select="."/><xsl:text>'</xsl:text>
 								</xsl:for-each>
-								<text>+'</text>
+								<xsl:text>+'</xsl:text>
 							</xsl:if>
 							<xsl:if test="not(contains(., '@'))">
 								<xsl:value-of select="."/>

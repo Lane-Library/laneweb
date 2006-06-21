@@ -334,7 +334,8 @@
 								<xsl:when test="contains(../@class,'short')">
 									<xsl:value-of select="concat('s', substring-after(../@class, 'shortS'), 'ShortContent', ' ' , 'mediumFont', $hide-or-not)"/>
 								</xsl:when>
-								<xsl:when test="ancestor::h:td[@class='centralColumn']/h:div[1][@class=$current-class-selection]">
+								<!--<xsl:when test="ancestor::h:td[@class='centralColumn']/h:div[1][@class=$current-class-selection]">-->
+								<xsl:when test="ancestor::h:td[@class='centralColumn'] and not(contains(@class, 'Blue'))">
 									<xsl:value-of select="concat(../@class, 'Content', ' ' , 'largeFont', $hide-or-not)"/>
 								</xsl:when>
 								<xsl:otherwise>
@@ -363,7 +364,8 @@
 								<xsl:when test="contains(@class,'short')">
 									<xsl:value-of select="concat('s', substring-after(@class, 'shortS'), 'ShortContent', ' ' , 'mediumFont')"/>
 								</xsl:when>
-								<xsl:when test="ancestor::h:td[@class='centralColumn']/h:div[1][@class=$current-class-selection]">
+								<!--<xsl:when test="ancestor::h:td[@class='centralColumn']/h:div[1][@class=$current-class-selection]">-->
+								<xsl:when test="ancestor::h:td[@class='centralColumn'] and not(contains(@class, 'Blue'))">
 									<xsl:value-of select="concat(@class, 'Content', ' ' , 'largeFont')"/>
 								</xsl:when>
 								<xsl:otherwise>
@@ -481,7 +483,7 @@
 		</xsl:copy>
 	</xsl:template>
 	
-	<xsl:template match="@*[not(self::xmlns:xi)]">
+	<xsl:template match="@*">
 		<xsl:copy-of select="."/>
 	</xsl:template>
 
