@@ -99,6 +99,7 @@
             </xsl:when>
 			<!-- obfuscate email addresses with JavaSscript -->
             <xsl:when test="starts-with(@href, 'mailto:')">
+				<xsl:variable name="apostrophe">'</xsl:variable>
 				<xsl:variable name="address">
 					<xsl:text>'+'ma'+''+'il'+'to'+':'</xsl:text>
 			    	<xsl:for-each select="str:tokenize(substring-after(@href,'mailto:'),'')">
@@ -109,22 +110,27 @@
 				<xsl:element name="script">
 					<xsl:attribute name="type">text/javascript</xsl:attribute>
 					var link = '<xsl:element name="a">
+						<xsl:copy-of select="@*"/>
 						<xsl:attribute name="href">
 							<xsl:value-of select="$address"/>
 						</xsl:attribute>
-						<xsl:variable name="link-text">
-							<xsl:if test="contains(., '@')">
-								<xsl:text>'</xsl:text>
-						    	<xsl:for-each select="str:tokenize(.,'')">
-										<xsl:text>+'</xsl:text><xsl:value-of select="."/><xsl:text>'</xsl:text>
-								</xsl:for-each>
-								<xsl:text>+'</xsl:text>
-							</xsl:if>
-							<xsl:if test="not(contains(., '@'))">
-								<xsl:value-of select="."/>
-							</xsl:if>
-							</xsl:variable>
-						<xsl:value-of select="$link-text"/>
+						<xsl:for-each select="*">
+							<xsl:apply-templates select="."/>
+						</xsl:for-each>
+						<xsl:text>'</xsl:text>
+				    	<xsl:for-each select="str:tokenize(text(),'')">
+							<xsl:text>+'</xsl:text>
+							<xsl:choose>
+								<xsl:when test=". = $apostrophe">
+									<xsl:text>\'</xsl:text>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:value-of select="."/>
+								</xsl:otherwise>
+							</xsl:choose>
+							<xsl:text>'</xsl:text>
+						</xsl:for-each>
+						<xsl:text>+'</xsl:text>
 					</xsl:element>';
 					document.write(link);
 				</xsl:element>
