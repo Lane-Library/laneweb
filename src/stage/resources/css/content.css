@@ -377,16 +377,22 @@ li img {
 */
 
 td#leftColumn, td#rightColumn {
-	width: 180px;
+	width: 170px; /* 180px originally, prior to removing 15px side padding from central column*/
 	height: auto;
 	vertical-align: top;
 	overflow: hidden;
 }
 
+td#leftColumn {
+	padding-right: 20px;
+}
+
+td#rightColumn {
+	padding-left: 20px;
+}
+
 td.centralColumn {
 	width: auto;
-	padding-left: 15px;
-	padding-right: 15px;
 	vertical-align: top;
 	/*text-align: center; exploiting IE hack to center column boxes*/
 }
