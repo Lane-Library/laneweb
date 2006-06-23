@@ -77,6 +77,7 @@
 				<div class="searchCategory">
                     <h3 class="hide">Stanford</h3>
                     <ul>
+                       <li id="lanefaq">Lane Services</li>
 					<li id="biomedseminars">Biomedical seminars</li>
 					<li id="cap">Faculty research profiles</li>				
                     </ul>

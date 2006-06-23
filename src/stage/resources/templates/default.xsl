@@ -62,43 +62,9 @@
 		<xsl:choose>
 			<xsl:when test="string($category)">
 				<xsl:copy-of select="h:div[@id='breadCrumb']"/>
-				<xsl:for-each select="child::node()[not(self::h:div[@id='breadCrumb'])]">
-					<xsl:choose>
-						<xsl:when test="name()">
-							<xsl:choose>
-								<xsl:when test="normalize-space(string(.)) and name()!='h1'">
-									<xsl:element name="{name()}">
-										<xsl:copy-of select="@*[not(self::class)]"/>
-										<xsl:attribute name="class">
-											<xsl:choose>
-												<xsl:when test="@class">
-													<xsl:value-of select="concat(@class, ' largeFont')"/>
-												</xsl:when>
-												<xsl:otherwise>
-													<xsl:text>largeFont</xsl:text>
-												</xsl:otherwise>
-											</xsl:choose>
-										</xsl:attribute>
-										<xsl:apply-templates select="child::node()"/>
-									</xsl:element>
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:copy-of select="."/>
-								</xsl:otherwise>
-							</xsl:choose>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:choose>
-								<xsl:when test="normalize-space(string(.)) and not(self::comment())">
-									<span class="largeFont"><xsl:copy-of select="."/></span>
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:copy-of select="."/>
-								</xsl:otherwise>
-							</xsl:choose>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:for-each>
+				<xsl:call-template name="font-application">
+					<xsl:with-param name="candidate-node" select="."/>
+				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise>
 
@@ -131,44 +97,10 @@
 	<xsl:template match="h:td[@class='centralColumn'][not(descendant::h:div[contains(@class, 'Box')])]">
 	<!--<xsl:template match="h:td[@class='centralColumn']">-->
 		<td class="centralColumn">
-		<xsl:for-each select="child::node()">
-			<!--<xsl:for-each select="child::node()[not(self::h:div[contains(@class, 'Box')])]">-->
-				<xsl:choose>
-					<xsl:when test="name()">
-						<xsl:choose>
-							<xsl:when test="normalize-space(string(.)) and name()!='h1'">
-								<xsl:element name="{name()}">
-									<xsl:copy-of select="@*[not(self::class)]"/>
-									<xsl:attribute name="class">
-										<xsl:choose>
-											<xsl:when test="@class">
-												<xsl:value-of select="concat(@class, ' largeFont')"/>
-											</xsl:when>
-											<xsl:otherwise>
-												<xsl:text>largeFont</xsl:text>
-											</xsl:otherwise>
-										</xsl:choose>
-									</xsl:attribute>
-									<xsl:apply-templates select="child::node()"/>
-								</xsl:element>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:copy-of select="."/>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:choose>
-							<xsl:when test="normalize-space(string(.)) and not(self::comment())">
-								<span class="largeFont"><xsl:copy-of select="."/></span>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:copy-of select="."/>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:otherwise>
-				</xsl:choose>
-			</xsl:for-each>
+
+				<xsl:call-template name="font-application">
+					<xsl:with-param name="candidate-node" select="."/>
+				</xsl:call-template>
 
 
 <!--
@@ -395,6 +327,48 @@
 			<br style="clear:both;"/><!-- assisting content editors, who would most likely omit this crucial tag, whose importance is not exactly apparent, but whose absence creates a gap between the alphabetic display and the info div[@class='popInContent'] below it -->
 		</xsl:if>
 		<xsl:copy-of select="."/>
+	</xsl:template>
+	
+	<xsl:template name="font-application">
+		<xsl:param name="candidate-node"/>
+		
+				<xsl:for-each select="$candidate-node/child::node()[not(self::h:div[@id='breadCrumb'])]">
+					<xsl:choose>
+						<xsl:when test="name()">
+							<xsl:choose>
+								<xsl:when test="normalize-space(string(.)) and name()!='h1'">
+									<xsl:element name="{name()}">
+										<xsl:copy-of select="@*[not(self::class)]"/>
+										<xsl:attribute name="class">
+											<xsl:choose>
+												<xsl:when test="@class">
+													<xsl:value-of select="concat(@class, ' largeFont')"/>
+												</xsl:when>
+												<xsl:otherwise>
+													<xsl:text>largeFont</xsl:text>
+												</xsl:otherwise>
+											</xsl:choose>
+										</xsl:attribute>
+										<xsl:apply-templates select="child::node()"/>
+									</xsl:element>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:copy-of select="."/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:choose>
+								<xsl:when test="normalize-space(string(.)) and not(self::comment())">
+									<span class="largeFont"><xsl:copy-of select="."/></span>
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:copy-of select="."/>
+								</xsl:otherwise>
+							</xsl:choose>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:for-each>
 	</xsl:template>
 	
 <!--alphabet incorporation-->
