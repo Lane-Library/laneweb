@@ -48,7 +48,7 @@
                 <map:read src="{defaults:live-base}/content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
             </map:match>
             <map:match type="wildcard" pattern="**.ram">
-                <map:read src="{defaults:live-base}/content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
+                <map:read src="{defaults:live-base}/content/{1}.ram" mime-type="audio/x-pn-realaudio"/>
             </map:match>
             <map:match type="wildcard" pattern="**.camv">
                 <map:read src="{defaults:live-base}/content/{1}.camv" mime-type="application/x-camtasia_video"/>
