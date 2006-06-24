@@ -79,20 +79,20 @@
                     </map:transform>
 
                     <map:select type="resource-exists">
-                        <map:when test="{defaults:stage-base}/resources/templates/{chain:template}.xsl">
+                        <map:when test="{defaults:stage-base}/xsl/template-{chain:template}.xsl">
                             <map:transform type="xsltc"
-                                src="{defaults:stage-base}/resources/templates/{chain:template}.xsl">
+                                src="{defaults:stage-base}/xsl/template-{chain:template}.xsl">
                                 <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="xsltc" src="{defaults:stage-base}/resources/templates/default.xsl">
+                            <map:transform type="xsltc" src="{defaults:stage-base}/xsl/template-default.xsl">
                                 <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             </map:transform>
                         </map:otherwise>
                     </map:select>
                     <!--
-                     <map:transform type="xsltc" src="{defaults:stage-base}/resources/templates/default.xsl">
+                     <map:transform type="xsltc" src="{defaults:stage-base}/xsl/template-default.xsl">
                          <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                      </map:transform>
 										 -->
