@@ -234,11 +234,11 @@
                     </map:transform>
                     <!--
                     <map:select type="resource-exists">
-                        <map:when test="{defaults:live-base}/resources/templates/{chain:template}.xsl">
-                            <map:transform type="xsltc" src="{defaults:live-base}/resources/templates/{chain:template}.xsl"/>
+                        <map:when test="{defaults:live-base}/xsl/template-{chain:template}.xsl">
+                            <map:transform type="xsltc" src="{defaults:live-base}/xsl/template-{chain:template}.xsl"/>
                         </map:when>
                     </map:select> -->
-                    <map:transform type="xsltc" src="{defaults:live-base}/resources/templates/default.xsl">
+                    <map:transform type="xsltc" src="{defaults:live-base}/xsl/template-default.xsl">
                         <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         <!--<map:parameter name="alpha" value="{request-param:a}"/>-->
                     </map:transform>
