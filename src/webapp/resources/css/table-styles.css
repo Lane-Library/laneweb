@@ -1,0 +1,92 @@
+/* table styles for EdTech */
+/* CSS Document */
+
+
+.greyGreenTable
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	color: #000000;
+	
+}
+
+.greyGreenTable td
+{
+	border-color: #cccccc;
+	border-style:solid;
+	border-left-width: 0px;
+	border-top-width: 0px;
+	border-right-width: 1px;
+	border-bottom-width: 0px;
+	padding: 3px 3px 3px 3px;
+	margin: 1px 1px 1px 1px;
+}
+
+.tableHeader td
+
+{
+	border-style:solid;
+	border-left-width: 0px;
+	border-top-width: 0px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	color: #444;	
+}
+
+.greyGreenTable a
+{
+	font-size: 11px;
+}
+
+.tableHeader a
+{
+	font-size: 12px;
+}
+
+.tableHeader
+{
+	font-weight: bold;
+	font-size: 12px;
+	background-color: #ecece8;
+	text-align:left;
+	height: 25px;
+}
+
+
+
+.tableAltA
+{
+	height: 25px;
+	overflow: visible; 
+	background-color: #f2f3ed
+}
+
+.tableAltB
+{
+	height: 25px;
+	background-color: #d2d5c9;
+	overflow: visible; 
+}
+
+.tableSep
+{
+	font-weight: bold;
+	font-size: 12px;
+	background-color: #ecece8;
+	text-align:left;
+}
+
+.tableSep td
+
+{
+	border-style:solid;
+	border-left-width: 0px;
+	border-top-width: 6px;
+	border-right-width: 1px;
+	border-bottom-width: 6px;
+	color: #444;	
+}
+
+
+
