@@ -3,6 +3,7 @@
 		xmlns:h="http://www.w3.org/1999/xhtml"
 		xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 		xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:xi="http://www.w3.org//2001/XInclude"
 		exclude-result-prefixes="h xi">
 
 	<xsl:output method="xml" indent="yes"/>
