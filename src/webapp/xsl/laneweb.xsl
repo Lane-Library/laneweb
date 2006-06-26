@@ -30,7 +30,11 @@
 
     <xsl:param name="sunetid"/>
     
+    <!-- m request parameter is a MeSH term -->
     <xsl:param name="m"/>
+    
+    <!-- LPCH and SHC don't require authentication for proxy server -->
+    <xsl:param name="affiliation"/>
     
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
@@ -142,8 +146,12 @@
                         <xsl:attribute name="onclick">
                             <xsl:text>openSearchResult('</xsl:text>
                             <xsl:choose>
+                                <xsl:when test="$proxy-links = 'true' and ($affiliation = 'LPCH' or $affiliation = 'SHC')">
+                                    <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
+                                    <xsl:value-of select="."/>
+                                </xsl:when>
                                 <xsl:when test="$proxy-links = 'true' and $ticket != '' and $sunetid != ''">
-                                    <xsl:text>http://laneproxy.fo.stanford.edu/login?user=</xsl:text>
+                                    <xsl:text>http://laneproxy.stanford.edu/login?user=</xsl:text>
                                     <xsl:value-of select="$sunetid"/>
                                     <xsl:text>&amp;ticket=</xsl:text>
                                     <xsl:value-of select="$ticket"/>
@@ -190,7 +198,11 @@
                 <xsl:call-template name="make-link">
                     <xsl:with-param name="link">
                         <xsl:choose>
-                            <xsl:when test="$proxy-links = 'true' and $ticket != '' and $sunetid != ''">
+                            <xsl:when test="$affiliation = 'LPCH' or $affiliation = 'SHC'">
+                                <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
+                                <xsl:value-of select="."/>
+                            </xsl:when>
+                            <xsl:when test="$ticket != '' and $sunetid != ''">
                                 <xsl:text>http://laneproxy.stanford.edu/login?user=</xsl:text>
                                 <xsl:value-of select="$sunetid"/>
                                 <xsl:text>&amp;ticket=</xsl:text>
