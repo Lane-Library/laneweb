@@ -76,6 +76,7 @@
                         <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
                         <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                         <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                        <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     </map:transform>
 
                     <map:select type="resource-exists">
