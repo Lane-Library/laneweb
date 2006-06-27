@@ -28,7 +28,7 @@ body {
 #headerTop {
 	width: auto;
 	height:69px;
-	background: url(/././images/templates/100years/topGradBackgr.jpg) repeat-x top left;
+	background: url(/images/centennial/topGradBackgr.jpg) repeat-x top left;
 	border-bottom: 20px solid #c5bd9f;
 }
 
@@ -106,7 +106,7 @@ body>#contentContainer {
 	color: #900;
 	text-align: center;
 	padding-top: 2px; /* cover empty space at top*/
-	background: url(/././images/templates/100years/leftColumnBackgr.jpg) repeat-x;
+	background: url(/images/centennial/leftColumnBackgr.jpg) repeat-x;
 }
 	
 #content {
@@ -157,7 +157,7 @@ body>#contentContainer {
 /*following sidebar ... override lane standard*/
 #sidebar li {
 	padding-left: 12px;
-	background-image: url(/././images/templates/100years/bullet.gif);
+	background-image: url(/images/centennial/bullet.gif);
 	background-repeat: no-repeat;
 	background-position: 0 0.3em;
 }
@@ -174,4 +174,89 @@ body>#contentContainer {
 padding-top: 2em;
 margin-bottom: 1em;
 border-bottom: 1px #E3E1DC solid;
+}
+
+.subtitle {
+font: Gloucester MT Extra Condensed; 
+font-size: 18px;
+font-weight: bold;
+color: #A35101;
+margin-top: 2em;
+margin-bottom: 0.5em;
+}
+
+h2 {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #003163;
+}
+
+a:link {
+	color: #990000;
+	text-decoration: underline;
+}
+a:visited {
+	color: #990000;
+	text-decoration: underline;
+}
+a:hover {
+	color: #003366;
+	text-decoration: underline;
+}
+a:active {
+	color: #003399;
+	text-decoration: underline;
+}
+
+.dates {
+font: Gloucester MT Extra Condensed; 
+font-size: 110%; 
+font-weight: bold; 
+color: #A35101; 
+float:left; 
+margin-right: 20px;
+}
+
+.section {
+background: #F7F7E7; 
+margin: 0; 
+padding: 1em; 
+border: 1px #DEDECE solid;
+}
+
+.sectionhead {
+background:#DEDECE; 
+color:#226B6D; 
+padding:0; 
+margin:0;
+}
+
+.thumbnail {
+float: left;
+margin-right: 10px;
+border: 0;
+}
+
+.inline {
+list-style: none;
+display: inline;
+padding-right: 1em;
+}
+
+a.inlinenav {
+color: #963;
+}
+
+.inset {
+background: #FFFFEA; 
+margin-right: 2em; 
+margin-left: 2em;
+padding: 1em;
+}
+
+.subhead {
+color: #A35101;
+margin-top: 0;
+margin-bottom: 1em;
 }

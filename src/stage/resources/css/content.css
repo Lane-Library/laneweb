@@ -829,14 +829,12 @@ dl li {background-image:none;}
 	margin-right: 0px;
 }
 
-/* commented out by TP - doesn't appear to be used */
-
-/*
+/* this is used on the contact page and on the classes page */
 .tableWithSidePadding td {
 	padding-right: 1em;
 	padding-bottom: .4em;
 }
-*/
+
 
 /*font specifications*/
 .smallFont {

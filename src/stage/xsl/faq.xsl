@@ -47,10 +47,20 @@
                 <table cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                         <td valign="top" align="left" id="leftColumn">
+<xsl:choose>
+<xsl:when test="string-length($root-category-string) = 0">
+<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+href="cocoon:/services/leftmenu_services.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
+<xi:fallback/>
+</xi:include>
+</xsl:when>
+<xsl:otherwise>
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                 href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
                                 <xi:fallback/>
                             </xi:include>
+</xsl:otherwise>
+</xsl:choose>
                         </td>
                         <td valign="top" align="left" class="centralColumn">
                             
@@ -130,10 +140,20 @@
             <table cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tr>
                     <td valign="top" align="left" id="leftColumn">
+<xsl:choose>
+<xsl:when test="string-length($root-category-string) = 0">
+<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+href="cocoon:/services/leftmenu_services.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
+<xi:fallback/>
+</xi:include>
+</xsl:when>
+<xsl:otherwise>
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                 href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
                                 <xi:fallback/>
                             </xi:include>
+</xsl:otherwise>
+</xsl:choose>
                     </td>
                     <td valign="top" align="left" class="centralColumn">
                         <h1>
