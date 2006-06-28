@@ -24,7 +24,7 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="h:li">
+    <xsl:template match="h:li[not(ancestor::h:div)]">
         <xsl:copy>
             <a href="/howto/index.html?id={@id}"><xsl:value-of select="text()"/></a>
         </xsl:copy>
