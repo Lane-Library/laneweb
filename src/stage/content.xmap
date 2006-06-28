@@ -103,7 +103,7 @@
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match type="wildcard" pattern="howto/index.html">
-                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq-test.html"/>
+                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/faq.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
