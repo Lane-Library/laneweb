@@ -7,15 +7,15 @@
 
 	<xsl:output method='xml' omit-xml-declaration='no' indent="yes"/>
 
-	<xsl:param name="keyword" />
+	<xsl:param name="q" />
 
 	<xsl:template match="h:html">
 		<response>
 		<xsl:for-each select="h:body/h:table/h:tr/h:td/h:table/h:tr/h:td/h:a">
 			<xsl:variable name="matches">
-				<xsl:apply-templates select="h:b[java:contains(self::h:b,$keyword)]"/>
+				<xsl:apply-templates select="h:b[java:contains(self::h:b,$q)]"/>
 			</xsl:variable>
-			<xsl:if test="string-length($matches) &gt; 0 and string-length($keyword) &gt; 2">
+			<xsl:if test="string-length($matches) &gt; 0 and string-length($q) &gt; 2">
 				<result>
 					<name><xsl:value-of select="h:b"/></name>
 					<link>

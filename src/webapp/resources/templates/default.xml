@@ -115,7 +115,7 @@
 										<div style="clear: both; height: 2px; font-size: 2px;">&#160;</div>
                 </div>
 								<div id="siteLinksContainer">
-									<span id="askUsContainer"><a href="/services/access/contacts/askus.html"><img src="/images/templates/default/question_mark.gif" alt="question mark" width="11" height="12"/></a>&#160;&#160;<span id="askUsText"><a href="/services/access/contacts/askus.html">Ask Us</a></span></span>
+									<span id="askUsContainer"><a href="/contacts/index.html?loadTab=askus"><img src="/images/templates/default/question_mark.gif" alt="question mark" width="11" height="12"/></a>&#160;&#160;<span id="askUsText"><a href="/contacts/index.html?loadTab=askus">Ask Us</a></span></span>
                         <span id="siteLinks">
 													<span><a href="/online/ej.html" title="eJournals">eJournals</a></span>
 													<span><a href="/portals/bioresearch.html" title="Bioresearch">Bioresearch</a></span>
@@ -150,7 +150,7 @@
 					<a href="/howto/index.html?id=_48">Hours</a> &#160;&#160;&#8226;&#160;&#160;
 					<a href="/services/access/directions.html">Directions</a> &#160;&#160;&#8226;&#160;&#160;
 					<a href="/services/about/index.html">About Us</a> &#160;&#160;&#8226;&#160;&#160;
-					<a href="/services/access/contacts/index.html">Contact Us</a> &#160;&#160;&#8226;&#160;&#160;
+					<a href="/contacts/index.html">Contact Us</a> &#160;&#160;&#8226;&#160;&#160;
 					<a href="/feedback_preview.html?template=none" 
 	onclick="openSearchResult(this.href,'width=625,height=720,menubar=no,toolbar=no,scrollbars=yes,resizable=yes');return false;">Feedback</a>
 					&#160;&#160;&#8226;&#160;&#160;

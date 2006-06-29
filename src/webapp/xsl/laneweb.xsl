@@ -486,12 +486,7 @@
             <xsl:with-param name="uri-before" select="'/'"/>
             <xsl:with-param name="uri-remaining">
                 <xsl:choose>
-                    <xsl:when test="contains($request-uri,'portals/')">
-                        <xsl:value-of select="substring-after($request-uri,'portals/')"/>
-                    </xsl:when>
-                    <xsl:when test="contains($request-uri,'online/')">
-                        <xsl:value-of select="substring-after($request-uri,'online/')"/>
-                    </xsl:when>
+                    <!-- this is how the breadcrumb is coerced into what it should be based on faq category -->
                     <xsl:when test="$source-doc/h:head/h:meta[@name='lw_faqCategory']">
                         <xsl:value-of select="substring-after($sitemap//h:a[.=$source-doc/h:head/h:meta[@name='lw_faqCategory']/@content]/@href,'/')"/>
                     </xsl:when>
@@ -512,8 +507,15 @@
             <xsl:value-of select="$sitemap//h:a[@href=concat($uri-before,'index.html')]"/>
         </xsl:variable>
         <xsl:variable name="uri-next" select="substring-after($uri-remaining, '/')"/>
+ <!--       <div>uri-before <xsl:value-of select="$uri-before"/></div>
+        <div>uri-remaining <xsl:value-of select="$uri-remaining"/></div>
+        <div>uri-current <xsl:value-of select="$uri-current"/></div>
+        <div>label-current <xsl:value-of select="$label-current"/></div>
+        <div>uri-next <xsl:value-of select="$uri-next"/></div>-->
         <xsl:choose>
             <xsl:when test="contains($uri-remaining, '/')">
+                <!-- here is a hack to prevent the non-existent top level portals/index.html from appearing in breadcrumb in history portal -->
+                <xsl:if test="$uri-before != '/portals/'">
                 <a>
                     <xsl:call-template name="make-link">
                         <xsl:with-param name="link" select="concat($uri-before, 'index.html')"/>
@@ -522,6 +524,7 @@
                     <xsl:value-of select="$label-current"/>
                 </a>
                 <xsl:text>&#160;&gt;&#160;</xsl:text>
+                    </xsl:if>
                 <xsl:call-template name="breadcrumb-section">
                     <xsl:with-param name="uri-before" select="concat($uri-before, $uri-current, '/')"/>
                     <xsl:with-param name="uri-remaining" select="$uri-next"/>
@@ -534,6 +537,8 @@
                 <xsl:value-of select="$label-current"/>
             </xsl:when>
             <xsl:otherwise>
+                <!-- here is a hack to prevent the top level online and portals index.html from appearing in breadcrumb -->
+                <xsl:if test="$uri-before != '/online/' and $uri-before != '/portals/'">
                 <a>
                     <xsl:call-template name="make-link">
                         <xsl:with-param name="link" select="concat($uri-before, 'index.html')"/>
@@ -542,6 +547,7 @@
                     <xsl:value-of select="$label-current"/>
                 </a>
                 <xsl:text>&#160;&gt;&#160;</xsl:text>
+                </xsl:if>
                 <xsl:variable name="title">
                     <xsl:value-of select="$sitemap//h:a[@href=concat($uri-before,$uri-remaining)]"/>
                 </xsl:variable>
