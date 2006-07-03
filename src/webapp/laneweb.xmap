@@ -47,7 +47,7 @@
                 <doctype-public>-//W3C//DTD XHTML 1.0 Transitional//EN</doctype-public>
                 <doctype-system>http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd</doctype-system>
                 <encoding>UTF-8</encoding>
-                <indent>no</indent>
+                <indent>yes</indent>
             </map:serializer>
             <map:serializer name="html" mime-type="text/html" logger="sitemap.serializer.html"
                 src="org.apache.cocoon.serialization.HTMLSerializer" pool-max="32" pool-min="16" pool-grow="4">
@@ -263,10 +263,10 @@
             <map:match type="wildcard" pattern="**">
                 <map:redirect-to uri="{1}/index.html"/>
             </map:match>
-            <!--            <map:handle-errors>
+            <map:handle-errors>
                 <map:generate src="cocoon:/error.html"/>
                 <map:serialize type="xhtml" status-code="404"/>
-            </map:handle-errors>-->
+            </map:handle-errors>
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>
