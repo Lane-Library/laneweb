@@ -93,6 +93,7 @@
 					<!--li id="wiley_0">Current Protocols</li       not working, removing june 2. Pam.-->
 					<li id="enzymology">Methods in Enzymology</li>
 					<li id="protocolonline">Protocol Online</li>
+					<li id="cshprotocols">Cold Spring Harbor Protocols</li>				
 					</ul>
 					</div>
 					

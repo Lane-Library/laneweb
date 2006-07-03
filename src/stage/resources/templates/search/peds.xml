@@ -54,18 +54,31 @@
                 </div>
 				
 				<div class="searchCategory">	
-                    <h3 class="hide">More Texts</h3>
+                    <h3 class="hide">Genetics</h3>
                     <ul>
-						<li id="mdc_hlh">Harriet Lane Handbook</li>
-                        <li id="mdc_miller">Miller's Anesthesia</li>
+						<li id="genereviews">Gene Reviews</li>
 						<li id="crossdb_omim">OMIM: Inherited Disease</li>
-                        <li id="mdc_park">Pediatric Cardiology</li>
-                        <li id="mdc_green">Skeletal Trauma in Children</li>
-                        <li id="skolar_scott">Danforth's ObGyn</li>
+                    </ul>
+                </div> 
+
+				
+				<div class="searchCategory">	
+                    <h3 class="hide">Obstetrics</h3>
+                    <ul>
+                        <li id="skolar_scott">Danforth's Obstetrics  &amp; Gynecology</li>
                         <li id="mdc_gabbe">Gabbe's Obstetrics</li>
                     </ul>
                 </div> 
-				
+								
+				<div class="searchCategory">	
+                    <h3 class="hide">More Pediatric Texts</h3>
+                    <ul>
+						<li id="mdc_hlh">Harriet Lane Handbook</li>
+                        <li id="mdc_miller">Miller's Anesthesia</li>
+                        <li id="mdc_park">Pediatric Cardiology</li>
+                        <li id="mdc_green">Skeletal Trauma in Children</li>
+                    </ul>
+                </div> 
 			</div>	
 			
 			<div class="searchColumn3 largeFont">
