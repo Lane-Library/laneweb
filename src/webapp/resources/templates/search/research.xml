@@ -39,7 +39,7 @@
 						<li id="faculty1000med">Faculty of 1000 Medicine</li>
 						<li id="gopubmed">GoPubMed by gene ontology</li>								
 						<li id="crossdb_omim">OMIM: Inherited Disease</li>	
-						<li id="flashpoint_sciplus">SearchPlus@LANL</li>						
+						<li id="flashpoint_sci_plus_0">SearchPlus@LANL</li>
                         </ul>
                     </div>
 				
@@ -77,6 +77,7 @@
 				<div class="searchCategory">
                     <h3 class="hide">Stanford</h3>
                     <ul>
+                       <li id="lanefaq">Lane Services</li>
 					<li id="biomedseminars">Biomedical seminars</li>
 					<li id="cap">Faculty research profiles</li>				
                     </ul>
@@ -92,6 +93,7 @@
 					<!--li id="wiley_0">Current Protocols</li       not working, removing june 2. Pam.-->
 					<li id="enzymology">Methods in Enzymology</li>
 					<li id="protocolonline">Protocol Online</li>
+					<li id="cshprotocols">Cold Spring Harbor Protocols</li>				
 					</ul>
 					</div>
 					
