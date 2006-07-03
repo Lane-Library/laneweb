@@ -107,6 +107,10 @@
             <map:match type="wildcard" pattern="**">
                 <map:redirect-to uri="{1}/index.html"/>
             </map:match>
+            <map:handle-errors>
+                <map:generate src="cocoon:/error.html"/>
+                <map:serialize type="xhtml" status-code="404"/>
+            </map:handle-errors>
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>
