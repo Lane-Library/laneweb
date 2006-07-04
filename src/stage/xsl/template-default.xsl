@@ -58,7 +58,7 @@
 	
 <!-- FAQs per category -->
 	
-	<xsl:template match="h:div[@id='contentBody'][not(descendant::h:table) and $request-uri != 'search.html']">
+	<xsl:template match="h:div[@id='contentBody'][not(descendant::h:td[@class='centralColumn']) and $request-uri != 'search.html' and not(contains($request-uri, 'browse.html'))]"><!-- remove URL screening b/c rickety and dangerous -->
 		<div id="contentBody">
 		<!--<xsl:choose>
 			<xsl:when test="string($category)">
@@ -350,7 +350,7 @@
 			<xsl:choose>
 				<xsl:when test="name()">
 					<xsl:choose>
-						<xsl:when test="self::h:div and contains(@class, 'Box')">
+						<xsl:when test="self::h:div and (contains(@class, 'Box') or @class='searchHeader' or @class='popInContent')">
 							<xsl:apply-templates select="."/>
 						</xsl:when>
 						<xsl:when test="normalize-space(string(.)) and name()!='h1'">
@@ -442,14 +442,16 @@
 				</span>
 			</xsl:when>
 			<xsl:otherwise>
-				<span class="eLibraryTab">
+				
 					<a href="{$eLibrary-type}browse.html?a={$browse-lowercase-letter}&amp;t={$eLibrary-search-code}">
+					<span class="eLibraryTab">
 						<xsl:if test="$browse-capital-letter='#'">
 							<xsl:attribute name="title">non-alphabetical characters</xsl:attribute>
 						</xsl:if>
 						<xsl:value-of select="$browse-capital-letter"/>
+						</span>
 					</a>
-				</span>
+				
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>

@@ -519,7 +519,7 @@ a:link, a:visited {
 	text-decoration: none;
 }
 
-a:hover, a:active {
+a:hover, a:active, a:hover span.eLibraryTab, a:active span.eLibraryTab {
 	color: #036;
 	text-decoration: underline !important;
 }
@@ -847,6 +847,9 @@ dl li {background-image:none;}
 
 .largeFont {
 	font-size: 1.2em;
+}
+.tinyFont {
+	font-size: xx-small;
 }
 
 h1, .portalTitle {
