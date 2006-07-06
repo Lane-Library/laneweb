@@ -174,28 +174,43 @@
             <map:match type="wildcard" pattern="admin/**">
                 <map:mount uri-prefix="admin" check-reload="yes" src="admin.xmap"/>
             </map:match>
-            <!-- ========================================================== -->
-            <!--
-            <map:match type="wildcard" pattern="online/ebooks.html">
-                <map:redirect-to uri="{request:contextPath}/online/eb.html"/>
-            </map:match>
-            <map:match type="wildcard" pattern="online/elearning.html">
-                <map:redirect-to uri="{request:contextPath}/classes/index.html"/>
-            </map:match>
-            <map:match type="wildcard" pattern="online/eja.html">
-                <map:redirect-to uri="{request:contextPath}/online/ej.html"/>
-            </map:match>
-            <map:match type="wildcard" pattern="toolkits/**">
-                <map:redirect-to uri="{request:contextPath}/clinician/specialist/index.html"/>
-            </map:match>
-            <map:match type="wildcard" pattern="clinical">
-                <map:redirect-to uri="{request:contextPath}/clinician/index.html"/>
-            </map:match>
--->
-            <map:match type="regex" pattern="^(classes|classes/index.html)">
+            <!-- ========================== permenent redirects ============================ -->
+            <map:match type="wildcard" pattern="classes/index.html">
                 <map:redirect-to uri="{request:contextPath}/services/workshops/laneclasses.html"/>
             </map:match>
-            <!-- ========================================================== -->
+            <map:match type="wildcard" pattern="edtech/index.html">
+                <map:redirect-to uri="{request:contextPath}/services/about/edtech/index.html"/>
+            </map:match>
+            <map:match type="wildcard" pattern="edtech/learning_spaces/facilities/m112.html">
+                <map:redirect-to uri="{request:contextPath}/services/spaces/features/m112.html"/>
+            </map:match>
+            <!-- ========================== permenent redirects ============================ -->
+            <!-- ========================== temporary redirects ============================ -->
+            <map:match type="wildcard" pattern="clinician/peds.html">
+                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/peds.html"/>
+            </map:match>
+            <map:match type="wildcard" pattern="clinician/index.html">
+                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/clinical.html"/>
+            </map:match>
+            <map:match type="wildcard" pattern="researcher/index.html">
+                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/bioresearch.html"/>
+            </map:match>
+            <map:match type="wildcard" pattern="clinician/specialist/nursing.html">
+                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/nursing.html"/>
+            </map:match>
+            <map:match type="wildcard" pattern="howto/sunetid.html">
+                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/howto/index.html?id=_1414"/>
+            </map:match>
+            <map:match type="wildcard" pattern="clinician/specialist/oncology.html">
+                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/oncology.html"/>
+            </map:match>
+            <map:match type="wildcard" pattern="clinician/specialist/ophthalmology.html">
+                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/ophthalmology.html"/>
+            </map:match>
+            <map:match type="wildcard" pattern="liaisons/index.html">
+                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/contacts/index.html?loadTab=liaisions"/>
+            </map:match>
+            <!-- ========================== temporary redirects ============================ -->
             <map:match type="wildcard" pattern="**.html">
                 <map:act type="session-action"/>
                 <map:aggregate element="doc" label="content">
