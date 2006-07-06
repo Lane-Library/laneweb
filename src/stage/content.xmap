@@ -13,7 +13,7 @@
         <map:pipes default="noncaching"/>
     </map:components>
     <map:pipelines>
-        <map:pipeline type="caching">
+        <map:pipeline type="noncaching">
             <map:match pattern="template2meta-engines">
                 <map:generate type="file" src="cocoon:/templates/search/{request-param:source}.xml"/>
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/template2meta-engines.xsl">
@@ -26,8 +26,6 @@
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/faq-category-list.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-        </map:pipeline>
-        <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="eresources/**">
                 <map:mount uri-prefix="eresources" check-reload="yes" src="{defaults:stage-base}/eresources.xmap"/>
             </map:match>
@@ -91,6 +89,11 @@
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
                 <map:transform type="xsltc" src="{defaults:stage-base}/xsl/faq.xsl"/>
                 <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="redirect.html">
+                <map:generate type="html" src="{defaults:stage-base}/content/redirect.html"/>
+                <map:transform type="xsltc" src="{defaults:stage-base}/xsl/redirect.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="blog/*">
