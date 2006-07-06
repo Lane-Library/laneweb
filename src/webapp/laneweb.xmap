@@ -208,7 +208,7 @@
                 <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/ophthalmology.html"/>
             </map:match>
             <map:match type="wildcard" pattern="liaisons/index.html">
-                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/contacts/index.html?loadTab=liaisions"/>
+                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/contacts/index.html?loadTab=liaisons"/>
             </map:match>
             <!-- ========================== temporary redirects ============================ -->
             <map:match type="wildcard" pattern="**.html">
