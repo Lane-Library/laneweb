@@ -119,6 +119,7 @@
 							<xsl:value-of select="$address"/>
 						</xsl:attribute>
 						<xsl:for-each select="*">
+							<xsl:text>'+'</xsl:text>
 							<xsl:apply-templates select="."/>
 						</xsl:for-each>
 						<xsl:text>'</xsl:text>
