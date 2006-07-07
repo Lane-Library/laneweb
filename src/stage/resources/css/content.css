@@ -39,7 +39,8 @@ body {
 	z-index: 3;
 }
 
-.sideBlueBox, .sideTanBox, .centerGreenBox, .whiteBox, .centerBlueBox {
+.sideBlueBox, .sideTanBox, .centerGreenBox, .whiteBox, .centerBlueBox,
+.ABox, .BSideBox, .CSideBox, .DSideBox, .EMainBox {
 	height: auto;
 	margin: 0px;
 	margin-bottom: 15px;
@@ -47,21 +48,28 @@ body {
 	/*overflow: hidden;*/
 }
 
-.sideBlueBox, .sideTanBox, .whiteBox  {
+.sideBlueBox, .sideTanBox, .whiteBox,
+.ABox, .BSideBox, .CSideBox, .DSideBox {
 	width: 170px;
 }
 
-.centerGreenBox, .centerBlueBox, .centralColumn .whiteBox {
+.centerGreenBox, .centerBlueBox, .centralColumn .whiteBox,
+.centralColumn .ABox, .EMainBox {
 	width: auto;
 }
 
-.whiteBox {
+.whiteBox,
+.ABox {
 	border: 1px solid #ccc;
 	text-align: center; /* used to center the grey divider due to a bug in IE ignoring the auto margin */
 }
 
 .sideBlueBox h2, .sideBlueBox h2.SquareTitle,
-.sideTanBox h2, .centerGreenBox h2, .whiteBox h2, .centerBlueBox h2 {
+.sideTanBox h2, .centerGreenBox h2, .whiteBox h2, .centerBlueBox h2,
+.ABox h2, .BSideBox h2, 
+.CSideBox h2, .DSideBox h2,
+.CSideBox h2.SquareTitle, .DSideBox h2.SquareTitle,
+.EMainBox h2 {
 	padding-top: 3px;
 	padding-bottom: 3px;
 	text-align: center;
@@ -69,63 +77,88 @@ body {
 	margin: 0px;
 }
 
-.sideBlueBox h2, .sideBlueBox h2.ImageTitle, .sideBlueBox h2.SquareTitle {
+.sideBlueBox h2, .sideBlueBox h2.ImageTitle, .sideBlueBox h2.SquareTitle,
+.CSideBox h2, .DSideBox h2,
+.CSideBox h2.ImageTitle, .DSideBox h2.ImageTitle,
+.CSideBox h2.SquareTitle, .DSideBox h2.SquareTitle {
 	color: white;
 }
 
-#leftColumn .sideBlueBox h2 {
+#leftColumn .sideBlueBox h2,
+#leftColumn .CSideBox h2, 
+#leftColumn .DSideBox h2 {
 	background-image: url(/././images/templates/default/whiteCornerBlueBoxTL.gif);
 	background-repeat: no-repeat;
 	background-position: top left;
 }
 
-#leftColumn .sideBlueBox h2 {
+#leftColumn .sideBlueBox h2,
+#leftColumn .CSideBox h2, 
+#leftColumn .DSideBox h2
+{
 	padding-left: 10px;
 	padding-right: 2px;
 }
 
-#rightColumn .sideBlueBox h2   {
+#rightColumn .sideBlueBox h2,
+#rightColumn .CSideBox h2, 
+#rightColumn .DSideBox h2 {
 	background-image: url(/././images/templates/default/whiteCornerBlueBoxTR.gif);
 	background-repeat: no-repeat;
 	background-position: top right;
 }
 
-#rightColumn .sideBlueBox h2 {
+#rightColumn .sideBlueBox h2,
+#rightColumn .CSideBox h2, 
+#rightColumn .DSideBox h2 {
 	padding-left: 2px;
 	padding-right: 10px;
 }
 
-.sideBlueBox h2 {
+.sideBlueBox h2,
+.CSideBox h2, 
+.DSideBox h2 {
 	/* background-color: #6784A2;  - blue.        darker blue 7589a0;      lighter blue 879ab0;*/
 	background-color:  #B7B5AB; /* latest blue to use selectively elsewhere -- #7589a0; /*#879ab0; /*#7589a0;  #879ab0  * #69798c  #B7B5AB;  grey from cancer center */
 	text-transform: uppercase;
 }
 
-.sideBlueBox h2.attention {
+.sideBlueBox h2.attention,
+.CSideBox h2.attention, 
+.DSideBox h2.attention {
 	background-color:  #7589a0;
 }
 
-.sideBlueBox h2.SquareTitle {
+.sideBlueBox h2.SquareTitle,
+.CSideBox h2.SquareTitle, 
+.DSideBox h2.SquareTitle {
 	/* background-color: #6784A2;  - blue.*/
 	background-color: #B7B5AB;  /*grey from cancer center */
 	text-transform: uppercase;
 }
 
-#leftColumn .sideBlueBox h2.SquareTitle, #rightColumn .sideBlueBox h2.SquareTitle {
+#leftColumn .sideBlueBox h2.SquareTitle, #rightColumn .sideBlueBox h2.SquareTitle,
+#leftColumn .CSideBox h2.SquareTitle, #rightColumn .CSideBox h2.SquareTitle,
+#leftColumn .DSideBox h2.SquareTitle, #rightColumn .DSideBox h2.SquareTitle {
 	background-image: none;
 }
 
-#leftColumn .sideBlueBox h2.ImageTitle, #rightColumn .sideBlueBox h2.ImageTitle  {
+#leftColumn .sideBlueBox h2.ImageTitle, #rightColumn .sideBlueBox h2.ImageTitle,
+#leftColumn .CSideBox h2.ImageTitle, #rightColumn .CSideBox h2.ImageTitle,
+#leftColumn .DSideBox h2.ImageTitle, #rightColumn .DSideBox h2.ImageTitle {
+	background-image: none;
 	padding: 0px;
 }
 
-#leftColumn .sideTanBox h2 {
+#leftColumn .sideTanBox h2,
+#leftColumn .BSideBox h2 {
 	color: #444;
 	text-transform: uppercase;
 	background: #d9d7b0 url(/././images/templates/default/beigeTopLeftCorner.gif) no-repeat top left;
 }
 
-#rightColumn .sideTanBox h2 {
+#rightColumn .sideTanBox h2,
+#rightColumn .BSideBox h2 {
 	color: #444;
 	text-transform: uppercase;
 	background: #d9d7b0 url(/././images/templates/default/beigeTopRightCorner.gif) no-repeat top right;
@@ -167,7 +200,8 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 #6884a4
 */
 
-.centerBlueBox h2 {
+.centerBlueBox h2,
+.EMainBox h2 {
 	float: left;
 	width: auto;
 	padding-left: 20px;
@@ -179,7 +213,8 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 	border-bottom: 1px solid #fff;
 }
 
-.whiteBox h2 {
+.whiteBox h2,
+.ABox h2 {
 	padding: 6px;
 	padding-top: 10px;
 }
@@ -189,7 +224,8 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 	border: 1px solid #e0dfc2;
 }
 
-.whiteBoxDivider {
+.whiteBoxDivider,
+.ABoxDivider {
 	clear: both;
 	width: 90%;
 	height: 6px;
@@ -205,7 +241,8 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 }
 */
 
-.sideBlueBoxShortContent, .sideBlueBoxLongContent, .sideTanBoxContent, .centerGreenBoxContent, .whiteBoxContent, .centerBlueBoxContent {
+.sideBlueBoxShortContent, .sideBlueBoxLongContent, .sideTanBoxContent, .centerGreenBoxContent, .whiteBoxContent, .centerBlueBoxContent,
+.ABoxContent, .BSideBoxContent, .CSideBoxContent, .DSideBoxContent, .EMainBoxContent {
 	height: 1%; /* solves dissolving/vanishing borders in IE */
 	padding: 5px;
 	padding-left: 10px;
@@ -215,17 +252,18 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 	/*background: yellow;*/
 }
 
-.sideBlueBoxShortContent h2, .sideBlueBoxLongContent h2, .sideTanBoxContent h2, .centerGreenBoxContent h2, .whiteBoxContent h2, .centerBlueBoxContent h2 {
+.sideBlueBoxShortContent h2, .sideBlueBoxLongContent h2, .sideTanBoxContent h2, .centerGreenBoxContent h2, .whiteBoxContent h2, .centerBlueBoxContent h2,
+.ABoxContent h2, .BSideBoxContent h2, .CSideBoxContent h2, .DSideBoxContent h2, .EMainBoxContent h2 {
 	display: none;
 }
 
-.sideBlueBoxShortContent {
+.sideBlueBoxShortContent, .CSideBoxContent {
 	margin-top: 1px;
 	border: 1px solid #ccc;
 	background: #fff;
 }
 
-.sideBlueBoxLongContent {
+.sideBlueBoxLongContent, .DSideBoxContent {
 	margin-top: 1px;
 	border: 1px solid #ccc;
 	background: #fff url(/././images/templates/default/blueBoxGradient.jpg) repeat-x bottom left;
@@ -236,15 +274,18 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 	/*background-color: green;*/
 }
 
-#leftColumn .sideTanBoxContent {
+#leftColumn .sideTanBoxContent,
+#leftColumn .BSideBoxContent {
 	background: #f2f3ed url(/././images/templates/default/beigeBottomRightCorner.gif) no-repeat bottom right;
 }
 
-#rightColumn .sideTanBoxContent {
+#rightColumn .sideTanBoxContent,
+#rightColumn .BSideBoxContent {
 	background: #f2f3ed url(/././images/templates/default/beigeBottomLeftCorner.gif) no-repeat bottom left;
 }
 
-.centerBlueBoxContent {
+.centerBlueBoxContent,
+.EMainBoxContent {
 	background: url(/././images/templates/default/blueToWhiteBoxGrad.jpg) repeat-x top left;
 	border: 1px solid #ccc;
 }
@@ -807,7 +848,7 @@ dl li {background-image:none;}
 	margin-right: 200px;
 }
 
-.leftColumnof2inBox, .rightColumnof2inBox {
+.leftColumnOf2InBox, .rightColumnOf2InBox {
 	float: left;
 	width: 45% !important; /*w/o the 'important' qualifier browsers don't accurately render the width*/
 	margin: 0px;
@@ -816,7 +857,7 @@ dl li {background-image:none;}
 	white-space: normal;
 }
 
-.leftColumnof3inBox, .centerColumnof3inBox, .rightColumnof3inBox {
+.leftColumnOf3InBox, .centerColumnOf3InBox, .rightColumnOf3InBox {
 	float: left;
 	width: 29% !important; /*w/o the 'important' qualifier browsers don't accurately render the width*/
 	margin: 0px;
@@ -825,7 +866,7 @@ dl li {background-image:none;}
 	white-space: normal;
 }
 
-.rightColumnof2inBox, .rightColumnof3inBox {
+.rightColumnOf2InBox, .rightColumnOf3InBox {
 	margin-right: 0px;
 }
 
@@ -872,13 +913,15 @@ h3 {
 */
 
 
-.whiteBox h2 {
+.whiteBox h2,
+.ABox h2 {
 	font-size: 1.2em;
 }
 .searchHeader {
 	font-size: 1.2em;
 }
-#tabTip .whiteBox {
+#tabTip .whiteBox,
+#tabTip .ABox {
 	font-size: 0.9em;
 }
 

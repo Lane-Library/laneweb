@@ -116,30 +116,12 @@
 
 
 	<!-- box assembly -->
-	<xsl:template match="h:div[contains(@class, 'Box') and not(contains(@class, 'inBox'))]">
+	<xsl:template match="h:div[contains(@class, 'Box') and not(contains(@class, 'InBox'))]">
 		<xsl:variable name="current-class-selection">
 			<xsl:value-of select="@class"/>
 		</xsl:variable>
-		<xsl:choose>
-			<xsl:when test="@class = 'noBordersBox'">
-				<div class="noBordersBox largeFont">
-					<xsl:apply-templates select="child::node()"/>
-				</div>
-			</xsl:when>
-			<xsl:when test="not(contains(@class, 'BoxContent'))">
 				<div>
-					<xsl:for-each select="@*">
-						<xsl:choose>
-							<xsl:when test="name()='class' and (contains(.,'long') or contains(.,'short'))">
-								<xsl:attribute name="class">
-									<xsl:value-of select="concat('s', concat(substring-after(., 'longS'), substring-after(., 'shortS')))" />
-								</xsl:attribute><!-- replacing capital w/ lowercase 's', e.g. 'shortSideBlueBox' in content; only one of 'short' or 'long' qualifiers present at a time, so OK to concatenate-->
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:copy-of select="."/>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:for-each>
+					<xsl:copy-of select="@*" />
 					
 <!-- header H2 -->
 					<xsl:choose>
@@ -212,7 +194,7 @@
 						</xsl:otherwise>
 					</xsl:choose>
 					
-					<xsl:if test="@class='centerGreenBox' or @class='centerBlueBox'">
+					<xsl:if test="@class='centerGreenBox' or @class='EMainBox'">
 						<!-- other portals drop-down -->
 						<xsl:if test="child::h:div[@id='otherPortalOptions'] and contains($request-uri, 'portals')">
 							<form>
@@ -244,8 +226,8 @@
 						<br style="clear: both;"/><!--clearance for floats-->
 					</xsl:if>
 					
-					<xsl:if test="contains(@class, 'white') and h:h2">
-						<div class="whiteBoxDivider">&#160;</div>
+					<xsl:if test="starts-with(@class, 'A') and h:h2">
+						<div class="ABoxDivider">&#160;</div>
 					</xsl:if>
 					
 					
@@ -276,18 +258,12 @@
 									</xsl:attribute>
 									<xsl:attribute name="class">
 										<xsl:choose>
-											<xsl:when test="contains(../@class,'long')">
-												<xsl:value-of select="concat('s', substring-after(../@class, 'longS'), 'LongContent', ' ' , 'mediumFont', $hide-or-not)"/>
-											</xsl:when>
-											<xsl:when test="contains(../@class,'short')">
-												<xsl:value-of select="concat('s', substring-after(../@class, 'shortS'), 'ShortContent', ' ' , 'mediumFont', $hide-or-not)"/>
-											</xsl:when>
-								<!--<xsl:when test="ancestor::h:td[@class='centralColumn']/h:div[1][@class=$current-class-selection]">-->
-											<xsl:when test="ancestor::h:td[@class='centralColumn'] and not(contains(@class, 'Blue'))">
-												<xsl:value-of select="concat(../@class, 'Content', ' ' , 'largeFont', $hide-or-not)"/>
+
+											<xsl:when test="ancestor::h:td[@class='centralColumn'] and not(contains(../@class, 'EMain'))">
+												<xsl:value-of select="concat(../@class, 'Content largeFont', $hide-or-not)"/>
 											</xsl:when>
 											<xsl:otherwise>
-												<xsl:value-of select="concat(../@class, 'Content', ' ' , 'mediumFont', $hide-or-not)"/>
+												<xsl:value-of select="concat(../@class, 'Content mediumFont', $hide-or-not)"/>
 											</xsl:otherwise>
 										</xsl:choose>
 									</xsl:attribute>
@@ -306,22 +282,16 @@
 							<div>
 								<xsl:attribute name="class">
 									<xsl:choose>
-										<xsl:when test="contains(@class,'long')">
-											<xsl:value-of select="concat('s', substring-after(@class, 'longS'), 'LongContent', ' ' , 'mediumFont')"/>
-										</xsl:when>
-										<xsl:when test="contains(@class,'short')">
-											<xsl:value-of select="concat('s', substring-after(@class, 'shortS'), 'ShortContent', ' ' , 'mediumFont')"/>
-										</xsl:when>
 								<!--<xsl:when test="ancestor::h:td[@class='centralColumn']/h:div[1][@class=$current-class-selection]">-->
-										<xsl:when test="ancestor::h:td[@class='centralColumn'] and not(contains(@class, 'Blue'))">
-											<xsl:value-of select="concat(@class, 'Content', ' ' , 'largeFont')"/>
+										<xsl:when test="ancestor::h:td[@class='centralColumn'] and not(contains(@class, 'EMain'))">
+											<xsl:value-of select="concat(@class, 'Content largeFont')"/>
 										</xsl:when>
 										<xsl:otherwise>
-											<xsl:value-of select="concat(@class, 'Content', ' ' , 'mediumFont')"/>
+											<xsl:value-of select="concat(@class, 'Content mediumFont')"/>
 										</xsl:otherwise>
 									</xsl:choose>
 								</xsl:attribute>
-								<xsl:if test="contains(@class, 'white') and not(h:h2)">
+								<xsl:if test="starts-with(@class, 'A') and not(h:h2)">
 									<xsl:attribute name="style">text-align: center;</xsl:attribute>
 								</xsl:if><!--content of white boxes to be centered when no logos present-->
 								<xsl:apply-templates select="child::node()[not(self::h:h2)]"/>
@@ -330,8 +300,8 @@
 						</xsl:otherwise>
 					</xsl:choose>
 				</div>
-			</xsl:when>
-		</xsl:choose>
+			<!--</xsl:when>
+		</xsl:choose>-->
 	</xsl:template>
 	
 	<xsl:template match="h:div[@id='otherPortalOptions']">
