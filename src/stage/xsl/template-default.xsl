@@ -58,7 +58,7 @@
 	
 <!-- FAQs per category -->
 	
-	<xsl:template match="h:div[@id='contentBody'][not(descendant::h:td[@class='centralColumn']) and $request-uri != 'search.html' and not(contains($request-uri, 'browse.html'))]"><!-- remove URL screening b/c rickety and dangerous -->
+	<xsl:template match="h:div[@id='contentBody'][not(descendant::h:td[@class='mainColumn']) and $request-uri != 'search.html' and not(contains($request-uri, 'browse.html'))]"><!-- remove URL screening b/c rickety and dangerous -->
 		<div id="contentBody">
 		<!--<xsl:choose>
 			<xsl:when test="string($category)">
@@ -105,9 +105,9 @@
 
 <!-- central column w/o boxes gets large font -->
 
-	<!--<xsl:template match="h:td[@class='centralColumn'][not(descendant::h:div[contains(@class, 'Box')])]">-->
-	<xsl:template match="h:td[@class='centralColumn']">
-		<td class="centralColumn">
+	<!--<xsl:template match="h:td[@class='mainColumn'][not(descendant::h:div[contains(@class, 'Box')])]">-->
+	<xsl:template match="h:td[@class='mainColumn']">
+		<td class="mainColumn">
 			<xsl:call-template name="font-application">
 				<xsl:with-param name="candidate-node" select="."/>
 			</xsl:call-template>
@@ -122,7 +122,6 @@
 		</xsl:variable>
 				<div>
 					<xsl:copy-of select="@*" />
-					
 <!-- header H2 -->
 					<xsl:choose>
 <!--final version: <h2 class="activeTab" id="tab1"><a href="#" style="color: black;" onClick="javascript:loadTab(1, 3);">Tools</a></h2>-->
@@ -194,7 +193,7 @@
 						</xsl:otherwise>
 					</xsl:choose>
 					
-					<xsl:if test="@class='centerGreenBox' or @class='EMainBox'">
+					<xsl:if test="@class='fMainBox' or @class='eMainBox'">
 						<!-- other portals drop-down -->
 						<xsl:if test="child::h:div[@id='otherPortalOptions'] and contains($request-uri, 'portals')">
 							<form>
@@ -226,10 +225,9 @@
 						<br style="clear: both;"/><!--clearance for floats-->
 					</xsl:if>
 					
-					<xsl:if test="starts-with(@class, 'A') and h:h2">
-						<div class="ABoxDivider">&#160;</div>
+					<xsl:if test="@class ='aGeneralBox' and h:h2">
+						<div class="aGeneralBoxDivider">&#160;</div>
 					</xsl:if>
-					
 					
 					<xsl:choose>
 						<xsl:when test="h:h2[contains(@class, 'Tab')]">
@@ -258,8 +256,7 @@
 									</xsl:attribute>
 									<xsl:attribute name="class">
 										<xsl:choose>
-
-											<xsl:when test="ancestor::h:td[@class='centralColumn'] and not(contains(../@class, 'EMain'))">
+											<xsl:when test="ancestor::h:td[@class='mainColumn'] and not(contains(../@class, 'eMain'))">
 												<xsl:value-of select="concat(../@class, 'Content largeFont', $hide-or-not)"/>
 											</xsl:when>
 											<xsl:otherwise>
@@ -267,11 +264,6 @@
 											</xsl:otherwise>
 										</xsl:choose>
 									</xsl:attribute>
-<!--
-						Position: <xsl:value-of select="position()"/><br/>
-						Stop-point value: <xsl:value-of select="$stop-point"/><br/>
--->
-						
 									<xsl:apply-templates select="following-sibling::node()[count(following-sibling::h:h2[contains(@class, 'Tab')]) = $stop-point]"/>
 									<div style="clear:both; height: 1px; font-size: 1px;">&#160;</div>
 								</div>
@@ -282,8 +274,8 @@
 							<div>
 								<xsl:attribute name="class">
 									<xsl:choose>
-								<!--<xsl:when test="ancestor::h:td[@class='centralColumn']/h:div[1][@class=$current-class-selection]">-->
-										<xsl:when test="ancestor::h:td[@class='centralColumn'] and not(contains(@class, 'EMain'))">
+								<!--<xsl:when test="ancestor::h:td[@class='mainColumn']/h:div[1][@class=$current-class-selection]">-->
+										<xsl:when test="ancestor::h:td[@class='mainColumn'] and @class!='eMainBox'">
 											<xsl:value-of select="concat(@class, 'Content largeFont')"/>
 										</xsl:when>
 										<xsl:otherwise>
@@ -291,7 +283,7 @@
 										</xsl:otherwise>
 									</xsl:choose>
 								</xsl:attribute>
-								<xsl:if test="starts-with(@class, 'A') and not(h:h2)">
+								<xsl:if test="@class='aGeneralBox' and not(h:h2)">
 									<xsl:attribute name="style">text-align: center;</xsl:attribute>
 								</xsl:if><!--content of white boxes to be centered when no logos present-->
 								<xsl:apply-templates select="child::node()[not(self::h:h2)]"/>
