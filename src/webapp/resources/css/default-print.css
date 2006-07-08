@@ -1,9 +1,0 @@
-/* default template CSS for print -- initial very minimal version: fixes for IE hack bug */
-* html #pageContainer {
-	border-left: 0px;
-}
-
-* html #pageHolder {
-	margin-left: 0px;
-}
-
