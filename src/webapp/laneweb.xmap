@@ -159,6 +159,12 @@
             <map:match type="wildcard" pattern="tpod/**">
                 <map:mount uri-prefix="tpod" check-reload="yes" src="file:/afs/ir/users/t/p/tpod/laneweb/laneweb.xmap"/>
             </map:match>
+            <map:match type="wildcard" pattern="alainb/**">
+                <map:mount uri-prefix="alainb" check-reload="yes" src="file:/afs/ir/users/a/l/alainb/laneweb/laneweb.xmap"/>
+            </map:match>
+            <map:match type="wildcard" pattern="lmurdock/**">
+                <map:mount uri-prefix="lmurdock" check-reload="yes" src="file:/afs/ir/users/l/m/lmurdock/laneweb/laneweb.xmap"/>
+            </map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|ram|camv|smil|xls|doc|ppt|ico|swf)$">
                 <map:mount uri-prefix="" check-reload="yes" src="static.xmap"/>
             </map:match>
