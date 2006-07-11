@@ -93,7 +93,7 @@ href="cocoon:/services/leftmenu_services.html#xmlns(h=http://www.w3.org/1999/xht
             </xsl:otherwise>
         </xsl:choose>
 <!--
-            <div class="longSideBlueBox">
+            <div class="dSideBox">
                 <h2>faq categories</h2>
                 <ul>
                     <xsl:apply-templates select="//h:li[@class='category'][not(following::h:li/text() = text())]">
@@ -155,13 +155,13 @@ href="cocoon:/services/leftmenu_services.html#xmlns(h=http://www.w3.org/1999/xht
 </xsl:otherwise>
 </xsl:choose>
                     </td>
-                    <td valign="top" align="left" class="centralColumn">
+                    <td valign="top" align="left" class="mainColumn">
                         <h1>
                             <xsl:value-of select="text()"/>
                         </h1>
                         <xsl:copy-of select="h:ul/h:li[@class='body']/node()"/></td>
                     <td valign="top" align="right" id="rightColumn">
-                        <div class="sideTanBox">
+                        <div class="bSideBox">
                             <h2>FAQs on this topic</h2>
                             <xsl:variable name="cat" select="h:ul/h:li[@class='primaryCategory']"/>
                             <ul>

@@ -58,7 +58,7 @@
 	
 <!-- FAQs per category -->
 	
-	<xsl:template match="h:div[@id='contentBody'][not(descendant::h:td[@class='mainColumn']) and $request-uri != 'search.html' and not(contains($request-uri, 'browse.html'))]"><!-- remove URL screening b/c rickety and dangerous -->
+	<xsl:template match="h:div[@id='contentBody'][not(descendant::h:td[@class='mainColumn' or @id='mainColumn']) and $request-uri != 'search.html' and not(contains($request-uri, 'browse.html'))]"><!-- remove URL screening b/c rickety and dangerous -->
 		<div id="contentBody">
 		<!--<xsl:choose>
 			<xsl:when test="string($category)">
@@ -85,8 +85,15 @@
 		</div>
 	</xsl:template>
 
-	
-<!-- top level table keeps only id and class attributes; prevent editors from changing layout of page -->
+<!-- top level table attributes unchangeable by editors -->
+
+	<xsl:template match="h:div[@id='contentBody']/h:table[1]">
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<xsl:apply-templates/>
+		</table>
+	</xsl:template>
+
+<!-- top level table cells keep only id and class attributes; prevent editors from changing layout of page -->
 	
 	<xsl:template match="h:table[ancestor::h:div[@id='contentBody']]/h:tr/h:td[contains(@id, 'Column') or contains(@class, 'Column')]">
 		<td valign="top"><!-- strangely, the vertical-align in the css appears insufficient for the right column to get top- aligned; investigate... -->
@@ -106,8 +113,8 @@
 <!-- central column w/o boxes gets large font -->
 
 	<!--<xsl:template match="h:td[@class='mainColumn'][not(descendant::h:div[contains(@class, 'Box')])]">-->
-	<xsl:template match="h:td[@class='mainColumn']">
-		<td class="mainColumn">
+	<xsl:template match="h:td[@class='mainColumn' or @id='mainColumn']">
+		<td id="mainColumn">
 			<xsl:call-template name="font-application">
 				<xsl:with-param name="candidate-node" select="."/>
 			</xsl:call-template>
@@ -256,7 +263,7 @@
 									</xsl:attribute>
 									<xsl:attribute name="class">
 										<xsl:choose>
-											<xsl:when test="ancestor::h:td[@class='mainColumn'] and not(contains(../@class, 'eMain'))">
+											<xsl:when test="ancestor::h:td[@class='mainColumn' or @id='mainColumn'] and not(contains(../@class, 'eMain'))">
 												<xsl:value-of select="concat(../@class, 'Content largeFont', $hide-or-not)"/>
 											</xsl:when>
 											<xsl:otherwise>
@@ -275,7 +282,7 @@
 								<xsl:attribute name="class">
 									<xsl:choose>
 								<!--<xsl:when test="ancestor::h:td[@class='mainColumn']/h:div[1][@class=$current-class-selection]">-->
-										<xsl:when test="ancestor::h:td[@class='mainColumn'] and @class!='eMainBox'">
+										<xsl:when test="ancestor::h:td[@class='mainColumn' or @id='mainColumn'] and @class!='eMainBox'">
 											<xsl:value-of select="concat(@class, 'Content largeFont')"/>
 										</xsl:when>
 										<xsl:otherwise>

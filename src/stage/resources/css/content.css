@@ -39,8 +39,7 @@ body {
 	z-index: 3;
 }
 
-.sideBlueBox, .sideTanBox, .fMainBox, .whiteBox, .centerBlueBox,
-.aGeneralBox, .bSideBox, .cSideBox, .dSideBox, .eMainBox {
+.aGeneralBox, .bSideBox, .cSideBox, .dSideBox, .eMainBox,.fMainBox {
 	height: auto;
 	margin: 0px;
 	margin-bottom: 15px;
@@ -48,28 +47,23 @@ body {
 	/*overflow: hidden;*/
 }
 
-.sideBlueBox, .sideTanBox, .whiteBox,
 .aGeneralBox, .bSideBox, .cSideBox, .dSideBox {
 	width: 170px;
 }
 
-.fMainBox, .centerBlueBox, .mainColumn .whiteBox,
-.mainColumn .aGeneralBox, .eMainBox {
+#mainColumn .aGeneralBox, .eMainBox, .fMainBox {
 	width: auto;
 }
 
-.whiteBox,
 .aGeneralBox {
 	border: 1px solid #ccc;
 	text-align: center; /* used to center the grey divider due to a bug in IE ignoring the auto margin */
 }
 
-.sideBlueBox h2, .sideBlueBox h2.SquareTitle,
-.sideTanBox h2, .fMainBox h2, .whiteBox h2, .centerBlueBox h2,
 .aGeneralBox h2, .bSideBox h2, 
 .cSideBox h2, .dSideBox h2,
 .cSideBox h2.SquareTitle, .dSideBox h2.SquareTitle,
-.eMainBox h2 {
+.eMainBox h2, .fMainBox h2 {
 	padding-top: 3px;
 	padding-bottom: 3px;
 	text-align: center;
@@ -77,14 +71,12 @@ body {
 	margin: 0px;
 }
 
-.sideBlueBox h2, .sideBlueBox h2.ImageTitle, .sideBlueBox h2.SquareTitle,
 .cSideBox h2, .dSideBox h2,
 .cSideBox h2.ImageTitle, .dSideBox h2.ImageTitle,
 .cSideBox h2.SquareTitle, .dSideBox h2.SquareTitle {
 	color: white;
 }
 
-#leftColumn .sideBlueBox h2,
 #leftColumn .cSideBox h2, 
 #leftColumn .dSideBox h2 {
 	background-image: url(/././images/templates/default/whiteCornerBlueBoxTL.gif);
@@ -92,7 +84,6 @@ body {
 	background-position: top left;
 }
 
-#leftColumn .sideBlueBox h2,
 #leftColumn .cSideBox h2, 
 #leftColumn .dSideBox h2
 {
@@ -100,7 +91,6 @@ body {
 	padding-right: 2px;
 }
 
-#rightColumn .sideBlueBox h2,
 #rightColumn .cSideBox h2, 
 #rightColumn .dSideBox h2 {
 	background-image: url(/././images/templates/default/whiteCornerBlueBoxTR.gif);
@@ -108,14 +98,12 @@ body {
 	background-position: top right;
 }
 
-#rightColumn .sideBlueBox h2,
 #rightColumn .cSideBox h2, 
 #rightColumn .dSideBox h2 {
 	padding-left: 2px;
 	padding-right: 10px;
 }
 
-.sideBlueBox h2,
 .cSideBox h2, 
 .dSideBox h2 {
 	/* background-color: #6784A2;  - blue.        darker blue 7589a0;      lighter blue 879ab0;*/
@@ -123,13 +111,11 @@ body {
 	text-transform: uppercase;
 }
 
-.sideBlueBox h2.attention,
 .cSideBox h2.attention, 
 .dSideBox h2.attention {
 	background-color:  #7589a0;
 }
 
-.sideBlueBox h2.SquareTitle,
 .cSideBox h2.SquareTitle, 
 .dSideBox h2.SquareTitle {
 	/* background-color: #6784A2;  - blue.*/
@@ -137,27 +123,23 @@ body {
 	text-transform: uppercase;
 }
 
-#leftColumn .sideBlueBox h2.SquareTitle, #rightColumn .sideBlueBox h2.SquareTitle,
 #leftColumn .cSideBox h2.SquareTitle, #rightColumn .cSideBox h2.SquareTitle,
 #leftColumn .dSideBox h2.SquareTitle, #rightColumn .dSideBox h2.SquareTitle {
 	background-image: none;
 }
 
-#leftColumn .sideBlueBox h2.ImageTitle, #rightColumn .sideBlueBox h2.ImageTitle,
 #leftColumn .cSideBox h2.ImageTitle, #rightColumn .cSideBox h2.ImageTitle,
 #leftColumn .dSideBox h2.ImageTitle, #rightColumn .dSideBox h2.ImageTitle {
 	background-image: none;
 	padding: 0px;
 }
 
-#leftColumn .sideTanBox h2,
 #leftColumn .bSideBox h2 {
 	color: #444;
 	text-transform: uppercase;
 	background: #d9d7b0 url(/././images/templates/default/beigeTopLeftCorner.gif) no-repeat top left;
 }
 
-#rightColumn .sideTanBox h2,
 #rightColumn .bSideBox h2 {
 	color: #444;
 	text-transform: uppercase;
@@ -200,7 +182,6 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 #6884a4
 */
 
-.centerBlueBox h2,
 .eMainBox h2 {
 	float: left;
 	width: auto;
@@ -213,7 +194,6 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 	border-bottom: 1px solid #fff;
 }
 
-.whiteBox h2,
 .aGeneralBox h2 {
 	padding: 6px;
 	padding-top: 10px;
@@ -224,7 +204,6 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 	border: 1px solid #e0dfc2;
 }
 
-.whiteBoxDivider,
 .aGeneralBoxDivider {
 	clear: both;
 	width: 90%;
@@ -241,8 +220,7 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 }
 */
 
-.sideBlueBoxShortContent, .sideBlueBoxLongContent, .sideTanBoxContent, .fMainBoxContent, .whiteBoxContent, .centerBlueBoxContent,
-.aGeneralBoxContent, .bSideBoxContent, .cSideBoxContent, .dSideBoxContent, .eMainBoxContent {
+.aGeneralBoxContent, .bSideBoxContent, .cSideBoxContent, .dSideBoxContent, .eMainBoxContent, .fMainBoxContent {
 	height: 1%; /* solves dissolving/vanishing borders in IE */
 	padding: 5px;
 	padding-left: 10px;
@@ -252,18 +230,17 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 	/*background: yellow;*/
 }
 
-.sideBlueBoxShortContent h2, .sideBlueBoxLongContent h2, .sideTanBoxContent h2, .fMainBoxContent h2, .whiteBoxContent h2, .centerBlueBoxContent h2,
-.aGeneralBoxContent h2, .bSideBoxContent h2, .cSideBoxContent h2, .dSideBoxContent h2, .eMainBoxContent h2 {
+.aGeneralBoxContent h2, .bSideBoxContent h2, .cSideBoxContent h2, .dSideBoxContent h2, .eMainBoxContent h2, .fMainBoxContent h2 {
 	display: none;
 }
 
-.sideBlueBoxShortContent, .cSideBoxContent {
+.cSideBoxContent {
 	margin-top: 1px;
 	border: 1px solid #ccc;
 	background: #fff;
 }
 
-.sideBlueBoxLongContent, .dSideBoxContent {
+.dSideBoxContent {
 	margin-top: 1px;
 	border: 1px solid #ccc;
 	background: #fff url(/././images/templates/default/blueBoxGradient.jpg) repeat-x bottom left;
@@ -274,17 +251,14 @@ h2.bgTab a, h2.bgTab a:link, h2.bgTab a:visited, h2.bgTab a:hover, h2.bgTab a:ac
 	/*background-color: green;*/
 }
 
-#leftColumn .sideTanBoxContent,
 #leftColumn .bSideBoxContent {
 	background: #f2f3ed url(/././images/templates/default/beigeBottomRightCorner.gif) no-repeat bottom right;
 }
 
-#rightColumn .sideTanBoxContent,
 #rightColumn .bSideBoxContent {
 	background: #f2f3ed url(/././images/templates/default/beigeBottomLeftCorner.gif) no-repeat bottom left;
 }
 
-.centerBlueBoxContent,
 .eMainBoxContent {
 	background: url(/././images/templates/default/blueToWhiteBoxGrad.jpg) repeat-x top left;
 	border: 1px solid #ccc;
@@ -373,7 +347,6 @@ td#footerText {
 
 /* Clinical trials -- testing */
 
-/*.sideBlueBoxShortContent ul, .sideBlueBoxLongContent ul, .sideTanBoxContent ul {*/
 ul {
 	padding: 3px;
 	margin: 0px;
@@ -432,18 +405,18 @@ td#rightColumn {
 	padding-left: 20px;
 }
 
-td.mainColumn {
+td#mainColumn {
 	width: auto;
 	vertical-align: top;
 	/*text-align: center; exploiting IE hack to center column boxes*/
 }
 
-td.mainColumn div {
+td#mainColumn div{
 	width: auto;
-	text-align: left; /*compensating for the above td.mainColumn settings*/
+	text-align: left; /*compensating for the above td#mainColumn settings*/
 }
 
-* html td.mainColumn {
+* html td#mainColumn {
 	width: 100%;/*IE weird doubling of padding problem fix - surreptitious */
 }
 	/*
@@ -577,87 +550,7 @@ h3 a:link, h3 a:visited {
 	text-decoration: underline;
 }
 
-/* eJournals */
-/*
-#alphabet {
-	width: 100%;
-	padding-left: 0;
-	margin-top: 10px;
-*/
-	
-	/*
-	margin-top: 8px;
-	margin-bottom: 8px;
-	
-	padding-left:.5em;*/
-	
-/*	
-}
-
-#alphabet .alphaExtras {
-	background: #ecece8;
-	padding: 3px;
-	margin-left: 0px;
-	margin-right: 1px;
-	margin-top: 0px;
-	margin-bottom:0px;
-}
-#alphabet .letter  {
-	background: #d3cebf;
-	padding: 3px;
-	margin-left: 0px;
-	margin-right: 1px;
-	margin-top: 0px;
-	margin-bottom:0px;
-}
-
-
-#alphaBrowse {
-	background-color:#e7e2cd;
-	padding:0.6em 1.25em 0.6em 0.6em;
-	margin-top:0;
-	margin-bottom: 15px;
-}*/
-/*
-.browseTagline {
-	clear: both;
-	margin-left:0;
-	padding-left:.5em;
-	border-top: 4px #99987a solid;
-	border-right: 1px #99987a solid;
-	border-left: 1px #99987a solid;
-	border-bottom: 1px #99987a solid;
-	background: #e0e0d1;
-	margin-top: 0px;
-	padding-top: 2px;
-	padding-bottom: 2px;
-}
-
-.onlineBrowseHeader {
-	margin-top: 1.5em;
-	margin-bottom:0;
-}
-*/
-
-/* below replaced w/ Ryan's popInContent class */
-/*
-.taglineContainer{
-	clear: both;
-	position: relative;
-	top: 0px;
-	left: 0px;
-	width: 99%;
-	background-color: #e0e0d1;
-	padding:5px;
-	text-indent: 15px;
-	margin: 0px;
-	margin-bottom: 15px;
-	border: 1px solid #99987a;
-	border-top: 5px solid #99987a;
-}
-*/
 /* Ryan's styles*/
-
 
 .hide {
 	display: none;
@@ -903,24 +796,14 @@ h2 {
 h3 {
 	font-size: 1.0em;
 }
-/*
-.mainColumn h2 {
-	font-size: 1.1em;
-}
-.mainColumn .centerBlueBox h2, .mainColumn .whiteBox h2, .mainColumn .fMainBox h2 {
-	font-size: 1.2em;
-}
-*/
 
-
-.whiteBox h2,
 .aGeneralBox h2 {
 	font-size: 1.2em;
 }
 .searchHeader {
 	font-size: 1.2em;
 }
-#tabTip .whiteBox,
+
 #tabTip .aGeneralBox {
 	font-size: 0.9em;
 }
