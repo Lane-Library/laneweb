@@ -23,7 +23,7 @@
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/ersql2html.xsl"/>
+                <map:transform type="xsltc" src="context://xsl/ersql2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ezproxy-servers.txt">
@@ -31,7 +31,7 @@
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/ezproxy-servers.xsl"/>
+                <map:transform type="xsltc" src="context://xsl/ezproxy-servers.xsl"/>
                 <map:serialize type="text"/>
             </map:match>
         </map:pipeline>

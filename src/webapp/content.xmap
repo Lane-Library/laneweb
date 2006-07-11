@@ -15,11 +15,11 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="eresources/**">
-                <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
+                <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="online/auth.html">
                 <map:generate type="html" src="{defaults:live-base}/content/online/auth.html"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/auth.xsl">
+                <map:transform type="xsltc" src="context://xsl/auth.xsl">
                     <map:parameter name="url" value="{request-param:url}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
@@ -36,7 +36,7 @@
                             <map:part src="cocoon:/search-proxy"/>
                             <map:part type="xml" src="cocoon:/templates/search/{request-param:source}.xml"/>
                         </map:aggregate>
-                        <map:transform type="xsltc" src="{defaults:live-base}/xsl/ajax-search.xsl"/>
+                        <map:transform type="xsltc" src="context://xsl/ajax-search.xsl"/>
                         <map:serialize type="xml"/>
                     </map:when>
                     <map:otherwise>
@@ -53,7 +53,7 @@
                                     <map:part type="file" src="cocoon:/template2meta-engines?source=peds"/>
                                     <map:part type="file" src="cocoon:/template2meta-engines?source=research"/>
                                 </map:aggregate>
-                                <map:transform type="xsltc" src="{defaults:live-base}/xsl/elibrary-search.xsl"/>
+                                <map:transform type="xsltc" src="context://xsl/elibrary-search.xsl"/>
                                 <map:transform type="xinclude"/>
                                 <map:serialize type="xml"/>
                             </map:otherwise>
@@ -63,14 +63,14 @@
             </map:match>
             <map:match type="wildcard" pattern="request.html">
                 <map:generate type="request"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/request2html.xsl"/>
+                <map:transform type="xsltc" src="context://xsl/request2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
             <map:match type="wildcard" pattern="howto/index.html">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/faq.xsl">
+                <map:transform type="xsltc" src="context://xsl/faq.xsl">
                     <map:parameter name="id" value="{request-param:id}"/>
                     <map:parameter name="category" value="{request-param:category}"/>
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
@@ -80,30 +80,30 @@
             </map:match>
             <map:match pattern="faq-category-list.html">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/faq-category-list.xsl"/>
+                <map:transform type="xsltc" src="context://xsl/faq-category-list.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="blog/*">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-news/lane-news.html"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/news-blog.xsl">
+                <map:transform type="xsltc" src="context://xsl/news-blog.xsl">
                     <map:parameter name="type" value="{1}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="random">
                 <map:generate type="file" src="{request-param:source}"/>
-                <map:transform type="xslt" src="{defaults:live-base}/xsl/random.xsl"/>
+                <map:transform type="xslt" src="context://xsl/random.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match type="wildcard" pattern="redirect.html">
                 <map:generate type="html" src="{defaults:live-base}/content/redirect.html"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/redirect.xsl"/>
+                <map:transform type="xsltc" src="context://xsl/redirect.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="sfx">
                 <map:generate type="html"
                     src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={uriencode-request-param:q}&amp;sfx.title_search=exact"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/sfx.xsl">
+                <map:transform type="xsltc" src="context://xsl/sfx.xsl">
                     <map:parameter name="sfx-request"
                         value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={uriencode-request-param:q}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
                     />
@@ -112,7 +112,7 @@
             </map:match>
             <map:match pattern="template2meta-engines">
                 <map:generate type="file" src="cocoon:/templates/search/{request-param:source}.xml"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/template2meta-engines.xsl">
+                <map:transform type="xsltc" src="context://xsl/template2meta-engines.xsl">
                     <map:parameter name="source" value="{request-param:source}"/>
                 </map:transform>
                 <map:serialize type="text"/>
@@ -124,7 +124,7 @@
             <map:match type="wildcard" pattern="**">
                 <map:generate type="html" src="{defaults:live-base}/content/{1}"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/rss2html.xsl"/>
+                <map:transform type="xsltc" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>

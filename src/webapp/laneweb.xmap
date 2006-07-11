@@ -134,7 +134,7 @@
             </map:match>
             <map:match type="wildcard" pattern="cookiesFetch.html">
                 <map:generate type="file" src="{defaults:live-base}/content/cookiesFetch.html"/>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/cookiesFetch.xsl">
+                <map:transform type="xsltc" src="context://xsl/cookiesFetch.xsl">
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
@@ -166,19 +166,19 @@
                 <map:mount uri-prefix="lmurdock" check-reload="yes" src="file:/afs/ir/users/l/m/lmurdock/laneweb/laneweb.xmap"/>
             </map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|ram|camv|smil|xls|doc|ppt|ico|swf)$">
-                <map:mount uri-prefix="" check-reload="yes" src="static.xmap"/>
+                <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="robots.txt">
                 <map:read src="robots.txt" mime-type="text/plain"/>
             </map:match>
             <map:match type="wildcard" pattern="eresources/**">
-                <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
+                <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="content/**">
-                <map:mount uri-prefix="content" check-reload="yes" src="content.xmap"/>
+                <map:mount uri-prefix="content" check-reload="no" src="content.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="admin/**">
-                <map:mount uri-prefix="admin" check-reload="yes" src="admin.xmap"/>
+                <map:mount uri-prefix="admin" check-reload="no" src="admin.xmap"/>
             </map:match>
             <!-- ========================== permenent redirects ============================ -->
             <map:match type="wildcard" pattern="classes/index.html">
@@ -224,24 +224,23 @@
                     <map:part src="cocoon:/content/sitemap.html"/>
                     <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                 </map:aggregate>
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/laneweb.xsl">
+                <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}"/>
                     <map:parameter name="query-string" value="{request:queryString}"/>
-                    <map:parameter name="selection" value="{request-param:source}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                 </map:transform>
                 <map:select type="resource-exists">
-                    <map:when test="{defaults:live-base}/xsl/template-{chain:template}.xsl">
-                        <map:transform type="xsltc" src="{defaults:live-base}/xsl/template-default.xsl">
+                    <map:when test="context://xsl/template-{chain:template}.xsl">
+                        <map:transform type="xsltc" src="context://xsl/template-default.xsl">
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>
                     </map:when>
                 </map:select> 
-                <map:transform type="xsltc" src="{defaults:live-base}/xsl/webtrends.xsl">
+                <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                 </map:transform>
@@ -254,7 +253,8 @@
                         <map:serialize type="xhtml"/>
                     </map:otherwise>
                 </map:select>
-            </map:match>            <map:match type="wildcard" pattern="**">
+            </map:match>
+            <map:match type="wildcard" pattern="**">
                 <map:redirect-to uri="{1}/index.html"/>
             </map:match>
             <map:handle-errors>

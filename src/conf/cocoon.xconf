@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cocoon version="2.1">
     
-  <sitemap check-reload="yes" file="***laneweb.live.base***/laneweb.xmap" logger="sitemap"/>
+  <sitemap check-reload="no" file="context://laneweb.xmap" logger="sitemap"/>
  
   <input-modules>
     <component-instance logger="core.modules.input.laneweb" name="laneweb" class="edu.stanford.laneweb.LanewebInputModule">

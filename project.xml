@@ -32,6 +32,18 @@
             <name>Charles Yates</name>
             <id>ceyates</id>
             <email>ceyates@stanford.edu</email>
+            <organization>IRT Systems Development</organization>
+        </developer>
+        <developer>
+            <name>Tanya Podchiyska</name>
+            <id>tpod</id>
+            <email>tpod@stanford.edu</email>
+            <organization>IRT Systems Development</organization>
+        </developer>
+        <developer>
+            <name>Ryan Max Steinberg</name>
+            <id>ryanmax</id>
+            <email>ryanmax@stanford.edu</email>
             <organization>Lane Medical Library</organization>
         </developer>
     </developers>
@@ -125,12 +137,6 @@
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
-        </dependency>
-        <dependency>
-            <groupId>cocoon</groupId>
-            <artifactId>cocoon-serializers</artifactId>
-            <version>2.1.9</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
