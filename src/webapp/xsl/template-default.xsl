@@ -58,10 +58,43 @@
 	
 <!-- FAQs per category -->
 	
-	<xsl:template match="h:dl[@id='faq']"><!-- remove URL screening b/c rickety and dangerous -->
+<!--	<xsl:template match="h:dl[@id='faq']">
 		<dl id="faq" class="largeFont">
 			<xsl:apply-templates select="*"/>
 		</dl>
+	</xsl:template>-->
+	<xsl:template match="h:div[@id='contentBody'][not(descendant::h:td[@class='mainColumn' or @id='mainColumn'])]"><!-- remove URL screening b/c rickety and dangerous -->
+		<div id="contentBody">
+			<xsl:choose>
+				<xsl:when test="$request-uri != 'search.html' and not(contains($request-uri, 'browse.html'))">
+					<xsl:copy-of select="h:div[@id='breadCrumb']"/>
+					<xsl:call-template name="font-application">
+						<xsl:with-param name="candidate-node" select="."/>
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:apply-templates/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</div>
+	</xsl:template>
+	
+<!-- feedback form -->
+	<xsl:template match="h:body[not(descendant::h:div[@id='contentBody'])]">
+		
+		<div id="contentBody">
+			<xsl:choose>
+				<xsl:when test="$request-uri != 'search.html'">
+					<xsl:copy-of select="h:div[@id='breadCrumb']"/>
+					<xsl:call-template name="font-application">
+						<xsl:with-param name="candidate-node" select="."/>
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:apply-templates/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</div>
 	</xsl:template>
 
 <!-- top level table attributes unchangeable by editors -->

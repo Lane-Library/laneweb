@@ -62,7 +62,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </td>
-                        <td valign="top" align="left" class="centralColumn">
+                        <td valign="top" align="left" id="mainColumn">
                             
                             <xsl:if test="$category != ''">
                                 <h1><xsl:value-of select="$category"/> FAQs</h1>
