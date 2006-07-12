@@ -47,27 +47,25 @@
                 <table cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                         <td valign="top" align="left" id="leftColumn">
-<xsl:choose>
-<xsl:when test="string-length($root-category-string) = 0">
-<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-href="cocoon:/services/leftmenu_services.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
-<xi:fallback/>
-</xi:include>
-</xsl:when>
-<xsl:otherwise>
-                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
-                                <xi:fallback/>
-                            </xi:include>
-</xsl:otherwise>
-</xsl:choose>
+                            <xsl:choose>
+                                <xsl:when test="string-length($root-category-string) = 0">
+                                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                        href="cocoon:/services/leftmenu_services.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
+                                        <xi:fallback/>
+                                    </xi:include>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                        href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
+                                        <xi:fallback/>
+                                    </xi:include>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </td>
                         <td valign="top" align="left" class="centralColumn">
                             
                             <xsl:if test="$category != ''">
-                                <h1>
-                                    <xsl:value-of select="$category"/> FAQs
-                                </h1>
+                                <h1><xsl:value-of select="$category"/> FAQs</h1>
                             </xsl:if>
                             <xsl:if test="$category = '' and $id = ''">
                                 <h1>Hot Topics</h1>
@@ -137,45 +135,45 @@ href="cocoon:/services/leftmenu_services.html#xmlns(h=http://www.w3.org/1999/xht
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-            <table cellspacing="0" cellpadding="0" border="0" width="100%">
-                <tr>
-                    <td valign="top" align="left" id="leftColumn">
-<xsl:choose>
-<xsl:when test="string-length($root-category-string) = 0">
-<xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-href="cocoon:/services/leftmenu_services.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
-<xi:fallback/>
-</xi:include>
-</xsl:when>
-<xsl:otherwise>
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tr>
+                <td valign="top" align="left" id="leftColumn">
+                    <xsl:choose>
+                        <xsl:when test="string-length($root-category-string) = 0">
+                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                href="cocoon:/services/leftmenu_services.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
+                                <xi:fallback/>
+                            </xi:include>
+                        </xsl:when>
+                        <xsl:otherwise>
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                 href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
                                 <xi:fallback/>
                             </xi:include>
-</xsl:otherwise>
-</xsl:choose>
-                    </td>
-                    <td valign="top" align="left" class="mainColumn">
-                        <h1>
-                            <xsl:value-of select="text()"/>
-                        </h1>
-                        <xsl:copy-of select="h:ul/h:li[@class='body']/node()"/></td>
-                    <td valign="top" align="right" id="rightColumn">
-                        <div class="bSideBox">
-                            <h2>FAQs on this topic</h2>
-                            <xsl:variable name="cat" select="h:ul/h:li[@class='primaryCategory']"/>
-                            <ul>
-                                <xsl:for-each select="parent::h:ul/h:li[$cat=h:ul/h:li[@class='primaryCategory'] and not(@id = current()/@id) and contains(h:ul/h:li[@class='keywords'],'_show_me_')]">
-                                    <li>
-                                        <a href="/howto/index.html?id={@id}"><xsl:value-of select="text()"/></a>
-                                    </li>
-                                </xsl:for-each>
-                                <li class="moreItem"><a href="/howto/index.html?category={$more-category}">More</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </td>
+                <td valign="top" align="left" class="mainColumn">
+                    <h1>
+                        <xsl:value-of select="text()"/>
+                    </h1>
+                    <xsl:copy-of select="h:ul/h:li[@class='body']/node()"/></td>
+                <td valign="top" align="right" id="rightColumn">
+                    <div class="bSideBox">
+                        <h2>FAQs on this topic</h2>
+                        <xsl:variable name="cat" select="h:ul/h:li[@class='primaryCategory']"/>
+                        <ul>
+                            <xsl:for-each select="parent::h:ul/h:li[$cat=h:ul/h:li[@class='primaryCategory'] and not(@id = current()/@id) and contains(h:ul/h:li[@class='keywords'],'_show_me_')]">
+                                <li>
+                                    <a href="/howto/index.html?id={@id}"><xsl:value-of select="text()"/></a>
+                                </li>
+                            </xsl:for-each>
+                            <li class="moreItem"><a href="/howto/index.html?category={$more-category}">More</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </xsl:template>
     
     
