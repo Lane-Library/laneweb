@@ -235,7 +235,7 @@
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="context://xsl/template-{chain:template}.xsl">
-                        <map:transform type="xsltc" src="context://xsl/template-default.xsl">
+                        <map:transform type="xsltc" src="context://xsl/template-{chain:template}.xsl">
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>
                     </map:when>
