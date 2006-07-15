@@ -29,11 +29,6 @@
             <map:match type="wildcard" pattern="eresources/**">
                 <map:mount uri-prefix="eresources" check-reload="yes" src="{defaults:stage-base}/eresources.xmap"/>
             </map:match>
-            <map:match pattern="askus_response.html">
-                <map:generate type="file" src="content/askus_response.html"/>
-                <map:transform type="sendmail"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="search-proxy">
                 <map:generate type="search-proxy" src="{defaults:search-url}search"/>
                 <map:serialize type="xml"/>

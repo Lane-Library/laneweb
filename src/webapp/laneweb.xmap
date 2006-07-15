@@ -33,11 +33,6 @@
                 <xslt-processor-role>xalan</xslt-processor-role>
                 <check-includes>false</check-includes>
             </map:transformer>
-            <map:transformer name="sendmail" src="org.apache.cocoon.mail.transformation.SendMailTransformer">
-                <smtphost>smtp.stanford.edu</smtphost>
-                <smtpport>25</smtpport>
-                <from>laneweb@stanford.edu</from>
-            </map:transformer>
             <map:transformer name="xinclude" src="edu.stanford.laneweb.XIncludeTransformer" pool-min="16" pool-max="32"
                 pool-grow="4" logger="sitemap.transformer.xinclude"/>
         </map:transformers>

@@ -61,7 +61,6 @@
                 <map:transform type="xsltc" src="context://xsl/faq.xsl">
                     <map:parameter name="id" value="{request-param:id}"/>
                     <map:parameter name="category" value="{request-param:category}"/>
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
