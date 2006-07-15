@@ -17,13 +17,6 @@
             <map:match type="wildcard" pattern="eresources/**">
                 <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="online/auth.html">
-                <map:generate type="html" src="{defaults:live-base}/content/online/auth.html"/>
-                <map:transform type="xsltc" src="context://xsl/auth.xsl">
-                    <map:parameter name="url" value="{request-param:url}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="search-proxy">
                 <map:generate type="search-proxy" src="{defaults:search-url}search"/>
                 <map:serialize type="xml"/>
@@ -61,11 +54,6 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="request.html">
-                <map:generate type="request"/>
-                <map:transform type="xsltc" src="context://xsl/request2html.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
             <map:match type="wildcard" pattern="howto/index.html">
@@ -81,13 +69,6 @@
             <map:match pattern="faq-category-list.html">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
                 <map:transform type="xsltc" src="context://xsl/faq-category-list.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="blog/*">
-                <map:generate type="html" src="http://medblog.stanford.edu/lane-news/lane-news.html"/>
-                <map:transform type="xsltc" src="context://xsl/news-blog.xsl">
-                    <map:parameter name="type" value="{1}"/>
-                </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="random">

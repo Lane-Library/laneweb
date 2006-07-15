@@ -34,15 +34,6 @@
                 <map:transform type="sendmail"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="proxy/voyager.html">
-                <map:generate type="html-proxy" src="http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="online/auth.html">
-                <map:generate type="html" src="{defaults:stage-base}/content/online/auth.html"/>
-                <map:transform type="xsltc" src="context://xsl/auth.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="search-proxy">
                 <map:generate type="search-proxy" src="{defaults:search-url}search"/>
                 <map:serialize type="xml"/>
@@ -94,18 +85,6 @@
             <map:match type="wildcard" pattern="redirect.html">
                 <map:generate type="html" src="{defaults:stage-base}/content/redirect.html"/>
                 <map:transform type="xsltc" src="context://xsl/redirect.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="blog/*">
-                <map:generate type="html" src="http://medblog.stanford.edu/lane-news/lane-news.html"/>
-                <map:transform type="xsltc" src="context://xsl/news-blog.xsl">
-                    <map:parameter name="type" value="{1}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="request.html">
-                <map:generate type="request"/>
-                <map:transform type="xsltc" src="context://xsl/request2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="sfx">

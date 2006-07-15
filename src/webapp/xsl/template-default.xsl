@@ -6,12 +6,12 @@
 		xmlns:xi="http://www.w3.org//2001/XInclude"
 		exclude-result-prefixes="h xi">
 	
+	<xsl:include href="template-helper.xsl"/>
 	<xsl:output method="xml" indent="yes"/>
 	
 	<xsl:param name="request-uri"/>
 	<xsl:param name="a"/> <!-- alphabetical browse in online directory -->
 	<xsl:param name="c"/> <!-- core title -->
-	<xsl:param name="category"/> <!-- FAQ categories -->
 	<xsl:param name="loadTab" /> <!-- loading specific tab as active -->
 	
 	<xsl:variable name="alpha">
@@ -56,14 +56,9 @@
 		</xsl:choose>
 	</xsl:template>
 	
-<!-- FAQs per category -->
-	
-<!--	<xsl:template match="h:dl[@id='faq']">
-		<dl id="faq" class="largeFont">
-			<xsl:apply-templates select="*"/>
-		</dl>
-	</xsl:template>-->
-	<xsl:template match="h:div[@id='contentBody'][not(descendant::h:td[@class='mainColumn' or @id='mainColumn'])]"><!-- remove URL screening b/c rickety and dangerous -->
+
+	<xsl:template match="h:div[@id='contentBody'][not(descendant::h:td[@class='mainColumn' or @id='mainColumn'])]">
+	<!-- remove URL screening b/c rickety and dangerous -->
 		<div id="contentBody">
 			<xsl:choose>
 				<xsl:when test="$request-uri != 'search.html' and not(contains($request-uri, 'browse.html'))">
@@ -80,6 +75,7 @@
 	</xsl:template>
 	
 <!-- feedback form -->
+<!--
 	<xsl:template match="h:body[not(descendant::h:div[@id='contentBody'])]">
 		
 		<div id="contentBody">
@@ -96,7 +92,7 @@
 			</xsl:choose>
 		</div>
 	</xsl:template>
-
+-->
 <!-- top level table attributes unchangeable by editors -->
 
 	<xsl:template match="h:div[@id='contentBody']/h:table[1]">
@@ -123,7 +119,6 @@
 	</xsl:template>
 
 <!-- central column w/o boxes gets large font -->
-
 	<!--<xsl:template match="h:td[@class='mainColumn'][not(descendant::h:div[contains(@class, 'Box')])]">-->
 	<xsl:template match="h:td[@class='mainColumn' or @id='mainColumn']">
 		<td id="mainColumn">
@@ -132,7 +127,6 @@
 			</xsl:call-template>
 		</td>
 	</xsl:template>
-
 
 	<!-- box assembly -->
 	<xsl:template match="h:div[contains(@class, 'Box') and not(contains(@class, 'InBox'))]">
@@ -314,6 +308,8 @@
 			<!--</xsl:when>
 		</xsl:choose>-->
 	</xsl:template>
+
+	
 	
 	<xsl:template match="h:div[@id='otherPortalOptions']">
 		<!--want it mapped to nothing; processed for top box in central column of portal pages--></xsl:template>
@@ -323,52 +319,6 @@
 			<br style="clear:both;"/><!-- assisting content editors, who would most likely omit this crucial tag, whose importance is not exactly apparent, but whose absence creates a gap between the alphabetic display and the info div[@class='popInContent'] below it -->
 		</xsl:if>
 		<xsl:copy-of select="."/>
-	</xsl:template>
-	
-	<xsl:template name="font-application">
-		<xsl:param name="candidate-node"/>
-		<xsl:for-each select="$candidate-node/child::node()[not(self::h:div[@id='breadCrumb'])]">
-			<xsl:choose>
-				<xsl:when test="name()">
-					<xsl:choose>
-						<xsl:when test="self::h:div and (contains(@class, 'Box') or @class='searchHeader' or @class='popInContent')">
-							<xsl:apply-templates select="."/>
-						</xsl:when>
-						<xsl:when test="normalize-space(string(.)) and name()!='h1'">
-							<xsl:element name="{name()}">
-								<xsl:copy-of select="@*[not(self::class)]"/>
-								<xsl:attribute name="class">
-									<xsl:choose>
-										<xsl:when test="@class">
-											<xsl:value-of select="concat(@class, ' largeFont')"/>
-										</xsl:when>
-										<xsl:otherwise>
-											<xsl:text>largeFont</xsl:text>
-										</xsl:otherwise>
-									</xsl:choose>
-								</xsl:attribute>
-								<xsl:apply-templates select="child::node()"/>
-							</xsl:element>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:copy-of select="."/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:choose>
-						<xsl:when test="normalize-space(string(.)) and not(self::comment())">
-							<span class="largeFont">
-								<xsl:copy-of select="."/>
-							</span>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:copy-of select="."/>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:otherwise>
-			</xsl:choose>
-		</xsl:for-each>
 	</xsl:template>
 	
 <!--alphabet incorporation-->
@@ -450,7 +400,6 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
-
 	
 	<xsl:template match="h:div[@id='alphabeticalBrowse']">
 		<xsl:call-template name="alphabet-display">
@@ -458,15 +407,4 @@
 		</xsl:call-template>
 	</xsl:template>
 	
-	<!--identity copy-->
-	<xsl:template match="node()">
-		<xsl:copy>
-			<xsl:apply-templates select="node() | @*"/>
-		</xsl:copy>
-	</xsl:template>
-	
-	<xsl:template match="@*">
-		<xsl:copy-of select="."/>
-	</xsl:template>
-
 </xsl:stylesheet>
