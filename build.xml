@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="all" name="laneweb" basedir=".">
+<project default="dist" name="laneweb" basedir=".">
     <property name="defaulttargetdir" value="target"/>
     <property name="libdir" value="target/lib"/>
     <property name="classesdir" value="target/classes"/>
