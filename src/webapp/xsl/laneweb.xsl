@@ -181,7 +181,7 @@
     <!-- href and src attributes template -->
     <xsl:template match="@href">
         <xsl:choose>
-            <xsl:when test="parent::h:a[@class='proxy'] and $proxy-links = 'true'">
+            <xsl:when test="parent::h:a[@class='proxy'] and $proxy-links = 'true' and starts-with(.,'http')">
                 <xsl:variable name="title">
                     <xsl:choose>
                         <xsl:when test="parent::h:a/@title">
@@ -240,7 +240,7 @@
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
-            <xsl:when test="starts-with(., 'mailto:') or starts-with(.,'telnet:')">
+            <xsl:when test="starts-with(., 'mailto:') or starts-with(.,'telnet:') or starts-with(.,'rtsp://')">
                 <xsl:attribute name="{name()}">
                     <xsl:value-of select="."/>
                 </xsl:attribute>
