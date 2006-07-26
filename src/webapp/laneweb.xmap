@@ -160,6 +160,9 @@
             <map:match type="wildcard" pattern="lmurdock/**">
                 <map:mount uri-prefix="lmurdock" check-reload="yes" src="file:/afs/ir/users/l/m/lmurdock/laneweb/laneweb.xmap"/>
             </map:match>
+            <map:match type="wildcard" pattern="ermeltz/**">
+                <map:mount uri-prefix="ermeltz" check-reload="yes" src="file:/afs/ir/users/e/r/ermeltz/laneweb/laneweb.xmap"/>
+            </map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|ram|camv|smil|xls|doc|ppt|ico|swf)$">
                 <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>
