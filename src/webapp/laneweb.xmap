@@ -157,6 +157,9 @@
             <map:match type="wildcard" pattern="alainb/**">
                 <map:mount uri-prefix="alainb" check-reload="yes" src="file:/afs/ir/users/a/l/alainb/laneweb/laneweb.xmap"/>
             </map:match>
+            <map:match type="wildcard" pattern="olgary/**">
+                <map:mount uri-prefix="olgary" check-reload="yes" src="file:/afs/ir/users/o/l/olgary/laneweb/laneweb.xmap"/>
+            </map:match>
             <map:match type="wildcard" pattern="lmurdock/**">
                 <map:mount uri-prefix="lmurdock" check-reload="yes" src="file:/afs/ir/users/l/m/lmurdock/laneweb/laneweb.xmap"/>
             </map:match>
