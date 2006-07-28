@@ -24,7 +24,7 @@
             <map:match pattern="search.html">
                 <map:select type="regex-parameter">
                     <map:parameter name="parameter-selector-test" value="{request-param:source}"/>
-                    <map:when test="clinical|peds|research">
+                    <map:when test="clinical|peds|research|test">
                         <map:aggregate element="aggregate">
                             <map:part src="cocoon:/search-proxy"/>
                             <map:part type="xml" src="cocoon:/templates/search/{request-param:source}.xml"/>

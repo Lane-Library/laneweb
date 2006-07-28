@@ -36,7 +36,7 @@
             <map:match pattern="search.html">
                 <map:select type="regex-parameter">
                     <map:parameter name="parameter-selector-test" value="{request-param:source}"/>
-                    <map:when test="clinical|peds|research">
+                    <map:when test="clinical|peds|research|test">
                         <map:aggregate element="aggregate">
                             <map:part src="cocoon:/search-proxy"/>
                             <map:part type="xml" src="cocoon:/templates/search/{request-param:source}.xml"/>
@@ -57,6 +57,7 @@
                                     <map:part type="file" src="cocoon:/template2meta-engines?source=clinical"/>
                                     <map:part type="file" src="cocoon:/template2meta-engines?source=peds"/>
                                     <map:part type="file" src="cocoon:/template2meta-engines?source=research"/>
+                                    
                                 </map:aggregate>
                                 <map:transform type="xsltc" src="context://xsl/elibrary-search.xsl"/>
                                 <map:transform type="xinclude"/>
