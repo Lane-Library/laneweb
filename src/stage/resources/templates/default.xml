@@ -74,7 +74,7 @@
                                 <option value="database">Databases</option>
                                 <option value="book">eBooks</option>
                                 <option value="cc">medCalcs</option>
-																<option value="faq">Lane Services</option>
+																<option value="faq">Lane FAQs</option>
 																<option disabled="disabled">----------------</option>
                                 <option value="research">Bioresearch</option>
 																<option value="clinical">Clinical</option>
@@ -151,7 +151,7 @@
 					<a href="/services/access/directions.html">Directions</a> &#160;&#160;&#8226;&#160;&#160;
 					<a href="/services/about/index.html">About Us</a> &#160;&#160;&#8226;&#160;&#160;
 					<a href="/contacts/index.html">Contact Us</a> &#160;&#160;&#8226;&#160;&#160;
-					<a href="/feedback_preview.html?template=none" 
+					<a href="/feedback.html?template=none" 
 	onclick="openSearchResult(this.href,'width=625,height=720,menubar=no,toolbar=no,scrollbars=yes,resizable=yes');return false;">Feedback</a>
 					&#160;&#160;&#8226;&#160;&#160;
 					<a href="http://laneintranet.stanford.edu/">Intranet</a><br/>

@@ -1,7 +1,7 @@
 var date=new Date();
 var startTime=date.getTime();
 var GLOBALS=new Object();
-GLOBALS.basePath="/./.";
+GLOBALS.basePath='/./.';
 GLOBALS.httpRequestInterval="1500";
 GLOBALS.incrementalSearchWait="2500";
 GLOBALS.metasearchProxyPath=GLOBALS.basePath+"/content/search-proxy";
@@ -15,8 +15,8 @@ _4.src=GLOBALS.basePath+"/javascript/ErrorLogger.js?url="+_2+"&line="+_3+"&msg="
 _4.className="hide";
 return false;
 }
-var eLibraryTabLabels=new Array("All","eJournals","Databases","eBooks","medCalcs","Lane Services");
-var eLibraryTabIDs=new Array("all","ej","database","book","cc","faq");
+var eLibraryTabLabels=new Array("All","eJournals","Databases","eBooks","Biotools","medCalcs","Lane FAQs");
+var eLibraryTabIDs=new Array("all","ej","database","book","biotools","cc","faq");
 var eLibraryResultCounts=[];
 var eLibraryActiveTab=null;
 function geteLibraryTabCount(_5){

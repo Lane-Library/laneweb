@@ -29,8 +29,8 @@ function errorLogger(message, url, line){
 /**************************
 // slice eLibrary (LaneConnex) results into format tabs
 */
-var eLibraryTabLabels = new Array('All','eJournals','Databases','eBooks','medCalcs','Lane Services');
-var eLibraryTabIDs = new Array('all','ej','database','book','cc','faq');
+var eLibraryTabLabels=new Array('All','eJournals','Databases','eBooks','Biotools','medCalcs','Lane FAQs');
+var eLibraryTabIDs=new Array('all','ej','database','book','biotools','cc','faq');
 var eLibraryResultCounts = [];
 var eLibraryActiveTab = null;
 
