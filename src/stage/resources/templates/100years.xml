@@ -32,7 +32,7 @@
 					<img id="100years" style="position: relative; top: 8px; left: 53px; width: 116px; height: 27px;" src="/images/templates/100years/years.gif" width="116" height="27" alt="1906-2006"/>
 				</div>
 				<img id="topCollage" src="/images/templates/100years/topCollage.jpg" width="870" height="97" alt="Lane History in JPEG form"/>
-				<div id="centennialBreadCrumb" style="width: auto; border-top: 1px solid #fff; padding-left: 35px; padding-top: 3px; padding-bottom: 3px; background-color: #e8e5d9;"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &gt; <a href="http://lane.stanford.edu/" target="_blank">Lane</a> &gt; <a href="index.html" target="_blank">Celebrating 100 Years</a></div>
+				<div id="centennialBreadCrumb" style="width: auto; border-top: 1px solid #fff; padding-left: 35px; padding-top: 3px; padding-bottom: 3px; background-color: #e8e5d9;"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &gt; <a href="/index.html" target="_blank">Lane</a> &gt; <a href="index.html" target="_blank">Celebrating 100 Years</a></div>
 			</div>
 		</div>
 		<div id="contentContainer">
@@ -47,7 +47,7 @@
 					        <li> <a href="vignettes.html" id="vignettesSidebarItem">Vignettes</a></li>
 					        <li> <a href="http://med.stanford.edu/alumni/" target="_blank">Alumni</a></li>
 					        <li> <a href="http://med.stanford.edu/center/development/" target="_blank">Make a Gift</a></li>
-					        <li> <a href="http://lane.stanford.edu/">Lane Home</a></li>
+					        <li> <a href="/index.html">Lane Home</a></li>
 					    </ul>
 					    <br/>
 						<ul>
@@ -71,7 +71,7 @@
 						<td width="30%" align="center" valign="top">&#169;2006 <a href="http://med.stanford.edu/" target="_blank">Stanford University School of Medicine</a><br/>
 							<a href="http://www.stanford.edu/" target="_blank">Stanford University</a>
 						</td>
-						<td width="50%" align="center" valign="top">&#8226; <a href="http://lane.stanford.edu/" target="_blank">Lane Medical Library &#38; Knowledge Management Center</a> &#8226;<br/>
+						<td width="50%" align="center" valign="top">&#8226; <a href="/index.html" target="_blank">Lane Medical Library &#38; Knowledge Management Center</a> &#8226;<br/>
 							<a href="mailto:LaneAskUs@stanford.edu">LaneAskUs@stanford.edu</a> | (650) 723-6831 | <a href="http://laneintranet.stanford.edu/" target="_blank">Staff Intranet</a></td>
 						<td width="20%" align="center" valign="top">Powered by <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &#8226; <a href="http://www.stanford.edu/home/atoz/terms.html" target="_blank">Terms of Use</a></td>
 					</tr>

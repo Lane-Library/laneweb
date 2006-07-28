@@ -89,7 +89,7 @@
 					</object>
 				</div>
 				<img id="indexCollageBottomPart" src="/images/templates/100years/flashPlaceholder.jpg" width="870" height="162" alt="[image]"/>
-				<div id="centennialBreadCrumb" style="width: auto; border-top: 1px solid #fff; padding-left: 35px; padding-top: 3px; padding-bottom: 3px; background-color: #e8e5d9;"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &gt; <a href="http://lane.stanford.edu/" target="_blank">Lane</a> &gt; Celebrating 100 Years</div>
+				<div id="centennialBreadCrumb" style="width: auto; border-top: 1px solid #fff; padding-left: 35px; padding-top: 3px; padding-bottom: 3px; background-color: #e8e5d9;"><a href="http://med.stanford.edu/">School Home</a> &gt; <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &gt; <a href="/index.html" target="_blank">Lane</a> &gt; Celebrating 100 Years</div>
 			</div>
 		</div>
 		<div id="indexContentContainer">
@@ -103,7 +103,7 @@
 				        <li> <a href="vignettes.html" id="vignettesSidebarItem">Vignettes</a></li>
 				        <li> <a href="http://med.stanford.edu/alumni/" target="_blank">Alumni</a></li>
 				        <li> <a href="http://med.stanford.edu/center/development/" target="_blank">Make a Gift</a></li>
-				        <li> <a href="http://lane.stanford.edu/">Lane Home</a></li>
+				        <li> <a href="/index.html">Lane Home</a></li>
 				    </ul>
 				    </div>
 				</div>
@@ -116,7 +116,7 @@
 						<td width="30%" align="center" valign="top">&#169;2006 <a href="http://med.stanford.edu/" target="_blank">Stanford University School of Medicine</a><br/>
 							<a href="http://www.stanford.edu/" target="_blank">Stanford University</a>
 						</td>
-						<td width="50%" align="center" valign="top">&#8226; <a href="http://lane.stanford.edu/" target="_blank">Lane Medical Library &#38; Knowledge Management Center</a> &#8226;<br/>
+						<td width="50%" align="center" valign="top">&#8226; <a href="/index.html" target="_blank">Lane Medical Library &#38; Knowledge Management Center</a> &#8226;<br/>
 							<a href="mailto:LaneAskUs@stanford.edu">LaneAskUs@stanford.edu</a> | (650) 723-6831 | <a href="http://laneintranet.stanford.edu/" target="_blank">Staff Intranet</a></td>
 						<td width="20%" align="center" valign="top">Powered by <a href="http://irt.stanford.edu/" target="_blank">IRT</a> &#8226; <a href="http://www.stanford.edu/home/atoz/terms.html" target="_blank">Terms of Use</a></td>
 					</tr>
