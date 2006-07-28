@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+    <!-- =========================== Components ================================ -->
+    <map:components>
+        <map:generators default="file">
+            <map:generator name="exception" src="org.apache.cocoon.generation.ExceptionGenerator"/>
+        </map:generators>
+        <map:transformers default="xsltc"/>
+        <map:serializers default="xhtml"/>
+        <map:selectors default="source-parameter"/>
+        <map:readers default="resource"/>
+        <map:matchers default="wildcard"/>
+        <map:pipes default="noncaching"/>
+    </map:components>
+    <map:pipelines>
+        <map:pipeline>
+            <map:match pattern="secure/login.html">
+                <map:act type="loginAction"/>
+            </map:match>
+            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|ram|camv|smil|xls|doc|ppt|ico|swf)$">
+                <map:mount uri-prefix="" check-reload="yes" src="static.xmap"/>
+            </map:match>
+            <map:match type="wildcard" pattern="eresources/**">
+                <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
+            </map:match>
+            <map:match type="wildcard" pattern="content/**">
+                <map:mount uri-prefix="content" check-reload="yes" src="content.xmap"/>
+            </map:match>
+            <map:match type="wildcard" pattern="cookiesFetch.html">
+                <map:select type="resource-exists">
+                    <map:when test="content/cookiesFetch.html">
+                        <map:generate type="file" src="content/cookiesFetch.html"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:generate type="file" src="{defaults:live-base}/content/cookiesFetch.html"/>
+                    </map:otherwise>
+                </map:select>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/cookiesFetch.xsl">
+                        <map:transform type="xsltc" src="context://xsl/cookiesFetch.xsl">
+                            <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                            <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                            <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                        </map:transform>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="xsltc" src="context://xsl/cookiesFetch.xsl">
+                            <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                            <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                            <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                        </map:transform>
+                    </map:otherwise>
+                </map:select>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="**.html">
+                <map:act type="session-action"/>
+                <map:aggregate element="doc" label="content">
+                    <map:part src="cocoon:/content/{1}.html"/>
+                    <map:part src="cocoon:/content/sitemap.html"/>
+                    <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
+                </map:aggregate>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/laneweb.xsl">
+                        <map:transform type="xsltc" src="xsl/laneweb.xsl">
+                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+                            <map:parameter name="context" value="{request:contextPath}/stage"/>
+                            <map:parameter name="query-string" value="{request:queryString}"/>
+                            <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                            <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                            <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                            <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                        </map:transform>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+                            <map:parameter name="context" value="{request:contextPath}/your-sunetid"/>
+                            <map:parameter name="query-string" value="{request:queryString}"/>
+                            <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                            <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                            <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                            <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                        </map:transform>
+                    </map:otherwise>
+                </map:select>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/template-{chain:template}.xsl">
+                        <map:transform type="xsltc"
+                            src="xsl/template-{chain:template}.xsl">
+                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+                        </map:transform>
+                    </map:when> 
+                    <map:when test="context://xsl/template-{chain:template}.xsl">
+                        <map:transform type="xsltc"
+                            src="context://xsl/template-{chain:template}.xsl">
+                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+                        </map:transform>
+                    </map:when> 
+                </map:select>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/webtrends.xsl">
+                        <map:transform type="xsltc" src="xsl/webtrends.xsl">
+                            <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+                        </map:transform>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
+                            <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+                        </map:transform>
+                    </map:otherwise>
+                </map:select>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:handle-errors>
+                <map:generate type="exception"/>
+                <map:serialize type="xml" status-code="500"/>
+            </map:handle-errors>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>

@@ -1,0 +1,193 @@
+<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+    <!-- =========================== Components ================================ -->
+    <map:components>
+        <map:readers default="resource"/>
+        <map:matchers default="wildcard"/>
+        <map:pipes default="noncaching"/>
+    </map:components>
+    <map:pipelines>
+        <map:pipeline type="noncaching">
+            <map:match type="wildcard" pattern="images/**.gif">
+                <map:select type="resource-exists">
+                    <map:when test="resources/images/{1}.gif">
+                        <map:read src="resources/images/{1}.gif" mime-type="image/gif"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/resources/images/{1}.gif" mime-type="image/gif"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="style/*.css">
+                <map:select type="resource-exists">
+                    <map:when test="resources/css/{1}.css">
+                        <map:read type="txt-resource" src="resources/css/{1}.css">
+                            <map:parameter name="path" value="{request:contextPath}/your-sunetid"/>
+                        </map:read>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="txt-resource" src="{defaults:live-base}/resources/css/{1}.css">
+                            <map:parameter name="path" value="{request:contextPath}/your-sunetid"/>
+                        </map:read>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="javascript/*.js">
+                <map:select type="resource-exists">
+                    <map:when test="resources/javascript/{1}.js">
+                        <map:read type="txt-resource" src="resources/javascript/{1}.js"
+                            mime-type="application/x-javascript">
+                            <map:parameter name="path" value="{request:contextPath}/your-sunetid"/>
+                        </map:read>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="txt-resource" src="{defaults:live-base}/resources/javascript/{1}.js"
+                            mime-type="application/x-javascript">
+                            <map:parameter name="path" value="{request:contextPath}/your-sunetid"/>
+                        </map:read>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="images/**.jpg">
+                <map:select type="resource-exists">
+                    <map:when test="resources/images/{1}.jpg">
+                        <map:read src="resources/images/{1}.jpg" mime-type="image/jpeg"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/resources/images/{1}.jpg" mime-type="image/jpeg"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="images/**.png">
+                <map:select type="resource-exists">
+                    <map:when test="resources/images/{1}.png">
+                        <map:read src="resources/images/{1}.jpg" mime-type="image/png"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/resources/images/{1}.jpg" mime-type="image/png"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="pdf/**.pdf">
+                <map:select type="resource-exists">
+                    <map:when test="resources/pdf/{1}.pdf">
+                        <map:read type="no-byte-range" src="resources/pdf/{1}.pdf"
+                            mime-type="application/pdf"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="no-byte-range" src="{defaults:live-base}/resources/pdf/{1}.pdf"
+                            mime-type="application/pdf"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.gif">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.gif">
+                        <map:read src="content/{1}.gif" mime-type="image/gif"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/content/{1}.gif" mime-type="image/gif"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.jpg">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.jpg">
+                        <map:read src="content/{1}.jpg" mime-type="image/jpeg"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/content/{1}.jpg" mime-type="image/jpeg"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.pdf">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.pdf">
+                        <map:read type="no-byte-range" src="content/{1}.pdf" mime-type="application/pdf"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="no-byte-range" src="{defaults:live-base}/content/{1}.pdf" mime-type="application/pdf"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.rm">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.rm">
+                        <map:read src="content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.ram">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.ram">
+                    </map:when>
+                    <map:otherwise>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.camv">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.camv">
+                        <map:read src="content/{1}.ram" mime-type="audio/x-pn-realaudio"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/content/{1}.ram" mime-type="audio/x-pn-realaudio"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.smil">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.smil">
+                        <map:read src="content/{1}.smil" mime-type="application/smil"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/content/{1}.smil" mime-type="application/smil"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.xls">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.xls">
+                        <map:read src="content/{1}.xls" mime-type="application/vnd.ms-excel"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/content/{1}.xls" mime-type="application/vnd.ms-excel"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.doc">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.doc">
+                        <map:read src="content/{1}.doc" mime-type="application/msword"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/content/{1}.doc" mime-type="application/msword"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.ppt">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.doc">
+                        <map:read src="content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.swf">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.swf">
+                        <map:read src="content/{1}.swf" mime-type="application/x-shockwave-flash"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read src="{defaults:live-base}/content/{1}.swf" mime-type="application/x-shockwave-flash"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>
