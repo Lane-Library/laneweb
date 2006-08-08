@@ -21,7 +21,36 @@ import org.xml.sax.helpers.AttributesImpl;
 
 public class EresourcesQueryGenerator extends AbstractGenerator {
 	
-	//ERESOURCE.TITLE, lower(ERESOURCE.TITLE) as LTITLE, 
+	//ERESOURCE.TITLE, lower(ERESOURCE.TITLE) AS LTITLE, 
+	
+	private static final String COUNT_QUERY =
+		"SELECT COUNT(*) AS HITS, 'er' AS GENRE FROM ERESOURCE, TYPE\n"+
+		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'er'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'ej' AS GENRE FROM ERESOURCE, TYPE\n"+
+		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'ej'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'database' AS GENRE FROM ERESOURCE, TYPE\n"+
+		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'database'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'book' AS GENRE FROM ERESOURCE, TYPE\n"+
+		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'book'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'cc' AS GENRE FROM ERESOURCE, TYPE\n"+
+		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'cc'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'lanefaq' AS GENRE FROM ERESOURCE, TYPE\n"+
+		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'lanefaq'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'biotools' AS GENRE FROM ERESOURCE, VERSION, SUBSET\n"+
+		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID AND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET = 'biotools'";
     
     private static final String TYPE = "t";
     private static final String MESH = "m";
@@ -47,12 +76,12 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     	"LINK.LABEL, " +
     	"LINK.INSTRUCTION, ";
     private static final String FROM = "FROM " +
-"ERESOURCE, VERSION, LINK";
+    "ERESOURCE, VERSION, LINK";
     private static final String WHERE =
-"WHERE " +
-"ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID " +
-"AND " + 
-"VERSION.VERSION_ID = LINK.VERSION_ID ";
+    	"WHERE " +
+    	"ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID " +
+    	"AND " + 
+    	"VERSION.VERSION_ID = LINK.VERSION_ID ";
     private static final String ORDER_BY = "\nORDER BY ";
     private static final String ORDER = " LTITLE, LINK_ID";
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
@@ -64,6 +93,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     private String core;
     private String query;
     private String translatedQuery;
+    private boolean count;
     private boolean haveParameters;
     private String coreWeight;
     private QueryTranslator queryTranslator = new QueryTranslator();
@@ -75,6 +105,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
         this.coreWeight = par.getParameter("core-weight", "3");
         Request request = ObjectModelHelper.getRequest(objectModel);
         this.haveParameters = false;
+        this.count = request.getRequestURI().indexOf("count") > 0;
         this.core = request.getParameter(CORE);
         if (this.core != null) {
         	if (this.core.equals("y")) {
@@ -141,6 +172,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
         	this.query = this.query.replaceAll("'","''");
         	this.translatedQuery = this.queryTranslator.translate(this.query);
         }
+        this.count = this.count && this.translatedQuery != null;
     }
 
     public void generate() throws SAXException {
@@ -165,10 +197,15 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
         this.subset = null;
         this.alpha = null;
         this.query = null;
+        this.count = false;
         this.translatedQuery = null;
     }
     
     private char[] getSelectStatmentChars() {
+    	if (count) {
+    		String countQuery = COUNT_QUERY.replaceAll("XX", this.translatedQuery);
+    		return countQuery.toCharArray();
+    	}
     	StringBuffer queryBuffer = new StringBuffer();
     	if (this.translatedQuery != null) {
     		getScoredSelectSQL(queryBuffer, "ERESOURCE.TITLE", true);
