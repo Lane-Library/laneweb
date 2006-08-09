@@ -138,7 +138,7 @@
 
   <datasources logger="core.datasources">
     <jdbc logger="laneweb.eresourcesdb" name="eresources">
-      <pool-controller min="6" max="36" grow="2">
+      <pool-controller min="***laneweb.eresourcesdb.pool.min***" max="***laneweb.eresourcesdb.pool.max***" grow="***laneweb.eresourcesdb.pool.grow***">
         <keep-alive>SELECT 1 FROM DUAL</keep-alive>
       </pool-controller>
       <driver>oracle.jdbc.driver.OracleDriver</driver>
