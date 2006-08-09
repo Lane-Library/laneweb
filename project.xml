@@ -369,15 +369,6 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>marc4j</groupId>
-            <artifactId>marc4j</artifactId>
-            <version>b7</version>
-            <type>jar</type>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
             <groupId>oracle-jdbc</groupId>
             <artifactId>oracle-jdbc</artifactId>
             <version>1.4</version>

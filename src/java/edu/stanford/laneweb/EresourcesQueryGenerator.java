@@ -202,7 +202,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     }
     
     private char[] getSelectStatmentChars() {
-    	if (count) {
+    	if (this.count) {
     		String countQuery = COUNT_QUERY.replaceAll("XX", this.translatedQuery);
     		return countQuery.toCharArray();
     	}
