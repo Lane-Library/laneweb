@@ -43,7 +43,7 @@
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
                 <map:transform type="xsltc" src="context://xsl/linkscan.xsl"/>
-                <map:serialize type="text"/>
+                <map:serialize type="xhtml"/>
             </map:match>
         </map:pipeline>
     </map:pipelines>
