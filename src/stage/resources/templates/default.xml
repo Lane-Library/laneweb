@@ -10,7 +10,6 @@
 				<link href="/style/table-styles.css" rel="stylesheet" type="text/css" media="screen, print"/>
 				<link href="/style/content.css" rel="stylesheet" type="text/css" media="screen, print"/>
         <meta name="WT.seg_1" content="{affiliation}"/>
-        <meta name="lw_requestQuery" content="{query-string}"/>
         <meta name="lw_proxyLinks" content="{proxy-links}"/>
         <script src="/javascript/laneweb.js" type="text/javascript"> </script>
         <script src="/javascript/search.js" type="text/javascript"> </script>
@@ -73,14 +72,15 @@
                                 <option value="ej">eJournals</option>
                                 <option value="database">Databases</option>
                                 <option value="book">eBooks</option>
+								<option value="biotools">Biotools</option>
                                 <option value="cc">medCalcs</option>
-																<option value="faq">Lane FAQs</option>
-																<option disabled="disabled">----------------</option>
+								<option value="faq">Lane FAQs</option>
+								<option disabled="disabled">----------------</option>
                                 <option value="research">Bioresearch</option>
-																<option value="clinical">Clinical</option>
+								<option value="clinical">Clinical</option>
                                 <option value="peds">Pediatrics</option>
                                 <option disabled="disabled">----------------</option>
-																<option value="pubmed">PubMed</option>
+								<option value="pubmed">PubMed</option>
                                 <option value="google">Google</option>
                                 <option value="catalog">Lane Catalog</option>
                                 <option value="biomedsem">Biomed Seminars</option>
