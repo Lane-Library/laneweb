@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<execute-query xmlns="http://apache.org/cocoon/SQL/2.0">
+	<query>
+		select distinct url, link.version_id, eresource.title, eresource.eresource_id
+		from link, eresource, version, type
+		where
+			eresource.eresource_id = version.eresource_id
+			and version.version_id = link.version_id
+			and type.eresource_id = eresource.eresource_id
+			and type.type = 'er'
+	</query>
+</execute-query>
