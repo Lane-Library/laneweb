@@ -3,7 +3,7 @@
         <available file="../laneweb.properties" property="laneweb.production"/>
         <copy todir="target/laneweb/WEB-INF">
             <fileset dir="src/conf">
-                <includes name="cocoon.xconf,log4j.xconf"/>
+                <includes name="cocoon.xconf,log4j.xconf,instrumentation.xconf"/>
             </fileset>
             <j:choose>
                 <j:when test="${laneweb.production}">

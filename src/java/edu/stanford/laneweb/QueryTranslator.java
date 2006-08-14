@@ -11,11 +11,11 @@ class WordData {
 
 public class QueryTranslator {
 
-	Vector reqWords = new Vector();
+	Vector<WordData> reqWords = new Vector<WordData>();
 
-	Vector optWords = new Vector();
+	Vector<WordData> optWords = new Vector<WordData>();
 
-	Vector notWords = new Vector();
+	Vector<WordData> notWords = new Vector<WordData>();
 
 	public static final int required = 1;
 
@@ -56,9 +56,9 @@ public class QueryTranslator {
 		String theWord;
 		String fieldName;
 
-		reqWords = new Vector();
-		optWords = new Vector();
-		notWords = new Vector();
+		reqWords = new Vector<WordData>();
+		optWords = new Vector<WordData>();
+		notWords = new Vector<WordData>();
 
 		while (true) { // Loop over all words
 

@@ -15,7 +15,7 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="template2meta-engines">
-                <map:generate type="file" src="cocoon:/templates/search/{request-param:source}.xml"/>
+                <map:generate type="file" src="{defaults:stage-base}/resources/templates/search/{request-param:source}.xml"/>
                 <map:transform type="xsltc" src="context://xsl/template2meta-engines.xsl">
                     <map:parameter name="source" value="{request-param:source}"/>
                 </map:transform>

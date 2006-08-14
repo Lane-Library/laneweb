@@ -7,6 +7,7 @@ laneweb.eresourcesdb.pool.max=
 laneweb.eresourcesdb.pool.min=
 laneweb.eresourcesdb.pool.grow=
 laneweb.eresourcesdb.pool.timeout=
+laneweb.instrument.port=
 laneweb.live.base=file:/afs/ir/group/lane/beta/live
 laneweb.stage.base=file:/afs/ir/group/lane/beta/stage
 laneweb.search.url=

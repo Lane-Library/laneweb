@@ -15,7 +15,15 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="template2meta-engines">
-                <map:generate type="file" src="cocoon:/templates/search/{request-param:source}.xml"/>
+                <map:select type="resource-exists">
+                    <map:when test="resources/templates/search/{request-param:source}.xml">
+                        <map:generate type="file" src="resources/templates/search/{request-param:source}.xml"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:generate type="file" src="{defaults:live-base}/resources/templates/search/{request-param:source}.xml"/>
+                    </map:otherwise>
+                </map:select>
+                <map:generate type="file" src="{defaults:live-base}/resources/templates/search/{request-param:source}.xml"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/template2meta-engines.xsl">
                         <map:transform type="xsltc" src="xsl/template2meta-engines.xsl">
