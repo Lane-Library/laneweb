@@ -63,10 +63,13 @@ function initeLibraryTabs(){
 
 // makes "tab" active
 function showeLibraryTab(tab){
-	// if active tab not specified, cookie trumps, then source parameter in URL, then default to all
+	// if active tab not specified, direct parameter makes source trump over cookie, then LWeLibSource cookie, then source parameter alone in URL, then default to all
 	if (!tab){
 		tab = 'all'; // default to all
-		if( readCookie('LWeLibSource') && eLibraryTabIDs.contains(tab) ){
+		if( (getQueryContent('direct') == '1' || getQueryContent('direct') == 'true') && eLibraryTabIDs.contains(getQueryContent('source'))  ){
+			tab = getQueryContent('source');
+		}
+		else if( readCookie('LWeLibSource') && eLibraryTabIDs.contains(readCookie('LWeLibSource')) ){
 			tab = readCookie('LWeLibSource');
 		}
 		else if( eLibraryTabIDs.contains(getQueryContent('source')) ){

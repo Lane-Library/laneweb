@@ -44,11 +44,15 @@ document.getElementById("eLibraryTabs").innerHTML=_8;
 function showeLibraryTab(_c){
 if(!_c){
 _c="all";
-if(readCookie("LWeLibSource")&&eLibraryTabIDs.contains(_c)){
+if((getQueryContent("direct")=="1"||getQueryContent("direct")=="true")&&eLibraryTabIDs.contains(getQueryContent("source"))){
+_c=getQueryContent("source");
+}else{
+if(readCookie("LWeLibSource")&&eLibraryTabIDs.contains(readCookie("LWeLibSource"))){
 _c=readCookie("LWeLibSource");
 }else{
 if(eLibraryTabIDs.contains(getQueryContent("source"))){
 _c=getQueryContent("source");
+}
 }
 }
 }
