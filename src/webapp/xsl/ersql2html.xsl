@@ -13,6 +13,10 @@
               <dl class="searchResults">
                   <xsl:apply-templates select="sql:row[sql:ltitle = $ltitle and not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title)]"/>
                   <xsl:apply-templates select="sql:row[not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title) and sql:ltitle != $ltitle]"/>
+		          <xsl:if test="count(sql:row) &gt; 20">
+		          	<br/>
+					 <a style="margin-left:-3px;" href="#"><img src="/graphics/icons/arrowUpTransp.gif" border="0"/> Back to top</a>
+		          </xsl:if>
               </dl>
           </xsl:when>
           <xsl:when test="$a != ''"><div>
