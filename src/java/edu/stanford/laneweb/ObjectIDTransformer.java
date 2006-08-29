@@ -82,7 +82,7 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 						Attr att = (Attr) aliasNodeList.item(i);
 						String value = att.getValue();
 						aliasStatement.setString(1,value.substring(OBJECT_ALIAS_SCHEME.length()));
-						ResultSet rs = idStatement.executeQuery();
+						ResultSet rs = aliasStatement.executeQuery();
 						if (rs.next()) {
 							String href = rs.getString(1);
 							att.setValue(href);
