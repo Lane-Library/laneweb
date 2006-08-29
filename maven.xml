@@ -14,14 +14,6 @@
                 </j:otherwise>
             </j:choose>
         </copy>
-        <j:forEach var="lib" items="${pom.artifacts}">
-            <j:set var="dep" value="${lib.dependency}"/>
-            <j:if test="${dep.getProperty('endorsed')=='true'}">
-                <j:if test="${dep.type =='jar'}">
-                    <copy todir="${maven.build.dir}/endorsed" file="${lib.path}"/>
-                </j:if>
-            </j:if>
-        </j:forEach>
     </postGoal>
     
 </project>
