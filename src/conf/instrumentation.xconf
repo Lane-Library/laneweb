@@ -26,72 +26,757 @@
     <state-file interval="60000" use-compact-samples="true">cocoon.sampledata</state-file>
     
     <instrumentables>
-        <instrumentable name="instrument-manager" description="Instrument Manager">
-            <instrument name="active-thread-count" description="Active Thread Count">
-                <sample type="max" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            <instrument name="total-memory" description="Total Memory">
-                <sample type="max" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            
-            <instrument name="free-memory" description="Free Memory">
-                <sample type="min" interval="1000" size="600" description="Minimum each second."/>
-            </instrument>
-            
-            <instrument name="memory" description="In-Use Memory">
-                <sample type="max" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            
-            <instrument name="instrumentable-registrations">
-                <sample type="counter" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            
-            <instrument name="instrumentables">
-                <sample type="max" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            
-            <instrument name="instruments">
-                <sample type="max" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            
-            <instrument name="samples">
-                <sample type="max" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            
-            <instrument name="leased-samples">
-                <sample type="max" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            
-            <instrument name="lease-requests">
-                <sample type="counter" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            
-            <instrument name="state-saves">
-                <sample type="counter" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            
-            <instrument name="state-save-time">
-                <sample type="max" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-        </instrumentable>
-        <instrumentable name="datasources">
-        <instrumentable name="eresources">
-        <instrumentable name="pool">
-            
-            <instrument name="gets">
-                <sample type="counter" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            
-            <instrument name="puts">
-                <sample type="counter" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            
-            <instrument name="size">
-                <sample type="max" interval="1000" size="600" description="Maximum each second."/>
-            </instrument>
-            </instrumentable>
-        </instrumentable>
-        </instrumentable>
+    <instrumentable name="instrument-manager" description="Instrument Manager">
+  <instrument name="active-thread-count" description="Active Thread Count">
+    <sample type="max" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="free-memory" description="Free Memory">
+    <sample type="max" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="memory" description="In-Use Memory">
+    <sample type="max" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="total-memory" description="Total Memory">
+    <sample type="max" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="instrumentable-registrations" description="instrumentable-registrations">
+    <sample type="counter" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="instrumentables" description="instrumentables">
+    <sample type="max" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="instruments" description="instruments">
+    <sample type="max" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="lease-requests" description="lease-requests">
+    <sample type="counter" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="leased-samples" description="leased-samples">
+    <sample type="max" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="samples" description="samples">
+    <sample type="max" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="state-save-time" description="state-save-time">
+    <sample type="max" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="state-saves" description="state-saves">
+    <sample type="counter" interval="1000" size="600"/>
+  </instrument>
+  <instrumentable name="connector" description="connector">
+    <instrumentable name="http" description="http">
+      <instrumentable name="favicon" description="favicon">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="html-create-sample" description="html-create-sample">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="html-gc" description="html-gc">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="html-instrument" description="html-instrument">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="html-instrument-manager" description="html-instrument-manager">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="html-instrumentable" description="html-instrumentable">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="html-root" description="html-root">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="html-sample" description="html-sample">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="html-sample-lease" description="html-sample-lease">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="sample-chart" description="sample-chart">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="server" description="server">
+        <instrument name="connects" description="connects">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="disconnects" description="disconnects">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="open-sockets" description="open-sockets">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="request-bytes" description="request-bytes">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="response-bytes" description="response-bytes">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="xml-create-sample" description="xml-create-sample">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="xml-create-samples" description="xml-create-samples">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="xml-gc" description="xml-gc">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="xml-instrument" description="xml-instrument">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="xml-instrument-manager" description="xml-instrument-manager">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="xml-instrumentable" description="xml-instrumentable">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="xml-sample" description="xml-sample">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="xml-sample-lease" description="xml-sample-lease">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="xml-sample-leases" description="xml-sample-leases">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="xml-snapshot" description="xml-snapshot">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+      <instrumentable name="xml-snapshots" description="xml-snapshots">
+        <instrument name="request-time" description="request-time">
+          <sample type="max" interval="1000" size="600"/>
+        </instrument>
+        <instrument name="requests" description="requests">
+          <sample type="counter" interval="1000" size="600"/>
+        </instrument>
+      </instrumentable>
+    </instrumentable>
+  </instrumentable>
+</instrumentable>
+    <instrumentable name="component-manager" description="component-manager">
+  <instrumentable name="" description="">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+  </instrumentable>
+  <instrumentable name="$Proxy0" description="$Proxy0">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+  </instrumentable>
+  <instrumentable name="cache" description="cache">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+  </instrumentable>
+  <instrumentable name="classloader" description="classloader">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+  </instrumentable>
+  <instrumentable name="component" description="component">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+    <instrumentable name="pool" description="pool">
+      <instrument name="blocks" description="blocks">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="creates" description="creates">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="decommissions" description="decommissions">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="ready-size" description="ready-size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="size" description="size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+  </instrumentable>
+  <instrumentable name="datasources" description="datasources">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+    <instrumentable name="eresources" description="eresources">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+  </instrumentable>
+  <instrumentable name="input-modules" description="input-modules">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+    <instrumentable name="chain" description="chain">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="defaults" description="defaults">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="laneweb" description="laneweb">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="request" description="request">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="request-attr" description="request-attr">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="request-param" description="request-param">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="request-uri" description="request-uri">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="session-attr" description="session-attr">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="uriencode-request-param" description="uriencode-request-param">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+  </instrumentable>
+  <instrumentable name="runnable-manager" description="runnable-manager">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+  </instrumentable>
+  <instrumentable name="sitemap" description="sitemap">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+  </instrumentable>
+  <instrumentable name="source-factories" description="source-factories">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+    <instrumentable name="*" description="*">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="cocoon" description="cocoon">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="context" description="context">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="file" description="file">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+    <instrumentable name="resource" description="resource">
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="references" description="references">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+  </instrumentable>
+  <instrumentable name="source-resolver" description="source-resolver">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+  </instrumentable>
+  <instrumentable name="store" description="store">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+  </instrumentable>
+  <instrumentable name="store-janitor" description="store-janitor">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+  </instrumentable>
+  <instrumentable name="transient-store" description="transient-store">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+  </instrumentable>
+  <instrumentable name="xml-deserializer" description="xml-deserializer">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+    <instrumentable name="pool" description="pool">
+      <instrument name="blocks" description="blocks">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="creates" description="creates">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="decommissions" description="decommissions">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="ready-size" description="ready-size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="size" description="size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+  </instrumentable>
+  <instrumentable name="xml-parser" description="xml-parser">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+    <instrumentable name="pool" description="pool">
+      <instrument name="blocks" description="blocks">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="creates" description="creates">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="decommissions" description="decommissions">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="ready-size" description="ready-size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="size" description="size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+  </instrumentable>
+  <instrumentable name="xml-serializer" description="xml-serializer">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+    <instrumentable name="pool" description="pool">
+      <instrument name="blocks" description="blocks">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="creates" description="creates">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="decommissions" description="decommissions">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="ready-size" description="ready-size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="size" description="size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+  </instrumentable>
+  <instrumentable name="xmlizer" description="xmlizer">
+    <instrument name="gets" description="gets">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="puts" description="puts">
+      <sample type="counter" interval="1000" size="600"/>
+    </instrument>
+    <instrument name="references" description="references">
+      <sample type="max" interval="1000" size="600"/>
+    </instrument>
+    <instrumentable name="pool" description="pool">
+      <instrument name="blocks" description="blocks">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="creates" description="creates">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="decommissions" description="decommissions">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="ready-size" description="ready-size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="size" description="size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+  </instrumentable>
+</instrumentable>
+    <instrumentable name="datasources" description="datasources">
+  <instrumentable name="eresources" description="eresources">
+    <instrumentable name="pool" description="pool">
+      <instrument name="blocks" description="blocks">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="creates" description="creates">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="decommissions" description="decommissions">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="gets" description="gets">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="puts" description="puts">
+        <sample type="counter" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="ready-size" description="ready-size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+      <instrument name="size" description="size">
+        <sample type="max" interval="1000" size="600"/>
+      </instrument>
+    </instrumentable>
+  </instrumentable>
+</instrumentable>
+    <instrumentable name="input-modules" description="input-modules"/>
+    <instrumentable name="source-factories" description="source-factories"/>
+    <instrumentable name="transient-store" description="transient-store">
+  <instrument name="hits" description="hits">
+    <sample type="counter" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="misses" description="misses">
+    <sample type="counter" interval="1000" size="600"/>
+  </instrument>
+  <instrument name="size" description="size">
+    <sample type="max" interval="1000" size="600"/>
+  </instrument>
+</instrumentable>
+
 
     </instrumentables>
 </instrument>
