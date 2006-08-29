@@ -39,7 +39,7 @@
   <xsl:template match="sql:row">
       <xsl:variable name="eresource_id" select="sql:eresource_id/text()"/>
       <xsl:variable name="title" select="sql:title/text()"/>
-    <xsl:variable name="links" select=".|following-sibling::sql:row[position() &lt; 10 and sql:title/text()=$title and sql:eresource_id/text() = $eresource_id]"/>
+    <xsl:variable name="links" select=".|following-sibling::sql:row[position() &lt; 26 and sql:title/text()=$title and sql:eresource_id/text() = $eresource_id]"/>
     <xsl:variable name="link_count" select="count($links)"/>
       <dt><xsl:value-of select="sql:title/text()"/></dt>
     <dd><ul>
@@ -174,7 +174,7 @@
                   </li>
               </xsl:when>
               <xsl:otherwise>
-                      <xsl:for-each select="self::sql:row[sql:label != 'Get Password'] | following-sibling::sql:row[position() &lt; 10 and sql:version_id = $version_id and sql:label != 'Get Password']">
+                      <xsl:for-each select="self::sql:row[sql:label != 'Get Password'] | following-sibling::sql:row[position() &lt; 26 and sql:version_id = $version_id and sql:label != 'Get Password']">
                           <xsl:variable name="proxy_class">
                               <xsl:choose>
                                   <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
