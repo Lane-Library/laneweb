@@ -51,8 +51,14 @@
         </xsl:variable>
             
         <xsl:copy>
-            <!--<a class="{$status}" target="_blank" href="{$resource/s:url}"><xsl:value-of select="."/></a><xsl:text>: </xsl:text>-->
-	      <a class="proxy" type="{$status}" href="{$resource/s:url}"><xsl:value-of select="."/></a><xsl:text>: </xsl:text>
+            <xsl:choose>
+                <xsl:when test="*">
+                    <a class="proxy" type="{$status}" href="{$resource/s:url}"><xsl:value-of select="."/></a>&#160;<xsl:copy-of select="*"/><xsl:text>: </xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <a class="proxy" type="{$status}" href="{$resource/s:url}"><xsl:value-of select="."/></a><xsl:text>: </xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:choose>
                 <xsl:when test="$status='successful'">
                     <span><xsl:value-of select="format-number($resource/s:hits, '###,###')"/></span>
