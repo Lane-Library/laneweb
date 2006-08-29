@@ -349,7 +349,7 @@
 		-->
 		<init-param>
 			<param-name>enable-instrumentation</param-name>
-			<param-value>true</param-value>
+			<param-value>false</param-value>
 		</init-param>
 
 		<!--
