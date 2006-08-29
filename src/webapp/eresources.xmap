@@ -7,7 +7,7 @@
         </map:generators>
         <map:transformers default="xsltc">
             <map:transformer name="sql" logger="sitemap.transformer.sql"
-                src="org.apache.cocoon.transformation.SQLTransformer" pool-max="4" pool-min="2" pool-grow="2"/>
+                src="org.apache.cocoon.transformation.SQLTransformer" pool-max="32" pool-min="16" pool-grow="4"/>
         </map:transformers>
         <map:serializers default="xml"> </map:serializers>
         <map:matchers default="wildcard"/>
