@@ -6,10 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.xml.transform.TransformerException;
-
 import org.apache.avalon.excalibur.datasource.DataSourceComponent;
 import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.component.Component;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
@@ -17,10 +16,12 @@ import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.components.ExtendedComponentSelector;
 import org.apache.cocoon.transformation.AbstractDOMTransformer;
 import org.apache.excalibur.source.SourceValidity;
-import org.apache.xpath.XPathAPI;
+import org.apache.excalibur.xml.xpath.XPathProcessor;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 
 public class ObjectIDTransformer extends AbstractDOMTransformer 
 	implements Parameterizable, Initializable, CacheableProcessingComponent 
@@ -28,19 +29,47 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 
 	private static final String OBJECT_ID_SCHEME = "id:";
 	
-	private static final String OBJECT_ALIAS_SCHEME = "alias:";
+	private static final String ALIAS_SCHEME = "alias:";
 	
-	private static final String OBJECT_ID_SQL = "SELECT URL FROM LINK WHERE OBJECT_ID = ?";
+	//private static final String RESOLVED_OBJECTS = "rslvd";
 	
-	private static final String OBJECT_ALIAS_SQL = "SELECT URL FROM LINK WHERE ALIAS = ?";
+	private static final String HREF = "href";
 	
-	private static final String OBJECT_ID_XPATH = "//@href[starts-with(.,'" + OBJECT_ID_SCHEME + "')]";
+	private static final String TITLE = "title";
 	
-	private static final String OBJECT_ALIAS_XPATH = "//@href[starts-with(.,'" + OBJECT_ALIAS_SCHEME + "')]";
+	private static final String CLASS = "class";
+	
+	private static final String PROXY = "proxy";
+	
+	private static final String NO_PROXY = "noproxy";
+	
+	private static final int TITLE_COLUMN = 1;
+	
+	private static final int PROXY_COLUMN = 2;
+	
+	private static final int URL_COLUMN = 3;
+	
+	private static final String OBJECT_ID_SQL =
+	"SELECT TITLE, PROXY, URL FROM ERESOURCE, VERSION, LINK " +
+	"WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID " + 
+	"AND VERSION.VERSION_ID = LINK.VERSION_ID " +
+	"AND OBJECT_ID = ?";
+	
+	private static final String ALIAS_SQL =
+		"SELECT TITLE, PROXY, URL FROM ERESOURCE, VERSION, LINK " +
+		"WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID " + 
+		"AND VERSION.VERSION_ID = LINK.VERSION_ID " +
+		"AND ALIAS = ?";
+	
+	private static final String OBJECT_ID_XPATH = "//*[name() = 'a' and @href[starts-with(.,'" + OBJECT_ID_SCHEME + "')]]";
+	
+	private static final String ALIAS_XPATH = "//*[name() = 'a' and @href[starts-with(.,'" + ALIAS_SCHEME + "')]]";
 	
 	private String connectionName;
 	
 	private DataSourceComponent dataSource;
+	
+	private XPathProcessor xpathProcessor;
 
 	@Override
 	protected Document transform(Document doc) {
@@ -49,49 +78,24 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 		PreparedStatement aliasStatement = null;
 		NodeList idNodeList = null;
 		NodeList aliasNodeList = null;
-		try {
-			idNodeList = XPathAPI.selectNodeList(doc,OBJECT_ID_XPATH);
-			aliasNodeList = XPathAPI.selectNodeList(doc,OBJECT_ALIAS_XPATH);
-		} catch (TransformerException e) {
-			getLogger().error(e.getMessage(), e);
-			return doc;
-		}
+//		Request request = ObjectModelHelper.getRequest(super.objectModel);
+//		Map resolvedObjects = (Map) request.getAttribute(RESOLVED_OBJECTS);
+//		if (resolvedObjects == null) {
+//			resolvedObjects = new HashMap();
+//			request.setAttribute(RESOLVED_OBJECTS, resolvedObjects);
+//		}
+		idNodeList = this.xpathProcessor.selectNodeList(doc,OBJECT_ID_XPATH);
+		aliasNodeList = this.xpathProcessor.selectNodeList(doc,ALIAS_XPATH);
 		if (idNodeList.getLength() > 0 || aliasNodeList.getLength() > 0) {
 			try {
 				conn = dataSource.getConnection();
 				if (idNodeList.getLength() > 0) {
 					idStatement = conn.prepareStatement(OBJECT_ID_SQL);
-					for (int i = 0; i < idNodeList.getLength(); i++) {
-						Attr att = (Attr) idNodeList.item(i);
-						String value = att.getValue();
-						idStatement.setString(1,value.substring(OBJECT_ID_SCHEME.length()));
-						ResultSet rs = idStatement.executeQuery();
-						if (rs.next()) {
-							String href = rs.getString(1);
-							att.setValue(href);
-							if (getLogger().isDebugEnabled()) {
-								getLogger().debug("replacing " + OBJECT_ID_SCHEME + value + " with url " + href);
-							}
-						}
-						rs.close();
-					}
+					transformNodeList(idNodeList, idStatement);
 				}
 				if (aliasNodeList.getLength() > 0) {
-					aliasStatement = conn.prepareStatement(OBJECT_ALIAS_SQL);
-					for (int i = 0; i < aliasNodeList.getLength(); i++) {
-						Attr att = (Attr) aliasNodeList.item(i);
-						String value = att.getValue();
-						aliasStatement.setString(1,value.substring(OBJECT_ALIAS_SCHEME.length()));
-						ResultSet rs = aliasStatement.executeQuery();
-						if (rs.next()) {
-							String href = rs.getString(1);
-							att.setValue(href);
-							if (getLogger().isDebugEnabled()) {
-								getLogger().debug("replacing " + OBJECT_ALIAS_SCHEME + value + " with url " + href);
-							}
-						}
-						rs.close();
-					}
+					aliasStatement = conn.prepareStatement(ALIAS_SQL);
+					transformNodeList(aliasNodeList, aliasStatement);
 				}
 			} catch (SQLException e) {
 				getLogger().error(e.getMessage(),e);
@@ -121,6 +125,44 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 		}
 		return doc;
 	}
+	
+	private void transformNodeList(NodeList nodeList, PreparedStatement stmt) throws SQLException {
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Element anchor = (Element) nodeList.item(i);
+			Attr href = anchor.getAttributeNode(HREF);
+			String idUri = href.getValue();
+			stmt.setString(1,idUri.substring(idUri.indexOf(':') + 1));
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				String title = rs.getString(TITLE_COLUMN);
+				String clazz = rs.getString(PROXY_COLUMN).equals("T") ? PROXY : NO_PROXY;
+				String url = rs.getString(URL_COLUMN);
+				href.setValue(url);
+			
+				Attr titleAttr = anchor.getAttributeNode(TITLE);
+				if (titleAttr == null) {
+					titleAttr = anchor.getOwnerDocument().createAttribute(TITLE);
+					anchor.setAttributeNode(titleAttr);
+				}
+				titleAttr.setValue(title);
+				Attr classAttr = anchor.getAttributeNode(CLASS);
+				if (classAttr == null) {
+					classAttr = anchor.getOwnerDocument().createAttribute(CLASS);
+					anchor.setAttributeNode(classAttr);
+				}
+				classAttr.setValue(clazz);
+				if (anchor.getChildNodes().getLength() == 0) {
+					Text text = anchor.getOwnerDocument().createTextNode(title);
+					anchor.appendChild(text);
+				}
+				if (getLogger().isDebugEnabled()) {
+					getLogger().debug(idUri + " => " + title + "," + clazz + "," + url);
+				}
+			}
+			rs.close();
+		}
+	}
+	
 
 	public Serializable getKey() {
 		return "";
@@ -148,6 +190,15 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 		ExtendedComponentSelector selector = (ExtendedComponentSelector) super.manager.lookup(DataSourceComponent.ROLE + "Selector");
 		this.dataSource = (DataSourceComponent) selector.select(this.connectionName);
 		super.manager.release(selector);
+		this.xpathProcessor = (XPathProcessor) this.manager.lookup(XPathProcessor.ROLE);
+	}
+	
+	public void dispose() {
+		this.manager.release(this.dataSource);
+		this.manager.release((Component) this.xpathProcessor);
+		this.dataSource = null;
+		this.xpathProcessor = null;
+		super.dispose();
 	}
 
 }
