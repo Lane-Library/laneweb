@@ -356,7 +356,7 @@ IOClient.prototype = {
 								//&& resources[j].getElementsByTagName('hits')[0].firstChild.data > 0){
 								//document.getElementById(resources[j].getAttribute('id') + 'SearchResults').innerHTML = "<a target='new' href='" + resources[j].getElementsByTagName('url')[0].firstChild.data + "'>" + resources[j].getElementsByTagName('description')[0].firstChild.data + '<br /><span class="tabHitCount">' + intToNumberString(resources[j].getElementsByTagName('hits')[0].firstChild.data) + '</span></a>';
 								var container = document.getElementById(resources[j].getAttribute('id') + 'SearchResults');
-								//container.getElementsByTagName('a')[0].href = resources[j].getElementsByTagName('url')[0].firstChild.data;
+								container.getElementsByTagName('a')[0].href = resources[j].getElementsByTagName('url')[0].firstChild.data;
 								container.getElementsByTagName('a')[0].innerHTML = resources[j].getElementsByTagName('description')[0].firstChild.data + '<br /><span class="tabHitCount">' + intToNumberString(resources[j].getElementsByTagName('hits')[0].firstChild.data) + '</span>';
 
 								if(resources[j].getAttribute('id') == 'google'){
