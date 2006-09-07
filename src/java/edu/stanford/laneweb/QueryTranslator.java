@@ -24,7 +24,8 @@ public class QueryTranslator {
 	public static final int notwanted = 3;
 
 	public String translate(String input) {
-		processString(input);
+		//CY: leading space broke this sucker
+		processString(input.trim());
 		return getQuery();
 	}
 
@@ -216,6 +217,6 @@ public class QueryTranslator {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(new QueryTranslator().translate("ophth* amer*"));
+		System.out.println(new QueryTranslator().translate(" cell"));
 	}
 }
