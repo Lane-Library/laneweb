@@ -68,6 +68,9 @@
             <map:match type="wildcard" pattern="**.swf">
                 <map:read src="{defaults:stage-base}/content/{1}.swf" mime-type="application/x-shockwave-flash"/>
             </map:match>
+            <map:match type="wildcard" pattern="**.wmv">
+                <map:read src="{defaults:stage-base}/content/{1}.wmv" mime-type="audio/x-ms-wmv"/>
+            </map:match>
             <map:match type="wildcard" pattern="robots.txt">
                 <map:read src="{defaults:stage-base}/robots.txt" mime-type="text/plain"/>
             </map:match>
