@@ -84,6 +84,7 @@
                     <map:part src="cocoon:/content/sitemap.html"/>
                     <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                 </map:aggregate>
+                <map:transform type="object-id"/>
                 <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}/stage"/>
@@ -93,7 +94,6 @@
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                 </map:transform>
-                <map:transform type="object-id"/>
                 <map:select type="resource-exists">
                     <map:when test="context://xsl/template-{chain:template}.xsl">
                         <map:transform type="xsltc"
