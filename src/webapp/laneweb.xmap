@@ -35,6 +35,10 @@
             </map:transformer>
             <map:transformer name="xinclude" src="edu.stanford.laneweb.XIncludeTransformer" pool-min="16" pool-max="32"
                 pool-grow="4" logger="sitemap.transformer.xinclude"/>
+            <map:transformer name="object-id" src="edu.stanford.laneweb.ObjectIDTransformer" pool-min="16" pool-max="32"
+                pool-grow="4" logger="sitemap.transformer.object-id">
+                <map:parameter name="connection-name" value="eresources"/>
+            </map:transformer>
         </map:transformers>
         <map:serializers default="xhtml">
             <map:serializer name="xhtml" mime-type="text/html" logger="sitemap.serializer.xhtml"
@@ -166,7 +170,7 @@
             <map:match type="wildcard" pattern="ermeltz/**">
                 <map:mount uri-prefix="ermeltz" check-reload="yes" src="file:/afs/ir/users/e/r/ermeltz/laneweb/laneweb.xmap"/>
             </map:match>
-            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|ram|camv|smil|xls|doc|ppt|ico|swf)$">
+            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|ram|camv|smil|xls|doc|ppt|ico|swf|wmv)$">
                 <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="robots.txt">
@@ -234,6 +238,7 @@
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                 </map:transform>
+                <map:transform type="object-id"/>
                 <map:select type="resource-exists">
                     <map:when test="context://xsl/template-{chain:template}.xsl">
                         <map:transform type="xsltc" src="context://xsl/template-{chain:template}.xsl">

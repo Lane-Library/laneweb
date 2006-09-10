@@ -93,6 +93,7 @@
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                 </map:transform>
+                <map:transform type="object-id"/>
                 <map:select type="resource-exists">
                     <map:when test="context://xsl/template-{chain:template}.xsl">
                         <map:transform type="xsltc"

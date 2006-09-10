@@ -27,9 +27,7 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 	implements Parameterizable, Initializable, CacheableProcessingComponent 
 		{
 
-	private static final String OBJECT_ID_SCHEME = "id:";
-	
-	private static final String ALIAS_SCHEME = "alias:";
+	private static final String SCHEME = "id:";
 	
 	//private static final String RESOLVED_OBJECTS = "rslvd";
 	
@@ -49,21 +47,15 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 	
 	private static final int URL_COLUMN = 3;
 	
-	private static final String OBJECT_ID_SQL =
-	"SELECT TITLE, PROXY, URL FROM ERESOURCE, VERSION, LINK " +
+	private static final int PUBLISHER_COLUMN = 4;
+	
+	private static final String SQL =
+	"SELECT TITLE, PROXY, URL, PUBLISHER FROM ERESOURCE, VERSION, LINK " +
 	"WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID " + 
 	"AND VERSION.VERSION_ID = LINK.VERSION_ID " +
 	"AND OBJECT_ID = ?";
 	
-	private static final String ALIAS_SQL =
-		"SELECT TITLE, PROXY, URL FROM ERESOURCE, VERSION, LINK " +
-		"WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID " + 
-		"AND VERSION.VERSION_ID = LINK.VERSION_ID " +
-		"AND ALIAS = ?";
-	
-	private static final String OBJECT_ID_XPATH = "//*[name() = 'a' and @href[starts-with(.,'" + OBJECT_ID_SCHEME + "')]]";
-	
-	private static final String ALIAS_XPATH = "//*[name() = 'a' and @href[starts-with(.,'" + ALIAS_SCHEME + "')]]";
+	private static final String XPATH = "//*[name() = 'a' and @href[starts-with(.,'" + SCHEME + "')]]";
 	
 	private String connectionName;
 	
@@ -74,42 +66,68 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 	@Override
 	protected Document transform(Document doc) {
 		Connection conn = null;
-		PreparedStatement idStatement = null;
-		PreparedStatement aliasStatement = null;
-		NodeList idNodeList = null;
-		NodeList aliasNodeList = null;
+		PreparedStatement stmt = null;
+		NodeList nodeList = null;
 //		Request request = ObjectModelHelper.getRequest(super.objectModel);
 //		Map resolvedObjects = (Map) request.getAttribute(RESOLVED_OBJECTS);
 //		if (resolvedObjects == null) {
 //			resolvedObjects = new HashMap();
 //			request.setAttribute(RESOLVED_OBJECTS, resolvedObjects);
 //		}
-		idNodeList = this.xpathProcessor.selectNodeList(doc,OBJECT_ID_XPATH);
-		aliasNodeList = this.xpathProcessor.selectNodeList(doc,ALIAS_XPATH);
-		if (idNodeList.getLength() > 0 || aliasNodeList.getLength() > 0) {
+		nodeList = this.xpathProcessor.selectNodeList(doc,XPATH);
+		if (nodeList.getLength() > 0) {
 			try {
 				conn = dataSource.getConnection();
-				if (idNodeList.getLength() > 0) {
-					idStatement = conn.prepareStatement(OBJECT_ID_SQL);
-					transformNodeList(idNodeList, idStatement);
-				}
-				if (aliasNodeList.getLength() > 0) {
-					aliasStatement = conn.prepareStatement(ALIAS_SQL);
-					transformNodeList(aliasNodeList, aliasStatement);
+				if (nodeList.getLength() > 0) {
+					stmt = conn.prepareStatement(SQL);
+					transformNodeList(nodeList, stmt);
+					for (int i = 0; i < nodeList.getLength(); i++) {
+						Element anchor = (Element) nodeList.item(i);
+						Attr href = anchor.getAttributeNode(HREF);
+						String idUri = href.getValue();
+						stmt.setString(1,idUri.substring(idUri.indexOf(':') + 1));
+						ResultSet rs = stmt.executeQuery();
+						if (rs.next()) {
+							String title = rs.getString(TITLE_COLUMN);
+							String clazz = rs.getString(PROXY_COLUMN).equals("T") ? PROXY : NO_PROXY;
+							String url = rs.getString(URL_COLUMN);
+							String publisher = rs.getString(PUBLISHER_COLUMN);
+							href.setValue(url);
+						
+							Attr titleAttr = anchor.getAttributeNode(TITLE);
+							if (titleAttr == null) {
+								titleAttr = anchor.getOwnerDocument().createAttribute(TITLE);
+								StringBuffer titleAttrValue = new StringBuffer(title);
+								if (publisher != null) {
+									titleAttrValue.append(':').append(publisher);
+								}
+								titleAttr.setValue(titleAttrValue.toString());
+								anchor.setAttributeNode(titleAttr);
+							}
+							titleAttr.setValue(title);
+							Attr classAttr = anchor.getAttributeNode(CLASS);
+							if (classAttr == null) {
+								classAttr = anchor.getOwnerDocument().createAttribute(CLASS);
+								anchor.setAttributeNode(classAttr);
+							}
+							classAttr.setValue(clazz);
+							if (anchor.getChildNodes().getLength() == 0) {
+								Text text = anchor.getOwnerDocument().createTextNode(title);
+								anchor.appendChild(text);
+							}
+							if (getLogger().isDebugEnabled()) {
+								getLogger().debug(idUri + " => " + title + "," + publisher + ", " + clazz + "," + url);
+							}
+						}
+						rs.close();
+					}
 				}
 			} catch (SQLException e) {
 				getLogger().error(e.getMessage(),e);
 			} finally {
-				if (idStatement != null) {
+				if (stmt != null) {
 					try {
-						idStatement.close();
-					} catch (SQLException e) {
-						getLogger().error(e.getMessage(), e);
-					}
-				}
-				if (aliasStatement != null) {
-					try {
-						aliasStatement.close();
+						stmt.close();
 					} catch (SQLException e) {
 						getLogger().error(e.getMessage(), e);
 					}
@@ -127,40 +145,6 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 	}
 	
 	private void transformNodeList(NodeList nodeList, PreparedStatement stmt) throws SQLException {
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Element anchor = (Element) nodeList.item(i);
-			Attr href = anchor.getAttributeNode(HREF);
-			String idUri = href.getValue();
-			stmt.setString(1,idUri.substring(idUri.indexOf(':') + 1));
-			ResultSet rs = stmt.executeQuery();
-			if (rs.next()) {
-				String title = rs.getString(TITLE_COLUMN);
-				String clazz = rs.getString(PROXY_COLUMN).equals("T") ? PROXY : NO_PROXY;
-				String url = rs.getString(URL_COLUMN);
-				href.setValue(url);
-			
-				Attr titleAttr = anchor.getAttributeNode(TITLE);
-				if (titleAttr == null) {
-					titleAttr = anchor.getOwnerDocument().createAttribute(TITLE);
-					anchor.setAttributeNode(titleAttr);
-				}
-				titleAttr.setValue(title);
-				Attr classAttr = anchor.getAttributeNode(CLASS);
-				if (classAttr == null) {
-					classAttr = anchor.getOwnerDocument().createAttribute(CLASS);
-					anchor.setAttributeNode(classAttr);
-				}
-				classAttr.setValue(clazz);
-				if (anchor.getChildNodes().getLength() == 0) {
-					Text text = anchor.getOwnerDocument().createTextNode(title);
-					anchor.appendChild(text);
-				}
-				if (getLogger().isDebugEnabled()) {
-					getLogger().debug(idUri + " => " + title + "," + clazz + "," + url);
-				}
-			}
-			rs.close();
-		}
 	}
 	
 
