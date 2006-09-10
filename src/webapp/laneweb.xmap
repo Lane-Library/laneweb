@@ -9,6 +9,11 @@
                 pool-max="32" pool-min="16" pool-grow="4">
                 <jtidy-config>context://WEB-INF/jtidy.properties</jtidy-config>
             </map:generator>
+            <map:generator name="expiring" logger="sitemap.generator.expiring" src="edu.stanford.laneweb.ExpiringHTMLGenerator"
+                pool-max="32" pool-min="16" pool-grow="4">
+                <jtidy-config>context://WEB-INF/jtidy.properties</jtidy-config>
+                <expires>3600000</expires>
+            </map:generator>
             <map:generator name="search-proxy" src="edu.stanford.laneweb.SearchProxyGenerator"
                 logger="sitemap.generator.search-proxy" pool-min="16" pool-max="32" pool-grow="4"/>
             <map:generator name="request" src="org.apache.cocoon.generation.RequestGenerator"
@@ -229,7 +234,7 @@
                     <map:part src="cocoon:/content/sitemap.html"/>
                     <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                 </map:aggregate>
-                <map:transform type="object-id"/>
+                <!--<map:transform type="object-id"/>-->
                 <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}"/>

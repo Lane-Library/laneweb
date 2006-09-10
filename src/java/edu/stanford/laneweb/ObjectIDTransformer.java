@@ -16,6 +16,7 @@ import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.components.ExtendedComponentSelector;
 import org.apache.cocoon.transformation.AbstractDOMTransformer;
 import org.apache.excalibur.source.SourceValidity;
+import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 import org.apache.excalibur.xml.xpath.XPathProcessor;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -57,11 +58,15 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 	
 	private static final String XPATH = "//*[name() = 'a' and @href[starts-with(.,'" + SCHEME + "')]]";
 	
+	private static final long DEFAULT_EXPIRATION = 60 * 60 * 1000;
+	
 	private String connectionName;
 	
 	private DataSourceComponent dataSource;
 	
 	private XPathProcessor xpathProcessor;
+	
+	private long expiration;
 
 	@Override
 	protected Document transform(Document doc) {
@@ -80,7 +85,6 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 				conn = dataSource.getConnection();
 				if (nodeList.getLength() > 0) {
 					stmt = conn.prepareStatement(SQL);
-					transformNodeList(nodeList, stmt);
 					for (int i = 0; i < nodeList.getLength(); i++) {
 						Element anchor = (Element) nodeList.item(i);
 						Attr href = anchor.getAttributeNode(HREF);
@@ -144,30 +148,18 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 		return doc;
 	}
 	
-	private void transformNodeList(NodeList nodeList, PreparedStatement stmt) throws SQLException {
-	}
-	
 
 	public Serializable getKey() {
 		return "";
 	}
 
 	public SourceValidity getValidity() {
-		return new SourceValidity () {
-
-			public int isValid() {
-				return SourceValidity.VALID;
-			}
-
-			public int isValid(SourceValidity arg0) {
-				return SourceValidity.VALID;
-			}
-			
-		};
+		return new ExpiresValidity(this.expiration);
 	}
 
 	public void parameterize(Parameters params) throws ParameterException {
 		this.connectionName = params.getParameter("connection-name","eresources");
+		this.expiration = params.getParameterAsLong("expiration", DEFAULT_EXPIRATION);
 	}
 
 	public void initialize() throws Exception {
