@@ -15,10 +15,10 @@
 				</tr>
 				<tr>
 					<td class="popInContent" colspan="3">
-				        <span id="spellResults">Try query in: <a href="search.html?source=clinical&amp;id={$id}">Clinical</a>, 
+				        <span id="spellResults">Run query in: <a href="search.html?source=clinical&amp;id={$id}">Clinical</a>, 
 						<a href="search.html?source=research&amp;id={$id}">Bioresearch</a> or  
 						<a href="search.html?source=all&amp;id={$id}">Laneconnex</a>
-						| More on: <a href="portals/peds.html">Pediatrics Portal</a></span>
+						| More resources: <a href="portals/peds.html">Pediatrics Portal</a></span>
 
 
 
@@ -32,17 +32,35 @@
             <div class="searchColumn3 largeFont">
 			
                 <div class="searchCategory">
-                    <h3 class="hide">Most Popular</h3>
+                    <h3 class="hide">General</h3>
                     <ul>
-					    <li id="calculators">Calculators</li>
-					    <li id="am_hay">Current Pediatric Dx &amp; Tx</li>
-                        <li id="mdc_behrman">Nelson's Pediatrics</li>
-                        <li id="skolar_rudolph">Rudolph's Pediatrics</li>
 						<li id="emedicine">eMedicine</li>
 						<li id="uptodate">UpToDate</li>
+						<li id="calculators">Calculators</li>
 						<li id="pubmed">PubMed@Stanford</li>
                     </ul>
                 </div>
+				
+				<div class="searchCategory">
+                    <h3 class="hide">Pediatrics</h3>
+                    <ul>
+					    <li id="am_hay">Current Pediatric Dx &amp; Tx</li>
+                        <li id="mdc_behrman">Nelson's Pediatrics</li>
+                        <li id="skolar_rudolph">Rudolph's Pediatrics</li>
+						<li id="mdc_hlh">Harriet Lane Handbook</li>
+                        <li id="mdc_miller">Miller's Anesthesia</li>
+                        <li id="mdc_park">Pediatric Cardiology</li>
+                        <li id="mdc_green">Skeletal Trauma in Children</li>
+                    </ul>
+                </div>
+				
+				<div class="searchCategory">	
+                    <h3 class="hide">Genetics</h3>
+                    <ul>
+						<li id="genereviews">Gene Reviews</li>
+						<li id="crossdb_omim">OMIM</li>
+                    </ul>
+                </div> 
 				
 				<div class="searchCategory">
                     <h3 class="hide">Infectious Disease</h3>
@@ -54,29 +72,10 @@
                 </div>
 				
 				<div class="searchCategory">	
-                    <h3 class="hide">Genetics</h3>
-                    <ul>
-						<li id="genereviews">Gene Reviews</li>
-						<li id="crossdb_omim">OMIM: Inherited Disease</li>
-                    </ul>
-                </div> 
-
-				
-				<div class="searchCategory">	
                     <h3 class="hide">Obstetrics</h3>
                     <ul>
-                        <li id="skolar_scott">Danforth's Obstetrics  &amp; Gynecology</li>
+                        <li id="skolar_scott">Danforth's Obstetrics &amp;Gynecology</li>
                         <li id="mdc_gabbe">Gabbe's Obstetrics</li>
-                    </ul>
-                </div> 
-								
-				<div class="searchCategory">	
-                    <h3 class="hide">More Pediatric Texts</h3>
-                    <ul>
-						<li id="mdc_hlh">Harriet Lane Handbook</li>
-                        <li id="mdc_miller">Miller's Anesthesia</li>
-                        <li id="mdc_park">Pediatric Cardiology</li>
-                        <li id="mdc_green">Skeletal Trauma in Children</li>
                     </ul>
                 </div> 
 			</div>	
@@ -128,10 +127,10 @@
                         <li id="aappatient">AAP</li>
 						<li id="skolar_aafp">AAFP</li>
                         <li id="mdchandout">MDConsult</li>
-                        <li id="medlineplus_1">MedlinePlus-drug</li>
-                        <li id="medlineplus_2">MedlinePlus-encyclopedia</li>
-                        <li id="medlineplus_0">MedlinePlus-topics</li>
-                        <li id="skolar_pdq_pat">PDQ Cancer</li>
+                        <li id="medlineplus_2">MedlinePlus encyclopedia</li>
+                        <li id="medlineplus_0">MedlinePlus topics</li>
+						 <li id="medlineplus_1">MedlinePlus drugs</li>
+                         <!-- <li id="skolar_pdq_pat">PDQ Cancer</li>-->
                     </ul>
                 </div>
 

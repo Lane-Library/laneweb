@@ -15,8 +15,8 @@ _4.src=GLOBALS.basePath+"/javascript/ErrorLogger.js?url="+_2+"&line="+_3+"&msg="
 _4.className="hide";
 return false;
 }
-var eLibraryTabLabels=new Array("All","eJournals","Databases","eBooks","Biotools","medCalcs","Lane FAQs");
-var eLibraryTabIDs=new Array("all","ej","database","book","biotools","cc","faq");
+var eLibraryTabLabels=new Array("All","eJournals","Databases","eBooks","Biotools","Videos","medCalcs","Lane FAQs");
+var eLibraryTabIDs=new Array("all","ej","database","book","biotools","video","cc","faq");
 var eLibraryResultCounts=[];
 var eLibraryActiveTab=null;
 function geteLibraryTabCount(_5){
