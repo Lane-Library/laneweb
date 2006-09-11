@@ -70,18 +70,18 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
-            <map:match type="wildcard" pattern="lane-faq/lane-faq.html">
-                <map:generate type="expiring" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
+            <map:match type="wildcard" pattern="lane-faq/lane-faq-all.html">
+                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq-all.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="howto/index.html">
-                <map:generate type="file" src="cocoon:/lane-faq/lane-faq.html"/>
+                <map:generate type="file" src="cocoon:/lane-faq/lane-faq-all.html"/>
                 <map:transform type="xsltc" src="context://xsl/faq.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="faq-category-list.html">
-                <map:generate type="file" src="cocoon:/lane-faq/lane-faq.html"/>
+                <map:generate type="file" src="cocoon:/lane-faq/lane-faq-all.html"/>
                 <map:transform type="xsltc" src="context://xsl/faq-category-list.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
