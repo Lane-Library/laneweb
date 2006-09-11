@@ -20,7 +20,7 @@
                 </map:read>
             </map:match>
             <map:match type="wildcard" pattern="javascript/*.js">
-                <map:read type="txt-resource" src="{defaults:live-base}/resources/javascript/{1}.js"
+                <map:read type="txt-resource" src="context://javascript/{1}.js"
                     mime-type="application/x-javascript">
                     <map:parameter name="path" value="{request:contextPath}"/>
                 </map:read>
