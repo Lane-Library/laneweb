@@ -17,7 +17,7 @@
             <map:match type="wildcard" pattern="search-proxy">
                 <map:generate type="search-proxy" src="{defaults:search-url}search"/>
                 <map:transform type="xsltc" src="context://xsl/search-proxy.xsl">
-                	<map:parameter name="context" value="{request:contextPath}" />
+                	<map:parameter name="context" value="{request:contextPath}/stage" />
                 	<map:parameter name="sunetid" value="{laneweb:sunetid}" />
                 	<map:parameter name="ticket" value="{laneweb:ticket}" />
                 	<map:parameter name="affiliation" value="{laneweb:affiliation}" />
@@ -75,12 +75,8 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="lane-faq/lane-faq.html">
-                <map:generate type="expiring" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="howto/index.html">
-                <map:generate type="file" src="cocoon:/lane-faq/lane-faq.html"/>
+                <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
                 <map:transform type="xsltc" src="context://xsl/faq.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
