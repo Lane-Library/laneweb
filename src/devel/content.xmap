@@ -4,52 +4,13 @@
     <map:components>
         <map:generators default="html"/>
         <map:transformers default="xinclude"/>
-        <map:serializers default="xml">
-            <map:serializer name="text" mime-type="text/plain" logger="sitemap.serializer.xhtml"
-                src="org.apache.cocoon.serialization.TextSerializer" pool-max="32" pool-min="16" pool-grow="4"/>
-        </map:serializers>
+        <map:serializers default="xml"/>
         <map:selectors default="simple"/>
         <map:matchers default="wildcard"/>
         <map:pipes default="noncaching"/>
     </map:components>
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match pattern="template2meta-engines">
-                <map:select type="resource-exists">
-                    <map:when test="resources/templates/search/{request-param:source}.xml">
-                        <map:generate type="file" src="resources/templates/search/{request-param:source}.xml"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:generate type="file" src="{defaults:live-base}/resources/templates/search/{request-param:source}.xml"/>
-                    </map:otherwise>
-                </map:select>
-                <map:generate type="file" src="{defaults:live-base}/resources/templates/search/{request-param:source}.xml"/>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/template2meta-engines.xsl">
-                        <map:transform type="xsltc" src="xsl/template2meta-engines.xsl">
-                            <map:parameter name="source" value="{request-param:source}"/>
-                        </map:transform>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/template2meta-engines.xsl">
-                            <map:parameter name="source" value="{request-param:source}"/>
-                        </map:transform>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="text"/>
-            </map:match>
-            <map:match pattern="faq-category-list.html">
-                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/faq=category-list.xsl">
-                        <map:transform type="xsltc" src="xsl/faq-category-list.xsl"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/faq-category-list.xsl"/>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="eresources/**">
                 <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
             </map:match>
@@ -116,6 +77,65 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
+            <map:match pattern="template2meta-engines">
+                <map:select type="resource-exists">
+                    <map:when test="resources/templates/search/{request-param:source}.xml">
+                        <map:generate type="file" src="resources/templates/search/{request-param:source}.xml"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:generate type="file" src="{defaults:live-base}/resources/templates/search/{request-param:source}.xml"/>
+                    </map:otherwise>
+                </map:select>
+                <map:generate type="file" src="{defaults:live-base}/resources/templates/search/{request-param:source}.xml"/>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/template2meta-engines.xsl">
+                        <map:transform type="xsltc" src="xsl/template2meta-engines.xsl">
+                            <map:parameter name="source" value="{request-param:source}"/>
+                        </map:transform>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="xsltc" src="context://xsl/template2meta-engines.xsl">
+                            <map:parameter name="source" value="{request-param:source}"/>
+                        </map:transform>
+                    </map:otherwise>
+                </map:select>
+                <map:serialize type="text"/>
+            </map:match>
+            <map:match pattern="sfx">
+                <map:generate type="html"
+                    src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={uriencode-request-param:q}&amp;sfx.title_search=exact"/>
+                <map:transform type="xsltc" src="context://xsl/sfx.xsl">
+                    <map:parameter name="sfx-request"
+                        value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={uriencode-request-param:q}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
+                    />
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="howto/index.html">
+                <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/faq.xsl">
+                        <map:transform type="xsltc" src="xsl/faq.xsl"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="xsltc" src="context://xsl/faq.xsl"/>
+                    </map:otherwise>
+                </map:select>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="faq-category-list.html">
+                <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/faq=category-list.xsl">
+                        <map:transform type="xsltc" src="xsl/faq-category-list.xsl"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="xsltc" src="context://xsl/faq-category-list.xsl"/>
+                    </map:otherwise>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match type="wildcard" pattern="random">
                 <map:generate type="file" src="{request-param:source}"/>
                 <map:select type="resource-exists">
@@ -127,19 +147,6 @@
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xhtml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="howto/index.html">
-                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.html"/>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/faq.xsl">
-                        <map:transform type="xsltc" src="xsl/faq.xsl"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/faq.xsl"/>
-                    </map:otherwise>
-                </map:select>
-                <map:transform type="xinclude"/>
-                <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="redirect.html">
                 <map:select type="resource-exists">
@@ -158,16 +165,6 @@
                         <map:transform type="xsltc" src="context://xsl/redirect.xsl"/>
                     </map:otherwise>
                 </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="sfx">
-                <map:generate type="html"
-                    src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={uriencode-request-param:q}&amp;sfx.title_search=exact"/>
-                <map:transform type="xsltc" src="context://xsl/sfx.xsl">
-                    <map:parameter name="sfx-request"
-                        value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={uriencode-request-param:q}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
-                    />
-                </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="templates/**.xml">

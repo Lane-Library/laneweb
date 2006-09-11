@@ -17,7 +17,7 @@
             <map:match pattern="secure/login.html">
                 <map:act type="loginAction"/>
             </map:match>
-            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|ram|camv|smil|xls|doc|ppt|ico|swf)$">
+            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|ram|camv|smil|xls|doc|ppt|ico|swf|wmv)$">
                 <map:mount uri-prefix="" check-reload="yes" src="static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="eresources/**">
