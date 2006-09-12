@@ -520,7 +520,7 @@ function getIncrementalResults(){
 var id=getMetaContent(document,"lw_searchParameters","id");
 var _85=getMetaContent(document,"lw_searchParameters","source");
 var _86=new Date();
-var url=GLOBALS.basePath+"/search.html?id="+id+"&source="+_85+"&secs="+_86.getSeconds();
+var url=GLOBALS.basePath+"/content/search.html?id="+id+"&source="+_85+"&secs="+_86.getSeconds();
 var _88=new IOClient();
 _88.init("incremental",url);
 _88.get();

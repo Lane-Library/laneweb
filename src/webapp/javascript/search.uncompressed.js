@@ -744,7 +744,7 @@ function getIncrementalResults() { // kick off IOClient requests
 	var id = getMetaContent(document,'lw_searchParameters','id');
 	var source = getMetaContent(document,'lw_searchParameters','source');
 	var date = new Date();
-	var url = GLOBALS.basePath + '/search.html?id='+id+'&source='+source+'&secs='+date.getSeconds();
+	var url = GLOBALS.basePath + '/content/search.html?id='+id+'&source='+source+'&secs='+date.getSeconds();
 
 	var incremental = new IOClient();
 	incremental.init('incremental',url);
