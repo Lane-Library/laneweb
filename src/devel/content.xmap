@@ -16,6 +16,26 @@
             </map:match>
             <map:match type="wildcard" pattern="search-proxy">
                 <map:generate type="search-proxy" src="{defaults:search-url}search"/>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/search-proxy.xsl">
+                        <map:transform type="xsltc" src="xsl/search-proxy.xsl">
+                            <map:parameter name="context" value="{request:contextPath}" />
+                            <map:parameter name="sunetid" value="{laneweb:sunetid}" />
+                            <map:parameter name="ticket" value="{laneweb:ticket}" />
+                            <map:parameter name="affiliation" value="{laneweb:affiliation}" />
+                            <map:parameter name="proxy-links" value="{laneweb:proxy-links}" />
+                        </map:transform>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="xsltc" src="context://xsl/search-proxy.xsl">
+                            <map:parameter name="context" value="{request:contextPath}" />
+                            <map:parameter name="sunetid" value="{laneweb:sunetid}" />
+                            <map:parameter name="ticket" value="{laneweb:ticket}" />
+                            <map:parameter name="affiliation" value="{laneweb:affiliation}" />
+                            <map:parameter name="proxy-links" value="{laneweb:proxy-links}" />
+                        </map:transform>
+                    </map:otherwise>
+                </map:select>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search.html">
