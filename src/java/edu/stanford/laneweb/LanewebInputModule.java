@@ -228,6 +228,9 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 			if (d[1] >= 253 && d[1] <= 255) {
 				return SHC;
 			}
+			if (d[1] == 50) {
+				return LPCH;
+			}
 			return OTHER;
 		}
 		if (d[0] == 128) {
@@ -236,7 +239,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 			}
 			return OTHER;
 		}
-		if (d[0] == 134) {
+		if (d[0] == 134) {//10.50.0.1 - 10.50.255.255
 			if (d[1] == 79) {
 				return SU;
 			}
