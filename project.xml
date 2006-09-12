@@ -6,7 +6,7 @@
     <groupId>laneweb</groupId>
     <logo>http://lane.stanford.edu/images/logo.gif</logo>
     <id>laneweb:laneweb</id>
-    <currentVersion>1.4.0</currentVersion>
+    <currentVersion>1.4.4-SNAPSHOT</currentVersion>
     <organization>
         <name>Lane Medical Library</name>
         <url>http://lane.stanford.edu/</url>
