@@ -12,13 +12,11 @@ public class ExpiringHTMLGenerator extends HTMLGenerator {
 	
 	private long expiration;
 
-	@Override
 	public void configure(Configuration config) throws ConfigurationException {
 		super.configure(config);
 		this.expiration = config.getChild("expiration").getValueAsLong(DEFAULT_EXPIRATION);
 	}
 
-	@Override
 	public SourceValidity getValidity() {
 		return new ExpiresValidity(this.expiration);
 	}

@@ -62,7 +62,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 
 	static final String LANE = "LANE";
 
-	static final List<String> ATTRS = new ArrayList<String>();
+	static final List ATTRS = new ArrayList();
 	static {
 		ATTRS.add(PROXY_LINKS);
 		ATTRS.add(AFFILIATION);

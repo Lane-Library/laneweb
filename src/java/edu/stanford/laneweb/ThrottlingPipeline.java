@@ -19,7 +19,7 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
      * the currently processed host/urls. The superclass is a pooled Component
      * so this has to be a static variable.
      */
-    private static Collection<String> REQUESTS = new HashSet<String>();
+    private static Collection REQUESTS = new HashSet();
 
     /**
      * Process the given <code>Environment</code>, producing the output. I

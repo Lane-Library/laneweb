@@ -68,7 +68,6 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 	
 	private long expiration;
 
-	@Override
 	protected Document transform(Document doc) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
