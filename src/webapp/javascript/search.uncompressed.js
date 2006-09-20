@@ -298,7 +298,7 @@ IOClient.prototype = {
 				var spellSuggestion = (xmlObj.getElementsByTagName('spell').length > 0) ? xmlObj.getElementsByTagName('spell')[0].firstChild.data : null;
 
 				if(spellSuggestion && !document.getElementById('spellResults')){
-					var html = 'Did you mean: <a href="' + GLOBALS.searchPath + '?keywords=' + spellSuggestion + '"><i><strong>' + spellSuggestion + '</strong></i></a><br />';
+					var html = 'Did you mean: <a href="' + GLOBALS.searchPath + '?keywords=' + escape(spellSuggestion) + '"><i><strong>' + spellSuggestion + '</strong></i></a><br />';
 
 					//create new spellResults div (rely on refreshPopInContent to display)
 					var body = document.getElementsByTagName("body").item(0);

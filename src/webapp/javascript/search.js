@@ -192,7 +192,7 @@ var _26=_23.getAttribute("status");
 var _27=_23.getElementsByTagName("query")[0].firstChild.data;
 var _28=(_23.getElementsByTagName("spell").length>0)?_23.getElementsByTagName("spell")[0].firstChild.data:null;
 if(_28&&!document.getElementById("spellResults")){
-var _29="Did you mean: <a href=\""+GLOBALS.searchPath+"?keywords="+_28+"\"><i><strong>"+_28+"</strong></i></a><br />";
+var _29="Did you mean: <a href=\""+GLOBALS.searchPath+"?keywords="+escape(_28)+"\"><i><strong>"+_28+"</strong></i></a><br />";
 var _2a=document.getElementsByTagName("body").item(0);
 var _2b=document.createElement("div");
 _2b.className="hide";
