@@ -15,13 +15,16 @@ _4.src=GLOBALS.basePath+"/javascript/ErrorLogger.js?url="+_2+"&line="+_3+"&msg="
 _4.className="hide";
 return false;
 }
-var eLibraryTabLabels=new Array("All","eJournals","Databases","eBooks","Biotools","medCalcs","Lane FAQs");
-var eLibraryTabIDs=new Array("all","ej","database","book","biotools","cc","faq");
+var eLibraryTabLabels=new Array("All","eJournals","Databases","eBooks","Biotools","Videos","medCalcs","Lane FAQs");
+var eLibraryTabIDs=new Array("all","ej","database","book","biotools","video","cc","faq");
 var eLibraryResultCounts=[];
 var eLibraryActiveTab=null;
 function geteLibraryTabCount(_5){
-var _6=document.getElementById(_5).getElementsByTagName("dt");
-return _6.length;
+var _6=0;
+if(document.getElementById(_5)){
+_6=document.getElementById(_5).getElementsByTagName("dt").length;
+}
+return _6;
 }
 function initeLibraryTabs(){
 for(var i=0;i<eLibraryTabIDs.length;i++){
@@ -229,8 +232,8 @@ document.getElementById("researchMetaCount").innerHTML=intToNumberString(_2d);
 }
 if(document.getElementById(_31[j].getAttribute("id")+"SearchResults")&&_31[j].getElementsByTagName("hits").length>0){
 var _34=document.getElementById(_31[j].getAttribute("id")+"SearchResults");
-_34.getElementsByTagName("a")[0].innerHTML=_31[j].getElementsByTagName("description")[0].firstChild.data+"<br /><span class=\"tabHitCount\">"+intToNumberString(_31[j].getElementsByTagName("hits")[0].firstChild.data)+"</span>";
 _34.getElementsByTagName("a")[0].href=_31[j].getElementsByTagName("url")[0].firstChild.data;
+_34.getElementsByTagName("a")[0].innerHTML=_31[j].getElementsByTagName("description")[0].firstChild.data+"<br /><span class=\"tabHitCount\">"+intToNumberString(_31[j].getElementsByTagName("hits")[0].firstChild.data)+"</span>";
 if(_31[j].getAttribute("id")=="google"){
 document.getElementById(_31[j].getAttribute("id")+"SearchResults").className="metaSearchResultsRightCorner";
 }else{

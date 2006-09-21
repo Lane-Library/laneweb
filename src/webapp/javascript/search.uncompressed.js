@@ -29,14 +29,17 @@ function errorLogger(message, url, line){
 /**************************
 // slice eLibrary (LaneConnex) results into format tabs
 */
-var eLibraryTabLabels=new Array('All','eJournals','Databases','eBooks','Biotools','medCalcs','Lane FAQs');
-var eLibraryTabIDs=new Array('all','ej','database','book','biotools','cc','faq');
+var eLibraryTabLabels=new Array('All','eJournals','Databases','eBooks','Biotools','Videos','medCalcs','Lane FAQs');
+var eLibraryTabIDs=new Array('all','ej','database','book','biotools','video','cc','faq');
 var eLibraryResultCounts = [];
 var eLibraryActiveTab = null;
 
 // returns number of dt tags foudn within tabID
 function geteLibraryTabCount(tabID){
-	var tabResultLinks = document.getElementById(tabID).getElementsByTagName('dt');
+	var tabResultLinks = 0;
+	if(document.getElementById(tabID)){
+		tabResultLinks = document.getElementById(tabID).getElementsByTagName('dt').length;
+	}
 	return tabResultLinks.length;
 }
 
