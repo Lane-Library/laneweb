@@ -40,7 +40,7 @@ function geteLibraryTabCount(tabID){
 	if(document.getElementById(tabID)){
 		tabResultLinks = document.getElementById(tabID).getElementsByTagName('dt').length;
 	}
-	return tabResultLinks.length;
+	return tabResultLinks;
 }
 
 // writes format-based tabs to document
