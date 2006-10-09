@@ -6,6 +6,7 @@
     xmlns:str="http://exslt.org/strings"
     exclude-result-prefixes="h xi str">
 
+<!--<xsl:strip-space elements="h:html h:head h:body h:div h:form h:map h:select h:table h:tr h:td"/>-->
     <!-- ===========================  PARAMETERS ========================= -->
     <!-- the template parameter from the request -->
     <xsl:param name="template"/>
@@ -82,6 +83,9 @@
     
     <xsl:template match="comment()">
         <xsl:copy-of select="."/>
+<!--        <xsl:comment>
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:comment>-->
     </xsl:template>
    
     <xsl:template match="h:a">
@@ -270,12 +274,9 @@
     <!-- get all the head elements from template and all non title head elements from source (with some exceptions)-->
     <xsl:template match="h:head">
         <xsl:copy>
-            <xsl:apply-templates select="node()"/>
-            <xsl:for-each select="$source-doc/h:head/*[not(self::h:title or @http-equiv)]">
-                <xsl:apply-templates select="self::node()"/>
-                <xsl:text>
-      </xsl:text>
-            </xsl:for-each>
+            <xsl:apply-templates select="node()|$source-doc/h:head/*[not(self::h:title or @http-equiv)]">
+                <xsl:sort select="name()" order="descending"/>
+            </xsl:apply-templates>
         </xsl:copy>
     </xsl:template>
     <!-- combines the template title value with the value of the title of the source document -->

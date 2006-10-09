@@ -24,10 +24,9 @@
 	    <ezproxy-key>***laneweb.ezproxy.key***</ezproxy-key>
     </component-instance>
     <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
-    <component-instance logger="core.modules.input" name="uriencode-request-param" class="edu.stanford.laneweb.URIEncodedParameterModule" />
     <component-instance logger="core.modules.input" name="request-uri" class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
     <component-instance logger="core.modules.input" name="request" class="org.apache.cocoon.components.modules.input.RequestModule"/>
-    <component-instance class="org.apache.cocoon.components.modules.input.RequestAttributeModule" logger="core.modules.input" name="request-attr"/>
+    <component-instance logger="core.modules.input" name="urlencode" class="org.apache.cocoon.components.modules.input.URLEncodeModule"/>
     <component-instance logger="core.modules.input" name="chain" class="org.apache.cocoon.components.modules.input.ChainMetaModule">
       <input-module name="request-param"/>
       <input-module name="laneweb"/>
@@ -74,7 +73,6 @@
     <component-instance class="org.apache.excalibur.source.impl.ResourceSourceFactory" name="resource" logger="core.source.resource"/>
     <component-instance class="org.apache.cocoon.components.source.impl.ContextSourceFactory" name="context" logger="core.source.context"/>
     <component-instance class="org.apache.cocoon.components.source.impl.SitemapSourceFactory" name="cocoon" logger="core.source.sitemap"/>
-    <!--<component-instance class="org.apache.excalibur.source.impl.HTTPClientSourceFactory" name="http" logger="core.source.http"/>-->
     <component-instance class="org.apache.excalibur.source.impl.FileSourceFactory" name="file" logger="core.source.file"/>
     <component-instance class="org.apache.excalibur.source.impl.URLSourceFactory" name="*"/>
   </source-factories>
@@ -85,23 +83,21 @@
   
   <xml-deserializer class="org.apache.cocoon.components.sax.XMLByteStreamInterpreter" logger="core.xml-deserializer" pool-max="32"/>
 
-  <xmlizer role="org.apache.excalibur.xml.sax.SAXParser" logger="core.xmlizer"/>
-
   <component logger="core.xslt-processor"
              role="org.apache.excalibur.xml.xslt.XSLTProcessor/xsltc"
              class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl">
      <parameter name="use-store" value="true"/>
      <parameter name="incremental-processing" value="false"/>
-     <parameter name="transformer-factory" value="org.apache.xalan.xsltc.trax.TransformerFactoryImpl"/>
+     <parameter name="transformer-factory" value="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl"/>
   </component>
   
-    <component class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl" logger="core.xslt-processor"
+<!--    <component class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl" logger="core.xslt-processor"
     role="org.apache.excalibur.xml.xslt.XSLTProcessor/xalan">
      <parameter name="use-store" value="true"/>
      <parameter name="incremental-processing" value="false"/>
      <parameter name="transformer-factory" value="org.apache.xalan.processor.TransformerFactoryImpl"/>
-  </component>
-  
+    </component>
+  -->
   <classloader class="org.apache.cocoon.components.classloader.ClassLoaderManagerImpl" logger="core.classloader"/>
 
   <cache logger="core.cache"/>

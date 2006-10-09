@@ -111,6 +111,7 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
+        <!--
         <dependency>
             <groupId>cocoon</groupId>
             <artifactId>cocoon-paranoid</artifactId>
@@ -120,6 +121,7 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
+        -->
         <dependency>
             <groupId>cocoon</groupId>
             <artifactId>cocoon-proxy</artifactId>
@@ -332,6 +334,7 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
+<!--
         <dependency>
             <groupId>joost</groupId>
             <artifactId>joost</artifactId>
@@ -341,6 +344,7 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
+-->
         <dependency>
             <groupId>jtidy</groupId>
             <artifactId>jtidy</artifactId>
@@ -383,6 +387,7 @@
             <version>2.4</version>
             <type>jar</type>
         </dependency>
+<!--
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
@@ -409,7 +414,8 @@
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
-        </dependency>
+            </dependency>
+        -->
     </dependencies>
     <build>
         <sourceDirectory>src/java</sourceDirectory>

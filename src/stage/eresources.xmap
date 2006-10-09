@@ -1,21 +1,9 @@
 <?xml version="1.0"?>
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
-    <map:components>
-        <map:generators default="file">
-            <map:generator name="eresources" src="edu.stanford.laneweb.EresourcesQueryGenerator"/>
-        </map:generators>
-        <map:transformers default="xsltc">
-            <map:transformer name="sql" logger="sitemap.transformer.sql"
-                src="org.apache.cocoon.transformation.SQLTransformer" pool-max="4" pool-min="2" pool-grow="2"/>
-        </map:transformers>
-        <map:serializers default="xml"/>
-        <map:matchers default="wildcard"/>
-        <map:pipes default="noncaching"/>
-    </map:components>
     <map:pipelines>
-        <map:pipeline type="noncaching">
+        <map:pipeline type="throttling">
             <map:match pattern="erdb">
-                <map:generate type="eresources"/>
+                <map:generate type="eresource"/>
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
@@ -23,14 +11,14 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="count">
-                <map:generate type="eresources"/>
+                <map:generate type="eresource"/>
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ezproxy-servers.txt">
-                <map:generate src="{defaults:stage-base}/resources/sql/ezproxy-servers.xml"/>
+                <map:generate type="file" src="{defaults:stage-base}/resources/sql/ezproxy-servers.xml"/>
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
@@ -38,7 +26,7 @@
                 <map:serialize type="text"/>
             </map:match>
             <map:match pattern="linkscan.html">
-                <map:generate src="{defaults:stage-base}/resources/sql/linkscan.xml"/>
+                <map:generate type="file" src="{defaults:stage-base}/resources/sql/linkscan.xml"/>
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>

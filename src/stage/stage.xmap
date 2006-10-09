@@ -1,23 +1,12 @@
 <?xml version="1.0"?>
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
-    <!-- =========================== Components ================================ -->
-    <map:components>
-        <map:generators default="file"/>
-        <map:transformers default="xsltc"/>
-        <map:serializers default="xhtml"/>
-        <map:selectors default="source-parameter"/>
-        <map:readers default="resource"/>
-        <map:matchers default="wildcard"/>
-        <map:pipes default="noncaching"/>
-    </map:components>
     <map:pipelines>
-        <map:pipeline>
-            <map:match pattern="secure/login.html">
-                <map:act type="loginAction"/>
-                <map:redirect-to uri="{request:contextPath}/stage/index.html?proxy-links=true"/>
-            </map:match>
+        <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="TMP**">
                 <map:read src="{defaults:stage-base}/content/TMP{1}" mime-type="text/html"/>
+            </map:match>
+            <map:match pattern="secure/login.html">
+                <map:act type="loginAction"/>
             </map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|rm|ram|camv|smil|xls|doc|ppt|ico|swf|wmv)$">
                 <map:mount uri-prefix="" check-reload="yes" src="{defaults:stage-base}/static.xmap"/>
@@ -27,9 +16,6 @@
             </map:match>
             <map:match type="wildcard" pattern="content/**">
                 <map:mount uri-prefix="content" check-reload="yes" src="{defaults:stage-base}/content.xmap"/>
-            </map:match>
-            <map:match type="wildcard" pattern="admin/**">
-                <map:mount uri-prefix="admin" check-reload="yes" src="{defaults:stage-base}/admin.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="cookiesFetch.html">
                 <map:generate type="file" src="{defaults:stage-base}/content/cookiesFetch.html"/>
@@ -84,7 +70,6 @@
                     <map:part src="cocoon:/content/sitemap.html"/>
                     <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                 </map:aggregate>
-                <!--<map:transform type="object-id"/>-->
                 <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}/stage"/>
@@ -96,8 +81,7 @@
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="context://xsl/template-{chain:template}.xsl">
-                        <map:transform type="xsltc"
-                            src="context://xsl/template-{chain:template}.xsl">
+                        <map:transform type="xsltc" src="context://xsl/template-{chain:template}.xsl">
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>
                     </map:when> 
@@ -106,7 +90,18 @@
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                 </map:transform>
-                <map:serialize type="xhtml"/>
+                <map:select type="simple">
+                    <map:parameter name="parameter-selector-test" value="{chain:template}"/>
+                    <map:when test="100years">
+                        <map:serialize type="noprolog"/>
+                    </map:when>
+                    <map:when test="100years_index">
+                        <map:serialize type="noprolog"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:serialize type="xhtml"/>
+                    </map:otherwise>
+                </map:select>
             </map:match>
             <map:match type="wildcard" pattern="**">
                 <map:redirect-to uri="{1}/index.html"/>

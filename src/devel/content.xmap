@@ -1,14 +1,5 @@
 <?xml version="1.0"?>
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
-    <!-- =========================== Components ================================ -->
-    <map:components>
-        <map:generators default="html"/>
-        <map:transformers default="xinclude"/>
-        <map:serializers default="xml"/>
-        <map:selectors default="simple"/>
-        <map:matchers default="wildcard"/>
-        <map:pipes default="noncaching"/>
-    </map:components>
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="eresources/**">
@@ -39,63 +30,58 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search.html">
-                <map:select type="regex-parameter">
-                    <map:parameter name="parameter-selector-test" value="{request-param:source}"/>
-                    <map:when test="clinical|peds|research|test">
-                        <map:aggregate element="aggregate">
-                            <map:part src="cocoon:/search-proxy"/>
-                            <map:part type="xml" src="cocoon:/templates/search/{request-param:source}.xml"/>
-                        </map:aggregate>
-                        <map:select type="resource-exists">
-                            <map:when test="xsl/ajax-search.xsl">
-                                <map:transform type="xsltc" src="xsl/ajax-search.xsl"/>
-                            </map:when>
-                            <map:otherwise>
-                                <map:transform type="xsltc" src="context://xsl/ajax-search.xsl"/>
-                            </map:otherwise>
-                        </map:select>
-                        <map:serialize type="xml"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:select type="regex-parameter">
-                            <map:parameter name="parameter-selector-test" value="{request-param:keywords}"/>
-                            <map:when test="">
-                                <map:generate src="cocoon:/error.html"/>
-                                <map:serialize type="xhtml" status-code="404"/>
-                            </map:when>
-                            <map:otherwise>
-                                <map:select type="resource-exists">
-                                    <map:when test="content/search.html">
-                                        <map:aggregate element="aggregate">
-                                            <map:part type="file" src="content/search.html"/>
-                                            <map:part type="file" src="cocoon:/template2meta-engines?source=clinical"/>
-                                            <map:part type="file" src="cocoon:/template2meta-engines?source=peds"/>
-                                            <map:part type="file" src="cocoon:/template2meta-engines?source=research"/>
-                                        </map:aggregate>
-                                    </map:when>
-                                    <map:otherwise>
-                                        <map:aggregate element="aggregate">
-                                            <map:part type="file" src="{defaults:live-base}/content/search.html"/>
-                                            <map:part type="file" src="cocoon:/template2meta-engines?source=clinical"/>
-                                            <map:part type="file" src="cocoon:/template2meta-engines?source=peds"/>
-                                            <map:part type="file" src="cocoon:/template2meta-engines?source=research"/>
-                                        </map:aggregate>
-                                    </map:otherwise>
-                                </map:select>
-                                <map:select type="resource-exists">
-                                    <map:when test="xsl/elibrary-search.xsl">
-                                        <map:transform type="xsltc" src="xsl/elibrary-search.xsl"/>
-                                    </map:when>
-                                    <map:otherwise>
-                                        <map:transform type="xsltc" src="context://xsl/elibrary-search.xsl"/>
-                                    </map:otherwise>
-                                </map:select>
-                                <map:transform type="xinclude"/>
-                                <map:serialize type="xml"/>
-                            </map:otherwise>
-                        </map:select>
-                    </map:otherwise>
-                </map:select>
+                <map:match type="regex-parameter" pattern="^(clinical|peds|research|test)$">
+                    <map:parameter name="parameter-name" value="source"/>
+                    <map:aggregate element="aggregate">
+                        <map:part src="cocoon:/search-proxy"/>
+                        <map:part type="xml" src="cocoon:/templates/search/{request-param:source}.xml"/>
+                    </map:aggregate>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/ajax-search.xsl">
+                            <map:transform type="xsltc" src="xsl/ajax-search.xsl"/>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="xsltc" src="context://xsl/ajax-search.xsl"/>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match type="regex-parameter" pattern="^.+$">
+                    <map:parameter name="parameter-name" value="keywords"/>
+                    <map:select type="resource-exists">
+                        <map:when test="content/search.html">
+                            <map:aggregate element="aggregate">
+                                <map:part type="file" src="content/search.html"/>
+                                <map:part type="file" src="cocoon:/template2meta-engines?source=clinical"/>
+                                <map:part type="file" src="cocoon:/template2meta-engines?source=peds"/>
+                                <map:part type="file" src="cocoon:/template2meta-engines?source=research"/>
+                            </map:aggregate>
+                        </map:when>
+                        <map:otherwise>
+                            <map:aggregate element="aggregate">
+                                <map:part type="file" src="{defaults:live-base}/content/search.html"/>
+                                <map:part type="file" src="cocoon:/template2meta-engines?source=clinical"/>
+                                <map:part type="file" src="cocoon:/template2meta-engines?source=peds"/>
+                                <map:part type="file" src="cocoon:/template2meta-engines?source=research"/>
+                            </map:aggregate>
+                        </map:otherwise>
+                    </map:select>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/elibrary-search.xsl">
+                            <map:transform type="xsltc" src="xsl/elibrary-search.xsl"/>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="xsltc" src="context://xsl/elibrary-search.xsl"/>
+                        </map:otherwise>
+                    </map:select>
+                    <map:transform type="object-id"/>
+                    <map:transform type="xinclude"/>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match type="wildcard" pattern="search.html">
+                    <map:generate type="html" src="{defaults:live-base}/error.html"/>
+                    <map:serialize type="xml" status-code="404"/>
+                </map:match>
             </map:match>
             <map:match pattern="template2meta-engines">
                 <map:select type="resource-exists">
@@ -106,7 +92,6 @@
                         <map:generate type="file" src="{defaults:live-base}/resources/templates/search/{request-param:source}.xml"/>
                     </map:otherwise>
                 </map:select>
-                <map:generate type="file" src="{defaults:live-base}/resources/templates/search/{request-param:source}.xml"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/template2meta-engines.xsl">
                         <map:transform type="xsltc" src="xsl/template2meta-engines.xsl">
@@ -123,13 +108,25 @@
             </map:match>
             <map:match pattern="sfx">
                 <map:generate type="html"
-                    src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={uriencode-request-param:q}&amp;sfx.title_search=exact"/>
+                    src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"/>
                 <map:transform type="xsltc" src="context://xsl/sfx.xsl">
                     <map:parameter name="sfx-request"
-                        value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={uriencode-request-param:q}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
+                        value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
                     />
                 </map:transform>
                 <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="random">
+                <map:generate type="file" src="{request-param:source}"/>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/random.xsl">
+                        <map:transform type="xsltc" src="xsl/random.xsl"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="xsltc" src="context://xsl/random.xsl"/>
+                    </map:otherwise>
+                </map:select>
+                <map:serialize type="xhtml"/>
             </map:match>
             <map:match type="wildcard" pattern="howto/index.html">
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
@@ -155,18 +152,6 @@
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="random">
-                <map:generate type="file" src="{request-param:source}"/>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/random.xsl">
-                        <map:transform type="xsltc" src="xsl/random.xsl"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/random.xsl"/>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="xhtml"/>
             </map:match>
             <map:match type="wildcard" pattern="redirect.html">
                 <map:select type="resource-exists">
@@ -196,6 +181,7 @@
                         <map:generate type="file" src="{defaults:live-base}/resources/templates/{1}.xml"/>
                     </map:otherwise>
                 </map:select>
+                <map:transform type="object-id"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="**">
@@ -207,6 +193,7 @@
                         <map:generate type="html" src="{defaults:live-base}/content/{1}"/>
                     </map:otherwise>
                 </map:select>
+                <map:transform type="object-id"/>
                 <map:transform type="xinclude"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/rss2html.xsl">

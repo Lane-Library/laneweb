@@ -2,9 +2,14 @@ package edu.stanford.laneweb;
 
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.avalon.excalibur.datasource.DataSourceComponent;
 import org.apache.avalon.framework.activity.Initializable;
@@ -14,6 +19,8 @@ import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.components.ExtendedComponentSelector;
+import org.apache.cocoon.environment.ObjectModelHelper;
+import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.transformation.AbstractDOMTransformer;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.ExpiresValidity;
@@ -30,7 +37,7 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 
 	private static final String SCHEME = "id:";
 	
-	//private static final String RESOLVED_OBJECTS = "rslvd";
+	private static final String RESOLVED_OBJECTS = "rslvd";
 	
 	private static final String HREF = "href";
 	
@@ -50,11 +57,13 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 	
 	private static final int PUBLISHER_COLUMN = 4;
 	
+	private static final int OBJECT_ID_COLUMN = 5;
+	
 	private static final String SQL =
-	"SELECT TITLE, PROXY, URL, PUBLISHER FROM ERESOURCE, VERSION, LINK " +
+	"SELECT TITLE, PROXY, URL, PUBLISHER, OBJECT_ID FROM ERESOURCE, VERSION, LINK " +
 	"WHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID " + 
 	"AND VERSION.VERSION_ID = LINK.VERSION_ID " +
-	"AND OBJECT_ID = ?";
+	"AND OBJECT_ID = '";
 	
 	private static final String XPATH = "//*[name() = 'a' and @href[starts-with(.,'" + SCHEME + "')]]";
 	
@@ -69,65 +78,58 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 	private long expiration;
 
 	protected Document transform(Document doc) {
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		NodeList nodeList = null;
-//		Request request = ObjectModelHelper.getRequest(super.objectModel);
-//		Map resolvedObjects = (Map) request.getAttribute(RESOLVED_OBJECTS);
-//		if (resolvedObjects == null) {
-//			resolvedObjects = new HashMap();
-//			request.setAttribute(RESOLVED_OBJECTS, resolvedObjects);
-//		}
-		nodeList = this.xpathProcessor.selectNodeList(doc,XPATH);
-		if (nodeList.getLength() > 0) {
+		NodeList nodeList = this.xpathProcessor.selectNodeList(doc,XPATH);
+		if (nodeList.getLength() == 0) {
+			return doc;
+		}
+		Request request = ObjectModelHelper.getRequest(super.objectModel);
+		Map resolvedObjects = (Map) request.getAttribute(RESOLVED_OBJECTS);
+		if (resolvedObjects == null) {
+			resolvedObjects = new HashMap();
+			request.setAttribute(RESOLVED_OBJECTS, resolvedObjects);
+		}
+		Set ids = new HashSet();
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Element anchor = (Element) nodeList.item(i);
+			Attr href = anchor.getAttributeNode(HREF);
+			String idUri = href.getValue();
+			ids.add(idUri.substring(SCHEME.length()));
+		}
+		ids.removeAll(resolvedObjects.keySet());
+		if (ids.size() > 0) {
+			StringBuffer sql = new StringBuffer();
+			for (Iterator it = ids.iterator(); it.hasNext();) {
+				sql.append(SQL).append(it.next()).append("\'\n");
+				if (it.hasNext()) {
+					sql.append("UNION\n");
+				}
+			}
+			Connection conn = null;
+			Statement stmt = null;
+			ResultSet rs = null;
 			try {
 				conn = dataSource.getConnection();
-				if (nodeList.getLength() > 0) {
-					stmt = conn.prepareStatement(SQL);
-					for (int i = 0; i < nodeList.getLength(); i++) {
-						Element anchor = (Element) nodeList.item(i);
-						Attr href = anchor.getAttributeNode(HREF);
-						String idUri = href.getValue();
-						stmt.setString(1,idUri.substring(idUri.indexOf(':') + 1));
-						ResultSet rs = stmt.executeQuery();
-						if (rs.next()) {
-							String title = rs.getString(TITLE_COLUMN);
-							String clazz = rs.getString(PROXY_COLUMN).equals("T") ? PROXY : NO_PROXY;
-							String url = rs.getString(URL_COLUMN);
-							String publisher = rs.getString(PUBLISHER_COLUMN);
-							href.setValue(url);
-						
-							Attr titleAttr = anchor.getAttributeNode(TITLE);
-							if (titleAttr == null) {
-								titleAttr = anchor.getOwnerDocument().createAttribute(TITLE);
-								StringBuffer titleAttrValue = new StringBuffer(title);
-								if (publisher != null) {
-									titleAttrValue.append(':').append(publisher);
-								}
-								titleAttr.setValue(titleAttrValue.toString());
-								anchor.setAttributeNode(titleAttr);
-							}
-							titleAttr.setValue(title);
-							Attr classAttr = anchor.getAttributeNode(CLASS);
-							if (classAttr == null) {
-								classAttr = anchor.getOwnerDocument().createAttribute(CLASS);
-								anchor.setAttributeNode(classAttr);
-							}
-							classAttr.setValue(clazz);
-							if (anchor.getChildNodes().getLength() == 0) {
-								Text text = anchor.getOwnerDocument().createTextNode(title);
-								anchor.appendChild(text);
-							}
-							if (getLogger().isDebugEnabled()) {
-								getLogger().debug(idUri + " => " + title + "," + publisher + ", " + clazz + "," + url);
-							}
-						}
-						rs.close();
-					}
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sql.toString());
+				while (rs.next()) {
+					ResolvableObject resolvableObject = new ResolvableObject();
+					resolvableObject.title = rs.getString(TITLE_COLUMN);
+					resolvableObject.proxy = rs.getString(PROXY_COLUMN).equals("T") ? true : false;
+					resolvableObject.url = rs.getString(URL_COLUMN);
+					resolvableObject.publisher = rs.getString(PUBLISHER_COLUMN);
+					resolvableObject.id = rs.getString(OBJECT_ID_COLUMN);
+					resolvedObjects.put(resolvableObject.id, resolvableObject);
 				}
 			} catch (SQLException e) {
-				getLogger().error(e.getMessage(),e);
+				getLogger().error(e.getMessage(), e);
 			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						getLogger().error(e.getMessage(), e);
+					}
+				}
 				if (stmt != null) {
 					try {
 						stmt.close();
@@ -141,6 +143,35 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 					} catch (SQLException e) {
 						getLogger().error(e.getMessage(), e);
 					}
+				}
+			}
+		}
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Element anchor = (Element) nodeList.item(i);
+			Attr href = anchor.getAttributeNode(HREF);
+			String id = href.getValue().substring(SCHEME.length());
+			ResolvableObject resolvableObject = (ResolvableObject) resolvedObjects.get(id);
+			if (resolvableObject != null) {
+				href.setValue(resolvableObject.url);
+				Attr titleAttr = anchor.getAttributeNode(TITLE);
+				if (titleAttr == null) {
+					titleAttr = doc.createAttribute(TITLE);
+					anchor.setAttributeNode(titleAttr);
+				}
+				StringBuffer titleAttrValue = new StringBuffer(resolvableObject.title);
+				if (resolvableObject.publisher != null) {
+					titleAttrValue.append(':').append(resolvableObject.publisher);
+				}
+				titleAttr.setValue(titleAttrValue.toString());
+				Attr classAttr = anchor.getAttributeNode(CLASS);
+				if (classAttr == null) {
+					classAttr = doc.createAttribute(CLASS);
+					anchor.setAttributeNode(classAttr);
+				}
+				classAttr.setValue(resolvableObject.proxy ? PROXY : NO_PROXY);
+				if (anchor.getChildNodes().getLength() == 0) {
+					Text text = doc.createTextNode(resolvableObject.title);
+					anchor.appendChild(text);
 				}
 			}
 		}
@@ -174,6 +205,14 @@ public class ObjectIDTransformer extends AbstractDOMTransformer
 		this.dataSource = null;
 		this.xpathProcessor = null;
 		super.dispose();
+	}
+	
+	private class ResolvableObject {
+		protected String id;
+		protected String url;
+		protected String title;
+		protected String publisher;
+		protected boolean proxy;
 	}
 
 }
