@@ -8,7 +8,7 @@
             <map:match pattern="secure/login.html">
                 <map:act type="loginAction"/>
             </map:match>
-            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|ppt|ico|swf|wmv)$">
+            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv)$">
                 <map:mount uri-prefix="" check-reload="yes" src="{defaults:stage-base}/static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="eresources/**">

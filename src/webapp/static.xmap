@@ -90,6 +90,10 @@
                 <map:read type="resource" src="{defaults:live-base}/content/{1}.doc"
                     mime-type="application/msword"/>
             </map:match>
+            <map:match type="wildcard" pattern="**.dot">
+                <map:read type="resource" src="{defaults:live-base}/content/{1}.dot"
+                    mime-type="application/msword"/>
+            </map:match>
             <map:match type="wildcard" pattern="**.ppt">
                 <map:read type="resource" src="{defaults:live-base}/content/{1}.ppt"
                     mime-type="application/vnd.ms-powerpoint"/>

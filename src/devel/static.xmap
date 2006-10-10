@@ -210,6 +210,16 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
+            <map:match type="wildcard" pattern="**.dot">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.doc">
+                        <map:read type="resource" src="content/{1}.dot" mime-type="application/msword"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="resource" src="{defaults:live-base}/content/{1}.dot" mime-type="application/msword"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
             <map:match type="wildcard" pattern="**.ppt">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.doc">
