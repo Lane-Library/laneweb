@@ -387,7 +387,6 @@
             <version>2.4</version>
             <type>jar</type>
         </dependency>
-<!--
         <dependency>
             <groupId>xalan</groupId>
             <artifactId>xalan</artifactId>
@@ -397,6 +396,7 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
+        <!--
         <dependency>
             <groupId>xml-apis</groupId>
             <artifactId>xml-apis</artifactId>

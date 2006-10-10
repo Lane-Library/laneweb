@@ -112,6 +112,46 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
+            <map:match type="wildcard" pattern="**.png">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.png">
+                        <map:read type="resource" src="content/{1}.png" mime-type="image/png"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="resource" src="{defaults:live-base}/content/{1}.png" mime-type="image/png"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.eps">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.eps">
+                        <map:read type="resource" src="content/{1}.eps" mime-type="application/postscript"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="resource" src="{defaults:live-base}/content/{1}.eps" mime-type="application/postscript"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.ai">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.ai">
+                        <map:read type="resource" src="content/{1}.ai" mime-type="application/postscript"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="resource" src="{defaults:live-base}/content/{1}.ai" mime-type="application/postscript"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.psd">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.ai">
+                        <map:read type="resource" src="content/{1}.psd" mime-type="application/photoshop"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="resource" src="{defaults:live-base}/content/{1}.psd" mime-type="application/photoshop"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
             <map:match type="wildcard" pattern="**.rm">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.rm">

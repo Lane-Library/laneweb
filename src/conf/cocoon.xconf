@@ -88,7 +88,7 @@
              class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl">
      <parameter name="use-store" value="true"/>
      <parameter name="incremental-processing" value="false"/>
-     <parameter name="transformer-factory" value="com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl"/>
+     <parameter name="transformer-factory" value="org.apache.xalan.xsltc.trax.TransformerFactoryImpl"/>
   </component>
   
 <!--    <component class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl" logger="core.xslt-processor"
