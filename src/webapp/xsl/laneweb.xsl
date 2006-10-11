@@ -2,11 +2,11 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xi="http://www.w3.org//2001/XInclude"
     xmlns:str="http://exslt.org/strings"
-    exclude-result-prefixes="h xi str">
+    exclude-result-prefixes="h str">
 
-<!--<xsl:strip-space elements="h:html h:head h:body h:div h:form h:map h:select h:table h:tr h:td"/>-->
+    <xsl:strip-space elements="h:html h:head h:body h:div h:form h:map h:select h:table h:tr h:td"/>
+    
     <!-- ===========================  PARAMETERS ========================= -->
     <!-- the template parameter from the request -->
     <xsl:param name="template"/>
@@ -82,10 +82,11 @@
     </xsl:template>
     
     <xsl:template match="comment()">
-        <xsl:copy-of select="."/>
-<!--        <xsl:comment>
-            <xsl:value-of select="normalize-space(.)"/>
-        </xsl:comment>-->
+        <xsl:if test="contains(.,'if IE')">
+            <xsl:comment>
+                <xsl:value-of select="normalize-space(.)"/>
+            </xsl:comment>
+        </xsl:if>
     </xsl:template>
    
     <xsl:template match="h:a">
