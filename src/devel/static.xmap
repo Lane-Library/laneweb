@@ -135,10 +135,10 @@
             <map:match type="wildcard" pattern="**.ai">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.ai">
-                        <map:read type="resource" src="content/{1}.ai" mime-type="application/postscript"/>
+                        <map:read type="resource" src="content/{1}.ai" mime-type="application/illustrator"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.ai" mime-type="application/postscript"/>
+                        <map:read type="resource" src="{defaults:live-base}/content/{1}.ai" mime-type="application/illustrator"/>
                     </map:otherwise>
                 </map:select>
             </map:match>

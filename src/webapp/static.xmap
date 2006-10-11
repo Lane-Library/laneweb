@@ -60,7 +60,7 @@
             </map:match>
             <map:match type="wildcard" pattern="**.ai">
                 <map:read type="resource" src="{defaults:live-base}/content/{1}.ai"
-                    mime-type="application/postscript"/>
+                    mime-type="application/illustrator"/>
             </map:match>
             <map:match type="wildcard" pattern="**.psd">
                 <map:read type="resource" src="{defaults:live-base}/content/{1}.psd"
