@@ -84,8 +84,15 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
+            <xsl:variable name="title-publisher">
+                <xsl:value-of select="sql:title"/>
+                <xsl:if test="string-length(sql:publisher) &gt; 0">
+                    <xsl:text>:</xsl:text>
+                    <xsl:value-of select="sql:publisher"/>
+                </xsl:if>
+            </xsl:variable>
             
-            <li><a href="{$url}" title="{sql:title}" class="{$proxy_class}">
+            <li><a href="{$url}" title="{$title-publisher}" class="{$proxy_class}">
                 <xsl:choose>
                     <xsl:when test="$holdings-length &gt; 0 and $dates-length &gt; 0">
                         <xsl:apply-templates select="sql:holdings"/>, <xsl:value-of select="sql:dates"/>
@@ -149,8 +156,15 @@
                   </xsl:variable>
                   <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
                   <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
+                  <xsl:variable name="title-publisher">
+                      <xsl:value-of select="sql:title"/>
+                      <xsl:if test="string-length(sql:publisher) &gt; 0">
+                          <xsl:text>:</xsl:text>
+                          <xsl:value-of select="sql:publisher"/>
+                      </xsl:if>
+                  </xsl:variable>
                   <li>
-                      <a href="{sql:url}" title="{sql:title}" class="{$proxy_class}">
+                      <a href="{sql:url}" title="{$title-publisher}" class="{$proxy_class}">
                           <xsl:choose>
                               <xsl:when test="$holdings-length &gt; 0 and $dates-length &gt; 0">
                                   <xsl:apply-templates select="sql:holdings"/>, <xsl:value-of select="sql:dates"/>
@@ -183,7 +197,14 @@
                           </xsl:variable>
                           <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
                           <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
-                          <li><a href="{sql:url}" title="{sql:title}" class="{$proxy_class}">
+                          <xsl:variable name="title-publisher">
+                              <xsl:value-of select="sql:title"/>
+                              <xsl:if test="string-length(sql:publisher) &gt; 0">
+                                  <xsl:text>:</xsl:text>
+                                  <xsl:value-of select="sql:publisher"/>
+                              </xsl:if>
+                          </xsl:variable>
+                          <li><a href="{sql:url}" title="{$title-publisher}" class="{$proxy_class}">
                               <xsl:choose>
                                   <xsl:when test="preceding-sibling::sql:row[1]/sql:label = 'Get Password'">
                                       <xsl:choose>
