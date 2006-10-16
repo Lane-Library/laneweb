@@ -5,7 +5,7 @@
     xmlns:str="http://exslt.org/strings"
     exclude-result-prefixes="h str">
 
-    <xsl:strip-space elements="h:html h:head h:body h:div h:form h:map h:select h:table h:tr h:td"/>
+    <!--<xsl:strip-space elements="h:html h:head h:body h:div h:form h:map h:select h:table h:tr h:td"/>-->
     
     <!-- ===========================  PARAMETERS ========================= -->
     <!-- the template parameter from the request -->
@@ -82,7 +82,7 @@
     </xsl:template>
     
     <xsl:template match="comment()">
-        <xsl:if test="contains(.,'if IE')">
+        <xsl:if test="contains(.,'[if IE]')">
             <xsl:comment>
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:comment>
