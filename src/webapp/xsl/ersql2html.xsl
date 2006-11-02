@@ -120,7 +120,7 @@
   
   <xsl:template match="sql:publisher">
     <xsl:if test="string-length(text()) &gt; 0">
-        <xsl:text> </xsl:text><span class="publisher"><xsl:value-of select="text()"/></span>
+        <xsl:text> </xsl:text><span class="provider"><xsl:value-of select="text()"/></span>
     </xsl:if>
   </xsl:template>
   
