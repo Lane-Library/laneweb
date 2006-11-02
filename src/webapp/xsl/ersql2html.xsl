@@ -112,15 +112,15 @@
                 </xsl:choose>
                 <xsl:apply-templates select="sql:description|sql:instruction"/>
             </a>
-            <xsl:apply-templates select="sql:provider"/></li>
+            <xsl:apply-templates select="sql:publisher"/></li>
         </xsl:otherwise>
       </xsl:choose>
     </ul></dd>
   </xsl:template>
   
-  <xsl:template match="sql:provider">
+  <xsl:template match="sql:publisher">
     <xsl:if test="string-length(text()) &gt; 0">
-        <xsl:text> </xsl:text><span class="provider"><xsl:value-of select="text()"/></span>
+        <xsl:text> </xsl:text><span class="publisher"><xsl:value-of select="text()"/></span>
     </xsl:if>
   </xsl:template>
   
@@ -184,7 +184,7 @@
                           </xsl:choose>
                           <xsl:apply-templates select="sql:description|sql:instruction"/>
                       </a>
-                      <xsl:apply-templates select="sql:provider"/>
+                      <xsl:apply-templates select="sql:publisher"/>
                   </li>
               </xsl:when>
               <xsl:otherwise>
@@ -230,7 +230,7 @@
                                   </xsl:otherwise>
                               </xsl:choose>
                               <xsl:apply-templates select="sql:description|sql:instruction"/></a>
-                              <xsl:apply-templates select="sql:provider"/>
+                              <xsl:apply-templates select="sql:publisher"/>
                            <!--   <xsl:choose>-->
                                   <xsl:if test="preceding-sibling::sql:row[1]/sql:label = 'Get Password'">
                                       <a href="{preceding-sibling::sql:row[1]/sql:url}"> get password</a>
@@ -264,7 +264,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:apply-templates select="sql:description|sql:instruction"/>
-            </a><xsl:apply-templates select="sql:provider"/>
+            </a><xsl:apply-templates select="sql:publisher"/>
                 <xsl:if test="preceding-sibling::sql:row[1]/sql:label = 'Get Password'">
                     <a href="{preceding-sibling::sql:row[1]/sql:url}"> get password</a>
                 </xsl:if>
@@ -305,7 +305,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:apply-templates select="sql:description|sql:instruction"/>
-            </a><xsl:apply-templates select="sql:provider"/>
+            </a><xsl:apply-templates select="sql:publisher"/>
                     <a href="{$links[sql:label='Get Password']/sql:url}"> get password</a>
             </li>
         </xsl:for-each>
