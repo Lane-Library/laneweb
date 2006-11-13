@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 
 import java.util.Map;
 
@@ -43,10 +42,6 @@ public class TxtResourceReader extends ResourceReader {
 		super.setup(resolver, objectModel, src, par);
 		this.path = par.getParameter("path", configuredPath);
 	}
-	
-	public Serializable getKey() {
-        return inputSource.getURI() + ";path=" + this.path;
-    }
 
 	protected void processStream(InputStream inputStream) throws IOException,
 			ProcessingException {
