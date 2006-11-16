@@ -53,10 +53,10 @@
         <xsl:copy>
             <xsl:choose>
                 <xsl:when test="*">
-                    <a type="{$status}" href="{$resource/s:url}"><xsl:value-of select="text()"/></a>&#160;<xsl:copy-of select="*"/><xsl:text>: </xsl:text>
+                    <a target="_blank" type="{$status}" href="{$resource/s:url}"><xsl:value-of select="text()"/></a>&#160;<xsl:copy-of select="*"/><xsl:text>: </xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-                    <a type="{$status}" href="{$resource/s:url}"><xsl:value-of select="text()"/></a><xsl:text>: </xsl:text>
+                    <a target="_blank" type="{$status}" href="{$resource/s:url}"><xsl:value-of select="text()"/></a><xsl:text>: </xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:choose>
