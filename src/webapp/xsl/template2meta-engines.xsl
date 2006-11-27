@@ -13,12 +13,12 @@
 	<xsl:template match="h:html">
 		<xsl:variable name="count" select="count(//h:li[@id])"/>
 		<h:javascript-array>GLOBALS.<xsl:value-of select="$source"/>Engines  = [
-		<xsl:apply-templates select="//h:li">
+		<xsl:apply-templates select="//h:li[@id]">
 			<xsl:with-param name="count" select="$count"/>
 		</xsl:apply-templates>];&#10;</h:javascript-array>
 	</xsl:template>
         
-	<xsl:template match="h:li">
+	<xsl:template match="h:li[@id]">
 		<xsl:param name="count"/>
 		<xsl:variable name="sep">
 			<xsl:choose>
