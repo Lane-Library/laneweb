@@ -137,6 +137,9 @@
             <map:match type="wildcard" pattern="lmurdock/**">
                 <map:mount uri-prefix="lmurdock" check-reload="yes" src="file:/afs/ir/users/l/m/lmurdock/laneweb/laneweb.xmap"/>
             </map:match>
+            <map:match type="wildcard" pattern="rzwies/**">
+                <map:mount uri-prefix="rzwies" check-reload="yes" src="file:/afs/ir/users/r/z/rzwies/laneweb/laneweb.xmap"/>
+            </map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv)$">
                 <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>
