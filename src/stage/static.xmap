@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
     <map:pipelines>
-        <map:pipeline type="caching">
+        <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="images/**.gif">
                 <map:read type="resource" src="{defaults:stage-base}/resources/images/{1}.gif"
                     mime-type="image/gif"/>
