@@ -35,7 +35,6 @@
                         <map:part type="file" src="cocoon:/template2meta-engines?source=research"/>
                     </map:aggregate>
                     <map:transform type="xsltc" src="context://xsl/elibrary-search.xsl"/>
-                    <map:transform type="object-id"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -90,12 +89,10 @@
             </map:match>
             <map:match type="wildcard" pattern="templates/**.xml">
                 <map:generate type="file" src="{defaults:live-base}/resources/templates/{1}.xml"/>
-                <map:transform type="object-id"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="**">
                 <map:generate type="html" src="{defaults:live-base}/content/{1}"/>
-                <map:transform type="object-id"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="xsltc" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
