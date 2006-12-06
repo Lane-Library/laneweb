@@ -115,7 +115,10 @@
                 <map:redirect-to uri="{request:contextPath}/{1}/index.html"/>
             </map:match>
             <map:match type="wildcard" pattern="stage/**">
-                <map:mount uri-prefix="stage" check-reload="yes" src="{defaults:stage-base}/stage.xmap"/>
+                <!-- temporary change to accomodate object-id in /afs/ir/group/lane/beta/stage
+                    <map:mount uri-prefix="stage" check-reload="yes" src="{defaults:stage-base}/stage.xmap"/>
+                    -->
+                    <map:mount uri-prefix="stage" check-reload="yes" src="{defaults:stage-base}/irt-dev-stage.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="ceyates/**">
                 <map:mount uri-prefix="ceyates" check-reload="yes"
