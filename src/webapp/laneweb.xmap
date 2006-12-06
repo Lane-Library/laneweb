@@ -28,13 +28,11 @@
             </map:transformer>
             <map:transformer name="xinclude" src="edu.stanford.laneweb.LanewebXIncludeTransformer" pool-min="16" pool-max="32"
                 pool-grow="4" logger="sitemap.transformer.xinclude"/>
-            <!--
             <map:transformer name="object-id" src="edu.stanford.laneweb.ObjectIDTransformer" pool-min="16" pool-max="32"
                 pool-grow="4" logger="sitemap.transformer.object-id">
                 <map:parameter name="connection-name" value="eresources"/>
                 <map:parameter name="expiration" value="3600000"/>
             </map:transformer>
-            -->
             <map:transformer name="sql" logger="sitemap.transformer.sql"
                 src="org.apache.cocoon.transformation.SQLTransformer" pool-max="32" pool-min="16" pool-grow="4"/>
         </map:transformers>
