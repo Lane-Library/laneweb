@@ -59,11 +59,8 @@
 		<!--
 			The regular servlet class (trusts the servlet container classloader)
 		-->
-		<!--<servlet-class>
-			org.apache.cocoon.servlet.ParanoidCocoonServlet
-		</servlet-class>-->
 		<servlet-class>
-			edu.stanford.laneweb.LanewebServlet
+			org.apache.cocoon.servlet.ParanoidCocoonServlet
 		</servlet-class>
 
 		<!--
