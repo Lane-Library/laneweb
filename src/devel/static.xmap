@@ -222,7 +222,7 @@
             </map:match>
             <map:match type="wildcard" pattern="**.ppt">
                 <map:select type="resource-exists">
-                    <map:when test="content/{1}.doc">
+                    <map:when test="content/{1}.ppt">
                         <map:read type="resource" src="content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
                     </map:when>
                     <map:otherwise>
