@@ -68,6 +68,10 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
+            <map:match type="regex" pattern="^(announcement|error|sitemap|online/alphabet)\.html$">
+                <map:generate type="html" src="{defaults:live-base}/content/{1}.html"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match type="wildcard" pattern="lane-faq/lane-faq-all.html">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq-all.xml"/>
                 <map:serialize type="xml"/>
