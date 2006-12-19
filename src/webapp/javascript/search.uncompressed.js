@@ -799,7 +799,7 @@ var searching = false;
 function submitSearch() {
   var formName = 'searchForm';
   var source = document[formName].source.options[document[formName].source.selectedIndex].value;
-  var keywords = document[formName].keywords.value;
+  var keywords = cleanKW(document[formName].keywords.value);
   var nokeywords = 'Please enter one or more search terms.';
 
   if(eLibraryTabIDs.contains(source)){

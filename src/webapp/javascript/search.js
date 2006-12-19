@@ -566,7 +566,7 @@ var searching=false;
 function submitSearch(){
 var _91="searchForm";
 var _92=document[_91].source.options[document[_91].source.selectedIndex].value;
-var _93=document[_91].keywords.value;
+var _93=cleanKW(document[_91].keywords.value);
 var _94="Please enter one or more search terms.";
 if(eLibraryTabIDs.contains(_92)){
 setCookie("LWeLibSource",_92);
