@@ -371,15 +371,6 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>oracle-jdbc</groupId>
-            <artifactId>oracle-jdbc</artifactId>
-            <version>1.4</version>
-            <type>jar</type>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.4</version>

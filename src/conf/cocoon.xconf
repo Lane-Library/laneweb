@@ -21,7 +21,7 @@
         <template url="^(stage/|)100years/index\.html" value="100years_index"/>
         <template url="^(stage/|)100years/\S+" value="100years"/>
         <template url="^(stage/|)services/spaces/reserve/\S+" value="none"/>
-	    <ezproxy-key>***laneweb.ezproxy.key***</ezproxy-key>
+	    <ezproxy-key>***laneweb.cocoon.laneweb.ezproxy-key***</ezproxy-key>
     </component-instance>
     <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
     <component-instance logger="core.modules.input" name="request-uri" class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
@@ -35,10 +35,9 @@
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
       <values>
         <template>default</template>
-        <search-url>***laneweb.search.url***</search-url>
-        <live-base>***laneweb.live.base***</live-base>
-        <stage-base>***laneweb.stage.base***</stage-base>
-        <search-timeout>***laneweb.search.timeout***</search-timeout>
+        <search-url>***laneweb.cocoon.defaults.search-url***</search-url>
+        <live-base>***laneweb.cocoon.defaults.live-base***</live-base>
+        <stage-base>***laneweb.cocoon.defaults.stage-base***</stage-base>
       </values>
     </component-instance>
     <component-instance logger="core.modules.input" name="session-attr"  class="org.apache.cocoon.components.modules.input.SessionAttributeModule"/>
@@ -54,7 +53,7 @@
   </xml-parser>
   
   <store logger="core.store">
-     <parameter name="maxobjects" value="***laneweb.store.maxobjects***"/>
+     <parameter name="maxobjects" value="***laneweb.cocoon.store.maxobjects***"/>
     <parameter name="use-cache-directory" value="true"/>
   </store>
                                                                                                                                                                                                     
@@ -63,8 +62,8 @@
   </transient-store>
 
   <store-janitor logger="core.store.janitor">  
-     <parameter name="freememory" value="***laneweb.store.freememory***"/>
-     <parameter name="heapsize" value="***laneweb.store.heapsize***"/>
+     <parameter name="freememory" value="***laneweb.cocoon.store.freememory***"/>
+     <parameter name="heapsize" value="***laneweb.cocoon.store.heapsize***"/>
      <parameter name="cleanupthreadinterval" value="10"/>
      <parameter name="percent_to_free" value="10"/>
   </store-janitor>
@@ -133,18 +132,9 @@
   </runnable-manager>
 
   <datasources logger="core.datasources">
-    <jdbc logger="laneweb.eresourcesdb" name="eresources">
-      <pool-controller min="***laneweb.eresourcesdb.pool.min***"
-                       max="***laneweb.eresourcesdb.pool.max***"
-                       grow="***laneweb.eresourcesdb.pool.grow***"
-                       timeout="***laneweb.eresourcesdb.pool.timeout***">
-        <keep-alive>SELECT 1 FROM DUAL</keep-alive>
-      </pool-controller>
-      <driver>oracle.jdbc.driver.OracleDriver</driver>
-      <dburl>***laneweb.eresourcesdb.url***</dburl>
-      <user>***laneweb.eresourcesdb.user***</user>
-      <password>***laneweb.eresourcesdb.password***</password>
-    </jdbc>
+    <j2ee logger="laneweb.eresources" name="eresources">
+      <dbname>eresources</dbname>
+    </j2ee>
   </datasources>
    
 </cocoon>
