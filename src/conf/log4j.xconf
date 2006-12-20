@@ -25,7 +25,7 @@
     <param name="File" value="${catalina.home}/logs/laneweb-beta.log"/>
     <param name="Append" value="true"/>
     <param name="MaxFileSize" value="10MB"/>
-    <param name="MaxBackupIndex" value="4"/> 
+    <param name="MaxBackupIndex" value="40"/> 
     <layout class="org.apache.log4j.PatternLayout">
       <param name="ConversionPattern" value="%d %p [%t][%c] - %m%n"/>
     </layout>

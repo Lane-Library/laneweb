@@ -60,20 +60,6 @@ import org.xml.sax.ext.LexicalHandler;
  * shamelessly copied from cocoon 2.2-M2, modified only startPrefixMapping() --cy
  * also altered to use fallback if ProcessingException or SAXException
  * 
- * @cocoon.sitemap.component.documentation
- * Implementation of an XInclude transformer.
- * 
- * @cocoon.sitemap.component.name   xinclude
- * @cocoon.sitemap.component.logger sitemap.transformer.xinclude
- * 
- * @cocoon.sitemap.component.pooling.max  16
- * 
- * Implementation of an XInclude transformer. It supports xml:base attributes,
- * XPointer fragment identifiers (see the xpointer package to see what exactly is
- * supported), fallback elements, and does xinclude processing on the included content
- * and on the content of fallback elements (with loop inclusion detection).
- *
- * @version $Id: XIncludeTransformer.java 448473 2006-09-21 06:22:51Z crossley $
  */
 public class LanewebXIncludeTransformer extends AbstractTransformer implements Serviceable, CacheableProcessingComponent { 
     protected SourceResolver resolver;
