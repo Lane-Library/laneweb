@@ -10,6 +10,12 @@
     <property name="javadocdir" value="${docsdir}/apidocs"/>
     <property name="webappdir" value="${defaulttargetdir}/laneweb"/>
     <available file="../laneweb.properties" property="laneweb.production"/>
+    <path id="build.classpath">
+        <fileset dir="${libdir}">
+            <include name="**/*.jar">
+            </include>
+        </fileset>
+    </path>
     <target name="init" description="o Initializes some properties">
         <mkdir dir="${libdir}"/>
         <condition property="noget">
