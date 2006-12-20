@@ -47,7 +47,7 @@ public class LoginAction extends AbstractAction implements Parameterizable {
 					getLogger().debug("ticket = " + ticket);
 					getLogger().debug("url = " + url);
 				}
-				String redirectURL = this.proxyURL + "user=" + sunetid + "&ticket=" + ticket + "&url=" + url;
+				String redirectURL = this.proxyURL + "user=" + sunetid + "&ticket=" + ticket + "&" + url;
 				redirector.redirect(true, redirectURL);
 			}
 		}
