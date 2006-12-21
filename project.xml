@@ -403,6 +403,15 @@
                 <war.bundle>true</war.bundle>
             </properties>
             </dependency>
+        <dependency>
+            <groupId>yui</groupId>
+            <artifactId>yui</artifactId>
+            <version>0.12.0</version>
+            <type>jar</type>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
     </dependencies>
     <build>
         <sourceDirectory>src/java</sourceDirectory>
