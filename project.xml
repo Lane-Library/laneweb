@@ -18,7 +18,7 @@
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://www.stanford.edu/~ceyates/laneweb</url>
     <repository>
-        <connection>scm:cvs:ext:ceyates@irt-dev-cvs.stanford.edu:/export/cvs:laneweb</connection>
+        <connection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</connection>
     </repository>
     <versions>
         <version>
