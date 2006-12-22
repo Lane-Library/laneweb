@@ -1,4 +1,5 @@
 maven.repo.remote=http://www.ibiblio.org/maven,http://www.stanford.edu/~ceyates/maven
+maven.changelog.factory=org.apache.maven.svnlib.SvnChangeLogFactory
 
 laneweb.context.docBase=/Users/ceyates/Documents/workspace/laneweb/target/laneweb
 laneweb.context.path=/
