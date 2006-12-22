@@ -15,5 +15,9 @@
             </j:choose>
         </copy>
     </postGoal>
+
+    <preGoal name="checkstyle:report-internal">
+${systemScope.setProperty('javax.xml.transform.TransformerFactory','com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl')}
+</preGoal>
     
 </project>
