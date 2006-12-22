@@ -99,7 +99,7 @@
             <filterset filtersfile="project.properties" begintoken="***" endtoken="***"/>
         </copy>
     </target>
-    <target name="webapp" depends="compile, prepare-webapp,production,stage"/>
+    <target name="webapp" depends="compile, test, prepare-webapp,production,stage"/>
     <target name="prepare-webapp">
         <copy todir="${webappdir}">
             <fileset dir="src/webapp"/>
