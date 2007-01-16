@@ -1,7 +1,28 @@
-maven.repo.remote=http://www.ibiblio.org/maven,http://www.stanford.edu/~ceyates/maven
+file.encoding=UTF-8
+
+maven.repo.remote=http://repo1.maven.org/maven,http://www.stanford.edu/~ceyates/maven
+
 maven.changelog.factory=org.apache.maven.svnlib.SvnChangeLogFactory
 
-laneweb.context.docBase=/Users/ceyates/Documents/workspace/laneweb/target/laneweb
+maven.test.error.ignore=true
+maven.test.failure.ignore=true
+
+maven.junit.fork=true
+
+maven.compile.target=1.5
+
+maven.eclipse.src.download=false
+
+maven.docs.outputencoding=UTF-8
+
+maven.tomcat.manager.url=http://localhost:8080/manager/
+maven.tomcat.deploy.mode=development
+maven.tomcat.jsp.precompile=false
+maven.tomcat.jsp.exclude=false
+maven.tomcat.username=
+maven.tomcat.password=
+
+laneweb.context.docBase=
 laneweb.context.path=/
 
 laneweb.context.eresources.username=
@@ -13,8 +34,8 @@ laneweb.context.eresources.maxWait=5000
 
 laneweb.cocoon.laneweb.ezproxy-key=L0nePr0xyP0SSK0y
 
-laneweb.cocoon.defaults.live-base=file:/afs/ir/group/lane/beta/live
-laneweb.cocoon.defaults.stage-base=file:/afs/ir/group/lane/beta/stage
+laneweb.cocoon.defaults.live-base=file:/afs/ir/group/lane/laneconnex/live
+laneweb.cocoon.defaults.stage-base=file:/afs/ir/group/lane/laneconnex/stage
 laneweb.cocoon.defaults.search-url=http://lane.stanford.edu/search/
 
 laneweb.cocoon.store.maxobjects=2000
@@ -24,5 +45,3 @@ laneweb.cocoon.store.heapsize=66600000
 laneweb.log4j.host=
 laneweb.log4j.email=
 laneweb.log4j.level=error
-
-

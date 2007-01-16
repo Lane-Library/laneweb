@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/3.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/3.0.0 http://maven.apache.org/maven-v3_0_0.xsd">
     <pomVersion>1</pomVersion>
     <artifactId>laneweb</artifactId>
     <name>Lane Library Website</name>
-    <groupId>laneweb</groupId>
+    <groupId>lane</groupId>
     <logo>http://lane.stanford.edu/images/logo.gif</logo>
     <id>laneweb</id>
     <currentVersion>1.5.0-dev</currentVersion>
@@ -332,7 +334,7 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
-<!--
+        <!--
         <dependency>
             <groupId>joost</groupId>
             <artifactId>joost</artifactId>
@@ -402,7 +404,7 @@
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
-            </dependency>
+        </dependency>
         <dependency>
             <groupId>yui</groupId>
             <artifactId>yui</artifactId>
@@ -416,6 +418,6 @@
     <build>
         <sourceDirectory>src/java</sourceDirectory>
         <unitTestSourceDirectory>src/test</unitTestSourceDirectory>
+        <nagEmailAddress>ceyates@stanford.edu</nagEmailAddress>
     </build>
 </project>
-

@@ -1,7 +1,7 @@
 <project default="war:war" xmlns:j="jelly:core">
     <postGoal name="war:webapp">
         <available file="../laneweb.properties" property="laneweb.production"/>
-        <copy todir="target/laneweb/WEB-INF">
+        <copy todir="${maven.war.webapp.dir}/WEB-INF">
             <fileset dir="src/conf">
                 <includes name="cocoon.xconf,log4j.xconf,context.xml"/>
             </fileset>
