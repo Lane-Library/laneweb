@@ -22,7 +22,7 @@
          Note, that you can use properties for value substitution.
     -->
   <appender name="LOG" class="org.apache.log4j.RollingFileAppender">
-    <param name="File" value="${catalina.home}/logs/laneweb-beta.log"/>
+    <param name="File" value="${catalina.home}/logs/laneweb.log"/>
     <param name="Append" value="true"/>
     <param name="MaxFileSize" value="10MB"/>
     <param name="MaxBackupIndex" value="40"/> 

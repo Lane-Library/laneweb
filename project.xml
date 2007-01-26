@@ -168,6 +168,15 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1</version>
+            <type>jar</type>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>concurrent</groupId>
             <artifactId>concurrent</artifactId>
             <version>1.3.4</version>
@@ -308,9 +317,10 @@
             </properties>
         </dependency>
         <dependency>
-            <groupId>jakarta-bcel</groupId>
-            <artifactId>jakarta-bcel</artifactId>
-            <version>20040329</version>
+            <groupId>bcel</groupId>
+            <artifactId>bcel</artifactId>
+            <version>5.2</version>
+            <!--<version>20040329</version>-->
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -325,7 +335,7 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
             <version>1.0.2</version>
@@ -333,7 +343,7 @@
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
-        </dependency>
+        </dependency>-->
         <!--
         <dependency>
             <groupId>joost</groupId>
@@ -363,7 +373,7 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.3.3</version>
@@ -371,7 +381,7 @@
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
