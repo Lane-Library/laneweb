@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"><map:pipelines>
+        <map:pipeline type="caching">
+            <map:match type="wildcard" pattern="**.ico">
+                <map:read src="{defaults:live-base}/resources/extensions/{1}.ico" mime-type="image/x-icon"/>
+            </map:match>
+            <map:match type="wildcard" pattern="**.png">
+                <map:read src="{defaults:live-base}/resources/extensions/{1}.png" mime-type="image/png"/>
+            </map:match>
+            <map:match type="wildcard" pattern="**.rdf">
+                <map:read src="{defaults:live-base}/resources/extensions/{1}.rdf" mime-type="text/xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="**.src">
+                <map:read src="{defaults:live-base}/resources/extensions/{1}.src" mime-type="text/txt"/>
+            </map:match>
+            <map:match type="wildcard" pattern="**.xml">
+                <map:read src="{defaults:live-base}/resources/extensions/{1}.xml" mime-type="text/xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="**.xpi">
+                <map:read src="{defaults:live-base}/resources/extensions/{1}.xpi" mime-type="application/x-xpinstall"/>
+            </map:match>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>

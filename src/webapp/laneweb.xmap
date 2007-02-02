@@ -146,6 +146,9 @@
             <map:match type="wildcard" pattern="javascript/yui/**">
                 <map:mount uri-prefix="javascript/yui" check-reload="no" src="yui.xmap"/>
             </map:match>
+			<map:match type="wildcard" pattern="extensions/**">
+			    <map:mount uri-prefix="extensions" check-reload="no" src="extensions.xmap"/>
+			</map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv)$">
                 <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>
