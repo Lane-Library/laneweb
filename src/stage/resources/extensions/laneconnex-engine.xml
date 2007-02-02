@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>LaneConnex</ShortName> 
+  <Description>Lane Medical Library and Knowledge Management Center - LaneConnex Search Plugin</Description> 
+  <Url type="text/html" template="http://irt-lanelocal.stanford.edu/stage/search.html?source=all&amp;keywords={searchTerms}&amp;sourceid=laneconnex-engine-0.1" /> 
+  <Url type="application/x-suggestions+json" template="http://irt-lanelocal.stanford.edu/stage/eresources/extensions-suggest?q={searchTerms}"/>
+</OpenSearchDescription>
