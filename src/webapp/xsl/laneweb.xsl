@@ -24,6 +24,8 @@
     <xsl:param name="source"/>
     
     <xsl:param name="proxy-links"/>
+
+    <xsl:param name="guest-links"/>
   
     <xsl:param name="tab"/>
 	
@@ -152,6 +154,9 @@
                         <xsl:attribute name="onclick">
                             <xsl:text>openSearchResult('</xsl:text>
                             <xsl:choose>
+                                <xsl:when test="$guest-links = 'true'">
+                                    <xsl:value-of select="@href"/>
+                                </xsl:when>
                                 <xsl:when test="$proxy-links = 'true' and ($affiliation = 'LPCH' or $affiliation = 'SHC')">
                                     <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
                                     <xsl:value-of select="."/>
@@ -204,6 +209,9 @@
                 <xsl:call-template name="make-link">
                     <xsl:with-param name="link">
                         <xsl:choose>
+                            <xsl:when test="$guest-links = 'true'">
+                               <xsl:value-of select="."/>
+                            </xsl:when>
                             <xsl:when test="$affiliation = 'LPCH' or $affiliation = 'SHC'">
                                 <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
                                 <xsl:value-of select="."/>
@@ -372,6 +380,9 @@
                     <xsl:when test="@content = '{proxy-links}'">
                         <xsl:value-of select="$proxy-links"/>
                     </xsl:when>
+                    <xsl:when test="@content = '{guest-links}'">
+                        <xsl:value-of select="$guest-links"/>
+                    </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="@content"/>
                     </xsl:otherwise>
@@ -395,6 +406,7 @@
                 <li>ticket=<xsl:value-of select="$ticket"/></li>
                 <li>sunetid=<xsl:value-of select="$sunetid"/></li>
                 <li>proxy-links=<xsl:value-of select="$proxy-links"/></li>
+                <li>guest-links=<xsl:value-of select="$guest-links"/></li>
                 </ul>
             </div>
         </xsl:if>

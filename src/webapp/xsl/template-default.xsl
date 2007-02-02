@@ -10,6 +10,8 @@
 	<xsl:output method="xml" indent="yes"/>
 	
 	<xsl:param name="request-uri"/>
+	<xsl:param name="proxy-links"/>
+	<xsl:param name="guest-links"/>
 	<xsl:param name="a"/> <!-- alphabetical browse in online directory -->
 	<xsl:param name="c"/> <!-- core title -->
 	<xsl:param name="loadTab" /> <!-- loading specific tab as active -->
@@ -29,6 +31,21 @@
 			<xsl:when test="$eLibrary-type='db'">database</xsl:when>
 		</xsl:choose>
 	</xsl:variable>
+
+<!-- display guest link toggle for off-campus users -->
+	<xsl:template match="h:div[@id='accessMode']">
+		<xsl:choose>
+			<xsl:when test="$proxy-links = 'true' and not($guest-links = 'true')">
+				<xsl:copy-of select="h:div[@id='guestLinks']/*"/>
+			</xsl:when>
+			<xsl:when test="$proxy-links = 'true' and $guest-links = 'true'">
+				<xsl:copy-of select="h:div[@id='suLinks']/*"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<div id="accessMode" class="hide">&#160;</div>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
 	
 <!-- collage display only on home page -->
 	<xsl:template match="h:div[@id='collage']">
