@@ -54,7 +54,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 			// mod_proxy puts the real remote address in an x-forwarded-for
 			// header
 			// Load balancer also does this
-			String header = request.getHeader("X-FORWARDED-FOR");
+			String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
 			if (header != null) {
 				ip = header;
 			}

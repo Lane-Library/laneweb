@@ -15,11 +15,18 @@ public class TicketTest extends TestCase {
 	}
 
 	public void testTicket() {
-		fail("Not yet implemented"); // TODO
+		try {
+			new Ticket(this.ezproxyKey, null);
+			fail("expected IllegalArgumentException");
+		} catch (IllegalArgumentException e) {}
+		try {
+			new Ticket(null, this.sunetid);
+			fail("expected IllegalArgumentException");
+		} catch (IllegalArgumentException e) {}
 	}
 
 	public void testToString() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(46,this.ticket.toString().length());
 	}
 
 }
