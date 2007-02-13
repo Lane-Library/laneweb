@@ -82,11 +82,12 @@
     </xsl:template>
     
     <xsl:template match="comment()">
-        <xsl:if test="contains(.,'[if IE]')">
+        <xsl:copy-of select="."/>
+        <!--<xsl:if test="contains(.,'[if IE]')">
             <xsl:comment>
                 <xsl:value-of select="normalize-space(.)"/>
             </xsl:comment>
-        </xsl:if>
+        </xsl:if>-->
     </xsl:template>
    
     <xsl:template match="h:a">
