@@ -58,7 +58,8 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 			if (header != null) {
 				ip = header;
 			}
-			return Boolean.FALSE.equals(userInfo.getProxyLinks()) ? Boolean.FALSE : new Boolean(isProxy(ip));
+			
+			return userInfo.getProxyLinks() != null ? userInfo.getProxyLinks() : new Boolean(isProxy(ip));
 		}
 		if (LanewebConstants.AFFILIATION.equals(key)) {
 			return userInfo.getAffiliation();
