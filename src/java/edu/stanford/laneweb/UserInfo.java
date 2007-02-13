@@ -49,7 +49,7 @@ public class UserInfo {
 		}
 		if (this.sunetId != null) {
 			Context context = ObjectModelHelper.getContext(objectModel);
-			String key = (String) context.getAttribute(LanewebConstants.EZPROXY_KEY);
+			String key = (String) context.getInitParameter(LanewebConstants.EZPROXY_KEY);
 			this.ticket = new Ticket(key, this.sunetId);
 		}
 	}

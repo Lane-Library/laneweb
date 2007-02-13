@@ -40,7 +40,7 @@ public class UserInfoTest extends TestCase {
 		expect(this.request.getParameter(LanewebConstants.PROXY_LINKS)).andReturn("true");
 		expect(this.request.getParameter(LanewebConstants.PROXY_LINKS)).andReturn("true");
 		replay(this.request);
-		expect(this.context.getAttribute(LanewebConstants.EZPROXY_KEY)).andReturn(this.ezproxyKey);
+		expect(this.context.getInitParameter(LanewebConstants.EZPROXY_KEY)).andReturn(this.ezproxyKey);
 		replay(this.context);
 	}
 
