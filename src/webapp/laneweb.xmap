@@ -176,7 +176,6 @@
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                    <map:parameter name="guest-links" value="{request:cookies[name='guest-links']/@value}"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
@@ -229,7 +228,6 @@
                     <map:parameter name="context" value="{request:contextPath}"/>
                     <map:parameter name="query-string" value="{request:queryString}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                    <map:parameter name="guest-links" value="{request:cookies[name='guest-links']/@value}"/>
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
@@ -238,8 +236,6 @@
                     <map:when test="context://xsl/template-{chain:template}.xsl">
                         <map:transform type="xsltc" src="context://xsl/template-{chain:template}.xsl">
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                            <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                            <map:parameter name="guest-links" value="{request:cookies[name='guest-links']/@value}"/>
                         </map:transform>
                     </map:when>
                 </map:select> 

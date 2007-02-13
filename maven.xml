@@ -2,7 +2,7 @@
     <postGoal name="war:webapp">
         <available file="../laneweb.properties" property="laneweb.production"/>
         <copy todir="${maven.war.webapp.dir}/WEB-INF">
-            <fileset dir="src/conf" includes="*.xconf"/>
+            <fileset dir="src/conf" includes="*.xconf,web.xml"/>
             <j:choose>
                 <j:when test="${laneweb.production}">
                     <filterset filtersfile="../laneweb.properties" begintoken="***" endtoken="***"/>

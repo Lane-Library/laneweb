@@ -13,7 +13,6 @@
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                    <map:parameter name="guest-links" value="{request:cookies[name='guest-links']/@value}" />
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>

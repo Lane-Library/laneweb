@@ -8,7 +8,6 @@
 	<xsl:param name="ticket" />
 	<xsl:param name="affiliation" />
 	<xsl:param name="proxy-links" />
-	<xsl:param name="guest-links"/>
 	<xsl:variable name="proxy-url">http://laneproxy.stanford.edu/login?</xsl:variable>
 
 	<xsl:template match="*">
@@ -20,9 +19,6 @@
 	<xsl:template match="s:url">
 		<xsl:copy>
 			<xsl:choose>
-				<xsl:when test="$guest-links = 'true'">
-					<xsl:value-of select="."/>
-				</xsl:when>
 				<xsl:when test="$proxy-links = 'true' and ($affiliation = 'LPCH' or $affiliation = 'SHC')">
 					<xsl:value-of select="$proxy-url" />
 					<xsl:text>url=</xsl:text>
