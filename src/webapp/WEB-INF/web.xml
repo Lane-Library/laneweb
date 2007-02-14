@@ -62,11 +62,6 @@
 		<servlet-class>
 			org.apache.cocoon.servlet.ParanoidCocoonServlet
 		</servlet-class>
-		
-		<init-param>
-			<param-name>ezproxy-key</param-name>
-			<param-value>***laneweb.webxml.ezproxy-key***</param-value>
-		</init-param>
 
 		<!--
 			This parameter tells cocoon to set the thread's context classloader to

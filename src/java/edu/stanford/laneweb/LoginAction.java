@@ -18,6 +18,7 @@ import org.apache.cocoon.environment.SourceResolver;
 public class LoginAction extends AbstractAction implements Parameterizable {
 	
 	private String proxyURL;
+	private String ezproxyKey;
 
 	public Map act(Redirector redirector, SourceResolver resolver,
 			Map objectModel, String source, Parameters params) throws ProcessingException, IOException {
@@ -31,7 +32,7 @@ public class LoginAction extends AbstractAction implements Parameterizable {
 				session.setAttribute(LanewebConstants.USER_INFO, userInfo);
 			}
 			request.setAttribute(LanewebConstants.USER_INFO, userInfo);
-			userInfo.update(objectModel);
+			userInfo.update(objectModel, this.ezproxyKey);
 		}
 
 		String sunetid = userInfo.getSunetId();
@@ -60,5 +61,6 @@ public class LoginAction extends AbstractAction implements Parameterizable {
 
 	public void parameterize(Parameters params) throws ParameterException {
 		this.proxyURL = params.getParameter("proxy-url","http://laneproxy.stanford.edu/login?");
+		this.ezproxyKey = params.getParameter("ezproxy-key");
 	}
 }

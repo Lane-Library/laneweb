@@ -1,7 +1,5 @@
 package edu.stanford.laneweb;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import org.apache.cocoon.environment.Context;
@@ -18,9 +16,12 @@ public class UserInfo {
 	
 	private Ticket ticket;
 	
-	public void update(final Map objectModel) {
+	public void update(final Map objectModel, final String ezproxyKey) {
 		if (objectModel == null) {
 			throw new IllegalArgumentException("null objectModel");
+		}
+		if (ezproxyKey == null) {
+			throw new IllegalArgumentException("null ezproxyKey");
 		}
 		Request request = ObjectModelHelper.getRequest(objectModel);
 		if (this.affiliation == null) {
@@ -48,9 +49,7 @@ public class UserInfo {
 			this.proxyLinks = new Boolean(request.getParameter(LanewebConstants.PROXY_LINKS));
 		}
 		if (this.sunetId != null) {
-			Context context = ObjectModelHelper.getContext(objectModel);
-			String key = (String) context.getInitParameter(LanewebConstants.EZPROXY_KEY);
-			this.ticket = new Ticket(key, this.sunetId);
+			this.ticket = new Ticket(ezproxyKey, this.sunetId);
 		}
 	}
 

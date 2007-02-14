@@ -32,7 +32,7 @@ laneweb.context.eresources.maxActive=
 laneweb.context.eresources.maxIdle=
 laneweb.context.eresources.maxWait=5000
 
-laneweb.webxml.ezproxy-key=L0nePr0xyP0SSK0y
+laneweb.cocoon.laneweb.ezproxy-key=L0nePr0xyP0SSK0y
 
 laneweb.cocoon.defaults.live-base=file:/afs/ir/group/lane/laneconnex/live
 laneweb.cocoon.defaults.stage-base=file:/afs/ir/group/lane/laneconnex/stage
