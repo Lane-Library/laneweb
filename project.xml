@@ -8,7 +8,7 @@
     <groupId>lane</groupId>
     <logo>http://lane.stanford.edu/images/logo.gif</logo>
     <id>laneweb</id>
-    <currentVersion>1.5.0-dev</currentVersion>
+    <currentVersion>1.6.0-dev</currentVersion>
     <organization>
         <name>Lane Medical Library</name>
         <url>http://lane.stanford.edu/</url>
@@ -37,13 +37,6 @@
         <report>maven-tasklist-plugin</report>
         <report>maven-cobertura-plugin</report>
     </reports>
-    <versions>
-        <version>
-            <id>0</id>
-            <name>1.4.0</name>
-            <tag>HEAD</tag>
-        </version>
-    </versions>
     <developers>
         <developer>
             <name>Charles Yates</name>
@@ -52,7 +45,7 @@
             <organization>IRT Systems Development</organization>
         </developer>
         <developer>
-            <name>Таня Подчийска</name>
+            <name>Tanya Podchiyska</name>
             <id>tpod</id>
             <email>tpod@stanford.edu</email>
             <organization>IRT Systems Development</organization>
@@ -347,26 +340,6 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
-        <!--<dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>activation</artifactId>
-            <version>1.0.2</version>
-            <type>jar</type>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>-->
-        <!--
-        <dependency>
-            <groupId>joost</groupId>
-            <artifactId>joost</artifactId>
-            <version>20050521</version>
-            <type>jar</type>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
--->
         <dependency>
             <groupId>jtidy</groupId>
             <artifactId>jtidy</artifactId>
@@ -379,21 +352,12 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.13</version>
+            <version>1.2.14</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
-<!--        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.3.3</version>
-            <type>jar</type>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>

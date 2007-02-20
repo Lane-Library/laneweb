@@ -3,8 +3,6 @@
     <property name="defaulttargetdir" value="target"/>
     <property name="libdir" value="${defaulttargetdir}/lib"/>
     <property name="classesdir" value="${defaulttargetdir}/classes"/>
-    <property name="testclassesdir" value="${defaulttargetdir}/test-classes"/>
-    <property name="testreportdir" value="${defaulttargetdir}/test-reports"/>
     <property name="distdir" value="dist"/>
     <property name="docsdir" value="${defaulttargetdir}/docs"/>
     <property name="javadocdir" value="${docsdir}/apidocs"/>
@@ -12,8 +10,7 @@
     <available file="../laneweb.properties" property="laneweb.production"/>
     <path id="build.classpath">
         <fileset dir="${libdir}">
-            <include name="**/*.jar">
-            </include>
+            <include name="**/*.jar"/>
         </fileset>
     </path>
     <target name="init" description="o Initializes some properties">
@@ -21,7 +18,6 @@
         <condition property="noget">
             <equals arg2="only" arg1="${build.sysclasspath}"/>
         </condition>
-        <available property="Junit.present" classname="junit.framework.Test"/>
     </target>
     <target name="compile" description="o Compile the code" depends="get-deps">
         <mkdir dir="${classesdir}"/>
@@ -34,57 +30,15 @@
             </classpath>
         </javac>
     </target>
-    <target name="test" description="o Run the test cases" if="test.failure" depends="internal-test">
-        <fail message="There were test failures.">
-        </fail>
-    </target>
-    <target name="internal-test" if="Junit.present" depends="junit-present,compile-tests">
-        <mkdir dir="${testreportdir}">
-        </mkdir>
-        <junit dir="./" failureproperty="test.failure" printSummary="yes" fork="true" haltonerror="true">
-            <sysproperty key="basedir" value=".">
-            </sysproperty>
-            <formatter type="xml">
-            </formatter>
-            <formatter usefile="false" type="plain">
-            </formatter>
-            <classpath>
-                <path refid="build.classpath">
-                </path>
-                <pathelement path="${testclassesdir}">
-                </pathelement>
-                <pathelement path="${classesdir}">
-                </pathelement>
-            </classpath>
-            <batchtest todir="${testreportdir}">
-                <fileset dir="src/test">
-                </fileset>
-            </batchtest>
-        </junit>
-    </target>
-    <target name="junit-present" unless="Junit.present" depends="init">
-        <echo>junit not in classpath</echo>
-    </target>
-    <target name="compile-tests" if="Junit.present" depends="junit-present,compile">
-        <mkdir dir="${testclassesdir}">
-        </mkdir>
-        <javac destdir="${testclassesdir}" deprecation="true" debug="true" optimize="false" excludes="**/package.html">
-            <src>
-                <pathelement location="src/test">
-                </pathelement>
-            </src>
-            <classpath>
-                <path refid="build.classpath">
-                </path>
-                <pathelement path="${classesdir}">
-                </pathelement>
-            </classpath>
-        </javac>
-    </target>
     <target name="production" if="laneweb.production">
         <copy todir="${webappdir}/WEB-INF">
             <fileset dir="src/conf">
                 <include name="*.xconf"/>
+            </fileset>
+            <filterset filtersfile="../laneweb.properties" begintoken="***" endtoken="***"/>
+        </copy>
+        <copy todir="${webappdir}/META-INF">
+            <fileset dir="src/conf">
                 <include name="context.xml"/>
             </fileset>
             <filterset filtersfile="../laneweb.properties" begintoken="***" endtoken="***"/>
@@ -94,18 +48,23 @@
         <copy todir="${webappdir}/WEB-INF">
             <fileset dir="src/conf">
                 <include name="*.xconf"/>
+            </fileset>
+            <filterset filtersfile="project.properties" begintoken="***" endtoken="***"/>
+        </copy>
+        <copy todir="${webappdir}/META-INF">
+            <fileset dir="src/conf">
                 <include name="context.xml"/>
             </fileset>
             <filterset filtersfile="project.properties" begintoken="***" endtoken="***"/>
         </copy>
     </target>
-    <target name="webapp" depends="compile, test, prepare-webapp,production,stage"/>
+    <target name="webapp" depends="compile, prepare-webapp,production,stage"/>
     <target name="prepare-webapp">
         <copy todir="${webappdir}">
-            <fileset dir="src/webapp"/>
+            <fileset dir="src/webapp" excludes="META-INF/context.xml"/>
         </copy>
         <copy todir="${webappdir}/WEB-INF/lib">
-            <fileset dir="${defaulttargetdir}/lib" excludes="servlet-api*,junit*"/>
+            <fileset dir="${defaulttargetdir}/lib" excludes="servlet-api*,junit*,easymock*"/>
         </copy>
         <copy todir="${webappdir}/WEB-INF/classes">
             <fileset dir="${defaulttargetdir}/classes"/>
@@ -128,26 +87,7 @@
         <delete file="${defaulttargetdir}/laneweb.war"/>
         <delete dir="${defaulttargetdir}/classes"/>
     </target>
-    <target name="all" depends="clean,dist,docs"/>
-    <target name="docs" depends="javadoc"/>
-    <target name="javadoc" description="o Generate javadoc" depends="compile">
-        <mkdir dir="${javadocdir}"/>
-        <tstamp>
-            <format pattern="2002-yyyy" property="year"/>
-        </tstamp>
-        <property name="copyright"
-            value="Copyright &amp;copy;  Lane Medical Library. All Rights Reserved."/>
-        <property name="title" value="Lane Library Website API"/>
-        <javadoc use="true" private="true" destdir="${javadocdir}" author="true" version="true"
-            sourcepath="src/java" packagenames="edu.stanford.*">
-            <classpath>
-                <fileset dir="${libdir}">
-                    <include name="*.jar"/>
-                </fileset>
-                <pathelement location="${defaulttargetdir}/classes"/>
-            </classpath>
-        </javadoc>
-    </target>
+    <target name="all" depends="clean,dist"/>
     <target name="get-deps" unless="noget" depends="init">
         <get dest="${libdir}/avalon-framework-api-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/avalon-framework/jars/avalon-framework-api-4.3.jar"/>
         <get dest="${libdir}/avalon-framework-impl-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/avalon-framework/jars/avalon-framework-impl-4.3.jar"/>
@@ -163,6 +103,7 @@
         <get dest="${libdir}/commons-jxpath-1.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/commons-jxpath/jars/commons-jxpath-1.2.jar"/>
         <get dest="${libdir}/commons-lang-2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/commons-lang/jars/commons-lang-2.2.jar"/>
         <get dest="${libdir}/concurrent-1.3.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/concurrent/jars/concurrent-1.3.4.jar"/>
+        <get dest="${libdir}/easymock-2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/easymock/jars/easymock-2.2.jar"/>
         <get dest="${libdir}/ehcache-1.2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/ehcache/jars/ehcache-1.2.2.jar"/>
         <get dest="${libdir}/excalibur-component-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/excalibur-component/jars/excalibur-component-2.1.jar"/>
         <get dest="${libdir}/excalibur-datasource-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/excalibur-datasource/jars/excalibur-datasource-2.1.jar"/>
@@ -177,13 +118,11 @@
         <get dest="${libdir}/excalibur-sourceresolve-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/excalibur-sourceresolve/jars/excalibur-sourceresolve-2.1.jar"/>
         <get dest="${libdir}/excalibur-store-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/excalibur-store/jars/excalibur-store-2.1.jar"/>
         <get dest="${libdir}/excalibur-xmlutil-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/excalibur-xmlutil/jars/excalibur-xmlutil-2.1.jar"/>
-        <!--<get dest="${libdir}/jakarta-bcel-20040329.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/jakarta-bcel/jars/jakarta-bcel-20040329.jar"/>
-        --><get dest="${libdir}/jakarta-regexp-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/jakarta-regexp/jars/jakarta-regexp-1.4.jar"/>
-        <!--<get dest="${libdir}/joost-20050521.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/joost/jars/joost-20050521.jar"/>-->
+        <get dest="${libdir}/bcel-5.2.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/bcel/jars/bcel-5.2.jar"/>
+        <get dest="${libdir}/jakarta-regexp-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/jakarta-regexp/jars/jakarta-regexp-1.4.jar"/>
         <get dest="${libdir}/jtidy-4aug2000r7-dev.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/jtidy/jars/jtidy-4aug2000r7-dev.jar"/>
         <get dest="${libdir}/log4j-1.2.14.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/log4j/jars/log4j-1.2.14.jar"/>
-        <!--<get dest="${libdir}/mail-1.3.3.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/javax.mail/jars/mail-1.3.3.jar"/>
-        --><get dest="${libdir}/servlet-api-2.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/javax.servlet/jars/servlet-api-2.4.jar"/>
+        <get dest="${libdir}/servlet-api-2.4.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/javax.servlet/jars/servlet-api-2.4.jar"/>
         <get dest="${libdir}/xalan-2.7.0.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/xalan/jars/xalan-2.7.0.jar"/>
         <get dest="${libdir}/xml-apis-1.3.04.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/xml-apis/jars/xml-apis-1.3.04.jar"/>
         <get dest="${libdir}/xercesImpl-2.9.0.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/xerces/jars/xercesImpl-2.9.0.jar"/>
