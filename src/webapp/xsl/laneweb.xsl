@@ -401,28 +401,60 @@
         </xsl:if>
     </xsl:template>
     
-    <!-- creates a a element with the current url and a different template -->
-    <xsl:template match="h:span[@class='lw_thisLink']">
-        <a>
-            <xsl:attribute name="href">
-                <xsl:value-of select="concat($context,'/',$request-uri)"/>
-                <xsl:choose>
-                    <xsl:when test="contains($query-string, '?')">
-                        <xsl:choose>
-                            <xsl:when test="contains($query-string, 'template=')">
-                                <xsl:value-of select="substring-before($query-string, 'template=')"/>
-                                <xsl:value-of select="concat('template=', h:span[@class='lw_template'])"/>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of select="concat($query-string, '&amp;template=', h:span[@class='lw_template'])"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:when>
-                    <xsl:otherwise>?template=<xsl:value-of select="h:span[@class='lw_template']"/></xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-            <xsl:value-of select="text()"/>
-        </a>
+    <xsl:template match="h:a[@class='lw_toggleProxyOn']">
+        <xsl:if test="$proxy-links = 'false'">
+            <xsl:copy>
+                <xsl:apply-templates select="attribute::node()"/>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="concat($context,'/',$request-uri)"/>
+                    <xsl:choose>
+                        <xsl:when test="$query-string = ''">
+                            <xsl:text>?proxy-links=true</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="not(contains($query-string,'proxy-links=false'))">
+                            <xsl:text>?</xsl:text>
+                            <xsl:value-of select="$query-string"/>
+                            <xsl:text>&amp;proxy-links=true</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>?</xsl:text>
+                            <xsl:value-of select="substring-before($query-string,'proxy-links=false')"/>
+                            <xsl:text>proxy-links=true</xsl:text>
+                            <xsl:value-of select="substring-after($query-string,'proxy-links=false')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+                <xsl:apply-templates select="child::node()"/>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="h:a[@class='lw_toggleProxyOff']">
+        <xsl:if test="$proxy-links = 'true'">
+            <xsl:copy>
+                <xsl:apply-templates select="attribute::node()"/>
+                <xsl:attribute name="href">
+                    <xsl:value-of select="concat($context,'/',$request-uri)"/>
+                    <xsl:choose>
+                        <xsl:when test="$query-string = ''">
+                            <xsl:text>?proxy-links=false</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="not(contains($query-string,'proxy-links=true'))">
+                            <xsl:text>?</xsl:text>
+                            <xsl:value-of select="$query-string"/>
+                            <xsl:text>&amp;proxy-links=false</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>?</xsl:text>
+                            <xsl:value-of select="substring-before($query-string,'proxy-links=true')"/>
+                            <xsl:text>proxy-links=false</xsl:text>
+                            <xsl:value-of select="substring-after($query-string,'proxy-links=true')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+                <xsl:apply-templates select="child::node()"/>
+            </xsl:copy>
+        </xsl:if>
     </xsl:template>
     
     <!-- generates the breadcrumb -->
