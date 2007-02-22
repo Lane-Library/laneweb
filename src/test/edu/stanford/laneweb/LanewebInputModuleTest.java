@@ -31,6 +31,7 @@ public class LanewebInputModuleTest extends TestCase {
     }
     
     public void testAFewIPs() throws ConfigurationException {
+    	assertTrue((this.module.proxyLinks("64.9.230.210")));
     	assertTrue((this.module.proxyLinks("171.65.44.22")));
     	assertTrue((this.module.proxyLinks("171.65.45.22")));
     	assertFalse((this.module.proxyLinks("171.65.46.22")));

@@ -2,7 +2,6 @@ package edu.stanford.laneweb;
 
 import java.util.Map;
 
-import org.apache.cocoon.environment.Context;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 

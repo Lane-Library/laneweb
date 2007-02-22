@@ -60,11 +60,10 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 			if (header != null) {
 				ip = header;
 			}
-			
-			return userInfo.getProxyLinks() != null ? userInfo.getProxyLinks() : new Boolean(isProxy(ip));
+			result = userInfo.getProxyLinks() != null ? userInfo.getProxyLinks() : new Boolean(proxyLinks(ip));
 		}
 		if (LanewebConstants.AFFILIATION.equals(key)) {
-			return userInfo.getAffiliation();
+			result = userInfo.getAffiliation();
 		}
 		if (LanewebConstants.TEMPLATE.equals(key)) {
 			String requestURI = request.getRequestURI();
@@ -72,10 +71,10 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 			result = getTemplateName(requestURI.substring(contextPathLength + 1));
 		}
 		if (LanewebConstants.SUNETID.equals(key)) {
-			return userInfo.getSunetId();
+			result = userInfo.getSunetId();
 		}
 		if (LanewebConstants.TICKET.equals(key)) {
-			return userInfo.getTicket();
+			result = userInfo.getTicket();
 		}
 		if (getLogger().isDebugEnabled()) {
 			getLogger().debug(key + " = " + result);
@@ -114,7 +113,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 	}
 
 	protected boolean proxyLinks(final String ip) throws ConfigurationException {
-		return!isNoProxy(ip) || isProxy(ip);
+		return !isNoProxy(ip) || isProxy(ip);
 	}
 
 	private boolean isNoProxy(final String ip) throws ConfigurationException {
