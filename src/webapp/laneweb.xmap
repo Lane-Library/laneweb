@@ -189,33 +189,10 @@
             <map:match type="wildcard" pattern="edtech/learning_spaces/facilities/m112.html">
                 <map:redirect-to uri="{request:contextPath}/services/spaces/features/m112.html"/>
             </map:match>
-            <!-- ========================== permenent redirects ============================ -->
-            <!-- ========================== temporary redirects ============================ -->
-            <map:match type="wildcard" pattern="clinician/peds.html">
-                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/peds.html"/>
-            </map:match>
             <map:match type="wildcard" pattern="clinician/index.html">
-                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/clinical.html"/>
+                <map:redirect-to uri="{request:contextPath}/portals/clinical.html"/>
             </map:match>
-            <map:match type="wildcard" pattern="researcher/index.html">
-                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/bioresearch.html"/>
-            </map:match>
-            <map:match type="wildcard" pattern="clinician/specialist/nursing.html">
-                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/nursing.html"/>
-            </map:match>
-            <map:match type="wildcard" pattern="howto/sunetid.html">
-                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/howto/index.html?id=_1414"/>
-            </map:match>
-            <map:match type="wildcard" pattern="clinician/specialist/oncology.html">
-                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/oncology.html"/>
-            </map:match>
-            <map:match type="wildcard" pattern="clinician/specialist/ophthalmology.html">
-                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/portals/ophthalmology.html"/>
-            </map:match>
-            <map:match type="wildcard" pattern="liaisons/index.html">
-                <map:redirect-to uri="{request:contextPath}/redirect.html?url=/contacts/index.html?loadTab=liaisons"/>
-            </map:match>
-            <!-- ========================== temporary redirects ============================ -->
+            <!-- ========================== permenent redirects ============================ -->
             <map:match type="wildcard" pattern="**.html">
                 <map:act type="session-action"/>
                 <map:aggregate element="doc" label="content">

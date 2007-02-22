@@ -77,11 +77,6 @@
                 <map:transform type="xsltc" src="context://xsl/faq-category-list.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="redirect.html">
-                <map:generate type="html" src="{defaults:stage-base}/content/redirect.html"/>
-                <map:transform type="xsltc" src="context://xsl/redirect.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="templates/**.xml">
                 <map:generate type="file" src="{defaults:stage-base}/resources/templates/{1}.xml"/>
                 <map:transform type="object-id"/>

@@ -153,25 +153,6 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="redirect.html">
-                <map:select type="resource-exists">
-                    <map:when test="content/redirect.html">
-                        <map:generate type="html" src="content/redirect.html"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:generate type="html" src="{defaults:live-base}/content/redirect.html"/>
-                    </map:otherwise>
-                </map:select>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/redirect.xsl">
-                        <map:transform type="xsltc" src="xsl/redirect.xsl"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/redirect.xsl"/>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="templates/**.xml">
                 <map:select type="resource-exists">
                     <map:when test="resources/templates/{1}.xml">

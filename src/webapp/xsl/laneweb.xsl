@@ -396,13 +396,14 @@
                 <li>ticket=<xsl:value-of select="$ticket"/></li>
                 <li>sunetid=<xsl:value-of select="$sunetid"/></li>
                 <li>proxy-links=<xsl:value-of select="$proxy-links"/></li>
+                <li>affiliation=<xsl:value-of select="$affiliation"/></li>
                 </ul>
             </div>
         </xsl:if>
     </xsl:template>
     
     <xsl:template match="h:a[@class='lw_toggleProxyOn']">
-        <xsl:if test="$proxy-links = 'false'">
+        <xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'false'">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
                 <xsl:attribute name="href">
@@ -430,7 +431,7 @@
     </xsl:template>
     
     <xsl:template match="h:a[@class='lw_toggleProxyOff']">
-        <xsl:if test="$proxy-links = 'true'">
+        <xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'true'">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
                 <xsl:attribute name="href">
