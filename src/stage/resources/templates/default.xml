@@ -11,13 +11,13 @@
 				<link rel="search" type="application/opensearchdescription+xml" title="LaneConnex" href="/extensions/laneconnex-engine.xml"/>
         <meta name="WT.seg_1" content="{affiliation}"/>
         <meta name="lw_proxyLinks" content="{proxy-links}"/>
-		<script src="/yui/build/yahoo/yahoo-min.js" type="text/javascript"> </script>
-		<script src="/yui/build/event/event-min.js" type="text/javascript"> </script>
-		<script src="/yui/build/dom/dom-min.js" > </script>
-		<script src="/yui/build/dragdrop/dragdrop-min.js" type="text/javascript"> </script>
-		<script src="/yui/build/animation/animation-min.js" type="text/javascript"> </script>
-		<script src="/yui/build/container/container-min.js" type="text/javascript"> </script>
-		<script src="/yui/build/connection/connection-min.js" type="text/javascript"> </script>
+		<script src="/javascript/yui/build/yahoo/yahoo-min.js" type="text/javascript"> </script>
+		<script src="/javascript/yui/build/event/event-min.js" type="text/javascript"> </script>
+		<script src="/javascript/yui/build/dom/dom-min.js" > </script>
+		<script src="/javascript/yui/build/dragdrop/dragdrop-min.js" type="text/javascript"> </script>
+		<script src="/javascript/yui/build/animation/animation-min.js" type="text/javascript"> </script>
+		<script src="/javascript/yui/build/container/container-min.js" type="text/javascript"> </script>
+		<script src="/javascript/yui/build/connection/connection-min.js" type="text/javascript"> </script>
 		<script src="/javascript/yui-popup.js" type="text/javascript"> </script>
         <script src="/javascript/laneweb.js" type="text/javascript"> </script>
         <script src="/javascript/search.js" type="text/javascript"> </script>
@@ -123,23 +123,9 @@
 										<div style="clear: both; height: 2px; font-size: 2px;">&#160;</div>
                 </div>
 								<div id="siteLinksContainer">
-									<span id="askUsContainer">
-										<div id="accessMode">
-											<div id="guestLinks">
-												<a href="/" onclick="setCookie('guest-links','true');window.location=window.location.href;return false" onmouseover="return escape('Access LaneConnex without logging in for full access to free resources. Licensed content restricted.')">Guest Access</a>
-											</div>
-											<div id="suLinks">
-												<a href="/" onclick="setCookie('guest-links','false');window.location=window.location.href;return false" onmouseover="return escape('Click here for full access to all LaneConnex resources.')">Stanford Access</a>
-											</div>
-										</div>
-										&#160;&#160;&#160;&#160;&#160;&#160;
-										<a href="/contacts/index.html?loadTab=askus">
-											<img src="/images/templates/default/question_mark.gif" alt="question mark" width="11" height="12"/>
-										</a>
-										<span id="askUsText">
-											<a href="/contacts/index.html?loadTab=askus">Ask Us</a>
-										</span>
-									</span>
+									<span id="askUsContainer"><a href="/contacts/index.html?loadTab=askus"><img src="/images/templates/default/question_mark.gif" alt="question mark" width="11" height="12"/></a><span id="askUsText"><a href="/contacts/index.html?loadTab=askus">Ask Us</a></span></span>
+									<a style="float:right;color:white;margin-right:2em" class="lw_toggleProxyOff" onmouseover="return escape('Access LaneConnex without logging in for full access to free resources. Licensed content restricted.')">Guest Access</a>
+									<a style="float:right;color:white;margin-right:2em" class="lw_toggleProxyOn" onmouseover="return escape('Click here to log in for full access to all LaneConnex resources.')">Stanford Access</a>
                         <span id="siteLinks">
 													<span><a href="/online/ej.html" title="eJournals">eJournals</a></span>
 													<span><a href="/portals/bioresearch.html" title="Bioresearch">Bioresearch</a></span>
@@ -183,7 +169,7 @@
 					<a href="/index.html">Lane Medical Library &#38; Knowledge Management Center</a>
 					<!--  &#160;&#8226;&#160; <span class="footerComment">A division of Information Resources and Technology</span>--><br/>
 					
-					&#169;2006 <a href="http://med.stanford.edu/">Stanford University School of Medicine</a> &#160;&#8226;&#160;
+					&#169;2007 <a href="http://med.stanford.edu/">Stanford University School of Medicine</a> &#160;&#8226;&#160;
 					<a href="http://www.stanford.edu/home/atoz/terms.html">Terms of Use</a>
 				
 					</td>
@@ -194,6 +180,6 @@
 
 			</div>	
         </div>
-	<script src="/javascript/wz_tooltip.js" type="text/javascript">//</script>
+	<script src="/javascript/wz_tooltip.js" type="text/javascript"> </script>
     </body>
 </html>
