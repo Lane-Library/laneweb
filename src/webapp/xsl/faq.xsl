@@ -8,6 +8,7 @@
     
     <xsl:param name="id"/>
     <xsl:param name="category"/>
+    <xsl:param name="mode"/>
     
     <xsl:variable name="category-map" select="/h:html/h:body/h:div[@id='category-map']"/>
     
@@ -86,6 +87,9 @@
                     </tr>
                 </table>
             </xsl:when>
+            <xsl:when test="$id != '' and $mode = 'dl'">
+                <xsl:apply-templates select="h:li[@id=$id]" mode="dl"/>
+            </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates select="h:li[@id=$id]" mode="full"/>
             </xsl:otherwise>
@@ -110,7 +114,7 @@
     
     <xsl:template match="h:li[@class='faq']" mode="dl">
         <dt>
-            <a href="/howto/index.html?id={@id}">
+            <a id="{@id}" href="/howto/index.html?id={@id}">
                 <xsl:value-of select="text()"/>
             </a>
         </dt>
