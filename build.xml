@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="dist" name="laneweb" basedir=".">
+<project default="webapp" name="laneweb" basedir=".">
     <property name="defaulttargetdir" value="target"/>
     <property name="libdir" value="${defaulttargetdir}/lib"/>
     <property name="classesdir" value="${defaulttargetdir}/classes"/>
-    <property name="distdir" value="dist"/>
-    <property name="docsdir" value="${defaulttargetdir}/docs"/>
-    <property name="javadocdir" value="${docsdir}/apidocs"/>
     <property name="webappdir" value="${defaulttargetdir}/laneweb"/>
     <available file="../laneweb.properties" property="laneweb.production"/>
     <path id="build.classpath">
@@ -74,20 +71,11 @@
         <war destfile="${defaulttargetdir}/laneweb.war" webxml="src/webapp/WEB-INF/web.xml"
             basedir="${webappdir}"/>
     </target>
-    <target name="dist" depends="webapp">
-        <copy todir="${distdir}">
-            <fileset dir="${defaulttargetdir}" includes="laneweb/**"/>
-        </copy>
-    </target>
     <target name="clean" description="o Clean up the generated directories">
-        <!--delete dir="${defaulttargetdir}"/-->
-        <delete dir="${distdir}"/>
-        <delete dir="${docsdir}"/>
         <delete dir="${webappdir}"/>
         <delete file="${defaulttargetdir}/laneweb.war"/>
         <delete dir="${defaulttargetdir}/classes"/>
     </target>
-    <target name="all" depends="clean,dist"/>
     <target name="get-deps" unless="noget" depends="init">
         <get dest="${libdir}/avalon-framework-api-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/avalon-framework/jars/avalon-framework-api-4.3.jar"/>
         <get dest="${libdir}/avalon-framework-impl-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/avalon-framework/jars/avalon-framework-impl-4.3.jar"/>
