@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
     <title>LaneConnex - Lane Medical Library &amp; Knowledge Management Center, Stanford University Medical Center</title>
-				<link href="/yui/build/fonts/fonts.css" rel="stylesheet" type="text/css" />
+				<link href="/javascript/yui/build/fonts/fonts.css" rel="stylesheet" type="text/css" />
 				<link href="/style/yui-container.css" rel="stylesheet" type="text/css" />
 		 		<link href="/style/default.css" rel="stylesheet" type="text/css" media="screen, print"/>
 				<link href="/style/default-print.css" rel="stylesheet" type="text/css" media="print"/>
