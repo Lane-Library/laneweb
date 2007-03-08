@@ -198,7 +198,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     	queryBuffer.append('\n');
     	queryBuffer.append(FROM);
       if (this.type != null) {
-			queryBuffer.append(", TYPE");
+			queryBuffer.append(", HISTORY_TYPE");
 		}
     }
     private void getScoredWhereSQL(StringBuffer queryBuffer, String titleTable, boolean core) {
