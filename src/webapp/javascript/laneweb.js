@@ -107,3 +107,16 @@ function setFocusOnSearchBox() {
 	document.forms["searchForm"].elements["keywords"].select();
 }
 
+function alternateTableRows(id){
+ if(document.getElementsByTagName){  
+   var table = document.getElementById(id);  
+   var rows = table.getElementsByTagName("tr");  
+   for(i = 0; i < rows.length; i++){          
+     if(i % 2 == 0){
+       rows[i].className = "tableAltA";
+     }else{
+       rows[i].className = "tableAltB";
+     }      
+   }
+ }
+}
