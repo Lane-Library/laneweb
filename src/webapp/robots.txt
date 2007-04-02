@@ -1,2 +1,3 @@
 User-agent: *
+Crawl-delay: 7
 Disallow: /search.html
