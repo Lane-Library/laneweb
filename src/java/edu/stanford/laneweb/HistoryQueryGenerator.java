@@ -193,7 +193,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     
     private void getScoredSelectSQL(StringBuffer queryBuffer, String titleTable, boolean coreWeighting) {
     	getSelectSQL(queryBuffer, titleTable);
-        queryBuffer.append(", CONTAINS(").append(titleTable).append(",'")
+        queryBuffer.append(" CONTAINS(").append(titleTable).append(",'")
         .append(this.translatedQuery)
         .append("',1)");
         if (coreWeighting) {
