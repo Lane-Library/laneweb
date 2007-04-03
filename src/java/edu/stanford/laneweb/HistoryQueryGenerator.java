@@ -204,7 +204,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     }
     
     private void getSelectSQL(StringBuffer queryBuffer, String titleTable) {
-    	queryBuffer.append(SELECT).append(titleTable);
+    	queryBuffer.append(SELECT).append(titleTable).append(" AS TITLE");
 //    	queryBuffer.append(titleTable).append(", lower(").append(titleTable).append(") AS LTITLE");
     }
     
