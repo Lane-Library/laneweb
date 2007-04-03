@@ -53,7 +53,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     	"AND " + 
     	"HISTORY_VERSION.VERSION_ID = HISTORY_LINK.VERSION_ID ";
     private static final String ORDER_BY = "\nORDER BY ";
-    private static final String ORDER = " TITLE, LINK_ID";
+    private static final String ORDER = " LTITLE, LINK_ID";
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
     private static final char[] NLS_SORT =
     	"ALTER SESSION SET NLS_SORT=GENERIC_BASELETTER".toCharArray();
@@ -204,8 +204,8 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     }
     
     private void getSelectSQL(StringBuffer queryBuffer, String titleTable) {
-    	queryBuffer.append(SELECT).append(titleTable).append(" AS TITLE");
-//    	queryBuffer.append(titleTable).append(", lower(").append(titleTable).append(") AS LTITLE");
+    	queryBuffer.append(SELECT);//.append(titleTable).append(" AS TITLE");
+    	queryBuffer.append(titleTable).append(", lower(").append(titleTable).append(") AS LTITLE");
     }
     
     private void getFromSQL(StringBuffer queryBuffer) {
