@@ -53,12 +53,8 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     	"AND " + 
     	"HISTORY_VERSION.VERSION_ID = HISTORY_LINK.VERSION_ID ";
     private static final String ORDER_BY = "\nORDER BY ";
-    private static final String ORDER = " LTITLE, LINK_ID";
+    private static final String ORDER = " STITLE, LINK_ID";
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
-    private static final char[] NLS_SORT =
-    	"ALTER SESSION SET NLS_SORT=GENERIC_BASELETTER".toCharArray();
-    private static final char[] NLS_COMP =
-    	"ALTER SESSION SET NLS_COMP=ANSI".toCharArray();
     
     private String type;
     private String alpha;
@@ -136,16 +132,6 @@ public class HistoryQueryGenerator extends AbstractGenerator {
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT,EMPTY_ATTS);
         this.xmlConsumer.startElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT,EMPTY_ATTS);
-        this.xmlConsumer.characters(NLS_SORT,0,NLS_SORT.length);
-        this.xmlConsumer.endElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT);
-        this.xmlConsumer.endElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT);
-        this.xmlConsumer.startElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT,EMPTY_ATTS);
-        this.xmlConsumer.startElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT,EMPTY_ATTS);
-        this.xmlConsumer.characters(NLS_COMP,0,NLS_COMP.length);
-        this.xmlConsumer.endElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT);
-        this.xmlConsumer.endElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT);
-        this.xmlConsumer.startElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT,EMPTY_ATTS);
-        this.xmlConsumer.startElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT,EMPTY_ATTS);
         this.xmlConsumer.characters(selectStatmentChars,0,selectStatmentChars.length);
         this.xmlConsumer.endElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT);
         this.xmlConsumer.endElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT);
@@ -206,6 +192,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     private void getSelectSQL(StringBuffer queryBuffer, String titleTable) {
     	queryBuffer.append(SELECT);//.append(titleTable).append(" AS TITLE");
     	queryBuffer.append(titleTable).append(", lower(").append(titleTable).append(") AS LTITLE");
+    	queryBuffer.append(", NLSSORT(").append(titleTable).append(",'NLS_SORT=GENERIC_BASELETTER') AS STITLE");
     }
     
     private void getFromSQL(StringBuffer queryBuffer) {
@@ -240,14 +227,14 @@ public class HistoryQueryGenerator extends AbstractGenerator {
 		if (this.alpha != null) {
 			queryBuffer.append("\nAND ");
 			if (this.alpha.equals("#")) {
-				queryBuffer.append("(SUBSTR(")
+				queryBuffer.append("(NLSSORT(SUBSTR(")
 				.append(titleTable)
-				.append(",1,1) < 'A' OR SUBSTR(")
+				.append(",1,1),'NLS_SORT=GENERIC_BASELETTER') < NLSSORT('A','NLS_SORT=GENERIC_BASELETTER') OR NLSSORT(SUBSTR(")
 				.append(titleTable)
-				.append(",1,1) > 'z')");
+				.append(",1,1),'NLS_SORT=GENERIC_BASELETTER') > NLSSORT('z','NLS_SORT=GENERIC_BASELETTER'))");
 			} else {
-				queryBuffer.append("SUBSTR(").append(titleTable)
-				.append(",1,1) = '").append(this.alpha).append("'");
+				queryBuffer.append("NLSSORT(SUBSTR(").append(titleTable)
+				.append(",1,1),'NLS_SORT=GENERIC_BASELETTER') = NLSSORT('").append(this.alpha).append("','NLS_SORT=GENERIC_BASELETTER')");
 			}
 		}
 		if (this.translatedQuery != null) {
