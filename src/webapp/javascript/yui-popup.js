@@ -71,6 +71,11 @@ Popup.prototype.render = function(){
 	YAHOO.popup.panel.cfg.setProperty('Y',this.locY-140);
 	YAHOO.popup.panel.render();
 	YAHOO.popup.panel.show();
+
+	// make webtrends call only if dcsMultiTrack() is defined
+	if(isDefined(window,'dcsMultiTrack')){
+		dcsMultiTrack('WT.ti','YUI Pop-up [' + this.type + ':'+ this.id + '] -- ' + this.title);
+	}
 }
 
 
@@ -84,9 +89,11 @@ function faqSuccessHandler(o){
 	var m = f.getElementsByTagName('meta')[0];
 	var faqid = f.getElementsByTagName('a')[0].getAttribute('id');
 	var faqUrl = '/././howto/index.html?id=' + faqid;
+	popup.type = 'faq';
+	popup.id = faqid;
 	popup.title = f.getElementsByTagName('a')[0].firstChild.data;
 	popup.body = f.getElementsByTagName('dd')[0].firstChild.data+'&nbsp;<a href="'+faqUrl+'">More</a>';
-	popup.height = '130';
+	popup.height = '135';
 	popup.width =  (popup.title.length*6.5 > 250 ) ? popup.title.length*6.5 : 250;
 	popup.locX = X;
 	popup.locY = Y;
@@ -102,9 +109,11 @@ function faqFailureHandler(o){
 function localPopup(elmId){
 	var popup = new Popup();
 	var elm = (document.getElementById(elmId)) ? document.getElementById(elmId) : 0;
+	popup.type = 'local';
+	popup.id = elmId;
 	popup.title = (elm.getAttribute('title')) ? elm.getAttribute('title') : 0;
 	popup.body = (document.getElementById(elmId)) ? document.getElementById(elmId).innerHTML : 0;
-	popup.height = '130';
+	popup.height = '135';
 	popup.width =  ( popup.title.length*6.5 > 250 ) ? popup.title.length*6.5 : 250;
 	popup.locX = X;
 	popup.locY = Y;
