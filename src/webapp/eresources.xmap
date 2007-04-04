@@ -25,6 +25,13 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="history-count">
+                <map:generate type="history"/>
+                <map:transform type="sql">
+                    <map:parameter name="use-connection" value="eresources"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="ezproxy-servers.txt">
                 <map:generate type="file" src="{defaults:live-base}/resources/sql/ezproxy-servers.xml"/>
                 <map:transform type="sql">

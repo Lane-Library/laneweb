@@ -22,6 +22,42 @@ import org.xml.sax.helpers.AttributesImpl;
 public class HistoryQueryGenerator extends AbstractGenerator {
 	
 	//ERESOURCE.TITLE, lower(ERESOURCE.TITLE) AS LTITLE, 
+	private static final String COUNT_QUERY =
+		"SELECT COUNT(*) AS HITS, 'books' AS GENRE FROM HISTORY_ERESOURCE, HISTORY_TYPE\n"+
+		"WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'XX ') > 0 \n"+ 
+		"AND HISTORY_TYPE.ERESOURCE_ID = HISTORY_ERESOURCE.ERESOURCE_ID AND TYPE = 'books'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'movie' AS GENRE FROM HISTORY_ERESOURCE, HISTORY_TYPE\n"+
+		"WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND HISTORY_TYPE.ERESOURCE_ID = HISTORY_ERESOURCE.ERESOURCE_ID AND TYPE = 'movie'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'serial' AS GENRE FROM HISTORY_ERESOURCE, HISTORY_TYPE\n"+
+		"WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND HISTORY_TYPE.ERESOURCE_ID = HISTORY_ERESOURCE.ERESOURCE_ID AND TYPE = 'serial'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'graphic' AS GENRE FROM HISTORY_ERESOURCE, HISTORY_TYPE\n"+
+		"WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND HISTORY_TYPE.ERESOURCE_ID = HISTORY_ERESOURCE.ERESOURCE_ID AND TYPE = 'graphic'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'thesis' AS GENRE FROM HISTORY_ERESOURCE, HISTORY_TYPE\n"+
+		"WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND HISTORY_TYPE.ERESOURCE_ID = HISTORY_ERESOURCE.ERESOURCE_ID AND TYPE = 'thesis'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'object' AS GENRE FROM HISTORY_ERESOURCE, HISTORY_TYPE\n"+
+		"WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND HISTORY_TYPE.ERESOURCE_ID = HISTORY_ERESOURCE.ERESOURCE_ID AND TYPE = 'object'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'people' AS GENRE FROM HISTORY_ERESOURCE, HISTORY_TYPE\n"+
+		"WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND HISTORY_TYPE.ERESOURCE_ID = HISTORY_ERESOURCE.ERESOURCE_ID AND TYPE = 'people'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'organization' AS GENRE FROM HISTORY_ERESOURCE, HISTORY_TYPE\n"+
+		"WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND HISTORY_TYPE.ERESOURCE_ID = HISTORY_ERESOURCE.ERESOURCE_ID AND TYPE = 'organization'\n"+
+		"UNION\n"+
+		"SELECT COUNT(*) AS HITS, 'event' AS GENRE FROM HISTORY_ERESOURCE, HISTORY_TYPE\n"+
+		"WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'XX ') > 0 \n"+
+		"AND HISTORY_TYPE.ERESOURCE_ID = HISTORY_ERESOURCE.ERESOURCE_ID AND TYPE = 'event'\n";
 	
     
     private static final String TYPE = "t";
@@ -61,6 +97,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     private String core;
     private String query;
     private String translatedQuery;
+    private boolean count;
     private boolean haveParameters;
     private String coreWeight;
     private QueryTranslator queryTranslator = new QueryTranslator();
@@ -72,6 +109,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
         this.coreWeight = par.getParameter("core-weight", "3");
         Request request = ObjectModelHelper.getRequest(objectModel);
         this.haveParameters = false;
+        this.count = request.getRequestURI().indexOf("count") > 0;
         this.core = request.getParameter(CORE);
         if (this.core != null) {
         	if (this.core.equals("y")) {
@@ -146,6 +184,10 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     }
     
     private char[] getSelectStatmentChars() {
+    	if (this.count) {
+    		String countQuery = COUNT_QUERY.replaceAll("XX", this.translatedQuery);
+    		return countQuery.toCharArray();
+    	}
     	StringBuffer queryBuffer = new StringBuffer();
     	if (this.translatedQuery != null) {
     		getScoredSelectSQL(queryBuffer, "HISTORY_ERESOURCE.TITLE", true);
