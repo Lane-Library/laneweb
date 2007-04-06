@@ -87,7 +87,7 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     	"AND " + 
     	"VERSION.VERSION_ID = LINK.VERSION_ID ";
     private static final String ORDER_BY = "\nORDER BY ";
-    private static final String ORDER = " LTITLE, LINK_ID";
+    private static final String ORDER = " STITLE, LINK_ID";
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
     
     private String type;
@@ -254,8 +254,9 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     }
     
     private void getSelectSQL(StringBuffer queryBuffer, String titleTable) {
-    	queryBuffer.append(SELECT);
-    	queryBuffer.append(titleTable).append(", lower(").append(titleTable).append(") AS LTITLE");
+    	queryBuffer.append(SELECT)
+    	.append(titleTable).append(", lower(").append(titleTable).append(") AS LTITLE")
+    	.append(", NLSSORT(").append(titleTable).append(",'NLS_SORT=GENERIC_BASELETTER') AS STITLE");
     }
     
     private void getFromSQL(StringBuffer queryBuffer) {
@@ -308,17 +309,14 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
 		if (this.alpha != null) {
 			queryBuffer.append("\nAND ");
 			if (this.alpha.equals("#")) {
-				
+				queryBuffer.append("(NLSSORT(SUBSTR(")
+				.append(titleTable)
+				.append(",1,1),'NLS_SORT=GENERIC_BASELETTER') < NLSSORT('A','NLS_SORT=GENERIC_BASELETTER') OR NLSSORT(SUBSTR(")
+				.append(titleTable)
+				.append(",1,1),'NLS_SORT=GENERIC_BASELETTER') > NLSSORT('z','NLS_SORT=GENERIC_BASELETTER'))");
 			} else {
-				queryBuffer.append("LOWER(SUBSTR(").append(titleTable)
-				.append(",1,1)) = '").append(this.alpha).append("'");
-			}
-			if (this.alpha.equals("#")) {
-				queryBuffer.append("(SUBSTR(")
-				.append(titleTable)
-				.append(",1,1) < 'A' OR SUBSTR(")
-				.append(titleTable)
-				.append(",1,1) > 'z')");
+				queryBuffer.append("NLSSORT(SUBSTR(").append(titleTable)
+				.append(",1,1),'NLS_SORT=GENERIC_BASELETTER') = NLSSORT('").append(this.alpha).append("','NLS_SORT=GENERIC_BASELETTER')");
 			}
 		}
 		if (this.translatedQuery != null) {

@@ -232,9 +232,9 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     }
     
     private void getSelectSQL(StringBuffer queryBuffer, String titleTable) {
-    	queryBuffer.append(SELECT);//.append(titleTable).append(" AS TITLE");
-    	queryBuffer.append(titleTable).append(", lower(").append(titleTable).append(") AS LTITLE");
-    	queryBuffer.append(", NLSSORT(").append(titleTable).append(",'NLS_SORT=GENERIC_BASELETTER') AS STITLE");
+    	queryBuffer.append(SELECT)
+    	.append(titleTable).append(", lower(").append(titleTable).append(") AS LTITLE")
+    	.append(", NLSSORT(").append(titleTable).append(",'NLS_SORT=GENERIC_BASELETTER') AS STITLE");
     }
     
     private void getFromSQL(StringBuffer queryBuffer) {
