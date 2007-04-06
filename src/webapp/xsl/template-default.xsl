@@ -409,13 +409,15 @@
 	
 	<xsl:template match="h:tr[parent::h:table[@class='striped']]">
 		<xsl:copy>
-			<xsl:apply-templates select="attribute::node()[not(class)]"/>
-			<xsl:attribute name="class">
-				<xsl:choose>
-					<xsl:when test="position() mod 2 = 0">even</xsl:when>
-					<xsl:otherwise>odd</xsl:otherwise>
-				</xsl:choose>
-			</xsl:attribute>
+			<xsl:copy-of select="attribute::node()"/>
+			<xsl:if test="not(attribute::class)">
+				<xsl:attribute name="class">
+					<xsl:choose>
+						<xsl:when test="position() mod 2 = 0">even</xsl:when>
+						<xsl:otherwise>odd</xsl:otherwise>
+					</xsl:choose>
+				</xsl:attribute>
+			</xsl:if>
 			<xsl:apply-templates/>
 		</xsl:copy>
 	</xsl:template>
