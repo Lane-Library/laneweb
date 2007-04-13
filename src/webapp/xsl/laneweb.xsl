@@ -89,6 +89,10 @@
             </xsl:comment>
         </xsl:if>-->
     </xsl:template>
+    
+    <xsl:template match="h:html[ancestor::h:html]">
+        <xsl:apply-templates select="h:body/child::node()"/>
+    </xsl:template>
    
     <xsl:template match="h:a">
         <xsl:choose>

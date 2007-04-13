@@ -8,16 +8,20 @@
     <xsl:variable name="ltitle" select="translate($keywords,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
 
   <xsl:template match="sql:rowset">
+      <html>
+          <head>
+              <title>laneconnex search results</title>
+          </head>
+          <body>
       <xsl:choose>
           <xsl:when test="sql:row">
               <dl class="searchResults">
                   <xsl:apply-templates select="sql:row[sql:ltitle = $ltitle and not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title)]"/>
                   <xsl:apply-templates select="sql:row[not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title) and sql:ltitle != $ltitle]"/>
-		          <xsl:if test="count(sql:row) &gt; 20">
-		          	<br/>
-					 <a style="margin-left:-3px;" href="#"><img src="/graphics/icons/arrowUpTransp.gif" border="0"/> Back to top</a>
-		          </xsl:if>
               </dl>
+              <xsl:if test="count(sql:row) &gt; 20">
+                  <a style="margin-left:-3px;" href="#"><img src="/graphics/icons/arrowUpTransp.gif" alt="up" border="0"/> Back to top</a>
+              </xsl:if>
           </xsl:when>
           <xsl:when test="$a != ''"><div>
               No results for 
@@ -34,6 +38,8 @@
               Try the search box above or <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;PAGE=First">Lane's Catalog</a>
           </div></xsl:when>
       </xsl:choose>
+          </body>
+      </html>
   </xsl:template>
   
   <xsl:template match="sql:row">
