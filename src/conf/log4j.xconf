@@ -5,7 +5,7 @@
         <param name="File" value="${catalina.home}/logs/laneweb.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="10MB"/>
-        <param name="MaxBackupIndex" value="40"/> 
+        <param name="MaxBackupIndex" value="10"/> 
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d %p [%t][%c] - %m%n"/>
         </layout>
