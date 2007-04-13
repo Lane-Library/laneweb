@@ -65,6 +65,12 @@
                 <map:transform type="xsltc" src="context://xsl/random.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
+            <!-- don't cache history searches because keywords will make too many cached items -->
+            <map:match type="wildcard" pattern="portals/history/historySearchResults.html">
+                <map:generate type="html" src="{defaults:live-base}/content/portals/history/historySearchResults.html"/>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
             <map:match type="regex" pattern="^(announcement|error|sitemap|online/alphabet)\.html$">

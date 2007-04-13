@@ -37,6 +37,9 @@
     <!-- LPCH and SHC don't require authentication for proxy server -->
     <xsl:param name="affiliation"/>
     
+    <!-- value of the 't' parameter -->
+    <xsl:param name="t"/>
+    
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
     <xsl:variable name="default-template" select="'default'"/>
@@ -473,6 +476,11 @@
             <xsl:apply-templates select="@*"/>
             <xsl:value-of select="$m"/>
         </xsl:copy>
+    </xsl:template>
+    
+    <!-- chose which text to display for a history search result -->
+    <xsl:template match="h:div[@id='lw_history-headings']">
+        <xsl:apply-templates select="h:div[h:span=$t]/h:h1"/>
     </xsl:template>
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
