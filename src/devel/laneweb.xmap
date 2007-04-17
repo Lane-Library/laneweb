@@ -10,9 +10,6 @@
             <map:match pattern="secure/login.html">
                 <map:act type="loginAction"/>
             </map:match>
-            <map:match type="wildcard" pattern="rss/**">
-            	<map:read type="resource" src="content/rss/{1}" mime-type="text/xml"/>
-            </map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv)$">
                 <map:mount uri-prefix="" check-reload="yes" src="static.xmap"/>
             </map:match>
@@ -120,6 +117,17 @@
                         <map:serialize type="xhtml"/>
                     </map:otherwise>
                 </map:select>
+                <map:match type="wildcard" pattern="**.xml">
+                    <map:select type="resource-exists">
+                        <map:when test="content/{1}.xml">
+                            <map:generate type="file" src="content/{1}.xml"/>
+                        </map:when>
+                        <map:otherwise>
+                            <map:generate type="file" src="{defaults:live-base}/content/{1}.xml"/>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
             </map:match>
             <map:handle-errors>
                 <map:generate type="exception"/>
