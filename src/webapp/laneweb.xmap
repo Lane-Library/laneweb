@@ -78,8 +78,14 @@
         </map:readers>
         <map:actions>
             <map:action logger="sitemap.action.login" name="loginAction" src="edu.stanford.laneweb.LoginAction">
-                <map:parameter name="ezproxy-key" value="L0nePr0xyP0SSK0y"/>
                 <map:parameter name="proxy-url" value="http://laneproxy.stanford.edu/login?"/>
+            </map:action>
+             <map:action logger="sitemap.action.webdash" name="webdashAction" src="edu.stanford.laneweb.WebdashAction">
+                <map:parameter name="webdashURL" value="https://myserver.com/user/join?"/>
+	            <map:parameter name="groupKey" value="1234"/>
+                <map:parameter name="groupName" value="SMS"/>
+            	<map:parameter name="dateFormat" value="yyyy-MM-dd"/>
+            	<map:parameter name="webAuthLdapSeparator" value="|"/>
             </map:action>
             <map:action name="session-action" src="edu.stanford.laneweb.LanewebSessionAction"/>
             <map:action name="clear-cache" logger="sitemap.acting.clear-cache"
@@ -106,6 +112,9 @@
         <map:pipeline type="noncaching">
             <map:match pattern="secure/login.html">
                 <map:act type="loginAction"/>
+            </map:match>
+             <map:match pattern="secure/webdash.html">
+                <map:act type="webdashAction"/>
             </map:match>
             <map:match type="wildcard" pattern="">
                 <map:redirect-to uri="{request:contextPath}/index.html"/>
@@ -231,10 +240,6 @@
                         <map:serialize type="xhtml"/>
                     </map:otherwise>
                 </map:select>
-            </map:match>
-            <map:match type="wildcard" pattern="**.xml">
-                <map:generate type="file" src="{defaults:live-base}/content/{1}.xml"/>
-                <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="**">
                 <map:redirect-to uri="{1}/index.html"/>
