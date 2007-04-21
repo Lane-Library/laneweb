@@ -1,27 +1,28 @@
 package edu.stanford.laneweb;
 
+import edu.stanford.irt.SystemException;
+
+import java.io.IOException;
+import java.util.Map;
+
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.acting.AbstractAction;
-
-import java.io.IOException;
-import java.util.Map;
-
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
 import org.apache.cocoon.environment.SourceResolver;
 
-public class LoginAction extends AbstractAction implements Parameterizable {
+public class LoginAction extends AbstractAction implements Parameterizable  {
 	
 	private String proxyURL;
-	private String ezproxyKey;
 
+	
 	public Map act(Redirector redirector, SourceResolver resolver,
-			Map objectModel, String source, Parameters params) throws ProcessingException, IOException {
+			Map objectModel, String source, Parameters params) throws ProcessingException, IOException, SystemException {
 		Request request = ObjectModelHelper.getRequest(objectModel);
 		UserInfo userInfo = (UserInfo) request.getAttribute(LanewebConstants.USER_INFO);
 		if (userInfo == null) {
@@ -32,7 +33,7 @@ public class LoginAction extends AbstractAction implements Parameterizable {
 				session.setAttribute(LanewebConstants.USER_INFO, userInfo);
 			}
 			request.setAttribute(LanewebConstants.USER_INFO, userInfo);
-			userInfo.update(objectModel, this.ezproxyKey);
+			userInfo.update(objectModel, getLogger());
 		}
 
 		String sunetid = userInfo.getSunetId();
@@ -61,6 +62,5 @@ public class LoginAction extends AbstractAction implements Parameterizable {
 
 	public void parameterize(Parameters params) throws ParameterException {
 		this.proxyURL = params.getParameter("proxy-url","http://laneproxy.stanford.edu/login?");
-		this.ezproxyKey = params.getParameter("ezproxy-key");
 	}
 }

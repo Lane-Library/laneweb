@@ -6,6 +6,8 @@
  */
 package edu.stanford.laneweb;
 
+import edu.stanford.irt.SystemException;
+
 import java.util.Iterator;
 import java.util.Map;
 
@@ -49,8 +51,8 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 				session.setAttribute(LanewebConstants.USER_INFO, userInfo);
 			}
 			request.setAttribute(LanewebConstants.USER_INFO, userInfo);
-			userInfo.update(objectModel, this.ezproxyKey);
-		}
+				userInfo.update(objectModel, getLogger());
+			}
 		if (LanewebConstants.PROXY_LINKS.equals(key)) {
 			String ip = request.getRemoteAddr();
 			// mod_proxy puts the real remote address in an x-forwarded-for

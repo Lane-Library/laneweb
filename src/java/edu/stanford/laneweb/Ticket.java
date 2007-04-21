@@ -16,18 +16,15 @@ import java.util.Date;
 public class Ticket {
 
 	private String stringValue;
-
-	public Ticket(final String ezproxyKey, final String user) {
-		if (ezproxyKey == null) {
-			throw new IllegalArgumentException("null ezproxyKey");
-		}
+	
+	public Ticket( final String user) {
 		if (user == null) {
 			throw new IllegalArgumentException("null user");
 		}
 		Date now = new Date();
 		String packet = "$u" + ((int) (now.getTime() / 1000));
 		try {
-			this.stringValue = URLEncoder.encode(getKeyedDigest(ezproxyKey + user
+			this.stringValue = URLEncoder.encode(getKeyedDigest(LanewebConstants.EZPROXY_KEY + user
 					+ packet)
 					+ packet, "UTF-8");
 		} catch (UnsupportedEncodingException e) {

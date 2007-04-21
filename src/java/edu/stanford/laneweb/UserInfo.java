@@ -1,27 +1,40 @@
 package edu.stanford.laneweb;
 
+import edu.stanford.irt.SystemException;
+import edu.stanford.irt.directory.LDAPDirectoryFactory;
+import edu.stanford.irt.directory.LDAPDirectoryUtil;
+import edu.stanford.irt.directory.LDAPPerson;
+
 import java.util.Map;
 
+import org.apache.avalon.framework.logger.Logger;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 
 public class UserInfo {
 	
-	private Boolean proxyLinks;
-	
-	private String sunetId;
-	
-	private Affiliation affiliation;
-	
-	private Ticket ticket;
-	
-	public void update(final Map objectModel, final String ezproxyKey) {
+	private static final LDAPDirectoryFactory directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil
+																	   .getLDAPDirectoryFactory()
+																	   .getDirectoryFactory();
+	private Boolean						   proxyLinks;
+
+	private String							sunetId;
+
+	private Affiliation					   affiliation;
+
+	private Ticket							ticket;
+
+	private LDAPPerson						ldapPerson;
+ 
+  
+	public void update(final Map objectModel, Logger logger) {
 		if (objectModel == null) {
 			throw new IllegalArgumentException("null objectModel");
 		}
-		if (ezproxyKey == null) {
-			throw new IllegalArgumentException("null ezproxyKey");
+		if (logger == null) {
+			throw new IllegalArgumentException("null logger");
 		}
+		
 		Request request = ObjectModelHelper.getRequest(objectModel);
 		if (this.affiliation == null) {
 			String ip = request.getRemoteAddr();
@@ -39,16 +52,25 @@ public class UserInfo {
 			}
 		}
 		if (this.sunetId == null) {
-			String requestSunetId = (String) request.getAttribute(LanewebConstants.WEBAUTH_USER);
+			String requestSunetId = (String) request
+					.getAttribute(LanewebConstants.WEBAUTH_USER);
 			if (!LanewebConstants.UNSET.equals(requestSunetId)) {
 				this.sunetId = requestSunetId;
+				try {
+					ldapPerson = directoryFactory.getSearcher().searchPersonByUID(sunetId);
+				} catch (SystemException e) {
+					logger.error(e.getMessage(),e);
+				}
 			}
 		}
+
+
 		if (null != request.getParameter(LanewebConstants.PROXY_LINKS)) {
-			this.proxyLinks = new Boolean(request.getParameter(LanewebConstants.PROXY_LINKS));
+			this.proxyLinks = new Boolean(request
+					.getParameter(LanewebConstants.PROXY_LINKS));
 		}
 		if (this.sunetId != null) {
-			this.ticket = new Ticket(ezproxyKey, this.sunetId);
+			this.ticket = new Ticket(this.sunetId);
 		}
 	}
 
@@ -63,9 +85,15 @@ public class UserInfo {
 	public String getSunetId() {
 		return this.sunetId;
 	}
-	
+
 	public Ticket getTicket() {
 		return this.ticket;
 	}
 
+	public LDAPPerson getLdapPerson() {
+		return ldapPerson;
+	}
+
+	
+	
 }
