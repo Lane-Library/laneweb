@@ -9,7 +9,10 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -38,6 +41,7 @@ public class WebdashAction extends AbstractAction implements Parameterizable, In
 	public Map act(Redirector redirector, SourceResolver sourceResolver, Map objectModel, String string, Parameters parameter) throws Exception {
 		Request request = ObjectModelHelper.getRequest(objectModel);
 		UserInfo userInfo = (UserInfo) request.getAttribute(LanewebConstants.USER_INFO);
+		LDAPPerson ldapPerson = null;
 		if (userInfo == null) {
 			Session session = request.getSession(true);
 			userInfo = (UserInfo) session.getAttribute(LanewebConstants.USER_INFO);
@@ -47,23 +51,24 @@ public class WebdashAction extends AbstractAction implements Parameterizable, In
 			}
 			request.setAttribute(LanewebConstants.USER_INFO, userInfo);
 			userInfo.update(objectModel, getLogger());
-			if(userInfo.getLdapPerson() == null)
+			ldapPerson = userInfo.getLdapPerson(); 
+			if(ldapPerson == null)
 				throw new RuntimeException("Ladp user not found");
 		}
-			String mail = URLEncoder.encode( userInfo.getLdapPerson().getMail() , "UTF-8"); 
-			String fullName = URLEncoder.encode( userInfo.getLdapPerson().getDisplayName(), "UTF-8");
-			String affiliation =  getSubGroup(userInfo.getLdapPerson());
-			StringBuffer parameters = new StringBuffer();
-			parameters.append("email=");
-			parameters.append(mail);
-			parameters.append("&enddate=".concat(getEndDate()));
-			parameters.append("&fullname=".concat(fullName));
-			parameters.append("&group=".concat(groupName));
-			parameters.append("&subgroup=".concat(affiliation));
-			String token = getToken(parameters.toString());
-			redirector.redirect(true, url.concat(parameters.toString()).concat("&token=").concat(token));
+		String mail = URLEncoder.encode( ldapPerson.getMail() , "UTF-8"); 
+		String fullName = URLEncoder.encode( ldapPerson.getDisplayName(), "UTF-8");
+		String affiliation =  getSubGroup(ldapPerson);
+		StringBuffer parameters = new StringBuffer();
+		parameters.append("email=");
+		parameters.append(mail);
+		parameters.append("&enddate=".concat(getEndDate()));
+		parameters.append("&fullname=".concat(fullName));
+		parameters.append("&group=".concat(groupName));
+		parameters.append("&subgroup=".concat(affiliation));
+		String token = getToken(parameters.toString());
+		redirector.redirect(true, url.concat(parameters.toString()).concat("&token=").concat(token));
 		return null;
-		
+			
 	}
 
 	private String getToken(String string) throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException
@@ -89,7 +94,10 @@ public class WebdashAction extends AbstractAction implements Parameterizable, In
 		if(affiliations.length >0)
 		{
 			String[] affiliation = affiliations[0].split(":");
-			result = URLEncoder.encode(affiliation[0] ,"UTF-8");
+			if(affiliation.length >0)
+				result = URLEncoder.encode(affiliation[1] ,"UTF-8");
+			else
+				result =  URLEncoder.encode(affiliation[1] ,"UTF-8");
 		}
 		else
 		{
