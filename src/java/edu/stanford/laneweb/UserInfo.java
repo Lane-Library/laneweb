@@ -14,7 +14,7 @@ import org.apache.cocoon.environment.Request;
 public class UserInfo {
 	
 	private static final LDAPDirectoryFactory directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil
-																	   .getLDAPDirectoryFactory()
+																	   .getLDAPDirectoryFactory("IRT_K5")
 																	   .getDirectoryFactory();
 	private Boolean						   proxyLinks;
 
@@ -54,6 +54,7 @@ public class UserInfo {
 		if (this.sunetId == null) {
 			String requestSunetId = (String) request
 					.getAttribute(LanewebConstants.WEBAUTH_USER);
+			
 			if (!LanewebConstants.UNSET.equals(requestSunetId)) {
 				this.sunetId = requestSunetId;
 				try {

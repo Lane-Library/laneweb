@@ -1,5 +1,7 @@
 package edu.stanford.laneweb;
 
+import edu.stanford.irt.directory.LDAPPerson;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.InvalidKeyException;
@@ -50,7 +52,7 @@ public class WebdashAction extends AbstractAction implements Parameterizable, In
 		}
 			String mail = URLEncoder.encode( userInfo.getLdapPerson().getMail() , "UTF-8"); 
 			String fullName = URLEncoder.encode( userInfo.getLdapPerson().getDisplayName(), "UTF-8");
-			String affiliation =  getSubGroup(userInfo.getLdapPerson().getAffilation());
+			String affiliation =  getSubGroup(userInfo.getLdapPerson());
 			StringBuffer parameters = new StringBuffer();
 			parameters.append("email=");
 			parameters.append(mail);
@@ -69,8 +71,7 @@ public class WebdashAction extends AbstractAction implements Parameterizable, In
 		 string = string.replace("+", "%20");
 	     byte[] utf8 = string.getBytes("UTF8");
 	     byte[] b = mac.doFinal(utf8);
-	        //return new sun.misc.BASE64Encoder().encode(digest);
-		StringBuffer sb = new StringBuffer();
+	   StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < b.length; i++) {
 			sb.append(Integer.toHexString((b[i] & 0xf0) >> 4)
 					+ Integer.toHexString(b[i] & 0x0f));
@@ -80,21 +81,21 @@ public class WebdashAction extends AbstractAction implements Parameterizable, In
 	}
 	
 	
-	private String getSubGroup(String[] affiliation) throws UnsupportedEncodingException
+	private String getSubGroup(LDAPPerson ldapPerson) throws UnsupportedEncodingException
 	{
-		//value coming from LDAP and afflialtion may have multiple value e.i stanford:staff|stanford:student 		
+		//value coming from LDAP and afflialtion may have multiple value e.i stanford:staff 		
 		String result = null;
-		if(affiliation.length >0)
-			return URLEncoder.encode(affiliation[1],"UTF8-8");
-	/*	String firstAffiliation = affiliation.split(webAuthLdapSeparator)[0];
-		if(firstAffiliation.length()==0)
-			firstAffiliation = affiliation;
-		String[] subGroup = firstAffiliation.split(":");
-		if(subGroup.length >1 )
-			result = subGroup[1];
+		String[] affiliations = ldapPerson.getAffilation();
+		if(affiliations.length >0)
+		{
+			String[] affiliation = affiliations[0].split(":");
+			result = URLEncoder.encode(affiliation[0] ,"UTF-8");
+		}
 		else
-			result = firstAffiliation;*/
-		return (URLEncoder.encode(result,"UTF-8"));
+		{
+			throw new RuntimeException("Ldap person : ".concat(ldapPerson.getDisplayName()).concat( "  don't have a affiliation"));	
+		}
+		return result;
 	}
 	
 	
