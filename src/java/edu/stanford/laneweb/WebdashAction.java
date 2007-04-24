@@ -97,7 +97,7 @@ public class WebdashAction extends AbstractAction implements Parameterizable, In
 			if(affiliation.length >0)
 				result = URLEncoder.encode(affiliation[1] ,"UTF-8");
 			else
-				result =  URLEncoder.encode(affiliation[1] ,"UTF-8");
+				result =  URLEncoder.encode(affiliation[0] ,"UTF-8");
 		}
 		else
 		{
