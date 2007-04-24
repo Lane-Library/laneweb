@@ -66,8 +66,9 @@ public class WebdashAction extends AbstractAction implements Parameterizable, In
 
 	private String getToken(String string) throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException
 	{
-	        byte[] utf8 = string.getBytes("UTF8");
-	        byte[] b = mac.doFinal(utf8);
+		 string = string.replace("+", "%20");
+	     byte[] utf8 = string.getBytes("UTF8");
+	     byte[] b = mac.doFinal(utf8);
 	        //return new sun.misc.BASE64Encoder().encode(digest);
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < b.length; i++) {
