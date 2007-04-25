@@ -27,18 +27,6 @@ public interface LanewebConstants {
 
 	public static final String WEBAUTH_USER = "WEBAUTH_USER";
 
-	public static final String WEBAUTH_LDAP_SUDISPLAYNAMEFIRST = "WEBAUTH_LDAP_SUDISPLAYNAMEFIRST";
-	
-	public static final String WEBAUTH_LDAP_SUDISPLAYNAMELAST = "WEBAUTH_LDAP_SUDISPLAYNAMELAST";
-	
-	public static final String WEBAUTH_LDAP_OU = "WEBAUTH_LDAP_OU";
-	
-	public static final String WEBAUTH_LDAP_TELEPHONENUMBER = "WEBAUTH_LDAP_TELEPHONENUMBER";
-		
-	public static final String WEBAUTH_LDAP_MAIL = "WEBAUTH_LDAP_MAIL";
-	
-	public static final String WEBAUTH_LDAP_SUAFFILIATION = "WEBAUTH_LDAP_SUAFFILIATION";
-	
 	public static final String UNSET = "<UNSET>";
 
 	
