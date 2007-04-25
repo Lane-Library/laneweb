@@ -241,6 +241,10 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
+            <map:match type="wildcard" pattern="**.xml">
+                <map:generate type="file" src="{defaults:live-base}/content/{1}.xml"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match type="wildcard" pattern="**">
                 <map:redirect-to uri="{1}/index.html"/>
             </map:match>
