@@ -34,7 +34,6 @@ public class WebdashAction extends AbstractAction implements Parameterizable, In
 	String url;
 	String groupName;
 	String dateFormat;
-	String webAuthLdapSeparator;
 	String groupKey;
 	Mac mac ;
 	
@@ -121,7 +120,6 @@ public class WebdashAction extends AbstractAction implements Parameterizable, In
 		this.groupKey = param.getParameter("groupKey");
 		this.groupName = param.getParameter("groupName");
 		this.dateFormat = param.getParameter("dateFormat");
-		this.webAuthLdapSeparator = param.getParameter("webAuthLdapSeparator");
 	}
 
 	

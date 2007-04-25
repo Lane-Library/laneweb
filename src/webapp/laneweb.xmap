@@ -85,7 +85,6 @@
 	            <map:parameter name="groupKey" value="1234"/>
                 <map:parameter name="groupName" value="SMS"/>
             	<map:parameter name="dateFormat" value="yyyy-MM-dd"/>
-            	<map:parameter name="webAuthLdapSeparator" value="|"/>
             </map:action>
             <map:action name="session-action" src="edu.stanford.laneweb.LanewebSessionAction"/>
             <map:action name="clear-cache" logger="sitemap.acting.clear-cache"
