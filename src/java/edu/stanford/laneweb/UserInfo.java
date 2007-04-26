@@ -13,9 +13,10 @@ import org.apache.cocoon.environment.Request;
 
 public class UserInfo {
 	
-	private static final LDAPDirectoryFactory directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil
-																	   .getLDAPDirectoryFactory("IRT_K5")
-																	   .getDirectoryFactory();
+	private final static LDAPDirectoryFactory directoryFactory =(LDAPDirectoryFactory) LDAPDirectoryUtil
+	   																			.getLDAPDirectoryFactory("IRT_K5")
+	   																			.getDirectoryFactory();
+	
 	private Boolean						   proxyLinks;
 
 	private String							sunetId;
@@ -27,6 +28,8 @@ public class UserInfo {
 	private LDAPPerson						ldapPerson;
  
   
+	
+	
 	public void update(final Map objectModel, Logger logger) {
 		if (objectModel == null) {
 			throw new IllegalArgumentException("null objectModel");
@@ -57,10 +60,13 @@ public class UserInfo {
 			
 			if (!LanewebConstants.UNSET.equals(requestSunetId)) {
 				this.sunetId = requestSunetId;
-				try {
-					ldapPerson = directoryFactory.getSearcher().searchPersonByUID(sunetId);
-				} catch (SystemException e) {
-					logger.error(e.getMessage(),e);
+				if(sunetId != null)
+				{
+					try {
+						ldapPerson = directoryFactory.getSearcher().searchPersonByUID(sunetId);
+					} catch (SystemException e) {
+						logger.error(e.getMessage(),e);
+					}
 				}
 			}
 		}
