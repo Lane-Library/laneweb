@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context docBase="***laneweb.context.docBase***" path="***laneweb.context.path***">
+    <Resource name="jdbc/eresources" auth="Container" type="javax.sql.DataSource"/>
+    <ResourceParams name="jdbc/eresources">
+        <parameter>
+            <name>username</name>
+            <value>***laneweb.context.eresources.username***</value>
+        </parameter>
+        <parameter>
+            <name>password</name>
+            <value>***laneweb.context.eresources.password***</value>
+        </parameter>
+        <parameter>
+            <name>driverClassName</name>
+            <value>oracle.jdbc.driver.OracleDriver</value>
+        </parameter>
+        <parameter>
+            <name>url</name>
+            <value>***laneweb.context.eresources.url***</value>
+        </parameter>
+        <parameter>
+            <name>maxActive</name>
+            <value>***laneweb.context.eresources.maxActive***</value>
+        </parameter>
+        <parameter>
+            <name>maxIdle</name>
+            <value>***laneweb.context.eresources.maxIdle***</value>
+        </parameter>
+        <parameter>
+            <name>maxWait</name>
+            <value>***laneweb.context.eresources.maxWait***</value>
+        </parameter>
+    </ResourceParams>
+</Context>
