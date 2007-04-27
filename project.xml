@@ -332,6 +332,15 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>irt</groupId>
+            <artifactId>irt</artifactId>
+            <version>UNKNOWN</version>
+            <type>jar</type>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>jakarta-regexp</groupId>
             <artifactId>jakarta-regexp</artifactId>
             <version>1.4</version>
