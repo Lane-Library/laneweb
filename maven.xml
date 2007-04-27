@@ -12,7 +12,8 @@
                 </j:otherwise>
             </j:choose>
         </copy>
-        <copy todir="${maven.war.webapp.dir}/META-INF" file="src/conf/context*.xml" overwrite="true">
+        <copy todir="${maven.war.webapp.dir}/META-INF" overwrite="true">
+            <fileset dir="src/conf" includes="context*.xml"/>
             <j:choose>
                 <j:when test="${laneweb.production}">
                     <filterset filtersfile="../laneweb.properties" begintoken="***" endtoken="***"/>
