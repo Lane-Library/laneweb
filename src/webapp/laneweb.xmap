@@ -80,12 +80,7 @@
             <map:action logger="sitemap.action.login" name="loginAction" src="edu.stanford.laneweb.LoginAction">
                 <map:parameter name="proxy-url" value="http://laneproxy.stanford.edu/login?"/>
             </map:action>
-             <map:action logger="sitemap.action.webdash" name="webdashAction" src="edu.stanford.laneweb.WebdashAction">
-                <map:parameter name="webdashURL" value="https://webda.sh/user/join?"/>
-	            <map:parameter name="groupKey" value="1234"/>
-                <map:parameter name="groupName" value="SMS"/>
-            	<map:parameter name="dateFormat" value="yyyy-MM-dd"/>
-            </map:action>
+             <map:action logger="sitemap.action.webdash" name="webdashAction" src="edu.stanford.laneweb.WebdashAction"/>
             <map:action name="session-action" src="edu.stanford.laneweb.LanewebSessionAction"/>
             <map:action name="clear-cache" logger="sitemap.acting.clear-cache"
                 src="org.apache.cocoon.acting.ClearCacheAction"/>

@@ -42,6 +42,10 @@ laneweb.cocoon.store.maxobjects=2000
 laneweb.cocoon.store.freememory=2048000
 laneweb.cocoon.store.heapsize=66600000
 
+laneweb.cocoon.webdash.key=1234
+laneweb.cocoon.webdash.key.backup=1234
+
+
 laneweb.log4j.host=
 laneweb.log4j.email=
 laneweb.log4j.level=error

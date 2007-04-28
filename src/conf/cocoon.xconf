@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cocoon version="2.1">
+<cocoon version="2.1" user-roles="/WEB-INF/roles.xml">
     
   <sitemap check-reload="no" file="context://laneweb.xmap" logger="sitemap"/>
  
@@ -31,13 +31,14 @@
       <input-module name="request-param"/>
       <input-module name="laneweb"/>
       <input-module name="defaults"/>
-    </component-instance>
+	</component-instance>
+    
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
       <values>
         <template>default</template>
         <search-url>***laneweb.cocoon.defaults.search-url***</search-url>
         <live-base>***laneweb.cocoon.defaults.live-base***</live-base>
-        <stage-base>***laneweb.cocoon.defaults.stage-base***</stage-base>
+        <stage-base>***laneweb.cocoon.defaults.stage-base***</stage-base>	
       </values>
     </component-instance>
     <component-instance logger="core.modules.input" name="session-attr"  class="org.apache.cocoon.components.modules.input.SessionAttributeModule"/>
@@ -136,5 +137,12 @@
       <dbname>eresources</dbname>
     </j2ee>
   </datasources>
+  
+  <webdash-login logger="core.webdash"  >
+    <parameter name="webdashURL" value="https://webda.sh/user/join?"/>
+    <parameter name="groupKey" value="***laneweb.cocoon.webdash.key***"/>
+    <parameter name="groupName" value="SMS"/>
+	<parameter name="dateFormat" value="yyyy-MM-dd"/>
+  </webdash-login>
    
 </cocoon>

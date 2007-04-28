@@ -1,0 +1,6 @@
+<role-list>
+    <role
+        name="edu.stanford.laneweb.WebDashLogin"
+        shorthand="webdash-login"
+        default-class="edu.stanford.laneweb.WebDashLoginImpl"/>
+</role-list>
