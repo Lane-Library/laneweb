@@ -33,7 +33,6 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 	
 	public void initialize() throws Exception {
 		try {
-			System.out.print("group[ key "+groupKey);
 			 SecretKey key = new SecretKeySpec(groupKey.getBytes(), "HmacSHA1");
 			 mac = Mac.getInstance(key.getAlgorithm());
 			 mac.init(key);
