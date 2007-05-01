@@ -581,7 +581,7 @@ window.location=_95;
 return false;
 }else{
 if(_92=="biomedsem"){
-var _96="http://med.stanford.edu/seminars/searchresults.jsp?searchString="+_93+"&Submit=Go";
+var _96="http://med.stanford.edu/seminars/search?searchString="+_93+"&Submit=Go";
 window.location=_96;
 return false;
 }else{

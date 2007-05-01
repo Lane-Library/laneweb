@@ -816,19 +816,16 @@ function submitSearch() {
 	return false;
   }
   else if (source == 'biomedsem') {
-	//openSearchResult('http://med.stanford.edu/seminars/searchresults.jsp?searchString=' + keywords + '&Submit=Go');
-	var dest = 'http://med.stanford.edu/seminars/searchresults.jsp?searchString=' + keywords + '&Submit=Go';
+	var dest = 'http://med.stanford.edu/seminars/search?searchString=' + keywords + '&Submit=Go';
     window.location = dest;
 	return false;
   }
   else if (source == 'catalog') {
 	var dest = 'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1=' + keywords + '&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50';
-	//openSearchResult(dest);
     window.location = dest;
 	return false;
   }
   else if (source == 'google') {
-	//openSearchResult('http://www.google.com/search?hl=en&q=' + keywords);
 	var dest = 'http://www.google.com/search?hl=en&q=' + keywords;
 	if(GLOBALS.needsProxy == 'true'){
 		dest = GLOBALS.proxyPrefix + dest;
@@ -837,7 +834,6 @@ function submitSearch() {
 	return false;
   }
   else if (source == 'pubmed') {
-	//openSearchResult('http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term=' + keywords);
 	var dest = 'http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&CMD=search&DB=PubMed&term=' + keywords;
 	if(GLOBALS.needsProxy == 'true'){
 		dest = GLOBALS.proxyPrefix + dest;
@@ -846,7 +842,6 @@ function submitSearch() {
 	return false;
   }
   else if (source == 'stanford_who') {
-	//openSearchResult('https://stanfordwho.stanford.edu/lookup?search=' + keywords);
 	var dest = 'https://stanfordwho.stanford.edu/lookup?search=' + keywords;
     window.location = dest;
 	return false;
