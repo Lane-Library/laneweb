@@ -6,8 +6,6 @@
  */
 package edu.stanford.laneweb;
 
-import edu.stanford.irt.SystemException;
-
 import java.util.Iterator;
 import java.util.Map;
 
@@ -35,8 +33,6 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 	private Configuration[] proxyRegex;
 
 	private Configuration[] templateConfig;
-	
-	private String ezproxyKey;
 
 	public Object getAttribute(String key, Configuration config, Map objectModel)
 			throws ConfigurationException {
@@ -101,7 +97,6 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 		this.noProxyRegex = config.getChildren("noproxy-regex");
 		this.proxyRegex = config.getChildren("proxy-regex");
 		this.templateConfig = config.getChildren("template");
-		this.ezproxyKey = config.getChild("ezproxy-key").getValue();
 	}
 
 	protected String getTemplateName(final String url)

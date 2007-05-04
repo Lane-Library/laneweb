@@ -116,6 +116,5 @@
         <get dest="${libdir}/xercesImpl-2.9.0.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/xerces/jars/xercesImpl-2.9.0.jar"/>
         <get dest="${libdir}/yui-0.12.0.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/yui/jars/yui-0.12.0.jar"/>
         <get dest="${libdir}/irt-UNKNOWN.jar" usetimestamp="true" ignoreerrors="true" src="http://www.stanford.edu/~ceyates/maven/irt/jars/irt-UNKNOWN.jar"/>
-  
     </target>
 </project>

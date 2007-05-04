@@ -1,15 +1,14 @@
 package edu.stanford.laneweb;
 
-import edu.stanford.irt.SystemException;
-import edu.stanford.irt.directory.LDAPDirectoryFactory;
-import edu.stanford.irt.directory.LDAPDirectoryUtil;
-import edu.stanford.irt.directory.LDAPPerson;
-
 import java.util.Map;
 
 import org.apache.avalon.framework.logger.Logger;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
+
+import edu.stanford.irt.directory.LDAPDirectoryFactory;
+import edu.stanford.irt.directory.LDAPDirectoryUtil;
+import edu.stanford.irt.directory.LDAPPerson;
 
 public class UserInfo {
 	
@@ -64,7 +63,7 @@ public class UserInfo {
 				{
 					try {
 						ldapPerson = directoryFactory.getSearcher().searchPersonByUID(sunetId);
-					} catch (SystemException e) {
+					} catch (Exception e) {
 						logger.error(e.getMessage(),e);
 					}
 				}

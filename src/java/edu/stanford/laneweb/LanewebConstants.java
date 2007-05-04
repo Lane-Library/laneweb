@@ -29,6 +29,4 @@ public interface LanewebConstants {
 
 	public static final String UNSET = "<UNSET>";
 
-	
-	
 }
