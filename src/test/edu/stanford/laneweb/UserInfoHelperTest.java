@@ -4,6 +4,7 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.easymock.EasyMock.isA;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
@@ -23,7 +24,7 @@ public class UserInfoHelperTest extends TestCase {
 	private Logger log; 
 	private LdapClient ldapClient;
 	private Session session;
-	
+	private UserInfoHelper userInfoHelper;
 	
 	
 	protected void setUp() throws Exception {
@@ -41,40 +42,49 @@ public class UserInfoHelperTest extends TestCase {
 		ldapPerson.setSunetId(sunetIds);
 
 		expect(this.ldapClient.getLdapPerson(this.sunetid)).andReturn(ldapPerson);
-
-		UserInfo userInfo = new UserInfo(); 
 		expect(this.request.getAttribute(LanewebConstants.USER_INFO)).andReturn(null);
-		expect(this.session.getAttribute(LanewebConstants.USER_INFO)).andReturn(userInfo);
-		this.request.setAttribute(LanewebConstants.USER_INFO, userInfo);
+		expect(this.session.getAttribute(LanewebConstants.USER_INFO)).andReturn(null);
 		
+		this.session.setAttribute(isA(String.class), isA(UserInfo.class));
+		this.request.setAttribute(isA(String.class), isA(UserInfo.class));
+	
 		expect(this.request.getSession(true)).andReturn(this.session);
-		expect(this.request.getRemoteAddr()).andReturn(this.ip);
 		expect(this.request.getHeader(LanewebConstants.X_FORWARDED_FOR)).andReturn(null);
 		expect(this.request.getAttribute(LanewebConstants.WEBAUTH_USER)).andReturn(this.sunetid);
 		expect(this.request.getParameter(LanewebConstants.PROXY_LINKS)).andReturn("true");
 		expect(this.request.getParameter(LanewebConstants.PROXY_LINKS)).andReturn("true");
 		replay(ldapClient);
 		replay(this.session);
-		replay(this.request);	
-		
+	
+		userInfoHelper = new UserInfoHelperImpl();
+		userInfoHelper.setLdapClient(this.ldapClient);
+
 	}
 
 
 
 	public void testGetUserInfo() {
-		
-		UserInfoHelper userInfoHelper = new UserInfoHelperImpl();
-	
-		userInfoHelper.setLdapClient(this.ldapClient);
+		expect(this.request.getRemoteAddr()).andReturn(this.ip);
+		replay(this.request);	
 		UserInfo userInfo =  userInfoHelper.getUserInfo(this.request);
 		assertEquals(Affiliation.SOM, userInfo.getAffiliation());
 		assertTrue(userInfo.getProxyLinks());
 		assertEquals(this.sunetid, userInfo.getSunetId());
+		assertNotNull(userInfo.getTicket());
 		assertEquals(46,userInfo.getTicket().toString().length());
 		assertEquals(this.sunetid, userInfo.getLdapPerson().getSunetId()[0]);
 		verify(this.session);
 		verify(this.request);
 		}
 
+	public void testAffiliation() {
+		this.ip = this.ip.concat("FAIL_TEST");
+		expect(this.request.getRemoteAddr()).andReturn(ip);
+		replay(this.request);	
+		UserInfo userInfo =  userInfoHelper.getUserInfo(this.request);
+		assertEquals(Affiliation.ERR, userInfo.getAffiliation());
+		verify(this.session);
+		verify(this.request);
+	}
 
 }
