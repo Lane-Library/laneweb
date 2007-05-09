@@ -66,7 +66,7 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHe
 
 	
 	public void initialize() throws Exception {
-		ldapClient = (LdapClient) new LdapClientImpl();
+		ldapClient =  new LdapClientImpl();
 	}
 
 

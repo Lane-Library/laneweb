@@ -6,7 +6,7 @@ import edu.stanford.irt.directory.LDAPPerson;
 
 import org.apache.log4j.Logger;
 
-public class LdapClientImpl {
+public class LdapClientImpl implements LdapClient {
 
 	Logger log = Logger.getLogger(this.getClass());
 	
