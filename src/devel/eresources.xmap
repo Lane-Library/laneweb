@@ -24,10 +24,10 @@
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="xsl/ersql2html.xsl">
-                        <map:transform type="xsltc" src="xsl/ersql2html.xsl"/>
+                        <map:transform type="xsltc" src="xsl/historyErsql2html.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/ersql2html.xsl"/>
+                        <map:transform type="xsltc" src="context://xsl/historyErsql2html.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

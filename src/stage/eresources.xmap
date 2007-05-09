@@ -15,7 +15,7 @@
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
-                <map:transform type="xsltc" src="context://xsl/ersql2html.xsl"/>
+                <map:transform type="xsltc" src="context://xsl/historyErsql2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="count">
