@@ -13,6 +13,9 @@ import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.components.modules.input.InputModule;
 import org.apache.cocoon.environment.ObjectModelHelper;
@@ -26,29 +29,22 @@ import org.apache.cocoon.environment.Session;
  * Preferences - Java - Code Generation - Code and Comments
  */
 public class LanewebInputModule extends AbstractLogEnabled implements
-		InputModule, ThreadSafe, Configurable {
+		InputModule, ThreadSafe, Configurable, Serviceable {
 
 	private Configuration[] noProxyRegex;
 
 	private Configuration[] proxyRegex;
 
 	private Configuration[] templateConfig;
+	
+	private UserInfoHelper userInfoHelper;
 
 	public Object getAttribute(String key, Configuration config, Map objectModel)
 			throws ConfigurationException {
 		Object result = null;
 		Request request = ObjectModelHelper.getRequest(objectModel);
-		UserInfo userInfo = (UserInfo) request.getAttribute(LanewebConstants.USER_INFO);
-		if (userInfo == null) {
-			Session session = request.getSession(true);
-			userInfo = (UserInfo) session.getAttribute(LanewebConstants.USER_INFO);
-			if (userInfo == null) {
-				userInfo = new UserInfo();
-				session.setAttribute(LanewebConstants.USER_INFO, userInfo);
-			}
-			request.setAttribute(LanewebConstants.USER_INFO, userInfo);
-				userInfo.update(objectModel, getLogger());
-			}
+		UserInfo userInfo = userInfoHelper.getUserInfo(request);
+		
 		if (LanewebConstants.PROXY_LINKS.equals(key)) {
 			String ip = request.getRemoteAddr();
 			// mod_proxy puts the real remote address in an x-forwarded-for
@@ -129,6 +125,10 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 			}
 		}
 		return false;
+	}
+
+	public void service(ServiceManager serviceManager) throws ServiceException {
+		userInfoHelper = (UserInfoHelper) serviceManager.lookup(UserInfoHelper.ROLE);
 	}
 
 }

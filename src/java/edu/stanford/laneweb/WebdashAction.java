@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.parameters.Parameters;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.acting.ServiceableAction;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
@@ -13,28 +15,20 @@ import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
 import org.apache.cocoon.environment.SourceResolver;
 
-public class WebdashAction extends ServiceableAction implements  Initializable{
+public class WebdashAction extends ServiceableAction{
 
-
+	UserInfoHelper userInfoHelper = null;
 	WebDashLogin webDashLogin = null;
 	
 	
 	public Map act(Redirector redirector, SourceResolver sourceResolver, Map objectModel, String string, Parameters param) throws Exception {
 		
 		Request request = ObjectModelHelper.getRequest(objectModel);
-		UserInfo userInfo = (UserInfo) request.getAttribute(LanewebConstants.USER_INFO);
-		if (userInfo == null) {
-			Session session = request.getSession(true);
-			userInfo = (UserInfo) session.getAttribute(LanewebConstants.USER_INFO);
-			if (userInfo == null) {
-				userInfo = new UserInfo();
-				session.setAttribute(LanewebConstants.USER_INFO, userInfo);
-			}
-			request.setAttribute(LanewebConstants.USER_INFO, userInfo);
-			userInfo.update(objectModel, getLogger());
-		}
+	
+		UserInfo userInfo = userInfoHelper.getUserInfo(request);
+		
 		LDAPPerson ldapPerson = userInfo.getLdapPerson(); 
-		if(ldapPerson == null)
+		if( userInfo == null ||  userInfo.getLdapPerson() == null)
 			throw new RuntimeException("Ladp user not found");
 
 		String url = webDashLogin.getEncodedUrl(ldapPerson);
@@ -42,11 +36,17 @@ public class WebdashAction extends ServiceableAction implements  Initializable{
 		return null;
 	}
 
-
-	public void initialize() throws Exception {
-		webDashLogin = (WebDashLogin) this.manager.lookup(WebDashLogin.ROLE);
-	}
 	
+
+	@Override
+	public void service(ServiceManager manager) throws ServiceException {
+		super.service(manager);
+		webDashLogin = (WebDashLogin) manager.lookup(WebDashLogin.ROLE);
+		userInfoHelper = (UserInfoHelper) manager.lookup(UserInfoHelper.ROLE);
+
+	}
+
+
 	
 	
 }

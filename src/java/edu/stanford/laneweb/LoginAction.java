@@ -8,34 +8,26 @@ import java.util.Map;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.acting.AbstractAction;
+import org.apache.cocoon.acting.ServiceableAction;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
 import org.apache.cocoon.environment.SourceResolver;
 
-public class LoginAction extends AbstractAction implements Parameterizable  {
+public class LoginAction extends ServiceableAction implements Parameterizable  {
 	
 	private String proxyURL;
-
+	private UserInfoHelper userInfoHelper = null;
 	
 	public Map act(Redirector redirector, SourceResolver resolver,
 			Map objectModel, String source, Parameters params) throws ProcessingException, IOException, SystemException {
 		Request request = ObjectModelHelper.getRequest(objectModel);
-		UserInfo userInfo = (UserInfo) request.getAttribute(LanewebConstants.USER_INFO);
-		if (userInfo == null) {
-			Session session = request.getSession(true);
-			userInfo = (UserInfo) session.getAttribute(LanewebConstants.USER_INFO);
-			if (userInfo == null) {
-				userInfo = new UserInfo();
-				session.setAttribute(LanewebConstants.USER_INFO, userInfo);
-			}
-			request.setAttribute(LanewebConstants.USER_INFO, userInfo);
-			userInfo.update(objectModel, getLogger());
-		}
-
+		UserInfo userInfo = userInfoHelper.getUserInfo(request); 
 		String sunetid = userInfo.getSunetId();
 		if (sunetid == null) {
 			throw new ProcessingException("null sunetid");
@@ -63,4 +55,13 @@ public class LoginAction extends AbstractAction implements Parameterizable  {
 	public void parameterize(Parameters params) throws ParameterException {
 		this.proxyURL = params.getParameter("proxy-url","http://laneproxy.stanford.edu/login?");
 	}
+	
+
+	@Override
+	public void service(ServiceManager manager) throws ServiceException {
+		super.service(manager);
+		userInfoHelper = (UserInfoHelper) manager.lookup(UserInfoHelper.ROLE);
+	}
+
+
 }

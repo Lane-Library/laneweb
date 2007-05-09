@@ -1,5 +1,9 @@
 <role-list>
     <role
+        name="edu.stanford.laneweb.UserInfoHelper"
+        shorthand="user-info-helper"
+        default-class="edu.stanford.laneweb.UserInfoHelperImpl"/>
+    <role
         name="edu.stanford.laneweb.WebDashLogin"
         shorthand="webdash-login"
         default-class="edu.stanford.laneweb.WebDashLoginImpl"/>
