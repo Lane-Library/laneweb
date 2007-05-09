@@ -159,6 +159,9 @@
               <xsl:when test="not(following-sibling::sql:row) or following-sibling::sql:row[1]/sql:version_id != $version_id">
                   <xsl:variable name="proxy_class">
                       <xsl:choose>
+                          <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
+                          <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
+                          <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
                           <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
                           <xsl:otherwise>noproxy</xsl:otherwise>
                       </xsl:choose>
@@ -200,6 +203,9 @@
                       <xsl:for-each select="self::sql:row[sql:label != 'Get Password'] | following-sibling::sql:row[position() &lt; 26 and sql:version_id = $version_id and sql:label != 'Get Password']">
                           <xsl:variable name="proxy_class">
                               <xsl:choose>
+                                  <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
+                                  <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
+                                  <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
                                   <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
                                   <xsl:otherwise>noproxy</xsl:otherwise>
                               </xsl:choose>
@@ -256,13 +262,16 @@
     
     <xsl:template name="multiple-links">
         <xsl:param name="links"/>
-        <xsl:variable name="proxy_class">
-            <xsl:choose>
-                <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
-                <xsl:otherwise>noproxy</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
         <xsl:for-each select="$links">
+            <xsl:variable name="proxy_class">
+                <xsl:choose>
+                    <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
+                    <xsl:otherwise>noproxy</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
             <li><a href="{sql:url}" title="{concat(sql:title,':',sql:label)}" class="{$proxy_class}">
                 <xsl:choose>
                     <xsl:when test="string-length(sql:label) &gt; 0">
@@ -289,6 +298,9 @@
         <xsl:for-each select="$links[not(sql:label = 'Get Password')]">
             <xsl:variable name="proxy_class">
                 <xsl:choose>
+                    <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
                     <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
                     <xsl:otherwise>noproxy</xsl:otherwise>
                 </xsl:choose>
