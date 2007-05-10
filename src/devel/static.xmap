@@ -220,16 +220,6 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.ppt">
-                <map:select type="resource-exists">
-                    <map:when test="content/{1}.ppt">
-                        <map:read type="resource" src="content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
-                    </map:otherwise>
-                </map:select>
-            </map:match>
             <map:match type="wildcard" pattern="**.swf">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.swf">
@@ -247,6 +237,26 @@
                     </map:when>
                     <map:otherwise>
                         <map:read type="resource" src="{defaults:live-base}/content/{1}.wmv" mime-type="audio/x-ms-wmv"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.ppt">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.ppt">
+                        <map:read type="resource" src="content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="resource" src="{defaults:live-base}/content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.avi">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.avi">
+                        <map:read type="resource" src="content/{1}.avi" mime-type="video/x-msvideo"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="resource" src="{defaults:live-base}/content/{1}.avi" mime-type="video/x-msvideo"/>
                     </map:otherwise>
                 </map:select>
             </map:match>

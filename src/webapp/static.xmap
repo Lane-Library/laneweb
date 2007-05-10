@@ -94,17 +94,23 @@
                 <map:read type="resource" src="{defaults:live-base}/content/{1}.dot"
                     mime-type="application/msword"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.ppt">
-                <map:read type="resource" src="{defaults:live-base}/content/{1}.ppt"
-                    mime-type="application/vnd.ms-powerpoint"/>
-            </map:match>
             <map:match type="wildcard" pattern="**.swf">
                 <map:read type="resource" src="{defaults:live-base}/content/{1}.swf"
                     mime-type="application/x-shockwave-flash"/>
             </map:match>
+        </map:pipeline>
+        <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="**.wmv">
                 <map:read type="resource" src="{defaults:live-base}/content/{1}.wmv"
                     mime-type="audio/x-ms-wmv"/>
+            </map:match>
+            <map:match type="wildcard" pattern="**.ppt">
+                <map:read type="resource" src="{defaults:live-base}/content/{1}.ppt"
+                    mime-type="application/vnd.ms-powerpoint"/>
+            </map:match>
+            <map:match type="wildcard" pattern="**.avi">
+                <map:read type="resource" src="{defaults:live-base}/content/{1}.avi"
+                    mime-type="video/x-msvideo"/>
             </map:match>
         </map:pipeline>
     </map:pipelines>
