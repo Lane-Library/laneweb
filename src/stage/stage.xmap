@@ -14,7 +14,7 @@
             <map:match type="wildcard" pattern="extensions/**">
                 <map:mount uri-prefix="extensions" check-reload="no" src="{defaults:stage-base}/extensions.xmap"/>
             </map:match>
-            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv)$">
+            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv|avi)$">
                 <map:mount uri-prefix="" check-reload="yes" src="{defaults:stage-base}/static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="eresources/**">
