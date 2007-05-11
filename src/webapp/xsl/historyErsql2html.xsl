@@ -76,6 +76,7 @@
                     <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
                     <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
                     <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'eLane.stanford.edu')">noproxy</xsl:when>
                     <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
                     <xsl:otherwise>noproxy</xsl:otherwise>
                 </xsl:choose>
@@ -162,6 +163,7 @@
                           <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
                           <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
                           <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
+                          <xsl:when test="contains(sql:url,'eLane.stanford.edu')">noproxy</xsl:when>
                           <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
                           <xsl:otherwise>noproxy</xsl:otherwise>
                       </xsl:choose>
@@ -206,6 +208,7 @@
                                   <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
                                   <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
                                   <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
+                                  <xsl:when test="contains(sql:url,'eLane.stanford.edu')">noproxy</xsl:when>
                                   <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
                                   <xsl:otherwise>noproxy</xsl:otherwise>
                               </xsl:choose>
@@ -268,6 +271,7 @@
                     <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
                     <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
                     <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'eLane.stanford.edu')">noproxy</xsl:when>
                     <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
                     <xsl:otherwise>noproxy</xsl:otherwise>
                 </xsl:choose>
@@ -301,6 +305,7 @@
                     <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
                     <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
                     <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'eLane.stanford.edu')">noproxy</xsl:when>
                     <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
                     <xsl:otherwise>noproxy</xsl:otherwise>
                 </xsl:choose>
