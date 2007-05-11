@@ -13,7 +13,8 @@
               <title>laneconnex search results</title>
           </head>
           <body>
-          <xsl:if test="sql:row">
+      <xsl:choose>
+          <xsl:when test="sql:row">
               <dl class="searchResults">
                   <xsl:apply-templates select="sql:row[sql:ltitle = $ltitle and not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title)]"/>
                   <xsl:apply-templates select="sql:row[not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id and preceding-sibling::sql:row[1]/sql:title = sql:title) and sql:ltitle != $ltitle]"/>
@@ -21,7 +22,22 @@
               <xsl:if test="count(sql:row) &gt; 20">
                   <a style="margin-left:-3px;" href="#"><img src="/graphics/icons/arrowUpTransp.gif" alt="up" border="0"/> Back to top</a>
               </xsl:if>
-          </xsl:if>
+          </xsl:when>
+<!--          <xsl:when test="$a != ''"><div>
+              No results for 
+              <xsl:choose>
+                  <xsl:when test="$t = 'ej'">eJournals</xsl:when>
+                  <xsl:when test="$t = 'cc'">Calculators</xsl:when>
+                  <xsl:when test="$t = 'book'">Books</xsl:when>
+                  <xsl:when test="$t = 'database'">Databases</xsl:when>
+              </xsl:choose> beginning with
+              <xsl:choose>
+                  <xsl:when test="$a = '#'">non alpha character.</xsl:when>
+                  <xsl:otherwise><xsl:value-of select="$a"/>.</xsl:otherwise>
+              </xsl:choose>
+              Try the search box above or <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;PAGE=First">Lane's Catalog</a>
+          </div></xsl:when>-->
+      </xsl:choose>
           </body>
       </html>
   </xsl:template>
@@ -55,6 +71,15 @@
               </xsl:choose>
           </xsl:when>
         <xsl:otherwise>
+            <xsl:variable name="proxy_class">
+                <xsl:choose>
+                    <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
+                    <xsl:otherwise>noproxy</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
             <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
             <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
             <!--this is to strip server from faqs, kind of a hack -->
@@ -76,7 +101,7 @@
                 </xsl:if>
             </xsl:variable>
             
-            <li><a href="{$url}" title="{$title-publisher}">
+            <li><a href="{$url}" title="{$title-publisher}" class="{$proxy_class}">
                 <xsl:choose>
                     <xsl:when test="$holdings-length &gt; 0 and $dates-length &gt; 0">
                         <xsl:apply-templates select="sql:holdings"/>, <xsl:value-of select="sql:dates"/>
@@ -132,6 +157,15 @@
           <xsl:choose>
               <xsl:when test="preceding-sibling::sql:row[1]/sql:version_id = $version_id"/>
               <xsl:when test="not(following-sibling::sql:row) or following-sibling::sql:row[1]/sql:version_id != $version_id">
+                  <xsl:variable name="proxy_class">
+                      <xsl:choose>
+                          <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
+                          <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
+                          <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
+                          <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
+                          <xsl:otherwise>noproxy</xsl:otherwise>
+                      </xsl:choose>
+                  </xsl:variable>
                   <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
                   <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
                   <xsl:variable name="title-publisher">
@@ -142,7 +176,7 @@
                       </xsl:if>
                   </xsl:variable>
                   <li>
-                      <a href="{sql:url}" title="{$title-publisher}">
+                      <a href="{sql:url}" title="{$title-publisher}" class="{$proxy_class}">
                           <xsl:choose>
                               <xsl:when test="$holdings-length &gt; 0 and $dates-length &gt; 0">
                                   <xsl:apply-templates select="sql:holdings"/>, <xsl:value-of select="sql:dates"/>
@@ -167,6 +201,15 @@
               </xsl:when>
               <xsl:otherwise>
                       <xsl:for-each select="self::sql:row[sql:label != 'Get Password'] | following-sibling::sql:row[position() &lt; 26 and sql:version_id = $version_id and sql:label != 'Get Password']">
+                          <xsl:variable name="proxy_class">
+                              <xsl:choose>
+                                  <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
+                                  <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
+                                  <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
+                                  <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
+                                  <xsl:otherwise>noproxy</xsl:otherwise>
+                              </xsl:choose>
+                          </xsl:variable>
                           <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
                           <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
                           <xsl:variable name="title-publisher">
@@ -176,7 +219,7 @@
                                   <xsl:value-of select="sql:publisher"/>
                               </xsl:if>
                           </xsl:variable>
-                          <li><a href="{sql:url}" title="{$title-publisher}">
+                          <li><a href="{sql:url}" title="{$title-publisher}" class="{$proxy_class}">
                               <xsl:choose>
                                   <xsl:when test="preceding-sibling::sql:row[1]/sql:label = 'Get Password'">
                                       <xsl:choose>
@@ -220,7 +263,16 @@
     <xsl:template name="multiple-links">
         <xsl:param name="links"/>
         <xsl:for-each select="$links">
-            <li><a href="{sql:url}" title="{concat(sql:title,':',sql:label)}">
+            <xsl:variable name="proxy_class">
+                <xsl:choose>
+                    <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
+                    <xsl:otherwise>noproxy</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            <li><a href="{sql:url}" title="{concat(sql:title,':',sql:label)}" class="{$proxy_class}">
                 <xsl:choose>
                     <xsl:when test="string-length(sql:label) &gt; 0">
                         <xsl:value-of select="sql:label"/>
@@ -244,9 +296,18 @@
     <xsl:template name="one-and-password">
         <xsl:param name="links"/>
         <xsl:for-each select="$links[not(sql:label = 'Get Password')]">
+            <xsl:variable name="proxy_class">
+                <xsl:choose>
+                    <xsl:when test="contains(sql:url,'lmldb.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'cifdb.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="contains(sql:url,'elane.stanford.edu')">noproxy</xsl:when>
+                    <xsl:when test="sql:proxy = 'T'">proxy</xsl:when>
+                    <xsl:otherwise>noproxy</xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
             <xsl:variable name="holdings-length" select="string-length(sql:holdings)"/>
             <xsl:variable name="dates-length" select="string-length(sql:dates)"/>
-            <li><a href="{sql:url}" title="{concat(sql:title,':',sql:label)}">
+            <li><a href="{sql:url}" title="{concat(sql:title,':',sql:label)}" class="{$proxy_class}">
                 <xsl:choose>
                     <xsl:when test="$holdings-length &gt; 0 and $dates-length &gt; 0">
                         <xsl:apply-templates select="sql:holdings"/>, <xsl:value-of select="sql:dates"/>
