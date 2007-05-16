@@ -48,12 +48,18 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 
 
 	public String getEncodedUrl(LDAPPerson ldapPerson) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException {
-		String mail = URLEncoder.encode( ldapPerson.getMail() , "UTF-8"); 
+		
 		String fullName = URLEncoder.encode( ldapPerson.getDisplayName(), "UTF-8");
 		String affiliation =  getSubGroup(ldapPerson);
 		StringBuffer parameters = new StringBuffer();
 		parameters.append("email=");
-		parameters.append(mail);
+		
+		if(ldapPerson.getMail() != null)
+		{
+			String mail = URLEncoder.encode( ldapPerson.getMail() , "UTF-8");
+			parameters.append(mail);
+			
+		}
 		parameters.append("&enddate=".concat(getEndDate()));
 		parameters.append("&fullname=".concat(fullName));
 		parameters.append("&group=".concat(groupName));
