@@ -173,7 +173,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="search/*">
-                <map:generate type="xml" src="cocoon:/error.html"/>
+                <map:generate type="file" src="cocoon:/error.html"/>
                 <map:serialize type="xhtml" status-code="503"/>
             </map:match>
             <map:match type="wildcard" pattern="cookiesFetch.html">
