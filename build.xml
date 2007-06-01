@@ -54,8 +54,23 @@
             </fileset>
             <filterset filtersfile="project.properties" begintoken="***" endtoken="***"/>
         </copy>
-    </target>
-    <target name="webapp" depends="compile, prepare-webapp,production,stage"/>
+     </target>
+	
+	<target name="robotsMessage">
+    	<echo level="warning"   >
+    	**************************************************************************
+    	  			If NOT PRODUCTION server,
+    		
+    		Please edit the robots.txt  ( target/laneweb/robots.txt )
+    			
+    		User-agent: *
+    		Disallow: /
+   
+    	**************************************************************************
+    	</echo>
+	</target>
+	
+    <target name="webapp" depends="compile, prepare-webapp,production,stage,robotsMessage"/>
     <target name="prepare-webapp">
         <copy todir="${webappdir}">
             <fileset dir="src/webapp" excludes="META-INF/context.xml"/>

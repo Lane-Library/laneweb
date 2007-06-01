@@ -1,3 +1,12 @@
 User-agent: *
 Crawl-delay: 7
 Disallow: /search.html
+Disallow: /stage/
+Disallow: /lohara/
+Disallow: /ceyates/
+Disallow: /ryanmax/
+Disallow: /tpod/
+Disallow: /alainb/
+Disallow: /olgary/
+Disallow: /lmurdock/
+Disallow: /rzwies/
