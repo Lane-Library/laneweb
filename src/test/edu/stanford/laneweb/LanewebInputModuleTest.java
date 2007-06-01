@@ -31,6 +31,18 @@ public class LanewebInputModuleTest extends TestCase {
     }
     
     public void testAFewIPs() throws ConfigurationException {
+    	
+    	//ITS VPN 
+    	assertTrue((this.module.proxyLinks("171.66.16.0")));
+    	assertFalse((this.module.proxyLinks("171.66.15.255")));
+    	assertTrue((this.module.proxyLinks("171.66.19.230")));
+    	assertTrue((this.module.proxyLinks("171.66.20.55")));
+    	assertTrue((this.module.proxyLinks("171.66.22.10")));
+    	assertTrue((this.module.proxyLinks("171.66.30.55")));
+    	assertTrue((this.module.proxyLinks("171.66.31.255")));
+    	assertFalse((this.module.proxyLinks("171.66.32.0")));
+    	
+    	//Med School VPN
     	assertTrue((this.module.proxyLinks("64.9.230.210")));
     	assertTrue((this.module.proxyLinks("171.65.44.22")));
     	assertTrue((this.module.proxyLinks("171.65.45.22")));

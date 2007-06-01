@@ -2,26 +2,22 @@ package edu.stanford.laneweb;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
-import static org.easymock.EasyMock.isA;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
 import junit.framework.TestCase;
 
-import org.apache.avalon.framework.logger.Logger;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
-
-import com.sun.java_cup.internal.version;
 
 public class UserInfoHelperTest extends TestCase {
 
 	private Request request;
 	private String ip;
 	private String sunetid;
-	private Logger log; 
 	private LdapClient ldapClient;
 	private Session session;
 	private UserInfoHelper userInfoHelper;

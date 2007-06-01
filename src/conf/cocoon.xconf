@@ -6,8 +6,8 @@
   <input-modules>
     <component-instance logger="core.modules.input.laneweb" name="laneweb" class="edu.stanford.laneweb.LanewebInputModule">
         <noproxy-regex>^171\.6[4-7]\.\S+</noproxy-regex>
-        <!-- VPN 171.65.16.0 - 171.65.23.255 -->
-        <proxy-regex>^171\.66\.(1[6-9]|2[0-3])\.\S+</proxy-regex>
+        <!-- VPN 171.65.16.0 - 171.65.31.255 -->
+        <proxy-regex>^171\.66\.(1[6-9]|2[0-9]|3[0-1])\.\S+</proxy-regex>
         <!-- hospital 171.65.44.0 - 171.65.45.255 -->
         <proxy-regex>^171\.65\.4[4-5]\.\S+</proxy-regex>
         <!-- hospital 171.65.56.0 - 171.65.59.255 -->
