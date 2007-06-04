@@ -1,6 +1,6 @@
 file.encoding=UTF-8
 
-maven.repo.remote=http://repo1.maven.org/maven,http://www.stanford.edu/~ceyates/maven
+maven.repo.remote=http://repo1.maven.org/maven,http://irt-lanelocal.stanford.edu/maven
 
 maven.changelog.factory=org.apache.maven.svnlib.SvnChangeLogFactory
 
