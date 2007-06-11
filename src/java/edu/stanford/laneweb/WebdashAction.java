@@ -1,10 +1,7 @@
 package edu.stanford.laneweb;
 
-import edu.stanford.irt.directory.LDAPPerson;
-
 import java.util.Map;
 
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -12,8 +9,9 @@ import org.apache.cocoon.acting.ServiceableAction;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.Request;
-import org.apache.cocoon.environment.Session;
 import org.apache.cocoon.environment.SourceResolver;
+
+import edu.stanford.irt.directory.LDAPPerson;
 
 public class WebdashAction extends ServiceableAction{
 
