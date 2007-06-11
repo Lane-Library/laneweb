@@ -35,7 +35,7 @@
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="txt-resource" src="{defaults:live-base}/resources/javascript/{1}.js"
+                        <map:read type="txt-resource" src="context://javascript/{1}.js"
                             mime-type="application/x-javascript">
                             <map:parameter name="path" value="{request:contextPath}/your-sunet-id"/>
                         </map:read>
