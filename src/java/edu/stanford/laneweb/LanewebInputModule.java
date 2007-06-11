@@ -20,7 +20,6 @@ import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.components.modules.input.InputModule;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
-import org.apache.cocoon.environment.Session;
 
 /**
  * @author ceyates
