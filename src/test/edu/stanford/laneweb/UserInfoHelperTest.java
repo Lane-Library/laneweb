@@ -56,9 +56,7 @@ public class UserInfoHelperTest extends TestCase {
 		userInfoHelper.setLdapClient(this.ldapClient);
 
 	}
-
-
-
+	
 	public void testGetUserInfo() {
 		expect(this.request.getRemoteAddr()).andReturn(this.ip);
 		replay(this.request);	
