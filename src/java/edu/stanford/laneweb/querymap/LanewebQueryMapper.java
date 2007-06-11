@@ -19,7 +19,6 @@ import edu.stanford.irt.querymap.ClasspathDescriptorToResource;
 import edu.stanford.irt.querymap.DescriptorManager;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.QueryToDescriptor;
-import edu.stanford.irt.querymap.ResourceMap;
 
 /**
  * @author ceyates
