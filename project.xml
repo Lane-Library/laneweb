@@ -325,7 +325,6 @@
             <groupId>bcel</groupId>
             <artifactId>bcel</artifactId>
             <version>5.2</version>
-            <!--<version>20040329</version>-->
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -378,6 +377,15 @@
             <artifactId>servlet-api</artifactId>
             <version>2.4</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>querymap</groupId>
+            <artifactId>querymap</artifactId>
+            <version>0.3.0</version>
+            <type>jar</type>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
         </dependency>
         <dependency>
             <groupId>xalan</groupId>
