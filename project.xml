@@ -351,7 +351,7 @@
         <dependency>
             <groupId>jtidy</groupId>
             <artifactId>jtidy</artifactId>
-            <version>4aug2000r7-dev</version>
+            <version>4aug2000r7-nodom</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
