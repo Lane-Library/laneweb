@@ -1,7 +1,5 @@
 package edu.stanford.laneweb;
 
-import edu.stanford.irt.SystemException;
-
 import java.io.IOException;
 import java.util.Map;
 
@@ -11,13 +9,13 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.acting.AbstractAction;
 import org.apache.cocoon.acting.ServiceableAction;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.Request;
-import org.apache.cocoon.environment.Session;
 import org.apache.cocoon.environment.SourceResolver;
+
+import edu.stanford.irt.SystemException;
 
 public class LoginAction extends ServiceableAction implements Parameterizable  {
 	
