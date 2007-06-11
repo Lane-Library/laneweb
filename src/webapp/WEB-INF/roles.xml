@@ -7,4 +7,16 @@
         name="edu.stanford.laneweb.WebDashLogin"
         shorthand="webdash-login"
         default-class="edu.stanford.laneweb.WebDashLoginImpl"/>
+    <role
+        name="edu.stanford.laneweb.querymap.QueryMapper"
+        shorthand="query-map"
+        default-class="edu.stanford.laneweb.querymap.LanewebQueryMapper"/>
+    <role
+        name="edu.stanford.laneweb.querymap.DescriptorManager"
+        shorthand="descriptor-manager"
+        default-class="edu.stanford.laneweb.querymap.LanewebDescriptorManager"/>
+    <role
+        name="edu.stanford.laneweb.querymap.QueryToDescriptor"
+        shorthand="query-to-descriptor"
+        default-class="edu.stanford.laneweb.querymap.QueryToDescriptor"/>
 </role-list>
