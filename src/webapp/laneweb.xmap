@@ -20,8 +20,6 @@
                 src="org.apache.cocoon.generation.StatusGenerator" pool-max="4" pool-min="2" pool-grow="2"/>
             <map:generator name="html-proxy" src="edu.stanford.laneweb.JTidyProxyGenerator"
                 logger="sitemap.generation.html-proxy" pool-min="16" pool-max="32" pool-grow="4"/>
-            <map:generator name="query-map" src="edu.stanford.laneweb.querymap.QueryMapGenerator"
-                logger="sitemap.generation.query-map" pool-min="16" pool-max="32" pool-grow="4"/>
         </map:generators>
         <map:transformers default="xsltc">
             <map:transformer name="xsltc" logger="sitemap.transformer.xsltc"
@@ -118,12 +116,6 @@
              <map:match pattern="secure/webdash.html">
                 <map:act type="webdashAction"/>
              </map:match>
-            <map:match type="wildcard" pattern="services/querymap">
-                <map:generate type="query-map">
-                    <map:parameter name="query" value="{request-param:q}"/>
-                </map:generate>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="">
                 <map:redirect-to uri="{request:contextPath}/index.html"/>
             </map:match>
@@ -176,6 +168,9 @@
             </map:match>
             <map:match type="wildcard" pattern="content/**">
                 <map:mount uri-prefix="content" check-reload="no" src="content.xmap"/>
+            </map:match>
+            <map:match type="wildcard" pattern="applications/*">
+                <map:mount uri-prefix="applications" check-reload="no" src="applications.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="admin/status">
                 <map:generate type="status"/>
