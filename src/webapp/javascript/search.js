@@ -38,7 +38,7 @@ _a=document.getElementById(eLibraryTabIDs[i]+"SearchTagline").innerHTML;
 }
 var _b="";
 if(isDefined(window,"dcsMultiTrack")){
-_b="dcsMultiTrack('WT.ti','LaneConnex search "+eLibraryTabIDs[i]+" tab','DCSext.keywords','cancer','DCSext.tab_view','"+eLibraryTabIDs[i]+"');";
+_b="dcsMultiTrack('WT.ti','LaneConnex search "+eLibraryTabIDs[i]+" tab','DCSext.keywords','"+keywords+"','DCSext.tab_view','"+eLibraryTabIDs[i]+"');";
 }
 _8=_8+"<div id=\""+eLibraryTabIDs[i]+"Tab\" class=\"eLibraryTab\" title=\""+_a+"\" name=\""+eLibraryTabIDs[i]+"\" onclick=\"javascript:showeLibraryTab('"+eLibraryTabIDs[i]+"');"+_b+"\">"+eLibraryTabLabels[i]+"<br /><span class=\"tabHitCount\">"+intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]])+"</span></div>";
 }

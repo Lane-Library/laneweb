@@ -57,7 +57,7 @@ function initeLibraryTabs(){
 		}
 		var webtrendsCall = ''; // add webtrends call only if dcsMultiTrack() is defined
 		if(isDefined(window,'dcsMultiTrack')){
-			webtrendsCall = "dcsMultiTrack('WT.ti','LaneConnex search " + eLibraryTabIDs[i] + " tab','DCSext.keywords','cancer','DCSext.tab_view','" + eLibraryTabIDs[i] + "');";
+			webtrendsCall = "dcsMultiTrack('WT.ti','LaneConnex search " + eLibraryTabIDs[i] + " tab','DCSext.keywords','"+keywords+"','DCSext.tab_view','" + eLibraryTabIDs[i] + "');";
 		}
 		bar = bar + '<div id="' + eLibraryTabIDs[i] + 'Tab" class="eLibraryTab" title="' + elementContainerForDisplayText + '" name="' + eLibraryTabIDs[i] + '" onclick="javascript:showeLibraryTab(\'' + eLibraryTabIDs[i] + '\');' + webtrendsCall + '">' + eLibraryTabLabels[i] + '<br /><span class="tabHitCount">' + intToNumberString(eLibraryResultCounts[eLibraryTabIDs[i]]) + '</span></div>';
 	}
