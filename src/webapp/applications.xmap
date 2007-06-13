@@ -21,7 +21,7 @@
                         <map:part src="cocoon://content/templates/search/querymap.xml"/>
                     </map:aggregate>
                     <map:transform type="xsltc" src="context://xsl/querymap2html.xsl"/>
-                    <map:serialize type="xhtml"/>
+                    <map:serialize type="xml"/>
                 </map:match>
             </map:match>
         </map:pipeline>
