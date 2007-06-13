@@ -5,9 +5,6 @@
             <map:match type="wildcard" pattern="TMP**">
                 <map:read src="{defaults:stage-base}/content/TMP{1}" mime-type="text/html"/>
             </map:match>
-            <map:match pattern="secure/login.html">
-                <map:act type="loginAction"/>
-            </map:match>
             <map:match type="wildcard" pattern="javascript/yui/**">
                 <map:mount uri-prefix="javascript/yui" check-reload="no" src="{defaults:stage-base}/yui.xmap"/>
             </map:match>
@@ -22,6 +19,12 @@
             </map:match>
             <map:match type="wildcard" pattern="content/**">
                 <map:mount uri-prefix="content" check-reload="yes" src="{defaults:stage-base}/content.xmap"/>
+            </map:match>
+            <map:match pattern="secure/login.html">
+                <map:act type="loginAction"/>
+            </map:match>
+            <map:match pattern="secure/webdash.html">
+                <map:act type="webdashAction"/>
             </map:match>
             <map:match type="wildcard" pattern="cookiesFetch.html">
                 <map:generate type="file" src="{defaults:stage-base}/content/cookiesFetch.html"/>

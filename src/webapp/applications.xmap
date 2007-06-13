@@ -8,11 +8,21 @@
     </map:components>
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match pattern="querymap">
-                <map:generate type="query-map">
-                    <map:parameter name="query" value="{request-param:q}"/>
-                </map:generate>
-                <map:serialize type="xml"/>
+            <map:match pattern="querymap/*">
+                <map:match pattern="querymap/map">
+                    <map:generate type="query-map">
+                        <map:parameter name="query" value="{request-param:q}"/>
+                    </map:generate>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match pattern="querymap/html">
+                    <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
+                        <map:part src="cocoon:/querymap/map"/>
+                        <map:part src="cocoon://content/templates/search/querymap.xml"/>
+                    </map:aggregate>
+                    <map:transform type="xsltc" src="context://xsl/querymap2html.xsl"/>
+                    <map:serialize type="xhtml"/>
+                </map:match>
             </map:match>
         </map:pipeline>
     </map:pipelines>

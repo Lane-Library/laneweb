@@ -2,14 +2,10 @@ package edu.stanford.laneweb;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Enumeration;
 
-import org.apache.avalon.framework.service.ServiceException;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
@@ -20,13 +16,9 @@ import org.apache.cocoon.xml.dom.DOMStreamer;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
-import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.excalibur.xml.sax.SAXParser;
 import org.w3c.tidy.Tidy;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class JTidyProxyGenerator extends WebServiceProxyGenerator {
@@ -123,10 +115,10 @@ public class JTidyProxyGenerator extends WebServiceProxyGenerator {
         method.setFollowRedirects(true);
 
         // copy request parameters and merge with URL parameters
-        Request request = ObjectModelHelper.getRequest(objectModel);
+//        Request request = ObjectModelHelper.getRequest(objectModel);
 
-        ArrayList paramList = new ArrayList();
-        Enumeration enumeration = request.getParameterNames();
+//        ArrayList paramList = new ArrayList();
+//        Enumeration enumeration = request.getParameterNames();
 //        while (enumeration.hasMoreElements()) {
 //            String pname = (String)enumeration.nextElement();
 //            String[] paramsForName = request.getParameterValues(pname);

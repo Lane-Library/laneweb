@@ -110,12 +110,6 @@
     </map:components>
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match pattern="secure/login.html">
-                <map:act type="loginAction"/>
-            </map:match>
-             <map:match pattern="secure/webdash.html">
-                <map:act type="webdashAction"/>
-             </map:match>
             <map:match type="wildcard" pattern="">
                 <map:redirect-to uri="{request:contextPath}/index.html"/>
             </map:match>
@@ -169,7 +163,7 @@
             <map:match type="wildcard" pattern="content/**">
                 <map:mount uri-prefix="content" check-reload="no" src="content.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="applications/*">
+            <map:match type="wildcard" pattern="applications/**">
                 <map:mount uri-prefix="applications" check-reload="no" src="applications.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="admin/status">
@@ -184,6 +178,12 @@
             <map:match type="wildcard" pattern="search/*">
                 <map:generate type="file" src="cocoon:/error.html"/>
                 <map:serialize type="xhtml" status-code="503"/>
+            </map:match>
+            <map:match pattern="secure/login.html">
+                <map:act type="loginAction"/>
+            </map:match>
+            <map:match pattern="secure/webdash.html">
+                <map:act type="webdashAction"/>
             </map:match>
             <map:match type="wildcard" pattern="cookiesFetch.html">
                 <map:generate type="file" src="{defaults:live-base}/content/cookiesFetch.html"/>

@@ -11,11 +11,11 @@ class WordData {
 
 public class QueryTranslator {
 
-	Vector reqWords = new Vector();
+	Vector<WordData> reqWords = new Vector<WordData>();
 
-	Vector optWords = new Vector();
+	Vector<WordData> optWords = new Vector<WordData>();
 
-	Vector notWords = new Vector();
+	Vector<WordData> notWords = new Vector<WordData>();
 
 	public static final int required = 1;
 
@@ -57,9 +57,9 @@ public class QueryTranslator {
 		String theWord;
 		String fieldName;
 
-		reqWords = new Vector();
-		optWords = new Vector();
-		notWords = new Vector();
+		reqWords = new Vector<WordData>();
+		optWords = new Vector<WordData>();
+		notWords = new Vector<WordData>();
 
 		while (true) { // Loop over all words
 
@@ -120,9 +120,9 @@ public class QueryTranslator {
 	// surrounds it in braces (to avoid reserved words)
 	// and attaches a WITHIN clause if appropriate.
 
-	private String getWord(Vector words, int pos) {
+	private String getWord(Vector<WordData> words, int pos) {
 		//here I added stuff for handling the wildcard, which doesn't work if in {}
-		String word = ((WordData) words.elementAt(pos)).text;
+		String word = words.elementAt(pos).text;
 		String ts = word.indexOf('%') > -1 ? word : "{" + word + "}";
 //		String ts = "{" + ((WordData) words.elementAt(pos)).text + "}";
 		//not using fieldName at the moment
