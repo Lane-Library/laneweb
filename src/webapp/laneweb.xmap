@@ -207,6 +207,9 @@
             <map:match type="wildcard" pattern="clinician/index.html">
                 <map:redirect-to uri="{request:contextPath}/portals/clinical.html"/>
             </map:match>
+            <map:match type="wildcard" pattern="portals/history/howto/index.html">
+                <map:redirect-to uri="{request:contextPath}/portals/history/index.html?loadTab=howto"/>
+            </map:match>
             <!-- ========================== permenent redirects ============================ -->
             <map:match type="wildcard" pattern="**.html">
                 <map:act type="session-action"/>
