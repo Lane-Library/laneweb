@@ -81,35 +81,37 @@ public class QueryTranslator {
 			// Got a word. Check for required/not wanted flags (+-)
 
 			theWord = input.substring(startWord, p);
-
-			//CY changed this to requred from optional to make it AND logic
-			flag = required;
-			fieldName = "";
-
-			if (theWord.charAt(0) == '+') {
+			//CY bug 11825, don't process zero length string
+			if (theWord.length() > 0) {
+				//CY changed this to requred from optional to make it AND logic
 				flag = required;
-				theWord = theWord.substring(1);
+				fieldName = "";
+
+				if (theWord.charAt(0) == '+') {
+					flag = required;
+					theWord = theWord.substring(1);
+				}
+
+				else if (theWord.charAt(0) == '-') {
+					flag = notwanted;
+					theWord = theWord.substring(1);
+				}
+
+				// Replace * wild cards with %
+
+				theWord = theWord.replace('*', '%');
+
+				// Find field indicator ":"
+
+				pp = theWord.indexOf(":");
+				if (pp > 0) {
+					fieldName = theWord.substring(0, pp);
+					theWord = theWord.substring(pp + 1, theWord.length());
+				}
+
+				addWord(theWord, flag, fieldName);
+
 			}
-
-			else if (theWord.charAt(0) == '-') {
-				flag = notwanted;
-				theWord = theWord.substring(1);
-			}
-
-			// Replace * wild cards with %
-
-			theWord = theWord.replace('*', '%');
-
-			// Find field indicator ":"
-
-			pp = theWord.indexOf(":");
-			if (pp > 0) {
-				fieldName = theWord.substring(0, pp);
-				theWord = theWord.substring(pp + 1, theWord.length());
-			}
-
-			addWord(theWord, flag, fieldName);
-
 			p++;
 			if (p >= input.length())
 				break;
