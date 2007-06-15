@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
-<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"><map:pipelines>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
+    <map:pipelines>
         <map:pipeline type="caching">
             <map:match type="wildcard" pattern="**.ico">
                 <map:read src="{defaults:live-base}/resources/extensions/{1}.ico" mime-type="image/x-icon"/>
