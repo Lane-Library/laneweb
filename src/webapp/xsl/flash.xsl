@@ -22,7 +22,7 @@ if ( hasProductInstall &amp;&amp; !hasRequestedVersion ) {
 	var MMdoctitle = document.title;
 
 	AC_FL_RunContent(
-		"src", "playerProductInstall.swf",
+		"src", "/flash/playerProductInstall.swf",
 		"FlashVars", "MMredirectURL="+MMredirectURL+'&amp;MMplayerType='+MMPlayerType+'&amp;MMdoctitle='+MMdoctitle+"",
 		"width", "550",
 		"height", "300",
