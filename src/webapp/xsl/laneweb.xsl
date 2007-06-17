@@ -96,6 +96,22 @@
     <xsl:template match="h:html[ancestor::h:html]">
         <xsl:apply-templates select="h:body/child::node()"/>
     </xsl:template>
+    
+    <!-- make sure there is not an empty <script/> element -->
+    <xsl:template match="h:script[@src]|h:style[not(@src)]">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()[local-name()!='space']"/>
+            <xsl:text> </xsl:text>
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- disable output escaping for script -->
+    <xsl:template match="h:script">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:value-of select="." disable-output-escaping="yes"/>
+        </xsl:copy>
+    </xsl:template>
    
     <xsl:template match="h:a">
         <xsl:choose>
