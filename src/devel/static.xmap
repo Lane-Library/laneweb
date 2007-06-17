@@ -222,16 +222,6 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.swf">
-                <map:select type="resource-exists">
-                    <map:when test="content/{1}.swf">
-                        <map:read type="resource" src="content/{1}.swf" mime-type="application/x-shockwave-flash"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.swf" mime-type="application/x-shockwave-flash"/>
-                    </map:otherwise>
-                </map:select>
-            </map:match>
             <map:match type="wildcard" pattern="flash/*.swf">
                 <map:select type="resource-exists">
                     <map:when test="resources/flash/{1}.swf">
@@ -239,6 +229,16 @@
                     </map:when>
                     <map:otherwise>
                         <map:read type="resource" src="{defaults:live-base}/resources/flash/{1}.swf" mime-type="application/x-shockwave-flash"/>
+                    </map:otherwise>
+                </map:select>
+            </map:match>
+            <map:match type="wildcard" pattern="**.swf">
+                <map:select type="resource-exists">
+                    <map:when test="content/{1}.swf">
+                        <map:read type="resource" src="content/{1}.swf" mime-type="application/x-shockwave-flash"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="resource" src="{defaults:live-base}/content/{1}.swf" mime-type="application/x-shockwave-flash"/>
                     </map:otherwise>
                 </map:select>
             </map:match>

@@ -5,7 +5,14 @@
     version="1.0">
     
     <xsl:template match="h:object">
-        <xsl:variable name="flash-version" select="h:param[@name='flash-version']/@value"/>
+    	<xsl:variable name="flash-version">
+    		<xsl:choose>
+    			<xsl:when test="h:param[@name='flash-version']">
+    				<xsl:value-of select="h:param[@name='flash-version']/@value"/>
+    			</xsl:when>
+    			<xsl:otherwise>6.0.65</xsl:otherwise>
+    		</xsl:choose>
+    	</xsl:variable>
         <script type="text/javascript">
 <xsl:text disable-output-escaping="yes">
 var hasProductInstall = DetectFlashVer(6, 0, 65);
