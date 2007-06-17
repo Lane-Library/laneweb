@@ -75,6 +75,7 @@ if ( hasProductInstall &amp;&amp; !hasRequestedVersion ) {
 }
 </xsl:text>
        </script>
+    	<noscript><p>This flash object requires javascript.</p></noscript>
     </xsl:template>
     
 </xsl:stylesheet>
