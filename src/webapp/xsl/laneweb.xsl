@@ -4,6 +4,8 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:str="http://exslt.org/strings"
     exclude-result-prefixes="h str">
+    
+    <xsl:include href="flash.xsl"/>
 
     <!--<xsl:strip-space elements="h:html h:head h:body h:div h:form h:map h:select h:table h:tr h:td"/>-->
     

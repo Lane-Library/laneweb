@@ -100,6 +100,10 @@
                 <map:read type="resource" src="{defaults:stage-base}/content/{1}.swf"
                     mime-type="application/x-shockwave-flash"/>
             </map:match>
+            <map:match type="wildcard" pattern="flash/*.swf">
+                <map:read type="resource" src="{defaults:stage-base}/resources/flash/{1}.swf"
+                    mime-type="application/x-shockwave-flash"/>
+            </map:match>
             <map:match type="wildcard" pattern="**.wmv">
                 <map:read type="resource" src="{defaults:stage-base}/content/{1}.wmv"
                     mime-type="audio/x-ms-wmv"/>

@@ -44,8 +44,8 @@
                 <doctype-system>http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd</doctype-system>
                 <encoding>UTF-8</encoding>
                 <indent>yes</indent>
-                <!--<cdata-section-elements>script css</cdata-section-elements>
-                <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>-->
+                <cdata-section-elements>script css</cdata-section-elements>
+                <!--<transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>-->
             </map:serializer>
             <map:serializer name="xml" mime-type="text/xml" logger="sitemap.serializer.xml"
                 src="org.apache.cocoon.serialization.XMLSerializer" pool-max="32">

@@ -100,6 +100,10 @@
                 <map:read type="resource" src="{defaults:live-base}/content/{1}.swf"
                     mime-type="application/x-shockwave-flash"/>
             </map:match>
+            <map:match type="wildcard" pattern="flash/*.swf">
+                <map:read type="resource" src="{defaults:live-base}/resources/flash/{1}.swf"
+                    mime-type="application/x-shockwave-flash"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="**.wmv">
