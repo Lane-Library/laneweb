@@ -98,15 +98,15 @@
     </xsl:template>
     
     <!-- make sure there is not an empty <script/> element -->
-    <xsl:template match="h:script[@src]|h:style[not(@src)]">
+    <xsl:template match="h:script[@src]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[local-name()!='space']"/>
             <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
     
-    <!-- disable output escaping for script -->
-    <xsl:template match="h:script">
+    <!-- disable output escaping for script and style -->
+    <xsl:template match="h:script|h:style[not(@src)]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:value-of select="." disable-output-escaping="yes"/>
