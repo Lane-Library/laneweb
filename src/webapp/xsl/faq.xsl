@@ -51,13 +51,13 @@
                             <xsl:choose>
                                 <xsl:when test="string-length($root-category-string) = 0">
                                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                        href="cocoon:/services/leftmenu_services.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
+                                        href="cocoon:/services/leftmenu_services.html">
                                         <xi:fallback/>
                                     </xi:include>
                                 </xsl:when>
                                 <xsl:otherwise>
                                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                        href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
+                                        href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html">
                                         <xi:fallback/>
                                     </xi:include>
                                 </xsl:otherwise>
@@ -145,13 +145,13 @@
                     <xsl:choose>
                         <xsl:when test="string-length($root-category-string) = 0">
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                href="cocoon:/services/leftmenu_services.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
+                                href="cocoon:/services/leftmenu_services.html">
                                 <xi:fallback/>
                             </xi:include>
                         </xsl:when>
                         <xsl:otherwise>
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html#xmlns(h=http://www.w3.org/1999/xhtml)xpointer(/h:html/h:body/*)">
+                                href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html">
                                 <xi:fallback/>
                             </xi:include>
                         </xsl:otherwise>
@@ -161,7 +161,16 @@
                     <h1>
                         <xsl:value-of select="text()"/>
                     </h1>
-                    <xsl:copy-of select="h:ul/h:li[@class='body']/node()"/></td>
+                    <xsl:copy-of select="h:ul/h:li[@class='body']/node()"/>
+                    <p class="tinyfont">
+                        created by <xsl:value-of select="h:ul/h:li[@class='author']"/>
+                        on <xsl:value-of select="h:ul/h:li[@class='created']"/>
+                        <xsl:if test="h:ul/h:li[@class='modified'] != h:ul/h:li[@class='created']">
+                            last modified <xsl:value-of select="h:ul/h:li[@class='modified']"/>
+                        </xsl:if>
+                    </p>
+                </td>
+                
                 <td valign="top" align="right" id="rightColumn">
                     <div class="bSideBox">
                         <h2>FAQs on this topic</h2>
