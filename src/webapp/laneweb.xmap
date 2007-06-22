@@ -199,6 +199,17 @@
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
+            <map:match type="wildcard" pattern="postMethodHelper.html">
+              <map:generate type="request"/>
+                <map:transform type="xsltc" src="context://xsl/postMethodHelper.xsl">
+                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                </map:transform>
+              <map:serialize type="xhtml"/>
+         	</map:match>
+           
+            
             <!-- ========================== permenent redirects ============================ -->
             <map:match type="wildcard" pattern="classes/index.html">
                 <map:redirect-to uri="{request:contextPath}/services/workshops/laneclasses.html"/>
