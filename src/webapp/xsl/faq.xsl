@@ -162,12 +162,8 @@
                         <xsl:value-of select="text()"/>
                     </h1>
                     <xsl:copy-of select="h:ul/h:li[@class='body']/node()"/>
-                    <p style="font-size:xx-small">
-                        created by <xsl:value-of select="h:ul/h:li[@class='author']"/>
-                        on <xsl:value-of select="h:ul/h:li[@class='created']"/>
-                        <xsl:if test="h:ul/h:li[@class='modified'] != h:ul/h:li[@class='created']">
-                            last modified <xsl:value-of select="h:ul/h:li[@class='modified']"/>
-                        </xsl:if>
+                    <p style="font-size:xx-small"><xsl:value-of select="h:ul/h:li[@class='author']"/>,
+                        <xsl:value-of select="h:ul/h:li[@class='modified']"/>
                     </p>
                 </td>
                 
