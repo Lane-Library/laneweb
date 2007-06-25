@@ -28,7 +28,7 @@
     <xsl:param name="proxy-links"/>
   
     <xsl:param name="tab"/>
-	
+    
     <xsl:param name="ticket"/>
 
     <xsl:param name="sunetid"/>
@@ -86,6 +86,16 @@
         <xsl:copy-of select="."/>
     </xsl:template>
     
+    <!-- strip onload event handlers except 100years pages using yui in laneweb.js-->
+    <xsl:template match="h:body/@onload">
+        <xsl:if test="starts-with($request-uri,'100years')">
+            <xsl:copy-of select="."/>
+        </xsl:if>
+    </xsl:template>
+    
+    <!-- strip onunload handlers -->
+    <xsl:template match="h:body/@onunload"/>
+    
     <xsl:template match="comment()">
         <xsl:copy-of select="."/>
         <!--<xsl:if test="contains(.,'[if IE]')">
@@ -106,14 +116,6 @@
             <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
-    
-    <!-- disable output escaping for script and style -->
-    <xsl:template match="h:script|h:style[not(@src)]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:value-of select="." disable-output-escaping="yes"/>
-        </xsl:copy>
-    </xsl:template>
    
     <xsl:template match="h:a">
         <xsl:choose>
@@ -132,44 +134,44 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-			<!-- obfuscate email addresses with JavaSscript -->
+            <!-- obfuscate email addresses with JavaSscript -->
             <xsl:when test="starts-with(@href, 'mailto:')">
-				<xsl:variable name="apostrophe">'</xsl:variable>
-				<xsl:variable name="address">
-					<xsl:text>'+'ma'+''+'il'+'to'+':'</xsl:text>
-			    	<xsl:for-each select="str:tokenize(substring-after(@href,'mailto:'),'')">
-							<xsl:text>+'</xsl:text><xsl:value-of select="."/><xsl:text>'</xsl:text>
-					</xsl:for-each>
-					<xsl:text>+'</xsl:text>
-				</xsl:variable>
-				<xsl:element name="script">
-					<xsl:attribute name="type">text/javascript</xsl:attribute>
-					var link = '<xsl:element name="a">
-						<xsl:copy-of select="@*"/>
-						<xsl:attribute name="href">
-							<xsl:value-of select="$address"/>
-						</xsl:attribute>
-						<xsl:for-each select="*">
-							<xsl:text>'+'</xsl:text>
-							<xsl:apply-templates select="."/>
-						</xsl:for-each>
-						<xsl:text>'</xsl:text>
-				    	<xsl:for-each select="str:tokenize(text(),'')">
-							<xsl:text>+'</xsl:text>
-							<xsl:choose>
-								<xsl:when test=". = $apostrophe">
-									<xsl:text>\'</xsl:text>
-								</xsl:when>
-								<xsl:otherwise>
-									<xsl:value-of select="."/>
-								</xsl:otherwise>
-							</xsl:choose>
-							<xsl:text>'</xsl:text>
-						</xsl:for-each>
-						<xsl:text>+'</xsl:text>
-					</xsl:element>';
-					document.write(link);
-				</xsl:element>
+                <xsl:variable name="apostrophe">'</xsl:variable>
+                <xsl:variable name="address">
+                    <xsl:text>'+'ma'+''+'il'+'to'+':'</xsl:text>
+                    <xsl:for-each select="str:tokenize(substring-after(@href,'mailto:'),'')">
+                            <xsl:text>+'</xsl:text><xsl:value-of select="."/><xsl:text>'</xsl:text>
+                    </xsl:for-each>
+                    <xsl:text>+'</xsl:text>
+                </xsl:variable>
+                <xsl:element name="script">
+                    <xsl:attribute name="type">text/javascript</xsl:attribute>
+                    var link = '<xsl:element name="a">
+                        <xsl:copy-of select="@*"/>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$address"/>
+                        </xsl:attribute>
+                        <xsl:for-each select="*">
+                            <xsl:text>'+'</xsl:text>
+                            <xsl:apply-templates select="."/>
+                        </xsl:for-each>
+                        <xsl:text>'</xsl:text>
+                        <xsl:for-each select="str:tokenize(text(),'')">
+                            <xsl:text>+'</xsl:text>
+                            <xsl:choose>
+                                <xsl:when test=". = $apostrophe">
+                                    <xsl:text>\'</xsl:text>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="."/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:text>'</xsl:text>
+                        </xsl:for-each>
+                        <xsl:text>+'</xsl:text>
+                    </xsl:element>';
+                    document.write(link);
+                </xsl:element>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy>
@@ -350,7 +352,7 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:choose>
-								<xsl:when test="@value='peds' and contains($request-uri,'portals/peds.html')">
+                <xsl:when test="@value='peds' and contains($request-uri,'portals/peds.html')">
                 <!--<xsl:when test="@value='peds' and contains($request-uri,'clinician/peds.html')">-->
                         <xsl:attribute name="selected">selected</xsl:attribute>
                 </xsl:when>
@@ -376,8 +378,8 @@
                     <xsl:attribute name="selected">selected</xsl:attribute>
                 </xsl:when>
                 <xsl:when test="@value=$source or (@value='clinical' and $source='texts')">
-                	<xsl:attribute name="selected">selected</xsl:attribute>
-            	</xsl:when>
+                    <xsl:attribute name="selected">selected</xsl:attribute>
+                </xsl:when>
             </xsl:choose>
             <xsl:apply-templates/>
         </xsl:copy>
