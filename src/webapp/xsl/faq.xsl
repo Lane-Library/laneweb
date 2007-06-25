@@ -45,9 +45,9 @@
                 </xsl:variable>
                 <xsl:variable name="root-category" select="/h:html/h:body/h:div[@id='categories']/h:ul/h:li[descendant-or-self::h:li/text() = $cat]/text()"/>
                 <xsl:variable name="root-category-string" select="$category-map/h:div[h:span=$root-category]/h:span[2]"/>
-                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                <table>
                     <tr>
-                        <td valign="top" align="left" id="leftColumn">
+                        <td id="leftColumn">
                             <xsl:choose>
                                 <xsl:when test="string-length($root-category-string) = 0">
                                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -63,7 +63,7 @@
                                 </xsl:otherwise>
                             </xsl:choose>
                         </td>
-                        <td valign="top" align="left" id="mainColumn">
+                        <td id="mainColumn">
                             
                             <xsl:if test="$category != ''">
                                 <h1><xsl:value-of select="$category"/> FAQs</h1>
@@ -94,21 +94,7 @@
                 <xsl:apply-templates select="h:li[@id=$id]" mode="full"/>
             </xsl:otherwise>
         </xsl:choose>
-<!--
-            <div class="dSideBox">
-                <h2>faq categories</h2>
-                <ul>
-                    <xsl:apply-templates select="//h:li[@class='category'][not(following::h:li/text() = text())]">
-                        <xsl:sort select="."/>
-                    </xsl:apply-templates>
-                </ul>
-            </div>
--->
     </xsl:template>
-    
-    <!--<xsl:template match="h:li">
-        <li><a href="/howto/index.html?category={text()}"><xsl:value-of select="text()"/></a></li>
-    </xsl:template>-->
     
     <xsl:template match="h:div[@id='categories' or @id='category-map']"/>
     
@@ -139,9 +125,9 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+        <table>
             <tr>
-                <td valign="top" align="left" id="leftColumn">
+                <td id="leftColumn">
                     <xsl:choose>
                         <xsl:when test="string-length($root-category-string) = 0">
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -157,7 +143,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </td>
-                <td valign="top" align="left" class="mainColumn">
+                <td id="mainColumn">
                     <h1>
                         <xsl:value-of select="text()"/>
                     </h1>
@@ -167,7 +153,7 @@
                     </p>
                 </td>
                 
-                <td valign="top" align="right" id="rightColumn">
+                <td id="rightColumn">
                     <div class="bSideBox">
                         <h2>FAQs on this topic</h2>
                         <xsl:variable name="cat" select="h:ul/h:li[@class='primaryCategory']"/>
