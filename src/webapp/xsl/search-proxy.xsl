@@ -16,7 +16,7 @@
 		</xsl:copy>
 	</xsl:template>
 
-	<xsl:template match="s:url[not(starts-with(.,'http://lane.'))]">
+	<xsl:template match="s:url[not(starts-with(.,'http://lane.')) or contains(.,'postMethodHelper')]">
 		<xsl:copy>
 			<xsl:choose>
 				<xsl:when test="$proxy-links = 'true' and ($affiliation = 'LPCH' or $affiliation = 'SHC')">
