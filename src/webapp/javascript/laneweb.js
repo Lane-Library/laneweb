@@ -24,13 +24,14 @@ function startState(url) {
 }
 
 function openNewWindow(url,features) {
-	features = (features) ? features : 'width=700,height=650,directories=yes,menubar=yes,location=yes,left=75,toolbar=yes,scrollbars=yes,resizable=yes,status=yes,top=100';
-	window.open(url, '', features);
+    features = (features) ? features : '';
+    var w = window.open(url, 'LaneConnex', features);
+    if(window.focus){
+        w.focus();
+    }
 }
-
-function openSearchResult(url, features) {
-	openNewWindow(url,features);
-}
+// allow deprecated openSearchResult calls
+var openSearchResult = openNewWindow; 
 
 function loadTab(n, maxTabsPerBox) {
 	for (var i=1; i<=maxTabsPerBox; i++) {
