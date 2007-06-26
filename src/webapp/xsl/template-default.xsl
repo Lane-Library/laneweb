@@ -61,7 +61,7 @@
 	<!-- remove URL screening b/c rickety and dangerous -->
 		<div id="contentBody">
 			<xsl:choose>
-				<xsl:when test="$request-uri != 'search.html' and not(contains($request-uri, 'browse.html')) and $request-uri != 'online/ejsubject.html'">
+				<xsl:when test="$request-uri != 'search.html' and not(contains($request-uri, 'browse.html')) and $request-uri != 'online/ejsubject.html' and $request-uri != 'online/ebsubject.html'">
 					<xsl:copy-of select="h:div[@id='breadCrumb']"/>
 					<xsl:call-template name="font-application">
 						<xsl:with-param name="candidate-node" select="."/>
