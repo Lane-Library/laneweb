@@ -282,7 +282,7 @@ _42=false;
 }else{
 _41++;
 }
-if(_46=="running"||_3a[i].getElementsByTagName("span")[0].childNodes[0].nodeValue=="failed"||_3a[i].getElementsByTagName("span")[0].childNodes[0].nodeValue=="timed out"||_3a[i].getElementsByTagName("span")[0].childNodes[0].nodeValue==0){
+if(_46=="running"||_3a[i].getElementsByTagName("span")[0].childNodes[0].nodeValue==0){
 _3b[i].className="hide";
 }else{
 _3b[i].parentNode.parentNode.getElementsByTagName("h3")[0].className="";

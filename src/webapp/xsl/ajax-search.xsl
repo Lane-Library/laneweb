@@ -63,11 +63,8 @@
                 <xsl:when test="$status='successful'">
                     <span><xsl:value-of select="format-number($resource/s:hits, '###,###')"/></span>
                 </xsl:when>
-                <xsl:when test="$status = 'canceled'">
-                    <span>timed out</span>
-                </xsl:when>
                 <xsl:when test="$status != 'running'">
-                    <span><xsl:value-of select="$status"/></span>
+                    <span class="hide"><xsl:value-of select="$status"/></span>
                 </xsl:when>
             </xsl:choose>
         </xsl:copy>
