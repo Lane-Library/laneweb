@@ -14,7 +14,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="style/*.css">
+            <map:match type="wildcard" pattern="style/**.css">
                 <map:select type="resource-exists">
                     <map:when test="resources/css/{1}.css">
                         <map:read type="txt-resource" src="resources/css/{1}.css">

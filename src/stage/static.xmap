@@ -12,7 +12,7 @@
                 <map:read type="resource" src="{defaults:stage-base}/resources/images/favicon.ico"
                     mime-type="image/x-icon"/>
             </map:match>
-            <map:match type="wildcard" pattern="style/*.css">
+            <map:match type="wildcard" pattern="style/**.css">
                 <map:read type="txt-resource" src="{defaults:stage-base}/resources/css/{1}.css"
                     mime-type="text/css">
                     <map:parameter name="path" value="{request:contextPath}/stage"/>
