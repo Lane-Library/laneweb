@@ -60,8 +60,8 @@
                 <doctype-system>http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd</doctype-system>
                 <encoding>UTF-8</encoding>
                 <indent>no</indent>
-                <!--<cdata-section-elements>script css</cdata-section-elements>
-                <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>-->
+                <cdata-section-elements>script css</cdata-section-elements>
+                <!--<transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>-->
                 <omit-xml-declaration>yes</omit-xml-declaration>
             </map:serializer>
             <map:serializer name="text" mime-type="text/plain" logger="sitemap.serializer.text"
@@ -222,9 +222,6 @@
             </map:match>
             <map:match type="wildcard" pattern="clinician/index.html">
                 <map:redirect-to uri="{request:contextPath}/portals/clinical.html"/>
-            </map:match>
-            <map:match type="wildcard" pattern="portals/history/howto/index.html">
-                <map:redirect-to uri="{request:contextPath}/portals/history/index.html?loadTab=howto"/>
             </map:match>
             <!-- ========================== permenent redirects ============================ -->
             <map:match type="wildcard" pattern="**.html">
