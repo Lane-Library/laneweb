@@ -9,7 +9,7 @@
         default-class="edu.stanford.laneweb.WebDashLoginImpl"/>
     <role
         name="edu.stanford.laneweb.querymap.QueryMapper"
-        shorthand="query-map"
+        shorthand="query-mapper"
         default-class="edu.stanford.laneweb.querymap.LanewebQueryMapper"/>
     <role
         name="edu.stanford.laneweb.querymap.DescriptorManager"

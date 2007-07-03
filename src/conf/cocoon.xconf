@@ -145,19 +145,9 @@
 	<parameter name="dateFormat" value="yyyy-MM-dd"/>
   </webdash-login>
   
-  <query-map logger="core.query-map">
-    <stop-descriptor>Humans</stop-descriptor>
-    <stop-descriptor>Mice</stop-descriptor>
-    <stop-descriptor>Male</stop-descriptor>
-    <stop-descriptor>Female</stop-descriptor>
-    <stop-descriptor>Infant, Newborn</stop-descriptor>
-    <stop-descriptor>Infant</stop-descriptor>
-    <stop-descriptor>Animals</stop-descriptor>
-    <stop-descriptor>Adult</stop-descriptor>
-    <stop-descriptor>Aged</stop-descriptor>
-    <stop-descriptor>Middle Aged</stop-descriptor>
-    <stop-descriptor>Adolescent</stop-descriptor>
-    <stop-descriptor>Aged, 80 and over</stop-descriptor>
-  </query-map>
+  <query-mapper logger="core.query-mapper">
+    <parameter name="resource-maps" value="file:/afs/ir.stanford.edu/group/lane/query-map/resource-maps.xml"/>
+    <parameter name="descriptor-weights" value="file:/afs/ir.stanford.edu/group/lane/query-map/descriptor-weights.xml"/>
+  </query-mapper>
    
 </cocoon>
