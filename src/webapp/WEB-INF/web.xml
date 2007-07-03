@@ -388,6 +388,11 @@
 		-->
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>querymap</servlet-name>
+		<servlet-class>edu.stanford.laneweb.querymap.QueryMapperServlet</servlet-class>
+	</servlet>
 
 	<!-- URL space mappings ============================================= -->
 
@@ -400,6 +405,11 @@
 	<servlet-mapping>
 		<servlet-name>Cocoon</servlet-name>
 		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>querymap</servlet-name>
+		<url-pattern>/query-map/map</url-pattern>
 	</servlet-mapping>
 
 	<!--
