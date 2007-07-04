@@ -5,7 +5,7 @@
     xmlns:str="http://exslt.org/strings"
     exclude-result-prefixes="h str">
     
-    <xsl:strip-space elements="h:html h:head h:body h:div h:form h:select"/>
+    <xsl:strip-space elements="h:html h:head h:body h:form h:select"/>
     
     <xsl:include href="flash.xsl"/>
 
