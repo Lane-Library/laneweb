@@ -5,6 +5,8 @@
     xmlns:str="http://exslt.org/strings"
     exclude-result-prefixes="h str">
     
+    <xsl:strip-space elements="h:html h:head h:body h:div h:form h:select"/>
+    
     <xsl:include href="flash.xsl"/>
 
     <!--<xsl:strip-space elements="h:html h:head h:body h:div h:form h:map h:select h:table h:tr h:td"/>-->
@@ -26,8 +28,6 @@
     <xsl:param name="source"/>
     
     <xsl:param name="proxy-links"/>
-  
-    <xsl:param name="tab"/>
     
     <xsl:param name="ticket"/>
 
@@ -67,6 +67,29 @@
     <!-- the sitemap document -->
     <xsl:variable name="sitemap" select="/*/h:html[2]"/>
     
+    <xsl:variable name="search-form-select">
+        <xsl:choose>
+            <xsl:when test="$source-doc/h:head/h:meta[@name='lw_searchFormSelect']">
+                <xsl:value-of select="$source-doc/h:head/h:meta[@name='lw_searchFormSelect']/@content"/>
+            </xsl:when>
+            <xsl:when test="$source-doc/h:body/h:script[contains(.,'searchFormSelect')]">
+                <xsl:value-of select="substring-before(substring-after($source-doc/h:body/h:script[contains(.,'searchFormSelect')],&quot;&apos;&quot;),&quot;&apos;&quot;)"/>
+            </xsl:when>
+            <xsl:when test="starts-with($request-uri,'online/ej')">ej</xsl:when>
+            <xsl:when test="starts-with($request-uri,'online/eb')">book</xsl:when>
+            <xsl:when test="starts-with($request-uri,'online/cc')">cc</xsl:when>
+            <xsl:when test="starts-with($request-uri,'online/db')">database</xsl:when>
+            <xsl:when test="starts-with($request-uri,'services')">faq</xsl:when>
+            <xsl:when test="starts-with($request-uri,'howto')">faq</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/clinical')">clinical</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/peds')">peds</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/history')">history</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/bioresearch')">research</xsl:when>
+            <xsl:when test="$source"><xsl:value-of select="$source"/></xsl:when>
+            <xsl:otherwise>all</xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    
     <!-- ====================  DEFAULT TEMPLATES ============================= -->
     <!-- root template applies templates on the template document -->
     <xsl:template match="/">
@@ -105,6 +128,7 @@
         </xsl:if>-->
     </xsl:template>
     
+    <!-- xincludes often include html/head and html/body -->
     <xsl:template match="h:html[ancestor::h:html]">
         <xsl:apply-templates select="h:body/child::node()"/>
     </xsl:template>
@@ -116,6 +140,9 @@
             <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
+    
+    <!-- remove searchFormSelect() script -->
+    <xsl:template match="h:script[contains(.,'searchFormSelect')]"/>
    
     <xsl:template match="h:a">
         <xsl:choose>
@@ -301,11 +328,15 @@
     <!-- get all the head elements from template and all non title head elements from source (with some exceptions)-->
     <xsl:template match="h:head">
         <xsl:copy>
-            <xsl:apply-templates select="node()|$source-doc/h:head/*[not(self::h:title or @http-equiv)]">
+            <xsl:apply-templates select="node()|$source-doc/h:head/*[not(self::h:title)]">
                 <xsl:sort select="name()" order="descending"/>
             </xsl:apply-templates>
         </xsl:copy>
     </xsl:template>
+    
+    <!-- remove http-equiv meta elements-->
+    <xsl:template match="h:meta[@http-equiv]"/>
+    
     <!-- combines the template title value with the value of the title of the source document -->
     <xsl:template match="h:title">
         <xsl:copy>
@@ -320,25 +351,13 @@
         </xsl:copy>
     </xsl:template>
     
+    <!-- remove class="lw_...." and id="lw_...." -->
     <xsl:template match="@class[starts-with(.,'lw_')]|@id[starts-with(.,'lw_')]"/>
-    <xsl:template match="@class[.='proxy']"/>
-    <xsl:template match="*[@id='lw_alt-title']"/>
-    <xsl:template match="*[@id='lw_title']">
-          <xsl:choose>
-              <xsl:when test="$source-doc//*[@id='lw_alt-title']/node()">
-                  <xsl:copy>
-                      <xsl:apply-templates select="$source-doc//*[@id='lw_alt-title']/node()"/>
-                  </xsl:copy>
-              </xsl:when>
-              <xsl:when test="$source-doc//*[@id='lw_alt-title']"/>
-              <xsl:otherwise>
-                  <xsl:copy>
-                      <xsl:value-of select="$source-doc/h:head/h:title/text()"/>
-                  </xsl:copy>
-              </xsl:otherwise>
-            </xsl:choose>
-    </xsl:template>
     
+    <!-- remove class="proxy" -->
+    <xsl:template match="@class[.='proxy']"/>
+
+    <!-- TODO did the id of the input change? -->
     <xsl:template match="h:input[@id='lw_search-keywords']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
@@ -346,47 +365,38 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="h:option">
+    <!-- set the selected option of the search form -->
+    <xsl:template match="h:option[parent::h:select[@id='source']]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:choose>
-                <xsl:when test="@value='peds' and contains($request-uri,'portals/peds.html')">
-                <!--<xsl:when test="@value='peds' and contains($request-uri,'clinician/peds.html')">-->
-                        <xsl:attribute name="selected">selected</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@value='clinical' and contains($request-uri,'portals/clinical')">
-                        <xsl:attribute name="selected">selected</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@value='research' and contains($request-uri,'portals/bioresearch')">
-                        <xsl:attribute name="selected">selected</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@value='ej' and (contains($request-uri,'online/ej') or $tab='ej')">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@value='faq' and (contains($request-uri,'howto/index.html') or contains($request-uri,'askus.html') or contains($request-uri,'services/'))">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@value='book' and (contains($request-uri,'online/eb') or $tab='book')">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@value='cc' and (contains($request-uri,'online/cc') or $tab='cc')">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@value='database' and (contains($request-uri,'online/db') or $tab='database')">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="@value=$source or (@value='clinical' and $source='texts')">
-                    <xsl:attribute name="selected">selected</xsl:attribute>
-                </xsl:when>
-            </xsl:choose>
+            <xsl:if test="@value=$search-form-select">
+                <xsl:attribute name="selected">selected</xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates/>
         </xsl:copy>
    </xsl:template>
+    
+    <!-- set the search tagline text -->
+    <xsl:template match="h:div[@id='displaySearchTaglineText']">
+        <xsl:variable name="taglineText" select="$template-document//h:span[starts-with(@id,$search-form-select)]"/>
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:choose>
+                <xsl:when test="$taglineText">
+                    <xsl:value-of select="$taglineText"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:copy>
+    </xsl:template>
    
    <xsl:template match="h:span[@class='lw_keywords']">
        <xsl:value-of select="$keywords"/>
    </xsl:template>
    
+   <!-- put the appropriate text into the content attribute of meta elements -->
     <xsl:template match="h:meta[starts-with(@name,'lw_')]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='content')]"/>
@@ -422,6 +432,8 @@
                 <li>sunetid=<xsl:value-of select="$sunetid"/></li>
                 <li>proxy-links=<xsl:value-of select="$proxy-links"/></li>
                 <li>affiliation=<xsl:value-of select="$affiliation"/></li>
+                    <li>search-form-select=<xsl:value-of select="$search-form-select"/></li>
+                    <li>source=<xsl:value-of select="$source"/></li>
                 </ul>
             </div>
         </xsl:if>
