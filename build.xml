@@ -123,7 +123,7 @@
         <get dest="${libdir}/excalibur-xmlutil-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-xmlutil/jars/excalibur-xmlutil-2.1.jar"/>
         <get dest="${libdir}/bcel-5.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/bcel/jars/bcel-5.2.jar"/>
         <get dest="${libdir}/jakarta-regexp-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/jakarta-regexp/jars/jakarta-regexp-1.4.jar"/>
-        <get dest="${libdir}/jtidy-4aug2000r7-dev.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/jtidy/jars/jtidy-4aug2000r7-dev.jar"/>
+        <get dest="${libdir}/jtidy-4aug2000r7-nodom.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/jtidy/jars/jtidy-4aug2000r7-nodom.jar"/>
         <get dest="${libdir}/log4j-1.2.14.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/log4j/jars/log4j-1.2.14.jar"/>
         <get dest="${libdir}/servlet-api-2.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax.servlet/jars/servlet-api-2.4.jar"/>
         <get dest="${libdir}/xalan-2.7.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xalan/jars/xalan-2.7.0.jar"/>
