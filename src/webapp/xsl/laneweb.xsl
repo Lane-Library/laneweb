@@ -81,10 +81,16 @@
             <xsl:when test="starts-with($request-uri,'online/db')">database</xsl:when>
             <xsl:when test="starts-with($request-uri,'services')">faq</xsl:when>
             <xsl:when test="starts-with($request-uri,'howto')">faq</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/clinical')">clinical</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/peds')">peds</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/picu')">peds</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/history')">history</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/bioresearch')">research</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/patient')">all</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/cultural')">all</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/pharmacy')">pharmacy</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/shc-demo-pharmacy')">pharmacy</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/')">clinical</xsl:when>
+            <xsl:when test="starts-with($request-uri,'local/antibiogram')">clinical</xsl:when>
             <xsl:when test="$source"><xsl:value-of select="$source"/></xsl:when>
             <xsl:otherwise>all</xsl:otherwise>
         </xsl:choose>
@@ -366,7 +372,7 @@
     </xsl:template>
     
     <!-- set the selected option of the search form -->
-    <xsl:template match="h:option[parent::h:select[@id='source']]">
+    <xsl:template match="h:option[parent::h:select[@id='searchSelect']]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:if test="@value=$search-form-select">
@@ -377,7 +383,7 @@
    </xsl:template>
     
     <!-- set the search tagline text -->
-    <xsl:template match="h:div[@id='displaySearchTaglineText']">
+    <xsl:template match="h:div[@id='displayTagline']">
         <xsl:variable name="taglineText" select="$template-document//h:span[starts-with(@id,$search-form-select)]"/>
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
