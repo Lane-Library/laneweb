@@ -372,10 +372,10 @@
     </xsl:template>
     
     <!-- set the selected option of the search form -->
-    <xsl:template match="h:option[parent::h:select[@id='searchSelect']]">
+    <xsl:template match="h:option[parent::h:select[@id='searchSelect' or @id='source']]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:if test="@value=$search-form-select">
+            <xsl:if test="@value = $search-form-select">
                 <xsl:attribute name="selected">selected</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
@@ -383,7 +383,7 @@
    </xsl:template>
     
     <!-- set the search tagline text -->
-    <xsl:template match="h:div[@id='displayTagline']">
+    <xsl:template match="h:div[@id='displayTagline' or @id='displaySearchTaglineText']">
         <xsl:variable name="taglineText" select="$template-document//h:span[starts-with(@id,$search-form-select)]"/>
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
