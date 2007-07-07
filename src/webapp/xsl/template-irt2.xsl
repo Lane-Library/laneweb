@@ -26,25 +26,30 @@
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template match="h:div[@id='breadCrumb']">
+	<xsl:template match="h:div[@id='breadcrumb']">
 		<xsl:if test="$request-uri != 'index.html'">
 			<xsl:copy>
 				<xsl:apply-templates select="attribute::node() | child::node()"/>
 			</xsl:copy>
 		</xsl:if>
 	</xsl:template>
-	
+
 	<xsl:template match="h:td/h:div">
-		<xsl:apply-templates select="child::h:h2"/>
 		<xsl:copy>
-			<xsl:apply-templates select="attribute::node()"/>
-			<xsl:apply-templates select="child::node()[not(self::h:h2)]"/>
+			<xsl:apply-templates select="child::node()"/>
 		</xsl:copy>
 	</xsl:template>
 	
-	<xsl:template match="h:td[@id='mainColumn']/h:div[@class='aGeneralBox']">
+	<xsl:template match="h:td[@id='mainColumn']/h:div[@class='aGeneralBox' or (@class='eMainBox' and not(h:h2))]">
 		<xsl:copy>
 			<xsl:apply-templates select="attribute::node()|child::node()"/>
+		</xsl:copy>
+	</xsl:template>
+	
+	<xsl:template match="h:td[@id='mainColumn']/h:div[@class='eMainBox' and h:h2]">
+		<xsl:apply-templates select="h:h2"/>
+		<xsl:copy>
+			<xsl:apply-templates select="attribute::node() | child::node() [not(self::h:h2)]"/>
 		</xsl:copy>
 	</xsl:template>
 	
@@ -64,14 +69,20 @@
 		<xsl:attribute name="class">columnOf2</xsl:attribute>
 	</xsl:template>
 	
-	<xsl:template match="h:td[@id='mainColumn']/h:div[@class='fMainBox']">
-		<xsl:if test="child::h:h2">
-			<h2 class="activeTab"><xsl:apply-templates select="child::h:h2/node()"/></h2>
-		</xsl:if>
+	<xsl:template match="h:p[preceding-sibling::h:h3]
+		|h:ul[preceding-sibling::h:h3]
+		|h:form[preceding-sibling::h:h3]
+		|h:ol[preceding-sibling::h:h3]
+		|h:td[@id='mainColumn']/h:p[preceding-sibling::h:h2]
+		|h:td[@id='mainColumn']/h:ul[preceding-sibling::h:h2]
+		|h:td[@id='mainColumn']/h:ol[preceding-sibling::h:h2]">
 		<xsl:copy>
 			<xsl:apply-templates select="attribute::node()"/>
-			<xsl:apply-templates select="child::node()[not(self::h:h2)]"/>
-		</xsl:copy>
+			<xsl:if test="not(@class)">
+				<xsl:attribute name="class">labled</xsl:attribute>
+			</xsl:if>
+			<xsl:apply-templates/>
+			</xsl:copy>
 	</xsl:template>
 
 	<xsl:template match="h:td[@id='leftColumn']|h:td[@id='rightColumn']|h:td[@id='leftColumnHome']|h:td[@id='rightColumnHome']">
@@ -82,8 +93,9 @@
 		</xsl:copy>
 	</xsl:template>
 	
-	<xsl:template match="h:div[@id='otherPortalOptions']"><!--
-		<xsl:copy>
+	<xsl:template match="h:div[@id='otherPortalOptions']">
+	    <xsl:copy-of select="child::node()"/>
+<!--		<xsl:copy>
 			<xsl:apply-templates select="attribute::node()"/>
 			<h2 class="bgTab"><a href="#">Other Portals</a></h2>
 			<ul>
@@ -98,81 +110,85 @@
 					</li>
 				</xsl:for-each>
 			</ul>
-		</xsl:copy>
-	--></xsl:template>
-
-	<xsl:template match="h:td[@id='mainColumn']/h:div[@class='fMainBox' and count(child::h:h2) &gt; 1]">
-
-			<xsl:for-each select="h:h2[contains(@class, 'Tab')]">
-				<xsl:copy>
-					<xsl:variable name="id">
-						<xsl:choose>
-							<xsl:when test="@id">
-								<xsl:value-of select="@id"/>
-							</xsl:when>
-							<xsl:otherwise>
-								<xsl:value-of select="concat('tab', position())"/>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:variable>
-					<xsl:variable name="class">
-						<xsl:choose>
-							<xsl:when test="$loadTab != '' and $loadTab = $id">activeTab</xsl:when>
-							<xsl:when test="$loadTab = '' and contains(@class, 'activeTab')"
-								>activeTab</xsl:when>
-							<xsl:otherwise>
-								<xsl:choose>
-									<xsl:when
-										test="$loadTab = '' and not(../h:h2[contains(@class, 'activeTab')]) and position()=1"
-										>activeTab</xsl:when>
-									<xsl:otherwise>bgTab</xsl:otherwise>
-								</xsl:choose>
-							</xsl:otherwise>
-						</xsl:choose>
-					</xsl:variable>
-					<xsl:attribute name="id">
-						<xsl:value-of select="$id"/>
-					</xsl:attribute>
-					<xsl:attribute name="class">
-						<xsl:value-of select="$class"/>
-					</xsl:attribute>
-					<xsl:choose>
-						<xsl:when test="$class='bgTab'">
-							<a href="?loadTab={$id}&amp;template=irt2">
-								<xsl:value-of select="."/>
-							</a>
-						</xsl:when>
-						<xsl:otherwise>
-							<xsl:value-of select="."/>
-						</xsl:otherwise>
-					</xsl:choose>
-	</xsl:copy>
-							</xsl:for-each>
-		<xsl:copy>
-			<xsl:apply-templates select="attribute::node()" />
-			<xsl:apply-templates select="child::h:div[@id='otherPortalOptions']"/>
-					<xsl:for-each select="h:h2[contains(@class, 'Tab')]">
-						<xsl:variable name="stop-point">
-							<xsl:value-of select="last() - position()"/>
-						</xsl:variable>
-						<xsl:variable name="id">
-							<xsl:choose>
-								<xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
-								<xsl:otherwise><xsl:value-of select="concat('tab', position())"/></xsl:otherwise>
-							</xsl:choose>
-						</xsl:variable>
-							
-							<xsl:if test="($loadTab != '' and $loadTab = $id) 
-								or ($loadTab = '' and @class = 'activeTab') 
-								or ($loadTab = '' and not(../h:h2[@class = 'activeTab']) and position()!=1)">
-									<xsl:apply-templates select="following-sibling::node()[not(@id='otherPortalOptions') and count(following-sibling::h:h2[contains(@class, 'Tab')]) = $stop-point]"/>
-							</xsl:if>
-							
-					</xsl:for-each>
-		</xsl:copy>
+		</xsl:copy>-->
 	</xsl:template>
+
+    <xsl:template match="h:td[@id='mainColumn']/h:div[@class='fMainBox']">
+        <div class="tabs">
+        <xsl:for-each select="h:h2">
+            <xsl:copy>
+                <xsl:variable name="id">
+                    <xsl:choose>
+                        <xsl:when test="@id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat('tab', position())"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:variable name="class">
+                    <xsl:choose>
+                        <xsl:when test="$loadTab != '' and $loadTab = $id">activeTab</xsl:when>
+                        <xsl:when test="$loadTab = '' and contains(@class, 'activeTab')"
+                            >activeTab</xsl:when>
+                        <xsl:otherwise>
+                            <xsl:choose>
+                                <xsl:when
+                                    test="$loadTab = '' and not(../h:h2[contains(@class, 'activeTab')]) and position()=1"
+                                    >activeTab</xsl:when>
+                                <xsl:otherwise>bgTab</xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:attribute name="id">
+                    <xsl:value-of select="$id"/>
+                </xsl:attribute>
+                <xsl:attribute name="class">
+                    <xsl:value-of select="$class"/>
+                </xsl:attribute>
+                <xsl:choose>
+                    <xsl:when test="$class='bgTab'">
+                        <a href="?loadTab={$id}&amp;template=irt2">
+                            <xsl:value-of select="."/>
+                        </a>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="."/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:copy>
+        </xsl:for-each>
+            <xsl:apply-templates select="child::h:div[@id='otherPortalOptions']/node()"/>
+        	</div>
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()" />
+            <xsl:for-each select="h:h2">
+                <xsl:variable name="stop-point">
+                    <xsl:value-of select="last() - position()"/>
+                </xsl:variable>
+                <xsl:variable name="id">
+                    <xsl:choose>
+                        <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="concat('tab', position())"/></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:if test="(count(parent::h:div/h:h2) = 1)
+                    or ($loadTab != '' and $loadTab = $id) 
+                    or ($loadTab = '' and @class = 'activeTab') 
+                    or ($loadTab = '' and not(../h:h2[@class = 'activeTab']) and position()!=1)">
+                    <xsl:apply-templates select="following-sibling::node()[not(@id='otherPortalOptions') and count(following-sibling::h:h2) = $stop-point]"/>
+                </xsl:if>
+                
+            </xsl:for-each>
+        </xsl:copy>
+    </xsl:template>
 	
-	
+    <xsl:template match="h:div[@class='searchHeader']">
+        <h2 class="searchHeader"><xsl:apply-templates/></h2>
+    </xsl:template>
+    
 	<xsl:template match="h:tr[parent::h:table[@class='striped']]">
 		<xsl:copy>
 			<xsl:copy-of select="attribute::node()"/>

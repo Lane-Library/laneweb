@@ -53,7 +53,7 @@ function initializeSearchForm(e) {
 	            option.tagLine = allTagline;
 	        }
 	        option.activate = function(e) {
-	            this.displayTagline.textContent = this.tagLine.textContent;
+	            this.displayTagline.innerHTML = this.tagLine.innerHTML;
 	        }
 	        option.deactivate = function(e) {
 	            this.parentNode.homeOption.activate(e);
