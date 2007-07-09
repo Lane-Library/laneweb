@@ -153,6 +153,9 @@
 			<map:match type="wildcard" pattern="extensions/**">
 			    <map:mount uri-prefix="extensions" check-reload="no" src="extensions.xmap"/>
 			</map:match>
+			<map:match type="wildcard" pattern="tobacco/**">
+			    <map:mount uri-prefix="tobacco" check-reload="no" src="tobacco.xmap"/>
+			</map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv|avi)$">
                 <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>
