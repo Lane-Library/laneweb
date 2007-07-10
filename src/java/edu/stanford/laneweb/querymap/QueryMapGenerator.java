@@ -1,9 +1,9 @@
 package edu.stanford.laneweb.querymap;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
-import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -11,12 +11,20 @@ import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.ServiceableGenerator;
 import org.apache.cocoon.xml.XMLUtils;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
+import org.apache.excalibur.source.Source;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.querymap.Descriptor;
+import edu.stanford.irt.querymap.DescriptorManager;
+import edu.stanford.irt.querymap.DescriptorToResource;
+import edu.stanford.irt.querymap.DescriptorWeightMap;
 import edu.stanford.irt.querymap.QueryMap;
+import edu.stanford.irt.querymap.QueryToDescriptor;
 import edu.stanford.irt.querymap.ResourceMap;
+import edu.stanford.irt.querymap.StreamResourceMapping;
 
 public class QueryMapGenerator extends ServiceableGenerator {
 	
@@ -28,23 +36,42 @@ public class QueryMapGenerator extends ServiceableGenerator {
 	private static final String IDREF = "idref";
 	private static final String NAMESPACE = "http://lane.stanford.edu/querymap/ns";
 	
-	private QueryMapper queryMapper;
+	private DescriptorManager descriptorManager;
+	private edu.stanford.irt.querymap.QueryMapper queryMapper;
+	private HttpClient httpClient = new HttpClient(new MultiThreadedHttpConnectionManager());
 	
 	private String query;
 
-	public void service(ServiceManager manager) throws ServiceException {
-		super.service(manager);
-		this.queryMapper = (QueryMapper) manager.lookup(QueryMapper.ROLE);
+	public void service(ServiceManager serviceManager) throws ServiceException {
+		super.service(serviceManager);
+		DescriptorManagerManager managerManager = (DescriptorManagerManager) serviceManager.lookup(DescriptorManagerManager.ROLE);
+		this.descriptorManager = managerManager.getDescriptorManager();
+		serviceManager.release(managerManager);
 	}
 
 	@Override
 	public void setup(SourceResolver resolver, Map objectModel, String src, Parameters params) throws ProcessingException, SAXException, IOException {
 		super.setup(resolver, objectModel, src, params);
-		try {
-			this.query = params.getParameter(QUERY);
-		} catch (ParameterException e) {
-			throw new ProcessingException(e);
-		}
+		String resourceMap = params.getParameter("resource-maps", "resource://edu/stanford/irt/querymap/resource-maps.xml");
+		String descriptorWeights = params.getParameter("descriptor-weights","resource://edu/stanford/irt/querymap/descriptor-weights.xml");
+		this.query = params.getParameter(QUERY, null);
+		this.queryMapper = new edu.stanford.irt.querymap.QueryMapper();
+		this.queryMapper.setDescriptorManager(this.descriptorManager);
+		QueryToDescriptor queryToDescriptor = new QueryToDescriptor();
+		queryToDescriptor.setDescriptorManager(this.descriptorManager);
+		queryToDescriptor.setHttpClient(this.httpClient);
+		this.queryMapper.setQueryToDescriptor(queryToDescriptor);
+		Source resourceMapSource = resolver.resolveURI(resourceMap);
+		InputStream inputStream = resourceMapSource.getInputStream();
+		StreamResourceMapping resourceMapping = new StreamResourceMapping(inputStream);
+		resolver.release(resourceMapSource);
+		Source descriptorWeightSource = resolver.resolveURI(descriptorWeights);
+		DescriptorWeightMap descriptorWeightMap = new DescriptorWeightMap(descriptorWeightSource.getInputStream());
+		resolver.release(descriptorWeightSource);
+		queryToDescriptor.setDescriptorWeightAdjustments(descriptorWeightMap);
+		DescriptorToResource descriptorToResource = new DescriptorToResource();
+		descriptorToResource.setResourceMap(resourceMapping);
+		this.queryMapper.setDescriptorToResource(descriptorToResource);
 	}
 
 	public void generate() throws IOException, SAXException,
@@ -78,6 +105,7 @@ public class QueryMapGenerator extends ServiceableGenerator {
 	@Override
 	public void recycle() {
 		this.query = null;
+		this.queryMapper = null;
 		super.recycle();
 	}
 
