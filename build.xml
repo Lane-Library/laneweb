@@ -127,7 +127,7 @@
         <get dest="${libdir}/log4j-1.2.14.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/log4j/jars/log4j-1.2.14.jar"/>
         <get dest="${libdir}/servlet-api-2.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax.servlet/jars/servlet-api-2.4.jar"/>
         <get dest="${libdir}/xalan-2.7.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xalan/jars/xalan-2.7.0.jar"/>
-        <get dest="${libdir}/query-map-0.5.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/querymap/jars/querymap-0.5.0.jar"/>
+        <get dest="${libdir}/query-map-0.5.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/querymap/jars/querymap-0.5.1.jar"/>
         <get dest="${libdir}/xml-apis-1.3.04.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xml-apis/jars/xml-apis-1.3.04.jar"/>
         <get dest="${libdir}/xercesImpl-2.9.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xerces/jars/xercesImpl-2.9.0.jar"/>
         <get dest="${libdir}/yui-2.2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/yui/jars/yui-2.2.2.jar"/>
