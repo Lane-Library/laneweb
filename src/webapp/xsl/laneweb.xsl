@@ -148,7 +148,8 @@
     </xsl:template>
     
     <!-- remove searchFormSelect() script -->
-    <xsl:template match="h:script[contains(.,'searchFormSelect')]"/>
+    <!-- well, maybe later . . . -->
+    <!--<xsl:template match="h:script[contains(.,'searchFormSelect')]"/>-->
    
     <xsl:template match="h:a">
         <xsl:choose>
