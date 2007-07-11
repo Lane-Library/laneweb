@@ -43,21 +43,6 @@ public class QueryMapperServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		try {
-			QueryToDescriptor queryToDescriptor = new QueryToDescriptor();
-			queryToDescriptor.setHttpClient(this.httpClient);
-			queryToDescriptor.setDescriptorManager(this.manager);
-			FileInputStream weightsStream = new FileInputStream(
-					"/afs/ir/group/lane/query-map/descriptor-weights.xml");
-			DescriptorWeightMap descriptorWeights = new DescriptorWeightMap(
-					weightsStream);
-			queryToDescriptor.setDescriptorWeightAdjustments(descriptorWeights);
-			DescriptorToResource descriptorToResource = new DescriptorToResource();
-			FileInputStream resourceMapsStream = new FileInputStream(
-					"/afs/ir/group/lane/query-map/resource-maps.xml");
-			StreamResourceMapping resourceMapping = new StreamResourceMapping(
-					resourceMapsStream);
-			descriptorToResource.setResourceMap(resourceMapping);
-
 			response.setContentType("text/plain");
 			String query = request.getParameter("q");
 			if (query == null) {
@@ -68,6 +53,31 @@ public class QueryMapperServlet extends HttpServlet {
 				out.println("no query");
 				return;
 			}
+			String abstractCountString = request.getParameter("n");
+			int abstractCount = 100;
+			if (null != abstractCountString) {
+				try {
+					abstractCount = Integer.parseInt(abstractCountString);
+				} catch (NumberFormatException e) {
+					//ignore, use default
+				}
+			}
+			QueryToDescriptor queryToDescriptor = new QueryToDescriptor();
+			queryToDescriptor.setHttpClient(this.httpClient);
+			queryToDescriptor.setDescriptorManager(this.manager);
+			queryToDescriptor.setAbstractCount(abstractCount);
+			FileInputStream weightsStream = new FileInputStream(
+					"/afs/ir/group/lane/beta/stage/resources/querymap/descriptor-weights.xml");
+			DescriptorWeightMap descriptorWeights = new DescriptorWeightMap(
+					weightsStream);
+			queryToDescriptor.setDescriptorWeights(descriptorWeights);
+			DescriptorToResource descriptorToResource = new DescriptorToResource();
+			FileInputStream resourceMapsStream = new FileInputStream(
+					"/afs/ir/group/lane/beta/stage/resources/querymap/resource-maps.xml");
+			StreamResourceMapping resourceMapping = new StreamResourceMapping(
+					resourceMapsStream);
+			descriptorToResource.setResourceMap(resourceMapping);
+
 			Set<Descriptor> descriptors = queryToDescriptor
 					.getDescriptorsForQuery(query);
 			Descriptor descriptor = null;

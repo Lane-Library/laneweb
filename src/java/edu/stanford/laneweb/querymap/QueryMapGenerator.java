@@ -54,6 +54,7 @@ public class QueryMapGenerator extends ServiceableGenerator {
 		super.setup(resolver, objectModel, src, params);
 		String resourceMap = params.getParameter("resource-maps", "resource://edu/stanford/irt/querymap/resource-maps.xml");
 		String descriptorWeights = params.getParameter("descriptor-weights","resource://edu/stanford/irt/querymap/descriptor-weights.xml");
+		int abstractCount = params.getParameterAsInteger("abstract-count",100);
 		this.query = params.getParameter(QUERY, null);
 		this.queryMapper = new edu.stanford.irt.querymap.QueryMapper();
 		this.queryMapper.setDescriptorManager(this.descriptorManager);
@@ -68,7 +69,8 @@ public class QueryMapGenerator extends ServiceableGenerator {
 		Source descriptorWeightSource = resolver.resolveURI(descriptorWeights);
 		DescriptorWeightMap descriptorWeightMap = new DescriptorWeightMap(descriptorWeightSource.getInputStream());
 		resolver.release(descriptorWeightSource);
-		queryToDescriptor.setDescriptorWeightAdjustments(descriptorWeightMap);
+		queryToDescriptor.setDescriptorWeights(descriptorWeightMap);
+		queryToDescriptor.setAbstractCount(abstractCount);
 		DescriptorToResource descriptorToResource = new DescriptorToResource();
 		descriptorToResource.setResourceMap(resourceMapping);
 		this.queryMapper.setDescriptorToResource(descriptorToResource);

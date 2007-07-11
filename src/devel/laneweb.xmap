@@ -21,6 +21,9 @@
             <map:match type="wildcard" pattern="content/**">
                 <map:mount uri-prefix="content" check-reload="yes" src="content.xmap"/>
             </map:match>
+            <map:match type="wildcard" pattern="apps/**">
+                <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
+            </map:match>
             <map:match type="wildcard" pattern="cookiesFetch.html">
                 <map:select type="resource-exists">
                     <map:when test="content/cookiesFetch.html">

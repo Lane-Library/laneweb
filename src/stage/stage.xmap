@@ -25,6 +25,9 @@
             <map:match type="wildcard" pattern="content/**">
                 <map:mount uri-prefix="content" check-reload="yes" src="{defaults:stage-base}/content.xmap"/>
             </map:match>
+            <map:match type="wildcard" pattern="apps/**">
+                <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
+            </map:match>
             <map:match pattern="secure/login.html">
                 <map:act type="loginAction"/>
             </map:match>
