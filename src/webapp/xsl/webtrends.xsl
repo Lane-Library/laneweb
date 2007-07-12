@@ -102,7 +102,7 @@
 
     <xsl:template match="@href[not(contains(.,'://')) and (contains(.,'.pdf') or contains(.,'.camv')
                                            or contains(.,'.smil') or contains(.,'.doc') or contains(.,'.ppt')
-                                           or contains(.,'.xls') or contains(.,'.rm'))]">
+                                           or contains(.,'.xls') or contains(.,'.rm') or contains(.,'.xml'))]">
         <xsl:copy-of select="."/>
         <xsl:variable name="title">
             <xsl:call-template name="escape-apos">
