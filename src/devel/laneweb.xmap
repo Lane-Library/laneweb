@@ -2,11 +2,6 @@
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
-    <map:components>
-        <map:generators default="file">
-            <map:generator name="exception" src="org.apache.cocoon.generation.ExceptionGenerator"/>
-        </map:generators>
-    </map:components>
     <map:pipelines>
         <map:pipeline>
             <map:match pattern="secure/login.html">
