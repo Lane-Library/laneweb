@@ -24,6 +24,10 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
+            <map:handle-errors>
+                <map:generate type="exception"/>
+                <map:serialize type="xml" status-code="500"/>
+            </map:handle-errors>
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>
