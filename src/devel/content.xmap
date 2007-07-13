@@ -154,6 +154,23 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match type="wildcard" pattern="search-templates.xml">
+                <map:aggregate element="search-templates" ns="http://lane.stanford.edu/search-templates/ns">
+                    <map:part src="cocoon:/templates/search/clinical.xml"/>
+                    <map:part src="cocoon:/templates/search/peds.xml"/>
+                    <map:part src="cocoon:/templates/search/research.xml"/>
+                    <map:part src="cocoon:/templates/search/history.xml"/>
+                </map:aggregate>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/search-templates.xsl">
+                        <map:transform type="xsltc" src="xsl/search-templates.xsl"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="xsltc" src="context://xsl/search-templates.xsl"/>
+                    </map:otherwise>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match type="wildcard" pattern="templates/**.xml">
                 <map:select type="resource-exists">
                     <map:when test="resources/templates/{1}.xml">
