@@ -286,11 +286,6 @@ _43=false;
 }else{
 _42++;
 }
-if(_47=="running"||_3b[i].getElementsByTagName("span")[0].childNodes[0].nodeValue==0){
-_3c[i].className="hide";
-}else{
-_3c[i].parentNode.parentNode.getElementsByTagName("h3")[0].className="";
-_3c[i].className="";
 if(_45.getAttribute("href")!=_46.getAttribute("href")){
 var _48=_45.innerHTML;
 if(navigator.appVersion.indexOf("Safari")>-1){
@@ -300,6 +295,11 @@ _45.setAttribute("href",_46.getAttribute("href"));
 }
 _45.innerHTML=_48;
 }
+if(_47=="running"||_3b[i].getElementsByTagName("span")[0].childNodes[0].nodeValue==0){
+_3c[i].className="hide";
+}else{
+_3c[i].parentNode.parentNode.getElementsByTagName("h3")[0].className="";
+_3c[i].className="";
 _41++;
 }
 if(_45.getAttribute("type")!=_47){

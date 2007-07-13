@@ -436,6 +436,23 @@ IOClient.prototype = {
 				  	sourcesCompleteCount++;
 				  }
 
+				  // if old and new URLs differ, use new one
+				  //oldAnchor.href = (oldAnchor.href != newAnchor.href) ? newAnchor.href : oldAnchor.href;
+				  if(oldAnchor.getAttribute('href') != newAnchor.getAttribute('href')){
+					// retarded fix for IE 7: http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
+					// grab innerHTML of anchor before setting href, then copy back to oldAnchor (below)
+					var text = oldAnchor.innerHTML;
+
+					// Safari doesn't decode ampersands in URLs
+					if(navigator.appVersion.indexOf("Safari")>-1){
+						oldAnchor.setAttribute('href',newAnchor.getAttribute("href").replace(/&#38;/g,'&'));	
+					}
+					else{
+						oldAnchor.setAttribute('href',newAnchor.getAttribute('href'));	
+					}
+					oldAnchor.innerHTML = text;
+				  }
+
 				  //hide result items if engine is still running or it returned a zero hit count
 				  if ( newStatus == 'running' 
 				  	|| newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue == 0){
@@ -445,25 +462,6 @@ IOClient.prototype = {
 				    // display parent h3 heading as well as result
 				    oldResults[i].parentNode.parentNode.getElementsByTagName('h3')[0].className = '';
 				    oldResults[i].className = '';
-
-					// if old and new URLs differ, use new one
-					//oldAnchor.href = (oldAnchor.href != newAnchor.href) ? newAnchor.href : oldAnchor.href;
-					if(oldAnchor.getAttribute('href') != newAnchor.getAttribute('href')){
-						// retarded fix for IE 7: http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
-						// grab innerHTML of anchor before setting href, then copy back to oldAnchor (below)
-						var text = oldAnchor.innerHTML;
-
-						// Safari doesn't decode ampersands in URLs
-						if(navigator.appVersion.indexOf("Safari")>-1){
-							oldAnchor.setAttribute('href',newAnchor.getAttribute("href").replace(/&#38;/g,'&'));	
-						}
-						else{
-							oldAnchor.setAttribute('href',newAnchor.getAttribute('href'));	
-						}
-
-						oldAnchor.innerHTML = text;
-					}
-
 				    hitsFoundInSourceCount++;
 				  }
 
