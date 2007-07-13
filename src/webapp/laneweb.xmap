@@ -48,14 +48,11 @@
                 <encoding>UTF-8</encoding>
                 <indent>yes</indent>
                 <cdata-section-elements>script css</cdata-section-elements>
-                <!--<transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>-->
             </map:serializer>
             <map:serializer name="xml" mime-type="text/xml" logger="sitemap.serializer.xml"
                 src="org.apache.cocoon.serialization.XMLSerializer" pool-max="32">
                 <indent>yes</indent>
                 <encoding>UTF-8</encoding>
-                <!--<cdata-section-elements>script css</cdata-section-elements>
-                <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>-->
             </map:serializer>
             <map:serializer name="noprolog" mime-type="text/html" logger="sitemap.serializer.xhtml"
                 src="org.apache.cocoon.serialization.XMLSerializer" pool-max="32">
@@ -64,7 +61,6 @@
                 <encoding>UTF-8</encoding>
                 <indent>no</indent>
                 <cdata-section-elements>script css</cdata-section-elements>
-                <!--<transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>-->
                 <omit-xml-declaration>yes</omit-xml-declaration>
             </map:serializer>
             <map:serializer name="text" mime-type="text/plain" logger="sitemap.serializer.text"
@@ -211,8 +207,6 @@
                 </map:transform>
               <map:serialize type="xhtml"/>
          	</map:match>
-           
-            
             <!-- ========================== permenent redirects ============================ -->
             <map:match type="wildcard" pattern="classes/index.html">
                 <map:redirect-to uri="{request:contextPath}/services/workshops/laneclasses.html"/>

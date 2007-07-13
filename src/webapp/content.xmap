@@ -104,13 +104,6 @@
                 <map:transform type="xsltc" src="context://xsl/faq-category-list.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="reggie/*.html">
-                <map:generate type="html-proxy" src="http://reggie.stanford.edu/{1}.asp?{request:queryString}"/>
-                <map:transform type="xsltc" src="context://xsl/reggie.xsl">
-                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="search-templates.xml">
                 <map:aggregate element="search-templates" ns="http://lane.stanford.edu/search-templates/ns">
                     <map:part src="cocoon:/templates/search/clinical.xml"/>
