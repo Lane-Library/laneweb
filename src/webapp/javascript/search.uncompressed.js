@@ -189,7 +189,11 @@ function refreshPopInContent(){
 		else {
 			optionsHtml = '<option selected="true">' + options[0] + '</option><option>' + options[1] + '</option>';
 		}
-		popInContent += 'Sorted by <select name="sortBy" onchange="sorteLibraryResults();" style="font-size: 95%; font-weight: 400;">' + optionsHtml + '</select>&nbsp;&nbsp;&nbsp;&nbsp;';
+		var webtrendsCall = ''; // add webtrends call only if dcsMultiTrack() is defined
+		if(isDefined(window,'dcsMultiTrack')){
+			webtrendsCall = "dcsMultiTrack('WT.ti','LaneConnex sort by click: "+  readCookie('LWeLibNextSort') +"','DCSext.keywords','"+keywords+"');";
+		}
+		popInContent += 'Sorted by <select name="sortBy" onchange="'+webtrendsCall+'sorteLibraryResults();" style="font-size: 95%; font-weight: 400;">' + optionsHtml + '</select>&nbsp;&nbsp;&nbsp;&nbsp;';
 	}
 	// if zero results for active tab AND no SFX results, display zeroResultsText
 	else if ( document.getElementById(eLibraryActiveTab + "TabZeroResultsText") 
@@ -786,6 +790,10 @@ function toggleIncrementalZeros(toggle){
 				results[i].className = 'hide';
 			}
 		}
+	}
+	var webtrendsCall = ''; // make webtrends call only if dcsMultiTrack() is defined
+	if(isDefined(window,'dcsMultiTrack')){
+		dcsMultiTrack("WT.ti","Metasearch Show/Hide Details clicked");
 	}
 }
 // end additional incremental functions
