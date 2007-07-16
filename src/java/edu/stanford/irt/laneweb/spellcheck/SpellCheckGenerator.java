@@ -10,16 +10,11 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.ServiceableGenerator;
 import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.querymap.Descriptor;
-import edu.stanford.irt.querymap.ResourceMap;
 import edu.stanford.irt.spell.SpellCheckResult;
 import edu.stanford.irt.spell.SpellChecker;
 
@@ -54,11 +49,15 @@ public class SpellCheckGenerator extends ServiceableGenerator {
 	 */
 	public void generate() throws IOException, SAXException,
 			ProcessingException {
-		SpellCheckResult result = this.spellChecker.spellCheck(this.query);
 		this.contentHandler.startDocument();
 		XMLUtils.startElement(this.contentHandler, NAMESPACE, SPELLCHECK);
-		XMLUtils.createElementNS(this.contentHandler, NAMESPACE, QUERY, this.query);
-		XMLUtils.createElementNS(this.contentHandler, NAMESPACE, SUGGESTION, result.getSuggestion());
+		if (null != this.query && this.query.length() > 0) {
+			SpellCheckResult result = this.spellChecker.spellCheck(this.query);
+			XMLUtils.createElementNS(this.contentHandler, NAMESPACE, QUERY, this.query);
+			if (null != result.getSuggestion()) {
+				XMLUtils.createElementNS(this.contentHandler, NAMESPACE, SUGGESTION, result.getSuggestion());
+			}
+		}
 		XMLUtils.endElement(this.contentHandler, NAMESPACE, SPELLCHECK);
 		this.contentHandler.endDocument();
 	}
@@ -75,9 +74,6 @@ public class SpellCheckGenerator extends ServiceableGenerator {
 			IOException {
 		super.setup(resolver, objectModel, src, params);
 		this.query = params.getParameter(QUERY, null);
-		if (null == this.query || this.query.length() == 0) {
-			throw new ProcessingException("null or empty query");
-		}
 	}
 
 }
