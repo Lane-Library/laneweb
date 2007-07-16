@@ -1,14 +1,18 @@
 <role-list>
     <role
-        name="edu.stanford.laneweb.UserInfoHelper"
+        name="edu.stanford.irt.laneweb.UserInfoHelper"
         shorthand="user-info-helper"
-        default-class="edu.stanford.laneweb.UserInfoHelperImpl"/>
+        default-class="edu.stanford.irt.laneweb.UserInfoHelperImpl"/>
     <role
-        name="edu.stanford.laneweb.WebDashLogin"
+        name="edu.stanford.irt.laneweb.WebDashLogin"
         shorthand="webdash-login"
-        default-class="edu.stanford.laneweb.WebDashLoginImpl"/>
+        default-class="edu.stanford.irt.laneweb.WebDashLoginImpl"/>
     <role
-        name="edu.stanford.laneweb.querymap.DescriptorManagerManager"
+        name="edu.stanford.irt.laneweb.querymap.DescriptorManagerManager"
         shorthand="descriptor-manager-manager"
-        default-class="edu.stanford.laneweb.querymap.LanewebDescriptorManager"/>
+        default-class="edu.stanford.irt.laneweb.querymap.LanewebDescriptorManager"/>
+    <role
+        name="edu.stanford.irt.spell.SpellChecker"
+        shorthand="spellchecker"
+        default-class="edu.stanford.irt.laneweb.spellcheck.SpellChecker"/>
 </role-list>

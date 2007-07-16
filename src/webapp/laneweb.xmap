@@ -10,20 +10,22 @@
                 pool-max="32">
                 <jtidy-config>context://WEB-INF/jtidy.properties</jtidy-config>
             </map:generator>
-            <map:generator name="search-proxy" src="edu.stanford.laneweb.SearchProxyGenerator"
+            <map:generator name="search-proxy" src="edu.stanford.irt.laneweb.SearchProxyGenerator"
                 logger="sitemap.generator.search-proxy" pool-max="32"/>
             <map:generator name="request" src="org.apache.cocoon.generation.RequestGenerator"
                 logger="sitemap.generator.request" pool-max="32"/>
-            <map:generator name="eresource" src="edu.stanford.laneweb.EresourcesQueryGenerator"
+            <map:generator name="eresource" src="edu.stanford.irt.laneweb.EresourcesQueryGenerator"
                 logger="sitemap.generation.eresource" pool-max="32"/>
-            <map:generator name="history" src="edu.stanford.laneweb.HistoryQueryGenerator"
+            <map:generator name="history" src="edu.stanford.irt.laneweb.HistoryQueryGenerator"
                 logger="sitemap.generation.history" pool-max="32"/>
             <map:generator name="status" logger="sitemap.generator.status"
                 src="org.apache.cocoon.generation.StatusGenerator" pool-max="4"/>
-            <map:generator name="html-proxy" src="edu.stanford.laneweb.JTidyProxyGenerator"
+            <map:generator name="html-proxy" src="edu.stanford.irt.laneweb.JTidyProxyGenerator"
                 logger="sitemap.generation.html-proxy" pool-max="32"/>
-            <map:generator name="querymap" src="edu.stanford.laneweb.querymap.QueryMapGenerator"
+            <map:generator name="querymap" src="edu.stanford.irt.laneweb.querymap.QueryMapGenerator"
                 logger="sitemap.generation.querymap" pool-max="32"/>
+            <map:generator name="spellcheck" src="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator"
+                logger="sitemap.generation.spellcheck" pool-max="32"/>
             <map:generator name="exception" src="org.apache.cocoon.generation.ExceptionGenerator"/>
         </map:generators>
         <map:transformers default="xsltc">
@@ -35,7 +37,7 @@
                 <xslt-processor-role>xsltc</xslt-processor-role>
                 <check-includes>false</check-includes>
             </map:transformer>
-            <map:transformer name="xinclude" src="edu.stanford.laneweb.LanewebXIncludeTransformer" pool-max="32"
+            <map:transformer name="xinclude" src="edu.stanford.irt.laneweb.LanewebXIncludeTransformer" pool-max="32"
                 logger="sitemap.transformer.xinclude"/>
             <map:transformer name="sql" logger="sitemap.transformer.sql"
                 src="org.apache.cocoon.transformation.SQLTransformer" pool-max="32"/>
@@ -78,17 +80,17 @@
         <map:readers default="resource">
             <map:reader name="resource" logger="sitemap.reader.resource" src="org.apache.cocoon.reading.ResourceReader"/>
             <map:reader name="txt-resource" logger="sitemap.reader.txtresource"
-                src="edu.stanford.laneweb.TxtResourceReader">
+                src="edu.stanford.irt.laneweb.TxtResourceReader">
                 <path>/</path>
                 <valueToSubstitute>/./.</valueToSubstitute>
             </map:reader>
         </map:readers>
         <map:actions>
-            <map:action logger="sitemap.action.login" name="loginAction" src="edu.stanford.laneweb.LoginAction">
+            <map:action logger="sitemap.action.login" name="loginAction" src="edu.stanford.irt.laneweb.LoginAction">
                 <map:parameter name="proxy-url" value="http://laneproxy.stanford.edu/login?"/>
             </map:action>
-             <map:action logger="sitemap.action.webdash" name="webdashAction" src="edu.stanford.laneweb.WebdashAction"/>
-            <map:action name="session-action" src="edu.stanford.laneweb.LanewebSessionAction"/>
+             <map:action logger="sitemap.action.webdash" name="webdashAction" src="edu.stanford.irt.laneweb.WebdashAction"/>
+            <map:action name="session-action" src="edu.stanford.irt.laneweb.LanewebSessionAction"/>
             <map:action name="clear-cache" logger="sitemap.acting.clear-cache"
                 src="org.apache.cocoon.acting.ClearCacheAction"/>
         </map:actions>
@@ -106,7 +108,7 @@
             <map:pipe name="noncaching" logger="sitemap.pipeline.noncaching"
                 src="org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline"/>
             <map:pipe name="throttling" logger="sitemap.pipeline.throttling"
-                src="edu.stanford.laneweb.ThrottlingPipeline"/>
+                src="edu.stanford.irt.laneweb.ThrottlingPipeline"/>
         </map:pipes>
     </map:components>
     <map:pipelines>
@@ -207,18 +209,16 @@
                 </map:transform>
               <map:serialize type="xhtml"/>
          	</map:match>
-           <map:match type="wildcard" pattern="ipFetch.html">
-              <map:generate type="request"/>
+            <map:match type="wildcard" pattern="ipFetch.html">
+                <map:generate type="request"/>
                 <map:transform type="xsltc" src="context://xsl/ipFetch.xsl">
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
                     <map:parameter name="remoteAddr" value="{request:remoteAddr}"/>
                 </map:transform>
-              <map:serialize type="xhtml"/>
-         	</map:match>
-         	
-         	
+                <map:serialize type="xhtml"/>
+            </map:match>
             <!-- ========================== permenent redirects ============================ -->
             <map:match type="wildcard" pattern="classes/index.html">
                 <map:redirect-to uri="{request:contextPath}/services/workshops/laneclasses.html"/>

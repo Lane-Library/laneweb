@@ -34,6 +34,8 @@ laneweb.context.eresources.maxWait=5000
 
 laneweb.cocoon.laneweb.ezproxy-key=L0nePr0xyP0SSK0y
 
+laneweb.cocoon.spellchecker.google-key=
+
 laneweb.cocoon.defaults.live-base=file:/afs/ir/group/lane/laneconnex/live
 laneweb.cocoon.defaults.stage-base=file:/afs/ir/group/lane/laneconnex/stage
 laneweb.cocoon.defaults.search-url=http://lane.stanford.edu/search/

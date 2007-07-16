@@ -43,7 +43,7 @@
 	<filter>
 		<filter-name>LanewebHTTPSFilter</filter-name>
 		<filter-class>
-			edu.stanford.laneweb.LanewebHTTPSFilter
+			edu.stanford.irt.laneweb.LanewebHTTPSFilter
 		</filter-class>
 	</filter>
 	<filter-mapping>
