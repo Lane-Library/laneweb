@@ -38,7 +38,7 @@ xmlns="http://www.w3.org/1999/xhtml"  xmlns:r="http://apache.org/cocoon/request/
 <body onload="document.defaultForm.submit()" >
 
 
-<form   action="{r:request/r:requestParameters/r:parameter[@name='postAction']}"  name="defaultForm" method="post">
+<form   action="{$post-url}"  name="defaultForm" method="post">
 <xsl:for-each select="r:request/r:requestParameters/r:parameter">
 	<xsl:if  test="@name !='postAction'">
 		<input type="hidden" name="{@name}" value="{r:value}"/>
