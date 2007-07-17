@@ -23,11 +23,11 @@ import edu.stanford.irt.laneweb.httpclient.HTTPClientSource;
 public class SearchProxyGenerator extends ServiceableGenerator {
 	
 	private SAXParser parser;
-	private Source source;
+	private Source src;
 
 	@Override
 	public void recycle() {
-		this.resolver.release(this.source);
+		this.resolver.release(this.src);
 		this.manager.release(this.parser);
 		this.source = null;
 		this.parser = null;
@@ -57,7 +57,7 @@ public class SearchProxyGenerator extends ServiceableGenerator {
         }
         Map map = new HashMap();
         map.put(HTTPClientSource.HTTP_STATE, httpState);
-        this.source = this.resolver.resolveURI(this.source + queryString,null,map);
+        this.src = this.resolver.resolveURI(this.source + queryString,null,map);
         try {
 			this.parser = (SAXParser) this.manager.lookup(SAXParser.ROLE);
 		} catch (ServiceException e) {
@@ -67,7 +67,7 @@ public class SearchProxyGenerator extends ServiceableGenerator {
 	
 	public void generate() throws IOException, SAXException,
 			ProcessingException {
-		InputSource inputSource = new InputSource(this.source.getInputStream());
+		InputSource inputSource = new InputSource(this.src.getInputStream());
 		this.parser.parse(inputSource, this.xmlConsumer);
 	}
 	
