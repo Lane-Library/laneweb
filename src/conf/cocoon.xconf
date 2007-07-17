@@ -150,5 +150,11 @@
   <spellchecker>
     <parameter name="google-key" value="***laneweb.cocoon.spellchecker.google-key***"/>
   </spellchecker>
-   
+  
+  <httpclient-manager>
+    <parameter name="max-total-connections" value="30"/>
+    <parameter name="max-host-connections" value="5"/>
+    <parameter name="connection-timeout" value="20000"/>
+  </httpclient-manager>
+  
 </cocoon>

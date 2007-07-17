@@ -43,10 +43,7 @@ public class SpellCheckGenerator extends ServiceableGenerator {
 		super.service(manager);
 		this.spellChecker = (SpellChecker) this.manager.lookup(SpellChecker.class.getName());
 	}
-
-	/* (non-Javadoc)
-	 * @see org.apache.cocoon.generation.Generator#generate()
-	 */
+	
 	public void generate() throws IOException, SAXException,
 			ProcessingException {
 		this.contentHandler.startDocument();

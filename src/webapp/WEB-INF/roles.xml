@@ -15,4 +15,8 @@
         name="edu.stanford.irt.spell.SpellChecker"
         shorthand="spellchecker"
         default-class="edu.stanford.irt.laneweb.spellcheck.SpellChecker"/>
+    <role
+        name="edu.stanford.irt.laneweb.httpclient.HttpClientManager"
+        shorthand="httpclient-manager"
+        default-class="edu.stanford.irt.laneweb.httpclient.LanewebHttpClientManager"/>
 </role-list>
