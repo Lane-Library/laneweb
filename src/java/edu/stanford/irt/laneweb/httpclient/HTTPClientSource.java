@@ -221,8 +221,11 @@ public class HTTPClientSource extends AbstractLogEnabled
      */
     public void initialize() throws Exception
     {
-    	this.m_httpState = (HttpState) this.m_parameters.get(HTTP_STATE);
-
+    	if (this.m_parameters.containsKey(HTTP_STATE))
+    	{
+    		this.m_httpState = (HttpState) this.m_parameters.get(HTTP_STATE);
+    		this.m_parameters.remove(HTTP_STATE);
+    	}
         if ( this.m_proxyHost != null && this.m_proxyPort != -1 )
         {
             this.m_client.getHostConfiguration().setProxy( this.m_proxyHost, this.m_proxyPort );
@@ -331,8 +334,7 @@ public class HTTPClientSource extends AbstractLogEnabled
                     "Adding header '" + key + "', with value '" + value + "'"
                 );
             }
-            //TODO a hack so the HttpState doesn't end up a header:
-            if (!HTTP_STATE.equals(key))
+           
             method.setRequestHeader( key, value );
         }
 
