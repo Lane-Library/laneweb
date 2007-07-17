@@ -35,7 +35,7 @@ import org.apache.excalibur.source.SourceException;
 import org.apache.excalibur.source.SourceFactory;
 
 /**
- * {@link HTTPClientSource} Factory class.
+ * {@link HttpClientSource} Factory class.
  *
  * @avalon.component
  * @avalon.service type=SourceFactory
@@ -55,15 +55,15 @@ public class HTTPClientSourceFactory extends AbstractLogEnabled
 	private HttpClient httpClient;
 
     /**
-     * Creates a {@link HTTPClientSource} instance.
+     * Creates a {@link HttpClientSource} instance.
      */
     public Source getSource( final String uri, final Map sourceParams )
         throws MalformedURLException, IOException
     {
         try
         {
-            final HTTPClientSource source = 
-                new HTTPClientSource( uri, sourceParams, this.httpClient );
+            final HttpClientSource source = 
+                new HttpClientSource( uri, sourceParams, this.httpClient );
             ContainerUtil.enableLogging( source, getLogger() );
             ContainerUtil.parameterize( source, m_parameters );
             ContainerUtil.initialize( source );
@@ -81,7 +81,7 @@ public class HTTPClientSourceFactory extends AbstractLogEnabled
         {
             final StringBuffer message = new StringBuffer();
             message.append( "Exception thrown while creating " );
-            message.append( HTTPClientSource.class.getName() );
+            message.append( HttpClientSource.class.getName() );
 
             throw new SourceException( message.toString(), e );
         }

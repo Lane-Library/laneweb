@@ -174,7 +174,7 @@ public class HTTPClientSource extends AbstractLogEnabled
     private long m_cachedLastModificationDate;
 
     /**
-     * Constructor, creates a new {@link HTTPClientSource} instance.
+     * Constructor, creates a new {@link HttpClientSource} instance.
      *
      * @param uri URI
      * @param parameters contextual parameters passed to this instance
@@ -189,7 +189,7 @@ public class HTTPClientSource extends AbstractLogEnabled
     }
 
     /**
-     * Parameterizes this {@link HTTPClientSource} instance.
+     * Parameterizes this {@link HttpClientSource} instance.
      *
      * @param params a {@link Parameters} instance.
      * @exception ParameterException if an error occurs
@@ -213,7 +213,7 @@ public class HTTPClientSource extends AbstractLogEnabled
     }
 
     /**
-     * Initializes this {@link HTTPClientSource} instance.
+     * Initializes this {@link HttpClientSource} instance.
      *
      * @exception Exception if an error occurs
      */
@@ -249,7 +249,7 @@ public class HTTPClientSource extends AbstractLogEnabled
 
     /**
      * Helper method to create the required {@link HttpMethod} object
-     * based on parameters passed to this {@link HTTPClientSource} object.
+     * based on parameters passed to this {@link HttpClientSource} object.
      *
      * @return a {@link HttpMethod} object.
      */
@@ -666,7 +666,7 @@ public class HTTPClientSource extends AbstractLogEnabled
     }
 
     /**
-     * Recycles this {@link HTTPClientSource} object so that it may be reused
+     * Recycles this {@link HttpClientSource} object so that it may be reused
      * to refresh it's content.
      */
     private void recycle()
@@ -779,28 +779,28 @@ public class HTTPClientSource extends AbstractLogEnabled
         private void upload()
             throws IOException
         {
-            final HttpMethod uploader = HTTPClientSource.this.createPutMethod( HTTPClientSource.this.m_uri, this.m_file );
+            final HttpMethod uploader = HttpClientSource.this.createPutMethod( HttpClientSource.this.m_uri, this.m_file );
 
             if ( this.m_logger.isDebugEnabled() )
             {
-                this.m_logger.debug( "Stream closed, writing data to " + HTTPClientSource.this.m_uri );
+                this.m_logger.debug( "Stream closed, writing data to " + HttpClientSource.this.m_uri );
             }
 
             try
             {
-                final int response = HTTPClientSource.this.executeMethod( uploader );
+                final int response = HttpClientSource.this.executeMethod( uploader );
 
                 if ( !this.successfulUpload( response ) )
                 {
                     throw new SourceException(
-                        "Write to " + HTTPClientSource.this.m_uri + " failed (" + response + ")"
+                        "Write to " + HttpClientSource.this.m_uri + " failed (" + response + ")"
                     );
                 }
 
                 if ( this.m_logger.isDebugEnabled() )
                 {
                     this.m_logger.debug(
-                        "Write to " + HTTPClientSource.this.m_uri + " succeeded (" + response + ")"
+                        "Write to " + HttpClientSource.this.m_uri + " succeeded (" + response + ")"
                     );
                 }
             }
