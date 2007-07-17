@@ -49,7 +49,10 @@ public class SearchProxyGenerator extends ServiceableGenerator {
 	    if (null == query) {
 	    	query = keywords;
 	    }
-	    String queryString = buildQuery(URLEncoder.encode(query,"UTF-8"), timeout, id, wait, engines);
+	    if (null != query) {
+	    	query = URLEncoder.encode(query,"UTF-8");
+	    }
+	    String queryString = buildQuery(query, timeout, id, wait, engines);
         Session session = request.getSession(true);
         HttpState httpState = (HttpState) session.getAttribute(HTTPClientSource.HTTP_STATE);
         if (null == httpState) {
