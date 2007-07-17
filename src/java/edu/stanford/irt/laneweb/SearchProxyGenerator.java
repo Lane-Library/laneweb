@@ -1,52 +1,33 @@
 package edu.stanford.irt.laneweb;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.ServiceableGenerator;
-import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpState;
-import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.excalibur.source.Source;
 import org.apache.excalibur.xml.sax.SAXParser;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.httpclient.HttpClientManager;
+import edu.stanford.irt.laneweb.httpclient.HTTPClientSource;
 
 public class SearchProxyGenerator extends ServiceableGenerator {
 	
-	private static final String HTTP_STATE = "httpState";
-	
-	private HttpClient httpClient;
-	private HttpState httpState;
-	private String queryString;
 	private SAXParser parser;
+	private Source source;
 
 	@Override
-	public void service(ServiceManager manager) throws ServiceException {
-		super.service(manager);
-		HttpClientManager httpClientManager = (HttpClientManager) this.manager.lookup(HttpClientManager.ROLE);
-		this.httpClient = httpClientManager.getHttpClient();
-		this.manager.release(httpClientManager);
-	}
-	@Override
-	public void dispose() {
-		this.httpClient = null;
-		super.dispose();
-	}
-	@Override
 	public void recycle() {
-		this.httpState = null;
-		this.queryString = null;
+		this.resolver.release(this.source);
 		this.manager.release(this.parser);
 		super.recycle();
 	}
@@ -65,13 +46,16 @@ public class SearchProxyGenerator extends ServiceableGenerator {
 	    if (null == query) {
 	    	query = keywords;
 	    }
-	    this.queryString = buildQuery(query, timeout, id, wait, engines);
+	    String queryString = buildQuery(query, timeout, id, wait, engines);
         Session session = request.getSession(true);
-        this.httpState = (HttpState) session.getAttribute(HTTP_STATE);
-        if (null == this.httpState) {
-        	this.httpState = new HttpState();
-        	session.setAttribute(HTTP_STATE, this.httpState);
+        HttpState httpState = (HttpState) session.getAttribute(HTTPClientSource.HTTP_STATE);
+        if (null == httpState) {
+        	httpState = new HttpState();
+        	session.setAttribute(HTTPClientSource.HTTP_STATE, httpState);
         }
+        Map map = new HashMap();
+        map.put(HTTPClientSource.HTTP_STATE, httpState);
+        this.source = this.resolver.resolveURI(this.source + queryString,null,map);
         try {
 			this.parser = (SAXParser) this.manager.lookup(SAXParser.ROLE);
 		} catch (ServiceException e) {
@@ -81,14 +65,8 @@ public class SearchProxyGenerator extends ServiceableGenerator {
 	
 	public void generate() throws IOException, SAXException,
 			ProcessingException {
-		GetMethod get = new GetMethod(this.source + this.queryString);
-		try {
-			this.httpClient.executeMethod(null, get, this.httpState);
-			InputStream input = get.getResponseBodyAsStream();
-			this.parser.parse(new InputSource(input), this.xmlConsumer);
-		} finally {
-			get.releaseConnection();
-		}
+		InputSource inputSource = new InputSource(this.source.getInputStream());
+		this.parser.parse(inputSource, this.xmlConsumer);
 	}
 	
 	private String buildQuery(String query, String timeout, String id, String wait, String[] engines) {

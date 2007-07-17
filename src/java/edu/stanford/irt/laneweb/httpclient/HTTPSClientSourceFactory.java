@@ -35,7 +35,7 @@ import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
  * @author <a href="mailto:dev@avalon.apache.org">Avalon Development Team</a>
  * @version CVS $Id: HTTPSClientSourceFactory.java,v 1.5 2004/02/28 11:47:24 cziegeler Exp $
  */
-public class HTTPSClientSourceFactory extends HttpClientSourceFactory
+public class HTTPSClientSourceFactory extends HTTPClientSourceFactory
 {
     /**
      * SSL implementation provider.

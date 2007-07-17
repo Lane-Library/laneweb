@@ -73,6 +73,7 @@
     <component-instance class="org.apache.cocoon.components.source.impl.ContextSourceFactory" name="context" logger="core.source.context"/>
     <component-instance class="org.apache.cocoon.components.source.impl.SitemapSourceFactory" name="cocoon" logger="core.source.sitemap"/>
     <component-instance class="org.apache.excalibur.source.impl.FileSourceFactory" name="file" logger="core.source.file"/>
+    <component-instance class="edu.stanford.irt.laneweb.httpclient.HTTPClientSourceFactory" name="http" logger="core.source.http"/>
     <component-instance class="org.apache.excalibur.source.impl.URLSourceFactory" name="*"/>
   </source-factories>
 
