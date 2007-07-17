@@ -29,6 +29,8 @@ public class SearchProxyGenerator extends ServiceableGenerator {
 	public void recycle() {
 		this.resolver.release(this.source);
 		this.manager.release(this.parser);
+		this.source = null;
+		this.parser = null;
 		super.recycle();
 	}
 	@Override
