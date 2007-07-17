@@ -526,6 +526,8 @@ public class HTTPClientSource extends AbstractLogEnabled
         				}
         				output.write(buffer,0,b);
         			}
+        			in.close();
+        			output.close();
         		} catch (IOException e) {
 					getLogger().error(e.getMessage(),e);
 				} finally {
