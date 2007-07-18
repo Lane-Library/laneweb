@@ -34,7 +34,7 @@
     </component-instance>
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
       <values>
-        <template>default</template>
+        <template>irt2</template>
         <search-url>***laneweb.cocoon.defaults.search-url***</search-url>
         <live-base>***laneweb.cocoon.defaults.live-base***</live-base>
         <stage-base>***laneweb.cocoon.defaults.stage-base***</stage-base>
