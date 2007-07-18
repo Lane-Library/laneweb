@@ -4,30 +4,10 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <!--<map:match type="wildcard" pattern="search/*">
-                <map:match type="wildcard" pattern="search/search">
-                    <map:generate type="search-proxy" src="{defaults:search-url}/search"/>
-                    <!- -<map:transform type="xsltc" src="context://xsl/search-proxy.xsl">
-                        <map:parameter name="context" value="{request:contextPath}"/>
-                        <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                        <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                        <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                        <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                        </map:transform>- ->
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match type="wildcard" pattern="search/describe">
-                    <map:generate type="search-proxy" src="{defaults:search-url}/describe"/>
-                    <!- -<map:transform type="xsltc" src="context://xsl/search-proxy.xsl">
-                        <map:parameter name="context" value="{request:contextPath}"/>
-                        <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                        <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                        <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                        <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                        </map:transform>- ->
-                    <map:serialize type="xhtml"/>
-                </map:match>
-            </map:match>-->
+            <map:match pattern="search/*">
+                <map:generate type="search-proxy" src="{defaults:search-url}/{1}"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="querymap/*">
                 <map:match pattern="querymap/map">
                     <map:generate type="querymap">

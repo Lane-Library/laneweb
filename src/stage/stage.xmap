@@ -8,7 +8,7 @@
                 <map:read src="{defaults:stage-base}/content/TMP{1}" mime-type="text/html"/>
             </map:match>
             <map:match type="wildcard" pattern="javascript/yui/**">
-                <map:mount uri-prefix="javascript/yui" check-reload="no" src="{defaults:stage-base}/yui.xmap"/>
+                <map:mount uri-prefix="javascript/yui" check-reload="no" src="context://yui.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="extensions/**">
                 <map:mount uri-prefix="extensions" check-reload="no" src="{defaults:stage-base}/extensions.xmap"/>
