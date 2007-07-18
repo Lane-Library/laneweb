@@ -1,8 +1,6 @@
 var keywords;
 var results;
 
-YAHOO.util.Event.addListener(window,'load',initSearch);
-
 function initSearch(e)
 {
     window.keywords = escape(document.getElementById('keywordresult').innerHTML.replace(/&amp;/g,'&'));
@@ -50,7 +48,7 @@ function Result(type, tab, zeroHits, container)
     }
     if (zeroHits != undefined)
     {
-    	this._zeroHits = zeroHits;
+        this._zeroHits = zeroHits;
     }
     if (container != undefined)
     {
@@ -92,7 +90,7 @@ Result.prototype.callbackSuccess = function(o)
     if (newList && newList.nodeName == 'dl')
     {
         container.appendChild(newList);
-    	result.setTabCount(newList.getElementsByTagName('dt').length);
+        result.setTabCount(newList.getElementsByTagName('dt').length);
     }
     else
     {
