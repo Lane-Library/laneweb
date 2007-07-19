@@ -6,7 +6,7 @@
         <map:generators default="file">
             <map:generator name="file" logger="sitemap.generator.file" src="org.apache.cocoon.generation.FileGenerator"
                 pool-max="32"/>
-            <map:generator name="html" logger="sitemap.generator.html" src="org.apache.cocoon.generation.HTMLGenerator"
+            <map:generator name="html" logger="sitemap.generator.html" src="edu.stanford.irt.laneweb.HTMLGenerator"
                 pool-max="32">
                 <jtidy-config>context://WEB-INF/jtidy.properties</jtidy-config>
             </map:generator>
