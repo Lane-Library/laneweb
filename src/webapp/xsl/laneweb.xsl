@@ -5,11 +5,9 @@
     xmlns:str="http://exslt.org/strings"
     exclude-result-prefixes="h str">
     
-    <xsl:strip-space elements="h:html h:head h:body h:form h:select"/>
+    <xsl:strip-space elements="h:html h:head h:body h:div h:form h:map h:select h:table h:tr h:td"/>
     
     <xsl:include href="flash.xsl"/>
-
-    <!--<xsl:strip-space elements="h:html h:head h:body h:div h:form h:map h:select h:table h:tr h:td"/>-->
     
     <!-- ===========================  PARAMETERS ========================= -->
     <!-- the template parameter from the request -->
@@ -122,6 +120,17 @@
         <xsl:copy-of select="."/>
     </xsl:template>
     
+    <xsl:template match="processing-instruction()">
+        <xsl:choose>
+            <xsl:when test=".='content'">
+                <xsl:call-template name="content"/>
+            </xsl:when>
+            <xsl:when test=".='breadcrumb'">
+                <xsl:call-template name="breadcrumb"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
     <!-- strip onload event handlers except 100years pages using yui in laneweb.js-->
     <xsl:template match="h:body/@onload">
         <xsl:if test="starts-with($request-uri,'100years')">
@@ -153,10 +162,6 @@
             <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
-    
-    <!-- remove searchFormSelect() script -->
-    <!-- well, maybe later . . . -->
-    <!--<xsl:template match="h:script[contains(.,'searchFormSelect')]"/>-->
    
     <xsl:template match="h:a">
         <xsl:choose>
@@ -431,27 +436,8 @@
     </xsl:template>
     
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
-    <!-- puts in the current document's content, -->
-    <xsl:template match="h:div[@id='lw_content']">
-        <xsl:apply-templates select="$source-doc/h:body/node()"/>
-        <xsl:if test="$debug='y'">
-            <div id="debug">
-                <h3 style="padding:0;margin:0 0 1em 0">debugging information</h3>
-                <ul>
-                <li>context=<xsl:value-of select="$context"/></li>
-                <li>request-uri=<xsl:value-of select="$request-uri"/></li>
-                <li>query-string=<xsl:value-of select="$query-string"/></li>
-                <li>href=<xsl:value-of select="concat($context,'/',$request-uri,'?',$query-string)"/></li>
-                <li>ticket=<xsl:value-of select="$ticket"/></li>
-                <li>sunetid=<xsl:value-of select="$sunetid"/></li>
-                <li>proxy-links=<xsl:value-of select="$proxy-links"/></li>
-                <li>affiliation=<xsl:value-of select="$affiliation"/></li>
-                    <li>search-form-select=<xsl:value-of select="$search-form-select"/></li>
-                    <li>source=<xsl:value-of select="$source"/></li>
-                </ul>
-            </div>
-        </xsl:if>
-    </xsl:template>
+    <!-- puts in the current document's content (not any more) -->
+    <xsl:template match="h:div[@id='lw_content']"/>
     
     <xsl:template match="h:a[@class='lw_toggleProxyOn']">
         <xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'false'">
@@ -509,10 +495,8 @@
         </xsl:if>
     </xsl:template>
     
-    <!-- generates the breadcrumb -->
-    <xsl:template match="h:span[@id='lw_breadcrumb']">
-        <xsl:call-template name="breadcrumb"/>
-    </xsl:template>
+    <!-- generates the breadcrumb (not any more) -->
+    <xsl:template match="h:span[@id='lw_breadcrumb']"/>
 
    <!-- insert the mesh term from the m parameter --> 
     <xsl:template match="h:span[@class='lw_mesh']">
@@ -573,6 +557,29 @@
             </xsl:if>
         </xsl:attribute>
     </xsl:template>
+    
+    <!-- the content -->
+    <xsl:template name="content">
+        <xsl:apply-templates select="$source-doc/h:body/node()"/>
+        <xsl:if test="$debug='y'">
+            <div id="debug">
+                <h3 style="padding:0;margin:0 0 1em 0">debugging information</h3>
+                <ul>
+                    <li>context=<xsl:value-of select="$context"/></li>
+                    <li>request-uri=<xsl:value-of select="$request-uri"/></li>
+                    <li>query-string=<xsl:value-of select="$query-string"/></li>
+                    <li>href=<xsl:value-of select="concat($context,'/',$request-uri,'?',$query-string)"/></li>
+                    <li>ticket=<xsl:value-of select="$ticket"/></li>
+                    <li>sunetid=<xsl:value-of select="$sunetid"/></li>
+                    <li>proxy-links=<xsl:value-of select="$proxy-links"/></li>
+                    <li>affiliation=<xsl:value-of select="$affiliation"/></li>
+                    <li>search-form-select=<xsl:value-of select="$search-form-select"/></li>
+                    <li>source=<xsl:value-of select="$source"/></li>
+                </ul>
+            </div>
+        </xsl:if>
+    </xsl:template>
+    
     <!-- the breadcrumb -->
     <xsl:template name="breadcrumb">
         <xsl:call-template name="breadcrumb-section">

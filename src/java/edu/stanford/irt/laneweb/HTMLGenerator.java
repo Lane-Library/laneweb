@@ -39,6 +39,8 @@ import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.AbstractSource;
 import org.w3c.tidy.Tidy;
+import org.w3c.tidy.TidyXMLReader;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
@@ -61,33 +63,33 @@ public class HTMLGenerator extends ServiceableGenerator implements
 	}
 	private void doConfig() throws ConfigurationException {
 
-		if (configUrl != null) {
-			org.apache.excalibur.source.SourceResolver resolver = null;
-			Source configSource = null;
-			try {
-				resolver = (org.apache.excalibur.source.SourceResolver) this.manager
-						.lookup(org.apache.excalibur.source.SourceResolver.ROLE);
-				configSource = resolver.resolveURI(configUrl);
-				if (getLogger().isDebugEnabled()) {
-					getLogger().debug(
-							"Loading configuration from "
-									+ configSource.getURI());
-				}
-
-				this.properties = new Properties();
-				this.properties.load(configSource.getInputStream());
-
-			} catch (Exception e) {
-				getLogger().warn("Cannot load configuration from " + configUrl);
-				throw new ConfigurationException(
-						"Cannot load configuration from " + configUrl, e);
-			} finally {
-				if (null != resolver) {
-					this.manager.release(resolver);
-					resolver.release(configSource);
-				}
-			}
-		}
+//		if (configUrl != null) {
+//			org.apache.excalibur.source.SourceResolver resolver = null;
+//			Source configSource = null;
+//			try {
+//				resolver = (org.apache.excalibur.source.SourceResolver) this.manager
+//						.lookup(org.apache.excalibur.source.SourceResolver.ROLE);
+//				configSource = resolver.resolveURI(configUrl);
+//				if (getLogger().isDebugEnabled()) {
+//					getLogger().debug(
+//							"Loading configuration from "
+//									+ configSource.getURI());
+//				}
+//
+//				this.properties = new Properties();
+//				this.properties.load(configSource.getInputStream());
+//
+//			} catch (Exception e) {
+//				getLogger().warn("Cannot load configuration from " + configUrl);
+//				throw new ConfigurationException(
+//						"Cannot load configuration from " + configUrl, e);
+//			} finally {
+//				if (null != resolver) {
+//					this.manager.release(resolver);
+//					resolver.release(configSource);
+//				}
+//			}
+//		}
 	}
 
 	/**
@@ -148,36 +150,12 @@ public class HTMLGenerator extends ServiceableGenerator implements
 	public void generate() throws IOException, SAXException,
 			ProcessingException {
 		try {
-			doConfig();
-			Tidy tidy = new Tidy();
-
-			tidy.setConfigurationFromProps(this.properties);
-
-			StringWriter stringWriter = new StringWriter();
-			PrintWriter errorWriter = new PrintWriter(stringWriter);
-			tidy.setErrout(errorWriter);
-
-			final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			tidy.parse(this.inputSource.getInputStream(), baos);
-			errorWriter.flush();
-			errorWriter.close();
-			if (getLogger().isWarnEnabled()) {
-				getLogger().warn(stringWriter.toString());
-			}
-			Source foo = new AbstractSource() {
-				public boolean exists() {
-					return true;
-				}
-
-				public InputStream getInputStream() {
-					return new ByteArrayInputStream(baos.toByteArray());
-				}
-			};
-			SourceUtil.parse(this.manager, foo, super.xmlConsumer);
+			TidyXMLReader reader = new TidyXMLReader();
+			reader.setContentHandler(this.xmlConsumer);
+			InputSource source = new InputSource(this.inputSource.getInputStream());
+			reader.parse(source);
 		} catch (SAXException e) {
 			SourceUtil.handleSAXException(this.inputSource.getURI(), e);
-		} catch (ConfigurationException e) {
-			throw new ProcessingException(e);
 		}
 	}
 

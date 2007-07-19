@@ -33,6 +33,9 @@
 			</xsl:copy>
 		</xsl:if>
 	</xsl:template>
+	
+	<!-- remove searchFormSelect() script -->
+	<xsl:template match="h:script[contains(.,'searchFormSelect')]"/>
 
 	<xsl:template match="h:td/h:div">
 		<xsl:copy>
