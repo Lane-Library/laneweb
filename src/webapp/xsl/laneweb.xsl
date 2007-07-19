@@ -128,6 +128,9 @@
             <xsl:when test=".='breadcrumb'">
                 <xsl:call-template name="breadcrumb"/>
             </xsl:when>
+            <xsl:when test=".='keywords'">
+                <xsl:value-of select="$keywords"/>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
     
@@ -411,6 +414,7 @@
         </xsl:copy>
     </xsl:template>
    
+   <!-- TODO keep for now for backwards compatibility will be replaced by pi -->
    <xsl:template match="h:span[@class='lw_keywords']">
        <xsl:value-of select="$keywords"/>
    </xsl:template>
