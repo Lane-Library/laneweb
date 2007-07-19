@@ -147,7 +147,11 @@ public class NodeParser
         else if (node.type == Node.ProcInsTag)
         {
             String pi = new String(node.textarray,node.start,node.end-node.start);
-            this.contentHandler.processingInstruction(pi.substring(0,pi.indexOf(' ')), pi.substring(pi.indexOf(' '),pi.length()-1));
+            if(pi.indexOf(' ') > 0) {
+            	String name = pi.substring(0, pi.indexOf(' '));
+            	String value = pi.substring(pi.indexOf(' ')+1,pi.length()-1);//last '?' appears in string
+            	this.contentHandler.processingInstruction(name, value);
+            }
         }
 //        else if (node.type == Node.XML_DECL)
 //        {

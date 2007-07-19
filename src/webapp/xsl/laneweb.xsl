@@ -579,6 +579,7 @@
                     <li>affiliation=<xsl:value-of select="$affiliation"/></li>
                     <li>search-form-select=<xsl:value-of select="$search-form-select"/></li>
                     <li>source=<xsl:value-of select="$source"/></li>
+                    <li>keywords=<xsl:value-of select="$keywords"/></li>
                 </ul>
             </div>
         </xsl:if>

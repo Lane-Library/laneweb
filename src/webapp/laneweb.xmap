@@ -243,6 +243,7 @@
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                    <map:parameter name="keywords" value="{request-param:keywords}"/>
                 </map:transform>
                 <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
@@ -265,6 +266,7 @@
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                    <map:parameter name="keywords" value="{request-param:keywords}"/>
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="context://xsl/template-{chain:template}.xsl">
