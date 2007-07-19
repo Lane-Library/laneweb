@@ -99,7 +99,14 @@
     <!-- ====================  DEFAULT TEMPLATES ============================= -->
     <!-- root template applies templates on the template document -->
     <xsl:template match="/">
-        <xsl:apply-templates select="$template-document"/>
+        <xsl:choose>
+            <xsl:when test="$template-document">
+                <xsl:apply-templates select="$template-document"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="child::node()"/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <!-- default element match, copies the element and applies templates on all childeren and attributes -->
