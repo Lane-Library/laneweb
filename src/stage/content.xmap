@@ -52,6 +52,14 @@
                 </map:transform>
                 <map:serialize type="text"/>
             </map:match>
+            <map:match type="wildcard" pattern="search-tab-results.xml">
+                <map:aggregate element="search-tab-results" ns="http://lane.stanford.edu/search-tab-results/ns">
+                    <map:part src="cocoon:/search-proxy"/>  
+                    <map:part src="cocoon:/search-templates.xml"/>
+                </map:aggregate>
+                <map:transform type="xsltc" src="context://xsl/search-tab-results.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="sfx">
                 <map:generate type="html"
                     src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"/>
