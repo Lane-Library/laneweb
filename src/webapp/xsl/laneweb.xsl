@@ -353,6 +353,7 @@
             <xsl:apply-templates select="node()|$source-doc/h:head/*[not(self::h:title)]">
                 <xsl:sort select="name()" order="descending"/>
             </xsl:apply-templates>
+            <xsl:call-template name="meta-data"/>
         </xsl:copy>
     </xsl:template>
     
@@ -582,6 +583,15 @@
                     <li>keywords=<xsl:value-of select="$keywords"/></li>
                 </ul>
             </div>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template name="meta-data">
+        <xsl:if test="$keywords">
+            <meta name="LW.keywords" content="{$keywords}"/>
+        </xsl:if>
+        <xsl:if test="$source">
+            <meta name="LW.source" content="{$source}"/>
         </xsl:if>
     </xsl:template>
     
