@@ -45,6 +45,16 @@
                     <map:serialize type="xml" status-code="404"/>
                 </map:match>
             </map:match>
+            <map:match type="wildcard" pattern="search2.html">
+                <map:generate type="file" src="{defaults:live-base}/content/search2.html"/>
+                <map:transform type="xsltc" src="context://xsl/search.xsl">
+                    <map:parameter name="keywords" value="{request-param:keywords}"/>
+                    <map:parameter name="source" value="{request-param:source}"/>
+                </map:transform>
+                <map:transform type="xinclude"/>
+                <map:transform type="xsltc" src="context://xsl/search-post.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match type="wildcard" pattern="template2meta-engines">
                 <map:generate type="file" src="{defaults:live-base}/resources/templates/search/{request-param:source}.xml"/>
                 <map:transform type="xsltc" src="context://xsl/template2meta-engines.xsl">
