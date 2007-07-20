@@ -21,6 +21,8 @@
     <!-- whether debugging is on or not -->
     <xsl:param name="debug"/>
     
+    <xsl:param name="host"/>
+    
     <xsl:param name="keywords"/>
     
     <xsl:param name="source"/>
@@ -596,6 +598,9 @@
         </xsl:if>
         <xsl:if test="$source">
             <meta name="LW.source" content="{$source}"/>
+        </xsl:if>
+         <xsl:if test="$host">
+            <meta name="LW.host" content="{$host}"/>
         </xsl:if>
     </xsl:template>
     

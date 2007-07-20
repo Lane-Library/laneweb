@@ -60,6 +60,7 @@
             <map:match type="wildcard" pattern="plain/**.html">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
                 <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                	<map:parameter name="host" value="{request:serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}"/>
                     <map:parameter name="query-string" value="{request:queryString}"/>
@@ -83,6 +84,7 @@
                     <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                 </map:aggregate>
                 <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                	<map:parameter name="host" value="{request:serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}/stage"/>
                     <map:parameter name="query-string" value="{request:queryString}"/>

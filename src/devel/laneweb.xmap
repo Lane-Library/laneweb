@@ -54,6 +54,7 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
                         <map:transform type="xsltc" src="xsl/laneweb.xsl">
+                       	   	<map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
@@ -66,6 +67,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                 		   	<map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
@@ -103,6 +105,7 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
                         <map:transform type="xsltc" src="xsl/laneweb.xsl">
+                       	   	<map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
@@ -114,6 +117,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                        	<map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
