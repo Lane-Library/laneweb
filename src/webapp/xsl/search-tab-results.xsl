@@ -85,8 +85,7 @@
      <xsl:template match="res:search/res:engine[@id='lane']/res:resource[@id='calculators']">
         <resource id="cc">
         	<hits><xsl:value-of select="res:hits"/></hits>
-        	<url><xsl:value-of select="res:url"/></url>
-            <xsl:apply-templates/>
+           <xsl:apply-templates/>
         </resource>
     </xsl:template>
     
@@ -94,7 +93,6 @@
      <xsl:template match="res:search/res:engine[@id='lane']/res:resource[@id='lanedatabase']">
         <resource id="database">
         	<hits><xsl:value-of select="res:hits"/></hits>
-        	<url><xsl:value-of select="res:url"/></url>
             <xsl:apply-templates/>
         </resource>
     </xsl:template>
@@ -103,7 +101,6 @@
      <xsl:template match="res:search/res:engine[@id='lane']/res:resource[@id='lanefaq']">
         <resource id="lanefaq">
         	<hits><xsl:value-of select="res:hits"/></hits>
-        	<url><xsl:value-of select="res:url"/></url>
             <xsl:apply-templates/>
         </resource>
     </xsl:template>
@@ -111,7 +108,6 @@
      <xsl:template match="res:search/res:engine[@id='lane']/res:resource[@id='lanebook']">
         <resource id="book">
         	<hits><xsl:value-of select="res:hits"/></hits>
-        	<url><xsl:value-of select="res:url"/></url>
             <xsl:apply-templates/>
         </resource>
     </xsl:template>
@@ -120,7 +116,6 @@
      <xsl:template match="res:search/res:engine[@id='lane']/res:resource[@id='lane_ej']">
         <resource id="ej">
         	<hits><xsl:value-of select="res:hits"/></hits>
-        	<url><xsl:value-of select="res:url"/></url>
             <xsl:apply-templates/>
         </resource>
     </xsl:template>
