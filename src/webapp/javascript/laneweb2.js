@@ -1,4 +1,5 @@
 var searching = false;
+var metaTags = new Object();
 
 YAHOO.util.Event.addListener(window,'load',initialize);
 
@@ -6,7 +7,9 @@ function initialize(e) {
     YAHOO.util.Event.addListener(window, 'unload', finalize);
     YAHOO.util.Event.addListener(document, 'mouseover', handleMouseOver);
     YAHOO.util.Event.addListener(document, 'mouseout', handleMouseOut);
+    YAHOO.util.Event.addListener(document, 'click', handleClick);
     initializeSearchForm(e);
+    initializeMetaTags(e);
     if (window.initSearch) {
         window.initSearch(e);
     }
@@ -14,6 +17,22 @@ function initialize(e) {
 
 function finalize(e) {
     searching = false;
+}
+
+function initializeMetaTags(e){
+	var metaTagElements = document.getElementsByTagName('meta');
+	for (var i = 0; i < metaTagElements.length; i++) {
+	    var key = metaTagElements[i].getAttribute('name');
+	    var value =  metaTagElements[i].getAttribute('content');
+	    if(key != undefined &&  value != undefined)
+			window.metaTags[key] = value;		
+	}
+}
+
+function getMetaContent(name)
+{
+	if(name != undefined)
+		return window.metaTags[name];
 }
 
 function handleMouseOver(e) {
@@ -36,6 +55,26 @@ function handleChange(e) {
         target.change(e);
     }
 }
+
+function handleClick(e) {
+	var target = (e.srcElement) ? e.srcElement : e.target;
+    if(target.tagName == "A" || target.tagName == "IMG")
+    	webtrendsProcess(target);
+    if (target.clicked) {
+        target.clicked(e);
+    }
+}
+
+function webtrendsProcess(node)
+{
+	var DCS_dcsuri;
+	var DCS_dcsquery;
+	var WT_ti;
+	
+	
+}
+
+ 
 
 function initializeSearchForm(e) {
     var searchForm = document.getElementById('searchForm');
