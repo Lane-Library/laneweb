@@ -441,8 +441,10 @@
     </xsl:template>
     
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
-    <!-- puts in the current document's content (not any more) -->
-    <xsl:template match="h:div[@id='lw_content']"/>
+    <!-- puts in the current document's content (not any more) (well ok, need backwards compatibility for now )-->
+    <xsl:template match="h:div[@id='lw_content']">
+        <xsl:call-template name="content"/>
+    </xsl:template>
     
     <xsl:template match="h:a[@class='lw_toggleProxyOn']">
         <xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'false'">
@@ -501,7 +503,9 @@
     </xsl:template>
     
     <!-- generates the breadcrumb (not any more) -->
-    <xsl:template match="h:span[@id='lw_breadcrumb']"/>
+    <xsl:template match="h:span[@id='lw_breadcrumb']">
+        <xsl:call-template name="breadcrumb"/>
+    </xsl:template>
 
    <!-- insert the mesh term from the m parameter --> 
     <xsl:template match="h:span[@class='lw_mesh']">
