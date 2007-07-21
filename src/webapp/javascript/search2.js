@@ -5,50 +5,65 @@ var startTime = new Date().getTime();
 
 var spellcheck;
 
-
-function initSearch()
-{
+function initSearch() {
+try {
     window.keywords = escape(getMetaContent("LW.keywords"));
     YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck?q='+window.keywords, window.spellCheckCallBack);
     YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?q='+window.keywords, window.showHitsCallback);
     window.results = new Array();
-    var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('div');
+    var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
     for (i = 0; i  < tabs.length; i++)
     {
-        if (tabs[i].className == 'eLibraryTab')
+        if (tabs[i].className == 'eLibraryTab' || tabs[i].className == 'eLibraryTabActive')
         {
             var tab = tabs[i];
             var id = tab.id;
             var type = id.substring(0,id.indexOf('Tab'));
-            var container = document.getElementById(type);
+            var container = document.getElementById('eLibrarySearchResults');
             var zeroHits = document.getElementById(type+'NoHitsText');
-            var result = tabs[i].result = new Result(type, tab, zeroHits, container);
+            var result = new Result(type, tab, zeroHits, container, window.keywords);
             window.results.push(result);
             tab.result = result;
-            tab.onclick = function(event)
+            var anchor = tab.getElementsByTagName('a')[0];
+            tab.activate = function(event) {
+                if (this.className != 'eLibraryTabActive') {
+                    this.style.textDecoration = 'underline';
+                    this.style.cursor = 'pointer';
+                }
+            }
+            tab.deactivate = function(event) {
+                this.style.textDecoration = 'none';
+                this.style.cursor = 'default';
+            }
+            tab.clicked = function(event) {
+                this.result.clicked(event);
+                YAHOO.util.Event.stopEvent(event);
+            }
+/*            tab.onclick = function(event)
             {
                 return this.result.onclick(event);
-            }
-            
-        }        
+            }*/
+        }
     }
     spellcheck = new Spellcheck();
 }
+    catch(e) {alert(e.getMessage()) }
+    }
 
 
 
-function Result(type, tab, zeroHits, container)
+function Result(type, tab, zeroHits, container, keywords)
 {
     if (type != undefined)
     {
         this._type = type;
         if (this._type == 'biotools')
         {
-            this._baseUrl = '/././eresources/erdb?s=biotools&q=';
+            this._baseUrl = '/././plain/search2.html?source=biotools&keywords=';
         }
         else
         {
-            this._baseUrl = '/././eresources/erdb?t='+this._type+'&q=';
+            this._baseUrl = '/././plain/search2.html?source='+this._type+'&keywords=';
         }
     }
     if (tab != undefined)
@@ -63,6 +78,7 @@ function Result(type, tab, zeroHits, container)
     {
         this._container = container;
     }
+    this._keywords = keywords;
     this._callback =
     {
         success:this.callbackSuccess,
@@ -77,9 +93,9 @@ function Result(type, tab, zeroHits, container)
 /*
 Result.prototype.initialize() = function()
 {
-    if (this.currentList())
+    if (this.currentContent())
     {
-        this._container.removeChild(currentList());
+        this._container.removeChild(currentContent());
     }
     this.hide();
     this._state = 'initialized';
@@ -87,19 +103,27 @@ Result.prototype.initialize() = function()
     */
 Result.prototype.callbackSuccess = function(o)
 {
+try {
     var result = o.argument.result;
     var container = result._container;
-    var currentList = result.currentList();
-    var newList = o.responseXML.getElementsByTagName('dl')[0];
-    window.hideResults();
-    if (currentList)
-    {
-        container.removeChild(currentList);
+    var currentContent = result._container.ownerDocument.getElementById('eLibrarySearchResults').getElementsByTagName('div')[0];
+    var divs = o.responseXML.getElementsByTagName('div');
+    var newContent = undefined;
+    for (var i = 0; i < divs.length; i++) {
+        if (divs[i].id == result._type) {
+            newContent = divs[i];
+            break;
+        }
     }
-    if (newList && newList.nodeName == 'dl')
+    //window.hideResults();
+    if (currentContent)
     {
-        container.appendChild(newList);
-        result.setTabCount(newList.getElementsByTagName('dt').length);
+        container.removeChild(currentContent);
+    }
+    if (newContent && newContent.nodeName == 'div')
+    {
+        container.appendChild(newContent);
+        result.setTabCount(newContent.getElementsByTagName('dt').length);
     }
     else
     {
@@ -107,16 +131,17 @@ Result.prototype.callbackSuccess = function(o)
     }
     result._state = 'searched';
     result.show();
+    } catch(e) {alert(e.getMessage()); }
 }
 Result.prototype.callbackFailure = function(o)
 {
     alert('callbackFailure');
 }
-Result.prototype.onclick = function(event)
+Result.prototype.clicked = function(event)
 {
     if (this._state == 'initialized')
     {
-        var url = this._baseUrl+keywords;
+        var url = this._baseUrl+this._keywords;
         this._state = 'searching';
         var request = YAHOO.util.Connect.asyncRequest('GET', url, this._callback);
     }
@@ -136,7 +161,7 @@ Result.prototype.onclick = function(event)
 
 Result.prototype.show = function()
 {
-    if (this.currentList())
+    if (this.currentContent())
     {
         this._zeroHits.style.display = 'none';
     }
@@ -153,9 +178,9 @@ Result.prototype.hide = function()
     this._container.style.display = 'none';
     this._zeroHits.style.display = 'none';
 }
-Result.prototype.currentList = function()
+Result.prototype.currentContent = function()
 {
-    return this._container.getElementsByTagName('dl')[0];
+    return this._container.ownerDocument.getElementsId(this._type);
 }
 Result.prototype.setTabCount = function(count)
 {
@@ -187,7 +212,7 @@ var showHitsCallback =
 
 
 function showHits(o) {
-//try {
+try {
 	var uri = 'http://lane.stanford.edu/search-tab-result/ns';
 	var rootNode = window.getElementsByTagName(o.responseXML,"", uri, 'search-tab-results')[0];
 	searchId = rootNode.getAttribute("id");
@@ -226,7 +251,7 @@ function showHits(o) {
 			sleepingTime = 10000;
 		setTimeout( "getTabResult()", sleepingTime);
 	}
-//} catch (e) { alert(e.message) }
+} catch (e) { alert(e.message) }
 }
 
 function getTabResult()

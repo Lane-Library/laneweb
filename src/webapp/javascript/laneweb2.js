@@ -60,8 +60,11 @@ function handleClick(e) {
 	var target = (e.srcElement) ? e.srcElement : e.target;
     if(target.tagName == "A" || target.tagName == "IMG")
     	webtrendsProcess(target);
-    if (target.clicked) {
-        target.clicked(e);
+    while (target != undefined) {
+        if (target.clicked) {
+            target.clicked(e);
+        }
+        target = target.parentNode;
     }
 }
 

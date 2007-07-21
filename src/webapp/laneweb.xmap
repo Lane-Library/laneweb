@@ -252,7 +252,7 @@
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                 </map:transform>
-                <map:serialize type="xhtml"/>
+                <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="**.html">
                 <map:act type="session-action"/>
