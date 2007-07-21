@@ -13,19 +13,31 @@
          <search-tab-results id="{@id}" status="{@status}" >
             
             <resource id="clinical">
-	        	<hits> <xsl:value-of  select="count(//st:template[@id='clinical']/st:resource[@idref=$successful/../@id])" /></hits>
+            	<xsl:variable name="clinicalHits" select="count(//st:template[@id='clinical']/st:resource[@idref=$successful/../@id])"/> 
+            	<xsl:if test="$clinicalHits != 0">
+            		<hits> <xsl:value-of  select="$clinicalHits" /></hits>
+            	</xsl:if>
 	        	<url><xsl:text>/search.html?source=clinical&amp;id=</xsl:text><xsl:value-of select="@id"/></url>
 		   </resource>
 			<resource id="history">
-	        	<hits> <xsl:value-of  select="count(//st:template[@id='history']/st:resource[@idref=$successful/../@id])" /></hits>
+			<xsl:variable name="historyHits" select="count(//st:template[@id='history']/st:resource[@idref=$successful/../@id])"/> 
+            	<xsl:if test="$historyHits != 0">
+            		<hits> <xsl:value-of  select="$historyHits" /></hits>
+            	</xsl:if>
 	        <url><xsl:text>/search.html?source=history&amp;id=</xsl:text><xsl:value-of select="@id"/></url>
 		   </resource>
 			<resource id="peds">
-	        	<hits> <xsl:value-of  select="count(//st:template[@id='peds']/st:resource[@idref=$successful/../@id])" /></hits>
+	      		<xsl:variable name="pedsHits" select="count(//st:template[@id='peds']/st:resource[@idref=$successful/../@id])"/> 
+            	<xsl:if test="$pedsHits != 0">
+            		<hits> <xsl:value-of  select="$pedsHits" /></hits>
+            	</xsl:if>
 	        	<url><xsl:text>/search.html?source=peds&amp;id=</xsl:text><xsl:value-of select="@id"/></url>
 		   </resource>	            
       		<resource id="research">
-	        	<hits> <xsl:value-of  select="count(//st:template[@id='research']/st:resource[@idref=$successful/../@id])" /></hits>
+	        	<xsl:variable name="researchHits" select="count(//st:template[@id='research']/st:resource[@idref=$successful/../@id])"/> 
+            	<xsl:if test="$researchHits != 0">
+            		<hits> <xsl:value-of  select="$researchHits" /></hits>
+            	</xsl:if>
 	        	<url><xsl:text>/search.html?source=research&amp;id=</xsl:text><xsl:value-of select="@id"/></url>
 		   </resource>
 		   <xsl:apply-templates/>
@@ -55,6 +67,7 @@
     <xsl:template match="res:search/res:engine[@id='crossdb']/res:resource[@id='pubmed']">
         <resource id="{@id}">
         	<hits><xsl:value-of select="res:hits"/></hits>
+        	<url><xsl:value-of select="res:url"/></url>
         	<xsl:apply-templates/>
         </resource>
     </xsl:template>
