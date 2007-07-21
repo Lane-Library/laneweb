@@ -5,9 +5,10 @@ var startTime = new Date().getTime();
 
 var spellcheck;
 
+
 function initSearch()
 {
-    window.keywords = escape(document.getElementById('keywordresult').innerHTML.replace(/&amp;/g,'&'));
+    window.keywords = escape(getMetaContent("LW.keywords"));
     YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck?q='+window.keywords, window.spellCheckCallBack);
     YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?q='+window.keywords, window.showHitsCallback);
     window.results = new Array();
@@ -202,13 +203,13 @@ function showHits(o) {
 			if ( tabs[j].id != undefined &&  tabs[j].id == genre + 'Tab') 
 			{
 				var hitSpan = tabs[j].getElementsByTagName('span')[0];
-				if(window.getElementsByTagName(rows[i],"",uri,'hits')[0].firstChild != undefined)
+				if(window.getElementsByTagName(rows[i],"",uri,'hits')[0] != undefined && window.getElementsByTagName(rows[i],"",uri,'hits')[0].firstChild != undefined)
 				{
 					hitSpan.innerHTML = window.getElementsByTagName(rows[i],"",uri,'hits')[0].firstChild.nodeValue;
 					if(window.getElementsByTagName(rows[i],"",uri,'url')[0] != undefined && window.getElementsByTagName(rows[i],"",uri,'url')[0].firstChild != undefined)
 					{
 						var linkValue = window.getElementsByTagName(rows[i],"",uri,'url')[0].firstChild.nodeValue;
-						if(linkValue != null)
+						if(linkValue != null && tabs[j].getElementsByTagName('a')[0] != undefined)
 							tabs[j].getElementsByTagName('a')[0].href = linkValue;
 					}
 					hitSpan.style.visibility = 'visible';
@@ -251,11 +252,9 @@ function showSpellCheck(o)
 		var link = spellCheckContainer.getElementsByTagName('a')[0];
 		link.innerHTML = suggestion;
 		spellCheckContainer.style.display= 'inline';
-		var initTab = 'er';
+		var initTab = getMetaContent("LW.source");
         window.spellcheck.init(initTab,suggestion, link);
-        
-			
-	}
+    }
 	
 }
 
