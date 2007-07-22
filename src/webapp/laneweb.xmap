@@ -169,7 +169,7 @@
                 <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="content/**">
-                <map:mount uri-prefix="content" check-reload="no" src="content.xmap"/>
+                <map:mount uri-prefix="content" check-reload="yes" src="content.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="apps/**">
                 <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>

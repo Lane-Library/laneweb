@@ -13,30 +13,41 @@
         </xsl:copy>
     </xsl:template>
     
+    <xsl:template match="/doc">
+        <xsl:apply-templates select="child::h:html[not(attribute::id)]"/>
+    </xsl:template>
+    
+    <xsl:template match="processing-instruction()">
+        <xsl:choose>
+            <xsl:when test=".='searchResults'">
+                <xsl:apply-templates select="/doc/h:html[attribute::id]/h:body/child::node()"/>
+            </xsl:when>
+            <xsl:when test=".='keywords'">
+                <xsl:value-of select="$keywords"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="attribute::href[contains(.,'{$keywords}')]">
+        <xsl:attribute name="href">
+            <xsl:value-of select="substring-before(.,'{$keywords}')"/>
+            <xsl:value-of select="$keywords"/>
+        </xsl:attribute>
+    </xsl:template>
+    
     <xsl:template match="attribute::node()">
         <xsl:copy-of select="self::node()"/>
     </xsl:template>
     
-    <xsl:template match="child::h:div[parent::h:div[attribute::id='eLibrarySearchResults']]">
-        <xsl:if test="attribute::id = $source">
-            <xsl:copy>
-            <xsl:apply-templates select="attribute::node()|child::node()"/>
-                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" 
-                    href="cocoon://eresources/erdb?t={$source}&amp;q={$keywords}">
-                    <xi:fallback>sorry, something failed during your search.</xi:fallback>
-                </xi:include>
-            </xsl:copy>
-        </xsl:if>
+    <xsl:template match="h:p[parent::h:div[attribute::id='popInContent']]">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:apply-templates select="/doc/h:html[attribute::id]//h:div[attribute::id='popInContent']/child::node()"/>
+            <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
     </xsl:template>
     
-    <!--<xsl:template match="child::h:div[attribute::class='tipText']">
-        <xsl:if test="attribute::id = concat($source,'TipText')">
-            <xsl:copy>
-                <xsl:attribute name="style">display:block;float:right</xsl:attribute>
-                <xsl:apply-templates select="attribute::node()|child::node()"/>
-            </xsl:copy>
-        </xsl:if>
-    </xsl:template>-->
+    <xsl:template match="h:div[attribute::id='popInContent' and ancestor::h:html[attribute::id]]"/>
     
     <xsl:template match="child::h:li[attribute::class='eLibraryTab']">
         <xsl:copy>

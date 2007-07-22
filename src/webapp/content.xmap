@@ -46,7 +46,10 @@
                 </map:match>
             </map:match>
             <map:match type="wildcard" pattern="search2.html">
-                <map:generate type="file" src="{defaults:live-base}/content/search2.html"/>
+                <map:aggregate element="doc">
+                    <map:part src="{defaults:live-base}/content/search2.html"/>
+                    <map:part src="{defaults:live-base}/content/search2/{request-param:source}.html"/>
+                </map:aggregate>
                 <map:transform type="xsltc" src="context://xsl/search.xsl">
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
                     <map:parameter name="source" value="{request-param:source}"/>
