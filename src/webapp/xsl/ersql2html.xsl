@@ -17,7 +17,7 @@
             <body>
                 <xsl:choose>
                     <xsl:when test="sql:row">
-                        <dl class="searchResults">
+                        <dl id="searchResults">
                             <xsl:apply-templates
                                 select="sql:row[sql:ltitle = $ltitle
                                     and not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id
@@ -25,12 +25,15 @@
                             <xsl:apply-templates
                                 select="sql:row[not(preceding-sibling::sql:row[1]/sql:eresource_id = sql:eresource_id
                                     and preceding-sibling::sql:row[1]/sql:title = sql:title) and sql:ltitle != $ltitle]"/>
+                    
+                            <xsl:if test="count(sql:row) &gt; 20">
+                                <dt>
+                                <a href="#">
+                                    <img src="/graphics/icons/arrowUpTransp.gif" alt="up" border="0"/>
+                                    Back to top </a></dt>
+                                <dd/>
+                            </xsl:if>
                         </dl>
-                        <xsl:if test="count(sql:row) &gt; 20">
-                            <a style="margin-left:-3px;" href="#">
-                                <img src="/graphics/icons/arrowUpTransp.gif" alt="up" border="0"/>
-                                Back to top </a>
-                        </xsl:if>
                     </xsl:when>
                     <xsl:when test="$a != ''">
                         <div> No results for <xsl:choose>

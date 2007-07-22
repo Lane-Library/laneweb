@@ -4,15 +4,14 @@ var metaTags = new Object();
 YAHOO.util.Event.addListener(window,'load',initialize);
 
 function initialize(e) {
+try {
     YAHOO.util.Event.addListener(window, 'unload', finalize);
     YAHOO.util.Event.addListener(document, 'mouseover', handleMouseOver);
     YAHOO.util.Event.addListener(document, 'mouseout', handleMouseOut);
     YAHOO.util.Event.addListener(document, 'click', handleClick);
     initializeSearchForm(e);
     initializeMetaTags(e);
-    if (window.initSearch) {
-        window.initSearch(e);
-    }
+    } catch(exception) { alert(exception.message) }
 }
 
 function finalize(e) {
@@ -20,6 +19,7 @@ function finalize(e) {
 }
 
 function initializeMetaTags(e){
+try {
 	var metaTagElements = document.getElementsByTagName('meta');
 	for (var i = 0; i < metaTagElements.length; i++) {
 	    var key = metaTagElements[i].getAttribute('name');
@@ -27,36 +27,46 @@ function initializeMetaTags(e){
 	    if(key != undefined &&  value != undefined)
 			window.metaTags[key] = value;		
 	}
+    } catch(exception) { alert(exception.message) }
 }
 
 function getMetaContent(name)
 {
+try {
 	if(name != undefined)
 		return window.metaTags[name];
+    } catch(exception) { alert(exception.message) }
 }
 
 function handleMouseOver(e) {
+try {
     var target = (e.srcElement) ? e.srcElement : e.target;
     if (target.activate) {
         target.activate(e);
     }
+    } catch(exception) { alert(exception.message) }
 }
 
 function handleMouseOut(e) {
+try {
     var target = (e.srcElement) ? e.srcElement : e.target;
     if (target.deactivate) {
         target.deactivate(e);
     }
+    } catch(exception) { alert(exception.message) }
 }
 
 function handleChange(e) {
+try {
     var target = (e.srcElement) ? e.srcElement : e.target;
     if (target.change) {
         target.change(e);
     }
+    } catch(exception) { alert(exception.message) }
 }
 
 function handleClick(e) {
+try {
 	var target = (e.srcElement) ? e.srcElement : e.target;
     if(target.tagName == "A" || target.tagName == "IMG")
     	webtrendsProcess(target);
@@ -66,20 +76,24 @@ function handleClick(e) {
         }
         target = target.parentNode;
     }
+    } catch(exception) { alert(exception.message) }
 }
 
 function webtrendsProcess(node)
 {
+try {
 	var DCS_dcsuri;
 	var DCS_dcsquery;
 	var WT_ti;
 	
+    } catch(exception) { alert(exception.message) }
 	
 }
 
  
 
 function initializeSearchForm(e) {
+try {
     var searchForm = document.getElementById('searchForm');
     var taglines = document.getElementById('taglines');
     var allTagline = document.getElementById('allTagline');
@@ -119,13 +133,17 @@ function initializeSearchForm(e) {
     searchSubmit.deactivate = function(e) {
         this.src=this.src.replace('search_btn_f2.gif','search_btn.gif');
     }
+    } catch(exception) { alert(exception.message) }
 }
 
 
 function openNewWindow(url,features) {
+try {
     features = (features) ? features : '';
     var w = window.open(url, 'LaneConnex', features);
     if(window.focus){
         w.focus();
     }
+    
+    } catch(exception) { alert(exception.message) }
 }

@@ -5,6 +5,8 @@ var startTime = new Date().getTime();
 
 var spellcheck;
 
+YAHOO.util.Event.addListener(window,'load',initSearch);
+
 function initSearch() {
 try {
     window.keywords = escape(getMetaContent("LW.keywords"));
@@ -19,9 +21,7 @@ try {
             var tab = tabs[i];
             var id = tab.id;
             var type = id.substring(0,id.indexOf('Tab'));
-            var container = document.getElementById('eLibrarySearchResults');
-            var zeroHits = document.getElementById(type+'NoHitsText');
-            var result = new Result(type, tab, zeroHits, container, window.keywords);
+            var result = new Result(type, tab, window.keywords);
             window.results.push(result);
             tab.result = result;
             var anchor = tab.getElementsByTagName('a')[0];
@@ -46,38 +46,30 @@ try {
         }
     }
     spellcheck = new Spellcheck();
+    var sortBySelect = document.getElementById('sortBySelect');
+    if (sortBySelect) {
+         sortBySelect.change = sorteLibraryResults;
+         YAHOO.util.Event.addListener(sortBySelect, 'change', handleChange);
+    }
 }
-    catch(e) {alert(e.getMessage()) }
+    catch(e) {alert(e.message) }
     }
 
 
 
-function Result(type, tab, zeroHits, container, keywords)
+function Result(type, tab, keywords)
 {
+    try {
     if (type != undefined)
     {
         this._type = type;
-        if (this._type == 'biotools')
-        {
-            this._baseUrl = '/././plain/search2.html?source=biotools&keywords=';
-        }
-        else
-        {
-            this._baseUrl = '/././plain/search2.html?source='+this._type+'&keywords=';
-        }
+        this._baseUrl = '/././plain/search2/'+this._type+'.html?source='+this._type+'&keywords=';
     }
     if (tab != undefined)
     {
         this._tab = tab;
     }
-    if (zeroHits != undefined)
-    {
-        this._zeroHits = zeroHits;
-    }
-    if (container != undefined)
-    {
-        this._container = container;
-    }
+
     this._keywords = keywords;
     this._callback =
     {
@@ -89,49 +81,19 @@ function Result(type, tab, zeroHits, container, keywords)
         }
     }
     this._state = 'initialized';
+    } catch(exception) { alert(exception.message) }
 }
-/*
-Result.prototype.initialize() = function()
-{
-    if (this.currentContent())
-    {
-        this._container.removeChild(currentContent());
-    }
-    this.hide();
-    this._state = 'initialized';
-}
-    */
+
 Result.prototype.callbackSuccess = function(o)
 {
 try {
     var result = o.argument.result;
-    var container = result._container;
-    var currentContent = result._container.ownerDocument.getElementById('eLibrarySearchResults').getElementsByTagName('div')[0];
-    var divs = o.responseXML.getElementsByTagName('div');
-    var newContent = undefined;
-    for (var i = 0; i < divs.length; i++) {
-        if (divs[i].id == result._type) {
-            newContent = divs[i];
-            break;
-        }
-    }
-    //window.hideResults();
-    if (currentContent)
-    {
-        container.removeChild(currentContent);
-    }
-    if (newContent && newContent.nodeName == 'div')
-    {
-        container.appendChild(newContent);
-        result.setTabCount(newContent.getElementsByTagName('dt').length);
-    }
-    else
-    {
-        result.setTabCount(0);
-    }
+    
+    result.bodyNodes = o.responseXML.getElementsByTagName('body')[0].childNodes;
     result._state = 'searched';
     result.show();
-    } catch(e) {alert(e.getMessage()); }
+    
+    } catch(exception) { alert(exception.message) }
 }
 Result.prototype.callbackFailure = function(o)
 {
@@ -139,6 +101,7 @@ Result.prototype.callbackFailure = function(o)
 }
 Result.prototype.clicked = function(event)
 {
+try {
     if (this._state == 'initialized')
     {
         var url = this._baseUrl+this._keywords;
@@ -147,60 +110,56 @@ Result.prototype.clicked = function(event)
     }
     else if (this._state == 'searched')
     {
-        window.hideResults();
         this.show();
     }
     else if (this._state == 'searching')
     {
         alert('search in progress');
     }
-    window.spellcheck.setSource(this._type);
-    return false;
+    
+    } catch(exception) { alert(exception.message) }
 }
 
 
 Result.prototype.show = function()
 {
-    if (this.currentContent())
-    {
-        this._zeroHits.style.display = 'none';
-    }
-    else
-    {
-        this._zeroHits.style.display = 'inline';
+try {
+    var container = document.getElementById('eLibrarySearchResults');
+    for (var i = 0; i < this.bodyNodes.length; i++) {
+        var node = document.importNode(this.bodyNodes[i],true);
+        container.appendChild(node);
     }
     this._tab.className = 'eLibraryTabActive';
-    this._container.style.display = 'block';
+    
+    } catch(exception) { alert(exception.message) }
 }
 Result.prototype.hide = function()
 {
+try {
     this._tab.className = 'eLibraryTab';
-    this._container.style.display = 'none';
-    this._zeroHits.style.display = 'none';
+    
+    } catch(exception) { alert(exception.message) }
 }
 Result.prototype.currentContent = function()
 {
-    return this._container.ownerDocument.getElementsId(this._type);
+try {
+
+    } catch(exception) { alert(exception.message) }
 }
 Result.prototype.setTabCount = function(count)
 {
+try {
     var hitCount = this._tab.getElementsByTagName('span')[0];
     hitCount.textContent = count;
     hitCount.style.visibility = 'visible';
-}
-function hideResults()
-{
-    for (i = 0; i < results.length; i++)
-    {
-        results[i].hide();
-    }
+    
+    } catch(exception) { alert(exception.message) }
 }
 
 
 
 var handleFailure = function(o){
 alert('tab callback failure');
-searchType = null;
 }
 
 
@@ -256,7 +215,10 @@ try {
 
 function getTabResult()
 {
+try {
 	  YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?id='+window.searchId, window.showHitsCallback);
+
+    } catch(exception) { alert(exception.message) }
 }
 
 
@@ -264,11 +226,13 @@ function getTabResult()
 var spellCheckCallBack =
 {
   success:showSpellCheck,
+  failure:function() {alert('spellcheck failure')}
   //do nothing iof google spellcheck is done we dosn't want a alert windows 
 };
 
 function showSpellCheck(o)
 {
+try {
 	var uri = 'http://lane.stanford.edu/spellcheck/ns';
 	if( window.getElementsByTagName(o.responseXML,"", uri, 'suggestion')[0] != undefined)
 	{
@@ -281,6 +245,7 @@ function showSpellCheck(o)
         window.spellcheck.init(initTab,suggestion, link);
     }
 	
+    } catch(exception) { alert(exception.message) }
 }
 
 function Spellcheck()
@@ -289,6 +254,7 @@ function Spellcheck()
 
 Spellcheck.prototype.init = function(currentTab, suggestion, link)
 {
+try {
 	if(currentTab != undefined)
 		this.source = currentTab;		
 	 if (suggestion != undefined)
@@ -297,19 +263,27 @@ Spellcheck.prototype.init = function(currentTab, suggestion, link)
 	{
 		return window.spellcheck.onclick(event, this);
 	}	   	
+	
+    } catch(exception) { alert(exception.message) }
 }
 
 Spellcheck.prototype.onclick = function(event, link)
 {
+try {
 	link.href = '/search2.html?keywords='+this.suggestion+'&source='+this.source;
     return false;
+    
+    } catch(exception) { alert(exception.message) }
 }
 
 
 Spellcheck.prototype.setSource = function(source)
 {
+try {
     if (source != undefined)
 		this.source = source;
+		
+    } catch(exception) { alert(exception.message) }
 }
 
 
@@ -321,7 +295,57 @@ function getElementsByTagName(node, prefix, uri, name)
     }
     catch (e)
     {
+        alert(e.message);
         return node.getElementsByTagName(prefix+':'+name);
     }
 
+}
+
+// sort results
+//  relevance-sort = as returned by erdb 
+//  alpha-sort = alpha sort done by sortByAlpha (extension of Array class)
+//  relevance-sorted results are stored in relevanceSortedResults variable if alpha-sort is executed
+//  the LWeLibNextSort cookie is used to track the appropriate *next* sort scheme
+var relevanceSortedResults;
+function sorteLibraryResults(){
+try {
+	var searchResults = document.getElementById('eLibrarySearchResults');
+	
+	var nextSort = '';
+	if(searchResults.getAttribute('name') == 'relevance-sort'){
+		nextSort = 'alpha-sort';
+		searchResults.innerHTML = relevanceSortedResults;
+		showeLibraryTab(eLibraryActiveTab);
+	}
+	else {
+		nextSort = 'relevance-sort';
+		relevanceSortedResults = document.getElementById('eLibrarySearchResults').innerHTML;
+
+		for( var i = 0; i < eLibraryTabIDs.length; i++){
+			var divID = eLibraryTabIDs[i];
+			var div = document.getElementById(divID);
+			var dl = document.getElementById(divID).getElementsByTagName('dl');
+
+			var resultsArray = [];
+			var resultsHTML = '';
+
+			for(var p = 0; p < div.getElementsByTagName('dt').length; p++){
+				resultsArray[p]=[div.getElementsByTagName('dt')[p].innerHTML,'<dt>' + div.getElementsByTagName('dt')[p].innerHTML + '</dt>' + '<dd>' + div.getElementsByTagName('dd')[p].innerHTML + '</dd>'];
+			}
+			resultsArray = resultsArray.sortByAlpha();
+
+			for(p=0;p<resultsArray.length;p++){
+				resultsHTML = resultsHTML + resultsArray[p][1];
+			}
+			
+			var dlClassName = (dl.length) ? dl[0].className : '';
+			div.innerHTML = '<dl class="' + dlClassName + '">' + resultsHTML + '</dl>';
+		}
+	}
+
+	searchResults.setAttribute('name',nextSort);
+	setCookie('LWeLibNextSort',nextSort);
+	refreshPopInContent();
+	
+    } catch(exception) { alert(exception.message) }
 }

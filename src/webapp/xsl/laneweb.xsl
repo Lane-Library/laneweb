@@ -5,7 +5,7 @@
     xmlns:str="http://exslt.org/strings"
     exclude-result-prefixes="h str">
     
-    <xsl:strip-space elements="h:html h:head h:body h:div h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
+    <xsl:strip-space elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
     
     <xsl:include href="flash.xsl"/>
     
@@ -352,9 +352,8 @@
     <!-- get all the head elements from template and all non title head elements from source (with some exceptions)-->
     <xsl:template match="h:head">
         <xsl:copy>
-            <xsl:apply-templates select="node()|$source-doc/h:head/*[not(self::h:title)]">
-                <xsl:sort select="name()" order="descending"/>
-            </xsl:apply-templates>
+            <xsl:apply-templates select="child::node()"/>
+            <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
             <xsl:call-template name="meta-data"/>
         </xsl:copy>
     </xsl:template>
