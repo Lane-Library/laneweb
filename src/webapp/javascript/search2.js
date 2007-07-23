@@ -1,7 +1,7 @@
 var keywords;
 var searchId;
 var startTime = new Date().getTime();
-
+var activeResult;
 var spellcheck;
 
 YAHOO.util.Event.addListener(window,'load',initSearch);
@@ -12,18 +12,22 @@ function initSearch() {
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck?q='+window.keywords, window.spellCheckCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?q='+window.keywords, window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
-        for (i = 0; i  < tabs.length; i++) {
+        for (var i = 0; i  < tabs.length; i++) {
             if (tabs[i].className == 'eLibraryTab' || tabs[i].className == 'eLibraryTabActive') {
                 var tab = tabs[i];
                 var id = tab.id;
                 var type = id.substring(0,id.indexOf('Tab'));
+                var container = document.getElementById('eLibrarySearchResults');
+                var result = new Result(type, tab, window.keywords, container);
                 var content = null;
-                var zeroHits = null;
                 if (tab.className == 'eLibraryTabActive') {
-                    content = document.getElementById('eLibrarySearchResults').childNodes;
-                    zeroResults = document.getElementById('noHitsText');
+                    content = new Array();
+                    for (var j = 0; j < container.childNodes.length; j++) {
+                        content[j] = container.childNodes[j];
+                    }
+                    result.setContent(content);
+                    window.activeResult = result;
                 }
-                var result = new Result(type, tab, window.keywords, zeroHits, content);
                 tab.result = result;
                 tab.activate = function(event) {
                     if (this.className != 'eLibraryTabActive') {
@@ -36,7 +40,7 @@ function initSearch() {
                     this.style.cursor = 'default';
                 }
                 tab.clicked = function(event) {
-                    this.result.clicked(event);
+                    this.result.show();
                     YAHOO.util.Event.stopEvent(event);
                 }
             }
@@ -54,7 +58,7 @@ function initSearch() {
 
 
 
-function Result(type, tab, keywords, zeroHits, content) {
+function Result(type, tab, keywords, container) {
     if (null == type) {
         throw('null type');
     }
@@ -64,16 +68,20 @@ function Result(type, tab, keywords, zeroHits, content) {
     if (null == keywords) {
         throw ('null keywords');
     }
+    if (null == container) {
+        throw ('null container');
+    }
     this._type = type;
     this._tab = tab;
     this._keywords = keywords;
-    this._zeroHits = zeroHits;
-    this._content = content;
+    this._container = container;
     this._url = '/././plain/search2/'+this._type+'.html?source='+this._type+'&keywords='+this._keywords;
     this._callback = {
         success:this.callbackSuccess,
         failure:this.callbackFailure,
-        argument: { result:this }
+        argument: {
+            result:this
+        }
     }
     this._state = 'initialized';
 }
@@ -83,6 +91,7 @@ Result.prototype.setContent = function(content) {
         throw ('null content');
     }
     this._content = content;
+    this._state = 'searched';
 }
 
 Result.prototype.callbackSuccess = function(o) {
@@ -94,7 +103,6 @@ Result.prototype.callbackSuccess = function(o) {
             content[i] = document.importNode(bodyNodes[i], true);
         }
         result.setContent(content);
-        result._state = 'searched';
         result.show();
     } catch(exception) {
         window.handleException(exception);
@@ -105,7 +113,7 @@ Result.prototype.callbackFailure = function(o) {
     alert('callbackFailure');
 }
 
-Result.prototype.clicked = function(event) {
+Result.prototype.getContent = function() {
     try {
         if (this._state == 'initialized') {
             this._state = 'searching';
@@ -122,14 +130,18 @@ Result.prototype.clicked = function(event) {
 
 Result.prototype.show = function() {
     try {
-        var container = document.getElementById('eLibrarySearchResults');
-        while(container.childNodes.length > 0) {
-            container.removeChild(container.lastChild);
+        if (this._state == 'initialized') {
+            this.getContent();
+        } else if (this._state == 'searching') {
+            alert('search in progress');
+        } else {
+            window.activeResult.hide();
+            for (var i = 0; i < this._content.length; i++) {
+                this._container.appendChild(this._content[i]);
+            }
+            this._tab.className = 'eLibraryTabActive';
+            window.activeResult = this;
         }
-        for (var i = 0; i < this._content.length; i++) {
-            container.appendChild(this._content[i]);
-        }
-        this._tab.className = 'eLibraryTabActive';
     } catch(exception) {
         window.handleException(exception);
     }
@@ -137,6 +149,9 @@ Result.prototype.show = function() {
 
 Result.prototype.hide = function() {
     try {
+        while(this._container.childNodes.length > 0) {
+            this._container.removeChild(this._container.lastChild);
+        }
         this._tab.className = 'eLibraryTab';
     } catch(exception) {
         window.handleException(exception);

@@ -24,10 +24,7 @@
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:choose>
                 <xsl:when test="$count > 1">
-                    <xsl:apply-templates select="attribute::node() | child::node()[not(attribute::id='noHitsText')]"/>
-                </xsl:when>
-                <xsl:when test="$count = 1">
-                    <xsl:apply-templates select="attribute::node() | child::node()[not(attribute::id='sortBy' or attribute::id='noHitsText')]"/>
+                    <xsl:apply-templates select="attribute::node() | child::node()"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="attribute::node() | child::node()[not(attribute::id='sortBy')]"/>
@@ -35,18 +32,13 @@
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
-
-    <xsl:template match="h:div[attribute::id = 'popInContent']/child::h:span">
-        <xsl:choose>
-            <xsl:when test="attribute::id = 'noHitsText' and $count > 0">
-                <xsl:copy>
-                    <xsl:apply-templates select="attribute::node()|child::node()"/>
-                </xsl:copy>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:apply-templates select="attribute::node()|child::node()"/>
-            </xsl:otherwise>
-        </xsl:choose>
+    
+    <xsl:template match="h:p[attribute::id='noHitsText']">
+        <xsl:if test="$count = 0">
+            <xsl:copy>
+                <xsl:apply-templates select="attribute::node() | child::node()"/>
+            </xsl:copy>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template

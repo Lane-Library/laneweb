@@ -39,16 +39,6 @@
         <xsl:copy-of select="self::node()"/>
     </xsl:template>
     
-    <xsl:template match="h:p[parent::h:div[attribute::id='popInContent']]">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:apply-templates select="/doc/h:html[attribute::id]//h:div[attribute::id='popInContent']/child::node()"/>
-            <xsl:apply-templates select="child::node()"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:div[attribute::id='popInContent' and ancestor::h:html[attribute::id]]"/>
-    
     <xsl:template match="child::h:li[attribute::class='eLibraryTab']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(self::class)]"/>
@@ -62,19 +52,6 @@
             </xsl:choose>
             <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="child::h:a[parent::h:li[attribute::class='eLibraryTab']]">
-        <xsl:choose>
-            <xsl:when test="starts-with(parent::h:li/attribute::id,$source)">
-                <xsl:apply-templates select="child::node()"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:copy>
-                    <xsl:apply-templates select="attribute::node()|child::node()"/>
-                </xsl:copy>
-            </xsl:otherwise>
-        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>
