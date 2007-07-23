@@ -11,11 +11,15 @@ try {
     YAHOO.util.Event.addListener(document, 'click', handleClick);
     initializeSearchForm(e);
     initializeMetaTags(e);
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { handleException(exception);  }
 }
 
 function finalize(e) {
     searching = false;
+}
+
+function handleException(exception) {
+    alert(exception.name + '\n' + exception.message + '\n' + exception.fileName + '\n' + exception.lineNumber + '\n' + exception.stack);
 }
 
 function initializeMetaTags(e){
@@ -27,7 +31,7 @@ try {
 	    if(key != undefined &&  value != undefined)
 			window.metaTags[key] = value;		
 	}
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { handleException(exception) }
 }
 
 function getMetaContent(name)
@@ -35,7 +39,7 @@ function getMetaContent(name)
 try {
 	if(name != undefined)
 		return window.metaTags[name];
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { handleException(exception) }
 }
 
 function handleMouseOver(e) {
@@ -44,7 +48,7 @@ try {
     if (target.activate) {
         target.activate(e);
     }
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { handleException(exception) }
 }
 
 function handleMouseOut(e) {
@@ -53,7 +57,7 @@ try {
     if (target.deactivate) {
         target.deactivate(e);
     }
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { handleException(exception) }
 }
 
 function handleChange(e) {
@@ -62,7 +66,7 @@ try {
     if (target.change) {
         target.change(e);
     }
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { handleException(exception) }
 }
 
 function handleClick(e) {
@@ -76,7 +80,7 @@ try {
         }
         target = target.parentNode;
     }
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { handleException(exception) }
 }
 
 function webtrendsProcess(node)
@@ -86,7 +90,7 @@ try {
 	var DCS_dcsquery;
 	var WT_ti;
 	
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { handleException(exception) }
 	
 }
 
@@ -133,7 +137,7 @@ try {
     searchSubmit.deactivate = function(e) {
         this.src=this.src.replace('search_btn_f2.gif','search_btn.gif');
     }
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { handleException(exception) }
 }
 
 
@@ -145,5 +149,5 @@ try {
         w.focus();
     }
     
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { handleException(exception) }
 }

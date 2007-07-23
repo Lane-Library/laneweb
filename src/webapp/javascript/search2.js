@@ -1,5 +1,4 @@
 var keywords;
-var results;
 var searchId;
 var startTime = new Date().getTime();
 
@@ -8,152 +7,156 @@ var spellcheck;
 YAHOO.util.Event.addListener(window,'load',initSearch);
 
 function initSearch() {
-try {
-    window.keywords = escape(getMetaContent("LW.keywords"));
-    YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck?q='+window.keywords, window.spellCheckCallBack);
-    YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?q='+window.keywords, window.showHitsCallback);
-    window.results = new Array();
-    var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
-    for (i = 0; i  < tabs.length; i++)
-    {
-        if (tabs[i].className == 'eLibraryTab' || tabs[i].className == 'eLibraryTabActive')
-        {
-            var tab = tabs[i];
-            var id = tab.id;
-            var type = id.substring(0,id.indexOf('Tab'));
-            var result = new Result(type, tab, window.keywords);
-            window.results.push(result);
-            tab.result = result;
-            var anchor = tab.getElementsByTagName('a')[0];
-            tab.activate = function(event) {
-                if (this.className != 'eLibraryTabActive') {
-                    this.style.textDecoration = 'underline';
-                    this.style.cursor = 'pointer';
+    try {
+        window.keywords = escape(getMetaContent("LW.keywords"));
+        YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck?q='+window.keywords, window.spellCheckCallBack);
+        YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?q='+window.keywords, window.showHitsCallback);
+        var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
+        for (i = 0; i  < tabs.length; i++) {
+            if (tabs[i].className == 'eLibraryTab' || tabs[i].className == 'eLibraryTabActive') {
+                var tab = tabs[i];
+                var id = tab.id;
+                var type = id.substring(0,id.indexOf('Tab'));
+                var content = null;
+                var zeroHits = null;
+                if (tab.className == 'eLibraryTabActive') {
+                    content = document.getElementById('eLibrarySearchResults').childNodes;
+                    zeroResults = document.getElementById('noHitsText');
+                }
+                var result = new Result(type, tab, window.keywords, zeroHits, content);
+                tab.result = result;
+                tab.activate = function(event) {
+                    if (this.className != 'eLibraryTabActive') {
+                        this.style.textDecoration = 'underline';
+                        this.style.cursor = 'pointer';
+                    }
+                }
+                tab.deactivate = function(event) {
+                    this.style.textDecoration = 'none';
+                    this.style.cursor = 'default';
+                }
+                tab.clicked = function(event) {
+                    this.result.clicked(event);
+                    YAHOO.util.Event.stopEvent(event);
                 }
             }
-            tab.deactivate = function(event) {
-                this.style.textDecoration = 'none';
-                this.style.cursor = 'default';
-            }
-            tab.clicked = function(event) {
-                this.result.clicked(event);
-                YAHOO.util.Event.stopEvent(event);
-            }
-/*            tab.onclick = function(event)
-            {
-                return this.result.onclick(event);
-            }*/
         }
-    }
-    spellcheck = new Spellcheck();
-    var sortBySelect = document.getElementById('sortBySelect');
-    if (sortBySelect) {
-         sortBySelect.change = sorteLibraryResults;
-         YAHOO.util.Event.addListener(sortBySelect, 'change', handleChange);
+        spellcheck = new Spellcheck();
+        var sortBySelect = document.getElementById('sortBySelect');
+        if (sortBySelect) {
+            sortBySelect.change = sorteLibraryResults;
+             YAHOO.util.Event.addListener(sortBySelect, 'change', handleChange);
+        }
+    } catch(e) {
+        window.handleException(e);
     }
 }
-    catch(e) {alert(e.message) }
+
+
+
+function Result(type, tab, keywords, zeroHits, content) {
+    if (null == type) {
+        throw('null type');
     }
-
-
-
-function Result(type, tab, keywords)
-{
-    try {
-    if (type != undefined)
-    {
-        this._type = type;
-        this._baseUrl = '/././plain/search2/'+this._type+'.html?source='+this._type+'&keywords=';
+    if (null == tab) {
+        throw ('null tab');
     }
-    if (tab != undefined)
-    {
-        this._tab = tab;
+    if (null == keywords) {
+        throw ('null keywords');
     }
-
+    this._type = type;
+    this._tab = tab;
     this._keywords = keywords;
-    this._callback =
-    {
+    this._zeroHits = zeroHits;
+    this._content = content;
+    this._url = '/././plain/search2/'+this._type+'.html?source='+this._type+'&keywords='+this._keywords;
+    this._callback = {
         success:this.callbackSuccess,
         failure:this.callbackFailure,
-        argument:
-        {
-            result:this
-        }
+        argument: { result:this }
     }
     this._state = 'initialized';
-    } catch(exception) { alert(exception.message) }
 }
 
-Result.prototype.callbackSuccess = function(o)
-{
-try {
-    var result = o.argument.result;
-    
-    result.bodyNodes = o.responseXML.getElementsByTagName('body')[0].childNodes;
-    result._state = 'searched';
-    result.show();
-    
-    } catch(exception) { alert(exception.message) }
+Result.prototype.setContent = function(content) {
+    if (null == content) {
+        throw ('null content');
+    }
+    this._content = content;
 }
-Result.prototype.callbackFailure = function(o)
-{
+
+Result.prototype.callbackSuccess = function(o) {
+    try {
+        var result = o.argument.result;
+        var bodyNodes = o.responseXML.getElementsByTagName('body')[0].childNodes;
+        var content = new Array();
+        for (var i = 0; i < bodyNodes.length; i++) {
+            content[i] = document.importNode(bodyNodes[i], true);
+        }
+        result.setContent(content);
+        result._state = 'searched';
+        result.show();
+    } catch(exception) {
+        window.handleException(exception);
+    }
+}
+
+Result.prototype.callbackFailure = function(o) {
     alert('callbackFailure');
 }
-Result.prototype.clicked = function(event)
-{
-try {
-    if (this._state == 'initialized')
-    {
-        var url = this._baseUrl+this._keywords;
-        this._state = 'searching';
-        var request = YAHOO.util.Connect.asyncRequest('GET', url, this._callback);
+
+Result.prototype.clicked = function(event) {
+    try {
+        if (this._state == 'initialized') {
+            this._state = 'searching';
+            var request = YAHOO.util.Connect.asyncRequest('GET', this._url, this._callback);
+        } else if (this._state == 'searched') {
+            this.show();
+        } else if (this._state == 'searching') {
+            alert('search in progress');
+        }
+    } catch(exception) {
+        window.handleException(exception);
     }
-    else if (this._state == 'searched')
-    {
-        this.show();
-    }
-    else if (this._state == 'searching')
-    {
-        alert('search in progress');
-    }
-    
-    } catch(exception) { alert(exception.message) }
 }
 
-
-Result.prototype.show = function()
-{
-try {
-    var container = document.getElementById('eLibrarySearchResults');
-    for (var i = 0; i < this.bodyNodes.length; i++) {
-        var node = document.importNode(this.bodyNodes[i],true);
-        container.appendChild(node);
+Result.prototype.show = function() {
+    try {
+        var container = document.getElementById('eLibrarySearchResults');
+        while(container.childNodes.length > 0) {
+            container.removeChild(container.lastChild);
+        }
+        for (var i = 0; i < this._content.length; i++) {
+            container.appendChild(this._content[i]);
+        }
+        this._tab.className = 'eLibraryTabActive';
+    } catch(exception) {
+        window.handleException(exception);
     }
-    this._tab.className = 'eLibraryTabActive';
-    
-    } catch(exception) { alert(exception.message) }
 }
-Result.prototype.hide = function()
-{
-try {
-    this._tab.className = 'eLibraryTab';
-    
-    } catch(exception) { alert(exception.message) }
-}
-Result.prototype.currentContent = function()
-{
-try {
 
-    } catch(exception) { alert(exception.message) }
+Result.prototype.hide = function() {
+    try {
+        this._tab.className = 'eLibraryTab';
+    } catch(exception) {
+        window.handleException(exception);
+    }
 }
-Result.prototype.setTabCount = function(count)
-{
-try {
-    var hitCount = this._tab.getElementsByTagName('span')[0];
-    hitCount.textContent = count;
-    hitCount.style.visibility = 'visible';
-    
-    } catch(exception) { alert(exception.message) }
+
+Result.prototype.currentContent = function() {
+    try {
+        //
+    } catch(exception) { window.handleException(exception) }
+}
+
+Result.prototype.setTabCount = function(count) {
+    try {
+        var hitCount = this._tab.getElementsByTagName('span')[0];
+        hitCount.textContent = count;
+        hitCount.style.visibility = 'visible';
+    } catch(exception) {
+        window.handleException(exception);
+    }
 }
 
 
@@ -210,7 +213,7 @@ try {
 			sleepingTime = 10000;
 		setTimeout( "getTabResult()", sleepingTime);
 	}
-} catch (e) { alert(e.message) }
+} catch (e) { window.handleException(e) }
 }
 
 function getTabResult()
@@ -218,7 +221,7 @@ function getTabResult()
 try {
 	  YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?id='+window.searchId, window.showHitsCallback);
 
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { window.handleException(exception) }
 }
 
 
@@ -245,7 +248,7 @@ try {
         window.spellcheck.init(initTab,suggestion, link);
     }
 	
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { window.handleException(exception) }
 }
 
 function Spellcheck()
@@ -264,7 +267,7 @@ try {
 		return window.spellcheck.onclick(event, this);
 	}	   	
 	
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { window.handleException(exception) }
 }
 
 Spellcheck.prototype.onclick = function(event, link)
@@ -273,7 +276,7 @@ try {
 	link.href = '/search2.html?keywords='+this.suggestion+'&source='+this.source;
     return false;
     
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { window.handleException(exception) }
 }
 
 
@@ -283,7 +286,7 @@ try {
     if (source != undefined)
 		this.source = source;
 		
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { window.handleException(exception) }
 }
 
 
@@ -295,7 +298,7 @@ function getElementsByTagName(node, prefix, uri, name)
     }
     catch (e)
     {
-        alert(e.message);
+        window.handleException(e);
         return node.getElementsByTagName(prefix+':'+name);
     }
 
@@ -347,5 +350,5 @@ try {
 	setCookie('LWeLibNextSort',nextSort);
 	refreshPopInContent();
 	
-    } catch(exception) { alert(exception.message) }
+    } catch(exception) { window.handleException(exception) }
 }
