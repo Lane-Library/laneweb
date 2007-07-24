@@ -83,18 +83,22 @@ try {
     } catch(exception) { handleException(exception) }
 }
 
-function webtrendsProcess(node)
-{
-try {
-	var DCS_dcsuri;
-	var DCS_dcsquery;
-	var WT_ti;
-	
-    } catch(exception) { handleException(exception) }
-	
-}
-
- 
+function webtrendsProcess(node){
+	try{
+		if(node.tagName == "A")
+			{
+				var host = getMetaContent("LW.host");
+				if(host != node.hostname)
+				{
+					alert(node.hostname +"    "+ node.host);
+					
+				} 
+			}
+			if(node.tagName == "IMG")
+			{
+			}
+	} catch(exception) { handleException(exception) }
+} 
 
 function initializeSearchForm(e) {
 try {

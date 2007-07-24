@@ -19,17 +19,13 @@
         <xsl:copy-of select="self::node()"/>
     </xsl:template>
 
-    <xsl:template match="h:div[attribute::id='popInContent']/h:p">
+    <xsl:template match="h:span[@id='sortBy']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
-            <xsl:choose>
-                <xsl:when test="$count > 1">
-                    <xsl:apply-templates select="attribute::node() | child::node()"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates select="attribute::node() | child::node()[not(attribute::id='sortBy')]"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:if test="$count > 1">
+  				<xsl:attribute name="style">visibility:visible;display:inline</xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
     

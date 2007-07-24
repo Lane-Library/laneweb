@@ -9,6 +9,7 @@ YAHOO.util.Event.addListener(window,'load',initSearch);
 function initSearch() {
     try {
         window.keywords = escape(getMetaContent("LW.keywords"));
+        YAHOO.util.Connect.asyncRequest('GET', '/././content/sfx?q='+window.keywords, window.findItCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck?q='+window.keywords, window.spellCheckCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?q='+window.keywords, window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
@@ -46,7 +47,8 @@ function initSearch() {
                 }
             }
         }
-        spellcheck = new Spellcheck();
+       	var initTab = getMetaContent("LW.source");
+        spellcheck = new Spellcheck(initTab);
         var sortBySelect = document.getElementById('sortBySelect');
         if (sortBySelect) {
             sortBySelect.change = sorteLibraryResults;
@@ -141,11 +143,14 @@ Result.prototype.show = function() {
         } else if (this._state == 'searching') {
             alert('search in progress');
         } else {
+            window.spellcheck.setSource(this._type);
             window.activeResult.hide();
             this._tab.className = 'eLibraryTabActive';
             if (this._count <= 1) {
+            	this._sortBy.style.display = 'none';
                 this._sortBy.style.visibility = 'hidden';
             } else {
+            	this._sortBy.style.display = 'inline';
                 this._sortBy.style.visibility = 'visible';
             }
             for (var i = 0; i < this._content.length; i++) {
@@ -153,6 +158,7 @@ Result.prototype.show = function() {
             }
             window.activeResult = this;
         }
+     
     } catch(exception) {
         window.handleException(exception);
     }
@@ -194,46 +200,46 @@ var showHitsCallback =
 
 
 function showHits(o) {
-try {
-	var uri = 'http://lane.stanford.edu/search-tab-result/ns';
-	var rootNode = window.getElementsByTagName(o.responseXML,"", uri, 'search-tab-results')[0];
-	searchId = rootNode.getAttribute("id");
-	var status = rootNode.getAttribute("status");
-	var rows = window.getElementsByTagName(rootNode, "",uri,'resource');
-	var tabs = document.getElementById('eLibraryTabs').childNodes;
-	
-	for (i = 0; i  < rows.length; i++) 
-	{
-		var genre = rows[i].getAttribute("id");
-		for (j = 0; j < tabs.length; j++)
-		 {
-			if ( tabs[j].id != undefined &&  tabs[j].id == genre + 'Tab') 
-			{
-				var hitSpan = tabs[j].getElementsByTagName('span')[0];
-				if(window.getElementsByTagName(rows[i],"",uri,'hits')[0] != undefined && window.getElementsByTagName(rows[i],"",uri,'hits')[0].firstChild != undefined)
+	try {
+		var uri = 'http://lane.stanford.edu/search-tab-result/ns';
+		var rootNode = window.getElementsByTagName(o.responseXML,"", uri, 'search-tab-results')[0];
+		searchId = rootNode.getAttribute("id");
+		var status = rootNode.getAttribute("status");
+		var rows = window.getElementsByTagName(rootNode, "",uri,'resource');
+		var tabs = document.getElementById('eLibraryTabs').childNodes;
+		
+		for (var i = 0; i  < rows.length; i++) 
+		{
+			var genre = rows[i].getAttribute("id");
+			for (var j = 0; j < tabs.length; j++)
+			 {
+				if ( tabs[j].id != undefined &&  tabs[j].id == genre + 'Tab') 
 				{
-					hitSpan.innerHTML = window.getElementsByTagName(rows[i],"",uri,'hits')[0].firstChild.nodeValue;
-					if(window.getElementsByTagName(rows[i],"",uri,'url')[0] != undefined && window.getElementsByTagName(rows[i],"",uri,'url')[0].firstChild != undefined)
+					var hitSpan = tabs[j].getElementsByTagName('span')[0];
+					if(window.getElementsByTagName(rows[i],"",uri,'hits')[0] !=	undefined && window.getElementsByTagName(rows[i],"",uri,'hits')[0].firstChild != undefined)
 					{
-						var linkValue = window.getElementsByTagName(rows[i],"",uri,'url')[0].firstChild.nodeValue;
-						if(linkValue != null && tabs[j].getElementsByTagName('a')[0] != undefined)
-							tabs[j].getElementsByTagName('a')[0].href = linkValue;
+						hitSpan.innerHTML = window.getElementsByTagName(rows[i],"",uri,'hits')[0].firstChild.nodeValue;
+						if(window.getElementsByTagName(rows[i],"",uri,'url')[0] != undefined && window.getElementsByTagName(rows[i],"",uri,'url')[0].firstChild != undefined)
+						{
+							var linkValue = window.getElementsByTagName(rows[i],"",uri,'url')[0].firstChild.nodeValue;
+							if(linkValue != null && tabs[j].getElementsByTagName('a')[0] != undefined)
+								tabs[j].getElementsByTagName('a')[0].href = linkValue;
+						}
+						hitSpan.style.visibility = 'visible';
+						break;
 					}
-					hitSpan.style.visibility = 'visible';
-					break;
 				}
 			}
 		}
-	}
-	var sleepingTime = 2000;
-	var remainingTime = (new Date().getTime())-startTime;
-	if(status != 'successful' && ( remainingTime < 60*1000))
-	{	// if time superior at 20 seconds the sleeping time equals 10 seconds 
-		if(remainingTime > 20 *1000)
-			sleepingTime = 10000;
-		setTimeout( "getTabResult()", sleepingTime);
-	}
-} catch (e) { window.handleException(e) }
+		var sleepingTime = 2000;
+		var remainingTime = (new Date().getTime())-startTime;
+		if(status != 'successful' && ( remainingTime < 60*1000))
+		{	// if time superior at 20 seconds the sleeping time equals 10 seconds 
+			if(remainingTime > 20 *1000)
+				sleepingTime = 10000;
+			setTimeout( "getTabResult()", sleepingTime);
+		}
+	} catch (e) { window.handleException(e) }
 }
 
 function getTabResult()
@@ -245,6 +251,33 @@ try {
 }
 
 
+var findItCallBack =
+{
+  success:showFindIt,
+  failure:function() {alert('findIt failure')}
+};
+
+function showFindIt(o)
+{
+	try {
+		var uri = 'http://lane.stanford.edu/sfx/ns';
+		if( window.getElementsByTagName(o.responseXML,"", uri, 'openurl')[0] != undefined)
+		{
+			var result = window.getElementsByTagName(o.responseXML,"", uri, 'result')[0].firstChild.nodeValue; 
+			if(result != '0')
+			{
+				var url = window.getElementsByTagName(o.responseXML,"", uri, 'openurl')[0].firstChild.nodeValue;
+				var findItLink = document.getElementById("findItLink");
+				findItLink.href = url;
+				findItLink.textContent = result.replace(/ \[.*\]/,'');
+				var findItContainer = document.getElementById('findIt');
+				findItContainer.style.visibility= 'visible';
+				findItContainer.style.display = 'inline';
+			}
+	    }
+	
+   	} catch(exception) { window.handleException(exception) }
+}
 
 var spellCheckCallBack =
 {
@@ -255,58 +288,58 @@ var spellCheckCallBack =
 
 function showSpellCheck(o)
 {
-try {
-	var uri = 'http://lane.stanford.edu/spellcheck/ns';
-	if( window.getElementsByTagName(o.responseXML,"", uri, 'suggestion')[0] != undefined)
-	{
-		suggestion = window.getElementsByTagName(o.responseXML,"", uri, 'suggestion')[0].firstChild.nodeValue;	
-		var spellCheckContainer = document.getElementById("spellCheck");
-		var spellCheckLink = document.getElementById("spellCheckLink");
-		spellCheckLink.textContent = suggestion;
-		spellCheckContainer.style.visibility= 'visible';
-		//TODO I changed the markup in search2.html related to this.
-/*		var initTab = getMetaContent("LW.source");
-        window.spellcheck.init(initTab,suggestion, link);*/
-    }
+	try {
+		var uri = 'http://lane.stanford.edu/spellcheck/ns';
+		if( window.getElementsByTagName(o.responseXML,"", uri, 'suggestion')[0] != undefined)
+		{
+			var suggestion = window.getElementsByTagName(o.responseXML,"", uri, 'suggestion')[0].firstChild.nodeValue;	
+			var spellCheckContainer = document.getElementById("spellCheck");
+			var spellCheckLink = document.getElementById("spellCheckLink");
+			spellCheckContainer.style.display = 'inline';
+			spellCheckContainer.style.visibility= 'visible';
+		    window.spellcheck.setSuggestion(suggestion, spellCheckLink);
+	    }
 	
-    } catch(exception) { window.handleException(exception) }
+   	} catch(exception) { window.handleException(exception) }
 }
 
-function Spellcheck()
+function Spellcheck(currentTab)
 {
+	try {
+		if(currentTab != undefined)
+			this.source = currentTab;
+	
+	} catch(exception) { window.handleException(exception) }
 }
 
-Spellcheck.prototype.init = function(currentTab, suggestion, link)
+Spellcheck.prototype.setSuggestion = function(suggestion, link)
 {
-try {
-	if(currentTab != undefined)
-		this.source = currentTab;		
-	 if (suggestion != undefined)
+	try {
+		if (suggestion == null)
+			throw('suggestion is null'); 
 		this.suggestion = suggestion;
-	link.clicked = function(event)
-	{
-		return window.spellcheck.onclick(event, this);
-	}	   	
-	
+		link.textContent = suggestion;	
+		link.clicked = function(event)
+		{
+			return window.spellcheck.onclick(event, this);
+		}	   	
     } catch(exception) { window.handleException(exception) }
 }
 
 Spellcheck.prototype.onclick = function(event, link)
 {
-try {
-	link.href = '/search2.html?keywords='+this.suggestion+'&source='+this.source;
-    return false;
-    
-    } catch(exception) { window.handleException(exception) }
+	try {
+			link.href = '/search2.html?keywords='+this.suggestion+'&source='+this.source;
+	    } catch(exception) { window.handleException(exception) }
+	   return false;
 }
 
 
 Spellcheck.prototype.setSource = function(source)
 {
-try {
-    if (source != undefined)
-		this.source = source;
-		
+	try {
+	    if (source != undefined)
+			this.source = source;
     } catch(exception) { window.handleException(exception) }
 }
 
