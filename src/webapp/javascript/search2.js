@@ -12,13 +12,14 @@ function initSearch() {
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck?q='+window.keywords, window.spellCheckCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?q='+window.keywords, window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
+        var popIn = document.getElementById('popInContent');
         for (var i = 0; i  < tabs.length; i++) {
             if (tabs[i].className == 'eLibraryTab' || tabs[i].className == 'eLibraryTabActive') {
                 var tab = tabs[i];
                 var id = tab.id;
                 var type = id.substring(0,id.indexOf('Tab'));
                 var container = document.getElementById('eLibrarySearchResults');
-                var result = new Result(type, tab, window.keywords, container);
+                var result = new Result(type, tab, container);
                 var content = null;
                 if (tab.className == 'eLibraryTabActive') {
                     content = new Array();
@@ -58,24 +59,21 @@ function initSearch() {
 
 
 
-function Result(type, tab, keywords, container) {
+function Result(type, tab, container) {
     if (null == type) {
         throw('null type');
     }
     if (null == tab) {
         throw ('null tab');
     }
-    if (null == keywords) {
-        throw ('null keywords');
-    }
     if (null == container) {
         throw ('null container');
     }
     this._type = type;
     this._tab = tab;
-    this._keywords = keywords;
     this._container = container;
-    this._url = '/././plain/search2/'+this._type+'.html?source='+this._type+'&keywords='+this._keywords;
+    this._url = '/././plain/search2/'+this._type+'.html?source='+this._type+'&keywords=';
+    this._sortBy = document.getElementById('sortBy');
     this._callback = {
         success:this.callbackSuccess,
         failure:this.callbackFailure,
@@ -91,6 +89,14 @@ Result.prototype.setContent = function(content) {
         throw ('null content');
     }
     this._content = content;
+    this._count = 0;
+    for (var i = 0; i < this._content.length; i++) {
+       if (this._content[i].nodeName.toLowerCase() == 'dl') {
+           this._count = this._content[i].getElementsByTagName('dt').length;
+           break;
+       }
+    }
+    this.setTabCount(this._count);
     this._state = 'searched';
 }
 
@@ -117,7 +123,7 @@ Result.prototype.getContent = function() {
     try {
         if (this._state == 'initialized') {
             this._state = 'searching';
-            var request = YAHOO.util.Connect.asyncRequest('GET', this._url, this._callback);
+            var request = YAHOO.util.Connect.asyncRequest('GET', this._url+window.keywords, this._callback);
         } else if (this._state == 'searched') {
             this.show();
         } else if (this._state == 'searching') {
@@ -136,10 +142,15 @@ Result.prototype.show = function() {
             alert('search in progress');
         } else {
             window.activeResult.hide();
+            this._tab.className = 'eLibraryTabActive';
+            if (this._count <= 1) {
+                this._sortBy.style.visibility = 'hidden';
+            } else {
+                this._sortBy.style.visibility = 'visible';
+            }
             for (var i = 0; i < this._content.length; i++) {
                 this._container.appendChild(this._content[i]);
             }
-            this._tab.className = 'eLibraryTabActive';
             window.activeResult = this;
         }
     } catch(exception) {
@@ -156,12 +167,6 @@ Result.prototype.hide = function() {
     } catch(exception) {
         window.handleException(exception);
     }
-}
-
-Result.prototype.currentContent = function() {
-    try {
-        //
-    } catch(exception) { window.handleException(exception) }
 }
 
 Result.prototype.setTabCount = function(count) {
@@ -256,11 +261,12 @@ try {
 	{
 		suggestion = window.getElementsByTagName(o.responseXML,"", uri, 'suggestion')[0].firstChild.nodeValue;	
 		var spellCheckContainer = document.getElementById("spellCheck");
-		var link = spellCheckContainer.getElementsByTagName('a')[0];
-		link.innerHTML = suggestion;
-		spellCheckContainer.style.display= 'inline';
-		var initTab = getMetaContent("LW.source");
-        window.spellcheck.init(initTab,suggestion, link);
+		var spellCheckLink = document.getElementById("spellCheckLink");
+		spellCheckLink.textContent = suggestion;
+		spellCheckContainer.style.visibility= 'visible';
+		//TODO I changed the markup in search2.html related to this.
+/*		var initTab = getMetaContent("LW.source");
+        window.spellcheck.init(initTab,suggestion, link);*/
     }
 	
     } catch(exception) { window.handleException(exception) }
