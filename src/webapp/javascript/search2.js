@@ -1,5 +1,4 @@
 var keywords;
-var searchId;
 var startTime = new Date().getTime();
 var activeResult;
 var spellcheck;
@@ -11,7 +10,7 @@ function initSearch() {
         window.keywords = escape(getMetaContent("LW.keywords"));
         YAHOO.util.Connect.asyncRequest('GET', '/././content/sfx?q='+window.keywords, window.findItCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck?q='+window.keywords, window.spellCheckCallBack);
-        YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?q='+window.keywords, window.showHitsCallback);
+        YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
         var popIn = document.getElementById('popInContent');
         for (var i = 0; i  < tabs.length; i++) {
@@ -203,7 +202,6 @@ function showHits(o) {
 	try {
 		var uri = 'http://lane.stanford.edu/search-tab-result/ns';
 		var rootNode = window.getElementsByTagName(o.responseXML,"", uri, 'search-tab-results')[0];
-		searchId = rootNode.getAttribute("id");
 		var status = rootNode.getAttribute("status");
 		var rows = window.getElementsByTagName(rootNode, "",uri,'resource');
 		var tabs = document.getElementById('eLibraryTabs').childNodes;
@@ -245,7 +243,7 @@ function showHits(o) {
 function getTabResult()
 {
 try {
-	  YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?id='+window.searchId, window.showHitsCallback);
+	  YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
 
     } catch(exception) { window.handleException(exception) }
 }
@@ -269,7 +267,7 @@ function showFindIt(o)
 				var url = window.getElementsByTagName(o.responseXML,"", uri, 'openurl')[0].firstChild.nodeValue;
 				var findItLink = document.getElementById("findItLink");
 				findItLink.href = url;
-				findItLink.textContent = result.replace(/ \[.*\]/,'');
+				findItLink.innerHTML = result.replace(/ \[.*\]/,'');
 				var findItContainer = document.getElementById('findIt');
 				findItContainer.style.visibility= 'visible';
 				findItContainer.style.display = 'inline';
@@ -318,7 +316,7 @@ Spellcheck.prototype.setSuggestion = function(suggestion, link)
 		if (suggestion == null)
 			throw('suggestion is null'); 
 		this.suggestion = suggestion;
-		link.textContent = suggestion;	
+		link.innerHTML = suggestion;
 		link.clicked = function(event)
 		{
 			return window.spellcheck.onclick(event, this);

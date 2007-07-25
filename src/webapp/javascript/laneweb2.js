@@ -90,7 +90,7 @@ function webtrendsProcess(node){
 				var host = getMetaContent("LW.host");
 				if(host != node.hostname)
 				{
-					alert(node.hostname +"    "+ node.host);
+					//alert(node.hostname +"    "+ node.host);
 					
 				} 
 			}
