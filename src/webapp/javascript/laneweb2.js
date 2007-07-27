@@ -74,7 +74,6 @@ function handleClick(e) {
 try {
 	var target = (e.srcElement) ? e.srcElement : e.target;
     webtrendsProcess(target);
-    YAHOO.util.Event.stopEvent(e);
     while (target != undefined) {
         if (target.clicked) {
             target.clicked(e);
