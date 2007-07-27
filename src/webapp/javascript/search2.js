@@ -2,12 +2,14 @@ var keywords;
 var startTime = new Date().getTime();
 var activeResult;
 var spellcheck;
+var querymapContent;
 
 YAHOO.util.Event.addListener(window,'load',initSearch);
 
 function initSearch() {
     try {
         window.keywords = escape(getMetaContent("LW.keywords"));
+        YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.keywords, window.querymapCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././content/sfx?q='+window.keywords, window.findItCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck?q='+window.keywords, window.spellCheckCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
@@ -46,8 +48,7 @@ function initSearch() {
                 }
             }
         }
-       	var initTab = getMetaContent("LW.source");
-        spellcheck = new Spellcheck(initTab);
+       	 spellcheck = new Spellcheck(getMetaContent("LW.source"));
         var sortBySelect = document.getElementById('sortBySelect');
         if (sortBySelect) {
             sortBySelect.change = sorteLibraryResults;
@@ -77,7 +78,7 @@ function Result(type, tab, container) {
     this._sortBy = document.getElementById('sortBy');
     this._callback = {
         success:this.callbackSuccess,
-        failure:this.callbackFailure,
+        failure:handleFailure,
         argument: {
             result:this
         }
@@ -89,7 +90,10 @@ Result.prototype.setContent = function(content) {
     if (null == content) {
         throw ('null content');
     }
-    this._content = content;
+    if(this._content == null)
+    	this._content = content;
+    else
+    	this._content = this._content.concat(content);
     this._count = 0;
     for (var i = 0; i < this._content.length; i++) {
        if (this._content[i].nodeName.toLowerCase() == 'dl') {
@@ -101,10 +105,12 @@ Result.prototype.setContent = function(content) {
     this._state = 'searched';
 }
 
+
 Result.prototype.callbackSuccess = function(o) {
     try {
         var result = o.argument.result;
         var bodyNodes = o.responseXML.getElementsByTagName('body')[0].childNodes;
+        
         var content = new Array();
         for (var i = 0; i < bodyNodes.length; i++) {
             content[i] = document.importNode(bodyNodes[i], true);
@@ -116,9 +122,6 @@ Result.prototype.callbackSuccess = function(o) {
     }
 }
 
-Result.prototype.callbackFailure = function(o) {
-    alert('callbackFailure');
-}
 
 Result.prototype.getContent = function() {
     try {
@@ -155,6 +158,7 @@ Result.prototype.show = function() {
             for (var i = 0; i < this._content.length; i++) {
                 this._container.appendChild(this._content[i]);
             }
+             this._container.appendChild(window.querymapContent );
             window.activeResult = this;
         }
      
@@ -162,6 +166,7 @@ Result.prototype.show = function() {
         window.handleException(exception);
     }
 }
+
 
 Result.prototype.hide = function() {
     try {
@@ -174,6 +179,8 @@ Result.prototype.hide = function() {
     }
 }
 
+
+
 Result.prototype.setTabCount = function(count) {
     try {
         var hitCount = this._tab.getElementsByTagName('span')[0];
@@ -185,10 +192,6 @@ Result.prototype.setTabCount = function(count) {
 }
 
 
-
-var handleFailure = function(o){
-alert('tab callback failure');
-}
 
 
 var showHitsCallback =
@@ -252,8 +255,9 @@ try {
 var findItCallBack =
 {
   success:showFindIt,
-  failure:function() {alert('findIt failure')}
+  failure:handleFailure	
 };
+
 
 function showFindIt(o)
 {
@@ -280,8 +284,7 @@ function showFindIt(o)
 var spellCheckCallBack =
 {
   success:showSpellCheck,
-  failure:function() {alert('spellcheck failure')}
-  //do nothing iof google spellcheck is done we dosn't want a alert windows 
+  //failure:do nothing iof google spellcheck is done we dosn't want a alert windows 
 };
 
 function showSpellCheck(o)
@@ -353,8 +356,28 @@ function getElementsByTagName(node, prefix, uri, name)
         window.handleException(e);
         return node.getElementsByTagName(prefix+':'+name);
     }
-
 }
+
+
+var querymapCallBack =
+{
+  success:showQuerymap,
+  failure:handleFailure	
+};
+
+
+function showQuerymap(o)
+{
+	var uri = 'http://www.w3.org/1999/xhtml';
+	if( window.getElementsByTagName(o.responseXML,"", uri, 'body')[0] != undefined)
+	{
+		var querymapContainer = window.getElementsByTagName(o.responseXML,"", uri, 'div')[0];	
+		window.querymapContent = querymapContainer; 
+    	activeResult._container.appendChild(querymapContainer);
+    }
+}	
+
+
 
 // sort results
 //  relevance-sort = as returned by erdb 
@@ -403,4 +426,10 @@ try {
 	refreshPopInContent();
 	
     } catch(exception) { window.handleException(exception) }
+}
+
+
+
+function handleFailure(o){
+	alert("status: "+o.status+ '\n' +"statusText "+o.statusText  );	
 }

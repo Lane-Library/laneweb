@@ -12,6 +12,16 @@
         <xsl:apply-templates select="h:html"/>
     </xsl:template>
     
+    
+    <xsl:template match="h:body">
+        <xsl:if test="$resource-count &gt; 0">
+ 			 <xsl:copy>
+                <xsl:apply-templates/>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>
+    
+    
     <xsl:template match="h:*">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node() | child::node()"/>
