@@ -248,10 +248,6 @@
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
                 </map:transform>
-                <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
-                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                    <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="**.html">
@@ -279,10 +275,6 @@
                         </map:transform>
                     </map:when>
                 </map:select> 
-                <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
-                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                    <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                </map:transform>
                 <map:select type="simple">
                     <map:parameter name="value" value="{chain:template}"/>
                     <map:when test="100years">

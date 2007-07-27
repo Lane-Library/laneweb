@@ -11,9 +11,20 @@
   <xsl:variable name="search-id" select="/aggregate/s:search/@id"/>
   <xsl:variable name="keywords" select="/aggregate/s:search/s:query/text()"/>
 
-    <xsl:template match="/aggregate">
+	<xsl:template match="/aggregate">
         <xsl:apply-templates select="h:html"/>
     </xsl:template>
+    
+    
+     <xsl:template match="h:meta[@name='LW.searchId']">
+        <xsl:copy>
+        <xsl:apply-templates select="@*"/>
+        <xsl:attribute name="content">
+            <xsl:value-of select="/s:search/@id"></xsl:value-of>
+        </xsl:attribute>
+        </xsl:copy>
+    </xsl:template>
+    
      
     <xsl:template match="*">
          <xsl:copy>
@@ -26,18 +37,6 @@
             <xsl:apply-templates/>
 			<meta name="lw_searchParameters" content="id={/aggregate/s:search/@id};status={/aggregate/s:search/@status};query={/aggregate/s:search/s:query};source={$source}"/>
 		</xsl:copy>
-    </xsl:template>
-      
-    <xsl:template match="h:span[@id='spellResults']">
-        <xsl:if test="/aggregate/s:search/s:spell">
-	            <span>Did you mean: <a href="search.html?source={$source}&amp;keywords={/aggregate/s:search/s:spell/text()}"><strong><i><xsl:value-of select="/aggregate/s:search/s:spell/text()"/></i></strong></a></span>
-        </xsl:if>
-        <xsl:if test="not(/aggregate/s:search/s:spell)">
-	        <xsl:copy>
-	            <xsl:copy-of select="@*"/>
-	            <xsl:apply-templates/>
-	        </xsl:copy>
-		</xsl:if>
     </xsl:template>
 
     <xsl:template match="h:li">
