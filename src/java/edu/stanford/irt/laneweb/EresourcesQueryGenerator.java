@@ -9,6 +9,7 @@ package edu.stanford.irt.laneweb;
 import java.io.IOException;
 import java.util.Map;
 
+
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
@@ -21,40 +22,26 @@ import org.xml.sax.helpers.AttributesImpl;
 
 public class EresourcesQueryGenerator extends AbstractGenerator {
 	
-	//ERESOURCE.TITLE, lower(ERESOURCE.TITLE) AS LTITLE, 
-	
 	private static final String COUNT_QUERY =
-		"SELECT COUNT(*) AS HITS, 'er' AS GENRE FROM ERESOURCE, TYPE\n"+
-		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
-		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'er'\n"+
+		"WITH FOUND AS (SELECT ERESOURCE2.ERESOURCE_ID, TYPE2.TYPE, SUBSET2.SUBSET FROM ERESOURCE2, TYPE2, SUBSET2 \n" +
+		"WHERE CONTAINS(ERESOURCE2.TEXT,'XX') > 0 \n" +
+		"AND ERESOURCE2.ERESOURCE_ID = TYPE2.ERESOURCE_ID \n" +
+		"AND ERESOURCE2.ERESOURCE_ID = SUBSET2.ERESOURCE_ID(+)) \n"+
+		"SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'er' AS GENRE FROM FOUND WHERE TYPE = 'er'\n"+
 		"UNION\n"+
-		"SELECT COUNT(*) AS HITS, 'ej' AS GENRE FROM ERESOURCE, TYPE\n"+
-		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
-		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'ej'\n"+
+		"SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'ej' AS GENRE FROM FOUND WHERE TYPE = 'ej'\n"+
 		"UNION\n"+
-		"SELECT COUNT(*) AS HITS, 'database' AS GENRE FROM ERESOURCE, TYPE\n"+
-		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
-		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'database'\n"+
+		"SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'database' AS GENRE FROM FOUND WHERE TYPE = 'database'\n"+
 		"UNION\n"+
-		"SELECT COUNT(*) AS HITS, 'video' AS GENRE FROM ERESOURCE, TYPE\n"+
-		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
-		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'video'\n"+
+		"SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'video' AS GENRE FROM FOUND WHERE TYPE = 'video'\n"+
 		"UNION\n"+
-		"SELECT COUNT(*) AS HITS, 'book' AS GENRE FROM ERESOURCE, TYPE\n"+
-		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
-		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'book'\n"+
+		"SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'book' AS GENRE FROM FOUND WHERE TYPE = 'book'\n"+
 		"UNION\n"+
-		"SELECT COUNT(*) AS HITS, 'cc' AS GENRE FROM ERESOURCE, TYPE\n"+
-		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
-		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'cc'\n"+
+		"SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'cc' AS GENRE FROM FOUND WHERE TYPE = 'cc'\n"+
 		"UNION\n"+
-		"SELECT COUNT(*) AS HITS, 'lanefaq' AS GENRE FROM ERESOURCE, TYPE\n"+
-		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
-		"AND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE = 'lanefaq'\n"+
+		"SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'lanefaq' AS GENRE FROM FOUND WHERE TYPE = 'lanefaq'\n"+
 		"UNION\n"+
-		"SELECT COUNT(*) AS HITS, 'biotools' AS GENRE FROM ERESOURCE, VERSION, SUBSET\n"+
-		"WHERE CONTAINS(ERESOURCE.TEXT,'XX ') > 0 \n"+
-		"AND ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID AND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET = 'biotools'";
+		"SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'biotools' AS GENRE FROM FOUND WHERE SUBSET = 'biotools'";
     
     private static final String TYPE = "t";
     private static final String MESH = "m";
@@ -68,26 +55,26 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     private static final String QUERY_ELEMENT = "query";
     private static final String SELECT = 
     	"SELECT " +
-    	"DISTINCT LINK.LINK_ID, " +
-    	"ERESOURCE.ERESOURCE_ID, " +
-    	"VERSION.VERSION_ID, " +
-    	"VERSION.PUBLISHER, " +
-    	"VERSION.HOLDINGS, " +
-    	"VERSION.DATES, " +
-    	"VERSION.DESCRIPTION, " +
-    	"VERSION.PROXY, " +
-    	"LINK.URL, " +
-    	"LINK.LABEL, " +
-    	"LINK.INSTRUCTION, ";
+    	"LINK2.SEQNUM, " +
+    	"ERESOURCE2.ERESOURCE_ID, " +
+    	"VERSION2.VERSION_ID, " +
+    	"VERSION2.PUBLISHER, " +
+    	"VERSION2.HOLDINGS, " +
+    	"VERSION2.DATES, " +
+    	"VERSION2.DESCRIPTION, " +
+    	"VERSION2.PROXY, " +
+    	"LINK2.URL, " +
+    	"LINK2.LABEL, " +
+    	"LINK2.INSTRUCTION, ";
     private static final String FROM = "FROM " +
-    "ERESOURCE, VERSION, LINK";
+    "ERESOURCE2, VERSION2, LINK2";
     private static final String WHERE =
     	"WHERE " +
-    	"ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID " +
+    	"ERESOURCE2.ERESOURCE_ID = VERSION2.ERESOURCE_ID " +
     	"AND " + 
-    	"VERSION.VERSION_ID = LINK.VERSION_ID ";
+    	"VERSION2.VERSION_ID = LINK2.VERSION_ID ";
     private static final String ORDER_BY = "\nORDER BY ";
-    private static final String ORDER = " STITLE, LINK_ID";
+    private static final String ORDER = " STITLE, SEQNUM";
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
     
     private String type;
@@ -212,30 +199,30 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     	}
     	StringBuffer queryBuffer = new StringBuffer();
     	if (this.translatedQuery != null) {
-    		getScoredSelectSQL(queryBuffer, "ERESOURCE.TITLE", true);
+    		getScoredSelectSQL(queryBuffer, "ERESOURCE2.TITLE", true);
     		getFromSQL(queryBuffer);
-    		getScoredWhereSQL(queryBuffer, "ERESOURCE.TITLE", true);
+    		getScoredWhereSQL(queryBuffer, "ERESOURCE2.TITLE", true);
     		queryBuffer.append("\nUNION\n");
-    		getScoredSelectSQL(queryBuffer, "ERESOURCE.TITLE", false);
+    		getScoredSelectSQL(queryBuffer, "ERESOURCE2.TITLE", false);
     		getFromSQL(queryBuffer);
-    		getScoredWhereSQL(queryBuffer, "ERESOURCE.TITLE", false);
+    		getScoredWhereSQL(queryBuffer, "ERESOURCE2.TITLE", false);
     		queryBuffer.append("\nUNION\n");
-    		getScoredSelectSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE", true);
+    		getScoredSelectSQL(queryBuffer, "ERESOURCE2.PREFERRED_TITLE", true);
     		getFromSQL(queryBuffer);
-    		getScoredWhereSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE", true);
+    		getScoredWhereSQL(queryBuffer, "ERESOURCE2.PREFERRED_TITLE", true);
     		queryBuffer.append("\nUNION\n");
-    		getScoredSelectSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE", false);
+    		getScoredSelectSQL(queryBuffer, "ERESOURCE2.PREFERRED_TITLE", false);
     		getFromSQL(queryBuffer);
-    		getScoredWhereSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE", false);
+    		getScoredWhereSQL(queryBuffer, "ERESOURCE2.PREFERRED_TITLE", false);
     		getOrderBySQL(queryBuffer);
     	} else {
-    		getSelectSQL(queryBuffer, "ERESOURCE.TITLE");
+    		getSelectSQL(queryBuffer, "ERESOURCE2.TITLE");
     		getFromSQL(queryBuffer);
-    		getWhereSQL(queryBuffer, "ERESOURCE.TITLE");
+    		getWhereSQL(queryBuffer, "ERESOURCE2.TITLE");
     		queryBuffer.append("\nUNION\n");
-    		getSelectSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE");
+    		getSelectSQL(queryBuffer, "ERESOURCE2.PREFERRED_TITLE");
     		getFromSQL(queryBuffer);
-    		getWhereSQL(queryBuffer, "ERESOURCE.PREFERRED_TITLE");
+    		getWhereSQL(queryBuffer, "ERESOURCE2.PREFERRED_TITLE");
     		getOrderBySQL(queryBuffer);
     	}
         return  queryBuffer.toString().toCharArray();
@@ -263,18 +250,18 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
     	queryBuffer.append('\n');
     	queryBuffer.append(FROM);
       if (this.type != null) {
-			queryBuffer.append(", TYPE");
+			queryBuffer.append(", TYPE2");
 		}
 		if (this.mesh != null) {
-			queryBuffer.append(", MESH");
+			queryBuffer.append(", MESH2");
 		}
 		if (this.subset != null) {
-			queryBuffer.append(", SUBSET");
+			queryBuffer.append(", SUBSET2");
 		}
     }
     private void getScoredWhereSQL(StringBuffer queryBuffer, String titleTable, boolean core) {
     	getWhereSQL(queryBuffer, titleTable);
-    	queryBuffer.append("\nAND ERESOURCE.CORE ");
+    	queryBuffer.append("\nAND ERESOURCE2.CORE ");
     	if (core) {
     		queryBuffer.append("= 'Y'");
     	} else {
@@ -288,23 +275,23 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
 		if (this.type != null) {
 			queryBuffer
 					.append(
-							"\nAND TYPE.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND TYPE.TYPE = '")
+							"\nAND TYPE2.ERESOURCE_ID = ERESOURCE2.ERESOURCE_ID AND TYPE2.TYPE = '")
 					.append(this.type).append("'");
 		}
 		if (this.mesh != null) {
 			queryBuffer
 					.append(
-							"\nAND MESH.ERESOURCE_ID = ERESOURCE.ERESOURCE_ID AND MESH.TERM = '")
+							"\nAND MESH2.ERESOURCE_ID = ERESOURCE2.ERESOURCE_ID AND MESH2.TERM = '")
 					.append(this.mesh).append("'");
 		}
 		if (this.subset != null) {
 			queryBuffer
 					.append(
-							"\nAND SUBSET.VERSION_ID = VERSION.VERSION_ID AND SUBSET.SUBSET = '")
+							"\nAND SUBSET2.VERSION_ID = VERSION2.VERSION_ID AND SUBSET2.SUBSET = '")
 					.append(this.subset).append("'");
 		}
 		if (this.core != null) {
-			queryBuffer.append("\nAND ERESOURCE.CORE = 'Y'");
+			queryBuffer.append("\nAND ERESOURCE2.CORE = 'Y'");
 		}
 		if (this.alpha != null) {
 			queryBuffer.append("\nAND ");
@@ -320,11 +307,11 @@ public class EresourcesQueryGenerator extends AbstractGenerator {
 			}
 		}
 		if (this.translatedQuery != null) {
-			queryBuffer.append("\nAND CONTAINS(ERESOURCE.TEXT,'").append(
+			queryBuffer.append("\nAND CONTAINS(ERESOURCE2.TEXT,'").append(
 					translatedQuery).append("', 2) > 0 ");
 		}
-		if (titleTable.equals("ERESOURCE.PREFERRED_TITLE")) {
-			queryBuffer.append("\nAND ERESOURCE.PREFERRED_TITLE IS NOT NULL");
+		if (titleTable.equals("ERESOURCE2.PREFERRED_TITLE")) {
+			queryBuffer.append("\nAND ERESOURCE2.PREFERRED_TITLE IS NOT NULL");
 		}
 	}
     private void getOrderBySQL(StringBuffer queryBuffer) {
