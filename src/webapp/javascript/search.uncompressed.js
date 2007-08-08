@@ -453,20 +453,22 @@ IOClient.prototype = {
 					oldAnchor.innerHTML = text;
 				  }
 
-				  //hide result items if engine is still running or it returned a zero hit count
+				  // hide result items if engine is still running or it returned a zero hit count
+				  // otherwise, show engine name and make sure parent h3 is displayed
 				  if ( newStatus == 'running' 
 				  	|| newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue == 0){
 				    oldResults[i].className = 'hide';
 				  }
 				  else{
-				    // display parent h3 heading as well as result
+				    // otherwise, show engine name and make sure parent h3 is displayed
 				    oldResults[i].parentNode.parentNode.getElementsByTagName('h3')[0].className = '';
 				    oldResults[i].className = '';
 				    hitsFoundInSourceCount++;
 				  }
 
-				  // only write engine result count when status of engine has changed
-				  if (oldAnchor.getAttribute('type') != newStatus){
+				  // write engine result counts
+				  //  only write count when: engine status is successful and status of engine has changed
+				  if (newStatus == 'successful' && oldAnchor.getAttribute('type') != newStatus){
 					oldAnchor.setAttribute('type',newStatus);// = newStatus;
 					if (newResults[i].getElementsByTagName('span').length > 0) {
 						var hitCount = newResults[i].getElementsByTagName('span')[0].childNodes[0].nodeValue;
@@ -880,32 +882,3 @@ function lastSelectValue(select){
 		}
 	}
 }
-
-/*
-// catalog.html iframe
-function loadCatalogIframe(){
-        var q = getQueryContent('keywords',location.href);
-        var frame = document.getElementById('catalog');
-        frame.src = 'http://traindb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&SAB1=' + q + '&BOOL1=all+of+these&FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&CNT=50';
-        frame.className = '';
-}
-
-
-function openCitationMatcher(newWindow){
- 	url = 'http://www.ncbi.nlm.nih.gov/entrez/query/static/citmatch.html';
- 	var body = document.getElementsByTagName("body").item(0);
-  	if(body){
- 		var iframe = document.createElement('iframe');
- 		iframe.src = 'http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&holding=F1000';
- 		iframe.setAttribute('style','display:none;');
- 		body.appendChild(iframe);
- 	}
-	if(newWindow){
- 		setTimeout("openSearchResult(url);",500);
- 		return false;
- 	}
- 	else {
- 		setTimeout("window.location = url;",2500);
- 	}
-}
-*/

@@ -302,7 +302,7 @@ _3c[i].parentNode.parentNode.getElementsByTagName("h3")[0].className="";
 _3c[i].className="";
 _41++;
 }
-if(_45.getAttribute("type")!=_47){
+if(_47=="successful"&&_45.getAttribute("type")!=_47){
 _45.setAttribute("type",_47);
 if(_3b[i].getElementsByTagName("span").length>0){
 var _49=_3b[i].getElementsByTagName("span")[0].childNodes[0].nodeValue;
