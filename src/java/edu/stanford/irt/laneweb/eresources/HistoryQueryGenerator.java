@@ -4,7 +4,7 @@
  * To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.eresources;
 
 import java.io.IOException;
 import java.util.Map;
@@ -18,6 +18,7 @@ import org.apache.cocoon.generation.AbstractGenerator;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
+
 
 public class HistoryQueryGenerator extends AbstractGenerator {
 	

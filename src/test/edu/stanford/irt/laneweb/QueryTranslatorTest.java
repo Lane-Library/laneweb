@@ -3,6 +3,7 @@
  */
 package edu.stanford.irt.laneweb;
 
+import edu.stanford.irt.laneweb.eresources.QueryTranslator;
 import junit.framework.TestCase;
 
 /**
@@ -18,7 +19,7 @@ public class QueryTranslatorTest extends TestCase {
 	}
 
 	/**
-	 * Test method for {@link edu.stanford.irt.laneweb.QueryTranslator#processString(java.lang.String)}.
+	 * Test method for {@link edu.stanford.irt.laneweb.eresources.QueryTranslator#processString(java.lang.String)}.
 	 */
 	public void testProcessString() {
 		this.translator.processString("green  red");

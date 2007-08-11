@@ -16,9 +16,11 @@
                 logger="sitemap.generator.search-proxy" pool-max="32"/>
             <map:generator name="request" src="org.apache.cocoon.generation.RequestGenerator"
                 logger="sitemap.generator.request" pool-max="32"/>
-            <map:generator name="eresource" src="edu.stanford.irt.laneweb.EresourcesQueryGenerator"
-                logger="sitemap.generation.eresource" pool-max="32"/>
-            <map:generator name="history" src="edu.stanford.irt.laneweb.HistoryQueryGenerator"
+            <map:generator name="eresources-search" src="edu.stanford.irt.laneweb.eresources.EresourcesSearchGenerator"
+                logger="sitemap.generation.eresource-search" pool-max="32"/>
+            <map:generator name="eresources-count" src="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
+                logger="sitemap.generation.eresource-search" pool-max="32"/>
+            <map:generator name="history" src="edu.stanford.irt.laneweb.eresources.HistoryQueryGenerator"
                 logger="sitemap.generation.history" pool-max="32"/>
             <map:generator name="status" logger="sitemap.generator.status"
                 src="org.apache.cocoon.generation.StatusGenerator" pool-max="4"/>

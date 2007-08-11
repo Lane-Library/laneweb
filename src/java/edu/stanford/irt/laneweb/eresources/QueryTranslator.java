@@ -1,5 +1,5 @@
 //stolen from oracle web site.
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Vector;
 
