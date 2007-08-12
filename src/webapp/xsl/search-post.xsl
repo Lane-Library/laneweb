@@ -2,9 +2,6 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:h="http://www.w3.org/1999/xhtml" exclude-result-prefixes="h" version="1.0">
 
-    <xsl:param name="source"/>
-    <xsl:param name="keywords"/>
-
     <xsl:variable name="count">
         <xsl:value-of select="count(//h:dt)"/>
     </xsl:variable>

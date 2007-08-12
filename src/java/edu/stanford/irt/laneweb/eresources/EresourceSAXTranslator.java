@@ -18,7 +18,7 @@ import edu.stanford.irt.eresources.Version;
  */
 public class EresourceSAXTranslator {
 	
-	private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
+	private static final String XHTML_NS = "";//http://www.w3.org/1999/xhtml";
 	private static final String DD = "dd";
 	private static final String DT = "dt";
 	private static final String UL = "ul";
