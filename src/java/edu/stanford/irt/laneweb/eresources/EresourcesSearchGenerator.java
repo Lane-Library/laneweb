@@ -221,8 +221,11 @@ public class EresourcesSearchGenerator extends ServiceableGenerator {
 		}
 		finally {
 			try {
+				if (null != conn) 
 				conn.close();
+				if (null != stmt)
 				stmt.close();
+				if (null != rs)
 				rs.close();
 			} catch (SQLException e) {
 				throw new ProcessingException(e);

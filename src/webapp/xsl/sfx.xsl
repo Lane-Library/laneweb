@@ -3,7 +3,7 @@
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns="http://lane.stanford.edu/sfx/ns"
     exclude-result-prefixes="h"
-    version="1.0">
+    version="2.0">
 
 	<xsl:output method='xml' omit-xml-declaration='no' indent="yes"/>
 

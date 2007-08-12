@@ -3,7 +3,7 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:sql="http://apache.org/cocoon/SQL/2.0"
                 exclude-result-prefixes="sql"
-                version="1.0">
+                version="2.0">
 
   <xsl:param name="q"/>
 

@@ -33,14 +33,14 @@
                 </map:select>
                 <map:select type="resource-exists">
                     <map:when test="xsl/cookiesFetch.xsl">
-                        <map:transform type="xsltc" src="xsl/cookiesFetch.xsl">
+                        <map:transform type="saxon" src="xsl/cookiesFetch.xsl">
                             <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/cookiesFetch.xsl">
+                        <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
                             <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
@@ -53,7 +53,7 @@
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
-                        <map:transform type="xsltc" src="xsl/laneweb.xsl">
+                        <map:transform type="saxon" src="xsl/laneweb.xsl">
                        	   	<map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
@@ -66,7 +66,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                        <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                  		   	<map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
@@ -81,13 +81,13 @@
                 </map:select>
                 <map:select type="resource-exists">
                     <map:when test="xsl/webtrends.xsl">
-                        <map:transform type="xsltc" src="xsl/webtrends.xsl">
+                        <map:transform type="saxon" src="xsl/webtrends.xsl">
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
+                        <map:transform type="saxon" src="context://xsl/webtrends.xsl">
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>
@@ -104,7 +104,7 @@
                 </map:aggregate>
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
-                        <map:transform type="xsltc" src="xsl/laneweb.xsl">
+                        <map:transform type="saxon" src="xsl/laneweb.xsl">
                        	   	<map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
@@ -116,7 +116,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                        <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                         	<map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
@@ -130,13 +130,13 @@
                 </map:select>
                 <map:select type="resource-exists">
                     <map:when test="xsl/template-{chain:template}.xsl">
-                        <map:transform type="xsltc"
+                        <map:transform type="saxon"
                             src="xsl/template-{chain:template}.xsl">
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>
                     </map:when> 
                     <map:when test="context://xsl/template-{chain:template}.xsl">
-                        <map:transform type="xsltc"
+                        <map:transform type="saxon"
                             src="context://xsl/template-{chain:template}.xsl">
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>
@@ -144,13 +144,13 @@
                 </map:select>
                 <map:select type="resource-exists">
                     <map:when test="xsl/webtrends.xsl">
-                        <map:transform type="xsltc" src="xsl/webtrends.xsl">
+                        <map:transform type="saxon" src="xsl/webtrends.xsl">
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
+                        <map:transform type="saxon" src="context://xsl/webtrends.xsl">
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>

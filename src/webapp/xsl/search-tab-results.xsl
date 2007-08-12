@@ -5,7 +5,7 @@
                 xmlns:str="http://lane.stanford.edu/search-tab-results/ns"
                 xmlns="http://lane.stanford.edu/search-tab-result/ns"
                 exclude-result-prefixes="h st str res"
-                version="1.0">
+                version="2.0">
     
    
    <xsl:template match="res:search">

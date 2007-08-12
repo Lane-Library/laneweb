@@ -11,7 +11,7 @@
                 <map:generate type="search-proxy" src="{defaults:search-url}search"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-proxy.xsl">
-                        <map:transform type="xsltc" src="xsl/search-proxy.xsl">
+                        <map:transform type="saxon" src="xsl/search-proxy.xsl">
                             <map:parameter name="context" value="{request:contextPath}" />
                             <map:parameter name="sunetid" value="{laneweb:sunetid}" />
                             <map:parameter name="ticket" value="{laneweb:ticket}" />
@@ -20,7 +20,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/search-proxy.xsl">
+                        <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
                             <map:parameter name="context" value="{request:contextPath}" />
                             <map:parameter name="sunetid" value="{laneweb:sunetid}" />
                             <map:parameter name="ticket" value="{laneweb:ticket}" />
@@ -40,10 +40,10 @@
                     </map:aggregate>
                     <map:select type="resource-exists">
                         <map:when test="xsl/ajax-search.xsl">
-                            <map:transform type="xsltc" src="xsl/ajax-search.xsl"/>
+                            <map:transform type="saxon" src="xsl/ajax-search.xsl"/>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="xsltc" src="context://xsl/ajax-search.xsl"/>
+                            <map:transform type="saxon" src="context://xsl/ajax-search.xsl"/>
                         </map:otherwise>
                     </map:select>
                     <map:serialize type="xml"/>
@@ -70,10 +70,10 @@
                     </map:select>
                     <map:select type="resource-exists">
                         <map:when test="xsl/elibrary-search.xsl">
-                            <map:transform type="xsltc" src="xsl/elibrary-search.xsl"/>
+                            <map:transform type="saxon" src="xsl/elibrary-search.xsl"/>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="xsltc" src="context://xsl/elibrary-search.xsl"/>
+                            <map:transform type="saxon" src="context://xsl/elibrary-search.xsl"/>
                         </map:otherwise>
                     </map:select>
                     <map:transform type="xinclude"/>
@@ -95,12 +95,12 @@
                 </map:select>
                 <map:select type="resource-exists">
                     <map:when test="xsl/template2meta-engines.xsl">
-                        <map:transform type="xsltc" src="xsl/template2meta-engines.xsl">
+                        <map:transform type="saxon" src="xsl/template2meta-engines.xsl">
                             <map:parameter name="source" value="{request-param:source}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/template2meta-engines.xsl">
+                        <map:transform type="saxon" src="context://xsl/template2meta-engines.xsl">
                             <map:parameter name="source" value="{request-param:source}"/>
                         </map:transform>
                     </map:otherwise>
@@ -114,12 +114,12 @@
                 </map:aggregate>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-tab-results.xsl">
-                        <map:transform type="xsltc" src="xsl/search-tab-results.xsl">
+                        <map:transform type="saxon" src="xsl/search-tab-results.xsl">
                             <map:parameter name="source" value="{request-param:source}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/search-tab-results.xsl">
+                        <map:transform type="saxon" src="context://xsl/search-tab-results.xsl">
                             <map:parameter name="source" value="{request-param:source}"/>
                         </map:transform>
                     </map:otherwise>
@@ -129,7 +129,7 @@
             <map:match pattern="sfx">
                 <map:generate type="html"
                     src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"/>
-                <map:transform type="xsltc" src="context://xsl/sfx.xsl">
+                <map:transform type="saxon" src="context://xsl/sfx.xsl">
                     <map:parameter name="sfx-request"
                         value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
                     />
@@ -140,10 +140,10 @@
                 <map:generate type="file" src="{request-param:source}"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/random.xsl">
-                        <map:transform type="xsltc" src="xsl/random.xsl"/>
+                        <map:transform type="saxon" src="xsl/random.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/random.xsl"/>
+                        <map:transform type="saxon" src="context://xsl/random.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xhtml"/>
@@ -152,10 +152,10 @@
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/faq.xsl">
-                        <map:transform type="xsltc" src="xsl/faq.xsl"/>
+                        <map:transform type="saxon" src="xsl/faq.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/faq.xsl"/>
+                        <map:transform type="saxon" src="context://xsl/faq.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="xinclude"/>
@@ -165,10 +165,10 @@
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/faq=category-list.xsl">
-                        <map:transform type="xsltc" src="xsl/faq-category-list.xsl"/>
+                        <map:transform type="saxon" src="xsl/faq-category-list.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/faq-category-list.xsl"/>
+                        <map:transform type="saxon" src="context://xsl/faq-category-list.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -182,10 +182,10 @@
                 </map:aggregate>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-templates.xsl">
-                        <map:transform type="xsltc" src="xsl/search-templates.xsl"/>
+                        <map:transform type="saxon" src="xsl/search-templates.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/search-templates.xsl"/>
+                        <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -213,10 +213,10 @@
                 <map:transform type="xinclude"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/rss2html.xsl">
-                        <map:transform type="xsltc" src="xsl/rss2html.xsl"/>
+                        <map:transform type="saxon" src="xsl/rss2html.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/rss2html.xsl"/>
+                        <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

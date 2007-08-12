@@ -4,7 +4,7 @@
                        xmlns="http://www.w3.org/1999/xhtml"
                        xmlns:math="http://exslt.org/math"
                        exclude-result-prefixes="h math"
-                       version="1.0">
+                       version="2.0">
 
 	<!--
 	 return a random div element from a node set of divs

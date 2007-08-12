@@ -9,7 +9,7 @@
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
-                <map:transform type="xsltc" src="context://xsl/ersql2html.xsl"/>
+                <map:transform type="saxon" src="context://xsl/ersql2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="histdb">
@@ -17,7 +17,7 @@
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
-                <map:transform type="xsltc" src="context://xsl/historyErsql2html.xsl"/>
+                <map:transform type="saxon" src="context://xsl/historyErsql2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="count">
@@ -39,7 +39,7 @@
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
-                <map:transform type="xsltc" src="context://xsl/ezproxy-servers.xsl"/>
+                <map:transform type="saxon" src="context://xsl/ezproxy-servers.xsl"/>
                 <map:serialize type="text"/>
             </map:match>
             <map:match pattern="linkscan.html">
@@ -47,7 +47,7 @@
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
-                <map:transform type="xsltc" src="context://xsl/linkscan.xsl"/>
+                <map:transform type="saxon" src="context://xsl/linkscan.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="extensions-suggest">
@@ -56,7 +56,7 @@
                     <map:parameter name="use-connection" value="eresources"/>
                     <map:parameter name="q" value="{request-param:q}"/>
                 </map:transform>
-                <map:transform type="xsltc" src="context://xsl/extensions-suggest.xsl">
+                <map:transform type="saxon" src="context://xsl/extensions-suggest.xsl">
                     <map:parameter name="q" value="{request-param:q}"/>
                 </map:transform>
                 <map:serialize type="text"/>

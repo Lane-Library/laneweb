@@ -241,3 +241,8 @@ try {
     }
    } catch(exception) { handleException(exception) }
 }
+
+function email(obfuscatedEmail) {
+    document.location = obfuscatedEmail.replace(/\|/g,'');
+    return false;
+}

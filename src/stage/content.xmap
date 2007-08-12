@@ -9,7 +9,7 @@
             </map:match>
             <map:match type="wildcard" pattern="search-proxy">
                 <map:generate type="search-proxy" src="{defaults:search-url}search"/>
-                <map:transform type="xsltc" src="context://xsl/search-proxy.xsl">
+                <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
                     <map:parameter name="context" value="{request:contextPath}/stage"/>
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
@@ -25,7 +25,7 @@
                         <map:part src="cocoon:/search-proxy"/>
                         <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>
                     </map:aggregate>
-                    <map:transform type="xsltc" src="context://xsl/ajax-search.xsl"/>
+                    <map:transform type="saxon" src="context://xsl/ajax-search.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match type="regex-parameter" pattern="^.+$">
@@ -36,7 +36,7 @@
                         <map:part src="cocoon:/template2meta-engines?source=peds"/>
                         <map:part src="cocoon:/template2meta-engines?source=research"/>
                     </map:aggregate>
-                    <map:transform type="xsltc" src="context://xsl/elibrary-search.xsl"/>
+                    <map:transform type="saxon" src="context://xsl/elibrary-search.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -47,7 +47,7 @@
             </map:match>
             <map:match pattern="template2meta-engines">
                 <map:generate type="file" src="{defaults:stage-base}/resources/templates/search/{request-param:source}.xml"/>
-                <map:transform type="xsltc" src="context://xsl/template2meta-engines.xsl">
+                <map:transform type="saxon" src="context://xsl/template2meta-engines.xsl">
                     <map:parameter name="source" value="{request-param:source}"/>
                 </map:transform>
                 <map:serialize type="text"/>
@@ -57,13 +57,13 @@
                     <map:part src="cocoon:/search-proxy"/>  
                     <map:part src="cocoon:/search-templates.xml"/>
                 </map:aggregate>
-                <map:transform type="xsltc" src="context://xsl/search-tab-results.xsl"/>
+                <map:transform type="saxon" src="context://xsl/search-tab-results.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="sfx">
                 <map:generate type="html"
                     src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"/>
-                <map:transform type="xsltc" src="context://xsl/sfx.xsl">
+                <map:transform type="saxon" src="context://xsl/sfx.xsl">
                     <map:parameter name="sfx-request"
                         value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
                     />
@@ -72,18 +72,18 @@
             </map:match>
             <map:match type="wildcard" pattern="random">
                 <map:generate type="file" src="{request-param:source}"/>
-                <map:transform type="xsltc" src="context://xsl/random.xsl"/>
+                <map:transform type="saxon" src="context://xsl/random.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match type="wildcard" pattern="howto/index.html">
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
-                <map:transform type="xsltc" src="context://xsl/faq.xsl"/>
+                <map:transform type="saxon" src="context://xsl/faq.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="faq-category-list.html">
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
-                <map:transform type="xsltc" src="context://xsl/faq-category-list.xsl"/>
+                <map:transform type="saxon" src="context://xsl/faq-category-list.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="search-templates.xml">
@@ -93,7 +93,7 @@
                     <map:part src="cocoon:/templates/search/research.xml"/>
                     <map:part src="cocoon:/templates/search/history.xml"/>
                 </map:aggregate>
-                <map:transform type="xsltc" src="context://xsl/search-templates.xsl"/>
+                <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="templates/**.xml">
@@ -103,7 +103,7 @@
             <map:match type="wildcard" pattern="**">
                 <map:generate type="html" src="{defaults:stage-base}/content/{1}"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="xsltc" src="context://xsl/rss2html.xsl"/>
+                <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>

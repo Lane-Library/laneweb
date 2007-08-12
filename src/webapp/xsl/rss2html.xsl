@@ -5,7 +5,7 @@
     xmlns:rss="http://purl.org/rss/1.0/"
     xmlns="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="rdf rss"
-    version="1.0">
+    version="2.0">
     
   <xsl:template match="node()">
     <xsl:copy>

@@ -1,14 +1,12 @@
-<xsl:stylesheet version="1.0"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:str="http://exslt.org/strings"
-    exclude-result-prefixes="h str">
-    
-    <xsl:strip-space elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
-    
+<xsl:stylesheet version="2.0" xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    exclude-result-prefixes="h">
+
+    <xsl:strip-space
+        elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
+
     <xsl:include href="flash.xsl"/>
-    
+
     <!-- ===========================  PARAMETERS ========================= -->
     <!-- the template parameter from the request -->
     <xsl:param name="template"/>
@@ -20,28 +18,28 @@
     <xsl:param name="query-string"/>
     <!-- whether debugging is on or not -->
     <xsl:param name="debug"/>
-    
+
     <xsl:param name="host"/>
-    
+
     <xsl:param name="keywords"/>
-    
+
     <xsl:param name="source"/>
-    
+
     <xsl:param name="proxy-links"/>
-    
+
     <xsl:param name="ticket"/>
 
     <xsl:param name="sunetid"/>
-    
+
     <!-- m request parameter is a MeSH term -->
     <xsl:param name="m"/>
-    
+
     <!-- LPCH and SHC don't require authentication for proxy server -->
     <xsl:param name="affiliation"/>
-    
+
     <!-- value of the 't' parameter -->
     <xsl:param name="t"/>
-    
+
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
     <xsl:variable name="default-template" select="'default'"/>
@@ -66,14 +64,17 @@
     <xsl:variable name="source-doc" select="/*/h:html[1]"/>
     <!-- the sitemap document -->
     <xsl:variable name="sitemap" select="/*/h:html[2]"/>
-    
+
     <xsl:variable name="search-form-select">
         <xsl:choose>
             <xsl:when test="$source-doc/h:head/h:meta[@name='lw_searchFormSelect']">
-                <xsl:value-of select="$source-doc/h:head/h:meta[@name='lw_searchFormSelect']/@content"/>
+                <xsl:value-of
+                    select="$source-doc/h:head/h:meta[@name='lw_searchFormSelect']/@content"/>
             </xsl:when>
             <xsl:when test="$source-doc/h:body/h:script[contains(.,'searchFormSelect')]">
-                <xsl:value-of select="substring-before(substring-after($source-doc/h:body/h:script[contains(.,'searchFormSelect')],&quot;&apos;&quot;),&quot;&apos;&quot;)"/>
+                <xsl:value-of
+                    select="substring-before(substring-after($source-doc/h:body/h:script[contains(.,'searchFormSelect')],&quot;&apos;&quot;),&quot;&apos;&quot;)"
+                />
             </xsl:when>
             <xsl:when test="starts-with($request-uri,'online/ej')">ej</xsl:when>
             <xsl:when test="starts-with($request-uri,'online/eb')">book</xsl:when>
@@ -91,11 +92,13 @@
             <xsl:when test="starts-with($request-uri,'portals/shc-demo-pharmacy')">pharmacy</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/')">clinical</xsl:when>
             <xsl:when test="starts-with($request-uri,'local/antibiogram')">clinical</xsl:when>
-            <xsl:when test="$source"><xsl:value-of select="$source"/></xsl:when>
+            <xsl:when test="$source">
+                <xsl:value-of select="$source"/>
+            </xsl:when>
             <xsl:otherwise>all</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    
+
     <!-- ====================  DEFAULT TEMPLATES ============================= -->
     <!-- root template applies templates on the template document -->
     <xsl:template match="/">
@@ -108,20 +111,20 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <!-- default element match, copies the element and applies templates on all childeren and attributes -->
     <xsl:template match="*">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
     </xsl:template>
-  
-    
+
+
     <!-- default attribute match, copies the attribute -->
     <xsl:template match="@*">
         <xsl:copy-of select="."/>
     </xsl:template>
-    
+
     <xsl:template match="processing-instruction()">
         <xsl:choose>
             <xsl:when test=".='content'">
@@ -135,17 +138,17 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-    
+
     <!-- strip onload event handlers except 100years pages using yui in laneweb.js-->
     <xsl:template match="h:body/@onload">
         <xsl:if test="starts-with($request-uri,'100years')">
             <xsl:copy-of select="."/>
         </xsl:if>
     </xsl:template>
-    
+
     <!-- strip onunload handlers -->
     <xsl:template match="h:body/@onunload"/>
-    
+
     <xsl:template match="comment()">
         <xsl:copy-of select="."/>
         <!--<xsl:if test="contains(.,'[if IE]')">
@@ -154,12 +157,12 @@
             </xsl:comment>
         </xsl:if>-->
     </xsl:template>
-    
+
     <!-- xincludes often include html/head and html/body -->
     <xsl:template match="h:html[ancestor::h:html]">
         <xsl:apply-templates select="h:body/child::node()"/>
     </xsl:template>
-    
+
     <!-- make sure there is not an empty <script/> element -->
     <xsl:template match="h:script[@src]">
         <xsl:copy>
@@ -167,7 +170,7 @@
             <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
-   
+
     <xsl:template match="h:a">
         <xsl:choose>
             <xsl:when test="starts-with(@href, '/')">
@@ -175,7 +178,8 @@
                     <xsl:when test="$query-string='' and @href = concat('/',$request-uri)">
                         <xsl:apply-templates select="node()"/>
                     </xsl:when>
-                    <xsl:when test="$query-string != '' and @href = concat('/',$request-uri,'?',$query-string)">
+                    <xsl:when
+                        test="$query-string != '' and @href = concat('/',$request-uri,'?',$query-string)">
                         <xsl:apply-templates select="node()"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -187,55 +191,34 @@
             </xsl:when>
             <!-- obfuscate email addresses with JavaSscript -->
             <xsl:when test="starts-with(@href, 'mailto:')">
-                <xsl:variable name="apostrophe">'</xsl:variable>
-                <xsl:variable name="address">
-                    <xsl:text>'+'ma'+''+'il'+'to'+':'</xsl:text>
-                    <xsl:for-each select="str:tokenize(substring-after(@href,'mailto:'),'')">
-                            <xsl:text>+'</xsl:text><xsl:value-of select="."/><xsl:text>'</xsl:text>
-                    </xsl:for-each>
-                    <xsl:text>+'</xsl:text>
-                </xsl:variable>
-                <xsl:element name="script">
-                    <xsl:attribute name="type">text/javascript</xsl:attribute>
-                    var link = '<xsl:element name="a">
-                        <xsl:copy-of select="@*"/>
-                        <xsl:attribute name="href">
-                            <xsl:value-of select="$address"/>
-                        </xsl:attribute>
-                        <xsl:for-each select="*">
-                            <xsl:text>'+'</xsl:text>
-                            <xsl:apply-templates select="."/>
-                        </xsl:for-each>
-                        <xsl:text>'</xsl:text>
-                        <xsl:for-each select="str:tokenize(text(),'')">
-                            <xsl:text>+'</xsl:text>
-                            <xsl:choose>
-                                <xsl:when test=". = $apostrophe">
-                                    <xsl:text>\'</xsl:text>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="."/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                            <xsl:text>'</xsl:text>
-                        </xsl:for-each>
-                        <xsl:text>+'</xsl:text>
-                    </xsl:element>';
-                    document.write(link);
-                </xsl:element>
+                <xsl:copy>
+                    <xsl:attribute name="onclick">
+                        <xsl:text>email('</xsl:text>
+                        <xsl:call-template name="tokenize-email">
+                            <xsl:with-param name="string" select="@href"/>
+                        </xsl:call-template>
+                        <xsl:text>')</xsl:text>
+                    </xsl:attribute>
+                    <xsl:attribute name="href"/>
+                    <xsl:apply-templates select="attribute::node()[name() != 'href']"/>
+                    <xsl:apply-templates select="child::node()"/>
+                </xsl:copy>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
-                    <xsl:if test="$response-template='default' and (@class='proxy') and ancestor::h:div[@id='searchResults']">
+                    <xsl:if
+                        test="$response-template='default' and (@class='proxy') and ancestor::h:div[@id='searchResults']">
                         <xsl:attribute name="onclick">
                             <xsl:text>openSearchResult('</xsl:text>
                             <xsl:choose>
-                                <xsl:when test="$proxy-links = 'true' and ($affiliation = 'LPCH' or $affiliation = 'SHC')">
+                                <xsl:when
+                                    test="$proxy-links = 'true' and ($affiliation = 'LPCH' or $affiliation = 'SHC')">
                                     <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
                                     <xsl:value-of select="."/>
                                 </xsl:when>
-                                <xsl:when test="$proxy-links = 'true' and $ticket != '' and $sunetid != ''">
+                                <xsl:when
+                                    test="$proxy-links = 'true' and $ticket != '' and $sunetid != ''">
                                     <xsl:text>http://laneproxy.stanford.edu/login?user=</xsl:text>
                                     <xsl:value-of select="$sunetid"/>
                                     <xsl:text>&amp;ticket=</xsl:text>
@@ -244,7 +227,8 @@
                                     <xsl:value-of select="@href"/>
                                 </xsl:when>
                                 <xsl:when test="$proxy-links = 'true'">
-                                    <xsl:value-of select="concat('/',$context,'/secure/login.html?url=',@href)"/>
+                                    <xsl:value-of
+                                        select="concat('/',$context,'/secure/login.html?url=',@href)"/>
                                     <!--<xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
                                     <xsl:value-of select="@href"/>-->
                                 </xsl:when>
@@ -256,16 +240,17 @@
                         </xsl:attribute>
                     </xsl:if>
                     <xsl:apply-templates select="node()"/>
-                    </xsl:copy>
+                </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <!-- =====================  SPECIAL CASE TEMPLATES ===================== -->
     <!-- href and src attributes template -->
     <xsl:template match="@href">
         <xsl:choose>
-            <xsl:when test="parent::h:a[@class='proxy'] and $proxy-links = 'true' and starts-with(.,'http')">
+            <xsl:when
+                test="parent::h:a[@class='proxy'] and $proxy-links = 'true' and starts-with(.,'http')">
                 <xsl:variable name="title">
                     <xsl:choose>
                         <xsl:when test="parent::h:a/@title">
@@ -299,30 +284,37 @@
                                 <xsl:value-of select="concat('/secure/login.html?url=',.)"/>
                             </xsl:otherwise>
                         </xsl:choose>
-                     </xsl:with-param>
+                    </xsl:with-param>
                     <xsl:with-param name="attr" select="'href'"/>
                 </xsl:call-template>
             </xsl:when>
-            <xsl:when test="starts-with(.,'http://lane.stanford.edu') and not(contains(.,'cookiesFetch'))">
+            <xsl:when
+                test="starts-with(.,'http://lane.stanford.edu') and not(contains(.,'cookiesFetch'))">
                 <xsl:call-template name="make-link">
-                    <xsl:with-param name="link" select="substring-after(.,'http://lane.stanford.edu')"/>
+                    <xsl:with-param name="link"
+                        select="substring-after(.,'http://lane.stanford.edu')"/>
                     <xsl:with-param name="attr" select="name()"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="contains(., '://') and contains(.,'{keywords}')">
                 <xsl:attribute name="{name()}">
-                    <xsl:value-of select="substring-before(.,'{keywords}')"/><xsl:value-of select="$keywords"/><xsl:value-of select="substring-after(.,'{keywords}')"/>
+                    <xsl:value-of select="substring-before(.,'{keywords}')"/>
+                    <xsl:value-of select="$keywords"/>
+                    <xsl:value-of select="substring-after(.,'{keywords}')"/>
                 </xsl:attribute>
-            </xsl:when> 
+            </xsl:when>
             <xsl:when test="starts-with(.,'http://') and starts-with($request-uri,'secure')">
-                <xsl:attribute name="{name()}"><xsl:value-of select="."/></xsl:attribute>
+                <xsl:attribute name="{name()}">
+                    <xsl:value-of select="."/>
+                </xsl:attribute>
             </xsl:when>
             <xsl:when test="contains(., '://') and not(ancestor::h:head) and starts-with(.,'http')">
                 <xsl:attribute name="{name()}">
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
-            <xsl:when test="starts-with(., 'mailto:') or starts-with(.,'telnet:') or starts-with(.,'rtsp://')">
+            <xsl:when
+                test="starts-with(.,'telnet:') or starts-with(.,'rtsp://')">
                 <xsl:attribute name="{name()}">
                     <xsl:value-of select="."/>
                 </xsl:attribute>
@@ -335,7 +327,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="@action | @src">
         <xsl:attribute name="{name()}">
             <xsl:choose>
@@ -348,7 +340,7 @@
             </xsl:choose>
         </xsl:attribute>
     </xsl:template>
-    
+
     <!-- get all the head elements from template and all non title head elements from source (with some exceptions)-->
     <xsl:template match="h:head">
         <xsl:copy>
@@ -357,10 +349,10 @@
             <xsl:call-template name="meta-data"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- remove http-equiv meta elements-->
     <xsl:template match="h:meta[@http-equiv]"/>
-    
+
     <!-- combines the template title value with the value of the title of the source document -->
     <xsl:template match="h:title">
         <xsl:copy>
@@ -374,10 +366,10 @@
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- remove class="lw_...." and id="lw_...." -->
     <xsl:template match="@class[starts-with(.,'lw_')]|@id[starts-with(.,'lw_')]"/>
-    
+
     <!-- remove class="proxy" -->
     <xsl:template match="@class[.='proxy']"/>
 
@@ -385,10 +377,12 @@
     <xsl:template match="h:input[@id='lw_search-keywords']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="value"><xsl:value-of select="$keywords"/></xsl:attribute>
+            <xsl:attribute name="value">
+                <xsl:value-of select="$keywords"/>
+            </xsl:attribute>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- set the selected option of the search form -->
     <xsl:template match="h:option[parent::h:select[@id='searchSelect' or @id='source']]">
         <xsl:copy>
@@ -398,11 +392,12 @@
             </xsl:if>
             <xsl:apply-templates/>
         </xsl:copy>
-   </xsl:template>
-    
+    </xsl:template>
+
     <!-- set the search tagline text -->
     <xsl:template match="h:div[@id='displayTagline' or @id='displaySearchTaglineText']">
-        <xsl:variable name="taglineText" select="$template-document//h:span[starts-with(@id,$search-form-select)]"/>
+        <xsl:variable name="taglineText"
+            select="$template-document//h:span[starts-with(@id,$search-form-select)]"/>
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:choose>
@@ -415,13 +410,13 @@
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
-   
-   <!-- TODO keep for now for backwards compatibility will be replaced by pi -->
-   <xsl:template match="h:span[@class='lw_keywords']">
-       <xsl:value-of select="$keywords"/>
-   </xsl:template>
-   
-   <!-- put the appropriate text into the content attribute of meta elements -->
+
+    <!-- TODO keep for now for backwards compatibility will be replaced by pi -->
+    <xsl:template match="h:span[@class='lw_keywords']">
+        <xsl:value-of select="$keywords"/>
+    </xsl:template>
+
+    <!-- put the appropriate text into the content attribute of meta elements -->
     <xsl:template match="h:meta[starts-with(@name,'lw_')]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='content')]"/>
@@ -440,13 +435,13 @@
             </xsl:attribute>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
     <!-- puts in the current document's content (not any more) (well ok, need backwards compatibility for now )-->
     <xsl:template match="h:div[@id='lw_content']">
         <xsl:call-template name="content"/>
     </xsl:template>
-    
+
     <xsl:template match="h:a[@class='lw_toggleProxyOn']">
         <xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'false'">
             <xsl:copy>
@@ -464,9 +459,11 @@
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:text>?</xsl:text>
-                            <xsl:value-of select="substring-before($query-string,'proxy-links=false')"/>
+                            <xsl:value-of
+                                select="substring-before($query-string,'proxy-links=false')"/>
                             <xsl:text>proxy-links=true</xsl:text>
-                            <xsl:value-of select="substring-after($query-string,'proxy-links=false')"/>
+                            <xsl:value-of
+                                select="substring-after($query-string,'proxy-links=false')"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
@@ -474,7 +471,7 @@
             </xsl:copy>
         </xsl:if>
     </xsl:template>
-    
+
     <xsl:template match="h:a[@class='lw_toggleProxyOff']">
         <xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'true'">
             <xsl:copy>
@@ -492,9 +489,11 @@
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:text>?</xsl:text>
-                            <xsl:value-of select="substring-before($query-string,'proxy-links=true')"/>
+                            <xsl:value-of
+                                select="substring-before($query-string,'proxy-links=true')"/>
                             <xsl:text>proxy-links=false</xsl:text>
-                            <xsl:value-of select="substring-after($query-string,'proxy-links=true')"/>
+                            <xsl:value-of select="substring-after($query-string,'proxy-links=true')"
+                            />
                         </xsl:otherwise>
                     </xsl:choose>
                 </xsl:attribute>
@@ -502,20 +501,20 @@
             </xsl:copy>
         </xsl:if>
     </xsl:template>
-    
+
     <!-- generates the breadcrumb (not any more) -->
     <xsl:template match="h:span[@id='lw_breadcrumb']">
         <xsl:call-template name="breadcrumb"/>
     </xsl:template>
 
-   <!-- insert the mesh term from the m parameter --> 
+    <!-- insert the mesh term from the m parameter -->
     <xsl:template match="h:span[@class='lw_mesh']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:value-of select="$m"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- chose which text to display for a history search result -->
     <xsl:template match="h:div[@id='lw_history-headings']">
         <xsl:apply-templates select="h:div[h:span=$t]/h:h1"/>
@@ -553,10 +552,14 @@
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="contains($link,'{keywords}')">
-                    <xsl:value-of select="substring-before($link,'{keywords}')"/><xsl:value-of select="$keywords"/><xsl:value-of select="substring-after($link,'{keywords}')"/>
+                    <xsl:value-of select="substring-before($link,'{keywords}')"/>
+                    <xsl:value-of select="$keywords"/>
+                    <xsl:value-of select="substring-after($link,'{keywords}')"/>
                 </xsl:when>
                 <xsl:when test="contains($link,'%7Bkeywords%7D')">
-                    <xsl:value-of select="substring-before($link,'%7Bkeywords%7D')"/><xsl:value-of select="$keywords"/><xsl:value-of select="substring-after($link,'%7Bkeywords%7D')"/>
+                    <xsl:value-of select="substring-before($link,'%7Bkeywords%7D')"/>
+                    <xsl:value-of select="$keywords"/>
+                    <xsl:value-of select="substring-after($link,'%7Bkeywords%7D')"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$link"/>
@@ -567,7 +570,7 @@
             </xsl:if>
         </xsl:attribute>
     </xsl:template>
-    
+
     <!-- the content -->
     <xsl:template name="content">
         <xsl:apply-templates select="$source-doc/h:body/node()"/>
@@ -578,7 +581,8 @@
                     <li>context=<xsl:value-of select="$context"/></li>
                     <li>request-uri=<xsl:value-of select="$request-uri"/></li>
                     <li>query-string=<xsl:value-of select="$query-string"/></li>
-                    <li>href=<xsl:value-of select="concat($context,'/',$request-uri,'?',$query-string)"/></li>
+                    <li>href=<xsl:value-of
+                            select="concat($context,'/',$request-uri,'?',$query-string)"/></li>
                     <li>ticket=<xsl:value-of select="$ticket"/></li>
                     <li>sunetid=<xsl:value-of select="$sunetid"/></li>
                     <li>proxy-links=<xsl:value-of select="$proxy-links"/></li>
@@ -590,7 +594,7 @@
             </div>
         </xsl:if>
     </xsl:template>
-    
+
     <xsl:template name="meta-data">
         <xsl:if test="$keywords">
             <meta name="LW.keywords" content="{$keywords}"/>
@@ -598,11 +602,22 @@
         <xsl:if test="$source">
             <meta name="LW.source" content="{$source}"/>
         </xsl:if>
-         <xsl:if test="$host">
+        <xsl:if test="$host">
             <meta name="LW.host" content="{$host}"/>
         </xsl:if>
     </xsl:template>
-    
+
+    <xsl:template name="tokenize-email">
+        <xsl:param name="string"/>
+        <xsl:value-of
+            select="concat('|',substring($string,1,1))"/>
+            <xsl:if test="string-length($string) &gt; 1">
+                <xsl:call-template name="tokenize-email">
+                    <xsl:with-param name="string" select="substring($string,2)"/>
+                </xsl:call-template>
+            </xsl:if>
+    </xsl:template>
+
     <!-- the breadcrumb -->
     <xsl:template name="breadcrumb">
         <xsl:call-template name="breadcrumb-section">
@@ -611,7 +626,9 @@
                 <xsl:choose>
                     <!-- this is how the breadcrumb is coerced into what it should be based on faq category -->
                     <xsl:when test="$source-doc/h:head/h:meta[@name='lw_faqCategory']">
-                        <xsl:value-of select="substring-after($sitemap//h:a[.=$source-doc/h:head/h:meta[@name='lw_faqCategory']/@content]/@href,'/')"/>
+                        <xsl:value-of
+                            select="substring-after($sitemap//h:a[.=$source-doc/h:head/h:meta[@name='lw_faqCategory']/@content]/@href,'/')"
+                        />
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="$request-uri"/>
@@ -630,7 +647,7 @@
             <xsl:value-of select="$sitemap//h:a[@href=concat($uri-before,'index.html')]"/>
         </xsl:variable>
         <xsl:variable name="uri-next" select="substring-after($uri-remaining, '/')"/>
- <!--       <div>uri-before <xsl:value-of select="$uri-before"/></div>
+        <!--       <div>uri-before <xsl:value-of select="$uri-before"/></div>
         <div>uri-remaining <xsl:value-of select="$uri-remaining"/></div>
         <div>uri-current <xsl:value-of select="$uri-current"/></div>
         <div>label-current <xsl:value-of select="$label-current"/></div>
@@ -639,17 +656,18 @@
             <xsl:when test="contains($uri-remaining, '/')">
                 <!-- here is a hack to prevent the non-existent top level portals/index.html from appearing in breadcrumb in history portal -->
                 <xsl:if test="$uri-before != '/portals/'">
-                <a>
-                    <xsl:call-template name="make-link">
-                        <xsl:with-param name="link" select="concat($uri-before, 'index.html')"/>
-                        <xsl:with-param name="attr" select="'href'"/>
-                    </xsl:call-template>
-                    <xsl:value-of select="$label-current"/>
-                </a>
-                <xsl:text>&#160;&gt;&#160;</xsl:text>
-                    </xsl:if>
+                    <a>
+                        <xsl:call-template name="make-link">
+                            <xsl:with-param name="link" select="concat($uri-before, 'index.html')"/>
+                            <xsl:with-param name="attr" select="'href'"/>
+                        </xsl:call-template>
+                        <xsl:value-of select="$label-current"/>
+                    </a>
+                    <xsl:text>&#160;&gt;&#160;</xsl:text>
+                </xsl:if>
                 <xsl:call-template name="breadcrumb-section">
-                    <xsl:with-param name="uri-before" select="concat($uri-before, $uri-current, '/')"/>
+                    <xsl:with-param name="uri-before"
+                        select="concat($uri-before, $uri-current, '/')"/>
                     <xsl:with-param name="uri-remaining" select="$uri-next"/>
                 </xsl:call-template>
             </xsl:when>
@@ -662,14 +680,14 @@
             <xsl:otherwise>
                 <!-- here is a hack to prevent the top level online and portals index.html from appearing in breadcrumb -->
                 <xsl:if test="$uri-before != '/online/' and $uri-before != '/portals/'">
-                <a>
-                    <xsl:call-template name="make-link">
-                        <xsl:with-param name="link" select="concat($uri-before, 'index.html')"/>
-                        <xsl:with-param name="attr" select="'href'"/>
-                    </xsl:call-template>
-                    <xsl:value-of select="$label-current"/>
-                </a>
-                <xsl:text>&#160;&gt;&#160;</xsl:text>
+                    <a>
+                        <xsl:call-template name="make-link">
+                            <xsl:with-param name="link" select="concat($uri-before, 'index.html')"/>
+                            <xsl:with-param name="attr" select="'href'"/>
+                        </xsl:call-template>
+                        <xsl:value-of select="$label-current"/>
+                    </a>
+                    <xsl:text>&#160;&gt;&#160;</xsl:text>
                 </xsl:if>
                 <xsl:variable name="title">
                     <xsl:value-of select="$sitemap//h:a[@href=concat($uri-before,$uri-remaining)]"/>
@@ -685,5 +703,5 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
 </xsl:stylesheet>

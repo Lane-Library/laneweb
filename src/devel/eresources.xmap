@@ -11,10 +11,10 @@
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="xsl/ersql2html.xsl">
-                        <map:transform type="xsltc" src="xsl/ersql2html.xsl"/>
+                        <map:transform type="saxon" src="xsl/ersql2html.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/ersql2html.xsl"/>
+                        <map:transform type="saxon" src="context://xsl/ersql2html.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -26,10 +26,10 @@
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="xsl/ersql2html.xsl">
-                        <map:transform type="xsltc" src="xsl/historyErsql2html.xsl"/>
+                        <map:transform type="saxon" src="xsl/historyErsql2html.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/historyErsql2html.xsl"/>
+                        <map:transform type="saxon" src="context://xsl/historyErsql2html.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -62,10 +62,10 @@
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="xsl/ezproxy-servers.xsl">
-                        <map:transform type="xsltc" src="xsl/ezproxy-servers.xsl"/>
+                        <map:transform type="saxon" src="xsl/ezproxy-servers.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/ezproxy-servers.xsl"/>
+                        <map:transform type="saxon" src="context://xsl/ezproxy-servers.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="text"/>
@@ -84,10 +84,10 @@
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="xsl/linkscan.xsl">
-                        <map:transform type="xsltc" src="xsl/linkscan.xsl"/>
+                        <map:transform type="saxon" src="xsl/linkscan.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="xsltc" src="context://xsl/linkscan.xsl"/>
+                        <map:transform type="saxon" src="context://xsl/linkscan.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xhtml"/>

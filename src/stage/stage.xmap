@@ -36,7 +36,7 @@
             </map:match>
             <map:match type="wildcard" pattern="cookiesFetch.html">
                 <map:generate type="file" src="{defaults:stage-base}/content/cookiesFetch.html"/>
-                <map:transform type="xsltc" src="context://xsl/cookiesFetch.xsl">
+                <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
@@ -59,7 +59,7 @@
             <!-- ========================== permenent redirects ============================ -->
             <map:match type="wildcard" pattern="plain/**.html">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
-                <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                 	<map:parameter name="host" value="{request:serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}"/>
@@ -70,7 +70,7 @@
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
                 </map:transform>
-                <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
+                <map:transform type="saxon" src="context://xsl/webtrends.xsl">
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                 </map:transform>
@@ -83,7 +83,7 @@
                     <map:part src="cocoon:/content/sitemap.html"/>
                     <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                 </map:aggregate>
-                <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                 	<map:parameter name="host" value="{request:serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}/stage"/>
@@ -96,12 +96,12 @@
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="context://xsl/template-{chain:template}.xsl">
-                        <map:transform type="xsltc" src="context://xsl/template-{chain:template}.xsl">
+                        <map:transform type="saxon" src="context://xsl/template-{chain:template}.xsl">
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>
                     </map:when> 
                 </map:select>
-                <map:transform type="xsltc" src="context://xsl/webtrends.xsl">
+                <map:transform type="saxon" src="context://xsl/webtrends.xsl">
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                 </map:transform>

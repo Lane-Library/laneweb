@@ -3,7 +3,7 @@
                 xmlns:h="http://www.w3.org/1999/xhtml"
                 xmlns:lw="http://lane.stanford.edu/laneweb/ns"
                 xmlns:qm="http://lane.stanford.edu/querymap/ns"
-                version="1.0">
+                version="2.0">
 
     <xsl:variable name="resource-ids" select="/lw:laneweb/qm:query-map/qm:resource-map/qm:resource/@idref"/>
     <xsl:variable name="resource-count" select="count($resource-ids)"/>

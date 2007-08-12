@@ -23,7 +23,7 @@
                         <map:part src="cocoon:/querymap/map"/>
                         <map:part src="cocoon://content/templates/search/querymap.xml"/>
                     </map:aggregate>
-                    <map:transform type="xsltc" src="xsl/querymap2html.xsl"/>
+                    <map:transform type="saxon" src="xsl/querymap2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>

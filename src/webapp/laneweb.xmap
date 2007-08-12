@@ -32,13 +32,13 @@
                 logger="sitemap.generation.spellcheck" pool-max="32"/>
             <map:generator name="exception" src="org.apache.cocoon.generation.ExceptionGenerator"/>
         </map:generators>
-        <map:transformers default="xsltc">
-            <map:transformer name="xsltc" logger="sitemap.transformer.xsltc"
+        <map:transformers default="saxon">
+            <map:transformer name="saxon" logger="sitemap.transformer.saxon"
                 src="org.apache.cocoon.transformation.TraxTransformer" pool-max="32">
                 <use-request-parameters>true</use-request-parameters>
                 <use-session-parameters>true</use-session-parameters>
                 <use-cookie-parameters>true</use-cookie-parameters>
-                <xslt-processor-role>xsltc</xslt-processor-role>
+                <xslt-processor-role>saxon</xslt-processor-role>
                 <check-includes>false</check-includes>
             </map:transformer>
             <map:transformer name="xinclude" src="edu.stanford.irt.laneweb.LanewebXIncludeTransformer" pool-max="32"
@@ -54,11 +54,13 @@
                 <encoding>UTF-8</encoding>
                 <indent>yes</indent>
                 <cdata-section-elements>script css</cdata-section-elements>
+                <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
             </map:serializer>
             <map:serializer name="xml" mime-type="text/xml" logger="sitemap.serializer.xml"
                 src="org.apache.cocoon.serialization.XMLSerializer" pool-max="32">
                 <indent>yes</indent>
                 <encoding>UTF-8</encoding>
+                <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
             </map:serializer>
             <map:serializer name="noprolog" mime-type="text/html" logger="sitemap.serializer.xhtml"
                 src="org.apache.cocoon.serialization.XMLSerializer" pool-max="32">
@@ -68,6 +70,7 @@
                 <indent>no</indent>
                 <cdata-section-elements>script css</cdata-section-elements>
                 <omit-xml-declaration>yes</omit-xml-declaration>
+                <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
             </map:serializer>
             <map:serializer name="text" mime-type="text/plain" logger="sitemap.serializer.text"
                 src="org.apache.cocoon.serialization.TextSerializer" pool-max="32"/>
@@ -197,7 +200,7 @@
             </map:match>
             <map:match type="wildcard" pattern="cookiesFetch.html">
                 <map:generate type="file" src="{defaults:live-base}/content/cookiesFetch.html"/>
-                <map:transform type="xsltc" src="context://xsl/cookiesFetch.xsl">
+                <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
@@ -206,7 +209,7 @@
             </map:match>
             <map:match type="wildcard" pattern="postMethodHelper.html">
               <map:generate type="request"/>
-                <map:transform type="xsltc" src="context://xsl/postMethodHelper.xsl">
+                <map:transform type="saxon" src="context://xsl/postMethodHelper.xsl">
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
@@ -215,7 +218,7 @@
          	</map:match>
             <map:match type="wildcard" pattern="ipFetch.html">
                 <map:generate type="request"/>
-                <map:transform type="xsltc" src="context://xsl/ipFetch.xsl">
+                <map:transform type="saxon" src="context://xsl/ipFetch.xsl">
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
@@ -239,7 +242,7 @@
             <!-- ========================== permenent redirects ============================ -->
             <map:match type="wildcard" pattern="plain/**.html">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
-                <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="{request:serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}"/>
@@ -259,7 +262,7 @@
                     <map:part src="cocoon:/content/sitemap.html"/>
                     <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                 </map:aggregate>
-                <map:transform type="xsltc" src="context://xsl/laneweb.xsl">
+                <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="{request:serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}"/>
@@ -272,7 +275,7 @@
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="context://xsl/template-{chain:template}.xsl">
-                        <map:transform type="xsltc" src="context://xsl/template-{chain:template}.xsl">
+                        <map:transform type="saxon" src="context://xsl/template-{chain:template}.xsl">
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>
                     </map:when>

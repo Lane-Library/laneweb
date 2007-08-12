@@ -3,7 +3,7 @@
                 xmlns:h="http://www.w3.org/1999/xhtml"
                	xmlns:res="http://irt.stanford.edu/search/2.0"
                 exclude-result-prefixes="h res"
-                version="1.0">
+                version="2.0">
     
     <xsl:param name="source"/>
     <xsl:param name="keywords"/>
@@ -11,14 +11,14 @@
     
     
     
-    <xsl:template match="child::node()">
+    <xsl:template match="*">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()|child::node()"/>
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="/doc">
-        <xsl:apply-templates select="child::h:html[not(attribute::id)]"/>
+    <xsl:template match="doc">
+        <xsl:apply-templates select="h:html[not(attribute::id)]"/>
     </xsl:template>
     
     <xsl:template match="processing-instruction()">
@@ -53,7 +53,7 @@
         <xsl:copy-of select="self::node()"/>
     </xsl:template>
     
-    <xsl:template match="child::h:li[attribute::class='eLibraryTab']">
+    <xsl:template match="h:li[attribute::class='eLibraryTab']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(self::class)]"/>
             <xsl:choose>

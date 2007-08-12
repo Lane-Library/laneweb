@@ -73,14 +73,14 @@ public class EresourceSAXTranslator {
 	private void handleAnchor(ContentHandler handler, Eresource eresource, Version version, Link link) throws SAXException {
 		AttributesImpl attributes = new AttributesImpl();
 		String proxyValue = version.isProxy() ? "proxy" : "noproxy";
-		attributes.addAttribute("", "class", "class", "CDATA", proxyValue);
-		attributes.addAttribute("", "href", "href", "CDATA", link.getUrl());
+		attributes.addAttribute(XHTML_NS, "class", "class", "CDATA", proxyValue);
+		attributes.addAttribute(XHTML_NS, "href", "href", "CDATA", link.getUrl());
 		StringBuffer sb = new StringBuffer();
 		sb.append(eresource.getTitle()).append(':').append(version.getPublisher());
 		if (version.getLinks().size() > 1) {
 			sb.append(':').append(link.getLabel());
 		}
-		attributes.addAttribute("", "title", "title", "CDATA", sb.toString());
+		attributes.addAttribute(XHTML_NS, "title", "title", "CDATA", sb.toString());
 		handler.startElement(XHTML_NS, A, A, attributes);
 		char[] linkText = getLinkText(eresource, version, link);
 		handler.characters(linkText, 0, linkText.length);

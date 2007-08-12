@@ -84,21 +84,13 @@
   <xml-deserializer class="org.apache.cocoon.components.sax.XMLByteStreamInterpreter" logger="core.xml-deserializer" pool-max="32"/>
 
   <component logger="core.xslt-processor"
-             role="org.apache.excalibur.xml.xslt.XSLTProcessor/xsltc"
+             role="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
              class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl">
      <parameter name="use-store" value="true"/>
      <parameter name="incremental-processing" value="false"/>
-     <!--<parameter name="transformer-factory" value="net.sf.saxon.TransformerFactoryImpl"/>-->
-     <parameter name="transformer-factory" value="org.apache.xalan.xsltc.trax.TransformerFactoryImpl"/>
+     <parameter name="transformer-factory" value="net.sf.saxon.TransformerFactoryImpl"/>
   </component>
   
-<!--    <component class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl" logger="core.xslt-processor"
-    role="org.apache.excalibur.xml.xslt.XSLTProcessor/xalan">
-     <parameter name="use-store" value="true"/>
-     <parameter name="incremental-processing" value="false"/>
-     <parameter name="transformer-factory" value="org.apache.xalan.processor.TransformerFactoryImpl"/>
-    </component>
-  -->
   <classloader class="org.apache.cocoon.components.classloader.ClassLoaderManagerImpl" logger="core.classloader"/>
 
   <cache logger="core.cache"/>

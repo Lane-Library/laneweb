@@ -4,7 +4,7 @@
                 xmlns:st="http://lane.stanford.edu/search-templates/ns"
                 xmlns="http://lane.stanford.edu/search-templates/ns"
                 exclude-result-prefixes="h st"
-                version="1.0">
+                version="2.0">
     
     <xsl:template match="st:search-templates">
         <xsl:copy>
