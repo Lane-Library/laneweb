@@ -201,6 +201,7 @@ public class EresourcesSearchGenerator extends ServiceableGenerator {
 	    	}
 	    	EresourceSAXTranslator translator = new EresourceSAXTranslator();
 	    	this.xmlConsumer.startDocument();
+	    	this.xmlConsumer.startPrefixMapping("", "http://www.w3.org/1999/xhtml");
 	    	this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "html", "html", EMPTY_ATTS);
 	    	this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "head", "head", EMPTY_ATTS);
 	    	this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "title", "title", EMPTY_ATTS);
@@ -215,6 +216,7 @@ public class EresourcesSearchGenerator extends ServiceableGenerator {
 	    	this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "dl", "dl");
 	    	this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "body", "body");
 	    	this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "html", "html");
+	    	this.xmlConsumer.endPrefixMapping("");
 	    	this.xmlConsumer.endDocument();
 		} catch (SQLException e) {
 			throw new ProcessingException(e);
