@@ -178,14 +178,14 @@ public class EresourcesSearchGenerator extends ServiceableGenerator {
 	    		}
 	    		int rowVersionId = rs.getInt("VERSION_ID");
 	    		if (rowVersionId != currentVersionId) {
-	    			version = new Version(eresource);
+	    			version = new Version();
 	    			eresource.addVersion(version);
 	    			version.setPublisher(rs.getString("PUBLISHER"));
 	    			version.setSummaryHoldings(rs.getString("HOLDINGS"));
 	    			version.setDates(rs.getString("DATES"));
 	    			version.setDescription(rs.getString("DESCRIPTION"));
-	    			if ("T".equals(rs.getString("PROXY"))) {
-	    				version.addSubset("proxy");
+	    			if ("F".equals(rs.getString("PROXY"))) {
+	    				version.setProxy(false);
 	    			}
 	    			currentVersionId = rowVersionId;
 	    		}

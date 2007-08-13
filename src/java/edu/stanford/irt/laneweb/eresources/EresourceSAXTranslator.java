@@ -41,9 +41,18 @@ public class EresourceSAXTranslator {
 		handler.startElement(XHTML_NS,UL,UL,EMPTY_ATTS);
 		StringBuffer sb = new StringBuffer();
 		for (Version version : eresource.getVersions()) {
+			Link getPasswordLink = null;
+			for (Link link :version.getLinks()) {
+				String label = link.getLabel();
+				if (null != label && "get password".equalsIgnoreCase(label)) {
+					getPasswordLink = link;
+					break;
+				}
+			}
 			for (Link link : version.getLinks()) {
+				if (!link.equals(getPasswordLink)) {
 				handler.startElement(XHTML_NS, LI, LI, EMPTY_ATTS);
-				handleAnchor(handler, eresource, version, link);
+				handleAnchor(handler, eresource, version, link, getPasswordLink != null);
 				sb.setLength(0);
 				String instruction = link.getInstruction();
 				if (null != instruction && instruction.length() > 0) {
@@ -53,10 +62,22 @@ public class EresourceSAXTranslator {
 				if (null != publisher && publisher.length() > 0) {
 					sb.append(' ').append(publisher);
 				}
+				if (null != getPasswordLink) {
+					sb.append(' ');
+				}
 				if (sb.length() > 0) {
 					handler.characters(sb.toString().toCharArray(), 0, sb.length());
 				}
+				if (null != getPasswordLink) {
+					AttributesImpl attributes = new AttributesImpl();
+					attributes.addAttribute(XHTML_NS, "href", "href", "CDATA", getPasswordLink.getUrl());
+					handler.startElement(XHTML_NS, A, A, attributes);
+					char[] getPassword = "get password".toCharArray();
+					handler.characters(getPassword, 0, getPassword.length);
+					handler.endElement(XHTML_NS, A, A);
+				}
 				handler.endElement(XHTML_NS, LI, LI);
+				}
 			}
 		}
 		handler.endElement(XHTML_NS, UL, UL);
@@ -70,26 +91,29 @@ public class EresourceSAXTranslator {
 	 * @param link
 	 * @throws SAXException 
 	 */
-	private void handleAnchor(ContentHandler handler, Eresource eresource, Version version, Link link) throws SAXException {
+	private void handleAnchor(ContentHandler handler, Eresource eresource, Version version, Link link, boolean hasGetPassword) throws SAXException {
 		AttributesImpl attributes = new AttributesImpl();
 		String proxyValue = version.isProxy() ? "proxy" : "noproxy";
 		attributes.addAttribute(XHTML_NS, "class", "class", "CDATA", proxyValue);
 		attributes.addAttribute(XHTML_NS, "href", "href", "CDATA", link.getUrl());
 		StringBuffer sb = new StringBuffer();
-		sb.append(eresource.getTitle()).append(':').append(version.getPublisher());
-		if (version.getLinks().size() > 1) {
+		sb.append(eresource.getTitle());
+		if (null != version.getPublisher()) {
+			sb.append(':').append(version.getPublisher());
+		}
+		if ((hasGetPassword && version.getLinks().size() > 2) || (!hasGetPassword && version.getLinks().size() > 1)) {
 			sb.append(':').append(link.getLabel());
 		}
 		attributes.addAttribute(XHTML_NS, "title", "title", "CDATA", sb.toString());
 		handler.startElement(XHTML_NS, A, A, attributes);
-		char[] linkText = getLinkText(eresource, version, link);
+		char[] linkText = getLinkText(eresource, version, link, hasGetPassword);
 		handler.characters(linkText, 0, linkText.length);
 		handler.endElement(XHTML_NS, A, A);
 	}
 
-	private char[] getLinkText(Eresource eresource, Version version, Link link) {
+	private char[] getLinkText(Eresource eresource, Version version, Link link, boolean hasGetPassword) {
 		StringBuffer sb = new StringBuffer();
-		if (version.getLinks().size() == 1) {
+		if ((hasGetPassword && version.getLinks().size() == 2) || version.getLinks().size() == 1) {
 			String holdings = version.getSummaryHoldings();
 			if (null != holdings && holdings.length() > 0) {
 				sb.append(holdings);
