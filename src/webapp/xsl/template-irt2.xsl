@@ -26,13 +26,13 @@
 		</xsl:if>
 	</xsl:template>
 	
-	<xsl:template match="h:div[@id='breadcrumb']">
+<!--	<xsl:template match="h:div[@id='breadcrumb']">
 		<xsl:if test="$request-uri != 'index.html'">
 			<xsl:copy>
 				<xsl:apply-templates select="attribute::node() | child::node()"/>
 			</xsl:copy>
 		</xsl:if>
-	</xsl:template>
+	</xsl:template>-->
 	
 	<!-- remove searchFormSelect() script -->
 	<xsl:template match="h:script[contains(.,'searchFormSelect')]"/>
