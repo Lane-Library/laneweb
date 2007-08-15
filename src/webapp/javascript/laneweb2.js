@@ -190,11 +190,15 @@ function getWebtrendsTitle(node)
 function initializeSearchForm(e) {
 try {
     var searchForm = document.getElementById('searchForm');
+    /*
     var taglines = document.getElementById('taglines');
     var allTagline = document.getElementById('allTagline');
+    */
     var searchSelect = document.getElementById('searchSelect');
     YAHOO.util.Event.addListener(searchSelect, 'change', handleChange);
+    /*
     var displayTagline = document.getElementById('displayTagline');
+    */
     var searchSubmit = document.getElementById('searchSubmit');
     searchSelect.homeOption = searchSelect.options[searchSelect.selectedIndex];
     searchSelect.change = function(e) {
@@ -203,8 +207,11 @@ try {
         } else {
             this.homeOption = this.options[this.selectedIndex];
         }
+        /*
         this.homeOption.activate(e);
+        */
     }
+    /*
     for (i = 0; i < searchSelect.options.length; i++) {
         var option = searchSelect.options[i];
         if (!option.disabled) {
@@ -221,7 +228,10 @@ try {
             }
         }
     }
+    */
+    /*
     searchSelect.homeOption.activate();
+    */
     searchSubmit.activate = function(e) {
         this.src=this.src.replace('search_btn.gif','search_btn_f2.gif');
     }

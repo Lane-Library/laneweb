@@ -18,13 +18,13 @@
 		<xsl:copy-of select="self::node()"/>
 	</xsl:template>
 	
-	<xsl:template match="h:div[@id='collage']">
+<!--	<xsl:template match="h:div[@id='collage']">
 		<xsl:if test="$request-uri = 'index.html'">
 			<xsl:copy>
 				<xsl:apply-templates select="attribute::node() | child::node()"/>
 			</xsl:copy>
 		</xsl:if>
-	</xsl:template>
+	</xsl:template>-->
 	
 <!--	<xsl:template match="h:div[@id='breadcrumb']">
 		<xsl:if test="$request-uri != 'index.html'">

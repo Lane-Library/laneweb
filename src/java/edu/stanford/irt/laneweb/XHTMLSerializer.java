@@ -31,6 +31,7 @@ public class XHTMLSerializer extends XMLSerializer {
         return this.getTransformerFactory().newTransformerHandler(new StreamSource(new StringReader(foo)));
     }
     
+    //TODO add <![CDATA[]]>
     private static final String foo = "<stylesheet version='2.0' "+
     "xmlns='http://www.w3.org/1999/XSL/Transform' xmlns:h='http://www.w3.org/1999/xhtml'>"+
     "<template match='*'><copy><apply-templates select='@*|*|text()'/></copy></template>"+
