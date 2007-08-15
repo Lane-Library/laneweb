@@ -12,7 +12,7 @@ function initSearch() {
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.keywords, window.querymapCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././content/sfx?q='+window.keywords, window.findItCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck?q='+window.keywords, window.spellCheckCallBack);
-        YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
+        //YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
         var popIn = document.getElementById('popInContent');
         for (var i = 0; i  < tabs.length; i++) {

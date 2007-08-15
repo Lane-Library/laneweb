@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:h="http://www.w3.org/1999/xhtml"
-               	xmlns:res="http://irt.stanford.edu/search/2.0"
-                exclude-result-prefixes="h res"
+                exclude-result-prefixes="h"
                 version="2.0">
     
     <xsl:param name="source"/>
@@ -32,14 +31,14 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="h:meta[@name='LW.searchId']">
+<!--    <xsl:template match="h:meta[@name='LW.searchId']">
         <xsl:copy>
         <xsl:apply-templates select="@*"/>
         <xsl:attribute name="content">
             <xsl:value-of select="/doc/res:search/@id"></xsl:value-of>
         </xsl:attribute>
         </xsl:copy>
-    </xsl:template>
+    </xsl:template>-->
     
     
     <xsl:template match="attribute::href[contains(.,'{$keywords}')]">
