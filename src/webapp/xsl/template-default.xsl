@@ -120,7 +120,7 @@
 
 <!-- central column w/o boxes gets large font -->
 	<!--<xsl:template match="h:td[@class='mainColumn'][not(descendant::h:div[contains(@class, 'Box')])]">-->
-	<xsl:template match="h:td[@class='mainColumn' or @id='mainColumn']">
+	<xsl:template match="h:td[@class='mainColumn' or @id='mainColumn']" priority="1">
 		<td id="mainColumn">
 			<xsl:call-template name="font-application">
 				<xsl:with-param name="candidate-node" select="."/>

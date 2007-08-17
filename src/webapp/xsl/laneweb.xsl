@@ -168,6 +168,15 @@
             <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
+    
+    <xsl:template match="h:script">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:comment>
+                <xsl:apply-templates select="child::node()"/>
+            </xsl:comment>
+        </xsl:copy>
+    </xsl:template>
 
     <xsl:template match="h:a">
         <xsl:choose>
@@ -713,6 +722,7 @@
             </xsl:choose>
         </xsl:variable>
         <script type="text/javascript">
+            <xsl:comment>
             <xsl:text>
                 var hasProductInstall = DetectFlashVer(6, 0, 65);
                 var requiredVersion = '</xsl:text><xsl:value-of select="$flash-version"/><xsl:text>'.split('.');
@@ -758,6 +768,7 @@
                 document.write(alternateContent);<!--  // insert non-flash content-->
                 }
             </xsl:text>
+            </xsl:comment>
         </script>
         <noscript><p>This flash object requires javascript.</p></noscript>
     </xsl:template>

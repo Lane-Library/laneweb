@@ -116,6 +116,10 @@
                 <map:read type="resource" src="{defaults:stage-base}/content/{1}.avi"
                     mime-type="video/x-msvideo"/>
             </map:match>
+            <map:match type="wildcard" pattern="**.zip">
+                <map:read type="resource" src="{defaults:stage-base}/content/{1}.zip"
+                    mime-type="application/zip"/>
+            </map:match>
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>
