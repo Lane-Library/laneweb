@@ -71,6 +71,7 @@ try {
 }
 
 function handleClick(e) {
+/* commenting out temporarily because causing error alert
 try {
 	var target = (e.srcElement) ? e.srcElement : e.target;
     webtrendsProcess(target);
@@ -81,6 +82,7 @@ try {
         target = target.parentNode;
     }
     } catch(exception) { handleException(exception) }
+    */
 }
 
 function webtrendsProcess(node){
