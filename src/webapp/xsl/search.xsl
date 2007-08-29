@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:h="http://www.w3.org/1999/xhtml"
-                exclude-result-prefixes="h"
+                xmlns:sql="http://apache.org/cocoon/SQL/2.0"
+                xmlns:s="http://irt.stanford.edu/search/2.0"
+                exclude-result-prefixes="h sql s"
                 version="2.0">
     
     <xsl:param name="source"/>
@@ -31,14 +33,14 @@
         </xsl:choose>
     </xsl:template>
     
-<!--    <xsl:template match="h:meta[@name='LW.searchId']">
+    <xsl:template match="h:meta[@name='LW.searchId']">
         <xsl:copy>
         <xsl:apply-templates select="@*"/>
         <xsl:attribute name="content">
-            <xsl:value-of select="/doc/res:search/@id"></xsl:value-of>
+            <xsl:value-of select="/doc/s:search/@id"></xsl:value-of>
         </xsl:attribute>
         </xsl:copy>
-    </xsl:template>-->
+    </xsl:template>
     
     
     <xsl:template match="attribute::href[contains(.,'{$keywords}')]">
@@ -64,6 +66,14 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:li[attribute::class='eLibraryTab']/h:a/h:span[attribute::class='tabHitCount']">
+        <xsl:variable name="genre" select="substring-before(parent::h:a/parent::h:li/attribute::id,'Tab')"/>
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:value-of select="/doc/sql:rowset/sql:row[sql:genre=$genre]/sql:hits"/>
         </xsl:copy>
     </xsl:template>
 

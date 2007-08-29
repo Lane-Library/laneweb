@@ -34,13 +34,13 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template
+<!--    <xsl:template
         match="h:li[attribute::class='eLibraryTabActive']/h:a/h:span[attribute::class='tabHitCount']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:attribute name="style">visibility:visible</xsl:attribute>
             <xsl:value-of select="$count"/>
         </xsl:copy>
-    </xsl:template>
+    </xsl:template>-->
 
 </xsl:stylesheet>
