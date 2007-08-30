@@ -18,38 +18,22 @@
 		<xsl:copy-of select="self::node()"/>
 	</xsl:template>
 	
-<!--	<xsl:template match="h:div[@id='collage']">
-		<xsl:if test="$request-uri = 'index.html'">
-			<xsl:copy>
-				<xsl:apply-templates select="attribute::node() | child::node()"/>
-			</xsl:copy>
-		</xsl:if>
-	</xsl:template>-->
-	
-<!--	<xsl:template match="h:div[@id='breadcrumb']">
-		<xsl:if test="$request-uri != 'index.html'">
-			<xsl:copy>
-				<xsl:apply-templates select="attribute::node() | child::node()"/>
-			</xsl:copy>
-		</xsl:if>
-	</xsl:template>-->
-	
 	<!-- remove searchFormSelect() script -->
 	<xsl:template match="h:script[contains(.,'searchFormSelect')]"/>
 
-<!--	<xsl:template match="h:td/h:div">
+	<xsl:template match="h:td/h:div">
 		<xsl:copy>
 			<xsl:apply-templates select="child::node()"/>
 		</xsl:copy>
-	</xsl:template>-->
+	</xsl:template>
 	
-	<xsl:template match="h:td[@id='mainColumn']/h:div[@class='aGeneralBox' or (@class='eMainBox' and not(h:h2))]">
+	<xsl:template match="h:td[@id='mainColumn']/h:div[@class='aGeneralBox' or (@class='eMainBox' and not(h:h2))]" priority="1">
 		<xsl:copy>
 			<xsl:apply-templates select="attribute::node()|child::node()"/>
 		</xsl:copy>
 	</xsl:template>
 	
-	<xsl:template match="h:td[@id='mainColumn']/h:div[@class='eMainBox' and h:h2]">
+	<xsl:template match="h:td[@id='mainColumn']/h:div[@class='eMainBox' and h:h2]" priority="1">
 		<xsl:apply-templates select="h:h2"/>
 		<xsl:copy>
 			<xsl:apply-templates select="attribute::node() | child::node() [not(self::h:h2)]"/>
@@ -116,7 +100,7 @@
 		</xsl:copy>-->
 	</xsl:template>
 
-    <xsl:template match="h:td[@id='mainColumn']/h:div[@class='fMainBox']">
+    <xsl:template match="h:td[@id='mainColumn']/h:div[@class='fMainBox']" priority="1">
         <div class="tabs">
         <xsl:for-each select="h:h2">
             <xsl:copy>
