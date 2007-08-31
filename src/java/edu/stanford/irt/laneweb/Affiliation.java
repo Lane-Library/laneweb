@@ -47,34 +47,74 @@ public class Affiliation {
 				d[index++] = Integer.parseInt(tokenizer.nextToken());
 			}
 		if (d[0] == 10) {
+			if (d[1] == 50) {
+				return Affiliation.LPCH;
+			}
+			if (d[1] == 248) {
+				return Affiliation.SHC;
+			}
+			if (d[1] == 250 || d[1] == 251) {
+				if (d[2] < 128) {
+					return Affiliation.SHC;
+				} else {
+					return Affiliation.LPCH;
+				}
+			}
 			if (d[1] == 252) {
-				if (d[2] == 6 || d[2] == 7 || d[2] == 10 || d[2] == 11
-						|| d[2] == 14 || d[2] == 15 || d[2] == 18 || d[2] == 19
-						|| d[2] == 22 || d[2] == 23 || d[2] == 26 || d[2] == 27
-						|| d[2] == 30 || d[2] == 31 || d[2] == 34 || d[2] == 35
-						|| d[2] == 38 || d[2] == 39 || d[2] == 43 || d[2] == 46
+				if (d[2] == 1 && (d[3] == 1 || d[3] == 2)) {
+					return Affiliation.LPCH;
+				}
+				if (d[2] == 5 || d[2] == 6 || d[2] == 7 || d[2] == 10
+						|| d[2] == 11 || d[2] == 18 || d[2] == 19 || d[2] == 22
+						|| d[2] == 23 || d[2] == 26 || d[2] == 27 || d[2] == 30
+						|| d[2] == 31 || d[2] == 34 || d[2] == 35 || d[2] == 38
+						|| d[2] == 39 || d[2] == 42 || d[2] == 43 || d[2] == 46
 						|| d[2] == 47 || d[2] == 50 || d[2] == 51 || d[2] == 54
-						|| d[2] == 55 || d[2] == 67 || d[2] == 71 || d[2] == 97
-						|| d[2] == 108 || d[2] == 109 || d[2] == 122
+						|| d[2] == 55 || d[2] == 60 || d[2] == 61 || d[2] == 62
+						|| d[2] == 63) {
+					return Affiliation.LPCH;
+				}
+				if (d[2] == 64 && (d[3] == 12 || d[3] == 23 || d[3] == 46 || d[3] == 60
+						|| d[3] == 64 || d[3] == 71)) {
+					return Affiliation.LPCH;
+				}
+				if (d[2] == 65 && (d[3] == 5 || d[3] == 6 || d[3] == 9 || d[3] == 13
+						|| d[3] == 14 || d[3] == 17 || d[3] == 18 || d[3] == 41
+						|| d[3] == 42 || d[3] == 141 || d[3] == 142 || d[3] == 145
+						|| d[3] == 146)) {
+					return Affiliation.LPCH;
+				}
+				if (d[2] == 66 && (d[3] == 5 || d[3] == 6 || d[3] == 49 || d[3] == 50
+						|| d[3] == 233 || d[3] == 234 || d[3] == 249 || d[3] == 250
+						|| d[3] == 253 || d[3] == 254)) {
+					return Affiliation.LPCH;
+				}
+				if (d[2] == 67 || d[2] == 70 || d[2] == 71 || d[2] == 84 || d[2] == 85
+						|| d[2] == 107 || d[2] == 108 || d[2] == 109 || d[2] == 122 
 						|| d[2] == 123) {
 					return Affiliation.LPCH;
 				}
-				if (d[2] >= 138 && d[2] <= 146) {
+				if (d[2] >= 138 && d[2] <= 149) {
+					return Affiliation.LPCH;
+				}
+				if (d[2] == 152 || d[2] == 153 || d[2] == 200) {
 					return Affiliation.LPCH;
 				}
 				if (d[2] == 250) {
-					if (d[3] >= 96 && d[3] <= 127) {
+					if (d[3] >= 97 && d[3] <= 126) {
 						return Affiliation.LPCH;
 					}
-					return Affiliation.SHC;
 				}
 				return Affiliation.SHC;
 			}
-			if (d[1] >= 253 && d[1] <= 255) {
+			if (d[1] == 253) {
+				if (d[2] == 220 || d[2] == 254 || d[2] == 255) {
+					return Affiliation.LPCH;
+				}
 				return Affiliation.SHC;
 			}
-			if (d[1] == 50) {
-				return Affiliation.LPCH;
+			if (d[1] > 253) {
+				return Affiliation.SHC;
 			}
 			return Affiliation.OTHER;
 		}
@@ -84,38 +124,30 @@ public class Affiliation {
 			}
 			return Affiliation.OTHER;
 		}
-		if (d[0] == 134) {//10.50.0.1 - 10.50.255.255
+		if (d[0] == 134) {
 			if (d[1] == 79) {
 				return Affiliation.SU;
 			}
 			return Affiliation.OTHER;
 		}
-		if (d[0] == 152) {
-			if (d[1] >= 130 && d[1] <= 133) {
-				if (d[2] == 10 && d[3] == 128) {
+		if (d[0] == 152 && d[2] == 10 && d[3] == 128 && d[1] >= 130 && d[1] <= 133) {
 					return Affiliation.PAVA;
-				}
-			}
-			return Affiliation.OTHER;
+		}
+		if (d[0] == 159 && d[1] == 140 && d[2] == 183) {
+			return Affiliation.LPCH;
 		}
 		if (d[0] == 171) {
 			if (d[1] == 64) {
 				return Affiliation.SU;
 			}
 			if (d[1] == 65) {
-				if (d[2] >= 1 && d[2] <= 43) {
+				if (d[2] >= 0 && d[2] <= 43) {
 					return Affiliation.SOM;
 				}
-				if (d[2] >= 44 && d[2] <= 45) {
+				if (d[2] >= 44 && d[2] <= 47) {
 					return Affiliation.SHC;
 				}
-				if (d[2] >= 46 && d[2] <= 55) {
-					return Affiliation.SOM;
-				}
-				if (d[2] >= 56 && d[2] <= 59) {
-					return Affiliation.LPCH;
-				}
-				if (d[2] >= 60 && d[2] <= 81) {
+				if (d[2] >= 48 && d[2] <= 81) {
 					return Affiliation.SOM;
 				}
 				if (d[2] == 82) {
@@ -156,27 +188,44 @@ public class Affiliation {
 				if (d[2] >= 84 && d[2] <= 111) {
 					return Affiliation.SOM;
 				}
-				if (d[2] >= 112 && d[2] <= 126) {
-					return Affiliation.SHC;
-				}
-				if (d[2] == 127) {
+				if (d[2] == 112) {
 					return Affiliation.LPCH;
 				}
-				if (d[2] >= 128 && d[2] <= 255) {
+				if (d[2] == 113) {
+					return Affiliation.SOM;
+				}
+				if (d[2] == 114 || d[2] == 115) {
 					return Affiliation.SHC;
 				}
-				return Affiliation.SU;
-			}
-			if (d[1] == 66) {
-				if (d[2] >= 97 && d[2] <= 99) {
+				if (d[2] >= 116 && d[2] <= 123) {
+					return Affiliation.SOM;
+				}
+				if (d[2] == 124 || d[2] == 125) {
 					return Affiliation.SHC;
 				}
-				return Affiliation.SU;
+				if (d[2] == 126) {
+					return Affiliation.LPCH;
+				}
+				if (d[2] == 127) {
+					return Affiliation.SHC;
+				}
+				return Affiliation.SOM;
 			}
-			if (d[1] == 67) {
+			if (d[1] == 66 || d[1] == 67) {
 				return Affiliation.SU;
 			}
 			return Affiliation.OTHER;
+		}
+		if (d[0] == 204 && d[1] == 161 && d[2] == 120) {
+			return Affiliation.SHC;
+		}
+		if (d[0] == 209 && d[1] == 11) {
+			if (d[2] >= 184 && d[2] <= 187) {
+				return Affiliation.SHC;
+			}
+			if (d[2] >= 188 && d[2] <= 191) {
+				return Affiliation.LPCH;
+			}
 		}
 		return Affiliation.OTHER;
 	}
