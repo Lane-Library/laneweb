@@ -101,6 +101,7 @@ public class EresourcesSearchGenerator extends ServiceableGenerator {
         Request request = ObjectModelHelper.getRequest(objectModel);
         String query = request.getParameter(QUERY);
         if (query != null) {
+        	query = query.trim();
             if (query.length() ==0) {
                 query = null;
             }
@@ -108,12 +109,13 @@ public class EresourcesSearchGenerator extends ServiceableGenerator {
         if (query == null) {
 			query = request.getParameter(KEYWORDS);
 			if (query != null) {
+				query = query.trim();
 				if (query.length() == 0) {
 					query = null;
 				}
 			}
 		}
-        requestQuery = query;
+        this.requestQuery = query;
         String type = request.getParameter(TYPE);
         if (type != null) {
             if (type.length() == 0) {

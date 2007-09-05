@@ -63,6 +63,7 @@ public class EresourcesCountGenerator extends AbstractGenerator {
         Request request = ObjectModelHelper.getRequest(objectModel);
         String query = request.getParameter(QUERY);
         if (query != null) {
+        	query = query.trim();
             if (query.length() ==0) {
                 query = null;
             }
@@ -70,6 +71,7 @@ public class EresourcesCountGenerator extends AbstractGenerator {
         if (query == null) {
 			query = request.getParameter(KEYWORDS);
 			if (query != null) {
+				query = query.trim();
 				if (query.length() == 0) {
 					query = null;
 				}
@@ -78,11 +80,11 @@ public class EresourcesCountGenerator extends AbstractGenerator {
         if (query != null) {
         	query = query.replaceAll("'","''");
         	String translatedQuery = this.queryTranslator.translate(query);
-        	if ("(({})) ".equals(translatedQuery)) {
-        		throw new ProcessingException("empty translatedQuery");
-        	}
         	this.selectStatementChars = COUNT_QUERY.replaceAll("XX", translatedQuery).toCharArray();
         } else {
+        	if (getLogger().isWarnEnabled()) {
+        		getLogger().warn("no useable query paramter");
+        	}
             this.selectStatementChars = new char[0];
         }
     }
