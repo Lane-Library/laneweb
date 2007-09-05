@@ -83,7 +83,7 @@ public class EresourcesCountGenerator extends AbstractGenerator {
         	this.selectStatementChars = COUNT_QUERY.replaceAll("XX", translatedQuery).toCharArray();
         } else {
         	if (getLogger().isWarnEnabled()) {
-        		getLogger().warn("no useable query paramter");
+        		getLogger().warn("no useable query parameter");
         	}
             this.selectStatementChars = new char[0];
         }
