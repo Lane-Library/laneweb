@@ -78,6 +78,9 @@ public class EresourcesCountGenerator extends AbstractGenerator {
         if (query != null) {
         	query = query.replaceAll("'","''");
         	String translatedQuery = this.queryTranslator.translate(query);
+        	if ("(({})) ".equals(translatedQuery)) {
+        		throw new ProcessingException("empty translatedQuery");
+        	}
         	this.selectStatementChars = COUNT_QUERY.replaceAll("XX", translatedQuery).toCharArray();
         } else {
             this.selectStatementChars = new char[0];
