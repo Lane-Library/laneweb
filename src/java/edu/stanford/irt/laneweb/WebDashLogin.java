@@ -10,6 +10,6 @@ public interface WebDashLogin {
 	
 	public static final String ROLE = WebDashLogin.class.getName();
 	
-	public String getEncodedUrl(LDAPPerson ldapPerson) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException;
+	public String getEncodedUrl(LDAPPerson ldapPerson, String nonce) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException;
 
 }

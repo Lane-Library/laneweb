@@ -28,8 +28,8 @@ public class WebdashAction extends ServiceableAction{
 		LDAPPerson ldapPerson = userInfo.getLdapPerson(); 
 		if( userInfo == null ||  userInfo.getLdapPerson() == null)
 			throw new RuntimeException("Ladp user not found");
-
-		String url = webDashLogin.getEncodedUrl(ldapPerson);
+		String nonce = request.getParameter("nonce");
+		String url = webDashLogin.getEncodedUrl(ldapPerson, nonce);
 		redirector.globalRedirect(true, url);
 		return null;
 	}

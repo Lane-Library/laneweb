@@ -6,9 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
@@ -25,7 +23,6 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 
 	String url;
 	String groupName;
-	String dateFormat;
 	String groupKey;
 	Mac mac ;
 	
@@ -47,16 +44,20 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 	}
 
 
-	public String getEncodedUrl(LDAPPerson ldapPerson) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException {
+	public String getEncodedUrl(LDAPPerson ldapPerson, String nonce) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException {
 		String mail = URLEncoder.encode( ldapPerson.getMail() , "UTF-8"); 
 		String fullName = URLEncoder.encode( ldapPerson.getDisplayName(), "UTF-8");
+		String userId = URLEncoder.encode(ldapPerson.getUId(),"UTF-8");
 		String affiliation =  getSubGroup(ldapPerson);
 		StringBuffer parameters = new StringBuffer();
 		parameters.append("email=");
 		parameters.append(mail);
-		parameters.append("&enddate=".concat(getEndDate()));
+		parameters.append("&nonce=");
+		if(nonce != null)
+			parameters.append(nonce);	
 		parameters.append("&fullname=".concat(fullName));
-		parameters.append("&group=".concat(groupName));
+		parameters.append("&system_short_name=".concat(groupName));
+		parameters.append("&system_user_id=".concat(userId));
 		parameters.append("&subgroup=".concat(affiliation));
 		String token = getToken(parameters.toString());
 		return url.concat(parameters.toString()).concat("&token=").concat(token);
@@ -98,20 +99,13 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 	}
 	
 	
-	private String getEndDate()
-	{
-		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-		GregorianCalendar endDate = new GregorianCalendar();
-		endDate.add(Calendar.YEAR, 1);
-		return sdf.format(endDate.getTime());
-	}
 
 
 	public void parameterize(Parameters param) throws ParameterException {
 		this.url = param.getParameter("webdashURL");
 		this.groupKey = param.getParameter("groupKey");
 		this.groupName = param.getParameter("groupName");
-		this.dateFormat = param.getParameter("dateFormat");
+		
 	}
 
 	
