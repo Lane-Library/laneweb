@@ -134,7 +134,7 @@
   <webdash-login logger="core.webdash">
     <parameter name="webdashURL" value="https://sanda.webda.sh/auth/init_post?"/>
     <parameter name="groupKey" value="***laneweb.cocoon.webdash.key***"/>
-    <parameter name="groupName" value="SMS"/>
+    <parameter name="groupName" value="stanford-sunet"/>
 	<parameter name="dateFormat" value="yyyy-MM-dd"/>
   </webdash-login>
   
