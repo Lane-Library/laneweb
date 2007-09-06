@@ -8,7 +8,8 @@
                 <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="search-proxy">
-                <map:generate type="search-proxy" src="{defaults:search-url}/search"/>
+                <!--map:generate type="search-proxy" src="{defaults:search-url}/search"/-->
+                <map:generate type="file" src="{defaults:live-base}/content/search.xml"/>
                 <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
                     <map:parameter name="context" value="{request:contextPath}"/>
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
@@ -40,7 +41,7 @@
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
-                <map:match type="wildcard" pattern="search.html">
+                <map:match type="wildcard" pattern="search2.html">
                     <map:generate type="html" src="{defaults:live-base}/error.html"/>
                     <map:serialize type="xml" status-code="404"/>
                 </map:match>
