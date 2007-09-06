@@ -56,9 +56,9 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 		if(nonce != null)
 			parameters.append(nonce);	
 		parameters.append("&fullname=".concat(fullName.replace("+", "%20")));
+		parameters.append("&subgroup=".concat(affiliation));
 		parameters.append("&system_short_name=".concat(groupName));
 		parameters.append("&system_user_id=".concat(userId.replace("+", "%20")));
-		parameters.append("&subgroup=".concat(affiliation));
 		String token = getToken(parameters.toString());
 		return url.concat(parameters.toString()).concat("&token=").concat(token);
 	}	
