@@ -52,10 +52,10 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 		StringBuffer parameters = new StringBuffer();
 		parameters.append("email=");
 		parameters.append(mail);
+		parameters.append("&fullname=".concat(fullName.replace("+", "%20")));
 		parameters.append("&nonce=");
 		if(nonce != null)
 			parameters.append(nonce);	
-		parameters.append("&fullname=".concat(fullName.replace("+", "%20")));
 		parameters.append("&subgroup=".concat(affiliation));
 		parameters.append("&system_short_name=".concat(groupName));
 		parameters.append("&system_user_id=".concat(userId.replace("+", "%20")));
