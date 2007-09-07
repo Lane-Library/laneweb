@@ -24,12 +24,10 @@ public class WebdashAction extends ServiceableAction{
 		Request request = ObjectModelHelper.getRequest(objectModel);
 	
 		UserInfo userInfo = userInfoHelper.getUserInfo(request);
-		
 		LDAPPerson ldapPerson = userInfo.getLdapPerson(); 
 		if( userInfo == null ||  userInfo.getLdapPerson() == null)
 			throw new RuntimeException("Ladp user not found");
-		String nonce = request.getParameter("nonce");
-		String url = webDashLogin.getEncodedUrl(ldapPerson, nonce);
+		String url = webDashLogin.getEncodedUrl(ldapPerson, request);
 		redirector.globalRedirect(true, url);
 		return null;
 	}

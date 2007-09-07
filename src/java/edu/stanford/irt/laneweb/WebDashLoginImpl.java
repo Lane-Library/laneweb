@@ -18,10 +18,13 @@ import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.thread.ThreadSafe;
+import org.apache.cocoon.environment.Request;
+import org.apache.cocoon.environment.http.HttpRequest;
 
 public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin, ThreadSafe, Parameterizable, Initializable {
 
-	String url;
+	String loginUrl;
+	String registrationUrl;
 	String groupName;
 	String groupKey;
 	Mac mac ;
@@ -44,11 +47,12 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 	}
 
 
-	public String getEncodedUrl(LDAPPerson ldapPerson, String nonce) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException {
+	public String getEncodedUrl(LDAPPerson ldapPerson, Request request) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException {
 		String mail = URLEncoder.encode( ldapPerson.getMail() , "UTF-8"); 
 		String fullName = URLEncoder.encode( ldapPerson.getDisplayName(), "UTF-8");
 		String userId = URLEncoder.encode(ldapPerson.getUId(),"UTF-8");
 		String affiliation =  getSubGroup(ldapPerson);
+		String nonce = request.getParameter("nonce");
 		StringBuffer parameters = new StringBuffer();
 		parameters.append("email=");
 		parameters.append(mail);
@@ -60,7 +64,10 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 		parameters.append("&system_short_name=".concat(groupName));
 		parameters.append("&system_user_id=".concat(userId.replace("+", "%20")));
 		String token = getToken(parameters.toString());
-		return url.concat(parameters.toString()).concat("&token=").concat(token);
+		if( request.getParameter("system_user_id") != null) // webdash past us system_user_id in the url for a login other wise is a registration 
+			return loginUrl.concat(parameters.toString()).concat("&token=").concat(token);
+		else
+			return registrationUrl.concat(parameters.toString()).concat("&token=").concat(token);
 	}	
 	
 	private String getToken(String string) throws NoSuchAlgorithmException, InvalidKeyException, UnsupportedEncodingException
@@ -102,7 +109,8 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 
 
 	public void parameterize(Parameters param) throws ParameterException {
-		this.url = param.getParameter("webdashURL");
+		this.registrationUrl = param.getParameter("webdashRegistrationURL");
+		this.loginUrl = param.getParameter("webdashLoginURL");
 		this.groupKey = param.getParameter("groupKey");
 		this.groupName = param.getParameter("groupName");
 		
