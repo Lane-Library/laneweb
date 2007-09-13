@@ -160,7 +160,7 @@
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
+            <version>3.1-log4j</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
