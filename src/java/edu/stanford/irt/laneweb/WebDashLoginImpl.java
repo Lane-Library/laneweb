@@ -19,7 +19,6 @@ import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.environment.Request;
-import org.apache.cocoon.environment.http.HttpRequest;
 
 public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin, ThreadSafe, Parameterizable, Initializable {
 
@@ -48,7 +47,13 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 
 
 	public String getEncodedUrl(LDAPPerson ldapPerson, Request request) throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException {
-		String mail = URLEncoder.encode( ldapPerson.getMail() , "UTF-8"); 
+		
+		String error = validation(ldapPerson, request);
+		if(error != null)
+		{
+			return "/error_webdash.html?error=".concat(error);
+		}
+		String mail = URLEncoder.encode( ldapPerson.getUId().concat("@stanford.edu") , "UTF-8"); 
 		String fullName = URLEncoder.encode( ldapPerson.getDisplayName(), "UTF-8");
 		String userId = URLEncoder.encode(ldapPerson.getUId(),"UTF-8");
 		String affiliation =  getSubGroup(ldapPerson);
@@ -84,6 +89,21 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
 	
 	}
 	
+	private String validation(LDAPPerson ldapPerson, Request request)
+	{
+		if(ldapPerson == null)
+			return "ldapPerson";
+		if(request.getParameter("nonce") == null || request.getParameter("nonce").length() == 0)
+			return "nonce";
+		if(ldapPerson.getDisplayName() == null || ldapPerson.getDisplayName().length() == 0)
+			return "fullName";
+		if(ldapPerson.getAffilation() == null || ldapPerson.getAffilation().length == 0)
+			return "affilation";
+		if(ldapPerson.getUId() == null || ldapPerson.getUId().length() == 0)
+			return "userId";
+		return null;
+		
+	}
 	
 	private String getSubGroup(LDAPPerson ldapPerson) throws UnsupportedEncodingException
 	{
