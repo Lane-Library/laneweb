@@ -69,6 +69,19 @@
         </xsl:copy>
     </xsl:template>
     
+    <xsl:template match="h:li[attribute::class='eLibraryTab']/h:a">
+        <xsl:choose>
+            <xsl:when test="starts-with(parent::h:li/attribute::id,$source)">
+                <xsl:apply-templates/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="attribute::node()|child::node()"/>
+                </xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <xsl:template match="h:li[attribute::class='eLibraryTab']/h:a/h:span[attribute::class='tabHitCount']">
         <xsl:variable name="genre" select="substring-before(parent::h:a/parent::h:li/attribute::id,'Tab')"/>
         <xsl:copy>
