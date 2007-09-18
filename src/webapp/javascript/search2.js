@@ -10,8 +10,8 @@ function initSearch() {
     try {
         window.keywords = escape(getMetaContent("LW.keywords"));
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.keywords, window.querymapCallBack);
-        YAHOO.util.Connect.asyncRequest('GET', '/././content/sfx?q='+window.keywords, window.findItCallBack);
-        YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck?q='+window.keywords, window.spellCheckCallBack);
+        YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q='+window.keywords, window.findItCallBack);
+        YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
         //YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
         var popIn = document.getElementById('popInContent');
@@ -262,20 +262,14 @@ var findItCallBack =
 function showFindIt(o)
 {
 	try {
-		var uri = 'http://lane.stanford.edu/sfx/ns';
-		if( window.getElementsByTagName(o.responseXML,"", uri, 'openurl')[0] != undefined)
+		var findIt = eval("("+o.responseText+")");
+		if (findIt.result != '')
 		{
-			var result = window.getElementsByTagName(o.responseXML,"", uri, 'result')[0].firstChild.nodeValue; 
-			if(result != '0')
-			{
-				var url = window.getElementsByTagName(o.responseXML,"", uri, 'openurl')[0].firstChild.nodeValue;
 				var findItLink = document.getElementById("findItLink");
-				findItLink.href = url;
-				findItLink.innerHTML = result.replace(/ \[.*\]/,'');
+				findItLink.href = findIt.openurl;
+				findItLink.innerHTML = findIt.result;
 				var findItContainer = document.getElementById('findIt');
-				findItContainer.style.visibility= 'visible';
-				findItContainer.style.display = 'inline';
-			}
+				findItContainer.style.display= 'inline';
 	    }
 	
    	} catch(exception) { window.handleException(exception) }
@@ -290,16 +284,13 @@ var spellCheckCallBack =
 function showSpellCheck(o)
 {
 	try {
-		var uri = 'http://lane.stanford.edu/spellcheck/ns';
-		if( window.getElementsByTagName(o.responseXML,"", uri, 'suggestion')[0] != undefined)
-		{
-			var suggestion = window.getElementsByTagName(o.responseXML,"", uri, 'suggestion')[0].firstChild.nodeValue;	
+	    var spellCheckResponse = eval("("+o.responseText+")");
+	    if (spellCheckResponse.suggestion) {
 			var spellCheckContainer = document.getElementById("spellCheck");
 			var spellCheckLink = document.getElementById("spellCheckLink");
-			spellCheckContainer.style.display = 'inline';
-			spellCheckContainer.style.visibility= 'visible';
-		    window.spellcheck.setSuggestion(suggestion, spellCheckLink);
-	    }
+			spellCheckContainer.style.display= 'inline';
+		    window.spellcheck.setSuggestion(spellCheckResponse.suggestion, spellCheckLink);
+		}
 	
    	} catch(exception) { window.handleException(exception) }
 }

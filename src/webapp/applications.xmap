@@ -18,7 +18,7 @@
                     </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>
-                <map:match pattern="querymap/html">
+                <map:match type="wildcard" pattern="querymap/html">
                     <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
                         <map:part src="cocoon:/querymap/map"/>
                         <map:part src="cocoon://content/templates/search/querymap.xml"/>
@@ -27,11 +27,42 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
-            <map:match pattern="spellcheck">
-                <map:generate type="spellcheck">
-                    <map:parameter name="query" value="{request-param:q}"/>
-                </map:generate>
-                <map:serialize type="xml"/>
+            <map:match type="wildcard" pattern="spellcheck/*">
+                <map:match type="wildcard" pattern="spellcheck/xml">
+                    <map:generate type="spellcheck">
+                        <map:parameter name="query" value="{request-param:q}"/>
+                    </map:generate>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match type="wildcard" pattern="spellcheck/json">
+                    <map:generate type="spellcheck">
+                        <map:parameter name="query" value="{request-param:q}"/>
+                    </map:generate>
+                    <map:transform src="context://xsl/spellcheck2json.xsl" type="saxon"/>
+                    <map:serialize type="text"/>
+                </map:match>
+            </map:match>
+            <map:match type="wildcard" pattern="sfx/*">
+                <map:match type="wildcard" pattern="sfx/xml">
+                    <map:generate type="html"
+                        src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"/>
+                    <map:transform type="saxon" src="context://xsl/sfx.xsl">
+                        <map:parameter name="sfx-request"
+                            value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
+                        />
+                    </map:transform>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match type="wildcard" pattern="sfx/json">
+                    <map:generate type="html"
+                        src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"/>
+                    <map:transform src="context://xsl/sfx2json.xsl" type="saxon">
+                        <map:parameter name="sfx-request"
+                            value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
+                        />
+                    </map:transform>
+                    <map:serialize type="text"/>
+                </map:match>
             </map:match>
             <map:handle-errors>
                 <map:generate type="exception"/>

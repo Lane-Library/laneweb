@@ -8,7 +8,7 @@
                 <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="search-proxy">
-                <map:generate type="search-proxy" src="{defaults:search-url}/search"/>
+                <map:generate type="search-proxy" src="{defaults:search-url}search"/>
                 <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
                     <map:parameter name="context" value="{request:contextPath}"/>
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
@@ -47,11 +47,10 @@
             </map:match>
             <map:match type="wildcard" pattern="search2.html">
                 <map:aggregate element="doc">
-                	<!--<map:part src="cocoon:/search-proxy"/>-->
                     <map:part src="{defaults:search-url}/id?q={urlencode:{request-param:keywords}}"/>
                     <map:part src="cocoon:/eresources/count"/>
                     <map:part src="{defaults:live-base}/content/search2.html"/>
-                    <map:part src="{defaults:live-base}/content/search2/{request-param:source}.html"/>
+                    <map:part src="cocoon:/search2/{request-param:source}.html"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/search.xsl">
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
