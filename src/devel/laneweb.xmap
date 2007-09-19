@@ -79,20 +79,6 @@
                         </map:transform>
                     </map:otherwise>
                 </map:select>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/webtrends.xsl">
-                        <map:transform type="saxon" src="xsl/webtrends.xsl">
-                            <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                        </map:transform>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/webtrends.xsl">
-                            <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                        </map:transform>
-                    </map:otherwise>
-                </map:select>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match type="wildcard" pattern="**.html">
@@ -141,20 +127,6 @@
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                         </map:transform>
                     </map:when> 
-                </map:select>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/webtrends.xsl">
-                        <map:transform type="saxon" src="xsl/webtrends.xsl">
-                            <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                        </map:transform>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/webtrends.xsl">
-                            <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                        </map:transform>
-                    </map:otherwise>
                 </map:select>
                 <map:select type="simple">
                     <map:parameter name="parameter-selector-test" value="{chain:template}"/>
