@@ -52,7 +52,7 @@
                 </map:transform>
                 <map:serialize type="text"/>
             </map:match>
-            <map:match type="wildcard" pattern="search-tab-results.xml">
+            <map:match type="wildcard" pattern="search-tab-results">
                 <map:aggregate element="search-tab-results" ns="http://lane.stanford.edu/search-tab-results/ns">
                     <map:part src="cocoon:/search-proxy"/>  
                     <map:part src="cocoon:/search-templates.xml"/>
