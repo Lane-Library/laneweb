@@ -1,4 +1,124 @@
 var gTimeZone = -8;
+// ****************    Add by IRT  		**********************//
+
+
+YAHOO.util.Event.addListener(document, 'click', handleClicks);
+
+
+function handleClicks(e) {
+try {
+		var target = (e.srcElement) ? e.srcElement : e.target;
+	    webtrendsProcess(target);
+    } catch(exception) { handleException(exception) }
+}
+
+function webtrendsProcess(node){
+	try{
+		var title;
+		var host;
+		if(node.hostname != undefined)
+		{
+			host = node.hostname;
+			if(host.indexOf(':')>-1)//safari return port
+				host = host.substring(0,host.indexOf(':'));
+		}
+		if(node.tagName == "IMG")
+		{
+			var anchorNode = node.parentNode;
+			if(anchorNode != undefined)
+				node = anchorNode;
+		}
+		if(node.tagName == "A" || node.tagName == "AREA")//for anchor tag 
+		{
+			if(host != getMetaContent("LW.host") || node.href.indexOf("/secure/login.html?url=") >-1 )
+			{
+				var href;
+				var uri= '/';
+				var query ;
+				var proxyUrl = 'http://laneproxy.stanford.edu/login';
+				var href = node.href;
+				if(href.indexOf(proxyUrl) > -1 || node.href.indexOf("/secure/login.html?url=") >-1)
+					href = href.substring( href.indexOf('url=')+4 , href.length);
+				if(href.indexOf('://')>-1)		
+					href = href.substring(href.indexOf('://')+3, href.length);
+				if(href.indexOf('?')>-1)
+				{
+					query = href.substring(href.indexOf('?')+1, href.length);
+					href = href.substring(0,href.indexOf('?'));
+				}
+				if(href.indexOf('/')>-1)
+				{	
+					uri =  href.substring(href.indexOf('/'), href.length);	
+					href = href.substring(0,href.indexOf('/'));
+				}	
+				title = getWebtrendsTitle(node);	
+				alert('DCS.dcssip:'+ href +'\nDCS.dcsuri:'+uri + '\nDCS.dcsquery:' +query  +'\nWT.ti:'+title +'\nDCSext.keywords:'+getMetaContent('LW.keywords')+'\nDCSext.search_type:'+getMetaContent('LW.source')+'\nDCSext.offsite_link:1');
+			 	if(getMetaContent('LW.keywords') != undefined)
+			 	{
+			 		if(query != undefined )
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1');
+					else	
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1');
+				}
+				else
+				{
+					if(query != undefined )
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.offsite_link','1');
+					else	
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'WT.ti',title,'DCSext.offsite_link','1');
+			 	}
+			 }
+		}
+		
+		if((node.href != undefined) && host == getMetaContent("LW.host") &&
+			(node.href.indexOf('.pdf') > -1 || node.href.indexOf('.camv') >-1 || node.href.indexOf('.smil') >-1 || node.href.indexOf('.doc') >-1 
+		  || node.href.indexOf('.ppt') > -1 || node.href.indexOf('.xls') > -1  || node.href.indexOf('.rm') > -1 || node.href.indexOf('.xml') >-1
+		  || node.href.indexOf('.wmv') >-1))
+		{
+			title = getWebtrendsTitle(node);
+			uri =  node.pathname;	
+			alert('\nDCS.dcsuri:'+uri + '\nWT.ti: '+title +'\nDCSext.keywords: '+getMetaContent('LW.keywords')+'\nDCSext.search_type: '+getMetaContent('LW.source'));
+			if(getMetaContent('LW.keywords') != undefined)
+				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'));
+			else
+				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title);
+		}
+			
+		
+	} catch(exception) { handleException(exception) }
+} 
+
+
+function getWebtrendsTitle(node)
+{
+	var title;
+	if(title == null || title == '')
+	 	title = node.title;
+	if(title == null || title == '')
+		title = node.alt;
+	if(title == null || title == '')
+	{	
+		var img = node.getElementsByTagName("IMG");
+		if(img != undefined)
+		{
+			title = node.alt;
+		}
+	}
+	if(title == null || title == '')
+	{
+		title = node.innerHTML;//textContent doesn't work with safari
+		if(title.indexOf('<')>-1 )
+			title = title.substring(0,title.indexOf('<'));
+	}		
+	if(title == null || title == '')
+		title = 'unknow';
+	return title					
+}
+
+
+
+
+//***************** 	End add by IRT  *******************//
 
 function dcsAdv(){
 	dcsFunc("dcsET");

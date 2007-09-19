@@ -12,7 +12,7 @@ function initSearch() {
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.keywords, window.querymapCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q='+window.keywords, window.findItCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
-        //YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
+       	YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
         var popIn = document.getElementById('popInContent');
         for (var i = 0; i  < tabs.length; i++) {
@@ -49,11 +49,6 @@ function initSearch() {
             }
         }
        	 spellcheck = new Spellcheck(getMetaContent("LW.source"));
-        var sortBySelect = document.getElementById('sortBySelect');
-        if (sortBySelect) {
-            sortBySelect.change = sorteLibraryResults;
-             YAHOO.util.Event.addListener(sortBySelect, 'change', handleChange);
-        }
     } catch(e) {
         window.handleException(e);
     }
@@ -75,7 +70,6 @@ function Result(type, tab, container) {
     this._tab = tab;
     this._container = container;
     this._url = '/././plain/search2/'+this._type+'.html?source='+this._type+'&keywords=';
-    this._sortBy = document.getElementById('sortBy');
     this._callback = {
         success:this.callbackSuccess,
         failure:handleFailure,
@@ -148,16 +142,10 @@ Result.prototype.show = function() {
             window.spellcheck.setSource(this._type);
             window.activeResult.hide();
             this._tab.className = 'eLibraryTabActive';
-            if (this._count <= 1) {
-            	this._sortBy.style.display = 'none';
-                this._sortBy.style.visibility = 'hidden';
-            } else {
-            	this._sortBy.style.display = 'inline';
-                this._sortBy.style.visibility = 'visible';
-            }
             for (var i = 0; i < this._content.length; i++) {
                 this._container.appendChild(this._content[i]);
             }
+            if(window.querymapContent  != undefined)
              this._container.appendChild(window.querymapContent );
             window.activeResult = this;
         }
@@ -202,38 +190,28 @@ var showHitsCallback =
 
 
 function showHits(o) {
-	try {
-		var uri = 'http://lane.stanford.edu/search-tab-result/ns';
-		var rootNode = window.getElementsByTagName(o.responseXML,"", uri, 'search-tab-results')[0];
-		var status = rootNode.getAttribute("status");
-		var rows = window.getElementsByTagName(rootNode, "",uri,'resource');
-		var tabs = document.getElementById('eLibraryTabs').childNodes;
-		
-		for (var i = 0; i  < rows.length; i++) 
-		{
-			var genre = rows[i].getAttribute("id");
-			for (var j = 0; j < tabs.length; j++)
-			 {
-				if ( tabs[j].id != undefined &&  tabs[j].id == genre + 'Tab') 
+	try 
+	{
+		var response = eval("("+o.responseText+")");
+		for (var j = 0; j < response.results.tabs.length; j++)
+		 {
+			 var tabName = response.results.tabs[j].resource;
+			 tab = document.getElementById(tabName+"Tab")
+			 if ( tab != undefined) 
 				{
-					var hitSpan = tabs[j].getElementsByTagName('span')[0];
-					if(window.getElementsByTagName(rows[i],"",uri,'hits')[0] !=	undefined && window.getElementsByTagName(rows[i],"",uri,'hits')[0].firstChild != undefined)
-					{
-						hitSpan.innerHTML = window.getElementsByTagName(rows[i],"",uri,'hits')[0].firstChild.nodeValue;
-						if(window.getElementsByTagName(rows[i],"",uri,'url')[0] != undefined && window.getElementsByTagName(rows[i],"",uri,'url')[0].firstChild != undefined)
-						{
-							var linkValue = window.getElementsByTagName(rows[i],"",uri,'url')[0].firstChild.nodeValue;
-							if(linkValue != null && tabs[j].getElementsByTagName('a')[0] != undefined)
-								tabs[j].getElementsByTagName('a')[0].href = linkValue;
-						}
-						hitSpan.style.visibility = 'visible';
-						break;
-					}
+					var hitSpan = tab.getElementsByTagName('span')[0];
+					var hits = response.results.tabs[j].hits;
+					if(hitSpan != null && hits != "")
+						hitSpan.innerHTML = hits;   
+					var linkValue = response.results.tabs[j].url;
+					if(linkValue != null && tab.getElementsByTagName('a')[0] != undefined)
+						tab.getElementsByTagName('a')[0].href = linkValue;
+					hitSpan.style.visibility = 'visible';
 				}
-			}
 		}
 		var sleepingTime = 2000;
 		var remainingTime = (new Date().getTime())-startTime;
+		var status = response.results.status;
 		if(status != 'successful' && ( remainingTime < 60*1000))
 		{	// if time superior at 20 seconds the sleeping time equals 10 seconds 
 			if(remainingTime > 20 *1000)
@@ -245,8 +223,9 @@ function showHits(o) {
 
 function getTabResult()
 {
+
 try {
-	  YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results.xml?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
+	  YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
 
     } catch(exception) { window.handleException(exception) }
 }
@@ -270,6 +249,7 @@ function showFindIt(o)
 				findItLink.innerHTML = findIt.result;
 				var findItContainer = document.getElementById('findIt');
 				findItContainer.style.display= 'inline';
+				findItContainer.style.visibility = 'visible';
 	    }
 	
    	} catch(exception) { window.handleException(exception) }
@@ -289,6 +269,7 @@ function showSpellCheck(o)
 			var spellCheckContainer = document.getElementById("spellCheck");
 			var spellCheckLink = document.getElementById("spellCheckLink");
 			spellCheckContainer.style.display= 'inline';
+			spellCheckContainer.style.visibility= 'visible';
 		    window.spellcheck.setSuggestion(spellCheckResponse.suggestion, spellCheckLink);
 		}
 	
@@ -353,72 +334,21 @@ function getElementsByTagName(node, prefix, uri, name)
 var querymapCallBack =
 {
   success:showQuerymap,
-  failure:handleFailure	
+  //failure:handleFailure	 we don't want see the error message for example if the DTD is not found on the server 
 };
 
 
 function showQuerymap(o)
 {
+
 	var uri = 'http://www.w3.org/1999/xhtml';
 	if( window.getElementsByTagName(o.responseXML,"", uri, 'body')[0] != undefined)
 	{
 		var querymapContainer = window.getElementsByTagName(o.responseXML,"", uri, 'div')[0];	
-		window.querymapContent = querymapContainer; 
-    	activeResult._container.appendChild(querymapContainer);
+		window.querymapContent = querymapContainer;
+		window.activeResult._container.appendChild(querymapContainer);
     }
 }	
-
-
-
-// sort results
-//  relevance-sort = as returned by erdb 
-//  alpha-sort = alpha sort done by sortByAlpha (extension of Array class)
-//  relevance-sorted results are stored in relevanceSortedResults variable if alpha-sort is executed
-//  the LWeLibNextSort cookie is used to track the appropriate *next* sort scheme
-var relevanceSortedResults;
-function sorteLibraryResults(){
-try {
-	var searchResults = document.getElementById('eLibrarySearchResults');
-	
-	var nextSort = '';
-	if(searchResults.getAttribute('name') == 'relevance-sort'){
-		nextSort = 'alpha-sort';
-		searchResults.innerHTML = relevanceSortedResults;
-		showeLibraryTab(eLibraryActiveTab);
-	}
-	else {
-		nextSort = 'relevance-sort';
-		relevanceSortedResults = document.getElementById('eLibrarySearchResults').innerHTML;
-
-		for( var i = 0; i < eLibraryTabIDs.length; i++){
-			var divID = eLibraryTabIDs[i];
-			var div = document.getElementById(divID);
-			var dl = document.getElementById(divID).getElementsByTagName('dl');
-
-			var resultsArray = [];
-			var resultsHTML = '';
-
-			for(var p = 0; p < div.getElementsByTagName('dt').length; p++){
-				resultsArray[p]=[div.getElementsByTagName('dt')[p].innerHTML,'<dt>' + div.getElementsByTagName('dt')[p].innerHTML + '</dt>' + '<dd>' + div.getElementsByTagName('dd')[p].innerHTML + '</dd>'];
-			}
-			resultsArray = resultsArray.sortByAlpha();
-
-			for(p=0;p<resultsArray.length;p++){
-				resultsHTML = resultsHTML + resultsArray[p][1];
-			}
-			
-			var dlClassName = (dl.length) ? dl[0].className : '';
-			div.innerHTML = '<dl class="' + dlClassName + '">' + resultsHTML + '</dl>';
-		}
-	}
-
-	searchResults.setAttribute('name',nextSort);
-	setCookie('LWeLibNextSort',nextSort);
-	refreshPopInContent();
-	
-    } catch(exception) { window.handleException(exception) }
-}
-
 
 
 function handleFailure(o){
