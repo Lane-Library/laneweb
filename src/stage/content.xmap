@@ -58,7 +58,7 @@
                     <map:part src="cocoon:/search-templates.xml"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/search-tab-results.xsl"/>
-                <map:serialize type="xml"/>
+                <map:serialize type="text"/>
             </map:match>
             <map:match pattern="sfx">
                 <map:generate type="html"

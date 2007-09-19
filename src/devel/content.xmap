@@ -107,8 +107,8 @@
                 </map:select>
                 <map:serialize type="text"/>
             </map:match>
-            <map:match type="wildcard" pattern="search-tab-results.xml">
-                <map:aggregate element="search-tab-results" ns="http://lane.stanford.edu/search-tab-results/ns">
+            <map:match type="wildcard" pattern="search-tab-results">
+                <map:aggregate element="search-tab-results">
                     <map:part src="cocoon:/search-proxy"/>  
                     <map:part src="cocoon:/search-templates.xml"/>
                 </map:aggregate>
@@ -124,7 +124,7 @@
                         </map:transform>
                     </map:otherwise>
                 </map:select>
-                <map:serialize type="xml"/>
+                <map:serialize type="text"/>
             </map:match>
             <map:match pattern="sfx">
                 <map:generate type="html"
