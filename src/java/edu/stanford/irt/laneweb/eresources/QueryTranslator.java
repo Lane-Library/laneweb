@@ -101,14 +101,6 @@ public class QueryTranslator {
 
 				theWord = theWord.replace('*', '%');
 
-				// Find field indicator ":"
-
-				pp = theWord.indexOf(":");
-				if (pp > 0) {
-					fieldName = theWord.substring(0, pp);
-					theWord = theWord.substring(pp + 1, theWord.length());
-				}
-
 				addWord(theWord, flag, fieldName);
 
 			}

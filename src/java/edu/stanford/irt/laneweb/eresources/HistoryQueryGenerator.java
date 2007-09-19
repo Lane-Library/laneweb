@@ -147,6 +147,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
         }
         this.query = request.getParameter(QUERY);
         if (this.query != null) {
+        	this.query = this.query.trim();
             if (this.query.length() ==0) {
                 this.query = null;
             } else {
@@ -156,6 +157,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
         if (this.query == null) {
 			this.query = request.getParameter(KEYWORDS);
 			if (this.query != null) {
+	        	this.query = this.query.trim();
 				if (this.query.length() == 0) {
 					this.query = null;
 				} else {
