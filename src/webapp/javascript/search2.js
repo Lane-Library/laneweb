@@ -202,8 +202,10 @@ function showHits(o) {
 					var hitSpan = tab.getElementsByTagName('span')[0];
 					var hits = response.results.tabs[j].hits;
 					if(hitSpan != null && hits != "")
+					{
 						hitSpan.innerHTML = hits;   
-					hitSpan.style.visibility = 'visible';
+						hitSpan.style.visibility = "visible";
+					}
 				}
 		}
 		var sleepingTime = 2000;
@@ -254,7 +256,7 @@ function showFindIt(o)
 
 var spellCheckCallBack =
 {
-  success:showSpellCheck,
+  success:showSpellCheck//,
   //failure:do nothing iof google spellcheck is done we dosn't want a alert windows 
 };
 
@@ -330,7 +332,7 @@ function getElementsByTagName(node, prefix, uri, name)
 
 var querymapCallBack =
 {
-  success:showQuerymap,
+  success:showQuerymap//,
   //failure:handleFailure	 we don't want see the error message for example if the DTD is not found on the server 
 };
 
