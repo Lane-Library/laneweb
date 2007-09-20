@@ -2,9 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:res="http://irt.stanford.edu/search/2.0"
                 xmlns:st="http://lane.stanford.edu/search-templates/ns"
-                xmlns:str="http://lane.stanford.edu/search-tab-results/ns"
                 xmlns="http://lane.stanford.edu/search-tab-result/ns"
-                exclude-result-prefixes="h st str res"
+                exclude-result-prefixes="st res"
                 version="2.0">
     
 

@@ -4,6 +4,14 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="throttling">
+            <map:match pattern="search">
+                <map:generate type="eresources-search"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="browse">
+                <map:generate type="eresources-browse"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="erdb">
                 <map:generate type="eresource"/>
                 <map:transform type="sql">

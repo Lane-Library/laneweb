@@ -20,6 +20,8 @@
                 logger="sitemap.generation.eresource-search" pool-max="32"/>
             <map:generator name="eresources-count" src="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
                 logger="sitemap.generation.eresource-search" pool-max="32"/>
+            <map:generator name="eresources-browse" src="edu.stanford.irt.laneweb.eresources.EresourcesBrowseGenerator"
+                logger="sitemap.generation.eresource-browse" pool-max="32"/>
             <map:generator name="history" src="edu.stanford.irt.laneweb.eresources.HistoryQueryGenerator"
                 logger="sitemap.generation.history" pool-max="32"/>
             <map:generator name="status" logger="sitemap.generator.status"
