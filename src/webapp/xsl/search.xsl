@@ -49,6 +49,14 @@
             <xsl:value-of select="$keywords"/>
         </xsl:attribute>
     </xsl:template>
+ 
+    
+    <xsl:template match="attribute::href[contains(.,'{id}')]">
+        <xsl:attribute name="href">
+            <xsl:value-of select="substring-before(.,'{id}')"/>
+             <xsl:value-of select="/doc/s:search/@id"/>
+        </xsl:attribute>
+    </xsl:template>
     
     <xsl:template match="attribute::node()">
         <xsl:copy-of select="self::node()"/>

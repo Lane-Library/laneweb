@@ -203,18 +203,15 @@ function showHits(o) {
 					var hits = response.results.tabs[j].hits;
 					if(hitSpan != null && hits != "")
 						hitSpan.innerHTML = hits;   
-					var linkValue = response.results.tabs[j].url;
-					if(linkValue != null && tab.getElementsByTagName('a')[0] != undefined)
-						tab.getElementsByTagName('a')[0].href = linkValue;
 					hitSpan.style.visibility = 'visible';
 				}
 		}
 		var sleepingTime = 2000;
-		var remainingTime = (new Date().getTime())-startTime;
+		var runningTime = (new Date().getTime())-startTime;
 		var status = response.results.status;
-		if(status != 'successful' && ( remainingTime < 60*1000))
+		if(status != 'successful' && ( runningTime < 60*1000))
 		{	// if time superior at 20 seconds the sleeping time equals 10 seconds 
-			if(remainingTime > 20 *1000)
+			if(runningTime > 20 *1000)
 				sleepingTime = 10000;
 			setTimeout( "getTabResult()", sleepingTime);
 		}

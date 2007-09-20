@@ -21,43 +21,30 @@
 	{
 	"resource":"clinical", 
 	"hits" : "<xsl:if test="$clinicalHits != 0"><xsl:value-of  select="$clinicalHits" /></xsl:if>",
-	"url" :"/search.html?source=clinical&amp;id=<xsl:value-of select="@id"/>"
-	}
-	,	
+	},	
 	{
 	"resource":"history",
 	"hits" : "<xsl:if test="$historyHits != 0"><xsl:value-of  select="$historyHits" /></xsl:if>",
-	"url":"/search.html?source=history&amp;id=<xsl:value-of select="@id"/>"
-	}
-	,	
+	},	
 	{
 	"resource":"peds",
 	"hits" : "<xsl:if test="$pedsHits != 0"><xsl:value-of  select="$pedsHits" /></xsl:if>",
-	"url":"/search.html?source=peds&amp;id=<xsl:value-of select="@id"/>"
-	}
-	,	
+	},	
 	{
 	"resource":"research",
 	"hits" : "<xsl:if test="$researchHits != 0"><xsl:value-of  select="$researchHits" /></xsl:if>",
-	"url":"/search.html?source=research&amp;id=<xsl:value-of select="@id"/>"
-	}
-	,	
+	},	
 	{
 	"resource":"google",
 	"hits" : "<xsl:value-of  select="res:engine[@id='google']/res:hits" />",
-	"url":"<xsl:value-of select="res:engine[@id='google']/res:resource/res:url"/>"
-	}
-	,	
+	},	
 	{
 	"resource":"lois",
 	"hits" : "<xsl:value-of  select="res:engine[@id='lois']/res:hits" />",
-	"url":"<xsl:value-of select="res:engine[@id='lois']/res:resource/res:url"/>"
-	}
-	,	
+	},	
 	{
 	"resource":"pubmed",
 	"hits" : "<xsl:value-of  select="res:engine[@id='crossdb']/res:hits" />",
-	"url":"<xsl:value-of select="res:engine[@id='crossdb']/res:resource[@id='pubmed']/res:url"/>"
 	}
   ]
  }
