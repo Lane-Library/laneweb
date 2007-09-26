@@ -8,6 +8,26 @@
                 <map:generate type="search-proxy" src="{defaults:search-url}/{1}"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match type="wildcard" pattern="search-proxy/json">
+                <map:generate src="cocoon:/search-proxy/search"/>
+                <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
+                <map:serialize type="text"/>
+            </map:match>
+            <map:match type="wildcard" pattern="search-proxy/xml">
+                <map:generate src="cocoon:/search-proxy/search"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="search-proxy/*">
+                <map:generate type="search-proxy" src="{defaults:search-url}/{1}"/>
+                <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
+                    <map:parameter name="context" value="{request:contextPath}"/>
+                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="querymap/*">
                 <map:match pattern="querymap/map">
                     <map:generate type="querymap">
