@@ -305,11 +305,7 @@
             </xsl:when>
             <xsl:when test="contains(., '://') and contains(.,'{keywords}')">
                 <xsl:attribute name="{name()}">
-                    <xsl:call-template name="recursive-string-replace">
-                        <xsl:with-param name="string" select="."/>
-                        <xsl:with-param name="find" select="'{keywords}'"/>
-                        <xsl:with-param name="replace" select="$keywords"/>
-                    </xsl:call-template>
+                    <xsl:value-of select="replace(.,'\{keywords\}',$keywords)"/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:when test="starts-with(.,'http://') and starts-with($request-uri,'secure')">
@@ -561,18 +557,10 @@
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="contains($link,'{keywords}')">
-                    <xsl:call-template name="recursive-string-replace">
-                        <xsl:with-param name="string" select="$link"/>
-                        <xsl:with-param name="find" select="'{keywords}'"/>
-                        <xsl:with-param name="replace" select="$keywords"/>
-                    </xsl:call-template>
+                    <xsl:value-of select="replace($link,'\{keywords\}',$keywords)"/>
                 </xsl:when>
                 <xsl:when test="contains($link,'%7Bkeywords%7D')">
-                    <xsl:call-template name="recursive-string-replace">
-                        <xsl:with-param name="string" select="$link"/>
-                        <xsl:with-param name="find" select="'%7Bkeywords%7D'"/>
-                        <xsl:with-param name="replace" select="$keywords"/>
-                    </xsl:call-template>
+                    <xsl:value-of select="replace($link,'%7Bkeywords%7D',$keywords)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$link"/>
@@ -780,26 +768,6 @@
             </xsl:comment>
         </script>
         <noscript><p>This flash object requires javascript.</p></noscript>
-    </xsl:template>
-
-    <!-- replace 'find' with 'replace' in given 'string' ... works recursively -->
-    <xsl:template name="recursive-string-replace">
-        <xsl:param name="string"/>
-        <xsl:param name="find"/>
-        <xsl:param name="replace"/>
-        <xsl:value-of select="substring-before($string,$find)"/><xsl:value-of select="$replace"/>
-        <xsl:choose>
-            <xsl:when test="contains(substring-after($string,$find),$find)">
-                <xsl:call-template name="recursive-string-replace">
-                    <xsl:with-param name="string" select="substring-after($string,$find)" />
-                    <xsl:with-param name="find" select="$find" />
-                    <xsl:with-param name="replace" select="$replace" />
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="substring-after($string,$find)"/>
-            </xsl:otherwise>
-        </xsl:choose>
     </xsl:template>
 
 </xsl:stylesheet>
