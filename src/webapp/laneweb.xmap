@@ -55,13 +55,13 @@
                 <doctype-system>http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd</doctype-system>
                 <encoding>UTF-8</encoding>
                 <indent>yes</indent>
+                <omit-xml-declaration>yes</omit-xml-declaration>
                 <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
             </map:serializer>
             <map:serializer name="xml" mime-type="text/xml" logger="sitemap.serializer.xml"
                 src="org.apache.cocoon.serialization.XMLSerializer" pool-max="32">
                 <indent>yes</indent>
                 <encoding>UTF-8</encoding>
-                <omit-xml-declaration>yes</omit-xml-declaration>
                 <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
             </map:serializer>
             <map:serializer name="noprolog" mime-type="text/html" logger="sitemap.serializer.xhtml"
