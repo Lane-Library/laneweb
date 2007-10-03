@@ -19,7 +19,7 @@ function initializeMetasearch(e)
         window.searchId = getMetaContent("LW.searchId");
         window.searchMode = getMetaContent("LW.searchMode");
 
-        if( window.keywords != 'undefined' || (window.searchId && window.searchId != 'undefined') )
+        if( (window.keywords && window.keywords != 'undefined') || (window.searchId && window.searchId != 'undefined') )
         {
         	YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+window.searchId+'&q='+window.keywords, window.metasearchCallback);
     		YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
