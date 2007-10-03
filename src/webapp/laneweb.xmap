@@ -61,6 +61,7 @@
                 src="org.apache.cocoon.serialization.XMLSerializer" pool-max="32">
                 <indent>yes</indent>
                 <encoding>UTF-8</encoding>
+                <omit-xml-declaration>yes</omit-xml-declaration>
                 <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
             </map:serializer>
             <map:serializer name="noprolog" mime-type="text/html" logger="sitemap.serializer.xhtml"
