@@ -1,16 +1,34 @@
+var keywords;
 var searchId;
 var searchIndicator;
+var searchMode;
+var searchStatus;
 
 YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 
 function initializeMetasearch(e)
 {
     try {
-        if(getMetaContent("LW.keywords")){
-        	YAHOO.util.Connect.asyncRequest('GET', '/././apps/search-proxy/json?q='+getMetaContent("LW.keywords"), window.metasearchCallback);
-    		YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+getMetaContent("LW.keywords"), window.spellCheckCallBack);
-    		window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting');
-    		window.searchIndicator.show();
+
+    	var jshiddens = YAHOO.util.Dom.getElementsByClassName('jshidden');
+    	for(var z = 0; z<jshiddens.length; z++){
+    	    YAHOO.util.Dom.setStyle(jshiddens[z],'display','none');
+    	}
+
+        window.keywords = escape(getMetaContent("LW.keywords"));
+        window.searchId = getMetaContent("LW.searchId");
+        window.searchMode = getMetaContent("LW.searchMode");
+
+        if( window.keywords != 'undefined' || (window.searchId && window.searchId != 'undefined') )
+        {
+        	YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+window.searchId+'&q='+window.keywords, window.metasearchCallback);
+    		YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
+
+            if(YAHOO.util.Dom.inDocument('searchIndicator')){
+                window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
+            }
+            
+            YAHOO.util.Event.addListener('searchIndicator', 'click', haltMetasearch);
 	    }
    	} catch(e) { window.handleException(e) }
 }
@@ -20,14 +38,15 @@ var showMetasearchResults = function(o)
     try {
 	    var searchResponse = eval("("+o.responseText+")");
         var searchResources = searchResponse.resources;
-    	var searchStatus = searchResponse.status;
+    	window.searchStatus = (window.searchStatus == 'successful') ? window.searchStatus : searchResponse.status;
     	window.searchId = searchResponse.id;
         
     	var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
-    	window.searchIndicator.setProgress(searchStatus,metasearchElements.length);
-
-    	if(metasearchElements.length && searchStatus != 'successful'){
-    	    setTimeout("YAHOO.util.Connect.asyncRequest('GET', '/././apps/search-proxy/json?id='+"+window.searchId+"+'&r='+"+Math.random()+", window.metasearchCallback);",1500);
+        if(window.searchIndicator){
+        	window.searchIndicator.setProgress(window.searchStatus,metasearchElements.length,YAHOO.util.Dom.getElementsByClassName('complete').length);
+        }
+    	if(metasearchElements.length && window.searchStatus != 'successful'){
+    	    setTimeout("YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+"+window.searchId+"+'&r='+"+Math.random()+", window.metasearchCallback);",2000);
     	}
     
     	for(var i = 0; i<searchResources.length; i++){
@@ -37,7 +56,6 @@ var showMetasearchResults = function(o)
     				}
     			}
     	}
-
 
    	} catch(e) { window.handleException(e) }
 }
@@ -53,40 +71,89 @@ function MetasearchResult(metasearchElement,searchResource)
 
     this.id = searchResource.id;
     this.name = (metasearchElement.innerHTML) ? metasearchElement.innerHTML : '';
-    this.status = searchResource.status;
+    this.status = (searchResource.status) ? searchResource.status : 0;
     this.hits = searchResource.hits;
     this.href = searchResource.url;
+    
+    this.setContent(metasearchElement);
 
-    // write debugging info
     if(getMetaContent("LW.debug") && YAHOO.util.Dom.inDocument('debug')){
+        this.debug();
+    }
+}
+
+MetasearchResult.prototype.setContent = function(metasearchElement)
+{
+    if (metasearchElement == null) {
+        throw('null metasearchElement');
+    }
+ 	try {
+        switch(window.searchMode){
+            case "original":
+                if( this.status && this.status != 'running' ) {
+                	metasearchElement.setAttribute('href',this.href);
+                	metasearchElement.setAttribute('target','_blank');
+                    metasearchElement.className = 'complete';
+    
+                    var resultSpan = document.createElement('span');
+                    resultSpan.innerHTML = ': ' + this.hits;
+                    metasearchElement.parentNode.appendChild(resultSpan);
+    
+                    if( this.hits > 0 || this.status != 'successful' ) { 
+                        var parentHeading = YAHOO.util.Dom.getAncestorByTagName(this.id,'div').getElementsByTagName('h3')[0];
+                        parentHeading.style.display = 'block';
+                        var parent = YAHOO.util.Dom.getAncestorByTagName(this.id,'li');
+                        parent.style.display = 'block';
+                    }
+                    else if( this.hits == 0 ) { 
+                        var parent = YAHOO.util.Dom.getAncestorByTagName(this.id,'li');
+                        parent.className = 'zero';
+                    }
+                }
+            break;
+            default:  // merged 
+                if( this.status == 'successful') {
+                	metasearchElement.setAttribute('href',this.href);
+                	metasearchElement.setAttribute('target','_blank');
+            
+                	var resultSpan = document.createElement('span');
+                	resultSpan.innerHTML = ': ' + this.hits;
+                	metasearchElement.parentNode.appendChild(resultSpan);
+                    metasearchElement.className = 'complete';
+                }
+                else if( this.status == 'failed' || this.status == 'canceled' ){
+                	metasearchElement.className = 'complete';
+                }
+            break;
+       }
+   	} catch(exception) { window.handleException(exception) }
+}
+
+MetasearchResult.prototype.debug = function()
+{
+ 	try {
         var dd = document.createElement('div');
         for (var d in this){
-            if(d == 'href'){
+            if( d.match(/id|name|status|hits/) ){
+                dd.innerHTML += ' :: ' + d + '=' + this[d];
+            }
+            else if(d == 'href'){
                 var a = document.createElement('a');
                 a.href = this[d];
                 a.innerHTML = d;
                 dd.innerHTML += ' :: ';
                 dd.appendChild(a);
             }
-            else{
-                dd.innerHTML += ' :: ' + d + '=' + this[d];
-            }
         }
         document.getElementById('debug').appendChild(dd);
-    }
-
-    if( this.status == 'successful') {
-    	metasearchElement.setAttribute('href',this.href);
-    	metasearchElement.setAttribute('target','_blank');
-
-    	this.resultSpan = document.createElement('span');
-    	this.resultSpan.innerHTML = ': ' + this.hits;
-    	metasearchElement.parentNode.appendChild(this.resultSpan);
-        metasearchElement.className = 'complete';
-    }
-    else if( this.status == 'failed' || this.status == 'canceled' ){
-    	metasearchElement.className = 'complete';
-    }
+        
+   	} catch(exception) { window.handleException(exception) }
+}
+function haltMetasearch()
+{
+ 	try {
+        window.searchStatus = 'successful';
+   	} catch(exception) { window.handleException(exception) }
 }
 
 var metasearchCallback = 
@@ -95,50 +162,82 @@ var metasearchCallback =
     failure:window.handleFailure	
 };
 
+function toggleZeros(e)
+{
+    try {
+        var toggleEl = document.getElementById('toggleZeros');
+        var zeroResources = YAHOO.util.Dom.getElementsByClassName('zero');
+        var display;
+        
+        switch(toggleEl.innerHTML){
+            case "Show Details":
+                display = 'block';
+                toggleEl.innerHTML = 'Hide Details';
+            break;
+            case "Hide Details":
+                display = 'none';
+                toggleEl.innerHTML = 'Show Details';
+            break;
+        }
+        
+        for(var i = 0; i<zeroResources.length; i++){
+            YAHOO.util.Dom.setStyle(zeroResources[i],'display',display);
+        }
+   	} catch(e) { window.handleException(e) }
+}
+
 
 function SearchIndicator(elementId,message) 
 {
     this.elementId = (YAHOO.util.Dom.inDocument(elementId)) ? elementId : null;
-    if(null == elementId){
+    if(null == this.elementId){
         throw('SearchIndicator missing elementId');
     }
     this.message = message;
+    this.show();
 }
 
 SearchIndicator.prototype.hide = function()
 {
-    YAHOO.util.Dom.setStyle(this.elementId,'visibility','hidden');
+ 	try {
+        YAHOO.util.Dom.setStyle(this.elementId,'visibility','hidden');
+   	} catch(exception) { window.handleException(exception) }
 }
 
 SearchIndicator.prototype.show = function()
 {
-    YAHOO.util.Dom.setStyle(this.elementId,'visibility','visible');
+ 	try {
+ 	    YAHOO.util.Dom.setStyle(this.elementId,'visibility','visible');
+   	} catch(exception) { window.handleException(exception) }
 }
 
-SearchIndicator.prototype.setProgress = function(status,pendingResources)
+SearchIndicator.prototype.setProgress = function(status,pendingResources,completedResources)
 {
-    this.show();
-    
-    if(status == 'successful' || pendingResources == 0)
-    {
-        this.setMessage('Search complete');
-        this.hide();
-    }
-    else if(pendingResources == 1)
-    {
-        this.setMessage(pendingResources + 'one pending resource');
-    }
-    else if(pendingResources > 1)
-    {
-        this.setMessage(pendingResources + ' pending resources');
-    }
+	try {
+        this.show();
+        if(status == 'successful' || pendingResources == 0)
+        {
+            this.hide();
+            //YAHOO.util.Dom.setStyle('haltMetasearch','display','none');
+        	this.setMessage('Results for ' + window.keywords);
+            YAHOO.util.Dom.setStyle('resultsMessage','display','inline');
+            YAHOO.util.Dom.setStyle('metasearchControls','display','inline');
+            YAHOO.util.Event.addListener('toggleZeros', 'click', toggleZeros);
+        }
+        else{
+       		this.setMessage(completedResources + ' of ' + (pendingResources + completedResources) + ' sources searched');
+        }
+   	} catch(exception) { window.handleException(exception) }
 }
 
 SearchIndicator.prototype.setMessage = function(message)
 {
-    this.message = message;
-    document.getElementById(this.elementId).title = this.message;
+	try {
+        this.message = message;
+        document.getElementById(this.elementId).title = this.message;
+   	} catch(exception) { window.handleException(exception) }
 }
+
 
 
 function showSpellCheck(o)
@@ -150,20 +249,18 @@ function showSpellCheck(o)
 			var spellCheckLink = document.getElementById("spellCheckLink");
 			if(spellCheckContainer && spellCheckLink)
 			{
-    			spellCheckLink.href = location.href.replace("keywords=" + getMetaContent("LW.keywords"),"keywords=" + spellCheckResponse.suggestion);
+    			spellCheckLink.href = location.href.replace("keywords=" + window.keywords,"keywords=" + spellCheckResponse.suggestion);
     			spellCheckLink.innerHTML = spellCheckResponse.suggestion;
     			spellCheckContainer.style.display= 'inline';
     			spellCheckContainer.style.visibility= 'visible';
             }
 		}
-	
    	} catch(exception) { window.handleException(exception) }
 }
 
 var spellCheckCallBack =
 {
-  success:showSpellCheck,
-  failure: null
+  success:showSpellCheck
 };
 
 
@@ -178,4 +275,3 @@ function handleFailure(o)
 {
 	alert("status: "+o.status+ '\n' +"statusText "+o.statusText  );	
 }
-
