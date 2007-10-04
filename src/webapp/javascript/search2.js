@@ -2,7 +2,7 @@ var keywords;
 var startTime = new Date().getTime();
 var activeResult;
 var spellcheck;
-var querymapContent;
+var queryMappingContent;
 
 YAHOO.util.Event.addListener(window,'load',initSearch);
 
@@ -68,7 +68,7 @@ function Result(type, tab, container) {
     }
     this._type = type;
     this._tab = tab;
-    this._container = container;
+    this.container = container;
     this._url = '/././plain/search2/'+this._type+'.html?source='+this._type+'&keywords=';
     this._callback = {
         success:this.callbackSuccess,
@@ -103,11 +103,11 @@ Result.prototype.setContent = function(content) {
 Result.prototype.callbackSuccess = function(o) {
     try {
         var result = o.argument.result;
-        var bodyNodes = o.responseXML.getElementsByTagName('body')[0].childNodes;
         
+        var bodyNodes = o.responseXML.getElementsByTagName('body')[0].childNodes;
         var content = new Array();
         for (var i = 0; i < bodyNodes.length; i++) {
-            content[i] = document.importNode(bodyNodes[i], true);
+            content[i] = window.importNodes(bodyNodes[i], true);
         }
         result.setContent(content);
         result.show();
@@ -142,12 +142,12 @@ Result.prototype.show = function() {
             window.spellcheck.setSource(this._type);
             window.activeResult.hide();
             this._tab.className = 'eLibraryTabActive';
-            for (var i = 0; i < this._content.length; i++) {
-                this._container.appendChild(this._content[i]);
+           	for (var i = 0; i < this._content.length; i++) {
+                this.container.appendChild(this._content[i]);
             }
-            if(window.querymapContent  != undefined)
-             this._container.appendChild(window.querymapContent );
-            window.activeResult = this;
+            if(window.queryMappingContent)
+	            this.container.appendChild(window.queryMappingContent);
+	        window.activeResult = this;
         }
      
     } catch(exception) {
@@ -158,8 +158,8 @@ Result.prototype.show = function() {
 
 Result.prototype.hide = function() {
     try {
-        while(this._container.childNodes.length > 0) {
-            this._container.removeChild(this._container.lastChild);
+        while(this.container.childNodes.length > 0) {
+            this.container.removeChild(this.container.lastChild);
         }
         this._tab.className = 'eLibraryTab';
     } catch(exception) {
@@ -196,24 +196,25 @@ function showHits(o) {
 		for (var j = 0; j < response.results.tabs.length; j++)
 		 {
 			 var tabName = response.results.tabs[j].resource;
-			 tab = document.getElementById(tabName+"Tab")
+			 var tab = document.getElementById(tabName+"Tab")
 			 if ( tab != undefined) 
 				{
 					var hitSpan = tab.getElementsByTagName('span')[0];
 					var hits = response.results.tabs[j].hits;
 					if(hitSpan != null && hits != "")
-					{
 						hitSpan.innerHTML = hits;   
-						hitSpan.style.visibility = "visible";
-					}
+					var linkValue = response.results.tabs[j].url;
+					if(linkValue != null && tab.getElementsByTagName('a')[0] != undefined)
+						tab.getElementsByTagName('a')[0].href = linkValue;
+					hitSpan.style.visibility = 'visible';
 				}
 		}
 		var sleepingTime = 2000;
-		var runningTime = (new Date().getTime())-startTime;
+		var remainingTime = (new Date().getTime())-startTime;
 		var status = response.results.status;
-		if(status != 'successful' && ( runningTime < 60*1000))
+		if(status != 'successful' && ( remainingTime < 60*1000))
 		{	// if time superior at 20 seconds the sleeping time equals 10 seconds 
-			if(runningTime > 20 *1000)
+			if(remainingTime > 20 *1000)
 				sleepingTime = 10000;
 			setTimeout( "getTabResult()", sleepingTime);
 		}
@@ -316,38 +317,65 @@ Spellcheck.prototype.setSource = function(source)
 }
 
 
-function getElementsByTagName(node, prefix, uri, name)
-{
-    try
-    {
-        return node.getElementsByTagNameNS(uri,name);
-    }
-    catch (e)
-    {
-        window.handleException(e);
-        return node.getElementsByTagName(prefix+':'+name);
-    }
-}
-
 
 var querymapCallBack =
 {
-  success:showQuerymap//,
+  success:showQueryMapping//,
   //failure:handleFailure	 we don't want see the error message for example if the DTD is not found on the server 
 };
 
 
 function showQuerymap(o)
 {
+	 var resultNodes = o.responseText;
+	 if(resultNodes  && resultNodes.indexOf('li id')>-1)
+	 {
+	 	//window.queryMapContent = resultNodes;
+	 	document.getElementById("queryMapping").className="largeFont";
+	 	document.getElementById("queryMapping").innerHTML =  resultNodes;
+	 }
+}
+ 	
 
-	var uri = 'http://www.w3.org/1999/xhtml';
-	if( window.getElementsByTagName(o.responseXML,"", uri, 'body')[0] != undefined)
+function showQueryMapping(o)
+{
+	if( o.responseXML.getElementsByTagName( 'ul')[0] != null)
 	{
-		var querymapContainer = window.getElementsByTagName(o.responseXML,"", uri, 'div')[0];	
-		window.querymapContent = querymapContainer;
-		window.activeResult._container.appendChild(querymapContainer);
-    }
+		var queryMappingResult = o.responseXML.getElementsByTagName( 'div')[0];	
+		window.activeResult.container.appendChild(window.importNodes(queryMappingResult, true));
+    	window.queryMappingContent = window.importNodes(queryMappingResult, true);
+    } 
 }	
+
+
+
+ function importNodes(importedNode, deep){
+        var newNode;
+        if(importedNode.nodeType == 1) { // Node.ELEMENT_NODE
+            newNode = document.createElement(importedNode.nodeName);
+            for(var i = 0; i < importedNode.attributes.length; i++){
+                var attr = importedNode.attributes[i];
+                if (attr.nodeValue != null && attr.nodeValue != '') {
+                    newNode.setAttribute(attr.name, attr.nodeValue);
+                    if(attr.name == 'class'){
+                		newNode.className = attr.nodeValue;
+                	}
+                }
+            }
+        } else if(importedNode.nodeType == 3) { // Node.TEXT_NODE
+            newNode = document.createTextNode(importedNode.nodeValue);
+        }
+        
+        if(deep && importedNode.hasChildNodes()){
+            for(var i = 0; i < importedNode.childNodes.length; i++) {
+                newNode.appendChild(
+                    window.importNodes(importedNode.childNodes[i], true)
+                );
+            }
+        }
+        return newNode;
+    }
+
 
 
 function handleFailure(o){
