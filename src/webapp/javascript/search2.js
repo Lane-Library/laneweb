@@ -142,12 +142,13 @@ Result.prototype.show = function() {
             window.spellcheck.setSource(this._type);
             window.activeResult.hide();
             this._tab.className = 'eLibraryTabActive';
+            if(window.queryMappingContent)
+	            this.container.appendChild(window.queryMappingContent);
+	      
            	for (var i = 0; i < this._content.length; i++) {
                 this.container.appendChild(this._content[i]);
             }
-            if(window.queryMappingContent)
-	            this.container.appendChild(window.queryMappingContent);
-	        window.activeResult = this;
+            window.activeResult = this;
         }
      
     } catch(exception) {
@@ -324,17 +325,6 @@ var querymapCallBack =
   //failure:handleFailure	 we don't want see the error message for example if the DTD is not found on the server 
 };
 
-
-function showQuerymap(o)
-{
-	 var resultNodes = o.responseText;
-	 if(resultNodes  && resultNodes.indexOf('li id')>-1)
-	 {
-	 	//window.queryMapContent = resultNodes;
-	 	document.getElementById("queryMapping").className="largeFont";
-	 	document.getElementById("queryMapping").innerHTML =  resultNodes;
-	 }
-}
  	
 
 function showQueryMapping(o)
@@ -342,8 +332,8 @@ function showQueryMapping(o)
 	if( o.responseXML.getElementsByTagName( 'ul')[0] != null)
 	{
 		var queryMappingResult = o.responseXML.getElementsByTagName( 'div')[0];	
-		window.activeResult.container.appendChild(window.importNodes(queryMappingResult, true));
-    	window.queryMappingContent = window.importNodes(queryMappingResult, true);
+		window.queryMappingContent = window.importNodes(queryMappingResult, true);
+		window.activeResult.show();
     } 
 }	
 
