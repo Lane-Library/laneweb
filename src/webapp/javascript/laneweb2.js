@@ -81,9 +81,20 @@ try {
     }
     } catch(exception) { handleException(exception) }
 }
+
+function handleSubmit(e) {
+try {
+    var target = (e.srcElement) ? e.srcElement : e.target;
+    if (target.submit) {
+        target.submit(e);
+    }
+    } catch(exception) { handleException(exception) }
+}
+
 function initializeSearchForm(e) {
 try {
     var searchForm = document.getElementById('searchForm');
+    YAHOO.util.Event.addListener(searchForm, 'submit', handleSubmit);
     var taglines = document.getElementById('taglines');
     var allTagline = document.getElementById('allTagline');
     var searchSelect = document.getElementById('searchSelect');
@@ -99,6 +110,18 @@ try {
         }
         if (taglines) {
         this.homeOption.activate(e);
+        }
+    }
+    searchForm.submit = function(e) {
+        var formTarget = searchSelect.homeOption.value;
+        if( formTarget.match(/^\//) ){
+            formTarget = formTarget.replace(/^\//,'/././');
+            this.action = formTarget;
+        }
+        else if( formTarget.match(/^http/) ){
+            formTarget = formTarget.replace(/\{keywords\}/g,this.keywords.value);
+            window.location = formTarget;
+            YAHOO.util.Event.preventDefault(e);
         }
     }
     //TODO this isn't used in new design:

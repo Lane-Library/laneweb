@@ -853,6 +853,11 @@ function submitSearch() {
     window.location = dest;
 	return false;
   }
+  else if (source.match(/^\//) ){
+    source = source.replace(/^\//,'/././');
+    document[formName].action = source;
+	return true;
+  }
 
   if (searching) {
     alert('a search is already in progress');
