@@ -20,6 +20,8 @@
 	
 	<!-- remove searchFormSelect() script -->
 	<xsl:template match="h:script[contains(.,'searchFormSelect')]"/>
+	
+	<xsl:template match="h:link[contains(@href,'search.css')]"/>
 
 	<xsl:template match="h:td/h:div">
 		<xsl:copy>
