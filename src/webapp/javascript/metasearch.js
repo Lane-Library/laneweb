@@ -3,6 +3,7 @@ var searchId;
 var searchIndicator;
 var searchMode;
 var searchStatus;
+var sourceTemplate;
 
 YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 
@@ -10,18 +11,14 @@ function initializeMetasearch(e)
 {
     try {
 
-    	var jshiddens = YAHOO.util.Dom.getElementsByClassName('jshidden');
-    	for(var z = 0; z<jshiddens.length; z++){
-    	    YAHOO.util.Dom.setStyle(jshiddens[z],'display','none');
-    	}
-
         window.keywords = escape(getMetaContent("LW.keywords"));
         window.searchId = getMetaContent("LW.searchId");
         window.searchMode = getMetaContent("LW.searchMode");
+        window.searchTemplate = getMetaContent("LW.searchTemplate");
 
-        if( (window.keywords && window.keywords != 'undefined') || (window.searchId && window.searchId != 'undefined') )
+        if( (window.searchId && window.searchId != 'undefined') && (window.searchTemplate && window.searchTemplate != 'undefined') )
         {
-        	YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+window.searchId+'&q='+window.keywords, window.metasearchCallback);
+        	YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate, window.metasearchCallback);
     		YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
 
             if(YAHOO.util.Dom.inDocument('searchIndicator')){
@@ -46,7 +43,7 @@ var showMetasearchResults = function(o)
         	window.searchIndicator.setProgress(window.searchStatus,metasearchElements.length,YAHOO.util.Dom.getElementsByClassName('complete').length);
         }
     	if(metasearchElements.length && window.searchStatus != 'successful'){
-    	    setTimeout("YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+"+window.searchId+"+'&r='+"+Math.random()+", window.metasearchCallback);",2000);
+    	    setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate+'&r='+Math.random()+"', window.metasearchCallback);",2000);
     	}
     
     	for(var i = 0; i<searchResources.length; i++){
