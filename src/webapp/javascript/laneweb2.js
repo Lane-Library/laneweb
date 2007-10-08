@@ -83,17 +83,20 @@ try {
 }
 
 function handleSubmit(e) {
-try {
-    var target = (e.srcElement) ? e.srcElement : e.target;
-    if (target.submit) {
-        target.submit(e);
+    try {
+        var target = (e.srcElement) ? e.srcElement : e.target;
+        if (target.submit) {
+            target.submit(e);
+        }
+    } catch(exception) {
+        handleException(exception);
     }
-    } catch(exception) { handleException(exception) }
 }
 
 function initializeSearchForm(e) {
 try {
     var searchForm = document.getElementById('searchForm');
+    searchForm.searchIndicator = document.getElementById('searchIndicator');
     YAHOO.util.Event.addListener(searchForm, 'submit', handleSubmit);
     var taglines = document.getElementById('taglines');
     var allTagline = document.getElementById('allTagline');
@@ -113,6 +116,7 @@ try {
         }
     }
     searchForm.submit = function(e) {
+        this.searchIndicator.style.visibility = 'visible';
         var formTarget = searchSelect.homeOption.value;
         if( formTarget.match(/^http/) ){
             formTarget = formTarget.replace(/\{keywords\}/g,this.keywords.value);
