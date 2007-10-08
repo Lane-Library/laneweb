@@ -114,11 +114,7 @@ try {
     }
     searchForm.submit = function(e) {
         var formTarget = searchSelect.homeOption.value;
-        if( formTarget.match(/^\//) ){
-            formTarget = formTarget.replace(/^\//,'/././');
-            this.action = formTarget;
-        }
-        else if( formTarget.match(/^http/) ){
+        if( formTarget.match(/^http/) ){
             formTarget = formTarget.replace(/\{keywords\}/g,this.keywords.value);
             window.location = formTarget;
             YAHOO.util.Event.preventDefault(e);

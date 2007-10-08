@@ -619,10 +619,10 @@ var _9c="https://stanfordwho.stanford.edu/lookup?search="+_95;
 window.location=_9c;
 return false;
 }else{
-if(_94.match(/^\//)){
-_94=_94.replace(/^\//,"/././");
-document[_93].action=_94;
-return true;
+if(_94.match(/^http/)){
+_9c=_94.replace(/\{keywords\}/g,_95);
+window.location=_9c;
+return false;
 }
 }
 }

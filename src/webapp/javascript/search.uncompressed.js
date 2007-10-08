@@ -853,10 +853,10 @@ function submitSearch() {
     window.location = dest;
 	return false;
   }
-  else if (source.match(/^\//) ){
-    source = source.replace(/^\//,'/././');
-    document[formName].action = source;
-	return true;
+  else if (source.match(/^http/) ){
+    dest = source.replace(/\{keywords\}/g,keywords);
+    window.location = dest;
+	return false;
   }
 
   if (searching) {
