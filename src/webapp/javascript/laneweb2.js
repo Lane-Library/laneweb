@@ -12,6 +12,14 @@ try {
     YAHOO.util.Event.addListener(document, 'click', handleClick);
     initializeSearchForm(e);
     initializeMetaTags(e);
+    if (YAHOO.env.ua.ie) {
+    //TODO figure out why this doesn't work with the activate/deactivate business
+        var otherPortals = document.getElementById('otherPortalOptions');
+        if (otherPortals) {
+            YAHOO.util.Event.addListener(otherPortals, 'mouseover',function(e) {this.className='hover'});
+            YAHOO.util.Event.addListener(otherPortals, 'mouseout',function(e) {this.className=''});
+        }
+    }
     } catch(exception) { handleException(exception);  }
 }
 
