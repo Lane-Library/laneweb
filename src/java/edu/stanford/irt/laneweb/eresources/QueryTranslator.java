@@ -87,12 +87,12 @@ public class QueryTranslator {
 				flag = required;
 				fieldName = "";
 
-				if (theWord.charAt(0) == '+') {
+				if (theWord.charAt(0) == '+' && theWord.length() > 1) {
 					flag = required;
 					theWord = theWord.substring(1);
 				}
 
-				else if (theWord.charAt(0) == '-') {
+				else if (theWord.charAt(0) == '-' && theWord.length() > 1) {
 					flag = notwanted;
 					theWord = theWord.substring(1);
 				}
@@ -211,6 +211,6 @@ public class QueryTranslator {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(new QueryTranslator().translate(" cell"));
+		System.out.println(new QueryTranslator().translate(java.net.URLDecoder.decode("+J.+Thorac.+Cardiovasc.+Surg.%2C+June+1%2C+2004%3B+127%286%29%3A+1858+-+1858.")));
 	}
 }
