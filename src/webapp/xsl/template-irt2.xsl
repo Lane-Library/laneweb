@@ -81,26 +81,6 @@
 			<xsl:apply-templates select="child::node()"/>
 		</xsl:copy>
 	</xsl:template>
-	
-	<xsl:template match="h:div[@id='otherPortalOptions']">
-	    <xsl:copy-of select="child::node()"/>
-<!--		<xsl:copy>
-			<xsl:apply-templates select="attribute::node()"/>
-			<h2 class="bgTab"><a href="#">Other Portals</a></h2>
-			<ul>
-				<xsl:for-each select="descendant::h:option[. != 'Other Portals']">
-					<li>
-						<xsl:choose>
-							<xsl:when test="@disabled"><xsl:value-of select="."/></xsl:when>
-							<xsl:otherwise>
-								<a href="/ceyates{@value}?template=irt2"><xsl:value-of select="."/></a>
-							</xsl:otherwise>
-						</xsl:choose>
-					</li>
-				</xsl:for-each>
-			</ul>
-		</xsl:copy>-->
-	</xsl:template>
 
     <xsl:template match="h:td[@id='mainColumn']/h:div[@class='fMainBox']" priority="1">
         <div class="tabs">
@@ -149,7 +129,7 @@
                 </xsl:choose>
             </xsl:copy>
         </xsl:for-each>
-            <xsl:apply-templates select="child::h:div[@id='otherPortalOptions']/node()"/>
+            <xsl:apply-templates select="child::h:div[@id='otherPortalOptions']"/>
         	</div>
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()" />
