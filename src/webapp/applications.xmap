@@ -25,7 +25,7 @@
 	                <map:serialize type="xml"/>
 	            </map:match>
                 <map:match pattern="search/*">
-	                <map:generate type="search-proxy" src="{defaults:search-url}{1}"/>
+	                <map:generate type="search-proxy" src="{defaults:search-url}/{1}"/>
 	                <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
 	                    <map:parameter name="context" value="{request:contextPath}"/>
 	                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
