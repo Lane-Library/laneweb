@@ -9,20 +9,19 @@
 	"status": "<xsl:value-of select="@status"/>",
 	"query": "<xsl:value-of select="s:query"/>",
 	"spell": "<xsl:value-of select="s:spell"/>",
-	"resources": [
+	"resources": {
 	<xsl:apply-templates select="//s:resource"/>
-	]
+	}
 }
 	</xsl:template>
 
 	<xsl:template match="s:resource">
+			"<xsl:value-of select="@id"/>":
 			{
-				"id": "<xsl:value-of select="@id"/>",
 				"status": "<xsl:value-of select="@status"/>",
 				"url": "<xsl:value-of select="s:url"/>",
 				"hits": "<xsl:value-of select="s:hits"/>"
 			}
 		<xsl:if test="position() != count(//s:resource)">,</xsl:if>
 	</xsl:template>
-
 </xsl:stylesheet>
