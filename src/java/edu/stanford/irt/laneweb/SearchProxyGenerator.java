@@ -44,6 +44,7 @@ public class SearchProxyGenerator extends ServiceableGenerator {
 	    String timeout = request.getParameter("t");
 	    String id = request.getParameter("id");
 	    String[] engines = request.getParameterValues("e");
+	    String[] resources = request.getParameterValues("r");
 	    String wait = request.getParameter("w");
 	    String keywords = request.getParameter("keywords");
 	    if (null == query) {
@@ -52,7 +53,7 @@ public class SearchProxyGenerator extends ServiceableGenerator {
 	    if (null != query) {
 	    	query = URLEncoder.encode(query,"UTF-8");
 	    }
-	    String queryString = buildQuery(query, timeout, id, wait, engines);
+	    String queryString = buildQuery(query, timeout, id, wait, engines, resources);
         Session session = request.getSession(true);
         HttpState httpState = (HttpState) session.getAttribute(HTTPClientSource.HTTP_STATE);
         if (null == httpState) {
@@ -75,7 +76,7 @@ public class SearchProxyGenerator extends ServiceableGenerator {
 		this.parser.parse(inputSource, this.xmlConsumer);
 	}
 	
-	private String buildQuery(String query, String timeout, String id, String wait, String[] engines) {
+	private String buildQuery(String query, String timeout, String id, String wait, String[] engines, String[] resources) {
         boolean needAmp = false;
         StringBuffer sb = new StringBuffer("?");
         if (null != query) {
@@ -102,6 +103,15 @@ public class SearchProxyGenerator extends ServiceableGenerator {
             		sb.append('&');
             	}
         		sb.append("e=").append(engines[i]);
+        		needAmp = true;
+        	}
+        }
+        if (null != resources && resources.length > 0) {
+        	for (int i = 0; i < resources.length; i++) {
+            	if (needAmp) {
+            		sb.append('&');
+            	}
+        		sb.append("r=").append(resources[i]);
         		needAmp = true;
         	}
         }
