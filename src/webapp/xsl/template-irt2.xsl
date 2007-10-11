@@ -119,7 +119,7 @@
                 </xsl:attribute>
                 <xsl:choose>
                     <xsl:when test="$class='bgTab'">
-                        <a href="?loadTab={$id}&amp;template=irt2">
+                        <a href="?loadTab={$id}">
                             <xsl:value-of select="."/>
                         </a>
                     </xsl:when>
