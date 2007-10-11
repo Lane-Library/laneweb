@@ -142,7 +142,7 @@ Result.prototype.show = function() {
             window.spellcheck.setSource(this._type);
             window.activeResult.hide();
             this._tab.className = 'eLibraryTabActive';
-            if(window.queryMapping.getContent())
+            if(window.queryMapping && window.queryMapping.getContent())
 	            this.container.appendChild(window.queryMapping.getContent());
 	      
            	for (var i = 0; i < this._content.length; i++) {
