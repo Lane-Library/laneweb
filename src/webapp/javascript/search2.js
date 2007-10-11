@@ -2,7 +2,7 @@ var keywords;
 var startTime = new Date().getTime();
 var activeResult;
 var spellcheck;
-var queryMappingContent;
+var queryMapping;
 
 YAHOO.util.Event.addListener(window,'load',initSearch);
 
@@ -11,7 +11,7 @@ function initSearch() {
         window.keywords = escape(getMetaContent("LW.keywords"));
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.keywords, window.querymapCallBack);
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q='+window.keywords, window.findItCallBack);
-        YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
+       	YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
        	YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
         var popIn = document.getElementById('popInContent');
@@ -142,8 +142,8 @@ Result.prototype.show = function() {
             window.spellcheck.setSource(this._type);
             window.activeResult.hide();
             this._tab.className = 'eLibraryTabActive';
-            if(window.queryMappingContent)
-	            this.container.appendChild(window.queryMappingContent);
+            if(window.queryMapping.getContent())
+	            this.container.appendChild(window.queryMapping.getContent());
 	      
            	for (var i = 0; i < this._content.length; i++) {
                 this.container.appendChild(this._content[i]);
@@ -332,11 +332,76 @@ function showQueryMapping(o)
 	if( o.responseXML.getElementsByTagName( 'ul')[0] != null)
 	{
 		var queryMappingResult = o.responseXML.getElementsByTagName( 'div')[0];	
-		window.queryMappingContent = window.importNodes(queryMappingResult, true);
+		window.queryMapping = new QueryMapping( importNodes(queryMappingResult, true));
 		window.activeResult.show();
     } 
 }	
 
+
+function QueryMapping(content)
+{
+	this.resourceUrl = "";
+	this._counter = 0;
+	this._content = content;
+    var lis = 	this._content.getElementsByTagName( 'li');
+    for(var i = 0; i < lis.length; i++) {
+    	  lis[i].style.display = 'none';
+    	  this.resourceUrl = this.resourceUrl +"&r="+lis[i].id;
+    }
+    this._callback = {
+        success:this.successfulCallback,
+        failure:handleFailure,
+        argument: {
+            queryMapping:this
+        }
+    }
+   this.sendQueryMappingRequest();
+}	
+
+QueryMapping.prototype.successfulCallback = function(o) {
+    var response = eval("("+o.responseText+")");
+   	var queryMapping = o.argument.queryMapping; 
+   	window.queryMapping.update(response);      	
+    }
+
+QueryMapping.prototype.update = function(response) {
+	this.resourceUrl = "";
+	this._counter++;
+	var lis = 	this._content.getElementsByTagName( 'li');
+    var resourceUrl="";
+    for(var i = 0; i < lis.length; i++) {
+    	var resourceId  = lis[i].id;
+ 	    if(response.resources[resourceId] != null)
+		{
+   			var status = response.resources[resourceId].status;
+			if(status =='successful')
+			{
+				lis[i].style.display= 'block';
+				lis[i].style.visibility = 'visible';
+				var anchor = lis[i].getElementsByTagName('a');
+				anchor[0].href = response.resources[resourceId].url;
+				var span = document.createTextNode(":"+response.resources[resourceId].hits);
+				lis[i].appendChild(span);
+			}
+			else
+			 	this.resourceUrl = this.resourceUrl.concat("&r=").concat(resourceId);
+		}
+	}
+	window.activeResult.show();
+   	if(this._counter <7 && this.resourceUrl != "")
+   		setTimeout( "window.queryMapping.sendQueryMappingRequest()", 10000);
+}
+
+
+QueryMapping.prototype.sendQueryMappingRequest = function() {
+		YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+getMetaContent("LW.searchId")+this.resourceUrl, this._callback);
+    }
+
+
+
+QueryMapping.prototype.getContent = function() {
+       	return  this._content;
+    }
 
 
  function importNodes(importedNode, deep){

@@ -32,10 +32,10 @@ function initializeMetasearch(e)
 
 var showMetasearchResults = function(o)
 {
+var resourceId;
     try {
 	    var searchResponse = eval("("+o.responseText+")");
-        var searchResources = searchResponse.resources;
-    	window.searchStatus = (window.searchStatus == 'successful') ? window.searchStatus : searchResponse.status;
+        window.searchStatus = (window.searchStatus == 'successful') ? window.searchStatus : searchResponse.status;
     	window.searchId = searchResponse.id;
         
     	var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
@@ -43,21 +43,21 @@ var showMetasearchResults = function(o)
         	window.searchIndicator.setProgress(window.searchStatus,metasearchElements.length,YAHOO.util.Dom.getElementsByClassName('complete').length);
         }
     	if(metasearchElements.length && window.searchStatus != 'successful'){
-    	    setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate+'&r='+Math.random()+"', window.metasearchCallback);",2000);
+    	    setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate+'&rd='+Math.random()+"', window.metasearchCallback);",2000);
     	}
-    
-    	for(var i = 0; i<searchResources.length; i++){
-    			for( var z = 0; z<metasearchElements.length; z++){
-    				if( metasearchElements[z].className != 'complete' && metasearchElements[z].getAttribute('id') == searchResources[i].id ) {
-    			        var metasearchResult = new MetasearchResult(metasearchElements[z],searchResources[i]);
-    				}
-    			}
+    	for( var z = 0; z<metasearchElements.length; z++){
+			if( metasearchElements[z].className != 'complete'  ) {
+				resourceId = metasearchElements[z].getAttribute('id');
+				searchResource = searchResponse.resources[resourceId];
+				if(searchResource)  
+					var metasearchResult = new MetasearchResult(metasearchElements[z],searchResource, resourceId);
+			}
     	}
 
-   	} catch(e) { window.handleException(e) }
+   	} catch(e) {  window.handleException(exception) }
 }
 
-function MetasearchResult(metasearchElement,searchResource)
+function MetasearchResult(metasearchElement,searchResource, id)
 {
     if (metasearchElement == null) {
         throw('null metasearchElement');
@@ -66,7 +66,7 @@ function MetasearchResult(metasearchElement,searchResource)
         throw('null searchResource');
     }
 
-    this.id = searchResource.id;
+    this.id = id;
     this.name = (metasearchElement.innerHTML) ? metasearchElement.innerHTML : '';
     this.status = (searchResource.status) ? searchResource.status : 0;
     this.hits = searchResource.hits;
