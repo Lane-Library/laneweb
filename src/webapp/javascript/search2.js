@@ -365,7 +365,7 @@ QueryMapping.prototype.successfulCallback = function(o) {
     }
 
 QueryMapping.prototype.update = function(response) {
-	this.resourceUrl = "";
+  	this.resourceUrl = "";
 	this._counter++;
 	var lis = 	this._content.getElementsByTagName( 'li');
     var resourceUrl="";
@@ -388,8 +388,13 @@ QueryMapping.prototype.update = function(response) {
 		}
 	}
 	window.activeResult.show();
-   	if(this._counter <7 && this.resourceUrl != "")
-   		setTimeout( "window.queryMapping.sendQueryMappingRequest()", 10000);
+   	if(this._counter < 19 && this.resourceUrl != "")
+   	{	
+   	 	var sleepingTime = 2000;
+		if(this._counter > 15 ) //time sleepingtime (2 seconds) * 15 = 30 seconds
+   			sleepingTime = 10000;
+   		setTimeout( "window.queryMapping.sendQueryMappingRequest()", sleepingTime);
+   	}
 }
 
 

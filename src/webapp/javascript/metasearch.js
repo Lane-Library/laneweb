@@ -4,6 +4,7 @@ var searchIndicator;
 var searchMode;
 var searchStatus;
 var sourceTemplate;
+var counter = 0;
 
 YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 
@@ -20,7 +21,6 @@ function initializeMetasearch(e)
         {
         	YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate, window.metasearchCallback);
     		YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
-
             if(YAHOO.util.Dom.inDocument('searchIndicator')){
                 window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
             }
@@ -32,22 +32,25 @@ function initializeMetasearch(e)
 
 var showMetasearchResults = function(o)
 {
-var resourceId;
     try {
+    
 	    var searchResponse = eval("("+o.responseText+")");
         window.searchStatus = (window.searchStatus == 'successful') ? window.searchStatus : searchResponse.status;
     	window.searchId = searchResponse.id;
-        
-    	var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
+		var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
         if(window.searchIndicator){
         	window.searchIndicator.setProgress(window.searchStatus,metasearchElements.length,YAHOO.util.Dom.getElementsByClassName('complete').length);
         }
     	if(metasearchElements.length && window.searchStatus != 'successful'){
-    	    setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate+'&rd='+Math.random()+"', window.metasearchCallback);",2000);
+    		window.counter++;
+    		var sleepingTime = 2000; //2 seconds
+    		if(window.counter > 15) //time sleepingtime (2 seconds) * 15 = 30 seconds
+    			sleepingTime = 10000;// 10 seconds
+    	    setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate+'&rd='+Math.random()+"', window.metasearchCallback);",sleepingTime);
     	}
     	for( var z = 0; z<metasearchElements.length; z++){
 			if( metasearchElements[z].className != 'complete'  ) {
-				resourceId = metasearchElements[z].getAttribute('id');
+				var resourceId = metasearchElements[z].getAttribute('id');
 				searchResource = searchResponse.resources[resourceId];
 				if(searchResource)  
 					var metasearchResult = new MetasearchResult(metasearchElements[z],searchResource, resourceId);
