@@ -34,7 +34,7 @@ public class EresourceSAXTranslator {
 			throw new IllegalArgumentException("null eresource");
 		}
 		handler.startElement(XHTML_NS,DT,DT,EMPTY_ATTS);
-		char[] title = eresource.getTitle().toCharArray();
+		char[] title = null != eresource.getTitle() ? eresource.getTitle().toCharArray() : new char[0];
 		handler.characters(title, 0, title.length);
 		handler.endElement(XHTML_NS, DT, DT);
 		handler.startElement(XHTML_NS, DD, DD, EMPTY_ATTS);
@@ -51,32 +51,32 @@ public class EresourceSAXTranslator {
 			}
 			for (Link link : version.getLinks()) {
 				if (!link.equals(getPasswordLink)) {
-				handler.startElement(XHTML_NS, LI, LI, EMPTY_ATTS);
-				handleAnchor(handler, eresource, version, link, getPasswordLink != null);
-				sb.setLength(0);
-				String instruction = link.getInstruction();
-				if (null != instruction && instruction.length() > 0) {
-					sb.append(' ').append(instruction);
-				}
-				String publisher = version.getPublisher();
-				if (null != publisher && publisher.length() > 0) {
-					sb.append(' ').append(publisher);
-				}
-				if (null != getPasswordLink) {
-					sb.append(' ');
-				}
-				if (sb.length() > 0) {
-					handler.characters(sb.toString().toCharArray(), 0, sb.length());
-				}
-				if (null != getPasswordLink) {
-					AttributesImpl attributes = new AttributesImpl();
-					attributes.addAttribute(XHTML_NS, "href", "href", "CDATA", getPasswordLink.getUrl());
-					handler.startElement(XHTML_NS, A, A, attributes);
-					char[] getPassword = "get password".toCharArray();
-					handler.characters(getPassword, 0, getPassword.length);
-					handler.endElement(XHTML_NS, A, A);
-				}
-				handler.endElement(XHTML_NS, LI, LI);
+					handler.startElement(XHTML_NS, LI, LI, EMPTY_ATTS);
+					handleAnchor(handler, eresource, version, link, getPasswordLink != null);
+					sb.setLength(0);
+					String instruction = link.getInstruction();
+					if (null != instruction && instruction.length() > 0) {
+						sb.append(' ').append(instruction);
+					}
+					String publisher = version.getPublisher();
+					if (null != publisher && publisher.length() > 0) {
+						sb.append(' ').append(publisher);
+					}
+					if (null != getPasswordLink) {
+						sb.append(' ');
+					}
+					if (sb.length() > 0) {
+						handler.characters(sb.toString().toCharArray(), 0, sb.length());
+					}
+					if (null != getPasswordLink) {
+						AttributesImpl attributes = new AttributesImpl();
+						attributes.addAttribute(XHTML_NS, "href", "href", "CDATA", getPasswordLink.getUrl());
+						handler.startElement(XHTML_NS, A, A, attributes);
+						char[] getPassword = "get password".toCharArray();
+						handler.characters(getPassword, 0, getPassword.length);
+						handler.endElement(XHTML_NS, A, A);
+					}
+					handler.endElement(XHTML_NS, LI, LI);
 				}
 			}
 		}
@@ -95,7 +95,8 @@ public class EresourceSAXTranslator {
 		AttributesImpl attributes = new AttributesImpl();
 		String proxyValue = version.isProxy() ? "proxy" : "noproxy";
 		attributes.addAttribute(XHTML_NS, "class", "class", "CDATA", proxyValue);
-		attributes.addAttribute(XHTML_NS, "href", "href", "CDATA", link.getUrl());
+		String url = null != link.getUrl() ? link.getUrl() : "";
+		attributes.addAttribute(XHTML_NS, "href", "href", "CDATA", url);
 		StringBuffer sb = new StringBuffer();
 		sb.append(eresource.getTitle());
 		if (null != version.getPublisher()) {
