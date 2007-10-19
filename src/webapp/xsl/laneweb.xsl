@@ -164,7 +164,7 @@
     </xsl:template>
 
     <!-- make sure there is not an empty <script/> element -->
-    <xsl:template match="h:script[@src]">
+     <xsl:template match="h:script[@src]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[local-name()!='space']"/>
             <xsl:text> </xsl:text>
@@ -354,6 +354,11 @@
             <xsl:apply-templates select="child::node()"/>
             <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
             <xsl:call-template name="meta-data"/>
+            <xsl:if test="$debug='y'">
+				<link href="/javascript/yui/build/logger/assets/skins/sam/logger.css" type="text/css" rel="stylesheet"/>
+				<script src="/javascript/yui/build/logger/logger-min.js" type="text/javascript"><xsl:text> </xsl:text></script>
+   	    	 </xsl:if>
+   	        
         </xsl:copy>
     </xsl:template>
 
@@ -527,7 +532,18 @@
         <xsl:apply-templates select="h:div[h:span=$t]/h:h1"/>
     </xsl:template>
 
+	<xsl:template match="h:form">
+		 <xsl:copy>
+		  <xsl:apply-templates select="attribute::node()|child::node()"/>
+		 <xsl:if test="$debug='y'">
+				<input type="hidden"  name="debug" value="y"/>
+    	 </xsl:if>
+	 	  </xsl:copy>
+    </xsl:template>
+
     <!-- ======================  NAMED TEMPLATES  =========================== -->
+
+    
     <!-- adds parameters to href attributes depending on various parameter states -->
     <xsl:template name="make-link">
         <xsl:param name="link"/>
