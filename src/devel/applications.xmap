@@ -10,7 +10,14 @@
             </map:match>
             <map:match type="wildcard" pattern="search-proxy/json">
                 <map:generate src="cocoon:/search-proxy/search"/>
-                <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/search2json.xsl">
+                        <map:transform type="saxon" src="xsl/search2json.xsl"/>
+                    </map:when>
+                    <map:otherwise>
+		                <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
+                    </map:otherwise>
+                </map:select>
                 <map:serialize type="text"/>
             </map:match>
             <map:match type="wildcard" pattern="search-proxy/xml">
@@ -19,13 +26,26 @@
             </map:match>
             <map:match type="wildcard" pattern="search-proxy/*">
                 <map:generate type="search-proxy" src="{defaults:search-url}/{1}"/>
-                <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
-                    <map:parameter name="context" value="{request:contextPath}"/>
-                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                </map:transform>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/search-proxy.xsl">
+                        <map:transform type="saxon" src="xsl/search-proxy.xsl">
+		                    <map:parameter name="context" value="{request:contextPath}"/>
+		                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+		                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
+		                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+		                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                        </map:transform>
+                    </map:when>
+                    <map:otherwise>
+		                <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
+		                    <map:parameter name="context" value="{request:contextPath}"/>
+		                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+		                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
+		                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+		                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                        </map:transform>
+                    </map:otherwise>
+                </map:select>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="querymap/*">
@@ -47,11 +67,71 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
-            <map:match pattern="spellcheck">
-                <map:generate type="spellcheck">
-                    <map:parameter name="query" value="{request-param:q}"/>
-                </map:generate>
-                <map:serialize type="xml"/>
+            <map:match type="wildcard" pattern="spellcheck/*">
+                <map:match type="wildcard" pattern="spellcheck/xml">
+                    <map:generate type="spellcheck">
+                        <map:parameter name="query" value="{request-param:q}"/>
+                    </map:generate>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match type="wildcard" pattern="spellcheck/json">
+                    <map:generate type="spellcheck">
+                        <map:parameter name="query" value="{request-param:q}"/>
+                    </map:generate>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/spellcheck2json.xsl">
+                            <map:transform type="saxon" src="xsl/spellcheck2json.xsl"/>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform src="context://xsl/spellcheck2json.xsl" type="saxon"/>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="text"/>
+                </map:match>
+            </map:match>
+            <map:match type="wildcard" pattern="sfx/*">
+                <map:match type="wildcard" pattern="sfx/xml">
+                    <map:generate type="html"
+                        src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"/>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/sfx.xsl">
+                            <map:transform type="saxon" src="xsl/sfx.xsl">
+                                <map:parameter name="sfx-request"
+                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
+                                />
+                            </map:transform>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/sfx.xsl">
+                                <map:parameter name="sfx-request"
+                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
+                                />
+                            </map:transform>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match type="wildcard" pattern="sfx/json">
+                    <map:generate type="html"
+                        src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"/>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/sfx2json.xsl">
+                            <map:transform src="xsl/sfx2json.xsl" type="saxon">
+                                <map:parameter name="sfx-request"
+                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
+                                />
+                            </map:transform>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform src="context://xsl/sfx2json.xsl" type="saxon">
+                                <map:parameter name="sfx-request"
+                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
+                                />
+                            </map:transform>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="text"/>
+                </map:match>
             </map:match>
             <map:handle-errors>
                 <map:generate type="exception"/>

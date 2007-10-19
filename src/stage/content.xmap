@@ -45,6 +45,31 @@
                     <map:serialize type="xml" status-code="404"/>
                 </map:match>
             </map:match>
+            <map:match type="wildcard" pattern="search2.html">
+                <map:aggregate element="doc">
+                    <map:part src="{defaults:search-url}/id?q={urlencode:{request-param:keywords}}"/>
+                    <map:part src="cocoon:/eresources/count"/>
+                    <map:part src="{defaults:stage-base}/content/search2.html"/>
+                    <map:part src="cocoon:/search2/{request-param:source}.html"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="context://xsl/search.xsl">
+                    <map:parameter name="keywords" value="{request-param:keywords}"/>
+                    <map:parameter name="source" value="{request-param:source}"/>
+                </map:transform>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="search2/**.html">
+                <map:generate type="file" src="{defaults:stage-base}/content/search2/{1}.html"/>
+                <map:transform type="saxon" src="context://xsl/search.xsl">
+                    <map:parameter name="keywords" value="{request-param:keywords}"/>
+                    <map:parameter name="source" value="{request-param:source}"/>
+                </map:transform>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="template2meta-engines">
                 <map:generate type="file" src="{defaults:stage-base}/resources/templates/search/{request-param:source}.xml"/>
                 <map:transform type="saxon" src="context://xsl/template2meta-engines.xsl">
