@@ -1,17 +1,54 @@
 var searching = false;
 var metaTags = new Object();
 
+
 YAHOO.util.Event.addListener(window,'load',initialize);
+window.onerror = handleMessage;
+    	
+
+function handleMessage( message, url, line)
+{
+	var parameter = "userAgent="+navigator.userAgent+"&message=".concat(message).concat("&url=").concat(url).concat("&line=").concat(line);
+	if(getMetaContent("LW.debug") == "y")
+	{
+		if (url != null)
+			message = message.concat("\nurl --> ").concat(url);
+		if (line != null)
+			message = message.concat("\nline --> ").concat(line);
+		YAHOO.log(message, "error");
+	}
+	else
+		YAHOO.util.Connect.asyncRequest('GET', '/././javascriptLogger?'+parameter);
+		return true;
+}
+
+
+
+
+function handleFailure(o){
+	handleMessage( "Status: "+o.status+ "statusText: "+o.statusText,  o.argument.file, o.argument.line);
+}
+
+
+function log(message)
+{	
+	handleMessage(message);
+}
+
+
 
 function initialize(e) {
-try {
-
-    YAHOO.util.Event.addListener(window, 'unload', finalize);
+	initializeMetaTags(e);
+	if(getMetaContent("LW.debug") == "y")
+	{
+		document.body.className = "yui-skin-sam";	
+		var myLogReader = new YAHOO.widget.LogReader();
+	}
+	YAHOO.util.Event.addListener(window, 'unload', finalize);
     YAHOO.util.Event.addListener(document, 'mouseover', handleMouseOver);
     YAHOO.util.Event.addListener(document, 'mouseout', handleMouseOut);
     YAHOO.util.Event.addListener(document, 'click', handleClick);
     initializeSearchForm(e);
-    initializeMetaTags(e);
     if (YAHOO.env.ua.ie) {
     //TODO figure out why this doesn't work with the activate/deactivate business
         var otherPortals = document.getElementById('otherPortalOptions');
@@ -20,19 +57,13 @@ try {
             YAHOO.util.Event.addListener(otherPortals, 'mouseout',function(e) {this.className=''});
         }
     }
-    } catch(exception) { handleException(exception);  }
 }
 
 function finalize(e) {
 	searching = false;
 }
 
-function handleException(exception) {
-    alert(exception.name + '\n' + exception.message + '\n' + exception.fileName + '\n' + exception.lineNumber + '\n' + exception.stack);
-}
-
 function initializeMetaTags(e){
-try {
 	var metaTagElements = document.getElementsByTagName('meta');
 	for (var i = 0; i < metaTagElements.length; i++) {
 	    var key = metaTagElements[i].getAttribute('name');
@@ -40,46 +71,36 @@ try {
 	    if(key != undefined &&  value != undefined)
 			window.metaTags[key] = value;		
 	}
-    } catch(exception) { handleException(exception) }
 }
 
 function getMetaContent(name)
 {
-try {
 	if(name != undefined)
 		return window.metaTags[name];
-    } catch(exception) { handleException(exception) }
 }
 
 function handleMouseOver(e) {
-try {
     var target = (e.srcElement) ? e.srcElement : e.target;
     if (target.activate) {
         target.activate(e);
     }
-    } catch(exception) { handleException(exception) }
 }
 
 function handleMouseOut(e) {
-try {
     var target = (e.srcElement) ? e.srcElement : e.target;
     if (target.deactivate) {
         target.deactivate(e);
     }
-    } catch(exception) { handleException(exception) }
 }
 
 function handleChange(e) {
-try {
     var target = (e.srcElement) ? e.srcElement : e.target;
     if (target.change) {
         target.change(e);
     }
-    } catch(exception) { handleException(exception) }
 }
 
 function handleClick(e) {
-try {
 	var target = (e.srcElement) ? e.srcElement : e.target;
     while (target != undefined) {
         if (target.clicked) {
@@ -87,22 +108,16 @@ try {
         }
         target = target.parentNode;
     }
-    } catch(exception) { handleException(exception) }
 }
 
 function handleSubmit(e) {
-    try {
         var target = (e.srcElement) ? e.srcElement : e.target;
         if (target.submit) {
             target.submit(e);
         }
-    } catch(exception) {
-        handleException(exception);
-    }
 }
 
 function initializeSearchForm(e) {
-try {
     var searchForm = document.getElementById('searchForm');
     var searchIndicator = document.getElementById('searchIndicator');
     YAHOO.util.Event.addListener(searchForm, 'submit', handleSubmit);
@@ -161,18 +176,15 @@ try {
         this.src=this.src.replace('search_btn_f2.gif','search_btn.gif');
     }
     }
-    } catch(exception) { handleException(exception) }
 }
 
 
 function openNewWindow(url,features) {
-try {
     features = (features) ? features : '';
     var w = window.open(url, 'LaneConnex', features);
     if(window.focus){
         w.focus();
     }
-   } catch(exception) { handleException(exception) }
 }
 
 function email(obfuscatedEmail) {

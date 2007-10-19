@@ -7,10 +7,9 @@ var queryMapping;
 YAHOO.util.Event.addListener(window,'load',initSearch);
 
 function initSearch() {
-    try {
         window.keywords = escape(getMetaContent("LW.keywords"));
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.keywords, window.querymapCallBack);
-        YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q='+window.keywords, window.findItCallBack);
+      	YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q='+window.keywords, window.findItCallBack);
        	YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
        	YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
@@ -49,22 +48,19 @@ function initSearch() {
             }
         }
        	 spellcheck = new Spellcheck(getMetaContent("LW.source"));
-    } catch(e) {
-        window.handleException(e);
-    }
 }
 
 
 
 function Result(type, tab, container) {
     if (null == type) {
-        throw('null type');
+        window.log('Result(): type should not be null');
     }
     if (null == tab) {
-        throw ('null tab');
+        window.log('Result(): tab should not be null');
     }
     if (null == container) {
-        throw ('null container');
+         window.log('Result(): contianer should not be null');
     }
     this._type = type;
     this._tab = tab;
@@ -72,9 +68,11 @@ function Result(type, tab, container) {
     this._url = '/././plain/search2/'+this._type+'.html?source='+this._type+'&keywords=';
     this._callback = {
         success:this.callbackSuccess,
-        failure:handleFailure,
+        failure:window.handleFailure,
         argument: {
-            result:this
+            result:this,
+  			file:"search2.js",
+  			line:"Result"
         }
     }
     this._state = 'initialized';
@@ -82,7 +80,7 @@ function Result(type, tab, container) {
 
 Result.prototype.setContent = function(content) {
     if (null == content) {
-        throw ('null content');
+         window.log('Result.setContent(): content should not  be null');
     }
     if(this._content == null)
     	this._content = content;
@@ -101,9 +99,7 @@ Result.prototype.setContent = function(content) {
 
 
 Result.prototype.callbackSuccess = function(o) {
-    try {
         var result = o.argument.result;
-        
         var bodyNodes = o.responseXML.getElementsByTagName('body')[0].childNodes;
         var content = new Array();
         for (var i = 0; i < bodyNodes.length; i++) {
@@ -111,14 +107,10 @@ Result.prototype.callbackSuccess = function(o) {
         }
         result.setContent(content);
         result.show();
-    } catch(exception) {
-        window.handleException(exception);
-    }
 }
 
 
 Result.prototype.getContent = function() {
-    try {
         if (this._state == 'initialized') {
             this._state = 'searching';
             var request = YAHOO.util.Connect.asyncRequest('GET', this._url+window.keywords, this._callback);
@@ -127,13 +119,9 @@ Result.prototype.getContent = function() {
         } else if (this._state == 'searching') {
             alert('search in progress');
         }
-    } catch(exception) {
-        window.handleException(exception);
-    }
 }
 
 Result.prototype.show = function() {
-    try {
         if (this._state == 'initialized') {
             this.getContent();
         } else if (this._state == 'searching') {
@@ -144,40 +132,28 @@ Result.prototype.show = function() {
             this._tab.className = 'eLibraryTabActive';
             if(window.queryMapping && window.queryMapping.getContent())
 	            this.container.appendChild(window.queryMapping.getContent());
-	      
-           	for (var i = 0; i < this._content.length; i++) {
-                this.container.appendChild(this._content[i]);
+	       	for (var i = 0; i < this._content.length; i++) {
+           		this.container.appendChild(this._content[i]);
             }
             window.activeResult = this;
         }
-     
-    } catch(exception) {
-        window.handleException(exception);
-    }
 }
 
 
 Result.prototype.hide = function() {
-    try {
-        while(this.container.childNodes.length > 0) {
-            this.container.removeChild(this.container.lastChild);
-        }
-        this._tab.className = 'eLibraryTab';
-    } catch(exception) {
-        window.handleException(exception);
-    }
+      while(this.container.childNodes.length > 0) {
+          this.container.removeChild(this.container.lastChild);
+      }
+      this._tab.className = 'eLibraryTab';
 }
 
 
 
 Result.prototype.setTabCount = function(count) {
-    try {
-        var hitCount = this._tab.getElementsByTagName('span')[0];
-        hitCount.textContent = count;
-        hitCount.style.visibility = 'visible';
-    } catch(exception) {
-        window.handleException(exception);
-    }
+    var hitCount = this._tab.getElementsByTagName('span')[0];
+    hitCount.textContent = count;
+    hitCount.style.visibility = 'visible';
+  
 }
 
 
@@ -186,143 +162,125 @@ Result.prototype.setTabCount = function(count) {
 var showHitsCallback =
 {
   success:showHits,
-  failure:handleFailure
+  failure:handleFailure,
+   argument:{file:"search2.js", line:"showHitsCallback"} 
 };
 
 
 function showHits(o) {
-	try 
-	{
-		var response = eval("("+o.responseText+")");
-		for (var j = 0; j < response.results.tabs.length; j++)
-		 {
-			 var tabName = response.results.tabs[j].resource;
-			 var tab = document.getElementById(tabName+"Tab")
-			 if ( tab != undefined) 
-				{
-					var hitSpan = tab.getElementsByTagName('span')[0];
-					var hits = response.results.tabs[j].hits;
-					if(hitSpan != null && hits != "")
-						hitSpan.innerHTML = hits;   
-					var linkValue = response.results.tabs[j].url;
-					if(linkValue != null && tab.getElementsByTagName('a')[0] != undefined)
-						tab.getElementsByTagName('a')[0].href = linkValue;
-					hitSpan.style.visibility = 'visible';
-				}
-		}
-		var sleepingTime = 2000;
-		var remainingTime = (new Date().getTime())-startTime;
-		var status = response.results.status;
-		if(status != 'successful' && ( remainingTime < 60*1000))
-		{	// if time superior at 20 seconds the sleeping time equals 10 seconds 
-			if(remainingTime > 20 *1000)
-				sleepingTime = 10000;
-			setTimeout( "getTabResult()", sleepingTime);
-		}
-	} catch (e) { window.handleException(e) }
+	var response = eval("("+o.responseText+")");
+	for (var j = 0; j < response.results.tabs.length; j++)
+	 {
+		 var tabName = response.results.tabs[j].resource;
+		 var tab = document.getElementById(tabName+"Tab")
+		 if ( tab != undefined) 
+			{
+				var hitSpan = tab.getElementsByTagName('span')[0];
+				var hits = response.results.tabs[j].hits;
+				if(hitSpan != null && hits != "")
+					hitSpan.innerHTML = hits;   
+				var linkValue = response.results.tabs[j].url;
+				if(linkValue != null && tab.getElementsByTagName('a')[0] != undefined)
+					tab.getElementsByTagName('a')[0].href = linkValue;
+				hitSpan.style.visibility = 'visible';
+			}
+	}
+	var sleepingTime = 2000;
+	var remainingTime = (new Date().getTime())-startTime;
+	var status = response.results.status;
+	if(status != 'successful' && ( remainingTime < 60*1000))
+	{	// if time superior at 20 seconds the sleeping time equals 10 seconds 
+		if(remainingTime > 20 *1000)
+			sleepingTime = 10000;
+		setTimeout( "getTabResult()", sleepingTime);
+	}
 }
 
 function getTabResult()
 {
-
-try {
-	  YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
-
-    } catch(exception) { window.handleException(exception) }
+  YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
 }
 
 
 var findItCallBack =
 {
   success:showFindIt,
-  failure:handleFailure	
+  failure:handleFailure ,
+  argument:{file:"search2.js", line:"findItCallBack"}	
 };
 
 
 function showFindIt(o)
 {
-	try {
-		var findIt = eval("("+o.responseText+")");
-		if (findIt.result != '')
-		{
-				var findItLink = document.getElementById("findItLink");
-				findItLink.href = findIt.openurl;
-				findItLink.innerHTML = findIt.result;
-				var findItContainer = document.getElementById('findIt');
-				findItContainer.style.display= 'inline';
-				findItContainer.style.visibility = 'visible';
-	    }
-	
-   	} catch(exception) { window.handleException(exception) }
+	var findIt = eval("("+o.responseText+")");
+	if (findIt.result != '')
+	{
+		var findItLink = document.getElementById("findItLink");
+		findItLink.href = findIt.openurl;
+		findItLink.innerHTML = findIt.result;
+		var findItContainer = document.getElementById('findIt');
+		findItContainer.style.display= 'inline';
+		findItContainer.style.visibility = 'visible';
+    }
 }
 
 var spellCheckCallBack =
 {
-  success:showSpellCheck//,
-  //failure:do nothing iof google spellcheck is done we dosn't want a alert windows 
+  success:showSpellCheck,
+  failure:handleFailure,
+  argument:{file:"search2.js", line:"spellCheckCallBack"} 
 };
 
 function showSpellCheck(o)
 {
-	try {
-	    var spellCheckResponse = eval("("+o.responseText+")");
-	    if (spellCheckResponse.suggestion) {
-			var spellCheckContainer = document.getElementById("spellCheck");
-			var spellCheckLink = document.getElementById("spellCheckLink");
-			spellCheckContainer.style.display= 'inline';
-			spellCheckContainer.style.visibility= 'visible';
-		    window.spellcheck.setSuggestion(spellCheckResponse.suggestion, spellCheckLink);
-		}
-	
-   	} catch(exception) { window.handleException(exception) }
+    var spellCheckResponse = eval("("+o.responseText+")");
+    if (spellCheckResponse.suggestion) {
+		var spellCheckContainer = document.getElementById("spellCheck");
+		var spellCheckLink = document.getElementById("spellCheckLink");
+		spellCheckContainer.style.display= 'inline';
+		spellCheckContainer.style.visibility= 'visible';
+	    window.spellcheck.setSuggestion(spellCheckResponse.suggestion, spellCheckLink);
+	}
 }
 
 function Spellcheck(currentTab)
 {
-	try {
-		if(currentTab != undefined)
-			this.source = currentTab;
-	
-	} catch(exception) { window.handleException(exception) }
+	if(currentTab != undefined)
+		this.source = currentTab;
 }
 
 Spellcheck.prototype.setSuggestion = function(suggestion, link)
 {
-	try {
-		if (suggestion == null)
-			throw('suggestion is null'); 
-		this.suggestion = suggestion;
-		link.innerHTML = suggestion;
-		link.clicked = function(event)
-		{
-			return window.spellcheck.onclick(event, this);
-		}	   	
-    } catch(exception) { window.handleException(exception) }
+	if (suggestion == null)
+		window.log('Spellcheck.setSuggestion(): suggestion should not be null'); 
+	this.suggestion = suggestion;
+	link.innerHTML = suggestion;
+	link.clicked = function(event)
+	{
+		return window.spellcheck.onclick(event, this);
+	}
 }
 
 Spellcheck.prototype.onclick = function(event, link)
 {
-	try {
-			link.href = '/search2.html?keywords='+this.suggestion+'&source='+this.source;
-	    } catch(exception) { window.handleException(exception) }
-	   return false;
+	link.href = '/search2.html?keywords='+this.suggestion+'&source='+this.source;
+   	return false;
 }
 
 
 Spellcheck.prototype.setSource = function(source)
 {
-	try {
-	    if (source != undefined)
-			this.source = source;
-    } catch(exception) { window.handleException(exception) }
+    if (source != undefined)
+		this.source = source;
 }
 
 
 
 var querymapCallBack =
 {
-  success:showQueryMapping//,
-  //failure:handleFailure	 we don't want see the error message for example if the DTD is not found on the server 
+  success:showQueryMapping,
+  failure:handleFailure,
+  argument:{file:"search2.js", line:"queryMapping"}
 };
 
  	
@@ -350,9 +308,11 @@ function QueryMapping(content)
     }
     this._callback = {
         success:this.successfulCallback,
-        failure:handleFailure,
+        failure:window.handleFailure,
         argument: {
-            queryMapping:this
+            queryMapping:this,
+			file:"search2.js",
+  			line:"QueryMapping()"
         }
     }
    this.sendQueryMappingRequest();
@@ -399,7 +359,7 @@ QueryMapping.prototype.update = function(response) {
 
 
 QueryMapping.prototype.sendQueryMappingRequest = function() {
-		YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+getMetaContent("LW.searchId")+this.resourceUrl, this._callback);
+		YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+getMetaContent("LW.searchId")+"1"+this.resourceUrl, this._callback);
     }
 
 
@@ -437,7 +397,3 @@ QueryMapping.prototype.getContent = function() {
     }
 
 
-
-function handleFailure(o){
-	alert("status: "+o.status+ '\n' +"statusText "+o.statusText  );	
-}
