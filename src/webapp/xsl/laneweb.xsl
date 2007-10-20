@@ -355,8 +355,9 @@
             <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
             <xsl:call-template name="meta-data"/>
             <xsl:if test="$debug='y'">
-				<link href="/javascript/yui/build/logger/assets/skins/sam/logger.css" type="text/css" rel="stylesheet"/>
+  				<link href="/javascript/yui/build/logger/assets/skins/sam/logger.css" type="text/css" rel="stylesheet"/>
 				<script src="/javascript/yui/build/logger/logger-min.js" type="text/javascript"><xsl:text> </xsl:text></script>
+	       	    <script src="/javascript/yui/build/dragdrop/dragdrop-min.js" type="text/javascript"><xsl:text> </xsl:text></script>
    	    	 </xsl:if>
    	        
         </xsl:copy>
