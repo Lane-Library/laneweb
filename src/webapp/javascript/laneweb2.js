@@ -139,12 +139,20 @@ function initializeSearchForm(e) {
         }
     }
     searchForm.submit = function(e) {
-        searchIndicator.style.visibility = 'visible';
-        var formTarget = searchSelect.homeOption.value;
-        if( formTarget.match(/^http/) ){
-            formTarget = formTarget.replace(/\{keywords\}/g,this.keywords.value);
-            window.location = formTarget;
-            YAHOO.util.Event.preventDefault(e);
+	    if(this.keywords.value == '')
+	    {
+	    	alert('Please enter one or more search terms.');
+	    	YAHOO.util.Event.stopEvent(e);
+	    }
+	    else
+	    {    
+	    	searchIndicator.style.visibility = 'visible';
+	        var formTarget = searchSelect.homeOption.value;
+	        if( formTarget.match(/^http/) ){
+	            formTarget = formTarget.replace(/\{keywords\}/g,this.keywords.value);
+	            window.location = formTarget;
+	            YAHOO.util.Event.preventDefault(e);
+	        }
         }
     }
     //TODO this isn't used in new design:
