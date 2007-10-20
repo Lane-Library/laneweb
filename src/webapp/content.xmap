@@ -63,6 +63,7 @@
 	                    <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
 	                    <map:part src="cocoon:/search2/{request-param:source}.html"/>
 	                </map:aggregate>
+                    <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/metasearch.xsl">
                         <map:parameter name="query-string" value="{request:queryString}"/>
                     </map:transform>
@@ -74,6 +75,7 @@
 	                    <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
 	                    <map:part src="{defaults:live-base}/content{request-param:source}"/>
 	                </map:aggregate>
+                    <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/metasearch.xsl">
                         <map:parameter name="query-string" value="{request:queryString}"/>
                     </map:transform>
