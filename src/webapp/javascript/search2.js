@@ -10,7 +10,7 @@ function initSearch() {
         window.keywords = escape(getMetaContent("LW.keywords"));
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.keywords, window.querymapCallBack);
       	YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q='+window.keywords, window.findItCallBack);
-       	YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
+       	YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack );
        	YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
         var popIn = document.getElementById('popInContent');
@@ -359,7 +359,7 @@ QueryMapping.prototype.update = function(response) {
 
 
 QueryMapping.prototype.sendQueryMappingRequest = function() {
-		YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+getMetaContent("LW.searchId")+"1"+this.resourceUrl, this._callback);
+		YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+getMetaContent("LW.searchId")+this.resourceUrl, this._callback);
     }
 
 
