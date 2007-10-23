@@ -1,7 +1,6 @@
 YAHOO.util.Event.addListener(window,'load',initializeTooltips);
 
 function initializeTooltips(e){
-try {
     var tooltipEls = YAHOO.util.Dom.getElementsByClassName('tooltips');
 
     if(tooltipEls){
@@ -17,5 +16,4 @@ try {
             }
         }
     }
-   } catch(exception) { handleException(exception) }    
 }
