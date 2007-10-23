@@ -39,11 +39,7 @@ function log(message)
 
 function initialize(e) {
 	initializeMetaTags(e);
-	if(getMetaContent("LW.debug") == "y")
-	{
-		document.body.className = "yui-skin-sam";	
-		var myLogReader = new YAHOO.widget.LogReader();
-	}
+	initializeLogger();
 	YAHOO.util.Event.addListener(window, 'unload', finalize);
     YAHOO.util.Event.addListener(document, 'mouseover', handleMouseOver);
     YAHOO.util.Event.addListener(document, 'mouseout', handleMouseOut);
@@ -57,6 +53,28 @@ function initialize(e) {
             YAHOO.util.Event.addListener(otherPortals, 'mouseout',function(e) {this.className=''});
         }
     }
+}
+
+
+function initializeLogger()
+{
+	if(getMetaContent("LW.debug") == "y")
+	{
+		document.body.className = "yui-skin-sam";	
+		var myLogReader = new YAHOO.widget.LogReader();
+		var logMessage = "context ==> "+context;
+		logMessage = logMessage.concat("\nquery_string ==> "+query_string); 
+		logMessage = logMessage.concat("\nrequest_uri ==> "+request_uri);
+		logMessage = logMessage.concat("\nhref ==> "+href);
+		logMessage = logMessage.concat("\nticket ==> "+ticket);
+		logMessage = logMessage.concat("\nsunetid ==> "+sunetid);
+		logMessage = logMessage.concat("\nproxy_links ==> "+proxy_links);
+		logMessage = logMessage.concat("\naffiliation ==> "+affiliation);
+		logMessage = logMessage.concat("\nsearch_form_select ==> "+search_form_select);
+		logMessage = logMessage.concat("\nsource ==> "+source);
+		logMessage = logMessage.concat("\nkeywords ==> "+keywords+"\n");
+		YAHOO.log(logMessage , "info");
+	}
 }
 
 function finalize(e) {

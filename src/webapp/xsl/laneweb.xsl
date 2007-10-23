@@ -358,7 +358,20 @@
   				<link href="/javascript/yui/build/logger/assets/skins/sam/logger.css" type="text/css" rel="stylesheet"/>
 				<script src="/javascript/yui/build/logger/logger-min.js" type="text/javascript"><xsl:text> </xsl:text></script>
 	       	    <script src="/javascript/yui/build/dragdrop/dragdrop-min.js" type="text/javascript"><xsl:text> </xsl:text></script>
-   	    	 </xsl:if>
+	            	<script type="text/javascript">
+	           	    	<xsl:text>var context="</xsl:text><xsl:value-of select="$context"/><xsl:text>";</xsl:text>
+		                <xsl:text>var request_uri="</xsl:text><xsl:value-of select="$request-uri"/><xsl:text>";</xsl:text>
+	                    <xsl:text>var query_string="</xsl:text><xsl:value-of select="$query-string"/><xsl:text>";</xsl:text>
+	                    <xsl:text>var href="</xsl:text><xsl:value-of select="concat($context,'/',$request-uri,'?',$query-string)"/><xsl:text>";</xsl:text>
+	                    <xsl:text>var ticket="</xsl:text><xsl:value-of select="$ticket"/><xsl:text>";</xsl:text>
+	                    <xsl:text>var sunetid="</xsl:text><xsl:value-of select="$sunetid"/><xsl:text>";</xsl:text>
+	                    <xsl:text>var proxy_links="</xsl:text><xsl:value-of select="$proxy-links"/><xsl:text>";</xsl:text>
+	                    <xsl:text>var affiliation="</xsl:text><xsl:value-of select="$affiliation"/><xsl:text>";</xsl:text>
+	                    <xsl:text>var search_form_select="</xsl:text><xsl:value-of select="$search-form-select"/><xsl:text>";</xsl:text>
+	                    <xsl:text>var source="</xsl:text><xsl:value-of select="$source"/><xsl:text>";</xsl:text>
+	                    <xsl:text>var keywords="</xsl:text><xsl:value-of select="$keywords"/><xsl:text>";</xsl:text>
+	                </script>
+	       	 </xsl:if>
    	        
         </xsl:copy>
     </xsl:template>
@@ -452,7 +465,7 @@
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
     <!-- puts in the current document's content (not any more) (well ok, need backwards compatibility for now )-->
     <xsl:template match="h:div[@id='lw_content']">
-        <xsl:call-template name="content"/>
+        <xsl:apply-templates select="$source-doc/h:body/node()"/>
     </xsl:template>
 
     <xsl:template match="h:a[@class='lw_toggleProxyOn']">
@@ -539,7 +552,10 @@
 		 <xsl:if test="$debug='y'">
 				<input type="hidden"  name="debug" value="y"/>
     	 </xsl:if>
-	 	  </xsl:copy>
+    	<xsl:if test="not($template-is-default)">
+				<input type="hidden"  name="template" value="{$response-template}"/>
+    	</xsl:if>
+    	</xsl:copy>
     </xsl:template>
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
@@ -592,28 +608,6 @@
     </xsl:template>
 
     <!-- the content -->
-    <xsl:template name="content">
-        <xsl:apply-templates select="$source-doc/h:body/node()"/>
-        <xsl:if test="$debug='y'">
-            <div id="debug">
-                <h3 style="padding:0;margin:0 0 1em 0">debugging information</h3>
-                <ul>
-                    <li>context=<xsl:value-of select="$context"/></li>
-                    <li>request-uri=<xsl:value-of select="$request-uri"/></li>
-                    <li>query-string=<xsl:value-of select="$query-string"/></li>
-                    <li>href=<xsl:value-of
-                            select="concat($context,'/',$request-uri,'?',$query-string)"/></li>
-                    <li>ticket=<xsl:value-of select="$ticket"/></li>
-                    <li>sunetid=<xsl:value-of select="$sunetid"/></li>
-                    <li>proxy-links=<xsl:value-of select="$proxy-links"/></li>
-                    <li>affiliation=<xsl:value-of select="$affiliation"/></li>
-                    <li>search-form-select=<xsl:value-of select="$search-form-select"/></li>
-                    <li>source=<xsl:value-of select="$source"/></li>
-                    <li>keywords=<xsl:value-of select="$keywords"/></li>
-                </ul>
-            </div>
-        </xsl:if>
-    </xsl:template>
 
     <xsl:template name="meta-data">
         <xsl:if test="$keywords">
