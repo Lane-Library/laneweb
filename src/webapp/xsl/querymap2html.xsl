@@ -48,6 +48,10 @@
         </xsl:if>
     </xsl:template>
     
+    <xsl:template match="h:span[@class='lw_keywords']">
+        <xsl:value-of select="/lw:laneweb/qm:query-map/qm:query"/>
+    </xsl:template>
+    
     <xsl:template match="h:span[@class='lw_descriptor']">
         <xsl:value-of select="/lw:laneweb/qm:query-map/qm:resource-map/qm:descriptor"/>
     </xsl:template>
