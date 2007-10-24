@@ -1,6 +1,7 @@
 User-agent: *
 Crawl-delay: 7
 Disallow: /search.html
+Disallow: /search2.html
 Disallow: /stage/
 Disallow: /lohara/
 Disallow: /ceyates/
