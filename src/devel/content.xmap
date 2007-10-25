@@ -85,48 +85,114 @@
                 </map:match>
             </map:match>
             <map:match type="wildcard" pattern="search2.html">
-                <map:select type="resource-exists">
-                    <map:when test="content/search2.html">
-                        <map:aggregate element="doc">
-                            <map:part src="{defaults:search-url}/id?q={urlencode:{request-param:keywords}}"/>
-                            <map:part src="cocoon:/eresources/count"/>
-                            <map:part src="content/search2.html"/>
-                            <map:part src="cocoon:/search2/{request-param:source}.html"/>
-                        </map:aggregate>
-                    </map:when>
-                    <map:otherwise>
-                        <map:aggregate element="doc">
-                            <map:part src="{defaults:search-url}/id?q={urlencode:{request-param:keywords}}"/>
-                            <map:part src="cocoon:/eresources/count"/>
-                            <map:part src="{defaults:live-base}/content/search2.html"/>
-                            <map:part src="cocoon:/search2/{request-param:source}.html"/>
-                        </map:aggregate>
-                    </map:otherwise>
-                </map:select>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/search.xsl">
-                        <map:transform type="saxon" src="xsl/search.xsl">
-                            <map:parameter name="keywords" value="{request-param:keywords}"/>
-                            <map:parameter name="source" value="{request-param:source}"/>
-                        </map:transform>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/search.xsl">
-                            <map:parameter name="keywords" value="{request-param:keywords}"/>
-                            <map:parameter name="source" value="{request-param:source}"/>
-                        </map:transform>
-                    </map:otherwise>
-                </map:select>
-                <map:transform type="xinclude"/>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/search-post.xsl">
-                        <map:transform type="saxon" src="xsl/search-post.xsl"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="xml"/>
+                <map:match type="regex-parameter" pattern="^(clinical|peds|research|pharmacy|history|test)$">
+                    <map:parameter name="parameter-name" value="source"/>
+                    <map:select type="resource-exists">
+                        <map:when test="content/search2/{request-param:source}.html">
+                            <map:aggregate element="doc">
+                                <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="content/search2/{request-param:source}.html"/>
+                            </map:aggregate>
+                        </map:when>
+                        <map:otherwise>
+                            <map:aggregate element="doc">
+                                <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon:/search2/{request-param:source}.html"/>
+                            </map:aggregate>
+                        </map:otherwise>
+                    </map:select>
+                    <map:transform type="xinclude"/>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/metasearch.xsl">
+                            <map:transform type="saxon" src="xsl/metasearch.xsl">
+                                <map:parameter name="query-string" value="{request:queryString}"/>
+                            </map:transform>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/metasearch.xsl">
+                                <map:parameter name="query-string" value="{request:queryString}"/>
+                            </map:transform>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match type="regex-parameter" pattern="^\/.+\.html$">
+                    <map:parameter name="parameter-name" value="source"/>
+                    <map:select type="resource-exists">
+                        <map:when test="content{request-param:source}">
+                            <map:aggregate element="doc">
+                                <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="content{request-param:source}"/>
+                            </map:aggregate>
+                        </map:when>
+                        <map:otherwise>
+                            <map:aggregate element="doc">
+                                <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="{defaults:live-base}/content{request-param:source}"/>
+                            </map:aggregate>
+                        </map:otherwise>
+                    </map:select>
+                    <map:transform type="xinclude"/>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/metasearch.xsl">
+                            <map:transform type="saxon" src="xsl/metasearch.xsl">
+                                <map:parameter name="query-string" value="{request:queryString}"/>
+                            </map:transform>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/metasearch.xsl">
+                                <map:parameter name="query-string" value="{request:queryString}"/>
+                            </map:transform>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match type="regex-parameter" pattern="^.+$">
+                    <map:parameter name="parameter-name" value="keywords"/>
+                    <map:parameter name="parameter-name" value="source"/>
+                    <map:select type="resource-exists">
+                        <map:when test="content/search2.html">
+                            <map:aggregate element="doc">
+                                <map:part src="{defaults:search-url}/id?q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon:/eresources/count"/>
+                                <map:part src="content/search2.html"/>
+                                <map:part src="cocoon:/search2/{request-param:source}.html"/>
+                            </map:aggregate>
+                        </map:when>
+                        <map:otherwise>
+                            <map:aggregate element="doc">
+                                <map:part src="{defaults:search-url}/id?q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon:/eresources/count"/>
+                                <map:part src="{defaults:live-base}/content/search2.html"/>
+                                <map:part src="cocoon:/search2/{request-param:source}.html"/>
+                            </map:aggregate>
+                        </map:otherwise>
+                    </map:select>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/search.xsl">
+                            <map:transform type="saxon" src="xsl/search.xsl">
+                                <map:parameter name="keywords" value="{request-param:keywords}"/>
+                                <map:parameter name="source" value="{request-param:source}"/>
+                            </map:transform>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/search.xsl">
+                                <map:parameter name="keywords" value="{request-param:keywords}"/>
+                                <map:parameter name="source" value="{request-param:source}"/>
+                            </map:transform>
+                        </map:otherwise>
+                    </map:select>
+                    <map:transform type="xinclude"/>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/search-post.xsl">
+                            <map:transform type="saxon" src="xsl/search-post.xsl"/>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
             </map:match>
             <map:match type="wildcard" pattern="search2/**.html">
                 <map:select type="resource-exists">

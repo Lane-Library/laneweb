@@ -5,48 +5,70 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="search/*">
-                <map:generate type="search-proxy" src="{defaults:search-url}/{1}"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="search-proxy/json">
-                <map:generate src="cocoon:/search-proxy/search"/>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/search2json.xsl">
-                        <map:transform type="saxon" src="xsl/search2json.xsl"/>
-                    </map:when>
-                    <map:otherwise>
-		                <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="text"/>
-            </map:match>
-            <map:match type="wildcard" pattern="search-proxy/xml">
-                <map:generate src="cocoon:/search-proxy/search"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match type="wildcard" pattern="search-proxy/*">
-                <map:generate type="search-proxy" src="{defaults:search-url}/{1}"/>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/search-proxy.xsl">
-                        <map:transform type="saxon" src="xsl/search-proxy.xsl">
-		                    <map:parameter name="context" value="{request:contextPath}"/>
-		                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-		                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
-		                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-		                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                        </map:transform>
-                    </map:when>
-                    <map:otherwise>
-		                <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
-		                    <map:parameter name="context" value="{request:contextPath}"/>
-		                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-		                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
-		                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-		                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                        </map:transform>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="xml"/>
+                <map:match type="wildcard" pattern="search/json">
+                    <map:generate src="cocoon:/search/search"/>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/search2json.xsl">
+                            <map:transform type="saxon" src="xsl/search2json.xsl"/>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="text"/>
+                </map:match>
+                <map:match type="wildcard" pattern="search/filtered-json">
+                    <map:parameter name="parameter-name" value="source"/>
+                    <map:aggregate element="doc">
+                        <map:part src="cocoon://apps/search/search"/>
+                        <map:part src="cocoon://plain/{request-param:source}"/>
+                    </map:aggregate>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/content2search.xsl">
+                            <map:transform type="saxon" src="xsl/content2search.xsl"/>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/content2search.xsl"/>
+                        </map:otherwise>
+                    </map:select>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/search2json.xsl">
+                            <map:transform type="saxon" src="xsl/search2json.xsl"/>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="text"/>
+                </map:match>
+                <map:match type="wildcard" pattern="search/xml">
+                    <map:generate src="cocoon:/search/search"/>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match pattern="search/*">
+                    <map:generate type="search-proxy" src="{defaults:search-url}/{1}"/>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/search-proxy.xsl">
+                            <map:transform type="saxon" src="xsl/search-proxy.xsl">
+                                <map:parameter name="context" value="{request:contextPath}"/>
+                                <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                                <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                                <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                                <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                            </map:transform>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
+                                <map:parameter name="context" value="{request:contextPath}"/>
+                                <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                                <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                                <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                                <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                            </map:transform>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
             </map:match>
             <map:match pattern="querymap/*">
                 <map:match pattern="querymap/map">
