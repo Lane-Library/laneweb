@@ -8,7 +8,7 @@
                 <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="search-proxy">
-                <map:generate type="search-proxy" src="{defaults:search-url}search"/>
+                <map:generate type="search-proxy" src="{defaults:search-url}/search"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-proxy.xsl">
                         <map:transform type="saxon" src="xsl/search-proxy.xsl">
