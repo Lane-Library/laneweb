@@ -139,7 +139,7 @@
                 </map:select>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search.xsl">
-                        <map:transform type="xsltc" src="xsl/search.xsl">
+                        <map:transform type="saxon" src="xsl/search.xsl">
                             <map:parameter name="keywords" value="{request-param:keywords}"/>
                             <map:parameter name="source" value="{request-param:source}"/>
                         </map:transform>
