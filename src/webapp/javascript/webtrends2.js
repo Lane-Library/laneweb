@@ -1,4 +1,3 @@
-var gTimeZone = -8;
 // ****************    Add by IRT  		**********************//
 
 
@@ -118,7 +117,7 @@ function dcsAdv(){
 	dcsFunc("dcsET");
 	dcsFunc("dcsAdSearch");
 }
-
+var gTimeZone = -8;
 var gImages=new Array;
 var gIndex=0;
 var DCS=new Object();
@@ -127,7 +126,8 @@ var DCSext=new Object();
 var gQP=new Array();
 
 var gDomain="irt-sdc.stanford.edu";
-var gDcsId="dcssi6l0t1000004z9mg95sop_9v3k";
+//var gDcsId="dcssi6l0t1000004z9mg95sop_9v3k"; comment out for testing
+var gDcsId="dcshtma7610000ww2x7rkqe2x_5o2r";
 
 function dcsMultiTrack() {
     for (var i=0;i<arguments.length;i++) {
