@@ -6,14 +6,11 @@ YAHOO.util.Event.addListener(document, 'click', handleClicks);
 
 
 function handleClicks(e) {
-try {
 		var target = (e.srcElement) ? e.srcElement : e.target;
 	    webtrendsProcess(target);
-    } catch(exception) { handleException(exception) }
 }
 
 function webtrendsProcess(node){
-	try{
 		var title;
 		var host;
 		if(node.hostname != undefined)
@@ -52,7 +49,7 @@ function webtrendsProcess(node){
 					href = href.substring(0,href.indexOf('/'));
 				}	
 				title = getWebtrendsTitle(node);	
-				alert('DCS.dcssip:'+ href +'\nDCS.dcsuri:'+uri + '\nDCS.dcsquery:' +query  +'\nWT.ti:'+title +'\nDCSext.keywords:'+getMetaContent('LW.keywords')+'\nDCSext.search_type:'+getMetaContent('LW.source')+'\nDCSext.offsite_link:1');
+				//alert('DCS.dcssip:'+ href +'\nDCS.dcsuri:'+uri + '\nDCS.dcsquery:' +query  +'\nWT.ti:'+title +'\nDCSext.keywords:'+getMetaContent('LW.keywords')+'\nDCSext.search_type:'+getMetaContent('LW.source')+'\nDCSext.offsite_link:1');
 			 	if(getMetaContent('LW.keywords') != undefined)
 			 	{
 			 		if(query != undefined )
@@ -77,15 +74,12 @@ function webtrendsProcess(node){
 		{
 			title = getWebtrendsTitle(node);
 			uri =  node.pathname;	
-			alert('\nDCS.dcsuri:'+uri + '\nWT.ti: '+title +'\nDCSext.keywords: '+getMetaContent('LW.keywords')+'\nDCSext.search_type: '+getMetaContent('LW.source'));
+			//alert('\nDCS.dcsuri:'+uri + '\nWT.ti: '+title +'\nDCSext.keywords: '+getMetaContent('LW.keywords')+'\nDCSext.search_type: '+getMetaContent('LW.source'));
 			if(getMetaContent('LW.keywords') != undefined)
 				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'));
 			else
 				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title);
 		}
-			
-		
-	} catch(exception) { handleException(exception) }
 } 
 
 
