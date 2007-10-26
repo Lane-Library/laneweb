@@ -26,6 +26,8 @@
                 logger="sitemap.generation.eresource-subset" pool-max="32"/>
             <map:generator name="eresources-mesh" src="edu.stanford.irt.laneweb.eresources.EresourcesMeshGenerator"
                 logger="sitemap.generation.eresource-mesh" pool-max="32"/>
+            <map:generator name="eresources-core" src="edu.stanford.irt.laneweb.eresources.EresourcesCoreGenerator"
+                logger="sitemap.generation.eresource-core" pool-max="32"/>
             <map:generator name="history" src="edu.stanford.irt.laneweb.eresources.HistoryQueryGenerator"
                 logger="sitemap.generation.history" pool-max="32"/>
             <map:generator name="status" logger="sitemap.generator.status"
