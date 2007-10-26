@@ -372,7 +372,6 @@
 	                    <xsl:text>var keywords="</xsl:text><xsl:value-of select="$keywords"/><xsl:text>";</xsl:text>
 	                </script>
 	       	 </xsl:if>
-   	        
         </xsl:copy>
     </xsl:template>
 
@@ -460,6 +459,13 @@
                 </xsl:choose>
             </xsl:attribute>
         </xsl:copy>
+    </xsl:template>
+    
+    <!-- substitute the affiliation in the meta element -->
+    <xsl:template match="h:meta/@content[.='{affiliation}']">
+        <xsl:attribute name="content">
+            <xsl:value-of select="$affiliation"/>
+        </xsl:attribute>
     </xsl:template>
 
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
