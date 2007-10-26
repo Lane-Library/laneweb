@@ -465,7 +465,7 @@
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
     <!-- puts in the current document's content (not any more) (well ok, need backwards compatibility for now )-->
     <xsl:template match="h:div[@id='lw_content']">
-        <xsl:apply-templates select="$source-doc/h:body/node()"/>
+        <xsl:call-template name="content"/>
     </xsl:template>
 
     <xsl:template match="h:a[@class='lw_toggleProxyOn']">
@@ -608,6 +608,9 @@
     </xsl:template>
 
     <!-- the content -->
+    <xsl:template name="content">
+        <xsl:apply-templates select="$source-doc/h:body/node()"/>
+    </xsl:template>
 
     <xsl:template name="meta-data">
         <xsl:if test="$keywords">
