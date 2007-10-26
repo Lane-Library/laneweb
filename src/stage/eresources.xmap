@@ -16,6 +16,10 @@
                 <map:generate type="eresources-subset"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="mesh">
+                <map:generate type="eresources-mesh"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="erdb">
                 <map:generate type="eresource"/>
                 <map:transform type="sql">
