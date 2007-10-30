@@ -547,9 +547,9 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- chose which text to display for a history search result -->
+    <!-- choose which text to display for a history search result -->
     <xsl:template match="h:div[@id='lw_history-headings']">
-        <xsl:apply-templates select="h:div[h:span=$t]/h:h1"/>
+        <xsl:apply-templates select="h:div[h:span=$t]/h:h2"/>
     </xsl:template>
 
 	<xsl:template match="h:form">
