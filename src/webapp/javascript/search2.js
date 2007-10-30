@@ -301,9 +301,10 @@ function QueryMapping(content)
 	this.resourceUrl = "";
 	this._counter = 0;
 	this._content = content;
+    new YAHOO.widget.Tooltip(YAHOO.util.Dom.generateId(), { context:'qmTip', width:'170px', text:'text' } )
     var lis = 	this._content.getElementsByTagName( 'li');
     for(var i = 0; i < lis.length; i++) {
-    	  lis[i].style.display = 'none';
+    	  //lis[i].style.display = 'none';
     	  this.resourceUrl = this.resourceUrl +"&r="+lis[i].id;
     }
     this._callback = {
@@ -333,14 +334,13 @@ QueryMapping.prototype.update = function(response) {
     	var resourceId  = lis[i].id;
  	    if(response.resources[resourceId] != null)
 		{
+			var anchor = lis[i].getElementsByTagName('a');
+			anchor[0].href = response.resources[resourceId].url;
+			anchor[0].title = 'QueryMapping: ' + anchor[0].innerHTML;
    			var status = response.resources[resourceId].status;
 			if(status =='successful')
 			{
-				lis[i].style.display= 'block';
-				lis[i].style.visibility = 'visible';
-				var anchor = lis[i].getElementsByTagName('a');
-				anchor[0].href = response.resources[resourceId].url;
-				var span = document.createTextNode(":"+response.resources[resourceId].hits);
+				var span = document.createTextNode(": "+response.resources[resourceId].hits);
 				lis[i].appendChild(span);
 			}
 			else
