@@ -22,12 +22,6 @@
 	<xsl:template match="h:script[contains(.,'searchFormSelect')]"/>
 	
 	<xsl:template match="h:link[contains(@href,'search.css')]"/>
-
-	<!--<xsl:template match="h:td/h:div">
-		<xsl:copy>
-			<xsl:apply-templates select="child::node()"/>
-		</xsl:copy>
-	</xsl:template>-->
 	
 	<xsl:template match="h:td[@id='mainColumn']/h:div[@class='aGeneralBox' or (@class='eMainBox' and not(h:h2))]" priority="1">
 		<xsl:copy>
