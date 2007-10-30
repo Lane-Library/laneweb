@@ -83,9 +83,13 @@ MetasearchResult.prototype.setContent = function(metasearchElement)
             case "original":
                 if( this.status && this.status != 'running' ) {
                 	metasearchElement.setAttribute('href',this.href);
+                    // fix for IE7 (@ in text of element will cause element text to be replaced by href value
+                    // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
+                    if (YAHOO.env.ua.ie){
+                    	metasearchElement.innerHTML = this.name;
+                    }
                 	metasearchElement.setAttribute('target','_blank');
                     metasearchElement.className = 'complete';
-    
                     var resultSpan = document.createElement('span');
                     resultSpan.innerHTML = ': ' + this.hits;
                     metasearchElement.parentNode.appendChild(resultSpan);
@@ -105,6 +109,11 @@ MetasearchResult.prototype.setContent = function(metasearchElement)
             default:  // merged 
                 if( this.status == 'successful') {
                 	metasearchElement.setAttribute('href',this.href);
+                    // fix for IE7 (@ in text of element will cause element text to be replaced by href value
+                    // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
+                    if (YAHOO.env.ua.ie){
+                    	metasearchElement.innerHTML = this.name;
+                    }
                 	metasearchElement.setAttribute('target','_blank');
             
                 	var resultSpan = document.createElement('span');
