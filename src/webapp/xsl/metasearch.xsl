@@ -83,7 +83,7 @@
     </xsl:template>
     
     <!-- assuming every metasearch element is nested in a parent element that should be hidden by default -->
-    <xsl:template match="node()[child::node()[position() = 1 and attribute::class = 'metasearch']]">
+    <xsl:template match="node()[child::node()[attribute::class = 'metasearch']]">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:if test="$searchMode = 'original' and not(contains($query-string,'javascript=false'))">
