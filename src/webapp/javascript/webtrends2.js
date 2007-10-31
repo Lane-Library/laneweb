@@ -12,6 +12,7 @@ function handleClicks(e) {
 function webtrendsProcess(node){
 		var title;
 		var host;
+		var affiliation = getMetaContent('WT.seg_1');
 		if(node.hostname != undefined)
 		{
 			host = node.hostname;
@@ -52,16 +53,16 @@ function webtrendsProcess(node){
 			 	if(getMetaContent('LW.keywords') != undefined)
 			 	{
 			 		if(query != undefined )
-						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1');
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1','WT.seg_1',affiliation);
 					else	
-						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1');
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1','WT.seg_1',affiliation);
 				}
 				else
 				{
 					if(query != undefined )
-						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.offsite_link','1');
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.offsite_link','1','WT.seg_1',affiliation);
 					else	
-						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'WT.ti',title,'DCSext.offsite_link','1');
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'WT.ti',title,'DCSext.offsite_link','1','WT.seg_1',affiliation);
 			 	}
 			 }
 		}
@@ -75,9 +76,9 @@ function webtrendsProcess(node){
 			uri =  node.pathname;	
 			//alert('\nDCS.dcsuri:'+uri + '\nWT.ti: '+title +'\nDCSext.keywords: '+getMetaContent('LW.keywords')+'\nDCSext.search_type: '+getMetaContent('LW.source'));
 			if(getMetaContent('LW.keywords') != undefined)
-				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'));
+				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'WT.seg_1',affiliation);
 			else
-				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title);
+				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'WT.seg_1',affiliation);
 		}
 } 
 
