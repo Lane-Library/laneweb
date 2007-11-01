@@ -40,7 +40,7 @@
 
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
-    <xsl:variable name="default-template" select="'default'"/>
+    <xsl:variable name="default-template" select="'irt2'"/>
     <!-- the requested template -->
     <xsl:variable name="request-template" select="$template"/>
     <!-- the template that will be used in the response -->
@@ -553,7 +553,7 @@
         <xsl:apply-templates select="h:div[h:span=$t]/h:h2"/>
     </xsl:template>
 
-	<xsl:template match="h:form">
+	<xsl:template match="h:form[attribute::id='searchForm']">
 		 <xsl:copy>
 		  <xsl:apply-templates select="attribute::node()|child::node()"/>
 		 <xsl:if test="$debug='y'">
