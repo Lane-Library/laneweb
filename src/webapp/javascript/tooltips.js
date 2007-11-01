@@ -10,7 +10,15 @@ function initializeTooltips(e){
                 if(tooltips[i].nodeType == 1){
                     var contextId = tooltips[i].id.replace(/Tooltip$/,'');
                     if(contextId.length && YAHOO.util.Dom.inDocument(contextId)){
-                        new YAHOO.widget.Tooltip(YAHOO.util.Dom.generateId(), { context:contextId, width:'25%', text:document.getElementById(tooltips[i].id).innerHTML } );
+                        new YAHOO.widget.Tooltip(
+                                YAHOO.util.Dom.generateId(), 
+                                {
+                                    context:contextId,
+                                    width:'25%',
+                                    autodismissdelay:30000,
+                                    text:tooltips[i].innerHTML
+                                }
+                            );
                     }
                 }
             }
