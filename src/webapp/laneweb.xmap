@@ -145,23 +145,14 @@
                 <map:mount uri-prefix="ryanmax" check-reload="yes"
                     src="file:/afs/ir/users/r/y/ryanmax/laneweb/laneweb.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="tpod/**">
-                <map:mount uri-prefix="tpod" check-reload="yes" src="file:/afs/ir/users/t/p/tpod/laneweb/laneweb.xmap"/>
-            </map:match>
             <map:match type="wildcard" pattern="alainb/**">
                 <map:mount uri-prefix="alainb" check-reload="yes" src="file:/afs/ir/users/a/l/alainb/laneweb/laneweb.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="olgary/**">
                 <map:mount uri-prefix="olgary" check-reload="yes" src="file:/afs/ir/users/o/l/olgary/laneweb/laneweb.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="lmurdock/**">
-                <map:mount uri-prefix="lmurdock" check-reload="yes" src="file:/afs/ir/users/l/m/lmurdock/laneweb/laneweb.xmap"/>
-            </map:match>
             <map:match type="wildcard" pattern="rzwies/**">
                 <map:mount uri-prefix="rzwies" check-reload="yes" src="file:/afs/ir/users/r/z/rzwies/laneweb/laneweb.xmap"/>
-            </map:match>
-            <map:match type="wildcard" pattern="lohara/**">
-                <map:mount uri-prefix="lohara" check-reload="yes" src="file:/afs/ir/users/l/o/lohara/laneweb/laneweb.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="javascript/yui/**">
                 <map:mount uri-prefix="javascript/yui" check-reload="no" src="yui.xmap"/>
@@ -179,13 +170,13 @@
                 <map:read type="resource" src="robots.txt" mime-type="text/plain"/>
             </map:match>
             <map:match type="wildcard" pattern="eresources/**">
-                <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
+                <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="content/**">
-                <map:mount uri-prefix="content" check-reload="yes" src="content.xmap"/>
+                <map:mount uri-prefix="content" check-reload="no" src="content.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="apps/**">
-                <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
+                <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="admin/status">
                 <map:generate type="status"/>
@@ -313,10 +304,8 @@
                 <map:redirect-to uri="{1}/index.html"/>
             </map:match>
             <map:handle-errors>
-                <map:generate type="exception"/>
-                <map:serialize type="xml"/>
-<!--                <map:generate src="cocoon:/error.html"/>
-                <map:serialize type="xhtml" status-code="404"/>-->
+                <map:generate src="cocoon:/error.html"/>
+                <map:serialize type="xhtml" status-code="404"/>
             </map:handle-errors>
         </map:pipeline>
     </map:pipelines>
