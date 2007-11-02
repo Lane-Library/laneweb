@@ -126,9 +126,8 @@ var WT=new Object();
 var DCSext=new Object();
 var gQP=new Array();
 
-//var gDomain="irt-sdc.stanford.edu";
+var gDomain="irt-sdc.stanford.edu";
 //var gDcsId="dcssi6l0t1000004z9mg95sop_9v3k"; comment out for testing
-var gDomain="med.stanford.edu";
 var gDcsId="dcs1j77p500000gket1ohc74a_9n2w";
 
 function dcsMultiTrack() {
