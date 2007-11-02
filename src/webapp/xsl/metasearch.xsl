@@ -31,7 +31,7 @@
             <xsl:choose>
                 <!-- when source isn't an html file, assume source is one of the old metasearch templates and complete path -->
                 <xsl:when test="not(ends-with($source,'.html'))">
-                    <meta name="LW.searchTemplate" content="/search2/{$source}.html"/>
+                    <meta name="LW.searchTemplate" content="/search/{$source}.html"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <meta name="LW.searchTemplate" content="{$source}"/>
@@ -51,7 +51,7 @@
             <xsl:if test="/doc/s:search/@status != 'successful'">
                 <noscript>
                     <h2>
-                        Search still running ... <a href="search2.html?javascript=false&amp;source={$source}&amp;id={$searchId}&amp;keywords={$keywords}">Click to see more hit counts</a>
+                        Search still running ... <a href="search.html?javascript=false&amp;source={$source}&amp;id={$searchId}&amp;keywords={$keywords}">Click to see more hit counts</a>
                     </h2>
                 </noscript>
             </xsl:if>

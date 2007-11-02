@@ -18,50 +18,12 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="search.html">
-                <map:match type="regex-parameter" pattern="^(clinical|peds|research|pharmacy|history|test)$">
-                    <map:parameter name="parameter-name" value="source"/>
-                    <map:aggregate element="aggregate">
-                        <map:part src="cocoon:/search-proxy"/>
-                        <map:part src="cocoon:/templates/search/{request-param:source}.xml"/>
-                    </map:aggregate>
-                    <map:transform type="saxon" src="context://xsl/ajax-search.xsl"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match type="regex-parameter" pattern="^\/.+\.html$">
-                    <map:parameter name="parameter-name" value="source"/>
-	                <map:aggregate element="doc">
-	                    <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
-	                    <map:part src="{defaults:live-base}/content{request-param:source}"/>
-	                </map:aggregate>
-                    <map:transform type="saxon" src="context://xsl/metasearch.xsl">
-                        <map:parameter name="query-string" value="{request:queryString}"/>
-                    </map:transform>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match type="regex-parameter" pattern="^.+$">
-                    <map:parameter name="parameter-name" value="keywords"/>
-                    <map:aggregate element="aggregate">
-                        <map:part src="{defaults:live-base}/content/search.html"/>
-                        <map:part src="cocoon:/template2meta-engines?source=clinical"/>
-                        <map:part src="cocoon:/template2meta-engines?source=peds"/>
-                        <map:part src="cocoon:/template2meta-engines?source=research"/>
-                    </map:aggregate>
-                    <map:transform type="saxon" src="context://xsl/elibrary-search.xsl"/>
-                    <map:transform type="xinclude"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match type="wildcard" pattern="search2.html">
-                    <map:generate type="html" src="{defaults:live-base}/error.html"/>
-                    <map:serialize type="xml" status-code="404"/>
-                </map:match>
-            </map:match>
-            <map:match type="wildcard" pattern="search2.html">
+            <map:match type="wildcard" pattern="search.html">
                 <map:match type="regex-parameter" pattern="^(clinical|peds|research|pharmacy|history|test)$">
                     <map:parameter name="parameter-name" value="source"/>
 	                <map:aggregate element="doc">
 	                    <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
-	                    <map:part src="cocoon:/search2/{request-param:source}.html"/>
+	                    <map:part src="cocoon:/search/{request-param:source}.html"/>
 	                </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/metasearch.xsl">
@@ -87,8 +49,8 @@
 	                <map:aggregate element="doc">
 	                    <map:part src="{defaults:search-url}/id?q={urlencode:{request-param:keywords}}"/>
 	                    <map:part src="cocoon:/eresources/count"/>
-	                    <map:part src="{defaults:live-base}/content/search2.html"/>
-	                    <map:part src="cocoon:/search2/{request-param:source}.html"/>
+	                    <map:part src="{defaults:live-base}/content/search.html"/>
+	                    <map:part src="cocoon:/search/{request-param:source}.html"/>
 	                </map:aggregate>
 	                <map:transform type="saxon" src="context://xsl/search.xsl">
 	                    <map:parameter name="keywords" value="{request-param:keywords}"/>
@@ -99,8 +61,8 @@
 	                <map:serialize type="xml"/>
                 </map:match>
             </map:match>
-            <map:match type="wildcard" pattern="search2/**.html">
-                <map:generate type="file" src="{defaults:live-base}/content/search2/{1}.html"/>
+            <map:match type="wildcard" pattern="search/**.html">
+                <map:generate type="file" src="{defaults:live-base}/content/search/{1}.html"/>
                 <map:transform type="saxon" src="context://xsl/search.xsl">
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
                     <map:parameter name="source" value="{request-param:source}"/>

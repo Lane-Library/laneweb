@@ -11,7 +11,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.w3c.tidy.TidyXMLReader;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -48,7 +47,7 @@ public class TidyXMLReaderTest extends TestCase {
 //					throws TransformerException {
 //				exception.printStackTrace();
 //			}});
-//		transformer.transform(new SAXSource(reader,new InputSource(new FileInputStream("/Users/ceyates/Documents/workspace/laneweb-content/content/search2.html"))), new StreamResult(System.out));
+//		transformer.transform(new SAXSource(reader,new InputSource(new FileInputStream("/Users/ceyates/Documents/workspace/laneweb-content/content/search.html"))), new StreamResult(System.out));
 	}
 
 }

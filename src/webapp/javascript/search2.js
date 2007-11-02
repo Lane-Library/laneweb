@@ -65,7 +65,7 @@ function Result(type, tab, container) {
     this._type = type;
     this._tab = tab;
     this.container = container;
-    this._url = '/././plain/search2/'+this._type+'.html?source='+this._type+'&keywords=';
+    this._url = '/././plain/search/'+this._type+'.html?source='+this._type+'&keywords=';
     this._callback = {
         success:this.callbackSuccess,
         failure:window.handleFailure,
@@ -263,7 +263,7 @@ Spellcheck.prototype.setSuggestion = function(suggestion, link)
 
 Spellcheck.prototype.onclick = function(event, link)
 {
-	link.href = '/search2.html?keywords='+this.suggestion+'&source='+this.source;
+	link.href = '/search.html?keywords='+this.suggestion+'&source='+this.source;
    	return false;
 }
 
