@@ -105,7 +105,7 @@ function getWebtrendsTitle(node)
 			title = title.substring(0,title.indexOf('<'));
 	}		
 	if(title == null || title == '')
-		title = 'unknow';
+		title = 'unknown';
 	return title					
 }
 
