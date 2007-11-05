@@ -123,10 +123,10 @@
             </map:match>
             <map:match type="wildcard" pattern="search-templates.xml">
                 <map:aggregate element="search-templates" ns="http://lane.stanford.edu/search-templates/ns">
-                    <map:part src="cocoon:/search/clinical.html"/>
-                    <map:part src="cocoon:/search/peds.html"/>
-                    <map:part src="cocoon:/search/research.html"/>
-                    <map:part src="cocoon:/search/history.html"/>
+                    <map:part src="cocoon:/templates/search/clinical.xml"/>
+                    <map:part src="cocoon:/templates/search/peds.xml"/>
+                    <map:part src="cocoon:/templates/search/research.xml"/>
+                    <map:part src="cocoon:/templates/search/history.xml"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
