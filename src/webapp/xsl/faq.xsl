@@ -47,7 +47,7 @@
                 <xsl:variable name="root-category-string" select="$category-map/h:div[h:span=$root-category]/h:span[2]"/>
                 <table>
                     <tr>
-                        <td id="leftColumn">
+                        <td id="leftColumn" class="sideColumn">
                             <xsl:choose>
                                 <xsl:when test="string-length($root-category-string) = 0">
                                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -127,7 +127,7 @@
         </xsl:variable>
         <table>
             <tr>
-                <td id="leftColumn">
+                <td id="leftColumn" class="sideColumn">
                     <xsl:choose>
                         <xsl:when test="string-length($root-category-string) = 0">
                             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
@@ -153,7 +153,7 @@
                     </p>
                 </td>
                 
-                <td id="rightColumn">
+                <td id="rightColumn" class="sideColumn">
                     <div class="bSideBox">
                         <h2>FAQs on this topic</h2>
                         <xsl:variable name="cat" select="h:ul/h:li[@class='primaryCategory']"/>
