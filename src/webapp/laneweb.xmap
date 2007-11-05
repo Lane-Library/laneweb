@@ -70,15 +70,6 @@
                 <encoding>UTF-8</encoding>
                 <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
             </map:serializer>
-            <map:serializer name="noprolog" mime-type="text/html" logger="sitemap.serializer.xhtml"
-                src="org.apache.cocoon.serialization.XMLSerializer" pool-max="32">
-                <doctype-public>-//W3C//DTD XHTML 1.0 Transitional//EN</doctype-public>
-                <doctype-system>http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd</doctype-system>
-                <encoding>UTF-8</encoding>
-                <indent>no</indent>
-                <omit-xml-declaration>yes</omit-xml-declaration>
-                <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
-            </map:serializer>
             <map:serializer name="text" mime-type="text/plain" logger="sitemap.serializer.text"
                 src="org.apache.cocoon.serialization.TextSerializer" pool-max="32"/>
         </map:serializers>
@@ -255,6 +246,7 @@
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
+                    <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -275,26 +267,9 @@
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
+                    <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                 </map:transform>
-                <map:select type="resource-exists">
-                    <map:when test="context://xsl/template-{chain:template}.xsl">
-                        <map:transform type="saxon" src="context://xsl/template-{chain:template}.xsl">
-                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                        </map:transform>
-                    </map:when>
-                </map:select> 
-                <map:select type="simple">
-                    <map:parameter name="value" value="{chain:template}"/>
-                    <map:when test="100years">
-                        <map:serialize type="noprolog"/>
-                    </map:when>
-                    <map:when test="100years_index">
-                        <map:serialize type="noprolog"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:serialize type="xhtml"/>
-                    </map:otherwise>
-                </map:select>
+                <map:serialize type="xhtml"/>
             </map:match>
             <map:match type="wildcard" pattern="**.xml">
                 <map:generate type="file" src="{defaults:live-base}/content/{1}.xml"/>

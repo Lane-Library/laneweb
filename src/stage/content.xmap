@@ -71,13 +71,6 @@
                 <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="template2meta-engines">
-                <map:generate type="file" src="{defaults:stage-base}/resources/templates/search/{request-param:source}.xml"/>
-                <map:transform type="saxon" src="context://xsl/template2meta-engines.xsl">
-                    <map:parameter name="source" value="{request-param:source}"/>
-                </map:transform>
-                <map:serialize type="text"/>
-            </map:match>
             <map:match type="wildcard" pattern="search-tab-results">
                 <map:aggregate element="search-tab-results" ns="http://lane.stanford.edu/search-tab-results/ns">
                     <map:part src="cocoon:/search-proxy"/>  

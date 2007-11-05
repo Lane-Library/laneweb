@@ -10,7 +10,8 @@
             <map:match type="wildcard" pattern="javascript/yui/**">
                 <map:mount uri-prefix="javascript/yui" check-reload="no" src="context://yui.xmap"/>
             </map:match>
-            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv|avi|zip)$">
+            <map:match type="regex"
+                pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv|avi|zip)$">
                 <map:mount uri-prefix="" check-reload="yes" src="static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="eresources/**">
@@ -28,7 +29,8 @@
                         <map:generate type="file" src="content/cookiesFetch.html"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="{defaults:live-base}/content/cookiesFetch.html"/>
+                        <map:generate type="file"
+                            src="{defaults:live-base}/content/cookiesFetch.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:select type="resource-exists">
@@ -54,20 +56,22 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
                         <map:transform type="saxon" src="xsl/laneweb.xsl">
-                       	   	<map:parameter name="host" value="{request:serverName}"/>
+                            <map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                            <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
+                            <map:parameter name="context"
+                                value="{request:contextPath}/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
                             <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
                             <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                             <map:parameter name="keywords" value="{request-param:keywords}"/>
+                            <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                 		   	<map:parameter name="host" value="{request:serverName}"/>
+                            <map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
@@ -76,6 +80,7 @@
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                             <map:parameter name="keywords" value="{request-param:keywords}"/>
+                            <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>
@@ -91,7 +96,7 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
                         <map:transform type="saxon" src="xsl/laneweb.xsl">
-                       	   	<map:parameter name="host" value="{request:serverName}"/>
+                            <map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
@@ -99,11 +104,13 @@
                             <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                            <map:parameter name="keywords" value="{request-param:keywords}"/>
+                            <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                        	<map:parameter name="host" value="{request:serverName}"/>
+                            <map:parameter name="host" value="{request:serverName}"/>
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="{request:contextPath}/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
@@ -111,46 +118,23 @@
                             <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                            <map:parameter name="keywords" value="{request-param:keywords}"/>
+                            <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="**.xml">
                 <map:select type="resource-exists">
-                    <map:when test="xsl/template-{chain:template}.xsl">
-                        <map:transform type="saxon"
-                            src="xsl/template-{chain:template}.xsl">
-                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                        </map:transform>
-                    </map:when> 
-                    <map:when test="context://xsl/template-{chain:template}.xsl">
-                        <map:transform type="saxon"
-                            src="context://xsl/template-{chain:template}.xsl">
-                            <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                        </map:transform>
-                    </map:when> 
-                </map:select>
-                <map:select type="simple">
-                    <map:parameter name="parameter-selector-test" value="{chain:template}"/>
-                    <map:when test="100years">
-                        <map:serialize type="noprolog"/>
-                    </map:when>
-                    <map:when test="100years_index">
-                        <map:serialize type="noprolog"/>
+                    <map:when test="content/{1}.xml">
+                        <map:generate type="file" src="content/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:serialize type="xhtml"/>
+                        <map:generate type="file" src="{defaults:live-base}/content/{1}.xml"/>
                     </map:otherwise>
                 </map:select>
-                <map:match type="wildcard" pattern="**.xml">
-                    <map:select type="resource-exists">
-                        <map:when test="content/{1}.xml">
-                            <map:generate type="file" src="content/{1}.xml"/>
-                        </map:when>
-                        <map:otherwise>
-                            <map:generate type="file" src="{defaults:live-base}/content/{1}.xml"/>
-                        </map:otherwise>
-                    </map:select>
-                    <map:serialize type="xml"/>
-                </map:match>
+                <map:serialize type="xml"/>
             </map:match>
             <map:handle-errors>
                 <map:generate type="exception"/>

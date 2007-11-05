@@ -37,6 +37,9 @@
 
     <!-- value of the 't' parameter -->
     <xsl:param name="t"/>
+    
+    <!-- loadTab parameter -->
+    <xsl:param name="loadTab"/>
 
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
@@ -468,6 +471,113 @@
             <xsl:value-of select="$affiliation"/>
         </xsl:attribute>
     </xsl:template>
+    
+    <!-- even/odd tr classes for striped table -->
+    <xsl:template match="h:tr[parent::h:table[@class='striped']]">
+        <xsl:copy>
+            <xsl:copy-of select="attribute::node()"/>
+            <xsl:if test="not(attribute::class)">
+                <xsl:attribute name="class">
+                    <xsl:choose>
+                        <xsl:when test="position() mod 2 = 0">even</xsl:when>
+                        <xsl:otherwise>odd</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- add class="labled" where appropriate -->
+    <xsl:template match="h:p[preceding-sibling::h:h3]
+        |h:ul[preceding-sibling::h:h3]
+        |h:form[preceding-sibling::h:h3]
+        |h:ol[preceding-sibling::h:h3]
+        |h:td[@id='mainColumn']/h:p[preceding-sibling::h:h2]
+        |h:td[@id='mainColumn']/h:ul[preceding-sibling::h:h2]
+        |h:td[@id='mainColumn']/h:ol[preceding-sibling::h:h2]">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:if test="not(@class)">
+                <xsl:attribute name="class">labled</xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- create the tabbed box markup -->
+    <xsl:template match="h:div[@class='fMainBox']">
+        <div class="tabs">
+            <xsl:for-each select="h:h2">
+                <xsl:copy>
+                    <xsl:variable name="id">
+                        <xsl:choose>
+                            <xsl:when test="@id">
+                                <xsl:value-of select="@id"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="concat('tab', position())"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:variable name="class">
+                        <xsl:choose>
+                            <xsl:when test="$loadTab != '' and $loadTab = $id">activeTab</xsl:when>
+                            <xsl:when test="$loadTab = '' and contains(@class, 'activeTab')"
+                                >activeTab</xsl:when>
+                            <xsl:otherwise>
+                                <xsl:choose>
+                                    <xsl:when
+                                        test="$loadTab = '' and not(../h:h2[contains(@class, 'activeTab')]) and position()=1"
+                                        >activeTab</xsl:when>
+                                    <xsl:otherwise>bgTab</xsl:otherwise>
+                                </xsl:choose>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <xsl:attribute name="id">
+                        <xsl:value-of select="$id"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="class">
+                        <xsl:value-of select="$class"/>
+                    </xsl:attribute>
+                    <xsl:choose>
+                        <xsl:when test="$class='bgTab'">
+                            <a href="?loadTab={$id}">
+                                <xsl:value-of select="."/>
+                            </a>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="."/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:copy>
+            </xsl:for-each>
+            <xsl:apply-templates select="child::h:div[@id='otherPortalOptions']"/>
+        </div>
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()" />
+            <xsl:for-each select="h:h2">
+                <xsl:variable name="stop-point">
+                    <xsl:value-of select="last() - position()"/>
+                </xsl:variable>
+                <xsl:variable name="id">
+                    <xsl:choose>
+                        <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="concat('tab', position())"/></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <xsl:if test="(count(parent::h:div/h:h2) = 1)
+                    or ($loadTab != '' and $loadTab = $id) 
+                    or ($loadTab = '' and @class = 'activeTab') 
+                    or ($loadTab = '' and not(../h:h2[@class = 'activeTab']) and position()!=1)">
+                    <xsl:apply-templates select="following-sibling::node()[not(@id='otherPortalOptions') and count(following-sibling::h:h2) = $stop-point]"/>
+                </xsl:if>
+                
+            </xsl:for-each>
+        </xsl:copy>
+    </xsl:template>
+    
 
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
     <!-- puts in the current document's content (not any more) (well ok, need backwards compatibility for now )-->

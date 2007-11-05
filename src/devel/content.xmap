@@ -175,7 +175,7 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="template2meta-engines">
+            <map:match pattern="search-tab-results">
                 <map:select type="resource-exists">
                     <map:when test="resources/templates/search/{request-param:source}.xml">
                         <map:generate type="file" src="resources/templates/search/{request-param:source}.xml"/>
