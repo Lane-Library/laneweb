@@ -45,7 +45,6 @@
                 </map:match>
                 <map:match type="regex-parameter" pattern="^.+$">
                     <map:parameter name="parameter-name" value="keywords"/>
-                    <map:parameter name="parameter-name" value="source"/>
 	                <map:aggregate element="doc">
 	                    <map:part src="{defaults:search-url}/id?q={urlencode:{request-param:keywords}}"/>
 	                    <map:part src="cocoon:/eresources/count"/>
@@ -102,7 +101,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
-            <map:match type="regex" pattern="^(announcement|error|sitemap|online/alphabet)\.html$">
+            <map:match type="regex" pattern="^(announcement|error|sitemap|otherportals)\.html$">
                 <map:generate type="html" src="{defaults:live-base}/content/{1}.html"/>
                 <map:serialize type="xml"/>
             </map:match>
