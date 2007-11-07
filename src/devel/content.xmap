@@ -95,7 +95,7 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match type="regex-parameter" pattern="^.+$">
-                    <map:parameter name="parameter-name" value="keywords"/>
+                    <map:parameter name="parameter-name" value="source"/>
                     <map:select type="resource-exists">
                         <map:when test="content/search.html">
                             <map:aggregate element="doc">
