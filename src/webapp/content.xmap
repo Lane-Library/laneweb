@@ -101,7 +101,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
-            <map:match type="regex" pattern="^(announcement|error|sitemap|otherportals)\.html$">
+            <map:match type="regex" pattern="^(announcement|error|sitemap|portals/otherportals)\.html$">
                 <map:generate type="html" src="{defaults:live-base}/content/{1}.html"/>
                 <map:serialize type="xml"/>
             </map:match>
