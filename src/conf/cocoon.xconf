@@ -146,8 +146,8 @@
   </spellchecker>
   
   <httpclient-manager>
-    <parameter name="max-total-connections" value="30"/>
-    <parameter name="max-host-connections" value="5"/>
+    <parameter name="max-total-connections" value="300"/>
+    <parameter name="max-host-connections" value="100"/>
     <parameter name="connection-timeout" value="20000"/>
   </httpclient-manager>
   
