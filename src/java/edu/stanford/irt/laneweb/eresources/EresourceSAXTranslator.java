@@ -19,6 +19,7 @@ import edu.stanford.irt.eresources.Version;
 public class EresourceSAXTranslator {
 	
 	private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
+	private static final String EMPTY_NS = "";
 	private static final String DD = "dd";
 	private static final String DT = "dt";
 	private static final String UL = "ul";
@@ -70,7 +71,7 @@ public class EresourceSAXTranslator {
 					}
 					if (null != getPasswordLink) {
 						AttributesImpl attributes = new AttributesImpl();
-						attributes.addAttribute(XHTML_NS, "href", "href", "CDATA", getPasswordLink.getUrl());
+						attributes.addAttribute(EMPTY_NS, "href", "href", "CDATA", getPasswordLink.getUrl());
 						handler.startElement(XHTML_NS, A, A, attributes);
 						char[] getPassword = "get password".toCharArray();
 						handler.characters(getPassword, 0, getPassword.length);
@@ -94,9 +95,9 @@ public class EresourceSAXTranslator {
 	private void handleAnchor(ContentHandler handler, Eresource eresource, Version version, Link link, boolean hasGetPassword) throws SAXException {
 		AttributesImpl attributes = new AttributesImpl();
 		String proxyValue = version.isProxy() ? "proxy" : "noproxy";
-		attributes.addAttribute(XHTML_NS, "class", "class", "CDATA", proxyValue);
+		attributes.addAttribute(EMPTY_NS, "class", "class", "CDATA", proxyValue);
 		String url = null != link.getUrl() ? link.getUrl() : "";
-		attributes.addAttribute(XHTML_NS, "href", "href", "CDATA", url);
+		attributes.addAttribute(EMPTY_NS, "href", "href", "CDATA", url);
 		StringBuffer sb = new StringBuffer();
 		sb.append(eresource.getTitle());
 		if (null != version.getPublisher()) {
@@ -105,7 +106,7 @@ public class EresourceSAXTranslator {
 		if ((hasGetPassword && version.getLinks().size() > 2) || (!hasGetPassword && version.getLinks().size() > 1)) {
 			sb.append(':').append(link.getLabel());
 		}
-		attributes.addAttribute(XHTML_NS, "title", "title", "CDATA", sb.toString());
+		attributes.addAttribute(EMPTY_NS, "title", "title", "CDATA", sb.toString());
 		handler.startElement(XHTML_NS, A, A, attributes);
 		char[] linkText = getLinkText(eresource, version, link, hasGetPassword);
 		handler.characters(linkText, 0, linkText.length);
