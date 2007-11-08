@@ -18,7 +18,7 @@
         </template>
     </xsl:template>
     
-    <xsl:template match="h:li[@id]">
+    <xsl:template match="h:a[@id]">
         <resource idref="{@id}"/>
     </xsl:template>
     
