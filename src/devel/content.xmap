@@ -7,43 +7,19 @@
             <map:match type="wildcard" pattern="eresources/**">
                 <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="search-proxy">
-                <map:generate type="search-proxy" src="{defaults:search-url}/search"/>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/search-proxy.xsl">
-                        <map:transform type="saxon" src="xsl/search-proxy.xsl">
-                            <map:parameter name="context" value="{request:contextPath}" />
-                            <map:parameter name="sunetid" value="{laneweb:sunetid}" />
-                            <map:parameter name="ticket" value="{laneweb:ticket}" />
-                            <map:parameter name="affiliation" value="{laneweb:affiliation}" />
-                            <map:parameter name="proxy-links" value="{laneweb:proxy-links}" />
-                        </map:transform>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
-                            <map:parameter name="context" value="{request:contextPath}" />
-                            <map:parameter name="sunetid" value="{laneweb:sunetid}" />
-                            <map:parameter name="ticket" value="{laneweb:ticket}" />
-                            <map:parameter name="affiliation" value="{laneweb:affiliation}" />
-                            <map:parameter name="proxy-links" value="{laneweb:proxy-links}" />
-                        </map:transform>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match type="wildcard" pattern="search.html">
                 <map:match type="regex-parameter" pattern="^(clinical|peds|research|pharmacy|history|test)$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:select type="resource-exists">
                         <map:when test="content/search/{request-param:source}.html">
                             <map:aggregate element="doc">
-                                <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
                                 <map:part src="content/search/{request-param:source}.html"/>
                             </map:aggregate>
                         </map:when>
                         <map:otherwise>
                             <map:aggregate element="doc">
-                                <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
                                 <map:part src="cocoon:/search/{request-param:source}.html"/>
                             </map:aggregate>
                         </map:otherwise>
@@ -68,13 +44,13 @@
                     <map:select type="resource-exists">
                         <map:when test="content{request-param:source}">
                             <map:aggregate element="doc">
-                                <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
                                 <map:part src="content{request-param:source}"/>
                             </map:aggregate>
                         </map:when>
                         <map:otherwise>
                             <map:aggregate element="doc">
-                                <map:part src="cocoon:/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
                                 <map:part src="{defaults:live-base}/content{request-param:source}"/>
                             </map:aggregate>
                         </map:otherwise>
@@ -99,7 +75,7 @@
                     <map:select type="resource-exists">
                         <map:when test="content/search.html">
                             <map:aggregate element="doc">
-                                <map:part src="{defaults:search-url}/id?q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
                                 <map:part src="cocoon:/eresources/count"/>
                                 <map:part src="content/search.html"/>
                                 <map:part src="cocoon:/search/{request-param:source}.html"/>
@@ -107,7 +83,7 @@
                         </map:when>
                         <map:otherwise>
                             <map:aggregate element="doc">
-                                <map:part src="{defaults:search-url}/id?q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-proxy?id={request-param:id}&amp;q={urlencode:{request-param:keywords}}"/>
                                 <map:part src="cocoon:/eresources/count"/>
                                 <map:part src="{defaults:live-base}/content/search.html"/>
                                 <map:part src="cocoon:/search/{request-param:source}.html"/>
@@ -141,14 +117,7 @@
                 </map:match>
             </map:match>
             <map:match type="wildcard" pattern="search/**.html">
-                <map:select type="resource-exists">
-                    <map:when test="content/search/{1}.html">
-                        <map:generate type="file" src="content/search/{1}.html"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:generate type="file" src="{defaults:live-base}/content/search/{1}.html"/>
-                    </map:otherwise>
-                </map:select>
+                <map:generate type="file" src="cocoon:/search-templates/{1}.html"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search.xsl">
                         <map:transform type="saxon" src="xsl/search.xsl">
@@ -175,14 +144,10 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search-tab-results">
-                <map:select type="resource-exists">
-                    <map:when test="resources/templates/search/{request-param:source}.xml">
-                        <map:generate type="file" src="resources/templates/search/{request-param:source}.xml"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:generate type="file" src="{defaults:live-base}/resources/templates/search/{request-param:source}.xml"/>
-                    </map:otherwise>
-                </map:select>
+                <map:aggregate element="search-tab-results" >
+                    <map:part src="cocoon://apps/search-proxy"/>  
+                    <map:part src="cocoon:/search-templates.xml"/>
+                </map:aggregate>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-tab-results.xsl">
                         <map:transform type="saxon" src="xsl/search-tab-results.xsl">
@@ -246,10 +211,10 @@
             </map:match>
             <map:match type="wildcard" pattern="search-templates.xml">
                 <map:aggregate element="search-templates" ns="http://lane.stanford.edu/search-templates/ns">
-                    <map:part src="cocoon:/templates/search/clinical.xml"/>
-                    <map:part src="cocoon:/templates/search/peds.xml"/>
-                    <map:part src="cocoon:/templates/search/research.xml"/>
-                    <map:part src="cocoon:/templates/search/history.xml"/>
+                   <map:part src="cocoon:/search-templates/clinical.html"/>
+                    <map:part src="cocoon:/search-templates/peds.html"/>
+                    <map:part src="cocoon:/search-templates/research.html"/>
+                    <map:part src="cocoon:/search-templates/history.html"/>
                 </map:aggregate>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-templates.xsl">
@@ -261,6 +226,21 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
+            
+            <map:match type="wildcard" pattern="search-templates/**.html">
+            	 <map:select type="resource-exists">
+                    <map:when test="content/search/{1}.html">
+                        <map:generate type="file" src="content/search/{1}.html"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:generate type="file" src="{defaults:live-base}/content/search/{1}.html"/>
+                    </map:otherwise>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+                
+          
+            
             <map:match type="wildcard" pattern="templates/**.xml">
                 <map:select type="resource-exists">
                     <map:when test="resources/templates/{1}.xml">
