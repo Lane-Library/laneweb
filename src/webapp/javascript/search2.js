@@ -177,28 +177,20 @@ function showHits(o) {
 			{
 				var hitSpan = tab.getElementsByTagName('span')[0];
 				var hits = response.results.tabs[j].hits;
-				if(hitSpan != null && hits != "")
+				if(hitSpan != null && hits!='')
 					hitSpan.innerHTML = hits;   
-				var linkValue = response.results.tabs[j].url;
-				if(linkValue != null && tab.getElementsByTagName('a')[0] != undefined)
-					tab.getElementsByTagName('a')[0].href = linkValue;
 				hitSpan.style.visibility = 'visible';
 			}
 	}
 	var sleepingTime = 2000;
 	var remainingTime = (new Date().getTime())-startTime;
 	var status = response.results.status;
-	if(status != 'successful' && ( remainingTime < 60*1000))
-	{	// if time superior at 20 seconds the sleeping time equals 10 seconds 
-		if(remainingTime > 20 *1000)
+	if(status != 'successful' && ( remainingTime <= 60*1000))
+	{	// if time superior at 20 seconds the sleeping time equals 10 seconds
+		if(remainingTime > 20 * 1000)
 			sleepingTime = 10000;
-		setTimeout( "getTabResult()", sleepingTime);
+		setTimeout( "YAHOO.util.Connect.asyncRequest('GET', '"+'/././content/search-tab-results?id='+getMetaContent("LW.searchId")+'&rd='+Math.random()+"', window.showHitsCallback);", sleepingTime);
 	}
-}
-
-function getTabResult()
-{
-  YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
 }
 
 
@@ -359,7 +351,7 @@ QueryMapping.prototype.update = function(response) {
 
 
 QueryMapping.prototype.sendQueryMappingRequest = function() {
-		YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+getMetaContent("LW.searchId")+this.resourceUrl, this._callback);
+		YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+getMetaContent("LW.searchId")+this.resourceUrl+'&rd='+Math.random(), this._callback);
     }
 
 
