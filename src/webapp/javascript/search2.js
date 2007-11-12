@@ -76,6 +76,7 @@ function Result(type, tab, container) {
         }
     }
     this._state = 'initialized';
+    this.searchIndicator = document.getElementById('searchIndicator');
 }
 
 Result.prototype.setContent = function(content) {
@@ -107,6 +108,7 @@ Result.prototype.callbackSuccess = function(o) {
         }
         result.setContent(content);
         result.show();
+        result.searchIndicator.style.visibility = 'hidden';
 }
 
 
@@ -114,6 +116,7 @@ Result.prototype.getContent = function() {
         if (this._state == 'initialized') {
             this._state = 'searching';
             var request = YAHOO.util.Connect.asyncRequest('GET', this._url+window.keywords, this._callback);
+	    	this.searchIndicator.style.visibility = 'visible';
         } else if (this._state == 'searched') {
             this.show();
         } else if (this._state == 'searching') {
