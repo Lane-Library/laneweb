@@ -16,12 +16,17 @@
 	</xsl:template>
 
 	<xsl:template match="s:resource">
-			"<xsl:value-of select="@id"/>":
-			{
-				"status": "<xsl:value-of select="@status"/>",
-				"url": "<xsl:value-of select="s:url"/>",
-				"hits": "<xsl:value-of select="s:hits"/>"
-			}
+		<xsl:variable name="hitcount">
+			<xsl:if test="s:hits">
+				<xsl:value-of select="format-number(s:hits, '###,###')"/>
+			</xsl:if>
+		</xsl:variable>
+		"<xsl:value-of select="@id"/>":
+		{
+		"status": "<xsl:value-of select="@status"/>",
+		"url": "<xsl:value-of select="s:url"/>",
+		"hits": "<xsl:value-of select="$hitcount"/>"
+		}
 		<xsl:if test="position() != count(//s:resource)">,</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>

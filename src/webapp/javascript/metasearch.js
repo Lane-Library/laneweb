@@ -94,13 +94,13 @@ MetasearchResult.prototype.setContent = function(metasearchElement)
                     resultSpan.innerHTML = ': ' + this.hits;
                     metasearchElement.parentNode.appendChild(resultSpan);
     
-                    if( this.hits > 0 || this.status != 'successful' ) { 
+                    if( parseInt(this.hits) > 0 || this.status != 'successful' ) { 
                         var parentHeading = YAHOO.util.Dom.getAncestorByTagName(this.id,'div').getElementsByTagName('h3')[0];
                         parentHeading.style.display = 'block';
                         var parent = YAHOO.util.Dom.getAncestorByTagName(this.id,'li');
                         parent.style.display = 'block';
                     }
-                    else if( this.hits == 0 ) { 
+                    else if( parseInt(this.hits) == 0 ) { 
                         var parent = YAHOO.util.Dom.getAncestorByTagName(this.id,'li');
                         parent.className = 'zero';
                     }
