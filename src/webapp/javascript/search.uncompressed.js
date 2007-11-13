@@ -1,3 +1,5 @@
+
+
 var date = new Date();
 var startTime = date.getTime();
 
