@@ -72,10 +72,8 @@ Popup.prototype.render = function(){
 	YAHOO.popup.panel.render();
 	YAHOO.popup.panel.show();
 
-	// make webtrends call only if dcsMultiTrack() is defined
-	if(isDefined(window,'dcsMultiTrack')){
-		dcsMultiTrack('WT.ti','YUI Pop-up [' + this.type + ':'+ this.id + '] -- ' + this.title);
-	}
+	// webtrends call
+	dcsMultiTrack('WT.ti','YUI Pop-up [' + this.type + ':'+ this.id + '] -- ' + this.title);
 }
 
 
