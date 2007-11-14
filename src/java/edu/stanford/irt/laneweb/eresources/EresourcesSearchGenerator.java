@@ -112,6 +112,8 @@ public class EresourcesSearchGenerator extends ServiceableGenerator {
 				query = query.trim();
 				if (query.length() == 0) {
 					query = null;
+				} else if ("%".equals(query)) {
+					query = null;
 				}
 			}
 		}
