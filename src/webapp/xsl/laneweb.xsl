@@ -573,8 +573,10 @@
                     or ($loadTab = '' and not(../h:h2[@class = 'activeTab']) and position()!=1)">
                     <xsl:apply-templates select="following-sibling::node()[not(@id='otherPortalOptions') and count(following-sibling::h:h2) = $stop-point]"/>
                 </xsl:if>
-                
             </xsl:for-each>
+            <xsl:if test="not(h:h2)">
+                <xsl:apply-templates select="node()"/>
+            </xsl:if>
         </xsl:copy>
     </xsl:template>
     
