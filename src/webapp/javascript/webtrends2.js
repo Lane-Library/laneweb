@@ -6,7 +6,28 @@ YAHOO.util.Event.addListener(document, 'click', handleClicks);
 
 function handleClicks(e) {
 		var target = (e.srcElement) ? e.srcElement : e.target;
-	    webtrendsProcess(target);
+		var node = getNode(target);
+		if(node != null)
+	    	webtrendsProcess(node);
+}
+
+function getNode(node)
+{
+	if(node.tagName == "IMG" || node.tagName == "A" || node.tagName == "AREA")
+		return node;
+	var ancestorNode = YAHOO.util.Dom.getAncestorBy(node, getNodeByNames);
+	if(ancestorNode != null)
+		return ancestorNode; 
+	return null; 	
+}
+
+
+function getNodeByNames(node)
+{
+	if(node.tagName == "A" || node.tagName == "AREA")
+		return true;
+	else
+		return false;
 }
 
 function webtrendsProcess(node){
@@ -27,14 +48,14 @@ function webtrendsProcess(node){
 		}
 		if(node.tagName == "A" || node.tagName == "AREA")//for anchor tag 
 		{
-			if(host != getMetaContent("LW.host") || node.href.indexOf("/secure/login.html?url=") >-1 )
+			if(host != getMetaContent("LW.host") || node.href.indexOf("/secure/login.html?url=") >-1 || node.href.indexOf("/secure/login.html?user=") >-1 )
 			{
 				var href;
 				var uri= '/';
 				var query ;
 				var proxyUrl = 'http://laneproxy.stanford.edu/login';
 				var href = node.href;
-				if(href.indexOf(proxyUrl) > -1 || node.href.indexOf("/secure/login.html?url=") >-1)
+				if(href.indexOf(proxyUrl) > -1 )
 					href = href.substring( href.indexOf('url=')+4 , href.length);
 				if(href.indexOf('://')>-1)		
 					href = href.substring(href.indexOf('://')+3, href.length);
