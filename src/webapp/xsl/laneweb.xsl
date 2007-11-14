@@ -221,7 +221,7 @@
                 <xsl:copy>
                     <xsl:apply-templates select="@*"/>
                     <xsl:if
-                        test="$response-template='default' and (@class='proxy') and ancestor::h:div[@id='searchResults']">
+                        test="$response-template='irt2' and (@class='proxy' or @proxy) and ancestor::h:div[@id='searchResults']">
                         <xsl:attribute name="onclick">
                             <xsl:text>openSearchResult('</xsl:text>
                             <xsl:choose>
@@ -263,7 +263,7 @@
     <xsl:template match="@href">
         <xsl:choose>
             <xsl:when
-                test="parent::h:a[@class='proxy'] and $proxy-links = 'true' and starts-with(.,'http')">
+                test="(parent::h:a[@class='proxy' or @proxy]) and $proxy-links = 'true' and starts-with(.,'http')">
                 <xsl:choose>
                     <xsl:when test="$affiliation = 'LPCH' or $affiliation = 'SHC'">
                         <xsl:attribute name="href">
@@ -391,6 +391,8 @@
 
     <!-- remove class="proxy" -->
     <xsl:template match="@class[.='proxy']"/>
+    
+    <xsl:template match="@proxy"/>
 
     <!-- TODO did the id of the input change? -->
     <xsl:template match="h:input[@id='lw_search-keywords']">
