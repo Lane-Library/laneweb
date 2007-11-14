@@ -264,42 +264,32 @@
         <xsl:choose>
             <xsl:when
                 test="parent::h:a[@class='proxy'] and $proxy-links = 'true' and starts-with(.,'http')">
-                <xsl:variable name="title">
-                    <xsl:choose>
-                        <xsl:when test="parent::h:a/@title">
-                            <xsl:value-of select="parent::h:a/@title"/>
-                        </xsl:when>
-                        <xsl:when test="parent::h:a/text()!=''">
-                            <xsl:value-of select="parent::h:a/text()"/>
-                        </xsl:when>
-                        <xsl:when test="parent::h:a/h:img/@alt">
-                            <xsl:value-of select="parent::h:a/h:img/@alt"/>
-                        </xsl:when>
-                        <xsl:otherwise>the resource</xsl:otherwise>
-                    </xsl:choose>
-                </xsl:variable>
-                <xsl:call-template name="make-link">
-                    <xsl:with-param name="link">
-                        <xsl:choose>
-                            <xsl:when test="$affiliation = 'LPCH' or $affiliation = 'SHC'">
-                                <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
-                                <xsl:value-of select="."/>
-                            </xsl:when>
-                            <xsl:when test="$ticket != '' and $sunetid != ''">
-                                <xsl:text>http://laneproxy.stanford.edu/login?user=</xsl:text>
-                                <xsl:value-of select="$sunetid"/>
-                                <xsl:text>&amp;ticket=</xsl:text>
-                                <xsl:value-of select="$ticket"/>
-                                <xsl:text>&amp;url=</xsl:text>
-                                <xsl:value-of select="."/>
-                            </xsl:when>
-                            <xsl:otherwise>
+                <xsl:choose>
+                    <xsl:when test="$affiliation = 'LPCH' or $affiliation = 'SHC'">
+                        <xsl:attribute name="href">
+                            <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
+                            <xsl:value-of select="."/>
+                        </xsl:attribute>
+                    </xsl:when>
+                    <xsl:when test="$ticket != '' and $sunetid != ''">
+                        <xsl:attribute name="href">
+                            <xsl:text>http://laneproxy.stanford.edu/login?user=</xsl:text>
+                            <xsl:value-of select="$sunetid"/>
+                            <xsl:text>&amp;ticket=</xsl:text>
+                            <xsl:value-of select="$ticket"/>
+                            <xsl:text>&amp;url=</xsl:text>
+                            <xsl:value-of select="."/>
+                        </xsl:attribute>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:call-template name="make-link">
+                            <xsl:with-param name="link">
                                 <xsl:value-of select="concat('/secure/login.html?url=',.)"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:with-param>
-                    <xsl:with-param name="attr" select="'href'"/>
-                </xsl:call-template>
+                            </xsl:with-param>
+                            <xsl:with-param name="attr" select="'href'"/>
+                        </xsl:call-template>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:when>
             <xsl:when
                 test="starts-with(.,'http://lane.stanford.edu') and not(contains(.,'cookiesFetch'))">
@@ -310,30 +300,30 @@
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="contains(., '://') and contains(.,'{keywords}')">
-                <xsl:attribute name="{name()}">
+                <xsl:attribute name="href">
                     <xsl:value-of select="replace(.,'\{keywords\}',$keywords)"/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:when test="starts-with(.,'http://') and starts-with($request-uri,'secure')">
-                <xsl:attribute name="{name()}">
+                <xsl:attribute name="href">
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:when test="contains(., '://') and not(ancestor::h:head) and starts-with(.,'http')">
-                <xsl:attribute name="{name()}">
+                <xsl:attribute name="href">
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:when
                 test="starts-with(.,'telnet:') or starts-with(.,'rtsp://')">
-                <xsl:attribute name="{name()}">
+                <xsl:attribute name="href">
                     <xsl:value-of select="."/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:call-template name="make-link">
                     <xsl:with-param name="link" select="."/>
-                    <xsl:with-param name="attr" select="name()"/>
+                    <xsl:with-param name="attr" select="'href'"/>
                 </xsl:call-template>
             </xsl:otherwise>
         </xsl:choose>
@@ -685,7 +675,7 @@
         <xsl:param name="link"/>
         <xsl:param name="attr"/>
         <xsl:variable name="param-string">
-            <xsl:if test="$debug='y' or not($template-is-default)">
+            <xsl:if test="not(contains($link,'/secure/login.html')) and ($debug='y' or not($template-is-default))">
                 <xsl:choose>
                     <xsl:when test="contains($link, '?')">&amp;</xsl:when>
                     <xsl:otherwise>?</xsl:otherwise>
