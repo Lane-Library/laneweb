@@ -575,7 +575,7 @@
                 </xsl:if>
             </xsl:for-each>
             <xsl:if test="not(h:h2)">
-                <xsl:apply-templates select="node()"/>
+                <xsl:apply-templates select="node()[not(@id='otherPortalOptions')]"/>
             </xsl:if>
         </xsl:copy>
     </xsl:template>
