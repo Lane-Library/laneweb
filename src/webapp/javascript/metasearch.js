@@ -3,7 +3,8 @@ var searchId;
 var searchIndicator;
 var searchMode;
 var searchStatus;
-var sourceTemplate;
+var searchTemplate;
+var searchUrl;
 var counter = 0;
 
 YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
@@ -13,17 +14,26 @@ function initializeMetasearch(e)
      window.keywords = escape(getMetaContent("LW.keywords"));
      window.searchId = getMetaContent("LW.searchId");
      window.searchMode = getMetaContent("LW.searchMode");
-     window.searchTemplate = getMetaContent("LW.searchTemplate");
-
+     window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
+     
      if( (window.searchId && window.searchId != 'undefined') && (window.searchTemplate && window.searchTemplate != 'undefined') )
      {
-     	YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate, window.metasearchCallback);
- 		YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
+         window.searchUrl = '/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate;
+     }
+     else if( window.keywords && window.keywords != 'undefined' )
+     {
+         window.searchUrl = '/././apps/search/filtered-json?q='+window.keywords+'&source='+location.pathname.replace('/./.','');
+     }
+     
+     if( window.searchUrl )
+     {
+         YAHOO.util.Connect.asyncRequest('GET', searchUrl, window.metasearchCallback);
+         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
          if(YAHOO.util.Dom.inDocument('searchIndicator')){
              window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
          }
          YAHOO.util.Event.addListener('searchIndicator', 'click', haltMetasearch);
-  	}
+     }
 }
 
 var showMetasearchResults = function(o)
@@ -69,7 +79,7 @@ function MetasearchResult(metasearchElement,searchResource, id)
     
     this.setContent(metasearchElement);
 
-    if(getMetaContent("LW.debug") && YAHOO.util.Dom.inDocument('debug')){
+    if(getMetaContent("LW.debug")){
         this.debug();
     }
 }
@@ -130,20 +140,13 @@ MetasearchResult.prototype.setContent = function(metasearchElement)
 
 MetasearchResult.prototype.debug = function()
 {
-        var dd = document.createElement('div');
+        var logMessage = '';
         for (var d in this){
-            if( d.match(/id|name|status|hits/) ){
-                dd.innerHTML += ' :: ' + d + '=' + this[d];
-            }
-            else if(d == 'href'){
-                var a = document.createElement('a');
-                a.href = this[d];
-                a.innerHTML = d;
-                dd.innerHTML += ' :: ';
-                dd.appendChild(a);
+            if( d.match(/id|name|status|hits|href/) ){
+                logMessage += '\n' + d + ' ==> ' + this[d];
             }
         }
-        document.getElementById('debug').appendChild(dd);
+        YAHOO.log(logMessage , 'info');
 }
 
 function haltMetasearch()
