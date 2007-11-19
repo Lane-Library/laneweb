@@ -204,18 +204,32 @@
             </xsl:when>
             <!-- obfuscate email addresses with JavaSscript -->
             <xsl:when test="starts-with(@href, 'mailto:')">
-                <xsl:copy>
-                    <xsl:attribute name="onclick">
-                        <xsl:text>email('</xsl:text>
-                        <xsl:call-template name="tokenize-email">
-                            <xsl:with-param name="string" select="@href"/>
+                <xsl:variable name="apostrophe">'</xsl:variable>
+                <xsl:variable name="address">
+                    <xsl:text>'+'ma'+''+'il'+'to'+':'</xsl:text>
+                    <xsl:call-template name="js-split">
+                        <xsl:with-param name="string" select="substring-after(@href,'mailto:')"/>
+                    </xsl:call-template>
+                    <xsl:text>+'</xsl:text>
+                </xsl:variable>
+                <script type="text/javascript">
+                    var link = '<xsl:copy>
+                        <xsl:apply-templates select="attribute::node()"/>
+                        <xsl:attribute name="href">
+                            <xsl:value-of select="$address"/>
+                        </xsl:attribute>
+                        <xsl:for-each select="*">
+                            <xsl:text>'+'</xsl:text>
+                            <xsl:apply-templates select="."/>
+                        </xsl:for-each>
+                        <xsl:text>'</xsl:text>
+                        <xsl:call-template name="js-split">
+                            <xsl:with-param name="string" select="normalize-space()"/>
                         </xsl:call-template>
-                        <xsl:text>')</xsl:text>
-                    </xsl:attribute>
-                    <xsl:attribute name="href"/>
-                    <xsl:apply-templates select="attribute::node()[name() != 'href']"/>
-                    <xsl:apply-templates select="child::node()"/>
-                </xsl:copy>
+                        <xsl:text>+'</xsl:text>
+                    </xsl:copy>';
+                    document.write(link);
+                </script>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy>
@@ -259,6 +273,10 @@
     </xsl:template>
 
     <!-- =====================  SPECIAL CASE TEMPLATES ===================== -->
+    <!-- obfuscated email href (don't copy, processed elsewhere) -->
+    <xsl:template match="attribute::href[starts-with(.,'mailto:')]"/>
+    
+    
     <!-- href and src attributes template -->
     <xsl:template match="@href">
         <xsl:choose>
@@ -895,6 +913,24 @@
             </xsl:comment>
         </script>
         <noscript><p>This flash object requires javascript.</p></noscript>
+    </xsl:template>
+    
+    <xsl:template name="js-split">
+        <xsl:param name="string"/>
+        <xsl:variable name="char">
+            <xsl:value-of select="substring($string,1,1)"/>
+        </xsl:variable>
+        <xsl:text>+'</xsl:text>
+        <xsl:if test="$char = &quot;'&quot;">
+            <xsl:text>\</xsl:text>
+        </xsl:if>
+        <xsl:value-of select="$char"/>
+        <xsl:text>'</xsl:text>
+        <xsl:if test="string-length($string) &gt; 1">
+            <xsl:call-template name="js-split">
+                <xsl:with-param name="string" select="substring($string,2)"/>
+            </xsl:call-template>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>
