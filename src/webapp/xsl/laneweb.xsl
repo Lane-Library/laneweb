@@ -213,22 +213,37 @@
                     <xsl:text>+'</xsl:text>
                 </xsl:variable>
                 <script type="text/javascript">
-                    var link = '<xsl:copy>
-                        <xsl:apply-templates select="attribute::node()"/>
-                        <xsl:attribute name="href">
-                            <xsl:value-of select="$address"/>
-                        </xsl:attribute>
+                    <xsl:comment>
+                        <xsl:text>&#xD;var link = '&lt;a href="</xsl:text>
+                        <xsl:value-of select="$address"/>
+                        <xsl:text>"</xsl:text>
+                        <xsl:for-each select="attribute::node()[not(name() = 'href')]">
+                            <xsl:text> </xsl:text>
+                            <xsl:value-of select="name()"/>
+                            <xsl:text>="</xsl:text>
+                            <xsl:value-of select="."/>
+                            <xsl:text>"</xsl:text>
+                        </xsl:for-each>
+                        <xsl:text>&gt;</xsl:text>
                         <xsl:for-each select="*">
-                            <xsl:text>'+'</xsl:text>
-                            <xsl:apply-templates select="."/>
+                            <xsl:text>'+'&lt;</xsl:text>
+                            <xsl:value-of select="name()"/>
+                            <xsl:for-each select="attribute::node()">
+                                <xsl:text> </xsl:text>
+                                <xsl:value-of select="name()"/>
+                                <xsl:text>="</xsl:text>
+                                <xsl:value-of select="."/>
+                                <xsl:text>"</xsl:text>
+                            </xsl:for-each>
+                            <xsl:text>&gt;</xsl:text>
                         </xsl:for-each>
                         <xsl:text>'</xsl:text>
                         <xsl:call-template name="js-split">
                             <xsl:with-param name="string" select="normalize-space()"/>
                         </xsl:call-template>
-                        <xsl:text>+'</xsl:text>
-                    </xsl:copy>';
-                    document.write(link);
+                        <xsl:text>+'&lt;/a&gt;';</xsl:text>
+                        document.write(link);
+                    </xsl:comment>
                 </script>
             </xsl:when>
             <xsl:otherwise>
