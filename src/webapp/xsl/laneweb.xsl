@@ -92,6 +92,7 @@
             <xsl:when test="starts-with($request-uri,'portals/pharmacy')">pharmacy</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/anesthesia')">/portals/anesthesia.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/cardiology')">/portals/cardiology.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/hematology')">/portals/hematology.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/internal-medicine')">/portals/internal-medicine.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/lpch-cerner')">/portals/lpch-cerner.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/')">clinical</xsl:when>
