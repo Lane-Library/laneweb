@@ -1,6 +1,7 @@
 User-agent: *
 Crawl-delay: 7
 Disallow: /search.html
+Disallow: /secure/
 Disallow: /stage/
 Disallow: /ceyates/
 Disallow: /ryanmax/

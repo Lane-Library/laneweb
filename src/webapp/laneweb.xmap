@@ -275,6 +275,14 @@
                 <map:generate type="file" src="{defaults:live-base}/content/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match type="wildcard" pattern="_vti**">
+                <map:generate src="cocoon:/error.html"/>
+                <map:serialize type="xhtml" status-code="404"/>
+            </map:match>
+            <map:match type="wildcard" pattern="MSOffice**">
+                <map:generate src="cocoon:/error.html"/>
+                <map:serialize type="xhtml" status-code="404"/>
+            </map:match>
             <map:match type="wildcard" pattern="**">
                 <map:redirect-to uri="{1}/index.html"/>
             </map:match>
