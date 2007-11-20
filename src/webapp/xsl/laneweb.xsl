@@ -568,7 +568,7 @@
                     </xsl:attribute>
                     <xsl:choose>
                         <xsl:when test="$class='bgTab'">
-                            <a href="?loadTab={$id}">
+                            <a href="/{$request-uri}?loadTab={$id}">
                                 <xsl:value-of select="."/>
                             </a>
                         </xsl:when>
