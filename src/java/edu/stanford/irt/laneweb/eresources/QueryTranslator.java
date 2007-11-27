@@ -13,13 +13,13 @@ public class QueryTranslator {
 
 	Vector<WordData> reqWords = new Vector<WordData>();
 
-	Vector<WordData> optWords = new Vector<WordData>();
+//	Vector<WordData> optWords = new Vector<WordData>();
 
 	Vector<WordData> notWords = new Vector<WordData>();
 
 	public static final int required = 1;
 
-	public static final int optional = 2;
+//	public static final int optional = 2;
 
 	public static final int notwanted = 3;
 
@@ -40,9 +40,9 @@ public class QueryTranslator {
 		case required:
 			reqWords.addElement(wd);
 			break;
-		case optional:
-			optWords.addElement(wd);
-			break;
+//		case optional:
+//			optWords.addElement(wd);
+//			break;
 		case notwanted:
 			notWords.addElement(wd);
 			break;
@@ -58,7 +58,7 @@ public class QueryTranslator {
 		String fieldName;
 
 		reqWords = new Vector<WordData>();
-		optWords = new Vector<WordData>();
+//		optWords = new Vector<WordData>();
 		notWords = new Vector<WordData>();
 
 		while (true) { // Loop over all words
@@ -83,7 +83,7 @@ public class QueryTranslator {
 			theWord = input.substring(startWord, p);
 			//CY bug 11825, don't process zero length string
 			if (theWord.length() > 0) {
-				//CY changed this to requred from optional to make it AND logic
+				//CY changed this to required from optional to make it AND logic
 				flag = required;
 				fieldName = "";
 
@@ -140,13 +140,13 @@ public class QueryTranslator {
 
 		String boolOp = ""; // AND, OR, NOT operator
 		int reqCount; // Count of required words
-		int optCount; // Count of optional words
+//		int optCount; // Count of optional words
 		int notCount; // Count of not wanted words
 		int i; // Loop control
 
 		boolOp = "";
 		reqCount = reqWords.size();
-		optCount = optWords.size();
+//		optCount = optWords.size();
 		notCount = notWords.size();
 
 		if (reqWords.size() > 0) {
@@ -158,47 +158,48 @@ public class QueryTranslator {
 				boolOp = " & ";
 			}
 
-			if (reqCount > 0 && optCount > 0) {
-				tempString += ") | ";
-				tempString += "((";
-				// Required words - second time (anded with optional words)
-				boolOp = "";
-				for (i = 0; i < reqCount; i++) {
-					tempString += boolOp + getWord(reqWords, i);
-					boolOp = " & ";
-				}
-				tempString += ")*10*10";
-
-				tempString += " & (";
-
-				// Required words - third time as part of accumulate
-				boolOp = "";
-				for (i = 0; i < reqCount; i++) {
-					tempString += boolOp + getWord(reqWords, i);
-					// tempString += "*2";// Uncomment to double weight of
-					// required words
-					boolOp = " , ";
-				}
-			}
-		} else
-			tempString = "(";
+//			if (reqCount > 0 && optCount > 0) {
+//				tempString += ") | ";
+//				tempString += "((";
+//				// Required words - second time (anded with optional words)
+//				boolOp = "";
+//				for (i = 0; i < reqCount; i++) {
+//					tempString += boolOp + getWord(reqWords, i);
+//					boolOp = " & ";
+//				}
+//				tempString += ")*10*10";
+//
+//				tempString += " & (";
+//
+//				// Required words - third time as part of accumulate
+//				boolOp = "";
+//				for (i = 0; i < reqCount; i++) {
+//					tempString += boolOp + getWord(reqWords, i);
+//					// tempString += "*2";// Uncomment to double weight of
+//					// required words
+//					boolOp = " , ";
+//				}
+//			}
+		} //else
+			//tempString = "(";
 
 		// Optional words
 		// Don't reset boolOp
-		for (i = 0; i < optCount; i++) {
-			tempString += boolOp + getWord(optWords, i);
-			boolOp = " , "; // Accumulate
-		}
+//		for (i = 0; i < optCount; i++) {
+//			tempString += boolOp + getWord(optWords, i);
+//			boolOp = " , "; // Accumulate
+//		}
 
 		if (reqCount > 0)
-			if (optCount > 0)
-				tempString += ")) )";
-			else
+//			if (optCount > 0)
+//				tempString += ")) )";
+//			else
 				tempString += ")) ";
-		else
-			tempString += ")";
+//		else
+//			tempString += ")";
 
-		if (tempString.length() > 0)
+//		if (tempString.length() > 0)
+		if (notCount > 0)
 			boolOp = " NOT ";
 		else
 			boolOp = "";
@@ -211,6 +212,7 @@ public class QueryTranslator {
 	}
 	
 	public static void main(String[] args) {
+		System.out.println(new QueryTranslator().translate(java.net.URLDecoder.decode("-tope")));
 		System.out.println(new QueryTranslator().translate(java.net.URLDecoder.decode("+J.+Thorac.+Cardiovasc.+Surg.%2C+June+1%2C+2004%3B+127%286%29%3A+1858+-+1858.")));
 	}
 }
