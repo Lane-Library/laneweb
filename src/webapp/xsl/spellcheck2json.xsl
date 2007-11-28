@@ -5,9 +5,10 @@
     
     
     
-    <xsl:template match="/">{
-"query": "<xsl:value-of select="encode-for-uri(//s:query)"/>",
-"suggestion": "<xsl:value-of select="//s:suggestion"/>"
-}</xsl:template>
+<xsl:template match="/">{
+	"query": "<xsl:value-of select="encode-for-uri(//s:query)"/>",
+	"suggestion": "<xsl:value-of select="//s:suggestion"/>"
+}
+</xsl:template>
 
 </xsl:stylesheet>
