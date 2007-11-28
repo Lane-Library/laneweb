@@ -7,7 +7,7 @@
 {
 	"id": "<xsl:value-of select="@id"/>",
 	"status": "<xsl:value-of select="@status"/>",
-	"query": "<xsl:value-of select="s:query"/>",
+	"query": "<xsl:value-of select="encode-for-uri(s:query)"/>",
 	"spell": "<xsl:value-of select="s:spell"/>",
 	"resources": {
 	<xsl:apply-templates select="//s:resource"/>
