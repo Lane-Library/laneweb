@@ -33,7 +33,7 @@
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
                         <map:part src="cocoon:/search-proxy"/>
-                        <map:part src="cocoon://plain/{request-param:source}"/>
+                        <map:part src="cocoon://stage/plain/{request-param:source}"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/content2search.xsl"/>
                     <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
@@ -53,7 +53,7 @@
                 <map:match pattern="querymap/html">
                     <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
                         <map:part src="cocoon:/querymap/map"/>
-                        <map:part src="cocoon://content/templates/search/querymap.xml"/>
+                        <map:part src="cocoon://stage/content/templates/search/querymap.xml"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/querymap2html.xsl"/>
                     <map:serialize type="xml"/>
