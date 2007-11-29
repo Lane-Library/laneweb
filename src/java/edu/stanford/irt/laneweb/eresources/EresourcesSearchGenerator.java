@@ -100,26 +100,11 @@ public class EresourcesSearchGenerator extends ServiceableGenerator {
         super.setup(resolver, objectModel, src, par);
         Request request = ObjectModelHelper.getRequest(objectModel);
         String query = request.getParameter(QUERY);
-        if (query != null) {
-        	query = query.trim();
-            if (query.length() ==0) {
-                query = null;
-            }
-        }
-        if (query == null) {
+        if (null == query) {
 			query = request.getParameter(KEYWORDS);
-			if (query != null) {
-				query = query.trim();
-				if (query.length() == 0) {
-					query = null;
-				} else if ("%".equals(query)) {
-					query = null;
-				}
-			}
 		}
-        this.requestQuery = query;
         String type = request.getParameter(TYPE);
-        if (type != null) {
+        if (null != type) {
             if (type.length() == 0) {
                 type = null;
             } else {
@@ -127,27 +112,41 @@ public class EresourcesSearchGenerator extends ServiceableGenerator {
             }
         }
         String subset = request.getParameter(SUBSET);
-        if (subset != null) {
+        if (null != subset) {
             if (subset.length() == 0) {
                 subset = null;
             } else {
                 subset = subset.toLowerCase();
             }
         }
-        if (query != null) {
+        if (null != query) {
+        	query = query.trim();
+        	if (query.length() == 0 || "%".equals(query)) {
+        		query = null;
+        	}
+        	
+        }
+        if (null == query) {
+            this.sql = "";
+        } else {
+            this.requestQuery = query;
         	query = query.replaceAll("'","''");
         	String translatedQuery = this.queryTranslator.translate(query);
-        	StringBuffer sb = new StringBuffer(SEARCH_SQL_1.replaceAll("XX", translatedQuery));
-        	if (null != subset) {
-        		sb.append("AND SUBSET ='").append(subset).append("'\n");
+        	if (translatedQuery.indexOf("()") == -1
+        			&& translatedQuery.indexOf("{}") == -1
+        			&& translatedQuery.indexOf("NOT") != 1) {
+        		StringBuffer sb = new StringBuffer(SEARCH_SQL_1.replaceAll("XX", translatedQuery));
+        		if (null != subset) {
+        			sb.append("AND SUBSET ='").append(subset).append("'\n");
+        		}
+        		if (null != type) {
+        			sb.append("AND TYPE = '").append(type).append("'\n");
+        		}
+        		sb.append(SEARCH_SQL_2);
+        		this.sql = sb.toString();
+        	} else {
+        		this.sql = "";
         	}
-        	if (null != type) {
-        		sb.append("AND TYPE = '").append(type).append("'\n");
-        	}
-        	sb.append(SEARCH_SQL_2);
-        	this.sql = sb.toString();
-        } else {
-            this.sql = "";
         }
     }
 

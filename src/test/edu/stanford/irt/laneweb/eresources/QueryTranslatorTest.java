@@ -1,9 +1,10 @@
 /**
  * 
  */
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.eresources;
 
-import edu.stanford.irt.laneweb.eresources.QueryTranslator;
+import java.util.Arrays;
+
 import junit.framework.TestCase;
 
 /**
@@ -30,7 +31,7 @@ public class QueryTranslatorTest extends TestCase {
 		assertEquals("(({green} & {red}))  NOT {blue}",this.translator.getQuery());
 		this.translator.processString("green  red  -blue");
 		assertEquals("(({green} & {red}))  NOT {blue}",this.translator.getQuery());
+		this.translator.processString("-lane");
+		System.out.println(this.translator.getQuery().indexOf("NOT"));
 	}
-
-
 }

@@ -113,7 +113,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
         this.haveParameters = false;
         this.count = request.getRequestURI().indexOf("count") > 0;
         this.core = request.getParameter(CORE);
-        if (this.core != null) {
+        if (null != this.core) {
         	if (this.core.equals("y")) {
         		this.haveParameters = true;
         	} else {
@@ -121,7 +121,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
         	}
         }
         this.type = request.getParameter(TYPE);
-        if (this.type != null) {
+        if (null != this.type) {
             if (this.type.length() == 0) {
                 this.type = null;
             } else {
@@ -130,7 +130,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
             }
         }
         this.alpha = request.getParameter(ALPHA);
-        if (this.alpha != null) {
+        if (null != this.alpha) {
             if (this.alpha.length() == 0) {
                 this.alpha = null;
             } else {
@@ -139,26 +139,26 @@ public class HistoryQueryGenerator extends AbstractGenerator {
             }
         }
         this.query = request.getParameter(QUERY);
-        if (this.query != null) {
-			this.query = this.query.trim();
-            if (this.query.length() ==0) {
-                this.query = null;
-            } else {
-                this.haveParameters = true;
-            }
-        }
-        if (this.query == null) {
+        if (null == this.query) {
 			this.query = request.getParameter(KEYWORDS);
-			if (this.query != null) {
-				this.query = this.query.trim();
-				if (this.query.length() == 0) {
-					this.query = null;
-				} else {
-					this.haveParameters = true;
-				}
-			}
 		}
-        if (this.query != null) {
+        if (null != this.query) {
+			this.query = this.query.trim();
+			if (this.query.length() == 0 || "%".equals(this.query)) {
+				this.query = null;
+			} else {
+            	this.query = this.query.replaceAll("'","''");
+            	this.translatedQuery = this.queryTranslator.translate(this.query);
+            	if (this.translatedQuery.indexOf("()") == -1
+            			&& this.translatedQuery.indexOf("{}") == -1
+            			&& this.translatedQuery.indexOf("NOT") != 1) {
+            		this.haveParameters = true;
+            	} else {
+            		this.translatedQuery = null;
+            	}
+			}
+        }
+        if (null != this.query) {
         	this.query = this.query.replaceAll("'","''");
         	this.translatedQuery = this.queryTranslator.translate(this.query);
         }
@@ -193,7 +193,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     		return countQuery.toCharArray();
     	}
     	StringBuffer queryBuffer = new StringBuffer();
-    	if (this.translatedQuery != null) {
+    	if (null != this.translatedQuery) {
     		getScoredSelectSQL(queryBuffer, "HISTORY_ERESOURCE.TITLE", true);
     		getFromSQL(queryBuffer);
     		getScoredWhereSQL(queryBuffer, "HISTORY_ERESOURCE.TITLE", true);
@@ -244,7 +244,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     private void getFromSQL(StringBuffer queryBuffer) {
     	queryBuffer.append('\n');
     	queryBuffer.append(FROM);
-      if (this.type != null) {
+      if (null != this.type) {
 			queryBuffer.append(", HISTORY_TYPE");
 		}
     }
@@ -261,16 +261,16 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     private void getWhereSQL(StringBuffer queryBuffer, String titleTable) {
 		queryBuffer.append('\n');
 		queryBuffer.append(WHERE);
-		if (this.type != null) {
+		if (null != this.type) {
 			queryBuffer
 					.append(
 							"\nAND HISTORY_TYPE.ERESOURCE_ID = HISTORY_ERESOURCE.ERESOURCE_ID AND HISTORY_TYPE.TYPE = '")
 					.append(this.type).append("'");
 		}
-		if (this.core != null) {
+		if (null != this.core) {
 			queryBuffer.append("\nAND HISTORY_ERESOURCE.CORE = 'Y'");
 		}
-		if (this.alpha != null) {
+		if (null != this.alpha) {
 			queryBuffer.append("\nAND ");
 			if (this.alpha.equals("#")) {
 				queryBuffer.append("(NLSSORT(SUBSTR(")
@@ -283,7 +283,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
 				.append(",1,1),'NLS_SORT=GENERIC_BASELETTER') = NLSSORT('").append(this.alpha).append("','NLS_SORT=GENERIC_BASELETTER')");
 			}
 		}
-		if (this.translatedQuery != null) {
+		if (null != this.translatedQuery) {
 			queryBuffer.append("\nAND CONTAINS(HISTORY_ERESOURCE.TEXT,'").append(
 					translatedQuery).append("', 2) > 0 ");
 		}
@@ -293,7 +293,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
 	}
     private void getOrderBySQL(StringBuffer queryBuffer) {
         queryBuffer.append(ORDER_BY);
-		if (this.translatedQuery != null) {
+		if (null != this.translatedQuery) {
 			queryBuffer.append("SCORE_TITLE DESC, SCORE_TEXT DESC, ");
 		}
 		queryBuffer.append(ORDER);

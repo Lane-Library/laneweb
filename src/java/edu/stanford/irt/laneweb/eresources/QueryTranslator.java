@@ -6,7 +6,7 @@ import java.util.Vector;
 class WordData {
 	String text;
 
-	String fieldName;
+//	String fieldName;
 }
 
 public class QueryTranslator {
@@ -17,11 +17,11 @@ public class QueryTranslator {
 
 	Vector<WordData> notWords = new Vector<WordData>();
 
-	public static final int required = 1;
+	public static final int REQUIRED = 1;
 
 //	public static final int optional = 2;
 
-	public static final int notwanted = 3;
+	public static final int NOT_WANTED = 3;
 
 	public String translate(String input) {
 		//CY: leading space broke this sucker
@@ -29,21 +29,21 @@ public class QueryTranslator {
 		return getQuery();
 	}
 
-	private void addWord(String word, int wordType, String field) {
+	private void addWord(String word, int wordType) {
 
 		WordData wd = new WordData();
 
 		wd.text = word;
-		wd.fieldName = field;
+//		wd.fieldName = field;
 
 		switch (wordType) {
-		case required:
+		case REQUIRED:
 			reqWords.addElement(wd);
 			break;
 //		case optional:
 //			optWords.addElement(wd);
 //			break;
-		case notwanted:
+		case NOT_WANTED:
 			notWords.addElement(wd);
 			break;
 		}
@@ -51,11 +51,10 @@ public class QueryTranslator {
 
 	public void processString(String input) {
 		int p = 0;
-		int pp;
 		int startWord;
 		int flag;
 		String theWord;
-		String fieldName;
+//		String fieldName;
 
 		reqWords = new Vector<WordData>();
 //		optWords = new Vector<WordData>();
@@ -84,16 +83,16 @@ public class QueryTranslator {
 			//CY bug 11825, don't process zero length string
 			if (theWord.length() > 0) {
 				//CY changed this to required from optional to make it AND logic
-				flag = required;
-				fieldName = "";
+				flag = REQUIRED;
+//				fieldName = "";
 
 				if (theWord.charAt(0) == '+' && theWord.length() > 1) {
-					flag = required;
+					flag = REQUIRED;
 					theWord = theWord.substring(1);
 				}
 
 				else if (theWord.charAt(0) == '-' && theWord.length() > 1) {
-					flag = notwanted;
+					flag = NOT_WANTED;
 					theWord = theWord.substring(1);
 				}
 
@@ -101,7 +100,7 @@ public class QueryTranslator {
 
 				theWord = theWord.replace('*', '%');
 
-				addWord(theWord, flag, fieldName);
+				addWord(theWord, flag);
 
 			}
 			p++;
@@ -211,8 +210,8 @@ public class QueryTranslator {
 		return tempString;
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(new QueryTranslator().translate(java.net.URLDecoder.decode("-tope")));
-		System.out.println(new QueryTranslator().translate(java.net.URLDecoder.decode("+J.+Thorac.+Cardiovasc.+Surg.%2C+June+1%2C+2004%3B+127%286%29%3A+1858+-+1858.")));
-	}
+//	public static void main(String[] args) {
+//		System.out.println(new QueryTranslator().translate(java.net.URLDecoder.decode("-tope")));
+//		System.out.println(new QueryTranslator().translate(java.net.URLDecoder.decode("+J.+Thorac.+Cardiovasc.+Surg.%2C+June+1%2C+2004%3B+127%286%29%3A+1858+-+1858.")));
+//	}
 }
