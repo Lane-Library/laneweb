@@ -129,10 +129,21 @@
                 <map:generate type="file" src="{defaults:live-base}/resources/templates/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match type="wildcard" pattern="shc/**">
+                <map:select type="resource-exists">
+                    <map:when test="{defaults:live-base}/content/portals/{1}">
+                        <map:generate type="html" src="{defaults:live-base}/content/portals/{1}"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:generate type="html" src="{defaults:live-base}/content/portals/internal-medicine.html"/>
+                    </map:otherwise>
+                </map:select>
+                <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match type="wildcard" pattern="**">
                 <map:generate type="html" src="{defaults:live-base}/content/{1}"/>
                 <map:transform type="xinclude"/>
-                
                 <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>

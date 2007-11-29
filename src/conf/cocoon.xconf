@@ -18,6 +18,7 @@
         <proxy-regex>^171\.65\.1(2[8-9]|[3-9][0-9])\.\S+</proxy-regex>
         <!-- hospital 171.65.200.0 - 171.65.255.255 -->
         <proxy-regex>^171\.65\.2[0-5][0-9]\.\S+</proxy-regex>
+        <template url="^(stage/|)shc/\S+" value="shc"/>
         <template url="^(stage/|)100years/index\.html" value="100years_index"/>
         <template url="^(stage/|)100years/\S+" value="100years"/>
         <template url="^(stage/|)services/spaces/reserve/\S+" value="none"/>
