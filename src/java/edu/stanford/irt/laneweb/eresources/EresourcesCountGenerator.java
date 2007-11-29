@@ -62,25 +62,29 @@ public class EresourcesCountGenerator extends AbstractGenerator {
         super.setup(resolver, objectModel, src, par);
         Request request = ObjectModelHelper.getRequest(objectModel);
         String query = request.getParameter(QUERY);
-        if (query != null) {
-        	query = query.trim();
-            if (query.length() ==0) {
-                query = null;
-            }
-        }
         if (query == null) {
 			query = request.getParameter(KEYWORDS);
-			if (query != null) {
-				query = query.trim();
-				if (query.length() == 0) {
-					query = null;
-				}
-			}
 		}
+        if (null != query) {
+        	query = query.trim();
+        	if (query.length() == 0 || "%".equals(query)) {
+        		query = null;
+        	}
+        	
+        }
         if (query != null) {
         	query = query.replaceAll("'","''");
         	String translatedQuery = this.queryTranslator.translate(query);
-        	this.selectStatementChars = COUNT_QUERY.replaceAll("XX", translatedQuery).toCharArray();
+        	if (translatedQuery.indexOf("()") == -1
+        			&& translatedQuery.indexOf("{}") == -1
+        			&& translatedQuery.indexOf("NOT") != 1) {
+        		this.selectStatementChars = COUNT_QUERY.replaceAll("XX", translatedQuery).toCharArray();
+        	} else {
+            	if (getLogger().isWarnEnabled()) {
+            		getLogger().warn("bad query translation: " + translatedQuery);
+            	}
+                this.selectStatementChars = new char[0];
+        	}
         } else {
         	if (getLogger().isWarnEnabled()) {
         		getLogger().warn("no useable query parameter");
