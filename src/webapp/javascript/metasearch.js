@@ -11,7 +11,7 @@ YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 
 function initializeMetasearch(e)
 {
-     window.keywords = escape(getMetaContent("LW.keywords"));
+     window.keywords = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.keywords"));
      window.searchId = getMetaContent("LW.searchId");
      window.searchMode = getMetaContent("LW.searchMode");
      window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
@@ -75,7 +75,7 @@ function MetasearchResult(metasearchElement,searchResource, id)
     this.name = (metasearchElement.innerHTML) ? metasearchElement.innerHTML : '';
     this.status = (searchResource.status) ? searchResource.status : 0;
     this.hits = searchResource.hits;
-    this.href = searchResource.url;
+    this.href = searchResource.url; // TODO: should fix this so only updates when searchResource.url has data
     
     this.setContent(metasearchElement);
 

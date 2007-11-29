@@ -21,6 +21,8 @@
 
     <xsl:param name="keywords"/>
 
+    <xsl:param name="q"/>
+
     <xsl:param name="source"/>
 
     <xsl:param name="proxy-links"/>
@@ -433,7 +435,14 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="value">
-                <xsl:value-of select="$keywords"/>
+                <xsl:choose>
+                    <xsl:when test="$keywords">
+                        <xsl:value-of select="$keywords"/>
+                    </xsl:when>
+                    <xsl:when test="$q">
+                        <xsl:value-of select="$q"/>
+                    </xsl:when>
+                </xsl:choose>
             </xsl:attribute>
         </xsl:copy>
     </xsl:template>
@@ -760,6 +769,9 @@
     <xsl:template name="meta-data">
         <xsl:if test="$keywords">
             <meta name="LW.keywords" content="{$keywords}"/>
+        </xsl:if>
+        <xsl:if test="$q">
+            <meta name="LW.q" content="{$q}"/>
         </xsl:if>
         <xsl:if test="$source">
             <meta name="LW.source" content="{$source}"/>
