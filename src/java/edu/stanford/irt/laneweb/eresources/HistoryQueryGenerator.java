@@ -165,18 +165,15 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     }
 
     public void generate() throws SAXException {
-        char[] selectStatmentChars = null;
-        if (this.haveParameters)  {
-            selectStatmentChars = getSelectStatmentChars();
-        } else {
-            selectStatmentChars = new char[0];
-        }
         this.xmlConsumer.startDocument();
-        this.xmlConsumer.startElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT,EMPTY_ATTS);
-        this.xmlConsumer.startElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT,EMPTY_ATTS);
-        this.xmlConsumer.characters(selectStatmentChars,0,selectStatmentChars.length);
-        this.xmlConsumer.endElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT);
-        this.xmlConsumer.endElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT);
+        if (this.haveParameters)  {
+            char[] selectStatmentChars = getSelectStatmentChars();
+            this.xmlConsumer.startElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT,EMPTY_ATTS);
+            this.xmlConsumer.startElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT,EMPTY_ATTS);
+            this.xmlConsumer.characters(selectStatmentChars,0,selectStatmentChars.length);
+            this.xmlConsumer.endElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT);
+            this.xmlConsumer.endElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT);
+        }
         this.xmlConsumer.endDocument();
     }
     

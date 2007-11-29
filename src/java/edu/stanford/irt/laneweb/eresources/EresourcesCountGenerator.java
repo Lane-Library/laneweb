@@ -95,11 +95,13 @@ public class EresourcesCountGenerator extends AbstractGenerator {
 
     public void generate() throws SAXException {
         this.xmlConsumer.startDocument();
+        if (this.selectStatementChars.length > 0) {
         this.xmlConsumer.startElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT,EMPTY_ATTS);
         this.xmlConsumer.startElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT,EMPTY_ATTS);
         this.xmlConsumer.characters(this.selectStatementChars,0,this.selectStatementChars.length);
         this.xmlConsumer.endElement(XMLNS,QUERY_ELEMENT,QUERY_ELEMENT);
         this.xmlConsumer.endElement(XMLNS,EXECUTE_QUERY_ELEMENT,EXECUTE_QUERY_ELEMENT);
+        }
         this.xmlConsumer.endDocument();
     }
     
