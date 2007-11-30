@@ -94,12 +94,14 @@
                         <map:when test="xsl/search.xsl">
                             <map:transform type="saxon" src="xsl/search.xsl">
                                 <map:parameter name="keywords" value="{request-param:keywords}"/>
+                                <map:parameter name="q" value="{request-param:q}"/>
                                 <map:parameter name="source" value="{request-param:source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search.xsl">
                                 <map:parameter name="keywords" value="{request-param:keywords}"/>
+                                <map:parameter name="q" value="{request-param:q}"/>
                                 <map:parameter name="source" value="{request-param:source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -122,12 +124,14 @@
                     <map:when test="xsl/search.xsl">
                         <map:transform type="saxon" src="xsl/search.xsl">
                             <map:parameter name="keywords" value="{request-param:keywords}"/>
+                            <map:parameter name="q" value="{request-param:q}"/>
                             <map:parameter name="source" value="{request-param:source}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/search.xsl">
                             <map:parameter name="keywords" value="{request-param:keywords}"/>
+                            <map:parameter name="q" value="{request-param:q}"/>
                             <map:parameter name="source" value="{request-param:source}"/>
                         </map:transform>
                     </map:otherwise>

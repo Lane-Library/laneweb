@@ -2,10 +2,22 @@
 <xsl:stylesheet exclude-result-prefixes="sql" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:sql="http://apache.org/cocoon/SQL/2.0">
     
     <xsl:param name="keywords"/>
+    <xsl:param name="q"/>
     <xsl:param name="t"/>
     <xsl:param name="a"/>
     
-    <xsl:variable name="ltitle" select="translate($keywords,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+    <xsl:variable name="search-terms">
+        <xsl:choose>
+            <xsl:when test="$q">
+                <xsl:value-of select="$q"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$keywords"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    
+    <xsl:variable name="ltitle" select="translate($search-terms,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
 
   <xsl:template match="sql:rowset">
       <html>

@@ -67,6 +67,17 @@
     <xsl:variable name="source-doc" select="/*/h:html[1]"/>
     <!-- the sitemap document -->
     <xsl:variable name="sitemap" select="/*/h:html[2]"/>
+    
+    <xsl:variable name="search-terms">
+        <xsl:choose>
+            <xsl:when test="$q">
+                <xsl:value-of select="$q"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$keywords"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
 
     <xsl:variable name="search-form-select">
         <xsl:choose>
@@ -145,7 +156,10 @@
                 <xsl:call-template name="breadcrumb"/>
             </xsl:when>
             <xsl:when test=".='keywords'">
-                <xsl:value-of select="$keywords"/>
+                <xsl:value-of select="$search-terms"/>
+            </xsl:when>
+            <xsl:when test=".='search-terms'">
+                <xsl:value-of select="$search-terms"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -341,7 +355,12 @@
             </xsl:when>
             <xsl:when test="contains(., '://') and contains(.,'{keywords}')">
                 <xsl:attribute name="href">
-                    <xsl:value-of select="replace(.,'\{keywords\}',$keywords)"/>
+                    <xsl:value-of select="replace(.,'\{keywords\}',$search-terms)"/>
+                </xsl:attribute>
+            </xsl:when>
+            <xsl:when test="contains(., '://') and contains(.,'{search-terms}')">
+                <xsl:attribute name="href">
+                    <xsl:value-of select="replace(.,'\{search-terms\}',$search-terms)"/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:when test="starts-with(.,'http://') and starts-with($request-uri,'secure')">
@@ -403,7 +422,7 @@
 	                    <xsl:text>var affiliation="</xsl:text><xsl:value-of select="$affiliation"/><xsl:text>";</xsl:text>
 	                    <xsl:text>var search_form_select="</xsl:text><xsl:value-of select="$search-form-select"/><xsl:text>";</xsl:text>
 	                    <xsl:text>var source="</xsl:text><xsl:value-of select="$source"/><xsl:text>";</xsl:text>
-	                    <xsl:text>var keywords="</xsl:text><xsl:value-of select="$keywords"/><xsl:text>";</xsl:text>
+	                    <xsl:text>var searchTerms="</xsl:text><xsl:value-of select="$search-terms"/><xsl:text>";</xsl:text>
 	                </script>
 	       	 </xsl:if>
         </xsl:copy>
@@ -435,18 +454,11 @@
     <xsl:template match="@proxy"/>
 
     <!-- TODO did the id of the input change? -->
-    <xsl:template match="h:input[@id='lw_search-keywords']">
+    <xsl:template match="h:input[@id='lw_search-keywords' or @id='lw_search-terms']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="value">
-                <xsl:choose>
-                    <xsl:when test="$keywords">
-                        <xsl:value-of select="$keywords"/>
-                    </xsl:when>
-                    <xsl:when test="$q">
-                        <xsl:value-of select="$q"/>
-                    </xsl:when>
-                </xsl:choose>
+                <xsl:value-of select="$search-terms"/>
             </xsl:attribute>
         </xsl:copy>
     </xsl:template>
@@ -480,8 +492,8 @@
     </xsl:template>
 
     <!-- TODO keep for now for backwards compatibility will be replaced by pi -->
-    <xsl:template match="h:span[@class='lw_keywords']">
-        <xsl:value-of select="$keywords"/>
+    <xsl:template match="h:span[@class='lw_keywords' or @class='lw_search-terms']">
+        <xsl:value-of select="$search-terms"/>
     </xsl:template>
 
     <!-- put the appropriate text into the content attribute of meta elements -->
@@ -750,10 +762,16 @@
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="contains($link,'{keywords}')">
-                    <xsl:value-of select="replace($link,'\{keywords\}',$keywords)"/>
+                    <xsl:value-of select="replace($link,'\{keywords\}',$search-terms)"/>
                 </xsl:when>
                 <xsl:when test="contains($link,'%7Bkeywords%7D')">
-                    <xsl:value-of select="replace($link,'%7Bkeywords%7D',$keywords)"/>
+                    <xsl:value-of select="replace($link,'%7Bkeywords%7D',$search-terms)"/>
+                </xsl:when>
+                <xsl:when test="contains($link,'{search-terms}')">
+                    <xsl:value-of select="replace($link,'\{search-terms\}',$search-terms)"/>
+                </xsl:when>
+                <xsl:when test="contains($link,'%7Bsearch-terms%7D')">
+                    <xsl:value-of select="replace($link,'%7Bsearch-terms%7D',$search-terms)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$link"/>
@@ -771,8 +789,9 @@
     </xsl:template>
 
     <xsl:template name="meta-data">
-        <xsl:if test="$keywords">
-            <meta name="LW.keywords" content="{$keywords}"/>
+        <xsl:if test="$search-terms">
+            <meta name="LW.keywords" content="{$search-terms}"/>
+            <meta name="LW.searchTerms" content="{$search-terms}"/>
         </xsl:if>
         <xsl:if test="$q">
             <meta name="LW.q" content="{$q}"/>

@@ -1,4 +1,4 @@
-var keywords;
+var searchTerms;
 var startTime = new Date().getTime();
 var activeResult;
 var spellcheck;
@@ -7,10 +7,10 @@ var queryMapping;
 YAHOO.util.Event.addListener(window,'load',initSearch);
 
 function initSearch() {
-        window.keywords = escape(getMetaContent("LW.keywords"));
-        YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.keywords, window.querymapCallBack);
-      	YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q='+window.keywords, window.findItCallBack);
-       	YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack );
+        window.searchTerms = escape(getMetaContent("LW.searchTerms"));
+        YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.searchTerms, window.querymapCallBack);
+      	YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q='+window.searchTerms, window.findItCallBack);
+       	YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack );
        	YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
         var popIn = document.getElementById('popInContent');
@@ -65,7 +65,7 @@ function Result(type, tab, container) {
     this._type = type;
     this._tab = tab;
     this.container = container;
-    this._url = '/././plain/search/'+this._type+'.html?source='+this._type+'&keywords=';
+    this._url = '/././plain/search/'+this._type+'.html?source='+this._type+'&q=';
     this._callback = {
         success:this.callbackSuccess,
         failure:window.handleFailure,
@@ -115,7 +115,7 @@ Result.prototype.callbackSuccess = function(o) {
 Result.prototype.getContent = function() {
         if (this._state == 'initialized') {
             this._state = 'searching';
-            var request = YAHOO.util.Connect.asyncRequest('GET', this._url+window.keywords, this._callback);
+            var request = YAHOO.util.Connect.asyncRequest('GET', this._url+window.searchTerms, this._callback);
 	    	this.searchIndicator.style.visibility = 'visible';
         } else if (this._state == 'searched') {
             this.show();
@@ -258,7 +258,7 @@ Spellcheck.prototype.setSuggestion = function(suggestion, link)
 
 Spellcheck.prototype.onclick = function(event, link)
 {
-	link.href = '/search.html?keywords='+this.suggestion+'&source='+this.source;
+	link.href = '/search.html?q='+this.suggestion+'&source='+this.source;
    	return false;
 }
 

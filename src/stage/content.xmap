@@ -42,6 +42,7 @@
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/search.xsl">
                         <map:parameter name="keywords" value="{request-param:keywords}"/>
+                        <map:parameter name="q" value="{request-param:q}"/>
                         <map:parameter name="source" value="{request-param:source}"/>
                     </map:transform>
                     <map:transform type="xinclude"/>
@@ -53,6 +54,7 @@
                 <map:generate type="file" src="cocoon:/search-templates/{1}.html"/>
                 <map:transform type="saxon" src="context://xsl/search.xsl">
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
+                    <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="source" value="{request-param:source}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>

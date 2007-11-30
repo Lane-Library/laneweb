@@ -72,7 +72,7 @@ function initializeLogger()
 		logMessage = logMessage.concat("\naffiliation ==> "+affiliation);
 		logMessage = logMessage.concat("\nsearch_form_select ==> "+search_form_select);
 		logMessage = logMessage.concat("\nsource ==> "+source);
-		logMessage = logMessage.concat("\nkeywords ==> "+keywords+"\n");
+		logMessage = logMessage.concat("\nsearchTerms ==> "+searchTerms+"\n");
 		YAHOO.log(logMessage , "info");
 	}
 }
@@ -157,7 +157,7 @@ function initializeSearchForm(e) {
         }
     }
     searchForm.submit = function(e) {
-	    if(this.keywords.value == '')
+	    if((this.keywords && this.keywords.value == '') || (this.q && this.q.value == ''))
 	    {
 	    	alert('Please enter one or more search terms.');
 	    	YAHOO.util.Event.stopEvent(e);
@@ -167,7 +167,11 @@ function initializeSearchForm(e) {
 	    	searchIndicator.style.visibility = 'visible';
 	        var formTarget = searchSelect.homeOption.value;
 	        if( formTarget.match(/^http/) ){
-	            formTarget = formTarget.replace(/\{keywords\}/g,this.keywords.value);
+	            if (this.keywords) {
+	                formTarget = formTarget.replace(/\{keywords\}/g,this.keywords.value);
+	            } else if (this.q) {
+                    formTarget = formTarget.replace(/\{search-terms\}/g,this.q.value);
+                }
 	            window.location = formTarget;
 	            YAHOO.util.Event.preventDefault(e);
 	        }

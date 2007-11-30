@@ -234,19 +234,19 @@
                 <map:redirect-to uri="{request:contextPath}/portals/clinical.html"/>
             </map:match>
             <!-- ========================== EHR redirects for SHC ============================ -->
-            <!--<map:match type="wildcard" pattern="shc/cardiology.html">
+            <map:match type="wildcard" pattern="shc/cardiology.html">
                 <map:redirect-to uri="{request:contextPath}/portals/cardiology.html?template=shc&amp;{request:queryString}"/>
             </map:match>
             <map:match type="wildcard" pattern="shc/clinical.html">
                 <map:redirect-to uri="{request:contextPath}/portals/clinical.html?template=shc&amp;{request:queryString}"/>
-            </map:match>-->
+            </map:match>
             <map:match type="wildcard" pattern="shc/ear-nose-throat.html">
                 <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
             </map:match>
             <map:match type="wildcard" pattern="shc/emergency.html">
                 <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
             </map:match>
-            <!--<map:match type="wildcard" pattern="shc/gastroenterology.html">
+            <map:match type="wildcard" pattern="shc/gastroenterology.html">
                 <map:redirect-to uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"/>
             </map:match>
             <map:match type="wildcard" pattern="shc/hematology.html">
@@ -263,16 +263,16 @@
             </map:match>
             <map:match type="wildcard" pattern="shc/internal-medicine.html">
                 <map:redirect-to uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"/>
-            </map:match>-->
+            </map:match>
             <map:match type="wildcard" pattern="shc/neurology.html">
                 <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
             </map:match>
             <map:match type="wildcard" pattern="shc/ob-gyn.html">
                 <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
             </map:match>
-            <!--<map:match type="wildcard" pattern="shc/oncology.html">
+            <map:match type="wildcard" pattern="shc/oncology.html">
                 <map:redirect-to uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"/>
-            </map:match>-->
+            </map:match>
             <map:match type="wildcard" pattern="shc/opthalmology.html">
                 <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
             </map:match>
@@ -282,9 +282,9 @@
             <map:match type="wildcard" pattern="shc/psychiatry.html">
                 <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
             </map:match>
-            <!--<map:match type="wildcard" pattern="shc/pulmonary.html">
+            <map:match type="wildcard" pattern="shc/pulmonary.html">
                 <map:redirect-to uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"/>
-            </map:match>-->
+            </map:match>
             <map:match type="wildcard" pattern="shc/radiology.html">
                 <map:redirect-to uri="http://www.guideline.gov/search/searchresults.aspx?Type=3&amp;num=20&amp;txtSearch={request-param:keywords}+AND+%22american+college+of+radiology%22"/>
             </map:match>
@@ -307,6 +307,7 @@
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
+                    <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
@@ -328,6 +329,7 @@
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
+                    <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>

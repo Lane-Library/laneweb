@@ -70,13 +70,13 @@ function webtrendsProcess(node){
 					href = href.substring(0,href.indexOf('/'));
 				}	
 				title = getWebtrendsTitle(node);	
-				//alert('DCS.dcssip:'+ href +'\nDCS.dcsuri:'+uri + '\nDCS.dcsquery:' +query  +'\nWT.ti:'+title +'\nDCSext.keywords:'+getMetaContent('LW.keywords')+'\nDCSext.search_type:'+getMetaContent('LW.source')+'\nDCSext.offsite_link:1');
-			 	if(getMetaContent('LW.keywords') != undefined)
+				//alert('DCS.dcssip:'+ href +'\nDCS.dcsuri:'+uri + '\nDCS.dcsquery:' +query  +'\nWT.ti:'+title +'\nDCSext.keywords:'+getMetaContent('LW.searchTerms')+'\nDCSext.search_type:'+getMetaContent('LW.source')+'\nDCSext.offsite_link:1');
+			 	if(getMetaContent('LW.searchTerms') != undefined)
 			 	{
 			 		if(query != undefined )
-						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1','WT.seg_1',affiliation);
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.searchTerms'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1','WT.seg_1',affiliation);
 					else	
-						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1','WT.seg_1',affiliation);
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.searchTerms'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1','WT.seg_1',affiliation);
 				}
 				else
 				{
@@ -95,9 +95,9 @@ function webtrendsProcess(node){
 		{
 			title = getWebtrendsTitle(node);
 			uri =  node.pathname;	
-			//alert('\nDCS.dcsuri:'+uri + '\nWT.ti: '+title +'\nDCSext.keywords: '+getMetaContent('LW.keywords')+'\nDCSext.search_type: '+getMetaContent('LW.source'));
-			if(getMetaContent('LW.keywords') != undefined)
-				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'WT.seg_1',affiliation);
+			//alert('\nDCS.dcsuri:'+uri + '\nWT.ti: '+title +'\nDCSext.keywords: '+getMetaContent('LW.searchTerms')+'\nDCSext.search_type: '+getMetaContent('LW.source'));
+			if(getMetaContent('LW.searchTerms') != undefined)
+				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.searchTerms'),'DCSext.search_type',getMetaContent('LW.source'),'WT.seg_1',affiliation);
 			else
 				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'WT.seg_1',affiliation);
 		}

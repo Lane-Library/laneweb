@@ -10,7 +10,7 @@
     <xsl:param name="query-string"/>
     <xsl:param name="source"/>
     
-    <xsl:variable name="keywords" select="/doc/s:search/s:query/text()"/>
+    <xsl:variable name="search-terms" select="/doc/s:search/s:query/text()"/>
     <xsl:variable name="searchId" select="/doc/s:search/@id"/>
     <xsl:variable name="searchMode" select="/doc/h:html/h:head/h:meta[@name='LW.searchMode']/@content"/>
     
@@ -37,8 +37,8 @@
                     <meta name="LW.searchTemplate" content="{$source}"/>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="not(h:meta[@name='LW.keywords' and not(@content='')])">
-                <meta name="LW.keywords" content="{$keywords}"/>
+            <xsl:if test="not(h:meta[@name='LW.searchTerms' and not(@content='')])">
+                <meta name="LW.searchTerms" content="{$search-terms}"/>
             </xsl:if>
             <xsl:if test="not(h:script[@src='/javascript/metasearch.js'])">
                 <script type="text/javascript" src="/javascript/metasearch.js">//</script>
@@ -51,7 +51,7 @@
             <xsl:if test="/doc/s:search/@status != 'successful'">
                 <noscript>
                     <h2>
-                        Search still running ... <a href="search.html?javascript=false&amp;source={$source}&amp;id={$searchId}&amp;keywords={$keywords}">Click to see more hit counts</a>
+                        Search still running ... <a href="search.html?javascript=false&amp;source={$source}&amp;id={$searchId}&amp;q={$search-terms}">Click to see more hit counts</a>
                     </h2>
                 </noscript>
             </xsl:if>
@@ -61,7 +61,7 @@
     
     <xsl:template match="attribute::href[contains(.,'{$id}') or contains(.,'{$q}')]">
         <xsl:variable name="q">
-            <xsl:value-of select="replace(.,'\{\$q\}',$keywords)"/>
+            <xsl:value-of select="replace(.,'\{\$q\}',$search-terms)"/>
         </xsl:variable>
         <xsl:attribute name="href">
             <xsl:value-of select="replace($q,'\{\$id\}',$searchId)"/>

@@ -65,6 +65,7 @@
                             <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                            <map:parameter name="q" value="{request-param:q}"/>
                             <map:parameter name="keywords" value="{request-param:keywords}"/>
                             <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                         </map:transform>
@@ -79,6 +80,7 @@
                             <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                            <map:parameter name="q" value="{request-param:q}"/>
                             <map:parameter name="keywords" value="{request-param:keywords}"/>
                             <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                         </map:transform>
@@ -104,6 +106,7 @@
                             <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                            <map:parameter name="q" value="{request-param:q}"/>
                             <map:parameter name="keywords" value="{request-param:keywords}"/>
                             <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                         </map:transform>
@@ -118,6 +121,7 @@
                             <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                            <map:parameter name="q" value="{request-param:q}"/>
                             <map:parameter name="keywords" value="{request-param:keywords}"/>
                             <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                         </map:transform>

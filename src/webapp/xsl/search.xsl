@@ -8,6 +8,18 @@
     
     <xsl:param name="source"/>
     <xsl:param name="keywords"/>
+    <xsl:param name="q"/>
+    
+    <xsl:variable name="search-terms">
+        <xsl:choose>
+            <xsl:when test="$q">
+                <xsl:value-of select="$q"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$keywords"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
     
     
     
@@ -27,8 +39,11 @@
             <xsl:when test=".='searchResults'">
                 <xsl:apply-templates select="/doc/h:html[attribute::id]/h:body/child::node()"/>
             </xsl:when>
+            <xsl:when test=".='search-terms'">
+                <xsl:value-of select="$search-terms"/>
+            </xsl:when>
             <xsl:when test=".='keywords'">
-                <xsl:value-of select="$keywords"/>
+                <xsl:value-of select="$search-terms"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -46,7 +61,7 @@
     <xsl:template match="attribute::href[contains(.,'{$keywords}')]">
         <xsl:attribute name="href">
             <xsl:value-of select="substring-before(.,'{$keywords}')"/>
-            <xsl:value-of select="$keywords"/>
+            <xsl:value-of select="$search-terms"/>
         </xsl:attribute>
     </xsl:template>
  

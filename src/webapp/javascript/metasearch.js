@@ -1,4 +1,4 @@
-var keywords;
+var searchTerms;
 var searchId;
 var searchIndicator;
 var searchMode;
@@ -11,7 +11,7 @@ YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 
 function initializeMetasearch(e)
 {
-     window.keywords = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.keywords"));
+     window.searchTerms = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.searchTerms"));
      window.searchId = getMetaContent("LW.searchId");
      window.searchMode = getMetaContent("LW.searchMode");
      window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
@@ -20,15 +20,15 @@ function initializeMetasearch(e)
      {
          window.searchUrl = '/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate;
      }
-     else if( window.keywords && window.keywords != 'undefined' )
+     else if( window.searchTerms && window.searchTerms != 'undefined' )
      {
-         window.searchUrl = '/././apps/search/filtered-json?q='+window.keywords+'&source='+location.pathname.replace('/./.','');
+         window.searchUrl = '/././apps/search/filtered-json?q='+window.searchTerms+'&source='+location.pathname.replace('/./.','');
      }
      
      if( window.searchUrl )
      {
          YAHOO.util.Connect.asyncRequest('GET', searchUrl, window.metasearchCallback);
-         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.keywords, window.spellCheckCallBack);
+         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack);
          if(YAHOO.util.Dom.inDocument('searchIndicator')){
              window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
          }
@@ -211,7 +211,7 @@ SearchIndicator.prototype.setProgress = function(status,pendingResources,complet
     {
         this.hide();
         //YAHOO.util.Dom.setStyle('haltMetasearch','display','none');
-    	this.setMessage('Results for ' + window.keywords);
+    	this.setMessage('Results for ' + window.searchTerms);
         YAHOO.util.Dom.setStyle('resultsMessage','display','inline');
         YAHOO.util.Dom.setStyle('metasearchControls','display','inline');
         YAHOO.util.Event.addListener('toggleZeros', 'click', toggleZeros);
@@ -237,7 +237,8 @@ function showSpellCheck(o)
 			var spellCheckLink = document.getElementById("spellCheckLink");
 			if(spellCheckContainer && spellCheckLink)
 			{
-    			spellCheckLink.href = location.href.replace("keywords=" + window.keywords,"keywords=" + spellCheckResponse.suggestion);
+    			spellCheckLink.href = location.href.replace("keywords=" + window.searchTerms,"keywords=" + spellCheckResponse.suggestion);
+                spellCheckLink.href = spellCheckLink.href.replace("q=" + window.searchTerms,"q=" + spellCheckResponse.suggestion);
     			spellCheckLink.innerHTML = spellCheckResponse.suggestion;
     			spellCheckContainer.style.display= 'inline';
     			spellCheckContainer.style.visibility= 'visible';
