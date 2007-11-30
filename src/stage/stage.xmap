@@ -34,6 +34,10 @@
             <map:match pattern="secure/webdash.html">
                 <map:act type="webdashAction"/>
             </map:match>
+             <map:match pattern="javascriptLogger">
+                <map:act type="javascript-logger"/>
+                <map:read type="resource" src="{defaults:live-base}/resources/images/templates/default/spacer.gif" mime-type="image/gif"/>
+            </map:match>
             <map:match type="wildcard" pattern="cookiesFetch.html">
                 <map:generate type="file" src="{defaults:stage-base}/content/cookiesFetch.html"/>
                 <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
