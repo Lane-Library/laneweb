@@ -16,12 +16,7 @@
  */
 package edu.stanford.irt.laneweb;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Map;
 import java.util.Properties;
 
@@ -37,126 +32,121 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.ServiceableGenerator;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
-import org.apache.excalibur.source.impl.AbstractSource;
-import org.w3c.tidy.Tidy;
 import org.w3c.tidy.TidyXMLReader;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
  */
-public class HTMLGenerator extends ServiceableGenerator implements
-		Configurable, CacheableProcessingComponent, Disposable {
+public class HTMLGenerator extends ServiceableGenerator implements Configurable, CacheableProcessingComponent, Disposable {
 
-	/** The source, if coming from a file */
-	private Source inputSource;
+    /** The source, if coming from a file */
+    private Source inputSource;
 
-	/** JTidy properties */
-	private Properties properties;
+    private String configUrl;
 
-	private String configUrl;
+    private Properties properties;
 
-	public void configure(Configuration config) throws ConfigurationException {
+    public void configure(final Configuration config) throws ConfigurationException {
 
-		this.configUrl = config.getChild("jtidy-config").getValue(null);
-		doConfig();
-	}
-	private void doConfig() throws ConfigurationException {
+        this.configUrl = config.getChild("jtidy-config").getValue(null);
+        doConfig();
+    }
 
-//		if (configUrl != null) {
-//			org.apache.excalibur.source.SourceResolver resolver = null;
-//			Source configSource = null;
-//			try {
-//				resolver = (org.apache.excalibur.source.SourceResolver) this.manager
-//						.lookup(org.apache.excalibur.source.SourceResolver.ROLE);
-//				configSource = resolver.resolveURI(configUrl);
-//				if (getLogger().isDebugEnabled()) {
-//					getLogger().debug(
-//							"Loading configuration from "
-//									+ configSource.getURI());
-//				}
-//
-//				this.properties = new Properties();
-//				this.properties.load(configSource.getInputStream());
-//
-//			} catch (Exception e) {
-//				getLogger().warn("Cannot load configuration from " + configUrl);
-//				throw new ConfigurationException(
-//						"Cannot load configuration from " + configUrl, e);
-//			} finally {
-//				if (null != resolver) {
-//					this.manager.release(resolver);
-//					resolver.release(configSource);
-//				}
-//			}
-//		}
-	}
+    private void doConfig() throws ConfigurationException {
 
-	/**
-	 * Recycle this component. All instance variables are set to
-	 * <code>null</code>.
-	 */
-	public void recycle() {
-		if (this.inputSource != null) {
-			this.resolver.release(this.inputSource);
-			this.inputSource = null;
-		}
-		super.recycle();
-	}
+        if (this.configUrl != null) {
+            org.apache.excalibur.source.SourceResolver resolver = null;
+            Source configSource = null;
+            try {
+                resolver =
+                        (org.apache.excalibur.source.SourceResolver) this.manager
+                                                                                 .lookup(org.apache.excalibur.source.SourceResolver.ROLE);
+                configSource = resolver.resolveURI(this.configUrl);
+                if (getLogger().isDebugEnabled()) {
+                    getLogger().debug("Loading configuration from " + configSource.getURI());
+                }
 
-	/**
-	 * Setup the html generator. Try to get the last modification date of the
-	 * source for caching.
-	 */
-	public void setup(SourceResolver resolver, Map objectModel, String src,
-			Parameters par) throws ProcessingException, SAXException,
-			IOException {
-		super.setup(resolver, objectModel, src, par);
-		this.inputSource = this.resolver.resolveURI(this.source);
-	}
+                this.properties = new Properties();
+                this.properties.load(configSource.getInputStream());
 
-	/**
-	 * Generate the unique key. This key must be unique inside the space of this
-	 * component. This method must be invoked before the generateValidity()
-	 * method.
-	 * 
-	 * @return The generated key or <code>0</code> if the component is
-	 *         currently not cacheable.
-	 */
-	public java.io.Serializable getKey() {
-		if (this.inputSource == null) {
-			return null;
-		}
-		return this.inputSource.getURI();
-	}
+            } catch (Exception e) {
+                getLogger().warn("Cannot load configuration from " + this.configUrl);
+                throw new ConfigurationException("Cannot load configuration from " + this.configUrl, e);
+            } finally {
+                if (null != resolver) {
+                    this.manager.release(resolver);
+                    resolver.release(configSource);
+                }
+            }
+        }
+    }
 
-	/**
-	 * Generate the validity object. Before this method can be invoked the
-	 * generateKey() method must be invoked.
-	 * 
-	 * @return The generated validity object or <code>null</code> if the
-	 *         component is currently not cacheable.
-	 */
-	public SourceValidity getValidity() {
-		if (this.inputSource == null) {
-			return null;
-		}
-		return this.inputSource.getValidity();
-	}
+    /**
+     * Recycle this component. All instance variables are set to
+     * <code>null</code>.
+     */
+    @Override
+    public void recycle() {
+        if (this.inputSource != null) {
+            this.resolver.release(this.inputSource);
+            this.inputSource = null;
+        }
+        super.recycle();
+    }
 
-	/**
-	 * Generate XML data.
-	 */
-	public void generate() throws IOException, SAXException,
-			ProcessingException {
-		try {
-			TidyXMLReader reader = new TidyXMLReader();
-			reader.setContentHandler(this.xmlConsumer);
-			InputSource source = new InputSource(this.inputSource.getInputStream());
-			reader.parse(source);
-		} catch (SAXException e) {
-			SourceUtil.handleSAXException(this.inputSource.getURI(), e);
-		}
-	}
+    /**
+     * Setup the html generator. Try to get the last modification date of the
+     * source for caching.
+     */
+    @Override
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
+        super.setup(resolver, objectModel, src, par);
+        this.inputSource = this.resolver.resolveURI(this.source);
+    }
+
+    /**
+     * Generate the unique key. This key must be unique inside the space of this
+     * component. This method must be invoked before the generateValidity()
+     * method.
+     * 
+     * @return The generated key or <code>0</code> if the component is
+     *         currently not cacheable.
+     */
+    public java.io.Serializable getKey() {
+        if (this.inputSource == null) {
+            return null;
+        }
+        return this.inputSource.getURI();
+    }
+
+    /**
+     * Generate the validity object. Before this method can be invoked the
+     * generateKey() method must be invoked.
+     * 
+     * @return The generated validity object or <code>null</code> if the
+     *         component is currently not cacheable.
+     */
+    public SourceValidity getValidity() {
+        if (this.inputSource == null) {
+            return null;
+        }
+        return this.inputSource.getValidity();
+    }
+
+    /**
+     * Generate XML data.
+     */
+    public void generate() throws IOException, SAXException, ProcessingException {
+        try {
+            TidyXMLReader reader = new TidyXMLReader();
+            reader.setContentHandler(this.xmlConsumer);
+            InputSource source = new InputSource(this.inputSource.getInputStream());
+            reader.parse(source);
+        } catch (SAXException e) {
+            SourceUtil.handleSAXException(this.inputSource.getURI(), e);
+        }
+    }
 
 }

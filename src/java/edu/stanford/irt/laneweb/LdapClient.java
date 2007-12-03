@@ -4,5 +4,5 @@ import edu.stanford.irt.directory.LDAPPerson;
 
 public interface LdapClient {
 
-	public LDAPPerson getLdapPerson(String sunetId);
+    public LDAPPerson getLdapPerson(String sunetId);
 }

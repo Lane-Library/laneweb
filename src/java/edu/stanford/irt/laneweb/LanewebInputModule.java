@@ -27,107 +27,104 @@ import org.apache.cocoon.environment.Request;
  * To change the template for this generated type comment go to Window -
  * Preferences - Java - Code Generation - Code and Comments
  */
-public class LanewebInputModule extends AbstractLogEnabled implements
-		InputModule, ThreadSafe, Configurable, Serviceable {
+public class LanewebInputModule extends AbstractLogEnabled implements InputModule, ThreadSafe, Configurable, Serviceable {
 
-	private Configuration[] noProxyRegex;
+    private Configuration[] noProxyRegex;
 
-	private Configuration[] proxyRegex;
+    private Configuration[] proxyRegex;
 
-	private Configuration[] templateConfig;
-	
-	private UserInfoHelper userInfoHelper;
+    private Configuration[] templateConfig;
 
-	public Object getAttribute(String key, Configuration config, Map objectModel)
-			throws ConfigurationException {
-		Object result = null;
-		Request request = ObjectModelHelper.getRequest(objectModel);
-		UserInfo userInfo = userInfoHelper.getUserInfo(request);
-		
-		if (LanewebConstants.PROXY_LINKS.equals(key)) {
-			String ip = request.getRemoteAddr();
-			// mod_proxy puts the real remote address in an x-forwarded-for
-			// header
-			// Load balancer also does this
-			String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
-			if (header != null) {
-				ip = header;
-			}
-			result = userInfo.getProxyLinks() != null ? userInfo.getProxyLinks() : new Boolean(proxyLinks(ip));
-		}
-		if (LanewebConstants.AFFILIATION.equals(key)) {
-			result = userInfo.getAffiliation();
-		}
-		if (LanewebConstants.TEMPLATE.equals(key)) {
-			String requestURI = request.getRequestURI();
-			int contextPathLength = request.getContextPath().length();
-			result = getTemplateName(requestURI.substring(contextPathLength + 1));
-		}
-		if (LanewebConstants.SUNETID.equals(key)) {
-			result = userInfo.getSunetId();
-		}
-		if (LanewebConstants.TICKET.equals(key)) {
-			result = userInfo.getTicket();
-		}
-		if (getLogger().isDebugEnabled()) {
-			getLogger().debug(key + " = " + result);
-		}
-		return result;
-	}
+    private UserInfoHelper userInfoHelper;
 
-	public Iterator getAttributeNames(Configuration key, Map config) {
-		throw new UnsupportedOperationException();
-	}
+    public Object getAttribute(final String key, final Configuration config, final Map objectModel) throws ConfigurationException {
+        Object result = null;
+        Request request = ObjectModelHelper.getRequest(objectModel);
+        UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
 
-	public Object[] getAttributeValues(String key, Configuration config,
-			Map objectModel) throws ConfigurationException {
-		Object result = getAttribute(key, config, objectModel);
-		if (result != null) {
-			return new Object[] { result };
-		}
-		return null;
-	}
+        if (LanewebConstants.PROXY_LINKS.equals(key)) {
+            String ip = request.getRemoteAddr();
+            // mod_proxy puts the real remote address in an x-forwarded-for
+            // header
+            // Load balancer also does this
+            String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
+            if (header != null) {
+                ip = header;
+            }
+            result = userInfo.getProxyLinks() != null ? userInfo.getProxyLinks() : new Boolean(proxyLinks(ip));
+        }
+        if (LanewebConstants.AFFILIATION.equals(key)) {
+            result = userInfo.getAffiliation();
+        }
+        if (LanewebConstants.TEMPLATE.equals(key)) {
+            String requestURI = request.getRequestURI();
+            int contextPathLength = request.getContextPath().length();
+            result = getTemplateName(requestURI.substring(contextPathLength + 1));
+        }
+        if (LanewebConstants.SUNETID.equals(key)) {
+            result = userInfo.getSunetId();
+        }
+        if (LanewebConstants.TICKET.equals(key)) {
+            result = userInfo.getTicket();
+        }
+        if (getLogger().isDebugEnabled()) {
+            getLogger().debug(key + " = " + result);
+        }
+        return result;
+    }
 
-	public void configure(Configuration config) throws ConfigurationException {
-		this.noProxyRegex = config.getChildren("noproxy-regex");
-		this.proxyRegex = config.getChildren("proxy-regex");
-		this.templateConfig = config.getChildren("template");
-	}
+    public Iterator<String> getAttributeNames(final Configuration key, final Map config) {
+        throw new UnsupportedOperationException();
+    }
 
-	protected String getTemplateName(final String url)
-			throws ConfigurationException {
-		for (int i = 0; i < this.templateConfig.length; i++) {
-			if (url.matches(this.templateConfig[i].getAttribute("url"))) {
-				return this.templateConfig[i].getAttribute("value");
-			}
-		}
-		return null;
-	}
+    public Object[] getAttributeValues(final String key, final Configuration config, final Map objectModel)
+            throws ConfigurationException {
+        Object result = getAttribute(key, config, objectModel);
+        if (result != null) {
+            return new Object[] { result };
+        }
+        return null;
+    }
 
-	protected boolean proxyLinks(final String ip) throws ConfigurationException {
-		return !isNoProxy(ip) || isProxy(ip);
-	}
+    public void configure(final Configuration config) throws ConfigurationException {
+        this.noProxyRegex = config.getChildren("noproxy-regex");
+        this.proxyRegex = config.getChildren("proxy-regex");
+        this.templateConfig = config.getChildren("template");
+    }
 
-	private boolean isNoProxy(final String ip) throws ConfigurationException {
-		for (int i = 0; i < this.noProxyRegex.length; i++) {
-			if (ip.matches(this.noProxyRegex[i].getValue())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    protected String getTemplateName(final String url) throws ConfigurationException {
+        for (Configuration element : this.templateConfig) {
+            if (url.matches(element.getAttribute("url"))) {
+                return element.getAttribute("value");
+            }
+        }
+        return null;
+    }
 
-	private boolean isProxy(String ip) throws ConfigurationException {
-		for (int i = 0; i < this.proxyRegex.length; i++) {
-			if (ip.matches(this.proxyRegex[i].getValue())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    protected boolean proxyLinks(final String ip) throws ConfigurationException {
+        return !isNoProxy(ip) || isProxy(ip);
+    }
 
-	public void service(ServiceManager serviceManager) throws ServiceException {
-		userInfoHelper = (UserInfoHelper) serviceManager.lookup(UserInfoHelper.ROLE);
-	}
+    private boolean isNoProxy(final String ip) throws ConfigurationException {
+        for (Configuration element : this.noProxyRegex) {
+            if (ip.matches(element.getValue())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isProxy(final String ip) throws ConfigurationException {
+        for (Configuration element : this.proxyRegex) {
+            if (ip.matches(element.getValue())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void service(final ServiceManager serviceManager) throws ServiceException {
+        this.userInfoHelper = (UserInfoHelper) serviceManager.lookup(UserInfoHelper.ROLE);
+    }
 
 }

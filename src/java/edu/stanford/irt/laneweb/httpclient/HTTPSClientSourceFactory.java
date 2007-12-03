@@ -26,21 +26,22 @@ import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
 
 /**
  * {@link HttpClientSource} Factory class.
- *
+ * 
  * @avalon.component
  * @avalon.service type=org.apache.excalibur.source.SourceFactory
  * @x-avalon.info name=httpsclient-source
  * @x-avalon.lifestyle type=singleton
- *
+ * 
  * @author <a href="mailto:dev@avalon.apache.org">Avalon Development Team</a>
- * @version CVS $Id: HTTPSClientSourceFactory.java,v 1.5 2004/02/28 11:47:24 cziegeler Exp $
+ * @version CVS $Id: HTTPSClientSourceFactory.java,v 1.5 2004/02/28 11:47:24
+ *          cziegeler Exp $
  */
-public class HTTPSClientSourceFactory extends HTTPClientSourceFactory
-{
+public class HTTPSClientSourceFactory extends HTTPClientSourceFactory {
+
     /**
      * SSL implementation provider.
      */
-    public static final String SSL_PROVIDER   = "provider";
+    public static final String SSL_PROVIDER = "provider";
 
     /**
      * SSL socket factory.
@@ -50,97 +51,81 @@ public class HTTPSClientSourceFactory extends HTTPClientSourceFactory
     /**
      * HTTPS constant.
      */
-    public static final String HTTPS          = "https";
+    public static final String HTTPS = "https";
 
     /**
-     * Parameterize this {@link org.apache.excalibur.source.SourceFactory SourceFactory}.
-     *
-     * @param params {@link Parameters} instance
-     * @exception ParameterException if an error occurs
+     * Parameterize this
+     * {@link org.apache.excalibur.source.SourceFactory SourceFactory}.
+     * 
+     * @param params
+     *            {@link Parameters} instance
+     * @exception ParameterException
+     *                if an error occurs
      */
-    public void parameterize( final Parameters params )
-        throws ParameterException
-    {
-        super.parameterize( params );
+    @Override
+    public void parameterize(final Parameters params) throws ParameterException {
+        super.parameterize(params);
 
-        this.setProvider( params );
-        this.setSocketFactory( params );
+        this.setProvider(params);
+        this.setSocketFactory(params);
     }
 
     /**
-     * Method to set up the SSL provider for this factory
-     * instance.
-     *
-     * @param params configuration {@link Parameters}
-     * @exception ParameterException if an error occurs
+     * Method to set up the SSL provider for this factory instance.
+     * 
+     * @param params
+     *            configuration {@link Parameters}
+     * @exception ParameterException
+     *                if an error occurs
      */
-    private void setProvider( final Parameters params )
-        throws ParameterException
-    {
+    private void setProvider(final Parameters params) throws ParameterException {
         String provider = null;
 
-        try
-        {
-            provider = params.getParameter( SSL_PROVIDER );
-        }
-        catch ( final ParameterException e )
-        {
+        try {
+            provider = params.getParameter(SSL_PROVIDER);
+        } catch (final ParameterException e) {
             return; // this is ok, means no custom SSL provider
         }
 
-        Security.addProvider( (Provider) this.getInstance( provider ) );
+        Security.addProvider((Provider) this.getInstance(provider));
     }
 
     /**
-     * Method to set up the SSL socket factory for this
-     * source factory instance.
-     *
-     * @param params configuration {@link Parameters}
-     * @exception ParameterException if an error occurs
+     * Method to set up the SSL socket factory for this source factory instance.
+     * 
+     * @param params
+     *            configuration {@link Parameters}
+     * @exception ParameterException
+     *                if an error occurs
      */
-    private void setSocketFactory( final Parameters params )
-        throws ParameterException
-    {
+    private void setSocketFactory(final Parameters params) throws ParameterException {
         String factoryName = null;
 
-        try
-        {
-            factoryName = params.getParameter( SOCKET_FACTORY );
-        }
-        catch ( final ParameterException e )
-        {
+        try {
+            factoryName = params.getParameter(SOCKET_FACTORY);
+        } catch (final ParameterException e) {
             return; // this is ok, means no custom socket factory
         }
 
-        final Protocol protocol =
-            new Protocol(
-                HTTPS,
-                ( ProtocolSocketFactory ) this.getInstance( factoryName ),
-                443
-            );
-        Protocol.registerProtocol( HTTPS, protocol );
+        final Protocol protocol = new Protocol(HTTPS, (ProtocolSocketFactory) this.getInstance(factoryName), 443);
+        Protocol.registerProtocol(HTTPS, protocol);
     }
 
     /**
      * Helper method to create a single instance from a class name. Assumes
      * given class name has a no-parameter constructor.
-     *
-     * @param className class name to instantiate
+     * 
+     * @param className
+     *            class name to instantiate
      * @return instantiated class
-     * @exception ParameterException if an error occurs
+     * @exception ParameterException
+     *                if an error occurs
      */
-    private Object getInstance( final String className )
-        throws ParameterException
-    {
-        try
-        {
-            return Class.forName( className ).newInstance();
-        }
-        catch ( final Exception e )
-        {
-            throw new ParameterException(
-                "Unable to instantiate: " + className, e
-            );
+    private Object getInstance(final String className) throws ParameterException {
+        try {
+            return Class.forName(className).newInstance();
+        } catch (final Exception e) {
+            throw new ParameterException("Unable to instantiate: " + className, e);
         }
     }
 }

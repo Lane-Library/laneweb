@@ -13,36 +13,33 @@ import org.apache.cocoon.environment.SourceResolver;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class WebdashAction extends ServiceableAction{
+public class WebdashAction extends ServiceableAction {
 
-	UserInfoHelper userInfoHelper = null;
-	WebDashLogin webDashLogin = null;
-	
-	
-	public Map act(Redirector redirector, SourceResolver sourceResolver, Map objectModel, String string, Parameters param) throws Exception {
-		
-		Request request = ObjectModelHelper.getRequest(objectModel);
-	
-		UserInfo userInfo = userInfoHelper.getUserInfo(request);
-		LDAPPerson ldapPerson = userInfo.getLdapPerson(); 
-		if( userInfo == null ||  userInfo.getLdapPerson() == null)
-			throw new RuntimeException("Ladp user not found");
-		String url = webDashLogin.getEncodedUrl(ldapPerson, request);
-		redirector.globalRedirect(true, url);
-		return null;
-	}
+    UserInfoHelper userInfoHelper = null;
 
-	
+    WebDashLogin webDashLogin = null;
 
-	@Override
-	public void service(ServiceManager manager) throws ServiceException {
-		super.service(manager);
-		webDashLogin = (WebDashLogin) manager.lookup(WebDashLogin.ROLE);
-		userInfoHelper = (UserInfoHelper) manager.lookup(UserInfoHelper.ROLE);
+    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string,
+            final Parameters param) throws Exception {
 
-	}
+        Request request = ObjectModelHelper.getRequest(objectModel);
 
+        UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
+        LDAPPerson ldapPerson = userInfo.getLdapPerson();
+        if (null == ldapPerson) {
+            throw new RuntimeException("Ladp user not found");
+        }
+        String url = this.webDashLogin.getEncodedUrl(ldapPerson, request);
+        redirector.globalRedirect(true, url);
+        return null;
+    }
 
-	
-	
+    @Override
+    public void service(final ServiceManager manager) throws ServiceException {
+        super.service(manager);
+        this.webDashLogin = (WebDashLogin) manager.lookup(WebDashLogin.ROLE);
+        this.userInfoHelper = (UserInfoHelper) manager.lookup(UserInfoHelper.ROLE);
+
+    }
+
 }

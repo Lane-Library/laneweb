@@ -11,12 +11,12 @@ import edu.stanford.irt.spell.GoogleAPISpellChecker;
 
 /**
  * @author ceyates
- *
+ * 
  */
-public class SpellChecker extends GoogleAPISpellChecker implements Parameterizable{
+public class SpellChecker extends GoogleAPISpellChecker implements Parameterizable {
 
-	public void parameterize(Parameters params) throws ParameterException {
-		super.setGoogleKey(params.getParameter("google-key"));
-	}
+    public void parameterize(final Parameters params) throws ParameterException {
+        super.setGoogleKey(params.getParameter("google-key"));
+    }
 
 }

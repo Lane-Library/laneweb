@@ -63,203 +63,180 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 import org.xml.sax.helpers.AttributesImpl;
 
-
 /**
  * Stolen from org.w3c.tidy.PPrint.java
  */
-public class NodeParser
-{
-	
+public class NodeParser {
+
     private ContentHandler contentHandler;
+
     private LexicalHandler lexicalHandler;
-    private Map<String,String> prefixMapping = new HashMap<String,String>();
 
+    private Map<String, String> prefixMapping = new HashMap<String, String>();
 
-    public void setContentHandler(ContentHandler contentHandler) {
-    	if (null == contentHandler) {
-    		throw new IllegalArgumentException("null contentHandler");
-    	}
-		this.contentHandler = contentHandler;
-	}
+    public void setContentHandler(final ContentHandler contentHandler) {
+        if (null == contentHandler) {
+            throw new IllegalArgumentException("null contentHandler");
+        }
+        this.contentHandler = contentHandler;
+    }
 
+    public void setLexicalHandler(final LexicalHandler lexicalHandler) {
+        if (null == lexicalHandler) {
+            throw new IllegalArgumentException("null lexicalHandler");
+        }
+        this.lexicalHandler = lexicalHandler;
+    }
 
-	public void setLexicalHandler(LexicalHandler lexicalHandler) {
-    	if (null == lexicalHandler) {
-    		throw new IllegalArgumentException("null lexicalHandler");
-    	}
-		this.lexicalHandler = lexicalHandler;
-	}
-
-
-	/**
+    /**
      * @param mode
      * @param indent
      * @param lexer
      * @param node
-     * @throws IOException 
-     * @throws SAXException 
+     * @throws IOException
+     * @throws SAXException
      */
-    public void parseNode(short mode, Node node) throws IOException, SAXException
-    {
+    public void parseNode(final short mode, final Node node) throws IOException, SAXException {
 
-        if (node == null)
-        {
+        if (node == null) {
             return;
         }
 
-        if (node.type == Node.TextNode)
-        {
-        	char[] chars = new String(node.textarray, node.start, node.end - node.start,"UTF-8").toCharArray();
+        if (node.type == Node.TextNode) {
+            char[] chars = new String(node.textarray, node.start, node.end - node.start, "UTF-8").toCharArray();
             this.contentHandler.characters(chars, 0, chars.length);
-        }
-        else if (node.type == Node.CommentTag)
-        {
-        	char[] chars = new String(node.textarray, node.start, node.end - node.start,"UTF-8").toCharArray();
+        } else if (node.type == Node.CommentTag) {
+            char[] chars = new String(node.textarray, node.start, node.end - node.start, "UTF-8").toCharArray();
             this.lexicalHandler.comment(chars, 0, chars.length);
-        }
-        else if (node.type == Node.RootNode)
-        {
-        	this.contentHandler.startDocument();
+        } else if (node.type == Node.RootNode) {
+            this.contentHandler.startDocument();
             Node content;
-            
-            for (content = node.content; content != null; content = content.next)
-            {
+
+            for (content = node.content; content != null; content = content.next) {
                 parseNode(mode, content);
             }
             this.contentHandler.endDocument();
-        }
-        else if (node.type == Node.DocTypeTag)
-        {
-            String doctypeString = new String(node.textarray,node.start,node.end - node.start);
+        } else if (node.type == Node.DocTypeTag) {
+            String doctypeString = new String(node.textarray, node.start, node.end - node.start);
             Pattern pattern = Pattern.compile("\\\"");
             String[] matches = pattern.split(doctypeString.subSequence(0, doctypeString.length()));
             String publicId = null, systemId = null, name = null;
-            name = (matches[0].substring(0,matches[0].indexOf(' ')));
-            if (matches[0].indexOf("PUBLIC")>0) {
-            	publicId = matches[1];
-            		systemId = matches[3];
+            name = (matches[0].substring(0, matches[0].indexOf(' ')));
+            if (matches[0].indexOf("PUBLIC") > 0) {
+                publicId = matches[1];
+                systemId = matches[3];
             } else if (matches[0].indexOf("SYSTEM") > 0) {
-            	systemId = matches[1];
+                systemId = matches[1];
             }
             this.lexicalHandler.startDTD(name, publicId, systemId);
             this.lexicalHandler.endDTD();
-        }
-        else if (node.type == Node.ProcInsTag)
-        {
-            String pi = new String(node.textarray,node.start,node.end-node.start);
-            if(pi.indexOf(' ') > 0) {
-            	String name = pi.substring(0, pi.indexOf(' '));
-            	String value = pi.substring(pi.indexOf(' ')+1,pi.length()-1);//last '?' appears in string
-            	this.contentHandler.processingInstruction(name, value);
+        } else if (node.type == Node.ProcInsTag) {
+            String pi = new String(node.textarray, node.start, node.end - node.start);
+            if (pi.indexOf(' ') > 0) {
+                String name = pi.substring(0, pi.indexOf(' '));
+                String value = pi.substring(pi.indexOf(' ') + 1, pi.length() - 1);// last
+                // '?'
+                // appears
+                // in
+                // string
+                this.contentHandler.processingInstruction(name, value);
             }
         }
-//        else if (node.type == Node.XML_DECL)
-//        {
-//            return;
-//        }
-        else if (node.type == Node.CDATATag)
-        {
-        	char[] chars = new String(node.textarray, node.start, node.end - node.start,"UTF-8").toCharArray();
+        // else if (node.type == Node.XML_DECL)
+        // {
+        // return;
+        // }
+        else if (node.type == Node.CDATATag) {
+            char[] chars = new String(node.textarray, node.start, node.end - node.start, "UTF-8").toCharArray();
             this.lexicalHandler.startCDATA();
             this.contentHandler.characters(chars, 0, chars.length);
             this.lexicalHandler.endCDATA();
-        }
-        else if (node.type == Node.SectionTag)
-        {
+        } else if (node.type == Node.SectionTag) {
             return;
-        }
-        else if ((node.tag.model & Dict.CM_EMPTY) != 0
-            || node.type == Node.StartEndTag)
-        {
+        } else if ((node.tag.model & Dict.CM_EMPTY) != 0 || node.type == Node.StartEndTag) {
             AttributesImpl outAtts = new AttributesImpl();
             AttVal atts = node.attributes;
             String prefix = null;
             String uri = null;
-            while(atts!= null) {
-            	if (atts.attribute.indexOf("xmlns") == 0) {
-            		prefix = atts.attribute.indexOf(':') > 0 ? atts.attribute.substring(atts.attribute.indexOf(':')+1,atts.attribute.length()) : "";
-            		uri = atts.value;
-            		prefixMapping.put(prefix, uri);
-            	} else {
-            		if (null == atts.value) {
-            			atts.value = atts.attribute;
-            		}
-            		outAtts.addAttribute("", atts.attribute, atts.attribute, "CDATA", atts.value);
-            	}
-            	atts = atts.next;
+            while (atts != null) {
+                if (atts.attribute.indexOf("xmlns") == 0) {
+                    prefix =
+                            atts.attribute.indexOf(':') > 0 ? atts.attribute.substring(atts.attribute.indexOf(':') + 1,
+                                                                                       atts.attribute.length()) : "";
+                    uri = atts.value;
+                    this.prefixMapping.put(prefix, uri);
+                } else {
+                    if (null == atts.value) {
+                        atts.value = atts.attribute;
+                    }
+                    outAtts.addAttribute("", atts.attribute, atts.attribute, "CDATA", atts.value);
+                }
+                atts = atts.next;
             }
             if (prefix != null) {
-            	this.contentHandler.startPrefixMapping(prefix, uri);
+                this.contentHandler.startPrefixMapping(prefix, uri);
             }
-            String ns = prefixMapping.get("");
+            String ns = this.prefixMapping.get("");
             String localName = node.element;
             if (localName.indexOf(':') > 0) {
-            	ns = prefixMapping.get(localName.substring(0,localName.indexOf(':')));
-            	localName = localName.substring(localName.indexOf(':')+1);
+                ns = this.prefixMapping.get(localName.substring(0, localName.indexOf(':')));
+                localName = localName.substring(localName.indexOf(':') + 1);
             }
             this.contentHandler.startElement(ns, localName, node.element, outAtts);
             this.contentHandler.endElement(ns, localName, node.element);
             if (prefix != null) {
-            	this.contentHandler.endPrefixMapping(prefix);
+                this.contentHandler.endPrefixMapping(prefix);
             }
-        }
-        else
-        {
+        } else {
             // some kind of container element
             Node content;
 
-            for (content = node.content; content != null; content = content.next)
-            {
-                if (content.type == Node.TextNode)
-                {
+            for (content = node.content; content != null; content = content.next) {
+                if (content.type == Node.TextNode) {
                     break;
                 }
             }
-
 
             AttributesImpl outAtts = new AttributesImpl();
             AttVal atts = node.attributes;
             String prefix = null;
             String uri = null;
-            while(atts!= null) {
-            	if (atts.attribute.indexOf("xmlns") == 0) {
-            		prefix = atts.attribute.indexOf(':') > 0 ? atts.attribute.substring(atts.attribute.indexOf(':')+1,atts.attribute.length()) : "";
-            		uri = atts.value;
-            		prefixMapping.put(prefix, uri);
-            	} else {
-            		if (null == atts.value) {
-            			atts.value = atts.attribute;
-            		}
-            		outAtts.addAttribute("", atts.attribute, atts.attribute, "CDATA", atts.value);
-            	}
-            	atts = atts.next;
+            while (atts != null) {
+                if (atts.attribute.indexOf("xmlns") == 0) {
+                    prefix =
+                            atts.attribute.indexOf(':') > 0 ? atts.attribute.substring(atts.attribute.indexOf(':') + 1,
+                                                                                       atts.attribute.length()) : "";
+                    uri = atts.value;
+                    this.prefixMapping.put(prefix, uri);
+                } else {
+                    if (null == atts.value) {
+                        atts.value = atts.attribute;
+                    }
+                    outAtts.addAttribute("", atts.attribute, atts.attribute, "CDATA", atts.value);
+                }
+                atts = atts.next;
             }
             if (prefix != null) {
-            	this.contentHandler.startPrefixMapping(prefix, uri);
+                this.contentHandler.startPrefixMapping(prefix, uri);
             }
-            String ns = prefixMapping.get("");
+            String ns = this.prefixMapping.get("");
             String localName = node.element;
             if (localName.indexOf(':') > 0) {
-            	ns = prefixMapping.get(localName.substring(0,localName.indexOf(':')));
-            	localName = localName.substring(localName.indexOf(':')+1);
+                ns = this.prefixMapping.get(localName.substring(0, localName.indexOf(':')));
+                localName = localName.substring(localName.indexOf(':') + 1);
             }
             this.contentHandler.startElement(ns, localName, node.element, outAtts);
 
-
-            for (content = node.content; content != null; content = content.next)
-            {
+            for (content = node.content; content != null; content = content.next) {
                 parseNode(mode, content);
             }
 
-
-             this.contentHandler.endElement(ns, localName, node.element);
-             if (prefix != null) {
-             	this.contentHandler.endPrefixMapping(prefix);
-             }
+            this.contentHandler.endElement(ns, localName, node.element);
+            if (prefix != null) {
+                this.contentHandler.endPrefixMapping(prefix);
+            }
 
         }
     }
-
-
 
 }

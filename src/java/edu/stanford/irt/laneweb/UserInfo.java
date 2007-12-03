@@ -3,59 +3,55 @@ package edu.stanford.irt.laneweb;
 import edu.stanford.irt.directory.LDAPPerson;
 
 public class UserInfo {
-	
-	private Boolean						   proxyLinks;
 
-	private String							sunetId;
+    private Boolean proxyLinks;
 
-	private Affiliation					   affiliation;
+    private String sunetId;
 
-	private Ticket							ticket;
+    private Affiliation affiliation;
 
-	private LDAPPerson						ldapPerson;
+    private Ticket ticket;
 
+    private LDAPPerson ldapPerson;
 
-	public Affiliation getAffiliation() {
-		return affiliation;
-	}
+    public Affiliation getAffiliation() {
+        return this.affiliation;
+    }
 
-	public void setAffiliation(Affiliation affiliation) {
-		this.affiliation = affiliation;
-	}
+    public void setAffiliation(final Affiliation affiliation) {
+        this.affiliation = affiliation;
+    }
 
-	public LDAPPerson getLdapPerson() {
-		return ldapPerson;
-	}
+    public LDAPPerson getLdapPerson() {
+        return this.ldapPerson;
+    }
 
-	public void setLdapPerson(LDAPPerson ldapPerson) {
-		this.ldapPerson = ldapPerson;
-	}
+    public void setLdapPerson(final LDAPPerson ldapPerson) {
+        this.ldapPerson = ldapPerson;
+    }
 
-	public Boolean getProxyLinks() {
-		return proxyLinks;
-	}
+    public Boolean getProxyLinks() {
+        return this.proxyLinks;
+    }
 
-	public void setProxyLinks(Boolean proxyLinks) {
-		this.proxyLinks = proxyLinks;
-	}
+    public void setProxyLinks(final Boolean proxyLinks) {
+        this.proxyLinks = proxyLinks;
+    }
 
-	public String getSunetId() {
-		return sunetId;
-	}
+    public String getSunetId() {
+        return this.sunetId;
+    }
 
-	public void setSunetId(String sunetId) {
-		this.sunetId = sunetId;
-	}
+    public void setSunetId(final String sunetId) {
+        this.sunetId = sunetId;
+    }
 
-	public Ticket getTicket() {
-		return ticket;
-	}
+    public Ticket getTicket() {
+        return this.ticket;
+    }
 
-	public void setTicket(Ticket ticket) {
-		this.ticket = ticket;
-	}
- 
+    public void setTicket(final Ticket ticket) {
+        this.ticket = ticket;
+    }
 
-	
-	
 }

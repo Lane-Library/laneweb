@@ -10,9 +10,9 @@ import edu.stanford.irt.querymap.DescriptorManager;
  * 
  */
 public interface DescriptorManagerManager {
-	
-	public static final String ROLE = DescriptorManagerManager.class.getName();
 
-	DescriptorManager getDescriptorManager();
+    public static final String ROLE = DescriptorManagerManager.class.getName();
+
+    DescriptorManager getDescriptorManager();
 
 }
