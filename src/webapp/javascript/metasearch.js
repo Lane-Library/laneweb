@@ -237,8 +237,7 @@ function showSpellCheck(o)
 			var spellCheckLink = document.getElementById("spellCheckLink");
 			if(spellCheckContainer && spellCheckLink)
 			{
-    			spellCheckLink.href = location.href.replace("keywords=" + window.searchTerms,"keywords=" + spellCheckResponse.suggestion);
-                spellCheckLink.href = spellCheckLink.href.replace("q=" + window.searchTerms,"q=" + spellCheckResponse.suggestion);
+    			spellCheckLink.href = location.href.replace(location.href.match(/\W(keywords|q)=([^&]*)/)[2],spellCheckResponse.suggestion);
     			spellCheckLink.innerHTML = spellCheckResponse.suggestion;
     			spellCheckContainer.style.display= 'inline';
     			spellCheckContainer.style.visibility= 'visible';
