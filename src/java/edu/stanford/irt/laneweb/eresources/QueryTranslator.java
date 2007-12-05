@@ -121,7 +121,7 @@ public class QueryTranslator {
         // here I added stuff for handling the wildcard, which doesn't work if
         // in {}
         String word = words.elementAt(pos).text;
-        String ts = word.indexOf('%') > -1 ? word : "{" + word + "}";
+        String ts = word.indexOf('%') > -1 ? word : "${" + word + "}";
         // String ts = "{" + ((WordData) words.elementAt(pos)).text + "}";
         // not using fieldName at the moment
         // if (((WordData) words.elementAt(pos)).fieldName.length() > 0) {
@@ -217,10 +217,10 @@ public class QueryTranslator {
         return tempString;
     }
 
-    // public static void main(String[] args) {
-    // System.out.println(new
-    // QueryTranslator().translate(java.net.URLDecoder.decode("-tope")));
-    // System.out.println(new
-    // QueryTranslator().translate(java.net.URLDecoder.decode("+J.+Thorac.+Cardiovasc.+Surg.%2C+June+1%2C+2004%3B+127%286%29%3A+1858+-+1858.")));
-    // }
+   //public static void main(String[] args) {
+   //System.out.println(new
+   //QueryTranslator().translate(java.net.URLDecoder.decode("rw -tope")));
+   //System.out.println(new
+   //QueryTranslator().translate(java.net.URLDecoder.decode("+J.+Thorac.+Cardiovasc.+Surg.%2C+June+1%2C+2004%3B+127%286%29%3A+1858+-+1858. or alain ")));
+   // }
 }
