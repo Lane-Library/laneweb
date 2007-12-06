@@ -121,7 +121,7 @@ public class QueryTranslator {
         // here I added stuff for handling the wildcard, which doesn't work if
         // in {}
         String word = words.elementAt(pos).text;
-        String ts = word.indexOf('%') > -1 ? word : "${" + word + "}";
+        String ts = word.indexOf('%') > -1 ? word : "{" + word + "}";
         // String ts = "{" + ((WordData) words.elementAt(pos)).text + "}";
         // not using fieldName at the moment
         // if (((WordData) words.elementAt(pos)).fieldName.length() > 0) {
