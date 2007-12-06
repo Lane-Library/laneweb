@@ -5,10 +5,10 @@
             <fileset dir="src/conf" includes="*.xconf"/>
             <j:choose>
                 <j:when test="${laneweb.production}">
-                    <filterset filtersfile="../laneweb.properties" begintoken="***" endtoken="***"/>
+                    <filterset filtersfile="../laneweb.properties" begintoken="$${" endtoken="}"/>
                 </j:when>
                 <j:otherwise>
-                    <filterset filtersfile="project.properties" begintoken="***" endtoken="***"/>
+                    <filterset filtersfile="project.properties" begintoken="$${" endtoken="}"/>
                 </j:otherwise>
             </j:choose>
         </copy>
@@ -16,10 +16,10 @@
             <fileset dir="src/conf" includes="context*.xml"/>
             <j:choose>
                 <j:when test="${laneweb.production}">
-                    <filterset filtersfile="../laneweb.properties" begintoken="***" endtoken="***"/>
+                    <filterset filtersfile="../laneweb.properties" begintoken="$${" endtoken="}"/>
                 </j:when>
                 <j:otherwise>
-                    <filterset filtersfile="project.properties" begintoken="***" endtoken="***"/>
+                    <filterset filtersfile="project.properties" begintoken="$${" endtoken="}"/>
                 </j:otherwise>
             </j:choose>
         </copy>
