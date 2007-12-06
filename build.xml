@@ -32,13 +32,13 @@
             <fileset dir="src/conf">
                 <include name="*.xconf"/>
             </fileset>
-            <filterset filtersfile="../laneweb.properties" begintoken="***" endtoken="***"/>
+            <filterset filtersfile="../laneweb.properties" begintoken="$${" endtoken="}"/>
         </copy>
         <copy todir="${webappdir}/META-INF">
             <fileset dir="src/conf">
                 <include name="context*.xml"/>
             </fileset>
-            <filterset filtersfile="../laneweb.properties" begintoken="***" endtoken="***"/>
+            <filterset filtersfile="../laneweb.properties" begintoken="$${" endtoken="}"/>
         </copy>
     </target>
     <target name="stage" unless="laneweb.production">
@@ -46,13 +46,13 @@
             <fileset dir="src/conf">
                 <include name="*.xconf"/>
             </fileset>
-            <filterset filtersfile="project.properties" begintoken="***" endtoken="***"/>
+            <filterset filtersfile="project.properties" begintoken="$${" endtoken="}"/>
         </copy>
         <copy todir="${webappdir}/META-INF">
             <fileset dir="src/conf">
                 <include name="context*.xml"/>
             </fileset>
-            <filterset filtersfile="project.properties" begintoken="***" endtoken="***"/>
+            <filterset filtersfile="project.properties" begintoken="$${" endtoken="}"/>
         </copy>
      </target>
 	

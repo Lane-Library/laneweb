@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context docBase="***laneweb.context.docBase***" path="***laneweb.context.path***">
+<Context docBase="${laneweb.context.docBase}" path="${laneweb.context.path}">
     <Resource name="jdbc/eresources" auth="Container"
         type="javax.sql.DataSource"
         driverClassName="oracle.jdbc.driver.OracleDriver"
-        url="***laneweb.context.eresources.url***"
-        username="***laneweb.context.eresources.username***"
-        password="***laneweb.context.eresources.password***"
-        maxActive="***laneweb.context.eresources.maxActive***"
-        maxIdle="***laneweb.context.eresources.maxIdle***"
-        maxWait="***laneweb.context.eresources.maxWait***"/>
+        url="${laneweb.context.eresources.url}"
+        username="${laneweb.context.eresources.username}"
+        password="${laneweb.context.eresources.password}"
+        maxActive="${laneweb.context.eresources.maxActive}"
+        maxIdle="${laneweb.context.eresources.maxIdle}"
+        maxWait="${laneweb.context.eresources.maxWait}"/>
 </Context>

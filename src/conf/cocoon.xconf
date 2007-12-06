@@ -22,7 +22,7 @@
         <template url="^(stage/|)100years/index\.html" value="100years_index"/>
         <template url="^(stage/|)100years/\S+" value="100years"/>
         <template url="^(stage/|)services/spaces/reserve/\S+" value="none"/>
-	    <ezproxy-key>***laneweb.cocoon.laneweb.ezproxy-key***</ezproxy-key>
+	    <ezproxy-key>${laneweb.cocoon.laneweb.ezproxy-key}</ezproxy-key>
     </component-instance>
     <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
     <component-instance logger="core.modules.input" name="request-uri" class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
@@ -36,9 +36,9 @@
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
       <values>
         <template>irt2</template>
-        <search-url>***laneweb.cocoon.defaults.search-url***</search-url>
-        <live-base>***laneweb.cocoon.defaults.live-base***</live-base>
-        <stage-base>***laneweb.cocoon.defaults.stage-base***</stage-base>
+        <search-url>${laneweb.cocoon.defaults.search-url}</search-url>
+        <live-base>${laneweb.cocoon.defaults.live-base}</live-base>
+        <stage-base>${laneweb.cocoon.defaults.stage-base}</stage-base>
       </values>
     </component-instance>
     <component-instance logger="core.modules.input" name="session-attr"  class="org.apache.cocoon.components.modules.input.SessionAttributeModule"/>
@@ -135,7 +135,7 @@
   <webdash-login logger="core.webdash">
     <parameter name="webdashRegistrationURL" value="https://webda.sh/auth/init_post?"/>
     <parameter name="webdashLoginURL" value="https://webda.sh/auth/auth_post?"/>
-    <parameter name="groupKey" value="***laneweb.cocoon.webdash.key***"/>
+    <parameter name="groupKey" value="${laneweb.cocoon.webdash.key}"/>
     <parameter name="groupName" value="stanford-sunet"/>
 	<parameter name="dateFormat" value="yyyy-MM-dd"/>
   </webdash-login>
@@ -143,7 +143,7 @@
   <descriptor-manager-manager/>
   
   <spellchecker>
-    <parameter name="google-key" value="***laneweb.cocoon.spellchecker.google-key***"/>
+    <parameter name="google-key" value="${laneweb.cocoon.spellchecker.google-key}"/>
   </spellchecker>
   
   <httpclient-manager>

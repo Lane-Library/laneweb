@@ -6,38 +6,30 @@
         <param name="File" value="${catalina.home}/logs/laneweb.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="10MB"/>
-        <param name="MaxBackupIndex" value="10"/> 
+        <param name="MaxBackupIndex" value="10"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d %p [%t][%c] - %m%n"/>
         </layout>
     </appender>
 
-   <appender name="JAVASCRIPT_LOG" class="org.apache.log4j.RollingFileAppender">
-    <param name="File" value="${catalina.home}/logs/javascript.log"/>
-    <param name="Append" value="true"/>
-    <param name="MaxFileSize" value="10MB"/>
-    <param name="MaxBackupIndex" value="4"/> 
-    <layout class="org.apache.log4j.PatternLayout">
+    <appender name="JAVASCRIPT_LOG" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.home}/logs/javascript.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="MaxBackupIndex" value="4"/>
+        <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d %p [%t][%c] - %m%n"/>
-     </layout>
-  </appender> 
- 	
+        </layout>
+    </appender>
 
-
-  <category name="sitemap.action.javascript-logger" additivity="false">
- 	<priority value="error"/>
-    <appender-ref ref="JAVASCRIPT_LOG"/>
-  </category>
-   
-	
-
-
-
+    <category name="sitemap.action.javascript-logger" additivity="false">
+        <priority value="error"/>
+        <appender-ref ref="JAVASCRIPT_LOG"/>
+    </category>
+    
     <root>
-        <priority value="***laneweb.log4j.level***"/>
+        <priority value="${laneweb.log4j.level}"/>
         <appender-ref ref="LOG"/>
     </root>
-
-
 
 </log4j:configuration>

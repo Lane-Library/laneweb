@@ -50,7 +50,25 @@
   <build>
     <sourceDirectory>src/java</sourceDirectory>
     <testSourceDirectory>src/test</testSourceDirectory>
+    <filters>
+      <filter>project.properties</filter>
+    </filters>
     <plugins>
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>maven-jetty-plugin</artifactId>
+        <version>6.0.2</version>
+        <configuration>
+          <connectors>
+            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+              <port>${jetty.port}</port>
+              <maxIdleTime>30000</maxIdleTime>
+            </connector>
+          </connectors>
+          <webAppSourceDirectory>./target/laneweb-${project.version}</webAppSourceDirectory>
+          <contextPath>${jetty.context}</contextPath>
+        </configuration>
+      </plugin>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
@@ -72,9 +90,14 @@
           <filters>
             <filter>project.properties</filter>
           </filters>
+          <webappDirectory>target/laneweb</webappDirectory>
           <webResources>
             <resource>
               <directory>src/webapp</directory>
+            </resource>
+            <resource>
+              <directory>target/classes</directory>
+              <targetPath>WEB-INF</targetPath>
             </resource>
             <resource>
               <directory>src/conf</directory>
@@ -83,6 +106,14 @@
               <excludes>
                 <exclude>context*xml</exclude>
               </excludes>
+            </resource>
+            <resource>
+            <directory>src/conf</directory>
+            <targetPath>META-INF</targetPath>
+            <filtering>true</filtering>
+            <excludes>
+              <exclude>*xconf</exclude>
+            </excludes>
             </resource>
           </webResources>
         </configuration>
@@ -101,6 +132,10 @@
       </plugin>
     </plugins>
   </build>
+  <properties>
+    <jetty.port>8888</jetty.port>
+    <jetty.context>/</jetty.context>
+  </properties>
   <repositories>
     <repository>
       <id>irt-lanelocal</id>
@@ -210,13 +245,13 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>avalon-logkit</groupId>
       <artifactId>avalon-logkit</artifactId>
       <version>2.1</version>
       <scope>runtime</scope>
     </dependency>
-    <dependency>
+    <!--<dependency>
       <groupId>bcel</groupId>
       <artifactId>bcel</artifactId>
       <version>5.2</version>
@@ -228,7 +263,7 @@
       <version>2.1.10</version>
       <scope>compile</scope>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>cocoon</groupId>
       <artifactId>cocoon-html</artifactId>
       <version>2.1.10</version>
@@ -245,14 +280,14 @@
       <artifactId>cocoon-paranoid</artifactId>
       <version>2.1.10</version>
       <scope>runtime</scope>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>cocoon</groupId>
       <artifactId>cocoon-proxy</artifactId>
       <version>2.1.10</version>
       <scope>compile</scope>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
       <version>1.3</version>
@@ -263,35 +298,75 @@
       <artifactId>commons-collections</artifactId>
       <version>3.2</version>
       <scope>runtime</scope>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>commons-httpclient</groupId>
       <artifactId>commons-httpclient</artifactId>
       <version>3.1-log4j</version>
       <scope>compile</scope>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>commons-jxpath</groupId>
       <artifactId>commons-jxpath</artifactId>
       <version>1.2</version>
       <scope>runtime</scope>
-    </dependency>-->
+      <exclusions>
+        <exclusion>
+          <artifactId>xerces</artifactId>
+          <groupId>xerces</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jdom</artifactId>
+          <groupId>jdom</groupId>
+        </exclusion>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>commons-beanutils</groupId>
+          <artifactId>commons-beanutils</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>commons-collections</groupId>
+          <artifactId>commons-collections</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>ant</groupId>
+          <artifactId>ant-optional</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
       <version>2.2</version>
       <scope>compile</scope>
     </dependency>
-    <!--<dependency>
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>logkit</artifactId>
+          <groupId>logkit</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>avalon-framework</artifactId>
+          <groupId>avalon-framework</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>avalon-logkit</artifactId>
+          <groupId>avalon-logkit</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
       <groupId>concurrent</groupId>
       <artifactId>concurrent</artifactId>
       <version>1.3.4</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>easymock</groupId>
-      <artifactId>easymock</artifactId>
-      <version>2.2</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -299,14 +374,14 @@
       <artifactId>ehcache</artifactId>
       <version>1.2.2</version>
       <scope>runtime</scope>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>edu.stanford.irt</groupId>
       <artifactId>eresources-model</artifactId>
       <version>1.1.6</version>
       <scope>compile</scope>
     </dependency>
-<!--    <dependency>
+    <dependency>
       <groupId>excalibur-component</groupId>
       <artifactId>excalibur-component</artifactId>
       <version>2.1</version>
@@ -361,7 +436,7 @@
           <artifactId>junit</artifactId>
         </exclusion>
       </exclusions>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>excalibur-datasource</groupId>
       <artifactId>excalibur-datasource</artifactId>
@@ -405,10 +480,6 @@
           <artifactId>excalibur-component</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>excalibur-logger</groupId>
-          <artifactId>excalibur-logger</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>excalibur-fortress</groupId>
           <artifactId>excalibur-fortress-container-api</artifactId>
         </exclusion>
@@ -436,18 +507,50 @@
       <groupId>excalibur-instrument</groupId>
       <artifactId>excalibur-instrument-mgr-api</artifactId>
       <version>2.1</version>
-    </dependency>
+      <exclusions>
+        <exclusion>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>-->
     <dependency>
       <groupId>excalibur-instrument</groupId>
       <artifactId>excalibur-instrument-mgr-impl</artifactId>
       <version>2.1</version>
+      <scope>runtime</scope>
+      <exclusions>
+        
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>excalibur-logger</groupId>
       <artifactId>excalibur-logger</artifactId>
       <version>2.1</version>
       <scope>runtime</scope>
-    </dependency>-->
+      <exclusions>
+        <exclusion>
+        <groupId>avalon-logkit</groupId>
+        <artifactId>avalon-logkit</artifactId>
+      </exclusion>
+      <exclusion>
+        <groupId>servletapi</groupId>
+        <artifactId>servletapi</artifactId>
+      </exclusion>
+      <exclusion>
+        <groupId>geronimo-spec</groupId>
+        <artifactId>geronimo-spec-javamail</artifactId>
+      </exclusion>
+      <exclusion>
+        <groupId>geronimo-spec</groupId>
+        <artifactId>geronimo-spec-jms</artifactId>
+      </exclusion>
+      <exclusion>
+        <groupId>xml-apis</groupId>
+        <artifactId>xml-apis</artifactId>
+      </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
       <groupId>excalibur-pool</groupId>
       <artifactId>excalibur-pool-api</artifactId>
@@ -459,13 +562,27 @@
       <artifactId>excalibur-pool-impl</artifactId>
       <version>2.1</version>
       <scope>runtime</scope>
-    </dependency>
+    </dependency>-->
     <dependency>
       <groupId>excalibur-pool</groupId>
       <artifactId>excalibur-pool-instrumented</artifactId>
       <version>2.1</version>
       <scope>runtime</scope>
-    </dependency>-->
+      <exclusions>
+        <exclusion>
+          <groupId>commons-collections</groupId>
+          <artifactId>commons-collections</artifactId>
+        </exclusion>
+          <exclusion>
+            <groupId>concurrent</groupId>
+            <artifactId>concurrent</artifactId>
+          </exclusion>
+        <exclusion>
+          <groupId>junitperf</groupId>
+          <artifactId>junitperf</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
       <groupId>excalibur-sourceresolve</groupId>
       <artifactId>excalibur-sourceresolve</artifactId>
@@ -475,6 +592,10 @@
         <exclusion>
           <artifactId>ant</artifactId>
           <groupId>ant</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-httpclient</artifactId>
+          <groupId>commons-httpclient</groupId>
         </exclusion>
         <exclusion>
           <artifactId>commons-logging</artifactId>
@@ -498,7 +619,7 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>excalibur-store</groupId>
       <artifactId>excalibur-store</artifactId>
       <version>2.1</version>
@@ -508,8 +629,24 @@
           <artifactId>excalibur-fortress-container-api</artifactId>
           <groupId>excalibur-fortress</groupId>
         </exclusion>
+        <exclusion>
+          <artifactId>excalibur-fortress-meta</artifactId>
+          <groupId>excalibur-fortress</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jisp</artifactId>
+          <groupId>jisp</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>qdox</artifactId>
+          <groupId>qdox</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>concurrent</artifactId>
+          <groupId>concurrent</groupId>
+        </exclusion>
       </exclusions>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>excalibur-xmlutil</groupId>
       <artifactId>excalibur-xmlutil</artifactId>
@@ -614,41 +751,41 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>googleapi</groupId>
       <artifactId>googleapi</artifactId>
       <version>0</version>
       <scope>runtime</scope>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>irt</groupId>
       <artifactId>irt</artifactId>
       <version>UNKNOWN</version>
       <scope>compile</scope>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>jakarta-regexp</groupId>
       <artifactId>jakarta-regexp</artifactId>
       <version>1.4</version>
       <scope>runtime</scope>
     </dependency>
-    <dependency>
+    <!--<dependency>
       <groupId>javax.activation</groupId>
       <artifactId>activation</artifactId>
       <version>1.0.2</version>
       <scope>runtime</scope>
-    </dependency>
+    </dependency>-->
     <dependency>
       <groupId>javax.mail</groupId>
       <artifactId>mail</artifactId>
       <version>1.3.3</version>
       <scope>runtime</scope>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>2.4</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>jtidy</groupId>
@@ -697,8 +834,14 @@
       <artifactId>querymap</artifactId>
       <version>1.0.3</version>
       <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>commons-httpclient</artifactId>
+          <groupId>commons-httpclient</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>saxon</groupId>
       <artifactId>saxon</artifactId>
       <version>8.9.j</version>
@@ -709,7 +852,7 @@
       <artifactId>soap</artifactId>
       <version>2.3</version>
       <scope>runtime</scope>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>spellcheck</groupId>
       <artifactId>spellcheck</artifactId>
@@ -727,12 +870,12 @@
       <artifactId>xercesImpl</artifactId>
       <version>2.9.0</version>
       <scope>runtime</scope>
-    </dependency>
+    </dependency>-->
     <dependency>
       <groupId>yui</groupId>
       <artifactId>yui</artifactId>
       <version>2.3.0</version>
       <scope>runtime</scope>
-    </dependency>-->
+    </dependency>
   </dependencies>
 </project>

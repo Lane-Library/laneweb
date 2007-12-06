@@ -4,11 +4,11 @@
     <ResourceParams name="jdbc/eresources">
         <parameter>
             <name>username</name>
-            <value>***laneweb.context.eresources.username***</value>
+            <value>${laneweb.context.eresources.username}</value>
         </parameter>
         <parameter>
             <name>password</name>
-            <value>***laneweb.context.eresources.password***</value>
+            <value>${laneweb.context.eresources.password}</value>
         </parameter>
         <parameter>
             <name>driverClassName</name>
@@ -16,19 +16,19 @@
         </parameter>
         <parameter>
             <name>url</name>
-            <value>***laneweb.context.eresources.url***</value>
+            <value>${laneweb.context.eresources.url}</value>
         </parameter>
         <parameter>
             <name>maxActive</name>
-            <value>***laneweb.context.eresources.maxActive***</value>
+            <value>${laneweb.context.eresources.maxActive}</value>
         </parameter>
         <parameter>
             <name>maxIdle</name>
-            <value>***laneweb.context.eresources.maxIdle***</value>
+            <value>${laneweb.context.eresources.maxIdle}</value>
         </parameter>
         <parameter>
             <name>maxWait</name>
-            <value>***laneweb.context.eresources.maxWait***</value>
+            <value>${laneweb.context.eresources.maxWait}</value>
         </parameter>
     </ResourceParams>
 </Context>
