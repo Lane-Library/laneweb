@@ -142,7 +142,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
         }
         if (null != this.query) {
             this.query = this.query.trim();
-            if (this.query.length() == 0 || "%".equals(this.query)) {
+            if (this.query.length() == 0 || "%".equals(this.query) || "*".equals(this.query)) {
                 this.query = null;
             } else {
                 this.query = this.query.replaceAll("'", "''");

@@ -105,7 +105,7 @@ public class EresourcesSearchGenerator extends ServiceableGenerator {
         }
         if (null != query) {
             query = query.trim();
-            if (query.length() == 0 || "%".equals(query)) {
+            if (query.length() == 0 || "%".equals(query) || "*".equals(query)) {
                 query = null;
             }
 
