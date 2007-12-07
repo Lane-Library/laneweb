@@ -12,8 +12,7 @@
             <map:match type="wildcard" pattern="search-proxy">
 	           <map:match type="regex-parameter" pattern="^.+$">
 	                <map:parameter name="parameter-name" value="id"/>
-	                <!--map:generate type="search-proxy" src="{defaults:search-url}/search"/-->
-	                <map:generate  src="{defaults:live-base}/content/search.xml"/>
+	                <map:generate type="search-proxy" src="{defaults:search-url}/search"/>
         		    <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
                 		<map:parameter name="context" value="{request:contextPath}"/>
                 		<map:parameter name="sunetid" value="{laneweb:sunetid}"/>
