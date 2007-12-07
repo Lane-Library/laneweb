@@ -1,6 +1,9 @@
-<xsl:stylesheet version="2.0" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="h">
+<xsl:stylesheet version="2.0"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:lw="http://irt.stanford.edu/laneweb"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    exclude-result-prefixes="h lw">
 
     <xsl:strip-space
         elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
@@ -825,9 +828,9 @@
             <xsl:with-param name="uri-remaining">
                 <xsl:choose>
                     <!-- this is how the breadcrumb is coerced into what it should be based on faq category -->
-                    <xsl:when test="$source-doc/h:head/h:meta[@name='lw_faqCategory']">
+                    <xsl:when test="$source-doc/h:head/h:meta[@name='LW.faqCategory']">
                         <xsl:value-of
-                            select="substring-after($sitemap//h:a[.=$source-doc/h:head/h:meta[@name='lw_faqCategory']/@content]/@href,'/')"
+                            select="substring-after($sitemap//h:a[.=$source-doc/h:head/h:meta[@name='LW.faqCategory']/@content]/@href,'/')"
                         />
                     </xsl:when>
                     <xsl:otherwise>

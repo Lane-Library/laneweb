@@ -23,12 +23,18 @@
     <xsl:template match="h:head">
         <xsl:copy>
             <xsl:apply-templates select="h:title"/>
-            <xsl:if test="$id != ''">
-                <meta name="lw_faqCategory" content="{../h:body/h:ul/h:li[@id=$id]/h:ul/h:li[@class='primaryCategory']}"/>
-            </xsl:if>
-            <xsl:if test="$category != ''">
-                <meta name="lw_faqCategory" content="{$category}"/>
-            </xsl:if>
+            <meta name="LW.faqCategory">
+                <xsl:attribute name="content">
+                    <xsl:choose>
+                        <xsl:when test="$id">
+                            <xsl:value-of select="/h:html/h:body/h:blog/h:entry[@id=$id]/h:ul/h:li[@class='primaryCategory']"/>
+                        </xsl:when>
+                        <xsl:when test="$category">
+                            <xsl:value-of select="$category"/>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:attribute>
+            </meta>
         </xsl:copy>
     </xsl:template>
     
@@ -36,7 +42,7 @@
         <xsl:copy>
             <xsl:choose>
                 <xsl:when test="$id">
-                    <xsl:value-of select="/h:html/h:body/lw:blog/lw:entry[@id=$id]/h:ul/h:li[@class='title']"/>
+                    <xsl:value-of select="/h:html/h:body/h:blog/h:entry[@id=$id]/h:ul/h:li[@class='title']"/>
                 </xsl:when>
                 <xsl:when test="$category">
                     <xsl:value-of select="$category"/><xsl:text> FAQs</xsl:text>
@@ -48,7 +54,7 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="lw:blog">
+    <xsl:template match="h:blog">
         <xsl:choose>
             <xsl:when test="not($id)">
                 <xsl:variable name="root-category" select="/h:html/h:body/h:div[@id='categories']/h:ul/h:li[descendant-or-self::h:li/text() = $category]/text()"/>
@@ -75,24 +81,24 @@
                             <h1><xsl:value-of select="$category"/> FAQs</h1>
                             <dl id="faq">
                                 <xsl:apply-templates
-                                            select="lw:entry[h:ul/h:li[@class='categories']/h:ul/h:li/text() = $category]" mode="dl"/>
+                                            select="h:entry[h:ul/h:li[@class='categories']/h:ul/h:li/text() = $category]" mode="dl"/>
                             </dl>
                         </td>
                     </tr>
                 </table>
             </xsl:when>
             <xsl:when test="$id != '' and $mode = 'dl'">
-                <xsl:apply-templates select="lw:entry[@id=$id]" mode="dl"/>
+                <xsl:apply-templates select="h:entry[@id=$id]" mode="dl"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates select="lw:entry[@id=$id]" mode="full"/>
+                <xsl:apply-templates select="h:entry[@id=$id]" mode="full"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     
     <xsl:template match="h:div[@id='categories' or @id='category-map']"/>
     
-    <xsl:template match="lw:entry" mode="dl">
+    <xsl:template match="h:entry" mode="dl">
         <dt>
             <a id="{@id}" href="/howto/index.html?id={@id}">
                 <xsl:value-of select="h:ul/h:li[@class='title']"/>
@@ -103,7 +109,7 @@
         </dd>
     </xsl:template>
     
-    <xsl:template match="lw:entry" mode="full">
+    <xsl:template match="h:entry" mode="full">
         <xsl:variable name="primary-category" select="h:ul/h:li[@class='primaryCategory']"/>
         <xsl:variable name="root-category" select="/h:html/h:body/h:div[@id='categories']/h:ul/h:li[descendant-or-self::h:li/text() = $primary-category]/text()"/>
         <xsl:variable name="root-category-string" select="$category-map/h:div[h:span=$root-category]/h:span[2]"/>
@@ -162,7 +168,7 @@
                         <h2>FAQs on this topic</h2>
                         <xsl:variable name="cat" select="h:ul/h:li[@class='primaryCategory']"/>
                         <ul>
-                            <xsl:for-each select="parent::lw:blog/lw:entry[$cat=h:ul/h:li[@class='primaryCategory'] and not(@id = current()/@id) and contains(h:ul/h:li[@class='keywords'],'_show_me_')]">
+                            <xsl:for-each select="parent::h:blog/h:entry[$cat=h:ul/h:li[@class='primaryCategory'] and not(@id = current()/@id) and contains(h:ul/h:li[@class='keywords'],'_show_me_')]">
                                 <li>
                                     <a href="/howto/index.html?id={@id}"><xsl:value-of select="h:ul/h:li[@class='title']"/></a>
                                 </li>
