@@ -25,12 +25,12 @@ public class QueryTranslatorTest extends TestCase {
      */
     public void testProcessString() {
         this.translator.processString("green  red");
-        assertEquals("((${green} & ${red})) ", this.translator.getQuery());
+        assertEquals("(({green} & {red})) ", this.translator.getQuery());
         this.translator.processString("green red");
-        assertEquals("((${green} & ${red})) ", this.translator.getQuery());
+        assertEquals("(({green} & {red})) ", this.translator.getQuery());
         this.translator.processString("green red -blue");
-        assertEquals("((${green} & ${red}))  NOT ${blue}", this.translator.getQuery());
+        assertEquals("(({green} & {red}))  NOT {blue}", this.translator.getQuery());
         this.translator.processString("green  red  -blue");
-        assertEquals("((${green} & ${red}))  NOT ${blue}", this.translator.getQuery());
+        assertEquals("(({green} & {red}))  NOT {blue}", this.translator.getQuery());
     }
 }
