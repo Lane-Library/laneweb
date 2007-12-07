@@ -5,7 +5,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:lw="http://irt.stanford.edu/laneweb"
     xmlns="http://www.w3.org/1999/xhtml"
-    exclude-result-prefixes="h"
+    exclude-result-prefixes="h xs lw"
     version="2.0">
     
     <xsl:param name="id"/>
@@ -36,7 +36,7 @@
         <xsl:copy>
             <xsl:choose>
                 <xsl:when test="$id">
-                    <xsl:value-of select="/h:html/h:body/h:ul/h:li[attribute::id=$id]/text()"/>
+                    <xsl:value-of select="/h:html/h:body/lw:blog/lw:entry[@id=$id]/h:ul/h:li[@class='title']"/>
                 </xsl:when>
                 <xsl:when test="$category">
                     <xsl:value-of select="$category"/><xsl:text> FAQs</xsl:text>
@@ -48,16 +48,10 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="h:body/h:ul">
+    <xsl:template match="lw:blog">
         <xsl:choose>
-            <xsl:when test="$id=''">
-                <xsl:variable name="cat">
-                    <xsl:choose>
-                        <xsl:when test="$category = ''">Hot Topics</xsl:when>
-                        <xsl:otherwise><xsl:value-of select="$category"/></xsl:otherwise>
-                    </xsl:choose>
-                </xsl:variable>
-                <xsl:variable name="root-category" select="/h:html/h:body/h:div[@id='categories']/h:ul/h:li[descendant-or-self::h:li/text() = $cat]/text()"/>
+            <xsl:when test="not($id)">
+                <xsl:variable name="root-category" select="/h:html/h:body/h:div[@id='categories']/h:ul/h:li[descendant-or-self::h:li/text() = $category]/text()"/>
                 <xsl:variable name="root-category-string" select="$category-map/h:div[h:span=$root-category]/h:span[2]"/>
                 <table>
                     <tr>
@@ -78,44 +72,30 @@
                             </xsl:choose>
                         </td>
                         <td id="mainColumn">
-                            
-                            <xsl:if test="$category != ''">
-                                <h1><xsl:value-of select="$category"/> FAQs</h1>
-                            </xsl:if>
-                            <xsl:if test="$category = '' and $id = ''">
-                                <h1>Hot Topics</h1>
-                            </xsl:if>
+                            <h1><xsl:value-of select="$category"/> FAQs</h1>
                             <dl id="faq">
-                                <xsl:choose>
-                                    <xsl:when test="$category=''">
-                                        <xsl:apply-templates 
-                                            select="h:li[h:ul/h:li[@class='categories']/h:ul/h:li/text() = 'Hot Topics']" mode="dl"/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:apply-templates
-                                            select="h:li[h:ul/h:li[@class='categories']/h:ul/h:li/text() = $category]" mode="dl"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
+                                <xsl:apply-templates
+                                            select="lw:entry[h:ul/h:li[@class='categories']/h:ul/h:li/text() = $category]" mode="dl"/>
                             </dl>
                         </td>
                     </tr>
                 </table>
             </xsl:when>
             <xsl:when test="$id != '' and $mode = 'dl'">
-                <xsl:apply-templates select="h:li[@id=$id]" mode="dl"/>
+                <xsl:apply-templates select="lw:entry[@id=$id]" mode="dl"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates select="h:li[@id=$id]" mode="full"/>
+                <xsl:apply-templates select="lw:entry[@id=$id]" mode="full"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     
     <xsl:template match="h:div[@id='categories' or @id='category-map']"/>
     
-    <xsl:template match="h:li[@class='faq']" mode="dl">
+    <xsl:template match="lw:entry" mode="dl">
         <dt>
             <a id="{@id}" href="/howto/index.html?id={@id}">
-                <xsl:value-of select="text()"/>
+                <xsl:value-of select="h:ul/h:li[@class='title']"/>
             </a>
         </dt>
         <dd>
@@ -123,8 +103,8 @@
         </dd>
     </xsl:template>
     
-    <xsl:template match="h:li[@class='faq']" mode="full">
-        <xsl:variable name="primary-category" select="/h:html/h:body/h:ul/h:li[@id=$id]/h:ul/h:li[@class='primaryCategory']"/>
+    <xsl:template match="lw:entry" mode="full">
+        <xsl:variable name="primary-category" select="h:ul/h:li[@class='primaryCategory']"/>
         <xsl:variable name="root-category" select="/h:html/h:body/h:div[@id='categories']/h:ul/h:li[descendant-or-self::h:li/text() = $primary-category]/text()"/>
         <xsl:variable name="root-category-string" select="$category-map/h:div[h:span=$root-category]/h:span[2]"/>
         <xsl:variable name="more-category">
@@ -159,7 +139,7 @@
                 </td>
                 <td id="mainColumn">
                     <h1>
-                        <xsl:value-of select="normalize-space(text()[1])"/>
+                        <xsl:value-of select="h:ul/h:li[@class='title']"/>
                     </h1>
                     <xsl:for-each-group select="h:ul/h:li[@class='body']/node()"
                         group-adjacent="lw:inline(.)">
@@ -182,9 +162,9 @@
                         <h2>FAQs on this topic</h2>
                         <xsl:variable name="cat" select="h:ul/h:li[@class='primaryCategory']"/>
                         <ul>
-                            <xsl:for-each select="parent::h:ul/h:li[$cat=h:ul/h:li[@class='primaryCategory'] and not(@id = current()/@id) and contains(h:ul/h:li[@class='keywords'],'_show_me_')]">
+                            <xsl:for-each select="parent::lw:blog/lw:entry[$cat=h:ul/h:li[@class='primaryCategory'] and not(@id = current()/@id) and contains(h:ul/h:li[@class='keywords'],'_show_me_')]">
                                 <li>
-                                    <a href="/howto/index.html?id={@id}"><xsl:value-of select="text()"/></a>
+                                    <a href="/howto/index.html?id={@id}"><xsl:value-of select="h:ul/h:li[@class='title']"/></a>
                                 </li>
                             </xsl:for-each>
                             <li class="moreItem"><a href="/howto/index.html?category={$more-category}">More</a></li>
