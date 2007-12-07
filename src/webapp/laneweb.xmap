@@ -322,6 +322,11 @@
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
                     <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="loadTab" value="{request-param:loadTab}"/>
+                    <map:parameter name="template" value="{request-param:template}"/>
+                    <map:parameter name="debug" value="{request-param:debug}"/>
+                    <map:parameter name="source" value="{request-param:source}"/>
+                    <map:parameter name="m" value="{request-param:m}"/>
+                    <map:parameter name="t" value="{request-param:t}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -344,6 +349,11 @@
                     <map:parameter name="keywords" value="{request-param:keywords}"/>
                     <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="loadTab" value="{request-param:loadTab}"/>
+                    <map:parameter name="template" value="{request-param:template}"/>
+                    <map:parameter name="debug" value="{request-param:debug}"/>
+                    <map:parameter name="source" value="{request-param:source}"/>
+                    <map:parameter name="m" value="{request-param:m}"/>
+                    <map:parameter name="t" value="{request-param:t}"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
