@@ -31,7 +31,19 @@
     </xsl:template>
     
     <xsl:template match="h:title">
-        <xsl:copy>Frequently Asked Questions</xsl:copy>
+        <xsl:copy>
+            <xsl:choose>
+                <xsl:when test="$id">
+                    <xsl:value-of select="/h:html/h:body/h:ul/h:li[attribute::id=$id]/text()"/>
+                </xsl:when>
+                <xsl:when test="$category">
+                    <xsl:value-of select="$category"/><xsl:text> FAQs</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>Frequently Asked Questions</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:copy>
     </xsl:template>
     
     <xsl:template match="h:body/h:ul">
