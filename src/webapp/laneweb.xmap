@@ -244,6 +244,9 @@
                 <map:redirect-to uri="{request:contextPath}/portals/clinical.html"/>
             </map:match>
             <!-- ========================== EHR redirects for SHC ============================ -->
+            <map:match type="wildcard" pattern="shc/anesthesia.html">
+                <map:redirect-to uri="{request:contextPath}/portals/anesthesia.html?template=shc&amp;{request:queryString}"/>
+            </map:match>
             <map:match type="wildcard" pattern="shc/cardiology.html">
                 <map:redirect-to uri="{request:contextPath}/portals/cardiology.html?template=shc&amp;{request:queryString}"/>
             </map:match>
