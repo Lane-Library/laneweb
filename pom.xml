@@ -3,13 +3,13 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>lane</groupId>
+  <groupId>edu.stanford.irt</groupId>
   <artifactId>laneweb</artifactId>
   <packaging>war</packaging>
   <name>Lane Library Website</name>
   <version>1.7.6-SNAPSHOT</version>
   <description>The Lane Library web application built with Cocoon</description>
-  <url>http://www.stanford.edu/~ceyates/laneweb</url>
+  <url>http://lane.stanford.edu/index.html</url>
   <ciManagement>
     <notifiers>
       <notifier>
@@ -38,6 +38,11 @@
       <name>Ryan Max Steinberg</name>
       <email>ryanmax@stanford.edu</email>
       <organization>Lane Medical Library</organization>
+    </developer><developer>
+      <id>alainb</id>
+      <name>Alain Broussard</name>
+      <email>alainb@stanford.edu</email>
+      <organization>IRT Systems Development</organization>
     </developer>
   </developers>
   <scm>
@@ -85,7 +90,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
-        <!--<version>2.0.2</version>-->
         <configuration>
           <filters>
             <filter>project.properties</filter>
@@ -108,12 +112,12 @@
               </excludes>
             </resource>
             <resource>
-            <directory>src/conf</directory>
-            <targetPath>META-INF</targetPath>
-            <filtering>true</filtering>
-            <excludes>
-              <exclude>*xconf</exclude>
-            </excludes>
+              <directory>src/conf</directory>
+              <targetPath>META-INF</targetPath>
+              <filtering>true</filtering>
+              <excludes>
+                <exclude>*xconf</exclude>
+              </excludes>
             </resource>
           </webResources>
         </configuration>
@@ -156,10 +160,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <!--<configuration>
-          <configLocation>http://svn.apache.org/repos/asf/maven/plugins/trunk/maven-checkstyle-plugin/src/main/resources/config/maven_checks.xml</configLocation>
-          <headerLocation>http://svn.apache.org/repos/asf/maven/plugins/trunk/maven-checkstyle-plugin/src/main/resources/config/maven-header.txt</headerLocation>
-          </configuration>-->
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -444,9 +444,9 @@
       <scope>compile</scope>
       <exclusions>
         <exclusion>
-        <groupId>hsqldb</groupId>
-        <artifactId>hsqldb</artifactId>
-      </exclusion>
+          <groupId>hsqldb</groupId>
+          <artifactId>hsqldb</artifactId>
+        </exclusion>
         <exclusion>
           <groupId>avalon-logkit</groupId>
           <artifactId>avalon-logkit</artifactId>
@@ -493,35 +493,11 @@
         </exclusion>
       </exclusions>
     </dependency>
-    <!--<dependency>
-      <groupId>excalibur-i18n</groupId>
-      <artifactId>excalibur-i18n</artifactId>
-      <version>1.1</version>
-    </dependency>
-    <dependency>
-      <groupId>excalibur-instrument</groupId>
-      <artifactId>excalibur-instrument-api</artifactId>
-      <version>2.1</version>
-    </dependency>
-    <dependency>
-      <groupId>excalibur-instrument</groupId>
-      <artifactId>excalibur-instrument-mgr-api</artifactId>
-      <version>2.1</version>
-      <exclusions>
-        <exclusion>
-          <groupId>xml-apis</groupId>
-          <artifactId>xml-apis</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>-->
     <dependency>
       <groupId>excalibur-instrument</groupId>
       <artifactId>excalibur-instrument-mgr-impl</artifactId>
       <version>2.1</version>
       <scope>runtime</scope>
-      <exclusions>
-        
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>excalibur-logger</groupId>
@@ -530,25 +506,25 @@
       <scope>runtime</scope>
       <exclusions>
         <exclusion>
-        <groupId>avalon-logkit</groupId>
-        <artifactId>avalon-logkit</artifactId>
-      </exclusion>
-      <exclusion>
-        <groupId>servletapi</groupId>
-        <artifactId>servletapi</artifactId>
-      </exclusion>
-      <exclusion>
-        <groupId>geronimo-spec</groupId>
-        <artifactId>geronimo-spec-javamail</artifactId>
-      </exclusion>
-      <exclusion>
-        <groupId>geronimo-spec</groupId>
-        <artifactId>geronimo-spec-jms</artifactId>
-      </exclusion>
-      <exclusion>
-        <groupId>xml-apis</groupId>
-        <artifactId>xml-apis</artifactId>
-      </exclusion>
+          <groupId>avalon-logkit</groupId>
+          <artifactId>avalon-logkit</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>servletapi</groupId>
+          <artifactId>servletapi</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>geronimo-spec</groupId>
+          <artifactId>geronimo-spec-javamail</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>geronimo-spec</groupId>
+          <artifactId>geronimo-spec-jms</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xml-apis</groupId>
+          <artifactId>xml-apis</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -557,12 +533,6 @@
       <version>2.1</version>
       <scope>compile</scope>
     </dependency>
-    <!--<dependency>
-      <groupId>excalibur-pool</groupId>
-      <artifactId>excalibur-pool-impl</artifactId>
-      <version>2.1</version>
-      <scope>runtime</scope>
-    </dependency>-->
     <dependency>
       <groupId>excalibur-pool</groupId>
       <artifactId>excalibur-pool-instrumented</artifactId>
@@ -573,10 +543,10 @@
           <groupId>commons-collections</groupId>
           <artifactId>commons-collections</artifactId>
         </exclusion>
-          <exclusion>
-            <groupId>concurrent</groupId>
-            <artifactId>concurrent</artifactId>
-          </exclusion>
+        <exclusion>
+          <groupId>concurrent</groupId>
+          <artifactId>concurrent</artifactId>
+        </exclusion>
         <exclusion>
           <groupId>junitperf</groupId>
           <artifactId>junitperf</artifactId>
@@ -658,9 +628,9 @@
           <groupId>jtidy</groupId>
         </exclusion>
         <exclusion>
-        <groupId>saxon</groupId>
-        <artifactId>saxon</artifactId>
-      </exclusion>
+          <groupId>saxon</groupId>
+          <artifactId>saxon</artifactId>
+        </exclusion>
         <exclusion>
           <groupId>saxon7</groupId>
           <artifactId>saxon7</artifactId>
@@ -752,12 +722,6 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>googleapi</groupId>
-      <artifactId>googleapi</artifactId>
-      <version>0</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
       <groupId>irt</groupId>
       <artifactId>irt</artifactId>
       <version>UNKNOWN</version>
@@ -767,18 +731,6 @@
       <groupId>jakarta-regexp</groupId>
       <artifactId>jakarta-regexp</artifactId>
       <version>1.4</version>
-      <scope>runtime</scope>
-    </dependency>
-    <!--<dependency>
-      <groupId>javax.activation</groupId>
-      <artifactId>activation</artifactId>
-      <version>1.0.2</version>
-      <scope>runtime</scope>
-    </dependency>-->
-    <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>mail</artifactId>
-      <version>1.3.3</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -806,10 +758,6 @@
       <scope>compile</scope>
       <exclusions>
         <exclusion>
-        <groupId>javax.mail</groupId>
-        <artifactId>mail</artifactId>
-      </exclusion>
-        <exclusion>
           <groupId>javax.jms</groupId>
           <artifactId>jms</artifactId>
         </exclusion>
@@ -822,13 +770,13 @@
           <artifactId>jmxri</artifactId>
         </exclusion>
       </exclusions>
-      </dependency>
+    </dependency>
     <dependency>
       <groupId>org.easymock</groupId>
       <artifactId>easymock</artifactId>
       <version>2.3</version>
       <scope>test</scope>
-      </dependency>
+    </dependency>
     <dependency>
       <groupId>edu.stanford.irt</groupId>
       <artifactId>querymap</artifactId>
@@ -848,16 +796,16 @@
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>soap</groupId>
-      <artifactId>soap</artifactId>
-      <version>2.3</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>spellcheck</groupId>
+      <groupId>edu.stanford.irt</groupId>
       <artifactId>spellcheck</artifactId>
       <version>1.2.0</version>
       <scope>compile</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>jazzy</artifactId>
+          <groupId>jazzy</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>xalan</groupId>
