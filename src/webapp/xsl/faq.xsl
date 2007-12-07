@@ -2,6 +2,8 @@
 <xsl:stylesheet
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:lw="http://irt.stanford.edu/laneweb"
     xmlns="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="h"
     version="2.0">
@@ -157,9 +159,19 @@
                 </td>
                 <td id="mainColumn">
                     <h1>
-                        <xsl:value-of select="text()"/>
+                        <xsl:value-of select="normalize-space(text()[1])"/>
                     </h1>
-                    <xsl:copy-of select="h:ul/h:li[@class='body']/node()"/>
+                    <xsl:for-each-group select="h:ul/h:li[@class='body']/node()"
+                        group-adjacent="lw:inline(.)">
+                        <xsl:choose>
+                            <xsl:when test="current-grouping-key()">
+                                <p><xsl:apply-templates select="current-group()"/></p>
+                            </xsl:when>
+                            <xsl:otherwise>                        
+                                <xsl:apply-templates select="current-group()"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:for-each-group>
                     <p style="font-size:xx-small"><xsl:value-of select="h:ul/h:li[@class='author']"/>,
                         <xsl:value-of select="h:ul/h:li[@class='modified']"/>
                     </p>
@@ -183,5 +195,11 @@
         </table>
     </xsl:template>
     
+    <xsl:function name="lw:inline" as="xs:boolean">
+        <xsl:param name="node" as="node()"/>
+        <xsl:sequence select="($node instance of text() and string-length(normalize-space($node)) > 0) or
+            $node[self::h:u|self::h:b|self::h:i|self::h:strong|self::h:span|self::h:em
+            |self::h:br|self::h:a]"/>
+    </xsl:function>
     
 </xsl:stylesheet>
