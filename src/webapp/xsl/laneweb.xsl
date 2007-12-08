@@ -542,18 +542,18 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- add class="labled" where appropriate -->
-    <xsl:template match="h:p[preceding-sibling::h:h3]
-        |h:ul[preceding-sibling::h:h3]
-        |h:form[preceding-sibling::h:h3]
-        |h:ol[preceding-sibling::h:h3]
-        |h:td[@id='mainColumn']/h:p[preceding-sibling::h:h2]
-        |h:td[@id='mainColumn']/h:ul[preceding-sibling::h:h2]
-        |h:td[@id='mainColumn']/h:ol[preceding-sibling::h:h2]">
+    <!-- add class="labeled" where appropriate -->
+    <xsl:template match="h:p[preceding-sibling::*[1][self::h:h3]]
+        |h:ul[preceding-sibling::*[1][self::h:h3]]
+        |h:form[preceding-sibling::*[1][self::h:h3]]
+        |h:ol[preceding-sibling::*[1][self::h:h3]]
+        |h:td[@id='mainColumn']/h:p[preceding-sibling::*[1][self::h:h2]]
+        |h:td[@id='mainColumn']/h:ul[preceding-sibling::*[1][self::h:h2]]
+        |h:td[@id='mainColumn']/h:ol[preceding-sibling::*[1][self::h:h2]]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:if test="not(@class)">
-                <xsl:attribute name="class">labled</xsl:attribute>
+                <xsl:attribute name="class">labeled</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </xsl:copy>
