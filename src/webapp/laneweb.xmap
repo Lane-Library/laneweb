@@ -66,7 +66,7 @@
             </map:serializer>
             <map:serializer name="xml" mime-type="text/xml" logger="sitemap.serializer.xml"
                 src="org.apache.cocoon.serialization.XMLSerializer" pool-max="32">
-                <indent>yes</indent>
+                <indent>no</indent>
                 <encoding>UTF-8</encoding>
                 <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
             </map:serializer>
