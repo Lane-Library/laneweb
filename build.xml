@@ -10,6 +10,7 @@
             <include name="**/*.jar"/>
         </fileset>
     </path>
+    <target name="all"/>
     <target name="init" description="o Initializes some properties">
         <mkdir dir="${libdir}"/>
         <condition property="noget">
