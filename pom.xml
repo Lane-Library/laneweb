@@ -825,5 +825,11 @@
       <version>2.3.0</version>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <artifactId>nekohtml</artifactId>
+      <groupId>nekohtml</groupId>
+      <version>0.9.5</version>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
 </project>
