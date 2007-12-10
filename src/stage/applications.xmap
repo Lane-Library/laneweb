@@ -4,6 +4,10 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
+        	<map:match type="wildcard" pattern="describe-proxy">
+	           <map:generate src="{defaults:search-url}/describe?xml=true"/>
+	          	<map:serialize type="xml"/>
+	        </map:match>  
         	<map:match type="wildcard" pattern="search-proxy">
 	           <map:match type="regex-parameter" pattern="^.+$">
 	                <map:parameter name="parameter-name" value="id"/>
