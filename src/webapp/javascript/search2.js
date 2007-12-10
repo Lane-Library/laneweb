@@ -42,6 +42,7 @@ function initSearch() {
                     this.style.cursor = 'default';
                 }
                 tab.clicked = function(event) {
+                	webtrends(this);
                     this.result.show();
                     YAHOO.util.Event.stopEvent(event);
                 }
@@ -49,7 +50,6 @@ function initSearch() {
         }
        	 spellcheck = new Spellcheck(getMetaContent("LW.source"));
 }
-
 
 
 function Result(type, tab, container) {
@@ -160,6 +160,10 @@ Result.prototype.setTabCount = function(count) {
 }
 
 
+function webtrends(tab)
+{
+	window.dcsMultiTrack('DCS.dcssip', window.getMetaContent('LW.host') ,'DCS.dcsuri','/plain/search/'+tab.result._type+'.html','DCS.dcsquery','source='+tab.result._type+'&keywords='+window.getMetaContent('LW.keywords'),'WT.ti',document.title,'DCSext.keywords',window.getMetaContent('LW.keywords'),'DCSext.search_type',window.getMetaContent('LW.source'),'WT.seg_1',window.getMetaContent('WT.seg_1'));
+}		
 
 
 var showHitsCallback =
