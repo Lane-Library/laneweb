@@ -3,63 +3,40 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Vector;
 
-class WordData {
-
-    String text;
-
-    // String fieldName;
-}
-
 public class QueryTranslator {
 
-    Vector<WordData> reqWords = new Vector<WordData>();
+    Vector<String> reqWords = new Vector<String>();
 
-    // Vector<WordData> optWords = new Vector<WordData>();
-
-    Vector<WordData> notWords = new Vector<WordData>();
-
-    public static final int REQUIRED = 1;
-
-    // public static final int optional = 2;
-
-    public static final int NOT_WANTED = 3;
+    Vector<String> notWords = new Vector<String>();
 
     public String translate(final String input) {
-        // CY: leading space broke this sucker
-        processString(input.trim());
+        processString(input);
+        if (this.reqWords.size() == 0 ) {
+            throw new IllegalArgumentException("no 'required' words in query: " + input);
+        }
+        String translatedQuery = getQuery();
+        if (translatedQuery.indexOf("()") > -1 || translatedQuery.indexOf("{}") > -1 || translatedQuery.indexOf("(%)") > -1) {
+            throw new IllegalArgumentException("can't construct a valid oracle text query from: " + input);
+        }
         return getQuery();
     }
 
-    private void addWord(final String word, final int wordType) {
-
-        WordData wd = new WordData();
-
-        wd.text = word;
-        // wd.fieldName = field;
-
-        switch (wordType) {
-        case REQUIRED:
-            this.reqWords.addElement(wd);
-            break;
-        // case optional:
-        // optWords.addElement(wd);
-        // break;
-        case NOT_WANTED:
-            this.notWords.addElement(wd);
-            break;
+    private void addWord(final String word, final boolean required) {
+        
+        if (required) {
+            this.reqWords.add(word);
+        } else {
+            this.notWords.add(word);
         }
     }
 
     public void processString(final String input) {
         int p = 0;
         int startWord;
-        int flag;
         String theWord;
-        // String fieldName;
 
-        this.reqWords = new Vector<WordData>();
-        // optWords = new Vector<WordData>();
-        this.notWords = new Vector<WordData>();
+        this.reqWords = new Vector<String>();
+        this.notWords = new Vector<String>();
 
         while (true) { // Loop over all words
 
@@ -86,16 +63,15 @@ public class QueryTranslator {
             if (theWord.length() > 0) {
                 // CY changed this to required from optional to make it AND
                 // logic
-                flag = REQUIRED;
-                // fieldName = "";
+                boolean required = true;
 
                 if (theWord.charAt(0) == '+' && theWord.length() > 1) {
-                    flag = REQUIRED;
+                    required = true;
                     theWord = theWord.substring(1);
                 }
 
                 else if (theWord.charAt(0) == '-' && theWord.length() > 1) {
-                    flag = NOT_WANTED;
+                    required = false;
                     theWord = theWord.substring(1);
                 }
 
@@ -103,7 +79,7 @@ public class QueryTranslator {
 
                 theWord = theWord.replace('*', '%');
 
-                addWord(theWord, flag);
+                addWord(theWord, required);
 
             }
             p++;
@@ -117,16 +93,11 @@ public class QueryTranslator {
     // surrounds it in braces (to avoid reserved words)
     // and attaches a WITHIN clause if appropriate.
 
-    private String getWord(final Vector<WordData> words, final int pos) {
+    private String getWord(final Vector<String> words, final int pos) {
         // here I added stuff for handling the wildcard, which doesn't work if
         // in {}
-        String word = words.elementAt(pos).text;
+        String word = words.elementAt(pos);
         String ts = word.indexOf('%') > -1 ? word : "{" + word + "}";
-        // String ts = "{" + ((WordData) words.elementAt(pos)).text + "}";
-        // not using fieldName at the moment
-        // if (((WordData) words.elementAt(pos)).fieldName.length() > 0) {
-        // ts += " WITHIN " + ((WordData) words.elementAt(pos)).fieldName;
-        // }
         return ts;
     }
 
@@ -140,70 +111,32 @@ public class QueryTranslator {
     // NOT (not1 | not2 | ... notN)
 
     public String getQuery() {
-        String tempString = "";
+        StringBuffer sb = new StringBuffer();
+//        String tempString = "";
 
         String boolOp = ""; // AND, OR, NOT operator
         int reqCount; // Count of required words
-        // int optCount; // Count of optional words
         int notCount; // Count of not wanted words
         int i; // Loop control
 
         boolOp = "";
         reqCount = this.reqWords.size();
-        // optCount = optWords.size();
         notCount = this.notWords.size();
 
         if (this.reqWords.size() > 0) {
             // Required words - first time
 
-            tempString = "((";
+            sb.append("((");
             for (i = 0; i < reqCount; i++) {
-                tempString += boolOp + getWord(this.reqWords, i);
+                sb.append(boolOp).append(getWord(this.reqWords, i));
                 boolOp = " & ";
             }
-
-            // if (reqCount > 0 && optCount > 0) {
-            // tempString += ") | ";
-            // tempString += "((";
-            // // Required words - second time (anded with optional words)
-            // boolOp = "";
-            // for (i = 0; i < reqCount; i++) {
-            // tempString += boolOp + getWord(reqWords, i);
-            // boolOp = " & ";
-            // }
-            // tempString += ")*10*10";
-            //
-            // tempString += " & (";
-            //
-            // // Required words - third time as part of accumulate
-            // boolOp = "";
-            // for (i = 0; i < reqCount; i++) {
-            // tempString += boolOp + getWord(reqWords, i);
-            // // tempString += "*2";// Uncomment to double weight of
-            // // required words
-            // boolOp = " , ";
-            // }
-            // }
-        } // else
-        // tempString = "(";
-
-        // Optional words
-        // Don't reset boolOp
-        // for (i = 0; i < optCount; i++) {
-        // tempString += boolOp + getWord(optWords, i);
-        // boolOp = " , "; // Accumulate
-        // }
-
-        if (reqCount > 0) {
-            // if (optCount > 0)
-            // tempString += ")) )";
-            // else
-            tempString += ")) ";
-            // else
-            // tempString += ")";
         }
 
-        // if (tempString.length() > 0)
+        if (reqCount > 0) {
+            sb.append(")) ");
+        }
+
         if (notCount > 0) {
             boolOp = " NOT ";
         } else {
@@ -211,16 +144,9 @@ public class QueryTranslator {
         }
 
         for (i = 0; i < notCount; i++) {
-            tempString += boolOp + getWord(this.notWords, i);
+            sb.append(boolOp).append(getWord(this.notWords, i));
             boolOp = " NOT ";
         }
-        return tempString;
+        return sb.toString();
     }
-
-   //public static void main(String[] args) {
-   //System.out.println(new
-   //QueryTranslator().translate(java.net.URLDecoder.decode("rw -tope")));
-   //System.out.println(new
-   //QueryTranslator().translate(java.net.URLDecoder.decode("+J.+Thorac.+Cardiovasc.+Surg.%2C+June+1%2C+2004%3B+127%286%29%3A+1858+-+1858. or alain ")));
-   // }
 }
