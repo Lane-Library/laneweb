@@ -1,28 +1,14 @@
 // ****************    Add by IRT  		**********************//
 
 
+YAHOO.util.Event.addListener(document, 'click', handleClicks);
 
-YAHOO.util.Event.addListener(document, 'click', webtrendsOnClick);
 
-
-function webtrendsOnClick(e) {
+function handleClicks(e) {
 		var target = (e.srcElement) ? e.srcElement : e.target;
 		var node = getNode(target);
 		if(node != null)
-		{
-	    	var redirectUrl = webtrendsProcess(node);
-	    	if(redirectUrl != null  && e.button =="0")//to give some time to send the request for webtrends
-			{
-				setTimeout("redirect('"+redirectUrl+"')",200);
-				YAHOO.util.Event.preventDefault(e);
-			}
-	    }
-}
-
-
-function redirect(redirectUrl)
-{
-	window.location = redirectUrl;
+	    	webtrendsProcess(node);
 }
 
 function getNode(node)
@@ -45,7 +31,6 @@ function getNodeByNames(node)
 }
 
 function webtrendsProcess(node){
-		var redirectUrl;
 		var title;
 		var host;
 		var affiliation = getMetaContent('WT.seg_1');
@@ -63,11 +48,11 @@ function webtrendsProcess(node){
 		}
 		if(node.tagName == "A" || node.tagName == "AREA")//for anchor tag 
 		{
-			if(host != getMetaContent("LW.host") || node.href.indexOf("/secure/login.html?url=") >-1 || node.href.indexOf("/secure/login.html?user=") >-1)
+			if(host != getMetaContent("LW.host") || node.href.indexOf("/secure/login.html?url=") >-1 || node.href.indexOf("/secure/login.html?user=") >-1 )
 			{
-				var offsite;
+				var href;
 				var uri= '/';
-				var query;
+				var query ;
 				var proxyUrl = 'http://laneproxy.stanford.edu/login';
 				var href = node.href;
 				if(href.indexOf(proxyUrl) > -1 )
@@ -83,15 +68,23 @@ function webtrendsProcess(node){
 				{	
 					uri =  href.substring(href.indexOf('/'), href.length);	
 					href = href.substring(0,href.indexOf('/'));
-				}
-				if(host != getMetaContent("LW.host") ||node.href.indexOf("/secure/login.html?url=") >-1 || node.href.indexOf("/secure/login.html?user=") >-1)	
-				{
-					offsite = 1;
-					redirectUrl = node.href;
-				}		
+				}	
 				title = getWebtrendsTitle(node);	
-				//alert('DCS.dcssip:'+ href +'\nDCS.dcsuri:'+uri + '\nDCS.dcsquery:' +query  +'\nWT.ti:'+title +'\nDCSext.keywords:'+getMetaContent('LW.keywords')+'\nDCSext.search_type:'+getMetaContent('LW.source')+'\nDCSext.offsite_link:1');
-			 	dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link',offsite,'WT.seg_1',affiliation);
+				//alert('DCS.dcssip:'+ href +'\nDCS.dcsuri:'+uri + '\nDCS.dcsquery:' +query  +'\nWT.ti:'+title +'\nDCSext.keywords:'+getMetaContent('LW.searchTerms')+'\nDCSext.search_type:'+getMetaContent('LW.source')+'\nDCSext.offsite_link:1');
+			 	if(getMetaContent('LW.searchTerms') != undefined)
+			 	{
+			 		if(query != undefined )
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.searchTerms'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1','WT.seg_1',affiliation);
+					else	
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.searchTerms'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link','1','WT.seg_1',affiliation);
+				}
+				else
+				{
+					if(query != undefined )
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.offsite_link','1','WT.seg_1',affiliation);
+					else	
+						dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'WT.ti',title,'DCSext.offsite_link','1','WT.seg_1',affiliation);
+			 	}
 			 }
 		}
 		
@@ -102,12 +95,12 @@ function webtrendsProcess(node){
 		{
 			title = getWebtrendsTitle(node);
 			uri =  node.pathname;	
-			//alert('\nDCS.dcsuri:'+uri + '\nWT.ti: '+title +'\nDCSext.keywords: '+getMetaContent('LW.keywords')+'\nDCSext.search_type: '+getMetaContent('LW.source'));
-			dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'WT.seg_1',affiliation);
+			//alert('\nDCS.dcsuri:'+uri + '\nWT.ti: '+title +'\nDCSext.keywords: '+getMetaContent('LW.searchTerms')+'\nDCSext.search_type: '+getMetaContent('LW.source'));
+			if(getMetaContent('LW.searchTerms') != undefined)
+				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.searchTerms'),'DCSext.search_type',getMetaContent('LW.source'),'WT.seg_1',affiliation);
+			else
+				dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'WT.seg_1',affiliation);
 		}
-		
-		return redirectUrl; 
-		
 } 
 
 
@@ -158,18 +151,18 @@ var gDomain="irt-sdc.stanford.edu";
 var gDcsId="dcssi6l0t1000004z9mg95sop_9v3k";
 
 function dcsMultiTrack() {
-	for (var i=0;i<arguments.length;i=i+2) {
-		if (arguments[i].indexOf('WT.')==0 ) {
-        	if(arguments[i+1] !="undefined")
-        		WT[arguments[i].substring(3)]=arguments[i+1];
+    for (var i=0;i<arguments.length;i++) {
+        if (arguments[i].indexOf('WT.')==0) {
+            WT[arguments[i].substring(3)]=arguments[i+1];
+            i++;
         }
-        if (arguments[i].indexOf('DCS.')==0 ) {
-        	if(arguments[i+1] !="undefined")
-        	   DCS[arguments[i].substring(4)]=arguments[i+1];
+        if (arguments[i].indexOf('DCS.')==0) {
+            DCS[arguments[i].substring(4)]=arguments[i+1];
+            i++;
         }
         if (arguments[i].indexOf('DCSext.')==0) {
-            if(arguments[i+1] !="undefined")
-        		DCSext[arguments[i].substring(7)]=arguments[i+1];
+            DCSext[arguments[i].substring(7)]=arguments[i+1];
+            i++;
         }
     }
     var dCurrent=new Date();
@@ -255,7 +248,6 @@ function dcsVar(){
 	}
 }
 
-
 function A(N,V){
 	return "&"+N+"="+dcsEscape(V);
 }
@@ -288,7 +280,6 @@ function dcsCreateImage(dcsSrc){
 		}
 		gImages[gIndex].src=dcsSrc;
 		gIndex++;
-	  	 
 	}
 	else{
 		document.write('<IMG BORDER="0" NAME="DCSIMG" WIDTH="1" HEIGHT="1" SRC="'+dcsSrc+'">');
