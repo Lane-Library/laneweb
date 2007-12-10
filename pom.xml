@@ -54,7 +54,6 @@
   </organization>
   <build>
     <sourceDirectory>src/java</sourceDirectory>
-    <testSourceDirectory>src/test</testSourceDirectory>
     <filters>
       <filter>project.properties</filter>
     </filters>
