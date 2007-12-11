@@ -7,6 +7,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
@@ -24,31 +25,31 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     // ERESOURCE.TITLE, lower(ERESOURCE.TITLE) AS LTITLE,
     private static final String COUNT_QUERY =
             "WITH FOUND AS (SELECT HISTORY_ERESOURCE.ERESOURCE_ID FROM HISTORY_ERESOURCE \n"
-                    + "WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'XX') > 0) \n"
-                    + "SELECT COUNT(*) AS HITS, 'books' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'books'\n" + "UNION\n"
-                    + "SELECT COUNT(*) AS HITS, 'movie' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'movie'\n" + "UNION\n"
-                    + "SELECT COUNT(*) AS HITS, 'serial' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'serial'\n" + "UNION\n"
-                    + "SELECT COUNT(*) AS HITS, 'graphic' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'graphic'\n" + "UNION\n"
-                    + "SELECT COUNT(*) AS HITS, 'thesis' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'thesis'\n" + "UNION\n"
-                    + "SELECT COUNT(*) AS HITS, 'object' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'object'\n" + "UNION\n"
-                    + "SELECT COUNT(*) AS HITS, 'people' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'people'\n" + "UNION\n"
-                    + "SELECT COUNT(*) AS HITS, 'organization' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'organization'\n" + "UNION\n"
-                    + "SELECT COUNT(*) AS HITS, 'article' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'article'\n" + "UNION\n"
-                    + "SELECT COUNT(*) AS HITS, 'chapter' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'chapter'\n" + "UNION\n"
-                    + "SELECT COUNT(*) AS HITS, 'event' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'event'\n" + "UNION\n"
-                    + "SELECT COUNT(*) AS HITS, 'findingAid' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'finding aid'\n";
+                    + "WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,{0}) > 0) \n"
+                    + "SELECT COUNT(*) AS HITS, ''books'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''books''\n" + "UNION\n"
+                    + "SELECT COUNT(*) AS HITS, ''movie'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''movie''\n" + "UNION\n"
+                    + "SELECT COUNT(*) AS HITS, ''serial'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''serial''\n" + "UNION\n"
+                    + "SELECT COUNT(*) AS HITS, ''graphic'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''graphic''\n" + "UNION\n"
+                    + "SELECT COUNT(*) AS HITS, ''thesis'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''thesis''\n" + "UNION\n"
+                    + "SELECT COUNT(*) AS HITS, ''object'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''object''\n" + "UNION\n"
+                    + "SELECT COUNT(*) AS HITS, ''people'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''people''\n" + "UNION\n"
+                    + "SELECT COUNT(*) AS HITS, ''organization'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''organization''\n" + "UNION\n"
+                    + "SELECT COUNT(*) AS HITS, ''article'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''article''\n" + "UNION\n"
+                    + "SELECT COUNT(*) AS HITS, ''chapter'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''chapter''\n" + "UNION\n"
+                    + "SELECT COUNT(*) AS HITS, ''event'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''event''\n" + "UNION\n"
+                    + "SELECT COUNT(*) AS HITS, ''findingAid'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+                    + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''finding aid''\n";
 
     private static final String TYPE = "t";
 
@@ -185,7 +186,9 @@ public class HistoryQueryGenerator extends AbstractGenerator {
 
     private char[] getSelectStatmentChars() {
         if (this.count) {
-            String countQuery = COUNT_QUERY.replaceAll("XX", this.translatedQuery);
+        	MessageFormat query = new MessageFormat(COUNT_QUERY);
+        	Object[] arg = { this.translatedQuery};
+            String countQuery = query.format(arg);
             return countQuery.toCharArray();
         }
         StringBuffer queryBuffer = new StringBuffer();

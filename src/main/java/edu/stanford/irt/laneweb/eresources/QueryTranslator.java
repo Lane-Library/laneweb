@@ -115,7 +115,7 @@ public class QueryTranslator {
         if (word.lastIndexOf('\\') == word.length() - 1) {
             word = word.substring(0, word.length() - 1);
         }
-        return '{' + word + '}';
+        return "${".concat( word) + '}';
     }
 
     // getQuery returns a formatted, ready-to-run ConText query.
