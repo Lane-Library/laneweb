@@ -54,7 +54,7 @@
   </xml-parser>
   
   <store logger="core.store">
-     <parameter name="maxobjects" value="***laneweb.cocoon.store.maxobjects***"/>
+     <parameter name="maxobjects" value="${laneweb.cocoon.store.maxobjects}"/>
     <parameter name="use-cache-directory" value="true"/>
   </store>
                                                                                                                                                                                                     
@@ -63,8 +63,8 @@
   </transient-store>
 
   <store-janitor logger="core.store.janitor">  
-     <parameter name="freememory" value="***laneweb.cocoon.store.freememory***"/>
-     <parameter name="heapsize" value="***laneweb.cocoon.store.heapsize***"/>
+     <parameter name="freememory" value="${laneweb.cocoon.store.freememory"/>
+     <parameter name="heapsize" value="${laneweb.cocoon.store.heapsize}"/>
      <parameter name="cleanupthreadinterval" value="10"/>
      <parameter name="percent_to_free" value="10"/>
   </store-janitor>
