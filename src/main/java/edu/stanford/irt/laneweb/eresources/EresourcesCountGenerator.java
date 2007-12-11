@@ -78,7 +78,6 @@ public class EresourcesCountGenerator extends AbstractGenerator {
             String translatedQuery = this.queryTranslator.translate(query);
             if (translatedQuery.indexOf("()") == -1 && translatedQuery.indexOf("{}") == -1 && translatedQuery.indexOf("NOT") != 1) {
             	Object[] argument = {"'".concat(translatedQuery).concat("'")};  
-	        	System.out.println("statement "+ selectStatement.format(argument));
 	        	this.selectStatementChars = selectStatement.format(argument).toCharArray();
 	        	
 	        	
