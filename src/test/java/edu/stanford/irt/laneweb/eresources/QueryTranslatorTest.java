@@ -7,7 +7,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import junit.framework.TestCase;
 
@@ -69,4 +75,28 @@ public class QueryTranslatorTest extends TestCase {
             }
         }
     }
+    
+//    public void testForOracleError() throws ClassNotFoundException, SQLException, IOException {
+//        Class.forName("oracle.jdbc.driver.OracleDriver");
+//        Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@171.65.56.227:1521:orcl","ceyates","phydeaux");
+//        PreparedStatement stmt = conn.prepareStatement("SELECT count(*) FROM ERESOURCE2 WHERE CONTAINS(TEXT,?) > 0");
+//        InputStream stream = getClass().getResourceAsStream("search-terms.txt");
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(stream, "ASCII"));
+//        for (String query = reader.readLine(); null != query; query = reader.readLine()) {
+//            String decodedQuery = URLDecoder.decode(query,"UTF-8");
+//            try {
+//            String translatedQuery = this.translator.translate(decodedQuery);
+//            stmt.setString(1, translatedQuery);
+//            ResultSet rs = stmt.executeQuery();
+////            if (rs.next()) {
+////                System.out.println(rs.getInt(1)  + " : " + decodedQuery + " : " + translatedQuery);
+////            }
+//            } catch (IllegalArgumentException e) {
+//                System.out.println(e.getMessage() + " : " +  decodedQuery + " : " + this.translator.getQuery());
+//            } catch (SQLException e) {
+//                System.out.println(e.getMessage() + " : " +  decodedQuery + " : " + this.translator.translate(decodedQuery));
+//                fail(e.getMessage() + " : " +  decodedQuery + " : " + this.translator.translate(decodedQuery));
+//            }
+//        }
+//    }
 }

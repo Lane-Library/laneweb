@@ -9,21 +9,26 @@ public class QueryTranslator {
 
     Vector<String> notWords = new Vector<String>();
 
-    public String translate(final String input) {
+    public String translate(String input) {
+        if (input.indexOf('{') > -1 || input.indexOf('}') > -1) {
+            throw new IllegalArgumentException("'}' and '{' should not appear in input");
+        }
         processString(input);
-        if (this.reqWords.size() == 0 ) {
+        if (this.reqWords.size() == 0) {
             throw new IllegalArgumentException("no 'required' words in query: " + input);
         }
         String translatedQuery = getQuery();
-        if (translatedQuery.indexOf("()") > -1 || translatedQuery.indexOf("{}") > -1 || translatedQuery.indexOf("(%)") > -1) {
+        if (translatedQuery.indexOf("()") > -1 
+                || translatedQuery.indexOf("{}") > -1
+                || translatedQuery.indexOf("\\}") > -1) {
             throw new IllegalArgumentException("can't construct a valid oracle text query from: " + input);
         }
-        return getQuery();
+        return translatedQuery;
     }
 
-    private void addWord(final String word, final boolean required) {
-        
-        if (required) {
+    private void addWord(final String word, final boolean isRequired) {
+
+        if (isRequired) {
             this.reqWords.add(word);
         } else {
             this.notWords.add(word);
@@ -59,19 +64,20 @@ public class QueryTranslator {
             // Got a word. Check for required/not wanted flags (+-)
 
             theWord = input.substring(startWord, p);
+
             // CY bug 11825, don't process zero length string
             if (theWord.length() > 0) {
                 // CY changed this to required from optional to make it AND
                 // logic
-                boolean required = true;
+                boolean isRequired = true;
 
                 if (theWord.charAt(0) == '+' && theWord.length() > 1) {
-                    required = true;
+                    isRequired = true;
                     theWord = theWord.substring(1);
                 }
 
                 else if (theWord.charAt(0) == '-' && theWord.length() > 1) {
-                    required = false;
+                    isRequired = false;
                     theWord = theWord.substring(1);
                 }
 
@@ -79,7 +85,9 @@ public class QueryTranslator {
 
                 theWord = theWord.replace('*', '%');
 
-                addWord(theWord, required);
+                if (!"%".equals(theWord)) {
+                    addWord(theWord, isRequired);
+                }
 
             }
             p++;
@@ -97,8 +105,17 @@ public class QueryTranslator {
         // here I added stuff for handling the wildcard, which doesn't work if
         // in {}
         String word = words.elementAt(pos);
-        String ts = word.indexOf('%') > -1 ? word : "{" + word + "}";
-        return ts;
+        if (word.indexOf('%') > -1) {
+            word =  word.replaceAll("[\\W&&[^%]]", "");
+            if ("%".equals(word)) {
+                return "";
+            }
+            return word;
+        }
+        if (word.lastIndexOf('\\') == word.length() - 1) {
+            word = word.substring(0, word.length() - 1);
+        }
+        return '{' + word + '}';
     }
 
     // getQuery returns a formatted, ready-to-run ConText query.
@@ -112,7 +129,7 @@ public class QueryTranslator {
 
     public String getQuery() {
         StringBuffer sb = new StringBuffer();
-//        String tempString = "";
+        // String tempString = "";
 
         String boolOp = ""; // AND, OR, NOT operator
         int reqCount; // Count of required words
