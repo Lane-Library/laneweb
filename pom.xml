@@ -53,7 +53,6 @@
     <url>http://lane.stanford.edu/</url>
   </organization>
   <build>
-    <sourceDirectory>src/java</sourceDirectory>
     <filters>
       <filter>project.properties</filter>
     </filters>
