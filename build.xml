@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="webapp" name="laneweb" basedir=".">
     <property name="defaulttargetdir" value="target"/>
+    <property name="srcdir" value="src/main/java"/>
     <property name="libdir" value="${defaulttargetdir}/lib"/>
     <property name="classesdir" value="${defaulttargetdir}/classes"/>
     <property name="webappdir" value="${defaulttargetdir}/laneweb"/>
@@ -20,7 +21,7 @@
     <target name="compile" description="o Compile the code" depends="get-deps">
         <mkdir dir="${classesdir}"/>
         <javac destdir="${classesdir}" deprecation="true" debug="true" optimize="false"
-            excludes="**/package.html" srcdir="src/java">
+            excludes="**/package.html" srcdir="${srcdir}">
             <classpath>
                 <fileset dir="${libdir}">
                     <include name="*.jar"/>
@@ -97,7 +98,6 @@
         <get dest="${libdir}/avalon-framework-api-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-framework/jars/avalon-framework-api-4.3.jar"/>
         <get dest="${libdir}/avalon-framework-impl-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-framework/jars/avalon-framework-impl-4.3.jar"/>
         <get dest="${libdir}/avalon-logkit-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-logkit/jars/avalon-logkit-2.1.jar"/>
-        <get dest="${libdir}/bcel-5.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/bcel/jars/bcel-5.2.jar"/>
         <get dest="${libdir}/cocoon-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-2.1.10.jar"/>
         <get dest="${libdir}/cocoon-html-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-html-2.1.10.jar"/>
         <get dest="${libdir}/cocoon-databases-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-databases-2.1.10.jar"/>
@@ -134,7 +134,7 @@
         <get dest="${libdir}/nekohtml-0.9.5.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/nekohtml/jars/nekohtml-0.9.5.jar"/>
         <get dest="${libdir}/querymap-1.0.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/querymap/jars/querymap-1.0.3.jar"/>
         <get dest="${libdir}/servlet-api-2.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax.servlet/jars/servlet-api-2.4.jar"/>
-        <get dest="${libdir}/saxon-8.9.j.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/saxon/jars/saxon-8.9.j.jar"/>
+        <get dest="${libdir}/saxon-9.0.0.2.j.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/net/sf/saxon/saxon/9.0.0.2.j/saxon-9.0.0.2.j.jar"/>
         <get dest="${libdir}/soap-2.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/soap/jars/soap-2.3.jar"/>
         <get dest="${libdir}/spellcheck-1.2.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/spellcheck/jars/spellcheck-1.2.0.jar"/>
         <get dest="${libdir}/xalan-2.7.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xalan/jars/xalan-2.7.0.jar"/>

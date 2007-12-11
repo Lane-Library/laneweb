@@ -783,9 +783,9 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>saxon</groupId>
+      <groupId>net.sf.saxon</groupId>
       <artifactId>saxon</artifactId>
-      <version>8.9.j</version>
+      <version>9.0.0.2.j</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>

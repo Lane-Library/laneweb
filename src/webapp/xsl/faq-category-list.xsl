@@ -4,7 +4,7 @@
                 xmlns:h="http://www.w3.org/1999/xhtml" version="2.0">
     <xsl:param name="category"/>
     
-    <xsl:template match="/h:html/h:body/h:ul">
+    <xsl:template match="/h:html/h:body/h:blog">
         <xsl:variable name="more-category">
             <xsl:choose>
                 <xsl:when test="contains($category,'&amp;')">
@@ -18,13 +18,13 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:copy>
-            <xsl:apply-templates select="h:li[h:ul/h:li[@class='primaryCategory'] = $category
+            <xsl:apply-templates select="h:entry[h:ul/h:li[@class='primaryCategory'] = $category
                                               and contains(h:ul/h:li[@class='keywords'],'_show_me_')]"/>
             <li class="moreItem"><a href="/howto/index.html?category={$more-category}">More</a></li>
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="h:li[not(ancestor::h:div)]">
+    <xsl:template match="h:entry">
         <xsl:copy>
             <a href="/howto/index.html?id={@id}"><xsl:value-of select="text()"/></a>
         </xsl:copy>
