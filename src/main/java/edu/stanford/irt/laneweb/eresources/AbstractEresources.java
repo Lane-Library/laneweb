@@ -36,7 +36,6 @@ public abstract class AbstractEresources  extends ServiceableGenerator {
 	        Statement stmt = null;
 	        ResultSet rs = null;
 	        try {
-	        	System.out.println("sql "+this.sql);
 	            conn = this.dataSource.getConnection();
 	            stmt = conn.createStatement();
 	            rs = stmt.executeQuery(this.sql);
