@@ -6,17 +6,11 @@
  */
 package edu.stanford.irt.laneweb.eresources;
 
-import java.io.IOException;
-import java.util.Map;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Request;
-import org.apache.cocoon.environment.SourceResolver;
-import org.xml.sax.SAXException;
-
-public class EresourcesSubsetGenerator extends AbstractEresources {
+public class EresourcesSubsetGenerator extends AbstractEresourcesGenerator {
 
     private static final String BROWSE_SQL_1 =
             "SELECT ERESOURCE2.ERESOURCE_ID, VERSION2.VERSION_ID, LINK_ID, TITLE, PUBLISHER,\n"
@@ -38,41 +32,21 @@ public class EresourcesSubsetGenerator extends AbstractEresources {
 
     private static final String BROWSE_SQL_12 = "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String SUBSET = "s";
-
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        super.setup(resolver, objectModel, src, par);
-        Request request = ObjectModelHelper.getRequest(objectModel);
-        String subset = request.getParameter(SUBSET);
-        if (subset != null) {
-            if (subset.length() == 0) {
-                subset = null;
-            } else {
-                subset = subset.toLowerCase().replaceAll("'", "''");
-            }
-        }
-        if (null == subset) {
-            throw new ProcessingException("no subset parameter provided");
-        }
-        this.sql = createSQL(subset);
-    }
-
-    private String createSQL(final String subset) {
+    protected PreparedStatement getStatement(Connection conn) throws SQLException {
         StringBuffer sb = new StringBuffer(BROWSE_SQL_1);
         sb.append(BROWSE_SQL_3);
-        if (null != subset) {
-            sb.append(BROWSE_SQL_4).append(subset).append("'\n");
+        if (null != this.subset) {
+            sb.append(BROWSE_SQL_4).append(this.subset.toLowerCase().replaceAll("'", "''")).append("'\n");
         }
         sb.append(BROWSE_SQL_8);
         sb.append(BROWSE_SQL_3);
-        if (null != subset) {
-            sb.append(BROWSE_SQL_4).append(subset).append("'\n");
+        if (null != this.subset) {
+            sb.append(BROWSE_SQL_4).append(this.subset.toLowerCase().replaceAll("'", "''")).append("'\n");
         }
         sb.append(BROWSE_SQL_11);
         sb.append(BROWSE_SQL_12);
-        return sb.toString();
+        return conn.prepareStatement(sb.toString());
     }
 
 }

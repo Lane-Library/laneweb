@@ -23,9 +23,11 @@ import org.xml.sax.helpers.AttributesImpl;
 public class HistoryQueryGenerator extends AbstractGenerator {
 
     // ERESOURCE.TITLE, lower(ERESOURCE.TITLE) AS LTITLE,
-    private static final String COUNT_QUERY =
+    private static final String COUNT_QUERY_1 =
             "WITH FOUND AS (SELECT HISTORY_ERESOURCE.ERESOURCE_ID FROM HISTORY_ERESOURCE \n"
-                    + "WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,{0}) > 0) \n"
+                    + "WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'";
+    private static final String COUNT_QUERY_2 =
+        "') > 0) \n"
                     + "SELECT COUNT(*) AS HITS, ''books'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
                     + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = ''books''\n" + "UNION\n"
                     + "SELECT COUNT(*) AS HITS, ''movie'' AS GENRE FROM FOUND, HISTORY_TYPE\n"
@@ -142,23 +144,16 @@ public class HistoryQueryGenerator extends AbstractGenerator {
             this.query = request.getParameter(KEYWORDS);
         }
         if (null != this.query) {
-            this.query = this.query.trim();
-            if (this.query.length() == 0 || "%".equals(this.query) || "*".equals(this.query)) {
+            if (this.query.length() == 0) {
                 this.query = null;
             } else {
-                this.query = this.query.replaceAll("'", "''");
-                this.translatedQuery = this.queryTranslator.translate(this.query);
-                if (this.translatedQuery.indexOf("()") == -1 && this.translatedQuery.indexOf("{}") == -1
-                        && this.translatedQuery.indexOf("NOT") != 1) {
+                try {
+                    this.translatedQuery = this.queryTranslator.translate(this.query);
                     this.haveParameters = true;
-                } else {
-                    this.translatedQuery = null;
+                } catch (Exception e) {
+                    throw new ProcessingException(e);
                 }
             }
-        }
-        if (null != this.query) {
-            this.query = this.query.replaceAll("'", "''");
-            this.translatedQuery = this.queryTranslator.translate(this.query);
         }
     }
 
@@ -186,10 +181,10 @@ public class HistoryQueryGenerator extends AbstractGenerator {
 
     private char[] getSelectStatmentChars() {
         if (this.count) {
-        	MessageFormat query = new MessageFormat(COUNT_QUERY);
-        	Object[] arg = { this.translatedQuery};
-            String countQuery = query.format(arg);
-            return countQuery.toCharArray();
+            StringBuffer sb = new StringBuffer(COUNT_QUERY_1);
+            sb.append(this.translatedQuery);
+            sb.append(COUNT_QUERY_2);
+        	return sb.toString().toCharArray();
         }
         StringBuffer queryBuffer = new StringBuffer();
         if (null != this.translatedQuery) {

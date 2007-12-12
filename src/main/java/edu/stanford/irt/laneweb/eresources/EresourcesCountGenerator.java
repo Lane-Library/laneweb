@@ -7,7 +7,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
@@ -24,9 +23,11 @@ public class EresourcesCountGenerator extends AbstractGenerator {
 
     // TODO only text search in with clause maybe probably should test again
     // since biotools more efficient with eresource_id
-    private static final String COUNT_QUERY =
+    private static final String COUNT_QUERY_1 =
             "WITH FOUND AS (SELECT ERESOURCE2.ERESOURCE_ID, TYPE2.TYPE, SUBSET2.SUBSET FROM ERESOURCE2, TYPE2, SUBSET2 \n"
-                    + "WHERE CONTAINS(ERESOURCE2.TEXT,{0}) > 0 \n" + "AND ERESOURCE2.ERESOURCE_ID = TYPE2.ERESOURCE_ID \n"
+                    + "WHERE CONTAINS(ERESOURCE2.TEXT,'";
+    
+    private static final String COUNT_QUERY_2 = "') > 0 \n" + "AND ERESOURCE2.ERESOURCE_ID = TYPE2.ERESOURCE_ID \n"
                     + "AND ERESOURCE2.ERESOURCE_ID = SUBSET2.ERESOURCE_ID(+)) \n"
                     + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, ''all'' AS GENRE FROM FOUND\n" + "UNION\n"
                     + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, ''ej'' AS GENRE FROM FOUND WHERE TYPE = ''ej''\n" + "UNION\n"
@@ -50,12 +51,12 @@ public class EresourcesCountGenerator extends AbstractGenerator {
     private static final String QUERY_ELEMENT = "query";
 
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
+    
+    private static final char[] DUAL_SELECT = "SELECT * FROM DUAL".toCharArray();
 
-    char[] selectStatementChars;
+    private char[] selectStatementChars;
 
     private QueryTranslator queryTranslator = new QueryTranslator();
-
-    private MessageFormat selectStatement = new MessageFormat(COUNT_QUERY);
     
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
@@ -68,30 +69,22 @@ public class EresourcesCountGenerator extends AbstractGenerator {
         }
         if (null != query) {
             query = query.trim();
-            if (query.length() == 0 || "%".equals(query) || "*".equals(query)) {
+            if (query.length() == 0) {
                 query = null;
             }
 
         }
-        if (query != null) {
-            query = query.replaceAll("'", "''");
+        try {
             String translatedQuery = this.queryTranslator.translate(query);
-            if (translatedQuery.indexOf("()") == -1 && translatedQuery.indexOf("{}") == -1 && translatedQuery.indexOf("NOT") != 1) {
-            	Object[] argument = {"'".concat(translatedQuery).concat("'")};  
-	        	this.selectStatementChars = selectStatement.format(argument).toCharArray();
-	        	
-	        	
-            } else {
-                if (getLogger().isWarnEnabled()) {
-                    getLogger().warn("bad query translation: " + translatedQuery);
-                }
-                this.selectStatementChars = new char[0];
+            StringBuffer sb = new StringBuffer(COUNT_QUERY_1);
+            sb.append(translatedQuery);
+            sb.append(COUNT_QUERY_2);
+            this.selectStatementChars = sb.toString().toCharArray();
+        } catch (Exception e) {
+            if (getLogger().isErrorEnabled()) {
+                getLogger().error(e.getMessage(), e);
             }
-        } else {
-            if (getLogger().isWarnEnabled()) {
-                getLogger().warn("no useable query parameter");
-            }
-            this.selectStatementChars = new char[0];
+            this.selectStatementChars = DUAL_SELECT;
         }
     }
 

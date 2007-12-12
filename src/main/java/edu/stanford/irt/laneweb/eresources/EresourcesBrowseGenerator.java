@@ -6,17 +6,11 @@
  */
 package edu.stanford.irt.laneweb.eresources;
 
-import java.io.IOException;
-import java.util.Map;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Request;
-import org.apache.cocoon.environment.SourceResolver;
-import org.xml.sax.SAXException;
-
-public class EresourcesBrowseGenerator extends AbstractEresources {
+public class EresourcesBrowseGenerator extends AbstractEresourcesGenerator {
 
     private static final String BROWSE_SQL_1 =
             "SELECT ERESOURCE2.ERESOURCE_ID, VERSION2.VERSION_ID, LINK_ID, TITLE, PUBLISHER,\n"
@@ -53,72 +47,45 @@ public class EresourcesBrowseGenerator extends AbstractEresources {
 
     private static final String BROWSE_SQL_12 = "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String TYPE = "t";
-
-    private static final String ALPHA = "a";
-
-    
-
-   
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        super.setup(resolver, objectModel, src, par);
-        Request request = ObjectModelHelper.getRequest(objectModel);
-        String alpha = request.getParameter(ALPHA);
-        if (alpha != null) {
-            if (alpha.length() == 0) {
-                alpha = null;
-            } else {
-                alpha = alpha.substring(0, 1);
-            }
+    protected PreparedStatement getStatement(Connection conn) throws SQLException {
+        if (null == this.alpha || this.alpha.length() == 0) {
+            throw new IllegalStateException("no alpha parameter");
         }
-        String type = request.getParameter(TYPE);
-        if (type != null) {
-            if (type.length() == 0) {
-                type = null;
-            } else {
-                type = type.toLowerCase().replaceAll("'", "''");
-            }
-        }
-        this.sql = createSQL(alpha, type);
-    }
-
-    
-    private String createSQL(final String alpha, final String type) {
+        String firstAlpha = this.alpha.substring(0, 1);
         StringBuffer sb = new StringBuffer(BROWSE_SQL_1);
-        if (null != type) {
+        if (null != this.type) {
             sb.append(BROWSE_SQL_2);
         }
         sb.append(BROWSE_SQL_3);
-        if (null != type) {
-            sb.append(BROWSE_SQL_4).append(type).append("'\n");
+        if (null != this.type) {
+            sb.append(BROWSE_SQL_4).append(this.type).append("'\n");
         }
-        if (null != alpha) {
-            if (!"#".equals(alpha)) {
-                sb.append(BROWSE_SQL_5).append(alpha).append(BROWSE_SQL_6);
+        if (null != firstAlpha) {
+            if (!"#".equals(firstAlpha)) {
+                sb.append(BROWSE_SQL_5).append(firstAlpha).append(BROWSE_SQL_6);
             } else {
                 sb.append(BROWSE_SQL_7);
             }
         }
         sb.append(BROWSE_SQL_8);
-        if (null != type) {
+        if (null != this.type) {
             sb.append(BROWSE_SQL_2);
         }
         sb.append(BROWSE_SQL_3);
-        if (null != type) {
-            sb.append(BROWSE_SQL_4).append(type).append("'\n");
+        if (null != this.type) {
+            sb.append(BROWSE_SQL_4).append(this.type).append("'\n");
         }
-        if (null != alpha) {
-            if (!"#".equals(alpha)) {
-                sb.append(BROWSE_SQL_9).append(alpha).append(BROWSE_SQL_6);
+        if (null != firstAlpha) {
+            if (!"#".equals(firstAlpha)) {
+                sb.append(BROWSE_SQL_9).append(firstAlpha).append(BROWSE_SQL_6);
             } else {
                 sb.append(BROWSE_SQL_10);
             }
         }
         sb.append(BROWSE_SQL_11);
         sb.append(BROWSE_SQL_12);
-        return sb.toString();
+        return conn.prepareStatement(sb.toString());
     }
 
 }
