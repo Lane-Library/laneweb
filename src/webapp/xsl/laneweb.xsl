@@ -315,6 +315,13 @@
     <!-- obfuscated email href (don't copy, processed elsewhere) -->
     <xsl:template match="attribute::href[starts-with(.,'mailto:')]"/>
     
+    <!-- add back to top for dl lists > 20 -->
+    <xsl:template match="h:dl[count(h:dd) &gt; 20]">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node | child::node()"/>
+        </xsl:copy>
+        <a href="#"><img src="{$context}/graphics/icons/arrowUpTransp.gif" alt="up arrow"/> Back to top</a>
+    </xsl:template>
     
     <!-- href and src attributes template -->
     <xsl:template match="@href">
