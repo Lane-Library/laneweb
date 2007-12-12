@@ -385,7 +385,7 @@
                 <xsl:call-template name="make-link">
                     <xsl:with-param name="link"
                         select="substring-after(.,'http://lane.stanford.edu')"/>
-                    <xsl:with-param name="attr" select="href"/>
+                    <xsl:with-param name="attr" select="'href'"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="contains(., '://') and contains(.,'{keywords}')">
