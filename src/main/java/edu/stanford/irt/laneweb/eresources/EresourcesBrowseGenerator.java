@@ -49,10 +49,7 @@ public class EresourcesBrowseGenerator extends AbstractEresourcesGenerator {
 
     @Override
     protected PreparedStatement getStatement(Connection conn) throws SQLException {
-        if (null == this.alpha || this.alpha.length() == 0) {
-            throw new IllegalStateException("no alpha parameter");
-        }
-        String firstAlpha = this.alpha.substring(0, 1);
+        String firstAlpha = null != this.alpha && this.alpha.length() > 0 ? this.alpha.substring(0, 1) : null;
         StringBuffer sb = new StringBuffer(BROWSE_SQL_1);
         if (null != this.type) {
             sb.append(BROWSE_SQL_2);
