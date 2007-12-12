@@ -327,6 +327,7 @@
         <a href="#"><img src="{$context}/graphics/icons/arrowUpTransp.gif" alt="up arrow"/> Back to top</a>
     </xsl:template>
     
+    <!-- make current elibraryTab activeTab -->
     <xsl:template match="h:li[attribute::class='eLibraryTab']">
         <xsl:copy>
             <xsl:choose>
