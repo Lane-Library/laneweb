@@ -17,17 +17,17 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:copy>
+        <ul>
             <xsl:apply-templates select="h:entry[h:ul/h:li[@class='primaryCategory'] = $category
                                               and contains(h:ul/h:li[@class='keywords'],'_show_me_')]"/>
             <li class="moreItem"><a href="/howto/index.html?category={$more-category}">More</a></li>
-        </xsl:copy>
+        </ul>
     </xsl:template>
     
     <xsl:template match="h:entry">
-        <xsl:copy>
-            <a href="/howto/index.html?id={@id}"><xsl:value-of select="text()"/></a>
-        </xsl:copy>
+        <li>
+            <a href="/howto/index.html?id={@id}"><xsl:value-of select="h:ul/h:li[@class='title']"/></a>
+        </li>
     </xsl:template>
     <xsl:template match="text()"/>
 </xsl:stylesheet>
