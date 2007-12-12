@@ -210,12 +210,13 @@ function initializeSearchForm(e) {
 
 
 function openNewWindow(url,features) {
-    features = (features) ? features : '';
+	features = (features) ? features : '';
     var w = window.open(url, 'LaneConnex', features);
     if(window.focus){
         w.focus();
     }
-}
+    dcsMultiTrack('WT.ti','openNewWindow ==> '+url);
+ }
 
 function email(obfuscatedEmail) {
     document.location = obfuscatedEmail.replace(/\|/g,'');
