@@ -109,7 +109,14 @@
         <xsl:variable name="genre" select="substring-before(parent::h:a/parent::h:li/attribute::id,'Tab')"/>
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
-            <xsl:value-of select="/doc/sql:rowset/sql:row[sql:genre=$genre]/sql:hits"/>
+            <xsl:choose>
+                <xsl:when test="/doc/sql:rowset/sql:row/sql:hits">
+                    <xsl:value-of select="/doc/sql:rowset/sql:row[sql:genre=$genre]/sql:hits"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>0</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:copy>
     </xsl:template>
 
