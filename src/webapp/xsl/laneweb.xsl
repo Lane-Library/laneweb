@@ -130,7 +130,7 @@
     
     <xsl:variable name="regex-search-terms">
         <xsl:if test="$search-terms">
-            <!-- TODO implement this -->
+            <xsl:value-of select="replace($search-terms,'(\\|\$)','\\$1')"/>
         </xsl:if>
     </xsl:variable>
 
@@ -357,7 +357,7 @@
                     <xsl:when test="$affiliation = 'LPCH' or $affiliation = 'SHC'">
                         <xsl:attribute name="href">
                             <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
-                            <xsl:value-of select="replace(replace(.,'\{keywords\}',$search-terms),'\{search-terms\}',$search-terms)"/>
+                            <xsl:value-of select="replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms)"/>
                         </xsl:attribute>
                     </xsl:when>
                     <xsl:when test="$ticket != '' and $sunetid != ''">
@@ -367,13 +367,13 @@
                             <xsl:text>&amp;ticket=</xsl:text>
                             <xsl:value-of select="$ticket"/>
                             <xsl:text>&amp;url=</xsl:text>
-                            <xsl:value-of select="replace(replace(.,'\{keywords\}',$search-terms),'\{search-terms\}',$search-terms)"/>
+                            <xsl:value-of select="replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms)"/>
                         </xsl:attribute>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:call-template name="make-link">
                             <xsl:with-param name="link">
-                                <xsl:value-of select="concat('/secure/login.html?url=',replace(replace(.,'\{keywords\}',$search-terms),'\{search-terms\}',$search-terms))"/>
+                                <xsl:value-of select="concat('/secure/login.html?url=',replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms))"/>
                             </xsl:with-param>
                             <xsl:with-param name="attr" select="'href'"/>
                         </xsl:call-template>
@@ -390,12 +390,12 @@
             </xsl:when>
             <xsl:when test="contains(., '://') and contains(.,'{keywords}')">
                 <xsl:attribute name="href">
-                    <xsl:value-of select="replace(.,'\{keywords\}',$search-terms)"/>
+                    <xsl:value-of select="replace(.,'\{keywords\}',$regex-search-terms)"/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:when test="contains(., '://') and contains(.,'{search-terms}')">
                 <xsl:attribute name="href">
-                    <xsl:value-of select="replace(.,'\{search-terms\}',$search-terms)"/>
+                    <xsl:value-of select="replace(.,'\{search-terms\}',$regex-search-terms)"/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:when test="starts-with(.,'http://') and starts-with($request-uri,'secure')">
@@ -791,16 +791,16 @@
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="contains($link,'{keywords}')">
-                    <xsl:value-of select="replace($link,'\{keywords\}',$search-terms)"/>
+                    <xsl:value-of select="replace($link,'\{keywords\}',$regex-search-terms)"/>
                 </xsl:when>
                 <xsl:when test="contains($link,'%7Bkeywords%7D')">
-                    <xsl:value-of select="replace($link,'%7Bkeywords%7D',$search-terms)"/>
+                    <xsl:value-of select="replace($link,'%7Bkeywords%7D',$regex-search-terms)"/>
                 </xsl:when>
                 <xsl:when test="contains($link,'{search-terms}')">
-                    <xsl:value-of select="replace($link,'\{search-terms\}',$search-terms)"/>
+                    <xsl:value-of select="replace($link,'\{search-terms\}',$regex-search-terms)"/>
                 </xsl:when>
                 <xsl:when test="contains($link,'%7Bsearch-terms%7D')">
-                    <xsl:value-of select="replace($link,'%7Bsearch-terms%7D',$search-terms)"/>
+                    <xsl:value-of select="replace($link,'%7Bsearch-terms%7D',$regex-search-terms)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$link"/>
