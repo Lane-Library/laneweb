@@ -24,7 +24,11 @@
 
     <xsl:param name="keywords"/>
 
+    <!-- the search query -->
     <xsl:param name="q"/>
+    
+    <!-- the alpha browse parameter -->
+    <xsl:param name="a"/>
 
     <xsl:param name="source"/>
 
@@ -321,6 +325,20 @@
             <xsl:apply-templates select="attribute::node | child::node()"/>
         </xsl:copy>
         <a href="#"><img src="{$context}/graphics/icons/arrowUpTransp.gif" alt="up arrow"/> Back to top</a>
+    </xsl:template>
+    
+    <xsl:template match="h:li[attribute::class='eLibraryTab']">
+        <xsl:copy>
+            <xsl:choose>
+                <xsl:when test="contains($request-uri,h:a/attribute::href) or $query-string and contains(h:a/attribute::href, $query-string)">
+                    <xsl:attribute name="class">activeTab</xsl:attribute>
+                    <xsl:apply-templates select="h:a/child::node()"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="attribute::node () | node()"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:copy>
     </xsl:template>
     
     <!-- href and src attributes template -->
