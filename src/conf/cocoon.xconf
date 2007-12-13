@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cocoon version="2.1" user-roles="/WEB-INF/roles.xml">
+<cocoon version="2.1">
     
   <sitemap check-reload="no" file="context://laneweb.xmap" logger="sitemap"/>
  
@@ -132,24 +132,36 @@
     </j2ee>
   </datasources>
   
-  <webdash-login logger="core.webdash">
+  <component logger="core.webdash-login"
+    role="edu.stanford.irt.laneweb.WebDashLogin"
+    class="edu.stanford.irt.laneweb.WebDashLoginImpl">
     <parameter name="webdashRegistrationURL" value="https://webda.sh/auth/init_post?"/>
     <parameter name="webdashLoginURL" value="https://webda.sh/auth/auth_post?"/>
     <parameter name="groupKey" value="${laneweb.cocoon.webdash.key}"/>
     <parameter name="groupName" value="stanford-sunet"/>
 	<parameter name="dateFormat" value="yyyy-MM-dd"/>
-  </webdash-login>
+  </component>
+
+  <component logger="core.descriptor-manager"
+    role="edu.stanford.irt.laneweb.querymap.DescriptorManagerManager"
+    class="edu.stanford.irt.laneweb.querymap.LanewebDescriptorManager"/>
   
-  <descriptor-manager-manager/>
-  
-  <spellchecker>
+  <component logger="core.spell-checker"
+      role="edu.stanford.irt.spell.SpellChecker"
+      class="edu.stanford.irt.laneweb.spell.SpellChecker">
     <parameter name="google-key" value="${laneweb.cocoon.spellchecker.google-key}"/>
-  </spellchecker>
+  </component>
   
-  <httpclient-manager>
+  <component logger="core.httpclient-manager"
+    role="edu.stanford.irt.laneweb.httpclient.HttpClientManager"
+    class="edu.stanford.irt.laneweb.httpclient.LanewebHttpClientManager">
     <parameter name="max-total-connections" value="300"/>
     <parameter name="max-host-connections" value="100"/>
     <parameter name="connection-timeout" value="20000"/>
-  </httpclient-manager>
+  </component>
+  
+  <component logger="core.user-info-helper"
+    role="edu.stanford.irt.laneweb.UserInfoHelper"
+    class="edu.stanford.irt.laneweb.UserInfoHelperImpl"/>
   
 </cocoon>
