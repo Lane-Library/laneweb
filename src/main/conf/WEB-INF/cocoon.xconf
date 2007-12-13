@@ -63,7 +63,7 @@
   </transient-store>
 
   <store-janitor logger="core.store.janitor">  
-     <parameter name="freememory" value="${laneweb.cocoon.store.freememory"/>
+     <parameter name="freememory" value="${laneweb.cocoon.store.freememory}"/>
      <parameter name="heapsize" value="${laneweb.cocoon.store.heapsize}"/>
      <parameter name="cleanupthreadinterval" value="10"/>
      <parameter name="percent_to_free" value="10"/>

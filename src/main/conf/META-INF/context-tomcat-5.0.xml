@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context docBase="***laneweb.context.docBase***" path="***laneweb.context.path***">
+<Context docBase="${laneweb.context.docBase}" path="${laneweb.context.path}">
     <Resource name="jdbc/eresources" auth="Container" type="javax.sql.DataSource"/>
     <ResourceParams name="jdbc/eresources">
         <parameter>

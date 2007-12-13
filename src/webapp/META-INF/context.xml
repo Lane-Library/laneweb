@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<!-- this file exists so the maven tomcat plugin
-    knows the value of the web application path attribute -->
-<Context path="/"/>

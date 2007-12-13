@@ -30,30 +30,14 @@
         </javac>
     </target>
     <target name="production" if="laneweb.production">
-        <copy todir="${webappdir}/WEB-INF">
-            <fileset dir="src/conf">
-                <include name="*.xconf"/>
-            </fileset>
-            <filterset filtersfile="../laneweb.properties" begintoken="$${" endtoken="}"/>
-        </copy>
-        <copy todir="${webappdir}/META-INF">
-            <fileset dir="src/conf">
-                <include name="context*.xml"/>
-            </fileset>
+        <copy todir="${webappdir}">
+            <fileset dir="src/main/conf"/>
             <filterset filtersfile="../laneweb.properties" begintoken="$${" endtoken="}"/>
         </copy>
     </target>
     <target name="stage" unless="laneweb.production">
-        <copy todir="${webappdir}/WEB-INF">
-            <fileset dir="src/conf">
-                <include name="*.xconf"/>
-            </fileset>
-            <filterset filtersfile="project.properties" begintoken="$${" endtoken="}"/>
-        </copy>
-        <copy todir="${webappdir}/META-INF">
-            <fileset dir="src/conf">
-                <include name="context*.xml"/>
-            </fileset>
+        <copy todir="${webappdir}">
+            <fileset dir="src/main/conf"/>
             <filterset filtersfile="project.properties" begintoken="$${" endtoken="}"/>
         </copy>
      </target>
@@ -75,7 +59,7 @@
     <target name="webapp" depends="compile, prepare-webapp,production,stage,robotsMessage"/>
     <target name="prepare-webapp">
         <copy todir="${webappdir}">
-            <fileset dir="src/webapp" excludes="META-INF/context.xml"/>
+            <fileset dir="src/main/webapp" excludes="META-INF/context.xml"/>
         </copy>
         <copy todir="${webappdir}/WEB-INF/lib">
             <fileset dir="${defaulttargetdir}/lib" excludes="servlet-api*,junit*,easymock*"/>
@@ -85,7 +69,7 @@
         </copy>
     </target>
     <target name="war" depends="webapp">
-        <war destfile="${defaulttargetdir}/laneweb.war" webxml="src/webapp/WEB-INF/web.xml"
+        <war destfile="${defaulttargetdir}/laneweb.war" webxml="src/main/webapp/WEB-INF/web.xml"
             basedir="${webappdir}"/>
     </target>
     <target name="clean" description="o Clean up the generated directories">
