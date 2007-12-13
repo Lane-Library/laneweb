@@ -29,16 +29,21 @@ public class EresourcesCountGenerator extends AbstractGenerator {
     
     private static final String COUNT_QUERY_2 = "') > 0 \n" + "AND ERESOURCE2.ERESOURCE_ID = TYPE2.ERESOURCE_ID \n"
                     + "AND ERESOURCE2.ERESOURCE_ID = SUBSET2.ERESOURCE_ID(+)) \n"
-                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, ''all'' AS GENRE FROM FOUND\n" + "UNION\n"
-                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, ''ej'' AS GENRE FROM FOUND WHERE TYPE = ''ej''\n" + "UNION\n"
-                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, ''database'' AS GENRE FROM FOUND WHERE TYPE = ''database''\n"
-                    + "UNION\n" + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, ''video'' AS GENRE FROM FOUND WHERE TYPE = ''video''\n"
-                    + "UNION\n" + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, ''book'' AS GENRE FROM FOUND WHERE TYPE = ''book''\n"
-                    + "UNION\n" + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, ''cc'' AS GENRE FROM FOUND WHERE TYPE = ''cc''\n"
+                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'all' AS GENRE FROM FOUND\n"
                     + "UNION\n"
-                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, ''lanefaq'' AS GENRE FROM FOUND WHERE TYPE = ''lanefaq''\n"
+                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'ej' AS GENRE FROM FOUND WHERE TYPE = 'ej'\n"
                     + "UNION\n"
-                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, ''biotools'' AS GENRE FROM FOUND WHERE SUBSET = ''biotools''";
+                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'database' AS GENRE FROM FOUND WHERE TYPE = 'database'\n"
+                    + "UNION\n"
+                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'video' AS GENRE FROM FOUND WHERE TYPE = 'video'\n"
+                    + "UNION\n"
+                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'book' AS GENRE FROM FOUND WHERE TYPE = 'book'\n"
+                    + "UNION\n"
+                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'cc' AS GENRE FROM FOUND WHERE TYPE = 'cc'\n"
+                    + "UNION\n"
+                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'lanefaq' AS GENRE FROM FOUND WHERE TYPE = 'lanefaq'\n"
+                    + "UNION\n"
+                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'biotools' AS GENRE FROM FOUND WHERE SUBSET = 'biotools'";
 
     private static final String KEYWORDS = "keywords";
 

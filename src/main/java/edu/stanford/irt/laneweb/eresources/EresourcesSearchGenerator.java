@@ -46,6 +46,7 @@ public class EresourcesSearchGenerator extends AbstractEresourcesGenerator {
         if (null != this.type) {
             sb.append("AND TYPE = '").append(this.type.toLowerCase().replaceAll("'", "''")).append("'\n");
         }
+        sb.append(SEARCH_SQL_2);
         PreparedStatement stmt = conn.prepareStatement(sb.toString());
         stmt.setString(1, translatedQuery);
         stmt.setString(2, translatedQuery);
