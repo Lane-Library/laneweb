@@ -7,7 +7,7 @@
   <artifactId>laneweb</artifactId>
   <packaging>war</packaging>
   <name>Lane Library Website</name>
-  <version>1.7.6</version>
+  <version>1.7.7-SNAPSHOT</version>
   <description>The Lane Library web application built with Cocoon</description>
   <url>http://lane.stanford.edu/index.html</url>
   <ciManagement>
