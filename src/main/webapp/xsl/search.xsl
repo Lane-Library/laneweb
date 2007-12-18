@@ -79,7 +79,7 @@
     
     <xsl:template match="h:li[attribute::class='eLibraryTab']">
         <xsl:copy>
-            <xsl:apply-templates select="attribute::node()[not(self::class)]"/>
+            <xsl:apply-templates select="attribute::node()[name() != 'class']"/>
             <xsl:choose>
                 <xsl:when test="starts-with(attribute::id,$source)">
                     <xsl:attribute name="class"><xsl:value-of select="attribute::class"/>Active</xsl:attribute>
