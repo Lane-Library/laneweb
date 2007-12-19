@@ -47,6 +47,7 @@ public class SearchProxyGenerator extends ServiceableGenerator {
         String[] engines = request.getParameterValues("e");
         String[] resources = request.getParameterValues("r");
         String wait = request.getParameter("w");
+        String clearCache = request.getParameter("clearcache");
         String keywords = request.getParameter("keywords");
         if (null == query) {
             query = keywords;
@@ -54,7 +55,7 @@ public class SearchProxyGenerator extends ServiceableGenerator {
         if (null != query) {
             query = URLEncoder.encode(query, "UTF-8");
         }
-        String queryString = buildQuery(query, timeout, id, wait, engines, resources);
+        String queryString = buildQuery(query, timeout, id, wait, engines, resources, clearCache);
         Session session = request.getSession(true);
         HttpState httpState = (HttpState) session.getAttribute(HTTPClientSource.HTTP_STATE);
         if (null == httpState) {
@@ -77,7 +78,7 @@ public class SearchProxyGenerator extends ServiceableGenerator {
     }
 
     private String buildQuery(final String query, final String timeout, final String id, final String wait, final String[] engines,
-            final String[] resources) {
+            final String[] resources, String clearCache) {
         boolean needAmp = false;
         StringBuffer sb = new StringBuffer("?");
         if (null != query) {
@@ -121,6 +122,12 @@ public class SearchProxyGenerator extends ServiceableGenerator {
                 sb.append('&');
             }
             sb.append("w=").append(wait);
+        }
+        if (null != clearCache) {
+            if (needAmp) {
+                sb.append('&');
+            }
+            sb.append("clearcache=").append(clearCache);
         }
         return sb.toString();
     }
