@@ -43,9 +43,9 @@
         <map:transformers default="saxon">
             <map:transformer name="saxon" logger="sitemap.transformer.saxon"
                 src="org.apache.cocoon.transformation.TraxTransformer" pool-max="32">
-                <use-request-parameters>true</use-request-parameters>
-                <use-session-parameters>true</use-session-parameters>
-                <use-cookie-parameters>true</use-cookie-parameters>
+                <use-request-parameters>false</use-request-parameters>
+                <use-session-parameters>false</use-session-parameters>
+                <use-cookie-parameters>false</use-cookie-parameters>
                 <xslt-processor-role>saxon</xslt-processor-role>
                 <check-includes>false</check-includes>
             </map:transformer>
