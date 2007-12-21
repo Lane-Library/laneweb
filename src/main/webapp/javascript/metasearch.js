@@ -1,4 +1,5 @@
 var searchTerms;
+var searchId;
 var searchIndicator;
 var searchMode;
 var searchStatus;
@@ -11,10 +12,11 @@ YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 function initializeMetasearch(e)
 {
      window.searchTerms = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.searchTerms"));
+     window.searchId = getMetaContent("LW.searchId");
      window.searchMode = getMetaContent("LW.searchMode");
      window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
      
-     if( (window.searchTerm && window.searchTerm != 'undefined') && (window.searchTemplate && window.searchTemplate != 'undefined') )
+     if( (window.searchId && window.searchId != 'undefined') && (window.searchTemplate && window.searchTemplate != 'undefined') )
      {
          window.searchUrl = '/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate;
      }
@@ -38,7 +40,8 @@ var showMetasearchResults = function(o)
 {
 	    var searchResponse = eval("("+o.responseText+")");
         window.searchStatus = (window.searchStatus == 'successful') ? window.searchStatus : searchResponse.status;
-    	var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
+    	window.searchId = searchResponse.id;
+		var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
         if(window.searchIndicator){
         	window.searchIndicator.setProgress(window.searchStatus,metasearchElements.length,YAHOO.util.Dom.getElementsByClassName('complete').length);
         }
