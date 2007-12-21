@@ -5,10 +5,8 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
         	<map:match type="wildcard" pattern="search-proxy">
-	           <map:match type="regex-parameter" pattern="^.+$">
-	                <map:parameter name="parameter-name" value="id"/>
-	                <map:generate type="search-proxy" src="{defaults:search-url}/search"/>
-	                 <map:select type="resource-exists">
+	               <map:generate type="search-proxy" src="{defaults:search-url}/search"/>
+	                <map:select type="resource-exists">
     				<map:when test="xsl/search-proxy.xsl">
                         <map:transform type="saxon" src="xsl/search-proxy.xsl">
                             <map:parameter name="context" value="{request:contextPath}"/>
@@ -29,14 +27,8 @@
                     </map:otherwise>
                   </map:select> 
         		<map:serialize type="xml"/>
-               	</map:match>	
-	        	 <map:match type="regex-parameter" pattern="^.+$">
-	                <map:parameter name="parameter-name" value="q"/>
-	               	<map:generate type="search-proxy" src="{defaults:search-url}/id"/>
-	            	<map:serialize type="xml"/>
-	           	 </map:match>	
-          	</map:match>
-            <map:match pattern="search/*">
+            </map:match>	
+	        <map:match pattern="search/*">
                 <map:match type="wildcard" pattern="search/json">
                     <map:generate src="cocoon:/search-proxy"/>
                     <map:select type="resource-exists">

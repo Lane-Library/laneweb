@@ -11,7 +11,7 @@ function initSearch() {
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.searchTerms, window.querymapCallBack);
       	YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q='+window.searchTerms, window.findItCallBack);
        	YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack );
-       	YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?id='+getMetaContent("LW.searchId"), window.showHitsCallback);
+       	YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?q='+window.searchTerms, window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
         var popIn = document.getElementById('popInContent');
         for (var i = 0; i  < tabs.length; i++) {
@@ -162,7 +162,7 @@ Result.prototype.setTabCount = function(count) {
 
 function webtrends(tab)
 {
-	window.dcsMultiTrack('DCS.dcssip', window.getMetaContent('LW.host') ,'DCS.dcsuri','/plain/search/'+tab.result._type+'.html','DCS.dcsquery','source='+tab.result._type+'&keywords='+window.getMetaContent('LW.keywords'),'WT.ti',document.title,'DCSext.keywords',window.getMetaContent('LW.keywords'),'DCSext.search_type',window.getMetaContent('LW.source'),'WT.seg_1',window.getMetaContent('WT.seg_1'));
+	window.dcsMultiTrack('DCS.dcssip', window.getMetaContent('LW.host') ,'DCS.dcsuri','/plain/search/'+tab.result._type+'.html','DCS.dcsquery','source='+tab.result._type+'&keywords='+window.getMetaContent('LW.searchTerm'),'WT.ti',document.title,'DCSext.searchTerm',window.getMetaContent('LW.keywords'),'DCSext.search_type',window.getMetaContent('LW.source'),'WT.seg_1',window.getMetaContent('WT.seg_1'));
 }		
 
 
@@ -196,7 +196,7 @@ function showHits(o) {
 	{	// if time superior at 20 seconds the sleeping time equals 10 seconds
 		if(remainingTime > 20 * 1000)
 			sleepingTime = 10000;
-		setTimeout( "YAHOO.util.Connect.asyncRequest('GET', '"+'/././content/search-tab-results?id='+getMetaContent("LW.searchId")+'&rd='+Math.random()+"', window.showHitsCallback);", sleepingTime);
+		setTimeout( "YAHOO.util.Connect.asyncRequest('GET', '"+'/././content/search-tab-results?q='+window.searchTerms+'&rd='+Math.random()+"', window.showHitsCallback);", sleepingTime);
 	}
 }
 
@@ -358,7 +358,7 @@ QueryMapping.prototype.update = function(response) {
 
 
 QueryMapping.prototype.sendQueryMappingRequest = function() {
-		YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?id='+getMetaContent("LW.searchId")+this.resourceUrl+'&rd='+Math.random(), this._callback);
+		YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?q='+window.searchTerms+this.resourceUrl+'&rd='+Math.random(), this._callback);
     }
 
 

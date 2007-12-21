@@ -1,5 +1,4 @@
 var searchTerms;
-var searchId;
 var searchIndicator;
 var searchMode;
 var searchStatus;
@@ -12,13 +11,12 @@ YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 function initializeMetasearch(e)
 {
      window.searchTerms = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.searchTerms"));
-     window.searchId = getMetaContent("LW.searchId");
      window.searchMode = getMetaContent("LW.searchMode");
      window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
      
-     if( (window.searchId && window.searchId != 'undefined') && (window.searchTemplate && window.searchTemplate != 'undefined') )
+     if( (window.searchTerm && window.searchTerm != 'undefined') && (window.searchTemplate && window.searchTemplate != 'undefined') )
      {
-         window.searchUrl = '/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate;
+         window.searchUrl = '/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate;
      }
      else if( window.searchTerms && window.searchTerms != 'undefined' )
      {
@@ -40,8 +38,7 @@ var showMetasearchResults = function(o)
 {
 	    var searchResponse = eval("("+o.responseText+")");
         window.searchStatus = (window.searchStatus == 'successful') ? window.searchStatus : searchResponse.status;
-    	window.searchId = searchResponse.id;
-		var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
+    	var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
         if(window.searchIndicator){
         	window.searchIndicator.setProgress(window.searchStatus,metasearchElements.length,YAHOO.util.Dom.getElementsByClassName('complete').length);
         }
@@ -50,7 +47,7 @@ var showMetasearchResults = function(o)
     		var sleepingTime = 2000; //2 seconds
     		if(window.counter > 15) //time sleepingtime (2 seconds) * 15 = 30 seconds
     			sleepingTime = 10000;// 10 seconds
-    	    setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered-json?id='+window.searchId+'&source='+window.searchTemplate+'&rd='+Math.random()+"', window.metasearchCallback);",sleepingTime);
+    	    setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate+'&rd='+Math.random()+"', window.metasearchCallback);",sleepingTime);
     	}
     	for( var z = 0; z<metasearchElements.length; z++){
 			if( metasearchElements[z].className != 'complete'  ) {

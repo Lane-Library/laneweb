@@ -9,8 +9,6 @@
 	          	<map:serialize type="xml"/>
 	        </map:match>  
         	<map:match type="wildcard" pattern="search-proxy">
-	           <map:match type="regex-parameter" pattern="^.+$">
-	                <map:parameter name="parameter-name" value="id"/>
 	                <map:generate type="search-proxy" src="{defaults:search-url}/search"/>
         		    <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
                 		<map:parameter name="context" value="{request:contextPath}"/>
@@ -21,12 +19,7 @@
 	                </map:transform>
         			<map:serialize type="xml"/>
                	</map:match>	
-	        	 <map:match type="regex-parameter" pattern="^.+$">
-	                <map:parameter name="parameter-name" value="q"/>
-	               	<map:generate type="search-proxy" src="{defaults:search-url}/id"/>
-	            	<map:serialize type="xml"/>
-	           	 </map:match>	
-          	</map:match>
+	        </map:match>
             <map:match pattern="search/*">
                 <map:match type="wildcard" pattern="search/json">
 	                <map:generate src="cocoon:/search-proxy"/>
