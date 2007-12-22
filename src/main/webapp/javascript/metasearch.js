@@ -1,5 +1,4 @@
 var searchTerms;
-var searchId;
 var searchIndicator;
 var searchMode;
 var searchStatus;
@@ -12,36 +11,21 @@ YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 function initializeMetasearch(e)
 {
      window.searchTerms = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.searchTerms"));
-     window.searchId = getMetaContent("LW.searchId");
      window.searchMode = getMetaContent("LW.searchMode");
      window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
-     
-     if( (window.searchId && window.searchId != 'undefined') && (window.searchTemplate && window.searchTemplate != 'undefined') )
-     {
-         window.searchUrl = '/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate;
-     }
-     else if( window.searchTerms && window.searchTerms != 'undefined' )
-     {
-         window.searchUrl = '/././apps/search/filtered-json?q='+window.searchTerms+'&source='+location.pathname.replace('/./.','');
-     }
-     
-     if( window.searchUrl )
-     {
-         YAHOO.util.Connect.asyncRequest('GET', searchUrl, window.metasearchCallback);
-         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack);
-         if(YAHOO.util.Dom.inDocument('searchIndicator')){
-             window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
-         }
-         YAHOO.util.Event.addListener('searchIndicator', 'click', haltMetasearch);
-     }
+     YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate, window.metasearchCallback);
+     YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack);
+      if(YAHOO.util.Dom.inDocument('searchIndicator')){
+          window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
+      }
+      YAHOO.util.Event.addListener('searchIndicator', 'click', haltMetasearch);     
 }
 
 var showMetasearchResults = function(o)
 {
 	    var searchResponse = eval("("+o.responseText+")");
         window.searchStatus = (window.searchStatus == 'successful') ? window.searchStatus : searchResponse.status;
-    	window.searchId = searchResponse.id;
-		var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
+    	var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
         if(window.searchIndicator){
         	window.searchIndicator.setProgress(window.searchStatus,metasearchElements.length,YAHOO.util.Dom.getElementsByClassName('complete').length);
         }
