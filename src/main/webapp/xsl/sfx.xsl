@@ -10,7 +10,7 @@
 	<xsl:param name="sfx-request"/>
 
 	<xsl:variable name="sfx-title">
-		<xsl:copy-of select="/html/body/div/table/tr/td[@id='laneweb_source']/text()"/>
+		<xsl:copy-of select="normalize-space(/html/body/div/table/tr/td[@id='laneweb_source']/text())"/>
 	</xsl:variable>
     
 	<xsl:template match="/">

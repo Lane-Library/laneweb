@@ -6,7 +6,7 @@
     
     <xsl:variable name="sfx-title">
             <xsl:if test="/html/body/div/table/tr/td[@class='BlockTitle'] = 'Full Text'">
-                <xsl:value-of select="/html/body/div/table/tr/td[@id='laneweb_source']/text()"/>
+                <xsl:value-of select="normalize-space(/html/body/div/table/tr/td[@id='laneweb_source']/text())"/>
             </xsl:if>
     </xsl:variable>
     
