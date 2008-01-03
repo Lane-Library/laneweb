@@ -15,7 +15,7 @@ function initializeMetasearch(e)
      window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
      YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate, window.metasearchCallback);
      YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack);
-      if(YAHOO.util.Dom.inDocument('searchIndicator')){
+      if( YAHOO.util.Dom.inDocument('searchIndicator') && window.searchTerms ){
           window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
       }
       YAHOO.util.Event.addListener('searchIndicator', 'click', haltMetasearch);     
