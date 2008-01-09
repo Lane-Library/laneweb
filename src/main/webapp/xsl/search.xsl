@@ -48,14 +48,6 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="h:meta[@name='LW.searchId']">
-        <xsl:copy>
-        <xsl:apply-templates select="@*"/>
-        <xsl:attribute name="content">
-            <xsl:value-of select="/doc/s:search/@id"></xsl:value-of>
-        </xsl:attribute>
-        </xsl:copy>
-    </xsl:template>
     
     
     <xsl:template match="attribute::href[contains(.,'{$keywords}')]">

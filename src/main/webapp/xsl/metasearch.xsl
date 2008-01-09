@@ -11,7 +11,6 @@
     <xsl:param name="source"/>
     
     <xsl:variable name="search-terms" select="/doc/s:search/s:query/text()"/>
-    <xsl:variable name="searchId" select="/doc/s:search/@id"/>
     <xsl:variable name="searchMode" select="/doc/h:html/h:head/h:meta[@name='LW.searchMode']/@content"/>
     
     <xsl:template match="*">
@@ -27,7 +26,6 @@
     <xsl:template match="h:head">
         <xsl:copy>
             <xsl:apply-templates/>
-            <meta name="LW.searchId" content="{$searchId}"/>
             <xsl:choose>
                 <!-- when source isn't an html file, assume source is one of the old metasearch templates and complete path -->
                 <xsl:when test="not(ends-with($source,'.html'))">
@@ -51,7 +49,7 @@
             <xsl:if test="/doc/s:search/@status != 'successful'">
                 <noscript>
                     <h2>
-                        Search still running ... <a href="search.html?javascript=false&amp;source={$source}&amp;id={$searchId}&amp;q={$search-terms}">Click to see more hit counts</a>
+                        Search still running ... <a href="search.html?javascript=false&amp;source={$source}&amp;q={$search-terms}">Click to see more hit counts</a>
                     </h2>
                 </noscript>
             </xsl:if>
@@ -63,9 +61,6 @@
         <xsl:variable name="q">
             <xsl:value-of select="replace(.,'\{\$q\}',replace($search-terms,'(\\|\$)','\\$1'))"/>
         </xsl:variable>
-        <xsl:attribute name="href">
-            <xsl:value-of select="replace($q,'\{\$id\}',$searchId)"/>
-        </xsl:attribute>
     </xsl:template>
     
     <xsl:template match="node()[attribute::class = 'metasearch']">
