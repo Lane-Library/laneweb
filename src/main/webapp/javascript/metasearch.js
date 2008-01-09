@@ -8,18 +8,32 @@ var counter = 0;
 
 YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 
+var searchTerms;
+var searchIndicator;
+var searchMode;
+var searchStatus;
+var searchTemplate;
+var searchUrl;
+var counter = 0;
+
+YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
+
 function initializeMetasearch(e)
 {
-     window.searchTerms = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.searchTerms"));
+	 window.searchTerms = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.searchTerms"));
      window.searchMode = getMetaContent("LW.searchMode");
      window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
-     YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate, window.metasearchCallback);
-     YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack);
-      if( YAHOO.util.Dom.inDocument('searchIndicator') && window.searchTerms ){
-          window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
-      }
-      YAHOO.util.Event.addListener('searchIndicator', 'click', haltMetasearch);     
-}
+     if( window.searchTerms && window.searchTerms != 'undefined'  )
+     {
+        YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate, window.metasearchCallback);
+     	YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack);
+	    if(YAHOO.util.Dom.inDocument('searchIndicator')){
+	         window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
+	     }
+	     YAHOO.util.Event.addListener('searchIndicator', 'click', haltMetasearch);   
+	}
+ }
+
 
 var showMetasearchResults = function(o)
 {
@@ -40,7 +54,7 @@ var showMetasearchResults = function(o)
 			if( metasearchElements[z].className != 'complete'  ) {
 				var resourceId = metasearchElements[z].getAttribute('id');
 				searchResource = searchResponse.resources[resourceId];
-				if(searchResource)  
+				if(searchResource && searchResource.status && searchResource.status != 'running' )  
 					var metasearchResult = new MetasearchResult(metasearchElements[z],searchResource, resourceId);
 			}
     	}
