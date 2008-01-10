@@ -13,16 +13,23 @@ function webtrendsOnClick(e) {
 	    	var redirectUrl = webtrendsProcess(node);
 	    	if(redirectUrl   && e.button =="0")//to give some time to send the request for webtrends
 			{
-				setTimeout("redirect('"+redirectUrl+"')",200);
+				var target = node.target;
+				if(target && '' != target && YAHOO.env.ua.webkit)// safari doesn't not open a new window in a method call by a setTimeout
+					window.open(redirectUrl, target);
+				else
+			 		setTimeout("redirect('"+redirectUrl+"','"+target+"')",200);
 				YAHOO.util.Event.preventDefault(e);
 			}
 	    }
 }
 
 
-function redirect(redirectUrl)
+function redirect(redirectUrl, target)
 {
-	window.location = redirectUrl;
+	if(target && '' != target)
+		var newWindow = window.open(redirectUrl, target);
+	else
+ 		window.location = redirectUrl; 	
 }
 
 function getNode(node)
