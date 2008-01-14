@@ -45,7 +45,7 @@
     </xsl:template>
     
     <xsl:template match="attribute::*[contains(.,'{$lw_descriptor}') or contains(.,'{$lw_keywords}') or contains(.,'{$lw_resultSuffix}') or contains(.,'{$lw_resourceCount}')]">
-        <xsl:attribute name="title">
+        <xsl:attribute name="{name(.)}">
             <xsl:value-of select="replace(
                                     replace(
                                         replace(
