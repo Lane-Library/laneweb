@@ -137,7 +137,7 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
         super.dispose();
     }
 
-    private List<Eresource> getEresourceList() throws ProcessingException {
+    protected List<Eresource> getEresourceList() throws ProcessingException {
         List<Eresource> eresources = new LinkedList<Eresource>();
         Connection conn = null;
         PreparedStatement stmt = null;

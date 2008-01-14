@@ -9,6 +9,12 @@ package edu.stanford.irt.laneweb.eresources;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.cocoon.ProcessingException;
+
+import edu.stanford.irt.eresources.Eresource;
 
 public class EresourcesSearchGenerator extends AbstractEresourcesGenerator {
 
@@ -57,6 +63,20 @@ public class EresourcesSearchGenerator extends AbstractEresourcesGenerator {
         stmt.setString(7, translatedQuery);
         stmt.setString(8, translatedQuery);
         return stmt;
+    }
+    
+    @Override
+    protected List<Eresource> getEresourceList() throws ProcessingException {
+        List<Eresource> eresources = super.getEresourceList();
+        for (int i = 0; i < eresources.size(); i++) {
+            Eresource eresource = eresources.get(i);
+            if (this.query.equalsIgnoreCase(eresource.getTitle())) {
+                eresources.remove(i);
+                eresources.add(0, eresource);
+                break;
+            }
+        }
+        return eresources;
     }
 
 }
