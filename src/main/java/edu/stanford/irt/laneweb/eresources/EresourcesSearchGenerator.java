@@ -68,11 +68,9 @@ public class EresourcesSearchGenerator extends AbstractEresourcesGenerator {
     @Override
     protected List<Eresource> getEresourceList() throws ProcessingException {
         List<Eresource> eresources = super.getEresourceList();
-        for (int i = 0; i < eresources.size(); i++) {
-            Eresource eresource = eresources.get(i);
-            if (this.query.equalsIgnoreCase(eresource.getTitle())) {
-                eresources.remove(i);
-                eresources.add(0, eresource);
+        for (int i = 0; i < eresources.size()  && i < 10; i++) {
+            if (this.query.equalsIgnoreCase(eresources.get(i).getTitle())) {
+                eresources.add(0, eresources.remove(i));
                 break;
             }
         }
