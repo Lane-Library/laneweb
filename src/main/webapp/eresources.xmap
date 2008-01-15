@@ -29,7 +29,12 @@
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
-                <map:transform type="saxon" src="context://xsl/historyErsql2html.xsl"/>
+                <map:transform type="saxon" src="context://xsl/historyErsql2html.xsl">
+                    <map:parameter name="keywords" value="{request-param:keywords}"/>
+                    <map:parameter name="q" value="{request-param:q}"/>
+                    <map:parameter name="t" value="{request-param:t}"/>
+                    <map:parameter name="a" value="{request-param:a}"/>
+                </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="count">

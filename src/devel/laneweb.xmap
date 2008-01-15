@@ -39,6 +39,9 @@
                             <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                            <map:parameter name="path" value="{request-param:path}"/>
+                            <map:parameter name="entryUrl" value="{request-param:entryUrl}"/>
+                            <map:parameter name="title" value="{request-param:title}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
@@ -46,6 +49,9 @@
                             <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                             <map:parameter name="ticket" value="{laneweb:ticket}"/>
                             <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                            <map:parameter name="path" value="{request-param:path}"/>
+                            <map:parameter name="entryUrl" value="{request-param:entryUrl}"/>
+                            <map:parameter name="title" value="{request-param:title}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>

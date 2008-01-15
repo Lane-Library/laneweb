@@ -90,13 +90,19 @@
             </map:match>
             <map:match type="wildcard" pattern="howto/index.html">
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
-                <map:transform type="saxon" src="context://xsl/faq.xsl"/>
+                <map:transform type="saxon" src="context://xsl/faq.xsl">
+                    <map:parameter name="id" value="{request-param:id}"/>
+                    <map:parameter name="category" value="{request-param:category}"/>
+                    <map:parameter name="mode" value="{request-param:mode}"/>
+                </map:transform>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="faq-category-list.html">
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
-                <map:transform type="saxon" src="context://xsl/faq-category-list.xsl"/>
+                <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
+                    <map:parameter name="category" value="{request-param:category}"/>
+                </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="search-templates.xml">

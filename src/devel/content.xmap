@@ -192,10 +192,18 @@
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/faq.xsl">
-                        <map:transform type="saxon" src="xsl/faq.xsl"/>
+                        <map:transform type="saxon" src="xsl/faq.xsl">
+                            <map:parameter name="id" value="{request-param:id}"/>
+                            <map:parameter name="category" value="{request-param:category}"/>
+                            <map:parameter name="mode" value="{request-param:mode}"/>
+                        </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/faq.xsl"/>
+                        <map:transform type="saxon" src="context://xsl/faq.xsl">
+                            <map:parameter name="id" value="{request-param:id}"/>
+                            <map:parameter name="category" value="{request-param:category}"/>
+                            <map:parameter name="mode" value="{request-param:mode}"/>
+                        </map:transform>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="xinclude"/>
@@ -205,10 +213,14 @@
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/faq=category-list.xsl">
-                        <map:transform type="saxon" src="xsl/faq-category-list.xsl"/>
+                        <map:transform type="saxon" src="xsl/faq-category-list.xsl">
+                            <map:parameter name="category" value="{request-param:category}"/>
+                        </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/faq-category-list.xsl"/>
+                        <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
+                            <map:parameter name="category" value="{request-param:category}"/>
+                        </map:transform>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
