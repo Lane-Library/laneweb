@@ -57,10 +57,10 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="attribute::href[contains(.,'{$id}') or contains(.,'{$q}')]">
-        <xsl:variable name="q">
+    <xsl:template match="attribute::href[contains(.,'{$q}')]">
+        <xsl:attribute name="href">
             <xsl:value-of select="replace(.,'\{\$q\}',replace($search-terms,'(\\|\$)','\\$1'))"/>
-        </xsl:variable>
+        </xsl:attribute>
     </xsl:template>
     
     <xsl:template match="node()[attribute::class = 'metasearch']">
