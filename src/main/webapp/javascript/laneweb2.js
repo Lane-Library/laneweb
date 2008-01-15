@@ -3,7 +3,7 @@ var metaTags = new Object();
 
 
 YAHOO.util.Event.addListener(window,'load',initialize);
-//window.onerror = handleMessage;
+window.onerror = handleMessage;
     	
 
 function handleMessage( message, url, line)

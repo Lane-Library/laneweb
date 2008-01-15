@@ -8,19 +8,9 @@ var counter = 0;
 
 YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 
-var searchTerms;
-var searchIndicator;
-var searchMode;
-var searchStatus;
-var searchTemplate;
-var searchUrl;
-var counter = 0;
-
-YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
-
 function initializeMetasearch(e)
 {
-	 window.searchTerms = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.searchTerms"));
+	window.searchTerms = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.searchTerms"));
      window.searchMode = getMetaContent("LW.searchMode");
      window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
      if( window.searchTerms && window.searchTerms != 'undefined'  )
@@ -30,7 +20,8 @@ function initializeMetasearch(e)
 	    if(YAHOO.util.Dom.inDocument('searchIndicator')){
 	         window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
 	     }
-	     YAHOO.util.Event.addListener('searchIndicator', 'click', haltMetasearch);   
+	     YAHOO.util.Event.addListener('searchIndicator', 'click', haltMetasearch);
+	     YAHOO.util.Event.addListener('toggleZeros', 'click', toggleZeros);
 	}
  }
 
@@ -212,7 +203,6 @@ SearchIndicator.prototype.setProgress = function(status,pendingResources,complet
     	this.setMessage('Results for ' + window.searchTerms);
         YAHOO.util.Dom.setStyle('resultsMessage','display','inline');
         YAHOO.util.Dom.setStyle('metasearchControls','display','inline');
-        YAHOO.util.Event.addListener('toggleZeros', 'click', toggleZeros);
     }
     else{
    		this.setMessage(completedResources + ' of ' + (pendingResources + completedResources) + ' sources searched');
