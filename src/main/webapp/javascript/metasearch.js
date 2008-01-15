@@ -64,7 +64,7 @@ function MetasearchResult(metasearchElement,searchResource, id)
     this.name = (metasearchElement.innerHTML) ? metasearchElement.innerHTML : '';
     this.status = (searchResource.status) ? searchResource.status : 0;
     this.hits = searchResource.hits;
-    this.href = searchResource.url; // TODO: should fix this so only updates when searchResource.url has data
+    this.href = searchResource.url || metasearchElement.href;
     
     this.setContent(metasearchElement);
 
@@ -80,7 +80,7 @@ MetasearchResult.prototype.setContent = function(metasearchElement)
     }
         switch(window.searchMode){
             case "original":
-                if( this.status && this.status != 'running' ) {
+                if( this.status && this.status != 'running' && this.href ) {
                 	metasearchElement.setAttribute('href',this.href);
                     // fix for IE7 (@ in text of element will cause element text to be replaced by href value
                     // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
@@ -106,7 +106,7 @@ MetasearchResult.prototype.setContent = function(metasearchElement)
                 }
             break;
             default:  // merged 
-                if( this.status == 'successful') {
+                if( this.status == 'successful' && this.href ) {
                 	metasearchElement.setAttribute('href',this.href);
                     // fix for IE7 (@ in text of element will cause element text to be replaced by href value
                     // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
