@@ -31,9 +31,6 @@ var showMetasearchResults = function(o)
 	    var searchResponse = eval("("+o.responseText+")");
         window.searchStatus = (window.searchStatus == 'successful') ? window.searchStatus : searchResponse.status;
     	var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
-        if(window.searchIndicator){
-        	window.searchIndicator.setProgress(window.searchStatus,metasearchElements.length,YAHOO.util.Dom.getElementsByClassName('complete').length);
-        }
     	if(metasearchElements.length && window.searchStatus != 'successful'){
     		window.counter++;
     		var sleepingTime = 2000; //2 seconds
@@ -49,6 +46,9 @@ var showMetasearchResults = function(o)
 					var metasearchResult = new MetasearchResult(metasearchElements[z],searchResource, resourceId);
 			}
     	}
+        if(window.searchIndicator){
+        	window.searchIndicator.setProgress(window.searchStatus,YAHOO.util.Dom.getElementsByClassName('metasearch').length,YAHOO.util.Dom.getElementsByClassName('complete').length);
+        }
 }
 
 function MetasearchResult(metasearchElement,searchResource, id)
@@ -196,16 +196,12 @@ SearchIndicator.prototype.show = function()
 SearchIndicator.prototype.setProgress = function(status,pendingResources,completedResources)
 {
     this.show();
+    this.setMessage(completedResources + ' of ' + (pendingResources + completedResources) + ' sources searched');
     if(status == 'successful' || pendingResources == 0)
     {
         this.hide();
-        //YAHOO.util.Dom.setStyle('haltMetasearch','display','none');
-    	this.setMessage('Results for ' + window.searchTerms);
         YAHOO.util.Dom.setStyle('resultsMessage','display','inline');
         YAHOO.util.Dom.setStyle('metasearchControls','display','inline');
-    }
-    else{
-   		this.setMessage(completedResources + ' of ' + (pendingResources + completedResources) + ' sources searched');
     }
 }
 
