@@ -123,6 +123,6 @@
         <get dest="${libdir}/spellcheck-1.2.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/spellcheck/jars/spellcheck-1.2.0.jar"/>
         <get dest="${libdir}/xalan-2.7.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xalan/jars/xalan-2.7.0.jar"/>
         <get dest="${libdir}/xercesImpl-2.9.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xerces/jars/xercesImpl-2.9.0.jar"/>
-        <get dest="${libdir}/yui-2.3.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/yui/jars/yui-2.3.0.jar"/>
+        <get dest="${libdir}/yui-2.4.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/yui/jars/yui-2.4.1.jar"/>
     </target>
 </project>
