@@ -83,7 +83,6 @@
         <get dest="${libdir}/avalon-framework-impl-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-framework/jars/avalon-framework-impl-4.3.jar"/>
         <get dest="${libdir}/avalon-logkit-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-logkit/jars/avalon-logkit-2.1.jar"/>
         <get dest="${libdir}/cocoon-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-2.1.10.jar"/>
-        <get dest="${libdir}/cocoon-html-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-html-2.1.10.jar"/>
         <get dest="${libdir}/cocoon-databases-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-databases-2.1.10.jar"/>
         <get dest="${libdir}/cocoon-paranoid-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-paranoid-2.1.10.jar"/>
         <get dest="${libdir}/cocoon-proxy-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-proxy-2.1.10.jar"/>
