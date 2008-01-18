@@ -300,7 +300,7 @@ function QueryMapping(content)
 	this.resourceUrl = "";
 	this._counter = 0;
 	this._content = content;
-    new YAHOO.widget.Tooltip(YAHOO.util.Dom.generateId(), { context:'qmTip', width:'170px', text:'text' } )
+    new YAHOO.widget.Tooltip(YAHOO.util.Dom.generateId(), { context:'qmTip', width:'170px' } )
     var lis = 	this._content.getElementsByTagName( 'li');
     for(var i = 0; i < lis.length; i++) {
     	  //lis[i].style.display = 'none';
