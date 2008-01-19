@@ -8,9 +8,6 @@
                 pool-max="32"/>
             <map:generator name="html" logger="sitemap.generator.html" src="edu.stanford.irt.laneweb.HTMLGenerator"
                 pool-max="32">
-                <!--<map:generator name="html" logger="sitemap.generator.html" src="edu.stanford.irt.laneweb.HTMLGenerator"
-                    pool-max="32">-->
-                <!--<jtidy-config>context://WEB-INF/jtidy.properties</jtidy-config>-->
             </map:generator>
             <map:generator name="search-proxy" src="edu.stanford.irt.laneweb.SearchProxyGenerator"
                 logger="sitemap.generator.search-proxy" pool-max="32"/>
@@ -32,8 +29,6 @@
                 logger="sitemap.generation.history" pool-max="32"/>
             <map:generator name="status" logger="sitemap.generator.status"
                 src="org.apache.cocoon.generation.StatusGenerator" pool-max="4"/>
-            <map:generator name="html-proxy" src="edu.stanford.irt.laneweb.JTidyProxyGenerator"
-                logger="sitemap.generation.html-proxy" pool-max="32"/>
             <map:generator name="querymap" src="edu.stanford.irt.laneweb.querymap.QueryMapGenerator"
                 logger="sitemap.generation.querymap" pool-max="32"/>
             <map:generator name="spellcheck" src="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator"

@@ -689,12 +689,6 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>jtidy</groupId>
-      <artifactId>jtidy</artifactId>
-      <version>4aug2000r7-nodom</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.2</version>
