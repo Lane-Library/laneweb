@@ -82,10 +82,10 @@
         <get dest="${libdir}/avalon-framework-api-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-framework/jars/avalon-framework-api-4.3.jar"/>
         <get dest="${libdir}/avalon-framework-impl-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-framework/jars/avalon-framework-impl-4.3.jar"/>
         <get dest="${libdir}/avalon-logkit-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-logkit/jars/avalon-logkit-2.1.jar"/>
-        <get dest="${libdir}/cocoon-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-2.1.10.jar"/>
-        <get dest="${libdir}/cocoon-databases-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-databases-2.1.10.jar"/>
-        <get dest="${libdir}/cocoon-paranoid-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-paranoid-2.1.10.jar"/>
-        <get dest="${libdir}/cocoon-proxy-2.1.10.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/cocoon/jars/cocoon-proxy-2.1.10.jar"/>
+        <get dest="${libdir}/cocoon-2.1.11.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/apache/cocoon/cocoon/2.1.11/cocoon-2.1.11.jar"/>
+        <get dest="${libdir}/cocoon-databases-2.1.11.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/apache/cocoon/cocoon-databases/2.1.11/cocoon-databases-2.1.11.jar"/>
+        <get dest="${libdir}/cocoon-paranoid-2.1.11.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/apache/cocoon/cocoon-paranoid/2.1.11/cocoon-paranoid-2.1.11.jar"/>
+        <get dest="${libdir}/cocoon-proxy-2.1.11.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/apache/cocoon/cocoon-proxy/2.1.11/cocoon-proxy-2.1.11.jar"/>
         <get dest="${libdir}/commons-codec-1.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-codec/jars/commons-codec-1.3.jar"/>
         <get dest="${libdir}/commons-collections-3.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-collections/jars/commons-collections-3.2.jar"/>
         <get dest="${libdir}/commons-httpclient-3.1-log4j.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-httpclient/jars/commons-httpclient-3.1-log4j.jar"/>
