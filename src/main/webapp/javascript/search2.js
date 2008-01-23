@@ -3,11 +3,21 @@ var startTime = new Date().getTime();
 var activeResult;
 var spellcheck;
 var queryMapping;
+var initialTabState;
 
 YAHOO.util.Event.addListener(window,'load',initSearch);
-
+		
 function initSearch() {
-        window.searchTerms = escape(getMetaContent("LW.searchTerms"));
+        if(YAHOO.util.History && YAHOO.util.Dom.inDocument('yui-history-field') && YAHOO.util.Dom.inDocument('yui-history-iframe')){
+            YAHOO.util.History.onReady(function () {
+            	var currentTabState = YAHOO.util.History.getCurrentState("aTab");
+            	activeTabStateChangeHandler (currentTabState);
+            });
+            window.initialTabState = YAHOO.util.History.getBookmarkedState("aTab") || getMetaContent("LW.source");
+        	YAHOO.util.History.register("aTab", window.initialTabState, activeTabStateChangeHandler);
+        	YAHOO.util.History.initialize("yui-history-field", "yui-history-iframe"); 
+        }
+		window.searchTerms = escape(getMetaContent("LW.searchTerms"));
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.searchTerms, window.querymapCallBack);
       	YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q='+window.searchTerms, window.findItCallBack);
        	YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack );
@@ -30,6 +40,11 @@ function initSearch() {
                     result.setContent(content);
                     window.activeResult = result;
                 }
+                else if (type == window.initialTabState){
+                    YAHOO.util.Dom.getElementsByClassName('eLibraryTabActive')[0].result.hide();
+                    result.show();
+                    window.activeResult = result;
+                }
                 tab.result = result;
                 tab.activate = function(event) {
                     if (this.className != 'eLibraryTabActive') {
@@ -44,6 +59,7 @@ function initSearch() {
                 tab.clicked = function(event) {
                 	webtrends(this);
                     this.result.show();
+                    (YAHOO.util.History) ? YAHOO.util.History.navigate("aTab", this.id.substring(0,this.id.indexOf('Tab'))) : ''; 
                     YAHOO.util.Event.stopEvent(event);
                 }
             }
@@ -159,6 +175,16 @@ Result.prototype.setTabCount = function(count) {
   
 }
 
+
+function activeTabStateChangeHandler (tab) {
+	var tab = document.getElementById(tab + "Tab");
+	if( tab.result._state == 'initialized' ){
+		tab.result.getContent();
+	}
+	else if( tab.result._state == 'searched' ){
+		tab.result.show();
+	}
+}
 
 function webtrends(tab)
 {
@@ -394,5 +420,3 @@ QueryMapping.prototype.getContent = function() {
         }
         return newNode;
     }
-
-
