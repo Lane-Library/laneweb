@@ -184,6 +184,9 @@ function activeTabStateChangeHandler (tab) {
 	else if( tab.result._state == 'searched' ){
 		tab.result.show();
 	}
+	else{
+	    tab.result._state = 'initialized';
+	}
 }
 
 function webtrends(tab)
