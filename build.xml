@@ -92,6 +92,7 @@
         <get dest="${libdir}/commons-httpclient-3.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar"/>
         <get dest="${libdir}/commons-jxpath-1.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-jxpath/commons-jxpath/1.2/commons-jxpath-1.2.jar"/>
         <get dest="${libdir}/commons-lang-2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-lang/commons-lang/2.2/commons-lang-2.2.jar"/>
+        <get dest="${libdir}/commons-logging-1.0.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar"/>
         <get dest="${libdir}/concurrent-1.3.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/concurrent/concurrent/1.3.4/concurrent-1.3.4.jar"/>
         <get dest="${libdir}/ehcache-1.2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/net/sf/ehcache/ehcache/1.2.2/ehcache-1.2.2.jar"/>
         <get dest="${libdir}/excalibur-component-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-component/excalibur-component/2.1/excalibur-component-2.1.jar"/>
