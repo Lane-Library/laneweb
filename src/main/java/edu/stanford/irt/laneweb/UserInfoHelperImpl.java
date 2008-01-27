@@ -1,14 +1,16 @@
 package edu.stanford.irt.laneweb;
 
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
 
-public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHelper, ThreadSafe, Initializable {
+public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHelper, ThreadSafe, Serviceable {
 
-    LdapClient ldapClient;
+    private LdapClient ldapClient;
 
     public UserInfo getUserInfo(final Request request) {
 
@@ -57,12 +59,12 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHe
         }
     }
 
-    public void initialize() throws Exception {
-        this.ldapClient = new LdapClientImpl();
-    }
-
     public void setLdapClient(final LdapClient ldapClient) {
         this.ldapClient = ldapClient;
+    }
+    
+    public void service(ServiceManager manager) throws ServiceException {
+        this.ldapClient = (LdapClient) manager.lookup(LdapClient.ROLE);
     }
 
 }

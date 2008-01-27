@@ -1,35 +1,35 @@
 package edu.stanford.irt.laneweb;
 
-import org.apache.log4j.Logger;
+import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
 
+import edu.stanford.irt.SystemException;
 import edu.stanford.irt.directory.LDAPDirectoryFactory;
 import edu.stanford.irt.directory.LDAPDirectoryUtil;
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class LdapClientImpl implements LdapClient {
+public class LdapClientImpl extends AbstractLogEnabled implements LdapClient, Initializable {
 
-    Logger log = Logger.getLogger(this.getClass());
+    private  LDAPDirectoryFactory directoryFactory = null;
 
-    private static LDAPDirectoryFactory directoryFactory = null;
-
-    public LdapClientImpl() {
-        try {
-            directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil.getLDAPDirectoryFactory("IRT_K5").getDirectoryFactory();
-
-        } catch (Exception e) {
-            this.log.error(e.getMessage(), e);
-        }
+    public void initialize() {
+        this.directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil.getLDAPDirectoryFactory("IRT_K5").getDirectoryFactory();
     }
 
     public LDAPPerson getLdapPerson(final String sunetId) {
-        LDAPPerson ldapPerson = null;
-        if (sunetId != null) {
-            try {
-                ldapPerson = directoryFactory.getSearcher().searchPersonByUID(sunetId);
-            } catch (Exception e) {
-                this.log.error(e.getMessage(), e);
-            }
+        if (getLogger().isDebugEnabled()) {
+            getLogger().debug("LdapClientImpl.getLdapPerson("+sunetId+")");
         }
-        return ldapPerson;
+        if (null == sunetId) {
+            throw new IllegalArgumentException("null sunetId");
+        }
+        try {
+            return this.directoryFactory.getSearcher().searchPersonByUID(sunetId);
+        } catch (SystemException e) {
+            if (getLogger().isErrorEnabled()) {
+                getLogger().error(e.getMessage(), e);
+            }
+            return null;
+        }
     }
 }

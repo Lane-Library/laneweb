@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.stanford.irt</groupId>
   <artifactId>laneweb</artifactId>
@@ -35,7 +37,8 @@
       <name>Ryan Max Steinberg</name>
       <email>ryanmax@stanford.edu</email>
       <organization>Lane Medical Library</organization>
-    </developer><developer>
+    </developer>
+    <developer>
       <id>alainb</id>
       <name>Alain Broussard</name>
       <email>alainb@stanford.edu</email>
@@ -103,11 +106,6 @@
       <id>irt-lanelocal</id>
       <url>http://irt-lanelocal.stanford.edu/maven/</url>
     </repository>
-    <repository>
-      <id>irt-lanelocal-legacy</id>
-      <url>http://irt-lanelocal.stanford.edu/maven/</url>
-      <layout>legacy</layout>
-    </repository>
   </repositories>
   <reporting>
     <plugins>
@@ -150,24 +148,19 @@
       </plugin>
     </plugins>
   </reporting>
+
   <dependencies>
     <dependency>
       <groupId>avalon-framework</groupId>
       <artifactId>avalon-framework-api</artifactId>
       <version>4.3</version>
       <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>avalon-logkit</groupId>
-          <artifactId>avalon-logkit</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>avalon-framework</groupId>
       <artifactId>avalon-framework-impl</artifactId>
       <version>4.3</version>
-      <scope>compile</scope>
+      <scope>runtime</scope>
       <exclusions>
         <exclusion>
           <groupId>xml-apis</groupId>
@@ -178,28 +171,12 @@
           <artifactId>xmlParserAPIs</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>xerces</groupId>
-          <artifactId>xerces</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>xalan</groupId>
-          <artifactId>xalan</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>avalon-logkit</groupId>
-          <artifactId>avalon-logkit</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>jmock</groupId>
           <artifactId>jmock</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>xerces</groupId>
+          <artifactId>xerces</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -208,6 +185,16 @@
       <artifactId>avalon-logkit</artifactId>
       <version>2.1</version>
       <scope>runtime</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>geronimo-spec</groupId>
+          <artifactId>geronimo-spec-jms</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>geronimo-spec</groupId>
+          <artifactId>geronimo-spec-javamail</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.cocoon</groupId>
@@ -234,21 +221,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>commons-codec</groupId>
-      <artifactId>commons-codec</artifactId>
-      <version>1.3</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>commons-collections</groupId>
-      <artifactId>commons-collections</artifactId>
-      <version>3.2</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
       <groupId>commons-httpclient</groupId>
       <artifactId>commons-httpclient</artifactId>
-      <version>3.1-log4j</version>
+      <version>3.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -266,16 +241,8 @@
           <groupId>jdom</groupId>
         </exclusion>
         <exclusion>
-          <groupId>commons-logging</groupId>
-          <artifactId>commons-logging</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>commons-beanutils</groupId>
           <artifactId>commons-beanutils</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-collections</groupId>
-          <artifactId>commons-collections</artifactId>
         </exclusion>
         <exclusion>
           <groupId>ant</groupId>
@@ -290,36 +257,20 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>1.1</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>logkit</artifactId>
-          <groupId>logkit</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>avalon-framework</artifactId>
-          <groupId>avalon-framework</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>avalon-logkit</artifactId>
-          <groupId>avalon-logkit</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>concurrent</groupId>
-      <artifactId>concurrent</artifactId>
-      <version>1.3.4</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>ehcache</groupId>
+      <groupId>net.sf.ehcache</groupId>
       <artifactId>ehcache</artifactId>
       <version>1.2.2</version>
       <scope>runtime</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>net.sf.hibernate</groupId>
+          <artifactId>hibernate</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>edu.stanford.irt</groupId>
@@ -334,52 +285,20 @@
       <scope>runtime</scope>
       <exclusions>
         <exclusion>
-          <groupId>avalon-logkit</groupId>
-          <artifactId>avalon-logkit</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>avalon-framework</groupId>
-          <artifactId>avalon-framework-impl</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-logger</groupId>
-          <artifactId>excalibur-logger</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-instrument</groupId>
-          <artifactId>excalibur-instrument-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-instrument</groupId>
-          <artifactId>excalibur-instrument-mgr-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-instrument</groupId>
-          <artifactId>excalibur-instrument-mgr-impl</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-pool</groupId>
-          <artifactId>excalibur-pool-impl</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-pool</groupId>
-          <artifactId>excalibur-pool-instrumented</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-collections</groupId>
-          <artifactId>commons-collections</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>concurrent</groupId>
-          <artifactId>concurrent</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>servletapi</groupId>
           <artifactId>servletapi</artifactId>
         </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>excalibur-pool</groupId>
+      <artifactId>excalibur-pool-impl</artifactId>
+      <version>2.1</version>
+      <scope>runtime</scope>
+      <exclusions>
         <exclusion>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
+          <artifactId>junitperf</artifactId>
+          <groupId>junitperf</groupId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -394,36 +313,8 @@
           <artifactId>hsqldb</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>avalon-logkit</groupId>
-          <artifactId>avalon-logkit</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-instrument</groupId>
-          <artifactId>excalibur-instrument-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-pool</groupId>
-          <artifactId>excalibur-pool-impl</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-pool</groupId>
-          <artifactId>excalibur-pool-instrumented</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-collections</groupId>
-          <artifactId>commons-collections</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>concurrent</groupId>
-          <artifactId>concurrent</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>excalibur-component</groupId>
           <artifactId>excalibur-testcase</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-component</groupId>
-          <artifactId>excalibur-component</artifactId>
         </exclusion>
         <exclusion>
           <groupId>excalibur-fortress</groupId>
@@ -440,21 +331,11 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>excalibur-instrument</groupId>
-      <artifactId>excalibur-instrument-mgr-impl</artifactId>
-      <version>2.1</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
       <groupId>excalibur-logger</groupId>
       <artifactId>excalibur-logger</artifactId>
       <version>2.1</version>
       <scope>runtime</scope>
       <exclusions>
-        <exclusion>
-          <groupId>avalon-logkit</groupId>
-          <artifactId>avalon-logkit</artifactId>
-        </exclusion>
         <exclusion>
           <groupId>servletapi</groupId>
           <artifactId>servletapi</artifactId>
@@ -486,14 +367,6 @@
       <scope>runtime</scope>
       <exclusions>
         <exclusion>
-          <groupId>commons-collections</groupId>
-          <artifactId>commons-collections</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>concurrent</groupId>
-          <artifactId>concurrent</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>junitperf</groupId>
           <artifactId>junitperf</artifactId>
         </exclusion>
@@ -508,14 +381,6 @@
         <exclusion>
           <artifactId>ant</artifactId>
           <groupId>ant</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-httpclient</artifactId>
-          <groupId>commons-httpclient</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>commons-logging</artifactId>
-          <groupId>commons-logging</groupId>
         </exclusion>
         <exclusion>
           <artifactId>commons-vfs</artifactId>
@@ -557,10 +422,6 @@
           <artifactId>qdox</artifactId>
           <groupId>qdox</groupId>
         </exclusion>
-        <exclusion>
-          <artifactId>concurrent</artifactId>
-          <groupId>concurrent</groupId>
-        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
@@ -594,38 +455,6 @@
           <artifactId>xml-resolver</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>excalibur-logger</groupId>
-          <artifactId>excalibur-logger</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>avalon-logkit</groupId>
-          <artifactId>avalon-logkit</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-component</groupId>
-          <artifactId>excalibur-component</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-instrument</groupId>
-          <artifactId>excalibur-instrument-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-pool</groupId>
-          <artifactId>excalibur-pool-impl</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-pool</groupId>
-          <artifactId>excalibur-pool-instrumented</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-instrument</groupId>
-          <artifactId>excalibur-instrument-api</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>excalibur-store</groupId>
-          <artifactId>excalibur-store</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>xml-apis</groupId>
           <artifactId>xml-apis</artifactId>
         </exclusion>
@@ -634,20 +463,12 @@
           <artifactId>xerces</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>xalan</groupId>
-          <artifactId>xalan</artifactId>
-        </exclusion>
-        <exclusion>
           <groupId>saxpath</groupId>
           <artifactId>saxpath</artifactId>
         </exclusion>
         <exclusion>
           <groupId>jaxen</groupId>
           <artifactId>jaxen</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>commons-collections</groupId>
-          <artifactId>commons-collections</artifactId>
         </exclusion>
         <exclusion>
           <groupId>excalibur-component</groupId>
@@ -688,14 +509,14 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>3.8.2</version>
+      <version>4.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.15</version>
-      <scope>compile</scope>
+      <scope>runtime</scope>
       <exclusions>
         <exclusion>
           <groupId>javax.jms</groupId>
@@ -722,12 +543,6 @@
       <artifactId>querymap</artifactId>
       <version>1.0.3</version>
       <scope>compile</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>commons-httpclient</artifactId>
-          <groupId>commons-httpclient</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>net.sf.saxon</groupId>
@@ -774,7 +589,7 @@
     <dependency>
       <artifactId>nekohtml</artifactId>
       <groupId>nekohtml</groupId>
-      <version>0.9.5</version>
+      <version>1.9.6</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

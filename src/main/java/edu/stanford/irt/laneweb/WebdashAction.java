@@ -15,9 +15,9 @@ import edu.stanford.irt.directory.LDAPPerson;
 
 public class WebdashAction extends ServiceableAction {
 
-    UserInfoHelper userInfoHelper = null;
+    private UserInfoHelper userInfoHelper = null;
 
-    WebDashLogin webDashLogin = null;
+    private WebDashLogin webDashLogin = null;
 
     public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string,
             final Parameters param) throws Exception {

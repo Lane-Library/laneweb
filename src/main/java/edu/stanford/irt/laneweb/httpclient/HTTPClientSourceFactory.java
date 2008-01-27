@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Map;
 
-import org.apache.avalon.framework.container.ContainerUtil;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
@@ -61,9 +60,9 @@ public class HTTPClientSourceFactory extends AbstractLogEnabled implements Sourc
     public Source getSource(final String uri, final Map sourceParams) throws MalformedURLException, IOException {
         try {
             final HTTPClientSource source = new HTTPClientSource(uri, sourceParams, this.httpClient);
-            ContainerUtil.enableLogging(source, getLogger());
-            ContainerUtil.parameterize(source, this.m_parameters);
-            ContainerUtil.initialize(source);
+            source.enableLogging(getLogger());
+            source.parameterize(this.m_parameters);
+            source.initialize();
             return source;
         } catch (final MalformedURLException e) {
             throw e;

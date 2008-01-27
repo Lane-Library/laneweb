@@ -78,49 +78,48 @@
         <delete dir="${defaulttargetdir}/classes"/>
     </target>
     <target name="get-deps" unless="noget" depends="init">
-        <get dest="${libdir}/activation-1.0.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax.activation/jars/activation-1.0.2.jar"/>
-        <get dest="${libdir}/avalon-framework-api-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-framework/jars/avalon-framework-api-4.3.jar"/>
-        <get dest="${libdir}/avalon-framework-impl-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-framework/jars/avalon-framework-impl-4.3.jar"/>
-        <get dest="${libdir}/avalon-logkit-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-logkit/jars/avalon-logkit-2.1.jar"/>
+        <get dest="${libdir}/activation-1.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax/activation/activation/1.1/activation-1.1.jar"/>
+        <get dest="${libdir}/avalon-framework-api-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-framework/avalon-framework-api/4.3/avalon-framework-api-4.3.jar"/>
+        <get dest="${libdir}/avalon-framework-impl-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-framework/avalon-framework-impl/4.3/avalon-framework-impl-4.3.jar"/>
+        <get dest="${libdir}/avalon-logkit-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-logkit/avalon-logkit/2.1/avalon-logkit-2.1.jar"/>
         <get dest="${libdir}/cocoon-2.1.11.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/apache/cocoon/cocoon/2.1.11/cocoon-2.1.11.jar"/>
         <get dest="${libdir}/cocoon-databases-2.1.11.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/apache/cocoon/cocoon-databases/2.1.11/cocoon-databases-2.1.11.jar"/>
         <get dest="${libdir}/cocoon-paranoid-2.1.11.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/apache/cocoon/cocoon-paranoid/2.1.11/cocoon-paranoid-2.1.11.jar"/>
         <get dest="${libdir}/cocoon-proxy-2.1.11.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/apache/cocoon/cocoon-proxy/2.1.11/cocoon-proxy-2.1.11.jar"/>
-        <get dest="${libdir}/commons-codec-1.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-codec/jars/commons-codec-1.3.jar"/>
-        <get dest="${libdir}/commons-collections-3.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-collections/jars/commons-collections-3.2.jar"/>
+        <get dest="${libdir}/commons-codec-1.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-codec/commons-codec/1.2/commons-codec-1.2.jar"/>
+        <get dest="${libdir}/commons-collections-3.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-collections/commons-collections/3.1/commons-collections-3.1.jar"/>
         <get dest="${libdir}/commons-io-1.3.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-io/commons-io/1.3.1/commons-io-1.3.1.jar"/>
-        <get dest="${libdir}/commons-httpclient-3.1-log4j.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-httpclient/jars/commons-httpclient-3.1-log4j.jar"/>
-        <get dest="${libdir}/commons-jxpath-1.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-jxpath/jars/commons-jxpath-1.2.jar"/>
-        <get dest="${libdir}/commons-lang-2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-lang/jars/commons-lang-2.2.jar"/>
-        <get dest="${libdir}/concurrent-1.3.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/concurrent/jars/concurrent-1.3.4.jar"/>
-        <get dest="${libdir}/easymock-2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/easymock/jars/easymock-2.2.jar"/>
-        <get dest="${libdir}/ehcache-1.2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/ehcache/jars/ehcache-1.2.2.jar"/>
-        <get dest="${libdir}/excalibur-component-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-component/jars/excalibur-component-2.1.jar"/>
-        <get dest="${libdir}/excalibur-datasource-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-datasource/jars/excalibur-datasource-2.1.jar"/>
-        <get dest="${libdir}/excalibur-instrument-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-instrument/jars/excalibur-instrument-api-2.1.jar"/>
-        <get dest="${libdir}/excalibur-instrument-mgr-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-instrument/jars/excalibur-instrument-mgr-api-2.1.jar"/>
-        <get dest="${libdir}/excalibur-instrument-mgr-impl-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-instrument/jars/excalibur-instrument-mgr-impl-2.1.jar"/>
-        <get dest="${libdir}/excalibur-logger-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-logger/jars/excalibur-logger-2.1.jar"/>
-        <get dest="${libdir}/excalibur-pool-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-pool/jars/excalibur-pool-api-2.1.jar"/>
-        <get dest="${libdir}/excalibur-pool-impl-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-pool/jars/excalibur-pool-impl-2.1.jar"/>
-        <get dest="${libdir}/excalibur-pool-instrumented-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-pool/jars/excalibur-pool-instrumented-2.1.jar"/>
-        <get dest="${libdir}/excalibur-sourceresolve-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-sourceresolve/jars/excalibur-sourceresolve-2.1.jar"/>
-        <get dest="${libdir}/excalibur-store-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-store/jars/excalibur-store-2.1.jar"/>
-        <get dest="${libdir}/excalibur-xmlutil-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-xmlutil/jars/excalibur-xmlutil-2.1.jar"/>
+        <get dest="${libdir}/commons-httpclient-3.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar"/>
+        <get dest="${libdir}/commons-jxpath-1.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-jxpath/commons-jxpath/1.2/commons-jxpath-1.2.jar"/>
+        <get dest="${libdir}/commons-lang-2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-lang/commons-lang/2.2/commons-lang-2.2.jar"/>
+        <get dest="${libdir}/concurrent-1.3.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/concurrent/concurrent/1.3.4/concurrent-1.3.4.jar"/>
+        <get dest="${libdir}/ehcache-1.2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/net/sf/ehcache/ehcache/1.2.2/ehcache-1.2.2.jar"/>
+        <get dest="${libdir}/excalibur-component-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-component/excalibur-component/2.1/excalibur-component-2.1.jar"/>
+        <get dest="${libdir}/excalibur-datasource-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-datasource/excalibur-datasource/2.1/excalibur-datasource-2.1.jar"/>
+        <get dest="${libdir}/excalibur-instrument-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-instrument/excalibur-instrument-api/2.1/excalibur-instrument-api-2.1.jar"/>
+        <get dest="${libdir}/excalibur-instrument-mgr-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-instrument/excalibur-instrument-mgr-api/2.1/excalibur-instrument-mgr-api-2.1.jar"/>
+        <get dest="${libdir}/excalibur-instrument-mgr-impl-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-instrument/excalibur-instrument-mgr-impl/2.1/excalibur-instrument-mgr-impl-2.1.jar"/>
+        <get dest="${libdir}/excalibur-logger-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-logger/excalibur-logger/2.1/excalibur-logger-2.1.jar"/>
+        <get dest="${libdir}/excalibur-pool-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-pool/excalibur-pool-api/2.1/excalibur-pool-api-2.1.jar"/>
+        <get dest="${libdir}/excalibur-pool-impl-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-pool/excalibur-pool-impl/2.1/excalibur-pool-impl-2.1.jar"/>
+        <get dest="${libdir}/excalibur-pool-instrumented-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-pool/excalibur-pool-instrumented/2.1/excalibur-pool-instrumented-2.1.jar"/>
+        <get dest="${libdir}/excalibur-sourceresolve-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-sourceresolve/excalibur-sourceresolve/2.1/excalibur-sourceresolve-2.1.jar"/>
+        <get dest="${libdir}/excalibur-store-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-store/excalibur-store/2.1/excalibur-store-2.1.jar"/>
+        <get dest="${libdir}/excalibur-xmlutil-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-xmlutil/excalibur-xmlutil/2.1/excalibur-xmlutil-2.1.jar"/>
         <get dest="${libdir}/eresources-model-1.1.6.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/eresources-model/1.1.6/eresources-model-1.1.6.jar"/>
-        <get dest="${libdir}/googleapi-0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/googleapi/jars/googleapi-0.jar"/>
-        <get dest="${libdir}/irt-UNKNOWN.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/irt/jars/irt-UNKNOWN.jar"/>
-        <get dest="${libdir}/jakarta-regexp-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/jakarta-regexp/jars/jakarta-regexp-1.4.jar"/>
-        <get dest="${libdir}/log4j-1.2.15.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/log4j/jars/log4j-1.2.15.jar"/>
-        <get dest="${libdir}/mail-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax.mail/jars/mail-1.4.jar"/>
-        <get dest="${libdir}/nekohtml-0.9.5.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/nekohtml/jars/nekohtml-0.9.5.jar"/>
-        <get dest="${libdir}/querymap-1.0.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/querymap/jars/querymap-1.0.3.jar"/>
-        <get dest="${libdir}/servlet-api-2.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax.servlet/jars/servlet-api-2.4.jar"/>
+        <get dest="${libdir}/googleapi-UNKNOWN.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/com/google/googleapi/UNKNOWN/googleapi-UNKNOWN.jar"/>
+        <get dest="${libdir}/irt-UNKNOWN.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/irt/irt/UNKNOWN/irt-UNKNOWN.jar"/>
+        <get dest="${libdir}/jakarta-regexp-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/jakarta-regexp/jakarta-regexp/1.4/jakarta-regexp-1.4.jar"/>
+        <get dest="${libdir}/log4j-1.2.15.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/log4j/log4j/1.2.15/log4j-1.2.15.jar"/>
+        <get dest="${libdir}/mail-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax/mail/mail/1.4/mail-1.4.jar"/>
+        <get dest="${libdir}/nekohtml-1.9.6.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/nekohtml/nekohtml/1.9.6/nekohtml-1.9.6.jar"/>
+        <get dest="${libdir}/querymap-1.0.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/querymap/1.0.3/querymap-1.0.3.jar"/>
+        <get dest="${libdir}/servlet-api-2.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar"/>
         <get dest="${libdir}/saxon-9.0.0.2.j.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/net/sf/saxon/saxon/9.0.0.2.j/saxon-9.0.0.2.j.jar"/>
-        <get dest="${libdir}/soap-2.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/soap/jars/soap-2.3.jar"/>
-        <get dest="${libdir}/spellcheck-1.2.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/spellcheck/jars/spellcheck-1.2.0.jar"/>
-        <get dest="${libdir}/xalan-2.7.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xalan/jars/xalan-2.7.0.jar"/>
-        <get dest="${libdir}/xercesImpl-2.9.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xerces/jars/xercesImpl-2.9.0.jar"/>
-        <get dest="${libdir}/yui-2.4.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/yui/jars/yui-2.4.1.jar"/>
+        <get dest="${libdir}/soap-2.3.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/soap/soap/2.3.1/soap-2.3.1.jar"/>
+        <get dest="${libdir}/spellcheck-1.2.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/spellcheck/1.2.0/spellcheck-1.2.0.jar"/>
+        <get dest="${libdir}/xalan-2.7.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xalan/xalan/2.7.0/xalan-2.7.0.jar"/>
+        <get dest="${libdir}/xercesImpl-2.9.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xerces/xercesImpl/2.9.0/xercesImpl-2.9.0.jar"/>
+        <get dest="${libdir}/yui-2.4.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/yui/yui/2.4.1/yui-2.4.1.jar"/>
     </target>
 </project>
