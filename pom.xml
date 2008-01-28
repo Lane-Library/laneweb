@@ -52,6 +52,16 @@
     <name>Lane Medical Library</name>
     <url>http://lane.stanford.edu/</url>
   </organization>
+  <distributionManagement>
+    <repository>
+      <id>irt-lanelocal</id>
+      <url>scp://irt-lanelocal.stanford.edu/opt/maven-repository</url>
+    </repository>
+    <site>
+      <id>irt-lanelocal</id>
+      <url>scp://irt-lanelocal.stanford.edu/opt/maven-projects/laneweb</url>
+    </site>
+  </distributionManagement>
   <build>
     <filters>
       <filter>project.properties</filter>
