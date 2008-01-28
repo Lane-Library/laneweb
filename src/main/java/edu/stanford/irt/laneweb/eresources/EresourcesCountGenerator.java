@@ -80,11 +80,11 @@ public class EresourcesCountGenerator extends AbstractGenerator {
 
         }
         try {
-            String translatedQuery = this.queryTranslator.translate(query);
+            String translatedQuery = this.queryTranslator.translate(query.replaceAll("'","''"));
             StringBuffer sb = new StringBuffer(COUNT_QUERY_1);
             sb.append(translatedQuery);
             sb.append(COUNT_QUERY_2);
-            this.selectStatementChars = sb.toString().replaceAll("'","''").toCharArray();
+            this.selectStatementChars = sb.toString().toCharArray();
         } catch (Exception e) {
             if (getLogger().isErrorEnabled()) {
                 getLogger().error(e.getMessage(), e);
