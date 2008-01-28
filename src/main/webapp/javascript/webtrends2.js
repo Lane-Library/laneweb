@@ -10,7 +10,7 @@ function webtrendsOnClick(e) {
 		var node = getNode(target);
 		if(node != null)
 		{
-	    	var redirectUrl = webtrendsProcess(node);
+	    	var redirectUrl = webtrendsProcess(node).replace("'","\\'");
 	    	if(redirectUrl   && e.button =="0")//to give some time to send the request for webtrends
 			{
 				var target = node.target;
