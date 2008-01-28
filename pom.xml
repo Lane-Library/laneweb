@@ -63,9 +63,9 @@
     </site>
   </distributionManagement>
   <build>
-    <filters>
+<!--    <filters>
       <filter>project.properties</filter>
-    </filters>
+    </filters>-->
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
