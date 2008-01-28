@@ -46,7 +46,7 @@
     </developer>
   </developers>
   <scm>
-    <connection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</connection>
+    <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
   </scm>
   <organization>
     <name>Lane Medical Library</name>
@@ -553,7 +553,7 @@
     <dependency>
       <groupId>edu.stanford.irt</groupId>
       <artifactId>spellcheck</artifactId>
-      <version>1.2.1-SNAPSHOT</version>
+      <version>1.2.1</version>
       <scope>compile</scope>
       <exclusions>
         <exclusion>
