@@ -84,7 +84,7 @@ public class EresourcesCountGenerator extends AbstractGenerator {
             StringBuffer sb = new StringBuffer(COUNT_QUERY_1);
             sb.append(translatedQuery);
             sb.append(COUNT_QUERY_2);
-            this.selectStatementChars = sb.toString().toCharArray();
+            this.selectStatementChars = sb.toString().replaceAll("'","''").toCharArray();
         } catch (Exception e) {
             if (getLogger().isErrorEnabled()) {
                 getLogger().error(e.getMessage(), e);
