@@ -31,4 +31,13 @@
             <value>${laneweb.context.eresources.maxWait}</value>
         </parameter>
     </ResourceParams>
+    <Environment name="live-base"
+        type="java.lang.String"
+        value="${laneweb.cocoon.defaults.live-base}"/>
+    <Environment name="stage-base"
+        type="java.lang.String"
+        value="${laneweb.cocoon.defaults.stage-base}"/>
+    <Environment name="search-url"
+        type="java.lang.String"
+        value="${laneweb.cocoon.defaults.search-url}"/>
 </Context>
