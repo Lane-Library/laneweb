@@ -39,7 +39,7 @@
                     <map:aggregate element="doc">
 	                	<map:part src="cocoon://apps/search-proxy"/>
 	                	<map:part src="cocoon:/eresources/count"/>
-	                    <map:part src="{defaults:live-base}/content/search.html"/>
+	                    <map:part src="{naming:java:comp/env/live-base}/content/search.html"/>
 	                    <map:part src="cocoon:/search/{request-param:source}.html"/>
 	                </map:aggregate>
 	                <map:transform type="saxon" src="context://xsl/search.xsl">
@@ -78,18 +78,18 @@
             </map:match>
             <!-- don't cache history searches because keywords will make too many cached items -->
             <map:match type="wildcard" pattern="portals/history/historySearchResults.html">
-                <map:generate type="html" src="{defaults:live-base}/content/portals/history/historySearchResults.html"/>
+                <map:generate type="html" src="{naming:java:comp/env/live-base}/content/portals/history/historySearchResults.html"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="search-templates/**.html">
-                <map:generate type="file" src="{defaults:live-base}/content/search/{1}.html"/>
+                <map:generate type="file" src="{naming:java:comp/env/live-base}/content/search/{1}.html"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
             <map:match type="regex" pattern="^(announcement|error|sitemap|portals/otherportals)\.html$">
-                <map:generate type="html" src="{defaults:live-base}/content/{1}.html"/>
+                <map:generate type="html" src="{naming:java:comp/env/live-base}/content/{1}.html"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="lane-faq/lane-faq-all.html">
@@ -119,33 +119,33 @@
                     <map:part src="cocoon:/search-templates/peds.html"/>
                     <map:part src="cocoon:/search-templates/research.html"/>
                     <map:part src="cocoon:/search-templates/history.html"/>
-                    <map:part src="{defaults:live-base}/content/portals/anesthesia.html"/>
-                    <map:part src="{defaults:live-base}/content/portals/cardiology.html"/>
-                    <map:part src="{defaults:live-base}/content/portals/hematology.html"/>
-                    <map:part src="{defaults:live-base}/content/portals/internal-medicine.html"/>
-                    <map:part src="{defaults:live-base}/content/portals/lpch-cerner.html"/>
+                    <map:part src="{naming:java:comp/env/live-base}/content/portals/anesthesia.html"/>
+                    <map:part src="{naming:java:comp/env/live-base}/content/portals/cardiology.html"/>
+                    <map:part src="{naming:java:comp/env/live-base}/content/portals/hematology.html"/>
+                    <map:part src="{naming:java:comp/env/live-base}/content/portals/internal-medicine.html"/>
+                    <map:part src="{naming:java:comp/env/live-base}/content/portals/lpch-cerner.html"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="templates/**.xml">
-                <map:generate type="file" src="{defaults:live-base}/resources/templates/{1}.xml"/>
+                <map:generate type="file" src="{naming:java:comp/env/live-base}/resources/templates/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!--<map:match type="wildcard" pattern="shc/**">
                 <map:select type="resource-exists">
-                    <map:when test="{defaults:live-base}/content/portals/{1}">
-                        <map:generate type="html" src="{defaults:live-base}/content/portals/{1}"/>
+                    <map:when test="{naming:java:comp/env/live-base}/content/portals/{1}">
+                        <map:generate type="html" src="{naming:java:comp/env/live-base}/content/portals/{1}"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="html" src="{defaults:live-base}/content/portals/internal-medicine.html"/>
+                        <map:generate type="html" src="{naming:java:comp/env/live-base}/content/portals/internal-medicine.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>-->
             <map:match type="wildcard" pattern="**">
-                <map:generate type="html" src="{defaults:live-base}/content/{1}"/>
+                <map:generate type="html" src="{naming:java:comp/env/live-base}/content/{1}"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>

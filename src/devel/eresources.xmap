@@ -69,7 +69,7 @@
                         <map:generate src="resources/sql/ezproxy-servers.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate src="{defaults:live-base}/resources/sql/ezproxy-servers.xml"/>
+                        <map:generate src="{naming:java:comp/env/live-base}/resources/sql/ezproxy-servers.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="sql">
@@ -91,7 +91,7 @@
                         <map:generate type="file" src="resources/sql/linkscan.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="{defaults:live-base}/resources/sql/linkscan.xml"/>
+                        <map:generate type="file" src="{naming:java:comp/env/live-base}/resources/sql/linkscan.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="sql">
@@ -113,7 +113,7 @@
                         <map:generate type="file" src="resources/sql/extensions-suggest.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="{defaults:live-base}/resources/sql/extensions-suggest.xml"/>
+                        <map:generate type="file" src="{naming:java:comp/env/live-base}/resources/sql/extensions-suggest.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="sql">

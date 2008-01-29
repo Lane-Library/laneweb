@@ -5,11 +5,11 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
            	<map:match type="wildcard" pattern="describe-proxy">
-	           <map:generate src="{defaults:search-url}/describe?xml=true"/>
+	           <map:generate src="{naming:search-url}/describe?xml=true"/>
 	          	<map:serialize type="xml"/>
 	        </map:match>  
 			 <map:match type="wildcard" pattern="search-proxy">
-	          <map:generate type="search-proxy" src="{defaults:search-url}/search"/>
+	          <map:generate type="search-proxy" src="{naming:search-url}/search"/>
     		    <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
             		<map:parameter name="context" value="{request:contextPath}"/>
             		<map:parameter name="sunetid" value="{laneweb:sunetid}"/>
@@ -45,8 +45,8 @@
                     <map:generate type="querymap">
                         <map:parameter name="query" value="{request-param:q}"/>
                         <map:parameter name="abstract-count" value="100"/>
-                        <map:parameter name="resource-maps" value="{defaults:live-base}/resources/querymap/resource-maps.xml"/>
-                        <map:parameter name="descriptor-weights" value="{defaults:live-base}/resources/querymap/descriptor-weights.xml"/>
+                        <map:parameter name="resource-maps" value="{naming:java:comp/env/live-base}/resources/querymap/resource-maps.xml"/>
+                        <map:parameter name="descriptor-weights" value="{naming:java:comp/env/live-base}/resources/querymap/descriptor-weights.xml"/>
                     </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>

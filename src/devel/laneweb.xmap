@@ -30,7 +30,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:generate type="file"
-                            src="{defaults:live-base}/content/cookiesFetch.html"/>
+                            src="{naming:java:comp/env/live-base}/content/cookiesFetch.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:select type="resource-exists">
@@ -161,7 +161,7 @@
                         <map:generate type="file" src="content/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="{defaults:live-base}/content/{1}.xml"/>
+                        <map:generate type="file" src="{naming:java:comp/env/live-base}/content/{1}.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

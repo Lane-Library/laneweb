@@ -5,7 +5,7 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="eresources/**">
-                <map:mount uri-prefix="eresources" check-reload="yes" src="{defaults:stage-base}/eresources.xmap"/>
+                <map:mount uri-prefix="eresources" check-reload="yes" src="{naming:java:comp/env/stage-base}/eresources.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="search.html">
                 <map:match type="regex-parameter" pattern="^(clinical|peds|research|pharmacy|history|test)$">
@@ -25,7 +25,7 @@
                     <map:parameter name="parameter-name" value="source"/>
 	                <map:aggregate element="doc">
 	                    <map:part src="cocoon://stage/apps/search-proxy?q={urlencode:{request-param:keywords}}"/>
-	                    <map:part src="{defaults:stage-base}/content{request-param:source}"/>
+	                    <map:part src="{naming:java:comp/env/stage-base}/content{request-param:source}"/>
 	                </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/metasearch.xsl">
@@ -39,7 +39,7 @@
 	                <map:aggregate element="doc">
                         <map:part src="cocoon://stage/apps/search-proxy?q={urlencode:{request-param:keywords}}"/>
                         <map:part src="cocoon:/eresources/count"/>
-                        <map:part src="{defaults:stage-base}/content/search.html"/>
+                        <map:part src="{naming:java:comp/env/stage-base}/content/search.html"/>
                         <map:part src="cocoon:/search/{request-param:source}.html"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/search.xsl">
@@ -72,7 +72,7 @@
                 <map:serialize type="text"/>
             </map:match>
              <map:match type="wildcard" pattern="search-templates/**.html">
-                <map:generate type="file" src="{defaults:stage-base}/content/search/{1}.html"/>
+                <map:generate type="file" src="{naming:java:comp/env/stage-base}/content/search/{1}.html"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="sfx">
@@ -113,21 +113,21 @@
                     <map:part src="cocoon:/search-templates/peds.html"/>
                     <map:part src="cocoon:/search-templates/research.html"/>
                     <map:part src="cocoon:/search-templates/history.html"/>
-                    <map:part src="{defaults:stage-base}/content/portals/anesthesia.html"/>
-                    <map:part src="{defaults:stage-base}/content/portals/cardiology.html"/>
-                    <map:part src="{defaults:stage-base}/content/portals/hematology.html"/>
-                    <map:part src="{defaults:stage-base}/content/portals/internal-medicine.html"/>
-                    <map:part src="{defaults:stage-base}/content/portals/lpch-cerner.html"/>
+                    <map:part src="{naming:java:comp/env/stage-base}/content/portals/anesthesia.html"/>
+                    <map:part src="{naming:java:comp/env/stage-base}/content/portals/cardiology.html"/>
+                    <map:part src="{naming:java:comp/env/stage-base}/content/portals/hematology.html"/>
+                    <map:part src="{naming:java:comp/env/stage-base}/content/portals/internal-medicine.html"/>
+                    <map:part src="{naming:java:comp/env/stage-base}/content/portals/lpch-cerner.html"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="templates/**.xml">
-                <map:generate type="file" src="{defaults:stage-base}/resources/templates/{1}.xml"/>
+                <map:generate type="file" src="{naming:java:comp/env/stage-base}/resources/templates/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="**">
-                <map:generate type="html" src="{defaults:stage-base}/content/{1}"/>
+                <map:generate type="html" src="{naming:java:comp/env/stage-base}/content/{1}"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>

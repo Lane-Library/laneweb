@@ -53,7 +53,7 @@
                         <map:otherwise>
                             <map:aggregate element="doc">
                                 <map:part src="cocoon://apps/search-proxy?q={urlencode:{request-param:keywords}}"/>
-                                <map:part src="{defaults:live-base}/content{request-param:source}"/>
+                                <map:part src="{naming:java:comp/env/live-base}/content{request-param:source}"/>
                             </map:aggregate>
                         </map:otherwise>
                     </map:select>
@@ -87,7 +87,7 @@
                             <map:aggregate element="doc">
                                 <map:part src="cocoon://apps/search-proxy?q={urlencode:{request-param:keywords}}"/>
                                 <map:part src="cocoon:/eresources/count"/>
-                                <map:part src="{defaults:live-base}/content/search.html"/>
+                                <map:part src="{naming:java:comp/env/live-base}/content/search.html"/>
                                 <map:part src="cocoon:/search/{request-param:source}.html"/>
                             </map:aggregate>
                         </map:otherwise>
@@ -251,7 +251,7 @@
                         <map:generate type="file" src="content/search/{1}.html"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="{defaults:live-base}/content/search/{1}.html"/>
+                        <map:generate type="file" src="{naming:java:comp/env/live-base}/content/search/{1}.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -265,7 +265,7 @@
                         <map:generate type="file" src="resources/templates/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="{defaults:live-base}/resources/templates/{1}.xml"/>
+                        <map:generate type="file" src="{naming:java:comp/env/live-base}/resources/templates/{1}.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -276,7 +276,7 @@
                         <map:generate type="html" src="content/{1}"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="html" src="{defaults:live-base}/content/{1}"/>
+                        <map:generate type="html" src="{naming:java:comp/env/live-base}/content/{1}"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="xinclude"/>

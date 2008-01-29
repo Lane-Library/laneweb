@@ -33,6 +33,7 @@
       <input-module name="laneweb"/>
       <input-module name="defaults"/>
     </component-instance>
+    <component-instance logger="core.modules.input" name="naming"       class="org.apache.cocoon.components.modules.input.NamingInputModule"/>
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
       <values>
         <template>irt2</template>
@@ -41,7 +42,6 @@
         <stage-base>${laneweb.cocoon.defaults.stage-base}</stage-base>
       </values>
     </component-instance>
-    <component-instance logger="core.modules.input" name="session-attr"  class="org.apache.cocoon.components.modules.input.SessionAttributeModule"/>
   </input-modules> 
     
   <xml-parser class="org.apache.excalibur.xml.impl.JaxpParser" logger="core.xml-parser" pool-max="32">

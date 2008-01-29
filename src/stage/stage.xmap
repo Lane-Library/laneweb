@@ -5,25 +5,25 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match type="wildcard" pattern="TMP**">
-                <map:read src="{defaults:stage-base}/content/TMP{1}" mime-type="text/html"/>
+                <map:read src="{naming:java:comp/env/stage-base}/content/TMP{1}" mime-type="text/html"/>
             </map:match>
             <map:match type="wildcard" pattern="javascript/yui/**">
                 <map:mount uri-prefix="javascript/yui" check-reload="no" src="context://yui.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="extensions/**">
-                <map:mount uri-prefix="extensions" check-reload="yes" src="{defaults:stage-base}/extensions.xmap"/>
+                <map:mount uri-prefix="extensions" check-reload="yes" src="{naming:java:comp/env/stage-base}/extensions.xmap"/>
             </map:match>
 			<map:match type="wildcard" pattern="tobacco/**">
 			    <map:mount uri-prefix="tobacco" check-reload="yes" src="tobacco.xmap"/>
 			</map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv|avi|zip)$">
-                <map:mount uri-prefix="" check-reload="yes" src="{defaults:stage-base}/static.xmap"/>
+                <map:mount uri-prefix="" check-reload="yes" src="{naming:java:comp/env/stage-base}/static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="eresources/**">
-                <map:mount uri-prefix="eresources" check-reload="yes" src="{defaults:stage-base}/eresources.xmap"/>
+                <map:mount uri-prefix="eresources" check-reload="yes" src="{naming:java:comp/env/stage-base}/eresources.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="content/**">
-                <map:mount uri-prefix="content" check-reload="yes" src="{defaults:stage-base}/content.xmap"/>
+                <map:mount uri-prefix="content" check-reload="yes" src="{naming:java:comp/env/stage-base}/content.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="apps/**">
                 <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
@@ -36,10 +36,10 @@
             </map:match>
              <map:match pattern="javascriptLogger">
                 <map:act type="javascript-logger"/>
-                <map:read type="resource" src="{defaults:live-base}/resources/images/templates/default/spacer.gif" mime-type="image/gif"/>
+                <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/templates/default/spacer.gif" mime-type="image/gif"/>
             </map:match>
             <map:match type="wildcard" pattern="cookiesFetch.html">
-                <map:generate type="file" src="{defaults:stage-base}/content/cookiesFetch.html"/>
+                <map:generate type="file" src="{naming:java:comp/env/stage-base}/content/cookiesFetch.html"/>
                 <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
@@ -122,7 +122,7 @@
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match type="wildcard" pattern="**.xml">
-                <map:generate type="file" src="{defaults:stage-base}/content/{1}.xml"/>
+                <map:generate type="file" src="{naming:java:comp/env/stage-base}/content/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match type="wildcard" pattern="**">

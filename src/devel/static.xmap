@@ -10,7 +10,7 @@
                         <map:read type="resource" src="resources/images/{1}.gif" mime-type="image/gif"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/resources/images/{1}.gif" mime-type="image/gif"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.gif" mime-type="image/gif"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -22,7 +22,7 @@
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="txt-resource" src="{defaults:live-base}/resources/css/{1}.css">
+                        <map:read type="txt-resource" src="{naming:java:comp/env/live-base}/resources/css/{1}.css">
                             <map:parameter name="path" value="{request:contextPath}/your-sunet-id"/>
                         </map:read>
                     </map:otherwise>
@@ -50,7 +50,7 @@
                         <map:read type="resource" src="resources/images/{1}.jpg" mime-type="image/jpeg"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/resources/images/{1}.jpg" mime-type="image/jpeg"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.jpg" mime-type="image/jpeg"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -60,7 +60,7 @@
                         <map:read type="resource" src="resources/images/{1}.jpg" mime-type="image/png"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/resources/images/{1}.jpg" mime-type="image/png"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.jpg" mime-type="image/png"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -73,7 +73,7 @@
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/resources/pdf/{1}.pdf"
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/pdf/{1}.pdf"
                             mime-type="application/pdf">
                             <map:parameter name="byte-ranges" value="false"/>
                         </map:read>
@@ -86,7 +86,7 @@
                         <map:read type="resource" src="content/{1}.gif" mime-type="image/gif"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.gif" mime-type="image/gif"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.gif" mime-type="image/gif"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -96,7 +96,7 @@
                         <map:read type="resource" src="content/{1}.jpg" mime-type="image/jpeg"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.jpg" mime-type="image/jpeg"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.jpg" mime-type="image/jpeg"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -108,7 +108,7 @@
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.pdf" mime-type="application/pdf">
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.pdf" mime-type="application/pdf">
                             <map:parameter name="byte-ranges" value="false"/>
                         </map:read>
                     </map:otherwise>
@@ -120,7 +120,7 @@
                         <map:read type="resource" src="content/{1}.png" mime-type="image/png"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.png" mime-type="image/png"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.png" mime-type="image/png"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -130,7 +130,7 @@
                         <map:read type="resource" src="content/{1}.eps" mime-type="application/postscript"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.eps" mime-type="application/postscript"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.eps" mime-type="application/postscript"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -140,7 +140,7 @@
                         <map:read type="resource" src="content/{1}.ai" mime-type="application/illustrator"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.ai" mime-type="application/illustrator"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.ai" mime-type="application/illustrator"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -150,7 +150,7 @@
                         <map:read type="resource" src="content/{1}.psd" mime-type="application/photoshop"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.psd" mime-type="application/photoshop"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.psd" mime-type="application/photoshop"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -160,7 +160,7 @@
                         <map:read type="resource" src="content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -178,7 +178,7 @@
                         <map:read type="resource" src="content/{1}.ram" mime-type="audio/x-pn-realaudio"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.ram" mime-type="audio/x-pn-realaudio"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.ram" mime-type="audio/x-pn-realaudio"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -188,7 +188,7 @@
                         <map:read type="resource" src="content/{1}.smil" mime-type="application/smil"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.smil" mime-type="application/smil"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.smil" mime-type="application/smil"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -198,7 +198,7 @@
                         <map:read type="resource" src="content/{1}.xls" mime-type="application/vnd.ms-excel"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.xls" mime-type="application/vnd.ms-excel"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.xls" mime-type="application/vnd.ms-excel"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -208,7 +208,7 @@
                         <map:read type="resource" src="content/{1}.doc" mime-type="application/msword"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.doc" mime-type="application/msword"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.doc" mime-type="application/msword"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -218,7 +218,7 @@
                         <map:read type="resource" src="content/{1}.dot" mime-type="application/msword"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.dot" mime-type="application/msword"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.dot" mime-type="application/msword"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -228,7 +228,7 @@
                         <map:read type="resource" src="resources/flash/{1}.swf" mime-type="application/x-shockwave-flash"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/resources/flash/{1}.swf" mime-type="application/x-shockwave-flash"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/flash/{1}.swf" mime-type="application/x-shockwave-flash"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -238,7 +238,7 @@
                         <map:read type="resource" src="content/{1}.swf" mime-type="application/x-shockwave-flash"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.swf" mime-type="application/x-shockwave-flash"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.swf" mime-type="application/x-shockwave-flash"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -248,7 +248,7 @@
                         <map:read type="resource" src="content/{1}.wmv" mime-type="audio/x-ms-wmv"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.wmv" mime-type="audio/x-ms-wmv"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.wmv" mime-type="audio/x-ms-wmv"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -258,7 +258,7 @@
                         <map:read type="resource" src="content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -268,7 +268,7 @@
                         <map:read type="resource" src="content/{1}.avi" mime-type="video/x-msvideo"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.avi" mime-type="video/x-msvideo"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.avi" mime-type="video/x-msvideo"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -278,7 +278,7 @@
                         <map:read type="resource" src="content/{1}.zip" mime-type="application/zip"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{defaults:live-base}/content/{1}.zip" mime-type="application/zip"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.zip" mime-type="application/zip"/>
                     </map:otherwise>
                 </map:select>
             </map:match>

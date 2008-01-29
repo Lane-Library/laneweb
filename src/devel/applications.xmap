@@ -5,7 +5,7 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
         	<map:match type="wildcard" pattern="search-proxy">
-	               <map:generate type="search-proxy" src="{defaults:search-url}/search"/>
+	               <map:generate type="search-proxy" src="{naming:java:comp/env/search-url}/search"/>
 	                <map:select type="resource-exists">
     				<map:when test="xsl/search-proxy.xsl">
                         <map:transform type="saxon" src="xsl/search-proxy.xsl">
@@ -81,8 +81,8 @@
 	               	    <map:generate type="querymap">
 	                        <map:parameter name="query" value="{request-param:q}"/>
 	                        <map:parameter name="abstract-count" value="100"/>
-	                        <map:parameter name="resource-maps" value="{defaults:live-base}/resources/querymap/resource-maps.xml"/>
-	                        <map:parameter name="descriptor-weights" value="{defaults:live-base}/resources/querymap/descriptor-weights.xml"/>
+	                        <map:parameter name="resource-maps" value="{naming:java:comp/env/live-base}/resources/querymap/resource-maps.xml"/>
+	                        <map:parameter name="descriptor-weights" value="{naming:java:comp/env/live-base}/resources/querymap/descriptor-weights.xml"/>
 	                    </map:generate>
                      </map:otherwise>
                     </map:select>  
