@@ -5,11 +5,11 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
            	<map:match type="wildcard" pattern="describe-proxy">
-	           <map:generate src="{naming:search-url}/describe?xml=true"/>
+           	    <map:generate src="{naming:java:comp/env/search-url}/describe?xml=true"/>
 	          	<map:serialize type="xml"/>
 	        </map:match>  
 			 <map:match type="wildcard" pattern="search-proxy">
-	          <map:generate type="search-proxy" src="{naming:search-url}/search"/>
+			     <map:generate type="search-proxy" src="{naming:java:comp/env/search-url}/search"/>
     		    <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
             		<map:parameter name="context" value="{request:contextPath}"/>
             		<map:parameter name="sunetid" value="{laneweb:sunetid}"/>
