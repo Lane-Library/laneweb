@@ -53,5 +53,17 @@ public class UserInfo {
     public void setTicket(final Ticket ticket) {
         this.ticket = ticket;
     }
+    
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("affiliation=").append(this.affiliation).append(' ');
+        sb.append("ldapPerson=").append(this.ldapPerson).append(' ');
+        sb.append("proxyLinks=").append(this.proxyLinks).append(' ');
+        sb.append("sunetId=").append(this.sunetId).append(' ');
+        sb.append("ticket=").append(this.ticket);
+        return sb.toString();
+        
+    }
 
 }

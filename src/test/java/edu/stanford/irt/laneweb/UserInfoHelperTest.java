@@ -19,12 +19,14 @@ public class UserInfoHelperTest extends TestCase {
     private String ip;
 
     private String sunetid;
+    
+    private String ezproxyKey = "boguskey";
 
     private LdapClient ldapClient;
 
     private Session session;
 
-    private UserInfoHelper userInfoHelper;
+    private UserInfoHelperImpl userInfoHelper;
 
     @Override
     protected void setUp() throws Exception {
@@ -58,7 +60,7 @@ public class UserInfoHelperTest extends TestCase {
 
         this.userInfoHelper = new UserInfoHelperImpl();
         this.userInfoHelper.setLdapClient(this.ldapClient);
-
+        this.userInfoHelper.setEzproxyKey(this.ezproxyKey);
     }
 
     public void testGetUserInfo() {

@@ -9,8 +9,6 @@ package edu.stanford.irt.laneweb;
  */
 public interface LanewebConstants {
 
-    public static final String EZPROXY_KEY = "L0nePr0xyP0SSK0y";
-
     public static final String USER_INFO = "userInfo";
 
     public static final String PROXY_LINKS = "proxy-links";

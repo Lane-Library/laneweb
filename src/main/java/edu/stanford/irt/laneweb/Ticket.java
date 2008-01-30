@@ -17,14 +17,17 @@ public class Ticket {
 
     private String stringValue;
 
-    public Ticket(final String user) {
-        if (user == null) {
+    public Ticket(final String user, final String ezyproxyKey) {
+        if (null == user) {
             throw new IllegalArgumentException("null user");
+        }
+        if (null == ezyproxyKey) {
+            throw new IllegalArgumentException("null ezproxyKey");
         }
         Date now = new Date();
         String packet = "$u" + ((int) (now.getTime() / 1000));
         try {
-            this.stringValue = URLEncoder.encode(getKeyedDigest(LanewebConstants.EZPROXY_KEY + user + packet) + packet, "UTF-8");
+            this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + user + packet) + packet, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             // won't happen
             throw new RuntimeException(e);

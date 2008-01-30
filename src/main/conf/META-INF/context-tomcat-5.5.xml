@@ -18,4 +18,7 @@
     <Environment name="search-url"
         type="java.lang.String"
         value="${laneweb.cocoon.defaults.search-url}"/>
+    <Environment name="ezproxy-key"
+        type="java.lang.String"
+        value="${laneweb.cocoon.laneweb.ezproxy-key}"/>
 </Context>

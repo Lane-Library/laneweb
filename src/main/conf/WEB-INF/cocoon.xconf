@@ -22,7 +22,6 @@
         <template url="^(stage/|)100years/index\.html" value="100years_index"/>
         <template url="^(stage/|)100years/\S+" value="100years"/>
         <template url="^(stage/|)services/spaces/reserve/\S+" value="none"/>
-	    <ezproxy-key>${laneweb.cocoon.laneweb.ezproxy-key}</ezproxy-key>
     </component-instance>
     <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
     <component-instance logger="core.modules.input" name="request-uri" class="org.apache.cocoon.components.modules.input.RequestURIModule"/>

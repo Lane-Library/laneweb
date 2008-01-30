@@ -6,8 +6,6 @@ public interface UserInfoHelper {
 
     public static final String ROLE = UserInfoHelper.class.getName();
 
-    public UserInfo getUserInfo(Request request);
-
-    public void setLdapClient(LdapClient ldapClient);
+    UserInfo getUserInfo(Request request);
 
 }

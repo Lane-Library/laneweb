@@ -1,5 +1,9 @@
 package edu.stanford.irt.laneweb;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.thread.ThreadSafe;
@@ -8,7 +12,9 @@ import org.apache.cocoon.environment.Session;
 
 public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHelper, ThreadSafe, Initializable {
 
-    LdapClient ldapClient;
+    private LdapClient ldapClient;
+    
+    private String ezproxyKey;
 
     public UserInfo getUserInfo(final Request request) {
 
@@ -49,20 +55,26 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHe
                 userInfo.setLdapPerson(this.ldapClient.getLdapPerson(requestSunetId));
             }
         }
-        if (userInfo.getSunetId() != null) {
-            userInfo.setTicket(new Ticket(userInfo.getSunetId()));
+        if (null != userInfo.getSunetId() && null != this.ezproxyKey) {
+            userInfo.setTicket(new Ticket(userInfo.getSunetId(), this.ezproxyKey));
         }
         if (null != request.getParameter(LanewebConstants.PROXY_LINKS)) {
             userInfo.setProxyLinks(new Boolean(request.getParameter(LanewebConstants.PROXY_LINKS)));
         }
     }
 
-    public void initialize() throws Exception {
-        this.ldapClient = new LdapClientImpl();
+    public void initialize() throws NamingException {
+        setLdapClient(new LdapClientImpl());
+        Context context = new InitialContext();
+        this.ezproxyKey = (String) context.lookup("java:comp/env/ezproxy-key");
     }
 
-    public void setLdapClient(final LdapClient ldapClient) {
+    void setLdapClient(final LdapClient ldapClient) {
         this.ldapClient = ldapClient;
+    }
+    
+    void setEzproxyKey(final String ezproxyKey) {
+        this.ezproxyKey = ezproxyKey;
     }
 
 }
