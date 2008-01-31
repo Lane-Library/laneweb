@@ -11,14 +11,20 @@
         maxWait="${laneweb.context.eresources.maxWait}"/>
     <Environment name="live-base"
         type="java.lang.String"
-        value="${laneweb.cocoon.defaults.live-base}"/>
+        value="${laneweb.context.environment.live-base}"/>
     <Environment name="stage-base"
         type="java.lang.String"
-        value="${laneweb.cocoon.defaults.stage-base}"/>
+        value="${laneweb.context.environment.stage-base}"/>
     <Environment name="search-url"
         type="java.lang.String"
-        value="${laneweb.cocoon.defaults.search-url}"/>
+        value="${laneweb.context.environment.search-url}"/>
     <Environment name="ezproxy-key"
         type="java.lang.String"
-        value="${laneweb.cocoon.laneweb.ezproxy-key}"/>
+        value="${laneweb.context.environment.ezproxy-key}"/>
+    <Environment name="webdash-key"
+        type="java.lang.String"
+        value="${laneweb.context.environment.webdash-key}"/>
+    <Environment name="google-key"
+        type="java.lang.String"
+        value="${laneweb.context.environment.google-key}"/>
 </Context>
