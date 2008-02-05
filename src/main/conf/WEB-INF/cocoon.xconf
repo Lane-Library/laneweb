@@ -148,7 +148,6 @@
   <component logger="core.spell-checker"
       role="edu.stanford.irt.spell.SpellChecker"
       class="edu.stanford.irt.laneweb.spellcheck.SpellChecker">
-    <parameter name="google-key" value="${laneweb.cocoon.spellchecker.google-key}"/>
   </component>
   
   <component logger="core.httpclient-manager"
