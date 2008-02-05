@@ -176,8 +176,8 @@ Result.prototype.setTabCount = function(count) {
 }
 
 
-function activeTabStateChangeHandler (tab) {
-	var tab = document.getElementById(tab + "Tab");
+function activeTabStateChangeHandler (tabId) {
+	var tab = document.getElementById(tabId + "Tab");
 	if( tab.result._state == 'initialized' ){
 		tab.result.getContent();
 	}
@@ -187,6 +187,15 @@ function activeTabStateChangeHandler (tab) {
 	else{
 	    tab.result._state = 'initialized';
 	}
+
+    var searchSelect = document.getElementById('searchSelect');
+    for(var i  = 0; i<searchSelect.options.length; i++){
+        if(searchSelect.options[i].value == tabId){
+            searchSelect.selectedIndex = i;
+            searchSelect.change();
+            break;
+        }
+    }
 }
 
 function webtrends(tab)
