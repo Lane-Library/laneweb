@@ -170,6 +170,14 @@ function toggleZeros(e)
     for(var i = 0; i<zeroResources.length; i++){
         YAHOO.util.Dom.setStyle(zeroResources[i],'display',display);
     }
+
+    // toggle h3 header as well if all children in searchCat are zeros
+    var searchCats = YAHOO.util.Dom.getElementsByClassName('searchCategory');
+    for(var y = 0; y<searchCats.length; y++){
+        if(YAHOO.util.Dom.getElementsByClassName('zero','',searchCats[y]).length ==  searchCats[y].getElementsByTagName('li').length ){
+            YAHOO.util.Dom.setStyle(YAHOO.util.Dom.getFirstChild(searchCats[y]),'display',display);
+        }
+    }
 }
 
 
