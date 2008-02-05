@@ -4,7 +4,6 @@ import edu.stanford.irt.search.MetaSearchManager;
 
 
 import org.apache.avalon.framework.thread.ThreadSafe;
-import org.apache.commons.httpclient.HttpClient;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
