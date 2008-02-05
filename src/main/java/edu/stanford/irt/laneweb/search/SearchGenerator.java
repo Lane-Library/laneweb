@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
+import edu.stanford.irt.search.impl.CachedMetaSearchManagerImpl;
 import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
 import edu.stanford.irt.search.util.SAXResult;
@@ -13,9 +14,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
-
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
 
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
@@ -36,9 +34,7 @@ import org.xml.sax.SAXException;
 public class SearchGenerator extends ServiceableGenerator implements Parameterizable{
 
 	private MetaSearchManager metaSearchManager;
-
-	private CacheManager	  cacheManager;
-
+	
 	private long			  defaultTimeout;
 
 	private String			q;
@@ -60,8 +56,8 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
 		super.service(manager);
 		MetaSearchManagerSource source = (MetaSearchManagerSource) this.manager.lookup(MetaSearchManagerSource.class
 				.getName());
-		this.metaSearchManager = source.getMetaSearchManager();
-		this.cacheManager = source.getCacheManager();
+		this.metaSearchManager = (CachedMetaSearchManagerImpl)source.getMetaSearchManager();
+		
 	}
 
 	@Override
@@ -102,8 +98,10 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
 			q = keywords;
 		}
 
-		if ("y".equalsIgnoreCase(cache) || "all".equalsIgnoreCase(cache))
-			clearCache(cache, q);
+		if ("y".equalsIgnoreCase(cache))
+			((CachedMetaSearchManagerImpl)metaSearchManager).clearCache(keywords);
+		if("all".equalsIgnoreCase(cache))
+			((CachedMetaSearchManagerImpl) metaSearchManager).clearAllCaches();
 
 		Result result = null;
 
@@ -197,17 +195,7 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
 	       xml.toSAX(this.xmlConsumer);
 	    }
 	}
-
-	protected void clearCache(String action, String keywords) {
-		String[] caches = cacheManager.getCacheNames();
-		for (String cacheId : caches) {
-			Cache cache = cacheManager.getCache(cacheId);
-			if ("y".equalsIgnoreCase(action))
-				cache.remove(keywords);
-			else if ("all".equalsIgnoreCase(action))
-				cache.removeAll();
-		}
-	}
-
+	
+	
 	
 }
