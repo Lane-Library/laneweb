@@ -40,7 +40,7 @@
     <xsl:template match="s:engine">
         <div class="engine">
             <h2>  <xsl:value-of select="s:description"/></h2>
-            <h3>Engine Name: <xsl:value-of select="@id"/></h3>
+            <h3>Engine Name: <xsl:value-of select="@s:id"/></h3>
             <table class="engine">
                 <xsl:apply-templates select="s:resource">
                     <xsl:sort select="s:description"/>
@@ -51,9 +51,9 @@
 
     <xsl:template match="s:resource">
       
-        	<tr><td><xsl:value-of select="@id"/> <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg=035a+%28LaneConnex%29+{@id}&amp;Search_Code=CMD*&amp;CNT=10"><img src="/graphics/icons/infoIcon.gif"  border="0"/></a></td> 
+        	<tr><td><xsl:value-of select="@s:id"/> <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;Search_Arg=035a+%28LaneConnex%29+{@id}&amp;Search_Code=CMD*&amp;CNT=10"><img src="/graphics/icons/infoIcon.gif"  border="0"/></a></td> 
  			<td><xsl:call-template name="resource-portals">
-                  <xsl:with-param name="resource" select="@id"/>
+                  <xsl:with-param name="resource" select="@s:id"/>
               </xsl:call-template>
 			</td>
 			<td>

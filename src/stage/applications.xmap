@@ -3,32 +3,38 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
+     <map:generators>
+	        <map:generator name="search" src="edu.stanford.irt.laneweb.search.SearchGenerator">
+	        	 <map:parameter name="defaultTimeout" value="60000"/>
+	        </map:generator>
+	        <map:generator  name="search-describe" src="edu.stanford.irt.laneweb.search.DescribeGenerator"/>
+	  </map:generators>
         <map:pipeline type="noncaching">
-        	<map:match type="wildcard" pattern="describe-proxy">
-	           <map:generate src="{naming:java:comp/env/search-url}/describe?xml=true"/>
+        	<map:match type="wildcard" pattern="describe-search-application">
+	           <map:generate type="search-describe"/>
 	          	<map:serialize type="xml"/>
 	        </map:match>  
-            <map:match type="wildcard" pattern="search-proxy">
-                <map:generate type="search-proxy" src="{naming:java:comp/env/search-url}/search"/>
-                <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
-                    <map:parameter name="context" value="{request:contextPath}"/>
-                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
+			 <map:match type="wildcard" pattern="search-application">
+	          <map:generate type="search"/>
+    		    <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
+            		<map:parameter name="context" value="{request:contextPath}"/>
+            		<map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+            		<map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
                 </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
+    			<map:serialize type="xml"/>
+			 </map:match>  
             <map:match pattern="search/*">
                 <map:match type="wildcard" pattern="search/json">
-	                <map:generate src="cocoon:/search-proxy"/>
+	                <map:generate src="cocoon:/search-application"/>
 	                <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
 	                <map:serialize type="text"/>
 	            </map:match>
                 <map:match type="wildcard" pattern="search/filtered-json">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
-                        <map:part src="cocoon:/search-proxy"/>
+                        <map:part src="cocoon:/search-application"/>
                         <map:part src="cocoon://stage/plain/{request-param:source}"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/content2search.xsl"/>

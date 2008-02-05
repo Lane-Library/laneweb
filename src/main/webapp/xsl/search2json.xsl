@@ -5,10 +5,9 @@
 
 	<xsl:template match="s:search">
 {
-	"id": "<xsl:value-of select="@id"/>",
-	"status": "<xsl:value-of select="@status"/>",
+	"id": "<xsl:value-of select="@s:id"/>",
+	"status": "<xsl:value-of select="@s:status"/>",
 	"query": "<xsl:value-of select="encode-for-uri(s:query)"/>",
-	"spell": "<xsl:value-of select="s:spell"/>",
 	"resources": {
 	<xsl:apply-templates select="//s:resource"/>
 	}
@@ -21,9 +20,9 @@
 				<xsl:value-of select="format-number(s:hits, '###,###')"/>
 			</xsl:if>
 		</xsl:variable>
-		"<xsl:value-of select="@id"/>":
+		"<xsl:value-of select="@s:id"/>":
 		{
-		"status": "<xsl:value-of select="@status"/>",
+		"status": "<xsl:value-of select="@s:status"/>",
 		"url": "<xsl:value-of select="s:url"/>",
 		"hits": "<xsl:value-of select="$hitcount"/>"
 		}

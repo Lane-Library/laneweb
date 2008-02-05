@@ -8,8 +8,6 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import javax.naming.Context;
-import javax.naming.InitialContext;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
@@ -23,20 +21,28 @@ import edu.stanford.irt.directory.LDAPPerson;
 
 public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin, ThreadSafe, Parameterizable, Initializable {
 
-    private String loginUrl;
+    String loginUrl;
 
-    private String registrationUrl;
+    String registrationUrl;
 
-    private String groupName;
+    String groupName;
 
-    private Mac mac;
+    String groupKey;
+
+    Mac mac;
 
     public void initialize() throws Exception {
-        Context context = new InitialContext();
-        String groupKey = (String) context.lookup("java:comp/env/webdash-key");
-        SecretKey key = new SecretKeySpec(groupKey.getBytes(), "HmacSHA1");
-        this.mac = Mac.getInstance(key.getAlgorithm());
-        this.mac.init(key);
+        try {
+            SecretKey key = new SecretKeySpec(this.groupKey.getBytes(), "HmacSHA1");
+            this.mac = Mac.getInstance(key.getAlgorithm());
+            this.mac.init(key);
+        } catch (NoSuchAlgorithmException e) {
+            getLogger().error(e.getMessage(), e);
+        } catch (InvalidKeyException e) {
+            getLogger().error(e.getMessage(), e);
+        } catch (IllegalStateException e) {
+            getLogger().error(e.getMessage(), e);
+        }
     }
 
     public String getEncodedUrl(final LDAPPerson ldapPerson, final Request request) throws UnsupportedEncodingException,
@@ -122,6 +128,7 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
     public void parameterize(final Parameters param) throws ParameterException {
         this.registrationUrl = param.getParameter("webdashRegistrationURL");
         this.loginUrl = param.getParameter("webdashLoginURL");
+        this.groupKey = param.getParameter("groupKey");
         this.groupName = param.getParameter("groupName");
 
     }

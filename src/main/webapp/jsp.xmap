@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
+
+    <map:components>
+      <map:generator name="jsp" label="content" logger="sitemap.generator.jsp" src="org.apache.cocoon.generation.JSPGenerator" />
+    <map:components>
+     <map:readers >
+      <map:reader name="jsp" logger="sitemap.reader.jsp" src="org.apache.cocoon.reading.JSPReader"/>
+     </map:readers>
+    
+    
+    <map:match pattern="*.jsp">
+        <map:generate type="jsp" src="{1}.jsp" />
+        <!-- Make use of servlet services -->
+        <map:serialize type="servletService">
+          <map:parameter name="service" value="servlet:style-default:/service/blocks/dynamic-page2html" />
+        </map:serialize>
+      </map:match>
+    
+</map>

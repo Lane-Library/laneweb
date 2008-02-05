@@ -16,7 +16,7 @@
     </xsl:template>
     
     <xsl:template match="s:resource">
-        <xsl:variable name="id" select="@id"/>
+        <xsl:variable name="id" select="@s:id"/>
         <xsl:if test="/doc/h:html/h:body//h:a[@class='metasearch' and @id = $id]">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()|child::node()"/>
@@ -26,6 +26,5 @@
         
     <xsl:template match="attribute::node()">
         <xsl:copy-of select="self::node()"/>
-    </xsl:template>
-    
+    </xsl:template>    
 </xsl:stylesheet>
