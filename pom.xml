@@ -155,8 +155,8 @@
   </reporting>
   <dependencies>
      <dependency>
+      <groupId>edu.stanford.irt.search</groupId>
       <artifactId>search-spring</artifactId>
-      <groupId>edu.stanford.irt</groupId>
       <version>1.4.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
@@ -263,7 +263,7 @@
     <dependency>
       <groupId>commons-httpclient</groupId>
       <artifactId>commons-httpclient</artifactId>
-      <version>3.1-log4j</version>
+      <version>3.1</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -759,7 +759,7 @@
     <dependency>
       <groupId>edu.stanford.irt</groupId>
       <artifactId>spellcheck</artifactId>
-      <version>1.2.0</version>
+      <version>1.2.2-SNAPSHOT</version>
       <scope>compile</scope>
       <exclusions>
         <exclusion>
