@@ -156,9 +156,6 @@
             <map:match type="wildcard" pattern="eresources/**">
                 <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="jsp/**">
-                <map:mount uri-prefix="content" check-reload="no" src="jsp.xmap"/>
-            </map:match>
             <map:match type="wildcard" pattern="content/**">
                 <map:mount uri-prefix="content" check-reload="no" src="content.xmap"/>
             </map:match>
