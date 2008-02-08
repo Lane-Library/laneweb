@@ -36,9 +36,6 @@
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
       <values>
         <template>irt2</template>
-        <search-url>${laneweb.cocoon.defaults.search-url}</search-url>
-        <live-base>${laneweb.cocoon.defaults.live-base}</live-base>
-        <stage-base>${laneweb.cocoon.defaults.stage-base}</stage-base>
       </values>
     </component-instance>
   </input-modules> 
@@ -52,20 +49,12 @@
     <parameter name="drop-dtd-comments" value="true"/>
   </xml-parser>
   
-  <store logger="core.store">
-     <parameter name="maxobjects" value="${laneweb.cocoon.store.maxobjects}"/>
-    <parameter name="use-cache-directory" value="true"/>
-  </store>
+  <store logger="core.store"/>
                                                                                                                                                                                                     
-  <transient-store logger="core.store.transient">
-     <parameter name="maxobjects" value="50"/>
-  </transient-store>
+  <transient-store logger="core.store.transient"/>
 
-  <store-janitor logger="core.store.janitor">  
-     <parameter name="freememory" value="${laneweb.cocoon.store.freememory}"/>
-     <parameter name="heapsize" value="${laneweb.cocoon.store.heapsize}"/>
-     <parameter name="cleanupthreadinterval" value="10"/>
-     <parameter name="percent_to_free" value="10"/>
+  <store-janitor logger="core.store.janitor">
+     <parameter name="cleanupthreadinterval" value="2147483"/>
   </store-janitor>
 
   <source-factories logger="core.source">
@@ -99,18 +88,6 @@
   <thread-factory>org.apache.cocoon.components.thread.DefaultThreadFactory</thread-factory>
     <thread-pools>
       <thread-pool>
-        <name>default</name>
-        <priority>NORM</priority>
-        <daemon>false</daemon>
-        <queue-size>-1</queue-size>
-        <max-pool-size>5</max-pool-size>
-        <min-pool-size>5</min-pool-size>
-        <keep-alive-time-ms>60000</keep-alive-time-ms>
-        <block-policy>RUN</block-policy>
-        <shutdown-graceful>false</shutdown-graceful>
-        <shutdown-wait-time-ms>-1</shutdown-wait-time-ms>
-      </thread-pool>
-      <thread-pool>
         <name>daemon</name>
         <priority>NORM</priority>
         <daemon>true</daemon>
@@ -136,7 +113,6 @@
     class="edu.stanford.irt.laneweb.WebDashLoginImpl">
     <parameter name="webdashRegistrationURL" value="https://webda.sh/auth/init_post?"/>
     <parameter name="webdashLoginURL" value="https://webda.sh/auth/auth_post?"/>
-    <parameter name="groupKey" value="${laneweb.cocoon.webdash.key}"/>
     <parameter name="groupName" value="stanford-sunet"/>
 	<parameter name="dateFormat" value="yyyy-MM-dd"/>
   </component>
