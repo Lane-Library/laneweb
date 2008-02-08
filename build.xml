@@ -122,12 +122,15 @@
         <get dest="${libdir}/xercesImpl-2.9.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xerces/xercesImpl/2.9.0/xercesImpl-2.9.0.jar"/>
     	<get dest="${libdir}/yui-2.4.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/yui/yui/2.4.1/yui-2.4.1.jar"/>
     	
+    					<!--   ==================  DEPENDENCY for the search application  ==================    -->
+    	
     	<get dest="${libdir}/spring-core-2.5.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/springframework/spring-core/2.5.1/spring-core-2.5.1.jar"/>
     	<get dest="${libdir}/spring-beans-2.5.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/springframework/spring-beans/2.5.1/spring-beans-2.5.1.jar"/>
-    	 <get dest="${libdir}/spring-context-2.5.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/springframework/spring-context/2.5.1/spring-context-2.5.1.jar"/>
-    	    
-    	 <get dest="${libdir}/search-spring-1.3.35.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/search/1.3.35/search-spring-1.3.35.jar"/>
-    	 <get dest="${libdir}/search-core-1.3.35.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/search/1.3.35/search-core-1.3.35.jar"/>
+    	<get dest="${libdir}/spring-context-2.5.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/springframework/spring-context/2.5.1/spring-context-2.5.1.jar"/>
+    	<get dest="${libdir}/spring-context-support-2.5.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/springframework/spring-context-support/2.5.1/spring-context-support-2.5.1.jar"/>
+    	<get dest="${libdir}/jtidy-4aug2000r7-nodom.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/jtidy/jtidy/4aug2000r7-nodom/jtidy-4aug2000r7-nodom.jar"/>
+    	<get dest="${libdir}/search-spring-1.3.35.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/search/1.3.35/search-spring-1.3.35.jar"/>
+    	<get dest="${libdir}/search-core-1.3.35.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/search/1.3.35/search-core-1.3.35.jar"/>
     	               
     </target>
 </project>
