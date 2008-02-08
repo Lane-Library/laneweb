@@ -115,10 +115,8 @@
             <xsl:when test="starts-with($request-uri,'portals/hematology')">/portals/hematology.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/internal-medicine')">/portals/internal-medicine.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/lpch-cerner')">/portals/lpch-cerner.html</xsl:when>
-            <!--<xsl:when test="starts-with($request-uri,'shc/anesthesia')">/shc/anesthesia.html</xsl:when>
-            <xsl:when test="starts-with($request-uri,'shc/cardiology')">/shc/cardiology.html</xsl:when>
-            <xsl:when test="starts-with($request-uri,'shc/hematology')">/shc/hematology.html</xsl:when>
-            <xsl:when test="starts-with($request-uri,'shc/')">/shc/internal-medicine.html</xsl:when>-->
+            <xsl:when test="starts-with($request-uri,'portals/pulmonary')">/portals/pulmonary.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/emergency')">/portals/emergency.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/')">clinical</xsl:when>
             <xsl:when test="starts-with($request-uri,'local/antibiogram')">clinical</xsl:when>
             <xsl:when test="$source">
