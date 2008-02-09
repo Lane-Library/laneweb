@@ -10,11 +10,15 @@ function initializeTooltips(e){
                 if(tooltips[i].nodeType == 1){
                     var contextId = tooltips[i].id.replace(/Tooltip$/,'');
                     if(contextId.length && YAHOO.util.Dom.inDocument(contextId)){
+                        var width = '25%';
+                        if(tooltips[i].style.width){
+                            width = tooltips[i].style.width;
+                        }
                         new YAHOO.widget.Tooltip(
                                 YAHOO.util.Dom.generateId(), 
                                 {
                                     context:contextId,
-                                    width:'25%',
+                                    width:width,
                                     autodismissdelay:30000,
                                     text:tooltips[i].innerHTML
                                 }
