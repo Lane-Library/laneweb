@@ -985,6 +985,9 @@
                 } else {<!--  // flash is too old or we can't detect the plugin-->
                 var alternateContent = 'This content requires the Adobe Flash Player. '
                 + '&lt;a href=http://www.adobe.com/go/getflash/>Get Flash&lt;/a>';
+                if(document.getElementById('noFlashContent')){
+                    alternateContent = document.getElementById('noFlashContent').innerHTML;
+                }
                 document.write(alternateContent);<!--  // insert non-flash content-->
                 }
             </xsl:text>
