@@ -48,7 +48,7 @@ public class EresourcesBrowseGenerator extends AbstractEresourcesGenerator {
     private static final String BROWSE_SQL_12 = "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     @Override
-    protected PreparedStatement getStatement(Connection conn) throws SQLException {
+    protected PreparedStatement getStatement(final Connection conn) throws SQLException {
         String firstAlpha = null != this.alpha && this.alpha.length() > 0 ? this.alpha.substring(0, 1) : null;
         StringBuffer sb = new StringBuffer(BROWSE_SQL_1);
         if (null != this.type) {

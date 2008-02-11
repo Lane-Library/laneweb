@@ -1,9 +1,5 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.Version;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,8 +23,12 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.eresources.Link;
+import edu.stanford.irt.eresources.Version;
+
 public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
-    
+
     protected static final String DUAL_SELECT = "SELECT * FROM DUAL WHERE 1 = 2";
 
     private static final String KEYWORDS = "keywords";
@@ -43,20 +43,19 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
 
     private static final String MESH = "m";
 
-	private static final Attributes EMPTY_ATTS = new AttributesImpl();
+    private static final Attributes EMPTY_ATTS = new AttributesImpl();
 
     private DataSourceComponent dataSource;
-    
+
     protected String query;
-    
+
     protected String subset;
-    
+
     protected String type;
-    
+
     protected String alpha;
-    
+
     protected String mesh;
-    
 
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
@@ -97,31 +96,30 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
             }
         }
     }
-	
-	public void generate()throws SAXException, ProcessingException
-	{
-	            List<Eresource> eresources = getEresourceList();
-	            String title = "edu.stanford.irt.eresources.Eresource";
-	            EresourceSAXTranslator translator = new EresourceSAXTranslator();
-	            this.xmlConsumer.startDocument();
-	            this.xmlConsumer.startPrefixMapping("", "http://www.w3.org/1999/xhtml");
-	            this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "html", "html", EMPTY_ATTS);
-	            this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "head", "head", EMPTY_ATTS);
-	            this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "title", "title", EMPTY_ATTS);
-	            this.xmlConsumer.characters(title.toCharArray(), 0, title.length());
-	            this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "title", "title");
-	            this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "head", "head");
-	            this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "body", "body", EMPTY_ATTS);
-	            this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "dl", "dl", EMPTY_ATTS);
-	            for (Eresource er : eresources) {
-	                translator.translate(this.xmlConsumer, er);
-	            }
-	            this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "dl", "dl");
-	            this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "body", "body");
-	            this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "html", "html");
-	            this.xmlConsumer.endPrefixMapping("");
-	            this.xmlConsumer.endDocument();
-	    }
+
+    public void generate() throws SAXException, ProcessingException {
+        List<Eresource> eresources = getEresourceList();
+        String title = "edu.stanford.irt.eresources.Eresource";
+        EresourceSAXTranslator translator = new EresourceSAXTranslator();
+        this.xmlConsumer.startDocument();
+        this.xmlConsumer.startPrefixMapping("", "http://www.w3.org/1999/xhtml");
+        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "html", "html", EMPTY_ATTS);
+        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "head", "head", EMPTY_ATTS);
+        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "title", "title", EMPTY_ATTS);
+        this.xmlConsumer.characters(title.toCharArray(), 0, title.length());
+        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "title", "title");
+        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "head", "head");
+        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "body", "body", EMPTY_ATTS);
+        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "dl", "dl", EMPTY_ATTS);
+        for (Eresource er : eresources) {
+            translator.translate(this.xmlConsumer, er);
+        }
+        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "dl", "dl");
+        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "body", "body");
+        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "html", "html");
+        this.xmlConsumer.endPrefixMapping("");
+        this.xmlConsumer.endDocument();
+    }
 
     @Override
     public void service(final ServiceManager manager) throws ServiceException {
@@ -147,7 +145,7 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
             try {
                 stmt = getStatement(conn);
             } catch (IllegalArgumentException e) {
-                //if can't create a SQL query, return the empty list
+                // if can't create a SQL query, return the empty list
                 return eresources;
             }
             rs = stmt.executeQuery();
@@ -209,8 +207,7 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
         }
         return eresources;
     }
-    
+
     protected abstract PreparedStatement getStatement(Connection conn) throws SQLException;
 
-	
 }

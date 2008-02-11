@@ -7,5 +7,5 @@ public interface MetaSearchManagerSource {
     public static final String ROLE = MetaSearchManagerSource.class.getName();
 
     MetaSearchManager getMetaSearchManager();
-    
+
 }

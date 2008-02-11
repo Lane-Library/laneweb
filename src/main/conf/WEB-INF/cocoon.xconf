@@ -32,7 +32,7 @@
       <input-module name="laneweb"/>
       <input-module name="defaults"/>
     </component-instance>
-    <component-instance logger="core.modules.input" name="naming"       class="org.apache.cocoon.components.modules.input.NamingInputModule"/>
+    <component-instance logger="core.modules.input" name="naming" class="org.apache.cocoon.components.modules.input.NamingInputModule"/>
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
       <values>
         <template>irt2</template>

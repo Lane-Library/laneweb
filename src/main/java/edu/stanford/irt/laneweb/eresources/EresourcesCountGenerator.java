@@ -26,20 +26,16 @@ public class EresourcesCountGenerator extends AbstractGenerator {
     private static final String COUNT_QUERY_1 =
             "WITH FOUND AS (SELECT ERESOURCE2.ERESOURCE_ID, TYPE2.TYPE, SUBSET2.SUBSET FROM ERESOURCE2, TYPE2, SUBSET2 \n"
                     + "WHERE CONTAINS(ERESOURCE2.TEXT,'";
-    
-    private static final String COUNT_QUERY_2 = "') > 0 \n" + "AND ERESOURCE2.ERESOURCE_ID = TYPE2.ERESOURCE_ID \n"
+
+    private static final String COUNT_QUERY_2 =
+            "') > 0 \n" + "AND ERESOURCE2.ERESOURCE_ID = TYPE2.ERESOURCE_ID \n"
                     + "AND ERESOURCE2.ERESOURCE_ID = SUBSET2.ERESOURCE_ID(+)) \n"
-                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'all' AS GENRE FROM FOUND\n"
-                    + "UNION\n"
-                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'ej' AS GENRE FROM FOUND WHERE TYPE = 'ej'\n"
-                    + "UNION\n"
+                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'all' AS GENRE FROM FOUND\n" + "UNION\n"
+                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'ej' AS GENRE FROM FOUND WHERE TYPE = 'ej'\n" + "UNION\n"
                     + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'database' AS GENRE FROM FOUND WHERE TYPE = 'database'\n"
-                    + "UNION\n"
-                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'video' AS GENRE FROM FOUND WHERE TYPE = 'video'\n"
-                    + "UNION\n"
-                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'book' AS GENRE FROM FOUND WHERE TYPE = 'book'\n"
-                    + "UNION\n"
-                    + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'cc' AS GENRE FROM FOUND WHERE TYPE = 'cc'\n"
+                    + "UNION\n" + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'video' AS GENRE FROM FOUND WHERE TYPE = 'video'\n"
+                    + "UNION\n" + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'book' AS GENRE FROM FOUND WHERE TYPE = 'book'\n"
+                    + "UNION\n" + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'cc' AS GENRE FROM FOUND WHERE TYPE = 'cc'\n"
                     + "UNION\n"
                     + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'lanefaq' AS GENRE FROM FOUND WHERE TYPE = 'lanefaq'\n"
                     + "UNION\n"
@@ -56,13 +52,13 @@ public class EresourcesCountGenerator extends AbstractGenerator {
     private static final String QUERY_ELEMENT = "query";
 
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
-    
+
     private static final char[] DUAL_SELECT = "SELECT * FROM DUAL".toCharArray();
 
     private char[] selectStatementChars;
 
     private QueryTranslator queryTranslator = new QueryTranslator();
-    
+
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
@@ -80,7 +76,7 @@ public class EresourcesCountGenerator extends AbstractGenerator {
 
         }
         try {
-            String translatedQuery = this.queryTranslator.translate(query.replaceAll("'","''"));
+            String translatedQuery = this.queryTranslator.translate(query.replaceAll("'", "''"));
             StringBuffer sb = new StringBuffer(COUNT_QUERY_1);
             sb.append(translatedQuery);
             sb.append(COUNT_QUERY_2);

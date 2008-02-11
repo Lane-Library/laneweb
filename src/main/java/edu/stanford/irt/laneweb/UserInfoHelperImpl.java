@@ -13,7 +13,7 @@ import org.apache.cocoon.environment.Session;
 public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHelper, ThreadSafe, Initializable {
 
     private LdapClient ldapClient;
-    
+
     private String ezproxyKey;
 
     public UserInfo getUserInfo(final Request request) {
@@ -72,7 +72,7 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHe
     void setLdapClient(final LdapClient ldapClient) {
         this.ldapClient = ldapClient;
     }
-    
+
     void setEzproxyKey(final String ezproxyKey) {
         this.ezproxyKey = ezproxyKey;
     }

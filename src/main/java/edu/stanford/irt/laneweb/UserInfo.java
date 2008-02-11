@@ -53,7 +53,7 @@ public class UserInfo {
     public void setTicket(final Ticket ticket) {
         this.ticket = ticket;
     }
-    
+
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
@@ -63,7 +63,7 @@ public class UserInfo {
         sb.append("sunetId=").append(this.sunetId).append(' ');
         sb.append("ticket=").append(this.ticket);
         return sb.toString();
-        
+
     }
 
 }

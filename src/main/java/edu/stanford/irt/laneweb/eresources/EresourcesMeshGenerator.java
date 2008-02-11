@@ -37,7 +37,7 @@ public class EresourcesMeshGenerator extends AbstractEresourcesGenerator {
     private static final String MESH_SQL_12 = "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     @Override
-    protected PreparedStatement getStatement(Connection conn) throws SQLException {
+    protected PreparedStatement getStatement(final Connection conn) throws SQLException {
         StringBuffer sb = new StringBuffer(MESH_SQL_1);
         if (null != this.type) {
             sb.append(MESH_SQL_2);

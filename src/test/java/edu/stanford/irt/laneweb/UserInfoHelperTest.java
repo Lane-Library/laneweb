@@ -19,7 +19,7 @@ public class UserInfoHelperTest extends TestCase {
     private String ip;
 
     private String sunetid;
-    
+
     private String ezproxyKey = "boguskey";
 
     private LdapClient ldapClient;

@@ -7,7 +7,7 @@ public class TicketTest extends TestCase {
     private Ticket ticket;
 
     private String sunetid;
-    
+
     private String ezproxyKey;
 
     @Override

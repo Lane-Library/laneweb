@@ -7,7 +7,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
@@ -26,9 +25,9 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     private static final String COUNT_QUERY_1 =
             "WITH FOUND AS (SELECT HISTORY_ERESOURCE.ERESOURCE_ID FROM HISTORY_ERESOURCE \n"
                     + "WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'";
+
     private static final String COUNT_QUERY_2 =
-        "') > 0) \n"
-                    + "SELECT COUNT(*) AS HITS, 'books' AS GENRE FROM FOUND, HISTORY_TYPE\n"
+            "') > 0) \n" + "SELECT COUNT(*) AS HITS, 'books' AS GENRE FROM FOUND, HISTORY_TYPE\n"
                     + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'books'\n" + "UNION\n"
                     + "SELECT COUNT(*) AS HITS, 'movie' AS GENRE FROM FOUND, HISTORY_TYPE\n"
                     + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'movie'\n" + "UNION\n"
@@ -184,7 +183,7 @@ public class HistoryQueryGenerator extends AbstractGenerator {
             StringBuffer sb = new StringBuffer(COUNT_QUERY_1);
             sb.append(this.translatedQuery);
             sb.append(COUNT_QUERY_2);
-        	return sb.toString().toCharArray();
+            return sb.toString().toCharArray();
         }
         StringBuffer queryBuffer = new StringBuffer();
         if (null != this.translatedQuery) {

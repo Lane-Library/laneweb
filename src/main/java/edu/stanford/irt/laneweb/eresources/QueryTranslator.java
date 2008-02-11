@@ -9,7 +9,7 @@ public class QueryTranslator {
 
     Vector<String> notWords = new Vector<String>();
 
-    public String translate(String input) {
+    public String translate(final String input) {
         if (input.indexOf('{') > -1 || input.indexOf('}') > -1) {
             throw new IllegalArgumentException("'}' and '{' should not appear in input");
         }
@@ -18,9 +18,7 @@ public class QueryTranslator {
             throw new IllegalArgumentException("no 'required' words in query: " + input);
         }
         String translatedQuery = getQuery();
-        if (translatedQuery.indexOf("()") > -1 
-                || translatedQuery.indexOf("{}") > -1
-                || translatedQuery.indexOf("\\}") > -1) {
+        if (translatedQuery.indexOf("()") > -1 || translatedQuery.indexOf("{}") > -1 || translatedQuery.indexOf("\\}") > -1) {
             throw new IllegalArgumentException("can't construct a valid oracle text query from: " + input);
         }
         return translatedQuery;
@@ -106,7 +104,7 @@ public class QueryTranslator {
         // in {}
         String word = words.elementAt(pos);
         if (word.indexOf('%') > -1) {
-            word =  word.replaceAll("[\\W&&[^%]]", "");
+            word = word.replaceAll("[\\W&&[^%]]", "");
             if ("%".equals(word)) {
                 return "";
             }
@@ -115,7 +113,7 @@ public class QueryTranslator {
         if (word.lastIndexOf('\\') == word.length() - 1) {
             word = word.substring(0, word.length() - 1);
         }
-        return "${".concat( word) + '}';
+        return "${".concat(word) + '}';
     }
 
     // getQuery returns a formatted, ready-to-run ConText query.
