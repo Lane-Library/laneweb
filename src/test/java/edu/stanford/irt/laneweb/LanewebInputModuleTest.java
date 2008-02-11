@@ -21,7 +21,7 @@ public class LanewebInputModuleTest extends TestCase {
         super.setUp();
         this.module = new LanewebInputModule();
         DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
-        Configuration config = builder.build("src/main/conf/WEB-INF/cocoon.xconf").getChild("input-modules").getChildren()[0];
+        Configuration config = builder.build("src/main/webapp/WEB-INF/cocoon.xconf").getChild("input-modules").getChildren()[0];
         this.module.configure(config);
     }
 
