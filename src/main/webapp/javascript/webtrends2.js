@@ -102,8 +102,7 @@ function webtrendsProcess(node){
 			 	dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link',offsite,'WT.seg_1',affiliation);
 			 	//alert('/OFFSITE/' + title + '/' + redirectUrl);
 			 	if(window.pageTracker != undefined){
-					pageTracker._trackPageview('/OFFSITE/' + title + '/' + redirectUrl);
-					pageTracker._setVar(affiliation);
+					window.pageTracker._trackPageview('/OFFSITE/' + title + '/' + redirectUrl);
 				}
 			 }
 		}
@@ -119,8 +118,7 @@ function webtrendsProcess(node){
 			dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'WT.seg_1',affiliation);
 			//alert('/ONSITE/' + title + uri);
 			if(window.pageTracker != undefined){
-				pageTracker._trackPageview('/ONSITE/' + title + '/' + uri);
-				pageTracker._setVar(affiliation);
+				window.pageTracker._trackPageview('/ONSITE/' + title + '/' + uri);
 			}
 		}
 		
