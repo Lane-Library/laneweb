@@ -11,19 +11,19 @@
                 <map:mount uri-prefix="javascript/yui" check-reload="no" src="context://yui.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="extensions/**">
-                <map:mount uri-prefix="extensions" check-reload="yes" src="{naming:java:comp/env/stage-base}/extensions.xmap"/>
+                <map:mount uri-prefix="extensions" check-reload="yes" src="context://stage/extensions.xmap"/>
             </map:match>
 			<map:match type="wildcard" pattern="tobacco/**">
 			    <map:mount uri-prefix="tobacco" check-reload="yes" src="tobacco.xmap"/>
 			</map:match>
             <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv|avi|zip)$">
-                <map:mount uri-prefix="" check-reload="yes" src="{naming:java:comp/env/stage-base}/static.xmap"/>
+                <map:mount uri-prefix="" check-reload="yes" src="context://stage/static.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="eresources/**">
-                <map:mount uri-prefix="eresources" check-reload="yes" src="{naming:java:comp/env/stage-base}/eresources.xmap"/>
+                <map:mount uri-prefix="eresources" check-reload="yes" src="context://stage/eresources.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="content/**">
-                <map:mount uri-prefix="content" check-reload="yes" src="{naming:java:comp/env/stage-base}/content.xmap"/>
+                <map:mount uri-prefix="content" check-reload="yes" src="context://stage/content.xmap"/>
             </map:match>
             <map:match type="wildcard" pattern="apps/**">
                 <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
