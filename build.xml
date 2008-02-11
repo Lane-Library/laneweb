@@ -5,7 +5,6 @@
     <property name="libdir" value="${defaulttargetdir}/lib"/>
     <property name="classesdir" value="${defaulttargetdir}/classes"/>
     <property name="webappdir" value="${defaulttargetdir}/laneweb"/>
-    <available file="../laneweb.properties" property="laneweb.production"/>
     <path id="build.classpath">
         <fileset dir="${libdir}">
             <include name="**/*.jar"/>
@@ -29,20 +28,8 @@
             </classpath>
         </javac>
     </target>
-    <target name="production" if="laneweb.production">
-        <copy todir="${webappdir}">
-            <fileset dir="src/main/conf"/>
-            <filterset filtersfile="../laneweb.properties" begintoken="$${" endtoken="}"/>
-        </copy>
-    </target>
-    <target name="stage" unless="laneweb.production">
-        <copy todir="${webappdir}">
-            <fileset dir="src/main/conf"/>
-            <filterset filtersfile="project.properties" begintoken="$${" endtoken="}"/>
-        </copy>
-     </target>
 	
-	<target name="robotsMessage">
+	<target name="robots-message">
     	<echo level="warning"   >
     	**************************************************************************
     	  			If NOT PRODUCTION server,
@@ -56,7 +43,7 @@
     	</echo>
 	</target>
 	
-    <target name="webapp" depends="compile, prepare-webapp,production,stage,robotsMessage"/>
+    <target name="webapp" depends="compile, prepare-webapp,robots-message"/>
     <target name="prepare-webapp">
         <copy todir="${webappdir}">
             <fileset dir="src/main/webapp" excludes="META-INF/context.xml"/>

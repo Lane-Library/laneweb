@@ -63,9 +63,9 @@
     </site>
   </distributionManagement>
   <build>
-    <filters>
+<!--    <filters>
       <filter>project.properties</filter>
-    </filters>
+    </filters>-->
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -85,12 +85,12 @@
         <artifactId>maven-war-plugin</artifactId>
         <configuration>
           <webappDirectory>target/laneweb</webappDirectory>
-          <webResources>
+<!--          <webResources>
             <resource>
               <directory>src/main/conf</directory>
               <filtering>true</filtering>
             </resource>
-          </webResources>
+          </webResources>-->
         </configuration>
       </plugin>
       <plugin>
