@@ -1,10 +1,168 @@
-var gTimeZone = -8;
+// ****************    Add by IRT  		**********************//
+
+
+
+YAHOO.util.Event.addListener(document, 'click', webtrendsOnClick);
+
+
+function webtrendsOnClick(e) {
+		var target = (e.srcElement) ? e.srcElement : e.target;
+		var node = getNode(target);
+		if(node != null)
+		{
+	    	var redirectUrl = webtrendsProcess(node);
+	    	if(redirectUrl   && e.button =="0")//to give some time to send the request for webtrends
+			{
+				redirectUrl = redirectUrl.replace("'","\\'");
+				var target = node.target;
+				if(target && '' != target && YAHOO.env.ua.webkit)// safari doesn't not open a new window in a method call by a setTimeout
+					window.open(redirectUrl, target);
+				else
+			 		setTimeout("redirect('"+redirectUrl+"','"+target+"')",200);
+				YAHOO.util.Event.preventDefault(e);
+			}
+	    }
+}
+
+
+function redirect(redirectUrl, target)
+{
+	if(target && '' != target)
+		var newWindow = window.open(redirectUrl, target);
+	else
+ 		window.location = redirectUrl; 	
+}
+
+function getNode(node)
+{
+	if(node.tagName == "IMG" || node.tagName == "A" || node.tagName == "AREA")
+		return node;
+	var ancestorNode = YAHOO.util.Dom.getAncestorBy(node, getNodeByNames);
+	if(ancestorNode != null)
+		return ancestorNode; 
+	return null; 	
+}
+
+
+function getNodeByNames(node)
+{
+	if(node.tagName == "A" || node.tagName == "AREA")
+		return true;
+	else
+		return false;
+}
+
+function webtrendsProcess(node){
+		var redirectUrl;
+		var title;
+		var host;
+		var affiliation = getMetaContent('WT.seg_1');
+		if(node.hostname != undefined)
+		{
+			host = node.hostname;
+			if(host.indexOf(':')>-1)//safari return port
+				host = host.substring(0,host.indexOf(':'));
+		}
+		if(node.tagName == "IMG")
+		{
+			var anchorNode = node.parentNode;
+			if(anchorNode != undefined)
+				node = anchorNode;
+		}
+		if((node.tagName == "A" || node.tagName == "AREA") && (host && node.href  &&  "" != node.href &&  "/" != node.href) )//for anchor tag 
+		{
+			if(host != getMetaContent("LW.host") || node.href.indexOf("/secure/login.html?url=") >-1 || node.href.indexOf("/secure/login.html?user=") >-1)
+			{
+				var offsite;
+				var uri= '/';
+				var query;
+				var proxyUrl = 'http://laneproxy.stanford.edu/login';
+				var href = node.href;
+				if(href.indexOf(proxyUrl) > -1 )
+					href = href.substring( href.indexOf('url=')+4 , href.length);
+				if(href.indexOf('://')>-1)		
+					href = href.substring(href.indexOf('://')+3, href.length);
+				if(href.indexOf('?')>-1)
+				{
+					query = href.substring(href.indexOf('?')+1, href.length);
+					href = href.substring(0,href.indexOf('?'));
+				}
+				if(href.indexOf('/')>-1)
+				{	
+					uri =  href.substring(href.indexOf('/'), href.length);	
+					href = href.substring(0,href.indexOf('/'));
+				}
+				if(host != getMetaContent("LW.host") ||node.href.indexOf("/secure/login.html?url=") >-1 || node.href.indexOf("/secure/login.html?user=") >-1)	
+				{
+					offsite = 1;
+					redirectUrl = node.href;
+				}
+				title = getWebtrendsTitle(node);
+				//alert('DCS.dcssip:'+ href +'\nDCS.dcsuri:'+uri + '\nDCS.dcsquery:' +query  +'\nWT.ti:'+title +'\nDCSext.keywords:'+getMetaContent('LW.keywords')+'\nDCSext.search_type:'+getMetaContent('LW.source')+'\nDCSext.offsite_link:1');
+			 	dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link',offsite,'WT.seg_1',affiliation);
+			 	//alert('/OFFSITE/' + title + '/' + redirectUrl);
+			 	if(window.pageTracker != undefined){
+					window.pageTracker._trackPageview('/OFFSITE/' + title + '/' + redirectUrl);
+				}
+			 }
+		}
+		
+		if((node.href != undefined) && host == getMetaContent("LW.host") &&
+			(node.href.indexOf('.pdf') > -1 || node.href.indexOf('.camv') >-1 || node.href.indexOf('.smil') >-1 || node.href.indexOf('.doc') >-1 
+		  || node.href.indexOf('.ppt') > -1 || node.href.indexOf('.xls') > -1  || node.href.indexOf('.rm') > -1 || node.href.indexOf('.xml') >-1
+		  || node.href.indexOf('.wmv') >-1))
+		{
+			title = getWebtrendsTitle(node);
+			uri =  node.pathname;	
+			//alert('\nDCS.dcsuri:'+uri + '\nWT.ti: '+title +'\nDCSext.keywords: '+getMetaContent('LW.keywords')+'\nDCSext.search_type: '+getMetaContent('LW.source'));
+			dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'WT.seg_1',affiliation);
+			//alert('/ONSITE/' + title + uri);
+			if(window.pageTracker != undefined){
+				window.pageTracker._trackPageview('/ONSITE/' + title + '/' + uri);
+			}
+		}
+		
+		return redirectUrl; 
+		
+} 
+
+
+function getWebtrendsTitle(node)
+{
+	var title;
+	if(title == null || title == '')
+	 	title = node.title;
+	if(title == null || title == '')
+		title = node.alt;
+	if(title == null || title == '')
+	{	
+		var img = node.getElementsByTagName("IMG");
+		if(img != undefined)
+		{
+			title = node.alt;
+		}
+	}
+	if(title == null || title == '')
+	{
+		title = node.innerHTML;//textContent doesn't work with safari
+		if(title.indexOf('<')>-1 )
+			title = title.substring(0,title.indexOf('<'));
+	}		
+	if(title == null || title == '')
+		title = 'unknown';
+	return title					
+}
+
+
+
+
+//***************** 	End add by IRT  *******************//
 
 function dcsAdv(){
 	dcsFunc("dcsET");
 	dcsFunc("dcsAdSearch");
 }
-
+var gTimeZone = -8;
 var gImages=new Array;
 var gIndex=0;
 var DCS=new Object();
@@ -16,18 +174,18 @@ var gDomain="irt-sdc.stanford.edu";
 var gDcsId="dcssi6l0t1000004z9mg95sop_9v3k";
 
 function dcsMultiTrack() {
-    for (var i=0;i<arguments.length;i++) {
-        if (arguments[i].indexOf('WT.')==0) {
-            WT[arguments[i].substring(3)]=arguments[i+1];
-            i++;
+	for (var i=0;i<arguments.length;i=i+2) {
+		if (arguments[i].indexOf('WT.')==0 ) {
+        	if(arguments[i+1] !="undefined")
+        		WT[arguments[i].substring(3)]=arguments[i+1];
         }
-        if (arguments[i].indexOf('DCS.')==0) {
-            DCS[arguments[i].substring(4)]=arguments[i+1];
-            i++;
+        if (arguments[i].indexOf('DCS.')==0 ) {
+        	if(arguments[i+1] !="undefined")
+        	   DCS[arguments[i].substring(4)]=arguments[i+1];
         }
         if (arguments[i].indexOf('DCSext.')==0) {
-            DCSext[arguments[i].substring(7)]=arguments[i+1];
-            i++;
+            if(arguments[i+1] !="undefined")
+        		DCSext[arguments[i].substring(7)]=arguments[i+1];
         }
     }
     var dCurrent=new Date();
@@ -113,6 +271,7 @@ function dcsVar(){
 	}
 }
 
+
 function A(N,V){
 	return "&"+N+"="+dcsEscape(V);
 }
@@ -145,6 +304,7 @@ function dcsCreateImage(dcsSrc){
 		}
 		gImages[gIndex].src=dcsSrc;
 		gIndex++;
+	  	 
 	}
 	else{
 		document.write('<IMG BORDER="0" NAME="DCSIMG" WIDTH="1" HEIGHT="1" SRC="'+dcsSrc+'">');
