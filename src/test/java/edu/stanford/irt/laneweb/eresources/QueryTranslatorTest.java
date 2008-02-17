@@ -51,21 +51,20 @@ public class QueryTranslatorTest extends TestCase {
                 assertTrue(query + ": " + translatedQuery, translatedQuery.indexOf("()") == -1);
                 assertTrue(query + ": " + translatedQuery, translatedQuery.indexOf(" NOT") != 0);
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage() + " " + this.translator.getQuery());
             }
         }
     }
 
     public void testMiscSearchTerms() {
-        String[] terms = new String[] { "%", "++++", "*", "-", "()", "{}", "-*", "-%" };
+        String[] terms = new String[] { "%", "*", "()", "{}", "-*", "-%", "#%"};
         for (String element : terms) {
             try {
                 String translatedQuery = this.translator.translate(element);
                 assertTrue(element + ": " + translatedQuery, translatedQuery.indexOf("{}") == -1);
                 assertTrue(element + ": " + translatedQuery, translatedQuery.indexOf("()") == -1);
                 assertTrue(element + ": " + translatedQuery, translatedQuery.indexOf(" NOT") != 0);
+                fail(element + " " + this.translator.getQuery());
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage() + " " + this.translator.getQuery());
             }
         }
     }

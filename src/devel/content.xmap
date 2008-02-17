@@ -13,13 +13,13 @@
                     <map:select type="resource-exists">
                         <map:when test="content/search/{request-param:source}.html">
                             <map:aggregate element="doc">
-                                <map:part src="cocoon://apps/search-application?q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-application"/>
                                 <map:part src="content/search/{request-param:source}.html"/>
                             </map:aggregate>
                         </map:when>
                         <map:otherwise>
                             <map:aggregate element="doc">
-                                <map:part src="cocoon://apps/search-application?q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-application"/>
                                 <map:part src="cocoon:/search/{request-param:source}.html"/>
                             </map:aggregate>
                         </map:otherwise>
@@ -45,13 +45,13 @@
                     <map:select type="resource-exists">
                         <map:when test="content{request-param:source}">
                             <map:aggregate element="doc">
-                                <map:part src="cocoon://apps/search-application?q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-application"/>
                                 <map:part src="content{request-param:source}"/>
                             </map:aggregate>
                         </map:when>
                         <map:otherwise>
                             <map:aggregate element="doc">
-                                <map:part src="cocoon://apps/search-application?q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-application"/>
                                 <map:part src="{naming:java:comp/env/live-base}/content{request-param:source}"/>
                             </map:aggregate>
                         </map:otherwise>
@@ -76,7 +76,7 @@
                     <map:select type="resource-exists">
                         <map:when test="content/search.html">
                             <map:aggregate element="doc">
-                                <map:part src="cocoon://apps/search-application?q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-application"/>
                                 <map:part src="cocoon:/eresources/count"/>
                                 <map:part src="content/search.html"/>
                                 <map:part src="cocoon:/search/{request-param:source}.html"/>
@@ -84,7 +84,7 @@
                         </map:when>
                         <map:otherwise>
                             <map:aggregate element="doc">
-                                <map:part src="cocoon://apps/search-application?q={urlencode:{request-param:keywords}}"/>
+                                <map:part src="cocoon://apps/search-application"/>
                                 <map:part src="cocoon:/eresources/count"/>
                                 <map:part src="{naming:java:comp/env/live-base}/content/search.html"/>
                                 <map:part src="cocoon:/search/{request-param:source}.html"/>

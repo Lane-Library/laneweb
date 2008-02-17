@@ -21,9 +21,6 @@
         </xsl:choose>
     </xsl:variable>
     
-    
-    
-    
     <xsl:template match="*">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()|child::node()"/>
@@ -48,16 +45,13 @@
         </xsl:choose>
     </xsl:template>
     
-    
-    
     <xsl:template match="attribute::href[contains(.,'{$keywords}')]">
         <xsl:attribute name="href">
             <xsl:value-of select="substring-before(.,'{$keywords}')"/>
-            <xsl:value-of select="$search-terms"/>
+            <xsl:value-of select="encode-for-uri($search-terms)"/>
         </xsl:attribute>
     </xsl:template>
  
-    
     <xsl:template match="attribute::href[contains(.,'{id}')]">
         <xsl:attribute name="href">
             <xsl:value-of select="substring-before(.,'{id}')"/>
