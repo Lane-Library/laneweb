@@ -4,10 +4,10 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match type="wildcard" pattern="eresources/**">
+            <map:match pattern="eresources/**" type="wildcard">
                 <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
-             <map:match type="wildcard" pattern="search.html">
+             <map:match pattern="search.html" type="wildcard">
                 <map:match type="regex-parameter" pattern="^(clinical|peds|research|pharmacy|history|test)$">
                     <map:parameter name="parameter-name" value="source"/>
 	                <map:aggregate element="doc">
@@ -52,7 +52,7 @@
 	                <map:serialize type="xml"/>
                 </map:match>
            </map:match>
-           <map:match type="wildcard" pattern="search/**.html">
+           <map:match pattern="search/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/search-templates/{1}.html"/>
                <map:transform type="saxon" src="context://xsl/search.xsl">
                    <map:parameter name="q" value="{request-param:q}"/>
@@ -63,7 +63,7 @@
                 <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="search-tab-results">
+            <map:match pattern="search-tab-results" type="wildcard">
               	 <map:aggregate element="search-tab-results" >
                     <map:part src="cocoon://apps/search-application"/>  
                     <map:part src="cocoon:/search-templates.xml"/>
@@ -71,18 +71,18 @@
                 <map:transform type="saxon" src="context://xsl/search-tab-results.xsl"/>
                 <map:serialize type="text"/>
             </map:match>
-            <map:match type="wildcard" pattern="random">
+            <map:match pattern="random" type="wildcard">
                 <map:generate type="file" src="{request-param:source}"/>
                 <map:transform type="saxon" src="context://xsl/random.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <!-- don't cache history searches because keywords will make too many cached items -->
-            <map:match type="wildcard" pattern="portals/history/historySearchResults.html">
+            <map:match pattern="portals/history/historySearchResults.html" type="wildcard">
                 <map:generate type="html" src="{naming:java:comp/env/live-base}/content/portals/history/historySearchResults.html"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="search-templates/**.html">
+            <map:match pattern="search-templates/**.html" type="wildcard">
                 <map:generate type="file" src="{naming:java:comp/env/live-base}/content/search/{1}.html"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -92,11 +92,11 @@
                 <map:generate type="html" src="{naming:java:comp/env/live-base}/content/{1}.html"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="lane-faq/lane-faq-all.html">
+            <map:match pattern="lane-faq/lane-faq-all.html" type="wildcard">
                 <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/lane-faq.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="howto/index.html">
+            <map:match pattern="howto/index.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/lane-faq/lane-faq-all.html"/>
                 <map:transform type="saxon" src="context://xsl/faq.xsl">
                     <map:parameter name="id" value="{request-param:id}"/>
@@ -113,7 +113,7 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="search-templates.xml">
+            <map:match pattern="search-templates.xml" type="wildcard">
                 <map:aggregate element="search-templates" ns="http://lane.stanford.edu/search-templates/ns">
                     <map:part src="cocoon:/search-templates/clinical.html"/>
                     <map:part src="cocoon:/search-templates/peds.html"/>
@@ -128,11 +128,11 @@
                 <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="templates/**.xml">
+            <map:match pattern="templates/**.xml" type="wildcard">
                 <map:generate type="file" src="{naming:java:comp/env/live-base}/resources/templates/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <!--<map:match type="wildcard" pattern="shc/**">
+            <!--<map:match pattern="shc/**" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="{naming:java:comp/env/live-base}/content/portals/{1}">
                         <map:generate type="html" src="{naming:java:comp/env/live-base}/content/portals/{1}"/>
@@ -144,7 +144,7 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>-->
-            <map:match type="wildcard" pattern="**">
+            <map:match pattern="**" type="wildcard">
                 <map:generate type="html" src="{naming:java:comp/env/live-base}/content/{1}"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>

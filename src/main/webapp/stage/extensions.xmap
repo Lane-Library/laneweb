@@ -4,22 +4,22 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="caching">
-            <map:match type="wildcard" pattern="**.ico">
+            <map:match pattern="**.ico" type="wildcard">
                 <map:read src="{naming:java:comp/env/stage-base}/resources/extensions/{1}.ico" mime-type="image/x-icon"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.png">
+            <map:match pattern="**.png" type="wildcard">
                 <map:read src="{naming:java:comp/env/stage-base}/resources/extensions/{1}.png" mime-type="image/png"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.rdf">
+            <map:match pattern="**.rdf" type="wildcard">
                 <map:read src="{naming:java:comp/env/stage-base}/resources/extensions/{1}.rdf" mime-type="text/xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.src">
+            <map:match pattern="**.src" type="wildcard">
                 <map:read src="{naming:java:comp/env/stage-base}/resources/extensions/{1}.src" mime-type="text/txt"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.xml">
+            <map:match pattern="**.xml" type="wildcard">
                 <map:read src="{naming:java:comp/env/stage-base}/resources/extensions/{1}.xml" mime-type="text/xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.xpi">
+            <map:match pattern="**.xpi" type="wildcard">
                 <map:read src="{naming:java:comp/env/stage-base}/resources/extensions/{1}.xpi" mime-type="application/x-xpinstall"/>
             </map:match>
         </map:pipeline>

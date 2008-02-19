@@ -7,23 +7,23 @@
             <map:match pattern="secure/login.html">
                 <map:act type="loginAction"/>
             </map:match>
-            <map:match type="wildcard" pattern="javascript/yui/**">
+            <map:match pattern="javascript/yui/**" type="wildcard">
                 <map:mount uri-prefix="javascript/yui" check-reload="no" src="context://yui.xmap"/>
             </map:match>
             <map:match type="regex"
                 pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv|avi|zip)$">
                 <map:mount uri-prefix="" check-reload="yes" src="static.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="eresources/**">
+            <map:match pattern="eresources/**" type="wildcard">
                 <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="content/**">
+            <map:match pattern="content/**" type="wildcard">
                 <map:mount uri-prefix="content" check-reload="yes" src="content.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="apps/**">
+            <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="cookiesFetch.html">
+            <map:match pattern="cookiesFetch.html" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/cookiesFetch.html">
                         <map:generate type="file" src="content/cookiesFetch.html"/>
@@ -57,7 +57,7 @@
                 </map:select>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match type="wildcard" pattern="plain/**.html">
+            <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
@@ -104,7 +104,7 @@
                 </map:select>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.html">
+            <map:match pattern="**.html" type="wildcard">
                 <map:act type="session-action"/>
                 <map:aggregate element="doc" label="content">
                     <map:part src="cocoon:/content/{1}.html"/>
@@ -155,7 +155,7 @@
                 </map:select>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.xml">
+            <map:match pattern="**.xml" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.xml">
                         <map:generate type="file" src="content/{1}.xml"/>

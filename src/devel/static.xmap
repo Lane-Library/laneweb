@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match type="wildcard" pattern="images/**.gif">
+            <map:match pattern="images/**.gif" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="resources/images/{1}.gif">
                         <map:read type="resource" src="resources/images/{1}.gif" mime-type="image/gif"/>
@@ -14,7 +14,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="style/**.css">
+            <map:match pattern="style/**.css" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="resources/css/{1}.css">
                         <map:read type="txt-resource" src="resources/css/{1}.css">
@@ -28,7 +28,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="javascript/*.js">
+            <map:match pattern="javascript/*.js" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="resources/javascript/{1}.js">
                         <map:read type="txt-resource" src="resources/javascript/{1}.js"
@@ -44,7 +44,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="images/**.jpg">
+            <map:match pattern="images/**.jpg" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="resources/images/{1}.jpg">
                         <map:read type="resource" src="resources/images/{1}.jpg" mime-type="image/jpeg"/>
@@ -54,7 +54,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="images/**.png">
+            <map:match pattern="images/**.png" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="resources/images/{1}.png">
                         <map:read type="resource" src="resources/images/{1}.jpg" mime-type="image/png"/>
@@ -64,7 +64,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="pdf/**.pdf">
+            <map:match pattern="pdf/**.pdf" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="resources/pdf/{1}.pdf">
                         <map:read type="resource" src="resources/pdf/{1}.pdf"
@@ -80,7 +80,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.gif">
+            <map:match pattern="**.gif" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.gif">
                         <map:read type="resource" src="content/{1}.gif" mime-type="image/gif"/>
@@ -90,7 +90,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.jpg">
+            <map:match pattern="**.jpg" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.jpg">
                         <map:read type="resource" src="content/{1}.jpg" mime-type="image/jpeg"/>
@@ -100,7 +100,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.pdf">
+            <map:match pattern="**.pdf" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.pdf">
                         <map:read type="resource" src="content/{1}.pdf" mime-type="application/pdf">
@@ -114,7 +114,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.png">
+            <map:match pattern="**.png" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.png">
                         <map:read type="resource" src="content/{1}.png" mime-type="image/png"/>
@@ -124,7 +124,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.eps">
+            <map:match pattern="**.eps" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.eps">
                         <map:read type="resource" src="content/{1}.eps" mime-type="application/postscript"/>
@@ -134,7 +134,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.ai">
+            <map:match pattern="**.ai" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.ai">
                         <map:read type="resource" src="content/{1}.ai" mime-type="application/illustrator"/>
@@ -144,7 +144,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.psd">
+            <map:match pattern="**.psd" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.ai">
                         <map:read type="resource" src="content/{1}.psd" mime-type="application/photoshop"/>
@@ -154,7 +154,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.rm">
+            <map:match pattern="**.rm" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.rm">
                         <map:read type="resource" src="content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
@@ -164,7 +164,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.ram">
+            <map:match pattern="**.ram" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.ram">
                     </map:when>
@@ -172,7 +172,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.camv">
+            <map:match pattern="**.camv" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.camv">
                         <map:read type="resource" src="content/{1}.ram" mime-type="audio/x-pn-realaudio"/>
@@ -182,7 +182,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.smil">
+            <map:match pattern="**.smil" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.smil">
                         <map:read type="resource" src="content/{1}.smil" mime-type="application/smil"/>
@@ -192,7 +192,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.xls">
+            <map:match pattern="**.xls" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.xls">
                         <map:read type="resource" src="content/{1}.xls" mime-type="application/vnd.ms-excel"/>
@@ -202,7 +202,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.doc">
+            <map:match pattern="**.doc" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.doc">
                         <map:read type="resource" src="content/{1}.doc" mime-type="application/msword"/>
@@ -212,7 +212,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.dot">
+            <map:match pattern="**.dot" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.dot">
                         <map:read type="resource" src="content/{1}.dot" mime-type="application/msword"/>
@@ -222,7 +222,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="flash/*.swf">
+            <map:match pattern="flash/*.swf" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="resources/flash/{1}.swf">
                         <map:read type="resource" src="resources/flash/{1}.swf" mime-type="application/x-shockwave-flash"/>
@@ -232,7 +232,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.swf">
+            <map:match pattern="**.swf" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.swf">
                         <map:read type="resource" src="content/{1}.swf" mime-type="application/x-shockwave-flash"/>
@@ -242,7 +242,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.wmv">
+            <map:match pattern="**.wmv" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.wmv">
                         <map:read type="resource" src="content/{1}.wmv" mime-type="audio/x-ms-wmv"/>
@@ -252,7 +252,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.ppt">
+            <map:match pattern="**.ppt" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.ppt">
                         <map:read type="resource" src="content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
@@ -262,7 +262,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.avi">
+            <map:match pattern="**.avi" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.avi">
                         <map:read type="resource" src="content/{1}.avi" mime-type="video/x-msvideo"/>
@@ -272,7 +272,7 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match type="wildcard" pattern="**.zip">
+            <map:match pattern="**.zip" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.zip">
                         <map:read type="resource" src="content/{1}.zip" mime-type="application/zip"/>

@@ -4,119 +4,119 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match type="wildcard" pattern="images/**.gif">
+            <map:match pattern="images/**.gif" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/images/{1}.gif"
                     mime-type="image/gif"/>
             </map:match>
-            <map:match type="wildcard" pattern="favicon.ico">
+            <map:match pattern="favicon.ico" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/images/favicon.ico"
                     mime-type="image/x-icon"/>
             </map:match>
-            <map:match type="wildcard" pattern="style/**.css">
+            <map:match pattern="style/**.css" type="wildcard">
                 <map:read type="txt-resource" src="{naming:java:comp/env/stage-base}/resources/css/{1}.css"
                     mime-type="text/css">
                     <map:parameter name="path" value="{request:contextPath}/stage"/>
                 </map:read>
             </map:match>
-            <map:match type="wildcard" pattern="javascript/*.js">
+            <map:match pattern="javascript/*.js" type="wildcard">
                 <map:read type="txt-resource" src="context://javascript/{1}.js"
                     mime-type="application/x-javascript">
                     <map:parameter name="path" value="{request:contextPath}/stage"/>
                 </map:read>
             </map:match>
-            <map:match type="wildcard" pattern="images/**.jpg">
+            <map:match pattern="images/**.jpg" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/images/{1}.jpg"
                     mime-type="image/jpeg"/>
             </map:match>
-            <map:match type="wildcard" pattern="images/**.png">
+            <map:match pattern="images/**.png" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/images/{1}.png"
                     mime-type="image/png"/>
             </map:match>
-            <map:match type="wildcard" pattern="pdf/**.pdf">
+            <map:match pattern="pdf/**.pdf" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/pdf/{1}.pdf"
                     mime-type="application/pdf">
                     <map:parameter name="byte-ranges" value="false"/>
                 </map:read>
             </map:match>
-            <map:match type="wildcard" pattern="**.gif">
+            <map:match pattern="**.gif" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.gif"
                     mime-type="image/gif"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.jpg">
+            <map:match pattern="**.jpg" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.jpg"
                     mime-type="image/jpeg"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.pdf">
+            <map:match pattern="**.pdf" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.pdf"
                     mime-type="application/pdf">
                     <map:parameter name="byte-ranges" value="false"/>
                 </map:read>
             </map:match>
-            <map:match type="wildcard" pattern="**.png">
+            <map:match pattern="**.png" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.png"
                     mime-type="image/png"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.eps">
+            <map:match pattern="**.eps" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.eps"
                     mime-type="application/postscript"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.ai">
+            <map:match pattern="**.ai" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.ai"
                     mime-type="application/illustrator"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.psd">
+            <map:match pattern="**.psd" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.psd"
                     mime-type="application/photoshop"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.rm">
+            <map:match pattern="**.rm" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.rm"
                     mime-type="audio/x-pn-realaudio"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.ram">
+            <map:match pattern="**.ram" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.ram"
                     mime-type="audio/x-pn-realaudio"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.camv">
+            <map:match pattern="**.camv" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.camv"
                     mime-type="application/x-camtasia_video"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.smil">
+            <map:match pattern="**.smil" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.smil"
                     mime-type="application/smil"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.xls">
+            <map:match pattern="**.xls" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.xls"
                     mime-type="application/vnd.ms-excel"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.doc">
+            <map:match pattern="**.doc" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.doc"
                     mime-type="application/msword"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.dot">
+            <map:match pattern="**.dot" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.dot"
                     mime-type="application/msword"/>
             </map:match>
-            <map:match type="wildcard" pattern="flash/*.swf">
+            <map:match pattern="flash/*.swf" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/flash/{1}.swf"
                     mime-type="application/x-shockwave-flash"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.swf">
+            <map:match pattern="**.swf" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.swf"
                     mime-type="application/x-shockwave-flash"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.wmv">
+            <map:match pattern="**.wmv" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.wmv"
                     mime-type="audio/x-ms-wmv"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.ppt">
+            <map:match pattern="**.ppt" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.ppt"
                     mime-type="application/vnd.ms-powerpoint"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.avi">
+            <map:match pattern="**.avi" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.avi"
                     mime-type="video/x-msvideo"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.zip">
+            <map:match pattern="**.zip" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.zip"
                     mime-type="application/zip"/>
             </map:match>

@@ -4,34 +4,47 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:components>
         <map:generators default="file">
-            <map:generator name="file" logger="sitemap.generator.file" src="org.apache.cocoon.generation.FileGenerator"
-                pool-max="32"/>
-            <map:generator name="html" logger="sitemap.generator.html" src="edu.stanford.irt.laneweb.HTMLGenerator"
-                pool-max="32">
-            </map:generator>
+            <map:generator name="file" logger="sitemap.generator.file"
+                src="org.apache.cocoon.generation.FileGenerator" pool-max="32"/>
+            <map:generator name="html" logger="sitemap.generator.html"
+                src="edu.stanford.irt.laneweb.HTMLGenerator" pool-max="32"> </map:generator>
             <map:generator name="request" src="org.apache.cocoon.generation.RequestGenerator"
                 logger="sitemap.generator.request" pool-max="32"/>
-            <map:generator name="eresources-search" src="edu.stanford.irt.laneweb.eresources.EresourcesSearchGenerator"
+            <map:generator name="eresources-search"
+                src="edu.stanford.irt.laneweb.eresources.EresourcesSearchGenerator"
                 logger="sitemap.generation.eresource-search" pool-max="32"/>
-            <map:generator name="eresources-count" src="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
+            <map:generator name="eresources-count"
+                src="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
                 logger="sitemap.generation.eresource-search" pool-max="32"/>
-            <map:generator name="eresources-browse" src="edu.stanford.irt.laneweb.eresources.EresourcesBrowseGenerator"
+            <map:generator name="eresources-browse"
+                src="edu.stanford.irt.laneweb.eresources.EresourcesBrowseGenerator"
                 logger="sitemap.generation.eresource-browse" pool-max="32"/>
-            <map:generator name="eresources-subset" src="edu.stanford.irt.laneweb.eresources.EresourcesSubsetGenerator"
+            <map:generator name="eresources-subset"
+                src="edu.stanford.irt.laneweb.eresources.EresourcesSubsetGenerator"
                 logger="sitemap.generation.eresource-subset" pool-max="32"/>
-            <map:generator name="eresources-mesh" src="edu.stanford.irt.laneweb.eresources.EresourcesMeshGenerator"
+            <map:generator name="eresources-mesh"
+                src="edu.stanford.irt.laneweb.eresources.EresourcesMeshGenerator"
                 logger="sitemap.generation.eresource-mesh" pool-max="32"/>
-            <map:generator name="eresources-core" src="edu.stanford.irt.laneweb.eresources.EresourcesCoreGenerator"
+            <map:generator name="eresources-core"
+                src="edu.stanford.irt.laneweb.eresources.EresourcesCoreGenerator"
                 logger="sitemap.generation.eresource-core" pool-max="32"/>
-            <map:generator name="history" src="edu.stanford.irt.laneweb.eresources.HistoryQueryGenerator"
+            <map:generator name="history"
+                src="edu.stanford.irt.laneweb.eresources.HistoryQueryGenerator"
                 logger="sitemap.generation.history" pool-max="32"/>
             <map:generator name="status" logger="sitemap.generator.status"
                 src="org.apache.cocoon.generation.StatusGenerator" pool-max="4"/>
             <map:generator name="querymap" src="edu.stanford.irt.laneweb.querymap.QueryMapGenerator"
                 logger="sitemap.generation.querymap" pool-max="32"/>
-            <map:generator name="spellcheck" src="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator"
+            <map:generator name="spellcheck"
+                src="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator"
                 logger="sitemap.generation.spellcheck" pool-max="32"/>
             <map:generator name="exception" src="org.apache.cocoon.generation.ExceptionGenerator"/>
+            <map:generator logger="edu.stanford.irt.laneweb.search" name="search"
+                src="edu.stanford.irt.laneweb.search.SearchGenerator">
+                <map:parameter name="defaultTimeout" value="60000"/>
+            </map:generator>
+            <map:generator logger="edu.stanford.irt.laneweb.search" name="search-describe"
+                src="edu.stanford.irt.laneweb.search.DescribeGenerator"/>
         </map:generators>
         <map:transformers default="saxon">
             <map:transformer name="saxon" logger="sitemap.transformer.saxon"
@@ -42,7 +55,8 @@
                 <xslt-processor-role>saxon</xslt-processor-role>
                 <check-includes>false</check-includes>
             </map:transformer>
-            <map:transformer name="xinclude" src="edu.stanford.irt.laneweb.LanewebXIncludeTransformer" pool-max="32"
+            <map:transformer name="xinclude"
+                src="edu.stanford.irt.laneweb.LanewebXIncludeTransformer" pool-max="32"
                 logger="sitemap.transformer.xinclude"/>
             <map:transformer name="sql" logger="sitemap.transformer.sql"
                 src="org.apache.cocoon.transformation.SQLTransformer" pool-max="32"/>
@@ -67,7 +81,8 @@
                 src="org.apache.cocoon.serialization.TextSerializer" pool-max="32"/>
         </map:serializers>
         <map:selectors default="source-parameter">
-            <map:selector name="source-parameter" src="org.apache.cocoon.selection.RequestParameterSelector"
+            <map:selector name="source-parameter"
+                src="org.apache.cocoon.selection.RequestParameterSelector"
                 logger="sitemap.selector.requestparameter">
                 <parameter-name>source</parameter-name>
             </map:selector>
@@ -76,7 +91,8 @@
             <map:selector name="simple" src="org.apache.cocoon.selection.SimpleSelector"/>
         </map:selectors>
         <map:readers default="resource">
-            <map:reader name="resource" logger="sitemap.reader.resource" src="org.apache.cocoon.reading.ResourceReader"/>
+            <map:reader name="resource" logger="sitemap.reader.resource"
+                src="org.apache.cocoon.reading.ResourceReader"/>
             <map:reader name="txt-resource" logger="sitemap.reader.txtresource"
                 src="edu.stanford.irt.laneweb.TxtResourceReader">
                 <path>/</path>
@@ -84,11 +100,14 @@
             </map:reader>
         </map:readers>
         <map:actions>
-            <map:action logger="sitemap.action.login" name="loginAction" src="edu.stanford.irt.laneweb.LoginAction">
+            <map:action logger="sitemap.action.login" name="loginAction"
+                src="edu.stanford.irt.laneweb.LoginAction">
                 <map:parameter name="proxy-url" value="http://laneproxy.stanford.edu/login?"/>
             </map:action>
-            <map:action logger="sitemap.action.javascript-logger" name="javascript-logger" src="edu.stanford.irt.laneweb.JavascriptLoggerAction"/>
-             <map:action logger="sitemap.action.webdash" name="webdashAction" src="edu.stanford.irt.laneweb.WebdashAction"/>
+            <map:action logger="sitemap.action.javascript-logger" name="javascript-logger"
+                src="edu.stanford.irt.laneweb.JavascriptLoggerAction"/>
+            <map:action logger="sitemap.action.webdash" name="webdashAction"
+                src="edu.stanford.irt.laneweb.WebdashAction"/>
             <map:action name="session-action" src="edu.stanford.irt.laneweb.LanewebSessionAction"/>
             <map:action name="clear-cache" logger="sitemap.acting.clear-cache"
                 src="org.apache.cocoon.acting.ClearCacheAction"/>
@@ -112,66 +131,70 @@
     </map:components>
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match type="wildcard" pattern="">
+            <map:match pattern="" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/index.html"/>
             </map:match>
-            <map:match type="wildcard" pattern="**/">
+            <map:match pattern="**/" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/{1}/index.html"/>
             </map:match>
-            <map:match type="wildcard" pattern="stage/**">
+            <map:match pattern="stage/**" type="wildcard">
                 <map:mount uri-prefix="stage" check-reload="yes" src="context://stage/stage.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="ceyates/**">
+            <map:match pattern="ceyates/**" type="wildcard">
                 <map:mount uri-prefix="ceyates" check-reload="yes"
                     src="file:/afs/ir/users/c/e/ceyates/laneweb/laneweb.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="ryanmax/**">
+            <map:match pattern="ryanmax/**" type="wildcard">
                 <map:mount uri-prefix="ryanmax" check-reload="yes"
                     src="file:/afs/ir/users/r/y/ryanmax/laneweb/laneweb.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="alainb/**">
-                <map:mount uri-prefix="alainb" check-reload="yes" src="file:/afs/ir/users/a/l/alainb/laneweb/laneweb.xmap"/>
+            <map:match pattern="alainb/**" type="wildcard">
+                <map:mount uri-prefix="alainb" check-reload="yes"
+                    src="file:/afs/ir/users/a/l/alainb/laneweb/laneweb.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="olgary/**">
-                <map:mount uri-prefix="olgary" check-reload="yes" src="file:/afs/ir/users/o/l/olgary/laneweb/laneweb.xmap"/>
+            <map:match pattern="olgary/**" type="wildcard">
+                <map:mount uri-prefix="olgary" check-reload="yes"
+                    src="file:/afs/ir/users/o/l/olgary/laneweb/laneweb.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="rzwies/**">
-                <map:mount uri-prefix="rzwies" check-reload="yes" src="file:/afs/ir/users/r/z/rzwies/laneweb/laneweb.xmap"/>
+            <map:match pattern="rzwies/**" type="wildcard">
+                <map:mount uri-prefix="rzwies" check-reload="yes"
+                    src="file:/afs/ir/users/r/z/rzwies/laneweb/laneweb.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="javascript/yui/**">
+            <map:match pattern="javascript/yui/**" type="wildcard">
                 <map:mount uri-prefix="javascript/yui" check-reload="no" src="yui.xmap"/>
             </map:match>
-			<map:match type="wildcard" pattern="extensions/**">
-			    <map:mount uri-prefix="extensions" check-reload="no" src="extensions.xmap"/>
-			</map:match>
-			<map:match type="wildcard" pattern="tobacco/**">
-			    <map:mount uri-prefix="tobacco" check-reload="no" src="tobacco.xmap"/>
-			</map:match>
-            <map:match type="regex" pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv|avi|zip)$">
+            <map:match pattern="extensions/**" type="wildcard">
+                <map:mount uri-prefix="extensions" check-reload="no" src="extensions.xmap"/>
+            </map:match>
+            <map:match pattern="tobacco/**" type="wildcard">
+                <map:mount uri-prefix="tobacco" check-reload="no" src="tobacco.xmap"/>
+            </map:match>
+            <map:match type="regex"
+                pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|ico|swf|wmv|avi|zip)$">
                 <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="robots.txt">
+            <map:match pattern="robots.txt" type="wildcard">
                 <map:read type="resource" src="robots.txt" mime-type="text/plain"/>
             </map:match>
-            <map:match type="wildcard" pattern="eresources/**">
+            <map:match pattern="eresources/**" type="wildcard">
                 <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="content/**">
+            <map:match pattern="content/**" type="wildcard">
                 <map:mount uri-prefix="content" check-reload="no" src="content.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="apps/**">
+            <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
             </map:match>
-            <map:match type="wildcard" pattern="admin/status">
+            <map:match pattern="admin/status" type="wildcard">
                 <map:generate type="status"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="admin/clearcache">
+            <map:match pattern="admin/clearcache" type="wildcard">
                 <map:act type="clear-cache"/>
                 <map:generate type="status"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="search/*">
+            <map:match pattern="search/*" type="wildcard">
                 <map:generate type="file" src="cocoon:/error.html"/>
                 <map:serialize type="xhtml" status-code="503"/>
             </map:match>
@@ -183,10 +206,13 @@
             </map:match>
             <map:match pattern="javascriptLogger">
                 <map:act type="javascript-logger"/>
-                <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/templates/default/spacer.gif" mime-type="image/gif"/>
+                <map:read type="resource"
+                    src="{naming:java:comp/env/live-base}/resources/images/templates/default/spacer.gif"
+                    mime-type="image/gif"/>
             </map:match>
-            <map:match type="wildcard" pattern="cookiesFetch.html">
-                <map:generate type="file" src="{naming:java:comp/env/live-base}/content/cookiesFetch.html"/>
+            <map:match pattern="cookiesFetch.html" type="wildcard">
+                <map:generate type="file"
+                    src="{naming:java:comp/env/live-base}/content/cookiesFetch.html"/>
                 <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
@@ -197,16 +223,16 @@
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match type="wildcard" pattern="postMethodHelper.html">
-              <map:generate type="request"/>
+            <map:match pattern="postMethodHelper.html" type="wildcard">
+                <map:generate type="request"/>
                 <map:transform type="saxon" src="context://xsl/postMethodHelper.xsl">
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
                 </map:transform>
-              <map:serialize type="xhtml"/>
-         	</map:match>
-            <map:match type="wildcard" pattern="ipFetch.html">
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match pattern="ipFetch.html" type="wildcard">
                 <map:generate type="request"/>
                 <map:transform type="saxon" src="context://xsl/ipFetch.xsl">
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
@@ -217,95 +243,137 @@
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match type="wildcard" pattern="describe.html">
+            <map:match pattern="describe.html" type="wildcard">
                 <map:aggregate element="portals" ns="http://lane.stanford.edu/describe/ns">
-                	<map:part src="cocoon://apps/describe-search-application"/>
+                    <map:part src="cocoon://apps/describe-search-application"/>
                     <map:part src="cocoon://content/search-templates.xml"/>
-                 </map:aggregate>
+                </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/describe.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-     
-            
+
+
             <!-- ========================== permenent redirects ============================ -->
-            <map:match type="wildcard" pattern="classes/index.html">
+            <map:match pattern="classes/index.html" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/services/workshops/laneclasses.html"/>
             </map:match>
-            <map:match type="wildcard" pattern="edtech/index.html">
+            <map:match pattern="edtech/index.html" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/services/about/edtech/index.html"/>
             </map:match>
-            <map:match type="wildcard" pattern="edtech/learning_spaces/facilities/m112.html">
+            <map:match pattern="edtech/learning_spaces/facilities/m112.html" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/services/spaces/features/m112.html"/>
             </map:match>
-            <map:match type="wildcard" pattern="clinician/index.html">
+            <map:match pattern="clinician/index.html" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/portals/clinical.html"/>
             </map:match>
             <!-- ========================== EHR redirects for SHC ============================ -->
-            <map:match type="wildcard" pattern="shc/anesthesia.html">
-                <map:redirect-to uri="{request:contextPath}/portals/anesthesia.html?template=shc&amp;{request:queryString}"/>
+            <map:match pattern="shc/anesthesia.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/portals/anesthesia.html?template=shc&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/cardiology.html">
-                <map:redirect-to uri="{request:contextPath}/portals/cardiology.html?template=shc&amp;{request:queryString}"/>
+            <map:match pattern="shc/cardiology.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/portals/cardiology.html?template=shc&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/clinical.html">
-                <map:redirect-to uri="{request:contextPath}/portals/clinical.html?template=shc&amp;{request:queryString}"/>
+            <map:match pattern="shc/clinical.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/portals/clinical.html?template=shc&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/ear-nose-throat.html">
-                <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
+            <map:match pattern="shc/ear-nose-throat.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/emergency.html">
-                <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
+            <map:match pattern="shc/emergency.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/gastroenterology.html">
-                <map:redirect-to uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"/>
+            <map:match pattern="shc/gastroenterology.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/hematology.html">
-                <map:redirect-to uri="{request:contextPath}/portals/hematology.html?template=shc&amp;{request:queryString}"/>
+            <map:match pattern="shc/hematology.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/portals/hematology.html?template=shc&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/hepatology.html">
-                <map:redirect-to uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"/>
+            <map:match pattern="shc/hepatology.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/icu.html">
-                <map:redirect-to uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"/>
+            <map:match pattern="shc/icu.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/infectious-disease.html">
-                <map:redirect-to uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"/>
+            <map:match pattern="shc/infectious-disease.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/internal-medicine.html">
-                <map:redirect-to uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"/>
+            <map:match pattern="shc/internal-medicine.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/neurology.html">
-                <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
+            <map:match pattern="shc/neurology.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/ob-gyn.html">
-                <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
+            <map:match pattern="shc/ob-gyn.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/oncology.html">
-                <map:redirect-to uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"/>
+            <map:match pattern="shc/oncology.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/opthalmology.html">
-                <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
+            <map:match pattern="shc/opthalmology.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/orthopedics.html">
-                <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
+            <map:match pattern="shc/orthopedics.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/psychiatry.html">
-                <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
+            <map:match pattern="shc/psychiatry.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/pulmonary.html">
-                <map:redirect-to uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"/>
+            <map:match pattern="shc/pulmonary.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/radiology.html">
-                <map:redirect-to uri="http://www.guideline.gov/search/searchresults.aspx?Type=3&amp;num=20&amp;txtSearch={request-param:keywords}+AND+%22american+college+of+radiology%22"/>
+            <map:match pattern="shc/radiology.html" type="wildcard">
+                <map:redirect-to
+                    uri="http://www.guideline.gov/search/searchresults.aspx?Type=3&amp;num=20&amp;txtSearch={request-param:keywords}+AND+%22american+college+of+radiology%22"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/surgery-cardiothoracic.html">
-                <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
+            <map:match pattern="shc/surgery-cardiothoracic.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
+                />
             </map:match>
-            <map:match type="wildcard" pattern="shc/surgery-general.html">
-                <map:redirect-to uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"/>
+            <map:match pattern="shc/surgery-general.html" type="wildcard">
+                <map:redirect-to
+                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
+                />
             </map:match>
             <!-- ========================== permenent redirects ============================ -->
-            <map:match type="wildcard" pattern="plain/**.html">
+            <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="{request:serverName}"/>
@@ -327,7 +395,7 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.html">
+            <map:match pattern="**.html" type="wildcard">
                 <map:act type="session-action"/>
                 <map:aggregate element="doc" label="content">
                     <map:part src="cocoon:/content/{1}.html"/>
@@ -354,19 +422,19 @@
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.xml">
+            <map:match pattern="**.xml" type="wildcard">
                 <map:generate type="file" src="{naming:java:comp/env/live-base}/content/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="_vti**">
+            <map:match pattern="_vti**" type="wildcard">
                 <map:generate src="cocoon:/error.html"/>
                 <map:serialize type="xhtml" status-code="404"/>
             </map:match>
-            <map:match type="wildcard" pattern="MSOffice**">
+            <map:match pattern="MSOffice**" type="wildcard">
                 <map:generate src="cocoon:/error.html"/>
                 <map:serialize type="xhtml" status-code="404"/>
             </map:match>
-            <map:match type="wildcard" pattern="**">
+            <map:match pattern="**" type="wildcard">
                 <map:redirect-to uri="{1}/index.html"/>
             </map:match>
             <map:handle-errors>

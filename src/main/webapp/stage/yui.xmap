@@ -4,28 +4,28 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="caching">
-            <map:match type="wildcard" pattern="**.js">
+            <map:match pattern="**.js" type="wildcard">
                 <map:read src="resource://yui/{1}.js" mime-type="application/x-javascript"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.html">
+            <map:match pattern="**.html" type="wildcard">
                 <map:read src="resource://yui/{1}.html" mime-type="text/html"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.txt">
+            <map:match pattern="**.txt" type="wildcard">
                 <map:read src="resource://yui/{1}.txt" mime-type="text/plain"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.css">
+            <map:match pattern="**.css" type="wildcard">
                 <map:read src="resource://yui/{1}.css" mime-type="text/css"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.json">
+            <map:match pattern="**.json" type="wildcard">
                 <map:read src="resource://yui/{1}.json" mime-type="text/json"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.png">
+            <map:match pattern="**.png" type="wildcard">
                 <map:read src="resource://yui/{1}.png" mime-type="image/png"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.gif">
+            <map:match pattern="**.gif" type="wildcard">
                 <map:read src="resource://yui/{1}.gif" mime-type="image/gif"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.jpg">
+            <map:match pattern="**.jpg" type="wildcard">
                 <map:read src="resource://yui/{1}.jpg" mime-type="image/jpg"/>
             </map:match>
         </map:pipeline>

@@ -11,7 +11,7 @@ function webtrendsOnClick(e) {
 		if(node != null)
 		{
 	    	var redirectUrl = webtrendsProcess(node);
-	    	if(redirectUrl   && e.button =="0")//to give some time to send the request for webtrends
+	    	if(redirectUrl   && e.button =="0"  && e.returnValue )//to give some time to send the request for webtrends
 			{
 				redirectUrl = redirectUrl.replace("'","\\'");
 				var target = node.target;

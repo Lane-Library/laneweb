@@ -2,23 +2,13 @@
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
-    <map:components>
-        <map:generators>
-            <map:generator logger="edu.stanford.irt.laneweb.search" name="search"
-                src="edu.stanford.irt.laneweb.search.SearchGenerator">
-                <map:parameter name="defaultTimeout" value="60000"/>
-            </map:generator>
-            <map:generator logger="edu.stanford.irt.laneweb.search" name="search-describe"
-                src="edu.stanford.irt.laneweb.search.DescribeGenerator"/>
-        </map:generators>
-    </map:components>
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match type="wildcard" pattern="describe-search-application">
+            <map:match pattern="describe-search-application" type="wildcard">
                 <map:generate type="search-describe"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match type="wildcard" pattern="search-application">
+            <map:match pattern="search-application" type="wildcard">
                 <map:generate type="search"/>
                 <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
                     <map:parameter name="context" value="{request:contextPath}"/>
@@ -30,7 +20,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search/*">
-                <map:match type="wildcard" pattern="search/json">
+                <map:match pattern="search/json" type="wildcard">
                     <map:generate src="cocoon:/search-application"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/search2json.xsl">
@@ -42,8 +32,7 @@
                     </map:select>
                     <map:serialize type="text"/>
                 </map:match>
-                <map:match type="wildcard" pattern="search/filtered-json">
-                    <map:parameter name="parameter-name" value="source"/>
+                <map:match pattern="search/filtered-json" type="wildcard">
                     <map:aggregate element="doc">
                         <map:part src="cocoon:/search-application"/>
                         <map:part src="cocoon://plain/{request-param:source}"/>
@@ -110,14 +99,14 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
-            <map:match type="wildcard" pattern="spellcheck/*">
-                <map:match type="wildcard" pattern="spellcheck/xml">
+            <map:match pattern="spellcheck/*" type="wildcard">
+                <map:match pattern="spellcheck/xml" type="wildcard">
                     <map:generate type="spellcheck">
                         <map:parameter name="query" value="{request-param:q}"/>
                     </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>
-                <map:match type="wildcard" pattern="spellcheck/json">
+                <map:match pattern="spellcheck/json" type="wildcard">
                     <map:generate type="spellcheck">
                         <map:parameter name="query" value="{request-param:q}"/>
                     </map:generate>
@@ -132,8 +121,8 @@
                     <map:serialize type="text"/>
                 </map:match>
             </map:match>
-            <map:match type="wildcard" pattern="sfx/*">
-                <map:match type="wildcard" pattern="sfx/xml">
+            <map:match pattern="sfx/*" type="wildcard">
+                <map:match pattern="sfx/xml" type="wildcard">
                     <map:generate type="html"
                         src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"/>
                     <map:select type="resource-exists">
@@ -154,7 +143,7 @@
                     </map:select>
                     <map:serialize type="xml"/>
                 </map:match>
-                <map:match type="wildcard" pattern="sfx/json">
+                <map:match pattern="sfx/json" type="wildcard">
                     <map:generate type="html"
                         src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"/>
                     <map:select type="resource-exists">

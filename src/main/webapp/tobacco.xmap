@@ -4,31 +4,31 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="caching">
-            <map:match type="wildcard" pattern="**.css">
+            <map:match pattern="**.css" type="wildcard">
                 <map:read src="{naming:java:comp/env/live-base}/content/tobacco/{1}.css" mime-type="text/css"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.gif">
+            <map:match pattern="**.gif" type="wildcard">
                 <map:read src="{naming:java:comp/env/live-base}/content/tobacco/{1}.gif" mime-type="image/gif"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.htm">
+            <map:match pattern="**.htm" type="wildcard">
                 <map:read src="{naming:java:comp/env/live-base}/content/tobacco/{1}.htm" mime-type="text/html"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.html">
+            <map:match pattern="**.html" type="wildcard">
                 <map:read src="{naming:java:comp/env/live-base}/content/tobacco/{1}.html" mime-type="text/html"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.jpg">
+            <map:match pattern="**.jpg" type="wildcard">
                 <map:read src="{naming:java:comp/env/live-base}/content/tobacco/{1}.jpg" mime-type="image/jpg"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.js">
+            <map:match pattern="**.js" type="wildcard">
                 <map:read src="{naming:java:comp/env/live-base}/content/tobacco/{1}.js" mime-type="application/x-javascript"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.png">
+            <map:match pattern="**.png" type="wildcard">
                 <map:read src="{naming:java:comp/env/live-base}/content/tobacco/{1}.png" mime-type="image/png"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.swf">
+            <map:match pattern="**.swf" type="wildcard">
                 <map:read src="{naming:java:comp/env/live-base}/content/tobacco/{1}.swf" mime-type="application/x-shockwave-flash"/>
             </map:match>
-            <map:match type="wildcard" pattern="**.xml">
+            <map:match pattern="**.xml" type="wildcard">
                 <map:read src="{naming:java:comp/env/live-base}/content/tobacco/{1}.xml" mime-type="text/xml"/>
             </map:match>
         </map:pipeline>
