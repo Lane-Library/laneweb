@@ -23,12 +23,13 @@
     </appender>
 
     <category name="sitemap.action.javascript-logger" additivity="false">
-        <priority value="error"/>
+        <priority value="ERROR"/>
         <appender-ref ref="JAVASCRIPT_LOG"/>
     </category>
     
     <root>
-        <priority value="${laneweb.log4j.level}"/>
+        <!--<priority value="${laneweb.log4j.level}"/>-->
+        <priority value="ERROR"/>
         <appender-ref ref="LOG"/>
     </root>
 
