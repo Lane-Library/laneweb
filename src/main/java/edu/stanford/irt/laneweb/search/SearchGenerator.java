@@ -96,7 +96,7 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
     public void generate() throws IOException, SAXException, ProcessingException {
 
         if ("y".equalsIgnoreCase(this.clearCache)) {
-            ((CachedMetaSearchManagerImpl) this.metaSearchManager).clearCache(this.keywords);
+            ((CachedMetaSearchManagerImpl) this.metaSearchManager).clearCache(this.q);
         }
         if ("all".equalsIgnoreCase(this.clearCache)) {
             ((CachedMetaSearchManagerImpl) this.metaSearchManager).clearAllCaches();
