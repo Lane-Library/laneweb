@@ -4,11 +4,11 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
-           	<map:match pattern="describe-search-application" type="wildcard">
+           	<map:match pattern="search-describe-application" type="wildcard">
 	           	<map:generate type="search-describe"/>
 	          	<map:serialize type="xml"/>
 	        </map:match>  
-           	 <map:match type="wildcard" pattern="url-tester">
+           	 <map:match pattern="url-tester" type="wildcard">
 	            <map:generate type="search-url-tester"/>
 	          	<map:serialize type="xhtml"/>
 	         </map:match>  
