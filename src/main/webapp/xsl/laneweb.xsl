@@ -888,6 +888,9 @@
                             <xsl:with-param name="link" select="concat($uri-before, 'index.html')"/>
                             <xsl:with-param name="attr" select="'href'"/>
                         </xsl:call-template>
+                        <xsl:attribute name="title">
+                            <xsl:value-of select="concat($label-current,'...')"/>
+                        </xsl:attribute>
                         <xsl:value-of select="$label-current"/>
                     </a>
                     <xsl:text>&#160;&gt;&#160;</xsl:text>
@@ -912,6 +915,9 @@
                             <xsl:with-param name="link" select="concat($uri-before, 'index.html')"/>
                             <xsl:with-param name="attr" select="'href'"/>
                         </xsl:call-template>
+                        <xsl:attribute name="title">
+                            <xsl:value-of select="concat($label-current,'...')"/>
+                        </xsl:attribute>
                         <xsl:value-of select="$label-current"/>
                     </a>
                     <xsl:text>&#160;&gt;&#160;</xsl:text>
