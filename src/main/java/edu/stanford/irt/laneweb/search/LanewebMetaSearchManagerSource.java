@@ -1,4 +1,3 @@
-
 package edu.stanford.irt.laneweb.search;
 
 import org.apache.avalon.framework.thread.ThreadSafe;
@@ -15,8 +14,9 @@ import edu.stanford.irt.search.MetaSearchManager;
 public class LanewebMetaSearchManagerSource implements ThreadSafe, MetaSearchManagerSource {
 
     private MetaSearchManager manager;
+
     private HttpClient httpClient;
-    
+
     public LanewebMetaSearchManagerSource() {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/metasearch.xml");
         this.manager = (MetaSearchManager) context.getBean("manager");
@@ -26,6 +26,7 @@ public class LanewebMetaSearchManagerSource implements ThreadSafe, MetaSearchMan
     public MetaSearchManager getMetaSearchManager() {
         return this.manager;
     }
+
     public HttpClient getHttpClient() {
         return this.httpClient;
     }

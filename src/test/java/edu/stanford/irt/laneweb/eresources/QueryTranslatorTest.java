@@ -56,7 +56,7 @@ public class QueryTranslatorTest extends TestCase {
     }
 
     public void testMiscSearchTerms() {
-        String[] terms = new String[] { "%", "*", "()", "{}", "-*", "-%", "#%"};
+        String[] terms = new String[] { "%", "*", "()", "{}", "-*", "-%", "#%" };
         for (String element : terms) {
             try {
                 String translatedQuery = this.translator.translate(element);
