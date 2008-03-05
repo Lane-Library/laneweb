@@ -100,9 +100,9 @@ function webtrendsProcess(node){
 				title = getWebtrendsTitle(node);
 				//alert('DCS.dcssip:'+ href +'\nDCS.dcsuri:'+uri + '\nDCS.dcsquery:' +query  +'\nWT.ti:'+title +'\nDCSext.keywords:'+getMetaContent('LW.keywords')+'\nDCSext.search_type:'+getMetaContent('LW.source')+'\nDCSext.offsite_link:1');
 			 	dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.keywords'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link',offsite,'WT.seg_1',affiliation);
-			 	//alert('/OFFSITE/' + title + '/' + redirectUrl);
+			 	//alert('/OFFSITE/' + title);
 			 	if(window.pageTracker != undefined){
-					window.pageTracker._trackPageview('/OFFSITE/' + title + '/' + redirectUrl);
+					window.pageTracker._trackPageview('/OFFSITE/' + title);
 				}
 			 }
 		}
