@@ -18,7 +18,7 @@
         </template>
     </xsl:template>
     
-    <xsl:template match="h:a[@id]">
+    <xsl:template match="h:a[@id and @class='metasearch']">
         <resource idref="{@id}"/>
     </xsl:template>
     
