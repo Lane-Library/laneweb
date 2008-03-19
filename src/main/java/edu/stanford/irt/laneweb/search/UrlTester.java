@@ -1,9 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
@@ -14,11 +11,12 @@ import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.ServiceableGenerator;
-import org.apache.cocoon.xml.XMLUtils;
 import org.apache.cocoon.xml.dom.DOMStreamer;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.w3c.tidy.Tidy;
+import org.apache.xerces.parsers.DOMParser;
+import org.cyberneko.html.HTMLConfiguration;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class UrlTester extends ServiceableGenerator {
@@ -51,29 +49,15 @@ public class UrlTester extends ServiceableGenerator {
     public void generate() throws SAXException, IOException {
         GetMethod get = new GetMethod(this.url);
         this.httpClient.executeMethod(get);
-        Tidy tidy = new Tidy();
-        tidy.setXmlOut(true);
-        tidy.setNumEntities(true);
-        tidy.setShowWarnings(false);
-        tidy.setQuiet(true);
-        tidy.setXHTML(true);
-        StringWriter stringWriter = new StringWriter();
-        PrintWriter errorWriter = new PrintWriter(stringWriter);
-        tidy.setErrout(errorWriter);
-        // ByteArrayOutputStream output = new ByteArrayOutputStream();
-
-        org.w3c.dom.Document doc =
-                tidy.parseDOM(new BufferedInputStream(new BufferedInputStream(get.getResponseBodyAsStream())), null);
-        XMLUtils.stripDuplicateAttributes(doc, null);
-        get.releaseConnection();
-        errorWriter.flush();
-        errorWriter.close();
-        if (getLogger().isWarnEnabled()) {
-            getLogger().warn(stringWriter.toString());
-        }
+        HTMLConfiguration config = new HTMLConfiguration();
+		config.setFeature("http://xml.org/sax/features/namespaces", false);  
+        config.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
+        DOMParser parser = new DOMParser(config);
+        parser.parse(new InputSource(get.getResponseBodyAsStream()));
+        
         DOMStreamer domStreamer = new DOMStreamer(this.contentHandler, this.lexicalHandler);
         this.contentHandler.startDocument();
-        domStreamer.stream(doc.getDocumentElement());
+        domStreamer.stream(parser.getDocument());
         this.contentHandler.endDocument();
 
     }
