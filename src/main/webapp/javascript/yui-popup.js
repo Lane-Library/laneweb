@@ -2,10 +2,17 @@
 var X;
 var Y;
 function setXY(e) {
-	// IE doesn't have pageX/pageY
+	// IE and Safari don't have pageX/pageY so we need to do a little more calculation
 	if(window.event){
 		X = event.clientX;
 		Y = event.clientY;
+            if( document.body && ( document.body.scrollLeft || document.body.scrollTop ) ) { // Safari
+                X += document.body.scrollLeft;
+                Y += document.body.scrollTop;
+            } else if( document.documentElement && ( document.documentElement.scrollLeft || document.documentElement.scrollTop ) ) { // IE
+                X += document.documentElement.scrollLeft;
+                Y += document.documentElement.scrollTop;
+            }
 	}
 	else{
 		X = e.pageX;
