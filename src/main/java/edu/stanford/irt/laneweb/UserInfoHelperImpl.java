@@ -37,14 +37,18 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHe
             String ip = request.getRemoteAddr();
             // mod_proxy puts the real remote address in an x-forwarded-for
             // header
-            // Loa:d balancer also does this
+            // Load balancer also does this
             String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
             if (header != null) {
-                ip = header;
+            	if(header.indexOf(",") >0)
+            		ip =  header.substring(header.lastIndexOf(",")+1 , header.length()).trim();
+            	else
+            		ip = header;
             }
             try {
                 userInfo.setAffiliation(Affiliation.getAffiliationForIP(ip));
             } catch (Exception e) {
+            	getLogger().error("Affiliation ERROR ip --->".concat(ip));
                 userInfo.setAffiliation(Affiliation.ERR);
             }
         }
