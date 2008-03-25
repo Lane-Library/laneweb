@@ -48,7 +48,8 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHe
             try {
                 userInfo.setAffiliation(Affiliation.getAffiliationForIP(ip));
             } catch (Exception e) {
-            	getLogger().error("Affiliation ERROR ip --->".concat(ip));
+            	if(getLogger() != null)
+            		getLogger().error("Affiliation ERROR ip --->".concat(ip));
                 userInfo.setAffiliation(Affiliation.ERR);
             }
         }
