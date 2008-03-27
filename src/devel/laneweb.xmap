@@ -153,6 +153,7 @@
                         </map:transform>
                     </map:otherwise>
                 </map:select>
+                <map:act type="laneweb-version"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="**.xml" type="wildcard">

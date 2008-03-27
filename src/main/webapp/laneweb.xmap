@@ -113,6 +113,9 @@
             <map:action name="session-action" src="edu.stanford.irt.laneweb.LanewebSessionAction"/>
             <map:action name="clear-cache" logger="sitemap.acting.clear-cache"
                 src="org.apache.cocoon.acting.ClearCacheAction"/>
+            <map:action name="laneweb-version" src="edu.stanford.irt.laneweb.VersionHeaderAction">
+                <map:parameter name="laneweb-version" value="1.7.15-SNAPSHOT"/>
+            </map:action>
         </map:actions>
         <map:matchers default="wildcard">
             <map:matcher name="wildcard" logger="sitemap.matcher.wildcard"
@@ -422,10 +425,12 @@
                     <map:parameter name="m" value="{request-param:m}"/>
                     <map:parameter name="t" value="{request-param:t}"/>
                 </map:transform>
+                <map:act type="laneweb-version"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
                 <map:generate type="file" src="{naming:java:comp/env/live-base}/content/{1}.xml"/>
+                <map:act type="laneweb-version"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="_vti**" type="wildcard">

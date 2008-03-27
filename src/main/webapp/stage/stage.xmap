@@ -119,6 +119,7 @@
                     <map:parameter name="m" value="{request-param:m}"/>
                     <map:parameter name="t" value="{request-param:t}"/>
                 </map:transform>
+                <map:act type="laneweb-version"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
