@@ -1,124 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="webapp" name="laneweb" basedir=".">
-    <property name="defaulttargetdir" value="target"/>
-    <property name="srcdir" value="src/main/java"/>
-    <property name="libdir" value="${defaulttargetdir}/lib"/>
-    <property name="classesdir" value="${defaulttargetdir}/classes"/>
-    <property name="webappdir" value="${defaulttargetdir}/laneweb"/>
-    <path id="build.classpath">
-        <fileset dir="${libdir}">
-            <include name="**/*.jar"/>
-        </fileset>
-    </path>
-    <target name="all"/>
-    <target name="init" description="o Initializes some properties">
-        <mkdir dir="${libdir}"/>
-        <condition property="noget">
-            <equals arg2="only" arg1="${build.sysclasspath}"/>
-        </condition>
-    </target>
-    <target name="compile" description="o Compile the code" depends="get-deps">
-        <mkdir dir="${classesdir}"/>
-        <javac destdir="${classesdir}" deprecation="true" debug="true" optimize="false"
-            excludes="**/package.html" srcdir="${srcdir}">
-            <classpath>
-                <fileset dir="${libdir}">
-                    <include name="*.jar"/>
-                </fileset>
-            </classpath>
-        </javac>
-    </target>
-	
-	<target name="robots-message">
-    	<echo level="warning"   >
-    	**************************************************************************
-    	  			If NOT PRODUCTION server,
-    		
-    		Please edit the robots.txt  ( target/laneweb/robots.txt )
-    			
-    		User-agent: *
-    		Disallow: /
-   
-    	**************************************************************************
-    	</echo>
-	</target>
-	
-    <target name="webapp" depends="compile, prepare-webapp,robots-message"/>
-    <target name="prepare-webapp">
-        <copy todir="${webappdir}">
-            <fileset dir="src/main/webapp" excludes="META-INF/context.xml"/>
-        </copy>
-        <copy todir="${webappdir}/WEB-INF/lib">
-            <fileset dir="${defaulttargetdir}/lib" excludes="servlet-api*,junit*,easymock*"/>
-        </copy>
-        <copy todir="${webappdir}/WEB-INF/classes">
-            <fileset dir="${defaulttargetdir}/classes"/>
-        </copy>
-    </target>
-    <target name="war" depends="webapp">
-        <war destfile="${defaulttargetdir}/laneweb.war" webxml="src/main/webapp/WEB-INF/web.xml"
-            basedir="${webappdir}"/>
-    </target>
-    <target name="clean" description="o Clean up the generated directories">
-        <delete dir="${webappdir}"/>
-        <delete file="${defaulttargetdir}/laneweb.war"/>
-        <delete dir="${defaulttargetdir}/classes"/>
-    </target>
-    <target name="get-deps" unless="noget" depends="init">
-        <get dest="${libdir}/activation-1.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax/activation/activation/1.1/activation-1.1.jar"/>
-        <get dest="${libdir}/avalon-framework-api-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-framework/avalon-framework-api/4.3/avalon-framework-api-4.3.jar"/>
-        <get dest="${libdir}/avalon-framework-impl-4.3.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-framework/avalon-framework-impl/4.3/avalon-framework-impl-4.3.jar"/>
-        <get dest="${libdir}/avalon-logkit-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/avalon-logkit/avalon-logkit/2.1/avalon-logkit-2.1.jar"/>
-        <get dest="${libdir}/cocoon-2.1.11.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/apache/cocoon/cocoon/2.1.11/cocoon-2.1.11.jar"/>
-        <get dest="${libdir}/cocoon-databases-2.1.11.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/apache/cocoon/cocoon-databases/2.1.11/cocoon-databases-2.1.11.jar"/>
-        <get dest="${libdir}/cocoon-paranoid-2.1.11.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/apache/cocoon/cocoon-paranoid/2.1.11/cocoon-paranoid-2.1.11.jar"/>
-        <get dest="${libdir}/commons-codec-1.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-codec/commons-codec/1.2/commons-codec-1.2.jar"/>
-        <get dest="${libdir}/commons-collections-3.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-collections/commons-collections/3.1/commons-collections-3.1.jar"/>
-        <get dest="${libdir}/commons-io-1.3.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-io/commons-io/1.3.1/commons-io-1.3.1.jar"/>
-        <get dest="${libdir}/commons-httpclient-3.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar"/>
-        <get dest="${libdir}/commons-jxpath-1.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-jxpath/commons-jxpath/1.2/commons-jxpath-1.2.jar"/>
-        <get dest="${libdir}/commons-lang-2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-lang/commons-lang/2.2/commons-lang-2.2.jar"/>
-        <get dest="${libdir}/commons-logging-1.1.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/>
-        <get dest="${libdir}/concurrent-1.3.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/concurrent/concurrent/1.3.4/concurrent-1.3.4.jar"/>
-        <get dest="${libdir}/ehcache-1.2.2.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/net/sf/ehcache/ehcache/1.2.2/ehcache-1.2.2.jar"/>
-        <get dest="${libdir}/excalibur-component-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-component/excalibur-component/2.1/excalibur-component-2.1.jar"/>
-        <get dest="${libdir}/excalibur-datasource-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-datasource/excalibur-datasource/2.1/excalibur-datasource-2.1.jar"/>
-        <get dest="${libdir}/excalibur-instrument-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-instrument/excalibur-instrument-api/2.1/excalibur-instrument-api-2.1.jar"/>
-        <get dest="${libdir}/excalibur-instrument-mgr-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-instrument/excalibur-instrument-mgr-api/2.1/excalibur-instrument-mgr-api-2.1.jar"/>
-        <get dest="${libdir}/excalibur-instrument-mgr-impl-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-instrument/excalibur-instrument-mgr-impl/2.1/excalibur-instrument-mgr-impl-2.1.jar"/>
-        <get dest="${libdir}/excalibur-logger-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-logger/excalibur-logger/2.1/excalibur-logger-2.1.jar"/>
-        <get dest="${libdir}/excalibur-pool-api-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-pool/excalibur-pool-api/2.1/excalibur-pool-api-2.1.jar"/>
-        <get dest="${libdir}/excalibur-pool-impl-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-pool/excalibur-pool-impl/2.1/excalibur-pool-impl-2.1.jar"/>
-        <get dest="${libdir}/excalibur-pool-instrumented-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-pool/excalibur-pool-instrumented/2.1/excalibur-pool-instrumented-2.1.jar"/>
-        <get dest="${libdir}/excalibur-sourceresolve-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-sourceresolve/excalibur-sourceresolve/2.1/excalibur-sourceresolve-2.1.jar"/>
-        <get dest="${libdir}/excalibur-store-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-store/excalibur-store/2.1/excalibur-store-2.1.jar"/>
-        <get dest="${libdir}/excalibur-xmlutil-2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/excalibur-xmlutil/excalibur-xmlutil/2.1/excalibur-xmlutil-2.1.jar"/>
-        <get dest="${libdir}/eresources-model-1.1.6.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/eresources-model/1.1.6/eresources-model-1.1.6.jar"/>
-        <get dest="${libdir}/googleapi-UNKNOWN.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/com/google/googleapi/UNKNOWN/googleapi-UNKNOWN.jar"/>
-        <get dest="${libdir}/irt-UNKNOWN.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/irt/irt/UNKNOWN/irt-UNKNOWN.jar"/>
-        <get dest="${libdir}/jakarta-regexp-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/jakarta-regexp/jakarta-regexp/1.4/jakarta-regexp-1.4.jar"/>
-        <get dest="${libdir}/log4j-1.2.15.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/log4j/log4j/1.2.15/log4j-1.2.15.jar"/>
-        <get dest="${libdir}/mail-1.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax/mail/mail/1.4/mail-1.4.jar"/>
-        <get dest="${libdir}/nekohtml-1.9.6.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/nekohtml/nekohtml/1.9.6/nekohtml-1.9.6.jar"/>
-        <get dest="${libdir}/querymap-1.0.5.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/querymap/1.0.5/querymap-1.0.5.jar"/>
-        <get dest="${libdir}/servlet-api-2.4.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar"/>
-        <get dest="${libdir}/saxon-9.0.0.2.j.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/net/sf/saxon/saxon/9.0.0.2.j/saxon-9.0.0.2.j.jar"/>
-        <get dest="${libdir}/soap-2.3.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/soap/soap/2.3.1/soap-2.3.1.jar"/>
-        <get dest="${libdir}/spellcheck-1.2.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/spellcheck/1.2.1/spellcheck-1.2.1.jar"/>
-        <get dest="${libdir}/xalan-2.7.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xalan/xalan/2.7.0/xalan-2.7.0.jar"/>
-        <get dest="${libdir}/xercesImpl-2.9.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/xerces/xercesImpl/2.9.0/xercesImpl-2.9.0.jar"/>
-    	<get dest="${libdir}/yui-2.4.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/yui/yui/2.4.1/yui-2.4.1.jar"/>
-    	
-    					<!--   ==================  DEPENDENCY for the search application  ==================    -->
-        
-        <get dest="${libdir}/spring-core-2.5.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/springframework/spring-core/2.5.1/spring-core-2.5.1.jar"/>
-        <get dest="${libdir}/aopalliance-1.0.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"/>
-        <get dest="${libdir}/spring-aop-2.5.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/springframework/spring-aop/2.5.1/spring-aop-2.5.1.jar"/>
-    	<get dest="${libdir}/spring-beans-2.5.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/springframework/spring-beans/2.5.1/spring-beans-2.5.1.jar"/>
-    	<get dest="${libdir}/spring-context-2.5.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/springframework/spring-context/2.5.1/spring-context-2.5.1.jar"/>
-    	<get dest="${libdir}/spring-context-support-2.5.1.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/org/springframework/spring-context-support/2.5.1/spring-context-support-2.5.1.jar"/>
-        <get dest="${libdir}/search-spring-1.4.5.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/search/search-spring/1.4.5/search-spring-1.4.5.jar"/>
-        <get dest="${libdir}/search-core-1.4.5.jar" usetimestamp="true" ignoreerrors="true" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/search/search-core/1.4.5/search-core-1.4.5.jar"/>
-    	               
+    <property name="laneweb.version" value="1.7.14"/>
+    <target name="webapp">
+        <mkdir dir="target"/>
+        <get dest="target/laneweb.war" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/laneweb/${laneweb.version}/laneweb-${laneweb.version}.war"/>
+        <unjar src="target/laneweb.war" dest="target/laneweb"/>
+        <echo level="warning"   >
+            **************************************************************************
+            If NOT PRODUCTION server,
+            
+            Please edit the robots.txt  ( target/laneweb/robots.txt )
+            
+            User-agent: *
+            Disallow: /
+            
+            **************************************************************************
+        </echo>
     </target>
 </project>
