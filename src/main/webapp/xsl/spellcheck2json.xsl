@@ -7,7 +7,7 @@
     
 <xsl:template match="/">{
 	"query": "<xsl:value-of select="encode-for-uri(//s:query)"/>",
-	"suggestion": "<xsl:value-of select="//s:suggestion"/>"
+	"suggestion": "<xsl:value-of select="replace(//s:suggestion,'&quot;','\\&quot;')"/>"
 }
 </xsl:template>
 
