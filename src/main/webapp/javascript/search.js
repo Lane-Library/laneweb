@@ -87,7 +87,7 @@ function Result(type, tab, container) {
         failure:window.handleFailure,
         argument: {
             result:this,
-  			file:"search2.js",
+  			file:"search.js",
   			line:"Result"
         }
     }
@@ -208,7 +208,7 @@ var showHitsCallback =
 {
   success:showHits,
   failure:handleFailure,
-   argument:{file:"search2.js", line:"showHitsCallback"} 
+   argument:{file:"search.js", line:"showHitsCallback"} 
 };
 
 
@@ -243,7 +243,7 @@ var findItCallBack =
 {
   success:showFindIt,
   failure:handleFailure ,
-  argument:{file:"search2.js", line:"findItCallBack"}	
+  argument:{file:"search.js", line:"findItCallBack"}	
 };
 
 
@@ -265,7 +265,7 @@ var spellCheckCallBack =
 {
   success:showSpellCheck,
   failure:handleFailure,
-  argument:{file:"search2.js", line:"spellCheckCallBack"} 
+  argument:{file:"search.js", line:"spellCheckCallBack"} 
 };
 
 function showSpellCheck(o)
@@ -317,7 +317,7 @@ var querymapCallBack =
 {
   success:showQueryMapping,
   failure:handleFailure,
-  argument:{file:"search2.js", line:"queryMapping"}
+  argument:{file:"search.js", line:"queryMapping"}
 };
 
  	
@@ -349,7 +349,7 @@ function QueryMapping(content)
         failure:window.handleFailure,
         argument: {
             queryMapping:this,
-			file:"search2.js",
+			file:"search.js",
   			line:"QueryMapping()"
         }
     }
