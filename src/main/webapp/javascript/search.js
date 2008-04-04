@@ -149,11 +149,9 @@ Result.prototype.show = function() {
             window.spellcheck.setSource(this._type);
             window.activeResult.hide();
             this._tab.className = 'eLibraryTabActive';
-            if(window.queryMapping && window.queryMapping.getContent())
-	            this.container.appendChild(window.queryMapping.getContent());
 	       	for (var i = 0; i < this._content.length; i++) {
            		this.container.appendChild(this._content[i]);
-            }
+           }
             window.activeResult = this;
         }
 }
@@ -329,6 +327,10 @@ function showQueryMapping(o)
 		var queryMappingResult = o.responseXML.getElementsByTagName( 'div')[0];	
 		window.queryMapping = new QueryMapping( importNodes(queryMappingResult, true));
 		window.activeResult.show();
+		var queryMappingContainer = document.getElementById('queryMapping');
+		if(queryMappingContainer && window.spellcheck.suggestion == null){
+			queryMappingContainer.appendChild(window.queryMapping.getContent());
+		}	
     } 
 }	
 

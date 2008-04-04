@@ -84,10 +84,20 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="querymap/html">
-                    <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
-                        <map:part src="cocoon:/querymap/map"/>
-                        <map:part src="cocoon://content/templates/search/querymap.xml"/>
-                    </map:aggregate>
+                    <map:select type="resource-exists">
+                        <map:when test="resources/querymap/display-template.xml">
+                            <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
+                                <map:part src="cocoon:/querymap/map"/>
+                                <map:part src="resources/querymap/display-template.xml"/>
+                            </map:aggregate>
+                        </map:when>
+                        <map:otherwise>
+                            <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
+                                <map:part src="cocoon:/querymap/map"/>
+                                <map:part src="{naming:java:comp/env/live-base}/resources/querymap/display-template.xml"/>
+                            </map:aggregate>
+                        </map:otherwise>
+                    </map:select>
                     <map:select type="resource-exists">
                         <map:when test="xsl/querymap2html.xsl">
                             <map:transform type="saxon" src="xsl/querymap2html.xsl"/>

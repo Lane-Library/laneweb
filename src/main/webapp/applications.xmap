@@ -56,7 +56,7 @@
                 <map:match pattern="querymap/html" type="wildcard">
                     <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
                         <map:part src="cocoon:/querymap/map"/>
-                        <map:part src="cocoon://content/templates/search/querymap.xml"/>
+                        <map:part src="{naming:java:comp/env/live-base}/resources/querymap/display-template.xml"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/querymap2html.xsl"/>
                     <map:serialize type="xml"/>
