@@ -8,6 +8,7 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.ServiceSelector;
+import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.acting.ServiceableAction;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
@@ -16,7 +17,7 @@ import org.apache.cocoon.environment.SourceResolver;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class VoyagerAction extends ServiceableAction {
+public class VoyagerAction extends ServiceableAction implements ThreadSafe {
 
     private UserInfoHelper userInfoHelper = null;
 
