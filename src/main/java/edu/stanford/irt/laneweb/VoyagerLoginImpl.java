@@ -33,8 +33,7 @@ public class VoyagerLoginImpl extends AbstractLogEnabled implements VoyagerLogin
         if (ldapPerson == null) {
             return "ldapPerson";
         }
-        if (request.getParameter("PID") == null || request.getParameter("PID").length() == 0
-                || !request.getParameter("PID").matches("[0-9a-zA-Z]")) {
+        if (request.getParameter("PID") == null || !request.getParameter("PID").matches("\\w+")) {
             return "PID";
         }
         if (ldapPerson.getUnivId() == null || ldapPerson.getUnivId().length() == 0) {
