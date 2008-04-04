@@ -50,11 +50,11 @@ public class UrlTester extends ServiceableGenerator {
         GetMethod get = new GetMethod(this.url);
         this.httpClient.executeMethod(get);
         HTMLConfiguration config = new HTMLConfiguration();
-		config.setFeature("http://xml.org/sax/features/namespaces", false);  
+        config.setFeature("http://xml.org/sax/features/namespaces", false);
         config.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
         DOMParser parser = new DOMParser(config);
         parser.parse(new InputSource(get.getResponseBodyAsStream()));
-        
+
         DOMStreamer domStreamer = new DOMStreamer(this.contentHandler, this.lexicalHandler);
         this.contentHandler.startDocument();
         domStreamer.stream(parser.getDocument());

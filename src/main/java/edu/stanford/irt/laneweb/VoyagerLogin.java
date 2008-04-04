@@ -12,6 +12,7 @@ public interface VoyagerLogin {
 
     public static final String ROLE = VoyagerLogin.class.getName();
 
-    public String initPatronSession(LDAPPerson ldapPerson, Request request, Connection conn) throws ProcessingException, SQLException;
-    
+    public String initPatronSession(LDAPPerson ldapPerson, Request request, Connection conn) throws ProcessingException,
+            SQLException;
+
 }

@@ -40,16 +40,18 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHe
             // Load balancer also does this
             String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
             if (header != null) {
-            	if(header.indexOf(",") >0)
-            		ip =  header.substring(header.lastIndexOf(",")+1 , header.length()).trim();
-            	else
-            		ip = header;
+                if (header.indexOf(",") > 0) {
+                    ip = header.substring(header.lastIndexOf(",") + 1, header.length()).trim();
+                } else {
+                    ip = header;
+                }
             }
             try {
                 userInfo.setAffiliation(Affiliation.getAffiliationForIP(ip));
             } catch (Exception e) {
-            	if(getLogger() != null)
-            		getLogger().error("Affiliation ERROR ip --->".concat(ip));
+                if (getLogger() != null) {
+                    getLogger().error("Affiliation ERROR ip --->".concat(ip));
+                }
                 userInfo.setAffiliation(Affiliation.ERR);
             }
         }

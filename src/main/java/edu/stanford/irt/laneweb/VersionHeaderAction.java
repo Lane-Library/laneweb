@@ -14,7 +14,7 @@ import org.apache.cocoon.environment.Response;
 import org.apache.cocoon.environment.SourceResolver;
 
 public class VersionHeaderAction implements Action, ThreadSafe, Parameterizable {
-    
+
     private String version;
 
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source,
@@ -26,7 +26,7 @@ public class VersionHeaderAction implements Action, ThreadSafe, Parameterizable 
         return Collections.emptyMap();
     }
 
-    public void parameterize(Parameters params) throws ParameterException {
+    public void parameterize(final Parameters params) throws ParameterException {
         this.version = params.getParameter("laneweb-version");
     }
 

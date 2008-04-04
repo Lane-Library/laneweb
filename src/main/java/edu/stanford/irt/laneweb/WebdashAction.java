@@ -31,7 +31,7 @@ public class WebdashAction extends ServiceableAction {
         }
         String url = this.webDashLogin.getEncodedUrl(ldapPerson, request);
         redirector.globalRedirect(true, url);
-        return null;
+        return EMPTY_MAP;
     }
 
     @Override

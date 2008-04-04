@@ -24,21 +24,22 @@ public class VoyagerAction extends ServiceableAction {
 
     private DataSourceComponent dataSource;
 
-    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string, final Parameters param) throws Exception {
+    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string,
+            final Parameters param) throws Exception {
         Connection conn = this.dataSource.getConnection();
         Request request = ObjectModelHelper.getRequest(objectModel);
         UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
         LDAPPerson ldapPerson = userInfo.getLdapPerson();
-        
+
         if (null == ldapPerson) {
-          throw new RuntimeException("Ldap user not found");
+            throw new RuntimeException("Ldap user not found");
         }
         if (null == conn) {
-          throw new RuntimeException("voyager database connection not found");
+            throw new RuntimeException("voyager database connection not found");
         }
         String url = this.voyagerLogin.initPatronSession(ldapPerson, request, conn);
         redirector.globalRedirect(true, url);
-        return null;
+        return EMPTY_MAP;
     }
 
     @Override
@@ -46,13 +47,11 @@ public class VoyagerAction extends ServiceableAction {
         super.service(manager);
         this.voyagerLogin = (VoyagerLogin) manager.lookup(VoyagerLogin.ROLE);
         this.userInfoHelper = (UserInfoHelper) manager.lookup(UserInfoHelper.ROLE);
-        
-        ServiceSelector selector = (ServiceSelector) manager.lookup(DataSourceComponent.ROLE+"Selector");
+
+        ServiceSelector selector = (ServiceSelector) manager.lookup(DataSourceComponent.ROLE + "Selector");
         this.dataSource = (DataSourceComponent) selector.select("voyager");
 
-        //TODO do I need to release these?
         this.manager.release(selector);
-        this.manager.release(this.dataSource);
     }
 
 }
