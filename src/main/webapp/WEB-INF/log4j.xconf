@@ -28,7 +28,8 @@
     </category>
     
     <root>
-        <priority value="${laneweb.log4j.level}"/>
+        <!--<priority value="${laneweb.log4j.level}"/>-->
+        <priority value="ERROR"/>
         <appender-ref ref="LOG"/>
     </root>
 
