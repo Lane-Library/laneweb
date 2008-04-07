@@ -17,4 +17,5 @@ laneweb.context.environment.ezproxy-key=
 laneweb.context.environment.google-key=
 laneweb.context.environment.live-base=
 laneweb.context.environment.stage-base=
+laneweb.context.environment.metasearch-failed=
 laneweb.log4j.level=
