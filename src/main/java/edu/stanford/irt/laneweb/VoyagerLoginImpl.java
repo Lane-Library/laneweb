@@ -47,7 +47,7 @@ public class VoyagerLoginImpl extends AbstractLogEnabled implements VoyagerLogin
             throws ProcessingException, SQLException {
         String error = validation(ldapPerson, request);
         if (error != null) {
-            return this.errorUrl.concat(error);
+          return this.errorUrl.concat(error);
         }
 
         String univId = "0" + ldapPerson.getUnivId(); // voyager data prepends 0
@@ -57,11 +57,7 @@ public class VoyagerLoginImpl extends AbstractLogEnabled implements VoyagerLogin
         boolean createdSession = createPatronSession(conn, univId, voyagerPid);
 
         if (false == clearedSession || false == createdSession) {
-            return this.errorUrl.concat("database");
-        }
-
-        if (null != conn) {
-            conn.close();
+          return this.errorUrl.concat("database");
         }
 
         return this.baseUrl.concat(request.getQueryString()).concat("&authenticate=Y");
