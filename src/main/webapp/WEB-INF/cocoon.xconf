@@ -106,11 +106,9 @@
     <j2ee logger="laneweb.eresources" name="eresources">
       <dbname>eresources</dbname>
     </j2ee>
-<!--
     <j2ee logger="laneweb.voyager" name="voyager">
       <dbname>voyager</dbname>
     </j2ee>
--->
   </datasources>
   
   <component logger="core.webdash-login"
@@ -122,14 +120,12 @@
 	<parameter name="dateFormat" value="yyyy-MM-dd"/>
   </component>
 
-<!--
   <component logger="core.voyager-login"
     role="edu.stanford.irt.laneweb.VoyagerLogin"
     class="edu.stanford.irt.laneweb.VoyagerLoginImpl">
     <parameter name="voyagerBaseURL" value="http://lmldb-test.stanford.edu/cgi-bin/Pwebrecon.cgi?"/>
     <parameter name="voyagerErrorURL" value="/error_voyager.html?error="/>
   </component>
--->
 
   <component logger="core.descriptor-manager"
     role="edu.stanford.irt.laneweb.querymap.DescriptorManagerManager"
