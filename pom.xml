@@ -488,7 +488,7 @@
     <dependency>
       <groupId>irt</groupId>
       <artifactId>irt</artifactId>
-      <version>UNKNOWN</version>
+      <version>1.4.8-jdk1.5.0</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
