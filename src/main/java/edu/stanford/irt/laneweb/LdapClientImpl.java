@@ -14,7 +14,7 @@ public class LdapClientImpl implements LdapClient {
 
     public LdapClientImpl() {
         try {
-            directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil.getLDAPDirectoryFactory("IRT_K5").getDirectoryFactory();
+            directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil.getLDAPDirectoryFactory("FASTFAC").getDirectoryFactory();
 
         } catch (Exception e) {
             this.log.error(e.getMessage(), e);
