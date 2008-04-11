@@ -155,7 +155,7 @@
   <component logger="core.ldap-client"
     role="edu.stanford.irt.laneweb.LdapClient"
     class="edu.stanford.irt.laneweb.LdapClientImpl">
-    <paramter name="ldap-keytab" value="FASTFAC"/>
+    <parameter name="ldap-keytab" value="FASTFAC"/>
   </component>
   
 </cocoon>
