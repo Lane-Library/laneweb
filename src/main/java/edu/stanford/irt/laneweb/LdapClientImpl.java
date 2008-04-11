@@ -1,35 +1,49 @@
 package edu.stanford.irt.laneweb;
 
-import org.apache.log4j.Logger;
+import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.parameters.ParameterException;
+import org.apache.avalon.framework.parameters.Parameterizable;
+import org.apache.avalon.framework.parameters.Parameters;
+import org.apache.avalon.framework.thread.ThreadSafe;
 
+import edu.stanford.irt.SystemException;
 import edu.stanford.irt.directory.LDAPDirectoryFactory;
 import edu.stanford.irt.directory.LDAPDirectoryUtil;
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class LdapClientImpl implements LdapClient {
+public class LdapClientImpl extends AbstractLogEnabled implements LdapClient,
+		Parameterizable, Initializable, ThreadSafe {
 
-    Logger log = Logger.getLogger(this.getClass());
+	private LDAPDirectoryFactory directoryFactory = null;
 
-    private static LDAPDirectoryFactory directoryFactory = null;
+	private String ldapKeytab;
 
-    public LdapClientImpl() {
-        try {
-            directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil.getLDAPDirectoryFactory("FASTFAC").getDirectoryFactory();
+	public LDAPPerson getLdapPerson(final String sunetId) {
+		try {
+			if (getLogger().isDebugEnabled()) {
+				LDAPPerson person = this.directoryFactory.getSearcher().searchPersonByUID(
+						sunetId);
+				getLogger().debug("ldapPerson = " + person.toString());
+				return person;
+			} else {
+				return this.directoryFactory.getSearcher().searchPersonByUID(
+						sunetId);
+			}
+		} catch (SystemException e) {
+			if (getLogger().isErrorEnabled()) {
+				getLogger().error("ldap lookup failed for " + sunetId, e);
+			}
+			return null;
+		}
+	}
 
-        } catch (Exception e) {
-            this.log.error(e.getMessage(), e);
-        }
-    }
+	public void parameterize(Parameters params) throws ParameterException {
+		this.ldapKeytab = params.getParameter("ldap-keytab");
+	}
 
-    public LDAPPerson getLdapPerson(final String sunetId) {
-        LDAPPerson ldapPerson = null;
-        if (sunetId != null) {
-            try {
-                ldapPerson = directoryFactory.getSearcher().searchPersonByUID(sunetId);
-            } catch (Exception e) {
-                this.log.error(e.getMessage(), e);
-            }
-        }
-        return ldapPerson;
-    }
+	public void initialize() throws Exception {
+		this.directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil
+				.getLDAPDirectoryFactory(this.ldapKeytab).getDirectoryFactory();
+	}
 }

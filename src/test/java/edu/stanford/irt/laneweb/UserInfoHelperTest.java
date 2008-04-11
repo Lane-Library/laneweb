@@ -7,6 +7,7 @@ import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import junit.framework.TestCase;
 
+import org.apache.avalon.framework.logger.Logger;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
 
@@ -78,9 +79,10 @@ public class UserInfoHelperTest extends TestCase {
     }
 
     public void testAffiliation() {
-        this.ip = this.ip.concat("FAIL_TEST");
-        expect(this.request.getRemoteAddr()).andReturn(this.ip);
+        String ip = this.ip.concat("FAIL_TEST");
+        expect(this.request.getRemoteAddr()).andReturn(ip);
         replay(this.request);
+        this.userInfoHelper.enableLogging(createMock(Logger.class));
         UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
         assertEquals(Affiliation.ERR, userInfo.getAffiliation());
         verify(this.session);

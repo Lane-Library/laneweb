@@ -6,11 +6,14 @@ import javax.naming.NamingException;
 
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.logger.AbstractLogEnabled;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
+import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
 
-public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHelper, ThreadSafe, Initializable {
+public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHelper, ThreadSafe, Initializable, Serviceable {
 
     private LdapClient ldapClient;
 
@@ -46,13 +49,10 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHe
                     ip = header;
                 }
             }
-            try {
-                userInfo.setAffiliation(Affiliation.getAffiliationForIP(ip));
-            } catch (Exception e) {
-                if (getLogger() != null) {
-                    getLogger().error("Affiliation ERROR ip --->".concat(ip));
-                }
-                userInfo.setAffiliation(Affiliation.ERR);
+            Affiliation affiliation = Affiliation.getAffiliationForIP(ip);
+            userInfo.setAffiliation(affiliation);
+            if (Affiliation.ERR.equals(affiliation) && getLogger().isErrorEnabled()) {
+            	getLogger().error("error parsing ip for Affiliation: ".concat(ip));
             }
         }
         if (userInfo.getSunetId() == null) {
@@ -71,7 +71,6 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHe
     }
 
     public void initialize() throws NamingException {
-        setLdapClient(new LdapClientImpl());
         Context context = new InitialContext();
         this.ezproxyKey = (String) context.lookup("java:comp/env/ezproxy-key");
     }
@@ -83,5 +82,9 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHe
     void setEzproxyKey(final String ezproxyKey) {
         this.ezproxyKey = ezproxyKey;
     }
+
+	public void service(ServiceManager manager) throws ServiceException {
+		this.ldapClient = (LdapClient) manager.lookup(LdapClient.ROLE);
+	}
 
 }

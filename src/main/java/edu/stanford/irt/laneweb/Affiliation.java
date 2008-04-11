@@ -44,7 +44,11 @@ public class Affiliation {
         int[] d = new int[4];
         int index = 0;
         for (StringTokenizer tokenizer = new StringTokenizer(ip, "."); tokenizer.hasMoreTokens();) {
-            d[index++] = Integer.parseInt(tokenizer.nextToken());
+        	try {
+        		d[index++] = Integer.parseInt(tokenizer.nextToken());
+        	} catch (NumberFormatException e) {
+        		return Affiliation.ERR;
+        	}
         }
         if (d[0] == 10) {
             if (d[1] == 50) {
