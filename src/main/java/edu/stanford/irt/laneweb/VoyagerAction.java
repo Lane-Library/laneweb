@@ -27,17 +27,13 @@ public class VoyagerAction extends ServiceableAction implements ThreadSafe {
 
     public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string,
             final Parameters param) throws Exception {
-        Connection conn = this.dataSource.getConnection();
         Request request = ObjectModelHelper.getRequest(objectModel);
         UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
         LDAPPerson ldapPerson = userInfo.getLdapPerson();
-
         if (null == ldapPerson) {
-            if (null != conn) {
-              conn.close();
-            }
             throw new RuntimeException("Ldap user not found");
         }
+        Connection conn = this.dataSource.getConnection();
         if (null == conn) {
             throw new RuntimeException("voyager database connection not found");
         }
