@@ -572,10 +572,9 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>com.yahoo.platform.yui</groupId>
+      <groupId>yui</groupId>
       <artifactId>yui</artifactId>
-      <version>2.5.0</version>
-      <type>zip</type>
+      <version>2.4.1</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
