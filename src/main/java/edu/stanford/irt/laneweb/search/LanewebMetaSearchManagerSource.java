@@ -11,14 +11,16 @@ import edu.stanford.irt.search.MetaSearchManager;
  * @author ceyates
  * 
  */
-public class LanewebMetaSearchManagerSource implements ThreadSafe, MetaSearchManagerSource {
+public class LanewebMetaSearchManagerSource implements ThreadSafe,
+        MetaSearchManagerSource {
 
     private MetaSearchManager manager;
 
     private HttpClient httpClient;
 
     public LanewebMetaSearchManagerSource() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring/metasearch.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext(
+                "spring/metasearch.xml");
         this.manager = (MetaSearchManager) context.getBean("manager");
         this.httpClient = (HttpClient) context.getBean("httpClient");
     }

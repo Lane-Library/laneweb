@@ -21,7 +21,9 @@ public class LanewebInputModuleTest extends TestCase {
         super.setUp();
         this.module = new LanewebInputModule();
         DefaultConfigurationBuilder builder = new DefaultConfigurationBuilder();
-        Configuration config = builder.build("src/main/webapp/WEB-INF/cocoon.xconf").getChild("input-modules").getChildren()[0];
+        Configuration config = builder.build(
+                "src/main/webapp/WEB-INF/cocoon.xconf").getChild(
+                "input-modules").getChildren()[0];
         this.module.configure(config);
     }
 
@@ -65,12 +67,18 @@ public class LanewebInputModuleTest extends TestCase {
     }
 
     public void testTemplates() throws ConfigurationException {
-        assertTrue("100years_index".equals(this.module.getTemplateName("100years/index.html")));
-        assertTrue("100years_index".equals(this.module.getTemplateName("stage/100years/index.html")));
-        assertTrue("100years".equals(this.module.getTemplateName("100years/anotherpage.html")));
-        assertTrue("100years".equals(this.module.getTemplateName("stage/100years/anotherpage.html")));
-        assertTrue("100years".equals(this.module.getTemplateName("100years/anotherpage.html")));
-        assertTrue("100years_index".equals(this.module.getTemplateName("stage/100years/index.html")));
+        assertTrue("100years_index".equals(this.module
+                .getTemplateName("100years/index.html")));
+        assertTrue("100years_index".equals(this.module
+                .getTemplateName("stage/100years/index.html")));
+        assertTrue("100years".equals(this.module
+                .getTemplateName("100years/anotherpage.html")));
+        assertTrue("100years".equals(this.module
+                .getTemplateName("stage/100years/anotherpage.html")));
+        assertTrue("100years".equals(this.module
+                .getTemplateName("100years/anotherpage.html")));
+        assertTrue("100years_index".equals(this.module
+                .getTemplateName("stage/100years/index.html")));
     }
 
 }

@@ -18,7 +18,8 @@ import org.apache.cocoon.environment.SourceResolver;
 
 public class LanewebSessionAction extends AbstractAction implements ThreadSafe {
 
-    public Map act(final Redirector arg0, final SourceResolver arg1, final Map objectModel, final String arg3, final Parameters arg4)
+    public Map act(final Redirector arg0, final SourceResolver arg1,
+            final Map objectModel, final String arg3, final Parameters arg4)
             throws Exception {
         ObjectModelHelper.getRequest(objectModel).getSession();
         return null;

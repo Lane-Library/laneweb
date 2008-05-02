@@ -11,11 +11,13 @@ import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 
-public class JavascriptLoggerAction extends AbstractAction implements ThreadSafe {
+public class JavascriptLoggerAction extends AbstractAction implements
+        ThreadSafe {
 
-    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string,
-            final Parameters param) throws Exception {
-        Logger log = this.getLogger();
+    public Map act(final Redirector redirector,
+            final SourceResolver sourceResolver, final Map objectModel,
+            final String string, final Parameters param) throws Exception {
+        Logger log = getLogger();
         Request request = ObjectModelHelper.getRequest(objectModel);
         String userAgent = request.getParameter("userAgent");
         String message = request.getParameter("message");

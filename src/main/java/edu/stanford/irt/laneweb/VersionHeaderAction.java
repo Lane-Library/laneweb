@@ -17,8 +17,8 @@ public class VersionHeaderAction implements Action, ThreadSafe, Parameterizable 
 
     private String version;
 
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source,
-            final Parameters params) {
+    public Map act(final Redirector redirector, final SourceResolver resolver,
+            final Map objectModel, final String source, final Parameters params) {
         Response response = ObjectModelHelper.getResponse(objectModel);
         if (null != this.version) {
             response.addHeader("X-Laneweb-Version", this.version);

@@ -58,8 +58,9 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
     protected String mesh;
 
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel,
+            final String src, final Parameters par) throws ProcessingException,
+            SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
         Request request = ObjectModelHelper.getRequest(objectModel);
         this.query = request.getParameter(QUERY);
@@ -103,20 +104,29 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
         EresourceSAXTranslator translator = new EresourceSAXTranslator();
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", "http://www.w3.org/1999/xhtml");
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "html", "html", EMPTY_ATTS);
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "head", "head", EMPTY_ATTS);
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "title", "title", EMPTY_ATTS);
+        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "html",
+                "html", EMPTY_ATTS);
+        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "head",
+                "head", EMPTY_ATTS);
+        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "title",
+                "title", EMPTY_ATTS);
         this.xmlConsumer.characters(title.toCharArray(), 0, title.length());
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "title", "title");
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "head", "head");
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "body", "body", EMPTY_ATTS);
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "dl", "dl", EMPTY_ATTS);
+        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "title",
+                "title");
+        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "head",
+                "head");
+        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "body",
+                "body", EMPTY_ATTS);
+        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "dl",
+                "dl", EMPTY_ATTS);
         for (Eresource er : eresources) {
             translator.translate(this.xmlConsumer, er);
         }
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "dl", "dl");
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "body", "body");
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "html", "html");
+        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "body",
+                "body");
+        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "html",
+                "html");
         this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
     }
@@ -124,7 +134,8 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
     @Override
     public void service(final ServiceManager manager) throws ServiceException {
         super.service(manager);
-        ServiceSelector selector = (ServiceSelector) manager.lookup(DataSourceComponent.ROLE + "Selector");
+        ServiceSelector selector = (ServiceSelector) manager
+                .lookup(DataSourceComponent.ROLE + "Selector");
         this.dataSource = (DataSourceComponent) selector.select("eresources");
         this.manager.release(selector);
     }
@@ -208,6 +219,7 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
         return eresources;
     }
 
-    protected abstract PreparedStatement getStatement(Connection conn) throws SQLException;
+    protected abstract PreparedStatement getStatement(Connection conn)
+            throws SQLException;
 
 }

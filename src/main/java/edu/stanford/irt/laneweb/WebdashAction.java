@@ -19,8 +19,9 @@ public class WebdashAction extends ServiceableAction {
 
     private WebDashLogin webDashLogin = null;
 
-    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string,
-            final Parameters param) throws Exception {
+    public Map act(final Redirector redirector,
+            final SourceResolver sourceResolver, final Map objectModel,
+            final String string, final Parameters param) throws Exception {
 
         Request request = ObjectModelHelper.getRequest(objectModel);
 
@@ -38,7 +39,8 @@ public class WebdashAction extends ServiceableAction {
     public void service(final ServiceManager manager) throws ServiceException {
         super.service(manager);
         this.webDashLogin = (WebDashLogin) manager.lookup(WebDashLogin.ROLE);
-        this.userInfoHelper = (UserInfoHelper) manager.lookup(UserInfoHelper.ROLE);
+        this.userInfoHelper = (UserInfoHelper) manager
+                .lookup(UserInfoHelper.ROLE);
 
     }
 

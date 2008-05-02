@@ -29,11 +29,13 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
      * ProcessingException
      */
     @Override
-    protected boolean processXMLPipeline(final Environment environment) throws ProcessingException {
-        Request request = (Request) environment.getObjectModel().get(ObjectModelHelper.REQUEST_OBJECT);
-        String requestKey =
-                new StringBuffer(request.getRemoteAddr()).append(request.getRequestURI()).append("?")
-                                                         .append(request.getQueryString()).toString();
+    protected boolean processXMLPipeline(final Environment environment)
+            throws ProcessingException {
+        Request request = (Request) environment.getObjectModel().get(
+                ObjectModelHelper.REQUEST_OBJECT);
+        String requestKey = new StringBuffer(request.getRemoteAddr()).append(
+                request.getRequestURI()).append("?").append(
+                request.getQueryString()).toString();
         if (getLogger().isDebugEnabled()) {
             getLogger().debug("requestKey = " + requestKey);
         }

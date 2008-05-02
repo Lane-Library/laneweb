@@ -31,7 +31,8 @@ import edu.stanford.irt.search.util.SAXable;
  * @author ceyates
  * 
  */
-public class SearchGenerator extends ServiceableGenerator implements Parameterizable {
+public class SearchGenerator extends ServiceableGenerator implements
+        Parameterizable {
 
     private MetaSearchManager metaSearchManager;
 
@@ -54,16 +55,19 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
     @Override
     public void service(final ServiceManager manager) throws ServiceException {
         super.service(manager);
-        MetaSearchManagerSource source = (MetaSearchManagerSource) this.manager.lookup(MetaSearchManagerSource.class.getName());
+        MetaSearchManagerSource source = (MetaSearchManagerSource) this.manager
+                .lookup(MetaSearchManagerSource.class.getName());
         this.metaSearchManager = source.getMetaSearchManager();
 
     }
 
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel,
+            final String src, final Parameters par) throws ProcessingException,
+            SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
-        Request request = (Request) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
+        Request request = (Request) objectModel
+                .get(ObjectModelHelper.REQUEST_OBJECT);
         this.q = request.getParameter("q");
         this.t = request.getParameter("t");
         this.e = request.getParameterValues("e");
@@ -71,7 +75,7 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
         this.r = request.getParameterValues("r");
         this.keywords = request.getParameter("keywords");
         this.clearCache = request.getParameter("clearcache");
-        if (this.q == null && this.keywords != null) {
+        if ((this.q == null) && (this.keywords != null)) {
             this.q = this.keywords;
         }
     }
@@ -93,13 +97,16 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
 
     }
 
-    public void generate() throws IOException, SAXException, ProcessingException {
+    public void generate() throws IOException, SAXException,
+            ProcessingException {
 
         if ("y".equalsIgnoreCase(this.clearCache)) {
-            ((CachedMetaSearchManagerImpl) this.metaSearchManager).clearCache(this.q);
+            ((CachedMetaSearchManagerImpl) this.metaSearchManager)
+                    .clearCache(this.q);
         }
         if ("all".equalsIgnoreCase(this.clearCache)) {
-            ((CachedMetaSearchManagerImpl) this.metaSearchManager).clearAllCaches();
+            ((CachedMetaSearchManagerImpl) this.metaSearchManager)
+                    .clearAllCaches();
         }
 
         Result result = null;
@@ -107,21 +114,21 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
         Collection<String> engines = null;
         Collection<String> resources = null;
 
-        if (this.e != null && this.e.length > 0) {
+        if ((this.e != null) && (this.e.length > 0)) {
             engines = new HashSet<String>();
             for (String element : this.e) {
                 engines.add(element);
             }
         }
 
-        if (this.r != null && this.r.length > 0) {
+        if ((this.r != null) && (this.r.length > 0)) {
             resources = new HashSet<String>();
             for (String element : this.r) {
                 resources.add(element);
             }
         }
 
-        if (this.q != null && this.q.length() > 0) {
+        if ((this.q != null) && (this.q.length() > 0)) {
 
             long time = this.defaultTimeout;
             if (null != this.t) {
@@ -134,7 +141,8 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
             long timeout = time;
 
             final SimpleQuery query = new SimpleQuery(this.q);
-            result = this.metaSearchManager.search(query, timeout, engines, false);
+            result = this.metaSearchManager.search(query, timeout, engines,
+                    false);
 
             if (null != this.w) {
                 long wait = 0;
@@ -148,7 +156,9 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
 
                 try {
                     synchronized (result) {
-                        while (wait > 0 && SearchStatus.RUNNING.equals(result.getStatus())) {
+                        while ((wait > 0)
+                                && SearchStatus.RUNNING.equals(result
+                                        .getStatus())) {
                             result.wait(wait);
                             if (wait != 0) {
                                 long now = System.currentTimeMillis();
@@ -167,17 +177,18 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
         if (result == null) {
             result = new DefaultResult("null");
             result.setStatus(SearchStatus.FAILED);
-        } else if (engines != null || resources != null) {
+        } else if ((engines != null) || (resources != null)) {
             Result limitedResult = new DefaultResult(result.getId());
             limitedResult.setQuery(result.getQuery());
             limitedResult.setStatus(result.getStatus());
             Collection<Result> selectedResult = new ArrayList<Result>();
             Collection<Result> results = result.getChildren();
             for (Result engineResult : results) {
-                if (engines != null && engines.contains(engineResult.getId())) {
+                if ((engines != null) && engines.contains(engineResult.getId())) {
                     selectedResult.add(engineResult);
                 } else if (resources != null) {
-                    Collection<Result> resourceResults = engineResult.getChildren();
+                    Collection<Result> resourceResults = engineResult
+                            .getChildren();
                     for (Result resourceResult : resourceResults) {
                         if (resources.contains(resourceResult.getId())) {
                             selectedResult.add(engineResult);

@@ -66,8 +66,8 @@ public class HTTPSClientSourceFactory extends HTTPClientSourceFactory {
     public void parameterize(final Parameters params) throws ParameterException {
         super.parameterize(params);
 
-        this.setProvider(params);
-        this.setSocketFactory(params);
+        setProvider(params);
+        setSocketFactory(params);
     }
 
     /**
@@ -87,7 +87,7 @@ public class HTTPSClientSourceFactory extends HTTPClientSourceFactory {
             return; // this is ok, means no custom SSL provider
         }
 
-        Security.addProvider((Provider) this.getInstance(provider));
+        Security.addProvider((Provider) getInstance(provider));
     }
 
     /**
@@ -98,7 +98,8 @@ public class HTTPSClientSourceFactory extends HTTPClientSourceFactory {
      * @exception ParameterException
      *                if an error occurs
      */
-    private void setSocketFactory(final Parameters params) throws ParameterException {
+    private void setSocketFactory(final Parameters params)
+            throws ParameterException {
         String factoryName = null;
 
         try {
@@ -107,7 +108,8 @@ public class HTTPSClientSourceFactory extends HTTPClientSourceFactory {
             return; // this is ok, means no custom socket factory
         }
 
-        final Protocol protocol = new Protocol(HTTPS, (ProtocolSocketFactory) this.getInstance(factoryName), 443);
+        final Protocol protocol = new Protocol(HTTPS,
+                (ProtocolSocketFactory) getInstance(factoryName), 443);
         Protocol.registerProtocol(HTTPS, protocol);
     }
 
@@ -118,6 +120,7 @@ public class HTTPSClientSourceFactory extends HTTPClientSourceFactory {
      * @param className
      *            class name to instantiate
      * @return instantiated class
+     * @throws ParameterException 
      * @exception ParameterException
      *                if an error occurs
      */
@@ -125,7 +128,8 @@ public class HTTPSClientSourceFactory extends HTTPClientSourceFactory {
         try {
             return Class.forName(className).newInstance();
         } catch (final Exception e) {
-            throw new ParameterException("Unable to instantiate: " + className, e);
+            throw new ParameterException("Unable to instantiate: " + className,
+                    e);
         }
     }
 }

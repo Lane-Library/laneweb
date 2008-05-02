@@ -8,7 +8,8 @@ import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 
-public class LanewebHttpClientManager implements HttpClientManager, Parameterizable, Initializable, ThreadSafe {
+public class LanewebHttpClientManager implements HttpClientManager,
+        Parameterizable, Initializable, ThreadSafe {
 
     /** the HttpClient. */
     protected HttpClient httpClient;
@@ -59,7 +60,8 @@ public class LanewebHttpClientManager implements HttpClientManager, Parameteriza
      * @param defaultMaxConnectionsPerHost
      *            duh
      */
-    public void setDefaultMaxConnectionsPerHost(final int defaultMaxConnectionsPerHost) {
+    public void setDefaultMaxConnectionsPerHost(
+            final int defaultMaxConnectionsPerHost) {
         this.defaultMaxConnectionsPerHost = defaultMaxConnectionsPerHost;
     }
 
@@ -81,9 +83,13 @@ public class LanewebHttpClientManager implements HttpClientManager, Parameteriza
      * this initializes the HttpClient with the various parameters.
      */
     public void init() {
-        this.httpClient.getHttpConnectionManager().getParams().setMaxTotalConnections(this.maxTotalConnections);
-        this.httpClient.getHttpConnectionManager().getParams().setDefaultMaxConnectionsPerHost(this.defaultMaxConnectionsPerHost);
-        this.httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(this.connectionTimeout);
+        this.httpClient.getHttpConnectionManager().getParams()
+                .setMaxTotalConnections(this.maxTotalConnections);
+        this.httpClient.getHttpConnectionManager().getParams()
+                .setDefaultMaxConnectionsPerHost(
+                        this.defaultMaxConnectionsPerHost);
+        this.httpClient.getHttpConnectionManager().getParams()
+                .setConnectionTimeout(this.connectionTimeout);
     }
 
     /*
@@ -92,9 +98,12 @@ public class LanewebHttpClientManager implements HttpClientManager, Parameteriza
      * @see org.apache.avalon.framework.parameters.Parameterizable#parameterize(org.apache.avalon.framework.parameters.Parameters)
      */
     public void parameterize(final Parameters params) throws ParameterException {
-        this.maxTotalConnections = params.getParameterAsInteger("max-total-connections", 30);
-        this.defaultMaxConnectionsPerHost = params.getParameterAsInteger("max-host-connections", 5);
-        this.connectionTimeout = params.getParameterAsInteger("connection-timeout", 20000);
+        this.maxTotalConnections = params.getParameterAsInteger(
+                "max-total-connections", 30);
+        this.defaultMaxConnectionsPerHost = params.getParameterAsInteger(
+                "max-host-connections", 5);
+        this.connectionTimeout = params.getParameterAsInteger(
+                "connection-timeout", 20000);
     }
 
     /*
@@ -103,7 +112,8 @@ public class LanewebHttpClientManager implements HttpClientManager, Parameteriza
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
     public void initialize() throws Exception {
-        this.httpClient = new HttpClient(new MultiThreadedHttpConnectionManager());
+        this.httpClient = new HttpClient(
+                new MultiThreadedHttpConnectionManager());
         init();
     }
 

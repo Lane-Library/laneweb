@@ -34,7 +34,8 @@ public class EresourceSAXTranslator {
 
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
 
-    public void translate(final ContentHandler handler, final Eresource eresource) throws SAXException {
+    public void translate(final ContentHandler handler,
+            final Eresource eresource) throws SAXException {
         if (null == handler) {
             throw new IllegalArgumentException("null handler");
         }
@@ -42,7 +43,8 @@ public class EresourceSAXTranslator {
             throw new IllegalArgumentException("null eresource");
         }
         handler.startElement(XHTML_NS, DT, DT, EMPTY_ATTS);
-        char[] title = null != eresource.getTitle() ? eresource.getTitle().toCharArray() : new char[0];
+        char[] title = null != eresource.getTitle() ? eresource.getTitle()
+                .toCharArray() : new char[0];
         handler.characters(title, 0, title.length);
         handler.endElement(XHTML_NS, DT, DT);
         handler.startElement(XHTML_NS, DD, DD, EMPTY_ATTS);
@@ -52,7 +54,7 @@ public class EresourceSAXTranslator {
             Link getPasswordLink = null;
             for (Link link : version.getLinks()) {
                 String label = link.getLabel();
-                if (null != label && "get password".equalsIgnoreCase(label)) {
+                if ((null != label) && "get password".equalsIgnoreCase(label)) {
                     getPasswordLink = link;
                     break;
                 }
@@ -60,25 +62,28 @@ public class EresourceSAXTranslator {
             for (Link link : version.getLinks()) {
                 if (!link.equals(getPasswordLink)) {
                     handler.startElement(XHTML_NS, LI, LI, EMPTY_ATTS);
-                    handleAnchor(handler, eresource, version, link, getPasswordLink != null);
+                    handleAnchor(handler, eresource, version, link,
+                            getPasswordLink != null);
                     sb.setLength(0);
                     String instruction = link.getInstruction();
-                    if (null != instruction && instruction.length() > 0) {
+                    if ((null != instruction) && (instruction.length() > 0)) {
                         sb.append(' ').append(instruction);
                     }
                     String publisher = version.getPublisher();
-                    if (null != publisher && publisher.length() > 0) {
+                    if ((null != publisher) && (publisher.length() > 0)) {
                         sb.append(' ').append(publisher);
                     }
                     if (null != getPasswordLink) {
                         sb.append(' ');
                     }
                     if (sb.length() > 0) {
-                        handler.characters(sb.toString().toCharArray(), 0, sb.length());
+                        handler.characters(sb.toString().toCharArray(), 0, sb
+                                .length());
                     }
                     if (null != getPasswordLink) {
                         AttributesImpl attributes = new AttributesImpl();
-                        attributes.addAttribute(EMPTY_NS, "href", "href", "CDATA", getPasswordLink.getUrl());
+                        attributes.addAttribute(EMPTY_NS, "href", "href",
+                                "CDATA", getPasswordLink.getUrl());
                         handler.startElement(XHTML_NS, A, A, attributes);
                         char[] getPassword = "get password".toCharArray();
                         handler.characters(getPassword, 0, getPassword.length);
@@ -99,11 +104,13 @@ public class EresourceSAXTranslator {
      * @param link
      * @throws SAXException
      */
-    private void handleAnchor(final ContentHandler handler, final Eresource eresource, final Version version, final Link link,
+    private void handleAnchor(final ContentHandler handler,
+            final Eresource eresource, final Version version, final Link link,
             boolean hasGetPassword) throws SAXException {
         AttributesImpl attributes = new AttributesImpl();
         String proxyValue = version.isProxy() ? "proxy" : "noproxy";
-        attributes.addAttribute(EMPTY_NS, "class", "class", "CDATA", proxyValue);
+        attributes
+                .addAttribute(EMPTY_NS, "class", "class", "CDATA", proxyValue);
         String url = null != link.getUrl() ? link.getUrl() : "";
         attributes.addAttribute(EMPTY_NS, "href", "href", "CDATA", url);
         StringBuffer sb = new StringBuffer();
@@ -111,25 +118,29 @@ public class EresourceSAXTranslator {
         if (null != version.getPublisher()) {
             sb.append(':').append(version.getPublisher());
         }
-        if ((hasGetPassword && version.getLinks().size() > 2) || (!hasGetPassword && version.getLinks().size() > 1)) {
+        if ((hasGetPassword && (version.getLinks().size() > 2))
+                || (!hasGetPassword && (version.getLinks().size() > 1))) {
             sb.append(':').append(link.getLabel());
         }
-        attributes.addAttribute(EMPTY_NS, "title", "title", "CDATA", sb.toString());
+        attributes.addAttribute(EMPTY_NS, "title", "title", "CDATA", sb
+                .toString());
         handler.startElement(XHTML_NS, A, A, attributes);
         char[] linkText = getLinkText(eresource, version, link, hasGetPassword);
         handler.characters(linkText, 0, linkText.length);
         handler.endElement(XHTML_NS, A, A);
     }
 
-    private char[] getLinkText(final Eresource eresource, final Version version, final Link link, final boolean hasGetPassword) {
+    private char[] getLinkText(final Eresource eresource,
+            final Version version, final Link link, final boolean hasGetPassword) {
         StringBuffer sb = new StringBuffer();
-        if ((hasGetPassword && version.getLinks().size() == 2) || version.getLinks().size() == 1) {
+        if ((hasGetPassword && (version.getLinks().size() == 2))
+                || (version.getLinks().size() == 1)) {
             String holdings = version.getSummaryHoldings();
-            if (null != holdings && holdings.length() > 0) {
+            if ((null != holdings) && (holdings.length() > 0)) {
                 sb.append(holdings);
             }
             String dates = version.getDates();
-            if (null != dates && dates.length() > 0) {
+            if ((null != dates) && (dates.length() > 0)) {
                 if (sb.length() != 0) {
                     sb.append(", ");
                 }
@@ -138,7 +149,7 @@ public class EresourceSAXTranslator {
         }
         if (sb.length() == 0) {
             String label = link.getLabel();
-            if (null != label && label.length() > 0) {
+            if ((null != label) && (label.length() > 0)) {
                 sb.append(label);
             } else {
                 sb.append(link.getUrl());

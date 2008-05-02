@@ -23,8 +23,9 @@ public class LoginAction extends ServiceableAction implements Parameterizable {
 
     private UserInfoHelper userInfoHelper = null;
 
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source,
-            final Parameters params) throws ProcessingException, IOException, SystemException {
+    public Map act(final Redirector redirector, final SourceResolver resolver,
+            final Map objectModel, final String source, final Parameters params)
+            throws ProcessingException, IOException, SystemException {
         Request request = ObjectModelHelper.getRequest(objectModel);
         UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
         String sunetid = userInfo.getSunetId();
@@ -42,21 +43,26 @@ public class LoginAction extends ServiceableAction implements Parameterizable {
             throw new ProcessingException("null url");
         }
         if (getLogger().isDebugEnabled()) {
-            getLogger().debug("redirecting to proxy server: " + " sunetid = " + sunetid + " ticket = " + " url = " + url);
+            getLogger().debug(
+                    "redirecting to proxy server: " + " sunetid = " + sunetid
+                            + " ticket = " + " url = " + url);
         }
-        String redirectURL = this.proxyURL + "user=" + sunetid + "&ticket=" + ticket + "&" + url;
+        String redirectURL = this.proxyURL + "user=" + sunetid + "&ticket="
+                + ticket + "&" + url;
         redirector.redirect(true, redirectURL);
         return null;
     }
 
     public void parameterize(final Parameters params) throws ParameterException {
-        this.proxyURL = params.getParameter("proxy-url", "http://laneproxy.stanford.edu/login?");
+        this.proxyURL = params.getParameter("proxy-url",
+                "http://laneproxy.stanford.edu/login?");
     }
 
     @Override
     public void service(final ServiceManager manager) throws ServiceException {
         super.service(manager);
-        this.userInfoHelper = (UserInfoHelper) manager.lookup(UserInfoHelper.ROLE);
+        this.userInfoHelper = (UserInfoHelper) manager
+                .lookup(UserInfoHelper.ROLE);
     }
 
 }

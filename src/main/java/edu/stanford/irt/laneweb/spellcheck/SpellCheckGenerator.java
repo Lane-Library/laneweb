@@ -45,17 +45,21 @@ public class SpellCheckGenerator extends ServiceableGenerator {
     @Override
     public void service(final ServiceManager manager) throws ServiceException {
         super.service(manager);
-        this.spellChecker = (SpellChecker) this.manager.lookup(SpellChecker.class.getName());
+        this.spellChecker = (SpellChecker) this.manager
+                .lookup(SpellChecker.class.getName());
     }
 
-    public void generate() throws IOException, SAXException, ProcessingException {
+    public void generate() throws IOException, SAXException,
+            ProcessingException {
         this.contentHandler.startDocument();
         XMLUtils.startElement(this.contentHandler, NAMESPACE, SPELLCHECK);
-        if (null != this.query && this.query.length() > 0) {
+        if ((null != this.query) && (this.query.length() > 0)) {
             SpellCheckResult result = this.spellChecker.spellCheck(this.query);
-            XMLUtils.createElementNS(this.contentHandler, NAMESPACE, QUERY, this.query);
+            XMLUtils.createElementNS(this.contentHandler, NAMESPACE, QUERY,
+                    this.query);
             if (null != result.getSuggestion()) {
-                XMLUtils.createElementNS(this.contentHandler, NAMESPACE, SUGGESTION, result.getSuggestion());
+                XMLUtils.createElementNS(this.contentHandler, NAMESPACE,
+                        SUGGESTION, result.getSuggestion());
             }
         }
         XMLUtils.endElement(this.contentHandler, NAMESPACE, SPELLCHECK);
@@ -69,7 +73,8 @@ public class SpellCheckGenerator extends ServiceableGenerator {
     }
 
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params)
+    public void setup(final SourceResolver resolver, final Map objectModel,
+            final String src, final Parameters params)
             throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, params);
         this.query = params.getParameter(QUERY, null);

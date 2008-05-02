@@ -18,6 +18,7 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.ServiceableGenerator;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceException;
+import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.cyberneko.html.HTMLConfiguration;
@@ -29,7 +30,8 @@ import org.xml.sax.SAXException;
  * generates SAX Events. It uses the NekoHTML library to do this. stolen from
  * cocoon-2.1.10 source
  */
-public class HTMLGenerator extends ServiceableGenerator implements Configurable, CacheableProcessingComponent {
+public class HTMLGenerator extends ServiceableGenerator implements
+        Configurable, CacheableProcessingComponent {
 
     /** The source, if coming from a file */
     private Source inputSource;
@@ -48,12 +50,13 @@ public class HTMLGenerator extends ServiceableGenerator implements Configurable,
             org.apache.excalibur.source.SourceResolver resolver = null;
             Source configSource = null;
             try {
-                resolver =
-                        (org.apache.excalibur.source.SourceResolver) this.manager
-                                                                                 .lookup(org.apache.excalibur.source.SourceResolver.ROLE);
+                resolver = (org.apache.excalibur.source.SourceResolver) this.manager
+                        .lookup(org.apache.excalibur.source.SourceResolver.ROLE);
                 configSource = resolver.resolveURI(configUrl);
                 if (getLogger().isDebugEnabled()) {
-                    getLogger().debug("Loading configuration from " + configSource.getURI());
+                    getLogger().debug(
+                            "Loading configuration from "
+                                    + configSource.getURI());
                 }
 
                 this.properties = new Properties();
@@ -61,7 +64,8 @@ public class HTMLGenerator extends ServiceableGenerator implements Configurable,
 
             } catch (Exception e) {
                 getLogger().warn("Cannot load configuration from " + configUrl);
-                throw new ConfigurationException("Cannot load configuration from " + configUrl, e);
+                throw new ConfigurationException(
+                        "Cannot load configuration from " + configUrl, e);
             } finally {
                 if (null != resolver) {
                     this.manager.release(resolver);
@@ -88,29 +92,33 @@ public class HTMLGenerator extends ServiceableGenerator implements Configurable,
     /**
      * Setup the html generator. Try to get the last modification date of the
      * source for caching.
+     * @throws IOException 
+     * @throws SAXException 
+     * @throws ProcessingException 
      */
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel,
+            final String src, final Parameters par) throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
 
         Request request = ObjectModelHelper.getRequest(objectModel);
 
         // append the request parameter to the URL if necessary
-        if (par.getParameterAsBoolean("copy-parameters", false) && request.getQueryString() != null) {
+        if (par.getParameterAsBoolean("copy-parameters", false)
+                && (request.getQueryString() != null)) {
             StringBuffer query = new StringBuffer(super.source);
             query.append(super.source.indexOf("?") == -1 ? '?' : '&');
             query.append(request.getQueryString());
             super.source = query.toString();
         }
 
-        try {
-            if (this.source != null) {
+//        try {
+            if (super.source != null) {
                 this.inputSource = resolver.resolveURI(super.source);
             }
-        } catch (SourceException se) {
-            throw SourceUtil.handle("Unable to resolve " + super.source, se);
-        }
+//        } catch (SourceException se) {
+//            throw SourceUtil.handle("Unable to resolve " + super.source, se);
+//        }
     }
 
     /**
@@ -145,10 +153,13 @@ public class HTMLGenerator extends ServiceableGenerator implements Configurable,
 
     /**
      * Generate XML data.
+     * @throws IOException 
+     * @throws SourceNotFoundException 
+     * @throws SAXException 
      * 
      * @throws SAXException
      */
-    public void generate() throws IOException, SAXException {
+    public void generate() throws SourceNotFoundException, IOException, SAXException {
         HtmlSaxParser parser = new HtmlSaxParser(this.properties);
 
         if (this.inputSource != null) {
@@ -173,12 +184,16 @@ public class HTMLGenerator extends ServiceableGenerator implements Configurable,
 
         private static HTMLConfiguration getConfig(final Properties properties) {
             HTMLConfiguration config = new HTMLConfiguration();
-            config.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
+            config
+                    .setProperty(
+                            "http://cyberneko.org/html/properties/names/elems",
+                            "lower");
             if (properties != null) {
                 for (Object element : properties.keySet()) {
                     String name = (String) element;
                     if (name.indexOf("/features/") > -1) {
-                        config.setFeature(name, Boolean.getBoolean(properties.getProperty(name)));
+                        config.setFeature(name, Boolean.getBoolean(properties
+                                .getProperty(name)));
                     } else if (name.indexOf("/properties/") > -1) {
                         config.setProperty(name, properties.getProperty(name));
                     }

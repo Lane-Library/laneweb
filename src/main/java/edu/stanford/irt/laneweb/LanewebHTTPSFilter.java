@@ -33,16 +33,17 @@ public class LanewebHTTPSFilter implements Filter {
     /**
      * does the redirect if no gohttps header or scheme is not https
      */
-    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException,
-            ServletException {
+    public void doFilter(final ServletRequest request,
+            final ServletResponse response, final FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String queryString = req.getQueryString();
-        String url =
-                queryString == null ? req.getRequestURL().toString() : req.getRequestURL().append('?').append(queryString)
-                                                                          .toString();
+        String url = queryString == null ? req.getRequestURL().toString() : req
+                .getRequestURL().append('?').append(queryString).toString();
         int colonIndex = url.indexOf(':');
-        if (req.getHeader("gohttps") != null || req.getScheme().equals("https")) {
+        if ((req.getHeader("gohttps") != null)
+                || "https".equals(req.getScheme())) {
             chain.doFilter(request, response);
         } else {
             resp.sendRedirect("https" + url.substring(colonIndex));

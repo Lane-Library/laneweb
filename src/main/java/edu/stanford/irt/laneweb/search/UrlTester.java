@@ -28,15 +28,18 @@ public class UrlTester extends ServiceableGenerator {
     @Override
     public void service(final ServiceManager manager) throws ServiceException {
         super.service(manager);
-        MetaSearchManagerSource source = (MetaSearchManagerSource) this.manager.lookup(MetaSearchManagerSource.class.getName());
+        MetaSearchManagerSource source = (MetaSearchManagerSource) this.manager
+                .lookup(MetaSearchManagerSource.class.getName());
         this.httpClient = source.getHttpClient();
     }
 
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel,
+            final String src, final Parameters par) throws ProcessingException,
+            SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
-        Request request = (Request) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
+        Request request = (Request) objectModel
+                .get(ObjectModelHelper.REQUEST_OBJECT);
         this.url = request.getParameter("url");
     }
 
@@ -51,11 +54,13 @@ public class UrlTester extends ServiceableGenerator {
         this.httpClient.executeMethod(get);
         HTMLConfiguration config = new HTMLConfiguration();
         config.setFeature("http://xml.org/sax/features/namespaces", false);
-        config.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
+        config.setProperty("http://cyberneko.org/html/properties/names/elems",
+                "lower");
         DOMParser parser = new DOMParser(config);
         parser.parse(new InputSource(get.getResponseBodyAsStream()));
 
-        DOMStreamer domStreamer = new DOMStreamer(this.contentHandler, this.lexicalHandler);
+        DOMStreamer domStreamer = new DOMStreamer(this.contentHandler,
+                this.lexicalHandler);
         this.contentHandler.startDocument();
         domStreamer.stream(parser.getDocument());
         this.contentHandler.endDocument();

@@ -14,7 +14,8 @@ public class AffiliationTest extends TestCase {
     }
 
     public void testGetAffiliationForIP() {
-        assertEquals(Affiliation.LPCH, Affiliation.getAffiliationForIP("10.252.31.112"));
+        assertEquals(Affiliation.LPCH, Affiliation
+                .getAffiliationForIP("10.252.31.112"));
     }
 
 }

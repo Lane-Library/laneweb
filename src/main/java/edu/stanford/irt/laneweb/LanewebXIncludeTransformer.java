@@ -61,7 +61,8 @@ import org.xml.sax.ext.LexicalHandler;
  * --cy also altered to use fallback if ProcessingException or SAXException
  * 
  */
-public class LanewebXIncludeTransformer extends AbstractTransformer implements Serviceable, CacheableProcessingComponent {
+public class LanewebXIncludeTransformer extends AbstractTransformer implements
+        Serviceable, CacheableProcessingComponent {
 
     protected SourceResolver resolver;
 
@@ -88,10 +89,12 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
     /** The {@link SourceValidity} instance associated with this request. */
     protected MultiSourceValidity validity;
 
-    public void setup(final SourceResolver resolver, final Map objectModel, final String source, final Parameters parameters)
+    public void setup(final SourceResolver resolver, final Map objectModel,
+            final String source, final Parameters parameters)
             throws ProcessingException, SAXException, IOException {
         this.resolver = resolver;
-        this.validity = new MultiSourceValidity(resolver, MultiSourceValidity.CHECK_ALWAYS);
+        this.validity = new MultiSourceValidity(resolver,
+                MultiSourceValidity.CHECK_ALWAYS);
         this.xIncludePipe = new XIncludePipe();
         this.xIncludePipe.enableLogging(getLogger());
         this.xIncludePipe.init(null, null);
@@ -185,7 +188,8 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         public void init(final String uri, final String xpointer) {
             this.href = uri;
             this.xpointer = xpointer;
-            this.xmlBaseSupport = new XMLBaseSupport(LanewebXIncludeTransformer.this.resolver, getLogger());
+            this.xmlBaseSupport = new XMLBaseSupport(
+                    LanewebXIncludeTransformer.this.resolver, getLogger());
         }
 
         public void setParent(final XIncludePipe parent) {
@@ -213,8 +217,8 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
          * unsuccessful xi:include.
          */
         private boolean isEvaluatingContent() {
-            return this.xIncludeElementLevel == 0
-                    || (this.fallbackElementLevel > 0 && this.fallbackElementLevel == this.useFallbackLevel);
+            return (this.xIncludeElementLevel == 0)
+                    || ((this.fallbackElementLevel > 0) && (this.fallbackElementLevel == this.useFallbackLevel));
         }
 
         @Override
@@ -226,7 +230,8 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         }
 
         @Override
-        public void startElement(final String uri, final String name, final String raw, final Attributes attr) throws SAXException {
+        public void startElement(final String uri, final String name,
+                final String raw, final Attributes attr) throws SAXException {
             // Track xml:base context:
             this.xmlBaseSupport.startElement(uri, name, raw, attr);
             // Handle elements in xinclude namespace:
@@ -235,9 +240,12 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                 if (XINCLUDE_INCLUDE_ELEMENT.equals(name)) {
                     // Process the include, unless in an ignored fallback:
                     if (isEvaluatingContent()) {
-                        String href = attr.getValue("", XINCLUDE_INCLUDE_ELEMENT_HREF_ATTRIBUTE);
-                        String parse = attr.getValue("", XINCLUDE_INCLUDE_ELEMENT_PARSE_ATTRIBUTE);
-                        String xpointer = attr.getValue("", XINCLUDE_INCLUDE_ELEMENT_XPOINTER_ATTRIBUTE);
+                        String href = attr.getValue("",
+                                XINCLUDE_INCLUDE_ELEMENT_HREF_ATTRIBUTE);
+                        String parse = attr.getValue("",
+                                XINCLUDE_INCLUDE_ELEMENT_PARSE_ATTRIBUTE);
+                        String xpointer = attr.getValue("",
+                                XINCLUDE_INCLUDE_ELEMENT_XPOINTER_ATTRIBUTE);
 
                         try {
                             processXIncludeElement(href, parse, xpointer);
@@ -255,7 +263,8 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                     this.fallbackElementLevel++;
                 } else {
                     // Unknown element:
-                    throw new SAXException("Unknown XInclude element " + raw + " at " + getLocation());
+                    throw new SAXException("Unknown XInclude element " + raw
+                            + " at " + getLocation());
                 }
             } else if (isEvaluatingContent()) {
                 // Copy other elements through when appropriate:
@@ -264,7 +273,8 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         }
 
         @Override
-        public void endElement(final String uri, final String name, final String raw) throws SAXException {
+        public void endElement(final String uri, final String name,
+                final String raw) throws SAXException {
             // Track xml:base context:
             this.xmlBaseSupport.endElement(uri, name, raw);
 
@@ -287,7 +297,8 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         }
 
         @Override
-        public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
+        public void startPrefixMapping(final String prefix, final String uri)
+                throws SAXException {
             // don't propagate xinclude namespace declarations
             if (XINCLUDE_NAMESPACE_URI.equals(uri)) {
                 return;
@@ -305,21 +316,24 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         }
 
         @Override
-        public void characters(final char c[], final int start, final int len) throws SAXException {
+        public void characters(final char c[], final int start, final int len)
+                throws SAXException {
             if (isEvaluatingContent()) {
                 super.characters(c, start, len);
             }
         }
 
         @Override
-        public void ignorableWhitespace(final char c[], final int start, final int len) throws SAXException {
+        public void ignorableWhitespace(final char c[], final int start,
+                final int len) throws SAXException {
             if (isEvaluatingContent()) {
                 super.ignorableWhitespace(c, start, len);
             }
         }
 
         @Override
-        public void processingInstruction(final String target, final String data) throws SAXException {
+        public void processingInstruction(final String target, final String data)
+                throws SAXException {
             if (isEvaluatingContent()) {
                 super.processingInstruction(target, data);
             }
@@ -361,7 +375,8 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         }
 
         @Override
-        public void comment(final char ch[], final int start, final int len) throws SAXException {
+        public void comment(final char ch[], final int start, final int len)
+                throws SAXException {
             if (isEvaluatingContent()) {
                 super.comment(ch, start, len);
             }
@@ -371,15 +386,19 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         public void setDocumentLocator(final Locator locator) {
             try {
                 if (getLogger().isDebugEnabled()) {
-                    getLogger().debug("setDocumentLocator called " + locator.getSystemId());
+                    getLogger().debug(
+                            "setDocumentLocator called "
+                                    + locator.getSystemId());
                 }
 
                 // When using SAXON to serialize a DOM tree to SAX, a locator is
                 // passed with a "null" system id
                 if (locator.getSystemId() != null) {
-                    Source source = LanewebXIncludeTransformer.this.resolver.resolveURI(locator.getSystemId());
+                    Source source = LanewebXIncludeTransformer.this.resolver
+                            .resolveURI(locator.getSystemId());
                     try {
-                        this.xmlBaseSupport.setDocumentLocation(source.getURI());
+                        this.xmlBaseSupport
+                                .setDocumentLocation(source.getURI());
                         // only for the "root" XIncludePipe, we'll have to set
                         // the href here, in the other cases
                         // the href is taken from the xi:include href attribute
@@ -387,20 +406,28 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                             this.href = source.getURI();
                         }
                     } finally {
-                        LanewebXIncludeTransformer.this.resolver.release(source);
+                        LanewebXIncludeTransformer.this.resolver
+                                .release(source);
                     }
                 }
             } catch (Exception e) {
-                throw new CascadingRuntimeException("Error in XIncludeTransformer while trying to resolve base URL for document", e);
+                throw new CascadingRuntimeException(
+                        "Error in XIncludeTransformer while trying to resolve base URL for document",
+                        e);
             }
             this.locator = locator;
             super.setDocumentLocator(locator);
         }
 
-        protected void processXIncludeElement(String href, String parse, String xpointer) throws SAXException, ProcessingException,
+        protected void processXIncludeElement(String href, String parse,
+                String xpointer) throws SAXException, ProcessingException,
                 IOException {
             if (getLogger().isDebugEnabled()) {
-                getLogger().debug("Processing XInclude element: href=" + href + ", parse=" + parse + ", xpointer=" + xpointer);
+                getLogger()
+                        .debug(
+                                "Processing XInclude element: href=" + href
+                                        + ", parse=" + parse + ", xpointer="
+                                        + xpointer);
             }
 
             // Default for @parse is "xml"
@@ -412,12 +439,14 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
             try {
                 int fragmentIdentifierPos = href.indexOf('#');
                 if (fragmentIdentifierPos != -1) {
-                    getLogger().warn(
-                                     "Fragment identifer found in 'href' attribute: " + href
-                                             + "\nFragment identifiers are forbidden by the XInclude specification. "
-                                             + "They are still handled by XIncludeTransformer for backward "
-                                             + "compatibility, but their use is deprecated and will be prohibited "
-                                             + "in a future release.  Use the 'xpointer' attribute instead.");
+                    getLogger()
+                            .warn(
+                                    "Fragment identifer found in 'href' attribute: "
+                                            + href
+                                            + "\nFragment identifiers are forbidden by the XInclude specification. "
+                                            + "They are still handled by XIncludeTransformer for backward "
+                                            + "compatibility, but their use is deprecated and will be prohibited "
+                                            + "in a future release.  Use the 'xpointer' attribute instead.");
                     if (xpointer == null) {
                         xpointer = href.substring(fragmentIdentifierPos + 1);
                     }
@@ -426,10 +455,10 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
 
                 // An empty or absent href is a reference to the current
                 // document -- this can be different than the current base
-                if (href == null || href.length() == 0) {
+                if ((href == null) || (href.length() == 0)) {
                     if (this.href == null) {
                         throw new SAXException(
-                                               "XIncludeTransformer: encountered empty href (= href pointing to the current document) but the location of the current document is unknown.");
+                                "XIncludeTransformer: encountered empty href (= href pointing to the current document) but the location of the current document is unknown.");
                     }
                     // The following can be simplified once fragment identifiers
                     // are prohibited
@@ -443,16 +472,19 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
 
                 url = this.xmlBaseSupport.makeAbsolute(href);
                 if (getLogger().isDebugEnabled()) {
-                    getLogger().debug("URL: " + url.getURI() + "\nXPointer: " + xpointer);
+                    getLogger().debug(
+                            "URL: " + url.getURI() + "\nXPointer: " + xpointer);
                 }
 
                 // add the source to the SourceValidity
                 LanewebXIncludeTransformer.this.validity.addSource(url);
 
-                if (parse.equals("text")) {
+                if ("text".equals(parse)) {
                     getLogger().debug("Parse type is text");
                     if (xpointer != null) {
-                        throw new SAXException("xpointer attribute must not be present when parse='text': " + getLocation());
+                        throw new SAXException(
+                                "xpointer attribute must not be present when parse='text': "
+                                        + getLocation());
                     }
                     InputStream is = null;
                     InputStreamReader isr = null;
@@ -462,14 +494,18 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                         isr = new InputStreamReader(is);
                         reader = new BufferedReader(isr);
                         int read;
-                        char ary[] = new char[1024 * 4];
+                        char[] ary = new char[1024 * 4];
                         while ((read = reader.read(ary)) != -1) {
                             super.characters(ary, 0, read);
                         }
                     } catch (SourceNotFoundException e) {
                         this.useFallbackLevel++;
-                        this.fallBackException = new CascadingException("Resource not found: " + url.getURI());
-                        getLogger().error("xIncluded resource not found: " + url.getURI(), e);
+                        this.fallBackException = new CascadingException(
+                                "Resource not found: " + url.getURI());
+                        getLogger()
+                                .error(
+                                        "xIncluded resource not found: "
+                                                + url.getURI(), e);
                     } finally {
                         if (reader != null) {
                             reader.close();
@@ -481,12 +517,15 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                             is.close();
                         }
                     }
-                } else if (parse.equals("xml")) {
+                } else if ("xml".equals(parse)) {
                     getLogger().debug("Parse type is XML");
 
                     // Check loop inclusion
                     if (isLoopInclusion(url.getURI(), xpointer)) {
-                        throw new ProcessingException("Detected loop inclusion of href=" + url.getURI() + ", xpointer=" + xpointer);
+                        throw new ProcessingException(
+                                "Detected loop inclusion of href="
+                                        + url.getURI() + ", xpointer="
+                                        + xpointer);
                     }
 
                     XIncludePipe subPipe = new XIncludePipe();
@@ -496,15 +535,17 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                     subPipe.setParent(this);
 
                     try {
-                        if (xpointer != null && xpointer.length() > 0) {
+                        if ((xpointer != null) && (xpointer.length() > 0)) {
                             XPointer xptr;
-                            xptr = XPointerFrameworkParser.parse(NetUtils.decodePath(xpointer));
-                            XPointerContext context =
-                                    new XPointerContext(xpointer, url, subPipe, getLogger(),
-                                                        LanewebXIncludeTransformer.this.manager);
+                            xptr = XPointerFrameworkParser.parse(NetUtils
+                                    .decodePath(xpointer));
+                            XPointerContext context = new XPointerContext(
+                                    xpointer, url, subPipe, getLogger(),
+                                    LanewebXIncludeTransformer.this.manager);
                             xptr.process(context);
                         } else {
-                            SourceUtil.toSAX(url, new IncludeXMLConsumer(subPipe));
+                            SourceUtil.toSAX(url, new IncludeXMLConsumer(
+                                    subPipe));
                         }
                         // restore locator on the consumer
                         if (this.locator != null) {
@@ -512,34 +553,56 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                         }
                     } catch (ResourceNotFoundException e) {
                         this.useFallbackLevel++;
-                        this.fallBackException = new CascadingException("Resource not found: " + url.getURI());
-                        getLogger().error("xIncluded resource not found: " + url.getURI(), e);
+                        this.fallBackException = new CascadingException(
+                                "Resource not found: " + url.getURI());
+                        getLogger()
+                                .error(
+                                        "xIncluded resource not found: "
+                                                + url.getURI(), e);
                     } catch (ParseException e) {
                         // this exception is thrown in case of an invalid
                         // xpointer expression
                         this.useFallbackLevel++;
-                        this.fallBackException = new CascadingException("Error parsing xPointer expression", e);
+                        this.fallBackException = new CascadingException(
+                                "Error parsing xPointer expression", e);
                         this.fallBackException.fillInStackTrace();
-                        getLogger().error("Error parsing XPointer expression, will try to use fallback.", e);
+                        getLogger()
+                                .error(
+                                        "Error parsing XPointer expression, will try to use fallback.",
+                                        e);
                     } catch (SAXException e) {
                         this.useFallbackLevel++;
                         this.fallBackException = e;
-                        getLogger().error("Error processing an xInclude, will try to use fallback.", e);
+                        getLogger()
+                                .error(
+                                        "Error processing an xInclude, will try to use fallback.",
+                                        e);
                     } catch (ProcessingException e) {
                         this.useFallbackLevel++;
                         this.fallBackException = e;
-                        getLogger().error("Error processing an xInclude, will try to use fallback.", e);
+                        getLogger()
+                                .error(
+                                        "Error processing an xInclude, will try to use fallback.",
+                                        e);
                     } catch (MalformedURLException e) {
                         this.useFallbackLevel++;
                         this.fallBackException = e;
-                        getLogger().error("Error processing an xInclude, will try to use fallback.", e);
+                        getLogger()
+                                .error(
+                                        "Error processing an xInclude, will try to use fallback.",
+                                        e);
                     } catch (IOException e) {
                         this.useFallbackLevel++;
                         this.fallBackException = e;
-                        getLogger().error("Error processing an xInclude, will try to use fallback.", e);
+                        getLogger()
+                                .error(
+                                        "Error processing an xInclude, will try to use fallback.",
+                                        e);
                     }
                 } else {
-                    throw new SAXException("Found 'parse' attribute with unknown value " + parse + " at " + getLocation());
+                    throw new SAXException(
+                            "Found 'parse' attribute with unknown value "
+                                    + parse + " at " + getLocation());
                 }
             } catch (SourceException se) {
                 throw SourceUtil.handle(se);
@@ -555,13 +618,17 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                 xpointer = "";
             }
 
-            if (uri.equals(this.href) && xpointer.equals(this.xpointer == null ? "" : this.xpointer)) {
+            if (uri.equals(this.href)
+                    && xpointer.equals(this.xpointer == null ? ""
+                            : this.xpointer)) {
                 return true;
             }
 
             XIncludePipe parent = getParent();
             while (parent != null) {
-                if (uri.equals(parent.getHref()) && xpointer.equals(parent.getXpointer() == null ? "" : parent.getXpointer())) {
+                if (uri.equals(parent.getHref())
+                        && xpointer.equals(parent.getXpointer() == null ? ""
+                                : parent.getXpointer())) {
                     return true;
                 }
                 parent = parent.getParent();
@@ -573,7 +640,9 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
             if (this.locator == null) {
                 return "unknown location";
             }
-            return this.locator.getSystemId() + ":" + this.locator.getColumnNumber() + ":" + this.locator.getLineNumber();
+            return this.locator.getSystemId() + ":"
+                    + this.locator.getColumnNumber() + ":"
+                    + this.locator.getLineNumber();
         }
     }
 }

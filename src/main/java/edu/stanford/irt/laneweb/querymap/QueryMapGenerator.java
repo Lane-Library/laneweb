@@ -46,25 +46,30 @@ public class QueryMapGenerator extends ServiceableGenerator {
 
     private edu.stanford.irt.querymap.QueryMapper queryMapper;
 
-    private HttpClient httpClient = new HttpClient(new MultiThreadedHttpConnectionManager());
+    private HttpClient httpClient = new HttpClient(
+            new MultiThreadedHttpConnectionManager());
 
     private String query;
 
     @Override
-    public void service(final ServiceManager serviceManager) throws ServiceException {
+    public void service(final ServiceManager serviceManager)
+            throws ServiceException {
         super.service(serviceManager);
-        DescriptorManagerManager managerManager = (DescriptorManagerManager) serviceManager.lookup(DescriptorManagerManager.ROLE);
+        DescriptorManagerManager managerManager = (DescriptorManagerManager) serviceManager
+                .lookup(DescriptorManagerManager.ROLE);
         this.descriptorManager = managerManager.getDescriptorManager();
         serviceManager.release(managerManager);
     }
 
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params)
+    public void setup(final SourceResolver resolver, final Map objectModel,
+            final String src, final Parameters params)
             throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, params);
-        String resourceMap = params.getParameter("resource-maps", "resource://edu/stanford/irt/querymap/resource-maps.xml");
-        String descriptorWeights =
-                params.getParameter("descriptor-weights", "resource://edu/stanford/irt/querymap/descriptor-weights.xml");
+        String resourceMap = params.getParameter("resource-maps",
+                "resource://edu/stanford/irt/querymap/resource-maps.xml");
+        String descriptorWeights = params.getParameter("descriptor-weights",
+                "resource://edu/stanford/irt/querymap/descriptor-weights.xml");
         int abstractCount = params.getParameterAsInteger("abstract-count", 100);
         this.query = params.getParameter(QUERY, null);
         this.queryMapper = new edu.stanford.irt.querymap.QueryMapper();
@@ -75,10 +80,12 @@ public class QueryMapGenerator extends ServiceableGenerator {
         this.queryMapper.setQueryToDescriptor(queryToDescriptor);
         Source resourceMapSource = resolver.resolveURI(resourceMap);
         InputStream inputStream = resourceMapSource.getInputStream();
-        StreamResourceMapping resourceMapping = new StreamResourceMapping(inputStream);
+        StreamResourceMapping resourceMapping = new StreamResourceMapping(
+                inputStream);
         resolver.release(resourceMapSource);
         Source descriptorWeightSource = resolver.resolveURI(descriptorWeights);
-        DescriptorWeightMap descriptorWeightMap = new DescriptorWeightMap(descriptorWeightSource.getInputStream());
+        DescriptorWeightMap descriptorWeightMap = new DescriptorWeightMap(
+                descriptorWeightSource.getInputStream());
         resolver.release(descriptorWeightSource);
         queryToDescriptor.setDescriptorWeights(descriptorWeightMap);
         queryToDescriptor.setAbstractCount(abstractCount);
@@ -87,30 +94,38 @@ public class QueryMapGenerator extends ServiceableGenerator {
         this.queryMapper.setDescriptorToResource(descriptorToResource);
     }
 
-    public void generate() throws IOException, SAXException, ProcessingException {
+    public void generate() throws IOException, SAXException,
+            ProcessingException {
         QueryMap queryMap = null;
         if (null != this.query) {
             queryMap = this.queryMapper.getQueryMap(this.query);
         } else {
-            throw new ProcessingException(new IllegalStateException("null queryMap"));
+            throw new ProcessingException(new IllegalStateException(
+                    "null queryMap"));
         }
         this.contentHandler.startDocument();
         XMLUtils.startElement(this.contentHandler, NAMESPACE, QUERY_MAP);
-        XMLUtils.createElementNS(this.contentHandler, NAMESPACE, QUERY, queryMap.getQuery());
+        XMLUtils.createElementNS(this.contentHandler, NAMESPACE, QUERY,
+                queryMap.getQuery());
         Descriptor descriptor = queryMap.getDescriptor();
         if (null != descriptor) {
-            XMLUtils.createElementNS(this.contentHandler, NAMESPACE, DESCRIPTOR, descriptor.getDescriptorName());
+            XMLUtils.createElementNS(this.contentHandler, NAMESPACE,
+                    DESCRIPTOR, descriptor.getDescriptorName());
             ResourceMap resourceMap = queryMap.getResourceMap();
             if (null != resourceMap) {
-                XMLUtils.startElement(this.contentHandler, NAMESPACE, RESOURCE_MAP);
-                XMLUtils.createElementNS(this.contentHandler, NAMESPACE, DESCRIPTOR, resourceMap.getDescriptor()
-                                                                                                .getDescriptorName());
+                XMLUtils.startElement(this.contentHandler, NAMESPACE,
+                        RESOURCE_MAP);
+                XMLUtils.createElementNS(this.contentHandler, NAMESPACE,
+                        DESCRIPTOR, resourceMap.getDescriptor()
+                                .getDescriptorName());
                 for (String idref : resourceMap.getResources()) {
                     AttributesImpl atts = new AttributesImpl();
                     atts.addAttribute("", IDREF, IDREF, "IDREF", idref);
-                    XMLUtils.createElementNS(this.contentHandler, NAMESPACE, RESOURCE, atts);
+                    XMLUtils.createElementNS(this.contentHandler, NAMESPACE,
+                            RESOURCE, atts);
                 }
-                XMLUtils.endElement(this.contentHandler, NAMESPACE, RESOURCE_MAP);
+                XMLUtils.endElement(this.contentHandler, NAMESPACE,
+                        RESOURCE_MAP);
             }
         }
         XMLUtils.endElement(this.contentHandler, NAMESPACE, QUERY_MAP);

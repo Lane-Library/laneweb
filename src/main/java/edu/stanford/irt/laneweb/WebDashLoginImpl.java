@@ -21,7 +21,8 @@ import org.apache.cocoon.environment.Request;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin, ThreadSafe, Parameterizable, Initializable {
+public class WebDashLoginImpl extends AbstractLogEnabled implements
+        WebDashLogin, ThreadSafe, Parameterizable, Initializable {
 
     private String loginUrl;
 
@@ -39,15 +40,18 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
         this.mac.init(key);
     }
 
-    public String getEncodedUrl(final LDAPPerson ldapPerson, final Request request) throws UnsupportedEncodingException,
+    public String getEncodedUrl(final LDAPPerson ldapPerson,
+            final Request request) throws UnsupportedEncodingException,
             InvalidKeyException, NoSuchAlgorithmException {
 
         String error = validation(ldapPerson, request);
         if (error != null) {
             return "/error_webdash.html?error=".concat(error);
         }
-        String mail = URLEncoder.encode(ldapPerson.getUId().concat("@stanford.edu"), "UTF-8");
-        String fullName = URLEncoder.encode(ldapPerson.getDisplayName(), "UTF-8");
+        String mail = URLEncoder.encode(ldapPerson.getUId().concat(
+                "@stanford.edu"), "UTF-8");
+        String fullName = URLEncoder.encode(ldapPerson.getDisplayName(),
+                "UTF-8");
         String userId = URLEncoder.encode(ldapPerson.getUId(), "UTF-8");
         String affiliation = getSubGroup(ldapPerson);
         String nonce = request.getParameter("nonce");
@@ -61,21 +65,25 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
         }
         parameters.append("&subgroup=".concat(affiliation));
         parameters.append("&system_short_name=".concat(this.groupName));
-        parameters.append("&system_user_id=".concat(userId.replace("+", "%20")));
+        parameters
+                .append("&system_user_id=".concat(userId.replace("+", "%20")));
         String token = getToken(parameters.toString());
         if (request.getParameter("system_user_id") != null) {
-            return this.loginUrl.concat(parameters.toString()).concat("&token=").concat(token);
+            return this.loginUrl.concat(parameters.toString())
+                    .concat("&token=").concat(token);
         }
-        return this.registrationUrl.concat(parameters.toString()).concat("&token=").concat(token);
+        return this.registrationUrl.concat(parameters.toString()).concat(
+                "&token=").concat(token);
     }
 
-    private String getToken(String string) throws UnsupportedEncodingException {
-        string = string.replace("+", "%20");
-        byte[] utf8 = string.getBytes("UTF8");
+    private String getToken(final String string) throws UnsupportedEncodingException {
+        String newString = string.replace("+", "%20");
+        byte[] utf8 = newString.getBytes("UTF8");
         byte[] b = this.mac.doFinal(utf8);
         StringBuffer sb = new StringBuffer();
         for (byte element : b) {
-            sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
+            sb.append(Integer.toHexString((element & 0xf0) >> 4)
+                    + Integer.toHexString(element & 0x0f));
         }
         return sb.toString();
 
@@ -85,23 +93,28 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
         if (ldapPerson == null) {
             return "ldapPerson";
         }
-        if (request.getParameter("nonce") == null || request.getParameter("nonce").length() == 0) {
+        if ((request.getParameter("nonce") == null)
+                || (request.getParameter("nonce").length() == 0)) {
             return "nonce";
         }
-        if (ldapPerson.getDisplayName() == null || ldapPerson.getDisplayName().length() == 0) {
+        if ((ldapPerson.getDisplayName() == null)
+                || (ldapPerson.getDisplayName().length() == 0)) {
             return "fullName";
         }
-        if (ldapPerson.getAffilation() == null || ldapPerson.getAffilation().length == 0) {
+        if ((ldapPerson.getAffilation() == null)
+                || (ldapPerson.getAffilation().length == 0)) {
             return "affilation";
         }
-        if (ldapPerson.getUId() == null || ldapPerson.getUId().length() == 0) {
+        if ((ldapPerson.getUId() == null)
+                || (ldapPerson.getUId().length() == 0)) {
             return "userId";
         }
         return null;
 
     }
 
-    private String getSubGroup(final LDAPPerson ldapPerson) throws UnsupportedEncodingException {
+    private String getSubGroup(final LDAPPerson ldapPerson)
+            throws UnsupportedEncodingException {
         // value coming from LDAP and afflialtion may have multiple value e.i
         // stanford:staff
         String result = null;
@@ -114,7 +127,9 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements WebDashLogin
                 result = URLEncoder.encode(affiliation[0], "UTF-8");
             }
         } else {
-            throw new RuntimeException("Ldap person : ".concat(ldapPerson.getDisplayName()).concat("  don't have a affiliation"));
+            throw new RuntimeException("Ldap person : ".concat(
+                    ldapPerson.getDisplayName()).concat(
+                    "  don't have a affiliation"));
         }
         return result;
     }

@@ -10,16 +10,21 @@ public class QueryTranslator {
     Vector<String> notWords = new Vector<String>();
 
     public String translate(final String input) {
-        if (input.indexOf('{') > -1 || input.indexOf('}') > -1) {
-            throw new IllegalArgumentException("'}' and '{' should not appear in input");
+        if ((input.indexOf('{') > -1) || (input.indexOf('}') > -1)) {
+            throw new IllegalArgumentException(
+                    "'}' and '{' should not appear in input");
         }
         processString(input);
         if (this.reqWords.size() == 0) {
-            throw new IllegalArgumentException("no 'required' words in query: " + input);
+            throw new IllegalArgumentException("no 'required' words in query: "
+                    + input);
         }
         String translatedQuery = getQuery();
-        if (translatedQuery.indexOf("()") > -1 || translatedQuery.indexOf("{}") > -1 || translatedQuery.indexOf("\\}") > -1) {
-            throw new IllegalArgumentException("can't construct a valid oracle text query from: " + input);
+        if ((translatedQuery.indexOf("()") > -1)
+                || (translatedQuery.indexOf("{}") > -1)
+                || (translatedQuery.indexOf("\\}") > -1)) {
+            throw new IllegalArgumentException(
+                    "can't construct a valid oracle text query from: " + input);
         }
         return translatedQuery;
     }
@@ -44,11 +49,11 @@ public class QueryTranslator {
         while (true) { // Loop over all words
 
             startWord = p;
-            while (p < input.length() && input.charAt(p) != ' ') {
+            while ((p < input.length()) && (input.charAt(p) != ' ')) {
                 // Check for quoted phrase
                 if (input.charAt(p) == '"') { // Quote - skip to next or end
                     p++; // skip the actual quote
-                    while (p < input.length() && input.charAt(p) != '"') {
+                    while ((p < input.length()) && (input.charAt(p) != '"')) {
                         p++;
                     }
                     if (p < input.length()) {
@@ -69,12 +74,12 @@ public class QueryTranslator {
                 // logic
                 boolean isRequired = true;
 
-                if (theWord.charAt(0) == '+' && theWord.length() > 1) {
+                if ((theWord.charAt(0) == '+') && (theWord.length() > 1)) {
                     isRequired = true;
                     theWord = theWord.substring(1);
                 }
 
-                else if (theWord.charAt(0) == '-' && theWord.length() > 1) {
+                else if ((theWord.charAt(0) == '-') && (theWord.length() > 1)) {
                     isRequired = false;
                     theWord = theWord.substring(1);
                 }

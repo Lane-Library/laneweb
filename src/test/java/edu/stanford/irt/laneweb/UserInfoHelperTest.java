@@ -44,18 +44,25 @@ public class UserInfoHelperTest extends TestCase {
         sunetIds[0] = this.sunetid;
         ldapPerson.setSunetId(sunetIds);
 
-        expect(this.ldapClient.getLdapPerson(this.sunetid)).andReturn(ldapPerson);
-        expect(this.request.getAttribute(LanewebConstants.USER_INFO)).andReturn(null);
-        expect(this.session.getAttribute(LanewebConstants.USER_INFO)).andReturn(null);
+        expect(this.ldapClient.getLdapPerson(this.sunetid)).andReturn(
+                ldapPerson);
+        expect(this.request.getAttribute(LanewebConstants.USER_INFO))
+                .andReturn(null);
+        expect(this.session.getAttribute(LanewebConstants.USER_INFO))
+                .andReturn(null);
 
         this.session.setAttribute(isA(String.class), isA(UserInfo.class));
         this.request.setAttribute(isA(String.class), isA(UserInfo.class));
 
         expect(this.request.getSession(true)).andReturn(this.session);
-        expect(this.request.getHeader(LanewebConstants.X_FORWARDED_FOR)).andReturn(null);
-        expect(this.request.getAttribute(LanewebConstants.WEBAUTH_USER)).andReturn(this.sunetid);
-        expect(this.request.getParameter(LanewebConstants.PROXY_LINKS)).andReturn("true");
-        expect(this.request.getParameter(LanewebConstants.PROXY_LINKS)).andReturn("true");
+        expect(this.request.getHeader(LanewebConstants.X_FORWARDED_FOR))
+                .andReturn(null);
+        expect(this.request.getAttribute(LanewebConstants.WEBAUTH_USER))
+                .andReturn(this.sunetid);
+        expect(this.request.getParameter(LanewebConstants.PROXY_LINKS))
+                .andReturn("true");
+        expect(this.request.getParameter(LanewebConstants.PROXY_LINKS))
+                .andReturn("true");
         replay(this.ldapClient);
         replay(this.session);
 

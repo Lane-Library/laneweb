@@ -45,7 +45,8 @@ import org.apache.excalibur.source.SourceFactory;
  * @version CVS $Id: HTTPClientSourceFactory.java,v 1.4 2004/02/28 11:47:24
  *          cziegeler Exp $
  */
-public class HTTPClientSourceFactory extends AbstractLogEnabled implements SourceFactory, Parameterizable, ThreadSafe, Serviceable {
+public class HTTPClientSourceFactory extends AbstractLogEnabled implements
+        SourceFactory, Parameterizable, ThreadSafe, Serviceable {
 
     /**
      * Configuration information.
@@ -57,9 +58,11 @@ public class HTTPClientSourceFactory extends AbstractLogEnabled implements Sourc
     /**
      * Creates a {@link HTTPClientSource} instance.
      */
-    public Source getSource(final String uri, final Map sourceParams) throws MalformedURLException, IOException {
+    public Source getSource(final String uri, final Map sourceParams)
+            throws MalformedURLException, IOException {
         try {
-            final HTTPClientSource source = new HTTPClientSource(uri, sourceParams, this.httpClient);
+            final HTTPClientSource source = new HTTPClientSource(uri,
+                    sourceParams, this.httpClient);
             source.enableLogging(getLogger());
             source.parameterize(this.m_parameters);
             source.initialize();
@@ -100,7 +103,8 @@ public class HTTPClientSourceFactory extends AbstractLogEnabled implements Sourc
     }
 
     public void service(final ServiceManager manager) throws ServiceException {
-        HttpClientManager httpClientManager = (HttpClientManager) manager.lookup(HttpClientManager.ROLE);
+        HttpClientManager httpClientManager = (HttpClientManager) manager
+                .lookup(HttpClientManager.ROLE);
         this.httpClient = httpClientManager.getHttpClient();
         manager.release(httpClientManager);
     }
