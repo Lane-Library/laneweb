@@ -89,7 +89,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
         if (result != null) {
             return new Object[] { result };
         }
-        return new Object[] {};
+        return null;
     }
 
     public void configure(final Configuration config)
