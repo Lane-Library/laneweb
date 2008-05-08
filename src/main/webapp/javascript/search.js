@@ -259,6 +259,13 @@ function showFindIt(o)
     }
 }
 
+function hideFindIt()
+{
+	var findItContainer = document.getElementById('findIt');
+	findItContainer.style.display= 'none';
+	findItContainer.style.visibility = 'hidden';
+}
+
 var spellCheckCallBack =
 {
   success:showSpellCheck,
@@ -270,6 +277,7 @@ function showSpellCheck(o)
 {
     var spellCheckResponse = eval("("+o.responseText+")");
     if (spellCheckResponse.suggestion) {
+    	hideFindIt();
 		var spellCheckContainer = document.getElementById("spellCheck");
 		var spellCheckLink = document.getElementById("spellCheckLink");
 		spellCheckContainer.style.display= 'inline';
@@ -329,6 +337,7 @@ function showQueryMapping(o)
 		window.activeResult.show();
 		var queryMappingContainer = document.getElementById('queryMapping');
 		if(queryMappingContainer && window.spellcheck.suggestion == null){
+			hideFindIt();
 			queryMappingContainer.appendChild(window.queryMapping.getContent());
 		}	
     } 
