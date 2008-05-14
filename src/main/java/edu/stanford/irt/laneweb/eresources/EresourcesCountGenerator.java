@@ -41,7 +41,7 @@ public class EresourcesCountGenerator extends AbstractGenerator {
             + "UNION\n"
             + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'cc' AS GENRE FROM FOUND WHERE TYPE = 'cc'\n"
             + "UNION\n"
-            + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'lanefaq' AS GENRE FROM FOUND WHERE TYPE = 'lanefaq'\n"
+            + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'lanesite' AS GENRE FROM FOUND WHERE TYPE = 'lanesite'\n"
             + "UNION\n"
             + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'biotools' AS GENRE FROM FOUND WHERE SUBSET = 'biotools'";
 
