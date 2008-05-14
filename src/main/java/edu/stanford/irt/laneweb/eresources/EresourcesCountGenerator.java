@@ -23,12 +23,12 @@ public class EresourcesCountGenerator extends AbstractGenerator {
 
     // TODO only text search in with clause maybe probably should test again
     // since biotools more efficient with eresource_id
-    private static final String COUNT_QUERY_1 = "WITH FOUND AS (SELECT ERESOURCE2.ERESOURCE_ID, TYPE2.TYPE, SUBSET2.SUBSET FROM ERESOURCE2, TYPE2, SUBSET2 \n"
-            + "WHERE CONTAINS(ERESOURCE2.TEXT,'";
+    private static final String COUNT_QUERY_1 = "WITH FOUND AS (SELECT ERESOURCE.ERESOURCE_ID, TYPE.TYPE, SUBSET.SUBSET FROM ERESOURCE, TYPE, SUBSET \n"
+            + "WHERE CONTAINS(ERESOURCE.TEXT,'";
 
     private static final String COUNT_QUERY_2 = "') > 0 \n"
-            + "AND ERESOURCE2.ERESOURCE_ID = TYPE2.ERESOURCE_ID \n"
-            + "AND ERESOURCE2.ERESOURCE_ID = SUBSET2.ERESOURCE_ID(+)) \n"
+            + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID \n"
+            + "AND ERESOURCE.ERESOURCE_ID = SUBSET.ERESOURCE_ID(+)) \n"
             + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'all' AS GENRE FROM FOUND\n"
             + "UNION\n"
             + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'ej' AS GENRE FROM FOUND WHERE TYPE = 'ej'\n"

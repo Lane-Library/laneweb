@@ -12,18 +12,18 @@ import java.sql.SQLException;
 
 public class EresourcesBrowseGenerator extends AbstractEresourcesGenerator {
 
-    private static final String BROWSE_SQL_1 = "SELECT ERESOURCE2.ERESOURCE_ID, VERSION2.VERSION_ID, LINK_ID, TITLE, PUBLISHER,\n"
+    private static final String BROWSE_SQL_1 = "SELECT ERESOURCE.ERESOURCE_ID, VERSION.VERSION_ID, LINK_ID, TITLE, PUBLISHER,\n"
             + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION,\n"
             + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE\n"
-            + "FROM ERESOURCE2, VERSION2, LINK2";
+            + "FROM ERESOURCE, VERSION, LINK";
 
-    private static final String BROWSE_SQL_2 = ", TYPE2";
+    private static final String BROWSE_SQL_2 = ", TYPE";
 
-    private static final String BROWSE_SQL_3 = "\nWHERE ERESOURCE2.ERESOURCE_ID = VERSION2.ERESOURCE_ID\n"
-            + "AND VERSION2.VERSION_ID = LINK2.VERSION_ID\n";
+    private static final String BROWSE_SQL_3 = "\nWHERE ERESOURCE.ERESOURCE_ID = VERSION.ERESOURCE_ID\n"
+            + "AND VERSION.VERSION_ID = LINK.VERSION_ID\n";
 
-    private static final String BROWSE_SQL_4 = "AND ERESOURCE2.ERESOURCE_ID = TYPE2.ERESOURCE_ID\n"
-            + "AND TYPE2.TYPE = '";
+    private static final String BROWSE_SQL_4 = "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID\n"
+            + "AND TYPE.TYPE = '";
 
     private static final String BROWSE_SQL_5 = "AND NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') = NLSSORT('";
 
@@ -32,10 +32,10 @@ public class EresourcesBrowseGenerator extends AbstractEresourcesGenerator {
     private static final String BROWSE_SQL_7 = "AND (NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') < NLSSORT('A','NLS_SORT=GENERIC_BASELETTER')\n"
             + "OR NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') > NLSSORT('z','NLS_SORT=GENERIC_BASELETTER'))\n";
 
-    private static final String BROWSE_SQL_8 = "UNION SELECT ERESOURCE2.ERESOURCE_ID, VERSION2.VERSION_ID, LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER,\n"
+    private static final String BROWSE_SQL_8 = "UNION SELECT ERESOURCE.ERESOURCE_ID, VERSION.VERSION_ID, LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER,\n"
             + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION,\n"
             + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE\n"
-            + "FROM ERESOURCE2, VERSION2, LINK2";
+            + "FROM ERESOURCE, VERSION, LINK";
 
     private static final String BROWSE_SQL_9 = "AND NLSSORT(SUBSTR(PREFERRED_TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') = NLSSORT('";
 

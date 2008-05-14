@@ -86,7 +86,7 @@ public class QueryTranslatorTest extends TestCase {
     // Connection conn =
     // DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:pplane","","");
     // PreparedStatement stmt = conn.prepareStatement("SELECT count(*) FROM
-    // ERESOURCE2 WHERE CONTAINS(TEXT,?) > 0");
+    // ERESOURCE WHERE CONTAINS(TEXT,?) > 0");
     // InputStream stream = getClass().getResourceAsStream("search-terms.txt");
     // BufferedReader reader = new BufferedReader(new InputStreamReader(stream,
     // "ASCII"));
