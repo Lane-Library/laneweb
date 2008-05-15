@@ -38,18 +38,15 @@
             <xsl:if test="not(h:meta[@name='LW.searchTerms' and not(@content='')])">
                 <meta name="LW.searchTerms" content="{$search-terms}"/>
             </xsl:if>
-            <xsl:if test="not(h:script[@src='/javascript/metasearch.js'])">
-                <script type="text/javascript" src="/javascript/metasearch.js">//</script>
-            </xsl:if>
         </xsl:copy>
     </xsl:template>
     
     <xsl:template match="h:body">
         <xsl:copy>
-            <xsl:if test="/doc/s:search/@status != 'successful'">
+            <xsl:if test="/doc/s:search/@s:status != 'successful'">
                 <noscript>
                     <h2>
-                        Search still running ... <a href="search.html?javascript=false&amp;source={$source}&amp;q={$search-terms}">Click to see more hit counts</a>
+                        Search still running ... <a href="search.html?javascript=false&amp;w=5000&amp;source={$source}&amp;q={$search-terms}">Click to see more hit counts</a>
                     </h2>
                 </noscript>
             </xsl:if>
@@ -68,12 +65,12 @@
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="href">
-                <xsl:value-of select="/doc/s:search/s:engine/s:resource[@id = $id]/s:url"/>
+                <xsl:value-of select="/doc/s:search/s:engine/s:resource[@s:id = $id]/s:url"/>
             </xsl:attribute>
             <xsl:apply-templates select="node()|child::node()"/>
         </xsl:copy>
-        <xsl:if test="contains($query-string,'javascript=false') and /doc/s:search/s:engine/s:resource[@id = $id]/@status = 'successful'">
-            <span><xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@id = $id]/s:hits, '###,###')"/></span>
+        <xsl:if test="contains($query-string,'javascript=false') and /doc/s:search/s:engine/s:resource[@s:id = $id]/@s:status = 'successful'">
+            <span>: <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id = $id]/s:hits, '###,###')"/></span>
         </xsl:if>
     </xsl:template>
     
