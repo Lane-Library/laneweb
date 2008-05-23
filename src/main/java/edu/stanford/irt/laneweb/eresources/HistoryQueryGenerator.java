@@ -22,45 +22,45 @@ import org.xml.sax.helpers.AttributesImpl;
 public class HistoryQueryGenerator extends AbstractGenerator {
 
     // ERESOURCE.TITLE, lower(ERESOURCE.TITLE) AS LTITLE,
-    private static final String COUNT_QUERY_1 = "WITH FOUND AS (SELECT HISTORY_ERESOURCE.ERESOURCE_ID FROM HISTORY_ERESOURCE \n"
-            + "WHERE CONTAINS(HISTORY_ERESOURCE.TEXT,'";
+    private static final String COUNT_QUERY_1 = "WITH FOUND AS (SELECT H_ERESOURCE.ERESOURCE_ID FROM H_ERESOURCE \n"
+            + "WHERE CONTAINS(H_ERESOURCE.TEXT,'";
 
     private static final String COUNT_QUERY_2 = "') > 0) \n"
-            + "SELECT COUNT(*) AS HITS, 'books' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'books'\n"
+            + "SELECT COUNT(*) AS HITS, 'book' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'book'\n"
             + "UNION\n"
-            + "SELECT COUNT(*) AS HITS, 'movie' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'movie'\n"
+            + "SELECT COUNT(*) AS HITS, 'movie' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'movie'\n"
             + "UNION\n"
-            + "SELECT COUNT(*) AS HITS, 'serial' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'serial'\n"
+            + "SELECT COUNT(*) AS HITS, 'serial' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'serial'\n"
             + "UNION\n"
-            + "SELECT COUNT(*) AS HITS, 'graphic' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'graphic'\n"
+            + "SELECT COUNT(*) AS HITS, 'graphic' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'graphic'\n"
             + "UNION\n"
-            + "SELECT COUNT(*) AS HITS, 'thesis' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'thesis'\n"
+            + "SELECT COUNT(*) AS HITS, 'thesis' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'thesis'\n"
             + "UNION\n"
-            + "SELECT COUNT(*) AS HITS, 'object' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'object'\n"
+            + "SELECT COUNT(*) AS HITS, 'object' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'object'\n"
             + "UNION\n"
-            + "SELECT COUNT(*) AS HITS, 'people' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'people'\n"
+            + "SELECT COUNT(*) AS HITS, 'people' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'people'\n"
             + "UNION\n"
-            + "SELECT COUNT(*) AS HITS, 'organization' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'organization'\n"
+            + "SELECT COUNT(*) AS HITS, 'organization' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'organization'\n"
             + "UNION\n"
-            + "SELECT COUNT(*) AS HITS, 'article' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'article'\n"
+            + "SELECT COUNT(*) AS HITS, 'article' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'article'\n"
             + "UNION\n"
-            + "SELECT COUNT(*) AS HITS, 'chapter' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'chapter'\n"
+            + "SELECT COUNT(*) AS HITS, 'chapter' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'chapter'\n"
             + "UNION\n"
-            + "SELECT COUNT(*) AS HITS, 'event' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'event'\n"
+            + "SELECT COUNT(*) AS HITS, 'event' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'event'\n"
             + "UNION\n"
-            + "SELECT COUNT(*) AS HITS, 'findingAid' AS GENRE FROM FOUND, HISTORY_TYPE\n"
-            + "WHERE FOUND.ERESOURCE_ID = HISTORY_TYPE.ERESOURCE_ID AND TYPE = 'finding aid'\n";
+            + "SELECT COUNT(*) AS HITS, 'findingAid' AS GENRE FROM FOUND, H_TYPE\n"
+            + "WHERE FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID AND TYPE = 'finding aid'\n";
 
     private static final String TYPE = "t";
 
@@ -78,20 +78,20 @@ public class HistoryQueryGenerator extends AbstractGenerator {
 
     private static final String QUERY_ELEMENT = "query";
 
-    private static final String SELECT = "SELECT " + "HISTORY_LINK.LINK_ID, "
-            + "HISTORY_ERESOURCE.ERESOURCE_ID, "
-            + "HISTORY_VERSION.VERSION_ID, " + "HISTORY_VERSION.PUBLISHER, "
-            + "HISTORY_VERSION.HOLDINGS, " + "HISTORY_VERSION.DATES, "
-            + "HISTORY_VERSION.DESCRIPTION, " + "HISTORY_VERSION.PROXY, "
-            + "HISTORY_LINK.URL, " + "HISTORY_LINK.LABEL, "
-            + "HISTORY_LINK.INSTRUCTION, ";
+    private static final String SELECT = "SELECT " + "H_LINK.LINK_ID, "
+            + "H_ERESOURCE.ERESOURCE_ID, "
+            + "H_VERSION.VERSION_ID, " + "H_VERSION.PUBLISHER, "
+            + "H_VERSION.HOLDINGS, " + "H_VERSION.DATES, "
+            + "H_VERSION.DESCRIPTION, " + "H_VERSION.PROXY, "
+            + "H_LINK.URL, " + "H_LINK.LABEL, "
+            + "H_LINK.INSTRUCTION, ";
 
     private static final String FROM = "FROM "
-            + "HISTORY_ERESOURCE, HISTORY_VERSION, HISTORY_LINK";
+            + "H_ERESOURCE, H_VERSION, H_LINK";
 
     private static final String WHERE = "WHERE "
-            + "HISTORY_ERESOURCE.ERESOURCE_ID = HISTORY_VERSION.ERESOURCE_ID "
-            + "AND " + "HISTORY_VERSION.VERSION_ID = HISTORY_LINK.VERSION_ID ";
+            + "H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+            + "AND " + "H_VERSION.VERSION_ID = H_LINK.VERSION_ID ";
 
     private static final String ORDER_BY = "\nORDER BY ";
 
@@ -206,34 +206,34 @@ public class HistoryQueryGenerator extends AbstractGenerator {
         }
         StringBuffer queryBuffer = new StringBuffer();
         if (null != this.translatedQuery) {
-            getScoredSelectSQL(queryBuffer, "HISTORY_ERESOURCE.TITLE", true);
+            getScoredSelectSQL(queryBuffer, "H_ERESOURCE.TITLE", true);
             getFromSQL(queryBuffer);
-            getScoredWhereSQL(queryBuffer, "HISTORY_ERESOURCE.TITLE", true);
+            getScoredWhereSQL(queryBuffer, "H_ERESOURCE.TITLE", true);
             queryBuffer.append("\nUNION\n");
-            getScoredSelectSQL(queryBuffer, "HISTORY_ERESOURCE.TITLE", false);
+            getScoredSelectSQL(queryBuffer, "H_ERESOURCE.TITLE", false);
             getFromSQL(queryBuffer);
-            getScoredWhereSQL(queryBuffer, "HISTORY_ERESOURCE.TITLE", false);
+            getScoredWhereSQL(queryBuffer, "H_ERESOURCE.TITLE", false);
             queryBuffer.append("\nUNION\n");
             getScoredSelectSQL(queryBuffer,
-                    "HISTORY_ERESOURCE.PREFERRED_TITLE", true);
+                    "H_ERESOURCE.PREFERRED_TITLE", true);
             getFromSQL(queryBuffer);
-            getScoredWhereSQL(queryBuffer, "HISTORY_ERESOURCE.PREFERRED_TITLE",
+            getScoredWhereSQL(queryBuffer, "H_ERESOURCE.PREFERRED_TITLE",
                     true);
             queryBuffer.append("\nUNION\n");
             getScoredSelectSQL(queryBuffer,
-                    "HISTORY_ERESOURCE.PREFERRED_TITLE", false);
+                    "H_ERESOURCE.PREFERRED_TITLE", false);
             getFromSQL(queryBuffer);
-            getScoredWhereSQL(queryBuffer, "HISTORY_ERESOURCE.PREFERRED_TITLE",
+            getScoredWhereSQL(queryBuffer, "H_ERESOURCE.PREFERRED_TITLE",
                     false);
             getOrderBySQL(queryBuffer);
         } else {
-            getSelectSQL(queryBuffer, "HISTORY_ERESOURCE.TITLE");
+            getSelectSQL(queryBuffer, "H_ERESOURCE.TITLE");
             getFromSQL(queryBuffer);
-            getWhereSQL(queryBuffer, "HISTORY_ERESOURCE.TITLE");
+            getWhereSQL(queryBuffer, "H_ERESOURCE.TITLE");
             queryBuffer.append("\nUNION\n");
-            getSelectSQL(queryBuffer, "HISTORY_ERESOURCE.PREFERRED_TITLE");
+            getSelectSQL(queryBuffer, "H_ERESOURCE.PREFERRED_TITLE");
             getFromSQL(queryBuffer);
-            getWhereSQL(queryBuffer, "HISTORY_ERESOURCE.PREFERRED_TITLE");
+            getWhereSQL(queryBuffer, "H_ERESOURCE.PREFERRED_TITLE");
             getOrderBySQL(queryBuffer);
         }
         return queryBuffer.toString().toCharArray();
@@ -263,14 +263,14 @@ public class HistoryQueryGenerator extends AbstractGenerator {
         queryBuffer.append('\n');
         queryBuffer.append(FROM);
         if (null != this.type) {
-            queryBuffer.append(", HISTORY_TYPE");
+            queryBuffer.append(", H_TYPE");
         }
     }
 
     private void getScoredWhereSQL(final StringBuffer queryBuffer,
             final String titleTable, final boolean core) {
         getWhereSQL(queryBuffer, titleTable);
-        queryBuffer.append("\nAND HISTORY_ERESOURCE.CORE ");
+        queryBuffer.append("\nAND H_ERESOURCE.CORE ");
         if (core) {
             queryBuffer.append("= 'Y'");
         } else {
@@ -285,11 +285,11 @@ public class HistoryQueryGenerator extends AbstractGenerator {
         if (null != this.type) {
             queryBuffer
                     .append(
-                            "\nAND HISTORY_TYPE.ERESOURCE_ID = HISTORY_ERESOURCE.ERESOURCE_ID AND HISTORY_TYPE.TYPE = '")
+                            "\nAND H_TYPE.ERESOURCE_ID = H_ERESOURCE.ERESOURCE_ID AND H_TYPE.TYPE = '")
                     .append(this.type).append("'");
         }
         if (null != this.core) {
-            queryBuffer.append("\nAND HISTORY_ERESOURCE.CORE = 'Y'");
+            queryBuffer.append("\nAND H_ERESOURCE.CORE = 'Y'");
         }
         if (null != this.alpha) {
             queryBuffer.append("\nAND ");
@@ -313,12 +313,12 @@ public class HistoryQueryGenerator extends AbstractGenerator {
             }
         }
         if (null != this.translatedQuery) {
-            queryBuffer.append("\nAND CONTAINS(HISTORY_ERESOURCE.TEXT,'")
+            queryBuffer.append("\nAND CONTAINS(H_ERESOURCE.TEXT,'")
                     .append(this.translatedQuery).append("', 2) > 0 ");
         }
-        if (titleTable.equals("HISTORY_ERESOURCE.PREFERRED_TITLE")) {
+        if (titleTable.equals("H_ERESOURCE.PREFERRED_TITLE")) {
             queryBuffer
-                    .append("\nAND HISTORY_ERESOURCE.PREFERRED_TITLE IS NOT NULL");
+                    .append("\nAND H_ERESOURCE.PREFERRED_TITLE IS NOT NULL");
         }
     }
 
