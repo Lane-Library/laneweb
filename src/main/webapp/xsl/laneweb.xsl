@@ -947,13 +947,40 @@
                 <xsl:otherwise>6.0.65</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+        <xsl:variable name="flash-for-upgrade">
+            <xsl:choose>
+                <xsl:when test="h:param[@name='flash-for-upgrade']">
+                    <xsl:value-of select="h:param[@name='flash-for-upgrade']/@value"/>
+                </xsl:when>
+                <xsl:otherwise>true</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="height">
+            <xsl:choose>
+                <xsl:when test="@height">
+                    <xsl:value-of select="@height"/>
+                </xsl:when>
+                <xsl:otherwise>100</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="width">
+            <xsl:choose>
+                <xsl:when test="@width">
+                    <xsl:value-of select="@width"/>
+                </xsl:when>
+                <xsl:otherwise>100</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <script type="text/javascript">
             <xsl:comment>
             <xsl:text>
                 var hasProductInstall = DetectFlashVer(6, 0, 65);
                 var requiredVersion = '</xsl:text><xsl:value-of select="$flash-version"/><xsl:text>'.split('.');
-                    var hasRequestedVersion = DetectFlashVer(requiredVersion[0],requiredVersion[1],requiredVersion[2]);
-                    if ( hasProductInstall &amp;&amp; !hasRequestedVersion ) {
+                var flashForUpgrade = </xsl:text><xsl:value-of select="$flash-for-upgrade"/><xsl:text>;
+                var flashUpgradeHeight = '</xsl:text><xsl:value-of select="$height"/><xsl:text>';
+                var flashUpgradeWidth = '</xsl:text><xsl:value-of select="$width"/><xsl:text>';
+                var hasRequestedVersion = DetectFlashVer(requiredVersion[0],requiredVersion[1],requiredVersion[2]);
+                if ( hasProductInstall &amp;&amp; !hasRequestedVersion &amp;&amp; flashForUpgrade) {
                     <!--	// MMdoctitle is the stored document.title value used by the installation process to close the window that started the process
                         // This is necessary in order to close browser windows that are still utilizing the older version of the player after installation has completed
                         // DO NOT MODIFY THE FOLLOWING FOUR LINES
@@ -966,8 +993,8 @@
                     AC_FL_RunContent(
                     "src", "/flash/playerProductInstall.swf",
                     "FlashVars", "MMredirectURL="+MMredirectURL+'&amp;MMplayerType='+MMPlayerType+'&amp;MMdoctitle='+MMdoctitle+"",
-                    "width", "550",
-                    "height", "300",
+                    "width", flashUpgradeWidth,
+                    "height", flashUpgradeHeight,
                     "align", "middle",
                     "id", "detectionExample",
                     "quality", "high",
