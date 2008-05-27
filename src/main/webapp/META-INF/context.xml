@@ -9,6 +9,15 @@
         maxActive="${laneweb.context.eresources.maxActive}"
         maxIdle="${laneweb.context.eresources.maxIdle}"
         maxWait="${laneweb.context.eresources.maxWait}"/>
+    <Resource name="jdbc/voyager" auth="Container"
+        type="javax.sql.DataSource"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        url="${laneweb.context.voyager.url}"
+        username="${laneweb.context.voyager.username}"
+        password="${laneweb.context.voyager.password}"
+        maxActive="${laneweb.context.voyager.maxActive}"
+        maxIdle="${laneweb.context.voyager.maxIdle}"
+        maxWait="${laneweb.context.voyager.maxWait}"/>
     <Environment name="live-base"
         type="java.lang.String"
         value="${laneweb.context.environment.live-base}"/>
