@@ -412,12 +412,13 @@ public class HTTPClientSource extends AbstractLogEnabled implements
      * @param method
      *            {@link HttpMethod} to execute
      * @return response code from server
-     * @throws IOException 
-     * @throws HttpException 
+     * @throws IOException
+     * @throws HttpException
      * @exception IOException
      *                if an error occurs
      */
-    protected int executeMethod(final HttpMethod method) throws HttpException, IOException {
+    protected int executeMethod(final HttpMethod method) throws HttpException,
+            IOException {
 
         final int response = this.m_client.executeMethod(method);
 
@@ -765,8 +766,9 @@ public class HTTPClientSource extends AbstractLogEnabled implements
         /**
          * Helper method to attempt uploading of the local data file to the
          * remove server via a HTTP PUT.
-         * @throws IOException 
-         * @throws IOException 
+         * 
+         * @throws IOException
+         * @throws IOException
          * 
          * @exception IOException
          *                if an error occurs

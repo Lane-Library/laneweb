@@ -41,9 +41,6 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
 
     private static final String MESH = "m";
 
-//    private static final char[] NO_RESOURCES = "no resources found"
-//            .toCharArray();
-
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
 
     private DataSourceComponent dataSource;
@@ -118,21 +115,12 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
                 "head");
         this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "body",
                 "body", EMPTY_ATTS);
-//        if (0 == eresources.size()) {
-//            this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "p",
-//                    "p", EMPTY_ATTS);
-//            this.xmlConsumer.characters(NO_RESOURCES, 0, NO_RESOURCES.length);
-//            this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "p",
-//                    "p");
-//        } else {
-            this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "dl",
-                    "dl", EMPTY_ATTS);
-            for (Eresource er : eresources) {
-                translator.translate(this.xmlConsumer, er);
-            }
-            this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "dl",
-                    "dl");
-//        }
+        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "dl",
+                "dl", EMPTY_ATTS);
+        for (Eresource er : eresources) {
+            translator.translate(this.xmlConsumer, er);
+        }
+        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "dl", "dl");
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "body",
                 "body");
         this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "html",

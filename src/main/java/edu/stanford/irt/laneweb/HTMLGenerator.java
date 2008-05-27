@@ -3,21 +3,15 @@ package edu.stanford.irt.laneweb;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
-import java.util.Properties;
 
-import org.apache.avalon.framework.configuration.Configurable;
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.cocoon.components.source.SourceUtil;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.ServiceableGenerator;
 import org.apache.excalibur.source.Source;
-import org.apache.excalibur.source.SourceException;
 import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.xerces.parsers.AbstractSAXParser;
@@ -31,49 +25,13 @@ import org.xml.sax.SAXException;
  * cocoon-2.1.10 source
  */
 public class HTMLGenerator extends ServiceableGenerator implements
-        Configurable, CacheableProcessingComponent {
+        CacheableProcessingComponent {
 
     /** The source, if coming from a file */
     private Source inputSource;
 
     /** The source, if coming from the request */
     private InputStream requestStream;
-
-    /** Neko properties */
-    private Properties properties;
-
-    public void configure(final Configuration config) throws ConfigurationException {
-
-        String configUrl = config.getChild("neko-config").getValue(null);
-
-        if (configUrl != null) {
-            org.apache.excalibur.source.SourceResolver resolver = null;
-            Source configSource = null;
-            try {
-                resolver = (org.apache.excalibur.source.SourceResolver) this.manager
-                        .lookup(org.apache.excalibur.source.SourceResolver.ROLE);
-                configSource = resolver.resolveURI(configUrl);
-                if (getLogger().isDebugEnabled()) {
-                    getLogger().debug(
-                            "Loading configuration from "
-                                    + configSource.getURI());
-                }
-
-                this.properties = new Properties();
-                this.properties.load(configSource.getInputStream());
-
-            } catch (Exception e) {
-                getLogger().warn("Cannot load configuration from " + configUrl);
-                throw new ConfigurationException(
-                        "Cannot load configuration from " + configUrl, e);
-            } finally {
-                if (null != resolver) {
-                    this.manager.release(resolver);
-                    resolver.release(configSource);
-                }
-            }
-        }
-    }
 
     /**
      * Recycle this component. All instance variables are set to
@@ -92,13 +50,15 @@ public class HTMLGenerator extends ServiceableGenerator implements
     /**
      * Setup the html generator. Try to get the last modification date of the
      * source for caching.
-     * @throws IOException 
-     * @throws SAXException 
-     * @throws ProcessingException 
+     * 
+     * @throws IOException
+     * @throws SAXException
+     * @throws ProcessingException
      */
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException, SAXException, IOException {
+            final String src, final Parameters par) throws ProcessingException,
+            SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
 
         Request request = ObjectModelHelper.getRequest(objectModel);
@@ -112,13 +72,9 @@ public class HTMLGenerator extends ServiceableGenerator implements
             super.source = query.toString();
         }
 
-//        try {
-            if (super.source != null) {
-                this.inputSource = resolver.resolveURI(super.source);
-            }
-//        } catch (SourceException se) {
-//            throw SourceUtil.handle("Unable to resolve " + super.source, se);
-//        }
+        if (super.source != null) {
+            this.inputSource = resolver.resolveURI(super.source);
+        }
     }
 
     /**
@@ -153,14 +109,16 @@ public class HTMLGenerator extends ServiceableGenerator implements
 
     /**
      * Generate XML data.
-     * @throws IOException 
-     * @throws SourceNotFoundException 
-     * @throws SAXException 
+     * 
+     * @throws IOException
+     * @throws SourceNotFoundException
+     * @throws SAXException
      * 
      * @throws SAXException
      */
-    public void generate() throws SourceNotFoundException, IOException, SAXException {
-        HtmlSaxParser parser = new HtmlSaxParser(this.properties);
+    public void generate() throws SourceNotFoundException, IOException,
+            SAXException {
+        HtmlSaxParser parser = new HtmlSaxParser();
 
         if (this.inputSource != null) {
             this.requestStream = this.inputSource.getInputStream();
@@ -178,27 +136,16 @@ public class HTMLGenerator extends ServiceableGenerator implements
 
     public static class HtmlSaxParser extends AbstractSAXParser {
 
-        public HtmlSaxParser(final Properties properties) {
-            super(getConfig(properties));
+        public HtmlSaxParser() {
+            super(getConfig());
         }
 
-        private static HTMLConfiguration getConfig(final Properties properties) {
+        private static HTMLConfiguration getConfig() {
             HTMLConfiguration config = new HTMLConfiguration();
             config
                     .setProperty(
                             "http://cyberneko.org/html/properties/names/elems",
                             "lower");
-            if (properties != null) {
-                for (Object element : properties.keySet()) {
-                    String name = (String) element;
-                    if (name.indexOf("/features/") > -1) {
-                        config.setFeature(name, Boolean.getBoolean(properties
-                                .getProperty(name)));
-                    } else if (name.indexOf("/properties/") > -1) {
-                        config.setProperty(name, properties.getProperty(name));
-                    }
-                }
-            }
             return config;
         }
     }

@@ -120,11 +120,12 @@ public class HTTPSClientSourceFactory extends HTTPClientSourceFactory {
      * @param className
      *            class name to instantiate
      * @return instantiated class
-     * @throws ParameterException 
+     * @throws ParameterException
      * @exception ParameterException
      *                if an error occurs
      */
-    private Object getInstance(final String className) throws ParameterException {
+    private Object getInstance(final String className)
+            throws ParameterException {
         try {
             return Class.forName(className).newInstance();
         } catch (final Exception e) {

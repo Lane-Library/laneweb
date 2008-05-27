@@ -79,19 +79,18 @@ public class HistoryQueryGenerator extends AbstractGenerator {
     private static final String QUERY_ELEMENT = "query";
 
     private static final String SELECT = "SELECT " + "H_LINK.LINK_ID, "
-            + "H_ERESOURCE.ERESOURCE_ID, "
-            + "H_VERSION.VERSION_ID, " + "H_VERSION.PUBLISHER, "
-            + "H_VERSION.HOLDINGS, " + "H_VERSION.DATES, "
-            + "H_VERSION.DESCRIPTION, " + "H_VERSION.PROXY, "
-            + "H_LINK.URL, " + "H_LINK.LABEL, "
+            + "H_ERESOURCE.ERESOURCE_ID, " + "H_VERSION.VERSION_ID, "
+            + "H_VERSION.PUBLISHER, " + "H_VERSION.HOLDINGS, "
+            + "H_VERSION.DATES, " + "H_VERSION.DESCRIPTION, "
+            + "H_VERSION.PROXY, " + "H_LINK.URL, " + "H_LINK.LABEL, "
             + "H_LINK.INSTRUCTION, ";
 
     private static final String FROM = "FROM "
             + "H_ERESOURCE, H_VERSION, H_LINK";
 
     private static final String WHERE = "WHERE "
-            + "H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-            + "AND " + "H_VERSION.VERSION_ID = H_LINK.VERSION_ID ";
+            + "H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND "
+            + "H_VERSION.VERSION_ID = H_LINK.VERSION_ID ";
 
     private static final String ORDER_BY = "\nORDER BY ";
 
@@ -214,17 +213,14 @@ public class HistoryQueryGenerator extends AbstractGenerator {
             getFromSQL(queryBuffer);
             getScoredWhereSQL(queryBuffer, "H_ERESOURCE.TITLE", false);
             queryBuffer.append("\nUNION\n");
-            getScoredSelectSQL(queryBuffer,
-                    "H_ERESOURCE.PREFERRED_TITLE", true);
+            getScoredSelectSQL(queryBuffer, "H_ERESOURCE.PREFERRED_TITLE", true);
             getFromSQL(queryBuffer);
-            getScoredWhereSQL(queryBuffer, "H_ERESOURCE.PREFERRED_TITLE",
-                    true);
+            getScoredWhereSQL(queryBuffer, "H_ERESOURCE.PREFERRED_TITLE", true);
             queryBuffer.append("\nUNION\n");
-            getScoredSelectSQL(queryBuffer,
-                    "H_ERESOURCE.PREFERRED_TITLE", false);
-            getFromSQL(queryBuffer);
-            getScoredWhereSQL(queryBuffer, "H_ERESOURCE.PREFERRED_TITLE",
+            getScoredSelectSQL(queryBuffer, "H_ERESOURCE.PREFERRED_TITLE",
                     false);
+            getFromSQL(queryBuffer);
+            getScoredWhereSQL(queryBuffer, "H_ERESOURCE.PREFERRED_TITLE", false);
             getOrderBySQL(queryBuffer);
         } else {
             getSelectSQL(queryBuffer, "H_ERESOURCE.TITLE");
@@ -313,12 +309,11 @@ public class HistoryQueryGenerator extends AbstractGenerator {
             }
         }
         if (null != this.translatedQuery) {
-            queryBuffer.append("\nAND CONTAINS(H_ERESOURCE.TEXT,'")
-                    .append(this.translatedQuery).append("', 2) > 0 ");
+            queryBuffer.append("\nAND CONTAINS(H_ERESOURCE.TEXT,'").append(
+                    this.translatedQuery).append("', 2) > 0 ");
         }
         if (titleTable.equals("H_ERESOURCE.PREFERRED_TITLE")) {
-            queryBuffer
-                    .append("\nAND H_ERESOURCE.PREFERRED_TITLE IS NOT NULL");
+            queryBuffer.append("\nAND H_ERESOURCE.PREFERRED_TITLE IS NOT NULL");
         }
     }
 

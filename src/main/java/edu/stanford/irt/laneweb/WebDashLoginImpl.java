@@ -76,7 +76,8 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements
                 "&token=").concat(token);
     }
 
-    private String getToken(final String string) throws UnsupportedEncodingException {
+    private String getToken(final String string)
+            throws UnsupportedEncodingException {
         String newString = string.replace("+", "%20");
         byte[] utf8 = newString.getBytes("UTF8");
         byte[] b = this.mac.doFinal(utf8);

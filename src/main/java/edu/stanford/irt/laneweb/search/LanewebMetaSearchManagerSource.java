@@ -17,14 +17,14 @@ public class LanewebMetaSearchManagerSource implements ThreadSafe, Disposable,
     private MetaSearchManager manager;
 
     private HttpClient httpClient;
-    
+
     private ClassPathXmlApplicationContext context;
 
     public LanewebMetaSearchManagerSource() {
         this.context = new ClassPathXmlApplicationContext(
                 "spring/metasearch.xml");
-        this.manager = (MetaSearchManager) context.getBean("manager");
-        this.httpClient = (HttpClient) context.getBean("httpClient");
+        this.manager = (MetaSearchManager) this.context.getBean("manager");
+        this.httpClient = (HttpClient) this.context.getBean("httpClient");
     }
 
     public MetaSearchManager getMetaSearchManager() {
