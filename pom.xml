@@ -254,6 +254,10 @@
       <scope>runtime</scope>
       <exclusions>
         <exclusion>
+          <groupId>net.sf.jsr107cache</groupId>
+          <artifactId>jsr107cache</artifactId>
+        </exclusion>
+        <exclusion>
           <groupId>org.hibernate</groupId>
           <artifactId>hibernate</artifactId>
         </exclusion>
