@@ -32,6 +32,8 @@ public class EresourcesCountGenerator extends ServiceableGenerator {
 
     private static final String QUERY = "q";
     
+    private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
+    
     private static final String[] TYPE_ARRAY =
     {"ej","database","video","book","cc","lanesite"};
     
@@ -79,19 +81,21 @@ public class EresourcesCountGenerator extends ServiceableGenerator {
     public void generate() throws SAXException {
         Map<String, Integer> result = this.collectionManager.searchCount(TYPES, SUBSETS, this.query);
         this.xmlConsumer.startDocument();
-        XMLUtils.startElement(this.xmlConsumer, "rowset");
+        this.xmlConsumer.startPrefixMapping("", SQL_NS);
+        XMLUtils.startElement(this.xmlConsumer, SQL_NS, "rowset");
         for (String genre : result.keySet()) {
             String hits = result.get(genre).toString();
-            XMLUtils.startElement(this.xmlConsumer, "row");
-            XMLUtils.startElement(this.xmlConsumer, "genre");
+            XMLUtils.startElement(this.xmlConsumer, SQL_NS, "row");
+            XMLUtils.startElement(this.xmlConsumer, SQL_NS, "genre");
             XMLUtils.data(this.xmlConsumer, genre);
-            XMLUtils.endElement(this.xmlConsumer, "genre");
-            XMLUtils.startElement(this.xmlConsumer, "hits");
+            XMLUtils.endElement(this.xmlConsumer, SQL_NS, "genre");
+            XMLUtils.startElement(this.xmlConsumer, SQL_NS, "hits");
             XMLUtils.data(this.xmlConsumer, hits);
-            XMLUtils.endElement(this.xmlConsumer, "hits");
-            XMLUtils.endElement(this.xmlConsumer, "row");
+            XMLUtils.endElement(this.xmlConsumer, SQL_NS, "hits");
+            XMLUtils.endElement(this.xmlConsumer, SQL_NS, "row");
         }
-        XMLUtils.endElement(this.xmlConsumer, "rowset");
+        XMLUtils.endElement(this.xmlConsumer, SQL_NS, "rowset");
+        this.xmlConsumer.endPrefixMapping("");
         this.xmlConsumer.endDocument();
     }
 
