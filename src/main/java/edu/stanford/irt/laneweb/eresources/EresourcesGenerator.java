@@ -1,19 +1,12 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
-import org.apache.avalon.excalibur.datasource.DataSourceComponent;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.ServiceSelector;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
@@ -23,11 +16,10 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.Version;
 
-public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
+public class EresourcesGenerator extends ServiceableGenerator {
 
     private static final String KEYWORDS = "keywords";
 
@@ -42,8 +34,8 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
     private static final String MESH = "m";
 
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
-
-    private DataSourceComponent dataSource;
+    
+    private CollectionManager collectionManager;
 
     protected String query;
 
@@ -54,12 +46,15 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
     protected String alpha;
 
     protected String mesh;
+    
+    private String mode;
 
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel,
             final String src, final Parameters par) throws ProcessingException,
             SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
+        this.mode = par.getParameter("mode", "browse");
         Request request = ObjectModelHelper.getRequest(objectModel);
         this.query = request.getParameter(QUERY);
         if (null == this.query) {
@@ -92,12 +87,14 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
         if (this.mesh != null) {
             if (this.mesh.length() == 0) {
                 this.mesh = null;
+            } else {
+                this.mesh = this.mesh.toLowerCase();
             }
         }
     }
 
     public void generate() throws SAXException, ProcessingException {
-        List<Eresource> eresources = getEresourceList();
+        Collection<Eresource> eresources = getEresourceList();
         String title = "edu.stanford.irt.eresources.Eresource";
         EresourceSAXTranslator translator = new EresourceSAXTranslator();
         this.xmlConsumer.startDocument();
@@ -132,92 +129,59 @@ public abstract class AbstractEresourcesGenerator extends ServiceableGenerator {
     @Override
     public void service(final ServiceManager manager) throws ServiceException {
         super.service(manager);
-        ServiceSelector selector = (ServiceSelector) manager
-                .lookup(DataSourceComponent.ROLE + "Selector");
-        this.dataSource = (DataSourceComponent) selector.select("eresources");
-        this.manager.release(selector);
+        this.collectionManager = (CollectionManager) manager.lookup(CollectionManager.class.getName());
     }
 
     @Override
     public void dispose() {
-        this.manager.release(this.dataSource);
+        this.manager.release(this.collectionManager);
         super.dispose();
     }
-
-    protected List<Eresource> getEresourceList() throws ProcessingException {
-        List<Eresource> eresources = new LinkedList<Eresource>();
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        try {
-            conn = this.dataSource.getConnection();
-            try {
-                stmt = getStatement(conn);
-            } catch (IllegalArgumentException e) {
-                // if can't create a SQL query, return the empty list
-                return eresources;
-            }
-            rs = stmt.executeQuery();
-            Eresource eresource = null;
-            Version version = null;
-            Link link;
-            int currentEresourceId = -1;
-            int currentVersionId = -1;
-            int currentLinkId = -1;
-            while (rs.next()) {
-                int rowEresourceId = rs.getInt("ERESOURCE_ID");
-                if (rowEresourceId != currentEresourceId) {
-                    eresource = new Eresource();
-                    eresource.setId(rowEresourceId);
-                    String title = rs.getString("TITLE");
-                    eresource.setTitle(title);
-                    eresources.add(eresource);
-                    currentEresourceId = rowEresourceId;
-                }
-                int rowVersionId = rs.getInt("VERSION_ID");
-                if (rowVersionId != currentVersionId) {
-                    version = new Version();
-                    eresource.addVersion(version);
-                    version.setPublisher(rs.getString("PUBLISHER"));
-                    version.setSummaryHoldings(rs.getString("HOLDINGS"));
-                    version.setDates(rs.getString("DATES"));
-                    version.setDescription(rs.getString("DESCRIPTION"));
-                    if ("F".equals(rs.getString("PROXY"))) {
-                        version.setProxy(false);
-                    }
-                    currentVersionId = rowVersionId;
-                }
-                int rowLinkId = rs.getInt("LINK_ID");
-                if (rowLinkId != currentLinkId) {
-                    link = new Link();
-                    version.addLink(link);
-                    link.setUrl(rs.getString("URL"));
-                    link.setLabel(rs.getString("LABEL"));
-                    link.setInstruction(rs.getString("INSTRUCTION"));
-                    currentLinkId = rowLinkId;
-                }
-            }
-        } catch (SQLException e) {
-            throw new ProcessingException(e);
-        } finally {
-            try {
-                if (null != conn) {
-                    conn.close();
-                }
-                if (null != stmt) {
-                    stmt.close();
-                }
-                if (null != rs) {
-                    rs.close();
-                }
-            } catch (SQLException e) {
-                throw new ProcessingException(e);
-            }
-        }
-        return eresources;
+    
+    @Override
+    public void recycle() {
+        this.mode = null;
+        this.alpha = null;
+        this.mesh = null;
+        this.query = null;
+        this.type = null;
+        this.subset = null;
     }
 
-    protected abstract PreparedStatement getStatement(Connection conn)
-            throws SQLException;
+    protected Collection<Eresource> getEresourceList() throws ProcessingException {
+        if ("search".equals(this.mode)) {
+            if (null == this.query) {
+                throw new ProcessingException("null query");
+            }
+            if (null != this.type) {
+                return this.collectionManager.searchType(this.type, this.query);
+            } else if (null != this.subset) {
+                return this.collectionManager.searchSubset(this.subset, this.query);
+            }
+            return this.collectionManager.search(this.query);
+        } else if ("browse".equals(this.mode)) {
+            if (null != this.type) {
+                if (null != this.alpha) {
+                    return this.collectionManager.getType(this.type, this.alpha.charAt(0));
+                }
+                return this.collectionManager.getType(this.type);
+            } else if (null != this.subset) {
+                return this.collectionManager.getSubset(this.subset);
+            } else {
+                throw new ProcessingException("null type or subset");
+            }
+        } else if ("core".equals(this.mode)) {
+            if (null == this.type) {
+                throw new ProcessingException("null type");
+            }
+            return this.collectionManager.getCore(this.type);
+        } else if ("mesh".equals(this.mode)) {
+            if (null == this.type) {
+                throw new ProcessingException("null type");
+            }
+            return this.collectionManager.getMesh(this.type, this.mesh);
+        }
+        throw new ProcessingException("incomplete parameters");
+    }
 
 }

@@ -158,4 +158,7 @@
     <parameter name="ldap-keytab" value="IRT_K5"/>
   </component>
   
+  <component role="edu.stanford.irt.eresources.CollectionManager"
+    class="edu.stanford.irt.laneweb.eresources.LanewebCollectionManager"/>
+  
 </cocoon>

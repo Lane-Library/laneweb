@@ -10,24 +10,12 @@
                 src="edu.stanford.irt.laneweb.HTMLGenerator" pool-max="32"> </map:generator>
             <map:generator name="request" src="org.apache.cocoon.generation.RequestGenerator"
                 logger="sitemap.generator.request" pool-max="32"/>
-            <map:generator name="eresources-search"
-                src="edu.stanford.irt.laneweb.eresources.EresourcesSearchGenerator"
+            <map:generator name="eresources"
+                src="edu.stanford.irt.laneweb.eresources.EresourcesGenerator"
                 logger="sitemap.generation.eresource-search" pool-max="32"/>
             <map:generator name="eresources-count"
                 src="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
                 logger="sitemap.generation.eresource-search" pool-max="32"/>
-            <map:generator name="eresources-browse"
-                src="edu.stanford.irt.laneweb.eresources.EresourcesBrowseGenerator"
-                logger="sitemap.generation.eresource-browse" pool-max="32"/>
-            <map:generator name="eresources-subset"
-                src="edu.stanford.irt.laneweb.eresources.EresourcesSubsetGenerator"
-                logger="sitemap.generation.eresource-subset" pool-max="32"/>
-            <map:generator name="eresources-mesh"
-                src="edu.stanford.irt.laneweb.eresources.EresourcesMeshGenerator"
-                logger="sitemap.generation.eresource-mesh" pool-max="32"/>
-            <map:generator name="eresources-core"
-                src="edu.stanford.irt.laneweb.eresources.EresourcesCoreGenerator"
-                logger="sitemap.generation.eresource-core" pool-max="32"/>
             <map:generator name="history"
                 src="edu.stanford.irt.laneweb.eresources.HistoryQueryGenerator"
                 logger="sitemap.generation.history" pool-max="32"/>

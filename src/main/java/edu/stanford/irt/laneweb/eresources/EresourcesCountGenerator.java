@@ -7,62 +7,55 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.avalon.framework.parameters.Parameters;
+import org.apache.avalon.framework.service.ServiceException;
+import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.AbstractGenerator;
+import org.apache.cocoon.generation.ServiceableGenerator;
+import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-public class EresourcesCountGenerator extends AbstractGenerator {
+import edu.stanford.irt.eresources.CollectionManager;
 
-    // TODO only text search in with clause maybe probably should test again
-    // since biotools more efficient with eresource_id
-    private static final String COUNT_QUERY_1 = "WITH FOUND AS (SELECT ERESOURCE.ERESOURCE_ID, TYPE.TYPE, SUBSET.SUBSET FROM ERESOURCE, TYPE, SUBSET \n"
-            + "WHERE CONTAINS(ERESOURCE.TEXT,'";
-
-    private static final String COUNT_QUERY_2 = "') > 0 \n"
-            + "AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID \n"
-            + "AND ERESOURCE.ERESOURCE_ID = SUBSET.ERESOURCE_ID(+)) \n"
-            + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'all' AS GENRE FROM FOUND\n"
-            + "UNION\n"
-            + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'ej' AS GENRE FROM FOUND WHERE TYPE = 'ej'\n"
-            + "UNION\n"
-            + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'database' AS GENRE FROM FOUND WHERE TYPE = 'database'\n"
-            + "UNION\n"
-            + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'video' AS GENRE FROM FOUND WHERE TYPE = 'video'\n"
-            + "UNION\n"
-            + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'book' AS GENRE FROM FOUND WHERE TYPE = 'book'\n"
-            + "UNION\n"
-            + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'cc' AS GENRE FROM FOUND WHERE TYPE = 'cc'\n"
-            + "UNION\n"
-            + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'lanesite' AS GENRE FROM FOUND WHERE TYPE = 'lanesite'\n"
-            + "UNION\n"
-            + "SELECT COUNT(DISTINCT ERESOURCE_ID) AS HITS, 'biotools' AS GENRE FROM FOUND WHERE SUBSET = 'biotools'";
-
+public class EresourcesCountGenerator extends ServiceableGenerator {
+    
     private static final String KEYWORDS = "keywords";
 
     private static final String QUERY = "q";
+    
+    private static final String[] TYPE_ARRAY =
+    {"ej","database","video","book","cc","lanesite"};
+    
+    private static final String[] SUBSET_ARRAY =
+    {"biotools"};
+    
+    private static Set<String> TYPES;
+    
+    private static Set<String> SUBSETS;
+    
+    static {
+        TYPES = new HashSet<String>();
+        for (String type : TYPE_ARRAY) {
+            TYPES.add(type);
+        }
+        SUBSETS = new HashSet<String>();
+        for (String subset : SUBSET_ARRAY) {
+            SUBSETS.add(subset);
+        }
+    }
 
-    private static final String XMLNS = "http://apache.org/cocoon/SQL/2.0";
-
-    private static final String EXECUTE_QUERY_ELEMENT = "execute-query";
-
-    private static final String QUERY_ELEMENT = "query";
-
-    private static final Attributes EMPTY_ATTS = new AttributesImpl();
-
-    private static final char[] DUAL_SELECT = "SELECT * FROM DUAL"
-            .toCharArray();
-
-    private char[] selectStatementChars;
-
-    private QueryTranslator queryTranslator = new QueryTranslator();
+    private CollectionManager collectionManager;
+    
+    private String query;
 
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel,
@@ -71,49 +64,51 @@ public class EresourcesCountGenerator extends AbstractGenerator {
         super.setup(resolver, objectModel, src, par);
         Request request = ObjectModelHelper.getRequest(objectModel);
         String query = request.getParameter(QUERY);
-        if (query == null) {
-            query = request.getParameter(KEYWORDS);
+        if (this.query == null) {
+            this.query = request.getParameter(KEYWORDS);
         }
         if (null != query) {
-            query = query.trim();
-            if (query.length() == 0) {
-                query = null;
+            this.query = query.trim();
+            if (this.query.length() == 0) {
+                this.query = null;
             }
 
-        }
-        try {
-            String translatedQuery = this.queryTranslator.translate(query
-                    .replaceAll("'", "''"));
-            StringBuffer sb = new StringBuffer(COUNT_QUERY_1);
-            sb.append(translatedQuery);
-            sb.append(COUNT_QUERY_2);
-            this.selectStatementChars = sb.toString().toCharArray();
-        } catch (RuntimeException e) {
-            if (getLogger().isErrorEnabled()) {
-                getLogger().error(e.getMessage(), e);
-            }
-            this.selectStatementChars = DUAL_SELECT;
         }
     }
 
     public void generate() throws SAXException {
+        Map<String, Integer> result = this.collectionManager.searchCount(TYPES, SUBSETS, this.query);
         this.xmlConsumer.startDocument();
-        if (this.selectStatementChars.length > 0) {
-            this.xmlConsumer.startElement(XMLNS, EXECUTE_QUERY_ELEMENT,
-                    EXECUTE_QUERY_ELEMENT, EMPTY_ATTS);
-            this.xmlConsumer.startElement(XMLNS, QUERY_ELEMENT, QUERY_ELEMENT,
-                    EMPTY_ATTS);
-            this.xmlConsumer.characters(this.selectStatementChars, 0,
-                    this.selectStatementChars.length);
-            this.xmlConsumer.endElement(XMLNS, QUERY_ELEMENT, QUERY_ELEMENT);
-            this.xmlConsumer.endElement(XMLNS, EXECUTE_QUERY_ELEMENT,
-                    EXECUTE_QUERY_ELEMENT);
+        XMLUtils.startElement(this.xmlConsumer, "rowset");
+        for (String genre : result.keySet()) {
+            String hits = result.get(genre).toString();
+            XMLUtils.startElement(this.xmlConsumer, "row");
+            XMLUtils.startElement(this.xmlConsumer, "genre");
+            XMLUtils.data(this.xmlConsumer, genre);
+            XMLUtils.endElement(this.xmlConsumer, "genre");
+            XMLUtils.startElement(this.xmlConsumer, "hits");
+            XMLUtils.data(this.xmlConsumer, hits);
+            XMLUtils.endElement(this.xmlConsumer, "hits");
+            XMLUtils.endElement(this.xmlConsumer, "row");
         }
+        XMLUtils.endElement(this.xmlConsumer, "rowset");
         this.xmlConsumer.endDocument();
     }
 
     @Override
     public void recycle() {
-        this.selectStatementChars = null;
+        this.query = null;
+    }
+
+    @Override
+    public void service(final ServiceManager manager) throws ServiceException {
+        super.service(manager);
+        this.collectionManager = (CollectionManager) manager.lookup(CollectionManager.class.getName());
+    }
+
+    @Override
+    public void dispose() {
+        this.manager.release(this.collectionManager);
+        super.dispose();
     }
 }
