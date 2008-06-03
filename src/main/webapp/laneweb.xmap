@@ -275,17 +275,17 @@
             <!-- ========================== EHR redirects for SHC ============================ -->
             <map:match pattern="shc/anesthesia.html" type="wildcard">
                 <map:redirect-to
-                    uri="{request:contextPath}/portals/anesthesia.html?template=shc&amp;{request:queryString}"
+                    uri="{request:contextPath}/portals/anesthesia.html?template=shc&amp;source=%2Fportals%2Fanesthesia.html&amp;{request:queryString}"
                 />
             </map:match>
             <map:match pattern="shc/cardiology.html" type="wildcard">
                 <map:redirect-to
-                    uri="{request:contextPath}/portals/cardiology.html?template=shc&amp;{request:queryString}"
+                    uri="{request:contextPath}/portals/cardiology.html?template=shc&amp;source=%2Fportals%2Fcardiology.html&amp;{request:queryString}"
                 />
             </map:match>
             <map:match pattern="shc/clinical.html" type="wildcard">
                 <map:redirect-to
-                    uri="{request:contextPath}/portals/clinical.html?template=shc&amp;{request:queryString}"
+                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
                 />
             </map:match>
             <map:match pattern="shc/ear-nose-throat.html" type="wildcard">
@@ -300,7 +300,7 @@
             </map:match>
             <map:match pattern="shc/gastroenterology.html" type="wildcard">
                 <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
                 />
             </map:match>
             <map:match pattern="shc/hematology.html" type="wildcard">
@@ -310,22 +310,22 @@
             </map:match>
             <map:match pattern="shc/hepatology.html" type="wildcard">
                 <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
                 />
             </map:match>
             <map:match pattern="shc/icu.html" type="wildcard">
                 <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
                 />
             </map:match>
             <map:match pattern="shc/infectious-disease.html" type="wildcard">
                 <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
                 />
             </map:match>
             <map:match pattern="shc/internal-medicine.html" type="wildcard">
                 <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
                 />
             </map:match>
             <map:match pattern="shc/neurology.html" type="wildcard">
@@ -340,7 +340,7 @@
             </map:match>
             <map:match pattern="shc/oncology.html" type="wildcard">
                 <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
                 />
             </map:match>
             <map:match pattern="shc/opthalmology.html" type="wildcard">
@@ -360,7 +360,7 @@
             </map:match>
             <map:match pattern="shc/pulmonary.html" type="wildcard">
                 <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;{request:queryString}"
+                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
                 />
             </map:match>
             <map:match pattern="shc/radiology.html" type="wildcard">
