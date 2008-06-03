@@ -250,7 +250,7 @@
     <dependency>
       <groupId>net.sf.ehcache</groupId>
       <artifactId>ehcache</artifactId>
-      <version>1.2.2</version>
+      <version>1.4.1</version>
       <scope>runtime</scope>
       <exclusions>
         <exclusion>
@@ -598,7 +598,7 @@
     <dependency>
       <groupId>edu.stanford.irt.search</groupId>
       <artifactId>search-spring</artifactId>
-      <version>1.4.13</version>
+      <version>1.4.14-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>
