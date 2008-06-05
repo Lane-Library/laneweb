@@ -172,6 +172,8 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
         } else if ("core".equals(this.mode)) {
             if (null == this.type) {
                 throw new ProcessingException("null type");
+            } else if (null != this.mesh) {
+                return this.collectionManager.getMeshCore(this.type, this.mesh);
             }
             return this.collectionManager.getCore(this.type);
         } else if ("mesh".equals(this.mode)) {

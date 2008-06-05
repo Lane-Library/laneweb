@@ -81,6 +81,15 @@ public class HistoryCollectionManager implements CollectionManager, ThreadSafe, 
         return doGet(MESH, params);
     }
 
+    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
+        Collection<String> params = new LinkedList<String>();
+        params.add(mesh);
+        params.add(type);
+        params.add(mesh);
+        params.add(type);
+        return doGet(MESH_CORE, params);
+    }
+
     public Collection<Eresource> getSubset(final String subset) {
         Collection<String> params = new LinkedList<String>();
         params.add(subset);
@@ -375,6 +384,31 @@ public class HistoryCollectionManager implements CollectionManager, ThreadSafe, 
             + "AND H_TYPE.TYPE = ? "
             + "AND PREFERRED_TITLE IS NOT NULL "
             + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+
+    private static final String MESH_CORE = "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID "
+        + "AND H_MESH.TERM = ? "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "AND H_ERESOURCE.CORE = 'Y' "
+        + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID "
+        + "AND H_MESH.TERM = ? "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "AND H_ERESOURCE.CORE = 'Y' "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     private static final String SUBSET = "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
             + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
