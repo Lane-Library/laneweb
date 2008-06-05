@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
+import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.parameters.ParameterException;
+import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -19,7 +22,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 
-public class EresourcesGenerator extends ServiceableGenerator {
+public class EresourcesGenerator extends ServiceableGenerator implements Parameterizable, Initializable {
 
     private static final String KEYWORDS = "keywords";
 
@@ -34,6 +37,8 @@ public class EresourcesGenerator extends ServiceableGenerator {
     private static final String MESH = "m";
 
     private static final Attributes EMPTY_ATTS = new AttributesImpl();
+    
+    private String collection;
     
     private CollectionManager collectionManager;
 
@@ -127,12 +132,6 @@ public class EresourcesGenerator extends ServiceableGenerator {
     }
 
     @Override
-    public void service(final ServiceManager manager) throws ServiceException {
-        super.service(manager);
-        this.collectionManager = (CollectionManager) manager.lookup(CollectionManager.class.getName());
-    }
-
-    @Override
     public void dispose() {
         this.manager.release(this.collectionManager);
         super.dispose();
@@ -182,6 +181,14 @@ public class EresourcesGenerator extends ServiceableGenerator {
             return this.collectionManager.getMesh(this.type, this.mesh);
         }
         throw new ProcessingException("incomplete parameters");
+    }
+
+    public void parameterize(Parameters param) throws ParameterException {
+        this.collection = param.getParameter("collection", "laneconnex");
+    }
+
+    public void initialize() throws Exception {
+        this.collectionManager = (CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection);
     }
 
 }

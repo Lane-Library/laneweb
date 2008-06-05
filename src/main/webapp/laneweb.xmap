@@ -12,13 +12,43 @@
                 logger="sitemap.generator.request" pool-max="32"/>
             <map:generator name="eresources"
                 src="edu.stanford.irt.laneweb.eresources.EresourcesGenerator"
-                logger="sitemap.generation.eresource-search" pool-max="32"/>
+                logger="sitemap.generation.eresource-search" pool-max="32">
+                <map:parameter name="collection" value="laneconnex"/>
+            </map:generator>
             <map:generator name="eresources-count"
                 src="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
-                logger="sitemap.generation.eresource-search" pool-max="32"/>
+                logger="sitemap.generation.eresource-search" pool-max="32">
+                <type>ej</type>
+                <type>database</type>
+                <type>video</type>
+                <type>book</type>
+                <type>cc</type>
+                <type>lanesite</type>
+                <subset>biotools</subset>
+                <collection>laneconnex</collection>
+            </map:generator>
             <map:generator name="history"
-                src="edu.stanford.irt.laneweb.eresources.HistoryQueryGenerator"
-                logger="sitemap.generation.history" pool-max="32"/>
+                src="edu.stanford.irt.laneweb.eresources.EresourcesGenerator"
+                logger="sitemap.generation.eresource-search" pool-max="32">
+                <map:parameter name="collection" value="history"/>
+            </map:generator>
+            <map:generator name="history-count"
+                src="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
+                logger="sitemap.generation.eresource-search" pool-max="32">
+                <type>book</type>
+                <type>movie</type>
+                <type>serial</type>
+                <type>graphic</type>
+                <type>thesis</type>
+                <type>object</type>
+                <type>people</type>
+                <type>organization</type>
+                <type>article</type>
+                <type>chapter</type>
+                <type>event</type>
+                <type>finding aid</type>
+                <collection>history</collection>
+            </map:generator>
             <map:generator name="status" logger="sitemap.generator.status"
                 src="org.apache.cocoon.generation.StatusGenerator" pool-max="4"/>
             <map:generator name="querymap" src="edu.stanford.irt.laneweb.querymap.QueryMapGenerator"

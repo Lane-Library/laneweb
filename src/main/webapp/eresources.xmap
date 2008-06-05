@@ -35,16 +35,9 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="histdb">
-                <map:generate type="history"/>
-                <map:transform type="sql">
-                    <map:parameter name="use-connection" value="eresources"/>
-                </map:transform>
-                <map:transform type="saxon" src="context://xsl/historyErsql2html.xsl">
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
-                    <map:parameter name="q" value="{request-param:q}"/>
-                    <map:parameter name="t" value="{request-param:t}"/>
-                    <map:parameter name="a" value="{request-param:a}"/>
-                </map:transform>
+                <map:generate type="history">
+                    <map:parameter name="mode" value="search"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="count">
@@ -52,10 +45,9 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="history-count">
-                <map:generate type="history"/>
-                <map:transform type="sql">
-                    <map:parameter name="use-connection" value="eresources"/>
-                </map:transform>
+                <map:generate type="history-count">
+                    <map:parameter name="collection" value="history"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ezproxy-servers.txt">
