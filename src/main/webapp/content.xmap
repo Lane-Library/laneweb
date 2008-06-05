@@ -93,6 +93,14 @@
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
+        <map:pipeline type="caching" internal-only="true">
+            <map:match pattern="secure/**" type="wildcard">
+                <map:generate type="html" src="{naming:java:comp/env/live-base}/content/secure/{1}"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+        </map:pipeline>
         <map:pipeline type="caching">
             <map:match type="regex" pattern="^(announcement|error|sitemap|portals/otherportals)\.html$">
                 <map:generate type="html" src="{naming:java:comp/env/live-base}/content/{1}.html"/>
@@ -149,7 +157,13 @@
                 </map:select>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
-            </map:match>-->
+                </map:match>-->
+            <map:match pattern="secure/**" type="wildcard">
+                <map:generate type="html" src="{naming:java:comp/env/live-base}/content/error.html"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
+                <map:serialize type="xml" status-code="403"/>
+            </map:match>
             <map:match pattern="**" type="wildcard">
                 <map:generate type="html" src="{naming:java:comp/env/live-base}/content/{1}"/>
                 <map:transform type="xinclude"/>
