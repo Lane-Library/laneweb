@@ -22,8 +22,6 @@
 
     <xsl:param name="host"/>
 
-    <xsl:param name="keywords"/>
-
     <!-- the search query -->
     <xsl:param name="q"/>
     
@@ -80,9 +78,6 @@
             <xsl:when test="$q">
                 <xsl:value-of select="$q"/>
             </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$keywords"/>
-            </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
 
@@ -127,8 +122,8 @@
     </xsl:variable>
     
     <xsl:variable name="regex-search-terms">
-        <xsl:if test="$search-terms">
-            <xsl:value-of select="replace($search-terms,'(\\|\$)','\\$1')"/>
+        <xsl:if test="$q">
+            <xsl:value-of select="replace($q,'(\\|\$)','\\$1')"/>
         </xsl:if>
     </xsl:variable>
 
@@ -166,11 +161,8 @@
             <xsl:when test=".='breadcrumb'">
                 <xsl:call-template name="breadcrumb"/>
             </xsl:when>
-            <xsl:when test=".='keywords'">
-                <xsl:value-of select="$search-terms"/>
-            </xsl:when>
             <xsl:when test=".='search-terms'">
-                <xsl:value-of select="$search-terms"/>
+                <xsl:value-of select="$q"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
@@ -449,7 +441,7 @@
                         <xsl:text>var affiliation="</xsl:text><xsl:value-of select="$affiliation"/><xsl:text>";</xsl:text>
                         <xsl:text>var search_form_select="</xsl:text><xsl:value-of select="$search-form-select"/><xsl:text>";</xsl:text>
                         <xsl:text>var source="</xsl:text><xsl:value-of select="$source"/><xsl:text>";</xsl:text>
-                        <xsl:text>var searchTerms="</xsl:text><xsl:value-of select="$search-terms"/><xsl:text>";</xsl:text>
+                        <xsl:text>var searchTerms="</xsl:text><xsl:value-of select="$q"/><xsl:text>";</xsl:text>
                     </script>
                 </xsl:if>
         </xsl:copy>
@@ -480,16 +472,6 @@
     
     <xsl:template match="@proxy"/>
 
-    <!-- TODO did the id of the input change? -->
-    <xsl:template match="h:input[@id='lw_search-keywords' or @id='lw_search-terms']">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="value">
-                <xsl:value-of select="$search-terms"/>
-            </xsl:attribute>
-        </xsl:copy>
-    </xsl:template>
-
     <!-- set the selected option of the search form -->
     <xsl:template match="h:option[parent::h:select[@id='searchSelect' or @id='source']]">
         <xsl:copy>
@@ -516,11 +498,6 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:copy>
-    </xsl:template>
-
-    <!-- TODO keep for now for backwards compatibility will be replaced by pi -->
-    <xsl:template match="h:span[@class='lw_keywords' or @class='lw_search-terms']">
-        <xsl:value-of select="$search-terms"/>
     </xsl:template>
 
     <!-- put the appropriate text into the content attribute of meta elements -->
@@ -816,12 +793,8 @@
     </xsl:template>
 
     <xsl:template name="meta-data">
-        <xsl:if test="$search-terms">
-            <meta name="LW.keywords" content="{$search-terms}"/>
-            <meta name="LW.searchTerms" content="{$search-terms}"/>
-        </xsl:if>
         <xsl:if test="$q">
-            <meta name="LW.q" content="{$q}"/>
+            <meta name="LW.searchTerms" content="{$q}"/>
         </xsl:if>
         <xsl:if test="$source">
             <meta name="LW.source" content="{$source}"/>

@@ -75,7 +75,6 @@ public class EresourcesGeneratorTest {
         expect(this.parameters.getParameter("mode","browse")).andReturn("browse");
         replay(this.parameters);
         expect(this.request.getParameter("q")).andReturn(null);
-        expect(this.request.getParameter("keywords")).andReturn(null);
         expect(this.request.getParameter("t")).andReturn("ej");
         expect(this.request.getParameter("s")).andReturn(null);
         expect(this.request.getParameter("a")).andReturn("z");
@@ -97,7 +96,6 @@ public class EresourcesGeneratorTest {
                 "browse");
         replay(this.parameters);
         expect(this.request.getParameter("q")).andReturn(null);
-        expect(this.request.getParameter("keywords")).andReturn(null);
         expect(this.request.getParameter("t")).andReturn("ej");
         expect(this.request.getParameter("s")).andReturn(null);
         expect(this.request.getParameter("a")).andReturn("z");

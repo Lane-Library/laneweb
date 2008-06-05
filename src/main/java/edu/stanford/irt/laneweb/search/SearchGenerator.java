@@ -48,8 +48,6 @@ public class SearchGenerator extends ServiceableGenerator implements
 
     private String[] r;
 
-    private String keywords;
-
     private String clearCache;
 
     @Override
@@ -73,11 +71,7 @@ public class SearchGenerator extends ServiceableGenerator implements
         this.e = request.getParameterValues("e");
         this.w = request.getParameter("w");
         this.r = request.getParameterValues("r");
-        this.keywords = request.getParameter("keywords");
         this.clearCache = request.getParameter("clearcache");
-        if ((this.q == null) && (this.keywords != null)) {
-            this.q = this.keywords;
-        }
     }
 
     @Override
@@ -87,7 +81,6 @@ public class SearchGenerator extends ServiceableGenerator implements
         this.e = null;
         this.w = null;
         this.r = null;
-        this.keywords = null;
         this.clearCache = null;
         super.recycle();
     }

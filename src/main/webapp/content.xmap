@@ -52,7 +52,6 @@
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/search.xsl">
                         <map:parameter name="q" value="{request-param:q}"/>
-                        <map:parameter name="keywords" value="{request-param:keywords}"/>
                         <map:parameter name="source" value="{request-param:source}"/>
                     </map:transform>
                     <map:transform type="xinclude"/>
@@ -64,7 +63,6 @@
                 <map:generate type="file" src="cocoon:/search-templates/{1}.html"/>
                 <map:transform type="saxon" src="context://xsl/search.xsl">
                     <map:parameter name="q" value="{request-param:q}"/>
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
                     <map:parameter name="source" value="{request-param:source}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
@@ -84,7 +82,6 @@
                 <map:transform type="saxon" src="context://xsl/random.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <!-- don't cache history searches because keywords will make too many cached items -->
             <map:match pattern="portals/history/historySearchResults.html" type="wildcard">
                 <map:generate type="html"
                     src="{naming:java:comp/env/live-base}/content/portals/history/historySearchResults.html"/>

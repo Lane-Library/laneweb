@@ -10,7 +10,7 @@ YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 
 function initializeMetasearch(e)
 {
-    window.searchTerms = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.searchTerms"));
+    window.searchTerms = escape(getMetaContent("LW.searchTerms"));
      window.searchMode = getMetaContent("LW.searchMode");
      window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
      if( window.searchTerms && window.searchTerms != 'undefined'  )
@@ -229,7 +229,7 @@ function showSpellCheck(o)
             var spellCheckLink = document.getElementById("spellCheckLink");
             if(spellCheckContainer && spellCheckLink)
             {
-                spellCheckLink.href = location.href.replace(location.href.match(/\W(keywords|q)=([^&]*)/)[2],spellCheckResponse.suggestion);
+                spellCheckLink.href = location.href.replace(location.href.match(/\Wq=([^&]*)/)[2],spellCheckResponse.suggestion);
                 spellCheckLink.innerHTML = spellCheckResponse.suggestion;
                 spellCheckContainer.style.display= 'inline';
                 spellCheckContainer.style.visibility= 'visible';

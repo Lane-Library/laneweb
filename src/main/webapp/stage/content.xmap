@@ -53,7 +53,6 @@
                         <map:part src="cocoon:/search/{request-param:source}.html"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/search.xsl">
-                        <map:parameter name="keywords" value="{request-param:keywords}"/>
                         <map:parameter name="q" value="{request-param:q}"/>
                         <map:parameter name="source" value="{request-param:source}"/>
                     </map:transform>
@@ -65,7 +64,6 @@
             <map:match pattern="search/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/search-templates/{1}.html"/>
                 <map:transform type="saxon" src="context://xsl/search.xsl">
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
                     <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="source" value="{request-param:source}"/>
                 </map:transform>

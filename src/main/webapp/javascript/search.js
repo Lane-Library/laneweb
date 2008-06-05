@@ -198,7 +198,7 @@ function activeTabStateChangeHandler (tabId) {
 
 function webtrends(tab)
 {
-    window.dcsMultiTrack('DCS.dcssip', window.getMetaContent('LW.host') ,'DCS.dcsuri','/plain/search/'+tab.result._type+'.html','DCS.dcsquery','source='+tab.result._type+'&keywords='+window.getMetaContent('LW.searchTerm'),'WT.ti',document.title,'DCSext.searchTerm',window.getMetaContent('LW.keywords'),'DCSext.search_type',window.getMetaContent('LW.source'),'WT.seg_1',window.getMetaContent('WT.seg_1'));
+    window.dcsMultiTrack('DCS.dcssip', window.getMetaContent('LW.host') ,'DCS.dcsuri','/plain/search/'+tab.result._type+'.html','DCS.dcsquery','source='+tab.result._type+'&keywords='+window.getMetaContent('LW.searchTerms'),'WT.ti',document.title,'DCSext.searchTerm',window.getMetaContent('LW.searchTerms'),'DCSext.search_type',window.getMetaContent('LW.source'),'WT.seg_1',window.getMetaContent('WT.seg_1'));
 }        
 
 

@@ -32,7 +32,6 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/historyErsql2html.xsl">
                         <map:transform type="saxon" src="context://xsl/historyErsql2html.xsl">
-                            <map:parameter name="keywords" value="{request-param:keywords}"/>
                             <map:parameter name="q" value="{request-param:q}"/>
                             <map:parameter name="t" value="{request-param:t}"/>
                             <map:parameter name="a" value="{request-param:a}"/>
@@ -40,7 +39,6 @@
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/historyErsql2html.xsl">
-                            <map:parameter name="keywords" value="{request-param:keywords}"/>
                             <map:parameter name="q" value="{request-param:q}"/>
                             <map:parameter name="t" value="{request-param:t}"/>
                             <map:parameter name="a" value="{request-param:a}"/>

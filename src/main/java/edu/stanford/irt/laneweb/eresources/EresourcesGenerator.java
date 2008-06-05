@@ -24,8 +24,6 @@ import edu.stanford.irt.eresources.Eresource;
 
 public class EresourcesGenerator extends ServiceableGenerator implements Parameterizable, Initializable {
 
-    private static final String KEYWORDS = "keywords";
-
     private static final String QUERY = "q";
 
     private static final String TYPE = "t";
@@ -62,9 +60,6 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
         this.mode = par.getParameter("mode", "browse");
         Request request = ObjectModelHelper.getRequest(objectModel);
         this.query = request.getParameter(QUERY);
-        if (null == this.query) {
-            this.query = request.getParameter(KEYWORDS);
-        }
         if (null != this.query) {
             if (this.query.length() == 0) {
                 this.query = null;

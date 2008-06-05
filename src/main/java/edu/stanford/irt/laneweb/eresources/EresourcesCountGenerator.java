@@ -27,8 +27,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 
 public class EresourcesCountGenerator extends ServiceableGenerator implements Configurable, Initializable {
-    
-    private static final String KEYWORDS = "keywords";
 
     private static final String QUERY = "q";
     
@@ -51,9 +49,6 @@ public class EresourcesCountGenerator extends ServiceableGenerator implements Co
         super.setup(resolver, objectModel, src, par);
         Request request = ObjectModelHelper.getRequest(objectModel);
         String query = request.getParameter(QUERY);
-        if (this.query == null) {
-            this.query = request.getParameter(KEYWORDS);
-        }
         if (null != query) {
             this.query = query.trim();
             if (this.query.length() == 0) {

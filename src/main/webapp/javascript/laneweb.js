@@ -157,7 +157,7 @@ function initializeSearchForm(e) {
         }
     }
     searchForm.submit = function(e) {
-        if((this.keywords && this.keywords.value == '') || (this.q && this.q.value == ''))
+        if(this.q && this.q.value == '')
         {
             alert('Please enter one or more search terms.');
             YAHOO.util.Event.stopEvent(e);
@@ -167,11 +167,7 @@ function initializeSearchForm(e) {
             searchIndicator.style.visibility = 'visible';
             var formTarget = searchSelect.homeOption.value;
             if( formTarget.match(/^http/) ){
-                if (this.keywords) {
-                    formTarget = formTarget.replace(/\{keywords\}/g,this.keywords.value);
-                } else if (this.q) {
-                    formTarget = formTarget.replace(/\{search-terms\}/g,this.q.value);
-                }
+                formTarget = formTarget.replace(/\{search-terms\}/g,this.q.value);
                 window.location = formTarget;
                 YAHOO.util.Event.preventDefault(e);
             }

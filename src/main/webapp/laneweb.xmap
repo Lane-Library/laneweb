@@ -395,7 +395,7 @@
             </map:match>
             <map:match pattern="shc/radiology.html" type="wildcard">
                 <map:redirect-to
-                    uri="http://www.guideline.gov/search/searchresults.aspx?Type=3&amp;num=20&amp;txtSearch={request-param:keywords}+AND+%22american+college+of+radiology%22"
+                    uri="http://www.guideline.gov/search/searchresults.aspx?Type=3&amp;num=20&amp;txtSearch={request-param:q}+AND+%22american+college+of+radiology%22"
                 />
             </map:match>
             <map:match pattern="shc/surgery-cardiothoracic.html" type="wildcard">
@@ -424,7 +424,6 @@
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
                     <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                     <map:parameter name="template" value="{request-param:template}"/>
@@ -451,7 +450,6 @@
                     <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                     <map:parameter name="ticket" value="{laneweb:ticket}"/>
                     <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                    <map:parameter name="keywords" value="{request-param:keywords}"/>
                     <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                     <map:parameter name="template" value="{request-param:template}"/>

@@ -7,7 +7,6 @@
                 version="2.0">
     
     <xsl:param name="source"/>
-    <xsl:param name="keywords"/>
     <xsl:param name="q"/>
     
     <xsl:variable name="search-terms">
@@ -15,9 +14,6 @@
             <xsl:when test="$q">
                 <xsl:value-of select="$q"/>
             </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$keywords"/>
-            </xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
     
@@ -37,9 +33,6 @@
                 <xsl:apply-templates select="/doc/h:html[attribute::id]/h:body/child::node()"/>
             </xsl:when>
             <xsl:when test=".='search-terms'">
-                <xsl:value-of select="$search-terms"/>
-            </xsl:when>
-            <xsl:when test=".='keywords'">
                 <xsl:value-of select="$search-terms"/>
             </xsl:when>
         </xsl:choose>
