@@ -4,43 +4,43 @@ var metaTags = new Object();
 
 YAHOO.util.Event.addListener(window,'load',initialize);
 window.onerror = handleMessage;
-    	
+        
 
 function handleMessage( message, url, line)
 {
-	var parameter = "userAgent="+navigator.userAgent+"&message=".concat(message).concat("&url=").concat(url).concat("&line=").concat(line);
-	if(getMetaContent("LW.debug") == "y")
-	{
-		if (url != null)
-			message = message.concat("\nurl --> ").concat(url);
-		if (line != null)
-			message = message.concat("\nline --> ").concat(line);
-		YAHOO.log(message, "error");
-	}
-	else
-		YAHOO.util.Connect.asyncRequest('GET', '/././javascriptLogger?'+parameter);
-		return true;
+    var parameter = "userAgent="+navigator.userAgent+"&message=".concat(message).concat("&url=").concat(url).concat("&line=").concat(line);
+    if(getMetaContent("LW.debug") == "y")
+    {
+        if (url != null)
+            message = message.concat("\nurl --> ").concat(url);
+        if (line != null)
+            message = message.concat("\nline --> ").concat(line);
+        YAHOO.log(message, "error");
+    }
+    else
+        YAHOO.util.Connect.asyncRequest('GET', '/././javascriptLogger?'+parameter);
+        return true;
 }
 
 
 
 
 function handleFailure(o){
-	handleMessage( "Status: "+o.status+ "statusText: "+o.statusText,  o.argument.file, o.argument.line);
+    handleMessage( "Status: "+o.status+ "statusText: "+o.statusText,  o.argument.file, o.argument.line);
 }
 
 
 function log(message)
-{	
-	handleMessage(message);
+{    
+    handleMessage(message);
 }
 
 
 
 function initialize(e) {
-	initializeMetaTags(e);
-	initializeLogger();
-	YAHOO.util.Event.addListener(window, 'unload', finalize);
+    initializeMetaTags(e);
+    initializeLogger();
+    YAHOO.util.Event.addListener(window, 'unload', finalize);
     YAHOO.util.Event.addListener(document, 'mouseover', handleMouseOver);
     YAHOO.util.Event.addListener(document, 'mouseout', handleMouseOut);
     YAHOO.util.Event.addListener(document, 'click', handleClick);
@@ -58,43 +58,43 @@ function initialize(e) {
 
 function initializeLogger()
 {
-	if(getMetaContent("LW.debug") == "y")
-	{
-		document.body.className = "yui-skin-sam";	
-		var myLogReader = new YAHOO.widget.LogReader();
-		var logMessage = "context ==> "+context;
-		logMessage = logMessage.concat("\nquery_string ==> "+query_string); 
-		logMessage = logMessage.concat("\nrequest_uri ==> "+request_uri);
-		logMessage = logMessage.concat("\nhref ==> "+href);
-		logMessage = logMessage.concat("\nticket ==> "+ticket);
-		logMessage = logMessage.concat("\nsunetid ==> "+sunetid);
-		logMessage = logMessage.concat("\nproxy_links ==> "+proxy_links);
-		logMessage = logMessage.concat("\naffiliation ==> "+affiliation);
-		logMessage = logMessage.concat("\nsearch_form_select ==> "+search_form_select);
-		logMessage = logMessage.concat("\nsource ==> "+source);
-		logMessage = logMessage.concat("\nsearchTerms ==> "+searchTerms+"\n");
-		YAHOO.log(logMessage , "info");
-	}
+    if(getMetaContent("LW.debug") == "y")
+    {
+        document.body.className = "yui-skin-sam";    
+        var myLogReader = new YAHOO.widget.LogReader();
+        var logMessage = "context ==> "+context;
+        logMessage = logMessage.concat("\nquery_string ==> "+query_string); 
+        logMessage = logMessage.concat("\nrequest_uri ==> "+request_uri);
+        logMessage = logMessage.concat("\nhref ==> "+href);
+        logMessage = logMessage.concat("\nticket ==> "+ticket);
+        logMessage = logMessage.concat("\nsunetid ==> "+sunetid);
+        logMessage = logMessage.concat("\nproxy_links ==> "+proxy_links);
+        logMessage = logMessage.concat("\naffiliation ==> "+affiliation);
+        logMessage = logMessage.concat("\nsearch_form_select ==> "+search_form_select);
+        logMessage = logMessage.concat("\nsource ==> "+source);
+        logMessage = logMessage.concat("\nsearchTerms ==> "+searchTerms+"\n");
+        YAHOO.log(logMessage , "info");
+    }
 }
 
 function finalize(e) {
-	searching = false;
+    searching = false;
 }
 
 function initializeMetaTags(e){
-	var metaTagElements = document.getElementsByTagName('meta');
-	for (var i = 0; i < metaTagElements.length; i++) {
-	    var key = metaTagElements[i].getAttribute('name');
-	    var value =  metaTagElements[i].getAttribute('content');
-	    if(key != undefined &&  value != undefined)
-			window.metaTags[key] = value;		
-	}
+    var metaTagElements = document.getElementsByTagName('meta');
+    for (var i = 0; i < metaTagElements.length; i++) {
+        var key = metaTagElements[i].getAttribute('name');
+        var value =  metaTagElements[i].getAttribute('content');
+        if(key != undefined &&  value != undefined)
+            window.metaTags[key] = value;        
+    }
 }
 
 function getMetaContent(name)
 {
-	if(name != undefined)
-		return window.metaTags[name];
+    if(name != undefined)
+        return window.metaTags[name];
 }
 
 function handleMouseOver(e) {
@@ -119,7 +119,7 @@ function handleChange(e) {
 }
 
 function handleClick(e) {
-	var target = (e.srcElement) ? e.srcElement : e.target;
+    var target = (e.srcElement) ? e.srcElement : e.target;
     while (target != undefined) {
         if (target.clicked) {
             target.clicked(e);
@@ -157,24 +157,24 @@ function initializeSearchForm(e) {
         }
     }
     searchForm.submit = function(e) {
-	    if((this.keywords && this.keywords.value == '') || (this.q && this.q.value == ''))
-	    {
-	    	alert('Please enter one or more search terms.');
-	    	YAHOO.util.Event.stopEvent(e);
-	    }
-	    else
-	    {    
-	    	searchIndicator.style.visibility = 'visible';
-	        var formTarget = searchSelect.homeOption.value;
-	        if( formTarget.match(/^http/) ){
-	            if (this.keywords) {
-	                formTarget = formTarget.replace(/\{keywords\}/g,this.keywords.value);
-	            } else if (this.q) {
+        if((this.keywords && this.keywords.value == '') || (this.q && this.q.value == ''))
+        {
+            alert('Please enter one or more search terms.');
+            YAHOO.util.Event.stopEvent(e);
+        }
+        else
+        {    
+            searchIndicator.style.visibility = 'visible';
+            var formTarget = searchSelect.homeOption.value;
+            if( formTarget.match(/^http/) ){
+                if (this.keywords) {
+                    formTarget = formTarget.replace(/\{keywords\}/g,this.keywords.value);
+                } else if (this.q) {
                     formTarget = formTarget.replace(/\{search-terms\}/g,this.q.value);
                 }
-	            window.location = formTarget;
-	            YAHOO.util.Event.preventDefault(e);
-	        }
+                window.location = formTarget;
+                YAHOO.util.Event.preventDefault(e);
+            }
         }
     }
     //TODO this isn't used in new design:
@@ -210,7 +210,7 @@ function initializeSearchForm(e) {
 
 
 function openNewWindow(url,features) {
-	features = (features) ? features : '';
+    features = (features) ? features : '';
     var w = window.open(url, 'LaneConnex', features);
     if(window.focus){
         w.focus();

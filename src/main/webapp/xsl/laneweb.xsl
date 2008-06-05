@@ -435,23 +435,23 @@
             <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
             <xsl:call-template name="meta-data"/>
             <xsl:if test="$debug='y'">
-  				<link href="/javascript/yui/build/logger/assets/skins/sam/logger.css" type="text/css" rel="stylesheet"/>
-				<script src="/javascript/yui/build/logger/logger-min.js" type="text/javascript"><xsl:text> </xsl:text></script>
-	       	    <script src="/javascript/yui/build/dragdrop/dragdrop-min.js" type="text/javascript"><xsl:text> </xsl:text></script>
-	            	<script type="text/javascript">
-	           	    	<xsl:text>var context="</xsl:text><xsl:value-of select="$context"/><xsl:text>";</xsl:text>
-		                <xsl:text>var request_uri="</xsl:text><xsl:value-of select="$request-uri"/><xsl:text>";</xsl:text>
-	                    <xsl:text>var query_string="</xsl:text><xsl:value-of select="$query-string"/><xsl:text>";</xsl:text>
-	                    <xsl:text>var href="</xsl:text><xsl:value-of select="concat($context,'/',$request-uri,'?',$query-string)"/><xsl:text>";</xsl:text>
-	                    <xsl:text>var ticket="</xsl:text><xsl:value-of select="$ticket"/><xsl:text>";</xsl:text>
-	                    <xsl:text>var sunetid="</xsl:text><xsl:value-of select="$sunetid"/><xsl:text>";</xsl:text>
-	                    <xsl:text>var proxy_links="</xsl:text><xsl:value-of select="$proxy-links"/><xsl:text>";</xsl:text>
-	                    <xsl:text>var affiliation="</xsl:text><xsl:value-of select="$affiliation"/><xsl:text>";</xsl:text>
-	                    <xsl:text>var search_form_select="</xsl:text><xsl:value-of select="$search-form-select"/><xsl:text>";</xsl:text>
-	                    <xsl:text>var source="</xsl:text><xsl:value-of select="$source"/><xsl:text>";</xsl:text>
-	                    <xsl:text>var searchTerms="</xsl:text><xsl:value-of select="$search-terms"/><xsl:text>";</xsl:text>
-	                </script>
-	       	 </xsl:if>
+                  <link href="/javascript/yui/build/logger/assets/skins/sam/logger.css" type="text/css" rel="stylesheet"/>
+                <script src="/javascript/yui/build/logger/logger-min.js" type="text/javascript"><xsl:text> </xsl:text></script>
+                   <script src="/javascript/yui/build/dragdrop/dragdrop-min.js" type="text/javascript"><xsl:text> </xsl:text></script>
+                    <script type="text/javascript">
+                           <xsl:text>var context="</xsl:text><xsl:value-of select="$context"/><xsl:text>";</xsl:text>
+                        <xsl:text>var request_uri="</xsl:text><xsl:value-of select="$request-uri"/><xsl:text>";</xsl:text>
+                        <xsl:text>var query_string="</xsl:text><xsl:value-of select="$query-string"/><xsl:text>";</xsl:text>
+                        <xsl:text>var href="</xsl:text><xsl:value-of select="concat($context,'/',$request-uri,'?',$query-string)"/><xsl:text>";</xsl:text>
+                        <xsl:text>var ticket="</xsl:text><xsl:value-of select="$ticket"/><xsl:text>";</xsl:text>
+                        <xsl:text>var sunetid="</xsl:text><xsl:value-of select="$sunetid"/><xsl:text>";</xsl:text>
+                        <xsl:text>var proxy_links="</xsl:text><xsl:value-of select="$proxy-links"/><xsl:text>";</xsl:text>
+                        <xsl:text>var affiliation="</xsl:text><xsl:value-of select="$affiliation"/><xsl:text>";</xsl:text>
+                        <xsl:text>var search_form_select="</xsl:text><xsl:value-of select="$search-form-select"/><xsl:text>";</xsl:text>
+                        <xsl:text>var source="</xsl:text><xsl:value-of select="$source"/><xsl:text>";</xsl:text>
+                        <xsl:text>var searchTerms="</xsl:text><xsl:value-of select="$search-terms"/><xsl:text>";</xsl:text>
+                    </script>
+                </xsl:if>
         </xsl:copy>
     </xsl:template>
 
@@ -743,16 +743,16 @@
         <xsl:apply-templates select="h:div[h:span=$t]/h:h2"/>
     </xsl:template>
 
-	<xsl:template match="h:form[attribute::id='searchForm']">
-		 <xsl:copy>
-		  <xsl:apply-templates select="attribute::node()|child::node()"/>
-		 <xsl:if test="$debug='y'">
-				<input type="hidden"  name="debug" value="y"/>
-    	 </xsl:if>
-    	<xsl:if test="not($template-is-default)">
-				<input type="hidden"  name="template" value="{$response-template}"/>
-    	</xsl:if>
-    	</xsl:copy>
+    <xsl:template match="h:form[attribute::id='searchForm']">
+         <xsl:copy>
+          <xsl:apply-templates select="attribute::node()|child::node()"/>
+         <xsl:if test="$debug='y'">
+                <input type="hidden"  name="debug" value="y"/>
+         </xsl:if>
+        <xsl:if test="not($template-is-default)">
+                <input type="hidden"  name="template" value="{$response-template}"/>
+        </xsl:if>
+        </xsl:copy>
     </xsl:template>
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
@@ -981,7 +981,7 @@
                 var flashUpgradeWidth = '</xsl:text><xsl:value-of select="$width"/><xsl:text>';
                 var hasRequestedVersion = DetectFlashVer(requiredVersion[0],requiredVersion[1],requiredVersion[2]);
                 if ( hasProductInstall &amp;&amp; !hasRequestedVersion &amp;&amp; flashForUpgrade) {
-                    <!--	// MMdoctitle is the stored document.title value used by the installation process to close the window that started the process
+                    <!--    // MMdoctitle is the stored document.title value used by the installation process to close the window that started the process
                         // This is necessary in order to close browser windows that are still utilizing the older version of the player after installation has completed
                         // DO NOT MODIFY THE FOLLOWING FOUR LINES
                         // Location visited after installation is complete if installation is required-->
@@ -1005,7 +1005,7 @@
                     "pluginspage", "http://www.adobe.com/go/getflashplayer"
                     );
                     } else if (hasRequestedVersion) {
-                    <!--	// if we've detected an acceptable version
+                    <!--    // if we've detected an acceptable version
                         // embed the Flash Content SWF when all tests are passed-->
                     AC_FL_RunContent(</xsl:text>
             <xsl:for-each select="@*">
@@ -1014,7 +1014,7 @@
             <xsl:for-each select="h:param[not(@name='flash-version')]">
                 "<xsl:value-of select="@name"/>","<xsl:value-of select="@value"/>"<xsl:if test="position() != last()">,</xsl:if>
             </xsl:for-each>
-            <xsl:text>	);
+            <xsl:text>    );
                 } else {<!--  // flash is too old or we can't detect the plugin-->
                 var alternateContent = 'This content requires the Adobe Flash Player. '
                 + '&lt;a href=http://www.adobe.com/go/getflash/>Get Flash&lt;/a>';

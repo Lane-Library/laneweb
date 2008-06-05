@@ -18,7 +18,7 @@ xmlns="http://www.w3.org/1999/xhtml"  xmlns:r="http://apache.org/cocoon/request/
                        <xsl:value-of select="$ticket"/>
                        <xsl:text>&amp;url=</xsl:text>
                        <xsl:value-of select="r:request/r:requestParameters/r:parameter[@name='postAction']"/>
-			</xsl:when>
+            </xsl:when>
                    <xsl:otherwise>
                        <xsl:value-of select="r:request/r:requestParameters/r:parameter[@name='postAction']"/>
                    </xsl:otherwise>
@@ -40,10 +40,10 @@ xmlns="http://www.w3.org/1999/xhtml"  xmlns:r="http://apache.org/cocoon/request/
 
 <form   action="{$post-url}"  name="defaultForm" method="post">
 <xsl:for-each select="r:request/r:requestParameters/r:parameter">
-	<xsl:if  test="@name !='postAction'">
-		<input type="hidden" name="{@name}" value="{r:value}"/>
-	</xsl:if>
-</xsl:for-each>	
+    <xsl:if  test="@name !='postAction'">
+        <input type="hidden" name="{@name}" value="{r:value}"/>
+    </xsl:if>
+</xsl:for-each>    
 </form>
 
 <table>

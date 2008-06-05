@@ -5,26 +5,26 @@
     exclude-result-prefixes="h"
     version="2.0">
 
-	<xsl:output method='xml' omit-xml-declaration='no' indent="yes"/>
+    <xsl:output method='xml' omit-xml-declaration='no' indent="yes"/>
 
-	<xsl:param name="sfx-request"/>
+    <xsl:param name="sfx-request"/>
 
-	<xsl:variable name="sfx-title">
-		<xsl:copy-of select="normalize-space(/html/body/div/table/tr/td[@id='laneweb_source']/text())"/>
-	</xsl:variable>
+    <xsl:variable name="sfx-title">
+        <xsl:copy-of select="normalize-space(/html/body/div/table/tr/td[@id='laneweb_source']/text())"/>
+    </xsl:variable>
     
-	<xsl:template match="/">
-		<response>
-			<openurl><xsl:value-of select="$sfx-request"/></openurl>
-			<result>
-			<xsl:choose>
-				<xsl:when test="/html/body/div/table/tr/td[@class='BlockTitle'] = 'Full Text'">
-					<xsl:value-of select="$sfx-title"/>
-				</xsl:when>
-				<xsl:otherwise>0</xsl:otherwise>
-			</xsl:choose>
-			</result>
-		</response>
-	</xsl:template>
+    <xsl:template match="/">
+        <response>
+            <openurl><xsl:value-of select="$sfx-request"/></openurl>
+            <result>
+            <xsl:choose>
+                <xsl:when test="/html/body/div/table/tr/td[@class='BlockTitle'] = 'Full Text'">
+                    <xsl:value-of select="$sfx-title"/>
+                </xsl:when>
+                <xsl:otherwise>0</xsl:otherwise>
+            </xsl:choose>
+            </result>
+        </response>
+    </xsl:template>
   
 </xsl:stylesheet>

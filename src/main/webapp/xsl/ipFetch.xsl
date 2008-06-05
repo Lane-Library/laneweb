@@ -12,7 +12,7 @@ xmlns="http://www.w3.org/1999/xhtml"  xmlns:r="http://apache.org/cocoon/request/
 <xsl:variable name="proxy-url">http://laneproxy.stanford.edu/login?</xsl:variable> 
 <xsl:variable name="url">
  <xsl:choose>
-	 <xsl:when test="$proxy-links = 'true' and $sunetid != '' and $ticket != ''">
+     <xsl:when test="$proxy-links = 'true' and $sunetid != '' and $ticket != ''">
          <xsl:value-of select="$proxy-url"/>
          <xsl:text>user=</xsl:text>
          <xsl:value-of select="$sunetid"/>
@@ -21,9 +21,9 @@ xmlns="http://www.w3.org/1999/xhtml"  xmlns:r="http://apache.org/cocoon/request/
          <xsl:text>&amp;url</xsl:text>
          <xsl:value-of select="$path"/>
          <xsl:value-of select="$remoteAddr"/>
-	</xsl:when>
-	 <xsl:otherwise>
-	   <xsl:value-of select="$path"/>
+    </xsl:when>
+     <xsl:otherwise>
+       <xsl:value-of select="$path"/>
        <xsl:value-of select="$remoteAddr"/>
       </xsl:otherwise>
   </xsl:choose>
@@ -42,9 +42,9 @@ var url =    "<xsl:value-of select="$url"/> ";
 <xsl:text disable-output-escaping="yes">
 
 function redirect()
-{	
-	window.location =  url.replace(/&amp;amp;/g,"&amp;");
-	
+{    
+    window.location =  url.replace(/&amp;amp;/g,"&amp;");
+    
 }
 </xsl:text>
 </script>

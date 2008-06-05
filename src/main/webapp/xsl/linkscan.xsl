@@ -13,13 +13,13 @@
     
     
   <xsl:template match="sql:row">
-	<li> #<xsl:value-of select="position()"/>
-		<ul>
-			<li>
-				<a href="{sql:url}"> id: <xsl:value-of select="concat(sql:record_type,'-',sql:record_id)"/> title: <xsl:value-of select="sql:title"/></a>
-			</li>
-		</ul>
-	</li>
+    <li> #<xsl:value-of select="position()"/>
+        <ul>
+            <li>
+                <a href="{sql:url}"> id: <xsl:value-of select="concat(sql:record_type,'-',sql:record_id)"/> title: <xsl:value-of select="sql:title"/></a>
+            </li>
+        </ul>
+    </li>
   </xsl:template>
 
 </xsl:stylesheet>

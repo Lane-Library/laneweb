@@ -51,7 +51,8 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ezproxy-servers.txt">
-                <map:generate type="file" src="{naming:java:comp/env/live-base}/resources/sql/ezproxy-servers.xml"/>
+                <map:generate type="file"
+                    src="{naming:java:comp/env/live-base}/resources/sql/ezproxy-servers.xml"/>
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
@@ -59,7 +60,8 @@
                 <map:serialize type="text"/>
             </map:match>
             <map:match pattern="linkscan.html">
-                <map:generate type="file" src="{naming:java:comp/env/live-base}/resources/sql/linkscan.xml"/>
+                <map:generate type="file"
+                    src="{naming:java:comp/env/live-base}/resources/sql/linkscan.xml"/>
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                 </map:transform>
@@ -67,7 +69,8 @@
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="extensions-suggest">
-                <map:generate type="file" src="{naming:java:comp/env/live-base}/resources/sql/extensions-suggest.xml"/>
+                <map:generate type="file"
+                    src="{naming:java:comp/env/live-base}/resources/sql/extensions-suggest.xml"/>
                 <map:transform type="sql">
                     <map:parameter name="use-connection" value="eresources"/>
                     <map:parameter name="q" value="{request-param:q}"/>

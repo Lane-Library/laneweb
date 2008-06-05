@@ -17,34 +17,34 @@
 {"results":{
 "status": "<xsl:value-of select="$successful"></xsl:value-of>",
 "tabs": [ 
-	{
-	"resource":"clinical", 
-	"hits" : "<xsl:if test="$clinicalHits != 0"><xsl:value-of  select="format-number($clinicalHits, '###,###')" /></xsl:if>"
-	},	
-	{
-	"resource":"history",
-	"hits" : "<xsl:if test="$historyHits != 0"><xsl:value-of  select="format-number($historyHits, '###,###')" /></xsl:if>"
-	},	
-	{
-	"resource":"peds",
-	"hits" : "<xsl:if test="$pedsHits != 0"><xsl:value-of  select="format-number($pedsHits, '###,###')" /></xsl:if>"
-	},	
-	{
-	"resource":"research",
-	"hits" : "<xsl:if test="$researchHits != 0"><xsl:value-of  select="format-number($researchHits, '###,###')" /></xsl:if>"
-	},	
-	{
-	"resource":"google",
-	"hits" : "<xsl:if test="res:engine[@res:id='google']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='google']/res:hits, '###,###')" /></xsl:if>"
-	},	
-	{
-	"resource":"lois",
-	"hits" : "<xsl:if test="res:engine[@res:id='lois']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='lois']/res:hits, '###,###')" /></xsl:if>"
-	},	
-	{
-	"resource":"pubmed",
-	"hits" : "<xsl:if test="res:engine[@res:id='crossdb']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='crossdb']/res:hits, '###,###')" /></xsl:if>"
-	}
+    {
+    "resource":"clinical", 
+    "hits" : "<xsl:if test="$clinicalHits != 0"><xsl:value-of  select="format-number($clinicalHits, '###,###')" /></xsl:if>"
+    },    
+    {
+    "resource":"history",
+    "hits" : "<xsl:if test="$historyHits != 0"><xsl:value-of  select="format-number($historyHits, '###,###')" /></xsl:if>"
+    },    
+    {
+    "resource":"peds",
+    "hits" : "<xsl:if test="$pedsHits != 0"><xsl:value-of  select="format-number($pedsHits, '###,###')" /></xsl:if>"
+    },    
+    {
+    "resource":"research",
+    "hits" : "<xsl:if test="$researchHits != 0"><xsl:value-of  select="format-number($researchHits, '###,###')" /></xsl:if>"
+    },    
+    {
+    "resource":"google",
+    "hits" : "<xsl:if test="res:engine[@res:id='google']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='google']/res:hits, '###,###')" /></xsl:if>"
+    },    
+    {
+    "resource":"lois",
+    "hits" : "<xsl:if test="res:engine[@res:id='lois']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='lois']/res:hits, '###,###')" /></xsl:if>"
+    },    
+    {
+    "resource":"pubmed",
+    "hits" : "<xsl:if test="res:engine[@res:id='crossdb']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='crossdb']/res:hits, '###,###')" /></xsl:if>"
+    }
   ]
  }
 }  

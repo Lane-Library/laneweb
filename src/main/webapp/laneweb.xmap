@@ -63,8 +63,8 @@
             </map:generator>
             <map:generator logger="edu.stanford.irt.laneweb.search" name="search-describe"
                 src="edu.stanford.irt.laneweb.search.DescribeGenerator"/>
-            <map:generator  logger="edu.stanford.irt.laneweb.urlTester" name="search-url-tester"
-            	src="edu.stanford.irt.laneweb.search.UrlTester"/>    
+            <map:generator logger="edu.stanford.irt.laneweb.urlTester" name="search-url-tester"
+                src="edu.stanford.irt.laneweb.search.UrlTester"/>
         </map:generators>
         <map:transformers default="saxon">
             <map:transformer name="saxon" logger="sitemap.transformer.saxon"

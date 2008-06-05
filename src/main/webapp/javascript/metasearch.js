@@ -10,44 +10,44 @@ YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 
 function initializeMetasearch(e)
 {
-	window.searchTerms = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.searchTerms"));
+    window.searchTerms = (getMetaContent("LW.q")) ? escape(getMetaContent("LW.q")): escape(getMetaContent("LW.searchTerms"));
      window.searchMode = getMetaContent("LW.searchMode");
      window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
      if( window.searchTerms && window.searchTerms != 'undefined'  )
      {
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate, window.metasearchCallback);
-     	YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack);
-	    if(YAHOO.util.Dom.inDocument('searchIndicator')){
-	         window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
-	     }
-	     YAHOO.util.Event.addListener('searchIndicator', 'click', haltMetasearch);
-	     YAHOO.util.Event.addListener('toggleZeros', 'click', toggleZeros);
-	}
+         YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack);
+        if(YAHOO.util.Dom.inDocument('searchIndicator')){
+             window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
+         }
+         YAHOO.util.Event.addListener('searchIndicator', 'click', haltMetasearch);
+         YAHOO.util.Event.addListener('toggleZeros', 'click', toggleZeros);
+    }
  }
 
 
 var showMetasearchResults = function(o)
 {
-	    var searchResponse = eval("("+o.responseText+")");
+        var searchResponse = eval("("+o.responseText+")");
         window.searchStatus = (window.searchStatus == 'successful') ? window.searchStatus : searchResponse.status;
-    	var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
-    	if(metasearchElements.length && window.searchStatus != 'successful'){
-    		window.counter++;
-    		var sleepingTime = 2000; //2 seconds
-    		if(window.counter > 15) //time sleepingtime (2 seconds) * 15 = 30 seconds
-    			sleepingTime = 10000;// 10 seconds
-    	    setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate+'&rd='+Math.random()+"', window.metasearchCallback);",sleepingTime);
-    	}
-    	for( var z = 0; z<metasearchElements.length; z++){
-			if( metasearchElements[z].className != 'complete'  ) {
-				var resourceId = metasearchElements[z].getAttribute('id');
-				searchResource = searchResponse.resources[resourceId];
-				if(searchResource && searchResource.status && searchResource.status != 'running' )  
-					var metasearchResult = new MetasearchResult(metasearchElements[z],searchResource, resourceId);
-			}
-    	}
+        var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
+        if(metasearchElements.length && window.searchStatus != 'successful'){
+            window.counter++;
+            var sleepingTime = 2000; //2 seconds
+            if(window.counter > 15) //time sleepingtime (2 seconds) * 15 = 30 seconds
+                sleepingTime = 10000;// 10 seconds
+            setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate+'&rd='+Math.random()+"', window.metasearchCallback);",sleepingTime);
+        }
+        for( var z = 0; z<metasearchElements.length; z++){
+            if( metasearchElements[z].className != 'complete'  ) {
+                var resourceId = metasearchElements[z].getAttribute('id');
+                searchResource = searchResponse.resources[resourceId];
+                if(searchResource && searchResource.status && searchResource.status != 'running' )  
+                    var metasearchResult = new MetasearchResult(metasearchElements[z],searchResource, resourceId);
+            }
+        }
         if(window.searchIndicator){
-        	window.searchIndicator.setProgress(window.searchStatus,YAHOO.util.Dom.getElementsByClassName('metasearch').length,YAHOO.util.Dom.getElementsByClassName('complete').length);
+            window.searchIndicator.setProgress(window.searchStatus,YAHOO.util.Dom.getElementsByClassName('metasearch').length,YAHOO.util.Dom.getElementsByClassName('complete').length);
         }
 }
 
@@ -81,13 +81,13 @@ MetasearchResult.prototype.setContent = function(metasearchElement)
         switch(window.searchMode){
             case "original":
                 if( this.status && this.status != 'running' && this.href ) {
-                	metasearchElement.setAttribute('href',this.href);
+                    metasearchElement.setAttribute('href',this.href);
                     // fix for IE7 (@ in text of element will cause element text to be replaced by href value
                     // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
                     if (YAHOO.env.ua.ie){
-                    	metasearchElement.innerHTML = this.name;
+                        metasearchElement.innerHTML = this.name;
                     }
-                	metasearchElement.setAttribute('target','_blank');
+                    metasearchElement.setAttribute('target','_blank');
                     metasearchElement.className = 'complete';
                     var resultSpan = document.createElement('span');
                     resultSpan.innerHTML = ': ' + this.hits;
@@ -107,21 +107,21 @@ MetasearchResult.prototype.setContent = function(metasearchElement)
             break;
             default:  // merged 
                 if( this.status == 'successful' && this.href ) {
-                	metasearchElement.setAttribute('href',this.href);
+                    metasearchElement.setAttribute('href',this.href);
                     // fix for IE7 (@ in text of element will cause element text to be replaced by href value
                     // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
                     if (YAHOO.env.ua.ie){
-                    	metasearchElement.innerHTML = this.name;
+                        metasearchElement.innerHTML = this.name;
                     }
-                	metasearchElement.setAttribute('target','_blank');
+                    metasearchElement.setAttribute('target','_blank');
             
-                	var resultSpan = document.createElement('span');
-                	resultSpan.innerHTML = ': ' + this.hits;
-                	metasearchElement.parentNode.appendChild(resultSpan);
+                    var resultSpan = document.createElement('span');
+                    resultSpan.innerHTML = ': ' + this.hits;
+                    metasearchElement.parentNode.appendChild(resultSpan);
                     metasearchElement.className = 'complete';
                 }
                 else if( this.status == 'failed' || this.status == 'canceled' ){
-                	metasearchElement.className = 'complete';
+                    metasearchElement.className = 'complete';
                 }
             break;
        }
@@ -147,7 +147,7 @@ var metasearchCallback =
 {
     success:showMetasearchResults,
     failure:window.handleFailure,
-  	argument:{file:"metasearch.js", line:"metasearchCallBack"}
+      argument:{file:"metasearch.js", line:"metasearchCallBack"}
 };
 
 function toggleZeros(e)
@@ -193,7 +193,7 @@ function SearchIndicator(elementId,message)
 
 SearchIndicator.prototype.hide = function()
 {
- 	YAHOO.util.Dom.setStyle(this.elementId,'visibility','hidden');
+     YAHOO.util.Dom.setStyle(this.elementId,'visibility','hidden');
 }
 
 SearchIndicator.prototype.show = function()
@@ -223,18 +223,18 @@ SearchIndicator.prototype.setMessage = function(message)
 
 function showSpellCheck(o)
 {
-	    var spellCheckResponse = eval("("+o.responseText+")");
-	    if (spellCheckResponse.suggestion) {
-			var spellCheckContainer = document.getElementById("spellCheck");
-			var spellCheckLink = document.getElementById("spellCheckLink");
-			if(spellCheckContainer && spellCheckLink)
-			{
-    			spellCheckLink.href = location.href.replace(location.href.match(/\W(keywords|q)=([^&]*)/)[2],spellCheckResponse.suggestion);
-    			spellCheckLink.innerHTML = spellCheckResponse.suggestion;
-    			spellCheckContainer.style.display= 'inline';
-    			spellCheckContainer.style.visibility= 'visible';
+        var spellCheckResponse = eval("("+o.responseText+")");
+        if (spellCheckResponse.suggestion) {
+            var spellCheckContainer = document.getElementById("spellCheck");
+            var spellCheckLink = document.getElementById("spellCheckLink");
+            if(spellCheckContainer && spellCheckLink)
+            {
+                spellCheckLink.href = location.href.replace(location.href.match(/\W(keywords|q)=([^&]*)/)[2],spellCheckResponse.suggestion);
+                spellCheckLink.innerHTML = spellCheckResponse.suggestion;
+                spellCheckContainer.style.display= 'inline';
+                spellCheckContainer.style.visibility= 'visible';
             }
-		}
+        }
 }
 
 var spellCheckCallBack =
