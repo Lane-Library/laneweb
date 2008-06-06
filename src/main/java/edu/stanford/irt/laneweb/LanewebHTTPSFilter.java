@@ -17,17 +17,22 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author ceyates
  * 
  * This filter redirects to https if the scheme is not https or there is not a
  * gohttps header as set by the BigIP load balancer for urls that it is doing
- * the ssl stuff. At the moment we can't do the reverse becuase BigIP goes into
+ * the ssl stuff. At the moment we can't do the reverse because BigIP goes into
  * a loop if you try to redirect from https to http.
  */
 public class LanewebHTTPSFilter implements Filter {
+    
+    Logger log = Logger.getLogger(LanewebHTTPSFilter.class);
 
     public void init(final FilterConfig arg0) {
+        
     }
 
     /**
@@ -41,11 +46,22 @@ public class LanewebHTTPSFilter implements Filter {
         String queryString = req.getQueryString();
         String url = queryString == null ? req.getRequestURL().toString() : req
                 .getRequestURL().append('?').append(queryString).toString();
+        if (this.log.isDebugEnabled()) {
+            this.log.debug("url:" + url);
+            this.log.debug("gohttps: " + req.getHeader("gohttps"));
+            this.log.debug("https: " + "https".equals(req.getScheme()));
+        }
         int colonIndex = url.indexOf(':');
         if ((req.getHeader("gohttps") != null)
                 || "https".equals(req.getScheme())) {
+            if (this.log.isDebugEnabled()) {
+                this.log.debug("chain.doFilter()");
+            }
             chain.doFilter(request, response);
         } else {
+            if (this.log.isDebugEnabled()) {
+                this.log.debug("sendRedirect(https:"+url.substring(colonIndex));
+            }
             resp.sendRedirect("https" + url.substring(colonIndex));
         }
     }
