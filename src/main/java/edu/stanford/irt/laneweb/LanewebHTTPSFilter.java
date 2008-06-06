@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  * a loop if you try to redirect from https to http.
  */
 public class LanewebHTTPSFilter implements Filter {
-    
+
     private ServletContext context;
 
     public void init(final FilterConfig filterConfig) {
@@ -39,22 +39,24 @@ public class LanewebHTTPSFilter implements Filter {
      */
     public void doFilter(final ServletRequest request,
             final ServletResponse response, final FilterChain chain)
-    throws IOException, ServletException {
+            throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String queryString = req.getQueryString();
         String url = queryString == null ? req.getRequestURL().toString() : req
                 .getRequestURL().append('?').append(queryString).toString();
-        this.context.log("url:" + url);
-        this.context.log("gohttps: " + req.getHeader("gohttps"));
-        this.context.log("https: " + "https".equals(req.getScheme()));
         int colonIndex = url.indexOf(':');
+        StringBuffer sb = new StringBuffer("url:").append(url).append(
+                "\ngohttps: ").append(req.getHeader("gohttps")).append(
+                "https".equals(req.getScheme()));
         if ((req.getHeader("gohttps") != null)
                 || "https".equals(req.getScheme())) {
-            this.context.log("chain.doFilter()");
+            sb.append("\nchain.doFilter()");
+            this.context.log(sb.toString());
             chain.doFilter(request, response);
         } else {
-            this.context.log("sendRedirect(https:"+url.substring(colonIndex));
+            sb.append("\nsendRedirect(https" + url.substring(colonIndex));
+            this.context.log(sb.toString());
             resp.sendRedirect("https" + url.substring(colonIndex));
         }
     }
