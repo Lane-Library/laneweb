@@ -471,6 +471,16 @@
     <xsl:template match="@class[.='proxy']"/>
     
     <xsl:template match="@proxy"/>
+    
+    <!-- TODO did the id of the input change? -->
+    <xsl:template match="h:input[@id='lw_search-terms']">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:attribute name="value">
+                <xsl:value-of select="$search-terms"/>
+            </xsl:attribute>
+        </xsl:copy>
+    </xsl:template>
 
     <!-- set the selected option of the search form -->
     <xsl:template match="h:option[parent::h:select[@id='searchSelect' or @id='source']]">
