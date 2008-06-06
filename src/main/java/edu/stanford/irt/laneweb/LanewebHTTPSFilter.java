@@ -29,7 +29,7 @@ import org.apache.log4j.Logger;
  */
 public class LanewebHTTPSFilter implements Filter {
     
-    Logger log = Logger.getLogger(LanewebHTTPSFilter.class);
+    Logger log = Logger.getLogger(LanewebHTTPSFilter.class.getName());
 
     public void init(final FilterConfig arg0) {
         
