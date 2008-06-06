@@ -61,17 +61,6 @@ public class HTMLGenerator extends ServiceableGenerator implements
             SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
 
-        Request request = ObjectModelHelper.getRequest(objectModel);
-
-        // append the request parameter to the URL if necessary
-        if (par.getParameterAsBoolean("copy-parameters", false)
-                && (request.getQueryString() != null)) {
-            StringBuffer query = new StringBuffer(super.source);
-            query.append(super.source.indexOf("?") == -1 ? '?' : '&');
-            query.append(request.getQueryString());
-            super.source = query.toString();
-        }
-
         if (super.source != null) {
             this.inputSource = resolver.resolveURI(super.source);
         }

@@ -11,13 +11,12 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.log4j.Logger;
 
 /**
  * @author ceyates
@@ -29,10 +28,10 @@ import org.apache.log4j.Logger;
  */
 public class LanewebHTTPSFilter implements Filter {
     
-    Logger log = Logger.getLogger(LanewebHTTPSFilter.class.getName());
+    private ServletContext context;
 
-    public void init(final FilterConfig arg0) {
-        
+    public void init(final FilterConfig filterConfig) {
+        this.context = filterConfig.getServletContext();
     }
 
     /**
@@ -40,28 +39,22 @@ public class LanewebHTTPSFilter implements Filter {
      */
     public void doFilter(final ServletRequest request,
             final ServletResponse response, final FilterChain chain)
-            throws IOException, ServletException {
+    throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String queryString = req.getQueryString();
         String url = queryString == null ? req.getRequestURL().toString() : req
                 .getRequestURL().append('?').append(queryString).toString();
-        if (this.log.isDebugEnabled()) {
-            this.log.debug("url:" + url);
-            this.log.debug("gohttps: " + req.getHeader("gohttps"));
-            this.log.debug("https: " + "https".equals(req.getScheme()));
-        }
+        this.context.log("url:" + url);
+        this.context.log("gohttps: " + req.getHeader("gohttps"));
+        this.context.log("https: " + "https".equals(req.getScheme()));
         int colonIndex = url.indexOf(':');
         if ((req.getHeader("gohttps") != null)
                 || "https".equals(req.getScheme())) {
-            if (this.log.isDebugEnabled()) {
-                this.log.debug("chain.doFilter()");
-            }
+            this.context.log("chain.doFilter()");
             chain.doFilter(request, response);
         } else {
-            if (this.log.isDebugEnabled()) {
-                this.log.debug("sendRedirect(https:"+url.substring(colonIndex));
-            }
+            this.context.log("sendRedirect(https:"+url.substring(colonIndex));
             resp.sendRedirect("https" + url.substring(colonIndex));
         }
     }
