@@ -35,9 +35,6 @@
                     <meta name="LW.searchTemplate" content="{$source}"/>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="not(h:meta[@name='LW.searchTerms' and not(@content='')])">
-                <meta name="LW.searchTerms" content="{$search-terms}"/>
-            </xsl:if>
         </xsl:copy>
     </xsl:template>
     

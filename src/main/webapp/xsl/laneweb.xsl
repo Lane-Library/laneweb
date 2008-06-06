@@ -24,9 +24,6 @@
 
     <!-- the search query -->
     <xsl:param name="q"/>
-    
-    <!-- the alpha browse parameter -->
-    <xsl:param name="a"/>
 
     <xsl:param name="source"/>
 
@@ -163,6 +160,9 @@
             </xsl:when>
             <xsl:when test=".='search-terms'">
                 <xsl:value-of select="$q"/>
+            </xsl:when>
+            <xsl:when test=".='mesh'">
+                <xsl:value-of select="$m"/>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
