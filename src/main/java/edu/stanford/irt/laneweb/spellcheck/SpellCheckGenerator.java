@@ -3,7 +3,6 @@
  */
 package edu.stanford.irt.laneweb.spellcheck;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.apache.avalon.framework.activity.Disposable;
@@ -12,7 +11,6 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.framework.thread.ThreadSafe;
-import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -41,7 +39,7 @@ public class SpellCheckGenerator implements Generator, Serviceable, Disposable,
 
     private ThreadLocal<String> query = new ThreadLocal<String>();
 
-    private ThreadLocal<XMLConsumer> xmlConsumer = new ThreadLocal<XMLConsumer>();
+    private ThreadLocal<XMLConsumer> consumer = new ThreadLocal<XMLConsumer>();
 
     private ServiceManager serviceManager;
 
@@ -65,35 +63,29 @@ public class SpellCheckGenerator implements Generator, Serviceable, Disposable,
                 .lookup(SpellChecker.class.getName());
     }
 
-    public void generate() throws IOException, SAXException,
-            ProcessingException {
+    public void generate() throws SAXException {
         String query = this.query.get();
         if (null == query) {
-            this.xmlConsumer.set(null);
+            this.consumer.set(null);
             throw new IllegalStateException("null query");
         }
-        XMLConsumer xmlConsumer = this.xmlConsumer.get();
-        if (null == xmlConsumer) {
+        XMLConsumer consumer = this.consumer.get();
+        if (null == consumer) {
             this.query.set(null);
-            throw new IllegalStateException("null xmlConsumer");
+            throw new IllegalStateException("null consumer");
         }
-        try {
-            xmlConsumer.startDocument();
-            XMLUtils.startElement(xmlConsumer, NAMESPACE, SPELLCHECK);
-            if ((null != query) && (query.length() > 0)) {
-                SpellCheckResult result = this.spellChecker.spellCheck(query);
-                XMLUtils.createElementNS(xmlConsumer, NAMESPACE, QUERY, query);
-                if (null != result.getSuggestion()) {
-                    XMLUtils.createElementNS(xmlConsumer, NAMESPACE,
-                            SUGGESTION, result.getSuggestion());
-                }
+        consumer.startDocument();
+        XMLUtils.startElement(consumer, NAMESPACE, SPELLCHECK);
+        if ((null != query) && (query.length() > 0)) {
+            SpellCheckResult result = this.spellChecker.spellCheck(query);
+            XMLUtils.createElementNS(consumer, NAMESPACE, QUERY, query);
+            if (null != result.getSuggestion()) {
+                XMLUtils.createElementNS(consumer, NAMESPACE, SUGGESTION,
+                        result.getSuggestion());
             }
-            XMLUtils.endElement(xmlConsumer, NAMESPACE, SPELLCHECK);
-            xmlConsumer.endDocument();
-        } finally {
-            this.query.set(null);
-            this.xmlConsumer.set(null);
         }
+        XMLUtils.endElement(consumer, NAMESPACE, SPELLCHECK);
+        consumer.endDocument();
     }
 
     public void setup(final SourceResolver resolver, final Map objectModel,
@@ -108,11 +100,11 @@ public class SpellCheckGenerator implements Generator, Serviceable, Disposable,
         this.query.set(param);
     }
 
-    public void setConsumer(final XMLConsumer xmlConsumer) {
-        if (null == xmlConsumer) {
-            throw new IllegalArgumentException("null xmlConsumer");
+    public void setConsumer(final XMLConsumer consumer) {
+        if (null == consumer) {
+            throw new IllegalArgumentException("null consumer");
         }
-        this.xmlConsumer.set(xmlConsumer);
+        this.consumer.set(consumer);
     }
 
 }
