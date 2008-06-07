@@ -48,7 +48,7 @@ public class LanewebHTTPSFilter implements Filter {
         int colonIndex = url.indexOf(':');
         StringBuffer sb = new StringBuffer("\nurl:").append(url).append(
                 "\ngohttps: ").append(req.getHeader("gohttps")).append(
-                "https: ").append("https".equals(req.getScheme()));
+                "\nhttps: ").append("https".equals(req.getScheme()));
         if ((req.getHeader("gohttps") != null)
                 || "https".equals(req.getScheme())) {
             sb.append("\nchain.doFilter()");
