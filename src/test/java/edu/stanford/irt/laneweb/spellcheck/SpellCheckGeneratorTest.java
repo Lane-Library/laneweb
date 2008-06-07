@@ -77,8 +77,8 @@ public class SpellCheckGeneratorTest {
         expect(this.params.getParameter("query", null)).andReturn("ibuprophen");
         replay(this.params);
         this.generator.service(this.serviceManager);
-        this.generator.setConsumer(this.xmlConsumer);
         this.generator.setup(null, null, null, this.params);
+        this.generator.setConsumer(this.xmlConsumer);
         this.generator.generate();
         verify(this.serviceManager);
         verify(this.spellChecker);
@@ -133,16 +133,16 @@ public class SpellCheckGeneratorTest {
 
                 public void run() {
                     final String response = Integer.toString(k++);
-                    SpellCheckGeneratorTest.this.generator.setConsumer(new AbstractXMLConsumer() {
-                        public void characters(char[] chars, int start, int length) {
-                            assertEquals(response, new String(chars, start, length));
-                        }
-                    });
                     Parameters params = createMock(Parameters.class);
                     expect(params.getParameter("query", null)).andReturn(response);
                     replay(params);
                     SpellCheckGeneratorTest.this.generator.setup(null, null,
                             null, params);
+                    SpellCheckGeneratorTest.this.generator.setConsumer(new AbstractXMLConsumer() {
+                        public void characters(char[] chars, int start, int length) {
+                            assertEquals(response, new String(chars, start, length));
+                        }
+                    });
                     try {
                         SpellCheckGeneratorTest.this.generator.generate();
                     } catch (SAXException e) {
