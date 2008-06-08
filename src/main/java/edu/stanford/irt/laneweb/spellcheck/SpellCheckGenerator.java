@@ -5,7 +5,6 @@ package edu.stanford.irt.laneweb.spellcheck;
 
 import java.util.Map;
 
-import org.apache.avalon.framework.activity.Disposable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
@@ -24,8 +23,7 @@ import edu.stanford.irt.spell.SpellChecker;
  * @author ceyates
  * 
  */
-public class SpellCheckGenerator implements Generator, Serviceable, Disposable,
-        ThreadSafe {
+public class SpellCheckGenerator implements Generator, Serviceable, ThreadSafe {
 
     private static final String SPELLCHECK = "spellcheck";
 
@@ -40,17 +38,12 @@ public class SpellCheckGenerator implements Generator, Serviceable, Disposable,
     private ThreadLocal<String> query = new ThreadLocal<String>();
 
     private ThreadLocal<XMLConsumer> consumer = new ThreadLocal<XMLConsumer>();
-
-    private ServiceManager serviceManager;
-
-    public void dispose() {
-        if (null == this.spellChecker) {
-            return;
-        }
-        if (null == this.serviceManager) {
-            throw new IllegalStateException("null serviceManager");
-        }
-        this.serviceManager.release(this.spellChecker);
+    
+    public void setSpellChecker(final SpellChecker spellChecker) {
+    	if (null == spellChecker) {
+    		throw new IllegalArgumentException("null spellChecker");
+    	}
+    	this.spellChecker = spellChecker;
     }
 
     public void service(final ServiceManager serviceManager)
@@ -58,9 +51,7 @@ public class SpellCheckGenerator implements Generator, Serviceable, Disposable,
         if (null == serviceManager) {
             throw new IllegalArgumentException("null serviceManager");
         }
-        this.serviceManager = serviceManager;
-        this.spellChecker = (SpellChecker) this.serviceManager
-                .lookup(SpellChecker.class.getName());
+        setSpellChecker((SpellChecker) serviceManager.lookup(SpellChecker.class.getName()));
     }
 
     public void generate() throws SAXException {

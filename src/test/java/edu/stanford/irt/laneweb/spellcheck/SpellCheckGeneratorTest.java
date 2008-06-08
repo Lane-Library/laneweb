@@ -47,8 +47,12 @@ public class SpellCheckGeneratorTest {
     }
 
     @Test
-    public void testDispose() {
-        this.generator.dispose();
+    public void testSetSpellCheck() {
+        try {
+        	this.generator.setSpellChecker(null);
+        	fail();
+        } catch (IllegalArgumentException e) {}
+        this.generator.setSpellChecker(this.spellChecker);
     }
 
     @Test
