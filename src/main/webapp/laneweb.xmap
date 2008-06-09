@@ -52,10 +52,10 @@
             <map:generator name="status" logger="sitemap.generator.status"
                 src="org.apache.cocoon.generation.StatusGenerator" pool-max="4"/>
             <map:generator name="querymap" src="edu.stanford.irt.laneweb.querymap.QueryMapGenerator"
-                logger="sitemap.generation.querymap" pool-max="32"/>
+                logger="sitemap.generation.querymap"/>
             <map:generator name="spellcheck"
                 src="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator"
-                logger="sitemap.generation.spellcheck" pool-max="32"/>
+                logger="sitemap.generation.spellcheck"/>
             <map:generator name="exception" src="org.apache.cocoon.generation.ExceptionGenerator"/>
             <map:generator logger="edu.stanford.irt.laneweb.search" name="search"
                 src="edu.stanford.irt.laneweb.search.SearchGenerator">

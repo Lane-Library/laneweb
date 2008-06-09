@@ -126,10 +126,6 @@
     <parameter name="voyagerBaseURL" value="http://lmldb-test.stanford.edu/cgi-bin/Pwebrecon.cgi?"/>
     <parameter name="voyagerErrorURL" value="/error_voyager.html?error="/>
   </component>
-
-  <component logger="core.descriptor-manager"
-    role="edu.stanford.irt.laneweb.querymap.DescriptorManagerManager"
-    class="edu.stanford.irt.laneweb.querymap.LanewebDescriptorManager"/>
   
   <component logger="core.spell-checker"
       role="edu.stanford.irt.spell.SpellChecker"
@@ -162,6 +158,9 @@
     class="edu.stanford.irt.laneweb.eresources.LanewebCollectionManager"/>
   
   <component role="edu.stanford.irt.eresources.CollectionManager/history"
-    class="edu.stanford.irt.laneweb.eresources.HistoryCollectionManager"/>
+  class="edu.stanford.irt.laneweb.eresources.HistoryCollectionManager"/>
+    
+    <component role="edu.stanford.irt.laneweb.querymap.QueryMapper"
+        class="edu.stanford.irt.laneweb.querymap.QueryMapperImpl"/>
 
 </cocoon>
