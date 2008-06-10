@@ -125,7 +125,6 @@ public class SpellCheckGeneratorTest {
         SpellChecker fauxSpellChecker = new SpellChecker() {
 
             public SpellCheckResult spellCheck(String words) {
-                System.out.println(words);
                 return new SpellCheckResult(words);
             }};
         this.generator.setSpellChecker(fauxSpellChecker);
