@@ -118,25 +118,25 @@ public class SpellCheckGeneratorTest {
         }
         this.generator.setConsumer(this.xmlConsumer);
     }
-
-    int k = 0;
     @Test
     public void testThreads() throws ServiceException {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors
                 .newFixedThreadPool(100);
-        for (int i = 0; i < 1000; i++){
-            expect(this.spellChecker.spellCheck(Integer.toString(i))).andReturn(new SpellCheckResult(Integer.toString(i)));
-        }
-        replay(this.spellChecker);
-        expect(this.serviceManager.lookup(SpellChecker.class.getName()))
-        .andReturn(this.spellChecker);
-        replay(this.serviceManager);
-        this.generator.service(this.serviceManager);
-        for (int i = 0; i < 1000; i++) {
+        SpellChecker fauxSpellChecker = new SpellChecker() {
+
+            public SpellCheckResult spellCheck(String words) {
+                System.out.println(words);
+                return new SpellCheckResult(words);
+            }};
+        this.generator.setSpellChecker(fauxSpellChecker);
+        for (int i = 999; i > -1; i--) {
+            final String response = Integer.toString(i);
+            synchronized(this.spellChecker) {
+            expect(this.spellChecker.spellCheck(response)).andReturn(new SpellCheckResult(response));
+            }
             executor.execute(new Runnable() {
 
                 public void run() {
-                    final String response = Integer.toString(k++);
                     Parameters params = createMock(Parameters.class);
                     expect(params.getParameter("query", null)).andReturn(response);
                     replay(params);
@@ -148,9 +148,14 @@ public class SpellCheckGeneratorTest {
                         }
                     });
                     try {
+                        Thread.sleep(Long.parseLong(response));
                         SpellCheckGeneratorTest.this.generator.generate();
                     } catch (SAXException e) {
                         throw new RuntimeException(e);
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                     verify(params);
                 }
@@ -158,13 +163,10 @@ public class SpellCheckGeneratorTest {
         }
         executor.shutdown();
         try {
-            executor.awaitTermination(10, TimeUnit.SECONDS);
+            executor.awaitTermination(100, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        verify(this.serviceManager);
-        verify(this.spellChecker);
-        verify(this.spellChecker);
         
     }
 

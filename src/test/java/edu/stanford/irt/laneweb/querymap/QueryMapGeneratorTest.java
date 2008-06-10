@@ -130,50 +130,42 @@ public class QueryMapGeneratorTest {
     public void testThreads() throws ServiceException {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors
                 .newFixedThreadPool(100);
-        this.generator.setQueryMapper(this.queryMapper);
-        final String[] response = new String[1000];
-        for (int i = 0; i < 1000; i++) {
-            response[i] = Integer.toString(i);
-            Descriptor descriptor = createMock(Descriptor.class);
-            expect(descriptor.getDescriptorName()).andReturn(response[i]);
-            expect(descriptor.getDescriptorName()).andReturn(response[i]);
-            replay(descriptor);
-            ResourceMap resourceMap = createMock(ResourceMap.class);
-            expect(resourceMap.getDescriptor()).andReturn(descriptor);
-            expect(resourceMap.getResources()).andReturn(Collections.<String>singleton(response[i]));
-            replay(resourceMap);
-            QueryMap queryMap = createMock(QueryMap.class);
-            expect(queryMap.getQuery()).andReturn(response[i]);
-            expect(queryMap.getDescriptor()).andReturn(descriptor);
-            expect(queryMap.getResourceMap()).andReturn(resourceMap);
-            replay(queryMap);
-            expect(this.queryMapper.getQueryMap(response[i])).andReturn(queryMap);
-        }
-        replay(this.queryMapper);
-        for (int k = 0; k < 1000; k++) {
-            final int i = k;
+        QueryMapper fauxQueryMapper = new QueryMapper() {
+
+            public QueryMap getQueryMap(String query) {
+                Descriptor descriptor = new Descriptor(query, query, Collections.<String>singleton(query));
+                return new QueryMap(query, descriptor,new ResourceMap(descriptor,Collections.<String>singleton(query)));
+            }};
+        this.generator.setQueryMapper(fauxQueryMapper);
+        for (int i = 999; i > -1; i--) {
+            final String response = Integer.toString(i);
             executor.execute(new Runnable() {
 
                 public void run() {
                     Parameters params = createMock(Parameters.class);
-                    expect(params.getParameter("query", null)).andReturn(response[i]);
+                    expect(params.getParameter("query", null)).andReturn(response);
                     replay(params);
                     QueryMapGeneratorTest.this.generator.setup(null, null,
                             null, params);
                     QueryMapGeneratorTest.this.generator.setConsumer(new AbstractXMLConsumer() {
                         public void characters(char[] chars, int start, int length) {
-                            assertEquals(response[i], new String(chars, start, length));
+                            assertEquals(response, new String(chars, start, length));
                             
                         }
                         public void startElement(String ns, String localName, String aName, Attributes atts) {
                             if (atts.getLength() > 0) {
-                                assertEquals(response[i], atts.getValue(0));
+                                assertEquals(response, atts.getValue(0));
                             }
                         }
                     });
                     try {
+                        Thread.sleep(Long.parseLong(response));
                         QueryMapGeneratorTest.this.generator.generate();
                     } catch (SAXException e) {
+                        throw new RuntimeException(e);
+                    } catch (NumberFormatException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                     verify(params);
@@ -182,7 +174,7 @@ public class QueryMapGeneratorTest {
         }
         executor.shutdown();
         try {
-            executor.awaitTermination(10, TimeUnit.SECONDS);
+            executor.awaitTermination(100, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
