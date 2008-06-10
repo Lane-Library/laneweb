@@ -37,6 +37,7 @@ public class XMLizableQueryMap implements XMLizable {
     }
 
     public void toSAX(ContentHandler consumer) throws SAXException {
+        consumer.startPrefixMapping("", NAMESPACE);
         XMLUtils.startElement(consumer, NAMESPACE, QUERY_MAP);
         XMLUtils.createElementNS(consumer, NAMESPACE, QUERY, queryMap
                 .getQuery());
@@ -59,6 +60,7 @@ public class XMLizableQueryMap implements XMLizable {
             }
         }
         XMLUtils.endElement(consumer, NAMESPACE, QUERY_MAP);
+        consumer.endPrefixMapping("");
     }
 
 }

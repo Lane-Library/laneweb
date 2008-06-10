@@ -1,9 +1,9 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.eresources;
 
-import org.xml.sax.Attributes;
+import java.util.Collection;
+
+import org.apache.cocoon.xml.XMLUtils;
+import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -12,15 +12,21 @@ import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.Link;
 import edu.stanford.irt.eresources.Version;
 
-/**
- * @author ceyates
- * 
- */
-public class EresourceSAXTranslator {
+public class XHTMLizableEresourceList implements XMLizable {
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
     private static final String EMPTY_NS = "";
+
+    private static final String HTML = "html";
+
+    private static final String HEAD = "head";
+
+    private static final String TITLE = "title";
+
+    private static final String BODY = "body";
+
+    private static final String DL = "dl";
 
     private static final String DD = "dd";
 
@@ -32,23 +38,50 @@ public class EresourceSAXTranslator {
 
     private static final String A = "a";
 
-    private static final Attributes EMPTY_ATTS = new AttributesImpl();
+    private Collection<Eresource> eresources;
 
-    public void translate(final ContentHandler handler,
-            final Eresource eresource) throws SAXException {
+    public XHTMLizableEresourceList(final Collection<Eresource> eresources) {
+        if (null == eresources) {
+            throw new IllegalArgumentException("null eresources");
+        }
+        this.eresources = eresources;
+    }
+
+    public void toSAX(final ContentHandler handler) throws SAXException {
         if (null == handler) {
             throw new IllegalArgumentException("null handler");
         }
-        if (null == eresource) {
-            throw new IllegalArgumentException("null eresource");
+        handler.startPrefixMapping("", XHTML_NS);
+        XMLUtils.startElement(handler, XHTML_NS, HTML);
+        XMLUtils.startElement(handler, XHTML_NS, HEAD);
+        XMLUtils.startElement(handler, XHTML_NS, TITLE);
+        XMLUtils.data(handler, "EresourcesList");
+        XMLUtils.endElement(handler, XHTML_NS, TITLE);
+        XMLUtils.endElement(handler, XHTML_NS, HEAD);
+        XMLUtils.startElement(handler, XHTML_NS, BODY);
+        XMLUtils.startElement(handler, XHTML_NS, DL);
+        for (Eresource eresource : this.eresources) {
+            handleEresource(handler, eresource);
         }
-        handler.startElement(XHTML_NS, DT, DT, EMPTY_ATTS);
-        char[] title = null != eresource.getTitle() ? eresource.getTitle()
-                .toCharArray() : new char[0];
-        handler.characters(title, 0, title.length);
-        handler.endElement(XHTML_NS, DT, DT);
-        handler.startElement(XHTML_NS, DD, DD, EMPTY_ATTS);
-        handler.startElement(XHTML_NS, UL, UL, EMPTY_ATTS);
+        XMLUtils.endElement(handler, XHTML_NS, DL);
+        XMLUtils.endElement(handler, XHTML_NS, BODY);
+        XMLUtils.endElement(handler, XHTML_NS, HTML);
+        handler.endPrefixMapping("");
+
+    }
+
+    private void handleEresource(final ContentHandler handler,
+            final Eresource eresource) throws SAXException {
+        String title = eresource.getTitle();
+        // TODO shouldn't have to check for this here
+        if (null == title) {
+            title = "";
+        }
+
+        XMLUtils.data(handler, title);
+        XMLUtils.endElement(handler, XHTML_NS, DT);
+        XMLUtils.startElement(handler, XHTML_NS, DD);
+        XMLUtils.startElement(handler, XHTML_NS, UL);
         StringBuffer sb = new StringBuffer();
         for (Version version : eresource.getVersions()) {
             Link getPasswordLink = null;
@@ -61,7 +94,7 @@ public class EresourceSAXTranslator {
             }
             for (Link link : version.getLinks()) {
                 if (!link.equals(getPasswordLink)) {
-                    handler.startElement(XHTML_NS, LI, LI, EMPTY_ATTS);
+                    XMLUtils.startElement(handler, XHTML_NS, LI);
                     handleAnchor(handler, eresource, version, link,
                             getPasswordLink != null);
                     sb.setLength(0);
@@ -77,24 +110,22 @@ public class EresourceSAXTranslator {
                         sb.append(' ');
                     }
                     if (sb.length() > 0) {
-                        handler.characters(sb.toString().toCharArray(), 0, sb
-                                .length());
+                        XMLUtils.data(handler, sb.toString());
                     }
                     if (null != getPasswordLink) {
                         AttributesImpl attributes = new AttributesImpl();
                         attributes.addAttribute(EMPTY_NS, "href", "href",
                                 "CDATA", getPasswordLink.getUrl());
-                        handler.startElement(XHTML_NS, A, A, attributes);
-                        char[] getPassword = "get password".toCharArray();
-                        handler.characters(getPassword, 0, getPassword.length);
-                        handler.endElement(XHTML_NS, A, A);
+                        XMLUtils.startElement(handler, XHTML_NS, A, attributes);
+                        XMLUtils.data(handler, "get password");
+                        XMLUtils.endElement(handler, XHTML_NS, A);
                     }
-                    handler.endElement(XHTML_NS, LI, LI);
+                    XMLUtils.endElement(handler, LI);
                 }
             }
         }
-        handler.endElement(XHTML_NS, UL, UL);
-        handler.endElement(XHTML_NS, DD, DD);
+        XMLUtils.endElement(handler, XHTML_NS, UL);
+        XMLUtils.endElement(handler, XHTML_NS, DD);
     }
 
     /**
@@ -124,13 +155,13 @@ public class EresourceSAXTranslator {
         }
         attributes.addAttribute(EMPTY_NS, "title", "title", "CDATA", sb
                 .toString());
-        handler.startElement(XHTML_NS, A, A, attributes);
-        char[] linkText = getLinkText(eresource, version, link, hasGetPassword);
-        handler.characters(linkText, 0, linkText.length);
-        handler.endElement(XHTML_NS, A, A);
+        XMLUtils.startElement(handler, XHTML_NS, A, attributes);
+        XMLUtils.data(handler, getLinkText(eresource, version, link,
+                hasGetPassword));
+        XMLUtils.endElement(handler, XHTML_NS, A);
     }
 
-    private char[] getLinkText(final Eresource eresource,
+    private String getLinkText(final Eresource eresource,
             final Version version, final Link link, final boolean hasGetPassword) {
         StringBuffer sb = new StringBuffer();
         if ((hasGetPassword && (version.getLinks().size() == 2))
@@ -159,32 +190,6 @@ public class EresourceSAXTranslator {
         if (null != description) {
             sb.append(' ').append(description);
         }
-        return sb.toString().toCharArray();
+        return sb.toString();
     }
-
-    // <li>
-    // <a href="{sql:url}" title="{$title-publisher}" class="{$proxy_class}">
-    // <xsl:choose>
-    // <xsl:when
-    // test="$holdings-length &gt; 0 and $dates-length &gt; 0">
-    // <xsl:apply-templates select="sql:holdings"/>, <xsl:value-of
-    // select="sql:dates"/>
-    // </xsl:when>
-    // <xsl:when test="$holdings-length &gt; 0">
-    // <xsl:apply-templates select="sql:holdings"/>
-    // </xsl:when>
-    // <xsl:when test="$dates-length &gt; 0">
-    // <xsl:value-of select="sql:dates"/>
-    // </xsl:when>
-    // <xsl:when test="string-length(sql:label) &gt; 0">
-    // <xsl:value-of select="sql:label"/>
-    // </xsl:when>
-    // <xsl:otherwise>
-    // <xsl:value-of select="sql:url"/>
-    // </xsl:otherwise>
-    // </xsl:choose>
-    // <xsl:apply-templates select="sql:description"/>
-    // </a>
-    // <xsl:apply-templates select="sql:instruction|sql:publisher"/>
-    // </li>
 }

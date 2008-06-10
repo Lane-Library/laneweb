@@ -8,16 +8,13 @@ import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.ServiceableGenerator;
-import org.xml.sax.Attributes;
+import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
@@ -33,8 +30,6 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
     private static final String ALPHA = "a";
 
     private static final String MESH = "m";
-
-    private static final Attributes EMPTY_ATTS = new AttributesImpl();
     
     private String collection;
     
@@ -51,11 +46,17 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
     protected String mesh;
     
     private String mode;
+    
+    public void setCollectionManager(final CollectionManager collectionManager) {
+        if (null == collectionManager) {
+            throw new IllegalArgumentException("null collectionManager");
+        }
+        this.collectionManager = collectionManager;
+    }
 
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException,
-            SAXException, IOException {
+            final String src, final Parameters par) throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
         this.mode = par.getParameter("mode", "browse");
         Request request = ObjectModelHelper.getRequest(objectModel);
@@ -93,36 +94,10 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
         }
     }
 
-    public void generate() throws SAXException, ProcessingException {
-        Collection<Eresource> eresources = getEresourceList();
-        String title = "edu.stanford.irt.eresources.Eresource";
-        EresourceSAXTranslator translator = new EresourceSAXTranslator();
+    public void generate() throws SAXException {
+        XMLizable eresources = new XHTMLizableEresourceList(getEresourceList());
         this.xmlConsumer.startDocument();
-        this.xmlConsumer.startPrefixMapping("", "http://www.w3.org/1999/xhtml");
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "html",
-                "html", EMPTY_ATTS);
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "head",
-                "head", EMPTY_ATTS);
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "title",
-                "title", EMPTY_ATTS);
-        this.xmlConsumer.characters(title.toCharArray(), 0, title.length());
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "title",
-                "title");
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "head",
-                "head");
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "body",
-                "body", EMPTY_ATTS);
-        this.xmlConsumer.startElement("http://www.w3.org/1999/xhtml", "dl",
-                "dl", EMPTY_ATTS);
-        for (Eresource er : eresources) {
-            translator.translate(this.xmlConsumer, er);
-        }
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "dl", "dl");
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "body",
-                "body");
-        this.xmlConsumer.endElement("http://www.w3.org/1999/xhtml", "html",
-                "html");
-        this.xmlConsumer.endPrefixMapping("");
+        eresources.toSAX(this.xmlConsumer);
         this.xmlConsumer.endDocument();
     }
 
@@ -142,10 +117,10 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
         this.subset = null;
     }
 
-    protected Collection<Eresource> getEresourceList() throws ProcessingException {
+    protected Collection<Eresource> getEresourceList() {
         if ("search".equals(this.mode)) {
             if (null == this.query) {
-                throw new ProcessingException("null query");
+                throw new IllegalStateException("null query");
             }
             if (null != this.type) {
                 return this.collectionManager.searchType(this.type, this.query);
@@ -162,22 +137,22 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
             } else if (null != this.subset) {
                 return this.collectionManager.getSubset(this.subset);
             } else {
-                throw new ProcessingException("null type or subset");
+                throw new IllegalStateException("null type or subset");
             }
         } else if ("core".equals(this.mode)) {
             if (null == this.type) {
-                throw new ProcessingException("null type");
+                throw new IllegalStateException("null type");
             } else if (null != this.mesh) {
                 return this.collectionManager.getMeshCore(this.type, this.mesh);
             }
             return this.collectionManager.getCore(this.type);
         } else if ("mesh".equals(this.mode)) {
             if (null == this.type) {
-                throw new ProcessingException("null type");
+                throw new IllegalStateException("null type");
             }
             return this.collectionManager.getMesh(this.type, this.mesh);
         }
-        throw new ProcessingException("incomplete parameters");
+        throw new IllegalStateException("incomplete parameters");
     }
 
     public void parameterize(Parameters param) throws ParameterException {
@@ -185,7 +160,7 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
     }
 
     public void initialize() throws Exception {
-        this.collectionManager = (CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection);
+        setCollectionManager((CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection));
     }
 
 }

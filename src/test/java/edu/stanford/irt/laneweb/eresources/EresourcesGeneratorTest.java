@@ -117,8 +117,8 @@ public class EresourcesGeneratorTest {
     public void testGetEresourceList() {
         try {
             this.generator.getEresourceList();
-            fail("no ProcessingException");
-        } catch (ProcessingException e) {}
+            fail("no IllegalStateException");
+        } catch (IllegalStateException e) {}
     }
 
 }

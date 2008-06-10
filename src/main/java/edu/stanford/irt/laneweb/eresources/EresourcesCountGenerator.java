@@ -41,6 +41,13 @@ public class EresourcesCountGenerator extends ServiceableGenerator implements Co
     private String query;
 
     private String collection;
+    
+    public void setCollectionManager(final CollectionManager collectionManager) {
+        if (null == collectionManager) {
+            throw new IllegalArgumentException("null collectionManager");
+        }
+        this.collectionManager = collectionManager;
+    }
 
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel,
@@ -105,6 +112,6 @@ public class EresourcesCountGenerator extends ServiceableGenerator implements Co
     }
 
     public void initialize() throws Exception {
-        this.collectionManager = (CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection);
+        setCollectionManager((CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection));
     }
 }
