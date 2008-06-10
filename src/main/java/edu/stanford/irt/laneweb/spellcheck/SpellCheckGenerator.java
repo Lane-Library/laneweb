@@ -13,10 +13,9 @@ import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.cocoon.xml.XMLUtils;
+import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.spell.SpellCheckResult;
 import edu.stanford.irt.spell.SpellChecker;
 
 /**
@@ -25,25 +24,19 @@ import edu.stanford.irt.spell.SpellChecker;
  */
 public class SpellCheckGenerator implements Generator, Serviceable, ThreadSafe {
 
-    private static final String SPELLCHECK = "spellcheck";
-
     private static final String QUERY = "query";
-
-    private static final String SUGGESTION = "suggestion";
-
-    private static final String NAMESPACE = "http://lane.stanford.edu/spellcheck/ns";
 
     private SpellChecker spellChecker;
 
     private ThreadLocal<String> query = new ThreadLocal<String>();
 
     private ThreadLocal<XMLConsumer> consumer = new ThreadLocal<XMLConsumer>();
-    
+
     public void setSpellChecker(final SpellChecker spellChecker) {
-    	if (null == spellChecker) {
-    		throw new IllegalArgumentException("null spellChecker");
-    	}
-    	this.spellChecker = spellChecker;
+        if (null == spellChecker) {
+            throw new IllegalArgumentException("null spellChecker");
+        }
+        this.spellChecker = spellChecker;
     }
 
     public void service(final ServiceManager serviceManager)
@@ -51,7 +44,8 @@ public class SpellCheckGenerator implements Generator, Serviceable, ThreadSafe {
         if (null == serviceManager) {
             throw new IllegalArgumentException("null serviceManager");
         }
-        setSpellChecker((SpellChecker) serviceManager.lookup(SpellChecker.class.getName()));
+        setSpellChecker((SpellChecker) serviceManager.lookup(SpellChecker.class
+                .getName()));
     }
 
     public void generate() throws SAXException {
@@ -65,18 +59,19 @@ public class SpellCheckGenerator implements Generator, Serviceable, ThreadSafe {
             this.query.set(null);
             throw new IllegalStateException("null consumer");
         }
-        consumer.startDocument();
-        XMLUtils.startElement(consumer, NAMESPACE, SPELLCHECK);
-        if ((null != query) && (query.length() > 0)) {
-            SpellCheckResult result = this.spellChecker.spellCheck(query);
-            XMLUtils.createElementNS(consumer, NAMESPACE, QUERY, query);
-            if (null != result.getSuggestion()) {
-                XMLUtils.createElementNS(consumer, NAMESPACE, SUGGESTION,
-                        result.getSuggestion());
-            }
+
+        try {
+
+            XMLizable result = new XMLizableSpellCheckResult(query,
+                    this.spellChecker.spellCheck(query));
+
+            consumer.startDocument();
+            result.toSAX(consumer);
+            consumer.endDocument();
+        } finally {
+            this.consumer.set(null);
+            this.query.set(null);
         }
-        XMLUtils.endElement(consumer, NAMESPACE, SPELLCHECK);
-        consumer.endDocument();
     }
 
     public void setup(final SourceResolver resolver, final Map objectModel,
