@@ -34,10 +34,22 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements
 
     public void initialize() throws Exception {
         Context context = new InitialContext();
-        String groupKey = (String) context.lookup("java:comp/env/webdash-key");
-        SecretKey key = new SecretKeySpec(groupKey.getBytes(), "HmacSHA1");
-        this.mac = Mac.getInstance(key.getAlgorithm());
-        this.mac.init(key);
+        setWebdashKey((String) context.lookup("java:comp/env/webdash-key"));
+    }
+
+    public void setWebdashKey(final String webdashKey) {
+        if (null == webdashKey) {
+            throw new IllegalArgumentException("null webdashKey");
+        }
+        SecretKey key = new SecretKeySpec(webdashKey.getBytes(), "HmacSHA1");
+        try {
+            this.mac = Mac.getInstance(key.getAlgorithm());
+            this.mac.init(key);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String getEncodedUrl(final LDAPPerson ldapPerson,
@@ -122,7 +134,7 @@ public class WebDashLoginImpl extends AbstractLogEnabled implements
         String[] affiliations = ldapPerson.getAffilation();
         if (affiliations.length > 0) {
             String[] affiliation = affiliations[0].split(":");
-            if (affiliation.length > 0) {
+            if (affiliation.length > 1) {
                 result = URLEncoder.encode(affiliation[1], "UTF-8");
             } else {
                 result = URLEncoder.encode(affiliation[0], "UTF-8");
