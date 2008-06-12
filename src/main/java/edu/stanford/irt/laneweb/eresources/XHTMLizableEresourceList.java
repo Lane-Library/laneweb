@@ -77,7 +77,7 @@ public class XHTMLizableEresourceList implements XMLizable {
         if (null == title) {
             title = "";
         }
-
+        XMLUtils.startElement(handler, XHTML_NS, DT);
         XMLUtils.data(handler, title);
         XMLUtils.endElement(handler, XHTML_NS, DT);
         XMLUtils.startElement(handler, XHTML_NS, DD);
