@@ -12,20 +12,12 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import org.apache.avalon.framework.activity.Initializable;
-import org.apache.avalon.framework.parameters.Parameterizable;
-import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.thread.ThreadSafe;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
 public class WebdashLoginImpl implements WebdashLogin, ThreadSafe,
-        Parameterizable, Initializable {
-
-    private String loginURL;
-
-    private String registrationURL;
-
-    private String groupName;
+        Initializable {
 
     private Mac mac;
 
@@ -44,38 +36,9 @@ public class WebdashLoginImpl implements WebdashLogin, ThreadSafe,
         }
     }
 
-    public void setLoginURL(final String loginURL) {
-        if (null == loginURL) {
-            throw new IllegalArgumentException("null loginURL");
-        }
-        this.loginURL = loginURL;
-    }
-
-    public void setRegistrationURL(final String registrationURL) {
-        if (null == registrationURL) {
-            throw new IllegalArgumentException("null registrationURL");
-        }
-        this.registrationURL = registrationURL;
-    }
-
-    public void setGroupName(final String groupName) {
-        if (null == groupName) {
-            throw new IllegalArgumentException("null groupName");
-        }
-        this.groupName = groupName;
-    }
-
     public void initialize() throws Exception {
         Context context = new InitialContext();
         setWebdashKey((String) context.lookup("java:comp/env/webdash-key"));
-    }
-
-    public String getRegistrationURL(final LDAPPerson person, final String nonce) {
-        return this.registrationURL.concat(getQueryString(person, nonce));
-    }
-
-    public String getLoginURL(final LDAPPerson person, final String nonce) {
-        return this.loginURL.concat(getQueryString(person, nonce));
     }
 
     public String getQueryString(final LDAPPerson person, final String nonce) {
@@ -85,17 +48,8 @@ public class WebdashLoginImpl implements WebdashLogin, ThreadSafe,
         if (null == nonce) {
             throw new IllegalArgumentException("null nonce");
         }
-        if (null == this.groupName) {
-            throw new IllegalStateException("null groupName");
-        }
         if (null == this.mac) {
             throw new IllegalStateException("webdashKey not set");
-        }
-        if (null == this.registrationURL) {
-            throw new IllegalStateException("null registrationURL");
-        }
-        if (null == this.loginURL) {
-            throw new IllegalStateException("null logingURL");
         }
         String userId = encodeParameter(person.getUId());
         String mail = encodeParameter(userId.concat("@stanford.edu"));
@@ -104,9 +58,8 @@ public class WebdashLoginImpl implements WebdashLogin, ThreadSafe,
         StringBuffer result = new StringBuffer();
         result.append("email=").append(mail).append("&fullname=").append(
                 fullName).append("&nonce=").append(nonce).append("&subgroup=")
-                .append(affiliation).append("&system_short_name=").append(
-                        this.groupName).append("&system_user_id=").append(
-                        userId);
+                .append(affiliation).append("&system_short_name=stanford-sunet&system_user_id=")
+                .append(userId);
         String token = getToken(result.toString());
         result.append("&token=").append(token);
         return result.toString();
@@ -154,13 +107,6 @@ public class WebdashLoginImpl implements WebdashLogin, ThreadSafe,
             return affiliation[1];
         }
         return affiliation[0];
-    }
-
-    public void parameterize(final Parameters param) {
-        setRegistrationURL(param.getParameter("registration-url", null));
-        setLoginURL(param.getParameter("login-url", null));
-        setGroupName(param.getParameter("group-name", null));
-
     }
 
 }

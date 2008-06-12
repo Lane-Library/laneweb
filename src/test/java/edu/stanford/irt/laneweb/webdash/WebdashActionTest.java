@@ -57,13 +57,13 @@ public class WebdashActionTest {
         expect(this.userInfo.getLdapPerson()).andReturn(this.person);
         replay(this.userInfo);
         replay(this.person);
-        expect(this.webdashLogin.getRegistrationURL(this.person, "nonce"))
+        expect(this.webdashLogin.getQueryString(this.person, "nonce"))
                 .andReturn("register");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserInfoHelper(this.userInfoHelper);
         Map result = this.action.act(null, null, this.objectModel, null, null);
-        assertEquals(result.get("webdash-url"), "register");
+        assertEquals("https://webda.sh/auth/init_post?register",result.get("webdash-url"));
         verify(this.objectModel);
         verify(this.request);
         verify(this.userInfoHelper);
@@ -86,13 +86,13 @@ public class WebdashActionTest {
         expect(this.userInfo.getLdapPerson()).andReturn(this.person);
         replay(this.userInfo);
         replay(this.person);
-        expect(this.webdashLogin.getLoginURL(this.person, "nonce")).andReturn(
+        expect(this.webdashLogin.getQueryString(this.person, "nonce")).andReturn(
                 "login");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserInfoHelper(this.userInfoHelper);
         Map result = this.action.act(null, null, this.objectModel, null, null);
-        assertEquals(result.get("webdash-url"), "login");
+        assertEquals("https://webda.sh/auth/auth_post?login",result.get("webdash-url"));
         verify(this.objectModel);
         verify(this.request);
         verify(this.userInfoHelper);
@@ -115,15 +115,14 @@ public class WebdashActionTest {
         expect(this.userInfo.getLdapPerson()).andReturn(this.person);
         replay(this.userInfo);
         replay(this.person);
-        expect(this.webdashLogin.getLoginURL(this.person, "nonce")).andThrow(
+        expect(this.webdashLogin.getQueryString(this.person, "nonce")).andThrow(
                 new IllegalArgumentException("broken"));
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserInfoHelper(this.userInfoHelper);
         this.action.enableLogging(createMock(Logger.class));
         Map result = this.action.act(null, null, this.objectModel, null, null);
-        assertEquals(result.get("webdash-url"),
-                "/error_webdash.html?error=broken");
+        assertEquals("/webdashError.html", result.get("webdash-url"));
         verify(this.objectModel);
         verify(this.request);
         verify(this.userInfoHelper);

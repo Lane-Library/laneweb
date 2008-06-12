@@ -19,58 +19,63 @@ import edu.stanford.irt.laneweb.UserInfo;
 import edu.stanford.irt.laneweb.UserInfoHelper;
 
 public class WebdashAction extends AbstractLogEnabled implements Action,
-        Serviceable {
+		Serviceable {
 
-    private UserInfoHelper userInfoHelper;
+	private static final String REGISTRATION_URL = "https://webda.sh/auth/init_post?";
 
-    private WebdashLogin webDashLogin;
+	private static final String LOGIN_URL = "https://webda.sh/auth/auth_post?";
 
-    public void setWebdashLogin(final WebdashLogin webdashLogin) {
-        if (null == webdashLogin) {
-            throw new IllegalArgumentException("null webdashLogin");
-        }
-        this.webDashLogin = webdashLogin;
-    }
+	private static final String ERROR_URL = "/webdashError.html";
 
-    public void setUserInfoHelper(final UserInfoHelper userInfoHelper) {
-        if (null == userInfoHelper) {
-            throw new IllegalArgumentException("null userInfoHelper");
-        }
-        this.userInfoHelper = userInfoHelper;
-    }
+	private static final String RESULT_KEY = "webdash-url";
 
-    public Map act(final Redirector redirector,
-            final SourceResolver sourceResolver, final Map objectModel,
-            final String string, final Parameters param) {
+	private UserInfoHelper userInfoHelper;
 
-        Request request = ObjectModelHelper.getRequest(objectModel);
-        
-        String nonce = request.getParameter("nonce");
-        String systemUserId = request.getParameter("system_user_id");
-        
-        UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
-        LDAPPerson person = userInfo.getLdapPerson();
-        Map<String, String> result = new HashMap<String, String>(1);
-        String url;
-        try {
-            if (null == systemUserId) {
-                url = this.webDashLogin.getRegistrationURL(person, nonce);
-            } else {
-                url = this.webDashLogin.getLoginURL(person, nonce);
-            }
-        } catch (IllegalArgumentException e) {
-            getLogger().error(e.getMessage(), e);
-            url = "/error_webdash.html?error=".concat(e.getMessage());
-        }
-        result.put("webdash-url", url);
-        return result;
-    }
+	private WebdashLogin webDashLogin;
 
-    public void service(final ServiceManager manager) throws ServiceException {
-        this.webDashLogin = (WebdashLogin) manager.lookup(WebdashLogin.ROLE);
-        this.userInfoHelper = (UserInfoHelper) manager
-                .lookup(UserInfoHelper.ROLE);
+	public void setWebdashLogin(final WebdashLogin webdashLogin) {
+		if (null == webdashLogin) {
+			throw new IllegalArgumentException("null webdashLogin");
+		}
+		this.webDashLogin = webdashLogin;
+	}
 
-    }
+	public void setUserInfoHelper(final UserInfoHelper userInfoHelper) {
+		if (null == userInfoHelper) {
+			throw new IllegalArgumentException("null userInfoHelper");
+		}
+		this.userInfoHelper = userInfoHelper;
+	}
+
+	public Map act(final Redirector redirector,
+			final SourceResolver sourceResolver, final Map objectModel,
+			final String string, final Parameters param) {
+
+		Request request = ObjectModelHelper.getRequest(objectModel);
+
+		String nonce = request.getParameter("nonce");
+		String systemUserId = request.getParameter("system_user_id");
+
+		UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
+		LDAPPerson person = userInfo.getLdapPerson();
+		Map<String, String> result = new HashMap<String, String>(1);
+		StringBuffer url = new StringBuffer();
+		url.append(systemUserId == null ? REGISTRATION_URL : LOGIN_URL);
+		try {
+			url.append(this.webDashLogin.getQueryString(person, nonce));
+			result.put(RESULT_KEY, url.toString());
+		} catch (IllegalArgumentException e) {
+			getLogger().error(e.getMessage(), e);
+			result.put(RESULT_KEY, ERROR_URL);
+		}
+		return result;
+	}
+
+	public void service(final ServiceManager manager) throws ServiceException {
+		this.webDashLogin = (WebdashLogin) manager.lookup(WebdashLogin.ROLE);
+		this.userInfoHelper = (UserInfoHelper) manager
+				.lookup(UserInfoHelper.ROLE);
+
+	}
 
 }
