@@ -30,7 +30,7 @@ public class VoyagerAction extends ServiceableAction implements ThreadSafe {
             final String string, final Parameters param) throws Exception {
         Request request = ObjectModelHelper.getRequest(objectModel);
         UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
-        LDAPPerson ldapPerson = userInfo.getLdapPerson();
+        LDAPPerson ldapPerson = userInfo.getPerson();
         if (null == ldapPerson) {
             throw new RuntimeException("Ldap user not found");
         }

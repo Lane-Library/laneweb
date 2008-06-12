@@ -6,6 +6,6 @@ public interface WebdashLogin {
 
     public static final String ROLE = WebdashLogin.class.getName();
 
-    String getQueryString(LDAPPerson person, String nonce);
+    String getWebdashURL(LDAPPerson person, String nonce, String systemUserId);
 
 }

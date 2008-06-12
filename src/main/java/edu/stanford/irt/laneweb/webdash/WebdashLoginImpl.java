@@ -12,12 +12,19 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 
 import org.apache.avalon.framework.activity.Initializable;
+import org.apache.avalon.framework.logger.AbstractLogEnabled;
 import org.apache.avalon.framework.thread.ThreadSafe;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class WebdashLoginImpl implements WebdashLogin, ThreadSafe,
-        Initializable {
+public class WebdashLoginImpl extends AbstractLogEnabled implements
+        WebdashLogin, ThreadSafe, Initializable {
+
+    private static final String REGISTRATION_URL = "https://webda.sh/auth/init_post?";
+
+    private static final String LOGIN_URL = "https://webda.sh/auth/auth_post?";
+
+    private static final String ERROR_URL = "/webdashError.html";
 
     private Mac mac;
 
@@ -41,15 +48,18 @@ public class WebdashLoginImpl implements WebdashLogin, ThreadSafe,
         setWebdashKey((String) context.lookup("java:comp/env/webdash-key"));
     }
 
-    public String getQueryString(final LDAPPerson person, final String nonce) {
-        if (null == person) {
-            throw new IllegalArgumentException("null person");
-        }
-        if (null == nonce) {
-            throw new IllegalArgumentException("null nonce");
-        }
+    public String getWebdashURL(final LDAPPerson person, final String nonce,
+            final String systemUserId) {
         if (null == this.mac) {
             throw new IllegalStateException("webdashKey not set");
+        }
+        if (null == person) {
+            getLogger().error("null person");
+            return ERROR_URL;
+        }
+        if (null == nonce) {
+            getLogger().error("null nonce");
+            return ERROR_URL;
         }
         String userId = encodeParameter(person.getUId());
         String mail = encodeParameter(userId.concat("@stanford.edu"));
@@ -58,10 +68,12 @@ public class WebdashLoginImpl implements WebdashLogin, ThreadSafe,
         StringBuffer result = new StringBuffer();
         result.append("email=").append(mail).append("&fullname=").append(
                 fullName).append("&nonce=").append(nonce).append("&subgroup=")
-                .append(affiliation).append("&system_short_name=stanford-sunet&system_user_id=")
+                .append(affiliation).append(
+                        "&system_short_name=stanford-sunet&system_user_id=")
                 .append(userId);
         String token = getToken(result.toString());
         result.append("&token=").append(token);
+        result.insert(0, systemUserId == null ? REGISTRATION_URL : LOGIN_URL);
         return result.toString();
     }
 

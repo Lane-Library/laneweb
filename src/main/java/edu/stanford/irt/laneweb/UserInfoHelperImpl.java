@@ -67,7 +67,7 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements
             if ((requestSunetId != null)
                     && !LanewebConstants.UNSET.equals(requestSunetId)) {
                 userInfo.setSunetId(requestSunetId);
-                userInfo.setLdapPerson(this.ldapClient
+                userInfo.setPerson(this.ldapClient
                         .getLdapPerson(requestSunetId));
             }
         }

@@ -12,7 +12,7 @@ public class UserInfo {
 
     private Ticket ticket;
 
-    private LDAPPerson ldapPerson;
+    private LDAPPerson person;
 
     public Affiliation getAffiliation() {
         return this.affiliation;
@@ -22,12 +22,12 @@ public class UserInfo {
         this.affiliation = affiliation;
     }
 
-    public LDAPPerson getLdapPerson() {
-        return this.ldapPerson;
+    public LDAPPerson getPerson() {
+        return this.person;
     }
 
-    public void setLdapPerson(final LDAPPerson ldapPerson) {
-        this.ldapPerson = ldapPerson;
+    public void setPerson(final LDAPPerson person) {
+        this.person = person;
     }
 
     public Boolean getProxyLinks() {
@@ -58,7 +58,7 @@ public class UserInfo {
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append("affiliation=").append(this.affiliation).append(' ');
-        sb.append("ldapPerson=").append(this.ldapPerson).append(' ');
+        sb.append("ldapPerson=").append(this.person).append(' ');
         sb.append("proxyLinks=").append(this.proxyLinks).append(' ');
         sb.append("sunetId=").append(this.sunetId).append(' ');
         sb.append("ticket=").append(this.ticket);

@@ -80,7 +80,7 @@ public class UserInfoHelperTest extends TestCase {
         assertEquals(this.sunetid, userInfo.getSunetId());
         assertNotNull(userInfo.getTicket());
         assertEquals(46, userInfo.getTicket().toString().length());
-        assertEquals(this.sunetid, userInfo.getLdapPerson().getSunetId()[0]);
+        assertEquals(this.sunetid, userInfo.getPerson().getSunetId()[0]);
         verify(this.session);
         verify(this.request);
     }

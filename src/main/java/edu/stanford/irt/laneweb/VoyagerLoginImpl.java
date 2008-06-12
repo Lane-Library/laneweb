@@ -55,7 +55,7 @@ public class VoyagerLoginImpl extends AbstractLogEnabled implements
         }
 
         String univId = "0" + ldapPerson.getUnivId(); // voyager data prepends
-                                                        // 0
+        // 0
         String voyagerPid = request.getParameter("PID");
 
         boolean clearedSession = clearPatronSession(conn, univId, voyagerPid);
