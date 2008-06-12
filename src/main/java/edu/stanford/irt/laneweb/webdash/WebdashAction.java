@@ -8,6 +8,7 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
+import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
@@ -19,7 +20,7 @@ import edu.stanford.irt.laneweb.UserInfo;
 import edu.stanford.irt.laneweb.UserInfoHelper;
 
 public class WebdashAction extends AbstractLogEnabled implements Action,
-		Serviceable {
+		Serviceable, ThreadSafe {
 
 	private static final String REGISTRATION_URL = "https://webda.sh/auth/init_post?";
 
