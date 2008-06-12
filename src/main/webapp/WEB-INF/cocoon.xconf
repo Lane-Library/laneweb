@@ -114,10 +114,8 @@
   <component logger="core.webdash-login"
     role="edu.stanford.irt.laneweb.webdash.WebdashLogin"
     class="edu.stanford.irt.laneweb.webdash.WebdashLoginImpl">
-      <parameter name="login-url" value="http://lane.stanford.edu/index.html?"/>
-      <parameter name="registration-url" value="http://irt-lanelocal.stanford.edu/index.html?"/>
-      <!--    <parameter name="registration-url" value="https://webda.sh/auth/init_post?"/>
-    <parameter name="login-url" value="https://webda.sh/auth/auth_post?"/>-->
+      <parameter name="registration-url" value="https://webda.sh/auth/init_post?"/>
+    <parameter name="login-url" value="https://webda.sh/auth/auth_post?"/>
     <parameter name="group-name" value="stanford-sunet"/>
   </component>
 
