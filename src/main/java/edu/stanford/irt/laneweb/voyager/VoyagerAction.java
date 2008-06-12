@@ -18,7 +18,7 @@ import edu.stanford.irt.laneweb.UserInfo;
 import edu.stanford.irt.laneweb.UserInfoHelper;
 
 public class VoyagerAction implements Serviceable, ThreadSafe {
-    
+
     private static final String VOYAGER_KEY = "voyager-url";
 
     private UserInfoHelper userInfoHelper = null;
@@ -28,7 +28,7 @@ public class VoyagerAction implements Serviceable, ThreadSafe {
     public Map act(final Redirector redirector,
             final SourceResolver sourceResolver, final Map objectModel,
             final String string, final Parameters param) throws Exception {
-        
+
         Request request = ObjectModelHelper.getRequest(objectModel);
         String pid = request.getParameter("PID");
         String queryString = request.getQueryString();
@@ -37,28 +37,27 @@ public class VoyagerAction implements Serviceable, ThreadSafe {
 
         String url = this.voyagerLogin.getVoyagerURL(person, pid, queryString);
         Map<String, String> result = new HashMap<String, String>(1);
-        result.put(VOYAGER_KEY,url);
+        result.put(VOYAGER_KEY, url);
         return result;
     }
-    
+
     public void setVoyagerLogin(final VoyagerLogin voyagerLogin) {
         if (null == voyagerLogin) {
             throw new IllegalArgumentException("null voyagerLogin");
         }
         this.voyagerLogin = voyagerLogin;
     }
-    
+
     public void setUserInfoHelper(final UserInfoHelper userInfoHelper) {
         if (null == userInfoHelper) {
             throw new IllegalArgumentException("null userInfoHelper");
         }
         this.userInfoHelper = userInfoHelper;
     }
-    
+
     public void service(final ServiceManager manager) throws ServiceException {
         setVoyagerLogin((VoyagerLogin) manager.lookup(VoyagerLogin.ROLE));
-        setUserInfoHelper((UserInfoHelper) manager
-                .lookup(UserInfoHelper.ROLE));
+        setUserInfoHelper((UserInfoHelper) manager.lookup(UserInfoHelper.ROLE));
     }
 
 }

@@ -1,10 +1,10 @@
 package edu.stanford.irt.laneweb.voyager;
 
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
-import static org.easymock.classextension.EasyMock.isA;
 import static org.junit.Assert.assertEquals;
 
 import java.sql.Connection;
@@ -19,13 +19,16 @@ import org.junit.Test;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
-
 public class VoyagerLoginImplTest {
 
     private VoyagerLoginImpl voyagerLogin;
+
     private LDAPPerson person;
+
     private DataSource dataSource;
+
     private Connection connection;
+
     private PreparedStatement statement;
 
     @Before
@@ -48,8 +51,10 @@ public class VoyagerLoginImplTest {
         expect(this.statement.executeUpdate()).andReturn(new Integer(1));
         this.statement.close();
         replay(this.statement);
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(
+                this.statement);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(
+                this.statement);
         this.connection.close();
         replay(this.connection);
         expect(this.dataSource.getConnection()).andReturn(this.connection);
@@ -59,7 +64,7 @@ public class VoyagerLoginImplTest {
         this.voyagerLogin.setDataSource(this.dataSource);
         assertEquals(
                 "http://lmldb-test.stanford.edu/cgi-bin/Pwebrecon.cgi?a=b&authenticate=Y",
-                this.voyagerLogin.getVoyagerURL(this.person,"123", "a=b"));
+                this.voyagerLogin.getVoyagerURL(this.person, "123", "a=b"));
         verify(this.person);
         verify(this.dataSource);
         verify(this.connection);
@@ -70,10 +75,12 @@ public class VoyagerLoginImplTest {
     public void testDeleteError() throws SQLException {
         this.statement.setString(1, "0999");
         this.statement.setString(2, "123");
-        expect(this.statement.executeUpdate()).andThrow(new SQLException("oops"));
+        expect(this.statement.executeUpdate()).andThrow(
+                new SQLException("oops"));
         this.statement.close();
         replay(this.statement);
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(
+                this.statement);
         this.connection.close();
         replay(this.connection);
         expect(this.dataSource.getConnection()).andReturn(this.connection);
@@ -81,9 +88,8 @@ public class VoyagerLoginImplTest {
         expect(this.person.getUnivId()).andReturn("999");
         replay(this.person);
         this.voyagerLogin.setDataSource(this.dataSource);
-        assertEquals(
-                "/voyagerError.html",
-                this.voyagerLogin.getVoyagerURL(this.person,"123", "a=b"));
+        assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL(
+                this.person, "123", "a=b"));
         verify(this.person);
         verify(this.dataSource);
         verify(this.connection);
@@ -97,11 +103,14 @@ public class VoyagerLoginImplTest {
         expect(this.statement.executeUpdate()).andReturn(new Integer(0));
         this.statement.setString(1, "0999");
         this.statement.setString(2, "123");
-        expect(this.statement.executeUpdate()).andThrow(new SQLException("oops"));
+        expect(this.statement.executeUpdate()).andThrow(
+                new SQLException("oops"));
         this.statement.close();
         replay(this.statement);
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(
+                this.statement);
+        expect(this.connection.prepareStatement(isA(String.class))).andReturn(
+                this.statement);
         this.connection.close();
         replay(this.connection);
         expect(this.dataSource.getConnection()).andReturn(this.connection);
@@ -109,9 +118,8 @@ public class VoyagerLoginImplTest {
         expect(this.person.getUnivId()).andReturn("999");
         replay(this.person);
         this.voyagerLogin.setDataSource(this.dataSource);
-        assertEquals(
-                "/voyagerError.html",
-                this.voyagerLogin.getVoyagerURL(this.person,"123", "a=b"));
+        assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL(
+                this.person, "123", "a=b"));
         verify(this.person);
         verify(this.dataSource);
         verify(this.connection);
@@ -127,6 +135,5 @@ public class VoyagerLoginImplTest {
                 this.person, null, "a=b"));
         verify(this.person);
     }
-
 
 }
