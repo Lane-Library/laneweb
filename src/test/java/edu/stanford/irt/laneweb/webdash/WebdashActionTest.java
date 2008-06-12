@@ -9,7 +9,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.Map;
 
 import org.apache.avalon.framework.logger.Logger;
-import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.Request;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,8 +22,6 @@ public class WebdashActionTest {
     private WebdashAction action;
 
     private Map objectModel;
-
-    private Parameters parameters;
 
     private Request request;
 
@@ -40,7 +37,6 @@ public class WebdashActionTest {
     public void setUp() throws Exception {
         this.action = new WebdashAction();
         this.objectModel = createMock(Map.class);
-        this.parameters = createMock(Parameters.class);
         this.request = createMock(Request.class);
         this.userInfoHelper = createMock(UserInfoHelper.class);
         this.userInfo = createMock(UserInfo.class);
@@ -50,12 +46,10 @@ public class WebdashActionTest {
 
     @Test
     public void testRegister() {
-        expect(this.parameters.getParameter("nonce", null)).andReturn("nonce");
-        expect(this.parameters.getParameter("system-user-id", null)).andReturn(
-                null);
-        replay(this.parameters);
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
+        expect(this.request.getParameter("nonce")).andReturn("nonce");
+        expect(this.request.getParameter("system_user_id")).andReturn(null);
         replay(this.request);
         expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(
                 this.userInfo);
@@ -68,10 +62,8 @@ public class WebdashActionTest {
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserInfoHelper(this.userInfoHelper);
-        Map result = this.action.act(null, null, this.objectModel, null,
-                this.parameters);
+        Map result = this.action.act(null, null, this.objectModel, null, null);
         assertEquals(result.get("webdash-url"), "register");
-        verify(this.parameters);
         verify(this.objectModel);
         verify(this.request);
         verify(this.userInfoHelper);
@@ -82,12 +74,11 @@ public class WebdashActionTest {
 
     @Test
     public void testLogin() {
-        expect(this.parameters.getParameter("nonce", null)).andReturn("nonce");
-        expect(this.parameters.getParameter("system-user-id", null)).andReturn(
-                "ceyates");
-        replay(this.parameters);
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
+        expect(this.request.getParameter("nonce")).andReturn("nonce");
+        expect(this.request.getParameter("system_user_id"))
+                .andReturn("ceyates");
         replay(this.request);
         expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(
                 this.userInfo);
@@ -100,10 +91,8 @@ public class WebdashActionTest {
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserInfoHelper(this.userInfoHelper);
-        Map result = this.action.act(null, null, this.objectModel, null,
-                this.parameters);
+        Map result = this.action.act(null, null, this.objectModel, null, null);
         assertEquals(result.get("webdash-url"), "login");
-        verify(this.parameters);
         verify(this.objectModel);
         verify(this.request);
         verify(this.userInfoHelper);
@@ -114,12 +103,11 @@ public class WebdashActionTest {
 
     @Test
     public void testError() {
-        expect(this.parameters.getParameter("nonce", null)).andReturn("nonce");
-        expect(this.parameters.getParameter("system-user-id", null)).andReturn(
-                "ceyates");
-        replay(this.parameters);
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
+        expect(this.request.getParameter("nonce")).andReturn("nonce");
+        expect(this.request.getParameter("system_user_id"))
+                .andReturn("ceyates");
         replay(this.request);
         expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(
                 this.userInfo);
@@ -133,11 +121,9 @@ public class WebdashActionTest {
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserInfoHelper(this.userInfoHelper);
         this.action.enableLogging(createMock(Logger.class));
-        Map result = this.action.act(null, null, this.objectModel, null,
-                this.parameters);
+        Map result = this.action.act(null, null, this.objectModel, null, null);
         assertEquals(result.get("webdash-url"),
                 "/error_webdash.html?error=broken");
-        verify(this.parameters);
         verify(this.objectModel);
         verify(this.request);
         verify(this.userInfoHelper);

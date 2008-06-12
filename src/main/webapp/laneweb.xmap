@@ -228,8 +228,6 @@
             </map:match>
             <map:match pattern="secure/webdash.html">
                 <map:act type="webdash">
-                    <map:parameter name="nonce" value="{request-param:nonce}"/>
-                    <map:parameter name="system-user-id" value="{request-param:system_user_id}"/>
                     <map:redirect-to uri="{webdash-url}"/>
                 </map:act>
             </map:match>

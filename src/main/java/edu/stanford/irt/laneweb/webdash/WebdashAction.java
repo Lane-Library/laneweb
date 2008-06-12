@@ -44,9 +44,10 @@ public class WebdashAction extends AbstractLogEnabled implements Action,
             final String string, final Parameters param) {
 
         Request request = ObjectModelHelper.getRequest(objectModel);
-
-        String nonce = param.getParameter("nonce", null);
-        String systemUserId = param.getParameter("system-user-id", null);
+        
+        String nonce = request.getParameter("nonce");
+        String systemUserId = request.getParameter("system_user_id");
+        
         UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
         LDAPPerson person = userInfo.getLdapPerson();
         Map<String, String> result = new HashMap<String, String>(1);
