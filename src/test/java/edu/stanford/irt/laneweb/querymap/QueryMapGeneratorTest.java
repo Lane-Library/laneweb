@@ -35,9 +35,9 @@ public class QueryMapGeneratorTest {
     private ServiceManager serviceManager;
 
     private Parameters parameters;
-    
+
     private QueryMapper queryMapper;
-    
+
     private XMLConsumer consumer;
 
     @Before
@@ -48,13 +48,14 @@ public class QueryMapGeneratorTest {
         this.queryMapper = createMock(QueryMapper.class);
         this.consumer = createMock(XMLConsumer.class);
     }
-    
+
     @Test
     public void testSetQueryMapper() {
         try {
             this.generator.setQueryMapper(null);
             fail();
-        } catch(IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
         this.generator.setQueryMapper(this.queryMapper);
     }
 
@@ -65,7 +66,8 @@ public class QueryMapGeneratorTest {
             fail();
         } catch (IllegalArgumentException e) {
         }
-        expect(this.serviceManager.lookup(QueryMapper.ROLE)).andReturn(this.queryMapper);
+        expect(this.serviceManager.lookup(QueryMapper.ROLE)).andReturn(
+                this.queryMapper);
         replay(this.serviceManager);
         this.generator.service(this.serviceManager);
         verify(this.serviceManager);
@@ -93,7 +95,8 @@ public class QueryMapGeneratorTest {
         replay(descriptor);
         ResourceMap resourceMap = createMock(ResourceMap.class);
         expect(resourceMap.getDescriptor()).andReturn(descriptor);
-        expect(resourceMap.getResources()).andReturn(Collections.<String>singleton("yo"));
+        expect(resourceMap.getResources()).andReturn(
+                Collections.<String> singleton("yo"));
         replay(resourceMap);
         QueryMap queryMap = createMock(QueryMap.class);
         expect(queryMap.getQuery()).andReturn("dvt");
@@ -124,8 +127,8 @@ public class QueryMapGeneratorTest {
         }
         this.generator.setConsumer(this.consumer);
     }
-    
-    //TODO I don't know if this actually does what I want it to.
+
+    // TODO I don't know if this actually does what I want it to.
     @Test
     public void testThreads() throws ServiceException {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors
@@ -133,9 +136,12 @@ public class QueryMapGeneratorTest {
         QueryMapper fauxQueryMapper = new QueryMapper() {
 
             public QueryMap getQueryMap(String query) {
-                Descriptor descriptor = new Descriptor(query, query, Collections.<String>singleton(query));
-                return new QueryMap(query, descriptor,new ResourceMap(descriptor,Collections.<String>singleton(query)));
-            }};
+                Descriptor descriptor = new Descriptor(query, query,
+                        Collections.<String> singleton(query));
+                return new QueryMap(query, descriptor, new ResourceMap(
+                        descriptor, Collections.<String> singleton(query)));
+            }
+        };
         this.generator.setQueryMapper(fauxQueryMapper);
         for (int i = 999; i > -1; i--) {
             final String response = Integer.toString(i);
@@ -143,21 +149,32 @@ public class QueryMapGeneratorTest {
 
                 public void run() {
                     Parameters params = createMock(Parameters.class);
-                    expect(params.getParameter("query", null)).andReturn(response);
+                    expect(params.getParameter("query", null)).andReturn(
+                            response);
                     replay(params);
                     QueryMapGeneratorTest.this.generator.setup(null, null,
                             null, params);
-                    QueryMapGeneratorTest.this.generator.setConsumer(new AbstractXMLConsumer() {
-                        public void characters(char[] chars, int start, int length) {
-                            assertEquals(response, new String(chars, start, length));
-                            
-                        }
-                        public void startElement(String ns, String localName, String aName, Attributes atts) {
-                            if (atts.getLength() > 0) {
-                                assertEquals(response, atts.getValue(0));
-                            }
-                        }
-                    });
+                    QueryMapGeneratorTest.this.generator
+                            .setConsumer(new AbstractXMLConsumer() {
+
+                                @Override
+                                public void characters(final char[] chars,
+                                        final int start, final int length) {
+                                    assertEquals(response, new String(chars,
+                                            start, length));
+
+                                }
+
+                                @Override
+                                public void startElement(final String ns,
+                                        final String localName,
+                                        final String aName,
+                                        final Attributes atts) {
+                                    if (atts.getLength() > 0) {
+                                        assertEquals(response, atts.getValue(0));
+                                    }
+                                }
+                            });
                     try {
                         Thread.sleep(Long.parseLong(response));
                         QueryMapGeneratorTest.this.generator.generate();
@@ -178,7 +195,7 @@ public class QueryMapGeneratorTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        
+
     }
 
 }

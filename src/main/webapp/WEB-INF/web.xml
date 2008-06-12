@@ -40,7 +40,7 @@
 		</context-param-->
 
 	<!-- Servlet Configuration ========================================== -->
-	<filter>
+<!--	<filter>
 		<filter-name>LanewebHTTPSFilter</filter-name>
 		<filter-class>
 			edu.stanford.irt.laneweb.LanewebHTTPSFilter
@@ -49,7 +49,7 @@
 	<filter-mapping>
 		<filter-name>LanewebHTTPSFilter</filter-name>
 		<url-pattern>/secure/*</url-pattern>
-	</filter-mapping>
+	</filter-mapping>-->
 
 	<servlet>
 		<servlet-name>Cocoon</servlet-name>

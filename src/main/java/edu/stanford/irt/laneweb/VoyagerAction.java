@@ -25,8 +25,9 @@ public class VoyagerAction extends ServiceableAction implements ThreadSafe {
 
     private DataSourceComponent dataSource;
 
-    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string,
-            final Parameters param) throws Exception {
+    public Map act(final Redirector redirector,
+            final SourceResolver sourceResolver, final Map objectModel,
+            final String string, final Parameters param) throws Exception {
         Request request = ObjectModelHelper.getRequest(objectModel);
         UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
         LDAPPerson ldapPerson = userInfo.getLdapPerson();
@@ -37,9 +38,10 @@ public class VoyagerAction extends ServiceableAction implements ThreadSafe {
         if (null == conn) {
             throw new RuntimeException("voyager database connection not found");
         }
-        String url = this.voyagerLogin.initPatronSession(ldapPerson, request, conn);
+        String url = this.voyagerLogin.initPatronSession(ldapPerson, request,
+                conn);
         if (null != conn) {
-          conn.close();
+            conn.close();
         }
         redirector.globalRedirect(true, url);
         return EMPTY_MAP;
@@ -49,13 +51,14 @@ public class VoyagerAction extends ServiceableAction implements ThreadSafe {
     public void service(final ServiceManager manager) throws ServiceException {
         super.service(manager);
         this.voyagerLogin = (VoyagerLogin) manager.lookup(VoyagerLogin.ROLE);
-        this.userInfoHelper = (UserInfoHelper) manager.lookup(UserInfoHelper.ROLE);
+        this.userInfoHelper = (UserInfoHelper) manager
+                .lookup(UserInfoHelper.ROLE);
 
-        ServiceSelector selector = (ServiceSelector) manager.lookup(DataSourceComponent.ROLE + "Selector");
+        ServiceSelector selector = (ServiceSelector) manager
+                .lookup(DataSourceComponent.ROLE + "Selector");
         this.dataSource = (DataSourceComponent) selector.select("voyager");
 
         this.manager.release(selector);
     }
 
 }
-

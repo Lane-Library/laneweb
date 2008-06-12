@@ -10,7 +10,6 @@ import edu.stanford.irt.querymap.Descriptor;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.ResourceMap;
 
-
 public class XMLizableQueryMap implements XMLizable {
 
     private static final String QUERY_MAP = "query-map";
@@ -26,9 +25,9 @@ public class XMLizableQueryMap implements XMLizable {
     private static final String IDREF = "idref";
 
     private static final String NAMESPACE = "http://lane.stanford.edu/querymap/ns";
-    
+
     private QueryMap queryMap;
-    
+
     public XMLizableQueryMap(final QueryMap queryMap) {
         if (null == queryMap) {
             throw new IllegalArgumentException("null queryMap");
@@ -36,16 +35,16 @@ public class XMLizableQueryMap implements XMLizable {
         this.queryMap = queryMap;
     }
 
-    public void toSAX(ContentHandler consumer) throws SAXException {
+    public void toSAX(final ContentHandler consumer) throws SAXException {
         consumer.startPrefixMapping("", NAMESPACE);
         XMLUtils.startElement(consumer, NAMESPACE, QUERY_MAP);
-        XMLUtils.createElementNS(consumer, NAMESPACE, QUERY, queryMap
+        XMLUtils.createElementNS(consumer, NAMESPACE, QUERY, this.queryMap
                 .getQuery());
-        Descriptor descriptor = queryMap.getDescriptor();
+        Descriptor descriptor = this.queryMap.getDescriptor();
         if (null != descriptor) {
             XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR,
                     descriptor.getDescriptorName());
-            ResourceMap resourceMap = queryMap.getResourceMap();
+            ResourceMap resourceMap = this.queryMap.getResourceMap();
             if (null != resourceMap) {
                 XMLUtils.startElement(consumer, NAMESPACE, RESOURCE_MAP);
                 XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR,
@@ -53,8 +52,8 @@ public class XMLizableQueryMap implements XMLizable {
                 for (String idref : resourceMap.getResources()) {
                     AttributesImpl atts = new AttributesImpl();
                     atts.addAttribute("", IDREF, IDREF, "IDREF", idref);
-                    XMLUtils.createElementNS(consumer, NAMESPACE,
-                            RESOURCE, atts);
+                    XMLUtils.createElementNS(consumer, NAMESPACE, RESOURCE,
+                            atts);
                 }
                 XMLUtils.endElement(consumer, NAMESPACE, RESOURCE_MAP);
             }

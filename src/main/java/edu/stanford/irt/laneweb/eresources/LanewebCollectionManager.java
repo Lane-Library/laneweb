@@ -18,21 +18,21 @@ import edu.stanford.irt.eresources.impl.CollectionManagerImpl;
 public class LanewebCollectionManager extends CollectionManagerImpl implements
         ThreadSafe, Serviceable {
 
-    public void service(ServiceManager manager) throws ServiceException {
+    public void service(final ServiceManager manager) throws ServiceException {
         ServiceSelector selector = (ServiceSelector) manager
                 .lookup(DataSourceComponent.ROLE + "Selector");
         final DataSourceComponent dataSourceComponent = (DataSourceComponent) selector
-        .select("eresources");
+                .select("eresources");
         super.setDataSource(new DataSource() {
-            
+
             private PrintWriter logWriter;
 
             public Connection getConnection() throws SQLException {
                 return dataSourceComponent.getConnection();
             }
 
-            public Connection getConnection(String username, String password)
-                    throws SQLException {
+            public Connection getConnection(final String username,
+                    final String password) throws SQLException {
                 return dataSourceComponent.getConnection();
             }
 
@@ -44,14 +44,15 @@ public class LanewebCollectionManager extends CollectionManagerImpl implements
                 throw new UnsupportedOperationException("sorry, can't do that");
             }
 
-            public void setLogWriter(PrintWriter out) throws SQLException {
+            public void setLogWriter(final PrintWriter out) throws SQLException {
                 this.logWriter = out;
             }
 
-            public void setLoginTimeout(int seconds) throws SQLException {
+            public void setLoginTimeout(final int seconds) throws SQLException {
                 throw new UnsupportedOperationException("sorry, can't do that");
-                
-            }});
+
+            }
+        });
         manager.release(selector);
     }
 

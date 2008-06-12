@@ -7,9 +7,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.spell.SpellCheckResult;
 
-
-public class XMLizableSpellCheckResult implements
-        XMLizable {
+public class XMLizableSpellCheckResult implements XMLizable {
 
     private static final String SPELLCHECK = "spellcheck";
 
@@ -18,23 +16,24 @@ public class XMLizableSpellCheckResult implements
     private static final String SUGGESTION = "suggestion";
 
     private static final String NAMESPACE = "http://lane.stanford.edu/spellcheck/ns";
-    
+
     private SpellCheckResult result;
-    
+
     private String query;
 
-    public XMLizableSpellCheckResult(final String query, final SpellCheckResult result) {
+    public XMLizableSpellCheckResult(final String query,
+            final SpellCheckResult result) {
         this.query = query;
         this.result = result;
     }
 
-    public void toSAX(ContentHandler consumer) throws SAXException {
+    public void toSAX(final ContentHandler consumer) throws SAXException {
         XMLUtils.startElement(consumer, NAMESPACE, SPELLCHECK);
-            XMLUtils.createElementNS(consumer, NAMESPACE, QUERY, this.query);
-            if (null != result.getSuggestion()) {
-                XMLUtils.createElementNS(consumer, NAMESPACE, SUGGESTION,
-                        result.getSuggestion());
-            }
+        XMLUtils.createElementNS(consumer, NAMESPACE, QUERY, this.query);
+        if (null != this.result.getSuggestion()) {
+            XMLUtils.createElementNS(consumer, NAMESPACE, SUGGESTION,
+                    this.result.getSuggestion());
+        }
         XMLUtils.endElement(consumer, NAMESPACE, SPELLCHECK);
     }
 

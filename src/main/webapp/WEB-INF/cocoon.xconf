@@ -112,12 +112,13 @@
   </datasources>
   
   <component logger="core.webdash-login"
-    role="edu.stanford.irt.laneweb.WebDashLogin"
-    class="edu.stanford.irt.laneweb.WebDashLoginImpl">
-    <parameter name="webdashRegistrationURL" value="https://webda.sh/auth/init_post?"/>
-    <parameter name="webdashLoginURL" value="https://webda.sh/auth/auth_post?"/>
-    <parameter name="groupName" value="stanford-sunet"/>
-    <parameter name="dateFormat" value="yyyy-MM-dd"/>
+    role="edu.stanford.irt.laneweb.webdash.WebdashLogin"
+    class="edu.stanford.irt.laneweb.webdash.WebdashLoginImpl">
+      <parameter name="login-url" value="http://lane.stanford.edu/index.html?"/>
+      <parameter name="registration-url" value="http://irt-lanelocal.stanford.edu/index.html?"/>
+      <!--    <parameter name="registration-url" value="https://webda.sh/auth/init_post?"/>
+    <parameter name="login-url" value="https://webda.sh/auth/auth_post?"/>-->
+    <parameter name="group-name" value="stanford-sunet"/>
   </component>
 
   <component logger="core.voyager-login"

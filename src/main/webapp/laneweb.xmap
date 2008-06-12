@@ -126,8 +126,8 @@
             </map:action>
             <map:action logger="sitemap.action.javascript-logger" name="javascript-logger"
                 src="edu.stanford.irt.laneweb.JavascriptLoggerAction"/>
-            <map:action logger="sitemap.action.webdash" name="webdashAction"
-                src="edu.stanford.irt.laneweb.WebdashAction"/>
+            <map:action logger="sitemap.action.webdash" name="webdash"
+                src="edu.stanford.irt.laneweb.webdash.WebdashAction"/>
             <map:action logger="sitemap.action.voyager" name="voyagerAction"
                 src="edu.stanford.irt.laneweb.VoyagerAction"/>
             <map:action name="session-action" src="edu.stanford.irt.laneweb.LanewebSessionAction"/>
@@ -227,7 +227,11 @@
                 <map:act type="loginAction"/>
             </map:match>
             <map:match pattern="secure/webdash.html">
-                <map:act type="webdashAction"/>
+                <map:act type="webdash">
+                    <map:parameter name="nonce" value="{request-param:nonce}"/>
+                    <map:parameter name="system-user-id" value="{request-param:system_user_id}"/>
+                    <map:redirect-to uri="{webdash-url}"/>
+                </map:act>
             </map:match>
             <map:match pattern="secure/voyager.html">
                 <map:act type="voyagerAction"/>

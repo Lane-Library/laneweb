@@ -17,17 +17,21 @@ import edu.stanford.irt.querymap.DescriptorWeightMap;
 import edu.stanford.irt.querymap.QueryToDescriptor;
 import edu.stanford.irt.querymap.StreamResourceMapping;
 
-public class QueryMapperImpl extends edu.stanford.irt.querymap.QueryMapper implements
-        edu.stanford.irt.laneweb.querymap.QueryMapper {
-    
+public class QueryMapperImpl extends edu.stanford.irt.querymap.QueryMapper
+        implements edu.stanford.irt.laneweb.querymap.QueryMapper {
+
     public QueryMapperImpl() {
         InputStream resourceMap = null;
         InputStream descriptorWeights = null;
         try {
             Context context = new InitialContext();
-            String liveBase = (String) context.lookup("java:comp/env/live-base");
-            resourceMap = new URL(liveBase + "/resources/querymap/resource-maps.xml").openStream();
-            descriptorWeights = new URL(liveBase + "/resources/querymap/descriptor-weights.xml").openStream();
+            String liveBase = (String) context
+                    .lookup("java:comp/env/live-base");
+            resourceMap = new URL(liveBase
+                    + "/resources/querymap/resource-maps.xml").openStream();
+            descriptorWeights = new URL(liveBase
+                    + "/resources/querymap/descriptor-weights.xml")
+                    .openStream();
         } catch (NamingException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -37,11 +41,14 @@ public class QueryMapperImpl extends edu.stanford.irt.querymap.QueryMapper imple
         super.setDescriptorManager(descriptorManager);
         QueryToDescriptor queryToDescriptor = new QueryToDescriptor();
         queryToDescriptor.setDescriptorManager(descriptorManager);
-        queryToDescriptor.setHttpClient(new HttpClient(new MultiThreadedHttpConnectionManager()));
+        queryToDescriptor.setHttpClient(new HttpClient(
+                new MultiThreadedHttpConnectionManager()));
         setQueryToDescriptor(queryToDescriptor);
         DescriptorToResource descriptorToResource = new DescriptorToResource();
-        descriptorToResource.setResourceMap(new StreamResourceMapping(resourceMap));
-        queryToDescriptor.setDescriptorWeights(new DescriptorWeightMap(descriptorWeights));
+        descriptorToResource.setResourceMap(new StreamResourceMapping(
+                resourceMap));
+        queryToDescriptor.setDescriptorWeights(new DescriptorWeightMap(
+                descriptorWeights));
         super.setDescriptorToResource(descriptorToResource);
     }
 

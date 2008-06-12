@@ -14,7 +14,8 @@ import org.apache.cocoon.environment.Request;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class VoyagerLoginImpl extends AbstractLogEnabled implements VoyagerLogin, ThreadSafe, Parameterizable {
+public class VoyagerLoginImpl extends AbstractLogEnabled implements
+        VoyagerLogin, ThreadSafe, Parameterizable {
 
     private static final String CLEAR_SESSION_SQL = "DELETE FROM LMLDB.WOPAC_PID_PATRON_KEYS WHERE ";
 
@@ -33,42 +34,49 @@ public class VoyagerLoginImpl extends AbstractLogEnabled implements VoyagerLogin
         if (ldapPerson == null) {
             return "ldapPerson";
         }
-        if (request.getParameter("PID") == null || request.getParameter("PID").length() == 0
-                || !request.getParameter("PID").matches("[\\w0-9-_]+") ) {
+        if ((request.getParameter("PID") == null)
+                || (request.getParameter("PID").length() == 0)
+                || !request.getParameter("PID").matches("[\\w0-9-_]+")) {
             return "PID";
         }
-        if (ldapPerson.getUnivId() == null || ldapPerson.getUnivId().length() == 0) {
-            return "univId"; 
+        if ((ldapPerson.getUnivId() == null)
+                || (ldapPerson.getUnivId().length() == 0)) {
+            return "univId";
         }
         return null;
     }
 
-    public String initPatronSession(final LDAPPerson ldapPerson, final Request request, final Connection conn)
+    public String initPatronSession(final LDAPPerson ldapPerson,
+            final Request request, final Connection conn)
             throws ProcessingException, SQLException {
         String error = validation(ldapPerson, request);
         if (error != null) {
-          return this.errorUrl.concat(error);
+            return this.errorUrl.concat(error);
         }
 
-        String univId = "0" + ldapPerson.getUnivId(); // voyager data prepends 0
+        String univId = "0" + ldapPerson.getUnivId(); // voyager data prepends
+                                                        // 0
         String voyagerPid = request.getParameter("PID");
 
         boolean clearedSession = clearPatronSession(conn, univId, voyagerPid);
         boolean createdSession = createPatronSession(conn, univId, voyagerPid);
 
-        if (false == clearedSession || false == createdSession) {
-          return this.errorUrl.concat("database");
+        if ((false == clearedSession) || (false == createdSession)) {
+            return this.errorUrl.concat("database");
         }
 
-        return this.baseUrl.concat(request.getQueryString()).concat("&authenticate=Y");
+        return this.baseUrl.concat(request.getQueryString()).concat(
+                "&authenticate=Y");
     }
 
-    private boolean clearPatronSession(final Connection conn, final String univId, final String voyagerPid)
+    private boolean clearPatronSession(final Connection conn,
+            final String univId, final String voyagerPid)
             throws ProcessingException {
         PreparedStatement stmt = null;
         int rs = -1;
         try {
-            stmt = conn.prepareStatement(CLEAR_SESSION_SQL + " PATRON_KEY = '" + univId + "' OR PID = '" + voyagerPid + "'");
+            stmt = conn.prepareStatement(CLEAR_SESSION_SQL + " PATRON_KEY = '"
+                    + univId + "' OR PID = '" + voyagerPid + "'");
             rs = stmt.executeUpdate();
         } catch (SQLException e) {
             throw new ProcessingException(e);
@@ -84,12 +92,14 @@ public class VoyagerLoginImpl extends AbstractLogEnabled implements VoyagerLogin
         return rs >= 0;
     }
 
-    private boolean createPatronSession(final Connection conn, final String univId, final String voyagerPid)
+    private boolean createPatronSession(final Connection conn,
+            final String univId, final String voyagerPid)
             throws ProcessingException {
         PreparedStatement stmt = null;
         int rs = -1;
         try {
-            stmt = conn.prepareStatement(CREATE_SESSION_SQL + "('" + univId + "','" + voyagerPid + "')");
+            stmt = conn.prepareStatement(CREATE_SESSION_SQL + "('" + univId
+                    + "','" + voyagerPid + "')");
             rs = stmt.executeUpdate();
         } catch (SQLException e) {
             throw new ProcessingException(e);
@@ -106,4 +116,3 @@ public class VoyagerLoginImpl extends AbstractLogEnabled implements VoyagerLogin
     }
 
 }
-

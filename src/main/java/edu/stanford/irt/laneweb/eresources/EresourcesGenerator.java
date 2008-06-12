@@ -19,7 +19,8 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 
-public class EresourcesGenerator extends ServiceableGenerator implements Parameterizable, Initializable {
+public class EresourcesGenerator extends ServiceableGenerator implements
+        Parameterizable, Initializable {
 
     private static final String QUERY = "q";
 
@@ -30,9 +31,9 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
     private static final String ALPHA = "a";
 
     private static final String MESH = "m";
-    
+
     private String collection;
-    
+
     private CollectionManager collectionManager;
 
     protected String query;
@@ -44,9 +45,9 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
     protected String alpha;
 
     protected String mesh;
-    
+
     private String mode;
-    
+
     public void setCollectionManager(final CollectionManager collectionManager) {
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
@@ -56,7 +57,8 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
 
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException, SAXException, IOException {
+            final String src, final Parameters par) throws ProcessingException,
+            SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
         this.mode = par.getParameter("mode", "browse");
         Request request = ObjectModelHelper.getRequest(objectModel);
@@ -106,7 +108,7 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
         this.manager.release(this.collectionManager);
         super.dispose();
     }
-    
+
     @Override
     public void recycle() {
         this.mode = null;
@@ -125,13 +127,15 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
             if (null != this.type) {
                 return this.collectionManager.searchType(this.type, this.query);
             } else if (null != this.subset) {
-                return this.collectionManager.searchSubset(this.subset, this.query);
+                return this.collectionManager.searchSubset(this.subset,
+                        this.query);
             }
             return this.collectionManager.search(this.query);
         } else if ("browse".equals(this.mode)) {
             if (null != this.type) {
                 if (null != this.alpha) {
-                    return this.collectionManager.getType(this.type, this.alpha.charAt(0));
+                    return this.collectionManager.getType(this.type, this.alpha
+                            .charAt(0));
                 }
                 return this.collectionManager.getType(this.type);
             } else if (null != this.subset) {
@@ -155,12 +159,14 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
         throw new IllegalStateException("incomplete parameters");
     }
 
-    public void parameterize(Parameters param) throws ParameterException {
+    public void parameterize(final Parameters param) throws ParameterException {
         this.collection = param.getParameter("collection", "laneconnex");
     }
 
     public void initialize() throws Exception {
-        setCollectionManager((CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection));
+        setCollectionManager((CollectionManager) this.manager
+                .lookup(CollectionManager.class.getName() + "/"
+                        + this.collection));
     }
 
 }

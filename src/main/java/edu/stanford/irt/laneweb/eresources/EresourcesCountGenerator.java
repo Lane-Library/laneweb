@@ -26,22 +26,23 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 
-public class EresourcesCountGenerator extends ServiceableGenerator implements Configurable, Initializable {
+public class EresourcesCountGenerator extends ServiceableGenerator implements
+        Configurable, Initializable {
 
     private static final String QUERY = "q";
-    
+
     private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
-    
+
     private Set<String> types;
-    
+
     private Set<String> subsets;
 
     private CollectionManager collectionManager;
-    
+
     private String query;
 
     private String collection;
-    
+
     public void setCollectionManager(final CollectionManager collectionManager) {
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
@@ -66,7 +67,8 @@ public class EresourcesCountGenerator extends ServiceableGenerator implements Co
     }
 
     public void generate() throws SAXException {
-        Map<String, Integer> result = this.collectionManager.searchCount(this.types, this.subsets, this.query);
+        Map<String, Integer> result = this.collectionManager.searchCount(
+                this.types, this.subsets, this.query);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", SQL_NS);
         XMLUtils.startElement(this.xmlConsumer, SQL_NS, "rowset");
@@ -97,21 +99,24 @@ public class EresourcesCountGenerator extends ServiceableGenerator implements Co
         super.dispose();
     }
 
-    public void configure(Configuration conf) throws ConfigurationException {
+    public void configure(final Configuration conf)
+            throws ConfigurationException {
         this.types = new HashSet<String>();
-          Configuration[] typeConf = conf.getChildren("type");
-          for (int i = 0; i < typeConf.length; i++) {
-              this.types.add(typeConf[i].getValue());
-          }
+        Configuration[] typeConf = conf.getChildren("type");
+        for (int i = 0; i < typeConf.length; i++) {
+            this.types.add(typeConf[i].getValue());
+        }
         this.subsets = new HashSet<String>();
-          Configuration[] subsetConf = conf.getChildren("subset");
-          for (int i = 0; i < subsetConf.length; i++) {
-              this.subsets.add(subsetConf[i].getValue());
-          }
-          this.collection = conf.getChild("collection").getValue();
+        Configuration[] subsetConf = conf.getChildren("subset");
+        for (int i = 0; i < subsetConf.length; i++) {
+            this.subsets.add(subsetConf[i].getValue());
+        }
+        this.collection = conf.getChild("collection").getValue();
     }
 
     public void initialize() throws Exception {
-        setCollectionManager((CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection));
+        setCollectionManager((CollectionManager) this.manager
+                .lookup(CollectionManager.class.getName() + "/"
+                        + this.collection));
     }
 }

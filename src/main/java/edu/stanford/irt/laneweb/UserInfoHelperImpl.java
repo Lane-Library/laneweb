@@ -83,19 +83,25 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements
 
     public void initialize() throws NamingException {
         Context context = new InitialContext();
-        this.ezproxyKey = (String) context.lookup("java:comp/env/ezproxy-key");
+        setEzproxyKey((String) context.lookup("java:comp/env/ezproxy-key"));
     }
 
     void setLdapClient(final LdapClient ldapClient) {
+        if (null == ldapClient) {
+            throw new IllegalArgumentException("null ldapClient");
+        }
         this.ldapClient = ldapClient;
     }
 
     void setEzproxyKey(final String ezproxyKey) {
+        if (null == ezproxyKey) {
+            throw new IllegalArgumentException("null ezproxyKey");
+        }
         this.ezproxyKey = ezproxyKey;
     }
 
     public void service(final ServiceManager manager) throws ServiceException {
-        this.ldapClient = (LdapClient) manager.lookup(LdapClient.ROLE);
+        setLdapClient((LdapClient) manager.lookup(LdapClient.ROLE));
     }
 
 }
