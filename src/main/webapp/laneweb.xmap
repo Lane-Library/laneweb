@@ -128,8 +128,8 @@
                 src="edu.stanford.irt.laneweb.JavascriptLoggerAction"/>
             <map:action logger="sitemap.action.webdash" name="webdash"
                 src="edu.stanford.irt.laneweb.webdash.WebdashAction"/>
-            <map:action logger="sitemap.action.voyager" name="voyagerAction"
-                src="edu.stanford.irt.laneweb.VoyagerAction"/>
+            <map:action logger="sitemap.action.voyager" name="voyager"
+                src="edu.stanford.irt.laneweb.voyager.VoyagerAction"/>
             <map:action name="session-action" src="edu.stanford.irt.laneweb.LanewebSessionAction"/>
             <map:action name="clear-cache" logger="sitemap.acting.clear-cache"
                 src="org.apache.cocoon.acting.ClearCacheAction"/>
@@ -232,7 +232,9 @@
                 </map:act>
             </map:match>
             <map:match pattern="secure/voyager.html">
-                <map:act type="voyagerAction"/>
+                <map:act type="voyager">
+                    <map:redirect-to uri="{voyager-url}"/>
+                </map:act>
             </map:match>
             <map:match pattern="javascriptLogger">
                 <map:act type="javascript-logger"/>
