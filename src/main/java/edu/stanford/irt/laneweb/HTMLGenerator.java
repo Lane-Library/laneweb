@@ -48,6 +48,9 @@ public class HTMLGenerator extends ServiceableGenerator implements
     /**
      * Setup the html generator. Try to get the last modification date of the
      * source for caching.
+     * @throws IOException 
+     * @throws SAXException 
+     * @throws ProcessingException 
      * 
      * @throws IOException
      * @throws SAXException
@@ -55,8 +58,7 @@ public class HTMLGenerator extends ServiceableGenerator implements
      */
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException,
-            SAXException, IOException {
+            final String src, final Parameters par) throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
 
         if (super.source != null) {

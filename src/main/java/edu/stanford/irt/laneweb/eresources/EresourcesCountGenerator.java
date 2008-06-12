@@ -16,6 +16,7 @@ import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.parameters.Parameters;
+import org.apache.avalon.framework.service.ServiceException;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
@@ -114,7 +115,7 @@ public class EresourcesCountGenerator extends ServiceableGenerator implements
         this.collection = conf.getChild("collection").getValue();
     }
 
-    public void initialize() throws Exception {
+    public void initialize() throws ServiceException {
         setCollectionManager((CollectionManager) this.manager
                 .lookup(CollectionManager.class.getName() + "/"
                         + this.collection));

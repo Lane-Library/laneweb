@@ -8,6 +8,7 @@ import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
+import org.apache.avalon.framework.service.ServiceException;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
@@ -163,7 +164,7 @@ public class EresourcesGenerator extends ServiceableGenerator implements
         this.collection = param.getParameter("collection", "laneconnex");
     }
 
-    public void initialize() throws Exception {
+    public void initialize() throws ServiceException {
         setCollectionManager((CollectionManager) this.manager
                 .lookup(CollectionManager.class.getName() + "/"
                         + this.collection));

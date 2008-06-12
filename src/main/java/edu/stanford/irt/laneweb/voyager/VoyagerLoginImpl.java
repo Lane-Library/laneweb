@@ -91,7 +91,7 @@ public class VoyagerLoginImpl extends AbstractLogEnabled implements
 
     public void service(final ServiceManager manager) throws ServiceException {
         ServiceSelector selector = (ServiceSelector) manager
-                .lookup(DataSourceComponent.ROLE);
+                .lookup(DataSourceComponent.ROLE + "Selector");
         final DataSourceComponent dsc = (DataSourceComponent) selector
                 .select("voyager");
         setDataSource(new DataSource() {

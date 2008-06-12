@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameters;
+import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.Request;
@@ -30,7 +31,7 @@ public class EresourcesGeneratorTest {
 
     private ServiceManager serviceManager;
 
-    private Map objectModel;
+    private Map<String, Object> objectModel;
 
     private Parameters parameters;
 
@@ -42,7 +43,7 @@ public class EresourcesGeneratorTest {
     public void setUp() throws Exception {
         this.generator = new EresourcesGenerator();
         this.serviceManager = createMock(ServiceManager.class);
-        this.objectModel = new HashMap();
+        this.objectModel = new HashMap<String, Object>();
         this.parameters = createMock(Parameters.class);
         this.collectionManager = createMock(CollectionManager.class);
         this.request = createMock(Request.class);
@@ -55,7 +56,7 @@ public class EresourcesGeneratorTest {
     }
 
     @Test
-    public void testDispose() throws Exception {
+    public void testDispose() throws ServiceException, ParameterException {
         expect(this.parameters.getParameter("collection", "laneconnex"))
                 .andReturn("laneconnex");
         replay(this.parameters);
@@ -92,7 +93,7 @@ public class EresourcesGeneratorTest {
     }
 
     @Test
-    public void testGenerate() throws Exception {
+    public void testGenerate() throws ServiceException, ParameterException, ProcessingException, SAXException, IOException {
         expect(this.parameters.getParameter("collection", "laneconnex"))
                 .andReturn("laneconnex");
         expect(
