@@ -8,6 +8,7 @@ import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.framework.thread.ThreadSafe;
+import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.Request;
@@ -17,7 +18,7 @@ import edu.stanford.irt.directory.LDAPPerson;
 import edu.stanford.irt.laneweb.UserInfo;
 import edu.stanford.irt.laneweb.UserInfoHelper;
 
-public class VoyagerAction implements Serviceable, ThreadSafe {
+public class VoyagerAction implements Action, Serviceable, ThreadSafe {
 
     private static final String VOYAGER_KEY = "voyager-url";
 
