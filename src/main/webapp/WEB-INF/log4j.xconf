@@ -48,12 +48,12 @@
         </layout>
     </appender>
     
-    <category name="sitemap.action.webdash" additivity="false">
+    <category name="core.webdash-login" additivity="false">
         <priority value="ERROR"/>
         <appender-ref ref="WEBDASH"/>
     </category>
     
-    <category name="sitemap.action.voyager" additivity="false">
+    <category name="core.voyager-login" additivity="false">
         <priority value="ERROR"/>
         <appender-ref ref="VOYAGER"/>
     </category>
