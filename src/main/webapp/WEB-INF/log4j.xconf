@@ -21,6 +21,42 @@
             <param name="ConversionPattern" value="%d %p [%t][%c] - %m%n"/>
         </layout>
     </appender>
+    
+    <appender name="WEBDASH" class="org.apache.log4j.net.SMTPAppender">
+        <param name="Threshold" value="ERROR"/>
+        <param name="To" value="ceyates@stanford.edu"/>
+        <param name="From" value="laneweb@stanford.edu"/>
+        <param name="Subject" value="Webdash Error"/>
+        <param name="SMTPHost" value="smtp.stanford.edu"/>
+        <param name="BufferSize" value="512"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{ISO8601}] %-5p %c %m %n"
+            />
+        </layout>
+    </appender>
+    
+    <appender name="VOYAGER" class="org.apache.log4j.net.SMTPAppender">
+        <param name="Threshold" value="ERROR"/>
+        <param name="To" value="ryanmax@stanford.edu"/>
+        <param name="From" value="laneweb@stanford.edu"/>
+        <param name="Subject" value="Voyager Login Error"/>
+        <param name="SMTPHost" value="smtp.stanford.edu"/>
+        <param name="BufferSize" value="512"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{ISO8601}] %-5p %c %m %n"
+            />
+        </layout>
+    </appender>
+    
+    <category name="sitemap.action.webdash" additivity="false">
+        <priority value="ERROR"/>
+        <appender-ref ref="WEBDASH"/>
+    </category>
+    
+    <category name="sitemap.action.voyager" additivity="false">
+        <priority value="ERROR"/>
+        <appender-ref ref="VOYAGER"/>
+    </category>
 
     <category name="sitemap.action.javascript-logger" additivity="false">
         <priority value="ERROR"/>
