@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="webapp" name="laneweb" basedir=".">
-    <property name="laneweb.version" value="1.7.23"/>
+    <property name="laneweb.version" value="1.7.24"/>
     <target name="webapp">
         <mkdir dir="target"/>
         <get dest="target/laneweb.war" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/laneweb/${laneweb.version}/laneweb-${laneweb.version}.war"/>
