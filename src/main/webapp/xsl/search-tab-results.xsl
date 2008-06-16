@@ -15,7 +15,7 @@
          <xsl:variable name="pedsHits" select="count(//st:template[@id='peds']/st:resource[@idref=$successful])"/> 
          <xsl:variable name="researchHits" select="count(//st:template[@id='research']/st:resource[@idref=$successful])"/>      
 {"results":{
-"status": "<xsl:value-of select="$successful"></xsl:value-of>",
+"status": "<xsl:value-of select="$successful"/>",
 "tabs": [ 
     {
     "resource":"clinical", 
