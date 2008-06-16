@@ -43,7 +43,7 @@
     },    
     {
     "resource":"pubmed",
-    "hits" : "<xsl:if test="res:engine[@res:id='crossdb']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='crossdb']/res:hits, '###,###')" /></xsl:if>"
+    "hits" : "<xsl:if test="res:engine[@res:id='crossdb']/res:resource[@res:id='pubmed']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='crossdb']/res:resource[@res:id='pubmed']/res:hits, '###,###')" /></xsl:if>"
     }
   ]
  }
