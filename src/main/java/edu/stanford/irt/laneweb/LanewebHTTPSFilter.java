@@ -7,6 +7,8 @@
 package edu.stanford.irt.laneweb;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -27,12 +29,8 @@ import javax.servlet.http.HttpServletResponse;
  * a loop if you try to redirect from https to http.
  */
 public class LanewebHTTPSFilter implements Filter {
-
-    private ServletContext context;
-
-    public void init(final FilterConfig filterConfig) {
-        this.context = filterConfig.getServletContext();
-    }
+    
+    Logger logger = Logger.getLogger(LanewebHTTPSFilter.class.getName());
 
     /**
      * does the redirect if no gohttps header or scheme is not https
@@ -52,16 +50,19 @@ public class LanewebHTTPSFilter implements Filter {
         if ((req.getHeader("gohttps") != null)
                 || "https".equals(req.getScheme())) {
             sb.append("\nchain.doFilter()");
-            this.context.log(sb.toString());
+            this.logger.log(Level.INFO, sb.toString());
             chain.doFilter(request, response);
         } else {
             sb.append("\nsendRedirect(https" + url.substring(colonIndex));
-            this.context.log(sb.toString());
+            this.logger.log(Level.INFO, sb.toString());
             resp.sendRedirect("https" + url.substring(colonIndex));
         }
     }
 
     public void destroy() {
+    }
+
+    public void init(FilterConfig filterConfig) throws ServletException {
     }
 
 }
