@@ -17,7 +17,8 @@
         password="${laneweb.context.voyager.password}"
         maxActive="${laneweb.context.voyager.maxActive}"
         maxIdle="${laneweb.context.voyager.maxIdle}"
-        maxWait="${laneweb.context.voyager.maxWait}"/>
+        maxWait="${laneweb.context.voyager.maxWait}"
+        validationQuery="SELECT 1 FROM DUAL"/>
     <Environment name="live-base"
         type="java.lang.String"
         value="${laneweb.context.environment.live-base}"/>
