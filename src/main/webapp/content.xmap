@@ -82,6 +82,12 @@
                 <map:transform type="saxon" src="context://xsl/random.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
+            <map:match pattern="ncbi-rss2html" type="wildcard">
+                <map:generate 
+                    src="{request-param:rss-url}"/>
+                <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
             <map:match pattern="portals/history/historySearchResults.html" type="wildcard">
                 <map:generate type="html"
                     src="{naming:java:comp/env/live-base}/content/portals/history/historySearchResults.html"/>
