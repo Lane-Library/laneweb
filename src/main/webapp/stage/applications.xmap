@@ -103,6 +103,12 @@
                     </map:transform>
                     <map:serialize type="text"/>
                 </map:match>
+                <map:match pattern="sfx/highly-accessed2rss" type="wildcard">
+                    <map:generate 
+                        src="http://sfx.stanford.edu/local/cgi/public/get_file.cgi?file=highly-accessed.xml"/>
+                    <map:transform src="context://xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>
+                    <map:serialize type="xml"/>
+                </map:match>
             </map:match>
             <map:handle-errors>
                 <map:generate type="exception"/>
