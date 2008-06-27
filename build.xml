@@ -6,15 +6,15 @@
         <get dest="target/laneweb.war" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/laneweb/${laneweb.version}/laneweb-${laneweb.version}.war"/>
         <unjar src="target/laneweb.war" dest="target/laneweb"/>
         <echo level="warning"   >
-            **************************************************************************
-            If NOT PRODUCTION server,
-            
-            Please edit the robots.txt  ( target/laneweb/robots.txt )
-            
-            User-agent: *
-            Disallow: /
-            
-            **************************************************************************
+**************************************************************************
+If NOT PRODUCTION server,
+
+Please edit the robots.txt  ( target/laneweb/robots.txt )
+
+User-agent: *
+Disallow: /
+
+**************************************************************************
         </echo>
     </target>
 </project>

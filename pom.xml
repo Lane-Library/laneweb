@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>lane</artifactId>
         <groupId>edu.stanford.irt</groupId>
@@ -57,8 +59,35 @@
                     </webResources>
                 </configuration>
             </plugin>
+            <plugin>
+                    <groupId>gr.abiss.mvn.plugins</groupId>
+                    <artifactId>maven-jstools-plugin</artifactId>
+                    <version>0.7</version>
+            </plugin>
         </plugins>
     </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>gr.abiss.mvn.plugins</groupId>
+                <artifactId>maven-jstools-plugin</artifactId>
+                <configuration>
+                    <jsDir>src/main/webapp/javascript</jsDir>
+                    <caseSensitive>true</caseSensitive>
+                    <!-- for more configuration properties, see the goals documentation -->
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <!-- include the desired reports -->
+                            <report>jslint</report>
+                            <report>jsdoc</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
     <dependencies>
         <dependency>
             <groupId>avalon-framework</groupId>
