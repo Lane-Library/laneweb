@@ -64,6 +64,20 @@
                     <artifactId>maven-jstools-plugin</artifactId>
                     <version>0.7</version>
             </plugin>
+            <plugin>
+                <groupId>net.sf.alchim</groupId>
+                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                    </execution>
+                </executions>        
+                <configuration>
+                    <webappDirectory>target/laneweb</webappDirectory>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <reporting>
