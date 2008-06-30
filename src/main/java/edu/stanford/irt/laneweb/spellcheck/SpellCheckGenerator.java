@@ -20,7 +20,6 @@ import edu.stanford.irt.spell.SpellChecker;
 
 /**
  * @author ceyates
- * 
  */
 public class SpellCheckGenerator implements Generator, Serviceable, ThreadSafe {
 

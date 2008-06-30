@@ -7,7 +7,6 @@ import org.apache.commons.httpclient.HttpClient;
 
 /**
  * @author ceyates
- * 
  */
 public interface HttpClientManager {
 

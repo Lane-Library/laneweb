@@ -11,7 +11,6 @@ import java.util.Date;
 
 /**
  * @author ceyates
- * 
  */
 public class Ticket {
 

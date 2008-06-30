@@ -1,8 +1,6 @@
 /*
- * Created on Mar 19, 2004
- * 
- * To change the template for this generated file go to Window - Preferences -
- * Java - Code Generation - Code and Comments
+ * Created on Mar 19, 2004 To change the template for this generated file go to
+ * Window - Preferences - Java - Code Generation - Code and Comments
  */
 package edu.stanford.irt.laneweb;
 
@@ -22,10 +20,8 @@ import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 
 /**
- * @author ceyates
- * 
- * To change the template for this generated type comment go to Window -
- * Preferences - Java - Code Generation - Code and Comments
+ * @author ceyates To change the template for this generated type comment go to
+ *         Window - Preferences - Java - Code Generation - Code and Comments
  */
 public class LanewebInputModule extends AbstractLogEnabled implements
         InputModule, ThreadSafe, Configurable, Serviceable {

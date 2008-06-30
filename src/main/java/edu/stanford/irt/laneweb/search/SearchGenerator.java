@@ -29,7 +29,6 @@ import edu.stanford.irt.search.util.SAXable;
 
 /**
  * @author ceyates
- * 
  */
 public class SearchGenerator extends ServiceableGenerator implements
         Parameterizable {

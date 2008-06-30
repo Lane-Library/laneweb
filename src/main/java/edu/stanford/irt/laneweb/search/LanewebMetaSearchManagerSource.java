@@ -9,7 +9,6 @@ import edu.stanford.irt.search.MetaSearchManager;
 
 /**
  * @author ceyates
- * 
  */
 public class LanewebMetaSearchManagerSource implements ThreadSafe, Disposable,
         MetaSearchManagerSource {

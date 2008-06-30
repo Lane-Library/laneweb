@@ -1,18 +1,15 @@
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * contributor license agreements. See the NOTICE file distributed with this
+ * work for additional information regarding copyright ownership. The ASF
+ * licenses this file to You under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law
+ * or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package edu.stanford.irt.laneweb.httpclient;
 
@@ -434,7 +431,6 @@ public class HTTPClientSource extends AbstractLogEnabled implements
     /**
      * Method to update whether a referenced resource exists, after executing a
      * particular {@link HttpMethod}.
-     * 
      * <p>
      * REVISIT: exists() would be better called canRead() or similar, as a
      * resource can exist but not be readable.
@@ -547,8 +543,8 @@ public class HTTPClientSource extends AbstractLogEnabled implements
     /**
      * Obtain a {@link SourceValidity} object.
      * 
-     * @return a {@link SourceValidity} object, or <code>null</code> if this
-     *         is not possible.
+     * @return a {@link SourceValidity} object, or <code>null</code> if this is
+     *         not possible.
      */
     public SourceValidity getValidity() {
         // Implementation taken from URLSource.java, Kudos :)
@@ -675,9 +671,8 @@ public class HTTPClientSource extends AbstractLogEnabled implements
     /**
      * Obtain an {@link OutputStream} to write to. The {@link OutputStream}
      * returned actually references a temporary local file, which will be
-     * written to the server upon closing.
-     * 
-     * The returned stream must be closed or cancelled by the calling code.
+     * written to the server upon closing. The returned stream must be closed or
+     * cancelled by the calling code.
      * 
      * @return an {@link OutputStream} instance
      * @exception IOException
@@ -769,7 +764,6 @@ public class HTTPClientSource extends AbstractLogEnabled implements
          * 
          * @throws IOException
          * @throws IOException
-         * 
          * @exception IOException
          *                if an error occurs
          */
@@ -877,10 +871,8 @@ public class HTTPClientSource extends AbstractLogEnabled implements
 
     /**
      * Cancels any data sent to the {@link OutputStream} returned by
-     * {@link #getOutputStream()}.
-     * 
-     * After calling this method, the supplied {@link OutputStream} should no
-     * longer be used.
+     * {@link #getOutputStream()}. After calling this method, the supplied
+     * {@link OutputStream} should no longer be used.
      */
     public void cancel(final OutputStream stream) throws IOException {
         if (stream instanceof WrappedFileOutputStream) {

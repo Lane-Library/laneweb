@@ -135,7 +135,7 @@ public class QueryMapGeneratorTest {
                 .newFixedThreadPool(100);
         QueryMapper fauxQueryMapper = new QueryMapper() {
 
-            public QueryMap getQueryMap(String query) {
+            public QueryMap getQueryMap(final String query) {
                 Descriptor descriptor = new Descriptor(query, query,
                         Collections.<String> singleton(query));
                 return new QueryMap(query, descriptor, new ResourceMap(

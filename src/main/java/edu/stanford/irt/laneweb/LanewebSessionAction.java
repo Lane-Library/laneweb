@@ -13,7 +13,6 @@ import org.apache.cocoon.environment.SourceResolver;
  * creates a session object
  * 
  * @author ceyates
- * 
  */
 
 public class LanewebSessionAction extends AbstractAction implements ThreadSafe {

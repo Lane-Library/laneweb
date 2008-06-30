@@ -60,9 +60,9 @@
                 </configuration>
             </plugin>
             <plugin>
-                    <groupId>gr.abiss.mvn.plugins</groupId>
-                    <artifactId>maven-jstools-plugin</artifactId>
-                    <version>0.7</version>
+                <groupId>gr.abiss.mvn.plugins</groupId>
+                <artifactId>maven-jstools-plugin</artifactId>
+                <version>0.7</version>
             </plugin>
             <plugin>
                 <groupId>net.sf.alchim</groupId>
@@ -73,7 +73,7 @@
                             <goal>compress</goal>
                         </goals>
                     </execution>
-                </executions>        
+                </executions>
                 <configuration>
                     <webappDirectory>target/laneweb</webappDirectory>
                 </configuration>
@@ -88,12 +88,10 @@
                 <configuration>
                     <jsDir>src/main/webapp/javascript</jsDir>
                     <caseSensitive>true</caseSensitive>
-                    <!-- for more configuration properties, see the goals documentation -->
                 </configuration>
                 <reportSets>
                     <reportSet>
                         <reports>
-                            <!-- include the desired reports -->
                             <report>jslint</report>
                             <report>jsdoc</report>
                         </reports>

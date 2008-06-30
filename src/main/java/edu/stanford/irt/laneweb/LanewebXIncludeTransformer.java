@@ -1,18 +1,15 @@
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
- * this work for additional information regarding copyright ownership.
- * The ASF licenses this file to You under the Apache License, Version 2.0
- * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * contributor license agreements. See the NOTICE file distributed with this
+ * work for additional information regarding copyright ownership. The ASF
+ * licenses this file to You under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law
+ * or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
  */
 package edu.stanford.irt.laneweb;
 
@@ -59,7 +56,6 @@ import org.xml.sax.ext.LexicalHandler;
 /**
  * shamelessly copied from cocoon 2.2-M2, modified only startPrefixMapping()
  * --cy also altered to use fallback if ProcessingException or SAXException
- * 
  */
 public class LanewebXIncludeTransformer extends AbstractTransformer implements
         Serviceable, CacheableProcessingComponent {
@@ -155,7 +151,9 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements
         /** The nesting level of fallback that should be used */
         private int useFallbackLevel = 0;
 
-        /** The nesting level of xi:fallback elements that have been encountered. */
+        /**
+         * The nesting level of xi:fallback elements that have been encountered.
+         */
         private int fallbackElementLevel;
 
         /**

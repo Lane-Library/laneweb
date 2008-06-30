@@ -137,7 +137,7 @@ public class XHTMLizableEresourceList implements XMLizable {
      */
     private void handleAnchor(final ContentHandler handler,
             final Eresource eresource, final Version version, final Link link,
-            boolean hasGetPassword) throws SAXException {
+            final boolean hasGetPassword) throws SAXException {
         AttributesImpl attributes = new AttributesImpl();
         String proxyValue = version.isProxy() ? "proxy" : "noproxy";
         attributes

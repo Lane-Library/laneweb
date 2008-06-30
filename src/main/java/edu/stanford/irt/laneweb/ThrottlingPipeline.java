@@ -11,7 +11,6 @@ import org.apache.cocoon.environment.Request;
 
 /**
  * The ThrottlingPipeline
- * 
  */
 public class ThrottlingPipeline extends CachingProcessingPipeline {
 

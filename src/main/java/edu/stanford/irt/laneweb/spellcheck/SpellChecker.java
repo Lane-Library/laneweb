@@ -13,7 +13,6 @@ import edu.stanford.irt.spell.GoogleAPISpellChecker;
 
 /**
  * @author ceyates
- * 
  */
 public class SpellChecker extends GoogleAPISpellChecker implements
         Initializable {

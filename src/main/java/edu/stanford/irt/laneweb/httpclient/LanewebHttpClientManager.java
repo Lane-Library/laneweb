@@ -94,8 +94,9 @@ public class LanewebHttpClientManager implements HttpClientManager,
 
     /*
      * (non-Javadoc)
-     * 
-     * @see org.apache.avalon.framework.parameters.Parameterizable#parameterize(org.apache.avalon.framework.parameters.Parameters)
+     * @see
+     * org.apache.avalon.framework.parameters.Parameterizable#parameterize(org
+     * .apache.avalon.framework.parameters.Parameters)
      */
     public void parameterize(final Parameters params) throws ParameterException {
         this.maxTotalConnections = params.getParameterAsInteger(
@@ -108,7 +109,6 @@ public class LanewebHttpClientManager implements HttpClientManager,
 
     /*
      * (non-Javadoc)
-     * 
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
     public void initialize() throws Exception {

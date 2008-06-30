@@ -5,7 +5,6 @@ package edu.stanford.irt.laneweb;
 
 /**
  * @author ceyates
- * 
  */
 public interface LanewebConstants {
 

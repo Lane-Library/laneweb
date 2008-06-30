@@ -1,7 +1,5 @@
 /*
- * Created on Aug 5, 2004
- *
- * To change the template for this generated file go to
+ * Created on Aug 5, 2004 To change the template for this generated file go to
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
 package edu.stanford.irt.laneweb;
@@ -20,15 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author ceyates
- * 
- * This filter redirects to https if the scheme is not https or there is not a
- * gohttps header as set by the BigIP load balancer for urls that it is doing
- * the ssl stuff. At the moment we can't do the reverse because BigIP goes into
- * a loop if you try to redirect from https to http.
+ * @author ceyates This filter redirects to https if the scheme is not https or
+ *         there is not a gohttps header as set by the BigIP load balancer for
+ *         urls that it is doing the ssl stuff. At the moment we can't do the
+ *         reverse because BigIP goes into a loop if you try to redirect from
+ *         https to http.
  */
 public class LanewebHTTPSFilter implements Filter {
-    
+
     Logger logger = Logger.getLogger(LanewebHTTPSFilter.class.getName());
 
     /**
@@ -52,7 +49,8 @@ public class LanewebHTTPSFilter implements Filter {
             this.logger.log(Level.INFO, sb.toString());
             chain.doFilter(request, response);
         } else {
-            sb.append("\nsendRedirect(https").append(url.substring(colonIndex)).append(")");
+            sb.append("\nsendRedirect(https").append(url.substring(colonIndex))
+                    .append(")");
             this.logger.log(Level.INFO, sb.toString());
             resp.sendRedirect("https" + url.substring(colonIndex));
         }
@@ -61,7 +59,7 @@ public class LanewebHTTPSFilter implements Filter {
     public void destroy() {
     }
 
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(final FilterConfig filterConfig) throws ServletException {
     }
 
 }

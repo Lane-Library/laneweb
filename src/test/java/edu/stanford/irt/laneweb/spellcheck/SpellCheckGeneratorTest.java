@@ -126,7 +126,7 @@ public class SpellCheckGeneratorTest {
                 .newFixedThreadPool(100);
         SpellChecker fauxSpellChecker = new SpellChecker() {
 
-            public SpellCheckResult spellCheck(String words) {
+            public SpellCheckResult spellCheck(final String words) {
                 return new SpellCheckResult(words);
             }
         };

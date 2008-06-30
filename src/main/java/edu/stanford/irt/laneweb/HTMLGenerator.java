@@ -48,17 +48,18 @@ public class HTMLGenerator extends ServiceableGenerator implements
     /**
      * Setup the html generator. Try to get the last modification date of the
      * source for caching.
-     * @throws IOException 
-     * @throws SAXException 
-     * @throws ProcessingException 
      * 
+     * @throws IOException
+     * @throws SAXException
+     * @throws ProcessingException
      * @throws IOException
      * @throws SAXException
      * @throws ProcessingException
      */
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException, SAXException, IOException {
+            final String src, final Parameters par) throws ProcessingException,
+            SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
 
         if (super.source != null) {
@@ -71,8 +72,8 @@ public class HTMLGenerator extends ServiceableGenerator implements
      * component. This method must be invoked before the generateValidity()
      * method.
      * 
-     * @return The generated key or <code>0</code> if the component is
-     *         currently not cacheable.
+     * @return The generated key or <code>0</code> if the component is currently
+     *         not cacheable.
      */
     public java.io.Serializable getKey() {
         if (this.inputSource == null) {
@@ -102,7 +103,6 @@ public class HTMLGenerator extends ServiceableGenerator implements
      * @throws IOException
      * @throws SourceNotFoundException
      * @throws SAXException
-     * 
      * @throws SAXException
      */
     public void generate() throws SourceNotFoundException, IOException,

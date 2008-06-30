@@ -93,7 +93,8 @@ public class EresourcesGeneratorTest {
     }
 
     @Test
-    public void testGenerate() throws ServiceException, ParameterException, ProcessingException, SAXException, IOException {
+    public void testGenerate() throws ServiceException, ParameterException,
+            ProcessingException, SAXException, IOException {
         expect(this.parameters.getParameter("collection", "laneconnex"))
                 .andReturn("laneconnex");
         expect(
