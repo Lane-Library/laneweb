@@ -82,7 +82,7 @@ function Result(type, tab, container){
     }
     this._type = type;
     this._tab = tab;
-    this.container = container;
+    this._container = container;
     this._url = '/././plain/search/' + this._type + '.html?source=' + this._type + '&q=';
     this._callback = {
         success: this.callbackSuccess,
@@ -98,12 +98,13 @@ function Result(type, tab, container){
 }
 
 Result.prototype.setContent = function(content){
-    if (null == content) {
+    if (content === undefined) {
         window.log('Result.setContent(): content should not  be null');
     }
-    if (this._content === null) {
+    if (this._content === undefined) {
         this._content = content;
     }
+	//FIXME:  THIS IS setContent, not concatContent what is this concat ???
     else {
         this._content = this._content.concat(content);
     }
@@ -155,15 +156,15 @@ Result.prototype.show = function(){
             window.activeResult.hide();
             this._tab.className = 'eLibraryTabActive';
             for (var i = 0; i < this._content.length; i++) {
-                this.container.appendChild(this._content[i]);
+                this._container.appendChild(this._content[i]);
             }
             window.activeResult = this;
         }
 };
 
 Result.prototype.hide = function(){
-    while (this.container.childNodes.length > 0) {
-        this.container.removeChild(this.container.lastChild);
+    while (this._container.childNodes.length > 0) {
+        this._container.removeChild(this._container.lastChild);
     }
     this._tab.className = 'eLibraryTab';
 };
@@ -216,7 +217,7 @@ function showHits(o){
     for (var j = 0; j < response.results.tabs.length; j++) {
         var tabName = response.results.tabs[j].resource;
         var tab = document.getElementById(tabName + "Tab");
-        if (tab !== undefined) {
+        if (tab !== null) {
             var hitSpan = tab.getElementsByTagName('span')[0];
             var hits = response.results.tabs[j].hits;
             if (hitSpan !== null && hits !== '') {
