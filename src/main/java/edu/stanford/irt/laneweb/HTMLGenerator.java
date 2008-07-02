@@ -31,6 +31,19 @@ public class HTMLGenerator extends ServiceableGenerator implements
     /** The source, if coming from the request */
     private InputStream requestStream;
 
+    private AbstractSAXParser parser;
+
+    public HTMLGenerator() {
+        HTMLConfiguration conf = new HTMLConfiguration();
+        conf.setProperty(
+                "http://cyberneko.org/html/properties/default-encoding",
+                "UTF-8");
+        conf.setProperty("http://cyberneko.org/html/properties/names/elems",
+                "lower");
+        this.parser = new AbstractSAXParser(conf) {
+        };
+    }
+
     /**
      * Recycle this component. All instance variables are set to
      * <code>null</code>.
@@ -107,35 +120,19 @@ public class HTMLGenerator extends ServiceableGenerator implements
      */
     public void generate() throws SourceNotFoundException, IOException,
             SAXException {
-        HtmlSaxParser parser = new HtmlSaxParser();
 
         if (this.inputSource != null) {
             this.requestStream = this.inputSource.getInputStream();
         }
 
-        parser.setContentHandler(this.contentHandler);
+        this.parser.setContentHandler(this.contentHandler);
         try {
-            parser.parse(new InputSource(this.requestStream));
+            this.parser.parse(new InputSource(this.requestStream));
         } finally {
+            this.parser.reset();
             if (null != this.requestStream) {
                 this.requestStream.close();
             }
-        }
-    }
-
-    public static class HtmlSaxParser extends AbstractSAXParser {
-
-        public HtmlSaxParser() {
-            super(getConfig());
-        }
-
-        private static HTMLConfiguration getConfig() {
-            HTMLConfiguration config = new HTMLConfiguration();
-            config
-                    .setProperty(
-                            "http://cyberneko.org/html/properties/names/elems",
-                            "lower");
-            return config;
         }
     }
 }
