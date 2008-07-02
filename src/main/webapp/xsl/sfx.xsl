@@ -5,8 +5,6 @@
     exclude-result-prefixes="h"
     version="2.0">
 
-    <xsl:output method='xml' omit-xml-declaration='no' indent="yes"/>
-
     <xsl:param name="sfx-request"/>
 
     <xsl:variable name="sfx-title">
