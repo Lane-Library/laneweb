@@ -32,8 +32,9 @@ var showMetasearchResults = function(o) {
         var sleepingTime = 2000; //2 seconds
         if (window.counter > 15) {//time sleepingtime (2 seconds) * 15 = 30 seconds
 			sleepingTime = 10000;// 10 seconds
-			setTimeout("YAHOO.util.Connect.asyncRequest('GET', '" + '/././apps/search/filtered-json?q=' + window.searchTerms + '&source=' + window.searchTemplate + '&rd=' + Math.random() + "', window.metasearchCallback);", sleepingTime);
-		}
+        }
+		setTimeout("YAHOO.util.Connect.asyncRequest('GET', '" + '/././apps/search/filtered-json?q=' + window.searchTerms + '&source=' + window.searchTemplate + '&rd=' + Math.random() + "', window.metasearchCallback);", sleepingTime);
+		
     }
     for (var z = 0; z < metasearchElements.length; z++) {
         if (metasearchElements[z].className != 'complete') {
