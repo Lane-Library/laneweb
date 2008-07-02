@@ -293,7 +293,7 @@ var findItCallBack = {
 
 function showFindIt(o){
     var findIt = YAHOO.lang.JSON.parse(o.responseText);
-    if (findIt.result !== '') {
+    if (findIt.result) {
         var findItLink = document.getElementById("findItLink");
         findItLink.href = findIt.openurl;
         findItLink.innerHTML = findIt.result;
