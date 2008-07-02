@@ -530,12 +530,6 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>yui</groupId>
-            <artifactId>yui</artifactId>
-            <version>2.4.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <artifactId>nekohtml</artifactId>
             <groupId>nekohtml</groupId>
             <version>1.9.6</version>

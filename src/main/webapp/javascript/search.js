@@ -1,13 +1,55 @@
+/**
+ * search.js handles scripting of the search result page.
+ * //TODO: do namespaces!
+ */
+
+/**
+ * encoded version of what is being searched
+ */
 var searchTerms;
+
+/**
+ * the time for timing various things
+ */
 var startTime = new Date().getTime();
+
+/**
+ * the eresources result currently being shown.
+ */
 var activeResult;
+
+/**
+ * the spell check object
+ */
 var spellcheck;
+
+/**
+ * the querymapping object
+ */
 var queryMapping;
+
+/**
+ * uh, not sure
+ */
+//TODO get clear on what this does
 var initialTabState;
 
+//add an event handler for initialization
 YAHOO.util.Event.addListener(window, 'load', initSearch);
 
-function initSearch(){
+function initSearch() {
+	if (decodeURIComponent) {
+		searchTerms = encodeURIComponent(getMetaContent("LW.searchTerms"));
+	} else {
+		searchTerms = escape(getMetaContent("LW.searchTerms"));
+	}
+	initHistory();
+	initAjax();
+	initTabs();
+    spellcheck = new Spellcheck(getMetaContent("LW.source"));
+}
+
+function initHistory() {
     if (YAHOO.util.History && YAHOO.util.Dom.inDocument('yui-history-field') && YAHOO.util.Dom.inDocument('yui-history-iframe')) {
         YAHOO.util.History.onReady(function(){
             var currentTabState = YAHOO.util.History.getCurrentState("aTab");
@@ -17,11 +59,16 @@ function initSearch(){
         YAHOO.util.History.register("aTab", window.initialTabState, activeTabStateChangeHandler);
         YAHOO.util.History.initialize("yui-history-field", "yui-history-iframe");
     }
-    window.searchTerms = escape(getMetaContent("LW.searchTerms"));
+}
+
+function initAjax() {
     YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q=' + window.searchTerms, window.querymapCallBack);
     YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q=' + window.searchTerms, window.findItCallBack);
     YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q=' + window.searchTerms, window.spellCheckCallBack);
     YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?q=' + window.searchTerms, window.showHitsCallback);
+}
+
+function initTabs() {
     var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
     var popIn = document.getElementById('popInContent');
     for (var i = 0; i < tabs.length; i++) {
@@ -31,9 +78,8 @@ function initSearch(){
             var type = id.substring(0, id.indexOf('Tab'));
             var container = document.getElementById('eLibrarySearchResults');
             var result = new Result(type, tab, container);
-            var content = null;
             if (tab.className == 'eLibraryTabActive') {
-                content = [];
+                var content = [];
                 for (var j = 0; j < container.childNodes.length; j++) {
                     content[j] = container.childNodes[j];
                 }
@@ -67,18 +113,17 @@ function initSearch(){
             };
         }
     }
-    spellcheck = new Spellcheck(getMetaContent("LW.source"));
 }
 
-function Result(type, tab, container){
-    if (null == type) {
-        window.log('Result(): type should not be null');
+function Result(type, tab, container) {
+    if (!type) {
+        window.log('Result(): type should not be ' + type);
     }
-    if (null == tab) {
-        window.log('Result(): tab should not be null');
+    if (!tab) {
+        window.log('Result(): tab should not be ' + tab);
     }
-    if (null == container) {
-        window.log('Result(): contianer should not be null');
+    if (!container) {
+        window.log('Result(): container should not be ' + container);
     }
     this._type = type;
     this._tab = tab;
@@ -93,13 +138,13 @@ function Result(type, tab, container){
             line: "Result"
         }
     };
+    this._searchIndicator = document.getElementById('searchIndicator');
     this._state = 'initialized';
-    this.searchIndicator = document.getElementById('searchIndicator');
 }
 
 Result.prototype.setContent = function(content){
-    if (content === undefined) {
-        window.log('Result.setContent(): content should not  be null');
+    if (!content) {
+        window.log('Result.setContent(): content should not be ' + content);
     }
     if (this._content === undefined) {
         this._content = content;
@@ -128,14 +173,14 @@ Result.prototype.callbackSuccess = function(o){
     }
     result.setContent(content);
     result.show();
-    result.searchIndicator.style.visibility = 'hidden';
+    result._searchIndicator.style.visibility = 'hidden';
 };
 
 Result.prototype.getContent = function(){
     if (this._state == 'initialized') {
         this._state = 'searching';
         var request = YAHOO.util.Connect.asyncRequest('GET', this._url + window.searchTerms, this._callback);
-        this.searchIndicator.style.visibility = 'visible';
+        this._searchIndicator.style.visibility = 'visible';
     } else if (this._state == 'searched') {
         this.show();
    	} else if (this._state == 'searching') {
@@ -410,7 +455,7 @@ function importNodes(importedNode, deep){
         newNode = document.createElement(importedNode.nodeName);
         for (var i = 0; i < importedNode.attributes.length; i++) {
             var attr = importedNode.attributes[i];
-            if (attr.nodeValue !== null && attr.nodeValue !== '') {
+            if (attr.nodeValue) {
                 newNode.setAttribute(attr.name, attr.nodeValue);
                 if (attr.name == 'class') {
                     newNode.className = attr.nodeValue;
