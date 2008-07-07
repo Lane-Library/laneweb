@@ -352,8 +352,9 @@ function QueryMapping(content)
     new YAHOO.widget.Tooltip(YAHOO.util.Dom.generateId(), { context:'qmTip', width:'170px' } )
     var lis =     this._content.getElementsByTagName( 'li');
     for(var i = 0; i < lis.length; i++) {
-          //lis[i].style.display = 'none';
-          this.resourceUrl = this.resourceUrl +"&r="+lis[i].id;
+          if (lis[i].id) {
+              this.resourceUrl = this.resourceUrl + "&r=" + lis[i].id;
+          }
     }
     this._callback = {
         success:this.successfulCallback,
@@ -407,7 +408,7 @@ QueryMapping.prototype.update = function(response) {
 
 
 QueryMapping.prototype.sendQueryMappingRequest = function() {
-        YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/json?q='+window.searchTerms+this.resourceUrl+'&rd='+Math.random(), this._callback);
+        YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/proxy/json?q='+window.searchTerms+this.resourceUrl+'&rd='+Math.random(), this._callback);
     }
 
 
