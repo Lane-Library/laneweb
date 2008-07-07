@@ -15,6 +15,10 @@
         </xsl:copy>
     </xsl:template>
     
+    <xsl:template match="s:engine">
+        <xsl:apply-templates select="s:resource"/>
+    </xsl:template>
+    
     <xsl:template match="s:resource">
         <xsl:variable name="id" select="@s:id"/>
         <xsl:if test="/doc/h:html/h:body//h:a[@class='metasearch' and @id = $id]">

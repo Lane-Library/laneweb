@@ -19,7 +19,7 @@
                     pattern="^(clinical|peds|research|pharmacy|history|test)$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
-                        <map:part src="cocoon://apps/search-application"/>
+                        <map:part src="cocoon://apps/search/proxy/xml"/>
                         <map:part src="cocoon:/search/{request-param:source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
@@ -32,7 +32,7 @@
                 <map:match type="regex-parameter" pattern="^\/.+\.html$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
-                        <map:part src="cocoon://apps/search-application"/>
+                        <map:part src="cocoon://apps/search/proxy/xml"/>
                         <map:part src="cocoon:{request-param:source}"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
@@ -45,7 +45,7 @@
                 <map:match type="regex-parameter" pattern="^.+$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
-                        <map:part src="cocoon://apps/search-application"/>
+                        <map:part src="cocoon://apps/search/proxy/xml"/>
                         <map:part src="cocoon:/eresources/count"/>
                         <map:part src="{naming:java:comp/env/live-base}/content/search.html"/>
                         <map:part src="cocoon:/search/{request-param:source}.html"/>
@@ -71,7 +71,7 @@
             </map:match>
             <map:match pattern="search-tab-results" type="wildcard">
                 <map:aggregate element="search-tab-results">
-                    <map:part src="cocoon://apps/search-application"/>
+                    <map:part src="cocoon://apps/search/proxy/xml"/>
                     <map:part src="cocoon:/search-templates.xml"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/search-tab-results.xsl"/>

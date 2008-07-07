@@ -26,6 +26,6 @@
         "url": "<xsl:value-of select="s:url"/>",
         "hits": "<xsl:value-of select="$hitcount"/>"
         }
-        <xsl:if test="position() != count(//s:resource)">,</xsl:if>
+        <xsl:if test="following-sibling::s:resource">,</xsl:if>
     </xsl:template>
 </xsl:stylesheet>

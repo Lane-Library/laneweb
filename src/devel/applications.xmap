@@ -8,23 +8,18 @@
                 <map:generate type="search-describe"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="search-application" type="wildcard">
-                <map:generate type="search"/>
-                <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
-                    <map:parameter name="context" value="{request:contextPath}"/>
-                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="search/*">
+            <map:match pattern="search/**" type="wildcard">
+                <!-- /apps/search/xml returns the xmlized search result -->
+                <map:match type="wildcard" pattern="search/xml">
+                    <map:generate type="search"/>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <!-- search2json.xsl converts the result xml to json -->
                 <map:match pattern="search/json" type="wildcard">
-                    <map:generate src="cocoon:/search-application"/>
+                    <map:generate type="search"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/search2json.xsl">
-                            <map:transform type="saxon" src="xsl/search2json.xsl"/>
+                            <map:transform src="xsl/search2json.xsl"/>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
@@ -32,22 +27,114 @@
                     </map:select>
                     <map:serialize type="text"/>
                 </map:match>
-                <map:match pattern="search/filtered-json" type="wildcard">
-                    <map:aggregate element="doc">
-                        <map:part src="cocoon:/search-application"/>
-                        <map:part src="cocoon://plain/{request-param:source}"/>
-                    </map:aggregate>
+                <!-- result with proxy links (if necessary) in xml format -->
+                <map:match pattern="search/proxy/xml" type="wildcard">
+                    <map:generate type="search"/>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/search-proxy.xsl">
+                            <map:transform type="saxon" src="xsl/search-proxy.xsl">
+                                <map:parameter name="context" value="{request:contextPath}"/>
+                                <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                                <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                                <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                                <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                            </map:transform>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
+                                <map:parameter name="context" value="{request:contextPath}"/>
+                                <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                                <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                                <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                                <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                            </map:transform>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <!-- result with proxy links (if necessary) in json format -->
+                <map:match pattern="search/proxy/json" type="wildcard">
+                    <map:generate type="file" src="cocoon:/search/proxy/xml"/>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/search2json.xsl">
+                            <map:transform src="xsl/search2json.xsl"/>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="text"/>
+                </map:match>
+                <!-- result in xml with only resources with ids in source request parameter document -->
+                <map:match pattern="search/filtered/xml" type="wildcard">
+                    <map:select type="resource-exists">
+                        <map:when test="content/{request-param:source}">
+                            <map:aggregate element="doc">
+                                <map:part src="cocoon:/search/xml"/>
+                                <map:part src="file:content/{request-param:source}"/>
+                            </map:aggregate>
+                        </map:when>
+                        <map:otherwise>
+                            <map:aggregate element="doc">
+                                <map:part src="cocoon:/search/xml"/>
+                                <map:part src="cocoon://content/{request-param:source}"/>
+                            </map:aggregate>
+                        </map:otherwise>
+                    </map:select>
                     <map:select type="resource-exists">
                         <map:when test="xsl/content2search.xsl">
-                            <map:transform type="saxon" src="xsl/content2search.xsl"/>
+                            <map:transform src="xsl/content2search.xsl"/>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/content2search.xsl"/>
                         </map:otherwise>
                     </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <!-- result in json with only resources with ids in source request parameter document -->
+                <map:match pattern="search/filtered/json" type="wildcard">
+                    <map:generate type="file" src="cocoon:/search/filtered/xml"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/search2json.xsl">
-                            <map:transform type="saxon" src="xsl/search2json.xsl"/>
+                            <map:transform src="xsl/search2json.xsl"/>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="text"/>
+                </map:match>
+                <!-- filtered and proxied xml -->
+                <map:match pattern="search/filtered/proxy/xml" type="wildcard">
+                    <map:generate type="file" src="cocoon:/search/filtered/xml"/>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/search-proxy.xsl">
+                            <map:transform type="saxon" src="xsl/search-proxy.xsl">
+                                <map:parameter name="context" value="{request:contextPath}"/>
+                                <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                                <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                                <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                                <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                            </map:transform>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
+                                <map:parameter name="context" value="{request:contextPath}"/>
+                                <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
+                                <map:parameter name="ticket" value="{laneweb:ticket}"/>
+                                <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                                <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                            </map:transform>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <!-- filtered and proxied json -->
+                <map:match pattern="search/filtered/proxy/xml" type="wildcard">
+                    <map:generate type="file" src="cocoon:/search/filtered/proxy/xml"/>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/search2json.xsl">
+                            <map:transform src="xsl/search2json.xsl"/>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search2json.xsl"/>

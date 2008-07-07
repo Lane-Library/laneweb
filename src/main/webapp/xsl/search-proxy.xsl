@@ -16,7 +16,8 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="s:url[not(starts-with(.,'http://lane.')) or contains(.,'postMethodHelper')]">
+    <!-- convert resource urls to ezproxy based on verious criteria -->
+    <xsl:template match="s:resource/s:url[not(starts-with(.,'http://lane.')) or contains(.,'postMethodHelper')]">
         <xsl:copy>
             <xsl:choose>
                 <xsl:when test="$proxy-links = 'true' and ($affiliation = 'LPCH' or $affiliation = 'SHC')">
