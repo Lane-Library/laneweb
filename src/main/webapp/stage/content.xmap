@@ -139,6 +139,7 @@
                         src="{naming:java:comp/env/stage-base}/content/portals/internal-medicine.html"/>
                     <map:part
                         src="{naming:java:comp/env/stage-base}/content/portals/lpch-cerner.html"/>
+                    <map:part src="{naming:java:comp/env/stage-base}/content/portals/pulmonary.html"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
