@@ -3,62 +3,51 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
-        <map:pipeline type="noncaching">
+        <map:pipeline type="throttling">
             <map:match pattern="search">
-                <map:generate type="eresources-search"/>
+                <map:generate type="eresources">
+                    <map:parameter name="mode" value="search"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="browse">
-                <map:generate type="eresources-browse"/>
+                <map:generate type="eresources">
+                    <map:parameter name="mode" value="browse"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="subset">
-                <map:generate type="eresources-subset"/>
+                <map:generate type="eresources">
+                    <map:parameter name="mode" value="browse"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="mesh">
-                <map:generate type="eresources-mesh"/>
+                <map:generate type="eresources">
+                    <map:parameter name="mode" value="mesh"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="core">
-                <map:generate type="eresources-core"/>
+                <map:generate type="eresources">
+                    <map:parameter name="mode" value="core"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="histdb">
-                <map:generate type="history"/>
-                <map:transform type="sql">
-                    <map:parameter name="use-connection" value="eresources"/>
-                </map:transform>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/historyErsql2html.xsl">
-                        <map:transform type="saxon" src="context://xsl/historyErsql2html.xsl">
-                            <map:parameter name="q" value="{request-param:q}"/>
-                            <map:parameter name="t" value="{request-param:t}"/>
-                            <map:parameter name="a" value="{request-param:a}"/>
-                        </map:transform>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/historyErsql2html.xsl">
-                            <map:parameter name="q" value="{request-param:q}"/>
-                            <map:parameter name="t" value="{request-param:t}"/>
-                            <map:parameter name="a" value="{request-param:a}"/>
-                        </map:transform>
-                    </map:otherwise>
-                </map:select>
+                <map:generate type="history">
+                    <map:parameter name="mode" value="search"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="count">
                 <map:generate type="eresources-count"/>
-                <map:transform type="sql">
-                    <map:parameter name="use-connection" value="eresources"/>
-                </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="history-count">
-                <map:generate type="history"/>
-                <map:transform type="sql">
-                    <map:parameter name="use-connection" value="eresources"/>
-                </map:transform>
+                <map:generate type="history-count">
+                    <map:parameter name="collection" value="history"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ezproxy-servers.txt">

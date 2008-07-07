@@ -98,7 +98,7 @@
         </map:pipeline>
         <map:pipeline type="noncaching" internal-only="true">
             <map:match pattern="secure/**" type="wildcard">
-                <map:generate type="html" src="{naming:java:comp/env/live-base}/content/secure/{1}"/>
+                <map:generate type="html" src="{naming:java:comp/env/stage-base}/content/secure/{1}"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>

@@ -4,9 +4,6 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline>
-            <map:match pattern="secure/login.html">
-                <map:act type="loginAction"/>
-            </map:match>
             <map:match pattern="javascript/yui/**" type="wildcard">
                 <map:mount uri-prefix="javascript/yui" check-reload="no" src="context://yui.xmap"/>
             </map:match>
@@ -23,39 +20,16 @@
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
             </map:match>
-            <map:match pattern="cookiesFetch.html" type="wildcard">
-                <map:select type="resource-exists">
-                    <map:when test="content/cookiesFetch.html">
-                        <map:generate type="file" src="content/cookiesFetch.html"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:generate type="file"
-                            src="{naming:java:comp/env/live-base}/content/cookiesFetch.html"/>
-                    </map:otherwise>
-                </map:select>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/cookiesFetch.xsl">
-                        <map:transform type="saxon" src="xsl/cookiesFetch.xsl">
-                            <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                            <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                            <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                            <map:parameter name="path" value="{request-param:path}"/>
-                            <map:parameter name="entryUrl" value="{request-param:entryUrl}"/>
-                            <map:parameter name="title" value="{request-param:title}"/>
-                        </map:transform>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
-                            <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                            <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                            <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                            <map:parameter name="path" value="{request-param:path}"/>
-                            <map:parameter name="entryUrl" value="{request-param:entryUrl}"/>
-                            <map:parameter name="title" value="{request-param:title}"/>
-                        </map:transform>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="xhtml"/>
+            <map:match pattern="search/*" type="wildcard">
+                <map:generate type="file" src="cocoon:/error.html"/>
+                <map:serialize type="xhtml" status-code="503"/>
+            </map:match>
+            <map:match pattern="secure/login.html">
+                <map:act type="loginAction"/>
+            </map:match>
+            <map:match pattern="plain/secure/**.html" type="wildcard">
+                <map:generate type="file" src="cocoon:/plain/error.html"/>
+                <map:serialize type="xhtml" status-code="403"/>
             </map:match>
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>

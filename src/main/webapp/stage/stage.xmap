@@ -73,10 +73,6 @@
                 <map:redirect-to uri="{request:contextPath}/stage/services/about/edtech/index.html"
                 />
             </map:match>
-            <map:match pattern="edtech/learning_spaces/facilities/m112.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/stage/services/spaces/features/m112.html"/>
-            </map:match>
             <map:match pattern="clinician/index.html" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/stage/portals/clinical.html"/>
             </map:match>

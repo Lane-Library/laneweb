@@ -8,7 +8,7 @@
     <xsl:strip-space
         elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
 
-    <!-- ===========================  PARAMETERS ========================= -->  
+    <!-- ===========================  PARAMETERS ========================= -->
     <!-- the template parameter from the request -->
     <xsl:param name="template"/>
     <!-- the request-uri ( not including parameters ) -->
@@ -17,8 +17,6 @@
     <xsl:param name="context"/>
     <!-- the query part of the request -->
     <xsl:param name="query-string"/>
-    <!-- whether debugging is on or not -->
-    <xsl:param name="debug"/>
 
     <xsl:param name="host"/>
 
@@ -41,7 +39,7 @@
 
     <!-- value of the 't' parameter -->
     <xsl:param name="t"/>
-    
+
     <!-- loadTab parameter -->
     <xsl:param name="loadTab"/>
 
@@ -69,7 +67,7 @@
     <xsl:variable name="source-doc" select="/*/h:html[1]"/>
     <!-- the sitemap document -->
     <xsl:variable name="sitemap" select="/*/h:html[2]"/>
-    
+
     <xsl:variable name="search-terms">
         <xsl:choose>
             <xsl:when test="$q">
@@ -105,8 +103,10 @@
             <xsl:when test="starts-with($request-uri,'portals/anesthesia')">/portals/anesthesia.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/cardiology')">/portals/cardiology.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/hematology')">/portals/hematology.html</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/internal-medicine')">/portals/internal-medicine.html</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/lpch-cerner')">/portals/lpch-cerner.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/internal-medicine')"
+                >/portals/internal-medicine.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/lpch-cerner')"
+                >/portals/lpch-cerner.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/pulmonary')">/portals/pulmonary.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/emergency')">/portals/emergency.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/')">clinical</xsl:when>
@@ -117,7 +117,7 @@
             <xsl:otherwise>all</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
-    
+
     <xsl:variable name="regex-search-terms">
         <xsl:if test="$q">
             <xsl:value-of select="replace($q,'(\\|\$)','\\$1')"/>
@@ -192,13 +192,13 @@
     </xsl:template>
 
     <!-- make sure there is not an empty <script/> element -->
-     <xsl:template match="h:script[@src]">
+    <xsl:template match="h:script[@src]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[local-name()!='space']"/>
             <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="h:script">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
@@ -314,20 +314,22 @@
     <!-- =====================  SPECIAL CASE TEMPLATES ===================== -->
     <!-- obfuscated email href (don't copy, processed elsewhere) -->
     <xsl:template match="attribute::href[starts-with(.,'mailto:')]"/>
-    
+
     <!-- add back to top for dl lists > 20 -->
     <xsl:template match="h:dl[count(h:dd) &gt; 20]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node | child::node()"/>
         </xsl:copy>
-        <a href="#"><img src="{$context}/graphics/icons/arrowUpTransp.gif" alt="up arrow"/> Back to top</a>
+        <a href="#"><img src="{$context}/graphics/icons/arrowUpTransp.gif" alt="up arrow"/> Back to
+            top</a>
     </xsl:template>
-    
+
     <!-- make current elibraryTab activeTab -->
     <xsl:template match="h:li[attribute::class='eLibraryTab']">
         <xsl:copy>
             <xsl:choose>
-                <xsl:when test="contains($request-uri,h:a/attribute::href) or $query-string and contains(h:a/attribute::href, $query-string)">
+                <xsl:when
+                    test="contains($request-uri,h:a/attribute::href) or $query-string and contains(h:a/attribute::href, $query-string)">
                     <xsl:attribute name="class">activeTab</xsl:attribute>
                     <xsl:apply-templates select="h:a/child::node()"/>
                 </xsl:when>
@@ -337,7 +339,7 @@
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- href and src attributes template -->
     <xsl:template match="@href">
         <xsl:choose>
@@ -347,7 +349,9 @@
                     <xsl:when test="$affiliation = 'LPCH' or $affiliation = 'SHC'">
                         <xsl:attribute name="href">
                             <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
-                            <xsl:value-of select="replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms)"/>
+                            <xsl:value-of
+                                select="replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms)"
+                            />
                         </xsl:attribute>
                     </xsl:when>
                     <xsl:when test="$ticket != '' and $sunetid != ''">
@@ -357,13 +361,17 @@
                             <xsl:text>&amp;ticket=</xsl:text>
                             <xsl:value-of select="$ticket"/>
                             <xsl:text>&amp;url=</xsl:text>
-                            <xsl:value-of select="replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms)"/>
+                            <xsl:value-of
+                                select="replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms)"
+                            />
                         </xsl:attribute>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:call-template name="make-link">
                             <xsl:with-param name="link">
-                                <xsl:value-of select="concat('/secure/login.html?url=',replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms))"/>
+                                <xsl:value-of
+                                    select="concat('/secure/login.html?url=',replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms))"
+                                />
                             </xsl:with-param>
                             <xsl:with-param name="attr" select="'href'"/>
                         </xsl:call-template>
@@ -426,24 +434,6 @@
             <xsl:apply-templates select="child::node()"/>
             <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
             <xsl:call-template name="meta-data"/>
-            <xsl:if test="$debug='y'">
-                  <link href="/javascript/yui/build/logger/assets/skins/sam/logger.css" type="text/css" rel="stylesheet"/>
-                <script src="/javascript/yui/build/logger/logger-min.js" type="text/javascript"><xsl:text> </xsl:text></script>
-                   <script src="/javascript/yui/build/dragdrop/dragdrop-min.js" type="text/javascript"><xsl:text> </xsl:text></script>
-                    <script type="text/javascript">
-                           <xsl:text>var context="</xsl:text><xsl:value-of select="$context"/><xsl:text>";</xsl:text>
-                        <xsl:text>var request_uri="</xsl:text><xsl:value-of select="$request-uri"/><xsl:text>";</xsl:text>
-                        <xsl:text>var query_string="</xsl:text><xsl:value-of select="$query-string"/><xsl:text>";</xsl:text>
-                        <xsl:text>var href="</xsl:text><xsl:value-of select="concat($context,'/',$request-uri,'?',$query-string)"/><xsl:text>";</xsl:text>
-                        <xsl:text>var ticket="</xsl:text><xsl:value-of select="$ticket"/><xsl:text>";</xsl:text>
-                        <xsl:text>var sunetid="</xsl:text><xsl:value-of select="$sunetid"/><xsl:text>";</xsl:text>
-                        <xsl:text>var proxy_links="</xsl:text><xsl:value-of select="$proxy-links"/><xsl:text>";</xsl:text>
-                        <xsl:text>var affiliation="</xsl:text><xsl:value-of select="$affiliation"/><xsl:text>";</xsl:text>
-                        <xsl:text>var search_form_select="</xsl:text><xsl:value-of select="$search-form-select"/><xsl:text>";</xsl:text>
-                        <xsl:text>var source="</xsl:text><xsl:value-of select="$source"/><xsl:text>";</xsl:text>
-                        <xsl:text>var searchTerms="</xsl:text><xsl:value-of select="$q"/><xsl:text>";</xsl:text>
-                    </script>
-                </xsl:if>
         </xsl:copy>
     </xsl:template>
 
@@ -469,9 +459,9 @@
 
     <!-- remove class="proxy" -->
     <xsl:template match="@class[.='proxy']"/>
-    
+
     <xsl:template match="@proxy"/>
-    
+
     <!-- TODO did the id of the input change? -->
     <xsl:template match="h:input[@id='lw_search-terms']">
         <xsl:copy>
@@ -493,50 +483,13 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- set the search tagline text -->
-    <xsl:template match="h:div[@id='displayTagline' or @id='displaySearchTaglineText']">
-        <xsl:variable name="taglineText"
-            select="$template-document//h:span[starts-with(@id,$search-form-select)]"/>
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:choose>
-                <xsl:when test="$taglineText">
-                    <xsl:value-of select="$taglineText"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- put the appropriate text into the content attribute of meta elements -->
-    <xsl:template match="h:meta[starts-with(@name,'lw_')]">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()[not(name()='content')]"/>
-            <xsl:attribute name="content">
-                <xsl:choose>
-                    <xsl:when test="@content = '{query-string}'">
-                        <xsl:value-of select="$query-string"/>
-                    </xsl:when>
-                    <xsl:when test="@content = '{proxy-links}'">
-                        <xsl:value-of select="$proxy-links"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="@content"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:attribute>
-        </xsl:copy>
-    </xsl:template>
-    
-    <!-- substitute the affiliation in the meta element -->
-    <xsl:template match="h:meta/@content[.='{affiliation}']">
+    <!-- add the affiliation to content of the meta element named WT.seg_1 for reporting to webtrends -->
+    <xsl:template match="h:meta[@name='WT.seg_1']/@content">
         <xsl:attribute name="content">
             <xsl:value-of select="$affiliation"/>
         </xsl:attribute>
     </xsl:template>
-    
+
     <!-- even/odd tr classes for striped table -->
     <xsl:template match="h:tr[parent::h:table[@class='striped']]">
         <xsl:copy>
@@ -552,9 +505,10 @@
             <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- add class="labeled" where appropriate -->
-    <xsl:template match="h:p[preceding-sibling::*[1][self::h:h3]]
+    <xsl:template
+        match="h:p[preceding-sibling::*[1][self::h:h3]]
         |h:ul[preceding-sibling::*[1][self::h:h3]]
         |h:form[preceding-sibling::*[1][self::h:h3]]
         |h:ol[preceding-sibling::*[1][self::h:h3]]
@@ -569,7 +523,7 @@
             <xsl:apply-templates/>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- create the tabbed box markup -->
     <xsl:template match="h:div[@class='fMainBox']">
         <div class="tabs">
@@ -621,22 +575,29 @@
             <xsl:apply-templates select="child::h:div[@id='otherPortalOptions']"/>
         </div>
         <xsl:copy>
-            <xsl:apply-templates select="attribute::node()" />
+            <xsl:apply-templates select="attribute::node()"/>
             <xsl:for-each select="h:h2">
                 <xsl:variable name="stop-point">
                     <xsl:value-of select="last() - position()"/>
                 </xsl:variable>
                 <xsl:variable name="id">
                     <xsl:choose>
-                        <xsl:when test="@id"><xsl:value-of select="@id"/></xsl:when>
-                        <xsl:otherwise><xsl:value-of select="concat('tab', position())"/></xsl:otherwise>
+                        <xsl:when test="@id">
+                            <xsl:value-of select="@id"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat('tab', position())"/>
+                        </xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
-                <xsl:if test="(count(parent::h:div/h:h2) = 1)
+                <xsl:if
+                    test="(count(parent::h:div/h:h2) = 1)
                     or ($loadTab != '' and $loadTab = $id) 
                     or ($loadTab = '' and @class = 'activeTab') 
                     or ($loadTab = '' and not(../h:h2[@class = 'activeTab']) and position()!=1)">
-                    <xsl:apply-templates select="following-sibling::node()[not(@id='otherPortalOptions') and count(following-sibling::h:h2) = $stop-point]"/>
+                    <xsl:apply-templates
+                        select="following-sibling::node()[not(@id='otherPortalOptions') and count(following-sibling::h:h2) = $stop-point]"
+                    />
                 </xsl:if>
             </xsl:for-each>
             <xsl:if test="not(h:h2)">
@@ -644,7 +605,7 @@
             </xsl:if>
         </xsl:copy>
     </xsl:template>
-    
+
 
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
     <!-- puts in the current document's content (not any more) (well ok, need backwards compatibility for now )-->
@@ -731,43 +692,31 @@
     </xsl:template>
 
     <xsl:template match="h:form[attribute::id='searchForm']">
-         <xsl:copy>
-          <xsl:apply-templates select="attribute::node()|child::node()"/>
-         <xsl:if test="$debug='y'">
-                <input type="hidden"  name="debug" value="y"/>
-         </xsl:if>
-        <xsl:if test="not($template-is-default)">
-                <input type="hidden"  name="template" value="{$response-template}"/>
-        </xsl:if>
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()|child::node()"/>
+            <xsl:if test="not($template-is-default)">
+                <input type="hidden" name="template" value="{$response-template}"/>
+            </xsl:if>
         </xsl:copy>
     </xsl:template>
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 
-    
+
     <!-- adds parameters to href attributes depending on various parameter states -->
     <xsl:template name="make-link">
         <xsl:param name="link"/>
         <xsl:param name="attr"/>
         <xsl:variable name="param-string">
-            <xsl:if test="not(contains($link,'/secure/login.html')) and ($debug='y' or not($template-is-default))">
+            <xsl:if test="not(contains($link,'/secure/login.html')) and not($template-is-default)">
                 <xsl:choose>
                     <xsl:when test="contains($link, '?')">&amp;</xsl:when>
                     <xsl:otherwise>?</xsl:otherwise>
                 </xsl:choose>
-                <xsl:choose>
-                    <xsl:when test="$debug='y' and not($template-is-default)">
-                        <xsl:text>debug=y&amp;template=</xsl:text>
-                        <xsl:value-of select="$response-template"/>
-                    </xsl:when>
-                    <xsl:when test="not($template-is-default)">
-                        <xsl:text>template=</xsl:text>
-                        <xsl:value-of select="$response-template"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>debug=y</xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
+                <xsl:if test="not($template-is-default)">
+                    <xsl:text>template=</xsl:text>
+                    <xsl:value-of select="$response-template"/>
+                </xsl:if>
             </xsl:if>
         </xsl:variable>
         <xsl:attribute name="{$attr}">
@@ -812,20 +761,16 @@
         <xsl:if test="$host">
             <meta name="LW.host" content="{$host}"/>
         </xsl:if>
-        <xsl:if test="$debug">
-            <meta name="LW.debug" content="{$debug}"/>
-        </xsl:if>
     </xsl:template>
 
     <xsl:template name="tokenize-email">
         <xsl:param name="string"/>
-        <xsl:value-of
-            select="concat('|',substring($string,1,1))"/>
-            <xsl:if test="string-length($string) &gt; 1">
-                <xsl:call-template name="tokenize-email">
-                    <xsl:with-param name="string" select="substring($string,2)"/>
-                </xsl:call-template>
-            </xsl:if>
+        <xsl:value-of select="concat('|',substring($string,1,1))"/>
+        <xsl:if test="string-length($string) &gt; 1">
+            <xsl:call-template name="tokenize-email">
+                <xsl:with-param name="string" select="substring($string,2)"/>
+            </xsl:call-template>
+        </xsl:if>
     </xsl:template>
 
     <!-- the breadcrumb -->
@@ -919,7 +864,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <!-- here is the flash detect thing -->
     <xsl:template match="h:object[h:param[@name='flash-version']]">
         <xsl:variable name="flash-version">
@@ -1009,9 +954,11 @@
             </xsl:text>
             </xsl:comment>
         </script>
-        <noscript><p>This flash object requires javascript.</p></noscript>
+        <noscript>
+            <p>This flash object requires javascript.</p>
+        </noscript>
     </xsl:template>
-    
+
     <xsl:template name="js-split">
         <xsl:param name="string"/>
         <xsl:variable name="char">

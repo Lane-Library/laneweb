@@ -291,17 +291,12 @@
                 <map:transform type="saxon" src="context://xsl/describe.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-
-
             <!-- ========================== permenent redirects ============================ -->
             <map:match pattern="classes/index.html" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/services/workshops/laneclasses.html"/>
             </map:match>
             <map:match pattern="edtech/index.html" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/services/about/edtech/index.html"/>
-            </map:match>
-            <map:match pattern="edtech/learning_spaces/facilities/m112.html" type="wildcard">
-                <map:redirect-to uri="{request:contextPath}/services/spaces/features/m112.html"/>
             </map:match>
             <map:match pattern="clinician/index.html" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/portals/clinical.html"/>
