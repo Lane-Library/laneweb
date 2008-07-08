@@ -163,7 +163,7 @@
                 <map:redirect-to uri="{request:contextPath}/{1}/index.html"/>
             </map:match>
             <map:match pattern="stage/**" type="wildcard">
-                <map:mount uri-prefix="stage" check-reload="yes" src="context://stage/stage.xmap"/>
+                <map:mount uri-prefix="stage" check-reload="no" src="context://stage/stage.xmap"/>
             </map:match>
             <map:match pattern="ceyates/**" type="wildcard">
                 <map:mount uri-prefix="ceyates" check-reload="yes"
