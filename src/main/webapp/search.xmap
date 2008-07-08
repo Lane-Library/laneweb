@@ -4,13 +4,20 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
+            <!-- search.xmap depends on applications.xmap and eresources.xmap -->
+            <map:match pattern="apps/**" type="wildcard">
+                <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
+            </map:match>
+            <map:match pattern="eresources" type="wildcard">
+                <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
+            </map:match>
             <map:match pattern="search.html" type="wildcard">
                 <!-- original metasearch sources -->
                 <map:match type="regex-parameter"
                     pattern="^(clinical|peds|research|pharmacy|history|test)$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
-                        <map:part src="cocoon://apps/search/proxy/xml"/>
+                        <map:part src="cocoon:/apps/search/proxy/xml"/>
                         <map:part src="cocoon:/cached/search/{request-param:source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
@@ -24,7 +31,7 @@
                 <map:match type="regex-parameter" pattern="^\/.+\.html$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
-                        <map:part src="cocoon://apps/search/proxy/xml"/>
+                        <map:part src="cocoon:/apps/search/proxy/xml"/>
                         <map:part src="cocoon:/cached/{request-param:source}"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
@@ -38,8 +45,8 @@
                 <map:match type="regex-parameter" pattern="^.+$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
-                        <map:part src="cocoon://apps/search/proxy/xml"/>
-                        <map:part src="cocoon://eresources/count"/>
+                        <map:part src="cocoon:/apps/search/proxy/xml"/>
+                        <map:part src="cocoon:/eresources/count"/>
                         <map:part src="cocoon:/cached/search.html"/>
                         <map:part src="cocoon:/cached/search/{request-param:source}.html"/>
                     </map:aggregate>

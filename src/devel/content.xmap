@@ -7,6 +7,9 @@
             <map:match pattern="eresources/**" type="wildcard">
                 <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
             </map:match>
+            <map:match pattern="apps/**" type="wildcard">
+                <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
+            </map:match>
             <map:match pattern="online/(ej|db|cc|eb)browse.html" type="regex">
                 <map:select type="resource-exists">
                     <map:when test="content/online/{1}browse.html">
@@ -36,7 +39,7 @@
             </map:match>
             <map:match pattern="search-tab-results">
                 <map:aggregate element="search-tab-results" >
-                    <map:part src="cocoon://apps/search/proxy/xml"/>  
+                    <map:part src="cocoon:/apps/search/proxy/xml"/>  
                     <map:part src="cocoon:/search-templates.xml"/>
                 </map:aggregate>
                 <map:select type="resource-exists">
@@ -79,10 +82,11 @@
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
-                <map:generate src="cocoon://apps/sfx/highly-accessed2rss"/>
+                <map:generate src="cocoon:/apps/sfx/highly-accessed2rss"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="howto/index.html" type="wildcard">
+                <!-- this grabs the cached version of the lane-faq-all.html document -->
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/faq.xsl">
@@ -104,6 +108,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="faq-category-list.html">
+                <!-- this grabs the cached version of the lane-faq-all.html document -->
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/faq=category-list.xsl">
@@ -120,6 +125,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search-templates.xml" type="wildcard">
+                <!-- rather than check for each of the aggregated documents, grab the live version -->
                 <map:generate type="file" src="cocoon://content/search-templates.xml"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-templates.xsl">

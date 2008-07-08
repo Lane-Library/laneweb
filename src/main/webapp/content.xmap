@@ -7,6 +7,9 @@
             <map:match pattern="eresources/**" type="wildcard">
                 <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
+            <map:match pattern="apps/**" type="wildcard">
+                <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
+            </map:match>
             <map:match pattern="online/(ej|db|cc|eb)browse.html" type="regex">
                 <map:generate type="html"
                     src="{naming:java:comp/env/live-base}/content/online/{1}browse.html"/>
@@ -22,7 +25,7 @@
             </map:match>
             <map:match pattern="search-tab-results" type="wildcard">
                 <map:aggregate element="search-tab-results">
-                    <map:part src="cocoon://apps/search/proxy/xml"/>
+                    <map:part src="cocoon:/apps/search/proxy/xml"/>
                     <map:part src="cocoon:/search-templates.xml"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/search-tab-results.xsl"/>
@@ -40,7 +43,7 @@
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
-                <map:generate src="cocoon://apps/sfx/highly-accessed2rss"/>
+                <map:generate src="cocoon:/apps/sfx/highly-accessed2rss"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="portals/history/historySearchResults.html" type="wildcard">
