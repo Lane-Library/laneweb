@@ -5,7 +5,7 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="eresources/**" type="wildcard">
-                <map:mount uri-prefix="eresources" check-reload="yes"
+                <map:mount uri-prefix="eresources" check-reload="no"
                     src="context://stage/eresources.xmap"/>
             </map:match>
             <map:match pattern="online/(ej|db|cc|eb)browse.html" type="regex">
@@ -16,60 +16,10 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search.html" type="wildcard">
-                <map:match type="regex-parameter"
-                    pattern="^(clinical|peds|research|pharmacy|history|test)$">
-                    <map:parameter name="parameter-name" value="source"/>
-                    <map:aggregate element="doc">
-                        <map:part src="cocoon://stage/apps/search/proxy/xml"/>
-                        <map:part src="cocoon:/search/{request-param:source}.html"/>
-                    </map:aggregate>
-                    <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="context://xsl/metasearch.xsl">
-                        <map:parameter name="query-string" value="{request:queryString}"/>
-                        <map:parameter name="source" value="{request-param:source}"/>
-                    </map:transform>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match type="regex-parameter" pattern="^\/.+\.html$">
-                    <map:parameter name="parameter-name" value="source"/>
-                    <map:aggregate element="doc">
-                        <map:part src="cocoon://stage/apps/search/proxy/xml"/>
-                        <map:part
-                            src="{naming:java:comp/env/stage-base}/content{request-param:source}"/>
-                    </map:aggregate>
-                    <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="context://xsl/metasearch.xsl">
-                        <map:parameter name="query-string" value="{request:queryString}"/>
-                        <map:parameter name="source" value="{request-param:source}"/>
-                    </map:transform>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match type="regex-parameter" pattern="^.+$">
-                    <map:parameter name="parameter-name" value="source"/>
-                    <map:aggregate element="doc">
-                        <map:part src="cocoon://stage/apps/search/proxy/xml"/>
-                        <map:part src="cocoon:/eresources/count"/>
-                        <map:part src="{naming:java:comp/env/stage-base}/content/search.html"/>
-                        <map:part src="cocoon:/search/{request-param:source}.html"/>
-                    </map:aggregate>
-                    <map:transform type="saxon" src="context://xsl/search.xsl">
-                        <map:parameter name="q" value="{request-param:q}"/>
-                        <map:parameter name="source" value="{request-param:source}"/>
-                    </map:transform>
-                    <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
-                    <map:serialize type="xml"/>
-                </map:match>
+                <map:mount uri-prefix="" check-reload="no" src="search.xmap"/>
             </map:match>
-            <map:match pattern="search/**.html" type="wildcard">
-                <map:generate type="file" src="cocoon:/search-templates/{1}.html"/>
-                <map:transform type="saxon" src="context://xsl/search.xsl">
-                    <map:parameter name="q" value="{request-param:q}"/>
-                    <map:parameter name="source" value="{request-param:source}"/>
-                </map:transform>
-                <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
-                <map:serialize type="xml"/>
+            <map:match pattern="search/**" type="wildcard">
+                <map:mount uri-prefix="" check-reload="no" src="search.xmap"/>
             </map:match>
             <map:match pattern="search-tab-results" type="wildcard">
                 <map:aggregate element="search-tab-results">
@@ -89,11 +39,6 @@
                     src="{request-param:rss-url}"/>
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
                 <map:serialize type="xhtml"/>
-            </map:match>
-            <map:match pattern="search-templates/**.html" type="wildcard">
-                <map:generate type="file"
-                    src="{naming:java:comp/env/stage-base}/content/search/{1}.html"/>
-                <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching" internal-only="true">
@@ -125,10 +70,10 @@
             <map:match pattern="search-templates.xml" type="wildcard">
                 <map:aggregate element="search-templates"
                     ns="http://lane.stanford.edu/search-templates/ns">
-                    <map:part src="cocoon:/search-templates/clinical.html"/>
-                    <map:part src="cocoon:/search-templates/peds.html"/>
-                    <map:part src="cocoon:/search-templates/research.html"/>
-                    <map:part src="cocoon:/search-templates/history.html"/>
+                    <map:part src="{naming:java:comp/env/stage-base}/clinical.html"/>
+                    <map:part src="{naming:java:comp/env/stage-base}/peds.html"/>
+                    <map:part src="{naming:java:comp/env/stage-base}/research.html"/>
+                    <map:part src="{naming:java:comp/env/stage-base}/history.html"/>
                     <map:part
                         src="{naming:java:comp/env/stage-base}/content/portals/anesthesia.html"/>
                     <map:part

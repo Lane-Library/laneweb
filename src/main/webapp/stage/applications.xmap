@@ -12,11 +12,6 @@
                 <map:generate type="search-url-tester"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <!-- this match for backward compatibility -->
-            <map:match pattern="search/filtered-json" type="wildcard">
-                <map:generate src="cocoon:/search/filtered/proxy/json" type="file"/>
-                <map:serialize type="text"/>
-            </map:match>
             <!-- matches /apps/search/ requests -->
             <map:match pattern="search/**" type="wildcard">
                 <!-- /apps/search/xml returns the xmlized search result -->

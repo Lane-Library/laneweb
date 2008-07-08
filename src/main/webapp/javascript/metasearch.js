@@ -15,7 +15,7 @@ function initializeMetasearch(e)
      window.searchTemplate = (getMetaContent("LW.searchTemplate")) ? getMetaContent("LW.searchTemplate"): location.pathname.replace('/./.','');
      if( window.searchTerms && window.searchTerms != 'undefined'  )
      {
-        YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate, window.metasearchCallback);
+        YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/filtered/proxy/json?q='+window.searchTerms+'&source='+window.searchTemplate, window.metasearchCallback);
          YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack);
         if(YAHOO.util.Dom.inDocument('searchIndicator')){
              window.searchIndicator = new SearchIndicator('searchIndicator','Search Starting ... ');
@@ -36,7 +36,7 @@ var showMetasearchResults = function(o)
             var sleepingTime = 2000; //2 seconds
             if(window.counter > 15) //time sleepingtime (2 seconds) * 15 = 30 seconds
                 sleepingTime = 10000;// 10 seconds
-            setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered-json?q='+window.searchTerms+'&source='+window.searchTemplate+'&rd='+Math.random()+"', window.metasearchCallback);",sleepingTime);
+            setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered/proxy/json?q='+window.searchTerms+'&source='+window.searchTemplate+'&rd='+Math.random()+"', window.metasearchCallback);",sleepingTime);
         }
         for( var z = 0; z<metasearchElements.length; z++){
             if( metasearchElements[z].className != 'complete'  ) {
