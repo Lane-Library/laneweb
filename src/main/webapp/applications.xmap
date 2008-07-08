@@ -1,4 +1,5 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- this is the live applications.xmap -->
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
@@ -12,7 +13,7 @@
                 <map:generate type="search-url-tester"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <!-- matches /apps/search/ requests -->
+            <!-- matches all /apps/search/ requests -->
             <map:match pattern="search/**" type="wildcard">
                 <!-- /apps/search/xml returns the xmlized search result -->
                 <map:match type="wildcard" pattern="search/xml">
@@ -76,6 +77,15 @@
                     <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
                     <map:serialize type="text"/>
                 </map:match>
+                <!-- search tab results -->
+                <map:match pattern="search/tabs/json" type="wildcard">
+                    <map:aggregate element="search-tab-results">
+                        <map:part src="cocoon:/search/xml"/>
+                        <map:part src="cocoon:/cache/search/templates/xml"/>
+                    </map:aggregate>
+                    <map:transform type="saxon" src="context://xsl/search-tab-results.xsl"/>
+                    <map:serialize type="text"/>
+                </map:match>
             </map:match>
             <map:match pattern="querymap/*">
                 <map:match pattern="querymap/map">
@@ -132,11 +142,35 @@
                     <map:serialize type="text"/>
                 </map:match>
                 <map:match pattern="sfx/highly-accessed2rss" type="wildcard">
-                    <map:generate 
-                        src="http://sfx.stanford.edu/local/cgi/public/get_file.cgi?file=highly-accessed.xml"/>
+                    <map:generate
+                        src="http://sfx.stanford.edu/local/cgi/public/get_file.cgi?file=highly-accessed.xml" type="file"/>
                     <map:transform src="context://xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>
                     <map:serialize type="xml"/>
                 </map:match>
+            </map:match>
+        </map:pipeline>
+        <!-- caching pipeline for static documents -->
+        <map:pipeline type="caching">
+            <map:match pattern="cache/search/templates/xml" type="wildcard">
+                <map:aggregate element="search-templates"
+                    ns="http://lane.stanford.edu/search-templates/ns">
+                    <map:part src="cocoon:/cache/search/clinical.html"/>
+                    <map:part src="cocoon:/cache/search/peds.html"/>
+                    <map:part src="cocoon:/cache/search/research.html"/>
+                    <map:part src="cocoon:/cache/search/history.html"/>
+                    <map:part src="cocoon:/cache/portals/anesthesia.html"/>
+                    <map:part src="cocoon:/cache/portals/cardiology.html"/>
+                    <map:part src="cocoon:/cache/portals/hematology.html"/>
+                    <map:part src="cocoon:/cache/portals/internal-medicine.html"/>
+                    <map:part src="cocoon:/cache/portals/lpch-cerner.html"/>
+                    <map:part src="cocoon:/cache/portals/pulmonary.html"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="cache/**.html" type="wildcard">
+                <map:generate src="{naming:java:comp/env/live-base}/content/{1}.html" type="html"/>
+                <map:serialize type="xml"/>
             </map:match>
             <map:handle-errors>
                 <map:generate type="exception"/>

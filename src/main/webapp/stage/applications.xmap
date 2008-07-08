@@ -76,6 +76,15 @@
                     <map:transform type="saxon" src="context://xsl/search2json.xsl"/>
                     <map:serialize type="text"/>
                 </map:match>
+                <!-- search tab results -->
+                <map:match pattern="search/tabs/json" type="wildcard">
+                    <map:aggregate element="search-tab-results">
+                        <map:part src="cocoon:/search/xml"/>
+                        <map:part src="cocoon:/cache/search/templates/xml"/>
+                    </map:aggregate>
+                    <map:transform type="saxon" src="context://xsl/search-tab-results.xsl"/>
+                    <map:serialize type="text"/>
+                </map:match>
             </map:match>
             <map:match pattern="querymap/*">
                 <map:match pattern="querymap/map">
@@ -143,6 +152,28 @@
                     <map:transform src="context://xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>
                     <map:serialize type="xml"/>
                 </map:match>
+            </map:match>
+            <!-- these next matches use cache in live, but here just require html generator -->
+            <map:match pattern="cache/search/templates/xml" type="wildcard">
+                <map:aggregate element="search-templates"
+                    ns="http://lane.stanford.edu/search-templates/ns">
+                    <map:part src="cocoon:/cache/search/clinical.html"/>
+                    <map:part src="cocoon:/cache/search/peds.html"/>
+                    <map:part src="cocoon:/cache/search/research.html"/>
+                    <map:part src="cocoon:/cache/search/history.html"/>
+                    <map:part src="cocoon:/cache/portals/anesthesia.html"/>
+                    <map:part src="cocoon:/cache/portals/cardiology.html"/>
+                    <map:part src="cocoon:/cache/portals/hematology.html"/>
+                    <map:part src="cocoon:/cache/portals/internal-medicine.html"/>
+                    <map:part src="cocoon:/cache/portals/lpch-cerner.html"/>
+                    <map:part src="cocoon:/cache/portals/pulmonary.html"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="cache/**.html" type="wildcard">
+                <map:generate src="{naming:java:comp/env/live-base}/content/{1}.html" type="html"/>
+                <map:serialize type="xml"/>
             </map:match>
             <map:handle-errors>
                 <map:generate type="exception"/>

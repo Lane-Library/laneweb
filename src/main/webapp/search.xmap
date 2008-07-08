@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- this is the live search.xmap -->
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
@@ -72,7 +73,7 @@
             </map:match>
         </map:pipeline>
         <!-- static documents cached and accessed via html generator -->
-        <map:pipeline internal-only="true" type="caching">
+        <map:pipeline type="caching">
             <map:match pattern="cached/**" type="wildcard">
                 <map:generate src="{naming:java:comp/env/live-base}/content/{1}" type="html"/>
                 <map:serialize type="xml"/>

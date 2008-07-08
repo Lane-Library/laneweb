@@ -21,7 +21,7 @@ function initSearch() {
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q='+window.searchTerms, window.querymapCallBack);
           YAHOO.util.Connect.asyncRequest('GET', '/././apps/sfx/json?q='+window.searchTerms, window.findItCallBack);
            YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q='+window.searchTerms, window.spellCheckCallBack );
-           YAHOO.util.Connect.asyncRequest('GET', '/././content/search-tab-results?q='+window.searchTerms, window.showHitsCallback);
+           YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/tabs/json?q='+window.searchTerms, window.showHitsCallback);
         var tabs = document.getElementById('eLibraryTabs').getElementsByTagName('li');
         var popIn = document.getElementById('popInContent');
         for (var i = 0; i  < tabs.length; i++) {
@@ -232,7 +232,7 @@ function showHits(o) {
     {    // if time superior at 20 seconds the sleeping time equals 10 seconds
         if(remainingTime > 20 * 1000)
             sleepingTime = 10000;
-        setTimeout( "YAHOO.util.Connect.asyncRequest('GET', '"+'/././content/search-tab-results?q='+window.searchTerms+'&rd='+Math.random()+"', window.showHitsCallback);", sleepingTime);
+        setTimeout( "YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/tabs/json?q='+window.searchTerms+'&rd='+Math.random()+"', window.showHitsCallback);", sleepingTime);
     }
 }
 
