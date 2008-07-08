@@ -39,6 +39,10 @@
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
                 <map:serialize type="xhtml"/>
             </map:match>
+            <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
+                <map:generate src="cocoon://apps/sfx/highly-accessed2rss"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="portals/history/historySearchResults.html" type="wildcard">
                 <map:generate type="html"
                     src="{naming:java:comp/env/live-base}/content/portals/history/historySearchResults.html"/>

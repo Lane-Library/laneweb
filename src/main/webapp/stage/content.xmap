@@ -40,6 +40,10 @@
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
                 <map:serialize type="xhtml"/>
             </map:match>
+            <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
+                <map:generate src="cocoon://stage/apps/sfx/highly-accessed2rss"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching" internal-only="true">
             <map:match pattern="secure/**" type="wildcard">

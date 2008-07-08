@@ -217,6 +217,10 @@
                 </map:select>
                 <map:serialize type="xhtml"/>
             </map:match>
+            <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
+                <map:generate src="cocoon://apps/sfx/highly-accessed2rss"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="howto/index.html" type="wildcard">
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
                 <map:select type="resource-exists">
