@@ -68,20 +68,10 @@
                 </map:match>
                 <!-- result in xml with only resources with ids in source request parameter document -->
                 <map:match pattern="search/filtered/xml" type="wildcard">
-                    <map:select type="resource-exists">
-                        <map:when test="content/{request-param:source}">
-                            <map:aggregate element="doc">
-                                <map:part src="cocoon:/search/xml"/>
-                                <map:part src="file:content/{request-param:source}"/>
-                            </map:aggregate>
-                        </map:when>
-                        <map:otherwise>
-                            <map:aggregate element="doc">
-                                <map:part src="cocoon:/search/xml"/>
-                                <map:part src="cocoon:/{request-param:source}"/>
-                            </map:aggregate>
-                        </map:otherwise>
-                    </map:select>
+                    <map:aggregate element="doc">
+                        <map:part src="cocoon:/search/xml"/>
+                        <map:part src="cocoon:/cache{request-param:source}"/>
+                    </map:aggregate>
                     <map:select type="resource-exists">
                         <map:when test="xsl/content2search.xsl">
                             <map:transform src="xsl/content2search.xsl" type="saxon"/>

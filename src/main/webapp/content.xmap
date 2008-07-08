@@ -19,10 +19,10 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search.html" type="wildcard">
-                <map:mount uri-prefix="" check-reload="no" src="search.xmap"/>
+                <map:mount uri-prefix="" check-reload="yes" src="search.xmap"/>
             </map:match>
             <map:match pattern="search/*.html" type="wildcard">
-                <map:mount uri-prefix="" check-reload="no" src="search.xmap"/>
+                <map:mount uri-prefix="" check-reload="yes" src="search.xmap"/>
             </map:match>
             <map:match pattern="random" type="wildcard">
                 <map:generate type="file" src="{request-param:source}"/>

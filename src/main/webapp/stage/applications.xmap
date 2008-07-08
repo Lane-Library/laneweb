@@ -47,7 +47,7 @@
                 <map:match pattern="search/filtered/xml" type="wildcard">
                     <map:aggregate element="doc">
                         <map:part src="cocoon:/search/xml"/>
-                        <map:part src="cocoon:/{request-param:source}"/>
+                        <map:part src="cocoon:/cache{request-param:source}"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/content2search.xsl"/>
                     <map:serialize type="xml"/>
