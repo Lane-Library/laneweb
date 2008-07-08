@@ -56,14 +56,6 @@
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match pattern="describe.html" type="wildcard">
-                <map:aggregate element="portals" ns="http://lane.stanford.edu/describe/ns">
-                    <map:part src="cocoon:/apps/search-describe-application"/>
-                    <map:part src="cocoon:/search-templates.xml"/>
-                </map:aggregate>
-                <map:transform type="saxon" src="context://xsl/describe.xsl"/>
-                <map:serialize type="xhtml"/>
-            </map:match>
             <!-- ========================== permenent redirects ============================ -->
             <map:match pattern="classes/index.html" type="wildcard">
                 <map:redirect-to

@@ -4,10 +4,6 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match pattern="search-describe-application" type="wildcard">
-                <map:generate type="search-describe"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match pattern="url-tester" type="wildcard">
                 <map:generate type="search-url-tester"/>
                 <map:serialize type="xhtml"/>
@@ -85,6 +81,20 @@
                     <map:transform type="saxon" src="context://xsl/search-tab-results.xsl"/>
                     <map:serialize type="text"/>
                 </map:match>
+            </map:match>
+            <!-- search describe xml output -->
+            <map:match pattern="search/describe/xml" type="wildcard">
+                <map:generate type="search-describe"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- search describe html output -->
+            <map:match pattern="search/describe/html" type="wildcard">
+                <map:aggregate element="portals" ns="http://lane.stanford.edu/describe/ns">
+                    <map:part src="cocoon:/search/describe/xml"/>
+                    <map:part src="cocoon:/cache/search/templates/xml"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="context://xsl/describe.xsl"/>
+                <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="querymap/*">
                 <map:match pattern="querymap/map">
@@ -172,7 +182,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="cache/**.html" type="wildcard">
-                <map:generate src="{naming:java:comp/env/live-base}/content/{1}.html" type="html"/>
+                <map:generate src="{naming:java:comp/env/stage-base}/content/{1}.html" type="html"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:handle-errors>
