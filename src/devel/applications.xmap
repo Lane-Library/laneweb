@@ -117,7 +117,7 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- filtered and proxied json -->
-                <map:match pattern="search/filtered/proxy/xml" type="wildcard">
+                <map:match pattern="search/filtered/proxy/json" type="wildcard">
                     <map:generate type="file" src="cocoon:/search/filtered/proxy/xml"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/search2json.xsl">
