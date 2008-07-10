@@ -39,24 +39,21 @@ LANE.core = LANE.core || {
         y.addListener(document, 'mouseout', c.handleMouseOut);
         y.addListener(document, 'click', c.handleClick);
     },
+    //calls 'activate' function on target
     handleMouseOver: function(e){
         var t = e.srcElement || e.target;
         if (t.activate) {
             t.activate(e);
         }
     },
+    //calls 'deactivate' function on target
     handleMouseOut: function(e){
         var t = e.srcElement || e.target;
         if (t.deactivate) {
             t.deactivate(e);
         }
     },
-    handleChange: function(e){
-        var t = e.srcElement || e.target;
-        if (t.change) {
-            t.change(e);
-        }
-    },
+    //calls 'clicked' function on target and any parent elements
     handleClick: function(e){
         var t = e.srcElement || e.target;
         while (t) {
@@ -64,12 +61,6 @@ LANE.core = LANE.core || {
                 t.clicked(e);
             }
             t = t.parentNode;
-        }
-    },
-    handleSubmit: function(e){
-        var t = e.srcElement || e.target;
-        if (t.submit) {
-            t.submit(e);
         }
     }
 };
@@ -153,51 +144,15 @@ function finalize(e) {
 }
 
 function initializeMetaTags(e) {
-    var metaTagElements = document.getElementsByTagName('meta');
-    for (var i = 0; i < metaTagElements.length; i++) {
-        var key = metaTagElements[i].getAttribute('name');
-        var value = metaTagElements[i].getAttribute('content');
-        if (key !== undefined && value !== undefined) {
-            window.metaTags[key] = value;
-        }
-    }
 }
 
 function getMetaContent(name) {
-    if (undefined == name) {
-        throw "null name";
-    }
-    return window.metaTags[name] !== undefined ? window.metaTags[name] : null;
-}
-
-function handleMouseOver(e) {
-    var target = (e.srcElement) ? e.srcElement : e.target;
-    if (target.activate) {
-        target.activate(e);
-    }
-}
-
-function handleMouseOut(e) {
-    var target = (e.srcElement) ? e.srcElement : e.target;
-    if (target.deactivate) {
-        target.deactivate(e);
-    }
 }
 
 function handleChange(e) {
     var target = (e.srcElement) ? e.srcElement : e.target;
     if (target.change) {
         target.change(e);
-    }
-}
-
-function handleClick(e) {
-    var target = (e.srcElement) ? e.srcElement : e.target;
-    while (target !== null) {
-        if (target.clicked) {
-            target.clicked(e);
-        }
-        target = target.parentNode;
     }
 }
 

@@ -1,10 +1,13 @@
 /**
  * @author ceyates
  */
-LANE.core.initialize();
 var Assert = YAHOO.util.Assert;
 var TestRunner = YAHOO.tool.TestRunner;
 var TestCase = YAHOO.tool.TestCase;
+var UserAction = YAHOO.util.UserAction;
+
+LANE.core.initialize();
+
 var LANETestCase = new TestCase({
     name: "Lane TestCase",
     testExists: function(){
@@ -32,39 +35,35 @@ var LANECoreTestCase = new TestCase({
     testHandleMouseOver: function(){
         var d = document, p, e;
         p = d.getElementById('p');
-        p.activate = function() {
-            this.style.color = 'red';
+        p.foo = 'foo';
+        p.activate = function(){
+            this.foo = 'bar';
         };
-        e = d.createEvent("MouseEvents");
-        e.initMouseEvent("mouseover", true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, p);
-        p.dispatchEvent(e);
-        Assert.areEqual('red', p.style.color);
+        YAHOO.util.UserAction.mouseover(p);
+        Assert.areEqual('bar', p.foo);
     },
     testHandleMouseOut: function(){
         var d = document, p, e;
         p = d.getElementById('p');
-        p.deactivate = function() {
-            this.style.color = 'blue';
+        p.foo = 'foo';
+        p.deactivate = function(){
+            this.foo = 'bar';
         };
-        e = d.createEvent("MouseEvents");
-        e.initMouseEvent("mouseout", true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, p);
-        p.dispatchEvent(e);
-        Assert.areEqual('blue', p.style.color);
+        YAHOO.util.UserAction.mouseout(p);
+        Assert.areEqual('bar', p.foo);
     },
     testHandleClick: function(){
         var d = document, h, p, f, e;
         h = d.documentElement;
         p = d.getElementById('p');
-        f = function() {
+        f = function(){
             this.foo = 'bar';
         };
         h.foo = 'foo';
         h.clicked = f;
         p.foo = 'foo';
         p.clicked = f;
-        e = d.createEvent("MouseEvents");
-        e.initMouseEvent("click", true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, p);
-        p.dispatchEvent(e);
+        YAHOO.util.UserAction.click(p);
         Assert.areEqual('bar', h.foo);
         Assert.areEqual('bar', p.foo);
     }
