@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>lane</artifactId>
         <groupId>edu.stanford.irt</groupId>
@@ -43,6 +45,7 @@
         <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
     </scm>
     <build>
+        <defaultGoal>package</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -52,7 +55,10 @@
                     <webResources>
                         <resource>
                             <directory>src/main/webapp</directory>
-                            <filtering>true</filtering>
+                        </resource>
+                        <resource>
+                            <directory>src/main/javascript</directory>
+                            <targetPath>javascript</targetPath>
                         </resource>
                     </webResources>
                 </configuration>
@@ -68,7 +74,16 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <sourceDirectory>src/main/javascript</sourceDirectory>
+                    <outputDirectory>target/laneweb/javascript</outputDirectory>
                     <webappDirectory>target/laneweb</webappDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <outputEncoding>UTF-8</outputEncoding>
                 </configuration>
             </plugin>
         </plugins>
@@ -79,7 +94,7 @@
                 <groupId>gr.abiss.mvn.plugins</groupId>
                 <artifactId>maven-jstools-plugin</artifactId>
                 <configuration>
-                    <jsDir>src/main/webapp/javascript</jsDir>
+                    <jsDir>src/main/javascript</jsDir>
                     <caseSensitive>true</caseSensitive>
                 </configuration>
                 <reportSets>

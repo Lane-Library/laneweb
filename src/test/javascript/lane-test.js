@@ -19,6 +19,9 @@ var LANETestCase = new TestCase({
     testCoreExists: function(){
         Assert.isObject(LANE.core);
     },
+    testSearchExists: function(){
+        Assert.isObject(LANE.search);
+    },
     testNamespace: function(){
         var o = LANE.namespace('LANE.newNamespace', 'another.newNamespace');
         Assert.isObject(LANE.newNamespace);
@@ -26,6 +29,7 @@ var LANETestCase = new TestCase({
         Assert.areSame(LANE.another.newNamespace, o);
     }
 });
+
 var LANECoreTestCase = new TestCase({
     name: "LaneCore TestCase",
     testMetaValues: function(){
@@ -68,7 +72,19 @@ var LANECoreTestCase = new TestCase({
         Assert.areEqual('bar', p.foo);
     }
 });
+
+var LANESearchTestCase = new TestCase({
+    name: "LaneSearch TestCase",
+    testPropertiesExist: function() {
+        var s = LANE.search;
+        Assert.isObject(s.indicator,'indicator');
+        Assert.isObject(s.home,'home');
+        Assert.isObject(s.select,'select');
+        Assert.isObject(s.submit,'submit');
+    }
+});
 var oLogger = new YAHOO.tool.TestLogger();
 TestRunner.add(LANETestCase);
 TestRunner.add(LANECoreTestCase);
+TestRunner.add(LANESearchTestCase);
 TestRunner.run();
