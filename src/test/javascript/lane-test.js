@@ -75,12 +75,33 @@ var LANECoreTestCase = new TestCase({
 
 var LANESearchTestCase = new TestCase({
     name: "LaneSearch TestCase",
-    testPropertiesExist: function() {
-        var s = LANE.search;
-        Assert.isObject(s.indicator,'indicator');
-        Assert.isObject(s.home,'home');
-        Assert.isObject(s.select,'select');
-        Assert.isObject(s.submit,'submit');
+    testActivateDeactivateButton: function() {
+        var d = document, s;
+        s = d.getElementById('searchSubmit');
+        Assert.areEqual('search_btn.gif', s.src.match(/search_btn.gif/));
+        YAHOO.util.UserAction.mouseover(s);
+        Assert.areEqual('search_btn_f2.gif', s.src.match(/search_btn_f2.gif/));
+        YAHOO.util.UserAction.mouseout(s);
+        Assert.areEqual('search_btn.gif', s.src.match(/search_btn.gif/));
+    },
+    testStartSearch: function() {
+        var d = document, f = LANE.search.form, i;
+        i = d.getElementById('searchIndicator');
+        Assert.areEqual('hidden', i.style.visibility);
+        Assert.isFalse(f.isSearching());
+        f.startSearch();
+        Assert.isTrue(f.isSearching());
+        Assert.areEqual('visible', i.style.visibility);
+        f.stopSearch();
+        Assert.areEqual('hidden', i.style.visibility);
+    },
+    testSubmitNoQuery: function() {
+        var d = document, f = LANE.search.form, s;
+        s = d.getElementById('searchSubmit');
+        try {
+            YAHOO.util.UserAction.click(s);
+            Assert.fail('empty input should throw exception');
+        } catch(e) {}
     }
 });
 var oLogger = new YAHOO.tool.TestLogger();

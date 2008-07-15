@@ -56,6 +56,13 @@
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
+            <!-- external resource searches, normally intercepted by javascript -->
+            <map:match pattern="^http" type="regex-parameter">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:act type="form-redirect">
+                    <map:redirect-to uri="{form-redirect-key}"/>
+                </map:act>
+            </map:match>
             <!-- ========================== permenent redirects ============================ -->
             <map:match pattern="classes/index.html" type="wildcard">
                 <map:redirect-to

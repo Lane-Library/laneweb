@@ -136,6 +136,7 @@
             <map:action name="laneweb-version" src="edu.stanford.irt.laneweb.VersionHeaderAction">
                 <map:parameter name="laneweb-version" value="${pom.version}"/>
             </map:action>
+            <map:action name="form-redirect" src="edu.stanford.irt.laneweb.FormRedirectAction"/>
         </map:actions>
         <map:matchers default="wildcard">
             <map:matcher name="wildcard" logger="sitemap.matcher.wildcard"
@@ -282,6 +283,13 @@
                     <map:parameter name="callback" value="{request-param:callback}"/>
                 </map:transform>
                 <map:serialize type="text"/>
+            </map:match>
+            <!-- external resource searches, normally intercepted by javascript -->
+            <map:match pattern="^http" type="regex-parameter">
+                <map:parameter name="parameter-name" value="source"/>
+                <map:act type="form-redirect">
+                    <map:redirect-to uri="{form-redirect-key}"/>
+                </map:act>
             </map:match>
             <!-- ========================== permenent redirects ============================ -->
             <map:match pattern="classes/index.html" type="wildcard">

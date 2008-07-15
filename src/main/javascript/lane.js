@@ -37,7 +37,6 @@ LANE.core = LANE.core ||
         E.addListener(d, 'mouseover', c.handleMouseOver);
         E.addListener(d, 'mouseout', c.handleMouseOut);
         E.addListener(d, 'click', c.handleClick);
-        LANE.search.initialize();
     },
     //calls 'activate' function on target
     handleMouseOver: function(e){
@@ -64,53 +63,76 @@ LANE.core = LANE.core ||
         }
     }
 };
-LANE.search = LANE.search ||
-{
-    indicator: undefined,
-    selected: undefined,
-    select: undefined,
-    submit: undefined,
-    searchTerms: undefined,
-    handleSubmit: function(e){
-        var s = LANE.search, E = YAHOO.util.Event;
-        if (!this.q.value) {
-            alert('Please enter one or more search terms.');
-            E.stopEvent(e);
-        } else {
-            s.startSearch();
-            if (s.selected.value.match(/^http/)) {
-                window.location(s.selected.value.replace(/\{search-terms\}/g, this.q.value));
-                E.preventDefault(e);
+
+LANE.search = LANE.search || {};
+
+LANE.search.form = function(foo) {
+    var d = document,
+        form, //the form Element
+        indicator, //the spinning wheel
+        submit, //the submit input
+        select, //the select Element
+        selected, //the selected option
+        E = YAHOO.util.Event, //shorthand for Event
+        searching = false, //searching state
+        // publicly available functions:
+        o = {
+            startSearch: function(){
+                if (searching) {
+                    throw('already searching');
+                }
+                if (!form.q.value) {
+                    throw('nothing to search for');
+                }
+                searching = true;
+                indicator.style.visibility = 'visible';
+            },
+            stopSearch: function(){
+                searching = false;
+                indicator.style.visibility = 'hidden';
+            },
+            isSearching: function(){
+                return searching;
             }
-        }
-    },
-    handleChange: function(){
-        var s = LANE.search;
-        if (this.options[this.selectedIndex].disabled) {
-            this.selectedIndex = s.selected.index;
-        } else {
-            s.selected = this.options[this.selectedIndex];
-        }
-    },
-    initialize: function(){
-        var d = document, f = d.getElementById('searchForm'), E = YAHOO.util.Event, s = LANE.search;
-        s.indicator = d.getElementById('searchIndicator');
-        s.select = d.getElementById('searchSelect');
-        s.submit = d.getElementById('searchSubmit');
-        s.selected = s.select.options[s.select.selectedIndex];
-        E.addListener(s.select, 'change', s.handleChange);
-        E.addListener(f, 'submit', s.handleSubmit);
-        s.submit.activate = function(e){
+        };
+    // initialize on load
+    E.addListener(this,'load',function() {
+        form = d.getElementById('searchForm');
+        indicator = d.getElementById('searchIndicator');
+        submit = d.getElementById('searchSubmit');
+        select = d.getElementById('searchSelect');
+        selected = select.options[select.selectedIndex];
+        //change submit button image mouseover/mouseout
+        submit.activate = function(e){
             this.src = this.src.replace('search_btn.gif', 'search_btn_f2.gif');
         };
-        s.submit.deactivate = function(e){
+        submit.deactivate = function(e){
             this.src = this.src.replace('search_btn_f2.gif', 'search_btn.gif');
         };
-    },
-    startSearch: function(){
-        LANE.search.indicator.style.visibility = 'visible';
-    }
-};
+
+        E.addListener(form, 'submit', function(e) {
+            try {
+                o.startSearch();
+                if (selected.value.match(/^http/)) {
+                    window.location(selected.value.replace(/\{search-terms\}/g, this.q.value));
+                    E.preventDefault(e);
+                }
+            } catch(ex) {
+                alert(ex);
+                E.preventDefault(e);
+            }
+        });
+        E.addListener(select, 'change',  function(){
+            if (this.options[this.selectedIndex].disabled) {
+                this.selectedIndex = selected.index;
+            } else {
+                selected = this.options[this.selectedIndex];
+            }
+        });
+    });
+    return o;
+}();
+
 /*
  * var searching = false;
 var metaTags = new Object();
