@@ -6,8 +6,6 @@ var TestRunner = YAHOO.tool.TestRunner;
 var TestCase = YAHOO.tool.TestCase;
 var UserAction = YAHOO.util.UserAction;
 
-LANE.core.initialize();
-
 var LANETestCase = new TestCase({
     name: "Lane TestCase",
     testExists: function(){
@@ -33,8 +31,8 @@ var LANETestCase = new TestCase({
 var LANECoreTestCase = new TestCase({
     name: "LaneCore TestCase",
     testMetaValues: function(){
-        Assert.areEqual('1', LANE.core.meta.A);
-        Assert.areEqual('2', LANE.core.meta.B);
+        Assert.areEqual('1', LANE.core.getMetaContent('A'));
+        Assert.areEqual('2', LANE.core.getMetaContent('B'));
     },
     testHandleMouseOver: function(){
         var d = document, p, e;
@@ -70,6 +68,17 @@ var LANECoreTestCase = new TestCase({
         YAHOO.util.UserAction.click(p);
         Assert.areEqual('bar', h.foo);
         Assert.areEqual('bar', p.foo);
+    },
+    testHover: function() {
+        if (YAHOO.env.ua.ie) {
+            var d = document, p, u;
+            p = d.getElementById('otherPortalOptions');
+            u = p.getElementsByTagName('ul')[0];
+            YAHOO.util.UserAction.mouseover(p);
+            Assert.areEqual('hover', p.className);
+            YAHOO.util.UserAction.mouseout(p);
+            Assert.areEqual('', p.className);
+        }
     }
 });
 
@@ -85,23 +94,26 @@ var LANESearchTestCase = new TestCase({
         Assert.areEqual('search_btn.gif', s.src.match(/search_btn.gif/));
     },
     testStartSearch: function() {
-        var d = document, f = LANE.search.form, i;
+        var d = document, f = LANE.search.form, i, q;
+        q = d.getElementById('p').getElementsByTagName('input')[0];
         i = d.getElementById('searchIndicator');
         Assert.areEqual('hidden', i.style.visibility);
         Assert.isFalse(f.isSearching());
+        q.value = 'hello';
         f.startSearch();
         Assert.isTrue(f.isSearching());
         Assert.areEqual('visible', i.style.visibility);
         f.stopSearch();
         Assert.areEqual('hidden', i.style.visibility);
+        q.value = '';
     },
-    testSubmitNoQuery: function() {
-        var d = document, f = LANE.search.form, s;
-        s = d.getElementById('searchSubmit');
+    testStartSearchNoQuery: function() {
+        var d = document, f = LANE.search.form;
         try {
-            YAHOO.util.UserAction.click(s);
-            Assert.fail('empty input should throw exception');
-        } catch(e) {}
+            f.startSearch();
+        } catch(ex) {
+            Assert.areEqual('nothing to search for',ex.toString());
+        }
     }
 });
 var oLogger = new YAHOO.tool.TestLogger();

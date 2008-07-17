@@ -25,44 +25,89 @@ LANE.namespace = function(){
     }
     return o;
 };
-LANE.core = LANE.core ||
-{
-    meta: {},
-    initialize: function(){
-        var m, i, E = YAHOO.util.Event, c = LANE.core, d = document;
-        m = d.getElementsByTagName('meta');
-        for (i = 0; i < m.length; i++) {
-            c.meta[m[i].getAttribute('name')] = m[i].getAttribute('content');
+LANE.core = LANE.core || function() {
+    var E = YAHOO.util.Event, //shorthand
+        m = {}; //the meta element name/values
+    // initialize on load
+    E.addListener(this,'load',function() {
+        var d = document,
+            meta, //the meta elements
+            p, //anchors for finding popup links
+            a, //popup anchor
+            i;
+        meta = d.getElementsByTagName('meta');
+        for (i = 0; i < meta.length; i++) {
+            m[meta[i].getAttribute('name')] = meta[i].getAttribute('content');
         }
-        E.addListener(d, 'mouseover', c.handleMouseOver);
-        E.addListener(d, 'mouseout', c.handleMouseOut);
-        E.addListener(d, 'click', c.handleClick);
-    },
-    //calls 'activate' function on target
-    handleMouseOver: function(e){
-        var t = e.srcElement || e.target;
-        if (t.activate) {
-            t.activate(e);
-        }
-    },
-    //calls 'deactivate' function on target
-    handleMouseOut: function(e){
-        var t = e.srcElement || e.target;
-        if (t.deactivate) {
-            t.deactivate(e);
-        }
-    },
-    //calls 'clicked' function on target and any parent elements
-    handleClick: function(e){
-        var t = e.srcElement || e.target;
-        while (t) {
-            if (t.clicked) {
-                t.clicked(e);
+        //calls 'activate' function on target
+        E.addListener(d, 'mouseover', function(e) {
+            var t = e.srcElement || e.target;
+            if (t.activate) {
+                t.activate(e);
             }
-            t = t.parentNode;
+        });
+        //calls 'deactivate' function on target
+        E.addListener(d, 'mouseout', function(e) {
+            var t = e.srcElement || e.target;
+            if (t.deactivate) {
+                t.deactivate(e);
+            }
+        });
+        //calls 'clicked' function on target and any parent elements
+        E.addListener(d, 'click', function(e){
+            var t = e.srcElement || e.target;
+            while (t) {
+                if (t.clicked) {
+                    t.clicked(e);
+                }
+                t = t.parentNode;
+            }
+        });
+        //handle popup links, currently just open new window.
+        //TODO: flesh this out, add parameters, etc.
+        p = d.getElementsByTagName('a');
+        for (i = 0; i < p.length; p++) {
+            a = p[i];
+            if (a.rel && a.rel.indexOf('popup') === 0) {
+                a.clicked = function(e) {
+                    window.open(this.href);
+                    E.preventDefault(e);
+                };
+            }
         }
-    }
-};
+        //set class to hover for ie
+        if (YAHOO.env.ua.ie) {
+            if (d.getElementById('otherPortalOptions')) {
+                d.getElementById('otherPortalOptions').activate = function() {
+                    this.className = 'hover';
+                };
+                d.getElementById('otherPortalOptions').deactivate = function() {
+                    this.className = '';
+                };
+            }
+        }
+    });
+    return {
+        getMetaContent: function(name) {
+            return m[name];
+        },
+        //for backward compatibility, to be removed
+        openNewWindow: function(url,features) {
+            features = (features) ? features : '';
+            window.open(url, 'LaneConnex', features);
+        },
+        //TODO: urlencode msg, implement onerror to point to this, etc
+        log: function(msg, cat, src) {
+            YAHOO.log(msg, cat, src);
+            if (YAHOO.util.Connect) {
+                YAHOO.util.Connect.asyncRequest('HEAD','/././javascriptLogger?' + msg);
+            }
+        }
+    };
+}();
+
+//for backward compatibility, to be removed
+openNewWindow = LANE.core.openNewWindow;
 
 LANE.search = LANE.search || {};
 
@@ -108,15 +153,12 @@ LANE.search.form = function(foo) {
         };
         submit.deactivate = function(e){
             this.src = this.src.replace('search_btn_f2.gif', 'search_btn.gif');
+            YAHOO.widget.Logger.log('deactivate');
         };
 
         E.addListener(form, 'submit', function(e) {
             try {
                 o.startSearch();
-                if (selected.value.match(/^http/)) {
-                    window.location(selected.value.replace(/\{search-terms\}/g, this.q.value));
-                    E.preventDefault(e);
-                }
             } catch(ex) {
                 alert(ex);
                 E.preventDefault(e);
@@ -134,8 +176,7 @@ LANE.search.form = function(foo) {
 }();
 
 /*
- * var searching = false;
-var metaTags = new Object();
+ 
 
 
 YAHOO.util.Event.addListener(window,'load',initialize);
@@ -173,185 +214,4 @@ function log(message)
 
 
 
-function initialize(e) {
-    initializeMetaTags(e);
-    initializeLogger();
-    YAHOO.util.Event.addListener(window, 'unload', finalize);
-    YAHOO.util.Event.addListener(document, 'mouseover', handleMouseOver);
-    YAHOO.util.Event.addListener(document, 'mouseout', handleMouseOut);
-    YAHOO.util.Event.addListener(document, 'click', handleClick);
-    initializeSearchForm(e);
-    if (YAHOO.env.ua.ie) {
-    //TODO figure out why this doesn't work with the activate/deactivate business
-        var otherPortals = document.getElementById('otherPortalOptions');
-        if (otherPortals) {
-            YAHOO.util.Event.addListener(otherPortals, 'mouseover',function(e) {this.className='hover'});
-            YAHOO.util.Event.addListener(otherPortals, 'mouseout',function(e) {this.className=''});
-        }
-    }
-}
-
-
-function initializeLogger()
-{
-    if(getMetaContent("LW.debug") == "y")
-    {
-        document.body.className = "yui-skin-sam";    
-        var myLogReader = new YAHOO.widget.LogReader();
-        var logMessage = "context ==> "+context;
-        logMessage = logMessage.concat("\nquery_string ==> "+query_string); 
-        logMessage = logMessage.concat("\nrequest_uri ==> "+request_uri);
-        logMessage = logMessage.concat("\nhref ==> "+href);
-        logMessage = logMessage.concat("\nticket ==> "+ticket);
-        logMessage = logMessage.concat("\nsunetid ==> "+sunetid);
-        logMessage = logMessage.concat("\nproxy_links ==> "+proxy_links);
-        logMessage = logMessage.concat("\naffiliation ==> "+affiliation);
-        logMessage = logMessage.concat("\nsearch_form_select ==> "+search_form_select);
-        logMessage = logMessage.concat("\nsource ==> "+source);
-        logMessage = logMessage.concat("\nsearchTerms ==> "+searchTerms+"\n");
-        YAHOO.log(logMessage , "info");
-    }
-}
-
-function finalize(e) {
-    searching = false;
-}
-
-function initializeMetaTags(e){
-    var metaTagElements = document.getElementsByTagName('meta');
-    for (var i = 0; i < metaTagElements.length; i++) {
-        var key = metaTagElements[i].getAttribute('name');
-        var value =  metaTagElements[i].getAttribute('content');
-        if(key != undefined &&  value != undefined)
-            window.metaTags[key] = value;        
-    }
-}
-
-function getMetaContent(name)
-{
-    if(name != undefined)
-        return window.metaTags[name];
-}
-
-function handleMouseOver(e) {
-    var target = (e.srcElement) ? e.srcElement : e.target;
-    if (target.activate) {
-        target.activate(e);
-    }
-}
-
-function handleMouseOut(e) {
-    var target = (e.srcElement) ? e.srcElement : e.target;
-    if (target.deactivate) {
-        target.deactivate(e);
-    }
-}
-
-function handleChange(e) {
-    var target = (e.srcElement) ? e.srcElement : e.target;
-    if (target.change) {
-        target.change(e);
-    }
-}
-
-function handleClick(e) {
-    var target = (e.srcElement) ? e.srcElement : e.target;
-    while (target != undefined) {
-        if (target.clicked) {
-            target.clicked(e);
-        }
-        target = target.parentNode;
-    }
-}
-
-function handleSubmit(e) {
-        var target = (e.srcElement) ? e.srcElement : e.target;
-        if (target.submit) {
-            target.submit(e);
-        }
-}
-
-function initializeSearchForm(e) {
-    var searchForm = document.getElementById('searchForm');
-    var searchIndicator = document.getElementById('searchIndicator');
-    YAHOO.util.Event.addListener(searchForm, 'submit', handleSubmit);
-    var taglines = document.getElementById('taglines');
-    var allTagline = document.getElementById('allTagline');
-    var searchSelect = document.getElementById('searchSelect');
-    YAHOO.util.Event.addListener(searchSelect, 'change', handleChange);
-    var displayTagline = document.getElementById('displayTagline');
-    var searchSubmit = document.getElementById('searchSubmit');
-    searchSelect.homeOption = searchSelect.options[searchSelect.selectedIndex];
-    searchSelect.change = function(e) {
-        if (this.options[this.selectedIndex].disabled) {
-            this.selectedIndex = this.homeOption.index;
-        } else {
-            this.homeOption = this.options[this.selectedIndex];
-        }
-        if (taglines) {
-        this.homeOption.activate(e);
-        }
-    }
-    searchForm.submit = function(e) {
-        if(this.q && this.q.value == '')
-        {
-            alert('Please enter one or more search terms.');
-            YAHOO.util.Event.stopEvent(e);
-        }
-        else
-        {    
-            searchIndicator.style.visibility = 'visible';
-            var formTarget = searchSelect.homeOption.value;
-            if( formTarget.match(/^http/) ){
-                formTarget = formTarget.replace(/\{search-terms\}/g,this.q.value);
-                window.location = formTarget;
-                YAHOO.util.Event.preventDefault(e);
-            }
-        }
-    }
-    //TODO this isn't used in new design:
-    if (taglines) {
-    for (i = 0; i < searchSelect.options.length; i++) {
-        var option = searchSelect.options[i];
-        if (!option.disabled) {
-            option.displayTagline = displayTagline
-            option.tagLine = document.getElementById(option.value + 'Tagline');
-            if (!option.tagLine) {
-                option.tagLine = allTagline;
-            }
-            option.activate = function(e) {
-                this.displayTagline.innerHTML = this.tagLine.innerHTML;
-            }
-            option.deactivate = function(e) {
-                this.parentNode.homeOption.activate(e);
-            }
-        }
-    }
-    searchSelect.homeOption.activate();
-    }
-    //TODO can remove this if() after redesign rollout:
-    if (searchSubmit) {
-    searchSubmit.activate = function(e) {
-        this.src=this.src.replace('search_btn.gif','search_btn_f2.gif');
-    }
-    searchSubmit.deactivate = function(e) {
-        this.src=this.src.replace('search_btn_f2.gif','search_btn.gif');
-    }
-    }
-}
-
-
-function openNewWindow(url,features) {
-    features = (features) ? features : '';
-    var w = window.open(url, 'LaneConnex', features);
-    if(window.focus){
-        w.focus();
-    }
-    dcsMultiTrack('WT.ti','openNewWindow ==> '+url);
- }
-
-function email(obfuscatedEmail) {
-    document.location = obfuscatedEmail.replace(/\|/g,'');
-    return false;
-}
  */

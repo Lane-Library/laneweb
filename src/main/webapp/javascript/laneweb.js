@@ -204,7 +204,8 @@ function initializeSearchForm(e) {
     }
 }
 
-
+//will include this as a reference to LANE.core.openNewWindow
+//but deprecate it in favor of using rel="popup ...." in <a>
 function openNewWindow(url,features) {
     features = (features) ? features : '';
     var w = window.open(url, 'LaneConnex', features);
@@ -214,6 +215,8 @@ function openNewWindow(url,features) {
     dcsMultiTrack('WT.ti','openNewWindow ==> '+url);
  }
 
+
+//This doesn't appear to be used anywhere, will remove
 function email(obfuscatedEmail) {
     document.location = obfuscatedEmail.replace(/\|/g,'');
     return false;
