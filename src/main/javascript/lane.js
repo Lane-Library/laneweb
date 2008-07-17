@@ -65,16 +65,13 @@ LANE.core = LANE.core || function() {
         });
         //handle popup links, currently just open new window.
         //TODO: flesh this out, add parameters, etc.
-        p = d.getElementsByTagName('a');
-        for (i = 0; i < p.length; p++) {
-            a = p[i];
-            if (a.rel && a.rel.indexOf('popup') === 0) {
-                a.clicked = function(e) {
-                    window.open(this.href);
-                    E.preventDefault(e);
-                };
+        E.addListener(d, 'click', function(e) {
+            var t = e.srcElement || e.target;
+            if (t.rel && t.rel.indexOf('popup') === 0) {
+                window.open(t.href);
+                E.preventDefault(e);
             }
-        }
+        });
         //set class to hover for ie
         if (YAHOO.env.ua.ie) {
             if (d.getElementById('otherPortalOptions')) {
