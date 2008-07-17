@@ -107,11 +107,9 @@ LANE.core = LANE.core || function() {
 }();
 
 //for backward compatibility, to be removed
-openNewWindow = LANE.core.openNewWindow;
+var openNewWindow = LANE.core.openNewWindow;
 
-LANE.search = LANE.search || {};
-
-LANE.search.form = function(foo) {
+LANE.search = LANE.search ||  function() {
     var d = document,
         form, //the form Element
         indicator, //the spinning wheel
@@ -176,10 +174,7 @@ LANE.search.form = function(foo) {
 }();
 
 /*
- 
 
-
-YAHOO.util.Event.addListener(window,'load',initialize);
 window.onerror = handleMessage;
         
 

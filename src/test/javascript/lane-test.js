@@ -1,6 +1,7 @@
 /**
  * @author ceyates
  */
+(function() {
 var Assert = YAHOO.util.Assert;
 var TestRunner = YAHOO.tool.TestRunner;
 var TestCase = YAHOO.tool.TestCase;
@@ -94,23 +95,23 @@ var LANESearchTestCase = new TestCase({
         Assert.areEqual('search_btn.gif', s.src.match(/search_btn.gif/));
     },
     testStartSearch: function() {
-        var d = document, f = LANE.search.form, i, q;
+        var d = document, s = LANE.search, i, q;
         q = d.getElementById('p').getElementsByTagName('input')[0];
         i = d.getElementById('searchIndicator');
         Assert.areEqual('hidden', i.style.visibility);
-        Assert.isFalse(f.isSearching());
+        Assert.isFalse(s.isSearching());
         q.value = 'hello';
-        f.startSearch();
-        Assert.isTrue(f.isSearching());
+        s.startSearch();
+        Assert.isTrue(s.isSearching());
         Assert.areEqual('visible', i.style.visibility);
-        f.stopSearch();
+        s.stopSearch();
         Assert.areEqual('hidden', i.style.visibility);
         q.value = '';
     },
     testStartSearchNoQuery: function() {
-        var d = document, f = LANE.search.form;
+        var d = document, s = LANE.search;
         try {
-            f.startSearch();
+            s.startSearch();
         } catch(ex) {
             Assert.areEqual('nothing to search for',ex.toString());
         }
@@ -121,3 +122,4 @@ TestRunner.add(LANETestCase);
 TestRunner.add(LANECoreTestCase);
 TestRunner.add(LANESearchTestCase);
 TestRunner.run();
+})();
