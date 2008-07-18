@@ -12,7 +12,6 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 
 import edu.stanford.irt.querymap.DescriptorManager;
-import edu.stanford.irt.querymap.DescriptorToResource;
 import edu.stanford.irt.querymap.DescriptorWeightMap;
 import edu.stanford.irt.querymap.QueryToDescriptor;
 import edu.stanford.irt.querymap.StreamResourceMapping;
@@ -44,12 +43,8 @@ public class QueryMapperImpl extends edu.stanford.irt.querymap.QueryMapper
         queryToDescriptor.setHttpClient(new HttpClient(
                 new MultiThreadedHttpConnectionManager()));
         setQueryToDescriptor(queryToDescriptor);
-        DescriptorToResource descriptorToResource = new DescriptorToResource();
-        descriptorToResource.setResourceMap(new StreamResourceMapping(
-                resourceMap));
-        queryToDescriptor.setDescriptorWeights(new DescriptorWeightMap(
-                descriptorWeights));
-        super.setDescriptorToResource(descriptorToResource);
+        setResourceMaps(new StreamResourceMapping(resourceMap));
+        setDescriptorWeights(new DescriptorWeightMap(descriptorWeights));
     }
 
 }

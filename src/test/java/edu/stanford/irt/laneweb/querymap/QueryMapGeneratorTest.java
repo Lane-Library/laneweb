@@ -10,6 +10,8 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -81,6 +83,8 @@ public class QueryMapGeneratorTest {
         } catch (IllegalArgumentException e) {
         }
         expect(this.parameters.getParameter("query", null)).andReturn("dvt");
+        expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
+        expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         replay(this.parameters);
         this.generator.setup(null, null, null, this.parameters);
         verify(this.parameters);
@@ -107,6 +111,8 @@ public class QueryMapGeneratorTest {
         replay(this.queryMapper);
         this.generator.setQueryMapper(this.queryMapper);
         expect(this.parameters.getParameter("query", null)).andReturn("dvt");
+        expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
+        expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         replay(this.parameters);
         this.generator.setConsumer(this.consumer);
         this.generator.setup(null, null, null, this.parameters);
@@ -141,6 +147,14 @@ public class QueryMapGeneratorTest {
                 return new QueryMap(query, descriptor, new ResourceMap(
                         descriptor, Collections.<String> singleton(query)));
             }
+
+            //TODO: need to more thoroughly test the source reloading:
+            public QueryMap getQueryMap(String query,
+                    Map<String, Set<String>> resourceMaps,
+                    Map<String, Float> descriptorWeights) {
+                // TODO Auto-generated method stub
+                return null;
+            }
         };
         this.generator.setQueryMapper(fauxQueryMapper);
         for (int i = 999; i > -1; i--) {
@@ -151,6 +165,8 @@ public class QueryMapGeneratorTest {
                     Parameters params = createMock(Parameters.class);
                     expect(params.getParameter("query", null)).andReturn(
                             response);
+                    expect(params.getParameter("resource-maps", null)).andReturn(null);
+                    expect(params.getParameter("descriptor-weights", null)).andReturn(null);
                     replay(params);
                     QueryMapGeneratorTest.this.generator.setup(null, null,
                             null, params);

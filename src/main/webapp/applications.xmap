@@ -101,6 +101,8 @@
                 <map:match pattern="querymap/map">
                     <map:generate type="querymap">
                         <map:parameter name="query" value="{request-param:q}"/>
+                        <map:parameter name="resource-maps" value="{naming:java:comp/env/live-base}/resources/querymap/resource-maps.xml"/>
+                        <map:parameter name="descriptor-weights" value="{naming:java:comp/env/live-base}/resources/querymap/descriptor-weights.xml"/>
                     </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>

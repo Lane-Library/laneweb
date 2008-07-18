@@ -171,7 +171,7 @@ LANE.search = LANE.search ||  function() {
 }();
 
 
-//anonymous initializer for tooltips no public properties of functions
+//anonymous initializer for tooltips no public properties or functions
 (function() {
     YAHOO.util.Event.addListener(window,'load', function() {
         var tc, //tooltip container Elements

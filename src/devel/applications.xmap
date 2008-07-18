@@ -170,10 +170,9 @@
             <map:match pattern="querymap/*" type="wildcard">
                 <map:match pattern="querymap/map" type="wildcard">
                     <map:select type="resource-exists">
-                        <map:when test="/resources/querymap/resource-maps.xml">
+                        <map:when test="resources/querymap/resource-maps.xml">
                             <map:generate type="querymap">
                                 <map:parameter name="query" value="{request-param:q}"/>
-                                <map:parameter name="abstract-count" value="100"/>
                                 <map:parameter name="resource-maps"
                                     value="resources/querymap/resource-maps.xml"/>
                                 <map:parameter name="descriptor-weights"
@@ -183,7 +182,6 @@
                         <map:otherwise>
                             <map:generate type="querymap">
                                 <map:parameter name="query" value="{request-param:q}"/>
-                                <map:parameter name="abstract-count" value="100"/>
                                 <map:parameter name="resource-maps"
                                     value="{defaults:live-base}/resources/querymap/resource-maps.xml"/>
                                 <map:parameter name="descriptor-weights"
