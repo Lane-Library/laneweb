@@ -115,6 +115,11 @@ var LANESearchTestCase = new TestCase({
         } catch(ex) {
             Assert.areEqual('nothing to search for',ex.toString());
         }
+    },
+    //TODO: make this a real test, Assert something
+    testToolTips: function() {
+        var t = document.getElementById('toggleProxyOff');
+        YAHOO.util.UserAction.mouseover(t);
     }
 });
 var oLogger = new YAHOO.tool.TestLogger();
