@@ -76,7 +76,7 @@ public class XMLizableQueryMap implements XMLizable {
             XMLUtils.startElement(consumer, NAMESPACE, "frequencies");
             int maxDescriptors = 10;
             for (Descriptor frequency : this.queryMap.getFrequencies()) {
-                if (maxDescriptors-- == 0) {
+                if (maxDescriptors-- < 0) {
                     break;
                 }
                 XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR,
