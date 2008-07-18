@@ -106,6 +106,8 @@ public class QueryMapGeneratorTest {
         expect(queryMap.getQuery()).andReturn("dvt");
         expect(queryMap.getDescriptor()).andReturn(descriptor);
         expect(queryMap.getResourceMap()).andReturn(resourceMap);
+        expect(queryMap.getTreePath()).andReturn(null);
+        expect(queryMap.getFrequencies()).andReturn(null);
         replay(queryMap);
         expect(this.queryMapper.getQueryMap("dvt")).andReturn(queryMap);
         replay(this.queryMapper);
@@ -145,7 +147,7 @@ public class QueryMapGeneratorTest {
                 Descriptor descriptor = new Descriptor(query, query,
                         Collections.<String> singleton(query));
                 return new QueryMap(query, descriptor, new ResourceMap(
-                        descriptor, Collections.<String> singleton(query)));
+                        descriptor, Collections.<String> singleton(query)), null, null);
             }
 
             //TODO: need to more thoroughly test the source reloading:

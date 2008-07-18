@@ -9,6 +9,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.querymap.Descriptor;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.ResourceMap;
+import edu.stanford.irt.querymap.WeightedDescriptor;
 
 public class XMLizableQueryMap implements XMLizable {
 
@@ -57,6 +58,31 @@ public class XMLizableQueryMap implements XMLizable {
                 }
                 XMLUtils.endElement(consumer, NAMESPACE, RESOURCE_MAP);
             }
+        }
+        if (null != this.queryMap.getTreePath()) {
+            XMLUtils.startElement(consumer, NAMESPACE, "tree-paths");
+            for (Descriptor path : this.queryMap.getTreePath()) {
+                XMLUtils.startElement(consumer, NAMESPACE,  "tree-path");
+                XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR,
+                        path.getDescriptorName());
+                for (String tree : path.getTreeNumbers()) {
+                    XMLUtils.createElementNS(consumer, NAMESPACE, "tree", tree);
+                }
+                XMLUtils.endElement(consumer, NAMESPACE, "tree-path");
+            }
+            XMLUtils.endElement(consumer, NAMESPACE, "tree-paths");
+        }
+        if (null != this.queryMap.getFrequencies()) {
+            XMLUtils.startElement(consumer, NAMESPACE, "frequencies");
+            int maxDescriptors = 10;
+            for (Descriptor frequency : this.queryMap.getFrequencies()) {
+                if (maxDescriptors-- == 0) {
+                    break;
+                }
+                XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR,
+                        frequency.toString());
+            }
+            XMLUtils.endElement(consumer, NAMESPACE, "frequencies");
         }
         XMLUtils.endElement(consumer, NAMESPACE, QUERY_MAP);
         consumer.endPrefixMapping("");

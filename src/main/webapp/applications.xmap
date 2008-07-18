@@ -98,7 +98,7 @@
                 </map:match>
             </map:match>
             <map:match pattern="querymap/*">
-                <map:match pattern="querymap/map">
+                <map:match pattern="querymap/xml">
                     <map:generate type="querymap">
                         <map:parameter name="query" value="{request-param:q}"/>
                         <map:parameter name="resource-maps" value="{naming:java:comp/env/live-base}/resources/querymap/resource-maps.xml"/>
@@ -108,7 +108,7 @@
                 </map:match>
                 <map:match pattern="querymap/html" type="wildcard">
                     <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
-                        <map:part src="cocoon:/querymap/map"/>
+                        <map:part src="cocoon:/querymap/xml"/>
                         <map:part
                             src="{naming:java:comp/env/live-base}/resources/querymap/display-template.xml"
                         />
