@@ -27,6 +27,8 @@ public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
     private static final String RESOURCE_MAPS = "resource-maps";
 
     private static final String DESCRIPTOR_WEIGHTS = "descriptor-weights";
+    
+    private static final String ABSTRACT_COUNT = "abstract-count";
 
     private QueryMapper queryMapper;
 
@@ -37,6 +39,8 @@ public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
     private ThreadLocal<Map<String, Set<String>>> resourceMaps = new ThreadLocal<Map<String, Set<String>>>();
 
     private ThreadLocal<Map<String, Float>> descriptorWeights = new ThreadLocal<Map<String, Float>>();
+    
+    private ThreadLocal<Integer> abstractCount = new ThreadLocal<Integer>();
 
     public void setQueryMapper(final QueryMapper queryMapper) {
         if (null == queryMapper) {
@@ -62,6 +66,7 @@ public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
         String query = params.getParameter(QUERY, null);
         String mapURL = params.getParameter(RESOURCE_MAPS, null);
         String weightURL = params.getParameter(DESCRIPTOR_WEIGHTS, null);
+        int abstractCount = params.getParameterAsInteger(ABSTRACT_COUNT, 100);
         if ((null != mapURL) && (null != weightURL)) {
             try {
                 Source mapSource = resolver.resolveURI(mapURL);
@@ -70,6 +75,7 @@ public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
                 Source weightSource = resolver.resolveURI(weightURL);
                 this.descriptorWeights.set(new DescriptorWeightMap(weightSource
                         .getInputStream()));
+                this.abstractCount.set(new Integer(abstractCount));
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {
@@ -103,7 +109,7 @@ public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
         } else {
             queryMap = new XMLizableQueryMap(this.queryMapper.getQueryMap(
                     query, this.resourceMaps.get(), this.descriptorWeights
-                            .get()));
+                            .get(), this.abstractCount.get().intValue()));
         }
         try {
             consumer.startDocument();

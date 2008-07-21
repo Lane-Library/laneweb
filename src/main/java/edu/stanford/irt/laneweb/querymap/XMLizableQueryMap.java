@@ -1,5 +1,8 @@
 package edu.stanford.irt.laneweb.querymap;
 
+import java.util.List;
+import java.util.Set;
+
 import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.ContentHandler;
@@ -24,6 +27,12 @@ public class XMLizableQueryMap implements XMLizable {
     private static final String RESOURCE = "resource";
 
     private static final String IDREF = "idref";
+    
+    private static final String TREEPATHS = "tree-paths";
+    
+    private static final String TREEPATH = "tree-path";
+    
+    private static final String FREQUENCIES = "frequencies";
 
     private static final String NAMESPACE = "http://lane.stanford.edu/querymap/ns";
 
@@ -59,30 +68,32 @@ public class XMLizableQueryMap implements XMLizable {
                 XMLUtils.endElement(consumer, NAMESPACE, RESOURCE_MAP);
             }
         }
-        if (null != this.queryMap.getTreePath()) {
-            XMLUtils.startElement(consumer, NAMESPACE, "tree-paths");
-            for (Descriptor path : this.queryMap.getTreePath()) {
-                XMLUtils.startElement(consumer, NAMESPACE,  "tree-path");
+        List<Descriptor> treePaths = this.queryMap.getTreePath();
+        if (null != treePaths && treePaths.size() > 0) {
+            XMLUtils.startElement(consumer, NAMESPACE, TREEPATHS);
+            for (Descriptor path : treePaths) {
+                XMLUtils.startElement(consumer, NAMESPACE,  TREEPATH);
                 XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR,
                         path.getDescriptorName());
                 for (String tree : path.getTreeNumbers()) {
                     XMLUtils.createElementNS(consumer, NAMESPACE, "tree", tree);
                 }
-                XMLUtils.endElement(consumer, NAMESPACE, "tree-path");
+                XMLUtils.endElement(consumer, NAMESPACE, TREEPATH);
             }
-            XMLUtils.endElement(consumer, NAMESPACE, "tree-paths");
+            XMLUtils.endElement(consumer, NAMESPACE, TREEPATHS);
         }
-        if (null != this.queryMap.getFrequencies()) {
-            XMLUtils.startElement(consumer, NAMESPACE, "frequencies");
+        Set<WeightedDescriptor> frequencies = this.queryMap.getFrequencies();
+        if (null != frequencies && frequencies.size() > 0) {
+            XMLUtils.startElement(consumer, NAMESPACE, FREQUENCIES);
             int maxDescriptors = 10;
-            for (Descriptor frequency : this.queryMap.getFrequencies()) {
+            for (Descriptor frequency : frequencies) {
                 if (maxDescriptors-- == 0) {
                     break;
                 }
                 XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR,
                         frequency.toString());
             }
-            XMLUtils.endElement(consumer, NAMESPACE, "frequencies");
+            XMLUtils.endElement(consumer, NAMESPACE, FREQUENCIES);
         }
         XMLUtils.endElement(consumer, NAMESPACE, QUERY_MAP);
         consumer.endPrefixMapping("");

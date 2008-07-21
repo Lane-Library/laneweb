@@ -11,5 +11,5 @@ public interface QueryMapper {
 
     QueryMap getQueryMap(String query);
     
-    QueryMap getQueryMap(String query, Map<String, Set<String>> resourceMaps, Map<String, Float> descriptorWeights);
+    QueryMap getQueryMap(String query, Map<String, Set<String>> resourceMaps, Map<String, Float> descriptorWeights, int abstractCount);
 }

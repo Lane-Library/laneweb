@@ -177,6 +177,8 @@
                                     value="resources/querymap/resource-maps.xml"/>
                                 <map:parameter name="descriptor-weights"
                                     value="resources/querymap/descriptor-weights.xml"/>
+                                <!-- abstract count can be set in query string, or default set in cocoon.xconf -->
+                                <map:parameter name="abstract-count" value="{chain:abstract-count}"/>
                             </map:generate>
                         </map:when>
                         <map:otherwise>
@@ -187,6 +189,8 @@
                                 <map:parameter name="descriptor-weights"
                                     value="{defaults:live-base}/resources/querymap/descriptor-weights.xml"
                                 />
+                                <!-- abstract count can be set in query string, or default set in cocoon.xconf -->
+                                <map:parameter name="abstract-count" value="{chain:abstract-count}"/>
                             </map:generate>
                         </map:otherwise>
                     </map:select>

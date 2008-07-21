@@ -85,6 +85,7 @@ public class QueryMapGeneratorTest {
         expect(this.parameters.getParameter("query", null)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
+        expect(this.parameters.getParameterAsInteger("abstract-count",100)).andReturn(null);
         replay(this.parameters);
         this.generator.setup(null, null, null, this.parameters);
         verify(this.parameters);
@@ -115,6 +116,7 @@ public class QueryMapGeneratorTest {
         expect(this.parameters.getParameter("query", null)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
+        expect(this.parameters.getParameterAsInteger("abstract-count",100)).andReturn(null);
         replay(this.parameters);
         this.generator.setConsumer(this.consumer);
         this.generator.setup(null, null, null, this.parameters);
@@ -153,7 +155,7 @@ public class QueryMapGeneratorTest {
             //TODO: need to more thoroughly test the source reloading:
             public QueryMap getQueryMap(String query,
                     Map<String, Set<String>> resourceMaps,
-                    Map<String, Float> descriptorWeights) {
+                    Map<String, Float> descriptorWeights, int abstractCount) {
                 // TODO Auto-generated method stub
                 return null;
             }
@@ -169,6 +171,7 @@ public class QueryMapGeneratorTest {
                             response);
                     expect(params.getParameter("resource-maps", null)).andReturn(null);
                     expect(params.getParameter("descriptor-weights", null)).andReturn(null);
+                    expect(params.getParameterAsInteger("abstract-count", 100)).andReturn(null);
                     replay(params);
                     QueryMapGeneratorTest.this.generator.setup(null, null,
                             null, params);

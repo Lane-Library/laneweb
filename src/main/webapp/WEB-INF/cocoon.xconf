@@ -36,6 +36,7 @@
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
       <values>
         <template>irt2</template>
+        <abstract-count>100</abstract-count>
       </values>
     </component-instance>
   </input-modules> 
