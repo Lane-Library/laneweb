@@ -21,10 +21,6 @@ LANE.track = function() {
             }
             if (node) {
                 if (node.host == h) {
-                    //TODO:remove this in favor of a test
-                    if (!node.pathname) {
-                        alert('no node.pathname');
-                    }
                     //track proxy logins
                     if ((/\/secure\/login.html/).test(node.pathname)) {
                         return true;
