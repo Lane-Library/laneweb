@@ -53,20 +53,23 @@ LANE.core = LANE.core || function() {
                 t.deactivate(e);
             }
         });
-        //calls 'clicked' function on target and any parent elements
-        E.addListener(d, 'click', function(e){
-            var t = e.srcElement || e.target;
-            while (t) {
-                if (t.clicked) {
-                    t.clicked(e);
-                }
-                t = t.parentNode;
-            }
-        });
+//        //calls 'clicked' function on target and any parent elements
+//        E.addListener(d, 'click', function(e){
+//            var t = e.srcElement || e.target;
+//            while (t) {
+//                if (t.clicked) {
+//                    t.clicked(e);
+//                }
+//                t = t.parentNode;
+//            }
+//        });
         //handle popup links, currently just open new window.
         //TODO: flesh this out, add parameters, etc.
         E.addListener(d, 'click', function(e) {
             var t = e.srcElement || e.target;
+            if (LANE.webtrends) {
+                alert(LANE.webtrends.isTrackable(t));
+            }
             if (t.rel && t.rel.indexOf('popup') === 0) {
                 window.open(t.href);
                 E.preventDefault(e);
@@ -136,36 +139,37 @@ LANE.search = LANE.search ||  function() {
             }
         };
     // initialize on load
-    E.addListener(this,'load',function() {
+    E.addListener(this,'load',function(){
         form = d.getElementById('searchForm');
-        indicator = d.getElementById('searchIndicator');
-        submit = d.getElementById('searchSubmit');
-        select = d.getElementById('searchSelect');
-        selected = select.options[select.selectedIndex];
-        //change submit button image mouseover/mouseout
-        submit.activate = function(e){
-            this.src = this.src.replace('search_btn.gif', 'search_btn_f2.gif');
-        };
-        submit.deactivate = function(e){
-            this.src = this.src.replace('search_btn_f2.gif', 'search_btn.gif');
-            YAHOO.widget.Logger.log('deactivate');
-        };
-
-        E.addListener(form, 'submit', function(e) {
-            try {
-                o.startSearch();
-            } catch(ex) {
-                alert(ex);
-                E.preventDefault(e);
-            }
-        });
-        E.addListener(select, 'change',  function(){
-            if (this.options[this.selectedIndex].disabled) {
-                this.selectedIndex = selected.index;
-            } else {
-                selected = this.options[this.selectedIndex];
-            }
-        });
+        if (form) {
+            indicator = d.getElementById('searchIndicator');
+            submit = d.getElementById('searchSubmit');
+            select = d.getElementById('searchSelect');
+            selected = select.options[select.selectedIndex];
+            //change submit button image mouseover/mouseout
+            submit.activate = function(e){
+                this.src = this.src.replace('search_btn.gif', 'search_btn_f2.gif');
+            };
+            submit.deactivate = function(e){
+                this.src = this.src.replace('search_btn_f2.gif', 'search_btn.gif');
+                YAHOO.widget.Logger.log('deactivate');
+            };
+            E.addListener(form, 'submit', function(e){
+                try {
+                    o.startSearch();
+                } catch (ex) {
+                    alert(ex);
+                    E.preventDefault(e);
+                }
+            });
+            E.addListener(select, 'change', function(){
+                if (this.options[this.selectedIndex].disabled) {
+                    this.selectedIndex = selected.index;
+                } else {
+                    selected = this.options[this.selectedIndex];
+                }
+            });
+        }
     });
     return o;
 }();
