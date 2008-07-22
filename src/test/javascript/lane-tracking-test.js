@@ -14,7 +14,7 @@ var LANETrackingTestCase = new TestCase({
         Assert.isObject(LANE.track);
     },
     testIsTrackable: function() {
-        var i, t = LANE.track,
+        var i, m, t = LANE.track,
         a = document.getElementsByTagName('a');
         for (i = 0; i < a.length; i++) {
             if (a[i].rel == 'trackable') {
@@ -23,7 +23,14 @@ var LANETrackingTestCase = new TestCase({
                 Assert.isFalse(t.isTrackable(a[i]));
             }
         }
-        
+        m = document.getElementsByTagName('img');
+        for (i = 0; i < m.length; i++) {
+            if (m[i].parentNode.rel == 'trackable') {
+                Assert.isTrue(t.isTrackable(m[i]));
+            } else {
+                Assert.isFalse(t.isTrackable(m[i]));
+            }
+        }
     },
     testAddTracker: function() {
         try {
@@ -38,16 +45,21 @@ var LANETrackingTestCase = new TestCase({
         });
     },
     testTrack: function() {
-        var node = {href:'http://www.google.com/'},
-            t = '';
+        var node = {
+            parentNode: {
+                href: 'http://www.google.com/',
+                nodeName: 'A'
+            },
+            nodeName: 'IMG'
+        }, t = '';
         LANE.track.addTracker({
             track: function(node){
                 t = node.href + '?foo';
             }
         });
         LANE.track.track(node);
-        Assert.areEqual(tracked,'http://www.google.com/?bar');
-        Assert.areEqual(t,'http://www.google.com/?foo');
+        Assert.areEqual('http://www.google.com/?bar', tracked);
+        Assert.areEqual('http://www.google.com/?foo',t);
     }
 });
 

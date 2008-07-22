@@ -67,8 +67,8 @@ LANE.core = LANE.core || function() {
         //TODO: flesh this out, add parameters, etc.
         E.addListener(d, 'click', function(e) {
             var t = e.srcElement || e.target;
-            if (LANE.track) {
-                alert(LANE.track.isTrackable(t));
+            if (LANE.track && LANE.track.isTrackable(t)) {
+                LANE.track.track(t);
             }
             if (t.rel && t.rel.indexOf('popup') === 0) {
                 window.open(t.href);

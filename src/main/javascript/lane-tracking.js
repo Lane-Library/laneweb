@@ -15,13 +15,16 @@ LANE.track = function() {
                 throw 'node is not trackable';
             }
             for(i = 0; i < trackers.length; i++) {
+                while(node && node.nodeName != 'A') {
+                    node = node.parentNode;
+                }
                 trackers[i].track(node);
             }
         },
         isTrackable:function(node) {
             var h = document.location.host;
             //find self or ancestor with href
-            while(node && !node.href) {
+            while(node && node.nodeName != 'A') {
                 node = node.parentNode;
             }
             if (node) {
