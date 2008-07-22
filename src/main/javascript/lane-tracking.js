@@ -9,17 +9,9 @@ LANE.track = function() {
             }
             trackers.push(tracker);
         },
-        track:function(node) {
-            var i;
-            if (!this.isTrackable(node)) {
-                throw 'node is not trackable';
-            }
-            for(i = 0; i < trackers.length; i++) {
-                while(node && node.nodeName != 'A') {
-                    node = node.parentNode;
-                }
-                trackers[i].track(node);
-            }
+        getTrackedTitle: function(node) {
+            //TODO implement this
+            return 'title';
         },
         isTrackable:function(node) {
             var h = document.location.host;
@@ -49,6 +41,20 @@ LANE.track = function() {
             }
             //no href, not trackable
             return false;
+        },
+        track:function(node) {
+            //TODO: instead of a node pass an object with various
+            //required properties.  I need to determine where best
+            //to build that object, here, in the tracker, or in 
+            //whatever calls this.  Probably that last one, but defined
+            //here.
+            var i;
+            if (!this.isTrackable(node)) {
+                throw 'node is not trackable';
+            }
+            for(i = 0; i < trackers.length; i++) {
+                trackers[i].track(node);
+            }
         }
     };
 }();

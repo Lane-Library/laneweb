@@ -40,6 +40,7 @@ var LANETrackingTestCase = new TestCase({
         }
         LANE.track.addTracker({
             track: function(node){
+                while (!node.href) node = node.parentNode;
                 tracked = node.href + '?bar';
             }
         });
@@ -54,6 +55,7 @@ var LANETrackingTestCase = new TestCase({
         }, t = '';
         LANE.track.addTracker({
             track: function(node){
+                while (!node.href) node = node.parentNode;
                 t = node.href + '?foo';
             }
         });
