@@ -53,22 +53,22 @@ LANE.core = LANE.core || function() {
                 t.deactivate(e);
             }
         });
-//        //calls 'clicked' function on target and any parent elements
-//        E.addListener(d, 'click', function(e){
-//            var t = e.srcElement || e.target;
-//            while (t) {
-//                if (t.clicked) {
-//                    t.clicked(e);
-//                }
-//                t = t.parentNode;
-//            }
-//        });
+        //calls 'clicked' function on target and any parent elements
+        E.addListener(d, 'click', function(e){
+            var t = e.srcElement || e.target;
+            while (t) {
+                if (t.clicked) {
+                    t.clicked(e);
+                }
+                t = t.parentNode;
+            }
+        });
         //handle popup links, currently just open new window.
         //TODO: flesh this out, add parameters, etc.
         E.addListener(d, 'click', function(e) {
             var t = e.srcElement || e.target;
-            if (LANE.webtrends) {
-                alert(LANE.webtrends.isTrackable(t));
+            if (LANE.track) {
+                alert(LANE.track.isTrackable(t));
             }
             if (t.rel && t.rel.indexOf('popup') === 0) {
                 window.open(t.href);

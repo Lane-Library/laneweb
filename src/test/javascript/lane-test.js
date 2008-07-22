@@ -120,6 +120,7 @@ var LANESearchTestCase = new TestCase({
     testToolTips: function() {
         var t = document.getElementById('toggleProxyOff');
         YAHOO.util.UserAction.mouseover(t);
+        YAHOO.util.UserAction.mouseout(t);
     }
 });
 var oLogger = new YAHOO.tool.TestLogger();
