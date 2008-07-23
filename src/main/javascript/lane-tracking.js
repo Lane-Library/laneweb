@@ -9,10 +9,6 @@ LANE.track = function() {
             }
             trackers.push(tracker);
         },
-        getTrackedTitle: function(node) {
-            //TODO implement this
-            return 'title';
-        },
         isTrackable:function(node) {
             var h = document.location.host;
             //find self or ancestor with href
@@ -38,19 +34,26 @@ LANE.track = function() {
             //no href, not trackable
             return false;
         },
-        track:function(node) {
-            //TODO: instead of a node pass an object with various
-            //required properties.  I need to determine where best
-            //to build that object, here, in the tracker, or in 
-            //whatever calls this.  Probably that last one, but defined
-            //here.
-            var i;
-            if (!this.isTrackable(node)) {
-                throw 'node is not trackable';
+        track:function(trackable) {
+            for(var i = 0; i < trackers.length; i++) {
+                trackers[i].track(trackable);
             }
-            for(i = 0; i < trackers.length; i++) {
-                trackers[i].track(node);
-            }
+        },
+        Trackable: function(node) {
+            //TODO: make this real
+            var n = ['A','AREA'],
+            getTrackedTitle = function() {
+                return 'The+Title';
+            };
+            return {
+                host:'www.google.com',
+                uri:'/foo/bar.html',
+                query:'',
+                title:getTrackedTitle(node),
+                searchTerms:'',
+                searchSource:'',
+                external:false
+            };
         }
     };
 }();
