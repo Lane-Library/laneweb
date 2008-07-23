@@ -52,8 +52,8 @@ var LANETrackingTestCase = new TestCase({
             }
         });
         LANE.track.track(new LANE.track.Trackable());
-        Assert.areEqual('http://www.google.com/foo/bar.html?bar&title=The+Title', tracked);
-        Assert.areEqual('http://www.google.com/foo/bar.html?foo&title=The+Title',t);
+        Assert.areEqual('http://www.google.com/foo/bar.html?bar&title=The Title', tracked);
+        Assert.areEqual('http://www.google.com/foo/bar.html?foo&title=The Title',t);
     }
 });
 

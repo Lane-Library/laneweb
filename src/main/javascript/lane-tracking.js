@@ -43,7 +43,7 @@ LANE.track = function() {
             //TODO: make this real
             var n = ['A','AREA'],
             getTrackedTitle = function() {
-                return 'The+Title';
+                return 'The Title';
             };
             return {
                 host:'www.google.com',
