@@ -18,7 +18,7 @@ LANE.track = function() {
             if (node) {
                 if (node.host == h) {
                     //track proxy logins
-                    if ((/\/secure\/login.html/).test(node.pathname)) {
+                    if ((/secure\/login.html/).test(node.pathname)) {
                         return true;
                     }
                     //otherwise rely on normal tracking for .html
