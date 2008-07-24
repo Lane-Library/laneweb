@@ -57,10 +57,6 @@
                             <directory>src/main/webapp</directory>
                             <filtering>true</filtering>
                         </resource>
-                        <resource>
-                            <directory>src/main/javascript</directory>
-                            <targetPath>javascript</targetPath>
-                        </resource>
                     </webResources>
                 </configuration>
             </plugin>
@@ -75,7 +71,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <sourceDirectory>src/main/javascript</sourceDirectory>
                     <outputDirectory>target/laneweb/javascript</outputDirectory>
                     <webappDirectory>target/laneweb</webappDirectory>
                 </configuration>
