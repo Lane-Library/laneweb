@@ -152,7 +152,10 @@
             <map:pipe name="noncaching" logger="sitemap.pipeline.noncaching"
                 src="org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline"/>
             <map:pipe name="throttling" logger="sitemap.pipeline.throttling"
-                src="edu.stanford.irt.laneweb.ThrottlingPipeline"/>
+            src="edu.stanford.irt.laneweb.ThrottlingPipeline"/>
+            <map:pipe name="expires" src="org.apache.cocoon.components.pipeline.impl.ExpiresCachingProcessingPipeline">
+                <parameter name="cache-expires" value="300"/> <!-- Expires in secondes -->
+            </map:pipe>
         </map:pipes>
     </map:components>
     <map:pipelines>

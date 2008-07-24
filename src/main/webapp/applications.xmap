@@ -97,28 +97,6 @@
                     <map:serialize type="xhtml"/>
                 </map:match>
             </map:match>
-            <map:match pattern="querymap/*">
-                <map:match pattern="querymap/xml">
-                    <map:generate type="querymap">
-                        <map:parameter name="query" value="{request-param:q}"/>
-                        <map:parameter name="resource-maps" value="{naming:java:comp/env/live-base}/resources/querymap/resource-maps.xml"/>
-                        <map:parameter name="descriptor-weights" value="{naming:java:comp/env/live-base}/resources/querymap/descriptor-weights.xml"/>
-                        <!-- abstract count can be set in query string, or default set in cocoon.xconf -->
-                        <map:parameter name="abstract-count" value="{chain:abstract-count}"/>
-                    </map:generate>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match pattern="querymap/html" type="wildcard">
-                    <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
-                        <map:part src="cocoon:/querymap/xml"/>
-                        <map:part
-                            src="{naming:java:comp/env/live-base}/resources/querymap/display-template.xml"
-                        />
-                    </map:aggregate>
-                    <map:transform type="saxon" src="context://xsl/querymap2html.xsl"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-            </map:match>
             <map:match pattern="spellcheck/*" type="wildcard">
                 <map:match pattern="spellcheck/xml" type="wildcard">
                     <map:generate type="spellcheck">
@@ -159,6 +137,31 @@
                     <map:generate
                         src="http://sfx.stanford.edu/local/cgi/public/get_file.cgi?file=highly-accessed.xml" type="file"/>
                     <map:transform src="context://xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>
+                    <map:serialize type="xml"/>
+                </map:match>
+            </map:match>
+        </map:pipeline>
+        <!-- trying this out, might fill up cache with a bazillion query maps -->
+        <map:pipeline type="expires">
+            <map:match pattern="querymap/*">
+                <map:match pattern="querymap/xml">
+                    <map:generate type="querymap">
+                        <map:parameter name="query" value="{request-param:q}"/>
+                        <map:parameter name="resource-maps" value="{naming:java:comp/env/live-base}/resources/querymap/resource-maps.xml"/>
+                        <map:parameter name="descriptor-weights" value="{naming:java:comp/env/live-base}/resources/querymap/descriptor-weights.xml"/>
+                        <!-- abstract count can be set in query string, or default set in cocoon.xconf -->
+                        <map:parameter name="abstract-count" value="{chain:abstract-count}"/>
+                    </map:generate>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match pattern="querymap/html" type="wildcard">
+                    <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
+                        <map:part src="cocoon:/querymap/xml"/>
+                        <map:part
+                            src="{naming:java:comp/env/live-base}/resources/querymap/display-template.xml"
+                        />
+                    </map:aggregate>
+                    <map:transform type="saxon" src="context://xsl/querymap2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
