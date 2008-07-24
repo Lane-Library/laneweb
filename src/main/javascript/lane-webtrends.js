@@ -369,7 +369,7 @@
             }
             if (t.uri) {
                 args.push('DCS.dcsuri');
-                args.push(t.uri);
+                args.push(t.path);
             }
             if (t.query) {
                 args.push('DCS.dcsquery');

@@ -34,25 +34,35 @@ LANE.track = function() {
             //no href, not trackable
             return false;
         },
-        track:function(trackable) {
+        track:function(node) {
+            var td = this.getTrackingData(node);
             for(var i = 0; i < trackers.length; i++) {
-                trackers[i].track(trackable);
+                trackers[i].track(td);
             }
         },
-        Trackable: function(node) {
+        getTrackingData:function(node) {
             //TODO: make this real
-            var n = ['A','AREA'],
-            getTrackedTitle = function() {
+            var getTrackedTitle = function() {
                 return 'The Title';
-            };
+            },
+            l = node;
+            while(l.href === undefined) {
+                l = l.parentNode;
+                if (l === null) {
+                    throw 'not trackable';
+                }
+            }
+            if (!this.isTrackable(node)) {
+                throw 'not trackable';
+            }
             return {
-                host:'www.google.com',
-                uri:'/foo/bar.html',
-                query:'',
+                host:l.host,
+                path:l.pathname,
+                query:l.search,
                 title:getTrackedTitle(node),
-                searchTerms:'',
-                searchSource:'',
-                external:false
+                searchTerms:LANE.core.getMetaContent('LW.searchTerms'),
+                searchSource:LANE.core.getMetaContent('LW.searchSource'),
+                external:l.host == document.location.host
             };
         }
     };

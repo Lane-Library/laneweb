@@ -39,21 +39,21 @@ var LANETrackingTestCase = new TestCase({
             Assert.areEqual(ex, 'tracker does not implement track()');
         }
         LANE.track.addTracker({
-            track: function(trackable){
-                tracked = 'http://' + trackable.host + trackable.uri + '?bar&title=' + trackable.title;
+            track: function(td){
+                tracked = td.host + td.path + (td.query || '') + td.title;
             }
         });
     },
     testTrack: function() {
         var t = '';
         LANE.track.addTracker({
-            track: function(trackable){
-                t = 'http://' + trackable.host + trackable.uri + '?foo&title=' + trackable.title;
+            track: function(td){
+                t = td.host + td.path + (td.query || '') + td.title;
             }
         });
-        LANE.track.track(new LANE.track.Trackable());
-        Assert.areEqual('http://www.google.com/foo/bar.html?bar&title=The Title', tracked);
-        Assert.areEqual('http://www.google.com/foo/bar.html?foo&title=The Title',t);
+        LANE.track.track(document.getElementById('track'));
+        Assert.areEqual('www.google.com/The Title', tracked);
+        Assert.areEqual('www.google.com/The Title',t);
     }
 });
 
