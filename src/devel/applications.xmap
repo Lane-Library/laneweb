@@ -167,12 +167,17 @@
                     <map:serialize type="xhtml"/>
                 </map:match>
             </map:match>
-            <map:match pattern="querymap/*" type="wildcard">
-                <map:match pattern="querymap/xml" type="wildcard">
+            <!-- for backwards compatibility while testing expires pipeline -->
+            <map:match pattern="querymap/*">
+                <map:generate type="file" src="cocoon:/querymap/{1}/{request-param:q}"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="querymap/**">
+                <map:match pattern="querymap/xml/*">
                     <map:select type="resource-exists">
                         <map:when test="resources/querymap/resource-maps.xml">
                             <map:generate type="querymap">
-                                <map:parameter name="query" value="{request-param:q}"/>
+                                <map:parameter name="query" value="{1}"/>
                                 <map:parameter name="resource-maps"
                                     value="resources/querymap/resource-maps.xml"/>
                                 <map:parameter name="descriptor-weights"
@@ -183,7 +188,7 @@
                         </map:when>
                         <map:otherwise>
                             <map:generate type="querymap">
-                                <map:parameter name="query" value="{request-param:q}"/>
+                                <map:parameter name="query" value="{1}"/>
                                 <map:parameter name="resource-maps"
                                     value="{defaults:live-base}/resources/querymap/resource-maps.xml"/>
                                 <map:parameter name="descriptor-weights"
@@ -196,17 +201,17 @@
                     </map:select>
                     <map:serialize type="xml"/>
                 </map:match>
-                <map:match pattern="querymap/html" type="wildcard">
+                <map:match pattern="querymap/html/*" type="wildcard">
                     <map:select type="resource-exists">
                         <map:when test="resources/querymap/display-template.xml">
                             <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
-                                <map:part src="cocoon:/querymap/xml"/>
+                                <map:part src="cocoon:/querymap/xml/{1}"/>
                                 <map:part src="resources/querymap/display-template.xml"/>
                             </map:aggregate>
                         </map:when>
                         <map:otherwise>
                             <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
-                                <map:part src="cocoon:/querymap/xml"/>
+                                <map:part src="cocoon:/querymap/xml/{1}"/>
                                 <map:part src="{naming:java:comp/env/live-base}/resources/querymap/display-template.xml"/>
                             </map:aggregate>
                         </map:otherwise>
@@ -219,6 +224,14 @@
                             <map:transform type="saxon" src="context://xsl/querymap2html.xsl"/>
                         </map:otherwise>
                     </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
+            </map:match>
+            <map:match pattern="querymap/*" type="wildcard">
+                <map:match pattern="querymap/xml" type="wildcard">
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match pattern="querymap/html" type="wildcard">
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
