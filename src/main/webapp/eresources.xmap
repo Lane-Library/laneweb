@@ -38,10 +38,9 @@
                 </map:transform>
                 <map:serialize type="text"/>
             </map:match>
-            <!-- TODO: expires pipeline doesn't use request parameters in key.  Either make eresources
-                generator cacheable with ExpiresValidity or restructure urls so parameters are in the url path -->
-<!--        </map:pipeline>
-        <map:pipeline type="expires">-->
+        </map:pipeline>
+        <map:pipeline type="expires">
+            <map:parameter name="cache-key" value="{0};a={request-param:a};t={request-param:t};m={request-param:m}"/>
             <map:match pattern="browse">
                 <map:generate type="eresources">
                     <map:parameter name="mode" value="browse"/>
