@@ -3,6 +3,38 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
+        <map:pipeline type="expires">
+            <map:parameter name="cache-expires" value="604800"/><!-- one week -->
+            <map:match pattern="javascript/yui/**" type="wildcard">
+                <map:match pattern="javascript/yui/**.js" type="wildcard">
+                    <map:read src="http://yui.yahooapis.com/2.5.2/{1}.js" mime-type="application/x-javascript"/>
+                </map:match>
+                <map:match pattern="javascript/yui/**.html" type="wildcard">
+                    <map:read src="http://yui.yahooapis.com/2.5.2/{1}.html" mime-type="text/html"/>
+                </map:match>
+                <map:match pattern="javascript/yui/**.txt" type="wildcard">
+                    <map:read src="http://yui.yahooapis.com/2.5.2/{1}.txt" mime-type="text/plain"/>
+                </map:match>
+                <map:match pattern="javascript/yui/**.css" type="wildcard">
+                    <map:read src="http://yui.yahooapis.com/2.5.2/{1}.css" mime-type="text/css"/>
+                </map:match>
+                <map:match pattern="javascript/yui/**.json" type="wildcard">
+                    <map:read src="http://yui.yahooapis.com/2.5.2/{1}.json" mime-type="text/json"/>
+                </map:match>
+                <map:match pattern="javascript/yui/**.png" type="wildcard">
+                    <map:read src="http://yui.yahooapis.com/2.5.2/{1}.png" mime-type="image/png"/>
+                </map:match>
+                <map:match pattern="javascript/yui/**.gif" type="wildcard">
+                    <map:read src="http://yui.yahooapis.com/2.5.2/{1}.gif" mime-type="image/gif"/>
+                </map:match>
+                <map:match pattern="javascript/yui/**.jpg" type="wildcard">
+                    <map:read src="http://yui.yahooapis.com/2.5.2/{1}.jpg" mime-type="image/jpg"/>
+                </map:match>
+            </map:match>
+            <map:match pattern="javascript/google-analytics.com/ga.js" type="wildcard">
+                <map:read src="http://www.google-analytics.com/ga.js" mime-type="application/x-javascript"/>
+            </map:match>
+        </map:pipeline>
         <map:pipeline type="caching">
             <map:match pattern="images/**.gif" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.gif"
