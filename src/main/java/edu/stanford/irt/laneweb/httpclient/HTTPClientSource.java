@@ -379,7 +379,10 @@ public class HTTPClientSource extends AbstractLogEnabled implements
             if (GET.equals(findMethodType())) {
                 final HttpMethod head = createHeadMethod(this.m_uri);
                 try {
-                    executeMethod(head);
+                    //cy altered so only one head request is made if successful
+                    if (200 == executeMethod(head)) {
+                        this.m_dataValid = true;
+                    }
                     return;
                 } catch (final IOException e) {
                     if (getLogger().isDebugEnabled()) {
