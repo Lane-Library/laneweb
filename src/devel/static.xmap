@@ -57,10 +57,10 @@
             <map:match pattern="images/**.png" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="resources/images/{1}.png">
-                        <map:read type="resource" src="resources/images/{1}.jpg" mime-type="image/png"/>
+                        <map:read type="resource" src="resources/images/{1}.png" mime-type="image/png"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.jpg" mime-type="image/png"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.png" mime-type="image/png"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
