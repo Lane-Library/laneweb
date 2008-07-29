@@ -185,9 +185,9 @@
                             <map:generate type="querymap">
                                 <map:parameter name="query" value="{request-param:q}"/>
                                 <map:parameter name="resource-maps"
-                                    value="{defaults:live-base}/resources/querymap/resource-maps.xml"/>
+                                    value="{naming:java:comp/env/live-base}/resources/querymap/resource-maps.xml"/>
                                 <map:parameter name="descriptor-weights"
-                                    value="{defaults:live-base}/resources/querymap/descriptor-weights.xml"
+                                    value="{naming:java:comp/env/live-base}/resources/querymap/descriptor-weights.xml"
                                 />
                                 <!-- abstract count can be set in query string, or default set in cocoon.xconf -->
                                 <map:parameter name="abstract-count" value="{chain:abstract-count}"/>
