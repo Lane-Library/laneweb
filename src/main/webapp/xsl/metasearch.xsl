@@ -51,6 +51,10 @@
         </xsl:copy>
     </xsl:template>
     
+    <xsl:template match="processing-instruction()[. = 'search-terms']">
+        <xsl:value-of select="$search-terms"/>
+    </xsl:template>
+    
     <xsl:template match="attribute::href[contains(.,'{$q}')]">
         <xsl:attribute name="href">
             <xsl:value-of select="replace(.,'\{\$q\}',replace($search-terms,'(\\|\$)','\\$1'))"/>
