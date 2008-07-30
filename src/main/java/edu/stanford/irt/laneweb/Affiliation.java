@@ -221,6 +221,9 @@ public class Affiliation {
                 }
                 return Affiliation.SOM;
             }
+            if (d[1] == 66 && d[2] == 222 && d[3] == 37) {
+                return Affiliation.STAFF;//rzwies home ip
+            }
             if ((d[1] == 66) || (d[1] == 67)) {
                 return Affiliation.SU;
             }
