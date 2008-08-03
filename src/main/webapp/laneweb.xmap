@@ -116,7 +116,7 @@
             <map:reader name="txt-resource" logger="sitemap.reader.txtresource"
                 src="edu.stanford.irt.laneweb.TxtResourceReader">
                 <path>/</path>
-                <valueToSubstitute>/./.</valueToSubstitute>
+                <valueToSubstitute>/\./\.</valueToSubstitute><!-- uses regex so /./. is what is actually substituted -->
             </map:reader>
         </map:readers>
         <map:actions>
