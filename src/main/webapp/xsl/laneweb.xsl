@@ -194,17 +194,18 @@
     <!-- make sure there is not an empty <script/> element -->
     <xsl:template match="h:script[@src]">
         <xsl:copy>
-            <xsl:apply-templates select="attribute::node()[local-name()!='space']"/>
+            <xsl:apply-templates select="attribute::node()"/>
             <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
 
+    <!-- put script text into a comment so saxon won't convert entities -->
     <xsl:template match="h:script">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:comment>
                 <xsl:apply-templates select="child::node()"/>
-            </xsl:comment>
+            <xsl:text>//</xsl:text></xsl:comment>
         </xsl:copy>
     </xsl:template>
 
@@ -309,6 +310,25 @@
                 </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+    
+    <!-- setup flash object, using swfobject -->
+    <xsl:template match="h:object[@type='application/x-shockwave-flash']">
+        <xsl:copy>
+            <xsl:attribute name="classid">clsid:D27CDB6E-AE6D-11cf-96B8-444553540000</xsl:attribute>
+            <xsl:apply-templates select="@*[not(name()='type' or name() = 'data')]"/>
+            <param name="movie" value="{@data}"/>
+            <xsl:apply-templates select="h:param"/>
+            <xsl:comment>[if !IE]></xsl:comment>
+            <xsl:copy>
+                <xsl:apply-templates select="@*[not(name()='id')]"/>
+                <xsl:apply-templates select="h:param"/>
+                <xsl:comment>&lt;![endif]</xsl:comment>
+                <xsl:apply-templates select="*[not(self::h:param)]"/>
+                <xsl:comment>[if !IE]></xsl:comment>
+            </xsl:copy>
+            <xsl:comment>&lt;![endif]</xsl:comment>
+        </xsl:copy>
     </xsl:template>
 
     <!-- =====================  SPECIAL CASE TEMPLATES ===================== -->
@@ -429,10 +449,28 @@
     </xsl:template>
 
     <!-- get all the head elements from template and all non title head elements from source (with some exceptions)-->
+    <!-- and add the swfobject.js stuff if necessary -->
     <xsl:template match="h:head">
         <xsl:copy>
             <xsl:apply-templates select="child::node()"/>
             <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
+            <xsl:if test="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
+                <script type="text/javascript" src="{$context}/javascript/swfobject.js"><xsl:text> </xsl:text></script>
+                <script type="text/javascript">
+                    <xsl:for-each select="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
+                        <xsl:text>swfobject.registerObject('</xsl:text>
+                        <xsl:value-of select="@id"/>
+                        <xsl:if test="h:param[@name='flash-version']">
+                            <xsl:text>','</xsl:text>
+                            <xsl:value-of select="h:param[@name='flash-version']/@value"/>
+                            <xsl:if test="h:param[@name='flash-for-upgrade']/@value = 'true'">
+                                <xsl:value-of select="concat(&quot;','&quot;,$context,'/flash/playerProductInstall.swf')"/>
+                            </xsl:if>
+                        </xsl:if>
+                        <xsl:text>');</xsl:text>
+                    </xsl:for-each>
+                </script>
+            </xsl:if>
             <xsl:call-template name="meta-data"/>
         </xsl:copy>
     </xsl:template>
@@ -866,7 +904,7 @@
     </xsl:template>
 
     <!-- here is the flash detect thing -->
-    <xsl:template match="h:object[h:param[@name='flash-version']]">
+    <xsl:template match="h:object[not(@type='application/x-shockwave-flash')]">
         <xsl:variable name="flash-version">
             <xsl:choose>
                 <xsl:when test="h:param[@name='flash-version']">
