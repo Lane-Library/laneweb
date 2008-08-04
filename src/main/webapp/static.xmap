@@ -114,6 +114,10 @@
                 <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.ppt"
                     mime-type="application/vnd.ms-powerpoint"/>
             </map:match>
+            <map:match pattern="**.pptx" type="wildcard">
+                <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.pptx"
+                    mime-type="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+            </map:match>
             <map:match pattern="**.avi" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.avi"
                     mime-type="video/x-msvideo"/>
