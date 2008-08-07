@@ -1,16 +1,17 @@
 YAHOO.util.Event.addListener(window,'load',initializeTooltips);
 
 function initializeTooltips(e){
-    var tooltipEls = YAHOO.util.Dom.getElementsByClassName('tooltips');
+    var tooltipEls = YAHOO.util.Dom.getElementsByClassName('tooltips'),
+        y, i, tooltips, contextId, width;
 
     if(tooltipEls){
-        for(var y = 0; y<tooltipEls.length; y++){
-            var tooltips = tooltipEls[y].childNodes;
-            for(var i=0; i<tooltips.length; i++){
+        for(y = 0; y<tooltipEls.length; y++){
+            tooltips = tooltipEls[y].childNodes;
+            for(i=0; i<tooltips.length; i++){
                 if(tooltips[i].nodeType == 1){
-                    var contextId = tooltips[i].id.replace(/Tooltip$/,'');
+                    contextId = tooltips[i].id.replace(/Tooltip$/,'');
                     if(contextId.length && YAHOO.util.Dom.inDocument(contextId)){
-                        var width = '25%';
+                        width = '25%';
                         if(tooltips[i].style.width){
                             width = tooltips[i].style.width;
                         }
