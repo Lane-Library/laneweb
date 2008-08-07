@@ -1,6 +1,9 @@
 // register onmousemove event to set XY
-var X;
-var Y;
+var X,Y,
+    faqCallback = {
+        success: faqSuccessHandler,
+        failure: faqFailureHandler
+    };
 function setXY(e) {
     // IE and Safari don't have pageX/pageY so we need to do a little more calculation
     if(window.event){
@@ -18,15 +21,16 @@ function setXY(e) {
         X = e.pageX;
         Y = e.pageY;
     }
-};
+}
 document.onmousemove = setXY;
 
 YAHOO.namespace("popup");
 function showPopup(elm,type,id){
     // create popupContainer if not already present
+    var body, popupContainer, popupUrl, popupRequest;
     if((type == 'local' && !document.getElementById(id)) || !document.getElementById('popupContainer')){
-        var body = document.getElementsByTagName("body").item(0);
-        var popupContainer = document.createElement('div');
+        body = document.getElementsByTagName("body").item(0);
+        popupContainer = document.createElement('div');
         popupContainer.setAttribute('id','popupContainer');
         body.appendChild(popupContainer);
     }
@@ -44,9 +48,6 @@ function showPopup(elm,type,id){
             }
         );
     YAHOO.popup.panel.hideEvent.subscribe(panelHideCallback);
-
-    var popupUrl;
-    var popupRequest;
 
     if(type == 'faq'){
         popupUrl = '/././content/howto/index.html?mode=dl&id=_'+id;
@@ -81,19 +82,15 @@ Popup.prototype.render = function(){
 
     // webtrends call
     dcsMultiTrack('WT.ti','YUI Pop-up [' + this.type + ':'+ this.id + '] -- ' + this.title);
-}
+};
 
-
-var faqCallback = {
-    success: faqSuccessHandler,
-    failure: faqFailureHandler
-}
 function faqSuccessHandler(o){
-    var popup = new Popup();
-    var f = o.responseXML.documentElement;
-    var m = f.getElementsByTagName('meta')[0];
-    var faqid = f.getElementsByTagName('a')[0].getAttribute('id');
-    var faqUrl = '/././howto/index.html?id=' + faqid;
+    var popup, f, m, faqid, faqUrl;
+    popup = new Popup();
+    f = o.responseXML.documentElement;
+    m = f.getElementsByTagName('meta')[0];
+    faqid = f.getElementsByTagName('a')[0].getAttribute('id');
+   faqUrl = '/././howto/index.html?id=' + faqid;
     popup.type = 'faq';
     popup.id = faqid;
     popup.title = f.getElementsByTagName('a')[0].firstChild.data;
@@ -112,8 +109,8 @@ function faqFailureHandler(o){
 }
 
 function localPopup(elmId){
-    var popup = new Popup();
-    var elm = (document.getElementById(elmId)) ? document.getElementById(elmId) : 0;
+    var popup = new Popup(),
+    	elm = (document.getElementById(elmId)) ? document.getElementById(elmId) : 0;
     popup.type = 'local';
     popup.id = elmId;
     popup.title = (elm.getAttribute('title')) ? elm.getAttribute('title') : 0;
