@@ -1,15 +1,13 @@
 // Flash Player Version Detection - Rev 1.5
 // Detect Client Browser type
 // Copyright(c) 2005-2006 Adobe Macromedia Software, LLC. All rights reserved.
-var isIE  = (navigator.appVersion.indexOf("MSIE") != -1) ? true : false;
-var isWin = (navigator.appVersion.toLowerCase().indexOf("win") != -1) ? true : false;
-var isOpera = (navigator.userAgent.indexOf("Opera") != -1) ? true : false;
+var isIE  = (navigator.appVersion.indexOf("MSIE") != -1) ? true : false,
+    isWin = (navigator.appVersion.toLowerCase().indexOf("win") != -1) ? true : false,
+    isOpera = (navigator.userAgent.indexOf("Opera") != -1) ? true : false;
 
 function ControlVersion()
 {
-    var version;
-    var axo;
-    var e;
+    var version, axo, e;
 
     // NOTE : new ActiveXObject(strFoo) throws an exception if strFoo isn't in the registry
 
@@ -80,44 +78,52 @@ function ControlVersion()
 // JavaScript helper required to detect Flash Player PlugIn version information
 function GetSwfVer(){
     // NS/Opera version >= 3 check for Flash plugin in plugin array
-    var flashVer = -1;
+    var flashVer = -1, swVer2, flashDescription, descArray, tempArrayMajor, versionMajor,
+        versionMinor, versionRevision;
     
-    if (navigator.plugins != null && navigator.plugins.length > 0) {
+    if (navigator.plugins !== null && navigator.plugins.length > 0) {
         if (navigator.plugins["Shockwave Flash 2.0"] || navigator.plugins["Shockwave Flash"]) {
-            var swVer2 = navigator.plugins["Shockwave Flash 2.0"] ? " 2.0" : "";
-            var flashDescription = navigator.plugins["Shockwave Flash" + swVer2].description;            
-            var descArray = flashDescription.split(" ");
-            var tempArrayMajor = descArray[2].split(".");
-            var versionMajor = tempArrayMajor[0];
-            var versionMinor = tempArrayMajor[1];
-            if ( descArray[3] != "" ) {
+            swVer2 = navigator.plugins["Shockwave Flash 2.0"] ? " 2.0" : "";
+            flashDescription = navigator.plugins["Shockwave Flash" + swVer2].description;            
+            descArray = flashDescription.split(" ");
+            tempArrayMajor = descArray[2].split(".");
+            versionMajor = tempArrayMajor[0];
+            versionMinor = tempArrayMajor[1];
+            if ( descArray[3] !== "" ) {
                 tempArrayMinor = descArray[3].split("r");
             } else {
                 tempArrayMinor = descArray[4].split("r");
             }
-            var versionRevision = tempArrayMinor[1] > 0 ? tempArrayMinor[1] : 0;
-            var flashVer = versionMajor + "." + versionMinor + "." + versionRevision;
+            versionRevision = tempArrayMinor[1] > 0 ? tempArrayMinor[1] : 0;
+            flashVer = versionMajor + "." + versionMinor + "." + versionRevision;
         }
     }
     // MSN/WebTV 2.6 supports Flash 4
-    else if (navigator.userAgent.toLowerCase().indexOf("webtv/2.6") != -1) flashVer = 4;
-    // WebTV 2.5 supports Flash 3
-    else if (navigator.userAgent.toLowerCase().indexOf("webtv/2.5") != -1) flashVer = 3;
-    // older WebTV supports Flash 2
-    else if (navigator.userAgent.toLowerCase().indexOf("webtv") != -1) flashVer = 2;
-    else if ( isIE && isWin && !isOpera ) {
-        flashVer = ControlVersion();
-    }    
+    else if (navigator.userAgent.toLowerCase().indexOf("webtv/2.6") != -1) {
+        flashVer = 4;
+    } // WebTV 2.5 supports Flash 3
+    else 
+        if (navigator.userAgent.toLowerCase().indexOf("webtv/2.5") != -1) {
+            flashVer = 3;
+        } // older WebTV supports Flash 2
+        else 
+            if (navigator.userAgent.toLowerCase().indexOf("webtv") != -1) {
+                flashVer = 2;
+            } else 
+                if (isIE && isWin && !isOpera) {
+                    flashVer = ControlVersion();
+                }    
     return flashVer;
 }
 
 // When called with reqMajorVer, reqMinorVer, reqRevision returns true if that version or greater is available
 function DetectFlashVer(reqMajorVer, reqMinorVer, reqRevision)
 {
+    var versionMajor, versionMinor, versionRevision, tempArray, tempString, versionArray,
     versionStr = GetSwfVer();
     if (versionStr == -1 ) {
         return false;
-    } else if (versionStr != 0) {
+    } else if (versionStr !== 0) {
         if(isIE && isWin && !isOpera) {
             // Given "WIN 2,0,0,11"
             tempArray         = versionStr.split(" ");     // ["WIN", "2,0,0,11"]
@@ -126,20 +132,22 @@ function DetectFlashVer(reqMajorVer, reqMinorVer, reqRevision)
         } else {
             versionArray      = versionStr.split(".");
         }
-        var versionMajor      = versionArray[0];
-        var versionMinor      = versionArray[1];
-        var versionRevision   = versionArray[2];
+        versionMajor      = versionArray[0];
+        versionMinor      = versionArray[1];
+        versionRevision   = versionArray[2];
 
             // is the major.revision >= requested major.revision AND the minor version >= requested minor
         if (versionMajor > parseFloat(reqMajorVer)) {
             return true;
         } else if (versionMajor == parseFloat(reqMajorVer)) {
-            if (versionMinor > parseFloat(reqMinorVer))
+            if (versionMinor > parseFloat(reqMinorVer)) {
                 return true;
-            else if (versionMinor == parseFloat(reqMinorVer)) {
-                if (versionRevision >= parseFloat(reqRevision))
-                    return true;
-            }
+            } else 
+                if (versionMinor == parseFloat(reqMinorVer)) {
+                    if (versionRevision >= parseFloat(reqRevision)) {
+                        return true;
+                    }
+                }
         }
         return false;
     }
@@ -147,27 +155,31 @@ function DetectFlashVer(reqMajorVer, reqMinorVer, reqRevision)
 
 function AC_AddExtension(src, ext)
 {
-  if (src.indexOf('?') != -1)
-    return src.replace(/\?/, ext+'?'); 
-  else
-    return src + ext;
+  if (src.indexOf('?') != -1) {
+      return src.replace(/\?/, ext + '?');
+  } else {
+      return src + ext;
+  }
 }
 
 function AC_Generateobj(objAttrs, params, embedAttrs) 
 { 
-    var str = '';
+    var str = '', i;
     if (isIE && isWin && !isOpera)
     {
           str += '<object ';
-          for (var i in objAttrs)
+          for (i in objAttrs) {
               str += i + '="' + objAttrs[i] + '" ';
-          for (var i in params)
+          }
+          for (i in params) {
               str += '><param name="' + i + '" value="' + params[i] + '" /> ';
+          }
           str += '></object>';
     } else {
           str += '<embed ';
-          for (var i in embedAttrs)
+          for (i in embedAttrs) {
               str += i + '="' + embedAttrs[i] + '" ';
+          }
           str += '> </embed>';
     }
 
@@ -184,12 +196,12 @@ function AC_FL_RunContent(){
 }
 
 function AC_GetArgs(args, ext, srcParamName, classid, mimeType){
-  var ret = new Object();
-  ret.embedAttrs = new Object();
-  ret.params = new Object();
-  ret.objAttrs = new Object();
-  for (var i=0; i < args.length; i=i+2){
-    var currArg = args[i].toLowerCase();    
+  var ret = {}, i, currArg;
+  ret.embedAttrs = {};
+  ret.params = {};
+  ret.objAttrs = {};
+  for (i=0; i < args.length; i=i+2){
+    currArg = args[i].toLowerCase();    
 
     switch (currArg){    
       case "classid":
@@ -262,7 +274,9 @@ function AC_GetArgs(args, ext, srcParamName, classid, mimeType){
     }
   }
   ret.objAttrs["classid"] = classid;
-  if (mimeType) ret.embedAttrs["type"] = mimeType;
+  if (mimeType) {
+      ret.embedAttrs["type"] = mimeType;
+  }
   return ret;
 }
 
