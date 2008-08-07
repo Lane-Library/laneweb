@@ -20,20 +20,20 @@
             </map:match>
             <map:match pattern="javascript/*.js" type="wildcard">
                 <!-- TODO: this resource-exists selection is only temporary, should explicitly request -min.js -->
-                <map:select type="resource-exists">
+<!--                <map:select type="resource-exists">
                     <map:when test="context://javascript/{1}-min.js">
                         <map:read type="txt-resource" src="context://javascript/{1}-min.js"
                             mime-type="application/x-javascript">
                             <map:parameter name="path" value="{request:contextPath}"/>
                         </map:read>
                     </map:when>
-                    <map:otherwise>
+                    <map:otherwise>-->
                         <map:read type="txt-resource" src="context://javascript/{1}.js"
                             mime-type="application/x-javascript">
                             <map:parameter name="path" value="{request:contextPath}"/>
                         </map:read>
-                    </map:otherwise>
-                </map:select>
+<!--                    </map:otherwise>
+                </map:select>-->
             </map:match>
             <map:match pattern="images/**.jpg" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.jpg"
