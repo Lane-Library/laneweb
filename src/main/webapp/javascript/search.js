@@ -131,10 +131,10 @@ function Result(type, tab, container) {
 
 Result.prototype.setContent = function(content) {
     var i;
-    if (null == content) {
+    if (content === null) {
         window.log('Result.setContent(): content should not  be null');
     }
-    if (this._content === null) {
+    if (this._content === undefined) {
         this._content = content;
     } else {
         this._content = this._content.concat(content);
