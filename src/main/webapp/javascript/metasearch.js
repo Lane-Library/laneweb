@@ -1,10 +1,20 @@
-var searchTerms;
-var searchIndicator;
-var searchMode;
-var searchStatus;
-var searchTemplate;
-var searchUrl;
-var counter = 0;
+var searchTerms,
+    searchIndicator,
+    searchMode,
+    searchStatus,
+    searchTemplate,
+    searchUrl,
+    counter = 0,
+    spellCheckCallBack = {
+        success:showSpellCheck,
+        failure:handleFailure,
+        argument:{file:"metasearch.js", line:"spellCheckCallBack"} 
+    },
+    metasearchCallback = {
+        success:showMetasearchResults,
+        failure:window.handleFailure,
+        argument:{file:"metasearch.js", line:"metasearchCallBack"}
+    };
 
 YAHOO.util.Event.addListener(window,'load',initializeMetasearch);
 
@@ -26,24 +36,27 @@ function initializeMetasearch(e)
  }
 
 
-var showMetasearchResults = function(o)
+function showMetasearchResults(o)
 {
-        var searchResponse = eval("("+o.responseText+")");
+    var metasearchElements, sleepingTime, z, metasearchResult, resourceId;
+        searchResponse = YAHOO.lang.JSON.parse(o.responseText);
         window.searchStatus = (window.searchStatus == 'successful') ? window.searchStatus : searchResponse.status;
-        var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
+        metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch');
         if(metasearchElements.length && window.searchStatus != 'successful'){
             window.counter++;
-            var sleepingTime = 2000; //2 seconds
-            if(window.counter > 15) //time sleepingtime (2 seconds) * 15 = 30 seconds
+            sleepingTime = 2000; //2 seconds
+            if (window.counter > 15) {//time sleepingtime (2 seconds) * 15 = 30 seconds
                 sleepingTime = 10000;// 10 seconds
+            }
             setTimeout("YAHOO.util.Connect.asyncRequest('GET', '"+'/././apps/search/filtered/proxy/json?q='+window.searchTerms+'&source='+window.searchTemplate+'&rd='+Math.random()+"', window.metasearchCallback);",sleepingTime);
         }
-        for( var z = 0; z<metasearchElements.length; z++){
+        for( z = 0; z<metasearchElements.length; z++){
             if( metasearchElements[z].className != 'complete'  ) {
-                var resourceId = metasearchElements[z].getAttribute('id');
+                resourceId = metasearchElements[z].getAttribute('id');
                 searchResource = searchResponse.resources[resourceId];
-                if(searchResource && searchResource.status && searchResource.status != 'running' )  
-                    var metasearchResult = new MetasearchResult(metasearchElements[z],searchResource, resourceId);
+                if (searchResource && searchResource.status && searchResource.status != 'running') {
+                    metasearchResult = new MetasearchResult(metasearchElements[z], searchResource, resourceId);
+                }
             }
         }
         if(window.searchIndicator){
@@ -53,10 +66,10 @@ var showMetasearchResults = function(o)
 
 function MetasearchResult(metasearchElement,searchResource, id)
 {
-    if (metasearchElement == null) {
+    if (metasearchElement === null) {
         window.log('MetasearchResult():  metasearchElement should not be null');
     }
-    if (searchResource == null) {
+    if (searchResource === null) {
        window.log('MetasearchResult():  searchResource should not be null');
     }
 
@@ -67,15 +80,12 @@ function MetasearchResult(metasearchElement,searchResource, id)
     this.href = searchResource.url || metasearchElement.href;
     
     this.setContent(metasearchElement);
-
-    if(getMetaContent("LW.debug")){
-        this.debug();
-    }
 }
 
 MetasearchResult.prototype.setContent = function(metasearchElement)
 {
-    if (metasearchElement == null) {
+    var resultSpan, parentHeading, parent;
+    if (metasearchElement === null) {
         window.log('MetasearchResult.setContent():  metasearchElement should not be null');
     }
         switch(window.searchMode){
@@ -89,18 +99,18 @@ MetasearchResult.prototype.setContent = function(metasearchElement)
                     }
                     metasearchElement.setAttribute('target','_blank');
                     metasearchElement.className = 'complete';
-                    var resultSpan = document.createElement('span');
+                    resultSpan = document.createElement('span');
                     resultSpan.innerHTML = ': ' + this.hits;
                     metasearchElement.parentNode.appendChild(resultSpan);
     
-                    if( parseInt(this.hits) > 0 || this.status != 'successful' ) { 
-                        var parentHeading = YAHOO.util.Dom.getAncestorByTagName(this.id,'div').getElementsByTagName('h3')[0];
+                    if( parseInt(this.hits, 10) > 0 || this.status != 'successful' ) { 
+                        parentHeading = YAHOO.util.Dom.getAncestorByTagName(this.id,'div').getElementsByTagName('h3')[0];
                         parentHeading.style.display = 'block';
-                        var parent = YAHOO.util.Dom.getAncestorByTagName(this.id,'li');
+                        parent = YAHOO.util.Dom.getAncestorByTagName(this.id,'li');
                         parent.style.display = 'block';
                     }
-                    else if( parseInt(this.hits) == 0 ) { 
-                        var parent = YAHOO.util.Dom.getAncestorByTagName(this.id,'li');
+                    else if( parseInt(this.hits, 10) === 0 ) { 
+                        parent = YAHOO.util.Dom.getAncestorByTagName(this.id,'li');
                         parent.className = 'zero';
                     }
                 }
@@ -115,7 +125,7 @@ MetasearchResult.prototype.setContent = function(metasearchElement)
                     }
                     metasearchElement.setAttribute('target','_blank');
             
-                    var resultSpan = document.createElement('span');
+                    resultSpan = document.createElement('span');
                     resultSpan.innerHTML = ': ' + this.hits;
                     metasearchElement.parentNode.appendChild(resultSpan);
                     metasearchElement.className = 'complete';
@@ -125,36 +135,18 @@ MetasearchResult.prototype.setContent = function(metasearchElement)
                 }
             break;
        }
-}
-
-MetasearchResult.prototype.debug = function()
-{
-        var logMessage = '';
-        for (var d in this){
-            if( d.match(/id|name|status|hits|href/) ){
-                logMessage += '\n' + d + ' ==> ' + this[d];
-            }
-        }
-        YAHOO.log(logMessage , 'info');
-}
+};
 
 function haltMetasearch()
 {
         window.searchStatus = 'successful';
 }
 
-var metasearchCallback = 
-{
-    success:showMetasearchResults,
-    failure:window.handleFailure,
-      argument:{file:"metasearch.js", line:"metasearchCallBack"}
-};
-
 function toggleZeros(e)
 {
-    var toggleEl = document.getElementById('toggleZeros');
-    var zeroResources = YAHOO.util.Dom.getElementsByClassName('zero');
-    var display;
+    var toggleEl = document.getElementById('toggleZeros'),
+        zeroResources = YAHOO.util.Dom.getElementsByClassName('zero'),
+        display, i, y, searchCats;
     
     switch(toggleEl.innerHTML){
         case "Show Details":
@@ -167,13 +159,13 @@ function toggleZeros(e)
         break;
     }
     
-    for(var i = 0; i<zeroResources.length; i++){
+    for(i = 0; i<zeroResources.length; i++){
         YAHOO.util.Dom.setStyle(zeroResources[i],'display',display);
     }
 
     // toggle h3 header as well if all children in searchCat are zeros
-    var searchCats = YAHOO.util.Dom.getElementsByClassName('searchCategory');
-    for(var y = 0; y<searchCats.length; y++){
+    searchCats = YAHOO.util.Dom.getElementsByClassName('searchCategory');
+    for(y = 0; y<searchCats.length; y++){
         if(YAHOO.util.Dom.getElementsByClassName('zero','',searchCats[y]).length ==  searchCats[y].getElementsByTagName('li').length ){
             YAHOO.util.Dom.setStyle(YAHOO.util.Dom.getFirstChild(searchCats[y]),'display',display);
         }
@@ -194,39 +186,40 @@ function SearchIndicator(elementId,message)
 SearchIndicator.prototype.hide = function()
 {
      YAHOO.util.Dom.setStyle(this.elementId,'visibility','hidden');
-}
+};
 
 SearchIndicator.prototype.show = function()
 {
    YAHOO.util.Dom.setStyle(this.elementId,'visibility','visible');
-}
+};
 
 SearchIndicator.prototype.setProgress = function(status,pendingResources,completedResources)
 {
     this.show();
     this.setMessage(completedResources + ' of ' + (pendingResources + completedResources) + ' sources searched');
-    if(status == 'successful' || pendingResources == 0)
+    if(status == 'successful' || pendingResources === 0)
     {
         this.hide();
         YAHOO.util.Dom.setStyle('resultsMessage','display','inline');
         YAHOO.util.Dom.setStyle('metasearchControls','display','inline');
     }
-}
+};
 
 SearchIndicator.prototype.setMessage = function(message)
 {
     this.message = message;
     document.getElementById(this.elementId).title = this.message;
-}
+};
 
 
 
 function showSpellCheck(o)
 {
-        var spellCheckResponse = eval("("+o.responseText+")");
+        var spellCheckResponse = YAHOO.lang.JSON.parse(o.responseText),
+            spellCheckContainer, spellCheckLink;
         if (spellCheckResponse.suggestion) {
-            var spellCheckContainer = document.getElementById("spellCheck");
-            var spellCheckLink = document.getElementById("spellCheckLink");
+            spellCheckContainer = document.getElementById("spellCheck");
+            spellCheckLink = document.getElementById("spellCheckLink");
             if(spellCheckContainer && spellCheckLink)
             {
                 spellCheckLink.href = location.href.replace(location.href.match(/\Wq=([^&]*)/)[2],spellCheckResponse.suggestion);
@@ -237,11 +230,5 @@ function showSpellCheck(o)
         }
 }
 
-var spellCheckCallBack =
-{
-  success:showSpellCheck,
-  failure:handleFailure,
-  argument:{file:"metasearch.js", line:"spellCheckCallBack"} 
-};
 
 
