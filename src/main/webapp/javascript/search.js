@@ -238,13 +238,12 @@ function showHits(o) {
     for (j = 0; j < response.results.tabs.length; j++) {
         tabName = response.results.tabs[j].resource;
         tab = document.getElementById(tabName + "Tab");
-        if (tab !== undefined) {
+        if (tab !== null) {
             hitSpan = tab.getElementsByTagName('span')[0];
             hits = response.results.tabs[j].hits;
             if (hitSpan !== null && hits !== '') {
                 hitSpan.innerHTML = hits;
             }
-            hitSpan.style.visibility = 'visible';
         }
     }
     sleepingTime = 2000;
