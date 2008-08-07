@@ -232,10 +232,6 @@ function dcsVar(){
     }
 }
 
-function A(N, V){
-    return "&" + N + "=" + escape(V);
-}
-
 function dcsCreateImage(dcsSrc){
     if (document.images) {
         gImages[gIndex] = new Image();
@@ -271,26 +267,35 @@ function dcsMeta(){
 }
 
 function dcsTag(){
-    var N, P = "http" + (window.location.protocol.indexOf('https:') === 0 ? 's' : '') + "://" + gDomain + (gDcsId === "" ? '' : '/' + gDcsId) + "/dcs.gif?";
-    for (N in DCS) {
-        if (DCS[N]) {
-            P += A(N, DCS[N]);
+    var name, params = "http" + (window.location.protocol.indexOf('https:') === 0 ? 's' : '') + "://" + gDomain + (gDcsId === "" ? '' : '/' + gDcsId) + "/dcs.gif?",
+    parameterize = function(name, value) {
+        var encoded;
+        if (encodeURIComponent) {
+            encoded = encodeURIComponent(value);
+        } else {
+            encoded = escape(value);
+        }
+        return "&" + name + "=" + encoded;
+    };
+    for (name in DCS) {
+        if (DCS[name]) {
+            params += parameterize(name, DCS[name]);
         }
     }
-    for (N in WT) {
-        if (WT[N]) {
-            P += A("WT." + N, WT[N]);
+    for (name in WT) {
+        if (WT[name]) {
+            params += parameterize("WT." + name, WT[name]);
         }
     }
-    for (N in DCSext) {
-        if (DCSext[N]) {
-            P += A(N, DCSext[N]);
+    for (name in DCSext) {
+        if (DCSext[name]) {
+            params += parameterize(name, DCSext[name]);
         }
     }
-    if (P.length > 2048 && navigator.userAgent.indexOf('MSIE') >= 0) {
-        P = P.substring(0, 2040) + "&WT.tu=1";
+    if (params.length > 2048 && navigator.userAgent.indexOf('MSIE') >= 0) {
+        params = params.substring(0, 2040) + "&WT.tu=1";
     }
-    dcsCreateImage(P);
+    dcsCreateImage(params);
 }
 
 dcsVar();
