@@ -73,6 +73,9 @@
                 <configuration>
                     <outputDirectory>target/laneweb/javascript</outputDirectory>
                     <webappDirectory>target/laneweb</webappDirectory>
+                    <excludes>
+                        <exclude>**/swfobject.js</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
