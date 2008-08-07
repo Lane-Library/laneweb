@@ -1,13 +1,12 @@
 var pageTracker;
 
-YAHOO.util.Event.addListener(window,'load',initialize);
+YAHOO.util.Event.addListener(window, 'load', initialize);
 
 function initialize(e) {
-    if(window._gat != undefined){
-        if("lane.stanford.edu" == getMetaContent('LW.host')){
+    if (window._gat !== undefined) {
+        if ("lane.stanford.edu" == getMetaContent('LW.host')) {
             window.pageTracker = _gat._getTracker("UA-3202241-2");
-        }
-        else{
+        } else {
             window.pageTracker = _gat._getTracker("UA-3203486-2");
         }
         window.pageTracker._initData();
