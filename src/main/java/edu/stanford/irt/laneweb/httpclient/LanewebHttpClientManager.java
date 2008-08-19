@@ -1,5 +1,9 @@
 package edu.stanford.irt.laneweb.httpclient;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
@@ -12,18 +16,21 @@ public class LanewebHttpClientManager implements HttpClientManager,
         Parameterizable, Initializable, ThreadSafe {
 
     /** the HttpClient. */
-    protected HttpClient httpClient;
+    private HttpClient httpClient;
 
     /** the total number of connections. */
-    protected int maxTotalConnections;
+    private int maxTotalConnections;
 
     /** the total connection per host. */
-    protected int defaultMaxConnectionsPerHost;
-
-    /** the time in milliseconds after which idle connection are closed */
-    protected long idleTimeout;
-
-    protected int connectionTimeout;
+    private int defaultMaxConnectionsPerHost;
+    
+    private int connectionTimeout;
+    
+    /** the proxy host, if any */
+    private String proxyHost;
+    
+    /** the proxy port if any */
+    private int proxyPort;
 
     /**
      * accessor for the HttpClient.
@@ -65,18 +72,24 @@ public class LanewebHttpClientManager implements HttpClientManager,
         this.defaultMaxConnectionsPerHost = defaultMaxConnectionsPerHost;
     }
 
-    /**
-     * sets the idle timeout.
-     * 
-     * @param idleTimeout
-     *            the idleTimeout
-     */
-    public void setIdleTimeout(final long idleTimeout) {
-        this.idleTimeout = idleTimeout;
-    }
-
     public void setConnectionTimeout(final int connectionTimeout) {
         this.connectionTimeout = connectionTimeout;
+    }
+    
+    /**
+     * set the proxy host
+     * @parm proxyHost
+     */
+    public void setProxyHost(final String proxyHost) {
+        this.proxyHost = proxyHost;
+    }
+    
+    /**
+     * set the proxy port
+     * @param proxyPort
+     */
+    public void setProxyPort(final int proxyPort) {
+        this.proxyPort = proxyPort;
     }
 
     /**
@@ -90,6 +103,10 @@ public class LanewebHttpClientManager implements HttpClientManager,
                         this.defaultMaxConnectionsPerHost);
         this.httpClient.getHttpConnectionManager().getParams()
                 .setConnectionTimeout(this.connectionTimeout);
+        //set up the proxy if parameters are available
+        if (null != this.proxyHost && this.proxyHost.length() > 0 && this.proxyPort > 0) {
+            this.httpClient.getHostConfiguration().setProxy(this.proxyHost, this.proxyPort);
+        }
     }
 
     /*
@@ -99,12 +116,12 @@ public class LanewebHttpClientManager implements HttpClientManager,
      * .apache.avalon.framework.parameters.Parameters)
      */
     public void parameterize(final Parameters params) throws ParameterException {
-        this.maxTotalConnections = params.getParameterAsInteger(
-                "max-total-connections", 30);
-        this.defaultMaxConnectionsPerHost = params.getParameterAsInteger(
-                "max-host-connections", 5);
-        this.connectionTimeout = params.getParameterAsInteger(
-                "connection-timeout", 20000);
+        setMaxTotalConnections(params.getParameterAsInteger(
+                "max-total-connections", 30));
+        setDefaultMaxConnectionsPerHost(params.getParameterAsInteger(
+                "max-host-connections", 5));
+        setConnectionTimeout(params.getParameterAsInteger(
+                "connection-timeout", 20000));
     }
 
     /*
@@ -112,8 +129,14 @@ public class LanewebHttpClientManager implements HttpClientManager,
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
     public void initialize() throws Exception {
-        this.httpClient = new HttpClient(
-                new MultiThreadedHttpConnectionManager());
+        setHttpClient(new HttpClient(
+                new MultiThreadedHttpConnectionManager()));
+        try {
+        Context context = new InitialContext();
+        setProxyHost(context.lookup("java:comp/env/proxy-host").toString());
+        setProxyPort(((Integer)context.lookup("java:comp/env/proxy-port")).intValue());
+        } catch (NamingException e) {
+        }
         init();
     }
 

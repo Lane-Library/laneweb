@@ -40,8 +40,18 @@ public class QueryMapperImpl extends edu.stanford.irt.querymap.QueryMapper
         super.setDescriptorManager(descriptorManager);
         QueryToDescriptor queryToDescriptor = new QueryToDescriptor();
         queryToDescriptor.setDescriptorManager(descriptorManager);
-        queryToDescriptor.setHttpClient(new HttpClient(
-                new MultiThreadedHttpConnectionManager()));
+        //TODO: make HttpClient more configurable
+        HttpClient httpClient = new HttpClient(new MultiThreadedHttpConnectionManager());
+        Context context;
+        try {
+            context = new InitialContext();
+            String proxyHost = context.lookup("java:comp/env/proxy-host").toString();
+            int proxyPort = ((Integer)context.lookup("java:comp/env/proxy-port")).intValue();
+            httpClient.getHostConfiguration().setProxy(proxyHost, proxyPort);
+        } catch (NamingException e) {
+            // do nothing, naming exception if no proxy-host or proxy-port
+        }
+        queryToDescriptor.setHttpClient(httpClient);
         setQueryToDescriptor(queryToDescriptor);
         setResourceMaps(new StreamResourceMapping(resourceMap));
         setDescriptorWeights(new DescriptorWeightMap(descriptorWeights));
