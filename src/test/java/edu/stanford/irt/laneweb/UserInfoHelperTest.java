@@ -57,7 +57,7 @@ public class UserInfoHelperTest extends TestCase {
         expect(this.request.getSession(true)).andReturn(this.session);
         expect(this.request.getHeader(LanewebConstants.X_FORWARDED_FOR))
                 .andReturn(null);
-        expect(this.request.getAttribute(LanewebConstants.WEBAUTH_USER))
+        expect(this.request.getRemoteUser())
                 .andReturn(this.sunetid);
         expect(this.request.getParameter(LanewebConstants.PROXY_LINKS))
                 .andReturn("true");
@@ -72,28 +72,28 @@ public class UserInfoHelperTest extends TestCase {
     }
 
     public void testGetUserInfo() {
-//        expect(this.request.getRemoteAddr()).andReturn(this.ip);
-//        replay(this.request);
-//        UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
-//        assertEquals(Affiliation.SOM, userInfo.getAffiliation());
-//        assertTrue(userInfo.getProxyLinks());
-//        assertEquals(this.sunetid, userInfo.getSunetId());
-//        assertNotNull(userInfo.getTicket());
-//        assertEquals(46, userInfo.getTicket().toString().length());
-//        assertEquals(this.sunetid, userInfo.getPerson().getSunetId()[0]);
-//        verify(this.session);
-//        verify(this.request);
+        expect(this.request.getRemoteAddr()).andReturn(this.ip);
+        replay(this.request);
+        UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
+        assertEquals(Affiliation.SOM, userInfo.getAffiliation());
+        assertTrue(userInfo.getProxyLinks());
+        assertEquals(this.sunetid, userInfo.getSunetId());
+        assertNotNull(userInfo.getTicket());
+        assertEquals(46, userInfo.getTicket().toString().length());
+        assertEquals(this.sunetid, userInfo.getPerson().getSunetId()[0]);
+        verify(this.session);
+        verify(this.request);
     }
 
     public void testAffiliation() {
-//        String ip = this.ip.concat("FAIL_TEST");
-//        expect(this.request.getRemoteAddr()).andReturn(ip);
-//        replay(this.request);
-//        this.userInfoHelper.enableLogging(createMock(Logger.class));
-//        UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
-//        assertEquals(Affiliation.ERR, userInfo.getAffiliation());
-//        verify(this.session);
-//        verify(this.request);
+        String ip = this.ip.concat("FAIL_TEST");
+        expect(this.request.getRemoteAddr()).andReturn(ip);
+        replay(this.request);
+        this.userInfoHelper.enableLogging(createMock(Logger.class));
+        UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
+        assertEquals(Affiliation.ERR, userInfo.getAffiliation());
+        verify(this.session);
+        verify(this.request);
     }
 
 }

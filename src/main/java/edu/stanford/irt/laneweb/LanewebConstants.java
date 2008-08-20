@@ -22,8 +22,4 @@ public interface LanewebConstants {
 
     public static final String X_FORWARDED_FOR = "X-FORWARDED-FOR";
 
-    public static final String WEBAUTH_USER = "WEBAUTH_USER";
-
-    public static final String UNSET = "<UNSET>";
-
 }

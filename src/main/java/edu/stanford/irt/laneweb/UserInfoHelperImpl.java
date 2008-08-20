@@ -62,16 +62,11 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements
             }
         }
         if (userInfo.getSunetId() == null) {
-            String requestSunetId = (String) request
-                    .getAttribute(LanewebConstants.WEBAUTH_USER);
-            if ((requestSunetId != null)
-                    && !LanewebConstants.UNSET.equals(requestSunetId)) {
-                if (!requestSunetId.equals(request.getRemoteUser())) {
-                    throw new RuntimeException("sunetId:"+requestSunetId+" remoteUser:"+request.getRemoteUser());
-                }
-                userInfo.setSunetId(requestSunetId);
+            String remoteUser = request.getRemoteUser();
+            if (remoteUser != null) {
+                userInfo.setSunetId(remoteUser);
                 userInfo.setPerson(this.ldapClient
-                        .getLdapPerson(requestSunetId));
+                        .getLdapPerson(remoteUser));
             }
         }
         if ((null != userInfo.getSunetId()) && (null != this.ezproxyKey)) {
