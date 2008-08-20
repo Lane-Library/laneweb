@@ -66,6 +66,9 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements
                     .getAttribute(LanewebConstants.WEBAUTH_USER);
             if ((requestSunetId != null)
                     && !LanewebConstants.UNSET.equals(requestSunetId)) {
+                if (!requestSunetId.equals(request.getRemoteUser())) {
+                    throw new RuntimeException("sunetId:"+requestSunetId+" remoteUser:"+request.getRemoteUser());
+                }
                 userInfo.setSunetId(requestSunetId);
                 userInfo.setPerson(this.ldapClient
                         .getLdapPerson(requestSunetId));
