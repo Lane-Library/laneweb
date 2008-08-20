@@ -71,7 +71,7 @@ public class UserInfoHelperTest extends TestCase {
         this.userInfoHelper.setEzproxyKey(this.ezproxyKey);
     }
 
-//    public void testGetUserInfo() {
+    public void testGetUserInfo() {
 //        expect(this.request.getRemoteAddr()).andReturn(this.ip);
 //        replay(this.request);
 //        UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
@@ -83,9 +83,9 @@ public class UserInfoHelperTest extends TestCase {
 //        assertEquals(this.sunetid, userInfo.getPerson().getSunetId()[0]);
 //        verify(this.session);
 //        verify(this.request);
-//    }
-//
-//    public void testAffiliation() {
+    }
+
+    public void testAffiliation() {
 //        String ip = this.ip.concat("FAIL_TEST");
 //        expect(this.request.getRemoteAddr()).andReturn(ip);
 //        replay(this.request);
@@ -94,6 +94,6 @@ public class UserInfoHelperTest extends TestCase {
 //        assertEquals(Affiliation.ERR, userInfo.getAffiliation());
 //        verify(this.session);
 //        verify(this.request);
-//    }
+    }
 
 }
