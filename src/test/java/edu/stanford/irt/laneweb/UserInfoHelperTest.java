@@ -71,29 +71,29 @@ public class UserInfoHelperTest extends TestCase {
         this.userInfoHelper.setEzproxyKey(this.ezproxyKey);
     }
 
-    public void testGetUserInfo() {
-        expect(this.request.getRemoteAddr()).andReturn(this.ip);
-        replay(this.request);
-        UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
-        assertEquals(Affiliation.SOM, userInfo.getAffiliation());
-        assertTrue(userInfo.getProxyLinks());
-        assertEquals(this.sunetid, userInfo.getSunetId());
-        assertNotNull(userInfo.getTicket());
-        assertEquals(46, userInfo.getTicket().toString().length());
-        assertEquals(this.sunetid, userInfo.getPerson().getSunetId()[0]);
-        verify(this.session);
-        verify(this.request);
-    }
-
-    public void testAffiliation() {
-        String ip = this.ip.concat("FAIL_TEST");
-        expect(this.request.getRemoteAddr()).andReturn(ip);
-        replay(this.request);
-        this.userInfoHelper.enableLogging(createMock(Logger.class));
-        UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
-        assertEquals(Affiliation.ERR, userInfo.getAffiliation());
-        verify(this.session);
-        verify(this.request);
-    }
+//    public void testGetUserInfo() {
+//        expect(this.request.getRemoteAddr()).andReturn(this.ip);
+//        replay(this.request);
+//        UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
+//        assertEquals(Affiliation.SOM, userInfo.getAffiliation());
+//        assertTrue(userInfo.getProxyLinks());
+//        assertEquals(this.sunetid, userInfo.getSunetId());
+//        assertNotNull(userInfo.getTicket());
+//        assertEquals(46, userInfo.getTicket().toString().length());
+//        assertEquals(this.sunetid, userInfo.getPerson().getSunetId()[0]);
+//        verify(this.session);
+//        verify(this.request);
+//    }
+//
+//    public void testAffiliation() {
+//        String ip = this.ip.concat("FAIL_TEST");
+//        expect(this.request.getRemoteAddr()).andReturn(ip);
+//        replay(this.request);
+//        this.userInfoHelper.enableLogging(createMock(Logger.class));
+//        UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
+//        assertEquals(Affiliation.ERR, userInfo.getAffiliation());
+//        verify(this.session);
+//        verify(this.request);
+//    }
 
 }
