@@ -4,6 +4,7 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="caching">
+            <map:parameter name="expires" value="access plus 7 days"/>
             <map:match pattern="images/**.gif" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.gif"
                     mime-type="image/gif"/>
@@ -117,6 +118,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching">
+            <map:parameter name="expires" value="access plus 7 days"/>
             <map:match pattern="**.wmv" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.wmv"
                     mime-type="audio/x-ms-wmv"/>
