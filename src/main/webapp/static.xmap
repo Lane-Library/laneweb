@@ -6,46 +6,41 @@
         <map:pipeline type="caching">
             <map:parameter name="expires" value="access plus 7 days"/>
             <map:match pattern="images/**.gif" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.gif"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/live-base}/resources/images/{1}.gif"
                     mime-type="image/gif"/>
             </map:match>
             <map:match pattern="favicon.ico" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/favicon.ico"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/live-base}/resources/images/favicon.ico"
                     mime-type="image/x-icon"/>
             </map:match>
             <map:match pattern="style/**.css" type="wildcard">
-                <map:read type="txt-resource" src="{naming:java:comp/env/live-base}/resources/css/{1}.css"
+                <map:read type="txt-resource"
+                    src="{naming:java:comp/env/live-base}/resources/css/{1}.css"
                     mime-type="text/css">
                     <map:parameter name="path" value="{request:contextPath}"/>
                 </map:read>
             </map:match>
             <map:match pattern="javascript/*.js" type="wildcard">
-                <!-- TODO: this resource-exists selection is only temporary, should explicitly request -min.js -->
-                <map:select type="resource-exists">
-                    <map:when test="context://javascript/{1}-min.js">
-                        <map:read type="txt-resource" src="context://javascript/{1}-min.js"
-                            mime-type="application/x-javascript">
-                            <map:parameter name="path" value="{request:contextPath}"/>
-                        </map:read>
-                    </map:when>
-                    <map:otherwise>
-                        <map:read type="txt-resource" src="context://javascript/{1}.js"
-                            mime-type="application/x-javascript">
-                            <map:parameter name="path" value="{request:contextPath}"/>
-                        </map:read>
-                    </map:otherwise>
-                </map:select>
+                <map:read type="txt-resource" src="context://javascript/{1}.js"
+                    mime-type="application/x-javascript">
+                    <map:parameter name="path" value="{request:contextPath}"/>
+                </map:read>
             </map:match>
             <map:match pattern="images/**.jpg" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.jpg"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/live-base}/resources/images/{1}.jpg"
                     mime-type="image/jpeg"/>
             </map:match>
             <map:match pattern="images/**.png" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.png"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/live-base}/resources/images/{1}.png"
                     mime-type="image/png"/>
             </map:match>
             <map:match pattern="pdf/**.pdf" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/pdf/{1}.pdf"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/live-base}/resources/pdf/{1}.pdf"
                     mime-type="application/pdf">
                     <map:parameter name="byte-ranges" value="false"/>
                 </map:read>
@@ -109,7 +104,8 @@
                     mime-type="application/msword"/>
             </map:match>
             <map:match pattern="flash/*.swf" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/flash/{1}.swf"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/live-base}/resources/flash/{1}.swf"
                     mime-type="application/x-shockwave-flash"/>
             </map:match>
             <map:match pattern="**.swf" type="wildcard">

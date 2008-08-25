@@ -3,7 +3,7 @@
     <property name="laneweb.version" value="1.7.29"/>
     <target name="webapp">
         <mkdir dir="target"/>
-        <get dest="target/laneweb.war" src="http://lane-local.stanford.edu/maven/edu/stanford/irt/laneweb/${laneweb.version}/laneweb-${laneweb.version}.war"/>
+        <get dest="target/laneweb.war" src="http://irt-lanelocal.stanford.edu/maven/edu/stanford/irt/laneweb/${laneweb.version}/laneweb-${laneweb.version}.war"/>
         <unjar src="target/laneweb.war" dest="target/laneweb"/>
         <echo level="warning"   >
 **************************************************************************

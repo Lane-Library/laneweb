@@ -904,7 +904,7 @@
     </xsl:template>
 
     <!-- here is the flash detect thing -->
-    <xsl:template match="h:object[not(@type='application/x-shockwave-flash')]">
+    <xsl:template match="h:object[h:param[@name='flash-version'] and not(@type='application/x-shockwave-flash')]">
         <xsl:variable name="flash-version">
             <xsl:choose>
                 <xsl:when test="h:param[@name='flash-version']">

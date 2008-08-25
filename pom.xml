@@ -4,7 +4,7 @@
     <parent>
         <artifactId>lane</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>2</version>
+        <version>1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.stanford.irt</groupId>
@@ -537,7 +537,7 @@
         <dependency>
             <groupId>edu.stanford.irt.search</groupId>
             <artifactId>search-spring</artifactId>
-            <version>1.4.19-SNAPSHOT</version>
+            <version>1.4.18</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
