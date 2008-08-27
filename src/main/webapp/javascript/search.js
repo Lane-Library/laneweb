@@ -131,7 +131,7 @@ function Result(type, tab, container) {
 
 Result.prototype.setContent = function(content) {
     var i;
-    if (content === null) {
+    if (content === undefined) {
         window.log('Result.setContent(): content should not  be null');
     }
     if (this._content === undefined) {
@@ -241,7 +241,7 @@ function showHits(o) {
         if (tab !== null) {
             hitSpan = tab.getElementsByTagName('span')[0];
             hits = response.results.tabs[j].hits;
-            if (hitSpan !== null && hits !== '') {
+            if (hitSpan !== undefined && hits !== '') {
                 hitSpan.innerHTML = hits;
             }
         }
@@ -295,7 +295,7 @@ function Spellcheck(currentTab) {
 }
 
 Spellcheck.prototype.setSuggestion = function(suggestion, link) {
-    if (suggestion === null) {
+    if (suggestion === undefined) {
         window.log('Spellcheck.setSuggestion(): suggestion should not be null');
     }
     this.suggestion = suggestion;
@@ -318,12 +318,12 @@ Spellcheck.prototype.setSource = function(source) {
 
 function showQueryMapping(o) {
     var queryMappingResult, queryMappingContainer;
-    if (o.responseXML.getElementsByTagName('ul')[0] !== null) {
+    if (o.responseXML.getElementsByTagName('ul')[0] !== undefined) {
         queryMappingResult = o.responseXML.getElementsByTagName('div')[0];
         window.queryMapping = new QueryMapping(importNodes(queryMappingResult, true));
         window.activeResult.show();
         queryMappingContainer = document.getElementById('queryMapping');
-        if (queryMappingContainer && window.spellcheck.suggestion === null) {
+        if (queryMappingContainer && window.spellcheck.suggestion === undefined) {
             hideFindIt();
             queryMappingContainer.appendChild(window.queryMapping.getContent());
         }
@@ -364,14 +364,14 @@ QueryMapping.prototype.successfulCallback = function(o) {
 };
 
 QueryMapping.prototype.update = function(response) {
-    var lis, resourceUrl, anchor, status, span, i, sleepingTime;
+    var lis, resourceUrl, resourceId, anchor, status, span, i, sleepingTime;
     this.resourceUrl = "";
     this._counter++;
     lis = this._content.getElementsByTagName('li');
     resourceUrl = "";
     for (i = 0; i < lis.length; i++) {
         resourceId = lis[i].id;
-        if (response.resources[resourceId] !== null) {
+        if (response.resources[resourceId] !== undefined) {
             anchor = lis[i].getElementsByTagName('a');
             anchor[0].href = response.resources[resourceId].url;
             anchor[0].title = 'QueryMapping: ' + anchor[0].innerHTML;
@@ -410,7 +410,7 @@ function importNodes(importedNode, deep) {
         newNode = document.createElement(importedNode.nodeName);
         for (i = 0; i < importedNode.attributes.length; i++) {
             attr = importedNode.attributes[i];
-            if (attr.nodeValue !== null && attr.nodeValue !== '') {
+            if (attr.nodeValue !== undefined && attr.nodeValue !== '') {
                 newNode.setAttribute(attr.name, attr.nodeValue);
                 if (attr.name == 'class') {
                     newNode.className = attr.nodeValue;
