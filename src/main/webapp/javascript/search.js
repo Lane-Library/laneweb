@@ -358,7 +358,7 @@ function QueryMapping(content) {
 }
 
 QueryMapping.prototype.successfulCallback = function(o) {
-    var response = YAHOO.lane.JSON.parse(o.responseText), queryMapping;
+    var response = YAHOO.lang.JSON.parse(o.responseText), queryMapping;
     queryMapping = o.argument.queryMapping;
     window.queryMapping.update(response);
 };
