@@ -535,7 +535,7 @@
         <dependency>
             <groupId>edu.stanford.irt.search</groupId>
             <artifactId>search-spring</artifactId>
-            <version>1.4.19</version>
+            <version>1.4.20-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
