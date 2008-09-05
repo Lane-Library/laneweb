@@ -29,6 +29,16 @@
                 <map:transform type="saxon" src="context://xsl/random.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
+            <map:match pattern="page2rss" type="wildcard">
+                <map:aggregate element="doc">
+                    <map:part src="cocoon:{request-param:page}"/>
+                    <map:part src="cocoon:/file-info{request-param:page}"/>
+                </map:aggregate>
+                <map:transform src="context://xsl/page2rss.xsl" type="saxon">
+                    <map:parameter name="page" value="{request-param:page}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="portals/history/historySearchResults.html" type="wildcard">
                 <map:generate type="html"
                     src="{naming:java:comp/env/live-base}/content/portals/history/historySearchResults.html"/>
@@ -37,6 +47,16 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="expires">
+            <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regex">
+                <map:generate type="directory" src="{naming:java:comp/env/live-base}/content/{1}">
+                    <map:parameter name="depth" value="1"/>
+                    <map:parameter name="dateFormat" value="EEE, d MMM yyyy HH:mm:ss Z"/>
+                </map:generate>
+                <map:transform src="context://xsl/file-info.xsl" type="saxon">
+                    <map:parameter name="file" value="{2}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="ncbi-rss2html" type="wildcard">
                 <map:generate 
                     src="{request-param:rss-url}"/>
