@@ -25,14 +25,15 @@
                 
                 <xsl:variable name="content-table" select="/doc/h:html//h:h2[contains(@class, 'activeTab')]/following-sibling::h:table[contains(@class, 'striped')]"/>
                 
+                <!-- will only generate item list from grandrounds and laneclasses pages -->
                 <xsl:choose>
-                    <xsl:when test="contains($page,'grandrounds')">
+                    <xsl:when test="contains($page,'grandrounds.html')">
                         <xsl:apply-templates select="$content-table[1]/h:tr[not(@class='tableHeader') and count(h:td) = count($content-table[1]/h:tr[@class='tableHeader']/h:td)]">
                             <xsl:with-param name="type" select="'grandrounds'"/>
                             <xsl:sort data-type="text" order="descending" select="h:td[@class='updateDate']"/>
                         </xsl:apply-templates>
                     </xsl:when>
-                    <xsl:when test="contains($page,'workshops')">
+                    <xsl:when test="contains($page,'workshops/laneclasses.html')">
                         <xsl:apply-templates select="$content-table[1]/h:tr[not(@class='tableHeader') and count(h:td) = count($content-table[1]/h:tr[@class='tableHeader']/h:td)]">
                             <xsl:with-param name="type" select="'workshops'"/>
                             <xsl:sort data-type="text" order="descending" select="h:td[@class='updateDate']"/>
@@ -118,7 +119,7 @@
                     </xsl:choose>
                 </xsl:for-each>
             </description>
-            <!--<guid><xsl:value-of select="$link"/></guid>-->
+            <!-- link isn't unique enough for guid ... <guid><xsl:value-of select="$link"/></guid>-->
             <xsl:apply-templates select="h:td[@class='updateDate']"/>
         </item>
     </xsl:template>
