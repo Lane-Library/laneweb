@@ -535,14 +535,8 @@
         <dependency>
             <groupId>edu.stanford.irt.search</groupId>
             <artifactId>search-spring</artifactId>
-            <version>1.4.20</version>
+            <version>1.4.21</version>
             <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.yahoo.platform.yui</groupId>
-            <artifactId>yui</artifactId>
-            <version>2.5.2</version>
-            <scope>runtime</scope>
         </dependency>
     </dependencies>
 </project>
