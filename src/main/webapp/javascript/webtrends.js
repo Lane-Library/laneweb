@@ -112,25 +112,25 @@ function webtrendsProcess(node){
 
 function getWebtrendsTitle(node){
     var title, img;
-    if (title === null || title === '') {
+    if (title === undefined || title === '') {
         title = node.title;
     }
-    if (title === null || title === '') {
+    if (title === undefined || title === '') {
         title = node.alt;
     }
-    if (title === null || title === '') {
+    if (title === undefined || title === '') {
         img = node.getElementsByTagName("IMG");
         if (img !== undefined) {
             title = node.alt;
         }
     }
-    if (title === null || title === '') {
+    if (title === undefined || title === '') {
         title = node.innerHTML;//textContent doesn't work with safari
         if (title.indexOf('<') > -1) {
             title = title.substring(0, title.indexOf('<'));
         }
     }
-    if (title === null || title === '') {
+    if (title === undefined || title === '') {
         title = 'unknown';
     }
     return title;
