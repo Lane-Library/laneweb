@@ -4,7 +4,8 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="caching">
-            <map:parameter name="expires" value="access plus 7 days"/>
+            <!-- TODO: uncomment this for release -->
+            <!--<map:parameter name="expires" value="access plus 7 days"/>-->
             <!-- irt3 stuff, change back before release -->
             <map:match pattern="images/templates/irt3/*.png" type="wildcard">
                 <map:read type="resource"
