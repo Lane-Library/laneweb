@@ -12,7 +12,7 @@ if (LANE.search.getEncodedSearchString()) {
                     s = document.getElementById('spellCheck');
                     s.style.display = 'inline';
                     a = s.getElementsByTagName('a')[0];
-                    a.href += '?source=' + LANE.search.getSearchSource() + '&q=' + encodeURIComponent(sc.suggestion);
+                    a.href = '/search.html?source=' + LANE.search.getSearchSource() + '&q=' + encodeURIComponent(sc.suggestion);
                     //TODO safari doesn't do textContent?
                     a.textContent = sc.suggestion;
                 }
