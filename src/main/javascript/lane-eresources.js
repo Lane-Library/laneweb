@@ -66,8 +66,7 @@ LANE.search.eresources = function () {
                 bodyNodes = o.responseXML.getElementsByTagName('body')[0].childNodes;
                 content = [];
                 for (i = 0; i < bodyNodes.length; i++) {
-                    //TODO: Safari doesn't implement importNode
-                    content[i] = document.importNode(bodyNodes[i], true);
+                    content[i] = LANE.core.importNode(bodyNodes[i], true);
                 }
                 result.setContent(content);
                 LANE.search.eresources.getCurrentResult().hide();

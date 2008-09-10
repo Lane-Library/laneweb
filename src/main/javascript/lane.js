@@ -102,6 +102,31 @@ LANE.core = LANE.core || function() {
             if (YAHOO.util.Connect) {
                 YAHOO.util.Connect.asyncRequest('HEAD','/././javascriptLogger?' + msg);
             }
+        },
+        // document.importNode not supported in IE
+        importNode: function(importedNode, deep) {
+		    var newNode, i, attr;
+		    if (importedNode.nodeType == 1) { // Node.ELEMENT_NODE
+		        newNode = document.createElement(importedNode.nodeName);
+		        for (i = 0; i < importedNode.attributes.length; i++) {
+		            attr = importedNode.attributes[i];
+		            if (attr.nodeValue !== undefined && attr.nodeValue !== '') {
+		                newNode.setAttribute(attr.name, attr.nodeValue);
+		                if (attr.name == 'class') {
+		                    newNode.className = attr.nodeValue;
+		                }
+		            }
+		        }
+		    } else 
+		        if (importedNode.nodeType == 3) { // Node.TEXT_NODE
+		            newNode = document.createTextNode(importedNode.nodeValue);
+		        }
+		    if (deep && importedNode.hasChildNodes()) {
+		        for (i = 0; i < importedNode.childNodes.length; i++) {
+		            newNode.appendChild(LANE.core.importNode(importedNode.childNodes[i], true));
+		        }
+		    }
+		    return newNode;
         }
     };
 }();
