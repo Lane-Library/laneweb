@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cocoon version="2.1">
     
-  <sitemap check-reload="no" file="context://laneweb.xmap" logger="sitemap"/>
+  <sitemap check-reload="yes" file="context://laneweb.xmap" logger="sitemap"/>
  
   <input-modules>
     <component-instance logger="core.modules.input.laneweb" name="laneweb" class="edu.stanford.irt.laneweb.LanewebInputModule">
@@ -35,7 +35,7 @@
     <component-instance logger="core.modules.input" name="naming" class="org.apache.cocoon.components.modules.input.NamingInputModule"/>
     <component-instance logger="core.modules.input" name="defaults" class="org.apache.cocoon.components.modules.input.DefaultsModule">
       <values>
-        <template>irt2</template>
+        <template>irt3</template>
         <abstract-count>100</abstract-count>
       </values>
     </component-instance>

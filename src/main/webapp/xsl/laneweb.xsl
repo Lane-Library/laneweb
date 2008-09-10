@@ -17,6 +17,8 @@
     <xsl:param name="context"/>
     <!-- the query part of the request -->
     <xsl:param name="query-string"/>
+    <!-- http or https -->
+    <xsl:param name="scheme"/>
 
     <xsl:param name="host"/>
 
@@ -198,6 +200,20 @@
             <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
+    
+    <!-- serve external scripts using request scheme -->
+    <xsl:template match="h:script/@src[starts-with(.,'http:')]">
+        <xsl:attribute name="src">
+            <xsl:choose>
+                <xsl:when test="$scheme = 'https'">
+                    <xsl:value-of select="concat('https:',substring-after(.,'http:'))"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="."/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:attribute>
+    </xsl:template>
 
     <!-- put script text into a comment so saxon won't convert entities -->
     <xsl:template match="h:script">
@@ -343,7 +359,7 @@
         <a href="#"><img src="{$context}/graphics/icons/arrowUpTransp.gif" alt="up arrow"/> Back to
             top</a>
     </xsl:template>
-
+    
     <!-- make current elibraryTab activeTab -->
     <xsl:template match="h:li[attribute::class='eLibraryTab']">
         <xsl:copy>
@@ -545,7 +561,7 @@
     </xsl:template>
 
     <!-- add class="labeled" where appropriate -->
-    <xsl:template
+    <!--<xsl:template
         match="h:p[preceding-sibling::*[1][self::h:h3]]
         |h:ul[preceding-sibling::*[1][self::h:h3]]
         |h:form[preceding-sibling::*[1][self::h:h3]]
@@ -560,7 +576,7 @@
             </xsl:if>
             <xsl:apply-templates/>
         </xsl:copy>
-    </xsl:template>
+    </xsl:template>-->
 
     <!-- create the tabbed box markup -->
     <xsl:template match="h:div[@class='fMainBox']">
@@ -790,14 +806,8 @@
     </xsl:template>
 
     <xsl:template name="meta-data">
-        <xsl:if test="$q">
-            <meta name="LW.searchTerms" content="{$q}"/>
-        </xsl:if>
         <xsl:if test="$source">
             <meta name="LW.source" content="{$source}"/>
-        </xsl:if>
-        <xsl:if test="$host">
-            <meta name="LW.host" content="{$host}"/>
         </xsl:if>
     </xsl:template>
 
@@ -901,100 +911,6 @@
                 </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
-
-    <!-- here is the flash detect thing -->
-    <xsl:template match="h:object[h:param[@name='flash-version'] and not(@type='application/x-shockwave-flash')]">
-        <xsl:variable name="flash-version">
-            <xsl:choose>
-                <xsl:when test="h:param[@name='flash-version']">
-                    <xsl:value-of select="h:param[@name='flash-version']/@value"/>
-                </xsl:when>
-                <xsl:otherwise>6.0.65</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="flash-for-upgrade">
-            <xsl:choose>
-                <xsl:when test="h:param[@name='flash-for-upgrade']">
-                    <xsl:value-of select="h:param[@name='flash-for-upgrade']/@value"/>
-                </xsl:when>
-                <xsl:otherwise>true</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="height">
-            <xsl:choose>
-                <xsl:when test="@height">
-                    <xsl:value-of select="@height"/>
-                </xsl:when>
-                <xsl:otherwise>100</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="width">
-            <xsl:choose>
-                <xsl:when test="@width">
-                    <xsl:value-of select="@width"/>
-                </xsl:when>
-                <xsl:otherwise>100</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <script type="text/javascript">
-            <xsl:comment>
-            <xsl:text>
-                var hasProductInstall = DetectFlashVer(6, 0, 65);
-                var requiredVersion = '</xsl:text><xsl:value-of select="$flash-version"/><xsl:text>'.split('.');
-                var flashForUpgrade = </xsl:text><xsl:value-of select="$flash-for-upgrade"/><xsl:text>;
-                var flashUpgradeHeight = '</xsl:text><xsl:value-of select="$height"/><xsl:text>';
-                var flashUpgradeWidth = '</xsl:text><xsl:value-of select="$width"/><xsl:text>';
-                var hasRequestedVersion = DetectFlashVer(requiredVersion[0],requiredVersion[1],requiredVersion[2]);
-                if ( hasProductInstall &amp;&amp; !hasRequestedVersion &amp;&amp; flashForUpgrade) {
-                    <!--    // MMdoctitle is the stored document.title value used by the installation process to close the window that started the process
-                        // This is necessary in order to close browser windows that are still utilizing the older version of the player after installation has completed
-                        // DO NOT MODIFY THE FOLLOWING FOUR LINES
-                        // Location visited after installation is complete if installation is required-->
-                    var MMPlayerType = (isIE == true) ? "ActiveX" : "PlugIn";
-                    var MMredirectURL = window.location;
-                    document.title = document.title.slice(0, 47) + " - Flash Player Installation";
-                    var MMdoctitle = document.title;
-                    
-                    AC_FL_RunContent(
-                    "src", "/flash/playerProductInstall.swf",
-                    "FlashVars", "MMredirectURL="+MMredirectURL+'&amp;MMplayerType='+MMPlayerType+'&amp;MMdoctitle='+MMdoctitle+"",
-                    "width", flashUpgradeWidth,
-                    "height", flashUpgradeHeight,
-                    "align", "middle",
-                    "id", "detectionExample",
-                    "quality", "high",
-                    "bgcolor", "#3A6EA5",
-                    "name", "detectionExample",
-                    "allowScriptAccess","sameDomain",
-                    "type", "application/x-shockwave-flash",
-                    "pluginspage", "http://www.adobe.com/go/getflashplayer"
-                    );
-                    } else if (hasRequestedVersion) {
-                    <!--    // if we've detected an acceptable version
-                        // embed the Flash Content SWF when all tests are passed-->
-                    AC_FL_RunContent(</xsl:text>
-            <xsl:for-each select="@*">
-                "<xsl:value-of select="name()"/>","<xsl:value-of select="."/>",
-            </xsl:for-each>
-            <xsl:for-each select="h:param[not(@name='flash-version')]">
-                "<xsl:value-of select="@name"/>","<xsl:value-of select="@value"/>"<xsl:if test="position() != last()">,</xsl:if>
-            </xsl:for-each>
-            <xsl:text>    );
-                } else {<!--  // flash is too old or we can't detect the plugin-->
-                var alternateContent = 'This content requires the Adobe Flash Player. '
-                + '&lt;a href=http://www.adobe.com/go/getflash/>Get Flash&lt;/a>';
-                if(document.getElementById('noFlashContent')){
-                    alternateContent = document.getElementById('noFlashContent').innerHTML;
-                }
-                document.write(alternateContent);<!--  // insert non-flash content-->
-                }
-            </xsl:text>
-            </xsl:comment>
-        </script>
-        <noscript>
-            <p>This flash object requires javascript.</p>
-        </noscript>
     </xsl:template>
 
     <xsl:template name="js-split">
