@@ -23,7 +23,7 @@
     </xsl:template>
     
     <xsl:template match="q:resource-map">
-        <xsl:text>'resource-map:{</xsl:text>
+        <xsl:text>'resource-map':{</xsl:text>
         <xsl:apply-templates select="q:descriptor"/>
         <xsl:text>'resources':[</xsl:text>
         <xsl:apply-templates select="q:resource"/>
