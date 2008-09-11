@@ -1,7 +1,7 @@
  //check if there is a query
 if (LANE.search.getEncodedSearchString()) {
     YAHOO.util.Event.onAvailable('queryMapping',function() {
-            YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/html?q=' + LANE.search.getEncodedSearchString(), {
+            YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/json?q=' + LANE.search.getEncodedSearchString(), {
             success:function(o) {
                     var queryMap = YAHOO.lang.JSON.parse(o.responseText),
                         queryMapContainer = document.getElementById('queryMapping');
