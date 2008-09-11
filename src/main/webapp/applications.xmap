@@ -166,7 +166,10 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="querymap/json" type="wildcard">
-                    <map:generate type="file" src="cocoon:/querymap/xml"/>
+                    <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
+                        <map:part src="cocoon:/querymap/xml"/>
+                        <map:part src="{naming:java:comp/env/live-base}/resources/querymap/display-template.xml"/>
+                    </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/querymap2json.xsl"/>
                     <map:serialize type="text"/>
                 </map:match>
