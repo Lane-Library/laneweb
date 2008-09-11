@@ -75,7 +75,7 @@
         <!-- static documents cached and accessed via html generator -->
         <map:pipeline type="caching">
             <map:match pattern="cached/**" type="wildcard">
-                <map:generate src="{naming:java:comp/env/live-base}/content/{1}" type="html"/>
+                <map:generate src="{naming:java:comp/env/irt3-base}/content/{1}" type="html"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- pass any unresolved urls (eg from xinclude) to content.xmap -->
