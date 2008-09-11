@@ -10,8 +10,9 @@
     </xsl:template>
     
     <xsl:template match="q:query|q:descriptor">
+        <xsl:text>'</xsl:text>
         <xsl:value-of select="name()"/>
-        <xsl:text>:'</xsl:text>
+        <xsl:text>':'</xsl:text>
         <xsl:call-template name="escape-apostrophe">
             <xsl:with-param name="string" select="."/>
         </xsl:call-template>
@@ -22,10 +23,9 @@
     </xsl:template>
     
     <xsl:template match="q:resource-map">
-        <xsl:value-of select="name()"/>
-        <xsl:text>:{</xsl:text>
+        <xsl:text>'resource-map:{</xsl:text>
         <xsl:apply-templates select="q:descriptor"/>
-        <xsl:text>resources:[</xsl:text>
+        <xsl:text>'resources':[</xsl:text>
         <xsl:apply-templates select="q:resource"/>
         <xsl:text>]</xsl:text>
         <xsl:text>}</xsl:text>
