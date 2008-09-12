@@ -30,13 +30,13 @@ if (LANE.search.getEncodedSearchString()) {
                                             }
                                             rs[i].status = result.status;
                                             if (result.status == 'successful') {
-                                                rs[i].anchor.parentNode.appendChild(document.createTextNode(' :' + result.hits + ' '));
+                                                rs[i].anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
                                             }
                                             rs[i].anchor.href = result.url;
                                         }
                                     }
                                     if (needMore) {
-                                        LANE.search.querymap.getResultCounts();
+                                        setTimeout(LANE.search.querymap.getResultCounts(),2000);
                                     }
                                     queryMapContainer.style.display = 'inline';
                                 }
