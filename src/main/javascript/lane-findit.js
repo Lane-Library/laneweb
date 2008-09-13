@@ -10,7 +10,8 @@ if (LANE.search.getEncodedSearchString()) {
                     findItLink = findItContainer.getElementsByTagName('a')[0];
                     findItLink.href = findIt.openurl;
                     findItLink.innerHTML = findIt.result;
-                    findItContainer.style.display = 'inline';
+                    //findItContainer.style.display = 'inline';
+                    LANE.search.popin.fire(findItContainer);
                 }
             }
         });

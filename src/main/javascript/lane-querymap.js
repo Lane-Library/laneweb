@@ -36,9 +36,10 @@ if (LANE.search.getEncodedSearchString()) {
                                         }
                                     }
                                     if (needMore) {
-                                        setTimeout(LANE.search.querymap.getResultCounts(),2000);
+                                        setTimeout("LANE.search.querymap.getResultCounts()",2000);
                                     }
-                                    queryMapContainer.style.display = 'inline';
+                                    //queryMapContainer.style.display = 'inline';
+                                    LANE.search.popin.fire(queryMapContainer);
                                 }
                             });
                         };

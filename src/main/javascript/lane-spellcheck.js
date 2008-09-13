@@ -10,7 +10,8 @@ if (LANE.search.getEncodedSearchString()) {
                     //if there is a suggestion show the spellcheck markup 
                     //and add the suggestion to the href
                     s = document.getElementById('spellCheck');
-                    s.style.display = 'inline';
+                    //s.style.display = 'inline';
+                    LANE.search.popin.fire(s);
                     a = s.getElementsByTagName('a')[0];
                     a.href = '/search.html?source=' + LANE.search.getSearchSource() + '&q=' + encodeURIComponent(sc.suggestion);
                     //TODO safari doesn't do textContent?
