@@ -1,26 +1,28 @@
 (function() {
     LANE.namespace('search.metasearch');
+    var startTime = startTime = new Date().getTime(),
+    	url,
+    	mergedMode = true,
+		// filter out multiple ovid, mdc and cro requests b/c of IE6's 2048 character limit on requests
+		// this depends on search app returning all resources for engine when one resource requested
+		filterSearchUrl = function(id){
+			var uberEngines = ['cro_','mdc_','ovid-'], i, add = true;
+			for ( i = 0; i < uberEngines.length; i++){
+				if( this.id.match(uberEngines[i]) && url.match(uberEngines[i]) ){
+					add = false;
+				}
+			}
+			if ( add ){
+				url+='&r='+this.id;
+			}
+		};
 
     YAHOO.util.Event.addListener(this,'load',function() {
 		// check for presence of search term and metasearch classNames
 		if( LANE.search.getEncodedSearchString() && YAHOO.util.Dom.getElementsByClassName('metasearch','a') ){
 		    LANE.search.metasearch.getResultCounts = function() {
-				var url = '/././apps/search/proxy/json?q=' + LANE.search.getEncodedSearchString(),
-					mergedMode = true,
-					// fetch metasearchElements and put ids in url string
-					metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch','a',document,function(){
-						// filter out multiple ovid, mds and cro requests b/c of IE6's 2048 character limit on requests
-						// this works b/c search returns all resources for engine when one resource requested
-						var uberEngines = ['cro_','mdc_','ovid-'], i, add = true;
-						for ( i = 0; i < uberEngines.length; i++){
-							if( this.id.match(uberEngines[i]) && url.match(uberEngines[i]) ){
-								add = false;
-							}
-						}
-						if ( add ){
-							url+='&r='+this.id;
-						}
-					});
+				url = '/././apps/search/proxy/json?q=' + LANE.search.getEncodedSearchString();
+				var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch','a',document,filterSearchUrl);
 				url += '&rd=' + Math.random();
 				
 				// determine if this is a merged page ... matters for result processing later on
@@ -77,9 +79,13 @@
 	                        }
 		                }
 		                
-		                if (needMore) {
-		                	//TODO: need to calculate sleeping time
-		                    setTimeout("LANE.search.metasearch.getResultCounts()",2000);
+						sleepingTime = 2000;
+						remainingTime = (new Date().getTime()) - startTime;
+		                if ( needMore && (remainingTime <= 60 * 1000)) { // at more than 20 seconds the sleeping time becomes 10 seconds
+							if (remainingTime > 20 * 1000) {
+								sleepingTime = 10000;
+							}
+		                    setTimeout("LANE.search.metasearch.getResultCounts()",sleepingTime);
 		                }
 		                
 		            }// end request success definition
