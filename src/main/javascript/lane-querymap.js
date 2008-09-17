@@ -1,4 +1,5 @@
 //TODO: this needs some cleaning up
+//TODO: expand descriptor into content (for inclusion in tooltip)?
 //check if there is a query
 if (LANE.search.getEncodedSearchString()) {
     //check if there is id=queryMapping
@@ -49,6 +50,7 @@ if (LANE.search.getEncodedSearchString()) {
                             LANE.search.querymap.resourceMap.resources[i].status = '';
                             span = document.createElement('span');
                             anchor = document.createElement('a');
+                            anchor.title = 'QueryMapping: ' + LANE.search.querymap.resourceMap.resources[i].label;
                             span.appendChild(anchor);
                             anchor.appendChild(document.createTextNode(LANE.search.querymap.resourceMap.resources[i].label));
                             queryMapContainer.appendChild(span);
