@@ -684,8 +684,9 @@
         <xsl:call-template name="content"/>
     </xsl:template>
 
-    <xsl:template match="h:a[@class='lw_toggleProxyOn']">
-        <xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'false'">
+    <xsl:template match="h:a[@id='proxyOn']">
+        <!--<xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'false'">-->
+            <xsl:if test="$proxy-links = 'false'">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
                 <xsl:attribute name="href">
@@ -714,8 +715,9 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="h:a[@class='lw_toggleProxyOff']">
-        <xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'true'">
+    <xsl:template match="h:a[@id='proxyOff']">
+        <!--<xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'true'">-->
+            <xsl:if test="$proxy-links = 'true'">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
                 <xsl:attribute name="href">
