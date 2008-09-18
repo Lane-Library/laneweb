@@ -26,15 +26,6 @@
     <xsl:template match="h:head">
         <xsl:copy>
             <xsl:apply-templates/>
-            <xsl:choose>
-                <!-- when source isn't an html file, assume source is one of the old metasearch templates and complete path -->
-                <xsl:when test="not(ends-with($source,'.html'))">
-                    <meta name="LW.searchTemplate" content="/search/{$source}.html"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <meta name="LW.searchTemplate" content="{$source}"/>
-                </xsl:otherwise>
-            </xsl:choose>
         </xsl:copy>
     </xsl:template>
     
@@ -73,6 +64,19 @@
         <xsl:if test="contains($query-string,'javascript=false') and /doc/s:search/s:engine/s:resource[@s:id = $id]/@s:status = 'successful'">
             <span>: <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id = $id]/s:hits, '###,###')"/></span>
         </xsl:if>
+    </xsl:template>
+
+    <!-- hide searchCategory headings in original style search pages -->
+    <xsl:template match="node()[attribute::class = 'searchCategory']/h:h3">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:if test="$searchMode = 'original' and not(contains($query-string,'javascript=false'))">
+                <xsl:attribute name="style">
+                    <xsl:value-of select="'display:none;'"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
     </xsl:template>
     
     <!-- assuming every metasearch element is nested in a parent element that should be hidden by default -->
