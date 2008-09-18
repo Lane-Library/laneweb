@@ -255,7 +255,7 @@
                 </xsl:variable>
                 <script type="text/javascript">
                     <xsl:comment>
-                        <xsl:text>&#xD;var link = '&lt;a href="</xsl:text>
+                        <xsl:text>&#xD;document.write('&lt;a href="</xsl:text>
                         <xsl:value-of select="$address"/>
                         <xsl:text>"</xsl:text>
                         <xsl:for-each select="attribute::node()[not(name() = 'href')]">
@@ -282,8 +282,8 @@
                         <xsl:call-template name="js-split">
                             <xsl:with-param name="string" select="normalize-space()"/>
                         </xsl:call-template>
-                        <xsl:text>+'&lt;/a&gt;';</xsl:text>
-                        <xsl:text>&#xD;document.write(link);&#xD;</xsl:text>
+                        <xsl:text>+'&lt;/a&gt;');&#xD;</xsl:text>
+                        <!--<xsl:text>&#xD;document.write(link);&#xD;</xsl:text>-->
                     </xsl:comment>
                 </script>
             </xsl:when>
