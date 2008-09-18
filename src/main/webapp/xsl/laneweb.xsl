@@ -869,7 +869,7 @@
                         </xsl:attribute>
                         <xsl:value-of select="$label-current"/>
                     </a>
-                    <xsl:text>&#160;&gt;&#160;</xsl:text>
+                    <xsl:text>&#160;&#xBB;&#160;</xsl:text>
                 </xsl:if>
                 <xsl:call-template name="breadcrumb-section">
                     <xsl:with-param name="uri-before"
@@ -896,7 +896,7 @@
                         </xsl:attribute>
                         <xsl:value-of select="$label-current"/>
                     </a>
-                    <xsl:text>&#160;&gt;&#160;</xsl:text>
+                    <xsl:text>&#160;&#xBB;&#160;</xsl:text>
                 </xsl:if>
                 <xsl:variable name="title">
                     <xsl:value-of select="$sitemap//h:a[@href=concat($uri-before,$uri-remaining)]"/>
