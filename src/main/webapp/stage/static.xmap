@@ -12,14 +12,15 @@
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/images/favicon.ico"
                     mime-type="image/x-icon"/>
             </map:match>
-            <map:match pattern="style/**.css" type="wildcard">
-                <map:read type="txt-resource" src="{naming:java:comp/env/stage-base}/resources/css/{1}.css"
+            <!-- first wildcard will be version for local css and javascript -->
+            <map:match pattern="style/*/**.css" type="wildcard">
+                <map:read type="txt-resource" src="{naming:java:comp/env/stage-base}/resources/css/{2}.css"
                     mime-type="text/css">
                     <map:parameter name="path" value="{request:contextPath}/stage"/>
                 </map:read>
             </map:match>
-            <map:match pattern="javascript/*.js" type="wildcard">
-                <map:read type="txt-resource" src="context://javascript/{1}.js"
+            <map:match pattern="javascript/*/*.js" type="wildcard">
+                <map:read type="txt-resource" src="context://javascript/{2}.js"
                     mime-type="application/x-javascript">
                     <map:parameter name="path" value="{request:contextPath}/stage"/>
                 </map:read>

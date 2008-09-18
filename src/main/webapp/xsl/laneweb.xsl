@@ -44,6 +44,8 @@
 
     <!-- loadTab parameter -->
     <xsl:param name="loadTab"/>
+    
+    <xsl:param name="version"/>
 
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
@@ -202,7 +204,8 @@
     </xsl:template>
     
     <!-- serve external scripts using request scheme -->
-    <xsl:template match="h:script/@src[starts-with(.,'http:')]">
+    <!-- TODO: revisit this, is this being used and does it work in all cases -->
+    <!--<xsl:template match="h:script/@src[starts-with(.,'http:')]">
         <xsl:attribute name="src">
             <xsl:choose>
                 <xsl:when test="$scheme = 'https'">
@@ -213,13 +216,27 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:attribute>
+        </xsl:template>-->
+    
+    <!-- put version into javascript @src -->
+    <xsl:template match="h:script/@src[starts-with(.,'/javascript')]">
+        <xsl:attribute name="src">
+            <xsl:value-of select="concat($context,'/javascript/',$version,substring-after(.,'/javascript'))"/>
+        </xsl:attribute>
+    </xsl:template>
+    
+    <!-- put version into css href -->
+    <xsl:template match="h:link/@href[starts-with(.,'/style')]">
+        <xsl:attribute name="href">
+            <xsl:value-of select="concat($context,'/style/',$version,substring-after(.,'/style'))"/>
+        </xsl:attribute>
     </xsl:template>
 
     <!-- put script text into a comment so saxon won't convert entities -->
     <xsl:template match="h:script">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
-            <xsl:comment>
+            <xsl:text>//</xsl:text><xsl:comment>
                 <xsl:apply-templates select="child::node()"/>
             <xsl:text>//</xsl:text></xsl:comment>
         </xsl:copy>

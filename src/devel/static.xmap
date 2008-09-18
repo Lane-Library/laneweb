@@ -14,30 +14,31 @@
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match pattern="style/**.css" type="wildcard">
+            <!-- first wildcard will be version for local css and javascript -->
+            <map:match pattern="style/*/**.css" type="wildcard">
                 <map:select type="resource-exists">
-                    <map:when test="resources/css/{1}.css">
-                        <map:read type="txt-resource" src="resources/css/{1}.css">
+                    <map:when test="resources/css/{2}.css">
+                        <map:read type="txt-resource" src="resources/css/{2}.css">
                             <map:parameter name="path" value="{request:contextPath}/your-sunet-id"/>
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="txt-resource" src="{naming:java:comp/env/live-base}/resources/css/{1}.css">
+                        <map:read type="txt-resource" src="{naming:java:comp/env/live-base}/resources/css/{2}.css">
                             <map:parameter name="path" value="{request:contextPath}/your-sunet-id"/>
                         </map:read>
                     </map:otherwise>
                 </map:select>
             </map:match>
-            <map:match pattern="javascript/*.js" type="wildcard">
+            <map:match pattern="javascript/*/*.js" type="wildcard">
                 <map:select type="resource-exists">
-                    <map:when test="resources/javascript/{1}.js">
-                        <map:read type="txt-resource" src="resources/javascript/{1}.js"
+                    <map:when test="resources/javascript/{2}.js">
+                        <map:read type="txt-resource" src="resources/javascript/{2}.js"
                             mime-type="application/x-javascript">
                             <map:parameter name="path" value="{request:contextPath}/your-sunet-id"/>
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="txt-resource" src="context://javascript/{1}.js"
+                        <map:read type="txt-resource" src="context://javascript/{2}.js"
                             mime-type="application/x-javascript">
                             <map:parameter name="path" value="{request:contextPath}/your-sunet-id"/>
                         </map:read>
