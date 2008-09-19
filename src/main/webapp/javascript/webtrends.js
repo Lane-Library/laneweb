@@ -51,17 +51,17 @@ function getNodeByNames(node){
 
 function webtrendsProcess(node){
     var redirectUrl, title, host, affiliation = getMetaContent('WT.seg_1'), offsite, uri = '/', query, proxyUrl = 'http://laneproxy.stanford.edu/login', href, anchorNode;
+    if (node.tagName == "IMG") {
+        anchorNode = node.parentNode;
+        if (anchorNode !== undefined) {
+            node = anchorNode;
+        }
+    }
     if (node.hostname !== undefined) {
         host = node.hostname;
         if (host.indexOf(':') > -1) {//safari return port
 
             host = host.substring(0, host.indexOf(':'));
-        }
-    }
-    if (node.tagName == "IMG") {
-        anchorNode = node.parentNode;
-        if (anchorNode !== undefined) {
-            node = anchorNode;
         }
     }
     if ((node.tagName == "A" || node.tagName == "AREA") && (host && node.href && "" != node.href && "/" != node.href))//for anchor tag 
@@ -111,7 +111,7 @@ function webtrendsProcess(node){
 }
 
 function getWebtrendsTitle(node){
-    var title, img;
+    var title, img, i;
     if (title === undefined || title === '') {
         title = node.title;
     }
@@ -121,7 +121,12 @@ function getWebtrendsTitle(node){
     if (title === undefined || title === '') {
         img = node.getElementsByTagName("IMG");
         if (img !== undefined) {
-            title = node.alt;
+            for (i = 0; i < img.length; i++) {
+                if (img[i].alt) {
+                    title = img[i].alt;
+                    break;
+                }
+            }
         }
     }
     if (title === undefined || title === '') {
