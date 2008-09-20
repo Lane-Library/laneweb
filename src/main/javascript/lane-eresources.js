@@ -45,6 +45,14 @@ LANE.search.eresources = function () {
                         };
                         tabs[i].clicked = function(event) {
                             this.result.show();
+							if (YAHOO.util.History) {
+								// Browser History Manager may not be initiliazed (Opera unsupported, hyui-history-iframe not present in content)
+								try {
+								    YAHOO.util.History.navigate("aTab", this.result._type);
+								} catch (e) {
+								    //log somewhere ... no need to break/alert
+								}
+							}
                             YAHOO.util.Event.stopEvent(event);
                         };
                     }
