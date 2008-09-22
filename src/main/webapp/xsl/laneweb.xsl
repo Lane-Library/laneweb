@@ -127,6 +127,14 @@
             <xsl:value-of select="replace($q,'(\\|\$)','\\$1')"/>
         </xsl:if>
     </xsl:variable>
+    
+    <!-- figure out what class the body should be for yui grids -->
+    <xsl:variable name="yui-grid-class">
+        <xsl:choose>
+            <xsl:when test="$source-doc/h:body/h:div[@id='leftColumn']">yui-t2</xsl:when>
+            <xsl:when test="$source-doc/h:body/h:div[@id='rightColumn']">yui-t4</xsl:when>
+        </xsl:choose>
+    </xsl:variable>
 
     <!-- ====================  DEFAULT TEMPLATES ============================= -->
     <!-- root template applies templates on the template document -->
@@ -169,6 +177,45 @@
                 <xsl:value-of select="$m"/>
             </xsl:when>
         </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="h:body">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:if test="$yui-grid-class">
+                <xsl:attribute name="class"><xsl:value-of select="$yui-grid-class"/></xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:div[@id='leftColumn']|h:div[@id='rightColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:attribute name="class">yui-b</xsl:attribute>
+            <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:div[@id='rightColumn' and preceding-sibling::h:div[@id='leftColumn']]"/>
+    
+    <xsl:template match="h:div[@id='mainColumn' and preceding-sibling::h:div[@id='leftColumn'] and following-sibling::h:div[@id='rightColumn']]">
+        <div id="yui-main">
+            <div class="yui-b yui-ge">
+                <div class="yui-u first">
+                    <xsl:apply-templates select="child::node()"/>
+                </div>
+                <div class="yui-u" id="rightColumn">
+                    <xsl:apply-templates select="following-sibling::h:div[@id='rightColumn']/child::node()"/>
+                </div>
+            </div>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="h:div[@id='mainColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
+        <div id="yui-main" class="yui-b">
+            <xsl:apply-templates select="child::node()"/>
+        </div>
     </xsl:template>
 
     <!-- strip onload event handlers except 100years pages using yui in laneweb.js-->
@@ -486,7 +533,7 @@
     <xsl:template match="h:head">
         <xsl:copy>
             <xsl:apply-templates select="child::node()"/>
-            <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
+            <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)][not(self::h:style)]"/>
             <xsl:if test="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
                 <script type="text/javascript" src="{$context}/javascript/{$version}/swfobject.js"><xsl:text> </xsl:text></script>
                 <script type="text/javascript">
