@@ -1,7 +1,6 @@
 LANE.search = LANE.search ||  function() {
     var d = document,
         form, //the form Element
-        indicator, //the spinning wheel
         submit, //the submit input
         select, //the select Element
         selected, //the selected option
@@ -20,11 +19,11 @@ LANE.search = LANE.search ||  function() {
                     throw('nothing to search for');
                 }
                 searching = true;
-                indicator.style.visibility = 'visible';
+                LANE.search.indicator.show();
             },
             stopSearch: function(){
                 searching = false;
-                indicator.style.visibility = 'hidden';
+                LANE.search.indicator.hide();
             },
             isSearching: function(){
                 return searching;
@@ -79,7 +78,6 @@ LANE.search = LANE.search ||  function() {
     E.addListener(this,'load',function(){
         form = d.getElementById('searchForm');
         if (form) {
-            indicator = d.getElementById('searchIndicator');
             submit = d.getElementById('searchSubmit');
             select = d.getElementById('searchSelect');
             selected = select.options[select.selectedIndex];
