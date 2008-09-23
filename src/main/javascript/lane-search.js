@@ -87,7 +87,6 @@ LANE.search = LANE.search ||  function() {
             };
             submit.deactivate = function(e){
                 this.src = this.src.replace('search_btn_f2.gif', 'search_btn.gif');
-                YAHOO.widget.Logger.log('deactivate');
             };
             E.addListener(form, 'submit', function(e){
                 try {
