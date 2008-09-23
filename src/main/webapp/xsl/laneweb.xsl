@@ -217,6 +217,14 @@
             <xsl:apply-templates select="child::node()"/>
         </div>
     </xsl:template>
+    
+    <xsl:template match="h:div[@id='mainColumn' and not(following-sibling::h:div[@id='rightColumn'])]">
+        <div id="yui-main">
+            <div class="yui-b">
+                <xsl:apply-templates/>
+            </div>
+        </div>
+    </xsl:template>
 
     <!-- strip onload event handlers except 100years pages using yui in laneweb.js-->
     <xsl:template match="h:body/@onload">
