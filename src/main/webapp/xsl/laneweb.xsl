@@ -213,8 +213,10 @@
     </xsl:template>
     
     <xsl:template match="h:div[@id='mainColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
-        <div id="yui-main" class="yui-b">
-            <xsl:apply-templates select="child::node()"/>
+        <div id="yui-main">
+            <div class="yui-b">
+                <xsl:apply-templates/>
+            </div>
         </div>
     </xsl:template>
     
