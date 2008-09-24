@@ -113,6 +113,7 @@
                 >/portals/lpch-cerner.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/pulmonary')">/portals/pulmonary.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/emergency')">/portals/emergency.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/ethics')">/portals/ethics.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/')">clinical</xsl:when>
             <xsl:when test="starts-with($request-uri,'local/antibiogram')">clinical</xsl:when>
             <xsl:when test="$source">
