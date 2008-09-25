@@ -42,15 +42,21 @@ LANE.core = LANE.core || function() {
         //calls 'activate' function on target
         E.addListener(d, 'mouseover', function(e) {
             var t = e.srcElement || e.target;
-            if (t.activate) {
-                t.activate(e);
+            while (t) {
+                if (t.activate) {
+                    t.activate(e);
+                }
+                t = t.parentNode;
             }
         });
         //calls 'deactivate' function on target
         E.addListener(d, 'mouseout', function(e) {
             var t = e.srcElement || e.target;
+            while (t) {
             if (t.deactivate) {
                 t.deactivate(e);
+            }
+                t = t.parentNode;
             }
         });
         //calls 'clicked' function on target and any parent elements
