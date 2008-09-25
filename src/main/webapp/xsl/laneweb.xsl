@@ -134,6 +134,7 @@
         <xsl:choose>
             <xsl:when test="$source-doc/h:body/h:div[@id='leftColumn']">yui-t2</xsl:when>
             <xsl:when test="$source-doc/h:body/h:div[@id='rightColumn']">yui-t4</xsl:when>
+            <xsl:when test="contains($request-uri,'search.html')">yui-t4</xsl:when>
         </xsl:choose>
     </xsl:variable>
 
