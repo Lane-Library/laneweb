@@ -10,7 +10,7 @@
                         if (!panel) {
                             container = document.createElement('div');
                             container.setAttribute('id', 'popupContainer');
-                            document.body.appendChild(popupContainer);
+                            document.body.appendChild(container);
                             panel = new YAHOO.widget.Panel("popupContainer", {
                                 underlay: "none",
                                 close: true,
