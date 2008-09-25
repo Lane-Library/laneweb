@@ -91,6 +91,14 @@ LANE.core = LANE.core || function() {
                     this.className = '';
                 };
             }
+            if (d.getElementById('legend-drop-down')) {
+                d.getElementById('legend-drop-down').activate = function() {
+                    this.className = 'hover';
+                };
+                d.getElementById('legend-drop-down').deactivate = function() {
+                    this.className = '';
+                };
+            }
         }
     });
     return {
