@@ -96,7 +96,7 @@
 		    
 			// add handler for zeroHit toggle if id=toggleZeros present
 	    	YAHOO.util.Event.onAvailable('toggleZeros',function() {
-	    		YAHOO.util.Event.addListener('toggleZeros', 'click', function() {
+	    		YAHOO.util.Event.addListener('toggleZeros', 'click', function(event) {
 				    var toggleEl = document.getElementById('toggleZeros'), 
 				    	zeroResources = YAHOO.util.Dom.getElementsByClassName('zeroHit'), 
 				    	searchCats = YAHOO.util.Dom.getElementsByClassName('searchCategory'),
@@ -118,6 +118,7 @@
 				            YAHOO.util.Dom.setStyle(YAHOO.util.Dom.getFirstChild(searchCats[y]), 'display', display);
 				        }
 				    }
+				    YAHOO.util.Event.stopEvent(event);
 	    		});
 	    	});
 	    	
