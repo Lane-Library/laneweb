@@ -93,9 +93,11 @@ LANE.search.eresources = function () {
     }
     this._count = 0;
     for (i = 0; i < this._content.length; i++) {
-        if (this._content[i].nodeName.toLowerCase() == 'dl') {
+        if (this._content[i].getElementsByTagName) {
             this._count = this._content[i].getElementsByTagName('dt').length;
-            break;
+            if (this._count > 0) {
+                break;
+            }
         }
     }
     this.setTabCount(this._count);
