@@ -1,6 +1,19 @@
 (function(){
     YAHOO.util.Event.addListener(window, 'load', function(){
-        var i, anchors, args, panel, container;
+        var i, anchors, args, panel, createPanel;
+        createPanel = function(){
+            var container = document.createElement('div');
+            container.setAttribute('id', 'popupContainer');
+            document.body.appendChild(container);
+            panel = new YAHOO.widget.Panel("popupContainer", {
+                underlay: "none",
+                close: true,
+                visible: false,
+                draggable: false,
+                constraintoviewport: true,
+                modal: false
+            });
+        };
         anchors = document.getElementsByTagName('a');
         for (i = 0; i < anchors.length; i++) {
             if (anchors[i].rel) {
@@ -8,25 +21,15 @@
                 if (args[0] == 'popup') {
                     if (args[1] == 'local') {
                         if (!panel) {
-                            container = document.createElement('div');
-                            container.setAttribute('id', 'popupContainer');
-                            document.body.appendChild(container);
-                            panel = new YAHOO.widget.Panel("popupContainer", {
-                                underlay: "none",
-                                close: true,
-                                visible: false,
-                                draggable: false,
-                                constraintoviewport: true,
-                                modal: false
-                            });
+                            createPanel();
                         }
                         anchors[i].clicked = function(e){
                             var id, elm, title, body, width, E = YAHOO.util.Event;
+                            E.preventDefault(e);
                             id = this.rel.split(' ')[2];
                             elm = (document.getElementById(id)) ? document.getElementById(id) : 0;
                             title = (elm.getAttribute('title')) ? elm.getAttribute('title') : '';
                             body = (document.getElementById(id)) ? document.getElementById(id).innerHTML : '';
-                            width = (title.length * 6.5 > 250) ? title.length * 6.5 : 250;
                             width = (title.length * 6.5 > 250) ? title.length * 6.5 : 250;
                             panel.setHeader(title);
                             panel.setBody(body);
@@ -35,6 +38,36 @@
                             panel.cfg.setProperty('Y', E.getPageY(e) - 140);
                             panel.render();
                             panel.show();
+                        };
+                    } else if (args[1] == 'faq') {
+                        if (!panel) {
+                            createPanel();
+                        }
+                        anchors[i].clicked = function(e) {
+                            var id = this.rel.split(' ')[2];
+                            YAHOO.util.Event.preventDefault(e);
+                            YAHOO.util.Connect.asyncRequest('GET', '/././plain/howto/index.html?mode=dl&id=_' + id, {
+                                success:function(o) {
+                                    var panel = o.argument.panel,
+                                        id = o.argument.id,
+                                        e = o.argument.e,
+                                        f = o.responseXML.documentElement,
+                                        E = YAHOO.util.Event,
+                                    	title = f.getElementsByTagName('a')[0].firstChild.data;
+                                    panel.setHeader(title);
+                                    panel.setBody(f.getElementsByTagName('dd')[0].firstChild.data + '&nbsp;<a href="/././howto/index.html?id=_' + id + '">More</a>');
+                                    panel.cfg.setProperty('X', E.getPageX(e));
+                                    panel.cfg.setProperty('Y', E.getPageY(e));
+                                    panel.cfg.setProperty('width', ((title.length * 6.5 > 250) ? title.length * 6.5 : 250) + 'px');
+                                    panel.render();
+                                    panel.show();
+                                },
+                                argument: {
+                                    panel:panel,
+                                    e:e,
+                                    id:id
+                                }
+                            });
                         };
                     }
                 }
