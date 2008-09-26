@@ -57,6 +57,9 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
+        </map:pipeline>
+        <map:pipeline type="expires">
+            <map:parameter name="cache-key" value="{0};rss-url={request-param:rss-url}"/>
             <map:match pattern="ncbi-rss2html" type="wildcard">
                 <map:generate 
                     src="{request-param:rss-url}"/>

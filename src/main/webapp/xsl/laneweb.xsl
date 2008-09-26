@@ -82,15 +82,6 @@
 
     <xsl:variable name="search-form-select">
         <xsl:choose>
-            <xsl:when test="$source-doc/h:head/h:meta[@name='lw_searchFormSelect']">
-                <xsl:value-of
-                    select="$source-doc/h:head/h:meta[@name='lw_searchFormSelect']/@content"/>
-            </xsl:when>
-            <xsl:when test="$source-doc/h:body/h:script[contains(.,'searchFormSelect')]">
-                <xsl:value-of
-                    select="substring-before(substring-after($source-doc/h:body/h:script[contains(.,'searchFormSelect')],&quot;&apos;&quot;),&quot;&apos;&quot;)"
-                />
-            </xsl:when>
             <xsl:when test="starts-with($request-uri,'online/ej')">ej</xsl:when>
             <xsl:when test="starts-with($request-uri,'online/eb')">book</xsl:when>
             <xsl:when test="starts-with($request-uri,'online/cc')">cc</xsl:when>
@@ -738,10 +729,6 @@
 
 
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
-    <!-- puts in the current document's content (not any more) (well ok, need backwards compatibility for now )-->
-    <xsl:template match="h:div[@id='lw_content']">
-        <xsl:call-template name="content"/>
-    </xsl:template>
 
     <xsl:template match="h:a[@id='proxyOn']">
         <xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'false'">
@@ -803,11 +790,6 @@
                 <xsl:apply-templates select="child::node()"/>
             </xsl:copy>
         </xsl:if>
-    </xsl:template>
-
-    <!-- generates the breadcrumb (not any more) -->
-    <xsl:template match="h:span[@id='lw_breadcrumb']">
-        <xsl:call-template name="breadcrumb"/>
     </xsl:template>
 
     <!-- insert the mesh term from the m parameter -->
