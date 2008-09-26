@@ -593,7 +593,7 @@
     <xsl:template match="@proxy"/>
 
     <!-- TODO did the id of the input change? -->
-    <xsl:template match="h:input[@id='lw_search-terms']">
+    <xsl:template match="h:input[@id='searchTerms']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="value">
