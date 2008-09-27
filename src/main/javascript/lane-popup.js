@@ -25,7 +25,6 @@
             panel.show();
         };
         showWindow = function(url, type, strWidth, strHeight){
-            alert(type);
             if (popupWindow !== undefined && !popupWindow.closed) {
                 popupWindow.close();
             }
