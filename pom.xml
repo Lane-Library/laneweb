@@ -98,6 +98,7 @@
                                 <include>**/lane-tooltips-min.js</include>
                                 <include>**/lane-popup-min.js</include>
                                 <include>**/lane-ie-min.js</include>
+                                <include>**/lane-forms-min.js</include>
                             </includes>
                             <!-- files to exclude, path relative to output's directory
                                 <excludes>
