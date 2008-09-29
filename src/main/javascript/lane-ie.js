@@ -2,7 +2,7 @@
     if (YAHOO.env.ua.ie) {
         YAHOO.util.Event.addListener(this, 'load', function(){
             var ie = YAHOO.env.ua.ie, lists, i, d = document, list;
-            if (ie >= 6) {
+            if (ie <= 6) {
                 //set hover class for these ids
                 if (d.getElementById('otherPortalOptions')) {
                     d.getElementById('otherPortalOptions').activate = function(){
