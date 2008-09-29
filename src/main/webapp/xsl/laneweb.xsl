@@ -172,7 +172,7 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="h:body">
+    <xsl:template match="h:div[@id='custom-doc']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:if test="$yui-grid-class">
