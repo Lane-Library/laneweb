@@ -69,25 +69,6 @@ LANE.core = LANE.core || function() {
                 t = t.parentNode;
             }
         });
-        //set class to hover for ie
-        if (YAHOO.env.ua.ie) {
-            if (d.getElementById('otherPortalOptions')) {
-                d.getElementById('otherPortalOptions').activate = function() {
-                    this.className = 'hover';
-                };
-                d.getElementById('otherPortalOptions').deactivate = function() {
-                    this.className = '';
-                };
-            }
-            if (d.getElementById('legend-drop-down')) {
-                d.getElementById('legend-drop-down').activate = function() {
-                    this.className = 'hover';
-                };
-                d.getElementById('legend-drop-down').deactivate = function() {
-                    this.className = '';
-                };
-            }
-        }
     });
     return {
         getMetaContent: function(name) {
