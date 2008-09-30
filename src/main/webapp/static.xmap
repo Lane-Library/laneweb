@@ -34,9 +34,13 @@
             </map:match>
             <!-- first wildcard will be version for local css and javascript -->
             <map:match pattern="style/*/**.css" type="wildcard">
+                <!-- keep in irt3-base for development -->
                 <map:read type="txt-resource"
                     src="{naming:java:comp/env/irt3-base}/resources/css/{2}.css"
                     mime-type="text/css">
+                <!--<map:read type="txt-resource"
+                        src="context://resources/css/{2}.css"
+                        mime-type="text/css">-->
                     <map:parameter name="path" value="{request:contextPath}"/>
                 </map:read>
             </map:match>

@@ -208,7 +208,9 @@
     <xsl:template match="h:div[@id='mainColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
         <div id="yui-main">
             <div class="yui-b">
+                <div style="margin-left:1em">
                 <xsl:apply-templates/>
+                </div>
             </div>
         </div>
     </xsl:template>
@@ -216,7 +218,9 @@
     <xsl:template match="h:div[@id='mainColumn' and not(following-sibling::h:div[@id='rightColumn'])]">
         <div id="yui-main">
             <div class="yui-b">
-                <xsl:apply-templates/>
+                <div style="margin-right:1em">
+                    <xsl:apply-templates/>
+                </div>
             </div>
         </div>
     </xsl:template>
