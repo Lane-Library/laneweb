@@ -1,0 +1,114 @@
+@charset "UTF-8";
+/* CSS Document */
+
+  .striped {
+  border-collapse: collapse;
+  background: #dbd9d6;
+  width:100%;
+}  
+  .tableHeader {
+  text-align: center;
+  background: transparent;
+  padding:6px 4px 8px 0;
+  color: #444;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+  .striped td {
+  border-bottom: 1px dotted #999;
+  padding: .4em;
+  border-top: 1px dotted #999;
+}
+  .odd {
+  background: #f2f3ed;
+}
+  .even {
+  background-color: #e8eae4;
+}
+  .even, .odd {
+    overflow: visible; 
+}
+  .striped tr:hover {
+  background: #e6e8d5;
+  border: 1px solid #03476F;
+ }
+  .tableSep {
+	background-color: #e6e8d5;
+	font-weight: bold;
+	border-top: 3px solid #999;
+}
+ .simpleColorTable  {
+    border-collapse:separate;
+	border: 1px solid #cccccc;
+    width:95%;
+}
+.simpleColorTable  td{
+	border: 1px solid #cccccc;
+}
+
+
+/* noColorTable appears on Bioresearch page*/
+
+table.noColorTable {
+margin:0; 
+width:100%;
+}
+
+table.noColorTable td{ 
+border-bottom: 1px solid #d7d7d7;
+padding:.5em;
+}
+
+th {
+background-color: #e6e8d5;
+padding:.5em;
+color: #444;
+}
+
+
+div#legend-drop-down {
+float:right;
+position:relative;
+margin-top:-3em;
+}
+div#legend-drop-down ul {
+display:none;
+position:absolute;
+background-color:#ebecec;
+color:inherit;
+font-size: 90%;
+border: 3px solid #d6d5c7;
+margin-left: -21.4em;
+margin-top: 0;
+width: 25em;
+padding: .75em;
+}
+div#legend-drop-down:hover ul, div#legend-drop-down.hover ul {
+display:block;
+}
+div#legend-drop-down li {
+white-space:normal;
+background-image: none;
+padding:.2em .7em .4em .7em;
+}
+
+
+#legend {
+float:left;
+position:relative;
+padding:.2em .7em .4em 0;
+}
+
+.green, .red { 
+display: inline;
+margin-right:.3em;
+padding-left: .2em;
+}
+
+.red {
+background-color: #990000;
+}
+
+.green {
+background-color: #659a00;
+}

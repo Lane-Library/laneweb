@@ -1,0 +1,94 @@
+#shd li {
+padding:0 15px;
+}
+#sb-lft {
+padding-left:6px
+}
+#sb-rt {
+padding-right:6px
+}
+#hd h2 {
+padding-left:12px;
+}
+#askUs {
+padding:.25em 1em;
+}
+#ft li, #gft li {
+padding:0 14px 0 14px;
+}
+#ft {
+padding:5px 0 5px 0;
+}
+ul#eLibraryTabs li,h2.bgTab, h2.activeTab, div#eLibraryTabContainer a {
+padding:.5em;
+}
+#bd li {
+padding-left:.5em;
+}
+#leftColumn h2, #rightColumn h2, h2.SquareTitle {
+padding: 7px 10px 7px 11px;
+}
+#leftColumn h2.ImageTitle, #rightColumn h2.ImageTitle {
+padding:0;
+}
+#hd {
+padding-bottom:10px;
+}
+#bd h1 {
+padding:.5em 0 .5em 0;
+}
+#queryMapping a {
+padding-left:2em;
+}
+.fMainBox, .noBox, .yui-tt {
+padding:1em;
+}
+.wrapperBox {
+padding:0 0 2em 1em;
+}
+.wrapperBox h2 {
+padding:0 .5em 0 .5em;
+}
+#otherPortalOptions li {
+padding:.1em .5em;
+}
+dd {
+padding-left:2em
+}
+.searchHeader {
+padding:.5em 1em;
+}
+.yui-panel .hd, .yui-panel .bd {
+padding: 4px;
+font-family: arial, helvetica, sans-serif;
+font-size:90%;
+}
+#yui-main .aGeneralBox {
+padding:1em;
+}
+#articlefinder td {
+padding:2px;
+}
+#articlefinder table {
+padding:10px;
+}
+#ebmesh, #ejmesh {
+padding:1em;
+}
+/*UNUSED==========================================
+#searchSelect option {
+padding-left: .5em;
+}
+div#leftColumn h2, div#rightColumn h2,  h2.searchHeader, ul#eLibraryTabs li,h2.bgTab, h2.activeTab, h2.eMainBox , div#eLibraryTabContainer a, div.aGeneralBox h2, div.tipText h2 {
+padding:.5em;
+}
+
+h1 {
+padding:.5em;
+padding-bottom: .2em;
+}
+
+form td {
+padding-right:.5em;
+}
+*/

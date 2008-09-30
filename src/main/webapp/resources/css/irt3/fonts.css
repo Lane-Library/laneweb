@@ -1,0 +1,174 @@
+#shd {
+text-transform:uppercase;
+font-size:9px;
+font-family:Arial,Helvetica,sans-serif;
+}
+#shd a, #nav a {
+text-decoration:none;
+}
+#nav {
+font-weight:600;
+}
+#breadcrumb {
+font-size:0.85em;
+}
+#gft{
+font-family:"Trebuchet MS",sans-serif;
+}
+#gft a {
+color:#2D2D2D;
+text-decoration:none;
+}
+#ft a {
+color:#1C4B70;
+text-decoration:none;
+}
+#ft, #gft {
+font-size:0.9em;
+}
+#ft a:hover, #gft a:hover, #shd a:hover {
+text-decoration:underline;
+}
+#hd h2 {
+font-family:FrutigerLTStdLightCn,"Arial Narrow",Arial,Tahoma,"Trebuchet MS",sans-serif;
+font-size:24px;
+letter-spacing:.1em;
+}
+#hd h2 span#subtitle {
+font-size:11px;
+text-transform:uppercase;
+letter-spacing:0;
+}
+#hd h2 a {
+text-decoration:none;
+}
+#hd h2 a:hover, #hd h2 a:active { 
+text-decoration: underline;
+}
+#hd h2 #subtitle a:hover,#hd h2 #subtitle a:active{ 
+text-decoration: none;
+}
+#hd h2 a:visited, #hd h2 a {
+color:black;
+}
+#hd h2 span {
+color:#990000;
+}
+div#rightColumn h2, div#leftColumn h2 {
+text-align:left;
+font-family:Arial, Helvetica, sans-serif;
+font-size:0.85em;
+font-weight:bold;
+text-transform:uppercase;
+}
+
+#bd h1 {
+font-weight: 500;
+font-family: arial,sans-serif;
+font-size: 1.7em;
+line-height: 1em;
+}
+
+
+div#leftColumn div, div#rightColumn div {
+font-size:0.95em;
+}
+#bd h2 {
+font-weight:700;
+font-size:1em;
+}
+#bd h3 {
+font-weight:700;
+font-size:1em;
+}
+#bd h4 {
+font-weight:700;
+font-size:0.9em;
+font-style:italic;
+}
+a {
+text-decoration:none;
+}
+a:hover, a:active { 
+text-decoration: underline;
+}
+#bd div.wrapperBox h2 {
+font-size:1.2em;
+}
+h2.bgTab, h2.activeTab, h2.eMainBox, ul#eLibraryTabs li, div#otherPortalOptions li, div#eLibraryTabContainer a   {
+font-size:.9em;
+}
+h2.bgTab a {
+font-weight:lighter;
+}
+div.aGeneralBox h2 {
+font-size:1em;
+}
+li.eLibraryTabActive, #popInContent a {
+font-weight:bolder;
+}
+p a, #popInContent a:hover { 
+text-decoration: underline;
+}
+#spellCheckLink {
+font-weight:bolder;
+font-style:italic;
+text-decoration:none;
+}
+dt {
+font-weight:bolder;
+}
+.yui-tt {
+font-size:90%;
+}
+.yui-panel, .yui-tt {
+text-align:left;
+}
+.yui-panel .hd {
+font-weight:bold;
+}
+em {
+font-style:italic;
+}
+strong {
+font-weight:bold;
+}
+/*UNUSED==============================
+div#leftColumn h3 {
+	text-align:left;
+	font-size: 1.2em;
+}
+
+#searchForm label {
+font-size:larger;
+font-weight:bolder;
+}
+td.sideColumn h2 {
+font-weight: 800;
+text-transform: uppercase;	
+}
+
+#footerDark {
+color:#fff;
+}
+#findItLink {
+font-weight:bolder;
+text-decoration:none;
+}
+
+
+.tinyFont {
+font-size:xx-small;
+}
+li.eLibraryTabActive a, ul.queryMappingHeader li a, ul.queryMappingResults li a {
+text-decoration:none;
+}
+
+p.pList a { 
+text-decoration: none;
+}
+h3 a {
+text-decoration: underline;
+}
+
+*/

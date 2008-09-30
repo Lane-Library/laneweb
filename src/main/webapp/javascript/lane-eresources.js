@@ -1,4 +1,3 @@
-
 (function() {
     LANE.namespace('search.eresources');
 

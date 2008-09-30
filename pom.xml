@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>lane</artifactId>
         <groupId>edu.stanford.irt</groupId>
@@ -69,43 +71,38 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <sourceDirectory>src/main/javascript</sourceDirectory>
-                    <outputDirectory>target/laneweb/javascript</outputDirectory>
+                    <webappDirectory>target/laneweb</webappDirectory>
                     <aggregations>
                         <aggregation>
-                            <!-- remove files after aggregation (default: false)
-                                <removeIncluded>true</removeIncluded>
-                            -->
-                            <!-- insert new line after each concatenation (default: false) -->
-                            <insertNewLine>true</insertNewLine>
-                            <output>target/laneweb/javascript/lane-all.js</output>
-                            <!-- files to include, path relative to output's directory or absolute path-->
+                            <removeIncluded>true</removeIncluded>
+                            <output>target/laneweb/resources/css/irt3/irt3.css</output>
                             <includes>
-                                <include>**/lane-min.js</include>
-                                <include>**/lane-search-min.js</include>
-                                <include>**/lane-tracking-min.js</include>
-                                <include>**/lane-webtrends-min.js</include>
-                                <include>**/lane-google-min.js</include>
-                                <include>**/lane-eresources-min.js</include>
-                                <include>**/lane-spellcheck-min.js</include>
-                                <include>**/lane-searchtabs-min.js</include>
-                                <include>**/lane-findit-min.js</include>
-                                <include>**/lane-querymap-min.js</include>
-                                <include>**/lane-popin-min.js</include>
-                                <include>**/lane-metasearch-min.js</include>
-                                <include>**/lane-search-history-min.js</include>
-                                <include>**/lane-search-indicator-min.js</include>
-                                <include>**/lane-tooltips-min.js</include>
-                                <include>**/lane-popup-min.js</include>
-                                <include>**/lane-ie-min.js</include>
-                                <include>**/lane-forms-min.js</include>
+                                <include>*-min.css</include>
                             </includes>
-                            <!-- files to exclude, path relative to output's directory
-                                <excludes>
-                                <exclude>**/*.pack.js</exclude>
-                                <exclude>**/compressed.css</exclude>
-                                </excludes>
-                            -->
+                        </aggregation>
+                        <aggregation>
+                            <removeIncluded>true</removeIncluded>
+                            <output>target/laneweb/javascript/lane-all.js</output>
+                            <includes>
+                                <include>lane-min.js</include>
+                                <include>lane-search-min.js</include>
+                                <include>lane-tracking-min.js</include>
+                                <include>lane-webtrends-min.js</include>
+                                <include>lane-google-min.js</include>
+                                <include>lane-eresources-min.js</include>
+                                <include>lane-spellcheck-min.js</include>
+                                <include>lane-searchtabs-min.js</include>
+                                <include>lane-findit-min.js</include>
+                                <include>lane-querymap-min.js</include>
+                                <include>lane-popin-min.js</include>
+                                <include>lane-metasearch-min.js</include>
+                                <include>lane-search-history-min.js</include>
+                                <include>lane-search-indicator-min.js</include>
+                                <include>lane-tooltips-min.js</include>
+                                <include>lane-popup-min.js</include>
+                                <include>lane-ie-min.js</include>
+                                <include>lane-forms-min.js</include>
+                            </includes>
                         </aggregation>
                     </aggregations>
                 </configuration>
@@ -569,7 +566,7 @@
         <dependency>
             <groupId>edu.stanford.irt.search</groupId>
             <artifactId>search-spring</artifactId>
-            <version>1.4.22-SNAPSHOT</version>
+            <version>1.4.23</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

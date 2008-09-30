@@ -1,0 +1,256 @@
+/* from yui-grid tool: */
+#custom-doc { 
+width:76.92em;*width:75.07em;min-width:1000px; margin:auto; text-align:left;
+}
+.sb-tb {
+position:relative;
+height:6px;
+z-index:1;
+}
+.sb-c {
+height:12px;
+width:12px;
+position:absolute;
+z-index:1;
+}
+#sb-tl {
+top:-1px;
+left:-7px
+}
+#sb-tr {
+top:-1px;
+right:-7px
+}
+#sb-bl {
+bottom:-1px;
+left:-7px
+}
+#sb-br {
+bottom:-1px;
+right:-7px
+}
+#hd {
+/*position:relative*/
+}
+#nav li {
+float:left;
+}
+#nav {
+height:22px;
+clear:both;
+}
+#askUs {
+float: right;
+}
+#ft, #gft, #hd form, #shd {
+text-align:center;
+}
+#ft li, #gft li, #shd li {
+display:inline;
+}
+/*IE6 needs this or floats get screwy*/
+#hd, .tabs {
+height:100%;
+}
+#hd h1, #hd h2 {
+float:left;
+margin:15px 0;
+}
+#hd h2 span#subtitle {
+display:block;
+}
+#hd h1 {
+height:50px;
+width:200px;
+}
+#hd h1 a, #hd h3 a {
+display:block;
+height:100%;
+width:100%;
+}
+#hd h1 span, #hd h3 span, .tooltips, .popups, span#findIt, #spellCheck, span#queryMapping {
+display:none;
+}
+#hd h3 {
+float:right;
+width:69px;
+height:11px;
+}
+#proxyOn, #proxyOff {
+float:right;
+}
+#searchTerms {
+width:25em;
+}
+input#searchSubmit {
+vertical-align:text-bottom;
+}
+.columnOf2 {
+float:left;
+width:49%;
+}
+.tabs:after, div.fMainBox:after, div.aGeneralBox:after, div.aGeneralBox h2:after, div.tipText h2:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both;
+    visibility:hidden;
+}
+div.aGeneralBox, div.aGeneralBox h2 {
+height:1%;
+}
+div.aGeneralBox {
+width:auto;
+}
+div.aGeneralBox h2 {
+text-align:center;
+}
+object#featureSlider div.aGeneralBox img {
+float:left;
+}
+div.columnOf3 {
+float:left;
+width:33%;
+}
+div.noBox div.columnOf3 {
+width:29%;
+}
+h2.bgTab, h2.activeTab  {
+float:left;
+}
+div.fMainBox, div#popInContent {
+clear:left;
+height:100%;
+}
+ul#eLibraryTabs li {
+float:left;
+text-align:center;
+}
+#popInContent div {
+height:1em;
+}
+span.tabHitCount {
+display:block;
+}
+#otherPortalOptions {
+float:right;
+position:relative;
+}
+#otherPortalOptions ul {
+display:none;
+position:absolute;
+top:2em;
+left:0;
+z-index:2;
+}
+#otherPortalOptions:hover ul, div#otherPortalOptions.hover ul {
+display:block;
+}
+#otherPortalOptions li {
+white-space:nowrap;
+}
+h2.ImageTitle img {
+display:block;
+width:100%;/*This stretches smaller images; or center w margin:0 auto 0 auto;*/
+}
+.wrapperBox h2 {
+display:inline;
+position:relative;
+top:-10px;
+}
+.noBox h1, .portalNavLinks{
+display:inline;
+}
+
+
+/*Search CSS, to be cleaned-up*/
+#searchSubmit {
+vertical-align:text-bottom;
+}
+#searchIndicator {
+visibility:hidden;
+}
+h2.searchHeader {
+float:left;
+}
+#searchHeaderTable {
+	width:100%;
+	border-spacing:0;
+	table-layout:auto;
+}
+dl#searchResults {
+float:left;
+}
+ul.queryMappingHeader, ul.queryMappingResults, ul.queryMappingHeader
+li, ul.queryMappingResults li {
+  display:inline;
+}
+ul#eLibraryTabs, div#eLibraryTabContainer {
+clear:both;
+}
+/* to hide history manager iframe */
+#yui-history-iframe {
+    position:absolute;
+    top:0; left:0;
+    width:1px; height:1px;
+    visibility:hidden;
+}
+.yui-panel .container-close {
+position:absolute;
+right:4px;
+top:5px;
+height:12px;
+width:12px;
+}
+div.imageFloatLft, div.imageFloatLeft {
+float:left;
+}
+/* UNUSED============================================
+
+
+h2.SquareTitle {
+   	background-color:#F3F4E6;
+	background-image:url(/././images/templates/irt3/bg_heading_small.gif);
+	background-repeat:repeat;
+	width: 184px;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	text-align:left;
+	font-size: 1.2em;
+}
+
+
+
+#searchForm {
+text-align:center;
+}
+div.aGeneralBox, div.tipText {
+width: 170px;
+}
+
+div.sideColumn h2 {
+text-align: center;
+}
+h2.ImageTitle img {
+display:block;
+width:100%
+}
+div.eMainBox {
+clear:both;
+}
+h2.eMainBox {
+float:left;
+}
+form#portalForm {
+float:right;
+}
+
+div.imageFloatLft, div.imageFloatLeft {
+float:left;
+}
+
+div.tabTip {
+float:right;
+}
+
+*/

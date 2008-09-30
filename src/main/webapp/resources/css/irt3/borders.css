@@ -1,0 +1,84 @@
+#shd li {
+border-left:1px dotted #616150;
+}
+
+#ft {
+border-top:1px solid #C1C1C1;
+}
+#ft li{
+border-left:1px dotted #C1C1C1;
+}
+#gft li {
+border-left:1px dotted #818181;
+}
+#ft li:first-child, #gft li:first-child, #shd li:first-child {
+border:none;
+}
+div#leftColumn div, div#rightColumn div {
+border-bottom:1px solid #c1c1c1;
+}
+div#leftColumn  {
+border-right:1px solid #c1c1c1;
+}
+div#rightColumn div {
+border-left:1px solid #c1c1c1;
+}
+div#rightColumn h2, div#leftColumn h2 {
+border-bottom:1px solid #c1c1c1;
+}
+div#hd {
+border-bottom: 1px solid #c1c1c1;
+}
+div.eMainBox {
+border: 1px solid #ccc;
+}
+.bgTab, ul#eLibraryTabs li, div#eLibraryTabContainer a {
+border: 1px solid #cccccc;
+}
+.activeTab, li.eLibraryTabActive {
+border:1px solid #99987a;
+}
+div.fMainBox {
+border:1px solid #9C9A90;
+border-top-width: 4px;
+}
+div#popInContent {
+border-bottom:1px solid #9C9A90;
+border-top: 4px solid #9C9A90;
+}
+div#otherPortalOptions {
+border:none;
+}
+div#otherPortalOptions ul {
+border:1px solid #999;
+}
+div.wrapperBox {
+border:1px solid #ccc;
+}
+div.aGeneralBox {
+border: 1px solid #ccc;
+border-top:none;
+}
+div.aGeneralBox h2 {
+border-bottom:.5em solid #e9e9e9;
+}
+object#featureSlider div.aGeneralBox {
+border-top: 1px solid #ccc;
+}
+.yui-tt { 
+border:1px solid #CCCCCC;
+}
+.yui-panel .hd {
+border:1px white solid;
+border-bottom: 1px black solid;
+}
+#popupContainer {
+border:1px solid black;
+}
+/*UNUSED===============================
+This could not be used with a bottom margin in IE6 (gave decendent tabs a bottom margin too)
+#bd h1 {
+border-bottom: 1px solid #c1c1c1;
+}
+
+*/

@@ -1,0 +1,143 @@
+#shd {
+margin: 14px 0 8px 0;
+}
+#hd h1 {
+margin-left:10px;
+}
+#hd h3 {
+margin-right:1em;
+margin-top:64px;
+}
+#nav li {
+margin:.25em 1em .5em 2.3em;
+}
+#breadcrumb {
+margin:.5em 2em .75em 1.2em;
+}
+#homeCategories h2, #homeCategories ul {
+margin:1em;
+}
+#bd ul {
+margin-bottom:1em;
+}
+p {
+margin-bottom:1em;
+}
+div.fMainBox, div.aGeneralBox {
+margin-bottom:1em;
+}
+#rightColumn div.aGeneralBox {
+margin-bottom:0;
+}
+object#featureSlider div.aGeneralBox img {
+margin-right:1em;
+}
+#leftColumn p, #leftColumn ul, #rightColumn p, #rightColumn ul {
+margin:0 1em 1em 1em;
+}
+#bd dd ul, #bd ul#eLibraryTabs {
+margin:0;
+}
+div#leftColumn, div#rightColumn {
+margin-bottom:-1px;
+}
+#leftColumn h2, #rightColumn h2 {
+margin-bottom:1em;
+}
+#leftColumn h2.ImageTitle {
+margin:0;
+}
+#leftColumn h3, #rightColumn h3 {
+margin:0 1em 0 1em;
+}
+#leftColumn div h3, #rightColumn div h3 {
+margin-top:1em;
+}
+.eLibraryTab, .metaSearchResults {
+margin-right: -1px;
+}
+#popInContent div {
+margin:1em;
+}
+.wrapperBox {
+margin:1em .5em 1em .5em;
+}
+.searchCategory {
+margin:1em;
+}
+h2.searchHeader {
+margin:1em 1em 1px 0;
+}
+ul.queryMappingResults li  {
+  margin:0 .5em 0 0;
+}
+dl {
+margin:1em;
+}
+p#noHitsText {
+margin:1em;
+}
+#yui-main .aGeneralBox h2 {
+margin-bottom:1em;
+}
+#articlefinder h2 {
+margin-top:1em;
+}
+/*UNUSED============================================
+This causes tabs underneath to separate from boxes in IE6
+#bd h1 {
+margin-bottom:1em;
+}
+
+commenting out, too general
+h2, h3, h4, h5 {
+margin:1em 1em 0 1em;
+}
+
+
+
+div.tabs {
+margin:0 1em 0 1em;
+}
+li ul, p ul {
+margin:0 0 0 1em;
+}
+dd ul {
+margin:0;
+}
+div#header, div#siteLinks, div#footer, div#greyBack, div div div {
+margin:0;
+}
+
+div#siteLinks span {
+margin-right:2em;
+}
+div#siteLinks span#askUs {
+margin-right:0;
+}
+
+
+*.labled, *.labeled, p.pList, p.noTopPadding {
+margin-top:0;
+}
+td#mainColumn div.tabs * {
+margin:0;
+}
+
+div.tabTip {
+margin:0;
+}
+
+div.aGeneralBox h2, div.tipText h2, div#popInContent, ul#eLibraryTabs {
+margin:0 1em 0 1em;
+}
+
+ #popInContent p span div {
+margin-left:-1.5em;
+}
+
+
+.citationList li{
+  margin-bottom:1em;
+}
+*/
