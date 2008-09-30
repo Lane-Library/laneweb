@@ -1,7 +1,15 @@
-
-
 LANE.track = function() {
     var trackers = [];
+    YAHOO.util.Event.addListener(this, 'click', function(e) {
+            var t = e.srcElement || e.target;
+            while (t) {
+                if (LANE.track.isTrackable(t)) {
+                    LANE.track.track(t);
+                    return;
+                }
+                t = t.parentNode;
+            }
+    });
     return {
         addTracker:function(tracker) {
             if (!tracker || tracker.track === undefined) {
