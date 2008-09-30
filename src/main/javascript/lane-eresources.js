@@ -114,16 +114,18 @@ Result.prototype.show = function() {
     var i;
     if (this._state == 'initialized') {
         this.getContent();
+	    LANE.search.indicator.show();
     } else if (this._state == 'searching') {
             alert('search in progress');
-        } else {
-                LANE.search.eresources.getCurrentResult().hide();
-                LANE.search.eresources.setCurrentResult(this);
-            this._tab.className = 'eLibraryTabActive';
-            for (i = 0; i < this._content.length; i++) {
-                this._container.appendChild(this._content[i]);
-            }
+    } else {
+        LANE.search.eresources.getCurrentResult().hide();
+        LANE.search.eresources.setCurrentResult(this);
+        this._tab.className = 'eLibraryTabActive';
+        for (i = 0; i < this._content.length; i++) {
+            this._container.appendChild(this._content[i]);
         }
+	    LANE.search.indicator.hide();
+    }
 };
 Result.prototype.getContent = function() {
     var request;
