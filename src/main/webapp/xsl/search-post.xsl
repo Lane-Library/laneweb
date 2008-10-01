@@ -16,7 +16,7 @@
         <xsl:copy-of select="self::node()"/>
     </xsl:template>
     
-    <xsl:template match="h:p[attribute::id='noHitsText']">
+    <xsl:template match="h:*[attribute::id='noHitsText']">
         <xsl:if test="$count = 0">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node() | child::node()"/>
