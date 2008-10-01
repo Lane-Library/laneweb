@@ -192,7 +192,7 @@
             WT.jo=navigator.javaEnabled()?"Yes":"No";
         }
         if (document.title){
-            WT.ti=document.title;
+            WT.ti=document.title.replace(/\s+/g,' ');
         }
         WT.js="Yes";
         if (typeof(gVersion)!="undefined"){
@@ -338,27 +338,27 @@
     LANE.track.addTracker({
         track: function(trackable){
             var args = [], t = trackable;
-            if (t.host) {
+            if (t.host !== undefined) {
                 args.push('DCS.dcssip');
                 args.push(t.host);
             }
-            if (t.path) {
+            if (t.path !== undefined) {
                 args.push('DCS.dcsuri');
                 args.push(t.path);
             }
-            if (t.query) {
+            if (t.query !== undefined) {
                 args.push('DCS.dcsquery');
                 args.push(t.query);
             }
-            if (t.title) {
+            if (t.title !== undefined) {
                 args.push('WT.ti');
                 args.push(t.title);
             }
-            if (t.searchTerms) {
+            if (t.searchTerms !== undefined) {
                 args.push('DCSext.keywords');
                 args.push(t.searchTerms);
             }
-            if (t.searchSource) {
+            if (t.searchSource !== undefined) {
                 args.push('DCSext.search_type');
                 args.push(t.searchSource);
             }

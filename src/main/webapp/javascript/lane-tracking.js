@@ -8,16 +8,18 @@ LANE.track = function(){
                 node = node.parentNode;
             }
             if (node) {
+                //for popups:
+                if (node.rel) {
+                    rel = node.rel.split(' ');
+                    if (rel[0] == 'popup' && (rel[1] == 'local' || rel[1] == 'faq')) {
+                        //TODO: change to true when ready to track popups
+                        return false;
+                    }
+                }
                 if (node.host == h) {
                     //track proxy logins
                     if ((/secure\/login.html/).test(node.pathname)) {
                         return true;
-                    }
-                    if (node.rel) {
-                        rel = node.rel.split(' ');
-                        if (rel[0] == 'popup' && (rel[1] == 'local' || rel[1] == 'faq')) {
-                            return true;
-                        }
                     }
                     //otherwise rely on normal tracking for .html unless
                     //a parent has a clicked function
@@ -91,7 +93,7 @@ LANE.track = function(){
             }
             return {
                 host: l.host,
-                path: l.pathname,
+                path: l.pathname || '',
                 query: l.search,
                 title: getTrackedTitle(node),
                 searchTerms: LANE.core.getMetaContent('LW.searchTerms'),
@@ -99,11 +101,28 @@ LANE.track = function(){
                 external: l.host != document.location.host
             };
         };
-    YAHOO.util.Event.addListener(this, 'click', function(e){
+        
+    YAHOO.util.Event.addListener(document, 'click', function(e){
         if (isTrackableClick(e)) {
-            var td = getTrackingData(e);
+            var td = getTrackingData(e),
+                f = function(href) {
+                    window.location = href;
+                };
             for (var i = 0; i < trackers.length; i++) {
                 trackers[i].track(td);
+            }
+            //put in a delay for safari to make the tracking request:
+            if (YAHOO.env.ua.webkit) {
+                    var node = e.target, href;
+                    while (node) {
+                        if (node.href && (!node.rel && !node.target)) {
+                            href = node.href;
+                            YAHOO.util.Event.preventDefault(e);
+                            setTimeout(f(href), 200);
+                            break;
+                        }
+                        node = node.parentNode;
+                    }
             }
         }
     });
