@@ -118,7 +118,7 @@
 				            YAHOO.util.Dom.setStyle(YAHOO.util.Dom.getFirstChild(searchCats[y]), 'display', display);
 				        }
 				    }
-				    YAHOO.util.Event.stopEvent(event);
+				    YAHOO.util.Event.preventDefault(event);
 	    		});
 	    	});
 	    	
