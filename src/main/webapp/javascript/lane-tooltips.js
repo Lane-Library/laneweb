@@ -15,6 +15,7 @@
                 if(tt[j].nodeType == 1) {
                     e = tt[j].id.replace(/Tooltip$/,'');
                     if(e && YAHOO.util.Dom.inDocument(e)) {
+                        document.getElementById(e).trackable = true;
                         w = tt[j].style.width || '25%';
                         var bar = new YAHOO.widget.Tooltip(
                                 YAHOO.util.Dom.generateId(), 
