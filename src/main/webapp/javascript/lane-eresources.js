@@ -52,7 +52,7 @@ LANE.search.eresources = function () {
 								    //log somewhere ... no need to break/alert
 								}
 							}
-                            YAHOO.util.Event.stopEvent(event);
+                            YAHOO.util.Event.preventDefault(event);
                         };
                     }
                 }
