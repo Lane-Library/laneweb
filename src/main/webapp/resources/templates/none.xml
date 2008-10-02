@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Lane Medical Library, Stanford University Medical Center</title>
+<link rel="stylesheet" type="text/css" href="/style/irt3/irt3.css"/>
 </head>
 <body>
 <?laneweb content?>

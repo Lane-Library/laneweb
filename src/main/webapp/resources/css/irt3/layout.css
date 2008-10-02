@@ -89,6 +89,9 @@ vertical-align:text-bottom;
 float:left;
 width:49%;
 }
+.fMainBox .wrapperBox {
+width:45%;
+}
 .tabs:after, div.fMainBox:after, div.aGeneralBox:after, div.aGeneralBox h2:after, div.tipText h2:after {
     content: "."; 
     display: block; 
@@ -158,11 +161,9 @@ display:inline;
 position:relative;
 top:-10px;
 }
-.noBox h1, .portalNavLinks{
+div.portalNavLinks h1 {
 display:inline;
 }
-
-
 /*Search CSS, to be cleaned-up*/
 #searchSubmit {
 vertical-align:text-bottom;
@@ -204,6 +205,10 @@ width:12px;
 }
 div.imageFloatLft, div.imageFloatLeft {
 float:left;
+}
+form#easyFeedback {
+clear:left;
+width:50%;
 }
 /* UNUSED============================================
 

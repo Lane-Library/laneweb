@@ -75,6 +75,9 @@ padding:10px;
 #ebmesh, #ejmesh {
 padding:1em;
 }
+#noCols {
+padding:1em;
+}
 /*UNUSED==========================================
 #searchSelect option {
 padding-left: .5em;

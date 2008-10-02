@@ -57,6 +57,8 @@ border:1px solid #ccc;
 }
 div.aGeneralBox {
 border: 1px solid #ccc;
+}
+#rightColumn .aGeneralBox {
 border-top:none;
 }
 div.aGeneralBox h2 {

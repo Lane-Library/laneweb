@@ -172,6 +172,9 @@ background-repeat:no-repeat;
 .keywords {
 color:black;
 }
+object#featureSlider div.aGeneralBox {
+background-color:#e4e4e4;
+}
 
 /*UNUSED==============================
 
