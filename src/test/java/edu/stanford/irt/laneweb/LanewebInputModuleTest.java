@@ -65,18 +65,8 @@ public class LanewebInputModuleTest extends TestCase {
     }
 
     public void testTemplates() throws ConfigurationException {
-        assertTrue("100years_index".equals(this.module
-                .getTemplateName("100years/index.html")));
-        assertTrue("100years_index".equals(this.module
-                .getTemplateName("stage/100years/index.html")));
-        assertTrue("100years".equals(this.module
-                .getTemplateName("100years/anotherpage.html")));
-        assertTrue("100years".equals(this.module
-                .getTemplateName("stage/100years/anotherpage.html")));
-        assertTrue("100years".equals(this.module
-                .getTemplateName("100years/anotherpage.html")));
-        assertTrue("100years_index".equals(this.module
-                .getTemplateName("stage/100years/index.html")));
+        assertTrue("shc".equals(this.module
+                .getTemplateName("shc/foo.html")));
     }
 
 }
