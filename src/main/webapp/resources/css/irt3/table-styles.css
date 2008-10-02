@@ -40,7 +40,7 @@
  .simpleColorTable  {
     border-collapse:separate;
 	border: 1px solid #cccccc;
-    width:95%;
+    width:100%;
 }
 .simpleColorTable  td{
 	border: 1px solid #cccccc;

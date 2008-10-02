@@ -198,6 +198,13 @@
                 resources.</span>
         </div>
         <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.5.2/build/utilities/utilities.js&amp;2.5.2/build/container/container-min.js&amp;2.5.2/build/json/json-min.js&amp;2.5.2/build/history/history-min.js"> </script>
-        <script src="/javascript/lane-all.js" type="text/javascript"> </script>
+        <script src="/javascript/lane.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-tooltips.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-search.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-search-indicator.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-eresources.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-popup.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-tracking.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-webtrends.js" type="text/javascript"> </script>
     </body>
 </html>

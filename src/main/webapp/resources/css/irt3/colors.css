@@ -169,6 +169,10 @@ color:white
 background-image: url(/././images/templates/irt2/panel-close.gif);
 background-repeat:no-repeat;
 }
+.keywords {
+color:black;
+}
+
 /*UNUSED==============================
 
 div#leftColumn h3 {
@@ -214,9 +218,6 @@ color:white;
 
 dd li, ol li, ul.queryMappingResults li, ul.queryMappingHeader li {
 background-image:none;
-}
-.keywords {
-    color: #000000;
 }
 #findItLink, #spellCheckLink {
 color: #900;
