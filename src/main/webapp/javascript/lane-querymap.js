@@ -56,6 +56,9 @@ if (LANE.search.getEncodedSearchString()) {
                             queryMapContainer.appendChild(span);
                             LANE.search.querymap.resourceMap.resources[i].anchor = anchor;
                         }
+                        if ( document.getElementById('queryMappingDescriptor') ){
+                        	document.getElementById('queryMappingDescriptor').appendChild(document.createTextNode(LANE.search.querymap.resourceMap.descriptor));
+                        }
                         LANE.search.querymap.getResultCounts();
                     }
             }
