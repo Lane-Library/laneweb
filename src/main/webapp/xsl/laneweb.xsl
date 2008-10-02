@@ -225,16 +225,6 @@
         </div>
     </xsl:template>
 
-    <!-- strip onload event handlers except 100years pages using yui in laneweb.js-->
-    <xsl:template match="h:body/@onload">
-        <xsl:if test="starts-with($request-uri,'100years')">
-            <xsl:copy-of select="."/>
-        </xsl:if>
-    </xsl:template>
-
-    <!-- strip onunload handlers -->
-    <xsl:template match="h:body/@onunload"/>
-
     <xsl:template match="comment()">
         <xsl:copy-of select="."/>
         <!--<xsl:if test="contains(.,'[if IE]')">
@@ -314,7 +304,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:when>
-            <!-- obfuscate email addresses with JavaSscript -->
+            <!-- obfuscate email addresses with javascript -->
             <xsl:when test="starts-with(@href, 'mailto:')">
                 <xsl:variable name="apostrophe">'</xsl:variable>
                 <xsl:variable name="address">

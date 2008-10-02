@@ -291,6 +291,10 @@
                     <map:redirect-to uri="{form-redirect-key}"/>
                 </map:act>
             </map:match>
+            <!-- ========================== temporary redirects ============================ -->
+            <map:match pattern="100years/**" type="wildcard">
+                <map:redirect-to uri="{request:contextPath}/portals/history/centennial/{1}"/>
+            </map:match>
             <!-- ========================== permenent redirects ============================ -->
             <map:match pattern="classes/index.html" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/services/workshops/laneclasses.html"/>
