@@ -1,4 +1,5 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- this is the live static.xmap -->
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
@@ -38,7 +39,7 @@
                 <map:read type="txt-resource"
                     src="{naming:java:comp/env/irt3-base}/resources/css/{2}.css"
                     mime-type="text/css">
-                <!--<map:read type="txt-resource"
+                    <!--<map:read type="txt-resource"
                         src="context://resources/css/{2}.css"
                         mime-type="text/css">-->
                     <map:parameter name="path" value="{request:contextPath}"/>

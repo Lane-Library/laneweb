@@ -1,20 +1,24 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- this is the stage static.xmap -->
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="images/**.gif" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/images/{1}.gif"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/stage-base}/resources/images/{1}.gif"
                     mime-type="image/gif"/>
             </map:match>
             <map:match pattern="favicon.ico" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/images/favicon.ico"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/stage-base}/resources/images/favicon.ico"
                     mime-type="image/x-icon"/>
             </map:match>
             <!-- first wildcard will be version for local css and javascript -->
             <map:match pattern="style/*/**.css" type="wildcard">
-                <map:read type="txt-resource" src="{naming:java:comp/env/stage-base}/resources/css/{2}.css"
+                <map:read type="txt-resource"
+                    src="{naming:java:comp/env/stage-base}/resources/css/{2}.css"
                     mime-type="text/css">
                     <map:parameter name="path" value="{request:contextPath}/stage"/>
                 </map:read>
@@ -26,15 +30,18 @@
                 </map:read>
             </map:match>
             <map:match pattern="images/**.jpg" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/images/{1}.jpg"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/stage-base}/resources/images/{1}.jpg"
                     mime-type="image/jpeg"/>
             </map:match>
             <map:match pattern="images/**.png" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/images/{1}.png"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/stage-base}/resources/images/{1}.png"
                     mime-type="image/png"/>
             </map:match>
             <map:match pattern="pdf/**.pdf" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/pdf/{1}.pdf"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/stage-base}/resources/pdf/{1}.pdf"
                     mime-type="application/pdf">
                     <map:parameter name="byte-ranges" value="false"/>
                 </map:read>
@@ -98,7 +105,8 @@
                     mime-type="application/msword"/>
             </map:match>
             <map:match pattern="flash/*.swf" type="wildcard">
-                <map:read type="resource" src="{naming:java:comp/env/stage-base}/resources/flash/{1}.swf"
+                <map:read type="resource"
+                    src="{naming:java:comp/env/stage-base}/resources/flash/{1}.swf"
                     mime-type="application/x-shockwave-flash"/>
             </map:match>
             <map:match pattern="**.swf" type="wildcard">
@@ -115,7 +123,8 @@
             </map:match>
             <map:match pattern="**.pptx" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.pptx"
-                    mime-type="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+                    mime-type="application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                />
             </map:match>
             <map:match pattern="**.avi" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/stage-base}/content/{1}.avi"

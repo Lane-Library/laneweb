@@ -6,10 +6,10 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="eresources/**" type="wildcard">
-                <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
+                <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
             <map:match pattern="apps/**" type="wildcard">
-                <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
+                <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
             </map:match>
             <map:match pattern="online/(ej|db|cc|eb)browse.html" type="regex">
                 <map:generate type="html"
@@ -19,10 +19,10 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search.html" type="wildcard">
-                <map:mount uri-prefix="" check-reload="yes" src="search.xmap"/>
+                <map:mount uri-prefix="" check-reload="no" src="search.xmap"/>
             </map:match>
             <map:match pattern="search/*.html" type="wildcard">
-                <map:mount uri-prefix="" check-reload="yes" src="search.xmap"/>
+                <map:mount uri-prefix="" check-reload="no" src="search.xmap"/>
             </map:match>
             <map:match pattern="random" type="wildcard">
                 <map:generate type="file" src="{request-param:source}"/>
@@ -61,8 +61,7 @@
         <map:pipeline type="expires">
             <map:parameter name="cache-key" value="{0};rss-url={request-param:rss-url}"/>
             <map:match pattern="ncbi-rss2html" type="wildcard">
-                <map:generate 
-                    src="{request-param:rss-url}"/>
+                <map:generate type="file" src="{request-param:rss-url}"/>
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
                 <map:serialize type="xhtml"/>
             </map:match>
@@ -72,6 +71,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching" internal-only="true">
+            <!-- secure/** generates an error unless used from a pipeline -->
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="{naming:java:comp/env/irt3-base}/content/secure/{1}"/>
                 <map:transform type="xinclude"/>
@@ -109,11 +109,12 @@
             <map:match pattern="templates/**.xml" type="wildcard">
                 <!-- keep in irt3-base for development -->
                 <map:generate type="file"
-                        src="{naming:java:comp/env/irt3-base}/resources/templates/{1}.xml"/>
+                    src="{naming:java:comp/env/irt3-base}/resources/templates/{1}.xml"/>
                 <!--<map:generate type="file"
                         src="context://resources/templates/{1}.xml"/>-->
                 <map:serialize type="xml"/>
             </map:match>
+            <!-- secure/** generates an error unless used from a pipeline -->
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="{naming:java:comp/env/irt3-base}/content/error.html"/>
                 <map:transform type="xinclude"/>

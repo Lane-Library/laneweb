@@ -64,7 +64,7 @@
             <map:generator logger="edu.stanford.irt.laneweb.search" name="search-describe"
                 src="edu.stanford.irt.laneweb.search.DescribeGenerator"/>
             <map:generator logger="edu.stanford.irt.laneweb.urlTester" name="search-url-tester"
-            src="edu.stanford.irt.laneweb.search.UrlTester"/>
+                src="edu.stanford.irt.laneweb.search.UrlTester"/>
             <map:generator name="directory" src="org.apache.cocoon.generation.DirectoryGenerator"/>
         </map:generators>
         <map:transformers default="saxon">
@@ -117,7 +117,8 @@
             <map:reader name="txt-resource" logger="sitemap.reader.txtresource"
                 src="edu.stanford.irt.laneweb.TxtResourceReader">
                 <path>/</path>
-                <valueToSubstitute>/\./\.</valueToSubstitute><!-- uses regex so /./. is what is actually substituted -->
+                <valueToSubstitute>/\./\.</valueToSubstitute>
+                <!-- uses regex so /./. is what is actually substituted -->
             </map:reader>
         </map:readers>
         <map:actions>
@@ -150,9 +151,10 @@
             <map:pipe name="noncaching" logger="sitemap.pipeline.noncaching"
                 src="org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline"/>
             <map:pipe name="throttling" logger="sitemap.pipeline.throttling"
-            src="edu.stanford.irt.laneweb.ThrottlingPipeline"/>
+                src="edu.stanford.irt.laneweb.ThrottlingPipeline"/>
             <map:pipe name="expires" src="edu.stanford.irt.laneweb.ExpiresPipeline">
-                <map:parameter name="cache-expires" value="300"/> <!-- default 300 sec (5 min) -->
+                <map:parameter name="cache-expires" value="300"/>
+                <!-- default 300 sec (5 min) -->
             </map:pipe>
         </map:pipes>
     </map:components>
@@ -165,7 +167,7 @@
                 <map:redirect-to uri="{request:contextPath}/{1}/index.html"/>
             </map:match>
             <map:match pattern="stage/**" type="wildcard">
-                <map:mount uri-prefix="stage" check-reload="yes" src="context://stage/stage.xmap"/>
+                <map:mount uri-prefix="stage" check-reload="no" src="context://stage/stage.xmap"/>
             </map:match>
             <map:match pattern="ceyates/**" type="wildcard">
                 <map:mount uri-prefix="ceyates" check-reload="yes"
@@ -188,26 +190,26 @@
                     src="file:/afs/ir/users/r/z/rzwies/laneweb/laneweb.xmap"/>
             </map:match>
             <map:match pattern="extensions/**" type="wildcard">
-                <map:mount uri-prefix="extensions" check-reload="yes" src="extensions.xmap"/>
+                <map:mount uri-prefix="extensions" check-reload="no" src="extensions.xmap"/>
             </map:match>
             <map:match pattern="tobacco/**" type="wildcard">
-                <map:mount uri-prefix="tobacco" check-reload="yes" src="tobacco.xmap"/>
+                <map:mount uri-prefix="tobacco" check-reload="no" src="tobacco.xmap"/>
             </map:match>
             <map:match type="regex"
                 pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|pptx|ico|swf|wmv|avi|zip)$">
-                <map:mount uri-prefix="" check-reload="yes" src="static.xmap"/>
+                <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>
             <map:match pattern="robots.txt" type="wildcard">
                 <map:read type="resource" src="robots.txt" mime-type="text/plain"/>
             </map:match>
             <map:match pattern="eresources/**" type="wildcard">
-                <map:mount uri-prefix="eresources" check-reload="yes" src="eresources.xmap"/>
+                <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
             <map:match pattern="content/**" type="wildcard">
-                <map:mount uri-prefix="content" check-reload="yes" src="content.xmap"/>
+                <map:mount uri-prefix="content" check-reload="no" src="content.xmap"/>
             </map:match>
             <map:match pattern="apps/**" type="wildcard">
-                <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
+                <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
             </map:match>
             <map:match pattern="admin/status" type="wildcard">
                 <map:generate type="status"/>

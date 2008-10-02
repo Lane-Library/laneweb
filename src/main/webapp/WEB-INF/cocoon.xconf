@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cocoon version="2.1">
     
-  <sitemap check-reload="yes" file="context://laneweb.xmap" logger="sitemap"/>
+  <sitemap check-reload="no" file="context://laneweb.xmap" logger="sitemap"/>
  
   <input-modules>
     <component-instance logger="core.modules.input.laneweb" name="laneweb" class="edu.stanford.irt.laneweb.LanewebInputModule">
@@ -19,8 +19,6 @@
         <!-- hospital 171.65.200.0 - 171.65.255.255 -->
         <proxy-regex>^171\.65\.2[0-5][0-9]\.\S+</proxy-regex>
         <template url="^(stage/|)shc/\S+" value="shc"/>
-        <template url="^(stage/|)100years/index\.html" value="100years_index"/>
-        <template url="^(stage/|)100years/\S+" value="100years"/>
         <template url="^(stage/|)services/spaces/reserve/\S+" value="none"/>
     </component-instance>
     <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>

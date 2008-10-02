@@ -1,4 +1,5 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- this is the stage applications.xmap -->
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
@@ -48,41 +49,19 @@
                     <map:transform type="saxon" src="context://xsl/search-tab-results.xsl"/>
                     <map:serialize type="text"/>
                 </map:match>
-            </map:match>
-            <!-- search describe xml output -->
-            <map:match pattern="search/describe/xml" type="wildcard">
-                <map:generate type="search-describe"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <!-- search describe html output -->
-            <map:match pattern="search/describe/html" type="wildcard">
-                <map:aggregate element="portals" ns="http://lane.stanford.edu/describe/ns">
-                    <map:part src="cocoon:/search/describe/xml"/>
-                    <map:part src="cocoon:/cache/search/templates/xml"/>
-                </map:aggregate>
-                <map:transform type="saxon" src="context://xsl/describe.xsl"/>
-                <map:serialize type="xhtml"/>
-            </map:match>
-            <map:match pattern="querymap/*">
-                <map:match pattern="querymap/xml">
-                    <map:generate type="querymap">
-                        <map:parameter name="query" value="{request-param:q}"/>
-                        <map:parameter name="resource-maps" value="{naming:java:comp/env/live-base}/resources/querymap/resource-maps.xml"/>
-                        <map:parameter name="descriptor-weights" value="{naming:java:comp/env/live-base}/resources/querymap/descriptor-weights.xml"/>
-                        <!-- abstract count can be set in query string, or default set in cocoon.xconf -->
-                        <map:parameter name="abstract-count" value="{chain:abstract-count}"/>
-                    </map:generate>
+                <!-- search describe xml output -->
+                <map:match pattern="search/describe/xml" type="wildcard">
+                    <map:generate type="search-describe"/>
                     <map:serialize type="xml"/>
                 </map:match>
-                <map:match pattern="querymap/html/*" type="wildcard">
-                    <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
-                        <map:part src="cocoon:/querymap/xml"/>
-                        <map:part
-                            src="{naming:java:comp/env/live-base}/resources/querymap/display-template.xml"
-                        />
+                <!-- search describe html output -->
+                <map:match pattern="search/describe/html" type="wildcard">
+                    <map:aggregate element="portals" ns="http://lane.stanford.edu/describe/ns">
+                        <map:part src="cocoon:/search/describe/xml"/>
+                        <map:part src="cocoon:/cache/search/templates/xml"/>
                     </map:aggregate>
-                    <map:transform type="saxon" src="context://xsl/querymap2html.xsl"/>
-                    <map:serialize type="xml"/>
+                    <map:transform type="saxon" src="context://xsl/describe.xsl"/>
+                    <map:serialize type="xhtml"/>
                 </map:match>
             </map:match>
             <map:match pattern="spellcheck/*" type="wildcard">
@@ -122,10 +101,45 @@
                     <map:serialize type="text"/>
                 </map:match>
                 <map:match pattern="sfx/highly-accessed2rss" type="wildcard">
-                    <map:generate 
-                        src="http://sfx.stanford.edu/local/cgi/public/get_file.cgi?file=highly-accessed.xml"/>
+                    <map:generate
+                        src="http://sfx.stanford.edu/local/cgi/public/get_file.cgi?file=highly-accessed.xml"
+                        type="file"/>
                     <map:transform src="context://xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>
                     <map:serialize type="xml"/>
+                </map:match>
+            </map:match>
+            <map:match pattern="querymap/*" type="wildcard">
+                <map:match pattern="querymap/xml" type="wildcard">
+                    <map:generate type="querymap">
+                        <map:parameter name="query" value="{request-param:q}"/>
+                        <map:parameter name="resource-maps"
+                            value="{naming:java:comp/env/stage-base}/resources/querymap/resource-maps.xml"/>
+                        <map:parameter name="descriptor-weights"
+                            value="{naming:java:comp/env/stage-base}/resources/querymap/descriptor-weights.xml"/>
+                        <!-- abstract count can be set in query string, or default set in cocoon.xconf -->
+                        <map:parameter name="abstract-count" value="{chain:abstract-count}"/>
+                    </map:generate>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match pattern="querymap/html" type="wildcard">
+                    <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
+                        <map:part src="cocoon:/querymap/xml"/>
+                        <map:part
+                            src="{naming:java:comp/env/stage-base}/resources/querymap/display-template.xml"
+                        />
+                    </map:aggregate>
+                    <map:transform type="saxon" src="context://xsl/querymap2html.xsl"/>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match pattern="querymap/json" type="wildcard">
+                    <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
+                        <map:part src="cocoon:/querymap/xml"/>
+                        <map:part
+                            src="{naming:java:comp/env/stage-base}/resources/querymap/display-template.xml"
+                        />
+                    </map:aggregate>
+                    <map:transform type="saxon" src="context://xsl/querymap2json.xsl"/>
+                    <map:serialize type="text"/>
                 </map:match>
             </map:match>
             <!-- these next matches use cache in live, but here just require html generator -->

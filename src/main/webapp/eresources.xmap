@@ -1,4 +1,5 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- this is the live eresources.xmap -->
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
@@ -40,7 +41,8 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="expires">
-            <map:parameter name="cache-key" value="{0};a={request-param:a};t={request-param:t};m={request-param:m}"/>
+            <map:parameter name="cache-key"
+                value="{0};a={request-param:a};t={request-param:t};m={request-param:m}"/>
             <map:match pattern="browse">
                 <map:generate type="eresources">
                     <map:parameter name="mode" value="browse"/>

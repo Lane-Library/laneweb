@@ -1,4 +1,5 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- this is the stage content.xmap -->
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
@@ -21,23 +22,13 @@
             <map:match pattern="search.html" type="wildcard">
                 <map:mount uri-prefix="" check-reload="no" src="search.xmap"/>
             </map:match>
-            <map:match pattern="search/**" type="wildcard">
+            <map:match pattern="search/*.html" type="wildcard">
                 <map:mount uri-prefix="" check-reload="no" src="search.xmap"/>
             </map:match>
             <map:match pattern="random" type="wildcard">
                 <map:generate type="file" src="{request-param:source}"/>
                 <map:transform type="saxon" src="context://xsl/random.xsl"/>
                 <map:serialize type="xhtml"/>
-            </map:match>
-            <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regex">
-                <map:generate type="directory" src="{naming:java:comp/env/stage-base}/content/{1}">
-                    <map:parameter name="depth" value="1"/>
-                    <map:parameter name="dateFormat" value="EEE, d MMM yyyy HH:mm:ss Z"/>
-                </map:generate>
-                <map:transform src="context://xsl/file-info.xsl" type="saxon">
-                    <map:parameter name="file" value="{2}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="page2rss" type="wildcard">
                 <map:aggregate element="doc">
@@ -49,9 +40,18 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regex">
+                <map:generate type="directory" src="{naming:java:comp/env/stage-base}/content/{1}">
+                    <map:parameter name="depth" value="1"/>
+                    <map:parameter name="dateFormat" value="EEE, d MMM yyyy HH:mm:ss Z"/>
+                </map:generate>
+                <map:transform src="context://xsl/file-info.xsl" type="saxon">
+                    <map:parameter name="file" value="{2}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="ncbi-rss2html" type="wildcard">
-                <map:generate 
-                    src="{request-param:rss-url}"/>
+                <map:generate type="file" src="{request-param:rss-url}"/>
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
                 <map:serialize type="xhtml"/>
             </map:match>
@@ -61,6 +61,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching" internal-only="true">
+            <!-- secure/** generates an error unless used from a pipeline -->
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="{naming:java:comp/env/stage-base}/content/secure/{1}"/>
                 <map:transform type="xinclude"/>
@@ -93,6 +94,7 @@
                     src="{naming:java:comp/env/stage-base}/resources/templates/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <!-- secure/** generates an error unless used from a pipeline -->
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="{naming:java:comp/env/stage-base}/content/error.html"/>
                 <map:transform type="xinclude"/>
