@@ -104,7 +104,7 @@ LANE.track = function(){
         
     YAHOO.util.Event.addListener(document, 'click', function(e){
         if (isTrackableClick(e)) {
-            var td = getTrackingData(e),
+            var td = getTrackingData(e), node, parent, href,
                 f = function(href) {
                     window.location = href;
                 };
@@ -113,9 +113,16 @@ LANE.track = function(){
             }
             //put in a delay for safari to make the tracking request:
             if (YAHOO.env.ua.webkit) {
-                    var node = e.target, href;
+                    node = e.target;
+                    parent = node;
+                    while (parent) {
+                        if (parent.clicked !== undefined) {
+                            return;
+                        }
+                        parent = parent.parentNode;
+                    }
                     while (node) {
-                        if (node.href && (!node.clicked &&  !node.target)) {
+                        if (node.href && (!node.rel && !node.target)) {
                             href = node.href;
                             YAHOO.util.Event.preventDefault(e);
                             setTimeout(f(href), 200);
