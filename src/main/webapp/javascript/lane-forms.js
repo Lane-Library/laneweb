@@ -18,8 +18,7 @@
 		     * @return {Boolean} Is form valid
 		     */
 		    validateFormOnSubmit: function(e) {
-			    var validForm = true, 
-			    	ff,     // field focus
+			    var ff,     // field focus
 			    	i,z,y,  // iterators
 			    	radios, // radio inputs
 			    	reqOneOfSet = this.validationPatterns["require-one-of"]; // list of fields where any one value found validates requirement ... equiv to OR
@@ -29,7 +28,7 @@
 			        if ( this.elements[i].type !== undefined && this.elements[i].type.match(/^(select-one|text|textarea)$/) && this.elements[i].onchange == LANE.forms.validateFieldOnChange ) {
 			            this.elements[i].onchange();
 			            if ( YAHOO.util.Dom.hasClass(this.elements[i], "invalid-field") ) {
-			                validForm = false;
+			                this.isValid = false;
 			                ff = this.elements[i];
 			            }
 			        } 
@@ -39,7 +38,7 @@
 	                        radios[z].onchange();
 	                    }
 			            if ( YAHOO.util.Dom.hasClass(this.elements[i], "invalid-field") ) {
-			                validForm = false;
+			                this.isValid = false;
 			                ff = radios[0];
 			            }
 			        }
@@ -47,19 +46,19 @@
 
 				// if we have a set of OR'd fields, loop through them to make sure at least one value is present			    
 			    if ( reqOneOfSet !== undefined ){
-			    	validForm = false;
+	                this.isValid = false;
 			    	for ( y = 0; y < reqOneOfSet.split(",").length; y++ ){
 				    	ff = this.elements[reqOneOfSet.split(",")[0]]; // set focus to first field in req list
 						if ( this.elements[reqOneOfSet.split(",")[y]].value ){
 				            ( this.elements[reqOneOfSet.split(",")[y]].onchange !== undefined ) ? this.elements[reqOneOfSet.split(",")[y]].onchange(): ''; // fire on change validation if field has validation pattern as well
 				            if ( !YAHOO.util.Dom.hasClass(this.elements[reqOneOfSet.split(",")[y]], "invalid-field") ) {
-								validForm = true;
+				                this.isValid = true;
 				            }
 						}
 			    	}
 			    }
 			    
-			    if ( validForm === true ) {
+			    if ( this.isValid === true ) {
 			    	// remove validation-patterns element so it's not sent as form data
 			    	( this.elements["validation-patterns"] ) ? this.removeChild(this.elements["validation-patterns"]) : '';
 				    // call any delayed onsubmit JS we may have found and overridden in markup
@@ -148,6 +147,7 @@
 	        }
 
 	        if ( needsValidation === true || form.validationPatterns["require-one-of"] !== undefined ){
+		    	form.isValid = true; // assume form is valid before onSubmit and onChange checking
 	        	// override any onsubmit calls found in markup; delay until after form validation has run
 	        	if ( form.onsubmit ){
 	        		form.delayedOnsubmit = form.onsubmit;
