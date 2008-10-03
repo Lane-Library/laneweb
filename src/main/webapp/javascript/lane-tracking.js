@@ -115,7 +115,7 @@ LANE.track = function(){
             if (YAHOO.env.ua.webkit) {
                     var node = e.target, href;
                     while (node) {
-                        if (node.href && (!node.rel && !node.target)) {
+                        if (node.href && (!node.clicked &&  !node.target)) {
                             href = node.href;
                             YAHOO.util.Event.preventDefault(e);
                             setTimeout(f(href), 200);
