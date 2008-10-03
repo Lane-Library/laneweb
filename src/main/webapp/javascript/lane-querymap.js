@@ -1,5 +1,4 @@
 //TODO: this needs some cleaning up
-//TODO: expand descriptor into content (for inclusion in tooltip)?
 //check if there is a query
 if (LANE.search.getEncodedSearchString()) {
     //check if there is id=queryMapping
