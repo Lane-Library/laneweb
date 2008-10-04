@@ -166,14 +166,14 @@ background-color:#888983;
 color:white
 }
 .yui-panel .container-close {
-background-image: url(/././images/templates/irt2/panel-close.gif);
+background-image: url(/././images/templates/irt3/panel-close.gif);
 background-repeat:no-repeat;
 }
 .keywords {
 color:black;
 }
 object#featureSlider div.aGeneralBox {
-background-color:#e4e4e4;
+background:#ccc;
 }
 
 /*UNUSED==============================

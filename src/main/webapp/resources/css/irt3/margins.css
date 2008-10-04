@@ -5,11 +5,15 @@ margin: 14px 0 8px 0;
 margin-left:10px;
 }
 #hd h3 {
-margin-right:1em;
 margin-top:64px;
+}
+#hd h3 {
+margin-right:1em;
+_margin-right:.5em;/*ie6 hack*/
 }
 #nav li {
 margin:.25em 1em .5em 2.3em;
+_margin:.25em 1em .5em 1.3em;/*ie6 hack*/
 }
 #breadcrumb {
 margin:.5em 2em .75em 1.2em;
