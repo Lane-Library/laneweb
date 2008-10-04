@@ -10,7 +10,7 @@ YAHOO.util.Event.addListener(this, 'load', function() {
                     pageTracker = _gat._getTracker("UA-3203486-2");
                 }
                 //TODO: remove this for production
-                pageTracker._setLocalServerMode();
+                //pageTracker._setLocalServerMode();
                 //TODO:
                 pageTracker._initData();
                 pageTracker._trackPageview();
