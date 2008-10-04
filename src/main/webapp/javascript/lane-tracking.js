@@ -121,7 +121,7 @@ LANE.track = function(){
         };
         
     YAHOO.util.Event.addListener(document, 'click', function(e){
-                            YAHOO.util.Event.preventDefault(e);
+//                            YAHOO.util.Event.preventDefault(e);
         if (isTrackableClick(e)) {
             var td = getTrackingData(e), node, parent, href,
                 f = function(href) {
