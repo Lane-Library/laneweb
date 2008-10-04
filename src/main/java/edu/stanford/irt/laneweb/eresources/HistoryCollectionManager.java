@@ -592,6 +592,10 @@ public class HistoryCollectionManager implements CollectionManager, ThreadSafe,
             public boolean isWrapperFor(Class<?> wrapped) {
                 throw new UnsupportedOperationException("sorry, can't do that");
             }
+            
+            public <T> T unwrap(java.lang.Class<T> wrapped) {
+                throw new UnsupportedOperationException("sorry, can't do that");
+            }
         };
         manager.release(selector);
     }
