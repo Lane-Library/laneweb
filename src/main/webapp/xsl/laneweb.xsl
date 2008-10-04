@@ -49,7 +49,7 @@
 
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
-    <xsl:variable name="default-template" select="'irt2'"/>
+    <xsl:variable name="default-template" select="'irt3'"/>
     <!-- the requested template -->
     <xsl:variable name="request-template" select="$template"/>
     <!-- the template that will be used in the response -->

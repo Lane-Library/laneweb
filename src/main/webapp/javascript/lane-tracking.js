@@ -58,8 +58,9 @@ LANE.track = function(){
         getTrackingData = function(e){
             var node = e.srcElement || e.target,
                 l = node,
+                host, path, query, external,
                 getTrackedTitle = function(){
-                    var title = node.title, img, i = 0;
+                    var title = l.title, img, i = 0;
                     if (!title) {
                         title = node.alt;
                     }
@@ -85,29 +86,48 @@ LANE.track = function(){
                     }
                     return title;
                 };
-            while (l.href === undefined) {
-                l = l.parentNode;
-                if (l === null) {
-                    throw 'not trackable';
+                while (l.href === undefined) {
+                    l = l.parentNode;
+                    if (l === null) {
+                        throw 'not trackable';
+                    }
                 }
+            if (l.pathname.indexOf('/secure/login.html') > -1) {
+                host = (l.search.substring(l.search.indexOf('//') + 2));
+                if (host.indexOf('/') > -1) {
+                    path = host.substring(host.indexOf('/'));
+                    if (path.indexOf('?') > -1) {
+                        path = path.substring(0, path.indexOf('?'));
+                    }
+                    host = host.substring(0, host.indexOf('/'));
+                }
+                query = '';
+                external = true;
+            } else {
+                host = l.host;
+                path = l.pathname;
+                external = l.host != document.location.host;
+                query = external ? '' : l.search;
             }
             return {
-                host: l.host,
-                path: l.pathname || '',
-                query: l.search,
-                title: getTrackedTitle(node),
-                searchTerms: LANE.core.getMetaContent('LW.searchTerms'),
-                searchSource: LANE.core.getMetaContent('LW.searchSource'),
-                external: l.host != document.location.host
+                host: host,
+                path: path,
+                query: query,
+                title: getTrackedTitle(),
+                searchTerms: LANE.search.getSearchString(),
+                searchSource: LANE.search.getSearchSource(),
+                external: external
             };
         };
         
     YAHOO.util.Event.addListener(document, 'click', function(e){
+                            YAHOO.util.Event.preventDefault(e);
         if (isTrackableClick(e)) {
             var td = getTrackingData(e), node, parent, href,
                 f = function(href) {
                     window.location = href;
                 };
+                //alert('host: '+td.host+'\npath: '+td.path+'\nquery: '+td.query+'\ntitle: '+td.title+'\nsearchTerms: '+td.searchTerms+'\nsearchSource: '+td.searchSource+'\nexternal: '+td.external);
             for (var i = 0; i < trackers.length; i++) {
                 trackers[i].track(td);
             }
@@ -155,6 +175,9 @@ LANE.track = function(){
                 throw 'tracker does not implement track()';
             }
             trackers.push(tracker);
+        },
+        track: function(td) {
+                alert('host: '+td.host+'\npath: '+td.path+'\nquery: '+td.query+'\ntitle: '+td.title+'\nsearchTerms: '+td.searchTerms+'\nsearchSource: '+td.searchSource+'\nexternal: '+td.external);
         }
     };
 }();
