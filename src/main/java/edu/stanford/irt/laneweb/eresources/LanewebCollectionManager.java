@@ -50,7 +50,10 @@ public class LanewebCollectionManager extends CollectionManagerImpl implements
 
             public void setLoginTimeout(final int seconds) throws SQLException {
                 throw new UnsupportedOperationException("sorry, can't do that");
-
+            }
+            
+            public boolean isWrapperFor(Class<?> wrapped) {
+                throw new UnsupportedOperationException("sorry, can't do that");
             }
         });
         manager.release(selector);
