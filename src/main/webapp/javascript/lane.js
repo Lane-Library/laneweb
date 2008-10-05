@@ -61,12 +61,39 @@ LANE.core = LANE.core || function() {
         });
         //calls 'clicked' function on target and any parent elements
         E.addListener(d, 'click', function(e){
-            var t = e.srcElement || e.target;
+            var t = e.srcElement || e.target, parent, href,
+                f;
             while (t) {
                 if (t.clicked) {
                     t.clicked(e);
                 }
                 t = t.parentNode;
+            }
+            if (LANE.track) {
+                LANE.track.trackEvent(e);
+            //put in a delay for safari to make the tracking request:
+            if (YAHOO.env.ua.webkit && LANE.track.isTrackable(e)) {
+                    t = e.target;
+                    parent = t;
+                    while (parent) {
+                        if (parent.clicked !== undefined) {
+                            return;
+                        }
+                        parent = parent.parentNode;
+                    }
+                    while (t) {
+                        if (t.href && (!t.rel && !t.target)) {
+                            f = function() {
+                                    alert(t.href);
+                                window.location = t.href;
+                            };
+                            YAHOO.util.Event.preventDefault(e);
+                            setTimeout(f, 200);
+                            break;
+                        }
+                        t = t.parentNode;
+                    }
+            }
             }
         });
     });

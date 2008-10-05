@@ -80,7 +80,9 @@ LANE.search.eresources = function () {
                 LANE.search.eresources.setCurrentResult(result);
                 result.show();
             },
-            failure: function() { alert('failure'); },
+            failure: function() {
+                //TODO: use window.location to set page to href of tab
+            },
             argument: {result:this}
     };
    Result.prototype.setContent = function(content) {
