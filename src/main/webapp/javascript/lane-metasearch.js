@@ -34,7 +34,7 @@
 		        YAHOO.util.Connect.asyncRequest('GET',url, {
 		            success: function(o){
 		                var results = YAHOO.lang.JSON.parse(o.responseText),
-		                    i, needMore = false, result, resultSpan;
+		                    i, needMore = false, result, resultSpan, sleepingTime, remainingTime;
 	
 		                for (i = 0; i < metasearchElements.length; i++) {
 	                        result = results.resources[metasearchElements[i].id];
