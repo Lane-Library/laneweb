@@ -84,7 +84,6 @@ LANE.core = LANE.core || function() {
                     while (t) {
                         if (t.href && (!t.rel && !t.target)) {
                             f = function() {
-                                    alert(t.href);
                                 window.location = t.href;
                             };
                             YAHOO.util.Event.preventDefault(e);
