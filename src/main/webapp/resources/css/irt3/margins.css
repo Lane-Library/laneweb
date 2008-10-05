@@ -99,6 +99,9 @@ margin-left:1em;
 .announce {
 margin:1em;
 }
+.citationList li{
+  margin-bottom:1em;
+}
 /*UNUSED============================================
 This causes tabs underneath to separate from boxes in IE6
 #bd h1 {
@@ -150,10 +153,5 @@ margin:0 1em 0 1em;
 
  #popInContent p span div {
 margin-left:-1.5em;
-}
-
-
-.citationList li{
-  margin-bottom:1em;
 }
 */
