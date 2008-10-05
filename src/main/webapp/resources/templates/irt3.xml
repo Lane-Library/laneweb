@@ -40,7 +40,7 @@
                     </div>
                     <div id="hd">
                         <h1>
-                            <a href="http://med.stanford.edu">
+                            <a href="http://med.stanford.edu" title="Stanford School of Medicine">
                                 <span>Stanford School of Medicine</span>
                             </a>
                         </h1>
@@ -137,7 +137,7 @@
                                         >Biomed Seminars</option>
                                     <option
                                         value="https://stanfordwho.stanford.edu/lookup?search={search-terms}"
-                                        >Stanford.Who</option>
+                                        >StanfordWho</option>
                                 </select>
                                 <input name="q" id="searchTerms" type="text"/>
                                 <input id="searchSubmit" type="image" value="Search"
@@ -168,7 +168,7 @@
                             <a href="/contacts/index.html" title="Contact Us..">Contact Us</a>
                         </li>
                         <li>
-                            <a href="/feedback.html?template=none" title="Feedback.." rel="popup standard 625 720">Feedback</a>
+                            <a href="/feedback.html" title="Feedback.." rel="popup standard 800 750">Feedback</a>
                         </li>
                         <li>
                             <a href="http://irt-integration.stanford.edu/display/lane/Start" title="Intranet..">Intranet</a>

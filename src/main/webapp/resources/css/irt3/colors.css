@@ -96,7 +96,7 @@ background-image: url(/././images/templates/irt3/list-background-line.gif);
 background-repeat: no-repeat;
 background-position:0 -.1em;
 }
-#bd ol li{
+#bd ol li {
 background-image:none;
 }
 #bd li.moreItem { 

@@ -78,6 +78,7 @@ height:11px;
 }
 #proxyOn, #proxyOff {
 float:right;
+margin-right:-1em;
 }
 #searchTerms {
 width:25em;
@@ -209,6 +210,9 @@ float:left;
 form#easyFeedback {
 clear:left;
 width:50%;
+}
+.floatRight {
+float:right;
 }
 /* UNUSED============================================
 

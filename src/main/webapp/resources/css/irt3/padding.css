@@ -24,6 +24,7 @@ padding:.5em;
 }
 #bd li {
 padding-left:.5em;
+padding-top:.1em;
 }
 #leftColumn h2, #rightColumn h2, h2.SquareTitle {
 padding: 7px 10px 7px 11px;

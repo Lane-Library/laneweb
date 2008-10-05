@@ -29,9 +29,6 @@ border-bottom:1px solid #c1c1c1;
 div#hd {
 border-bottom: 1px solid #c1c1c1;
 }
-div.eMainBox {
-border: 1px solid #ccc;
-}
 .bgTab, ul#eLibraryTabs li, div#eLibraryTabContainer a {
 border: 1px solid #cccccc;
 }

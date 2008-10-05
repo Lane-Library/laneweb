@@ -68,8 +68,6 @@ font-family: arial,sans-serif;
 font-size: 1.7em;
 line-height: 1em;
 }
-
-
 div#leftColumn div, div#rightColumn div {
 font-size:0.95em;
 }
@@ -78,11 +76,11 @@ font-weight:700;
 font-size:1em;
 }
 #bd h3 {
-font-weight:700;
+font-weight:600;
 font-size:1em;
 }
 #bd h4 {
-font-weight:700;
+font-weight:400;
 font-size:0.9em;
 font-style:italic;
 }
@@ -95,7 +93,7 @@ text-decoration: underline;
 #bd div.wrapperBox h2 {
 font-size:1.2em;
 }
-h2.bgTab, h2.activeTab, h2.eMainBox, ul#eLibraryTabs li, div#otherPortalOptions li, div#eLibraryTabContainer a   {
+h2.bgTab, h2.activeTab, ul#eLibraryTabs li, div#otherPortalOptions li, div#eLibraryTabContainer a   {
 font-size:.9em;
 }
 h2.bgTab a {

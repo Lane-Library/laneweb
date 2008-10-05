@@ -21,16 +21,23 @@ margin:.5em 2em .75em 1.2em;
 #homeCategories h2, #homeCategories ul {
 margin:1em;
 }
-#bd ul {
+#bd ul, #bd ol {
 margin-bottom:1em;
 }
 p {
 margin-bottom:1em;
 }
+h2, h3, h4, h5 {
+margin-top:.5em;
+}
 div.fMainBox, div.aGeneralBox {
 margin-bottom:1em;
 }
+div.aGeneralBox {
+margin-top:1em;
+}
 #rightColumn div.aGeneralBox {
+margin-top:0;
 margin-bottom:0;
 }
 object#featureSlider div.aGeneralBox img {
@@ -46,6 +53,7 @@ div#leftColumn, div#rightColumn {
 margin-bottom:-1px;
 }
 #leftColumn h2, #rightColumn h2 {
+margin-top:0;
 margin-bottom:1em;
 }
 #leftColumn h2.ImageTitle {
@@ -56,6 +64,12 @@ margin:0 1em 0 1em;
 }
 #leftColumn div h3, #rightColumn div h3 {
 margin-top:1em;
+}
+h2 img {
+margin-right:10px;
+}
+h2.ImageTitle img {
+margin:0;
 }
 .eLibraryTab, .metaSearchResults {
 margin-right: -1px;

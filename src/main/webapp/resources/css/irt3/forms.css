@@ -2,7 +2,6 @@ fieldset {
   border: 1px solid #c1c1c1;
   padding: 1em;
   margin-bottom: 1.2em; 
-
 }
 .required-in-form {
   color:#990000;
@@ -22,10 +21,7 @@ fieldset {
   border-top: 1px dotted #c1c1c1;
   border-bottom: 1px dotted #c1c1c1;
   background: #f2f3ed;
-  display: block;
-}
-label {
-	clear:both;
+  /*display: block;*/
 }
 legend {
   padding: 0.3em 1em;
@@ -37,12 +33,11 @@ legend {
 }
  p.in-legend{
   float:left;
-  
 }
 div.fieldRow {
-  white-space:nowrap;
-  display:inline;
-  margin:1em 0pt 0pt 0pt;
+  display:block;
+  margin-top:1em;
+  clear:both;
 }
 div.fieldRow input {
   margin-top:0.3em;
@@ -70,10 +65,23 @@ div.fieldRow input {
 .invalid-label {
   background: #b00202;
   color: #fff;
- }
-
+}
+fieldset p {
+margin-top:3em;
+clear:both;
+}
+fieldset [type="submit"] {
+margin-top:1em;
+}
+form#feedback {
+width:725px;
+background-color:#fff;
+margin:1em;
+padding:1em;
+}
 /* styles for submit button
  style="width:7em; height:24px; border:1px solid #ccc; padding:0;"
  
 .invalid-field { background: #faa; }
- */
+
+*/
