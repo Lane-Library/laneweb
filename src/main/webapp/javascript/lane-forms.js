@@ -22,6 +22,7 @@
 			    	i,z,y,  // iterators
 			    	radios, // radio inputs
 			    	reqOneOfSet = this.validationPatterns["require-one-of"]; // list of fields where any one value found validates requirement ... equiv to OR
+					this.isValid = true; // assume form is valid before all checking
 
 				// loop through select, text, textarea and radio elements and check against validation patterns
 			    for ( i = this.elements.length - 1; i > 0; i--) { // iterate backwards to keep focus at topmost invalid field
@@ -72,7 +73,6 @@
 			        "Please check highlighted fields below and try again.");
 			        ff.focus();
 			        YAHOO.util.Event.preventDefault(e);
-			        return false;
 			    }
 		    },
 		    /* Validate field values as they change
@@ -147,7 +147,6 @@
 	        }
 
 	        if ( needsValidation === true || form.validationPatterns["require-one-of"] !== undefined ){
-		    	form.isValid = true; // assume form is valid before onSubmit and onChange checking
 	        	// override any onsubmit calls found in markup; delay until after form validation has run
 	        	if ( form.onsubmit ){
 	        		form.delayedOnsubmit = form.onsubmit;
