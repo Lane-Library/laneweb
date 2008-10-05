@@ -337,33 +337,33 @@
     dcsTag();
     
     LANE.track.addTracker({
-        track: function(trackable){
-            var args = [], t = trackable;
-            if (t.host !== undefined) {
+        track: function(trackingData){
+            var args = [];
+            if (trackingData.host !== undefined) {
                 args.push('DCS.dcssip');
-                args.push(t.host);
+                args.push(trackingData.host);
             }
-            if (t.path !== undefined) {
+            if (trackingData.path !== undefined) {
                 args.push('DCS.dcsuri');
-                args.push(t.path);
+                args.push(trackingData.path);
             }
-            if (t.query !== undefined) {
-                args.push('DCS.dcsquery');
-                args.push(t.query);
+            if (trackingData.query !== undefined) {
+                args.push('DCS.dcsqry');
+                args.push(trackingData.query);
             }
-            if (t.title !== undefined) {
+            if (trackingData.title !== undefined) {
                 args.push('WT.ti');
-                args.push(t.title);
+                args.push(trackingData.title);
             }
-            if (t.searchTerms !== undefined) {
-                args.push('DCSext.keywords');
-                args.push(t.searchTerms);
+            if (trackingData.searchTerms !== undefined) {
+                args.push('DCSextrackingData.keywords');
+                args.push(trackingData.searchTerms);
             }
-            if (t.searchSource !== undefined) {
-                args.push('DCSext.search_type');
-                args.push(t.searchSource);
+            if (trackingData.searchSource !== undefined) {
+                args.push('DCSextrackingData.search_type');
+                args.push(trackingData.searchSource);
             }
-            if (t.external) {
+            if (trackingData.external) {
                 args.push('DCSext.offsite_link');
                 args.push('1');
             }

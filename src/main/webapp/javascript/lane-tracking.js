@@ -32,9 +32,9 @@ LANE.track = function(){
                     if (!title) {
                         title = 'unknown';
                     }
-                    return title;
+                    return title.replace(/\s+/g,' ').replace(/^\s|\s$/g, '');
                 };
-                if (e.type == 'clicked') {
+                if (e.type == 'click') {
                     while (l.href === undefined) {
                         l = l.parentNode;
                         if (l === null) {
@@ -56,11 +56,7 @@ LANE.track = function(){
                         host = l.host;
                         path = l.pathname;
                         external = l.host != document.location.host;
-                        if (!external && l.search.length > 1) {
-                            query = l.search.substring(1, l.search.length);
-                        } else {
-                            query = '';
-                        }
+                        query = external ? '' : l.search;
                     }
                 } else if (e.type == 'submit') {
                     host = node.action.substring(node.action.indexOf('//') + 2);
