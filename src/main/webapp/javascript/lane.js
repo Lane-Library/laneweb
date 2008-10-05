@@ -59,6 +59,15 @@ LANE.core = LANE.core || function() {
                 t = t.parentNode;
             }
         });
+        E.addListener(d, 'submit',function(e) {
+            var t = e.srcElement || e.target;
+            if (t.submit !== undefined) {
+                t.submit(e);
+            }
+            if (LANE.track) {
+                LANE.track.trackEvent(e);
+            }
+        });
         //calls 'clicked' function on target and any parent elements
         E.addListener(d, 'click', function(e){
             var t = e.srcElement || e.target, parent, href,

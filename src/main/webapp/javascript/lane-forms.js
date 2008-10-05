@@ -152,7 +152,7 @@
 	        		form.delayedOnsubmit = form.onsubmit;
 	        		form.onsubmit = '';
 	        	}
-	        	YAHOO.util.Event.addListener(form,'submit',LANE.forms.validateFormOnSubmit)
+                form.submit = LANE.forms.validateFormOnSubmit;
 	        }
 		}
     });

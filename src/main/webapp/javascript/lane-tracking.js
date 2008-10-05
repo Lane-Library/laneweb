@@ -3,9 +3,12 @@ LANE.track = function(){
         getTrackingData = function(e){
             var node = e.srcElement || e.target,
                 l = node,
-                host, path, query, external,
+                host, path, query, external, title, searchTerms, searchSource,
                 getTrackedTitle = function(){
                     var title = l.title, img, i = 0;
+                    if (l.nodeName == 'FORM') {
+                        title = l.name || l.id;
+                    }
                     if (!title) {
                         title = node.alt;
                     }
@@ -31,44 +34,56 @@ LANE.track = function(){
                     }
                     return title;
                 };
-                while (l.href === undefined) {
-                    l = l.parentNode;
-                    if (l === null) {
-                        throw 'not trackable';
+                if (e.type == 'clicked') {
+                    while (l.href === undefined) {
+                        l = l.parentNode;
+                        if (l === null) {
+                            throw 'not trackable';
+                        }
                     }
-                }
-            if (l.pathname.indexOf('/secure/login.html') > -1 || l.host == 'laneproxy.stanford.edu' ) {
-                host = (l.search.substring(l.search.indexOf('//') + 2));
-                if (host.indexOf('/') > -1) {
-                    path = host.substring(host.indexOf('/'));
-                    if (path.indexOf('?') > -1) {
-                        path = path.substring(0, path.indexOf('?'));
-                    }
-                    host = host.substring(0, host.indexOf('/'));
-                }
-                query = '';
-                external = true;
-            } else {
-                host = l.host;
-                path = l.pathname;
-                external = l.host != document.location.host;
-                if (external) {
-                    query = '';
-                } else {
-                    if (l.search.length > 1) {
-                        query = l.search.substring(1, l.search.length);
-                    } else {
+                    if (l.pathname.indexOf('/secure/login.html') > -1 || l.host == 'laneproxy.stanford.edu') {
+                        host = (l.search.substring(l.search.indexOf('//') + 2));
+                        if (host.indexOf('/') > -1) {
+                            path = host.substring(host.indexOf('/'));
+                            if (path.indexOf('?') > -1) {
+                                path = path.substring(0, path.indexOf('?'));
+                            }
+                            host = host.substring(0, host.indexOf('/'));
+                        }
                         query = '';
+                        external = true;
+                    } else {
+                        host = l.host;
+                        path = l.pathname;
+                        external = l.host != document.location.host;
+                        if (!external && l.search.length > 1) {
+                            query = l.search.substring(1, l.search.length);
+                        } else {
+                            query = '';
+                        }
                     }
+                } else if (e.type == 'submit') {
+                    host = node.action.substring(node.action.indexOf('//') + 2);
+                    if (host.indexOf('/') > -1) {
+                        path = host.substring(host.indexOf('/'));
+                            if (path.indexOf('?') > -1) {
+                                path = path.substring(0, path.indexOf('?'));
+                            }
+                        host = host.substring(0, host.indexOf('/'));
+                    }
+                    query = '';
+                    external = true;
                 }
-            }
+                title = getTrackedTitle();
+                searchTerms = LANE.search.getSearchString();
+                searchSource = LANE.search.getSearchSource();
             return {
                 host: host,
                 path: path,
                 query: query,
-                title: getTrackedTitle(),
-                searchTerms: LANE.search.getSearchString(),
-                searchSource: LANE.search.getSearchSource(),
+                title: title,
+                searchTerms: searchTerms,
+                searchSource: searchSource,
                 external: external
             };
         };
@@ -142,7 +157,13 @@ LANE.track = function(){
                 }
                 return false;
             } else if (e.type == 'submit') {
-                return node.action.indexOf(document.location.host) == -1;
+                if (node.action.indexOf(document.location.host) == -1) {
+                    if (node.isValid !== undefined && !node.isValid) {
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
             }
             return false;
         }

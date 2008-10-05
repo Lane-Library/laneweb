@@ -16,12 +16,11 @@ YAHOO.util.Event.addListener(this, 'load', function() {
                 pageTracker._trackPageview();
                 pageTracker._setVar(LANE.core.getMetaContent('WT.seg_1'));
                 LANE.track.addTracker({
-                    track: function(trackable){
-                        var t = trackable;
-                        if (t.external) {
-                            pageTracker._trackPageview('/OFFSITE/' + t.title);
+                    track: function(trackingData){
+                        if (trackingData.external) {
+                            pageTracker._trackPageview('/OFFSITE/' + trackingData.title);
                         } else {
-                            pageTracker._trackPageview('/ONSITE/' + t.title + '/' + t.path);
+                            pageTracker._trackPageview('/ONSITE/' + trackingData.title + '/' + trackingData.path);
                         }
                     }
                 });

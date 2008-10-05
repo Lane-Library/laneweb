@@ -5,8 +5,6 @@
 package edu.stanford.irt.laneweb;
 
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -26,8 +24,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LanewebHTTPSFilter implements Filter {
 
-    Logger logger = Logger.getLogger(LanewebHTTPSFilter.class.getName());
-
     /**
      * does the redirect if no gohttps header or scheme is not https
      */
@@ -40,18 +36,10 @@ public class LanewebHTTPSFilter implements Filter {
         String url = queryString == null ? req.getRequestURL().toString() : req
                 .getRequestURL().append('?').append(queryString).toString();
         int colonIndex = url.indexOf(':');
-        StringBuffer sb = new StringBuffer("\nurl:").append(url).append(
-                "\ngohttps: ").append(req.getHeader("gohttps")).append(
-                "\nhttps: ").append("https".equals(req.getScheme()));
         if ((req.getHeader("gohttps") != null)
                 || "https".equals(req.getScheme())) {
-            sb.append("\nchain.doFilter()");
-            this.logger.log(Level.INFO, sb.toString());
             chain.doFilter(request, response);
         } else {
-            sb.append("\nsendRedirect(https").append(url.substring(colonIndex))
-                    .append(")");
-            this.logger.log(Level.INFO, sb.toString());
             resp.sendRedirect("https" + url.substring(colonIndex));
         }
     }
