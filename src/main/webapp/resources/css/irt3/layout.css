@@ -214,6 +214,9 @@ width:50%;
 .floatRight {
 float:right;
 }
+td {
+vertical-align: top;
+}
 /* UNUSED============================================
 
 

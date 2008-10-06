@@ -6,23 +6,6 @@
     <map:pipelines>
         <map:pipeline type="caching">
             <map:parameter name="expires" value="access plus 7 days"/>
-            <!-- irt3 stuff, change back before release -->
-            <map:match pattern="images/templates/irt3/*.png" type="wildcard">
-                <map:read type="resource"
-                    src="{naming:java:comp/env/irt3-base}/resources/images/templates/irt3/{1}.png"
-                    mime-type="image/png"/>
-            </map:match>
-            <map:match pattern="images/templates/irt3/*.gif" type="wildcard">
-                <map:read type="resource"
-                    src="{naming:java:comp/env/irt3-base}/resources/images/templates/irt3/{1}.gif"
-                    mime-type="image/gif"/>
-            </map:match>
-            <map:match pattern="images/templates/irt3/*.jpg" type="wildcard">
-                <map:read type="resource"
-                    src="{naming:java:comp/env/irt3-base}/resources/images/templates/irt3/{1}.jpg"
-                    mime-type="image/jpeg"/>
-            </map:match>
-            <!-- irt3 stuff, change back before release -->
             <map:match pattern="images/**.gif" type="wildcard">
                 <map:read type="resource"
                     src="{naming:java:comp/env/live-base}/resources/images/{1}.gif"
@@ -35,13 +18,9 @@
             </map:match>
             <!-- first wildcard will be version for local css and javascript -->
             <map:match pattern="style/*/**.css" type="wildcard">
-                <!-- keep in irt3-base for development -->
-                <map:read type="txt-resource"
-                    src="{naming:java:comp/env/irt3-base}/resources/css/{2}.css"
-                    mime-type="text/css">
-                    <!--<map:read type="txt-resource"
+                    <map:read type="txt-resource"
                         src="context://resources/css/{2}.css"
-                        mime-type="text/css">-->
+                        mime-type="text/css">
                     <map:parameter name="path" value="{request:contextPath}"/>
                 </map:read>
             </map:match>
