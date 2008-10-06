@@ -10,8 +10,8 @@ if (LANE.search.getEncodedSearchString()) {
                 if (LANE.search.querymap.resourceMap) {
                     LANE.search.querymap.getResultCounts = function(){
                         var url = '/././apps/search/proxy/json?q=' + LANE.search.getEncodedSearchString(), i;
-                        for (i = 0; i < this.resourceMap.resources.length; i++) {
-                            if (!this.resourceMap.resources[i].status) {
+                        for (i = 0; i < LANE.search.querymap.resourceMap.resources.length; i++) {
+                            if (!LANE.search.querymap.resourceMap.resources[i].status) {
                                 url += '&r=' + this.resourceMap.resources[i].id;
                             }
                         }
