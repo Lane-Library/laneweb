@@ -505,7 +505,7 @@
     <xsl:template match="h:head">
         <xsl:copy>
             <xsl:apply-templates select="child::node()"/>
-            <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)][not(self::h:style)]"/>
+            <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
             <xsl:if test="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
                 <script type="text/javascript" src="{$context}/javascript/{$version}/swfobject.js"><xsl:text> </xsl:text></script>
                 <script type="text/javascript">
