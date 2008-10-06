@@ -12,7 +12,7 @@ if (LANE.search.getEncodedSearchString()) {
                         var url = '/././apps/search/proxy/json?q=' + LANE.search.getEncodedSearchString(), i;
                         for (i = 0; i < LANE.search.querymap.resourceMap.resources.length; i++) {
                             if (!LANE.search.querymap.resourceMap.resources[i].status) {
-                                url += '&r=' + this.resourceMap.resources[i].id;
+                                url += '&r=' + LANE.search.querymap.resourceMap.resources[i].id;
                             }
                         }
                         url += '&rd=' + Math.random();
