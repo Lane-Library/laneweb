@@ -109,11 +109,6 @@ LANE.core = LANE.core || function() {
         getMetaContent: function(name) {
             return m[name] === undefined ? undefined : m[name];
         },
-        //for backward compatibility, to be removed
-        openNewWindow: function(url,features) {
-            features = (features) ? features : '';
-            window.open(url, 'LaneConnex', features);
-        },
         //TODO: urlencode msg, implement onerror to point to this, etc
         log: function(msg, cat, src) {
             YAHOO.log(msg, cat, src);
@@ -148,9 +143,6 @@ LANE.core = LANE.core || function() {
         }
     };
 }();
-
-//for backward compatibility, to be removed
-var openNewWindow = LANE.core.openNewWindow;
 
 
 
