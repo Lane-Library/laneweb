@@ -23,7 +23,8 @@
     </component-instance>
     <component-instance logger="core.modules.input" name="request-param" class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
     <component-instance logger="core.modules.input" name="request-uri" class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
-    <component-instance logger="core.modules.input" name="request" class="org.apache.cocoon.components.modules.input.RequestModule"/>
+      <component-instance logger="core.modules.input" name="request" class="org.apache.cocoon.components.modules.input.RequestModule"/>
+      <component-instance logger="core.modules.input" name="header-attribute" class="org.apache.cocoon.components.modules.input.HeaderAttributeModule"/>
     <component-instance logger="core.modules.input" name="urlencode" class="org.apache.cocoon.components.modules.input.URLEncodeModule"/>
     <component-instance logger="core.modules.input" name="chain" class="org.apache.cocoon.components.modules.input.ChainMetaModule">
       <input-module name="request-param"/>

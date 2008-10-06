@@ -46,6 +46,8 @@
     <xsl:param name="loadTab"/>
     
     <xsl:param name="version"/>
+    
+    <xsl:param name="referrer"/>
 
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
@@ -350,40 +352,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:copy>
-                    <xsl:apply-templates select="@*"/>
-                    <xsl:if
-                        test="$response-template='irt2' and (@class='proxy' or @proxy) and ancestor::h:div[@id='searchResults']">
-                        <xsl:attribute name="onclick">
-                            <xsl:text>openSearchResult('</xsl:text>
-                            <xsl:choose>
-                                <xsl:when
-                                    test="$proxy-links = 'true' and ($affiliation = 'LPCH' or $affiliation = 'SHC')">
-                                    <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
-                                    <xsl:value-of select="."/>
-                                </xsl:when>
-                                <xsl:when
-                                    test="$proxy-links = 'true' and $ticket != '' and $sunetid != ''">
-                                    <xsl:text>http://laneproxy.stanford.edu/login?user=</xsl:text>
-                                    <xsl:value-of select="$sunetid"/>
-                                    <xsl:text>&amp;ticket=</xsl:text>
-                                    <xsl:value-of select="$ticket"/>
-                                    <xsl:text>&amp;url=</xsl:text>
-                                    <xsl:value-of select="@href"/>
-                                </xsl:when>
-                                <xsl:when test="$proxy-links = 'true'">
-                                    <xsl:value-of
-                                        select="concat('/',$context,'/secure/login.html?url=',@href)"/>
-                                    <!--<xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
-                                    <xsl:value-of select="@href"/>-->
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="@href"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                            <xsl:text>');return false;</xsl:text>
-                        </xsl:attribute>
-                    </xsl:if>
-                    <xsl:apply-templates select="node()"/>
+                    <xsl:apply-templates select="attribute::node()|child::node()"/>
                 </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
@@ -522,6 +491,12 @@
                     <xsl:value-of select="."/>
                 </xsl:otherwise>
             </xsl:choose>
+        </xsl:attribute>
+    </xsl:template>
+    
+    <xsl:template match="@*[.='{referrer}']">
+        <xsl:attribute name="{name()}">
+            <xsl:value-of select="$referrer"/>
         </xsl:attribute>
     </xsl:template>
 
