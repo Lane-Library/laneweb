@@ -37,7 +37,7 @@
            <xsl:apply-templates/>
            <script type="text/javascript">
                <xsl:text>
-            var path ="</xsl:text>
+            var path ='</xsl:text>
                <xsl:choose>
                    <xsl:when test="$proxy-links = 'true' and $sunetid != '' and $ticket != ''">
                        <xsl:value-of select="$proxy-url"/>
@@ -56,7 +56,7 @@
                        <xsl:value-of select="$path"/>
                    </xsl:otherwise>
            </xsl:choose>
-         <xsl:text>";
+         <xsl:text>';
          </xsl:text>
              <xsl:text>var entryUrl ="</xsl:text>
                <xsl:choose>
