@@ -265,17 +265,6 @@
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match pattern="ipFetch.html" type="wildcard">
-                <map:generate type="request"/>
-                <map:transform type="saxon" src="context://xsl/ipFetch.xsl">
-                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                    <map:parameter name="remoteAddr" value="{request:remoteAddr}"/>
-                    <map:parameter name="path" value="{request-param:path}"/>
-                </map:transform>
-                <map:serialize type="xhtml"/>
-            </map:match>
             <!-- used for tracking user affiliation in interfaces external to laneweb (catalog, elane) -->
             <map:match pattern="affiliationFetch" type="wildcard">
                 <map:generate type="request"/>
