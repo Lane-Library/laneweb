@@ -1,0 +1,142 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* styles for the history portal*/
+.histchapterLetter
+{
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+    width: 100%;
+	padding: 0px 0px 0px 0px;
+	border: 0px;
+    clear: both;
+}
+
+.histchapterTopLeftLetter
+{
+	width: 35px;
+	height: 79px;
+	background-image: url(/././graphics/portals/history/arabicLetter/letterTopLeftCorn.jpg);
+	background-repeat: no-repeat;
+	vertical-align: top;
+}
+
+.histchapterTopLetter
+{
+	background-image: url(/././graphics/portals/history/arabicLetter/letterTopEdge.gif);
+	height: 79px;
+	background-repeat: repeat-x;
+	vertical-align: top;
+			
+}
+
+.histchapterTopRightLetter
+{
+	width: 70px;
+	height: 79px;
+	background-image: url(/././graphics/portals/history/arabicLetter/letterTopRighCorn.jpg);
+	background-repeat: no-repeat;
+	vertical-align: top;
+	
+}
+.histchapterLeftLetter
+{
+	width: 35px;
+	background-image: url(/././graphics/portals/history/arabicLetter/letterLeftEdge.jpg);
+	background-repeat: repeat-y;
+	vertical-align: top;
+	margin-top: 0px;
+}
+
+td.histchapterLetterContent
+{
+	background-image: url(/././graphics/portals/history/arabicLetter/letterBackground.jpg);
+}
+
+.histchapterRightLetter
+{
+	width: 70px;
+	background-image: url(/././graphics/portals/history/arabicLetter/letterRightEdge.jpg);
+	background-repeat: repeat-y;
+	vertical-align: top;
+
+}
+
+
+.histchapterBottomLeftLetter
+{
+	width: 35px;
+	height: 32px;
+	background-image: url(/././graphics/portals/history/arabicLetter/letterBottomLeftCorn.jpg);
+	background-repeat: no-repeat;
+	vertical-align: bottom;
+
+}
+
+
+.histchapterBottomLetter
+{
+	background-image: url(/././graphics/portals/history/arabicLetter/letterBottomEdge.jpg);
+	background-repeat: repeat-x;
+	height: 32px;
+}
+
+
+.histchapterBottomRightLetter
+{
+	width: 70px;
+	height: 32px;
+	background-image: url(/././graphics/portals/history/arabicLetter/letterBottomRightCorn.jpg);
+	background-repeat: no-repeat;
+	vertical-align: bottom;
+
+}
+
+/* styles for the history portal plain letter background*/
+.histchapterTopLeftNoFeather
+{
+	width: 35px;
+	height: 35px;
+	background-image: url(/././graphics/portals/history/arabicLetter/letterTopLeftCornNoFeather.jpg);
+	background-repeat: no-repeat;
+	vertical-align: top;
+}
+
+.histchapterTopNoFeather
+{
+	background-image: url(/././graphics/portals/history/arabicLetter/letterTopEdgeNoFeather.gif);
+	height: 35px;
+	background-repeat: repeat-x;
+	vertical-align: top;
+			
+}
+
+.histchapterTopRightNoFeather
+{
+	width: 70px;
+	height: 35px;
+	background-image: url(/././graphics/portals/history/arabicLetter/letterTopRighCornNoFeather.jpg);
+	background-repeat: no-repeat;
+	vertical-align: top;
+	
+}
+.image {
+	margin: 0 0 7px 0;
+}
+
+.imageFloatRt {
+	float: right;
+	margin: 0 0 7px 15px;
+}
+
+.imageFloatLft {
+	float: left;
+	margin: 0 15px 7px 0;
+}
+
+.imageCaption {
+	margin: 7px 7px 7px 7px;
+	font-size: 1.0em;
+	color: #8a604f;
+}
