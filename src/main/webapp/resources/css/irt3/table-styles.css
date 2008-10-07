@@ -1,7 +1,4 @@
-@charset "UTF-8";
-/* CSS Document */
-
-  .striped {
+.striped {
   border-collapse: collapse;
   background: #dbd9d6;
   width:100%;

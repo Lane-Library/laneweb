@@ -171,10 +171,9 @@
     	DCS={},
     	WT={},
     	DCSext={},
-    	gQP=[],
         //gDomain = 'lane-local.stanford.edu',
-    	//gDomain='irt-lane-stage.stanford.edu',
-        gDomain="irt-sdc.stanford.edu",
+    	gDomain='irt-lane-stage.stanford.edu',
+        //gDomain="irt-sdc.stanford.edu",
     	gDcsId="dcssi6l0t1000004z9mg95sop_9v3k";
 
     function dcsVar(){
@@ -229,16 +228,6 @@
         DCS.dcsuri=window.location.pathname;
         if (window.location.search){
             DCS.dcsqry=window.location.search;
-            if (gQP.length>0){
-                for (i=0;i<gQP.length;i++){
-                    pos=DCS.dcsqry.indexOf(gQP[i]);
-                    if (pos!=-1){
-                        front=DCS.dcsqry.substring(0,pos);
-                        end=DCS.dcsqry.substring(pos+gQP[i].length,DCS.dcsqry.length);
-                        DCS.dcsqry=front+end;
-                    }
-                }
-            }
         }
         if ((window.document.referrer!=="")&&(window.document.referrer!="-")){
             if (!(navigator.appName=="Microsoft Internet Explorer"&&parseInt(navigator.appVersion, 10)<4)){
@@ -356,11 +345,11 @@
                 args.push(trackingData.title);
             }
             if (trackingData.searchTerms !== undefined) {
-                args.push('DCSextrackingData.keywords');
+                args.push('DCSext.keywords');
                 args.push(trackingData.searchTerms);
             }
             if (trackingData.searchSource !== undefined) {
-                args.push('DCSextrackingData.search_type');
+                args.push('DCSext.search_type');
                 args.push(trackingData.searchSource);
             }
             if (trackingData.external) {
