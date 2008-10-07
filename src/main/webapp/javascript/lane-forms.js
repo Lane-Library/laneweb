@@ -73,6 +73,7 @@
 			        "Please check highlighted fields below and try again.");
 			        ff.focus();
 			        YAHOO.util.Event.preventDefault(e);
+			        return false;
 			    }
 		    },
 		    /* Validate field values as they change
@@ -152,7 +153,7 @@
 	        		form.delayedOnsubmit = form.onsubmit;
 	        		form.onsubmit = '';
 	        	}
-                form.submit = LANE.forms.validateFormOnSubmit;
+	        	YAHOO.util.Event.addListener(form,'submit',LANE.forms.validateFormOnSubmit)
 	        }
 		}
     });
