@@ -2,6 +2,7 @@ LANE.track = function(){
     var trackers = [],
         getTrackingData = function(e){
             var node = e.srcElement || e.target,
+                //TODO: not sure I need this l variable
                 l = node,
                 host, path, query, external, title, searchTerms, searchSource,
                 getTrackedTitle = function(){
@@ -35,11 +36,17 @@ LANE.track = function(){
                     return title.replace(/\s+/g,' ').replace(/^\s|\s$/g, '');
                 };
                 if (e.type == 'click') {
-                    while (l.href === undefined) {
-                        l = l.parentNode;
-                        if (l === null) {
-                            throw 'not trackable';
+                    if (l.nodeName != 'A') {
+                        children = l.getElementsByTagName('a');
+                        if (children.length > 0) {
+                            l = children[0];
                         }
+                    }
+                    while (l && l.nodeName != 'A') {
+                        l = l.parentNode;
+                            if (l === null) {
+                                throw 'not trackable';
+                            }
                     }
                     if (l.pathname.indexOf('/secure/login.html') > -1 || l.host == 'laneproxy.stanford.edu') {
                         host = (l.search.substring(l.search.indexOf('//') + 2));
@@ -54,8 +61,11 @@ LANE.track = function(){
                         external = true;
                     } else {
                         host = l.host;
+                        if (host.indexOf(':') > -1) {
+                            host = host.substring(0, host.indexOf(':'));
+                        }
                         path = l.pathname;
-                        external = l.host != document.location.host;
+                        external = host != document.location.host;
                         query = external ? '' : l.search;
                     }
                 } else if (e.type == 'submit') {
@@ -69,6 +79,9 @@ LANE.track = function(){
                     }
                     query = '';
                     external = true;
+                }
+                if (path.indexOf('/') !== 0) {
+                    path = '/' + path;
                 }
                 title = getTrackedTitle();
                 searchTerms = LANE.search.getSearchString();
@@ -104,10 +117,13 @@ LANE.track = function(){
                  }
         },
         isTrackable: function(e){
-            var node = e.srcElement || e.target, h, rel;
-            h = document.location.host;
-            //find self or ancestor with href
+            var node = e.srcElement || e.target, dh, nh, rel, children;
+            dh = document.location.host;
+            //find self ancestor that is <a>
             if (e.type == 'click') {
+                if (node.className == 'eLibraryTab') {
+                    return true;
+                }
                 while (node && node.nodeName != 'A') {
                     node = node.parentNode;
                 }
@@ -120,7 +136,11 @@ LANE.track = function(){
                             return false;
                         }
                     }
-                    if (node.host == h) {
+                    nh = node.host;
+                    if (nh.indexOf(':') > -1) {
+                        nh = nh.substring(0, nh.indexOf(':'));
+                    }
+                    if (nh == dh) {
                         //track proxy logins
                         if ((/secure\/login.html/).test(node.pathname)) {
                             return true;
