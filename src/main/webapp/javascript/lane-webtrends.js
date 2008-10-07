@@ -172,8 +172,8 @@
     	WT={},
     	DCSext={},
         //gDomain = 'lane-local.stanford.edu',
-    	gDomain='irt-lane-stage.stanford.edu',
-        //gDomain="irt-sdc.stanford.edu",
+    	//gDomain='irt-lane-stage.stanford.edu',
+        gDomain="irt-sdc.stanford.edu",
     	gDcsId="dcssi6l0t1000004z9mg95sop_9v3k";
 
     function dcsVar(){
