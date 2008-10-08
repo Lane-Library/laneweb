@@ -14,8 +14,7 @@ if (LANE.search.getEncodedSearchString()) {
                     LANE.search.popin.fire(s);
                     a = s.getElementsByTagName('a')[0];
                     a.href = '/search.html?source=' + LANE.search.getSearchSource() + '&q=' + encodeURIComponent(sc.suggestion);
-                    //TODO safari doesn't do textContent?
-                    a.textContent = sc.suggestion;
+                    a.innerHTML = sc.suggestion;
                 }
             //failure:don't do anything
             }
