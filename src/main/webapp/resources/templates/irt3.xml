@@ -183,11 +183,13 @@
             <ul id="gft">
                 <li>&#169;<a href="http://stanfordmedicine.stanford.edu"><span>2008</span>
                         Stanford Medicine</a></li>
+                <!-- 
                 <li>
                     <a href="http://stanfordmedicine.stanford.edu/privacy.html">Privacy Policy</a>
                 </li>
+                -->
                 <li>
-                    <a href="http://www.stanford.edu/home/atoz/terms.html">Terms of Use</a>
+                    <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
                 </li>
             </ul>
         </div>
