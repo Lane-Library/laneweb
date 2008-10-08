@@ -3,18 +3,18 @@
         YAHOO.util.Event.addListener(this, 'load', function(){
             var ie = YAHOO.env.ua.ie, lists, i, d = document, list,
                 //the bottom shaded border z-index has to be reduced . . .
-                sbb = d.getElementById('sb-bot').style,
+                sbb = d.getElementById('sb-bot'),
                 opo = d.getElementById('otherPortalOptions'),
                 ldd = d.getElementById('legend-drop-down');
             if (ie <= 6) {
                 //set hover class for these ids
-                if (opo) {
+                if (opo && sbb) {
                     opo.activate = function(){
-                        sbb.zIndex = -1;
+                        sbb.style.zIndex = -1;
                         this.className = 'hover';
                     };
                     opo.deactivate = function(){
-                        sbb.zIndex = 1;
+                        sbb.style.zIndex = 1;
                         this.className = '';
                     };
                 }
@@ -34,12 +34,12 @@
                 }
             } else if (ie >= 7 && ie < 8) {
                 //ie 7 stil messes up z-index:
-                if (opo) {
+                if (opo && sbb) {
                     opo.activate = function(){
-                        sbb.zIndex = -1;
+                        sbb.style.zIndex = -1;
                     };
                     opo.deactivate = function(){
-                        sbb.zIndex = 1;
+                        sbb.style.zIndex = 1;
                     };
                 }
             }
