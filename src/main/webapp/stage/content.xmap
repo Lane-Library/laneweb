@@ -12,9 +12,9 @@
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="no" src="context://stage/applications.xmap"/>
             </map:match>
-            <map:match pattern="online/(ej|db|cc|eb)browse.html" type="regex">
+            <map:match pattern="online/*.html" type="wildcard">
                 <map:generate type="html"
-                    src="{naming:java:comp/env/stage-base}/content/online/{1}browse.html"/>
+                    src="{naming:java:comp/env/stage-base}/content/online/{1}.html"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>
