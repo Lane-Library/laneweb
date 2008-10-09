@@ -8,7 +8,7 @@
     
     <xsl:template match="q:query-map">
         <xsl:text>{"query":"</xsl:text>
-        <xsl:call-template name="escape-apostrophe">
+        <xsl:call-template name="escape">
             <xsl:with-param name="string" select="q:query"/>
         </xsl:call-template>
         <xsl:text>"</xsl:text>
@@ -25,7 +25,7 @@
     
     <xsl:template match="q:descriptor">
         <xsl:text>"descriptor":"</xsl:text>
-        <xsl:call-template name="escape-apostrophe">
+        <xsl:call-template name="escape">
             <xsl:with-param name="string" select="."/>
         </xsl:call-template>
         <xsl:text>"</xsl:text>
@@ -51,20 +51,10 @@
         </xsl:if>
     </xsl:template>
     
-    <xsl:template name="escape-apostrophe">
+    <xsl:template name="escape">
         <xsl:param name="string"/>
-        <xsl:choose>
-            <xsl:when test="contains($string,&quot;'&quot;)">
-                <xsl:value-of select="substring-before($string,&quot;'&quot;)"/>
-                <xsl:text>\'</xsl:text>
-                <xsl:call-template name="escape-apostrophe">
-                    <xsl:with-param name="string" select="substring-after($string,&quot;'&quot;)"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$string"/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:variable name="escape-apos" select="replace($string,&quot;'&quot;,&quot;\\'&quot;)"/>
+        <xsl:value-of select="replace($escape-apos,'&quot;','\\&quot;')"/>
     </xsl:template>
 
 </xsl:stylesheet>
