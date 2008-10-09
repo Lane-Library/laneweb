@@ -3,39 +3,41 @@
     xmlns:h="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:lw="http://irt.stanford.edu/laneweb" xmlns="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="h xs lw" version="2.0">
-
+    
     <xsl:param name="id"/>
     <xsl:param name="category"/>
     <xsl:param name="mode"/>
-
+    
     <xsl:variable name="category-map" select="/h:html/h:body/h:div[@id='category-map']"/>
-
+    
     <xsl:template match="@*|node()">
         <xsl:copy>
             <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
     </xsl:template>
-
+    
     <xsl:template match="h:head">
         <xsl:copy>
             <xsl:apply-templates select="h:title"/>
-            <meta name="LW.faqCategory">
-                <xsl:attribute name="content">
-                    <xsl:choose>
-                        <xsl:when test="$id">
-                            <xsl:value-of
-                                select="/h:html/h:body/h:blog/h:entry[@id=$id]/h:ul/h:li[@class='primaryCategory']"
-                            />
-                        </xsl:when>
-                        <xsl:when test="$category">
-                            <xsl:value-of select="$category"/>
-                        </xsl:when>
-                    </xsl:choose>
-                </xsl:attribute>
-            </meta>
+            <xsl:if test="string-length(/h:html/h:body/h:blog/h:entry[@id=$id]/h:ul/h:li[@class='primaryCategory']/text()) > 0 or $category">
+                <meta name="LW.faqCategory">
+                    <xsl:attribute name="content">
+                        <xsl:choose>
+                            <xsl:when test="$id">
+                                <xsl:value-of
+                                    select="/h:html/h:body/h:blog/h:entry[@id=$id]/h:ul/h:li[@class='primaryCategory']"
+                                />
+                            </xsl:when>
+                            <xsl:when test="$category">
+                                <xsl:value-of select="$category"/>
+                            </xsl:when>
+                        </xsl:choose>
+                    </xsl:attribute>
+                </meta>
+            </xsl:if>
         </xsl:copy>
     </xsl:template>
-
+    
     <xsl:template match="h:title">
         <xsl:copy>
             <xsl:choose>
@@ -53,7 +55,7 @@
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
-
+    
     <xsl:template match="h:blog">
         <xsl:choose>
             <xsl:when test="not($id)">
@@ -94,9 +96,9 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
+    
     <xsl:template match="h:div[@id='categories' or @id='category-map']"/>
-
+    
     <xsl:template match="h:entry" mode="dl">
         <dt>
             <a id="{@id}" href="/howto/index.html?id={@id}">
@@ -107,7 +109,7 @@
             <xsl:value-of select="h:ul/h:li[@class='excerpt']"/>
         </dd>
     </xsl:template>
-
+    
     <xsl:template match="h:entry" mode="full">
         <xsl:variable name="primary-category" select="h:ul/h:li[@class='primaryCategory']"/>
         <xsl:variable name="root-category"
@@ -160,30 +162,32 @@
                 </xsl:choose>
             </xsl:for-each-group>
             <p style="font-size:xx-small"><xsl:value-of select="h:ul/h:li[@class='author']"/>,
-                    <xsl:value-of select="h:ul/h:li[@class='modified']"/>
+                <xsl:value-of select="h:ul/h:li[@class='modified']"/>
             </p>
         </div>
-        <div id="rightColumn">
-            <div>
-                <h2>FAQs on this topic</h2>
-                <xsl:variable name="cat" select="h:ul/h:li[@class='primaryCategory']"/>
-                <ul>
-                    <xsl:for-each
-                        select="parent::h:blog/h:entry[$cat=h:ul/h:li[@class='primaryCategory'] and not(@id = current()/@id) and contains(h:ul/h:li[@class='keywords'],'_show_me_')]">
-                        <li>
-                            <a href="/howto/index.html?id={@id}">
-                                <xsl:value-of select="h:ul/h:li[@class='title']"/>
-                            </a>
+        <xsl:if test="string-length($more-category) > 0">
+            <div id="rightColumn">
+                <div>
+                    <h2>FAQs on this topic</h2>
+                    <xsl:variable name="cat" select="h:ul/h:li[@class='primaryCategory']"/>
+                    <ul>
+                        <xsl:for-each
+                            select="parent::h:blog/h:entry[$cat=h:ul/h:li[@class='primaryCategory'] and not(@id = current()/@id) and contains(h:ul/h:li[@class='keywords'],'_show_me_')]">
+                            <li>
+                                <a href="/howto/index.html?id={@id}">
+                                    <xsl:value-of select="h:ul/h:li[@class='title']"/>
+                                </a>
+                            </li>
+                        </xsl:for-each>
+                        <li class="moreItem">
+                            <a href="/howto/index.html?category={$more-category}">More</a>
                         </li>
-                    </xsl:for-each>
-                    <li class="moreItem">
-                        <a href="/howto/index.html?category={$more-category}">More</a>
-                    </li>
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </xsl:if>
     </xsl:template>
-
+    
     <xsl:function name="lw:inline" as="xs:boolean">
         <xsl:param name="node" as="node()"/>
         <xsl:sequence
@@ -192,5 +196,5 @@
             |self::h:br|self::h:a]"
         />
     </xsl:function>
-
+    
 </xsl:stylesheet>
