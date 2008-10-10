@@ -31,7 +31,7 @@ LANE.search = LANE.search ||  function() {
             getSearchString: function() {
                 if (searchString === undefined) {
                     if (encodedString === undefined) {
-                        getEncodedSearchString();
+                        this.getEncodedSearchString();
                     }
                     searchString = decodeURIComponent(encodedString);
                 }
