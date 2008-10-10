@@ -48,7 +48,7 @@ LANE.track = function(){
                                 throw 'not trackable';
                             }
                     }
-                    if (l.pathname.indexOf('/secure/login.html') > -1 || l.host == 'laneproxy.stanford.edu') {
+                    if (l.pathname.indexOf('/secure/login.html') > -1 || l.host.indexOf('laneproxy.stanford.edu') > -1) {
                         host = (l.search.substring(l.search.indexOf('//') + 2));
                         if (host.indexOf('/') > -1) {
                             path = host.substring(host.indexOf('/'));
