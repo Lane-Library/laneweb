@@ -91,11 +91,11 @@
             </map:match>
             <map:match pattern="templates/**.xml" type="wildcard">
                 <map:select type="resource-exists">
-                    <map:when test="{naming:java:comp/env/stage-base}/resources/templates/{1}.xml">
-                        <map:generate type="file" src="{naming:java:comp/env/stage-base}/resources/templates/{1}.xml"/>
+                    <map:when test="context://resources/templates/{1}.xml">
+                        <map:generate type="file" src="context://resources/templates/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="{naming:java:comp/env/stage-base}/resources/templates/{defaults:template}.xml"/>
+                        <map:generate type="file" src="context://resources/templates/{defaults:template}.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
