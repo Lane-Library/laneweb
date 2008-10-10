@@ -48,7 +48,7 @@ LANE.track = function(){
                                 throw 'not trackable';
                             }
                     }
-                    if (l.pathname.indexOf('/secure/login.html') > -1 || l.host.indexOf('laneproxy.stanford.edu') > -1) {
+                    if (l.pathname.indexOf('/secure/login.html') > -1 || l.host.indexOf('laneproxy') === 0) {
                         host = (l.search.substring(l.search.indexOf('//') + 2));
                         if (host.indexOf('/') > -1) {
                             path = host.substring(host.indexOf('/'));
@@ -68,17 +68,6 @@ LANE.track = function(){
                         external = host != document.location.host;
                         query = external ? '' : l.search;
                     }
-                } else if (e.type == 'submit') {
-                    host = node.action.substring(node.action.indexOf('//') + 2);
-                    if (host.indexOf('/') > -1) {
-                        path = host.substring(host.indexOf('/'));
-                            if (path.indexOf('?') > -1) {
-                                path = path.substring(0, path.indexOf('?'));
-                            }
-                        host = host.substring(0, host.indexOf('/'));
-                    }
-                    query = '';
-                    external = true;
                 }
                 if (path.indexOf('/') !== 0) {
                     path = '/' + path;
