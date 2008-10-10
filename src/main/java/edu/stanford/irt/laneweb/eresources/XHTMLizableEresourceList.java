@@ -82,50 +82,66 @@ public class XHTMLizableEresourceList implements XMLizable {
         XMLUtils.endElement(handler, XHTML_NS, DT);
         XMLUtils.startElement(handler, XHTML_NS, DD);
         XMLUtils.startElement(handler, XHTML_NS, UL);
-        StringBuffer sb = new StringBuffer();
+        Version impactFactor = null;
         for (Version version : eresource.getVersions()) {
-            Link getPasswordLink = null;
+            if (version.getSubsets().contains("impact factor")) {
+                impactFactor = version;
+                continue;
+            }
+            Link passwordLink = null;
             for (Link link : version.getLinks()) {
                 String label = link.getLabel();
                 if ((null != label) && "get password".equalsIgnoreCase(label)) {
-                    getPasswordLink = link;
+                    passwordLink = link;
                     break;
                 }
             }
             for (Link link : version.getLinks()) {
-                if (!link.equals(getPasswordLink)) {
-                    XMLUtils.startElement(handler, XHTML_NS, LI);
-                    handleAnchor(handler, eresource, version, link,
-                            getPasswordLink != null);
-                    sb.setLength(0);
-                    String instruction = link.getInstruction();
-                    if ((null != instruction) && (instruction.length() > 0)) {
-                        sb.append(' ').append(instruction);
-                    }
-                    String publisher = version.getPublisher();
-                    if ((null != publisher) && (publisher.length() > 0)) {
-                        sb.append(' ').append(publisher);
-                    }
-                    if (null != getPasswordLink) {
-                        sb.append(' ');
-                    }
-                    if (sb.length() > 0) {
-                        XMLUtils.data(handler, sb.toString());
-                    }
-                    if (null != getPasswordLink) {
-                        AttributesImpl attributes = new AttributesImpl();
-                        attributes.addAttribute(EMPTY_NS, "href", "href",
-                                "CDATA", getPasswordLink.getUrl());
-                        XMLUtils.startElement(handler, XHTML_NS, A, attributes);
-                        XMLUtils.data(handler, "get password");
-                        XMLUtils.endElement(handler, XHTML_NS, A);
-                    }
-                    XMLUtils.endElement(handler, LI);
+                if (!link.equals(passwordLink)) {
+                    handleLink(handler, eresource, version, passwordLink, link);
                 }
+            }
+        }
+        if (null != impactFactor) {
+            for (Link link : impactFactor.getLinks()) {
+                handleLink(handler, eresource, impactFactor, null, link);
             }
         }
         XMLUtils.endElement(handler, XHTML_NS, UL);
         XMLUtils.endElement(handler, XHTML_NS, DD);
+    }
+
+    private void handleLink(final ContentHandler handler,
+            final Eresource eresource, final Version version,
+            final Link passwordLink, final Link link) throws SAXException {
+        StringBuffer sb = new StringBuffer();
+        XMLUtils.startElement(handler, XHTML_NS, LI);
+        handleAnchor(handler, eresource, version, link, passwordLink != null);
+        sb.setLength(0);
+        String instruction = link.getInstruction();
+        if ((null != instruction) && (instruction.length() > 0)) {
+            sb.append(' ').append(instruction);
+        }
+        String publisher = version.getPublisher();
+        if ((null != publisher) && (publisher.length() > 0)) {
+            sb.append(' ').append(publisher);
+        }
+        if (null != passwordLink) {
+            sb.append(' ');
+        }
+        if (sb.length() > 0) {
+            XMLUtils.data(handler, sb.toString());
+        }
+        if (null != passwordLink) {
+            AttributesImpl attributes = new AttributesImpl();
+            attributes.addAttribute(EMPTY_NS, "href", "href", "CDATA",
+                    passwordLink.getUrl());
+            XMLUtils.startElement(handler, XHTML_NS, A, attributes);
+            XMLUtils.data(handler, "get password");
+            XMLUtils.endElement(handler, XHTML_NS, A);
+        }
+        XMLUtils.endElement(handler, LI);
+
     }
 
     /**
