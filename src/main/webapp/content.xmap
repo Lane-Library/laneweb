@@ -11,9 +11,9 @@
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
             </map:match>
-            <map:match pattern="online/*.html" type="wildcard">
+            <map:match pattern="online/(.+)browse.html" type="regex">
                 <map:generate type="html"
-                    src="{naming:java:comp/env/live-base}/content/online/{1}.html"/>
+                    src="{naming:java:comp/env/live-base}/content/online/{1}browse.html"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>

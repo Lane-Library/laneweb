@@ -587,7 +587,7 @@
         <dependency>
             <groupId>edu.stanford.irt.search</groupId>
             <artifactId>search-spring</artifactId>
-            <version>1.4.24</version>
+            <version>1.4.25</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
