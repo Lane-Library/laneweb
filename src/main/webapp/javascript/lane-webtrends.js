@@ -340,6 +340,10 @@
                 args.push('DCS.dcsqry');
                 args.push(trackingData.query);
             }
+            if (!(/\.html$/).test(trackingData.path) || trackingData.external) {
+                args.push('DCS.dcsref');
+                args.push(document.location.toString());
+            }
             if (trackingData.title !== undefined) {
                 args.push('WT.ti');
                 args.push(trackingData.title);
