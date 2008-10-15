@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.apache.avalon.framework.activity.Initializable;
-import org.apache.avalon.framework.parameters.ParameterException;
-import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.cocoon.ProcessingException;
@@ -20,18 +18,17 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 
-public class BassettEresourcesGenerator extends ServiceableGenerator implements Parameterizable, Initializable {
+public class BassettEresourcesGenerator extends ServiceableGenerator implements Initializable {
 
     private static final String QUERY = "q";
     private static final String REGION = "r";
     private static final String BASSETT_NUMBER = "bn";
     private static final String REGION_COUNT = "region-count";
 
-    private BassettCollectionManager collectionManager;
+    private BassettCollectionManagerImpl collectionManager;
 
     private String query;
     private String region;
-    private String collection;
     private String bassettNumber;
     private String region_count;
 
@@ -39,7 +36,7 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements 
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
         }
-        this.collectionManager = (BassettCollectionManager) collectionManager;
+        this.collectionManager = (BassettCollectionManagerImpl) collectionManager;
     }
 
     @Override
@@ -105,12 +102,8 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements 
         super.dispose();
     }
 
-    public void parameterize(final Parameters param) throws ParameterException {
-        this.collection = param.getParameter("collection", "laneconnex");
-    }
-
     public void initialize() throws ServiceException {
-        setCollectionManager((CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection));
+        setCollectionManager((CollectionManager) this.manager.lookup(BassettCollectionManager.class.getName()));
     }
 
 }

@@ -48,9 +48,7 @@
         	
         	
         	<map:match pattern="database">
-	            <map:generate type="bassett">
-	                <map:parameter name="collection" value="bassett"/>
-	            </map:generate>
+	            <map:generate type="bassett"/>
 	            <map:serialize type="xml"/>
       		</map:match>    
     	       
