@@ -100,6 +100,7 @@
                                 <include>lane-popup-min.js</include>
                                 <include>lane-ie-min.js</include>
                                 <include>lane-forms-min.js</include>
+                                <include>lane-bassett-min.js</include>
                             </includes>
                         </aggregation>
                     </aggregations>
@@ -259,7 +260,13 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>eresources-impl</artifactId>
-            <version>1.3.2</version>
+            <version>1.3.3-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>catalog</artifactId>
+            <version>3.5.3</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
