@@ -1,5 +1,12 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.eresources.Link;
+import edu.stanford.irt.eresources.Version;
+import edu.stanford.irt.eresources.impl.LinkImpl;
+import edu.stanford.irt.eresources.impl.QueryTranslator;
+import edu.stanford.irt.eresources.impl.VersionImpl;
+
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,15 +30,7 @@ import org.apache.avalon.framework.service.ServiceSelector;
 import org.apache.avalon.framework.service.Serviceable;
 import org.apache.avalon.framework.thread.ThreadSafe;
 
-import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.Version;
-import edu.stanford.irt.eresources.impl.LinkImpl;
-import edu.stanford.irt.eresources.impl.QueryTranslator;
-import edu.stanford.irt.eresources.impl.VersionImpl;
-
-public class BassettCollectionManagerImpl implements CollectionManager, ThreadSafe, Serviceable {
+public class BassettCollectionManagerImpl implements BassettCollectionManager, ThreadSafe, Serviceable {
 
     private DataSource dataSource;
 

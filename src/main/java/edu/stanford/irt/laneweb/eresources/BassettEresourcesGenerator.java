@@ -15,7 +15,6 @@ import org.apache.cocoon.generation.ServiceableGenerator;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 
 public class BassettEresourcesGenerator extends ServiceableGenerator implements Initializable {
@@ -25,18 +24,18 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements 
     private static final String BASSETT_NUMBER = "bn";
     private static final String REGION_COUNT = "region-count";
 
-    private BassettCollectionManagerImpl collectionManager;
+    private BassettCollectionManager collectionManager;
 
     private String query;
     private String region;
     private String bassettNumber;
     private String region_count;
 
-    public void setCollectionManager(final CollectionManager collectionManager) {
+    public void setCollectionManager(final BassettCollectionManager collectionManager) {
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
         }
-        this.collectionManager = (BassettCollectionManagerImpl) collectionManager;
+        this.collectionManager = (BassettCollectionManager) collectionManager;
     }
 
     @Override
@@ -103,7 +102,7 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements 
     }
 
     public void initialize() throws ServiceException {
-        setCollectionManager((CollectionManager) this.manager.lookup(BassettCollectionManager.class.getName()));
+        setCollectionManager((BassettCollectionManager) this.manager.lookup(BassettCollectionManager.class.getName()));
     }
 
 }
