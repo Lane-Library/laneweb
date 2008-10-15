@@ -599,4 +599,9 @@ public class HistoryCollectionManager implements CollectionManager, ThreadSafe,
         };
         manager.release(selector);
     }
+
+	public Collection<Eresource> getById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
