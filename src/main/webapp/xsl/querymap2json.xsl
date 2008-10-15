@@ -53,8 +53,8 @@
     
     <xsl:template name="escape">
         <xsl:param name="string"/>
-        <xsl:variable name="escape-apos" select="replace($string,&quot;'&quot;,&quot;/'&quot;)"/>
-        <xsl:value-of select="replace($escape-apos,'&quot;','/&quot;')"/>
+        <xsl:variable name="escape-apos" select="replace($string,&quot;'&quot;,&quot;\\'&quot;)"/>
+        <xsl:value-of select="replace($escape-apos,'&quot;','\\&quot;')"/>
     </xsl:template>
 
 </xsl:stylesheet>

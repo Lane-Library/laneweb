@@ -92,7 +92,7 @@
                         <div id="breadcrumb">
                             <a id="proxyOff">Guest Access</a>
                             <a id="proxyOn">Stanford Access</a>
-                            <a href="http://medicine.stanford.edu">Stanford Medicine</a> &#xBB;
+                            <a href="http://med.stanford.edu">Stanford Medicine</a> &#xBB;
                                 <a href="http://irt.stanford.edu/" title="IRT...">IRT</a> &#xBB;
                             <?laneweb breadcrumb?></div>
                         <form method="get" action="/search.html" id="searchForm">
