@@ -57,8 +57,7 @@ public class UserInfoHelperTest extends TestCase {
         expect(this.request.getSession(true)).andReturn(this.session);
         expect(this.request.getHeader(LanewebConstants.X_FORWARDED_FOR))
                 .andReturn(null);
-        expect(this.request.getRemoteUser())
-                .andReturn(this.sunetid);
+        expect(this.request.getRemoteUser()).andReturn(this.sunetid);
         expect(this.request.getParameter(LanewebConstants.PROXY_LINKS))
                 .andReturn("true");
         expect(this.request.getParameter(LanewebConstants.PROXY_LINKS))

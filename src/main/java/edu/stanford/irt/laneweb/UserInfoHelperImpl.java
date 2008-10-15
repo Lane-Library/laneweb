@@ -65,8 +65,8 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements
             String remoteUser = request.getRemoteUser();
             if (remoteUser != null) {
                 userInfo.setSunetId(remoteUser);
-                //TODO: find a better way to deal with lack of kerberos
-                //credentials in various servers
+                // TODO: find a better way to deal with lack of kerberos
+                // credentials in various servers
                 try {
                     userInfo.setPerson(this.ldapClient
                             .getLdapPerson(remoteUser));

@@ -1,8 +1,5 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,64 +9,63 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-public class XMLLizableBassettCount  implements XMLizable{
+public class XMLLizableBassettCount implements XMLizable {
 
-	private Map<String, Integer> regionMap;
+    private Map<String, Integer> regionMap;
 
-	
-	private String NAMESPACE = "http://lane.stanford.edu/bassett/ns";
+    private String NAMESPACE = "http://lane.stanford.edu/bassett/ns";
 
-	private static final String  COUNT	  = "bassett_count";
+    private static final String COUNT = "bassett_count";
     private static final String REGION = "region";
     private static final String SUB_REGION = "sub_region";
-    
-    
+
     private static final String NAME = "name";
     private static final String TOTAL = "total";
 
-	public XMLLizableBassettCount(Map<String, Integer> regions) {
-		this.regionMap = regions;
-	}
+    public XMLLizableBassettCount(final Map<String, Integer> regions) {
+        this.regionMap = regions;
+    }
 
-	public void toSAX(final ContentHandler consumer) throws SAXException {
-		consumer.startPrefixMapping("", NAMESPACE);
-		XMLUtils.startElement(consumer, NAMESPACE, COUNT);
-		handleRegionCounter(consumer);
-		XMLUtils.endElement(consumer, NAMESPACE, COUNT);
-		consumer.endPrefixMapping("");
-	}
-	
-	
-	private void handleRegionCounter(final ContentHandler consumer) throws SAXException
-	{
-		AttributesImpl attributes;
-		String currentRegion = null;
-		Set<String> keys = this.regionMap.keySet(); 
-		for (String key : keys) {
-			Integer count = this.regionMap.get(key);
-			if(currentRegion != null  &&  key.indexOf("--") == -1 && !currentRegion.equals(key))
-			{
-				currentRegion = key;
-				XMLUtils.endElement(consumer, NAMESPACE, REGION );
-			}
-    		if(key.indexOf("--") == -1)
-			{
-    			currentRegion = key;
-				attributes = new AttributesImpl();
-			    attributes.addAttribute(NAMESPACE, NAME, NAME, "CDATA", key.toLowerCase());
-			    attributes.addAttribute(NAMESPACE, TOTAL, TOTAL, "CDATA", count.toString());
-			    XMLUtils.startElement(consumer, NAMESPACE, REGION , attributes);
-			}
-			else
-			{
-				attributes = new AttributesImpl();
-	    		attributes.addAttribute(NAMESPACE, NAME, NAME, "CDATA", key.split("--")[1].toLowerCase());
-			    XMLUtils.startElement(consumer, NAMESPACE, SUB_REGION, attributes );
-			    XMLUtils.data(consumer, count.toString());
-	            XMLUtils.endElement(consumer, NAMESPACE, SUB_REGION );
-			}
-		}
-		XMLUtils.endElement(consumer, NAMESPACE, REGION );
-	}
+    public void toSAX(final ContentHandler consumer) throws SAXException {
+        consumer.startPrefixMapping("", this.NAMESPACE);
+        XMLUtils.startElement(consumer, this.NAMESPACE, COUNT);
+        handleRegionCounter(consumer);
+        XMLUtils.endElement(consumer, this.NAMESPACE, COUNT);
+        consumer.endPrefixMapping("");
+    }
+
+    private void handleRegionCounter(final ContentHandler consumer)
+            throws SAXException {
+        AttributesImpl attributes;
+        String currentRegion = null;
+        Set<String> keys = this.regionMap.keySet();
+        for (String key : keys) {
+            Integer count = this.regionMap.get(key);
+            if ((currentRegion != null) && (key.indexOf("--") == -1)
+                    && !currentRegion.equals(key)) {
+                currentRegion = key;
+                XMLUtils.endElement(consumer, this.NAMESPACE, REGION);
+            }
+            if (key.indexOf("--") == -1) {
+                currentRegion = key;
+                attributes = new AttributesImpl();
+                attributes.addAttribute(this.NAMESPACE, NAME, NAME, "CDATA",
+                        key.toLowerCase());
+                attributes.addAttribute(this.NAMESPACE, TOTAL, TOTAL, "CDATA",
+                        count.toString());
+                XMLUtils.startElement(consumer, this.NAMESPACE, REGION,
+                        attributes);
+            } else {
+                attributes = new AttributesImpl();
+                attributes.addAttribute(this.NAMESPACE, NAME, NAME, "CDATA",
+                        key.split("--")[1].toLowerCase());
+                XMLUtils.startElement(consumer, this.NAMESPACE, SUB_REGION,
+                        attributes);
+                XMLUtils.data(consumer, count.toString());
+                XMLUtils.endElement(consumer, this.NAMESPACE, SUB_REGION);
+            }
+        }
+        XMLUtils.endElement(consumer, this.NAMESPACE, REGION);
+    }
 
 }

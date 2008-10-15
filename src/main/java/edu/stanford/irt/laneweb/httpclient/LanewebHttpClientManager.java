@@ -23,12 +23,12 @@ public class LanewebHttpClientManager implements HttpClientManager,
 
     /** the total connection per host. */
     private int defaultMaxConnectionsPerHost;
-    
+
     private int connectionTimeout;
-    
+
     /** the proxy host, if any */
     private String proxyHost;
-    
+
     /** the proxy port if any */
     private int proxyPort;
 
@@ -75,17 +75,19 @@ public class LanewebHttpClientManager implements HttpClientManager,
     public void setConnectionTimeout(final int connectionTimeout) {
         this.connectionTimeout = connectionTimeout;
     }
-    
+
     /**
      * set the proxy host
+     * 
      * @parm proxyHost
      */
     public void setProxyHost(final String proxyHost) {
         this.proxyHost = proxyHost;
     }
-    
+
     /**
      * set the proxy port
+     * 
      * @param proxyPort
      */
     public void setProxyPort(final int proxyPort) {
@@ -103,9 +105,11 @@ public class LanewebHttpClientManager implements HttpClientManager,
                         this.defaultMaxConnectionsPerHost);
         this.httpClient.getHttpConnectionManager().getParams()
                 .setConnectionTimeout(this.connectionTimeout);
-        //set up the proxy if parameters are available
-        if (null != this.proxyHost && this.proxyHost.length() > 0 && this.proxyPort > 0) {
-            this.httpClient.getHostConfiguration().setProxy(this.proxyHost, this.proxyPort);
+        // set up the proxy if parameters are available
+        if ((null != this.proxyHost) && (this.proxyHost.length() > 0)
+                && (this.proxyPort > 0)) {
+            this.httpClient.getHostConfiguration().setProxy(this.proxyHost,
+                    this.proxyPort);
         }
     }
 
@@ -120,8 +124,8 @@ public class LanewebHttpClientManager implements HttpClientManager,
                 "max-total-connections", 30));
         setDefaultMaxConnectionsPerHost(params.getParameterAsInteger(
                 "max-host-connections", 5));
-        setConnectionTimeout(params.getParameterAsInteger(
-                "connection-timeout", 20000));
+        setConnectionTimeout(params.getParameterAsInteger("connection-timeout",
+                20000));
     }
 
     /*
@@ -129,12 +133,12 @@ public class LanewebHttpClientManager implements HttpClientManager,
      * @see org.apache.avalon.framework.activity.Initializable#initialize()
      */
     public void initialize() throws Exception {
-        setHttpClient(new HttpClient(
-                new MultiThreadedHttpConnectionManager()));
+        setHttpClient(new HttpClient(new MultiThreadedHttpConnectionManager()));
         try {
-        Context context = new InitialContext();
-        setProxyHost(context.lookup("java:comp/env/proxy-host").toString());
-        setProxyPort(((Integer)context.lookup("java:comp/env/proxy-port")).intValue());
+            Context context = new InitialContext();
+            setProxyHost(context.lookup("java:comp/env/proxy-host").toString());
+            setProxyPort(((Integer) context.lookup("java:comp/env/proxy-port"))
+                    .intValue());
         } catch (NamingException e) {
         }
         init();

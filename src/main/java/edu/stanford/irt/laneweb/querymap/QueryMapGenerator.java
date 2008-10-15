@@ -27,7 +27,7 @@ public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
     private static final String RESOURCE_MAPS = "resource-maps";
 
     private static final String DESCRIPTOR_WEIGHTS = "descriptor-weights";
-    
+
     private static final String ABSTRACT_COUNT = "abstract-count";
 
     private QueryMapper queryMapper;
@@ -39,7 +39,7 @@ public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
     private ThreadLocal<Map<String, Set<String>>> resourceMaps = new ThreadLocal<Map<String, Set<String>>>();
 
     private ThreadLocal<Map<String, Float>> descriptorWeights = new ThreadLocal<Map<String, Float>>();
-    
+
     private ThreadLocal<Integer> abstractCount = new ThreadLocal<Integer>();
 
     public void setQueryMapper(final QueryMapper queryMapper) {

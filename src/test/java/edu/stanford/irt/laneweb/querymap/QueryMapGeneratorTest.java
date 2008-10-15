@@ -83,9 +83,12 @@ public class QueryMapGeneratorTest {
         } catch (IllegalArgumentException e) {
         }
         expect(this.parameters.getParameter("query", null)).andReturn("dvt");
-        expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
-        expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count",100)).andReturn(null);
+        expect(this.parameters.getParameter("resource-maps", null)).andReturn(
+                null);
+        expect(this.parameters.getParameter("descriptor-weights", null))
+                .andReturn(null);
+        expect(this.parameters.getParameterAsInteger("abstract-count", 100))
+                .andReturn(null);
         replay(this.parameters);
         this.generator.setup(null, null, null, this.parameters);
         verify(this.parameters);
@@ -114,9 +117,12 @@ public class QueryMapGeneratorTest {
         replay(this.queryMapper);
         this.generator.setQueryMapper(this.queryMapper);
         expect(this.parameters.getParameter("query", null)).andReturn("dvt");
-        expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
-        expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count",100)).andReturn(null);
+        expect(this.parameters.getParameter("resource-maps", null)).andReturn(
+                null);
+        expect(this.parameters.getParameter("descriptor-weights", null))
+                .andReturn(null);
+        expect(this.parameters.getParameterAsInteger("abstract-count", 100))
+                .andReturn(null);
         replay(this.parameters);
         this.generator.setConsumer(this.consumer);
         this.generator.setup(null, null, null, this.parameters);
@@ -149,13 +155,15 @@ public class QueryMapGeneratorTest {
                 Descriptor descriptor = new Descriptor(query, query,
                         Collections.<String> singleton(query));
                 return new QueryMap(query, descriptor, new ResourceMap(
-                        descriptor, Collections.<String> singleton(query)), null, null);
+                        descriptor, Collections.<String> singleton(query)),
+                        null, null);
             }
 
-            //TODO: need to more thoroughly test the source reloading:
-            public QueryMap getQueryMap(String query,
-                    Map<String, Set<String>> resourceMaps,
-                    Map<String, Float> descriptorWeights, int abstractCount) {
+            // TODO: need to more thoroughly test the source reloading:
+            public QueryMap getQueryMap(final String query,
+                    final Map<String, Set<String>> resourceMaps,
+                    final Map<String, Float> descriptorWeights,
+                    final int abstractCount) {
                 // TODO Auto-generated method stub
                 return null;
             }
@@ -169,9 +177,12 @@ public class QueryMapGeneratorTest {
                     Parameters params = createMock(Parameters.class);
                     expect(params.getParameter("query", null)).andReturn(
                             response);
-                    expect(params.getParameter("resource-maps", null)).andReturn(null);
-                    expect(params.getParameter("descriptor-weights", null)).andReturn(null);
-                    expect(params.getParameterAsInteger("abstract-count", 100)).andReturn(null);
+                    expect(params.getParameter("resource-maps", null))
+                            .andReturn(null);
+                    expect(params.getParameter("descriptor-weights", null))
+                            .andReturn(null);
+                    expect(params.getParameterAsInteger("abstract-count", 100))
+                            .andReturn(null);
                     replay(params);
                     QueryMapGeneratorTest.this.generator.setup(null, null,
                             null, params);

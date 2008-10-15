@@ -65,8 +65,7 @@ public class LanewebInputModuleTest extends TestCase {
     }
 
     public void testTemplates() throws ConfigurationException {
-        assertTrue("shc".equals(this.module
-                .getTemplateName("shc/foo.html")));
+        assertTrue("shc".equals(this.module.getTemplateName("shc/foo.html")));
     }
 
 }

@@ -1,9 +1,5 @@
 package edu.stanford.irt.laneweb.eresources;
 
-
-import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.eresources.Eresource;
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
@@ -21,27 +17,30 @@ import org.apache.cocoon.generation.ServiceableGenerator;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
-public class BassettEresourcesGenerator  extends ServiceableGenerator implements
-			Parameterizable, Initializable {
+import edu.stanford.irt.eresources.CollectionManager;
+import edu.stanford.irt.eresources.Eresource;
 
-	private static final String QUERY = "q";
-	private static final String REGION = "r";
-	private static final String BASSETT_NUMBER = "bn";
-	private static final String REGION_COUNT = "region-count";
-	
-    private CollectionManager collectionManager;
+public class BassettEresourcesGenerator extends ServiceableGenerator implements
+        Parameterizable, Initializable {
+
+    private static final String QUERY = "q";
+    private static final String REGION = "r";
+    private static final String BASSETT_NUMBER = "bn";
+    private static final String REGION_COUNT = "region-count";
+
+    private BassettCollectionManager collectionManager;
 
     private String query;
     private String region;
     private String collection;
     private String bassettNumber;
     private String region_count;
-    
+
     public void setCollectionManager(final CollectionManager collectionManager) {
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
         }
-        this.collectionManager = collectionManager;
+        this.collectionManager = (BassettCollectionManager) collectionManager;
     }
 
     @Override
@@ -63,38 +62,42 @@ public class BassettEresourcesGenerator  extends ServiceableGenerator implements
     }
 
     public void generate() throws SAXException {
-    	Collection<Eresource> eresources = null;
-    	Map regionCountMap = null;
-    	if(region_count != null) {
-    		if(query == null)
-    			query = "bassett";
-    		regionCountMap = this.collectionManager.searchCount(null,null, query);
-    	}
-		
-    	if(this.bassettNumber != null)
-    		eresources = this.collectionManager.getById(bassettNumber);
-    	else if(this.region != null)
-    	{
-    		if(query != null)
-    			eresources = this.collectionManager.searchSubset(region, query);
-    		else
-    			eresources = this.collectionManager.getSubset(region);
-    	}
-    	else if(query != null)
-    		eresources = this.collectionManager.search(query);
-    	
-    	XMLizable xml = null;	
-    	this.xmlConsumer.startDocument();
-    	
-    	if(regionCountMap != null)
-        	xml = new XMLLizableBassettCount(regionCountMap);
-    	else  	
-    		xml = new XMLLizableBassettEresourceList(eresources);
-        
-    	xml.toSAX(this.xmlConsumer);
+        Collection<Eresource> eresources = null;
+        Map regionCountMap = null;
+        if (this.region_count != null) {
+            if (this.query == null) {
+                this.query = "bassett";
+            }
+            regionCountMap = this.collectionManager.searchCount(null, null,
+                    this.query);
+        }
+
+        if (this.bassettNumber != null) {
+            eresources = this.collectionManager.getById(this.bassettNumber);
+        } else if (this.region != null) {
+            if (this.query != null) {
+                eresources = this.collectionManager.searchSubset(this.region,
+                        this.query);
+            } else {
+                eresources = this.collectionManager.getSubset(this.region);
+            }
+        } else if (this.query != null) {
+            eresources = this.collectionManager.search(this.query);
+        }
+
+        XMLizable xml = null;
+        this.xmlConsumer.startDocument();
+
+        if (regionCountMap != null) {
+            xml = new XMLLizableBassettCount(regionCountMap);
+        } else {
+            xml = new XMLLizableBassettEresourceList(eresources);
+        }
+
+        xml.toSAX(this.xmlConsumer);
         this.xmlConsumer.endDocument();
     }
-    
+
     @Override
     public void recycle() {
         this.query = null;
@@ -106,17 +109,14 @@ public class BassettEresourcesGenerator  extends ServiceableGenerator implements
         super.dispose();
     }
 
-
     public void parameterize(final Parameters param) throws ParameterException {
         this.collection = param.getParameter("collection", "laneconnex");
     }
 
-    
     public void initialize() throws ServiceException {
         setCollectionManager((CollectionManager) this.manager
                 .lookup(CollectionManager.class.getName() + "/"
-	                        + this.collection));
-	}
-    
-}
+                        + this.collection));
+    }
 
+}

@@ -588,20 +588,15 @@ public class HistoryCollectionManager implements CollectionManager, ThreadSafe,
             public void setLoginTimeout(final int seconds) throws SQLException {
                 throw new UnsupportedOperationException("sorry, can't do that");
             }
-            
-            public boolean isWrapperFor(Class<?> wrapped) {
+
+            public boolean isWrapperFor(final Class<?> wrapped) {
                 throw new UnsupportedOperationException("sorry, can't do that");
             }
-            
-            public <T> T unwrap(java.lang.Class<T> wrapped) {
+
+            public <T> T unwrap(final java.lang.Class<T> wrapped) {
                 throw new UnsupportedOperationException("sorry, can't do that");
             }
         };
         manager.release(selector);
     }
-
-	public Collection<Eresource> getById(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

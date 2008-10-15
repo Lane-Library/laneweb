@@ -51,7 +51,7 @@
             </map:generator>
             <map:generator name="bassett"
                 src="edu.stanford.irt.laneweb.eresources.BassettEresourcesGenerator"
-                logger="sitemap.generation.eresource-search" pool-max="32">
+                logger="sitemap.generation.bassett" pool-max="32">
                 <map:parameter name="collection" value="bassett"/>
             </map:generator>
             <map:generator name="status" logger="sitemap.generator.status"

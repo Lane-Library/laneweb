@@ -27,11 +27,11 @@ public class XMLizableQueryMap implements XMLizable {
     private static final String RESOURCE = "resource";
 
     private static final String IDREF = "idref";
-    
+
     private static final String TREEPATHS = "tree-paths";
-    
+
     private static final String TREEPATH = "tree-path";
-    
+
     private static final String FREQUENCIES = "frequencies";
 
     private static final String NAMESPACE = "http://lane.stanford.edu/querymap/ns";
@@ -69,12 +69,12 @@ public class XMLizableQueryMap implements XMLizable {
             }
         }
         List<Descriptor> treePaths = this.queryMap.getTreePath();
-        if (null != treePaths && treePaths.size() > 0) {
+        if ((null != treePaths) && (treePaths.size() > 0)) {
             XMLUtils.startElement(consumer, NAMESPACE, TREEPATHS);
             for (Descriptor path : treePaths) {
-                XMLUtils.startElement(consumer, NAMESPACE,  TREEPATH);
-                XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR,
-                        path.getDescriptorName());
+                XMLUtils.startElement(consumer, NAMESPACE, TREEPATH);
+                XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR, path
+                        .getDescriptorName());
                 for (String tree : path.getTreeNumbers()) {
                     XMLUtils.createElementNS(consumer, NAMESPACE, "tree", tree);
                 }
@@ -83,7 +83,7 @@ public class XMLizableQueryMap implements XMLizable {
             XMLUtils.endElement(consumer, NAMESPACE, TREEPATHS);
         }
         Set<WeightedDescriptor> frequencies = this.queryMap.getFrequencies();
-        if (null != frequencies && frequencies.size() > 0) {
+        if ((null != frequencies) && (frequencies.size() > 0)) {
             XMLUtils.startElement(consumer, NAMESPACE, FREQUENCIES);
             int maxDescriptors = 10;
             for (Descriptor frequency : frequencies) {
