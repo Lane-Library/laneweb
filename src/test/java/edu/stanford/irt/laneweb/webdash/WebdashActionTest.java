@@ -50,14 +50,12 @@ public class WebdashActionTest {
         expect(this.request.getParameter("nonce")).andReturn("nonce");
         expect(this.request.getParameter("system_user_id")).andReturn(null);
         replay(this.request);
-        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(
-                this.userInfo);
+        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(this.userInfo);
         replay(this.userInfoHelper);
         expect(this.userInfo.getPerson()).andReturn(this.person);
         replay(this.userInfo);
         replay(this.person);
-        expect(this.webdashLogin.getWebdashURL(this.person, "nonce", null))
-                .andReturn("register");
+        expect(this.webdashLogin.getWebdashURL(this.person, "nonce", null)).andReturn("register");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserInfoHelper(this.userInfoHelper);
@@ -76,17 +74,14 @@ public class WebdashActionTest {
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
         expect(this.request.getParameter("nonce")).andReturn("nonce");
-        expect(this.request.getParameter("system_user_id"))
-                .andReturn("ceyates");
+        expect(this.request.getParameter("system_user_id")).andReturn("ceyates");
         replay(this.request);
-        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(
-                this.userInfo);
+        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(this.userInfo);
         replay(this.userInfoHelper);
         expect(this.userInfo.getPerson()).andReturn(this.person);
         replay(this.userInfo);
         replay(this.person);
-        expect(this.webdashLogin.getWebdashURL(this.person, "nonce", "ceyates"))
-                .andReturn("login");
+        expect(this.webdashLogin.getWebdashURL(this.person, "nonce", "ceyates")).andReturn("login");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserInfoHelper(this.userInfoHelper);
@@ -105,17 +100,14 @@ public class WebdashActionTest {
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
         expect(this.request.getParameter("nonce")).andReturn(null);
-        expect(this.request.getParameter("system_user_id"))
-                .andReturn("ceyates");
+        expect(this.request.getParameter("system_user_id")).andReturn("ceyates");
         replay(this.request);
-        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(
-                this.userInfo);
+        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(this.userInfo);
         replay(this.userInfoHelper);
         expect(this.userInfo.getPerson()).andReturn(this.person);
         replay(this.userInfo);
         replay(this.person);
-        expect(this.webdashLogin.getWebdashURL(this.person, null, "ceyates"))
-                .andReturn("broken");
+        expect(this.webdashLogin.getWebdashURL(this.person, null, "ceyates")).andReturn("broken");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserInfoHelper(this.userInfoHelper);

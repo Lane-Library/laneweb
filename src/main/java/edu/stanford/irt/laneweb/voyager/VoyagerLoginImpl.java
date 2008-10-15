@@ -17,8 +17,7 @@ import org.apache.avalon.framework.thread.ThreadSafe;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class VoyagerLoginImpl extends AbstractLogEnabled implements
-        VoyagerLogin, Serviceable, ThreadSafe {
+public class VoyagerLoginImpl extends AbstractLogEnabled implements VoyagerLogin, Serviceable, ThreadSafe {
 
     private static final String ERROR_URL = "/voyagerError.html";
 
@@ -30,8 +29,7 @@ public class VoyagerLoginImpl extends AbstractLogEnabled implements
 
     private DataSource dataSource;
 
-    public String getVoyagerURL(final LDAPPerson person, final String pid,
-            final String queryString) {
+    public String getVoyagerURL(final LDAPPerson person, final String pid, final String queryString) {
         if ((null == pid) || !pid.matches("[\\w0-9-_]+")) {
             getLogger().error("bad pid: " + pid);
             return ERROR_URL;
@@ -90,18 +88,15 @@ public class VoyagerLoginImpl extends AbstractLogEnabled implements
     }
 
     public void service(final ServiceManager manager) throws ServiceException {
-        ServiceSelector selector = (ServiceSelector) manager
-                .lookup(DataSourceComponent.ROLE + "Selector");
-        final DataSourceComponent dsc = (DataSourceComponent) selector
-                .select("voyager");
+        ServiceSelector selector = (ServiceSelector) manager.lookup(DataSourceComponent.ROLE + "Selector");
+        final DataSourceComponent dsc = (DataSourceComponent) selector.select("voyager");
         setDataSource(new DataSource() {
 
             public Connection getConnection() throws SQLException {
                 return dsc.getConnection();
             }
 
-            public Connection getConnection(final String username,
-                    final String password) throws SQLException {
+            public Connection getConnection(final String username, final String password) throws SQLException {
                 throw new UnsupportedOperationException();
             }
 

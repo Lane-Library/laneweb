@@ -30,13 +30,11 @@ public class WebdashLoginImplTest {
     public void testRegisterURL() {
         expect(this.person.getUId()).andReturn("ceyates");
         expect(this.person.getDisplayName()).andReturn("Charles E Yates");
-        expect(this.person.getAffilation()).andReturn(
-                new String[] { "stanford:staff" });
+        expect(this.person.getAffilation()).andReturn(new String[] { "stanford:staff" });
         replay(this.person);
         assertEquals(
                 "https://webda.sh/auth/init_post?email=ceyates%40stanford.edu&fullname=Charles%20E%20Yates&nonce=4ca14d60146ddff8ca128a7121854933&subgroup=staff&system_short_name=stanford-sunet&system_user_id=ceyates&token=7fbbcfd9e1af49678dbc3981be0ec418396cfe22",
-                this.webdashLogin.getWebdashURL(this.person,
-                        "4ca14d60146ddff8ca128a7121854933", null));
+                this.webdashLogin.getWebdashURL(this.person, "4ca14d60146ddff8ca128a7121854933", null));
         verify(this.person);
     }
 
@@ -44,23 +42,19 @@ public class WebdashLoginImplTest {
     public void testLoginURL() {
         expect(this.person.getUId()).andReturn("ceyates");
         expect(this.person.getDisplayName()).andReturn("Charles E Yates");
-        expect(this.person.getAffilation()).andReturn(
-                new String[] { "stanford:staff" });
+        expect(this.person.getAffilation()).andReturn(new String[] { "stanford:staff" });
         replay(this.person);
         assertEquals(
                 "https://webda.sh/auth/auth_post?email=ceyates%40stanford.edu&fullname=Charles%20E%20Yates&nonce=4ca14d60146ddff8ca128a7121854933&subgroup=staff&system_short_name=stanford-sunet&system_user_id=ceyates&token=7fbbcfd9e1af49678dbc3981be0ec418396cfe22",
-                this.webdashLogin.getWebdashURL(this.person,
-                        "4ca14d60146ddff8ca128a7121854933", "ceyates"));
+                this.webdashLogin.getWebdashURL(this.person, "4ca14d60146ddff8ca128a7121854933", "ceyates"));
         verify(this.person);
     }
 
     @Test
     public void testErrorURL() {
         replay(this.person);
-        assertEquals("/webdashError.html", this.webdashLogin.getWebdashURL(
-                null, "4ca14d60146ddff8ca128a7121854933", null));
-        assertEquals("/webdashError.html", this.webdashLogin.getWebdashURL(
-                this.person, null, null));
+        assertEquals("/webdashError.html", this.webdashLogin.getWebdashURL(null, "4ca14d60146ddff8ca128a7121854933", null));
+        assertEquals("/webdashError.html", this.webdashLogin.getWebdashURL(this.person, null, null));
         verify(this.person);
     }
 

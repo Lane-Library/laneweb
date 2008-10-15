@@ -30,8 +30,8 @@ public class FormRedirectAction extends AbstractAction implements ThreadSafe {
 
     private static final String REPLACE = "\\{search-terms\\}";
 
-    public Map act(final Redirector redirector, final SourceResolver resolver,
-            final Map objectModel, final String src, final Parameters parameters) {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String src,
+            final Parameters parameters) {
         Map<String, String> result = new HashMap<String, String>();
         Request request = ObjectModelHelper.getRequest(objectModel);
         String q = request.getParameter(Q);
@@ -39,8 +39,7 @@ public class FormRedirectAction extends AbstractAction implements ThreadSafe {
         if ((null == q) || (q.length() == 0)) {
             throw new IllegalArgumentException("null or empty query");
         }
-        if ((null == source) || (source.length() == 0)
-                || (source.indexOf("http") != 0)) {
+        if ((null == source) || (source.length() == 0) || (source.indexOf("http") != 0)) {
             throw new IllegalArgumentException("bad source parameter " + source);
         }
         String url = null;

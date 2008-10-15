@@ -63,21 +63,17 @@ public class SpellCheckGeneratorTest {
             fail();
         } catch (IllegalArgumentException e) {
         }
-        expect(this.serviceManager.lookup(SpellChecker.class.getName()))
-                .andReturn(this.spellChecker);
+        expect(this.serviceManager.lookup(SpellChecker.class.getName())).andReturn(this.spellChecker);
         replay(this.serviceManager);
         this.generator.service(this.serviceManager);
         verify(this.serviceManager);
     }
 
     @Test
-    public void testGenerate() throws ProcessingException, IOException,
-            SAXException, ServiceException {
-        expect(this.serviceManager.lookup(SpellChecker.class.getName()))
-                .andReturn(this.spellChecker);
+    public void testGenerate() throws ProcessingException, IOException, SAXException, ServiceException {
+        expect(this.serviceManager.lookup(SpellChecker.class.getName())).andReturn(this.spellChecker);
         replay(this.serviceManager);
-        expect(this.spellChecker.spellCheck("ibuprophen")).andReturn(
-                new SpellCheckResult("ibuprofen"));
+        expect(this.spellChecker.spellCheck("ibuprophen")).andReturn(new SpellCheckResult("ibuprofen"));
         replay(this.spellChecker);
         expect(this.params.getParameter("query", null)).andReturn("ibuprophen");
         replay(this.params);
@@ -91,8 +87,7 @@ public class SpellCheckGeneratorTest {
     }
 
     @Test
-    public void testSetup() throws ProcessingException, SAXException,
-            IOException {
+    public void testSetup() throws ProcessingException, SAXException, IOException {
         try {
             this.generator.setup(null, null, null, null);
             fail();
@@ -122,8 +117,7 @@ public class SpellCheckGeneratorTest {
 
     @Test
     public void testThreads() throws ServiceException {
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors
-                .newFixedThreadPool(100);
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(100);
         SpellChecker fauxSpellChecker = new SpellChecker() {
 
             public SpellCheckResult spellCheck(final String words) {
@@ -134,28 +128,22 @@ public class SpellCheckGeneratorTest {
         for (int i = 999; i > -1; i--) {
             final String response = Integer.toString(i);
             synchronized (this.spellChecker) {
-                expect(this.spellChecker.spellCheck(response)).andReturn(
-                        new SpellCheckResult(response));
+                expect(this.spellChecker.spellCheck(response)).andReturn(new SpellCheckResult(response));
             }
             executor.execute(new Runnable() {
 
                 public void run() {
                     Parameters params = createMock(Parameters.class);
-                    expect(params.getParameter("query", null)).andReturn(
-                            response);
+                    expect(params.getParameter("query", null)).andReturn(response);
                     replay(params);
-                    SpellCheckGeneratorTest.this.generator.setup(null, null,
-                            null, params);
-                    SpellCheckGeneratorTest.this.generator
-                            .setConsumer(new AbstractXMLConsumer() {
+                    SpellCheckGeneratorTest.this.generator.setup(null, null, null, params);
+                    SpellCheckGeneratorTest.this.generator.setConsumer(new AbstractXMLConsumer() {
 
-                                @Override
-                                public void characters(final char[] chars,
-                                        final int start, final int length) {
-                                    assertEquals(response, new String(chars,
-                                            start, length));
-                                }
-                            });
+                        @Override
+                        public void characters(final char[] chars, final int start, final int length) {
+                            assertEquals(response, new String(chars, start, length));
+                        }
+                    });
                     try {
                         Thread.sleep(Long.parseLong(response));
                         SpellCheckGeneratorTest.this.generator.generate();

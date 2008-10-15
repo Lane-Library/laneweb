@@ -24,18 +24,15 @@ public class TxtResourceReader extends ResourceReader {
     String valueToSubstitute = null;
 
     @Override
-    public void configure(final Configuration configuration)
-            throws ConfigurationException {
+    public void configure(final Configuration configuration) throws ConfigurationException {
         super.configure(configuration);
         this.configuredPath = configuration.getChild("path").getValue();
-        this.valueToSubstitute = configuration.getChild("valueToSubstitute")
-                .getValue();
+        this.valueToSubstitute = configuration.getChild("valueToSubstitute").getValue();
     }
 
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException,
-            SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
         this.path = par.getParameter("path", this.configuredPath);
     }
@@ -52,8 +49,7 @@ public class TxtResourceReader extends ResourceReader {
     }
 
     @Override
-    protected void processStream(final InputStream inputStream)
-            throws IOException, ProcessingException {
+    protected void processStream(final InputStream inputStream) throws IOException, ProcessingException {
         byte[] buffer = new byte[this.bufferSize];
         String ranges = this.request.getHeader("Range");
         long contentLength = this.inputSource.getContentLength();
@@ -62,19 +58,16 @@ public class TxtResourceReader extends ResourceReader {
             throw new ProcessingException("Reader only for Text file");
         }
         if (contentLength != -1) {
-            this.response.setHeader("Content-Length", Long
-                    .toString(contentLength));
+            this.response.setHeader("Content-Length", Long.toString(contentLength));
         }
         StringBuffer page = new StringBuffer();
-        BufferedReader bf = new BufferedReader(new InputStreamReader(
-                inputStream));
+        BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
         String line = null;
         while ((line = bf.readLine()) != null) {
             page.append(line);
             page.append("\n");
         }
-        String pageToSend = page.toString().replaceAll(this.valueToSubstitute,
-                this.path);
+        String pageToSend = page.toString().replaceAll(this.valueToSubstitute, this.path);
         buffer = pageToSend.getBytes();
         this.out.write(buffer, 0, buffer.length);
         this.out.flush();

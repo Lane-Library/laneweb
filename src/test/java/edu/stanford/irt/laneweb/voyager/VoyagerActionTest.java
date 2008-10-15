@@ -50,18 +50,15 @@ public class VoyagerActionTest {
         expect(this.request.getParameter("PID")).andReturn("123");
         expect(this.request.getQueryString()).andReturn("a=b");
         replay(this.request);
-        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(
-                this.userInfo);
+        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(this.userInfo);
         replay(this.userInfoHelper);
         expect(this.userInfo.getPerson()).andReturn(this.person);
         replay(this.userInfo);
-        expect(this.voyagerLogin.getVoyagerURL(this.person, "123", "a=b"))
-                .andReturn("hello");
+        expect(this.voyagerLogin.getVoyagerURL(this.person, "123", "a=b")).andReturn("hello");
         replay(this.voyagerLogin);
         this.action.setVoyagerLogin(this.voyagerLogin);
         this.action.setUserInfoHelper(this.userInfoHelper);
-        assertEquals(this.action.act(null, null, this.objectModel, null, null)
-                .get("voyager-url"), "hello");
+        assertEquals(this.action.act(null, null, this.objectModel, null, null).get("voyager-url"), "hello");
         verify(this.objectModel);
         verify(this.request);
         verify(this.userInfoHelper);

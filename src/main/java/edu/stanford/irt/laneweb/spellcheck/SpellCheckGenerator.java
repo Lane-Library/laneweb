@@ -38,13 +38,11 @@ public class SpellCheckGenerator implements Generator, Serviceable, ThreadSafe {
         this.spellChecker = spellChecker;
     }
 
-    public void service(final ServiceManager serviceManager)
-            throws ServiceException {
+    public void service(final ServiceManager serviceManager) throws ServiceException {
         if (null == serviceManager) {
             throw new IllegalArgumentException("null serviceManager");
         }
-        setSpellChecker((SpellChecker) serviceManager.lookup(SpellChecker.class
-                .getName()));
+        setSpellChecker((SpellChecker) serviceManager.lookup(SpellChecker.class.getName()));
     }
 
     public void generate() throws SAXException {
@@ -61,8 +59,7 @@ public class SpellCheckGenerator implements Generator, Serviceable, ThreadSafe {
 
         try {
 
-            XMLizable result = new XMLizableSpellCheckResult(query,
-                    this.spellChecker.spellCheck(query));
+            XMLizable result = new XMLizableSpellCheckResult(query, this.spellChecker.spellCheck(query));
 
             consumer.startDocument();
             result.toSAX(consumer);
@@ -73,8 +70,7 @@ public class SpellCheckGenerator implements Generator, Serviceable, ThreadSafe {
         }
     }
 
-    public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters params) {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
         if (null == params) {
             throw new IllegalArgumentException("null params");
         }

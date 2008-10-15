@@ -16,21 +16,16 @@ import edu.stanford.irt.querymap.DescriptorWeightMap;
 import edu.stanford.irt.querymap.QueryToDescriptor;
 import edu.stanford.irt.querymap.StreamResourceMapping;
 
-public class QueryMapperImpl extends edu.stanford.irt.querymap.QueryMapper
-        implements edu.stanford.irt.laneweb.querymap.QueryMapper {
+public class QueryMapperImpl extends edu.stanford.irt.querymap.QueryMapper implements edu.stanford.irt.laneweb.querymap.QueryMapper {
 
     public QueryMapperImpl() {
         InputStream resourceMap = null;
         InputStream descriptorWeights = null;
         try {
             Context context = new InitialContext();
-            String liveBase = (String) context
-                    .lookup("java:comp/env/live-base");
-            resourceMap = new URL(liveBase
-                    + "/resources/querymap/resource-maps.xml").openStream();
-            descriptorWeights = new URL(liveBase
-                    + "/resources/querymap/descriptor-weights.xml")
-                    .openStream();
+            String liveBase = (String) context.lookup("java:comp/env/live-base");
+            resourceMap = new URL(liveBase + "/resources/querymap/resource-maps.xml").openStream();
+            descriptorWeights = new URL(liveBase + "/resources/querymap/descriptor-weights.xml").openStream();
         } catch (NamingException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -41,15 +36,12 @@ public class QueryMapperImpl extends edu.stanford.irt.querymap.QueryMapper
         QueryToDescriptor queryToDescriptor = new QueryToDescriptor();
         queryToDescriptor.setDescriptorManager(descriptorManager);
         // TODO: make HttpClient more configurable
-        HttpClient httpClient = new HttpClient(
-                new MultiThreadedHttpConnectionManager());
+        HttpClient httpClient = new HttpClient(new MultiThreadedHttpConnectionManager());
         Context context;
         try {
             context = new InitialContext();
-            String proxyHost = context.lookup("java:comp/env/proxy-host")
-                    .toString();
-            int proxyPort = ((Integer) context
-                    .lookup("java:comp/env/proxy-port")).intValue();
+            String proxyHost = context.lookup("java:comp/env/proxy-host").toString();
+            int proxyPort = ((Integer) context.lookup("java:comp/env/proxy-port")).intValue();
             httpClient.getHostConfiguration().setProxy(proxyHost, proxyPort);
         } catch (NamingException e) {
             // do nothing, naming exception if no proxy-host or proxy-port

@@ -23,8 +23,7 @@ import org.apache.cocoon.environment.Request;
  * @author ceyates To change the template for this generated type comment go to
  *         Window - Preferences - Java - Code Generation - Code and Comments
  */
-public class LanewebInputModule extends AbstractLogEnabled implements
-        InputModule, ThreadSafe, Configurable, Serviceable {
+public class LanewebInputModule extends AbstractLogEnabled implements InputModule, ThreadSafe, Configurable, Serviceable {
 
     private Configuration[] noProxyRegex;
 
@@ -34,8 +33,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
 
     private UserInfoHelper userInfoHelper;
 
-    public Object getAttribute(final String key, final Configuration config,
-            final Map objectModel) throws ConfigurationException {
+    public Object getAttribute(final String key, final Configuration config, final Map objectModel) throws ConfigurationException {
         Object result = null;
         Request request = ObjectModelHelper.getRequest(objectModel);
         UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
@@ -49,8 +47,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
             if (header != null) {
                 ip = header;
             }
-            result = userInfo.getProxyLinks() != null ? userInfo
-                    .getProxyLinks() : new Boolean(proxyLinks(ip));
+            result = userInfo.getProxyLinks() != null ? userInfo.getProxyLinks() : new Boolean(proxyLinks(ip));
         }
         if (LanewebConstants.AFFILIATION.equals(key)) {
             result = userInfo.getAffiliation();
@@ -58,8 +55,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements
         if (LanewebConstants.TEMPLATE.equals(key)) {
             String requestURI = request.getRequestURI();
             int contextPathLength = request.getContextPath().length();
-            result = getTemplateName(requestURI
-                    .substring(contextPathLength + 1));
+            result = getTemplateName(requestURI.substring(contextPathLength + 1));
         }
         if (LanewebConstants.SUNETID.equals(key)) {
             result = userInfo.getSunetId();
@@ -73,14 +69,11 @@ public class LanewebInputModule extends AbstractLogEnabled implements
         return result;
     }
 
-    public Iterator<String> getAttributeNames(final Configuration key,
-            final Map config) {
+    public Iterator<String> getAttributeNames(final Configuration key, final Map config) {
         throw new UnsupportedOperationException();
     }
 
-    public Object[] getAttributeValues(final String key,
-            final Configuration config, final Map objectModel)
-            throws ConfigurationException {
+    public Object[] getAttributeValues(final String key, final Configuration config, final Map objectModel) throws ConfigurationException {
         Object result = getAttribute(key, config, objectModel);
         if (result != null) {
             return new Object[] { result };
@@ -88,15 +81,13 @@ public class LanewebInputModule extends AbstractLogEnabled implements
         return null;
     }
 
-    public void configure(final Configuration config)
-            throws ConfigurationException {
+    public void configure(final Configuration config) throws ConfigurationException {
         this.noProxyRegex = config.getChildren("noproxy-regex");
         this.proxyRegex = config.getChildren("proxy-regex");
         this.templateConfig = config.getChildren("template");
     }
 
-    protected String getTemplateName(final String url)
-            throws ConfigurationException {
+    protected String getTemplateName(final String url) throws ConfigurationException {
         for (Configuration element : this.templateConfig) {
             if (url.matches(element.getAttribute("url"))) {
                 return element.getAttribute("value");
@@ -127,10 +118,8 @@ public class LanewebInputModule extends AbstractLogEnabled implements
         return false;
     }
 
-    public void service(final ServiceManager serviceManager)
-            throws ServiceException {
-        this.userInfoHelper = (UserInfoHelper) serviceManager
-                .lookup(UserInfoHelper.ROLE);
+    public void service(final ServiceManager serviceManager) throws ServiceException {
+        this.userInfoHelper = (UserInfoHelper) serviceManager.lookup(UserInfoHelper.ROLE);
     }
 
 }

@@ -12,8 +12,7 @@ import edu.stanford.irt.directory.LDAPDirectoryFactory;
 import edu.stanford.irt.directory.LDAPDirectoryUtil;
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class LdapClientImpl extends AbstractLogEnabled implements LdapClient,
-        Parameterizable, Initializable, ThreadSafe {
+public class LdapClientImpl extends AbstractLogEnabled implements LdapClient, Parameterizable, Initializable, ThreadSafe {
 
     private LDAPDirectoryFactory directoryFactory = null;
 
@@ -22,13 +21,11 @@ public class LdapClientImpl extends AbstractLogEnabled implements LdapClient,
     public LDAPPerson getLdapPerson(final String sunetId) {
         try {
             if (getLogger().isDebugEnabled()) {
-                LDAPPerson person = this.directoryFactory.getSearcher()
-                        .searchPersonByUID(sunetId);
+                LDAPPerson person = this.directoryFactory.getSearcher().searchPersonByUID(sunetId);
                 getLogger().debug("ldapPerson = " + person.toString());
                 return person;
             } else {
-                return this.directoryFactory.getSearcher().searchPersonByUID(
-                        sunetId);
+                return this.directoryFactory.getSearcher().searchPersonByUID(sunetId);
             }
         } catch (SystemException e) {
             if (getLogger().isErrorEnabled()) {
@@ -43,7 +40,6 @@ public class LdapClientImpl extends AbstractLogEnabled implements LdapClient,
     }
 
     public void initialize() throws Exception {
-        this.directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil
-                .getLDAPDirectoryFactory(this.ldapKeytab).getDirectoryFactory();
+        this.directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil.getLDAPDirectoryFactory(this.ldapKeytab).getDirectoryFactory();
     }
 }

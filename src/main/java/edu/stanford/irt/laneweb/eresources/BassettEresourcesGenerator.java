@@ -20,8 +20,7 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 
-public class BassettEresourcesGenerator extends ServiceableGenerator implements
-        Parameterizable, Initializable {
+public class BassettEresourcesGenerator extends ServiceableGenerator implements Parameterizable, Initializable {
 
     private static final String QUERY = "q";
     private static final String REGION = "r";
@@ -44,9 +43,8 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements
     }
 
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException,
-            SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
         Request request = ObjectModelHelper.getRequest(objectModel);
         String query = request.getParameter(QUERY);
@@ -68,16 +66,14 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements
             if (this.query == null) {
                 this.query = "bassett";
             }
-            regionCountMap = this.collectionManager.searchCount(null, null,
-                    this.query);
+            regionCountMap = this.collectionManager.searchCount(null, null, this.query);
         }
 
         if (this.bassettNumber != null) {
             eresources = this.collectionManager.getById(this.bassettNumber);
         } else if (this.region != null) {
             if (this.query != null) {
-                eresources = this.collectionManager.searchSubset(this.region,
-                        this.query);
+                eresources = this.collectionManager.searchSubset(this.region, this.query);
             } else {
                 eresources = this.collectionManager.getSubset(this.region);
             }
@@ -114,9 +110,7 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements
     }
 
     public void initialize() throws ServiceException {
-        setCollectionManager((CollectionManager) this.manager
-                .lookup(CollectionManager.class.getName() + "/"
-                        + this.collection));
+        setCollectionManager((CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection));
     }
 
 }

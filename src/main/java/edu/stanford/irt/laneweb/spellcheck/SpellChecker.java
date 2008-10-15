@@ -14,8 +14,7 @@ import edu.stanford.irt.spell.GoogleAPISpellChecker;
 /**
  * @author ceyates
  */
-public class SpellChecker extends GoogleAPISpellChecker implements
-        Initializable {
+public class SpellChecker extends GoogleAPISpellChecker implements Initializable {
 
     public void initialize() throws NamingException {
         Context context = new InitialContext();

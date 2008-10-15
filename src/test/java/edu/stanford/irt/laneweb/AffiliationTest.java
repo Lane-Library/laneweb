@@ -18,24 +18,18 @@ public class AffiliationTest extends TestCase {
     }
 
     public void testGetAffiliationForIP() {
-        assertEquals(Affiliation.LPCH, Affiliation
-                .getAffiliationForIP("10.252.31.112"));
+        assertEquals(Affiliation.LPCH, Affiliation.getAffiliationForIP("10.252.31.112"));
     }
 
     public void testStaffIps() throws IOException {
-        LineNumberReader staffIps = new LineNumberReader(new InputStreamReader(
-                getClass().getResourceAsStream("staff-ips.txt")));
+        LineNumberReader staffIps = new LineNumberReader(new InputStreamReader(getClass().getResourceAsStream("staff-ips.txt")));
         String ip = null;
         while ((ip = staffIps.readLine()) != null) {
-            assertEquals(ip, Affiliation.STAFF, Affiliation
-                    .getAffiliationForIP(ip));
+            assertEquals(ip, Affiliation.STAFF, Affiliation.getAffiliationForIP(ip));
         }
-        LineNumberReader notStaffIps = new LineNumberReader(
-                new InputStreamReader(getClass().getResourceAsStream(
-                        "not-staff-ips.txt")));
+        LineNumberReader notStaffIps = new LineNumberReader(new InputStreamReader(getClass().getResourceAsStream("not-staff-ips.txt")));
         while ((ip = notStaffIps.readLine()) != null) {
-            assertNotSame(ip, Affiliation.STAFF, Affiliation
-                    .getAffiliationForIP(ip));
+            assertNotSame(ip, Affiliation.STAFF, Affiliation.getAffiliationForIP(ip));
         }
     }
 

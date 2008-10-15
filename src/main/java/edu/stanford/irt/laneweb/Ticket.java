@@ -26,9 +26,7 @@ public class Ticket {
         Date now = new Date();
         String packet = "$u" + ((int) (now.getTime() / 1000));
         try {
-            this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey
-                    + user + packet)
-                    + packet, "UTF-8");
+            this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + user + packet) + packet, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             // won't happen
             throw new RuntimeException(e);
@@ -38,14 +36,12 @@ public class Ticket {
         }
     }
 
-    private String getKeyedDigest(final String buffer)
-            throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    private String getKeyedDigest(final String buffer) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         StringBuffer sb = new StringBuffer();
         MessageDigest d = MessageDigest.getInstance("MD5");
         byte[] b = d.digest(buffer.getBytes("UTF-8"));
         for (byte element : b) {
-            sb.append(Integer.toHexString((element & 0xf0) >> 4)
-                    + Integer.toHexString(element & 0x0f));
+            sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
         }
         return sb.toString();
     }

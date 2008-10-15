@@ -10,8 +10,7 @@ import edu.stanford.irt.search.MetaSearchManager;
 /**
  * @author ceyates
  */
-public class LanewebMetaSearchManagerSource implements ThreadSafe, Disposable,
-        MetaSearchManagerSource {
+public class LanewebMetaSearchManagerSource implements ThreadSafe, Disposable, MetaSearchManagerSource {
 
     private MetaSearchManager manager;
 
@@ -20,8 +19,7 @@ public class LanewebMetaSearchManagerSource implements ThreadSafe, Disposable,
     private ClassPathXmlApplicationContext context;
 
     public LanewebMetaSearchManagerSource() {
-        this.context = new ClassPathXmlApplicationContext(
-                "spring/metasearch.xml");
+        this.context = new ClassPathXmlApplicationContext("spring/metasearch.xml");
         this.manager = (MetaSearchManager) this.context.getBean("manager");
         this.httpClient = (HttpClient) this.context.getBean("httpClient");
     }

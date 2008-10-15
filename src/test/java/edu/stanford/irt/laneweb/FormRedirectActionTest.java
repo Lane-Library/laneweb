@@ -34,14 +34,10 @@ public class FormRedirectActionTest {
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
         expect(this.request.getParameter("q")).andReturn("cardiology");
-        expect(this.request.getParameter("source"))
-                .andReturn(
-                        "http://lane.stanford.edu/search.html?q={search-terms}&source=all");
+        expect(this.request.getParameter("source")).andReturn("http://lane.stanford.edu/search.html?q={search-terms}&source=all");
         replay(this.request);
         Map result = this.action.act(null, null, this.objectModel, null, null);
-        assertEquals(
-                "http://lane.stanford.edu/search.html?q=cardiology&source=all",
-                result.get("form-redirect-key"));
+        assertEquals("http://lane.stanford.edu/search.html?q=cardiology&source=all", result.get("form-redirect-key"));
         verify(this.objectModel);
         verify(this.request);
     }
@@ -51,14 +47,11 @@ public class FormRedirectActionTest {
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
         expect(this.request.getParameter("q")).andReturn("$2cardiology");
-        expect(this.request.getParameter("source"))
-                .andReturn(
-                        "http://lane.stanford.edu/search.html?q={search-terms}&source=all");
+        expect(this.request.getParameter("source")).andReturn("http://lane.stanford.edu/search.html?q={search-terms}&source=all");
         replay(this.request);
         Map result = this.action.act(null, null, this.objectModel, null, null);
-        assertEquals("http://lane.stanford.edu/search.html?q="
-                + URLEncoder.encode("$2cardiology", "UTF-8") + "&source=all",
-                result.get("form-redirect-key"));
+        assertEquals("http://lane.stanford.edu/search.html?q=" + URLEncoder.encode("$2cardiology", "UTF-8") + "&source=all", result
+                .get("form-redirect-key"));
         verify(this.objectModel);
         verify(this.request);
     }
@@ -68,14 +61,11 @@ public class FormRedirectActionTest {
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
         expect(this.request.getParameter("q")).andReturn("\\cardiology");
-        expect(this.request.getParameter("source"))
-                .andReturn(
-                        "http://lane.stanford.edu/search.html?q={search-terms}&source=all");
+        expect(this.request.getParameter("source")).andReturn("http://lane.stanford.edu/search.html?q={search-terms}&source=all");
         replay(this.request);
         Map result = this.action.act(null, null, this.objectModel, null, null);
-        assertEquals("http://lane.stanford.edu/search.html?q="
-                + URLEncoder.encode("\\cardiology", "UTF-8") + "&source=all",
-                result.get("form-redirect-key"));
+        assertEquals("http://lane.stanford.edu/search.html?q=" + URLEncoder.encode("\\cardiology", "UTF-8") + "&source=all", result
+                .get("form-redirect-key"));
         verify(this.objectModel);
         verify(this.request);
     }

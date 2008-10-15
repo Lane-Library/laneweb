@@ -48,19 +48,12 @@ public class ExpiresPipelineTest {
         this.environment = createMock(Environment.class);
         this.params = createMock(Parameters.class);
         expect(this.params.getParameter("expires", null)).andReturn(null);
-        expect(this.params.getParameterAsInteger("outputBufferSize", -1))
-                .andReturn(new Integer(-1));
-        expect(
-                this.params.getParameter("cache-role",
-                        "org.apache.cocoon.caching.Cache")).andReturn(
-                "org.apache.cocoon.caching.Cache");
-        expect(this.params.getParameterAsLong("cache-expires", 3600))
-                .andReturn(new Long(3600));
+        expect(this.params.getParameterAsInteger("outputBufferSize", -1)).andReturn(new Integer(-1));
+        expect(this.params.getParameter("cache-role", "org.apache.cocoon.caching.Cache")).andReturn("org.apache.cocoon.caching.Cache");
+        expect(this.params.getParameterAsLong("cache-expires", 3600)).andReturn(new Long(3600));
         expect(this.params.getParameter("expires", null)).andReturn(null);
-        expect(this.params.getParameterAsInteger("outputBufferSize", -1))
-                .andReturn(new Integer(-1));
-        expect(this.params.getParameterAsLong("cache-expires", 3600))
-                .andReturn(new Long(3600));
+        expect(this.params.getParameterAsInteger("outputBufferSize", -1)).andReturn(new Integer(-1));
+        expect(this.params.getParameterAsLong("cache-expires", 3600)).andReturn(new Long(3600));
         expect(this.params.getParameter("cache-key", null)).andReturn(null);
         replay(this.params);
         this.reader = createMock(Reader.class);
@@ -76,19 +69,12 @@ public class ExpiresPipelineTest {
         this.cache = createNiceMock(Cache.class);
         replay(this.cache);
         this.manager = createMock(ComponentManager.class);
-        expect(this.manager.lookup("org.apache.cocoon.caching.Cache"))
-                .andReturn(this.cache);
-        expect(this.manager.lookup(Reader.ROLE + "Selector")).andReturn(
-                this.selector);
+        expect(this.manager.lookup("org.apache.cocoon.caching.Cache")).andReturn(this.cache);
+        expect(this.manager.lookup(Reader.ROLE + "Selector")).andReturn(this.selector);
         replay(this.manager);
         this.objectModel = createMock(Map.class);
-        expect(
-                this.objectModel
-                        .get("org.apache.cocoon.components.pipeline.impl.ExpiresCachingProcessingPipeline/Expires"))
-                .andReturn(null);
-        expect(
-                this.objectModel
-                        .get("org.apache.cocoon.components.pipeline.impl.ExpiresCachingProcessingPipeline/CacheKey"))
+        expect(this.objectModel.get("org.apache.cocoon.components.pipeline.impl.ExpiresCachingProcessingPipeline/Expires")).andReturn(null);
+        expect(this.objectModel.get("org.apache.cocoon.components.pipeline.impl.ExpiresCachingProcessingPipeline/CacheKey"))
                 .andReturn(null);
         replay(this.objectModel);
         this.pipeline.compose(this.manager);
@@ -105,8 +91,7 @@ public class ExpiresPipelineTest {
     }
 
     @Test
-    public void testProcessReaderEnvironment() throws ProcessingException,
-            ParameterException, IOException {
+    public void testProcessReaderEnvironment() throws ProcessingException, ParameterException, IOException {
         expect(this.environment.getObjectModel()).andReturn(this.objectModel);
         expect(this.environment.getURIPrefix()).andReturn("foo");
         expect(this.environment.getURI()).andReturn("bar");

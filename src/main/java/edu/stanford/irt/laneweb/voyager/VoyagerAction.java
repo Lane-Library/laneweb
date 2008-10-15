@@ -26,9 +26,8 @@ public class VoyagerAction implements Action, Serviceable, ThreadSafe {
 
     private VoyagerLogin voyagerLogin = null;
 
-    public Map act(final Redirector redirector,
-            final SourceResolver sourceResolver, final Map objectModel,
-            final String string, final Parameters param) throws Exception {
+    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string,
+            final Parameters param) throws Exception {
 
         Request request = ObjectModelHelper.getRequest(objectModel);
         String pid = request.getParameter("PID");

@@ -17,8 +17,7 @@ import org.apache.avalon.framework.thread.ThreadSafe;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class WebdashLoginImpl extends AbstractLogEnabled implements
-        WebdashLogin, ThreadSafe, Initializable {
+public class WebdashLoginImpl extends AbstractLogEnabled implements WebdashLogin, ThreadSafe, Initializable {
 
     private static final String REGISTRATION_URL = "https://webda.sh/auth/init_post?";
 
@@ -48,8 +47,7 @@ public class WebdashLoginImpl extends AbstractLogEnabled implements
         setWebdashKey((String) context.lookup("java:comp/env/webdash-key"));
     }
 
-    public String getWebdashURL(final LDAPPerson person, final String nonce,
-            final String systemUserId) {
+    public String getWebdashURL(final LDAPPerson person, final String nonce, final String systemUserId) {
         if (null == this.mac) {
             throw new IllegalStateException("webdashKey not set");
         }
@@ -66,11 +64,8 @@ public class WebdashLoginImpl extends AbstractLogEnabled implements
         String fullName = encodeParameter(person.getDisplayName());
         String affiliation = getSubGroup(person);
         StringBuffer result = new StringBuffer();
-        result.append("email=").append(mail).append("&fullname=").append(
-                fullName).append("&nonce=").append(nonce).append("&subgroup=")
-                .append(affiliation).append(
-                        "&system_short_name=stanford-sunet&system_user_id=")
-                .append(userId);
+        result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce).append("&subgroup=")
+                .append(affiliation).append("&system_short_name=stanford-sunet&system_user_id=").append(userId);
         String token = getToken(result.toString());
         result.append("&token=").append(token);
         result.insert(0, systemUserId == null ? REGISTRATION_URL : LOGIN_URL);
@@ -82,8 +77,7 @@ public class WebdashLoginImpl extends AbstractLogEnabled implements
             throw new IllegalArgumentException("null parameter");
         }
         try {
-            return URLEncoder.encode(parameter, "UTF-8").replaceAll("\\+",
-                    "%20");
+            return URLEncoder.encode(parameter, "UTF-8").replaceAll("\\+", "%20");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("UTF-8 not supported");
         }
@@ -99,8 +93,7 @@ public class WebdashLoginImpl extends AbstractLogEnabled implements
         byte[] b = this.mac.doFinal(utf8);
         StringBuffer sb = new StringBuffer();
         for (byte element : b) {
-            sb.append(Integer.toHexString((element & 0xf0) >> 4)
-                    + Integer.toHexString(element & 0x0f));
+            sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
         }
         return sb.toString();
 
@@ -111,8 +104,7 @@ public class WebdashLoginImpl extends AbstractLogEnabled implements
         // stanford:staff
         String[] affiliations = person.getAffilation();
         if (0 == affiliations.length) {
-            throw new RuntimeException("no affiliations for "
-                    + person.getDisplayName());
+            throw new RuntimeException("no affiliations for " + person.getDisplayName());
         }
         String[] affiliation = affiliations[0].split(":");
         if (affiliation.length > 1) {

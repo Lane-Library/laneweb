@@ -12,8 +12,7 @@ import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 
-public class LanewebHttpClientManager implements HttpClientManager,
-        Parameterizable, Initializable, ThreadSafe {
+public class LanewebHttpClientManager implements HttpClientManager, Parameterizable, Initializable, ThreadSafe {
 
     /** the HttpClient. */
     private HttpClient httpClient;
@@ -67,8 +66,7 @@ public class LanewebHttpClientManager implements HttpClientManager,
      * @param defaultMaxConnectionsPerHost
      *            duh
      */
-    public void setDefaultMaxConnectionsPerHost(
-            final int defaultMaxConnectionsPerHost) {
+    public void setDefaultMaxConnectionsPerHost(final int defaultMaxConnectionsPerHost) {
         this.defaultMaxConnectionsPerHost = defaultMaxConnectionsPerHost;
     }
 
@@ -98,18 +96,12 @@ public class LanewebHttpClientManager implements HttpClientManager,
      * this initializes the HttpClient with the various parameters.
      */
     public void init() {
-        this.httpClient.getHttpConnectionManager().getParams()
-                .setMaxTotalConnections(this.maxTotalConnections);
-        this.httpClient.getHttpConnectionManager().getParams()
-                .setDefaultMaxConnectionsPerHost(
-                        this.defaultMaxConnectionsPerHost);
-        this.httpClient.getHttpConnectionManager().getParams()
-                .setConnectionTimeout(this.connectionTimeout);
+        this.httpClient.getHttpConnectionManager().getParams().setMaxTotalConnections(this.maxTotalConnections);
+        this.httpClient.getHttpConnectionManager().getParams().setDefaultMaxConnectionsPerHost(this.defaultMaxConnectionsPerHost);
+        this.httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(this.connectionTimeout);
         // set up the proxy if parameters are available
-        if ((null != this.proxyHost) && (this.proxyHost.length() > 0)
-                && (this.proxyPort > 0)) {
-            this.httpClient.getHostConfiguration().setProxy(this.proxyHost,
-                    this.proxyPort);
+        if ((null != this.proxyHost) && (this.proxyHost.length() > 0) && (this.proxyPort > 0)) {
+            this.httpClient.getHostConfiguration().setProxy(this.proxyHost, this.proxyPort);
         }
     }
 
@@ -120,12 +112,9 @@ public class LanewebHttpClientManager implements HttpClientManager,
      * .apache.avalon.framework.parameters.Parameters)
      */
     public void parameterize(final Parameters params) throws ParameterException {
-        setMaxTotalConnections(params.getParameterAsInteger(
-                "max-total-connections", 30));
-        setDefaultMaxConnectionsPerHost(params.getParameterAsInteger(
-                "max-host-connections", 5));
-        setConnectionTimeout(params.getParameterAsInteger("connection-timeout",
-                20000));
+        setMaxTotalConnections(params.getParameterAsInteger("max-total-connections", 30));
+        setDefaultMaxConnectionsPerHost(params.getParameterAsInteger("max-host-connections", 5));
+        setConnectionTimeout(params.getParameterAsInteger("connection-timeout", 20000));
     }
 
     /*
@@ -137,8 +126,7 @@ public class LanewebHttpClientManager implements HttpClientManager,
         try {
             Context context = new InitialContext();
             setProxyHost(context.lookup("java:comp/env/proxy-host").toString());
-            setProxyPort(((Integer) context.lookup("java:comp/env/proxy-port"))
-                    .intValue());
+            setProxyPort(((Integer) context.lookup("java:comp/env/proxy-port")).intValue());
         } catch (NamingException e) {
         }
         init();

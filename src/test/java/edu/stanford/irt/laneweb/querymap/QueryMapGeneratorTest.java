@@ -68,8 +68,7 @@ public class QueryMapGeneratorTest {
             fail();
         } catch (IllegalArgumentException e) {
         }
-        expect(this.serviceManager.lookup(QueryMapper.ROLE)).andReturn(
-                this.queryMapper);
+        expect(this.serviceManager.lookup(QueryMapper.ROLE)).andReturn(this.queryMapper);
         replay(this.serviceManager);
         this.generator.service(this.serviceManager);
         verify(this.serviceManager);
@@ -83,28 +82,23 @@ public class QueryMapGeneratorTest {
         } catch (IllegalArgumentException e) {
         }
         expect(this.parameters.getParameter("query", null)).andReturn("dvt");
-        expect(this.parameters.getParameter("resource-maps", null)).andReturn(
-                null);
-        expect(this.parameters.getParameter("descriptor-weights", null))
-                .andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count", 100))
-                .andReturn(null);
+        expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
+        expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
+        expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
         replay(this.parameters);
         this.generator.setup(null, null, null, this.parameters);
         verify(this.parameters);
     }
 
     @Test
-    public void testGenerate() throws SAXException, MalformedURLException,
-            IOException {
+    public void testGenerate() throws SAXException, MalformedURLException, IOException {
         Descriptor descriptor = createMock(Descriptor.class);
         expect(descriptor.getDescriptorName()).andReturn("yomama");
         expect(descriptor.getDescriptorName()).andReturn("mama");
         replay(descriptor);
         ResourceMap resourceMap = createMock(ResourceMap.class);
         expect(resourceMap.getDescriptor()).andReturn(descriptor);
-        expect(resourceMap.getResources()).andReturn(
-                Collections.<String> singleton("yo"));
+        expect(resourceMap.getResources()).andReturn(Collections.<String> singleton("yo"));
         replay(resourceMap);
         QueryMap queryMap = createMock(QueryMap.class);
         expect(queryMap.getQuery()).andReturn("dvt");
@@ -117,12 +111,9 @@ public class QueryMapGeneratorTest {
         replay(this.queryMapper);
         this.generator.setQueryMapper(this.queryMapper);
         expect(this.parameters.getParameter("query", null)).andReturn("dvt");
-        expect(this.parameters.getParameter("resource-maps", null)).andReturn(
-                null);
-        expect(this.parameters.getParameter("descriptor-weights", null))
-                .andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count", 100))
-                .andReturn(null);
+        expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
+        expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
+        expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
         replay(this.parameters);
         this.generator.setConsumer(this.consumer);
         this.generator.setup(null, null, null, this.parameters);
@@ -147,23 +138,17 @@ public class QueryMapGeneratorTest {
     // TODO I don't know if this actually does what I want it to.
     @Test
     public void testThreads() throws ServiceException {
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors
-                .newFixedThreadPool(100);
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(100);
         QueryMapper fauxQueryMapper = new QueryMapper() {
 
             public QueryMap getQueryMap(final String query) {
-                Descriptor descriptor = new Descriptor(query, query,
-                        Collections.<String> singleton(query));
-                return new QueryMap(query, descriptor, new ResourceMap(
-                        descriptor, Collections.<String> singleton(query)),
-                        null, null);
+                Descriptor descriptor = new Descriptor(query, query, Collections.<String> singleton(query));
+                return new QueryMap(query, descriptor, new ResourceMap(descriptor, Collections.<String> singleton(query)), null, null);
             }
 
             // TODO: need to more thoroughly test the source reloading:
-            public QueryMap getQueryMap(final String query,
-                    final Map<String, Set<String>> resourceMaps,
-                    final Map<String, Float> descriptorWeights,
-                    final int abstractCount) {
+            public QueryMap getQueryMap(final String query, final Map<String, Set<String>> resourceMaps,
+                    final Map<String, Float> descriptorWeights, final int abstractCount) {
                 // TODO Auto-generated method stub
                 return null;
             }
@@ -175,38 +160,27 @@ public class QueryMapGeneratorTest {
 
                 public void run() {
                     Parameters params = createMock(Parameters.class);
-                    expect(params.getParameter("query", null)).andReturn(
-                            response);
-                    expect(params.getParameter("resource-maps", null))
-                            .andReturn(null);
-                    expect(params.getParameter("descriptor-weights", null))
-                            .andReturn(null);
-                    expect(params.getParameterAsInteger("abstract-count", 100))
-                            .andReturn(null);
+                    expect(params.getParameter("query", null)).andReturn(response);
+                    expect(params.getParameter("resource-maps", null)).andReturn(null);
+                    expect(params.getParameter("descriptor-weights", null)).andReturn(null);
+                    expect(params.getParameterAsInteger("abstract-count", 100)).andReturn(null);
                     replay(params);
-                    QueryMapGeneratorTest.this.generator.setup(null, null,
-                            null, params);
-                    QueryMapGeneratorTest.this.generator
-                            .setConsumer(new AbstractXMLConsumer() {
+                    QueryMapGeneratorTest.this.generator.setup(null, null, null, params);
+                    QueryMapGeneratorTest.this.generator.setConsumer(new AbstractXMLConsumer() {
 
-                                @Override
-                                public void characters(final char[] chars,
-                                        final int start, final int length) {
-                                    assertEquals(response, new String(chars,
-                                            start, length));
+                        @Override
+                        public void characters(final char[] chars, final int start, final int length) {
+                            assertEquals(response, new String(chars, start, length));
 
-                                }
+                        }
 
-                                @Override
-                                public void startElement(final String ns,
-                                        final String localName,
-                                        final String aName,
-                                        final Attributes atts) {
-                                    if (atts.getLength() > 0) {
-                                        assertEquals(response, atts.getValue(0));
-                                    }
-                                }
-                            });
+                        @Override
+                        public void startElement(final String ns, final String localName, final String aName, final Attributes atts) {
+                            if (atts.getLength() > 0) {
+                                assertEquals(response, atts.getValue(0));
+                            }
+                        }
+                    });
                     try {
                         Thread.sleep(Long.parseLong(response));
                         QueryMapGeneratorTest.this.generator.generate();

@@ -22,8 +22,7 @@ import org.xml.sax.SAXException;
  * generates SAX Events. It uses the NekoHTML library to do this. stolen from
  * cocoon-2.1.10 source
  */
-public class HTMLGenerator extends ServiceableGenerator implements
-        CacheableProcessingComponent {
+public class HTMLGenerator extends ServiceableGenerator implements CacheableProcessingComponent {
 
     /** The source, if coming from a file */
     private Source inputSource;
@@ -35,11 +34,8 @@ public class HTMLGenerator extends ServiceableGenerator implements
 
     public HTMLGenerator() {
         HTMLConfiguration conf = new HTMLConfiguration();
-        conf.setProperty(
-                "http://cyberneko.org/html/properties/default-encoding",
-                "UTF-8");
-        conf.setProperty("http://cyberneko.org/html/properties/names/elems",
-                "lower");
+        conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
+        conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
         this.parser = new AbstractSAXParser(conf) {
         };
     }
@@ -70,9 +66,8 @@ public class HTMLGenerator extends ServiceableGenerator implements
      * @throws ProcessingException
      */
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException,
-            SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
 
         if (super.source != null) {
@@ -118,8 +113,7 @@ public class HTMLGenerator extends ServiceableGenerator implements
      * @throws SAXException
      * @throws SAXException
      */
-    public void generate() throws SourceNotFoundException, IOException,
-            SAXException {
+    public void generate() throws SourceNotFoundException, IOException, SAXException {
 
         if (this.inputSource != null) {
             this.requestStream = this.inputSource.getInputStream();

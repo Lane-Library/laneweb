@@ -13,8 +13,7 @@ import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
 
-public class UserInfoHelperImpl extends AbstractLogEnabled implements
-        UserInfoHelper, ThreadSafe, Initializable, Serviceable {
+public class UserInfoHelperImpl extends AbstractLogEnabled implements UserInfoHelper, ThreadSafe, Initializable, Serviceable {
 
     private LdapClient ldapClient;
 
@@ -22,12 +21,10 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements
 
     public UserInfo getUserInfo(final Request request) {
 
-        UserInfo userInfo = (UserInfo) request
-                .getAttribute(LanewebConstants.USER_INFO);
+        UserInfo userInfo = (UserInfo) request.getAttribute(LanewebConstants.USER_INFO);
         if (userInfo == null) {
             Session session = request.getSession(true);
-            userInfo = (UserInfo) session
-                    .getAttribute(LanewebConstants.USER_INFO);
+            userInfo = (UserInfo) session.getAttribute(LanewebConstants.USER_INFO);
             if (userInfo == null) {
                 userInfo = new UserInfo();
                 session.setAttribute(LanewebConstants.USER_INFO, userInfo);
@@ -47,18 +44,15 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements
             String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
             if (header != null) {
                 if (header.indexOf(",") > 0) {
-                    ip = header.substring(header.lastIndexOf(",") + 1,
-                            header.length()).trim();
+                    ip = header.substring(header.lastIndexOf(",") + 1, header.length()).trim();
                 } else {
                     ip = header;
                 }
             }
             Affiliation affiliation = Affiliation.getAffiliationForIP(ip);
             userInfo.setAffiliation(affiliation);
-            if (Affiliation.ERR.equals(affiliation)
-                    && getLogger().isErrorEnabled()) {
-                getLogger().error(
-                        "error parsing ip for Affiliation: ".concat(ip));
+            if (Affiliation.ERR.equals(affiliation) && getLogger().isErrorEnabled()) {
+                getLogger().error("error parsing ip for Affiliation: ".concat(ip));
             }
         }
         if (userInfo.getSunetId() == null) {
@@ -68,8 +62,7 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements
                 // TODO: find a better way to deal with lack of kerberos
                 // credentials in various servers
                 try {
-                    userInfo.setPerson(this.ldapClient
-                            .getLdapPerson(remoteUser));
+                    userInfo.setPerson(this.ldapClient.getLdapPerson(remoteUser));
                 } catch (Exception e) {
                     if (getLogger().isErrorEnabled()) {
                         getLogger().error(e.getMessage(), e);
@@ -78,12 +71,10 @@ public class UserInfoHelperImpl extends AbstractLogEnabled implements
             }
         }
         if ((null != userInfo.getSunetId()) && (null != this.ezproxyKey)) {
-            userInfo.setTicket(new Ticket(userInfo.getSunetId(),
-                    this.ezproxyKey));
+            userInfo.setTicket(new Ticket(userInfo.getSunetId(), this.ezproxyKey));
         }
         if (null != request.getParameter(LanewebConstants.PROXY_LINKS)) {
-            userInfo.setProxyLinks(new Boolean(request
-                    .getParameter(LanewebConstants.PROXY_LINKS)));
+            userInfo.setProxyLinks(new Boolean(request.getParameter(LanewebConstants.PROXY_LINKS)));
         }
     }
 

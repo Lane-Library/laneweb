@@ -70,8 +70,7 @@ public class XHTMLizableEresourceList implements XMLizable {
 
     }
 
-    private void handleEresource(final ContentHandler handler,
-            final Eresource eresource) throws SAXException {
+    private void handleEresource(final ContentHandler handler, final Eresource eresource) throws SAXException {
         String title = eresource.getTitle();
         // TODO shouldn't have to check for this here
         if (null == title) {
@@ -111,9 +110,8 @@ public class XHTMLizableEresourceList implements XMLizable {
         XMLUtils.endElement(handler, XHTML_NS, DD);
     }
 
-    private void handleLink(final ContentHandler handler,
-            final Eresource eresource, final Version version,
-            final Link passwordLink, final Link link) throws SAXException {
+    private void handleLink(final ContentHandler handler, final Eresource eresource, final Version version, final Link passwordLink,
+            final Link link) throws SAXException {
         StringBuffer sb = new StringBuffer();
         XMLUtils.startElement(handler, XHTML_NS, LI);
         handleAnchor(handler, eresource, version, link, passwordLink != null);
@@ -134,8 +132,7 @@ public class XHTMLizableEresourceList implements XMLizable {
         }
         if (null != passwordLink) {
             AttributesImpl attributes = new AttributesImpl();
-            attributes.addAttribute(EMPTY_NS, "href", "href", "CDATA",
-                    passwordLink.getUrl());
+            attributes.addAttribute(EMPTY_NS, "href", "href", "CDATA", passwordLink.getUrl());
             XMLUtils.startElement(handler, XHTML_NS, A, attributes);
             XMLUtils.data(handler, "get password");
             XMLUtils.endElement(handler, XHTML_NS, A);
@@ -151,13 +148,11 @@ public class XHTMLizableEresourceList implements XMLizable {
      * @param link
      * @throws SAXException
      */
-    private void handleAnchor(final ContentHandler handler,
-            final Eresource eresource, final Version version, final Link link,
+    private void handleAnchor(final ContentHandler handler, final Eresource eresource, final Version version, final Link link,
             final boolean hasGetPassword) throws SAXException {
         AttributesImpl attributes = new AttributesImpl();
         String proxyValue = version.isProxy() ? "proxy" : "noproxy";
-        attributes
-                .addAttribute(EMPTY_NS, "class", "class", "CDATA", proxyValue);
+        attributes.addAttribute(EMPTY_NS, "class", "class", "CDATA", proxyValue);
         String url = null != link.getUrl() ? link.getUrl() : "";
         attributes.addAttribute(EMPTY_NS, "href", "href", "CDATA", url);
         StringBuffer sb = new StringBuffer();
@@ -165,23 +160,18 @@ public class XHTMLizableEresourceList implements XMLizable {
         if (null != version.getPublisher()) {
             sb.append(':').append(version.getPublisher());
         }
-        if ((hasGetPassword && (version.getLinks().size() > 2))
-                || (!hasGetPassword && (version.getLinks().size() > 1))) {
+        if ((hasGetPassword && (version.getLinks().size() > 2)) || (!hasGetPassword && (version.getLinks().size() > 1))) {
             sb.append(':').append(link.getLabel());
         }
-        attributes.addAttribute(EMPTY_NS, "title", "title", "CDATA", sb
-                .toString());
+        attributes.addAttribute(EMPTY_NS, "title", "title", "CDATA", sb.toString());
         XMLUtils.startElement(handler, XHTML_NS, A, attributes);
-        XMLUtils.data(handler, getLinkText(eresource, version, link,
-                hasGetPassword));
+        XMLUtils.data(handler, getLinkText(eresource, version, link, hasGetPassword));
         XMLUtils.endElement(handler, XHTML_NS, A);
     }
 
-    private String getLinkText(final Eresource eresource,
-            final Version version, final Link link, final boolean hasGetPassword) {
+    private String getLinkText(final Eresource eresource, final Version version, final Link link, final boolean hasGetPassword) {
         StringBuffer sb = new StringBuffer();
-        if ((hasGetPassword && (version.getLinks().size() == 2))
-                || (version.getLinks().size() == 1)) {
+        if ((hasGetPassword && (version.getLinks().size() == 2)) || (version.getLinks().size() == 1)) {
             String holdings = version.getSummaryHoldings();
             if ((null != holdings) && (holdings.length() > 0)) {
                 sb.append(holdings);

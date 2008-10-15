@@ -37,18 +37,15 @@ public class DescribeGenerator extends ServiceableGenerator {
     @Override
     public void service(final ServiceManager manager) throws ServiceException {
         super.service(manager);
-        MetaSearchManagerSource source = (MetaSearchManagerSource) this.manager
-                .lookup(MetaSearchManagerSource.class.getName());
+        MetaSearchManagerSource source = (MetaSearchManagerSource) this.manager.lookup(MetaSearchManagerSource.class.getName());
         this.metaSearchManager = source.getMetaSearchManager();
     }
 
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException,
-            SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
-        Request request = (Request) objectModel
-                .get(ObjectModelHelper.REQUEST_OBJECT);
+        Request request = (Request) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
         this.q = request.getParameter("q");
         this.e = request.getParameterValues("e");
         this.admin = request.getParameter("admin");

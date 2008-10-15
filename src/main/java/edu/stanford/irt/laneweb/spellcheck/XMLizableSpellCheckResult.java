@@ -21,8 +21,7 @@ public class XMLizableSpellCheckResult implements XMLizable {
 
     private String query;
 
-    public XMLizableSpellCheckResult(final String query,
-            final SpellCheckResult result) {
+    public XMLizableSpellCheckResult(final String query, final SpellCheckResult result) {
         this.query = query;
         this.result = result;
     }
@@ -31,8 +30,7 @@ public class XMLizableSpellCheckResult implements XMLizable {
         XMLUtils.startElement(consumer, NAMESPACE, SPELLCHECK);
         XMLUtils.createElementNS(consumer, NAMESPACE, QUERY, this.query);
         if (null != this.result.getSuggestion()) {
-            XMLUtils.createElementNS(consumer, NAMESPACE, SUGGESTION,
-                    this.result.getSuggestion());
+            XMLUtils.createElementNS(consumer, NAMESPACE, SUGGESTION, this.result.getSuggestion());
         }
         XMLUtils.endElement(consumer, NAMESPACE, SPELLCHECK);
     }

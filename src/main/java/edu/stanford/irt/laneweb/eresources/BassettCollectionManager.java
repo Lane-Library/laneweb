@@ -31,8 +31,7 @@ import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
 
-public class BassettCollectionManager implements CollectionManager, ThreadSafe,
-        Serviceable {
+public class BassettCollectionManager implements CollectionManager, ThreadSafe, Serviceable {
 
     private DataSource dataSource;
 
@@ -53,8 +52,7 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
         return doGetSearch(this.SEARCH_BASSETT, params, query);
     }
 
-    public Collection<Eresource> searchSubset(final String region,
-            final String query) {
+    public Collection<Eresource> searchSubset(final String region, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
@@ -91,8 +89,7 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
         return doGet(this.SEARCH_BY_BASSETT_NUMBER, params, true);
     }
 
-    public Map<String, Integer> searchCount(final Set<String> types,
-            final Set<String> subsets, final String query) {
+    public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Connection conn = null;
@@ -124,13 +121,11 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
         }
     }
 
-    private Collection<Eresource> doGetSearch(final String sql,
-            final Collection<String> params, final String query) {
+    private Collection<Eresource> doGetSearch(final String sql, final Collection<String> params, final String query) {
         LinkedList<Eresource> result = doGet(sql, params);
         LinkedList<Eresource> titleMatches = new LinkedList<Eresource>();
         int i = 0;
-        for (ListIterator<Eresource> it = result.listIterator(); it.hasNext()
-                && (i < 20); i++) {
+        for (ListIterator<Eresource> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
             Eresource eresource = it.next();
             if (query.equalsIgnoreCase(eresource.getTitle())) {
                 titleMatches.add(eresource);
@@ -144,13 +139,11 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
         return result;
     }
 
-    private LinkedList<Eresource> doGet(final String sql,
-            final Collection<String> params) {
+    private LinkedList<Eresource> doGet(final String sql, final Collection<String> params) {
         return doGet(sql, params, false);
     }
 
-    private LinkedList<Eresource> doGet(final String sql,
-            final Collection<String> params, final boolean withLegend) {
+    private LinkedList<Eresource> doGet(final String sql, final Collection<String> params, final boolean withLegend) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -182,8 +175,7 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
         }
     }
 
-    private LinkedList<Eresource> parseResultSet(final ResultSet rs,
-            final boolean fullResult) throws SQLException {
+    private LinkedList<Eresource> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         BassettEresource eresource = null;
         Version version = null;
@@ -204,8 +196,7 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
                 eresource.setDiagram(rs.getString("DIAGRAM"));
                 if (fullResult) {
                     eresource.setEngishLegend(rs.getString("ENGLISH_LEGEND"));
-                    eresource.setDescription(rs
-                            .getString("BASSETT_DESCRIPTION"));
+                    eresource.setDescription(rs.getString("BASSETT_DESCRIPTION"));
                 }
                 currentEresourceId = rowEresourceId;
                 version = new VersionImpl();
@@ -219,15 +210,13 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
                 }
                 link = new LinkImpl();
                 version.addLink(link);
-                link.setUrl(rs.getString("URL").replace(
-                        "http://lane.stanford.edu", ""));
+                link.setUrl(rs.getString("URL").replace("http://lane.stanford.edu", ""));
                 link.setLabel(rs.getString("LABEL"));
                 link.setInstruction(rs.getString("INSTRUCTION"));
                 eresources.add(eresource);
             }
             if (rs.getString("SUB_REGION") != null) {
-                eresource.addRegion(rs.getString("REGION").concat("--").concat(
-                        rs.getString("SUB_REGION")));
+                eresource.addRegion(rs.getString("REGION").concat("--").concat(rs.getString("SUB_REGION")));
             } else {
                 eresource.addRegion(rs.getString("REGION"));
             }
@@ -235,8 +224,7 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
         return eresources;
     }
 
-    private Map<String, Integer> parseCountResultSet(final ResultSet rs)
-            throws SQLException {
+    private Map<String, Integer> parseCountResultSet(final ResultSet rs) throws SQLException {
         Map<String, Integer> result = new LinkedHashMap<String, Integer>();
         List<String> alreadyIn = new ArrayList<String>();
         Integer count;
@@ -330,8 +318,7 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
         throw new UnsupportedOperationException();
     }
 
-    public Collection<Eresource> getMeshCore(final String type,
-            final String mesh) {
+    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
         throw new UnsupportedOperationException();
     }
 
@@ -339,8 +326,7 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
         throw new UnsupportedOperationException();
     }
 
-    public Collection<Eresource> searchType(final String type,
-            final String query) {
+    public Collection<Eresource> searchType(final String type, final String query) {
         throw new UnsupportedOperationException();
     }
 
@@ -349,10 +335,8 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
     }
 
     public void service(final ServiceManager manager) throws ServiceException {
-        ServiceSelector selector = (ServiceSelector) manager
-                .lookup(DataSourceComponent.ROLE + "Selector");
-        final DataSourceComponent dataSourceComponent = (DataSourceComponent) selector
-                .select("eresources");
+        ServiceSelector selector = (ServiceSelector) manager.lookup(DataSourceComponent.ROLE + "Selector");
+        final DataSourceComponent dataSourceComponent = (DataSourceComponent) selector.select("eresources");
         setDataSource(new DataSource() {
 
             private PrintWriter logWriter;
@@ -361,8 +345,7 @@ public class BassettCollectionManager implements CollectionManager, ThreadSafe,
                 return dataSourceComponent.getConnection();
             }
 
-            public Connection getConnection(final String username,
-                    final String password) throws SQLException {
+            public Connection getConnection(final String username, final String password) throws SQLException {
                 return dataSourceComponent.getConnection();
             }
 

@@ -57,13 +57,9 @@ public class EresourcesGeneratorTest {
 
     @Test
     public void testDispose() throws ServiceException, ParameterException {
-        expect(this.parameters.getParameter("collection", "laneconnex"))
-                .andReturn("laneconnex");
+        expect(this.parameters.getParameter("collection", "laneconnex")).andReturn("laneconnex");
         replay(this.parameters);
-        expect(
-                this.serviceManager
-                        .lookup("edu.stanford.irt.eresources.CollectionManager/laneconnex"))
-                .andReturn(this.collectionManager);
+        expect(this.serviceManager.lookup("edu.stanford.irt.eresources.CollectionManager/laneconnex")).andReturn(this.collectionManager);
         this.serviceManager.release(this.collectionManager);
         replay(this.serviceManager);
         this.generator.parameterize(this.parameters);
@@ -75,11 +71,8 @@ public class EresourcesGeneratorTest {
     }
 
     @Test
-    public void testSetupSourceResolverMapStringParameters()
-            throws ProcessingException, SAXException, IOException,
-            ParameterException {
-        expect(this.parameters.getParameter("mode", "browse")).andReturn(
-                "browse");
+    public void testSetupSourceResolverMapStringParameters() throws ProcessingException, SAXException, IOException, ParameterException {
+        expect(this.parameters.getParameter("mode", "browse")).andReturn("browse");
         replay(this.parameters);
         expect(this.request.getParameter("q")).andReturn(null);
         expect(this.request.getParameter("t")).andReturn("ej");
@@ -93,20 +86,13 @@ public class EresourcesGeneratorTest {
     }
 
     @Test
-    public void testGenerate() throws ServiceException, ParameterException,
-            ProcessingException, SAXException, IOException {
-        expect(this.parameters.getParameter("collection", "laneconnex"))
-                .andReturn("laneconnex");
-        expect(
-                this.serviceManager
-                        .lookup("edu.stanford.irt.eresources.CollectionManager/laneconnex"))
-                .andReturn(this.collectionManager);
+    public void testGenerate() throws ServiceException, ParameterException, ProcessingException, SAXException, IOException {
+        expect(this.parameters.getParameter("collection", "laneconnex")).andReturn("laneconnex");
+        expect(this.serviceManager.lookup("edu.stanford.irt.eresources.CollectionManager/laneconnex")).andReturn(this.collectionManager);
         replay(this.serviceManager);
-        expect(this.collectionManager.getType("ej", 'z')).andReturn(
-                new LinkedList<Eresource>());
+        expect(this.collectionManager.getType("ej", 'z')).andReturn(new LinkedList<Eresource>());
         replay(this.collectionManager);
-        expect(this.parameters.getParameter("mode", "browse")).andReturn(
-                "browse");
+        expect(this.parameters.getParameter("mode", "browse")).andReturn("browse");
         replay(this.parameters);
         expect(this.request.getParameter("q")).andReturn(null);
         expect(this.request.getParameter("t")).andReturn("ej");

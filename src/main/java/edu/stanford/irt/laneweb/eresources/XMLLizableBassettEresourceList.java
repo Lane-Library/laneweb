@@ -56,13 +56,11 @@ public class XMLLizableBassettEresourceList implements XMLizable {
 
     }
 
-    private void handleEresource(final ContentHandler handler,
-            final Eresource eresource) throws SAXException {
+    private void handleEresource(final ContentHandler handler, final Eresource eresource) throws SAXException {
         BassettEresource bassett = (BassettEresource) eresource;
 
         AttributesImpl attributes = new AttributesImpl();
-        attributes.addAttribute(this.NAMESPACE, BASSETT_NUMBER, BASSETT_NUMBER,
-                "CDATA", bassett.getBassettNumber());
+        attributes.addAttribute(this.NAMESPACE, BASSETT_NUMBER, BASSETT_NUMBER, "CDATA", bassett.getBassettNumber());
         XMLUtils.startElement(handler, this.NAMESPACE, BASSETT, attributes);
 
         XMLUtils.startElement(handler, this.NAMESPACE, TITLE);
@@ -94,8 +92,7 @@ public class XMLLizableBassettEresourceList implements XMLizable {
         if (bassett.getVersions().size() > 0) {
             Version version = bassett.getVersions().iterator().next();
             if (version.getLinks().size() > 0) {
-                XMLUtils.data(handler, version.getLinks().iterator().next()
-                        .getUrl());
+                XMLUtils.data(handler, version.getLinks().iterator().next().getUrl());
             }
         }
         XMLUtils.endElement(handler, this.NAMESPACE, LINK);
@@ -104,8 +101,7 @@ public class XMLLizableBassettEresourceList implements XMLizable {
         XMLUtils.endElement(handler, this.NAMESPACE, BASSETT);
     }
 
-    private void handleRegion(final ContentHandler handler,
-            final List<String> regions) throws SAXException {
+    private void handleRegion(final ContentHandler handler, final List<String> regions) throws SAXException {
         String currentRegion = null;
         XMLUtils.startElement(handler, this.NAMESPACE, REGIONS);
         for (int i = 0; i < regions.size(); i++) {
@@ -116,10 +112,8 @@ public class XMLLizableBassettEresourceList implements XMLizable {
                     XMLUtils.endElement(handler, this.NAMESPACE, REGION);
                 }
                 AttributesImpl attributes = new AttributesImpl();
-                attributes.addAttribute(this.NAMESPACE, NAME, NAME, "CDATA",
-                        splittedRegion[0]);
-                XMLUtils.startElement(handler, this.NAMESPACE, REGION,
-                        attributes);
+                attributes.addAttribute(this.NAMESPACE, NAME, NAME, "CDATA", splittedRegion[0]);
+                XMLUtils.startElement(handler, this.NAMESPACE, REGION, attributes);
                 currentRegion = splittedRegion[0];
             }
             if (splittedRegion.length > 1) {

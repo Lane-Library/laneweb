@@ -65,8 +65,7 @@ import org.apache.excalibur.source.impl.validity.TimeStampValidity;
  * @version CVS $Id: HTTPClientSource.java,v 1.4 2004/02/28 11:47:24 cziegeler
  *          Exp $
  */
-public class HTTPClientSource extends AbstractLogEnabled implements
-        ModifiableSource, Initializable, Parameterizable {
+public class HTTPClientSource extends AbstractLogEnabled implements ModifiableSource, Initializable, Parameterizable {
 
     /**
      * Constant used for identifying POST requests.
@@ -183,11 +182,9 @@ public class HTTPClientSource extends AbstractLogEnabled implements
      * @exception Exception
      *                if an error occurs
      */
-    public HTTPClientSource(final String uri, final Map parameters,
-            final HttpClient httpClient) throws Exception {
+    public HTTPClientSource(final String uri, final Map parameters, final HttpClient httpClient) throws Exception {
         this.m_uri = uri;
-        this.m_parameters = parameters == null ? Collections.EMPTY_MAP
-                : parameters;
+        this.m_parameters = parameters == null ? Collections.EMPTY_MAP : parameters;
         this.m_client = httpClient;
     }
 
@@ -204,10 +201,8 @@ public class HTTPClientSource extends AbstractLogEnabled implements
         this.m_proxyPort = params.getParameterAsInteger(PROXY_PORT, -1);
 
         if (getLogger().isDebugEnabled()) {
-            final String message = (this.m_proxyHost == null)
-                    || (this.m_proxyPort == -1) ? "No proxy configured"
-                    : "Configured with proxy host " + this.m_proxyHost
-                            + " port " + this.m_proxyPort;
+            final String message = (this.m_proxyHost == null) || (this.m_proxyPort == -1) ? "No proxy configured"
+                    : "Configured with proxy host " + this.m_proxyHost + " port " + this.m_proxyPort;
 
             getLogger().debug(message);
         }
@@ -225,8 +220,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
             this.m_parameters.remove(HTTP_STATE);
         }
         if ((this.m_proxyHost != null) && (this.m_proxyPort != -1)) {
-            this.m_client.getHostConfiguration().setProxy(this.m_proxyHost,
-                    this.m_proxyPort);
+            this.m_client.getHostConfiguration().setProxy(this.m_proxyHost, this.m_proxyPort);
         }
         if (this.m_httpState != null) {
             this.m_client.setState(this.m_httpState);
@@ -243,8 +237,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
      *         assumed.
      */
     private String findMethodType() {
-        final String method = (String) this.m_parameters
-                .get(SourceResolver.METHOD);
+        final String method = (String) this.m_parameters.get(SourceResolver.METHOD);
         return method == null ? GET : method;
     }
 
@@ -259,9 +252,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
 
         // create a POST method if requested
         if (POST.equals(method)) {
-            return createPostMethod(this.m_uri,
-                    (SourceParameters) this.m_parameters
-                            .get(SourceResolver.URI_PARAMETERS));
+            return createPostMethod(this.m_uri, (SourceParameters) this.m_parameters.get(SourceResolver.URI_PARAMETERS));
         }
 
         // default method is GET
@@ -278,20 +269,17 @@ public class HTTPClientSource extends AbstractLogEnabled implements
      *            {@link SourceParameters}
      * @return a {@link PostMethod} instance
      */
-    private PostMethod createPostMethod(final String uri,
-            final SourceParameters params) {
+    private PostMethod createPostMethod(final String uri, final SourceParameters params) {
         final PostMethod post = new PostMethod(uri);
 
         if (params == null) {
             return post;
         }
 
-        for (final Iterator<String> names = params.getParameterNames(); names
-                .hasNext();) {
+        for (final Iterator<String> names = params.getParameterNames(); names.hasNext();) {
             final String name = names.next();
 
-            for (final Iterator<String> values = params
-                    .getParameterValues(name); values.hasNext();) {
+            for (final Iterator<String> values = params.getParameterValues(name); values.hasNext();) {
                 final String value = values.next();
                 post.addParameter(new NameValuePair(name, value));
             }
@@ -311,15 +299,12 @@ public class HTTPClientSource extends AbstractLogEnabled implements
         final GetMethod method = new GetMethod(uri);
 
         // add all parameters as headers
-        for (final Iterator<String> i = this.m_parameters.keySet().iterator(); i
-                .hasNext();) {
+        for (final Iterator<String> i = this.m_parameters.keySet().iterator(); i.hasNext();) {
             final String key = i.next();
             final String value = (String) this.m_parameters.get(key);
 
             if (getLogger().isDebugEnabled()) {
-                getLogger().debug(
-                        "Adding header '" + key + "', with value '" + value
-                                + "'");
+                getLogger().debug("Adding header '" + key + "', with value '" + value + "'");
             }
 
             method.setRequestHeader(key, value);
@@ -350,11 +335,9 @@ public class HTTPClientSource extends AbstractLogEnabled implements
      * @exception IOException
      *                if an error occurs
      */
-    private PutMethod createPutMethod(final String uri, final File uploadFile)
-            throws IOException {
+    private PutMethod createPutMethod(final String uri, final File uploadFile) throws IOException {
         final PutMethod put = new PutMethod(uri);
-        put.setRequestEntity(new InputStreamRequestEntity(new FileInputStream(
-                uploadFile.getAbsolutePath())));
+        put.setRequestEntity(new InputStreamRequestEntity(new FileInputStream(uploadFile.getAbsolutePath())));
         return put;
     }
 
@@ -386,10 +369,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
                     return;
                 } catch (final IOException e) {
                     if (getLogger().isDebugEnabled()) {
-                        getLogger()
-                                .debug(
-                                        "Unable to determine response data, using defaults",
-                                        e);
+                        getLogger().debug("Unable to determine response data, using defaults", e);
                     }
                 } finally {
                     head.releaseConnection();
@@ -417,8 +397,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
      * @exception IOException
      *                if an error occurs
      */
-    protected int executeMethod(final HttpMethod method) throws HttpException,
-            IOException {
+    protected int executeMethod(final HttpMethod method) throws HttpException, IOException {
 
         final int response = this.m_client.executeMethod(method);
 
@@ -453,8 +432,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
         // 204 & 205 in the future
 
         // resource does not exist if HttpClient returns a 404 or a 410
-        this.m_exists = ((response == HttpStatus.SC_OK)
-                || (response == HttpStatus.SC_CREATED) || (response == HttpStatus.SC_PARTIAL_CONTENT));
+        this.m_exists = ((response == HttpStatus.SC_OK) || (response == HttpStatus.SC_CREATED) || (response == HttpStatus.SC_PARTIAL_CONTENT));
     }
 
     /**
@@ -478,8 +456,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
      * @throws SourceNotFoundException
      *             if the source doesn't exist.
      */
-    public InputStream getInputStream() throws IOException,
-            SourceNotFoundException {
+    public InputStream getInputStream() throws IOException, SourceNotFoundException {
         final HttpMethod method = getMethod();
         int response = executeMethod(method);
         this.m_dataValid = true;
@@ -609,12 +586,10 @@ public class HTTPClientSource extends AbstractLogEnabled implements
     private void updateContentLength(final HttpMethod method) {
         try {
             final Header length = method.getResponseHeader(CONTENT_LENGTH);
-            this.m_contentLength = length == null ? -1 : Long.parseLong(length
-                    .getValue());
+            this.m_contentLength = length == null ? -1 : Long.parseLong(length.getValue());
         } catch (final NumberFormatException e) {
             if (getLogger().isDebugEnabled()) {
-                getLogger().debug(
-                        "Unable to determine content length, returning -1", e);
+                getLogger().debug("Unable to determine content length, returning -1", e);
             }
 
             this.m_contentLength = -1;
@@ -642,8 +617,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
     private void updateLastModified(final HttpMethod method) {
         final Header lastModified = method.getResponseHeader(LAST_MODIFIED);
         try {
-            this.m_lastModified = lastModified == null ? 0 : DateUtil
-                    .parseDate(lastModified.getValue()).getTime();
+            this.m_lastModified = lastModified == null ? 0 : DateUtil.parseDate(lastModified.getValue()).getTime();
         } catch (DateParseException e) {
             // we ignore this exception and simply set last modified to 0
             this.m_lastModified = 0;
@@ -712,8 +686,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
          * @exception IOException
          *                if an error occurs
          */
-        public WrappedFileOutputStream(final File file, final Logger logger)
-                throws IOException {
+        public WrappedFileOutputStream(final File file, final Logger logger) throws IOException {
             super(file);
             this.m_file = file;
             this.m_logger = logger;
@@ -771,27 +744,21 @@ public class HTTPClientSource extends AbstractLogEnabled implements
          *                if an error occurs
          */
         private void upload() throws IOException {
-            final HttpMethod uploader = createPutMethod(
-                    HTTPClientSource.this.m_uri, this.m_file);
+            final HttpMethod uploader = createPutMethod(HTTPClientSource.this.m_uri, this.m_file);
 
             if (this.m_logger.isDebugEnabled()) {
-                this.m_logger.debug("Stream closed, writing data to "
-                        + HTTPClientSource.this.m_uri);
+                this.m_logger.debug("Stream closed, writing data to " + HTTPClientSource.this.m_uri);
             }
 
             try {
                 final int response = executeMethod(uploader);
 
                 if (!successfulUpload(response)) {
-                    throw new SourceException("Write to "
-                            + HTTPClientSource.this.m_uri + " failed ("
-                            + response + ")");
+                    throw new SourceException("Write to " + HTTPClientSource.this.m_uri + " failed (" + response + ")");
                 }
 
                 if (this.m_logger.isDebugEnabled()) {
-                    this.m_logger.debug("Write to "
-                            + HTTPClientSource.this.m_uri + " succeeded ("
-                            + response + ")");
+                    this.m_logger.debug("Write to " + HTTPClientSource.this.m_uri + " succeeded (" + response + ")");
                 }
             } finally {
                 if (uploader != null) {
@@ -809,9 +776,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
          * @return true if upload was successful, false otherwise.
          */
         private boolean successfulUpload(final int response) {
-            return (response == HttpStatus.SC_OK)
-                    || (response == HttpStatus.SC_CREATED)
-                    || (response == HttpStatus.SC_NO_CONTENT);
+            return (response == HttpStatus.SC_OK) || (response == HttpStatus.SC_CREATED) || (response == HttpStatus.SC_NO_CONTENT);
         }
     }
 
@@ -827,8 +792,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
             final int response = executeMethod(delete);
 
             if (!deleteSuccessful(response)) {
-                throw new SourceException("Failed to delete " + this.m_uri
-                        + " (" + response + ")");
+                throw new SourceException("Failed to delete " + this.m_uri + " (" + response + ")");
             }
 
             if (getLogger().isDebugEnabled()) {
@@ -850,9 +814,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
      * @return true if upload was successful, false otherwise.
      */
     private boolean deleteSuccessful(final int response) {
-        return (response == HttpStatus.SC_OK)
-                || (response == HttpStatus.SC_ACCEPTED)
-                || (response == HttpStatus.SC_NO_CONTENT);
+        return (response == HttpStatus.SC_OK) || (response == HttpStatus.SC_ACCEPTED) || (response == HttpStatus.SC_NO_CONTENT);
     }
 
     /**
@@ -868,8 +830,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
             return ((WrappedFileOutputStream) stream).canCancel();
         }
 
-        throw new IllegalArgumentException(
-                "Output stream supplied was not created by this class");
+        throw new IllegalArgumentException("Output stream supplied was not created by this class");
     }
 
     /**
@@ -881,8 +842,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements
         if (stream instanceof WrappedFileOutputStream) {
             ((WrappedFileOutputStream) stream).cancel();
         } else {
-            throw new IllegalArgumentException(
-                    "Output stream supplied was not created by this class");
+            throw new IllegalArgumentException("Output stream supplied was not created by this class");
         }
     }
 }

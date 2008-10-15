@@ -15,14 +15,11 @@ import org.apache.avalon.framework.thread.ThreadSafe;
 
 import edu.stanford.irt.eresources.impl.CollectionManagerImpl;
 
-public class LanewebCollectionManager extends CollectionManagerImpl implements
-        ThreadSafe, Serviceable {
+public class LanewebCollectionManager extends CollectionManagerImpl implements ThreadSafe, Serviceable {
 
     public void service(final ServiceManager manager) throws ServiceException {
-        ServiceSelector selector = (ServiceSelector) manager
-                .lookup(DataSourceComponent.ROLE + "Selector");
-        final DataSourceComponent dataSourceComponent = (DataSourceComponent) selector
-                .select("eresources");
+        ServiceSelector selector = (ServiceSelector) manager.lookup(DataSourceComponent.ROLE + "Selector");
+        final DataSourceComponent dataSourceComponent = (DataSourceComponent) selector.select("eresources");
         super.setDataSource(new DataSource() {
 
             private PrintWriter logWriter;
@@ -31,8 +28,7 @@ public class LanewebCollectionManager extends CollectionManagerImpl implements
                 return dataSourceComponent.getConnection();
             }
 
-            public Connection getConnection(final String username,
-                    final String password) throws SQLException {
+            public Connection getConnection(final String username, final String password) throws SQLException {
                 return dataSourceComponent.getConnection();
             }
 
@@ -49,14 +45,6 @@ public class LanewebCollectionManager extends CollectionManagerImpl implements
             }
 
             public void setLoginTimeout(final int seconds) throws SQLException {
-                throw new UnsupportedOperationException("sorry, can't do that");
-            }
-            
-            public boolean isWrapperFor(Class<?> wrapped) {
-                throw new UnsupportedOperationException("sorry, can't do that");
-            }
-            
-            public <T> T unwrap(java.lang.Class<T> wrapped) {
                 throw new UnsupportedOperationException("sorry, can't do that");
             }
         });

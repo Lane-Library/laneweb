@@ -34,33 +34,26 @@ public class XMLLizableBassettCount implements XMLizable {
         consumer.endPrefixMapping("");
     }
 
-    private void handleRegionCounter(final ContentHandler consumer)
-            throws SAXException {
+    private void handleRegionCounter(final ContentHandler consumer) throws SAXException {
         AttributesImpl attributes;
         String currentRegion = null;
         Set<String> keys = this.regionMap.keySet();
         for (String key : keys) {
             Integer count = this.regionMap.get(key);
-            if ((currentRegion != null) && (key.indexOf("--") == -1)
-                    && !currentRegion.equals(key)) {
+            if ((currentRegion != null) && (key.indexOf("--") == -1) && !currentRegion.equals(key)) {
                 currentRegion = key;
                 XMLUtils.endElement(consumer, this.NAMESPACE, REGION);
             }
             if (key.indexOf("--") == -1) {
                 currentRegion = key;
                 attributes = new AttributesImpl();
-                attributes.addAttribute(this.NAMESPACE, NAME, NAME, "CDATA",
-                        key.toLowerCase());
-                attributes.addAttribute(this.NAMESPACE, TOTAL, TOTAL, "CDATA",
-                        count.toString());
-                XMLUtils.startElement(consumer, this.NAMESPACE, REGION,
-                        attributes);
+                attributes.addAttribute(this.NAMESPACE, NAME, NAME, "CDATA", key.toLowerCase());
+                attributes.addAttribute(this.NAMESPACE, TOTAL, TOTAL, "CDATA", count.toString());
+                XMLUtils.startElement(consumer, this.NAMESPACE, REGION, attributes);
             } else {
                 attributes = new AttributesImpl();
-                attributes.addAttribute(this.NAMESPACE, NAME, NAME, "CDATA",
-                        key.split("--")[1].toLowerCase());
-                XMLUtils.startElement(consumer, this.NAMESPACE, SUB_REGION,
-                        attributes);
+                attributes.addAttribute(this.NAMESPACE, NAME, NAME, "CDATA", key.split("--")[1].toLowerCase());
+                XMLUtils.startElement(consumer, this.NAMESPACE, SUB_REGION, attributes);
                 XMLUtils.data(consumer, count.toString());
                 XMLUtils.endElement(consumer, this.NAMESPACE, SUB_REGION);
             }

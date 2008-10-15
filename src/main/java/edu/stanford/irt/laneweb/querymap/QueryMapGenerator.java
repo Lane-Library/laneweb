@@ -49,17 +49,14 @@ public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
         this.queryMapper = queryMapper;
     }
 
-    public void service(final ServiceManager serviceManager)
-            throws ServiceException {
+    public void service(final ServiceManager serviceManager) throws ServiceException {
         if (null == serviceManager) {
             throw new IllegalArgumentException("null serviceManager");
         }
-        setQueryMapper((QueryMapper) serviceManager.lookup(QueryMapper.class
-                .getName()));
+        setQueryMapper((QueryMapper) serviceManager.lookup(QueryMapper.class.getName()));
     }
 
-    public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters params) {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
         if (null == params) {
             throw new IllegalArgumentException("null params");
         }
@@ -70,11 +67,9 @@ public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
         if ((null != mapURL) && (null != weightURL)) {
             try {
                 Source mapSource = resolver.resolveURI(mapURL);
-                this.resourceMaps.set(new StreamResourceMapping(mapSource
-                        .getInputStream()));
+                this.resourceMaps.set(new StreamResourceMapping(mapSource.getInputStream()));
                 Source weightSource = resolver.resolveURI(weightURL);
-                this.descriptorWeights.set(new DescriptorWeightMap(weightSource
-                        .getInputStream()));
+                this.descriptorWeights.set(new DescriptorWeightMap(weightSource.getInputStream()));
                 this.abstractCount.set(new Integer(abstractCount));
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
@@ -104,12 +99,10 @@ public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
         }
         XMLizable queryMap = null;
         if (null == this.resourceMaps.get()) {
-            queryMap = new XMLizableQueryMap(this.queryMapper
-                    .getQueryMap(query));
+            queryMap = new XMLizableQueryMap(this.queryMapper.getQueryMap(query));
         } else {
-            queryMap = new XMLizableQueryMap(this.queryMapper.getQueryMap(
-                    query, this.resourceMaps.get(), this.descriptorWeights
-                            .get(), this.abstractCount.get().intValue()));
+            queryMap = new XMLizableQueryMap(this.queryMapper.getQueryMap(query, this.resourceMaps.get(), this.descriptorWeights.get(),
+                    this.abstractCount.get().intValue()));
         }
         try {
             consumer.startDocument();

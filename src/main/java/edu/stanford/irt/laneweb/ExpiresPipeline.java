@@ -18,15 +18,13 @@ import org.apache.excalibur.source.impl.validity.NOPValidity;
 public class ExpiresPipeline extends ExpiresCachingProcessingPipeline {
 
     @Override
-    protected boolean processReader(final Environment environment)
-            throws ProcessingException {
+    protected boolean processReader(final Environment environment) throws ProcessingException {
         // get the cache expiration value from the object model or as a
         // parameter
         final Map objectModel = environment.getObjectModel();
         String expiresValue = (String) objectModel.get(CACHE_EXPIRES_KEY);
         if (expiresValue == null) {
-            this.cacheExpires = this.parameters.getParameterAsLong(
-                    "cache-expires", this.defaultCacheExpires);
+            this.cacheExpires = this.parameters.getParameterAsLong("cache-expires", this.defaultCacheExpires);
         } else {
             this.cacheExpires = Long.valueOf(expiresValue).longValue();
             objectModel.remove(CACHE_EXPIRES_KEY);
@@ -49,8 +47,7 @@ public class ExpiresPipeline extends ExpiresCachingProcessingPipeline {
         } else {
             objectModel.remove(CACHE_KEY_KEY);
         }
-        this.cacheKey = new IdentifierCacheKey(key,
-                this.serializer == this.lastConsumer);
+        this.cacheKey = new IdentifierCacheKey(key, this.serializer == this.lastConsumer);
 
         // hand off
         return super.processReader(environment);

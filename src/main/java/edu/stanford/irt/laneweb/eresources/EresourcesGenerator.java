@@ -20,8 +20,7 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 
-public class EresourcesGenerator extends ServiceableGenerator implements
-        Parameterizable, Initializable {
+public class EresourcesGenerator extends ServiceableGenerator implements Parameterizable, Initializable {
 
     private static final String QUERY = "q";
 
@@ -57,9 +56,8 @@ public class EresourcesGenerator extends ServiceableGenerator implements
     }
 
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException,
-            SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
         this.mode = par.getParameter("mode", "browse");
         Request request = ObjectModelHelper.getRequest(objectModel);
@@ -128,15 +126,13 @@ public class EresourcesGenerator extends ServiceableGenerator implements
             if (null != this.type) {
                 return this.collectionManager.searchType(this.type, this.query);
             } else if (null != this.subset) {
-                return this.collectionManager.searchSubset(this.subset,
-                        this.query);
+                return this.collectionManager.searchSubset(this.subset, this.query);
             }
             return this.collectionManager.search(this.query);
         } else if ("browse".equals(this.mode)) {
             if (null != this.type) {
                 if (null != this.alpha) {
-                    return this.collectionManager.getType(this.type, this.alpha
-                            .charAt(0));
+                    return this.collectionManager.getType(this.type, this.alpha.charAt(0));
                 }
                 return this.collectionManager.getType(this.type);
             } else if (null != this.subset) {
@@ -165,9 +161,7 @@ public class EresourcesGenerator extends ServiceableGenerator implements
     }
 
     public void initialize() throws ServiceException {
-        setCollectionManager((CollectionManager) this.manager
-                .lookup(CollectionManager.class.getName() + "/"
-                        + this.collection));
+        setCollectionManager((CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection));
     }
 
 }

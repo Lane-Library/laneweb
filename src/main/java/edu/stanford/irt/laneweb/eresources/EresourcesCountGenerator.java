@@ -25,8 +25,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 
-public class EresourcesCountGenerator extends ServiceableGenerator implements
-        Configurable, Initializable {
+public class EresourcesCountGenerator extends ServiceableGenerator implements Configurable, Initializable {
 
     private static final String QUERY = "q";
 
@@ -50,9 +49,8 @@ public class EresourcesCountGenerator extends ServiceableGenerator implements
     }
 
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException,
-            SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
         Request request = ObjectModelHelper.getRequest(objectModel);
         String query = request.getParameter(QUERY);
@@ -66,8 +64,7 @@ public class EresourcesCountGenerator extends ServiceableGenerator implements
     }
 
     public void generate() throws SAXException {
-        Map<String, Integer> result = this.collectionManager.searchCount(
-                this.types, this.subsets, this.query);
+        Map<String, Integer> result = this.collectionManager.searchCount(this.types, this.subsets, this.query);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", SQL_NS);
         XMLUtils.startElement(this.xmlConsumer, SQL_NS, "rowset");
@@ -98,8 +95,7 @@ public class EresourcesCountGenerator extends ServiceableGenerator implements
         super.dispose();
     }
 
-    public void configure(final Configuration conf)
-            throws ConfigurationException {
+    public void configure(final Configuration conf) throws ConfigurationException {
         this.types = new HashSet<String>();
         Configuration[] typeConf = conf.getChildren("type");
         for (Configuration element : typeConf) {
@@ -114,8 +110,6 @@ public class EresourcesCountGenerator extends ServiceableGenerator implements
     }
 
     public void initialize() throws ServiceException {
-        setCollectionManager((CollectionManager) this.manager
-                .lookup(CollectionManager.class.getName() + "/"
-                        + this.collection));
+        setCollectionManager((CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection));
     }
 }

@@ -30,8 +30,7 @@ import edu.stanford.irt.search.util.SAXable;
 /**
  * @author ceyates
  */
-public class SearchGenerator extends ServiceableGenerator implements
-        Parameterizable {
+public class SearchGenerator extends ServiceableGenerator implements Parameterizable {
 
     private MetaSearchManager metaSearchManager;
 
@@ -52,19 +51,16 @@ public class SearchGenerator extends ServiceableGenerator implements
     @Override
     public void service(final ServiceManager manager) throws ServiceException {
         super.service(manager);
-        MetaSearchManagerSource source = (MetaSearchManagerSource) this.manager
-                .lookup(MetaSearchManagerSource.class.getName());
+        MetaSearchManagerSource source = (MetaSearchManagerSource) this.manager.lookup(MetaSearchManagerSource.class.getName());
         this.metaSearchManager = source.getMetaSearchManager();
 
     }
 
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException,
-            SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
-        Request request = (Request) objectModel
-                .get(ObjectModelHelper.REQUEST_OBJECT);
+        Request request = (Request) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
         this.q = request.getParameter("q");
         this.t = request.getParameter("t");
         this.e = request.getParameterValues("e");
@@ -89,16 +85,13 @@ public class SearchGenerator extends ServiceableGenerator implements
 
     }
 
-    public void generate() throws IOException, SAXException,
-            ProcessingException {
+    public void generate() throws IOException, SAXException, ProcessingException {
 
         if ("y".equalsIgnoreCase(this.clearCache)) {
-            ((CachedMetaSearchManagerImpl) this.metaSearchManager)
-                    .clearCache(this.q);
+            ((CachedMetaSearchManagerImpl) this.metaSearchManager).clearCache(this.q);
         }
         if ("all".equalsIgnoreCase(this.clearCache)) {
-            ((CachedMetaSearchManagerImpl) this.metaSearchManager)
-                    .clearAllCaches();
+            ((CachedMetaSearchManagerImpl) this.metaSearchManager).clearAllCaches();
         }
 
         Result result = null;
@@ -133,8 +126,7 @@ public class SearchGenerator extends ServiceableGenerator implements
             long timeout = time;
 
             final SimpleQuery query = new SimpleQuery(this.q);
-            result = this.metaSearchManager.search(query, timeout, engines,
-                    false);
+            result = this.metaSearchManager.search(query, timeout, engines, false);
 
             if (null != this.w) {
                 long wait = 0;
@@ -148,9 +140,7 @@ public class SearchGenerator extends ServiceableGenerator implements
 
                 try {
                     synchronized (result) {
-                        while ((wait > 0)
-                                && SearchStatus.RUNNING.equals(result
-                                        .getStatus())) {
+                        while ((wait > 0) && SearchStatus.RUNNING.equals(result.getStatus())) {
                             result.wait(wait);
                             if (wait != 0) {
                                 long now = System.currentTimeMillis();
@@ -179,8 +169,7 @@ public class SearchGenerator extends ServiceableGenerator implements
                 if ((engines != null) && engines.contains(engineResult.getId())) {
                     selectedResult.add(engineResult);
                 } else if (resources != null) {
-                    Collection<Result> resourceResults = engineResult
-                            .getChildren();
+                    Collection<Result> resourceResults = engineResult.getChildren();
                     for (Result resourceResult : resourceResults) {
                         if (resources.contains(resourceResult.getId())) {
                             selectedResult.add(engineResult);

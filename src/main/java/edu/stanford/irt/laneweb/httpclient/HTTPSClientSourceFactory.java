@@ -94,8 +94,7 @@ public class HTTPSClientSourceFactory extends HTTPClientSourceFactory {
      * @exception ParameterException
      *                if an error occurs
      */
-    private void setSocketFactory(final Parameters params)
-            throws ParameterException {
+    private void setSocketFactory(final Parameters params) throws ParameterException {
         String factoryName = null;
 
         try {
@@ -104,8 +103,7 @@ public class HTTPSClientSourceFactory extends HTTPClientSourceFactory {
             return; // this is ok, means no custom socket factory
         }
 
-        final Protocol protocol = new Protocol(HTTPS,
-                (ProtocolSocketFactory) getInstance(factoryName), 443);
+        final Protocol protocol = new Protocol(HTTPS, (ProtocolSocketFactory) getInstance(factoryName), 443);
         Protocol.registerProtocol(HTTPS, protocol);
     }
 
@@ -120,13 +118,11 @@ public class HTTPSClientSourceFactory extends HTTPClientSourceFactory {
      * @exception ParameterException
      *                if an error occurs
      */
-    private Object getInstance(final String className)
-            throws ParameterException {
+    private Object getInstance(final String className) throws ParameterException {
         try {
             return Class.forName(className).newInstance();
         } catch (final Exception e) {
-            throw new ParameterException("Unable to instantiate: " + className,
-                    e);
+            throw new ParameterException("Unable to instantiate: " + className, e);
         }
     }
 }

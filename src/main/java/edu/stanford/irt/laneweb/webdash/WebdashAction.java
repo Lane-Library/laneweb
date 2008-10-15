@@ -40,9 +40,8 @@ public class WebdashAction implements Action, Serviceable, ThreadSafe {
         this.userInfoHelper = userInfoHelper;
     }
 
-    public Map act(final Redirector redirector,
-            final SourceResolver sourceResolver, final Map objectModel,
-            final String string, final Parameters param) {
+    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string,
+            final Parameters param) {
 
         Request request = ObjectModelHelper.getRequest(objectModel);
 
@@ -53,15 +52,13 @@ public class WebdashAction implements Action, Serviceable, ThreadSafe {
         LDAPPerson person = userInfo.getPerson();
 
         Map<String, String> result = new HashMap<String, String>(1);
-        result.put(RESULT_KEY, this.webDashLogin.getWebdashURL(person, nonce,
-                systemUserId));
+        result.put(RESULT_KEY, this.webDashLogin.getWebdashURL(person, nonce, systemUserId));
         return result;
     }
 
     public void service(final ServiceManager manager) throws ServiceException {
         this.webDashLogin = (WebdashLogin) manager.lookup(WebdashLogin.ROLE);
-        this.userInfoHelper = (UserInfoHelper) manager
-                .lookup(UserInfoHelper.ROLE);
+        this.userInfoHelper = (UserInfoHelper) manager.lookup(UserInfoHelper.ROLE);
 
     }
 
