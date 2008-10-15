@@ -155,4 +155,7 @@
     <component role="edu.stanford.irt.laneweb.querymap.QueryMapper"
         class="edu.stanford.irt.laneweb.querymap.QueryMapperImpl"/>
 
+  <component role="edu.stanford.irt.eresources.CollectionManager/bassett"
+    class="edu.stanford.irt.laneweb.eresources.BassettCollectionManager"/>
+
 </cocoon>
