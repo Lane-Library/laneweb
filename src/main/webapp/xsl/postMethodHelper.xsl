@@ -28,14 +28,18 @@ xmlns="http://www.w3.org/1999/xhtml"  xmlns:r="http://apache.org/cocoon/request/
 <xsl:template match="/">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-
-<title>Post Method Helper</title>
 <head>
+<title>Post Method Helper</title>
+<script type="text/javascript"> 
+function submitForm()
+{
+	document.defaultForm.submit();
+}
+
+</script>
+
 </head>
-
-
-
-<body onload="document.defaultForm.submit()" >
+<body onload="submitForm()" >
 
 
 <form   action="{$post-url}"  name="defaultForm" method="post">
