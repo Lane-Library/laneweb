@@ -1,10 +1,8 @@
 (function() {
 
-var diagramDisplay = false;
-YD = YAHOO.util.Dom,
-YE = YAHOO.util.Event,
-YH = YAHOO.util.History,
-YC = YAHOO.util.Connect;   
+var diagramDisplay = false,
+YC = YAHOO.util.Connect,  
+YE = YAHOO.util.Event;
 
 YAHOO.util.Event.onAvailable('bassettContent',function() {
 	YAHOO.util.Get.script( "/javascript/noversion/bubbling-min.js", {
@@ -28,7 +26,7 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
  	function registerLinksContainer(container){
  		var anchor;    
         if (container) {
-        	var contentContainer = document.getElementById("bassettContent");
+         	contentContainer = document.getElementById("bassettContent");
          	anchor = container.getElementsByTagName('a');
          	for (i = 0; i < anchor.length; i++) {
          		if( anchor[i].rel == null || anchor[i].rel == "" )
@@ -50,7 +48,7 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
     	this._anchor = anchor;
     	this._container = container;
         this._content;
-        this._url = '/././plain' + anchor.pathname.replace('/bassett','/bassett/raw') + anchor.search ;
+        this._url = '/././plain/' + anchor.pathname.replace(/bassett/,'bassett/raw') + anchor.search ;
         this._callback = {
             success: function(o) {
                 var result, content;
@@ -95,12 +93,6 @@ BassettResult.prototype.hide = function() {
         this._container.removeChild(this._container.lastChild);
     }
 };
-
-changeHandler = function(result){
-	result.setContent();
-	result.hide();
-	result.show();
-}
 
 
 })();
