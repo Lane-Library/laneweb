@@ -342,7 +342,7 @@
             }
             if (!(/\.html$/).test(trackingData.path) || trackingData.external) {
                 args.push('DCS.dcsref');
-                args.push(document.location.toString());
+                args.push(DCS.dcsref);
             }
             if (trackingData.title !== undefined) {
                 args.push('WT.ti');
