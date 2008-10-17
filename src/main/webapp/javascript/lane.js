@@ -112,9 +112,12 @@ LANE.core = LANE.core || function() {
         //TODO: urlencode msg, implement onerror to point to this, etc
         log: function(msg, cat, src) {
             YAHOO.log(msg, cat, src);
-            if (YAHOO.util.Connect) {
-                YAHOO.util.Connect.asyncRequest('HEAD','/././javascriptLogger?' + msg);
+            if (encodeURIComponent) {
+                msg = encodeURIComponent(msg);
+            } else {
+                msg = escape(msg);
             }
+            YAHOO.util.Connect.asyncRequest('GET','/././javascriptLogger?' + msg);
         },
         // document.importNode not supported in IE
         importNode: function(importedNode, deep) {

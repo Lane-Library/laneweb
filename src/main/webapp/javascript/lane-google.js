@@ -20,6 +20,13 @@ YAHOO.util.Event.addListener(this, 'load', function() {
                         if (trackingData.external) {
                             pageTracker._trackPageview('/OFFSITE/' + trackingData.title);
                         } else {
+                            if (trackingData.path.indexOf('/secure/login') === 0) {
+                                var msg = 'useragent:' + navigator.userAgent;
+                                msg += ';host:' + document.location.toString();
+                                msg += ';title:' + trackingData.title;
+                                msg += ';path:' + trackingData.path;
+                                LANE.core.log(msg);
+                            }
                             pageTracker._trackPageview('/ONSITE/' + trackingData.title + '/' + trackingData.path);
                         }
                     }

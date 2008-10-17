@@ -7,7 +7,7 @@
             <map:generator name="file" logger="sitemap.generator.file"
                 src="org.apache.cocoon.generation.FileGenerator" pool-max="32"/>
             <map:generator name="html" logger="sitemap.generator.html"
-                src="edu.stanford.irt.laneweb.HTMLGenerator" pool-max="32"> </map:generator>
+                src="edu.stanford.irt.laneweb.HTMLGenerator" pool-max="32"/> 
             <map:generator name="request" src="org.apache.cocoon.generation.RequestGenerator"
                 logger="sitemap.generator.request" pool-max="32"/>
             <map:generator name="eresources"
