@@ -18,6 +18,7 @@
                	  	<map:parameter name="type" value="{request-param:t}"/>
                	  	<map:parameter name="region" value="{request-param:r}"/>
                	  	<map:parameter name="query-string" value="{request:queryString}"/>
+               	  	<map:parameter name="images-url" value="http://elane.stanford.edu/public/L254573"/>
                </map:transform>
               <map:serialize type="xml"/>
            </map:match>

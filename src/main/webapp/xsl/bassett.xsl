@@ -10,9 +10,13 @@
 <xsl:param name="type"/> 
 <xsl:param name="region"/>
 <xsl:param name="query-string"/>
+<xsl:param name="images-url"/>
 
-<xsl:variable name="thumbnailDirectory">http://lane-dev/bassett-web-ready-images/small/</xsl:variable>
-<xsl:variable name="imageDirectory">http://lane-dev/bassett-web-ready-images/<xsl:if test="$type != 'largerView'">medium/</xsl:if></xsl:variable>
+<xsl:variable name="thumbnail-directory"><xsl:value-of select="$images-url"/>/small/</xsl:variable>
+<xsl:variable name="large-image-directory"><xsl:value-of select="$images-url"/>/large/</xsl:variable>
+<xsl:variable name="medium-image-directory"><xsl:value-of select="$images-url"/>/medium/</xsl:variable>
+<xsl:variable name="image-directory"><xsl:if test="$type != 'largerView'"><xsl:value-of select="$medium-image-directory"/></xsl:if><xsl:if test="$type = 'largerView'"><xsl:value-of select="$large-image-directory"/></xsl:if></xsl:variable>
+
 <xsl:variable name="query"><xsl:value-of select="replace($query-string,'&amp;t=diagram','')"/> </xsl:variable>
 
 	 
@@ -105,7 +109,7 @@
 		        		<xsl:value-of select="./b:title"/>
 		        	</xsl:attribute>
 		        	<xsl:attribute name="src"  >
-		        		<xsl:value-of select="$thumbnailDirectory"/>
+		        		<xsl:value-of select="$thumbnail-directory"/>
 		        		<xsl:choose>
 		        			<xsl:when test="$type='diagram'">
 		        				<xsl:value-of select="./b:diagram_image"/>
@@ -157,7 +161,7 @@
 
 <xsl:template match="h:td[@id='image']/h:a/h:img/@src | h:td[@id='image']/h:img/@src">
 	<xsl:attribute name="src">
-		<xsl:value-of select="$imageDirectory"/>
+		<xsl:value-of select="$image-directory"/>
 		<xsl:value-of select="/doc/b:bassetts/b:bassett/b:bassett_image"/>
 	</xsl:attribute>
 </xsl:template>
@@ -165,14 +169,14 @@
   
 <xsl:template match="h:td[@id='diagram-image']/h:a/h:img/@src | h:td[@id='diagram-image']/h:img/@src">		      
 	<xsl:attribute name="src">
-		<xsl:value-of select="$imageDirectory"/>
+		<xsl:value-of select="$image-directory"/>
 		<xsl:value-of select="/doc/b:bassetts/b:bassett/b:diagram_image"/>
 	</xsl:attribute>
 </xsl:template>
 
 <xsl:template match="h:td[@id='legend-image']/h:a/h:img/@src | h:td[@id='legend-image']/h:img/@src">		      
 	<xsl:attribute name="src">
-		<xsl:value-of select="$imageDirectory"/>
+		<xsl:value-of select="$image-directory"/>
 		<xsl:value-of select="/doc/b:bassetts/b:bassett/b:legend_image"/>
 	</xsl:attribute>
 </xsl:template>
