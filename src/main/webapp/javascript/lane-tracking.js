@@ -97,11 +97,12 @@ LANE.track = function(){
             if (this.isTrackable(e)) {
                 td = getTrackingData(e);
                 //TODO: remove this after fixing bugs 22495 and 22496
-                            if (!td.external && td.path.indexOf('secure/login') > -1) {
+                            if (td.path.indexOf('secure/login') > -1) {
                                 var msg = 'useragent:' + navigator.userAgent;
-                                msg += ';host:' + document.location.toString();
+                                msg += ';ref:' + document.location.toString();
                                 msg += ';title:' + trackingData.title;
                                 msg += ';path:' + trackingData.path;
+                                msg += ';external:' + trackingData.external;
                                 LANE.core.log(msg);
                             }
                 this.track(td);
