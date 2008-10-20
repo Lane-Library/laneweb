@@ -77,9 +77,6 @@
                             <includes>
                                 <include>*-min.css</include>
                             </includes>
-                            <excludes>
-                                <exclude>bassett-min.css</exclude>
-                            </excludes>
                         </aggregation>
                         <aggregation>
                             <removeIncluded>true</removeIncluded>
@@ -103,7 +100,7 @@
                                 <include>lane-popup-min.js</include>
                                 <include>lane-ie-min.js</include>
                                 <include>lane-forms-min.js</include>
-                                <!--<include>lane-bassett-min.js</include>-->
+                                <include>lane-bassett-min.js</include>
                             </includes>
                         </aggregation>
                     </aggregations>
