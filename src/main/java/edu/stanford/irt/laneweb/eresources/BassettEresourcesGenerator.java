@@ -57,7 +57,7 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements 
 
     public void generate() throws SAXException {
         Collection<Eresource> eresources = null;
-        Map regionCountMap = null;
+        Map<String, Integer> regionCountMap = null;
         if (this.region_count != null) {
             if (this.query == null) {
                 this.query = "bassett";

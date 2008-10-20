@@ -14,7 +14,6 @@
             <map:match pattern="bassett/**" type="wildcard">
                 <map:mount uri-prefix="bassett" check-reload="yes" src="bassett.xmap"/>
             </map:match>
-     
             <map:match pattern="online/(.+)browse.html" type="regex">
                 <map:generate type="html"
                     src="{naming:java:comp/env/live-base}/content/online/{1}browse.html"/>
@@ -116,7 +115,8 @@
                         <map:generate type="file" src="context://resources/templates/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="context://resources/templates/{defaults:template}.xml"/>
+                        <map:generate type="file"
+                            src="context://resources/templates/{defaults:template}.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
