@@ -9,7 +9,7 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
         onSuccess: function(){
 			YAHOO.util.Get.script( "/javascript/noversion/accordion-min.js", {
        			 onSuccess: function(){
-					init();			        	
+       			 	init();	        	
         		}
 			});		        	
         }
@@ -18,12 +18,12 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
 	
 	function init(){
 		var accordion = document.getElementById('accordion');
- 		registerLinksContainer(accordion );
- 		registerLinksContainer( document.getElementById('bassettContent'));					
+ 		registerLinksContainer(accordion, false );
+ 		registerLinksContainer( document.getElementById('bassettContent'), false);					
  	}
 	
 	 	
- 	function registerLinksContainer(container){
+ 	function registerLinksContainer(container, check){
  		var anchor;    
         if (container) {
          	contentContainer = document.getElementById("bassettContent");
@@ -31,7 +31,7 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
          	for (i = 0; i < anchor.length; i++) {
          		if( anchor[i].rel == null || anchor[i].rel == "" )
          		{
-	                 anchor[i].result = new BassettResult( anchor[i], contentContainer);
+	                 anchor[i].result = new BassettResult( anchor[i], contentContainer, check);
 	                 anchor[i].clicked = function(event) {
 	             		this.result.getContent();
 	                    YE.stopEvent(event);
@@ -44,11 +44,18 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
     
 
     
-    function BassettResult(anchor, container) {
+    function BassettResult(anchor, container, check) {
+    	var href;
     	this._anchor = anchor;
     	this._container = container;
         this._content;
-        this._url = '/././plain/' + anchor.pathname.replace(/bassett/,'bassett/raw') + anchor.search ;
+        href = anchor.href;
+        href = href.substr(href.indexOf("/bassett/")+8);
+        href = href.split("?");
+        if(href.length == 1)
+        	this._url = '/././plain/bassett/raw' + href[0];
+        if(href.length > 1)
+        	this._url = '/././plain/bassett/raw' + href[0]+"?" + href[1] ;
         this._callback = {
             success: function(o) {
                 var result, content;
@@ -74,7 +81,7 @@ BassettResult.prototype.show = function() {
 	    for (i = 0; i < this._content.length; i++) {
 	    	this._container.appendChild(LANE.core.importNode(this._content[i], true));
 	    }
-	    registerLinksContainer(this._container);
+	    registerLinksContainer(this._container,true);
 };
 
 BassettResult.prototype.getContent = function() {
