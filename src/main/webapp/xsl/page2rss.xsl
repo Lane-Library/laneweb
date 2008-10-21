@@ -110,8 +110,8 @@
                                 <xsl:text><![CDATA[</a><br />]]></xsl:text>
                             </xsl:for-each>
                         </xsl:when>
-                        <!-- td's w/ spans ... note that these are also mixed w/ span-less text in classes page -->
-                        <xsl:when test="count(h:span) &gt; 0">
+                        <!-- td's w/ spans or brs  -->
+                        <xsl:when test="count(h:span) &gt; 0 or count(h:br) &gt; 0">
                             <xsl:text><![CDATA[<b>]]></xsl:text><xsl:value-of select="$header[$pos = position()]"/><xsl:text><![CDATA[</b>: ]]></xsl:text>
                             <xsl:value-of select="."/>
                             <xsl:text><![CDATA[<br />]]></xsl:text>
