@@ -165,8 +165,7 @@
 //LANE.namespace('webtrends');
 
 (function() {
-    var gTimeZone = -8,
-    	gImages=[],
+    var gImages=[],
     	gIndex=0,
     	DCS={},
     	WT={},
@@ -177,7 +176,7 @@
     	gDcsId="dcssi6l0t1000004z9mg95sop_9v3k";
 
     function dcsVar(){
-        var i, pos, front, end, dCurrent=new Date();
+        var i, dCurrent=new Date();
         WT.tz=dCurrent.getTimezoneOffset()/60*-1;
         if (WT.tz===0){
             WT.tz="0";
@@ -208,10 +207,13 @@
         }
         WT.fi="No";
         if (window.ActiveXObject){
-            if ((typeof(gFV)!="undefined")&&(gFV.length>0)){
-                WT.fi="Yes";
-                WT.fv=gFV;
-            }
+            //gFV is not set, it appears that this script expects it to be set to the
+            //flash version in a separate script element, which we have never done
+            //so have never recorded the flash version for ie
+//            if ((typeof(gFV)!="undefined")&&(gFV.length>0)){
+//                WT.fi="Yes";
+//                WT.fv=gFV;
+//            }
         }
         else if (navigator.plugins&&navigator.plugins.length){
             for (i=0;i<navigator.plugins.length;i++){

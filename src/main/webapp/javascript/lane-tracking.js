@@ -4,7 +4,7 @@ LANE.track = function(){
             var node = e.srcElement || e.target,
                 //TODO: not sure I need this l variable
                 l = node,
-                host, path, query, external, title, searchTerms, searchSource,
+                host, path, query, external, title, searchTerms, searchSource, children,
                 getTrackedTitle = function(){
                     var title = l.title, img, i = 0;
                     if (l.nodeName == 'FORM') {
@@ -115,7 +115,7 @@ LANE.track = function(){
                  }
         },
         isTrackable: function(e){
-            var node = e.srcElement || e.target, dh, nh, rel, children;
+            var node = e.srcElement || e.target, dh, nh, rel;
             dh = document.location.host;
             //find self ancestor that is <a>
             if (e.type == 'click') {

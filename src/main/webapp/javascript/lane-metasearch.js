@@ -1,7 +1,7 @@
 (function() {
     LANE.namespace('search.metasearch');
     var startTime = new Date().getTime(),
-    	url,
+    	url, i,
     	mergedMode = true,
 		// filter out multiple ovid, mdc and cro requests b/c of IE6's 2048 character limit on requests
 		// this depends on search app returning all resources for engine when one resource requested
@@ -100,7 +100,7 @@
 				    var toggleEl = document.getElementById('toggleZeros'), 
 				    	zeroResources = YAHOO.util.Dom.getElementsByClassName('zeroHit'), 
 				    	searchCats = YAHOO.util.Dom.getElementsByClassName('searchCategory'),
-				    	display;
+				    	display, y;
 					if ( toggleEl.innerHTML.match(/Show/) ){
 						display = "block";
 						toggleEl.innerHTML = toggleEl.innerHTML.replace("Show","Hide");

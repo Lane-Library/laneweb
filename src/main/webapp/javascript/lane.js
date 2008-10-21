@@ -32,8 +32,8 @@ LANE.core = LANE.core || function() {
     E.addListener(this,'load',function() {
         var d = document,
             meta, //the meta elements
-            p, //anchors for finding popup links
-            a, //popup anchor
+//            p, //anchors for finding popup links
+//            a, //popup anchor
             i;
         meta = d.getElementsByTagName('meta');
         for (i = 0; i < meta.length; i++) {
@@ -70,7 +70,7 @@ LANE.core = LANE.core || function() {
 //        });
         //calls 'clicked' function on target and any parent elements
         E.addListener(d, 'click', function(e){
-            var t = e.srcElement || e.target, parent, href,
+            var t = e.srcElement || e.target, parent,
                 f;
             while (t) {
                 if (t.clicked) {

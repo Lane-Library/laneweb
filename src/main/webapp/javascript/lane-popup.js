@@ -1,8 +1,8 @@
 (function(){
     YAHOO.util.Event.addListener(window, 'load', function(){
-        var i, anchors, args, panel, createPanel, showPanel, popupWindow, showWindow;
+        var i, anchors, args, createPanel, showPanel, popupWindow, showWindow;
         createPanel = function(){
-            var container = document.createElement('div');
+            var panel, container = document.createElement('div');
             container.setAttribute('id', 'popupContainer');
             document.body.appendChild(container);
             panel = new YAHOO.widget.Panel('popupContainer', {

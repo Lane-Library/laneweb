@@ -3,7 +3,6 @@
     YAHOO.util.Event.addListener(window,'load', function() {
         var tc, //tooltip container Elements
             tt, //tooltips
-            te, //elment to recieve tooltip
             e, //id of te element
             w, //width of tooltip
             i, j;
@@ -17,7 +16,7 @@
                     if(e && YAHOO.util.Dom.inDocument(e)) {
                         document.getElementById(e).trackable = true;
                         w = tt[j].style.width || '25%';
-                        var bar = new YAHOO.widget.Tooltip(
+                        new YAHOO.widget.Tooltip(
                                 YAHOO.util.Dom.generateId(), 
                                 {
                                     context:e,

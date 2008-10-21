@@ -70,6 +70,9 @@
                 </executions>
                 <configuration>
                     <webappDirectory>target/laneweb</webappDirectory>
+                    <excludes>
+                        <exclude>**/swfobject.js</exclude>
+                    </excludes>
                     <aggregations>
                         <aggregation>
                             <removeIncluded>true</removeIncluded>

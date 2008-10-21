@@ -24,7 +24,7 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
 	
 	 	
  	function registerLinksContainer(container, check){
- 		var anchor;    
+ 		var anchor, i;    
         if (container) {
          	contentContainer = document.getElementById("bassettContent");
          	anchor = container.getElementsByTagName('a');
@@ -78,6 +78,7 @@ BassettResult.prototype.setContent = function(content) {
     
 
 BassettResult.prototype.show = function() {
+    var i;
 	    for (i = 0; i < this._content.length; i++) {
 	    	this._container.appendChild(LANE.core.importNode(this._content[i], true));
 	    }
