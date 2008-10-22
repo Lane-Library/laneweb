@@ -39,6 +39,9 @@
             if (type == 'console' || type == 'fullscreen') {
                 tools = 'resizable,toolbar=no,location=no,scrollbars=no';
             }
+            if (type == 'console-with-scrollbars') {
+                tools = 'resizable,toolbar=no,location=no,scrollbars=yes';
+            }
             if (strWidth && strHeight) {
                 tools += ',width=' +strWidth + ',height=' + strHeight;
             }
@@ -53,7 +56,7 @@
                 if (anchors[i].rel) {
                     args = anchors[i].rel.split(' ');
                     if (args[0] == 'popup') {
-                        if (args[1] == 'standard' || args[1] == 'console' || args[1] == 'fullscreen') {
+                        if (args[1] == 'standard' || args[1] == 'console'|| args[1] == 'console-with-scrollbars' || args[1] == 'fullscreen') {
                             anchors[i].clicked = function(e){
                                 var args = this.rel.split(' ');
                                 YAHOO.util.Event.preventDefault(e);
