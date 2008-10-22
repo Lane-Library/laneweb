@@ -178,6 +178,9 @@ color:black;
 object#featureSlider div.aGeneralBox {
 background:#ccc;
 }
+.grey {
+color: #999;
+}
 
 /*UNUSED==============================
 
@@ -243,8 +246,4 @@ color: #900;
 .area-hover {
    background: #000000;
  }
-
-.grey {
-color: #999;
-}
 */
