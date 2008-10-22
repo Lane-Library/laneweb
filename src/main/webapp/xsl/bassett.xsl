@@ -143,14 +143,6 @@
 		        	<xsl:attribute name="href"  >
 		        		<xsl:text>/bassett/bassettView.html?bn=</xsl:text><xsl:value-of select="./@b:bassett_number"/>
 		        	</xsl:attribute>
-		       		<img>
-		       			<xsl:attribute name="class"  >
-			        		<xsl:text>newWinIcon</xsl:text>
-			        	</xsl:attribute>
-			     	   	<xsl:attribute name="src"  >
-			        		<xsl:text>/graphics/icons/newWinIcon.gif</xsl:text>
-			        	</xsl:attribute>
-		        	</img>
 		       </a>
 				</div>
 		</xsl:for-each>
