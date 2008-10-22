@@ -1,8 +1,8 @@
 (function(){
     YAHOO.util.Event.addListener(window, 'load', function(){
-        var i, anchors, args, createPanel, showPanel, popupWindow, showWindow;
+        var i, anchors, args, panel, createPanel, showPanel, popupWindow, showWindow;
         createPanel = function(){
-            var panel, container = document.createElement('div');
+            var container = document.createElement('div');
             container.setAttribute('id', 'popupContainer');
             document.body.appendChild(container);
             panel = new YAHOO.widget.Panel('popupContainer', {
@@ -80,8 +80,7 @@
                                 YAHOO.util.Event.preventDefault(e);
                                 YAHOO.util.Connect.asyncRequest('GET', '/././plain/howto/index.html?mode=dl&id=_' + id, {
                                     success: function(o){
-                                        var panel = o.argument.panel,
-                                            id = o.argument.id,
+                                        var id = o.argument.id,
                                             X = o.argument.X,
                                             Y = o.argument.Y,
                                             f = o.responseXML.documentElement,

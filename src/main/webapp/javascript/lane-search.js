@@ -9,21 +9,23 @@ LANE.search = LANE.search ||  function() {
         searchString,
         encodedString,
         source,
+        ind = document.getElementById('searchIndicator'),
         // publicly available functions:
         o = {
             startSearch: function(){
-                if (searching) {
-                    throw('already searching');
-                }
+                //TODO: revisit this, do we want to prevent a new search when one in progress?
+//                if (searching) {
+//                    throw('already searching');
+//                }
                 if (!form.q.value) {
                     throw('nothing to search for');
                 }
                 searching = true;
-                LANE.search.indicator.show();
+                ind.style.visibility = 'visible';
             },
             stopSearch: function(){
                 searching = false;
-                LANE.search.indicator.hide();
+                ind.style.visibility = 'hidden';
             },
             isSearching: function(){
                 return searching;

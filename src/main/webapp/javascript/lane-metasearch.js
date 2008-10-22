@@ -87,7 +87,7 @@
 		                    setTimeout("LANE.search.metasearch.getResultCounts()",sleepingTime);
 		                }
 		                else{
-			            	LANE.search.indicator.hide();
+			            	LANE.search.stopSearch();
 		                }
 		            }// end request success definition
 		        });// end async request
@@ -124,7 +124,7 @@
 	    	
 		    // kick off initial metasearch request
 		    LANE.search.metasearch.getResultCounts();
-        	LANE.search.indicator.show();
+        	LANE.search.startSearch();
 		}
 			
     });//end addListener

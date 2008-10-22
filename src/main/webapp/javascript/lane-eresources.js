@@ -115,7 +115,7 @@ Result.prototype.show = function() {
     var i;
     if (this._state == 'initialized') {
         this.getContent();
-	    LANE.search.indicator.show();
+	    LANE.search.startSearch();
     } else if (this._state == 'searching') {
             alert('search in progress');
     } else {
@@ -125,7 +125,7 @@ Result.prototype.show = function() {
         for (i = 0; i < this._content.length; i++) {
             this._container.appendChild(this._content[i]);
         }
-	    LANE.search.indicator.hide();
+	    LANE.search.stopSearch();
     }
 };
 Result.prototype.getContent = function() {
