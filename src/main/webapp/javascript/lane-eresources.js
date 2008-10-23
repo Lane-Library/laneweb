@@ -112,7 +112,7 @@ Result.prototype.setTabCount = function(count) {
     hitCount.textContent = count;
 };
 Result.prototype.show = function() {
-    var i;
+    var i, searchSelect = document.getElementById('searchSelect');
     if (this._state == 'initialized') {
         this.getContent();
 	    LANE.search.startSearch();
@@ -126,6 +126,12 @@ Result.prototype.show = function() {
             this._container.appendChild(this._content[i]);
         }
 	    LANE.search.stopSearch();
+    }
+    for (i = 0; i < searchSelect.options.length; i++) {
+        if (searchSelect.options[i].value == this._type) {
+            searchSelect.selectedIndex = i;
+            break;
+        }
     }
 };
 Result.prototype.getContent = function() {
