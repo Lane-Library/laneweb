@@ -18,12 +18,12 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
 	
 	function init(){
 		var accordion = document.getElementById('accordion');
- 		registerLinksContainer(accordion, false );
- 		registerLinksContainer( document.getElementById('bassettContent'), false);					
+ 		registerLinksContainer(accordion );
+ 		registerLinksContainer( document.getElementById('bassettContent'));					
  	}
 	
 	 	
- 	function registerLinksContainer(container, check){
+ 	function registerLinksContainer(container){
  		var anchor, i;    
         if (container) {
          	contentContainer = document.getElementById("bassettContent");
@@ -31,7 +31,7 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
          	for (i = 0; i < anchor.length; i++) {
          		if( anchor[i].rel == null || anchor[i].rel == "" )
          		{
-	                 anchor[i].result = new BassettResult( anchor[i], contentContainer, check);
+	                 anchor[i].result = new BassettResult( anchor[i], contentContainer);
 	                 anchor[i].clicked = function(event) {
 	             		this.result.getContent();
 	                    YE.stopEvent(event);
@@ -41,10 +41,8 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
 		}
  	}
         
-    
-
-    
-    function BassettResult(anchor, container, check) {
+        
+    function BassettResult(anchor, container) {
     	var href;
     	this._anchor = anchor;
     	this._container = container;
@@ -82,7 +80,8 @@ BassettResult.prototype.show = function() {
 	    for (i = 0; i < this._content.length; i++) {
 	    	this._container.appendChild(LANE.core.importNode(this._content[i], true));
 	    }
-	    registerLinksContainer(this._container,true);
+	    registerLinksContainer(this._container);
+	    LANE.popups.initialize(this._container);
 };
 
 BassettResult.prototype.getContent = function() {

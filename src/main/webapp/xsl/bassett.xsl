@@ -89,7 +89,7 @@
     	<xsl:attribute name="href">
       	    <xsl:value-of select="."/>
       	   	<xsl:value-of select="$query"/>
-      	   	<xsl:text>&amp;t=diagram </xsl:text>
+      	   	<xsl:text>&amp;t=diagram</xsl:text>
       	</xsl:attribute>
      </xsl:template> 
      
@@ -120,11 +120,11 @@
 		        		</xsl:choose>
 		        	</xsl:attribute>
 		        	<xsl:attribute name="alt"  >
-		        		<xsl:text>bassett Number</xsl:text><xsl:value-of select="./@b:bassett_number"/>
+		        		<xsl:text>bassett Number </xsl:text><xsl:value-of select="./@b:bassett_number"/>
 		        	</xsl:attribute>
 		      	</img>
 		      	</a>
-				<br/>
+		      	<br/>
 				<xsl:text>#</xsl:text><xsl:value-of select="./@b:bassett_number"/>
 				<br/>
 				<a> 
