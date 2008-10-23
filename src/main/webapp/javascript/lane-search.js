@@ -74,6 +74,14 @@ LANE.search = LANE.search ||  function() {
                     }
                 }
                 return source;
+            },
+            setSearchType: function(type) {
+                for (i = 0; i < select.options.length; i++) {
+                    if (select.options[i].value == type) {
+                        select.selectedIndex = i;
+                        break;
+                    }
+                }
             }
         };
     // initialize on load
