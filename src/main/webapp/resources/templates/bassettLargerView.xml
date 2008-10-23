@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Lane Medical Library, Stanford University Medical Center</title>
+    <link rel="stylesheet" type="text/css"
+        href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css"/>
+    <link rel="stylesheet" type="text/css"
+        href="http://yui.yahooapis.com/2.6.0/build/container/assets/skins/sam/container.css"/>
+    <link rel="stylesheet" type="text/css" href="/style/irt3/irt3.css"/>
+    <style>	html { background-color: #fff;}	</style>
+</head>
+<body>
+	<div id="doc3" class="yui-t7"> 
+		<div id="bd">
+	    	<div class="yui-g">
+		    	<?laneweb content?>
+			</div>
+		</div>
+	</div>
+	 <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.6.0/build/utilities/utilities.js&amp;2.6.0/build/container/container-min.js&amp;2.6.0/build/json/json-min.js&amp;2.6.0/build/history/history-min.js"> </script>
+</body>
+</html>
