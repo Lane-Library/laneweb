@@ -96,8 +96,8 @@ BassettResult.prototype.getContent = function() {
 };
  
 BassettResult.prototype.hide = function() {
-    while (this._container.childNodes.length > 0) {
-        this._container.removeChild(this._container.lastChild);
+	while (this._container.childNodes.length > 0) {
+        	this._container.removeChild(this._container.firstChild);
     }
 };
 
