@@ -140,7 +140,7 @@
                 <xsl:otherwise>
                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                         href="cocoon:/services/{$root-category-string}/leftmenu_{$root-category-string}.html">
-                        <xi:fallback/>
+                        <xi:fallback><span style="display:none;">missing category leftmenu file</span></xi:fallback>
                     </xi:include>
                 </xsl:otherwise>
             </xsl:choose>
