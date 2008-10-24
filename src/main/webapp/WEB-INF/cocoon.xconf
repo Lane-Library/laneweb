@@ -21,7 +21,7 @@
             <proxy-regex>^171\.65\.2[0-5][0-9]\.\S+</proxy-regex>
             <template url="^(stage/|)shc/\S+" value="shc"/>
             <template url="^(stage/|)services/spaces/reserve/\S+" value="none"/>
-            <template url="^(stage/|)bassett/raw/bassettLargerView.html?.*+" value="bassettlargerView"/>
+            <template url="^(stage/|)bassett/raw/bassettLargerView.html?.*+" value="bassettLargerView"/>
         </component-instance>
         <component-instance logger="core.modules.input" name="request-param"
             class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
