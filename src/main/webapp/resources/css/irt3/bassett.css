@@ -71,6 +71,19 @@ div.bassett-images div{
 	float: left;
 }
 
+#bassettContent .hr{
+	border-bottom:1px solid #ccc;
+	padding:0px;
+	padding-bottom:7px;
+	float:none;
+}
+
+#bassettContent .image-text{
+	padding:0px;
+	padding-top:3px;
+	float:none;
+}
+
 
 /*********** IMAGE VIEW CSS **************/
 
@@ -171,6 +184,13 @@ img.newWinIcon{
 
 #bassettContent hr{
 	border: 0px;
+	background-color: #ccc;
+	height: 1px;
+}
+
+#thumbnail hr{
+	margin-top:5px;
+	width:110px;
 	background-color: #ccc;
 	height: 1px;
 }

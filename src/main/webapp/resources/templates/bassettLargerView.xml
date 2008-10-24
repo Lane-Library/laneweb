@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css"
         href="http://yui.yahooapis.com/2.6.0/build/container/assets/skins/sam/container.css"/>
     <link rel="stylesheet" type="text/css" href="/style/irt3/irt3.css"/>
-    <style>	html { background-color: #fff;}	</style>
+    <style>	html { background-color: #fff;}</style>
 </head>
 <body>
 	<div id="doc3" class="yui-t7"> 
@@ -17,6 +17,7 @@
 			</div>
 		</div>
 	</div>
-	 <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.6.0/build/utilities/utilities.js&amp;2.6.0/build/container/container-min.js&amp;2.6.0/build/json/json-min.js&amp;2.6.0/build/history/history-min.js"> </script>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.6.0/build/utilities/utilities.js&amp;2.6.0/build/container/container-min.js&amp;2.6.0/build/json/json-min.js&amp;2.6.0/build/history/history-min.js"> </script>
+	<script src="/javascript/lane-all.js" type="text/javascript"> </script>
 </body>
 </html>

@@ -100,7 +100,9 @@
     	<xsl:apply-templates select="attribute::node()"/>
      	<xsl:for-each select="/doc/b:bassetts/b:bassett">
      		<div>
-     		<a> 
+     		<div>
+     		<xsl:attribute name="class">hr</xsl:attribute>
+		   	<a> 
            	<xsl:attribute name="href"  >
         		<xsl:text>/bassett/bassettView.html?bn=</xsl:text><xsl:value-of select="./@b:bassett_number"/>
         	</xsl:attribute>
@@ -124,8 +126,10 @@
 		        	</xsl:attribute>
 		      	</img>
 		      	</a>
-		      	<br/>
-				<xsl:text>#</xsl:text><xsl:value-of select="./@b:bassett_number"/>
+		      	</div>
+		      	<div>
+		      	<xsl:attribute name="class">image-text</xsl:attribute>
+		 		<xsl:text>#</xsl:text><xsl:value-of select="./@b:bassett_number"/>
 				<br/>
 				<a> 
 	     		  	<xsl:attribute name="title"  >
@@ -144,6 +148,7 @@
 		        		<xsl:text>/bassett/bassettView.html?bn=</xsl:text><xsl:value-of select="./@b:bassett_number"/>
 		        	</xsl:attribute>
 		       </a>
+		       </div>
 				</div>
 		</xsl:for-each>
     </xsl:copy>
