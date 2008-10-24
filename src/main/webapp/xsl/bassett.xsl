@@ -232,7 +232,9 @@
 </xsl:template>
 
 <!-- paging  -->
-<xsl:variable name="total-pages"><xsl:value-of select="round(number(count(/doc/b:bassetts/b:bassett) div $imgs-per-page)) -1"/></xsl:variable>
+<xsl:variable name="total-pages">
+	<xsl:value-of select="substring-before( string(count(/doc/b:bassetts/b:bassett) div $imgs-per-page),'.')"/>
+</xsl:variable>
 
 <xsl:template match="h:a[@id='first-page']/@href">
 	<xsl:attribute name="href">
