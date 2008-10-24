@@ -9,17 +9,25 @@
 <xsl:param name="q"/>
 <xsl:param name="type"/> 
 <xsl:param name="region"/>
-<xsl:param name="query-string"/>
 <xsl:param name="images-url"/>
+<xsl:param name="images-per-page"/>
+<xsl:param name="current-page"/>
+
 
 <xsl:variable name="thumbnail-directory"><xsl:value-of select="$images-url"/>/small/</xsl:variable>
 <xsl:variable name="large-image-directory"><xsl:value-of select="$images-url"/>/large/</xsl:variable>
 <xsl:variable name="medium-image-directory"><xsl:value-of select="$images-url"/>/medium/</xsl:variable>
 <xsl:variable name="image-directory"><xsl:if test="$type != 'largerView'"><xsl:value-of select="$medium-image-directory"/></xsl:if><xsl:if test="$type = 'largerView'"><xsl:value-of select="$large-image-directory"/></xsl:if></xsl:variable>
+<xsl:variable name="page-number"><xsl:if test="$current-page != ''"><xsl:value-of select="number($current-page)"/></xsl:if><xsl:if test="$current-page = ''"><xsl:value-of select="number(0)"/></xsl:if></xsl:variable>
+<xsl:variable name="imgs-per-page"><xsl:value-of select="number($images-per-page)"/></xsl:variable>
+
+<xsl:variable name="query-string">
+	<xsl:if test="$q != ''">q=<xsl:value-of select="$q"/><xsl:text>&amp;</xsl:text></xsl:if>
+	<xsl:if test="$region != ''">r=<xsl:value-of select="$region"/></xsl:if>
+	<xsl:if test="$type != ''">&amp;t=<xsl:value-of select="$type"/></xsl:if>
+</xsl:variable>
 
 <xsl:variable name="query"><xsl:value-of select="replace($query-string,'&amp;t=diagram','')"/> </xsl:variable>
-
-	 
 	<xsl:template match="*">
 	     <xsl:copy>
 	         <xsl:apply-templates select="attribute::node()|child::node()"/>
@@ -34,7 +42,7 @@
 	    
      <xsl:template match="h:span[@id='bassett-title']">
       	<xsl:copy>
-      		<xsl:apply-templates select="attribute::node()|child::node()"/>
+      	   <xsl:apply-templates select="attribute::node()|child::node()"/>
       		<xsl:choose>
 				<xsl:when test="$q">
 					<xsl:text>Search Term: </xsl:text>
@@ -45,7 +53,8 @@
 				</xsl:when>
 				<xsl:otherwise><xsl:value-of select="/doc/b:bassetts/b:bassett/b:regions/b:region[1]/@b:name"/>:</xsl:otherwise>
 			</xsl:choose>
-		</xsl:copy>        	
+		</xsl:copy>
+		        	
      </xsl:template> 
      
 	<xsl:template match="h:span[@id='bassett-subtitle']">
@@ -99,6 +108,8 @@
     	<xsl:copy>	
     	<xsl:apply-templates select="attribute::node()"/>
      	<xsl:for-each select="/doc/b:bassetts/b:bassett">
+     	
+     	<xsl:if test="position() &gt; $imgs-per-page * $page-number and position() &lt;= $imgs-per-page * $page-number + $imgs-per-page">
      		<div>
      		<div>
      		<xsl:attribute name="class">hr</xsl:attribute>
@@ -150,6 +161,7 @@
 		       </a>
 		       </div>
 				</div>
+				</xsl:if>
 		</xsl:for-each>
     </xsl:copy>
 	</xsl:template>    
@@ -214,13 +226,53 @@
 <!-- to get the Href for all links that will open a new window for the bassettLargerView.html -->
 <xsl:template match="h:a[@rel]/@href">
 	<xsl:attribute name="href">
-		<xsl:text>/bassett/raw/bassettLargerView.html?t=largerView&amp;bn=</xsl:text>
+		<xsl:text>/bassett/bassettLargerView.html?t=largerView&amp;bn=</xsl:text>
 		<xsl:value-of select="/doc/b:bassetts/b:bassett/@b:bassett_number"/>
 	</xsl:attribute>
 </xsl:template>
 
+<!-- paging  -->
+<xsl:variable name="total-pages"><xsl:value-of select="round(number(count(/doc/b:bassetts/b:bassett) div $imgs-per-page)) -1"/></xsl:variable>
 
+<xsl:template match="h:a[@id='first-page']/@href">
+	<xsl:attribute name="href">
+		<xsl:text>/bassett/bassettsView.html?</xsl:text>
+		<xsl:value-of select="$query-string"/>
+	</xsl:attribute>
+</xsl:template>
 
+<xsl:template match="h:a[@id='previous-page']/@href">
+	<xsl:attribute name="href">
+		<xsl:text>/bassett/bassettsView.html?</xsl:text>
+		<xsl:value-of select="$query-string"/>
+		<xsl:if test="$page-number != 0">
+			<xsl:text>&amp;pageNumber=</xsl:text><xsl:value-of select="number($page-number - 1)"></xsl:value-of>
+		</xsl:if>
+	</xsl:attribute>
+</xsl:template>
+
+<xsl:template match="h:a[@id='next-page']/@href">
+	<xsl:attribute name="href">
+		<xsl:text>/bassett/bassettsView.html?</xsl:text>
+		<xsl:value-of select="$query-string"/>
+		<xsl:if test="$total-pages != $page-number">
+			<xsl:text>&amp;pageNumber=</xsl:text><xsl:value-of select="number($page-number + 1)"></xsl:value-of>
+		</xsl:if>
+		<xsl:if test="$total-pages = $page-number">
+			<xsl:text>&amp;pageNumber=</xsl:text><xsl:value-of select="$total-pages"/>
+		</xsl:if>
+	</xsl:attribute>
+</xsl:template>
+
+<xsl:template match="h:a[@id='last-page']/@href">
+	<xsl:attribute name="href">
+		<xsl:text>/bassett/bassettsView.html?</xsl:text>
+		<xsl:value-of select="$query-string"/>
+		<xsl:text>&amp;pageNumber=</xsl:text><xsl:value-of select="$total-pages"/>
+	</xsl:attribute>
+</xsl:template>
+
+<!--  paging -->
 
 <xsl:template match="attribute::node()">
     <xsl:copy-of select="self::node()"/>
