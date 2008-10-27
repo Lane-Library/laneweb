@@ -131,6 +131,10 @@ font-style:italic;
 strong {
 font-weight:bold;
 }
+.tinyFont {
+font-size:xx-small;
+}
+
 /*UNUSED==============================
 div#leftColumn h3 {
 	text-align:left;
@@ -152,11 +156,6 @@ color:#fff;
 #findItLink {
 font-weight:bolder;
 text-decoration:none;
-}
-
-
-.tinyFont {
-font-size:xx-small;
 }
 li.eLibraryTabActive a, ul.queryMappingHeader li a, ul.queryMappingResults li a {
 text-decoration:none;
