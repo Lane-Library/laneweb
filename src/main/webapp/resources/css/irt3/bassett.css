@@ -69,7 +69,7 @@ div.bassett-images{
 }
 
 div.bassett-images div{
-	padding :10px;
+	padding :5px;
 	padding-top: 15px;
 	padding-bottom :30px;
 	float: left;
@@ -85,7 +85,6 @@ div.bassett-images div{
 #bassettContent .image-text{
 	padding:0px;
 	padding-top:3px;
-	float:none;
 }
 
 span.paging{

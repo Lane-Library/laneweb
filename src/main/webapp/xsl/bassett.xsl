@@ -111,33 +111,34 @@
      	
      	<xsl:if test="position() &gt; $imgs-per-page * $page-number and position() &lt;= $imgs-per-page * $page-number + $imgs-per-page">
      		<div>
-     		<div>
-     		<xsl:attribute name="class">hr</xsl:attribute>
-		   	<a> 
-           	<xsl:attribute name="href"  >
-        		<xsl:text>/bassett/bassettView.html?bn=</xsl:text><xsl:value-of select="./@b:bassett_number"/>
-        	</xsl:attribute>
-	     		<img width="110">
-	     		  	<xsl:attribute name="title"  >
-		        		<xsl:value-of select="./b:title"/>
-		        	</xsl:attribute>
-		        	<xsl:attribute name="src"  >
-		        		<xsl:value-of select="$thumbnail-directory"/>
-		        		<xsl:choose>
-		        			<xsl:when test="$type='diagram'">
-		        				<xsl:value-of select="./b:diagram_image"/>
-		        			</xsl:when>
-		        			<xsl:otherwise>
-		        				<xsl:value-of select="./b:bassett_image"/>
-		        			</xsl:otherwise>
-		        		</xsl:choose>
-		        	</xsl:attribute>
-		        	<xsl:attribute name="alt"  >
-		        		<xsl:text>bassett Number </xsl:text><xsl:value-of select="./@b:bassett_number"/>
-		        	</xsl:attribute>
-		      	</img>
-		      	</a>
-		      	</div>
+     			<xsl:attribute name="class">image-container</xsl:attribute>
+	     		<div>
+	     		<xsl:attribute name="class">hr</xsl:attribute>
+				   	<a> 
+			           	<xsl:attribute name="href"  >
+			        		<xsl:text>/bassett/bassettView.html?bn=</xsl:text><xsl:value-of select="./@b:bassett_number"/>
+			        	</xsl:attribute>
+			     		<img>
+			     		  	<xsl:attribute name="title"  >
+				        		<xsl:value-of select="./b:title"/>
+				        	</xsl:attribute>
+				        	<xsl:attribute name="src"  >
+				        		<xsl:value-of select="$thumbnail-directory"/>
+				        		<xsl:choose>
+				        			<xsl:when test="$type='diagram'">
+				        				<xsl:value-of select="./b:diagram_image"/>
+				        			</xsl:when>
+				        			<xsl:otherwise>
+				        				<xsl:value-of select="./b:bassett_image"/>
+				        			</xsl:otherwise>
+				        		</xsl:choose>
+				        	</xsl:attribute>
+				        	<xsl:attribute name="alt"  >
+				        		<xsl:text>bassett Number </xsl:text><xsl:value-of select="./@b:bassett_number"/>
+				        	</xsl:attribute>
+				      	</img>
+				      	</a>
+		      		</div>
 		      	<div>
 		      	<xsl:attribute name="class">image-text</xsl:attribute>
 		 		<xsl:text>#</xsl:text><xsl:value-of select="./@b:bassett_number"/>
