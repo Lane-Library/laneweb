@@ -236,6 +236,14 @@
 	<xsl:value-of select="substring-before( string(count(/doc/b:bassetts/b:bassett) div $imgs-per-page),'.')"/>
 </xsl:variable>
 
+<xsl:template match="h:span[@class='paging']">
+	<xsl:if test="$total-pages != '0'">
+	     <xsl:copy>
+	         <xsl:apply-templates select="attribute::node()|child::node()"/>
+	     </xsl:copy>
+	</xsl:if>
+</xsl:template>
+
 <xsl:template match="h:a[@id='first-page']/@href">
 	<xsl:attribute name="href">
 		<xsl:text>/bassett/bassettsView.html?</xsl:text>
