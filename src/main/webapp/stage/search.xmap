@@ -28,6 +28,12 @@
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
+                 <!-- bassett search pages -->
+                <map:match type="regex-parameter" pattern="bassett">
+                    <map:parameter name="parameter-name" value="source"/>
+                    <map:generate src="cocoon://content/bassett/bassettsView.html"/>
+                    <map:serialize type="xhtml"/>
+                </map:match>
                 <!-- portal metasearch pages -->
                 <map:match type="regex-parameter" pattern="^\/.+\.html$">
                     <map:parameter name="parameter-name" value="source"/>
