@@ -3,11 +3,13 @@ LANE.track = function(){
         getTrackingData = function(e){
             var node = e.srcElement || e.target,
                 //TODO: not sure I need this l variable
-                l = node,
+                l = node, rel,
                 host, path, query, external, title, searchTerms, searchSource, children,
                 getTrackedTitle = function(){
                     var title = l.title, img, i = 0;
-                    if (l.nodeName == 'FORM') {
+                    if (l.rel && l.rel.indexOf('popup') === 0) {
+                        title = 'YUI Pop-up [' + l.rel.substring(6) + ']';
+                    } else if (l.nodeName == 'FORM') {
                         title = l.name || l.id;
                     }
                     if (!title) {
@@ -59,6 +61,10 @@ LANE.track = function(){
                         }
                         query = '';
                         external = true;
+                    } else if (l.rel) {
+                        host = document.location.host;
+                        path = document.location.pathname;
+                        query = document.location.search;
                     } else {
                         host = l.host;
                         if (host.indexOf(':') > -1) {
@@ -96,15 +102,6 @@ LANE.track = function(){
             var td;
             if (this.isTrackable(e)) {
                 td = getTrackingData(e);
-                //TODO: remove this after fixing bugs 22495 and 22496
-                            if (td.path.indexOf('secure/login') > -1) {
-                                var msg = 'useragent:' + navigator.userAgent;
-                                msg += ';ref:' + document.location.toString();
-                                msg += ';title:' + trackingData.title;
-                                msg += ';path:' + trackingData.path;
-                                msg += ';external:' + trackingData.external;
-                                LANE.core.log(msg);
-                            }
                 this.track(td);
             }
         },
@@ -130,7 +127,8 @@ LANE.track = function(){
                     if (node.rel) {
                         rel = node.rel.split(' ');
                         if (rel[0] == 'popup' && (rel[1] == 'local' || rel[1] == 'faq')) {
-                            //TODO: change to true when ready to track popups
+                            return true;
+                        } else {
                             return false;
                         }
                     }
