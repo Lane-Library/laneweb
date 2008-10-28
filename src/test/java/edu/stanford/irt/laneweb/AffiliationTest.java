@@ -27,7 +27,11 @@ public class AffiliationTest extends TestCase {
         while ((ip = staffIps.readLine()) != null) {
             assertEquals(ip, Affiliation.STAFF, Affiliation.getAffiliationForIP(ip));
         }
+    }
+    
+    public void testNotStaffIps() throws IOException {
         LineNumberReader notStaffIps = new LineNumberReader(new InputStreamReader(getClass().getResourceAsStream("not-staff-ips.txt")));
+        String ip = null;
         while ((ip = notStaffIps.readLine()) != null) {
             assertNotSame(ip, Affiliation.STAFF, Affiliation.getAffiliationForIP(ip));
         }
