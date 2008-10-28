@@ -338,10 +338,6 @@
                 args.push('DCS.dcsuri');
                 args.push(trackingData.path);
             }
-            if (trackingData.query !== undefined) {
-                args.push('DCS.dcsqry');
-                args.push(trackingData.query);
-            }
             if (!(/\.html$/).test(trackingData.path) || trackingData.external) {
                 args.push('DCS.dcsref');
                 args.push(document.location.toString());
