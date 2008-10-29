@@ -178,7 +178,6 @@ public class BassettCollectionManagerImpl implements BassettCollectionManager, T
         LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         BassettEresource eresource = null;
         Version version = null;
-        Link link;
         int currentEresourceId = -1;
         String currentTitle = null;
         while (rs.next()) {
@@ -207,11 +206,6 @@ public class BassettCollectionManagerImpl implements BassettCollectionManager, T
                 if ("F".equals(rs.getString("PROXY"))) {
                     version.setProxy(false);
                 }
-                link = new LinkImpl();
-                version.addLink(link);
-                link.setUrl(rs.getString("URL").replace("http://lane.stanford.edu", ""));
-                link.setLabel(rs.getString("LABEL"));
-                link.setInstruction(rs.getString("INSTRUCTION"));
                 eresources.add(eresource);
             }
             if (rs.getString("SUB_REGION") != null) {
@@ -225,31 +219,17 @@ public class BassettCollectionManagerImpl implements BassettCollectionManager, T
 
     private Map<String, Integer> parseCountResultSet(final ResultSet rs) throws SQLException {
         Map<String, Integer> result = new LinkedHashMap<String, Integer>();
-        List<String> alreadyIn = new ArrayList<String>();
-        Integer count;
         while (rs.next()) {
-            String bassettNumber = rs.getString("BASSETT_NUMBER");
+            int count = rs.getInt("SUB_REGION_COUNT");
             String region = rs.getString("REGION");
             String subRegion = rs.getString("SUB_REGION");
-            if (!alreadyIn.contains(bassettNumber.concat(region))) {
-                alreadyIn.add(bassettNumber.concat(region));
-                count = result.get(region);
-                if (count == null) {
-                    result.put(region, new Integer(1));
-                } else {
-                    result.put(region, new Integer(count.intValue() + 1));
-                }
+            if ("0".equals(subRegion)) {
+        	result.put(region, count);
             }
-            if (subRegion != null) {
-                String key = region.concat("--".concat(subRegion));
-                count = result.get(key);
-                if (count == null) {
-                    result.put(key, new Integer(1));
-                } else {
-                    result.put(key, new Integer(count.intValue() + 1));
-                }
+            else if (subRegion != null) {
+                result.put(region.concat("--".concat(subRegion)), count);
             }
-        }
+         }
         return result;
     }
 
@@ -302,12 +282,17 @@ public class BassettCollectionManagerImpl implements BassettCollectionManager, T
             + "AND B.BASSETT_ID = BR.BASSETT_ID AND VERSION.VERSION_ID = LINK.VERSION_ID AND ERESOURCE.ERESOURCE_ID = TYPE.ERESOURCE_ID "
             + "AND TYPE = 'bassett'  AND B.BASSETT_NUMBER = ?";
 
-    private final String SEARCH_COUNT = "WITH FOUND AS ( SELECT TITLE, ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_ID, SCORE(1) AS SCORE_TEXT, CONTAINS(TITLE,? ) AS SCORE_TITLE "
-            + "FROM ERESOURCE  WHERE CONTAINS(TEXT,? ,1) > 0) "
-            + "SELECT  br.region, br.sub_region, b.bassett_number "
+    private final String SEARCH_COUNT = "WITH FOUND AS ( SELECT TITLE, ERESOURCE.ERESOURCE_ID, ERESOURCE.RECORD_ID, SCORE(1) AS SCORE_TEXT, "
+            + "CONTAINS(TITLE,?) AS SCORE_TITLE FROM ERESOURCE  WHERE CONTAINS(TEXT,?,1) > 0) "
+            + "SELECT  br.region, br.sub_region, count(b.bassett_number) as SUB_REGION_COUNT "
             + "FROM FOUND f,  BASSETT b , BASSETT_REGION br "
-            + "where f.record_id = b.record_id  and br.bassett_id = b.bassett_id "
-            + "group by  br.region, br.sub_region, b.bassett_number  order by  br.region, br.sub_region ";
+            + "where f.record_id = b.record_id  and br.bassett_id = b.bassett_id group by  br.region, br.sub_region "
+            + "union all "
+            + "SELECT  br.region, '0' as SUB_REGION, count(distinct(b.bassett_number)) as SUB_REGION_COUNT "
+            + "FROM FOUND f,  BASSETT b , BASSETT_REGION br "
+            + "where f.record_id = b.record_id  and br.bassett_id = b.bassett_id group by  br.region " 
+            + "order by 1,2";
+            
 
     public Collection<Eresource> getCore(final String type) {
         throw new UnsupportedOperationException();

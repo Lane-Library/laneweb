@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import edu.stanford.irt.eresources.Eresource;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
@@ -14,8 +16,6 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.ServiceableGenerator;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
-
-import edu.stanford.irt.eresources.Eresource;
 
 public class BassettEresourcesGenerator extends ServiceableGenerator implements Initializable {
 
@@ -59,33 +59,33 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements 
         Collection<Eresource> eresources = null;
         Map<String, Integer> regionCountMap = null;
         if (this.region_count != null) {
-            if (this.query == null) {
+            if (this.query == null) 
                 this.query = "bassett";
-            }
             regionCountMap = this.collectionManager.searchCount(null, null, this.query);
         }
-
-        if (this.bassettNumber != null) {
+        else  if (this.bassettNumber != null) {
             eresources = this.collectionManager.getById(this.bassettNumber);
-        } else if (this.region != null) {
+        } 
+        else if (this.region != null) {
             if (this.query != null) {
                 eresources = this.collectionManager.searchSubset(this.region, this.query);
             } else {
                 eresources = this.collectionManager.getSubset(this.region);
             }
-        } else if (this.query != null) {
+        } 
+        else if (this.query != null) {
             eresources = this.collectionManager.search(this.query);
         }
 
         XMLizable xml = null;
         this.xmlConsumer.startDocument();
-
         if (regionCountMap != null) {
             xml = new XMLLizableBassettCount(regionCountMap);
-        } else {
+            
+        }
+        else {
             xml = new XMLLizableBassettEresourceList(eresources);
         }
-
         xml.toSAX(this.xmlConsumer);
         this.xmlConsumer.endDocument();
     }

@@ -34,9 +34,6 @@ public class XMLLizableBassettEresourceList implements XMLizable {
     private static final String SUB_REGION = "sub_region";
     private static final String TITLE = "title";
     private static final String DESCRIPTION = "description";
-
-    private static final String LINK = "link";
-
     private static final String NAME = "name";
 
     public XMLLizableBassettEresourceList(final Collection<Eresource> bassetts) {
@@ -88,15 +85,6 @@ public class XMLLizableBassettEresourceList implements XMLizable {
             XMLUtils.data(handler, bassett.getDescription());
             XMLUtils.endElement(handler, this.NAMESPACE, DESCRIPTION);
         }
-        XMLUtils.startElement(handler, this.NAMESPACE, LINK);
-        if (bassett.getVersions().size() > 0) {
-            Version version = bassett.getVersions().iterator().next();
-            if (version.getLinks().size() > 0) {
-                XMLUtils.data(handler, version.getLinks().iterator().next().getUrl());
-            }
-        }
-        XMLUtils.endElement(handler, this.NAMESPACE, LINK);
-
         handleRegion(handler, bassett.getRegions());
         XMLUtils.endElement(handler, this.NAMESPACE, BASSETT);
     }
