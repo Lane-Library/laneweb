@@ -255,7 +255,7 @@
 	<xsl:copy>
 		<xsl:apply-templates select="attribute::node()|child::node()"/>
 		<xsl:value-of select="string(($imgs-per-page * $page-number)+1)"/>
-		<xsl:text > | </xsl:text>
+		<xsl:text >-</xsl:text>
 		<xsl:choose>
 		<xsl:when test="$page-number != $total-pages">
 			<xsl:value-of select="string($imgs-per-page * ($page-number+1))"/>
