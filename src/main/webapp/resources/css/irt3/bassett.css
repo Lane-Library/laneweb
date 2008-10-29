@@ -87,11 +87,20 @@ div.bassett-images div{
 	padding-top:3px;
 }
 
-span.paging{
+div.paging{
 	float:right;
-	padding-right:15px; 
+	vertical-align:middle;
 }
 
+div.paging img{
+	padding-right:3px;
+}
+
+div.paging #page-number{
+	color:#666;
+	width:60px;  
+	padding-left:8px;
+}
 
 /*********** IMAGE VIEW CSS **************/
 

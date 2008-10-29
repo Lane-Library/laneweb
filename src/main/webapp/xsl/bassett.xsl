@@ -233,17 +233,41 @@
 </xsl:template>
 
 <!-- paging  -->
-<xsl:variable name="total-pages">
-	<xsl:value-of select="substring-before( string(count(/doc/b:bassetts/b:bassett) div $imgs-per-page),'.')"/>
+
+<xsl:variable name="total-images">
+	<xsl:value-of select="count(/doc/b:bassetts/b:bassett)"/>
 </xsl:variable>
 
-<xsl:template match="h:span[@class='paging']">
+<xsl:variable name="total-pages">
+	<xsl:value-of select="substring-before( string($total-images div $imgs-per-page),'.')"/>
+</xsl:variable>
+
+<xsl:template match="h:div[@class='paging']">
 	<xsl:if test="$total-pages != '0'">
 	     <xsl:copy>
 	         <xsl:apply-templates select="attribute::node()|child::node()"/>
 	     </xsl:copy>
 	</xsl:if>
 </xsl:template>
+
+
+<xsl:template match="h:td[@id='page-number']">
+	<xsl:copy>
+		<xsl:apply-templates select="attribute::node()|child::node()"/>
+		<xsl:value-of select="string(($imgs-per-page * $page-number)+1)"/>
+		<xsl:text > | </xsl:text>
+		<xsl:choose>
+		<xsl:when test="$page-number != $total-pages">
+			<xsl:value-of select="string($imgs-per-page * ($page-number+1))"/>
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:value-of select="string($total-images - (($total-pages - $page-number)* $imgs-per-page) )"/>
+		</xsl:otherwise>
+		</xsl:choose>
+		
+	</xsl:copy>
+</xsl:template>
+
 
 <xsl:template match="h:a[@id='first-page']/@href">
 	<xsl:attribute name="href">
