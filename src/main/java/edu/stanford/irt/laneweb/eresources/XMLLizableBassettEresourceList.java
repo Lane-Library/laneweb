@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
+import edu.stanford.irt.eresources.Eresource;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +12,6 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
-
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Version;
 
 public class XMLLizableBassettEresourceList implements XMLizable {
 

@@ -1,9 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Link;
 import edu.stanford.irt.eresources.Version;
-import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
 
@@ -12,11 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
