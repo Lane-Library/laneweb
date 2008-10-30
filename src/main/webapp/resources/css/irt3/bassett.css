@@ -93,13 +93,15 @@ div.paging{
 }
 
 div.paging img{
+	padding:0px;
 	padding-right:3px;
+	padding-top:1px;
 }
 
 div.paging #page-number{
 	color:#666;
 	width:60px;  
-	padding-left:8px;
+	padding-left:5px;
 }
 
 /*********** IMAGE VIEW CSS **************/
