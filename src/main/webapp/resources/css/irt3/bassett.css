@@ -100,7 +100,7 @@ div.paging img{
 
 div.paging #page-number{
 	color:#666;
-	width:60px;  
+	padding-right:5px;
 	padding-left:5px;
 }
 

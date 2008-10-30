@@ -90,7 +90,9 @@
     <xsl:template match="h:a[@id='photo-choice']/@href">
 		<xsl:attribute name="href">
       	    <xsl:value-of select="."/>
-      	   	<xsl:value-of select="$query"/>    
+      	   	<xsl:value-of select="$query"/>    	
+      	   	<xsl:text>&amp;pageNumber=</xsl:text>
+      	   	<xsl:value-of select="$page-number"/>
       	</xsl:attribute> 
      </xsl:template> 
     
@@ -98,7 +100,8 @@
     	<xsl:attribute name="href">
       	    <xsl:value-of select="."/>
       	   	<xsl:value-of select="$query"/>
-      	   	<xsl:text>&amp;t=diagram</xsl:text>
+      	   	<xsl:text>&amp;t=diagram&amp;pageNumber=</xsl:text>
+      	   	<xsl:value-of select="$page-number"/>
       	</xsl:attribute>
      </xsl:template> 
      
@@ -225,7 +228,7 @@
 
 
 <!-- to get the Href for all links that will open a new window for the bassettLargerView.html -->
-<xsl:template match="h:a[@rel]/@href">
+<xsl:template match="h:a[starts-with(@rel,'popup')]/@href">
 	<xsl:attribute name="href">
 		<xsl:text>/bassett/raw/bassettLargerView.html?t=largerView&amp;bn=</xsl:text>
 		<xsl:value-of select="/doc/b:bassetts/b:bassett/@b:bassett_number"/>
@@ -254,8 +257,9 @@
 <xsl:template match="h:td[@id='page-number']">
 	<xsl:copy>
 		<xsl:apply-templates select="attribute::node()|child::node()"/>
+		<xsl:text>Page </xsl:text>
 		<xsl:value-of select="string(($imgs-per-page * $page-number)+1)"/>
-		<xsl:text >-</xsl:text>
+		<xsl:text > - </xsl:text>
 		<xsl:choose>
 		<xsl:when test="$page-number != $total-pages">
 			<xsl:value-of select="string($imgs-per-page * ($page-number+1))"/>
@@ -264,7 +268,8 @@
 			<xsl:value-of select="string($total-images - (($total-pages - $page-number)* $imgs-per-page) )"/>
 		</xsl:otherwise>
 		</xsl:choose>
-		
+		<xsl:text > of </xsl:text>
+		<xsl:value-of select="$total-images"></xsl:value-of>
 	</xsl:copy>
 </xsl:template>
 
@@ -312,6 +317,4 @@
 <xsl:template match="attribute::node()">
     <xsl:copy-of select="self::node()"/>
 </xsl:template>
-    
-
 </xsl:stylesheet>
