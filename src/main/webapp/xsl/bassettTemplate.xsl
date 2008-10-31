@@ -16,6 +16,21 @@
 	<xsl:template match="doc">
         <xsl:apply-templates select="h:html[1]"/>
     </xsl:template>
+
+	<xsl:template match="h:title">
+		<xsl:copy>
+			<xsl:choose>
+				<xsl:when test="/doc/h:html[2]/h:head/h:title">
+					    <xsl:value-of select="/doc/h:html[2]/h:head/h:title"/>
+	   			</xsl:when>
+	   			<xsl:otherwise>
+	   				<xsl:apply-templates select="attribute::node()|child::node()"/>
+	    		</xsl:otherwise>
+	    	</xsl:choose>
+		</xsl:copy>
+	</xsl:template>     
+	
+
     
 	<xsl:template match="processing-instruction()">
 		<xsl:choose>
