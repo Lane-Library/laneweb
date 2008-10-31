@@ -113,6 +113,7 @@
                                     <option value="peds">Pediatrics</option>
                                     <option disabled="disabled">----------------</option>
                                     <option value="/portals/anesthesia.html">Anesthesia</option>
+                                    <option value="bassett">Bassett</option>
                                     <option value="/portals/cardiology.html">Cardiology</option>
                                     <option value="/portals/emergency.html">Emergency</option>
                                     <option value="/portals/hematology.html">Hematology</option>
