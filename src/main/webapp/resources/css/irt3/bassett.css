@@ -90,6 +90,7 @@ div.bassett-images div{
 div.paging{
 	float:right;
 	vertical-align:middle;
+	clear:both;
 }
 
 div.paging img{
