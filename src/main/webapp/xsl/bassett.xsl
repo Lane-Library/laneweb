@@ -246,10 +246,10 @@
 </xsl:variable>
 
 <xsl:template match="h:div[@class='paging']">
-	<xsl:if test="$total-pages != '0'">
-	     <xsl:copy>
-	         <xsl:apply-templates select="attribute::node()|child::node()"/>
-	     </xsl:copy>
+	<xsl:if test="$total-pages != '0' and $total-pages != ''">
+		<xsl:copy>
+		    <xsl:apply-templates select="attribute::node()|child::node()"/>
+		</xsl:copy>
 	</xsl:if>
 </xsl:template>
 
