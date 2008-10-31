@@ -245,7 +245,7 @@
 	<xsl:value-of select="substring-before( string($total-images div $imgs-per-page),'.')"/>
 </xsl:variable>
 
-<xsl:template match="h:div[@class='paging']">
+<xsl:template match="h:div[@id='paging']">
 	<xsl:if test="$total-pages != '0' and $total-pages != ''">
 		<xsl:copy>
 		    <xsl:apply-templates select="attribute::node()|child::node()"/>
@@ -253,6 +253,14 @@
 	</xsl:if>
 </xsl:template>
 
+
+<xsl:template match="h:div[@id='lower-paging']">
+	<xsl:if test="($total-pages != '0' and $total-pages != '') and (($total-images -  ($page-number * $imgs-per-page)) > 18   ) ">
+		<xsl:copy>
+		    <xsl:apply-templates select="attribute::node()|child::node()"/>
+		</xsl:copy>
+	</xsl:if>
+</xsl:template>
 
 <xsl:template match="h:td[@id='page-number']">
 	<xsl:copy>
