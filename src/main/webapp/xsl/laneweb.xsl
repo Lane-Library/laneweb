@@ -90,6 +90,7 @@
             <xsl:when test="starts-with($request-uri,'online/db')">database</xsl:when>
             <xsl:when test="starts-with($request-uri,'services')">faq</xsl:when>
             <xsl:when test="starts-with($request-uri,'howto')">faq</xsl:when>
+            <xsl:when test="starts-with($request-uri,'bassett')">bassett</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/peds')">peds</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/picu')">peds</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/history')">history</xsl:when>
