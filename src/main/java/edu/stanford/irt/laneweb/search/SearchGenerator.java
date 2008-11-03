@@ -164,22 +164,25 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
             limitedResult.setQuery(result.getQuery());
             limitedResult.setStatus(result.getStatus());
             Collection<Result> selectedResult = new ArrayList<Result>();
-            Collection<Result> results = result.getChildren();
-            for (Result engineResult : results) {
-                if ((engines != null) && engines.contains(engineResult.getId())) {
-                    selectedResult.add(engineResult);
-                } else if (resources != null) {
-                    Collection<Result> resourceResults = engineResult.getChildren();
-                    for (Result resourceResult : resourceResults) {
-                        if (resources.contains(resourceResult.getId())) {
-                            selectedResult.add(engineResult);
-                            break;
+            synchronized(result)
+            {
+                Collection<Result> results = result.getChildren();
+                for (Result engineResult : results) {
+                    if ((engines != null) && engines.contains(engineResult.getId())) {
+                        selectedResult.add(engineResult);
+                    } else if (resources != null) {
+                        Collection<Result> resourceResults = engineResult.getChildren();
+                        for (Result resourceResult : resourceResults) {
+                            if (resources.contains(resourceResult.getId())) {
+                                selectedResult.add(engineResult);
+                                break;
+                            }
                         }
                     }
                 }
+                limitedResult.setChildren(selectedResult);
+                result = limitedResult;
             }
-            limitedResult.setChildren(selectedResult);
-            result = limitedResult;
         }
         SAXable xml = new SAXResult(result);
         synchronized (result) {
