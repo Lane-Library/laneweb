@@ -23,7 +23,7 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
     /**
      * Process the given <code>Environment</code>, producing the output. I
      * created this to keep Denial of Service attacks to the eresources urls.
-     * from binging down the site. Only one request for a given url from a given
+     * from bringing down the site. Only one request for a given url from a given
      * client IP is processed at one time. Others will throw a
      * ProcessingException
      */
