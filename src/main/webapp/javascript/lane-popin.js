@@ -16,15 +16,17 @@
 				activeEl = i;
 			}
 		}
-		for (i= 0; i < elms.length; i++){
-			if(el[0].id === elms[i].id && i <= activeEl){
-				activeEl = i;
-				elms[i].style.display = 'inline';
-			}
-			else if (i > activeEl){
-				elms[i].style.display = 'none';
-			}
-		}
+		for (i = 0; i < elms.length; i++) {
+            if (elms[i] !== null) {
+                if (el[0].id === elms[i].id && i <= activeEl) {
+                    activeEl = i;
+                    elms[i].style.display = 'inline';
+                } else 
+                    if (i > activeEl) {
+                        elms[i].style.display = 'none';
+                    }
+            }
+        }
 	};
 	LANE.search.popin.subscribe(onPopinHandler);
 })();
