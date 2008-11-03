@@ -3,8 +3,8 @@ LANE.track = function(){
         getTrackingData = function(e){
             var node = e.srcElement || e.target,
                 //TODO: not sure I need this l variable
-                l = node, rel,
-                host, path, external, title, searchTerms, searchSource, children,
+                l = node,
+                host, path, query, external, title, searchTerms, searchSource, children,
                 getTrackedTitle = function(){
                     var title = l.title, img, i = 0;
                     if (l.rel && l.rel.indexOf('popup') === 0) {
@@ -59,10 +59,12 @@ LANE.track = function(){
                             }
                             host = host.substring(0, host.indexOf('/'));
                         }
+                        query = '';
                         external = true;
                     } else if (l.rel) {
                         host = document.location.host;
                         path = document.location.pathname;
+                        query = document.location.search;
                     } else {
                         host = l.host;
                         if (host.indexOf(':') > -1) {
@@ -70,6 +72,7 @@ LANE.track = function(){
                         }
                         path = l.pathname;
                         external = host != document.location.host;
+                        query = external ? '' : l.search;
                     }
                 }
                 if (path.indexOf('/') !== 0) {
@@ -81,6 +84,7 @@ LANE.track = function(){
             return {
                 host: host,
                 path: path,
+                query: query,
                 title: title,
                 searchTerms: searchTerms,
                 searchSource: searchSource,
@@ -102,7 +106,7 @@ LANE.track = function(){
             }
         },
         track: function(td) {
-//                alert('host: '+td.host+'\npath: '+td.path+'\ntitle: '+td.title+'\nsearchTerms: '+td.searchTerms+'\nsearchSource: '+td.searchSource+'\nexternal: '+td.external);
+//                alert('host: '+td.host+'\npath: '+td.path+'\nquery: '+td.query+'\ntitle: '+td.title+'\nsearchTerms: '+td.searchTerms+'\nsearchSource: '+td.searchSource+'\nexternal: '+td.external);
                  for (var i = 0; i < trackers.length; i++) {
                      trackers[i].track(td);
                  }
