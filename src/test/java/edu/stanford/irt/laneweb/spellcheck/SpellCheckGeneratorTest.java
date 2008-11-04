@@ -13,8 +13,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.xml.AbstractXMLConsumer;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -29,8 +27,6 @@ public class SpellCheckGeneratorTest {
 
     private SpellCheckGenerator generator;
 
-    private ServiceManager serviceManager;
-
     private SpellChecker spellChecker;
 
     private Parameters params;
@@ -40,7 +36,6 @@ public class SpellCheckGeneratorTest {
     @Before
     public void setUp() throws Exception {
         this.generator = new SpellCheckGenerator();
-        this.serviceManager = createMock(ServiceManager.class);
         this.spellChecker = createMock(SpellChecker.class);
         this.params = createMock(Parameters.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
@@ -57,31 +52,15 @@ public class SpellCheckGeneratorTest {
     }
 
     @Test
-    public void testService() throws ServiceException {
-        try {
-            this.generator.service(null);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
-        expect(this.serviceManager.lookup(SpellChecker.class.getName())).andReturn(this.spellChecker);
-        replay(this.serviceManager);
-        this.generator.service(this.serviceManager);
-        verify(this.serviceManager);
-    }
-
-    @Test
-    public void testGenerate() throws ProcessingException, IOException, SAXException, ServiceException {
-        expect(this.serviceManager.lookup(SpellChecker.class.getName())).andReturn(this.spellChecker);
-        replay(this.serviceManager);
+    public void testGenerate() throws ProcessingException, IOException, SAXException {
         expect(this.spellChecker.spellCheck("ibuprophen")).andReturn(new SpellCheckResult("ibuprofen"));
         replay(this.spellChecker);
         expect(this.params.getParameter("query", null)).andReturn("ibuprophen");
         replay(this.params);
-        this.generator.service(this.serviceManager);
         this.generator.setup(null, null, null, this.params);
         this.generator.setConsumer(this.xmlConsumer);
+        this.generator.setSpellChecker(this.spellChecker);
         this.generator.generate();
-        verify(this.serviceManager);
         verify(this.spellChecker);
         verify(this.params);
     }
@@ -116,7 +95,7 @@ public class SpellCheckGeneratorTest {
     }
 
     @Test
-    public void testThreads() throws ServiceException {
+    public void testThreads() {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(100);
         SpellChecker fauxSpellChecker = new SpellChecker() {
 

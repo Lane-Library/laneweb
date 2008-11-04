@@ -5,6 +5,12 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
+            <map:match pattern="url-tester" type="wildcard">
+                <map:generate type="search-url-tester">
+                    <map:parameter name="url" value="{request-param:url}"/>
+                </map:generate>
+                <map:serialize type="xhtml"/>
+            </map:match>
             <map:match pattern="search/**" type="wildcard">
                 <!-- /apps/search/xml returns the xmlized search result -->
                 <map:match type="wildcard" pattern="search/xml">

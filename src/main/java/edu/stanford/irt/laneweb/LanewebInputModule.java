@@ -5,35 +5,32 @@
 package edu.stanford.irt.laneweb;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
-import org.apache.avalon.framework.configuration.Configurable;
 import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
-import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.components.modules.input.InputModule;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
+import org.apache.log4j.Logger;
 
 /**
  * @author ceyates To change the template for this generated type comment go to
  *         Window - Preferences - Java - Code Generation - Code and Comments
  */
-public class LanewebInputModule extends AbstractLogEnabled implements InputModule, ThreadSafe, Configurable, Serviceable {
+public class LanewebInputModule implements InputModule {
 
-    private Configuration[] noProxyRegex;
+    private Logger logger = Logger.getLogger(LanewebInputModule.class);
 
-    private Configuration[] proxyRegex;
+    private List<String> noProxyRegex;
 
-    private Configuration[] templateConfig;
+    private List<String> proxyRegex;
+
+    private Map<String, String> templateConfig;
 
     private UserInfoHelper userInfoHelper;
 
-    public Object getAttribute(final String key, final Configuration config, final Map objectModel) throws ConfigurationException {
+    public Object getAttribute(final String key, final Configuration config, final Map objectModel) {
         Object result = null;
         Request request = ObjectModelHelper.getRequest(objectModel);
         UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
@@ -63,8 +60,8 @@ public class LanewebInputModule extends AbstractLogEnabled implements InputModul
         if (LanewebConstants.TICKET.equals(key)) {
             result = userInfo.getTicket();
         }
-        if (getLogger().isDebugEnabled()) {
-            getLogger().debug(key + " = " + result);
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug(key + " = " + result);
         }
         return result;
     }
@@ -73,7 +70,7 @@ public class LanewebInputModule extends AbstractLogEnabled implements InputModul
         throw new UnsupportedOperationException();
     }
 
-    public Object[] getAttributeValues(final String key, final Configuration config, final Map objectModel) throws ConfigurationException {
+    public Object[] getAttributeValues(final String key, final Configuration config, final Map objectModel) {
         Object result = getAttribute(key, config, objectModel);
         if (result != null) {
             return new Object[] { result };
@@ -81,45 +78,54 @@ public class LanewebInputModule extends AbstractLogEnabled implements InputModul
         return null;
     }
 
-    public void configure(final Configuration config) throws ConfigurationException {
-        this.noProxyRegex = config.getChildren("noproxy-regex");
-        this.proxyRegex = config.getChildren("proxy-regex");
-        this.templateConfig = config.getChildren("template");
+    public void setNoProxyRegex(final List<String> noProxyRegex) {
+        this.noProxyRegex = noProxyRegex;
     }
 
-    protected String getTemplateName(final String url) throws ConfigurationException {
-        for (Configuration element : this.templateConfig) {
-            if (url.matches(element.getAttribute("url"))) {
-                return element.getAttribute("value");
+    public void setProxyRegex(final List<String> proxyRegex) {
+        this.proxyRegex = proxyRegex;
+    }
+
+    public void setTemplateConfig(final Map<String, String> templateConfig) {
+        this.templateConfig = templateConfig;
+    }
+
+    protected String getTemplateName(final String url) {
+        for (String key : this.templateConfig.keySet()) {
+            if (url.matches(key)) {
+                return this.templateConfig.get(key);
             }
         }
         return null;
     }
 
-    protected boolean proxyLinks(final String ip) throws ConfigurationException {
+    protected boolean proxyLinks(final String ip) {
         return !isNoProxy(ip) || isProxy(ip);
     }
 
-    private boolean isNoProxy(final String ip) throws ConfigurationException {
-        for (Configuration element : this.noProxyRegex) {
-            if (ip.matches(element.getValue())) {
+    private boolean isNoProxy(final String ip) {
+        for (String regex : this.noProxyRegex) {
+            if (ip.matches(regex)) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean isProxy(final String ip) throws ConfigurationException {
-        for (Configuration element : this.proxyRegex) {
-            if (ip.matches(element.getValue())) {
+    private boolean isProxy(final String ip) {
+        for (String regex : this.proxyRegex) {
+            if (ip.matches(regex)) {
                 return true;
             }
         }
         return false;
     }
 
-    public void service(final ServiceManager serviceManager) throws ServiceException {
-        this.userInfoHelper = (UserInfoHelper) serviceManager.lookup(UserInfoHelper.ROLE);
+    public void setUserInfoHelper(final UserInfoHelper userInfoHelper) {
+        if (null == userInfoHelper) {
+            throw new IllegalArgumentException("null userInfoHelper");
+        }
+        this.userInfoHelper = userInfoHelper;
     }
 
 }

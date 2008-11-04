@@ -62,7 +62,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="expires">
-            <map:parameter name="cache-key" value="{0};rss-url={request-param:rss-url}"/>
+            <map:parameter name="cache-key" value="{request-uri:requestURI};rss-url={request-param:rss-url}"/>
             <map:match pattern="ncbi-rss2html" type="wildcard">
                 <map:generate type="file" src="{request-param:rss-url}"/>
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>

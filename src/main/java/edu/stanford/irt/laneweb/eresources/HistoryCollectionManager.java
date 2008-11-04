@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,13 +13,6 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
-import org.apache.avalon.excalibur.datasource.DataSourceComponent;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.ServiceSelector;
-import org.apache.avalon.framework.service.Serviceable;
-import org.apache.avalon.framework.thread.ThreadSafe;
-
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.Link;
@@ -30,9 +22,16 @@ import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
 
-public class HistoryCollectionManager implements CollectionManager, ThreadSafe, Serviceable {
+public class HistoryCollectionManager implements CollectionManager {
 
     private DataSource dataSource;
+
+    public void setDataSource(final DataSource dataSource) {
+        if (null == dataSource) {
+            throw new IllegalArgumentException("null dataSource");
+        }
+        this.dataSource = dataSource;
+    }
 
     public Collection<Eresource> getType(final String type, final char alpha) {
         if (null == type) {
@@ -429,45 +428,4 @@ public class HistoryCollectionManager implements CollectionManager, ThreadSafe, 
 
     private static final String COUNT_SUBSET_UNION = " UNION SELECT ? AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND WHERE SUBSET = ?";
 
-    public void service(final ServiceManager manager) throws ServiceException {
-        ServiceSelector selector = (ServiceSelector) manager.lookup(DataSourceComponent.ROLE + "Selector");
-        final DataSourceComponent dataSourceComponent = (DataSourceComponent) selector.select("eresources");
-        this.dataSource = new DataSource() {
-
-            private PrintWriter logWriter;
-
-            public Connection getConnection() throws SQLException {
-                return dataSourceComponent.getConnection();
-            }
-
-            public Connection getConnection(final String username, final String password) throws SQLException {
-                return dataSourceComponent.getConnection();
-            }
-
-            public PrintWriter getLogWriter() throws SQLException {
-                return this.logWriter;
-            }
-
-            public int getLoginTimeout() throws SQLException {
-                throw new UnsupportedOperationException("sorry, can't do that");
-            }
-
-            public void setLogWriter(final PrintWriter out) throws SQLException {
-                this.logWriter = out;
-            }
-
-            public void setLoginTimeout(final int seconds) throws SQLException {
-                throw new UnsupportedOperationException("sorry, can't do that");
-            }
-
-            public boolean isWrapperFor(final Class<?> wrapped) {
-                throw new UnsupportedOperationException("sorry, can't do that");
-            }
-
-            public <T> T unwrap(final java.lang.Class<T> wrapped) {
-                throw new UnsupportedOperationException("sorry, can't do that");
-            }
-        };
-        manager.release(selector);
-    }
 }

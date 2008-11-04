@@ -3,23 +3,20 @@ package edu.stanford.irt.laneweb;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.avalon.framework.parameters.ParameterException;
-import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.acting.ServiceableAction;
+import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
+import org.apache.log4j.Logger;
 
 import edu.stanford.irt.SystemException;
 
-public class LoginAction extends ServiceableAction implements Parameterizable {
+public class LoginAction implements Action {
 
-    private String proxyURL;
+    private Logger logger = Logger.getLogger(LoginAction.class);
 
     private UserInfoHelper userInfoHelper = null;
 
@@ -41,22 +38,19 @@ public class LoginAction extends ServiceableAction implements Parameterizable {
         if (url == null) {
             throw new ProcessingException("null url");
         }
-        if (getLogger().isDebugEnabled()) {
-            getLogger().debug("redirecting to proxy server: " + " sunetid = " + sunetid + " ticket = " + " url = " + url);
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("redirecting to proxy server: " + " sunetid = " + sunetid + " ticket = " + " url = " + url);
         }
-        String redirectURL = this.proxyURL + "user=" + sunetid + "&ticket=" + ticket + "&" + url;
+        String redirectURL = "http://laneproxy.stanford.edu/login?user=" + sunetid + "&ticket=" + ticket + "&" + url;
         redirector.redirect(true, redirectURL);
         return null;
     }
 
-    public void parameterize(final Parameters params) throws ParameterException {
-        this.proxyURL = params.getParameter("proxy-url", "http://laneproxy.stanford.edu/login?");
-    }
-
-    @Override
-    public void service(final ServiceManager manager) throws ServiceException {
-        super.service(manager);
-        this.userInfoHelper = (UserInfoHelper) manager.lookup(UserInfoHelper.ROLE);
+    public void setUserInfoHelper(final UserInfoHelper userInfoHelper) {
+        if (null == userInfoHelper) {
+            throw new IllegalArgumentException("null userInfoHelper");
+        }
+        this.userInfoHelper = userInfoHelper;
     }
 
 }

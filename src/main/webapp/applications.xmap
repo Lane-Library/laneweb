@@ -6,7 +6,9 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="url-tester" type="wildcard">
-                <map:generate type="search-url-tester"/>
+                <map:generate type="search-url-tester">
+                    <map:parameter name="url" value="{request-param:url}"/>
+                </map:generate>
                 <map:serialize type="xhtml"/>
             </map:match>
             <!-- matches /apps/search/ requests -->
@@ -111,7 +113,7 @@
         </map:pipeline>
         <!-- trying this out, might fill up cache with a bazillion query maps -->
         <map:pipeline type="expires">
-            <map:parameter name="cache-key" value="{0};q={request-param:q}"/>
+            <map:parameter name="cache-key" value="{request-uri:requestURI};q={request-param:q}"/>
             <map:match pattern="querymap/*" type="wildcard">
                 <map:match pattern="querymap/xml" type="wildcard">
                     <map:generate type="querymap">

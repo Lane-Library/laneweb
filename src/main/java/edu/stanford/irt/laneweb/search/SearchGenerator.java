@@ -6,16 +6,13 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 
-import org.apache.avalon.framework.parameters.ParameterException;
-import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.ServiceableGenerator;
+import org.apache.cocoon.generation.Generator;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.search.MetaSearchManager;
@@ -30,7 +27,7 @@ import edu.stanford.irt.search.util.SAXable;
 /**
  * @author ceyates
  */
-public class SearchGenerator extends ServiceableGenerator implements Parameterizable {
+public class SearchGenerator implements Generator {
 
     private MetaSearchManager metaSearchManager;
 
@@ -48,18 +45,18 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
 
     private String clearCache;
 
-    @Override
-    public void service(final ServiceManager manager) throws ServiceException {
-        super.service(manager);
-        MetaSearchManagerSource source = (MetaSearchManagerSource) this.manager.lookup(MetaSearchManagerSource.class.getName());
-        this.metaSearchManager = source.getMetaSearchManager();
+    private XMLConsumer xmlConsumer;
 
+    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
+        this.metaSearchManager = msms.getMetaSearchManager();
     }
 
-    @Override
+    public void setDefaultTimeout(final long defaultTimeout) {
+        this.defaultTimeout = defaultTimeout;
+    }
+
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
-        super.setup(resolver, objectModel, src, par);
         Request request = (Request) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
         this.q = request.getParameter("q");
         this.t = request.getParameter("t");
@@ -67,22 +64,6 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
         this.w = request.getParameter("w");
         this.r = request.getParameterValues("r");
         this.clearCache = request.getParameter("clearcache");
-    }
-
-    @Override
-    public void recycle() {
-        this.q = null;
-        this.t = null;
-        this.e = null;
-        this.w = null;
-        this.r = null;
-        this.clearCache = null;
-        super.recycle();
-    }
-
-    public void parameterize(final Parameters param) throws ParameterException {
-        this.defaultTimeout = param.getParameterAsLong("defaultTimeout");
-
     }
 
     public void generate() throws IOException, SAXException, ProcessingException {
@@ -164,8 +145,7 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
             limitedResult.setQuery(result.getQuery());
             limitedResult.setStatus(result.getStatus());
             Collection<Result> selectedResult = new ArrayList<Result>();
-            synchronized(result)
-            {
+            synchronized (result) {
                 Collection<Result> results = result.getChildren();
                 for (Result engineResult : results) {
                     if ((engines != null) && engines.contains(engineResult.getId())) {
@@ -188,6 +168,10 @@ public class SearchGenerator extends ServiceableGenerator implements Parameteriz
         synchronized (result) {
             xml.toSAX(this.xmlConsumer);
         }
+    }
+
+    public void setConsumer(final XMLConsumer xmlConsumer) {
+        this.xmlConsumer = xmlConsumer;
     }
 
 }

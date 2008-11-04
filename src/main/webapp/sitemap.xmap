@@ -355,6 +355,7 @@
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                 </map:transform>
+                <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
@@ -383,6 +384,7 @@
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                 </map:transform>
+                <map:transform type="namespace-filter"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="**.xml" type="wildcard">

@@ -6,10 +6,6 @@ package edu.stanford.irt.laneweb.spellcheck;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
-import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -21,7 +17,7 @@ import edu.stanford.irt.spell.SpellChecker;
 /**
  * @author ceyates
  */
-public class SpellCheckGenerator implements Generator, Serviceable, ThreadSafe {
+public class SpellCheckGenerator implements Generator {
 
     private static final String QUERY = "query";
 
@@ -36,13 +32,6 @@ public class SpellCheckGenerator implements Generator, Serviceable, ThreadSafe {
             throw new IllegalArgumentException("null spellChecker");
         }
         this.spellChecker = spellChecker;
-    }
-
-    public void service(final ServiceManager serviceManager) throws ServiceException {
-        if (null == serviceManager) {
-            throw new IllegalArgumentException("null serviceManager");
-        }
-        setSpellChecker((SpellChecker) serviceManager.lookup(SpellChecker.class.getName()));
     }
 
     public void generate() throws SAXException {

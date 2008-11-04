@@ -53,7 +53,7 @@ public class Affiliation {
             if (d[1] == 50) {
                 return Affiliation.LPCH;
             }
-            if (d[1] == 247 || d[1] == 248) {
+            if ((d[1] == 247) || (d[1] == 248)) {
                 return Affiliation.SHC;
             }
             if ((d[1] == 250) || (d[1] == 251)) {

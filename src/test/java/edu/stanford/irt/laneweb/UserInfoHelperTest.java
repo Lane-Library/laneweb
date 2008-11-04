@@ -1,13 +1,12 @@
 package edu.stanford.irt.laneweb;
 
-import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
-import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.easymock.classextension.EasyMock.createMock;
+import static org.easymock.classextension.EasyMock.replay;
 import junit.framework.TestCase;
 
-import org.apache.avalon.framework.logger.Logger;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
 
@@ -27,7 +26,7 @@ public class UserInfoHelperTest extends TestCase {
 
     private Session session;
 
-    private UserInfoHelperImpl userInfoHelper;
+    private UserInfoHelper userInfoHelper;
 
     @Override
     protected void setUp() throws Exception {
@@ -59,7 +58,7 @@ public class UserInfoHelperTest extends TestCase {
         replay(this.ldapClient);
         replay(this.session);
 
-        this.userInfoHelper = new UserInfoHelperImpl();
+        this.userInfoHelper = new UserInfoHelper();
         this.userInfoHelper.setLdapClient(this.ldapClient);
         this.userInfoHelper.setEzproxyKey(this.ezproxyKey);
     }
@@ -82,7 +81,6 @@ public class UserInfoHelperTest extends TestCase {
         String ip = this.ip.concat("FAIL_TEST");
         expect(this.request.getRemoteAddr()).andReturn(ip);
         replay(this.request);
-        this.userInfoHelper.enableLogging(createMock(Logger.class));
         UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
         assertEquals(Affiliation.ERR, userInfo.getAffiliation());
         verify(this.session);

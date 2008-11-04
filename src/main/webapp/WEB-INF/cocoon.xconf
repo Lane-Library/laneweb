@@ -1,28 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<cocoon version="2.1">
+<cocoon version="2.2">
 
-    <sitemap check-reload="no" file="context://laneweb.xmap" logger="sitemap"/>
+    <include src="resource://org/apache/cocoon/cocoon.roles"/>
 
     <input-modules>
-        <component-instance logger="core.modules.input.laneweb" name="laneweb"
-            class="edu.stanford.irt.laneweb.LanewebInputModule">
-            <noproxy-regex>^171\.6[4-7]\.\S+</noproxy-regex>
-            <!-- VPN 171.65.16.0 - 171.65.31.255 -->
-            <proxy-regex>^171\.66\.(1[6-9]|2[0-9]|3[0-1])\.\S+</proxy-regex>
-            <!-- hospital 171.65.44.0 - 171.65.45.255 -->
-            <proxy-regex>^171\.65\.4[4-5]\.\S+</proxy-regex>
-            <!-- hospital 171.65.56.0 - 171.65.59.255 -->
-            <proxy-regex>^171\.65\.5[6-9]\.\S+</proxy-regex>
-            <!-- hospital 171.65.124.0 - 171.65.125.255 -->
-            <proxy-regex>^171\.65\.12[4-5]\.\S+</proxy-regex>
-            <!-- hospital 171.65.128.0 - 171.65.199.255 -->
-            <proxy-regex>^171\.65\.1(2[8-9]|[3-9][0-9])\.\S+</proxy-regex>
-            <!-- hospital 171.65.200.0 - 171.65.255.255 -->
-            <proxy-regex>^171\.65\.2[0-5][0-9]\.\S+</proxy-regex>
-            <template url="^(stage/|)shc/\S+" value="shc"/>
-            <template url="^(stage/|)services/spaces/reserve/\S+" value="none"/>
-            <template url="^(stage/|)bassett/raw/bassettLargerView.html?.*+" value="bassettLargerView"/>
-        </component-instance>
         <component-instance logger="core.modules.input" name="request-param"
             class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
         <component-instance logger="core.modules.input" name="request-uri"
@@ -50,24 +31,6 @@
         </component-instance>
     </input-modules>
 
-    <xml-parser class="org.apache.excalibur.xml.impl.JaxpParser" logger="core.xml-parser"
-        pool-max="32">
-        <parameter name="validate" value="false"/>
-        <parameter name="namespace-prefixes" value="false"/>
-        <parameter name="stop-on-warning" value="true"/>
-        <parameter name="stop-on-recoverable-error" value="true"/>
-        <parameter name="reuse-parsers" value="false"/>
-        <parameter name="drop-dtd-comments" value="true"/>
-    </xml-parser>
-
-    <store logger="core.store"/>
-
-    <transient-store logger="core.store.transient"/>
-
-    <store-janitor logger="core.store.janitor">
-        <parameter name="cleanupthreadinterval" value="2147483"/>
-    </store-janitor>
-
     <source-factories logger="core.source">
         <component-instance class="org.apache.excalibur.source.impl.ResourceSourceFactory"
             name="resource" logger="core.source.resource"/>
@@ -77,18 +40,10 @@
             name="cocoon" logger="core.source.sitemap"/>
         <component-instance class="org.apache.excalibur.source.impl.FileSourceFactory" name="file"
             logger="core.source.file"/>
-        <component-instance class="edu.stanford.irt.laneweb.httpclient.HTTPClientSourceFactory"
-            name="http" logger="core.source.http"/>
         <component-instance class="org.apache.excalibur.source.impl.URLSourceFactory" name="*"/>
     </source-factories>
 
     <source-resolver logger="core.source-resolver"/>
-
-    <xml-serializer class="org.apache.cocoon.components.sax.XMLByteStreamCompiler"
-        logger="core.xml-serializer" pool-max="32"/>
-
-    <xml-deserializer class="org.apache.cocoon.components.sax.XMLByteStreamInterpreter"
-        logger="core.xml-deserializer" pool-max="32"/>
 
     <component logger="core.xslt-processor" role="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
         class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl">
@@ -96,78 +51,5 @@
         <parameter name="incremental-processing" value="false"/>
         <parameter name="transformer-factory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </component>
-
-    <classloader class="org.apache.cocoon.components.classloader.ClassLoaderManagerImpl"
-        logger="core.classloader"/>
-
-    <cache logger="core.cache"/>
-
-    <runnable-manager logger="core.runnable">
-        <thread-factory>org.apache.cocoon.components.thread.DefaultThreadFactory</thread-factory>
-        <thread-pools>
-            <thread-pool>
-                <name>daemon</name>
-                <priority>NORM</priority>
-                <daemon>true</daemon>
-                <queue-size>0</queue-size>
-                <max-pool-size>-1</max-pool-size>
-                <min-pool-size>1</min-pool-size>
-                <keep-alive-time-ms>60000</keep-alive-time-ms>
-                <block-policy>ABORT</block-policy>
-                <shutdown-graceful>false</shutdown-graceful>
-                <shutdown-wait-time-ms>-1</shutdown-wait-time-ms>
-            </thread-pool>
-        </thread-pools>
-    </runnable-manager>
-
-    <datasources logger="core.datasources">
-        <j2ee logger="laneweb.eresources" name="eresources">
-            <dbname>eresources</dbname>
-        </j2ee>
-        <j2ee logger="laneweb.voyager" name="voyager">
-            <dbname>voyager</dbname>
-        </j2ee>
-    </datasources>
-
-    <component logger="core.webdash-login" role="edu.stanford.irt.laneweb.webdash.WebdashLogin"
-        class="edu.stanford.irt.laneweb.webdash.WebdashLoginImpl"/>
-
-    <component logger="core.voyager-login" role="edu.stanford.irt.laneweb.voyager.VoyagerLogin"
-        class="edu.stanford.irt.laneweb.voyager.VoyagerLoginImpl"/>
-
-    <component logger="core.spell-checker" role="edu.stanford.irt.spell.SpellChecker"
-        class="edu.stanford.irt.laneweb.spellcheck.SpellChecker"> </component>
-
-    <component logger="core.httpclient-manager"
-        role="edu.stanford.irt.laneweb.httpclient.HttpClientManager"
-        class="edu.stanford.irt.laneweb.httpclient.LanewebHttpClientManager">
-        <parameter name="max-total-connections" value="300"/>
-        <parameter name="max-host-connections" value="100"/>
-        <parameter name="connection-timeout" value="20000"/>
-    </component>
-
-    <component logger="core.search-app"
-        role="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
-        class="edu.stanford.irt.laneweb.search.LanewebMetaSearchManagerSource"/>
-
-    <component logger="core.user-info-helper" role="edu.stanford.irt.laneweb.UserInfoHelper"
-        class="edu.stanford.irt.laneweb.UserInfoHelperImpl"/>
-
-    <component logger="core.ldap-client" role="edu.stanford.irt.laneweb.LdapClient"
-        class="edu.stanford.irt.laneweb.LdapClientImpl">
-        <parameter name="ldap-keytab" value="IRT_K5"/>
-    </component>
-
-    <component role="edu.stanford.irt.eresources.CollectionManager/laneconnex"
-        class="edu.stanford.irt.laneweb.eresources.LanewebCollectionManager"/>
-
-    <component role="edu.stanford.irt.eresources.CollectionManager/history"
-        class="edu.stanford.irt.laneweb.eresources.HistoryCollectionManager"/>
-
-    <component role="edu.stanford.irt.laneweb.querymap.QueryMapper"
-        class="edu.stanford.irt.laneweb.querymap.QueryMapperImpl"/>
-
-    <component role="edu.stanford.irt.laneweb.eresources.BassettCollectionManager"
-        class="edu.stanford.irt.laneweb.eresources.BassettCollectionManagerImpl"/>
 
 </cocoon>

@@ -13,15 +13,14 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import org.apache.avalon.framework.logger.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class VoyagerLoginImplTest {
+public class VoyagerLoginTest {
 
-    private VoyagerLoginImpl voyagerLogin;
+    private VoyagerLogin voyagerLogin;
 
     private LDAPPerson person;
 
@@ -33,8 +32,7 @@ public class VoyagerLoginImplTest {
 
     @Before
     public void setUp() throws Exception {
-        this.voyagerLogin = new VoyagerLoginImpl();
-        this.voyagerLogin.enableLogging(createMock(Logger.class));
+        this.voyagerLogin = new VoyagerLogin();
         this.person = createMock(LDAPPerson.class);
         this.dataSource = createMock(DataSource.class);
         this.connection = createMock(Connection.class);

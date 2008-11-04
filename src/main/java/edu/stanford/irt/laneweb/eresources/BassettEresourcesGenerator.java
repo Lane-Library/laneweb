@@ -1,23 +1,22 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import edu.stanford.irt.eresources.Eresource;
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
-import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.ServiceableGenerator;
+import org.apache.cocoon.generation.Generator;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
-public class BassettEresourcesGenerator extends ServiceableGenerator implements Initializable {
+import edu.stanford.irt.eresources.Eresource;
+
+public class BassettEresourcesGenerator implements Generator {
 
     private static final String QUERY = "q";
     private static final String REGION = "r";
@@ -25,6 +24,8 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements 
     private static final String REGION_COUNT = "region-count";
 
     private BassettCollectionManager collectionManager;
+
+    private XMLConsumer xmlConsumer;
 
     private String query;
     private String region;
@@ -35,13 +36,11 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements 
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
         }
-        this.collectionManager = (BassettCollectionManager) collectionManager;
+        this.collectionManager = collectionManager;
     }
 
-    @Override
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
-        super.setup(resolver, objectModel, src, par);
         Request request = ObjectModelHelper.getRequest(objectModel);
         String query = request.getParameter(QUERY);
         this.region = request.getParameter(REGION);
@@ -59,21 +58,19 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements 
         Collection<Eresource> eresources = null;
         Map<String, Integer> regionCountMap = null;
         if (this.region_count != null) {
-            if (this.query == null) 
+            if (this.query == null) {
                 this.query = "bassett";
+            }
             regionCountMap = this.collectionManager.searchCount(null, null, this.query);
-        }
-        else  if (this.bassettNumber != null) {
+        } else if (this.bassettNumber != null) {
             eresources = this.collectionManager.getById(this.bassettNumber);
-        } 
-        else if (this.region != null) {
+        } else if (this.region != null) {
             if (this.query != null) {
                 eresources = this.collectionManager.searchSubset(this.region, this.query);
             } else {
                 eresources = this.collectionManager.getSubset(this.region);
             }
-        } 
-        else if (this.query != null) {
+        } else if (this.query != null) {
             eresources = this.collectionManager.search(this.query);
         }
 
@@ -81,28 +78,19 @@ public class BassettEresourcesGenerator extends ServiceableGenerator implements 
         this.xmlConsumer.startDocument();
         if (regionCountMap != null) {
             xml = new XMLLizableBassettCount(regionCountMap);
-            
-        }
-        else {
+
+        } else {
             xml = new XMLLizableBassettEresourceList(eresources);
         }
         xml.toSAX(this.xmlConsumer);
         this.xmlConsumer.endDocument();
     }
 
-    @Override
-    public void recycle() {
-        this.query = null;
-    }
-
-    @Override
-    public void dispose() {
-        this.manager.release(this.collectionManager);
-        super.dispose();
-    }
-
-    public void initialize() throws ServiceException {
-        setCollectionManager((BassettCollectionManager) this.manager.lookup(BassettCollectionManager.class.getName()));
+    public void setConsumer(final XMLConsumer xmlConsumer) {
+        if (null == xmlConsumer) {
+            throw new IllegalArgumentException("null xmlConsumer");
+        }
+        this.xmlConsumer = xmlConsumer;
     }
 
 }

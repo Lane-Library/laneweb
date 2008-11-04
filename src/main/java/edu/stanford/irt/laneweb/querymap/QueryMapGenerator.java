@@ -6,10 +6,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
-import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -18,9 +14,10 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.querymap.DescriptorWeightMap;
+import edu.stanford.irt.querymap.QueryMapper;
 import edu.stanford.irt.querymap.StreamResourceMapping;
 
-public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
+public class QueryMapGenerator implements Generator {
 
     private static final String QUERY = "query";
 
@@ -47,13 +44,6 @@ public class QueryMapGenerator implements Generator, Serviceable, ThreadSafe {
             throw new IllegalArgumentException("null queryMapper");
         }
         this.queryMapper = queryMapper;
-    }
-
-    public void service(final ServiceManager serviceManager) throws ServiceException {
-        if (null == serviceManager) {
-            throw new IllegalArgumentException("null serviceManager");
-        }
-        setQueryMapper((QueryMapper) serviceManager.lookup(QueryMapper.class.getName()));
     }
 
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {

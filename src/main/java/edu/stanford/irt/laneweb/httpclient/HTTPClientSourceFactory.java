@@ -17,14 +17,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Map;
 
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.parameters.ParameterException;
-import org.apache.avalon.framework.parameters.Parameterizable;
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
-import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceException;
@@ -41,12 +33,7 @@ import org.apache.excalibur.source.SourceFactory;
  * @version CVS $Id: HTTPClientSourceFactory.java,v 1.4 2004/02/28 11:47:24
  *          cziegeler Exp $
  */
-public class HTTPClientSourceFactory extends AbstractLogEnabled implements SourceFactory, Parameterizable, ThreadSafe, Serviceable {
-
-    /**
-     * Configuration information.
-     */
-    private Parameters m_parameters;
+public class HTTPClientSourceFactory implements SourceFactory {
 
     private HttpClient httpClient;
 
@@ -56,8 +43,6 @@ public class HTTPClientSourceFactory extends AbstractLogEnabled implements Sourc
     public Source getSource(final String uri, final Map sourceParams) throws MalformedURLException, IOException {
         try {
             final HTTPClientSource source = new HTTPClientSource(uri, sourceParams, this.httpClient);
-            source.enableLogging(getLogger());
-            source.parameterize(this.m_parameters);
             source.initialize();
             return source;
         } catch (final MalformedURLException e) {
@@ -74,18 +59,6 @@ public class HTTPClientSourceFactory extends AbstractLogEnabled implements Sourc
     }
 
     /**
-     * Parameterize this {@link SourceFactory}.
-     * 
-     * @param params
-     *            {@link Parameters} instance
-     * @exception ParameterException
-     *                if an error occurs
-     */
-    public void parameterize(final Parameters params) throws ParameterException {
-        this.m_parameters = params;
-    }
-
-    /**
      * Releases the given {@link Source} object.
      * 
      * @param source
@@ -95,9 +68,10 @@ public class HTTPClientSourceFactory extends AbstractLogEnabled implements Sourc
         // empty for the moment
     }
 
-    public void service(final ServiceManager manager) throws ServiceException {
-        HttpClientManager httpClientManager = (HttpClientManager) manager.lookup(HttpClientManager.ROLE);
-        this.httpClient = httpClientManager.getHttpClient();
-        manager.release(httpClientManager);
+    public void setHttpClientManager(final HttpClientManager manager) {
+        if (null == manager) {
+            throw new IllegalArgumentException("null httpClientManager");
+        }
+        this.httpClient = manager.getHttpClient();
     }
 }

@@ -4,10 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
-import org.apache.avalon.framework.thread.ThreadSafe;
 import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
@@ -18,7 +14,7 @@ import edu.stanford.irt.directory.LDAPPerson;
 import edu.stanford.irt.laneweb.UserInfo;
 import edu.stanford.irt.laneweb.UserInfoHelper;
 
-public class WebdashAction implements Action, Serviceable, ThreadSafe {
+public class WebdashAction implements Action {
 
     private static final String RESULT_KEY = "webdash-url";
 
@@ -54,12 +50,6 @@ public class WebdashAction implements Action, Serviceable, ThreadSafe {
         Map<String, String> result = new HashMap<String, String>(1);
         result.put(RESULT_KEY, this.webDashLogin.getWebdashURL(person, nonce, systemUserId));
         return result;
-    }
-
-    public void service(final ServiceManager manager) throws ServiceException {
-        this.webDashLogin = (WebdashLogin) manager.lookup(WebdashLogin.ROLE);
-        this.userInfoHelper = (UserInfoHelper) manager.lookup(UserInfoHelper.ROLE);
-
     }
 
 }

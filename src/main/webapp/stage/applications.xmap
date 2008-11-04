@@ -6,7 +6,9 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="url-tester" type="wildcard">
-                <map:generate type="search-url-tester"/>
+                <map:generate type="search-url-tester">
+                    <map:parameter name="url" value="{request-param:url}"/>
+                </map:generate>
                 <map:serialize type="xhtml"/>
             </map:match>
             <!-- matches /apps/search/ requests -->

@@ -1,9 +1,8 @@
 <xsl:stylesheet version="2.0"
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
-    xmlns:lw="http://irt.stanford.edu/laneweb"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    exclude-result-prefixes="h lw">
+    exclude-result-prefixes="h">
 
     <xsl:strip-space
         elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>

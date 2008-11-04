@@ -26,8 +26,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.avalon.framework.activity.Initializable;
-import org.apache.avalon.framework.logger.AbstractLogEnabled;
-import org.apache.avalon.framework.logger.Logger;
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
@@ -56,6 +54,7 @@ import org.apache.excalibur.source.SourceResolver;
 import org.apache.excalibur.source.SourceUtil;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.TimeStampValidity;
+import org.apache.log4j.Logger;
 
 /**
  * HTTP URL Source object, based on the Jakarta Commons <a
@@ -65,7 +64,9 @@ import org.apache.excalibur.source.impl.validity.TimeStampValidity;
  * @version CVS $Id: HTTPClientSource.java,v 1.4 2004/02/28 11:47:24 cziegeler
  *          Exp $
  */
-public class HTTPClientSource extends AbstractLogEnabled implements ModifiableSource, Initializable, Parameterizable {
+public class HTTPClientSource implements ModifiableSource, Initializable, Parameterizable {
+
+    private Logger logger = Logger.getLogger(HTTPClientSource.class);
 
     /**
      * Constant used for identifying POST requests.
@@ -200,11 +201,11 @@ public class HTTPClientSource extends AbstractLogEnabled implements ModifiableSo
         this.m_proxyHost = params.getParameter(PROXY_HOST, null);
         this.m_proxyPort = params.getParameterAsInteger(PROXY_PORT, -1);
 
-        if (getLogger().isDebugEnabled()) {
+        if (this.logger.isDebugEnabled()) {
             final String message = (this.m_proxyHost == null) || (this.m_proxyPort == -1) ? "No proxy configured"
                     : "Configured with proxy host " + this.m_proxyHost + " port " + this.m_proxyPort;
 
-            getLogger().debug(message);
+            this.logger.debug(message);
         }
     }
 
@@ -303,8 +304,8 @@ public class HTTPClientSource extends AbstractLogEnabled implements ModifiableSo
             final String key = i.next();
             final String value = (String) this.m_parameters.get(key);
 
-            if (getLogger().isDebugEnabled()) {
-                getLogger().debug("Adding header '" + key + "', with value '" + value + "'");
+            if (this.logger.isDebugEnabled()) {
+                this.logger.debug("Adding header '" + key + "', with value '" + value + "'");
             }
 
             method.setRequestHeader(key, value);
@@ -368,8 +369,8 @@ public class HTTPClientSource extends AbstractLogEnabled implements ModifiableSo
                     }
                     return;
                 } catch (final IOException e) {
-                    if (getLogger().isDebugEnabled()) {
-                        getLogger().debug("Unable to determine response data, using defaults", e);
+                    if (this.logger.isDebugEnabled()) {
+                        this.logger.debug("Unable to determine response data, using defaults", e);
                     }
                 } finally {
                     head.releaseConnection();
@@ -492,7 +493,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements ModifiableSo
                     in.close();
                     output.close();
                 } catch (IOException e) {
-                    getLogger().error(e.getMessage(), e);
+                    HTTPClientSource.this.logger.error(e.getMessage(), e);
                 } finally {
                     method.releaseConnection();
                 }
@@ -588,8 +589,8 @@ public class HTTPClientSource extends AbstractLogEnabled implements ModifiableSo
             final Header length = method.getResponseHeader(CONTENT_LENGTH);
             this.m_contentLength = length == null ? -1 : Long.parseLong(length.getValue());
         } catch (final NumberFormatException e) {
-            if (getLogger().isDebugEnabled()) {
-                getLogger().debug("Unable to determine content length, returning -1", e);
+            if (this.logger.isDebugEnabled()) {
+                this.logger.debug("Unable to determine content length, returning -1", e);
             }
 
             this.m_contentLength = -1;
@@ -657,7 +658,7 @@ public class HTTPClientSource extends AbstractLogEnabled implements ModifiableSo
      */
     public OutputStream getOutputStream() throws IOException {
         final File tempFile = File.createTempFile("httpclient", "tmp");
-        return new WrappedFileOutputStream(tempFile, getLogger());
+        return new WrappedFileOutputStream(tempFile, this.logger);
     }
 
     /**
@@ -795,8 +796,8 @@ public class HTTPClientSource extends AbstractLogEnabled implements ModifiableSo
                 throw new SourceException("Failed to delete " + this.m_uri + " (" + response + ")");
             }
 
-            if (getLogger().isDebugEnabled()) {
-                getLogger().debug(this.m_uri + " deleted (" + response + ")");
+            if (this.logger.isDebugEnabled()) {
+                this.logger.debug(this.m_uri + " deleted (" + response + ")");
             }
         } catch (final IOException e) {
             throw new SourceException("IOException thrown during delete", e);

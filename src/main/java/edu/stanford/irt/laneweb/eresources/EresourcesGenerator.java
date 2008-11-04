@@ -4,23 +4,20 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
-import org.apache.avalon.framework.activity.Initializable;
-import org.apache.avalon.framework.parameters.ParameterException;
-import org.apache.avalon.framework.parameters.Parameterizable;
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.ServiceableGenerator;
+import org.apache.cocoon.generation.Generator;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 
-public class EresourcesGenerator extends ServiceableGenerator implements Parameterizable, Initializable {
+public class EresourcesGenerator implements Generator {
 
     private static final String QUERY = "q";
 
@@ -31,8 +28,6 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
     private static final String ALPHA = "a";
 
     private static final String MESH = "m";
-
-    private String collection;
 
     private CollectionManager collectionManager;
 
@@ -48,6 +43,8 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
 
     private String mode;
 
+    private XMLConsumer xmlConsumer;
+
     public void setCollectionManager(final CollectionManager collectionManager) {
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
@@ -55,10 +52,8 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
         this.collectionManager = collectionManager;
     }
 
-    @Override
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
-        super.setup(resolver, objectModel, src, par);
         this.mode = par.getParameter("mode", "browse");
         Request request = ObjectModelHelper.getRequest(objectModel);
         this.query = request.getParameter(QUERY);
@@ -102,22 +97,6 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
         this.xmlConsumer.endDocument();
     }
 
-    @Override
-    public void dispose() {
-        this.manager.release(this.collectionManager);
-        super.dispose();
-    }
-
-    @Override
-    public void recycle() {
-        this.mode = null;
-        this.alpha = null;
-        this.mesh = null;
-        this.query = null;
-        this.type = null;
-        this.subset = null;
-    }
-
     protected Collection<Eresource> getEresourceList() {
         if ("search".equals(this.mode)) {
             if (null == this.query) {
@@ -156,12 +135,11 @@ public class EresourcesGenerator extends ServiceableGenerator implements Paramet
         throw new IllegalStateException("incomplete parameters");
     }
 
-    public void parameterize(final Parameters param) throws ParameterException {
-        this.collection = param.getParameter("collection", "laneconnex");
-    }
-
-    public void initialize() throws ServiceException {
-        setCollectionManager((CollectionManager) this.manager.lookup(CollectionManager.class.getName() + "/" + this.collection));
+    public void setConsumer(final XMLConsumer xmlConsumer) {
+        if (null == xmlConsumer) {
+            throw new IllegalArgumentException("null xmlConsumer");
+        }
+        this.xmlConsumer = xmlConsumer;
     }
 
 }

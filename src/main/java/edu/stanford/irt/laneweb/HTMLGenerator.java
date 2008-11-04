@@ -1,14 +1,14 @@
 package edu.stanford.irt.laneweb;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.ServiceableGenerator;
+import org.apache.cocoon.generation.Generator;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceValidity;
@@ -19,40 +19,14 @@ import org.xml.sax.SAXException;
 
 /**
  * The neko html generator reads HTML from a source, converts it to XHTML and
- * generates SAX Events. It uses the NekoHTML library to do this. stolen from
- * cocoon-2.1.10 source
+ * generates SAX Events. It uses the NekoHTML library to do this.
  */
-public class HTMLGenerator extends ServiceableGenerator implements CacheableProcessingComponent {
+public class HTMLGenerator implements Generator, CacheableProcessingComponent {
 
     /** The source, if coming from a file */
-    private Source inputSource;
+    private Source source;
 
-    /** The source, if coming from the request */
-    private InputStream requestStream;
-
-    private AbstractSAXParser parser;
-
-    public HTMLGenerator() {
-        HTMLConfiguration conf = new HTMLConfiguration();
-        conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
-        conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-        this.parser = new AbstractSAXParser(conf) {
-        };
-    }
-
-    /**
-     * Recycle this component. All instance variables are set to
-     * <code>null</code>.
-     */
-    @Override
-    public void recycle() {
-        if (this.inputSource != null) {
-            this.resolver.release(this.inputSource);
-            this.inputSource = null;
-            this.requestStream = null;
-        }
-        super.recycle();
-    }
+    private XMLConsumer xmlConsumer;
 
     /**
      * Setup the html generator. Try to get the last modification date of the
@@ -61,18 +35,10 @@ public class HTMLGenerator extends ServiceableGenerator implements CacheableProc
      * @throws IOException
      * @throws SAXException
      * @throws ProcessingException
-     * @throws IOException
-     * @throws SAXException
-     * @throws ProcessingException
      */
-    @Override
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
-        super.setup(resolver, objectModel, src, par);
-
-        if (super.source != null) {
-            this.inputSource = resolver.resolveURI(super.source);
-        }
+        this.source = resolver.resolveURI(src);
     }
 
     /**
@@ -84,11 +50,7 @@ public class HTMLGenerator extends ServiceableGenerator implements CacheableProc
      *         not cacheable.
      */
     public java.io.Serializable getKey() {
-        if (this.inputSource == null) {
-            return null;
-        }
-
-        return this.inputSource.getURI();
+        return this.source.getURI();
     }
 
     /**
@@ -99,10 +61,7 @@ public class HTMLGenerator extends ServiceableGenerator implements CacheableProc
      *         component is currently not cacheable.
      */
     public SourceValidity getValidity() {
-        if (this.inputSource == null) {
-            return null;
-        }
-        return this.inputSource.getValidity();
+        return this.source.getValidity();
     }
 
     /**
@@ -111,22 +70,18 @@ public class HTMLGenerator extends ServiceableGenerator implements CacheableProc
      * @throws IOException
      * @throws SourceNotFoundException
      * @throws SAXException
-     * @throws SAXException
      */
     public void generate() throws SourceNotFoundException, IOException, SAXException {
+        HTMLConfiguration conf = new HTMLConfiguration();
+        conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
+        conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
+        AbstractSAXParser parser = new AbstractSAXParser(conf) {
+        };
+        parser.setContentHandler(this.xmlConsumer);
+        parser.parse(new InputSource(this.source.getInputStream()));
+    }
 
-        if (this.inputSource != null) {
-            this.requestStream = this.inputSource.getInputStream();
-        }
-
-        this.parser.setContentHandler(this.contentHandler);
-        try {
-            this.parser.parse(new InputSource(this.requestStream));
-        } finally {
-            this.parser.reset();
-            if (null != this.requestStream) {
-                this.requestStream.close();
-            }
-        }
+    public void setConsumer(final XMLConsumer xmlConsumer) {
+        this.xmlConsumer = xmlConsumer;
     }
 }

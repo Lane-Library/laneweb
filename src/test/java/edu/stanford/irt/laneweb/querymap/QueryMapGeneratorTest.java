@@ -17,8 +17,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.xml.AbstractXMLConsumer;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
@@ -34,8 +32,6 @@ public class QueryMapGeneratorTest {
 
     private QueryMapGenerator generator;
 
-    private ServiceManager serviceManager;
-
     private Parameters parameters;
 
     private QueryMapper queryMapper;
@@ -45,7 +41,6 @@ public class QueryMapGeneratorTest {
     @Before
     public void setUp() throws Exception {
         this.generator = new QueryMapGenerator();
-        this.serviceManager = createMock(ServiceManager.class);
         this.parameters = createMock(Parameters.class);
         this.queryMapper = createMock(QueryMapper.class);
         this.consumer = createMock(XMLConsumer.class);
@@ -59,19 +54,6 @@ public class QueryMapGeneratorTest {
         } catch (IllegalArgumentException e) {
         }
         this.generator.setQueryMapper(this.queryMapper);
-    }
-
-    @Test
-    public void testService() throws ServiceException {
-        try {
-            this.generator.service(null);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
-        expect(this.serviceManager.lookup(QueryMapper.ROLE)).andReturn(this.queryMapper);
-        replay(this.serviceManager);
-        this.generator.service(this.serviceManager);
-        verify(this.serviceManager);
     }
 
     @Test
@@ -137,16 +119,18 @@ public class QueryMapGeneratorTest {
 
     // TODO I don't know if this actually does what I want it to.
     @Test
-    public void testThreads() throws ServiceException {
+    public void testThreads() {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(100);
-        QueryMapper fauxQueryMapper = new QueryMapper() {
+        edu.stanford.irt.querymap.QueryMapper fauxQueryMapper = new edu.stanford.irt.querymap.QueryMapper() {
 
+            @Override
             public QueryMap getQueryMap(final String query) {
                 Descriptor descriptor = new Descriptor(query, query, Collections.<String> singleton(query));
                 return new QueryMap(query, descriptor, new ResourceMap(descriptor, Collections.<String> singleton(query)), null, null);
             }
 
             // TODO: need to more thoroughly test the source reloading:
+            @Override
             public QueryMap getQueryMap(final String query, final Map<String, Set<String>> resourceMaps,
                     final Map<String, Float> descriptorWeights, final int abstractCount) {
                 // TODO Auto-generated method stub

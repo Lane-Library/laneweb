@@ -6,21 +6,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.thread.ThreadSafe;
-import org.apache.cocoon.acting.AbstractAction;
-import org.apache.cocoon.environment.ObjectModelHelper;
+import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.Redirector;
-import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 
 /**
  * used to redirect form submissions where the source value is a http address.
- * This substitutes the q parameter into the http address and returns the value
- * in the return map.
+ * These are normally intercepted by javascript in the client. This is here so
+ * that if javascript is off in the client, the user will get to the page
+ * anyway. This substitutes the q parameter into the http address and returns
+ * the value in the return map.
  * 
  * @author ceyates
  */
-public class FormRedirectAction extends AbstractAction implements ThreadSafe {
+public class FormRedirectAction implements Action {
 
     private static final String FORM_REDIRECT_KEY = "form-redirect-key";
 
@@ -31,11 +30,10 @@ public class FormRedirectAction extends AbstractAction implements ThreadSafe {
     private static final String REPLACE = "\\{search-terms\\}";
 
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String src,
-            final Parameters parameters) {
+            final Parameters params) {
         Map<String, String> result = new HashMap<String, String>();
-        Request request = ObjectModelHelper.getRequest(objectModel);
-        String q = request.getParameter(Q);
-        String source = request.getParameter(SOURCE);
+        String q = params.getParameter(Q, null);
+        String source = params.getParameter(SOURCE, null);
         if ((null == q) || (q.length() == 0)) {
             throw new IllegalArgumentException("null or empty query");
         }

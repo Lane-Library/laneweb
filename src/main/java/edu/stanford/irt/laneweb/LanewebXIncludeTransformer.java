@@ -20,6 +20,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.Serializable;
 import java.net.MalformedURLException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.avalon.framework.CascadingException;
@@ -30,8 +32,8 @@ import org.apache.avalon.framework.service.Serviceable;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.ResourceNotFoundException;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.cocoon.components.source.SourceUtil;
 import org.apache.cocoon.components.source.impl.MultiSourceValidity;
+import org.apache.cocoon.components.source.util.SourceUtil;
 import org.apache.cocoon.components.xpointer.XPointer;
 import org.apache.cocoon.components.xpointer.XPointerContext;
 import org.apache.cocoon.components.xpointer.parser.ParseException;
@@ -54,29 +56,22 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
 /**
- * shamelessly copied from cocoon 2.2-M2, modified only startPrefixMapping()
- * --cy also altered to use fallback if ProcessingException or SAXException
+ * shamelessly copied from cocoon 2.2, modified to use fallback if
+ * ProcessingException or SAXException
  */
 public class LanewebXIncludeTransformer extends AbstractTransformer implements Serviceable, CacheableProcessingComponent {
 
     protected SourceResolver resolver;
-
     protected ServiceManager manager;
-
     private XIncludePipe xIncludePipe;
 
     public static final String XMLBASE_ATTRIBUTE = "base";
 
     public static final String XINCLUDE_NAMESPACE_URI = "http://www.w3.org/2001/XInclude";
-
     public static final String XINCLUDE_INCLUDE_ELEMENT = "include";
-
     public static final String XINCLUDE_FALLBACK_ELEMENT = "fallback";
-
     public static final String XINCLUDE_INCLUDE_ELEMENT_HREF_ATTRIBUTE = "href";
-
     public static final String XINCLUDE_INCLUDE_ELEMENT_XPOINTER_ATTRIBUTE = "xpointer";
-
     public static final String XINCLUDE_INCLUDE_ELEMENT_PARSE_ATTRIBUTE = "parse";
 
     private static final String XINCLUDE_CACHE_KEY = "XInclude";
@@ -89,7 +84,6 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         this.resolver = resolver;
         this.validity = new MultiSourceValidity(resolver, MultiSourceValidity.CHECK_ALWAYS);
         this.xIncludePipe = new XIncludePipe();
-        this.xIncludePipe.enableLogging(getLogger());
         this.xIncludePipe.init(null, null);
         super.setContentHandler(this.xIncludePipe);
         super.setLexicalHandler(this.xIncludePipe);
@@ -138,10 +132,8 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
      * on included content, this class is instantiated recursively.
      */
     private class XIncludePipe extends AbstractXMLPipe {
-
         /** Helper class to keep track of xml:base attributes */
         private XMLBaseSupport xmlBaseSupport;
-
         /** The nesting level of xi:include elements that have been encountered. */
         private int xIncludeElementLevel = 0;
 
@@ -152,6 +144,12 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
          * The nesting level of xi:fallback elements that have been encountered.
          */
         private int fallbackElementLevel;
+
+        /**
+         * Keep a map of namespaces prefix in the source document to pass it to
+         * the XPointerContext for correct namespace identification.
+         */
+        private Map namespaces = new HashMap();
 
         /**
          * In case {@link #useFallbackLevel} > 0, then this should contain the
@@ -286,12 +284,9 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
 
         @Override
         public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
-            // don't propagate xinclude namespace declarations
-            if (XINCLUDE_NAMESPACE_URI.equals(uri)) {
-                return;
-            }
             if (isEvaluatingContent()) {
                 super.startPrefixMapping(prefix, uri);
+                this.namespaces.put(prefix, uri);
             }
         }
 
@@ -299,6 +294,7 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         public void endPrefixMapping(final String prefix) throws SAXException {
             if (isEvaluatingContent()) {
                 super.endPrefixMapping(prefix);
+                this.namespaces.remove(prefix);
             }
         }
 
@@ -488,7 +484,6 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                     }
 
                     XIncludePipe subPipe = new XIncludePipe();
-                    subPipe.enableLogging(getLogger());
                     subPipe.init(url.getURI(), xpointer);
                     subPipe.setConsumer(this.xmlConsumer);
                     subPipe.setParent(this);
@@ -497,11 +492,14 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                         if ((xpointer != null) && (xpointer.length() > 0)) {
                             XPointer xptr;
                             xptr = XPointerFrameworkParser.parse(NetUtils.decodePath(xpointer));
-                            XPointerContext context = new XPointerContext(xpointer, url, subPipe, getLogger(),
-                                    LanewebXIncludeTransformer.this.manager);
+                            XPointerContext context = new XPointerContext(xpointer, url, subPipe, LanewebXIncludeTransformer.this.manager);
+                            for (Iterator iter = this.namespaces.keySet().iterator(); iter.hasNext();) {
+                                String prefix = (String) iter.next();
+                                context.addPrefix(prefix, (String) this.namespaces.get(prefix));
+                            }
                             xptr.process(context);
                         } else {
-                            SourceUtil.toSAX(url, new IncludeXMLConsumer(subPipe));
+                            SourceUtil.toSAX(LanewebXIncludeTransformer.this.manager, url, new IncludeXMLConsumer(subPipe));
                         }
                         // restore locator on the consumer
                         if (this.locator != null) {
@@ -569,8 +567,9 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         private String getLocation() {
             if (this.locator == null) {
                 return "unknown location";
+            } else {
+                return this.locator.getSystemId() + ":" + this.locator.getColumnNumber() + ":" + this.locator.getLineNumber();
             }
-            return this.locator.getSystemId() + ":" + this.locator.getColumnNumber() + ":" + this.locator.getLineNumber();
         }
     }
 }

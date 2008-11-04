@@ -28,16 +28,9 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="extensions-suggest">
-                <map:generate type="file"
-                    src="{naming:java:comp/env/stage-base}/resources/sql/extensions-suggest.xml"/>
-                <map:transform type="sql">
-                    <map:parameter name="use-connection" value="eresources"/>
-                    <map:parameter name="q" value="{request-param:q}"/>
-                </map:transform>
-                <map:transform type="saxon" src="context://xsl/extensions-suggest.xsl">
-                    <map:parameter name="q" value="{request-param:q}"/>
-                </map:transform>
-                <map:serialize type="text"/>
+                <map:read type="extensions-suggest">
+                    <map:parameter name="query" value="{request-param:q}"/>
+                </map:read>
             </map:match>
             <map:match pattern="browse">
                 <map:generate type="eresources">
@@ -64,21 +57,10 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ezproxy-servers.txt">
-                <map:generate type="file"
-                    src="{naming:java:comp/env/stage-base}/resources/sql/ezproxy-servers.xml"/>
-                <map:transform type="sql">
-                    <map:parameter name="use-connection" value="eresources"/>
-                </map:transform>
-                <map:transform type="saxon" src="context://xsl/ezproxy-servers.xsl"/>
-                <map:serialize type="text"/>
+                <map:read type="ezproxy-servers"/>
             </map:match>
             <map:match pattern="linkscan.html">
-                <map:generate type="file"
-                    src="{naming:java:comp/env/stage-base}/resources/sql/linkscan.xml"/>
-                <map:transform type="sql">
-                    <map:parameter name="use-connection" value="eresources"/>
-                </map:transform>
-                <map:transform type="saxon" src="context://xsl/linkscan.xsl"/>
+                <map:generate type="link-scan"/>
                 <map:serialize type="xhtml"/>
             </map:match>
         </map:pipeline>

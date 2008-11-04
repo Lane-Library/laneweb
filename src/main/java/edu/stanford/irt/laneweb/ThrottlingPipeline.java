@@ -8,6 +8,7 @@ import org.apache.cocoon.components.pipeline.impl.CachingProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
+import org.apache.log4j.Logger;
 
 /**
  * The ThrottlingPipeline
@@ -20,11 +21,13 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
      */
     private static Collection<String> REQUESTS = new HashSet<String>();
 
+    private Logger logger = Logger.getLogger(ThrottlingPipeline.class);
+
     /**
      * Process the given <code>Environment</code>, producing the output. I
      * created this to keep Denial of Service attacks to the eresources urls.
-     * from bringing down the site. Only one request for a given url from a given
-     * client IP is processed at one time. Others will throw a
+     * from bringing down the site. Only one request for a given url from a
+     * given client IP is processed at one time. Others will throw a
      * ProcessingException
      */
     @Override
@@ -32,8 +35,8 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
         Request request = (Request) environment.getObjectModel().get(ObjectModelHelper.REQUEST_OBJECT);
         String requestKey = new StringBuffer(request.getRemoteAddr()).append(request.getRequestURI()).append("?").append(
                 request.getQueryString()).toString();
-        if (getLogger().isDebugEnabled()) {
-            getLogger().debug("requestKey = " + requestKey);
+        if (this.logger.isDebugEnabled()) {
+            this.logger.debug("requestKey = " + requestKey);
         }
         synchronized (REQUESTS) {
             if (REQUESTS.contains(requestKey)) {

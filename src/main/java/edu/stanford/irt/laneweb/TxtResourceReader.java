@@ -1,75 +1,85 @@
 package edu.stanford.irt.laneweb;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.Map;
 
-import org.apache.avalon.framework.configuration.Configuration;
-import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
+import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.reading.ResourceReader;
+import org.apache.cocoon.reading.Reader;
+import org.apache.excalibur.source.Source;
+import org.apache.excalibur.source.SourceValidity;
 import org.xml.sax.SAXException;
 
-public class TxtResourceReader extends ResourceReader {
+public class TxtResourceReader implements Reader, CacheableProcessingComponent {
 
-    String configuredPath = null;
+    private String defaultPath;
 
-    String path = null;
+    private String path;
 
-    String valueToSubstitute = null;
+    private String valueToSubstitute;
 
-    @Override
-    public void configure(final Configuration configuration) throws ConfigurationException {
-        super.configure(configuration);
-        this.configuredPath = configuration.getChild("path").getValue();
-        this.valueToSubstitute = configuration.getChild("valueToSubstitute").getValue();
+    private Source source;
+
+    private OutputStream outputStream;
+
+    public void setDefaultPath(final String path) {
+        this.defaultPath = path;
     }
 
-    @Override
+    public void setValueToSubstitute(final String valueToSubstitute) {
+        this.valueToSubstitute = valueToSubstitute;
+    }
+
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
-        super.setup(resolver, objectModel, src, par);
-        this.path = par.getParameter("path", this.configuredPath);
+        this.path = par.getParameter("path", this.defaultPath);
+        this.source = resolver.resolveURI(src);
     }
 
-    @Override
-    public void recycle() {
-        super.recycle();
-        this.path = null;
-    }
-
-    @Override
     public Serializable getKey() {
-        return this.inputSource.getURI() + ";path=" + this.path;
+        return this.source.getURI() + ";path=" + this.path;
     }
 
-    @Override
-    protected void processStream(final InputStream inputStream) throws IOException, ProcessingException {
-        byte[] buffer = new byte[this.bufferSize];
-        String ranges = this.request.getHeader("Range");
-        long contentLength = this.inputSource.getContentLength();
-
-        if (this.byteRanges && (ranges != null)) {
-            throw new ProcessingException("Reader only for Text file");
-        }
-        if (contentLength != -1) {
-            this.response.setHeader("Content-Length", Long.toString(contentLength));
-        }
-        StringBuffer page = new StringBuffer();
-        BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+    public void generate() throws IOException, SAXException, ProcessingException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(this.source.getInputStream()));
         String line = null;
         while ((line = bf.readLine()) != null) {
-            page.append(line);
-            page.append("\n");
+            line = line.replaceAll(this.valueToSubstitute, this.path);
+            this.outputStream.write(line.getBytes());
+            this.outputStream.write('\n');
         }
-        String pageToSend = page.toString().replaceAll(this.valueToSubstitute, this.path);
-        buffer = pageToSend.getBytes();
-        this.out.write(buffer, 0, buffer.length);
-        this.out.flush();
+        this.outputStream.flush();
+    }
+
+    public long getLastModified() {
+        return this.source.getLastModified();
+    }
+
+    public String getMimeType() {
+        return null;
+    }
+
+    public void setOutputStream(final OutputStream out) {
+        if ((out instanceof BufferedOutputStream) || (out instanceof org.apache.cocoon.util.BufferedOutputStream)) {
+
+            this.outputStream = out;
+        } else {
+            this.outputStream = new BufferedOutputStream(out, 1536);
+        }
+    }
+
+    public boolean shouldSetContentLength() {
+        return false;
+    }
+
+    public SourceValidity getValidity() {
+        return this.source.getValidity();
     }
 }

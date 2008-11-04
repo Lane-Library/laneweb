@@ -6,23 +6,21 @@ import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
-import org.apache.avalon.framework.logger.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.directory.LDAPPerson;
 
-public class WebdashLoginImplTest {
+public class WebdashLoginTest {
 
-    private WebdashLoginImpl webdashLogin;
+    private WebdashLogin webdashLogin;
 
     private LDAPPerson person;
 
     @Before
     public void setUp() throws Exception {
-        this.webdashLogin = new WebdashLoginImpl();
+        this.webdashLogin = new WebdashLogin();
         this.webdashLogin.setWebdashKey("webdashKey");
-        this.webdashLogin.enableLogging(createMock(Logger.class));
         this.person = createMock(LDAPPerson.class);
     }
 

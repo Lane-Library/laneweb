@@ -6,13 +6,12 @@ import java.util.Collection;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.ServiceableGenerator;
+import org.apache.cocoon.generation.Generator;
+import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.search.MetaSearchManager;
@@ -22,7 +21,7 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 import edu.stanford.irt.search.util.SAXResult;
 import edu.stanford.irt.search.util.SAXable;
 
-public class DescribeGenerator extends ServiceableGenerator {
+public class DescribeGenerator implements Generator {
 
     private MetaSearchManager metaSearchManager;
 
@@ -34,31 +33,19 @@ public class DescribeGenerator extends ServiceableGenerator {
 
     private String engineId;
 
-    @Override
-    public void service(final ServiceManager manager) throws ServiceException {
-        super.service(manager);
-        MetaSearchManagerSource source = (MetaSearchManagerSource) this.manager.lookup(MetaSearchManagerSource.class.getName());
-        this.metaSearchManager = source.getMetaSearchManager();
+    private XMLConsumer xmlConsumer;
+
+    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
+        this.metaSearchManager = msms.getMetaSearchManager();
     }
 
-    @Override
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
-        super.setup(resolver, objectModel, src, par);
         Request request = (Request) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
         this.q = request.getParameter("q");
         this.e = request.getParameterValues("e");
         this.admin = request.getParameter("admin");
         this.engineId = request.getParameter("id");
-    }
-
-    @Override
-    public void recycle() {
-        this.q = null;
-        this.e = null;
-        this.admin = null;
-        this.engineId = null;
-        super.recycle();
     }
 
     public void generate() throws SAXException {
@@ -97,6 +84,10 @@ public class DescribeGenerator extends ServiceableGenerator {
         synchronized (result) {
             xml.toSAX(this.xmlConsumer);
         }
+    }
+
+    public void setConsumer(final XMLConsumer xmlConsumer) {
+        this.xmlConsumer = xmlConsumer;
     }
 
 }
