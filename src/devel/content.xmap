@@ -11,7 +11,7 @@
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
             </map:match>
-            <map:match pattern="online/(ej|db|cc|eb)browse.html" type="regex">
+            <map:match pattern="online/(ej|db|cc|eb)browse.html" type="regexp">
                 <map:select type="resource-exists">
                     <map:when test="content/online/{1}browse.html">
                         <map:generate type="html" src="content/online/{1}browse.html"/>
@@ -50,7 +50,7 @@
                 </map:select>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regex">
+            <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regexp">
                 <map:generate type="directory" src="{naming:java:comp/env/live-base}/content/{1}">
                     <map:parameter name="depth" value="1"/>
                     <map:parameter name="dateFormat" value="EEE, d MMM yyyy HH:mm:ss Z"/>
@@ -149,11 +149,11 @@
                     <map:when test="resources/templates/{1}.xml">
                         <map:generate type="file" src="resources/templates/{1}.xml"/>
                     </map:when>
-                    <map:when test="{naming:java:comp/env/live-base}/resources/templates/{1}.xml">
-                        <map:generate type="file" src="{naming:java:comp/env/live-base}/resources/templates/{1}.xml"/>
+                    <map:when test="context://resources/templates/{1}.xml">
+                        <map:generate type="file" src="context://resources/templates/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="{naming:java:comp/env/live-base}/resources/templates/{defaults:template}.xml"/>
+                        <map:generate type="file" src="context://resources/templates/{defaults:template}.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

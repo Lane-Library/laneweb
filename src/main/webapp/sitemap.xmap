@@ -2,88 +2,6 @@
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
-    <map:components>
-        <map:generators default="file">
-            <map:generator name="file" logger="sitemap.generator.file"
-                src="org.apache.cocoon.generation.FileGenerator" pool-max="32"/>
-            <map:generator name="request" src="org.apache.cocoon.generation.RequestGenerator"
-                logger="sitemap.generator.request" pool-max="32"/>
-            <map:generator name="status" logger="sitemap.generator.status"
-                src="org.apache.cocoon.generation.StatusGenerator" pool-max="4"/>
-            <map:generator name="exception" src="org.apache.cocoon.generation.ExceptionGenerator"/>
-            <map:generator name="directory" src="org.apache.cocoon.generation.DirectoryGenerator"/>          
-        </map:generators>
-        <map:transformers default="saxon">
-            <map:transformer name="saxon" logger="sitemap.transformer.saxon"
-                src="org.apache.cocoon.transformation.TraxTransformer" pool-max="32">
-                <use-request-parameters>false</use-request-parameters>
-                <use-session-parameters>false</use-session-parameters>
-                <use-cookie-parameters>false</use-cookie-parameters>
-                <xslt-processor-role>saxon</xslt-processor-role>
-                <check-includes>false</check-includes>
-            </map:transformer>
-            <map:transformer name="xinclude"
-                src="edu.stanford.irt.laneweb.LanewebXIncludeTransformer" pool-max="32"
-                logger="sitemap.transformer.xinclude"/>
-        </map:transformers>
-        <map:serializers default="xhtml">
-            <map:serializer name="xhtml" mime-type="text/html" logger="sitemap.serializer.xhtml"
-                src="org.apache.cocoon.serialization.XMLSerializer" pool-max="32">
-                <doctype-public>-//W3C//DTD XHTML 1.0 Strict//EN</doctype-public>
-                <doctype-system>http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd</doctype-system>
-                <encoding>UTF-8</encoding>
-                <indent>yes</indent>
-                <omit-xml-declaration>yes</omit-xml-declaration>
-                <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
-            </map:serializer>
-            <map:serializer name="xml" mime-type="text/xml" logger="sitemap.serializer.xml"
-                src="org.apache.cocoon.serialization.XMLSerializer" pool-max="32">
-                <indent>no</indent>
-                <encoding>UTF-8</encoding>
-                <transformer-factory>net.sf.saxon.TransformerFactoryImpl</transformer-factory>
-            </map:serializer>
-            <map:serializer name="text" mime-type="text/plain" logger="sitemap.serializer.text"
-                src="org.apache.cocoon.serialization.TextSerializer" pool-max="32"/>
-        </map:serializers>
-        <map:selectors default="source-parameter">
-            <map:selector name="source-parameter"
-                src="org.apache.cocoon.selection.RequestParameterSelector"
-                logger="sitemap.selector.requestparameter">
-                <parameter-name>source</parameter-name>
-            </map:selector>
-            <map:selector name="resource-exists" logger="sitemap.selector.resource-exists"
-                src="org.apache.cocoon.selection.ResourceExistsSelector"/>
-            <map:selector name="simple" src="org.apache.cocoon.selection.SimpleSelector"/>
-        </map:selectors>
-        <map:readers default="resource">
-            <map:reader name="resource" logger="sitemap.reader.resource"
-                src="org.apache.cocoon.reading.ResourceReader"/>
-        </map:readers>
-        <map:actions>
-            <map:action name="clear-cache" logger="sitemap.acting.clear-cache"
-                src="org.apache.cocoon.acting.ClearCacheAction"/>
-        </map:actions>
-        <map:matchers default="wildcard">
-            <map:matcher name="wildcard" logger="sitemap.matcher.wildcard"
-                src="org.apache.cocoon.matching.WildcardURIMatcher"/>
-            <map:matcher name="regex" logger="sitemap.matcher.regex"
-                src="org.apache.cocoon.matching.RegexpURIMatcher"/>
-            <map:matcher name="regex-parameter" logger="sitemap.matcher.regex-parameter"
-                src="org.apache.cocoon.matching.RegexpRequestParameterMatcher"/>
-        </map:matchers>
-        <map:pipes default="noncaching">
-            <map:pipe name="caching" logger="sitemap.pipeline.caching"
-                src="org.apache.cocoon.components.pipeline.impl.CachingProcessingPipeline"/>
-            <map:pipe name="noncaching" logger="sitemap.pipeline.noncaching"
-                src="org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline"/>
-            <map:pipe name="throttling" logger="sitemap.pipeline.throttling"
-                src="edu.stanford.irt.laneweb.ThrottlingPipeline"/>
-            <map:pipe name="expires" src="org.apache.cocoon.components.pipeline.impl.ExpiresCachingProcessingPipeline">
-                <map:parameter name="cache-expires" value="300"/>
-                <!-- default 300 sec (5 min) -->
-            </map:pipe>
-        </map:pipes>
-    </map:components>
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="" type="wildcard">
@@ -121,7 +39,7 @@
             <map:match pattern="tobacco/**" type="wildcard">
                 <map:mount uri-prefix="tobacco" check-reload="no" src="tobacco.xmap"/>
             </map:match>
-            <map:match type="regex"
+            <map:match type="regexp"
                 pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|pptx|ico|swf|wmv|avi|zip)$">
                 <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>

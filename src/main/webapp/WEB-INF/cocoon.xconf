@@ -2,48 +2,9 @@
 <cocoon version="2.2">
 
     <include src="resource://org/apache/cocoon/cocoon.roles"/>
-
-    <input-modules>
-        <component-instance logger="core.modules.input" name="request-param"
-            class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
-        <component-instance logger="core.modules.input" name="request-uri"
-            class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
-        <component-instance logger="core.modules.input" name="request"
-            class="org.apache.cocoon.components.modules.input.RequestModule"/>
-        <component-instance logger="core.modules.input" name="header-attribute"
-            class="org.apache.cocoon.components.modules.input.HeaderAttributeModule"/>
-        <component-instance logger="core.modules.input" name="urlencode"
-            class="org.apache.cocoon.components.modules.input.URLEncodeModule"/>
-        <component-instance logger="core.modules.input" name="chain"
-            class="org.apache.cocoon.components.modules.input.ChainMetaModule">
-            <input-module name="request-param"/>
-            <input-module name="laneweb"/>
-            <input-module name="defaults"/>
-        </component-instance>
-        <component-instance logger="core.modules.input" name="naming"
-            class="org.apache.cocoon.components.modules.input.NamingInputModule"/>
-        <component-instance logger="core.modules.input" name="defaults"
-            class="org.apache.cocoon.components.modules.input.DefaultsModule">
-            <values>
-                <template>irt3</template>
-                <abstract-count>100</abstract-count>
-            </values>
-        </component-instance>
-    </input-modules>
-
-    <source-factories logger="core.source">
-        <component-instance class="org.apache.excalibur.source.impl.ResourceSourceFactory"
-            name="resource" logger="core.source.resource"/>
-        <component-instance class="org.apache.cocoon.components.source.impl.ContextSourceFactory"
-            name="context" logger="core.source.context"/>
-        <component-instance class="org.apache.cocoon.components.source.impl.SitemapSourceFactory"
-            name="cocoon" logger="core.source.sitemap"/>
-        <component-instance class="org.apache.excalibur.source.impl.FileSourceFactory" name="file"
-            logger="core.source.file"/>
-        <component-instance class="org.apache.excalibur.source.impl.URLSourceFactory" name="*"/>
-    </source-factories>
-
-    <source-resolver logger="core.source-resolver"/>
+    <include src="resource://META-INF/cocoon/avalon/cocoon-core-source-factories.xconf"/>
+    <include src="resource://META-INF/cocoon/avalon/cocoon-core-sitemapcomponents.xconf"/>
+    <include src="resource://META-INF/cocoon/avalon/cocoon-core-modules-input.xconf"/>
 
     <component logger="core.xslt-processor" role="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
         class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl">
@@ -51,5 +12,49 @@
         <parameter name="incremental-processing" value="false"/>
         <parameter name="transformer-factory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </component>
+    
+    <component role="org.apache.cocoon.transformation.Transformer/saxon"
+        class="org.apache.cocoon.transformation.TraxTransformer"
+        logger="sitemap.transformer.saxon">
+        <use-request-parameters>false</use-request-parameters>
+        <use-session-parameters>false</use-session-parameters>
+        <use-cookie-parameters>false</use-cookie-parameters>
+        <xslt-processor-role>saxon</xslt-processor-role>
+        <check-includes>false</check-includes>
+    </component>
+    
+    <!-- TODO: remove this in favor of regexp -->
+    <component role="org.apache.cocoon.matching.Matcher/regex"
+        class="org.apache.cocoon.matching.RegexpURIMatcher"/>
+    
+    <component role="org.apache.cocoon.matching.Matcher/regex-parameter"
+    class="org.apache.cocoon.matching.RegexpRequestParameterMatcher"/>
+    
+    <component role="org.apache.cocoon.components.modules.input.InputModule/request-uri"
+        class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
+    
+    <component role="org.apache.cocoon.components.modules.input.InputModule/header-attribute"
+    class="org.apache.cocoon.components.modules.input.HeaderAttributeModule"/>
+    
+    <component  role="org.apache.cocoon.components.modules.input.InputModule/chain"
+        class="org.apache.cocoon.components.modules.input.ChainMetaModule">
+        <input-module name="request-param"/>
+        <input-module name="laneweb"/>
+        <input-module name="defaults"/>
+    </component>
+    
+    <component role="org.apache.cocoon.components.modules.input.InputModule/defaults"
+        class="org.apache.cocoon.components.modules.input.DefaultsModule">
+        <values>
+            <template>irt3</template>
+            <abstract-count>100</abstract-count>
+        </values>
+    </component>
+    
+    <component role="org.apache.cocoon.components.modules.input.InputModule/urlencode"
+    class="org.apache.cocoon.components.modules.input.URLEncodeModule"/>
+    
+    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
+        class="edu.stanford.irt.laneweb.ThrottlingPipeline"/>
 
 </cocoon>

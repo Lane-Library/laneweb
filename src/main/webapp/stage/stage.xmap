@@ -15,7 +15,7 @@
             <map:match pattern="tobacco/**" type="wildcard">
                 <map:mount uri-prefix="tobacco" check-reload="no" src="context://stage/tobacco.xmap"/>
             </map:match>
-            <map:match type="regex"
+            <map:match type="regexp"
                 pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|pptx|ico|swf|wmv|avi|zip)$">
                 <map:mount uri-prefix="" check-reload="no" src="context://stage/static.xmap"/>
             </map:match>
