@@ -139,9 +139,6 @@
     <bean name="org.apache.cocoon.generation.Generator/html"
         class="edu.stanford.irt.laneweb.HTMLGenerator" scope="prototype"/>
 
-    <bean name="org.apache.cocoon.generation.Generator/search-url-tester"
-        class="edu.stanford.irt.laneweb.search.UrlTester" scope="prototype"/>
-
     <bean name="org.apache.cocoon.generation.Generator/querymap"
         class="edu.stanford.irt.laneweb.querymap.QueryMapGenerator">
         <property name="queryMapper">
@@ -192,7 +189,7 @@
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
 
-    <bean name="org.apache.cocoon.generation.Generator/bassett"
+    <bean  name="org.apache.cocoon.generation.Generator/bassett"
         class="edu.stanford.irt.laneweb.eresources.BassettEresourcesGenerator" scope="prototype">
         <property name="collectionManager">
             <bean class="edu.stanford.irt.laneweb.eresources.BassettCollectionManager">
@@ -246,6 +243,12 @@
         <!-- uses regex so /./. is what is actually substituted -->
     </bean>
 
+	<bean name="org.apache.cocoon.reading.Reader/search-url-tester"
+        class="edu.stanford.irt.laneweb.search.UrlTester" scope="prototype">
+         <property name="metaSearchManagerSource"
+            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+    </bean>
+    
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
         class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
 
