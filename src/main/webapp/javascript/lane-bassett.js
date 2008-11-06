@@ -2,7 +2,8 @@
 
 var diagramDisplay = false,
 YC = YAHOO.util.Connect,  
-YE = YAHOO.util.Event;
+YE = YAHOO.util.Event,
+YH = YAHOO.util.History;
 
 YAHOO.util.Event.onAvailable('bassettContent',function() {
 	YAHOO.util.Get.script( "/javascript/noversion/bubbling-min.js", {
@@ -19,87 +20,87 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
 	function init(){
 		var accordion = document.getElementById('accordion');
  		registerLinksContainer(accordion );
- 		registerLinksContainer( document.getElementById('bassettContent'));					
+ 		registerLinksContainer( document.getElementById('bassettContent'));	
+ 		if(accordion)
+ 			initializeHistory();
+ 						
  	}
 	
 	 	
  	function registerLinksContainer(container){
- 		var anchor, i;    
+ 		var anchor, i, url;    
         if (container) {
-         	contentContainer = document.getElementById("bassettContent");
          	anchor = container.getElementsByTagName('a');
          	for (i = 0; i < anchor.length; i++) {
          		if( anchor[i].rel == null || anchor[i].rel == "" )
          		{
-	                 anchor[i].result = new BassettResult( anchor[i], contentContainer);
 	                 anchor[i].clicked = function(event) {
-	             		this.result.getContent();
-	                    YE.stopEvent(event);
+	        			if( this.id == "diagram-choice")
+							diagramDisplay = true;
+						if( this.id == "photo-choice")
+							diagramDisplay = false;
+	        
+	            		url = formatAjaxUrl(this.href);
+	            		  if (YH) {
+                                try {
+                                    YH.navigate("bassett", url);
+                                } catch (e) {
+                                	loadContent(url);
+                                }
+                            }
+                            else
+                            	loadContent(url);
+	            		YE.stopEvent(event);
 	                };
 	     		}   
             }
 		}
  	}
-        
-        
-    function BassettResult(anchor, container) {
-    	var href;
-    	this._anchor = anchor;
-    	this._container = container;
-        this._content;
-        href = anchor.href;
-        href = href.substr(href.indexOf("/bassett/")+8);
-        href = href.split("?");
-        if(href.length == 1)
-        	this._url = '/././plain/bassett/raw' + href[0];
-        if(href.length > 1)
-        	this._url = '/././plain/bassett/raw' + href[0]+"?" + href[1] ;
-        this._callback = {
-            success: function(o) {
-                var result, content;
-                result = o.argument.result;
-                content = o.responseXML.getElementsByTagName('body')[0].childNodes;
-                result.setContent(content);
-                result.hide();
-                result.show();
-            },
-            failure: function() { alert('failure'); },
-            argument: {result:this}
-    };
-    }
-    
-
-BassettResult.prototype.setContent = function(content) {
-     this._content = content;         
-};
-    
-    
-
-BassettResult.prototype.show = function() {
-    var i;
-	    for (i = 0; i < this._content.length; i++) {
-	    	this._container.appendChild(LANE.core.importNode(this._content[i], true));
+ 	        
+	    
+	function loadContent(url) {
+		url = "/././plain/bassett/raw".concat(url);
+		function successHandler(o) {
+	        var content, container,i;
+	        container = document.getElementById('bassettContent')  
+	        content = o.responseXML.getElementsByTagName('body')[0].childNodes;
+	    	while (container.childNodes.length > 0) {
+	        	container.removeChild(container.firstChild);
+	    	}
+	    	for (i = 0; i < content.length; i++) {
+		    	container.appendChild(LANE.core.importNode(content[i], true));
+		    }
+		    registerLinksContainer(container);
+		    LANE.popups.initialize(container);
 	    }
-	    registerLinksContainer(this._container);
-	    LANE.popups.initialize(this._container);
-};
+        YC.asyncRequest("GET", url,
+        {
+			success:successHandler
+        });
+	}
+	    
+	     
+	 formatAjaxUrl = function(href)
+	 {
+	 	var url;
+	 	href = href.replace("search.html", "/bassett/bassettsView.html");
+		href = href.substr(href.indexOf("/bassett/")+8);
+		href = href.split("?");
+		if(href.length == 1)
+			url =  href[0];
+		if(href.length > 1)
+			url =	 href[0]+"?" + href[1] ;
+		if(diagramDisplay)
+		 	url = url +"&t=diagram";
+	    return url;
+	 } 
 
-BassettResult.prototype.getContent = function() {
-	if( this._anchor && this._anchor.id == "diagram-choice")
-		diagramDisplay = true;
-	else if( this._anchor && this._anchor.id == "photo-choice")
-		diagramDisplay = false;
-	if(diagramDisplay)
-		YC.asyncRequest('GET', this._url+"&t=diagram", this._callback);
-	else	
-		YC.asyncRequest('GET', this._url, this._callback);
-};
- 
-BassettResult.prototype.hide = function() {
-	while (this._container.childNodes.length > 0) {
-        	this._container.removeChild(this._container.firstChild);
-    }
-};
+
+	initializeHistory = function(){
+		var  initial = YH.getBookmarkedState("bassett") || window.location.toString();
+		YH.register("bassett",  formatAjaxUrl(initial), loadContent);
+		YH.initialize("yui-history-field-bassett", "yui-history-iframe");
+    };
 
 
 })();
