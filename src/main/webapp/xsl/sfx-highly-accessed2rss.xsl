@@ -25,7 +25,7 @@
         <xsl:variable name="link">
             <xsl:choose>
                 <xsl:when test="PMID">
-                    <xsl:value-of select="concat('http://www.ncbi.nlm.nih.gov/pubmed/',PMID,'?otool=stanford')"/>
+                    <xsl:value-of select="concat('http://www.ncbi.nlm.nih.gov/pubmed/',PMID,'?otool=stanford&amp;holding=F1000,F1000M')"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="OPEN_URL"/>
