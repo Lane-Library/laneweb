@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans" default-init-method="init"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:util="http://www.springframework.org/schema/util"
     xmlns:configurator="http://cocoon.apache.org/schema/configurator"
     xmlns:avalon="http://cocoon.apache.org/schema/avalon"
     xmlns:servlet="http://cocoon.apache.org/schema/servlet"
     xmlns:pipeline="http://cocoon.apache.org/schema/pipeline"
+    xmlns:aop="http://www.springframework.org/schema/aop"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
                            http://cocoon.apache.org/schema/configurator http://cocoon.apache.org/schema/configurator/cocoon-configurator-1.0.1.xsd
                            http://cocoon.apache.org/schema/avalon http://cocoon.apache.org/schema/avalon/cocoon-avalon-1.0.xsd
                            http://cocoon.apache.org/schema/servlet http://cocoon.apache.org/schema/servlet/cocoon-servlet-1.0.xsd
-                           http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd">
+                           http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
 
     <!-- Activate Cocoon Spring Configurator -->
-    <configurator:settings/>
+    <configurator:settings extractBlockResources="false" readFromClasspath="false"
+        readFromGlobalLocation="false" runningMode="prod"/>
 
     <!-- Configure Log4j -->
     <bean name="org.apache.cocoon.spring.configurator.log4j"
@@ -23,8 +26,66 @@
         <property name="resource" value="/WEB-INF/log4j.xml"/>
     </bean>
 
+    <bean name="org.apache.cocoon.processing.ProcessInfoProvider"
+        class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
+        <property name="servletContext" ref="javax.servlet.ServletContext"/>
+    </bean>
+
+    <bean name="org.apache.excalibur.xml.sax.SAXParser"
+        class="org.apache.cocoon.core.xml.avalon.DefaultSAXParser" scope="singleton">
+        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.core.xml.SAXParser"
+        class="org.apache.cocoon.core.xml.impl.JaxpSAXParser" scope="singleton">
+        <property name="validate" value="false"/>
+    </bean>
+
+    <bean id="org.apache.cocoon.template.expression.AbstractStringTemplateParser"
+        class="org.apache.cocoon.template.expression.AbstractStringTemplateParser" abstract="true">
+        <property name="expressionFactory" ref="org.apache.cocoon.el.ExpressionFactory"/>
+    </bean>
+
+    <bean id="org.apache.cocoon.el.ExpressionFactory"
+        class="org.apache.cocoon.el.impl.DefaultExpressionFactory">
+        <property name="expressionCompilers">
+            <configurator:bean-map type="org.apache.cocoon.el.ExpressionCompiler"/>
+        </property>
+    </bean>
+
+    <bean name="org.apache.cocoon.el.objectmodel.ObjectModel" scope="request"
+        parent="org.apache.cocoon.el.objectmodel.ObjectModel.template">
+        <aop:scoped-proxy proxy-target-class="false"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.el.objectmodel.ObjectModel.template"
+        class="org.apache.cocoon.el.impl.objectmodel.ObjectModelImpl" abstract="true">
+        <property name="initialEntries">
+            <configurator:bean-map type="org.apache.cocoon.el.objectmodel.ObjectModelProvider"/>
+        </property>
+    </bean>
+
     <!-- Activate Avalon Bridge -->
     <avalon:bridge location="/WEB-INF/cocoon.xconf"/>
+
+    <bean name="org.apache.cocoon.caching.Cache" class="org.apache.cocoon.caching.impl.CacheImpl">
+        <property name="store" ref="org.apache.excalibur.store.Store"/>
+    </bean>
+
+    <bean name="org.apache.excalibur.store.Store"
+        class="org.apache.cocoon.components.store.impl.EHDefaultStore" init-method="init"
+        destroy-method="destroy">
+        <property name="maxMemObjects" value="1000"/>
+        <property name="useCacheDirectory" value="true"/>
+        <property name="settings" ref="org.apache.cocoon.configuration.Settings"/>
+    </bean>
+
+    <bean name="org.apache.excalibur.store.Store/TransientStore"
+        class="org.apache.cocoon.components.store.impl.DefaultTransientStore" init-method="init"
+        destroy-method="destroy">
+        <property name="maxObjects" value="1000"/>
+        <property name="storeJanitor" ref="org.apache.excalibur.store.StoreJanitor"/>
+    </bean>
 
     <bean name="javax.sql.DataSource/eresources"
         class="org.springframework.jndi.JndiObjectFactoryBean">
@@ -60,7 +121,7 @@
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.httpclient.HttpClientManager"
-        class="edu.stanford.irt.laneweb.httpclient.HttpClientManager" init-method="init">
+        class="edu.stanford.irt.laneweb.httpclient.HttpClientManager">
         <property name="maxTotalConnections" value="300"/>
         <property name="defaultMaxConnectionsPerHost" value="100"/>
         <property name="connectionTimeout" value="20000"/>
@@ -107,6 +168,12 @@
 
     <bean id="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
         class="edu.stanford.irt.laneweb.search.MetaSearchManagerSource" destroy-method="dispose"/>
+
+    <bean name="org.apache.cocoon.generation.Generator/file"
+        class="org.apache.cocoon.generation.FileGenerator" scope="prototype">
+        <pipeline:component label="content"/>
+        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
+    </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/search-describe"
         class="edu.stanford.irt.laneweb.search.DescribeGenerator" scope="prototype">
@@ -174,7 +241,7 @@
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
 
-    <bean  name="org.apache.cocoon.generation.Generator/bassett"
+    <bean name="org.apache.cocoon.generation.Generator/bassett"
         class="edu.stanford.irt.laneweb.eresources.BassettEresourcesGenerator" scope="prototype">
         <property name="collectionManager">
             <bean class="edu.stanford.irt.laneweb.eresources.BassettCollectionManager">
@@ -211,6 +278,14 @@
             ref="edu.stanford.irt.eresources.CollectionManager/history"/>
     </bean>
 
+    <bean name="org.apache.cocoon.generation.Generator/directory"
+        class="org.apache.cocoon.generation.DirectoryGenerator" scope="prototype">
+        <pipeline:component label="content"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.reading.Reader/resource"
+        class="org.apache.cocoon.reading.ResourceReader" scope="prototype"/>
+
     <bean name="org.apache.cocoon.reading.Reader/extensions-suggest"
         class="edu.stanford.irt.laneweb.eresources.ExtensionsSuggestReader">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
@@ -228,18 +303,38 @@
         <!-- uses regex so /./. is what is actually substituted -->
     </bean>
 
-	<bean name="org.apache.cocoon.reading.Reader/search-url-tester"
+    <bean name="org.apache.cocoon.reading.Reader/search-url-tester"
         class="edu.stanford.irt.laneweb.search.UrlTester" scope="prototype">
-         <property name="metaSearchManagerSource"
+        <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
-    class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
-    
-    
-    <bean name="org.apache.cocoon.serialization.Serializer/xhtml" class="org.apache.cocoon.serialization.XMLSerializer"
-        scope="prototype" parent="org.apache.cocoon.serialization.AbstractTextSerializer">
+        class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
+
+    <!-- Abstract parent bean that sets the default encoding from the settings bean -->
+    <bean name="org.apache.cocoon.serialization.AbstractTextSerializer"
+        class="org.apache.cocoon.serialization.AbstractTextSerializer" scope="prototype"
+        abstract="true">
+        <property name="defaultEncoding">
+            <bean class="org.springframework.beans.factory.config.PropertyPathFactoryBean">
+                <property name="targetBeanName" value="org.apache.cocoon.configuration.Settings"/>
+                <property name="propertyPath" value="containerEncoding"/>
+            </bean>
+        </property>
+        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.serialization.Serializer/xml"
+        class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
+        parent="org.apache.cocoon.serialization.AbstractTextSerializer">
+        <pipeline:component mime-type="text/xml"/>
+    </bean>
+
+
+    <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
+        class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
+        parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <pipeline:component mime-type="text/html"/>
         <property name="format">
             <props>
@@ -250,7 +345,12 @@
                 <prop key="omit-xml-declaration">yes</prop>
             </props>
         </property>
-        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.serialization.Serializer/text"
+        class="org.apache.cocoon.serialization.TextSerializer" scope="prototype"
+        parent="org.apache.cocoon.serialization.AbstractTextSerializer">
+        <pipeline:component mime-type="text/plain"/>
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/voyager"
@@ -289,6 +389,83 @@
     <bean name="org.apache.cocoon.acting.Action/loginAction"
         class="edu.stanford.irt.laneweb.LoginAction">
         <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
+    </bean>
+
+    <bean name="org.apache.excalibur.store.StoreJanitor"
+        class="org.apache.cocoon.components.store.impl.CocoonStoreJanitor" init-method="init"
+        destroy-method="destroy">
+        <!--+
+            | How much free memory shall be available in the jvm?
+            | If not specified, defaults to 1Mb.
+            +-->
+        <property name="freeMemory" value="2048000"/>
+        <!--+
+            | How much memory at max jvm can consume?
+            | The default max heapsize for Sun's JVM is (almost) 64Mb,
+            | can be increased by specifying -Xmx command line parameter.
+            | If not specified, defaults to 66600000 bytes.
+            +-->
+        <property name="heapSize" value="66600000"/>
+        <!--+
+            | How often shall the cleanup thread check memory?
+            | If not specified, defaults to 10 seconds.
+            +-->
+        <property name="cleanupThreadInterval" value="10"/>
+        <!--+
+            | Experimental adaptive algorithm for cleanup interval
+            <property name="adaptiveThreadInterval" value="true"/>
+            +-->
+        <!--+
+            | What percent of the store elements shall be dropped on low memory?
+            | If not specified, defaults to 10%
+            +-->
+        <property name="percentToFree" value="10"/>
+        <!--+
+            | Shall garbage collector be invoked on low memory?
+            | If not specified, defaults to false.
+            +-->
+        <property name="invokeGC" value="false"/>
+        <!--+
+            | Algorithm describing how to clean caches in low memory situations.
+            |   round-robin: The registered caches are cycled through,
+            |                and each time there is a low memory situation one
+            |                of the registered caches has objects freed from it.
+            |   all-stores:  All registered stores have objects removed from
+            |                them each time there is a low memory situation.
+            | If not specified, defaults to 'round-robin'.
+            +-->
+        <property name="freeingAlgorithm" value="round-robin"/>
+        <!--+
+            | Name of the thread pool to use.
+            | If not specified, defaults to 'daemon'.
+            +-->
+        <property name="threadPool" value="daemon"/>
+
+        <!--+
+            | What should be the priority of the cleanup thread?
+            | This property is used only by older implementation of the janitor.
+            | New implementation uses centrally configured thread pool (see
+            | thread-pools element below).
+            <property name="threadPriority" value="5"/>
+            +-->
+
+        <property name="runnableManager" ref="org.apache.cocoon.thread.RunnableManager"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.thread.RunnableManager"
+        class="org.apache.cocoon.thread.impl.DefaultRunnableManager" scope="singleton"
+        init-method="init" destroy-method="destroy">
+        <!--+
+            | This is the default configuration of the runnable-manager. More
+            | indepth information can be found at
+            | http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/concurrent/PooledExecutor.html
+            | The following elements can be used:
+            |
+            | threadPools:       container element for thread-pool elements.
+            +-->
+        <property name="workerThreadPools">
+            <configurator:bean-map type="org.apache.cocoon.thread.ThreadPool" strip-prefix="true"/>
+        </property>
     </bean>
 
 </beans>
