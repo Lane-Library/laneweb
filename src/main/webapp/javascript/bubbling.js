@@ -17,25 +17,25 @@ YAHOO.namespace("plugin","behavior");
   * @class Bubbling
   */
   YAHOO.Bubbling = function () {
-  	var obj = {},
+  	var b, obj = {},
 		ua = navigator.userAgent.toLowerCase(),
         isOpera = (ua.indexOf('opera') > -1);
 	// private stuff
-	var navRelExternal = function (layer, args) {
-		  var el = args[1].anchor;
+	navRelExternal = function (layer, args) {
+		  var t, r, el = args[1].anchor;
 		  if (!(args[1].flagged || args[1].decrepitate) && el) {
-			  var r = el.getAttribute("rel"),
+			   r = el.getAttribute("rel"),
 			  	  t = el.getAttribute("target");
 		  	  if ((!t || (t === '')) && (r == 'external')) {
 				el.setAttribute("target", "blank");
 		      }
 		  }
 	};
-    var defaultActionsControl = function (layer, args) {
+    defaultActionsControl = function (layer, args) {
 	  obj.processingAction (layer, args, obj.defaultActions);
     };
-	var _searchYUIButton = function (t) {
-		var el = obj.getOwnerByClassName( t, 'yui-button' ), bt = null, id = null;
+	_searchYUIButton = function (t) {
+		var el = obj.getOwnerByClassName( t, 'yui-button' ), bt = null;
 		if ($L.isObject(el) && YAHOO.widget.Button) {
 			bt = YAHOO.widget.Button.getButton(el.id);
 		}
@@ -65,7 +65,7 @@ YAHOO.namespace("plugin","behavior");
 
 	// public methods
 	obj.onKeyPressedTrigger = function(args, e, m){
-	  var b = 'key';
+	b = 'key';
 	  e = e || $E.getEvent();
 	  m = m || {};
 	  m.action = b;
@@ -227,10 +227,10 @@ YAHOO.namespace("plugin","behavior");
 	* @return boolean if not exists...
 	*/
     obj.addLayer = function (layers, scope) {
-		var result = false;
+		var i, result = false;
 		layers = ($L.isArray(layers)?layers:[layers]);
         scope = scope || window;
-		for (var i = 0; i < layers.length; ++i) {
+		for (i = 0; i < layers.length; ++i) {
           if (layers[i] && !this.bubble.hasOwnProperty(layers[i])) {
             this.bubble[layers[i]] = new $Y.CustomEvent(layers[i], scope, true);
             result = true;

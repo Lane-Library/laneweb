@@ -42,10 +42,11 @@ version: 1.5.0
         // behaviors for the second accordion (ADVANCED AJAX APPLICATION)
         // Tagline: One behavior that will rule them all (based on the slide's rel attribute)
         $B.on('accordionOpenItem', function (layer, args) {
-          var reLink = /.*#/;
+          var reLink, trigger;
+           reLink = /.*#/;
           // if can be loaded thru AJAX
           if ($D.hasClass(args[1].slide, 'ajax') && $L.isObject(YAHOO.plugin.Dispatcher)) {
-            var trigger = $D.getElementsByClassName('accordionToggleItem','*',args[1].el);
+            trigger = $D.getElementsByClassName('accordionToggleItem','*',args[1].el);
             trigger = (trigger.length>0?trigger[0]:null);
             if (trigger && (trigger = trigger.getAttribute('href',2))) {
                 YAHOO.plugin.Dispatcher.fetch ( args[1].slide, trigger.replace(reLink,''), {
@@ -59,7 +60,7 @@ version: 1.5.0
 
         // on keyboad action behavior...
         $B.on('key', function (layer, args) {
-    	  var o = args[1], item = null, result = false;
+    	  var o = args[1];
     	  if (!o.decrepitate && (o.type == 'keyup')) {
     	      if (((o.keyCode === 39) && obj.open (o.target)) ||
     	          ((o.keyCode === 37) && obj.close (o.target))) { // Shortcut: cursor -> or cursor <-
@@ -112,7 +113,7 @@ version: 1.5.0
         }
         function _getItem ( elem ) {
           if (elem && ($L.isObject(elem) || (elem = $D.get (elem)))) {
-            var item, el = $B.getOwnerByClassName (elem, 'yui-cms-item');
+            var item, h, w, slide, el = $B.getOwnerByClassName (elem, 'yui-cms-item');
             if ($L.isObject(el)) {
                 item = {
                     el: el,
@@ -122,11 +123,11 @@ version: 1.5.0
                     size: {width:0, Height: 0}
                 };
                 // getting the slidable element
-                var slide = $D.getElementsByClassName('bd','*',el);
+                slide = $D.getElementsByClassName('bd','*',el);
                 slide = (slide.length>0?slide[0]:null);
                 item.slide = slide;
-                var h = parseInt($D.getStyle(slide, 'height'), 10);
-                var w = parseInt($D.getStyle(slide, 'width'), 10);
+                h = parseInt($D.getStyle(slide, 'height'), 10);
+                w = parseInt($D.getStyle(slide, 'width'), 10);
                 // forcing to number... to avoid misbehavior on "auto" height/width...
                 if (!$L.isNumber(h)) {
                     $D.setStyle(slide, 'height', slide.scrollHeight+'px');
@@ -172,7 +173,7 @@ version: 1.5.0
         }
         function _reset ( list, params ) {
             params = params || {};
-            var conf = [], i,
+            var  i,
                 force = params.force || false,
                 item = params.item || null;
             if (list) {
@@ -196,7 +197,7 @@ version: 1.5.0
 	        }
         }
         function _openItem ( item, list ) {
-            var conf = [], anim, i, g = [], m = [], fs, onFinish;
+            var conf = [], anim,  g = [], m = [], fs, onFinish, i;
             if (list || (list = _getList (item))) {
               // if the item is not already opened
               if (!item.selected) {
@@ -251,7 +252,7 @@ version: 1.5.0
 	        return false;
         }
         function _closeItem ( item, list, grouping ) {
-            var conf = [], anim, fs;
+            var conf = [], anim, fs, i;
             if (item && (list || (list = _getList (item)))) {
 	            // closing the item, based on the list's orientation, timer and effect attribute...
 	            conf[list.orientation] = {to: ((list.orientation=='width'||list.fixIE)?1:0)}; // hack for vertical accordion issue on Safari and Opera
