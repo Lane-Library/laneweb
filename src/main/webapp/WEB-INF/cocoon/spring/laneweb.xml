@@ -25,52 +25,12 @@
     </bean>
     
     <bean name="org.apache.excalibur.store.Store/TransientStore"
-        class="org.apache.cocoon.components.store.impl.DefaultTransientStore" init-method="init"
-        destroy-method="destroy">
-        <property name="maxObjects" value="1000"/>
-        <property name="storeJanitor">
-            <bean class="org.apache.cocoon.components.store.impl.CocoonStoreJanitor"
-                init-method="init" destroy-method="destroy">
-                <property name="freeMemory" value="2048000"/>
-                <property name="heapSize" value="66600000"/>
-                <property name="cleanupThreadInterval" value="10"/>
-                <property name="percentToFree" value="10"/>
-                <property name="invokeGC" value="false"/>
-                <property name="freeingAlgorithm" value="round-robin"/>
-                <property name="threadPool" value="daemon"/>
-                <property name="runnableManager">
-                    <bean name="org.apache.cocoon.thread.RunnableManager"
-                        class="org.apache.cocoon.thread.impl.DefaultRunnableManager"
-                        scope="singleton" init-method="init" destroy-method="destroy">
-                        <property name="workerThreadPools">
-                            <map>
-                                <entry key="daemon">
-                                    <bean name="org.apache.cocoon.thread.ThreadPool/daemon"
-                                        class="org.apache.cocoon.thread.impl.DefaultThreadPool"
-                                        init-method="init" scope="singleton">
-                                        <property name="name" value="daemon"/>
-                                        <property name="poolPriority" value="NORM"/>
-                                        <property name="daemon" value="true"/>
-                                        <property name="queueSize" value="0"/>
-                                        <property name="maxPoolSize" value="-1"/>
-                                        <property name="minPoolSize" value="1"/>
-                                        <property name="keepAliveTime" value="60000"/>
-                                        <property name="blockPolicy" value="ABORT"/>
-                                        <property name="shutdownGraceful" value="false"/>
-                                        <property name="shutdownWaitTimeMs" value="-1"/>
-                                        <property name="factory">
-                                            <bean class="org.apache.cocoon.thread.impl.DefaultThreadFactory"
-                                                scope="prototype"/>
-                                        </property>
-                                    </bean>
-                                </entry>
-                            </map>
-                        </property>
-                    </bean>
-                </property>
-            </bean>
-        </property>
+        class="edu.stanford.irt.laneweb.store.TransientStore">
+        <property name="storeJanitor" ref="org.apache.excalibur.store.StoreJanitor"/>
     </bean>
+    
+    <bean id="org.apache.excalibur.store.StoreJanitor"
+        class="edu.stanford.irt.laneweb.store.StoreJanitor"/>
     
     <bean id="edu.stanford.irt.laneweb.httpclient.HttpClientManager"
         class="edu.stanford.irt.laneweb.httpclient.HttpClientManager">

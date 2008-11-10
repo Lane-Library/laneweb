@@ -178,8 +178,20 @@
                     <groupId>junit</groupId>
                 </exclusion>
                 <exclusion>
+                    <artifactId>cocoon-thread-impl</artifactId>
+                    <groupId>org.apache.cocoon</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cocoon-thread-api</artifactId>
+                    <groupId>org.apache.cocoon</groupId>
+                </exclusion>
+                <exclusion>
                     <artifactId>excalibur-instrument-api</artifactId>
                     <groupId>org.apache.excalibur.containerkit</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>concurrent</artifactId>
+                    <groupId>concurrent</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
