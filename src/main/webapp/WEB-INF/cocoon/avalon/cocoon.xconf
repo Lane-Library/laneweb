@@ -1,70 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cocoon version="2.2">
-
-    <!--<include src="resource://org/apache/cocoon/cocoon.roles"/>
-    <include src="resource://META-INF/cocoon/avalon/cocoon-core-source-factories.xconf"/>
-    <include src="resource://META-INF/cocoon/avalon/cocoon-core-sitemapcomponents.xconf"/>
-    <include src="resource://META-INF/cocoon/avalon/cocoon-core-modules-input.xconf"/>-->
-
+    
     <component role="org.apache.cocoon.Processor" file="context://sitemap.xmap"
         class="org.apache.cocoon.components.treeprocessor.TreeProcessor"/>
-
+    
     <component role="org.apache.excalibur.source.SourceResolver"
         class="org.apache.cocoon.components.source.CocoonSourceResolver"/>
-
+    
     <component role="org.apache.excalibur.source.SourceFactory/*"
         class="org.apache.excalibur.source.impl.URLSourceFactory"/>
-
+    
     <component role="org.apache.excalibur.source.SourceFactory/context"
         class="org.apache.cocoon.components.source.impl.ContextSourceFactory"/>
-
+    
     <component role="org.apache.excalibur.source.SourceFactory/resource"
         class="org.apache.excalibur.source.impl.ResourceSourceFactory"/>
-
+    
     <component role="org.apache.excalibur.source.SourceFactory/cocoon"
         class="org.apache.cocoon.components.source.impl.SitemapSourceFactory"/>
-
+    
     <component role="org.apache.excalibur.xmlizer.XMLizer"
         class="org.apache.excalibur.xmlizer.DefaultXMLizer"/>
-
+    
     <component role="org.apache.cocoon.components.treeprocessor.TreeBuilder/sitemap-1.0"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapLanguage"/>
-
+    
+    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
+        class="org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline"/>
+    
+    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/expires"
+        class="org.apache.cocoon.components.pipeline.impl.ExpiresCachingProcessingPipeline">
+        <parameter name="cache-expires" value="300"/>
+    </component>
+    
+    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
+        class="edu.stanford.irt.laneweb.ThrottlingPipeline"/>
+    
+    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/caching"
+        class="org.apache.cocoon.components.pipeline.impl.CachingProcessingPipeline"/>
+    
+    <component role="org.apache.cocoon.matching.MatcherSelector"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
+    
+    <component role="org.apache.cocoon.matching.Matcher/wildcard"
+        class="org.apache.cocoon.matching.WildcardURIMatcher"/>
+    
+    <!-- TODO: maybe this one goes in irt-cocoon? -->
     <component role="org.apache.cocoon.components.notification.NotifyingBuilder"
         class="org.apache.cocoon.components.notification.DefaultNotifyingBuilder"/>
-
-    <component logger="core.xslt-processor" role="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
+    
+    <component role="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
         class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl">
         <parameter name="use-store" value="true"/>
         <parameter name="incremental-processing" value="false"/>
         <parameter name="transformer-factory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </component>
-
-    <component role="org.apache.cocoon.generation.Generator/status"
-        class="org.apache.cocoon.generation.StatusGenerator">
-        <show-continuations>false</show-continuations>
-    </component>
-
-    <component role="org.apache.cocoon.generation.Generator/request"
-        class="org.apache.cocoon.generation.RequestGenerator"/>
-
-    <component role="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
-        class="org.apache.cocoon.sitemap.DefaultContentAggregator" model="non-thread-safe-pooled"/>
-
-    <component role="org.apache.cocoon.generation.Generator/exception"
-        class="org.apache.cocoon.generation.ExceptionGenerator"/>
-
-    <component role="org.apache.cocoon.transformation.Transformer/saxon"
-        class="org.apache.cocoon.transformation.TraxTransformer" logger="sitemap.transformer.saxon">
-        <use-request-parameters>false</use-request-parameters>
-        <use-session-parameters>false</use-session-parameters>
-        <use-cookie-parameters>false</use-cookie-parameters>
-        <xslt-processor-role>saxon</xslt-processor-role>
-        <check-includes>false</check-includes>
-    </component>
-
-    <component role="org.apache.cocoon.transformation.Transformer/xinclude"
-        class="edu.stanford.irt.laneweb.LanewebXIncludeTransformer"/>
 
     <component role="org.apache.cocoon.components.modules.input.InputModuleSelector"
         class="org.apache.cocoon.core.container.DefaultServiceSelector"/>
@@ -102,23 +92,6 @@
     <component role="org.apache.cocoon.components.modules.input.InputModule/request"
         class="org.apache.cocoon.components.modules.input.RequestModule"/>
 
-    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
-        class="edu.stanford.irt.laneweb.ThrottlingPipeline"/>
-
-    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/caching"
-        class="org.apache.cocoon.components.pipeline.impl.CachingProcessingPipeline"/>
-
-    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
-        class="org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline"/>
-
-    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/expires"
-        class="org.apache.cocoon.components.pipeline.impl.ExpiresCachingProcessingPipeline">
-        <parameter name="cache-expires" value="300"/>
-    </component>
-
-    <component role="org.apache.cocoon.matching.MatcherSelector"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
-
     <component role="org.apache.cocoon.matching.Matcher/wildcard"
         class="org.apache.cocoon.matching.WildcardURIMatcher"/>
 
@@ -128,19 +101,45 @@
     <!-- TODO: remove this in favor of regexp -->
     <component role="org.apache.cocoon.matching.Matcher/regex"
         class="org.apache.cocoon.matching.RegexpURIMatcher"/>
-
+    
     <component role="org.apache.cocoon.matching.Matcher/regex-parameter"
         class="org.apache.cocoon.matching.RegexpRequestParameterMatcher"/>
-
+    
+    <component role="org.apache.cocoon.generation.Generator/status"
+        class="org.apache.cocoon.generation.StatusGenerator">
+        <show-continuations>false</show-continuations>
+    </component>
+    
+    <component role="org.apache.cocoon.generation.Generator/request"
+        class="org.apache.cocoon.generation.RequestGenerator"/>
+    
+    <component role="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
+        class="org.apache.cocoon.sitemap.DefaultContentAggregator" model="non-thread-safe-pooled"/>
+    
+    <component role="org.apache.cocoon.generation.Generator/exception"
+        class="org.apache.cocoon.generation.ExceptionGenerator"/>
+    
     <component role="org.apache.cocoon.acting.ActionSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
-
+    
     <component role="org.apache.cocoon.acting.Action/clear-cache"
         class="org.apache.cocoon.acting.ClearCacheAction"/>
-
+    
+    <component role="org.apache.cocoon.transformation.Transformer/saxon"
+        class="org.apache.cocoon.transformation.TraxTransformer">
+        <use-request-parameters>false</use-request-parameters>
+        <use-session-parameters>false</use-session-parameters>
+        <use-cookie-parameters>false</use-cookie-parameters>
+        <xslt-processor-role>saxon</xslt-processor-role>
+        <check-includes>false</check-includes>
+    </component>
+    
+    <component role="org.apache.cocoon.transformation.Transformer/xinclude"
+        class="edu.stanford.irt.laneweb.LanewebXIncludeTransformer"/>
+    
     <component role="org.apache.cocoon.selection.SelectorSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
-
+    
     <component role="org.apache.cocoon.selection.Selector/resource-exists"
         class="org.apache.cocoon.selection.ResourceExistsSelector"/>
 

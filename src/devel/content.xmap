@@ -89,8 +89,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ncbi-rss2html" type="wildcard">
-                <map:generate 
-                    src="{request-param:rss-url}"/>
+                <map:generate src="{request-param:rss-url}" type="file"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/ncbi-rss2html.xsl">
                         <map:transform src="xsl/ncbi-rss2html.xsl" type="saxon"/>
@@ -102,7 +101,7 @@
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
-                <map:generate src="cocoon:/apps/sfx/highly-accessed2rss"/>
+                <map:generate src="cocoon:/apps/sfx/highly-accessed2rss" type="file"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="howto/index.html" type="wildcard">
@@ -127,7 +126,7 @@
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="faq-category-list.html">
+            <map:match pattern="faq-category-list.html" type="wildcard">
                 <!-- this grabs the cached version of the lane-faq-all.html document -->
                 <map:generate type="file" src="cocoon://content/lane-faq/lane-faq-all.html"/>
                 <map:select type="resource-exists">

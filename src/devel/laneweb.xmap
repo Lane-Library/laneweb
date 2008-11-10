@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
-        <map:pipeline>
+        <map:pipeline type="noncaching">
             <map:match pattern="javascript/yui/**" type="wildcard">
                 <map:mount uri-prefix="javascript/yui" check-reload="no" src="context://yui.xmap"/>
             </map:match>
@@ -24,7 +24,7 @@
                 <map:generate type="file" src="cocoon:/error.html"/>
                 <map:serialize type="xhtml" status-code="503"/>
             </map:match>
-            <map:match pattern="secure/login.html">
+            <map:match pattern="secure/login.html" type="wildcard">
                 <map:act type="loginAction"/>
             </map:match>
             <!-- external resource searches, normally intercepted by javascript -->

@@ -1,77 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- @version $Id: laneweb.xml 561606 2007-08-01 00:23:28Z vgritsenko $ -->
 <beans xmlns="http://www.springframework.org/schema/beans" default-init-method="init"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:util="http://www.springframework.org/schema/util"
     xmlns:configurator="http://cocoon.apache.org/schema/configurator"
-    xmlns:avalon="http://cocoon.apache.org/schema/avalon"
-    xmlns:servlet="http://cocoon.apache.org/schema/servlet"
     xmlns:pipeline="http://cocoon.apache.org/schema/pipeline"
     xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:avalon="http://cocoon.apache.org/schema/avalon"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
-                           http://cocoon.apache.org/schema/configurator http://cocoon.apache.org/schema/configurator/cocoon-configurator-1.0.1.xsd
-                           http://cocoon.apache.org/schema/avalon http://cocoon.apache.org/schema/avalon/cocoon-avalon-1.0.xsd
-                           http://cocoon.apache.org/schema/servlet http://cocoon.apache.org/schema/servlet/cocoon-servlet-1.0.xsd
-                           http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd
-                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
-
-    <!-- Activate Cocoon Spring Configurator -->
-    <configurator:settings extractBlockResources="false" readFromClasspath="false"
-        readFromGlobalLocation="false" runningMode="prod"/>
-
-    <!-- Configure Log4j -->
-    <bean name="org.apache.cocoon.spring.configurator.log4j"
-        class="org.apache.cocoon.spring.configurator.log4j.Log4JConfigurator" scope="singleton">
-        <property name="settings" ref="org.apache.cocoon.configuration.Settings"/>
-        <property name="resource" value="/WEB-INF/log4j.xml"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.processing.ProcessInfoProvider"
-        class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
-        <property name="servletContext" ref="javax.servlet.ServletContext"/>
-    </bean>
-
-    <bean name="org.apache.excalibur.xml.sax.SAXParser"
-        class="org.apache.cocoon.core.xml.avalon.DefaultSAXParser" scope="singleton">
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.core.xml.SAXParser"
-        class="org.apache.cocoon.core.xml.impl.JaxpSAXParser" scope="singleton">
-        <property name="validate" value="false"/>
-    </bean>
-
-    <bean id="org.apache.cocoon.template.expression.AbstractStringTemplateParser"
-        class="org.apache.cocoon.template.expression.AbstractStringTemplateParser" abstract="true">
-        <property name="expressionFactory" ref="org.apache.cocoon.el.ExpressionFactory"/>
-    </bean>
-
-    <bean id="org.apache.cocoon.el.ExpressionFactory"
-        class="org.apache.cocoon.el.impl.DefaultExpressionFactory">
-        <property name="expressionCompilers">
-            <configurator:bean-map type="org.apache.cocoon.el.ExpressionCompiler"/>
-        </property>
-    </bean>
-
-    <bean name="org.apache.cocoon.el.objectmodel.ObjectModel" scope="request"
-        parent="org.apache.cocoon.el.objectmodel.ObjectModel.template">
-        <aop:scoped-proxy proxy-target-class="false"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.el.objectmodel.ObjectModel.template"
-        class="org.apache.cocoon.el.impl.objectmodel.ObjectModelImpl" abstract="true">
-        <property name="initialEntries">
-            <configurator:bean-map type="org.apache.cocoon.el.objectmodel.ObjectModelProvider"/>
-        </property>
-    </bean>
-
-    <!-- Activate Avalon Bridge -->
-    <avalon:bridge location="/WEB-INF/cocoon.xconf"/>
-
+    http://cocoon.apache.org/schema/configurator http://cocoon.apache.org/schema/configurator/cocoon-configurator-1.0.1.xsd
+    http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+    http://cocoon.apache.org/schema/avalon http://cocoon.apache.org/schema/avalon/cocoon-avalon-1.0.xsd">
+    
     <bean name="org.apache.cocoon.caching.Cache" class="org.apache.cocoon.caching.impl.CacheImpl">
         <property name="store" ref="org.apache.excalibur.store.Store"/>
     </bean>
-
+    
     <bean name="org.apache.excalibur.store.Store"
         class="org.apache.cocoon.components.store.impl.EHDefaultStore" init-method="init"
         destroy-method="destroy">
@@ -79,14 +23,68 @@
         <property name="useCacheDirectory" value="true"/>
         <property name="settings" ref="org.apache.cocoon.configuration.Settings"/>
     </bean>
-
+    
     <bean name="org.apache.excalibur.store.Store/TransientStore"
         class="org.apache.cocoon.components.store.impl.DefaultTransientStore" init-method="init"
         destroy-method="destroy">
         <property name="maxObjects" value="1000"/>
-        <property name="storeJanitor" ref="org.apache.excalibur.store.StoreJanitor"/>
+        <property name="storeJanitor">
+            <bean class="org.apache.cocoon.components.store.impl.CocoonStoreJanitor"
+                init-method="init" destroy-method="destroy">
+                <property name="freeMemory" value="2048000"/>
+                <property name="heapSize" value="66600000"/>
+                <property name="cleanupThreadInterval" value="10"/>
+                <property name="percentToFree" value="10"/>
+                <property name="invokeGC" value="false"/>
+                <property name="freeingAlgorithm" value="round-robin"/>
+                <property name="threadPool" value="daemon"/>
+                <property name="runnableManager">
+                    <bean name="org.apache.cocoon.thread.RunnableManager"
+                        class="org.apache.cocoon.thread.impl.DefaultRunnableManager"
+                        scope="singleton" init-method="init" destroy-method="destroy">
+                        <property name="workerThreadPools">
+                            <map>
+                                <entry key="daemon">
+                                    <bean name="org.apache.cocoon.thread.ThreadPool/daemon"
+                                        class="org.apache.cocoon.thread.impl.DefaultThreadPool"
+                                        init-method="init" scope="singleton">
+                                        <property name="name" value="daemon"/>
+                                        <property name="poolPriority" value="NORM"/>
+                                        <property name="daemon" value="true"/>
+                                        <property name="queueSize" value="0"/>
+                                        <property name="maxPoolSize" value="-1"/>
+                                        <property name="minPoolSize" value="1"/>
+                                        <property name="keepAliveTime" value="60000"/>
+                                        <property name="blockPolicy" value="ABORT"/>
+                                        <property name="shutdownGraceful" value="false"/>
+                                        <property name="shutdownWaitTimeMs" value="-1"/>
+                                        <property name="factory">
+                                            <bean class="org.apache.cocoon.thread.impl.DefaultThreadFactory"
+                                                scope="prototype"/>
+                                        </property>
+                                    </bean>
+                                </entry>
+                            </map>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </property>
     </bean>
-
+    
+    <bean id="edu.stanford.irt.laneweb.httpclient.HttpClientManager"
+        class="edu.stanford.irt.laneweb.httpclient.HttpClientManager">
+        <property name="maxTotalConnections" value="300"/>
+        <property name="defaultMaxConnectionsPerHost" value="100"/>
+        <property name="connectionTimeout" value="20000"/>
+    </bean>
+    
+    <bean name="org.apache.excalibur.source.SourceFactory/http"
+        class="edu.stanford.irt.laneweb.httpclient.HTTPClientSourceFactory">
+        <property name="httpClientManager"
+            ref="edu.stanford.irt.laneweb.httpclient.HttpClientManager"/>
+    </bean>
+    
     <bean name="javax.sql.DataSource/eresources"
         class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="java:comp/env/jdbc/eresources"/>
@@ -95,17 +93,10 @@
     <bean name="javax.sql.DataSource/voyager" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="java:comp/env/jdbc/voyager"/>
     </bean>
-
-    <bean name="edu.stanford.irt.eresources.CollectionManager/laneconnex"
-        class="edu.stanford.irt.eresources.impl.CollectionManagerImpl">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
-    </bean>
-
-    <bean name="edu.stanford.irt.eresources.CollectionManager/history"
-        class="edu.stanford.irt.laneweb.eresources.HistoryCollectionManager">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
-    </bean>
-
+    
+    <bean id="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
+        class="edu.stanford.irt.laneweb.search.MetaSearchManagerSource" destroy-method="dispose"/>
+    
     <bean id="edu.stanford.irt.laneweb.UserInfoHelper"
         class="edu.stanford.irt.laneweb.UserInfoHelper">
         <property name="ldapClient">
@@ -119,20 +110,17 @@
             </bean>
         </property>
     </bean>
-
-    <bean id="edu.stanford.irt.laneweb.httpclient.HttpClientManager"
-        class="edu.stanford.irt.laneweb.httpclient.HttpClientManager">
-        <property name="maxTotalConnections" value="300"/>
-        <property name="defaultMaxConnectionsPerHost" value="100"/>
-        <property name="connectionTimeout" value="20000"/>
+    
+    <bean name="edu.stanford.irt.eresources.CollectionManager/laneconnex"
+        class="edu.stanford.irt.eresources.impl.CollectionManagerImpl">
+        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
-
-    <bean name="org.apache.excalibur.source.SourceFactory/http"
-        class="edu.stanford.irt.laneweb.httpclient.HTTPClientSourceFactory">
-        <property name="httpClientManager"
-            ref="edu.stanford.irt.laneweb.httpclient.HttpClientManager"/>
+    
+    <bean name="edu.stanford.irt.eresources.CollectionManager/history"
+        class="edu.stanford.irt.laneweb.eresources.HistoryCollectionManager">
+        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
-
+    
     <bean name="org.apache.cocoon.components.modules.input.InputModule/laneweb"
         class="edu.stanford.irt.laneweb.LanewebInputModule">
         <property name="templateConfig">
@@ -165,44 +153,41 @@
         </property>
         <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
     </bean>
-
-    <bean id="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
-        class="edu.stanford.irt.laneweb.search.MetaSearchManagerSource" destroy-method="dispose"/>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/file"
         class="org.apache.cocoon.generation.FileGenerator" scope="prototype">
         <pipeline:component label="content"/>
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/search-describe"
         class="edu.stanford.irt.laneweb.search.DescribeGenerator" scope="prototype">
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/search"
         class="edu.stanford.irt.laneweb.search.SearchGenerator" scope="prototype">
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
         <property name="defaultTimeout" value="60000"/>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/html"
         class="edu.stanford.irt.laneweb.HTMLGenerator" scope="prototype"/>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/querymap"
         class="edu.stanford.irt.laneweb.querymap.QueryMapGenerator">
         <property name="queryMapper">
             <bean class="edu.stanford.irt.laneweb.querymap.QueryMapper"/>
         </property>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/link-scan"
         class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/spellcheck"
         class="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator">
         <property name="spellChecker">
@@ -215,7 +200,7 @@
             </bean>
         </property>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/eresources-count"
         class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator" scope="prototype">
         <property name="types">
@@ -234,13 +219,13 @@
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/eresources"
         class="edu.stanford.irt.laneweb.eresources.EresourcesGenerator" scope="prototype">
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/bassett"
         class="edu.stanford.irt.laneweb.eresources.BassettEresourcesGenerator" scope="prototype">
         <property name="collectionManager">
@@ -249,13 +234,13 @@
             </bean>
         </property>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/history"
         class="edu.stanford.irt.laneweb.eresources.EresourcesGenerator" scope="prototype">
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/history"/>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/history-count"
         class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator" scope="prototype">
         <property name="types">
@@ -277,11 +262,14 @@
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/history"/>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/directory"
         class="org.apache.cocoon.generation.DirectoryGenerator" scope="prototype">
         <pipeline:component label="content"/>
     </bean>
+    
+    <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
+        class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
 
     <bean name="org.apache.cocoon.reading.Reader/resource"
         class="org.apache.cocoon.reading.ResourceReader" scope="prototype"/>
@@ -308,11 +296,6 @@
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
-
-    <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
-        class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
-
-    <!-- Abstract parent bean that sets the default encoding from the settings bean -->
     <bean name="org.apache.cocoon.serialization.AbstractTextSerializer"
         class="org.apache.cocoon.serialization.AbstractTextSerializer" scope="prototype"
         abstract="true">
@@ -324,14 +307,52 @@
         </property>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
-
+    
+    <bean name="org.apache.cocoon.acting.Action/voyager"
+        class="edu.stanford.irt.laneweb.voyager.VoyagerAction">
+        <property name="voyagerLogin">
+            <bean class="edu.stanford.irt.laneweb.voyager.VoyagerLogin">
+                <property name="dataSource" ref="javax.sql.DataSource/voyager"/>
+            </bean>
+        </property>
+        <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.acting.Action/form-redirect"
+        class="edu.stanford.irt.laneweb.FormRedirectAction"/>
+    
+    <bean name="org.apache.cocoon.acting.Action/webdash"
+        class="edu.stanford.irt.laneweb.webdash.WebdashAction">
+        <property name="webdashLogin">
+            <bean class="edu.stanford.irt.laneweb.webdash.WebdashLogin">
+                <property name="webdashKey">
+                    <bean class="org.springframework.jndi.JndiObjectFactoryBean">
+                        <property name="jndiName" value="java:comp/env/webdash-key"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+        <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.acting.Action/session-action"
+        class="edu.stanford.irt.laneweb.LanewebSessionAction"/>
+    
+    <bean name="org.apache.cocoon.acting.Action/javascript-logger"
+        class="edu.stanford.irt.laneweb.JavascriptLoggerAction"/>
+    
+    <bean name="org.apache.cocoon.acting.Action/loginAction"
+        class="edu.stanford.irt.laneweb.LoginAction">
+        <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
+    </bean>
+    
     <bean name="org.apache.cocoon.serialization.Serializer/xml"
         class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <pipeline:component mime-type="text/xml"/>
     </bean>
-
-
+    
+    
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
         class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
@@ -346,52 +367,11 @@
             </props>
         </property>
     </bean>
-
+    
     <bean name="org.apache.cocoon.serialization.Serializer/text"
         class="org.apache.cocoon.serialization.TextSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <pipeline:component mime-type="text/plain"/>
     </bean>
 
-    <bean name="org.apache.cocoon.acting.Action/voyager"
-        class="edu.stanford.irt.laneweb.voyager.VoyagerAction">
-        <property name="voyagerLogin">
-            <bean class="edu.stanford.irt.laneweb.voyager.VoyagerLogin">
-                <property name="dataSource" ref="javax.sql.DataSource/voyager"/>
-            </bean>
-        </property>
-        <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.acting.Action/form-redirect"
-        class="edu.stanford.irt.laneweb.FormRedirectAction"/>
-
-    <bean name="org.apache.cocoon.acting.Action/webdash"
-        class="edu.stanford.irt.laneweb.webdash.WebdashAction">
-        <property name="webdashLogin">
-            <bean class="edu.stanford.irt.laneweb.webdash.WebdashLogin">
-                <property name="webdashKey">
-                    <bean class="org.springframework.jndi.JndiObjectFactoryBean">
-                        <property name="jndiName" value="java:comp/env/webdash-key"/>
-                    </bean>
-                </property>
-            </bean>
-        </property>
-        <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.acting.Action/session-action"
-        class="edu.stanford.irt.laneweb.LanewebSessionAction"/>
-
-    <bean name="org.apache.cocoon.acting.Action/javascript-logger"
-        class="edu.stanford.irt.laneweb.JavascriptLoggerAction"/>
-
-    <bean name="org.apache.cocoon.acting.Action/loginAction"
-        class="edu.stanford.irt.laneweb.LoginAction">
-        <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
-    </bean>
-    
-    <import resource="classpath:/META-INF/cocoon/spring/cocoon-thread-impl.xml"/>
-    
-    <import resource="classpath:/META-INF/cocoon/spring/cocoon-store-impl-janitor.xml"/>
 </beans>

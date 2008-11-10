@@ -47,7 +47,7 @@
               </map:transform>
                <map:serialize type="xhtml"/>
             </map:match>            
-        	<map:match pattern="database">
+        	<map:match pattern="database" type="wildcard">
 	            <map:generate type="bassett"/>
 	            <map:serialize type="xml"/>
       		</map:match>    

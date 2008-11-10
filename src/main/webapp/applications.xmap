@@ -9,7 +9,6 @@
                 <map:read  type="search-url-tester">
                     <map:parameter name="url" value="{request-param:url}"/>
                 </map:read>
-                <map:serialize type="xhtml"/>
             </map:match>
             <!-- matches /apps/search/ requests -->
             <map:match pattern="search/**" type="wildcard">
