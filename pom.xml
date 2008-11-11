@@ -144,70 +144,98 @@
         <dependency>
             <artifactId>irt-cocoon</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>1.0.0</version>
+            <version>1.0.0-SNAPSHOT</version>
             <type>war</type>
         </dependency>
         <dependency>
+            <artifactId>cocoon-sitemap-api</artifactId>
             <groupId>org.apache.cocoon</groupId>
-            <artifactId>cocoon-core</artifactId>
-            <version>2.2.0</version>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <artifactId>cocoon-pipeline-impl</artifactId>
+            <groupId>org.apache.cocoon</groupId>
+            <version>1.0.0</version>
             <scope>compile</scope>
             <exclusions>
                 <exclusion>
-                    <artifactId>xalan</artifactId>
-                    <groupId>xalan</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>js</artifactId>
-                    <groupId>rhino</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-jexl</artifactId>
-                    <groupId>commons-jexl</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>xml-apis</artifactId>
-                    <groupId>xml-apis</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>xercesImpl</artifactId>
-                    <groupId>xerces</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>junit</artifactId>
-                    <groupId>junit</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>cocoon-thread-impl</artifactId>
-                    <groupId>org.apache.cocoon</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>cocoon-thread-api</artifactId>
-                    <groupId>org.apache.cocoon</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>excalibur-instrument-api</artifactId>
-                    <groupId>org.apache.excalibur.containerkit</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>concurrent</artifactId>
-                    <groupId>concurrent</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>ehcache</artifactId>
-                    <groupId>net.sf.ehcache</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-web</artifactId>
-                    <groupId>org.springframework</groupId>
+                    <artifactId>commons-lang</artifactId>
+                    <groupId>commons-lang</groupId>
                 </exclusion>
                 <exclusion>
                     <artifactId>spring-core</artifactId>
                     <groupId>org.springframework</groupId>
                 </exclusion>
                 <exclusion>
+                    <artifactId>spring-web</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
                     <artifactId>spring-beans</artifactId>
                     <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-lang</artifactId>
+                    <groupId>commons-lang</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>xml-apis</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>excalibur-instrument-api</artifactId>
+                    <groupId>org.apache.excalibur.containerkit</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>cocoon-pipeline-api</artifactId>
+            <groupId>org.apache.cocoon</groupId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-lang</artifactId>
+                    <groupId>commons-lang</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>cocoon-pipeline-components</artifactId>
+            <groupId>org.apache.cocoon</groupId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <artifactId>cocoon-store-impl</artifactId>
+            <groupId>org.apache.cocoon</groupId>
+            <version>1.0.0</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>concurrent</artifactId>
+                    <groupId>concurrent</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>cocoon-thread-api</artifactId>
+                    <groupId>org.apache.cocoon</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>excalibur-store</artifactId>
+            <groupId>org.apache.excalibur.components</groupId>
+            <version>2.2.1</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>concurrent</artifactId>
+                    <groupId>concurrent</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -266,10 +294,60 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <artifactId>xercesImpl</artifactId>
+            <groupId>xerces</groupId>
+            <version>2.9.1</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>xml-apis</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>1.5.0</version>
+            <scope>runtime</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jsr107cache</artifactId>
+                    <groupId>net.sf.jsr107cache</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>net.sf.saxon</groupId>
             <artifactId>saxon</artifactId>
             <version>9.1.0.2</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.15</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.jms</groupId>
+                    <artifactId>jms</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <artifactId>commons-logging</artifactId>
+            <groupId>commons-logging</groupId>
+            <version>1.1.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
