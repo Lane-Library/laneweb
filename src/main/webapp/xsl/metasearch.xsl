@@ -62,7 +62,7 @@
             <xsl:apply-templates select="node()|child::node()"/>
         </xsl:copy>
         <xsl:if test="contains($query-string,'javascript=false') and /doc/s:search/s:engine/s:resource[@s:id = $id]/@s:status = 'successful'">
-            <span>: <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id = $id]/s:hits, '###,###')"/></span>
+            <span>: <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id = $id]/s:hits, '###,##0')"/></span>
         </xsl:if>
     </xsl:template>
 

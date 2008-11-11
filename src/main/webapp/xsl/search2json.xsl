@@ -17,7 +17,7 @@
     <xsl:template match="s:resource">
         <xsl:variable name="hitcount">
             <xsl:if test="s:hits">
-                <xsl:value-of select="format-number(s:hits, '###,###')"/>
+                <xsl:value-of select="format-number(s:hits, '###,##0')"/>
             </xsl:if>
         </xsl:variable>
         "<xsl:value-of select="@s:id"/>":
