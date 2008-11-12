@@ -12,11 +12,14 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.xml.sax.XMLizable;
+import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.Eresource;
 
 public class BassettEresourcesGenerator implements Generator {
+    
+    private Logger logger = Logger.getLogger(BassettEresourcesGenerator.class);
 
     private static final String QUERY = "q";
     private static final String REGION = "r";
@@ -41,6 +44,9 @@ public class BassettEresourcesGenerator implements Generator {
 
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
+        if (logger.isDebugEnabled()) {
+            logger.debug("setup");
+        }
         Request request = ObjectModelHelper.getRequest(objectModel);
         String query = request.getParameter(QUERY);
         this.region = request.getParameter(REGION);
@@ -55,6 +61,9 @@ public class BassettEresourcesGenerator implements Generator {
     }
 
     public void generate() throws SAXException {
+        if (logger.isDebugEnabled()) {
+            logger.debug("generate");
+        }
         Collection<Eresource> eresources = null;
         Map<String, Integer> regionCountMap = null;
         if (this.region_count != null) {
