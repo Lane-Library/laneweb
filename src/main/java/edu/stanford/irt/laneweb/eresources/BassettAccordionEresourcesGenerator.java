@@ -1,9 +1,6 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import edu.stanford.irt.eresources.Eresource;
-
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
@@ -13,26 +10,17 @@ import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
-public class BassettEresourcesGenerator implements Generator {
+public class BassettAccordionEresourcesGenerator implements Generator {
 
     private static final String QUERY = "q";
-    private static final String REGION = "r";
-    private static final String BASSETT_NUMBER = "bn";
 
     private BassettCollectionManager collectionManager;
-
     private XMLConsumer xmlConsumer;
 
-    ExpiresValidity validity;
-
     private String query;
-    private String region;
-
-    private String bassettNumber;
 
     public void setCollectionManager(final BassettCollectionManager collectionManager) {
 	if (null == collectionManager) {
@@ -45,8 +33,6 @@ public class BassettEresourcesGenerator implements Generator {
 	    throws ProcessingException, SAXException, IOException {
 	Request request = ObjectModelHelper.getRequest(objectModel);
 	String query = request.getParameter(QUERY);
-	this.region = request.getParameter(REGION);
-	this.bassettNumber = request.getParameter(BASSETT_NUMBER);
 	if (null != query) {
 	    this.query = query.trim();
 	    if (this.query.length() == 0) {
@@ -56,20 +42,11 @@ public class BassettEresourcesGenerator implements Generator {
     }
 
     public void generate() throws SAXException {
-	Collection<Eresource> eresources = null;
-	if (this.bassettNumber != null) {
-	    eresources = this.collectionManager.getById(this.bassettNumber);
-	} else if (this.region != null) {
-	    if (this.query != null) {
-		eresources = this.collectionManager.searchSubset(this.region, this.query);
-	    } else {
-		eresources = this.collectionManager.getSubset(this.region);
-	    }
-	} else if (this.query != null) {
-	    eresources = this.collectionManager.search(this.query);
-	}
+	if (this.query == null)
+	    this.query = "bassett";
+	Map<String, Integer> regionCountMap = this.collectionManager.searchCount(null, null, this.query);
 	this.xmlConsumer.startDocument();
-	XMLizable xml = new XMLLizableBassettEresourceList(eresources);
+	XMLizable xml = new XMLLizableBassettCount(regionCountMap);
 	xml.toSAX(this.xmlConsumer);
 	this.xmlConsumer.endDocument();
     }
