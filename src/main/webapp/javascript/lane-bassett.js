@@ -5,25 +5,23 @@ YC = YAHOO.util.Connect,
 YE = YAHOO.util.Event,
 YH = YAHOO.util.History;
 
-YAHOO.util.Event.onAvailable('bassettContent',function() {
-	YAHOO.util.Get.script( "/javascript/noversion/bubbling-min.js", {
-        onSuccess: function(){
-			YAHOO.util.Get.script( "/javascript/noversion/accordion-min.js", {
-       			 onSuccess: function(){
-       			 	init();	        	
-        		}
-			});		        	
-        }
-	});
-})
+	YAHOO.util.Event.onAvailable('bassettContent',function() {
+		YAHOO.util.Get.script( "/javascript/noversion/bubbling-min.js", {
+	        onSuccess: function(){
+				YAHOO.util.Get.script( "/javascript/noversion/accordion-min.js", {
+	       			 onSuccess: function(){
+	       			 	init();	        	
+	        		}
+				});		        	
+	        }
+		});
+	})
 	
 	function init(){
 		var accordion = document.getElementById('accordion');
  		registerLinksContainer(accordion );
  		registerLinksContainer( document.getElementById('bassettContent'));	
- 		if(accordion)
- 			initializeHistory();
- 						
+ 		initializeHistory();
  	}
 	
 	 	
@@ -97,8 +95,9 @@ YAHOO.util.Event.onAvailable('bassettContent',function() {
 
 
 	initializeHistory = function(){
-		var  initial = YH.getBookmarkedState("bassett") || window.location.toString();
-		YH.register("bassett",  formatAjaxUrl(initial), loadContent);
+		var  initial = YH.getBookmarkedState("bassett") ||  formatAjaxUrl(window.location.toString());
+		loadContent(initial);
+		YH.register("bassett", initial, loadContent);
 		YH.initialize("yui-history-field-bassett", "yui-history-iframe");
     };
 
