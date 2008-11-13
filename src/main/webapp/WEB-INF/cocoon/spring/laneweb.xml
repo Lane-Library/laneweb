@@ -186,7 +186,7 @@
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
     
-    <bean name="org.apache.cocoon.generation.Generator/bassett"
+	<bean name="org.apache.cocoon.generation.Generator/bassett"
         class="edu.stanford.irt.laneweb.eresources.BassettEresourcesGenerator" scope="prototype">
         <property name="collectionManager">
             <bean class="edu.stanford.irt.laneweb.eresources.BassettCollectionManager">
@@ -194,7 +194,16 @@
             </bean>
         </property>
     </bean>
-    
+
+    <bean name="org.apache.cocoon.generation.Generator/bassett-accordion"
+        class="edu.stanford.irt.laneweb.eresources.BassettAccordionEresourcesGenerator" scope="prototype">
+        <property name="collectionManager">
+            <bean class="edu.stanford.irt.laneweb.eresources.BassettCollectionManager">
+                <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+            </bean>
+        </property>
+    </bean>
+
     <bean name="org.apache.cocoon.generation.Generator/history"
         class="edu.stanford.irt.laneweb.eresources.EresourcesGenerator" scope="prototype">
         <property name="collectionManager"
