@@ -34,5 +34,6 @@ public class LdapClient {
 
     public void initialize() {
         this.directoryFactory = (LDAPDirectoryFactory) LDAPDirectoryUtil.getLDAPDirectoryFactory(this.ldapKeytab).getDirectoryFactory();
+        this.directoryFactory.setConnectionTimeout("5000");
     }
 }

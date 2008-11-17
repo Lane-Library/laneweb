@@ -273,8 +273,8 @@
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
-            <artifactId>irt</artifactId>
-            <version>1.5.1-jdk1.5.0</version>
+            <artifactId>irtcommons</artifactId>
+            <version>1.5.3</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -354,7 +354,7 @@
         <dependency>
             <artifactId>nekohtml</artifactId>
             <groupId>nekohtml</groupId>
-            <version>1.9.6.1</version>
+            <version>1.9.9</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
