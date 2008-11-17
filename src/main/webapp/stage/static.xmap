@@ -18,7 +18,7 @@
             <!-- first wildcard will be version for local css and javascript -->
             <map:match pattern="style/*/**.css" type="wildcard">
                 <map:read type="txt-resource"
-                    src="context://resources/css/{2}.css"
+                    src="{naming:java:comp/env/stage-base}/resources/css/{2}.css"
                     mime-type="text/css">
                     <map:parameter name="path" value="{request:contextPath}/stage"/>
                 </map:read>
