@@ -248,7 +248,7 @@
         <dependency>
             <groupId>edu.stanford.irt.search</groupId>
             <artifactId>search-spring</artifactId>
-            <version>1.4.29-SNAPSHOT</version>
+            <version>1.4.29</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -347,6 +347,12 @@
             <artifactId>commons-logging</artifactId>
             <groupId>commons-logging</groupId>
             <version>1.1.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <artifactId>nekohtml</artifactId>
+            <groupId>nekohtml</groupId>
+            <version>1.9.6.1</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
