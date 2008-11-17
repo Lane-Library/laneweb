@@ -319,6 +319,11 @@
         class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <pipeline:component mime-type="text/xml"/>
+        <property name="format">
+            <props>
+                <prop key="encoding">UTF-8</prop>
+            </props>
+        </property>
     </bean>
     
     
