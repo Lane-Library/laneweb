@@ -157,14 +157,6 @@
 		        	</xsl:attribute>
 		        	<xsl:text> View Larger</xsl:text>
 		       </a>
-		    	<a> 
-	     		  	<xsl:attribute name="title"  >
-		        		<xsl:value-of select="./b:title"/>
-		        	</xsl:attribute>
-		        	<xsl:attribute name="href"  >
-		        		<xsl:text>/bassett/bassettView.html?bn=</xsl:text><xsl:value-of select="./@b:bassett_number"/>
-		        	</xsl:attribute>
-		       </a>
 		       </div>
 				</div>
 				</xsl:if>
