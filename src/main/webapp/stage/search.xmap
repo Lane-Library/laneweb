@@ -31,7 +31,7 @@
                  <!-- bassett search pages -->
                 <map:match type="regex-parameter" pattern="bassett">
                     <map:parameter name="parameter-name" value="source"/>
-                    <map:generate src="cocoon://stage/content/bassett/bassettsView.html" type="file"/>
+                    	<map:redirect-to uri="cocoon://content/bassett/bassettsView.html"/>
                     <map:serialize type="xhtml"/>
                 </map:match>
                 <!-- portal metasearch pages -->
