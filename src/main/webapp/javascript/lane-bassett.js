@@ -19,9 +19,12 @@ YH = YAHOO.util.History;
 	
 	function init(){
 		var accordion = document.getElementById('accordion');
- 		registerLinksContainer(accordion );
- 		registerLinksContainer( document.getElementById('bassettContent'));	
- 		initializeHistory();
+		if(accordion) // not if largerView.html
+		{
+ 			registerLinksContainer(accordion );
+ 			registerLinksContainer( document.getElementById('bassettContent'));	
+ 			initializeHistory();
+		}
  	}
 	
 	 	
