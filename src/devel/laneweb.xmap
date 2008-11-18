@@ -31,6 +31,8 @@
             <map:match pattern="^http" type="regex-parameter">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:act type="form-redirect">
+                    <map:parameter name="q" value="{request-param:q}"/>
+                    <map:parameter name="source" value="{request-param:source}"/>
                     <map:redirect-to uri="{form-redirect-key}"/>
                 </map:act>
             </map:match>
