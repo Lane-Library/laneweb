@@ -5,6 +5,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,9 +27,9 @@ public class EresourcesCountGenerator implements Generator {
 
     private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
 
-    private Set<String> types;
+    private Set<String> types = Collections.emptySet();
 
-    private Set<String> subsets;
+    private Set<String> subsets = Collections.emptySet();
 
     private CollectionManager collectionManager;
 
