@@ -89,6 +89,23 @@
 	
     <!-- on multiple View to give link digrams or photos  -->
     
+    
+    <xsl:template match="h:span[@class='choice']">
+		<xsl:choose>
+  			<xsl:when test="count(/doc/b:bassetts/b:bassett) != 0">
+  				<xsl:copy>
+  				     <xsl:apply-templates select="attribute::node()|child::node()"/>
+	    		</xsl:copy>
+  			</xsl:when>
+  			<xsl:otherwise>
+  				<xsl:text>No images for search term </xsl:text>
+  				<b><xsl:value-of select="$q"/></b>
+  				<xsl:text> were found in this region.</xsl:text>
+  			</xsl:otherwise>
+  		</xsl:choose>
+	</xsl:template> 
+    
+    
     <xsl:template match="h:a[@id='photo-choice']/@href">
 		<xsl:attribute name="href">
       	    <xsl:value-of select="."/>
