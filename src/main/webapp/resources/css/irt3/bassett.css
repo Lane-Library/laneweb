@@ -1,4 +1,9 @@
 /**********   ACCORDION CSS	  *************/
+
+#bassettContent p {
+	text-align: justify;
+}
+
 .myAccordion .yui-cms-accordion .yui-cms-item {
 	border: 1px solid #ccc;
 	border-right: 0px solid #ccc;
