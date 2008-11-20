@@ -96,7 +96,7 @@
             <xsl:when test="starts-with($request-uri,'portals/bioresearch')">research</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/patient')">all</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/cultural')">all</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/pharmacy')">pharmacy</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/pharmacy')">/portals/pharmacy.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/anesthesia')">/portals/anesthesia.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/cardiology')">/portals/cardiology.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/hematology')">/portals/hematology.html</xsl:when>
@@ -651,6 +651,17 @@
                         <xsl:value-of select="$class"/>
                     </xsl:attribute>
                     <xsl:choose>
+                        <!-- retain query string in loadTab links; strip out previous loadTab value if found in query string -->
+                        <xsl:when test="$class='bgTab' and contains($query-string,concat('loadTab=',$loadTab))">
+                            <a href="{$context}/{$request-uri}?{replace($query-string,concat('loadTab=',$loadTab),concat('loadTab=',$id))}">
+                                <xsl:value-of select="."/>
+                            </a>
+                        </xsl:when>
+                        <xsl:when test="$class='bgTab' and $query-string">
+                            <a href="{$context}/{$request-uri}?{$query-string}&amp;loadTab={$id}">
+                                <xsl:value-of select="."/>
+                            </a>
+                        </xsl:when>
                         <xsl:when test="$class='bgTab'">
                             <a href="{$context}/{$request-uri}?loadTab={$id}">
                                 <xsl:value-of select="."/>

@@ -122,7 +122,7 @@
                                     <option value="/portals/internal-medicine.html">Internal
                                         Medicine</option>
                                     <option value="/portals/lpch-cerner.html">LPCH LINKS Tool</option>
-                                    <option value="pharmacy">Pharmacy</option>
+                                    <option value="/portals/pharmacy.html">Pharmacy</option>
                                     <option value="/portals/pulmonary.html">Pulmonary</option>
                                     <option disabled="disabled">----------------</option>
                                     <option
