@@ -596,24 +596,6 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- add class="labeled" where appropriate -->
-    <!--<xsl:template
-        match="h:p[preceding-sibling::*[1][self::h:h3]]
-        |h:ul[preceding-sibling::*[1][self::h:h3]]
-        |h:form[preceding-sibling::*[1][self::h:h3]]
-        |h:ol[preceding-sibling::*[1][self::h:h3]]
-        |h:td[@id='mainColumn']/h:p[preceding-sibling::*[1][self::h:h2]]
-        |h:td[@id='mainColumn']/h:ul[preceding-sibling::*[1][self::h:h2]]
-        |h:td[@id='mainColumn']/h:ol[preceding-sibling::*[1][self::h:h2]]">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:if test="not(@class)">
-                <xsl:attribute name="class">labeled</xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>-->
-
     <!-- create the tabbed box markup -->
     <xsl:template match="h:div[@class='fMainBox']">
         <div class="tabs">
@@ -651,19 +633,15 @@
                         <xsl:value-of select="$class"/>
                     </xsl:attribute>
                     <xsl:choose>
-                        <!-- retain query string in loadTab links; strip out previous loadTab value if found in query string -->
-                        <xsl:when test="$class='bgTab' and contains($query-string,concat('loadTab=',$loadTab))">
-                            <a href="{$context}/{$request-uri}?{replace($query-string,concat('loadTab=',$loadTab),concat('loadTab=',$id))}">
-                                <xsl:value-of select="."/>
-                            </a>
-                        </xsl:when>
-                        <xsl:when test="$class='bgTab' and $query-string">
-                            <a href="{$context}/{$request-uri}?{$query-string}&amp;loadTab={$id}">
-                                <xsl:value-of select="."/>
-                            </a>
-                        </xsl:when>
                         <xsl:when test="$class='bgTab'">
-                            <a href="{$context}/{$request-uri}?loadTab={$id}">
+                            <xsl:variable name="href">
+                                <xsl:value-of select="concat($context,'/',$request-uri,'?loadTab=',$id)"/>
+                                <!-- add query and source so tabbed portals work as a search template -->
+                                <xsl:if test="$q and $source">
+                                    <xsl:value-of select="concat('&amp;source=',$source,'&amp;q=',$q)"/>
+                                </xsl:if>
+                            </xsl:variable>
+                            <a href="{$href}">
                                 <xsl:value-of select="."/>
                             </a>
                         </xsl:when>
