@@ -15,7 +15,7 @@ YH = YAHOO.util.History;
 				});		        	
 	        }
 		});
-	})
+	});
 	
 	function init(){
 		var accordion = document.getElementById('accordion');
@@ -33,24 +33,25 @@ YH = YAHOO.util.History;
         if (container) {
          	anchor = container.getElementsByTagName('a');
          	for (i = 0; i < anchor.length; i++) {
-         		if( anchor[i].rel == null || anchor[i].rel == "" )
+         		if( anchor[i].rel === null || anchor[i].rel === "" )
          		{
 	                 anchor[i].clicked = function(event) {
-	        			if( this.id == "diagram-choice")
-							diagramDisplay = true;
-						if( this.id == "photo-choice")
-							diagramDisplay = false;
-	        
+	        			if (this.id == "diagram-choice") {
+                            diagramDisplay = true;
+                        }
+						if (this.id == "photo-choice") {
+                            diagramDisplay = false;
+                        }
 	            		url = formatAjaxUrl(this.href);
 	            		  if (YH) {
-                                try {
-                                    YH.navigate("bassett", url);
-                                } catch (e) {
-                                	loadContent(url);
-                                }
-                            }
-                            else
-                            	loadContent(url);
+                              try {
+                                  YH.navigate("bassett", url);
+                              } catch (e) {
+                                  loadContent(url);
+                              }
+                          } else {
+                              loadContent(url);
+                          }
 	            		YE.stopEvent(event);
 	                };
 	     		}   
@@ -63,7 +64,7 @@ YH = YAHOO.util.History;
 		url = "/././plain/bassett/raw".concat(url);
 		function successHandler(o) {
 	        var content, container,i;
-	        container = document.getElementById('bassettContent')  
+	        container = document.getElementById('bassettContent'); 
 	        content = o.responseXML.getElementsByTagName('body')[0].childNodes;
 	    	while (container.childNodes.length > 0) {
 	        	container.removeChild(container.firstChild);
@@ -81,28 +82,31 @@ YH = YAHOO.util.History;
 	}
 	    
 	     
-	 formatAjaxUrl = function(href)
+	 function formatAjaxUrl(href)
 	 {
 	 	var url;
 	 	href = href.replace("search.html", "/bassett/bassettsView.html");
 		href = href.substr(href.indexOf("/bassett/")+8);
 		href = href.split("?");
-		if(href.length == 1)
-			url =  href[0];
-		if(href.length > 1)
-			url =	 href[0]+"?" + href[1] ;
-		if(diagramDisplay)
-		 	url = url +"&t=diagram";
+		if (href.length == 1) {
+            url = href[0];
+        }
+		if (href.length > 1) {
+            url = href[0] + "?" + href[1];
+        }
+		if (diagramDisplay) {
+            url = url + "&t=diagram";
+        }
 	    return url;
 	 } 
 
 
-	initializeHistory = function(){
+	function initializeHistory(){
 		var  initial = YH.getBookmarkedState("bassett") ||  formatAjaxUrl(window.location.toString());
 		loadContent(initial);
 		YH.register("bassett", initial, loadContent);
 		YH.initialize("yui-history-field-bassett", "yui-history-iframe");
-    };
+    }
 
 
 })();
