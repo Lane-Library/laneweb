@@ -4,10 +4,11 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.Map;
@@ -17,65 +18,30 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.xml.AbstractXMLConsumer;
-import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.querymap.Descriptor;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.ResourceMap;
 
-public class QueryMapGeneratorTest {
+public class QueryMapReaderTest {
 
-    private QueryMapGenerator generator;
+    private QueryMapReader reader;
 
     private Parameters parameters;
 
     private QueryMapper queryMapper;
 
-    private XMLConsumer consumer;
+    private OutputStream outputStream;
 
     @Before
     public void setUp() throws Exception {
-        this.generator = new QueryMapGenerator();
+        this.reader = new QueryMapReader();
         this.parameters = createMock(Parameters.class);
         this.queryMapper = createMock(QueryMapper.class);
-        this.consumer = createMock(XMLConsumer.class);
-    }
-
-    @Test
-    public void testSetQueryMapper() {
-        try {
-            this.generator.setQueryMapper(null);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
-        this.generator.setQueryMapper(this.queryMapper);
-    }
-
-    @Test
-    public void testSetup() throws MalformedURLException, IOException {
-        
-        try {
-            this.generator.setup(null, null, null, null);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
-        expect(this.parameters.getParameter("query", null)).andReturn("dvt");
-        expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
-        expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
-        replay(this.parameters);
-        try {
-            this.generator.setup(null, null, null, this.parameters);
-        } catch (IllegalStateException e) {
-        }
-        this.generator.setQueryMapper(this.queryMapper);
-        this.generator.setup(null, null, null, this.parameters);
-        verify(this.parameters);
+        this.outputStream = createMock(OutputStream.class);
     }
 
     @Test
@@ -92,20 +58,18 @@ public class QueryMapGeneratorTest {
         expect(queryMap.getQuery()).andReturn("dvt");
         expect(queryMap.getDescriptor()).andReturn(descriptor);
         expect(queryMap.getResourceMap()).andReturn(resourceMap);
-        expect(queryMap.getTreePath()).andReturn(null);
-        expect(queryMap.getFrequencies()).andReturn(null);
         replay(queryMap);
         expect(this.queryMapper.getQueryMap("dvt")).andReturn(queryMap);
         replay(this.queryMapper);
-        this.generator.setQueryMapper(this.queryMapper);
+        this.reader.setQueryMapper(this.queryMapper);
         expect(this.parameters.getParameter("query", null)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
         replay(this.parameters);
-        this.generator.setConsumer(this.consumer);
-        this.generator.setup(null, null, null, this.parameters);
-        this.generator.generate();
+        this.reader.setOutputStream(this.outputStream);
+        this.reader.setup(null, null, null, this.parameters);
+        this.reader.generate();
         verify(descriptor);
         verify(resourceMap);
         verify(queryMap);
@@ -114,13 +78,13 @@ public class QueryMapGeneratorTest {
     }
 
     @Test
-    public void testSetConsumer() {
+    public void testSetConsumer() throws IOException {
         try {
-            this.generator.setConsumer(null);
+            this.reader.setOutputStream(null);
             fail();
         } catch (IllegalArgumentException e) {
         }
-        this.generator.setConsumer(this.consumer);
+        this.reader.setOutputStream(this.outputStream);
     }
 
     // TODO I don't know if this actually does what I want it to.
@@ -143,7 +107,7 @@ public class QueryMapGeneratorTest {
                 return null;
             }
         };
-        this.generator.setQueryMapper(fauxQueryMapper);
+        this.reader.setQueryMapper(fauxQueryMapper);
         for (int i = 999; i > -1; i--) {
             final String response = Integer.toString(i);
             executor.execute(new Runnable() {
@@ -155,30 +119,33 @@ public class QueryMapGeneratorTest {
                     expect(params.getParameter("descriptor-weights", null)).andReturn(null);
                     expect(params.getParameterAsInteger("abstract-count", 100)).andReturn(null);
                     replay(params);
-                    QueryMapGeneratorTest.this.generator.setup(null, null, null, params);
-                    QueryMapGeneratorTest.this.generator.setConsumer(new AbstractXMLConsumer() {
+                    QueryMapReaderTest.this.reader.setup(null, null, null, params);
+                    try {
+                        QueryMapReaderTest.this.reader.setOutputStream(new OutputStream() {
 
-                        @Override
-                        public void characters(final char[] chars, final int start, final int length) {
-                            assertEquals(response, new String(chars, start, length));
-
-                        }
-
-                        @Override
-                        public void startElement(final String ns, final String localName, final String aName, final Attributes atts) {
-                            if (atts.getLength() > 0) {
-                                assertEquals(response, atts.getValue(0));
+                            @Override
+                            public void write(int b) throws IOException {
+                                throw new IOException("not implemented");
                             }
-                        }
-                    });
+                            @Override
+                            public void write(byte[] bytes) {
+                                assertTrue(new String(bytes).indexOf(response) == 10);
+                            }
+                        });
+                    } catch (IOException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                     try {
                         Thread.sleep(Long.parseLong(response));
-                        QueryMapGeneratorTest.this.generator.generate();
+                        QueryMapReaderTest.this.reader.generate();
                     } catch (SAXException e) {
                         throw new RuntimeException(e);
                     } catch (NumberFormatException e) {
                         throw new RuntimeException(e);
                     } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                     verify(params);
