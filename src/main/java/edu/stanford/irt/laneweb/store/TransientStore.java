@@ -11,14 +11,14 @@ import org.apache.excalibur.store.Store;
 import org.apache.excalibur.store.StoreJanitor;
 
 public class TransientStore implements Store {
-    
+
     private Map<Object, Object> map = Collections.synchronizedMap(new HashMap<Object, Object>());
 
     public void clear() {
         this.map.clear();
     }
 
-    public boolean containsKey(Object key) {
+    public boolean containsKey(final Object key) {
         return this.map.containsKey(key);
     }
 
@@ -26,16 +26,16 @@ public class TransientStore implements Store {
         this.map.clear();
     }
 
-    public Object get(Object key) {
+    public Object get(final Object key) {
         return this.map.get(key);
     }
 
     public Enumeration<Object> keys() {
-        Vector<Object> v = new Vector<Object>(map.keySet());
+        Vector<Object> v = new Vector<Object>(this.map.keySet());
         return v.elements();
     }
 
-    public void remove(Object key) {
+    public void remove(final Object key) {
         this.map.remove(key);
     }
 
@@ -43,10 +43,10 @@ public class TransientStore implements Store {
         return this.map.size();
     }
 
-    public void store(Object key, Object value) throws IOException {
+    public void store(final Object key, final Object value) throws IOException {
         this.map.put(key, value);
     }
-    
+
     public void setStoreJanitor(final StoreJanitor storeJanitor) {
         storeJanitor.register(this);
     }

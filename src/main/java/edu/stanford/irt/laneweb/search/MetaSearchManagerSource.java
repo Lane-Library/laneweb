@@ -14,12 +14,12 @@ public class MetaSearchManagerSource {
 
     private ClassPathXmlApplicationContext context;
 
-    private HttpClient httpClient;	
-    
+    private HttpClient httpClient;
+
     public MetaSearchManagerSource() {
         this.context = new ClassPathXmlApplicationContext("spring/metasearch.xml");
         this.manager = (MetaSearchManager) this.context.getBean("manager");
-        this.httpClient = (HttpClient)this.context.getBean("httpClient");
+        this.httpClient = (HttpClient) this.context.getBean("httpClient");
     }
 
     public MetaSearchManager getMetaSearchManager() {
@@ -31,7 +31,7 @@ public class MetaSearchManagerSource {
     }
 
     public HttpClient getHttpClient() {
-        return httpClient;
+        return this.httpClient;
     }
-    
+
 }

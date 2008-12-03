@@ -81,6 +81,25 @@
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
     
+    <bean id="edu.stanford.irt.querymap.QueryMapper" class="edu.stanford.irt.querymap.QueryMapper">
+        <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
+        <property name="queryToDescriptor">
+            <bean class="edu.stanford.irt.querymap.QueryToDescriptor">
+                <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
+                <property name="httpClient">
+                    <bean class="org.apache.commons.httpclient.HttpClient">
+                        <constructor-arg>
+                            <bean class="org.apache.commons.httpclient.MultiThreadedHttpConnectionManager"/>
+                        </constructor-arg>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="edu.stanford.irt.querymap.DescriptorManager"
+        class="edu.stanford.irt.querymap.DescriptorManager"/>
+    
     <bean name="org.apache.cocoon.components.modules.input.InputModule/laneweb"
         class="edu.stanford.irt.laneweb.LanewebInputModule">
         <property name="templateConfig">
@@ -138,9 +157,7 @@
     
     <bean name="org.apache.cocoon.generation.Generator/querymap"
         class="edu.stanford.irt.laneweb.querymap.QueryMapGenerator">
-        <property name="queryMapper">
-            <bean class="edu.stanford.irt.laneweb.querymap.QueryMapper"/>
-        </property>
+        <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/link-scan"
@@ -275,6 +292,11 @@
             </bean>
         </property>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.reading.Reader/querymap"
+        class="edu.stanford.irt.laneweb.querymap.QueryMapReader">
+        <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
     </bean>
     
     <bean name="org.apache.cocoon.acting.Action/voyager"

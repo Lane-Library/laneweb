@@ -6,11 +6,12 @@ import java.io.OutputStream;
 import org.apache.cocoon.reading.Reader;
 import org.xml.sax.SAXException;
 
-//TODO: the label: property is not part of the QueryMap at the moment 
-//so this is not useable.
 public class QueryMapReader extends AbstractQueryMapComponent implements Reader {
 
+    private static final String MIME_TYPE = "text/plain";
+
     private ThreadLocal<OutputStream> outputStream = new ThreadLocal<OutputStream>();
+
     public void generate() throws SAXException, IOException {
         OutputStream outputStream = this.outputStream.get();
         if (null == outputStream) {
@@ -26,16 +27,14 @@ public class QueryMapReader extends AbstractQueryMapComponent implements Reader 
     }
 
     public long getLastModified() {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     public String getMimeType() {
-        // TODO Auto-generated method stub
-        return null;
+        return MIME_TYPE;
     }
 
-    public void setOutputStream(OutputStream outputStream) throws IOException {
+    public void setOutputStream(final OutputStream outputStream) throws IOException {
         if (null == outputStream) {
             throw new IllegalArgumentException("null outputStream");
         }
@@ -43,7 +42,6 @@ public class QueryMapReader extends AbstractQueryMapComponent implements Reader 
     }
 
     public boolean shouldSetContentLength() {
-        // TODO Auto-generated method stub
         return false;
     }
 

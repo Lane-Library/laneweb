@@ -8,7 +8,7 @@ import org.xml.sax.SAXException;
 public class QueryMapGenerator extends AbstractQueryMapComponent implements Generator {
 
     private ThreadLocal<XMLConsumer> consumer = new ThreadLocal<XMLConsumer>();
-    
+
     public void generate() throws SAXException {
         XMLConsumer consumer = this.consumer.get();
         if (null == consumer) {

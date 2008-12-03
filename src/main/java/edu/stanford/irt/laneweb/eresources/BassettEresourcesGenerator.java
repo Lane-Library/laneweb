@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import edu.stanford.irt.eresources.Eresource;
-
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
@@ -16,6 +14,8 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.eresources.Eresource;
 
 public class BassettEresourcesGenerator implements Generator {
 
@@ -35,50 +35,50 @@ public class BassettEresourcesGenerator implements Generator {
     private String bassettNumber;
 
     public void setCollectionManager(final BassettCollectionManager collectionManager) {
-	if (null == collectionManager) {
-	    throw new IllegalArgumentException("null collectionManager");
-	}
-	this.collectionManager = collectionManager;
+        if (null == collectionManager) {
+            throw new IllegalArgumentException("null collectionManager");
+        }
+        this.collectionManager = collectionManager;
     }
 
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-	    throws ProcessingException, SAXException, IOException {
-	Request request = ObjectModelHelper.getRequest(objectModel);
-	String query = request.getParameter(QUERY);
-	this.region = request.getParameter(REGION);
-	this.bassettNumber = request.getParameter(BASSETT_NUMBER);
-	if (null != query) {
-	    this.query = query.trim();
-	    if (this.query.length() == 0) {
-		this.query = null;
-	    }
-	}
+            throws ProcessingException, SAXException, IOException {
+        Request request = ObjectModelHelper.getRequest(objectModel);
+        String query = request.getParameter(QUERY);
+        this.region = request.getParameter(REGION);
+        this.bassettNumber = request.getParameter(BASSETT_NUMBER);
+        if (null != query) {
+            this.query = query.trim();
+            if (this.query.length() == 0) {
+                this.query = null;
+            }
+        }
     }
 
     public void generate() throws SAXException {
-	Collection<Eresource> eresources = null;
-	if (this.bassettNumber != null) {
-	    eresources = this.collectionManager.getById(this.bassettNumber);
-	} else if (this.region != null) {
-	    if (this.query != null) {
-		eresources = this.collectionManager.searchSubset(this.region, this.query);
-	    } else {
-		eresources = this.collectionManager.getSubset(this.region);
-	    }
-	} else if (this.query != null) {
-	    eresources = this.collectionManager.search(this.query);
-	}
-	this.xmlConsumer.startDocument();
-	XMLizable xml = new XMLLizableBassettEresourceList(eresources);
-	xml.toSAX(this.xmlConsumer);
-	this.xmlConsumer.endDocument();
+        Collection<Eresource> eresources = null;
+        if (this.bassettNumber != null) {
+            eresources = this.collectionManager.getById(this.bassettNumber);
+        } else if (this.region != null) {
+            if (this.query != null) {
+                eresources = this.collectionManager.searchSubset(this.region, this.query);
+            } else {
+                eresources = this.collectionManager.getSubset(this.region);
+            }
+        } else if (this.query != null) {
+            eresources = this.collectionManager.search(this.query);
+        }
+        this.xmlConsumer.startDocument();
+        XMLizable xml = new XMLLizableBassettEresourceList(eresources);
+        xml.toSAX(this.xmlConsumer);
+        this.xmlConsumer.endDocument();
     }
 
     public void setConsumer(final XMLConsumer xmlConsumer) {
-	if (null == xmlConsumer) {
-	    throw new IllegalArgumentException("null xmlConsumer");
-	}
-	this.xmlConsumer = xmlConsumer;
+        if (null == xmlConsumer) {
+            throw new IllegalArgumentException("null xmlConsumer");
+        }
+        this.xmlConsumer = xmlConsumer;
     }
 
 }

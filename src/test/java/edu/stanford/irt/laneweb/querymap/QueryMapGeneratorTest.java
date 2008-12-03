@@ -26,6 +26,8 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.querymap.Descriptor;
 import edu.stanford.irt.querymap.QueryMap;
+import edu.stanford.irt.querymap.QueryMapper;
+import edu.stanford.irt.querymap.Resource;
 import edu.stanford.irt.querymap.ResourceMap;
 
 public class QueryMapGeneratorTest {
@@ -58,7 +60,7 @@ public class QueryMapGeneratorTest {
 
     @Test
     public void testSetup() throws MalformedURLException, IOException {
-        
+
         try {
             this.generator.setup(null, null, null, null);
             fail();
@@ -86,7 +88,7 @@ public class QueryMapGeneratorTest {
         replay(descriptor);
         ResourceMap resourceMap = createMock(ResourceMap.class);
         expect(resourceMap.getDescriptor()).andReturn(descriptor);
-        expect(resourceMap.getResources()).andReturn(Collections.<String> singleton("yo"));
+        expect(resourceMap.getResources()).andReturn(Collections.<Resource> singleton(new Resource("a", "b")));
         replay(resourceMap);
         QueryMap queryMap = createMock(QueryMap.class);
         expect(queryMap.getQuery()).andReturn("dvt");
@@ -132,12 +134,13 @@ public class QueryMapGeneratorTest {
             @Override
             public QueryMap getQueryMap(final String query) {
                 Descriptor descriptor = new Descriptor(query, query, Collections.<String> singleton(query));
-                return new QueryMap(query, descriptor, new ResourceMap(descriptor, Collections.<String> singleton(query)), null, null);
+                return new QueryMap(query, descriptor, new ResourceMap(descriptor, Collections.<Resource> singleton(new Resource(query,
+                        query))), null, null);
             }
 
             // TODO: need to more thoroughly test the source reloading:
             @Override
-            public QueryMap getQueryMap(final String query, final Map<String, Set<String>> resourceMaps,
+            public QueryMap getQueryMap(final String query, final Map<String, Set<Resource>> resourceMaps,
                     final Map<String, Float> descriptorWeights, final int abstractCount) {
                 // TODO Auto-generated method stub
                 return null;

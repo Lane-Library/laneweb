@@ -11,6 +11,7 @@ import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.querymap.Descriptor;
 import edu.stanford.irt.querymap.QueryMap;
+import edu.stanford.irt.querymap.Resource;
 import edu.stanford.irt.querymap.ResourceMap;
 import edu.stanford.irt.querymap.WeightedDescriptor;
 
@@ -56,10 +57,12 @@ public class XMLizableQueryMap implements XMLizable {
             if (null != resourceMap) {
                 XMLUtils.startElement(consumer, NAMESPACE, RESOURCE_MAP);
                 XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR, resourceMap.getDescriptor().getDescriptorName());
-                for (String idref : resourceMap.getResources()) {
+                for (Resource resource : resourceMap.getResources()) {
                     AttributesImpl atts = new AttributesImpl();
-                    atts.addAttribute("", IDREF, IDREF, "IDREF", idref);
-                    XMLUtils.createElementNS(consumer, NAMESPACE, RESOURCE, atts);
+                    atts.addAttribute("", IDREF, IDREF, "IDREF", resource.getId());
+                    XMLUtils.startElement(consumer, NAMESPACE, RESOURCE, atts);
+                    XMLUtils.data(consumer, resource.getLabel());
+                    XMLUtils.endElement(consumer, NAMESPACE, RESOURCE);
                 }
                 XMLUtils.endElement(consumer, NAMESPACE, RESOURCE_MAP);
             }

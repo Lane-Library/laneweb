@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.querymap.QueryMap;
+import edu.stanford.irt.querymap.QueryMapper;
 
 public class AbstractQueryMapComponentTest {
 
@@ -22,7 +23,8 @@ public class AbstractQueryMapComponentTest {
 
     @Before
     public void setUp() throws Exception {
-        this.component = new AbstractQueryMapComponent(){};
+        this.component = new AbstractQueryMapComponent() {
+        };
         this.parameters = createMock(Parameters.class);
         this.queryMapper = createMock(QueryMapper.class);
     }
@@ -85,9 +87,9 @@ public class AbstractQueryMapComponentTest {
         this.component.setup(null, null, null, this.parameters);
         this.component.reset();
         try {
-        this.component.getQueryMap();
+            this.component.getQueryMap();
         } catch (IllegalStateException e) {
-            
+
         }
         verify(this.parameters);
     }

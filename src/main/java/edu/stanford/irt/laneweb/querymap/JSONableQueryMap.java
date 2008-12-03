@@ -5,30 +5,32 @@ import java.util.Set;
 
 import edu.stanford.irt.querymap.Descriptor;
 import edu.stanford.irt.querymap.QueryMap;
+import edu.stanford.irt.querymap.Resource;
 import edu.stanford.irt.querymap.ResourceMap;
 
 public class JSONableQueryMap {
-    
+
     private static final String COMMA_QUOTE = "\",\"";
 
     private static final String COLON_QUOTE = "\":\"";
-    
+
     private QueryMap queryMap;
-    
+
     /**
      * Converts a querymap into a JSON String via the toString() method.
-     * @param queryMap the QueryMap
-     * @throws IllegalArgumentException if null
+     * 
+     * @param queryMap
+     *            the QueryMap
+     * @throws IllegalArgumentException
+     *             if null
      */
-    //TODO: the label: property is not part of the QueryMap at the moment 
-    //so this is not useable.
     public JSONableQueryMap(final QueryMap queryMap) {
         if (null == queryMap) {
             throw new IllegalArgumentException("null queryMap");
         }
         this.queryMap = queryMap;
     }
-    
+
     /**
      * @return the JSON representation of the querymap
      */
@@ -44,16 +46,17 @@ public class JSONableQueryMap {
             if (null != map) {
                 sb.append(COMMA_QUOTE).append("resourceMap\":{\"descriptor").append(COLON_QUOTE);
                 escapeForJS(sb, map.getDescriptor().getDescriptorName());
-                Set<String> resources = map.getResources();
+                Set<Resource> resources = map.getResources();
                 if (null != resources) {
                     sb.append(COMMA_QUOTE).append("resources\":[");
-                    for (Iterator<String> it = resources.iterator(); it.hasNext();) {
-                        String id = it.next();
-                        sb.append("{\"id").append(COLON_QUOTE);
-                        escapeForJS(sb, id);
+                    for (Iterator<Resource> it = resources.iterator(); it.hasNext();) {
+                        Resource resource = it.next();
+                        sb.append("{\"id").append(COLON_QUOTE).append(resource.getId()).append(COMMA_QUOTE).append("label").append(
+                                COLON_QUOTE);
+                        escapeForJS(sb, resource.getLabel());
                         sb.append("\"}");
                         if (it.hasNext()) {
-                            sb.append(COMMA_QUOTE);
+                            sb.append(',');
                         }
                     }
                     sb.append("]");
@@ -67,16 +70,19 @@ public class JSONableQueryMap {
         }
         return sb.append("}").toString();
     }
-    
+
     /**
      * prepend quotes and apostrophes with a backslash
-     * @param sb the StringBuffer accumulating the text
-     * @param text the text to escape
+     * 
+     * @param sb
+     *            the StringBuffer accumulating the text
+     * @param text
+     *            the text to escape
      */
-    private void escapeForJS(StringBuffer sb, String text) {
+    private void escapeForJS(final StringBuffer sb, final String text) {
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
-            if (c == '\'' || c == '"') {
+            if ((c == '"')) {
                 sb.append('\\');
             }
             sb.append(c);

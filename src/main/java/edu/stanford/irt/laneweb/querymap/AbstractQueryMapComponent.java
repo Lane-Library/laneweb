@@ -13,6 +13,7 @@ import org.apache.excalibur.source.Source;
 import edu.stanford.irt.querymap.DescriptorWeightMap;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.QueryMapper;
+import edu.stanford.irt.querymap.Resource;
 import edu.stanford.irt.querymap.StreamResourceMapping;
 
 public abstract class AbstractQueryMapComponent implements SitemapModelComponent {
@@ -29,12 +30,11 @@ public abstract class AbstractQueryMapComponent implements SitemapModelComponent
 
     private ThreadLocal<String> query = new ThreadLocal<String>();
 
-    private ThreadLocal<Map<String, Set<String>>> resourceMaps = new ThreadLocal<Map<String, Set<String>>>();
+    private ThreadLocal<Map<String, Set<Resource>>> resourceMaps = new ThreadLocal<Map<String, Set<Resource>>>();
 
     private ThreadLocal<Map<String, Float>> descriptorWeights = new ThreadLocal<Map<String, Float>>();
 
     private ThreadLocal<Integer> abstractCount = new ThreadLocal<Integer>();
-
 
     public void setQueryMapper(final QueryMapper queryMapper) {
         if (null == queryMapper) {
@@ -75,7 +75,7 @@ public abstract class AbstractQueryMapComponent implements SitemapModelComponent
         }
         this.query.set(query);
     }
-    
+
     protected QueryMap getQueryMap() {
         String query = this.query.get();
         if (null == query) {
@@ -84,11 +84,11 @@ public abstract class AbstractQueryMapComponent implements SitemapModelComponent
         if (null == this.resourceMaps.get()) {
             return this.queryMapper.getQueryMap(query);
         } else {
-            return this.queryMapper.getQueryMap(query, this.resourceMaps.get(), this.descriptorWeights.get(),
-                    this.abstractCount.get().intValue());
+            return this.queryMapper.getQueryMap(query, this.resourceMaps.get(), this.descriptorWeights.get(), this.abstractCount.get()
+                    .intValue());
         }
     }
-    
+
     protected void reset() {
         this.query.set(null);
         this.descriptorWeights.set(null);
