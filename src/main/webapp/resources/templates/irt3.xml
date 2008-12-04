@@ -170,8 +170,7 @@
                             <a href="/contacts/index.html" title="Contact Us..">Contact Us</a>
                         </li>
                         <li>
-                            <a href="/feedback.html?template=none" title="Feedback.."
-                                rel="popup standard 625 720">Feedback</a>
+                            <a href="/contacts/index.html?loadTab=feedback" title="Feedback..">Feedback</a>
                         </li>
                         <li>
                             <a href="http://irt-integration.stanford.edu/display/lane/Start"
