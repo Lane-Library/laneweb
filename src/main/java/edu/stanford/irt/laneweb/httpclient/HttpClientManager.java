@@ -16,12 +16,6 @@ public class HttpClientManager {
 
     private int connectionTimeout;
 
-    /** the proxy host, if any */
-    private String proxyHost;
-
-    /** the proxy port if any */
-    private int proxyPort;
-
     /**
      * accessor for the HttpClient.
      * 
@@ -66,24 +60,6 @@ public class HttpClientManager {
     }
 
     /**
-     * set the proxy host
-     * 
-     * @parm proxyHost
-     */
-    public void setProxyHost(final String proxyHost) {
-        this.proxyHost = proxyHost;
-    }
-
-    /**
-     * set the proxy port
-     * 
-     * @param proxyPort
-     */
-    public void setProxyPort(final int proxyPort) {
-        this.proxyPort = proxyPort;
-    }
-
-    /**
      * this initializes the HttpClient with the various parameters.
      */
     public void init() {
@@ -91,10 +67,6 @@ public class HttpClientManager {
         this.httpClient.getHttpConnectionManager().getParams().setMaxTotalConnections(this.maxTotalConnections);
         this.httpClient.getHttpConnectionManager().getParams().setDefaultMaxConnectionsPerHost(this.defaultMaxConnectionsPerHost);
         this.httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(this.connectionTimeout);
-        // set up the proxy if parameters are available
-        if ((null != this.proxyHost) && (this.proxyHost.length() > 0) && (this.proxyPort > 0)) {
-            this.httpClient.getHostConfiguration().setProxy(this.proxyHost, this.proxyPort);
-        }
     }
 
 }
