@@ -32,17 +32,21 @@
     <bean id="org.apache.excalibur.store.StoreJanitor"
         class="edu.stanford.irt.laneweb.store.StoreJanitor"/>
     
-    <bean id="edu.stanford.irt.laneweb.httpclient.HttpClientManager"
-        class="edu.stanford.irt.laneweb.httpclient.HttpClientManager">
-        <property name="maxTotalConnections" value="300"/>
-        <property name="defaultMaxConnectionsPerHost" value="100"/>
-        <property name="connectionTimeout" value="20000"/>
+    <bean id="org.apache.commons.httpclient.HttpClient"
+        class="org.apache.commons.httpclient.HttpClient">
+        <constructor-arg>
+            <bean class="edu.stanford.irt.laneweb.httpclient.ConnectionManager">
+                <property name="maxTotalConnections" value="30"/>
+                <property name="defaultMaxConnectionsPerHost" value="10"/>
+                <property name="connectionTimeout" value="20000"/>
+            </bean>
+        </constructor-arg>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/http"
         class="edu.stanford.irt.laneweb.httpclient.HTTPClientSourceFactory">
-        <property name="httpClientManager"
-            ref="edu.stanford.irt.laneweb.httpclient.HttpClientManager"/>
+        <property name="httpClient"
+            ref="org.apache.commons.httpclient.HttpClient"/>
     </bean>
     
     <bean name="javax.sql.DataSource/eresources"
@@ -86,13 +90,8 @@
         <property name="queryToDescriptor">
             <bean class="edu.stanford.irt.querymap.QueryToDescriptor">
                 <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
-                <property name="httpClient">
-                    <bean class="org.apache.commons.httpclient.HttpClient">
-                        <constructor-arg>
-                            <bean class="org.apache.commons.httpclient.MultiThreadedHttpConnectionManager"/>
-                        </constructor-arg>
-                    </bean>
-                </property>
+                <property name="httpClient"
+                    ref="org.apache.commons.httpclient.HttpClient"/>
             </bean>
         </property>
     </bean>
