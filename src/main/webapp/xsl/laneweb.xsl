@@ -87,6 +87,7 @@
             <xsl:when test="starts-with($request-uri,'online/eb')">book</xsl:when>
             <xsl:when test="starts-with($request-uri,'online/cc')">cc</xsl:when>
             <xsl:when test="starts-with($request-uri,'online/db')">database</xsl:when>
+            <xsl:when test="starts-with($request-uri,'online/video')">video</xsl:when>
             <xsl:when test="starts-with($request-uri,'services')">faq</xsl:when>
             <xsl:when test="starts-with($request-uri,'howto')">faq</xsl:when>
             <xsl:when test="starts-with($request-uri,'bassett')">bassett</xsl:when>
