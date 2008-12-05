@@ -28,7 +28,7 @@ import org.xml.sax.SAXException;
  */
 public class NoBodyContent404Transformer implements Transformer, CacheableProcessingComponent {
 
-    private static final String KEY = "FNFT";
+    private static final String KEY = "NBC";
 
     private XMLConsumer consumer;
 
