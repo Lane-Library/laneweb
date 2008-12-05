@@ -99,6 +99,7 @@
                     <map:parameter name="category" value="{request-param:category}"/>
                     <map:parameter name="mode" value="{request-param:mode}"/>
                 </map:transform>
+                <map:transform type="no-body-content-404"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>

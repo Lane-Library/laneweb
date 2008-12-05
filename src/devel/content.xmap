@@ -123,6 +123,7 @@
                         </map:transform>
                     </map:otherwise>
                 </map:select>
+                <map:transform type="no-body-content-404"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
