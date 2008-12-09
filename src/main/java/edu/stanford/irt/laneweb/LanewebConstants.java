@@ -22,4 +22,7 @@ public interface LanewebConstants {
 
     public static final String X_FORWARDED_FOR = "X-FORWARDED-FOR";
 
+    public static final String FULL_NAME = "full-name";
+
+    public static final String USER_COOKIE_NAME = "lane-user";
 }

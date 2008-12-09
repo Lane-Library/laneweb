@@ -73,6 +73,11 @@
                 <property name="jndiName" value="java:comp/env/ezproxy-key"/>
             </bean>
         </property>
+        <property name="decryptor" ref="edu.stanford.irt.laneweb.Cryptor"></property>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.Cryptor" class="edu.stanford.irt.laneweb.Cryptor">
+    	<property name="key" value="stanfordlanelibraryir"/>
     </bean>
     
     <bean name="edu.stanford.irt.eresources.CollectionManager/laneconnex"
@@ -361,6 +366,7 @@
     <bean name="org.apache.cocoon.acting.Action/loginAction"
         class="edu.stanford.irt.laneweb.LoginAction">
         <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
+        <property name="encryptor" ref="edu.stanford.irt.laneweb.Cryptor"></property>
     </bean>
     
     <bean name="org.apache.cocoon.serialization.Serializer/xml"

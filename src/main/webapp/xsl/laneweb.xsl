@@ -47,6 +47,8 @@
     <xsl:param name="version"/>
     
     <xsl:param name="referrer"/>
+    
+    <xsl:param name="full-name"/>  
 
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
@@ -184,6 +186,38 @@
             <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
     </xsl:template>
+    
+    <xsl:template match="h:div[@id='pl']">
+	    <xsl:copy>
+	    	<xsl:apply-templates select="attribute::node()"/>
+	    	<xsl:choose>
+	            <xsl:when test="$sunetid != ''">
+	            <xsl:text>Logged in as </xsl:text>
+	            <xsl:value-of select="$full-name"/>
+	             <xsl:text> | </xsl:text>
+	             <a>
+	             	<xsl:attribute name="href">
+	             		<xsl:value-of select="$context"/>
+	             		<xsl:text>/secure/login.html?pl=init</xsl:text>
+	             	</xsl:attribute>
+		        	<xsl:text>Account</xsl:text>
+	             </a>
+	             <xsl:text> | </xsl:text>
+	             <a>
+	             	<xsl:attribute name="href">
+	             		<xsl:value-of select="$context"/>
+	             		<xsl:text>/logout.html?pl=logout</xsl:text>
+	             	</xsl:attribute>
+		        	<xsl:text>Logout</xsl:text>
+	             </a>   
+	            </xsl:when>
+	            <xsl:otherwise>
+	        		<xsl:apply-templates select="child::node()"/>    
+	            </xsl:otherwise>
+	        </xsl:choose>
+        </xsl:copy>
+    </xsl:template>
+    
     
     <xsl:template match="h:div[@id='leftColumn']|h:div[@id='rightColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
         <xsl:copy>

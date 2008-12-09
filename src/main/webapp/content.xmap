@@ -42,6 +42,11 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
+           <map:match pattern="secure/persistentlogin.html" type="wildcard">
+                <map:act type="loginAction"/>
+                <map:generate type="file" src="{naming:java:comp/env/live-base}/content/secure/persistentlogin.html"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="portals/history/historySearchResults.html" type="wildcard">
                 <map:generate type="html"
                     src="{naming:java:comp/env/live-base}/content/portals/history/historySearchResults.html"/>

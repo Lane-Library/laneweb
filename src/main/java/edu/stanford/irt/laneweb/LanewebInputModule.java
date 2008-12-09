@@ -60,6 +60,13 @@ public class LanewebInputModule implements InputModule {
         if (LanewebConstants.TICKET.equals(key)) {
             result = userInfo.getTicket();
         }
+        if (LanewebConstants.FULL_NAME.equals(key)) {
+            if(userInfo.getPerson() != null)
+        	result = userInfo.getPerson().getDisplayName();
+            if(result == null || result.equals(""))
+        	result = userInfo.getSunetId();
+        }
+        
         if (this.logger.isDebugEnabled()) {
             this.logger.debug(key + " = " + result);
         }
