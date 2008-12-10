@@ -55,6 +55,9 @@
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
             </map:match>
+            <map:match pattern="shc/*" type="wildcard">
+                <map:mount uri-prefix="shc" check-reload="no" src="shc.xmap"/>
+            </map:match>
             <map:match pattern="admin/status" type="wildcard">
                 <map:generate type="status"/>
                 <map:serialize type="xml"/>
@@ -143,112 +146,6 @@
             </map:match>
             <map:match pattern="clinician/index.html" type="wildcard">
                 <map:redirect-to uri="{request:contextPath}/portals/clinical.html"/>
-            </map:match>
-            <!-- ========================== EHR redirects for SHC ============================ -->
-            <map:match pattern="shc/anesthesia.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/portals/anesthesia.html?template=shc&amp;source=%2Fportals%2Fanesthesia.html&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/cardiology.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/portals/cardiology.html?template=shc&amp;source=%2Fportals%2Fcardiology.html&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/clinical.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/ear-nose-throat.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/emergency.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/gastroenterology.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/hematology.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/portals/hematology.html?template=shc&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/hepatology.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/icu.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/infectious-disease.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/internal-medicine.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/neurology.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/ob-gyn.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/oncology.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/opthalmology.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/orthopedics.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/psychiatry.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/pulmonary.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/portals/pulmonary.html?template=shc&amp;source=%2Fportals%2Fpulmonary.html&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/radiology.html" type="wildcard">
-                <map:redirect-to
-                    uri="http://www.guideline.gov/search/searchresults.aspx?Type=3&amp;num=20&amp;txtSearch={request-param:q}+AND+%22american+college+of+radiology%22"
-                />
-            </map:match>
-            <map:match pattern="shc/surgery-cardiothoracic.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
-                />
-            </map:match>
-            <map:match pattern="shc/surgery-general.html" type="wildcard">
-                <map:redirect-to
-                    uri="{request:contextPath}/search.html?template=shc&amp;source=clinical&amp;{request:queryString}"
-                />
             </map:match>
             <!-- ========================== permenent redirects ============================ -->
             <map:match pattern="plain/secure/**.html" type="wildcard">

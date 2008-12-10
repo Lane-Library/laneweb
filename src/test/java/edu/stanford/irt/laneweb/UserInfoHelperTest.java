@@ -6,8 +6,6 @@ import static org.easymock.EasyMock.verify;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
 
-import edu.stanford.irt.directory.LDAPPerson;
-
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -25,6 +23,8 @@ import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.Session;
 import org.apache.commons.codec.DecoderException;
 
+import edu.stanford.irt.directory.LDAPPerson;
+
 public class UserInfoHelperTest extends TestCase {
 
     private Request request;
@@ -41,7 +41,6 @@ public class UserInfoHelperTest extends TestCase {
 
     private UserInfoHelper userInfoHelper;
 
-    
     @Override
     protected void setUp() throws Exception {
         super.setUp();
@@ -71,16 +70,15 @@ public class UserInfoHelperTest extends TestCase {
         replay(this.ldapClient);
         replay(this.session);
 
-        
         this.userInfoHelper = new UserInfoHelper();
         this.userInfoHelper.setLdapClient(this.ldapClient);
         this.userInfoHelper.setEzproxyKey(this.ezproxyKey);
-        
+
     }
 
     public void testGetUserInfo() {
         expect(this.request.getRemoteUser()).andReturn(this.sunetid);
-	expect(this.request.getRemoteAddr()).andReturn(this.ip);
+        expect(this.request.getRemoteAddr()).andReturn(this.ip);
         replay(this.request);
         UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
         assertEquals(Affiliation.SOM, userInfo.getAffiliation());
@@ -93,18 +91,19 @@ public class UserInfoHelperTest extends TestCase {
         verify(this.request);
     }
 
-    public void testCookieUserInfo() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException, IOException, DecoderException {
+    public void testCookieUserInfo() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
+            IllegalBlockSizeException, BadPaddingException, InvalidKeySpecException, IOException, DecoderException {
         Cryptor cryptor = new Cryptor();
         cryptor.setKey("testtesttesttesttestt");
         String cookieValue = cryptor.encrypt(this.sunetid);
-	Cookie cookie = new Cookie(LanewebConstants.USER_COOKIE_NAME, cookieValue);
-	HashMap<String, Cookie> map = new HashMap<String, Cookie>();
-	map.put(LanewebConstants.USER_COOKIE_NAME, cookie);
-	expect(this.request.getRemoteAddr()).andReturn(this.ip);
-	expect(this.request.getRemoteUser()).andReturn(null);
-	expect(this.request.getCookieMap()).andReturn(map);
-	replay(this.request);
-	this.userInfoHelper.setDecryptor(cryptor);
+        Cookie cookie = new Cookie(LanewebConstants.USER_COOKIE_NAME, cookieValue);
+        HashMap<String, Cookie> map = new HashMap<String, Cookie>();
+        map.put(LanewebConstants.USER_COOKIE_NAME, cookie);
+        expect(this.request.getRemoteAddr()).andReturn(this.ip);
+        expect(this.request.getRemoteUser()).andReturn(null);
+        expect(this.request.getCookieMap()).andReturn(map);
+        replay(this.request);
+        this.userInfoHelper.setDecryptor(cryptor);
         UserInfo userInfo = this.userInfoHelper.getUserInfo(this.request);
         assertEquals(Affiliation.SOM, userInfo.getAffiliation());
         assertTrue(userInfo.getProxyLinks());
@@ -115,7 +114,7 @@ public class UserInfoHelperTest extends TestCase {
         verify(this.session);
         verify(this.request);
     }
-    
+
     public void testAffiliation() {
         String ip = this.ip.concat("FAIL_TEST");
         expect(this.request.getRemoteAddr()).andReturn(ip);

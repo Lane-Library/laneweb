@@ -12,7 +12,6 @@ import org.springframework.util.Assert;
 
 /**
  * {@link HTTPClientSource} Factory class.
- * 
  */
 public class HTTPClientSourceFactory implements SourceFactory {
 

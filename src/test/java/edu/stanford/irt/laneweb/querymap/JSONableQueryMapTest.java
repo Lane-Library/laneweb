@@ -7,7 +7,6 @@ import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -23,6 +22,7 @@ public class JSONableQueryMapTest {
     private static final String JSON_1 = "{\"query\":\"tetralogy of fallot\",\"descriptor\":\"Tetralogy of Fallot\",\"resourceMap\":{\"descriptor\":\"Heart Defects, Congenital\",\"resources\":[{\"id\":\"mdc_park\",\"label\":\"Pediatric Cardiology\"}]}}";
 
     private static final String JSON_2 = "{\"query\":\"borderline personality\",\"descriptor\":\"Borderline Personality Disorder\",\"resourceMap\":{\"descriptor\":\"Mental Disorders\",\"resources\":[{\"id\":\"ovid-kaplan\",\"label\":\"Kaplan's Comprehensive Psychiatry\"},{\"id\":\"am_ebert\",\"label\":\"Current Dx & Tx: Psychiatry\"}]}}";
+
     // "{\"query\":\"tetralogy of fallot\",\"descriptor\":\"Tetralogy of Fallot\",\"resourceMap\":{\"descriptor\":\"Heart Defects, Congenital\",\"resources\":[{\"id\":\"mdc_park\"}]}}";
 
     @Test
@@ -46,6 +46,7 @@ public class JSONableQueryMapTest {
         verify(map);
         verify(qm);
     }
+
     @Test
     public void testToString2() {
         Descriptor descriptor = createMock(Descriptor.class);
@@ -56,7 +57,7 @@ public class JSONableQueryMapTest {
         expect(map.getDescriptor()).andReturn(descriptor);
         Set<Resource> resources = new LinkedHashSet<Resource>();
         resources.add(new Resource("ovid-kaplan", "Kaplan's Comprehensive Psychiatry"));
-        resources.add(new Resource("am_ebert","Current Dx & Tx: Psychiatry"));
+        resources.add(new Resource("am_ebert", "Current Dx & Tx: Psychiatry"));
         expect(map.getResources()).andReturn(resources);
         replay(map);
         QueryMap qm = createMock(QueryMap.class);

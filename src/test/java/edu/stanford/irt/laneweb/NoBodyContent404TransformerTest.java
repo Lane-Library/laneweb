@@ -15,13 +15,13 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 public class NoBodyContent404TransformerTest {
-    
+
     private NoBodyContent404Transformer transformer;
-    
+
     private Map<Object, Object> objectModel;
-    
+
     private Response response;
-    
+
     private XMLConsumer consumer;
 
     @Before
@@ -34,7 +34,7 @@ public class NoBodyContent404TransformerTest {
         this.transformer.setConsumer(this.consumer);
         this.transformer.setup(null, this.objectModel, null, null);
     }
-    
+
     @Test
     public void testFAQNotFound() throws SAXException {
         this.response.setStatus(404);
@@ -47,7 +47,7 @@ public class NoBodyContent404TransformerTest {
         verify(this.response);
         verify(this.consumer);
     }
-    
+
     @Test
     public void testFAQFound() throws SAXException {
         replay(this.response);

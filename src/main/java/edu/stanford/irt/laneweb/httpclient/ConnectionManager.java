@@ -4,13 +4,13 @@ import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 
 public class ConnectionManager extends MultiThreadedHttpConnectionManager {
 
-
     /**
      * sets the maximum total connections.
      * 
      * @param maxTotalConnections
      *            the max number of connections
      */
+    @Override
     public void setMaxTotalConnections(final int maxTotalConnections) {
         super.getParams().setMaxTotalConnections(maxTotalConnections);
     }

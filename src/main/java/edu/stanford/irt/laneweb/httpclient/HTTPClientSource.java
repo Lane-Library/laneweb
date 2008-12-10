@@ -107,20 +107,20 @@ public class HTTPClientSource implements Source {
     private void updateData() {
         // no request made so far, attempt to get some response data.
         if (!this.m_dataValid) {
-                final HttpMethod head = new HeadMethod(this.m_uri);
-                try {
-                    // cy altered so only one head request is made if successful
-                    if (200 == executeMethod(head)) {
-                        this.m_dataValid = true;
-                    }
-                    return;
-                } catch (final IOException e) {
-                    if (this.logger.isDebugEnabled()) {
-                        this.logger.debug("Unable to determine response data, using defaults", e);
-                    }
-                } finally {
-                    head.releaseConnection();
+            final HttpMethod head = new HeadMethod(this.m_uri);
+            try {
+                // cy altered so only one head request is made if successful
+                if (200 == executeMethod(head)) {
+                    this.m_dataValid = true;
                 }
+                return;
+            } catch (final IOException e) {
+                if (this.logger.isDebugEnabled()) {
+                    this.logger.debug("Unable to determine response data, using defaults", e);
+                }
+            } finally {
+                head.releaseConnection();
+            }
 
             // default values when response data is not available
             this.m_exists = false;
