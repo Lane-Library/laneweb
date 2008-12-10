@@ -27,6 +27,10 @@
             <map:match pattern="secure/login.html" type="wildcard">
                 <map:act type="loginAction"/>
             </map:match>
+             <map:match pattern="logout.html" type="wildcard">
+                <map:act type="loginAction"/>
+            </map:match>
+            
             <!-- external resource searches, normally intercepted by javascript -->
             <map:match pattern="^http" type="regex-parameter">
                 <map:parameter name="parameter-name" value="source"/>
