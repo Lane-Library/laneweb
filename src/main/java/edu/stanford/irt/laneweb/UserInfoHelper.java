@@ -32,12 +32,21 @@ public class UserInfoHelper {
 		session.setAttribute(LanewebConstants.USER_INFO, userInfo);
 	    }
 	    request.setAttribute(LanewebConstants.USER_INFO, userInfo);
-	    setUserInfo(userInfo, request);
+	   
+	    setUserAffiliation(userInfo, request);
+	    try {
+		setSunetId(userInfo, request);
+	    } catch (Exception e) {
+		logger.error(e.getMessage(),e);
+	    }
+	    setTicket(userInfo, request);
+	    setProxyLink(userInfo, request);
 	}
 	return userInfo;
     }
 
-    private void setUserInfo(final UserInfo userInfo, final Request request) {
+    private void setUserAffiliation(final UserInfo userInfo, final Request request)
+    {
 	if (userInfo.getAffiliation() == null) {
 	    String ip = request.getRemoteAddr();
 	    // mod_proxy puts the real remote address in an x-forwarded-for
@@ -57,6 +66,11 @@ public class UserInfoHelper {
 		this.logger.error("error parsing ip for Affiliation: " + ip);
 	    }
 	}
+	
+    }
+    
+    private void setSunetId(final UserInfo userInfo, final Request request) throws Exception
+    {
 	if (userInfo.getSunetId() == null) {
 	    String remoteUser = request.getRemoteUser();
 	    if (remoteUser == null){
@@ -64,11 +78,7 @@ public class UserInfoHelper {
 		if (cookies != null) {
 		    Cookie cookie = cookies.get(LanewebConstants.USER_COOKIE_NAME);
 		    if (cookie != null) {
-			try {
 			    remoteUser = this.decryptor.decrypt(cookie.getValue());
-			} catch (Exception e) {
-			    logger.error(e.getMessage(),e);
-			}
 		    }
 		}
 	    }
@@ -77,14 +87,23 @@ public class UserInfoHelper {
 		userInfo.setPerson(this.ldapClient.getLdapPerson(remoteUser));
 	    }
 	}
+    }
+
+
+    private void setTicket(final UserInfo userInfo, final Request request)
+    {
 	if ((null != userInfo.getSunetId()) && (null != this.ezproxyKey)) {
 	    userInfo.setTicket(new Ticket(userInfo.getSunetId(), this.ezproxyKey));
 	}
+    }
+    
+    private void setProxyLink(final UserInfo userInfo, final Request request) {
 	if (null != request.getParameter(LanewebConstants.PROXY_LINKS)) {
 	    userInfo.setProxyLinks(new Boolean(request.getParameter(LanewebConstants.PROXY_LINKS)));
 	}
     }
 
+    
     public void setLdapClient(final LdapClient ldapClient) {
 	if (null == ldapClient) {
 	    throw new IllegalArgumentException("null ldapClient");
