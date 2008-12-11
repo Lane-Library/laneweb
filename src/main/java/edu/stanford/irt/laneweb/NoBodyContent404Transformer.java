@@ -21,8 +21,8 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
 /**
- * This transformer checks for elements within a body element and sets the
- * response code to 404 if there are none.
+ * This transformer checks for elements within a body element and throws
+ * a RuntimeException if there is none.
  * 
  * @author ceyates
  */
@@ -57,7 +57,7 @@ public class NoBodyContent404Transformer implements Transformer, CacheableProces
             if ("body".equals(localName)) {
                 this.done = true;
                 if (!this.hasBodyContent) {
-                    this.response.setStatus(404);
+                    throw new RuntimeException("no content in body");
                 }
             }
         }
