@@ -8,8 +8,6 @@ import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Response;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.transformation.Transformer;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -31,8 +29,6 @@ public class NoBodyContent404Transformer implements Transformer, CacheableProces
     private static final String KEY = "NBC";
 
     private XMLConsumer consumer;
-
-    private Response response;
 
     private boolean parsingBody = false;
 
@@ -82,8 +78,6 @@ public class NoBodyContent404Transformer implements Transformer, CacheableProces
      * org.apache.avalon.framework.parameters.Parameters)
      */
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.response = ObjectModelHelper.getResponse(objectModel);
-        Assert.notNull(this.response);
     }
 
     /*

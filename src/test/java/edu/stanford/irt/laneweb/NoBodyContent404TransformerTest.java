@@ -4,11 +4,6 @@ import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Response;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,39 +13,29 @@ public class NoBodyContent404TransformerTest {
 
     private NoBodyContent404Transformer transformer;
 
-    private Map<Object, Object> objectModel;
-
-    private Response response;
-
     private XMLConsumer consumer;
 
     @Before
     public void setUp() throws Exception {
         this.transformer = new NoBodyContent404Transformer();
-        this.response = createMock(Response.class);
-        this.objectModel = new HashMap<Object, Object>();
-        this.objectModel.put(ObjectModelHelper.RESPONSE_OBJECT, this.response);
         this.consumer = createMock(XMLConsumer.class);
         this.transformer.setConsumer(this.consumer);
-        this.transformer.setup(null, this.objectModel, null, null);
+        this.transformer.setup(null, null, null, null);
     }
 
     @Test
     public void testFAQNotFound() throws SAXException {
-        this.response.setStatus(404);
-        replay(this.response);
         this.consumer.startElement(null, "body", null, null);
-        this.consumer.endElement(null, "body", null);
         replay(this.consumer);
         this.transformer.startElement(null, "body", null, null);
+        try {
         this.transformer.endElement(null, "body", null);
-        verify(this.response);
+        } catch (RuntimeException e) {}
         verify(this.consumer);
     }
 
     @Test
     public void testFAQFound() throws SAXException {
-        replay(this.response);
         this.consumer.startElement(null, "body", null, null);
         this.consumer.startElement(null, "div", null, null);
         this.consumer.endElement(null, "div", null);
@@ -60,7 +45,6 @@ public class NoBodyContent404TransformerTest {
         this.transformer.startElement(null, "div", null, null);
         this.transformer.endElement(null, "div", null);
         this.transformer.endElement(null, "body", null);
-        verify(this.response);
         verify(this.consumer);
     }
 
