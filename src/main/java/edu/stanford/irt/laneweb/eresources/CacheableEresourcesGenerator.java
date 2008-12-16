@@ -43,9 +43,11 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
     }
 
     private String createKey() {
-        return new StringBuffer("t=").append(null == super.type ? "" : super.type).append(";s=").append(
-                null == super.subset ? "" : super.subset).append(";a=").append(null == super.alpha ? "" : super.alpha).append(";m=")
-                .append(null == super.mesh ? "" : super.mesh).toString();
+        return new StringBuffer("t=").append(null == super.type ? "" : super.type)
+        .append(";s=").append(null == super.subset ? "" : super.subset)
+        .append(";a=").append(null == super.alpha ? "" : super.alpha)
+        .append(";m=").append(null == super.mesh ? "" : super.mesh)
+        .toString();
     }
 
 }
