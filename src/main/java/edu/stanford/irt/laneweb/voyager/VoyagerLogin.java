@@ -14,7 +14,7 @@ public class VoyagerLogin {
 
     private static final String ERROR_URL = "/voyagerError.html";
 
-    private static final String BASE_URL = "http://lmldb-test.stanford.edu/cgi-bin/Pwebrecon.cgi?";
+    private static final String BASE_URL = "http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?";
 
     private static final String CLEAR_SESSION_SQL = "DELETE FROM LMLDB.WOPAC_PID_PATRON_KEYS WHERE PATRON_KEY = ? OR PID = ?";
 
