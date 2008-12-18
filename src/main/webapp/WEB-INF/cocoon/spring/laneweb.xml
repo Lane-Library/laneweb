@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- @version $Id: laneweb.xml 561606 2007-08-01 00:23:28Z vgritsenko $ -->
-<beans xmlns="http://www.springframework.org/schema/beans" default-init-method="init"
+<beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:configurator="http://cocoon.apache.org/schema/configurator"
     xmlns:pipeline="http://cocoon.apache.org/schema/pipeline"
-    xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:avalon="http://cocoon.apache.org/schema/avalon"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-    http://cocoon.apache.org/schema/configurator http://cocoon.apache.org/schema/configurator/cocoon-configurator-1.0.1.xsd
-    http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd
-    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
-    http://cocoon.apache.org/schema/avalon http://cocoon.apache.org/schema/avalon/cocoon-avalon-1.0.xsd">
+    http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd">
     
     <bean name="org.apache.cocoon.caching.Cache" class="org.apache.cocoon.caching.impl.CacheImpl">
         <property name="store" ref="org.apache.excalibur.store.Store"/>
@@ -139,7 +132,6 @@
     
     <bean name="org.apache.cocoon.generation.Generator/file"
         class="org.apache.cocoon.generation.FileGenerator" scope="prototype">
-        <pipeline:component label="content"/>
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
     
@@ -279,7 +271,6 @@
     
     <bean name="org.apache.cocoon.generation.Generator/directory"
         class="org.apache.cocoon.generation.DirectoryGenerator" scope="prototype">
-        <pipeline:component label="content"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
@@ -313,7 +304,8 @@
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
-    <bean name="org.apache.cocoon.serialization.AbstractTextSerializer"
+    
+<!--    <bean name="org.apache.cocoon.serialization.AbstractTextSerializer" init-method="init"
         class="org.apache.cocoon.serialization.AbstractTextSerializer" scope="prototype"
         abstract="true">
         <property name="defaultEncoding">
@@ -323,7 +315,7 @@
             </bean>
         </property>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
-    </bean>
+    </bean>-->
     
     <bean name="org.apache.cocoon.reading.Reader/querymap"
         class="edu.stanford.irt.laneweb.querymap.QueryMapReader">
@@ -369,18 +361,6 @@
         <property name="encryptor" ref="edu.stanford.irt.laneweb.Cryptor"></property>
     </bean>
     
-    <bean name="org.apache.cocoon.serialization.Serializer/xml"
-        class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
-        parent="org.apache.cocoon.serialization.AbstractTextSerializer">
-        <pipeline:component mime-type="text/xml"/>
-        <property name="format">
-            <props>
-                <prop key="encoding">UTF-8</prop>
-            </props>
-        </property>
-    </bean>
-    
-    
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
         class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
@@ -394,6 +374,7 @@
                 <prop key="omit-xml-declaration">yes</prop>
             </props>
         </property>
+        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
     
     <bean name="org.apache.cocoon.serialization.Serializer/text"
