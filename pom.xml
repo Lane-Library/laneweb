@@ -248,12 +248,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>edu.stanford.irt.search</groupId>
-            <artifactId>search-spring</artifactId>
-            <version>1.4.33</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.5</version>
@@ -353,8 +347,14 @@
         </dependency>
         <dependency>
             <artifactId>nekohtml</artifactId>
-            <groupId>nekohtml</groupId>
+            <groupId>net.sourceforge.nekohtml</groupId>
             <version>1.9.9</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>edu.stanford.irt.search</groupId>
+            <artifactId>search-spring</artifactId>
+            <version>1.4.34-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
