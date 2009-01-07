@@ -109,6 +109,9 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
+          	<map:match pattern="proxy/credential" type="wildcard">
+				<map:act type="loginAction"/>
+			</map:match>
         </map:pipeline>
         <!-- trying this out, might fill up cache with a bazillion query maps -->
         <map:pipeline type="expires">

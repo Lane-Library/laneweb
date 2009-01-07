@@ -62,6 +62,9 @@
     <component role="org.apache.cocoon.components.modules.input.InputModule/request-uri"
         class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
 
+	<component role="org.apache.cocoon.components.modules.input.InputModule/cookie"
+		class="org.apache.cocoon.components.modules.input.CookieModule"/>
+
     <component role="org.apache.cocoon.components.modules.input.InputModule/header-attribute"
         class="org.apache.cocoon.components.modules.input.HeaderAttributeModule"/>
 

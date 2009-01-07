@@ -24,5 +24,11 @@ public interface LanewebConstants {
 
     public static final String FULL_NAME = "full-name";
 
-    public static final String USER_COOKIE_NAME = "lane-user";
+    public static final String USER_COOKIE_NAME = "u-lane";
+    
+    public static final String DATE_COOKIE_NAME = "d-lane";
+    
+    public static final String SECURITY_COOKIE_NAME = "s-lane";
+    
+    
 }
