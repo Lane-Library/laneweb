@@ -35,20 +35,21 @@ public class PersistentLoginAction implements Action {
 	    final Parameters params) throws ProcessingException, IOException, SystemException, InvalidKeyException,
 	    IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException,
 	    DecoderException {
+
 	Request request = ObjectModelHelper.getRequest(objectModel);
 	Response response = ObjectModelHelper.getResponse(objectModel);
 
-	String removePersistentLogin = request.getParameter("remove-pl");
 	String persistentLogin = request.getParameter("pl");
-
+	String removePersistentLogin = request.getParameter("remove-pl");
+	
 	UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
 	String sunetid = userInfo.getSunetId();
 
 	if (sunetid == null && !"logout".equals(persistentLogin)) {
-	    String redirectUrl = request.getContextPath().concat("/secure/persistentlogin.html?");
+	    String secureUrl = request.getContextPath().concat("/secure/persistentlogin.html");
 	    if(null != request.getQueryString())
-		redirectUrl.concat(request.getQueryString());
-	    redirector.globalRedirect(true, redirectUrl);
+		secureUrl = secureUrl.concat("?").concat(request.getQueryString());
+	    redirector.globalRedirect(true, secureUrl);
 	}
 	if ("true".equals(persistentLogin)) {
 	    createSunetIdCookie(sunetid, request, response);

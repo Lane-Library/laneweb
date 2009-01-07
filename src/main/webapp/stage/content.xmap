@@ -43,6 +43,16 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="**persistentlogin.html" type="wildcard">
+                <map:act type="persistentLoginAction"/>
+                <map:generate type="file" src="{naming:java:comp/env/stage-base}/content/secure/persistentlogin.html"/>
+                <map:transform src="context://xsl/persistentlogin.xsl" type="saxon">
+                	<map:parameter name="persistent-login" value="{request-param:pl}"/>
+                	<map:parameter name="remove-persistent-login" value="{request-param:remove-pl}"/>
+                	<map:parameter name="lane-user-cookie" value="{cookie:u-lane}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regexp">
                 <map:generate type="directory" src="{naming:java:comp/env/stage-base}/content/{1}">
                     <map:parameter name="depth" value="1"/>
