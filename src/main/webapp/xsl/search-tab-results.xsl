@@ -19,31 +19,31 @@
 "tabs": [ 
     {
     "resource":"clinical", 
-    "hits" : "<xsl:if test="$clinicalHits != 0"><xsl:value-of  select="format-number($clinicalHits, '###,###')" /></xsl:if>"
+    "hits" : "<xsl:if test="$clinicalHits != 0"><xsl:value-of  select="format-number($clinicalHits, '###,##0')" /></xsl:if>"
     },    
     {
     "resource":"history",
-    "hits" : "<xsl:if test="$historyHits != 0"><xsl:value-of  select="format-number($historyHits, '###,###')" /></xsl:if>"
+    "hits" : "<xsl:if test="$historyHits != 0"><xsl:value-of  select="format-number($historyHits, '###,##0')" /></xsl:if>"
     },    
     {
     "resource":"peds",
-    "hits" : "<xsl:if test="$pedsHits != 0"><xsl:value-of  select="format-number($pedsHits, '###,###')" /></xsl:if>"
+    "hits" : "<xsl:if test="$pedsHits != 0"><xsl:value-of  select="format-number($pedsHits, '###,##0')" /></xsl:if>"
     },    
     {
     "resource":"research",
-    "hits" : "<xsl:if test="$researchHits != 0"><xsl:value-of  select="format-number($researchHits, '###,###')" /></xsl:if>"
+    "hits" : "<xsl:if test="$researchHits != 0"><xsl:value-of  select="format-number($researchHits, '###,##0')" /></xsl:if>"
     },    
     {
     "resource":"google",
-    "hits" : "<xsl:if test="res:engine[@res:id='google']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='google']/res:hits, '###,###')" /></xsl:if>"
+    "hits" : "<xsl:if test="res:engine[@res:id='google']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='google']/res:hits, '###,##0')" /></xsl:if>"
     },    
     {
     "resource":"lois",
-    "hits" : "<xsl:if test="res:engine[@res:id='lois']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='lois']/res:hits, '###,###')" /></xsl:if>"
+    "hits" : "<xsl:if test="res:engine[@res:id='lois']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='lois']/res:hits, '###,##0')" /></xsl:if>"
     },    
     {
     "resource":"pubmed",
-    "hits" : "<xsl:if test="res:engine[@res:id='crossdb']/res:resource[@res:id='pubmed']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='crossdb']/res:resource[@res:id='pubmed']/res:hits, '###,###')" /></xsl:if>"
+    "hits" : "<xsl:if test="res:engine[@res:id='crossdb']/res:resource[@res:id='pubmed']/res:hits"><xsl:value-of  select="format-number(res:engine[@res:id='crossdb']/res:resource[@res:id='pubmed']/res:hits, '###,##0')" /></xsl:if>"
     }
   ]
  }
