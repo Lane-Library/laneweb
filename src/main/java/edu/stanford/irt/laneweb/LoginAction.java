@@ -1,7 +1,5 @@
 package edu.stanford.irt.laneweb;
 
-import edu.stanford.irt.SystemException;
-
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -22,17 +20,20 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.commons.codec.DecoderException;
 import org.apache.log4j.Logger;
 
+import edu.stanford.irt.SystemException;
+
 public class LoginAction implements Action {
 
     private Logger logger = Logger.getLogger(LoginAction.class);
 
     private UserInfoHelper userInfoHelper = null;
 
-    
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source,
-            final Parameters params) throws ProcessingException, IOException, SystemException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, DecoderException {
+            final Parameters params) throws ProcessingException, IOException, SystemException, InvalidKeyException,
+            IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException,
+            DecoderException {
         Request request = ObjectModelHelper.getRequest(objectModel);
-        
+
         UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
         String sunetid = userInfo.getSunetId();
         if (sunetid == null) {
@@ -43,12 +44,12 @@ public class LoginAction implements Action {
         if (ticket == null) {
             throw new ProcessingException("null ticket");
         }
-        
+
         // note: url is not just the url, it is the whole query string ie
         // url=http://...
         String url = request.getQueryString();
         if (url == null) {
-           return null;
+            return null;
         }
         if (this.logger.isDebugEnabled()) {
             this.logger.debug("redirecting to proxy server: " + " sunetid = " + sunetid + " ticket = " + " url = " + url);
@@ -64,6 +65,5 @@ public class LoginAction implements Action {
         }
         this.userInfoHelper = userInfoHelper;
     }
-
 
 }

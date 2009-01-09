@@ -58,8 +58,8 @@ public class VoyagerLoginTest {
         expect(this.person.getUnivId()).andReturn("999");
         replay(this.person);
         this.voyagerLogin.setDataSource(this.dataSource);
-        assertEquals("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?a=b&authenticate=Y", this.voyagerLogin.getVoyagerURL(
-                this.person, "123", "a=b"));
+        assertEquals("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?a=b&authenticate=Y", this.voyagerLogin.getVoyagerURL(this.person,
+                "123", "a=b"));
         verify(this.person);
         verify(this.dataSource);
         verify(this.connection);

@@ -184,6 +184,7 @@
                 <value>book</value>
                 <value>cc</value>
                 <value>lanesite</value>
+                <value>software</value>
             </set>
         </property>
         <property name="subsets">

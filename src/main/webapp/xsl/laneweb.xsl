@@ -43,12 +43,12 @@
 
     <!-- loadTab parameter -->
     <xsl:param name="loadTab"/>
-    
+
     <xsl:param name="version"/>
-    
+
     <xsl:param name="referrer"/>
-    
-    <xsl:param name="full-name"/>  
+
+    <xsl:param name="full-name"/>
 
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
@@ -99,17 +99,24 @@
             <xsl:when test="starts-with($request-uri,'portals/bioresearch')">research</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/patient')">all</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/cultural')">all</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/pharmacy')">/portals/pharmacy.html</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/anesthesia')">/portals/anesthesia.html</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/cardiology')">/portals/cardiology.html</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/hematology')">/portals/hematology.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/pharmacy')"
+                >/portals/pharmacy.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/anesthesia')"
+                >/portals/anesthesia.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/cardiology')"
+                >/portals/cardiology.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/hematology')"
+                >/portals/hematology.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/internal-medicine')"
                 >/portals/internal-medicine.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/lpch-cerner')"
                 >/portals/lpch-cerner.html</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/pulmonary')">/portals/pulmonary.html</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/emergency')">/portals/emergency.html</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/ethics')">/portals/ethics.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/pulmonary')"
+                >/portals/pulmonary.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/emergency')"
+                >/portals/emergency.html</xsl:when>
+            <xsl:when test="starts-with($request-uri,'portals/ethics')"
+                >/portals/ethics.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/')">clinical</xsl:when>
             <xsl:when test="starts-with($request-uri,'local/antibiogram')">clinical</xsl:when>
             <xsl:when test="$source">
@@ -124,7 +131,7 @@
             <xsl:value-of select="replace($q,'(\\|\$)','\\$1')"/>
         </xsl:if>
     </xsl:variable>
-    
+
     <!-- figure out what class the body should be for yui grids -->
     <xsl:variable name="yui-grid-class">
         <xsl:choose>
@@ -176,94 +183,103 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-    
+
     <xsl:template match="h:div[@id='custom-doc']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:if test="$yui-grid-class">
-                <xsl:attribute name="class"><xsl:value-of select="$yui-grid-class"/></xsl:attribute>
+                <xsl:attribute name="class">
+                    <xsl:value-of select="$yui-grid-class"/>
+                </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="h:div[@id='pl']">
-	    <xsl:copy>
-			<xsl:apply-templates select="attribute::node()"/>
-		    <xsl:choose>
-				<xsl:when test="$proxy-links = 'true' ">
-					<xsl:choose>
-						<xsl:when test="$sunetid != ''">
-							<xsl:text>Off Campus Login: </xsl:text>
-							<xsl:value-of select="$full-name"/>
-							<xsl:text> | </xsl:text>
-							<a>
-								<xsl:attribute name="href">
-									<xsl:value-of select="$context"/>
-									<xsl:text>/persistentlogin.html</xsl:text>
-								</xsl:attribute>
-								<xsl:text>Account</xsl:text>
-							</a>
-							<xsl:text> | </xsl:text>
-							<a>
-								<xsl:attribute name="href">
-									<xsl:value-of select="$context"/>
-									<xsl:text>/persistentlogin.html?pl=logout</xsl:text>
-								</xsl:attribute>
-								<xsl:text>Logout</xsl:text>
-							</a>   
-							</xsl:when>
-						<xsl:otherwise>
-						<a>
-							<xsl:attribute name="href">
-								<xsl:value-of select="$context"/>
-								<xsl:text>/secure/login.html</xsl:text>
-							</xsl:attribute>
-							<xsl:text>Off Campus Login</xsl:text>
-						</a>
-						</xsl:otherwise>
-					</xsl:choose>
-				</xsl:when>
-				<xsl:otherwise><xsl:text>&#160;</xsl:text></xsl:otherwise>
-			</xsl:choose>
-		</xsl:copy>
-	</xsl:template>
-    
-    
-    <xsl:template match="h:div[@id='leftColumn']|h:div[@id='rightColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:choose>
+                <xsl:when test="$proxy-links = 'true' ">
+                    <xsl:choose>
+                        <xsl:when test="$sunetid != ''">
+                            <xsl:text>Off Campus Login: </xsl:text>
+                            <xsl:value-of select="$full-name"/>
+                            <xsl:text> | </xsl:text>
+                            <a>
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="$context"/>
+                                    <xsl:text>/persistentlogin.html</xsl:text>
+                                </xsl:attribute>
+                                <xsl:text>Account</xsl:text>
+                            </a>
+                            <xsl:text> | </xsl:text>
+                            <a>
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="$context"/>
+                                    <xsl:text>/persistentlogin.html?pl=logout</xsl:text>
+                                </xsl:attribute>
+                                <xsl:text>Logout</xsl:text>
+                            </a>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <a>
+                                <xsl:attribute name="href">
+                                    <xsl:value-of select="$context"/>
+                                    <xsl:text>/secure/login.html</xsl:text>
+                                </xsl:attribute>
+                                <xsl:text>Off Campus Login</xsl:text>
+                            </a>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>&#160;</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:copy>
+    </xsl:template>
+
+
+    <xsl:template
+        match="h:div[@id='leftColumn']|h:div[@id='rightColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:attribute name="class">yui-b</xsl:attribute>
             <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
     </xsl:template>
-    
+
     <xsl:template match="h:div[@id='rightColumn' and preceding-sibling::h:div[@id='leftColumn']]"/>
-    
-    <xsl:template match="h:div[@id='mainColumn' and preceding-sibling::h:div[@id='leftColumn'] and following-sibling::h:div[@id='rightColumn']]">
+
+    <xsl:template
+        match="h:div[@id='mainColumn' and preceding-sibling::h:div[@id='leftColumn'] and following-sibling::h:div[@id='rightColumn']]">
         <div id="yui-main">
             <div class="yui-b yui-ge">
                 <div class="yui-u first">
                     <xsl:apply-templates select="child::node()"/>
                 </div>
                 <div class="yui-u" id="rightColumn">
-                    <xsl:apply-templates select="following-sibling::h:div[@id='rightColumn']/child::node()"/>
+                    <xsl:apply-templates
+                        select="following-sibling::h:div[@id='rightColumn']/child::node()"/>
                 </div>
             </div>
         </div>
     </xsl:template>
-    
-    <xsl:template match="h:div[@id='mainColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
+
+    <xsl:template
+        match="h:div[@id='mainColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
         <div id="yui-main">
             <div class="yui-b">
                 <div style="margin-left:1em">
-                <xsl:apply-templates/>
+                    <xsl:apply-templates/>
                 </div>
             </div>
         </div>
     </xsl:template>
-    
-    <xsl:template match="h:div[@id='mainColumn' and not(following-sibling::h:div[@id='rightColumn'])]">
+
+    <xsl:template
+        match="h:div[@id='mainColumn' and not(following-sibling::h:div[@id='rightColumn'])]">
         <div id="yui-main">
             <div class="yui-b">
                 <div style="margin-right:1em">
@@ -294,7 +310,7 @@
             <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
-    
+
     <!-- serve external scripts using request scheme -->
     <!-- TODO: revisit this, is this being used and does it work in all cases -->
     <!--<xsl:template match="h:script/@src[starts-with(.,'http:')]">
@@ -309,14 +325,15 @@
             </xsl:choose>
         </xsl:attribute>
         </xsl:template>-->
-    
+
     <!-- put version into javascript @src -->
     <xsl:template match="h:script/@src[starts-with(.,'/javascript')]">
         <xsl:attribute name="src">
-            <xsl:value-of select="concat($context,'/javascript/',$version,substring-after(.,'/javascript'))"/>
+            <xsl:value-of
+                select="concat($context,'/javascript/',$version,substring-after(.,'/javascript'))"/>
         </xsl:attribute>
     </xsl:template>
-    
+
     <!-- put version into css href -->
     <xsl:template match="h:link/@href[starts-with(.,'/style')]">
         <xsl:attribute name="href">
@@ -328,9 +345,11 @@
     <xsl:template match="h:script">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
-            <xsl:text>//</xsl:text><xsl:comment>
+            <xsl:text>//</xsl:text>
+            <xsl:comment>
                 <xsl:apply-templates select="child::node()"/>
-            <xsl:text>//</xsl:text></xsl:comment>
+                <xsl:text>//</xsl:text>
+            </xsl:comment>
         </xsl:copy>
     </xsl:template>
 
@@ -403,7 +422,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-    
+
     <!-- setup flash object, using swfobject -->
     <xsl:template match="h:object[@type='application/x-shockwave-flash']">
         <xsl:copy>
@@ -435,7 +454,7 @@
         <a href="#"><img src="{$context}/graphics/icons/arrowUpTransp.gif" alt="up arrow"/> Back to
             top</a>
     </xsl:template>
-    
+
     <!-- make current elibraryTab activeTab -->
     <xsl:template match="h:li[attribute::class='eLibraryTab']">
         <xsl:copy>
@@ -539,7 +558,7 @@
             </xsl:choose>
         </xsl:attribute>
     </xsl:template>
-    
+
     <xsl:template match="@*[.='{referrer}']">
         <xsl:attribute name="{name()}">
             <xsl:value-of select="$referrer"/>
@@ -552,7 +571,8 @@
         <xsl:copy>
             <xsl:apply-templates select="child::node()"/>
             <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
-            <xsl:if test="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
+            <xsl:if
+                test="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
                 <script type="text/javascript" src="{$context}/javascript/{$version}/swfobject.js"><xsl:text> </xsl:text></script>
                 <script type="text/javascript">
                     <xsl:for-each select="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
@@ -681,10 +701,13 @@
                     <xsl:choose>
                         <xsl:when test="$class='bgTab'">
                             <xsl:variable name="href">
-                                <xsl:value-of select="concat($context,'/',$request-uri,'?loadTab=',$id)"/>
+                                <xsl:value-of
+                                    select="concat($context,'/',$request-uri,'?loadTab=',$id)"/>
                                 <!-- add query and source so tabbed portals work as a search template -->
                                 <xsl:if test="$q and $source">
-                                    <xsl:value-of select="concat('&amp;source=',$source,'&amp;q=',$q)"/>
+                                    <xsl:value-of
+                                        select="concat('&amp;source=',$source,'&amp;q=',$q)"
+                                    />
                                 </xsl:if>
                             </xsl:variable>
                             <a href="{$href}">

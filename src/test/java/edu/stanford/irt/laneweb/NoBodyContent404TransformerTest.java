@@ -29,8 +29,9 @@ public class NoBodyContent404TransformerTest {
         replay(this.consumer);
         this.transformer.startElement(null, "body", null, null);
         try {
-        this.transformer.endElement(null, "body", null);
-        } catch (RuntimeException e) {}
+            this.transformer.endElement(null, "body", null);
+        } catch (RuntimeException e) {
+        }
         verify(this.consumer);
     }
 

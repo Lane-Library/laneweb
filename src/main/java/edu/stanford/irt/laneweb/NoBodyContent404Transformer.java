@@ -19,8 +19,8 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
 /**
- * This transformer checks for elements within a body element and throws
- * a RuntimeException if there is none.
+ * This transformer checks for elements within a body element and throws a
+ * RuntimeException if there is none.
  * 
  * @author ceyates
  */
