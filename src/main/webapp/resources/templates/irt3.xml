@@ -103,7 +103,8 @@
                                     <option value="ej">eJournals</option>
                                     <option value="database">Databases</option>
                                     <option value="book">eBooks</option>
-                                    <option value="biotools">Biotools</option>
+                                    <!--<option value="biotools">Biotools</option>-->
+                                    <option value="software">Software</option>
                                     <option value="video">Video</option>
                                     <option value="cc">medCalcs</option>
                                     <option value="lanesite">Lane Site</option>
