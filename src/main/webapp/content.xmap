@@ -49,7 +49,8 @@
                 	<map:parameter name="persistent-login" value="{request-param:pl}"/>
                 	<map:parameter name="remove-persistent-login" value="{request-param:remove-pl}"/>
                 	<map:parameter name="lane-user-cookie" value="{cookie:u-lane}"/>
-                </map:transform type="xinclude">
+                </map:transform>
+                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="portals/history/historySearchResults.html" type="wildcard">
