@@ -37,6 +37,7 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
         this.valueToSubstitute = valueToSubstitute;
     }
 
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
         this.path = par.getParameter("path", this.defaultPath);

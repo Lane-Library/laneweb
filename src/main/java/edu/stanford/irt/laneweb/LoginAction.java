@@ -28,6 +28,7 @@ public class LoginAction implements Action {
 
     private UserInfoHelper userInfoHelper = null;
 
+    @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source,
             final Parameters params) throws ProcessingException, IOException, SystemException, InvalidKeyException,
             IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException,

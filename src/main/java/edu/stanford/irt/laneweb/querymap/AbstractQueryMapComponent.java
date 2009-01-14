@@ -43,6 +43,7 @@ public abstract class AbstractQueryMapComponent implements SitemapModelComponent
         this.queryMapper = queryMapper;
     }
 
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
         if (null == params) {
             throw new IllegalArgumentException("null params");

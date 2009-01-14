@@ -19,6 +19,7 @@ public class SearchEresourcesGenerator extends AbstractEresourcesGenerator {
 
     protected String query;
 
+    @SuppressWarnings("unchecked")
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {

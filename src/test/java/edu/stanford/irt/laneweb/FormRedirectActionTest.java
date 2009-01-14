@@ -26,6 +26,7 @@ public class FormRedirectActionTest {
         this.params = createMock(Parameters.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testAct() {
         expect(this.params.getParameter("q", null)).andReturn("cardiology");
@@ -36,6 +37,7 @@ public class FormRedirectActionTest {
         verify(this.params);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testActRegexChars() throws UnsupportedEncodingException {
         expect(this.params.getParameter("q", null)).andReturn("$2cardiology");
@@ -47,6 +49,7 @@ public class FormRedirectActionTest {
         verify(this.params);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testActBackslash() throws UnsupportedEncodingException {
         expect(this.params.getParameter("q", null)).andReturn("\\cardiology");

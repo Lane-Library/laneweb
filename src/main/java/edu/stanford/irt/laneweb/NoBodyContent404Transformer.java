@@ -77,6 +77,7 @@ public class NoBodyContent404Transformer implements Transformer, CacheableProces
      * .environment.SourceResolver, java.util.Map, java.lang.String,
      * org.apache.avalon.framework.parameters.Parameters)
      */
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
     }
 

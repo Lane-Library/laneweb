@@ -44,6 +44,7 @@ public class EresourcesCountGenerator implements Generator {
         this.collectionManager = collectionManager;
     }
 
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
         Request request = ObjectModelHelper.getRequest(objectModel);

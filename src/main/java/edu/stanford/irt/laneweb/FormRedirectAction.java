@@ -29,6 +29,7 @@ public class FormRedirectAction implements Action {
 
     private static final String REPLACE = "\\{search-terms\\}";
 
+    @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String src,
             final Parameters params) {
         Map<String, String> result = new HashMap<String, String>();

@@ -20,7 +20,7 @@ public class WebdashActionTest {
 
     private WebdashAction action;
 
-    private Map objectModel;
+    private Map<String, Object> objectModel;
 
     private Request request;
 
@@ -32,6 +32,7 @@ public class WebdashActionTest {
 
     private WebdashLogin webdashLogin;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.action = new WebdashAction();
@@ -43,6 +44,7 @@ public class WebdashActionTest {
         this.webdashLogin = createMock(WebdashLogin.class);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testRegister() {
         expect(this.objectModel.get("request")).andReturn(this.request);
@@ -69,6 +71,7 @@ public class WebdashActionTest {
         verify(this.webdashLogin);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testLogin() {
         expect(this.objectModel.get("request")).andReturn(this.request);
@@ -95,6 +98,7 @@ public class WebdashActionTest {
         verify(this.webdashLogin);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testError() {
         expect(this.objectModel.get("request")).andReturn(this.request);

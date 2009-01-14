@@ -55,6 +55,7 @@ public class SearchGenerator implements Generator {
         this.defaultTimeout = defaultTimeout;
     }
 
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
         Request request = (Request) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
@@ -66,6 +67,7 @@ public class SearchGenerator implements Generator {
         this.clearCache = request.getParameter("clearcache");
     }
 
+    @SuppressWarnings("unchecked")
     public void generate() throws IOException, SAXException, ProcessingException {
 
         if ("y".equalsIgnoreCase(this.clearCache)) {

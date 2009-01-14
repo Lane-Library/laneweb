@@ -20,6 +20,7 @@ public class HTTPClientSourceFactory implements SourceFactory {
     /**
      * Creates a {@link HTTPClientSource} instance.
      */
+    @SuppressWarnings("unchecked")
     public Source getSource(final String uri, final Map sourceParams) throws MalformedURLException, IOException {
         try {
             final HTTPClientSource source = new HTTPClientSource(uri, sourceParams, this.httpClient);

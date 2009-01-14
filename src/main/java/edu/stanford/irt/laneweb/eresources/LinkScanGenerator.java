@@ -94,6 +94,7 @@ public class LinkScanGenerator implements Generator {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3) throws ProcessingException,
             SAXException, IOException {
     }

@@ -105,6 +105,7 @@ public class UserInfoHelper {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public String getSunetId(final Request request) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException,
             NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeySpecException, UnsupportedEncodingException, DecoderException {
         if (this.cryptor == null) {

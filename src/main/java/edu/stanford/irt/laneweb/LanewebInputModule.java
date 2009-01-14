@@ -30,6 +30,7 @@ public class LanewebInputModule implements InputModule {
 
     private UserInfoHelper userInfoHelper;
 
+    @SuppressWarnings("unchecked")
     public Object getAttribute(final String key, final Configuration config, final Map objectModel) {
         Object result = null;
         Request request = ObjectModelHelper.getRequest(objectModel);
@@ -75,10 +76,12 @@ public class LanewebInputModule implements InputModule {
         return result;
     }
 
+    @SuppressWarnings("unchecked")
     public Iterator<String> getAttributeNames(final Configuration key, final Map config) {
         throw new UnsupportedOperationException();
     }
 
+    @SuppressWarnings("unchecked")
     public Object[] getAttributeValues(final String key, final Configuration config, final Map objectModel) {
         Object result = getAttribute(key, config, objectModel);
         if (result != null) {

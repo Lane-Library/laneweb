@@ -82,6 +82,7 @@ public class ExtensionsSuggestReader implements Reader {
         return 0;
     }
 
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters params) throws ProcessingException,
             SAXException, IOException {
         String q = params.getParameter("query", null);

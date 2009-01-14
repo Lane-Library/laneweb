@@ -16,6 +16,7 @@ import org.apache.cocoon.environment.SourceResolver;
 
 public class LanewebSessionAction implements Action {
 
+    @SuppressWarnings("unchecked")
     public Map act(final Redirector arg0, final SourceResolver arg1, final Map objectModel, final String arg3, final Parameters arg4)
             throws Exception {
         ObjectModelHelper.getRequest(objectModel).getSession();

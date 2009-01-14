@@ -24,7 +24,7 @@ public class VoyagerActionTest {
 
     private UserInfoHelper userInfoHelper;
 
-    private Map objectModel;
+    private Map<String, Object> objectModel;
 
     private Request request;
 
@@ -32,6 +32,7 @@ public class VoyagerActionTest {
 
     private LDAPPerson person;
 
+    @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.action = new VoyagerAction();

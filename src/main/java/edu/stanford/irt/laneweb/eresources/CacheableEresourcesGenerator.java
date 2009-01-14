@@ -20,6 +20,7 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
 
     private long expires;
 
+    @SuppressWarnings("unchecked")
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {

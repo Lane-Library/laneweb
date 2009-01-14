@@ -36,6 +36,7 @@ public class HTMLGenerator implements Generator, CacheableProcessingComponent {
      * @throws SAXException
      * @throws ProcessingException
      */
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
         this.source = resolver.resolveURI(src);

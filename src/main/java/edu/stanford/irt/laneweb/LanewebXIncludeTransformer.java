@@ -21,7 +21,6 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.avalon.framework.CascadingException;
@@ -79,6 +78,7 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
     /** The {@link SourceValidity} instance associated with this request. */
     protected MultiSourceValidity validity;
 
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String source, final Parameters parameters)
             throws ProcessingException, SAXException, IOException {
         this.resolver = resolver;
@@ -149,7 +149,7 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
          * Keep a map of namespaces prefix in the source document to pass it to
          * the XPointerContext for correct namespace identification.
          */
-        private Map namespaces = new HashMap();
+        private Map<String, String> namespaces = new HashMap<String, String>();
 
         /**
          * In case {@link #useFallbackLevel} > 0, then this should contain the
@@ -493,8 +493,7 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                             XPointer xptr;
                             xptr = XPointerFrameworkParser.parse(NetUtils.decodePath(xpointer));
                             XPointerContext context = new XPointerContext(xpointer, url, subPipe, LanewebXIncludeTransformer.this.manager);
-                            for (Iterator iter = this.namespaces.keySet().iterator(); iter.hasNext();) {
-                                String prefix = (String) iter.next();
+                            for (String prefix : this.namespaces.keySet()) {
                                 context.addPrefix(prefix, (String) this.namespaces.get(prefix));
                             }
                             xptr.process(context);

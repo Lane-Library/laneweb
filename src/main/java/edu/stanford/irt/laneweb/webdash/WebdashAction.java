@@ -36,6 +36,7 @@ public class WebdashAction implements Action {
         this.userInfoHelper = userInfoHelper;
     }
 
+    @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string,
             final Parameters param) {
 

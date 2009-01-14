@@ -39,6 +39,7 @@ public class DescribeGenerator implements Generator {
         this.metaSearchManager = msms.getMetaSearchManager();
     }
 
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
         Request request = (Request) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);

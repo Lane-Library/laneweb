@@ -1,9 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
@@ -15,9 +13,7 @@ import edu.stanford.irt.eresources.Eresource;
 
 public class XMLLizableBassettEresourceList implements XMLizable {
 
-    Collection<Eresource> bassetts;
-
-    Map<String, Map> regionCounter = new HashMap<String, Map>();
+    private Collection<Eresource> bassetts;
 
     private String NAMESPACE = "http://lane.stanford.edu/bassett/ns";
 
