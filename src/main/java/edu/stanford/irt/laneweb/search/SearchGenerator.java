@@ -67,7 +67,6 @@ public class SearchGenerator implements Generator {
         this.clearCache = request.getParameter("clearcache");
     }
 
-    @SuppressWarnings("unchecked")
     public void generate() throws IOException, SAXException, ProcessingException {
 
         if ("y".equalsIgnoreCase(this.clearCache)) {
