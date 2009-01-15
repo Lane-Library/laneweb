@@ -53,9 +53,9 @@ public class DescribeGenerator implements Generator {
 
         if (this.admin != null) {
             if ("rem".equals(this.admin)) {
-                this.metaSearchManager.removeSearchable(this.engineId);
+                this.metaSearchManager.disableSearchable(this.engineId);
             } else if ("add".equals(this.admin)) {
-                this.metaSearchManager.addSearchable(this.engineId);
+                this.metaSearchManager.enableSearchable(this.engineId);
             }
         }
 
