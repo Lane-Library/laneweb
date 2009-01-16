@@ -51,23 +51,24 @@ public class PersistentLoginAction implements Action {
 	    if(null != request.getQueryString())
 		secureUrl = secureUrl.concat("?").concat(request.getQueryString());
 	    redirector.globalRedirect(true, secureUrl);
+	    return null;
 	}
 	if ("true".equals(persistentLogin)) {
 	    createSunetIdCookie(sunetid, request, response);
 	} 
-	else if ("logout".equals(persistentLogin) || "true".equals(removePersistentLogin)) {
+	else if ("true".equals(removePersistentLogin)) {
 	    deleteSunetIdCookie(response);
 	}
-	if ("logout".equals(persistentLogin)) {
+	else if("logout".equals(persistentLogin)) {
+	    deleteSunetIdCookie(response);
 	    deleteWebauthCookie(response);
 	    HttpSession session = request.getSession(false);
 	    if (session != null)
 		session.removeAttribute(LanewebConstants.USER_INFO);
-	    redirector.globalRedirect(false, "https://weblogin.stanford.edu/logout");
+	    redirector.globalRedirect(true, "https://weblogin.stanford.edu/logout");
 	}
 	return null;
     }
-
 
     
     private void createSunetIdCookie(String sunetid, Request request, Response response) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException, IOException, DecoderException
@@ -140,6 +141,5 @@ public class PersistentLoginAction implements Action {
         }
         this.cryptor = cryptor;
     }
-    
 
 }
