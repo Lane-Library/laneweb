@@ -165,6 +165,12 @@ top:-10px;
 div.portalNavLinks h1 {
 display:inline;
 }
+#pl {
+float:right;
+}
+#hd h3 {
+clear:right;
+}
 /*Search CSS, to be cleaned-up*/
 #searchSubmit {
 vertical-align:text-bottom;

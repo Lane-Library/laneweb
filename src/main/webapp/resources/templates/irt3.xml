@@ -52,12 +52,15 @@
                                     Management Center</a>
                             </span>
                         </h2>
-                        <h3>
-                            <a href="http://med.stanford.edu/irt/" title="IRT.">
-                                <span>a division of IRT</span>
-                            </a>
-                        </h3>
-                        <div id="nav">
+                        <div>
+	                        <div id="pl"><!-- persistent login --></div>
+	                        <h3>
+	                            <a href="http://med.stanford.edu/irt/" title="IRT.">
+	                                <span>a division of IRT</span>
+	                            </a>
+	                        </h3>
+						</div>
+						<div id="nav">
                             <ul>
                                 <li>
                                     <a href="/online/ej.html" title="eJournals.">eJournals</a>
