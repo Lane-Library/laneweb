@@ -64,8 +64,8 @@ LANE.core = LANE.core || function() {
 //            if (t.submit !== undefined) {
 //                t.submit(e);
 //            }
-//            if (LANE.track) {
-//                LANE.track.trackEvent(e);
+//            if (LANE.tracking) {
+//                LANE.tracking.trackEvent(e);
 //            }
 //        });
         //calls 'clicked' function on target and any parent elements
@@ -78,10 +78,10 @@ LANE.core = LANE.core || function() {
                 }
                 t = t.parentNode;
             }
-            if (LANE.track) {
-                LANE.track.trackEvent(e);
+            if (LANE.tracking) {
+                LANE.tracking.trackEvent(e);
             //put in a delay for safari to make the tracking request:
-            if (YAHOO.env.ua.webkit && LANE.track.isTrackable(e)) {
+            if (YAHOO.env.ua.webkit && LANE.tracking.isTrackable(e)) {
                     t = e.target;
                     parent = t;
                     while (parent) {

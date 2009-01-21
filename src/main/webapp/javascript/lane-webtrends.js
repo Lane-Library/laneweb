@@ -327,7 +327,7 @@
     dcsMeta();
     dcsTag();
     
-    LANE.track.addTracker({
+    LANE.tracking.addTracker({
         track: function(trackingData){
             var args = [];
             if (trackingData.host !== undefined) {

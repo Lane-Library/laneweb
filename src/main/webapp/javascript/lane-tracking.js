@@ -1,4 +1,8 @@
-LANE.track = function(){
+LANE.tracking = function(){
+    //TODO more descriptive variable names
+    //TODO put conditionals into sub-functions
+    //TODO more thorough documentation
+    //TODO use 'track' less
     var trackers = [],
         getTrackingData = function(e){
             var node = e.srcElement || e.target,
@@ -112,43 +116,44 @@ LANE.track = function(){
                  }
         },
         isTrackable: function(e){
-            var node = e.srcElement || e.target, dh, nh, rel;
-            dh = document.location.host;
-            //find self ancestor that is <a>
+            var target = e.srcElement || e.target, link, documentHost, linkHost, relTokens;
+            documentHost = document.location.host;
             if (e.type == 'click') {
-                if (node.className == 'eLibraryTab') {
+                if (target.className == 'eLibraryTab') {
                     return true;
                 }
-                while (node && node.nodeName != 'A') {
-                    node = node.parentNode;
+                //find self ancestor that is <a>
+                link = target;
+                while (link && link.nodeName != 'A') {
+                    link = link.parentNode;
                 }
-                if (node) {
+                if (link) {
                     //for popups:
-                    if (node.rel) {
-                        rel = node.rel.split(' ');
-                        if (rel[0] == 'popup' && (rel[1] == 'local' || rel[1] == 'faq')) {
+                    if (link.rel && link.rel.indexOf('popup ') === 0) {
+                        relTokens = link.rel.split(' ');
+                        if (relTokens[1] == 'local' || relTokens[1] == 'faq') {
                             return true;
                         } else {
                             return false;
                         }
                     }
-                    nh = node.host;
-                    if (nh.indexOf(':') > -1) {
-                        nh = nh.substring(0, nh.indexOf(':'));
+                    linkHost = link.host;
+                    if (linkHost.indexOf(':') > -1) {
+                        linkHost = linkHost.substring(0, linkHost.indexOf(':'));
                     }
-                    if (nh == dh) {
+                    if (linkHost == documentHost) {
                         //track proxy logins
-                        if ((/secure\/login.html/).test(node.pathname)) {
+                        if ((/secure\/login.html/).test(link.pathname)) {
                             return true;
                         }
                         //otherwise rely on normal tracking for .html unless
                         //a parent has a clicked function
-                        if ((/\.html$/).test(node.pathname)) {
-                            while (node !== null) {
-                                if (node.clicked && !node.rel) {
+                        if ((/\.html$/).test(link.pathname)) {
+                            while (link !== null) {
+                                if (link.clicked && !link.rel) {
                                     return true;
                                 }
-                                node = node.parentNode;
+                                link = link.parentNode;
                             }
                             return false;
                         }
@@ -161,16 +166,16 @@ LANE.track = function(){
                 //no href, not trackable
                 return false;
             } else if (e.type == 'mouseover'){
-                while (node) {
-                    if (node.trackable) {
+                while (target) {
+                    if (target.trackable) {
                         return true;
                     }
-                    node = node.parentNode;
+                    target = target.parentNode;
                 }
                 return false;
             } else if (e.type == 'submit') {
-                if (node.action.indexOf(document.location.host) == -1) {
-                    if (node.isValid !== undefined && !node.isValid) {
+                if (target.action.indexOf(document.location.host) == -1) {
+                    if (target.isValid !== undefined && !target.isValid) {
                         return false;
                     }
                     return true;
@@ -181,3 +186,6 @@ LANE.track = function(){
         }
     };
 }();
+
+//for temporary backwards compatibility:
+LANE.track = LANE.tracking;

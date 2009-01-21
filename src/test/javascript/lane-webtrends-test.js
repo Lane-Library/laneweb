@@ -15,14 +15,14 @@ var LANEWebtrendsTestCase = new TestCase({
     testTrack: function() {
         var e = document.body.getElementsByTagName('img'), i;
         for (i = 0; i < e.length; i++) {
-            if (LANE.track.isTrackable(e[i])) {
-                LANE.track.track(e[i]);
+            if (LANE.tracking.isTrackable(e[i])) {
+                LANE.tracking.track(e[i]);
             }
         }
         e = document.body.getElementsByTagName('a');
         for (i = 0; i < e.length; i++) {
-            if (LANE.track.isTrackable(e[i])) {
-                LANE.track.track(e[i]);
+            if (LANE.tracking.isTrackable(e[i])) {
+                LANE.tracking.track(e[i]);
             }
         }
     }

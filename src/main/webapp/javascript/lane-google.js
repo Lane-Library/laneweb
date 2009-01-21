@@ -15,7 +15,7 @@ YAHOO.util.Event.addListener(this, 'load', function() {
                 pageTracker._initData();
                 pageTracker._trackPageview();
                 pageTracker._setVar(LANE.core.getMetaContent('WT.seg_1'));
-                LANE.track.addTracker({
+                LANE.tracking.addTracker({
                     track: function(trackingData){
                         if (trackingData.external) {
                             pageTracker._trackPageview('/OFFSITE/' + trackingData.title);
