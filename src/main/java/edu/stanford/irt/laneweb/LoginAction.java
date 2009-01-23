@@ -40,6 +40,7 @@ public class LoginAction implements Action {
         if (sunetid == null) {
             String redirectUrl = "/secure/login.html?".concat(request.getQueryString());
             redirector.redirect(true, redirectUrl);
+            return null;
         }
         String ticket = userInfo.getTicket().toString();
         if (ticket == null) {
