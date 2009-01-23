@@ -83,9 +83,12 @@ public class XHTMLizableEresourceList implements XMLizable {
         XMLUtils.startElement(handler, XHTML_NS, UL);
         Version impactFactor = null;
         for (Version version : eresource.getVersions()) {
-            if (version.getSubsets().contains("impact factor")) {
-                impactFactor = version;
-                continue;
+            if (null == impactFactor && version.getLinks().size() == 1) {
+                Link link = version.getLinks().iterator().next();
+                if ("Impact Factor".equals(link.getLabel())) {
+                    impactFactor = version;
+                    continue;
+                }
             }
             Link passwordLink = null;
             for (Link link : version.getLinks()) {
