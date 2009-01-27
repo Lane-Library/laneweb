@@ -129,13 +129,13 @@
                     <map:parameter name="parameter-name" value="category"/>
                     <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/archives/{mt-munge:{request-param:category}}.xml"/>
                     <map:select type="resource-exists">
-                        <map:when test="xsl/individual-faq.xsl">
-                            <map:transform type="saxon" src="xsl/individual-faq.xsl">
+                        <map:when test="xsl/category-faq.xsl">
+                            <map:transform type="saxon" src="xsl/category-faq.xsl">
                                 <map:parameter name="category" value="{request-param:category}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/individual-faq.xsl">
+                            <map:transform type="saxon" src="context://xsl/category-faq.xsl">
                                 <map:parameter name="category" value="{request-param:category}"/>
                             </map:transform>
                         </map:otherwise>

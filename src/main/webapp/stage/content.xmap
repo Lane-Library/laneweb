@@ -97,7 +97,7 @@
                     pattern=".+">
                     <map:parameter name="parameter-name" value="category"/>
                     <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/archives/{mt-munge:{request-param:category}}.xml"/>
-                    <map:transform type="saxon" src="context://xsl/individual-faq.xsl"/>
+                    <map:transform type="saxon" src="context://xsl/category-faq.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>

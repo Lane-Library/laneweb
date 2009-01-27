@@ -64,38 +64,19 @@
         </xsl:attribute>
     </xsl:template>
     
-    <xsl:template match="h:div[@id='rightColumn']//xi:include/attribute::href">
-        <xsl:attribute name="href">
-            <xsl:value-of select="."/>
-            <xsl:value-of select="lower-case(replace(normalize-space(replace($primary-category,'[^\w\s]',' ')),' ','_'))"/>
-        </xsl:attribute>
+    <xsl:template match="h:dl">
+        <xsl:copy>
+            <xsl:apply-templates select="h:dt">
+                <xsl:sort select="upper-case(.)"/>
+            </xsl:apply-templates>
+        </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="h:div[@class='excerpt']"/>
-
-    <!--<xsl:template match="h:div[@id='mainColumn']">
-        <xsl:for-each-group select="child::node()" group-adjacent="lw:inline(.)">
-            <xsl:choose>
-                <xsl:when test="current-grouping-key()">
-                    <p>
-                        <xsl:apply-templates select="current-group()"/>
-                    </p>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates select="current-group()"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each-group>
+    <xsl:template match="h:dt">
+        <xsl:copy>
+            <xsl:apply-templates select="h:a"/>
+        </xsl:copy>
+        <xsl:apply-templates select="following-sibling::h:dd[1]"/>
     </xsl:template>
-
-
-    <xsl:function name="lw:inline" as="xs:boolean">
-        <xsl:param name="node" as="node()"/>
-        <xsl:sequence
-            select="($node instance of text() and string-length(normalize-space($node)) > 0) or
-            $node[self::h:u|self::h:b|self::h:i|self::h:strong|self::h:span|self::h:em
-            |self::h:br|self::h:a]"
-        />
-    </xsl:function>-->
 
 </xsl:stylesheet>
