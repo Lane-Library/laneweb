@@ -44,13 +44,8 @@
         <category name="Library Access" label="access"/>
     </xsl:variable>
     
-    <!-- laneweb.xsl is expecting LW.faqCategory for the breadcrumb business -->
-    <xsl:template match="h:meta[attribute::name = 'primary-category']/attribute::name">
-        <xsl:attribute name="name">LW.faqCategory</xsl:attribute>
-    </xsl:template>
-    
     <!-- don't pass on meta elements only required here -->
-    <xsl:template match="h:meta[not(attribute::name='primary-category')]"/>
+    <xsl:template match="h:meta[not(attribute::name='LW.faqCategory')]"/>
 
     <xsl:template match="h:div[@id='leftColumn']//xi:include/attribute::href">
         <xsl:variable name="root-category-string"
