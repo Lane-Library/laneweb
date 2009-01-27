@@ -52,7 +52,7 @@
     <!-- don't pass on meta elements only required here -->
     <xsl:template match="h:meta[not(attribute::name='primary-category')]"/>
 
-    <xsl:template match="h:div[@id='leftColumn']/xi:include/attribute::href">
+    <xsl:template match="h:div[@id='leftColumn']//xi:include/attribute::href">
         <xsl:variable name="root-category-string"
             select="$category-map/child::node()[attribute::name = $root-category]/attribute::label"/>
         <xsl:attribute name="href">
@@ -84,7 +84,7 @@
         <xsl:apply-templates select="following-sibling::h:dd[1]"/>
     </xsl:template>
     
-    <xsl:template match="h:div[@id='rightColumn']/xi:include/attribute::href">
+    <xsl:template match="h:div[@id='rightColumn']//xi:include/attribute::href">
         <xsl:attribute name="href">
             <xsl:value-of select="."/>
             <xsl:value-of select="lower-case(replace(normalize-space(replace($primary-category,'[^\w\s]',' ')),' ','_'))"/>
