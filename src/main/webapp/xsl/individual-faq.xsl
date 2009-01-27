@@ -7,7 +7,7 @@
     <xsl:output method="xml"/>
 
     <xsl:variable name="primary-category"
-        select="/h:html/h:head/h:meta[attribute::name='primary-category']/attribute::content"/>
+        select="/h:html/h:head/h:meta[attribute::name='LW.faqCategory']/attribute::content"/>
 
     <xsl:variable name="root-category">
         <xsl:choose>
@@ -84,10 +84,11 @@
         <xsl:apply-templates select="following-sibling::h:dd[1]"/>
     </xsl:template>
     
-    <xsl:template match="h:div[@id='rightColumn']/h:div/h:ul">
-        <xsl:copy>
-            <li><a href="/howto/index.html?category={lower-case(replace(normalize-space(replace($primary-category,'[^\w\s]',' ')),' ','_'))}">More</a></li>
-        </xsl:copy>
+    <xsl:template match="h:div[@id='rightColumn']/xi:include/attribute::href">
+        <xsl:attribute name="href">
+            <xsl:value-of select="."/>
+            <xsl:value-of select="lower-case(replace(normalize-space(replace($primary-category,'[^\w\s]',' ')),' ','_'))"/>
+        </xsl:attribute>
     </xsl:template>
 
     <!--<xsl:template match="h:div[@id='mainColumn']">
