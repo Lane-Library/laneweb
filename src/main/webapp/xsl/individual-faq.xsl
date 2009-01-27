@@ -43,6 +43,14 @@
         <category name="Policies" label="policies"/>
         <category name="Library Access" label="access"/>
     </xsl:variable>
+    
+    <!-- laneweb.xsl is expecting LW.faqCategory for the breadcrumb business -->
+    <xsl:template match="h:meta[attribute::name = 'primary-category']/attribute::name">
+        <xsl:attribute name="name">LW.faqCategory</xsl:attribute>
+    </xsl:template>
+    
+    <!-- don't pass on meta elements only required here -->
+    <xsl:template match="h:meta[not(attribute::name='primary-category')]"/>
 
     <xsl:template match="h:div[@id='leftColumn']/xi:include/attribute::href">
         <xsl:variable name="root-category-string"
@@ -60,8 +68,29 @@
             </xsl:choose>
         </xsl:attribute>
     </xsl:template>
+    
+    <xsl:template match="h:dl">
+        <xsl:copy>
+            <xsl:apply-templates select="h:dt">
+                <xsl:sort select="upper-case(.)"/>
+            </xsl:apply-templates>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:dt">
+        <xsl:copy>
+            <xsl:apply-templates/>
+        </xsl:copy>
+        <xsl:apply-templates select="following-sibling::h:dd[1]"/>
+    </xsl:template>
+    
+    <xsl:template match="h:div[@id='rightColumn']/h:div/h:ul">
+        <xsl:copy>
+            <li><a href="/howto/index.html?category={lower-case(replace(normalize-space(replace($primary-category,'[^\w\s]',' ')),' ','_'))}">More</a></li>
+        </xsl:copy>
+    </xsl:template>
 
-    <xsl:template match="h:div[@id='mainColumn']">
+    <!--<xsl:template match="h:div[@id='mainColumn']">
         <xsl:for-each-group select="child::node()" group-adjacent="lw:inline(.)">
             <xsl:choose>
                 <xsl:when test="current-grouping-key()">
@@ -84,6 +113,6 @@
             $node[self::h:u|self::h:b|self::h:i|self::h:strong|self::h:span|self::h:em
             |self::h:br|self::h:a]"
         />
-    </xsl:function>
+    </xsl:function>-->
 
 </xsl:stylesheet>
