@@ -21,7 +21,7 @@
     
     <xsl:template match="h:dl">
         <ul>
-            <xsl:apply-templates select="h:dt[contains(comment(),'_show_me_')]">
+            <xsl:apply-templates select="h:dt[contains(@class,'_show_me_')]">
                 <xsl:sort select="upper-case(.)"/>
             </xsl:apply-templates>
             <li class="moreItem"><a href="/howto/index.html?category={$category}">More</a></li>
@@ -33,7 +33,5 @@
             <xsl:apply-templates/>
         </li>
     </xsl:template>
-    
-    <xsl:template match="child::comment()" priority=".25"/>
     
 </xsl:stylesheet>
