@@ -95,7 +95,10 @@
     </bean>
     
     <bean id="edu.stanford.irt.querymap.DescriptorManager"
-        class="edu.stanford.irt.querymap.DescriptorManager"/>
+    class="edu.stanford.irt.querymap.DescriptorManager"/>
+    
+    <bean name="org.apache.cocoon.components.modules.input.InputModule/mt-munge"
+        class="edu.stanford.irt.laneweb.MTMungingInputModule"/>
     
     <bean name="org.apache.cocoon.components.modules.input.InputModule/laneweb"
         class="edu.stanford.irt.laneweb.LanewebInputModule">
@@ -276,9 +279,6 @@
     
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
         class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
-    
-    <bean name="org.apache.cocoon.transformation.Transformer/no-body-content-404"
-        class="edu.stanford.irt.laneweb.NoBodyContent404Transformer" scope="prototype"/>
 
     <bean name="org.apache.cocoon.reading.Reader/resource"
         class="org.apache.cocoon.reading.ResourceReader" scope="prototype"/>

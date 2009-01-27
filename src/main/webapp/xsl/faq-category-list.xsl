@@ -21,7 +21,7 @@
     
     <xsl:template match="h:dl">
         <ul>
-            <xsl:apply-templates select="h:dt[contains(@class,'_show_me_')]">
+            <xsl:apply-templates select="h:dt[contains(h:span,'_show_me_')]">
                 <xsl:sort select="upper-case(.)"/>
             </xsl:apply-templates>
             <li class="moreItem"><a href="/howto/index.html?category={$category}">More</a></li>
@@ -30,7 +30,7 @@
     
     <xsl:template match="h:dt">
         <li>
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="child::h:a"/>
         </li>
     </xsl:template>
     

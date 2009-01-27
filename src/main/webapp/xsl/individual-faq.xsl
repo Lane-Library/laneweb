@@ -74,7 +74,7 @@
     
     <xsl:template match="h:dt">
         <xsl:copy>
-            <xsl:apply-templates/>
+            <xsl:apply-templates select="h:a"/>
         </xsl:copy>
         <xsl:apply-templates select="following-sibling::h:dd[1]"/>
     </xsl:template>
