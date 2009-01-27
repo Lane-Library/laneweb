@@ -15,6 +15,10 @@
         <xsl:copy-of select="self::node()"/>
     </xsl:template>
     
+    <xsl:template match="h:html">
+        <xsl:apply-templates select="descendant::h:dl"/>
+    </xsl:template>
+    
     <xsl:template match="h:dl">
         <ul>
             <xsl:apply-templates select="h:dt[contains(comment(),'_show_me_')]"/>
