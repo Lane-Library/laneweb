@@ -24,8 +24,8 @@ YAHOO.namespace("plugin","behavior");
 	navRelExternal = function (layer, args) {
 		  var t, r, el = args[1].anchor;
 		  if (!(args[1].flagged || args[1].decrepitate) && el) {
-			   r = el.getAttribute("rel"),
-			  	  t = el.getAttribute("target");
+			   r = el.getAttribute("rel");
+			   t = el.getAttribute("target");
 		  	  if ((!t || (t === '')) && (r == 'external')) {
 				el.setAttribute("target", "blank");
 		      }
@@ -142,8 +142,7 @@ YAHOO.namespace("plugin","behavior");
         	if (m.stop) {
         	  	$E.stopEvent(e);
         	}
-        }, 150
-      );
+        }, 150 );
 	};
 	obj.onRollOver = function(e){
 	  this.onEventTrigger ('rollover', e, {
@@ -168,11 +167,11 @@ YAHOO.namespace("plugin","behavior");
 	obj.getActionName = function (el, depot) {
 	  depot = depot || {};
 	  var b = null, r = null,
-	      f = ($D.inDocument(el)?function(b){return $D.hasClass(el, b)}:function(b){return el.hasClass(b);}); // f: check is certain object has a classname
+	      f = ($D.inDocument(el)?function(b){return $D.hasClass(el, b);}:function(b){return el.hasClass(b);}); // f: check is certain object has a classname
 	  if (el && ($L.isObject(el) || (el = $( el )))) {
 	  	try{
 			r = el.getAttribute("rel"); // if rel is available...
-		}catch(e){};
+		}catch(e){}
 		for (b in depot) { // behaviors in the depot...
 			if ((depot.hasOwnProperty(b)) && (f(b) || (b === r))) {
 				return b;

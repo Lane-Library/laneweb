@@ -74,7 +74,8 @@ version: 1.5.0
         // on rollover action behavior...
 		$B.on('rollover', function (layer, args) {
 		  var list, item, onWayOut;
-		  if (item = _getItem(args[1].target)) {
+		  item = _getItem(args[1].target);
+		  if (item) {
 		    if ((list = _getList(item)) && list.rollover) {
 				if (!list.selected) {
 		            $D.addClass(list.el, _selector);
@@ -144,7 +145,8 @@ version: 1.5.0
         function _getList ( item ) {
           var list = null, el = item.el;
           if (el && ($L.isObject(el) || (el = $D.get (el)))) {
-            if (el = $B.getOwnerByClassName (el, 'yui-cms-accordion')) {
+          	el = $B.getOwnerByClassName (el, 'yui-cms-accordion');
+            if (el) {
                 // creating the list literal based on the classnames defined for the accordion wrapper
                 list = {
                     el: el,
@@ -197,7 +199,7 @@ version: 1.5.0
 	        }
         }
         function _openItem ( item, list ) {
-            var conf = [], anim,  g = [], m = [], fs, onFinish, i;
+            var conf = [], anim,  g = [], m = [], fs, onFinish, i, test = [], choice;
             if (list || (list = _getList (item))) {
               // if the item is not already opened
               if (!item.selected) {
@@ -212,10 +214,12 @@ version: 1.5.0
     	          conf[list.orientation] = {to: item.size[list.orientation]};
     	          // scrolling effect
     	          if (!list.manually) {
-    	            conf['scroll'] = {from: (list.orientation=='width'?[item.size[list.orientation],0]:[0,item.size[list.orientation]]), to: [0,0]};
+    	          	choice = 'scroll';
+    	            conf[choice] = {from: (list.orientation=='width'?[item.size[list.orientation],0]:[0,item.size[list.orientation]]), to: [0,0]};
     	          }
     	          if (list.fade) { // appliying fadeIn
-    	            conf['opacity'] = {to: 1};
+    	            choice ='opacity';
+    	            conf [opacity] = { to: 1};
     	          }
     	          anim = new YAHOO.util.Scroll(item.slide, conf, list.timer, list.effect);
             	  $D.addClass(item.el, _sliding);
@@ -252,16 +256,18 @@ version: 1.5.0
 	        return false;
         }
         function _closeItem ( item, list, grouping ) {
-            var conf = [], anim, fs, i;
+            var conf = [], anim, fs, i, choice;
             if (item && (list || (list = _getList (item)))) {
 	            // closing the item, based on the list's orientation, timer and effect attribute...
 	            conf[list.orientation] = {to: ((list.orientation=='width'||list.fixIE)?1:0)}; // hack for vertical accordion issue on Safari and Opera
 	            if (list.fade) { // appliying fadeIn
-	              conf['opacity'] = {to: 0};
-	            }
+	            	choice = 'opacity'; 
+	              	conf[choice] = {to: 0};
+	             }
     	        // scrolling effect
     	        if (!list.manually) {
-    	          conf['scroll'] = {to: (list.orientation=='width'?[item.size[list.orientation],0]:[0,item.size[list.orientation]])};
+    	        	choice = 'scroll'; 
+	              	conf[choice] = {to: (list.orientation=='width'?[item.size[list.orientation],0]:[0,item.size[list.orientation]])};
     	        }
                 // if the animation is underway: we need to stop it...
                 anim = _anims[$E.generateId(item.slide)];
@@ -318,8 +324,8 @@ version: 1.5.0
 		* @return boolean
 		*/
 		obj.expand = function ( el ) {
-		    var list;
-		    if (list = _getList ({el:el})) {
+		    var list = _getList ({el:el});
+		    if (list ) {
 		        return _reset (list, {force:true, expand:true});
 		    }
 		};
@@ -330,8 +336,8 @@ version: 1.5.0
 		* @return boolean
 		*/
 		obj.collapse = function ( el ) {
-		    var list;
-		    if (list = _getList ({el:el})) {
+		    var list = _getList ({el:el});
+		    if (list ) {
 		        return _reset (list, {force:true});
 		    }
 		};
@@ -342,8 +348,8 @@ version: 1.5.0
 		* @return boolean
 		*/
 		obj.open = function ( el ) {
-		    var item;
-		    if (item = _getItem(el)) {
+		    var item = _getItem(el);
+		    if (item) {
 		        return _openItem (item);
 		    }
 		};
@@ -355,8 +361,10 @@ version: 1.5.0
 		*/
 		obj.close = function ( el ) {
 		    var item, list;
-		    if (item = _getItem(el)) {
-		        if (list = _getList (item)) {
+		    item = _getItem(el);
+		    if (item ) {
+		    	list = _getList (item);
+		        if (list ) {
 		          // if the item is already opened, and is multiple and not persistent
 		          return ((item.selected && (list.multiple || !list.persistent))?_closeItem (item, list):false);
 		        }
@@ -370,8 +378,10 @@ version: 1.5.0
 		*/
 		obj.toggle = function ( el ) {
 		    var item, list;
-		    if (item = _getItem(el)) {
-		        if (list = _getList (item)) {
+		    item = _getItem(el);
+		    if (item) {
+		    	list = _getList (item);
+		        if (list) {
 		          // if the item is already opened, and is multiple and not persistent
 		          return ((item.selected && (list.multiple || !list.persistent))?_closeItem (item, list):_openItem (item, list));
 		        }
@@ -385,8 +395,10 @@ version: 1.5.0
 		*/
 		obj.remove = function ( el ) {
 		    var item, list;
-		    if (item = _getItem(el)) {
-		        if (list = _getList (item)) {
+		    item = _getItem(el);
+		    if (item) {
+		    	list = _getList (item);
+		        if (list) {
 		          return _removeItem (item, list);
 		        }
 		    }
