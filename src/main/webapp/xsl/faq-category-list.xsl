@@ -21,17 +21,17 @@
     
     <xsl:template match="h:dl">
         <ul>
-            <xsl:apply-templates select="h:dt[contains(comment(),'_show_me_')]/node()">
+            <xsl:apply-templates select="h:dt[contains(comment(),'_show_me_')]">
                 <xsl:sort select="upper-case(.)"/>
             </xsl:apply-templates>
             <li class="moreItem"><a href="/howto/index.html?category={$category}">More</a></li>
         </ul>
     </xsl:template>
     
-    <xsl:template match="h:entry">
-        <dt>
+    <xsl:template match="h:dt">
+        <li>
             <xsl:apply-templates/>
-        </dt>
+        </li>
     </xsl:template>
     
     <xsl:template match="child::comment()" priority=".25"/>
