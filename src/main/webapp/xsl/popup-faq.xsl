@@ -21,7 +21,7 @@
         <xsl:copy-of select="."/>
     </xsl:template>
 
-    <xsl:template match="h:div[@class='excerpt']">
+    <xsl:template match="h:div[@id='excerpt']">
         <dl>
             <dt>
                 <a href="/howto/index.html?id={$id}">

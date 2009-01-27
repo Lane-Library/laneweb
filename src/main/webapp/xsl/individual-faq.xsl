@@ -71,7 +71,7 @@
         </xsl:attribute>
     </xsl:template>
     
-    <xsl:template match="h:div[@class='excerpt']"/>
+    <xsl:template match="h:div[@class='extra']"/>
 
     <!--<xsl:template match="h:div[@id='mainColumn']">
         <xsl:for-each-group select="child::node()" group-adjacent="lw:inline(.)">
