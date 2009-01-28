@@ -188,7 +188,7 @@
                 </div>
             </div>
             <ul id="gft">
-                <li>&#169;<a href="http://stanfordmedicine.stanford.edu"><span>2009</span>
+                <li>&#169;<a href="http://stanfordmedicine.stanford.edu"><span><?laneweb current-year?></span>
                         Stanford Medicine</a></li>
                 <li>
                     <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>

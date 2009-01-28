@@ -181,6 +181,9 @@
             <xsl:when test=".='mesh'">
                 <xsl:value-of select="$m"/>
             </xsl:when>
+            <xsl:when test=".='current-year'">
+                <xsl:value-of select="format-dateTime(current-dateTime(),'[Y,4]')"/>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
 
