@@ -8,7 +8,7 @@
     <xsl:variable name="title" select="/h:html/h:head/h:title/text()"/>
     
     <xsl:template match="/">
-        <xsl:apply-templates select="descendant::h:div[@class='excerpt']"/>
+        <xsl:apply-templates select="descendant::h:div[@id='excerpt']"/>
     </xsl:template>
 
     <xsl:template match="child::node()">
