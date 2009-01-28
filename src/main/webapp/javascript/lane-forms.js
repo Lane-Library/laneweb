@@ -51,7 +51,10 @@
 			    	for ( y = 0; y < reqOneOfSet.split(",").length; y++ ){
 				    	ff = this.elements[reqOneOfSet.split(",")[0]]; // set focus to first field in req list
 						if ( this.elements[reqOneOfSet.split(",")[y]].value ){
-				            ( this.elements[reqOneOfSet.split(",")[y]].onchange !== undefined ) ? this.elements[reqOneOfSet.split(",")[y]].onchange(): ''; // fire on change validation if field has validation pattern as well
+						    // fire onchange validation if field has validation pattern as well
+				            if ( this.elements[reqOneOfSet.split(",")[y]].onchange !== undefined ){
+				                this.elements[reqOneOfSet.split(",")[y]].onchange();
+				            }
 				            if ( !YAHOO.util.Dom.hasClass(this.elements[reqOneOfSet.split(",")[y]], "invalid-field") ) {
 				                this.isValid = true;
 				            }
@@ -61,7 +64,9 @@
 			    
 			    if ( this.isValid === true ) {
 			    	// remove validation-patterns element so it's not sent as form data
-			    	( this.elements["validation-patterns"] ) ? this.removeChild(this.elements["validation-patterns"]) : '';
+			    	if ( this.elements["validation-patterns"] ) {
+			    	    this.removeChild(this.elements["validation-patterns"]);
+			    	}
 				    // call any delayed onsubmit JS we may have found and overridden in markup
 				    if ( this.delayedOnsubmit ){
 				    	this.delayedOnsubmit();
@@ -98,10 +103,14 @@
 			    }
 			    if ( value.search(field.pattern) == -1 || (field.type == "radio" && radioSelected === false) ) {
 			        YAHOO.util.Dom.addClass(field, 'invalid-field');
-			        ( LANE.forms.getFieldLabel(field) ) ? YAHOO.util.Dom.addClass(LANE.forms.getFieldLabel(field), 'invalid-label'): '';
+			        if ( LANE.forms.getFieldLabel(field) ) {
+			            YAHOO.util.Dom.addClass(LANE.forms.getFieldLabel(field), 'invalid-label');
+			        }
 			    } else {
 			        YAHOO.util.Dom.removeClass(field, 'invalid-field');
-			        ( LANE.forms.getFieldLabel(field) ) ? YAHOO.util.Dom.removeClass(LANE.forms.getFieldLabel(field), 'invalid-label'): '';
+			        if ( LANE.forms.getFieldLabel(field) ) {
+			            YAHOO.util.Dom.removeClass(LANE.forms.getFieldLabel(field), 'invalid-label');
+			        }
 			    }
 		    },
 		    /* Convenience method for fetching first label for a given element
@@ -153,7 +162,7 @@
 	        		form.delayedOnsubmit = form.onsubmit;
 	        		form.onsubmit = '';
 	        	}
-	        	YAHOO.util.Event.addListener(form,'submit',LANE.forms.validateFormOnSubmit)
+	        	YAHOO.util.Event.addListener(form,'submit',LANE.forms.validateFormOnSubmit);
 	        }
 		}
     });
