@@ -38,14 +38,14 @@
 	
 		                for (i = 0; i < metasearchElements.length; i++) {
 	                        result = results.resources[metasearchElements[i].id];
-	                        if( result != undefined ){
+	                        if( result !== undefined ){
 		                        if (!result.status) {
 		                            needMore = true;
 		                        }
 					            if ( result.url && 
 					            		(mergedMode && result.status == 'successful') ||
 					            		(!mergedMode && result.status && result.status != 'running') ) {
-		                        	result.name = (metasearchElements[i].innerHTML) ? metasearchElements[i].innerHTML : ''
+		                        	result.name = (metasearchElements[i].innerHTML) ? metasearchElements[i].innerHTML : '';
 					                metasearchElements[i].setAttribute('href', result.url);
 					                // fix for IE7 (@ in text of element will cause element text to be replaced by href value
 					                // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
@@ -84,7 +84,7 @@
 							if (remainingTime > 20 * 1000) {
 								sleepingTime = 10000;
 							}
-		                    setTimeout("LANE.search.metasearch.getResultCounts()",sleepingTime);
+		                    setTimeout(LANE.search.metasearch.getResultCounts,sleepingTime);
 		                }
 		                else{
 			            	LANE.search.stopSearch();
@@ -92,7 +92,7 @@
 		            }// end request success definition
 		        });// end async request
 		        
-		    }// end getResultCounts
+		    };// end getResultCounts
 		    
 			// add handler for zeroHit toggle if id=toggleZeros present
 	    	YAHOO.util.Event.onAvailable('toggleZeros',function() {
@@ -100,7 +100,7 @@
 				    var toggleEl = document.getElementById('toggleZeros'), 
 				    	zeroResources = YAHOO.util.Dom.getElementsByClassName('zeroHit'), 
 				    	searchCats = YAHOO.util.Dom.getElementsByClassName('searchCategory'),
-				    	display, y;
+				    	display, i, y;
 					if ( toggleEl.innerHTML.match(/Show/) ){
 						display = "block";
 						toggleEl.innerHTML = toggleEl.innerHTML.replace("Show","Hide");
@@ -109,11 +109,11 @@
 						display = "none";
 						toggleEl.innerHTML = toggleEl.innerHTML.replace("Hide","Show");
 					}
-				    for (i in zeroResources) {
+				    for (i = 0 ; i < zeroResources.length; i++) {
 				        YAHOO.util.Dom.setStyle(zeroResources[i], 'display', display);
 				    }
 				    // toggle h3 header as well if all children in searchCat are zeroHit
-				    for (y in searchCats) {
+				    for (y = 0; y < searchCats.length; y++) {
 				        if (YAHOO.util.Dom.getElementsByClassName('zeroHit', '', searchCats[y]).length == searchCats[y].getElementsByTagName('li').length) {
 				            YAHOO.util.Dom.setStyle(YAHOO.util.Dom.getFirstChild(searchCats[y]), 'display', display);
 				        }
