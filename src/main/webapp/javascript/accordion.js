@@ -199,7 +199,7 @@ version: 1.5.0
 	        }
         }
         function _openItem ( item, list ) {
-            var conf = [], anim,  g = [], m = [], fs, onFinish, i, test = [], choice;
+            var conf = [], anim,  g = [], m = [], fs, onFinish, i, choice;
             if (list || (list = _getList (item))) {
               // if the item is not already opened
               if (!item.selected) {
