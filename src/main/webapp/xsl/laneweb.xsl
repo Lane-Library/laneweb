@@ -199,50 +199,30 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="h:div[@id='pl']">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:choose>
-                <xsl:when test="$proxy-links = 'true' ">
-                    <xsl:choose>
-                        <xsl:when test="$sunetid != ''">
-                            <xsl:text>Off Campus Login: </xsl:text>
-                            <xsl:value-of select="$full-name"/>
-                            <xsl:text> | </xsl:text>
-                            <a>
-                                <xsl:attribute name="href">
-                                    <xsl:value-of select="$context"/>
-                                    <xsl:text>/persistentlogin.html</xsl:text>
-                                </xsl:attribute>
-                                <xsl:text>Account</xsl:text>
-                            </a>
-                            <xsl:text> | </xsl:text>
-                            <a>
-                                <xsl:attribute name="href">
-                                    <xsl:value-of select="$context"/>
-                                    <xsl:text>/persistentlogin.html?pl=logout</xsl:text>
-                                </xsl:attribute>
-                                <xsl:text>Logout</xsl:text>
-                            </a>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <a>
-                                <xsl:attribute name="href">
-                                    <xsl:value-of select="$context"/>
-                                    <xsl:text>/secure/login.html</xsl:text>
-                                </xsl:attribute>
-                                <xsl:text>Off Campus Login</xsl:text>
-                            </a>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text>&#160;</xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:copy>
-    </xsl:template>
 
+    <!-- persistent login  -->
+	<xsl:template match="h:div[@id='pl-login']">
+		<xsl:if test="$sunetid != '' and $proxy-links = 'true'">
+			<xsl:copy>
+	    	    <xsl:apply-templates select="@*|node()"/>
+	        </xsl:copy>
+		</xsl:if>
+	</xsl:template>
+   
+    <xsl:template match="h:span[@id='user-full-name']">
+      <xsl:copy>
+        <xsl:value-of select="$full-name"/>
+      </xsl:copy>
+    </xsl:template>
+   
+    <xsl:template match="h:div[@id='pl-logout'] ">
+      <xsl:if test="$sunetid = '' and $proxy-links = 'true'">
+        <xsl:copy>
+          <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+      </xsl:if>
+	</xsl:template>
+	<!-- END persistent login  -->
 
     <xsl:template
         match="h:div[@id='leftColumn']|h:div[@id='rightColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">

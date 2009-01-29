@@ -168,6 +168,9 @@ display:inline;
 #pl {
 float:right;
 }
+#pl div{
+display:inline;
+}
 #hd h3 {
 clear:right;
 }
