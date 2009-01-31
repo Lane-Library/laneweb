@@ -128,6 +128,7 @@
                             value="{naming:java:comp/env/stage-base}/resources/querymap/resource-maps.xml"/>
                         <map:parameter name="descriptor-weights"
                             value="{naming:java:comp/env/stage-base}/resources/querymap/descriptor-weights.xml"/>
+                        <map:parameter name="abstract-count" value="{chain:abstract-count}"/>
                     </map:read>
                 </map:match>
             </map:match>
