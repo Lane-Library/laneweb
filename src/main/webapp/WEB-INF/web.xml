@@ -35,7 +35,22 @@
     
     <filter-mapping>
         <filter-name>GzipFilter</filter-name>
-        <servlet-name>edu.stanford.irt.cocoon.spring.SitemapRequestHandler</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>*.css</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>*.js</url-pattern>
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>*.xml</url-pattern>
     </filter-mapping>
 
     <servlet>
