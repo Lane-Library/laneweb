@@ -54,6 +54,8 @@ public class EresourcesCountGenerator implements Generator {
             if (this.query.length() == 0) {
                 this.query = null;
             }
+        } else {
+            throw new RuntimeException("null query");
         }
     }
 
