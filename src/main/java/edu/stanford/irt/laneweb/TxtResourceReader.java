@@ -17,7 +17,7 @@ import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
 import org.xml.sax.SAXException;
 
-public class TxtResourceReader implements Reader, CacheableProcessingComponent {
+public class TxtResourceReader extends GzipOutputComponent implements Reader, CacheableProcessingComponent {
 
     private String defaultPath;
 
@@ -26,8 +26,6 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
     private String valueToSubstitute;
 
     private Source source;
-
-    private OutputStream outputStream;
 
     public void setDefaultPath(final String path) {
         this.defaultPath = path;
@@ -40,6 +38,7 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
+    	super.setup(resolver, objectModel, src, par);
         this.path = par.getParameter("path", this.defaultPath);
         this.source = resolver.resolveURI(src);
     }
@@ -61,23 +60,6 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
 
     public long getLastModified() {
         return this.source.getLastModified();
-    }
-
-    public String getMimeType() {
-        return null;
-    }
-
-    public void setOutputStream(final OutputStream out) {
-        if ((out instanceof BufferedOutputStream) || (out instanceof org.apache.cocoon.util.BufferedOutputStream)) {
-
-            this.outputStream = out;
-        } else {
-            this.outputStream = new BufferedOutputStream(out, 1536);
-        }
-    }
-
-    public boolean shouldSetContentLength() {
-        return false;
     }
 
     public SourceValidity getValidity() {
