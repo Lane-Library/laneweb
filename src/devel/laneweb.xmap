@@ -68,6 +68,7 @@
                             <map:parameter name="m" value="{request-param:m}"/>
                             <map:parameter name="t" value="{request-param:t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                            <map:parameter name="full-name" value="{laneweb:full-name}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
@@ -88,6 +89,7 @@
                             <map:parameter name="m" value="{request-param:m}"/>
                             <map:parameter name="t" value="{request-param:t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                            <map:parameter name="full-name" value="{laneweb:full-name}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>
@@ -120,6 +122,7 @@
                             <map:parameter name="m" value="{request-param:m}"/>
                             <map:parameter name="t" value="{request-param:t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                            <map:parameter name="full-name" value="{laneweb:full-name}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
@@ -140,6 +143,7 @@
                             <map:parameter name="m" value="{request-param:m}"/>
                             <map:parameter name="t" value="{request-param:t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                            <map:parameter name="full-name" value="{laneweb:full-name}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>

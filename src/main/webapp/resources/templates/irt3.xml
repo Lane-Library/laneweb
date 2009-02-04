@@ -52,17 +52,15 @@
                                     Management Center</a>
                             </span>
                         </h2>
-                        <div>
-	                        <div id="pl">&#160;
-	                        	<div id="pl-logout"><a href="/secure/login.html">Off Campus Login</a></div>
-	                        	<div id="pl-login">Off Campus Login: <span id="user-full-name"/> | <a href="/persistentlogin.html">Account</a> | <a href="/persistentlogin.html?pl=logout">Logout</a></div>
-	                        </div>
-	                        <h3>
-	                            <a href="http://med.stanford.edu/irt/" title="IRT.">
-	                                <span>a division of IRT</span>
-	                            </a>
-	                        </h3>
-						</div>
+                        <h3 id="pl">
+                            <span id="pl-logout"><a href="/secure/login.html">Off Campus Login</a></span>
+                            <span id="pl-login">Off Campus Login: <span id="user-full-name"/> | <a href="/persistentlogin.html">Account</a> | <a href="/persistentlogin.html?pl=logout">Logout</a></span>
+                        </h3>
+                        <h3 id="irt">
+                            <a title="IRT." href="http://med.stanford.edu/irt/">
+                                <span>a division of IRT</span>
+                            </a>
+                        </h3>
 						<div id="nav">
                             <ul>
                                 <li>

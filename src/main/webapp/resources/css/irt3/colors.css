@@ -63,9 +63,10 @@ background-image: url(/././images/templates/irt3/hd-h2.png);
 background-repeat:no-repeat;
 background-position:0 6px;
 }
-#hd h3 {
+#irt {
 background-image: url(/././images/templates/irt3/divisionIRT.gif);
 background-repeat:no-repeat;
+background-position:99% 0;
 }
 #hd h2 span#subtitle {
 color:black;

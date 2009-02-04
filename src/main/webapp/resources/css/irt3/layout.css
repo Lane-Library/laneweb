@@ -63,19 +63,43 @@ display:block;
 height:50px;
 width:200px;
 }
-#hd h1 a, #hd h3 a {
+#hd h3 {
+text-align:right;
+}
+#irt {
+float:right;
+position:relative;
+top:38px;
+right:15px;
+width:70px;
+white-space:nowrap;
+overflow:hidden;
+}
+#irt span {
+visibility:hidden
+}
+/*#pl {
+float:right;
+}
+#pl div{
+display:inline;
+}
+#hd h3 {
+clear:right;
+}*/
+#hd h1 a, #irt a {
 display:block;
 height:100%;
 width:100%;
 }
-#hd h1 span, #hd h3 span, .tooltips, .popups, span#findIt, #spellCheck, span#queryMapping {
+#hd h1 span, .tooltips, .popups, span#findIt, #spellCheck, span#queryMapping {
 display:none;
 }
-#hd h3 {
+/*#hd h3 {
 float:right;
 width:69px;
 height:11px;
-}
+}*/
 #proxyOn, #proxyOff {
 float:right;
 margin-right:-1em;
@@ -164,15 +188,6 @@ top:-10px;
 }
 div.portalNavLinks h1 {
 display:inline;
-}
-#pl {
-float:right;
-}
-#pl div{
-display:inline;
-}
-#hd h3 {
-clear:right;
 }
 /*Search CSS, to be cleaned-up*/
 #searchSubmit {

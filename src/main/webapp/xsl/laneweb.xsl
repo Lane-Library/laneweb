@@ -201,27 +201,40 @@
 
 
     <!-- persistent login  -->
-	<xsl:template match="h:div[@id='pl-login']">
+    <xsl:template match="h:h3[@id='pl']">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:choose>
+                <xsl:when test="$sunetid and $proxy-links = 'true'">
+                    <xsl:apply-templates select="h:span[@id='pl-login']/node()"/>
+                </xsl:when>
+                <xsl:when test="$proxy-links = 'true'">
+                    <xsl:apply-templates select="h:span[@id='pl-logout']/node()"/>
+                </xsl:when>
+                <xsl:otherwise>&#160;</xsl:otherwise>
+            </xsl:choose>
+        </xsl:copy>
+    </xsl:template>
+    
+	<!--<xsl:template match="h:span[@id='pl-login']">
 		<xsl:if test="$sunetid != '' and $proxy-links = 'true'">
 			<xsl:copy>
 	    	    <xsl:apply-templates select="@*|node()"/>
 	        </xsl:copy>
 		</xsl:if>
-	</xsl:template>
+	</xsl:template>-->
    
     <xsl:template match="h:span[@id='user-full-name']">
-      <xsl:copy>
         <xsl:value-of select="$full-name"/>
-      </xsl:copy>
     </xsl:template>
    
-    <xsl:template match="h:div[@id='pl-logout'] ">
+   <!-- <xsl:template match="h:span[@id='pl-logout'] ">
       <xsl:if test="$sunetid = '' and $proxy-links = 'true'">
         <xsl:copy>
           <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
       </xsl:if>
-	</xsl:template>
+	</xsl:template>-->
 	<!-- END persistent login  -->
 
     <xsl:template

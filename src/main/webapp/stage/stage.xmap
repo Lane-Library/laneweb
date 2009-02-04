@@ -109,6 +109,7 @@
                     <map:parameter name="t" value="{request-param:t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                    <map:parameter name="full-name" value="{laneweb:full-name}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -137,6 +138,7 @@
                     <map:parameter name="t" value="{request-param:t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                    <map:parameter name="full-name" value="{laneweb:full-name}"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
