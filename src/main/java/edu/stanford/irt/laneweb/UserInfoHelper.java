@@ -1,22 +1,14 @@
 package edu.stanford.irt.laneweb;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Map;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import org.apache.cocoon.environment.Request;
-import org.apache.commons.codec.DecoderException;
 import org.apache.log4j.Logger;
 
 public class UserInfoHelper {
@@ -106,8 +98,7 @@ public class UserInfoHelper {
     }
 
     @SuppressWarnings("unchecked")
-    public String getSunetId(final Request request) throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException,
-            NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeySpecException, UnsupportedEncodingException, DecoderException {
+    public String getSunetId(final Request request) throws Exception {
         if (this.cryptor == null) {
             throw new RuntimeException("cryptor is null");
         }
