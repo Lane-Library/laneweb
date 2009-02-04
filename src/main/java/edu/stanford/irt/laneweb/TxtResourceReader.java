@@ -42,7 +42,7 @@ public class TxtResourceReader extends GzipOutputComponent implements Reader, Ca
     }
 
     public Serializable getKey() {
-        return this.source.getURI() + ";path=" + this.path;
+        return this.source.getURI() + ";path=" + this.path + (super.isGzip() ? ";gzip" : "");
     }
 
     public void generate() throws IOException, SAXException, ProcessingException {
@@ -54,6 +54,7 @@ public class TxtResourceReader extends GzipOutputComponent implements Reader, Ca
             this.outputStream.write('\n');
         }
         this.outputStream.flush();
+        this.outputStream.close();
     }
 
     public long getLastModified() {

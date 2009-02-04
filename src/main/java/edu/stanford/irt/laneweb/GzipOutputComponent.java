@@ -22,7 +22,7 @@ public class GzipOutputComponent implements SitemapModelComponent,
 	
 	private String mimeType;
 	
-	private boolean gzip = false;
+	private boolean isGzip = false;
 	
 	protected OutputStream outputStream;
 
@@ -39,12 +39,12 @@ public class GzipOutputComponent implements SitemapModelComponent,
 		if (null != acceptEncoding) {
 			for (StringTokenizer st = new StringTokenizer(acceptEncoding,",");st.hasMoreTokens();) {
 				if ("gzip".equals(st.nextToken().trim())) {
-					this.gzip = true;
+					this.isGzip = true;
 					break;
 				}
 			}
 		}
-		if (this.gzip) {
+		if (this.isGzip) {
 			HttpServletResponse response = ObjectModelHelper.getResponse(objectModel);
 			response.setHeader("Content-Encoding", "gzip");
 		}
@@ -57,9 +57,13 @@ public class GzipOutputComponent implements SitemapModelComponent,
 	public void setMimeType(final String mimeType) {
 		this.mimeType = mimeType;
 	}
+	
+	public boolean isGzip() {
+	    return this.isGzip;
+	}
 
 	public void setOutputStream(OutputStream out) throws IOException {
-		if (this.gzip) {
+		if (this.isGzip) {
 			this.outputStream = new GZIPOutputStream(out);
 		} else {
 			this.outputStream = out;
