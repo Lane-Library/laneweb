@@ -1,8 +1,10 @@
 package edu.stanford.irt.laneweb;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.Map;
 
@@ -15,7 +17,7 @@ import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
 import org.xml.sax.SAXException;
 
-public class TxtResourceReader extends GzipOutputComponent implements Reader, CacheableProcessingComponent {
+public class TxtResourceReader implements Reader, CacheableProcessingComponent {
 
     private String defaultPath;
 
@@ -24,6 +26,8 @@ public class TxtResourceReader extends GzipOutputComponent implements Reader, Ca
     private String valueToSubstitute;
 
     private Source source;
+
+    private OutputStream outputStream;
 
     public void setDefaultPath(final String path) {
         this.defaultPath = path;
@@ -36,13 +40,12 @@ public class TxtResourceReader extends GzipOutputComponent implements Reader, Ca
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
-    	super.setup(resolver, objectModel, src, par);
         this.path = par.getParameter("path", this.defaultPath);
         this.source = resolver.resolveURI(src);
     }
 
     public Serializable getKey() {
-        return this.source.getURI() + ";path=" + this.path + (super.isGzip() ? ";gzip" : "");
+        return this.source.getURI() + ";path=" + this.path;
     }
 
     public void generate() throws IOException, SAXException, ProcessingException {
@@ -54,11 +57,27 @@ public class TxtResourceReader extends GzipOutputComponent implements Reader, Ca
             this.outputStream.write('\n');
         }
         this.outputStream.flush();
-        this.outputStream.close();
     }
 
     public long getLastModified() {
         return this.source.getLastModified();
+    }
+
+    public String getMimeType() {
+        return null;
+    }
+
+    public void setOutputStream(final OutputStream out) {
+        if ((out instanceof BufferedOutputStream) || (out instanceof org.apache.cocoon.util.BufferedOutputStream)) {
+
+            this.outputStream = out;
+        } else {
+            this.outputStream = new BufferedOutputStream(out, 1536);
+        }
+    }
+
+    public boolean shouldSetContentLength() {
+        return false;
     }
 
     public SourceValidity getValidity() {
