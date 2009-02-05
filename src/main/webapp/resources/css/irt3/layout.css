@@ -71,11 +71,12 @@ float:right;
 position:relative;
 top:38px;
 right:15px;
-width:70px;
+width:78px;
 white-space:nowrap;
 overflow:hidden;
 }
 #irt span {
+font-size:smaller;
 visibility:hidden
 }
 /*#pl {
