@@ -115,6 +115,7 @@ public class UserInfoHelperTest extends TestCase {
         expect(this.request.getHeader("User-Agent")).andReturn("firefox test");
         expect(this.request.getRemoteAddr()).andReturn(this.ip);
         expect(this.request.getRemoteUser()).andReturn(null);
+        expect(this.request.getHeader("x-webauth-user")).andReturn(null);
         expect(this.request.getCookieMap()).andReturn(map);
         replay(this.request);
 
@@ -150,6 +151,7 @@ public class UserInfoHelperTest extends TestCase {
         expect(this.request.getHeader("User-Agent")).andReturn("firefox test");
         expect(this.request.getRemoteAddr()).andReturn(this.ip);
         expect(this.request.getRemoteUser()).andReturn(null);
+        expect(this.request.getHeader("x-webauth-user")).andReturn(null);
         expect(this.request.getCookieMap()).andReturn(this.map);
         replay(this.request);
 
