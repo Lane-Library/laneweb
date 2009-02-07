@@ -38,7 +38,10 @@ public class LoginAction implements Action {
         UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
         String sunetid = userInfo.getSunetId();
         if (sunetid == null) {
-            String redirectUrl = "/secure/login.html?".concat(request.getQueryString());
+            String redirectUrl = "/secure/login.html";
+            if (null != request.getQueryString()) {
+                redirectUrl = redirectUrl + request.getQueryString();
+            }
             redirector.redirect(true, redirectUrl);
             return null;
         }
