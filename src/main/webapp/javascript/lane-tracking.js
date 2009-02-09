@@ -143,7 +143,7 @@ LANE.tracking = function(){
                     }
                     if (linkHost == documentHost) {
                         //track proxy logins
-                        if ((/secure\/login.html/).test(link.pathname)) {
+                        if ((/secure\/login.html/).test(link.pathname) && link.search !== '') {
                             return true;
                         }
                         //otherwise rely on normal tracking for .html unless

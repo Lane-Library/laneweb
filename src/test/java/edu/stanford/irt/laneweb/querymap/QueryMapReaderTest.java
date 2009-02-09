@@ -106,7 +106,6 @@ public class QueryMapReaderTest {
             @Override
             public QueryMap getQueryMap(final String query, final Map<String, Set<Resource>> resourceMaps,
                     final Map<String, Float> descriptorWeights, final int abstractCount) {
-                // TODO Auto-generated method stub
                 return null;
             }
         };
@@ -137,7 +136,6 @@ public class QueryMapReaderTest {
                             }
                         });
                     } catch (IOException e1) {
-                        // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
                     try {

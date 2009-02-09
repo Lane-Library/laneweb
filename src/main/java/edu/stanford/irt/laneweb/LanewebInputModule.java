@@ -19,6 +19,8 @@ import org.apache.log4j.Logger;
  *         Window - Preferences - Java - Code Generation - Code and Comments
  */
 public class LanewebInputModule implements InputModule {
+    
+    //TODO: split this into separate input modules 
 
     private Logger logger = Logger.getLogger(LanewebInputModule.class);
 

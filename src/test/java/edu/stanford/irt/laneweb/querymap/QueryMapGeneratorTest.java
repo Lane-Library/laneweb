@@ -142,7 +142,6 @@ public class QueryMapGeneratorTest {
             @Override
             public QueryMap getQueryMap(final String query, final Map<String, Set<Resource>> resourceMaps,
                     final Map<String, Float> descriptorWeights, final int abstractCount) {
-                // TODO Auto-generated method stub
                 return null;
             }
         };
