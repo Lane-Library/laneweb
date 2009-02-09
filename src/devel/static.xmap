@@ -19,12 +19,12 @@
                 <map:select type="resource-exists">
                     <map:when test="resources/css/{1}.css">
                         <map:read type="txt-resource" src="resources/css/{1}.css">
-                            <map:parameter name="path" value="{request:contextPath}/your-sunet-id"/>
+                            <map:parameter name="path" value="/your-sunet-id"/>
                         </map:read>
                     </map:when>
                     <map:otherwise>
                         <map:read type="txt-resource" src="context://resources/css/{1}.css">
-                            <map:parameter name="path" value="{request:contextPath}/your-sunet-id"/>
+                            <map:parameter name="path" value="/your-sunet-id"/>
                         </map:read>
                     </map:otherwise>
                 </map:select>
@@ -34,13 +34,13 @@
                     <map:when test="resources/javascript/{1}.js">
                         <map:read type="txt-resource" src="resources/javascript/{1}.js"
                             mime-type="application/x-javascript">
-                            <map:parameter name="path" value="{request:contextPath}/your-sunet-id"/>
+                            <map:parameter name="path" value="/your-sunet-id"/>
                         </map:read>
                     </map:when>
                     <map:otherwise>
                         <map:read type="txt-resource" src="context://javascript/{1}.js"
                             mime-type="application/x-javascript">
-                            <map:parameter name="path" value="{request:contextPath}/your-sunet-id"/>
+                            <map:parameter name="path" value="/your-sunet-id"/>
                         </map:read>
                     </map:otherwise>
                 </map:select>

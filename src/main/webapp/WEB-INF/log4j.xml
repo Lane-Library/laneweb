@@ -3,7 +3,7 @@
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
     
     <appender name="LOG" class="edu.stanford.irt.laneweb.LogAppender">
-        <param name="File" value="${catalina.home}/logs/laneweb.log"/>
+        <param name="File" value="${catalina.base}/logs/laneweb.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="10MB"/>
         <param name="MaxBackupIndex" value="10"/>
@@ -13,7 +13,7 @@
     </appender>
     
     <appender name="JAVASCRIPT_LOG" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="${catalina.home}/logs/javascript.log"/>
+        <param name="File" value="${catalina.base}/logs/javascript.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="10MB"/>
         <param name="MaxBackupIndex" value="4"/>
@@ -70,15 +70,15 @@
         <appender-ref ref="JAVASCRIPT_LOG"/>
     </category>
     
-    <root>
+    <!--<root>
         <priority value="ERROR"/>
         <appender-ref ref="LOG"/>
-    </root>
-    
-    <!--<root>
-        <priority value="DEBUG"/>
-        <appender-ref ref="console"/>
     </root>-->
+    
+    <root>
+        <priority value="INFO"/>
+        <appender-ref ref="console"/>
+    </root>
     
 </log4j:configuration>
 

@@ -20,13 +20,13 @@
                 <map:read type="txt-resource"
                     src="{naming:java:comp/env/stage-base}/resources/css/{2}.css"
                     mime-type="text/css">
-                    <map:parameter name="path" value="{request:contextPath}/stage"/>
+                    <map:parameter name="path" value="/stage"/>
                 </map:read>
             </map:match>
             <map:match pattern="javascript/*/*.js" type="wildcard">
                 <map:read type="txt-resource" src="context://javascript/{2}.js"
                     mime-type="application/x-javascript">
-                    <map:parameter name="path" value="{request:contextPath}/stage"/>
+                    <map:parameter name="path" value="/stage"/>
                 </map:read>
             </map:match>
             <map:match pattern="images/**.jpg" type="wildcard">

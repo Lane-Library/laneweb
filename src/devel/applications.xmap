@@ -35,7 +35,7 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-proxy.xsl">
                             <map:transform type="saxon" src="xsl/search-proxy.xsl">
-                                <map:parameter name="context" value="{request:contextPath}"/>
+                                <map:parameter name="context" value=""/>
                                 <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                                 <map:parameter name="ticket" value="{laneweb:ticket}"/>
                                 <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
@@ -44,7 +44,7 @@
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
-                                <map:parameter name="context" value="{request:contextPath}"/>
+                                <map:parameter name="context" value=""/>
                                 <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
                                 <map:parameter name="ticket" value="{laneweb:ticket}"/>
                                 <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
