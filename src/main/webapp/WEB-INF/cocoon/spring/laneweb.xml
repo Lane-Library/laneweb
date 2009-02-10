@@ -367,6 +367,18 @@
         <property name="cryptor" ref="edu.stanford.irt.laneweb.Cryptor"></property>
     </bean>
     
+    <bean name="org.apache.cocoon.acting.Action/search-context-reloader"
+        class="edu.stanford.irt.laneweb.search.SearchContextReloaderAction" scope="singleton">
+        <property name="metaSearchManagerSource" 
+            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+        <property name="svnUrlProject">
+        	<value>https://irt-svn.stanford.edu/repos/irt/lane/search/tags/search-spring-</value>
+        </property>
+        <property name="svnUrlPath">
+        	<value>/src/main/resources/spring/metasearch.xml</value>
+        </property>
+    </bean>
+    
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
         class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
