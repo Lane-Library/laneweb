@@ -93,7 +93,7 @@
                 <map:match type="regex-parameter"
                     pattern=".+">
                     <map:parameter name="parameter-name" value="id"/>
-                    <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/archives/{mt-munge:{request-param:id}}.xml"/>
+                    <map:generate type="html" src="{naming:java:comp/env/medblog-base}{mt-munge:{request-param:id}}.xml"/>
                     <map:transform type="saxon" src="context://xsl/individual-faq.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
@@ -101,14 +101,14 @@
                 <map:match type="regex-parameter"
                     pattern=".+">
                     <map:parameter name="parameter-name" value="category"/>
-                    <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/archives/{mt-munge:{request-param:category}}.xml"/>
+                    <map:generate type="html" src="{naming:java:comp/env/medblog-base}{mt-munge:{request-param:category}}.xml"/>
                     <map:transform type="saxon" src="context://xsl/category-faq.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
             <map:match pattern="faq-category-list.html" type="wildcard">
-                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/archives/{mt-munge:{request-param:category}}.xml"/>
+                <map:generate type="html" src="{naming:java:comp/env/medblog-base}{mt-munge:{request-param:category}}.xml"/>
                 <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
                     <map:parameter name="category" value="{request-param:category}"/>
                 </map:transform>
