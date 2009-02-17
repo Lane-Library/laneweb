@@ -74,6 +74,9 @@ public class UserInfoHelper {
             String remoteUser = request.getRemoteUser();
             if (remoteUser == null) {
                 remoteUser = request.getHeader("x-webauth-user");
+                if ("(null)".equals(remoteUser)) {
+                    remoteUser = null;
+                }
             }
             if (remoteUser == null) {
                 String cookieSunetid = getSunetId(request);
