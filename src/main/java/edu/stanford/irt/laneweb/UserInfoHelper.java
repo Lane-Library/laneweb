@@ -104,7 +104,7 @@ public class UserInfoHelper {
     }
 
     @SuppressWarnings("unchecked")
-    public String getSunetId(final Request request) throws Exception {
+    private String getSunetId(final Request request) throws Exception {
         if (this.cryptor == null) {
             throw new RuntimeException("cryptor is null");
         }
