@@ -212,6 +212,7 @@ public class HTTPClientSource implements Source {
         // throw SourceNotFoundException - according to Source API we
         // need to throw this if the source doesn't exist.
         if (!exists()) {
+        	method.releaseConnection();
             final StringBuffer error = new StringBuffer();
             error.append("Unable to retrieve URI: ");
             error.append(this.m_uri);
