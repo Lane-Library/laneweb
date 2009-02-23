@@ -1,7 +1,7 @@
 (function() {
     LANE.namespace('search.metasearch');
     var startTime = new Date().getTime(),
-    	url, i,
+    	url,
     	mergedMode = true,
 		// filter out multiple ovid, mdc and cro requests b/c of IE6's 2048 character limit on requests
 		// this depends on search app returning all resources for engine when one resource requested
