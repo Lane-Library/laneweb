@@ -8,7 +8,7 @@
         class="org.apache.cocoon.components.source.CocoonSourceResolver"/>
     
     <component role="org.apache.excalibur.source.SourceFactory/file"
-        class="org.apache.excalibur.source.impl.URLSourceFactory"/>
+        class="org.apache.excalibur.source.impl.FileSourceFactory"/>
     
     <component role="org.apache.excalibur.source.SourceFactory/context"
         class="org.apache.cocoon.components.source.impl.ContextSourceFactory"/>

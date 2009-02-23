@@ -29,18 +29,19 @@
     </listener>
     
     <filter>
-		<filter-name>LanewebHTTPSFilter</filter-name>
-		<filter-class>
-			edu.stanford.irt.laneweb.LanewebHTTPSFilter
-		</filter-class>
+        <filter-name>LanewebHTTPSFilter</filter-name>
+        <filter-class>
+            edu.stanford.irt.laneweb.LanewebHTTPSFilter
+        </filter-class>
     </filter>
     
-	<filter-mapping>
-		<filter-name>LanewebHTTPSFilter</filter-name>
-		<url-pattern>/secure/*</url-pattern>
-	</filter-mapping>
+    <filter-mapping>
+        <filter-name>LanewebHTTPSFilter</filter-name>
+        <url-pattern>/secure/*</url-pattern>
+    </filter-mapping>
     
-    <filter>
+    <!-- TODO: find out why this filter breaks the error.html page -->
+    <!--<filter>
         <filter-name>GzipFilter</filter-name>
         <filter-class>net.sf.ehcache.constructs.web.filter.GzipFilter</filter-class>
     </filter>
@@ -63,7 +64,7 @@
     <filter-mapping>
         <filter-name>GzipFilter</filter-name>
         <url-pattern>*.xml</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
 
     <servlet>
         <description>SitemapRequestHandler</description>
@@ -371,47 +372,47 @@
         <mime-type>application/oda</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Database -->
+        
         <extension>odb</extension>
         <mime-type>application/vnd.oasis.opendocument.database</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Chart -->
+        
         <extension>odc</extension>
         <mime-type>application/vnd.oasis.opendocument.chart</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Formula -->
+        
         <extension>odf</extension>
         <mime-type>application/vnd.oasis.opendocument.formula</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Drawing -->
+        
         <extension>odg</extension>
         <mime-type>application/vnd.oasis.opendocument.graphics</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Image -->
+        
         <extension>odi</extension>
         <mime-type>application/vnd.oasis.opendocument.image</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Master Document -->
+        
         <extension>odm</extension>
         <mime-type>application/vnd.oasis.opendocument.text-master</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Presentation -->
+        
         <extension>odp</extension>
         <mime-type>application/vnd.oasis.opendocument.presentation</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Spreadsheet -->
+        
         <extension>ods</extension>
         <mime-type>application/vnd.oasis.opendocument.spreadsheet</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Text -->
+        
         <extension>odt</extension>
         <mime-type>application/vnd.oasis.opendocument.text</mime-type>
     </mime-mapping>
@@ -420,27 +421,27 @@
         <mime-type>application/ogg</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Drawing Template -->
+        
         <extension>otg </extension>
         <mime-type>application/vnd.oasis.opendocument.graphics-template</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- HTML Document Template -->
+        
         <extension>oth</extension>
         <mime-type>application/vnd.oasis.opendocument.text-web</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Presentation Template -->
+        
         <extension>otp</extension>
         <mime-type>application/vnd.oasis.opendocument.presentation-template</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Spreadsheet Template -->
+        
         <extension>ots</extension>
         <mime-type>application/vnd.oasis.opendocument.spreadsheet-template </mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- OpenDocument Text Template -->
+        
         <extension>ott</extension>
         <mime-type>application/vnd.oasis.opendocument.text-template</mime-type>
     </mime-mapping>
@@ -687,27 +688,27 @@
         <mime-type>application/x-visio</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- Wireless Bitmap -->
+        
         <extension>wbmp</extension>
         <mime-type>image/vnd.wap.wbmp</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- WML Source -->
+        
         <extension>wml</extension>
         <mime-type>text/vnd.wap.wml</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- Compiled WML -->
+        
         <extension>wmlc</extension>
         <mime-type>application/vnd.wap.wmlc</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- WML Script Source -->
+        
         <extension>wmls</extension>
         <mime-type>text/vnd.wap.wmlscript</mime-type>
     </mime-mapping>
     <mime-mapping>
-        <!-- Compiled WML Script -->
+        
         <extension>wmlscriptc</extension>
         <mime-type>application/vnd.wap.wmlscriptc</mime-type>
     </mime-mapping>
@@ -748,3 +749,4 @@
         <mime-type>application/vnd.ms-powerpoint</mime-type>
     </mime-mapping>
 </web-app>
+
