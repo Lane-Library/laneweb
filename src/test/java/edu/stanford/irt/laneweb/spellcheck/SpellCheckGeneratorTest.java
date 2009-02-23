@@ -104,7 +104,7 @@ public class SpellCheckGeneratorTest {
             }
         };
         this.generator.setSpellChecker(fauxSpellChecker);
-        for (int i = 999; i > -1; i--) {
+        for (int i = 99; i > -1; i--) {
             final String response = Integer.toString(i);
             synchronized (this.spellChecker) {
                 expect(this.spellChecker.spellCheck(response)).andReturn(new SpellCheckResult(response));
@@ -139,7 +139,7 @@ public class SpellCheckGeneratorTest {
         }
         executor.shutdown();
         try {
-            executor.awaitTermination(100, TimeUnit.SECONDS);
+            executor.awaitTermination(10, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
