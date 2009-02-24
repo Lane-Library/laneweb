@@ -26,18 +26,25 @@
         class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapLanguage"/>
     
     <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
-        class="org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline"/>
+        class="org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline">
+        <parameter name="outputBufferSize" value="1049"/>
+    </component>
     
     <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/expires"
         class="org.apache.cocoon.components.pipeline.impl.ExpiresCachingProcessingPipeline">
         <parameter name="cache-expires" value="300"/>
+        <parameter name="outputBufferSize" value="1049"/>
     </component>
     
     <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
-        class="edu.stanford.irt.laneweb.ThrottlingPipeline"/>
+        class="edu.stanford.irt.laneweb.ThrottlingPipeline">
+        <parameter name="outputBufferSize" value="1049"/>
+    </component>
     
     <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/caching"
-        class="org.apache.cocoon.components.pipeline.impl.CachingProcessingPipeline"/>
+        class="org.apache.cocoon.components.pipeline.impl.CachingProcessingPipeline">
+        <parameter name="outputBufferSize" value="1049"/>
+    </component>
     
     <component role="org.apache.cocoon.matching.MatcherSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
