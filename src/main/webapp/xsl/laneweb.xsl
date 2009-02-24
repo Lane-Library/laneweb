@@ -407,7 +407,6 @@
                             <xsl:with-param name="string" select="normalize-space()"/>
                         </xsl:call-template>
                         <xsl:text>+'&lt;/a&gt;');&#xD;</xsl:text>
-                        <!--<xsl:text>&#xD;document.write(link);&#xD;</xsl:text>-->
                     </xsl:comment>
                 </script>
             </xsl:when>

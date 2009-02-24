@@ -4,13 +4,13 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match pattern="images/**.gif" type="wildcard">
+            <map:match pattern="images/**" type="wildcard">
                 <map:select type="resource-exists">
-                    <map:when test="resources/images/{1}.gif">
-                        <map:read type="resource" src="resources/images/{1}.gif" mime-type="image/gif"/>
+                    <map:when test="resources/images/{1}">
+                        <map:read type="resource" src="resources/images/{1}"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.gif" mime-type="image/gif"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -32,51 +32,13 @@
             <map:match pattern="javascript/**.js" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="resources/javascript/{1}.js">
-                        <map:read type="txt-resource" src="resources/javascript/{1}.js"
-                            mime-type="application/x-javascript">
+                        <map:read type="txt-resource" src="resources/javascript/{1}.js">
                             <map:parameter name="path" value="/your-sunet-id"/>
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="txt-resource" src="context://javascript/{1}.js"
-                            mime-type="application/x-javascript">
+                        <map:read type="txt-resource" src="context://javascript/{1}.js">
                             <map:parameter name="path" value="/your-sunet-id"/>
-                        </map:read>
-                    </map:otherwise>
-                </map:select>
-            </map:match>
-            <map:match pattern="images/**.jpg" type="wildcard">
-                <map:select type="resource-exists">
-                    <map:when test="resources/images/{1}.jpg">
-                        <map:read type="resource" src="resources/images/{1}.jpg" mime-type="image/jpeg"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.jpg" mime-type="image/jpeg"/>
-                    </map:otherwise>
-                </map:select>
-            </map:match>
-            <map:match pattern="images/**.png" type="wildcard">
-                <map:select type="resource-exists">
-                    <map:when test="resources/images/{1}.png">
-                        <map:read type="resource" src="resources/images/{1}.png" mime-type="image/png"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}.png" mime-type="image/png"/>
-                    </map:otherwise>
-                </map:select>
-            </map:match>
-            <map:match pattern="pdf/**.pdf" type="wildcard">
-                <map:select type="resource-exists">
-                    <map:when test="resources/pdf/{1}.pdf">
-                        <map:read type="resource" src="resources/pdf/{1}.pdf"
-                            mime-type="application/pdf">
-                            <map:parameter name="byte-ranges" value="false"/>
-                        </map:read>
-                    </map:when>
-                    <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/pdf/{1}.pdf"
-                            mime-type="application/pdf">
-                            <map:parameter name="byte-ranges" value="false"/>
                         </map:read>
                     </map:otherwise>
                 </map:select>
@@ -84,32 +46,32 @@
             <map:match pattern="**.gif" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.gif">
-                        <map:read type="resource" src="content/{1}.gif" mime-type="image/gif"/>
+                        <map:read type="resource" src="content/{1}.gif"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.gif" mime-type="image/gif"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.gif"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.jpg" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.jpg">
-                        <map:read type="resource" src="content/{1}.jpg" mime-type="image/jpeg"/>
+                        <map:read type="resource" src="content/{1}.jpg"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.jpg" mime-type="image/jpeg"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.jpg"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.pdf" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.pdf">
-                        <map:read type="resource" src="content/{1}.pdf" mime-type="application/pdf">
+                        <map:read type="resource" src="content/{1}.pdf">
                             <map:parameter name="byte-ranges" value="false"/>
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.pdf" mime-type="application/pdf">
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.pdf">
                             <map:parameter name="byte-ranges" value="false"/>
                         </map:read>
                     </map:otherwise>
@@ -118,50 +80,50 @@
             <map:match pattern="**.png" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.png">
-                        <map:read type="resource" src="content/{1}.png" mime-type="image/png"/>
+                        <map:read type="resource" src="content/{1}.png"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.png" mime-type="image/png"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.png"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.eps" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.eps">
-                        <map:read type="resource" src="content/{1}.eps" mime-type="application/postscript"/>
+                        <map:read type="resource" src="content/{1}.eps"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.eps" mime-type="application/postscript"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.eps"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.ai" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.ai">
-                        <map:read type="resource" src="content/{1}.ai" mime-type="application/illustrator"/>
+                        <map:read type="resource" src="content/{1}.ai"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.ai" mime-type="application/illustrator"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.ai"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.psd" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.ai">
-                        <map:read type="resource" src="content/{1}.psd" mime-type="application/photoshop"/>
+                        <map:read type="resource" src="content/{1}.psd"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.psd" mime-type="application/photoshop"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.psd"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.rm" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.rm">
-                        <map:read type="resource" src="content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
+                        <map:read type="resource" src="content/{1}.rm"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.rm" mime-type="audio/x-pn-realaudio"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.rm"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -176,120 +138,110 @@
             <map:match pattern="**.camv" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.camv">
-                        <map:read type="resource" src="content/{1}.ram" mime-type="audio/x-pn-realaudio"/>
+                        <map:read type="resource" src="content/{1}.ram"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.ram" mime-type="audio/x-pn-realaudio"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.ram"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.smil" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.smil">
-                        <map:read type="resource" src="content/{1}.smil" mime-type="application/smil"/>
+                        <map:read type="resource" src="content/{1}.smil"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.smil" mime-type="application/smil"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.smil"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.xls" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.xls">
-                        <map:read type="resource" src="content/{1}.xls" mime-type="application/vnd.ms-excel"/>
+                        <map:read type="resource" src="content/{1}.xls"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.xls" mime-type="application/vnd.ms-excel"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.xls"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.doc" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.doc">
-                        <map:read type="resource" src="content/{1}.doc" mime-type="application/msword"/>
+                        <map:read type="resource" src="content/{1}.doc"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.doc" mime-type="application/msword"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.doc"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.dot" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.dot">
-                        <map:read type="resource" src="content/{1}.dot" mime-type="application/msword"/>
+                        <map:read type="resource" src="content/{1}.dot"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.dot" mime-type="application/msword"/>
-                    </map:otherwise>
-                </map:select>
-            </map:match>
-            <map:match pattern="flash/*.swf" type="wildcard">
-                <map:select type="resource-exists">
-                    <map:when test="resources/flash/{1}.swf">
-                        <map:read type="resource" src="resources/flash/{1}.swf" mime-type="application/x-shockwave-flash"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/flash/{1}.swf" mime-type="application/x-shockwave-flash"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.dot"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.swf" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.swf">
-                        <map:read type="resource" src="content/{1}.swf" mime-type="application/x-shockwave-flash"/>
+                        <map:read type="resource" src="content/{1}.swf"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.swf" mime-type="application/x-shockwave-flash"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.swf"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.wmv" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.wmv">
-                        <map:read type="resource" src="content/{1}.wmv" mime-type="audio/x-ms-wmv"/>
+                        <map:read type="resource" src="content/{1}.wmv"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.wmv" mime-type="audio/x-ms-wmv"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.wmv"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.ppt" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.ppt">
-                        <map:read type="resource" src="content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
+                        <map:read type="resource" src="content/{1}.ppt"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.ppt" mime-type="application/vnd.ms-powerpoint"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.ppt"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.pptx" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.pptx">
-                        <map:read type="resource" src="content/{1}.pptx" mime-type="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+                        <map:read type="resource" src="content/{1}.pptx"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.pptx" mime-type="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.pptx"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.avi" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.avi">
-                        <map:read type="resource" src="content/{1}.avi" mime-type="video/x-msvideo"/>
+                        <map:read type="resource" src="content/{1}.avi"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.avi" mime-type="video/x-msvideo"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.avi"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
             <map:match pattern="**.zip" type="wildcard">
                 <map:select type="resource-exists">
                     <map:when test="content/{1}.zip">
-                        <map:read type="resource" src="content/{1}.zip" mime-type="application/zip"/>
+                        <map:read type="resource" src="content/{1}.zip"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.zip" mime-type="application/zip"/>
+                        <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.zip"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
