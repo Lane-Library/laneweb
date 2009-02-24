@@ -41,7 +41,7 @@
     </filter-mapping>
     
     <!-- TODO: find out why this filter breaks the error.html page -->
-    <!--<filter>
+    <filter>
         <filter-name>GzipFilter</filter-name>
         <filter-class>net.sf.ehcache.constructs.web.filter.GzipFilter</filter-class>
     </filter>
@@ -64,7 +64,7 @@
     <filter-mapping>
         <filter-name>GzipFilter</filter-name>
         <url-pattern>*.xml</url-pattern>
-    </filter-mapping>-->
+    </filter-mapping>
 
     <servlet>
         <description>SitemapRequestHandler</description>
@@ -78,6 +78,11 @@
         <servlet-name>edu.stanford.irt.cocoon.spring.SitemapRequestHandler</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.html</location>
+    </error-page>
 
     <mime-mapping>
         <extension>abs</extension>
