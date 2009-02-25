@@ -4,12 +4,12 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match pattern="" type="wildcard">
+            <!--<map:match pattern="" type="wildcard">
                 <map:redirect-to uri="/index.html"/>
-            </map:match>
-            <map:match pattern="**/" type="wildcard">
+            </map:match>-->
+            <!--<map:match pattern="**/" type="wildcard">
                 <map:redirect-to uri="/{1}/index.html"/>
-            </map:match>
+            </map:match>-->
             <map:match pattern="stage/**" type="wildcard">
                 <map:mount uri-prefix="stage" check-reload="no" src="context://stage/stage.xmap"/>
             </map:match>
@@ -39,10 +39,10 @@
             <map:match pattern="tobacco/**" type="wildcard">
                 <map:mount uri-prefix="tobacco" check-reload="no" src="tobacco.xmap"/>
             </map:match>
-            <map:match type="regexp"
+            <!--<map:match type="regexp"
                 pattern="(gif|jpg|css|js|png|pdf|eps|ai|psd|rm|ram|camv|smil|xls|doc|dot|ppt|pptx|ico|swf|wmv|avi|zip)$">
                 <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
-            </map:match>
+            </map:match>-->
             <map:match pattern="robots.txt" type="wildcard">
                 <map:read type="resource" src="robots.txt" mime-type="text/plain"/>
             </map:match>
@@ -136,16 +136,20 @@
                     <map:redirect-to uri="{form-redirect-key}"/>
                 </map:act>
             </map:match>
-            <!-- ========================== temporary redirects ============================ -->
-            <map:match pattern="100years/**" type="wildcard">
-                <map:redirect-to uri="/portals/history/centennial/{1}"/>
+            <map:match pattern="classes" type="wildcard">
+                <map:generate type="file" src="cocoon:/services/workshops/laneclasses.html"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match pattern="clinician" type="wildcard">
+                <map:generate type="file" src="cocoon:/portals/clinical.html"/>
+                <map:serialize type="xhtml"/>
             </map:match>
             <!-- ========================== permenent redirects ============================ -->
+            <map:match pattern="tobacco" type="wildcard">
+                <map:redirect-to uri="/tobacco/index.html"/>
+            </map:match>
             <map:match pattern="classes/index.html" type="wildcard">
                 <map:redirect-to uri="/services/workshops/laneclasses.html"/>
-            </map:match>
-            <map:match pattern="edtech/index.html" type="wildcard">
-                <map:redirect-to uri="/services/about/edtech/index.html"/>
             </map:match>
             <map:match pattern="clinician/index.html" type="wildcard">
                 <map:redirect-to uri="/portals/clinical.html"/>
@@ -222,8 +226,54 @@
                 <map:generate src="cocoon:/error.html" type="file"/>
                 <map:serialize type="xhtml" status-code="404"/>
             </map:match>
+            <map:match pattern="" type="wildcard">
+                <map:generate type="file" src="cocoon:/index.html"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match pattern="**/" type="wildcard">
+                <map:generate type="file" src="cocoon:/{1}/index.html"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            <map:handle-errors>
+                <map:generate src="cocoon:/error.html" type="file"/>
+                <map:serialize type="xhtml" status-code="404"/>
+            </map:handle-errors>
+        </map:pipeline>
+        <map:pipeline type="caching">
+            <map:parameter name="expires" value="access plus 7 days"/>
+            <map:match type="wildcard" pattern="**.*">
+                <map:match pattern="images/**" type="wildcard">
+                    <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}"/>
+                </map:match>
+                <map:match pattern="favicon.ico" type="wildcard">
+                    <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/favicon.ico"/>
+                </map:match>
+                <!-- first wildcard will be version for local css and javascript -->
+                <map:match pattern="style/*/**.css" type="wildcard">
+                    <map:read type="txt-resource" src="context://resources/css/{2}.css">
+                        <map:parameter name="path" value=""/>
+                    </map:read>
+                </map:match>
+                <map:match pattern="javascript/*/*.js" type="wildcard">
+                    <map:read type="txt-resource" src="context://javascript/{2}.js">
+                        <map:parameter name="path" value=""/>
+                    </map:read>
+                </map:match>
+                <!-- cocoon reader range handling is broken so don't do it for pdfs where it matters most -->
+                <map:match pattern="**.pdf" type="wildcard">
+                    <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}.pdf">
+                        <map:parameter name="byte-ranges" value="false"/>
+                    </map:read>
+                </map:match>
+                <map:match pattern="**" type="wildcard">
+                    <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}"/>
+                </map:match>
+            </map:match>
+        </map:pipeline>
+        <map:pipeline type="noncaching">
             <map:match pattern="**" type="wildcard">
-                <map:redirect-to uri="{1}/index.html"/>
+                <map:generate type="file" src="cocoon:/{1}/index.html"/>
+                <map:serialize type="xhtml"/>
             </map:match>
             <map:handle-errors>
                 <map:generate src="cocoon:/error.html" type="file"/>
