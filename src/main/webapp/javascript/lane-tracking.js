@@ -146,9 +146,9 @@ LANE.tracking = function(){
                         if ((/secure\/login.html/).test(link.pathname) && link.search !== '') {
                             return true;
                         }
-                        //otherwise rely on normal tracking for .html unless
+                        //otherwise rely on normal tracking for .html and / unless
                         //a parent has a clicked function
-                        if ((/\.html$/).test(link.pathname)) {
+                        if ((/\.html$/).test(link.pathname) || (/\/$/).test(link.pathname)) {
                             while (link !== null) {
                                 if (link.clicked && !link.rel) {
                                     return true;
