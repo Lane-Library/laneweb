@@ -93,16 +93,20 @@ public class UserDao {
         Cookie sunetIdCookie = null;
         Cookie securityCookie = null;
         Cookie dateCookie = null;
-        for (Cookie cookie : request.getCookies()) {
+        Cookie[] cookies = request.getCookies();
+        if (null == cookies) {
+            return null;
+        }
+        for (int i = 0; i < cookies.length; i++) {
             // FIXME: remove this check after fixing tests:
-            if (null != cookie) {
-                String name = cookie.getName();
+            if (null != cookies[i]) {
+                String name = cookies[i].getName();
                 if (LanewebConstants.USER_COOKIE_NAME.equals(name)) {
-                    sunetIdCookie = cookie;
+                    sunetIdCookie = cookies[i];
                 } else if (LanewebConstants.SECURITY_COOKIE_NAME.equals(name)) {
-                    securityCookie = cookie;
+                    securityCookie = cookies[i];
                 } else if (LanewebConstants.DATE_COOKIE_NAME.equals(name)) {
-                    dateCookie = cookie;
+                    dateCookie = cookies[i];
                 }
             }
         }
