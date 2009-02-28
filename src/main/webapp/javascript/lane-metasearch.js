@@ -5,15 +5,15 @@
     	mergedMode = true,
 		// filter out multiple ovid, mdc and cro requests b/c of IE6's 2048 character limit on requests
 		// this depends on search app returning all resources for engine when one resource requested
-		filterSearchUrl = function(id){
+		filterSearchUrl = function(el){
 			var uberEngines = ['cro_','mdc_','ovid-'], i, add = true;
 			for ( i = 0; i < uberEngines.length; i++){
-				if( this.id.match(uberEngines[i]) && url.match(uberEngines[i]) ){
+				if( el.id.match(uberEngines[i]) && url.match(uberEngines[i]) ){
 					add = false;
 				}
 			}
 			if ( add ){
-				url+='&r='+this.id;
+				url+='&r='+el.id;
 			}
 		};
 
