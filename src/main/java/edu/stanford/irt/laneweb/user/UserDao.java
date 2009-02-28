@@ -140,7 +140,7 @@ public class UserDao {
     }
 
     private void setLdapData(final User user) {
-        if (null != user.getUId()) {
+        if (null != user.getUId() && null == user.getDisplayName()) {
             Subject subject = this.subjectSource.getSubject();
             if (null != subject) {
                 Subject.doAs(subject, new PrivilegedAction<User>() {
