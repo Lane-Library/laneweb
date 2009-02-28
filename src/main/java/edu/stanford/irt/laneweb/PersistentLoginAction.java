@@ -31,7 +31,7 @@ public class PersistentLoginAction implements Action {
         String persistentLogin = request.getParameter("pl");
         String removePersistentLogin = request.getParameter("remove-pl");
         User user = this.userDao.createOrUpdateUser(request);
-        String sunetid = user.getUId();
+        String sunetid = user.getSunetId();
         if ((sunetid == null) && !"logout".equals(persistentLogin)) {
             String secureUrl = request.getContextPath().concat("/secure/persistentlogin.html");
             if (null != request.getQueryString()) {

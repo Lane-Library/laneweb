@@ -140,13 +140,13 @@ public class UserDao {
     }
 
     private void setLdapData(final User user) {
-        if (null != user.getUId() && null == user.getDisplayName()) {
+        if (null != user.getSunetId() && null == user.getDisplayName()) {
             Subject subject = this.subjectSource.getSubject();
             if (null != subject) {
                 Subject.doAs(subject, new PrivilegedAction<User>() {
 
                     public User run() {
-                        UserDao.this.ldapTemplate.search("", "susunetid=" + user.getUId(), new AttributesMapper() {
+                        UserDao.this.ldapTemplate.search("", "susunetid=" + user.getSunetId(), new AttributesMapper() {
 
                             public Object mapFromAttributes(final Attributes attributes) throws NamingException {
                                 user.setDisplayName((String) attributes.get("displayname").get());
@@ -170,7 +170,7 @@ public class UserDao {
     }
 
     private void setSunetId(final User user, final HttpServletRequest request) {
-        if (user.getUId() == null) {
+        if (user.getSunetId() == null) {
             String sunetId = request.getRemoteUser();
             if (sunetId == null) {
                 sunetId = request.getHeader("x-webauth-user");
@@ -181,14 +181,14 @@ public class UserDao {
             if (sunetId == null) {
                 sunetId = getSunetIdFromCookie(request);
             }
-            user.setUId(sunetId);
+            user.setSunetId(sunetId);
         }
     }
 
     private void setTicket(final User user, final HttpServletRequest request) {
         Ticket ticket = user.getTicket();
-        if (null != user.getUId() && (null == ticket || !ticket.isValid())) {
-            user.setTicket(new Ticket(user.getUId(), this.ezproxyKey));
+        if (null != user.getSunetId() && (null == ticket || !ticket.isValid())) {
+            user.setTicket(new Ticket(user.getSunetId(), this.ezproxyKey));
         }
     }
 
@@ -206,10 +206,10 @@ public class UserDao {
                     ip = header;
                 }
             }
-            TrackingAffiliation trackingAffiliation = TrackingAffiliation.getAffiliationForIP(ip);
-            user.setTrackingAffiliation(trackingAffiliation);
-            if (TrackingAffiliation.ERR.equals(trackingAffiliation)) {
-                this.logger.error("error parsing ip for TrackingAffiliation: " + ip);
+            IPGroup iPGroup = IPGroup.getGroupForIP(ip);
+            user.setTrackingAffiliation(iPGroup);
+            if (IPGroup.ERR.equals(iPGroup)) {
+                this.logger.error("error parsing ip for IPGroup: " + ip);
             }
         }
     }

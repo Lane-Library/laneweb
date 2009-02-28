@@ -60,7 +60,7 @@ public class LanewebInputModule implements InputModule {
             result = getTemplateName(requestURI.substring(contextPathLength + 1));
         }
         if (LanewebConstants.SUNETID.equals(key)) {
-            result = user.getUId();
+            result = user.getSunetId();
         }
         if (LanewebConstants.TICKET.equals(key)) {
             result = user.getTicket();
@@ -68,7 +68,7 @@ public class LanewebInputModule implements InputModule {
         if (LanewebConstants.FULL_NAME.equals(key)) {
             result = user.getDisplayName();
             if ((result == null) || result.equals("")) {
-                result = user.getUId();
+                result = user.getSunetId();
             }
         }
         if (this.logger.isDebugEnabled()) {

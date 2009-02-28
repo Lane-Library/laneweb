@@ -37,7 +37,7 @@ public class WebdashLogin {
             this.logger.error("null nonce");
             return ERROR_URL;
         }
-        String userId = encodeParameter(person.getUId());
+        String userId = encodeParameter(person.getSunetId());
         String mail = encodeParameter(userId.concat("@stanford.edu"));
         String fullName = encodeParameter(person.getDisplayName());
         String affiliation = getSubGroup(person);

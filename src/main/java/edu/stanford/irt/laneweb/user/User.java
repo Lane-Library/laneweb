@@ -10,9 +10,9 @@ public class User {
 
     private Ticket ticket;
 
-    private TrackingAffiliation trackingAffiliation;
+    private IPGroup iPGroup;
 
-    private String uId;
+    private String sunetId;
 
     private String univId;
 
@@ -32,12 +32,12 @@ public class User {
         return this.ticket;
     }
 
-    public TrackingAffiliation getTrackingAffiliation() {
-        return this.trackingAffiliation;
+    public IPGroup getTrackingAffiliation() {
+        return this.iPGroup;
     }
 
-    public String getUId() {
-        return this.uId;
+    public String getSunetId() {
+        return this.sunetId;
     }
 
     public String getUnivId() {
@@ -60,12 +60,12 @@ public class User {
         this.ticket = ticket;
     }
 
-    public void setTrackingAffiliation(final TrackingAffiliation trackingAffiliation) {
-        this.trackingAffiliation = trackingAffiliation;
+    public void setTrackingAffiliation(final IPGroup iPGroup) {
+        this.iPGroup = iPGroup;
     }
 
-    public void setUId(final String uId) {
-        this.uId = uId;
+    public void setSunetId(final String uId) {
+        this.sunetId = uId;
     }
 
     public void setUnivId(final String univId) {
@@ -74,8 +74,8 @@ public class User {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("uid=").append(this.uId).append(",univid=").append(this.univId).append(",affiliation=").append(this.affiliation)
-                .append(",displayname=").append(this.displayName).append(",trackingAffiliation=").append(this.trackingAffiliation).append(",ticket=").append(
+        StringBuffer sb = new StringBuffer("sunetId=").append(this.sunetId).append(",univid=").append(this.univId).append(",affiliation=").append(this.affiliation)
+                .append(",displayname=").append(this.displayName).append(",iPGroup=").append(this.iPGroup).append(",ticket=").append(
                         this.ticket).append(",proxyLinks=").append(this.proxyLinks);
         return sb.toString();
     }

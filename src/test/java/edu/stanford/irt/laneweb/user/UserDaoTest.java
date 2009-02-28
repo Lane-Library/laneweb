@@ -50,7 +50,7 @@ public class UserDaoTest extends TestCase {
         expect(this.request.getRemoteUser()).andReturn(this.sunetid);
         replay(this.request);
         User user = this.userDao.createOrUpdateUser(this.request);
-        assertEquals(TrackingAffiliation.ERR, user.getTrackingAffiliation());
+        assertEquals(IPGroup.ERR, user.getTrackingAffiliation());
         verify(this.session);
         verify(this.request);
     }
@@ -78,9 +78,9 @@ public class UserDaoTest extends TestCase {
         this.cookies[2] = securityCookie;
         this.userDao.setCryptor(cryptor);
         User user = this.userDao.createOrUpdateUser(this.request);
-        assertEquals(TrackingAffiliation.SOM, user.getTrackingAffiliation());
+        assertEquals(IPGroup.SOM, user.getTrackingAffiliation());
         assertTrue(user.getProxyLinks());
-        assertEquals(this.sunetid, user.getUId());
+        assertEquals(this.sunetid, user.getSunetId());
         assertNotNull(user.getTicket());
         assertEquals(46, user.getTicket().toString().length());
         verify(this.session);
@@ -94,7 +94,7 @@ public class UserDaoTest extends TestCase {
         this.map.values().toArray(this.cookies);
         String sunetid = null;
         User user = this.userDao.createOrUpdateUser(this.request);
-        sunetid = user.getUId();
+        sunetid = user.getSunetId();
         assertEquals(sunetid, null);
     }
 
@@ -104,7 +104,7 @@ public class UserDaoTest extends TestCase {
         this.map.values().toArray(this.cookies);
         this.userDao.setCryptor(this.cryptor);
         User user = this.userDao.createOrUpdateUser(this.request);
-        String sunetid = user.getUId();
+        String sunetid = user.getSunetId();
         assertEquals(sunetid, null);
     }
 
@@ -115,7 +115,7 @@ public class UserDaoTest extends TestCase {
         this.map.values().toArray(this.cookies);
         String sunetid = null;
         User user = this.userDao.createOrUpdateUser(this.request);
-        sunetid = user.getUId();
+        sunetid = user.getSunetId();
         assertEquals(sunetid, null);
     }
 
@@ -124,7 +124,7 @@ public class UserDaoTest extends TestCase {
         this.map.remove(LanewebConstants.SECURITY_COOKIE_NAME);
         this.map.values().toArray(this.cookies);
         User user = this.userDao.createOrUpdateUser(this.request);
-        String sunetid = user.getUId();
+        String sunetid = user.getSunetId();
         assertEquals(sunetid, null);
     }
 
@@ -141,7 +141,7 @@ public class UserDaoTest extends TestCase {
         this.map.put(LanewebConstants.SECURITY_COOKIE_NAME, securityCookie);
         this.map.values().toArray(this.cookies);
         User user = this.userDao.createOrUpdateUser(this.request);
-        String sunetid = user.getUId();
+        String sunetid = user.getSunetId();
         assertEquals(sunetid, this.sunetid);
     }
 
@@ -158,7 +158,7 @@ public class UserDaoTest extends TestCase {
         this.map.put(LanewebConstants.SECURITY_COOKIE_NAME, securityCookie);
         this.map.values().toArray(this.cookies);
         User user = this.userDao.createOrUpdateUser(this.request);
-        String sunetid = user.getUId();
+        String sunetid = user.getSunetId();
         assertEquals(sunetid, null);
     }
 
@@ -169,7 +169,7 @@ public class UserDaoTest extends TestCase {
         this.map.values().toArray(this.cookies);
         String sunetid = null;
         User user = this.userDao.createOrUpdateUser(this.request);
-        sunetid = user.getUId();
+        sunetid = user.getSunetId();
         assertEquals(sunetid, null);
     }
 
@@ -178,7 +178,7 @@ public class UserDaoTest extends TestCase {
         this.map.remove(LanewebConstants.USER_COOKIE_NAME);
         this.map.values().toArray(this.cookies);
         User user = this.userDao.createOrUpdateUser(this.request);
-        String sunetid = user.getUId();
+        String sunetid = user.getSunetId();
         assertEquals(sunetid, null);
     }
 
@@ -187,9 +187,9 @@ public class UserDaoTest extends TestCase {
         expect(this.request.getRemoteAddr()).andReturn(this.ip);
         replay(this.request);
         User user = this.userDao.createOrUpdateUser(this.request);
-        assertEquals(TrackingAffiliation.SOM, user.getTrackingAffiliation());
+        assertEquals(IPGroup.SOM, user.getTrackingAffiliation());
         assertTrue(user.getProxyLinks());
-        assertEquals(this.sunetid, user.getUId());
+        assertEquals(this.sunetid, user.getSunetId());
         assertNotNull(user.getTicket());
         assertEquals(46, user.getTicket().toString().length());
         verify(this.session);
