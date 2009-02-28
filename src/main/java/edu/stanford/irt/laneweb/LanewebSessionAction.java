@@ -13,14 +13,11 @@ import org.apache.cocoon.environment.SourceResolver;
  * 
  * @author ceyates
  */
-
 public class LanewebSessionAction implements Action {
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector arg0, final SourceResolver arg1, final Map objectModel, final String arg3, final Parameters arg4)
-            throws Exception {
+    public Map act(final Redirector arg0, final SourceResolver arg1, final Map objectModel, final String arg3, final Parameters arg4) throws Exception {
         ObjectModelHelper.getRequest(objectModel).getSession();
         return null;
     }
-
 }

@@ -21,32 +21,13 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
 
     private String defaultPath;
 
-    private String path;
+    private OutputStream outputStream;
 
-    private String valueToSubstitute;
+    private String path;
 
     private Source source;
 
-    private OutputStream outputStream;
-
-    public void setDefaultPath(final String path) {
-        this.defaultPath = path;
-    }
-
-    public void setValueToSubstitute(final String valueToSubstitute) {
-        this.valueToSubstitute = valueToSubstitute;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        this.path = par.getParameter("path", this.defaultPath);
-        this.source = resolver.resolveURI(src);
-    }
-
-    public Serializable getKey() {
-        return this.source.getURI() + ";path=" + this.path;
-    }
+    private String valueToSubstitute;
 
     public void generate() throws IOException, SAXException, ProcessingException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(this.source.getInputStream()));
@@ -59,6 +40,10 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
         this.outputStream.flush();
     }
 
+    public Serializable getKey() {
+        return this.source.getURI() + ";path=" + this.path;
+    }
+
     public long getLastModified() {
         return this.source.getLastModified();
     }
@@ -67,20 +52,34 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
         return null;
     }
 
+    public SourceValidity getValidity() {
+        return this.source.getValidity();
+    }
+
+    public void setDefaultPath(final String path) {
+        this.defaultPath = path;
+    }
+
     public void setOutputStream(final OutputStream out) {
         if ((out instanceof BufferedOutputStream) || (out instanceof org.apache.cocoon.util.BufferedOutputStream)) {
-
             this.outputStream = out;
         } else {
             this.outputStream = new BufferedOutputStream(out, 1536);
         }
     }
 
-    public boolean shouldSetContentLength() {
-        return false;
+    @SuppressWarnings("unchecked")
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
+            IOException {
+        this.path = par.getParameter("path", this.defaultPath);
+        this.source = resolver.resolveURI(src);
     }
 
-    public SourceValidity getValidity() {
-        return this.source.getValidity();
+    public void setValueToSubstitute(final String valueToSubstitute) {
+        this.valueToSubstitute = valueToSubstitute;
+    }
+
+    public boolean shouldSetContentLength() {
+        return false;
     }
 }

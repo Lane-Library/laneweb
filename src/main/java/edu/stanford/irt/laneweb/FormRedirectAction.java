@@ -25,13 +25,12 @@ public class FormRedirectAction implements Action {
 
     private static final String Q = "q";
 
-    private static final String SOURCE = "source";
-
     private static final String REPLACE = "\\{search-terms\\}";
 
+    private static final String SOURCE = "source";
+
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String src,
-            final Parameters params) {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
         Map<String, String> result = new HashMap<String, String>();
         String q = params.getParameter(Q, null);
         String source = params.getParameter(SOURCE, null);
@@ -50,5 +49,4 @@ public class FormRedirectAction implements Action {
         result.put(FORM_REDIRECT_KEY, url);
         return result;
     }
-
 }

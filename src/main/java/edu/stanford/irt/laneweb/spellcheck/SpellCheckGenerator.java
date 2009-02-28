@@ -21,18 +21,11 @@ public class SpellCheckGenerator implements Generator {
 
     private static final String QUERY = "query";
 
-    private SpellChecker spellChecker;
+    private ThreadLocal<XMLConsumer> consumer = new ThreadLocal<XMLConsumer>();
 
     private ThreadLocal<String> query = new ThreadLocal<String>();
 
-    private ThreadLocal<XMLConsumer> consumer = new ThreadLocal<XMLConsumer>();
-
-    public void setSpellChecker(final SpellChecker spellChecker) {
-        if (null == spellChecker) {
-            throw new IllegalArgumentException("null spellChecker");
-        }
-        this.spellChecker = spellChecker;
-    }
+    private SpellChecker spellChecker;
 
     public void generate() throws SAXException {
         String query = this.query.get();
@@ -45,11 +38,8 @@ public class SpellCheckGenerator implements Generator {
             this.query.set(null);
             throw new IllegalStateException("null consumer");
         }
-
         try {
-
             XMLizable result = new XMLizableSpellCheckResult(query, this.spellChecker.spellCheck(query));
-
             consumer.startDocument();
             result.toSAX(consumer);
             consumer.endDocument();
@@ -57,6 +47,20 @@ public class SpellCheckGenerator implements Generator {
             this.consumer.set(null);
             this.query.set(null);
         }
+    }
+
+    public void setConsumer(final XMLConsumer consumer) {
+        if (null == consumer) {
+            throw new IllegalArgumentException("null consumer");
+        }
+        this.consumer.set(consumer);
+    }
+
+    public void setSpellChecker(final SpellChecker spellChecker) {
+        if (null == spellChecker) {
+            throw new IllegalArgumentException("null spellChecker");
+        }
+        this.spellChecker = spellChecker;
     }
 
     @SuppressWarnings("unchecked")
@@ -70,12 +74,4 @@ public class SpellCheckGenerator implements Generator {
         }
         this.query.set(param);
     }
-
-    public void setConsumer(final XMLConsumer consumer) {
-        if (null == consumer) {
-            throw new IllegalArgumentException("null consumer");
-        }
-        this.consumer.set(consumer);
-    }
-
 }

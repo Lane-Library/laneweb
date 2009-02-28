@@ -1,22 +1,14 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.user;
 
 import junit.framework.TestCase;
 
 public class TicketTest extends TestCase {
 
-    private Ticket ticket;
+    private String ezproxyKey;
 
     private String sunetid;
 
-    private String ezproxyKey;
-
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        this.sunetid = "ceyates";
-        this.ezproxyKey = "boguskey";
-        this.ticket = new Ticket(this.sunetid, this.ezproxyKey);
-    }
+    private Ticket ticket;
 
     public void testTicket() {
         try {
@@ -35,4 +27,11 @@ public class TicketTest extends TestCase {
         assertEquals(46, this.ticket.toString().length());
     }
 
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        this.sunetid = "ceyates";
+        this.ezproxyKey = "boguskey";
+        this.ticket = new Ticket(this.sunetid, this.ezproxyKey);
+    }
 }

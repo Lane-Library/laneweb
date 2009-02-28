@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.xml.sax.SAXException;
 
@@ -21,9 +22,9 @@ public class SearchEresourcesGenerator extends AbstractEresourcesGenerator {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        Request request = ObjectModelHelper.getRequest(objectModel);
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
+            IOException {
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         this.query = request.getParameter(QUERY);
         if (null != this.query) {
             if (this.query.length() == 0) {
@@ -45,5 +46,4 @@ public class SearchEresourcesGenerator extends AbstractEresourcesGenerator {
         }
         return this.collectionManager.search(this.query);
     }
-
 }

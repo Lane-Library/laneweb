@@ -32,5 +32,4 @@ public class QueryMapGenerator extends AbstractQueryMapComponent implements Gene
         }
         this.consumer.set(consumer);
     }
-
 }

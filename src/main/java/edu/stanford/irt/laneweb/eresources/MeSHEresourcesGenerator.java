@@ -13,5 +13,4 @@ public class MeSHEresourcesGenerator extends CacheableEresourcesGenerator {
         }
         return this.collectionManager.getMesh(this.type, this.mesh);
     }
-
 }

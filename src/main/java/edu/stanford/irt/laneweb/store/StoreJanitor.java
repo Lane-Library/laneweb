@@ -21,5 +21,4 @@ public class StoreJanitor implements org.apache.excalibur.store.StoreJanitor {
     public void unregister(final Store store) {
         this.stores.remove(store);
     }
-
 }

@@ -6,10 +6,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -29,74 +30,47 @@ import edu.stanford.irt.search.util.SAXable;
  */
 public class SearchGenerator implements Generator {
 
-    private MetaSearchManager metaSearchManager;
+    private String clearCache;
 
     private long defaultTimeout;
 
-    private String q;
-
-    private String t;
-
     private String[] e;
 
-    private String w;
+    private MetaSearchManager metaSearchManager;
+
+    private String q;
 
     private String[] r;
 
-    private String clearCache;
+    private String t;
+
+    private String w;
 
     private XMLConsumer xmlConsumer;
 
-    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
-        this.metaSearchManager = msms.getMetaSearchManager();
-    }
-
-    public void setDefaultTimeout(final long defaultTimeout) {
-        this.defaultTimeout = defaultTimeout;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        Request request = (Request) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
-        this.q = request.getParameter("q");
-        this.t = request.getParameter("t");
-        this.e = request.getParameterValues("e");
-        this.w = request.getParameter("w");
-        this.r = request.getParameterValues("r");
-        this.clearCache = request.getParameter("clearcache");
-    }
-
     public void generate() throws IOException, SAXException, ProcessingException {
-
         if ("y".equalsIgnoreCase(this.clearCache)) {
             ((CachedMetaSearchManagerImpl) this.metaSearchManager).clearCache(this.q);
         }
         if ("all".equalsIgnoreCase(this.clearCache)) {
             ((CachedMetaSearchManagerImpl) this.metaSearchManager).clearAllCaches();
         }
-
         Result result = null;
-
         Collection<String> engines = null;
         Collection<String> resources = null;
-
         if ((this.e != null) && (this.e.length > 0)) {
             engines = new HashSet<String>();
             for (String element : this.e) {
                 engines.add(element);
             }
         }
-
         if ((this.r != null) && (this.r.length > 0)) {
             resources = new HashSet<String>();
             for (String element : this.r) {
                 resources.add(element);
             }
         }
-
         if ((this.q != null) && (this.q.length() > 0)) {
-
             long time = this.defaultTimeout;
             if (null != this.t) {
                 try {
@@ -106,10 +80,8 @@ public class SearchGenerator implements Generator {
                 }
             }
             long timeout = time;
-
             final SimpleQuery query = new SimpleQuery(this.q);
             result = this.metaSearchManager.search(query, timeout, engines, false);
-
             if (null != this.w) {
                 long wait = 0;
                 try {
@@ -117,9 +89,7 @@ public class SearchGenerator implements Generator {
                 } catch (NumberFormatException nfe) {
                     ;
                 }
-
                 long start = System.currentTimeMillis();
-
                 try {
                     synchronized (result) {
                         while ((wait > 0) && SearchStatus.RUNNING.equals(result.getStatus())) {
@@ -135,9 +105,7 @@ public class SearchGenerator implements Generator {
                     throw new RuntimeException(ie);
                 }
             }
-
         }
-
         if (result == null) {
             result = new DefaultResult("null");
             result.setStatus(SearchStatus.FAILED);
@@ -175,4 +143,23 @@ public class SearchGenerator implements Generator {
         this.xmlConsumer = xmlConsumer;
     }
 
+    public void setDefaultTimeout(final long defaultTimeout) {
+        this.defaultTimeout = defaultTimeout;
+    }
+
+    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
+        this.metaSearchManager = msms.getMetaSearchManager();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
+            IOException {
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
+        this.q = request.getParameter("q");
+        this.t = request.getParameter("t");
+        this.e = request.getParameterValues("e");
+        this.w = request.getParameter("w");
+        this.r = request.getParameterValues("r");
+        this.clearCache = request.getParameter("clearcache");
+    }
 }

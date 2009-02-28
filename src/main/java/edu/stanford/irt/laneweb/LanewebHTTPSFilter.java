@@ -31,8 +31,7 @@ public class LanewebHTTPSFilter implements Filter {
     /**
      * does the redirect if no gohttps header or scheme is not https
      */
-    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException,
-            ServletException {
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String queryString = req.getQueryString();
@@ -47,5 +46,4 @@ public class LanewebHTTPSFilter implements Filter {
 
     public void init(final FilterConfig filterConfig) throws ServletException {
     }
-
 }

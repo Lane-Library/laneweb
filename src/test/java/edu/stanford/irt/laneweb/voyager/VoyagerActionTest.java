@@ -8,40 +8,37 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
-import org.apache.cocoon.environment.Request;
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.directory.LDAPPerson;
-import edu.stanford.irt.laneweb.UserInfo;
-import edu.stanford.irt.laneweb.UserInfoHelper;
+import edu.stanford.irt.laneweb.user.User;
+import edu.stanford.irt.laneweb.user.UserDao;
 
 public class VoyagerActionTest {
 
     private VoyagerAction action;
 
-    private VoyagerLogin voyagerLogin;
-
-    private UserInfoHelper userInfoHelper;
-
     private Map<String, Object> objectModel;
 
-    private Request request;
+    private HttpServletRequest request;
 
-    private UserInfo userInfo;
+    private User user;
 
-    private LDAPPerson person;
+    private UserDao userDao;
+
+    private VoyagerLogin voyagerLogin;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
         this.action = new VoyagerAction();
         this.voyagerLogin = createMock(VoyagerLogin.class);
-        this.userInfoHelper = createMock(UserInfoHelper.class);
+        this.userDao = createMock(UserDao.class);
         this.objectModel = createMock(Map.class);
-        this.request = createMock(Request.class);
-        this.userInfo = createMock(UserInfo.class);
-        this.person = createMock(LDAPPerson.class);
+        this.request = createMock(HttpServletRequest.class);
+        this.user = createMock(User.class);
     }
 
     @Test
@@ -51,20 +48,18 @@ public class VoyagerActionTest {
         expect(this.request.getParameter("PID")).andReturn("123");
         expect(this.request.getQueryString()).andReturn("a=b");
         replay(this.request);
-        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(this.userInfo);
-        replay(this.userInfoHelper);
-        expect(this.userInfo.getPerson()).andReturn(this.person);
-        replay(this.userInfo);
-        expect(this.voyagerLogin.getVoyagerURL(this.person, "123", "a=b")).andReturn("hello");
+        expect(this.userDao.createOrUpdateUser(this.request)).andReturn(this.user);
+        replay(this.userDao);
+        replay(this.user);
+        expect(this.voyagerLogin.getVoyagerURL(this.user, "123", "a=b")).andReturn("hello");
         replay(this.voyagerLogin);
         this.action.setVoyagerLogin(this.voyagerLogin);
-        this.action.setUserInfoHelper(this.userInfoHelper);
+        this.action.setUserDao(this.userDao);
         assertEquals(this.action.act(null, null, this.objectModel, null, null).get("voyager-url"), "hello");
         verify(this.objectModel);
         verify(this.request);
-        verify(this.userInfoHelper);
-        verify(this.userInfo);
+        verify(this.userDao);
+        verify(this.user);
         verify(this.voyagerLogin);
     }
-
 }

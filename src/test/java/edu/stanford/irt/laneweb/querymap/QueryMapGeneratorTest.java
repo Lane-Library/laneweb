@@ -32,13 +32,13 @@ import edu.stanford.irt.querymap.ResourceMap;
 
 public class QueryMapGeneratorTest {
 
+    private XMLConsumer consumer;
+
     private QueryMapGenerator generator;
 
     private Parameters parameters;
 
     private QueryMapper queryMapper;
-
-    private XMLConsumer consumer;
 
     @Before
     public void setUp() throws Exception {
@@ -46,38 +46,6 @@ public class QueryMapGeneratorTest {
         this.parameters = createMock(Parameters.class);
         this.queryMapper = createMock(QueryMapper.class);
         this.consumer = createMock(XMLConsumer.class);
-    }
-
-    @Test
-    public void testSetQueryMapper() {
-        try {
-            this.generator.setQueryMapper(null);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
-        this.generator.setQueryMapper(this.queryMapper);
-    }
-
-    @Test
-    public void testSetup() throws MalformedURLException, IOException {
-
-        try {
-            this.generator.setup(null, null, null, null);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
-        expect(this.parameters.getParameter("query", null)).andReturn("dvt");
-        expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
-        expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
-        replay(this.parameters);
-        try {
-            this.generator.setup(null, null, null, this.parameters);
-        } catch (IllegalStateException e) {
-        }
-        this.generator.setQueryMapper(this.queryMapper);
-        this.generator.setup(null, null, null, this.parameters);
-        verify(this.parameters);
     }
 
     @Test
@@ -125,6 +93,37 @@ public class QueryMapGeneratorTest {
         this.generator.setConsumer(this.consumer);
     }
 
+    @Test
+    public void testSetQueryMapper() {
+        try {
+            this.generator.setQueryMapper(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+        }
+        this.generator.setQueryMapper(this.queryMapper);
+    }
+
+    @Test
+    public void testSetup() throws MalformedURLException, IOException {
+        try {
+            this.generator.setup(null, null, null, null);
+            fail();
+        } catch (IllegalArgumentException e) {
+        }
+        expect(this.parameters.getParameter("query", null)).andReturn("dvt");
+        expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
+        expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
+        expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
+        replay(this.parameters);
+        try {
+            this.generator.setup(null, null, null, this.parameters);
+        } catch (IllegalStateException e) {
+        }
+        this.generator.setQueryMapper(this.queryMapper);
+        this.generator.setup(null, null, null, this.parameters);
+        verify(this.parameters);
+    }
+
     // TODO I don't know if this actually does what I want it to.
     @Test
     public void testThreads() {
@@ -134,14 +133,13 @@ public class QueryMapGeneratorTest {
             @Override
             public QueryMap getQueryMap(final String query) {
                 Descriptor descriptor = new Descriptor(query, query, Collections.<String> singleton(query));
-                return new QueryMap(query, descriptor, new ResourceMap(descriptor, Collections.<Resource> singleton(new Resource(query,
-                        query))), null, null);
+                return new QueryMap(query, descriptor, new ResourceMap(descriptor, Collections.<Resource> singleton(new Resource(query, query))), null, null);
             }
 
             // TODO: need to more thoroughly test the source reloading:
             @Override
-            public QueryMap getQueryMap(final String query, final Map<String, Set<Resource>> resourceMaps,
-                    final Map<String, Float> descriptorWeights, final int abstractCount) {
+            public QueryMap getQueryMap(final String query, final Map<String, Set<Resource>> resourceMaps, final Map<String, Float> descriptorWeights,
+                    final int abstractCount) {
                 return null;
             }
         };
@@ -163,7 +161,6 @@ public class QueryMapGeneratorTest {
                         @Override
                         public void characters(final char[] chars, final int start, final int length) {
                             assertEquals(response, new String(chars, start, length));
-
                         }
 
                         @Override
@@ -193,7 +190,5 @@ public class QueryMapGeneratorTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 }

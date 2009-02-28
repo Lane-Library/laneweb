@@ -24,14 +24,9 @@ public class LinkScanGenerator implements Generator {
 
     private DataSource dataSource;
 
-    private ThreadLocal<XMLConsumer> xmlConsumer = new ThreadLocal<XMLConsumer>();
+    private final String sql = "select url, record_type, record_id, title " + "from link, eresource " + "where eresource.eresource_id = link.eresource_id";
 
-    public void setDataSource(final DataSource dataSource) {
-        if (null == dataSource) {
-            throw new IllegalArgumentException("null dataSource");
-        }
-        this.dataSource = dataSource;
-    }
+    private ThreadLocal<XMLConsumer> xmlConsumer = new ThreadLocal<XMLConsumer>();
 
     public void generate() throws IOException, SAXException, ProcessingException {
         Connection conn = null;
@@ -94,11 +89,6 @@ public class LinkScanGenerator implements Generator {
         }
     }
 
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3) throws ProcessingException,
-            SAXException, IOException {
-    }
-
     public void setConsumer(final XMLConsumer xmlConsumer) {
         if (null == xmlConsumer) {
             throw new IllegalArgumentException("null xmlConsumer");
@@ -106,7 +96,15 @@ public class LinkScanGenerator implements Generator {
         this.xmlConsumer.set(xmlConsumer);
     }
 
-    private final String sql = "select url, record_type, record_id, title " + "from link, eresource "
-            + "where eresource.eresource_id = link.eresource_id";
+    public void setDataSource(final DataSource dataSource) {
+        if (null == dataSource) {
+            throw new IllegalArgumentException("null dataSource");
+        }
+        this.dataSource = dataSource;
+    }
 
+    @SuppressWarnings("unchecked")
+    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3) throws ProcessingException, SAXException,
+            IOException {
+    }
 }

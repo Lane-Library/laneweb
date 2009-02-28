@@ -18,23 +18,23 @@ import edu.stanford.irt.querymap.StreamResourceMapping;
 
 public abstract class AbstractQueryMapComponent implements SitemapModelComponent {
 
+    private static final String ABSTRACT_COUNT = "abstract-count";
+
+    private static final String DESCRIPTOR_WEIGHTS = "descriptor-weights";
+
     private static final String QUERY = "query";
 
     private static final String RESOURCE_MAPS = "resource-maps";
 
-    private static final String DESCRIPTOR_WEIGHTS = "descriptor-weights";
-
-    private static final String ABSTRACT_COUNT = "abstract-count";
-
-    private QueryMapper queryMapper;
-
-    private ThreadLocal<String> query = new ThreadLocal<String>();
-
-    private ThreadLocal<Map<String, Set<Resource>>> resourceMaps = new ThreadLocal<Map<String, Set<Resource>>>();
+    private ThreadLocal<Integer> abstractCount = new ThreadLocal<Integer>();
 
     private ThreadLocal<Map<String, Float>> descriptorWeights = new ThreadLocal<Map<String, Float>>();
 
-    private ThreadLocal<Integer> abstractCount = new ThreadLocal<Integer>();
+    private ThreadLocal<String> query = new ThreadLocal<String>();
+
+    private QueryMapper queryMapper;
+
+    private ThreadLocal<Map<String, Set<Resource>>> resourceMaps = new ThreadLocal<Map<String, Set<Resource>>>();
 
     public void setQueryMapper(final QueryMapper queryMapper) {
         if (null == queryMapper) {
@@ -85,8 +85,7 @@ public abstract class AbstractQueryMapComponent implements SitemapModelComponent
         if (null == this.resourceMaps.get()) {
             return this.queryMapper.getQueryMap(query);
         } else {
-            return this.queryMapper.getQueryMap(query, this.resourceMaps.get(), this.descriptorWeights.get(), this.abstractCount.get()
-                    .intValue());
+            return this.queryMapper.getQueryMap(query, this.resourceMaps.get(), this.descriptorWeights.get(), this.abstractCount.get().intValue());
         }
     }
 
@@ -95,5 +94,4 @@ public abstract class AbstractQueryMapComponent implements SitemapModelComponent
         this.descriptorWeights.set(null);
         this.resourceMaps.set(null);
     }
-
 }

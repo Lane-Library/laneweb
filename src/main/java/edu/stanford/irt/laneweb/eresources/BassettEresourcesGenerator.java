@@ -4,10 +4,11 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -19,42 +20,23 @@ import edu.stanford.irt.eresources.Eresource;
 
 public class BassettEresourcesGenerator implements Generator {
 
-    private static final String QUERY = "q";
-    private static final String REGION = "r";
     private static final String BASSETT_NUMBER = "bn";
 
+    private static final String QUERY = "q";
+
+    private static final String REGION = "r";
+
+    private String bassettNumber;
+
     private BassettCollectionManager collectionManager;
+
+    private String query;
+
+    private String region;
 
     private XMLConsumer xmlConsumer;
 
     ExpiresValidity validity;
-
-    private String query;
-    private String region;
-
-    private String bassettNumber;
-
-    public void setCollectionManager(final BassettCollectionManager collectionManager) {
-        if (null == collectionManager) {
-            throw new IllegalArgumentException("null collectionManager");
-        }
-        this.collectionManager = collectionManager;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        Request request = ObjectModelHelper.getRequest(objectModel);
-        String query = request.getParameter(QUERY);
-        this.region = request.getParameter(REGION);
-        this.bassettNumber = request.getParameter(BASSETT_NUMBER);
-        if (null != query) {
-            this.query = query.trim();
-            if (this.query.length() == 0) {
-                this.query = null;
-            }
-        }
-    }
 
     public void generate() throws SAXException {
         Collection<Eresource> eresources = null;
@@ -75,6 +57,13 @@ public class BassettEresourcesGenerator implements Generator {
         this.xmlConsumer.endDocument();
     }
 
+    public void setCollectionManager(final BassettCollectionManager collectionManager) {
+        if (null == collectionManager) {
+            throw new IllegalArgumentException("null collectionManager");
+        }
+        this.collectionManager = collectionManager;
+    }
+
     public void setConsumer(final XMLConsumer xmlConsumer) {
         if (null == xmlConsumer) {
             throw new IllegalArgumentException("null xmlConsumer");
@@ -82,4 +71,18 @@ public class BassettEresourcesGenerator implements Generator {
         this.xmlConsumer = xmlConsumer;
     }
 
+    @SuppressWarnings("unchecked")
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
+            IOException {
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
+        String query = request.getParameter(QUERY);
+        this.region = request.getParameter(REGION);
+        this.bassettNumber = request.getParameter(BASSETT_NUMBER);
+        if (null != query) {
+            this.query = query.trim();
+            if (this.query.length() == 0) {
+                this.query = null;
+            }
+        }
+    }
 }

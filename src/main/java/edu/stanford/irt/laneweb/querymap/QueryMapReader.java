@@ -44,5 +44,4 @@ public class QueryMapReader extends AbstractQueryMapComponent implements Reader 
     public boolean shouldSetContentLength() {
         return false;
     }
-
 }

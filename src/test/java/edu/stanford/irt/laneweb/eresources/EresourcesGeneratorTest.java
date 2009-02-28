@@ -11,9 +11,10 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,15 +25,15 @@ import edu.stanford.irt.eresources.Eresource;
 
 public class EresourcesGeneratorTest {
 
+    private CollectionManager collectionManager;
+
     private EresourcesGenerator generator;
 
     private Map<String, Object> objectModel;
 
     private Parameters parameters;
 
-    private CollectionManager collectionManager;
-
-    private Request request;
+    private HttpServletRequest request;
 
     @Before
     public void setUp() throws Exception {
@@ -40,23 +41,8 @@ public class EresourcesGeneratorTest {
         this.objectModel = new HashMap<String, Object>();
         this.parameters = createMock(Parameters.class);
         this.collectionManager = createMock(CollectionManager.class);
-        this.request = createMock(Request.class);
+        this.request = createMock(HttpServletRequest.class);
         this.objectModel.put("request", this.request);
-    }
-
-    @Test
-    public void testSetupSourceResolverMapStringParameters() throws ProcessingException, SAXException, IOException {
-        expect(this.parameters.getParameter("mode", "browse")).andReturn("browse");
-        replay(this.parameters);
-        expect(this.request.getParameter("q")).andReturn(null);
-        expect(this.request.getParameter("t")).andReturn("ej");
-        expect(this.request.getParameter("s")).andReturn(null);
-        expect(this.request.getParameter("a")).andReturn("z");
-        expect(this.request.getParameter("m")).andReturn(null);
-        replay(this.request);
-        this.generator.setup(null, this.objectModel, null, this.parameters);
-        verify(this.request);
-        verify(this.parameters);
     }
 
     @Test
@@ -89,4 +75,18 @@ public class EresourcesGeneratorTest {
         }
     }
 
+    @Test
+    public void testSetupSourceResolverMapStringParameters() throws ProcessingException, SAXException, IOException {
+        expect(this.parameters.getParameter("mode", "browse")).andReturn("browse");
+        replay(this.parameters);
+        expect(this.request.getParameter("q")).andReturn(null);
+        expect(this.request.getParameter("t")).andReturn("ej");
+        expect(this.request.getParameter("s")).andReturn(null);
+        expect(this.request.getParameter("a")).andReturn("z");
+        expect(this.request.getParameter("m")).andReturn(null);
+        replay(this.request);
+        this.generator.setup(null, this.objectModel, null, this.parameters);
+        verify(this.request);
+        verify(this.parameters);
+    }
 }

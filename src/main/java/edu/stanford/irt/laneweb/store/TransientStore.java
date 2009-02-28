@@ -39,6 +39,10 @@ public class TransientStore implements Store {
         this.map.remove(key);
     }
 
+    public void setStoreJanitor(final StoreJanitor storeJanitor) {
+        storeJanitor.register(this);
+    }
+
     public int size() {
         return this.map.size();
     }
@@ -46,9 +50,4 @@ public class TransientStore implements Store {
     public void store(final Object key, final Object value) throws IOException {
         this.map.put(key, value);
     }
-
-    public void setStoreJanitor(final StoreJanitor storeJanitor) {
-        storeJanitor.register(this);
-    }
-
 }

@@ -60,96 +60,16 @@ import org.xml.sax.ext.LexicalHandler;
  */
 public class LanewebXIncludeTransformer extends AbstractTransformer implements Serviceable, CacheableProcessingComponent {
 
-    protected SourceResolver resolver;
-    protected ServiceManager manager;
-    private XIncludePipe xIncludePipe;
-
-    public static final String XMLBASE_ATTRIBUTE = "base";
-
-    public static final String XINCLUDE_NAMESPACE_URI = "http://www.w3.org/2001/XInclude";
-    public static final String XINCLUDE_INCLUDE_ELEMENT = "include";
-    public static final String XINCLUDE_FALLBACK_ELEMENT = "fallback";
-    public static final String XINCLUDE_INCLUDE_ELEMENT_HREF_ATTRIBUTE = "href";
-    public static final String XINCLUDE_INCLUDE_ELEMENT_XPOINTER_ATTRIBUTE = "xpointer";
-    public static final String XINCLUDE_INCLUDE_ELEMENT_PARSE_ATTRIBUTE = "parse";
-
-    private static final String XINCLUDE_CACHE_KEY = "XInclude";
-
-    /** The {@link SourceValidity} instance associated with this request. */
-    protected MultiSourceValidity validity;
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String source, final Parameters parameters)
-            throws ProcessingException, SAXException, IOException {
-        this.resolver = resolver;
-        this.validity = new MultiSourceValidity(resolver, MultiSourceValidity.CHECK_ALWAYS);
-        this.xIncludePipe = new XIncludePipe();
-        this.xIncludePipe.init(null, null);
-        super.setContentHandler(this.xIncludePipe);
-        super.setLexicalHandler(this.xIncludePipe);
-    }
-
-    @Override
-    public void setConsumer(final XMLConsumer consumer) {
-        this.xIncludePipe.setConsumer(consumer);
-    }
-
-    @Override
-    public void setContentHandler(final ContentHandler handler) {
-        this.xIncludePipe.setContentHandler(handler);
-    }
-
-    @Override
-    public void setLexicalHandler(final LexicalHandler handler) {
-        this.xIncludePipe.setLexicalHandler(handler);
-    }
-
-    public void service(final ServiceManager manager) {
-        this.manager = manager;
-    }
-
-    /** Key to be used for caching */
-    public Serializable getKey() {
-        return XINCLUDE_CACHE_KEY;
-    }
-
-    /** Get the validity for this transform */
-    public SourceValidity getValidity() {
-        return this.validity;
-    }
-
-    @Override
-    public void recycle() {
-        // Reset all variables to initial state.
-        this.resolver = null;
-        this.validity = null;
-        this.xIncludePipe = null;
-        super.recycle();
-    }
-
     /**
      * XMLPipe that processes XInclude elements. To perform XInclude processing
      * on included content, this class is instantiated recursively.
      */
     private class XIncludePipe extends AbstractXMLPipe {
-        /** Helper class to keep track of xml:base attributes */
-        private XMLBaseSupport xmlBaseSupport;
-        /** The nesting level of xi:include elements that have been encountered. */
-        private int xIncludeElementLevel = 0;
-
-        /** The nesting level of fallback that should be used */
-        private int useFallbackLevel = 0;
 
         /**
          * The nesting level of xi:fallback elements that have been encountered.
          */
         private int fallbackElementLevel;
-
-        /**
-         * Keep a map of namespaces prefix in the source document to pass it to
-         * the XPointerContext for correct namespace identification.
-         */
-        private Map<String, String> namespaces = new HashMap<String, String>();
 
         /**
          * In case {@link #useFallbackLevel} > 0, then this should contain the
@@ -159,16 +79,33 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         private Exception fallBackException;
 
         /**
+         * Value of the href attribute of the xi:include element that caused the
+         * creation of the this XIncludePipe. Used to detect loop inclusions.
+         */
+        private String href;
+
+        /**
          * Locator of the current stream, stored here so that it can be restored
          * after another document send its content to the consumer.
          */
         private Locator locator;
 
         /**
-         * Value of the href attribute of the xi:include element that caused the
-         * creation of the this XIncludePipe. Used to detect loop inclusions.
+         * Keep a map of namespaces prefix in the source document to pass it to
+         * the XPointerContext for correct namespace identification.
          */
-        private String href;
+        private Map<String, String> namespaces = new HashMap<String, String>();
+
+        private XIncludePipe parent;
+
+        /** The nesting level of fallback that should be used */
+        private int useFallbackLevel = 0;
+
+        /** The nesting level of xi:include elements that have been encountered. */
+        private int xIncludeElementLevel = 0;
+
+        /** Helper class to keep track of xml:base attributes */
+        private XMLBaseSupport xmlBaseSupport;
 
         /**
          * Value of the xpointer attribute of the xi:include element that caused
@@ -176,41 +113,25 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
          */
         private String xpointer;
 
-        private XIncludePipe parent;
-
-        public void init(final String uri, final String xpointer) {
-            this.href = uri;
-            this.xpointer = xpointer;
-            this.xmlBaseSupport = new XMLBaseSupport(LanewebXIncludeTransformer.this.resolver, getLogger());
+        @Override
+        public void characters(final char c[], final int start, final int len) throws SAXException {
+            if (isEvaluatingContent()) {
+                super.characters(c, start, len);
+            }
         }
 
-        public void setParent(final XIncludePipe parent) {
-            this.parent = parent;
+        @Override
+        public void comment(final char ch[], final int start, final int len) throws SAXException {
+            if (isEvaluatingContent()) {
+                super.comment(ch, start, len);
+            }
         }
 
-        public XIncludePipe getParent() {
-            return this.parent;
-        }
-
-        public String getHref() {
-            return this.href;
-        }
-
-        public String getXpointer() {
-            return this.xpointer;
-        }
-
-        /**
-         * Determine whether the pipe is currently in a state where contents
-         * should be evaluated, i.e. xi:include elements should be resolved and
-         * elements in other namespaces should be copied through. Will return
-         * false for fallback contents within a successful xi:include, and true
-         * for contents outside any xi:include or within an xi:fallback for an
-         * unsuccessful xi:include.
-         */
-        private boolean isEvaluatingContent() {
-            return (this.xIncludeElementLevel == 0)
-                    || ((this.fallbackElementLevel > 0) && (this.fallbackElementLevel == this.useFallbackLevel));
+        @Override
+        public void endCDATA() throws SAXException {
+            if (isEvaluatingContent()) {
+                super.endCDATA();
+            }
         }
 
         @Override
@@ -219,6 +140,139 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
             // MultiSourceValidity as finished.
             LanewebXIncludeTransformer.this.validity.close();
             super.endDocument();
+        }
+
+        @Override
+        public void endElement(final String uri, final String name, final String raw) throws SAXException {
+            // Track xml:base context:
+            this.xmlBaseSupport.endElement(uri, name, raw);
+            // Handle elements in xinclude namespace:
+            if (XINCLUDE_NAMESPACE_URI.equals(uri)) {
+                // Handle xi:include:
+                if (XINCLUDE_INCLUDE_ELEMENT.equals(name)) {
+                    this.xIncludeElementLevel--;
+                    if (this.useFallbackLevel > this.xIncludeElementLevel) {
+                        this.useFallbackLevel = this.xIncludeElementLevel;
+                    }
+                } else if (XINCLUDE_FALLBACK_ELEMENT.equals(name)) {
+                    // Handle xi:fallback:
+                    this.fallbackElementLevel--;
+                }
+            } else if (isEvaluatingContent()) {
+                // Copy other elements through when appropriate:
+                super.endElement(uri, name, raw);
+            }
+        }
+
+        @Override
+        public void endEntity(final String name) throws SAXException {
+            if (isEvaluatingContent()) {
+                super.endEntity(name);
+            }
+        }
+
+        @Override
+        public void endPrefixMapping(final String prefix) throws SAXException {
+            if (isEvaluatingContent()) {
+                super.endPrefixMapping(prefix);
+                this.namespaces.remove(prefix);
+            }
+        }
+
+        public String getHref() {
+            return this.href;
+        }
+
+        public XIncludePipe getParent() {
+            return this.parent;
+        }
+
+        public String getXpointer() {
+            return this.xpointer;
+        }
+
+        @Override
+        public void ignorableWhitespace(final char c[], final int start, final int len) throws SAXException {
+            if (isEvaluatingContent()) {
+                super.ignorableWhitespace(c, start, len);
+            }
+        }
+
+        public void init(final String uri, final String xpointer) {
+            this.href = uri;
+            this.xpointer = xpointer;
+            this.xmlBaseSupport = new XMLBaseSupport(LanewebXIncludeTransformer.this.resolver, getLogger());
+        }
+
+        public boolean isLoopInclusion(final String uri, String xpointer) {
+            if (xpointer == null) {
+                xpointer = "";
+            }
+            if (uri.equals(this.href) && xpointer.equals(this.xpointer == null ? "" : this.xpointer)) {
+                return true;
+            }
+            XIncludePipe parent = getParent();
+            while (parent != null) {
+                if (uri.equals(parent.getHref()) && xpointer.equals(parent.getXpointer() == null ? "" : parent.getXpointer())) {
+                    return true;
+                }
+                parent = parent.getParent();
+            }
+            return false;
+        }
+
+        @Override
+        public void processingInstruction(final String target, final String data) throws SAXException {
+            if (isEvaluatingContent()) {
+                super.processingInstruction(target, data);
+            }
+        }
+
+        @Override
+        public void setDocumentLocator(final Locator locator) {
+            try {
+                if (getLogger().isDebugEnabled()) {
+                    getLogger().debug("setDocumentLocator called " + locator.getSystemId());
+                }
+                // When using SAXON to serialize a DOM tree to SAX, a locator is
+                // passed with a "null" system id
+                if (locator.getSystemId() != null) {
+                    Source source = LanewebXIncludeTransformer.this.resolver.resolveURI(locator.getSystemId());
+                    try {
+                        this.xmlBaseSupport.setDocumentLocation(source.getURI());
+                        // only for the "root" XIncludePipe, we'll have to set
+                        // the href here, in the other cases
+                        // the href is taken from the xi:include href attribute
+                        if (this.href == null) {
+                            this.href = source.getURI();
+                        }
+                    } finally {
+                        LanewebXIncludeTransformer.this.resolver.release(source);
+                    }
+                }
+            } catch (Exception e) {
+                throw new CascadingRuntimeException("Error in XIncludeTransformer while trying to resolve base URL for document", e);
+            }
+            this.locator = locator;
+            super.setDocumentLocator(locator);
+        }
+
+        public void setParent(final XIncludePipe parent) {
+            this.parent = parent;
+        }
+
+        @Override
+        public void skippedEntity(final String name) throws SAXException {
+            if (isEvaluatingContent()) {
+                super.skippedEntity(name);
+            }
+        }
+
+        @Override
+        public void startCDATA() throws SAXException {
+            if (isEvaluatingContent()) {
+                super.startCDATA();
+            }
         }
 
         @Override
@@ -234,7 +288,6 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                         String href = attr.getValue("", XINCLUDE_INCLUDE_ELEMENT_HREF_ATTRIBUTE);
                         String parse = attr.getValue("", XINCLUDE_INCLUDE_ELEMENT_PARSE_ATTRIBUTE);
                         String xpointer = attr.getValue("", XINCLUDE_INCLUDE_ELEMENT_XPOINTER_ATTRIBUTE);
-
                         try {
                             processXIncludeElement(href, parse, xpointer);
                         } catch (ProcessingException e) {
@@ -260,25 +313,9 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         }
 
         @Override
-        public void endElement(final String uri, final String name, final String raw) throws SAXException {
-            // Track xml:base context:
-            this.xmlBaseSupport.endElement(uri, name, raw);
-
-            // Handle elements in xinclude namespace:
-            if (XINCLUDE_NAMESPACE_URI.equals(uri)) {
-                // Handle xi:include:
-                if (XINCLUDE_INCLUDE_ELEMENT.equals(name)) {
-                    this.xIncludeElementLevel--;
-                    if (this.useFallbackLevel > this.xIncludeElementLevel) {
-                        this.useFallbackLevel = this.xIncludeElementLevel;
-                    }
-                } else if (XINCLUDE_FALLBACK_ELEMENT.equals(name)) {
-                    // Handle xi:fallback:
-                    this.fallbackElementLevel--;
-                }
-            } else if (isEvaluatingContent()) {
-                // Copy other elements through when appropriate:
-                super.endElement(uri, name, raw);
+        public void startEntity(final String name) throws SAXException {
+            if (isEvaluatingContent()) {
+                super.startEntity(name);
             }
         }
 
@@ -290,125 +327,40 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
             }
         }
 
-        @Override
-        public void endPrefixMapping(final String prefix) throws SAXException {
-            if (isEvaluatingContent()) {
-                super.endPrefixMapping(prefix);
-                this.namespaces.remove(prefix);
+        private String getLocation() {
+            if (this.locator == null) {
+                return "unknown location";
+            } else {
+                return this.locator.getSystemId() + ":" + this.locator.getColumnNumber() + ":" + this.locator.getLineNumber();
             }
         }
 
-        @Override
-        public void characters(final char c[], final int start, final int len) throws SAXException {
-            if (isEvaluatingContent()) {
-                super.characters(c, start, len);
-            }
+        /**
+         * Determine whether the pipe is currently in a state where contents
+         * should be evaluated, i.e. xi:include elements should be resolved and
+         * elements in other namespaces should be copied through. Will return
+         * false for fallback contents within a successful xi:include, and true
+         * for contents outside any xi:include or within an xi:fallback for an
+         * unsuccessful xi:include.
+         */
+        private boolean isEvaluatingContent() {
+            return (this.xIncludeElementLevel == 0) || ((this.fallbackElementLevel > 0) && (this.fallbackElementLevel == this.useFallbackLevel));
         }
 
-        @Override
-        public void ignorableWhitespace(final char c[], final int start, final int len) throws SAXException {
-            if (isEvaluatingContent()) {
-                super.ignorableWhitespace(c, start, len);
-            }
-        }
-
-        @Override
-        public void processingInstruction(final String target, final String data) throws SAXException {
-            if (isEvaluatingContent()) {
-                super.processingInstruction(target, data);
-            }
-        }
-
-        @Override
-        public void skippedEntity(final String name) throws SAXException {
-            if (isEvaluatingContent()) {
-                super.skippedEntity(name);
-            }
-        }
-
-        @Override
-        public void startEntity(final String name) throws SAXException {
-            if (isEvaluatingContent()) {
-                super.startEntity(name);
-            }
-        }
-
-        @Override
-        public void endEntity(final String name) throws SAXException {
-            if (isEvaluatingContent()) {
-                super.endEntity(name);
-            }
-        }
-
-        @Override
-        public void startCDATA() throws SAXException {
-            if (isEvaluatingContent()) {
-                super.startCDATA();
-            }
-        }
-
-        @Override
-        public void endCDATA() throws SAXException {
-            if (isEvaluatingContent()) {
-                super.endCDATA();
-            }
-        }
-
-        @Override
-        public void comment(final char ch[], final int start, final int len) throws SAXException {
-            if (isEvaluatingContent()) {
-                super.comment(ch, start, len);
-            }
-        }
-
-        @Override
-        public void setDocumentLocator(final Locator locator) {
-            try {
-                if (getLogger().isDebugEnabled()) {
-                    getLogger().debug("setDocumentLocator called " + locator.getSystemId());
-                }
-
-                // When using SAXON to serialize a DOM tree to SAX, a locator is
-                // passed with a "null" system id
-                if (locator.getSystemId() != null) {
-                    Source source = LanewebXIncludeTransformer.this.resolver.resolveURI(locator.getSystemId());
-                    try {
-                        this.xmlBaseSupport.setDocumentLocation(source.getURI());
-                        // only for the "root" XIncludePipe, we'll have to set
-                        // the href here, in the other cases
-                        // the href is taken from the xi:include href attribute
-                        if (this.href == null) {
-                            this.href = source.getURI();
-                        }
-                    } finally {
-                        LanewebXIncludeTransformer.this.resolver.release(source);
-                    }
-                }
-            } catch (Exception e) {
-                throw new CascadingRuntimeException("Error in XIncludeTransformer while trying to resolve base URL for document", e);
-            }
-            this.locator = locator;
-            super.setDocumentLocator(locator);
-        }
-
-        protected void processXIncludeElement(String href, String parse, String xpointer) throws SAXException, ProcessingException,
-                IOException {
+        protected void processXIncludeElement(String href, String parse, String xpointer) throws SAXException, ProcessingException, IOException {
             if (getLogger().isDebugEnabled()) {
                 getLogger().debug("Processing XInclude element: href=" + href + ", parse=" + parse + ", xpointer=" + xpointer);
             }
-
             // Default for @parse is "xml"
             if (parse == null) {
                 parse = "xml";
             }
             Source url = null;
-
             try {
                 int fragmentIdentifierPos = href.indexOf('#');
                 if (fragmentIdentifierPos != -1) {
                     getLogger().warn(
-                            "Fragment identifer found in 'href' attribute: " + href
-                                    + "\nFragment identifiers are forbidden by the XInclude specification. "
+                            "Fragment identifer found in 'href' attribute: " + href + "\nFragment identifiers are forbidden by the XInclude specification. "
                                     + "They are still handled by XIncludeTransformer for backward "
                                     + "compatibility, but their use is deprecated and will be prohibited "
                                     + "in a future release.  Use the 'xpointer' attribute instead.");
@@ -417,7 +369,6 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                     }
                     href = href.substring(0, fragmentIdentifierPos);
                 }
-
                 // An empty or absent href is a reference to the current
                 // document -- this can be different than the current base
                 if ((href == null) || (href.length() == 0)) {
@@ -434,15 +385,12 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                         href = this.href;
                     }
                 }
-
                 url = this.xmlBaseSupport.makeAbsolute(href);
                 if (getLogger().isDebugEnabled()) {
                     getLogger().debug("URL: " + url.getURI() + "\nXPointer: " + xpointer);
                 }
-
                 // add the source to the SourceValidity
                 LanewebXIncludeTransformer.this.validity.addSource(url);
-
                 if ("text".equals(parse)) {
                     getLogger().debug("Parse type is text");
                     if (xpointer != null) {
@@ -477,24 +425,21 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                     }
                 } else if ("xml".equals(parse)) {
                     getLogger().debug("Parse type is XML");
-
                     // Check loop inclusion
                     if (isLoopInclusion(url.getURI(), xpointer)) {
                         throw new ProcessingException("Detected loop inclusion of href=" + url.getURI() + ", xpointer=" + xpointer);
                     }
-
                     XIncludePipe subPipe = new XIncludePipe();
                     subPipe.init(url.getURI(), xpointer);
                     subPipe.setConsumer(this.xmlConsumer);
                     subPipe.setParent(this);
-
                     try {
                         if ((xpointer != null) && (xpointer.length() > 0)) {
                             XPointer xptr;
                             xptr = XPointerFrameworkParser.parse(NetUtils.decodePath(xpointer));
                             XPointerContext context = new XPointerContext(xpointer, url, subPipe, LanewebXIncludeTransformer.this.manager);
                             for (String prefix : this.namespaces.keySet()) {
-                                context.addPrefix(prefix, (String) this.namespaces.get(prefix));
+                                context.addPrefix(prefix, this.namespaces.get(prefix));
                             }
                             xptr.process(context);
                         } else {
@@ -543,32 +488,79 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                 }
             }
         }
+    }
 
-        public boolean isLoopInclusion(final String uri, String xpointer) {
-            if (xpointer == null) {
-                xpointer = "";
-            }
+    public static final String XINCLUDE_FALLBACK_ELEMENT = "fallback";
 
-            if (uri.equals(this.href) && xpointer.equals(this.xpointer == null ? "" : this.xpointer)) {
-                return true;
-            }
+    public static final String XINCLUDE_INCLUDE_ELEMENT = "include";
 
-            XIncludePipe parent = getParent();
-            while (parent != null) {
-                if (uri.equals(parent.getHref()) && xpointer.equals(parent.getXpointer() == null ? "" : parent.getXpointer())) {
-                    return true;
-                }
-                parent = parent.getParent();
-            }
-            return false;
-        }
+    public static final String XINCLUDE_INCLUDE_ELEMENT_HREF_ATTRIBUTE = "href";
 
-        private String getLocation() {
-            if (this.locator == null) {
-                return "unknown location";
-            } else {
-                return this.locator.getSystemId() + ":" + this.locator.getColumnNumber() + ":" + this.locator.getLineNumber();
-            }
-        }
+    public static final String XINCLUDE_INCLUDE_ELEMENT_PARSE_ATTRIBUTE = "parse";
+
+    public static final String XINCLUDE_INCLUDE_ELEMENT_XPOINTER_ATTRIBUTE = "xpointer";
+
+    public static final String XINCLUDE_NAMESPACE_URI = "http://www.w3.org/2001/XInclude";
+
+    public static final String XMLBASE_ATTRIBUTE = "base";
+
+    private static final String XINCLUDE_CACHE_KEY = "XInclude";
+
+    private XIncludePipe xIncludePipe;
+
+    protected ServiceManager manager;
+
+    protected SourceResolver resolver;
+
+    /** The {@link SourceValidity} instance associated with this request. */
+    protected MultiSourceValidity validity;
+
+    /** Key to be used for caching */
+    public Serializable getKey() {
+        return XINCLUDE_CACHE_KEY;
+    }
+
+    /** Get the validity for this transform */
+    public SourceValidity getValidity() {
+        return this.validity;
+    }
+
+    @Override
+    public void recycle() {
+        // Reset all variables to initial state.
+        this.resolver = null;
+        this.validity = null;
+        this.xIncludePipe = null;
+        super.recycle();
+    }
+
+    public void service(final ServiceManager manager) {
+        this.manager = manager;
+    }
+
+    @Override
+    public void setConsumer(final XMLConsumer consumer) {
+        this.xIncludePipe.setConsumer(consumer);
+    }
+
+    @Override
+    public void setContentHandler(final ContentHandler handler) {
+        this.xIncludePipe.setContentHandler(handler);
+    }
+
+    @Override
+    public void setLexicalHandler(final LexicalHandler handler) {
+        this.xIncludePipe.setLexicalHandler(handler);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setup(final SourceResolver resolver, final Map objectModel, final String source, final Parameters parameters) throws ProcessingException,
+            SAXException, IOException {
+        this.resolver = resolver;
+        this.validity = new MultiSourceValidity(resolver, MultiSourceValidity.CHECK_ALWAYS);
+        this.xIncludePipe = new XIncludePipe();
+        this.xIncludePipe.init(null, null);
+        super.setContentHandler(this.xIncludePipe);
+        super.setLexicalHandler(this.xIncludePipe);
     }
 }

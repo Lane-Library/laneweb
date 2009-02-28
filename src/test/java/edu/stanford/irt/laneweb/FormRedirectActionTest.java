@@ -39,26 +39,23 @@ public class FormRedirectActionTest {
 
     @SuppressWarnings("unchecked")
     @Test
-    public void testActRegexChars() throws UnsupportedEncodingException {
-        expect(this.params.getParameter("q", null)).andReturn("$2cardiology");
-        expect(this.params.getParameter("source", null)).andReturn("http://lane.stanford.edu/search.html?q={search-terms}&source=all");
-        replay(this.params);
-        Map result = this.action.act(null, null, null, null, this.params);
-        assertEquals("http://lane.stanford.edu/search.html?q=" + URLEncoder.encode("$2cardiology", "UTF-8") + "&source=all", result
-                .get("form-redirect-key"));
-        verify(this.params);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Test
     public void testActBackslash() throws UnsupportedEncodingException {
         expect(this.params.getParameter("q", null)).andReturn("\\cardiology");
         expect(this.params.getParameter("source", null)).andReturn("http://lane.stanford.edu/search.html?q={search-terms}&source=all");
         replay(this.params);
         Map result = this.action.act(null, null, null, null, this.params);
-        assertEquals("http://lane.stanford.edu/search.html?q=" + URLEncoder.encode("\\cardiology", "UTF-8") + "&source=all", result
-                .get("form-redirect-key"));
+        assertEquals("http://lane.stanford.edu/search.html?q=" + URLEncoder.encode("\\cardiology", "UTF-8") + "&source=all", result.get("form-redirect-key"));
         verify(this.params);
     }
 
+    @SuppressWarnings("unchecked")
+    @Test
+    public void testActRegexChars() throws UnsupportedEncodingException {
+        expect(this.params.getParameter("q", null)).andReturn("$2cardiology");
+        expect(this.params.getParameter("source", null)).andReturn("http://lane.stanford.edu/search.html?q={search-terms}&source=all");
+        replay(this.params);
+        Map result = this.action.act(null, null, null, null, this.params);
+        assertEquals("http://lane.stanford.edu/search.html?q=" + URLEncoder.encode("$2cardiology", "UTF-8") + "&source=all", result.get("form-redirect-key"));
+        verify(this.params);
+    }
 }

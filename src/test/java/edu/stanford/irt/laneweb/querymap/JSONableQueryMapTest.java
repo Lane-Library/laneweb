@@ -24,6 +24,43 @@ public class JSONableQueryMapTest {
     private static final String JSON_2 = "{\"query\":\"borderline personality\",\"descriptor\":\"Borderline Personality Disorder\",\"resourceMap\":{\"descriptor\":\"Mental Disorders\",\"resources\":[{\"id\":\"ovid-kaplan\",\"label\":\"Kaplan's Comprehensive Psychiatry\"},{\"id\":\"am_ebert\",\"label\":\"Current Dx & Tx: Psychiatry\"}]}}";
 
     // "{\"query\":\"tetralogy of fallot\",\"descriptor\":\"Tetralogy of Fallot\",\"resourceMap\":{\"descriptor\":\"Heart Defects, Congenital\",\"resources\":[{\"id\":\"mdc_park\"}]}}";
+    @Test
+    public void testNoDescriptor() {
+        QueryMap qm = createMock(QueryMap.class);
+        expect(qm.getQuery()).andReturn("tetralogy of fallot");
+        expect(qm.getDescriptor()).andReturn(null);
+        replay(qm);
+        JSONableQueryMap queryMap = new JSONableQueryMap(qm);
+        assertEquals("{\"query\":\"tetralogy of fallot\"}", queryMap.toString());
+        verify(qm);
+    }
+
+    @Test
+    public void testNullMap() {
+        Descriptor descriptor = createMock(Descriptor.class);
+        expect(descriptor.getDescriptorName()).andReturn("Tetralogy of Fallot");
+        replay(descriptor);
+        QueryMap qm = createMock(QueryMap.class);
+        expect(qm.getQuery()).andReturn("tetralogy of fallot");
+        expect(qm.getDescriptor()).andReturn(descriptor);
+        expect(qm.getResourceMap()).andReturn(null);
+        replay(qm);
+        JSONableQueryMap queryMap = new JSONableQueryMap(qm);
+        assertEquals("{\"query\":\"tetralogy of fallot\",\"descriptor\":\"Tetralogy of Fallot\"}", queryMap.toString());
+        verify(descriptor);
+        verify(qm);
+    }
+
+    @Test
+    public void testQuote() {
+        QueryMap qm = createMock(QueryMap.class);
+        expect(qm.getQuery()).andReturn("tetralogy o\" fallot");
+        expect(qm.getDescriptor()).andReturn(null);
+        replay(qm);
+        JSONableQueryMap queryMap = new JSONableQueryMap(qm);
+        assertEquals("{\"query\":\"tetralogy o\\\" fallot\"}", queryMap.toString());
+        verify(qm);
+    }
 
     @Test
     public void testToString1() {
@@ -71,43 +108,4 @@ public class JSONableQueryMapTest {
         verify(map);
         verify(qm);
     }
-
-    @Test
-    public void testNoDescriptor() {
-        QueryMap qm = createMock(QueryMap.class);
-        expect(qm.getQuery()).andReturn("tetralogy of fallot");
-        expect(qm.getDescriptor()).andReturn(null);
-        replay(qm);
-        JSONableQueryMap queryMap = new JSONableQueryMap(qm);
-        assertEquals("{\"query\":\"tetralogy of fallot\"}", queryMap.toString());
-        verify(qm);
-    }
-
-    @Test
-    public void testNullMap() {
-        Descriptor descriptor = createMock(Descriptor.class);
-        expect(descriptor.getDescriptorName()).andReturn("Tetralogy of Fallot");
-        replay(descriptor);
-        QueryMap qm = createMock(QueryMap.class);
-        expect(qm.getQuery()).andReturn("tetralogy of fallot");
-        expect(qm.getDescriptor()).andReturn(descriptor);
-        expect(qm.getResourceMap()).andReturn(null);
-        replay(qm);
-        JSONableQueryMap queryMap = new JSONableQueryMap(qm);
-        assertEquals("{\"query\":\"tetralogy of fallot\",\"descriptor\":\"Tetralogy of Fallot\"}", queryMap.toString());
-        verify(descriptor);
-        verify(qm);
-    }
-
-    @Test
-    public void testQuote() {
-        QueryMap qm = createMock(QueryMap.class);
-        expect(qm.getQuery()).andReturn("tetralogy o\" fallot");
-        expect(qm.getDescriptor()).andReturn(null);
-        replay(qm);
-        JSONableQueryMap queryMap = new JSONableQueryMap(qm);
-        assertEquals("{\"query\":\"tetralogy o\\\" fallot\"}", queryMap.toString());
-        verify(qm);
-    }
-
 }

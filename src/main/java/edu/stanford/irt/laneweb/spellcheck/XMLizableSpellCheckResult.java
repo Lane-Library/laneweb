@@ -9,17 +9,17 @@ import edu.stanford.irt.spell.SpellCheckResult;
 
 public class XMLizableSpellCheckResult implements XMLizable {
 
-    private static final String SPELLCHECK = "spellcheck";
+    private static final String NAMESPACE = "http://lane.stanford.edu/spellcheck/ns";
 
     private static final String QUERY = "query";
 
+    private static final String SPELLCHECK = "spellcheck";
+
     private static final String SUGGESTION = "suggestion";
 
-    private static final String NAMESPACE = "http://lane.stanford.edu/spellcheck/ns";
+    private String query;
 
     private SpellCheckResult result;
-
-    private String query;
 
     public XMLizableSpellCheckResult(final String query, final SpellCheckResult result) {
         this.query = query;
@@ -34,5 +34,4 @@ public class XMLizableSpellCheckResult implements XMLizable {
         }
         XMLUtils.endElement(consumer, NAMESPACE, SPELLCHECK);
     }
-
 }

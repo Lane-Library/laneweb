@@ -19,5 +19,4 @@ public class BrowseEresourcesGenerator extends CacheableEresourcesGenerator {
             throw new IllegalStateException("null type or subset");
         }
     }
-
 }

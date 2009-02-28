@@ -10,19 +10,7 @@ public class LanewebInputModuleTest extends TestCase {
 
     LanewebInputModule module;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        this.module = new LanewebInputModule();
-
-    }
-
-    public void testProxyMyIP() {
-        // assertFalse((this.module.proxyLinks("171.65.28.158")));
-    }
-
     public void testAFewIPs() {
-
         // ITS VPN
         // assertTrue((this.module.proxyLinks("171.66.16.0")));
         // assertFalse((this.module.proxyLinks("171.66.15.255")));
@@ -32,7 +20,6 @@ public class LanewebInputModuleTest extends TestCase {
         // assertTrue((this.module.proxyLinks("171.66.30.55")));
         // assertTrue((this.module.proxyLinks("171.66.31.255")));
         // assertFalse((this.module.proxyLinks("171.66.32.0")));
-
         // Med School VPN
         // assertTrue((this.module.proxyLinks("64.9.230.210")));
         // assertTrue((this.module.proxyLinks("171.65.44.22")));
@@ -56,8 +43,17 @@ public class LanewebInputModuleTest extends TestCase {
         // assertTrue((this.module.proxyLinks("171.65.173.37")));
     }
 
+    public void testProxyMyIP() {
+        // assertFalse((this.module.proxyLinks("171.65.28.158")));
+    }
+
     public void testTemplates() {
         // assertTrue("shc".equals(this.module.getTemplateName("shc/foo.html")));
     }
 
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        this.module = new LanewebInputModule();
+    }
 }

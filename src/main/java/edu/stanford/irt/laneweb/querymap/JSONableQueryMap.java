@@ -10,9 +10,9 @@ import edu.stanford.irt.querymap.ResourceMap;
 
 public class JSONableQueryMap {
 
-    private static final String COMMA_QUOTE = "\",\"";
-
     private static final String COLON_QUOTE = "\":\"";
+
+    private static final String COMMA_QUOTE = "\",\"";
 
     private QueryMap queryMap;
 
@@ -51,8 +51,7 @@ public class JSONableQueryMap {
                     sb.append(COMMA_QUOTE).append("resources\":[");
                     for (Iterator<Resource> it = resources.iterator(); it.hasNext();) {
                         Resource resource = it.next();
-                        sb.append("{\"id").append(COLON_QUOTE).append(resource.getId()).append(COMMA_QUOTE).append("label").append(
-                                COLON_QUOTE);
+                        sb.append("{\"id").append(COLON_QUOTE).append(resource.getId()).append(COMMA_QUOTE).append("label").append(COLON_QUOTE);
                         escapeForJS(sb, resource.getLabel());
                         sb.append("\"}");
                         if (it.hasNext()) {
@@ -88,5 +87,4 @@ public class JSONableQueryMap {
             sb.append(c);
         }
     }
-
 }

@@ -14,23 +14,11 @@ import org.xml.sax.SAXException;
 
 public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGenerator implements CacheableProcessingComponent {
 
-    private String key;
-
     private long configuredExpires = 1000 * 60 * 5;
 
     private long expires;
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        super.setup(resolver, objectModel, src, par);
-        this.expires = par.getParameterAsLong("expires", this.configuredExpires);
-    }
-
-    public void setExpires(final long expires) {
-        this.configuredExpires = expires;
-    }
+    private String key;
 
     public Serializable getKey() {
         if (null == this.key) {
@@ -43,12 +31,20 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
         return new ExpiresValidity(this.expires);
     }
 
-    private String createKey() {
-        return new StringBuffer("t=").append(null == super.type ? "" : super.type)
-        .append(";s=").append(null == super.subset ? "" : super.subset)
-        .append(";a=").append(null == super.alpha ? "" : super.alpha)
-        .append(";m=").append(null == super.mesh ? "" : super.mesh)
-        .toString();
+    public void setExpires(final long expires) {
+        this.configuredExpires = expires;
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
+            IOException {
+        super.setup(resolver, objectModel, src, par);
+        this.expires = par.getParameterAsLong("expires", this.configuredExpires);
+    }
+
+    private String createKey() {
+        return new StringBuffer("t=").append(null == super.type ? "" : super.type).append(";s=").append(null == super.subset ? "" : super.subset).append(";a=")
+                .append(null == super.alpha ? "" : super.alpha).append(";m=").append(null == super.mesh ? "" : super.mesh).toString();
+    }
 }

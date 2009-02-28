@@ -11,19 +11,19 @@ import org.xml.sax.helpers.AttributesImpl;
 
 public class XMLLizableBassettCount implements XMLizable {
 
-    private Map<String, Integer> regionMap;
-
-    private String NAMESPACE = "http://lane.stanford.edu/bassett/ns";
-
     private static final String COUNT = "bassett_count";
+
+    private static final String NAME = "name";
 
     private static final String REGION = "region";
 
     private static final String SUB_REGION = "sub_region";
 
-    private static final String NAME = "name";
-
     private static final String TOTAL = "total";
+
+    private String NAMESPACE = "http://lane.stanford.edu/bassett/ns";
+
+    private Map<String, Integer> regionMap;
 
     public XMLLizableBassettCount(final Map<String, Integer> regions) {
         this.regionMap = regions;
@@ -62,5 +62,4 @@ public class XMLLizableBassettCount implements XMLizable {
         }
         XMLUtils.endElement(consumer, this.NAMESPACE, REGION);
     }
-
 }

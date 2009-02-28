@@ -11,36 +11,21 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.log4j.Logger;
 
-import edu.stanford.irt.directory.LDAPPerson;
+import edu.stanford.irt.laneweb.user.User;
 
 public class WebdashLogin {
 
-    private static final String REGISTRATION_URL = "https://webda.sh/auth/init_post?";
+    private static final String ERROR_URL = "/webdashError.html";
 
     private static final String LOGIN_URL = "https://webda.sh/auth/auth_post?";
 
-    private static final String ERROR_URL = "/webdashError.html";
+    private static final String REGISTRATION_URL = "https://webda.sh/auth/init_post?";
 
     private Logger logger = Logger.getLogger(WebdashLogin.class);
 
     private Mac mac;
 
-    public void setWebdashKey(final String webdashKey) {
-        if (null == webdashKey) {
-            throw new IllegalArgumentException("null webdashKey");
-        }
-        SecretKey key = new SecretKeySpec(webdashKey.getBytes(), "HmacSHA1");
-        try {
-            this.mac = Mac.getInstance(key.getAlgorithm());
-            this.mac.init(key);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidKeyException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public String getWebdashURL(final LDAPPerson person, final String nonce, final String systemUserId) {
+    public String getWebdashURL(final User person, final String nonce, final String systemUserId) {
         if (null == this.mac) {
             throw new IllegalStateException("webdashKey not set");
         }
@@ -57,12 +42,27 @@ public class WebdashLogin {
         String fullName = encodeParameter(person.getDisplayName());
         String affiliation = getSubGroup(person);
         StringBuffer result = new StringBuffer();
-        result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce).append("&subgroup=")
-                .append(affiliation).append("&system_short_name=stanford-sunet&system_user_id=").append(userId);
+        result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce).append("&subgroup=").append(affiliation)
+                .append("&system_short_name=stanford-sunet&system_user_id=").append(userId);
         String token = getToken(result.toString());
         result.append("&token=").append(token);
         result.insert(0, systemUserId == null ? REGISTRATION_URL : LOGIN_URL);
         return result.toString();
+    }
+
+    public void setWebdashKey(final String webdashKey) {
+        if (null == webdashKey) {
+            throw new IllegalArgumentException("null webdashKey");
+        }
+        SecretKey key = new SecretKeySpec(webdashKey.getBytes(), "HmacSHA1");
+        try {
+            this.mac = Mac.getInstance(key.getAlgorithm());
+            this.mac.init(key);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private String encodeParameter(final String parameter) {
@@ -74,6 +74,14 @@ public class WebdashLogin {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("UTF-8 not supported");
         }
+    }
+
+    private String getSubGroup(final User person) {
+        String affiliation = person.getAffilation();
+        if (null == affiliation) {
+            throw new RuntimeException("no affiliations for " + person.getDisplayName());
+        }
+        return affiliation.substring(affiliation.indexOf(':') + 1);
     }
 
     private String getToken(final String string) {
@@ -89,21 +97,5 @@ public class WebdashLogin {
             sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
         }
         return sb.toString();
-
     }
-
-    private String getSubGroup(final LDAPPerson person) {
-        // value coming from LDAP may have multiple values e.g.
-        // stanford:staff
-        String[] affiliations = person.getAffilation();
-        if (0 == affiliations.length) {
-            throw new RuntimeException("no affiliations for " + person.getDisplayName());
-        }
-        String[] affiliation = affiliations[0].split(":");
-        if (affiliation.length > 1) {
-            return affiliation[1];
-        }
-        return affiliation[0];
-    }
-
 }

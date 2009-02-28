@@ -10,21 +10,16 @@ public class HttpApplicationContext extends AbstractXmlApplicationContext {
 
     private HttpResource[] configResources;
 
-    
-    public HttpApplicationContext(String url, String login, String password) throws IOException
-    {
-	URL urlObj = new URL(url);
-	HttpResource resource = new HttpResource(urlObj, login, password);
-	configResources = new HttpResource[1];
-	configResources[0] = resource;
-	this.refresh();
+    public HttpApplicationContext(final String url, final String login, final String password) throws IOException {
+        URL urlObj = new URL(url);
+        HttpResource resource = new HttpResource(urlObj, login, password);
+        this.configResources = new HttpResource[1];
+        this.configResources[0] = resource;
+        this.refresh();
     }
-    
+
+    @Override
     protected Resource[] getConfigResources() {
-	return this.configResources;
+        return this.configResources;
     }
-    
-    
 }
-
-

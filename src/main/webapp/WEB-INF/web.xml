@@ -13,7 +13,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContext.xml /WEB-INF/cocoon/spring/*.xml</param-value>
+        <param-value>/WEB-INF/cocoon/spring/*.xml</param-value>
     </context-param>
 
     <listener>
@@ -37,31 +37,6 @@
         <filter-name>LanewebHTTPSFilter</filter-name>
         <url-pattern>/secure/*</url-pattern>
     </filter-mapping>
-
-    <!--<filter>
-        <filter-name>GzipFilter</filter-name>
-        <filter-class>net.sf.ehcache.constructs.web.filter.GzipFilter</filter-class>
-    </filter>
-    
-    <filter-mapping>
-        <filter-name>GzipFilter</filter-name>
-        <url-pattern>*.html</url-pattern>
-    </filter-mapping>
-    
-    <filter-mapping>
-        <filter-name>GzipFilter</filter-name>
-        <url-pattern>*.css</url-pattern>
-    </filter-mapping>
-    
-    <filter-mapping>
-        <filter-name>GzipFilter</filter-name>
-        <url-pattern>*.js</url-pattern>
-    </filter-mapping>
-    
-    <filter-mapping>
-        <filter-name>GzipFilter</filter-name>
-        <url-pattern>*.xml</url-pattern>
-    </filter-mapping>-->
 
     <servlet>
         <description>SitemapRequestHandler</description>

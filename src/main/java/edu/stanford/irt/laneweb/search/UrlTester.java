@@ -23,19 +23,6 @@ public class UrlTester implements Reader {
 
     private String url;
 
-    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
-        this.httpClient = msms.getHttpClient();
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        this.url = par.getParameter("url", null);
-        if (!this.url.startsWith("http")) {
-            this.url = "http://".concat(this.url);
-        }
-    }
-
     public void generate() throws IOException, SAXException, ProcessingException {
         GetMethod get = new GetMethod(this.url);
         this.httpClient.executeMethod(get);
@@ -43,6 +30,43 @@ public class UrlTester implements Reader {
         byte[] headers = getHeaderString(get);
         this.outputStream.write(headers);
         this.outputStream.flush();
+    }
+
+    public long getLastModified() {
+        return 0;
+    }
+
+    public String getMimeType() {
+        return null;
+    }
+
+    public SourceValidity getValidity() {
+        return null;
+    }
+
+    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
+        this.httpClient = msms.getHttpClient();
+    }
+
+    public void setOutputStream(final OutputStream out) {
+        if ((out instanceof BufferedOutputStream) || (out instanceof org.apache.cocoon.util.BufferedOutputStream)) {
+            this.outputStream = out;
+        } else {
+            this.outputStream = new BufferedOutputStream(out, 1536);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
+            IOException {
+        this.url = par.getParameter("url", null);
+        if (!this.url.startsWith("http")) {
+            this.url = "http://".concat(this.url);
+        }
+    }
+
+    public boolean shouldSetContentLength() {
+        return false;
     }
 
     private byte[] getHeaderString(final GetMethod get) {
@@ -63,30 +87,5 @@ public class UrlTester implements Reader {
             result.append("\n");
         }
         return result.toString();
-    }
-
-    public long getLastModified() {
-        return 0;
-    }
-
-    public String getMimeType() {
-        return null;
-    }
-
-    public void setOutputStream(final OutputStream out) {
-        if ((out instanceof BufferedOutputStream) || (out instanceof org.apache.cocoon.util.BufferedOutputStream)) {
-
-            this.outputStream = out;
-        } else {
-            this.outputStream = new BufferedOutputStream(out, 1536);
-        }
-    }
-
-    public boolean shouldSetContentLength() {
-        return false;
-    }
-
-    public SourceValidity getValidity() {
-        return null;
     }
 }

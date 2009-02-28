@@ -8,13 +8,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
-import org.apache.cocoon.environment.Request;
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.directory.LDAPPerson;
-import edu.stanford.irt.laneweb.UserInfo;
-import edu.stanford.irt.laneweb.UserInfoHelper;
+import edu.stanford.irt.laneweb.user.User;
+import edu.stanford.irt.laneweb.user.UserDao;
 
 public class WebdashActionTest {
 
@@ -22,13 +22,11 @@ public class WebdashActionTest {
 
     private Map<String, Object> objectModel;
 
-    private Request request;
+    private HttpServletRequest request;
 
-    private UserInfoHelper userInfoHelper;
+    private User user;
 
-    private UserInfo userInfo;
-
-    private LDAPPerson person;
+    private UserDao userDao;
 
     private WebdashLogin webdashLogin;
 
@@ -37,37 +35,33 @@ public class WebdashActionTest {
     public void setUp() throws Exception {
         this.action = new WebdashAction();
         this.objectModel = createMock(Map.class);
-        this.request = createMock(Request.class);
-        this.userInfoHelper = createMock(UserInfoHelper.class);
-        this.userInfo = createMock(UserInfo.class);
-        this.person = createMock(LDAPPerson.class);
+        this.request = createMock(HttpServletRequest.class);
+        this.userDao = createMock(UserDao.class);
+        this.user = createMock(User.class);
         this.webdashLogin = createMock(WebdashLogin.class);
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    public void testRegister() {
+    public void testError() {
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
-        expect(this.request.getParameter("nonce")).andReturn("nonce");
-        expect(this.request.getParameter("system_user_id")).andReturn(null);
+        expect(this.request.getParameter("nonce")).andReturn(null);
+        expect(this.request.getParameter("system_user_id")).andReturn("ceyates");
         replay(this.request);
-        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(this.userInfo);
-        replay(this.userInfoHelper);
-        expect(this.userInfo.getPerson()).andReturn(this.person);
-        replay(this.userInfo);
-        replay(this.person);
-        expect(this.webdashLogin.getWebdashURL(this.person, "nonce", null)).andReturn("register");
+        expect(this.userDao.createOrUpdateUser(this.request)).andReturn(this.user);
+        replay(this.userDao);
+        replay(this.user);
+        expect(this.webdashLogin.getWebdashURL(this.user, null, "ceyates")).andReturn("broken");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
-        this.action.setUserInfoHelper(this.userInfoHelper);
+        this.action.setUserDao(this.userDao);
         Map result = this.action.act(null, null, this.objectModel, null, null);
-        assertEquals("register", result.get("webdash-url"));
+        assertEquals("broken", result.get("webdash-url"));
         verify(this.objectModel);
         verify(this.request);
-        verify(this.userInfoHelper);
-        verify(this.userInfo);
-        verify(this.person);
+        verify(this.userDao);
+        verify(this.user);
         verify(this.webdashLogin);
     }
 
@@ -79,50 +73,43 @@ public class WebdashActionTest {
         expect(this.request.getParameter("nonce")).andReturn("nonce");
         expect(this.request.getParameter("system_user_id")).andReturn("ceyates");
         replay(this.request);
-        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(this.userInfo);
-        replay(this.userInfoHelper);
-        expect(this.userInfo.getPerson()).andReturn(this.person);
-        replay(this.userInfo);
-        replay(this.person);
-        expect(this.webdashLogin.getWebdashURL(this.person, "nonce", "ceyates")).andReturn("login");
+        expect(this.userDao.createOrUpdateUser(this.request)).andReturn(this.user);
+        replay(this.userDao);
+        replay(this.user);
+        expect(this.webdashLogin.getWebdashURL(this.user, "nonce", "ceyates")).andReturn("login");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
-        this.action.setUserInfoHelper(this.userInfoHelper);
+        this.action.setUserDao(this.userDao);
         Map result = this.action.act(null, null, this.objectModel, null, null);
         assertEquals("login", result.get("webdash-url"));
         verify(this.objectModel);
         verify(this.request);
-        verify(this.userInfoHelper);
-        verify(this.userInfo);
-        verify(this.person);
+        verify(this.userDao);
+        verify(this.user);
         verify(this.webdashLogin);
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    public void testError() {
+    public void testRegister() {
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
-        expect(this.request.getParameter("nonce")).andReturn(null);
-        expect(this.request.getParameter("system_user_id")).andReturn("ceyates");
+        expect(this.request.getParameter("nonce")).andReturn("nonce");
+        expect(this.request.getParameter("system_user_id")).andReturn(null);
         replay(this.request);
-        expect(this.userInfoHelper.getUserInfo(this.request)).andReturn(this.userInfo);
-        replay(this.userInfoHelper);
-        expect(this.userInfo.getPerson()).andReturn(this.person);
-        replay(this.userInfo);
-        replay(this.person);
-        expect(this.webdashLogin.getWebdashURL(this.person, null, "ceyates")).andReturn("broken");
+        expect(this.userDao.createOrUpdateUser(this.request)).andReturn(this.user);
+        replay(this.userDao);
+        replay(this.user);
+        expect(this.webdashLogin.getWebdashURL(this.user, "nonce", null)).andReturn("register");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
-        this.action.setUserInfoHelper(this.userInfoHelper);
+        this.action.setUserDao(this.userDao);
         Map result = this.action.act(null, null, this.objectModel, null, null);
-        assertEquals("broken", result.get("webdash-url"));
+        assertEquals("register", result.get("webdash-url"));
         verify(this.objectModel);
         verify(this.request);
-        verify(this.userInfoHelper);
-        verify(this.userInfo);
-        verify(this.person);
+        verify(this.userDao);
+        verify(this.user);
         verify(this.webdashLogin);
     }
-
 }

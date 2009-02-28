@@ -23,7 +23,10 @@ import org.apache.log4j.Logger;
 
 public class HTTPClientSource implements Source {
 
-    private Logger logger = Logger.getLogger(HTTPClientSource.class);
+    /**
+     * Constant used when obtaining the Content-Length from HTTP Headers
+     */
+    private static final String CONTENT_LENGTH = "Content-Length";
 
     /**
      * Constant used when obtaining the Content-Type from HTTP Headers
@@ -31,24 +34,31 @@ public class HTTPClientSource implements Source {
     private static final String CONTENT_TYPE = "Content-Type";
 
     /**
-     * Constant used when obtaining the Content-Length from HTTP Headers
-     */
-    private static final String CONTENT_LENGTH = "Content-Length";
-
-    /**
      * Constant used when obtaining the Last-Modified date from HTTP Headers
      */
     private static final String LAST_MODIFIED = "Last-Modified";
 
+    private Logger logger = Logger.getLogger(HTTPClientSource.class);
+
     /**
-     * The URI being accessed.
+     * Cached last modification date.
      */
-    private final String m_uri;
+    private long m_cachedLastModificationDate;
+
+    /**
+     * Stored {@link SourceValidity} object.
+     */
+    private SourceValidity m_cachedValidity;
 
     /**
      * The {@link HttpClient} object.
      */
     private final HttpClient m_client;
+
+    /**
+     * The content length of the resource on the server.
+     */
+    private long m_contentLength;
 
     /**
      * Whether the data held within this instance is currently accurate.
@@ -61,29 +71,19 @@ public class HTTPClientSource implements Source {
     private boolean m_exists;
 
     /**
-     * The mime type of the resource on the server.
-     */
-    private String m_mimeType;
-
-    /**
-     * The content length of the resource on the server.
-     */
-    private long m_contentLength;
-
-    /**
      * The last modified date of the resource on the server.
      */
     private long m_lastModified;
 
     /**
-     * Stored {@link SourceValidity} object.
+     * The mime type of the resource on the server.
      */
-    private SourceValidity m_cachedValidity;
+    private String m_mimeType;
 
     /**
-     * Cached last modification date.
+     * The URI being accessed.
      */
-    private long m_cachedLastModificationDate;
+    private final String m_uri;
 
     /**
      * Constructor, creates a new {@link HTTPClientSource} instance.
@@ -102,87 +102,6 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Method to make response data available if possible without actually
-     * making an actual request (ie. via HTTP HEAD).
-     */
-    private void updateData() {
-        // no request made so far, attempt to get some response data.
-        if (!this.m_dataValid) {
-            final HttpMethod head = new HeadMethod(this.m_uri);
-            try {
-                // cy altered so only one head request is made if successful
-                if (200 == executeMethod(head)) {
-                    this.m_dataValid = true;
-                }
-                return;
-            } catch (final IOException e) {
-                if (this.logger.isDebugEnabled()) {
-                    this.logger.debug("Unable to determine response data, using defaults", e);
-                }
-            } finally {
-                head.releaseConnection();
-            }
-
-            // default values when response data is not available
-            this.m_exists = false;
-            this.m_mimeType = null;
-            this.m_contentLength = -1;
-            this.m_lastModified = 0;
-            this.m_dataValid = true;
-        }
-    }
-
-    /**
-     * Executes a particular {@link HttpMethod} and updates internal data
-     * storage.
-     * 
-     * @param method
-     *            {@link HttpMethod} to execute
-     * @return response code from server
-     * @throws IOException
-     * @throws HttpException
-     * @exception IOException
-     *                if an error occurs
-     */
-    protected int executeMethod(final HttpMethod method) throws HttpException, IOException {
-
-        final int response = this.m_client.executeMethod(method);
-
-        updateExists(method);
-        updateMimeType(method);
-        updateContentLength(method);
-        updateLastModified(method);
-
-        // all finished, return response code to the caller.
-        return response;
-    }
-
-    /**
-     * Method to update whether a referenced resource exists, after executing a
-     * particular {@link HttpMethod}.
-     * <p>
-     * REVISIT: exists() would be better called canRead() or similar, as a
-     * resource can exist but not be readable.
-     * </p>
-     * 
-     * @param method
-     *            {@link HttpMethod} executed.
-     */
-    private void updateExists(final HttpMethod method) {
-        final int response = method.getStatusCode();
-
-        // The following returns true, if the user can successfully get
-        // an InputStream without receiving errors? ie. if we receive a
-        // HTTP 200 (OK), 201 (CREATED), 206 (PARTIAL CONTENT)
-
-        // REVISIT(MC): need a special way to handle 304 (NOT MODIFIED)
-        // 204 & 205 in the future
-
-        // resource does not exist if HttpClient returns a 404 or a 410
-        this.m_exists = ((response == HttpStatus.SC_OK) || (response == HttpStatus.SC_CREATED) || (response == HttpStatus.SC_PARTIAL_CONTENT));
-    }
-
-    /**
      * Method to ascertain whether the given resource actually exists.
      * 
      * @return <code>true</code> if the resource pointed to by the URI during
@@ -191,6 +110,17 @@ public class HTTPClientSource implements Source {
     public boolean exists() {
         updateData();
         return this.m_exists;
+    }
+
+    /**
+     * Obtain the content length of the referenced resource.
+     * 
+     * @return content length of the referenced resource, or -1 if
+     *         unknown/uncalculatable
+     */
+    public long getContentLength() {
+        updateData();
+        return this.m_contentLength;
     }
 
     /**
@@ -205,21 +135,18 @@ public class HTTPClientSource implements Source {
      */
     public InputStream getInputStream() throws IOException, SourceNotFoundException {
         final GetMethod method = new GetMethod(this.m_uri);
-
         int response = executeMethod(method);
         this.m_dataValid = true;
-
         // throw SourceNotFoundException - according to Source API we
         // need to throw this if the source doesn't exist.
         if (!exists()) {
-        	method.releaseConnection();
+            method.releaseConnection();
             final StringBuffer error = new StringBuffer();
             error.append("Unable to retrieve URI: ");
             error.append(this.m_uri);
             error.append(" (");
             error.append(response);
             error.append(")");
-
             throw new SourceNotFoundException(error.toString());
         }
         final PipedOutputStream output = new PipedOutputStream();
@@ -251,12 +178,24 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Obtain the absolute URI this {@link Source} object references.
+     * Get the last modification date of this source. This date is measured in
+     * milliseconds since the Epoch (00:00:00 GMT, January 1, 1970).
      * 
-     * @return the absolute URI this {@link String} object references.
+     * @return the last modification date or <code>0</code> if unknown.
      */
-    public String getURI() {
-        return this.m_uri;
+    public long getLastModified() {
+        updateData();
+        return this.m_lastModified;
+    }
+
+    /**
+     * Obtain the mime-type for the referenced resource.
+     * 
+     * @return mime-type for the referenced resource.
+     */
+    public String getMimeType() {
+        updateData();
+        return this.m_mimeType;
     }
 
     /**
@@ -270,6 +209,15 @@ public class HTTPClientSource implements Source {
     }
 
     /**
+     * Obtain the absolute URI this {@link Source} object references.
+     * 
+     * @return the absolute URI this {@link String} object references.
+     */
+    public String getURI() {
+        return this.m_uri;
+    }
+
+    /**
      * Obtain a {@link SourceValidity} object.
      * 
      * @return a {@link SourceValidity} object, or <code>null</code> if this is
@@ -277,19 +225,15 @@ public class HTTPClientSource implements Source {
      */
     public SourceValidity getValidity() {
         // Implementation taken from URLSource.java, Kudos :)
-
         final long lm = getLastModified();
-
         if (lm > 0) {
             if (lm == this.m_cachedLastModificationDate) {
                 return this.m_cachedValidity;
             }
-
             this.m_cachedLastModificationDate = lm;
             this.m_cachedValidity = new TimeStampValidity(lm);
             return this.m_cachedValidity;
         }
-
         return null;
     }
 
@@ -298,31 +242,6 @@ public class HTTPClientSource implements Source {
      */
     public void refresh() {
         this.m_dataValid = false;
-    }
-
-    /**
-     * Method to update the mime type of a resource after executing a particular
-     * {@link HttpMethod}.
-     * 
-     * @param method
-     *            {@link HttpMethod} executed
-     */
-    private void updateMimeType(final HttpMethod method) {
-        // REVISIT: should this be the mime-type, or the content-type ->
-        // URLSource
-        // returns the Content-Type, so we'll follow that for now.
-        final Header header = method.getResponseHeader(CONTENT_TYPE);
-        this.m_mimeType = header == null ? null : header.getValue();
-    }
-
-    /**
-     * Obtain the mime-type for the referenced resource.
-     * 
-     * @return mime-type for the referenced resource.
-     */
-    public String getMimeType() {
-        updateData();
-        return this.m_mimeType;
     }
 
     /**
@@ -340,20 +259,60 @@ public class HTTPClientSource implements Source {
             if (this.logger.isDebugEnabled()) {
                 this.logger.debug("Unable to determine content length, returning -1", e);
             }
-
             this.m_contentLength = -1;
         }
     }
 
     /**
-     * Obtain the content length of the referenced resource.
-     * 
-     * @return content length of the referenced resource, or -1 if
-     *         unknown/uncalculatable
+     * Method to make response data available if possible without actually
+     * making an actual request (ie. via HTTP HEAD).
      */
-    public long getContentLength() {
-        updateData();
-        return this.m_contentLength;
+    private void updateData() {
+        // no request made so far, attempt to get some response data.
+        if (!this.m_dataValid) {
+            final HttpMethod head = new HeadMethod(this.m_uri);
+            try {
+                // cy altered so only one head request is made if successful
+                if (200 == executeMethod(head)) {
+                    this.m_dataValid = true;
+                }
+                return;
+            } catch (final IOException e) {
+                if (this.logger.isDebugEnabled()) {
+                    this.logger.debug("Unable to determine response data, using defaults", e);
+                }
+            } finally {
+                head.releaseConnection();
+            }
+            // default values when response data is not available
+            this.m_exists = false;
+            this.m_mimeType = null;
+            this.m_contentLength = -1;
+            this.m_lastModified = 0;
+            this.m_dataValid = true;
+        }
+    }
+
+    /**
+     * Method to update whether a referenced resource exists, after executing a
+     * particular {@link HttpMethod}.
+     * <p>
+     * REVISIT: exists() would be better called canRead() or similar, as a
+     * resource can exist but not be readable.
+     * </p>
+     * 
+     * @param method
+     *            {@link HttpMethod} executed.
+     */
+    private void updateExists(final HttpMethod method) {
+        final int response = method.getStatusCode();
+        // The following returns true, if the user can successfully get
+        // an InputStream without receiving errors? ie. if we receive a
+        // HTTP 200 (OK), 201 (CREATED), 206 (PARTIAL CONTENT)
+        // REVISIT(MC): need a special way to handle 304 (NOT MODIFIED)
+        // 204 & 205 in the future
+        // resource does not exist if HttpClient returns a 404 or a 410
+        this.m_exists = ((response == HttpStatus.SC_OK) || (response == HttpStatus.SC_CREATED) || (response == HttpStatus.SC_PARTIAL_CONTENT));
     }
 
     /**
@@ -374,13 +333,39 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Get the last modification date of this source. This date is measured in
-     * milliseconds since the Epoch (00:00:00 GMT, January 1, 1970).
+     * Method to update the mime type of a resource after executing a particular
+     * {@link HttpMethod}.
      * 
-     * @return the last modification date or <code>0</code> if unknown.
+     * @param method
+     *            {@link HttpMethod} executed
      */
-    public long getLastModified() {
-        updateData();
-        return this.m_lastModified;
+    private void updateMimeType(final HttpMethod method) {
+        // REVISIT: should this be the mime-type, or the content-type ->
+        // URLSource
+        // returns the Content-Type, so we'll follow that for now.
+        final Header header = method.getResponseHeader(CONTENT_TYPE);
+        this.m_mimeType = header == null ? null : header.getValue();
+    }
+
+    /**
+     * Executes a particular {@link HttpMethod} and updates internal data
+     * storage.
+     * 
+     * @param method
+     *            {@link HttpMethod} to execute
+     * @return response code from server
+     * @throws IOException
+     * @throws HttpException
+     * @exception IOException
+     *                if an error occurs
+     */
+    protected int executeMethod(final HttpMethod method) throws HttpException, IOException {
+        final int response = this.m_client.executeMethod(method);
+        updateExists(method);
+        updateMimeType(method);
+        updateContentLength(method);
+        updateLastModified(method);
+        // all finished, return response code to the caller.
+        return response;
     }
 }

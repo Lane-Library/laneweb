@@ -9,34 +9,33 @@ import java.util.Map;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
-import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.commons.codec.DecoderException;
 import org.apache.log4j.Logger;
 
-import edu.stanford.irt.SystemException;
+import edu.stanford.irt.laneweb.user.User;
+import edu.stanford.irt.laneweb.user.UserDao;
 
 public class LoginAction implements Action {
 
     private Logger logger = Logger.getLogger(LoginAction.class);
 
-    private UserInfoHelper userInfoHelper = null;
+    private UserDao userDao = null;
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source,
-            final Parameters params) throws ProcessingException, IOException, SystemException, InvalidKeyException,
-            IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeySpecException, NoSuchPaddingException,
-            DecoderException {
-        Request request = ObjectModelHelper.getRequest(objectModel);
-
-        UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
-        String sunetid = userInfo.getSunetId();
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters params)
+            throws ProcessingException, IOException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException,
+            InvalidKeySpecException, NoSuchPaddingException, DecoderException {
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
+        User user = this.userDao.createOrUpdateUser(request);
+        String sunetid = user.getUId();
         if (sunetid == null) {
             String redirectUrl = "/secure/login.html";
             if (null != request.getQueryString()) {
@@ -45,11 +44,10 @@ public class LoginAction implements Action {
             redirector.redirect(true, redirectUrl);
             return null;
         }
-        String ticket = userInfo.getTicket().toString();
+        String ticket = user.getTicket().toString();
         if (ticket == null) {
             throw new ProcessingException("null ticket");
         }
-
         // note: url is not just the url, it is the whole query string ie
         // url=http://...
         String url = request.getQueryString();
@@ -64,11 +62,10 @@ public class LoginAction implements Action {
         return null;
     }
 
-    public void setUserInfoHelper(final UserInfoHelper userInfoHelper) {
-        if (null == userInfoHelper) {
-            throw new IllegalArgumentException("null userInfoHelper");
+    public void setUserDao(final UserDao userDao) {
+        if (null == userDao) {
+            throw new IllegalArgumentException("null userDao");
         }
-        this.userInfoHelper = userInfoHelper;
+        this.userDao = userDao;
     }
-
 }

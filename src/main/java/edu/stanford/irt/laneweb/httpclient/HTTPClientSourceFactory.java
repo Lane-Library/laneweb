@@ -33,7 +33,6 @@ public class HTTPClientSourceFactory implements SourceFactory {
             final StringBuffer message = new StringBuffer();
             message.append("Exception thrown while creating ");
             message.append(HTTPClientSource.class.getName());
-
             throw new SourceException(message.toString(), e);
         }
     }

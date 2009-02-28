@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -23,34 +24,19 @@ import edu.stanford.irt.search.util.SAXable;
 
 public class DescribeGenerator implements Generator {
 
+    private String admin;
+
+    private String[] e;
+
+    private String engineId;
+
     private MetaSearchManager metaSearchManager;
 
     private String q;
 
-    private String[] e;
-
-    private String admin;
-
-    private String engineId;
-
     private XMLConsumer xmlConsumer;
 
-    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
-        this.metaSearchManager = msms.getMetaSearchManager();
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        Request request = (Request) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
-        this.q = request.getParameter("q");
-        this.e = request.getParameterValues("e");
-        this.admin = request.getParameter("admin");
-        this.engineId = request.getParameter("id");
-    }
-
     public void generate() throws SAXException {
-
         if (this.admin != null) {
             if ("rem".equals(this.admin)) {
                 this.metaSearchManager.disableSearchable(this.engineId);
@@ -58,9 +44,7 @@ public class DescribeGenerator implements Generator {
                 this.metaSearchManager.enableSearchable(this.engineId);
             }
         }
-
         Result result = null;
-
         Collection<String> engines = null;
         if ((this.e != null) && (this.e.length > 0)) {
             engines = new ArrayList<String>();
@@ -74,13 +58,10 @@ public class DescribeGenerator implements Generator {
         } else {
             query = new SimpleQuery("");
         }
-
         result = this.metaSearchManager.describe(query, engines);
-
         if (result == null) {
             throw new RuntimeException("result is null, something is broken");
         }
-
         SAXable xml = new SAXResult(result);
         synchronized (result) {
             xml.toSAX(this.xmlConsumer);
@@ -91,4 +72,17 @@ public class DescribeGenerator implements Generator {
         this.xmlConsumer = xmlConsumer;
     }
 
+    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
+        this.metaSearchManager = msms.getMetaSearchManager();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
+            IOException {
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
+        this.q = request.getParameter("q");
+        this.e = request.getParameterValues("e");
+        this.admin = request.getParameter("admin");
+        this.engineId = request.getParameter("id");
+    }
 }

@@ -17,25 +17,25 @@ import edu.stanford.irt.querymap.WeightedDescriptor;
 
 public class XMLizableQueryMap implements XMLizable {
 
-    private static final String QUERY_MAP = "query-map";
-
-    private static final String QUERY = "query";
-
     private static final String DESCRIPTOR = "descriptor";
-
-    private static final String RESOURCE_MAP = "resource-map";
-
-    private static final String RESOURCE = "resource";
-
-    private static final String IDREF = "idref";
-
-    private static final String TREEPATHS = "tree-paths";
-
-    private static final String TREEPATH = "tree-path";
 
     private static final String FREQUENCIES = "frequencies";
 
+    private static final String IDREF = "idref";
+
     private static final String NAMESPACE = "http://lane.stanford.edu/querymap/ns";
+
+    private static final String QUERY = "query";
+
+    private static final String QUERY_MAP = "query-map";
+
+    private static final String RESOURCE = "resource";
+
+    private static final String RESOURCE_MAP = "resource-map";
+
+    private static final String TREEPATH = "tree-path";
+
+    private static final String TREEPATHS = "tree-paths";
 
     private QueryMap queryMap;
 
@@ -95,5 +95,4 @@ public class XMLizableQueryMap implements XMLizable {
         XMLUtils.endElement(consumer, NAMESPACE, QUERY_MAP);
         consumer.endPrefixMapping("");
     }
-
 }

@@ -3,11 +3,12 @@ package edu.stanford.irt.laneweb;
 import java.util.Collection;
 import java.util.HashSet;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.components.pipeline.impl.CachingProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Request;
 import org.apache.log4j.Logger;
 
 /**
@@ -32,9 +33,8 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
      */
     @Override
     protected boolean processXMLPipeline(final Environment environment) throws ProcessingException {
-        Request request = (Request) environment.getObjectModel().get(ObjectModelHelper.REQUEST_OBJECT);
-        String requestKey = new StringBuffer(request.getRemoteAddr()).append(request.getRequestURI()).append("?").append(
-                request.getQueryString()).toString();
+        HttpServletRequest request = (HttpServletRequest) environment.getObjectModel().get(ObjectModelHelper.REQUEST_OBJECT);
+        String requestKey = new StringBuffer(request.getRemoteAddr()).append(request.getRequestURI()).append("?").append(request.getQueryString()).toString();
         if (this.logger.isDebugEnabled()) {
             this.logger.debug("requestKey = " + requestKey);
         }

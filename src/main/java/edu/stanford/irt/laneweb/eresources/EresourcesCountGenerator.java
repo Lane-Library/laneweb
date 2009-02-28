@@ -9,10 +9,11 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -27,37 +28,15 @@ public class EresourcesCountGenerator implements Generator {
 
     private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
 
-    private Set<String> types = Collections.emptySet();
-
-    private Set<String> subsets = Collections.emptySet();
-
     private CollectionManager collectionManager;
 
     private String query;
 
+    private Set<String> subsets = Collections.emptySet();
+
+    private Set<String> types = Collections.emptySet();
+
     private XMLConsumer xmlConsumer;
-
-    public void setCollectionManager(final CollectionManager collectionManager) {
-        if (null == collectionManager) {
-            throw new IllegalArgumentException("null collectionManager");
-        }
-        this.collectionManager = collectionManager;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        Request request = ObjectModelHelper.getRequest(objectModel);
-        String query = request.getParameter(QUERY);
-        if (null != query) {
-            this.query = query.trim();
-            if (this.query.length() == 0) {
-                this.query = null;
-            }
-        } else {
-            throw new RuntimeException("null query");
-        }
-    }
 
     public void generate() throws SAXException {
         Map<String, Integer> result = this.collectionManager.searchCount(this.types, this.subsets, this.query);
@@ -80,11 +59,25 @@ public class EresourcesCountGenerator implements Generator {
         this.xmlConsumer.endDocument();
     }
 
+    public void setCollectionManager(final CollectionManager collectionManager) {
+        if (null == collectionManager) {
+            throw new IllegalArgumentException("null collectionManager");
+        }
+        this.collectionManager = collectionManager;
+    }
+
     public void setConsumer(final XMLConsumer xmlConsumer) {
         if (null == xmlConsumer) {
             throw new IllegalArgumentException("null xmlConsumer");
         }
         this.xmlConsumer = xmlConsumer;
+    }
+
+    public void setSubsets(final Set<String> subsets) {
+        if (null == subsets) {
+            throw new IllegalArgumentException("null subsets");
+        }
+        this.subsets = subsets;
     }
 
     public void setTypes(final Set<String> types) {
@@ -94,10 +87,18 @@ public class EresourcesCountGenerator implements Generator {
         this.types = types;
     }
 
-    public void setSubsets(final Set<String> subsets) {
-        if (null == subsets) {
-            throw new IllegalArgumentException("null subsets");
+    @SuppressWarnings("unchecked")
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
+            IOException {
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
+        String query = request.getParameter(QUERY);
+        if (null != query) {
+            this.query = query.trim();
+            if (this.query.length() == 0) {
+                this.query = null;
+            }
+        } else {
+            throw new RuntimeException("null query");
         }
-        this.subsets = subsets;
     }
 }

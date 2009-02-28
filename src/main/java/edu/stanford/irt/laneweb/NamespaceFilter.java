@@ -20,12 +20,28 @@ public class NamespaceFilter implements Transformer {
         this.consumer.characters(ch, start, length);
     }
 
+    public void comment(final char[] ch, final int start, final int length) throws SAXException {
+        this.consumer.comment(ch, start, length);
+    }
+
+    public void endCDATA() throws SAXException {
+        this.consumer.endCDATA();
+    }
+
     public void endDocument() throws SAXException {
         this.consumer.endDocument();
     }
 
+    public void endDTD() throws SAXException {
+        this.consumer.endDTD();
+    }
+
     public void endElement(final String uri, final String localName, final String name) throws SAXException {
         this.consumer.endElement(uri, localName, name);
+    }
+
+    public void endEntity(final String name) throws SAXException {
+        this.consumer.endEntity(name);
     }
 
     public void endPrefixMapping(final String prefix) throws SAXException {
@@ -42,20 +58,41 @@ public class NamespaceFilter implements Transformer {
         this.consumer.processingInstruction(target, data);
     }
 
+    public void setConsumer(final XMLConsumer consumer) {
+        this.consumer = consumer;
+    }
+
     public void setDocumentLocator(final Locator locator) {
         this.consumer.setDocumentLocator(locator);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3) throws ProcessingException, SAXException,
+            IOException {
     }
 
     public void skippedEntity(final String name) throws SAXException {
         this.consumer.skippedEntity(name);
     }
 
+    public void startCDATA() throws SAXException {
+        this.consumer.startCDATA();
+    }
+
     public void startDocument() throws SAXException {
         this.consumer.startDocument();
     }
 
+    public void startDTD(final String name, final String publicId, final String systemId) throws SAXException {
+        this.consumer.startDTD(name, publicId, systemId);
+    }
+
     public void startElement(final String uri, final String localName, final String name, final Attributes atts) throws SAXException {
         this.consumer.startElement(uri, localName, name, atts);
+    }
+
+    public void startEntity(final String name) throws SAXException {
+        this.consumer.startEntity(name);
     }
 
     public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
@@ -63,42 +100,4 @@ public class NamespaceFilter implements Transformer {
             this.consumer.startPrefixMapping(prefix, uri);
         }
     }
-
-    public void comment(final char[] ch, final int start, final int length) throws SAXException {
-        this.consumer.comment(ch, start, length);
-    }
-
-    public void endCDATA() throws SAXException {
-        this.consumer.endCDATA();
-    }
-
-    public void endDTD() throws SAXException {
-        this.consumer.endDTD();
-    }
-
-    public void endEntity(final String name) throws SAXException {
-        this.consumer.endEntity(name);
-    }
-
-    public void startCDATA() throws SAXException {
-        this.consumer.startCDATA();
-    }
-
-    public void startDTD(final String name, final String publicId, final String systemId) throws SAXException {
-        this.consumer.startDTD(name, publicId, systemId);
-    }
-
-    public void startEntity(final String name) throws SAXException {
-        this.consumer.startEntity(name);
-    }
-
-    public void setConsumer(final XMLConsumer consumer) {
-        this.consumer = consumer;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3) throws ProcessingException,
-            SAXException, IOException {
-    }
-
 }

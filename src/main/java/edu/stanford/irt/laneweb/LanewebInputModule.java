@@ -8,20 +8,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.cocoon.components.modules.input.InputModule;
 import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.environment.Request;
 import org.apache.log4j.Logger;
+
+import edu.stanford.irt.laneweb.user.User;
+import edu.stanford.irt.laneweb.user.UserDao;
 
 /**
  * @author ceyates To change the template for this generated type comment go to
  *         Window - Preferences - Java - Code Generation - Code and Comments
  */
 public class LanewebInputModule implements InputModule {
-    
-    //TODO: split this into separate input modules 
 
+    // TODO: split this into separate input modules
     private Logger logger = Logger.getLogger(LanewebInputModule.class);
 
     private List<String> noProxyRegex;
@@ -30,14 +33,13 @@ public class LanewebInputModule implements InputModule {
 
     private Map<String, String> templateConfig;
 
-    private UserInfoHelper userInfoHelper;
+    private UserDao userDao;
 
     @SuppressWarnings("unchecked")
     public Object getAttribute(final String key, final Configuration config, final Map objectModel) {
         Object result = null;
-        Request request = ObjectModelHelper.getRequest(objectModel);
-        UserInfo userInfo = this.userInfoHelper.getUserInfo(request);
-
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
+        User user = this.userDao.createOrUpdateUser(request);
         if (LanewebConstants.PROXY_LINKS.equals(key)) {
             String ip = request.getRemoteAddr();
             // mod_proxy puts the real remote address in an x-forwarded-for
@@ -47,10 +49,10 @@ public class LanewebInputModule implements InputModule {
             if (header != null) {
                 ip = header;
             }
-            result = userInfo.getProxyLinks() != null ? userInfo.getProxyLinks() : new Boolean(proxyLinks(ip));
+            result = user.getProxyLinks() != null ? user.getProxyLinks() : new Boolean(proxyLinks(ip));
         }
         if (LanewebConstants.AFFILIATION.equals(key)) {
-            result = userInfo.getAffiliation();
+            result = user.getTrackingAffiliation();
         }
         if (LanewebConstants.TEMPLATE.equals(key)) {
             String requestURI = request.getRequestURI();
@@ -58,20 +60,17 @@ public class LanewebInputModule implements InputModule {
             result = getTemplateName(requestURI.substring(contextPathLength + 1));
         }
         if (LanewebConstants.SUNETID.equals(key)) {
-            result = userInfo.getSunetId();
+            result = user.getUId();
         }
         if (LanewebConstants.TICKET.equals(key)) {
-            result = userInfo.getTicket();
+            result = user.getTicket();
         }
         if (LanewebConstants.FULL_NAME.equals(key)) {
-            if (userInfo.getPerson() != null) {
-                result = userInfo.getPerson().getDisplayName();
-            }
+            result = user.getDisplayName();
             if ((result == null) || result.equals("")) {
-                result = userInfo.getSunetId();
+                result = user.getUId();
             }
         }
-
         if (this.logger.isDebugEnabled()) {
             this.logger.debug(key + " = " + result);
         }
@@ -104,17 +103,11 @@ public class LanewebInputModule implements InputModule {
         this.templateConfig = templateConfig;
     }
 
-    protected String getTemplateName(final String url) {
-        for (String key : this.templateConfig.keySet()) {
-            if (url.matches(key)) {
-                return this.templateConfig.get(key);
-            }
+    public void setUserDao(final UserDao userDao) {
+        if (null == userDao) {
+            throw new IllegalArgumentException("null userDao");
         }
-        return null;
-    }
-
-    protected boolean proxyLinks(final String ip) {
-        return !isNoProxy(ip) || isProxy(ip);
+        this.userDao = userDao;
     }
 
     private boolean isNoProxy(final String ip) {
@@ -135,11 +128,16 @@ public class LanewebInputModule implements InputModule {
         return false;
     }
 
-    public void setUserInfoHelper(final UserInfoHelper userInfoHelper) {
-        if (null == userInfoHelper) {
-            throw new IllegalArgumentException("null userInfoHelper");
+    protected String getTemplateName(final String url) {
+        for (String key : this.templateConfig.keySet()) {
+            if (url.matches(key)) {
+                return this.templateConfig.get(key);
+            }
         }
-        this.userInfoHelper = userInfoHelper;
+        return null;
     }
 
+    protected boolean proxyLinks(final String ip) {
+        return !isNoProxy(ip) || isProxy(ip);
+    }
 }

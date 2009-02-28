@@ -5,6 +5,16 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
     http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd">
     
+    <bean id="edu.stanford.irt.cocoon.spring.SitemapRequestHandler"
+        class="edu.stanford.irt.cocoon.spring.SitemapRequestHandler">
+        <property name="methodsNotAllowed">
+            <set>
+                <value>OPTIONS</value>
+                <value>PROPFIND</value>
+            </set>
+        </property>
+    </bean>
+    
     <bean name="org.apache.cocoon.caching.Cache" class="org.apache.cocoon.caching.impl.CacheImpl">
         <property name="store" ref="org.apache.excalibur.store.Store"/>
     </bean>
@@ -54,19 +64,33 @@
     <bean id="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
         class="edu.stanford.irt.laneweb.search.MetaSearchManagerSource" destroy-method="dispose"/>
     
-    <bean id="edu.stanford.irt.laneweb.UserInfoHelper"
-        class="edu.stanford.irt.laneweb.UserInfoHelper">
-        <property name="ldapClient">
-            <bean class="edu.stanford.irt.laneweb.LdapClient" init-method="initialize">
-                <property name="ldapKeytab" value="IRT_K5"/>
+    <bean id="org.springframework.ldap.core.ContextSource"
+        class="org.springframework.ldap.core.support.LdapContextSource">
+        <property name="url" value="ldap://ldap.stanford.edu" />
+        <property name="base" value="cn=people,dc=stanford,dc=edu" />
+        <property name="authenticationStrategy">
+            <bean class="edu.stanford.irt.laneweb.user.UserDao$GSSAPIAuthenticationStrategy"/>
+        </property>
+    </bean>
+    
+    <bean id="org.springframework.ldap.core.LdapTemplate"
+        class="org.springframework.ldap.core.LdapTemplate">
+        <constructor-arg ref="org.springframework.ldap.core.ContextSource" />
+    </bean>
+    <bean id="edu.stanford.irt.laneweb.user.UserDao"
+        class="edu.stanford.irt.laneweb.user.UserDao">
+        <property name="subjectSource">
+            <bean class="edu.stanford.irt.laneweb.user.SubjectSource">
+                <property name="name" value="IRT_K5"/>
             </bean>
         </property>
+        <property name="ldapTemplate" ref="org.springframework.ldap.core.LdapTemplate"/>
         <property name="ezproxyKey">
             <bean class="org.springframework.jndi.JndiObjectFactoryBean">
                 <property name="jndiName" value="java:comp/env/ezproxy-key"/>
             </bean>
         </property>
-        <property name="cryptor" ref="edu.stanford.irt.laneweb.Cryptor"></property>
+        <property name="cryptor" ref="edu.stanford.irt.laneweb.Cryptor"/>
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.Cryptor" class="edu.stanford.irt.laneweb.Cryptor">
@@ -130,7 +154,7 @@
                 <value>^171\.6[4-7]\.\S+</value>
             </list>
         </property>
-        <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
+        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/file"
@@ -330,7 +354,7 @@
                 <property name="dataSource" ref="javax.sql.DataSource/voyager"/>
             </bean>
         </property>
-        <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
+        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
     
     <bean name="org.apache.cocoon.acting.Action/form-redirect"
@@ -347,7 +371,7 @@
                 </property>
             </bean>
         </property>
-        <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
+        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
     
     <bean name="org.apache.cocoon.acting.Action/session-action"
@@ -358,12 +382,12 @@
     
     <bean name="org.apache.cocoon.acting.Action/loginAction"
         class="edu.stanford.irt.laneweb.LoginAction">
-        <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
+        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
     
     <bean name="org.apache.cocoon.acting.Action/persistentLoginAction"
         class="edu.stanford.irt.laneweb.PersistentLoginAction">
-        <property name="userInfoHelper" ref="edu.stanford.irt.laneweb.UserInfoHelper"/>
+        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
         <property name="cryptor" ref="edu.stanford.irt.laneweb.Cryptor"></property>
     </bean>
     

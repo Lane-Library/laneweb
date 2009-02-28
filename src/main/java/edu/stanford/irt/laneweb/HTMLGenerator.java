@@ -29,17 +29,20 @@ public class HTMLGenerator implements Generator, CacheableProcessingComponent {
     private XMLConsumer xmlConsumer;
 
     /**
-     * Setup the html generator. Try to get the last modification date of the
-     * source for caching.
+     * Generate XML data.
      * 
      * @throws IOException
+     * @throws SourceNotFoundException
      * @throws SAXException
-     * @throws ProcessingException
      */
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        this.source = resolver.resolveURI(src);
+    public void generate() throws SourceNotFoundException, IOException, SAXException {
+        HTMLConfiguration conf = new HTMLConfiguration();
+        conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
+        conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
+        AbstractSAXParser parser = new AbstractSAXParser(conf) {
+        };
+        parser.setContentHandler(this.xmlConsumer);
+        parser.parse(new InputSource(this.source.getInputStream()));
     }
 
     /**
@@ -65,24 +68,21 @@ public class HTMLGenerator implements Generator, CacheableProcessingComponent {
         return this.source.getValidity();
     }
 
-    /**
-     * Generate XML data.
-     * 
-     * @throws IOException
-     * @throws SourceNotFoundException
-     * @throws SAXException
-     */
-    public void generate() throws SourceNotFoundException, IOException, SAXException {
-        HTMLConfiguration conf = new HTMLConfiguration();
-        conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
-        conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-        AbstractSAXParser parser = new AbstractSAXParser(conf) {
-        };
-        parser.setContentHandler(this.xmlConsumer);
-        parser.parse(new InputSource(this.source.getInputStream()));
-    }
-
     public void setConsumer(final XMLConsumer xmlConsumer) {
         this.xmlConsumer = xmlConsumer;
+    }
+
+    /**
+     * Setup the html generator. Try to get the last modification date of the
+     * source for caching.
+     * 
+     * @throws IOException
+     * @throws SAXException
+     * @throws ProcessingException
+     */
+    @SuppressWarnings("unchecked")
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
+            IOException {
+        this.source = resolver.resolveURI(src);
     }
 }

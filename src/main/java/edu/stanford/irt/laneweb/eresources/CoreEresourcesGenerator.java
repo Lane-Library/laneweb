@@ -15,5 +15,4 @@ public class CoreEresourcesGenerator extends CacheableEresourcesGenerator {
         }
         return this.collectionManager.getCore(this.type);
     }
-
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.user;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -13,6 +13,8 @@ import java.util.Date;
  * @author ceyates
  */
 public class Ticket {
+
+    private long creationTime;
 
     private String stringValue;
 
@@ -27,6 +29,7 @@ public class Ticket {
         String packet = "$u" + ((int) (now.getTime() / 1000));
         try {
             this.stringValue = URLEncoder.encode(getKeyedDigest(ezyproxyKey + user + packet) + packet, "UTF-8");
+            this.creationTime = System.currentTimeMillis();
         } catch (UnsupportedEncodingException e) {
             // won't happen
             throw new RuntimeException(e);
@@ -34,6 +37,15 @@ public class Ticket {
             // won't happen
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean isValid() {
+        return System.currentTimeMillis() - this.creationTime < 1000 * 60;
+    }
+
+    @Override
+    public String toString() {
+        return this.stringValue;
     }
 
     private String getKeyedDigest(final String buffer) throws UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -45,10 +57,4 @@ public class Ticket {
         }
         return sb.toString();
     }
-
-    @Override
-    public String toString() {
-        return this.stringValue;
-    }
-
 }

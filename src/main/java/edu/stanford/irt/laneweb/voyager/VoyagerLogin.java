@@ -8,11 +8,9 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
-import edu.stanford.irt.directory.LDAPPerson;
+import edu.stanford.irt.laneweb.user.User;
 
 public class VoyagerLogin {
-
-    private static final String ERROR_URL = "/voyagerError.html";
 
     private static final String BASE_URL = "http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?";
 
@@ -20,11 +18,13 @@ public class VoyagerLogin {
 
     private static final String CREATE_SESSION_SQL = "INSERT INTO LMLDB.WOPAC_PID_PATRON_KEYS (PATRON_KEY, PID) VALUES (?,?)";
 
-    private Logger logger = Logger.getLogger(VoyagerLogin.class);
+    private static final String ERROR_URL = "/voyagerError.html";
 
     private DataSource dataSource;
 
-    public String getVoyagerURL(final LDAPPerson person, final String pid, final String queryString) {
+    private Logger logger = Logger.getLogger(VoyagerLogin.class);
+
+    public String getVoyagerURL(final User person, final String pid, final String queryString) {
         if ((null == pid) || !pid.matches("[\\w0-9-_]+")) {
             this.logger.error("bad pid: " + pid);
             return ERROR_URL;
@@ -38,9 +38,7 @@ public class VoyagerLogin {
             this.logger.error("bad univId: " + univId);
             return ERROR_URL;
         }
-
         univId = "0" + univId; // voyager data prepends 0
-
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
@@ -81,5 +79,4 @@ public class VoyagerLogin {
         }
         this.dataSource = dataSource;
     }
-
 }

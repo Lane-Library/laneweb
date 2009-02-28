@@ -30,13 +30,13 @@ import edu.stanford.irt.querymap.ResourceMap;
 
 public class QueryMapReaderTest {
 
-    private QueryMapReader reader;
+    private OutputStream outputStream;
 
     private Parameters parameters;
 
     private QueryMapper queryMapper;
 
-    private OutputStream outputStream;
+    private QueryMapReader reader;
 
     @Before
     public void setUp() throws Exception {
@@ -98,14 +98,13 @@ public class QueryMapReaderTest {
             @Override
             public QueryMap getQueryMap(final String query) {
                 Descriptor descriptor = new Descriptor(query, query, Collections.<String> singleton(query));
-                return new QueryMap(query, descriptor, new ResourceMap(descriptor, Collections.<Resource> singleton(new Resource(query,
-                        query))), null, null);
+                return new QueryMap(query, descriptor, new ResourceMap(descriptor, Collections.<Resource> singleton(new Resource(query, query))), null, null);
             }
 
             // TODO: need to more thoroughly test the source reloading:
             @Override
-            public QueryMap getQueryMap(final String query, final Map<String, Set<Resource>> resourceMaps,
-                    final Map<String, Float> descriptorWeights, final int abstractCount) {
+            public QueryMap getQueryMap(final String query, final Map<String, Set<Resource>> resourceMaps, final Map<String, Float> descriptorWeights,
+                    final int abstractCount) {
                 return null;
             }
         };
@@ -126,13 +125,13 @@ public class QueryMapReaderTest {
                         QueryMapReaderTest.this.reader.setOutputStream(new OutputStream() {
 
                             @Override
-                            public void write(final int b) throws IOException {
-                                throw new IOException("not implemented");
+                            public void write(final byte[] bytes) {
+                                assertTrue(new String(bytes).indexOf(response) == 10);
                             }
 
                             @Override
-                            public void write(final byte[] bytes) {
-                                assertTrue(new String(bytes).indexOf(response) == 10);
+                            public void write(final int b) throws IOException {
+                                throw new IOException("not implemented");
                             }
                         });
                     } catch (IOException e1) {
@@ -160,7 +159,5 @@ public class QueryMapReaderTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 }

@@ -22,19 +22,6 @@
         </layout>
     </appender>
     
-    <appender name="WEBDASH" class="org.apache.log4j.net.SMTPAppender">
-        <param name="Threshold" value="ERROR"/>
-        <param name="To" value="ceyates@stanford.edu"/>
-        <param name="From" value="laneweb@stanford.edu"/>
-        <param name="Subject" value="Webdash Error"/>
-        <param name="SMTPHost" value="smtp.stanford.edu"/>
-        <param name="BufferSize" value="512"/>
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="[%d{ISO8601}] %-5p %c %m %n"
-            />
-        </layout>
-    </appender>
-    
     <appender name="VOYAGER" class="org.apache.log4j.net.SMTPAppender">
         <param name="Threshold" value="ERROR"/>
         <param name="To" value="ryanmax@stanford.edu"/>
@@ -53,12 +40,7 @@
         <layout class="org.apache.log4j.PatternLayout"> 
             <param name="ConversionPattern" value="%-5p %c{1} - %m%n"/> 
         </layout> 
-    </appender> 
-    
-    <category name="edu.stanford.irt.laneweb.webdash.WebdashLogin" additivity="false">
-        <priority value="ERROR"/>
-        <appender-ref ref="WEBDASH"/>
-    </category>
+    </appender>
     
     <category name="edu.stanford.irt.laneweb.LoginAction" additivity="false">
         <priority value="ERROR"/>

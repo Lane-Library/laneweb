@@ -14,29 +14,29 @@ import edu.stanford.irt.eresources.Version;
 
 public class XHTMLizableEresourceList implements XMLizable {
 
-    private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
-
-    private static final String EMPTY_NS = "";
-
-    private static final String HTML = "html";
-
-    private static final String HEAD = "head";
-
-    private static final String TITLE = "title";
+    private static final String A = "a";
 
     private static final String BODY = "body";
 
-    private static final String DL = "dl";
-
     private static final String DD = "dd";
+
+    private static final String DL = "dl";
 
     private static final String DT = "dt";
 
-    private static final String UL = "ul";
+    private static final String EMPTY_NS = "";
+
+    private static final String HEAD = "head";
+
+    private static final String HTML = "html";
 
     private static final String LI = "li";
 
-    private static final String A = "a";
+    private static final String TITLE = "title";
+
+    private static final String UL = "ul";
+
+    private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
     private Collection<Eresource> eresources;
 
@@ -67,7 +67,64 @@ public class XHTMLizableEresourceList implements XMLizable {
         XMLUtils.endElement(handler, XHTML_NS, BODY);
         XMLUtils.endElement(handler, XHTML_NS, HTML);
         handler.endPrefixMapping("");
+    }
 
+    private String getLinkText(final Eresource eresource, final Version version, final Link link, final boolean hasGetPassword) {
+        StringBuffer sb = new StringBuffer();
+        if ((hasGetPassword && (version.getLinks().size() == 2)) || (version.getLinks().size() == 1)) {
+            String holdings = version.getSummaryHoldings();
+            if ((null != holdings) && (holdings.length() > 0)) {
+                sb.append(holdings);
+            }
+            String dates = version.getDates();
+            if ((null != dates) && (dates.length() > 0)) {
+                if (sb.length() != 0) {
+                    sb.append(", ");
+                }
+                sb.append(dates);
+            }
+        }
+        if (sb.length() == 0) {
+            String label = link.getLabel();
+            if ((null != label) && (label.length() > 0)) {
+                sb.append(label);
+            } else {
+                sb.append(link.getUrl());
+            }
+        }
+        String description = version.getDescription();
+        if (null != description) {
+            sb.append(' ').append(description);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * @param handler
+     * @param eresource
+     * @param version
+     * @param link
+     * @throws SAXException
+     */
+    private void handleAnchor(final ContentHandler handler, final Eresource eresource, final Version version, final Link link, final boolean hasGetPassword)
+            throws SAXException {
+        AttributesImpl attributes = new AttributesImpl();
+        String proxyValue = version.isProxy() ? "proxy" : "noproxy";
+        attributes.addAttribute(EMPTY_NS, "class", "class", "CDATA", proxyValue);
+        String url = null != link.getUrl() ? link.getUrl() : "";
+        attributes.addAttribute(EMPTY_NS, "href", "href", "CDATA", url);
+        StringBuffer sb = new StringBuffer();
+        sb.append(eresource.getTitle());
+        if (null != version.getPublisher()) {
+            sb.append(':').append(version.getPublisher());
+        }
+        if ((hasGetPassword && (version.getLinks().size() > 2)) || (!hasGetPassword && (version.getLinks().size() > 1))) {
+            sb.append(':').append(link.getLabel());
+        }
+        attributes.addAttribute(EMPTY_NS, "title", "title", "CDATA", sb.toString());
+        XMLUtils.startElement(handler, XHTML_NS, A, attributes);
+        XMLUtils.data(handler, getLinkText(eresource, version, link, hasGetPassword));
+        XMLUtils.endElement(handler, XHTML_NS, A);
     }
 
     private void handleEresource(final ContentHandler handler, final Eresource eresource) throws SAXException {
@@ -113,8 +170,8 @@ public class XHTMLizableEresourceList implements XMLizable {
         XMLUtils.endElement(handler, XHTML_NS, DD);
     }
 
-    private void handleLink(final ContentHandler handler, final Eresource eresource, final Version version, final Link passwordLink,
-            final Link link) throws SAXException {
+    private void handleLink(final ContentHandler handler, final Eresource eresource, final Version version, final Link passwordLink, final Link link)
+            throws SAXException {
         StringBuffer sb = new StringBuffer();
         XMLUtils.startElement(handler, XHTML_NS, LI);
         handleAnchor(handler, eresource, version, link, passwordLink != null);
@@ -141,64 +198,5 @@ public class XHTMLizableEresourceList implements XMLizable {
             XMLUtils.endElement(handler, XHTML_NS, A);
         }
         XMLUtils.endElement(handler, LI);
-
-    }
-
-    /**
-     * @param handler
-     * @param eresource
-     * @param version
-     * @param link
-     * @throws SAXException
-     */
-    private void handleAnchor(final ContentHandler handler, final Eresource eresource, final Version version, final Link link,
-            final boolean hasGetPassword) throws SAXException {
-        AttributesImpl attributes = new AttributesImpl();
-        String proxyValue = version.isProxy() ? "proxy" : "noproxy";
-        attributes.addAttribute(EMPTY_NS, "class", "class", "CDATA", proxyValue);
-        String url = null != link.getUrl() ? link.getUrl() : "";
-        attributes.addAttribute(EMPTY_NS, "href", "href", "CDATA", url);
-        StringBuffer sb = new StringBuffer();
-        sb.append(eresource.getTitle());
-        if (null != version.getPublisher()) {
-            sb.append(':').append(version.getPublisher());
-        }
-        if ((hasGetPassword && (version.getLinks().size() > 2)) || (!hasGetPassword && (version.getLinks().size() > 1))) {
-            sb.append(':').append(link.getLabel());
-        }
-        attributes.addAttribute(EMPTY_NS, "title", "title", "CDATA", sb.toString());
-        XMLUtils.startElement(handler, XHTML_NS, A, attributes);
-        XMLUtils.data(handler, getLinkText(eresource, version, link, hasGetPassword));
-        XMLUtils.endElement(handler, XHTML_NS, A);
-    }
-
-    private String getLinkText(final Eresource eresource, final Version version, final Link link, final boolean hasGetPassword) {
-        StringBuffer sb = new StringBuffer();
-        if ((hasGetPassword && (version.getLinks().size() == 2)) || (version.getLinks().size() == 1)) {
-            String holdings = version.getSummaryHoldings();
-            if ((null != holdings) && (holdings.length() > 0)) {
-                sb.append(holdings);
-            }
-            String dates = version.getDates();
-            if ((null != dates) && (dates.length() > 0)) {
-                if (sb.length() != 0) {
-                    sb.append(", ");
-                }
-                sb.append(dates);
-            }
-        }
-        if (sb.length() == 0) {
-            String label = link.getLabel();
-            if ((null != label) && (label.length() > 0)) {
-                sb.append(label);
-            } else {
-                sb.append(link.getUrl());
-            }
-        }
-        String description = version.getDescription();
-        if (null != description) {
-            sb.append(' ').append(description);
-        }
-        return sb.toString();
     }
 }

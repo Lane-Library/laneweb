@@ -13,23 +13,35 @@ import edu.stanford.irt.eresources.Eresource;
 
 public class XMLLizableBassettEresourceList implements XMLizable {
 
+    private static final String BASSETT = "bassett";
+
+    private static final String BASSETT_IMAGE = "bassett_image";
+
+    private static final String BASSETT_NUMBER = "bassett_number";
+
+    private static final String BASSETTS = "bassetts";
+
+    private static final String DESCRIPTION = "description";
+
+    private static final String DIAGRAM = "diagram_image";
+
+    private static final String LEGEND = "legend";
+
+    private static final String LEGEND_IMAGE = "legend_image";
+
+    private static final String NAME = "name";
+
+    private static final String REGION = "region";
+
+    private static final String REGIONS = "regions";
+
+    private static final String SUB_REGION = "sub_region";
+
+    private static final String TITLE = "title";
+
     private Collection<Eresource> bassetts;
 
     private String NAMESPACE = "http://lane.stanford.edu/bassett/ns";
-
-    private static final String BASSETTS = "bassetts";
-    private static final String BASSETT = "bassett";
-    private static final String BASSETT_NUMBER = "bassett_number";
-    private static final String BASSETT_IMAGE = "bassett_image";
-    private static final String DIAGRAM = "diagram_image";
-    private static final String LEGEND_IMAGE = "legend_image";
-    private static final String LEGEND = "legend";
-    private static final String REGIONS = "regions";
-    private static final String REGION = "region";
-    private static final String SUB_REGION = "sub_region";
-    private static final String TITLE = "title";
-    private static final String DESCRIPTION = "description";
-    private static final String NAME = "name";
 
     public XMLLizableBassettEresourceList(final Collection<Eresource> bassetts) {
         this.bassetts = bassetts;
@@ -45,28 +57,22 @@ public class XMLLizableBassettEresourceList implements XMLizable {
         }
         XMLUtils.endElement(consumer, this.NAMESPACE, BASSETTS);
         consumer.endPrefixMapping("");
-
     }
 
     private void handleEresource(final ContentHandler handler, final Eresource eresource) throws SAXException {
         BassettEresource bassett = (BassettEresource) eresource;
-
         AttributesImpl attributes = new AttributesImpl();
         attributes.addAttribute(this.NAMESPACE, BASSETT_NUMBER, BASSETT_NUMBER, "CDATA", bassett.getBassettNumber());
         XMLUtils.startElement(handler, this.NAMESPACE, BASSETT, attributes);
-
         XMLUtils.startElement(handler, this.NAMESPACE, TITLE);
         XMLUtils.data(handler, bassett.getTitle());
         XMLUtils.endElement(handler, this.NAMESPACE, TITLE);
-
         XMLUtils.startElement(handler, this.NAMESPACE, BASSETT_IMAGE);
         XMLUtils.data(handler, bassett.getImage());
         XMLUtils.endElement(handler, this.NAMESPACE, BASSETT_IMAGE);
-
         XMLUtils.startElement(handler, this.NAMESPACE, DIAGRAM);
         XMLUtils.data(handler, bassett.getDiagram());
         XMLUtils.endElement(handler, this.NAMESPACE, DIAGRAM);
-
         XMLUtils.startElement(handler, this.NAMESPACE, LEGEND_IMAGE);
         XMLUtils.data(handler, bassett.getLatinLegend());
         XMLUtils.endElement(handler, this.NAMESPACE, LEGEND_IMAGE);
@@ -108,5 +114,4 @@ public class XMLLizableBassettEresourceList implements XMLizable {
         XMLUtils.endElement(handler, this.NAMESPACE, REGION);
         XMLUtils.endElement(handler, this.NAMESPACE, REGIONS);
     }
-
 }

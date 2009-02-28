@@ -24,12 +24,9 @@ public class ExtensionsSuggestReader implements Reader {
 
     private ThreadLocal<String> query = new ThreadLocal<String>();
 
-    public void setDataSource(final DataSource dataSource) {
-        if (null == dataSource) {
-            throw new IllegalArgumentException("null dataSource");
-        }
-        this.dataSource = dataSource;
-    }
+    private final String sql_1 = "select title from eresource where lower(title) like lower('%";
+
+    private final String sql_2 = "%') and rownum < 20 order by title";
 
     public void generate() throws IOException, SAXException, ProcessingException {
         Connection conn = null;
@@ -48,7 +45,6 @@ public class ExtensionsSuggestReader implements Reader {
                 maybeComma = ",\"";
             }
             out.write("]]".getBytes());
-
         } catch (SQLException e) {
             throw new ProcessingException(e);
         } finally {
@@ -82,9 +78,27 @@ public class ExtensionsSuggestReader implements Reader {
         return 0;
     }
 
+    public String getMimeType() {
+        return "text/plain";
+    }
+
+    public void setDataSource(final DataSource dataSource) {
+        if (null == dataSource) {
+            throw new IllegalArgumentException("null dataSource");
+        }
+        this.dataSource = dataSource;
+    }
+
+    public void setOutputStream(final OutputStream outputStream) throws IOException {
+        if (null == outputStream) {
+            throw new IllegalArgumentException("null outputStream");
+        }
+        this.outputStream.set(outputStream);
+    }
+
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters params) throws ProcessingException,
-            SAXException, IOException {
+    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters params) throws ProcessingException, SAXException,
+            IOException {
         String q = params.getParameter("query", null);
         if (null == this.query) {
             throw new ProcessingException("null query");
@@ -103,23 +117,7 @@ public class ExtensionsSuggestReader implements Reader {
         this.query.set(q);
     }
 
-    public String getMimeType() {
-        return "text/plain";
-    }
-
-    public void setOutputStream(final OutputStream outputStream) throws IOException {
-        if (null == outputStream) {
-            throw new IllegalArgumentException("null outputStream");
-        }
-        this.outputStream.set(outputStream);
-    }
-
     public boolean shouldSetContentLength() {
         return false;
     }
-
-    private final String sql_1 = "select title from eresource where lower(title) like lower('%";
-
-    private final String sql_2 = "%') and rownum < 20 order by title";
-
 }

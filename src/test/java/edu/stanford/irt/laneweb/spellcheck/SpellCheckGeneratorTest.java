@@ -27,9 +27,9 @@ public class SpellCheckGeneratorTest {
 
     private SpellCheckGenerator generator;
 
-    private SpellChecker spellChecker;
-
     private Parameters params;
+
+    private SpellChecker spellChecker;
 
     private XMLConsumer xmlConsumer;
 
@@ -39,16 +39,6 @@ public class SpellCheckGeneratorTest {
         this.spellChecker = createMock(SpellChecker.class);
         this.params = createMock(Parameters.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
-    }
-
-    @Test
-    public void testSetSpellCheck() {
-        try {
-            this.generator.setSpellChecker(null);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
-        this.generator.setSpellChecker(this.spellChecker);
     }
 
     @Test
@@ -63,6 +53,26 @@ public class SpellCheckGeneratorTest {
         this.generator.generate();
         verify(this.spellChecker);
         verify(this.params);
+    }
+
+    @Test
+    public void testSetConsumer() {
+        try {
+            this.generator.setConsumer(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+        }
+        this.generator.setConsumer(this.xmlConsumer);
+    }
+
+    @Test
+    public void testSetSpellCheck() {
+        try {
+            this.generator.setSpellChecker(null);
+            fail();
+        } catch (IllegalArgumentException e) {
+        }
+        this.generator.setSpellChecker(this.spellChecker);
     }
 
     @Test
@@ -82,16 +92,6 @@ public class SpellCheckGeneratorTest {
         }
         this.generator.setup(null, null, null, this.params);
         verify(this.params);
-    }
-
-    @Test
-    public void testSetConsumer() {
-        try {
-            this.generator.setConsumer(null);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
-        this.generator.setConsumer(this.xmlConsumer);
     }
 
     @Test
@@ -143,7 +143,5 @@ public class SpellCheckGeneratorTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 }

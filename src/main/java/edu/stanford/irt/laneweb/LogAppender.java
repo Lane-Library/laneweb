@@ -6,10 +6,10 @@ import org.apache.log4j.RollingFileAppender;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.spi.ThrowableInformation;
 
-//TODO:  replace this with something in cocoon RequestProcessor subclass
+// TODO: replace this with something in cocoon RequestProcessor subclass
 /**
- * A log appender that doesn't spew out error stack traces in the log
- * just because someone requested a file that doesn't exist.
+ * A log appender that doesn't spew out error stack traces in the log just
+ * because someone requested a file that doesn't exist.
  */
 public class LogAppender extends RollingFileAppender {
 
@@ -26,9 +26,7 @@ public class LogAppender extends RollingFileAppender {
                 super.doAppend(newEvent);
                 return;
             }
-            
         }
         super.doAppend(event);
     }
-
 }
