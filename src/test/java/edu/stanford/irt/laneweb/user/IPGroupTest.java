@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 
 public class IPGroupTest extends TestCase {
 
-    public void testGetAffiliationForIP() {
+    public void testGetipGroupForIP() {
         assertEquals(IPGroup.LPCH, IPGroup.getGroupForIP("10.252.31.112"));
     }
 

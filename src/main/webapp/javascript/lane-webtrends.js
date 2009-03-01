@@ -56,7 +56,7 @@
 //        var redirectUrl;
 //        var title;
 //        var host;
-//        var affiliation = getMetaContent('WT.seg_1');
+//        var ipGroup = getMetaContent('WT.seg_1');
 //        if(node.hostname != undefined)
 //        {
 //            host = node.hostname;
@@ -99,7 +99,7 @@
 //                }
 //                title = getWebtrendsTitle(node);
 //                //alert('DCS.dcssip:'+ href +'\nDCS.dcsuri:'+uri + '\nDCS.dcsquery:' +query  +'\nWT.ti:'+title +'\nDCSext.keywords:'+getMetaContent('LW.searchTerms')+'\nDCSext.search_type:'+getMetaContent('LW.source')+'\nDCSext.offsite_link:1');
-//                 dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.searchTerms'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link',offsite,'WT.seg_1',affiliation);
+//                 dcsMultiTrack('DCS.dcssip', href,'DCS.dcsuri',uri,'DCS.dcsquery',query,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.searchTerms'),'DCSext.search_type',getMetaContent('LW.source'),'DCSext.offsite_link',offsite,'WT.seg_1',ipGroup);
 //                 //alert('/OFFSITE/' + title);
 //                 if(window.pageTracker != undefined){
 //                    window.pageTracker._trackPageview('/OFFSITE/' + title);
@@ -124,7 +124,7 @@
 //            title = getWebtrendsTitle(node);
 //            uri =  node.pathname;    
 //            //alert('\nDCS.dcsuri:'+uri + '\nWT.ti: '+title +'\nDCSext.keywords: '+getMetaContent('LW.searchTerms')+'\nDCSext.search_type: '+getMetaContent('LW.source'));
-//            dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.searchTerms'),'DCSext.search_type',getMetaContent('LW.source'),'WT.seg_1',affiliation);
+//            dcsMultiTrack('DCS.dcsuri',uri,'WT.ti',title,'DCSext.keywords',getMetaContent('LW.searchTerms'),'DCSext.search_type',getMetaContent('LW.source'),'WT.seg_1',ipGroup);
 //            //alert('/ONSITE/' + title + uri);
 //            if(window.pageTracker != undefined){
 //                window.pageTracker._trackPageview('/ONSITE/' + title + '/' + uri);

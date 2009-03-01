@@ -44,13 +44,13 @@ public class UserDaoTest extends TestCase {
 
     private UserDao userDao;
 
-    public void testAffiliation() {
+    public void testipGroup() {
         String ip = this.ip.concat("FAIL_TEST");
         expect(this.request.getRemoteAddr()).andReturn(ip);
         expect(this.request.getRemoteUser()).andReturn(this.sunetid);
         replay(this.request);
         User user = this.userDao.createOrUpdateUser(this.request);
-        assertEquals(IPGroup.ERR, user.getTrackingAffiliation());
+        assertEquals(IPGroup.ERR, user.getIPGroup());
         verify(this.session);
         verify(this.request);
     }
@@ -78,7 +78,7 @@ public class UserDaoTest extends TestCase {
         this.cookies[2] = securityCookie;
         this.userDao.setCryptor(cryptor);
         User user = this.userDao.createOrUpdateUser(this.request);
-        assertEquals(IPGroup.SOM, user.getTrackingAffiliation());
+        assertEquals(IPGroup.SOM, user.getIPGroup());
         assertTrue(user.getProxyLinks());
         assertEquals(this.sunetid, user.getSunetId());
         assertNotNull(user.getTicket());
@@ -187,7 +187,7 @@ public class UserDaoTest extends TestCase {
         expect(this.request.getRemoteAddr()).andReturn(this.ip);
         replay(this.request);
         User user = this.userDao.createOrUpdateUser(this.request);
-        assertEquals(IPGroup.SOM, user.getTrackingAffiliation());
+        assertEquals(IPGroup.SOM, user.getIPGroup());
         assertTrue(user.getProxyLinks());
         assertEquals(this.sunetid, user.getSunetId());
         assertNotNull(user.getTicket());

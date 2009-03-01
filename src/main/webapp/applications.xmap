@@ -28,10 +28,10 @@
                     <map:generate type="search"/>
                     <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
                         <map:parameter name="context" value=""/>
-                        <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                        <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                        <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
-                        <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                        <map:parameter name="sunetid" value="{user:sunetid}"/>
+                        <map:parameter name="ticket" value="{user:ticket}"/>
+                        <map:parameter name="ipGroup" value="{user:ip-group}"/>
+                        <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>

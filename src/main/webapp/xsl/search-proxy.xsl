@@ -6,7 +6,7 @@
     <xsl:param name="context" />
     <xsl:param name="sunetid" />
     <xsl:param name="ticket" />
-    <xsl:param name="affiliation" />
+    <xsl:param name="ipGroup" />
     <xsl:param name="proxy-links" />
     <xsl:variable name="proxy-url">http://laneproxy.stanford.edu/login?</xsl:variable>
 
@@ -20,7 +20,7 @@
     <xsl:template match="s:resource/s:url[not(starts-with(.,'http://lane.')) or contains(.,'postMethodHelper')]">
         <xsl:copy>
             <xsl:choose>
-                <xsl:when test="$proxy-links = 'true' and ($affiliation = 'LPCH' or $affiliation = 'SHC')">
+                <xsl:when test="$proxy-links = 'true' and ($ipGroup = 'LPCH' or $ipGroup = 'SHC')">
                     <xsl:value-of select="$proxy-url" />
                     <xsl:text>url=</xsl:text>
                     <xsl:value-of select="." />

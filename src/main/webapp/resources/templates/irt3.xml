@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="/style/irt3/irt3.css"/>
         <link rel="search" type="application/opensearchdescription+xml" title="LaneConnex"
             href="/extensions/laneconnex-engine.xml"/>
-        <meta name="WT.seg_1" content="{affiliation}"/>
+        <meta name="WT.seg_1" content="{ipGroup}"/>
     </head>
     <body>
         <div id="custom-doc">
@@ -54,7 +54,7 @@
                         </h2>
                         <h3 id="pl">
                             <span id="pl-logout"><a href="/secure/login.html">Off Campus Login</a></span>
-                            <span id="pl-login">Off Campus Login: <span id="user-full-name"/> | <a href="/persistentlogin.html">Account</a> | <a href="/persistentlogin.html?pl=logout">Logout</a></span>
+                            <span id="pl-login">Off Campus Login: <span id="user-name"/> | <a href="/persistentlogin.html">Account</a> | <a href="/persistentlogin.html?pl=logout">Logout</a></span>
                         </h3>
                         <h3 id="irt">
                             <a title="IRT." href="http://med.stanford.edu/irt/">

@@ -56,7 +56,7 @@ public class UserDao {
             user = new User();
             session.setAttribute(LanewebConstants.USER, user);
         }
-        setUserTrackingAffiliation(user, request);
+        setIpGroup(user, request);
         setSunetId(user, request);
         setTicket(user, request);
         setProxyLinks(user, request);
@@ -140,7 +140,7 @@ public class UserDao {
     }
 
     private void setLdapData(final User user) {
-        if (null != user.getSunetId() && null == user.getDisplayName()) {
+        if (null != user.getSunetId() && null == user.getName()) {
             Subject subject = this.subjectSource.getSubject();
             if (null != subject) {
                 Subject.doAs(subject, new PrivilegedAction<User>() {
@@ -149,7 +149,7 @@ public class UserDao {
                         UserDao.this.ldapTemplate.search("", "susunetid=" + user.getSunetId(), new AttributesMapper() {
 
                             public Object mapFromAttributes(final Attributes attributes) throws NamingException {
-                                user.setDisplayName((String) attributes.get("displayname").get());
+                                user.setName((String) attributes.get("displayname").get());
                                 user.setAffiliation((String) attributes.get("suaffiliation").get());
                                 user.setUnivId((String) attributes.get("suunivid").get());
                                 return user;
@@ -192,8 +192,8 @@ public class UserDao {
         }
     }
 
-    private void setUserTrackingAffiliation(final User user, final HttpServletRequest request) {
-        if (user.getTrackingAffiliation() == null) {
+    private void setIpGroup(final User user, final HttpServletRequest request) {
+        if (user.getIPGroup() == null) {
             String ip = request.getRemoteAddr();
             // mod_proxy puts the real remote address in an x-forwarded-for
             // header
@@ -207,7 +207,7 @@ public class UserDao {
                 }
             }
             IPGroup iPGroup = IPGroup.getGroupForIP(ip);
-            user.setTrackingAffiliation(iPGroup);
+            user.setIPGroup(iPGroup);
             if (IPGroup.ERR.equals(iPGroup)) {
                 this.logger.error("error parsing ip for IPGroup: " + ip);
             }

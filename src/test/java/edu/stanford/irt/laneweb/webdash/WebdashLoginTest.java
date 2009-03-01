@@ -35,7 +35,7 @@ public class WebdashLoginTest {
     @Test
     public void testLoginURL() {
         expect(this.person.getSunetId()).andReturn("ceyates");
-        expect(this.person.getDisplayName()).andReturn("Charles E Yates");
+        expect(this.person.getName()).andReturn("Charles E Yates");
         expect(this.person.getAffilation()).andReturn("stanford:staff");
         replay(this.person);
         assertEquals(
@@ -47,7 +47,7 @@ public class WebdashLoginTest {
     @Test
     public void testRegisterURL() {
         expect(this.person.getSunetId()).andReturn("ceyates");
-        expect(this.person.getDisplayName()).andReturn("Charles E Yates");
+        expect(this.person.getName()).andReturn("Charles E Yates");
         expect(this.person.getAffilation()).andReturn("stanford:staff");
         replay(this.person);
         assertEquals(

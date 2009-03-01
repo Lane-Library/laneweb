@@ -100,9 +100,9 @@
                 <map:generate type="file"
                     src="{naming:java:comp/env/live-base}/content/cookiesFetch.html"/>
                 <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
-                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                    <map:parameter name="sunetid" value="{user:sunetid}"/>
+                    <map:parameter name="ticket" value="{user:ticket}"/>
+                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="path" value="{request-param:path}"/>
                     <map:parameter name="entryUrl" value="{request-param:entryUrl}"/>
                     <map:parameter name="title" value="{request-param:title}"/>
@@ -112,17 +112,17 @@
             <map:match pattern="postMethodHelper.html" type="wildcard">
                 <map:generate type="request"/>
                 <map:transform type="saxon" src="context://xsl/postMethodHelper.xsl">
-                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
+                    <map:parameter name="sunetid" value="{user:sunetid}"/>
+                    <map:parameter name="ticket" value="{user:ticket}"/>
+                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <!-- used for tracking user affiliation in interfaces external to laneweb (catalog, elane) -->
+            <!-- used for tracking user ipGroup in interfaces external to laneweb (catalog, elane) -->
             <map:match pattern="affiliationFetch" type="wildcard">
                 <map:generate type="request"/>
-                <map:transform type="saxon" src="context://xsl/affiliationFetch.xsl">
-                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                <map:transform type="saxon" src="context://xsl/ipGroupFetch.xsl">
+                    <map:parameter name="ipGroup" value="{user:ip-group}"/>
                     <map:parameter name="callback" value="{request-param:callback}"/>
                 </map:transform>
                 <map:serialize type="text"/>
@@ -166,10 +166,10 @@
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value=""/>
                     <map:parameter name="query-string" value="{request:queryString}"/>
-                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="sunetid" value="{user:sunetid}"/>
+                    <map:parameter name="ticket" value="{user:ticket}"/>
+                    <map:parameter name="ipGroup" value="{user:ip-group}"/>
                     <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                     <map:parameter name="template" value="{request-param:template}"/>
@@ -179,7 +179,7 @@
                     <map:parameter name="t" value="{request-param:t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
-                    <map:parameter name="full-name" value="{laneweb:full-name}"/>
+                    <map:parameter name="name" value="{user:name}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
@@ -196,10 +196,10 @@
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value=""/>
                     <map:parameter name="query-string" value="{request:queryString}"/>
-                    <map:parameter name="proxy-links" value="{laneweb:proxy-links}"/>
-                    <map:parameter name="sunetid" value="{laneweb:sunetid}"/>
-                    <map:parameter name="ticket" value="{laneweb:ticket}"/>
-                    <map:parameter name="affiliation" value="{laneweb:affiliation}"/>
+                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="sunetid" value="{user:sunetid}"/>
+                    <map:parameter name="ticket" value="{user:ticket}"/>
+                    <map:parameter name="ipGroup" value="{user:ip-group}"/>
                     <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                     <map:parameter name="template" value="{request-param:template}"/>
@@ -209,7 +209,7 @@
                     <map:parameter name="t" value="{request-param:t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
-                    <map:parameter name="full-name" value="{laneweb:full-name}"/>
+                    <map:parameter name="name" value="{user:name}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xhtml"/>

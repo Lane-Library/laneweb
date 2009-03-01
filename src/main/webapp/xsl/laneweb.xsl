@@ -36,7 +36,7 @@
     <xsl:param name="m"/>
 
     <!-- LPCH and SHC don't require authentication for proxy server -->
-    <xsl:param name="affiliation"/>
+    <xsl:param name="ipGroup"/>
 
     <!-- value of the 't' parameter -->
     <xsl:param name="t"/>
@@ -48,7 +48,7 @@
 
     <xsl:param name="referrer"/>
 
-    <xsl:param name="full-name"/>
+    <xsl:param name="name"/>
 
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
@@ -224,8 +224,8 @@
 		</xsl:if>
 	</xsl:template>-->
    
-    <xsl:template match="h:span[@id='user-full-name']">
-        <xsl:value-of select="$full-name"/>
+    <xsl:template match="h:span[@id='user-name']">
+        <xsl:value-of select="$name"/>
     </xsl:template>
    
    <!-- <xsl:template match="h:span[@id='pl-logout'] ">
@@ -472,7 +472,7 @@
             <xsl:when
                 test="(parent::h:a[@class='proxy' or @proxy]) and $proxy-links = 'true' and starts-with(.,'http')">
                 <xsl:choose>
-                    <xsl:when test="$affiliation = 'LPCH' or $affiliation = 'SHC'">
+                    <xsl:when test="$ipGroup = 'LPCH' or $ipGroup = 'SHC'">
                         <xsl:attribute name="href">
                             <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
                             <xsl:value-of
@@ -634,10 +634,10 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- add the affiliation to content of the meta element named WT.seg_1 for reporting to webtrends -->
+    <!-- add the ipGroup to content of the meta element named WT.seg_1 for reporting to webtrends -->
     <xsl:template match="h:meta[@name='WT.seg_1']/@content">
         <xsl:attribute name="content">
-            <xsl:value-of select="$affiliation"/>
+            <xsl:value-of select="$ipGroup"/>
         </xsl:attribute>
     </xsl:template>
 
@@ -753,7 +753,7 @@
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
 
     <xsl:template match="h:a[@id='proxyOn']">
-        <xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'false'">
+        <xsl:if test="contains('OTHER|PAVA|ERR',$ipGroup) and $proxy-links = 'false'">
             <!--<xsl:if test="$proxy-links = 'false'">-->
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
@@ -784,7 +784,7 @@
     </xsl:template>
 
     <xsl:template match="h:a[@id='proxyOff']">
-        <xsl:if test="contains('OTHER|PAVA|ERR',$affiliation) and $proxy-links = 'true'">
+        <xsl:if test="contains('OTHER|PAVA|ERR',$ipGroup) and $proxy-links = 'true'">
             <!--<xsl:if test="$proxy-links = 'true'">-->
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>

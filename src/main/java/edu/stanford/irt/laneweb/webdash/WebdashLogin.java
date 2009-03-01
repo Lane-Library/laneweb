@@ -39,7 +39,7 @@ public class WebdashLogin {
         }
         String userId = encodeParameter(person.getSunetId());
         String mail = encodeParameter(userId.concat("@stanford.edu"));
-        String fullName = encodeParameter(person.getDisplayName());
+        String fullName = encodeParameter(person.getName());
         String affiliation = getSubGroup(person);
         StringBuffer result = new StringBuffer();
         result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce).append("&subgroup=").append(affiliation)
@@ -79,7 +79,7 @@ public class WebdashLogin {
     private String getSubGroup(final User person) {
         String affiliation = person.getAffilation();
         if (null == affiliation) {
-            throw new RuntimeException("no affiliations for " + person.getDisplayName());
+            throw new RuntimeException("no affiliations for " + person.getName());
         }
         return affiliation.substring(affiliation.indexOf(':') + 1);
     }

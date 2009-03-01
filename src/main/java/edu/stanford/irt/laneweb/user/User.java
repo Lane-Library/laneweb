@@ -2,9 +2,17 @@ package edu.stanford.irt.laneweb.user;
 
 public class User {
 
+    public static final String NAME = "name";
+
+    public static final String SUNETID = "sunetid";
+
+    public static final String TICKET = "ticket";
+
+    public static final String IPGROUP = "ip-group";
+
     private String affiliation;
 
-    private String displayName;
+    private String name;
 
     private Boolean proxyLinks;
 
@@ -20,8 +28,8 @@ public class User {
         return this.affiliation;
     }
 
-    public String getDisplayName() {
-        return this.displayName;
+    public String getName() {
+        return this.name;
     }
 
     public Boolean getProxyLinks() {
@@ -32,7 +40,7 @@ public class User {
         return this.ticket;
     }
 
-    public IPGroup getTrackingAffiliation() {
+    public IPGroup getIPGroup() {
         return this.iPGroup;
     }
 
@@ -48,8 +56,8 @@ public class User {
         this.affiliation = affiliation;
     }
 
-    public void setDisplayName(final String displayName) {
-        this.displayName = displayName;
+    public void setName(final String displayName) {
+        this.name = displayName;
     }
 
     public void setProxyLinks(final Boolean proxyLinks) {
@@ -60,7 +68,7 @@ public class User {
         this.ticket = ticket;
     }
 
-    public void setTrackingAffiliation(final IPGroup iPGroup) {
+    public void setIPGroup(final IPGroup iPGroup) {
         this.iPGroup = iPGroup;
     }
 
@@ -75,7 +83,7 @@ public class User {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer("sunetId=").append(this.sunetId).append(",univid=").append(this.univId).append(",affiliation=").append(this.affiliation)
-                .append(",displayname=").append(this.displayName).append(",iPGroup=").append(this.iPGroup).append(",ticket=").append(
+                .append(",displayname=").append(this.name).append(",iPGroup=").append(this.iPGroup).append(",ticket=").append(
                         this.ticket).append(",proxyLinks=").append(this.proxyLinks);
         return sb.toString();
     }

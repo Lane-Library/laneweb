@@ -78,7 +78,7 @@
     <component role="org.apache.cocoon.components.modules.input.InputModule/chain"
         class="org.apache.cocoon.components.modules.input.ChainMetaModule">
         <input-module name="request-param"/>
-        <input-module name="laneweb"/>
+        <input-module name="template"/>
         <input-module name="defaults"/>
     </component>
 

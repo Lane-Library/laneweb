@@ -119,20 +119,17 @@
     </bean>
     
     <bean id="edu.stanford.irt.querymap.DescriptorManager"
-    class="edu.stanford.irt.querymap.DescriptorManager"/>
+        class="edu.stanford.irt.querymap.DescriptorManager"/>
     
-    <bean name="org.apache.cocoon.components.modules.input.InputModule/mt-munge"
-        class="edu.stanford.irt.laneweb.MTMungingInputModule"/>
+    <bean id="org.apache.cocoon.components.modules.input.AbstractInputModule"
+        class="edu.stanford.irt.laneweb.inputmodule.AbstractInputModule"
+        abstract="true">
+        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
+    </bean>
     
-    <bean name="org.apache.cocoon.components.modules.input.InputModule/laneweb"
-        class="edu.stanford.irt.laneweb.LanewebInputModule">
-        <property name="templateConfig">
-            <map key-type="java.lang.String" value-type="java.lang.String">
-                <entry key="^(stage/|)services/spaces/reserve/\S+" value="none"/>
-                <entry key="^(stage/|)bassett/raw/bassettLargerView.html?.*+"
-                    value="bassettLargerView"/>
-            </map>
-        </property>
+    <bean name="org.apache.cocoon.components.modules.input.InputModule/proxy-links"
+        class="edu.stanford.irt.laneweb.inputmodule.ProxyLinks"
+        parent="org.apache.cocoon.components.modules.input.AbstractInputModule">
         <property name="proxyRegex">
             <list>
                 <!-- VPN 171.65.16.0 - 171.65.31.255 -->
@@ -154,8 +151,26 @@
                 <value>^171\.6[4-7]\.\S+</value>
             </list>
         </property>
-        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
+    
+    <bean name="org.apache.cocoon.components.modules.input.InputModule/user"
+        class="edu.stanford.irt.laneweb.inputmodule.UserInputModule"
+        parent="org.apache.cocoon.components.modules.input.AbstractInputModule"/>
+    
+    <bean name="org.apache.cocoon.components.modules.input.InputModule/template"
+        class="edu.stanford.irt.laneweb.inputmodule.Template"
+        parent="org.apache.cocoon.components.modules.input.AbstractInputModule">
+        <property name="templateConfig">
+            <map key-type="java.lang.String" value-type="java.lang.String">
+                <entry key="^(stage/|)services/spaces/reserve/\S+" value="none"/>
+                <entry key="^(stage/|)bassett/raw/bassettLargerView.html?.*+"
+                    value="bassettLargerView"/>
+            </map>
+        </property>
+    </bean>
+    
+    <bean name="org.apache.cocoon.components.modules.input.InputModule/mt-munge"
+        class="edu.stanford.irt.laneweb.inputmodule.MTMungingInputModule"/>
     
     <bean name="org.apache.cocoon.generation.Generator/file"
         class="org.apache.cocoon.generation.FileGenerator" scope="prototype">

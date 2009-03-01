@@ -7,6 +7,8 @@ import org.apache.avalon.framework.configuration.ConfigurationException;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.inputmodule.MTMungingInputModule;
+
 public class MTMungingInputModuleTest {
 
     private MTMungingInputModule inputModule;

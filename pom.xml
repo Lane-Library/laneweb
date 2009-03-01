@@ -361,5 +361,11 @@
             <version>1.3.0.RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <artifactId>cocoon-core</artifactId>
+            <groupId>org.apache.cocoon</groupId>
+            <version>2.2.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>
