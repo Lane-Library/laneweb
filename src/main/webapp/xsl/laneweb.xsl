@@ -225,7 +225,14 @@
 	</xsl:template>-->
    
     <xsl:template match="h:span[@id='user-name']">
-        <xsl:value-of select="$name"/>
+        <xsl:choose>
+            <xsl:when test="$name">
+                <xsl:value-of select="$name"/>
+            </xsl:when>
+            <xsl:when test="$sunetid">
+                <xsl:value-of select="$sunetid"/>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
    
    <!-- <xsl:template match="h:span[@id='pl-logout'] ">
