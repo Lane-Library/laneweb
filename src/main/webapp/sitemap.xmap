@@ -118,8 +118,17 @@
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <!-- used for tracking user ipGroup in interfaces external to laneweb (catalog, elane) -->
+            <!-- for backwards compatibility until request is changed to ipGroupFetch -->
             <map:match pattern="affiliationFetch" type="wildcard">
+                <map:generate type="request"/>
+                <map:transform type="saxon" src="context://xsl/ipGroupFetch.xsl">
+                    <map:parameter name="ipGroup" value="{user:ip-group}"/>
+                    <map:parameter name="callback" value="{request-param:callback}"/>
+                </map:transform>
+                <map:serialize type="text"/>
+            </map:match>
+            <!-- used for tracking user ipGroup in interfaces external to laneweb (catalog, elane) -->
+            <map:match pattern="ipGroupFetch" type="wildcard">
                 <map:generate type="request"/>
                 <map:transform type="saxon" src="context://xsl/ipGroupFetch.xsl">
                     <map:parameter name="ipGroup" value="{user:ip-group}"/>
