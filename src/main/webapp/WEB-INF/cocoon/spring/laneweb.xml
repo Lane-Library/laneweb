@@ -392,9 +392,6 @@
         <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
 
-    <bean name="org.apache.cocoon.acting.Action/session-action"
-        class="edu.stanford.irt.laneweb.LanewebSessionAction"/>
-
     <bean name="org.apache.cocoon.acting.Action/javascript-logger"
         class="edu.stanford.irt.laneweb.JavascriptLoggerAction"/>
 
