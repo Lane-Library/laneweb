@@ -102,7 +102,7 @@
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
                     <map:parameter name="ticket" value="{user:ticket}"/>
-                    <map:parameter name="ipGroup" value="{user:ip-group}"/>
+                    <map:parameter name="ip-group" value="{user:ip-group}"/>
                     <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                     <map:parameter name="template" value="{request-param:template}"/>
@@ -117,7 +117,6 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
-                <map:act type="session-action"/>
                 <map:aggregate element="doc" label="content">
                     <map:part src="cocoon:/content/{1}.html"/>
                     <map:part src="cocoon:/content/sitemap.html"/>
@@ -131,7 +130,7 @@
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
                     <map:parameter name="ticket" value="{user:ticket}"/>
-                    <map:parameter name="ipGroup" value="{user:ip-group}"/>
+                    <map:parameter name="ip-group" value="{user:ip-group}"/>
                     <map:parameter name="q" value="{request-param:q}"/>
                     <map:parameter name="loadTab" value="{request-param:loadTab}"/>
                     <map:parameter name="template" value="{request-param:template}"/>

@@ -38,7 +38,7 @@
                                 <map:parameter name="context" value=""/>
                                 <map:parameter name="sunetid" value="{user:sunetid}"/>
                                 <map:parameter name="ticket" value="{user:ticket}"/>
-                                <map:parameter name="ipGroup" value="{user:ip-group}"/>
+                                <map:parameter name="ip-group" value="{user:ip-group}"/>
                                 <map:parameter name="proxy-links" value="{proxy-links:}"/>
                             </map:transform>
                         </map:when>
@@ -47,7 +47,7 @@
                                 <map:parameter name="context" value=""/>
                                 <map:parameter name="sunetid" value="{user:sunetid}"/>
                                 <map:parameter name="ticket" value="{user:ticket}"/>
-                                <map:parameter name="ipGroup" value="{user:ip-group}"/>
+                                <map:parameter name="ip-group" value="{user:ip-group}"/>
                                 <map:parameter name="proxy-links" value="{proxy-links:}"/>
                             </map:transform>
                         </map:otherwise>

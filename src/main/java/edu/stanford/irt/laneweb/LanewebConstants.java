@@ -14,8 +14,6 @@ public interface LanewebConstants {
 
     public static final String SECURITY_COOKIE_NAME = "s-lane";
 
-    public static final String TEMPLATE = "template";
-
     public static final String USER = "user";
 
     public static final String USER_COOKIE_NAME = "u-lane";

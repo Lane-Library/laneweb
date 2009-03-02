@@ -4,7 +4,7 @@
     xmlns:pipeline="http://cocoon.apache.org/schema/pipeline"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
     http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd">
-    
+
     <bean id="edu.stanford.irt.cocoon.spring.SitemapRequestHandler"
         class="edu.stanford.irt.cocoon.spring.SitemapRequestHandler">
         <property name="methodsNotAllowed">
@@ -14,11 +14,11 @@
             </set>
         </property>
     </bean>
-    
+
     <bean name="org.apache.cocoon.caching.Cache" class="org.apache.cocoon.caching.impl.CacheImpl">
         <property name="store" ref="org.apache.excalibur.store.Store"/>
     </bean>
-    
+
     <bean name="org.apache.excalibur.store.Store"
         class="org.apache.cocoon.components.store.impl.EHDefaultStore" init-method="init"
         destroy-method="destroy">
@@ -26,15 +26,15 @@
         <property name="useCacheDirectory" value="true"/>
         <property name="settings" ref="org.apache.cocoon.configuration.Settings"/>
     </bean>
-    
+
     <bean name="org.apache.excalibur.store.Store/TransientStore"
         class="edu.stanford.irt.laneweb.store.TransientStore">
         <property name="storeJanitor" ref="org.apache.excalibur.store.StoreJanitor"/>
     </bean>
-    
+
     <bean id="org.apache.excalibur.store.StoreJanitor"
         class="edu.stanford.irt.laneweb.store.StoreJanitor"/>
-    
+
     <bean id="org.apache.commons.httpclient.HttpClient"
         class="org.apache.commons.httpclient.HttpClient">
         <constructor-arg>
@@ -45,13 +45,12 @@
             </bean>
         </constructor-arg>
     </bean>
-    
+
     <bean name="org.apache.excalibur.source.SourceFactory/http"
         class="edu.stanford.irt.laneweb.httpclient.HTTPClientSourceFactory">
-        <property name="httpClient"
-            ref="org.apache.commons.httpclient.HttpClient"/>
+        <property name="httpClient" ref="org.apache.commons.httpclient.HttpClient"/>
     </bean>
-    
+
     <bean name="javax.sql.DataSource/eresources"
         class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="java:comp/env/jdbc/eresources"/>
@@ -60,31 +59,37 @@
     <bean name="javax.sql.DataSource/voyager" class="org.springframework.jndi.JndiObjectFactoryBean">
         <property name="jndiName" value="java:comp/env/jdbc/voyager"/>
     </bean>
-    
+
     <bean id="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
         class="edu.stanford.irt.laneweb.search.MetaSearchManagerSource" destroy-method="dispose"/>
-    
-    <bean id="org.springframework.ldap.core.ContextSource"
-        class="org.springframework.ldap.core.support.LdapContextSource">
-        <property name="url" value="ldap://ldap.stanford.edu" />
-        <property name="base" value="cn=people,dc=stanford,dc=edu" />
-        <property name="authenticationStrategy">
-            <bean class="edu.stanford.irt.laneweb.user.UserDao$GSSAPIAuthenticationStrategy"/>
-        </property>
-    </bean>
-    
-    <bean id="org.springframework.ldap.core.LdapTemplate"
-        class="org.springframework.ldap.core.LdapTemplate">
-        <constructor-arg ref="org.springframework.ldap.core.ContextSource" />
-    </bean>
-    <bean id="edu.stanford.irt.laneweb.user.UserDao"
-        class="edu.stanford.irt.laneweb.user.UserDao">
+
+    <bean id="edu.stanford.irt.laneweb.user.UserDao" class="edu.stanford.irt.laneweb.user.UserDao">
         <property name="subjectSource">
             <bean class="edu.stanford.irt.laneweb.user.SubjectSource">
                 <property name="name" value="IRT_K5"/>
             </bean>
         </property>
-        <property name="ldapTemplate" ref="org.springframework.ldap.core.LdapTemplate"/>
+        <property name="ldapTemplate">
+            <bean class="org.springframework.ldap.core.LdapTemplate">
+                <constructor-arg>
+                    <bean class="org.springframework.ldap.core.support.LdapContextSource">
+                        <property name="urls">
+                            <value>
+                                ldap://ldap.stanford.edu
+                                ldap://ldap1.stanford.edu
+                                ldap://ldap2.stanford.edu
+                                ldap://ldap3.stanford.edu
+                                ldap://ldap4.stanford.edu
+                            </value>
+                        </property>
+                        <property name="base" value="cn=people,dc=stanford,dc=edu"/>
+                        <property name="authenticationStrategy">
+                            <bean class="edu.stanford.irt.laneweb.user.GSSAPIAuthenticationStrategy"/>
+                        </property>
+                    </bean>
+                </constructor-arg>
+            </bean>
+        </property>
         <property name="ezproxyKey">
             <bean class="org.springframework.jndi.JndiObjectFactoryBean">
                 <property name="jndiName" value="java:comp/env/ezproxy-key"/>
@@ -92,41 +97,39 @@
         </property>
         <property name="cryptor" ref="edu.stanford.irt.laneweb.Cryptor"/>
     </bean>
-    
+
     <bean id="edu.stanford.irt.laneweb.Cryptor" class="edu.stanford.irt.laneweb.Cryptor">
-    	<property name="key" value="stanfordlanelibraryir"/>
+        <property name="key" value="stanfordlanelibraryir"/>
     </bean>
-            
+
     <bean name="edu.stanford.irt.eresources.CollectionManager/laneconnex"
         class="edu.stanford.irt.eresources.impl.CollectionManagerImpl">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
-    
+
     <bean name="edu.stanford.irt.eresources.CollectionManager/history"
         class="edu.stanford.irt.laneweb.eresources.HistoryCollectionManager">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
-    
+
     <bean id="edu.stanford.irt.querymap.QueryMapper" class="edu.stanford.irt.querymap.QueryMapper">
         <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
         <property name="queryToDescriptor">
             <bean class="edu.stanford.irt.querymap.QueryToDescriptor">
                 <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
-                <property name="httpClient"
-                    ref="org.apache.commons.httpclient.HttpClient"/>
+                <property name="httpClient" ref="org.apache.commons.httpclient.HttpClient"/>
             </bean>
         </property>
     </bean>
-    
+
     <bean id="edu.stanford.irt.querymap.DescriptorManager"
         class="edu.stanford.irt.querymap.DescriptorManager"/>
-    
+
     <bean id="org.apache.cocoon.components.modules.input.AbstractInputModule"
-        class="edu.stanford.irt.laneweb.inputmodule.AbstractInputModule"
-        abstract="true">
+        class="edu.stanford.irt.laneweb.inputmodule.AbstractInputModule" abstract="true">
         <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.components.modules.input.InputModule/proxy-links"
         class="edu.stanford.irt.laneweb.inputmodule.ProxyLinks"
         parent="org.apache.cocoon.components.modules.input.AbstractInputModule">
@@ -152,11 +155,11 @@
             </list>
         </property>
     </bean>
-    
+
     <bean name="org.apache.cocoon.components.modules.input.InputModule/user"
         class="edu.stanford.irt.laneweb.inputmodule.UserInputModule"
         parent="org.apache.cocoon.components.modules.input.AbstractInputModule"/>
-    
+
     <bean name="org.apache.cocoon.components.modules.input.InputModule/template"
         class="edu.stanford.irt.laneweb.inputmodule.Template"
         parent="org.apache.cocoon.components.modules.input.AbstractInputModule">
@@ -168,41 +171,41 @@
             </map>
         </property>
     </bean>
-    
+
     <bean name="org.apache.cocoon.components.modules.input.InputModule/mt-munge"
         class="edu.stanford.irt.laneweb.inputmodule.MTMungingInputModule"/>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/file"
         class="org.apache.cocoon.generation.FileGenerator" scope="prototype">
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/search-describe"
         class="edu.stanford.irt.laneweb.search.DescribeGenerator" scope="prototype">
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/search"
         class="edu.stanford.irt.laneweb.search.SearchGenerator" scope="prototype">
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
         <property name="defaultTimeout" value="60000"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/html"
         class="edu.stanford.irt.laneweb.HTMLGenerator" scope="prototype"/>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/querymap"
         class="edu.stanford.irt.laneweb.querymap.QueryMapGenerator">
         <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/link-scan"
         class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/spellcheck"
         class="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator">
         <property name="spellChecker">
@@ -215,7 +218,7 @@
             </bean>
         </property>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/eresources-count"
         class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator" scope="prototype">
         <property name="types">
@@ -235,38 +238,38 @@
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/eresources"
         class="edu.stanford.irt.laneweb.eresources.EresourcesGenerator" scope="prototype">
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/er-browse"
         class="edu.stanford.irt.laneweb.eresources.BrowseEresourcesGenerator" scope="prototype">
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/er-core"
         class="edu.stanford.irt.laneweb.eresources.CoreEresourcesGenerator" scope="prototype">
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/er-mesh"
         class="edu.stanford.irt.laneweb.eresources.MeSHEresourcesGenerator" scope="prototype">
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/er-search"
         class="edu.stanford.irt.laneweb.eresources.SearchEresourcesGenerator" scope="prototype">
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
-    
-	<bean name="org.apache.cocoon.generation.Generator/bassett"
+
+    <bean name="org.apache.cocoon.generation.Generator/bassett"
         class="edu.stanford.irt.laneweb.eresources.BassettEresourcesGenerator" scope="prototype">
         <property name="collectionManager">
             <bean class="edu.stanford.irt.laneweb.eresources.BassettCollectionManager">
@@ -276,7 +279,8 @@
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/bassett-accordion"
-        class="edu.stanford.irt.laneweb.eresources.BassettAccordionEresourcesGenerator" scope="prototype">
+        class="edu.stanford.irt.laneweb.eresources.BassettAccordionEresourcesGenerator"
+        scope="prototype">
         <property name="collectionManager">
             <bean class="edu.stanford.irt.laneweb.eresources.BassettCollectionManager">
                 <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
@@ -289,7 +293,7 @@
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/history"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/history-count"
         class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator" scope="prototype">
         <property name="types">
@@ -311,11 +315,10 @@
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/history"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/directory"
-        class="org.apache.cocoon.generation.DirectoryGenerator" scope="prototype">
-    </bean>
-    
+        class="org.apache.cocoon.generation.DirectoryGenerator" scope="prototype"> </bean>
+
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
         class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
 
@@ -344,8 +347,8 @@
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
-    
-<!--    <bean name="org.apache.cocoon.serialization.AbstractTextSerializer" init-method="init"
+
+    <!--    <bean name="org.apache.cocoon.serialization.AbstractTextSerializer" init-method="init"
         class="org.apache.cocoon.serialization.AbstractTextSerializer" scope="prototype"
         abstract="true">
         <property name="defaultEncoding">
@@ -356,12 +359,12 @@
         </property>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>-->
-    
+
     <bean name="org.apache.cocoon.reading.Reader/querymap"
         class="edu.stanford.irt.laneweb.querymap.QueryMapReader">
         <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.acting.Action/voyager"
         class="edu.stanford.irt.laneweb.voyager.VoyagerAction">
         <property name="voyagerLogin">
@@ -371,10 +374,10 @@
         </property>
         <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.acting.Action/form-redirect"
         class="edu.stanford.irt.laneweb.FormRedirectAction"/>
-    
+
     <bean name="org.apache.cocoon.acting.Action/webdash"
         class="edu.stanford.irt.laneweb.webdash.WebdashAction">
         <property name="webdashLogin">
@@ -388,36 +391,36 @@
         </property>
         <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.acting.Action/session-action"
         class="edu.stanford.irt.laneweb.LanewebSessionAction"/>
-    
+
     <bean name="org.apache.cocoon.acting.Action/javascript-logger"
         class="edu.stanford.irt.laneweb.JavascriptLoggerAction"/>
-    
+
     <bean name="org.apache.cocoon.acting.Action/loginAction"
         class="edu.stanford.irt.laneweb.LoginAction">
         <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.acting.Action/persistentLoginAction"
         class="edu.stanford.irt.laneweb.PersistentLoginAction">
         <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
-        <property name="cryptor" ref="edu.stanford.irt.laneweb.Cryptor"></property>
+        <property name="cryptor" ref="edu.stanford.irt.laneweb.Cryptor"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.acting.Action/search-context-reloader"
         class="edu.stanford.irt.laneweb.search.SearchContextReloaderAction" scope="singleton">
-        <property name="metaSearchManagerSource" 
+        <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
         <property name="svnUrlProject">
-        	<value>https://irt-svn.stanford.edu/repos/irt/lane/search/tags/search-spring-</value>
+            <value>https://irt-svn.stanford.edu/repos/irt/lane/search/tags/search-spring-</value>
         </property>
         <property name="svnUrlPath">
-        	<value>/src/main/resources/spring/metasearch.xml</value>
+            <value>/src/main/resources/spring/metasearch.xml</value>
         </property>
     </bean>
-    
+
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
         class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
@@ -433,7 +436,7 @@
         </property>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.serialization.Serializer/text"
         class="org.apache.cocoon.serialization.TextSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">

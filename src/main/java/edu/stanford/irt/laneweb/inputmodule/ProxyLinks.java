@@ -24,6 +24,9 @@ public class ProxyLinks extends AbstractInputModule {
 
     @Override
     protected Object doGetAttribute(String key, User user, HttpServletRequest request) {
+        if (null != user.getProxyLinks()) {
+            return user.getProxyLinks();
+        }
         String ip = request.getRemoteAddr();
         // mod_proxy puts the real remote address in an x-forwarded-for
         // header
@@ -32,7 +35,7 @@ public class ProxyLinks extends AbstractInputModule {
         if (header != null) {
             ip = header;
         }
-        return user.getProxyLinks() != null ? user.getProxyLinks() : new Boolean(proxyLinks(ip));
+        return new Boolean(proxyLinks(ip));
     }
 
     private boolean isNoProxy(final String ip) {

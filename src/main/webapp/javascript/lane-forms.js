@@ -3,7 +3,7 @@
  * Provides form/field validation
  * Use: markup examined for "validation-patterns" elements
  *      "validation-patterns" value must contain pairs of fieldname=pattern values separated by "::"
- *      example: "name=.::email=([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z]+)::pager-phone-number=[0-9-\.\(\)]::affiliation=."
+ *      example: "full-name=.::email=([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z]+)::pager-phone-number=[0-9-\.\(\)]::affiliation=."
  *      "validation-patterns" can also be used to make one of a set of fields required; pattern validation will be checked as well if supplied
  *      example: "require-one-of=fieldname1,fieldname2,fieldname3"
  */

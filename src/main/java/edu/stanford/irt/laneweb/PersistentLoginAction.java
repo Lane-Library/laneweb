@@ -49,7 +49,7 @@ public class PersistentLoginAction implements Action {
             deleteWebauthCookie(response);
             HttpSession session = request.getSession(false);
             if (session != null) {
-                session.removeAttribute(LanewebConstants.USER);
+                session.invalidate();
             }
             redirector.globalRedirect(true, "https://weblogin.stanford.edu/logout");
         }

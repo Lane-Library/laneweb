@@ -4,14 +4,10 @@ import java.security.PrivilegedAction;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Hashtable;
 
-import javax.naming.Context;
 import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
-import javax.naming.directory.DirContext;
 import javax.security.auth.Subject;
-import javax.security.sasl.Sasl;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,25 +15,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
-import org.springframework.ldap.core.support.DirContextAuthenticationStrategy;
 
 import edu.stanford.irt.laneweb.Cryptor;
 import edu.stanford.irt.laneweb.LanewebConstants;
 
 public class UserDao {
-
-    public static class GSSAPIAuthenticationStrategy implements DirContextAuthenticationStrategy {
-
-        public DirContext processContextAfterCreation(final DirContext ctx, final String userDn, final String password) throws NamingException {
-            return ctx;
-        }
-
-        @SuppressWarnings("unchecked")
-        public void setupEnvironment(final Hashtable env, final String userDn, final String password) throws NamingException {
-            env.put(Context.SECURITY_AUTHENTICATION, "GSSAPI");
-            env.put(Sasl.QOP, "auth-conf");
-        }
-    }
 
     private Cryptor cryptor;
 

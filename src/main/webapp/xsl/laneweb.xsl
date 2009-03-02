@@ -36,7 +36,7 @@
     <xsl:param name="m"/>
 
     <!-- LPCH and SHC don't require authentication for proxy server -->
-    <xsl:param name="ipGroup"/>
+    <xsl:param name="ip-group"/>
 
     <!-- value of the 't' parameter -->
     <xsl:param name="t"/>
@@ -479,7 +479,7 @@
             <xsl:when
                 test="(parent::h:a[@class='proxy' or @proxy]) and $proxy-links = 'true' and starts-with(.,'http')">
                 <xsl:choose>
-                    <xsl:when test="$ipGroup = 'LPCH' or $ipGroup = 'SHC'">
+                    <xsl:when test="$ip-group = 'LPCH' or $ip-group = 'SHC'">
                         <xsl:attribute name="href">
                             <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
                             <xsl:value-of
@@ -641,10 +641,10 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- add the ipGroup to content of the meta element named WT.seg_1 for reporting to webtrends -->
+    <!-- add the ip-group to content of the meta element named WT.seg_1 for reporting to webtrends -->
     <xsl:template match="h:meta[@name='WT.seg_1']/@content">
         <xsl:attribute name="content">
-            <xsl:value-of select="$ipGroup"/>
+            <xsl:value-of select="$ip-group"/>
         </xsl:attribute>
     </xsl:template>
 
@@ -760,7 +760,7 @@
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
 
     <xsl:template match="h:a[@id='proxyOn']">
-        <xsl:if test="contains('OTHER|PAVA|ERR',$ipGroup) and $proxy-links = 'false'">
+        <xsl:if test="contains('OTHER|PAVA|ERR',$ip-group) and $proxy-links = 'false'">
             <!--<xsl:if test="$proxy-links = 'false'">-->
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
@@ -791,7 +791,7 @@
     </xsl:template>
 
     <xsl:template match="h:a[@id='proxyOff']">
-        <xsl:if test="contains('OTHER|PAVA|ERR',$ipGroup) and $proxy-links = 'true'">
+        <xsl:if test="contains('OTHER|PAVA|ERR',$ip-group) and $proxy-links = 'true'">
             <!--<xsl:if test="$proxy-links = 'true'">-->
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
