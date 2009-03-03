@@ -74,13 +74,13 @@
                 <constructor-arg>
                     <bean class="org.springframework.ldap.core.support.LdapContextSource">
                         <property name="urls">
-                            <value>
-                                ldap://ldap.stanford.edu
-                                ldap://ldap1.stanford.edu
-                                ldap://ldap2.stanford.edu
-                                ldap://ldap3.stanford.edu
-                                ldap://ldap4.stanford.edu
-                            </value>
+                            <list>
+                                <value>ldap://ldap.stanford.edu/</value>
+                                <value>ldap://ldap1.stanford.edu/</value>
+                                <value>ldap://ldap2.stanford.edu/</value>
+                                <value>ldap://ldap3.stanford.edu/</value>
+                                <value>ldap://ldap4.stanford.edu/</value>
+                            </list>
                         </property>
                         <property name="base" value="cn=people,dc=stanford,dc=edu"/>
                         <property name="authenticationStrategy">
