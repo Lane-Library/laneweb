@@ -13,7 +13,7 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/cocoon/spring/*.xml</param-value>
+        <param-value>/WEB-INF/cocoon/spring/cocoon.xml /WEB-INF/cocoon/spring/laneweb.xml</param-value>
     </context-param>
 
     <listener>

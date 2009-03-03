@@ -13,6 +13,7 @@
                 <value>PROPFIND</value>
             </set>
         </property>
+        <lookup-method name="getRequestProcessor" bean="org.apache.cocoon.servlet.RequestProcessor"/>
     </bean>
 
     <bean name="org.apache.cocoon.caching.Cache" class="org.apache.cocoon.caching.impl.CacheImpl">
