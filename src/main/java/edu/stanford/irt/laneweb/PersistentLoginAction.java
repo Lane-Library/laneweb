@@ -41,7 +41,7 @@ public class PersistentLoginAction implements Action {
             return null;
         }
         if ("true".equals(persistentLogin)) {
-            createSunetIdCookie(sunetid, request, response);
+            createLaneCookie(sunetid, request, response);
         } else if ("true".equals(removePersistentLogin)) {
             deleteSunetIdCookie(response);
         } else if ("logout".equals(persistentLogin)) {
@@ -70,37 +70,34 @@ public class PersistentLoginAction implements Action {
         this.userDao = userDao;
     }
 
-    private void createSunetIdCookie(final String sunetid, final HttpServletRequest request, final HttpServletResponse response) throws Exception {
+    private void createLaneCookie(final String sunetid, final HttpServletRequest request, final HttpServletResponse response) throws Exception {
         if (sunetid == null) {
             throw new RuntimeException("sunetId is null");
         }
         if (this.cryptor == null) {
             throw new RuntimeException("cryptor is null");
         }
-        String cryptedUserName = this.cryptor.encrypt(sunetid);
-        Cookie sunetIdCookie = new Cookie(LanewebConstants.USER_COOKIE_NAME, cryptedUserName);
-        sunetIdCookie.setPath("/");
-        sunetIdCookie.setMaxAge(3600 * 24 * 7 * 2); // cookie is available for 2
-        // weeks.
-        String createdDate = String.valueOf(new Date().getTime());
-        String cryptedDate = this.cryptor.encrypt(createdDate);
-        Cookie dateCookie = new Cookie(LanewebConstants.DATE_COOKIE_NAME, cryptedDate);
-        dateCookie.setPath("/");
-        dateCookie.setMaxAge(3600 * 24 * 7 * 2); // cookie is available for 2
-        // weeks.
         String userAgent = request.getHeader("User-Agent");
-        String encryptedSecurity = this.cryptor.encrypt(createdDate.concat(sunetid).concat(userAgent));
-        Cookie securityCookie = new Cookie(LanewebConstants.SECURITY_COOKIE_NAME, encryptedSecurity);
-        securityCookie.setPath("/");
-        securityCookie.setMaxAge(3600 * 24 * 7 * 2); // cookie is available for
-        // 2 weeks.
-        response.addCookie(sunetIdCookie);
-        response.addCookie(dateCookie);
-        response.addCookie(securityCookie);
+        if(userAgent == null)
+            throw new RuntimeException("userAgent is null");
+        StringBuffer cookieValue = new StringBuffer();
+        cookieValue.append(sunetid);
+        cookieValue.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
+        cookieValue.append(String.valueOf(new Date().getTime()));
+        cookieValue.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
+        userAgent = String.valueOf( userAgent.hashCode());
+        cookieValue.append(userAgent);
+        Cookie laneCookie = new Cookie(LanewebConstants.LANE_COOKIE_NAME, cryptor.encrypt(cookieValue.toString()));
+        laneCookie.setPath("/");
+        laneCookie.setMaxAge(3600 * 24 * 7 * 2); // cookie is available for
+        response.addCookie(laneCookie);
+        
     }
 
+
     private void deleteSunetIdCookie(final HttpServletResponse response) {
-        Cookie sunetIdCookie = new Cookie(LanewebConstants.USER_COOKIE_NAME, null);
+	//FIXME: Remove later after 2 weeks on prod
+	Cookie sunetIdCookie = new Cookie(LanewebConstants.USER_COOKIE_NAME, null);
         sunetIdCookie.setPath("/");
         sunetIdCookie.setMaxAge(0);
         Cookie dateCookie = new Cookie(LanewebConstants.DATE_COOKIE_NAME, null);
@@ -112,6 +109,13 @@ public class PersistentLoginAction implements Action {
         response.addCookie(sunetIdCookie);
         response.addCookie(dateCookie);
         response.addCookie(securityCookie);
+       //END of FIXME: Remove later after 2 weeks on prod
+        
+        Cookie laneCookie = new Cookie(LanewebConstants.LANE_COOKIE_NAME, null);
+        securityCookie.setPath("/");
+        securityCookie.setMaxAge(0);
+        response.addCookie(laneCookie);
+
     }
 
     private void deleteWebauthCookie(final HttpServletResponse response) {
