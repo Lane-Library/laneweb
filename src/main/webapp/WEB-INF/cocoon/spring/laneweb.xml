@@ -86,6 +86,11 @@
                         <property name="authenticationStrategy">
                             <bean class="edu.stanford.irt.laneweb.user.GSSAPIAuthenticationStrategy"/>
                         </property>
+                        <property name="baseEnvironmentProperties">
+                            <map>
+                                <entry key="com.sun.jndi.ldap.connect.timeout" value="5000" />
+                            </map>
+                        </property>
                     </bean>
                 </constructor-arg>
             </bean>
