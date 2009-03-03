@@ -348,18 +348,6 @@
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
 
-    <!--    <bean name="org.apache.cocoon.serialization.AbstractTextSerializer" init-method="init"
-        class="org.apache.cocoon.serialization.AbstractTextSerializer" scope="prototype"
-        abstract="true">
-        <property name="defaultEncoding">
-            <bean class="org.springframework.beans.factory.config.PropertyPathFactoryBean">
-                <property name="targetBeanName" value="org.apache.cocoon.configuration.Settings"/>
-                <property name="propertyPath" value="containerEncoding"/>
-            </bean>
-        </property>
-        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
-    </bean>-->
-
     <bean name="org.apache.cocoon.reading.Reader/querymap"
         class="edu.stanford.irt.laneweb.querymap.QueryMapReader">
         <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>

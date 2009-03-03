@@ -32,6 +32,9 @@
             <map:match pattern="**" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}"/>
             </map:match>
+            <map:handle-errors>
+                <map:read type="resource" src="notfound.txt" status-code="404"/>
+            </map:handle-errors>
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>
