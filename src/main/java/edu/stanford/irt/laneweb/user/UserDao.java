@@ -116,18 +116,17 @@ public class UserDao {
 	    }
 	    return cookieValues[0];
 	} else // FIXME: Remove later after 2 weeks on prod
-	    return getSunetIdFromOldCookie(request);
+	    return getSunetIdFromOldCookie(request, cookies);
     }
 
     //  FIXME: Remove later after 2 weeks on prod
-    private String getSunetIdFromOldCookie(final HttpServletRequest request) {
+    private String getSunetIdFromOldCookie(final HttpServletRequest request, Cookie[] cookies) {
 	if (this.cryptor == null) {
 	    throw new RuntimeException("cryptor is null");
 	}
 	Cookie sunetIdCookie = null;
 	Cookie securityCookie = null;
 	Cookie dateCookie = null;
-	Cookie[] cookies = request.getCookies();
 	if (null == cookies) {
 	    return null;
 	}
