@@ -215,13 +215,7 @@
     <bean name="org.apache.cocoon.generation.Generator/spellcheck"
         class="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator">
         <property name="spellChecker">
-            <bean class="edu.stanford.irt.spell.GoogleAPISpellChecker">
-                <property name="googleKey">
-                    <bean class="org.springframework.jndi.JndiObjectFactoryBean">
-                        <property name="jndiName" value="java:comp/env/google-key"/>
-                    </bean>
-                </property>
-            </bean>
+            <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
         </property>
     </bean>
 
