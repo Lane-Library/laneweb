@@ -53,7 +53,7 @@
                 <map:transform src="context://xsl/persistentlogin.xsl" type="saxon">
                 	<map:parameter name="persistent-login" value="{request-param:pl}"/>
                 	<map:parameter name="remove-persistent-login" value="{request-param:remove-pl}"/>
-                	<map:parameter name="lane-user-cookie" value="{cookie:u-lane}"/>
+                	<map:parameter name="lane-user-cookie" value="{cookie:user}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
