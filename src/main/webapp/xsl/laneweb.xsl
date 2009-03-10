@@ -566,6 +566,12 @@
             <xsl:value-of select="$referrer"/>
         </xsl:attribute>
     </xsl:template>
+    
+    <xsl:template match="@*[.='{request-uri}']">
+        <xsl:attribute name="{name()}">
+            <xsl:value-of select="$request-uri"/>
+        </xsl:attribute>
+    </xsl:template>
 
     <!-- get all the head elements from template and all non title head elements from source (with some exceptions)-->
     <!-- and add the swfobject.js stuff if necessary -->
