@@ -92,7 +92,7 @@ public class UserDao {
             try {
                 cookieValue = this.cryptor.decrypt(laneCookie.getValue());
             } catch (Exception e) {
-                this.logger.error(e.getMessage(), e);
+        	this.logger.error("Cookie cannot be decrypted, it was maybe modified by user. IP --> ".concat(request.getRemoteAddr()));
                 return null;
             }
             String[] cookieValues = cookieValue.split(LanewebConstants.COOKIE_VALUE_SEPARATOR);
