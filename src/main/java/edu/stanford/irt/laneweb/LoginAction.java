@@ -33,7 +33,7 @@ public class LoginAction implements Action {
             if (null != request.getQueryString()) {
                 redirectUrl = redirectUrl + "?" + request.getQueryString();
             }
-            redirector.redirect(true, redirectUrl);
+            redirector.redirect(false, redirectUrl);
             return null;
         }
         String ticket = user.getTicket().toString();
@@ -50,7 +50,7 @@ public class LoginAction implements Action {
             this.logger.debug("redirecting to proxy server: " + " sunetid = " + sunetid + " ticket = " + " url = " + url);
         }
         String redirectURL = "http://laneproxy.stanford.edu/login?user=" + sunetid + "&ticket=" + ticket + "&" + url;
-        redirector.redirect(true, redirectURL);
+        redirector.redirect(false, redirectURL);
         return null;
     }
 

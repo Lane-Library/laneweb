@@ -37,7 +37,7 @@ public class PersistentLoginAction implements Action {
             if (null != request.getQueryString()) {
                 secureUrl = secureUrl.concat("?").concat(request.getQueryString());
             }
-            redirector.globalRedirect(true, secureUrl);
+            redirector.globalRedirect(false, secureUrl);
             return null;
         }
         if ("true".equals(persistentLogin)) {
@@ -51,7 +51,7 @@ public class PersistentLoginAction implements Action {
             if (session != null) {
                 session.invalidate();
             }
-            redirector.globalRedirect(true, "https://weblogin.stanford.edu/logout");
+            redirector.globalRedirect(false, "https://weblogin.stanford.edu/logout");
         }
         return null;
     }
