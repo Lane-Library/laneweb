@@ -8,11 +8,11 @@ import org.apache.avalon.framework.configuration.Configuration;
 
 import edu.stanford.irt.laneweb.user.User;
 
-
 public class Template extends AbstractInputModule {
 
     private Map<String, String> templateConfig;
 
+    @Override
     @SuppressWarnings("unchecked")
     public Object[] getAttributeValues(final String name, final Configuration modeConf, final Map objectModel) {
         return new Object[] { getAttribute(name, modeConf, objectModel) };
@@ -23,7 +23,7 @@ public class Template extends AbstractInputModule {
     }
 
     @Override
-    protected Object doGetAttribute(String key, User user, HttpServletRequest request) {
+    protected Object doGetAttribute(final String key, final User user, final HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         int contextPathLength = request.getContextPath().length();
         return getTemplateName(requestURI.substring(contextPathLength + 1));

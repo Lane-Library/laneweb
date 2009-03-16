@@ -78,26 +78,25 @@ public class PersistentLoginAction implements Action {
             throw new RuntimeException("cryptor is null");
         }
         String userAgent = request.getHeader("User-Agent");
-        if(userAgent == null)
+        if (userAgent == null) {
             throw new RuntimeException("userAgent is null");
+        }
         StringBuffer cookieValue = new StringBuffer();
         cookieValue.append(sunetid);
         cookieValue.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
         cookieValue.append(String.valueOf(new Date().getTime()));
         cookieValue.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
-        userAgent = String.valueOf( userAgent.hashCode());
+        userAgent = String.valueOf(userAgent.hashCode());
         cookieValue.append(userAgent);
-        Cookie laneCookie = new Cookie(LanewebConstants.LANE_COOKIE_NAME, cryptor.encrypt(cookieValue.toString()));
+        Cookie laneCookie = new Cookie(LanewebConstants.LANE_COOKIE_NAME, this.cryptor.encrypt(cookieValue.toString()));
         laneCookie.setPath("/");
         laneCookie.setMaxAge(3600 * 24 * 7 * 2); // cookie is available for
         response.addCookie(laneCookie);
-        
     }
 
-
     private void deleteSunetIdCookie(final HttpServletResponse response) {
-	//FIXME: Remove later after 2 weeks on prod
-	Cookie sunetIdCookie = new Cookie(LanewebConstants.USER_COOKIE_NAME, null);
+        // FIXME: Remove later after 2 weeks on prod
+        Cookie sunetIdCookie = new Cookie(LanewebConstants.USER_COOKIE_NAME, null);
         sunetIdCookie.setPath("/");
         sunetIdCookie.setMaxAge(0);
         Cookie dateCookie = new Cookie(LanewebConstants.DATE_COOKIE_NAME, null);
@@ -109,13 +108,11 @@ public class PersistentLoginAction implements Action {
         response.addCookie(sunetIdCookie);
         response.addCookie(dateCookie);
         response.addCookie(securityCookie);
-       //END of FIXME: Remove later after 2 weeks on prod
-        
+        // END of FIXME: Remove later after 2 weeks on prod
         Cookie laneCookie = new Cookie(LanewebConstants.LANE_COOKIE_NAME, null);
         securityCookie.setPath("/");
         securityCookie.setMaxAge(0);
         response.addCookie(laneCookie);
-
     }
 
     private void deleteWebauthCookie(final HttpServletResponse response) {

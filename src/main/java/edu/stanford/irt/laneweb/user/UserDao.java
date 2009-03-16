@@ -68,6 +68,22 @@ public class UserDao {
         this.subjectSource = subjectSource;
     }
 
+    private String getRemoteAddr(final HttpServletRequest request) {
+        String ip = request.getRemoteAddr();
+        // mod_proxy puts the real remote address in an x-forwarded-for
+        // header
+        // Load balancer also does this
+        String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
+        if (header != null) {
+            if (header.indexOf(",") > 0) {
+                ip = header.substring(header.lastIndexOf(",") + 1, header.length()).trim();
+            } else {
+                ip = header;
+            }
+        }
+        return ip;
+    }
+
     private String getSunetIdFromCookie(final HttpServletRequest request) {
         if (this.cryptor == null) {
             throw new RuntimeException("cryptor is null");
@@ -92,7 +108,7 @@ public class UserDao {
             try {
                 cookieValue = this.cryptor.decrypt(laneCookie.getValue());
             } catch (Exception e) {
-        	this.logger.error("Cookie cannot be decrypted, it was maybe modified by user. IP --> ".concat(getRemoteAddr(request)));
+                this.logger.error("Cookie cannot be decrypted, it was maybe modified by user. IP --> ".concat(getRemoteAddr(request)));
                 return null;
             }
             String[] cookieValues = cookieValue.split(LanewebConstants.COOKIE_VALUE_SEPARATOR);
@@ -186,24 +202,6 @@ public class UserDao {
         }
     }
 
-
-    private String getRemoteAddr(final HttpServletRequest request)
-    {
-	String ip = request.getRemoteAddr();
-	// mod_proxy puts the real remote address in an x-forwarded-for
-        // header
-        // Load balancer also does this
-        String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
-        if (header != null) {
-            if (header.indexOf(",") > 0) {
-                ip = header.substring(header.lastIndexOf(",") + 1, header.length()).trim();
-            } else {
-                ip = header;
-            }
-        }
-        return ip;
-    }
-    
     private void setLdapData(final User user) {
         if (null != user.getSunetId() && null == user.getName()) {
             Subject subject = this.subjectSource.getSubject();

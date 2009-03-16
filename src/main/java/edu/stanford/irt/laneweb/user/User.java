@@ -2,30 +2,34 @@ package edu.stanford.irt.laneweb.user;
 
 public class User {
 
+    public static final String IPGROUP = "ip-group";
+
     public static final String NAME = "name";
 
     public static final String SUNETID = "sunetid";
 
     public static final String TICKET = "ticket";
 
-    public static final String IPGROUP = "ip-group";
-
     private String affiliation;
+
+    private IPGroup iPGroup;
 
     private String name;
 
     private Boolean proxyLinks;
 
-    private Ticket ticket;
-
-    private IPGroup iPGroup;
-
     private String sunetId;
+
+    private Ticket ticket;
 
     private String univId;
 
     public String getAffilation() {
         return this.affiliation;
+    }
+
+    public IPGroup getIPGroup() {
+        return this.iPGroup;
     }
 
     public String getName() {
@@ -36,16 +40,12 @@ public class User {
         return this.proxyLinks;
     }
 
-    public Ticket getTicket() {
-        return this.ticket;
-    }
-
-    public IPGroup getIPGroup() {
-        return this.iPGroup;
-    }
-
     public String getSunetId() {
         return this.sunetId;
+    }
+
+    public Ticket getTicket() {
+        return this.ticket;
     }
 
     public String getUnivId() {
@@ -56,6 +56,10 @@ public class User {
         this.affiliation = affiliation;
     }
 
+    public void setIPGroup(final IPGroup iPGroup) {
+        this.iPGroup = iPGroup;
+    }
+
     public void setName(final String displayName) {
         this.name = displayName;
     }
@@ -64,16 +68,12 @@ public class User {
         this.proxyLinks = proxyLinks;
     }
 
-    public void setTicket(final Ticket ticket) {
-        this.ticket = ticket;
-    }
-
-    public void setIPGroup(final IPGroup iPGroup) {
-        this.iPGroup = iPGroup;
-    }
-
     public void setSunetId(final String uId) {
         this.sunetId = uId;
+    }
+
+    public void setTicket(final Ticket ticket) {
+        this.ticket = ticket;
     }
 
     public void setUnivId(final String univId) {
@@ -82,9 +82,9 @@ public class User {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("sunetId=").append(this.sunetId).append(",univid=").append(this.univId).append(",affiliation=").append(this.affiliation)
-                .append(",displayname=").append(this.name).append(",iPGroup=").append(this.iPGroup).append(",ticket=").append(
-                        this.ticket).append(",proxyLinks=").append(this.proxyLinks);
+        StringBuffer sb = new StringBuffer("sunetId=").append(this.sunetId).append(",univid=").append(this.univId).append(",affiliation=").append(
+                this.affiliation).append(",displayname=").append(this.name).append(",iPGroup=").append(this.iPGroup).append(",ticket=").append(this.ticket)
+                .append(",proxyLinks=").append(this.proxyLinks);
         return sb.toString();
     }
 }

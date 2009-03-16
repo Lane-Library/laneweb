@@ -14,7 +14,7 @@ import edu.stanford.irt.laneweb.user.User;
 import edu.stanford.irt.laneweb.user.UserDao;
 
 public abstract class AbstractInputModule implements InputModule {
-    
+
     private Logger logger = Logger.getLogger(AbstractInputModule.class);
 
     private UserDao userDao;

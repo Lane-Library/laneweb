@@ -44,17 +44,6 @@ public class UserDaoTest extends TestCase {
 
     private UserDao userDao;
 
-    public void testipGroup() {
-        String ip = this.ip.concat("FAIL_TEST");
-        expect(this.request.getRemoteAddr()).andReturn(ip);
-        expect(this.request.getRemoteUser()).andReturn(this.sunetid);
-        replay(this.request);
-        User user = this.userDao.createOrUpdateUser(this.request);
-        assertEquals(IPGroup.ERR, user.getIPGroup());
-        verify(this.session);
-        verify(this.request);
-    }
-
     public void testCookieUserInfo() throws Exception {
         new HashMap<String, Cookie>();
         expect(this.request.getHeader("User-Agent")).andReturn("firefox test");
@@ -192,6 +181,17 @@ public class UserDaoTest extends TestCase {
         assertEquals(this.sunetid, user.getSunetId());
         assertNotNull(user.getTicket());
         assertEquals(46, user.getTicket().toString().length());
+        verify(this.session);
+        verify(this.request);
+    }
+
+    public void testipGroup() {
+        String ip = this.ip.concat("FAIL_TEST");
+        expect(this.request.getRemoteAddr()).andReturn(ip);
+        expect(this.request.getRemoteUser()).andReturn(this.sunetid);
+        replay(this.request);
+        User user = this.userDao.createOrUpdateUser(this.request);
+        assertEquals(IPGroup.ERR, user.getIPGroup());
         verify(this.session);
         verify(this.request);
     }

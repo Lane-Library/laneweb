@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.user.User;
 
-
 public class ProxyLinks extends AbstractInputModule {
 
     private List<String> noProxyRegex;
@@ -20,22 +19,6 @@ public class ProxyLinks extends AbstractInputModule {
 
     public void setProxyRegex(final List<String> proxyRegex) {
         this.proxyRegex = proxyRegex;
-    }
-
-    @Override
-    protected Object doGetAttribute(String key, User user, HttpServletRequest request) {
-        if (null != user.getProxyLinks()) {
-            return user.getProxyLinks();
-        }
-        String ip = request.getRemoteAddr();
-        // mod_proxy puts the real remote address in an x-forwarded-for
-        // header
-        // Load balancer also does this
-        String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
-        if (header != null) {
-            ip = header;
-        }
-        return new Boolean(proxyLinks(ip));
     }
 
     private boolean isNoProxy(final String ip) {
@@ -54,6 +37,22 @@ public class ProxyLinks extends AbstractInputModule {
             }
         }
         return false;
+    }
+
+    @Override
+    protected Object doGetAttribute(final String key, final User user, final HttpServletRequest request) {
+        if (null != user.getProxyLinks()) {
+            return user.getProxyLinks();
+        }
+        String ip = request.getRemoteAddr();
+        // mod_proxy puts the real remote address in an x-forwarded-for
+        // header
+        // Load balancer also does this
+        String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
+        if (header != null) {
+            ip = header;
+        }
+        return new Boolean(proxyLinks(ip));
     }
 
     protected boolean proxyLinks(final String ip) {

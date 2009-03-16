@@ -9,7 +9,6 @@ import javax.security.sasl.Sasl;
 
 import org.springframework.ldap.core.support.DirContextAuthenticationStrategy;
 
-
 public class GSSAPIAuthenticationStrategy implements DirContextAuthenticationStrategy {
 
     public DirContext processContextAfterCreation(final DirContext ctx, final String userDn, final String password) throws NamingException {
