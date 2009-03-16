@@ -277,6 +277,9 @@
                     <map:part src="cocoon:/cache/portals/internal-medicine.html"/>
                     <map:part src="cocoon:/cache/portals/lpch-cerner.html"/>
                     <map:part src="cocoon:/cache/portals/pulmonary.html"/>
+                    <map:part src="cocoon:/cache/portals/ethics.html"/>
+                    <map:part src="cocoon:/cache/portals/ophthalmology.html"/>
+                    <map:part src="cocoon:/cache/portals/emergency.html"/>
                 </map:aggregate>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-templates.xsl">
