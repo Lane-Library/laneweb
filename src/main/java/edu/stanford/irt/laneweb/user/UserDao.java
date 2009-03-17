@@ -1,9 +1,11 @@
 package edu.stanford.irt.laneweb.user;
 
+import edu.stanford.irt.laneweb.Cryptor;
+import edu.stanford.irt.laneweb.LanewebConstants;
+
 import java.security.PrivilegedAction;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import javax.naming.NamingException;
 import javax.naming.directory.Attributes;
@@ -15,9 +17,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
-
-import edu.stanford.irt.laneweb.Cryptor;
-import edu.stanford.irt.laneweb.LanewebConstants;
 
 public class UserDao {
 
@@ -103,6 +102,7 @@ public class UserDao {
                 }
             }
         }
+        String sunetId = null;
         if (laneCookie != null) {
             String cookieValue;
             try {
@@ -132,63 +132,9 @@ public class UserDao {
             if (calendar.before(Calendar.getInstance())) {
                 return null;
             }
-            return cookieValues[0];
-        } else {
-            return getSunetIdFromOldCookie(request, cookies);
+            sunetId = cookieValues[0]; 
         }
-    }
-
-    // FIXME: Remove later after 2 weeks on prod
-    private String getSunetIdFromOldCookie(final HttpServletRequest request, final Cookie[] cookies) {
-        if (this.cryptor == null) {
-            throw new RuntimeException("cryptor is null");
-        }
-        Cookie sunetIdCookie = null;
-        Cookie securityCookie = null;
-        Cookie dateCookie = null;
-        if (null == cookies) {
-            return null;
-        }
-        for (Cookie cookie : cookies) {
-            // FIXME: remove this check after fixing tests:
-            if (null != cookie) {
-                String name = cookie.getName();
-                if (LanewebConstants.USER_COOKIE_NAME.equals(name)) {
-                    sunetIdCookie = cookie;
-                } else if (LanewebConstants.SECURITY_COOKIE_NAME.equals(name)) {
-                    securityCookie = cookie;
-                } else if (LanewebConstants.DATE_COOKIE_NAME.equals(name)) {
-                    dateCookie = cookie;
-                }
-            }
-        }
-        if ((null == sunetIdCookie) || (null == securityCookie) || (dateCookie == null)) {
-            return null;
-        }
-        String decryptedDate;
-        String decryptedSunetId;
-        String decryptedSecurity;
-        try {
-            decryptedSecurity = this.cryptor.decrypt(securityCookie.getValue());
-            decryptedSunetId = this.cryptor.decrypt(sunetIdCookie.getValue());
-            decryptedDate = this.cryptor.decrypt(dateCookie.getValue());
-        } catch (Exception e) {
-            this.logger.error(e.getMessage(), e);
-            return null;
-        }
-        String userAgent = request.getHeader("User-Agent");
-        String comparableSecurity = decryptedDate.concat(decryptedSunetId).concat(userAgent);
-        if (!decryptedSecurity.equals(comparableSecurity)) {
-            return null;
-        }
-        GregorianCalendar gc = new GregorianCalendar();
-        Date date = new Date(Long.valueOf(decryptedDate).longValue());
-        gc.setTime(date);
-        gc.add(Calendar.WEEK_OF_YEAR, 2);
-        if (gc.before(new GregorianCalendar())) {
-            return null;
-        }
-        return decryptedSunetId;
+        return sunetId;
     }
 
     private void setIpGroup(final User user, final HttpServletRequest request) {

@@ -95,23 +95,9 @@ public class PersistentLoginAction implements Action {
     }
 
     private void deleteSunetIdCookie(final HttpServletResponse response) {
-        // FIXME: Remove later after 2 weeks on prod
-        Cookie sunetIdCookie = new Cookie(LanewebConstants.USER_COOKIE_NAME, null);
-        sunetIdCookie.setPath("/");
-        sunetIdCookie.setMaxAge(0);
-        Cookie dateCookie = new Cookie(LanewebConstants.DATE_COOKIE_NAME, null);
-        dateCookie.setPath("/");
-        dateCookie.setMaxAge(0);
-        Cookie securityCookie = new Cookie(LanewebConstants.SECURITY_COOKIE_NAME, null);
-        securityCookie.setPath("/");
-        securityCookie.setMaxAge(0);
-        response.addCookie(sunetIdCookie);
-        response.addCookie(dateCookie);
-        response.addCookie(securityCookie);
-        // END of FIXME: Remove later after 2 weeks on prod
         Cookie laneCookie = new Cookie(LanewebConstants.LANE_COOKIE_NAME, null);
-        securityCookie.setPath("/");
-        securityCookie.setMaxAge(0);
+        laneCookie.setPath("/");
+        laneCookie.setMaxAge(0);
         response.addCookie(laneCookie);
     }
 
