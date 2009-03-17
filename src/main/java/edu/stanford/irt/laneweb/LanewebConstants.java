@@ -18,12 +18,5 @@ public interface LanewebConstants {
     public static final String LANE_COOKIE_NAME = "user";
 
     public static final String COOKIE_VALUE_SEPARATOR = "%";
-    
-    // FIXME: Remove later after 2 weeks on prod
-    public static final String USER_COOKIE_NAME = "u-lane";
-    public static final String SECURITY_COOKIE_NAME = "s-lane";
-    public static final String DATE_COOKIE_NAME = "d-lane";
-
-
 
 }
