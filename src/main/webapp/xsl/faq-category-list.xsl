@@ -24,7 +24,7 @@
             <xsl:apply-templates select="h:dt[contains(h:span,'_show_me_')]">
                 <xsl:sort select="upper-case(.)"/>
             </xsl:apply-templates>
-            <li class="moreItem"><a href="/howto/index.html?category={$category}">More</a></li>
+            <li class="moreItem"><a href="/howto/index.html?category={encode-for-uri($category)}">More</a></li>
         </ul>
     </xsl:template>
     
