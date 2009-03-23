@@ -70,6 +70,6 @@ public class DescribeGenerator implements Generator {
             IOException {
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         this.q = request.getParameter("q");
-        this.e = request.getParameterValues("e");        
+        this.e = request.getParameterValues("e");
     }
 }

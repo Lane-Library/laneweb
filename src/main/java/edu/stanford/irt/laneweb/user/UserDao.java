@@ -1,8 +1,5 @@
 package edu.stanford.irt.laneweb.user;
 
-import edu.stanford.irt.laneweb.Cryptor;
-import edu.stanford.irt.laneweb.LanewebConstants;
-
 import java.security.PrivilegedAction;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
+
+import edu.stanford.irt.laneweb.Cryptor;
+import edu.stanford.irt.laneweb.LanewebConstants;
 
 public class UserDao {
 
@@ -133,8 +133,9 @@ public class UserDao {
                 return null;
             }
             sunetId = cookieValues[0];
-            if(sunetId == null || "".equals(sunetId.trim()))
-        	return null;
+            if (sunetId == null || "".equals(sunetId.trim())) {
+                return null;
+            }
         }
         return sunetId;
     }
