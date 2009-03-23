@@ -24,11 +24,7 @@ import edu.stanford.irt.search.util.SAXable;
 
 public class DescribeGenerator implements Generator {
 
-    private String admin;
-
     private String[] e;
-
-    private String engineId;
 
     private MetaSearchManager metaSearchManager;
 
@@ -37,13 +33,6 @@ public class DescribeGenerator implements Generator {
     private XMLConsumer xmlConsumer;
 
     public void generate() throws SAXException {
-        if (this.admin != null) {
-            if ("rem".equals(this.admin)) {
-                this.metaSearchManager.disableSearchable(this.engineId);
-            } else if ("add".equals(this.admin)) {
-                this.metaSearchManager.enableSearchable(this.engineId);
-            }
-        }
         Result result = null;
         Collection<String> engines = null;
         if ((this.e != null) && (this.e.length > 0)) {
@@ -81,8 +70,6 @@ public class DescribeGenerator implements Generator {
             IOException {
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         this.q = request.getParameter("q");
-        this.e = request.getParameterValues("e");
-        this.admin = request.getParameter("admin");
-        this.engineId = request.getParameter("id");
+        this.e = request.getParameterValues("e");        
     }
 }
