@@ -9,7 +9,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>1.9.13-SNAPSHOT</version>
+    <version>1.9.13</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/index.html</url>
     <inceptionYear>2002</inceptionYear>
@@ -40,7 +40,7 @@
         </developer>
     </developers>
     <scm>
-        <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
+        <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/tags/laneweb-1.9.13</developerConnection>
     </scm>
     <build>
         <defaultGoal>package</defaultGoal>
