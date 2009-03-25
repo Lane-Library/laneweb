@@ -220,8 +220,33 @@
                 <map:redirect-to uri="/{1}/index.html"/>
             </map:match>
             <map:handle-errors>
-                <map:generate src="cocoon:/error.html" type="file"/>
-                <map:serialize type="xhtml" status-code="404"/>
+                <map:aggregate element="doc" label="content">
+                    <map:part src="cocoon:/content/error.html"/>
+                    <map:part src="cocoon:/content/sitemap.html"/>
+                    <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
+                </map:aggregate>
+                <map:transform type="saxon" src="context://xsl/laneweb.xsl">
+                    <map:parameter name="host" value="{request:serverName}"/>
+                    <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+                    <map:parameter name="context" value=""/>
+                    <map:parameter name="query-string" value="{request:queryString}"/>
+                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="sunetid" value="{user:sunetid}"/>
+                    <map:parameter name="ticket" value="{user:ticket}"/>
+                    <map:parameter name="ip-group" value="{user:ip-group}"/>
+                    <map:parameter name="q" value="{request-param:q}"/>
+                    <map:parameter name="loadTab" value="{request-param:loadTab}"/>
+                    <map:parameter name="template" value="{request-param:template}"/>
+                    <map:parameter name="debug" value="{request-param:debug}"/>
+                    <map:parameter name="source" value="{request-param:source}"/>
+                    <map:parameter name="m" value="{request-param:m}"/>
+                    <map:parameter name="t" value="{request-param:t}"/>
+                    <map:parameter name="version" value="${pom.version}"/>
+                    <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                    <map:parameter name="name" value="{user:name}"/>
+                </map:transform>
+                <map:transform type="namespace-filter"/>
+                <map:serialize type="xhtml"/>
             </map:handle-errors>
         </map:pipeline>
     </map:pipelines>
