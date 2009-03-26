@@ -246,7 +246,7 @@
                     <map:parameter name="name" value="{user:name}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
-                <map:serialize type="xhtml"/>
+                <map:serialize type="xhtml" status-code="404"/>
             </map:handle-errors>
         </map:pipeline>
     </map:pipelines>
