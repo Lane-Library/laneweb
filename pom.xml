@@ -103,6 +103,7 @@
                                 <include>lane-ie-min.js</include>
                                 <include>lane-forms-min.js</include>
                                 <include>lane-bassett-min.js</include>
+                                <include>lane-pico-min.js</include>
                             </includes>
                         </aggregation>
                     </aggregations>

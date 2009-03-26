@@ -630,9 +630,11 @@
     <xsl:template match="h:input[@id='searchTerms']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="value">
-                <xsl:value-of select="$search-terms"/>
-            </xsl:attribute>
+            <xsl:if test="$search-terms != ''">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$search-terms"/>
+                </xsl:attribute>
+            </xsl:if>
         </xsl:copy>
     </xsl:template>
 

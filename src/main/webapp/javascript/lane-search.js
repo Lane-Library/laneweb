@@ -89,8 +89,6 @@ LANE.search = LANE.search ||  function() {
         form = d.getElementById('searchForm');
         if (form) {
             submit = d.getElementById('searchSubmit');
-            select = d.getElementById('searchSelect');
-            selected = select.options[select.selectedIndex];
             //change submit button image mouseover/mouseout
             submit.activate = function(e){
                 this.src = this.src.replace('search_btn.gif', 'search_btn_f2.gif');
@@ -106,13 +104,17 @@ LANE.search = LANE.search ||  function() {
                     E.preventDefault(e);
                 }
             });
-            E.addListener(select, 'change', function(){
-                if (this.options[this.selectedIndex].disabled) {
-                    this.selectedIndex = selected.index;
-                } else {
-                    selected = this.options[this.selectedIndex];
-                }
-            });
+            select = d.getElementById('searchSelect');
+			if(select){
+	            selected = select.options[select.selectedIndex];
+	            E.addListener(select, 'change', function(){
+	                if (this.options[this.selectedIndex].disabled) {
+	                    this.selectedIndex = selected.index;
+	                } else {
+	                    selected = this.options[this.selectedIndex];
+	                }
+	            });
+			}
         }
     });
     return o;

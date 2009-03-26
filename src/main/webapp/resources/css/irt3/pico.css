@@ -1,0 +1,79 @@
+/*TODO: fit into CY form once dev complete */
+
+#pico input#searchTerms{
+width:35em;
+}
+#pico .inputTip{
+color:#808080;
+}
+.acContainer {
+position:relative;z-index:9000;
+}
+.acMesh{
+text-align:left;
+}
+
+/* styles for entire auto complete widget */
+.yui-ac {
+position:relative;font-family:arial;font-size:100%;
+}
+
+/* styles for input field */
+.yui-ac-input {
+margin-bottom:4px;position:relative;width:100%;
+}
+
+/* styles for results container */
+.yui-ac-container {
+position:absolute;top:1.6em;width:100%;
+}
+
+/* styles for results container header */
+.yui-ac-hd {
+font-weight:bold;white-space:nowrap;padding:2px 5px;
+}
+
+/* styles for header/body/footer wrapper within container */
+.yui-ac-content {
+font-size:0.9em;position:absolute;text-align:left;width:100%;border:1px solid #808080;background:#fff;overflow:hidden;z-index:9050;
+/* adds scroll bar ... not working correctly in ie and safari ... remember to remove overflow:hidden if use
+max-height: 20em;
+overflow: auto;
+overflow-x: hidden;
+_height: 20em;
+*/
+}
+
+/* styles for container shadow */
+.yui-ac-shadow {
+position:absolute;margin:.3em;width:100%;background:#000;-moz-opacity: 0.10;opacity:.10;filter:alpha(opacity=10);z-index:9049;
+}
+
+/* styles for results list */
+.yui-ac-content ul{
+margin:0;padding:0;width:100%;
+}
+
+/* styles for result item */
+.yui-ac-content li {
+margin:0;padding:2px 5px;cursor:default;white-space:nowrap;
+}
+#bd li {
+background-image:none;
+}
+
+/* styles for prehighlighted result item */
+.yui-ac-content li.yui-ac-prehighlight {
+background:#B3D4FF;
+}
+
+/* styles for highlighted result item */
+.yui-ac-content li.yui-ac-highlight {
+background:#426FD9;color:#FFF;
+}
+
+/* auto-complete */
+.yui-ac-input { position:static;width:14em; vertical-align:middle;}
+/*.yui-ac-container { width:14em;left:0px;}*/
+.yui-ac-container { width:100%;left:0px;}
+        
