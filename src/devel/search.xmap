@@ -92,6 +92,10 @@
                     </map:select>
                     <map:serialize type="xml"/>
                 </map:match>
+                <map:match pattern="search.html" type="wildcard">
+                    <map:generate type="html" src="{naming:java:comp/env/live-base}/content/error.html"/>
+                    <map:serialize type="xml"/>
+                </map:match>
             </map:match>
             <!-- ajax requests for the tab results uses this, so does the aggregate in the previous match -->
             <map:match pattern="search/**.html" type="wildcard">

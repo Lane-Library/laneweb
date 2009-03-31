@@ -48,7 +48,6 @@
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
-
                 <!-- eresources search pages (parameter is all, ej, book, etc)-->
                 <map:match type="regex-parameter" pattern="^.+$">
                     <map:parameter name="parameter-name" value="source"/>
@@ -64,6 +63,10 @@
                     </map:transform>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match pattern="search.html" type="wildcard">
+                    <map:generate type="html" src="{naming:java:comp/env/live-base}/content/error.html"/>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
