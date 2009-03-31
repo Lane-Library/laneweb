@@ -244,6 +244,12 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
+            <map:match pattern="mesh-suggest/json" type="wildcard">
+                <map:read type="mesh-suggest">
+                    <map:parameter name="query" value="{request-param:q}"/>
+                    <map:parameter name="limit" value="{request-param:l}"/>
+                </map:read>
+            </map:match>
             <map:match pattern="cache/search/templates/xml" type="wildcard">
                 <map:aggregate element="search-templates"
                     ns="http://lane.stanford.edu/search-templates/ns">
