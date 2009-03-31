@@ -112,17 +112,11 @@
           	<map:match pattern="proxy/credential" type="wildcard">
 				<map:act type="loginAction"/>
 			</map:match>
-            <map:match pattern="mesh-suggest/*" type="wildcard">
-                <map:match pattern="mesh-suggest/xml" type="wildcard">
-                    <map:generate 
-                        src="http://lmldb.stanford.edu/cgi-bin/term2mesh.pl?l={urlencode:{request-param:l}}&amp;q={urlencode:{request-param:q}}" type="file"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match pattern="mesh-suggest/json" type="wildcard">
-                    <map:generate src="cocoon:/mesh-suggest/xml" type="file"/>
-                    <map:transform src="context://xsl/mesh-suggest.xsl" type="saxon"/>
-                    <map:serialize type="text"/>
-                </map:match>
+            <map:match pattern="mesh-suggest/json" type="wildcard">
+                <map:read type="mesh-suggest">
+                    <map:parameter name="query" value="{request-param:q}"/>
+                    <map:parameter name="limit" value="{request-param:l}"/>
+                </map:read>
             </map:match>
         </map:pipeline>
         <!-- trying this out, might fill up cache with a bazillion query maps -->

@@ -330,6 +330,15 @@
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
 
+    <bean name="org.apache.cocoon.reading.Reader/mesh-suggest"
+        class="edu.stanford.irt.laneweb.MeshSuggestReader">
+        <property name="voyagerMeshSuggest">
+            <bean class="edu.stanford.irt.laneweb.voyager.VoyagerMeshSuggest">
+                <property name="dataSource" ref="javax.sql.DataSource/voyager"/>
+            </bean>
+        </property>
+    </bean>
+
     <bean name="org.apache.cocoon.reading.Reader/ezproxy-servers"
         class="edu.stanford.irt.laneweb.eresources.EzproxyServersReader">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
