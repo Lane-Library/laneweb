@@ -76,7 +76,7 @@
 			if(acInputs.length){
 				for (var i = 0; i < acInputs.length; i++){
 					var elm = D.getPreviousSibling(acInputs[i]);
-					var ds = new W.DS_XHR("/././apps/mesh-suggest/json", ["result", "mesh"]);
+					var ds = new W.DS_XHR("/././apps/mesh-suggest/json", ["mesh"]);
 					ds.responseType = W.DS_XHR.TYPE_JSON;
 					ds.scriptQueryParam = "q";
 					// limit added to patient and intervention
