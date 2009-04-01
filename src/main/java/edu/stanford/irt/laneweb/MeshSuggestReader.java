@@ -18,8 +18,6 @@ public class MeshSuggestReader implements Reader {
 
     private VoyagerMeshSuggest voyagerMeshSuggest = null;
     
-    private ArrayList<String> meshList;
-
     private ThreadLocal<OutputStream> outputStream = new ThreadLocal<OutputStream>();
 
     private ThreadLocal<String> query = new ThreadLocal<String>();
@@ -30,10 +28,10 @@ public class MeshSuggestReader implements Reader {
         OutputStream out = this.outputStream.get();
         String q = this.query.get();
         String l = this.limit.get().toLowerCase();
-        this.meshList = this.voyagerMeshSuggest.getMesh(q, l);
-        Iterator<String> it = this.meshList.iterator();
+        ArrayList<String> meshList = new ArrayList<String>();
+        meshList = this.voyagerMeshSuggest.getMesh(q, l);
+        Iterator<String> it = meshList.iterator();
         try {
-            //out.write(("{\"q\": [\"" + q + "\"],\n").getBytes());
             out.write(("{\"mesh\": [").getBytes());
             String maybeComma = "\"";
             while (it.hasNext()) {
@@ -44,6 +42,7 @@ public class MeshSuggestReader implements Reader {
         } finally {
             this.outputStream.set(null);
             this.query.set(null);
+            this.limit.set(null);
         }
     }
 

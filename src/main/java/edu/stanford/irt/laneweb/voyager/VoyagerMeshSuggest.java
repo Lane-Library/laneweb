@@ -17,12 +17,6 @@ public class VoyagerMeshSuggest {
     
     private static final int MIN_QUERY_LENGTH = 3;
     
-    public String query;
-    
-    private String limit;
-
-    private ArrayList<String> meshList;
-    
     private final String sql_1 = "select distinct display_heading from cifdb.bib_index" +
                                     " where index_code = '2451' and bib_id in" + 
                                     " (select distinct bib_id from cifdb.bib_index where index_code = '6502' and (normal_heading like '% ";
@@ -51,38 +45,38 @@ public class VoyagerMeshSuggest {
     private Logger logger = Logger.getLogger(VoyagerMeshSuggest.class);
     
     public ArrayList<String> getMesh(String q, String l) throws ProcessingException{
-        this.meshList = new ArrayList<String>();
-        this.limit = l.toLowerCase();
-        this.query = q.toUpperCase();
-        if ( null == this.query ){
+        ArrayList<String> meshList = new ArrayList<String>();
+        String limit = l.toLowerCase();
+        String query = q.toUpperCase();
+        if ( null == query ){
           throw new ProcessingException("null query");
         }
-        if ( MIN_QUERY_LENGTH > this.query.length() ){
+        if ( MIN_QUERY_LENGTH > query.length() ){
           throw new ProcessingException("query too short");
         }
-        this.query = this.filterQuery(this.query);
+        query = this.filterQuery(query);
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
-            if ("p".equals(this.limit) || "d".equals(this.limit)){ // patient or disease
-              this.logger.debug(this.sql_1 + this.query + this.sql_2 + this.query + this.sql_3 + this.disease_limit + this.sql_4);
-              rs = stmt.executeQuery(this.sql_1 + this.query + this.sql_2 + this.query + this.sql_3 + this.disease_limit + this.sql_4);
+            if ("p".equals(limit) || "d".equals(limit)){ // patient or disease
+              this.logger.debug(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.disease_limit + this.sql_4);
+              rs = stmt.executeQuery(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.disease_limit + this.sql_4);
             }
-            else if ("i".equals(this.limit)){ // intervention
-              this.logger.debug(this.sql_1 + this.query + this.sql_2 + this.query + this.sql_3 + this.intervention_limit + this.sql_4);
-              rs = stmt.executeQuery(this.sql_1 + this.query + this.sql_2 + this.query + this.sql_3 + this.intervention_limit + this.sql_4);
+            else if ("i".equals(limit)){ // intervention
+              this.logger.debug(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.intervention_limit + this.sql_4);
+              rs = stmt.executeQuery(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.intervention_limit + this.sql_4);
             }
             else{
-              this.logger.debug(this.sql_1 + this.query + this.sql_2 + this.query + this.sql_3 + this.sql_4);
-              rs = stmt.executeQuery(this.sql_1 + this.query + this.sql_2 + this.query + this.sql_3 + this.sql_4);
+              this.logger.debug(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.sql_4);
+              rs = stmt.executeQuery(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.sql_4);
             }
             while (rs.next()) {
-              this.meshList.add(rs.getString(1));
+              meshList.add(rs.getString(1));
             }
-            return this.meshList;
+            return meshList;
         } catch (SQLException e) {
             throw new ProcessingException(e);
         } finally {
