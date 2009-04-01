@@ -15,18 +15,19 @@
 
 	<xsl:variable name="url">
 		<xsl:if test="$type = 'search'">
-			http://lane.stanford.edu/search.html?q=
+		    <xsl:text>http://lane.stanford.edu/search.html?q=</xsl:text>
 			<xsl:value-of select="$q"/>
 			<xsl:if test="$t != ''">&amp;source=<xsl:value-of select="$t"/></xsl:if>
 			<xsl:if test="$t = ''">&amp;source=all</xsl:if>
 		</xsl:if>
 		<xsl:if test="$type = 'ejounal'">
-			http://lane.stanford.edu/online/ejbrowse.html?
+			<xsl:text>http://lane.stanford.edu/online/ejbrowse.html?</xsl:text>
 			<xsl:if test="$a != ''"><xsl:text>a=</xsl:text><xsl:value-of select="$a"/></xsl:if>
 			<xsl:if test="$a = ''"><xsl:text>all</xsl:text></xsl:if>
 		</xsl:if>
 		<xsl:if test="$type = 'mesh'">
-			http://lane-local.stanford.edu/online/ejsubjectbrowse.html?m=<xsl:value-of select="$m"/>
+			<xsl:text>http://lane-local.stanford.edu/online/ejsubjectbrowse.html?m=</xsl:text>
+		    <xsl:value-of select="$m"/>
 		</xsl:if>
 	</xsl:variable>
 
