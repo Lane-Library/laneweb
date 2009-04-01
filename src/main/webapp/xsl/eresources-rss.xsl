@@ -66,7 +66,7 @@
             <title>
             	<xsl:value-of select="../../preceding-sibling::h:dt[1]/text()"/>: <xsl:value-of select="h:a"/> - <xsl:value-of select="text()"/>
             </title>
-            <link>http://lane.stanford.edu/apps/proxy/credential?url=<xsl:value-of select="h:a/@href"/></link>
+            <link>http://lane.stanford.edu/apps/proxy/credential?url=<xsl:value-of select="h:a[1]/@href"/></link>
             <description>
             	<xsl:value-of select="../../preceding-sibling::h:dt[1]/text()"/>: <xsl:value-of select="h:a"/> - <xsl:value-of select="text()"/>
             </description>
