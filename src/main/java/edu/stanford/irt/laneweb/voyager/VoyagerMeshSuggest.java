@@ -18,7 +18,7 @@ public class VoyagerMeshSuggest {
     private static final int MIN_QUERY_LENGTH = 3;
     
     private final String sql_1 = "select distinct display_heading from cifdb.bib_index" +
-                                    " where index_code = '2451' and bib_id in" + 
+                                    " where index_code = '2451' and rownum <= 20 and bib_id in" + 
                                     " (select distinct bib_id from cifdb.bib_index where index_code = '6502' and (normal_heading like '% ";
 
     private final String sql_2 ="%' or normal_heading like '";
