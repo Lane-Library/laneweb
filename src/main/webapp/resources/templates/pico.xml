@@ -20,7 +20,7 @@
                 </li>
                 <li>
                     <a href="http://stanfordhospital.org/">Stanford Hospital &amp;
-                    Clinics</a>
+                        Clinics</a>
                 </li>
                 <li>
                     <a href="http://www.lpch.org/">Lucile Packard Children's Hospital</a>
@@ -61,7 +61,7 @@
                                 <span>a division of IRT</span>
                             </a>
                         </h3>
-						<div id="nav">
+                        <div id="nav">
                             <ul>
                                 <li>
                                     <a href="/online/ej.html" title="eJournals.">eJournals</a>
@@ -89,33 +89,33 @@
                             </ul>
                             <span id="askUs">
                                 <a href="/contacts/index.html?loadTab=askus" title="Ask Us."><img
-                                        src="/images/templates/irt3/question_mark.gif" alt="?"
-                                    /> Ask Us</a>
+                                    src="/images/templates/irt3/question_mark.gif" alt="?"
+                                /> Ask Us</a>
                             </span>
                         </div>
                         <div id="breadcrumb">
                             <a id="proxyOff">Guest Access</a>
                             <a id="proxyOn">Stanford Access</a>
                             <a href="http://med.stanford.edu/">School of Medicine</a> &#xBB;
-                                <a href="http://irt.stanford.edu/" title="IRT...">IRT</a> &#xBB;
+                            <a href="http://irt.stanford.edu/" title="IRT...">IRT</a> &#xBB;
                             <?laneweb breadcrumb?></div>
-                           
+                        
                         <!-- TODO: change form action to self?; remove hidden source field;  change id? -->
                         <form method="get" action="/search.html" id="searchForm">
                             <div id="pico">
                                 <input name="source" type="hidden" value="clinical"/>
                                 <div>
                                     <!-- TODO: think about using rel attribute for field default values so we don't send defaults on query string -->
-                                    <span class="acContainer">
+                                    <div class="acContainer">
                                         <input name="p" id="p" type="text" class="inputTip" value="patient condition"/>
                                         <!-- TODO: why does this break in IE6 if width set in css? -->
-                                        <span class="acMesh" id="pInput" style="width:14em;" title="Suggested MeSH Terms"><!-- --></span>
-                                    </span>
-                                    <span class="acContainer">
+                                        <div class="acMesh" id="pInput" style="width:14em;" title="Suggested MeSH Terms"><!-- --></div>
+                                    </div>
+                                    <div class="acContainer">
                                         <input name="i" id="i" type="text" class="inputTip" value="intervention"/>
                                         <!-- TODO: why does this break in IE6 if width set in css? -->
-                                        <span class="acMesh" id="iInput" style="width:14em;" title="Suggested MeSH Terms"><!-- --></span>
-                                    </span>
+                                        <div class="acMesh" id="iInput" style="width:14em;" title="Suggested MeSH Terms"><!-- --></div>
+                                    </div>
                                     <input name="c" id="c" type="text" class="inputTip" value="comparison"/>
                                     <input name="o" id="o" type="text" class="inputTip" value="outcome"/>
                                 </div>
@@ -164,7 +164,7 @@
             </div>
             <ul id="gft">
                 <li>&#169;<a href="http://stanfordmedicine.stanford.edu"><span><?laneweb current-year?></span>
-                        Stanford Medicine</a></li>
+                    Stanford Medicine</a></li>
                 <li>
                     <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
                 </li>

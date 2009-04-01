@@ -72,10 +72,10 @@
 			}
 			
 			// auto complete mesh on p and i inputs
-			acInputs = D.getElementsByClassName('acMesh','span',picoCont);
+			acInputs = D.getElementsByClassName('acMesh',null,picoCont);
 			if(acInputs.length){
 				for (var i = 0; i < acInputs.length; i++){
-					var elm = D.getPreviousSibling(acInputs[i]);
+					var elm = d.getElementById(acInputs[i].id.substring(0,1));
 					var ds = new W.DS_XHR("/././apps/mesh-suggest/json", ["mesh"]);
 					ds.responseType = W.DS_XHR.TYPE_JSON;
 					ds.scriptQueryParam = "q";
