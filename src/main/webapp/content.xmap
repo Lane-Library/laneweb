@@ -47,6 +47,31 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="eresources.rss" type="wildcard">
+             	<map:generate type="html"  src="cocoon:/eresources/search"/>
+                <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
+                	<map:parameter name="q" value="{request-param:q}"/>
+                	<map:parameter name="t" value="{request-param:t}"/>
+                	<map:parameter name="type" value="search"/>
+				</map:transform>
+				<map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="ejournal.rss" type="wildcard">
+             	<map:generate type="html"  src="cocoon:/eresources/browse?t=ej"/>
+                <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
+                	<map:parameter name="a" value="{request-param:a}"/>
+                	<map:parameter name="type" value="browse"/>
+            	</map:transform>
+				<map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="mesh.rss" type="wildcard">
+             	<map:generate type="html"  src="cocoon:/eresources/mesh?t=ej"/>
+                <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
+                	<map:parameter name="m" value="{request-param:m}"/>
+                	<map:parameter name="type" value="mesh"/>
+            	</map:transform>
+				<map:serialize type="xml"/>
+            </map:match>
            <map:match pattern="**persistentlogin.html" type="wildcard">
                 <map:act type="persistentLoginAction"/>
                 <map:generate type="html" src="{naming:java:comp/env/live-base}/content/secure/persistentlogin.html"/>
