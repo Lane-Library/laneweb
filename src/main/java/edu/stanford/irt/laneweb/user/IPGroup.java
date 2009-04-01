@@ -131,8 +131,14 @@ public class IPGroup {
                 if ((d[2] >= 0) && (d[2] <= 43)) {
                     return IPGroup.SOM;
                 }
-                if ((d[2] >= 44) && (d[2] <= 47)) {
-                    return IPGroup.SHC;
+                if ((d[2] == 44)) {
+                    return IPGroup.PAVA;
+                }
+                if ((d[2] == 45)) {
+                  return IPGroup.SOM;
+                }
+                if ((d[2] >= 46) && (d[2] <= 47)) {
+                  return IPGroup.SHC;
                 }
                 if ((d[2] >= 48) && (d[2] <= 81)) {
                     return IPGroup.SOM;
@@ -170,14 +176,20 @@ public class IPGroup {
                 if ((d[2] >= 116) && (d[2] <= 123)) {
                     return IPGroup.SOM;
                 }
-                if ((d[2] == 124) || (d[2] == 125)) {
-                    return IPGroup.SHC;
+                if ((d[2] == 124)) {
+                    return IPGroup.SOM;
+                }
+                if ((d[2] == 125)) {
+                  return IPGroup.SHC;
                 }
                 if (d[2] == 126) {
                     return IPGroup.LPCH;
                 }
                 if (d[2] == 127) {
                     return IPGroup.SHC;
+                }
+                if ((d[2] >= 128) && (d[2] <= 255)) {
+                  return IPGroup.SHC;
                 }
                 return IPGroup.SOM;
             }
