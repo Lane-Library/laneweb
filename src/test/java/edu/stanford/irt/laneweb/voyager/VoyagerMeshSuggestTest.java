@@ -16,8 +16,8 @@ public class VoyagerMeshSuggestTest {
 
     @Test
     public void testFilterQuery() {
-        assertEquals("Aortic Stenosis Subvalvular", this.voyagerMeshSuggest.filterQuery("\"Aortic-Stenosis, Subvalvular\""));
-        assertEquals("Anti Inflammatory Agents Non Steroidal", this.voyagerMeshSuggest.filterQuery("Anti-Inflammatory Agents, Non-Steroidal"));
+        assertEquals("AORTIC STENOSIS SUBVALVULAR", this.voyagerMeshSuggest.filterQuery("\"Aortic-Stenosis, Subvalvular\""));
+        assertEquals("ANTI INFLAMMATORY AGENTS NON STEROIDAL", this.voyagerMeshSuggest.filterQuery("Anti-Inflammatory Agents, Non-Steroidal"));
     }
 
 }

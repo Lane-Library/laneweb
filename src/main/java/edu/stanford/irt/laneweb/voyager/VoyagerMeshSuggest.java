@@ -5,80 +5,82 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.cocoon.ProcessingException;
 import org.apache.log4j.Logger;
 
 public class VoyagerMeshSuggest {
-  
-    private DataSource dataSource;
-    
-    private static final int MIN_QUERY_LENGTH = 3;
-    
-    private final String sql_1 = "select distinct display_heading from cifdb.bib_index" +
-                                    " where index_code = '2451' and rownum <= 20 and bib_id in" + 
-                                    " (select distinct bib_id from cifdb.bib_index where index_code = '6502' and (normal_heading like '% ";
 
-    private final String sql_2 ="%' or normal_heading like '";
-    
-    private final String sql_3 ="%')" +
-                                    "  intersect " +
-                                    " select distinct bib_id from cifdb.bib_index where index_code = '655H' and normal_heading = 'MESH'";
-    
-    private final String disease_limit = " intersect " +
-                                    "select distinct bib_id from cifdb.bib_index where " +
-                                    "((index_code = '655H' and normal_heading = 'TOPIC DISEASE')" +
-                                    " or " + 
-                                    "(index_code = '6502' and (normal_heading = 'DISEASE OR SYNDROME' or normal_heading = 'MENTAL OR BEHAVIORAL DYSFUNCTION')))";
-    
-    private final String intervention_limit = " intersect " +
-                                    "(select distinct bib_id from cifdb.bib_index where index_code = '655H' and (normal_heading = 'TOPIC SUBSTANCE')" +
-                                    " union " +
-                                    "select distinct bib_id from cifdb.bib_index where index_code = '6502'" +
-                                    " and " + 
-                                    "(normal_heading = 'THERAPEUTIC OR PREVENTIVE PROCEDURE' or normal_heading = 'MEDICAL DEVICE'))";
-    
-    private final String sql_4 =") order by display_heading";
-    
+    private static final String DISEASE_LIMIT =
+        " intersect "
+        + "select distinct bib_id from cifdb.bib_index where "
+        + "((index_code = '655H' and normal_heading = 'TOPIC DISEASE')"
+        + " or "
+        + "(index_code = '6502' and (normal_heading = 'DISEASE OR SYNDROME' or normal_heading = 'MENTAL OR BEHAVIORAL DYSFUNCTION')))";
+
+    private static final String INTERVENTION_LIMIT =
+        " intersect "
+        + "(select distinct bib_id from cifdb.bib_index where index_code = '655H' and (normal_heading = 'TOPIC SUBSTANCE')"
+        + " union "
+        + "select distinct bib_id from cifdb.bib_index where index_code = '6502'"
+        + " and "
+        + "(normal_heading = 'THERAPEUTIC OR PREVENTIVE PROCEDURE' or normal_heading = 'MEDICAL DEVICE'))";
+
+    private static final int MIN_QUERY_LENGTH = 3;
+
+    private static final String SQL_1 =
+        "select distinct display_heading from cifdb.bib_index"
+        + " where index_code = '2451' and rownum <= 20 and bib_id in"
+        + " (select distinct bib_id from cifdb.bib_index where index_code = '6502' and (normal_heading like '% ";
+
+    private static final String SQL_2 = "%' or normal_heading like '";
+
+    private static final String SQL_3 =
+        "%')"
+        + "  intersect "
+        + " select distinct bib_id from cifdb.bib_index where index_code = '655H' and normal_heading = 'MESH'";
+
+    private static final String SQL_4 = ") order by display_heading";
+
+    private DataSource dataSource;
+
     private Logger logger = Logger.getLogger(VoyagerMeshSuggest.class);
-    
-    public ArrayList<String> getMesh(String q, String l) throws ProcessingException{
-        ArrayList<String> meshList = new ArrayList<String>();
-        String limit = l.toLowerCase();
-        String query = q.toUpperCase();
-        if ( null == query ){
-          throw new ProcessingException("null query");
+
+    public List<String> getMesh(final String query, final String limit) {
+        if (null == query) {
+            throw new IllegalArgumentException("null query");
         }
-        if ( MIN_QUERY_LENGTH > query.length() ){
-          throw new ProcessingException("query too short");
+        if (MIN_QUERY_LENGTH > query.length()) {
+            throw new IllegalArgumentException("query too short");
         }
-        query = this.filterQuery(query);
+        List<String> meshList = new ArrayList<String>();
+        String filteredQuery = filterQuery(query);
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
-            if ("p".equals(limit) || "d".equals(limit)){ // patient or disease
-              this.logger.debug(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.disease_limit + this.sql_4);
-              rs = stmt.executeQuery(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.disease_limit + this.sql_4);
+            StringBuffer sb = new StringBuffer(SQL_1).append(filteredQuery).append(SQL_2).append(filteredQuery).append(SQL_3);
+            if ("p".equalsIgnoreCase(limit) || "d".equalsIgnoreCase(limit)) { // patient or disease
+                sb.append(DISEASE_LIMIT);
+            } else if ("i".equalsIgnoreCase(limit)) { // intervention
+                sb.append(INTERVENTION_LIMIT);
             }
-            else if ("i".equals(limit)){ // intervention
-              this.logger.debug(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.intervention_limit + this.sql_4);
-              rs = stmt.executeQuery(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.intervention_limit + this.sql_4);
+            sb.append(SQL_4);
+            String sql = sb.toString();
+            if (this.logger.isDebugEnabled()) {
+                this.logger.debug(sql);
             }
-            else{
-              this.logger.debug(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.sql_4);
-              rs = stmt.executeQuery(this.sql_1 + query + this.sql_2 + query + this.sql_3 + this.sql_4);
-            }
+            rs = stmt.executeQuery(sql);
             while (rs.next()) {
-              meshList.add(rs.getString(1));
+                meshList.add(rs.getString(1));
             }
             return meshList;
         } catch (SQLException e) {
-            throw new ProcessingException(e);
+            throw new RuntimeException(e);
         } finally {
             if (null != rs) {
                 try {
@@ -103,27 +105,6 @@ public class VoyagerMeshSuggest {
             }
         }
     }
-    
-    /**
-     * filter query string: strip ' and " and ' characters; non alphanumerics to blanks
-     * 
-     * @param query
-     * @return String filtered query string
-     */
-    public String filterQuery(String query){
-      String q = query;
-      StringBuffer sb = new StringBuffer();
-      for (int i = 0; i < q.length(); i++) {
-          char c = q.charAt(i);
-          if ( Character.isLetter(c) || Character.isDigit(c) ) {
-              sb.append(c);
-          }
-          else if ( ('\'' != c) && ('"' != c) && (',' != c) ) {
-              sb.append(' ');
-          }
-      }
-      return sb.toString();
-    }
 
     public void setDataSource(final DataSource dataSource) {
         if (null == dataSource) {
@@ -132,4 +113,24 @@ public class VoyagerMeshSuggest {
         this.dataSource = dataSource;
     }
 
+    /**
+     * filter query string: strip ' and " and ' characters, convert to upper
+     * case; non alphanumerics to blanks
+     * 
+     * @param query
+     * @return String filtered query string
+     */
+    String filterQuery(final String query) {
+        String q = query.toUpperCase();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < q.length(); i++) {
+            char c = q.charAt(i);
+            if (Character.isLetter(c) || Character.isDigit(c)) {
+                sb.append(c);
+            } else if (('\'' != c) && ('"' != c) && (',' != c)) {
+                sb.append(' ');
+            }
+        }
+        return sb.toString();
+    }
 }
