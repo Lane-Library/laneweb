@@ -29,6 +29,10 @@
                     <map:parameter name="byte-ranges" value="false"/>
                 </map:read>
             </map:match>
+            <!-- we're getting requests for /bassett/favicon.ico and /tobacco/favicon.ico from google toolbar -->
+            <map:match pattern="**/favicon.ico" type="wildcard">
+                <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/favicon.ico"/>
+            </map:match>
             <map:match pattern="**" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/live-base}/content/{1}"/>
             </map:match>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>lane webtrends javascript unit tests</title>
+        <title>lane tracking javascript unit tests</title>
         <link href="http://yui.yahooapis.com/2.7.0/build/container/assets/container.css"
             rel="stylesheet" type="text/css"/>
         <link href="http://yui.yahooapis.com/2.7.0/build/logger/assets/logger.css" rel="stylesheet"
@@ -12,7 +12,7 @@
         <meta name="WT.foo" content="bar"/>
     </head>
     <body>
-        <ul>
+        <ul id="testIsTrackable">
             <li>
                 <a href="lane-tracking-test.html" rel="not trackable">not trackable</a>
             </li>
@@ -50,6 +50,31 @@
                 <a href="lane-tracking-test.XLS" rel="trackable">trackable xls</a>
             </li>
         </ul>
+		<ul id="testGetTrackedTitle">
+            <li>
+                <a href="http://www.google.com/" rel="Google">Google</a>
+            </li>
+            <li>
+                <a href="http://www.google.com:80/" rel="Google">
+                    <img src="http://www.google.com/intl/en_ALL/images/logo.gif"
+                        alt="Google"/>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.google.com/" title="Google" rel="Google">
+                    <img src="http://www.google.com/intl/en_ALL/images/logo.gif"
+                        alt="trackable external"/>
+                </a>
+            </li>
+			<li>
+				<a href="http://www.google.com/" rel="Google">Google <span>with nested markup</span></a>
+			</li>
+			<li>
+                <a href="http://www.google.com/" rel="unknown">
+                    <img src="http://www.google.com/intl/en_ALL/images/logo.gif"/>
+                </a>
+			</li>
+		</ul>
         <script src="http://yui.yahooapis.com/2.7.0/build/yahoo/yahoo.js" type="text/javascript"> </script>
         <script src="http://yui.yahooapis.com/2.7.0/build/event/event.js" type="text/javascript"> </script>
         <script src="http://yui.yahooapis.com/2.7.0/build/dom/dom.js" type="text/javascript"> </script>

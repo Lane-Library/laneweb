@@ -3,44 +3,55 @@ LANE.tracking = function(){
     //TODO put conditionals into sub-functions
     //TODO more thorough documentation
     //TODO use 'track' less
+    //trackers is the array of tracker objects
     var trackers = [],
+        //figures out the title string for a node
+        getTrackedTitle = function(node) {
+            //if there is a title attribute, use that.
+            var title = node.title, img, i = 0;
+            //if there is rel="popup .." then create a title from it.
+            if (node.rel && node.rel.indexOf('popup') === 0) {
+                title = 'YUI Pop-up [' + node.rel.substring(6) + ']';
+            }
+            //next try alt attribute.
+            if (!title) {
+                title = node.alt;
+            }
+            //next look for alt attributes in any child img.
+            if (!title) {
+                img = node.getElementsByTagName("IMG");
+                if (img) {
+                    for (i = 0; i < img.length; i++) {
+                        if (img[i].alt) {
+                            title = img[i].alt;
+                            break;
+                        }
+                    }
+                }
+            }
+            //next get the text content before any nested markup
+            //TODO:textContent?
+            if (!title) {
+                title = node.innerHTML;
+                if (title && title.indexOf('<') > -1) {
+                    title = title.substring(0, title.indexOf('<'));
+                }
+            }
+			if (title) {
+                //trim and normalize:
+				title = title.replace(/\s+/g,' ').replace(/^\s|\s$/g, '');
+			}
+            //finally:
+            if (!title) {
+                title = 'unknown';
+            }
+            return title;
+        },
         getTrackingData = function(e){
             var node = e.srcElement || e.target,
                 //TODO: not sure I need this l variable
                 l = node,
-                host, path, query, external, title, searchTerms, searchSource, children,
-                getTrackedTitle = function(){
-                    var title = l.title, img, i = 0;
-                    if (l.rel && l.rel.indexOf('popup') === 0) {
-                        title = 'YUI Pop-up [' + l.rel.substring(6) + ']';
-                    } else if (l.nodeName == 'FORM') {
-                        title = l.name || l.id;
-                    }
-                    if (!title) {
-                        title = node.alt;
-                    }
-                    if (!title) {
-                        img = node.getElementsByTagName("IMG");
-                        if (img) {
-                            for (i = 0; i < img.length; i++) {
-                                if (img[i].alt) {
-                                    title = img[i].alt;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (!title) {
-                        title = node.innerHTML;
-                        if (title && title.indexOf('<') > -1) {
-                            title = title.substring(0, title.indexOf('<'));
-                        }
-                    }
-                    if (!title) {
-                        title = 'unknown';
-                    }
-                    return title.replace(/\s+/g,' ').replace(/^\s|\s$/g, '');
-                };
+                host, path, query, external, title, searchTerms, searchSource, children;
                 if (e.type == 'click') {
                     if (l.nodeName != 'A') {
                         children = l.getElementsByTagName('a');
@@ -62,10 +73,12 @@ LANE.tracking = function(){
                                 path = path.substring(0, path.indexOf('?'));
                             }
                             host = host.substring(0, host.indexOf('/'));
-                        }
+                        } else {
+							path = '/';
+						}
                         query = '';
                         external = true;
-                    } else if (l.rel) {
+                    } else if (l.rel && l.rel.indexOf('popup') === 0) {
                         host = document.location.host;
                         path = document.location.pathname;
                         query = document.location.search;
@@ -82,9 +95,11 @@ LANE.tracking = function(){
                 if (path.indexOf('/') !== 0) {
                     path = '/' + path;
                 }
-                title = getTrackedTitle();
-                searchTerms = LANE.search.getSearchString();
-                searchSource = LANE.search.getSearchSource();
+                title = getTrackedTitle(l);
+				if (LANE.search) {
+					searchTerms = LANE.search.getSearchString();
+					searchSource = LANE.search.getSearchSource();
+				}
             return {
                 host: host,
                 path: path,
@@ -102,22 +117,25 @@ LANE.tracking = function(){
             }
             trackers.push(tracker);
         },
-        trackEvent: function(e){
-            var td;
-            if (this.isTrackable(e)) {
-                td = getTrackingData(e);
-                this.track(td);
+        trackEvent: function(event){
+            var trackingData;
+            if (this.isTrackable(event)) {
+                trackingData = getTrackingData(event);
+                this.track(trackingData);
             }
         },
-        track: function(td) {
+        track: function(trackingData) {
 //                alert('host: '+td.host+'\npath: '+td.path+'\nquery: '+td.query+'\ntitle: '+td.title+'\nsearchTerms: '+td.searchTerms+'\nsearchSource: '+td.searchSource+'\nexternal: '+td.external);
                  for (var i = 0; i < trackers.length; i++) {
-                     trackers[i].track(td);
+                     trackers[i].track(trackingData);
                  }
         },
         isTrackable: function(e){
             var target = e.srcElement || e.target, link, documentHost, linkHost, relTokens;
             documentHost = document.location.host;
+			if (documentHost.indexOf(':') > -1) {
+				documentHost = documentHost.substring(0, documentHost.indexOf(':'));
+			}
             if (e.type == 'click') {
                 if (target.className == 'eLibraryTab') {
                     return true;
@@ -143,7 +161,7 @@ LANE.tracking = function(){
                     }
                     if (linkHost == documentHost) {
                         //track proxy logins
-                        if ((/secure\/login.html/).test(link.pathname) && link.search && link.search.indexOf('url=') == 0) {
+                        if ((/secure\/login.html/).test(link.pathname) && link.search && link.search.indexOf('url=') > -1) {
                             return true;
                         }
                         //otherwise rely on normal tracking for .html and / unless
