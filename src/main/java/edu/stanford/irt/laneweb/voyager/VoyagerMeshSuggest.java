@@ -4,8 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.TreeSet;
 
 import javax.sql.DataSource;
 
@@ -32,7 +31,7 @@ public class VoyagerMeshSuggest {
 
     private static final String SQL_1 =
         "select distinct display_heading from cifdb.bib_index"
-        + " where index_code = '2451' and rownum <= 20 and bib_id in"
+        + " where index_code = '2451' and rownum <= 100 and bib_id in"
         + " (select distinct bib_id from cifdb.bib_index where index_code = '6502' and (normal_heading like '% ";
 
     private static final String SQL_2 = "%' or normal_heading like '";
@@ -48,14 +47,14 @@ public class VoyagerMeshSuggest {
 
     private Logger logger = Logger.getLogger(VoyagerMeshSuggest.class);
 
-    public List<String> getMesh(final String query, final String limit) {
+    public TreeSet<String> getMesh(final String query, final String limit) {
         if (null == query) {
             throw new IllegalArgumentException("null query");
         }
         if (MIN_QUERY_LENGTH > query.length()) {
             throw new IllegalArgumentException("query too short");
         }
-        List<String> meshList = new ArrayList<String>();
+        TreeSet<String> meshSet = new TreeSet<String>();
         String filteredQuery = filterQuery(query);
         Connection conn = null;
         Statement stmt = null;
@@ -76,9 +75,9 @@ public class VoyagerMeshSuggest {
             }
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                meshList.add(rs.getString(1));
+                meshSet.add(rs.getString(1));
             }
-            return meshList;
+            return meshSet;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
