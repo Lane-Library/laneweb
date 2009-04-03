@@ -60,12 +60,6 @@ var LANETrackingTestCase = new TestCase({
         }
     },
     testTrack: function() {
-        var t = '';
-        LANE.tracking.addTracker({
-            track: function(td){
-                t = td.host + td.path + (td.query || ' ') + td.title;
-            }
-        });
         LANE.tracking.track({host:'www.google.com',path:'/path',title:'title'});
 		Assert.areEqual('www.google.com', trackingData.host);
 		Assert.areEqual('/path', trackingData.path);

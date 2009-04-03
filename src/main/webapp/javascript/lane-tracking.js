@@ -47,26 +47,24 @@ LANE.tracking = function(){
             }
             return title;
         },
-        getTrackingData = function(e){
-            var node = e.srcElement || e.target,
-                //TODO: not sure I need this l variable
-                l = node,
+        getTrackingData = function(event){
+            var node = event.srcElement || event.target,
                 host, path, query, external, title, searchTerms, searchSource, children;
-                if (e.type == 'click') {
-                    if (l.nodeName != 'A') {
-                        children = l.getElementsByTagName('a');
+                if (event.type == 'click') {
+                    if (node.nodeName != 'A') {
+                        children = node.getElementsByTagName('a');
                         if (children.length > 0) {
-                            l = children[0];
+                            node = children[0];
                         }
                     }
-                    while (l && l.nodeName != 'A') {
-                        l = l.parentNode;
-                            if (l === null) {
+                    while (node && node.nodeName != 'A') {
+                        node = node.parentNode;
+                            if (node === null) {
                                 throw 'not trackable';
                             }
                     }
-                    if (l.pathname.indexOf('secure/login.html') > -1 || l.host.indexOf('laneproxy') === 0) {
-                        host = (l.search.substring(l.search.indexOf('//') + 2));
+                    if (node.pathname.indexOf('secure/login.html') > -1 || node.host.indexOf('laneproxy') === 0) {
+                        host = (node.search.substring(node.search.indexOf('//') + 2));
                         if (host.indexOf('/') > -1) {
                             path = host.substring(host.indexOf('/'));
                             if (path.indexOf('?') > -1) {
@@ -78,24 +76,24 @@ LANE.tracking = function(){
 						}
                         query = '';
                         external = true;
-                    } else if (l.rel && l.rel.indexOf('popup') === 0) {
+                    } else if (node.rel && node.rel.indexOf('popup') === 0) {
                         host = document.location.host;
                         path = document.location.pathname;
                         query = document.location.search;
                     } else {
-                        host = l.host;
+                        host = node.host;
                         if (host.indexOf(':') > -1) {
                             host = host.substring(0, host.indexOf(':'));
                         }
-                        path = l.pathname;
+                        path = node.pathname;
                         external = host != document.location.host;
-                        query = external ? '' : l.search;
+                        query = external ? '' : node.search;
                     }
                 }
                 if (path.indexOf('/') !== 0) {
                     path = '/' + path;
                 }
-                title = getTrackedTitle(l);
+                title = getTrackedTitle(node);
 				if (LANE.search) {
 					searchTerms = LANE.search.getSearchString();
 					searchSource = LANE.search.getSearchSource();
@@ -130,13 +128,13 @@ LANE.tracking = function(){
                      trackers[i].track(trackingData);
                  }
         },
-        isTrackable: function(e){
-            var target = e.srcElement || e.target, link, documentHost, linkHost, relTokens;
+        isTrackable: function(event){
+            var target = event.srcElement || event.target, link, documentHost, linkHost, relTokens;
             documentHost = document.location.host;
 			if (documentHost.indexOf(':') > -1) {
 				documentHost = documentHost.substring(0, documentHost.indexOf(':'));
 			}
-            if (e.type == 'click') {
+            if (event.type == 'click') {
                 if (target.className == 'eLibraryTab') {
                     return true;
                 }
@@ -181,24 +179,6 @@ LANE.tracking = function(){
                     //external reference is trackable
                     return true;
                 }
-                //no href, not trackable
-                return false;
-            } else if (e.type == 'mouseover'){
-                while (target) {
-                    if (target.trackable) {
-                        return true;
-                    }
-                    target = target.parentNode;
-                }
-                return false;
-            } else if (e.type == 'submit') {
-                if (target.action.indexOf(document.location.host) == -1) {
-                    if (target.isValid !== undefined && !target.isValid) {
-                        return false;
-                    }
-                    return true;
-                }
-                return false;
             }
             return false;
         }
