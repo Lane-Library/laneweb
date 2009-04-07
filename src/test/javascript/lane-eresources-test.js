@@ -9,7 +9,7 @@
 
     var EresourcesTestCase = new TestCase({
         name: "Eresources TestCase",
-        testFoo: function() {
+        testGetCurrentResult: function() {
     		var result = {};
     		LANE.search.eresources.setCurrentResult(result);
     		Assert.areEqual(result, LANE.search.eresources.getCurrentResult());

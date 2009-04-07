@@ -1,9 +1,10 @@
-package edu.stanford.irt.laneweb.voyager;
+package edu.stanford.irt.laneweb.mesh;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
+
 
 public class VoyagerMeshSuggestTest {
 

@@ -331,9 +331,9 @@
     </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/mesh-suggest"
-        class="edu.stanford.irt.laneweb.MeshSuggestReader">
+        class="edu.stanford.irt.laneweb.mesh.MeshSuggestReader">
         <property name="voyagerMeshSuggest">
-            <bean class="edu.stanford.irt.laneweb.voyager.VoyagerMeshSuggest">
+            <bean class="edu.stanford.irt.laneweb.mesh.VoyagerMeshSuggest">
                 <property name="dataSource" ref="javax.sql.DataSource/voyager"/>
             </bean>
         </property>

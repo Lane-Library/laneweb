@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.voyager;
+package edu.stanford.irt.laneweb.mesh;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.mesh;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -10,7 +10,6 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.reading.Reader;
 
-import edu.stanford.irt.laneweb.voyager.VoyagerMeshSuggest;
 
 public class MeshSuggestReader implements Reader {
 
