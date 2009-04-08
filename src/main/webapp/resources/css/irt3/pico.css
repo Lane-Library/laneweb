@@ -60,9 +60,6 @@ margin:0;padding:0;width:100%;
 .yui-ac-content li {
 margin:0;padding:2px 5px;cursor:default;white-space:nowrap;
 }
-#bd li {
-background-image:none;
-}
 
 /* styles for prehighlighted result item */
 .yui-ac-content li.yui-ac-prehighlight {
