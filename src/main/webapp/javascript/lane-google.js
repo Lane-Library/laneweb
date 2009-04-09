@@ -2,7 +2,14 @@ YAHOO.util.Event.addListener(this, 'load', function() {
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     YAHOO.util.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function(){
-            var host = document.location.host, pageTracker;
+            var host = document.location.host, 
+			pageTracker,
+			encode = function(value){
+		        if (encodeURIComponent) {
+		            return encodeURIComponent(value);
+		        }
+		        return escape(value);
+			};
             if (_gat !== undefined) {
                 if ("lane.stanford.edu" == host) {
                     pageTracker = _gat._getTracker("UA-3202241-2");
@@ -18,9 +25,9 @@ YAHOO.util.Event.addListener(this, 'load', function() {
                 LANE.tracking.addTracker({
                     track: function(trackingData){
                         if (trackingData.external) {
-                            pageTracker._trackPageview('/OFFSITE/' + trackingData.title);
+                            pageTracker._trackPageview('/OFFSITE/' + encode(trackingData.title));
                         } else {
-                            pageTracker._trackPageview('/ONSITE/' + trackingData.title + '/' + trackingData.path);
+                            pageTracker._trackPageview('/ONSITE/' + encode(trackingData.title) + '/' + trackingData.path);
                         }
                     }
                 });
