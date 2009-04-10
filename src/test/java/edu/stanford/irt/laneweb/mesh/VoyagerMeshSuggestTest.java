@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class VoyagerMeshSuggestTest {
 
     private VoyagerMeshSuggest voyagerMeshSuggest;
@@ -20,5 +19,4 @@ public class VoyagerMeshSuggestTest {
         assertEquals("AORTIC STENOSIS SUBVALVULAR", this.voyagerMeshSuggest.filterQuery("\"Aortic-Stenosis, Subvalvular\""));
         assertEquals("ANTI INFLAMMATORY AGENTS NON STEROIDAL", this.voyagerMeshSuggest.filterQuery("Anti-Inflammatory Agents, Non-Steroidal"));
     }
-
 }

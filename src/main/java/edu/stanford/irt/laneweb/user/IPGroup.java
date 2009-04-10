@@ -21,17 +21,17 @@ public class IPGroup {
     public static final IPGroup SHC = new IPGroup("SHC");
 
     public static final IPGroup SOM_BECKMAN = new IPGroup("SOM_BECKMAN");
-    
+
     public static final IPGroup SOM_CCSR = new IPGroup("SOM_CCSR");
-    
+
     public static final IPGroup SOM_CLARK = new IPGroup("SOM_CLARK");
-    
+
     public static final IPGroup SOM_GRANT = new IPGroup("SOM_GRANT");
-    
+
     public static final IPGroup SOM_LANE = new IPGroup("SOM_LANE");
-    
+
     public static final IPGroup SOM_OTHER = new IPGroup("SOM_OTHER");
-    
+
     public static final IPGroup STAFF = new IPGroup("STAFF");
 
     public static final IPGroup SU = new IPGroup("SU");
@@ -137,31 +137,31 @@ public class IPGroup {
                     return IPGroup.STAFF;
                 }
                 if ((d[2] >= 0) && (d[2] <= 43)) {
-                  if ((d[2] >= 4) && (d[2] <= 15)) {
-                    return IPGroup.SOM_CCSR;
-                  }
-                  if ((d[2] >= 20) && (d[2] <= 27)) {
-                    return IPGroup.SOM_BECKMAN;
-                  }
-                  if ((d[2] == 40) && ((d[3] >= 64) && (d[3] <= 79))) {
-                    return IPGroup.SOM_GRANT;
-                  }
-                  return IPGroup.SOM_OTHER;
+                    if ((d[2] >= 4) && (d[2] <= 15)) {
+                        return IPGroup.SOM_CCSR;
+                    }
+                    if ((d[2] >= 20) && (d[2] <= 27)) {
+                        return IPGroup.SOM_BECKMAN;
+                    }
+                    if ((d[2] == 40) && ((d[3] >= 64) && (d[3] <= 79))) {
+                        return IPGroup.SOM_GRANT;
+                    }
+                    return IPGroup.SOM_OTHER;
                 }
                 if ((d[2] == 44)) {
                     return IPGroup.PAVA;
                 }
                 if ((d[2] == 45)) {
-                  return IPGroup.SOM_OTHER;
+                    return IPGroup.SOM_OTHER;
                 }
                 if ((d[2] >= 46) && (d[2] <= 47)) {
-                  return IPGroup.SHC;
+                    return IPGroup.SHC;
                 }
                 if ((d[2] >= 48) && (d[2] <= 81)) {
-                  if ((d[2] == 71) && (d[3] <= 127)) {
-                    return IPGroup.SOM_CLARK;
-                  }
-                  return IPGroup.SOM_OTHER;
+                    if ((d[2] == 71) && (d[3] <= 127)) {
+                        return IPGroup.SOM_CLARK;
+                    }
+                    return IPGroup.SOM_OTHER;
                 }
                 if (d[2] == 82) {
                     if ((d[3] == 11) || (d[3] == 15) || (d[3] == 16) || (d[3] == 20) || (d[3] == 24) || (d[3] == 25) || (d[3] == 27) || (d[3] == 31)
@@ -182,16 +182,16 @@ public class IPGroup {
                     return IPGroup.SOM_LANE;
                 }
                 if ((d[2] >= 84) && (d[2] <= 111)) {
-                  if ((d[2] >= 88) && (d[2] <= 91)) {
-                    return IPGroup.SOM_GRANT;
-                  }
-                  if ((d[2] >= 92) && (d[2] <= 95)) {
-                    return IPGroup.SOM_CLARK;
-                  }
-                  if ((d[2] >= 102) && (d[2] <= 103)) {
-                    return IPGroup.SOM_CLARK;
-                  }
-                  return IPGroup.SOM_OTHER;
+                    if ((d[2] >= 88) && (d[2] <= 91)) {
+                        return IPGroup.SOM_GRANT;
+                    }
+                    if ((d[2] >= 92) && (d[2] <= 95)) {
+                        return IPGroup.SOM_CLARK;
+                    }
+                    if ((d[2] >= 102) && (d[2] <= 103)) {
+                        return IPGroup.SOM_CLARK;
+                    }
+                    return IPGroup.SOM_OTHER;
                 }
                 if (d[2] == 112) {
                     return IPGroup.LPCH;
@@ -209,7 +209,7 @@ public class IPGroup {
                     return IPGroup.SOM_OTHER;
                 }
                 if ((d[2] == 125)) {
-                  return IPGroup.SHC;
+                    return IPGroup.SHC;
                 }
                 if (d[2] == 126) {
                     return IPGroup.LPCH;
@@ -218,7 +218,7 @@ public class IPGroup {
                     return IPGroup.SHC;
                 }
                 if ((d[2] >= 128) && (d[2] <= 255)) {
-                  return IPGroup.SHC;
+                    return IPGroup.SHC;
                 }
                 return IPGroup.SOM_OTHER;
             }

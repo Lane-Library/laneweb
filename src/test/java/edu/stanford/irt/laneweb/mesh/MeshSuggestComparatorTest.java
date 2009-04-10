@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-
 public class MeshSuggestComparatorTest {
 
     @Test
@@ -18,7 +17,7 @@ public class MeshSuggestComparatorTest {
         assertTrue(comparator.compare("bar", "foo TestString") > 0);
         assertTrue(comparator.compare("aaa", "bbb") < 0);
         assertTrue(comparator.compare("bbb", "aaa") > 0);
-        assertTrue(comparator.compare("aaa","aaa") == 0);
+        assertTrue(comparator.compare("aaa", "aaa") == 0);
         assertTrue(comparator.compare("foo TestString", "foo TestString") == 0);
     }
 }

@@ -10,25 +10,25 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.reading.Reader;
 
-
 public class MeshSuggestReader implements Reader {
 
-    private static int JSON_RETURN_LIMIT = 20;
-    
     private static final byte[] JSON_1 = "{\"mesh\":[".getBytes();
 
     private static final byte[] JSON_2 = "]}".getBytes();
-    
+
+    private static int JSON_RETURN_LIMIT = 20;
+
     private ThreadLocal<String> limit = new ThreadLocal<String>();
 
     private ThreadLocal<OutputStream> outputStream = new ThreadLocal<OutputStream>();
 
     private ThreadLocal<String> query = new ThreadLocal<String>();
 
-    // VoyagerMeshSuggest intentionally NOT constrained to return JSON_RETURN_LIMIT results
+    // VoyagerMeshSuggest intentionally NOT constrained to return
+    // JSON_RETURN_LIMIT results
     // to allow for finer ordering with MeshSuggestComparator
     private VoyagerMeshSuggest voyagerMeshSuggest = null;
-    
+
     public void generate() throws IOException {
         OutputStream out = this.outputStream.get();
         String q = this.query.get();
@@ -41,7 +41,7 @@ public class MeshSuggestReader implements Reader {
         try {
             out.write(JSON_1);
             String maybeComma = "\"";
-            while ( it.hasNext() && count < JSON_RETURN_LIMIT ) {
+            while (it.hasNext() && count < JSON_RETURN_LIMIT) {
                 count++;
                 out.write((maybeComma + it.next() + '"').getBytes());
                 maybeComma = ",\"";
