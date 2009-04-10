@@ -129,7 +129,10 @@
     </bean>
 
     <bean id="edu.stanford.irt.querymap.DescriptorManager"
-        class="edu.stanford.irt.querymap.DescriptorManager"/>
+    class="edu.stanford.irt.querymap.DescriptorManager"/>
+    
+    <bean id="edu.stanford.irt.lane.icd9.ICD9Translator"
+        class="edu.stanford.irt.lane.icd9.ICD9Translator"/>
 
     <bean id="org.apache.cocoon.components.modules.input.AbstractInputModule"
         class="edu.stanford.irt.laneweb.inputmodule.AbstractInputModule" abstract="true">
@@ -360,6 +363,12 @@
     <bean name="org.apache.cocoon.reading.Reader/querymap"
         class="edu.stanford.irt.laneweb.querymap.QueryMapReader">
         <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.reading.Reader/icd9"
+        class="edu.stanford.irt.laneweb.icd9.ICD9JSONReader"
+        scope="prototype">
+        <property name="ICD9Translator" ref="edu.stanford.irt.lane.icd9.ICD9Translator"/>
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/voyager"

@@ -157,6 +157,10 @@
                     
                 </configuration>
             </plugin>
+            <plugin>
+            	<groupId>org.codehaus.mojo</groupId>
+            	<artifactId>javancss-maven-plugin</artifactId>
+            </plugin>
             
         </plugins>
     </reporting>
@@ -398,6 +402,11 @@
             <groupId>org.apache.cocoon</groupId>
             <version>2.2.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>edu.stanford.irt</groupId>
+        	<artifactId>icd9</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

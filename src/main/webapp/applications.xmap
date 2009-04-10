@@ -118,6 +118,11 @@
                     <map:parameter name="limit" value="{request-param:l}"/>
                 </map:read>
             </map:match>
+            <map:match pattern="icd9" type="wildcard">
+                <map:read type="icd9">
+                    <map:parameter name="icd9" value="{request-param:icd9}"/>
+                </map:read>
+            </map:match>
         </map:pipeline>
         <!-- trying this out, might fill up cache with a bazillion query maps -->
         <map:pipeline type="expires">
