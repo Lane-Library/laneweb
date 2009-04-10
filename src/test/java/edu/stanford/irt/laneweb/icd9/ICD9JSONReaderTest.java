@@ -65,11 +65,11 @@ public class ICD9JSONReaderTest {
     public void testGenerateEscapeQuote() throws IOException {
         expect(this.params.getParameter("icd9", null)).andReturn("fo\"o");
         replay(this.params);
-        expect(this.translator.getLongName("fo\"o")).andThrow(new IllegalArgumentException("FOO"));
+        expect(this.translator.getLongName("fo\"o")).andThrow(new IllegalArgumentException("FO\"O"));
         replay(this.translator);
         this.reader.setup(null, null, null, this.params);
         this.reader.generate();
-        assertEquals("{\"code\":\"fo\\\"o\",\"error\":\"FOO\"}", new String(this.outputStream.toByteArray()));
+        assertEquals("{\"code\":\"fo\\\"o\",\"error\":\"FO\\\"O\"}", new String(this.outputStream.toByteArray()));
         verify(this.params);
         verify(this.translator);
     }

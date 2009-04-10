@@ -32,7 +32,7 @@ public class ICD9JSONReader implements Reader {
             String result = this.translator.getLongName(this.icd9);
             sb.append("\"longName\":\"").append(result);
         } catch (IllegalArgumentException e) {
-            sb.append("\"error\":\"").append(e.getMessage());
+            sb.append("\"error\":\"").append(e.getMessage().replaceAll("\\\"", "\\\\\""));
         }
         sb.append("\"}");
         this.outputStream.write(sb.toString().getBytes());
