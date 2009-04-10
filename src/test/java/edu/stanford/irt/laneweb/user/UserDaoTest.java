@@ -54,7 +54,7 @@ public class UserDaoTest extends TestCase {
         expect(this.request.getHeader("User-Agent")).andReturn("firefox test");
         replay(this.request);
         User user = this.userDao.createOrUpdateUser(this.request);
-        assertEquals(IPGroup.SOM, user.getIPGroup());
+        assertEquals(IPGroup.SOM_OTHER, user.getIPGroup());
         assertTrue(user.getProxyLinks());
         assertEquals(this.sunetid, user.getSunetId());
         assertNotNull(user.getTicket());
@@ -188,7 +188,7 @@ public class UserDaoTest extends TestCase {
         expect(this.request.getRemoteAddr()).andReturn(this.ip);
         replay(this.request);
         User user = this.userDao.createOrUpdateUser(this.request);
-        assertEquals(IPGroup.SOM, user.getIPGroup());
+        assertEquals(IPGroup.SOM_OTHER, user.getIPGroup());
         assertTrue(user.getProxyLinks());
         assertEquals(this.sunetid, user.getSunetId());
         assertNotNull(user.getTicket());
