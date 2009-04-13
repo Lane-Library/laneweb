@@ -118,6 +118,14 @@
                                     </div>
                                     <input name="c" id="c" type="text" class="inputTip" value="comparison"/>
                                     <input name="o" id="o" type="text" class="inputTip" value="outcome"/>
+                                    <div class="inputWarning" id="cWarning">
+                                        <img src="/images/templates/irt3/warning_icon.jpg" alt="warning"/> <strong>Warning</strong><br/>
+                                        Use of the <strong>C</strong>omparison field may significantly reduce the number of results returned
+                                    </div>
+                                    <div class="inputWarning" id="oWarning">
+                                        <img src="/images/templates/irt3/warning_icon.jpg" alt="warning"/> <strong>Warning</strong><br/>
+                                        Use of the <strong>O</strong>utcome field may significantly reduce the number of results returned
+                                    </div>
                                 </div>
                                 <input name="q" id="searchTerms" type="text" class="inputTip" value="use PICO search above or type keywords here"/>
                                 <input id="searchSubmit" type="image" value="Search"

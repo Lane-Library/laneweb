@@ -6,6 +6,19 @@ width:35em;
 #pico .inputTip{
 color:#808080;
 }
+#pico .inputWarning{
+display:none;
+}
+#warningPanel.yui-panel .bd {
+border:1px solid #808080;
+background-color:#fff;
+color:#000;
+}
+#warningPanel.yui-panel .bd img {
+padding-top:2px;
+vertical-align:bottom;
+width:20px;
+}
 .acContainer {
 display:inline;
 position:relative;z-index:9000;
@@ -22,12 +35,12 @@ position:relative;font-family:arial;font-size:100%;
 
 /* styles for input field */
 .yui-ac-input {
-margin-bottom:4px;position:relative;width:100%;
+position:static; width:14em; margin-bottom:4px; vertical-align:middle;
 }
 
 /* styles for results container */
 .yui-ac-container {
-position:absolute;top:1.6em;width:100%;
+position:absolute;top:1.6em;width:100%;left:0px;
 }
 
 /* styles for results container header */
@@ -38,12 +51,6 @@ font-weight:bold;white-space:nowrap;padding:2px 5px;
 /* styles for header/body/footer wrapper within container */
 .yui-ac-content {
 font-size:0.9em;position:absolute;text-align:left;width:100%;border:1px solid #808080;background:#fff;overflow:hidden;z-index:9050;
-/* adds scroll bar ... not working correctly in ie and safari ... remember to remove overflow:hidden if use
-max-height: 20em;
-overflow: auto;
-overflow-x: hidden;
-_height: 20em;
-*/
 }
 
 /* styles for container shadow */
@@ -70,9 +77,3 @@ background:#B3D4FF;
 .yui-ac-content li.yui-ac-highlight {
 background:#426FD9;color:#FFF;
 }
-
-/* auto-complete */
-.yui-ac-input { position:static;width:14em; vertical-align:middle;}
-/*.yui-ac-container { width:14em;left:0px;}*/
-.yui-ac-container { width:100%;left:0px;}
-        
