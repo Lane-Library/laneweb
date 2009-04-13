@@ -49,6 +49,10 @@
                     type="resource"
                     mime-type="text/xml"/>
             </map:match>
+            <!-- we're getting requests for /bassett/favicon.ico and /tobacco/favicon.ico from google toolbar -->
+            <map:match pattern="favicon.ico" type="wildcard">
+                <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/favicon.ico"/>
+            </map:match>
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>
