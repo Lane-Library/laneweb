@@ -4,7 +4,6 @@
     //  - adds auto complete mesh listener on p i inputs
     //  - ties editing of pico to searchTermsInput for query builder effect
     //  TODO: where will saving of pico values occur? laneweb.xsl or js?
-	//  TODO: add caution on c and o fields
     var i,y,z,
 	d = document, 
 	picoCont,             //container div for pico inputs fields
@@ -119,7 +118,7 @@
 					acDs.maxCacheEntries = 100;
 					acMesh = new W.AutoComplete(acCont, acInputs[y], acDs);
 					acMesh.minQueryLength = 3;
-					acMesh.maxResultsDisplayed = 20; //TODO: change this to 100 once scrolling works
+					acMesh.maxResultsDisplayed = 20;
 					acMesh.useShadow = true;
 					acMesh.useIFrame = true; // ?? needed in IE6 so select doesn't bleed through
 					acMesh.autoHighlight = false;
