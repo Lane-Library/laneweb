@@ -2,7 +2,7 @@
     <parent>
         <artifactId>lane</artifactId>
         <groupId>edu.stanford.irt</groupId>
-        <version>2</version>
+        <version>3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.stanford.irt</groupId>
@@ -137,31 +137,6 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <configuration>
-                    <xmlOutput>true</xmlOutput>
-                    <xmlOutputDirectory>directory location of findbugs xdoc xml report</xmlOutputDirectory>
-                    <threshold>Ignore</threshold>
-                    <effort>Max</effort>
-                    <!--<excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
-                    <includeFilterFile>findbugs-include.xml</includeFilterFile>-->
-                    <visitors>FindDeadLocalStores,UnreadFields</visitors>
-                    <omitVisitors>FindDeadLocalStores,UnreadFields</omitVisitors>
-                    <!--<onlyAnalyze>org.codehaus.mojo.findbugs.*</onlyAnalyze>-->
-                    <!--<pluginList>/libs/fb-contrib/fb-contrib-2.8.0.jar</pluginList>-->
-                    <debug>true</debug>
-                    <relaxed>false</relaxed>
-                    <findbugsXmlOutput>true</findbugsXmlOutput>
-                    
-                </configuration>
-            </plugin>
-            <plugin>
-            	<groupId>org.codehaus.mojo</groupId>
-            	<artifactId>javancss-maven-plugin</artifactId>
-            </plugin>
-            
         </plugins>
     </reporting>
     <dependencies>
