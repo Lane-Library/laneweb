@@ -78,10 +78,11 @@ public class VoyagerLoginTest {
         this.statement.setString(2, "123");
         expect(this.statement.executeUpdate()).andReturn(new Integer(1));
         this.statement.close();
+        this.statement.close();
         replay(this.statement);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.connection.close();
+        this.connection.close();   
         replay(this.connection);
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         replay(this.dataSource);
@@ -103,6 +104,7 @@ public class VoyagerLoginTest {
         this.statement.setString(1, "0999");
         this.statement.setString(2, "123");
         expect(this.statement.executeUpdate()).andThrow(new SQLException("oops"));
+        this.statement.close();
         this.statement.close();
         replay(this.statement);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
