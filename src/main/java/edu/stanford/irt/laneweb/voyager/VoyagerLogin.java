@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
+import edu.stanford.irt.laneweb.JdbcUtils;
 import edu.stanford.irt.laneweb.user.User;
 
 public class VoyagerLogin {
@@ -42,7 +43,7 @@ public class VoyagerLogin {
         univId = "0" + univId; // voyager data prepends 0
         Connection conn = null;
         PreparedStatement clearStmt = null;
-        PreparedStatement createStmt =  null;
+        PreparedStatement createStmt = null;
         try {
             conn = this.dataSource.getConnection();
             clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
@@ -57,30 +58,9 @@ public class VoyagerLogin {
         } catch (SQLException e) {
             this.logger.error(e.getMessage(), e);
         } finally {
-            try {
-                if (null != clearStmt) {
-                    clearStmt.close();
-                }
-            } catch (SQLException e1) {
-                //do nothing  throw new RuntimeException(e1);
-            }
-            try {
-                if (null != createStmt) {
-                    createStmt.close();
-                }
-            } catch (SQLException e1) {
-                throw new RuntimeException(e1);
-            }
-            finally {
-
-                try {
-                    if (null != conn) {
-                        conn.close();
-                    }
-                } catch (SQLException e1) {
-                    throw new RuntimeException(e1);
-                }
-            }
+            JdbcUtils.closeStatement(clearStmt);
+            JdbcUtils.closeStatement(createStmt);
+            JdbcUtils.closeConnection(conn);
         }
         return url;
     }

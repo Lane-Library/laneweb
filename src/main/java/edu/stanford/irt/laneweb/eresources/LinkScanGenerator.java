@@ -18,13 +18,16 @@ import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.laneweb.JdbcUtils;
+
 public class LinkScanGenerator implements Generator {
+
+    private static final String sql = "select url, record_type, record_id, title " + "from link, eresource "
+            + "where eresource.eresource_id = link.eresource_id";
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
     private DataSource dataSource;
-
-    private static final String sql = "select url, record_type, record_id, title " + "from link, eresource " + "where eresource.eresource_id = link.eresource_id";
 
     private ThreadLocal<XMLConsumer> xmlConsumer = new ThreadLocal<XMLConsumer>();
 
@@ -65,27 +68,9 @@ public class LinkScanGenerator implements Generator {
             throw new ProcessingException(e);
         } finally {
             this.xmlConsumer.set(null);
-            if (null != rs) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
-            if (null != stmt) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
-            if (null != conn) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
     }
 

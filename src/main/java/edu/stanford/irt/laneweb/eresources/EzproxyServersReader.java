@@ -16,23 +16,41 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.reading.Reader;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.JdbcUtils;
+
 public class EzproxyServersReader implements Reader {
+
+    private static final byte[] HJ = "HJ ".getBytes();
+
+    private static final String SQL =
+        "with urls as ( "
+        + "select url from link, version "
+        + "where link.version_id = version.version_id "
+        + "and proxy = 'T' "
+        + "and url like 'http%' "
+        + "union "
+        + "select url from h_link, h_version "
+        + "where h_link.version_id = h_version.version_id "
+        + "and proxy = 'T' "
+        + "and url like 'http%' "
+        + ") "
+        + "select substr(url, 9, instr(url,'/',1,3) - 9) as server from urls "
+        + "where url like 'https://%' and instr(url,'/',1,3) > 0 "
+        + "union "
+        + "select substr(url, 9) as server from urls "
+        + "where url like 'https://%' and instr(url,'/',1,3) = 0 "
+        + "union "
+        + "select substr(url, 8, instr(url,'/',1,3) - 8) as server from urls "
+        + "where url like 'http://%' and instr(url,'/',1,3) > 0 "
+        + "union "
+        + "select substr(url, 8) as server from urls "
+        + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
 
     private DataSource dataSource;
 
-    private final byte[] hj = "HJ ".getBytes();
-
     private ThreadLocal<OutputStream> outputStream = new ThreadLocal<OutputStream>();
 
-    private static final String sql = "with urls as ( " + "select url from link, version " + "where link.version_id = version.version_id " + "and proxy = 'T' "
-            + "and url like 'http%' " + "union " + "select url from h_link, h_version " + "where h_link.version_id = h_version.version_id "
-            + "and proxy = 'T' " + "and url like 'http%' " + ") " + "select substr(url, 9, instr(url,'/',1,3) - 9) as server from urls "
-            + "where url like 'https://%' and instr(url,'/',1,3) > 0 " + "union " + "select substr(url, 9) as server from urls "
-            + "where url like 'https://%' and instr(url,'/',1,3) = 0 " + "union " + "select substr(url, 8, instr(url,'/',1,3) - 8) as server from urls "
-            + "where url like 'http://%' and instr(url,'/',1,3) > 0 " + "union " + "select substr(url, 8) as server from urls "
-            + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
-
-    public void generate() throws IOException, SAXException, ProcessingException {
+    public void generate() throws IOException {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -40,37 +58,19 @@ public class EzproxyServersReader implements Reader {
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
+            rs = stmt.executeQuery(SQL);
             while (rs.next()) {
-                out.write(this.hj);
+                out.write(HJ);
                 out.write(rs.getString(1).getBytes());
                 out.write('\n');
             }
         } catch (SQLException e) {
-            throw new ProcessingException(e);
+            throw new RuntimeException(e);
         } finally {
             this.outputStream.set(null);
-            if (null != rs) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
-            if (null != stmt) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
-            if (null != conn) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
     }
 

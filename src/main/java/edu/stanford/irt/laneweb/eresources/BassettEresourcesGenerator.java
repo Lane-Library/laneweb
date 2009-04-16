@@ -35,7 +35,6 @@ public class BassettEresourcesGenerator implements Generator {
 
     private XMLConsumer xmlConsumer;
 
-
     public void generate() throws SAXException {
         Collection<Eresource> eresources = null;
         if (this.bassettNumber != null) {

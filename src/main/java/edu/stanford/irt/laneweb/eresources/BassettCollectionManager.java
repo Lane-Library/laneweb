@@ -17,10 +17,9 @@ import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
+import edu.stanford.irt.laneweb.JdbcUtils;
 
 public class BassettCollectionManager {
-
-    private DataSource dataSource;
 
     private static final String GET_BASSETT_BY_REGION = "SELECT ERESOURCE.ERESOURCE_ID, VERSION.VERSION_ID, LINK_ID, TYPE,  TITLE, PUBLISHER, HOLDINGS, "
             + "DATES, VERSION.DESCRIPTION AS VERSION_DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, B.BASSETT_ID, B.BASSETT_NUMBER, B.IMAGE, B.DIAGRAM, B.LATIN_LEGEND, B.ENGLISH_LEGEND, B.DESCRIPTION AS BASSETT_DESCRIPTION, BR.REGION, BR.SUB_REGION "
@@ -79,15 +78,18 @@ public class BassettCollectionManager {
             + "union all "
             + "SELECT  br.region, '0' as SUB_REGION, count(distinct(b.bassett_number)) as SUB_REGION_COUNT "
             + "FROM FOUND f,  BASSETT b , BASSETT_REGION br "
-            + "where f.record_id = b.record_id  and br.bassett_id = b.bassett_id group by  br.region " + "order by 1,2";
+            + "where f.record_id = b.record_id  and br.bassett_id = b.bassett_id group by  br.region "
+            + "order by 1,2";
+
+    private DataSource dataSource;
 
     public Collection<Eresource> getById(final String bassettNumber) {
-        Collection < String > params = new LinkedList < String >();
+        Collection<String> params = new LinkedList<String>();
         params.add(bassettNumber);
         return doGet(SEARCH_BY_BASSETT_NUMBER, params, true);
     }
 
-    public Collection < Eresource > getCore(final String type) {
+    public Collection<Eresource> getCore(final String type) {
         throw new UnsupportedOperationException();
     }
 
@@ -95,12 +97,12 @@ public class BassettCollectionManager {
         throw new UnsupportedOperationException();
     }
 
-    public Collection < Eresource > getMeshCore(final String type, final String mesh) {
+    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
         throw new UnsupportedOperationException();
     }
 
     public Collection<Eresource> getSubset(final String region) {
-        Collection < String > params = new LinkedList < String >();
+        Collection<String> params = new LinkedList<String>();
         if (region.indexOf("--") > -1) {
             String[] splittedRegion = region.split("--");
             params.add(splittedRegion[0]);
@@ -120,26 +122,25 @@ public class BassettCollectionManager {
         throw new UnsupportedOperationException();
     }
 
-    public Collection < Eresource > search(final String query) {
+    public Collection<Eresource> search(final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
-        Collection < String > params = new LinkedList < String >();
+        Collection<String> params = new LinkedList<String>();
         for (int i = 0; i < 2; i++) {
             params.add(translatedQuery);
         }
         return doGetSearch(SEARCH_BASSETT, params, query);
     }
 
-    public Map<String, Integer> searchCount(final Set < String > types, final Set < String > subsets, final String query) {
+    public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Map < String, Integer > result = null;
+        Map<String, Integer> result = null;
         try {
             conn = this.dataSource.getConnection();
-
             stmt = conn.prepareStatement(SEARCH_COUNT);
             stmt.setString(1, translatedQuery);
             stmt.setString(2, translatedQuery);
@@ -148,22 +149,9 @@ public class BassettCollectionManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            try {
-                if (null != stmt) {
-                    stmt.close();
-                }
-
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    if (null != conn) {
-                        conn.close();
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
         return result;
     }
@@ -171,7 +159,7 @@ public class BassettCollectionManager {
     public Collection<Eresource> searchSubset(final String region, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
-        Collection < String > params = new LinkedList < String >();
+        Collection<String> params = new LinkedList<String>();
         for (int i = 0; i < 2; i++) {
             params.add(translatedQuery);
         }
@@ -197,15 +185,15 @@ public class BassettCollectionManager {
         this.dataSource = dataSource;
     }
 
-    private LinkedList < Eresource > doGet(final String sql, final Collection < String > params) {
+    private LinkedList<Eresource> doGet(final String sql, final Collection<String> params) {
         return doGet(sql, params, false);
     }
 
-    private LinkedList<Eresource> doGet(final String sql, final Collection < String > params, final boolean withLegend) {
+    private LinkedList<Eresource> doGet(final String sql, final Collection<String> params, final boolean withLegend) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        LinkedList < Eresource > result = null;
+        LinkedList<Eresource> result = null;
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.prepareStatement(sql);
@@ -218,30 +206,18 @@ public class BassettCollectionManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            try {
-                if (null != stmt) {
-                    stmt.close();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    if (null != conn) {
-                        conn.close();
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
         return result;
     }
 
-    private Collection < Eresource > doGetSearch(final String sql, final Collection < String > params, final String query) {
-        LinkedList < Eresource > result = doGet(sql, params);
-        LinkedList < Eresource > titleMatches = new LinkedList < Eresource >();
+    private Collection<Eresource> doGetSearch(final String sql, final Collection<String> params, final String query) {
+        LinkedList<Eresource> result = doGet(sql, params);
+        LinkedList<Eresource> titleMatches = new LinkedList<Eresource>();
         int i = 0;
-        for (ListIterator < Eresource > it = result.listIterator(); it.hasNext() && (i < 20); i++) {
+        for (ListIterator<Eresource> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
             Eresource eresource = it.next();
             if (query.equalsIgnoreCase(eresource.getTitle())) {
                 titleMatches.add(eresource);
@@ -255,8 +231,8 @@ public class BassettCollectionManager {
         return result;
     }
 
-    private Map < String, Integer > parseCountResultSet(final ResultSet rs) throws SQLException {
-        Map < String, Integer > result = new LinkedHashMap < String, Integer >();
+    private Map<String, Integer> parseCountResultSet(final ResultSet rs) throws SQLException {
+        Map<String, Integer> result = new LinkedHashMap<String, Integer>();
         while (rs.next()) {
             int count = rs.getInt("SUB_REGION_COUNT");
             String region = rs.getString("REGION");
@@ -270,8 +246,8 @@ public class BassettCollectionManager {
         return result;
     }
 
-    private LinkedList < Eresource > parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
-        LinkedList < Eresource > eresources = new LinkedList < Eresource >();
+    private LinkedList<Eresource> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
+        LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         BassettEresource eresource = null;
         Version version = null;
         int currentEresourceId = -1;

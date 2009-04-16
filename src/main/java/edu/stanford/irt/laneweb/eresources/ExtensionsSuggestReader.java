@@ -16,17 +16,19 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.reading.Reader;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.JdbcUtils;
+
 public class ExtensionsSuggestReader implements Reader {
+
+    private static final String SQL_1 = "select title from eresource where lower(title) like lower('%";
+
+    private static final String SQL_2 = "%') and rownum < 20 order by title";
 
     private DataSource dataSource;
 
     private ThreadLocal<OutputStream> outputStream = new ThreadLocal<OutputStream>();
 
     private ThreadLocal<String> query = new ThreadLocal<String>();
-
-    private static final String sql_1 = "select title from eresource where lower(title) like lower('%";
-
-    private static final String sql_2 = "%') and rownum < 20 order by title";
 
     public void generate() throws IOException, SAXException, ProcessingException {
         Connection conn = null;
@@ -37,7 +39,7 @@ public class ExtensionsSuggestReader implements Reader {
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql_1 + q + sql_2);
+            rs = stmt.executeQuery(SQL_1 + q + SQL_2);
             out.write(("[\"" + q + "\", [").getBytes());
             String maybeComma = "\"";
             while (rs.next()) {
@@ -50,27 +52,9 @@ public class ExtensionsSuggestReader implements Reader {
         } finally {
             this.outputStream.set(null);
             this.query.set(null);
-            if (null != rs) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
-            if (null != stmt) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
-            if (null != conn) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
     }
 

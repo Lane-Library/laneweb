@@ -43,8 +43,9 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
         } catch (IOException e) {
             throw e;
         } finally {
-            if (bf != null)
+            if (bf != null) {
                 bf.close();
+            }
         }
     }
 
@@ -77,8 +78,8 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
+            IOException {
         this.path = par.getParameter("path", this.defaultPath);
         this.source = resolver.resolveURI(src);
     }

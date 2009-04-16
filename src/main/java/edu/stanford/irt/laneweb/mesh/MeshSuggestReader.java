@@ -1,8 +1,5 @@
 package edu.stanford.irt.laneweb.mesh;
 
-import edu.stanford.irt.lane.mesh.export.MeshDescriptor;
-import edu.stanford.irt.lane.mesh.export.MeshDescriptorManager;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collection;
@@ -14,6 +11,9 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.reading.Reader;
 
+import edu.stanford.irt.lane.mesh.export.MeshDescriptor;
+import edu.stanford.irt.lane.mesh.export.MeshDescriptorManager;
+
 public class MeshSuggestReader implements Reader {
 
     private static final byte[] JSON_1 = "{\"mesh\":[".getBytes();
@@ -24,11 +24,11 @@ public class MeshSuggestReader implements Reader {
 
     private ThreadLocal<String> limit = new ThreadLocal<String>();
 
+    private MeshDescriptorManager meshDescriptorManager;
+
     private ThreadLocal<OutputStream> outputStream = new ThreadLocal<OutputStream>();
 
     private ThreadLocal<String> query = new ThreadLocal<String>();
-
-    private MeshDescriptorManager meshDescriptorManager;
 
     public void generate() throws IOException {
         OutputStream out = this.outputStream.get();
@@ -37,17 +37,15 @@ public class MeshSuggestReader implements Reader {
         MeshSuggestComparator comparator = new MeshSuggestComparator(q);
         TreeSet<String> meshSet = new TreeSet<String>(comparator);
         Collection<MeshDescriptor> descriptors;
-        if ("d".equalsIgnoreCase(l)||"p".equalsIgnoreCase(l)){
-          descriptors = this.meshDescriptorManager.getDescriptorsForDiseaseTerm(q);
+        if ("d".equalsIgnoreCase(l) || "p".equalsIgnoreCase(l)) {
+            descriptors = this.meshDescriptorManager.getDescriptorsForDiseaseTerm(q);
+        } else if ("i".equalsIgnoreCase(l)) {
+            descriptors = this.meshDescriptorManager.getDescriptorsForInterventionTerm(q);
+        } else {
+            descriptors = this.meshDescriptorManager.getDescriptorsForTerm(q);
         }
-        else if ("i".equalsIgnoreCase(l)){
-          descriptors = this.meshDescriptorManager.getDescriptorsForInterventionTerm(q);
-        }
-        else{
-          descriptors = this.meshDescriptorManager.getDescriptorsForTerm(q);
-        }
-        for (MeshDescriptor descriptor: descriptors){
-          meshSet.add(descriptor.getDescriptorName());
+        for (MeshDescriptor descriptor : descriptors) {
+            meshSet.add(descriptor.getDescriptorName());
         }
         Iterator<String> it = meshSet.iterator();
         int count = 0;
@@ -75,6 +73,13 @@ public class MeshSuggestReader implements Reader {
         return "text/plain";
     }
 
+    public void setMeshDescriptorManager(final MeshDescriptorManager meshDescriptorManager) {
+        if (null == meshDescriptorManager) {
+            throw new IllegalArgumentException("null meshDescriptorManager");
+        }
+        this.meshDescriptorManager = meshDescriptorManager;
+    }
+
     public void setOutputStream(final OutputStream outputStream) {
         if (null == outputStream) {
             throw new IllegalArgumentException("null outputStream");
@@ -86,13 +91,6 @@ public class MeshSuggestReader implements Reader {
     public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters params) {
         this.limit.set(params.getParameter("limit", null));
         this.query.set(params.getParameter("query", null));
-    }
-
-    public void setMeshDescriptorManager(final MeshDescriptorManager meshDescriptorManager) {
-        if (null == meshDescriptorManager) {
-            throw new IllegalArgumentException("null meshDescriptorManager");
-        }
-        this.meshDescriptorManager = meshDescriptorManager;
     }
 
     public boolean shouldSetContentLength() {

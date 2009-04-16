@@ -21,175 +21,304 @@ import edu.stanford.irt.eresources.impl.EresourceImpl;
 import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
+import edu.stanford.irt.laneweb.JdbcUtils;
 
 public class HistoryCollectionManager implements CollectionManager {
 
-    private static final String BROWSE = "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? "
-            + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? " + "AND PREFERRED_TITLE IS NOT NULL "
-            + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String BROWSE =
+        "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String BROWSE_ALPHA = "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? "
-            + "AND NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') = NLSSORT(?,'NLS_SORT=GENERIC_BASELETTER') "
-            + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? "
-            + "AND NLSSORT(SUBSTR(PREFERRED_TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') = NLSSORT(?,'NLS_SORT=GENERIC_BASELETTER') "
-            + "AND PREFERRED_TITLE IS NOT NULL " + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String BROWSE_ALPHA =
+        "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "AND NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') = NLSSORT(?,'NLS_SORT=GENERIC_BASELETTER') "
+        + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "AND NLSSORT(SUBSTR(PREFERRED_TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') = NLSSORT(?,'NLS_SORT=GENERIC_BASELETTER') "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String BROWSE_NONALPHA = "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? "
-            + "AND (NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') < NLSSORT('A','NLS_SORT=GENERIC_BASELETTER') "
-            + "OR NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') > NLSSORT('z','NLS_SORT=GENERIC_BASELETTER')) "
-            + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? "
-            + "AND (NLSSORT(SUBSTR(PREFERRED_TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') < NLSSORT('A','NLS_SORT=GENERIC_BASELETTER') "
-            + "OR NLSSORT(SUBSTR(PREFERRED_TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') > NLSSORT('z','NLS_SORT=GENERIC_BASELETTER')) "
-            + "AND PREFERRED_TITLE IS NOT NULL " + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String BROWSE_NONALPHA =
+        "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "AND (NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') < NLSSORT('A','NLS_SORT=GENERIC_BASELETTER') "
+        + "OR NLSSORT(SUBSTR(TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') > NLSSORT('z','NLS_SORT=GENERIC_BASELETTER')) "
+        + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "AND (NLSSORT(SUBSTR(PREFERRED_TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') < NLSSORT('A','NLS_SORT=GENERIC_BASELETTER') "
+        + "OR NLSSORT(SUBSTR(PREFERRED_TITLE,1,1),'NLS_SORT=GENERIC_BASELETTER') > NLSSORT('z','NLS_SORT=GENERIC_BASELETTER')) "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String CORE = "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_ERESOURCE.CORE = 'Y'AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? "
-            + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_ERESOURCE.CORE = 'Y'AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? "
-            + "AND PREFERRED_TITLE IS NOT NULL " + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String CORE =
+        "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.CORE = 'Y'AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.CORE = 'Y'AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String COUNT = "WITH FOUND AS (SELECT H_ERESOURCE.ERESOURCE_ID, H_TYPE.TYPE, H_SUBSET.SUBSET FROM H_ERESOURCE, H_TYPE, H_SUBSET "
-            + "WHERE CONTAINS(H_ERESOURCE.TEXT,?) > 0 "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_SUBSET.ERESOURCE_ID(+)) "
-            + "SELECT 'all' AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND";
+    private static final String COUNT =
+        "WITH FOUND AS (SELECT H_ERESOURCE.ERESOURCE_ID, H_TYPE.TYPE, H_SUBSET.SUBSET FROM H_ERESOURCE, H_TYPE, H_SUBSET "
+        + "WHERE CONTAINS(H_ERESOURCE.TEXT,?) > 0 "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_SUBSET.ERESOURCE_ID(+)) "
+        + "SELECT 'all' AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND";
 
     private static final String COUNT_SUBSET_UNION = " UNION SELECT ? AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND WHERE SUBSET = ?";
 
     private static final String COUNT_TYPE_UNION = " UNION SELECT ? AS GENRE, COUNT(DISTINCT ERESOURCE_ID) AS HITS FROM FOUND WHERE TYPE = ?";
 
-    private static final String MESH = "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID " + "AND H_MESH.TERM = ? "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? "
-            + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-            + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE " + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-            + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID " + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID "
-            + "AND H_MESH.TERM = ? " + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? "
-            + "AND PREFERRED_TITLE IS NOT NULL " + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String MESH =
+        "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID "
+        + "AND H_MESH.TERM = ? "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID "
+        + "AND H_MESH.TERM = ? "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String MESH_CORE = "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID " + "AND H_MESH.TERM = ? "
-            + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? " + "AND H_ERESOURCE.CORE = 'Y' "
-            + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-            + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE " + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-            + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID " + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID "
-            + "AND H_MESH.TERM = ? " + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID " + "AND H_TYPE.TYPE = ? "
-            + "AND H_ERESOURCE.CORE = 'Y' " + "AND PREFERRED_TITLE IS NOT NULL " + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String MESH_CORE =
+        "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID "
+        + "AND H_MESH.TERM = ? "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "AND H_ERESOURCE.CORE = 'Y' "
+        + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_MESH, H_TYPE "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_MESH.ERESOURCE_ID "
+        + "AND H_MESH.TERM = ? "
+        + "AND H_ERESOURCE.ERESOURCE_ID = H_TYPE.ERESOURCE_ID "
+        + "AND H_TYPE.TYPE = ? "
+        + "AND H_ERESOURCE.CORE = 'Y' "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String SEARCH = "WITH FOUND AS ( " + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
-            + "CONTAINS(TITLE,?) * 3 AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 " + "AND CORE = 'Y' "
-            + "UNION " + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
-            + "CONTAINS(PREFERRED_TITLE,?) * 3 AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 " + "AND CORE = 'Y' "
-            + "AND PREFERRED_TITLE IS NOT NULL " + "UNION " + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) AS SCORE_TEXT, "
-            + "CONTAINS(TITLE,?) AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 " + "AND CORE IS NULL " + "UNION "
-            + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, "
-            + "SCORE(1) AS SCORE_TEXT, CONTAINS(PREFERRED_TITLE,?) AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 "
-            + "AND CORE IS NULL " + "AND PREFERRED_TITLE IS NOT NULL " + ") "
-            + "SELECT FOUND.ERESOURCE_ID, H_VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-            + "FROM FOUND, H_VERSION, H_LINK, H_TYPE, H_SUBSET " + "WHERE FOUND.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-            + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID " + "AND FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID(+) "
-            + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID(+) "
-            + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String SEARCH =
+        "WITH FOUND AS ( "
+        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
+        + "CONTAINS(TITLE,?) * 3 AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE = 'Y' "
+        + "UNION "
+        + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
+        + "CONTAINS(PREFERRED_TITLE,?) * 3 AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE = 'Y' "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + "UNION "
+        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) AS SCORE_TEXT, "
+        + "CONTAINS(TITLE,?) AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE IS NULL "
+        + "UNION "
+        + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, "
+        + "SCORE(1) AS SCORE_TEXT, CONTAINS(PREFERRED_TITLE,?) AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE IS NULL "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + ") "
+        + "SELECT FOUND.ERESOURCE_ID, H_VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM FOUND, H_VERSION, H_LINK, H_TYPE, H_SUBSET "
+        + "WHERE FOUND.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID(+) "
+        + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID(+) "
+        + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String SEARCH_SUBSET = "WITH FOUND AS ( " + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
-            + "CONTAINS(TITLE,?) * 3 AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 " + "AND CORE = 'Y' "
-            + "UNION " + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
-            + "CONTAINS(PREFERRED_TITLE,?) * 3 AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 " + "AND CORE = 'Y' "
-            + "AND PREFERRED_TITLE IS NOT NULL " + "UNION " + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) AS SCORE_TEXT, "
-            + "CONTAINS(TITLE,?) AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 " + "AND CORE IS NULL " + "UNION "
-            + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, "
-            + "SCORE(1) AS SCORE_TEXT, CONTAINS(PREFERRED_TITLE,?) AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 "
-            + "AND CORE IS NULL " + "AND PREFERRED_TITLE IS NOT NULL " + ") "
-            + "SELECT FOUND.ERESOURCE_ID, H_VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-            + "FROM FOUND, H_VERSION, H_LINK, H_TYPE, H_SUBSET " + "WHERE FOUND.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-            + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID " + "AND FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID(+) "
-            + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID(+) " + "AND SUBSET = ? "
-            + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String SEARCH_SUBSET =
+        "WITH FOUND AS ( "
+        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
+        + "CONTAINS(TITLE,?) * 3 AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE = 'Y' "
+        + "UNION "
+        + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
+        + "CONTAINS(PREFERRED_TITLE,?) * 3 AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE = 'Y' "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + "UNION "
+        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) AS SCORE_TEXT, "
+        + "CONTAINS(TITLE,?) AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE IS NULL "
+        + "UNION "
+        + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, "
+        + "SCORE(1) AS SCORE_TEXT, CONTAINS(PREFERRED_TITLE,?) AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE IS NULL "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + ") "
+        + "SELECT FOUND.ERESOURCE_ID, H_VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM FOUND, H_VERSION, H_LINK, H_TYPE, H_SUBSET "
+        + "WHERE FOUND.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID(+) "
+        + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID(+) "
+        + "AND SUBSET = ? "
+        + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String SEARCH_TYPE = "WITH FOUND AS ( " + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
-            + "CONTAINS(TITLE,?) * 3 AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 " + "AND CORE = 'Y' "
-            + "UNION " + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
-            + "CONTAINS(PREFERRED_TITLE,?) * 3 AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 " + "AND CORE = 'Y' "
-            + "AND PREFERRED_TITLE IS NOT NULL " + "UNION " + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) AS SCORE_TEXT, "
-            + "CONTAINS(TITLE,?) AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 " + "AND CORE IS NULL " + "UNION "
-            + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, "
-            + "SCORE(1) AS SCORE_TEXT, CONTAINS(PREFERRED_TITLE,?) AS SCORE_TITLE " + "FROM H_ERESOURCE " + "WHERE CONTAINS(TEXT,?,1) > 0 "
-            + "AND CORE IS NULL " + "AND PREFERRED_TITLE IS NOT NULL " + ") "
-            + "SELECT FOUND.ERESOURCE_ID, H_VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
-            + "FROM FOUND, H_VERSION, H_LINK, H_TYPE, H_SUBSET " + "WHERE FOUND.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
-            + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID " + "AND FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID(+) "
-            + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID(+) " + "AND TYPE = ? "
-            + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String SEARCH_TYPE =
+        "WITH FOUND AS ( "
+        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
+        + "CONTAINS(TITLE,?) * 3 AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE = 'Y' "
+        + "UNION "
+        + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) * 3 AS SCORE_TEXT, "
+        + "CONTAINS(PREFERRED_TITLE,?) * 3 AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE = 'Y' "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + "UNION "
+        + "SELECT TITLE, H_ERESOURCE.ERESOURCE_ID, SCORE(1) AS SCORE_TEXT, "
+        + "CONTAINS(TITLE,?) AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE IS NULL "
+        + "UNION "
+        + "SELECT PREFERRED_TITLE AS TITLE, H_ERESOURCE.ERESOURCE_ID, "
+        + "SCORE(1) AS SCORE_TEXT, CONTAINS(PREFERRED_TITLE,?) AS SCORE_TITLE "
+        + "FROM H_ERESOURCE "
+        + "WHERE CONTAINS(TEXT,?,1) > 0 "
+        + "AND CORE IS NULL "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + ") "
+        + "SELECT FOUND.ERESOURCE_ID, H_VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "SCORE_TITLE, SCORE_TEXT, NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM FOUND, H_VERSION, H_LINK, H_TYPE, H_SUBSET "
+        + "WHERE FOUND.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND FOUND.ERESOURCE_ID = H_TYPE.ERESOURCE_ID(+) "
+        + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID(+) "
+        + "AND TYPE = ? "
+        + "ORDER BY SCORE_TITLE DESC, SCORE_TEXT DESC, SORT_TITLE, VERSION_ID, LINK_ID";
 
-    private static final String SUBSET = "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_SUBSET "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID " + "AND H_SUBSET.SUBSET = ? "
-            + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
-            + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
-            + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE " + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_SUBSET "
-            + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID " + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
-            + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID " + "AND H_SUBSET.SUBSET = ? " + "AND PREFERRED_TITLE IS NOT NULL "
-            + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
+    private static final String SUBSET =
+        "SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_SUBSET "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID "
+        + "AND H_SUBSET.SUBSET = ? "
+        + "UNION SELECT H_ERESOURCE.ERESOURCE_ID, H_VERSION.VERSION_ID, H_LINK_ID, PREFERRED_TITLE AS TITLE, PUBLISHER, "
+        + "HOLDINGS, DATES, DESCRIPTION, PROXY, LABEL, URL, INSTRUCTION, "
+        + "NLSSORT(PREFERRED_TITLE,'NLS_SORT=GENERIC_BASELETTER') AS SORT_TITLE "
+        + "FROM H_ERESOURCE, H_VERSION, H_LINK, H_SUBSET "
+        + "WHERE H_ERESOURCE.ERESOURCE_ID = H_VERSION.ERESOURCE_ID "
+        + "AND H_VERSION.VERSION_ID = H_LINK.VERSION_ID "
+        + "AND H_VERSION.VERSION_ID = H_SUBSET.VERSION_ID "
+        + "AND H_SUBSET.SUBSET = ? "
+        + "AND PREFERRED_TITLE IS NOT NULL "
+        + "ORDER BY SORT_TITLE, VERSION_ID, LINK_ID";
 
     private DataSource dataSource;
 
-    public Collection < Eresource > getCore(final String type) {
-        Collection < String > params = new LinkedList < String >();
+    public Collection<Eresource> getCore(final String type) {
+        Collection<String> params = new LinkedList<String>();
         params.add(type);
         params.add(type);
         return doGet(CORE, params);
     }
 
-    public Collection < Eresource > getMesh(final String type, final String mesh) {
-        Collection < String > params = new LinkedList < String >();
+    public Collection<Eresource> getMesh(final String type, final String mesh) {
+        Collection<String> params = new LinkedList<String>();
         params.add(mesh);
         params.add(type);
         params.add(mesh);
@@ -197,8 +326,8 @@ public class HistoryCollectionManager implements CollectionManager {
         return doGet(MESH, params);
     }
 
-    public Collection < Eresource > getMeshCore(final String type, final String mesh) {
-        Collection < String > params = new LinkedList < String >();
+    public Collection<Eresource> getMeshCore(final String type, final String mesh) {
+        Collection<String> params = new LinkedList<String>();
         params.add(mesh);
         params.add(type);
         params.add(mesh);
@@ -206,28 +335,28 @@ public class HistoryCollectionManager implements CollectionManager {
         return doGet(MESH_CORE, params);
     }
 
-    public Collection < Eresource > getSubset(final String subset) {
-        Collection < String > params = new LinkedList < String >();
+    public Collection<Eresource> getSubset(final String subset) {
+        Collection<String> params = new LinkedList<String>();
         params.add(subset);
         params.add(subset);
         return doGet(SUBSET, params);
     }
 
-    public Collection < Eresource > getType(final String type) {
+    public Collection<Eresource> getType(final String type) {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        Collection < String > params = new LinkedList < String >();
+        Collection<String> params = new LinkedList<String>();
         params.add(type);
         params.add(type);
         return doGet(BROWSE, params);
     }
 
-    public Collection < Eresource > getType(final String type, final char alpha) {
+    public Collection<Eresource> getType(final String type, final char alpha) {
         if (null == type) {
             throw new IllegalArgumentException("null type");
         }
-        Collection < String > params = new LinkedList < String >();
+        Collection<String> params = new LinkedList<String>();
         String sql = null;
         if ('#' == alpha) {
             sql = BROWSE_NONALPHA;
@@ -244,18 +373,18 @@ public class HistoryCollectionManager implements CollectionManager {
         return doGet(sql, params);
     }
 
-    public Collection < Eresource > search(final String query) {
+    public Collection<Eresource> search(final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
-        Collection < String > params = new LinkedList < String >();
+        Collection<String> params = new LinkedList<String>();
         for (int i = 0; i < 8; i++) {
             params.add(translatedQuery);
         }
         return doGetSearch(SEARCH, params, query);
     }
 
-    public Map < String, Integer > searchCount(final Set < String > types, final Set < String > subsets, final String query) {
-        Map < String, Integer > result = new HashMap < String, Integer >();
+    public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
+        Map<String, Integer> result = new HashMap<String, Integer>();
         StringBuffer sb = new StringBuffer(COUNT);
         for (int i = 0; i < types.size(); i++) {
             sb.append(COUNT_TYPE_UNION);
@@ -287,30 +416,17 @@ public class HistoryCollectionManager implements CollectionManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            try {
-                if (null != conn) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    if (null != stmt) {
-                        stmt.close();
-                    }
-
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
         return result;
     }
 
-    public Collection < Eresource > searchSubset(final String subset, final String query) {
+    public Collection<Eresource> searchSubset(final String subset, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
-        Collection < String > params = new LinkedList < String >();
+        Collection<String> params = new LinkedList<String>();
         for (int i = 0; i < 8; i++) {
             params.add(translatedQuery);
         }
@@ -318,10 +434,10 @@ public class HistoryCollectionManager implements CollectionManager {
         return doGetSearch(SEARCH_SUBSET, params, query);
     }
 
-    public Collection < Eresource > searchType(final String type, final String query) {
+    public Collection<Eresource> searchType(final String type, final String query) {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
-        Collection < String > params = new LinkedList < String >();
+        Collection<String> params = new LinkedList<String>();
         for (int i = 0; i < 8; i++) {
             params.add(translatedQuery);
         }
@@ -336,7 +452,7 @@ public class HistoryCollectionManager implements CollectionManager {
         this.dataSource = dataSource;
     }
 
-    private LinkedList < Eresource > doGet(final String sql, final Collection < String > params) {
+    private LinkedList<Eresource> doGet(final String sql, final Collection<String> params) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -352,30 +468,17 @@ public class HistoryCollectionManager implements CollectionManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            try {
-                if (null != conn) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            finally {
-                try {
-                    if (null != stmt) {
-                        stmt.close();
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
     }
 
-    private Collection < Eresource > doGetSearch(final String sql, final Collection < String > params, final String query) {
-        LinkedList < Eresource > result = doGet(sql, params);
-        LinkedList < Eresource > titleMatches = new LinkedList < Eresource >();
+    private Collection<Eresource> doGetSearch(final String sql, final Collection<String> params, final String query) {
+        LinkedList<Eresource> result = doGet(sql, params);
+        LinkedList<Eresource> titleMatches = new LinkedList<Eresource>();
         int i = 0;
-        for (ListIterator < Eresource > it = result.listIterator(); it.hasNext() && (i < 20); i++) {
+        for (ListIterator<Eresource> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
             Eresource eresource = it.next();
             if (query.equalsIgnoreCase(eresource.getTitle())) {
                 titleMatches.add(eresource);
@@ -389,8 +492,8 @@ public class HistoryCollectionManager implements CollectionManager {
         return result;
     }
 
-    private LinkedList < Eresource > parseResultSet(final ResultSet rs) throws SQLException {
-        LinkedList < Eresource > eresources = new LinkedList < Eresource >();
+    private LinkedList<Eresource> parseResultSet(final ResultSet rs) throws SQLException {
+        LinkedList<Eresource> eresources = new LinkedList<Eresource>();
         Eresource eresource = null;
         Version version = null;
         Link link;

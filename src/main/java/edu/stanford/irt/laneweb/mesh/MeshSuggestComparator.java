@@ -5,12 +5,9 @@ import java.util.Comparator;
 
 public class MeshSuggestComparator implements Comparator<String>, Serializable {
 
-
-
     /** for Serializable. */
     private static final long serialVersionUID = 1L;
 
-    
     private String query;
 
     public MeshSuggestComparator(final String query) {

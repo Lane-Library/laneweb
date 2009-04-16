@@ -22,14 +22,14 @@ public class HttpResource extends UrlResource {
         this.context = url;
     }
 
-    public HttpResource(final URL url, String authorization) throws MalformedURLException {
+    public HttpResource(final URL url, final String authorization) throws MalformedURLException {
         this(url);
         this.authorization = authorization;
     }
-    
+
     public HttpResource(final URL url, final String userName, final String password) throws MalformedURLException {
         this(url);
-        authorization = new BASE64Encoder().encode((userName.concat(":").concat(password)).getBytes());
+        this.authorization = new BASE64Encoder().encode((userName.concat(":").concat(password)).getBytes());
     }
 
     @Override
@@ -43,10 +43,8 @@ public class HttpResource extends UrlResource {
     @Override
     public InputStream getInputStream() throws IOException {
         URLConnection con = super.getURL().openConnection();
-        con.setRequestProperty("Authorization", "Basic " + authorization);
+        con.setRequestProperty("Authorization", "Basic " + this.authorization);
         con.setUseCaches(false);
         return con.getInputStream();
     }
-    
-    
 }

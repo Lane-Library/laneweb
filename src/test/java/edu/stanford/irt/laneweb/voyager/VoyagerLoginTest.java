@@ -82,7 +82,7 @@ public class VoyagerLoginTest {
         replay(this.statement);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
         expect(this.connection.prepareStatement(isA(String.class))).andReturn(this.statement);
-        this.connection.close();   
+        this.connection.close();
         replay(this.connection);
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         replay(this.dataSource);

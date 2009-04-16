@@ -10,6 +10,8 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
+import edu.stanford.irt.laneweb.JdbcUtils;
+
 public class VoyagerMeshSuggest {
 
     private static final String DISEASE_LIMIT =
@@ -81,27 +83,9 @@ public class VoyagerMeshSuggest {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            if (null != rs) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
-            if (null != stmt) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
-            if (null != conn) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    // ?
-                }
-            }
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
     }
 
