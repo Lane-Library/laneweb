@@ -122,7 +122,9 @@
 					acMesh.useShadow = true;
 					acMesh.useIFrame = true; // ?? needed in IE6 so select doesn't bleed through
 					acMesh.autoHighlight = false;
-					acMesh.animHoriz = true;
+					acMesh.animHoriz = false;
+					acMesh.animVert = false;
+					acMesh.queryDelay = 0.1;
 					acMesh.setHeader(acInputs[y].title);
 					acMesh.itemSelectEvent.subscribe(function(sType,aArgs){queryBuilder();});
 				}
