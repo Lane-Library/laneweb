@@ -13,7 +13,7 @@ import sun.misc.BASE64Encoder;
 
 public class HttpResource extends UrlResource {
 
-    private static String authorization;
+    private String authorization;
 
     private URL context;
 
@@ -22,6 +22,11 @@ public class HttpResource extends UrlResource {
         this.context = url;
     }
 
+    public HttpResource(final URL url, String authorization) throws MalformedURLException {
+        this(url);
+        this.authorization = authorization;
+    }
+    
     public HttpResource(final URL url, final String userName, final String password) throws MalformedURLException {
         this(url);
         authorization = new BASE64Encoder().encode((userName.concat(":").concat(password)).getBytes());
@@ -32,7 +37,7 @@ public class HttpResource extends UrlResource {
         if (relativePath.startsWith("/")) {
             relativePath = relativePath.substring(1);
         }
-        return new HttpResource(new URL(this.context, relativePath));
+        return new HttpResource(new URL(this.context, relativePath), this.authorization);
     }
 
     @Override
@@ -42,4 +47,6 @@ public class HttpResource extends UrlResource {
         con.setUseCaches(false);
         return con.getInputStream();
     }
+    
+    
 }

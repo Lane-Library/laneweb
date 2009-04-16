@@ -24,7 +24,7 @@ public class LinkScanGenerator implements Generator {
 
     private DataSource dataSource;
 
-    private final String sql = "select url, record_type, record_id, title " + "from link, eresource " + "where eresource.eresource_id = link.eresource_id";
+    private static final String sql = "select url, record_type, record_id, title " + "from link, eresource " + "where eresource.eresource_id = link.eresource_id";
 
     private ThreadLocal<XMLConsumer> xmlConsumer = new ThreadLocal<XMLConsumer>();
 
@@ -36,7 +36,7 @@ public class LinkScanGenerator implements Generator {
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(this.sql);
+            rs = stmt.executeQuery(sql);
             consumer.startDocument();
             XMLUtils.startElement(consumer, XHTML_NS, "ul");
             int p = 1;

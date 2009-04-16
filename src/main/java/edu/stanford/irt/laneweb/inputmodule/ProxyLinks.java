@@ -52,7 +52,7 @@ public class ProxyLinks extends AbstractInputModule {
         if (header != null) {
             ip = header;
         }
-        return new Boolean(proxyLinks(ip));
+        return Boolean.valueOf(proxyLinks(ip));
     }
 
     protected boolean proxyLinks(final String ip) {

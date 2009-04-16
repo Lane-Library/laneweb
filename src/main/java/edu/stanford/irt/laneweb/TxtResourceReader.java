@@ -30,14 +30,22 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
     private String valueToSubstitute;
 
     public void generate() throws IOException, SAXException, ProcessingException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(this.source.getInputStream()));
-        String line = null;
-        while ((line = bf.readLine()) != null) {
-            line = line.replaceAll(this.valueToSubstitute, this.path);
-            this.outputStream.write(line.getBytes());
-            this.outputStream.write('\n');
+        BufferedReader bf = null;
+        try {
+            bf = new BufferedReader(new InputStreamReader(this.source.getInputStream()));
+            String line = null;
+            while ((line = bf.readLine()) != null) {
+                line = line.replaceAll(this.valueToSubstitute, this.path);
+                this.outputStream.write(line.getBytes());
+                this.outputStream.write('\n');
+            }
+            this.outputStream.flush();
+        } catch (IOException e) {
+            throw e;
+        } finally {
+            if (bf != null)
+                bf.close();
         }
-        this.outputStream.flush();
     }
 
     public Serializable getKey() {
@@ -69,8 +77,8 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
-            IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         this.path = par.getParameter("path", this.defaultPath);
         this.source = resolver.resolveURI(src);
     }

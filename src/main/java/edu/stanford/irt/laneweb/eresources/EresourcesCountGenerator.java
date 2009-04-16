@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,15 +40,15 @@ public class EresourcesCountGenerator implements Generator {
     private XMLConsumer xmlConsumer;
 
     public void generate() throws SAXException {
-        Map<String, Integer> result = this.collectionManager.searchCount(this.types, this.subsets, this.query);
+        Map<String, Integer> results = this.collectionManager.searchCount(this.types, this.subsets, this.query);
         this.xmlConsumer.startDocument();
         this.xmlConsumer.startPrefixMapping("", SQL_NS);
         XMLUtils.startElement(this.xmlConsumer, SQL_NS, "rowset");
-        for (String genre : result.keySet()) {
-            String hits = result.get(genre).toString();
+        for (Entry<String, Integer> entry : results.entrySet()) {
+            String hits = entry.getValue().toString();
             XMLUtils.startElement(this.xmlConsumer, SQL_NS, "row");
             XMLUtils.startElement(this.xmlConsumer, SQL_NS, "genre");
-            XMLUtils.data(this.xmlConsumer, genre);
+            XMLUtils.data(this.xmlConsumer, entry.getKey());
             XMLUtils.endElement(this.xmlConsumer, SQL_NS, "genre");
             XMLUtils.startElement(this.xmlConsumer, SQL_NS, "hits");
             XMLUtils.data(this.xmlConsumer, hits);

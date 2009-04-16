@@ -24,7 +24,7 @@ public class EzproxyServersReader implements Reader {
 
     private ThreadLocal<OutputStream> outputStream = new ThreadLocal<OutputStream>();
 
-    private final String sql = "with urls as ( " + "select url from link, version " + "where link.version_id = version.version_id " + "and proxy = 'T' "
+    private static final String sql = "with urls as ( " + "select url from link, version " + "where link.version_id = version.version_id " + "and proxy = 'T' "
             + "and url like 'http%' " + "union " + "select url from h_link, h_version " + "where h_link.version_id = h_version.version_id "
             + "and proxy = 'T' " + "and url like 'http%' " + ") " + "select substr(url, 9, instr(url,'/',1,3) - 9) as server from urls "
             + "where url like 'https://%' and instr(url,'/',1,3) > 0 " + "union " + "select substr(url, 9) as server from urls "
@@ -40,7 +40,7 @@ public class EzproxyServersReader implements Reader {
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(this.sql);
+            rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 out.write(this.hj);
                 out.write(rs.getString(1).getBytes());

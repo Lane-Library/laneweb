@@ -12,7 +12,6 @@ import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
@@ -36,7 +35,6 @@ public class BassettEresourcesGenerator implements Generator {
 
     private XMLConsumer xmlConsumer;
 
-    ExpiresValidity validity;
 
     public void generate() throws SAXException {
         Collection<Eresource> eresources = null;

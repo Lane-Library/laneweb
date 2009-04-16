@@ -24,9 +24,9 @@ public class ExtensionsSuggestReader implements Reader {
 
     private ThreadLocal<String> query = new ThreadLocal<String>();
 
-    private final String sql_1 = "select title from eresource where lower(title) like lower('%";
+    private static final String sql_1 = "select title from eresource where lower(title) like lower('%";
 
-    private final String sql_2 = "%') and rownum < 20 order by title";
+    private static final String sql_2 = "%') and rownum < 20 order by title";
 
     public void generate() throws IOException, SAXException, ProcessingException {
         Connection conn = null;
@@ -37,7 +37,7 @@ public class ExtensionsSuggestReader implements Reader {
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(this.sql_1 + q + this.sql_2);
+            rs = stmt.executeQuery(sql_1 + q + sql_2);
             out.write(("[\"" + q + "\", [").getBytes());
             String maybeComma = "\"";
             while (rs.next()) {

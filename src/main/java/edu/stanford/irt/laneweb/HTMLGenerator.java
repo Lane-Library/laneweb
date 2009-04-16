@@ -13,6 +13,7 @@ import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.xerces.parsers.AbstractSAXParser;
+import org.apache.xerces.xni.parser.XMLParserConfiguration;
 import org.cyberneko.html.HTMLConfiguration;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -39,8 +40,7 @@ public class HTMLGenerator implements Generator, CacheableProcessingComponent {
         HTMLConfiguration conf = new HTMLConfiguration();
         conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
         conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-        AbstractSAXParser parser = new AbstractSAXParser(conf) {
-        };
+        AbstractSAXParser parser = new HtmlSAXParser(conf); 
         parser.setContentHandler(this.xmlConsumer);
         parser.parse(new InputSource(this.source.getInputStream()));
     }
@@ -84,5 +84,12 @@ public class HTMLGenerator implements Generator, CacheableProcessingComponent {
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
             IOException {
         this.source = resolver.resolveURI(src);
+    }
+    
+    private static class HtmlSAXParser extends AbstractSAXParser{
+
+        protected HtmlSAXParser(XMLParserConfiguration conf) {
+            super(conf);
+        }
     }
 }

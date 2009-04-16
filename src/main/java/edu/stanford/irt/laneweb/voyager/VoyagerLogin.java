@@ -25,52 +25,64 @@ public class VoyagerLogin {
     private Logger logger = Logger.getLogger(VoyagerLogin.class);
 
     public String getVoyagerURL(final User person, final String pid, final String queryString) {
+        String url = ERROR_URL;
         if ((null == pid) || !pid.matches("[\\w0-9-_]+")) {
             this.logger.error("bad pid: " + pid);
-            return ERROR_URL;
+            return url;
         }
         if (null == person) {
             this.logger.error("null person");
-            return ERROR_URL;
+            return url;
         }
         String univId = person.getUnivId();
         if ((null == univId) || (univId.length() == 0)) {
             this.logger.error("bad univId: " + univId);
-            return ERROR_URL;
+            return url;
         }
         univId = "0" + univId; // voyager data prepends 0
         Connection conn = null;
-        PreparedStatement stmt = null;
+        PreparedStatement clearStmt = null;
+        PreparedStatement createStmt =  null;
         try {
             conn = this.dataSource.getConnection();
-            stmt = conn.prepareStatement(CLEAR_SESSION_SQL);
-            stmt.setString(1, univId);
-            stmt.setString(2, pid);
-            stmt.executeUpdate();
-            stmt = conn.prepareStatement(CREATE_SESSION_SQL);
-            stmt.setString(1, univId);
-            stmt.setString(2, pid);
-            stmt.executeUpdate();
-            return BASE_URL.concat(queryString).concat("&authenticate=Y");
+            clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
+            clearStmt.setString(1, univId);
+            clearStmt.setString(2, pid);
+            clearStmt.executeUpdate();
+            createStmt = conn.prepareStatement(CREATE_SESSION_SQL);
+            createStmt.setString(1, univId);
+            createStmt.setString(2, pid);
+            createStmt.executeUpdate();
+            url = BASE_URL.concat(queryString).concat("&authenticate=Y");
         } catch (SQLException e) {
             this.logger.error(e.getMessage(), e);
-            return ERROR_URL;
         } finally {
-            if (null != stmt) {
-                try {
-                    stmt.close();
-                } catch (SQLException e1) {
-                    throw new RuntimeException(e1);
+            try {
+                if (null != clearStmt) {
+                    clearStmt.close();
                 }
+            } catch (SQLException e1) {
+                //do nothing  throw new RuntimeException(e1);
             }
-            if (null != conn) {
+            try {
+                if (null != createStmt) {
+                    createStmt.close();
+                }
+            } catch (SQLException e1) {
+                throw new RuntimeException(e1);
+            }
+            finally {
+
                 try {
-                    conn.close();
+                    if (null != conn) {
+                        conn.close();
+                    }
                 } catch (SQLException e1) {
                     throw new RuntimeException(e1);
                 }
             }
         }
+        return url;
     }
 
     public void setDataSource(final DataSource dataSource) {

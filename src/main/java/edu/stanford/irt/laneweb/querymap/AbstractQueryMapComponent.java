@@ -61,7 +61,7 @@ public abstract class AbstractQueryMapComponent implements SitemapModelComponent
                 this.resourceMaps.set(new StreamResourceMapping(mapSource.getInputStream()));
                 Source weightSource = resolver.resolveURI(weightURL);
                 this.descriptorWeights.set(new DescriptorWeightMap(weightSource.getInputStream()));
-                this.abstractCount.set(new Integer(abstractCount));
+                this.abstractCount.set(Integer.valueOf(abstractCount));
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {

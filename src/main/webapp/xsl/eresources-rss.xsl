@@ -55,7 +55,7 @@
                     <url>http://lane.stanford.edu/favicon.ico</url>
                     <link><xsl:value-of select="$url"/></link>
                 </image>
-                <xsl:apply-templates select="h:body/h:dl/h:dd//h:ul/h:li"/>
+                <xsl:apply-templates select="h:body/h:dl/h:dd/h:ul/h:li"/>
             </channel>
         </rss>
     </xsl:template>
