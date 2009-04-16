@@ -381,7 +381,13 @@
         <dependency>
         	<groupId>edu.stanford.irt</groupId>
         	<artifactId>icd9</artifactId>
-        	<version>1.0.0</version>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>mesh-export</artifactId>
+        	<version>1.0.1</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

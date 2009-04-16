@@ -134,6 +134,9 @@
     <bean id="edu.stanford.irt.lane.icd9.ICD9Translator"
         class="edu.stanford.irt.lane.icd9.ICD9Translator"/>
 
+    <bean id="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"
+        class="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
+
     <bean id="org.apache.cocoon.components.modules.input.AbstractInputModule"
         class="edu.stanford.irt.laneweb.inputmodule.AbstractInputModule" abstract="true">
         <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
@@ -335,11 +338,7 @@
 
     <bean name="org.apache.cocoon.reading.Reader/mesh-suggest"
         class="edu.stanford.irt.laneweb.mesh.MeshSuggestReader">
-        <property name="voyagerMeshSuggest">
-            <bean class="edu.stanford.irt.laneweb.mesh.VoyagerMeshSuggest">
-                <property name="dataSource" ref="javax.sql.DataSource/voyager"/>
-            </bean>
-        </property>
+        <property name="meshDescriptorManager" ref="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
     </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/ezproxy-servers"

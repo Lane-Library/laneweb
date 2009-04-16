@@ -1,7 +1,11 @@
 package edu.stanford.irt.laneweb.mesh;
 
+import edu.stanford.irt.lane.mesh.export.MeshDescriptor;
+import edu.stanford.irt.lane.mesh.export.MeshDescriptorManager;
+
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeSet;
@@ -24,10 +28,7 @@ public class MeshSuggestReader implements Reader {
 
     private ThreadLocal<String> query = new ThreadLocal<String>();
 
-    // VoyagerMeshSuggest intentionally NOT constrained to return
-    // JSON_RETURN_LIMIT results
-    // to allow for finer ordering with MeshSuggestComparator
-    private VoyagerMeshSuggest voyagerMeshSuggest = null;
+    private MeshDescriptorManager meshDescriptorManager;
 
     public void generate() throws IOException {
         OutputStream out = this.outputStream.get();
@@ -35,7 +36,19 @@ public class MeshSuggestReader implements Reader {
         String l = this.limit.get();
         MeshSuggestComparator comparator = new MeshSuggestComparator(q);
         TreeSet<String> meshSet = new TreeSet<String>(comparator);
-        meshSet.addAll(this.voyagerMeshSuggest.getMesh(q, l));
+        Collection<MeshDescriptor> descriptors;
+        if ("d".equalsIgnoreCase(l)||"p".equalsIgnoreCase(l)){
+          descriptors = this.meshDescriptorManager.getDescriptorsForDiseaseTerm(q);
+        }
+        else if ("i".equalsIgnoreCase(l)){
+          descriptors = this.meshDescriptorManager.getDescriptorsForInterventionTerm(q);
+        }
+        else{
+          descriptors = this.meshDescriptorManager.getDescriptorsForTerm(q);
+        }
+        for (MeshDescriptor descriptor: descriptors){
+          meshSet.add(descriptor.getDescriptorName());
+        }
         Iterator<String> it = meshSet.iterator();
         int count = 0;
         try {
@@ -75,11 +88,11 @@ public class MeshSuggestReader implements Reader {
         this.query.set(params.getParameter("query", null));
     }
 
-    public void setVoyagerMeshSuggest(final VoyagerMeshSuggest voyagerMeshSuggest) {
-        if (null == voyagerMeshSuggest) {
-            throw new IllegalArgumentException("null voyagerMeshSuggest");
+    public void setMeshDescriptorManager(final MeshDescriptorManager meshDescriptorManager) {
+        if (null == meshDescriptorManager) {
+            throw new IllegalArgumentException("null meshDescriptorManager");
         }
-        this.voyagerMeshSuggest = voyagerMeshSuggest;
+        this.meshDescriptorManager = meshDescriptorManager;
     }
 
     public boolean shouldSetContentLength() {
