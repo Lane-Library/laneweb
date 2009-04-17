@@ -250,7 +250,9 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
                         LanewebXIncludeTransformer.this.resolver.release(source);
                     }
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
+                throw new CascadingRuntimeException("Error in XIncludeTransformer while trying to resolve base URL for document", e);
+            } catch (SAXException e) {
                 throw new CascadingRuntimeException("Error in XIncludeTransformer while trying to resolve base URL for document", e);
             }
             this.locator = locator;

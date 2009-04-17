@@ -16,6 +16,7 @@ import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.lane.icd9.ICD9Translator;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
@@ -35,6 +36,8 @@ public class SearchGenerator implements Generator {
     private long defaultTimeout;
 
     private String[] e;
+
+    private ICD9Translator icd9Translator;
 
     private MetaSearchManager metaSearchManager;
 
@@ -80,7 +83,11 @@ public class SearchGenerator implements Generator {
                 }
             }
             long timeout = time;
-            final SimpleQuery query = new SimpleQuery(this.q);
+            String queryString = this.q;
+            if (this.icd9Translator.isICD9Code(this.q)) {
+                queryString = this.icd9Translator.getLongName(this.q);
+            }
+            final SimpleQuery query = new SimpleQuery(queryString);
             result = this.metaSearchManager.search(query, timeout, engines, false);
             if (null != this.w) {
                 long wait = 0;
@@ -145,6 +152,10 @@ public class SearchGenerator implements Generator {
 
     public void setDefaultTimeout(final long defaultTimeout) {
         this.defaultTimeout = defaultTimeout;
+    }
+
+    public void setICD9Translator(final ICD9Translator icd9Translator) {
+        this.icd9Translator = icd9Translator;
     }
 
     public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {

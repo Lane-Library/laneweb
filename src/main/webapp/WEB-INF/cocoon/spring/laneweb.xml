@@ -203,6 +203,7 @@
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
         <property name="defaultTimeout" value="60000"/>
+        <property name="ICD9Translator" ref="edu.stanford.irt.lane.icd9.ICD9Translator"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/html"
