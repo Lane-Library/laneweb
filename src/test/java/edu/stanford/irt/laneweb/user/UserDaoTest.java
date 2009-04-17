@@ -250,6 +250,7 @@ public class UserDaoTest extends TestCase {
         replay(this.session);
         expect(this.request.getHeader(LanewebConstants.X_FORWARDED_FOR)).andReturn(null);
         expect(this.request.getParameter(LanewebConstants.PROXY_LINKS)).andReturn("true");
+        expect(this.request.getParameter(User.CMEID)).andReturn(null);
         this.userDao = new UserDao();
         this.userDao.setSubjectSource(this.subjectSource);
         this.userDao.setLdapTemplate(createMock(LdapTemplate.class));

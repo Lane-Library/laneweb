@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.user;
 
 public class User {
 
+    public static final String CMEID = "cmeid";
+
     public static final String IPGROUP = "ip-group";
 
     public static final String NAME = "name";
@@ -11,6 +13,9 @@ public class User {
     public static final String TICKET = "ticket";
 
     private String affiliation;
+
+    /** the user id to pass in cme authentication requests */
+    private String cmeId;
 
     private IPGroup iPGroup;
 
@@ -26,6 +31,10 @@ public class User {
 
     public String getAffilation() {
         return this.affiliation;
+    }
+
+    public String getCmeId() {
+        return this.cmeId;
     }
 
     public IPGroup getIPGroup() {
@@ -54,6 +63,10 @@ public class User {
 
     public void setAffiliation(final String affiliation) {
         this.affiliation = affiliation;
+    }
+
+    public void setCmeId(final String cmeId) {
+        this.cmeId = cmeId;
     }
 
     public void setIPGroup(final IPGroup iPGroup) {
