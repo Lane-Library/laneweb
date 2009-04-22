@@ -50,7 +50,7 @@
     <xsl:template match="s:content">
                   {
                        "title": "<xsl:value-of select="s:title"/>",
-                       "decription": "<xsl:value-of select="s:description"/>",
+                       "description": "<xsl:value-of select="s:description"/>",
                        "url": "<xsl:value-of select="s:url"/>"
                   }
                    <xsl:if test="position() !=  $num-to-display">,</xsl:if>
