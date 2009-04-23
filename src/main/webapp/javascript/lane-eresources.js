@@ -127,7 +127,7 @@
                     }
                     LANE.search.stopSearch();
                 }
-            LANE.search.setSearchType(this._type);
+            LANE.search.setSearchSource(this._type);
         };
         Result.prototype.getContent = function(){
             var request;
