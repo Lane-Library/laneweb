@@ -25,26 +25,19 @@
                 <xsl:value-of select="format-number(s:hits, '###,##0')"/>
             </xsl:if>
         </xsl:variable>
-         <xsl:variable name="content-id">
-                <xsl:value-of select="concat( @s:id, '_content')"/>
-        </xsl:variable>
         "<xsl:value-of select="@s:id"/>":
         {
             "status": "<xsl:value-of select="@s:status"/>",
             "url": "<xsl:value-of select="s:url"/>",
             "hits": "<xsl:value-of select="$hitcount"/>"<xsl:text/>
-            <xsl:if test="$content = 'true' and //s:contents[@s:id=$content-id]//s:content">
-        	 	    <xsl:apply-templates select="//s:contents[@s:id=$content-id]"/>
-                </xsl:if>
+            <xsl:if test="$content = 'true' and ./s:content">
+                	<xsl:text>,
+    	    "contents":[</xsl:text>
+             	    <xsl:apply-templates select="./s:content[ $num-to-display &lt; position() ]"/>
+            ]<xsl:text/>
+             </xsl:if>
         }
         <xsl:if test="following::s:resource">,</xsl:if>
-    </xsl:template>
-    
-    <xsl:template match="s:contents">
-    	<xsl:text>,
-    	    "contents":[</xsl:text>
-	   	 <xsl:apply-templates select=".//s:content[ position() &lt;=  $num-to-display ]"/>
-	        ]
     </xsl:template>
     
     <xsl:template match="s:content">
