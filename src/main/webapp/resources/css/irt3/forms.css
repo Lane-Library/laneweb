@@ -70,9 +70,14 @@ fieldset p {
 margin-top:3em;
 clear:both;
 }
+/*
+FIXME:this use of attribute selector is not widely supported,
+and I think is incorrect since we have no <fieldset type="submit"> markup,
+which would be incorrect markup anyway
 fieldset [type="submit"] {
 margin-top:1em;
 }
+*/
 form#feedback {
 width:725px;
 background-color:#fff;
