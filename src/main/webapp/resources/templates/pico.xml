@@ -103,7 +103,7 @@
                         <!-- TODO: change form action to self?; remove hidden source field;  change id? -->
                         <form method="get" action="/search.html" id="searchForm">
                             <div id="pico">
-                                <input name="source" type="hidden" value="clinical"/>
+                                <input name="source" type="hidden" value="/portals/lpch-cerner.html"/>
                                 <div>
                                     <!-- TODO: think about using rel attribute for field default values so we don't send defaults on query string -->
                                     <div class="acContainer">
