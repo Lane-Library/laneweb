@@ -132,7 +132,10 @@
                     <map:redirect-to uri="{form-redirect-key}"/>
                 </map:act>
             </map:match>
-            <!-- ========================== permenent redirects ============================ -->
+            <!-- ========================== permanent redirects ============================ -->
+            <map:match pattern="liaisons/index.html" type="wildcard">
+                <map:redirect-to uri="/contacts/index.html?loadTab=liaisons"/>
+            </map:match>
             <map:match pattern="tobacco" type="wildcard">
                 <map:redirect-to uri="/tobacco/index.html"/>
             </map:match>
