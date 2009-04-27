@@ -19,8 +19,7 @@
                     <a href="http://www.stanford.edu/">Stanford University</a>
                 </li>
                 <li>
-                    <a href="http://stanfordhospital.org/">Stanford Hospital &amp;
-                    Clinics</a>
+                    <a href="http://stanfordhospital.org/">Stanford Hospital &amp; Clinics</a>
                 </li>
                 <li>
                     <a href="http://www.lpch.org/">Lucile Packard Children's Hospital</a>
@@ -53,15 +52,19 @@
                             </span>
                         </h2>
                         <h3 id="pl">
-                            <span id="pl-logout"><a href="/secure/login.html">Off Campus Login</a></span>
-                            <span id="pl-login">Off Campus Login: <span id="user-name"/> | <a href="/persistentlogin.html">Account</a> | <a href="/persistentlogin.html?pl=logout">Logout</a></span>
+                            <span id="pl-logout">
+                                <a href="/secure/login.html">Off Campus Login</a>
+                            </span>
+                            <span id="pl-login">Off Campus Login: <span id="user-name"/> | <a
+                                    href="/persistentlogin.html">Account</a> | <a
+                                    href="/persistentlogin.html?pl=logout">Logout</a></span>
                         </h3>
                         <h3 id="irt">
                             <a title="IRT." href="http://med.stanford.edu/irt/">
                                 <span>a division of IRT</span>
                             </a>
                         </h3>
-						<div id="nav">
+                        <div id="nav">
                             <ul>
                                 <li>
                                     <a href="/online/ej.html" title="eJournals.">eJournals</a>
@@ -89,69 +92,137 @@
                             </ul>
                             <span id="askUs">
                                 <a href="/contacts/index.html?loadTab=askus" title="Ask Us."><img
-                                        src="/images/templates/irt3/question_mark.gif" alt="?"
-                                    /> Ask Us</a>
+                                        src="/images/templates/irt3/question_mark.gif" alt="?"/> Ask
+                                    Us</a>
                             </span>
                         </div>
                         <div id="breadcrumb">
                             <a id="proxyOff">Guest Access</a>
                             <a id="proxyOn">Stanford Access</a>
-                            <a href="http://med.stanford.edu/">School of Medicine</a> &#xBB;
-                                <a href="http://irt.stanford.edu/" title="IRT...">IRT</a> &#xBB;
+                            <a href="http://med.stanford.edu/">School of Medicine</a> &#xBB; <a
+                                href="http://irt.stanford.edu/" title="IRT...">IRT</a> &#xBB;
                             <?laneweb breadcrumb?></div>
-                        <form method="get" action="/search.html" id="searchForm">
-                            <div>
-                                <label>Search</label>
-                                <select name="source" id="searchSelect">
-                                    <option value="all">LaneConnex</option>
-                                    <option value="ej">eJournals</option>
-                                    <option value="database">Databases</option>
-                                    <option value="book">eBooks</option>
-                                    <!--<option value="biotools">Biotools</option>-->
-                                    <option value="software">Software</option>
-                                    <option value="video">Video</option>
-                                    <option value="cc">medCalcs</option>
-                                    <option value="lanesite">Lane Site</option>
-                                    <option disabled="disabled">----------------</option>
-                                    <option value="research">Bioresearch</option>
-                                    <option value="clinical">Clinical</option>
-                                    <option value="peds">Pediatrics</option>
-                                    <option disabled="disabled">----------------</option>
-                                    <option value="/portals/anesthesia.html">Anesthesia</option>
-                                    <option value="bassett">Bassett</option>
-                                    <option value="/portals/cardiology.html">Cardiology</option>
-                                    <option value="/portals/emergency.html">Emergency</option>
-                                    <option value="/portals/ethics.html">Ethics</option>
-                                    <option value="/portals/hematology.html">Hematology</option>
-                                    <option value="history">History</option>
-                                    <option value="/portals/internal-medicine.html">Internal
-                                        Medicine</option>
-                                    <option value="/portals/lpch-cerner.html">LPCH LINKS Tool</option>
-                                    <option value="/portals/pharmacy.html">Pharmacy</option>
-                                    <option value="/portals/pulmonary.html">Pulmonary</option>
-                                    <option disabled="disabled">----------------</option>
-                                    <option
-                                        value="http://laneproxy.stanford.edu/login?url=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;CMD=search&amp;DB=PubMed&amp;holding=F1000,F1000M&amp;term={search-terms}"
-                                        >PubMed</option>
-                                    <option
-                                        value="http://laneproxy.stanford.edu/login?url=http://www.google.com/search?hl=en&amp;q={search-terms}"
-                                        >Google</option>
-                                    <option
-                                        value="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;SL=none&amp;SAB1={search-terms}&amp;BOOL1=all+of+these&amp;FLD1=Keyword+Anywhere++%5BLKEY%5D+%28LKEY%29&amp;GRP1=AND+with+next+set&amp;SAB2=&amp;BOOL2=all+of+these&amp;FLD2=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&amp;GRP2=AND+with+next+set&amp;SAB3=&amp;BOOL3=all+of+these&amp;FLD3=ISSN+%5Bwith+hyphen%5D+%28ISSN%29&amp;CNT=50"
-                                        >Lane Catalog</option>
-                                    <option
-                                        value="http://med.stanford.edu/seminars/search?searchString={search-terms}&amp;Submit=Go"
-                                        >Biomed Seminars</option>
-                                    <option
-                                        value="https://stanfordwho.stanford.edu/lookup?search={search-terms}"
-                                        >StanfordWho</option>
-                                </select>
-                                <input name="q" id="searchTerms" type="text"/>
-                                <input id="searchSubmit" type="image" value="Search"
-                                    src="/images/templates/irt3/search_btn.gif"/>
-                                <img id="searchIndicator" alt="[searching]"
+                        <form id="search" action="/search.html">
+                            <ul>
+                                <li id="allSearchTab">
+                                    <a href="/index.html">All</a>
+                                </li>
+                                <li id="ejSearchTab">
+                                    <a href="/online/ej.html">eJournals</a>
+                                </li>
+                                <li id="bookSearchTab">
+                                    <a href="/online/eb.html">eBooks</a>
+                                </li>
+                                <li id="clinicalSearchTab">
+                                    <a href="/portals/clinical.html">Clinical</a>
+                                </li>
+                                <li id="otherSearches">
+                                    <a href=".">Other Searches</a>
+                                    <ul>
+                                        <li id="databaseSearchTab">
+                                            <a href="/online/db.html">Databases</a>
+                                        </li>
+                                        <li id="softwareSearchTab">
+                                            <a href="/services/computing/laneApplications.html"
+                                                >Software</a>
+                                        </li>
+                                        <li id="videoSearchTab">
+                                            <a href="/online/videobrowse.html">Video</a>
+                                        </li>
+                                        <li id="ccSearchTab">
+                                            <a href="/online/ccbrowse.html">medCalcs</a>
+                                        </li>
+                                        <li id="lanesiteSearchTab">
+                                            <a href="/index.html">Lane Site</a>
+                                        </li>
+                                        <li>
+                                            <hr/>
+                                        </li>
+                                        <li id="researchSearchTab">
+                                            <a href="/portals/bioresearch.html">Bioresearch</a>
+                                        </li>
+                                        <li id="pedsSearchTab">
+                                            <a href="/portals/peds.html">Pediatrics</a>
+                                        </li>
+                                        <li>
+                                            <hr/>
+                                        </li>
+                                        <li>
+                                            <a href="/portals/anesthesia.html">Anesthesia</a>
+                                        </li>
+                                        <li>
+                                            <a href="/bassett/index.html">Bassett</a>
+                                        </li>
+                                        <li>
+                                            <a href="/portals/cardiology.html">Cardiology</a>
+                                        </li>
+                                        <li>
+                                            <a href="/portals/emergency.html">Emergency</a>
+                                        </li>
+                                        <li>
+                                            <a href="/portals/ethics.html">Ethics</a>
+                                        </li>
+                                        <li>
+                                            <a href="/portals/hematology.html">Hematology</a>
+                                        </li>
+                                        <li>
+                                            <a href="/portals/history/index.html">History</a>
+                                        </li>
+                                        <li>
+                                            <a href="/portals/internal-medicine.html">Internal
+                                                Medicine</a>
+                                        </li>
+                                        <li>
+                                            <a href="/portals/lpch-cerner.html">LPCH LINKS Tool</a>
+                                        </li>
+                                        <li>
+                                            <a href="/portals/pharmacy.html">Pharmacy</a>
+                                        </li>
+                                        <li>
+                                            <a href="/portals/pulmonary.html">Pulmonary</a>
+                                        </li>
+                                        <li>
+                                            <hr/>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M"
+                                                >PubMed</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.google.com/">Google</a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;PAGE=First"
+                                                >Lane Catalog</a>
+                                        </li>
+                                        <li>
+                                            <a href="http://med.stanford.edu/seminars/">Biomed
+                                                Seminars</a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="https://stanfordwho.stanford.edu/SWApp/jsp/index.jsp"
+                                                >StanfordWho</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <!--<fieldset id="pico">
+                                <input id="p" type="text" value="patient condition"/>
+                                <input id="i" type="text" value="intervention"/>
+                                <input id="c" type="text" value="comparison"/>
+                                <input id="o" type="text" value="outcome"/>
+                            </fieldset>-->
+                            <fieldset>
+                                <label for="searchTerms">Search: </label>
+                                <input type="text" id="searchTerms" name="q"/>
+                                <input type="hidden" id="searchSource" name="source" value="all"/>
+                                <input id="searchSubmit" type="submit" value="Search"/>
+                                <img id="searchIndicator" alt="[searching]" style="visibility:hidden"
                                     src="/images/templates/irt3/indicator.gif"/>
-                            </div>
+                            </fieldset>
                         </form>
                     </div>
                     <div id="bd">
@@ -175,7 +246,8 @@
                             <a href="/contacts/index.html" title="Contact Us..">Contact Us</a>
                         </li>
                         <li>
-                            <a href="/contacts/index.html?loadTab=feedback" title="Feedback..">Feedback</a>
+                            <a href="/contacts/index.html?loadTab=feedback" title="Feedback.."
+                                >Feedback</a>
                         </li>
                         <li>
                             <a href="http://irt-integration.stanford.edu/display/lane/Start"
@@ -189,8 +261,8 @@
                 </div>
             </div>
             <ul id="gft">
-                <li>&#169;<a href="http://stanfordmedicine.stanford.edu"><span><?laneweb current-year?></span>
-                        Stanford Medicine</a></li>
+                <li>&#169;<a href="http://stanfordmedicine.stanford.edu"
+                            ><span><?laneweb current-year?></span> Stanford Medicine</a></li>
                 <li>
                     <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
                 </li>
@@ -203,6 +275,25 @@
                 resources.</span>
         </div>
         <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/utilities/utilities.js&amp;2.7.0/build/container/container-min.js&amp;2.7.0/build/json/json-min.js&amp;2.7.0/build/history/history-min.js"> </script>
-        <script src="/javascript/lane-all.js" type="text/javascript"> </script>
+        <!--<script src="/javascript/lane-all.js" type="text/javascript"> </script>-->
+        <script src="/javascript/lane.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-search.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-tracking.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-webtrends.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-google.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-eresources.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-spellcheck.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-searchtabs.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-findit.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-querymap.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-popin.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-metasearch.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-search-history.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-tooltips.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-popup.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-ie.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-forms.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-bassett.js" type="text/javascript"> </script>
+        <script src="/javascript/lane-pico.js" type="text/javascript"> </script>
     </body>
 </html>

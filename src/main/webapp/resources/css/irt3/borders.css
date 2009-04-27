@@ -1,17 +1,16 @@
 #shd li {
 border-left:1px dotted #616150;
 }
-
 #ft {
 border-top:1px solid #C1C1C1;
 }
-#ft li{
+#ft li {
 border-left:1px dotted #C1C1C1;
 }
-#gft li {
+#gft li, #search li {
 border-left:1px dotted #818181;
 }
-#ft li:first-child, #gft li:first-child, #shd li:first-child {
+#search fieldset, #ft li:first-child, #gft li:first-child, #shd li:first-child, #search li:first-child, #search li li, div#otherPortalOptions {
 border:none;
 }
 div#leftColumn div, div#rightColumn div {
@@ -43,10 +42,7 @@ div#popInContent {
 border-bottom:1px solid #9C9A90;
 border-top: 4px solid #9C9A90;
 }
-div#otherPortalOptions {
-border:none;
-}
-div#otherPortalOptions ul {
+div#otherPortalOptions ul, #otherSearches ul {
 border:1px solid #999;
 }
 div.wrapperBox {
@@ -74,10 +70,6 @@ border-bottom: 1px black solid;
 #popupContainer {
 border:1px solid black;
 }
-/*UNUSED===============================
-This could not be used with a bottom margin in IE6 (gave decendent tabs a bottom margin too)
-#bd h1 {
-border-bottom: 1px solid #c1c1c1;
+fieldset {
+border: 1px solid #c1c1c1;
 }
-
-*/

@@ -1,17 +1,58 @@
 LANE.search = LANE.search ||  function() {
     var d = document,
+    getSourceFromTab = function(tab) {
+        if (tab.id) {
+            return tab.id.substring(0,tab.id.indexOf('SearchTab'));
+        }
+        return tab.getElementsByTagName('A')[0].href;
+    },
+/*
+    togglePico = function(source) {
+        if (source == 'clinical') {
+            pico.style.display = 'block';
+        } else {
+            pico.style.display = 'none';
+        }
+    },
+*/
+/*
+        pico, //the pico fieldset
+*/
         form, //the form Element
         submit, //the submit input
-        select, //the select Element
-        selected, //the selected option
         E = YAHOO.util.Event, //shorthand for Event
-        searching = false, //searching state
+        searching, //searching state
         searchString,
         encodedString,
         source,
-        ind = document.getElementById('searchIndicator'),
+        indicator,
+        //mapping between source and label, needs to by kept in sync with laneweb.xsl
+        sourceNameMap = {
+        'ej':'eJournals',
+        'book':'eBooks',
+        'cc':'Calculators',
+        'database':'Databases',
+        'software':'Software',
+        'video':'Videos',
+        'lanesite':'Lane Site',
+        'bassett':'Bassett',
+        'peds':'Pediatrics',
+        'history':'History',
+        'research':'Bioresearch',
+        'all':'All',
+        'clinical':'Clinical',
+        '/portals/pharmacy.html':'Pharmacy',
+        '/portals/anesthesia.html':'Anesthesia',
+        '/portals/cardiology.html':'Cardiology',
+        '/portals/hematology.html':'Hematology',
+        '/portals/internal-medicine.html':'Internal Medicine',
+        '/portals/lpch-cerner.html':'LPCH LINKS Tool',
+        '/portals/pulmonary.html':'Pulmonary',
+        '/portals/emergency.html':'Emergency',
+        '/portals/ethics.html':'Ethics'
+        },
         // publicly available functions:
-        o = {
+        lanesearch = {
             startSearch: function(){
                 //TODO: revisit this, do we want to prevent a new search when one in progress?
 //                if (searching) {
@@ -21,11 +62,11 @@ LANE.search = LANE.search ||  function() {
                     throw('nothing to search for');
                 }
                 searching = true;
-                ind.style.visibility = 'visible';
+                indicator.style.visibility = 'visible';
             },
             stopSearch: function(){
                 searching = false;
-                ind.style.visibility = 'hidden';
+                indicator.style.visibility = 'hidden';
             },
             isSearching: function(){
                 return searching;
@@ -58,64 +99,54 @@ LANE.search = LANE.search ||  function() {
                 return encodedString;
             },
             getSearchSource: function() {
-                var query, vars, pair, i;
-                if (source === undefined) {
-                    query = location.search.substring(1);
-                    vars = query.split('&');
-                    for (i = 0; i < vars.length; i++) {
-                        pair = vars[i].split('=');
-                        if (pair[0] == 'source') {
-                            source = pair[1];
-                            break;
-                        }
-                    }
-                    if (source === undefined) {
-                        source = '';
-                    }
-                }
-                return source;
+                return source.value;
             },
             setSearchSource: function(s) {
-                for (var i = 0; i < select.options.length; i++) {
-                    if (select.options[i].value == s) {
-                        select.selectedIndex = i;
-                        break;
-                    }
+                var searchTab = d.getElementById(source.value + 'SearchTab');
+                if (searchTab) {
+                    searchTab.className = '';
                 }
+                searchTab = d.getElementById(s + 'SearchTab');
+                if (searchTab) {
+                    searchTab.className = 'activeSearchTab';
+                }
+                submit.value = 'Search ' + sourceNameMap[s];
+/*
+                togglePico(s);
+*/
+                source.value = s;
             }
         };
-    // initialize on load
-    E.addListener(this,'load',function(){
-        form = d.getElementById('searchForm');
-        if (form) {
+    // initialize when search form content ready
+    E.onContentReady('search',function(){
+          form = this;
             submit = d.getElementById('searchSubmit');
-            //change submit button image mouseover/mouseout
-            submit.activate = function(e){
-                this.src = this.src.replace('search_btn.gif', 'search_btn_f2.gif');
-            };
-            submit.deactivate = function(e){
-                this.src = this.src.replace('search_btn_f2.gif', 'search_btn.gif');
-            };
+            indicator = d.getElementById('searchIndicator');
+            source = d.getElementById('searchSource');
+/*
+            pico = d.getElementById('pico');
+*/
+            searching = false;
+            var i, tabs = form.getElementsByTagName('LI');
+
+
+            for (i = 0; i < tabs.length; i++) {
+                if (tabs[i].id != 'otherSearches') {
+                    tabs[i].clicked = function(event){
+                        lanesearch.setSearchSource(getSourceFromTab(this));
+                        YAHOO.util.Event.preventDefault(event);
+                    };
+                }
+            }
             E.addListener(form, 'submit', function(e){
                 try {
-                    o.startSearch();
+                    lanesearch.startSearch();
                 } catch (ex) {
                     alert(ex);
                     E.preventDefault(e);
                 }
             });
-            select = d.getElementById('searchSelect');
-			if(select){
-	            selected = select.options[select.selectedIndex];
-	            E.addListener(select, 'change', function(){
-	                if (this.options[this.selectedIndex].disabled) {
-	                    this.selectedIndex = selected.index;
-	                } else {
-	                    selected = this.options[this.selectedIndex];
-	                }
-	            });
-			}
         }
-    });
-    return o;
+    );
+    return lanesearch;
 }();

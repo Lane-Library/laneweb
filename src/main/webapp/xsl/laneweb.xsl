@@ -49,6 +49,32 @@
     <xsl:param name="referrer"/>
 
     <xsl:param name="name"/>
+    
+    <!-- matches $search-form-select ask key to text value, keep this in sync with lane-search.js-->
+    <xsl:variable name="source-name-map">
+        <entry key="ej" value="eJournals"/>
+        <entry key="book" value="eBooks"/>
+        <entry key="cc" value="Calculators"/>
+        <entry key="database" value="Databases"/>
+        <entry key="software" value="Software"/>
+        <entry key="video" value="Videos"/>
+        <entry key="lanesite" value="Lane Site"/>
+        <entry key="bassett" value="Bassett"/>
+        <entry key="peds" value="Pediatrics"/>
+        <entry key="history" value="History"/>
+        <entry key="research" value="Bioresearch"/>
+        <entry key="all" value="All"/>
+        <entry key="clinical" value="Clinical"/>
+        <entry key="/portals/pharmacy.html" value="Pharmacy"/>
+        <entry key="/portals/anesthesia.html" value="Anesthesia"/>
+        <entry key="/portals/cardiology.html" value="Cardiology"/>
+        <entry key="/portals/hematology.html" value="Hematology"/>
+        <entry key="/portals/internal-medicine.html" value="Internal Medicine"/>
+        <entry key="/portals/lpch-cerner.html" value="LPCH LINKS Tool"/>
+        <entry key="/portals/pulmonary.html" value="Pulmonary"/>
+        <entry key="/portals/emergency.html" value="Emergency"/>
+        <entry key="/portals/ethics.html" value="Ethics"/>
+    </xsl:variable>
 
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
@@ -243,6 +269,52 @@
       </xsl:if>
 	</xsl:template>-->
 	<!-- END persistent login  -->
+    
+    <!-- search form -->
+    <!-- set the value of the submit button to the value from the $source-name-map related to $search-form-select -->
+    <xsl:template match="h:form[@id='search']//h:input[@type='submit']/@value">
+        <xsl:attribute name="value">
+            <xsl:value-of select="."/>
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="$source-name-map/h:entry[@key=$search-form-select]/@value"/>
+        </xsl:attribute>
+    </xsl:template>
+    
+    <!-- set the value of the source input to $search-form-select -->
+    <xsl:template match="h:form[@id='search']//h:input[@id='source']/@value">
+        <xsl:attribute name="value">
+            <xsl:value-of select="$search-form-select"/>
+        </xsl:attribute>
+    </xsl:template>
+    
+    <!--<xsl:template match="h:fieldset[@id='pico']">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:if test="$search-form-select != 'clinical'">
+                <xsl:attribute name="style">display:none</xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
+    </xsl:template>-->
+    
+    <!-- always provide a search <a> element for styling purposes -->
+    <xsl:template match="h:form[@id='search']//h:a">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()|child::node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- set the activeSearchTab class depending on $search-form-select, requires id to be <$search-form-select>SearchTab -->
+    <xsl:template match="h:form//h:li">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:if test="@id = concat($search-form-select, 'SearchTab')">
+                <xsl:attribute name="class">activeSearchTab</xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
+    </xsl:template>
+    <!-- end search form -->
 
     <xsl:template
         match="h:div[@id='leftColumn']|h:div[@id='rightColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">

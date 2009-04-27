@@ -45,8 +45,11 @@ float: right;
 #ft, #gft, #hd form, #shd {
 text-align:center;
 }
-#ft li, #gft li, #shd li {
+#ft li, #gft li, #shd li, #search li {
 display:inline;
+}
+#search li li {
+display:block
 }
 /*IE6 needs this or floats get screwy*/
 #hd, .tabs {
@@ -79,15 +82,6 @@ overflow:hidden;
 font-size:smaller;
 visibility:hidden
 }
-/*#pl {
-float:right;
-}
-#pl div{
-display:inline;
-}
-#hd h3 {
-clear:right;
-}*/
 #hd h1 a, #irt a {
 display:block;
 height:100%;
@@ -96,11 +90,6 @@ width:100%;
 #hd h1 span, .tooltips, .popups, span#findIt, #spellCheck, span#queryMapping {
 display:none;
 }
-/*#hd h3 {
-float:right;
-width:69px;
-height:11px;
-}*/
 #proxyOn, #proxyOff {
 float:right;
 margin-right:-1em;
@@ -165,17 +154,25 @@ display:block;
 float:right;
 position:relative;
 }
-#otherPortalOptions ul {
+#otherSearches {
+position:relative
+}
+#otherPortalOptions ul, #otherSearches ul {
 display:none;
 position:absolute;
-top:2em;
 left:0;
 z-index:2;
 }
-#otherPortalOptions:hover ul, div#otherPortalOptions.hover ul {
+#otherPortalOptions ul {
+top:2em;
+}
+#otherSearches ul {
+top:1em;
+}
+#otherPortalOptions:hover ul, div#otherPortalOptions.hover ul, #otherSearches:hover ul, #otherSearches.hover ul {
 display:block;
 }
-#otherPortalOptions li {
+#otherPortalOptions li, #otherSearches li {
 white-space:nowrap;
 }
 h2.ImageTitle img {
@@ -242,52 +239,3 @@ float:right;
 td {
 vertical-align: top;
 }
-/* UNUSED============================================
-
-
-h2.SquareTitle {
-   	background-color:#F3F4E6;
-	background-image:url(/././images/templates/irt3/bg_heading_small.gif);
-	background-repeat:repeat;
-	width: 184px;
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
-	text-align:left;
-	font-size: 1.2em;
-}
-
-
-
-#searchForm {
-text-align:center;
-}
-div.aGeneralBox, div.tipText {
-width: 170px;
-}
-
-div.sideColumn h2 {
-text-align: center;
-}
-h2.ImageTitle img {
-display:block;
-width:100%
-}
-div.eMainBox {
-clear:both;
-}
-h2.eMainBox {
-float:left;
-}
-form#portalForm {
-float:right;
-}
-
-div.imageFloatLft, div.imageFloatLeft {
-float:left;
-}
-
-div.tabTip {
-float:right;
-}
-
-*/

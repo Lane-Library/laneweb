@@ -9,6 +9,11 @@ text-decoration:none;
 #nav {
 font-weight:600;
 }
+.activeSearchTab a, .activeSearchTab a:visited, .activeSearchTab a:hover {
+color:black;
+text-decoration:none;
+cursor:text
+}
 #breadcrumb {
 font-size:0.85em;
 }
@@ -53,6 +58,9 @@ color:black;
 }
 #hd h2 span {
 color:#990000;
+}
+#otherSearches {
+text-align:left
 }
 div#rightColumn h2, div#leftColumn h2 {
 text-align:left;
@@ -134,38 +142,3 @@ font-weight:bold;
 .tinyFont {
 font-size:xx-small;
 }
-
-/*UNUSED==============================
-div#leftColumn h3 {
-	text-align:left;
-	font-size: 1.2em;
-}
-
-#searchForm label {
-font-size:larger;
-font-weight:bolder;
-}
-td.sideColumn h2 {
-font-weight: 800;
-text-transform: uppercase;	
-}
-
-#footerDark {
-color:#fff;
-}
-#findItLink {
-font-weight:bolder;
-text-decoration:none;
-}
-li.eLibraryTabActive a, ul.queryMappingHeader li a, ul.queryMappingResults li a {
-text-decoration:none;
-}
-
-p.pList a { 
-text-decoration: none;
-}
-h3 a {
-text-decoration: underline;
-}
-
-*/

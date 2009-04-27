@@ -137,7 +137,7 @@ div.wrapperBox h2 {
 color:#666;
 background-color:#fff;
 }
-div#otherPortalOptions ul {
+div#otherPortalOptions ul, #otherSearches ul {
 background-color:white;
 color:inherit;
 }
@@ -183,69 +183,3 @@ background:#ccc;
 .grey {
 color: #999;
 }
-
-/*UNUSED==============================
-
-div#leftColumn h3 {
-	background-color:#F3F4E6;
-	background-image:url(/././images/templates/irt3/bg_heading_small.gif);
-	background-repeat:repeat-x;
-}
-
-div#leftColumn {
-	background-color: #F3F4E6;
-}
-
-	
-	line-height:110%;
-
-	background-image:url(/Templates/images/boxlabel_bkgnd.jpg);
-	background-repeat:repeat;
-	border-bottom:solid;
-	border-bottom-width:1px;
-	border-bottom-color:#C1C1C1;
-
-div#leftColumn  h2 {
-color:inherit;
-background-color:#F3F4E6;
-background-image: url(/././images/templates/irt3/navlabel_bkgnd.jpg);
-}
-
-td#rightColumnHome h2, td#leftColumnHome h2 {
-background-color:#ececec;
-color:inherit;
-}
-
-div.eMainBox {
-background: url(/././images/templates/irt3/blueToWhiteBoxGrad.jpg) repeat-x top left;
-}
-div.eMainBox * {
-background-color:transparent;
-}
-h2.eMainBox {
-background-color:#b7b5ab;
-color:white;
-}
-
-dd li, ol li, ul.queryMappingResults li, ul.queryMappingHeader li {
-background-image:none;
-}
-#findItLink, #spellCheckLink {
-color: #900;
-background-color:inherit;
-}
-#footerDark {
-background-color: #5f5f5f;
-}
-#footerDark a {
-color: #fff;	
-}
-
-.alert {
-color: #900;
-}
-
-.area-hover {
-   background: #000000;
- }
-*/
