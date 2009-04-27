@@ -9,7 +9,7 @@ text-decoration:none;
 #nav {
 font-weight:600;
 }
-.activeSearchTab a, .activeSearchTab a:visited, .activeSearchTab a:hover {
+.activeSearchTab a, .activeSearchTab a:visited, .activeSearchTab a:hover, .activeSearchTab a:link {
 color:black;
 text-decoration:none;
 cursor:text
