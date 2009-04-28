@@ -90,9 +90,6 @@ width:100%;
 #hd h1 span, .tooltips, .popups, span#findIt, #spellCheck, span#queryMapping {
 display:none;
 }
-.tooltips, .popups {
-z-index:3
-}
 #proxyOn, #proxyOff {
 float:right;
 margin-right:-1em;
@@ -228,6 +225,9 @@ right:4px;
 top:5px;
 height:12px;
 width:12px;
+}
+.yui-tt {
+z-index:3
 }
 div.imageFloatLft, div.imageFloatLeft {
 float:left;

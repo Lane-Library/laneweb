@@ -150,7 +150,6 @@ LANE.search = LANE.search ||  function() {
 						} else {
 							event.srcElement.blur();
 						}
-						event.target.blur();
                         YAHOO.util.Event.preventDefault(event);
                     };
                 }
