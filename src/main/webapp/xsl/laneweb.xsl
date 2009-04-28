@@ -111,6 +111,7 @@
 
     <xsl:variable name="search-form-select">
         <xsl:choose>
+            <xsl:when test="$source"><xsl:value-of select="$source"/></xsl:when>
             <xsl:when test="starts-with($request-uri,'online/ej')">ej</xsl:when>
             <xsl:when test="starts-with($request-uri,'online/eb')">book</xsl:when>
             <xsl:when test="starts-with($request-uri,'online/cc')">cc</xsl:when>
@@ -272,7 +273,7 @@
     
     <!-- search form -->
     <!-- set the value of the submit button to the value from the $source-name-map related to $search-form-select -->
-    <xsl:template match="h:form[@id='search']//h:input[@type='submit']/@value">
+    <xsl:template match="h:input[@type='searchSubmit']/@value">
         <xsl:attribute name="value">
             <xsl:value-of select="."/>
             <xsl:text> </xsl:text>
@@ -281,7 +282,7 @@
     </xsl:template>
     
     <!-- set the value of the source input to $search-form-select -->
-    <xsl:template match="h:form[@id='search']//h:input[@id='source']/@value">
+    <xsl:template match="h:input[@id='searchSource']/@value">
         <xsl:attribute name="value">
             <xsl:value-of select="$search-form-select"/>
         </xsl:attribute>
