@@ -67,7 +67,7 @@
                                 otherSearches.activate = function(){
                                     shadedBorderBottom.style.zIndex = -1;
                                 };
-                                otherPortalOptions.deactivate = function(){
+                                otherSearches.deactivate = function(){
                                     shadedBorderBottom.style.zIndex = 1;
                                 };
                             }
