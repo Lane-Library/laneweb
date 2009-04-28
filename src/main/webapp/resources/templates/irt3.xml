@@ -103,7 +103,7 @@
                                 href="http://irt.stanford.edu/" title="IRT...">IRT</a> &#xBB;
                             <?laneweb breadcrumb?></div>
                         <form id="search" action="/search.html">
-                            <ul>
+                            <ul id="searchTabs">
                                 <li id="allSearchTab">
                                     <a href="/index.html">All</a>
                                 </li>
