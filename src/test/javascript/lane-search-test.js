@@ -40,7 +40,7 @@
             }
         },
 		testSetSearchSource: function() {
-			var searchSubmit = document.getElementById('searchSubmit'),
+			var searchLabel = document.getElementById('searchLabel'),
 			    searchSource = document.getElementById('searchSource'),
                 allSearchTab = document.getElementById('allSearchTab'),
 				ejSearchTab = document.getElementById('ejSearchTab');
@@ -48,7 +48,7 @@
 			Assert.areEqual('',ejSearchTab.className);
             Assert.areEqual('activeSearchTab', allSearchTab.className);
 			LANE.search.setSearchSource('ej');
-			Assert.areEqual('Search eJournals', searchSubmit.value);
+			Assert.areEqual('eJournals', searchLabel.innerHTML);
 			Assert.areEqual('ej', LANE.search.getSearchSource());
             Assert.areEqual('',allSearchTab.className);
             Assert.areEqual('activeSearchTab', ejSearchTab.className);

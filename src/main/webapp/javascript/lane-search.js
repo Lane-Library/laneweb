@@ -20,6 +20,8 @@ LANE.search = LANE.search ||  function() {
 */
         form, //the form Element
         submit, //the submit input
+        label, //the label span for substituting text
+        terms, //the search terms input
         E = YAHOO.util.Event, //shorthand for Event
         searching, //searching state
         searchString,
@@ -110,7 +112,7 @@ LANE.search = LANE.search ||  function() {
                 if (searchTab) {
                     searchTab.className = 'activeSearchTab';
                 }
-                submit.value = 'Search ' + sourceNameMap[s];
+                label.innerHTML = sourceNameMap[s];
 /*
                 togglePico(s);
 */
@@ -120,20 +122,35 @@ LANE.search = LANE.search ||  function() {
     // initialize when search form content ready
     E.onContentReady('search',function(){
           form = this;
+		  label = d.getElementById('searchLabel');
             submit = d.getElementById('searchSubmit');
             indicator = d.getElementById('searchIndicator');
             source = d.getElementById('searchSource');
+			terms = d.getElementById('searchTerms');
 /*
             pico = d.getElementById('pico');
 */
+            //change submit button image mouseover/mouseout
+            submit.activate = function(e){
+                this.src = this.src.replace('search_btn.gif', 'search_btn_f2.gif');
+            };
+            submit.deactivate = function(e){
+                this.src = this.src.replace('search_btn_f2.gif', 'search_btn.gif');
+            };
             searching = false;
             var i, tabs = form.getElementsByTagName('LI');
 
 
             for (i = 0; i < tabs.length; i++) {
-                if (tabs[i].id != 'otherSearches') {
+                if (tabs[i].id && tabs[i].id != 'otherSearches') {
                     tabs[i].clicked = function(event){
                         lanesearch.setSearchSource(getSourceFromTab(this));
+						if (event.target) {
+							event.target.blur();
+						} else {
+							event.srcElement.blur();
+						}
+						event.target.blur();
                         YAHOO.util.Event.preventDefault(event);
                     };
                 }

@@ -90,12 +90,15 @@ width:100%;
 #hd h1 span, .tooltips, .popups, span#findIt, #spellCheck, span#queryMapping {
 display:none;
 }
+.tooltips, .popups {
+z-index:3
+}
 #proxyOn, #proxyOff {
 float:right;
 margin-right:-1em;
 }
 #searchTerms {
-width:25em;
+width:45em;
 }
 input#searchSubmit {
 vertical-align:text-bottom;

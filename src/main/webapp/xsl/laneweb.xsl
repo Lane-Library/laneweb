@@ -117,15 +117,13 @@
             <xsl:when test="starts-with($request-uri,'online/cc')">cc</xsl:when>
             <xsl:when test="starts-with($request-uri,'online/db')">database</xsl:when>
             <xsl:when test="starts-with($request-uri,'online/video')">video</xsl:when>
-            <xsl:when test="starts-with($request-uri,'services')">faq</xsl:when>
-            <xsl:when test="starts-with($request-uri,'howto')">faq</xsl:when>
+            <xsl:when test="starts-with($request-uri,'services')">lanesite</xsl:when>
+            <xsl:when test="starts-with($request-uri,'howto')">lanesite</xsl:when>
             <xsl:when test="starts-with($request-uri,'bassett')">bassett</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/peds')">peds</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/picu')">peds</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/history')">history</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/bioresearch')">research</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/patient')">all</xsl:when>
-            <xsl:when test="starts-with($request-uri,'portals/cultural')">all</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/pharmacy')"
                 >/portals/pharmacy.html</xsl:when>
             <xsl:when test="starts-with($request-uri,'portals/anesthesia')"
@@ -273,12 +271,11 @@
     
     <!-- search form -->
     <!-- set the value of the submit button to the value from the $source-name-map related to $search-form-select -->
-    <xsl:template match="h:input[@type='searchSubmit']/@value">
-        <xsl:attribute name="value">
-            <xsl:value-of select="."/>
-            <xsl:text> </xsl:text>
+    <xsl:template match="h:span[@id='searchLabel']">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
             <xsl:value-of select="$source-name-map/h:entry[@key=$search-form-select]/@value"/>
-        </xsl:attribute>
+        </xsl:copy>
     </xsl:template>
     
     <!-- set the value of the source input to $search-form-select -->

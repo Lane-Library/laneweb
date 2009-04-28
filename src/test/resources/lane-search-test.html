@@ -15,7 +15,7 @@
     <body>
                         <form id="search" action="/search.html">
                             <ul>
-                                <li id="allSearchTab" class='activeSearchTab'>
+                                <li id="allSearchTab" class="activeSearchTab">
                                     <a href="/index.html">All</a>
                                 </li>
                                 <li id="ejSearchTab">
@@ -24,39 +24,20 @@
                                 <li id="bookSearchTab">
                                     <a href="/online/eb.html">eBooks</a>
                                 </li>
-                                <li id="">
+                                <li id="clinicalSearchTab">
                                     <a href="/portals/clinical.html">Clinical</a>
                                 </li>
+                                <li id="pedsSearchTab">
+                                    <a href="/portals/peds.html">Pediatrics</a>
+                                </li>
+                                <li id="researchSearchTab">
+                                    <a href="/portals/bioresearch.html">Bioresearch</a>
+                                </li>
                                 <li id="otherSearches">
-                                    <a href=".">Other Searches</a>
+                                    <a href="#">Other Searches</a>
                                     <ul>
                                         <li>
-                                            <a href="/online/db.html">Databases</a>
-                                        </li>
-                                        <li>
-                                            <a href="/services/computing/laneApplications.html"
-                                                >Software</a>
-                                        </li>
-                                        <li>
-                                            <a href="/online/videobrowse.html">Video</a>
-                                        </li>
-                                        <li>
-                                            <a href="/online/ccbrowse.html">medCalcs</a>
-                                        </li>
-                                        <li>
-                                            <a href="/index.html">Lane Site</a>
-                                        </li>
-                                        <li>
-                                            <hr/>
-                                        </li>
-                                        <li>
-                                            <a href="/portals/bioresearch.html">Bioresearch</a>
-                                        </li>
-                                        <li>
-                                            <a href="/portals/peds.html">Pediatrics</a>
-                                        </li>
-                                        <li>
-                                            <hr/>
+                                            <h3>Portals</h3>
                                         </li>
                                         <li>
                                             <a href="/portals/anesthesia.html">Anesthesia</a>
@@ -92,45 +73,38 @@
                                         <li>
                                             <a href="/portals/pulmonary.html">Pulmonary</a>
                                         </li>
-                                        <li>
-                                            <hr/>
+                                        <li><h3>Collections</h3></li>
+                                        <li id="databaseSearchTab">
+                                            <a href="/online/db.html">Databases</a>
                                         </li>
-                                        <li>
-                                            <a
-                                                href="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M"
-                                                >PubMed</a>
+                                        <li id="softwareSearchTab">
+                                            <a href="/services/computing/laneApplications.html"
+                                                >Software</a>
                                         </li>
-                                        <li>
-                                            <a href="http://www.google.com/">Google</a>
+                                        <li id="videoSearchTab">
+                                            <a href="/online/videobrowse.html">Video</a>
                                         </li>
-                                        <li>
-                                            <a
-                                                href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;PAGE=First"
-                                                >Lane Catalog</a>
+                                        <li id="ccSearchTab">
+                                            <a href="/online/ccbrowse.html">medCalcs</a>
                                         </li>
-                                        <li>
-                                            <a href="http://med.stanford.edu/seminars/">Biomed
-                                                Seminars</a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="https://stanfordwho.stanford.edu/SWApp/jsp/index.jsp"
-                                                >StanfordWho</a>
+                                        <li id="lanesiteSearchTab">
+                                            <a href="/index.html">Lane Site</a>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
-                            <fieldset id="pico">
+                            <!--<fieldset id="pico">
                                 <input id="p" type="text" value="patient condition"/>
                                 <input id="i" type="text" value="intervention"/>
                                 <input id="c" type="text" value="comparison"/>
                                 <input id="o" type="text" value="outcome"/>
-                            </fieldset>
+                            </fieldset>-->
                             <fieldset>
-                                <label for="q">Search: </label>
+                                <label for="searchTerms">Search <span id="searchLabel">All</span>: </label>
                                 <input type="text" id="searchTerms" name="q"/>
                                 <input type="hidden" id="searchSource" name="source" value="all"/>
-                                <input id="searchSubmit" type="submit" value="Search"/>
+                                <input id="searchSubmit" type="image" src="/images/templates/irt3/search_btn.gif" value="Search"/>
+                                <!--<input id="searchSubmit" type="submit" value="Search"/>-->
                                 <img id="searchIndicator" alt="[searching]" style="visibility:hidden"
                                     src="/images/templates/irt3/indicator.gif"/>
                             </fieldset>
