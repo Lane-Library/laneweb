@@ -9,23 +9,22 @@ LANE.search = LANE.search ||  function() {
         return path.substring(path.indexOf('/portals'));
     },
     getTabForSource = function(source) {
-        var tabs, links, path, i;
-        if (source.indexOf('/portals') > -1) {
-            tabs = d.getElementById('searchTabs').getElementsByTagName('LI');
-            for (i = 0; i < tabs.length; i++) {
-                links = tabs[i].getElementsByTagName('A');
-                if (links.length == 1) {
-                    path = tabs[i].getElementsByTagName('A')[0].pathname;
-                    if (path.indexOf(source) > 0) {
-                        return tabs[i];
-                    }
+        var links, path, i, tabs = d.getElementById('searchTabs').getElementsByTagName('LI');
+        for (i = 0; i < tabs.length; i++) {
+            if (tabs[i].id && tabs[i].id == source + 'SearchTab') {
+                return tabs[i];
+            }
+            links = tabs[i].getElementsByTagName('A');
+            if (links.length == 1) {
+                path = links[0].pathname;
+                if (path.indexOf(source) > -1) {
+                    return tabs[i];
                 }
             }
         }
-        return d.getElementById(source + 'SearchTab');
     },
     getActiveSearchTab = function() {
-        var tabs = d.getElementById('searchTabs').getElementsByTagName('LI'), i, path;
+        var tabs = d.getElementById('searchTabs').getElementsByTagName('LI'), i;
         for (i = 0; i < tabs.length; i++) {
             if (tabs[i].className == 'activeSearchTab') {
                 return tabs[i];
@@ -74,7 +73,7 @@ LANE.search = LANE.search ||  function() {
         '/portals/anesthesia.html':'Anesthesia',
         '/portals/cardiology.html':'Cardiology',
         '/portals/hematology.html':'Hematology',
-		'/portals/history/index.html':'History',
+        '/portals/history/index.html':'History',
         '/portals/internal-medicine.html':'Internal Medicine',
         '/portals/lpch-cerner.html':'LPCH LINKS Tool',
         '/portals/pulmonary.html':'Pulmonary',
