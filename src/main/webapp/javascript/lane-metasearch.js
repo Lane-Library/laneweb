@@ -17,7 +17,7 @@
 			}
 		};
 
-    YAHOO.util.Event.addListener(this,'load',function() {
+    YAHOO.util.Event.onDOMReady(function(){
 		// check for presence of search term and metasearch classNames
 		if( LANE.search.getEncodedSearchString() && YAHOO.util.Dom.getElementsByClassName('metasearch','a').length > 0 ){
 			

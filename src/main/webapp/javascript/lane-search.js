@@ -87,7 +87,7 @@ LANE.search = LANE.search ||  function() {
 //                if (searching) {
 //                    throw('already searching');
 //                }
-                if (!form.q.value) {
+                if (!terms.value) {
                     throw('nothing to search for');
                 }
                 searching = true;
