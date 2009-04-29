@@ -295,20 +295,25 @@
         </xsl:copy>
     </xsl:template>-->
     
-    <!-- always provide a search <a> element for styling purposes -->
-    <xsl:template match="h:form[@id='search']//h:a">
+    <!-- always provide a search <a> element for styling purposes in searchTabs -->
+    <xsl:template match="h:ul[@id='searchTabs']//h:a">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()|child::node()"/>
         </xsl:copy>
     </xsl:template>
     
     <!-- set the activeSearchTab class depending on $search-form-select, requires id to be <$search-form-select>SearchTab -->
-    <xsl:template match="h:form//h:li">
+    <xsl:template match="h:ul[@id='searchTabs']//h:li">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
-            <xsl:if test="@id = concat($search-form-select, 'SearchTab')">
-                <xsl:attribute name="class">activeSearchTab</xsl:attribute>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="@id = concat($search-form-select, 'SearchTab')">
+                    <xsl:attribute name="class">activeSearchTab</xsl:attribute>
+                </xsl:when>
+                <xsl:when test="child::h:a/attribute::href = $search-form-select">
+                    <xsl:attribute name="class">activeSearchTab</xsl:attribute>
+                </xsl:when>
+            </xsl:choose>
             <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
     </xsl:template>

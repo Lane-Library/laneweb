@@ -1,10 +1,37 @@
 LANE.search = LANE.search ||  function() {
     var d = document,
     getSourceFromTab = function(tab) {
+        var path;
         if (tab.id) {
             return tab.id.substring(0,tab.id.indexOf('SearchTab'));
         }
-        return tab.getElementsByTagName('A')[0].href;
+        path = tab.getElementsByTagName('A')[0].pathname;
+        return path.substring(path.indexOf('/portals'));
+    },
+    getTabForSource = function(source) {
+        var tabs, links, path, i;
+        if (source.indexOf('/portals') > -1) {
+            tabs = d.getElementById('searchTabs').getElementsByTagName('LI');
+            for (i = 0; i < tabs.length; i++) {
+                links = tabs[i].getElementsByTagName('A');
+                if (links.length == 1) {
+                    path = tabs[i].getElementsByTagName('A')[0].pathname;
+                    if (path.indexOf(source) > 0) {
+                        return tabs[i];
+                    }
+                }
+            }
+        }
+        return d.getElementById(source + 'SearchTab');
+    },
+    getActiveSearchTab = function() {
+        var tabs = d.getElementById('searchTabs').getElementsByTagName('LI'), i, path;
+        for (i = 0; i < tabs.length; i++) {
+            if (tabs[i].className == 'activeSearchTab') {
+                return tabs[i];
+            }
+        }
+        return null;
     },
 /*
     togglePico = function(source) {
@@ -22,7 +49,7 @@ LANE.search = LANE.search ||  function() {
         submit, //the submit input
         label, //the label span for substituting text
         terms, //the search terms input
-        E = YAHOO.util.Event, //shorthand for Event
+        Event = YAHOO.util.Event, //shorthand for Event
         searching, //searching state
         searchString,
         encodedString,
@@ -47,6 +74,7 @@ LANE.search = LANE.search ||  function() {
         '/portals/anesthesia.html':'Anesthesia',
         '/portals/cardiology.html':'Cardiology',
         '/portals/hematology.html':'Hematology',
+		'/portals/history/index.html':'History',
         '/portals/internal-medicine.html':'Internal Medicine',
         '/portals/lpch-cerner.html':'LPCH LINKS Tool',
         '/portals/pulmonary.html':'Pulmonary',
@@ -104,11 +132,11 @@ LANE.search = LANE.search ||  function() {
                 return source.value;
             },
             setSearchSource: function(s) {
-                var searchTab = d.getElementById(source.value + 'SearchTab');
+                var searchTab = getActiveSearchTab();
                 if (searchTab) {
                     searchTab.className = '';
                 }
-                searchTab = d.getElementById(s + 'SearchTab');
+                searchTab = getTabForSource(s);
                 if (searchTab) {
                     searchTab.className = 'activeSearchTab';
                 }
@@ -120,13 +148,13 @@ LANE.search = LANE.search ||  function() {
             }
         };
     // initialize when search form content ready
-    E.onContentReady('search',function(){
+    Event.onContentReady('search',function(){
           form = this;
-		  label = d.getElementById('searchLabel');
+          label = d.getElementById('searchLabel');
             submit = d.getElementById('searchSubmit');
             indicator = d.getElementById('searchIndicator');
             source = d.getElementById('searchSource');
-			terms = d.getElementById('searchTerms');
+            terms = d.getElementById('searchTerms');
 /*
             pico = d.getElementById('pico');
 */
@@ -142,24 +170,24 @@ LANE.search = LANE.search ||  function() {
 
 
             for (i = 0; i < tabs.length; i++) {
-                if (tabs[i].id && tabs[i].id != 'otherSearches') {
+                if (tabs[i].getElementsByTagName('A').length == 1) {
                     tabs[i].clicked = function(event){
                         lanesearch.setSearchSource(getSourceFromTab(this));
-						if (event.target) {
-							event.target.blur();
-						} else {
-							event.srcElement.blur();
-						}
-                        YAHOO.util.Event.preventDefault(event);
+                        if (event.target) {
+                            event.target.blur();
+                        } else {
+                            event.srcElement.blur();
+                        }
+                        Event.preventDefault(event);
                     };
                 }
             }
-            E.addListener(form, 'submit', function(e){
+            Event.addListener(form, 'submit', function(e){
                 try {
                     lanesearch.startSearch();
                 } catch (ex) {
                     alert(ex);
-                    E.preventDefault(e);
+                    Event.preventDefault(e);
                 }
             });
         }

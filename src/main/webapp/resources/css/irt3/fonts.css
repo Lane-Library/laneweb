@@ -66,7 +66,7 @@ color:black;
 #hd h2 span {
 color:#990000;
 }
-#otherSearches {
+#otherSearches li {
 text-align:left
 }
 div#rightColumn h2, div#leftColumn h2 {

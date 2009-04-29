@@ -132,9 +132,6 @@
                                             <a href="/portals/anesthesia.html">Anesthesia</a>
                                         </li>
                                         <li>
-                                            <a href="/bassett/index.html">Bassett</a>
-                                        </li>
-                                        <li>
                                             <a href="/portals/cardiology.html">Cardiology</a>
                                         </li>
                                         <li>
@@ -163,6 +160,9 @@
                                             <a href="/portals/pulmonary.html">Pulmonary</a>
                                         </li>
                                         <li><h3>Collections</h3></li>
+                                        <li id="bassettSearchTab">
+                                            <a href="/bassett/index.html">Bassett</a>
+                                        </li>
                                         <li id="databaseSearchTab">
                                             <a href="/online/db.html">Databases</a>
                                         </li>
