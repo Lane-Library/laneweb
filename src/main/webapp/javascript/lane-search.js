@@ -6,6 +6,9 @@ LANE.search = LANE.search ||  function() {
             return tab.id.substring(0,tab.id.indexOf('SearchTab'));
         }
         path = tab.getElementsByTagName('A')[0].pathname;
+        if (path.indexOf('/') !== 0) {
+            path = '/' + path;
+        }
         return path.substring(path.indexOf('/portals'));
     },
     getTabForSource = function(source) {
@@ -17,6 +20,9 @@ LANE.search = LANE.search ||  function() {
             links = tabs[i].getElementsByTagName('A');
             if (links.length == 1) {
                 path = links[0].pathname;
+                if (path.indexOf('/') !== 0) {
+                    path = '/' + path;
+                }
                 if (path.indexOf(source) > -1) {
                     return tabs[i];
                 }
