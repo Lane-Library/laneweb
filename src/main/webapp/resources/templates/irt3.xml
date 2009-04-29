@@ -143,7 +143,7 @@
                                         <li>
                                             <a href="/portals/hematology.html">Hematology</a>
                                         </li>
-                                        <li>
+                                        <li id="historySearchTab">
                                             <a href="/portals/history/index.html">History</a>
                                         </li>
                                         <li>
