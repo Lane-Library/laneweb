@@ -128,6 +128,7 @@ LANE.search = LANE.search ||  function() {
                 }
             });
             initialized = true;
+            togglePico(lanesearch.getSearchSource());
         }
         };
         //initialize when content ready.
