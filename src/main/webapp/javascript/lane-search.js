@@ -1,10 +1,9 @@
 LANE.search = LANE.search ||  function() {
-    var d = document,
-    initialized = false,
-    getSourceFromTab = function(tab) {
+    var d = document, initialized = false,
+    getSourceFromTab = function(tab){
         var path;
         if (tab.id) {
-            return tab.id.substring(0,tab.id.indexOf('SearchTab'));
+            return tab.id.substring(0, tab.id.indexOf('SearchTab'));
         }
         path = tab.getElementsByTagName('A')[0].pathname;
         if (path.indexOf('/') !== 0) {
@@ -12,7 +11,7 @@ LANE.search = LANE.search ||  function() {
         }
         return path.substring(path.indexOf('/portals'));
     },
-    getTabForSource = function(source) {
+    getTabForSource = function(source){
         var links, path, i, tabs = d.getElementById('searchTabs').getElementsByTagName('LI');
         for (i = 0; i < tabs.length; i++) {
             if (tabs[i].id && tabs[i].id == source + 'SearchTab') {
@@ -30,37 +29,34 @@ LANE.search = LANE.search ||  function() {
             }
         }
     },
-    getActiveSearchTab = function() {
-        var tabs = d.getElementById('searchTabs').getElementsByTagName('LI'), i;
+    switchActiveTab = function(s){
+        var i, tabs = Dom.getElementsByClassName('activeSearchTab', 'LI', searchTabs);
         for (i = 0; i < tabs.length; i++) {
-            if (tabs[i].className == 'activeSearchTab') {
-                return tabs[i];
-            }
+            Dom.removeClass(tabs[i], 'activeSearchTab');
         }
-        return null;
+        Dom.addClass(getTabForSource(s), 'activeSearchTab');
     },
-/*
-    togglePico = function(source) {
-        if (source == 'clinical') {
-            pico.style.display = 'block';
+    togglePico = function(s) {
+        if (pico && s == '/portals/lpch-cerner.html') {
+            Dom.setStyle(pico, 'display', 'block');
         } else {
-            pico.style.display = 'none';
+            Dom.setStyle(pico, 'display', 'none');
         }
     },
-*/
-/*
         pico, //the pico fieldset
-*/
         form, //the form Element
         submit, //the submit input
         label, //the label span for substituting text
         terms, //the search terms input
         Event = YAHOO.util.Event, //shorthand for Event
+        Dom = YAHOO.util.Dom,
         searching, //searching state
         searchString,
         encodedString,
         source,
         indicator,
+        //the ul containing the search tabs
+        searchTabs,
         //mapping between source and label, needs to by kept in sync with laneweb.xsl
         sourceNameMap = {
         'ej':'eJournals',
@@ -96,9 +92,8 @@ LANE.search = LANE.search ||  function() {
             indicator = d.getElementById('searchIndicator');
             source = d.getElementById('searchSource');
             terms = d.getElementById('searchTerms');
-            /*
-     pico = d.getElementById('pico');
-     */
+            searchTabs = d.getElementById('searchTabs');
+            pico = d.getElementById('pico');
             //change submit button image mouseover/mouseout
             submit.activate = function(e){
                 this.src = this.src.replace('search_btn.gif', 'search_btn_f2.gif');
@@ -107,9 +102,8 @@ LANE.search = LANE.search ||  function() {
                 this.src = this.src.replace('search_btn_f2.gif', 'search_btn.gif');
             };
             searching = false;
+            
             var i, tabs = form.getElementsByTagName('LI');
-            
-            
             for (i = 0; i < tabs.length; i++) {
                 if (tabs[i].getElementsByTagName('A').length == 1) {
                     tabs[i].clicked = function(event){
@@ -136,7 +130,7 @@ LANE.search = LANE.search ||  function() {
             initialized = true;
         }
         };
-		//initialize when content ready.
+        //initialize when content ready.
         Event.onContentReady('search',function(){lazyInit();});
         // publicly available functions:
         lanesearch = {
@@ -149,11 +143,11 @@ LANE.search = LANE.search ||  function() {
                     throw('nothing to search for');
                 }
                 searching = true;
-                indicator.style.visibility = 'visible';
+                Dom.setStyle(indicator,'visibilty','visible');
             },
             stopSearch: function(){
                 searching = false;
-                indicator.style.visibility = 'hidden';
+                Dom.setStyle(indicator,'visibilty','hidden');
             },
             isSearching: function(){
                 return searching;
@@ -185,25 +179,16 @@ LANE.search = LANE.search ||  function() {
                 }
                 return encodedString;
             },
-			//get the search source, maybe initialize because event timing might allow this
-			//to be called before onContentReady event initializes.
+            //get the search source, maybe initialize because event timing might allow this
+            //to be called before onContentReady event initializes.
             getSearchSource: function() {
                 lazyInit();
                 return source.value;
             },
             setSearchSource: function(s) {
-                var searchTab = getActiveSearchTab();
-                if (searchTab) {
-                    searchTab.className = '';
-                }
-                searchTab = getTabForSource(s);
-                if (searchTab) {
-                    searchTab.className = 'activeSearchTab';
-                }
+                switchActiveTab(s);
                 label.innerHTML = sourceNameMap[s];
-/*
                 togglePico(s);
-*/
                 source.value = s;
             }
         };

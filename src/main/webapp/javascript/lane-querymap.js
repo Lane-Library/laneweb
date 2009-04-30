@@ -53,12 +53,12 @@ if (LANE.search.getEncodedSearchString()) {
                     if (document.getElementById('queryMappingDescriptor')) {
                         document.getElementById('queryMappingDescriptor').appendChild(document.createTextNode(LANE.search.querymap.resourceMap.descriptor));
                     }
-	                // track mapped term and descriptor
-	                img = document.createElement('img');
-	                img.style.display = "none";
-	                img.src = "/././graphics/spacer.gif?log=QM&d=" + LANE.search.querymap.resourceMap.descriptor + "&k=" + LANE.search.getEncodedSearchString();
-	                queryMapContainer.appendChild(img);
-	                
+                    // track mapped term and descriptor
+                    img = document.createElement('img');
+                    img.style.display = "none";
+                    img.src = "/././graphics/spacer.gif?log=QM&d=" + LANE.search.querymap.resourceMap.descriptor + "&k=" + LANE.search.getEncodedSearchString();
+                    queryMapContainer.appendChild(img);
+                    
                     LANE.search.querymap.getResultCounts();
                 }
             }

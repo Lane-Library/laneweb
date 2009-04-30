@@ -3,13 +3,13 @@ YAHOO.util.Event.addListener(this, 'load', function() {
     YAHOO.util.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function(){
             var host = document.location.host, 
-			pageTracker,
-			encode = function(value){
-		        if (encodeURIComponent) {
-		            return encodeURIComponent(value);
-		        }
-		        return escape(value);
-			};
+            pageTracker,
+            encode = function(value){
+                if (encodeURIComponent) {
+                    return encodeURIComponent(value);
+                }
+                return escape(value);
+            };
             if (_gat !== undefined) {
                 if ("lane.stanford.edu" == host) {
                     pageTracker = _gat._getTracker("UA-3202241-2");

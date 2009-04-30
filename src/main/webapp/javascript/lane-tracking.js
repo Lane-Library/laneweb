@@ -37,10 +37,10 @@ LANE.tracking = function(){
                     title = title.substring(0, title.indexOf('<'));
                 }
             }
-			if (title) {
+            if (title) {
                 //trim and normalize:
-				title = title.replace(/\s+/g,' ').replace(/^\s|\s$/g, '');
-			}
+                title = title.replace(/\s+/g,' ').replace(/^\s|\s$/g, '');
+            }
             //finally:
             if (!title) {
                 title = 'unknown';
@@ -72,8 +72,8 @@ LANE.tracking = function(){
                             }
                             host = host.substring(0, host.indexOf('/'));
                         } else {
-							path = '/';
-						}
+                            path = '/';
+                        }
                         query = '';
                         external = true;
                     } else if (node.rel && node.rel.indexOf('popup') === 0) {
@@ -94,10 +94,10 @@ LANE.tracking = function(){
                     path = '/' + path;
                 }
                 title = getTrackedTitle(node);
-				if (LANE.search) {
-					searchTerms = LANE.search.getSearchString();
-					searchSource = LANE.search.getSearchSource();
-				}
+                if (LANE.search) {
+                    searchTerms = LANE.search.getSearchString();
+                    searchSource = LANE.search.getSearchSource();
+                }
             return {
                 host: host,
                 path: path,
@@ -131,9 +131,9 @@ LANE.tracking = function(){
         isTrackable: function(event){
             var target = event.srcElement || event.target, link, documentHost, linkHost, relTokens;
             documentHost = document.location.host;
-			if (documentHost.indexOf(':') > -1) {
-				documentHost = documentHost.substring(0, documentHost.indexOf(':'));
-			}
+            if (documentHost.indexOf(':') > -1) {
+                documentHost = documentHost.substring(0, documentHost.indexOf(':'));
+            }
             if (event.type == 'click') {
                 if (target.className == 'eLibraryTab') {
                     return true;

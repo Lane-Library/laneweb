@@ -45,10 +45,10 @@ float: right;
 #ft, #gft, #hd form, #shd {
 text-align:center;
 }
-#ft li, #gft li, #shd li, #search li {
+#ft li, #gft li, #shd li, #searchTabs li {
 display:inline;
 }
-#search li li {
+#otherSearches li {
 display:block
 }
 /*IE6 needs this or floats get screwy*/

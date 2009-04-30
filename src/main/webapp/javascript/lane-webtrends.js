@@ -1,11 +1,11 @@
 (function() {
     var gImages=[],
-    	gIndex=0,
-    	DCS={},
-    	WT={},
-    	DCSext={},
+        gIndex=0,
+        DCS={},
+        WT={},
+        DCSext={},
         gDomain="irt-sdc.stanford.edu",
-    	gDcsId="dcssi6l0t1000004z9mg95sop_9v3k";
+        gDcsId="dcssi6l0t1000004z9mg95sop_9v3k";
 
     function dcsVar(){
         var i, dCurrent=new Date();
