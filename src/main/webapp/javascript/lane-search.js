@@ -1,5 +1,6 @@
 LANE.search = LANE.search ||  function() {
     var d = document,
+    initialized = false,
     getSourceFromTab = function(tab) {
         var path;
         if (tab.id) {
@@ -86,6 +87,57 @@ LANE.search = LANE.search ||  function() {
         '/portals/emergency.html':'Emergency',
         '/portals/ethics.html':'Ethics'
         },
+    // initialize when search form content ready
+    lazyInit = function(){
+        if (!initialized) {
+            form = d.getElementById('search');
+            label = d.getElementById('searchLabel');
+            submit = d.getElementById('searchSubmit');
+            indicator = d.getElementById('searchIndicator');
+            source = d.getElementById('searchSource');
+            terms = d.getElementById('searchTerms');
+            /*
+     pico = d.getElementById('pico');
+     */
+            //change submit button image mouseover/mouseout
+            submit.activate = function(e){
+                this.src = this.src.replace('search_btn.gif', 'search_btn_f2.gif');
+            };
+            submit.deactivate = function(e){
+                this.src = this.src.replace('search_btn_f2.gif', 'search_btn.gif');
+            };
+            searching = false;
+            var i, tabs = form.getElementsByTagName('LI');
+            
+            
+            for (i = 0; i < tabs.length; i++) {
+                if (tabs[i].getElementsByTagName('A').length == 1) {
+                    tabs[i].clicked = function(event){
+                        lanesearch.setSearchSource(getSourceFromTab(this));
+                        if (event.target) {
+                            event.target.blur();
+                        }
+                        else {
+                            event.srcElement.blur();
+                        }
+                        Event.preventDefault(event);
+                    };
+                }
+            }
+            Event.addListener(form, 'submit', function(e){
+                try {
+                    lanesearch.startSearch();
+                } 
+                catch (ex) {
+                    alert(ex);
+                    Event.preventDefault(e);
+                }
+            });
+            initialized = true;
+        }
+        };
+		//initialize when content ready.
+        Event.onContentReady('search',function(){lazyInit();});
         // publicly available functions:
         lanesearch = {
             startSearch: function(){
@@ -133,7 +185,10 @@ LANE.search = LANE.search ||  function() {
                 }
                 return encodedString;
             },
+			//get the search source, maybe initialize because event timing might allow this
+			//to be called before onContentReady event initializes.
             getSearchSource: function() {
+                lazyInit();
                 return source.value;
             },
             setSearchSource: function(s) {
@@ -152,50 +207,5 @@ LANE.search = LANE.search ||  function() {
                 source.value = s;
             }
         };
-    // initialize when search form content ready
-    Event.onContentReady('search',function(){
-          form = this;
-          label = d.getElementById('searchLabel');
-            submit = d.getElementById('searchSubmit');
-            indicator = d.getElementById('searchIndicator');
-            source = d.getElementById('searchSource');
-            terms = d.getElementById('searchTerms');
-/*
-            pico = d.getElementById('pico');
-*/
-            //change submit button image mouseover/mouseout
-            submit.activate = function(e){
-                this.src = this.src.replace('search_btn.gif', 'search_btn_f2.gif');
-            };
-            submit.deactivate = function(e){
-                this.src = this.src.replace('search_btn_f2.gif', 'search_btn.gif');
-            };
-            searching = false;
-            var i, tabs = form.getElementsByTagName('LI');
-
-
-            for (i = 0; i < tabs.length; i++) {
-                if (tabs[i].getElementsByTagName('A').length == 1) {
-                    tabs[i].clicked = function(event){
-                        lanesearch.setSearchSource(getSourceFromTab(this));
-                        if (event.target) {
-                            event.target.blur();
-                        } else {
-                            event.srcElement.blur();
-                        }
-                        Event.preventDefault(event);
-                    };
-                }
-            }
-            Event.addListener(form, 'submit', function(e){
-                try {
-                    lanesearch.startSearch();
-                } catch (ex) {
-                    alert(ex);
-                    Event.preventDefault(e);
-                }
-            });
-        }
-    );
     return lanesearch;
 }();
