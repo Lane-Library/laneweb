@@ -1,7 +1,4 @@
 /*TODO: fit into CY form once dev complete */
-#pico {
-display:none
-}
 #pico input#searchTerms{
 width:35em;
 }

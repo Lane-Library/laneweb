@@ -182,7 +182,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <fieldset id="pico">
+                            <fieldset id="pico" style="display:none">
                                 <!-- TODO: think about using rel attribute for field default values so we don't send defaults on query string -->
                                 <div class="acContainer">
                                     <input name="p" id="p" type="text" class="inputTip" value="patient condition"/>

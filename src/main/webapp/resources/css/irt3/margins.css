@@ -70,8 +70,11 @@ margin-right:10px;
 h2.ImageTitle img {
 margin:0;
 }
-.eLibraryTab, .metaSearchResults {
+.eLibraryTab, .metaSearchResults, #searchTabs li {
 margin-right: -1px;
+}
+#searchTabs li li {
+margin-right:0
 }
 #popInContent div {
 margin:1em;

@@ -285,15 +285,11 @@
         </xsl:attribute>
     </xsl:template>
     
-    <!--<xsl:template match="h:fieldset[@id='pico']">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:if test="$search-form-select != 'clinical'">
-                <xsl:attribute name="style">display:none</xsl:attribute>
+    <xsl:template match="h:fieldset[@id='pico']/@style">
+            <xsl:if test="$search-form-select != '/portals/lpch-cerner.html'">
+                <xsl:copy-of select="."/>
             </xsl:if>
-            <xsl:apply-templates select="child::node()"/>
-        </xsl:copy>
-    </xsl:template>-->
+    </xsl:template>
     
     <!-- always provide a search <a> element for styling purposes in searchTabs -->
     <xsl:template match="h:ul[@id='searchTabs']//h:a">
