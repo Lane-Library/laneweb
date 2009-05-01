@@ -9,15 +9,8 @@ text-decoration:none;
 #nav {
 font-weight:600;
 }
-/*.activeSearchTab {
-font-weight:bold
-}*/
-/*.activeSearchTab a, .activeSearchTab a:visited, .activeSearchTab a:hover, .activeSearchTab a:link {
-color:black;
-text-decoration:none;
-cursor:text
-}*/
 #otherSearches li h3 {
+text-align:left;
 font-weight:bold
 }
 #breadcrumb {

@@ -135,7 +135,10 @@
         class="edu.stanford.irt.lane.icd9.ICD9Translator"/>
 
     <bean id="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"
-        class="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
+    class="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
+    
+    <bean id="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
+        class="edu.stanford.irt.laneweb.proxy.ProxyHostManager"/>
 
     <bean id="org.apache.cocoon.components.modules.input.AbstractInputModule"
         class="edu.stanford.irt.laneweb.inputmodule.AbstractInputModule" abstract="true">
@@ -325,7 +328,12 @@
         class="org.apache.cocoon.generation.DirectoryGenerator" scope="prototype"> </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
-        class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
+    class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
+    
+    <bean name="org.apache.cocoon.transformation.Transformer/proxy-links"
+        class="edu.stanford.irt.laneweb.proxy.ProxyLinkTransformer" scope="prototype">
+        <property name="proxyHostManager" ref="edu.stanford.irt.laneweb.proxy.ProxyHostManager"/>
+    </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/resource"
         class="edu.stanford.irt.laneweb.NoCacheBigReader" scope="prototype"/>

@@ -11,6 +11,8 @@ public class User {
     public static final String SUNETID = "sunetid";
 
     public static final String TICKET = "ticket";
+    
+    public static final String PROXY_LINKS = "proxy-links";
 
     private String affiliation;
 

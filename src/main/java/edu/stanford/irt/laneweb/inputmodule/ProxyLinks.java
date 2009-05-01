@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
+import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.User;
 
 public class ProxyLinks extends AbstractInputModule {
@@ -43,6 +44,10 @@ public class ProxyLinks extends AbstractInputModule {
     protected Object doGetAttribute(final String key, final User user, final HttpServletRequest request) {
         if (null != user.getProxyLinks()) {
             return user.getProxyLinks();
+        }
+        IPGroup ipGroup = user.getIPGroup();
+        if (null != ipGroup && (IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup))) {
+            return Boolean.TRUE;
         }
         String ip = request.getRemoteAddr();
         // mod_proxy puts the real remote address in an x-forwarded-for

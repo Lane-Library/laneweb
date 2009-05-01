@@ -108,6 +108,12 @@
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>
                 </map:transform>
+                <map:transform type="proxy-links">
+                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="sunetid" value="{user:sunetid}"/>
+                    <map:parameter name="ticket" value="{user:ticket}"/>
+                </map:transform>
+                <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
@@ -136,6 +142,12 @@
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>
                 </map:transform>
+                <map:transform type="proxy-links">
+                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="sunetid" value="{user:sunetid}"/>
+                    <map:parameter name="ticket" value="{user:ticket}"/>
+                </map:transform>
+                <map:transform type="namespace-filter"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
