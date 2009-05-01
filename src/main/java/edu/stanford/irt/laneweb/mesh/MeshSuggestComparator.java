@@ -15,17 +15,20 @@ public class MeshSuggestComparator implements Comparator<String>, Serializable {
     }
 
     public int compare(final String heading1, final String heading2) {
-        int weightDiff = queryWeight(heading2) - queryWeight(heading1);
+        String upper1 = heading1.toUpperCase();
+        String upper2 = heading2.toUpperCase();
+        int weightDiff = queryWeight(upper2) - queryWeight(upper1);
         if (weightDiff != 0) {
             return weightDiff;
         }
-        return heading1.compareToIgnoreCase(heading2);
+        return upper1.compareTo(upper2);
     }
 
     private int queryWeight(final String heading) {
-        if (heading.toUpperCase().startsWith(this.query)) {
+        int index = heading.indexOf(this.query);
+        if (index == 0) {
             return 2;
-        } else if (heading.toUpperCase().contains(this.query)) {
+        } else if (index > 0) {
             return 1;
         }
         return 0;

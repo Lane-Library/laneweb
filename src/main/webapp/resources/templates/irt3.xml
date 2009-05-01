@@ -204,10 +204,6 @@
                                     <img src="/images/templates/irt3/warning_icon.jpg" alt="warning"/> <strong>Warning</strong><br/>
                                     Use of the <strong>O</strong>utcome field may significantly reduce the number of results returned
                                 </div>
-                                <!--<input id="p" type="text" value="patient condition"/>
-                                <input id="i" type="text" value="intervention"/>
-                                <input id="c" type="text" value="comparison"/>
-                                <input id="o" type="text" value="outcome"/>-->
                             </fieldset>
                             <fieldset>
                                 <label for="searchTerms">Search <span id="searchLabel">All</span>: </label>
