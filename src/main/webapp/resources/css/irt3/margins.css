@@ -70,8 +70,11 @@ margin-right:10px;
 h2.ImageTitle img {
 margin:0;
 }
-.eLibraryTab, .metaSearchResults, #searchTabs li {
+.eLibraryTab, .metaSearchResults, #searchTabs li, h2.bgTab, h2.activeTab {
 margin-right: -1px;
+}
+#otherPortalOptions h2.bgTab {
+margin-right:0
 }
 #searchTabs li li {
 margin-right:0
