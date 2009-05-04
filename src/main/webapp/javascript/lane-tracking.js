@@ -45,6 +45,9 @@ LANE.tracking = function(){
             if (!title) {
                 title = 'unknown';
             }
+			if (YAHOO.util.Dom.getAncestorBy(node, function(n) {return n.id && n.id == 'searchTabs';}) !== null) {
+				title += ' Search Tab';
+			}
             return title;
         },
         getTrackingData = function(event){
@@ -80,6 +83,10 @@ LANE.tracking = function(){
                         host = document.location.host;
                         path = document.location.pathname;
                         query = document.location.search;
+                    } else if (YAHOO.util.Dom.getAncestorBy(node, function(n) {return n.id && n.id == 'searchTabs';}) !== null){
+                        host = document.location.host;
+                        path = document.location.pathname;
+                        query = document.location.search;
                     } else {
                         host = node.host;
                         if (host.indexOf(':') > -1) {
@@ -94,7 +101,7 @@ LANE.tracking = function(){
                     path = '/' + path;
                 }
                 title = getTrackedTitle(node);
-                if (LANE.search) {
+                if (LANE.search && LANE.search.getSearchString()) {
                     searchTerms = LANE.search.getSearchString();
                     searchSource = LANE.search.getSearchSource();
                 }
