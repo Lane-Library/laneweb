@@ -51,7 +51,7 @@
                         };
                     }
                     //TODO: use onavailable for this?
-                    lists = ['shd', 'ft', 'gft', 'searchTabs'];
+                    lists = ['shd', 'ft', 'gft'];
                     for (i = 0; i < lists.length; i++) {
                         list = d.getElementById(lists[i]);
                         if (list) {
