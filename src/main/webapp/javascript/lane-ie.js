@@ -66,9 +66,15 @@
                             if (otherSearches) {
                                 otherSearches.activate = function(){
                                     shadedBorderBottom.style.zIndex = -1;
+                                    if (otherPortalOptions) {
+                                        otherPortalOptions.style.zIndex = -1;
+                                    }
                                 };
                                 otherSearches.deactivate = function(){
                                     shadedBorderBottom.style.zIndex = 1;
+                                    if (otherPortalOptions) {
+                                        otherPortalOptions.style.zIndex = 1;
+                                    }
                                 };
                             }
                         }
