@@ -53,8 +53,11 @@ padding:0 0 2em 1em;
 .wrapperBox h2 {
 padding:0 .5em 0 .5em;
 }
-#otherPortalOptions li, #search li {
+#otherPortalOptions li, #otherSearches li {
 padding:.1em .5em;
+}
+#searchTabs li {
+padding:0.1em 0.5em 0;
 }
 dd {
 padding-left:2em
