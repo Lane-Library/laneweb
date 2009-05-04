@@ -11,10 +11,8 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.reading.Reader;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.JdbcUtils;
 
@@ -89,7 +87,7 @@ public class EzproxyServersReader implements Reader {
         this.dataSource = dataSource;
     }
 
-    public void setOutputStream(final OutputStream outputStream) throws IOException {
+    public void setOutputStream(final OutputStream outputStream) {
         if (null == outputStream) {
             throw new IllegalArgumentException("null outputStream");
         }
@@ -97,8 +95,7 @@ public class EzproxyServersReader implements Reader {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3) throws ProcessingException, SAXException,
-            IOException {
+    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3) {
     }
 
     public boolean shouldSetContentLength() {

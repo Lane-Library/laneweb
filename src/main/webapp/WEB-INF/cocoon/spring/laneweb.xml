@@ -138,7 +138,9 @@
     class="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
     
     <bean id="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
-        class="edu.stanford.irt.laneweb.proxy.ProxyHostManager"/>
+        class="edu.stanford.irt.laneweb.proxy.ProxyHostManager">
+        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+    </bean>
 
     <bean id="org.apache.cocoon.components.modules.input.AbstractInputModule"
         class="edu.stanford.irt.laneweb.inputmodule.AbstractInputModule" abstract="true">

@@ -5,10 +5,73 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.sql.DataSource;
+
+import edu.stanford.irt.laneweb.JdbcUtils;
+
 public class ProxyHostManager {
+
+    @SuppressWarnings("serial")
+    private static class DatabaseProxyHostSet extends HashSet<String> {
+
+        private static final String SQL =
+            "with urls as ( "
+            + "select url from link, version "
+            + "where link.version_id = version.version_id "
+            + "and proxy = 'T' "
+            + "and url like 'http%' "
+            + "union "
+            + "select url from h_link, h_version "
+            + "where h_link.version_id = h_version.version_id "
+            + "and proxy = 'T' "
+            + "and url like 'http%' "
+            + ") "
+            + "select substr(url, 9, instr(url,'/',1,3) - 9) as server from urls "
+            + "where url like 'https://%' and instr(url,'/',1,3) > 0 "
+            + "union "
+            + "select substr(url, 9) as server from urls "
+            + "where url like 'https://%' and instr(url,'/',1,3) = 0 "
+            + "union "
+            + "select substr(url, 8, instr(url,'/',1,3) - 8) as server from urls "
+            + "where url like 'http://%' and instr(url,'/',1,3) > 0 "
+            + "union "
+            + "select substr(url, 8) as server from urls "
+            + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
+
+        DatabaseProxyHostSet(final DataSource dataSource) {
+            Connection conn = null;
+            Statement stmt = null;
+            ResultSet rs = null;
+            try {
+                conn = dataSource.getConnection();
+                stmt = conn.createStatement();
+                rs = stmt.executeQuery(SQL);
+                while (rs.next()) {
+                    add(rs.getString(1));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                JdbcUtils.closeResultSet(rs);
+                JdbcUtils.closeStatement(stmt);
+                JdbcUtils.closeConnection(conn);
+            }
+        }
+    }
+
+    //update daily
+    private static final long UPDATE_INTERVAL = 1000 * 60 * 60 * 24;
+
+    private DataSource dataSource;
+
+    private long lastUpdate = 0;
 
     private Set<String> proxyHosts;
 
@@ -29,6 +92,7 @@ public class ProxyHostManager {
         if (null == host) {
             throw new IllegalArgumentException("null host");
         }
+        updateIfNecessary();
         return this.proxyHosts.contains(host);
     }
 
@@ -41,6 +105,25 @@ public class ProxyHostManager {
             return isProxyableHost(url.getHost());
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException(e);
+        }
+    }
+
+    public void setDataSource(final DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
+    private synchronized void updateIfNecessary() {
+        long now = System.currentTimeMillis();
+        if (now > this.lastUpdate + UPDATE_INTERVAL) {
+            this.lastUpdate = now;
+            new Thread() {
+
+                @Override
+                public void run() {
+                    Set<String> newSet = new DatabaseProxyHostSet(ProxyHostManager.this.dataSource);
+                    ProxyHostManager.this.proxyHosts = newSet;
+                }
+            }.start();
         }
     }
 }
