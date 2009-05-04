@@ -130,9 +130,12 @@ background-image:none;
 background-color: #9C9A90;
 color:white;
 }
-.activeTab a, .activeSearchTab a, .activeSearchTab a:link,.activeSearchTab a:visited,.activeSearchTab a:hover,.activeSearchTab a:active {
+.activeTab a, #searchTabs .activeSearchTab a, #searchTabs .activeSearchTab a:link,#searchTabs .activeSearchTab a:visited,#searchTabs .activeSearchTab a:hover,#searchTabs .activeSearchTab a:active {
 /*background-color:inherit;*/
 color:white;
+}
+#searchTabs a:visited {
+color:#1C4B70
 }
 div.wrapperBox h2 {
 color:#666;
