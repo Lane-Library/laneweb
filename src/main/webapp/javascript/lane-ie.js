@@ -12,27 +12,35 @@
                 otherSearches = d.getElementById('otherSearches');
                 if (ie <= 6) {
                     //set hover class for these ids
-                    if (shadedBorderBottom) {
-                        if (otherPortalOptions) {
-                            otherPortalOptions.activate = function(){
+                    if (otherPortalOptions && shadedBorderBottom) {
+                        otherPortalOptions.activate = function(){
+                            shadedBorderBottom.style.zIndex = -1;
+                            this.className = 'hover';
+                        };
+                        otherPortalOptions.deactivate = function(){
+                            shadedBorderBottom.style.zIndex = 1;
+                            this.className = '';
+                        };
+                    }
+                    if (otherSearches) {
+                        otherSearches.activate = function(){
+                            if (shadedBorderBottom) {
                                 shadedBorderBottom.style.zIndex = -1;
-                                this.className = 'hover';
-                            };
-                            otherPortalOptions.deactivate = function(){
+                            }
+                            if (otherPortalOptions) {
+                                otherPortalOptions.style.zIndex = -1;
+                            }
+                            this.className = 'hover';
+                        };
+                        otherSearches.deactivate = function(){
+                            if (shadedBorderBottom) {
                                 shadedBorderBottom.style.zIndex = 1;
-                                this.className = '';
-                            };
-                        }
-                        if (otherSearches) {
-                            otherSearches.activate = function(){
-                                shadedBorderBottom.style.zIndex = -1;
-                                this.className = 'hover';
-                            };
-                            otherSearches.deactivate = function(){
-                                shadedBorderBottom.style.zIndex = 1;
-                                this.className = '';
-                            };
-                        }
+                            }
+                            if (otherPortalOptions) {
+                                otherPortalOptions.style.zIndex = 1;
+                            }
+                            this.className = '';
+                        };
                     }
                     if (legendDropDown) {
                         legendDropDown.activate = function(){
@@ -54,7 +62,7 @@
                 else 
                     if (ie >= 7 && ie < 8) {
                         //ie 7 stil messes up z-index:
-                        if (shadedBorderBottom) {
+                        if (otherPortalOptions && shadedBorderBottom) {
                             if (otherPortalOptions) {
                                 otherPortalOptions.activate = function(){
                                     shadedBorderBottom.style.zIndex = -1;
@@ -66,13 +74,17 @@
                         }
                         if (otherSearches) {
                             otherSearches.activate = function(){
-                                shadedBorderBottom.style.zIndex = -1;
+                                if (shadedBorderBottom) {
+                                    shadedBorderBottom.style.zIndex = -1;
+                                }
                                 if (otherPortalOptions) {
                                     otherPortalOptions.style.zIndex = -1;
                                 }
                             };
                             otherSearches.deactivate = function(){
-                                shadedBorderBottom.style.zIndex = 1;
+                                if (shadedBorderBottom) {
+                                    shadedBorderBottom.style.zIndex = 1;
+                                }
                                 if (otherPortalOptions) {
                                     otherPortalOptions.style.zIndex = 1;
                                 }
