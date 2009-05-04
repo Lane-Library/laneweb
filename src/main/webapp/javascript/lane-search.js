@@ -36,6 +36,7 @@ LANE.search = LANE.search ||  function() {
         }
         Dom.addClass(getTabForSource(s), 'activeSearchTab');
     },
+/*
     togglePico = function(s) {
         if (pico && s == '/portals/lpch-cerner.html') {
             Dom.setStyle(pico, 'display', 'block');
@@ -44,6 +45,7 @@ LANE.search = LANE.search ||  function() {
         }
     },
         pico, //the pico fieldset
+*/
         form, //the form Element
         submit, //the submit input
         label, //the label span for substituting text
@@ -93,7 +95,9 @@ LANE.search = LANE.search ||  function() {
             source = d.getElementById('searchSource');
             terms = d.getElementById('searchTerms');
             searchTabs = d.getElementById('searchTabs');
+/*
             pico = d.getElementById('pico');
+*/
             //change submit button image mouseover/mouseout
             submit.activate = function(e){
                 this.src = this.src.replace('search_btn.gif', 'search_btn_f2.gif');
@@ -103,19 +107,23 @@ LANE.search = LANE.search ||  function() {
             };
             searching = false;
             
-            var i, tabs = form.getElementsByTagName('LI');
-            for (i = 0; i < tabs.length; i++) {
-                if (tabs[i].getElementsByTagName('A').length == 1) {
-                    tabs[i].clicked = function(event){
-                        lanesearch.setSearchSource(getSourceFromTab(this));
-                        if (event.target) {
-                            event.target.blur();
-                        }
-                        else {
-                            event.srcElement.blur();
-                        }
-                        Event.preventDefault(event);
-                    };
+            var i, tabs = form.getElementsByTagName('LI'),
+			    index = d.location.pathname.indexOf('index.html');
+            //add a clicked funtion to tabs if not home page (browser differences in '/' in pathname):
+            if (index !== 0 && index != 1) {
+                for (i = 0; i < tabs.length; i++) {
+                    if (tabs[i].getElementsByTagName('A').length == 1) {
+                        tabs[i].clicked = function(event){
+                            lanesearch.setSearchSource(getSourceFromTab(this));
+                            if (event.target) {
+                                event.target.blur();
+                            }
+                            else {
+                                event.srcElement.blur();
+                            }
+                            Event.preventDefault(event);
+                        };
+                    }
                 }
             }
             Event.addListener(form, 'submit', function(e){
@@ -128,10 +136,13 @@ LANE.search = LANE.search ||  function() {
                 }
             });
             initialized = true;
+/*
             togglePico(lanesearch.getSearchSource());
+*/
         }
         };
         //initialize when content ready.
+		//TODO: revisit yui event scheduling issues, shouldn't have to do this but browsers differ
         Event.onContentReady('search',function(){lazyInit();});
         // publicly available functions:
         lanesearch = {
@@ -189,7 +200,9 @@ LANE.search = LANE.search ||  function() {
             setSearchSource: function(s) {
                 switchActiveTab(s);
                 label.innerHTML = sourceNameMap[s];
+/*
                 togglePico(s);
+*/
                 source.value = s;
             }
         };
