@@ -48,6 +48,9 @@ text-align:center;
 #ft li, #gft li, #shd li, #searchTabs li {
 display:inline;
 }
+#search fieldset {
+text-align:right
+}
 #otherSearches li {
 display:block
 }
