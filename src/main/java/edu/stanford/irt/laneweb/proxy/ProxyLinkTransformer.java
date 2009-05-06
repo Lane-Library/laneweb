@@ -89,6 +89,7 @@ public class ProxyLinkTransformer implements Transformer {
         this.proxyHostManager = proxyHostManager;
     }
 
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
         this.sunetid = params.getParameter(User.SUNETID, EMPTY_STRING);
         this.ticket = params.getParameter(User.TICKET, EMPTY_STRING);
