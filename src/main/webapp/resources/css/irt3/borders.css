@@ -7,10 +7,10 @@ border-top:1px solid #C1C1C1;
 #ft li {
 border-left:1px dotted #C1C1C1;
 }
-#gft li {
+#searchTabs li, #gft li {
 border-left:1px dotted #818181;
 }
-#search fieldset, #ft li:first-child, #gft li:first-child, #shd li:first-child,  #search li li, div#otherPortalOptions {
+#search fieldset, #ft li:first-child, #gft li:first-child, #shd li:first-child,  #searchTabs li:first-child, #searchTabs li li , div#otherPortalOptions {
 border:none;
 }
 div#leftColumn div, div#rightColumn div {
@@ -28,10 +28,10 @@ border-bottom:1px solid #c1c1c1;
 div#hd {
 border-bottom: 1px solid #c1c1c1;
 }
-.bgTab, ul#eLibraryTabs li, div#eLibraryTabContainer a, #searchTabs li {
+.bgTab, ul#eLibraryTabs li, div#eLibraryTabContainer a {
 border: 1px solid #cccccc;
 }
-.activeTab, li.eLibraryTabActive, #searchTabs li.activeSearchTab {
+.activeTab, li.eLibraryTabActive {
 border:1px solid #99987a;
 }
 div.fMainBox {

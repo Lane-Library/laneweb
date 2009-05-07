@@ -16,6 +16,13 @@ font-weight:bold
 #breadcrumb {
 font-size:0.85em;
 }
+.activeSearchTab {
+font-weight:bold
+}
+.activeSearchTab a:hover {
+text-decoration:none;
+cursor:text;
+}
 #gft{
 font-family:"Trebuchet MS",sans-serif;
 }
