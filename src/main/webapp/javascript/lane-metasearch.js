@@ -57,7 +57,7 @@
                                     YAHOO.util.Dom.removeClass(metasearchElements[i],'metasearch');
                                     resultSpan = document.createElement('span');
 									// force UpToDate count to 50+ when 150 returned (FB#25141)
-									if(metasearchElements[i].id == 'uptodate' && results.hits == 150){
+									if(metasearchElements[i].id == 'uptodate' && result.hits == 150){
 										result.hits = '50+';
 									}
                                     resultSpan.appendChild(document.createTextNode(': ' + result.hits + ' '));
