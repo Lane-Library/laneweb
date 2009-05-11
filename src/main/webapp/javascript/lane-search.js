@@ -107,25 +107,24 @@ LANE.search = LANE.search ||  function() {
             };
             searching = false;
             
+/*
             var i, tabs = form.getElementsByTagName('LI'),
 			    index = d.location.pathname.indexOf('index.html');
-            //add a clicked funtion to tabs if not home page (browser differences in '/' in pathname):
-            if (index !== 0 && index != 1) {
-                for (i = 0; i < tabs.length; i++) {
-                    if (tabs[i].getElementsByTagName('A').length == 1) {
-                        tabs[i].clicked = function(event){
-                            lanesearch.setSearchSource(getSourceFromTab(this));
-                            if (event.target) {
-                                event.target.blur();
-                            }
-                            else {
-                                event.srcElement.blur();
-                            }
-                            Event.preventDefault(event);
-                        };
-                    }
+            for (i = 0; i < tabs.length; i++) {
+                if (tabs[i].getElementsByTagName('A').length == 1) {
+                    tabs[i].clicked = function(event){
+                        lanesearch.setSearchSource(getSourceFromTab(this));
+                        if (event.target) {
+                            event.target.blur();
+                        }
+                        else {
+                            event.srcElement.blur();
+                        }
+                        Event.preventDefault(event);
+                    };
                 }
             }
+*/
             Event.addListener(form, 'submit', function(e){
                 try {
                     lanesearch.startSearch();
