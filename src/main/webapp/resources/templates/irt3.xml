@@ -179,8 +179,8 @@
                                         <li id="lanesiteSearchTab">
                                             <a href="/index.html">Lane Site</a>
                                         </li>
-                                        <li>
-                                            <a href="http://lmldb.stanford.edu/">Lane Catalog</a>
+                                        <li id="catalogSearchTab">
+                                            <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;PAGE=First">Lane Catalog</a>
                                         </li>
                                     </ul>
                                 </li>
