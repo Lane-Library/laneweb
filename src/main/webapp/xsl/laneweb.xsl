@@ -156,6 +156,12 @@
             <xsl:value-of select="replace($q,'(\\|\$)','\\$1')"/>
         </xsl:if>
     </xsl:variable>
+    
+    <xsl:variable name="uri-encoded-search-terms">
+        <xsl:if test="$q">
+            <xsl:value-of select="encode-for-uri($q)"/>
+        </xsl:if>
+    </xsl:variable>
 
     <!-- figure out what class the body should be for yui grids -->
     <xsl:variable name="yui-grid-class">
@@ -270,7 +276,7 @@
 	<!-- END persistent login  -->
     
     <!-- search form -->
-    <!-- set the value of the submit button to the value from the $source-name-map related to $search-form-select -->
+    <!-- set the value of the search label to the value from the $source-name-map related to $search-form-select -->
     <xsl:template match="h:span[@id='searchLabel']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
@@ -291,10 +297,37 @@
             </xsl:if>
     </xsl:template>-->
     
-    <!-- always provide a search <a> element for styling purposes in searchTabs -->
-    <xsl:template match="h:ul[@id='searchTabs']//h:a">
+    <!-- set up href for search tabs if there is a search term present -->
+    <xsl:template match="h:ul[@id='searchTabs']//h:li[not(@id='otherSearches')]/h:a">
         <xsl:copy>
-            <xsl:apply-templates select="attribute::node()|child::node()"/>
+            <xsl:apply-templates select="attribute::node()[not(name()='href')]"/>
+            <xsl:call-template name="make-link">
+                <xsl:with-param name="attr" select="'href'"/>
+                <xsl:with-param name="link">
+                    <xsl:choose>
+                        <xsl:when test="parent::h:li/@id = 'catalogSearchTab' and $q">
+                            <xsl:text>http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;SL=none&amp;SAB1={search-terms}&amp;BOOL1=all+of+these&amp;FLD1=Keyword+Anywhere++[LKEY]+(LKEY)&amp;GRP1=AND+with+next+set&amp;SAB2=&amp;BOOL2=all+of+these&amp;FLD2=ISSN+[with+hyphen]+(ISSN)&amp;GRP2=AND+with+next+set&amp;SAB3=&amp;BOOL3=all+of+these&amp;FLD3=ISSN+[with+hyphen]+(ISSN)&amp;CNT=50</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="$q">
+                            <xsl:text>/search.html?source=</xsl:text>
+                            <xsl:choose>
+                                <xsl:when test="parent::h:li/@id">
+                                    <xsl:value-of select="substring-before(parent::h:li/@id,'SearchTab')"/>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="@href"/>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:text>&amp;q=</xsl:text>
+                            <xsl:value-of select="$uri-encoded-search-terms"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="@href"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:with-param>
+            </xsl:call-template>
+            <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
     </xsl:template>
     

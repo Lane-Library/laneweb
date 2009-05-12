@@ -107,24 +107,40 @@ LANE.search = LANE.search ||  function() {
             };
             searching = false;
             
-/*
-            var i, tabs = form.getElementsByTagName('LI'),
-			    index = d.location.pathname.indexOf('index.html');
+
+            var i, href, tabs = form.getElementsByTagName('LI');
             for (i = 0; i < tabs.length; i++) {
+				//if there is more than one A child it is otherSearches
                 if (tabs[i].getElementsByTagName('A').length == 1) {
+					//add clicked functions to the tabs
                     tabs[i].clicked = function(event){
-                        lanesearch.setSearchSource(getSourceFromTab(this));
-                        if (event.target) {
-                            event.target.blur();
+						//if there has been a search and there is something in the search input
+                        if (lanesearch.getSearchString() && terms.value) {
+                            href = this.getElementsByTagName('A')[0].href;
+							//special handling for catalog search, proxy if necessary
+                            if (this.id == 'catalogSearchTab') {
+                                if (href.indexOf('laneproxy') > 0 || href.indexOf('secure/login') > 0) {
+									href = href.substring(0, href.indexOf('url=') + 4);
+								} else {
+									href = '';
+								}
+								href += 'http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&SL=none&BOOL1=all+of+these&FLD1=Keyword+Anywhere++[LKEY]+(LKEY)&GRP1=AND+with+next+set&SAB2=&BOOL2=all+of+these&FLD2=ISSN+[with+hyphen]+(ISSN)&GRP2=AND+with+next+set&SAB3=&BOOL3=all+of+these&FLD3=ISSN+[with+hyphen]+(ISSN)&CNT=50&SAB1=';
+                            } else {
+                                href = this.getElementsByTagName('A')[0].href;
+                                href = href.substring(0, href.indexOf('q=') + 2);
+                            }
+                            href += encodeURIComponent(terms.value);
+                            document.location = href;
+                            Event.preventDefault(event);
+						//if no search and one of these tabs just change source input and label
+                        } else if (this.id == 'softwareSearchTab' || this.id == 'videoSearchTab' || this.id == 'lanesiteSearchTab'){
+                            lanesearch.setSearchSource(getSourceFromTab(this));
+                            Event.preventDefault(event);
                         }
-                        else {
-                            event.srcElement.blur();
-                        }
-                        Event.preventDefault(event);
                     };
                 }
             }
-*/
+
             Event.addListener(form, 'submit', function(e){
                 try {
                     lanesearch.startSearch();
@@ -141,7 +157,7 @@ LANE.search = LANE.search ||  function() {
         }
         };
         //initialize when content ready.
-		//TODO: revisit yui event scheduling issues, shouldn't have to do this but browsers differ
+        //TODO: revisit yui event scheduling issues, shouldn't have to do this but browsers differ
         Event.onContentReady('search',function(){lazyInit();});
         // publicly available functions:
         lanesearch = {
