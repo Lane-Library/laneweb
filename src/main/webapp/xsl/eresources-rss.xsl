@@ -20,7 +20,7 @@
 			<xsl:if test="$t != ''">&amp;source=<xsl:value-of select="$t"/></xsl:if>
 			<xsl:if test="$t = ''">&amp;source=all</xsl:if>
 		</xsl:if>
-		<xsl:if test="$type = 'ejounal'">
+		<xsl:if test="$type = 'ejournals'">
 			<xsl:text>http://lane.stanford.edu/online/ejbrowse.html?</xsl:text>
 			<xsl:if test="$a != ''"><xsl:text>a=</xsl:text><xsl:value-of select="$a"/></xsl:if>
 			<xsl:if test="$a = ''"><xsl:text>all</xsl:text></xsl:if>
