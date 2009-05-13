@@ -69,6 +69,8 @@ public class SearchGenerator implements Generator {
         }
         if ((this.r != null) && (this.r.length > 0)) {
             resources = new HashSet<String>();
+            metaSearchManager.describe(null, resources);
+            
             for (String element : this.r) {
                 resources.add(element);
             }
