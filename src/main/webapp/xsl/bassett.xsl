@@ -127,58 +127,59 @@
     <!-- Multiple View Generate div for the images  --> 
  
     <xsl:template match="h:div[@id='thumbnail']">
+    	<xsl:if test="/doc/b:bassetts/b:bassett">
     	<xsl:copy>	
-    	<xsl:apply-templates select="attribute::node()"/>
-     	<xsl:for-each select="/doc/b:bassetts/b:bassett">
-     	
-     	<xsl:if test="position() &gt; $imgs-per-page * $page-number and position() &lt;= $imgs-per-page * $page-number + $imgs-per-page">
-     		<div>
-     			<xsl:attribute name="class">image-container</xsl:attribute>
-	     		<div>
-	     		<xsl:attribute name="class">hr</xsl:attribute>
-				   	<a> 
-			           	<xsl:attribute name="href"  >
-			        		<xsl:text>/bassett/bassettView.html?bn=</xsl:text><xsl:value-of select="./@b:bassett_number"/>
-			        	</xsl:attribute>
-			     		<img>
+	    	<xsl:apply-templates select="attribute::node()"/>
+		    	<xsl:for-each select="/doc/b:bassetts/b:bassett">
+		     	<xsl:if test="position() &gt; $imgs-per-page * $page-number and position() &lt;= $imgs-per-page * $page-number + $imgs-per-page">
+		     		<div>
+		     			<xsl:attribute name="class">image-container</xsl:attribute>
+			     		<div>
+			     		<xsl:attribute name="class">hr</xsl:attribute>
+						   	<a> 
+					           	<xsl:attribute name="href"  >
+					        		<xsl:text>/bassett/bassettView.html?bn=</xsl:text><xsl:value-of select="./@b:bassett_number"/>
+					        	</xsl:attribute>
+					     		<img>
+					     		  	<xsl:attribute name="title"  >
+						        		<xsl:value-of select="./b:title"/>
+						        	</xsl:attribute>
+						        	<xsl:attribute name="src"  >
+						        		<xsl:value-of select="$thumbnail-directory"/>
+						        		<xsl:choose>
+						        			<xsl:when test="$type='diagram'">
+						        				<xsl:value-of select="./b:diagram_image"/>
+						        			</xsl:when>
+						        			<xsl:otherwise>
+						        				<xsl:value-of select="./b:bassett_image"/>
+						        			</xsl:otherwise>
+						        		</xsl:choose>
+						        	</xsl:attribute>
+						        	<xsl:attribute name="alt"  >
+						        		<xsl:text>bassett Number </xsl:text><xsl:value-of select="./@b:bassett_number"/>
+						        	</xsl:attribute>
+						      	</img>
+						      	</a>
+				      		</div>
+				      	<div>
+				      	<xsl:attribute name="class">image-text</xsl:attribute>
+				 		<xsl:text>#</xsl:text><xsl:value-of select="./@b:bassett_number"/>
+						<br/>
+						<a> 
 			     		  	<xsl:attribute name="title"  >
 				        		<xsl:value-of select="./b:title"/>
 				        	</xsl:attribute>
-				        	<xsl:attribute name="src"  >
-				        		<xsl:value-of select="$thumbnail-directory"/>
-				        		<xsl:choose>
-				        			<xsl:when test="$type='diagram'">
-				        				<xsl:value-of select="./b:diagram_image"/>
-				        			</xsl:when>
-				        			<xsl:otherwise>
-				        				<xsl:value-of select="./b:bassett_image"/>
-				        			</xsl:otherwise>
-				        		</xsl:choose>
+				        	<xsl:attribute name="href"  >
+				        		<xsl:text>/bassett/bassettView.html?bn=</xsl:text><xsl:value-of select="./@b:bassett_number"/>
 				        	</xsl:attribute>
-				        	<xsl:attribute name="alt"  >
-				        		<xsl:text>bassett Number </xsl:text><xsl:value-of select="./@b:bassett_number"/>
-				        	</xsl:attribute>
-				      	</img>
-				      	</a>
-		      		</div>
-		      	<div>
-		      	<xsl:attribute name="class">image-text</xsl:attribute>
-		 		<xsl:text>#</xsl:text><xsl:value-of select="./@b:bassett_number"/>
-				<br/>
-				<a> 
-	     		  	<xsl:attribute name="title"  >
-		        		<xsl:value-of select="./b:title"/>
-		        	</xsl:attribute>
-		        	<xsl:attribute name="href"  >
-		        		<xsl:text>/bassett/bassettView.html?bn=</xsl:text><xsl:value-of select="./@b:bassett_number"/>
-		        	</xsl:attribute>
-		        	<xsl:text> View Larger</xsl:text>
-		       </a>
-		       </div>
-				</div>
-				</xsl:if>
-		</xsl:for-each>
-    </xsl:copy>
+				        	<xsl:text> View Larger</xsl:text>
+				       </a>
+				       </div>
+					</div>
+					</xsl:if>
+				</xsl:for-each>
+		    </xsl:copy>
+	    </xsl:if>
 	</xsl:template>    
     
 <!-- To get the Image source for bassettView.html and bassettLagerView.html -->
@@ -322,7 +323,8 @@
 	</xsl:attribute>
 </xsl:template>
 
-<!--  paging -->
+<!-- End  paging -->
+
 
 <xsl:template match="attribute::node()">
     <xsl:copy-of select="self::node()"/>
