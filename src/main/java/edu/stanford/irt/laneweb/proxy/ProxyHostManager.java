@@ -104,7 +104,7 @@ public class ProxyHostManager {
             URL url = new URL(link);
             return isProxyableHost(url.getHost());
         } catch (MalformedURLException e) {
-            throw new IllegalArgumentException(e);
+            return false;
         }
     }
 
