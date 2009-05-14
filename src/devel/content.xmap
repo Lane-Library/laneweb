@@ -11,6 +11,9 @@
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="yes" src="applications.xmap"/>
             </map:match>
+            <map:match pattern="rss/**" type="wildcard">
+                <map:mount uri-prefix="rss" check-reload="yes" src="rss.xmap"/>
+            </map:match>
             <map:match pattern="online/(ej|db|cc|eb)browse.html" type="regexp">
                 <map:select type="resource-exists">
                     <map:when test="content/online/{1}browse.html">
@@ -71,24 +74,16 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="page2rss" type="wildcard">
-                <map:aggregate element="doc">
-                    <map:part src="cocoon:{request-param:page}"/>
-                    <map:part src="cocoon:/file-info{request-param:page}"/>
-                </map:aggregate>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/page2rss.xsl">
-                        <map:transform src="xsl/page2rss.xsl" type="saxon">
-                            <map:parameter name="page" value="{request-param:page}"/>
-                        </map:transform>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform src="context://xsl/page2rss.xsl" type="saxon">
-                            <map:parameter name="page" value="{request-param:page}"/>
-                        </map:transform>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="xml"/>
+            	<map:redirect-to uri="/rss/page2rss?{request:queryString}"/>
             </map:match>
+            <map:match pattern="ncbi-rss2html" type="wildcard">
+				<map:generate src="cocoon:/rss/ncbi-rss2html" type="file"/> 
+				<map:serialize type="xml"/>
+	        </map:match>
+            <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
+                <map:redirect-to uri="/rss/services/tools/highly-accessed-articles.xml"/>
+            </map:match>
+            
             <map:match pattern="**persistentlogin.html" type="wildcard">
                 <map:act type="persistentLoginAction"/>
                 <map:select type="resource-exists">

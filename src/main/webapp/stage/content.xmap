@@ -15,6 +15,10 @@
             <map:match pattern="bassett/**" type="wildcard">
                 <map:mount uri-prefix="bassett" check-reload="yes" src="context://stage/bassett.xmap"/>
             </map:match>
+            <map:match pattern="rss/**" type="wildcard">
+                <map:mount uri-prefix="rss" check-reload="yes" src="context://stage/rss.xmap"/>
+            </map:match>
+            
             <map:match pattern="online/(.+)browse.html" type="regexp">
                 <map:generate type="html"
                     src="{naming:java:comp/env/stage-base}/content/online/{1}browse.html"/>
@@ -39,15 +43,16 @@
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="page2rss" type="wildcard">
-                <map:aggregate element="doc">
-                    <map:part src="cocoon:{request-param:page}"/>
-                    <map:part src="cocoon:/file-info{request-param:page}"/>
-                </map:aggregate>
-                <map:transform src="context://xsl/page2rss.xsl" type="saxon">
-                    <map:parameter name="page" value="{request-param:page}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
+             	<map:redirect-to uri="/stage/rss/page2rss?{request:queryString}"/>
             </map:match>
+          	<map:match pattern="ncbi-rss2html" type="wildcard">
+				<map:generate src="cocoon:/rss/ncbi-rss2html" type="file"/> 
+				<map:serialize type="xml"/>
+	        </map:match>
+            <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
+                <map:redirect-to uri="/stage/rss/services/tools/highly-accessed-articles.xml"/>
+            </map:match>
+        
             <map:match pattern="**persistentlogin.html" type="wildcard">
                 <map:act type="persistentLoginAction"/>
                 <map:generate type="html" src="{naming:java:comp/env/stage-base}/content/secure/persistentlogin.html"/>
