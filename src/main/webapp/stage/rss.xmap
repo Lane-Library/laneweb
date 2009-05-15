@@ -55,11 +55,11 @@
 				</map:transform>
 				<map:serialize type="xml"/>
 	        </map:match>
-	        <map:match pattern="ejournal" type="wildcard">
+	        <map:match pattern="ejournals" type="wildcard">
 	         	<map:generate type="file"  src="cocoon:/eresources/browse?t=ej"/>
 	            <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
 	            	<map:parameter name="a" value="{request-param:a}"/>
-	            	<map:parameter name="type" value="browse"/>
+	            	<map:parameter name="type" value="ejournals"/>
 	        	</map:transform>
 				<map:serialize type="xml"/>
 	        </map:match>
