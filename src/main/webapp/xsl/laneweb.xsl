@@ -872,7 +872,7 @@
     <!-- ===================    LANEWEB NAMESPACE TEMPLATES  ================ -->
 
     <xsl:template match="h:a[@id='proxyOn']">
-        <xsl:if test="contains('OTHER|PAVA|ERR',$ip-group) and $proxy-links = 'false'">
+        <xsl:if test="matches($ip-group,'^(OTHER|PAVA|ERR)$') and $proxy-links = 'false'">
             <!--<xsl:if test="$proxy-links = 'false'">-->
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
@@ -903,7 +903,7 @@
     </xsl:template>
 
     <xsl:template match="h:a[@id='proxyOff']">
-        <xsl:if test="contains('OTHER|PAVA|ERR',$ip-group) and $proxy-links = 'true'">
+        <xsl:if test="matches($ip-group,'^(OTHER|PAVA|ERR)$') and $proxy-links = 'true'">
             <!--<xsl:if test="$proxy-links = 'true'">-->
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
