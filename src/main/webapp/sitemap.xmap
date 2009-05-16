@@ -175,6 +175,9 @@
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>
                 </map:transform>
+                <map:transform type="cme-links">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
+                </map:transform>
                 <map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
@@ -208,6 +211,9 @@
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>
+                </map:transform>
+                <map:transform type="cme-links">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
                 </map:transform>
                 <map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
@@ -260,6 +266,9 @@
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>
+                </map:transform>
+                <map:transform type="cme-links">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
                 </map:transform>
                 <map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>

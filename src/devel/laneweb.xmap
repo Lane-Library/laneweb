@@ -92,6 +92,9 @@
                         </map:transform>
                     </map:otherwise>
                 </map:select>
+                <map:transform type="cme-links">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
+                </map:transform>
                 <map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
@@ -150,6 +153,9 @@
                         </map:transform>
                     </map:otherwise>
                 </map:select>
+                <map:transform type="cme-links">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
+                </map:transform>
                 <map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>

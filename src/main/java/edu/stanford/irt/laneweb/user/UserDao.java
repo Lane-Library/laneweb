@@ -42,7 +42,7 @@ public class UserDao {
         setTicket(user, request);
         setProxyLinks(user, request);
         setLdapData(user);
-        setCmeId(user, request);
+        setEmrId(user, request);
         return user;
     }
 
@@ -141,8 +141,10 @@ public class UserDao {
         return sunetId;
     }
 
-    private void setCmeId(final User user, final HttpServletRequest request) {
-        user.setCmeId(request.getParameter(User.CMEID));
+    private void setEmrId(final User user, final HttpServletRequest request) {
+      if(null == user.getEmrId() || null != request.getParameter(User.EMRID)){
+        user.setEmrId(request.getParameter(User.EMRID));
+      }
     }
 
     private void setIpGroup(final User user, final HttpServletRequest request) {
