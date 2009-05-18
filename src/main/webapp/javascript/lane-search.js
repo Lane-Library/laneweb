@@ -170,11 +170,11 @@ LANE.search = LANE.search ||  function() {
                     throw('nothing to search for');
                 }
                 searching = true;
-                Dom.setStyle(indicator,'visibilty','visible');
+                Dom.setStyle(indicator,'visibility','visible');
             },
             stopSearch: function(){
                 searching = false;
-                Dom.setStyle(indicator,'visibilty','hidden');
+                Dom.setStyle(indicator,'visibility','hidden');
             },
             isSearching: function(){
                 return searching;
