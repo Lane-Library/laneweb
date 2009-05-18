@@ -25,6 +25,8 @@ public class CMELinkTransformer extends AbstractTransformer {
   private static final String QUESTION = "?";
 
   private String emrid;
+  
+  private boolean isSearchUrlElement;
 
   @SuppressWarnings("unchecked")
   public void setup(final SourceResolver resolver, final Map objectModel,
@@ -33,8 +35,22 @@ public class CMELinkTransformer extends AbstractTransformer {
   }
 
   @Override
+  public void characters(char ch[], int start, int length) throws SAXException {
+    if (!EMPTY_STRING.equals(this.emrid) && this.isSearchUrlElement) {
+      String value = new String(ch, start, length);
+      if (isCMEHost(value)){
+        value = createCMELink(value);
+        this.xmlConsumer.characters(value.toCharArray(), start, value.length());
+        return;
+      }
+    }
+    this.xmlConsumer.characters(ch, start, length);
+  }
+  
+  @Override
   public void startElement(final String uri, final String localName,
       final String name, final Attributes atts) throws SAXException {
+    this.isSearchUrlElement = false;
     if (!EMPTY_STRING.equals(this.emrid)) {
       if ("a".equals(localName)) {
         String link = atts.getValue(HREF);
@@ -45,6 +61,9 @@ public class CMELinkTransformer extends AbstractTransformer {
           this.xmlConsumer.startElement(uri, localName, name, newAttributes);
           return;
         }
+      }
+      if ("url".equals(localName)) {
+        this.isSearchUrlElement = true;
       }
     }
     this.xmlConsumer.startElement(uri, localName, name, atts);

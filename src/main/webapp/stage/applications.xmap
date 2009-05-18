@@ -29,6 +29,9 @@
                 <!-- result with proxy links (if necessary) in xml format -->
                 <map:match pattern="search/proxy/xml" type="wildcard">
                     <map:generate type="search"/>
+                    <map:transform type="cme-links">
+                        <map:parameter name="emrid" value="{user:emrid}"/>
+                    </map:transform>
                     <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
                         <map:parameter name="context" value=""/>
                         <map:parameter name="sunetid" value="{user:sunetid}"/>
