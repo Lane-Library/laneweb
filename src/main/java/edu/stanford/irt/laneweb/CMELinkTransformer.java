@@ -13,80 +13,78 @@ import edu.stanford.irt.laneweb.user.User;
 
 public class CMELinkTransformer extends AbstractTransformer {
 
-  //TODO: once more vendors, will want to move UTD strings out to CME_HOSTS<host, cme_args> object
-  private static final String[] UTD_HOSTS = {"www.utdol.com","www.uptodate.com"};
+    private static final String EMPTY_STRING = "";
 
-  private static final String UTD_CME_STRING = "unid=?&srcsys=epicXXX&eiv=2.1.0";
+    private static final String HREF = "href";
 
-  private static final String EMPTY_STRING = "";
+    private static final String QUESTION = "?";
 
-  private static final String HREF = "href";
+    private static final String UTD_CME_STRING = "unid=?&srcsys=epicXXX&eiv=2.1.0";
 
-  private static final String QUESTION = "?";
+    // TODO: once more vendors, will want to move UTD strings out to
+    // CME_HOSTS<host, cme_args> object
+    private static final String[] UTD_HOSTS = { "www.utdol.com", "www.uptodate.com" };
 
-  private String emrid;
-  
-  private boolean isSearchUrlElement;
+    private String emrid;
 
-  @SuppressWarnings("unchecked")
-  public void setup(final SourceResolver resolver, final Map objectModel,
-      final String src, final Parameters params) {
-    this.emrid = params.getParameter(User.EMRID, EMPTY_STRING);
-  }
+    private boolean isSearchUrlElement;
 
-  @Override
-  public void characters(char ch[], int start, int length) throws SAXException {
-    if (!EMPTY_STRING.equals(this.emrid) && this.isSearchUrlElement) {
-      String value = new String(ch, start, length);
-      if (isCMEHost(value)){
-        value = createCMELink(value);
-        this.xmlConsumer.characters(value.toCharArray(), start, value.length());
-        return;
-      }
-    }
-    this.xmlConsumer.characters(ch, start, length);
-  }
-  
-  @Override
-  public void startElement(final String uri, final String localName,
-      final String name, final Attributes atts) throws SAXException {
-    this.isSearchUrlElement = false;
-    if (!EMPTY_STRING.equals(this.emrid)) {
-      if ("a".equals(localName)) {
-        String link = atts.getValue(HREF);
-        if (null != link && link.indexOf("http") == 0 && isCMEHost(link)) {
-          AttributesImpl newAttributes = new AttributesImpl(atts);
-          newAttributes.setValue(newAttributes.getIndex(HREF),
-              createCMELink(link));
-          this.xmlConsumer.startElement(uri, localName, name, newAttributes);
-          return;
+    @Override
+    public void characters(final char ch[], final int start, final int length) throws SAXException {
+        if (!EMPTY_STRING.equals(this.emrid) && this.isSearchUrlElement) {
+            String value = new String(ch, start, length);
+            if (isCMEHost(value)) {
+                value = createCMELink(value);
+                this.xmlConsumer.characters(value.toCharArray(), start, value.length());
+                return;
+            }
         }
-      }
-      if ("url".equals(localName)) {
-        this.isSearchUrlElement = true;
-      }
+        this.xmlConsumer.characters(ch, start, length);
     }
-    this.xmlConsumer.startElement(uri, localName, name, atts);
-  }
 
-  private String createCMELink(final String link) {
-    StringBuffer sb = new StringBuffer();
-    sb.append(link);
-    if (!link.contains(QUESTION)) {
-      sb.append(QUESTION);
-    } else {
-      sb.append("&");
+    @SuppressWarnings("unchecked")
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
+        this.emrid = params.getParameter(User.EMRID, EMPTY_STRING);
     }
-    sb.append(UTD_CME_STRING.replaceFirst("\\?", this.emrid));
-    return sb.toString();
-  }
 
-  private boolean isCMEHost(final String link) {
-    for (String host : UTD_HOSTS) {
-      if (link.contains(host)) {
-        return true;
-      }
+    @Override
+    public void startElement(final String uri, final String localName, final String name, final Attributes atts) throws SAXException {
+        this.isSearchUrlElement = false;
+        if (!EMPTY_STRING.equals(this.emrid)) {
+            if ("a".equals(localName)) {
+                String link = atts.getValue(HREF);
+                if (null != link && link.indexOf("http") == 0 && isCMEHost(link)) {
+                    AttributesImpl newAttributes = new AttributesImpl(atts);
+                    newAttributes.setValue(newAttributes.getIndex(HREF), createCMELink(link));
+                    this.xmlConsumer.startElement(uri, localName, name, newAttributes);
+                    return;
+                }
+            }
+            if ("url".equals(localName)) {
+                this.isSearchUrlElement = true;
+            }
+        }
+        this.xmlConsumer.startElement(uri, localName, name, atts);
     }
-    return false;
-  }
+
+    private String createCMELink(final String link) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(link);
+        if (!link.contains(QUESTION)) {
+            sb.append(QUESTION);
+        } else {
+            sb.append("&");
+        }
+        sb.append(UTD_CME_STRING.replaceFirst("\\?", this.emrid));
+        return sb.toString();
+    }
+
+    private boolean isCMEHost(final String link) {
+        for (String host : UTD_HOSTS) {
+            if (link.contains(host)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

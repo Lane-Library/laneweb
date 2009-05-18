@@ -36,7 +36,7 @@ public class ProxyLinkTransformer extends AbstractTransformer {
     public void setProxyHostManager(final ProxyHostManager proxyHostManager) {
         this.proxyHostManager = proxyHostManager;
     }
-    
+
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
         this.sunetid = params.getParameter(User.SUNETID, EMPTY_STRING);

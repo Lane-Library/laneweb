@@ -16,7 +16,7 @@ public class Template extends AbstractInputModule {
     @SuppressWarnings("unchecked")
     public Object[] getAttributeValues(final String name, final Configuration modeConf, final Map objectModel) {
         Object obj = getAttribute(name, modeConf, objectModel);
-        return null == obj ? null : new Object[] {obj};
+        return null == obj ? null : new Object[] { obj };
     }
 
     public void setTemplateConfig(final Map<String, String> templateConfig) {

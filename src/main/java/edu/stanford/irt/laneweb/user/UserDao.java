@@ -142,9 +142,9 @@ public class UserDao {
     }
 
     private void setEmrId(final User user, final HttpServletRequest request) {
-      if(null == user.getEmrId() || null != request.getParameter(User.EMRID)){
-        user.setEmrId(request.getParameter(User.EMRID));
-      }
+        if (null == user.getEmrId() || null != request.getParameter(User.EMRID)) {
+            user.setEmrId(request.getParameter(User.EMRID));
+        }
     }
 
     private void setIpGroup(final User user, final HttpServletRequest request) {

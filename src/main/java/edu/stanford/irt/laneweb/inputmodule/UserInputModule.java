@@ -21,7 +21,7 @@ public class UserInputModule extends AbstractInputModule {
             return user.getName();
         }
         if (User.EMRID.equals(key)) {
-          return user.getEmrId();
+            return user.getEmrId();
         }
         throw new IllegalArgumentException("can't handle key: " + key);
     }
