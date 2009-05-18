@@ -196,10 +196,10 @@ public class IPGroup {
                 if (d[2] == 112) {
                     return IPGroup.LPCH;
                 }
-                if (d[2] == 113) {
+                if ((d[2] == 113) || (d[2] == 114)) {
                     return IPGroup.SOM_OTHER;
                 }
-                if ((d[2] == 114) || (d[2] == 115)) {
+                if (d[2] == 115) {
                     return IPGroup.SHC;
                 }
                 if ((d[2] >= 116) && (d[2] <= 123)) {
