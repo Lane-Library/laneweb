@@ -995,7 +995,7 @@
                     <xsl:value-of select="$link"/>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="ends-with($link,'/')">
+            <xsl:if test="not($param-string) and ends-with($link,'/')">
                 <xsl:text>index.html</xsl:text>
             </xsl:if>
             <xsl:if test="name(..) != 'link' and name(..) != 'img' and not(starts-with($link,'#'))">
