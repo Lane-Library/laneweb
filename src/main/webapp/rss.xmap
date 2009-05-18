@@ -16,9 +16,26 @@
 	        <map:match pattern="apps/**" type="wildcard">
 				<map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
 			</map:match>
+			
+		</map:pipeline>
+			
+		<map:pipeline type="expires">
+		    <map:parameter name="cache-key" value="{request-uri:requestURI};rss-url={request-param:rss-url}"/>
+           <map:match pattern="ncbi-rss2html" type="wildcard">
+               <map:generate type="file" src="{request-param:rss-url}"/>
+               <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
+               <map:serialize type="xhtml"/>
+           </map:match>
+           <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
+               <map:generate src="cocoon:/apps/sfx/highly-accessed2rss" type="file"/>
+               <map:serialize type="xml"/>
+			</map:match>
+		</map:pipeline>
+		
+		<map:pipeline type="noncaching">
 			<map:match pattern="**.xml" type="wildcard">
-                <map:generate type="file" src="{naming:java:comp/env/live-base}/content/rss/{1}.xml"/>
-                <map:serialize type="xml"/>
+               	<map:generate type="file" src="{naming:java:comp/env/live-base}/content/rss/{1}.xml"/>
+               <map:serialize type="xml"/>
             </map:match>
 			<map:match pattern="page2rss" type="wildcard">
                <map:aggregate element="doc">
@@ -29,21 +46,8 @@
                    <map:parameter name="page" value="{request-param:page}"/>
                </map:transform>
                <map:serialize type="xml"/>
-	       </map:match>
+	       	</map:match>
 		</map:pipeline>
-			
-		<map:pipeline type="expires">
-		    <map:parameter name="cache-key" value="{request-uri:requestURI};rss-url={request-param:rss-url}"/>
-	           <map:match pattern="ncbi-rss2html" type="wildcard">
-	               <map:generate type="file" src="{request-param:rss-url}"/>
-	               <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
-	               <map:serialize type="xhtml"/>
-	           </map:match>
-	           <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
-	               <map:generate src="cocoon:/apps/sfx/highly-accessed2rss" type="file"/>
-	               <map:serialize type="xml"/>
-	           </map:match>
-	       </map:pipeline>
 		
 		<map:pipeline type="expires">
 			<map:parameter name="expires" value="access plus 1 hours"/>

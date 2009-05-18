@@ -18,41 +18,7 @@
             </map:match>
       	</map:pipeline>
         
-        <map:pipeline type="noncaching">
-        	
-        	<map:match pattern="**.xml" type="wildcard">
-                <map:select type="resource-exists">
-                    <map:when test="content/rss/{1}.xml">
-                        <map:generate type="file" src="content/rss/{1}.xml"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:generate type="file" src="{naming:java:comp/env/live-base}/content/rss/{1}.xml"/>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
-			
-			<map:match pattern="page2rss" type="wildcard">
-                <map:aggregate element="doc">
-                    <map:part src="cocoon:/content/{request-param:page}"/>
-                    <map:part src="cocoon:/content/file-info{request-param:page}"/>
-                </map:aggregate>
-                <map:select type="resource-exists">
-					<map:when test="/xsl/page2rss.xsl">
-		                <map:transform src="/xsl/page2rss.xsl" type="saxon">
-		                    <map:parameter name="page" value="{request-param:page}"/>
-		                </map:transform>
-                     </map:when>
-                     <map:otherwise>
-                        <map:transform src="context://xsl/page2rss.xsl" type="saxon">
-		                    <map:parameter name="page" value="{request-param:page}"/>
-		                </map:transform>
-                     </map:otherwise>
-                </map:select>
-				<map:serialize type="xml"/>
-            </map:match>
-		</map:pipeline>
-		
+        
 		<map:pipeline type="expires">
             <map:parameter name="cache-key" value="{request-uri:requestURI};rss-url={request-param:rss-url}"/>
             <map:match pattern="ncbi-rss2html" type="wildcard">
@@ -127,6 +93,41 @@
 				<map:serialize type="xml"/>
 			</map:match>
 			
+		</map:pipeline>
+		
+		<map:pipeline type="noncaching">
+        	
+        	<map:match pattern="**.xml" type="wildcard">
+                <map:select type="resource-exists">
+                    <map:when test="content/rss/{1}.xml">
+                        <map:generate type="file" src="content/rss/{1}.xml"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:generate type="file" src="{naming:java:comp/env/live-base}/content/rss/{1}.xml"/>
+                    </map:otherwise>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+			
+			<map:match pattern="page2rss" type="wildcard">
+                <map:aggregate element="doc">
+                    <map:part src="cocoon:/content/{request-param:page}"/>
+                    <map:part src="cocoon:/content/file-info{request-param:page}"/>
+                </map:aggregate>
+                <map:select type="resource-exists">
+					<map:when test="/xsl/page2rss.xsl">
+		                <map:transform src="/xsl/page2rss.xsl" type="saxon">
+		                    <map:parameter name="page" value="{request-param:page}"/>
+		                </map:transform>
+                     </map:when>
+                     <map:otherwise>
+                        <map:transform src="context://xsl/page2rss.xsl" type="saxon">
+		                    <map:parameter name="page" value="{request-param:page}"/>
+		                </map:transform>
+                     </map:otherwise>
+                </map:select>
+				<map:serialize type="xml"/>
+            </map:match>
 		</map:pipeline>
 		
 	</map:pipelines>
