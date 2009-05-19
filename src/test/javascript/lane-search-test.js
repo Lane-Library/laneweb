@@ -8,17 +8,16 @@
     var UserAction = YAHOO.util.UserAction;
     var LANESearchTestCase = new TestCase({
         name: "LaneSearch TestCase",
-/*
+
         testActivateDeactivateButton: function(){
-            var s;
-            s = document.getElementById('searchSubmit');
-            Assert.areEqual('search_btn.gif', s.src.match(/search_btn.gif/));
-            YAHOO.util.UserAction.mouseover(s);
-            Assert.areEqual('search_btn_f2.gif', s.src.match(/search_btn_f2.gif/));
-            YAHOO.util.UserAction.mouseout(s);
-            Assert.areEqual('search_btn.gif', s.src.match(/search_btn.gif/));
+            var searchSubmit = document.getElementById('searchSubmit');
+            Assert.areEqual('search_btn.gif', searchSubmit.src.match(/search_btn.gif/));
+            YAHOO.util.UserAction.mouseover(searchSubmit);
+            Assert.areEqual('search_btn_f2.gif', searchSubmit.src.match(/search_btn_f2.gif/));
+            YAHOO.util.UserAction.mouseout(searchSubmit);
+            Assert.areEqual('search_btn.gif', searchSubmit.src.match(/search_btn.gif/));
         },
-*/
+
         testStartSearch: function(){
             var searchInput = document.getElementById('searchTerms'),
                 searchIndicator = document.getElementById('searchIndicator');
@@ -54,7 +53,7 @@
             Assert.areEqual('activeSearchTab', ejSearchTab.className);
 		}
     });
-    var oLogger = new YAHOO.tool.TestLogger();
+    new YAHOO.tool.TestLogger();
     TestRunner.add(LANESearchTestCase);
 	YAHOO.util.Event.addListener(this,'load',function(){
         TestRunner.run();
