@@ -215,7 +215,18 @@
             <xsl:when test=".='current-year'">
                 <xsl:value-of select="format-dateTime(current-dateTime(),'[Y,4]')"/>
             </xsl:when>
+            <xsl:when test=".='pico'">
+                <xsl:apply-templates select="$source-doc//child::node()[@id='pico']" mode="show"/>
+            </xsl:when>
         </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template match="child::node()[@id='pico']"/>
+    
+    <xsl:template match="child::node()" mode="show">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()|child::node()"/>
+        </xsl:copy>
     </xsl:template>
 
     <xsl:template match="h:div[@id='custom-doc']">
@@ -553,7 +564,7 @@
     <xsl:template match="attribute::href[starts-with(.,'mailto:')]"/>
 
     <!-- add back to top for dl lists > 20 -->
-    <xsl:template match="h:dl[count(h:dd) &gt; 20]">
+    <xsl:template match="h:dl[not(parent::h:div/@id) and count(h:dd) &gt; 20]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node | child::node()"/>
         </xsl:copy>

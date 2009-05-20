@@ -185,6 +185,7 @@
                                     </ul>
                                 </li>
                             </ul>
+                            <?laneweb pico?>
                             <fieldset>
                                 <label for="searchTerms">Search <span id="searchLabel">All</span>: </label>
                                 <input type="text" id="searchTerms" name="q"/>

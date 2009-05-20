@@ -17,6 +17,7 @@
      D = YAHOO.util.Dom,   // shorthand for YUI modules
      E = YAHOO.util.Event, 
      W = YAHOO.widget,
+     activeFacet,
      queryBuilder = function(target){ //build query terms from pico inputs
         var qString = '', i;
         if ( target === undefined ) {
@@ -67,9 +68,11 @@
     
     // initialize on load
     //E.addListener(this,'load',function(){
-    E.onDOMReady(function(){
-        picoContainer = d.getElementById('pico');
-        if (picoContainer) {
+//    E.onDOMReady(function(){
+    E.onContentReady('pico', function() {
+        picoContainer = this;
+        YAHOO.util.Get.script('http://yui.yahooapis.com/combo?2.7.0/build/datasource/datasource-min.js&2.7.0/build/animation/animation-min.js&2.7.0/build/autocomplete/autocomplete-min.js',{
+            onSuccess:function() {
             // change color and text of default input values
             // add event listeners to p,i,c,o inputs for building search terms
             inputs = D.getElementsBy(function(el){return el.type == 'text';},'input',picoContainer);
@@ -145,7 +148,40 @@
                     warningPanel.hide();
                 });
             }
+            }
+        });
+    });
+    E.onContentReady('facetTabs',function() {
+        var facetTabs = this.getElementsByTagName('LI'),
             
+            toggleFacet = function(facet) {
+                var i, facetElements = D.getElementsByClassName(activeFacet);
+                for (i = 0; i < facetElements.length; i++) {
+                    D.setStyle(facetElements[i], 'display', 'none');
+                }
+                facetElements = D.getElementsByClassName(facet);
+                for (i = 0; i < facetElements.length; i++) {
+                    D.setStyle(facetElements[i], 'display', 'block');
+                }
+                D.removeClass(D.getElementsByClassName('activeFacet')[0], 'activeFacet');
+                D.addClass(d.getElementById(facet + 'Tab'), 'activeFacet');
+                activeFacet = facet;
+            };
+        for (var i = 0; i < facetTabs.length; i++) {
+            if (facetTabs[i].className == 'activeFacet') {
+                activeFacet = facetTabs[i].id.substring(0, facetTabs[i].id.indexOf('Tab'));
+            }
+            facetTabs[i].clicked = function(event) {
+                var target;
+                E.stopEvent(event);
+                if (!event.handled) {
+                    toggleFacet(this.id.substring(0, this.id.indexOf('Tab')));
+                    target = event.target || event.srcElement;
+                    target.blur();
+                    event.handled = true;
+                }
+
+            };
         }
     });
     
