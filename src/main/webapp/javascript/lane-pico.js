@@ -165,8 +165,16 @@
                 }
                 D.removeClass(D.getElementsByClassName('activeFacet')[0], 'activeFacet');
                 D.addClass(d.getElementById(facet + 'Tab'), 'activeFacet');
+                if (facet == 'foundational') {
+                    facetInput.removeAttribute('name');
+                    facetInput.removeAttribute('value');
+                } else {
+                    facetInput.name = 'facet';
+                    facetInput.value = facet;
+                }
                 activeFacet = facet;
             };
+        facetInput = d.getElementById('facetInput');
         for (var i = 0; i < facetTabs.length; i++) {
             if (facetTabs[i].className == 'activeFacet') {
                 activeFacet = facetTabs[i].id.substring(0, facetTabs[i].id.indexOf('Tab'));
