@@ -43,6 +43,16 @@
         </xsl:copy>
     </xsl:template>
     
+    <xsl:template match="h:input[@id='facetInput']">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:if test="$facet">
+                <xsl:attribute name="name" select="'facet'"/>
+                <xsl:attribute name="value" select="$active-facet"/>
+            </xsl:if>
+        </xsl:copy>
+    </xsl:template>
+    
     <xsl:template match="h:div[@id='leftColumn']//h:a/@href">
         <xsl:choose>
             <xsl:when test="$search-terms">
