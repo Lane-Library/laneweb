@@ -6,7 +6,7 @@
     //  TODO: where will saving of pico values occur? laneweb.xsl or js?
     var i,y,z,
     d = document, 
-    picoContainer,             //container div for pico inputs fields
+    picoForm,             //container of all pico input fields
     searchTermsInput,     //input for built query terms
     inputs,               //input elements
     acInputs,             //input elements requiring auto complete
@@ -14,7 +14,7 @@
     warningContentElms,   //elements containing warning text and markup
     warningTarget,        // target element that toggles warning display
     warningViewLimit = 2, // max number of times to show warning
-     D = YAHOO.util.Dom,   // shorthand for YUI modules
+     D = YAHOO.util.Dom,  // shorthand for YUI modules
      E = YAHOO.util.Event, 
      W = YAHOO.widget,
      activeFacet,
@@ -70,12 +70,12 @@
     //E.addListener(this,'load',function(){
 //    E.onDOMReady(function(){
     E.onContentReady('pico', function() {
-        picoContainer = this;
+		picoForm = D.getAncestorByTagName(this,'form');
         YAHOO.util.Get.script('http://yui.yahooapis.com/combo?2.7.0/build/datasource/datasource-min.js&2.7.0/build/animation/animation-min.js&2.7.0/build/autocomplete/autocomplete-min.js',{
             onSuccess:function() {
             // change color and text of default input values
             // add event listeners to p,i,c,o inputs for building search terms
-            inputs = D.getElementsBy(function(el){return el.type == 'text';},'input',picoContainer);
+            inputs = D.getElementsBy(function(el){return el.type == 'text';},'input',picoForm);
             searchTermsInput = document.getElementById('searchTerms');
             for (i = 0; i < inputs.length; i++){
                 inputs[i].initState = {
@@ -104,7 +104,7 @@
             }
             
             // auto complete mesh on p and i inputs
-            acInputs = D.getElementsByClassName('acMesh',null,picoContainer);
+            acInputs = D.getElementsByClassName('acMesh',null,picoForm);
             if(acInputs.length){
                 for (y = 0; y < acInputs.length; y++){
                     var acCont,   // container element to hang the auto complete widget on
