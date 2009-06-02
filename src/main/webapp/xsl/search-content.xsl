@@ -96,7 +96,7 @@
             <xsl:apply-templates select="attribute::node()|child::node()"/>
             <xsl:if test="$search-terms">
                     <xsl:text> (</xsl:text>
-                    <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@id=current()/@id]/s:hits,'###,###,###')"/>
+                    <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id=current()/@id]/s:hits,'###,###,###')"/>
                     <xsl:text>)</xsl:text> 
             </xsl:if>
         </xsl:copy>
@@ -121,7 +121,7 @@
     
     <xsl:template match="h:dd" mode="results">
         <xsl:variable name="id" select="preceding-sibling::h:dt[1]/@id"/>
-        <xsl:variable name="results" select="/doc/s:search/s:engine[@id=$id]/s:resource/s:content"/>
+        <xsl:variable name="results" select="/doc/s:search/s:engine[@s:id=$id]/s:resource/s:content"/>
         <xsl:copy>
             <xsl:copy-of select="preceding-sibling::h:dt[1]/@class"/>
             <xsl:choose>

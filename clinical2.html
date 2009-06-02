@@ -1,0 +1,230 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Clinical Search Tool</title>
+        <style type="text/css">
+            div#leftColumn {padding-top:6em;border-right:none}
+            div#leftColumn li {background-image:none;padding-left:1em;padding-bottom:0}
+            div#leftColumn ul {margin:0}
+            div#leftColumn li li {padding-left:2em;margin-left:-1em}
+            div#leftColumn a, div#leftColumn li.activeFacet li a {color:#1C4B70}
+            div#leftColumn li.activeFacet {background-color:#b2a77a;font-weight:bolder}
+            div#leftColumn li.activeFacet a { color:white }
+            div#leftColumn li.activeFacet li  {background-color:white;font-weight:normal}
+            #facetTabs {padding-left:2em}
+            h1 span {text-transform:none}
+            h1 span span {color:#b90003}
+            #clinicalSearch {margin:1em 4em 1em -1em;border:5px #b2a77a solid;color:#595b5a;background-color:#f8f8f6 }
+            #clinicalSearch h1 {font-weight:bolder;color:#595b5a;padding:1.5em;font-size:95%;text-transform:uppercase;background-image:url(/images/templates/irt3/boxlabel_bkgnd.jpg);}
+            dt {padding:1em 0;margin:0 1em;text-transform:uppercase;border:1px #dee2cb solid;border-left:none;border-right:none}
+            dd {margin:1em 0;}
+            dd a {display:block }
+            .activeFacet { font-weight:bold}
+            .activeFacet li { font-weight:normal}
+            dd { display:none }
+            dt { display:none }
+            dt { background-image:url(/stage/logos-clinical.png);background-repeat:no-repeat }
+            
+            dt#pubmed {background-position:100% -9px}
+            dt#wiley_cochranelibrary {background-position:100% -176px}
+            dt#acpjc {background-position:100% -86px}
+            dt#uptodate {background-position:100% -127px}
+            dt#dare {background-position:100% -45px}
+            dt#bmj_clinical_evidence {background-position:100% -400px}
+            dt#emedicine {background-position:100% -266px}
+            dt#pubmed_guidelines {background-position:100% -9px}
+            dt#pubmed_treatment_systematic_reviews {background-position:100% -9px}
+            dt#pubmed_prognosis_systematic_reviews {background-position:100% -9px}
+            dt#pubmed_diagnosis_systematic_reviews {background-position:100% -9px}
+            dt#pubmed_harm_systematic_reviews {background-position:100% -9px}
+            dt#cro_clineguide {background-position:100% -312px}
+            dt#pubmed_recent_reviews {background-position:100% -9px}
+            dt#statref_acppier {background-position:100% -355px}
+            dt#ebooks_via_querymapping {background-image:none}
+            dt#pubmed_treatment_clinical_trials {background-position:100% -9px}
+            dt#pubmed_treatment_focused {background-position:100% -9px}
+            dt#pubmed_diagnosis_clinical_trials {background-position:100% -9px}
+            dt#pubmed_diagnosis_focused {background-position:100% -9px}
+            dt#pubmed_prognosis_clinical_trials {background-position:100% -9px}
+            dt#pubmed_prognosis_focused {background-position:100% -9px}
+            dt#pubmed_harm_clinical_trials {background-position:100% -9px}
+            dt#pubmed_harm_focused {background-position:100% -9px}
+            dt#pubmed_etiology_focused {background-position:100% -9px}
+            dt#pubmed_etiology_expanded {background-position:100% -9px}
+            dt#pubmed_epidemiology_focused {background-position:100% -9px}
+            dt#pubmed_epidemiology_expanded {background-position:100% -9px}
+            #search #pico {text-align:center;margin:0}
+            .inputTip {width:14em}
+        </style>
+    </head>
+    <body>
+        
+        <fieldset id="pico">
+            <!-- TODO: think about using rel attribute for field default values so we don't send defaults on query string -->
+            <div class="acContainer">
+                <input id="p" type="text" class="inputTip" value="patient/population"/>
+                <!-- TODO: why does this break in IE6 if width set in css? -->
+                <div class="acMesh" id="pInput" style="width:14em;" title="Suggested MeSH Terms"><!-- --></div>
+            </div>
+            <div class="acContainer">
+                <input id="i" type="text" class="inputTip" value="intervention"/>
+                <!-- TODO: why does this break in IE6 if width set in css? -->
+                <div class="acMesh" id="iInput" style="width:14em;" title="Suggested MeSH Terms"><!-- --></div>
+            </div>
+            <input id="c" type="text" class="inputTip" value="comparison"/>
+            <input id="o" type="text" class="inputTip" value="outcome"/>
+            <div class="inputWarning" id="cWarning">
+                <img src="/images/templates/irt3/warning_icon.jpg" alt="warning"/> <strong>Warning</strong><br/>
+                Use of the <strong>C</strong>omparison field may significantly reduce the number of results returned
+            </div>
+            <div class="inputWarning" id="oWarning">
+                <img src="/images/templates/irt3/warning_icon.jpg" alt="warning"/> <strong>Warning</strong><br/>
+                Use of the <strong>O</strong>utcome field may significantly reduce the number of results returned
+            </div>
+            <input type="hidden" id="facetInput"/>
+        </fieldset>
+        <div id="leftColumn">
+            <ul id="facetTabs">
+                <li id="foundationalTab">
+                    <a href="?facet=foundational">Foundational</a>
+                </li>
+                <li id="evidenceTab">
+                    <a href="?facet=evidence">Evidence Based</a>
+                    <!--<span>Refine your search in <span>PubMed</span></span>-->
+                    <ul>
+                        <li id="treatmentTab">
+                            <a href="?facet=treatment">Therapy</a>
+                        </li>
+                        <li id="diagnosisTab">
+                            <a href="?facet=diagnosis">Diagnosis</a>
+                        </li>
+                        <li id="prognosisTab">
+                            <a href="?facet=prognosis">Prognosis</a>
+                        </li>
+                        <li id="harmTab">
+                            <a href="?facet=harm">Harm</a>
+                        </li>
+                        <li id="etiologyTab">
+                            <a href="?facet=etiology">Etiology</a>
+                        </li>
+                        <li id="epidemiologyTab">
+                            <a href="?facet=epidemiology">Epidemiology</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="mainColumn">
+            <div id="clinicalSearch">
+                <h1>Clinical Search Tool</h1>
+                <dl>
+                    <dt id="pubmed" class="evidence">PubMed</dt>
+                    <dd>Provides access to the MEDLINE database, which contains coverage of over
+                        5000 journals and more than 16 million citations for biomedical articles,
+                        including, but not limited to, clinical trials, systematic reviews, case
+                        reports, and clinical practice guidelines. <a
+                            href="http://www.pubmedcentral.nih.gov/"
+                            >http://www.pubmedcentral.nih.gov/</a></dd>
+                    <dt id="wiley_cochranelibrary" class="evidence">Cochrane Database of Systematic
+                        Reviews</dt>
+                    <dd>Features systematic reviews that summarize the effects of interventions and
+                        makes a determination whether the intervention is efficacious or not.
+                        Cochrane reviews are created through a strict process of compiling and
+                        analyzing data from multiple randomized control trials to ensure
+                        comprehensiveness and reliability. <a href="http://www.cochrane.org/"
+                            >http://www.cochrane.org/</a></dd>
+                    <dt id="acpjc" class="evidence">ACP Journal Club</dt>
+                    <dd>Selects from the biomedical literature original studies and systematic
+                        reviews that are immediately clinically relevant and then summarizes these
+                        articles in an enhanced abstract with expert commentary. <a
+                            href="http://www.acpjc.org/">http://www.acpjc.org/</a></dd>
+                    <dt id="uptodate" class="evidence foundational">UpToDate</dt>
+                    <dd>Features topic reviews that include a synthesis of the biomedical literature
+                        and specific patient care recommendations. <a
+                            href="http://www.uptodate.com/">http://www.uptodate.com/</a></dd>
+                    <dt id="dare" class="evidence review">DARE</dt>
+                    <dd>Provides critical assessments of systematic reviews compiled from a variety
+                        of medical journals. <a href="http://www.crd.york.ac.uk/crdweb/"
+                            >http://www.crd.york.ac.uk/crdweb/</a></dd>
+                    <dt id="bmj_clinical_evidence" class="foundational">BMJ Clinical Evidence</dt>
+                    <dd>Provides reviews of treatments for over 250 conditions that summarize the
+                        related available evidence from systematic reviews, clinical trials,
+                        observational studies and clinical practice guidelines.</dd>
+                    <dt id="emedicine" class="evidence foundational">eMedicine</dt>
+                    <dd>emedicine</dd>
+                    <dt id="pubmed_guidelines" class="evidence foundational">Pubmed Guidelines</dt>
+                    <dd>pubmed_guidelines</dd>
+                    <dt id="pubmed_treatment_systematic_reviews" class="treatment">PubMed-Tx SR</dt>
+                    <dd>The evaluation of a therapeutic or preventive intervention.</dd>
+                    <dt id="pubmed_prognosis_systematic_reviews" class="prognosis">PubMed-Px SR</dt>
+                    <dd>The evaluation of clinical outcomes over time.</dd>
+                    <dt id="pubmed_diagnosis_systematic_reviews" class="diagnosis">PubMed-Dx SR</dt>
+                    <dd>Evaluation of a test, screening or other diagnostic assessment such as a
+                        history or a physical exam.</dd>
+                    <dt id="pubmed_harm_systematic_reviews" class="harm">PubMed-Hx SR</dt>
+                    <dd>pubmed_harm_systematic_reviews</dd>
+                    <dt class="evidence" id="cro_clineguide">Clin-eguide</dt>
+                    <dd>Clin-eguide</dd>
+                    <dt class="foundational" id="pubmed_recent_reviews">Pubmed Recent Reviews</dt>
+                    <dd>Pubmed Recent Reviews</dd>
+                    <dt id="statref_acppier" class="foundational">PIER</dt>
+                    <dd>PIER</dd>
+                    <dt class="foundational" id="ebooks_via_querymapping">eBooks via QM</dt>
+                    <dd>eBooks via QM</dd>
+                    <!--<dt id="pubmed_treatment_evidence_summaries"
+                        >pubmed_treatment_evidence_summaries</dt>
+                    <dd>pubmed_treatment_evidence_summaries</dd>-->
+                    <dt id="pubmed_treatment_clinical_trials" class="treatment">PubMed-Tx CT</dt>
+                    <dd>pubmed_treatment_clinical_trials</dd>
+                    <dt id="pubmed_treatment_focused" class="treatment">PubMed-Tx More</dt>
+                    <dd>pubmed_treatment_focused</dd>
+                    <!--<dt id="pubmed_diagnosis_evidence_summaries"
+                        >pubmed_diagnosis_evidence_summaries</dt>
+                    <dd>pubmed_diagnosis_evidence_summaries</dd>-->
+                    <dt id="pubmed_diagnosis_clinical_trials" class="diagnosis">PubMed-Dx CT</dt>
+                    <dd>pubmed_diagnosis_clinical_trials</dd>
+                    <dt id="pubmed_diagnosis_focused" class="diagnosis">PubMed-Dx More</dt>
+                    <dd>pubmed_diagnosis_focused</dd>
+                    <!--<dt id="pubmed_prognosis_evidence_summaries"
+                        >pubmed_prognosis_evidence_summaries</dt>
+                    <dd>pubmed_prognosis_evidence_summaries</dd>-->
+                    <dt id="pubmed_prognosis_clinical_trials" class="prognosis">PubMed-Px CT</dt>
+                    <dd>pubmed_prognosis_clinical_trials</dd>
+                    <dt id="pubmed_prognosis_focused" class="prognosis">PubMed-Dx More</dt>
+                    <dd>pubmed_prognosis_focused</dd>
+                    <!--<dt id="pubmed_harm_evidence_summaries">pubmed_harm_evidence_summaries</dt>
+                    <dd>pubmed_harm_evidence_summaries</dd>-->
+                    <dt id="pubmed_harm_clinical_trials" class="harm">PubMed-Hx CT</dt>
+                    <dd>pubmed_harm_clinical_trials</dd>
+                    <dt id="pubmed_harm_focused" class="harm">PubMed-Hx More</dt>
+                    <dd>pubmed_harm_focused</dd>
+                    <dt id="pubmed_etiology_focused" class="etiology">PubMed-Et-Less</dt>
+                    <dd>pubmed_etiology_focused</dd>
+                    <dt id="pubmed_etiology_expanded" class="etiology">PubMed-Et-More</dt>
+                    <dd>pubmed_etiology_expanded</dd>
+                    <dt id="pubmed_epidemiology_focused" class="epidemiology">PubMed-Ep-Less</dt>
+                    <dd>pubmed_epidemiology_focused</dd>
+                    <dt id="pubmed_epidemiology_expanded" class="epidemiology">PubMed-Ep-More</dt>
+                    <dd>pubmed_epidemiology_expanded</dd>
+                </dl>
+            </div>
+        </div>
+        <div class="tooltips">
+            <span id="treatmentTabTooltip">Therapy problems are questions about what treatment, if
+                any, to give a patient, and what the outcomes of different treatment options might
+                be.</span>
+            <span id="diagnosisTabTooltip"> Diagnosis problems are questions about the degree to
+                which a particular test is reliable and clinically useful, generally asked in order
+                to decide whether a patient would get enough benefit from the test, on average, to
+                justify having it done.</span>
+            <span id="prognosisTabTooltip">Prognosis problems are questions about a patient's future
+                health, life span, and quality of life in the event that s/he chooses a particular
+                treatment option.</span>
+            <span id="harmTabTooltip">Please don't hurt me.</span>
+            <span id="etiologyTabTooltip">Etiology problems are questions about the relationship
+                between a disease and a possible cause.</span>
+            <span id="epidemiologyTabTooltip">Epidemiology problems are questions about various
+                factors affecting the health of populations.</span>
+
+        </div>
+    </body>
+</html>

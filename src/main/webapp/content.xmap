@@ -150,6 +150,14 @@
                 <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml" status-code="403"/>
             </map:match>
+            <!-- temporary implemtation of the new clincal search portal 5/20/09 -->
+            <map:match type="wildcard" pattern="portals/clinical2.html">
+                <map:generate type="file" src="{naming:java:comp/env/stage-base}/content/search/clinical2.html"/>
+                <map:transform type="saxon" src="context://xsl/search-content.xsl">
+                    <map:parameter name="facet" value="{request-param:facet}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="**" type="wildcard">
                 <map:generate type="html" src="{naming:java:comp/env/live-base}/content/{1}"/>
                 <map:transform type="xinclude"/>
