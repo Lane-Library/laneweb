@@ -325,6 +325,36 @@
     
     <bean name="org.apache.cocoon.generation.Generator/content-search"
         class="edu.stanford.irt.laneweb.search.ContentSearchGenerator" scope="prototype">
+        <property name="engines">
+            <list>
+                <value>pubmed</value>
+                <value>wiley_cochranelibrary</value>
+                <value>acpjc</value>
+                <value>uptodate</value>
+                <value>dare</value>
+                <value>bmj_clinical_evidence</value>
+                <value>emedicine</value>
+                <value>pubmed_guidelines</value>
+                <value>pubmed_treatment_systematic_reviews</value>
+                <value>pubmed_prognosis_systematic_reviews</value>
+                <value>pubmed_diagnosis_systematic_reviews</value>
+                <value>pubmed_harm_systematic_reviews</value>
+                <value>pubmed_recent_reviews</value>
+                <value>statref_acppier</value>
+                <value>pubmed_treatment_clinical_trials</value>
+                <value>pubmed_treatment_focused</value>
+                <value>pubmed_diagnosis_clinical_trials</value>
+                <value>pubmed_diagnosis_focused</value>
+                <value>pubmed_prognosis_clinical_trials</value>
+                <value>pubmed_prognosis_focused</value>
+                <value>pubmed_harm_clinical_trials</value>
+                <value>pubmed_harm_focused</value>
+                <value>pubmed_etiology_focused</value>
+                <value>pubmed_etiology_expanded</value>
+                <value>pubmed_epidemiology_focused</value>
+                <value>pubmed_epidemiology_expanded</value>
+            </list>
+        </property>
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>
