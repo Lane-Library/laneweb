@@ -10,9 +10,11 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="histdb" type="wildcard">
-                <map:generate type="history">
-                    <map:parameter name="mode" value="search"/>
-                </map:generate>
+                <map:generate type="history-search"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="history-search" type="wildcard">
+                <map:generate type="history-search"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="count" type="wildcard">
@@ -20,9 +22,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="history-count" type="wildcard">
-                <map:generate type="history-count">
-                    <map:parameter name="collection" value="history"/>
-                </map:generate>
+                <map:generate type="history-count"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="extensions-suggest" type="wildcard">
