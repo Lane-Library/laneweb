@@ -32,6 +32,11 @@
                     <map:act type="persistentLoginAction"/>
                 </map:match>
             </map:match>
+            <map:match pattern="redirect/cme" type="wildcard">
+                <map:act type="cmeRedirectAction">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
+                </map:act>
+            </map:match>
             <!-- external resource searches, normally intercepted by javascript -->
             <map:match pattern="^http" type="regex-parameter">
                 <map:parameter name="parameter-name" value="source"/>

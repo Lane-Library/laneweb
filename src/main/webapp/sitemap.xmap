@@ -89,6 +89,11 @@
                     <map:redirect-to uri="{voyager-url}"/>
                 </map:act>
             </map:match>
+            <map:match pattern="redirect/cme" type="wildcard">
+                <map:act type="cmeRedirectAction">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
+                </map:act>
+            </map:match>
             <map:match pattern="javascriptLogger" type="wildcard">
                 <map:act type="javascript-logger"/>
                 <map:read type="resource"
