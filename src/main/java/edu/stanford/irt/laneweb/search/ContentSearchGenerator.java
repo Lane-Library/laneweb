@@ -32,7 +32,7 @@ public class ContentSearchGenerator implements Generator {
 
     public void generate() throws SAXException {
         Query query = new SimpleQuery(this.searchTerms);
-        Result result = this.metaSearchManager.search(query, 20000, engines, true);
+        Result result = this.metaSearchManager.search(query, 20000, this.engines, true);
         SAXable xml = new SAXResult(result);
         xml.toSAX(this.xmlConsumer);
     }
@@ -41,12 +41,12 @@ public class ContentSearchGenerator implements Generator {
         this.xmlConsumer = xmlConsumer;
     }
 
+    public void setEngines(final List<String> engines) {
+        this.engines = engines;
+    }
+
     public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
         this.metaSearchManager = msms.getMetaSearchManager();
-    }
-    
-    public void setEngines(List<String> engines) {
-        this.engines = engines;
     }
 
     @SuppressWarnings("unchecked")

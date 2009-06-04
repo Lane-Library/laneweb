@@ -53,12 +53,6 @@
                     <map:parameter name="emrid" value="{user:emrid}"/>
                 </map:act>
             </map:match>
-            <map:match pattern="javascriptLogger" type="wildcard">
-                <map:act type="javascript-logger"/>
-                <map:read type="resource"
-                    src="{naming:java:comp/env/stage-base}/resources/images/templates/default/spacer.gif"
-                    mime-type="image/gif"/>
-            </map:match>
             <map:match pattern="cookiesFetch.html" type="wildcard">
                 <map:generate type="file"
                     src="{naming:java:comp/env/stage-base}/content/cookiesFetch.html"/>

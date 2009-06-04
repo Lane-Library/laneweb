@@ -12,16 +12,6 @@
         </layout>
     </appender>
     
-    <appender name="JAVASCRIPT_LOG" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="${catalina.base}/logs/javascript.log"/>
-        <param name="Append" value="true"/>
-        <param name="MaxFileSize" value="10MB"/>
-        <param name="MaxBackupIndex" value="4"/>
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d %p [%t][%c] - %m%n"/>
-        </layout>
-    </appender>
-    
     <appender name="VOYAGER" class="org.apache.log4j.net.SMTPAppender">
         <param name="Threshold" value="ERROR"/>
         <param name="To" value="ryanmax@stanford.edu"/>
@@ -30,8 +20,7 @@
         <param name="SMTPHost" value="smtp.stanford.edu"/>
         <param name="BufferSize" value="512"/>
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="[%d{ISO8601}] %-5p %c %m %n"
-            />
+            <param name="ConversionPattern" value="[%d{ISO8601}] %-5p %c %m %n"/>
         </layout>
     </appender>
     
@@ -45,11 +34,6 @@
     <category name="edu.stanford.irt.laneweb.LoginAction" additivity="false">
         <priority value="ERROR"/>
         <appender-ref ref="VOYAGER"/>
-    </category>
-    
-    <category name="edu.stanford.irt.laneweb.JavascriptLoggerAction" additivity="false">
-        <priority value="ERROR"/>
-        <appender-ref ref="JAVASCRIPT_LOG"/>
     </category>
     
     <root>
