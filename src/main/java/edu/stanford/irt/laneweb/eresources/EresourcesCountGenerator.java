@@ -4,17 +4,12 @@
  */
 package edu.stanford.irt.laneweb.eresources;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -25,7 +20,7 @@ import edu.stanford.irt.eresources.CollectionManager;
 
 public class EresourcesCountGenerator implements Generator {
 
-    private static final String QUERY = "q";
+    private static final String QUERY = "query";
 
     private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
 
@@ -89,10 +84,8 @@ public class EresourcesCountGenerator implements Generator {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
-            IOException {
-        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        String query = request.getParameter(QUERY);
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+        String query = par.getParameter(QUERY, null);
         if (null != query) {
             this.query = query.trim();
             if (this.query.length() == 0) {
