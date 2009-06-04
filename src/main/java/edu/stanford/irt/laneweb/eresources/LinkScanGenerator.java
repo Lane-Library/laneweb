@@ -22,7 +22,7 @@ import edu.stanford.irt.laneweb.JdbcUtils;
 
 public class LinkScanGenerator implements Generator {
 
-    private static final String sql = "select url, record_type, record_id, title " + "from link, eresource "
+    private static final String SQL = "select url, record_type, record_id, title " + "from link, eresource "
             + "where eresource.eresource_id = link.eresource_id";
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
@@ -39,7 +39,7 @@ public class LinkScanGenerator implements Generator {
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
+            rs = stmt.executeQuery(SQL);
             consumer.startDocument();
             XMLUtils.startElement(consumer, XHTML_NS, "ul");
             int p = 1;
@@ -89,7 +89,6 @@ public class LinkScanGenerator implements Generator {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3) throws ProcessingException, SAXException,
-            IOException {
+    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3) {
     }
 }

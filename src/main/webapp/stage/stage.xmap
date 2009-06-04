@@ -93,7 +93,7 @@
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="{request:serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                    <map:parameter name="context" value="/stage"/>
+                    <map:parameter name="context" value="{request:contextPath}/stage"/>
                     <map:parameter name="query-string" value="{request:queryString}"/>
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
@@ -130,7 +130,7 @@
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="{request:serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                    <map:parameter name="context" value="/stage"/>
+                    <map:parameter name="context" value="{request:contextPath}/stage"/>
                     <map:parameter name="query-string" value="{request:queryString}"/>
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
