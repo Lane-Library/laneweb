@@ -1,14 +1,9 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -20,13 +15,13 @@ import edu.stanford.irt.eresources.Eresource;
 
 public abstract class AbstractEresourcesGenerator implements Generator {
 
-    private static final String ALPHA = "a";
+    private static final String ALPHA = "alpha";
 
-    private static final String MESH = "m";
+    private static final String MESH = "mesh";
 
-    private static final String SUBSET = "s";
+    private static final String SUBSET = "subset";
 
-    private static final String TYPE = "t";
+    private static final String TYPE = "type";
 
     private XMLConsumer xmlConsumer;
 
@@ -62,28 +57,20 @@ public abstract class AbstractEresourcesGenerator implements Generator {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
-            IOException {
-        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        this.type = request.getParameter(TYPE);
-        if (null != this.type) {
-            if (this.type.length() == 0) {
-                this.type = null;
-            }
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+        this.type = par.getParameter(TYPE, null);
+        if (null != this.type && this.type.length() == 0) {
+            this.type = null;
         }
-        this.subset = request.getParameter(SUBSET);
-        if (null != this.subset) {
-            if (this.subset.length() == 0) {
-                this.subset = null;
-            }
+        this.subset = par.getParameter(SUBSET, null);
+        if (null != this.subset && this.subset.length() == 0) {
+            this.subset = null;
         }
-        this.alpha = request.getParameter(ALPHA);
-        if (this.alpha != null) {
-            if (this.alpha.length() == 0) {
-                this.alpha = null;
-            }
+        this.alpha = par.getParameter(ALPHA, null);
+        if (this.alpha != null && this.alpha.length() == 0) {
+            this.alpha = null;
         }
-        this.mesh = request.getParameter(MESH);
+        this.mesh = par.getParameter(MESH, null);
         if (this.mesh != null) {
             if (this.mesh.length() == 0) {
                 this.mesh = null;

@@ -1,35 +1,25 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.Eresource;
 
 public class SearchEresourcesGenerator extends AbstractEresourcesGenerator {
 
-    private static final String QUERY = "q";
+    private static final String QUERY = "query";
 
     protected String query;
 
     @SuppressWarnings("unchecked")
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
-            IOException {
-        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        this.query = request.getParameter(QUERY);
-        if (null != this.query) {
-            if (this.query.length() == 0) {
-                this.query = null;
-            }
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+        this.query = par.getParameter(QUERY, null);
+        if (null != this.query && this.query.length() == 0) {
+            this.query = null;
         }
         super.setup(resolver, objectModel, src, par);
     }
