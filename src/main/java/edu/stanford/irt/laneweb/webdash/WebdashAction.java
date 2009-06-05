@@ -24,7 +24,7 @@ public class WebdashAction implements Action {
 
     @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string, final Parameters param) {
-        HttpServletRequest request = (HttpServletRequest) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         String nonce = request.getParameter("nonce");
         String systemUserId = request.getParameter("system_user_id");
         User user = this.userDao.createOrUpdateUser(request);

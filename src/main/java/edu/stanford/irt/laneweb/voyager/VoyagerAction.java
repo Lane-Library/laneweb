@@ -25,7 +25,7 @@ public class VoyagerAction implements Action {
     @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string, final Parameters param)
             throws Exception {
-        HttpServletRequest request = (HttpServletRequest) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         String pid = request.getParameter("PID");
         String queryString = request.getQueryString();
         User user = this.userDao.createOrUpdateUser(request);

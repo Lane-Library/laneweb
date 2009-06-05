@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.eresources.bassett;
 
 import java.io.IOException;
 import java.util.Map;

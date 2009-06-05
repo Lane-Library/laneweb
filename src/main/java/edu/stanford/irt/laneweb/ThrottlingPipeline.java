@@ -33,7 +33,7 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
      */
     @Override
     protected boolean processXMLPipeline(final Environment environment) throws ProcessingException {
-        HttpServletRequest request = (HttpServletRequest) environment.getObjectModel().get(ObjectModelHelper.REQUEST_OBJECT);
+        HttpServletRequest request = ObjectModelHelper.getRequest(environment.getObjectModel());
         String requestKey = new StringBuffer(request.getRemoteAddr()).append(request.getRequestURI()).append("?").append(request.getQueryString()).toString();
         if (this.logger.isDebugEnabled()) {
             this.logger.debug("requestKey = " + requestKey);
