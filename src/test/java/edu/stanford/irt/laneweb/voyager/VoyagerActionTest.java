@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,6 +24,8 @@ public class VoyagerActionTest {
     private Map<String, Object> objectModel;
 
     private HttpServletRequest request;
+    
+    private Parameters params;
 
     private User user;
 
@@ -38,6 +41,7 @@ public class VoyagerActionTest {
         this.userDao = createMock(UserDao.class);
         this.objectModel = createMock(Map.class);
         this.request = createMock(HttpServletRequest.class);
+        this.params = createMock(Parameters.class);
         this.user = createMock(User.class);
     }
 
@@ -45,9 +49,10 @@ public class VoyagerActionTest {
     public void testAct() throws Exception {
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
-        expect(this.request.getParameter("PID")).andReturn("123");
-        expect(this.request.getQueryString()).andReturn("a=b");
         replay(this.request);
+        expect(this.params.getParameter("pid", null)).andReturn("123");
+        expect(this.params.getParameter("query-string", null)).andReturn("a=b");
+        replay(this.params);
         expect(this.userDao.createOrUpdateUser(this.request)).andReturn(this.user);
         replay(this.userDao);
         replay(this.user);
@@ -55,9 +60,10 @@ public class VoyagerActionTest {
         replay(this.voyagerLogin);
         this.action.setVoyagerLogin(this.voyagerLogin);
         this.action.setUserDao(this.userDao);
-        assertEquals(this.action.act(null, null, this.objectModel, null, null).get("voyager-url"), "hello");
+        assertEquals(this.action.act(null, null, this.objectModel, null, this.params).get("voyager-url"), "hello");
         verify(this.objectModel);
         verify(this.request);
+        verify(this.params);
         verify(this.userDao);
         verify(this.user);
         verify(this.voyagerLogin);

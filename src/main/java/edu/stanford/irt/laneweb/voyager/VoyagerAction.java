@@ -25,9 +25,9 @@ public class VoyagerAction implements Action {
     @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string, final Parameters param)
             throws Exception {
-        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        String pid = request.getParameter("PID");
-        String queryString = request.getQueryString();
+        HttpServletRequest request = (HttpServletRequest) objectModel.get(ObjectModelHelper.REQUEST_OBJECT);
+        String pid = param.getParameter("pid", null);
+        String queryString = param.getParameter("query-string", null);
         User user = this.userDao.createOrUpdateUser(request);
         String url = this.voyagerLogin.getVoyagerURL(user, pid, queryString);
         Map<String, String> result = new HashMap<String, String>(1);

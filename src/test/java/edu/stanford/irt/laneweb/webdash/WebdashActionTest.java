@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,6 +24,8 @@ public class WebdashActionTest {
     private Map<String, Object> objectModel;
 
     private HttpServletRequest request;
+    
+    private Parameters params;
 
     private User user;
 
@@ -36,6 +39,7 @@ public class WebdashActionTest {
         this.action = new WebdashAction();
         this.objectModel = createMock(Map.class);
         this.request = createMock(HttpServletRequest.class);
+        this.params = createMock(Parameters.class);
         this.userDao = createMock(UserDao.class);
         this.user = createMock(User.class);
         this.webdashLogin = createMock(WebdashLogin.class);
@@ -46,9 +50,10 @@ public class WebdashActionTest {
     public void testError() {
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
-        expect(this.request.getParameter("nonce")).andReturn(null);
-        expect(this.request.getParameter("system_user_id")).andReturn("ceyates");
         replay(this.request);
+        expect(this.params.getParameter("nonce", null)).andReturn(null);
+        expect(this.params.getParameter("system-user-id", null)).andReturn("ceyates");
+        replay(this.params);
         expect(this.userDao.createOrUpdateUser(this.request)).andReturn(this.user);
         replay(this.userDao);
         replay(this.user);
@@ -56,9 +61,10 @@ public class WebdashActionTest {
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserDao(this.userDao);
-        Map result = this.action.act(null, null, this.objectModel, null, null);
+        Map result = this.action.act(null, null, this.objectModel, null, this.params);
         assertEquals("broken", result.get("webdash-url"));
         verify(this.objectModel);
+        verify(this.params);
         verify(this.request);
         verify(this.userDao);
         verify(this.user);
@@ -70,9 +76,10 @@ public class WebdashActionTest {
     public void testLogin() {
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
-        expect(this.request.getParameter("nonce")).andReturn("nonce");
-        expect(this.request.getParameter("system_user_id")).andReturn("ceyates");
         replay(this.request);
+        expect(this.params.getParameter("nonce", null)).andReturn("nonce");
+        expect(this.params.getParameter("system-user-id", null)).andReturn("ceyates");
+        replay(this.params);
         expect(this.userDao.createOrUpdateUser(this.request)).andReturn(this.user);
         replay(this.userDao);
         replay(this.user);
@@ -80,10 +87,11 @@ public class WebdashActionTest {
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserDao(this.userDao);
-        Map result = this.action.act(null, null, this.objectModel, null, null);
+        Map result = this.action.act(null, null, this.objectModel, null, this.params);
         assertEquals("login", result.get("webdash-url"));
         verify(this.objectModel);
         verify(this.request);
+        verify(this.params);
         verify(this.userDao);
         verify(this.user);
         verify(this.webdashLogin);
@@ -94,9 +102,10 @@ public class WebdashActionTest {
     public void testRegister() {
         expect(this.objectModel.get("request")).andReturn(this.request);
         replay(this.objectModel);
-        expect(this.request.getParameter("nonce")).andReturn("nonce");
-        expect(this.request.getParameter("system_user_id")).andReturn(null);
         replay(this.request);
+        expect(this.params.getParameter("nonce", null)).andReturn("nonce");
+        expect(this.params.getParameter("system-user-id", null)).andReturn(null);
+        replay(this.params);
         expect(this.userDao.createOrUpdateUser(this.request)).andReturn(this.user);
         replay(this.userDao);
         replay(this.user);
@@ -104,10 +113,11 @@ public class WebdashActionTest {
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         this.action.setUserDao(this.userDao);
-        Map result = this.action.act(null, null, this.objectModel, null, null);
+        Map result = this.action.act(null, null, this.objectModel, null, this.params);
         assertEquals("register", result.get("webdash-url"));
         verify(this.objectModel);
         verify(this.request);
+        verify(this.params);
         verify(this.userDao);
         verify(this.user);
         verify(this.webdashLogin);
