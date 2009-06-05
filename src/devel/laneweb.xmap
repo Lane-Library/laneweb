@@ -52,6 +52,9 @@
             </map:match>
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
+                <map:transform type="cme-links">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
+                </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
                         <map:transform type="saxon" src="xsl/laneweb.xsl">
@@ -97,9 +100,6 @@
                         </map:transform>
                     </map:otherwise>
                 </map:select>
-                <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="{user:emrid}"/>
-                </map:transform>
                 <!--<map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
@@ -114,6 +114,9 @@
                     <map:part src="cocoon:/content/sitemap.html"/>
                     <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                 </map:aggregate>
+                <map:transform type="cme-links">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
+                </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
                         <map:transform type="saxon" src="xsl/laneweb.xsl">
@@ -158,9 +161,6 @@
                         </map:transform>
                     </map:otherwise>
                 </map:select>
-                <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="{user:emrid}"/>
-                </map:transform>
                 <!--<map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>

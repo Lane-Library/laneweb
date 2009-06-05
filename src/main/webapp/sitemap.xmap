@@ -158,6 +158,9 @@
             </map:match>
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
+                <map:transform type="cme-links">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
+                </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="{request:serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
@@ -178,9 +181,6 @@
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>
                 </map:transform>
-                <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="{user:emrid}"/>
-                </map:transform>
                 <!--<map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
@@ -195,6 +195,9 @@
                     <map:part src="cocoon:/content/sitemap.html"/>
                     <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                 </map:aggregate>
+                <map:transform type="cme-links">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
+                </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="{request:serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
@@ -214,9 +217,6 @@
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>
-                </map:transform>
-                <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="{user:emrid}"/>
                 </map:transform>
                 <!--<map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
@@ -250,6 +250,9 @@
                     <map:part src="cocoon:/content/sitemap.html"/>
                     <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                 </map:aggregate>
+                <map:transform type="cme-links">
+                    <map:parameter name="emrid" value="{user:emrid}"/>
+                </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="{request:serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
@@ -269,9 +272,6 @@
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>
-                </map:transform>
-                <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="{user:emrid}"/>
                 </map:transform>
                 <!--<map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
