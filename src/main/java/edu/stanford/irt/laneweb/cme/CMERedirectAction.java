@@ -23,6 +23,8 @@ public class CMERedirectAction implements Action {
 
     // TODO: once more vendors, move UTD strings to collection of host objects
     private static final String UTD_CME_STRING = "http://www.uptodate.com/online/content/search.do?unid=EMRID&srcsys=epicXXX&eiv=2.1.0";
+    
+    private static final String PROXY_LINK = "http://laneproxy.stanford.edu/login?url=";
 
     private Logger logger = Logger.getLogger(CMERedirectAction.class);
 
@@ -40,7 +42,7 @@ public class CMERedirectAction implements Action {
             this.logger.error("null hostid");
         }
         if ("uptodate".equalsIgnoreCase(hostid)) {
-            redirectUrl = UTD_CME_STRING.replaceFirst("EMRID", emrid);
+            redirectUrl = PROXY_LINK + UTD_CME_STRING.replaceFirst("EMRID", emrid);
         } else {
             this.logger.error("unknown cme host: " + hostid);
         }
