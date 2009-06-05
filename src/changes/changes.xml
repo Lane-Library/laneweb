@@ -4,11 +4,16 @@
  xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/plugins/maven-changes-plugin/xsd/changes-1.0.0.xsd">
     <properties>
         <author email="ceyates@stanford.edu">Charles Yates</author>
-        <title>System Software Developer</title>
+        <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="in SVN" description="" version="1.10.0">
-            <action date="" dev="" due-to="" due-to-email="" issue="" system="" type=""/>
+        <release date="2009-06-05" version="1.9.18" description="1.9.18 bugfix release">
+            <action date="2009-06-01" dev="ceyates" issue="28652" type="fix">
+                reverted nekohtml to version 1.9.11
+            </action>
+            <action date="2009-05-27" dev="ryanmax" issue="28293" type="fix">
+                changed regular expression in laneweb.xml to not proxy affected IP range
+            </action>
         </release>
     </body>
 </document>

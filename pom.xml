@@ -146,8 +146,28 @@
                 </reportSets>
             </plugin>
             <plugin>
-            	<groupId>org.codehaus.mojo</groupId>
-            	<artifactId>changes-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changes-plugin</artifactId>
+                <configuration>
+                    <issueLinkTemplate>%URL%/default.php?%ISSUE%</issueLinkTemplate>
+                    <mailSender>
+                        <name>Release Notification</name>
+                        <email>ceyates@stanford.edu</email>
+                    </mailSender>
+                    <smtpHost>smtp.stanford.edu</smtpHost>
+                    <smtpPort implementation="java.lang.Integer">25</smtpPort>
+                    <toAddresses>
+                        <toAddress implementation="java.lang.String">ceyates@stanford.edu</toAddress>
+                    </toAddresses>
+                    
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>changes-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
             </plugin>
         </plugins>
     </reporting>
