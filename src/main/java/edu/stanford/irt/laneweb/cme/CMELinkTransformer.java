@@ -17,9 +17,9 @@ public class CMELinkTransformer extends AbstractTransformer {
 
     private static final String HREF = "href";
 
-    private static final String QUESTION = "?";
-
-    private static final String UTD_CME_STRING = "unid=?&srcsys=epicXXX&eiv=2.1.0";
+    private static final String UTD_CME_URL = "http://www.uptodate.com/online/content/search.do?";
+    
+    private static final String UTD_CME_ARGS = "unid=?&srcsys=epicXXX&eiv=2.1.0";
 
     // TODO: once more vendors, will want to move UTD strings out to
     // CME_HOSTS<host, cme_args> object
@@ -69,13 +69,13 @@ public class CMELinkTransformer extends AbstractTransformer {
 
     private String createCMELink(final String link) {
         StringBuffer sb = new StringBuffer();
-        sb.append(link);
-        if (!link.contains(QUESTION)) {
-            sb.append(QUESTION);
+        if (link.contains("?")) {
+          sb.append(link).append("&").append(UTD_CME_ARGS.replaceFirst("\\?", this.emrid));
+        } else if (link.endsWith("/") || link.endsWith("online")) {
+          sb.append(UTD_CME_URL).append(UTD_CME_ARGS.replaceFirst("\\?", this.emrid));
         } else {
-            sb.append("&");
+          sb.append(link);
         }
-        sb.append(UTD_CME_STRING.replaceFirst("\\?", this.emrid));
         return sb.toString();
     }
 
