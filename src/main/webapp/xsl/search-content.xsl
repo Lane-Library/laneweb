@@ -92,19 +92,37 @@
     </xsl:template>
     
     <xsl:template match="h:dt">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()|child::node()"/>
-            <xsl:if test="$search-terms">
-                    <xsl:text> (</xsl:text>
-                    <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id=current()/@id]/s:hits,'###,###,###')"/>
-                    <xsl:text>)</xsl:text> 
-            </xsl:if>
-        </xsl:copy>
         <xsl:choose>
             <xsl:when test="$search-terms">
+                <xsl:copy>
+                    <xsl:apply-templates select="attribute::node()"/>
+                    <xsl:variable name="resource" select="/doc/s:search/s:engine/s:resource[@s:id=current()/@id]"/>
+                    <a href="{$resource/s:url}"><xsl:apply-templates select="child::node()"/>
+                        <xsl:text> (</xsl:text>
+                        <xsl:choose>
+                            <xsl:when test="$resource/s:hits">
+                                <xsl:value-of select="format-number($resource/s:hits,'###,###,##0')"/>
+                            </xsl:when>
+                            <xsl:when test="$resource/@s:status">
+                                <xsl:value-of select="$resource/@s:status"/>
+                            </xsl:when>
+                            <xsl:when test="$resource">
+                                <xsl:text>running</xsl:text>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:text>don't know about </xsl:text>
+                                <xsl:value-of select="@id"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <xsl:text>)</xsl:text> 
+                    </a>
+                </xsl:copy>
                 <xsl:apply-templates select="following-sibling::h:dd[1]" mode="results"/>
             </xsl:when>
             <xsl:otherwise>
+                <xsl:copy>
+                    <xsl:apply-templates select="attribute::node()|child::node()"/>
+                </xsl:copy>
                 <xsl:apply-templates select="following-sibling::h:dd[1]" mode="description"/>
             </xsl:otherwise>
         </xsl:choose>
