@@ -30,7 +30,7 @@ public class ICD9JSONReader implements Reader {
         StringBuffer sb = new StringBuffer("{\"code\":\"").append(this.icd9.replaceAll("\\\"", "\\\\\"")).append("\",");
         try {
             String result = this.translator.getLongName(this.icd9);
-            sb.append("\"long-name\":\"").append(result);
+            sb.append("\"longName\":\"").append(result);
         } catch (IllegalArgumentException e) {
             sb.append("\"error\":\"").append(e.getMessage().replaceAll("\\\"", "\\\\\""));
         }
