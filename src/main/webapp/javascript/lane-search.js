@@ -167,7 +167,7 @@ LANE.search = LANE.search ||  function() {
                     throw('nothing to search for');
                 }
                 searching = true;
-                Dom.setStyle(indicator,'visibility','visible');
+                Dom.setStyle(indicator,'visability','visible');
             },
             stopSearch: function(){
                 searching = false;
