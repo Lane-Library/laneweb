@@ -1,5 +1,9 @@
-#shd li {
-border-left:1px dotted #616150;
+#shd ul {
+border:1px solid #c6c6c6;
+border-top:none
+}
+#shd ul li {
+border-top:1px dotted #c6c6c6
 }
 #ft {
 border-top:1px solid #C1C1C1;
@@ -10,7 +14,7 @@ border-left:1px dotted #C1C1C1;
 #searchTabs li, #gft li {
 border-left:1px dotted #818181;
 }
-#search fieldset, #ft li:first-child, #gft li:first-child, #shd li:first-child,  #searchTabs li:first-child, #searchTabs li li , div#otherPortalOptions {
+#search fieldset, #ft li:first-child, #gft li:first-child,  #searchTabs li:first-child, #searchTabs li li , div#otherPortalOptions {
 border:none;
 }
 div#leftColumn div, div#rightColumn div {

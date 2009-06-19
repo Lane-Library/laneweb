@@ -1,5 +1,8 @@
-#shd li {
-padding:0 15px;
+#shd li a {
+padding:13px 34px 0;
+}
+#shd ul li a {
+padding:6px
 }
 #sb-lft {
 padding-left:6px

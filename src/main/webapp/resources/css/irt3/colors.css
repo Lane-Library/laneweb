@@ -1,3 +1,9 @@
+#shd ul {
+background-color:#D6D5C7
+}
+#shd ul li a:hover {
+background-color:#b5b5a7
+}
 .sb-tb {
 background-image:url(/././images/templates/irt3/tb.gif);
 background-repeat:repeat-x;
@@ -45,7 +51,10 @@ background-color: #D6D5C7;
 color:black;
 }
 #shd a {
-color:#616150
+color:#696962
+}
+#shd a:hover {
+color:#900;
 }
 div#hd {
 background-image:url(/././images/templates/irt3/hd.png);

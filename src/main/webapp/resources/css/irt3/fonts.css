@@ -1,9 +1,7 @@
 #shd {
-text-transform:uppercase;
-font-size:9px;
-font-family:Arial,Helvetica,sans-serif;
+font-size:11px;
 }
-#shd a, #nav a {
+#nav a {
 text-decoration:none;
 }
 #nav {
@@ -39,6 +37,9 @@ font-size:0.9em;
 }
 #ft a:hover, #gft a:hover, #shd a:hover {
 text-decoration:underline;
+}
+#shd ul a:hover {
+text-decoration:none
 }
 #hd h2 {
 font-family:FrutigerLTStdLightCn,"Arial Narrow",Arial,Tahoma,"Trebuchet MS",sans-serif;

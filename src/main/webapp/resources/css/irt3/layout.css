@@ -2,6 +2,29 @@
 #custom-doc { 
 width:76.92em;*width:75.07em;min-width:1000px; margin:auto; text-align:left;
 }
+#shd {
+height:33px;
+}
+#shd li {
+float:left;
+position:relative;
+}
+#shd a {
+display:block
+}
+#shd ul {
+display:none;
+position:absolute;
+z-index:2
+}
+#shd li:hover ul {
+display:block
+}
+#shd ul li {
+float:none;
+text-align: left;
+white-space:nowrap;
+}
 .sb-tb {
 position:relative;
 height:6px;
@@ -45,7 +68,7 @@ float: right;
 #ft, #gft, #hd form, #shd {
 text-align:center;
 }
-#ft li, #gft li, #shd li, #searchTabs li {
+#ft li, #gft li, #searchTabs li {
 display:inline;
 }
 #search fieldset {
