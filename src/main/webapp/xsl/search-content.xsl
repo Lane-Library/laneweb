@@ -156,7 +156,7 @@
     </xsl:template>
     
     <xsl:template match="s:content">
-        <li><a href="{s:url}"><xsl:value-of select="s:title"/></a><xsl:text> </xsl:text><xsl:value-of select="s:description"/></li>
+        <li><a title="{s:description}" href="{s:url}"><xsl:value-of select="s:title"/></a></li>
     </xsl:template>
 
 </xsl:stylesheet>
