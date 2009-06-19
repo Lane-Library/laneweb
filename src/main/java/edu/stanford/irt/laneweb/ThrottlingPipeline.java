@@ -25,6 +25,12 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
     private String requestKey;
 
     @Override
+    public void recycle() {
+        super.recycle();
+        this.requestKey = null;
+    }
+
+    @Override
     public void setup(final Parameters params) {
         this.requestKey = params.getParameter("request-key", null);
     }
