@@ -46,7 +46,7 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
         }
         synchronized (REQUESTS) {
             if (REQUESTS.contains(this.requestKey)) {
-                throw new ProcessingException("too many concurrent requests");
+                throw new ProcessingException("too many concurrent requests. key:" + this.requestKey);
             }
             REQUESTS.add(this.requestKey);
         }
