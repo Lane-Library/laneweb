@@ -1,3 +1,19 @@
+#shd {
+background-image:url(/././images/templates/irt3/shd.gif);
+background-repeat:repeat-x
+}
+#shd li {
+background-image:url(/././images/templates/irt3/shd-li.gif);
+background-repeat:no-repeat
+}
+#shd a {
+background-image:url(/././images/templates/irt3/shd-a.gif);
+background-repeat:no-repeat;
+background-position:87% 75%;
+}
+#shd ul li, #shd ul a {
+background-image:none
+}
 #shd ul {
 background-color:#D6D5C7
 }
