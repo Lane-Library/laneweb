@@ -12,6 +12,9 @@ position:relative;
 #shd a {
 display:block
 }
+#shd a * {
+visibility:hidden
+}
 #shd ul {
 display:none;
 position:absolute;

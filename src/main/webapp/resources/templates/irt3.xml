@@ -15,7 +15,7 @@
     <body>
         <div id="custom-doc">
             <ul id="shd">
-                <li id="stanfordMedicineBrand"><a href="http://stanfordmedicine.org/"><b>Stanford Medicine</b></a></li>
+                <li id="stanfordMedicineBrand"><a href="http://stanfordmedicine.org/"><strong>Stanford Medicine</strong></a></li>
                 <li><a href="http://stanfordmedicine.org/getting_care/">Getting Care</a>
                     <ul>
                         <li><a href="http://stanfordmedicine.org/getting_care/">Overview</a></li>
@@ -77,7 +77,7 @@
                     </ul>
                 </li>
                 
-                <li id="stanfordUniversityBrand"><a href="http://www.stanford.edu/"><b>Stanford University</b></a></li>
+                <li id="stanfordUniversityBrand"><a href="http://www.stanford.edu/"><strong>Stanford University</strong></a></li>
             </ul>
             <!--<ul id="shd">
                 <li>

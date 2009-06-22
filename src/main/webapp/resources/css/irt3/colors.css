@@ -12,6 +12,23 @@ background-image:url(/././images/templates/irt3/shd-a.gif);
 background-repeat:no-repeat;
 background-position:87% 75%;
 }
+#stanfordMedicineBrand a {
+background-image:url(/././images/templates/irt3/sprite.png);
+background-repeat:no-repeat;
+background-position:0 0;
+}
+#stanfordMedicineBrand a:hover {
+background-position:0 -100px;
+}
+#stanfordUniversityBrand a {
+background-image:url(/././images/templates/irt3/sprite.png);
+background-repeat:no-repeat;
+background-position:52px -194px;
+}
+#shd #stanfordUniversityBrand a:hover {
+background-position:52px -294px;
+text-decoration:none
+}
 #shd ul li, #shd ul a {
 background-image:none
 }
