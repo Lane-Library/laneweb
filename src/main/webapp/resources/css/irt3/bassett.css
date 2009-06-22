@@ -23,7 +23,7 @@ div#leftColumn div.myAccordion .yui-cms-item  h2 {
 }
  
 div#leftColumn #accordionTitle{
-	background-image:url(/images/templates/irt3/boxlabel_bkgnd.jpg);
+	background-image:url(/././images/templates/irt3/boxlabel_bkgnd.jpg);
 	padding-top:12px;
 	padding-bottom:7px;
 	text-align: center;
@@ -33,7 +33,7 @@ div#leftColumn #accordionTitle{
 }
     
 .myAccordion .yui-cms-accordion .yui-cms-item .accordionToggleItem {
-	background: url(/graphics/accordion.gif) no-repeat 0px -197px;
+	background: url(/././graphics/accordion.gif) no-repeat 0px -197px;
 	color:black;
 	text-decoration: none;
 	padding-bottom: 5px;
@@ -42,7 +42,7 @@ div#leftColumn #accordionTitle{
 }
     
 .myAccordion .yui-cms-accordion .yui-cms-item.selected .accordionToggleItem {
-	background: url(/graphics/accordion.gif) no-repeat 0px 3px;
+	background: url(/././graphics/accordion.gif) no-repeat 0px 3px;
 }
         
 .myAccordion .yui-cms-accordion .yui-cms-item .bd {

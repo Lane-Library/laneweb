@@ -7,6 +7,9 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="in SVN" description="1.10.M1 minor version upgrade preview" version="1.10.M1">
+            
+        </release>
         <release date="2009-06-05" version="1.9.18" description="1.9.18 bugfix release">
             <action date="2009-06-01" dev="ceyates" issue="28652" type="fix">
                 reverted nekohtml to version 1.9.11
