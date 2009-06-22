@@ -1,6 +1,5 @@
 #shd {
 background-image:url(/././images/templates/irt3/sprite-vert.png);
-/*background-position:0 -460px;*/
 background-repeat:repeat-x
 }
 #shd li {
@@ -113,7 +112,7 @@ color:#111111
 div#leftColumn h2, div#rightColumn h2 {
 background-image:url(/././images/templates/irt3/sprite-vert.png);
 background-position:0 -440px;
-background-color:  #F7F7F7;
+background-color:  #EFEFEF;
 color:#2D2D2D;
 }
 
