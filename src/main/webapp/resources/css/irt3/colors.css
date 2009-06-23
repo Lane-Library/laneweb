@@ -8,9 +8,9 @@ background-position:0 -60px;
 background-repeat:no-repeat
 }
 #shd a {
-background-image:url(/././images/templates/irt3/shd-a.gif);
+background-image:url(/././images/templates/irt3/sprite.png);
 background-repeat:no-repeat;
-background-position:87% 75%;
+background-position:115% -382px
 }
 #stanfordMedicineBrand a {
 background-image:url(/././images/templates/irt3/sprite.png);
@@ -23,10 +23,10 @@ background-position:0 -100px;
 #stanfordUniversityBrand a {
 background-image:url(/././images/templates/irt3/sprite.png);
 background-repeat:no-repeat;
-background-position:52px -194px;
+background-position:52px -195px;
 }
 #shd #stanfordUniversityBrand a:hover {
-background-position:52px -294px;
+background-position:52px -295px;
 text-decoration:none
 }
 #shd ul li, #shd ul a {
@@ -47,10 +47,10 @@ background-repeat:repeat-x;
 background-image:url(/././images/templates/irt3/sprite.png);
 }
 #sb-tl {
-background-position:0 -600px;
+background-position:0 -700px;
 }
 #sb-tr {
-background-position:-12px -600px;
+background-position:-12px -700px;
 }
 #sb-rt {
 background-image:url(/././images/templates/irt3/lr.gif);
@@ -66,10 +66,10 @@ background-repeat:repeat-y
 background-position:0 -126px
 }
 #sb-bl {
-background-position:0 -612px
+background-position:0 -712px
 }
 #sb-br {
-background-position:-12px -612px
+background-position:-12px -712px
 }
 #nav a {
 color:white;
@@ -103,10 +103,10 @@ background-position:0 -140px;
 }
 #hd h1 a {
 background-image: url(/././images/templates/irt3/sprite.png);
-background-position:0 -400px;
+background-position:0 -500px;
 }
 #hd h1 a:hover{
-background-position:0 -500px;
+background-position:0 -600px;
 }
 #hd h2 {
 background-image: url(/././images/templates/irt3/sprite-vert.png);
@@ -114,15 +114,17 @@ background-repeat:no-repeat;
 background-position:0 -334px;
 }
 #irt {
-background-image: url(/././images/templates/irt3/divisionIRT.gif);
+background-image: url(/././images/templates/irt3/sprite.png);
 background-repeat:no-repeat;
-background-position:right;
+background-position:5px -798px
 }
 #hd h2 span#subtitle {
 color:black;
 }
 #askUs {
-color:white;
+background-image:url(/././images/templates/irt3/sprite.png);
+background-repeat:no-repeat;
+background-position:0 -895px
 }
 #searchTabs li.activeSearchTab a:link, #searchTabs li.activeSearchTab a:visited, #searchTabs li.activeSearchTab a:hover, #searchTabs li.activeSearchTab a:active {
 color:#111111
