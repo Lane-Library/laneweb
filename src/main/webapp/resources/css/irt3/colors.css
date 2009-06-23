@@ -1,19 +1,19 @@
 #shd {
-background-image:url(/././images/templates/irt3/sprite-vert.png);
+background-image:url(/././images/templates/irt3/sprite-vert.gif);
 background-repeat:repeat-x
 }
 #shd li {
-background-image:url(/././images/templates/irt3/sprite-vert.png);
+background-image:url(/././images/templates/irt3/sprite-vert.gif);
 background-position:0 -60px;
 background-repeat:no-repeat
 }
 #shd a {
-background-image:url(/././images/templates/irt3/sprite.png);
+background-image:url(/././images/templates/irt3/sprite.gif);
 background-repeat:no-repeat;
 background-position:115% -382px
 }
 #stanfordMedicineBrand a {
-background-image:url(/././images/templates/irt3/sprite.png);
+background-image:url(/././images/templates/irt3/sprite.gif);
 background-repeat:no-repeat;
 background-position:0 0;
 }
@@ -21,7 +21,7 @@ background-position:0 0;
 background-position:0 -100px;
 }
 #stanfordUniversityBrand a {
-background-image:url(/././images/templates/irt3/sprite.png);
+background-image:url(/././images/templates/irt3/sprite.gif);
 background-repeat:no-repeat;
 background-position:52px -195px;
 }
@@ -39,12 +39,12 @@ background-color:#D6D5C7
 background-color:#b5b5a7
 }
 .sb-tb {
-background-image:url(/././images/templates/irt3/sprite-vert.png);
+background-image:url(/././images/templates/irt3/sprite-vert.gif);
 background-position:0 -120px;
 background-repeat:repeat-x;
 }
 .sb-c {
-background-image:url(/././images/templates/irt3/sprite.png);
+background-image:url(/././images/templates/irt3/sprite.gif);
 }
 #sb-tl {
 background-position:0 -700px;
@@ -78,7 +78,7 @@ color:white;
 color:white;
 }
 #nav {
-background-image: url(/././images/templates/irt3/sprite-vert.png);
+background-image: url(/././images/templates/irt3/sprite-vert.gif);
 background-color: #800000;
 background-position:0 -400px
 }
@@ -96,25 +96,25 @@ color:#696962
 color:#900;
 }
 div#hd {
-background-image:url(/././images/templates/irt3/sprite-vert.png);
+background-image:url(/././images/templates/irt3/sprite-vert.gif);
 background-repeat:repeat-x;
 background-color:#F3F4E6;
 background-position:0 -140px;
 }
 #hd h1 a {
-background-image: url(/././images/templates/irt3/sprite.png);
+background-image: url(/././images/templates/irt3/sprite.gif);
 background-position:0 -500px;
 }
 #hd h1 a:hover{
 background-position:0 -600px;
 }
 #hd h2 {
-background-image: url(/././images/templates/irt3/sprite-vert.png);
+background-image: url(/././images/templates/irt3/sprite-vert.gif);
 background-repeat:no-repeat;
 background-position:0 -334px;
 }
 #irt {
-background-image: url(/././images/templates/irt3/sprite.png);
+background-image: url(/././images/templates/irt3/sprite.gif);
 background-repeat:no-repeat;
 background-position:5px -798px
 }
@@ -122,12 +122,12 @@ background-position:5px -798px
 color:black;
 }
 #askUs {
-background-image:url(/././images/templates/irt3/sprite.png);
+background-image:url(/././images/templates/irt3/sprite.gif);
 background-repeat:no-repeat;
 background-position:0 -895px
 }
 #searchSubmit {
-background-image:url(/././images/templates/irt3/sprite.png);
+background-image:url(/././images/templates/irt3/sprite.gif);
 background-position:0 -1000px;
 border:none;
 width:56px;
@@ -143,7 +143,7 @@ color:#111111
     background-color:#F2F3ED;
 }
 div#leftColumn h2, div#rightColumn h2 {
-background-image:url(/././images/templates/irt3/sprite-vert.png);
+background-image:url(/././images/templates/irt3/sprite-vert.gif);
 background-position:0 -440px;
 background-color:  #EFEFEF;
 color:#2D2D2D;
@@ -184,7 +184,7 @@ color: #79455C;
 }
 
 ul#eLibraryTabs li.eLibraryTab, div#eLibraryTabContainer a, .bgTab {
-background-image: url(/././images/templates/irt3/sprite-vert.png);
+background-image: url(/././images/templates/irt3/sprite-vert.gif);
 background-position:0 -580px;
 background-repeat:repeat-x;
 }
