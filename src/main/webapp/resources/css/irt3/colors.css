@@ -44,10 +44,13 @@ background-position:0 -120px;
 background-repeat:repeat-x;
 }
 .sb-c {
-background-image:url(/././images/templates/irt3/corners.gif);
+background-image:url(/././images/templates/irt3/sprite.png);
+}
+#sb-tl {
+background-position:0 -600px;
 }
 #sb-tr {
-background-position:100% 0
+background-position:-12px -600px;
 }
 #sb-rt {
 background-image:url(/././images/templates/irt3/lr.gif);
@@ -63,10 +66,10 @@ background-repeat:repeat-y
 background-position:0 -126px
 }
 #sb-bl {
-background-position:0 100%
+background-position:0 -612px
 }
 #sb-br {
-background-position:100% 100%
+background-position:-12px -612px
 }
 #nav a {
 color:white;
@@ -99,10 +102,11 @@ background-color:#F3F4E6;
 background-position:0 -140px;
 }
 #hd h1 a {
-background-image: url(/././images/templates/irt3/logo_header_som.png);
+background-image: url(/././images/templates/irt3/sprite.png);
+background-position:0 -400px;
 }
 #hd h1 a:hover{
-background-position:0 -50px;
+background-position:0 -500px;
 }
 #hd h2 {
 background-image: url(/././images/templates/irt3/sprite-vert.png);
