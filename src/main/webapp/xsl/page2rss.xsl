@@ -34,9 +34,9 @@
                         </xsl:apply-templates>
                     </xsl:when>
                     <xsl:when test="contains($page,'workshops/laneclasses.html')">
-                        <xsl:apply-templates select="$content-table[1]/h:tr[not(@class='tableHeader') and count(h:td) = count($content-table[1]/h:tr[@class='tableHeader']/h:td)]">
+                        <xsl:apply-templates select="$content-table[1]/h:tr[not(h:td[.='inactive']) and not(@class='tableHeader') and count(h:td) = count($content-table[1]/h:tr[@class='tableHeader']/h:td)]">
                             <xsl:with-param name="type" select="'workshops'"/>
-                            <xsl:sort data-type="text" order="descending" select="h:td[@class='updateDate']"/>
+                            <xsl:sort data-type="text" order="ascending" select="h:td[@class='updateDate']"/>
                         </xsl:apply-templates>
                     </xsl:when>
                 </xsl:choose>
