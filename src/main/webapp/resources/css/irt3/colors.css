@@ -126,6 +126,16 @@ background-image:url(/././images/templates/irt3/sprite.png);
 background-repeat:no-repeat;
 background-position:0 -895px
 }
+#searchSubmit {
+background-image:url(/././images/templates/irt3/sprite.png);
+background-position:0 -1000px;
+border:none;
+width:56px;
+height:18px;
+}
+#searchSubmit:hover {
+background-position:0 -1100px;
+}
 #searchTabs li.activeSearchTab a:link, #searchTabs li.activeSearchTab a:visited, #searchTabs li.activeSearchTab a:hover, #searchTabs li.activeSearchTab a:active {
 color:#111111
 }

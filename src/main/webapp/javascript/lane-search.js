@@ -99,12 +99,14 @@ LANE.search = LANE.search ||  function() {
             pico = d.getElementById('pico');
 */
             //change submit button image mouseover/mouseout
+/*
             submit.activate = function(e){
                 this.src = this.src.replace('search_btn.gif', 'search_btn_f2.gif');
             };
             submit.deactivate = function(e){
                 this.src = this.src.replace('search_btn_f2.gif', 'search_btn.gif');
             };
+*/
             searching = false;
             
 

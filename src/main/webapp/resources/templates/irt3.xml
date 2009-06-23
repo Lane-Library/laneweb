@@ -252,7 +252,7 @@
                                 <label for="searchTerms">Search <span id="searchLabel">All</span>: </label>
                                 <input type="text" id="searchTerms" name="q"/>
                                 <input type="hidden" id="searchSource" name="source" value="all"/>
-                                <input id="searchSubmit" type="image" src="/images/templates/irt3/search_btn.gif" value="Search"/>
+                                <input id="searchSubmit" type="submit" value=""/>
                                 <img id="searchIndicator" alt="[searching]" style="visibility:hidden"
                                     src="/images/templates/irt3/indicator.gif"/>
                             </fieldset>
