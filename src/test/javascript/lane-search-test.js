@@ -23,7 +23,7 @@
             searchInput.value = 'hello';
             LANE.search.startSearch();
             YAHOO.util.Assert.isTrue(LANE.search.isSearching());
-            YAHOO.util.Assert.areEqual('visible', searchIndicator.style.visibility);
+            YAHOO.util.Assert.areEqual('visible', searchIndicator.style.visibility, "search indicator not visible");
             LANE.search.stopSearch();
             YAHOO.util.Assert.areEqual('hidden', searchIndicator.style.visibility);
             searchInput.value = '';
