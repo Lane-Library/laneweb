@@ -33,7 +33,7 @@ position:relative;font-family:arial;font-size:100%;
 }
 
 /* styles for input field */
-.yui-ac-input {
+#pico input, .yui-ac-input {
 position:static; width:14em; margin-bottom:4px; vertical-align:middle;
 }
 
