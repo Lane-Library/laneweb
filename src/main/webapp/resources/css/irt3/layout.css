@@ -242,7 +242,7 @@ ul.queryMappingHeader, ul.queryMappingResults, ul.queryMappingHeader
 li, ul.queryMappingResults li {
   display:inline;
 }
-ul#eLibraryTabs, div#eLibraryTabContainer {
+ul#eLibraryTabs {
 clear:both;
 }
 /* to hide history manager iframe */

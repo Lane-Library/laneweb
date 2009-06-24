@@ -184,10 +184,15 @@ li.eLibraryTab:visited {
 color: #79455C;	
 }
 
-ul#eLibraryTabs li.eLibraryTab, div#eLibraryTabContainer a, .bgTab {
+#eLibraryTabs .eLibraryTab, .bgTab {
 background-image: url(/././images/templates/irt3/sprite-vert.gif);
-background-position:0 -580px;
 background-repeat:repeat-x;
+}
+#eLibraryTabs .eLibraryTab {
+background-position:0 -570px
+}
+.bgTab {
+background-position:0 -581px
 }
 #bd .activeTab, li.eLibraryTabActive, li.eLibraryTabActive a {
 background-image:none;

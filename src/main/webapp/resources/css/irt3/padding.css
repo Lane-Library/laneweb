@@ -25,7 +25,7 @@ padding:0 14px 0 14px;
 #ft {
 padding:5px 0 5px 0;
 }
-ul#eLibraryTabs li,h2.bgTab, h2.activeTab, div#eLibraryTabContainer a {
+ul#eLibraryTabs li,h2.bgTab, h2.activeTab {
 padding:.5em;
 }
 #bd li {

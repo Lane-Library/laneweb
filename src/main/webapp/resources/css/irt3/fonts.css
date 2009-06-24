@@ -108,7 +108,7 @@ text-decoration: underline;
 #bd div.wrapperBox h2 {
 font-size:1.2em;
 }
-h2.bgTab, h2.activeTab, ul#eLibraryTabs li, div#otherPortalOptions li, div#eLibraryTabContainer a   {
+h2.bgTab, h2.activeTab, ul#eLibraryTabs li, div#otherPortalOptions li {
 font-size:.9em;
 }
 h2.bgTab a {
