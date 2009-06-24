@@ -18,27 +18,23 @@
      E = YAHOO.util.Event, 
      W = YAHOO.widget,
      activeFacet,
-     queryBuilder = function(target){ //build query terms from pico inputs
+     queryBuilder = function(targetId){ //build query terms from pico inputs
         var qString = '', i;
-        if ( target === undefined ) {
-            target = searchTermsInput;
-        }
+		if(targetId == searchTermsInput.id) {
+			return 0;
+		};
         for (i = 0; i < inputs.length; i++) {
-            if (inputs[i].id != target.id && inputs[i].value !== '' && inputs[i].value != inputs[i].initState.value) {
-                qString += '(' + inputs[i].value + ')';
-            }
+			if (inputs[i].id != searchTermsInput.id && inputs[i].value !== '' && inputs[i].value != inputs[i].title) {
+				qString += '(' + inputs[i].value + ')';
+			}
         }
         if ( qString.length ){
             qString = qString.replace(/\)\(/g, ") AND (");
             if (qString.indexOf('(') === 0 && qString.indexOf(')') == qString.length - 1) {
                 qString = qString.replace(/(\(|\))/g, '');
             }
-            target.value = qString;
-            D.removeClass(target,'inputTip');
-        }
-        else{
-            target.value = target.initState.value;
-            D.addClass(target,'inputTip');
+            searchTermsInput.value = qString;
+            D.removeClass(searchTermsInput,'inputTip');
         }
     },
     createWarningPanel = function(){
@@ -77,30 +73,34 @@
             // add event listeners to p,i,c,o inputs for building search terms
             inputs = D.getElementsBy(function(el){return el.type == 'text';},'input',picoForm);
             searchTermsInput = document.getElementById('searchTerms');
+			searchTermsInput.title = 'use PICO search above or type keywords here';
+			if (searchTermsInput.value == ''){
+				searchTermsInput.value = searchTermsInput.title;
+				searchTermsInput.className = 'inputTip';
+			}
             for (i = 0; i < inputs.length; i++){
-                inputs[i].initState = {
-                    'value' : inputs[i].value
-                };
-                E.addListener(inputs[i], 'focus', function(e,initObj){
-                    if (this.value == initObj.value){
+				if(inputs[i].value === ''){
+					inputs[i].value = inputs[i].title;
+				}
+				else if(inputs[i].value != inputs[i].title){
+					D.removeClass(inputs[i],'inputTip');
+				}
+                E.addListener(inputs[i], 'focus', function(){
+                    if (this.value == this.title){
                         this.value = '';
                         D.removeClass(this,'inputTip');
                     }
-                },inputs[i].initState);
-                E.addListener(inputs[i], 'blur', function(e,initObj){
+                });
+                E.addListener(inputs[i], 'blur', function(){
                     if (this.value === ''){
-                        this.value = initObj.value;
+                        this.value = this.title;
                         D.addClass(this,'inputTip');
                     }
-                },inputs[i].initState);
-                if ( inputs[i].id != searchTermsInput.id ){
-                    E.addListener(inputs[i], 'blur', function(e,initObj){
-                        queryBuilder();
-                    },inputs[i].initState);
-                    E.addListener(inputs[i], 'keyup', function(e,initObj){
-                        queryBuilder();
-                    },inputs[i].initState);
-                }
+					queryBuilder(this.id);
+                });
+                E.addListener(inputs[i], 'keyup', function(){
+                    queryBuilder(this.id);
+                });
             }
             
             // auto complete mesh on p and i inputs

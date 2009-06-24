@@ -20,6 +20,10 @@
                         <map:part src="{naming:java:comp/env/live-base}/content/search/clinical2.html"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/search-content.xsl">
+                        <map:parameter name="p" value="{request-param:p}"/>
+                        <map:parameter name="i" value="{request-param:i}"/>
+                        <map:parameter name="c" value="{request-param:c}"/>
+                        <map:parameter name="o" value="{request-param:o}"/>
                         <map:parameter name="facet" value="{request-param:facet}"/>
                     </map:transform>
                     <map:serialize type="xml"/>

@@ -6,6 +6,10 @@
     exclude-result-prefixes="h s"
     version="2.0">
     
+    <xsl:param name="p"/>
+    <xsl:param name="i"/>
+    <xsl:param name="c"/>
+    <xsl:param name="o"/>
     <xsl:param name="facet"/>
     
     <xsl:variable name="active-facet">
@@ -157,6 +161,32 @@
     
     <xsl:template match="s:content">
         <li><a title="{s:description}" href="{s:url}"><xsl:value-of select="s:title"/></a></li>
+    </xsl:template>
+    
+    <xsl:template match="h:input">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:if test="@id = 'p' and $p != ''">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$p"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@id = 'i' and $i != ''">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$i"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@id = 'c' and $c != ''">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$c"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@id = 'o' and $o != ''">
+                <xsl:attribute name="value">
+                    <xsl:value-of select="$o"/>
+                </xsl:attribute>
+            </xsl:if>
+        </xsl:copy>
     </xsl:template>
 
 </xsl:stylesheet>
