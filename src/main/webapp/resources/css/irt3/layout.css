@@ -4,6 +4,8 @@ width:76.92em;*width:75.07em;min-width:1000px; margin:auto; text-align:left;
 }
 #shd {
 height:33px;
+z-index:2;
+position:relative
 }
 #shd li {
 float:left;
@@ -11,10 +13,12 @@ position:relative;
 }
 #shd a {
 display:block;
+/*IE 6 needs this:*/
+float:left;
 height:18px
 }
 #shd ul a {
-height:auto
+float:none;
 }
 #shd a * {
 visibility:hidden
@@ -22,9 +26,11 @@ visibility:hidden
 #shd ul {
 display:none;
 position:absolute;
-z-index:2
+top:30px;
+left:0;
+width:214px
 }
-#shd li:hover ul {
+#shd li:hover ul, #shd li.hover ul {
 display:block
 }
 #shd ul li {

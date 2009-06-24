@@ -9,7 +9,8 @@
                 shadedBorderBottom = d.getElementById('sb-bot'),
                 otherPortalOptions = d.getElementById('otherPortalOptions'),
                 legendDropDown = d.getElementById('legend-drop-down'),
-                otherSearches = d.getElementById('otherSearches');
+                otherSearches = d.getElementById('otherSearches'),
+                superHeader = d.getElementById('shd');
                 if (ie <= 6) {
                     //set hover class for these ids
                     if (otherPortalOptions && shadedBorderBottom) {
@@ -49,6 +50,17 @@
                         legendDropDown.deactivate = function(){
                             this.className = '';
                         };
+                    }
+                    if (superHeader) {
+                        var uls = superHeader.getElementsByTagName('UL');
+                        for (i = 0; i < uls.length; i++) {
+                            uls[i].parentNode.activate = function() {
+                                this.className = 'hover';
+                            };
+                            uls[i].parentNode.deactivate = function() {
+                                this.className = '';
+                            };
+                        }
                     }
                     //TODO: use onavailable for this?
                     lists = ['shd', 'ft', 'gft','searchTabs'];
