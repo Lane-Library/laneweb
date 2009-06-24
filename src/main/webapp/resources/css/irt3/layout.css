@@ -10,7 +10,11 @@ float:left;
 position:relative;
 }
 #shd a {
-display:block
+display:block;
+height:18px
+}
+#shd ul a {
+height:auto
 }
 #shd a * {
 visibility:hidden

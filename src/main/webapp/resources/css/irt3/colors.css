@@ -24,10 +24,10 @@ text-decoration:none
 #stanfordUniversityBrand a {
 background-image:url(/././images/templates/irt3/sprite.gif);
 background-repeat:no-repeat;
-background-position:52px -195px;
+background-position:52px -191px;
 }
 #shd #stanfordUniversityBrand a:hover {
-background-position:52px -295px;
+background-position:52px -291px;
 text-decoration:none
 }
 #shd ul li, #shd ul a {
