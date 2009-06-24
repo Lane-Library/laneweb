@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import javax.naming.NamingException;
+import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.security.auth.Subject;
 import javax.servlet.http.Cookie;
@@ -168,9 +169,18 @@ public class UserDao {
                         UserDao.this.ldapTemplate.search("", "susunetid=" + user.getSunetId(), new AttributesMapper() {
 
                             public Object mapFromAttributes(final Attributes attributes) throws NamingException {
-                                user.setName((String) attributes.get("displayname").get());
-                                user.setAffiliation((String) attributes.get("suaffiliation").get());
-                                user.setUnivId((String) attributes.get("suunivid").get());
+                                Attribute currentAttribute = attributes.get("displayName");
+                                if (null != currentAttribute) {
+                                    user.setName((String) currentAttribute.get());
+                                }
+                                currentAttribute = attributes.get("suaffiliation");
+                                if (null != currentAttribute) {
+                                    user.setAffiliation((String) currentAttribute.get());
+                                }
+                                currentAttribute = attributes.get("suunivid");
+                                if (null != currentAttribute) {
+                                    user.setUnivId((String) currentAttribute.get());
+                                }
                                 return user;
                             }
                         });

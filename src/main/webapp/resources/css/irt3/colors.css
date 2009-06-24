@@ -19,6 +19,7 @@ background-position:0 0;
 }
 #stanfordMedicineBrand a:hover {
 background-position:0 -100px;
+text-decoration:none
 }
 #stanfordUniversityBrand a {
 background-image:url(/././images/templates/irt3/sprite.gif);
