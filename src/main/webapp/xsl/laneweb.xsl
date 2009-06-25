@@ -169,6 +169,7 @@
             <xsl:when test="$source-doc/h:body/h:div[@id='leftColumn']">yui-t2</xsl:when>
             <xsl:when test="$source-doc/h:body/h:div[@id='rightColumn']">yui-t4</xsl:when>
             <xsl:when test="contains($request-uri,'search.html')">yui-t4</xsl:when>
+            <xsl:when test="contains($request-uri,'search2.html')">yui-t4</xsl:when>
         </xsl:choose>
     </xsl:variable>
 
@@ -579,7 +580,10 @@
                 <xsl:when
                     test="contains($request-uri,h:a/attribute::href) or $query-string and contains(h:a/attribute::href, $query-string)">
                     <xsl:attribute name="class">activeTab</xsl:attribute>
+                    <!-- TODO: uncomment and remove next line after search2 testing  
                     <xsl:apply-templates select="h:a/child::node()"/>
+                    -->
+                    <xsl:apply-templates select="attribute::node () | node()"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="attribute::node () | node()"/>

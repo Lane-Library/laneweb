@@ -60,8 +60,15 @@
         this._type = type;
         this._tab = tab;
         this._container = container;
-        this._url = '/././plain/search/' + this._type + '.html?source=' + this._type + '&q=' +
-        LANE.search.getEncodedSearchString();
+		//TODO: remove this after search2 testing 
+		if(null !== location.pathname.match('search2')){
+	        this._url = '/././plain/search2/' + this._type + '.html?source=' + this._type + '&q=' +
+	        LANE.search.getEncodedSearchString();
+		}
+		else{
+	        this._url = '/././plain/search/' + this._type + '.html?source=' + this._type + '&q=' +
+	        LANE.search.getEncodedSearchString();
+		}
         this._state = 'initialized';
         this._callback = {
             success: function(o){
