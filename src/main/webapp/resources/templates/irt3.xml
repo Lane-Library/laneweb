@@ -12,88 +12,6 @@
     </head>
     <body>
         <div id="custom-doc">
-            <ul id="shd">
-                <li id="stanfordMedicineBrand"><a href="http://stanfordmedicine.org/"><strong>Stanford Medicine</strong></a></li>
-                <li><a href="http://stanfordmedicine.org/getting_care/">Getting Care</a>
-                    <ul>
-                        <li><a href="http://stanfordmedicine.org/getting_care/">Overview</a></li>
-                        <li><a href="http://stanfordmedicine.org/getting_care/find_physician.html">Find a Physician</a></li>
-                        <li><a href="http://stanfordmedicine.org/getting_care/fccc.html">Find a Clinical Care Center</a></li>
-                        <li><a href="http://stanfordhospital.org/">Stanford Hospital &amp; Clinics</a></li>
-                        
-                        <li><a href="http://www.lpch.org/">Lucile Packard Children's Hospital</a></li>
-                        <li><a href="http://stanfordmedicine.org/getting_care/emergency.html">Emergency</a></li>
-                    </ul>
-                </li>
-                <li><a href="http://stanfordmedicine.org/research/">Research</a>
-                    <ul>
-                        <li><a href="http://stanfordmedicine.org/research/">Overview</a></li>
-                        <li><a href="http://med.stanford.edu/">School of Medicine</a></li>
-                        
-                        <li><a href="http://med.stanford.edu/research/">News &amp; Resources</a></li>
-                        <li><a href="http://med.stanford.edu/clinicaltrials/">Clinical Trials</a></li>
-                        <li><a href="http://med.stanford.edu/guide/">Departments, Institutes &amp; Centers</a></li>
-                        <li><a href="http://med.stanford.edu/profiles/">Faculty Profiles</a></li>
-                    </ul>
-                    
-                </li>
-                <li><a href="http://stanfordmedicine.org/education_training/">Education &amp; Training</a>
-                    <ul>
-                        <li><a href="http://stanfordmedicine.org/education_training/">Overview</a></li>
-                        <li><a href="http://med.stanford.edu/">School of Medicine</a></li>
-                        <li><a href="http://stanfordmedicine.org/education_training/programs.html">Programs</a></li>
-                        <li><a href="http://med.stanford.edu/admissions/">Admissions</a></li>
-                        
-                        <li><a href="http://med.stanford.edu/cme/">Continuing Medical Education</a></li>
-                        <li><a href="http://med.stanford.edu/alumni/">Alumni</a></li>
-                        <li><a href="http://lane.stanford.edu/">Lane Medical Library</a></li>
-                    </ul>
-                </li>
-                <li><a href="http://stanfordmedicine.org/community_connections/">Community</a>
-                    <ul>
-                        <li><a href="http://stanfordmedicine.org/community_connections/">Overview</a></li>
-                        
-                        <li><a href="http://healthlibrary.stanford.edu/">Stanford Health Library</a></li>
-                        <li><a href="http://med.stanford.edu/communitymednews/">Community Newsletter</a></li>
-                        <li><a href="http://stanfordmedicine.org/community_connections/volunteering.html">Volunteering</a></li>
-                        <li><a href="http://stanfordmedicine.org/community_connections/pscp.html">Public Service &amp; Community Partnerships</a></li>
-                        <li><a href="http://stanfordmedicine.org/community_connections/rnbp.html">Renewal &amp; New Building Projects</a></li>
-                        
-                    </ul>
-                </li>
-                <li><a href="http://stanfordmedicine.org/about/">About Us</a>
-                    <ul>
-                        <li><a href="http://stanfordmedicine.org/about/">Overview</a></li>
-                        <li><a href="http://stanfordmedicine.org/about/news.html">News</a></li>
-                        <li><a href="http://stanfordmedicine.org/about/careers.html">Careers</a></li>
-                        <li><a href="http://stanfordmedicine.org/about/ways_to_give.html">Ways to Give</a></li>
-                        
-                        <li><a href="http://stanfordmedicine.org/about/find_person.html">Find a Person</a></li>
-                        <li><a href="http://stanfordmedicine.org/about/contact.html">Contact Us</a></li>
-                        <li><a href="http://stanfordmedicine.org/about/maps_directions.html">Maps &amp; Directions</a></li>
-                        <li><a href="http://deansnewsletter.stanford.edu/">The Dean's Newsletter</a></li>
-                    </ul>
-                </li>
-                
-                <li id="stanfordUniversityBrand"><a href="http://www.stanford.edu/"><strong>Stanford University</strong></a></li>
-            </ul>
-            <!--<ul id="shd">
-                <li>
-                    <a href="http://www.stanford.edu/">Stanford University</a>
-                </li>
-                <li>
-                    <a href="http://stanfordhospital.org/">Stanford Hospital &amp; Clinics</a>
-                </li>
-                <li>
-                    <a href="http://www.lpch.org/">Lucile Packard Children's Hospital</a>
-                </li>
-                <li>
-                    <a href="http://www.palo-alto.med.va.gov/">VA Palo Alto</a>
-                </li>
-                <li>
-                    <a href="http://www.scvmed.org/">Santa Clara Valley Medical Center</a>
-                </li>
-            </ul>-->
             <div id="sb-rt">
                 <div id="sb-lft">
                     <div class="sb-tb">
@@ -297,6 +215,71 @@
                 <li>
                     <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
                 </li>
+            </ul>
+            <ul id="shd">
+                <li id="stanfordMedicineBrand"><a href="http://stanfordmedicine.org/"><strong>Stanford Medicine</strong></a></li>
+                <li><a href="http://stanfordmedicine.org/getting_care/">Getting Care</a>
+                    <ul>
+                        <li><a href="http://stanfordmedicine.org/getting_care/">Overview</a></li>
+                        <li><a href="http://stanfordmedicine.org/getting_care/find_physician.html">Find a Physician</a></li>
+                        <li><a href="http://stanfordmedicine.org/getting_care/fccc.html">Find a Clinical Care Center</a></li>
+                        <li><a href="http://stanfordhospital.org/">Stanford Hospital &amp; Clinics</a></li>
+                        
+                        <li><a href="http://www.lpch.org/">Lucile Packard Children's Hospital</a></li>
+                        <li><a href="http://stanfordmedicine.org/getting_care/emergency.html">Emergency</a></li>
+                    </ul>
+                </li>
+                <li><a href="http://stanfordmedicine.org/research/">Research</a>
+                    <ul>
+                        <li><a href="http://stanfordmedicine.org/research/">Overview</a></li>
+                        <li><a href="http://med.stanford.edu/">School of Medicine</a></li>
+                        
+                        <li><a href="http://med.stanford.edu/research/">News &amp; Resources</a></li>
+                        <li><a href="http://med.stanford.edu/clinicaltrials/">Clinical Trials</a></li>
+                        <li><a href="http://med.stanford.edu/guide/">Departments, Institutes &amp; Centers</a></li>
+                        <li><a href="http://med.stanford.edu/profiles/">Faculty Profiles</a></li>
+                    </ul>
+                    
+                </li>
+                <li><a href="http://stanfordmedicine.org/education_training/">Education &amp; Training</a>
+                    <ul>
+                        <li><a href="http://stanfordmedicine.org/education_training/">Overview</a></li>
+                        <li><a href="http://med.stanford.edu/">School of Medicine</a></li>
+                        <li><a href="http://stanfordmedicine.org/education_training/programs.html">Programs</a></li>
+                        <li><a href="http://med.stanford.edu/admissions/">Admissions</a></li>
+                        
+                        <li><a href="http://med.stanford.edu/cme/">Continuing Medical Education</a></li>
+                        <li><a href="http://med.stanford.edu/alumni/">Alumni</a></li>
+                        <li><a href="http://lane.stanford.edu/">Lane Medical Library</a></li>
+                    </ul>
+                </li>
+                <li><a href="http://stanfordmedicine.org/community_connections/">Community</a>
+                    <ul>
+                        <li><a href="http://stanfordmedicine.org/community_connections/">Overview</a></li>
+                        
+                        <li><a href="http://healthlibrary.stanford.edu/">Stanford Health Library</a></li>
+                        <li><a href="http://med.stanford.edu/communitymednews/">Community Newsletter</a></li>
+                        <li><a href="http://stanfordmedicine.org/community_connections/volunteering.html">Volunteering</a></li>
+                        <li><a href="http://stanfordmedicine.org/community_connections/pscp.html">Public Service &amp; Community Partnerships</a></li>
+                        <li><a href="http://stanfordmedicine.org/community_connections/rnbp.html">Renewal &amp; New Building Projects</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="http://stanfordmedicine.org/about/">About Us</a>
+                    <ul>
+                        <li><a href="http://stanfordmedicine.org/about/">Overview</a></li>
+                        <li><a href="http://stanfordmedicine.org/about/news.html">News</a></li>
+                        <li><a href="http://stanfordmedicine.org/about/careers.html">Careers</a></li>
+                        <li><a href="http://stanfordmedicine.org/about/ways_to_give.html">Ways to Give</a></li>
+                        
+                        <li><a href="http://stanfordmedicine.org/about/find_person.html">Find a Person</a></li>
+                        <li><a href="http://stanfordmedicine.org/about/contact.html">Contact Us</a></li>
+                        <li><a href="http://stanfordmedicine.org/about/maps_directions.html">Maps &amp; Directions</a></li>
+                        <li><a href="http://deansnewsletter.stanford.edu/">The Dean's Newsletter</a></li>
+                    </ul>
+                </li>
+                
+                <li id="stanfordUniversityBrand"><a href="http://www.stanford.edu/"><strong>Stanford University</strong></a></li>
             </ul>
         </div>
         <div class="tooltips">
