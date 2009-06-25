@@ -19,7 +19,7 @@ height:18px
 }
 #shd ul a {
 float:none;
-height:auto
+height:100%
 }
 #shd a * {
 visibility:hidden
@@ -137,9 +137,6 @@ margin-right:-1em;
 #searchTerms {
 width:45em;
 }
-/*#searchSubmit {
-vertical-align:baseline;
-}*/
 .columnOf2 {
 float:left;
 width:49%;
