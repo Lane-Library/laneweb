@@ -137,9 +137,9 @@ margin-right:-1em;
 #searchTerms {
 width:45em;
 }
-input#searchSubmit {
-vertical-align:text-bottom;
-}
+/*#searchSubmit {
+vertical-align:baseline;
+}*/
 .columnOf2 {
 float:left;
 width:49%;
@@ -226,10 +226,6 @@ top:-10px;
 }
 div.portalNavLinks h1 {
 display:inline;
-}
-/*Search CSS, to be cleaned-up*/
-#searchSubmit {
-vertical-align:text-bottom;
 }
 #searchIndicator {
 visibility:hidden;
