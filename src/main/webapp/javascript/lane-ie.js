@@ -10,7 +10,8 @@
                 otherPortalOptions = d.getElementById('otherPortalOptions'),
                 legendDropDown = d.getElementById('legend-drop-down'),
                 otherSearches = d.getElementById('otherSearches'),
-                superHeader = d.getElementById('shd');
+                superHeader = d.getElementById('shd'),
+                searchSubmit = d.getElementById('searchSubmit');
                 if (ie <= 6) {
                     //set hover class for these ids
                     if (otherPortalOptions && shadedBorderBottom) {
@@ -61,6 +62,14 @@
                                 this.className = '';
                             };
                         }
+                    }
+                    if (searchSubmit) {
+                        searchSubmit.activate = function() {
+                            this.className = 'hover';
+                        };
+                        searchSubmit.deactivate = function() {
+                            this.className = '';
+                        };
                     }
                     //TODO: use onavailable for this?
                     lists = ['shd', 'ft', 'gft','searchTabs'];
