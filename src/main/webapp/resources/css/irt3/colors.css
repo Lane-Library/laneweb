@@ -135,7 +135,7 @@ border:none;
 width:56px;
 height:18px;
 }
-#searchSubmit:hover {
+#searchSubmit:hover, #searchSubmit.hover {
 background-position:0 -1100px;
 }
 #searchTabs li.activeSearchTab a:link, #searchTabs li.activeSearchTab a:visited, #searchTabs li.activeSearchTab a:hover, #searchTabs li.activeSearchTab a:active {
