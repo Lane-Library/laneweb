@@ -203,7 +203,7 @@ background-position:0 -581px
 #browseTabs li {
 background-position:0 -584px
 }
-#browseTabs .activeTab, #eLibraryTabs .eLibraryTabActive,  li.eLibraryTabActive a, #browseTabs .activeTab a  {
+#bd .activeTab, #eLibraryTabs .eLibraryTabActive,  li.eLibraryTabActive a, #bd .activeTab a  {
 background-image:none;
 background-color: #9C9A90;
 color:white;

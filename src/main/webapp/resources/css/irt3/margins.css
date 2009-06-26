@@ -48,7 +48,7 @@ margin-right:1em;
 #leftColumn p, #leftColumn ul, #rightColumn p, #rightColumn ul {
 margin:0 1em 1em 1em;
 }
-#bd dd ul {
+#bd dd ul, #bd #eLibraryTabs, #bd #browseTabs {
 margin:0;
 }
 div#leftColumn, div#rightColumn {
