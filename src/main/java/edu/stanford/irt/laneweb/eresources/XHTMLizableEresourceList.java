@@ -69,33 +69,29 @@ public class XHTMLizableEresourceList implements XMLizable {
         handler.endPrefixMapping("");
     }
 
-    private String getLinkText(final Eresource eresource, final Version version, final Link link, final boolean hasGetPassword) {
+    private void appendText(final StringBuffer sb, final String text, final String separator) {
+        if (null == text || text.length() == 0) {
+            return;
+        }
+        if (sb.length() > 0) {
+            sb.append(separator);
+        }
+        sb.append(text);
+    }
+
+    private String getLinkText(final Version version, final Link link, final boolean hasGetPassword) {
         StringBuffer sb = new StringBuffer();
-        if ((hasGetPassword && (version.getLinks().size() == 2)) || (version.getLinks().size() == 1)) {
-            String holdings = version.getSummaryHoldings();
-            if ((null != holdings) && (holdings.length() > 0)) {
-                sb.append(holdings);
-            }
-            String dates = version.getDates();
-            if ((null != dates) && (dates.length() > 0)) {
-                if (sb.length() != 0) {
-                    sb.append(", ");
-                }
-                sb.append(dates);
-            }
+        if ((hasGetPassword && version.getLinks().size() == 2) || version.getLinks().size() == 1) {
+            appendText(sb, version.getSummaryHoldings(), null);
+            appendText(sb, version.getDates(), ", ");
         }
         if (sb.length() == 0) {
-            String label = link.getLabel();
-            if ((null != label) && (label.length() > 0)) {
-                sb.append(label);
-            } else {
-                sb.append(link.getUrl());
-            }
+            appendText(sb, link.getLabel(), null);
         }
-        String description = version.getDescription();
-        if (null != description) {
-            sb.append(' ').append(description);
+        if (sb.length() == 0) {
+            appendText(sb, link.getUrl(), null);
         }
+        appendText(sb, version.getDescription(), " ");
         return sb.toString();
     }
 
@@ -123,7 +119,7 @@ public class XHTMLizableEresourceList implements XMLizable {
         }
         attributes.addAttribute(EMPTY_NS, "title", "title", "CDATA", sb.toString());
         XMLUtils.startElement(handler, XHTML_NS, A, attributes);
-        XMLUtils.data(handler, getLinkText(eresource, version, link, hasGetPassword));
+        XMLUtils.data(handler, getLinkText(version, link, hasGetPassword));
         XMLUtils.endElement(handler, XHTML_NS, A);
     }
 
