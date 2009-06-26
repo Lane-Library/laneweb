@@ -143,14 +143,16 @@
         <xsl:choose>
             <xsl:when test="$mode = 'facets' and count($results/result) &gt; 0">
                 <ul xmlns="http://www.w3.org/1999/xhtml">
-                    <h3>Narrow Your Results</h3>
+                    <xsl:choose>
+                        <xsl:when test="$ids != ''">
+                            <h3><a href="?source={$source}&amp;q={$search-terms}">Remove Limits</a></h3>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <h3>Narrow Your Results</h3>
+                        </xsl:otherwise>
+                    </xsl:choose>
                     <xsl:if test="$ids != ''">
-                        <li><a href="?source={$source}&amp;q={$search-terms}">All</a></li>
                     </xsl:if>
-                    <h3>Source</h3>
-                    <xsl:apply-templates select="$facets/facet[@type='source']">
-                        <xsl:sort select="@name"/>                      
-                    </xsl:apply-templates>
                     
                     <h3>Article Format</h3>
                     <xsl:apply-templates select="$facets/facet[@type='format']"/>
@@ -158,6 +160,10 @@
                     <h3>Question Type</h3>
                     <xsl:apply-templates select="$facets/facet[@type='type']"/>
                     
+                    <h3>Source</h3>
+                    <xsl:apply-templates select="$facets/facet[@type='source']">
+                        <xsl:sort select="@name"/>                      
+                    </xsl:apply-templates>
                 </ul>
             </xsl:when>
             <xsl:otherwise>
