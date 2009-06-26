@@ -193,6 +193,24 @@
         </xsl:copy>
     </xsl:template>
 
+    <!-- TODO: remove this after 1.10 release and necessary content changes (remove class=eLibraryTab from /online/*)-->
+    <xsl:template match="attribute::class[.='eLibraryTab']">
+        <xsl:if test="contains($request-uri,'search')">
+            <xsl:copy-of select="."/>
+        </xsl:if>
+    </xsl:template>
+    
+    <!-- TODO: remove this after 1.10 release and necessary content changes (change id=eLibraryTabs to browseTabs in /online/*)-->
+    <xsl:template match="attribute::id[.='eLibraryTabs']">
+        <xsl:choose>
+            <xsl:when test="contains($request-uri,'search')">
+                <xsl:copy-of select="."/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:attribute name="id" select="'browseTabs'"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 
     <!-- default attribute match, copies the attribute -->
     <xsl:template match="@*">

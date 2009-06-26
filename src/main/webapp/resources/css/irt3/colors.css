@@ -172,9 +172,9 @@ background-image:none;
 #bd li.moreItem { 
 background-image: url(/././images/templates/irt3/list-background-chevron.gif);
 }
-ul#eLibraryTabs li {
+/*ul#eLibraryTabs li {
 background-image:none;
-}
+}*/
 li.eLibraryTab{
 color:#1C4B70;
 }
@@ -185,23 +185,27 @@ li.eLibraryTab:visited {
 color: #79455C;	
 }
 
-#eLibraryTabs .eLibraryTab, .bgTab {
+#eLibraryTabs li, .bgTab, #browseTabs li {
+background-color:#E6E7E2;
 background-image: url(/././images/templates/irt3/sprite-vert.gif);
 background-repeat:repeat-x;
 }
+#eLibraryTabs .metaSearchResults {
+background-image:none;
+background-color:white
+}
 #eLibraryTabs .eLibraryTab {
-background-position:0 -570px
+background-position:0 -570px;
 }
 .bgTab {
 background-position:0 -581px
 }
-#bd .activeTab, li.eLibraryTabActive, li.eLibraryTabActive a {
+#browseTabs li {
+background-position:0 -584px
+}
+#browseTabs .activeTab, #eLibraryTabs .eLibraryTabActive,  li.eLibraryTabActive a, #browseTabs .activeTab a  {
 background-image:none;
 background-color: #9C9A90;
-color:white;
-}
-.activeTab a {
-/*background-color:inherit;*/
 color:white;
 }
 div.wrapperBox h2 {

@@ -177,7 +177,7 @@ div.fMainBox, div#popInContent {
 clear:left;
 height:100%;
 }
-ul#eLibraryTabs li {
+#eLibraryTabs li, #browseTabs li{
 float:left;
 text-align:center;
 }
@@ -242,7 +242,7 @@ ul.queryMappingHeader, ul.queryMappingResults, ul.queryMappingHeader
 li, ul.queryMappingResults li {
   display:inline;
 }
-ul#eLibraryTabs {
+#eLibraryTabs, #browseTabs {
 clear:both;
 }
 /* to hide history manager iframe */

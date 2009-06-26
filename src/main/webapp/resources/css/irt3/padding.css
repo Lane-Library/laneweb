@@ -25,12 +25,12 @@ padding:0 14px 0 14px;
 #ft {
 padding:5px 0 5px 0;
 }
-ul#eLibraryTabs li,h2.bgTab, h2.activeTab {
-padding:.5em;
-}
 #bd li {
 padding-left:.5em;
 padding-top:.1em;
+}
+#eLibraryTabs li, #browseTabs li, .bgTab, .activeTab {
+padding:.5em;
 }
 #leftColumn h2, #rightColumn h2, h2.SquareTitle {
 padding: 7px 10px 7px 11px;
