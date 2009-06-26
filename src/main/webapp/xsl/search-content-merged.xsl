@@ -20,93 +20,83 @@
     </xsl:variable>
     
     <xsl:variable name="facets">
-        <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and not(contains(@s:id,'pubmed') ) and s:content]">
-            <facet type="source" name="{s:description}">
-                <rid><xsl:value-of select="@s:id"/></rid>
-            </facet>
-        </xsl:for-each>
-        
-        <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed') and s:content]">
-            <facet type="source" name="PubMed">
-                <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed') and s:content]">
-                    <rid><xsl:value-of select="@s:id"/></rid>                
-                </xsl:for-each>
-            </facet>
-        </xsl:if>
-        
-        <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_treatment') and s:content]">
-            <facet type="type" name="Therapy">
-                <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_treatment') and s:content]">
-                    <rid><xsl:value-of select="@s:id"/></rid>                
-                </xsl:for-each>
-            </facet>
-        </xsl:if>
-        
-        <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_diagnosis') and s:content]">
-            <facet type="type" name="Diagnosis">
-                <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_diagnosis') and s:content]">
-                    <rid><xsl:value-of select="@s:id"/></rid>                
-                </xsl:for-each>
-            </facet>
-        </xsl:if>
-        
-        <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_prognosis') and s:content]">
-            <facet type="type" name="Prognosis">
-                <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_prognosis') and s:content]">
-                    <rid><xsl:value-of select="@s:id"/></rid>                
-                </xsl:for-each>
-            </facet>
-        </xsl:if>
-        
-        <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_harm') and s:content]">
-            <facet type="type" name="Harm">
-                <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_harm') and s:content]">
-                    <rid><xsl:value-of select="@s:id"/></rid>                
-                </xsl:for-each>
-            </facet>
-        </xsl:if>
-        
-        
-        <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_etiology') and s:content]">
-            <facet type="type" name="Etiology">
-                <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_etiology') and s:content]">
-                    <rid><xsl:value-of select="@s:id"/></rid>                
-                </xsl:for-each>
-            </facet>
-        </xsl:if>
-        
-        <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_epidemiology') and s:content]">
-            <facet type="type" name="Epidemiology">
-                <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_epidemiology') and s:content]">
-                    <rid><xsl:value-of select="@s:id"/></rid>                
-                </xsl:for-each>
-            </facet>
-        </xsl:if>
-        
-        <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'systematic') and s:content]">
-            <facet type="format" name="Systematic Review">
-                <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'systematic') and s:content]">
-                    <rid><xsl:value-of select="@s:id"/></rid>                
-                </xsl:for-each>
-            </facet>
-        </xsl:if>
-        
-        <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'trial') and s:content]">
-            <facet type="format" name="Clinical Trial">
-                <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'trial') and s:content]">
-                    <rid><xsl:value-of select="@s:id"/></rid>                
-                </xsl:for-each>
-            </facet>
-        </xsl:if>
-        
-        <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'summaries') and s:content]">
-            <facet type="format" name="Evidence Summary">
-                <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'summaries') and s:content]">
-                    <rid><xsl:value-of select="@s:id"/></rid>                
-                </xsl:for-each>
-            </facet>
-        </xsl:if>
-        
+        <facets>
+            <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and not(contains(@s:id,'pubmed') ) and s:content]">
+                <facet type="source" name="{s:description}">
+                    <rid><xsl:value-of select="@s:id"/></rid>
+                </facet>
+            </xsl:for-each>
+            <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed') and s:content]">
+                <facet type="source" name="PubMed">
+                    <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed') and s:content]">
+                        <rid><xsl:value-of select="@s:id"/></rid>                
+                    </xsl:for-each>
+                </facet>
+            </xsl:if>
+            <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_treatment') and s:content]">
+                <facet type="type" name="Therapy">
+                    <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_treatment') and s:content]">
+                        <rid><xsl:value-of select="@s:id"/></rid>                
+                    </xsl:for-each>
+                </facet>
+            </xsl:if>
+            <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_diagnosis') and s:content]">
+                <facet type="type" name="Diagnosis">
+                    <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_diagnosis') and s:content]">
+                        <rid><xsl:value-of select="@s:id"/></rid>                
+                    </xsl:for-each>
+                </facet>
+            </xsl:if>
+            <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_prognosis') and s:content]">
+                <facet type="type" name="Prognosis">
+                    <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_prognosis') and s:content]">
+                        <rid><xsl:value-of select="@s:id"/></rid>                
+                    </xsl:for-each>
+                </facet>
+            </xsl:if>
+            <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_harm') and s:content]">
+                <facet type="type" name="Harm">
+                    <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_harm') and s:content]">
+                        <rid><xsl:value-of select="@s:id"/></rid>                
+                    </xsl:for-each>
+                </facet>
+            </xsl:if>
+            <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_etiology') and s:content]">
+                <facet type="type" name="Etiology">
+                    <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_etiology') and s:content]">
+                        <rid><xsl:value-of select="@s:id"/></rid>                
+                    </xsl:for-each>
+                </facet>
+            </xsl:if>
+            <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_epidemiology') and s:content]">
+                <facet type="type" name="Epidemiology">
+                    <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'pubmed_epidemiology') and s:content]">
+                        <rid><xsl:value-of select="@s:id"/></rid>                
+                    </xsl:for-each>
+                </facet>
+            </xsl:if>
+            <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'systematic') and s:content]">
+                <facet type="format" name="Systematic Review">
+                    <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'systematic') and s:content]">
+                        <rid><xsl:value-of select="@s:id"/></rid>                
+                    </xsl:for-each>
+                </facet>
+            </xsl:if>
+            <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'trial') and s:content]">
+                <facet type="format" name="Clinical Trial">
+                    <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'trial') and s:content]">
+                        <rid><xsl:value-of select="@s:id"/></rid>                
+                    </xsl:for-each>
+                </facet>
+            </xsl:if>
+            <xsl:if test="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'summaries') and s:content]">
+                <facet type="format" name="Evidence Summary">
+                    <xsl:for-each select="/s:search/s:engine/s:resource[index-of(tokenize($filtered-ids,','),@s:id) &gt; 0 and contains(@s:id,'summaries') and s:content]">
+                        <rid><xsl:value-of select="@s:id"/></rid>                
+                    </xsl:for-each>
+                </facet>
+            </xsl:if>
+        </facets>
     </xsl:variable>
     
     <xsl:variable name="filtered-ids">
@@ -148,22 +138,10 @@
                             <h3><a href="?source={$source}&amp;q={$search-terms}">Remove Limits</a></h3>
                         </xsl:when>
                         <xsl:otherwise>
-                            <h3>Narrow Your Results</h3>
+                            <h3>Refine Results</h3>
                         </xsl:otherwise>
                     </xsl:choose>
-                    <xsl:if test="$ids != ''">
-                    </xsl:if>
-                    
-                    <h3>Article Format</h3>
-                    <xsl:apply-templates select="$facets/facet[@type='format']"/>
-                    
-                    <h3>Question Type</h3>
-                    <xsl:apply-templates select="$facets/facet[@type='type']"/>
-                    
-                    <h3>Source</h3>
-                    <xsl:apply-templates select="$facets/facet[@type='source']">
-                        <xsl:sort select="@name"/>                      
-                    </xsl:apply-templates>
+                    <xsl:apply-templates select="$facets/facets"/>
                 </ul>
             </xsl:when>
             <xsl:otherwise>
@@ -176,7 +154,7 @@
                             <dl>
                                 <xsl:apply-templates select="$results/result[not(url=preceding-sibling::node()/url)]">
                                     <xsl:sort select="@score" order="descending"/>
-                                    <xsl:sort select="title"/>
+                                    <xsl:sort select="sortTitle"/>
                                 </xsl:apply-templates>
                             </dl>
                         </body>
@@ -184,10 +162,6 @@
                 </xsl:copy>
             </xsl:otherwise>
         </xsl:choose>
-    </xsl:template>
-    
-    <xsl:template match="attribute::node()">
-        <xsl:copy-of select="self::node()"/>
     </xsl:template>
     
     <xsl:template match="s:content">
@@ -203,6 +177,7 @@
         </xsl:variable>
         <result score="{$score}">
             <title><xsl:value-of select="s:title"/></title>   
+            <sortTitle><xsl:value-of select="replace($norm-title,'^(a|an|the) ','','i')"/></sortTitle>   
             <type><xsl:value-of select="../s:description"/></type>       
             <url><xsl:value-of select="s:url"/></url> 
             <resultsUrl><xsl:value-of select="../s:url"/></resultsUrl> 
@@ -228,6 +203,23 @@
         </dd>
     </xsl:template>
     
+    <xsl:template match="facets">
+        <xsl:if test="facet[@type='format']">
+            <h3>Article Format</h3>
+            <xsl:apply-templates select="facet[@type='format']"/>
+        </xsl:if>
+        <xsl:if test="facet[@type='type']">
+            <h3>Question Type</h3>
+            <xsl:apply-templates select="facet[@type='type']"/>
+        </xsl:if>
+        <xsl:if test="facet[@type='source']">
+            <h3>Source</h3>
+            <xsl:apply-templates select="facet[@type='source']">
+                <xsl:sort select="@name"/>                      
+            </xsl:apply-templates>
+        </xsl:if>
+    </xsl:template>
+    
     <xsl:template match="facet">
         <xsl:variable name="facet-ids">
             <xsl:for-each select="rid">
@@ -236,6 +228,10 @@
             </xsl:for-each>
         </xsl:variable>
         <li xmlns="http://www.w3.org/1999/xhtml"><a href="?source={$source}&amp;ids={$facet-ids}&amp;q={$search-terms}"><xsl:value-of select="@name"/></a></li>
+    </xsl:template>
+
+    <xsl:template match="attribute::node()">
+        <xsl:copy-of select="self::node()"/>
     </xsl:template>
     
 </xsl:stylesheet>
