@@ -1,8 +1,12 @@
 package edu.stanford.irt.laneweb.user;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-public class TicketTest extends TestCase {
+import org.junit.Before;
+import org.junit.Test;
+
+public class TicketTest {
 
     private String ezproxyKey;
 
@@ -10,6 +14,7 @@ public class TicketTest extends TestCase {
 
     private Ticket ticket;
 
+    @Test
     public void testTicket() {
         try {
             new Ticket(null, this.ezproxyKey);
@@ -23,13 +28,13 @@ public class TicketTest extends TestCase {
         }
     }
 
+    @Test
     public void testToString() {
         assertEquals(46, this.ticket.toString().length());
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() {
         this.sunetid = "ceyates";
         this.ezproxyKey = "boguskey";
         this.ticket = new Ticket(this.sunetid, this.ezproxyKey);

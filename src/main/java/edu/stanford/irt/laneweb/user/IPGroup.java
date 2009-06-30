@@ -3,7 +3,7 @@
  */
 package edu.stanford.irt.laneweb.user;
 
-import java.util.StringTokenizer;
+import java.util.regex.Pattern;
 
 /**
  * @author ceyates
@@ -36,212 +36,173 @@ public class IPGroup {
 
     public static final IPGroup SU = new IPGroup("SU");
 
+    private static String _0_TO_255 = "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
+
+    private static String DOT = "\\.";
+
+    private static Pattern IP_ADDRESS = Pattern.compile("^" + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+
+    private static Pattern LPCH_159_PATTERN = Pattern.compile("^159" + DOT + "140" + DOT + "183" + DOT + _0_TO_255 + "$");
+
+    private static String LPCH_252_1 = "(?:5|6|7|10|11|18|19|22|23|26|27|30|31|34|35|38|39|42|43|46|47|50|51|54|55|60|61|62|63|67|70|71|84|85|107|108|109|122|123|13[89]|14[0-9]|15[23]|200)"
+            + DOT + _0_TO_255;
+
+    private static String LPCH_252_2 = "250" + DOT + "(?:0?9[7-9]|1[01][0-9]|12[0-6])";
+
+    private static String LPCH_252_3 = "1" + DOT + "[12]";
+
+    private static String LPCH_252_4 = "64" + DOT + "(?:12|23|46|60|64|71)";
+
+    private static String LPCH_252_5 = "65" + DOT + "(?:5|6|9|13|14|17|18|41|42|141|142|145|146)";
+
+    private static String LPCH_252_6 = "66" + DOT + "(?:5|6|49|50|233|234|249|250|253|254)";
+
+    private static String LPCH_1 = "(?:50" + DOT + _0_TO_255 + DOT + _0_TO_255 + "|25[01]" + DOT + "(?:25[0-5]|2[0-4][0-9]|1[3-9][0-9]|12[89])" + DOT
+            + _0_TO_255 + ")";
+
+    private static String LPCH_2 = "252" + DOT + "(?:" + LPCH_252_1 + "|" + LPCH_252_2 + "|" + LPCH_252_3 + "|" + LPCH_252_4 + "|" + LPCH_252_5 + "|"
+            + LPCH_252_6 + ")";
+
+    private static String LPCH_3 = "253" + DOT + "2(?:20|54|55)" + DOT + _0_TO_255;
+
+    private static Pattern LPCH_PATTERN = Pattern.compile("^(?:" + LPCH_1 + "|" + LPCH_2 + "|" + LPCH_3 + ")$");
+
+    private static Pattern LPCH_209_PATTERN = Pattern.compile("^209" + DOT + "11" + DOT + "(?:18[89]|19[01])" + DOT + _0_TO_255 + "$");
+
+    private static Pattern NOT_OTHER = Pattern.compile("^(?:10|128|134|152|159|171|204|209)" + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+
+    private static Pattern PAVA_PATTERN = Pattern.compile("^152" + DOT + "13[0-3]" + DOT + "10" + DOT + "128$");
+
+    private static Pattern SHC_204_PATTERN = Pattern.compile("^204" + DOT + "161" + DOT + "120.*");
+
+    private static Pattern SHC_209_PATTERN = Pattern.compile("^209" + DOT + "11" + DOT + "18[4-7].*");
+
+    private static Pattern SHC_PATTERN = Pattern.compile("^2(?:(?:5[2-5]|4[78])" + DOT + _0_TO_255 + "|5[01]" + DOT + "(?:12[0-7]|1[01][0-9]|[0]?[0-9][0-9]?))"
+            + DOT + _0_TO_255 + "$");
+
+    private static Pattern SOM_BECKMAN_PATTERN = Pattern.compile("^2[0-7]" + DOT + _0_TO_255 + "$");
+
+    private static Pattern SOM_CCSR_PATTERN = Pattern.compile("^(?:1[0-5]|[4-9])" + DOT + _0_TO_255 + "$");
+
+    private static String SOM_CLARK_1 = "(?:9[2-5]|10[23])" + DOT + _0_TO_255;
+
+    private static String SOM_CLARK_2 = "71" + DOT + "(?:12[0-7]|1[01][0-9]|[0-9][0-9]?)";
+
+    private static Pattern SOM_CLARK_PATTERN = Pattern.compile("^(?:" + SOM_CLARK_1 + "|" + SOM_CLARK_2 + ")$");
+
+    private static String SOM_GRANT_1 = "(?:8[89]|9[01])" + DOT + _0_TO_255;
+
+    private static String SOM_GRANT_2 = "^40" + DOT + "(?:7[0-9]|6[4-9])";
+
+    private static Pattern SOM_GRANT_PATTERN = Pattern.compile("^(?:" + SOM_GRANT_1 + "|" + SOM_GRANT_2 + ")$");
+
+    private static Pattern SOM_LANE_PATTERN = Pattern.compile("^8[23]" + DOT + _0_TO_255 + "$");
+
+    private static String SOM_LANE_STAFF_1 = "82" + DOT
+            + "(?:11|15|16|20|24|25|27|31|42|43|46|47|48|59|60|68|74|78|95|105|119|129|135|143|144|166|168|179|204|232)";
+
+    private static String SOM_LANE_STAFF_2 = "83" + DOT
+            + "(?:8|32|37|45|73|84|86|96|98|114|132|149|157|160|168|172|174|203|204|205|206|208|212|213|214|215|232)";
+
+    private static String SOM_LANE_STAFF_3 = "1" + DOT + "213";
+
+    private static Pattern SOM_LANE_STAFF_PATTERN = Pattern.compile("^(?:" + SOM_LANE_STAFF_1 + "|" + SOM_LANE_STAFF_2 + "|" + SOM_LANE_STAFF_3 + ")$");
+
+    private static Pattern SOM_LPCH_PATTERN = Pattern.compile("^(?:112|126)" + DOT + _0_TO_255 + "$");
+
+    private static Pattern SOM_PATTERN = Pattern.compile("^171" + DOT + "65" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+
+    private static Pattern SOM_PAVA_PATTERN = Pattern.compile("^44" + DOT + _0_TO_255 + "$");
+
+    private static Pattern SOM_SHC_PATTERN = Pattern.compile("^(?:(?:1[12]5|12[7-9]|1[3-9][0-9]|25[0-5]|2[0-4][0-9])|4[6-7])" + DOT + _0_TO_255 + "$");
+
+    private static Pattern STANFORD_10_PATTERN = Pattern.compile("^10" + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+
+    private static Pattern STANFORD_128_PATTERN = Pattern.compile("^128" + DOT + "12" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+
+    private static Pattern STANFORD_134_PATTERN = Pattern.compile("^134" + DOT + "79" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+
+    private static Pattern STANFORD_171_PATTERN = Pattern.compile("^171" + DOT + "6[4-7]" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+
     public static IPGroup getGroupForIP(final String ip) {
-        int[] d = new int[4];
-        int index = 0;
-        for (StringTokenizer tokenizer = new StringTokenizer(ip, "."); tokenizer.hasMoreTokens();) {
-            try {
-                d[index++] = Integer.parseInt(tokenizer.nextToken());
-            } catch (NumberFormatException e) {
-                return IPGroup.ERR;
-            }
+        if (!IP_ADDRESS.matcher(ip).matches()) {
+            return IPGroup.ERR;
         }
-        if (d[0] == 10) {
-            if (d[1] == 50) {
-                return IPGroup.LPCH;
-            }
-            if ((d[1] == 247) || (d[1] == 248)) {
-                return IPGroup.SHC;
-            }
-            if ((d[1] == 250) || (d[1] == 251)) {
-                if (d[2] < 128) {
-                    return IPGroup.SHC;
-                }
-                return IPGroup.LPCH;
-            }
-            if (d[1] == 252) {
-                if ((d[2] == 1) && ((d[3] == 1) || (d[3] == 2))) {
-                    return IPGroup.LPCH;
-                }
-                if ((d[2] == 5) || (d[2] == 6) || (d[2] == 7) || (d[2] == 10) || (d[2] == 11) || (d[2] == 18) || (d[2] == 19) || (d[2] == 22) || (d[2] == 23)
-                        || (d[2] == 26) || (d[2] == 27) || (d[2] == 30) || (d[2] == 31) || (d[2] == 34) || (d[2] == 35) || (d[2] == 38) || (d[2] == 39)
-                        || (d[2] == 42) || (d[2] == 43) || (d[2] == 46) || (d[2] == 47) || (d[2] == 50) || (d[2] == 51) || (d[2] == 54) || (d[2] == 55)
-                        || (d[2] == 60) || (d[2] == 61) || (d[2] == 62) || (d[2] == 63)) {
-                    return IPGroup.LPCH;
-                }
-                if ((d[2] == 64) && ((d[3] == 12) || (d[3] == 23) || (d[3] == 46) || (d[3] == 60) || (d[3] == 64) || (d[3] == 71))) {
-                    return IPGroup.LPCH;
-                }
-                if ((d[2] == 65)
-                        && ((d[3] == 5) || (d[3] == 6) || (d[3] == 9) || (d[3] == 13) || (d[3] == 14) || (d[3] == 17) || (d[3] == 18) || (d[3] == 41)
-                                || (d[3] == 42) || (d[3] == 141) || (d[3] == 142) || (d[3] == 145) || (d[3] == 146))) {
-                    return IPGroup.LPCH;
-                }
-                if ((d[2] == 66)
-                        && ((d[3] == 5) || (d[3] == 6) || (d[3] == 49) || (d[3] == 50) || (d[3] == 233) || (d[3] == 234) || (d[3] == 249) || (d[3] == 250)
-                                || (d[3] == 253) || (d[3] == 254))) {
-                    return IPGroup.LPCH;
-                }
-                if ((d[2] == 67) || (d[2] == 70) || (d[2] == 71) || (d[2] == 84) || (d[2] == 85) || (d[2] == 107) || (d[2] == 108) || (d[2] == 109)
-                        || (d[2] == 122) || (d[2] == 123)) {
-                    return IPGroup.LPCH;
-                }
-                if ((d[2] >= 138) && (d[2] <= 149)) {
-                    return IPGroup.LPCH;
-                }
-                if ((d[2] == 152) || (d[2] == 153) || (d[2] == 200)) {
-                    return IPGroup.LPCH;
-                }
-                if (d[2] == 250) {
-                    if ((d[3] >= 97) && (d[3] <= 126)) {
-                        return IPGroup.LPCH;
-                    }
-                }
-                return IPGroup.SHC;
-            }
-            if (d[1] == 253) {
-                if ((d[2] == 220) || (d[2] == 254) || (d[2] == 255)) {
-                    return IPGroup.LPCH;
-                }
-                return IPGroup.SHC;
-            }
-            if (d[1] > 253) {
-                return IPGroup.SHC;
-            }
+        if (!NOT_OTHER.matcher(ip).matches()) {
             return IPGroup.OTHER;
         }
-        if (d[0] == 128) {
-            if (d[1] == 12) {
-                return IPGroup.SU;
-            }
-            return IPGroup.OTHER;
+        if (SOM_PATTERN.matcher(ip).matches()) {
+            return getGroupForSOMSubnet(ip.substring(7));
         }
-        if (d[0] == 134) {
-            if (d[1] == 79) {
-                return IPGroup.SU;
-            }
-            return IPGroup.OTHER;
+        if (STANFORD_10_PATTERN.matcher(ip).matches()) {
+            return getGroupForHospitalSubnet(ip.substring(3));
         }
-        if ((d[0] == 152) && (d[2] == 10) && (d[3] == 128) && (d[1] >= 130) && (d[1] <= 133)) {
+        if (PAVA_PATTERN.matcher(ip).matches()) {
             return IPGroup.PAVA;
         }
-        if ((d[0] == 159) && (d[1] == 140) && (d[2] == 183)) {
-            return IPGroup.LPCH;
+        if (STANFORD_171_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SU;
         }
-        if (d[0] == 171) {
-            if (d[1] == 64) {
-                return IPGroup.SU;
-            }
-            if (d[1] == 65) {
-                if ((d[2] == 1) && (d[3] == 213)) {
-                    return IPGroup.STAFF;
-                }
-                if ((d[2] >= 0) && (d[2] <= 43)) {
-                    if ((d[2] >= 4) && (d[2] <= 15)) {
-                        return IPGroup.SOM_CCSR;
-                    }
-                    if ((d[2] >= 20) && (d[2] <= 27)) {
-                        return IPGroup.SOM_BECKMAN;
-                    }
-                    if ((d[2] == 40) && ((d[3] >= 64) && (d[3] <= 79))) {
-                        return IPGroup.SOM_GRANT;
-                    }
-                    return IPGroup.SOM_OTHER;
-                }
-                if ((d[2] == 44)) {
-                    return IPGroup.PAVA;
-                }
-                if ((d[2] == 45)) {
-                    return IPGroup.SOM_OTHER;
-                }
-                if ((d[2] >= 46) && (d[2] <= 47)) {
-                    return IPGroup.SHC;
-                }
-                if ((d[2] >= 48) && (d[2] <= 81)) {
-                    if ((d[2] == 71) && (d[3] <= 127)) {
-                        return IPGroup.SOM_CLARK;
-                    }
-                    return IPGroup.SOM_OTHER;
-                }
-                if (d[2] == 82) {
-                    if ((d[3] == 11) || (d[3] == 15) || (d[3] == 16) || (d[3] == 20) || (d[3] == 24) || (d[3] == 25) || (d[3] == 27) || (d[3] == 31)
-                            || (d[3] == 42) || (d[3] == 43) || (d[3] == 46) || (d[3] == 47) || (d[3] == 48) || (d[3] == 59) || (d[3] == 60) || (d[3] == 68)
-                            || (d[3] == 74) || (d[3] == 78) || (d[3] == 95) || (d[3] == 105) || (d[3] == 119) || (d[3] == 129) || (d[3] == 135)
-                            || (d[3] == 143) || (d[3] == 144) || (d[3] == 166) || (d[3] == 168) || (d[3] == 179) || (d[3] == 204) || (d[3] == 232)) {
-                        return IPGroup.STAFF;
-                    }
-                    return IPGroup.SOM_LANE;
-                }
-                if (d[2] == 83) {
-                    if (((d[3] == 8) || (d[3] == 32)) || (d[3] == 37) || (d[3] == 45) || (d[3] == 73) || (d[3] == 84) || (d[3] == 86) || (d[3] == 96)
-                            || (d[3] == 98) || (d[3] == 114) || (d[3] == 132) || (d[3] == 149) || (d[3] == 157) || (d[3] == 160) || (d[3] == 168)
-                            || (d[3] == 172) || (d[3] == 174) || (d[3] == 203) || (d[3] == 204) || (d[3] == 205) || (d[3] == 206) || (d[3] == 208)
-                            || (d[3] == 212) || (d[3] == 213) || (d[3] == 214) || (d[3] == 215) || (d[3] == 232)) {
-                        return IPGroup.STAFF;
-                    }
-                    return IPGroup.SOM_LANE;
-                }
-                if ((d[2] >= 84) && (d[2] <= 111)) {
-                    if ((d[2] >= 88) && (d[2] <= 91)) {
-                        return IPGroup.SOM_GRANT;
-                    }
-                    if ((d[2] >= 92) && (d[2] <= 95)) {
-                        return IPGroup.SOM_CLARK;
-                    }
-                    if ((d[2] >= 102) && (d[2] <= 103)) {
-                        return IPGroup.SOM_CLARK;
-                    }
-                    return IPGroup.SOM_OTHER;
-                }
-                if (d[2] == 112) {
-                    return IPGroup.LPCH;
-                }
-                if ((d[2] == 113) || (d[2] == 114)) {
-                    return IPGroup.SOM_OTHER;
-                }
-                if (d[2] == 115) {
-                    return IPGroup.SHC;
-                }
-                if ((d[2] >= 116) && (d[2] <= 123)) {
-                    return IPGroup.SOM_OTHER;
-                }
-                if ((d[2] == 124)) {
-                    return IPGroup.SOM_OTHER;
-                }
-                if ((d[2] == 125)) {
-                    return IPGroup.SHC;
-                }
-                if (d[2] == 126) {
-                    return IPGroup.LPCH;
-                }
-                if (d[2] == 127) {
-                    return IPGroup.SHC;
-                }
-                if ((d[2] >= 128) && (d[2] <= 255)) {
-                    return IPGroup.SHC;
-                }
-                return IPGroup.SOM_OTHER;
-            }
-            if ((d[1] == 66) && (d[2] == 222) && (d[3] == 37)) {
-                return IPGroup.STAFF;// rzwies home ip
-            }
-            if ((d[1] == 66) || (d[1] == 67)) {
-                return IPGroup.SU;
-            }
-            return IPGroup.OTHER;
+        if (STANFORD_128_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SU;
         }
-        if ((d[0] == 204) && (d[1] == 161) && (d[2] == 120)) {
+        if (SHC_209_PATTERN.matcher(ip).matches()) {
             return IPGroup.SHC;
         }
-        if ((d[0] == 209) && (d[1] == 11)) {
-            if ((d[2] >= 184) && (d[2] <= 187)) {
-                return IPGroup.SHC;
-            }
-            if ((d[2] >= 188) && (d[2] <= 191)) {
-                return IPGroup.LPCH;
-            }
+        if (STANFORD_134_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SU;
+        }
+        if (SHC_204_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SHC;
+        }
+        if (LPCH_209_PATTERN.matcher(ip).matches()) {
+            return IPGroup.LPCH;
+        }
+        if (LPCH_159_PATTERN.matcher(ip).matches()) {
+            return IPGroup.LPCH;
         }
         return IPGroup.OTHER;
+    }
+
+    private static IPGroup getGroupForHospitalSubnet(final String ip) {
+        if (LPCH_PATTERN.matcher(ip).matches()) {
+            return IPGroup.LPCH;
+        }
+        if (SHC_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SHC;
+        }
+        return IPGroup.SU;
+    }
+
+    private static IPGroup getGroupForSOMSubnet(final String ip) {
+        if (SOM_LANE_STAFF_PATTERN.matcher(ip).matches()) {
+            return IPGroup.STAFF;
+        }
+        if (SOM_LANE_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SOM_LANE;
+        }
+        if (SOM_CCSR_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SOM_CCSR;
+        }
+        if (SOM_BECKMAN_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SOM_BECKMAN;
+        }
+        if (SOM_GRANT_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SOM_GRANT;
+        }
+        if (SOM_CLARK_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SOM_CLARK;
+        }
+        if (SOM_LPCH_PATTERN.matcher(ip).matches()) {
+            return IPGroup.LPCH;
+        }
+        if (SOM_PAVA_PATTERN.matcher(ip).matches()) {
+            return IPGroup.PAVA;
+        }
+        if (SOM_SHC_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SHC;
+        }
+        return IPGroup.SOM_OTHER;
     }
 
     private String stringValue;

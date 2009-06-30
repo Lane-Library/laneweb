@@ -5,6 +5,9 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.verify;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -13,15 +16,15 @@ import java.util.GregorianCalendar;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import junit.framework.TestCase;
-
 import org.apache.cocoon.environment.Session;
+import org.junit.Before;
+import org.junit.Test;
 import org.springframework.ldap.core.LdapTemplate;
 
 import edu.stanford.irt.laneweb.Cryptor;
 import edu.stanford.irt.laneweb.LanewebConstants;
 
-public class UserDaoTest extends TestCase {
+public class UserDaoTest {
 
     private Cookie[] cookies = new Cookie[1];
 
@@ -41,6 +44,7 @@ public class UserDaoTest extends TestCase {
 
     private UserDao userDao;
 
+    @Test
     public void testCookieUserInfo() throws Exception {
         resetCookieTest();
         StringBuffer cookieValue = new StringBuffer();
@@ -183,6 +187,7 @@ public class UserDaoTest extends TestCase {
         verify(this.request);
     }
 
+    @Test
     public void testGetUserInfo() {
         expect(this.request.getRemoteUser()).andReturn(this.sunetid);
         expect(this.request.getRemoteAddr()).andReturn(this.ip);
@@ -197,6 +202,7 @@ public class UserDaoTest extends TestCase {
         verify(this.request);
     }
 
+    @Test
     public void testipGroup() {
         String ip = this.ip.concat("FAIL_TEST");
         expect(this.request.getRemoteAddr()).andReturn(ip);
@@ -208,7 +214,8 @@ public class UserDaoTest extends TestCase {
         verify(this.request);
     }
 
-    public final void testNotTimeGetSunetId() throws Exception {
+    @Test
+    public void testNotTimeGetSunetId() throws Exception {
         resetCookieTest();
         StringBuffer cookieValue = new StringBuffer();
         cookieValue.append("ceyates");
@@ -236,9 +243,8 @@ public class UserDaoTest extends TestCase {
         expect(this.request.getRemoteUser()).andReturn(null);
     }
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(Session.class);
         this.subjectSource = createMock(SubjectSource.class);
