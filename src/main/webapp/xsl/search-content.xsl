@@ -149,7 +149,7 @@
             <xsl:choose>
                 <xsl:when test="count($results) &gt; 0">
                     <ul>
-                        <xsl:apply-templates select="$results[position() &lt;= 2]"/>
+                        <xsl:apply-templates select="$results[position() &lt;= 5]"/>
                     </ul>
                 </xsl:when>
                 <xsl:otherwise>
