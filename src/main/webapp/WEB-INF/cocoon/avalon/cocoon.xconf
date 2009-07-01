@@ -144,8 +144,8 @@
         <check-includes>false</check-includes>
     </component>
     
-    <component role="org.apache.cocoon.transformation.Transformer/xinclude"
-        class="edu.stanford.irt.laneweb.LanewebXIncludeTransformer"/>
+    <!--<component role="org.apache.cocoon.transformation.Transformer/xinclude"
+        class="edu.stanford.irt.laneweb.LanewebXIncludeTransformer"/>-->
     
     <component role="org.apache.cocoon.selection.SelectorSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>

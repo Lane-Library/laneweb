@@ -26,6 +26,7 @@ import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceException;
 import org.apache.excalibur.source.SourceNotFoundException;
 import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
@@ -383,7 +384,8 @@ class XIncludePipe extends AbstractXMLPipe {
                 }
                 xptr.process(context);
             } else {
-                SourceUtil.toSAX(this.lanewebXIncludeTransformer.manager, url, new IncludeXMLConsumer(subPipe));
+                this.lanewebXIncludeTransformer.parser.parse(new InputSource(url.getInputStream()), new IncludeXMLConsumer(subPipe));
+//                SourceUtil.toSAX(this.lanewebXIncludeTransformer.manager, url, new IncludeXMLConsumer(subPipe));
             }
             // restore locator on the consumer
             if (this.locator != null) {
@@ -401,10 +403,6 @@ class XIncludePipe extends AbstractXMLPipe {
             this.fallBackException.fillInStackTrace();
             getLogger().error("Error parsing XPointer expression, will try to use fallback.", e);
         } catch (SAXException e) {
-            this.useFallbackLevel++;
-            this.fallBackException = e;
-            getLogger().error("Error processing an xInclude, will try to use fallback.", e);
-        } catch (ProcessingException e) {
             this.useFallbackLevel++;
             this.fallBackException = e;
             getLogger().error("Error processing an xInclude, will try to use fallback.", e);

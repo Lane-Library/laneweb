@@ -19,10 +19,10 @@ import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.avalon.framework.service.Serviceable;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.components.source.impl.MultiSourceValidity;
+import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.transformation.AbstractTransformer;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -35,7 +35,7 @@ import org.xml.sax.ext.LexicalHandler;
  * shamelessly copied from cocoon 2.2, modified to use fallback if
  * ProcessingException or SAXException
  */
-public class LanewebXIncludeTransformer extends AbstractTransformer implements Serviceable, CacheableProcessingComponent {
+public class LanewebXIncludeTransformer extends AbstractTransformer implements CacheableProcessingComponent {
 
     public static final String XINCLUDE_FALLBACK_ELEMENT = "fallback";
 
@@ -62,6 +62,8 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
     /** The {@link SourceValidity} instance associated with this request. */
     protected MultiSourceValidity validity;
 
+    protected SAXParser parser;
+
     /** Key to be used for caching */
     public Serializable getKey() {
         return XINCLUDE_CACHE_KEY;
@@ -72,17 +74,12 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements S
         return this.validity;
     }
 
-    @Override
-    public void recycle() {
-        // Reset all variables to initial state.
-        this.resolver = null;
-        this.validity = null;
-        this.xIncludePipe = null;
-        super.recycle();
-    }
-
     public void service(final ServiceManager manager) {
         this.manager = manager;
+    }
+    
+    public void setParser(final SAXParser parser) {
+        this.parser = parser;
     }
 
     @Override

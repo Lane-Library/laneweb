@@ -370,6 +370,11 @@
     <bean name="org.apache.cocoon.transformation.Transformer/cme-links"
         class="edu.stanford.irt.laneweb.cme.CMELinkTransformer" scope="prototype">
     </bean>
+    
+    <bean name="org.apache.cocoon.transformation.Transformer/xinclude"
+        class="edu.stanford.irt.laneweb.LanewebXIncludeTransformer" scope="prototype">
+        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
+    </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/resource"
         class="edu.stanford.irt.laneweb.NoCacheBigReader" scope="prototype"/>
