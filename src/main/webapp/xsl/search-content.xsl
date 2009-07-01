@@ -143,7 +143,7 @@
     
     <xsl:template match="h:dd" mode="results">
         <xsl:variable name="id" select="preceding-sibling::h:dt[1]/@id"/>
-        <xsl:variable name="results" select="/doc/s:search/s:engine[@s:id=$id]/s:resource/s:content"/>
+        <xsl:variable name="results" select="/doc/s:search/s:engine/s:resource[@s:id=$id]/s:content"/>
         <xsl:copy>
             <xsl:copy-of select="preceding-sibling::h:dt[1]/@class"/>
             <xsl:choose>
