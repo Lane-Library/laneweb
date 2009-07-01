@@ -97,7 +97,7 @@
     
     <xsl:template match="h:dt">
         <xsl:choose>
-            <xsl:when test="$search-terms">
+            <xsl:when test="$search-terms and @id">
                 <xsl:copy>
                     <xsl:apply-templates select="attribute::node()"/>
                     <xsl:variable name="resource" select="/doc/s:search/s:engine/s:resource[@s:id=current()/@id]"/>
