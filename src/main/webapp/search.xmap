@@ -30,7 +30,7 @@
                 </map:match>
                 <!-- original metasearch sources -->
                 <map:match type="regex-parameter"
-                    pattern="^(clinical|peds|research|pharmacy|history|test)$">
+                    pattern="^(clinical|peds|research|pharmacy|history|test|textbooks)$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
                         <map:part src="cocoon:/apps/search/proxy/xml"/>

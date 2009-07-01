@@ -27,7 +27,7 @@
                 url += '&rd=' + Math.random();
                 
                 // determine if this is a merged page ... matters for result processing later on
-                if( LANE.search.getSearchSource().match(/^(clinical|peds|research|pharmacy|history|test)$/) !== null ){
+                if( LANE.search.getSearchSource().match(/^(clinical|peds|research|pharmacy|history|test|textbooks)$/) !== null ){
                     mergedMode = false;
                 }
                 
