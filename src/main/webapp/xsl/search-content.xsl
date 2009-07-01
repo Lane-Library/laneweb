@@ -41,9 +41,9 @@
     
     <xsl:template match="h:style">
         <xsl:copy>
-        <xsl:apply-templates select="attribute::node|child::node()"/>
-        dt.<xsl:value-of select="$active-facet"/>{display:block}
-        dd.<xsl:value-of select="$active-facet"/>{display:block}
+            <xsl:apply-templates select="attribute::node|child::node()"/>
+            dt.<xsl:value-of select="$active-facet"/>{display:block}
+            dd.<xsl:value-of select="$active-facet"/>{display:block}
         </xsl:copy>
     </xsl:template>
     
@@ -83,9 +83,9 @@
             <xsl:choose>
                 <xsl:when test="$search-terms">
                     <span>
-                    <xsl:text>Search Results for "</xsl:text>
-                    <span><xsl:value-of select="$search-terms"/></span>
-                    <xsl:text>"</xsl:text>
+                        <xsl:text>Search Results for "</xsl:text>
+                        <span><xsl:value-of select="$search-terms"/></span>
+                        <xsl:text>"</xsl:text>
                     </span>
                 </xsl:when>
                 <xsl:otherwise>
@@ -160,7 +160,55 @@
     </xsl:template>
     
     <xsl:template match="s:content">
-        <li><a title="{s:description}" href="{s:url}"><xsl:value-of select="s:title"/></a></li>
+        <xsl:variable name="title">
+            <xsl:call-template name="highlight">
+                <xsl:with-param name="term" select="$search-terms"/> 
+                <xsl:with-param name="text" select="s:title"/>
+            </xsl:call-template>
+        </xsl:variable>
+        
+        <li>
+            <a href="{s:url}" id="{concat(../parent::node()/@s:id,'content-',position())}">
+                <xsl:copy-of select="$title"/>
+            </a>
+            <xsl:apply-templates select="s:description">
+                <xsl:with-param name="position" select="position()"/>
+            </xsl:apply-templates>
+        </li>
+    </xsl:template>
+    
+    <xsl:template match="s:description">
+        <xsl:param name="position"/>
+        <xsl:variable name="description-long">
+            <xsl:call-template name="highlight">
+                <xsl:with-param name="term" select="$search-terms"/> 
+                <xsl:with-param name="text">
+                    <xsl:call-template name="truncate">
+                        <xsl:with-param name="text" select="."/>
+                        <xsl:with-param name="limit" select="800"/>
+                    </xsl:call-template>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="description-short">
+            <xsl:call-template name="highlight">
+                <xsl:with-param name="term" select="$search-terms"/> 
+                <xsl:with-param name="text">
+                    <xsl:call-template name="truncate">
+                        <xsl:with-param name="text" select="."/>
+                        <xsl:with-param name="limit" select="200"/>
+                    </xsl:call-template>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:variable>
+        
+        <xsl:copy-of select="$description-short"/>
+        
+        <div class="tooltips">
+            <span id="{concat(../parent::node()/@s:id,'content-',$position,'Tooltip')}">
+                <xsl:copy-of select="$description-long"/>
+            </span>
+        </div>
     </xsl:template>
     
     <xsl:template match="h:input">
@@ -188,5 +236,35 @@
             </xsl:if>
         </xsl:copy>
     </xsl:template>
-
+    
+    <xsl:template name="highlight">
+        <xsl:param name="term" select="''" />
+        <xsl:param name="text" select="''" />
+        <xsl:variable name="reg" select="concat('(.*)([ \s]?',$term,'[ \s]?)(.*)')"/>
+        <xsl:choose>
+            <xsl:when test="matches($text,$reg,'i')">
+                <xsl:call-template name="highlight">
+                    <xsl:with-param name="term" select="$term"/>
+                    <xsl:with-param name="text" select="replace($text,$reg,'$1','i')"/>
+                </xsl:call-template>
+                <strong xmlns="http://www.w3.org/1999/xhtml">
+                    <xsl:value-of select="replace($text,$reg,'$2','i')"/>                
+                </strong>
+                <xsl:value-of select="replace($text,$reg,'$3','i')"/>
+            </xsl:when>
+            <xsl:otherwise><xsl:value-of select="$text"/></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+    <xsl:template name="truncate">
+        <xsl:param name="text" select="''" />
+        <xsl:param name="limit" select="''" />
+        <xsl:choose>
+            <xsl:when test="string-length($text) > $limit">
+                <xsl:value-of select="concat(substring($text,0,$limit),' ...')"/>
+            </xsl:when>
+            <xsl:otherwise><xsl:value-of select="$text"/></xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
 </xsl:stylesheet>
