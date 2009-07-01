@@ -168,7 +168,7 @@
         </xsl:variable>
         
         <li>
-            <a href="{s:url}" id="{concat(../parent::node()/@s:id,'content-',position())}">
+            <a href="{s:url}" id="{concat(parent::node()/@s:id,'content-',position())}">
                 <xsl:copy-of select="$title"/>
             </a>
             <xsl:apply-templates select="s:description">
@@ -205,7 +205,7 @@
         <xsl:copy-of select="$description-short"/>
         
         <div class="tooltips">
-            <span id="{concat(../parent::node()/@s:id,'content-',$position,'Tooltip')}">
+            <span id="{concat(parent::node()/parent::node()/@s:id,'content-',$position,'Tooltip')}">
                 <xsl:copy-of select="$description-long"/>
             </span>
         </div>
