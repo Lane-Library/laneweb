@@ -62,6 +62,9 @@
         <parameter name="incremental-processing" value="false"/>
         <parameter name="transformer-factory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </component>
+    
+    <component role="org.apache.excalibur.xml.xpath.XPathProcessor"
+        class="org.apache.excalibur.xml.xpath.XPathProcessorImpl"/>
 
     <component role="org.apache.cocoon.components.modules.input.InputModuleSelector"
         class="org.apache.cocoon.core.container.DefaultServiceSelector"/>

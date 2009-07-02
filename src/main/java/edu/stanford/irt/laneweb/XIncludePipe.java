@@ -385,7 +385,6 @@ class XIncludePipe extends AbstractXMLPipe {
                 xptr.process(context);
             } else {
                 this.lanewebXIncludeTransformer.parser.parse(new InputSource(url.getInputStream()), new IncludeXMLConsumer(subPipe));
-//                SourceUtil.toSAX(this.lanewebXIncludeTransformer.manager, url, new IncludeXMLConsumer(subPipe));
             }
             // restore locator on the consumer
             if (this.locator != null) {

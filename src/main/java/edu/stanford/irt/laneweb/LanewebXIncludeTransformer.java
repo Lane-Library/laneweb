@@ -57,12 +57,12 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements C
 
     protected ServiceManager manager;
 
+    protected SAXParser parser;
+
     protected SourceResolver resolver;
 
     /** The {@link SourceValidity} instance associated with this request. */
     protected MultiSourceValidity validity;
-
-    protected SAXParser parser;
 
     /** Key to be used for caching */
     public Serializable getKey() {
@@ -72,14 +72,6 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements C
     /** Get the validity for this transform */
     public SourceValidity getValidity() {
         return this.validity;
-    }
-
-    public void service(final ServiceManager manager) {
-        this.manager = manager;
-    }
-    
-    public void setParser(final SAXParser parser) {
-        this.parser = parser;
     }
 
     @Override
@@ -95,6 +87,14 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements C
     @Override
     public void setLexicalHandler(final LexicalHandler handler) {
         this.xIncludePipe.setLexicalHandler(handler);
+    }
+
+    public void setParser(final SAXParser parser) {
+        this.parser = parser;
+    }
+
+    public void setServiceManager(final ServiceManager serviceManager) {
+        this.manager = serviceManager;
     }
 
     @SuppressWarnings("unchecked")
