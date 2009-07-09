@@ -145,15 +145,16 @@
     
     <xsl:template match="h:dd" mode="results">
         <xsl:variable name="id" select="preceding-sibling::h:dt[1]/@id"/>
+        <xsl:variable name="hits" select="/doc/s:search/s:engine/s:resource[@s:id=$id]/s:hits"/>
         <xsl:variable name="results" select="/doc/s:search/s:engine/s:resource[@s:id=$id]/s:content"/>
         <xsl:copy>
             <xsl:copy-of select="preceding-sibling::h:dt[1]/@class"/>
             <xsl:choose>
-                <xsl:when test="count($results) &gt; 0 and count($results) &gt; $resultLimit">
+                <xsl:when test="count($results) &gt; 0 and $hits &gt; $resultLimit">
                     <ul>
                         <xsl:apply-templates select="$results[position() &lt;= $resultLimit]"/>
                         <li>
-                            <span class="moreResults">All <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id=$id]/s:hits,'###,###,##0')"/> results in 
+                            <span class="moreResults">All <xsl:value-of select="format-number($hits,'###,###,##0')"/> results in 
                                 <a target="_blank" href="{/doc/s:search/s:engine/s:resource[@s:id=$id]/s:url}">
                                     <xsl:value-of select="preceding-sibling::h:dt[1]/text()"/>
                                 </a>
