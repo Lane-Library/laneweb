@@ -356,6 +356,7 @@
                 <value>pubmed_etiology_expanded</value>
                 <value>pubmed_epidemiology_focused</value>
                 <value>pubmed_epidemiology_expanded</value>
+                <value>pubmed_systematicreviews</value>
             </list>
         </property>
         <property name="metaSearchManagerSource"
