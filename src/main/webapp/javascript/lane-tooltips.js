@@ -21,7 +21,7 @@
                                 {
                                     context:e,
                                     width:w,
-                                    autodismissdelay:30000,
+                                    autodismissdelay:60000,
                                     text:tt[j].innerHTML
                                 });
                     }
