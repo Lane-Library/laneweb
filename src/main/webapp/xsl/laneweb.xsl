@@ -613,7 +613,7 @@
     <!-- href and src attributes template -->
     <xsl:template match="@href">
         <xsl:choose>
-            <xsl:when
+            <!--<xsl:when
                 test="(parent::h:a[@class='proxy' or @proxy]) and $proxy-links = 'true' and starts-with(.,'http')">
                 <xsl:choose>
                     <xsl:when test="$ip-group = 'LPCH' or $ip-group = 'SHC'">
@@ -647,7 +647,7 @@
                         </xsl:call-template>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:when>
+            </xsl:when>-->
             <xsl:when
                 test="starts-with(.,'http://lane.stanford.edu') and not(contains(.,'cookiesFetch'))">
                 <xsl:call-template name="make-link">
