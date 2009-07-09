@@ -205,19 +205,19 @@
             <map:match pattern="sfx/*" type="wildcard">
                 <map:match pattern="sfx/json" type="wildcard">
                     <map:generate type="html"
-                        src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"/>
+                        src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;sfx.directlink=off"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/sfx2json.xsl">
                             <map:transform src="xsl/sfx2json.xsl" type="saxon">
                                 <map:parameter name="sfx-request"
-                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
+                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"
                                 />
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform src="context://xsl/sfx2json.xsl" type="saxon">
                                 <map:parameter name="sfx-request"
-                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
+                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"
                                 />
                             </map:transform>
                         </map:otherwise>
