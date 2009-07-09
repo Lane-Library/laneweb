@@ -12,6 +12,8 @@
     <xsl:param name="o"/>
     <xsl:param name="facet"/>
     
+    <xsl:variable name="resultLimit" select="3"/>
+    
     <xsl:variable name="active-facet">
         <xsl:choose>
             <xsl:when test="$facet"><xsl:value-of select="$facet"/></xsl:when>
@@ -101,7 +103,7 @@
                 <xsl:copy>
                     <xsl:apply-templates select="attribute::node()"/>
                     <xsl:variable name="resource" select="/doc/s:search/s:engine/s:resource[@s:id=current()/@id]"/>
-                    <a href="{$resource/s:url}"><xsl:apply-templates select="child::node()"/>
+                    <a href="{$resource/s:url}" target="_blank"><xsl:apply-templates select="child::node()"/>
                         <xsl:text> (</xsl:text>
                         <xsl:choose>
                             <xsl:when test="$resource/s:hits">
@@ -147,9 +149,21 @@
         <xsl:copy>
             <xsl:copy-of select="preceding-sibling::h:dt[1]/@class"/>
             <xsl:choose>
+                <xsl:when test="count($results) &gt; 0 and count($results) &gt; $resultLimit">
+                    <ul>
+                        <xsl:apply-templates select="$results[position() &lt;= $resultLimit]"/>
+                        <li>
+                            <span class="moreResults">All <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id=$id]/s:hits,'###,###,##0')"/> results in 
+                                <a target="_blank" href="{/doc/s:search/s:engine/s:resource[@s:id=$id]/s:url}">
+                                    <xsl:value-of select="preceding-sibling::h:dt[1]/text()"/>
+                                </a>
+                            </span>
+                        </li>
+                    </ul>
+                </xsl:when>
                 <xsl:when test="count($results) &gt; 0">
                     <ul>
-                        <xsl:apply-templates select="$results[position() &lt;= 5]"/>
+                        <xsl:apply-templates select="$results[position() &lt;= $resultLimit]"/>
                     </ul>
                 </xsl:when>
                 <xsl:otherwise>
@@ -168,7 +182,7 @@
         </xsl:variable>
         
         <li>
-            <a href="{s:url}" id="{concat(parent::node()/@s:id,'content-',position())}">
+            <a href="{s:url}" id="{concat(parent::node()/@s:id,'content-',position())}" target="_blank">
                 <xsl:copy-of select="$title"/>
             </a>
             <xsl:apply-templates select="s:description">
