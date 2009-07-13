@@ -14,22 +14,22 @@ border-left:1px dotted #C1C1C1;
 #searchTabs li, #gft li {
 border-left:1px dotted #818181;
 }
-#search fieldset, #ft li:first-child, #gft li:first-child,  #searchTabs li:first-child, #searchTabs li li , div#otherPortalOptions {
+#search fieldset, #ft li:first-child, #gft li:first-child,  #searchTabs li:first-child, #searchTabs li li , #otherPortalOptions {
 border:none;
 }
-div#leftColumn div, div#rightColumn div {
+#leftColumn div, #rightColumn div {
 border-bottom:1px solid #c1c1c1;
 }
-div#leftColumn  {
+#leftColumn  {
 border-right:1px solid #c1c1c1;
 }
-div#rightColumn div {
+#rightColumn div {
 border-left:1px solid #c1c1c1;
 }
-div#rightColumn h2, div#leftColumn h2 {
+#rightColumn h2, #leftColumn h2 {
 border-bottom:1px solid #c1c1c1;
 }
-div#hd {
+#hd {
 border-bottom: 1px solid #c1c1c1;
 }
 .bgTab, #eLibraryTabs li, #browseTabs li {
@@ -42,11 +42,11 @@ div.fMainBox {
 border:1px solid #9C9A90;
 border-top-width: 4px;
 }
-div#popInContent {
+#popInContent {
 border-bottom:1px solid #9C9A90;
 border-top: 4px solid #9C9A90;
 }
-div#otherPortalOptions ul, #otherSearches ul {
+#otherPortalOptions ul, #otherSearches ul {
 border:1px solid #999;
 }
 div.wrapperBox {

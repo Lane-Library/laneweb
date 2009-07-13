@@ -173,7 +173,7 @@ width:29%;
 h2.bgTab, h2.activeTab  {
 float:left;
 }
-div.fMainBox, div#popInContent {
+div.fMainBox, #popInContent {
 clear:left;
 height:100%;
 }
@@ -206,7 +206,7 @@ top:2em;
 #otherSearches ul {
 top:1em;
 }
-#otherPortalOptions:hover ul, div#otherPortalOptions.hover ul, #otherSearches:hover ul, #otherSearches.hover ul {
+#otherPortalOptions:hover ul, #otherPortalOptions.hover ul, #otherSearches:hover ul, #otherSearches.hover ul {
 display:block;
 }
 #otherPortalOptions li, #otherSearches li {

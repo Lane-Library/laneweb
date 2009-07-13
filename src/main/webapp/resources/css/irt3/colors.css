@@ -144,14 +144,14 @@ color:#111111
 .yui-tt { 
     background-color:#F2F3ED;
 }
-div#leftColumn h2, div#rightColumn h2 {
+#leftColumn h2, #rightColumn h2 {
 background-image:url(/././images/templates/irt3/sprite-vert.gif);
 background-position:0 -440px;
 background-color:  #EFEFEF;
 color:#2D2D2D;
 }
 
-div#rightColumn{
+#rightColumn{
  color:#2D2D2D;
 }
 #bd h1 {
@@ -212,11 +212,11 @@ div.wrapperBox h2 {
 color:#666;
 background-color:#fff;
 }
-div#otherPortalOptions ul, #otherSearches ul {
+#otherPortalOptions ul, #otherSearches ul {
 background-color:white;
 color:inherit;
 }
-div#otherPortalOptions ul li {
+#otherPortalOptions ul li {
 background-image:none;
 }
 a:link, #searchTabs a:visited {

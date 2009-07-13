@@ -64,12 +64,12 @@ color: #444;
 }
 
 
-div#legend-drop-down {
+#legend-drop-down {
 float:right;
 position:relative;
 margin-top:-3em;
 }
-div#legend-drop-down ul {
+#legend-drop-down ul {
 display:none;
 position:absolute;
 background-color:#ebecec;
@@ -81,10 +81,10 @@ margin-top: 0;
 width: 25em;
 padding: .75em;
 }
-div#legend-drop-down:hover ul, div#legend-drop-down.hover ul {
+#legend-drop-down:hover ul, #legend-drop-down.hover ul {
 display:block;
 }
-div#legend-drop-down li {
+#legend-drop-down li {
 white-space:normal;
 background-image: none;
 padding:.2em .7em .4em .7em;

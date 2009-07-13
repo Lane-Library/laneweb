@@ -51,7 +51,7 @@ margin:0 1em 1em 1em;
 #bd dd ul, #bd #eLibraryTabs, #bd #browseTabs {
 margin:0;
 }
-div#leftColumn, div#rightColumn {
+#leftColumn, #rightColumn {
 margin-bottom:-1px;
 }
 #leftColumn h2, #rightColumn h2 {
