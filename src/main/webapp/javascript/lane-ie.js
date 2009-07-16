@@ -72,11 +72,16 @@
                         };
                     }
                     //TODO: use onavailable for this?
-                    lists = ['shd', 'ft', 'gft','searchTabs'];
+                    lists = ['ft', 'gft','searchTabs'];
                     for (i = 0; i < lists.length; i++) {
                         list = d.getElementById(lists[i]);
                         if (list) {
                             list.getElementsByTagName('li')[0].style.border = 'none';
+                        }
+                    }
+                    list = d.getElementById('shd') {
+                        if (list) {
+                            list.getElementsByTagName('li')[0].style.background-image = 'none';
                         }
                     }
                 }
