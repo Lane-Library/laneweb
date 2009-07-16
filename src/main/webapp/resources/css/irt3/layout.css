@@ -1,11 +1,12 @@
 /* from yui-grid tool: */
-#custom-doc, #shd { 
+#custom-doc { 
 width:76.92em;*width:75.07em;min-width:1000px; margin:auto; text-align:left;
 }
 #shd {
 position:absolute;
 top:0;
-z-index:2
+z-index:2;
+width:750px
 }
 #shd li {
 float:left;
@@ -16,6 +17,12 @@ display:block;
 /*IE 6 needs this:*/
 float:left;
 height:18px
+}
+#stanfordMedicineBrand a {
+width:124px;
+}
+#stanfordUniversityBrand a{
+width:62px
 }
 #shd ul a {
 float:none;

@@ -7,10 +7,13 @@ background-image:url(/././images/templates/irt3/sprite-vert.gif);
 background-position:0 -60px;
 background-repeat:no-repeat
 }
+#shd li:first-child {
+background-image:none
+}
 #shd a {
 background-image:url(/././images/templates/irt3/sprite.gif);
 background-repeat:no-repeat;
-background-position:115% -382px
+background-position:100% -382px
 }
 #stanfordMedicineBrand a {
 background-image:url(/././images/templates/irt3/sprite.gif);
@@ -24,10 +27,10 @@ text-decoration:none
 #stanfordUniversityBrand a {
 background-image:url(/././images/templates/irt3/sprite.gif);
 background-repeat:no-repeat;
-background-position:52px -191px;
+background-position:8px -191px;
 }
 #shd #stanfordUniversityBrand a:hover {
-background-position:52px -291px;
+background-position:8px -291px;
 text-decoration:none
 }
 #shd ul li, #shd ul a {
@@ -172,9 +175,6 @@ background-image:none;
 #bd li.moreItem { 
 background-image: url(/././images/templates/irt3/list-background-chevron.gif);
 }
-/*ul#eLibraryTabs li {
-background-image:none;
-}*/
 li.eLibraryTab{
 color:#1C4B70;
 }
@@ -221,15 +221,12 @@ background-image:none;
 }
 a:link, #searchTabs a:visited {
 color: #1C4B70;
-/*background-color:inherit;*/
 }
 a:visited {
 color: #79455C;	
-/*background-color:inherit;*/
 }
 a:hover, a:active { 
 color: #900;
-/*background-color:inherit;*/
 }
 #bd h2.searchHeader {
 background-color: #9C9A90;
