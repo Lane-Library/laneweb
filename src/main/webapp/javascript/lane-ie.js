@@ -79,10 +79,9 @@
                             list.getElementsByTagName('li')[0].style.border = 'none';
                         }
                     }
-                    list = d.getElementById('shd') {
-                        if (list) {
-                            list.getElementsByTagName('li')[0].style.background-image = 'none';
-                        }
+                    list = d.getElementById('shd');
+                    if (list) {
+                        list.getElementsByTagName('li')[0].style.backgroundImage = 'none';
                     }
                 }
                 else 
