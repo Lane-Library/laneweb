@@ -22,7 +22,7 @@ public class CMERedirectAction implements Action {
     private static final String HOST_PARAM = "host";
 
     // TODO: once more vendors, move UTD strings to collection of host objects
-    private static final String UTD_CME_STRING = "http://www.uptodate.com/online/content/search.do?unid=EMRID&srcsys=epicXXX&eiv=2.1.0";
+    private static final String UTD_CME_STRING = "http://www.uptodate.com/online/content/search.do?unid=EMRID&srcsys=epic90710&eiv=2.1.0";
     
     private static final String PROXY_LINK = "http://laneproxy.stanford.edu/login?url=";
 

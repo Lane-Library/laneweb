@@ -32,7 +32,7 @@ public class CMELinkTransformer extends AbstractTransformer {
     
     private static final String UTD_CME_URL = "http://www.uptodate.com/online/content/search.do?";
     
-    private static final String UTD_CME_ARGS = "unid=?&srcsys=epicXXX&eiv=2.1.0";
+    private static final String UTD_CME_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
 
     // TODO: once more vendors, move UTD strings to collection of host objects
     private static final String[] UTD_HOSTS = { "www.utdol.com", "www.uptodate.com" };
