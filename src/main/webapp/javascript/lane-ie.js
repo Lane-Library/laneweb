@@ -55,12 +55,24 @@
                     if (superHeader) {
                         var uls = superHeader.getElementsByTagName('UL');
                         for (i = 0; i < uls.length; i++) {
-                            uls[i].parentNode.activate = function() {
-                                this.className = 'hover';
-                            };
-                            uls[i].parentNode.deactivate = function() {
-                                this.className = '';
-                            };
+                            //hide search select for 1st superheader drop down
+                            if (i == 0 ) {
+                                uls[i].parentNode.activate = function() {
+                                    searchSelect.style.visibility = 'hidden';
+                                    this.className = 'hover';
+                                };
+                                uls[i].parentNode.deactivate = function() {
+                                    this.className = '';
+                                    searchSelect.style.visibility = 'visible';
+                                };
+                            } else {
+                                uls[i].parentNode.activate = function() {
+                                    this.className = 'hover';
+                                };
+                                uls[i].parentNode.deactivate = function() {
+                                    this.className = '';
+                                };
+                            }
                         }
                     }
                     if (searchSubmit) {

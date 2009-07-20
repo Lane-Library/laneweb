@@ -71,8 +71,8 @@
                                         >Google</a>
                                 </li>
                             </ul>
-                                <a id="askUs" href="/contacts/index.html?loadTab=askus" title="Ask Us.">Ask
-                                    Us</a>
+                            <span id="askUs"><a href="/contacts/index.html?loadTab=askus" title="Ask Us.">Ask
+                                    Us</a></span>
                         </div>
                         <div id="breadcrumb">
                             <a id="proxyOff">Guest Access</a>

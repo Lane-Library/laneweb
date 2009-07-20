@@ -10,6 +10,25 @@
         <release date="in SVN" description="1.10.M1 minor version upgrade preview" version="1.10.M1">
             
         </release>
+        <release date="2009-07-20" version="1.9.20" description="1.9.20 bugfix release">
+            <action date="2009-07-17" dev="ceyates" issue="29794" type="fix">
+                Lane "super header" Position and Wrapping on Browser Resize
+            </action>
+            <action date="2009-06-29" dev="ryanmax" issue="29672" type="fix">
+                Google Analytics missing proxied traffic
+            </action>
+            <action date="2009-07-13" dev="ceyates" issue="29021" type="add">
+                Implement SOM Super Header
+            </action>
+            <action date="2009-07-17" dev="ryanmax" issue="28228" type="add">
+                cme ID: persist through session and re-write UTD links
+            </action>
+        </release>
+        <release date="2009-06-29" version="1.9.19" description="1.9.19 bugfix release">
+            <action date="2009-06-29" dev="ceyates" issue="29326" type="fix">
+                check for null when getting ldap attributes
+            </action>
+        </release>
         <release date="2009-06-05" version="1.9.18" description="1.9.18 bugfix release">
             <action date="2009-06-01" dev="ceyates" issue="28652" type="fix">
                 reverted nekohtml to version 1.9.11

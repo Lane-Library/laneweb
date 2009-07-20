@@ -96,6 +96,9 @@
             <map:match pattern="redirect/cme" type="wildcard">
                 <map:act type="cmeRedirectAction">
                     <map:parameter name="emrid" value="{user:emrid}"/>
+                    <map:parameter name="host" value="{request-param:host}"/>
+                    <map:parameter name="query-string" value="{request:queryString}"/>
+                    <map:redirect-to uri="{cme-redirect}"/>
                 </map:act>
             </map:match>
             <map:match pattern="cookiesFetch.html" type="wildcard">

@@ -217,7 +217,7 @@
                         <map:otherwise>
                             <map:transform src="context://xsl/sfx2json.xsl" type="saxon">
                                 <map:parameter name="sfx-request"
-                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact"
+                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:{request-param:q}}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
                                 />
                             </map:transform>
                         </map:otherwise>
