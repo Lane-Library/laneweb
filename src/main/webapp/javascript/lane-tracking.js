@@ -82,7 +82,7 @@ LANE.tracking = function(){
                         }
                         query = '';
                         external = true;
-                    } else if (node.rel && node.rel.indexOf('popup') === 0) {
+                    } else if (node.rel && (node.rel.indexOf('popup local') === 0 || node.rel.indexOf('popup faq') === 0)) {
                         host = document.location.host;
                         path = document.location.pathname;
                         query = document.location.search;
