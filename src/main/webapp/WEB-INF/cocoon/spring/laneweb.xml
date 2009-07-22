@@ -15,6 +15,11 @@
         </property>
         <lookup-method name="getRequestProcessor" bean="org.apache.cocoon.servlet.RequestProcessor"/>
     </bean>
+    
+    <bean id="org.apache.cocoon.processing.ProcessInfoProvider"
+        class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
+        <property name="servletContext" ref="javax.servlet.ServletContext"/>
+    </bean>
 
     <bean name="org.apache.cocoon.caching.Cache" class="org.apache.cocoon.caching.impl.CacheImpl">
         <property name="store" ref="org.apache.excalibur.store.Store"/>
@@ -400,14 +405,18 @@
     </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/txt-resource"
-        class="edu.stanford.irt.laneweb.GZipTxtResourceReader" scope="prototype">
+        class="edu.stanford.irt.laneweb.TxtResourceReader" scope="prototype">
         <property name="defaultPath" value="/"/>
         <property name="valueToSubstitute" value="/\./\."/>
-        <property name="processInfoProvider">
-            <bean class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
-            </bean>
-        </property>
         <!-- uses regex so /./. is what is actually substituted -->
+    </bean>
+    
+    <bean name="org.apache.cocoon.reading.Reader/gziptxt-resource"
+        class="edu.stanford.irt.laneweb.gzip.GZipTxtResourceReader" scope="prototype">
+        <property name="defaultPath" value="/"/>
+        <property name="valueToSubstitute" value="/\./\."/>
+        <!-- uses regex so /./. is what is actually substituted -->
+        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
     </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/search-url-tester"
@@ -425,6 +434,11 @@
         class="edu.stanford.irt.laneweb.icd9.ICD9JSONReader"
         scope="prototype">
         <property name="ICD9Translator" ref="edu.stanford.irt.lane.icd9.ICD9Translator"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.selection.Selector/gzip"
+        class="edu.stanford.irt.laneweb.gzip.GZipAcceptEncodingSelector">
+        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/voyager"
@@ -482,7 +496,7 @@
     </bean>
 
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
-        class="edu.stanford.irt.laneweb.GZipXMLSerializer" scope="prototype"
+        class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <pipeline:component mime-type="text/html"/>
         <property name="format">
@@ -495,10 +509,23 @@
             </props>
         </property>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
-        <property name="processInfoProvider">
-            <bean class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
-            </bean>
+    </bean>
+    
+    <bean name="org.apache.cocoon.serialization.Serializer/gzipxhtml"
+        class="edu.stanford.irt.laneweb.gzip.GZipXMLSerializer" scope="prototype"
+        parent="org.apache.cocoon.serialization.AbstractTextSerializer">
+        <pipeline:component mime-type="text/html"/>
+        <property name="format">
+            <props>
+                <prop key="doctype-public">-//W3C//DTD XHTML 1.0 Strict//EN</prop>
+                <prop key="doctype-system">http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd</prop>
+                <prop key="encoding">UTF-8</prop>
+                <prop key="indent">yes</prop>
+                <prop key="omit-xml-declaration">yes</prop>
+            </props>
         </property>
+        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
+        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
     </bean>
 
     <bean name="org.apache.cocoon.serialization.Serializer/text"

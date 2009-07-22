@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.gzip;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -21,7 +21,6 @@ public class GZipXMLSerializer extends XMLSerializer {
         try {
             ((GZIPOutputStream)this.output).finish();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             throw new RuntimeException(e);
         }
     }

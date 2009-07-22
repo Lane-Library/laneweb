@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.gzip;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -11,6 +11,8 @@ import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.processing.ProcessInfoProvider;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.laneweb.TxtResourceReader;
 
 public class GZipTxtResourceReader extends TxtResourceReader {
     

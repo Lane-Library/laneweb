@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="caching">
-            <map:parameter name="expires" value="access plus 7 days"/>
+            <map:parameter name="expires" value="access plus 31 days"/>
             <map:match pattern="images/**" type="wildcard">
                 <map:read type="resource" src="context://resources/images/{1}"/>
             </map:match>
@@ -14,14 +14,32 @@
             </map:match>
             <!-- first wildcard will be version for local css and javascript -->
             <map:match pattern="style/*/**.css" type="wildcard">
-                <map:read type="txt-resource" src="context://resources/css/{2}.css">
-                    <map:parameter name="path" value="{request:contextPath}"/>
-                </map:read>
+                <map:select type="gzip">
+                    <map:when test="">
+                        <map:read type="gziptxt-resource" src="context://resources/css/{2}.css">
+                            <map:parameter name="path" value="{request:contextPath}"/>
+                        </map:read>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="txt-resource" src="context://resources/css/{2}.css">
+                            <map:parameter name="path" value="{request:contextPath}"/>
+                        </map:read>
+                    </map:otherwise>
+                </map:select>
             </map:match>
             <map:match pattern="javascript/*/*.js" type="wildcard">
-                <map:read type="txt-resource" src="context://javascript/{2}.js">
-                    <map:parameter name="path" value="{request:contextPath}"/>
-                </map:read>
+                <map:select type="gzip">
+                    <map:when test="">
+                        <map:read type="gziptxt-resource" src="context://javascript/{2}.js">
+                            <map:parameter name="path" value="{request:contextPath}"/>
+                        </map:read>
+                    </map:when>
+                    <map:otherwise>
+                        <map:read type="txt-resource" src="context://javascript/{2}.js">
+                            <map:parameter name="path" value="{request:contextPath}"/>
+                        </map:read>
+                    </map:otherwise>
+                </map:select>
             </map:match>
             <!-- cocoon reader range handling is broken so don't do it for pdfs where it matters most -->
             <map:match pattern="**.pdf" type="wildcard">
