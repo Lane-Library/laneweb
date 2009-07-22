@@ -21,15 +21,15 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
 
     private String defaultPath;
 
-    private OutputStream outputStream;
+    protected OutputStream outputStream;
 
-    private String path;
+    protected String path;
 
-    private Source source;
+    protected Source source;
 
     private String valueToSubstitute;
 
-    public void generate() throws IOException, SAXException, ProcessingException {
+    public void generate() throws IOException {
         BufferedReader bf = null;
         try {
             bf = new BufferedReader(new InputStreamReader(this.source.getInputStream()));
@@ -40,8 +40,6 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
                 this.outputStream.write('\n');
             }
             this.outputStream.flush();
-        } catch (IOException e) {
-            throw e;
         } finally {
             if (bf != null) {
                 bf.close();
