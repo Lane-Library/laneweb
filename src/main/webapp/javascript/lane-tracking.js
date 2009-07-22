@@ -8,10 +8,13 @@ LANE.tracking = function(){
         //figures out the title string for a node
         getTrackedTitle = function(node) {
             //if there is a title attribute, use that.
-            var title = node.title, img, i = 0;
+            var title = node.title, img, i = 0, relTokens;
             //if there is rel="popup .." then create a title from it.
             if (node.rel && node.rel.indexOf('popup') === 0) {
-                title = 'YUI Pop-up [' + node.rel.substring(6) + ']';
+                relTokens = node.rel.split(' ');
+                if (relTokens[1] == 'local' || relTokens[1] == 'faq') {
+                    title = 'YUI Pop-up [' + relTokens[1] + ']';
+                }
             }
             //next try alt attribute.
             if (!title) {
