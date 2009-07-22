@@ -156,8 +156,6 @@ LANE.tracking = function(){
                         relTokens = link.rel.split(' ');
                         if (relTokens[1] == 'local' || relTokens[1] == 'faq') {
                             return true;
-                        } else {
-                            return false;
                         }
                     }
                     linkHost = link.host;
