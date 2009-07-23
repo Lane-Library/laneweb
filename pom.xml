@@ -14,12 +14,12 @@
     <url>http://lane.stanford.edu/index.html</url>
     <inceptionYear>2002</inceptionYear>
     <issueManagement>
-    	<system>FogBugz</system>
-    	<url>http://irt-bugs.stanford.edu/default.php</url>
+        <system>FogBugz</system>
+        <url>http://irt-bugs.stanford.edu/default.php</url>
     </issueManagement>
     <ciManagement>
-    	<system>Hudson</system>
-    	<url>http://irt-integration.stanford.edu/hudson/job/Laneweb/</url>
+        <system>Hudson</system>
+        <url>http://irt-integration.stanford.edu/hudson/job/Laneweb/</url>
     </ciManagement>
     <developers>
         <developer>
@@ -416,38 +416,38 @@
         </dependency>
         -->
         <dependency>
-        	<groupId>edu.stanford.irt</groupId>
-        	<artifactId>icd9</artifactId>
+            <groupId>edu.stanford.irt</groupId>
+            <artifactId>icd9</artifactId>
             <version>1.0.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>mesh-export</artifactId>
-        	<version>1.0.3</version>
+            <version>1.0.3</version>
             <scope>compile</scope>
             <exclusions>
-            	<exclusion>
-            		<artifactId>marc4j-jdk15</artifactId>
-            		<groupId>edu.stanford.irt.marc4j</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>catalog</artifactId>
-            		<groupId>edu.stanford.irt</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>spring-jdbc</artifactId>
-            		<groupId>org.springframework</groupId>
-            	</exclusion>
-            	<exclusion>
-            		<artifactId>ojdbc5</artifactId>
-            		<groupId>com.oracle.ojdbc</groupId>
-            	</exclusion>
+                <exclusion>
+                    <artifactId>marc4j-jdk15</artifactId>
+                    <groupId>edu.stanford.irt.marc4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>catalog</artifactId>
+                    <groupId>edu.stanford.irt</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-jdbc</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>ojdbc5</artifactId>
+                    <groupId>com.oracle.ojdbc</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
     </dependencies>
     <properties>
-    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-	</properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
 </project>
