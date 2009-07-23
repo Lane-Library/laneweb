@@ -7,10 +7,6 @@ text-decoration:none;
 #nav {
 font-weight:600;
 }
-#otherSearches li h3 {
-text-align:left;
-font-weight:bold
-}
 #breadcrumb {
 font-size:0.85em;
 }
@@ -57,7 +53,7 @@ text-decoration:none;
 #hd h2 a:hover, #hd h2 a:active { 
 text-decoration: underline;
 }
-#hd h2 #subtitle a:hover,#hd h2 #subtitle a:active{ 
+#hd h2 #subtitle a:hover,#hd h2 #subtitle a:active, .eLibraryTabActive a:active { 
 text-decoration: none;
 }
 #hd h2 a:visited, #hd h2 a {
@@ -65,9 +61,6 @@ color:black;
 }
 #hd h2 span {
 color:#990000;
-}
-#otherSearches li {
-text-align:left
 }
 #rightColumn h2, #leftColumn h2 {
 text-align:left;

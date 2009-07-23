@@ -13,22 +13,6 @@
                 <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
             <map:match pattern="search.html" type="wildcard">
-                <!-- temporary implementation of new clinical search tool 5/20/09 -->
-                <map:match type="regex-parameter" pattern="clinical">
-                    <map:parameter name="parameter-name" value="source"/>
-                    <map:aggregate element="doc">
-                        <map:part src="cocoon:/apps/search/content/xml"/>
-                        <map:part src="{naming:java:comp/env/stage-base}/content/search/clinical2.html"/>
-                    </map:aggregate>
-                    <map:transform type="saxon" src="context://xsl/search-content.xsl">
-                        <map:parameter name="p" value="{request-param:p}"/>
-                        <map:parameter name="i" value="{request-param:i}"/>
-                        <map:parameter name="c" value="{request-param:c}"/>
-                        <map:parameter name="o" value="{request-param:o}"/>
-                        <map:parameter name="facet" value="{request-param:facet}"/>
-                    </map:transform>
-                    <map:serialize type="xml"/>
-                </map:match>
                 <!-- original metasearch sources -->
                 <map:match type="regex-parameter"
                     pattern="^(clinical|peds|research|pharmacy|history|test|textbooks)$">

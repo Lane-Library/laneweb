@@ -49,32 +49,6 @@
     <xsl:param name="referrer"/>
 
     <xsl:param name="name"/>
-    
-    <!-- matches $search-form-select ask key to text value, keep this in sync with lane-search.js-->
-    <xsl:variable name="source-name-map">
-        <entry key="ej" value="eJournals"/>
-        <entry key="book" value="eBooks"/>
-        <entry key="cc" value="Calculators"/>
-        <entry key="database" value="Databases"/>
-        <entry key="software" value="Software"/>
-        <entry key="video" value="Videos"/>
-        <entry key="lanesite" value="Lane Site"/>
-        <entry key="bassett" value="Bassett"/>
-        <entry key="peds" value="Pediatrics"/>
-        <entry key="history" value="History"/>
-        <entry key="research" value="Bioresearch"/>
-        <entry key="all" value="All"/>
-        <entry key="clinical" value="Clinical"/>
-        <entry key="/portals/pharmacy.html" value="Pharmacy"/>
-        <entry key="/portals/anesthesia.html" value="Anesthesia"/>
-        <entry key="/portals/cardiology.html" value="Cardiology"/>
-        <entry key="/portals/hematology.html" value="Hematology"/>
-        <entry key="/portals/internal-medicine.html" value="Internal Medicine"/>
-        <entry key="/portals/lpch-cerner.html" value="LPCH LINKS Tool"/>
-        <entry key="/portals/pulmonary.html" value="Pulmonary"/>
-        <entry key="/portals/emergency.html" value="Emergency"/>
-        <entry key="/portals/ethics.html" value="Ethics"/>
-    </xsl:variable>
 
     <!-- ==========================  VARIABLES  ========================== -->
     <!-- the default template -->
@@ -169,7 +143,6 @@
             <xsl:when test="$source-doc/h:body/h:div[@id='leftColumn']">yui-t2</xsl:when>
             <xsl:when test="$source-doc/h:body/h:div[@id='rightColumn']">yui-t4</xsl:when>
             <xsl:when test="contains($request-uri,'search.html')">yui-t4</xsl:when>
-            <xsl:when test="contains($request-uri,'search2.html')">yui-t4</xsl:when>
         </xsl:choose>
     </xsl:variable>
 
@@ -193,7 +166,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- TODO: remove this after 1.10 release and necessary content changes (remove class=eLibraryTab from /online/*)-->
+    <!-- TODO: remove this after 1.9.19 release and necessary content changes (remove class=eLibraryTab from /online/*)-->
     <xsl:template match="attribute::class[.='eLibraryTab']">
         <xsl:if test="contains($request-uri,'search')">
             <xsl:copy-of select="."/>
@@ -234,18 +207,7 @@
             <xsl:when test=".='current-year'">
                 <xsl:value-of select="format-dateTime(current-dateTime(),'[Y,4]')"/>
             </xsl:when>
-            <xsl:when test=".='pico'">
-                <xsl:apply-templates select="$source-doc//child::node()[@id='pico']" mode="show"/>
-            </xsl:when>
         </xsl:choose>
-    </xsl:template>
-    
-    <xsl:template match="child::node()[@id='pico']"/>
-    
-    <xsl:template match="child::node()" mode="show">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()|child::node()"/>
-        </xsl:copy>
     </xsl:template>
 
     <xsl:template match="h:div[@id='custom-doc']">
@@ -304,79 +266,6 @@
       </xsl:if>
     </xsl:template>-->
     <!-- END persistent login  -->
-    
-    <!-- search form -->
-    <!-- set the value of the search label to the value from the $source-name-map related to $search-form-select -->
-    <xsl:template match="h:span[@id='searchLabel']">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:value-of select="$source-name-map/h:entry[@key=$search-form-select]/@value"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <!-- set the value of the source input to $search-form-select -->
-    <xsl:template match="h:input[@id='searchSource']/@value">
-        <xsl:attribute name="value">
-            <xsl:value-of select="$search-form-select"/>
-        </xsl:attribute>
-    </xsl:template>
-    
-    <!--<xsl:template match="h:fieldset[@id='pico']/@style">
-            <xsl:if test="$search-form-select != '/portals/lpch-cerner.html'">
-                <xsl:copy-of select="."/>
-            </xsl:if>
-    </xsl:template>-->
-    
-    <!-- set up href for search tabs if there is a search term present -->
-    <xsl:template match="h:ul[@id='searchTabs']//h:li[not(@id='otherSearches')]/h:a">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()[not(name()='href')]"/>
-            <xsl:call-template name="make-link">
-                <xsl:with-param name="attr" select="'href'"/>
-                <xsl:with-param name="link">
-                    <xsl:choose>
-                        <xsl:when test="parent::h:li/@id = 'catalogSearchTab' and $q">
-                            <xsl:text>http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?DB=local&amp;SL=none&amp;SAB1={search-terms}&amp;BOOL1=all+of+these&amp;FLD1=Keyword+Anywhere++[LKEY]+(LKEY)&amp;GRP1=AND+with+next+set&amp;SAB2=&amp;BOOL2=all+of+these&amp;FLD2=ISSN+[with+hyphen]+(ISSN)&amp;GRP2=AND+with+next+set&amp;SAB3=&amp;BOOL3=all+of+these&amp;FLD3=ISSN+[with+hyphen]+(ISSN)&amp;CNT=50</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="$q">
-                            <xsl:text>/search.html?source=</xsl:text>
-                            <xsl:choose>
-                                <xsl:when test="parent::h:li/@id">
-                                    <xsl:value-of select="substring-before(parent::h:li/@id,'SearchTab')"/>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:value-of select="@href"/>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                            <xsl:text>&amp;q=</xsl:text>
-                            <xsl:value-of select="$uri-encoded-search-terms"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="@href"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:with-param>
-            </xsl:call-template>
-            <xsl:apply-templates select="child::node()"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <!-- set the activeSearchTab class depending on $search-form-select, requires id to be <$search-form-select>SearchTab -->
-    <xsl:template match="h:ul[@id='searchTabs']//h:li">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:choose>
-                <xsl:when test="@id = concat($search-form-select, 'SearchTab')">
-                    <xsl:attribute name="class">activeSearchTab</xsl:attribute>
-                </xsl:when>
-                <xsl:when test="child::h:a/attribute::href = $search-form-select">
-                    <xsl:attribute name="class">activeSearchTab</xsl:attribute>
-                </xsl:when>
-            </xsl:choose>
-            <xsl:apply-templates select="child::node()"/>
-        </xsl:copy>
-    </xsl:template>
-    <!-- end search form -->
 
     <xsl:template
         match="h:div[@id='leftColumn']|h:div[@id='rightColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
@@ -583,7 +472,7 @@
     <xsl:template match="attribute::href[starts-with(.,'mailto:')]"/>
 
     <!-- add back to top for dl lists > 20 -->
-    <xsl:template match="h:dl[not(parent::h:div/@id) and count(h:dd) &gt; 20]">
+    <xsl:template match="h:dl[count(h:dd) &gt; 20]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node | child::node()"/>
         </xsl:copy>
@@ -598,10 +487,7 @@
                 <xsl:when
                     test="contains($request-uri,h:a/attribute::href) or $query-string and contains(h:a/attribute::href, $query-string)">
                     <xsl:attribute name="class">activeTab</xsl:attribute>
-                    <!-- TODO: uncomment and remove next line after search2 testing  
                     <xsl:apply-templates select="h:a/child::node()"/>
-                    -->
-                    <xsl:apply-templates select="attribute::node () | node()"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="attribute::node () | node()"/>

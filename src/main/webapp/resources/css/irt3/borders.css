@@ -11,10 +11,10 @@ border-top:1px solid #C1C1C1;
 #ft li {
 border-left:1px dotted #C1C1C1;
 }
-#searchTabs li, #gft li {
+#gft li {
 border-left:1px dotted #818181;
 }
-#search fieldset, #ft li:first-child, #gft li:first-child,  #searchTabs li:first-child, #searchTabs li li , #otherPortalOptions {
+#search fieldset, #ft li:first-child, #gft li:first-child, #otherPortalOptions {
 border:none;
 }
 #leftColumn div, #rightColumn div {
@@ -46,7 +46,7 @@ border-top-width: 4px;
 border-bottom:1px solid #9C9A90;
 border-top: 4px solid #9C9A90;
 }
-#otherPortalOptions ul, #otherSearches ul {
+#otherPortalOptions ul {
 border:1px solid #999;
 }
 div.wrapperBox {

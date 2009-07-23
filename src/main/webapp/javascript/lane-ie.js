@@ -9,8 +9,8 @@
                 shadedBorderBottom = d.getElementById('sb-bot'),
                 otherPortalOptions = d.getElementById('otherPortalOptions'),
                 legendDropDown = d.getElementById('legend-drop-down'),
-                otherSearches = d.getElementById('otherSearches'),
                 superHeader = d.getElementById('shd'),
+                searchSelect = d.getElementById('searchSelect'),
                 searchSubmit = d.getElementById('searchSubmit');
                 if (ie <= 6) {
                     //set hover class for these ids
@@ -21,26 +21,6 @@
                         };
                         otherPortalOptions.deactivate = function(){
                             shadedBorderBottom.style.zIndex = 1;
-                            this.className = '';
-                        };
-                    }
-                    if (otherSearches) {
-                        otherSearches.activate = function(){
-                            if (shadedBorderBottom) {
-                                shadedBorderBottom.style.zIndex = -1;
-                            }
-                            if (otherPortalOptions) {
-                                otherPortalOptions.style.zIndex = -1;
-                            }
-                            this.className = 'hover';
-                        };
-                        otherSearches.deactivate = function(){
-                            if (shadedBorderBottom) {
-                                shadedBorderBottom.style.zIndex = 1;
-                            }
-                            if (otherPortalOptions) {
-                                otherPortalOptions.style.zIndex = 1;
-                            }
                             this.className = '';
                         };
                     }
@@ -84,7 +64,7 @@
                         };
                     }
                     //TODO: use onavailable for this?
-                    lists = ['ft', 'gft','searchTabs'];
+                    lists = ['ft', 'gft'];
                     for (i = 0; i < lists.length; i++) {
                         list = d.getElementById(lists[i]);
                         if (list) {
@@ -108,24 +88,6 @@
                                     shadedBorderBottom.style.zIndex = 1;
                                 };
                             }
-                        }
-                        if (otherSearches) {
-                            otherSearches.activate = function(){
-                                if (shadedBorderBottom) {
-                                    shadedBorderBottom.style.zIndex = -1;
-                                }
-                                if (otherPortalOptions) {
-                                    otherPortalOptions.style.zIndex = -1;
-                                }
-                            };
-                            otherSearches.deactivate = function(){
-                                if (shadedBorderBottom) {
-                                    shadedBorderBottom.style.zIndex = 1;
-                                }
-                                if (otherPortalOptions) {
-                                    otherPortalOptions.style.zIndex = 1;
-                                }
-                            };
                         }
                     }
             });

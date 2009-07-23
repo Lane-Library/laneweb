@@ -12,25 +12,6 @@
             </map:match>
             <!-- matches /apps/search/ requests -->
             <map:match pattern="search/**" type="wildcard">
-                <map:match pattern="search/content/xml" type="wildcard">
-                    <map:generate type="content-search">
-                        <map:parameter name="search-terms" value="{request-param:q}"/>
-                    </map:generate>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match pattern="search/ranked/xml" type="wildcard">
-                    <map:generate type="search">
-                        <map:parameter name="s" value="true"/>
-                        <map:parameter name="t" value="20000"/>
-                    </map:generate>
-                    <map:transform type="saxon" src="context://xsl/search-content-merged.xsl">
-                        <map:parameter name="ids" value="{request-param:ids}"/>
-                        <map:parameter name="mode" value="{request-param:mode}"/>
-                        <map:parameter name="q" value="{request-param:q}"/>
-                        <map:parameter name="source" value="{request-param:source}"/>
-                    </map:transform>
-                    <map:serialize type="xml"/>
-                </map:match>
                 <!-- /apps/search/xml returns the xmlized search result -->
                 <map:match type="wildcard" pattern="search/xml">
                     <map:generate type="search"/>

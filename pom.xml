@@ -9,7 +9,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>1.10.M1-SNAPSHOT</version>
+    <version>1.9.21-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/index.html</url>
     <inceptionYear>2002</inceptionYear>
@@ -392,7 +392,7 @@
         <dependency>
             <groupId>edu.stanford.irt.search</groupId>
             <artifactId>search-spring</artifactId>
-            <version>1.5.15-SNAPSHOT</version>
+            <version>1.5.16</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

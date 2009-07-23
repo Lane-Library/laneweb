@@ -48,9 +48,6 @@ LANE.tracking = function(){
             if (!title) {
                 title = 'unknown';
             }
-            if (YAHOO.util.Dom.getAncestorBy(node, function(n) {return n.id && n.id == 'searchTabs';}) !== null) {
-                title += ' Search Tab';
-            }
             return title;
         },
         getTrackingData = function(event){
@@ -83,10 +80,6 @@ LANE.tracking = function(){
                         query = '';
                         external = true;
                     } else if (node.rel && (node.rel.indexOf('popup local') === 0 || node.rel.indexOf('popup faq') === 0)) {
-                        host = document.location.host;
-                        path = document.location.pathname;
-                        query = document.location.search;
-                    } else if (YAHOO.util.Dom.getAncestorBy(node, function(n) {return n.id && n.id == 'searchTabs';}) !== null){
                         host = document.location.host;
                         path = document.location.pathname;
                         query = document.location.search;

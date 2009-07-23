@@ -7,7 +7,7 @@
         <map:pipeline type="caching">
             <map:parameter name="expires" value="access plus 31 days"/>
             <map:match pattern="images/**" type="wildcard">
-                <map:read type="resource" src="context://resources/images/{1}"/>
+                <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/{1}"/>
             </map:match>
             <map:match pattern="favicon.ico" type="wildcard">
                 <map:read type="resource" src="{naming:java:comp/env/live-base}/resources/images/favicon.ico"/>

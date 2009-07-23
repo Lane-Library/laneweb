@@ -89,7 +89,7 @@ float: right;
 #ft, #gft, #hd form, #shd {
 text-align:center;
 }
-#ft li, #gft li, #searchTabs li {
+#ft li, #gft li {
 display:inline;
 }
 #search fieldset {
@@ -142,7 +142,7 @@ float:right;
 margin-right:-1em;
 }
 #searchTerms {
-width:45em;
+width:25em;
 }
 .columnOf2 {
 float:left;
@@ -198,9 +198,6 @@ display:block;
 float:right;
 position:relative;
 }
-#otherSearches {
-position:relative
-}
 #otherPortalOptions ul, #otherSearches ul {
 display:none;
 position:absolute;
@@ -210,13 +207,10 @@ z-index:2;
 #otherPortalOptions ul {
 top:2em;
 }
-#otherSearches ul {
-top:1em;
-}
-#otherPortalOptions:hover ul, #otherPortalOptions.hover ul, #otherSearches:hover ul, #otherSearches.hover ul {
+#otherPortalOptions:hover ul, #otherPortalOptions.hover ul  {
 display:block;
 }
-#otherPortalOptions li, #otherSearches li {
+#otherPortalOptions li {
 white-space:nowrap;
 }
 h2.ImageTitle img {

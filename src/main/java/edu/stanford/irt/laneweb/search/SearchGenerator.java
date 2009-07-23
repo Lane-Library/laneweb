@@ -49,8 +49,6 @@ public class SearchGenerator implements Generator {
 
     private String w;
 
-    private String s;
-    
     private XMLConsumer xmlConsumer;
 
     public void generate() throws IOException, SAXException, ProcessingException {
@@ -90,11 +88,7 @@ public class SearchGenerator implements Generator {
                 queryString = this.icd9Translator.getLongName(this.q);
             }
             final SimpleQuery query = new SimpleQuery(queryString);
-            boolean synchronous = false;
-            if ((this.s != null) && (this.s.length() > 0)) {
-              synchronous = Boolean.parseBoolean(this.s);
-            }
-            result = this.metaSearchManager.search(query, timeout, engines, synchronous);
+            result = this.metaSearchManager.search(query, timeout, engines, false);
             if (null != this.w) {
                 long wait = 0;
                 try {
@@ -174,16 +168,9 @@ public class SearchGenerator implements Generator {
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         this.q = request.getParameter("q");
         this.t = request.getParameter("t");
-        if(null == this.t){
-          this.t = par.getParameter("t", null);
-        }
         this.e = request.getParameterValues("e");
         this.w = request.getParameter("w");
         this.r = request.getParameterValues("r");
-        this.s = request.getParameter("s");
-        if(null == this.s){
-          this.s = par.getParameter("s", null);
-        }
         this.clearCache = request.getParameter("clearcache");
     }
 }

@@ -20,9 +20,6 @@ _margin:.25em 1em .5em 1.3em;/*ie6 hack*/
 #breadcrumb {
 margin:.5em 2em .75em 1.2em;
 }
-#searchTabs {
-margin-bottom:.3em;
-}
 #homeCategories h2, #homeCategories ul {
 margin:1em;
 }
@@ -80,9 +77,6 @@ margin:0;
 margin-right: -1px;
 }
 #otherPortalOptions h2.bgTab {
-margin-right:0
-}
-#searchTabs li li {
 margin-right:0
 }
 #popInContent div {

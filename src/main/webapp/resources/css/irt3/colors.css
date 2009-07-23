@@ -142,9 +142,6 @@ height:18px;
 #searchSubmit:hover, #searchSubmit.hover {
 background-position:0 -1100px;
 }
-#searchTabs li.activeSearchTab a:link, #searchTabs li.activeSearchTab a:visited, #searchTabs li.activeSearchTab a:hover, #searchTabs li.activeSearchTab a:active {
-color:#111111
-}
 .yui-tt { 
     background-color:#F2F3ED;
 }
@@ -204,7 +201,7 @@ background-position:0 -581px
 #browseTabs li {
 background-position:0 -584px
 }
-#bd .activeTab, #eLibraryTabs .eLibraryTabActive,  li.eLibraryTabActive a, #bd .activeTab a  {
+#bd .activeTab, #eLibraryTabs .eLibraryTabActive,  li.eLibraryTabActive a, li.eLibraryTabActive a:active, #bd .activeTab a  {
 background-image:none;
 background-color: #9C9A90;
 color:white;
@@ -213,14 +210,14 @@ div.wrapperBox h2 {
 color:#666;
 background-color:#fff;
 }
-#otherPortalOptions ul, #otherSearches ul {
+#otherPortalOptions ul {
 background-color:white;
 color:inherit;
 }
 #otherPortalOptions ul li {
 background-image:none;
 }
-a:link, #searchTabs a:visited {
+a:link {
 color: #1C4B70;
 }
 a:visited {
