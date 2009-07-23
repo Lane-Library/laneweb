@@ -20,13 +20,13 @@
      activeFacet,
      queryBuilder = function(targetId){ //build query terms from pico inputs
         var qString = '', i;
-		if(targetId == searchTermsInput.id) {
-			return 0;
-		};
+        if(targetId == searchTermsInput.id) {
+            return 0;
+        };
         for (i = 0; i < inputs.length; i++) {
-			if (inputs[i].id != searchTermsInput.id && inputs[i].value !== '' && inputs[i].value != inputs[i].title) {
-				qString += '(' + inputs[i].value + ')';
-			}
+            if (inputs[i].id != searchTermsInput.id && inputs[i].value !== '' && inputs[i].value != inputs[i].title) {
+                qString += '(' + inputs[i].value + ')';
+            }
         }
         if ( qString.length ){
             qString = qString.replace(/\)\(/g, ") AND (");
@@ -66,25 +66,25 @@
     //E.addListener(this,'load',function(){
 //    E.onDOMReady(function(){
     E.onContentReady('pico', function() {
-		picoForm = D.getAncestorByTagName(this,'form');
+        picoForm = D.getAncestorByTagName(this,'form');
         YAHOO.util.Get.script('http://yui.yahooapis.com/combo?2.7.0/build/datasource/datasource-min.js&2.7.0/build/animation/animation-min.js&2.7.0/build/autocomplete/autocomplete-min.js',{
             onSuccess:function() {
             // change color and text of default input values
             // add event listeners to p,i,c,o inputs for building search terms
             inputs = D.getElementsBy(function(el){return el.type == 'text';},'input',picoForm);
             searchTermsInput = document.getElementById('searchTerms');
-			searchTermsInput.title = 'use PICO search above or type keywords here';
-			if (searchTermsInput.value == ''){
-				searchTermsInput.value = searchTermsInput.title;
-				searchTermsInput.className = 'inputTip';
-			}
+            searchTermsInput.title = 'use PICO search above or type keywords here';
+            if (searchTermsInput.value == ''){
+                searchTermsInput.value = searchTermsInput.title;
+                searchTermsInput.className = 'inputTip';
+            }
             for (i = 0; i < inputs.length; i++){
-				if(inputs[i].value === ''){
-					inputs[i].value = inputs[i].title;
-				}
-				else if(inputs[i].value != inputs[i].title){
-					D.removeClass(inputs[i],'inputTip');
-				}
+                if(inputs[i].value === ''){
+                    inputs[i].value = inputs[i].title;
+                }
+                else if(inputs[i].value != inputs[i].title){
+                    D.removeClass(inputs[i],'inputTip');
+                }
                 E.addListener(inputs[i], 'focus', function(){
                     if (this.value == this.title){
                         this.value = '';
@@ -96,7 +96,7 @@
                         this.value = this.title;
                         D.addClass(this,'inputTip');
                     }
-					queryBuilder(this.id);
+                    queryBuilder(this.id);
                 });
                 E.addListener(inputs[i], 'keyup', function(){
                     queryBuilder(this.id);

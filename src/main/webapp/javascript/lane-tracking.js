@@ -48,9 +48,9 @@ LANE.tracking = function(){
             if (!title) {
                 title = 'unknown';
             }
-			if (YAHOO.util.Dom.getAncestorBy(node, function(n) {return n.id && n.id == 'searchTabs';}) !== null) {
-				title += ' Search Tab';
-			}
+            if (YAHOO.util.Dom.getAncestorBy(node, function(n) {return n.id && n.id == 'searchTabs';}) !== null) {
+                title += ' Search Tab';
+            }
             return title;
         },
         getTrackingData = function(event){

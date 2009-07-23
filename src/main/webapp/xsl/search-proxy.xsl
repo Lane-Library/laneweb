@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:s="http://irt.stanford.edu/search/2.0"
     exclude-result-prefixes="s" version="2.0">
-	
+    
 
     <xsl:param name="context" />
     <xsl:param name="sunetid" />
@@ -20,11 +20,11 @@
 
     <!-- convert resource urls to ezproxy based on verious criteria -->
     <xsl:template match="s:resource/s:url[not(starts-with(.,'http://lane.')) or contains(.,'postMethodHelper')]">
-    	<xsl:call-template name="transform-url"/>
+        <xsl:call-template name="transform-url"/>
     </xsl:template>
     
     <xsl:template match="s:content/s:url[not(starts-with(.,'http://lane.')) or contains(.,'postMethodHelper')]">
-    	<xsl:call-template name="transform-url"/>
+        <xsl:call-template name="transform-url"/>
     </xsl:template>
     
 

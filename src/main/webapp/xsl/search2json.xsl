@@ -31,9 +31,9 @@
             "url": "<xsl:value-of select="s:url"/>",
             "hits": "<xsl:value-of select="$hitcount"/>"<xsl:text/>
             <xsl:if test="$content = 'true' and ./s:content">
-                	<xsl:text>,
-    	    "contents":[</xsl:text>
-             	    <xsl:apply-templates select="./s:content[ $num-to-display &lt; position() ]"/>
+                    <xsl:text>,
+            "contents":[</xsl:text>
+                     <xsl:apply-templates select="./s:content[ $num-to-display &lt; position() ]"/>
             ]<xsl:text/>
              </xsl:if>
         }

@@ -21,15 +21,15 @@
                     <map:generate type="search"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/search2json.xsl">
-	                        <map:transform type="saxon" src="xsl/search2json.xsl">
-	                    	    <map:parameter name="content" value="{request-param:content}"/>
-	                    	    <map:parameter name="content-to-display" value="5"/>
-	                        </map:transform>
+                            <map:transform type="saxon" src="xsl/search2json.xsl">
+                                <map:parameter name="content" value="{request-param:content}"/>
+                                <map:parameter name="content-to-display" value="5"/>
+                            </map:transform>
                         </map:when>
                         <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/search2json.xsl">
-                    	    <map:parameter name="content" value="{request-param:content}"/>
-                    	    <map:parameter name="content-to-display" value="5"/>
+                            <map:parameter name="content" value="{request-param:content}"/>
+                            <map:parameter name="content-to-display" value="5"/>
                         </map:transform>
                         </map:otherwise>
                     </map:select>
@@ -69,14 +69,14 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search2json.xsl">
                              <map:transform type="saxon" src="xsl/search2json.xsl">
-                    	         <map:parameter name="content" value="{request-param:content}"/>
-                    	         <map:parameter name="content-to-display" value="5"/>
+                                 <map:parameter name="content" value="{request-param:content}"/>
+                                 <map:parameter name="content-to-display" value="5"/>
                              </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search2json.xsl">
-                    	        <map:parameter name="content" value="{request-param:content}"/>
-                    	        <map:parameter name="content-to-display" value="5"/>
+                                <map:parameter name="content" value="{request-param:content}"/>
+                                <map:parameter name="content-to-display" value="5"/>
                             </map:transform>
                         </map:otherwise>
                     </map:select>

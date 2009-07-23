@@ -277,13 +277,13 @@
         </xsl:copy>
     </xsl:template>
     
-	<!--<xsl:template match="h:span[@id='pl-login']">
-		<xsl:if test="$sunetid != '' and $proxy-links = 'true'">
-			<xsl:copy>
-	    	    <xsl:apply-templates select="@*|node()"/>
-	        </xsl:copy>
-		</xsl:if>
-	</xsl:template>-->
+    <!--<xsl:template match="h:span[@id='pl-login']">
+        <xsl:if test="$sunetid != '' and $proxy-links = 'true'">
+            <xsl:copy>
+                <xsl:apply-templates select="@*|node()"/>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>-->
    
     <xsl:template match="h:span[@id='user-name']">
         <xsl:choose>
@@ -302,8 +302,8 @@
           <xsl:apply-templates select="@*|node()"/>
         </xsl:copy>
       </xsl:if>
-	</xsl:template>-->
-	<!-- END persistent login  -->
+    </xsl:template>-->
+    <!-- END persistent login  -->
     
     <!-- search form -->
     <!-- set the value of the search label to the value from the $source-name-map related to $search-form-select -->

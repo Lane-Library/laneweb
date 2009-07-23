@@ -40,8 +40,8 @@
                 <map:match pattern="search/json" type="wildcard">
                     <map:generate type="search"/>
                     <map:transform type="saxon" src="context://xsl/search2json.xsl">
-                    	<map:parameter name="content" value="{request-param:content}"/>
-                    	<map:parameter name="content-to-display" value="5"/>
+                        <map:parameter name="content" value="{request-param:content}"/>
+                        <map:parameter name="content-to-display" value="5"/>
                     </map:transform>
                     <map:serialize type="text"/>
                 </map:match>
@@ -65,7 +65,7 @@
                     <map:generate type="file" src="cocoon:/search/proxy/xml"/>
                     <map:transform type="saxon" src="context://xsl/search2json.xsl">
                     <map:parameter name="content" value="{request-param:content}"/>
-                    	<map:parameter name="content-to-display" value="5"/>
+                        <map:parameter name="content-to-display" value="5"/>
                     </map:transform>
                     <map:serialize type="text"/>
                 </map:match>
@@ -127,9 +127,9 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
-          	<map:match pattern="proxy/credential" type="wildcard">
-				<map:act type="loginAction"/>
-			</map:match>
+              <map:match pattern="proxy/credential" type="wildcard">
+                <map:act type="loginAction"/>
+            </map:match>
             <map:match pattern="mesh-suggest/json" type="wildcard">
                 <map:read type="mesh-suggest">
                     <map:parameter name="query" value="{request-param:q}"/>
@@ -174,10 +174,10 @@
                     <map:part src="cocoon:/cache/portals/internal-medicine.html"/>
                     <map:part src="cocoon:/cache/portals/lpch-cerner.html"/>
                     <map:part src="cocoon:/cache/portals/pulmonary.html"/>
-					<map:part src="cocoon:/cache/portals/ethics.html"/>
-					<map:part src="cocoon:/cache/portals/ophthalmology.html"/>
-					<map:part src="cocoon:/cache/portals/emergency.html"/>
-		        </map:aggregate>
+                    <map:part src="cocoon:/cache/portals/ethics.html"/>
+                    <map:part src="cocoon:/cache/portals/ophthalmology.html"/>
+                    <map:part src="cocoon:/cache/portals/emergency.html"/>
+                </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>

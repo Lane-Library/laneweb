@@ -13,33 +13,33 @@
     
 
 
-	<xsl:variable name="url">
-		<xsl:if test="$type = 'search'">
-		    <xsl:text>http://lane.stanford.edu/search.html?q=</xsl:text>
-			<xsl:value-of select="$q"/>
-			<xsl:if test="$t != ''">&amp;source=<xsl:value-of select="$t"/></xsl:if>
-			<xsl:if test="$t = ''">&amp;source=all</xsl:if>
-		</xsl:if>
-		<xsl:if test="$type = 'ejournals'">
-			<xsl:text>http://lane.stanford.edu/online/ejbrowse.html?</xsl:text>
-			<xsl:if test="$a != ''"><xsl:text>a=</xsl:text><xsl:value-of select="$a"/></xsl:if>
-			<xsl:if test="$a = ''"><xsl:text>all</xsl:text></xsl:if>
-		</xsl:if>
-		<xsl:if test="$type = 'mesh'">
-			<xsl:text>http://lane-local.stanford.edu/online/ejsubjectbrowse.html?m=</xsl:text>
-		    <xsl:value-of select="$m"/>
-		</xsl:if>
-	</xsl:variable>
+    <xsl:variable name="url">
+        <xsl:if test="$type = 'search'">
+            <xsl:text>http://lane.stanford.edu/search.html?q=</xsl:text>
+            <xsl:value-of select="$q"/>
+            <xsl:if test="$t != ''">&amp;source=<xsl:value-of select="$t"/></xsl:if>
+            <xsl:if test="$t = ''">&amp;source=all</xsl:if>
+        </xsl:if>
+        <xsl:if test="$type = 'ejournals'">
+            <xsl:text>http://lane.stanford.edu/online/ejbrowse.html?</xsl:text>
+            <xsl:if test="$a != ''"><xsl:text>a=</xsl:text><xsl:value-of select="$a"/></xsl:if>
+            <xsl:if test="$a = ''"><xsl:text>all</xsl:text></xsl:if>
+        </xsl:if>
+        <xsl:if test="$type = 'mesh'">
+            <xsl:text>http://lane-local.stanford.edu/online/ejsubjectbrowse.html?m=</xsl:text>
+            <xsl:value-of select="$m"/>
+        </xsl:if>
+    </xsl:variable>
 
 
-	<xsl:variable name="option">
-		<xsl:if test="$type = 'search'"><xsl:value-of select="$q"/></xsl:if>
-		<xsl:if test="$type = 'mesh'"><xsl:value-of select="$m"/></xsl:if>
-		<xsl:if test="$type = 'ejournal'">
-			<xsl:if test="$a != ''"><xsl:value-of select="$a"/></xsl:if>
-			<xsl:if test="$a = ''">All</xsl:if>
-		</xsl:if>
-	</xsl:variable>
+    <xsl:variable name="option">
+        <xsl:if test="$type = 'search'"><xsl:value-of select="$q"/></xsl:if>
+        <xsl:if test="$type = 'mesh'"><xsl:value-of select="$m"/></xsl:if>
+        <xsl:if test="$type = 'ejournal'">
+            <xsl:if test="$a != ''"><xsl:value-of select="$a"/></xsl:if>
+            <xsl:if test="$a = ''">All</xsl:if>
+        </xsl:if>
+    </xsl:variable>
 
 
     <xsl:template match="h:html">
@@ -62,15 +62,15 @@
     
     
     <xsl:template match="h:li">
-    	<item>
+        <item>
             <title>
-            	<xsl:value-of select="../../preceding-sibling::h:dt[1]/text()"/>: <xsl:value-of select="h:a"/> - <xsl:value-of select="text()"/>
+                <xsl:value-of select="../../preceding-sibling::h:dt[1]/text()"/>: <xsl:value-of select="h:a"/> - <xsl:value-of select="text()"/>
             </title>
             <link>http://lane.stanford.edu/apps/proxy/credential?url=<xsl:value-of select="h:a[1]/@href"/></link>
             <description>
-            	<xsl:value-of select="../../preceding-sibling::h:dt[1]/text()"/>: <xsl:value-of select="h:a"/> - <xsl:value-of select="text()"/>
+                <xsl:value-of select="../../preceding-sibling::h:dt[1]/text()"/>: <xsl:value-of select="h:a"/> - <xsl:value-of select="text()"/>
             </description>
-    	 </item>
+         </item>
     </xsl:template>
     
     

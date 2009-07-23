@@ -33,7 +33,7 @@ xmlns="http://www.w3.org/1999/xhtml"  xmlns:r="http://apache.org/cocoon/request/
 <script type="text/javascript"> 
 function submitForm()
 {
-	document.defaultForm.submit();
+    document.defaultForm.submit();
 }
 
 </script>

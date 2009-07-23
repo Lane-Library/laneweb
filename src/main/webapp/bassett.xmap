@@ -4,36 +4,36 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
-		<map:pipeline type="expires">
-			<map:parameter name="cache-key" value="{request-uri:requestURI};{request-param:q};{request-param:r};{request-param:t};{request-param:bn};{request-param:pageNumber}"/>
-	   			<map:match type="regex-parameter" pattern="^.+$">
-	   				<map:parameter name="parameter-name" value="q"/>	
-	   				<map:call resource="bassett-content"/>
-				</map:match>
-		</map:pipeline>
-		
+        <map:pipeline type="expires">
+            <map:parameter name="cache-key" value="{request-uri:requestURI};{request-param:q};{request-param:r};{request-param:t};{request-param:bn};{request-param:pageNumber}"/>
+                   <map:match type="regex-parameter" pattern="^.+$">
+                       <map:parameter name="parameter-name" value="q"/>    
+                       <map:call resource="bassett-content"/>
+                </map:match>
+        </map:pipeline>
+        
         <map:pipeline type="caching">
- 			<map:call resource="bassett-content"/>
-		</map:pipeline>
-		
-		<map:pipeline type="expires">
-			<map:parameter name="cache-key" value="{request-param:q};{request-param:r};{request-param:bn}"/>
-    		<map:match pattern="database" type="wildcard">
-	            <map:generate type="bassett"/>
-	        	<map:serialize type="xml"/>
-	     	</map:match>
-		</map:pipeline>
-		
-		<map:pipeline type="expires">
-			<map:parameter name="cache-key" value="{request-param:q}"/>
-    			<map:match pattern="bassett-accordion" type="wildcard">
-		            <map:generate type="bassett-accordion"/>
-	        		<map:serialize type="xml"/>
-	      	  </map:match>
-		</map:pipeline>
-		
-	</map:pipelines>
-	
+             <map:call resource="bassett-content"/>
+        </map:pipeline>
+        
+        <map:pipeline type="expires">
+            <map:parameter name="cache-key" value="{request-param:q};{request-param:r};{request-param:bn}"/>
+            <map:match pattern="database" type="wildcard">
+                <map:generate type="bassett"/>
+                <map:serialize type="xml"/>
+             </map:match>
+        </map:pipeline>
+        
+        <map:pipeline type="expires">
+            <map:parameter name="cache-key" value="{request-param:q}"/>
+                <map:match pattern="bassett-accordion" type="wildcard">
+                    <map:generate type="bassett-accordion"/>
+                    <map:serialize type="xml"/>
+                </map:match>
+        </map:pipeline>
+        
+    </map:pipelines>
+    
     <map:resources>
     <map:resource name="bassett-content">
          <map:match pattern="raw/**.html" type="wildcard">
@@ -81,5 +81,5 @@
         </map:match>
         </map:resource>
     
-	</map:resources>
+    </map:resources>
 </map:sitemap>

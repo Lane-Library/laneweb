@@ -40,8 +40,8 @@
                 <map:match pattern="search/json" type="wildcard">
                     <map:generate type="search"/>
                     <map:transform type="saxon" src="context://xsl/search2json.xsl">
-                    	<map:parameter name="content" value="{request-param:content}"/>
-                    	<map:parameter name="content-to-display" value="5"/>
+                        <map:parameter name="content" value="{request-param:content}"/>
+                        <map:parameter name="content-to-display" value="5"/>
                     </map:transform>
                     <map:serialize type="text"/>
                 </map:match>
@@ -64,8 +64,8 @@
                 <map:match pattern="search/proxy/json" type="wildcard">
                     <map:generate type="file" src="cocoon:/search/proxy/xml"/>
                        <map:transform type="saxon" src="context://xsl/search2json.xsl">
-                    	<map:parameter name="content" value="{request-param:content}"/>
-                    	<map:parameter name="content-to-display" value="5"/>
+                        <map:parameter name="content" value="{request-param:content}"/>
+                        <map:parameter name="content-to-display" value="5"/>
                     </map:transform>
                     <map:serialize type="text"/>
                 </map:match>
