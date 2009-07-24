@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2009-07-27" version="1.9.21" description="1.9.21 bug fix release">
+            <action date="2009-07-24" dev="ceyates" issue="30042" type="fix">
+                proxy traffic should be OTHER
+            </action>
+            <action date="2009-07-23" dev="ceyates" issue="27973" type="add">
+                Automate determination of proxyable status of links
+            </action>
+            <action date="2009-07-22" dev="ceyates" issue="30002" type="fix">
+                tracking: rel="popup standard"
+            </action>
+        </release>
         <release date="2009-07-20" version="1.9.20" description="1.9.20 bugfix release">
             <action date="2009-07-17" dev="ceyates" issue="29794" type="fix">
                 Lane "super header" Position and Wrapping on Browser Resize
