@@ -83,4 +83,9 @@ public class IPGroupTest {
     public void testToString() {
         assertEquals(IPGroup.LPCH.toString(), "LPCH");
     }
+    
+    @Test
+    public void testProxyServer() {
+        assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("171.65.65.46"));
+    }
 }

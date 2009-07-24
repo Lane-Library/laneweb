@@ -113,6 +113,8 @@ public class IPGroup {
     private static Pattern SOM_PATTERN = Pattern.compile("^171" + DOT + "65" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
 
     private static Pattern SOM_PAVA_PATTERN = Pattern.compile("^44" + DOT + _0_TO_255 + "$");
+    
+    private static Pattern EZPROXY_SERVER_PATTERN = Pattern.compile("^65.46$");
 
     private static Pattern SOM_SHC_PATTERN = Pattern.compile("^(?:(?:1[12]5|12[7-9]|1[3-9][0-9]|25[0-5]|2[0-4][0-9])|4[6-7])" + DOT + _0_TO_255 + "$");
 
@@ -201,6 +203,9 @@ public class IPGroup {
         }
         if (SOM_SHC_PATTERN.matcher(ip).matches()) {
             return IPGroup.SHC;
+        }
+        if (EZPROXY_SERVER_PATTERN.matcher(ip).matches()) {
+            return IPGroup.OTHER;
         }
         return IPGroup.SOM_OTHER;
     }
