@@ -190,14 +190,14 @@
                     <map:parameter name="ticket" value="{user:ticket}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
-                <map:select type="gzip">
+                <!--<map:select type="gzip">
                     <map:when test="">
                         <map:serialize type="gzipxhtml"/>
                     </map:when>
-                    <map:otherwise>
+                    <map:otherwise>-->
                         <map:serialize type="xhtml"/>
-                    </map:otherwise>
-                </map:select>
+                    <!--</map:otherwise>
+                </map:select>-->
             </map:match>
             <map:match pattern="**.html" type="wildcard">
                 <map:aggregate element="doc" label="content">
@@ -234,14 +234,14 @@
                     <map:parameter name="ticket" value="{user:ticket}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
-                <map:select type="gzip">
+                <!--<map:select type="gzip">
                     <map:when test="">
                         <map:serialize type="gzipxhtml"/>
                     </map:when>
-                    <map:otherwise>
+                    <map:otherwise>-->
                         <map:serialize type="xhtml"/>
-                    </map:otherwise>
-                </map:select>
+                    <!--</map:otherwise>
+                </map:select>-->
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
                 <map:generate type="file" src="{naming:java:comp/env/live-base}/content/{1}.xml"/>
@@ -290,11 +290,11 @@
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>
                 </map:transform>
-                <!--<map:transform type="proxy-links">
+                <map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
                     <map:parameter name="ticket" value="{user:ticket}"/>
-                </map:transform>-->
+                </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xhtml" status-code="404"/>
             </map:handle-errors>

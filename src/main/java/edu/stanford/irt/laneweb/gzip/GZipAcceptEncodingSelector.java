@@ -15,6 +15,7 @@ public class GZipAcceptEncodingSelector implements Selector {
         this.pip = pip;
     }
 
+    @SuppressWarnings("unchecked")
     public boolean select(String expression, Map objectModel, Parameters parameters) {
         String header = pip.getRequest().getHeader("Accept-Encoding");
         return header != null ? header.contains("gzip") : false;

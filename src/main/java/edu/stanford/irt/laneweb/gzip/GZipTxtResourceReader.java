@@ -22,6 +22,7 @@ public class GZipTxtResourceReader extends TxtResourceReader {
         ((GZIPOutputStream)this.outputStream).finish();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void setup(SourceResolver resolver, Map objectModel, String src, Parameters par) throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
