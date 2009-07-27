@@ -166,25 +166,6 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- TODO: remove this after 1.9.19 release and necessary content changes (remove class=eLibraryTab from /online/*)-->
-    <xsl:template match="attribute::class[.='eLibraryTab']">
-        <xsl:if test="contains($request-uri,'search')">
-            <xsl:copy-of select="."/>
-        </xsl:if>
-    </xsl:template>
-    
-    <!-- TODO: remove this after 1.10 release and necessary content changes (change id=eLibraryTabs to browseTabs in /online/*)-->
-    <xsl:template match="attribute::id[.='eLibraryTabs']">
-        <xsl:choose>
-            <xsl:when test="contains($request-uri,'search')">
-                <xsl:copy-of select="."/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:attribute name="id" select="'browseTabs'"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
     <!-- default attribute match, copies the attribute -->
     <xsl:template match="@*">
         <xsl:copy-of select="."/>
@@ -238,14 +219,6 @@
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
-    
-    <!--<xsl:template match="h:span[@id='pl-login']">
-        <xsl:if test="$sunetid != '' and $proxy-links = 'true'">
-            <xsl:copy>
-                <xsl:apply-templates select="@*|node()"/>
-            </xsl:copy>
-        </xsl:if>
-    </xsl:template>-->
    
     <xsl:template match="h:span[@id='user-name']">
         <xsl:choose>
@@ -257,14 +230,6 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-   
-   <!-- <xsl:template match="h:span[@id='pl-logout'] ">
-      <xsl:if test="$sunetid = '' and $proxy-links = 'true'">
-        <xsl:copy>
-          <xsl:apply-templates select="@*|node()"/>
-        </xsl:copy>
-      </xsl:if>
-    </xsl:template>-->
     <!-- END persistent login  -->
 
     <xsl:template
@@ -317,11 +282,6 @@
 
     <xsl:template match="comment()">
         <xsl:copy-of select="."/>
-        <!--<xsl:if test="contains(.,'[if IE]')">
-            <xsl:comment>
-                <xsl:value-of select="normalize-space(.)"/>
-            </xsl:comment>
-        </xsl:if>-->
     </xsl:template>
 
     <!-- xincludes often include html/head and html/body -->
@@ -336,21 +296,6 @@
             <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
-
-    <!-- serve external scripts using request scheme -->
-    <!-- TODO: revisit this, is this being used and does it work in all cases -->
-    <!--<xsl:template match="h:script/@src[starts-with(.,'http:')]">
-        <xsl:attribute name="src">
-            <xsl:choose>
-                <xsl:when test="$scheme = 'https'">
-                    <xsl:value-of select="concat('https:',substring-after(.,'http:'))"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="."/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
-        </xsl:template>-->
 
     <!-- put version into javascript @src -->
     <xsl:template match="h:script/@src[starts-with(.,'/javascript')]">
@@ -499,41 +444,6 @@
     <!-- href and src attributes template -->
     <xsl:template match="@href">
         <xsl:choose>
-            <!--<xsl:when
-                test="(parent::h:a[@class='proxy' or @proxy]) and $proxy-links = 'true' and starts-with(.,'http')">
-                <xsl:choose>
-                    <xsl:when test="$ip-group = 'LPCH' or $ip-group = 'SHC'">
-                        <xsl:attribute name="href">
-                            <xsl:text>http://laneproxy.stanford.edu/login?url=</xsl:text>
-                            <xsl:value-of
-                                select="replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms)"
-                            />
-                        </xsl:attribute>
-                    </xsl:when>
-                    <xsl:when test="$ticket != '' and $sunetid != ''">
-                        <xsl:attribute name="href">
-                            <xsl:text>http://laneproxy.stanford.edu/login?user=</xsl:text>
-                            <xsl:value-of select="$sunetid"/>
-                            <xsl:text>&amp;ticket=</xsl:text>
-                            <xsl:value-of select="$ticket"/>
-                            <xsl:text>&amp;url=</xsl:text>
-                            <xsl:value-of
-                                select="replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms)"
-                            />
-                        </xsl:attribute>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:call-template name="make-link">
-                            <xsl:with-param name="link">
-                                <xsl:value-of
-                                    select="concat('/secure/login.html?url=',replace(replace(.,'\{keywords\}',$regex-search-terms),'\{search-terms\}',$regex-search-terms))"
-                                />
-                            </xsl:with-param>
-                            <xsl:with-param name="attr" select="'href'"/>
-                        </xsl:call-template>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>-->
             <xsl:when
                 test="starts-with(.,'http://lane.stanford.edu') and not(contains(.,'cookiesFetch'))">
                 <xsl:call-template name="make-link">
