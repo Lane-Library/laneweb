@@ -83,7 +83,7 @@
                     <xsl:variable name="pos" select="position()"/>
                     <xsl:choose>
                         <!-- simple text for td's w/o child nodes -->
-                        <xsl:when test="count(*) = 0 and string-length(normalize-space(text()) ) &gt; 1">
+                        <xsl:when test="count(*) = 0 and string-length(normalize-space()) &gt; 1">
                             <xsl:text><![CDATA[<b>]]></xsl:text><xsl:value-of select="$header[$pos = position()]"/><xsl:text><![CDATA[</b>: ]]></xsl:text>
                             <xsl:value-of select="."/>
                             <xsl:text><![CDATA[<br />]]></xsl:text>
@@ -100,7 +100,7 @@
                                 <xsl:value-of select="$link"/>
                                 <xsl:text><![CDATA[">]]></xsl:text>
                                 <xsl:choose>
-                                    <xsl:when test="string-length(normalize-space(text()) ) &gt; 1">
+                                    <xsl:when test="string-length(normalize-space()) &gt; 1">
                                         <xsl:value-of select="."/>
                                     </xsl:when>
                                     <xsl:otherwise>
