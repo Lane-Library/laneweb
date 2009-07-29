@@ -43,7 +43,7 @@
                 <map:mount uri-prefix="" check-reload="yes" src="search.xmap"/>
             </map:match>
             <map:match pattern="random" type="wildcard">
-                <map:generate type="file" src="{request-param:source}"/>
+                <map:generate type="file" src="${request/parameters/source}"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/random.xsl">
                         <map:transform type="saxon" src="xsl/random.xsl"/>
@@ -98,17 +98,17 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/persistentlogin.xsl">
                         <map:transform src="xsl/persistentlogin.xsl" type="saxon">
-                            <map:parameter name="persistent-login" value="{request-param:pl}"/>
+                            <map:parameter name="persistent-login" value="${request/parameters/pl}"/>
                             <map:parameter name="remove-persistent-login"
-                                value="{request-param:remove-pl}"/>
+                                value="${request/parameters/remove-pl}"/>
                             <map:parameter name="lane-user-cookie" value="{cookie:u-lane}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform src="context://xsl/persistentlogin.xsl" type="saxon">
-                            <map:parameter name="persistent-login" value="{request-param:pl}"/>
+                            <map:parameter name="persistent-login" value="${request/parameters/pl}"/>
                             <map:parameter name="remove-persistent-login"
-                                value="{request-param:remove-pl}"/>
+                                value="${request/parameters/remove-pl}"/>
                             <map:parameter name="lane-user-cookie" value="{cookie:u-lane}"/>
                         </map:transform>
                     </map:otherwise>
@@ -124,16 +124,16 @@
                 <map:match type="regex-parameter" pattern=".+">
                     <map:parameter name="parameter-name" value="id"/>
                     <map:generate type="html"
-                        src="{naming:java:comp/env/medblog-base}/lane-faq/archives/{mt-munge:{request-param:id}}.xml"/>
+                        src="{naming:java:comp/env/medblog-base}/lane-faq/archives/{mt-munge:${request/parameters/id}}.xml"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/individual-faq.xsl">
                             <map:transform type="saxon" src="xsl/individual-faq.xsl">
-                                <map:parameter name="category" value="{request-param:category}"/>
+                                <map:parameter name="category" value="${request/parameters/category}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/individual-faq.xsl">
-                                <map:parameter name="category" value="{request-param:category}"/>
+                                <map:parameter name="category" value="${request/parameters/category}"/>
                             </map:transform>
                         </map:otherwise>
                     </map:select>
@@ -143,16 +143,16 @@
                 <map:match type="regex-parameter" pattern=".+">
                     <map:parameter name="parameter-name" value="category"/>
                     <map:generate type="html"
-                        src="{naming:java:comp/env/medblog-base}/lane-faq/archives/{mt-munge:{request-param:category}}.xml"/>
+                        src="{naming:java:comp/env/medblog-base}/lane-faq/archives/{mt-munge:${request/parameters/category}}.xml"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/category-faq.xsl">
                             <map:transform type="saxon" src="xsl/category-faq.xsl">
-                                <map:parameter name="category" value="{request-param:category}"/>
+                                <map:parameter name="category" value="${request/parameters/category}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/category-faq.xsl">
-                                <map:parameter name="category" value="{request-param:category}"/>
+                                <map:parameter name="category" value="${request/parameters/category}"/>
                             </map:transform>
                         </map:otherwise>
                     </map:select>
@@ -162,16 +162,16 @@
             </map:match>
             <map:match pattern="faq-category-list.html" type="wildcard">
                 <map:generate type="html"
-                    src="{naming:java:comp/env/medblog-base}/lane-faq/archives/{mt-munge:{request-param:category}}.xml"/>
+                    src="{naming:java:comp/env/medblog-base}/lane-faq/archives/{mt-munge:${request/parameters/category}}.xml"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/faq-category-list.xsl">
                         <map:transform type="saxon" src="xsl/faq-category-list.xsl">
-                            <map:parameter name="category" value="{request-param:category}"/>
+                            <map:parameter name="category" value="${request/parameters/category}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
-                            <map:parameter name="category" value="{request-param:category}"/>
+                            <map:parameter name="category" value="${request/parameters/category}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>

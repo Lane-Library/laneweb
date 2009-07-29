@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="expires">
-            <map:parameter name="cache-key" value="{request-uri:requestURI};{request-param:q};{request-param:r};{request-param:t};{request-param:bn};{request-param:pageNumber}"/>
+            <map:parameter name="cache-key" value="{request-uri:requestURI};${request/parameters/q};${request/parameters/r};${request/parameters/t};${request/parameters/bn};${request/parameters/pageNumber}"/>
                    <map:match type="regex-parameter" pattern="^.+$">
                        <map:parameter name="parameter-name" value="q"/>    
                        <map:call resource="bassett-content"/>
@@ -17,7 +17,7 @@
         </map:pipeline>
         
         <map:pipeline type="expires">
-            <map:parameter name="cache-key" value="{request-param:q};{request-param:r};{request-param:bn}"/>
+            <map:parameter name="cache-key" value="${request/parameters/q};${request/parameters/r};${request/parameters/bn}"/>
             <map:match pattern="database" type="wildcard">
                 <map:generate type="bassett"/>
                 <map:serialize type="xml"/>
@@ -25,7 +25,7 @@
         </map:pipeline>
         
         <map:pipeline type="expires">
-            <map:parameter name="cache-key" value="{request-param:q}"/>
+            <map:parameter name="cache-key" value="${request/parameters/q}"/>
                 <map:match pattern="bassett-accordion" type="wildcard">
                     <map:generate type="bassett-accordion"/>
                     <map:serialize type="xml"/>
@@ -44,13 +44,13 @@
             </map:aggregate>
             <map:transform type="xinclude"/>
             <map:transform type="saxon" src="context://xsl/bassett.xsl">
-                <map:parameter name="q" value="{request-param:q}"/>
-                <map:parameter name="type" value="{request-param:t}"/>
-                <map:parameter name="region" value="{request-param:r}"/>
+                <map:parameter name="q" value="${request/parameters/q}"/>
+                <map:parameter name="type" value="${request/parameters/t}"/>
+                <map:parameter name="region" value="${request/parameters/r}"/>
                 <map:parameter name="images-url"
                     value="http://elane.stanford.edu/public/L254573"/>
                 <map:parameter name="images-per-page" value="30"/>
-                <map:parameter name="current-page" value="{request-param:pageNumber}"/>
+                <map:parameter name="current-page" value="${request/parameters/pageNumber}"/>
             </map:transform>
             <map:serialize type="xhtml"/>
         </map:match>
@@ -75,7 +75,7 @@
             </map:aggregate>
             <map:transform type="xinclude"/>
             <map:transform type="saxon" src="context://xsl/bassettAccordion.xsl">
-                <map:parameter name="q" value="{request-param:q}"/>
+                <map:parameter name="q" value="${request/parameters/q}"/>
             </map:transform>
             <map:serialize type="xhtml"/>
         </map:match>

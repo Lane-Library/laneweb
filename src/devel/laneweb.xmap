@@ -35,7 +35,7 @@
             <map:match pattern="redirect/cme" type="wildcard">
                 <map:act type="cmeRedirectAction">
                     <map:parameter name="emrid" value="{user:emrid}"/>
-                    <map:parameter name="host" value="{request-param:host}"/>
+                    <map:parameter name="host" value="${request/parameters/host}"/>
                     <map:parameter name="query-string" value="{request:queryString}"/>
                     <map:redirect-to uri="{cme-redirect}"/>
                 </map:act>
@@ -44,8 +44,8 @@
             <map:match pattern="^http" type="regex-parameter">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:act type="form-redirect">
-                    <map:parameter name="q" value="{request-param:q}"/>
-                    <map:parameter name="source" value="{request-param:source}"/>
+                    <map:parameter name="q" value="${request/parameters/q}"/>
+                    <map:parameter name="source" value="${request/parameters/source}"/>
                     <map:redirect-to uri="{form-redirect-key}"/>
                 </map:act>
             </map:match>
@@ -70,13 +70,13 @@
                             <map:parameter name="sunetid" value="{user:sunetid}"/>
                             <map:parameter name="ticket" value="{user:ticket}"/>
                             <map:parameter name="ip-group" value="{user:ip-group}"/>
-                            <map:parameter name="q" value="{request-param:q}"/>
-                            <map:parameter name="loadTab" value="{request-param:loadTab}"/>
-                            <map:parameter name="template" value="{request-param:template}"/>
-                            <map:parameter name="debug" value="{request-param:debug}"/>
-                            <map:parameter name="source" value="{request-param:source}"/>
-                            <map:parameter name="m" value="{request-param:m}"/>
-                            <map:parameter name="t" value="{request-param:t}"/>
+                            <map:parameter name="q" value="${request/parameters/q}"/>
+                            <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                            <map:parameter name="template" value="${request/parameters/template}"/>
+                            <map:parameter name="debug" value="${request/parameters/debug}"/>
+                            <map:parameter name="source" value="${request/parameters/source}"/>
+                            <map:parameter name="m" value="${request/parameters/m}"/>
+                            <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
                             <map:parameter name="name" value="{user:name}"/>
                         </map:transform>
@@ -91,13 +91,13 @@
                             <map:parameter name="sunetid" value="{user:sunetid}"/>
                             <map:parameter name="ticket" value="{user:ticket}"/>
                             <map:parameter name="ip-group" value="{user:ip-group}"/>
-                            <map:parameter name="q" value="{request-param:q}"/>
-                            <map:parameter name="loadTab" value="{request-param:loadTab}"/>
-                            <map:parameter name="template" value="{request-param:template}"/>
-                            <map:parameter name="debug" value="{request-param:debug}"/>
-                            <map:parameter name="source" value="{request-param:source}"/>
-                            <map:parameter name="m" value="{request-param:m}"/>
-                            <map:parameter name="t" value="{request-param:t}"/>
+                            <map:parameter name="q" value="${request/parameters/q}"/>
+                            <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                            <map:parameter name="template" value="${request/parameters/template}"/>
+                            <map:parameter name="debug" value="${request/parameters/debug}"/>
+                            <map:parameter name="source" value="${request/parameters/source}"/>
+                            <map:parameter name="m" value="${request/parameters/m}"/>
+                            <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
                             <map:parameter name="name" value="{user:name}"/>
                         </map:transform>
@@ -131,13 +131,13 @@
                             <map:parameter name="sunetid" value="{user:sunetid}"/>
                             <map:parameter name="ticket" value="{user:ticket}"/>
                             <map:parameter name="ip-group" value="{user:ip-group}"/>
-                            <map:parameter name="q" value="{request-param:q}"/>
-                            <map:parameter name="loadTab" value="{request-param:loadTab}"/>
-                            <map:parameter name="template" value="{request-param:template}"/>
-                            <map:parameter name="debug" value="{request-param:debug}"/>
-                            <map:parameter name="source" value="{request-param:source}"/>
-                            <map:parameter name="m" value="{request-param:m}"/>
-                            <map:parameter name="t" value="{request-param:t}"/>
+                            <map:parameter name="q" value="${request/parameters/q}"/>
+                            <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                            <map:parameter name="template" value="${request/parameters/template}"/>
+                            <map:parameter name="debug" value="${request/parameters/debug}"/>
+                            <map:parameter name="source" value="${request/parameters/source}"/>
+                            <map:parameter name="m" value="${request/parameters/m}"/>
+                            <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
                             <map:parameter name="name" value="{user:name}"/>
                         </map:transform>
@@ -152,13 +152,13 @@
                             <map:parameter name="sunetid" value="{user:sunetid}"/>
                             <map:parameter name="ticket" value="{user:ticket}"/>
                             <map:parameter name="ip-group" value="{user:ip-group}"/>
-                            <map:parameter name="q" value="{request-param:q}"/>
-                            <map:parameter name="loadTab" value="{request-param:loadTab}"/>
-                            <map:parameter name="template" value="{request-param:template}"/>
-                            <map:parameter name="debug" value="{request-param:debug}"/>
-                            <map:parameter name="source" value="{request-param:source}"/>
-                            <map:parameter name="m" value="{request-param:m}"/>
-                            <map:parameter name="t" value="{request-param:t}"/>
+                            <map:parameter name="q" value="${request/parameters/q}"/>
+                            <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                            <map:parameter name="template" value="${request/parameters/template}"/>
+                            <map:parameter name="debug" value="${request/parameters/debug}"/>
+                            <map:parameter name="source" value="${request/parameters/source}"/>
+                            <map:parameter name="m" value="${request/parameters/m}"/>
+                            <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
                             <map:parameter name="name" value="{user:name}"/>
                         </map:transform>

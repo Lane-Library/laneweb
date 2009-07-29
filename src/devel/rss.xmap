@@ -20,9 +20,9 @@
         
         
         <map:pipeline type="expires">
-            <map:parameter name="cache-key" value="{request-uri:requestURI};rss-url={request-param:rss-url}"/>
+            <map:parameter name="cache-key" value="{request-uri:requestURI};rss-url=${request/parameters/rss-url}"/>
             <map:match pattern="ncbi-rss2html" type="wildcard">
-                <map:generate type="file" src="{request-param:rss-url}"/>
+                <map:generate type="file" src="${request/parameters/rss-url}"/>
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
                 <map:serialize type="xhtml"/>
             </map:match>
@@ -39,15 +39,15 @@
                  <map:select>
                     <map:when test="/xsl/eresources-rss.xsl">
                         <map:transform type="saxon" src="/xsl/eresources-rss.xsl">
-                            <map:parameter name="q" value="{request-param:q}"/>
-                            <map:parameter name="t" value="{request-param:t}"/>
+                            <map:parameter name="q" value="${request/parameters/q}"/>
+                            <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="type" value="search"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
-                            <map:parameter name="q" value="{request-param:q}"/>
-                            <map:parameter name="t" value="{request-param:t}"/>
+                            <map:parameter name="q" value="${request/parameters/q}"/>
+                            <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="type" value="search"/>
                         </map:transform>
                     </map:otherwise>
@@ -60,13 +60,13 @@
                  <map:select>
                      <map:when test="/xsl/eresources-rss.xsl">
                         <map:transform type="saxon" src="/xsl/eresources-rss.xsl">
-                            <map:parameter name="a" value="{request-param:a}"/>
+                            <map:parameter name="a" value="${request/parameters/a}"/>
                             <map:parameter name="type" value="ejournals"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
-                            <map:parameter name="a" value="{request-param:a}"/>
+                            <map:parameter name="a" value="${request/parameters/a}"/>
                             <map:parameter name="type" value="ejournals"/>
                         </map:transform>
                     </map:otherwise>
@@ -79,13 +79,13 @@
                  <map:select>
                      <map:when test="/xsl/eresources-rss.xsl">
                         <map:transform type="saxon" src="/xsl/eresources-rss.xsl">
-                            <map:parameter name="m" value="{request-param:m}"/>
+                            <map:parameter name="m" value="${request/parameters/m}"/>
                             <map:parameter name="type" value="mesh"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                        <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
-                            <map:parameter name="m" value="{request-param:m}"/>
+                            <map:parameter name="m" value="${request/parameters/m}"/>
                             <map:parameter name="type" value="mesh"/>
                         </map:transform>
                     </map:otherwise>
@@ -111,18 +111,18 @@
             
             <map:match pattern="page2rss" type="wildcard">
                 <map:aggregate element="doc">
-                    <map:part src="cocoon:/content/{request-param:page}"/>
-                    <map:part src="cocoon:/content/file-info{request-param:page}"/>
+                    <map:part src="cocoon:/content/${request/parameters/page}"/>
+                    <map:part src="cocoon:/content/file-info${request/parameters/page}"/>
                 </map:aggregate>
                 <map:select type="resource-exists">
                     <map:when test="/xsl/page2rss.xsl">
                         <map:transform src="/xsl/page2rss.xsl" type="saxon">
-                            <map:parameter name="page" value="{request-param:page}"/>
+                            <map:parameter name="page" value="${request/parameters/page}"/>
                         </map:transform>
                      </map:when>
                      <map:otherwise>
                         <map:transform src="context://xsl/page2rss.xsl" type="saxon">
-                            <map:parameter name="page" value="{request-param:page}"/>
+                            <map:parameter name="page" value="${request/parameters/page}"/>
                         </map:transform>
                      </map:otherwise>
                 </map:select>
