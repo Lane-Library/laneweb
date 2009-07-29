@@ -81,23 +81,23 @@
             </map:match>
             <map:match pattern="secure/webdash.html" type="wildcard">
                 <map:act type="webdash">
-                    <map:parameter name="nonce" value="{request-param:nonce}"/>
-                    <map:parameter name="system-user-id" value="{request-param:system_user_id}"/>
+                    <map:parameter name="nonce" value="${request/parameters/nonce}"/>
+                    <map:parameter name="system-user-id" value="${request/parameters/system_user_id}"/>
                     <map:redirect-to uri="{webdash-url}"/>
                 </map:act>
             </map:match>
             <map:match pattern="secure/voyager.html" type="wildcard">
                 <map:act type="voyager">
-                    <map:parameter name="pid" value="{request-param:PID}"/>
-                    <map:parameter name="query-string" value="{request:queryString}"/>
+                    <map:parameter name="pid" value="${request/parameters/PID}"/>
+                    <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:redirect-to uri="{voyager-url}"/>
                 </map:act>
             </map:match>
             <map:match pattern="redirect/cme" type="wildcard">
                 <map:act type="cmeRedirectAction">
                     <map:parameter name="emrid" value="{user:emrid}"/>
-                    <map:parameter name="host" value="{request-param:host}"/>
-                    <map:parameter name="query-string" value="{request:queryString}"/>
+                    <map:parameter name="host" value="${request/parameters/host}"/>
+                    <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:redirect-to uri="{cme-redirect}"/>
                 </map:act>
             </map:match>
@@ -108,9 +108,9 @@
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
                     <map:parameter name="ticket" value="{user:ticket}"/>
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
-                    <map:parameter name="path" value="{request-param:path}"/>
-                    <map:parameter name="entryUrl" value="{request-param:entryUrl}"/>
-                    <map:parameter name="title" value="{request-param:title}"/>
+                    <map:parameter name="path" value="${request/parameters/path}"/>
+                    <map:parameter name="entryUrl" value="${request/parameters/entryUrl}"/>
+                    <map:parameter name="title" value="${request/parameters/title}"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
@@ -128,7 +128,7 @@
                 <map:generate type="request"/>
                 <map:transform type="saxon" src="context://xsl/ipGroupFetch.xsl">
                     <map:parameter name="ip-group" value="{user:ip-group}"/>
-                    <map:parameter name="callback" value="{request-param:callback}"/>
+                    <map:parameter name="callback" value="${request/parameters/callback}"/>
                 </map:transform>
                 <map:serialize type="text"/>
             </map:match>
@@ -136,8 +136,8 @@
             <map:match pattern="^http" type="regex-parameter">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:act type="form-redirect">
-                    <map:parameter name="q" value="{request-param:q}"/>
-                    <map:parameter name="source" value="{request-param:source}"/>
+                    <map:parameter name="q" value="${request/parameters/q}"/>
+                    <map:parameter name="source" value="${request/parameters/source}"/>
                     <map:redirect-to uri="{form-redirect-key}"/>
                 </map:act>
             </map:match>
@@ -165,21 +165,21 @@
                     <map:parameter name="emrid" value="{user:emrid}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                    <map:parameter name="host" value="{request:serverName}"/>
+                    <map:parameter name="host" value="${request/serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                    <map:parameter name="context" value="{request:contextPath}"/>
-                    <map:parameter name="query-string" value="{request:queryString}"/>
+                    <map:parameter name="context" value="${request/contextPath}"/>
+                    <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
                     <map:parameter name="ticket" value="{user:ticket}"/>
                     <map:parameter name="ip-group" value="{user:ip-group}"/>
-                    <map:parameter name="q" value="{request-param:q}"/>
-                    <map:parameter name="loadTab" value="{request-param:loadTab}"/>
-                    <map:parameter name="template" value="{request-param:template}"/>
-                    <map:parameter name="debug" value="{request-param:debug}"/>
-                    <map:parameter name="source" value="{request-param:source}"/>
-                    <map:parameter name="m" value="{request-param:m}"/>
-                    <map:parameter name="t" value="{request-param:t}"/>
+                    <map:parameter name="q" value="${request/parameters/q}"/>
+                    <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                    <map:parameter name="template" value="${request/parameters/template}"/>
+                    <map:parameter name="debug" value="${request/parameters/debug}"/>
+                    <map:parameter name="source" value="${request/parameters/source}"/>
+                    <map:parameter name="m" value="${request/parameters/m}"/>
+                    <map:parameter name="t" value="${request/parameters/t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>
@@ -209,21 +209,21 @@
                     <map:parameter name="emrid" value="{user:emrid}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                    <map:parameter name="host" value="{request:serverName}"/>
+                    <map:parameter name="host" value="${request/serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                    <map:parameter name="context" value="{request:contextPath}"/>
-                    <map:parameter name="query-string" value="{request:queryString}"/>
+                    <map:parameter name="context" value="${request/contextPath}"/>
+                    <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
                     <map:parameter name="ticket" value="{user:ticket}"/>
                     <map:parameter name="ip-group" value="{user:ip-group}"/>
-                    <map:parameter name="q" value="{request-param:q}"/>
-                    <map:parameter name="loadTab" value="{request-param:loadTab}"/>
-                    <map:parameter name="template" value="{request-param:template}"/>
-                    <map:parameter name="debug" value="{request-param:debug}"/>
-                    <map:parameter name="source" value="{request-param:source}"/>
-                    <map:parameter name="m" value="{request-param:m}"/>
-                    <map:parameter name="t" value="{request-param:t}"/>
+                    <map:parameter name="q" value="${request/parameters/q}"/>
+                    <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                    <map:parameter name="template" value="${request/parameters/template}"/>
+                    <map:parameter name="debug" value="${request/parameters/debug}"/>
+                    <map:parameter name="source" value="${request/parameters/source}"/>
+                    <map:parameter name="m" value="${request/parameters/m}"/>
+                    <map:parameter name="t" value="${request/parameters/t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>
@@ -271,21 +271,21 @@
                     <map:parameter name="emrid" value="{user:emrid}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                    <map:parameter name="host" value="{request:serverName}"/>
+                    <map:parameter name="host" value="${request/serverName}"/>
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                    <map:parameter name="context" value="{request:contextPath}"/>
-                    <map:parameter name="query-string" value="{request:queryString}"/>
+                    <map:parameter name="context" value="${request/contextPath}"/>
+                    <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="{user:sunetid}"/>
                     <map:parameter name="ticket" value="{user:ticket}"/>
                     <map:parameter name="ip-group" value="{user:ip-group}"/>
-                    <map:parameter name="q" value="{request-param:q}"/>
-                    <map:parameter name="loadTab" value="{request-param:loadTab}"/>
-                    <map:parameter name="template" value="{request-param:template}"/>
-                    <map:parameter name="debug" value="{request-param:debug}"/>
-                    <map:parameter name="source" value="{request-param:source}"/>
-                    <map:parameter name="m" value="{request-param:m}"/>
-                    <map:parameter name="t" value="{request-param:t}"/>
+                    <map:parameter name="q" value="${request/parameters/q}"/>
+                    <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                    <map:parameter name="template" value="${request/parameters/template}"/>
+                    <map:parameter name="debug" value="${request/parameters/debug}"/>
+                    <map:parameter name="source" value="${request/parameters/source}"/>
+                    <map:parameter name="m" value="${request/parameters/m}"/>
+                    <map:parameter name="t" value="${request/parameters/t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="{header-attribute:referer}"/>
                     <map:parameter name="name" value="{user:name}"/>

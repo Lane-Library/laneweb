@@ -496,5 +496,30 @@
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <pipeline:component mime-type="text/plain"/>
     </bean>
+    
+    <bean id="org.apache.cocoon.el.ExpressionFactory"
+        class="org.apache.cocoon.el.impl.DefaultExpressionFactory">
+        <property name="expressionCompilers">
+            <map>
+                <entry key="default">
+                    <bean class="org.apache.cocoon.el.impl.jxpath.JXPathCompiler"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="org.apache.cocoon.el.objectmodel.ObjectModel"
+        class="org.apache.cocoon.el.impl.objectmodel.ObjectModelImpl"
+        scope="request">
+        <property name="initialEntries">
+            <map>
+                <entry key="contextBean">
+                    <bean class="org.apache.cocoon.objectmodel.impl.CocoonEntryObjectModelProvider">
+                        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
 
 </beans>
