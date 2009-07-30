@@ -32,6 +32,8 @@ public class ProxyLinkTransformer extends AbstractTransformer {
     private String sunetid;
 
     private String ticket;
+    
+    private String ipGroup;
 
     public void setProxyHostManager(final ProxyHostManager proxyHostManager) {
         this.proxyHostManager = proxyHostManager;
@@ -42,6 +44,7 @@ public class ProxyLinkTransformer extends AbstractTransformer {
         this.sunetid = params.getParameter(User.SUNETID, EMPTY_STRING);
         this.ticket = params.getParameter(User.TICKET, EMPTY_STRING);
         this.proxyLinks = params.getParameterAsBoolean(User.PROXY_LINKS, false);
+        this.ipGroup = params.getParameter(User.IPGROUP, "OTHER");
     }
 
     @Override
@@ -64,7 +67,9 @@ public class ProxyLinkTransformer extends AbstractTransformer {
 
     private String createProxyLink(final String link) {
         StringBuffer sb = new StringBuffer();
-        if (EMPTY_STRING.equals(this.ticket) || EMPTY_STRING.equals(this.sunetid)) {
+        if ("SHC".equals(this.ipGroup) || "LPCH".equals(this.ipGroup)) {
+            sb.append("http://laneproxy.stanford.edu/login?url=");
+        } else if (EMPTY_STRING.equals(this.ticket) || EMPTY_STRING.equals(this.sunetid)) {
             sb.append(WEBAUTH_LINK);
         } else {
             sb.append(EZPROXY_LINK).append(this.sunetid).append(TICKET).append(this.ticket).append(URL);
