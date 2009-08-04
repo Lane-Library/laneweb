@@ -72,8 +72,8 @@
             </map:match>
             <map:match pattern="secure/login.html" type="wildcard">
                 <map:act type="loginAction">
-                    <map:parameter name="sunetid" value="${session/user/sunetid}"/>
-                    <map:parameter name="ticket" value="${session/user/ticket}"/>
+                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                     <map:parameter name="query-string" value="${request/queryString}"/>
                 </map:act>
             </map:match>
