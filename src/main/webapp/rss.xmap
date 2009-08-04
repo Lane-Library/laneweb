@@ -34,7 +34,7 @@
         
         <map:pipeline type="noncaching">
             <map:match pattern="**.xml" type="wildcard">
-                   <map:generate type="file" src="{naming:java:comp/env/live-base}/content/rss/{1}.xml"/>
+                   <map:generate type="file" src="${jndi/live-base}/content/rss/{1}.xml"/>
                <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="page2rss" type="wildcard">

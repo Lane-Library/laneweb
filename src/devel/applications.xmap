@@ -138,9 +138,9 @@
                             <map:generate type="querymap">
                                 <map:parameter name="query" value="${request/parameters/q}"/>
                                 <map:parameter name="resource-maps"
-                                    value="{naming:java:comp/env/live-base}/resources/querymap/resource-maps.xml"/>
+                                    value="${jndi/live-base}/resources/querymap/resource-maps.xml"/>
                                 <map:parameter name="descriptor-weights"
-                                    value="{naming:java:comp/env/live-base}/resources/querymap/descriptor-weights.xml"
+                                    value="${jndi/live-base}/resources/querymap/descriptor-weights.xml"
                                 />
                                 <!-- abstract count can be set in query string, or default set in cocoon.xconf -->
                                 <map:parameter name="abstract-count" value="{chain:abstract-count}"/>
@@ -160,7 +160,7 @@
                         <map:otherwise>
                             <map:aggregate element="laneweb" ns="http://lane.stanford.edu/laneweb/ns">
                                 <map:part src="cocoon:/querymap/xml"/>
-                                <map:part src="{naming:java:comp/env/live-base}/resources/querymap/display-template.xml"/>
+                                <map:part src="${jndi/live-base}/resources/querymap/display-template.xml"/>
                             </map:aggregate>
                         </map:otherwise>
                     </map:select>
@@ -283,7 +283,7 @@
                         <map:generate src="content/{1}.html" type="html"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate src="{naming:java:comp/env/live-base}/content/{1}.html" type="html"/>
+                        <map:generate src="${jndi/live-base}/content/{1}.html" type="html"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

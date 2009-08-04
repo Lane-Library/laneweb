@@ -13,9 +13,10 @@
                 <value>PROPFIND</value>
             </set>
         </property>
-        <lookup-method name="getRequestProcessor" bean="org.apache.cocoon.servlet.RequestProcessor"/>
+        <lookup-method name="getRequestProcessor" bean="org.apache.cocoon.servlet.RequestProcessor"
+        />
     </bean>
-    
+
     <bean id="org.apache.cocoon.processing.ProcessInfoProvider"
         class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
         <property name="servletContext" ref="javax.servlet.ServletContext"/>
@@ -40,7 +41,7 @@
 
     <bean id="org.apache.excalibur.store.StoreJanitor"
         class="edu.stanford.irt.laneweb.store.StoreJanitor"/>
-    
+
     <bean name="org.apache.excalibur.xml.xpath.XPathProcessor"
         class="edu.stanford.irt.laneweb.XPathProcessor"/>
 
@@ -93,11 +94,12 @@
                         </property>
                         <property name="base" value="cn=people,dc=stanford,dc=edu"/>
                         <property name="authenticationStrategy">
-                            <bean class="edu.stanford.irt.laneweb.user.GSSAPIAuthenticationStrategy"/>
+                            <bean class="edu.stanford.irt.laneweb.user.GSSAPIAuthenticationStrategy"
+                            />
                         </property>
                         <property name="baseEnvironmentProperties">
                             <map>
-                                <entry key="com.sun.jndi.ldap.connect.timeout" value="5000" />
+                                <entry key="com.sun.jndi.ldap.connect.timeout" value="5000"/>
                             </map>
                         </property>
                     </bean>
@@ -137,14 +139,14 @@
     </bean>
 
     <bean id="edu.stanford.irt.querymap.DescriptorManager"
-    class="edu.stanford.irt.querymap.DescriptorManager"/>
-    
+        class="edu.stanford.irt.querymap.DescriptorManager"/>
+
     <bean id="edu.stanford.irt.lane.icd9.ICD9Translator"
         class="edu.stanford.irt.lane.icd9.ICD9Translator"/>
 
     <bean id="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"
-    class="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
-    
+        class="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
+
     <bean id="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
         class="edu.stanford.irt.laneweb.proxy.ProxyHostManager">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
@@ -282,7 +284,8 @@
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/bassett"
-        class="edu.stanford.irt.laneweb.eresources.bassett.BassettEresourcesGenerator" scope="prototype">
+        class="edu.stanford.irt.laneweb.eresources.bassett.BassettEresourcesGenerator"
+        scope="prototype">
         <property name="collectionManager">
             <bean class="edu.stanford.irt.laneweb.eresources.bassett.BassettCollectionManager">
                 <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
@@ -299,7 +302,7 @@
             </bean>
         </property>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/history-search"
         class="edu.stanford.irt.laneweb.eresources.SearchEresourcesGenerator" scope="prototype">
         <property name="collectionManager"
@@ -332,17 +335,16 @@
         class="org.apache.cocoon.generation.DirectoryGenerator" scope="prototype"> </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
-    class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
-    
+        class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
+
     <bean name="org.apache.cocoon.transformation.Transformer/proxy-links"
         class="edu.stanford.irt.laneweb.proxy.ProxyLinkTransformer" scope="prototype">
         <property name="proxyHostManager" ref="edu.stanford.irt.laneweb.proxy.ProxyHostManager"/>
     </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/cme-links"
-        class="edu.stanford.irt.laneweb.cme.CMELinkTransformer" scope="prototype">
-    </bean>
-    
+        class="edu.stanford.irt.laneweb.cme.CMELinkTransformer" scope="prototype"> </bean>
+
     <bean name="org.apache.cocoon.transformation.Transformer/xinclude"
         class="edu.stanford.irt.laneweb.LanewebXIncludeTransformer" scope="prototype">
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
@@ -359,7 +361,8 @@
 
     <bean name="org.apache.cocoon.reading.Reader/mesh-suggest"
         class="edu.stanford.irt.laneweb.mesh.MeshSuggestReader">
-        <property name="meshDescriptorManager" ref="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
+        <property name="meshDescriptorManager"
+            ref="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
     </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/ezproxy-servers"
@@ -373,13 +376,14 @@
         <property name="valueToSubstitute" value="/\./\."/>
         <!-- uses regex so /./. is what is actually substituted -->
     </bean>
-    
+
     <bean name="org.apache.cocoon.reading.Reader/gziptxt-resource"
         class="edu.stanford.irt.laneweb.gzip.GZipTxtResourceReader" scope="prototype">
         <property name="defaultPath" value="/"/>
         <property name="valueToSubstitute" value="/\./\."/>
         <!-- uses regex so /./. is what is actually substituted -->
-        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
+        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"
+        />
     </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/search-url-tester"
@@ -392,16 +396,16 @@
         class="edu.stanford.irt.laneweb.querymap.QueryMapReader">
         <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.reading.Reader/icd9"
-        class="edu.stanford.irt.laneweb.icd9.ICD9JSONReader"
-        scope="prototype">
+        class="edu.stanford.irt.laneweb.icd9.ICD9JSONReader" scope="prototype">
         <property name="ICD9Translator" ref="edu.stanford.irt.lane.icd9.ICD9Translator"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.selection.Selector/gzip"
         class="edu.stanford.irt.laneweb.gzip.GZipAcceptEncodingSelector">
-        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
+        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"
+        />
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/voyager"
@@ -443,8 +447,7 @@
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/cmeRedirectAction"
-        class="edu.stanford.irt.laneweb.cme.CMERedirectAction">
-    </bean>
+        class="edu.stanford.irt.laneweb.cme.CMERedirectAction"> </bean>
 
     <bean name="org.apache.cocoon.acting.Action/search-context-reloader"
         class="edu.stanford.irt.laneweb.search.SearchContextReloaderAction" scope="singleton">
@@ -473,7 +476,7 @@
         </property>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
-    
+
     <bean name="org.apache.cocoon.serialization.Serializer/gzipxhtml"
         class="edu.stanford.irt.laneweb.gzip.GZipXMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
@@ -488,7 +491,8 @@
             </props>
         </property>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
-        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
+        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"
+        />
     </bean>
 
     <bean name="org.apache.cocoon.serialization.Serializer/text"
@@ -496,7 +500,7 @@
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <pipeline:component mime-type="text/plain"/>
     </bean>
-    
+
     <bean id="org.apache.cocoon.el.ExpressionFactory"
         class="org.apache.cocoon.el.impl.DefaultExpressionFactory">
         <property name="expressionCompilers">
@@ -507,15 +511,33 @@
             </map>
         </property>
     </bean>
-    
+
     <bean id="org.apache.cocoon.el.objectmodel.ObjectModel"
-        class="org.apache.cocoon.el.impl.objectmodel.ObjectModelImpl"
-        scope="request">
+        class="org.apache.cocoon.el.impl.objectmodel.ObjectModelImpl" scope="request">
         <property name="initialEntries">
             <map>
                 <entry key="contextBean">
-                    <bean class="org.apache.cocoon.objectmodel.impl.CocoonEntryObjectModelProvider">
-                        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
+                    <bean class="edu.stanford.irt.laneweb.LanewebObjectModelProvider">
+                        <constructor-arg ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
+                        <constructor-arg>
+                            <map>
+                                <entry key="live-base">
+                                    <bean class="org.springframework.jndi.JndiObjectFactoryBean">
+                                        <property name="jndiName" value="java:comp/env/live-base"/>
+                                    </bean>
+                                </entry>
+                                <entry key="stage-base">
+                                    <bean class="org.springframework.jndi.JndiObjectFactoryBean">
+                                        <property name="jndiName" value="java:comp/env/stage-base"/>
+                                    </bean>
+                                </entry>
+                                <entry key="medblog-base">
+                                    <bean class="org.springframework.jndi.JndiObjectFactoryBean">
+                                        <property name="jndiName" value="java:comp/env/medblog-base"/>
+                                    </bean>
+                                </entry>
+                            </map>
+                        </constructor-arg>
                     </bean>
                 </entry>
             </map>

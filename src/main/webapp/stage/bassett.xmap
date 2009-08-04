@@ -39,7 +39,7 @@
          <map:match pattern="raw/**.html" type="wildcard">
             <map:aggregate element="doc">
                 <map:part
-                    src="{naming:java:comp/env/stage-base}/content/portals/bassett/{1}.html"/>
+                    src="${jndi/stage-base}/content/portals/bassett/{1}.html"/>
                 <map:part src="cocoon:/database"/>
             </map:aggregate>
             <map:transform type="xinclude"/>
@@ -58,7 +58,7 @@
         <map:match pattern="**.html" type="wildcard">
             <map:aggregate element="doc" label="bassettContent">
                 <map:part
-                    src="{naming:java:comp/env/stage-base}/content/portals/bassett/bassettTemplate.html"/>
+                    src="${jndi/stage-base}/content/portals/bassett/bassettTemplate.html"/>
                 <map:part src="cocoon:/raw/{1}.html"/>
                 <map:part src="cocoon:/accordionMenu"/>
             </map:aggregate>
@@ -70,7 +70,7 @@
         <map:match pattern="accordionMenu" type="wildcard">
             <map:aggregate element="doc" label="bassettContent">
                 <map:part
-                    src="{naming:java:comp/env/stage-base}/content/portals/bassett/accordionMenu.html"/>
+                    src="${jndi/stage-base}/content/portals/bassett/accordionMenu.html"/>
                 <map:part src="cocoon:/bassett-accordion"/>
             </map:aggregate>
             <map:transform type="xinclude"/>

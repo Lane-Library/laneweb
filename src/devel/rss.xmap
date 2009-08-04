@@ -103,7 +103,7 @@
                         <map:generate type="file" src="content/rss/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="{naming:java:comp/env/live-base}/content/rss/{1}.xml"/>
+                        <map:generate type="file" src="${jndi/live-base}/content/rss/{1}.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
