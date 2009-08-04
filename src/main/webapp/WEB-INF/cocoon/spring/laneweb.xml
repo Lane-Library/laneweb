@@ -436,9 +436,7 @@
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/loginAction"
-        class="edu.stanford.irt.laneweb.LoginAction">
-        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
-    </bean>
+        class="edu.stanford.irt.laneweb.LoginAction"/>
 
     <bean name="org.apache.cocoon.acting.Action/persistentLoginAction"
         class="edu.stanford.irt.laneweb.PersistentLoginAction">
@@ -538,6 +536,7 @@
                                 </entry>
                             </map>
                         </constructor-arg>
+                        <constructor-arg ref="edu.stanford.irt.laneweb.user.UserDao"/>
                     </bean>
                 </entry>
             </map>

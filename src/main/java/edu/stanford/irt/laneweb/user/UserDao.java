@@ -30,7 +30,7 @@ public class UserDao {
     private Logger logger = Logger.getLogger(UserDao.class);
 
     private SubjectSource subjectSource;
-
+    
     public User createOrUpdateUser(final HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute(LanewebConstants.USER);
@@ -38,13 +38,17 @@ public class UserDao {
             user = new User();
             session.setAttribute(LanewebConstants.USER, user);
         }
+        getUserData(user, request);
+        return user;
+    }
+
+    public void getUserData(final User user, final HttpServletRequest request) {
         setIpGroup(user, request);
         setSunetId(user, request);
         setTicket(user, request);
         setProxyLinks(user, request);
         setLdapData(user);
         setEmrId(user, request);
-        return user;
     }
 
     public void setCryptor(final Cryptor cryptor) {
