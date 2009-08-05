@@ -58,7 +58,7 @@
                 <map:act type="cmeRedirectAction">
                     <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                     <map:parameter name="host" value="${request/parameters/host}"/>
-                    <map:parameter name="query-string" value="{request:queryString}"/>
+                    <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:redirect-to uri="{cme-redirect}"/>
                 </map:act>
             </map:match>
@@ -102,10 +102,10 @@
                     <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                    <map:parameter name="host" value="{request:serverName}"/>
-                    <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                    <map:parameter name="context" value="{request:contextPath}/stage"/>
-                    <map:parameter name="query-string" value="{request:queryString}"/>
+                    <map:parameter name="host" value="${request/serverName}"/>
+                    <map:parameter name="request-uri" value="${request/requestURI}"/>
+                    <map:parameter name="context" value="${request/contextPath}/stage"/>
+                    <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
@@ -118,7 +118,7 @@
                     <map:parameter name="m" value="${request/parameters/m}"/>
                     <map:parameter name="t" value="${request/parameters/t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
-                    <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                    <map:parameter name="referrer" value="${request/headers/referer}"/>
                     <map:parameter name="name" value="${session/attributes/user/name}"/>
                 </map:transform>
                 <map:transform type="proxy-links">
@@ -140,10 +140,10 @@
                     <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                    <map:parameter name="host" value="{request:serverName}"/>
-                    <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
-                    <map:parameter name="context" value="{request:contextPath}/stage"/>
-                    <map:parameter name="query-string" value="{request:queryString}"/>
+                    <map:parameter name="host" value="${request/serverName}"/>
+                    <map:parameter name="request-uri" value="${request/requestURI}"/>
+                    <map:parameter name="context" value="${request/contextPath}/stage"/>
+                    <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
@@ -156,7 +156,7 @@
                     <map:parameter name="m" value="${request/parameters/m}"/>
                     <map:parameter name="t" value="${request/parameters/t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
-                    <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                    <map:parameter name="referrer" value="${request/headers/referer}"/>
                     <map:parameter name="name" value="${session/attributes/user/name}"/>
                 </map:transform>
                 <map:transform type="proxy-links">

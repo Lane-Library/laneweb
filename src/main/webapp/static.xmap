@@ -17,12 +17,12 @@
                 <map:select type="gzip">
                     <map:when test="">
                         <map:read type="gziptxt-resource" src="context://resources/css/{2}.css">
-                            <map:parameter name="path" value="{request:contextPath}"/>
+                            <map:parameter name="path" value="${request/contextPath}"/>
                         </map:read>
                     </map:when>
                     <map:otherwise>
                         <map:read type="txt-resource" src="context://resources/css/{2}.css">
-                            <map:parameter name="path" value="{request:contextPath}"/>
+                            <map:parameter name="path" value="${request/contextPath}"/>
                         </map:read>
                     </map:otherwise>
                 </map:select>
@@ -31,12 +31,12 @@
                 <map:select type="gzip">
                     <map:when test="">
                         <map:read type="gziptxt-resource" src="context://javascript/{2}.js">
-                            <map:parameter name="path" value="{request:contextPath}"/>
+                            <map:parameter name="path" value="${request/contextPath}"/>
                         </map:read>
                     </map:when>
                     <map:otherwise>
                         <map:read type="txt-resource" src="context://javascript/{2}.js">
-                            <map:parameter name="path" value="{request:contextPath}"/>
+                            <map:parameter name="path" value="${request/contextPath}"/>
                         </map:read>
                     </map:otherwise>
                 </map:select>

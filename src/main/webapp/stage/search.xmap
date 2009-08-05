@@ -23,7 +23,7 @@
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/metasearch.xsl">
-                        <map:parameter name="query-string" value="{request:queryString}"/>
+                        <map:parameter name="query-string" value="${request/queryString}"/>
                         <map:parameter name="source" value="${request/parameters/source}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
@@ -43,7 +43,7 @@
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/metasearch.xsl">
-                        <map:parameter name="query-string" value="{request:queryString}"/>
+                        <map:parameter name="query-string" value="${request/queryString}"/>
                         <map:parameter name="source" value="${request/parameters/source}"/>
                     </map:transform>
                     <map:serialize type="xml"/>

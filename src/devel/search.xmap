@@ -23,13 +23,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/metasearch.xsl">
                             <map:transform type="saxon" src="xsl/metasearch.xsl">
-                                <map:parameter name="query-string" value="{request:queryString}"/>
+                                <map:parameter name="query-string" value="${request/queryString}"/>
                                 <map:parameter name="source" value="${request/parameters/source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/metasearch.xsl">
-                                <map:parameter name="query-string" value="{request:queryString}"/>
+                                <map:parameter name="query-string" value="${request/queryString}"/>
                                 <map:parameter name="source" value="${request/parameters/source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -47,12 +47,12 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/metasearch.xsl">
                             <map:transform type="saxon" src="xsl/metasearch.xsl">
-                                <map:parameter name="query-string" value="{request:queryString}"/>
+                                <map:parameter name="query-string" value="${request/queryString}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/metasearch.xsl">
-                                <map:parameter name="query-string" value="{request:queryString}"/>
+                                <map:parameter name="query-string" value="${request/queryString}"/>
                             </map:transform>
                         </map:otherwise>
                     </map:select>

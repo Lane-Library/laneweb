@@ -176,7 +176,7 @@
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="${request/serverName}"/>
-                    <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+                    <map:parameter name="request-uri" value="${request/requestURI}"/>
                     <map:parameter name="context" value="${request/contextPath}"/>
                     <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="${proxyLinks}"/>
@@ -191,7 +191,7 @@
                     <map:parameter name="m" value="${request/parameters/m}"/>
                     <map:parameter name="t" value="${request/parameters/t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
-                    <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                    <map:parameter name="referrer" value="${request/headers/referer}"/>
                     <map:parameter name="name" value="${session/attributes/user/name}"/>
                 </map:transform>
                 <map:transform type="proxy-links">
@@ -221,7 +221,7 @@
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="${request/serverName}"/>
-                    <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+                    <map:parameter name="request-uri" value="${request/requestURI}"/>
                     <map:parameter name="context" value="${request/contextPath}"/>
                     <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="${proxyLinks}"/>
@@ -236,7 +236,7 @@
                     <map:parameter name="m" value="${request/parameters/m}"/>
                     <map:parameter name="t" value="${request/parameters/t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
-                    <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                    <map:parameter name="referrer" value="${request/headers/referer}"/>
                     <map:parameter name="name" value="${session/attributes/user/name}"/>
                 </map:transform>
                 <map:transform type="proxy-links">
@@ -246,14 +246,14 @@
                     <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
-                <!--<map:select type="gzip">
+                <map:select type="gzip">
                     <map:when test="">
                         <map:serialize type="gzipxhtml"/>
                     </map:when>
-                    <map:otherwise>-->
+                    <map:otherwise>
                         <map:serialize type="xhtml"/>
-                    <!--</map:otherwise>
-                </map:select>-->
+                    </map:otherwise>
+                </map:select>
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
                 <map:generate type="file" src="${jndi/live-base}/content/{1}.xml"/>
@@ -284,7 +284,7 @@
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="${request/serverName}"/>
-                    <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
+                    <map:parameter name="request-uri" value="${request/requestURI}"/>
                     <map:parameter name="context" value="${request/contextPath}"/>
                     <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="${proxyLinks}"/>
@@ -299,7 +299,7 @@
                     <map:parameter name="m" value="${request/parameters/m}"/>
                     <map:parameter name="t" value="${request/parameters/t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
-                    <map:parameter name="referrer" value="{header-attribute:referer}"/>
+                    <map:parameter name="referrer" value="${request/headers/referer}"/>
                     <map:parameter name="name" value="${session/attributes/user/name}"/>
                 </map:transform>
                 <map:transform type="proxy-links">

@@ -66,15 +66,6 @@
     <component role="org.apache.cocoon.components.modules.input.InputModuleSelector"
         class="org.apache.cocoon.core.container.DefaultServiceSelector"/>
 
-    <component role="org.apache.cocoon.components.modules.input.InputModule/request-uri"
-        class="org.apache.cocoon.components.modules.input.RequestURIModule"/>
-
-	<component role="org.apache.cocoon.components.modules.input.InputModule/cookie"
-		class="org.apache.cocoon.components.modules.input.CookieModule"/>
-
-    <component role="org.apache.cocoon.components.modules.input.InputModule/header-attribute"
-        class="org.apache.cocoon.components.modules.input.HeaderAttributeModule"/>
-
     <component role="org.apache.cocoon.components.modules.input.InputModule/chain"
         class="org.apache.cocoon.components.modules.input.ChainMetaModule">
         <input-module name="request-param"/>
@@ -90,17 +81,11 @@
         </values>
     </component>
 
-    <component role="org.apache.cocoon.components.modules.input.InputModule/naming"
-        class="org.apache.cocoon.components.modules.input.NamingInputModule"/>
-
     <component role="org.apache.cocoon.components.modules.input.InputModule/request-param"
         class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
 
     <component role="org.apache.cocoon.components.modules.input.InputModule/urlencode"
         class="org.apache.cocoon.components.modules.input.URLEncodeModule"/>
-
-    <component role="org.apache.cocoon.components.modules.input.InputModule/request"
-        class="org.apache.cocoon.components.modules.input.RequestModule"/>
 
     <component role="org.apache.cocoon.matching.Matcher/wildcard"
         class="org.apache.cocoon.matching.WildcardURIMatcher"/>

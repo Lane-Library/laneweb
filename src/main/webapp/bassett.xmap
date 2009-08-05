@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="expires">
-            <map:parameter name="cache-key" value="{request-uri:requestURI};${request/parameters/q};${request/parameters/r};${request/parameters/t};${request/parameters/bn};${request/parameters/pageNumber}"/>
+            <map:parameter name="cache-key" value="${request/requestURI};${request/parameters/q};${request/parameters/r};${request/parameters/t};${request/parameters/bn};${request/parameters/pageNumber}"/>
                    <map:match type="regex-parameter" pattern="^.+$">
                        <map:parameter name="parameter-name" value="q"/>    
                        <map:call resource="bassett-content"/>

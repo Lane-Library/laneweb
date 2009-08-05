@@ -20,7 +20,7 @@
         
         
         <map:pipeline type="expires">
-            <map:parameter name="cache-key" value="{request-uri:requestURI};rss-url=${request/parameters/rss-url}"/>
+            <map:parameter name="cache-key" value="${request/requestURI};rss-url=${request/parameters/rss-url}"/>
             <map:match pattern="ncbi-rss2html" type="wildcard">
                 <map:generate type="file" src="${request/parameters/rss-url}"/>
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
