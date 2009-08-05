@@ -46,12 +46,6 @@
         <parameter name="outputBufferSize" value="1049"/>
     </component>
     
-    <component role="org.apache.cocoon.matching.MatcherSelector"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
-    
-    <component role="org.apache.cocoon.matching.Matcher/wildcard"
-        class="org.apache.cocoon.matching.WildcardURIMatcher"/>
-    
     <!-- TODO: maybe this one goes in irt-cocoon? -->
     <component role="org.apache.cocoon.components.notification.NotifyingBuilder"
         class="org.apache.cocoon.components.notification.DefaultNotifyingBuilder"/>
@@ -86,6 +80,9 @@
 
     <component role="org.apache.cocoon.components.modules.input.InputModule/urlencode"
         class="org.apache.cocoon.components.modules.input.URLEncodeModule"/>
+    
+    <component role="org.apache.cocoon.matching.MatcherSelector"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
 
     <component role="org.apache.cocoon.matching.Matcher/wildcard"
         class="org.apache.cocoon.matching.WildcardURIMatcher"/>
