@@ -47,7 +47,7 @@
                                 <map:parameter name="context" value=""/>
                                 <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                                 <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                                <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
+                                <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                                 <map:parameter name="proxy-links" value="{proxy-links:}"/>
                             </map:transform>
                         </map:when>
@@ -56,7 +56,7 @@
                                 <map:parameter name="context" value=""/>
                                 <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                                 <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                                <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
+                                <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                                 <map:parameter name="proxy-links" value="{proxy-links:}"/>
                             </map:transform>
                         </map:otherwise>

@@ -135,7 +135,7 @@
             <map:match pattern="ipGroupFetch" type="wildcard">
                 <map:generate type="request"/>
                 <map:transform type="saxon" src="context://xsl/ipGroupFetch.xsl">
-                    <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
+                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                     <map:parameter name="callback" value="${request/parameters/callback}"/>
                 </map:transform>
                 <map:serialize type="text"/>
@@ -180,7 +180,7 @@
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
+                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                     <map:parameter name="q" value="${request/parameters/q}"/>
                     <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
                     <map:parameter name="template" value="${request/parameters/template}"/>
@@ -196,7 +196,7 @@
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
+                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:select type="gzip">
@@ -225,7 +225,7 @@
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
+                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                     <map:parameter name="q" value="${request/parameters/q}"/>
                     <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
                     <map:parameter name="template" value="${request/parameters/template}"/>
@@ -241,7 +241,7 @@
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
+                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <!--<map:select type="gzip">
@@ -288,7 +288,7 @@
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
+                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                     <map:parameter name="q" value="${request/parameters/q}"/>
                     <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
                     <map:parameter name="template" value="${request/parameters/template}"/>
@@ -304,7 +304,7 @@
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
+                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xhtml" status-code="404"/>
