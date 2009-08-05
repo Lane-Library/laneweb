@@ -438,7 +438,6 @@
 
     <bean name="org.apache.cocoon.acting.Action/persistentLoginAction"
         class="edu.stanford.irt.laneweb.PersistentLoginAction">
-        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
         <property name="cryptor" ref="edu.stanford.irt.laneweb.Cryptor"/>
     </bean>
 

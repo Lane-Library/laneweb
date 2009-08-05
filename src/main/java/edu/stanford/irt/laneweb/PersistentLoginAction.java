@@ -14,14 +14,9 @@ import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
 
-import edu.stanford.irt.laneweb.user.User;
-import edu.stanford.irt.laneweb.user.UserDao;
-
 public class PersistentLoginAction implements Action {
 
     private Cryptor cryptor = null;
-
-    private UserDao userDao = null;
 
     @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters params)
@@ -30,8 +25,7 @@ public class PersistentLoginAction implements Action {
         HttpServletResponse response = ObjectModelHelper.getResponse(objectModel);
         String persistentLogin = request.getParameter("pl");
         String removePersistentLogin = request.getParameter("remove-pl");
-        User user = this.userDao.createOrUpdateUser(request);
-        String sunetid = user.getSunetId();
+        String sunetid = params.getParameter("sunet-id", null);
         if ((sunetid == null) && !"logout".equals(persistentLogin)) {
             String secureUrl = request.getContextPath().concat("/secure/persistentlogin.html");
             if (null != request.getQueryString()) {
@@ -61,13 +55,6 @@ public class PersistentLoginAction implements Action {
             throw new IllegalArgumentException("null cryptor");
         }
         this.cryptor = cryptor;
-    }
-
-    public void setUserDao(final UserDao userDao) {
-        if (null == userDao) {
-            throw new IllegalArgumentException("null userDao");
-        }
-        this.userDao = userDao;
     }
 
     private void createLaneCookie(final String sunetid, final HttpServletRequest request, final HttpServletResponse response) throws Exception {

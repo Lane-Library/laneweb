@@ -53,7 +53,9 @@
             </map:match>
             
                <map:match pattern="**persistentlogin.html" type="wildcard">
-                <map:act type="persistentLoginAction"/>
+                   <map:act type="persistentLoginAction">
+                       <map:parameter name="sunet-id" value="${session/attributes/user/sunetId}"/>
+                   </map:act>
                 <map:generate type="html" src="${jndi/live-base}/content/secure/persistentlogin.html"/>
                 <map:transform src="context://xsl/persistentlogin.xsl" type="saxon">
                     <map:parameter name="persistent-login" value="${request/parameters/pl}"/>

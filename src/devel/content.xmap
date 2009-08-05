@@ -84,7 +84,9 @@
                 <map:redirect-to uri="/rss/services/tools/highly-accessed-articles.xml"/>
             </map:match>
             <map:match pattern="**persistentlogin.html" type="wildcard">
-                <map:act type="persistentLoginAction"/>
+                <map:act type="persistentLoginAction">
+                    <map:parameter name="sunet-id" value="${session/attributes/user/sunetId}"/>
+                </map:act>
                 <map:select type="resource-exists">
                     <map:when test="content/secure/persistentlogin.html">
                         <map:generate type="html" src="content/secure/persistentlogin.html"/>
