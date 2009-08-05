@@ -94,6 +94,7 @@
                 <map:act type="voyager">
                     <map:parameter name="pid" value="${request/parameters/PID}"/>
                     <map:parameter name="query-string" value="${request/queryString}"/>
+                    <map:parameter name="univ-id" value="${session/attributes/user/univId}"/>
                     <map:redirect-to uri="{voyager-url}"/>
                 </map:act>
             </map:match>

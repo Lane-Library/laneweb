@@ -9,7 +9,6 @@ import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 
 import edu.stanford.irt.laneweb.JdbcUtils;
-import edu.stanford.irt.laneweb.user.User;
 
 public class VoyagerLogin {
 
@@ -25,33 +24,28 @@ public class VoyagerLogin {
 
     private Logger logger = Logger.getLogger(VoyagerLogin.class);
 
-    public String getVoyagerURL(final User person, final String pid, final String queryString) {
+    public String getVoyagerURL(final String univId, final String pid, final String queryString) {
         String url = ERROR_URL;
-        if ((null == pid) || !pid.matches("[\\w0-9-_]+")) {
+        if (null == pid || !pid.matches("[\\w0-9-_]+")) {
             this.logger.error("bad pid: " + pid);
             return url;
         }
-        if (null == person) {
-            this.logger.error("null person");
-            return url;
-        }
-        String univId = person.getUnivId();
-        if ((null == univId) || (univId.length() == 0)) {
+        if (null == univId || univId.length() == 0) {
             this.logger.error("bad univId: " + univId);
             return url;
         }
-        univId = "0" + univId; // voyager data prepends 0
+        String voyagerUnivId = "0" + univId; // voyager data prepends 0
         Connection conn = null;
         PreparedStatement clearStmt = null;
         PreparedStatement createStmt = null;
         try {
             conn = this.dataSource.getConnection();
             clearStmt = conn.prepareStatement(CLEAR_SESSION_SQL);
-            clearStmt.setString(1, univId);
+            clearStmt.setString(1, voyagerUnivId);
             clearStmt.setString(2, pid);
             clearStmt.executeUpdate();
             createStmt = conn.prepareStatement(CREATE_SESSION_SQL);
-            createStmt.setString(1, univId);
+            createStmt.setString(1, voyagerUnivId);
             createStmt.setString(2, pid);
             createStmt.executeUpdate();
             url = BASE_URL.concat(queryString).concat("&authenticate=Y");

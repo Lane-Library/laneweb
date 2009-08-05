@@ -415,7 +415,6 @@
                 <property name="dataSource" ref="javax.sql.DataSource/voyager"/>
             </bean>
         </property>
-        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/form-redirect"

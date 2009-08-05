@@ -16,15 +16,11 @@ import javax.sql.DataSource;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.user.User;
-
 public class VoyagerLoginTest {
 
     private Connection connection;
 
     private DataSource dataSource;
-
-    private User person;
 
     private PreparedStatement statement;
 
@@ -33,7 +29,6 @@ public class VoyagerLoginTest {
     @Before
     public void setUp() throws Exception {
         this.voyagerLogin = new VoyagerLogin();
-        this.person = createMock(User.class);
         this.dataSource = createMock(DataSource.class);
         this.connection = createMock(Connection.class);
         this.statement = createMock(PreparedStatement.class);
@@ -51,11 +46,8 @@ public class VoyagerLoginTest {
         replay(this.connection);
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         replay(this.dataSource);
-        expect(this.person.getUnivId()).andReturn("999");
-        replay(this.person);
         this.voyagerLogin.setDataSource(this.dataSource);
-        assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL(this.person, "123", "a=b"));
-        verify(this.person);
+        assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL("999", "123", "a=b"));
         verify(this.dataSource);
         verify(this.connection);
         verify(this.statement);
@@ -63,10 +55,8 @@ public class VoyagerLoginTest {
 
     @Test
     public void testErrorURL() {
-        replay(this.person);
         assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL(null, "123", "a=b"));
-        assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL(this.person, null, "a=b"));
-        verify(this.person);
+        assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL("", null, "a=b"));
     }
 
     @Test
@@ -86,11 +76,8 @@ public class VoyagerLoginTest {
         replay(this.connection);
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         replay(this.dataSource);
-        expect(this.person.getUnivId()).andReturn("999");
-        replay(this.person);
         this.voyagerLogin.setDataSource(this.dataSource);
-        assertEquals("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?a=b&authenticate=Y", this.voyagerLogin.getVoyagerURL(this.person, "123", "a=b"));
-        verify(this.person);
+        assertEquals("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?a=b&authenticate=Y", this.voyagerLogin.getVoyagerURL("999", "123", "a=b"));
         verify(this.dataSource);
         verify(this.connection);
         verify(this.statement);
@@ -113,11 +100,8 @@ public class VoyagerLoginTest {
         replay(this.connection);
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         replay(this.dataSource);
-        expect(this.person.getUnivId()).andReturn("999");
-        replay(this.person);
         this.voyagerLogin.setDataSource(this.dataSource);
-        assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL(this.person, "123", "a=b"));
-        verify(this.person);
+        assertEquals("/voyagerError.html", this.voyagerLogin.getVoyagerURL("999", "123", "a=b"));
         verify(this.dataSource);
         verify(this.connection);
         verify(this.statement);
