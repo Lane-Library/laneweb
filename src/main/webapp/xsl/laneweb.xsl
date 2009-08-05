@@ -12,8 +12,8 @@
     <xsl:param name="template"/>
     <!-- the request-uri ( not including parameters ) -->
     <xsl:param name="request-uri"/>
-    <!-- the context parameter ( i.e. the base url of the webapp ) -->
-    <xsl:param name="context"/>
+    <!-- the base-path parameter ( i.e. the base url of the webapp ) -->
+    <xsl:param name="base-path"/>
     <!-- the query part of the request -->
     <xsl:param name="query-string"/>
     <!-- http or https -->
@@ -50,8 +50,8 @@
 
     <xsl:param name="name"/>
     
-    <xsl:variable name="request-urix">
-        <xsl:value-of select="substring($request-uri,string-length($context) + 2)"/>
+    <xsl:variable name="path">
+        <xsl:value-of select="substring($request-uri,string-length($base-path) + 1)"/>
     </xsl:variable>
 
     <!-- ==========================  VARIABLES  ========================== -->
@@ -90,38 +90,38 @@
     <xsl:variable name="search-form-select">
         <xsl:choose>
             <xsl:when test="$source"><xsl:value-of select="$source"/></xsl:when>
-            <xsl:when test="starts-with($request-urix,'online/ej')">ej</xsl:when>
-            <xsl:when test="starts-with($request-urix,'online/eb')">book</xsl:when>
-            <xsl:when test="starts-with($request-urix,'online/cc')">cc</xsl:when>
-            <xsl:when test="starts-with($request-urix,'online/db')">database</xsl:when>
-            <xsl:when test="starts-with($request-urix,'online/video')">video</xsl:when>
-            <xsl:when test="starts-with($request-urix,'services')">lanesite</xsl:when>
-            <xsl:when test="starts-with($request-urix,'howto')">lanesite</xsl:when>
-            <xsl:when test="starts-with($request-urix,'bassett')">bassett</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/peds')">peds</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/picu')">peds</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/history')">history</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/bioresearch')">research</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/pharmacy')"
+            <xsl:when test="starts-with($path,'/online/ej')">ej</xsl:when>
+            <xsl:when test="starts-with($path,'/online/eb')">book</xsl:when>
+            <xsl:when test="starts-with($path,'/online/cc')">cc</xsl:when>
+            <xsl:when test="starts-with($path,'/online/db')">database</xsl:when>
+            <xsl:when test="starts-with($path,'/online/video')">video</xsl:when>
+            <xsl:when test="starts-with($path,'/services')">lanesite</xsl:when>
+            <xsl:when test="starts-with($path,'/howto')">lanesite</xsl:when>
+            <xsl:when test="starts-with($path,'/bassett')">bassett</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/peds')">peds</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/picu')">peds</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/history')">history</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/bioresearch')">research</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/pharmacy')"
                 >/portals/pharmacy.html</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/anesthesia')"
+            <xsl:when test="starts-with($path,'/portals/anesthesia')"
                 >/portals/anesthesia.html</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/cardiology')"
+            <xsl:when test="starts-with($path,'/portals/cardiology')"
                 >/portals/cardiology.html</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/hematology')"
+            <xsl:when test="starts-with($path,'/portals/hematology')"
                 >/portals/hematology.html</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/internal-medicine')"
+            <xsl:when test="starts-with($path,'/portals/internal-medicine')"
                 >/portals/internal-medicine.html</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/lpch-cerner')"
+            <xsl:when test="starts-with($path,'/portals/lpch-cerner')"
                 >/portals/lpch-cerner.html</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/pulmonary')"
+            <xsl:when test="starts-with($path,'/portals/pulmonary')"
                 >/portals/pulmonary.html</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/emergency')"
+            <xsl:when test="starts-with($path,'/portals/emergency')"
                 >/portals/emergency.html</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/ethics')"
+            <xsl:when test="starts-with($path,'/portals/ethics')"
                 >/portals/ethics.html</xsl:when>
-            <xsl:when test="starts-with($request-urix,'portals/')">clinical</xsl:when>
-            <xsl:when test="starts-with($request-urix,'local/antibiogram')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/local/antibiogram')">clinical</xsl:when>
             <xsl:when test="$source">
                 <xsl:value-of select="$source"/>
             </xsl:when>
@@ -146,7 +146,7 @@
         <xsl:choose>
             <xsl:when test="$source-doc/h:body/h:div[@id='leftColumn']">yui-t2</xsl:when>
             <xsl:when test="$source-doc/h:body/h:div[@id='rightColumn']">yui-t4</xsl:when>
-            <xsl:when test="contains($request-urix,'search.html')">yui-t4</xsl:when>
+            <xsl:when test="contains($path,'search.html')">yui-t4</xsl:when>
         </xsl:choose>
     </xsl:variable>
 
@@ -305,14 +305,14 @@
     <xsl:template match="h:script/@src[starts-with(.,'/javascript')]">
         <xsl:attribute name="src">
             <xsl:value-of
-                select="concat($context,'/javascript/',$version,substring-after(.,'/javascript'))"/>
+                select="concat($base-path,'/javascript/',$version,substring-after(.,'/javascript'))"/>
         </xsl:attribute>
     </xsl:template>
 
     <!-- put version into css href -->
     <xsl:template match="h:link/@href[starts-with(.,'/style')]">
         <xsl:attribute name="href">
-            <xsl:value-of select="concat($context,'/style/',$version,substring-after(.,'/style'))"/>
+            <xsl:value-of select="concat($base-path,'/style/',$version,substring-after(.,'/style'))"/>
         </xsl:attribute>
     </xsl:template>
 
@@ -332,11 +332,11 @@
         <xsl:choose>
             <xsl:when test="starts-with(@href, '/')">
                 <xsl:choose>
-                    <xsl:when test="$query-string='' and @href = concat('/',$request-urix)">
+                    <xsl:when test="$query-string='' and @href = $path">
                         <xsl:apply-templates select="node()"/>
                     </xsl:when>
                     <xsl:when
-                        test="$query-string != '' and @href = concat('/',$request-urix,'?',$query-string)">
+                        test="$query-string != '' and @href = concat($path,'?',$query-string)">
                         <xsl:apply-templates select="node()"/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -425,7 +425,7 @@
         <xsl:copy>
             <xsl:apply-templates select="attribute::node | child::node()"/>
         </xsl:copy>
-        <a href="#"><img src="{$context}/graphics/icons/arrowUpTransp.gif" alt="up arrow"/> Back to
+        <a href="#"><img src="{$base-path}/graphics/icons/arrowUpTransp.gif" alt="up arrow"/> Back to
             top</a>
     </xsl:template>
 
@@ -434,7 +434,7 @@
         <xsl:copy>
             <xsl:choose>
                 <xsl:when
-                    test="contains($request-urix,h:a/attribute::href) or $query-string and contains(h:a/attribute::href, $query-string)">
+                    test="contains($path,h:a/attribute::href) or $query-string and contains(h:a/attribute::href, $query-string)">
                     <xsl:attribute name="class">activeTab</xsl:attribute>
                     <xsl:apply-templates select="h:a/child::node()"/>
                 </xsl:when>
@@ -466,7 +466,7 @@
                     <xsl:value-of select="replace(.,'\{search-terms\}',$regex-search-terms)"/>
                 </xsl:attribute>
             </xsl:when>
-            <xsl:when test="starts-with(.,'http://') and starts-with($request-urix,'secure')">
+            <xsl:when test="starts-with(.,'http://') and starts-with($path,'/secure')">
                 <xsl:attribute name="href">
                     <xsl:value-of select="."/>
                 </xsl:attribute>
@@ -489,7 +489,7 @@
         <xsl:attribute name="{name()}">
             <xsl:choose>
                 <xsl:when test="starts-with(.,'/')">
-                    <xsl:value-of select="concat($context,.)"/>
+                    <xsl:value-of select="concat($base-path,.)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="."/>
@@ -506,7 +506,7 @@
     
     <xsl:template match="@*[.='{request-uri}']">
         <xsl:attribute name="{name()}">
-            <xsl:value-of select="$request-urix"/>
+            <xsl:value-of select="$path"/>
         </xsl:attribute>
     </xsl:template>
 
@@ -518,7 +518,7 @@
             <xsl:apply-templates select="$source-doc/h:head/node()[not(self::h:title)]"/>
             <xsl:if
                 test="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
-                <script type="text/javascript" src="{$context}/javascript/{$version}/swfobject.js"><xsl:text> </xsl:text></script>
+                <script type="text/javascript" src="{$base-path}/javascript/{$version}/swfobject.js"><xsl:text> </xsl:text></script>
                 <script type="text/javascript">
                     <xsl:for-each select="$source-doc/h:body//h:object[@type='application/x-shockwave-flash' and @id]">
                         <xsl:text>swfobject.registerObject('</xsl:text>
@@ -527,7 +527,7 @@
                             <xsl:text>','</xsl:text>
                             <xsl:value-of select="h:param[@name='flash-version']/@value"/>
                             <xsl:if test="h:param[@name='flash-for-upgrade']/@value = 'true'">
-                                <xsl:value-of select="concat(&quot;','&quot;,$context,'/flash/playerProductInstall.swf')"/>
+                                <xsl:value-of select="concat(&quot;','&quot;,$base-path,'/flash/playerProductInstall.swf')"/>
                             </xsl:if>
                         </xsl:if>
                         <xsl:text>');</xsl:text>
@@ -545,7 +545,7 @@
     <xsl:template match="h:title">
         <xsl:copy>
             <xsl:choose>
-                <xsl:when test="concat('/',$request-urix) = '/index.html'">
+                <xsl:when test="$path = '/index.html'">
                     <xsl:value-of select="."/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -649,7 +649,7 @@
                         <xsl:when test="$class='bgTab'">
                             <xsl:variable name="href">
                                 <xsl:value-of
-                                    select="concat($context,'/',$request-urix,'?loadTab=',$id)"/>
+                                    select="concat($request-uri,'?loadTab=',$id)"/>
                                 <!-- add query and source so tabbed portals work as a search template -->
                                 <xsl:if test="$q and $source">
                                     <xsl:value-of
@@ -710,7 +710,7 @@
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
                 <xsl:attribute name="href">
-                    <xsl:value-of select="concat($context,'/',$request-urix)"/>
+                    <xsl:value-of select="$request-uri"/>
                     <xsl:choose>
                         <xsl:when test="$query-string = ''">
                             <xsl:text>?proxy-links=true</xsl:text>
@@ -741,7 +741,7 @@
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()"/>
                 <xsl:attribute name="href">
-                    <xsl:value-of select="concat($context,'/',$request-urix)"/>
+                    <xsl:value-of select="$request-uri"/>
                     <xsl:choose>
                         <xsl:when test="$query-string = ''">
                             <xsl:text>?proxy-links=false</xsl:text>
@@ -809,7 +809,7 @@
         </xsl:variable>
         <xsl:attribute name="{$attr}">
             <xsl:if test="starts-with($link, '/')">
-                <xsl:value-of select="$context"/>
+                <xsl:value-of select="$base-path"/>
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="contains($link,'{keywords}')">
@@ -871,11 +871,11 @@
                         />
                     </xsl:when>
                     <xsl:otherwise>
-                        <xsl:value-of select="$request-urix"/>
+                        <xsl:value-of select="substring($path,2)"/>
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:with-param>
-            <!--<xsl:with-param name="uri-remaining" select="$request-urix"/>-->
+            <!--<xsl:with-param name="uri-remaining" select="$path"/>-->
         </xsl:call-template>
     </xsl:template>
     <!-- does most of the breadcrumb work -->
@@ -887,7 +887,7 @@
             <xsl:value-of select="$sitemap//h:a[@href=concat($uri-before,'index.html')]"/>
         </xsl:variable>
         <xsl:variable name="uri-next" select="substring-after($uri-remaining, '/')"/>
-        <!--       <div>uri-before <xsl:value-of select="$uri-before"/></div>
+        <!--<div>uri-before <xsl:value-of select="$uri-before"/></div>
         <div>uri-remaining <xsl:value-of select="$uri-remaining"/></div>
         <div>uri-current <xsl:value-of select="$uri-current"/></div>
         <div>label-current <xsl:value-of select="$label-current"/></div>

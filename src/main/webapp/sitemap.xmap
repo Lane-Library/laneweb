@@ -177,7 +177,7 @@
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="${request/serverName}"/>
                     <map:parameter name="request-uri" value="${request/requestURI}"/>
-                    <map:parameter name="context" value="${request/contextPath}"/>
+                    <map:parameter name="base-path" value="${request/contextPath}"/>
                     <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
@@ -222,7 +222,7 @@
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="${request/serverName}"/>
                     <map:parameter name="request-uri" value="${request/requestURI}"/>
-                    <map:parameter name="context" value="${request/contextPath}"/>
+                    <map:parameter name="base-path" value="${request/contextPath}"/>
                     <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
@@ -285,7 +285,7 @@
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="host" value="${request/serverName}"/>
                     <map:parameter name="request-uri" value="${request/requestURI}"/>
-                    <map:parameter name="context" value="${request/contextPath}"/>
+                    <map:parameter name="base-path" value="${request/contextPath}"/>
                     <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>

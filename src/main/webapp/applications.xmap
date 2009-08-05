@@ -33,7 +33,7 @@
                         <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                     </map:transform>
                     <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
-                        <map:parameter name="context" value=""/>
+                        <map:parameter name="base-path" value=""/>
                         <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                         <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                         <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>

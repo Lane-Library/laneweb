@@ -69,7 +69,7 @@
                         <map:transform type="saxon" src="xsl/laneweb.xsl">
                             <map:parameter name="host" value="${request/serverName}"/>
                             <map:parameter name="request-uri" value="${request/requestURI}"/>
-                            <map:parameter name="context"
+                            <map:parameter name="base-path"
                                 value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
@@ -91,7 +91,7 @@
                         <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                             <map:parameter name="host" value="${request/serverName}"/>
                             <map:parameter name="request-uri" value="${request/requestURI}"/>
-                            <map:parameter name="context" value="/your-sunet-id"/>
+                            <map:parameter name="base-path" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
@@ -132,7 +132,7 @@
                         <map:transform type="saxon" src="xsl/laneweb.xsl">
                             <map:parameter name="host" value="${request/serverName}"/>
                             <map:parameter name="request-uri" value="${request/requestURI}"/>
-                            <map:parameter name="context" value="/your-sunet-id"/>
+                            <map:parameter name="base-path" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
@@ -153,7 +153,7 @@
                         <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                             <map:parameter name="host" value="${request/serverName}"/>
                             <map:parameter name="request-uri" value="${request/requestURI}"/>
-                            <map:parameter name="context" value="/your-sunet-id"/>
+                            <map:parameter name="base-path" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
