@@ -431,7 +431,6 @@
                 </property>
             </bean>
         </property>
-        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/loginAction"
