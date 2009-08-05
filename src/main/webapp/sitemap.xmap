@@ -87,6 +87,9 @@
                 <map:act type="webdash">
                     <map:parameter name="nonce" value="${request/parameters/nonce}"/>
                     <map:parameter name="system-user-id" value="${request/parameters/system_user_id}"/>
+                    <map:parameter name="sunet-id" value="${session/attributes/user/sunetId}"/>
+                    <map:parameter name="name" value="${session/attributes/user/name}"/>
+                    <map:parameter name="affilation" value="${session/attributes/user/affiliation}"/>
                     <map:redirect-to uri="{webdash-url}"/>
                 </map:act>
             </map:match>

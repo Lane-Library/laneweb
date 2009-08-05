@@ -11,8 +11,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.log4j.Logger;
 
-import edu.stanford.irt.laneweb.user.User;
-
 public class WebdashLogin {
 
     private static final String ERROR_URL = "/webdashError.html";
@@ -24,26 +22,34 @@ public class WebdashLogin {
     private Logger logger = Logger.getLogger(WebdashLogin.class);
 
     private Mac mac;
-
-    public String getWebdashURL(final User person, final String nonce, final String systemUserId) {
+    
+    public String getWebdashURL(String sunetId, String name, String affiliation, String nonce, String systemUserId) {
         if (null == this.mac) {
             throw new IllegalStateException("webdashKey not set");
         }
-        if (null == person) {
-            this.logger.error("null person");
+        if (null == sunetId || sunetId.length() == 0) {
+            this.logger.error("null sunetId");
             return ERROR_URL;
         }
-        if (null == nonce) {
+        if (null == name || name.length() == 0) {
+            this.logger.error("null name");
+            return ERROR_URL;
+        }
+        if (null == affiliation || affiliation.length() == 0) {
+            this.logger.error("null affiliation");
+            return ERROR_URL;
+        }
+        if (null == nonce || nonce.length() == 0) {
             this.logger.error("null nonce");
             return ERROR_URL;
         }
-        String userId = encodeParameter(person.getSunetId());
-        String mail = encodeParameter(userId.concat("@stanford.edu"));
-        String fullName = encodeParameter(person.getName());
-        String affiliation = getSubGroup(person);
+        String encodedId = encodeParameter(sunetId);
+        String mail = encodeParameter(sunetId.concat("@stanford.edu"));
+        String fullName = encodeParameter(name);
+        String encodedAffiliation = getSubGroup(affiliation);
         StringBuffer result = new StringBuffer();
-        result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce).append("&subgroup=").append(affiliation)
-                .append("&system_short_name=stanford-sunet&system_user_id=").append(userId);
+        result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce).append("&subgroup=").append(encodedAffiliation)
+                .append("&system_short_name=stanford-sunet&system_user_id=").append(encodedId);
         String token = getToken(result.toString());
         result.append("&token=").append(token);
         result.insert(0, systemUserId == null ? REGISTRATION_URL : LOGIN_URL);
@@ -66,9 +72,6 @@ public class WebdashLogin {
     }
 
     private String encodeParameter(final String parameter) {
-        if (null == parameter) {
-            throw new IllegalArgumentException("null parameter");
-        }
         try {
             return URLEncoder.encode(parameter, "UTF-8").replaceAll("\\+", "%20");
         } catch (UnsupportedEncodingException e) {
@@ -76,11 +79,7 @@ public class WebdashLogin {
         }
     }
 
-    private String getSubGroup(final User person) {
-        String affiliation = person.getAffilation();
-        if (null == affiliation) {
-            throw new RuntimeException("no affiliations for " + person.getName());
-        }
+    private String getSubGroup(final String affiliation) {
         return affiliation.substring(affiliation.indexOf(':') + 1);
     }
 

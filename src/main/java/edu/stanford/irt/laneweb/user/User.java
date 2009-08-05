@@ -31,7 +31,7 @@ public class User {
 
     private String univId;
 
-    public String getAffilation() {
+    public String getAffiliation() {
         return this.affiliation;
     }
 
