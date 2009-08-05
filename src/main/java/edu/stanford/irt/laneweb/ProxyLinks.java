@@ -1,14 +1,13 @@
-package edu.stanford.irt.laneweb.inputmodule;
+package edu.stanford.irt.laneweb;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.User;
 
-public class ProxyLinks extends AbstractInputModule {
+public class ProxyLinks {
 
     private List<String> noProxyRegex;
 
@@ -40,8 +39,7 @@ public class ProxyLinks extends AbstractInputModule {
         return false;
     }
 
-    @Override
-    protected Object doGetAttribute(final String key, final User user, final HttpServletRequest request) {
+    public Boolean proxyLinks(final User user, final HttpServletRequest request) {
         if (null != user.getProxyLinks()) {
             return user.getProxyLinks();
         }

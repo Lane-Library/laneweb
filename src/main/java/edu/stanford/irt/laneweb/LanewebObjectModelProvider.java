@@ -19,17 +19,19 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
     private ProcessInfoProvider processInfoProvider;
     private Map<String, Object> jndiData;
     private UserDao userDao;
+    private ProxyLinks proxyLinks;
     
-    public LanewebObjectModelProvider(ProcessInfoProvider pip, Map<String, Object> jndiData, UserDao userDao) {
+    public LanewebObjectModelProvider(ProcessInfoProvider pip, Map<String, Object> jndiData, UserDao userDao, ProxyLinks proxyLinks) {
         this.processInfoProvider = pip;
         this.jndiData = jndiData;
         this.userDao = userDao;
+        this.proxyLinks = proxyLinks;
     }
 
     public Object getObject() {
         Map objectModel = processInfoProvider.getObjectModel();
         
-        Map cocoonMap = new HashMap();
+        Map<String, Object> cocoonMap = new HashMap<String, Object>();
         
         //cocoon.request
         Request request = ObjectModelHelper.getRequest(objectModel);
@@ -44,6 +46,8 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             session.setAttribute(LanewebConstants.USER, user);
         }
         this.userDao.getUserData(user, request);
+        
+        cocoonMap.put("proxyLinks", this.proxyLinks.proxyLinks(user, request));
         
         // cocoon.context
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);

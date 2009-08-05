@@ -72,7 +72,7 @@
                             <map:parameter name="context"
                                 value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
-                            <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                            <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                             <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                             <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
@@ -93,7 +93,7 @@
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
-                            <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                            <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                             <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                             <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
@@ -110,7 +110,7 @@
                     </map:otherwise>
                 </map:select>
                 <map:transform type="proxy-links">
-                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                     <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
@@ -134,7 +134,7 @@
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
-                            <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                            <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                             <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                             <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
@@ -155,7 +155,7 @@
                             <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                             <map:parameter name="context" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
-                            <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                            <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                             <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                             <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
@@ -172,7 +172,7 @@
                     </map:otherwise>
                 </map:select>
                 <map:transform type="proxy-links">
-                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                     <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>

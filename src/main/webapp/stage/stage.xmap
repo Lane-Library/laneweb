@@ -68,7 +68,7 @@
                 <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="path" value="${request/parameters/path}"/>
                     <map:parameter name="entryUrl" value="${request/parameters/entryUrl}"/>
                     <map:parameter name="title" value="${request/parameters/title}"/>
@@ -106,7 +106,7 @@
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}/stage"/>
                     <map:parameter name="query-string" value="{request:queryString}"/>
-                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                     <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
@@ -122,7 +122,7 @@
                     <map:parameter name="name" value="${session/attributes/user/name}"/>
                 </map:transform>
                 <map:transform type="proxy-links">
-                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                     <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
@@ -144,7 +144,7 @@
                     <map:parameter name="request-uri" value="{request-uri:requestURI}"/>
                     <map:parameter name="context" value="{request:contextPath}/stage"/>
                     <map:parameter name="query-string" value="{request:queryString}"/>
-                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                     <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
@@ -160,7 +160,7 @@
                     <map:parameter name="name" value="${session/attributes/user/name}"/>
                 </map:transform>
                 <map:transform type="proxy-links">
-                    <map:parameter name="proxy-links" value="{proxy-links:}"/>
+                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                     <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
