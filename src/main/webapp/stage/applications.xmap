@@ -30,13 +30,13 @@
                 <map:match pattern="search/proxy/xml" type="wildcard">
                     <map:generate type="search"/>
                     <map:transform type="cme-links">
-                        <map:parameter name="emrid" value="{user:emrid}"/>
+                        <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                     </map:transform>
                     <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
                         <map:parameter name="context" value=""/>
-                        <map:parameter name="sunetid" value="{user:sunetid}"/>
-                        <map:parameter name="ticket" value="{user:ticket}"/>
-                        <map:parameter name="ip-group" value="{user:ip-group}"/>
+                        <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                        <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
+                        <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
                         <map:parameter name="proxy-links" value="{proxy-links:}"/>
                     </map:transform>
                     <map:serialize type="xml"/>

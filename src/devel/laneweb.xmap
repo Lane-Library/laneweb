@@ -38,7 +38,7 @@
             </map:match>
             <map:match pattern="redirect/cme" type="wildcard">
                 <map:act type="cmeRedirectAction">
-                    <map:parameter name="emrid" value="{user:emrid}"/>
+                    <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                     <map:parameter name="host" value="${request/parameters/host}"/>
                     <map:parameter name="query-string" value="{request:queryString}"/>
                     <map:redirect-to uri="{cme-redirect}"/>
@@ -60,7 +60,7 @@
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
                 <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="{user:emrid}"/>
+                    <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
@@ -71,9 +71,9 @@
                                 value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
                             <map:parameter name="proxy-links" value="{proxy-links:}"/>
-                            <map:parameter name="sunetid" value="{user:sunetid}"/>
-                            <map:parameter name="ticket" value="{user:ticket}"/>
-                            <map:parameter name="ip-group" value="{user:ip-group}"/>
+                            <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                            <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
+                            <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
                             <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
@@ -82,7 +82,7 @@
                             <map:parameter name="m" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
-                            <map:parameter name="name" value="{user:name}"/>
+                            <map:parameter name="name" value="${session/attributes/user/name}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
@@ -92,9 +92,9 @@
                             <map:parameter name="context" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
                             <map:parameter name="proxy-links" value="{proxy-links:}"/>
-                            <map:parameter name="sunetid" value="{user:sunetid}"/>
-                            <map:parameter name="ticket" value="{user:ticket}"/>
-                            <map:parameter name="ip-group" value="{user:ip-group}"/>
+                            <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                            <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
+                            <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
                             <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
@@ -103,15 +103,15 @@
                             <map:parameter name="m" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
-                            <map:parameter name="name" value="{user:name}"/>
+                            <map:parameter name="name" value="${session/attributes/user/name}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
-                    <map:parameter name="sunetid" value="{user:sunetid}"/>
-                    <map:parameter name="ticket" value="{user:ticket}"/>
-                    <map:parameter name="ip-group" value="{user:ip-group}"/>
+                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
+                    <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
@@ -123,7 +123,7 @@
                     <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
                 </map:aggregate>
                 <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="{user:emrid}"/>
+                    <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                 </map:transform>
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
@@ -133,9 +133,9 @@
                             <map:parameter name="context" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
                             <map:parameter name="proxy-links" value="{proxy-links:}"/>
-                            <map:parameter name="sunetid" value="{user:sunetid}"/>
-                            <map:parameter name="ticket" value="{user:ticket}"/>
-                            <map:parameter name="ip-group" value="{user:ip-group}"/>
+                            <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                            <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
+                            <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
                             <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
@@ -144,7 +144,7 @@
                             <map:parameter name="m" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
-                            <map:parameter name="name" value="{user:name}"/>
+                            <map:parameter name="name" value="${session/attributes/user/name}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
@@ -154,9 +154,9 @@
                             <map:parameter name="context" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="{request:queryString}"/>
                             <map:parameter name="proxy-links" value="{proxy-links:}"/>
-                            <map:parameter name="sunetid" value="{user:sunetid}"/>
-                            <map:parameter name="ticket" value="{user:ticket}"/>
-                            <map:parameter name="ip-group" value="{user:ip-group}"/>
+                            <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                            <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
+                            <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
                             <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
@@ -165,15 +165,15 @@
                             <map:parameter name="m" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="{header-attribute:referer}"/>
-                            <map:parameter name="name" value="{user:name}"/>
+                            <map:parameter name="name" value="${session/attributes/user/name}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="{proxy-links:}"/>
-                    <map:parameter name="sunetid" value="{user:sunetid}"/>
-                    <map:parameter name="ticket" value="{user:ticket}"/>
-                    <map:parameter name="ip-group" value="{user:ip-group}"/>
+                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
+                    <map:parameter name="ip-group" value="${session/attributes/user/iPGroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xhtml"/>
