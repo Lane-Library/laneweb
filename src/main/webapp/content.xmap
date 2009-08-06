@@ -35,8 +35,8 @@
                 <map:generate type="html" src="${jndi/live-base}/content/secure/reloadresources.html"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="random" type="wildcard">
-                <map:generate type="file" src="${request/parameters/source}"/>
+            <map:match pattern="random/**" type="wildcard">
+                <map:generate type="file" src="{1}"/>
                 <map:transform type="saxon" src="context://xsl/random.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -119,10 +119,10 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
-            <map:match pattern="faq-category-list.html" type="wildcard">
-                <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{mt-munge:${request/parameters/category}}.xml"/>
+            <map:match pattern="faq-category-list.html/*" type="wildcard">
+                <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{mt-munge:{1}}.xml"/>
                 <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
-                    <map:parameter name="category" value="${request/parameters/category}"/>
+                    <map:parameter name="category" value="{mt-munge:{1}}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -154,6 +154,7 @@
             </map:match>
             <map:match pattern="**" type="wildcard">
                 <map:generate type="html" src="${jndi/live-base}/content/{1}"/>
+                <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>

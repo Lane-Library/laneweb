@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.inputmodule;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -13,7 +15,11 @@ public class MTMungingInputModule implements InputModule {
 
     @SuppressWarnings("unchecked")
     public Object getAttribute(final String name, final Configuration modeConf, final Map objectModel) {
-        return this.pattern.matcher(name).replaceAll(" ").trim().replace(' ', '_').toLowerCase();
+        try {
+            return this.pattern.matcher(URLDecoder.decode(name,"UTF-8")).replaceAll(" ").trim().replace(' ', '_').toLowerCase();
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @SuppressWarnings("unchecked")

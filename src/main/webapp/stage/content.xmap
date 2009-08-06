@@ -135,6 +135,7 @@
             </map:match>
             <map:match pattern="**" type="wildcard">
                 <map:generate type="html" src="${jndi/stage-base}/content/{1}"/>
+                <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
