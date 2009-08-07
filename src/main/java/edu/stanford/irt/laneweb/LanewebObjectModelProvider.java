@@ -47,8 +47,6 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             }
             this.userDao.getUserData(user, request);
             cocoonMap.put("proxyLinks", this.proxyLinks.proxyLinks(user, request));
-        } else {
-            cocoonMap.put("proxyLinks", Boolean.TRUE);
         }
         // cocoon.context
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);
