@@ -204,7 +204,6 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
-                <map:act type="create-session"/>
                 <map:aggregate element="doc" label="content">
                     <map:part src="cocoon:/content/{1}.html"/>
                     <map:part src="cocoon:/content/sitemap.html"/>

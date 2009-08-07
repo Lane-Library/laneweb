@@ -37,8 +37,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         Request request = ObjectModelHelper.getRequest(objectModel);
         cocoonMap.put("request", request);
         // cocoon.session
-        HttpSession session = request.getSession(false);
-        if (null != session) {
+        HttpSession session = request.getSession(true);
             cocoonMap.put("session", session);
             User user = (User) session.getAttribute(LanewebConstants.USER);
             if (null == user) {
@@ -47,7 +46,6 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             }
             this.userDao.getUserData(user, request);
             cocoonMap.put("proxyLinks", this.proxyLinks.proxyLinks(user, request));
-        }
         // cocoon.context
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);
         cocoonMap.put("context", context);

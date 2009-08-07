@@ -418,10 +418,7 @@
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/cmeRedirectAction"
-        class="edu.stanford.irt.laneweb.cme.CMERedirectAction"/> 
-    
-    <bean name="org.apache.cocoon.acting.Action/create-session"
-        class="edu.stanford.irt.laneweb.CreateSessionAction"/> 
+        class="edu.stanford.irt.laneweb.cme.CMERedirectAction"/>
 
     <bean name="org.apache.cocoon.acting.Action/search-context-reloader"
         class="edu.stanford.irt.laneweb.search.SearchContextReloaderAction" scope="singleton">
