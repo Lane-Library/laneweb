@@ -67,19 +67,16 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
                         <map:transform type="saxon" src="xsl/laneweb.xsl">
-                            <map:parameter name="host" value="${request/serverName}"/>
                             <map:parameter name="request-uri" value="${request/requestURI}"/>
                             <map:parameter name="base-path"
                                 value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                            <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                             <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
-                            <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                            <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
-                            <map:parameter name="debug" value="${request/parameters/debug}"/>
                             <map:parameter name="source" value="${request/parameters/source}"/>
                             <map:parameter name="m" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>
@@ -89,18 +86,15 @@
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                            <map:parameter name="host" value="${request/serverName}"/>
                             <map:parameter name="request-uri" value="${request/requestURI}"/>
                             <map:parameter name="base-path" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                            <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                             <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
-                            <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                            <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
-                            <map:parameter name="debug" value="${request/parameters/debug}"/>
                             <map:parameter name="source" value="${request/parameters/source}"/>
                             <map:parameter name="m" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>
@@ -130,18 +124,15 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
                         <map:transform type="saxon" src="xsl/laneweb.xsl">
-                            <map:parameter name="host" value="${request/serverName}"/>
                             <map:parameter name="request-uri" value="${request/requestURI}"/>
                             <map:parameter name="base-path" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                            <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                             <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
-                            <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                            <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
-                            <map:parameter name="debug" value="${request/parameters/debug}"/>
                             <map:parameter name="source" value="${request/parameters/source}"/>
                             <map:parameter name="m" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>
@@ -151,18 +142,15 @@
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                            <map:parameter name="host" value="${request/serverName}"/>
                             <map:parameter name="request-uri" value="${request/requestURI}"/>
                             <map:parameter name="base-path" value="/your-sunet-id"/>
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                            <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                             <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
-                            <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                            <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
-                            <map:parameter name="debug" value="${request/parameters/debug}"/>
                             <map:parameter name="source" value="${request/parameters/source}"/>
                             <map:parameter name="m" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>

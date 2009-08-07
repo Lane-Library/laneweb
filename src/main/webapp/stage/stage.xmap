@@ -8,12 +8,6 @@
                 <map:read src="${jndi/stage-base}/content/TMP{1}"
                     mime-type="text/html" type="resource"/>
             </map:match>
-            <map:match pattern="" type="wildcard">
-                <map:redirect-to uri="/stage/index.html"/>
-            </map:match>
-            <map:match pattern="**/" type="wildcard">
-                <map:redirect-to uri="/stage/{1}/index.html"/>
-            </map:match>
             <map:match pattern="extensions/**" type="wildcard">
                 <map:mount uri-prefix="extensions" check-reload="no"
                     src="context://stage/extensions.xmap"/>
@@ -84,14 +78,6 @@
                     <map:redirect-to uri="{form-redirect-key}"/>
                 </map:act>
             </map:match>
-            <!-- ========================== permenent redirects ============================ -->
-            <map:match pattern="classes/index.html" type="wildcard">
-                <map:redirect-to uri="/stage/services/workshops/laneclasses.html"/>
-            </map:match>
-            <map:match pattern="clinician/index.html" type="wildcard">
-                <map:redirect-to uri="/stage/portals/clinical.html"/>
-            </map:match>
-            <!-- ========================== permenent redirects ============================ -->
             <map:match pattern="plain/secure/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/plain/error.html"/>
                 <map:serialize type="xhtml" status-code="403"/>
@@ -102,18 +88,15 @@
                     <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                    <map:parameter name="host" value="${request/serverName}"/>
                     <map:parameter name="request-uri" value="${request/requestURI}"/>
                     <map:parameter name="base-path" value="${request/contextPath}/stage"/>
                     <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                     <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                     <map:parameter name="q" value="${request/parameters/q}"/>
-                    <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                    <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                     <map:parameter name="template" value="${request/parameters/template}"/>
-                    <map:parameter name="debug" value="${request/parameters/debug}"/>
                     <map:parameter name="source" value="${request/parameters/source}"/>
                     <map:parameter name="m" value="${request/parameters/m}"/>
                     <map:parameter name="t" value="${request/parameters/t}"/>
@@ -140,18 +123,15 @@
                     <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                    <map:parameter name="host" value="${request/serverName}"/>
                     <map:parameter name="request-uri" value="${request/requestURI}"/>
                     <map:parameter name="base-path" value="${request/contextPath}/stage"/>
                     <map:parameter name="query-string" value="${request/queryString}"/>
                     <map:parameter name="proxy-links" value="${proxyLinks}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                     <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                     <map:parameter name="q" value="${request/parameters/q}"/>
-                    <map:parameter name="loadTab" value="${request/parameters/loadTab}"/>
+                    <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                     <map:parameter name="template" value="${request/parameters/template}"/>
-                    <map:parameter name="debug" value="${request/parameters/debug}"/>
                     <map:parameter name="source" value="${request/parameters/source}"/>
                     <map:parameter name="m" value="${request/parameters/m}"/>
                     <map:parameter name="t" value="${request/parameters/t}"/>

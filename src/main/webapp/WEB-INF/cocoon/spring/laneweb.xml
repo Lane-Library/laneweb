@@ -13,6 +13,14 @@
                 <value>PROPFIND</value>
             </set>
         </property>
+        <property name="redirectMap">
+            <map>
+                <entry key="(.*)/" value="$1/index.html"/>
+                <entry key="(.*)/liaisons/index.html" value="$1/contacts/index.html?loadTab=liaisons"/>
+                <entry key="(.*)/classes/index.html" value="$1/services/workshops/laneclasses.html"/>
+                <entry key="(.*)/clinician/index.html" value="$1/portals/clinical.html"/>
+            </map>
+        </property>
         <lookup-method name="getRequestProcessor" bean="org.apache.cocoon.servlet.RequestProcessor"
         />
     </bean>

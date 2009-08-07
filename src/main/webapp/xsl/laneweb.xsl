@@ -16,10 +16,6 @@
     <xsl:param name="base-path"/>
     <!-- the query part of the request -->
     <xsl:param name="query-string"/>
-    <!-- http or https -->
-    <xsl:param name="scheme"/>
-
-    <xsl:param name="host"/>
 
     <!-- the search query -->
     <xsl:param name="q"/>
@@ -27,8 +23,6 @@
     <xsl:param name="source"/>
 
     <xsl:param name="proxy-links"/>
-
-    <xsl:param name="ticket"/>
 
     <xsl:param name="sunetid"/>
 
@@ -42,7 +36,7 @@
     <xsl:param name="t"/>
 
     <!-- loadTab parameter -->
-    <xsl:param name="loadTab"/>
+    <xsl:param name="load-tab"/>
 
     <xsl:param name="version"/>
 
@@ -626,13 +620,13 @@
                     </xsl:variable>
                     <xsl:variable name="class">
                         <xsl:choose>
-                            <xsl:when test="$loadTab != '' and $loadTab = $id">activeTab</xsl:when>
-                            <xsl:when test="$loadTab = '' and contains(@class, 'activeTab')"
+                            <xsl:when test="$load-tab != '' and $load-tab = $id">activeTab</xsl:when>
+                            <xsl:when test="$load-tab = '' and contains(@class, 'activeTab')"
                                 >activeTab</xsl:when>
                             <xsl:otherwise>
                                 <xsl:choose>
                                     <xsl:when
-                                        test="$loadTab = '' and not(../h:h2[contains(@class, 'activeTab')]) and position()=1"
+                                        test="$load-tab = '' and not(../h:h2[contains(@class, 'activeTab')]) and position()=1"
                                         >activeTab</xsl:when>
                                     <xsl:otherwise>bgTab</xsl:otherwise>
                                 </xsl:choose>
@@ -687,9 +681,9 @@
                 </xsl:variable>
                 <xsl:if
                     test="(count(parent::h:div/h:h2) = 1)
-                    or ($loadTab != '' and $loadTab = $id) 
-                    or ($loadTab = '' and @class = 'activeTab') 
-                    or ($loadTab = '' and not(../h:h2[@class = 'activeTab']) and position()!=1)">
+                    or ($load-tab != '' and $load-tab = $id) 
+                    or ($load-tab = '' and @class = 'activeTab') 
+                    or ($load-tab = '' and not(../h:h2[@class = 'activeTab']) and position()!=1)">
                     <xsl:apply-templates
                         select="following-sibling::node()[not(@id='otherPortalOptions') and count(following-sibling::h:h2) = $stop-point]"
                     />
