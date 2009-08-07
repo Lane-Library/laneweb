@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2009-08-07" version="1.9.23" description="1.9.23 bug fix release">
+            <action date="2009-08-07" dev="ceyates" issue="30300" type="fix">
+                Genre ebook tab broken
+            </action>
+        </release>
         <release date="2009-07-29" version="1.9.22" description="1.9.22 bug fix release">
             <action date="2009-07-29" dev="ceyates" issue="30150" type="fix">
                 Hosptial IPs being redirect to webauth for proxy server
