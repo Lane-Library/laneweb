@@ -4,7 +4,8 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="throttling">
-            <map:parameter name="request-key" value="${request/remoteHost}/${request/requestURI}/${request/queryString}"/>
+            <map:parameter name="request-key"
+                value="${request/remoteHost}/${request/requestURI}/${request/queryString}"/>
             <map:match pattern="search" type="wildcard">
                 <map:generate type="er-search">
                     <map:parameter name="query" value="${request/parameters/q}"/>
@@ -13,29 +14,20 @@
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="browse" type="wildcard">
-                <map:match pattern="browse/t/*" type="wildcard">
-                    <map:generate type="er-browse">
-                        <map:parameter name="alpha" value="${request/parameters/a}"/>
-                        <map:parameter name="mesh" value="${request/parameters/m}"/>
-                        <map:parameter name="subset" value="${request/parameters/s}"/>
-                        <map:parameter name="type" value="{1}"/>
-                    </map:generate>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <map:match pattern="browse/s/*" type="wildcard">
-                    <map:generate type="er-browse">
-                        <map:parameter name="alpha" value="${request/parameters/a}"/>
-                        <map:parameter name="mesh" value="${request/parameters/m}"/>
-                        <map:parameter name="subset" value="{1}"/>
-                        <map:parameter name="type" value="${request/parameters/t}"/>
-                    </map:generate>
-                    <map:serialize type="xml"/>
-                </map:match>
+            <map:match pattern="browse/t/*" type="wildcard">
                 <map:generate type="er-browse">
                     <map:parameter name="alpha" value="${request/parameters/a}"/>
                     <map:parameter name="mesh" value="${request/parameters/m}"/>
                     <map:parameter name="subset" value="${request/parameters/s}"/>
+                    <map:parameter name="type" value="{1}"/>
+                </map:generate>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="browse/s/*" type="wildcard">
+                <map:generate type="er-browse">
+                    <map:parameter name="alpha" value="${request/parameters/a}"/>
+                    <map:parameter name="mesh" value="${request/parameters/m}"/>
+                    <map:parameter name="subset" value="{1}"/>
                     <map:parameter name="type" value="${request/parameters/t}"/>
                 </map:generate>
                 <map:serialize type="xml"/>

@@ -22,6 +22,7 @@
             <map:match pattern="online/(.+)browse.html" type="regexp">
                 <map:generate type="html"
                     src="${jndi/stage-base}/content/online/{1}browse.html"/>
+                <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>
