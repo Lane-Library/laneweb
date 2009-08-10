@@ -28,6 +28,11 @@ public class XIncludeParameterMungingTransformer extends AbstractTransformer imp
                 StringBuilder builder = new StringBuilder(st.nextToken());
                 while (st.hasMoreTokens()) {
                     String token = st.nextToken();
+                    if ("t".equals(token)) {
+                        token = "type";
+                    } else if ("s".equals(token)) {
+                        token = "subset";
+                    }
                     if (!"category".equals(token) && !"source".equals(token)) {
                         builder.append('/').append(token);
                     }

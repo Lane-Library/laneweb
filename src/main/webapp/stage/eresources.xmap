@@ -48,7 +48,7 @@
                     <map:parameter name="query" value="${request/parameters/q}"/>
                 </map:read>
             </map:match>
-            <map:match pattern="browse/t/*" type="wildcard">
+            <map:match pattern="browse/type/*" type="wildcard">
                 <map:generate type="er-browse">
                     <map:parameter name="alpha" value="${request/parameters/a}"/>
                     <map:parameter name="mesh" value="${request/parameters/m}"/>
@@ -57,7 +57,7 @@
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="browse/s/*" type="wildcard">
+            <map:match pattern="browse/subset/*" type="wildcard">
                 <map:generate type="er-browse">
                     <map:parameter name="alpha" value="${request/parameters/a}"/>
                     <map:parameter name="mesh" value="${request/parameters/m}"/>
