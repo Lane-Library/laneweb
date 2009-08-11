@@ -61,6 +61,7 @@
                         <map:parameter name="q" value="${request/parameters/q}"/>
                         <map:parameter name="source" value="${request/parameters/source}"/>
                     </map:transform>
+                    <map:transform type="xinclude-munging"/>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
                     <map:serialize type="xml"/>
@@ -77,6 +78,7 @@
                     <map:parameter name="q" value="${request/parameters/q}"/>
                     <map:parameter name="source" value="${request/parameters/source}"/>
                 </map:transform>
+                <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>

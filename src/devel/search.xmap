@@ -81,6 +81,7 @@
                             </map:transform>
                         </map:otherwise>
                     </map:select>
+                    <map:transform type="xinclude-munging"/>
                     <map:transform type="xinclude"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-post.xsl">
@@ -114,6 +115,7 @@
                         </map:transform>
                     </map:otherwise>
                 </map:select>
+                <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-post.xsl">
