@@ -32,12 +32,12 @@
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="mesh" type="wildcard">
+            <map:match pattern="mesh/type/*" type="wildcard">
                 <map:generate type="er-mesh">
                     <map:parameter name="alpha" value="${request/parameters/a}"/>
                     <map:parameter name="mesh" value="${request/parameters/m}"/>
                     <map:parameter name="subset" value="${request/parameters/s}"/>
-                    <map:parameter name="type" value="${request/parameters/t}"/>
+                    <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
