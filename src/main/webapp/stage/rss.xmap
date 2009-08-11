@@ -16,10 +16,6 @@
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="no" src="context://stage/applications.xmap"/>
             </map:match>
-       </map:pipeline>
-        
-        <map:pipeline type="expires">
-            <map:parameter name="cache-key" value="${request/requestURI};rss-url=${request/parameters/rss-url}"/>
             <map:match pattern="ncbi-rss2html" type="wildcard">
                 <map:generate type="file" src="${request/parameters/rss-url}"/>
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
@@ -29,9 +25,6 @@
                 <map:generate src="cocoon:/apps/sfx/highly-accessed2rss" type="file"/>
                 <map:serialize type="xml"/>
             </map:match>
-        </map:pipeline>
-        
-        <map:pipeline type="noncaching">
             <map:match pattern="page2rss" type="wildcard">
                 <map:aggregate element="doc">
                     <map:part src="cocoon:/content/${request/parameters/page}"/>
@@ -46,11 +39,6 @@
                 <map:generate type="file" src="${jndi/stage-base}/content/rss/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
-        </map:pipeline>    
-        
-        
-        <map:pipeline type="expires">
-            <map:parameter name="expires" value="access plus 1 hours"/>
             <map:match pattern="eresources" type="wildcard">
                  <map:generate type="file"  src="cocoon:/eresources/search"/>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
@@ -61,7 +49,10 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ejournals" type="wildcard">
-                 <map:generate type="file"  src="cocoon:/eresources/browse?t=ej"/>
+                <map:generate type="er-browse">
+                    <map:parameter name="alpha" value="${request/parameters/a}"/>
+                    <map:parameter name="type" value="ej"/>
+                </map:generate>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
                     <map:parameter name="a" value="${request/parameters/a}"/>
                     <map:parameter name="type" value="ejournals"/>
@@ -69,7 +60,10 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="mesh" type="wildcard">
-                 <map:generate type="file"  src="cocoon:/eresources/mesh?t=ej"/>
+                <map:generate type="er-browse">
+                    <map:parameter name="mesh" value="${request/parameters/m}"/>
+                    <map:parameter name="type" value="ej"/>
+                </map:generate>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
                     <map:parameter name="m" value="${request/parameters/m}"/>
                     <map:parameter name="type" value="mesh"/>
