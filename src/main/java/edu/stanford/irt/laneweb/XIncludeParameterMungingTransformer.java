@@ -24,20 +24,21 @@ public class XIncludeParameterMungingTransformer extends AbstractTransformer imp
     public void startElement(String uri, String loc, String raw, Attributes a) throws SAXException {
         if (XIncludeTransformer.XINCLUDE_NAMESPACE_URI.equals(uri) && "include".equals(loc)) {
             String href = a.getValue("href");
-            if (null != href && href.indexOf("cocoon:") == 0 && href.indexOf('?') > 0) {
+            int qMark = href.indexOf('?');
+            if (null != href && href.indexOf("cocoon:") == 0 && qMark > 0) {
                 AttributesImpl newAttributes = new AttributesImpl(a);
-                StringTokenizer st = new StringTokenizer(href, "?&");
-                StringBuilder builder = new StringBuilder(st.nextToken());
+                StringTokenizer st = new StringTokenizer(href.substring(qMark + 1), "&");
+                StringBuilder builder = new StringBuilder(href.substring(0, qMark));
                 while (st.hasMoreTokens()) {
                     String pair = st.nextToken();
                     String name = pair.substring(0, pair.indexOf('='));
-                    String value = pair.substring(pair.indexOf('=') + 1, pair.length());
+                    String value = pair.substring(pair.indexOf('=') + 1);
                     if ("t".equals(name)) {
                         name = "type";
                     } else if ("s".equals(name)) {
                         name = "subset";
                     }
-                    if (!"category".equals(name) && !"source".equals(name) && !"q".equals(name)) {
+                    if ("type".equals(name) || "subset".equals(name)) {
                         builder.append('/').append(name);
                     }
                     try {

@@ -3,9 +3,7 @@
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
-
     <map:pipelines>
-
         <map:pipeline type="noncaching">
             <map:match pattern="eresources/**" type="wildcard">
                 <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
@@ -16,14 +14,12 @@
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
             </map:match>
-
         </map:pipeline>
-
         <map:pipeline type="expires">
             <map:parameter name="cache-key"
                 value="${request/requestURI};rss-url=${request/parameters/rss-url}"/>
-            <map:match pattern="ncbi-rss2html" type="wildcard">
-                <map:generate type="file" src="${request/parameters/rss-url}"/>
+            <map:match pattern="ncbi-rss2html/**" type="wildcard">
+                <map:generate type="file" src="{1}"/>
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
                 <map:serialize type="xhtml"/>
             </map:match>
@@ -32,7 +28,6 @@
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
-
         <map:pipeline type="noncaching">
             <map:match pattern="**.xml" type="wildcard">
                 <map:generate type="file" src="${jndi/live-base}/content/rss/{1}.xml"/>
@@ -49,7 +44,6 @@
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
-
         <map:pipeline type="expires">
             <map:parameter name="expires" value="access plus 1 hours"/>
             <map:match pattern="eresources" type="wildcard">
@@ -85,5 +79,4 @@
             </map:match>
         </map:pipeline>
     </map:pipelines>
-
 </map:sitemap>
