@@ -1,6 +1,8 @@
 package edu.stanford.irt.laneweb;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -24,17 +26,24 @@ public class XIncludeParameterMungingTransformer extends AbstractTransformer imp
             String href = a.getValue("href");
             if (null != href && href.indexOf("cocoon:") == 0 && href.indexOf('?') > 0) {
                 AttributesImpl newAttributes = new AttributesImpl(a);
-                StringTokenizer st = new StringTokenizer(href, "?=");
+                StringTokenizer st = new StringTokenizer(href, "?&");
                 StringBuilder builder = new StringBuilder(st.nextToken());
                 while (st.hasMoreTokens()) {
-                    String token = st.nextToken();
-                    if ("t".equals(token)) {
-                        token = "type";
-                    } else if ("s".equals(token)) {
-                        token = "subset";
+                    String pair = st.nextToken();
+                    String name = pair.substring(0, pair.indexOf('='));
+                    String value = pair.substring(pair.indexOf('=') + 1, pair.length());
+                    if ("t".equals(name)) {
+                        name = "type";
+                    } else if ("s".equals(name)) {
+                        name = "subset";
                     }
-                    if (!"category".equals(token) && !"source".equals(token)) {
-                        builder.append('/').append(token);
+                    if (!"category".equals(name) && !"source".equals(name) && !"q".equals(name)) {
+                        builder.append('/').append(name);
+                    }
+                    try {
+                        builder.append('/').append(URLDecoder.decode(value, "UTF-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        throw new RuntimeException(e);
                     }
                 }
                 newAttributes.setValue(newAttributes.getIndex("href"), builder.toString());
