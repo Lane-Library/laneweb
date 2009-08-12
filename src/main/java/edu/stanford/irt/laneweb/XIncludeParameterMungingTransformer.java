@@ -55,6 +55,7 @@ public class XIncludeParameterMungingTransformer extends AbstractTransformer imp
         this.xmlConsumer.startElement(uri, loc, raw, a);
     }
 
+    @SuppressWarnings("unchecked")
     public void setup(SourceResolver resolver, Map objectModel, String src, Parameters par) {
     }
 

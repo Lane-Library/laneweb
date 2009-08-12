@@ -30,6 +30,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         this.proxyLinks = proxyLinks;
     }
 
+    @SuppressWarnings("unchecked")
     public Object getObject() {
         Map objectModel = this.processInfoProvider.getObjectModel();
         Map<String, Object> cocoonMap = new HashMap<String, Object>();
