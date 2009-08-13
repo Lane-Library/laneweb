@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources;
+package edu.stanford.irt.laneweb.proxy;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -19,6 +19,8 @@ import edu.stanford.irt.laneweb.JdbcUtils;
 public class EzproxyServersReader implements Reader {
 
     private static final byte[] HJ = "HJ ".getBytes();
+    
+    private static final byte[] SUL = "HJ jensen.stanford.edu\nHJ socrates.stanford.edu\nHJ library.stanford.edu".getBytes();
 
     private static final String SQL =
         "with urls as ( "
@@ -64,6 +66,7 @@ public class EzproxyServersReader implements Reader {
                 this.outputStream.write(host.getBytes());
                 this.outputStream.write('\n');
             }
+            this.outputStream.write(SUL);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
