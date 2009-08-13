@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
-import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -27,11 +26,13 @@ public class EzproxyServersReader implements Reader {
         + "where link.version_id = version.version_id "
         + "and proxy = 'T' "
         + "and url like 'http%' "
+        + "and url not like '%.stanford.edu%' "
         + "union "
         + "select url from h_link, h_version "
         + "where h_link.version_id = h_version.version_id "
         + "and proxy = 'T' "
         + "and url like 'http%' "
+        + "and url not like '%.stanford.edu%' "
         + ") "
         + "select substr(url, 9, instr(url,'/',1,3) - 9) as server from urls "
         + "where url like 'https://%' and instr(url,'/',1,3) > 0 "
