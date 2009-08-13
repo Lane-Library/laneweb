@@ -12,11 +12,11 @@ import edu.stanford.irt.search.MetaSearchManager;
  */
 public class MetaSearchManagerSource {
 
+    private static final Logger LOGGER = Logger.getLogger(MetaSearchManagerSource.class);
+
     private AbstractXmlApplicationContext context;
 
     private HttpClient httpClient;
-
-    private Logger logger = Logger.getLogger(MetaSearchManagerSource.class);
 
     private MetaSearchManager manager;
 
@@ -46,7 +46,7 @@ public class MetaSearchManagerSource {
             this.context.destroy();
             this.context = context;
         } catch (Exception e) {
-            this.logger.error(e.getMessage(), e);
+            LOGGER.error(e.getMessage(), e);
         }
     }
 }

@@ -21,13 +21,13 @@ import edu.stanford.irt.laneweb.LanewebConstants;
 
 public class UserDao {
 
+    private static final Logger LOGGER = Logger.getLogger(UserDao.class);
+
     private Cryptor cryptor;
 
     private String ezproxyKey;
 
     private LdapTemplate ldapTemplate;
-
-    private Logger logger = Logger.getLogger(UserDao.class);
 
     private SubjectSource subjectSource;
     
@@ -114,7 +114,7 @@ public class UserDao {
             try {
                 cookieValue = this.cryptor.decrypt(laneCookie.getValue());
             } catch (Exception e) {
-                this.logger.error("Cookie cannot be decrypted, it was maybe modified by user. IP --> ".concat(getRemoteAddr(request)));
+                LOGGER.error("Cookie cannot be decrypted, it was maybe modified by user. IP --> ".concat(getRemoteAddr(request)));
                 return null;
             }
             String[] cookieValues = cookieValue.split(LanewebConstants.COOKIE_VALUE_SEPARATOR);
@@ -158,7 +158,7 @@ public class UserDao {
             IPGroup iPGroup = IPGroup.getGroupForIP(ip);
             user.setIPGroup(iPGroup);
             if (IPGroup.ERR.equals(iPGroup)) {
-                this.logger.error("error parsing ip for IPGroup: " + ip);
+                LOGGER.error("error parsing ip for IPGroup: " + ip);
             }
         }
     }

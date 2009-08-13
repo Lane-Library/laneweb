@@ -38,52 +38,52 @@ public class HTTPClientSource implements Source {
      */
     private static final String LAST_MODIFIED = "Last-Modified";
 
-    private Logger logger = Logger.getLogger(HTTPClientSource.class);
+    private static final Logger LOGGER = Logger.getLogger(HTTPClientSource.class);
 
     /**
      * Cached last modification date.
      */
-    private long m_cachedLastModificationDate;
+    private long cachedLastModificationDate;
 
     /**
      * Stored {@link SourceValidity} object.
      */
-    private SourceValidity m_cachedValidity;
+    private SourceValidity cachedValidity;
 
     /**
      * The {@link HttpClient} object.
      */
-    private final HttpClient m_client;
+    private final HttpClient httpClient;
 
     /**
      * The content length of the resource on the server.
      */
-    private long m_contentLength;
+    private long contentLength;
 
     /**
      * Whether the data held within this instance is currently accurate.
      */
-    private boolean m_dataValid;
+    private boolean dataValid;
 
     /**
      * Whether the resource exists on the server.
      */
-    private boolean m_exists;
+    private boolean exists;
 
     /**
      * The last modified date of the resource on the server.
      */
-    private long m_lastModified;
+    private long lastModified;
 
     /**
      * The mime type of the resource on the server.
      */
-    private String m_mimeType;
+    private String mimeType;
 
     /**
      * The URI being accessed.
      */
-    private final String m_uri;
+    private final String uri;
 
     /**
      * Constructor, creates a new {@link HTTPClientSource} instance.
@@ -97,8 +97,8 @@ public class HTTPClientSource implements Source {
      */
     @SuppressWarnings("unchecked")
     public HTTPClientSource(final String uri, final Map parameters, final HttpClient httpClient) throws Exception {
-        this.m_uri = uri;
-        this.m_client = httpClient;
+        this.uri = uri;
+        this.httpClient = httpClient;
     }
 
     /**
@@ -109,7 +109,7 @@ public class HTTPClientSource implements Source {
      */
     public boolean exists() {
         updateData();
-        return this.m_exists;
+        return this.exists;
     }
 
     /**
@@ -120,7 +120,7 @@ public class HTTPClientSource implements Source {
      */
     public long getContentLength() {
         updateData();
-        return this.m_contentLength;
+        return this.contentLength;
     }
 
     /**
@@ -134,16 +134,16 @@ public class HTTPClientSource implements Source {
      *             if the source doesn't exist.
      */
     public InputStream getInputStream() throws IOException, SourceNotFoundException {
-        final GetMethod method = new GetMethod(this.m_uri);
+        final GetMethod method = new GetMethod(this.uri);
         int response = executeMethod(method);
-        this.m_dataValid = true;
+        this.dataValid = true;
         // throw SourceNotFoundException - according to Source API we
         // need to throw this if the source doesn't exist.
         if (!exists()) {
             method.releaseConnection();
             final StringBuffer error = new StringBuffer();
             error.append("Unable to retrieve URI: ");
-            error.append(this.m_uri);
+            error.append(this.uri);
             error.append(" (");
             error.append(response);
             error.append(")");
@@ -168,7 +168,7 @@ public class HTTPClientSource implements Source {
                     in.close();
                     output.close();
                 } catch (IOException e) {
-                    HTTPClientSource.this.logger.error(e.getMessage(), e);
+                    HTTPClientSource.LOGGER.error(e.getMessage(), e);
                 } finally {
                     method.releaseConnection();
                 }
@@ -185,7 +185,7 @@ public class HTTPClientSource implements Source {
      */
     public long getLastModified() {
         updateData();
-        return this.m_lastModified;
+        return this.lastModified;
     }
 
     /**
@@ -195,7 +195,7 @@ public class HTTPClientSource implements Source {
      */
     public String getMimeType() {
         updateData();
-        return this.m_mimeType;
+        return this.mimeType;
     }
 
     /**
@@ -214,7 +214,7 @@ public class HTTPClientSource implements Source {
      * @return the absolute URI this {@link String} object references.
      */
     public String getURI() {
-        return this.m_uri;
+        return this.uri;
     }
 
     /**
@@ -227,12 +227,12 @@ public class HTTPClientSource implements Source {
         // Implementation taken from URLSource.java, Kudos :)
         final long lm = getLastModified();
         if (lm > 0) {
-            if (lm == this.m_cachedLastModificationDate) {
-                return this.m_cachedValidity;
+            if (lm == this.cachedLastModificationDate) {
+                return this.cachedValidity;
             }
-            this.m_cachedLastModificationDate = lm;
-            this.m_cachedValidity = new TimeStampValidity(lm);
-            return this.m_cachedValidity;
+            this.cachedLastModificationDate = lm;
+            this.cachedValidity = new TimeStampValidity(lm);
+            return this.cachedValidity;
         }
         return null;
     }
@@ -241,7 +241,7 @@ public class HTTPClientSource implements Source {
      * Refreshes this {@link Source} object.
      */
     public void refresh() {
-        this.m_dataValid = false;
+        this.dataValid = false;
     }
 
     /**
@@ -254,12 +254,12 @@ public class HTTPClientSource implements Source {
     private void updateContentLength(final HttpMethod method) {
         try {
             final Header length = method.getResponseHeader(CONTENT_LENGTH);
-            this.m_contentLength = length == null ? -1 : Long.parseLong(length.getValue());
+            this.contentLength = length == null ? -1 : Long.parseLong(length.getValue());
         } catch (final NumberFormatException e) {
-            if (this.logger.isDebugEnabled()) {
-                this.logger.debug("Unable to determine content length, returning -1", e);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("Unable to determine content length, returning -1", e);
             }
-            this.m_contentLength = -1;
+            this.contentLength = -1;
         }
     }
 
@@ -269,27 +269,27 @@ public class HTTPClientSource implements Source {
      */
     private void updateData() {
         // no request made so far, attempt to get some response data.
-        if (!this.m_dataValid) {
-            final HttpMethod head = new HeadMethod(this.m_uri);
+        if (!this.dataValid) {
+            final HttpMethod head = new HeadMethod(this.uri);
             try {
                 // cy altered so only one head request is made if successful
                 if (200 == executeMethod(head)) {
-                    this.m_dataValid = true;
+                    this.dataValid = true;
                 }
                 return;
             } catch (final IOException e) {
-                if (this.logger.isDebugEnabled()) {
-                    this.logger.debug("Unable to determine response data, using defaults", e);
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("Unable to determine response data, using defaults", e);
                 }
             } finally {
                 head.releaseConnection();
             }
             // default values when response data is not available
-            this.m_exists = false;
-            this.m_mimeType = null;
-            this.m_contentLength = -1;
-            this.m_lastModified = 0;
-            this.m_dataValid = true;
+            this.exists = false;
+            this.mimeType = null;
+            this.contentLength = -1;
+            this.lastModified = 0;
+            this.dataValid = true;
         }
     }
 
@@ -312,7 +312,7 @@ public class HTTPClientSource implements Source {
         // REVISIT(MC): need a special way to handle 304 (NOT MODIFIED)
         // 204 & 205 in the future
         // resource does not exist if HttpClient returns a 404 or a 410
-        this.m_exists = ((response == HttpStatus.SC_OK) || (response == HttpStatus.SC_CREATED) || (response == HttpStatus.SC_PARTIAL_CONTENT));
+        this.exists = ((response == HttpStatus.SC_OK) || (response == HttpStatus.SC_CREATED) || (response == HttpStatus.SC_PARTIAL_CONTENT));
     }
 
     /**
@@ -325,10 +325,10 @@ public class HTTPClientSource implements Source {
     private void updateLastModified(final HttpMethod method) {
         final Header lastModified = method.getResponseHeader(LAST_MODIFIED);
         try {
-            this.m_lastModified = lastModified == null ? 0 : DateUtil.parseDate(lastModified.getValue()).getTime();
+            this.lastModified = lastModified == null ? 0 : DateUtil.parseDate(lastModified.getValue()).getTime();
         } catch (DateParseException e) {
             // we ignore this exception and simply set last modified to 0
-            this.m_lastModified = 0;
+            this.lastModified = 0;
         }
     }
 
@@ -344,7 +344,7 @@ public class HTTPClientSource implements Source {
         // URLSource
         // returns the Content-Type, so we'll follow that for now.
         final Header header = method.getResponseHeader(CONTENT_TYPE);
-        this.m_mimeType = header == null ? null : header.getValue();
+        this.mimeType = header == null ? null : header.getValue();
     }
 
     /**
@@ -360,7 +360,7 @@ public class HTTPClientSource implements Source {
      *                if an error occurs
      */
     protected int executeMethod(final HttpMethod method) throws HttpException, IOException {
-        final int response = this.m_client.executeMethod(method);
+        final int response = this.httpClient.executeMethod(method);
         updateExists(method);
         updateMimeType(method);
         updateContentLength(method);

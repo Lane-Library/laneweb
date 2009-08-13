@@ -20,7 +20,7 @@ public class MeshSuggestReader implements Reader {
 
     private static final byte[] JSON_2 = "]}".getBytes();
 
-    private static int JSON_RETURN_LIMIT = 20;
+    private static final int JSON_RETURN_LIMIT = 20;
 
     private ThreadLocal<String> limit = new ThreadLocal<String>();
 

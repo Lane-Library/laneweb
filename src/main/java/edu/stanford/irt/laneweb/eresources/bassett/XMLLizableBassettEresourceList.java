@@ -31,6 +31,8 @@ public class XMLLizableBassettEresourceList implements XMLizable {
 
     private static final String NAME = "name";
 
+    private static final String NAMESPACE = "http://lane.stanford.edu/bassett/ns";
+
     private static final String REGION = "region";
 
     private static final String REGIONS = "regions";
@@ -41,77 +43,75 @@ public class XMLLizableBassettEresourceList implements XMLizable {
 
     private Collection<Eresource> bassetts;
 
-    private String NAMESPACE = "http://lane.stanford.edu/bassett/ns";
-
     public XMLLizableBassettEresourceList(final Collection<Eresource> bassetts) {
         this.bassetts = bassetts;
     }
 
     public void toSAX(final ContentHandler consumer) throws SAXException {
-        consumer.startPrefixMapping("", this.NAMESPACE);
-        XMLUtils.startElement(consumer, this.NAMESPACE, BASSETTS);
+        consumer.startPrefixMapping("", NAMESPACE);
+        XMLUtils.startElement(consumer, NAMESPACE, BASSETTS);
         if (this.bassetts != null) {
             for (Eresource eresource : this.bassetts) {
                 handleEresource(consumer, eresource);
             }
         }
-        XMLUtils.endElement(consumer, this.NAMESPACE, BASSETTS);
+        XMLUtils.endElement(consumer, NAMESPACE, BASSETTS);
         consumer.endPrefixMapping("");
     }
 
     private void handleEresource(final ContentHandler handler, final Eresource eresource) throws SAXException {
         BassettEresource bassett = (BassettEresource) eresource;
         AttributesImpl attributes = new AttributesImpl();
-        attributes.addAttribute(this.NAMESPACE, BASSETT_NUMBER, BASSETT_NUMBER, "CDATA", bassett.getBassettNumber());
-        XMLUtils.startElement(handler, this.NAMESPACE, BASSETT, attributes);
-        XMLUtils.startElement(handler, this.NAMESPACE, TITLE);
+        attributes.addAttribute(NAMESPACE, BASSETT_NUMBER, BASSETT_NUMBER, "CDATA", bassett.getBassettNumber());
+        XMLUtils.startElement(handler, NAMESPACE, BASSETT, attributes);
+        XMLUtils.startElement(handler, NAMESPACE, TITLE);
         XMLUtils.data(handler, bassett.getTitle());
-        XMLUtils.endElement(handler, this.NAMESPACE, TITLE);
-        XMLUtils.startElement(handler, this.NAMESPACE, BASSETT_IMAGE);
+        XMLUtils.endElement(handler, NAMESPACE, TITLE);
+        XMLUtils.startElement(handler, NAMESPACE, BASSETT_IMAGE);
         XMLUtils.data(handler, bassett.getImage());
-        XMLUtils.endElement(handler, this.NAMESPACE, BASSETT_IMAGE);
-        XMLUtils.startElement(handler, this.NAMESPACE, DIAGRAM);
+        XMLUtils.endElement(handler, NAMESPACE, BASSETT_IMAGE);
+        XMLUtils.startElement(handler, NAMESPACE, DIAGRAM);
         XMLUtils.data(handler, bassett.getDiagram());
-        XMLUtils.endElement(handler, this.NAMESPACE, DIAGRAM);
-        XMLUtils.startElement(handler, this.NAMESPACE, LEGEND_IMAGE);
+        XMLUtils.endElement(handler, NAMESPACE, DIAGRAM);
+        XMLUtils.startElement(handler, NAMESPACE, LEGEND_IMAGE);
         XMLUtils.data(handler, bassett.getLatinLegend());
-        XMLUtils.endElement(handler, this.NAMESPACE, LEGEND_IMAGE);
+        XMLUtils.endElement(handler, NAMESPACE, LEGEND_IMAGE);
         if (null != bassett.getEngishLegend()) {
-            XMLUtils.startElement(handler, this.NAMESPACE, LEGEND);
+            XMLUtils.startElement(handler, NAMESPACE, LEGEND);
             XMLUtils.data(handler, bassett.getEngishLegend());
-            XMLUtils.endElement(handler, this.NAMESPACE, LEGEND);
+            XMLUtils.endElement(handler, NAMESPACE, LEGEND);
         }
         if (null != bassett.getDescription()) {
-            XMLUtils.startElement(handler, this.NAMESPACE, DESCRIPTION);
+            XMLUtils.startElement(handler, NAMESPACE, DESCRIPTION);
             XMLUtils.data(handler, bassett.getDescription());
-            XMLUtils.endElement(handler, this.NAMESPACE, DESCRIPTION);
+            XMLUtils.endElement(handler, NAMESPACE, DESCRIPTION);
         }
         handleRegion(handler, bassett.getRegions());
-        XMLUtils.endElement(handler, this.NAMESPACE, BASSETT);
+        XMLUtils.endElement(handler, NAMESPACE, BASSETT);
     }
 
     private void handleRegion(final ContentHandler handler, final List<String> regions) throws SAXException {
         String currentRegion = null;
-        XMLUtils.startElement(handler, this.NAMESPACE, REGIONS);
+        XMLUtils.startElement(handler, NAMESPACE, REGIONS);
         for (int i = 0; i < regions.size(); i++) {
             String region = regions.get(i);
             String[] splittedRegion = region.split("--");
             if (!splittedRegion[0].equals(currentRegion)) {
                 if (i != 0) {
-                    XMLUtils.endElement(handler, this.NAMESPACE, REGION);
+                    XMLUtils.endElement(handler, NAMESPACE, REGION);
                 }
                 AttributesImpl attributes = new AttributesImpl();
-                attributes.addAttribute(this.NAMESPACE, NAME, NAME, "CDATA", splittedRegion[0]);
-                XMLUtils.startElement(handler, this.NAMESPACE, REGION, attributes);
+                attributes.addAttribute(NAMESPACE, NAME, NAME, "CDATA", splittedRegion[0]);
+                XMLUtils.startElement(handler, NAMESPACE, REGION, attributes);
                 currentRegion = splittedRegion[0];
             }
             if (splittedRegion.length > 1) {
-                XMLUtils.startElement(handler, this.NAMESPACE, SUB_REGION);
+                XMLUtils.startElement(handler, NAMESPACE, SUB_REGION);
                 XMLUtils.data(handler, splittedRegion[1]);
-                XMLUtils.endElement(handler, this.NAMESPACE, SUB_REGION);
+                XMLUtils.endElement(handler, NAMESPACE, SUB_REGION);
             }
         }
-        XMLUtils.endElement(handler, this.NAMESPACE, REGION);
-        XMLUtils.endElement(handler, this.NAMESPACE, REGIONS);
+        XMLUtils.endElement(handler, NAMESPACE, REGION);
+        XMLUtils.endElement(handler, NAMESPACE, REGIONS);
     }
 }

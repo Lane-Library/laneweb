@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
@@ -185,15 +186,15 @@ public class BassettCollectionManager {
         this.dataSource = dataSource;
     }
 
-    private LinkedList<Eresource> doGet(final String sql, final Collection<String> params) {
+    private List<Eresource> doGet(final String sql, final Collection<String> params) {
         return doGet(sql, params, false);
     }
 
-    private LinkedList<Eresource> doGet(final String sql, final Collection<String> params, final boolean withLegend) {
+    private List<Eresource> doGet(final String sql, final Collection<String> params, final boolean withLegend) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        LinkedList<Eresource> result = null;
+        List<Eresource> result = null;
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.prepareStatement(sql);
@@ -214,8 +215,8 @@ public class BassettCollectionManager {
     }
 
     private Collection<Eresource> doGetSearch(final String sql, final Collection<String> params, final String query) {
-        LinkedList<Eresource> result = doGet(sql, params);
-        LinkedList<Eresource> titleMatches = new LinkedList<Eresource>();
+        List<Eresource> result = doGet(sql, params);
+        List<Eresource> titleMatches = new LinkedList<Eresource>();
         int i = 0;
         for (ListIterator<Eresource> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
             Eresource eresource = it.next();
@@ -246,8 +247,8 @@ public class BassettCollectionManager {
         return result;
     }
 
-    private LinkedList<Eresource> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
-        LinkedList<Eresource> eresources = new LinkedList<Eresource>();
+    private List<Eresource> parseResultSet(final ResultSet rs, final boolean fullResult) throws SQLException {
+        List<Eresource> eresources = new LinkedList<Eresource>();
         BassettEresource eresource = null;
         Version version = null;
         int currentEresourceId = -1;

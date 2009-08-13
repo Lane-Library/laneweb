@@ -15,7 +15,7 @@ import edu.stanford.irt.laneweb.user.UserDao;
 
 public abstract class AbstractInputModule implements InputModule {
 
-    private Logger logger = Logger.getLogger(AbstractInputModule.class);
+    private static final Logger LOGGER = Logger.getLogger(AbstractInputModule.class);
 
     private UserDao userDao;
 
@@ -23,9 +23,9 @@ public abstract class AbstractInputModule implements InputModule {
     public Object getAttribute(final String key, final Configuration modeConf, final Map objectModel) {
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         User user = this.userDao.createOrUpdateUser(request);
-        if (this.logger.isDebugEnabled()) {
+        if (LOGGER.isDebugEnabled()) {
             Object result = doGetAttribute(key, user, request);
-            this.logger.debug(key + " = " + result);
+            LOGGER.debug(key + " = " + result);
             return result;
         } else {
             return doGetAttribute(key, user, request);

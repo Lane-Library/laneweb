@@ -96,16 +96,16 @@ class XIncludePipe extends AbstractXMLPipe {
     }
 
     @Override
-    public void characters(final char c[], final int start, final int len) throws SAXException {
+    public void characters(final char chars[], final int start, final int len) throws SAXException {
         if (isEvaluatingContent()) {
-            super.characters(c, start, len);
+            super.characters(chars, start, len);
         }
     }
 
     @Override
-    public void comment(final char ch[], final int start, final int len) throws SAXException {
+    public void comment(final char chars[], final int start, final int len) throws SAXException {
         if (isEvaluatingContent()) {
-            super.comment(ch, start, len);
+            super.comment(chars, start, len);
         }
     }
 
@@ -174,9 +174,9 @@ class XIncludePipe extends AbstractXMLPipe {
     }
 
     @Override
-    public void ignorableWhitespace(final char c[], final int start, final int len) throws SAXException {
+    public void ignorableWhitespace(final char chars[], final int start, final int len) throws SAXException {
         if (isEvaluatingContent()) {
-            super.ignorableWhitespace(c, start, len);
+            super.ignorableWhitespace(chars, start, len);
         }
     }
 
@@ -186,16 +186,14 @@ class XIncludePipe extends AbstractXMLPipe {
         this.xmlBaseSupport = new XMLBaseSupport(this.lanewebXIncludeTransformer.resolver, getLogger());
     }
 
-    public boolean isLoopInclusion(final String uri, String xpointer) {
-        if (xpointer == null) {
-            xpointer = "";
-        }
-        if (uri.equals(this.href) && xpointer.equals(this.xpointer == null ? "" : this.xpointer)) {
+    public boolean isLoopInclusion(final String uri, final String xpointer) {
+        String thePointer = xpointer == null ? "" : xpointer;
+        if (uri.equals(this.href) && thePointer.equals(this.xpointer == null ? "" : this.xpointer)) {
             return true;
         }
         XIncludePipe parent = getParent();
         while (parent != null) {
-            if (uri.equals(parent.getHref()) && xpointer.equals(parent.getXpointer() == null ? "" : parent.getXpointer())) {
+            if (uri.equals(parent.getHref()) && thePointer.equals(parent.getXpointer() == null ? "" : parent.getXpointer())) {
                 return true;
             }
             parent = parent.getParent();
@@ -416,15 +414,14 @@ class XIncludePipe extends AbstractXMLPipe {
         }
     }
 
-    protected void processXIncludeElement(String href, String parse, String xpointer) throws SAXException, ProcessingException, IOException {
+    protected void processXIncludeElement(final String href, final String parse, final String xpointer) throws SAXException, ProcessingException, IOException {
         if (getLogger().isDebugEnabled()) {
             getLogger().debug("Processing XInclude element: href=" + href + ", parse=" + parse + ", xpointer=" + xpointer);
         }
         // Default for @parse is "xml"
-        if (parse == null) {
-            parse = "xml";
-        }
+        String p = parse == null ? "xml" : parse;
         Source url = null;
+        String h = href;
         try {
             // An empty or absent href is a reference to the current
             // document -- this can be different than the current base
@@ -433,20 +430,20 @@ class XIncludePipe extends AbstractXMLPipe {
                     throw new SAXException(
                             "XIncludeTransformer: encountered empty href (= href pointing to the current document) but the location of the current document is unknown.");
                 }
-                href = this.href;
+                h = this.href;
             }
-            url = this.xmlBaseSupport.makeAbsolute(href);
+            url = this.xmlBaseSupport.makeAbsolute(h);
             if (getLogger().isDebugEnabled()) {
                 getLogger().debug("URL: " + url.getURI() + "\nXPointer: " + xpointer);
             }
             // add the source to the SourceValidity
             this.lanewebXIncludeTransformer.validity.addSource(url);
-            if ("text".equals(parse)) {
+            if ("text".equals(p)) {
                 parseText(xpointer, url);
-            } else if ("xml".equals(parse)) {
+            } else if ("xml".equals(p)) {
                 parseXML(xpointer, url);
             } else {
-                throw new SAXException("Found 'parse' attribute with unknown value " + parse + " at " + getLocation());
+                throw new SAXException("Found 'parse' attribute with unknown value " + p + " at " + getLocation());
             }
         } catch (SourceException se) {
             throw SourceUtil.handle(se);

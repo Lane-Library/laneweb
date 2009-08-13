@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 public class LoginAction implements Action {
 
-    private Logger logger = Logger.getLogger(LoginAction.class);
+    private static final Logger LOGGER = Logger.getLogger(LoginAction.class);
 
     @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters params) throws IOException, ProcessingException {
@@ -35,8 +35,8 @@ public class LoginAction implements Action {
         if (null == queryString || queryString.length() == 0) {
             return null;
         }
-        if (this.logger.isDebugEnabled()) {
-            this.logger.debug("redirecting to proxy server: " + " sunetid = " + sunetid + " ticket = " + " url = " + queryString);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("redirecting to proxy server: " + " sunetid = " + sunetid + " ticket = " + " url = " + queryString);
         }
         String redirectURL = "http://laneproxy.stanford.edu/login?user=" + sunetid + "&ticket=" + ticket + "&" + queryString;
         redirector.redirect(false, redirectURL);

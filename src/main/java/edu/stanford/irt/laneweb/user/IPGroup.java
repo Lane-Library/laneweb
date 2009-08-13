@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * @author ceyates
  */
-public class IPGroup {
+public final class IPGroup {
 
     public static final IPGroup ERR = new IPGroup("ERR");
 
@@ -36,95 +36,95 @@ public class IPGroup {
 
     public static final IPGroup SU = new IPGroup("SU");
 
-    private static String _0_TO_255 = "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
+    private static final String _0_TO_255 = "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
 
-    private static String DOT = "\\.";
+    private static final String DOT = "\\.";
 
-    private static Pattern IP_ADDRESS = Pattern.compile("^" + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+    private static final Pattern IP_ADDRESS = Pattern.compile("^" + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
 
-    private static Pattern LPCH_159_PATTERN = Pattern.compile("^159" + DOT + "140" + DOT + "183" + DOT + _0_TO_255 + "$");
+    private static final Pattern LPCH_159_PATTERN = Pattern.compile("^159" + DOT + "140" + DOT + "183" + DOT + _0_TO_255 + "$");
 
-    private static String LPCH_252_1 = "(?:5|6|7|10|11|18|19|22|23|26|27|30|31|34|35|38|39|42|43|46|47|50|51|54|55|60|61|62|63|67|70|71|84|85|107|108|109|122|123|13[89]|14[0-9]|15[23]|200)"
+    private static final String LPCH_252_1 = "(?:5|6|7|10|11|18|19|22|23|26|27|30|31|34|35|38|39|42|43|46|47|50|51|54|55|60|61|62|63|67|70|71|84|85|107|108|109|122|123|13[89]|14[0-9]|15[23]|200)"
             + DOT + _0_TO_255;
 
-    private static String LPCH_252_2 = "250" + DOT + "(?:0?9[7-9]|1[01][0-9]|12[0-6])";
+    private static final String LPCH_252_2 = "250" + DOT + "(?:0?9[7-9]|1[01][0-9]|12[0-6])";
 
-    private static String LPCH_252_3 = "1" + DOT + "[12]";
+    private static final String LPCH_252_3 = "1" + DOT + "[12]";
 
-    private static String LPCH_252_4 = "64" + DOT + "(?:12|23|46|60|64|71)";
+    private static final String LPCH_252_4 = "64" + DOT + "(?:12|23|46|60|64|71)";
 
-    private static String LPCH_252_5 = "65" + DOT + "(?:5|6|9|13|14|17|18|41|42|141|142|145|146)";
+    private static final String LPCH_252_5 = "65" + DOT + "(?:5|6|9|13|14|17|18|41|42|141|142|145|146)";
 
-    private static String LPCH_252_6 = "66" + DOT + "(?:5|6|49|50|233|234|249|250|253|254)";
+    private static final String LPCH_252_6 = "66" + DOT + "(?:5|6|49|50|233|234|249|250|253|254)";
 
-    private static String LPCH_1 = "(?:50" + DOT + _0_TO_255 + DOT + _0_TO_255 + "|25[01]" + DOT + "(?:25[0-5]|2[0-4][0-9]|1[3-9][0-9]|12[89])" + DOT
+    private static final String LPCH_1 = "(?:50" + DOT + _0_TO_255 + DOT + _0_TO_255 + "|25[01]" + DOT + "(?:25[0-5]|2[0-4][0-9]|1[3-9][0-9]|12[89])" + DOT
             + _0_TO_255 + ")";
 
-    private static String LPCH_2 = "252" + DOT + "(?:" + LPCH_252_1 + "|" + LPCH_252_2 + "|" + LPCH_252_3 + "|" + LPCH_252_4 + "|" + LPCH_252_5 + "|"
+    private static final String LPCH_2 = "252" + DOT + "(?:" + LPCH_252_1 + "|" + LPCH_252_2 + "|" + LPCH_252_3 + "|" + LPCH_252_4 + "|" + LPCH_252_5 + "|"
             + LPCH_252_6 + ")";
 
-    private static String LPCH_3 = "253" + DOT + "2(?:20|54|55)" + DOT + _0_TO_255;
+    private static final String LPCH_3 = "253" + DOT + "2(?:20|54|55)" + DOT + _0_TO_255;
 
-    private static Pattern LPCH_PATTERN = Pattern.compile("^(?:" + LPCH_1 + "|" + LPCH_2 + "|" + LPCH_3 + ")$");
+    private static final Pattern LPCH_PATTERN = Pattern.compile("^(?:" + LPCH_1 + "|" + LPCH_2 + "|" + LPCH_3 + ")$");
 
-    private static Pattern LPCH_209_PATTERN = Pattern.compile("^209" + DOT + "11" + DOT + "(?:18[89]|19[01])" + DOT + _0_TO_255 + "$");
+    private static final Pattern LPCH_209_PATTERN = Pattern.compile("^209" + DOT + "11" + DOT + "(?:18[89]|19[01])" + DOT + _0_TO_255 + "$");
 
-    private static Pattern NOT_OTHER = Pattern.compile("^(?:10|128|134|152|159|171|204|209)" + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+    private static final Pattern NOT_OTHER = Pattern.compile("^(?:10|128|134|152|159|171|204|209)" + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
 
-    private static Pattern PAVA_PATTERN = Pattern.compile("^152" + DOT + "13[0-3]" + DOT + "10" + DOT + "128$");
+    private static final Pattern PAVA_PATTERN = Pattern.compile("^152" + DOT + "13[0-3]" + DOT + "10" + DOT + "128$");
 
-    private static Pattern SHC_204_PATTERN = Pattern.compile("^204" + DOT + "161" + DOT + "120.*");
+    private static final Pattern SHC_204_PATTERN = Pattern.compile("^204" + DOT + "161" + DOT + "120.*");
 
-    private static Pattern SHC_209_PATTERN = Pattern.compile("^209" + DOT + "11" + DOT + "18[4-7].*");
+    private static final Pattern SHC_209_PATTERN = Pattern.compile("^209" + DOT + "11" + DOT + "18[4-7].*");
 
-    private static Pattern SHC_PATTERN = Pattern.compile("^2(?:(?:5[2-5]|4[78])" + DOT + _0_TO_255 + "|5[01]" + DOT + "(?:12[0-7]|1[01][0-9]|[0]?[0-9][0-9]?))"
+    private static final Pattern SHC_PATTERN = Pattern.compile("^2(?:(?:5[2-5]|4[78])" + DOT + _0_TO_255 + "|5[01]" + DOT + "(?:12[0-7]|1[01][0-9]|[0]?[0-9][0-9]?))"
             + DOT + _0_TO_255 + "$");
 
-    private static Pattern SOM_BECKMAN_PATTERN = Pattern.compile("^2[0-7]" + DOT + _0_TO_255 + "$");
+    private static final Pattern SOM_BECKMAN_PATTERN = Pattern.compile("^2[0-7]" + DOT + _0_TO_255 + "$");
 
-    private static Pattern SOM_CCSR_PATTERN = Pattern.compile("^(?:1[0-5]|[4-9])" + DOT + _0_TO_255 + "$");
+    private static final Pattern SOM_CCSR_PATTERN = Pattern.compile("^(?:1[0-5]|[4-9])" + DOT + _0_TO_255 + "$");
 
-    private static String SOM_CLARK_1 = "(?:9[2-5]|10[23])" + DOT + _0_TO_255;
+    private static final String SOM_CLARK_1 = "(?:9[2-5]|10[23])" + DOT + _0_TO_255;
 
-    private static String SOM_CLARK_2 = "71" + DOT + "(?:12[0-7]|1[01][0-9]|[0-9][0-9]?)";
+    private static final String SOM_CLARK_2 = "71" + DOT + "(?:12[0-7]|1[01][0-9]|[0-9][0-9]?)";
 
-    private static Pattern SOM_CLARK_PATTERN = Pattern.compile("^(?:" + SOM_CLARK_1 + "|" + SOM_CLARK_2 + ")$");
+    private static final Pattern SOM_CLARK_PATTERN = Pattern.compile("^(?:" + SOM_CLARK_1 + "|" + SOM_CLARK_2 + ")$");
 
-    private static String SOM_GRANT_1 = "(?:8[89]|9[01])" + DOT + _0_TO_255;
+    private static final String SOM_GRANT_1 = "(?:8[89]|9[01])" + DOT + _0_TO_255;
 
-    private static String SOM_GRANT_2 = "^40" + DOT + "(?:7[0-9]|6[4-9])";
+    private static final String SOM_GRANT_2 = "^40" + DOT + "(?:7[0-9]|6[4-9])";
 
-    private static Pattern SOM_GRANT_PATTERN = Pattern.compile("^(?:" + SOM_GRANT_1 + "|" + SOM_GRANT_2 + ")$");
+    private static final Pattern SOM_GRANT_PATTERN = Pattern.compile("^(?:" + SOM_GRANT_1 + "|" + SOM_GRANT_2 + ")$");
 
-    private static Pattern SOM_LANE_PATTERN = Pattern.compile("^8[23]" + DOT + _0_TO_255 + "$");
+    private static final Pattern SOM_LANE_PATTERN = Pattern.compile("^8[23]" + DOT + _0_TO_255 + "$");
 
-    private static String SOM_LANE_STAFF_1 = "82" + DOT
+    private static final String SOM_LANE_STAFF_1 = "82" + DOT
             + "(?:11|15|16|20|24|25|27|31|42|43|46|47|48|59|60|68|74|78|95|105|119|129|135|143|144|166|168|179|204|232)";
 
-    private static String SOM_LANE_STAFF_2 = "83" + DOT
+    private static final String SOM_LANE_STAFF_2 = "83" + DOT
             + "(?:8|32|37|45|73|84|86|96|98|114|132|149|157|160|168|172|174|203|204|205|206|208|212|213|214|215|232)";
 
-    private static String SOM_LANE_STAFF_3 = "1" + DOT + "213";
+    private static final String SOM_LANE_STAFF_3 = "1" + DOT + "213";
 
-    private static Pattern SOM_LANE_STAFF_PATTERN = Pattern.compile("^(?:" + SOM_LANE_STAFF_1 + "|" + SOM_LANE_STAFF_2 + "|" + SOM_LANE_STAFF_3 + ")$");
+    private static final Pattern SOM_LANE_STAFF_PATTERN = Pattern.compile("^(?:" + SOM_LANE_STAFF_1 + "|" + SOM_LANE_STAFF_2 + "|" + SOM_LANE_STAFF_3 + ")$");
 
-    private static Pattern SOM_LPCH_PATTERN = Pattern.compile("^(?:112|126)" + DOT + _0_TO_255 + "$");
+    private static final Pattern SOM_LPCH_PATTERN = Pattern.compile("^(?:112|126)" + DOT + _0_TO_255 + "$");
 
-    private static Pattern SOM_PATTERN = Pattern.compile("^171" + DOT + "65" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+    private static final Pattern SOM_PATTERN = Pattern.compile("^171" + DOT + "65" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
 
-    private static Pattern SOM_PAVA_PATTERN = Pattern.compile("^44" + DOT + _0_TO_255 + "$");
+    private static final Pattern SOM_PAVA_PATTERN = Pattern.compile("^44" + DOT + _0_TO_255 + "$");
     
-    private static Pattern EZPROXY_SERVER_PATTERN = Pattern.compile("^65.46$");
+    private static final Pattern EZPROXY_SERVER_PATTERN = Pattern.compile("^65.46$");
 
-    private static Pattern SOM_SHC_PATTERN = Pattern.compile("^(?:(?:1[12]5|12[7-9]|1[3-9][0-9]|25[0-5]|2[0-4][0-9])|4[6-7])" + DOT + _0_TO_255 + "$");
+    private static final Pattern SOM_SHC_PATTERN = Pattern.compile("^(?:(?:1[12]5|12[7-9]|1[3-9][0-9]|25[0-5]|2[0-4][0-9])|4[6-7])" + DOT + _0_TO_255 + "$");
 
-    private static Pattern STANFORD_10_PATTERN = Pattern.compile("^10" + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+    private static final Pattern STANFORD_10_PATTERN = Pattern.compile("^10" + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
 
-    private static Pattern STANFORD_128_PATTERN = Pattern.compile("^128" + DOT + "12" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+    private static final Pattern STANFORD_128_PATTERN = Pattern.compile("^128" + DOT + "12" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
 
-    private static Pattern STANFORD_134_PATTERN = Pattern.compile("^134" + DOT + "79" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+    private static final Pattern STANFORD_134_PATTERN = Pattern.compile("^134" + DOT + "79" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
 
-    private static Pattern STANFORD_171_PATTERN = Pattern.compile("^171" + DOT + "6[4-7]" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
+    private static final Pattern STANFORD_171_PATTERN = Pattern.compile("^171" + DOT + "6[4-7]" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
 
     public static IPGroup getGroupForIP(final String ip) {
         if (!IP_ADDRESS.matcher(ip).matches()) {

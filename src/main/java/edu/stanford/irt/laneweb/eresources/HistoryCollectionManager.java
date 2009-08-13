@@ -385,14 +385,14 @@ public class HistoryCollectionManager implements CollectionManager {
 
     public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
         Map<String, Integer> result = new HashMap<String, Integer>();
-        StringBuffer sb = new StringBuffer(COUNT);
+        StringBuffer stringBuffer = new StringBuffer(COUNT);
         for (int i = 0; i < types.size(); i++) {
-            sb.append(COUNT_TYPE_UNION);
+            stringBuffer.append(COUNT_TYPE_UNION);
         }
         for (int i = 0; i < subsets.size(); i++) {
-            sb.append(COUNT_SUBSET_UNION);
+            stringBuffer.append(COUNT_SUBSET_UNION);
         }
-        String sql = sb.toString();
+        String sql = stringBuffer.toString();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;

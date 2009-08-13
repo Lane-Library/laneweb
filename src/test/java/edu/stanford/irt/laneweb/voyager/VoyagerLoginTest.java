@@ -63,10 +63,10 @@ public class VoyagerLoginTest {
     public void testLoginURL() throws SQLException {
         this.statement.setString(1, "0999");
         this.statement.setString(2, "123");
-        expect(this.statement.executeUpdate()).andReturn(new Integer(0));
+        expect(this.statement.executeUpdate()).andReturn(Integer.valueOf(0));
         this.statement.setString(1, "0999");
         this.statement.setString(2, "123");
-        expect(this.statement.executeUpdate()).andReturn(new Integer(1));
+        expect(this.statement.executeUpdate()).andReturn(Integer.valueOf(1));
         this.statement.close();
         this.statement.close();
         replay(this.statement);
@@ -87,7 +87,7 @@ public class VoyagerLoginTest {
     public void testUpdateError() throws SQLException {
         this.statement.setString(1, "0999");
         this.statement.setString(2, "123");
-        expect(this.statement.executeUpdate()).andReturn(new Integer(0));
+        expect(this.statement.executeUpdate()).andReturn(Integer.valueOf(0));
         this.statement.setString(1, "0999");
         this.statement.setString(2, "123");
         expect(this.statement.executeUpdate()).andThrow(new SQLException("oops"));

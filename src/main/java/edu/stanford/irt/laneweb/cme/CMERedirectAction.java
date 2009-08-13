@@ -19,6 +19,8 @@ public class CMERedirectAction implements Action {
     private static final String ERROR_URL = "/cmeRedirectError.html";
 
     private static final String HOST_PARAM = "host";
+
+    private static final Logger LOGGER = Logger.getLogger(CMERedirectAction.class);
     
     private static final String QUERY_STRING = "query-string";
 
@@ -26,8 +28,6 @@ public class CMERedirectAction implements Action {
     private static final String UTD_CME_STRING = "http://www.uptodate.com/online/content/search.do?unid=EMRID&srcsys=epic90710&eiv=2.1.0";
     
     private static final String PROXY_LINK = "http://laneproxy.stanford.edu/login?url=";
-
-    private Logger logger = Logger.getLogger(CMERedirectAction.class);
 
     @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters params) {
@@ -39,7 +39,7 @@ public class CMERedirectAction implements Action {
         } else {
             String queryString = params.getParameter(QUERY_STRING, null);
             result.put(CME_REDIRECT_KEY, null == queryString ? ERROR_URL : ERROR_URL + '?' + queryString);
-            if (this.logger.isEnabledFor(Level.ERROR)) {
+            if (LOGGER.isEnabledFor(Level.ERROR)) {
                 StringBuilder message = new StringBuilder();
                 if (null == emrid || emrid.length() == 0) {
                     message.append("null emrid");
@@ -55,11 +55,11 @@ public class CMERedirectAction implements Action {
                     }
                     message.append("unknown host: " + host);
                 }
-                this.logger.error(message.toString());
+                LOGGER.error(message.toString());
             }
         }
-        if (this.logger.isDebugEnabled()) {
-            this.logger.debug("redirecting to cme host: host = " + host + " emrid = " + emrid + " redirectUrl = " + result.get(CME_REDIRECT_KEY));
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("redirecting to cme host: host = " + host + " emrid = " + emrid + " redirectUrl = " + result.get(CME_REDIRECT_KEY));
         }
         return result;
     }

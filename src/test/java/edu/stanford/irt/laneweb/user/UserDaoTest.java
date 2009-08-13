@@ -45,9 +45,9 @@ public class UserDaoTest {
     private UserDao userDao;
 
     @Test
-    public void testCookieUserInfo() throws Exception {
+    public void testCookieUserInfo() {
         resetCookieTest();
-        StringBuffer cookieValue = new StringBuffer();
+        StringBuffer cookieValue = new StringBuffer(128);
         cookieValue.append("ceyates");
         cookieValue.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
         cookieValue.append(String.valueOf(new Date().getTime()));
@@ -67,9 +67,10 @@ public class UserDaoTest {
         verify(this.request);
     }
 
-    public final void testGetSunetIdCookieModified() throws Exception {
+    @Test
+    public final void testGetSunetIdCookieModified() {
         resetCookieTest();
-        StringBuffer cookieValue = new StringBuffer();
+        StringBuffer cookieValue = new StringBuffer(128);
         cookieValue.append("ceyates");
         cookieValue.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
         cookieValue.append(String.valueOf(new Date().getTime()));
@@ -89,7 +90,8 @@ public class UserDaoTest {
         verify(this.request);
     }
 
-    public final void testGetSunetIdCookieNull() throws Exception {
+    @Test
+    public final void testGetSunetIdCookieNull() {
         resetCookieTest();
         replay(this.request);
         User user = this.userDao.createOrUpdateUser(this.request);
@@ -99,7 +101,8 @@ public class UserDaoTest {
         verify(this.request);
     }
 
-    public final void testGetSunetIdLimitTime() throws Exception {
+    @Test
+    public final void testGetSunetIdLimitTime() {
         resetCookieTest();
         GregorianCalendar gc = new GregorianCalendar();
         gc.add(Calendar.DAY_OF_YEAR, -13);
@@ -122,9 +125,10 @@ public class UserDaoTest {
         verify(this.request);
     }
 
-    public final void testGetSunetIdSunetIdNull() throws Exception {
+    @Test
+    public final void testGetSunetIdSunetIdNull() {
         resetCookieTest();
-        StringBuffer cookieValue = new StringBuffer();
+        StringBuffer cookieValue = new StringBuffer(128);
         cookieValue.append("");
         cookieValue.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
         cookieValue.append(String.valueOf(new Date().getTime()));
@@ -143,7 +147,8 @@ public class UserDaoTest {
         verify(this.request);
     }
 
-    public final void testGetSunetIdTimePassed() throws Exception {
+    @Test
+    public final void testGetSunetIdTimePassed() {
         resetCookieTest();
         GregorianCalendar gc = new GregorianCalendar();
         gc.add(Calendar.DAY_OF_YEAR, -15);
@@ -166,9 +171,10 @@ public class UserDaoTest {
         verify(this.request);
     }
 
-    public final void testGetSunetIdUserAgent() throws Exception {
+    @Test
+    public final void testGetSunetIdUserAgent() {
         resetCookieTest();
-        StringBuffer cookieValue = new StringBuffer();
+        StringBuffer cookieValue = new StringBuffer(128);
         cookieValue.append("ceyates");
         cookieValue.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
         cookieValue.append(String.valueOf(new Date().getTime()));
@@ -215,9 +221,9 @@ public class UserDaoTest {
     }
 
     @Test
-    public void testNotTimeGetSunetId() throws Exception {
+    public void testNotTimeGetSunetId() {
         resetCookieTest();
-        StringBuffer cookieValue = new StringBuffer();
+        StringBuffer cookieValue = new StringBuffer(128);
         cookieValue.append("ceyates");
         cookieValue.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
         cookieValue.append("");
@@ -236,7 +242,7 @@ public class UserDaoTest {
         verify(this.request);
     }
 
-    private void resetCookieTest() throws Exception {
+    private void resetCookieTest() {
         expect(this.request.getHeader("x-webauth-user")).andReturn(null);
         expect(this.request.getCookies()).andReturn(this.cookies);
         expect(this.request.getRemoteAddr()).andReturn(this.ip);
@@ -244,7 +250,7 @@ public class UserDaoTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(Session.class);
         this.subjectSource = createMock(SubjectSource.class);

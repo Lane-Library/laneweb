@@ -33,10 +33,8 @@ public class HttpResource extends UrlResource {
     }
 
     @Override
-    public Resource createRelative(String relativePath) throws MalformedURLException {
-        if (relativePath.startsWith("/")) {
-            relativePath = relativePath.substring(1);
-        }
+    public Resource createRelative(final String path) throws MalformedURLException {
+        String relativePath = path.startsWith("/") ? path.substring(1) : path;
         return new HttpResource(new URL(this.context, relativePath), this.authorization);
     }
 

@@ -14,13 +14,13 @@ import org.apache.log4j.Logger;
  */
 public class ThrottlingPipeline extends CachingProcessingPipeline {
 
+    private static final Logger LOGGER = Logger.getLogger(ThrottlingPipeline.class);
+
     /**
      * the currently processed host/urls. The superclass is a pooled Component
      * so this has to be a static variable.
      */
-    private static Collection<String> REQUESTS = new HashSet<String>();
-
-    private Logger logger = Logger.getLogger(ThrottlingPipeline.class);
+    private static final Collection<String> REQUESTS = new HashSet<String>();
 
     private String requestKey;
 
@@ -47,8 +47,8 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
         if (null == this.requestKey) {
             throw new IllegalStateException("null requestKey");
         }
-        if (this.logger.isDebugEnabled()) {
-            this.logger.debug("requestKey = " + this.requestKey);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("requestKey = " + this.requestKey);
         }
         synchronized (REQUESTS) {
             if (REQUESTS.contains(this.requestKey)) {

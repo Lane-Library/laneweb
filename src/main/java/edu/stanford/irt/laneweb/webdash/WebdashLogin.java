@@ -15,11 +15,11 @@ public class WebdashLogin {
 
     private static final String ERROR_URL = "/webdashError.html";
 
+    private static final Logger LOGGER = Logger.getLogger(WebdashLogin.class);
+
     private static final String LOGIN_URL = "https://webda.sh/auth/auth_post?";
 
     private static final String REGISTRATION_URL = "https://webda.sh/auth/init_post?";
-
-    private Logger logger = Logger.getLogger(WebdashLogin.class);
 
     private Mac mac;
     
@@ -28,19 +28,19 @@ public class WebdashLogin {
             throw new IllegalStateException("webdashKey not set");
         }
         if (null == sunetId || sunetId.length() == 0) {
-            this.logger.error("null sunetId");
+            LOGGER.error("null sunetId");
             return ERROR_URL;
         }
         if (null == name || name.length() == 0) {
-            this.logger.error("null name");
+            LOGGER.error("null name");
             return ERROR_URL;
         }
         if (null == affiliation || affiliation.length() == 0) {
-            this.logger.error("null affiliation");
+            LOGGER.error("null affiliation");
             return ERROR_URL;
         }
         if (null == nonce || nonce.length() == 0) {
-            this.logger.error("null nonce");
+            LOGGER.error("null nonce");
             return ERROR_URL;
         }
         String encodedId = encodeParameter(sunetId);
