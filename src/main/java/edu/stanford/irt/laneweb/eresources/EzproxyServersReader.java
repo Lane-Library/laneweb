@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
+import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -46,26 +47,29 @@ public class EzproxyServersReader implements Reader {
 
     private DataSource dataSource;
 
-    private ThreadLocal<OutputStream> outputStream = new ThreadLocal<OutputStream>();
+    private Set<String> excludedHosts;
+
+    private OutputStream outputStream;
 
     public void generate() throws IOException {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
-        OutputStream out = this.outputStream.get();
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(SQL);
             while (rs.next()) {
-                out.write(HJ);
-                out.write(rs.getString(1).getBytes());
-                out.write('\n');
+                String host = rs.getString(1);
+                if (!this.excludedHosts.contains(host)) {
+                    this.outputStream.write(HJ);
+                    this.outputStream.write(host.getBytes());
+                    this.outputStream.write('\n');
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            this.outputStream.set(null);
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);
             JdbcUtils.closeConnection(conn);
@@ -87,11 +91,18 @@ public class EzproxyServersReader implements Reader {
         this.dataSource = dataSource;
     }
 
+    public void setExcludedHosts(final Set<String> excludedHosts) {
+        if (null == excludedHosts) {
+            throw new IllegalArgumentException("null excludedHosts");
+        }
+        this.excludedHosts = excludedHosts;
+    }
+
     public void setOutputStream(final OutputStream outputStream) {
         if (null == outputStream) {
             throw new IllegalArgumentException("null outputStream");
         }
-        this.outputStream.set(outputStream);
+        this.outputStream = outputStream;
     }
 
     @SuppressWarnings("unchecked")
