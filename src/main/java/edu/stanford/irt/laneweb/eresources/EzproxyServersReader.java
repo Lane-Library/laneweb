@@ -47,8 +47,6 @@ public class EzproxyServersReader implements Reader {
 
     private DataSource dataSource;
 
-    private Set<String> excludedHosts;
-
     private OutputStream outputStream;
 
     public void generate() throws IOException {
@@ -61,11 +59,9 @@ public class EzproxyServersReader implements Reader {
             rs = stmt.executeQuery(SQL);
             while (rs.next()) {
                 String host = rs.getString(1);
-                if (!this.excludedHosts.contains(host)) {
-                    this.outputStream.write(HJ);
-                    this.outputStream.write(host.getBytes());
-                    this.outputStream.write('\n');
-                }
+                this.outputStream.write(HJ);
+                this.outputStream.write(host.getBytes());
+                this.outputStream.write('\n');
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -89,13 +85,6 @@ public class EzproxyServersReader implements Reader {
             throw new IllegalArgumentException("null dataSource");
         }
         this.dataSource = dataSource;
-    }
-
-    public void setExcludedHosts(final Set<String> excludedHosts) {
-        if (null == excludedHosts) {
-            throw new IllegalArgumentException("null excludedHosts");
-        }
-        this.excludedHosts = excludedHosts;
     }
 
     public void setOutputStream(final OutputStream outputStream) {
