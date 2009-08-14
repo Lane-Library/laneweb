@@ -177,8 +177,8 @@
         </property>
     </bean>
 
-    <bean name="org.apache.cocoon.components.modules.input.InputModule/mt-munge"
-        class="edu.stanford.irt.laneweb.inputmodule.MTMungingInputModule"/>
+    <!--<bean name="org.apache.cocoon.components.modules.input.InputModule/mt-munge"
+        class="edu.stanford.irt.laneweb.inputmodule.MTMungingInputModule"/>-->
 
     <bean name="org.apache.cocoon.generation.Generator/file"
         class="org.apache.cocoon.generation.FileGenerator" scope="prototype">

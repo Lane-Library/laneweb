@@ -127,7 +127,7 @@
                 <map:match type="regex-parameter" pattern=".+">
                     <map:parameter name="parameter-name" value="id"/>
                     <map:generate type="html"
-                        src="${jndi/medblog-base}/lane-faq/archives/{mt-munge:${request/parameters/id}}.xml"/>
+                        src="${jndi/medblog-base}/lane-faq/archives/${request/parameters/id}.xml"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/individual-faq.xsl">
                             <map:transform type="saxon" src="xsl/individual-faq.xsl">
@@ -146,7 +146,7 @@
                 <map:match type="regex-parameter" pattern=".+">
                     <map:parameter name="parameter-name" value="category"/>
                     <map:generate type="html"
-                        src="${jndi/medblog-base}/lane-faq/archives/{mt-munge:${request/parameters/category}}.xml"/>
+                        src="${jndi/medblog-base}/lane-faq/archives/${request/parameters/category}.xml"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/category-faq.xsl">
                             <map:transform type="saxon" src="xsl/category-faq.xsl">
@@ -165,7 +165,7 @@
             </map:match>
             <map:match pattern="faq-category-list.html" type="wildcard">
                 <map:generate type="html"
-                    src="${jndi/medblog-base}/lane-faq/archives/{mt-munge:${request/parameters/category}}.xml"/>
+                    src="${jndi/medblog-base}/lane-faq/archives/${request/parameters/category}.xml"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/faq-category-list.xsl">
                         <map:transform type="saxon" src="xsl/faq-category-list.xsl">

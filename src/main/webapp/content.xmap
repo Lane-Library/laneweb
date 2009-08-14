@@ -104,7 +104,7 @@
                 <map:match type="regex-parameter" pattern=".+">
                     <map:parameter name="parameter-name" value="id"/>
                     <map:generate type="html"
-                        src="${jndi/medblog-base}/lane-faq/archives/{mt-munge:${request/parameters/id}}.xml"/>
+                        src="${jndi/medblog-base}/lane-faq/archives/${request/parameters/id}.xml"/>
                     <map:transform type="saxon" src="context://xsl/individual-faq.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
@@ -112,7 +112,7 @@
                 <map:match type="regex-parameter" pattern=".+">
                     <map:parameter name="parameter-name" value="category"/>
                     <map:generate type="html"
-                        src="${jndi/medblog-base}/lane-faq/archives/{mt-munge:${request/parameters/category}}.xml"/>
+                        src="${jndi/medblog-base}/lane-faq/archives/${request/parameters/category}.xml"/>
                     <map:transform type="saxon" src="context://xsl/category-faq.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
@@ -120,15 +120,15 @@
             </map:match>
             <map:match pattern="faq-category-list.html/*" type="wildcard">
                 <map:generate type="html"
-                    src="${jndi/medblog-base}/lane-faq/archives/{mt-munge:{1}}.xml"/>
+                    src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                 <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
-                    <map:parameter name="category" value="{mt-munge:{1}}"/>
+                    <map:parameter name="category" value="{1}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="popup.html" type="wildcard">
                 <map:generate type="html"
-                    src="${jndi/medblog-base}/lane-faq/archives/{mt-munge:${request/parameters/id}}.xml"/>
+                    src="${jndi/medblog-base}/lane-faq/archives/${request/parameters/id}.xml"/>
                 <map:transform type="saxon" src="context://xsl/popup-faq.xsl">
                     <map:parameter name="id" value="${request/parameters/id}"/>
                 </map:transform>
