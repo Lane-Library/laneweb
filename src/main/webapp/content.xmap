@@ -89,6 +89,7 @@
             <!-- secure/** generates an error unless used from a pipeline -->
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="${jndi/live-base}/content/secure/{1}"/>
+                <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
@@ -101,10 +102,10 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="howto/index.html" type="wildcard">
-                <map:match type="regex-parameter" pattern=".+">
+                <map:match type="regex-parameter" pattern="_?(\d.+)">
                     <map:parameter name="parameter-name" value="id"/>
                     <map:generate type="html"
-                        src="${jndi/medblog-base}/lane-faq/archives/${request/parameters/id}.xml"/>
+                        src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                     <map:transform type="saxon" src="context://xsl/individual-faq.xsl"/>
                     <map:transform type="xinclude-munging"/>
                     <map:transform type="xinclude"/>
@@ -113,13 +114,22 @@
                 <map:match type="regex-parameter" pattern=".+">
                     <map:parameter name="parameter-name" value="category"/>
                     <map:generate type="html"
-                        src="${jndi/medblog-base}/lane-faq/archives/${request/parameters/category}.xml"/>
+                        src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                     <map:transform type="saxon" src="context://xsl/category-faq.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
+            <!-- TODO: remove this match after the xincludes are changed to remove .html -->
             <map:match pattern="faq-category-list.html/*" type="wildcard">
+                <map:generate type="html"
+                    src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
+                <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
+                    <map:parameter name="category" value="{1}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="faq-category-list/*" type="wildcard">
                 <map:generate type="html"
                     src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                 <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">

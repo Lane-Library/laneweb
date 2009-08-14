@@ -10,18 +10,19 @@
                     src="context://stage/eresources.xmap"/>
             </map:match>
             <map:match pattern="apps/**" type="wildcard">
-                <map:mount uri-prefix="apps" check-reload="no" src="context://stage/applications.xmap"/>
+                <map:mount uri-prefix="apps" check-reload="no"
+                    src="context://stage/applications.xmap"/>
             </map:match>
             <map:match pattern="bassett/**" type="wildcard">
-                <map:mount uri-prefix="bassett" check-reload="yes" src="context://stage/bassett.xmap"/>
+                <map:mount uri-prefix="bassett" check-reload="yes"
+                    src="context://stage/bassett.xmap"/>
             </map:match>
             <map:match pattern="rss/**" type="wildcard">
                 <map:mount uri-prefix="rss" check-reload="yes" src="context://stage/rss.xmap"/>
             </map:match>
-            
+
             <map:match pattern="online/(.+)browse.html" type="regexp">
-                <map:generate type="html"
-                    src="${jndi/stage-base}/content/online/{1}browse.html"/>
+                <map:generate type="html" src="${jndi/stage-base}/content/online/{1}browse.html"/>
                 <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
@@ -35,7 +36,8 @@
             </map:match>
             <map:match pattern="secure/reloadresources.html" type="wildcard">
                 <map:act type="search-context-reloader"/>
-                <map:generate type="html" src="${jndi/stage-base}/content/secure/reloadresources.html"/>
+                <map:generate type="html"
+                    src="${jndi/stage-base}/content/secure/reloadresources.html"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="random" type="wildcard">
@@ -44,10 +46,10 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="page2rss" type="wildcard">
-                 <map:redirect-to uri="/stage/rss/page2rss?${request/queryString}"/>
+                <map:redirect-to uri="/stage/rss/page2rss?${request/queryString}"/>
             </map:match>
-              <map:match pattern="ncbi-rss2html/**" type="wildcard">
-                <map:generate src="cocoon:/rss/ncbi-rss2html/{1}" type="file"/> 
+            <map:match pattern="ncbi-rss2html/**" type="wildcard">
+                <map:generate src="cocoon:/rss/ncbi-rss2html/{1}" type="file"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
@@ -57,10 +59,12 @@
                 <map:act type="persistentLoginAction">
                     <map:parameter name="sunet-id" value="${session/attributes/user/sunetId}"/>
                 </map:act>
-                <map:generate type="html" src="${jndi/stage-base}/content/secure/persistentlogin.html"/>
+                <map:generate type="html"
+                    src="${jndi/stage-base}/content/secure/persistentlogin.html"/>
                 <map:transform src="context://xsl/persistentlogin.xsl" type="saxon">
                     <map:parameter name="persistent-login" value="${request/parameters/pl}"/>
-                    <map:parameter name="remove-persistent-login" value="${request/parameters/remove-pl}"/>
+                    <map:parameter name="remove-persistent-login"
+                        value="${request/parameters/remove-pl}"/>
                     <map:parameter name="lane-user-cookie" value="${request/cookies/u-lane}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
@@ -85,6 +89,7 @@
             <!-- secure/** generates an error unless used from a pipeline -->
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="${jndi/stage-base}/content/secure/{1}"/>
+                <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
@@ -92,25 +97,31 @@
         </map:pipeline>
         <map:pipeline type="noncaching">
             <map:match pattern="howto/index.html" type="wildcard">
-                <map:match type="regex-parameter"
-                    pattern=".+">
+                <map:match type="regex-parameter" pattern="_?(\d.+)">
                     <map:parameter name="parameter-name" value="id"/>
-                    <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/${request/parameters/id}.xml"/>
+                    <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                     <map:transform type="saxon" src="context://xsl/individual-faq.xsl"/>
                     <map:transform type="xinclude-munging"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
-                <map:match type="regex-parameter"
-                    pattern=".+">
+                <map:match type="regex-parameter" pattern=".+">
                     <map:parameter name="parameter-name" value="category"/>
-                    <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/${request/parameters/category}.xml"/>
+                    <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                     <map:transform type="saxon" src="context://xsl/category-faq.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
+            <!-- TODO: remove this match after the xincludes are changed to remove .html -->
             <map:match pattern="faq-category-list.html/*" type="wildcard">
+                <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
+                <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
+                    <map:parameter name="category" value="{1}"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="faq-category-list/*" type="wildcard">
                 <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                 <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
                     <map:parameter name="category" value="{1}"/>
@@ -123,7 +134,8 @@
                         <map:generate type="file" src="context://resources/templates/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="context://resources/templates/{defaults:template}.xml"/>
+                        <map:generate type="file"
+                            src="context://resources/templates/{defaults:template}.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
