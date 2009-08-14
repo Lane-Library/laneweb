@@ -27,6 +27,7 @@ public class GZipTxtResourceReader extends TxtResourceReader {
     public void setup(SourceResolver resolver, Map objectModel, String src, Parameters par) throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
         this.pip.getResponse().setHeader("Content-Encoding", "gzip");
+        this.pip.getResponse().setHeader("Vary", "Accept-Encoding");
     }
 
     private ProcessInfoProvider pip;

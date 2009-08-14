@@ -18,6 +18,7 @@ public class GZipXMLSerializer extends XMLSerializer {
     public void endDocument() throws SAXException {
         super.endDocument();
         this.pip.getResponse().setHeader("Content-Encoding", "gzip");
+        this.pip.getResponse().setHeader("Vary", "Accept-Encoding");
         try {
             ((GZIPOutputStream)this.output).finish();
         } catch (IOException e) {
