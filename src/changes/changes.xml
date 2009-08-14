@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2009-08-17" version="1.9.24" description="1.9.24 bug fix release">
+            <action date="2009-08-14" dev="ceyates" issue="30433" type="fix">
+                allow mailto: scheme in area href attributes
+            </action>
             <action date="2009-08-13" dev="ceyates" issue="30392" type="add">
                 Don't proxy stanford.edu except jenson, library and socrates
             </action>
