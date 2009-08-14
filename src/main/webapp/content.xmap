@@ -106,6 +106,7 @@
                     <map:generate type="html"
                         src="${jndi/medblog-base}/lane-faq/archives/${request/parameters/id}.xml"/>
                     <map:transform type="saxon" src="context://xsl/individual-faq.xsl"/>
+                    <map:transform type="xinclude-munging"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
