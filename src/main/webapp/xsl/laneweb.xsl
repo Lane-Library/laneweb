@@ -322,7 +322,7 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="h:a">
+    <xsl:template match="h:a|h:area">
         <xsl:choose>
             <xsl:when test="starts-with(@href, '/')">
                 <xsl:choose>
@@ -352,7 +352,9 @@
                 </xsl:variable>
                 <script type="text/javascript">
                     <xsl:comment>
-                        <xsl:text>&#xD;document.write('&lt;a href="</xsl:text>
+                        <xsl:text>&#xD;document.write('&lt;</xsl:text>
+                        <xsl:value-of select="name()"/>
+                        <xsl:text> href="</xsl:text>
                         <xsl:value-of select="$address"/>
                         <xsl:text>"</xsl:text>
                         <xsl:for-each select="attribute::node()[not(name() = 'href')]">
@@ -379,7 +381,9 @@
                         <xsl:call-template name="js-split">
                             <xsl:with-param name="string" select="normalize-space()"/>
                         </xsl:call-template>
-                        <xsl:text>+'&lt;/a&gt;');&#xD;</xsl:text>
+                        <xsl:text>+'&lt;/</xsl:text>
+                        <xsl:value-of select="name()"/>
+                        <xsl:text>&gt;');&#xD;</xsl:text>
                     </xsl:comment>
                 </script>
             </xsl:when>
