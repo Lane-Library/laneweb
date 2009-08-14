@@ -105,7 +105,7 @@
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
-                <map:match type="regex-parameter" pattern=".+">
+                <map:match type="regex-parameter" pattern="(.+)">
                     <map:parameter name="parameter-name" value="category"/>
                     <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                     <map:transform type="saxon" src="context://xsl/category-faq.xsl"/>
