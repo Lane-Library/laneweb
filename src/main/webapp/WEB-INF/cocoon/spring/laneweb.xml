@@ -318,7 +318,12 @@
         class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
 
     <bean name="org.apache.cocoon.transformation.Transformer/proxy-links"
-        class="edu.stanford.irt.laneweb.proxy.ProxyLinkTransformer" scope="prototype">
+        class="edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer" scope="prototype">
+        <property name="proxyHostManager" ref="edu.stanford.irt.laneweb.proxy.ProxyHostManager"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.transformation.Transformer/search-proxy-links"
+        class="edu.stanford.irt.laneweb.search.SearchProxyLinkTransformer" scope="prototype">
         <property name="proxyHostManager" ref="edu.stanford.irt.laneweb.proxy.ProxyHostManager"/>
     </bean>
 

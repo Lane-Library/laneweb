@@ -41,26 +41,13 @@
                     <map:transform type="cme-links">
                         <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                     </map:transform>
-                    <map:select type="resource-exists">
-                        <map:when test="xsl/search-proxy.xsl">
-                            <map:transform type="saxon" src="xsl/search-proxy.xsl">
-                                <map:parameter name="base-path" value=""/>
-                                <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                                <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                                <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
-                                <map:parameter name="proxy-links" value="${proxyLinks}"/>
-                            </map:transform>
-                        </map:when>
-                        <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-proxy.xsl">
-                                <map:parameter name="base-path" value=""/>
-                                <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                                <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                                <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
-                                <map:parameter name="proxy-links" value="${proxyLinks}"/>
-                            </map:transform>
-                        </map:otherwise>
-                    </map:select>
+                    <map:transform type="search-proxy-links">
+                        <map:parameter name="base-path" value="${request/contextPath}/your-sunet-id"/>
+                        <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                        <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
+                        <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
+                        <map:parameter name="proxy-links" value="${proxyLinks}"/>
+                    </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- result with proxy links (if necessary) in json format -->

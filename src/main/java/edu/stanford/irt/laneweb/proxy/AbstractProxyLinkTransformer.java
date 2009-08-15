@@ -5,35 +5,36 @@ import java.util.Map;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.transformation.AbstractTransformer;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.laneweb.user.User;
 
-public class ProxyLinkTransformer extends AbstractTransformer {
+public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     private static final String EMPTY_STRING = "";
 
     private static final String EZPROXY_LINK = "http://laneproxy.stanford.edu/login?user=";
-
-    private static final String HREF = "href";
 
     private static final String TICKET = "&ticket=";
 
     private static final String URL = "&url=";
 
     private static final String WEBAUTH_LINK = "/secure/login.html?url=";
+    
+    private String basePath;
 
-    private ProxyHostManager proxyHostManager;
-
-    private boolean proxyLinks;
+    private String ipGroup;
 
     private String sunetid;
 
     private String ticket;
-    
-    private String ipGroup;
+
+    protected ProxyHostManager proxyHostManager;
+
+    protected boolean proxyLinks;
+
+    public AbstractProxyLinkTransformer() {
+        super();
+    }
 
     public void setProxyHostManager(final ProxyHostManager proxyHostManager) {
         this.proxyHostManager = proxyHostManager;
@@ -45,32 +46,15 @@ public class ProxyLinkTransformer extends AbstractTransformer {
         this.ticket = params.getParameter(User.TICKET, EMPTY_STRING);
         this.proxyLinks = params.getParameterAsBoolean(User.PROXY_LINKS, false);
         this.ipGroup = params.getParameter(User.IPGROUP, "OTHER");
+        this.basePath = params.getParameter("base-path", "");
     }
 
-    @Override
-    public void startElement(final String uri, final String localName, final String name, final Attributes atts) throws SAXException {
-        if (this.proxyLinks) {
-            if ("a".equals(localName)) {
-                String link = atts.getValue(HREF);
-                if (null != link && link.indexOf("http") == 0) {
-                    if (this.proxyHostManager.isProxyableLink(link)) {
-                        AttributesImpl newAttributes = new AttributesImpl(atts);
-                        newAttributes.setValue(newAttributes.getIndex(HREF), createProxyLink(link));
-                        this.xmlConsumer.startElement(uri, localName, name, newAttributes);
-                        return;
-                    }
-                }
-            }
-        }
-        this.xmlConsumer.startElement(uri, localName, name, atts);
-    }
-
-    private String createProxyLink(final String link) {
-        StringBuffer sb = new StringBuffer();
+    protected String createProxyLink(final String link) {
+        StringBuilder sb = new StringBuilder(128);
         if ("SHC".equals(this.ipGroup) || "LPCH".equals(this.ipGroup)) {
             sb.append("http://laneproxy.stanford.edu/login?url=");
         } else if (EMPTY_STRING.equals(this.ticket) || EMPTY_STRING.equals(this.sunetid)) {
-            sb.append(WEBAUTH_LINK);
+            sb.append(this.basePath).append(WEBAUTH_LINK);
         } else {
             sb.append(EZPROXY_LINK).append(this.sunetid).append(TICKET).append(this.ticket).append(URL);
         }
