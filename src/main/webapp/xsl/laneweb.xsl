@@ -415,8 +415,8 @@
     </xsl:template>
 
     <!-- =====================  SPECIAL CASE TEMPLATES ===================== -->
-    <!-- obfuscated email href (don't copy, processed elsewhere) (but not <area> -->
-    <xsl:template match="attribute::href[starts-with(.,'mailto:') and name(..) != 'area' ]"/>
+    <!-- obfuscated email href (don't copy, processed elsewhere) -->
+    <xsl:template match="attribute::href[starts-with(.,'mailto:')]"/>
 
     <!-- add back to top for dl lists > 20 -->
     <xsl:template match="h:dl[count(h:dd) &gt; 20]">
