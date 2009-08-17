@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.eresources;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,13 +28,12 @@ public class LinkScanGenerator implements Generator {
 
     private DataSource dataSource;
 
-    private ThreadLocal<XMLConsumer> xmlConsumer = new ThreadLocal<XMLConsumer>();
+    private XMLConsumer consumer;
 
-    public void generate() throws IOException, SAXException, ProcessingException {
+    public void generate() throws SAXException, ProcessingException {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
-        XMLConsumer consumer = this.xmlConsumer.get();
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
@@ -67,18 +65,17 @@ public class LinkScanGenerator implements Generator {
         } catch (SQLException e) {
             throw new ProcessingException(e);
         } finally {
-            this.xmlConsumer.set(null);
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);
             JdbcUtils.closeConnection(conn);
         }
     }
 
-    public void setConsumer(final XMLConsumer xmlConsumer) {
-        if (null == xmlConsumer) {
-            throw new IllegalArgumentException("null xmlConsumer");
+    public void setConsumer(final XMLConsumer consumer) {
+        if (null == consumer) {
+            throw new IllegalArgumentException("null consumer");
         }
-        this.xmlConsumer.set(xmlConsumer);
+        this.consumer = consumer;
     }
 
     public void setDataSource(final DataSource dataSource) {

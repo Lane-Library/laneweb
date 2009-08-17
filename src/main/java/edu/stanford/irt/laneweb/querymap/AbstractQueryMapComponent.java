@@ -26,15 +26,15 @@ public abstract class AbstractQueryMapComponent implements SitemapModelComponent
 
     private static final String RESOURCE_MAPS = "resource-maps";
 
-    private ThreadLocal<Integer> abstractCount = new ThreadLocal<Integer>();
+    private int abstractCount;
 
-    private ThreadLocal<Map<String, Float>> descriptorWeights = new ThreadLocal<Map<String, Float>>();
+    private Map<String, Float> descriptorWeights;
 
-    private ThreadLocal<String> query = new ThreadLocal<String>();
+    private String query;
 
     private QueryMapper queryMapper;
 
-    private ThreadLocal<Map<String, Set<Resource>>> resourceMaps = new ThreadLocal<Map<String, Set<Resource>>>();
+    private Map<String, Set<Resource>> resourceMaps;
 
     public void setQueryMapper(final QueryMapper queryMapper) {
         if (null == queryMapper) {
@@ -58,40 +58,30 @@ public abstract class AbstractQueryMapComponent implements SitemapModelComponent
         if ((null != mapURL) && (null != weightURL)) {
             try {
                 Source mapSource = resolver.resolveURI(mapURL);
-                this.resourceMaps.set(new StreamResourceMapping(mapSource.getInputStream()));
+                this.resourceMaps = new StreamResourceMapping(mapSource.getInputStream());
                 Source weightSource = resolver.resolveURI(weightURL);
-                this.descriptorWeights.set(new DescriptorWeightMap(weightSource.getInputStream()));
-                this.abstractCount.set(Integer.valueOf(abstractCount));
+                this.descriptorWeights = new DescriptorWeightMap(weightSource.getInputStream());
+                this.abstractCount = abstractCount;
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } else {
-            this.descriptorWeights.set(null);
-            this.resourceMaps.set(null);
         }
         if (null == query) {
             throw new IllegalArgumentException("null query");
         }
-        this.query.set(query);
+        this.query = query;
     }
 
     protected QueryMap getQueryMap() {
-        String query = this.query.get();
-        if (null == query) {
+        if (null == this.query) {
             throw new IllegalStateException("null query");
         }
-        if (null == this.resourceMaps.get()) {
-            return this.queryMapper.getQueryMap(query);
+        if (null == this.resourceMaps) {
+            return this.queryMapper.getQueryMap(this.query);
         } else {
-            return this.queryMapper.getQueryMap(query, this.resourceMaps.get(), this.descriptorWeights.get(), this.abstractCount.get().intValue());
+            return this.queryMapper.getQueryMap(this.query, this.resourceMaps, this.descriptorWeights, this.abstractCount);
         }
-    }
-
-    protected void reset() {
-        this.query.set(null);
-        this.descriptorWeights.set(null);
-        this.resourceMaps.set(null);
     }
 }

@@ -4,18 +4,12 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.util.Collections;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
@@ -87,77 +81,5 @@ public class QueryMapReaderTest {
         } catch (IllegalArgumentException e) {
         }
         this.reader.setOutputStream(this.outputStream);
-    }
-
-    // TODO I don't know if this actually does what I want it to.
-    @Test
-    public void testThreads() {
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(100);
-        edu.stanford.irt.querymap.QueryMapper fauxQueryMapper = new edu.stanford.irt.querymap.QueryMapper() {
-
-            @Override
-            public QueryMap getQueryMap(final String query) {
-                Descriptor descriptor = new Descriptor(query, query, Collections.<String> singleton(query));
-                return new QueryMap(query, descriptor, new ResourceMap(descriptor, Collections.<Resource> singleton(new Resource(query, query))), null, null);
-            }
-
-            // TODO: need to more thoroughly test the source reloading:
-            @Override
-            public QueryMap getQueryMap(final String query, final Map<String, Set<Resource>> resourceMaps, final Map<String, Float> descriptorWeights,
-                    final int abstractCount) {
-                return null;
-            }
-        };
-        this.reader.setQueryMapper(fauxQueryMapper);
-        for (int i = 999; i > -1; i--) {
-            final String response = Integer.toString(i);
-            executor.execute(new Runnable() {
-
-                public void run() {
-                    Parameters params = createMock(Parameters.class);
-                    expect(params.getParameter("query", null)).andReturn(response);
-                    expect(params.getParameter("resource-maps", null)).andReturn(null);
-                    expect(params.getParameter("descriptor-weights", null)).andReturn(null);
-                    expect(params.getParameterAsInteger("abstract-count", 100)).andReturn(null);
-                    replay(params);
-                    QueryMapReaderTest.this.reader.setup(null, null, null, params);
-                    try {
-                        QueryMapReaderTest.this.reader.setOutputStream(new OutputStream() {
-
-                            @Override
-                            public void write(final byte[] bytes) {
-                                assertTrue(new String(bytes).indexOf(response) == 10);
-                            }
-
-                            @Override
-                            public void write(final int b) throws IOException {
-                                throw new IOException("not implemented");
-                            }
-                        });
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                    try {
-                        Thread.sleep(Long.parseLong(response));
-                        QueryMapReaderTest.this.reader.generate();
-                    } catch (SAXException e) {
-                        throw new RuntimeException(e);
-                    } catch (NumberFormatException e) {
-                        throw new RuntimeException(e);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    verify(params);
-                }
-            });
-        }
-        executor.shutdown();
-        try {
-            executor.awaitTermination(100, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

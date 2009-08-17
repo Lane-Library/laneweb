@@ -55,7 +55,6 @@ public class AbstractQueryMapComponentTest {
         expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
         replay(this.parameters);
         this.component.setup(null, null, null, this.parameters);
-        this.component.reset();
         try {
             this.component.getQueryMap();
         } catch (IllegalStateException e) {

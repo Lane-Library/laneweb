@@ -10,20 +10,13 @@ public class QueryMapReader extends AbstractQueryMapComponent implements Reader 
 
     private static final String MIME_TYPE = "text/plain";
 
-    private ThreadLocal<OutputStream> outputStream = new ThreadLocal<OutputStream>();
+    private OutputStream outputStream;
 
     public void generate() throws SAXException, IOException {
-        OutputStream outputStream = this.outputStream.get();
-        if (null == outputStream) {
-            super.reset();
+        if (null == this.outputStream) {
             throw new IllegalStateException("null outputStream");
         }
-        try {
-            outputStream.write(new JSONableQueryMap(super.getQueryMap()).toString().getBytes());
-        } finally {
-            this.outputStream.set(null);
-            super.reset();
-        }
+        this.outputStream.write(new JSONableQueryMap(super.getQueryMap()).toString().getBytes());
     }
 
     public long getLastModified() {
@@ -38,7 +31,7 @@ public class QueryMapReader extends AbstractQueryMapComponent implements Reader 
         if (null == outputStream) {
             throw new IllegalArgumentException("null outputStream");
         }
-        this.outputStream.set(outputStream);
+        this.outputStream = outputStream;
     }
 
     public boolean shouldSetContentLength() {

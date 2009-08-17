@@ -7,29 +7,22 @@ import org.xml.sax.SAXException;
 
 public class QueryMapGenerator extends AbstractQueryMapComponent implements Generator {
 
-    private ThreadLocal<XMLConsumer> consumer = new ThreadLocal<XMLConsumer>();
+    private XMLConsumer consumer;
 
     public void generate() throws SAXException {
-        XMLConsumer consumer = this.consumer.get();
-        if (null == consumer) {
-            super.reset();
+        if (null == this.consumer) {
             throw new IllegalStateException("null consumer");
         }
         XMLizable queryMap = new XMLizableQueryMap(super.getQueryMap());
-        try {
-            consumer.startDocument();
-            queryMap.toSAX(consumer);
-            consumer.endDocument();
-        } finally {
-            this.consumer.set(null);
-            super.reset();
-        }
+        this.consumer.startDocument();
+        queryMap.toSAX(this.consumer);
+        this.consumer.endDocument();
     }
 
     public void setConsumer(final XMLConsumer consumer) {
         if (null == consumer) {
             throw new IllegalArgumentException("null consumer");
         }
-        this.consumer.set(consumer);
+        this.consumer = consumer;
     }
 }

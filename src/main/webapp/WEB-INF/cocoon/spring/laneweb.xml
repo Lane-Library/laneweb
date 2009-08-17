@@ -203,17 +203,20 @@
         class="edu.stanford.irt.laneweb.HTMLGenerator" scope="prototype"/>
 
     <bean name="org.apache.cocoon.generation.Generator/querymap"
-        class="edu.stanford.irt.laneweb.querymap.QueryMapGenerator">
+        class="edu.stanford.irt.laneweb.querymap.QueryMapGenerator"
+        scope="prototype">
         <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/link-scan"
-        class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator">
+        class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator"
+        scope="prototype">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/spellcheck"
-        class="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator">
+        class="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator"
+        scope="prototype">
         <property name="spellChecker">
             <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
         </property>
@@ -344,12 +347,14 @@
         class="edu.stanford.irt.laneweb.NoCacheBigReader" scope="prototype"/>
 
     <bean name="org.apache.cocoon.reading.Reader/extensions-suggest"
-        class="edu.stanford.irt.laneweb.eresources.ExtensionsSuggestReader">
+        class="edu.stanford.irt.laneweb.eresources.ExtensionsSuggestReader"
+        scope="prototype">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/mesh-suggest"
-        class="edu.stanford.irt.laneweb.mesh.MeshSuggestReader">
+        class="edu.stanford.irt.laneweb.mesh.MeshSuggestReader"
+        scope="prototype">
         <property name="meshDescriptorManager"
             ref="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
     </bean>
@@ -382,7 +387,8 @@
     </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/querymap"
-        class="edu.stanford.irt.laneweb.querymap.QueryMapReader">
+        class="edu.stanford.irt.laneweb.querymap.QueryMapReader"
+        scope="prototype">
         <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
     </bean>
 

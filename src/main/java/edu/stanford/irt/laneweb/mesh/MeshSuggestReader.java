@@ -22,47 +22,38 @@ public class MeshSuggestReader implements Reader {
 
     private static final int JSON_RETURN_LIMIT = 20;
 
-    private ThreadLocal<String> limit = new ThreadLocal<String>();
+    private String limit;
 
     private MeshDescriptorManager meshDescriptorManager;
 
-    private ThreadLocal<OutputStream> outputStream = new ThreadLocal<OutputStream>();
+    private OutputStream outputStream;
 
-    private ThreadLocal<String> query = new ThreadLocal<String>();
+    private String query;
 
     public void generate() throws IOException {
-        OutputStream out = this.outputStream.get();
-        String q = this.query.get();
-        String l = this.limit.get();
-        MeshSuggestComparator comparator = new MeshSuggestComparator(q);
+        MeshSuggestComparator comparator = new MeshSuggestComparator(this.query);
         TreeSet<String> meshSet = new TreeSet<String>(comparator);
         Collection<MeshDescriptor> descriptors;
-        if ("d".equalsIgnoreCase(l) || "p".equalsIgnoreCase(l)) {
-            descriptors = this.meshDescriptorManager.getDescriptorsForDiseaseTerm(q);
-        } else if ("i".equalsIgnoreCase(l)) {
-            descriptors = this.meshDescriptorManager.getDescriptorsForInterventionTerm(q);
+        if ("d".equalsIgnoreCase(this.limit) || "p".equalsIgnoreCase(this.limit)) {
+            descriptors = this.meshDescriptorManager.getDescriptorsForDiseaseTerm(this.query);
+        } else if ("i".equalsIgnoreCase(this.limit)) {
+            descriptors = this.meshDescriptorManager.getDescriptorsForInterventionTerm(this.query);
         } else {
-            descriptors = this.meshDescriptorManager.getDescriptorsForTerm(q);
+            descriptors = this.meshDescriptorManager.getDescriptorsForTerm(this.query);
         }
         for (MeshDescriptor descriptor : descriptors) {
             meshSet.add(descriptor.getDescriptorName());
         }
         Iterator<String> it = meshSet.iterator();
         int count = 0;
-        try {
-            out.write(JSON_1);
+            this.outputStream.write(JSON_1);
             String maybeComma = "\"";
             while (it.hasNext() && count < JSON_RETURN_LIMIT) {
                 count++;
-                out.write((maybeComma + it.next() + '"').getBytes());
+                this.outputStream.write((maybeComma + it.next() + '"').getBytes());
                 maybeComma = ",\"";
             }
-            out.write(JSON_2);
-        } finally {
-            this.outputStream.set(null);
-            this.query.set(null);
-            this.limit.set(null);
-        }
+            this.outputStream.write(JSON_2);
     }
 
     public long getLastModified() {
@@ -84,13 +75,13 @@ public class MeshSuggestReader implements Reader {
         if (null == outputStream) {
             throw new IllegalArgumentException("null outputStream");
         }
-        this.outputStream.set(outputStream);
+        this.outputStream = outputStream;
     }
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters params) {
-        this.limit.set(params.getParameter("limit", null));
-        this.query.set(params.getParameter("query", null));
+        this.limit = params.getParameter("limit", null);
+        this.query = params.getParameter("query", null);
     }
 
     public boolean shouldSetContentLength() {

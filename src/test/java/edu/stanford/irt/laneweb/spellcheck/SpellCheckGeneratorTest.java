@@ -8,9 +8,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
@@ -92,56 +89,5 @@ public class SpellCheckGeneratorTest {
         }
         this.generator.setup(null, null, null, this.params);
         verify(this.params);
-    }
-
-    @Test
-    public void testThreads() {
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(100);
-        SpellChecker fauxSpellChecker = new SpellChecker() {
-
-            public SpellCheckResult spellCheck(final String words) {
-                return new SpellCheckResult(words);
-            }
-        };
-        this.generator.setSpellChecker(fauxSpellChecker);
-        for (int i = 99; i > -1; i--) {
-            final String response = Integer.toString(i);
-            synchronized (this.spellChecker) {
-                expect(this.spellChecker.spellCheck(response)).andReturn(new SpellCheckResult(response));
-            }
-            executor.execute(new Runnable() {
-
-                public void run() {
-                    Parameters params = createMock(Parameters.class);
-                    expect(params.getParameter("query", null)).andReturn(response);
-                    replay(params);
-                    SpellCheckGeneratorTest.this.generator.setup(null, null, null, params);
-                    SpellCheckGeneratorTest.this.generator.setConsumer(new AbstractXMLConsumer() {
-
-                        @Override
-                        public void characters(final char[] chars, final int start, final int length) {
-                            assertEquals(response, new String(chars, start, length));
-                        }
-                    });
-                    try {
-                        Thread.sleep(Long.parseLong(response));
-                        SpellCheckGeneratorTest.this.generator.generate();
-                    } catch (SAXException e) {
-                        throw new RuntimeException(e);
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    verify(params);
-                }
-            });
-        }
-        executor.shutdown();
-        try {
-            executor.awaitTermination(10, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

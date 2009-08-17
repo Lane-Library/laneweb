@@ -21,39 +21,30 @@ public class SpellCheckGenerator implements Generator {
 
     private static final String QUERY = "query";
 
-    private ThreadLocal<XMLConsumer> consumer = new ThreadLocal<XMLConsumer>();
+    private XMLConsumer consumer;
 
-    private ThreadLocal<String> query = new ThreadLocal<String>();
+    private String query;
 
     private SpellChecker spellChecker;
 
     public void generate() throws SAXException {
-        String query = this.query.get();
-        if (null == query) {
-            this.consumer.set(null);
+        if (null == this.query) {
             throw new IllegalStateException("null query");
         }
-        XMLConsumer consumer = this.consumer.get();
-        if (null == consumer) {
-            this.query.set(null);
+        if (null == this.consumer) {
             throw new IllegalStateException("null consumer");
         }
-        try {
             XMLizable result = new XMLizableSpellCheckResult(query, this.spellChecker.spellCheck(query));
             consumer.startDocument();
             result.toSAX(consumer);
             consumer.endDocument();
-        } finally {
-            this.consumer.set(null);
-            this.query.set(null);
-        }
     }
 
     public void setConsumer(final XMLConsumer consumer) {
         if (null == consumer) {
             throw new IllegalArgumentException("null consumer");
         }
-        this.consumer.set(consumer);
+        this.consumer = consumer;
     }
 
     public void setSpellChecker(final SpellChecker spellChecker) {
@@ -68,10 +59,10 @@ public class SpellCheckGenerator implements Generator {
         if (null == params) {
             throw new IllegalArgumentException("null params");
         }
-        String param = params.getParameter(QUERY, null);
-        if (null == param) {
+        String query = params.getParameter(QUERY, null);
+        if (null == query) {
             throw new IllegalArgumentException("null query");
         }
-        this.query.set(param);
+        this.query = query;
     }
 }
