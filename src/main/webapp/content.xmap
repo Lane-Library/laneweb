@@ -61,7 +61,7 @@
                     <map:parameter name="persistent-login" value="${request/parameters/pl}"/>
                     <map:parameter name="remove-persistent-login"
                         value="${request/parameters/remove-pl}"/>
-                    <map:parameter name="lane-user-cookie" value="${request/cookies/u-lane}"/>
+                    <map:parameter name="lane-user-cookie" value="${request/cookieMap/u-lane}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
