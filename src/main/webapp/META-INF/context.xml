@@ -34,9 +34,6 @@
     <Environment name="webdash-key"
         type="java.lang.String"
         value="${laneweb.context.environment.webdash-key}"/>
-    <Environment name="google-key"
-        type="java.lang.String"
-        value="${laneweb.context.environment.google-key}"/>
     <Environment name="metasearch-failed"
         type="java.lang.String"
         value="${laneweb.context.environment.metasearch-failed}"/>

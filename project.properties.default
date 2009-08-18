@@ -14,7 +14,6 @@ laneweb.context.voyager.maxIdle=
 laneweb.context.voyager.maxWait=
 laneweb.context.environment.webdash-key=
 laneweb.context.environment.ezproxy-key=
-laneweb.context.environment.google-key=
 laneweb.context.environment.live-base=
 laneweb.context.environment.stage-base=
 laneweb.context.environment.medblog-base=
