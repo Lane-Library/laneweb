@@ -43,8 +43,8 @@
             <map:match pattern="search/**" type="wildcard">
                 <map:mount uri-prefix="" check-reload="yes" src="search.xmap"/>
             </map:match>
-            <map:match pattern="random" type="wildcard">
-                <map:generate type="file" src="${request/parameters/source}"/>
+            <map:match pattern="/**" type="wildcard">
+                <map:generate type="file" src="{1}"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/random.xsl">
                         <map:transform type="saxon" src="xsl/random.xsl"/>
