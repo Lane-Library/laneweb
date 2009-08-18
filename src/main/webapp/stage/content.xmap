@@ -40,8 +40,8 @@
                     src="${jndi/stage-base}/content/secure/reloadresources.html"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="random" type="wildcard">
-                <map:generate type="file" src="${request/parameters/source}"/>
+            <map:match pattern="random/**" type="wildcard">
+                <map:generate type="file" src="{1}"/>
                 <map:transform type="saxon" src="context://xsl/random.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
