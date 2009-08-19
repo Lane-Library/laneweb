@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2009-08-19" version="1.9.25" description="1.9.25 bug fix release">
+            <action date="2009-08-19" dev="ceyates" issue="30523" type="fix">
+                LoginAction invoked from /apps/proxy/credential not getting parameters
+            </action>
+            <action date="2009-08-19" dev="ceyates" issue="30497" type="fix">
+                Account link for logged in users broken
+            </action>
+        </release>
         <release date="2009-08-17" version="1.9.24" description="1.9.24 bug fix release">
             <action date="2009-08-14" dev="ceyates" issue="30433" type="fix">
                 allow mailto: scheme in area href attributes
