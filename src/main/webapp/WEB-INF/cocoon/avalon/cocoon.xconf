@@ -81,6 +81,9 @@
     <component role="org.apache.cocoon.components.modules.input.InputModule/urlencode"
         class="org.apache.cocoon.components.modules.input.URLEncodeModule"/>
     
+    <component role="org.apache.cocoon.components.modules.input.InputModule/cookie"
+        class="org.apache.cocoon.components.modules.input.CookieModule"/>
+    
     <component role="org.apache.cocoon.matching.MatcherSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
 
