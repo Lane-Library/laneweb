@@ -109,7 +109,11 @@
                 </map:match>
             </map:match>
               <map:match pattern="proxy/credential" type="wildcard">
-                <map:act type="loginAction"/>
+                  <map:act type="loginAction">
+                      <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                      <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
+                      <map:parameter name="query-string" value="${request/queryString}"/>
+                  </map:act>
             </map:match>
             <map:match pattern="mesh-suggest/json" type="wildcard">
                 <map:read type="mesh-suggest">

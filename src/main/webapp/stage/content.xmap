@@ -67,6 +67,7 @@
                         value="${request/parameters/remove-pl}"/>
                     <map:parameter name="lane-user-cookie" value="{cookie:user}"/>
                 </map:transform>
+                <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
