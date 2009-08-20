@@ -450,6 +450,12 @@
             <value>/src/main/resources/spring/metasearch.xml</value>
         </property>
     </bean>
+    
+    <bean name="org.apache.cocoon.acting.Action/delete-cookie"
+    class="edu.stanford.irt.laneweb.DeleteCookieAction"/>
+    
+    <bean name="org.apache.cocoon.acting.Action/invalidate-session"
+        class="org.apache.cocoon.acting.SessionInvalidatorAction"/>
 
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
         class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
