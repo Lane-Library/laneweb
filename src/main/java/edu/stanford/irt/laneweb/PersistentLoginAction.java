@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.acting.Action;
@@ -38,14 +37,6 @@ public class PersistentLoginAction implements Action {
             createLaneCookie(sunetid, request, response);
         } else if ("true".equals(removePersistentLogin)) {
             deleteSunetIdCookie(response);
-        } else if ("logout".equals(persistentLogin)) {
-            deleteSunetIdCookie(response);
-            deleteWebauthCookie(response);
-            HttpSession session = request.getSession(false);
-            if (session != null) {
-                session.invalidate();
-            }
-            redirector.globalRedirect(false, "https://weblogin.stanford.edu/logout");
         }
         return null;
     }
@@ -86,12 +77,5 @@ public class PersistentLoginAction implements Action {
         laneCookie.setPath("/");
         laneCookie.setMaxAge(0);
         response.addCookie(laneCookie);
-    }
-
-    private void deleteWebauthCookie(final HttpServletResponse response) {
-        Cookie webauth = new Cookie("webauth_at", null);
-        webauth.setMaxAge(0);
-        webauth.setPath("/");
-        response.addCookie(webauth);
     }
 }
