@@ -92,6 +92,7 @@ public class UserDaoTest {
 
     @Test
     public final void testGetSunetIdCookieNull() {
+        this.cookies = new Cookie[0];
         resetCookieTest();
         replay(this.request);
         User user = this.userDao.createOrUpdateUser(this.request);

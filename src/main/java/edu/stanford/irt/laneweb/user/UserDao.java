@@ -99,13 +99,10 @@ public class UserDao {
         }
         Cookie laneCookie = null;
         for (Cookie cookie : cookies) {
-            // FIXME: remove this check after fixing tests:
-            if (null != cookie) {
-                String name = cookie.getName();
-                if (LanewebConstants.LANE_COOKIE_NAME.equals(name)) {
-                    laneCookie = cookie;
-                    break;
-                }
+            String name = cookie.getName();
+            if (LanewebConstants.LANE_COOKIE_NAME.equals(name)) {
+                laneCookie = cookie;
+                break;
             }
         }
         String sunetId = null;
