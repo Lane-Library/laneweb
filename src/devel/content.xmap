@@ -24,7 +24,6 @@
                             src="${jndi/live-base}/content/online/{1}browse.html"/>
                     </map:otherwise>
                 </map:select>
-                <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-post.xsl">
@@ -116,7 +115,6 @@
                         </map:transform>
                     </map:otherwise>
                 </map:select>
-                <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -137,7 +135,6 @@
                             <map:transform type="saxon" src="context://xsl/individual-faq.xsl"/>
                         </map:otherwise>
                     </map:select>
-                    <map:transform type="xinclude-munging"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -217,7 +214,6 @@
                         />
                     </map:otherwise>
                 </map:select>
-                <map:transform type="xinclude-munging"/>
                 <map:transform type="xinclude"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/rss2html.xsl">

@@ -338,10 +338,6 @@
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
-    
-    <bean name="org.apache.cocoon.transformation.Transformer/xinclude-munging"
-        class="edu.stanford.irt.laneweb.XIncludeParameterMungingTransformer"
-        scope="prototype"/>
 
     <bean name="org.apache.cocoon.reading.Reader/resource"
         class="edu.stanford.irt.laneweb.NoCacheBigReader" scope="prototype"/>

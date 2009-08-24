@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2009-08-24" version="1.9.26" description="1.9.26 bug fix release">
+            <action date="2009-08-24" dev="ceyates" issue="30484" type="fix">
+                Lane wiki url change
+            </action>
+        </release>
         <release date="2009-08-19" version="1.9.25" description="1.9.25 bug fix release">
             <action date="2009-08-19" dev="ceyates" issue="30523" type="fix">
                 LoginAction invoked from /apps/proxy/credential not getting parameters
