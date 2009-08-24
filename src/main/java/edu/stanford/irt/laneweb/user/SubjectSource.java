@@ -34,7 +34,7 @@ public class SubjectSource {
 
     private void authenticateIfNecessary() throws LoginException {
         long now = System.currentTimeMillis();
-        if (null == this.subject || this.lastAuthentication.getTime() + (1000 * 60 * 60 * 24) > now) {
+        if (null == this.subject || this.lastAuthentication.getTime() + (1000 * 60 * 60 * 24) < now) {
             if (null == this.subject) {
                 LOGGER.error("null == this.subject");
             } else {
