@@ -6,11 +6,9 @@ import javax.security.auth.Subject;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 
-import org.apache.log4j.Logger;
-
 public class SubjectSource {
     
-    private static final Logger LOGGER = Logger.getLogger(SubjectSource.class);
+    private static final long TWENTYFOUR_HOURS = 1000 * 60 * 60 * 24;
 
     private Date lastAuthentication;
 
@@ -19,7 +17,6 @@ public class SubjectSource {
     private Subject subject;
 
     public synchronized Subject getSubject() {
-        LOGGER.error("getSubject()");
         try {
             authenticateIfNecessary();
         } catch (LoginException e) {
@@ -33,13 +30,7 @@ public class SubjectSource {
     }
 
     private void authenticateIfNecessary() throws LoginException {
-        long now = System.currentTimeMillis();
-        if (null == this.subject || this.lastAuthentication.getTime() + (1000 * 60 * 60 * 24) < now) {
-            if (null == this.subject) {
-                LOGGER.error("null == this.subject");
-            } else {
-                LOGGER.error(this.lastAuthentication);
-            }
+        if (null == this.subject || System.currentTimeMillis() > this.lastAuthentication.getTime() + TWENTYFOUR_HOURS) {
             LoginContext loginContext = new LoginContext(this.name);
             loginContext.login();
             this.subject = loginContext.getSubject();
