@@ -15,6 +15,22 @@
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="search/type/*" type="wildcard">
+                <map:generate type="er-search">
+                    <map:parameter name="query" value="${request/parameters/q}"/>
+                    <map:parameter name="subset" value="${request/parameters/s}"/>
+                    <map:parameter name="type" value="{1}"/>
+                </map:generate>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="search/type/*/*" type="wildcard">
+                <map:generate type="er-search">
+                    <map:parameter name="query" value="{2}"/>
+                    <map:parameter name="subset" value="${request/parameters/s}"/>
+                    <map:parameter name="type" value="{1}"/>
+                </map:generate>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="histdb" type="wildcard">
                 <map:generate type="history-search">
                     <map:parameter name="query" value="${request/parameters/q}"/>
