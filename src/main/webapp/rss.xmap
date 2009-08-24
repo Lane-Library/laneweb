@@ -16,19 +16,22 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="expires">
-            <map:parameter name="cache-key"
-                value="${request/requestURI};rss-url=${request/parameters/rss-url}"/>
+            <map:parameter name="expires" value="access plus 2 hours"/>
             <map:match pattern="ncbi-rss2html/**" type="wildcard">
                 <map:generate type="file" src="{1}"/>
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
                 <map:serialize type="xhtml"/>
             </map:match>
-            <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
-                <map:generate src="cocoon:/apps/sfx/highly-accessed2rss" type="file"/>
+            <map:match pattern="ncbi-rss/**" type="wildcard">
+                <map:generate type="file" src="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid={1}"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching">
+            <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
+                <map:generate src="cocoon:/apps/sfx/highly-accessed2rss" type="file"/>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="**.xml" type="wildcard">
                 <map:generate type="file" src="${jndi/live-base}/content/rss/{1}.xml"/>
                 <map:serialize type="xml"/>
