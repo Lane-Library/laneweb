@@ -35,7 +35,6 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
-            <!-- TODO add search.xmap to devel -->
             <map:match pattern="search.html" type="wildcard">
                 <map:mount uri-prefix="" check-reload="yes" src="search.xmap"/>
             </map:match>
@@ -54,31 +53,9 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regexp">
-                <map:generate type="directory" src="${jndi/live-base}/content/{1}">
-                    <map:parameter name="depth" value="1"/>
-                    <map:parameter name="dateFormat" value="EEE, d MMM yyyy HH:mm:ss Z"/>
-                </map:generate>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/file-info.xsl">
-                        <map:transform src="xsl/file-info.xsl" type="saxon">
-                            <map:parameter name="file" value="{2}"/>
-                        </map:transform>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform src="context://xsl/file-info.xsl" type="saxon">
-                            <map:parameter name="file" value="{2}"/>
-                        </map:transform>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
+            <!-- TODO: deprecate these redirected urls -->
             <map:match pattern="page2rss" type="wildcard">
                 <map:redirect-to uri="/rss/page2rss?${request/queryString}"/>
-            </map:match>
-            <map:match pattern="ncbi-rss2html/**" type="wildcard">
-                <map:generate src="cocoon:/rss/ncbi-rss2html/{1}" type="file"/> 
-                <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
                 <map:redirect-to uri="/rss/services/tools/highly-accessed-articles.xml"/>
@@ -120,6 +97,49 @@
             </map:match>
             <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
                 <map:generate src="cocoon:/apps/sfx/highly-accessed2rss" type="file"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regexp">
+                <map:generate type="directory" src="${jndi/live-base}/content/{1}">
+                    <map:parameter name="depth" value="1"/>
+                    <map:parameter name="dateFormat" value="EEE, d MMM yyyy HH:mm:ss Z"/>
+                </map:generate>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/file-info.xsl">
+                        <map:transform src="xsl/file-info.xsl" type="saxon">
+                            <map:parameter name="file" value="{2}"/>
+                        </map:transform>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform src="context://xsl/file-info.xsl" type="saxon">
+                            <map:parameter name="file" value="{2}"/>
+                        </map:transform>
+                    </map:otherwise>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="ncbi-rss2html/**" type="wildcard">
+                <map:generate type="file" src="{1}"/>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/ncbi-rss2html.xsl">
+                        <map:transform src="xsl/ncbi-rss2html.xsl" type="saxon"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
+                    </map:otherwise>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="ncbi-su-recent/*" type="wildcard">
+                <map:generate type="file" src="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid={1}"/>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/ncbi-rss2html.xsl">
+                        <map:transform src="xsl/ncbi-rss2html.xsl" type="saxon"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
+                    </map:otherwise>
+                </map:select>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="howto/index.html" type="wildcard">

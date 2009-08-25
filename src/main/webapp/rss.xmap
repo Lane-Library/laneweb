@@ -16,15 +16,6 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="expires">
-            <map:match pattern="ncbi-rss2html/**" type="wildcard">
-                <map:generate type="file" src="{1}"/>
-                <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
-                <map:serialize type="xhtml"/>
-            </map:match>
-            <map:match pattern="ncbi-rss/**" type="wildcard">
-                <map:generate type="file" src="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid={1}"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
                 <map:generate src="cocoon:/apps/sfx/highly-accessed2rss" type="file"/>
                 <map:serialize type="xml"/>

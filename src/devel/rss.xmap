@@ -14,22 +14,13 @@
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
             </map:match>
-            <map:match pattern="ncbi-rss2html/**" type="wildcard">
-                <map:generate type="file" src="{1}"/>
-                <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
-                <map:serialize type="xhtml"/>
-            </map:match>
-            <map:match pattern="ncbi-rss/**" type="wildcard">
-                <map:generate type="file" src="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid={1}"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
                 <map:generate src="cocoon:/apps/sfx/highly-accessed2rss" type="file"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="eresources" type="wildcard">
                 <map:generate type="file" src="cocoon:/eresources/search"/>
-                <map:select>
+                <map:select type="resource-exists">
                     <map:when test="/xsl/eresources-rss.xsl">
                         <map:transform type="saxon" src="/xsl/eresources-rss.xsl">
                             <map:parameter name="q" value="${request/parameters/q}"/>
@@ -52,7 +43,7 @@
                     <map:parameter name="alpha" value="${request/parameters/a}"/>
                     <map:parameter name="type" value="ej"/>
                 </map:generate>
-                <map:select>
+                <map:select type="resource-exists">
                     <map:when test="/xsl/eresources-rss.xsl">
                         <map:transform type="saxon" src="/xsl/eresources-rss.xsl">
                             <map:parameter name="a" value="${request/parameters/a}"/>
@@ -73,7 +64,7 @@
                     <map:parameter name="mesh" value="${request/parameters/m}"/>
                     <map:parameter name="type" value="ej"/>
                 </map:generate>
-                <map:select>
+                <map:select type="resource-exists">
                     <map:when test="/xsl/eresources-rss.xsl">
                         <map:transform type="saxon" src="/xsl/eresources-rss.xsl">
                             <map:parameter name="m" value="${request/parameters/m}"/>

@@ -44,12 +44,9 @@
                 <map:transform type="saxon" src="context://xsl/random.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <!-- TODO: deprecate these redirected urls -->
             <map:match pattern="page2rss" type="wildcard">
                 <map:redirect-to uri="/stage/rss/page2rss?${request/queryString}"/>
-            </map:match>
-            <map:match pattern="ncbi-rss2html/**" type="wildcard">
-                <map:generate src="cocoon:/rss/ncbi-rss2html/{1}" type="file"/>
-                <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="services/tools/highly-accessed-articles.xml" type="wildcard">
                 <map:redirect-to uri="/stage/rss/services/tools/highly-accessed-articles.xml"/>
@@ -67,6 +64,16 @@
                     <map:parameter name="lane-user-cookie" value="{cookie:user}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="ncbi-rss2html/**" type="wildcard">
+                <map:generate type="file" src="{1}"/>
+                <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="ncbi-su-recent/*" type="wildcard">
+                <map:generate type="file" src="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid={1}"/>
+                <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regexp">
