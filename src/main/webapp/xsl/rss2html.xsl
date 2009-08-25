@@ -25,7 +25,7 @@
     
   <xsl:template match="rss:item|item">
     <li>
-      <a href="{rss:link|link}">
+      <a href="{rss:link|link}" title="feed link---{../rss:channel/rss:title|../../channel/title}---{rss:title|title}">
         <xsl:value-of select="rss:title|title"/>
       </a>
     </li>
