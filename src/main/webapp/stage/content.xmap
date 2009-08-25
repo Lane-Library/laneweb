@@ -71,9 +71,20 @@
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="ncbi-rss2html-brief/**" type="wildcard">
+                <map:generate type="file" src="{1}"/>
+                <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon">
+                	<map:parameter name="format" value="brief"/>
+                </map:transform>
+                <map:serialize type="xml"/>
+            </map:match>
             <map:match pattern="ncbi-su-recent/*" type="wildcard">
                 <map:generate type="file" src="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid={1}"/>
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="ncbi-rss/*" type="wildcard">
+                <map:generate type="file" src="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid={1}"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regexp">
