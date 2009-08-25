@@ -35,7 +35,7 @@
         <li>
             <xsl:choose>
                 <xsl:when test="starts-with(guid,'PubMed:')">
-                    <a href="{concat('http://sfx.stanford.edu/local?sid=Entrez:PubMed&amp;id=pmid:',substring-after(guid,':'))}" title="feed link---{../../channel/title}---{title}"><xsl:value-of select="title"/></a>
+                    <a href="{concat('http://www.ncbi.nlm.nih.gov/pubmed/',substring-after(guid,':'),'?otool=stanford&amp;holding=F1000,F1000M')}" title="feed link---{../../channel/title}---{title}"><xsl:value-of select="title"/></a>
                 </xsl:when>
                 <xsl:otherwise>
                     <a href="{link}" title="feed link---{../../channel/title}---{title}"><xsl:value-of select="title"/></a>
