@@ -24,7 +24,9 @@
             <map:match pattern="online/(.+)browse.html" type="regexp">
                 <map:generate type="html" src="${jndi/stage-base}/content/online/{1}browse.html"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
+                <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                	<map:parameter name="query-string" value="${request/queryString}"/>
+                </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search.html" type="wildcard">
