@@ -40,7 +40,7 @@
                     <map:parameter name="query-string" value="${request/queryString}"/>
                 </map:act>
             </map:match>
-            <map:match pattern="logout.html" type="wildcard">
+            <map:match pattern="logout" type="wildcard">
                 <map:act type="delete-cookie">
                     <map:parameter name="cookie-name" value="user"/>
                 </map:act>

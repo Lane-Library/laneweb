@@ -38,7 +38,7 @@
                             </span>
                             <span id="pl-login">Off Campus Login: <span id="user-name"/> | <a
                                     href="/persistentlogin.html">Account</a> | <a
-                                    href="/persistentlogin.html?pl=logout">Logout</a></span>
+                                    href="/logout">Logout</a></span>
                         </h3>
                         <h3 id="irt">
                             <a title="IRT." href="http://med.stanford.edu/irt/">
