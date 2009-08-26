@@ -38,6 +38,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="expires">
+        	<map:parameter name="cache-key" value="${request/requestURI};${request/queryString}"/>
             <map:parameter name="expires" value="access plus 1 hours"/>
             <map:match pattern="eresources" type="wildcard">
                 <map:generate type="file" src="cocoon:/eresources/search"/>
