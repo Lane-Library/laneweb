@@ -13,11 +13,26 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
+import edu.stanford.irt.laneweb.user.PersistentLoginToken;
+
 public class Cryptor {
 
     private Cipher cipher;
 
     private SecretKey desKey;
+
+    public PersistentLoginToken createLoginToken(final String sunetId, final int userAgentHash) {
+        long now = System.currentTimeMillis();
+        StringBuilder builder = new StringBuilder();
+        builder.append(sunetId);
+        builder.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
+        builder.append(now);
+        builder.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
+        builder.append(userAgentHash);
+        String encryptedValue = encrypt(builder.toString());
+        PersistentLoginToken token = new PersistentLoginToken(sunetId, now, userAgentHash, encryptedValue);
+        return token;
+    }
 
     public String decrypt(final String codedInput) {
         try {
@@ -31,7 +46,7 @@ public class Cryptor {
         } catch (IllegalBlockSizeException e) {
             throw new IllegalStateException(e);
         } catch (BadPaddingException e) {
-            throw new IllegalStateException(e);
+            throw new IllegalArgumentException(e);
         }
     }
 
@@ -49,6 +64,19 @@ public class Cryptor {
             throw new IllegalStateException(e);
         } catch (BadPaddingException e) {
             throw new IllegalStateException(e);
+        }
+    }
+
+    public PersistentLoginToken restoreLoginToken(final String encryptedValue) {
+        String decrypted = decrypt(encryptedValue);
+        String[] values = decrypted.split(LanewebConstants.COOKIE_VALUE_SEPARATOR);
+        if (values.length != 3) {
+            throw new IllegalArgumentException("invalid encryptedValue");
+        }
+        try {
+            return new PersistentLoginToken(values[0], Long.parseLong(values[1]), Integer.parseInt(values[2]), encryptedValue);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("invalid encryptedValue", e);
         }
     }
 

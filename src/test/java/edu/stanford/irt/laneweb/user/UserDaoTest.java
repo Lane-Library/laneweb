@@ -79,7 +79,6 @@ public class UserDaoTest {
         String value = this.cryptor.encrypt(cookieValue.toString());
         Cookie sunetIdCookie = new Cookie(LanewebConstants.LANE_COOKIE_NAME, value.substring(1));
         this.cookies[0] = sunetIdCookie;
-        expect(this.request.getRemoteAddr()).andReturn(this.ip);
         expect(this.request.getHeader(LanewebConstants.X_FORWARDED_FOR)).andReturn(null);
         replay(this.request);
         String sunetid = null;
@@ -143,7 +142,7 @@ public class UserDaoTest {
         String sunetid = null;
         User user = this.userDao.createOrUpdateUser(this.request);
         sunetid = user.getSunetId();
-        assertEquals(sunetid, null);
+        assertEquals(null, sunetid);
         verify(this.session);
         verify(this.request);
     }
@@ -234,7 +233,7 @@ public class UserDaoTest {
         Cookie sunetIdCookie = new Cookie(LanewebConstants.LANE_COOKIE_NAME, value);
         this.cookies[0] = sunetIdCookie;
         this.userDao.setCryptor(this.cryptor);
-        expect(this.request.getHeader("User-Agent")).andReturn("firefox test");
+        expect(this.request.getHeader(LanewebConstants.X_FORWARDED_FOR)).andReturn(null);
         replay(this.request);
         User user = this.userDao.createOrUpdateUser(this.request);
         String sunetid = user.getSunetId();
@@ -246,7 +245,7 @@ public class UserDaoTest {
     private void resetCookieTest() {
         expect(this.request.getHeader("x-webauth-user")).andReturn(null);
         expect(this.request.getCookies()).andReturn(this.cookies);
-        expect(this.request.getRemoteAddr()).andReturn(this.ip);
+        expect(this.request.getRemoteAddr()).andReturn(this.ip).atLeastOnce();
         expect(this.request.getRemoteUser()).andReturn(null);
     }
 

@@ -1,8 +1,6 @@
 package edu.stanford.irt.laneweb.user;
 
 import java.security.PrivilegedAction;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
@@ -30,7 +28,7 @@ public class UserDao {
     private LdapTemplate ldapTemplate;
 
     private SubjectSource subjectSource;
-    
+
     public User createOrUpdateUser(final HttpServletRequest request) {
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute(LanewebConstants.USER);
@@ -105,42 +103,18 @@ public class UserDao {
                 break;
             }
         }
-        String sunetId = null;
         if (laneCookie != null) {
-            String cookieValue;
             try {
-                cookieValue = this.cryptor.decrypt(laneCookie.getValue());
-            } catch (Exception e) {
+                PersistentLoginToken token = this.cryptor.restoreLoginToken(laneCookie.getValue());
+                int userAgentHash = request.getHeader("User-Agent").hashCode();
+                if (token.isValidFor(System.currentTimeMillis(), userAgentHash)) {
+                    return token.getSunetId();
+                }
+            } catch (IllegalArgumentException e) {
                 LOGGER.error("Cookie cannot be decrypted, it was maybe modified by user. IP --> ".concat(getRemoteAddr(request)));
-                return null;
-            }
-            String[] cookieValues = cookieValue.split(LanewebConstants.COOKIE_VALUE_SEPARATOR);
-            if (cookieValues.length != 3) {
-                return null;
-            }
-            String currentUserAgent = String.valueOf(request.getHeader("User-Agent").hashCode());
-            String cookieUserAgent = cookieValues[2];
-            if (!cookieUserAgent.equals(currentUserAgent)) {
-                return null;
-            }
-            Calendar calendar = Calendar.getInstance();
-            Date date = null;
-            try {
-                date = new Date(Long.valueOf(cookieValues[1]).longValue());
-            } catch (Exception e) {
-                return null;
-            }
-            calendar.setTime(date);
-            calendar.add(Calendar.WEEK_OF_YEAR, 2);
-            if (calendar.before(Calendar.getInstance())) {
-                return null;
-            }
-            sunetId = cookieValues[0];
-            if (sunetId == null || "".equals(sunetId.trim())) {
-                return null;
             }
         }
-        return sunetId;
+        return null;
     }
 
     private void setEmrId(final User user, final HttpServletRequest request) {
