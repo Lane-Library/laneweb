@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2009-08-31" version="1.9.27" description="1.9.27 bug fix release">
+            <action date="2009-08-26" dev="ceyates" issue="30645" type="add">
+                Change proxy links update frequency to 2 hours
+            </action>
+            <action date="2009-08-25" dev="ceyates" issue="30647" type="add">
+                create a dedicated logout url
+            </action>
+        </release>
         <release date="2009-08-24" version="1.9.26" description="1.9.26 bug fix release">
             <action date="2009-08-24" dev="ceyates" issue="30484" type="fix">
                 Lane wiki url change
