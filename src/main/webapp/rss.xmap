@@ -41,10 +41,13 @@
         	<map:parameter name="cache-key" value="${request/requestURI};${request/queryString}"/>
             <map:parameter name="expires" value="access plus 1 hours"/>
             <map:match pattern="eresources" type="wildcard">
-                <map:generate type="file" src="cocoon:/eresources/search"/>
+                <map:generate type="er-search">
+                    <map:parameter name="query" value="${request/parameters/q}"/>
+                    <map:parameter name="type" value="${request/parameters/source}"/>
+                </map:generate>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
                     <map:parameter name="q" value="${request/parameters/q}"/>
-                    <map:parameter name="t" value="${request/parameters/t}"/>
+                    <map:parameter name="t" value="${request/parameters/source}"/>
                     <map:parameter name="type" value="search"/>
                 </map:transform>
                 <map:serialize type="xml"/>

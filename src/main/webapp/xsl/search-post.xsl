@@ -28,7 +28,7 @@
 	
 	<xsl:template match="h:link[@type='application/rss+xml']/@href">
 	   <xsl:attribute name="href">
-              <xsl:value-of select="concat(.,$query-string)"/>
+              <xsl:value-of select="concat(.,replace($query-string,'source=all',''))"/>
 	   </xsl:attribute>
     </xsl:template>
 	
