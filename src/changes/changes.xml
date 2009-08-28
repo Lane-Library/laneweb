@@ -7,7 +7,10 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2009-08-31" version="1.9.27" description="1.9.27 bug fix release">
+        <release date="2009-08-29" version="1.9.27" description="1.9.27 bug fix release">
+            <action date="2009-08-27" dev="ryanmax" issue="30656" type="fix">
+                Change proxy links update frequency to 2 hours
+            </action>
             <action date="2009-08-26" dev="ceyates" issue="30645" type="add">
                 Change proxy links update frequency to 2 hours
             </action>
