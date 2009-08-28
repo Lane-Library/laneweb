@@ -27,7 +27,7 @@
                 <map:transform type="xinclude"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-post.xsl">
-                        <map:transform type="saxon" src="xsl/search-post.xsl">>
+                        <map:transform type="saxon" src="xsl/search-post.xsl">
                 			<map:parameter name="query-string" value="${request/queryString}"/>
                 		</map:transform>
                     </map:when>
