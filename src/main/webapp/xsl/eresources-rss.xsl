@@ -17,8 +17,6 @@
         <xsl:if test="$type = 'search'">
             <xsl:text>http://lane.stanford.edu/search.html?q=</xsl:text>
             <xsl:value-of select="$q"/>
-            <xsl:if test="$t != ''">&amp;source=<xsl:value-of select="$t"/></xsl:if>
-            <xsl:if test="$t = ''">&amp;source=all</xsl:if>
         </xsl:if>
         <xsl:if test="$type = 'ejournals'">
             <xsl:text>http://lane.stanford.edu/online/ejbrowse.html?</xsl:text>

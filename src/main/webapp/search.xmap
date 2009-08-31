@@ -63,7 +63,7 @@
                     </map:transform>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-post.xsl">
-						<map:parameter name="query-string" value="${request/queryString}"/>
+						<map:parameter name="query-string" value="${request/parameters/q}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
