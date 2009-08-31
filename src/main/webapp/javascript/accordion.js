@@ -1,38 +1,49 @@
 /*
-Copyright (c) 2007, Caridy Patino. All rights reserved.
-Portions Copyright (c) 2007, Yahoo!, Inc. All rights reserved.
+Copyright (c) 2008, Bubbling Library Team. All rights reserved.
+Portions Copyright (c) 2008, Yahoo!, Inc. All rights reserved.
 Code licensed under the BSD License:
 http://www.bubbling-library.com/eng/licence
-version: 1.5.0
+version: 2.1
 */
 (function() {
 
     var $B = YAHOO.Bubbling,
-        $L = YAHOO.lang,
+		$L = YAHOO.lang,
         $E = YAHOO.util.Event,
-        $D = YAHOO.util.Dom;
+	    $D = YAHOO.util.Dom;
 
-    /**
-    * @singleton Accordion Manager - Creating accordion controls based on the markup.
-    * Apply visual enhanced to an area
-    * @constructor
-    */
-    YAHOO.widget.AccordionManager = function() {
-        var obj = {},
-            _selector = 'selected',
-            _sliding = 'sliding',
-            _anims = {};
+	/**
+	* @singleton Accordion Manager - Creating accordion controls based on the markup.
+	* Apply visual enhanced to an area
+	* @constructor
+	*/
+	YAHOO.widget.AccordionManager = function() {
+		var obj = {},
+		    _selector = 'selected',
+		    _sliding = 'sliding',
+		    _anims = {};
 
-        // on click action behaviors...
-        $B.addDefaultAction('accordionToggleItem', function (layer, args) {
-            if (!args[1].decrepitate) {
+		// on click action behaviors...
+		
+		$B.on('navigate', function (layer, args) {
+			var el = $B.getOwnerByClassName (args[1].target, 'trigger');
+            if (!args[1].flagged && el) {
                 // switching the slidable area and reclaiming the behavior
-                obj.toggle(args[1].target);
-                return false;
+                if (obj.toggle(args[1].target)) {
+					args[1].stop = true;
+					args[1].flagged = true;
+				}
             }
         });
-        $B.addDefaultAction('accordionRemoveItem', function (layer, args) {
-            if (!args[1].decrepitate) {
+		
+		$B.addDefaultAction('accordionToggleItem', function (layer, args) {
+            if (!args[1].flagged) {
+                // switching the slidable area and reclaiming the behavior
+                return obj.toggle(args[1].target);
+            }
+        });
+		$B.addDefaultAction('accordionRemoveItem', function (layer, args) {
+            if (!args[1].flagged) {
                 // removing an item from the accordion and reclaiming the behavior
                 return obj.remove(args[1].target);
             }
@@ -42,61 +53,70 @@ version: 1.5.0
         // behaviors for the second accordion (ADVANCED AJAX APPLICATION)
         // Tagline: One behavior that will rule them all (based on the slide's rel attribute)
         $B.on('accordionOpenItem', function (layer, args) {
-          var reLink, trigger;
-           reLink = /.*#/;
+          var reLink = /.*#/;
           // if can be loaded thru AJAX
           if ($D.hasClass(args[1].slide, 'ajax') && $L.isObject(YAHOO.plugin.Dispatcher)) {
-            trigger = $D.getElementsByClassName('accordionToggleItem','*',args[1].el);
+            var trigger = $D.getElementsByClassName('accordionToggleItem','*',args[1].el);
             trigger = (trigger.length>0?trigger[0]:null);
             if (trigger && (trigger = trigger.getAttribute('href',2))) {
                 YAHOO.plugin.Dispatcher.fetch ( args[1].slide, trigger.replace(reLink,''), {
                     onLoad: function (el) {
-                        $D.removeClass(args[1].slide, 'ajax');
+						// forcing the accordion item to expand to the correct height when the content is loaded using ajax
+						$D.setStyle(el,"height",el.scrollHeight+"px");
+						
+						
+						// TODO: apply the animation instead to apply the height/width directly
+						
+						
+						// each accordion item can have his own cache definition, applying the class "nocache" to the BD element,
+						// the accordion will reload the content everytime the accordion is opened...
+						if (!$D.hasClass(el, 'nocache')) {
+                        	$D.removeClass(el, 'ajax');
+						}						
                     }
                 });
             }
           }
         });
 
-        // on keyboad action behavior...
+        // on keyboad action behavior... (only works if the target element is within a trigger/class)
         $B.on('key', function (layer, args) {
-          var o = args[1];
-          if (!o.decrepitate && (o.type == 'keyup')) {
-              if (((o.keyCode === 39) && obj.open (o.target)) ||
-                  ((o.keyCode === 37) && obj.close (o.target))) { // Shortcut: cursor -> or cursor <-
-                  // reclaiming the event & stoping the event propagation
-                  o.decrepitate = true;
-                  o.stop = true;
-              }
-          }
+    	  var o = args[1], item = null, result = false, el;
+    	  if (!o.flagged && (o.type == 'keyup') && (el = $B.getOwnerByClassName (o.target, 'trigger'))) {
+			  if (((o.keyCode === 39) && obj.open (el)) ||
+    	          ((o.keyCode === 37) && obj.close (el))) { // Shortcut: cursor -> or cursor <-
+        		  // reclaiming the event & stoping the event propagation
+        	      o.flagged = true;
+        	      o.stop = true;
+        	  }
+    	  }
         });
 
         // on rollover action behavior...
-        $B.on('rollover', function (layer, args) {
-          var list, item, onWayOut;
-          item = _getItem(args[1].target);
-          if (item) {
-            if ((list = _getList(item)) && list.rollover) {
-                if (!list.selected) {
-                    $D.addClass(list.el, _selector);
-                    onWayOut = function (e) {
-                        var l = _getList ({el:$E.getTarget(e)});
-                        if (l && !$B.virtualTarget(e, l.el) && !l.persistent) {
-                          _reset(l, {force:true});
-                        }
-                    };
-                    if (!list.persistent) {
-                        $E.removeListener ( list.el, 'mouseout', onWayOut );
-                        $E.addListener ( list.el, 'mouseout', onWayOut, obj, true );
-                    }
-                }
-                if (!item.selected) {
-                    // is over a new item...
-                    _openItem(item, list);
-                }
-            }
-          }
-        });
+		$B.on('rollover', function (layer, args) {
+		  var list, item, onWayOut;
+		  if (item = _getItem(args[1].target)) {
+		    if ((list = _getList(item)) && list.rollover) {
+				if (!list.selected) {
+		            $D.addClass(list.el, _selector);
+					onWayOut = function (e) {
+					    var l = _getList ({el:$E.getTarget(e)});
+					    if (l && !$B.virtualTarget(e, l.el) && !l.persistent) {
+					      _reset(l, {force:true});
+					    }
+					};
+					if (!list.persistent) {
+					    $E.removeListener ( list.el, 'mouseout', onWayOut );
+						$E.addListener ( list.el, 'mouseout', onWayOut, obj, true );
+					}
+				}
+				if (!item.selected) {
+					// is over a new item...
+					_openItem(item, list);
+				}
+			}
+		  }
+	    });
 
         // creating the most common message (behavior layer)
         $B.addLayer (['accordionOpenItem', 'accordionCloseItem', 'accordionRemoveItem'], obj);
@@ -114,7 +134,7 @@ version: 1.5.0
         }
         function _getItem ( elem ) {
           if (elem && ($L.isObject(elem) || (elem = $D.get (elem)))) {
-            var item, h, w, slide, el = $B.getOwnerByClassName (elem, 'yui-cms-item');
+            var item, el = $B.getOwnerByClassName (elem, 'yui-cms-item');
             if ($L.isObject(el)) {
                 item = {
                     el: el,
@@ -124,20 +144,24 @@ version: 1.5.0
                     size: {width:0, Height: 0}
                 };
                 // getting the slidable element
-                slide = $D.getElementsByClassName('bd','*',el);
-                slide = (slide.length>0?slide[0]:null);
-                item.slide = slide;
-                h = parseInt($D.getStyle(slide, 'height'), 10);
-                w = parseInt($D.getStyle(slide, 'width'), 10);
-                // forcing to number... to avoid misbehavior on "auto" height/width...
-                if (!$L.isNumber(h)) {
-                    $D.setStyle(slide, 'height', slide.scrollHeight+'px');
-                }
-                if (!$L.isNumber(w)) {
-                    $D.setStyle(slide, 'width', slide.scrollWidth+'px');
-                }
-                item.size.height = slide.scrollHeight;
-                item.size.width = slide.scrollWidth;
+                var slide = $D.getElementsByClassName('bd','*',el);
+				// if there is no Body element within the item, we should try to find the next BD: Semantic Markups DL\DT\DD
+                slide = (slide.length>0?slide[0]:$D.getNextSiblingBy(el, function(node){return $D.hasClass(node, 'bd');}));
+                if (item.slide = slide) {
+	                var h = parseInt($D.getStyle(slide, 'height'), 10);
+	                var w = parseInt($D.getStyle(slide, 'width'), 10);
+	                // forcing to number... to avoid misbehavior on "auto" height/width...
+	                if (!$L.isNumber(h)) {
+	                    $D.setStyle(slide, 'height', slide.scrollHeight+'px');
+	                }
+	                if (!$L.isNumber(w)) {
+	                    $D.setStyle(slide, 'width', slide.scrollWidth+'px');
+	                }
+	                item.size.height = slide.scrollHeight;
+	                item.size.width = slide.scrollWidth;
+				} else {
+					return false;
+				}
             }
             return item;
           }
@@ -145,8 +169,7 @@ version: 1.5.0
         function _getList ( item ) {
           var list = null, el = item.el;
           if (el && ($L.isObject(el) || (el = $D.get (el)))) {
-              el = $B.getOwnerByClassName (el, 'yui-cms-accordion');
-            if (el) {
+            if (el = $B.getOwnerByClassName (el, 'yui-cms-accordion')) {
                 // creating the list literal based on the classnames defined for the accordion wrapper
                 list = {
                     el: el,
@@ -175,31 +198,31 @@ version: 1.5.0
         }
         function _reset ( list, params ) {
             params = params || {};
-            var  i,
+            var conf = [], i,
                 force = params.force || false,
                 item = params.item || null;
             if (list) {
               if (!list.multiple || force) {
-                // closing all the selected items
-                for (i=0; i<list.items.length; i++) {
-                  // is the element is not equal to item, or if the item is under an animation...
-                  if ((!item || (list.items[i].el !== item.el)) && (list.items[i].selected || list.items[i].sliding || params.expand)) {
-                     if (params.expand) {
-                       _openItem (list.items[i], list, params.grouping);
-                     } else {
-                       _closeItem (list.items[i], list, params.grouping);
-                       if (params.mirror) {
-                          // hack for get the mirror element in persistent and !mutiples accordions
-                          params.mirror.push(list.items[i]);
-                       }
-                     }
-                  }
-                }
-              }
-            }
+	            // closing all the selected items
+		        for (i=0; i<list.items.length; i++) {
+		          // is the element is not equal to item, or if the item is under an animation...
+				  if ((!item || (list.items[i].el !== item.el)) && (list.items[i].selected || list.items[i].sliding || params.expand)) {
+				     if (params.expand) {
+				       _openItem (list.items[i], list, params.grouping);
+				     } else {
+				       _closeItem (list.items[i], list, params.grouping);
+				       if (params.mirror) {
+				          // hack for get the mirror element in persistent and !mutiples accordions
+				          params.mirror.push(list.items[i]);
+				       }
+				     }
+			      }
+	            }
+	          }
+	        }
         }
         function _openItem ( item, list ) {
-            var conf = [], anim,  g = [], m = [], fs, onFinish, i, choice;
+            var conf = [], anim, i, g = [], m = [], fs, onFinish;
             if (list || (list = _getList (item))) {
               // if the item is not already opened
               if (!item.selected) {
@@ -207,203 +230,193 @@ version: 1.5.0
                   if (!list.multiple) {
                     _reset ( list, {item: item, grouping: g, mirror: m} );
                   }
-                  // if the animation is underway: we need to stop it...
+    	          // if the animation is underway: we need to stop it...
                   anim = _anims[$E.generateId(item.slide)];
                   if ((anim) && (anim.isAnimated())) {anim.stop();}
-                  // opening the selected element, based on the list's orientation, timer and effect attribute...
-                  conf[list.orientation] = {to: item.size[list.orientation]};
-                  // scrolling effect
-                  if (!list.manually) {
-                      choice = 'scroll';
-                    conf[choice] = {from: (list.orientation=='width'?[item.size[list.orientation],0]:[0,item.size[list.orientation]]), to: [0,0]};
-                  }
-                  if (list.fade) { // appliying fadeIn
-                    choice ='opacity';
-                    conf [opacity] = { to: 1};
-                  }
-                  anim = new YAHOO.util.Scroll(item.slide, conf, list.timer, list.effect);
-                  $D.addClass(item.el, _sliding);
-                  onFinish = function() {
-                      $D.removeClass(item.el, _sliding);
-                      $D.addClass(item.el, _selector);
-                      // broadcasting the corresponding event...
-                      $B.fire ('accordionOpenItem', item);
-                  };
-                  anim.onComplete.subscribe(onFinish);
-                  _anims[$E.generateId(item.slide)] = anim;
-                  if (list.manually) {
-                    // manually animation...
-                    m = m[0] || null;
-                    // getting the desired dimension from the mirror or from the current item
-                    fs = (m?m.size[list.orientation]:item.size[list.orientation]);
-                    for (i=1;i<=fs;i++){
-                        if (m) {
-                          $D.setStyle (m.slide, list.orientation, (fs-i)+'px');
-                        }
-                        $D.setStyle (item.slide, list.orientation, i+'px');
-                    }
-                    onFinish();
-                  } else {
-                    // creating an animation thread
-                    for (i=0; i<g.length; i++) {
-                      YAHOO.util.AnimMgr.registerElement(g[i]);
-                    }
-                    YAHOO.util.AnimMgr.registerElement(anim);
-                  }
+    	          // opening the selected element, based on the list's orientation, timer and effect attribute...
+    	          conf[list.orientation] = {to: item.size[list.orientation]};
+    	          // scrolling effect
+    	          if (!list.manually) {
+    	            conf['scroll'] = {from: (list.orientation=='width'?[item.size[list.orientation],0]:[0,item.size[list.orientation]]), to: [0,0]};
+    	          }
+    	          if (list.fade) { // appliying fadeIn
+    	            conf['opacity'] = {to: 1};
+    	          }
+    	          anim = new YAHOO.util.Scroll(item.slide, conf, list.timer, list.effect);
+            	  $D.addClass(item.el, _sliding);
+            	  onFinish = function() {
+            		  $D.removeClass(item.el, _sliding);
+            		  $D.addClass(item.el, _selector);
+            		  // broadcasting the corresponding event (open)...
+            		  $B.fire ('accordionOpenItem', item);
+            	  };
+            	  anim.onComplete.subscribe(onFinish);
+            	  _anims[$E.generateId(item.slide)] = anim;
+            	  if (list.manually) {
+            	    // manually animation...
+            	    m = m[0] || null;
+            	    // getting the desired dimension from the mirror or from the current item
+            	    fs = (m?m.size[list.orientation]:item.size[list.orientation]);
+            	    for (i=1;i<=fs;i++){
+            	        if (m) {
+            	          $D.setStyle (m.slide, list.orientation, (fs-i)+'px');
+            	        }
+            	        $D.setStyle (item.slide, list.orientation, i+'px');
+            	    }
+            	    onFinish();
+            	  } else {
+            	    // creating an animation thread
+            	    for (i=0; i<g.length; i++) {
+            	      YAHOO.util.AnimMgr.registerElement(g[i]);
+            	    }
+            	    YAHOO.util.AnimMgr.registerElement(anim);
+            	  }
               }
-              return true;
-            }
-            return false;
+        	  return true;
+	        }
+	        return false;
         }
         function _closeItem ( item, list, grouping ) {
-            var conf = [], anim, fs, i, choice;
+            var conf = [], anim, fs;
             if (item && (list || (list = _getList (item)))) {
-                // closing the item, based on the list's orientation, timer and effect attribute...
-                conf[list.orientation] = {to: ((list.orientation=='width'||list.fixIE)?1:0)}; // hack for vertical accordion issue on Safari and Opera
-                if (list.fade) { // appliying fadeIn
-                    choice = 'opacity'; 
-                      conf[choice] = {to: 0};
-                 }
-                // scrolling effect
-                if (!list.manually) {
-                    choice = 'scroll'; 
-                      conf[choice] = {to: (list.orientation=='width'?[item.size[list.orientation],0]:[0,item.size[list.orientation]])};
-                }
+	            // closing the item, based on the list's orientation, timer and effect attribute...
+	            conf[list.orientation] = {to: ((list.orientation=='width'||list.fixIE)?1:0)}; // hack for vertical accordion issue on Safari and Opera
+	            if (list.fade) { // appliying fadeIn
+	              conf['opacity'] = {to: 0};
+	            }
+    	        // scrolling effect
+    	        if (!list.manually) {
+    	          conf['scroll'] = {to: (list.orientation=='width'?[item.size[list.orientation],0]:[0,item.size[list.orientation]])};
+    	        }
                 // if the animation is underway: we need to stop it...
                 anim = _anims[$E.generateId(item.slide)];
                 if ((anim) && (anim.isAnimated())) {anim.stop();}
-                anim = new YAHOO.util.Scroll(item.slide, conf, list.timer, list.effect);
-                $D.addClass(item.el, _sliding);
-                onFinish = function() {
+        	    anim = new YAHOO.util.Scroll(item.slide, conf, list.timer, list.effect);
+        		$D.addClass(item.el, _sliding);
+            	onFinish = function() {
                     $D.removeClass(item.el, _sliding);
-                    $D.removeClass(item.el, _selector);
-                    // broadcasting the corresponding event...
-                    $B.fire ('accordionOpenItem', item);
-                };
-                anim.onComplete.subscribe(onFinish);
-                if ($L.isArray(grouping)) {
-                    grouping.push(anim);
-                } else {
-                    anim.animate();
-                }
-                if (list.manually) {
-                    // animation manually
-                    fs = item.size[list.orientation];
-                    for (i=fs;i>=conf[list.orientation].to;i--){
-                        $D.setStyle (item.slide, list.orientation, i+'px');
-                    }
-                    onFinish();
-                }
-                _anims[$E.generateId(item.slide)] = anim;
-                return true;
-            }
-            return false;
+        		    $D.removeClass(item.el, _selector);
+            		// broadcasting the corresponding event (close)...
+            		$B.fire ('accordionCloseItem', item);
+            	};
+        		anim.onComplete.subscribe(onFinish);
+        		if ($L.isArray(grouping)) {
+        		    grouping.push(anim);
+        	    } else {
+        		    anim.animate();
+        		}
+        		if (list.manually) {
+        	        // animation manually
+        	        fs = item.size[list.orientation];
+            	    for (i=fs;i>=conf[list.orientation].to;i--){
+            	        $D.setStyle (item.slide, list.orientation, i+'px');
+            	    }
+            	    onFinish();
+        		}
+        		_anims[$E.generateId(item.slide)] = anim;
+        		return true;
+	        }
+	        return false;
         }
         function _removeItem ( item, list ) {
             if (item && (list || (list = _getList (item)))) {
                 // closing element
                 _closeItem (item, list);
                 // removing listeners...
-                $E.purgeElement ( item.el, true );
-                // hack, removing the element after close it...
-                window.setTimeout (function(){
-                      item.el.parentNode.removeChild(item.el);
-                      $B.fire ('accordionRemoveItem', item);
-                   }, list.timer+0.1);
-                return true;
-            }
-            return false;
+    			$E.purgeElement ( item.el, true );
+    			// hack, removing the element after close it...
+    			window.setTimeout (function(){
+    			      item.el.parentNode.removeChild(item.el);
+    			      $B.fire ('accordionRemoveItem', item);
+    			   }, list.timer+0.1);
+        		return true;
+	        }
+	        return false;
         }
 
-        // public vars
-        // public methods
-        /**
-        * * Expanding all the elements in the accordion...
-        * @public
-        * @param {object} el   DOM reference
-        * @return boolean
-        */
-        obj.expand = function ( el ) {
-            var list = _getList ({el:el});
-            if (list ) {
-                return _reset (list, {force:true, expand:true});
-            }
-        };
-        /**
-        * * Collapsing all the elements in the accordion...
-        * @public
-        * @param {object} el   DOM reference
-        * @return boolean
-        */
-        obj.collapse = function ( el ) {
-            var list = _getList ({el:el});
-            if (list ) {
-                return _reset (list, {force:true});
-            }
-        };
-        /**
-        * * Open a certain item inside an area...
-        * @public
-        * @param {object} el   DOM reference
-        * @return boolean
-        */
-        obj.open = function ( el ) {
-            var item = _getItem(el);
-            if (item) {
-                return _openItem (item);
-            }
-        };
-        /**
-        * * Close a certain item inside an area...
-        * @public
-        * @param {object} el   DOM reference
-        * @return boolean
-        */
-        obj.close = function ( el ) {
-            var item, list;
-            item = _getItem(el);
-            if (item ) {
-                list = _getList (item);
-                if (list ) {
-                  // if the item is already opened, and is multiple and not persistent
-                  return ((item.selected && (list.multiple || !list.persistent))?_closeItem (item, list):false);
-                }
-            }
-        };
-        /**
-        * * toggle a certain item inside an area...
-        * @public
-        * @param {object} el   DOM reference
-        * @return boolean
-        */
-        obj.toggle = function ( el ) {
-            var item, list;
-            item = _getItem(el);
-            if (item) {
-                list = _getList (item);
-                if (list) {
-                  // if the item is already opened, and is multiple and not persistent
-                  return ((item.selected && (list.multiple || !list.persistent))?_closeItem (item, list):_openItem (item, list));
-                }
-            }
-        };
-        /**
-        * * remove a certain item from the area...
-        * @public
-        * @param {object} el   DOM reference
-        * @return boolean
-        */
-        obj.remove = function ( el ) {
-            var item, list;
-            item = _getItem(el);
-            if (item) {
-                list = _getList (item);
-                if (list) {
-                  return _removeItem (item, list);
-                }
-            }
-        };
-        return obj;
-    }();
+		// public vars
+		// public methods
+		/**
+		* * Expanding all the elements in the accordion...
+		* @public
+		* @param {object} el   DOM reference
+		* @return boolean
+		*/
+		obj.expand = function ( el ) {
+		    var list;
+		    if (list = _getList ({el:el})) {
+		        return _reset (list, {force:true, expand:true});
+		    }
+		};
+		/**
+		* * Collapsing all the elements in the accordion...
+		* @public
+		* @param {object} el   DOM reference
+		* @return boolean
+		*/
+		obj.collapse = function ( el ) {
+		    var list;
+		    if (list = _getList ({el:el})) {
+		        return _reset (list, {force:true});
+		    }
+		};
+		/**
+		* * Open a certain item inside an area...
+		* @public
+		* @param {object} el   DOM reference
+		* @return boolean
+		*/
+		obj.open = function ( el ) {
+		    var item;
+		    if (item = _getItem(el)) {
+		        return _openItem (item);
+		    }
+		};
+		/**
+		* * Close a certain item inside an area...
+		* @public
+		* @param {object} el   DOM reference
+		* @return boolean
+		*/
+		obj.close = function ( el ) {
+		    var item, list;
+		    if (item = _getItem(el)) {
+		        if (list = _getList (item)) {
+		          // if the item is already opened, and is multiple and not persistent
+		          return ((item.selected && (list.multiple || !list.persistent))?_closeItem (item, list):false);
+		        }
+		    }
+		};
+		/**
+		* * toggle a certain item inside an area...
+		* @public
+		* @param {object} el   DOM reference
+		* @return boolean
+		*/
+		obj.toggle = function ( el ) {
+		    var item, list;
+		    if (item = _getItem(el)) {
+				if (list = _getList (item)) {
+				  // if the item is already opened, and is multiple and not persistent
+		          return ((item.selected && (list.multiple || !list.persistent))?_closeItem (item, list):_openItem (item, list));
+		        }
+		    }
+		};
+		/**
+		* * remove a certain item from the area...
+		* @public
+		* @param {object} el   DOM reference
+		* @return boolean
+		*/
+		obj.remove = function ( el ) {
+		    var item, list;
+		    if (item = _getItem(el)) {
+		        if (list = _getList (item)) {
+		          return _removeItem (item, list);
+		        }
+		    }
+		};
+		return obj;
+	}();
 })();
-YAHOO.register("accordion", YAHOO.widget.AccordionManager, {version: "1.5.0", build: "203"});
+YAHOO.register("accordion", YAHOO.widget.AccordionManager, {version: "2.1", build: "211"});
