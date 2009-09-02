@@ -18,7 +18,7 @@
             <xsl:text>/search.html?q=</xsl:text>
             <xsl:value-of select="$q"/>
         </xsl:if>
-        <xsl:if test="$type = 'ej' or $type = 'book' or $type = 'database' or $type = 'cc' ">
+        <xsl:if test="$type = 'ej' or $type = 'book' or $type = 'database' or $type = 'cc'  or $type = 'video' ">
             <xsl:text>/online/</xsl:text>
             <xsl:choose>
             	<xsl:when test="$type = 'database'"><xsl:text>db</xsl:text></xsl:when>
@@ -39,7 +39,7 @@
     <xsl:variable name="query-term">
         <xsl:if test="$type = 'search'"><xsl:value-of select="$q"/></xsl:if>
         <xsl:if test="$type = 'mesh'"><xsl:value-of select="$m"/></xsl:if>
-        <xsl:if test="$type =  'ej' or $type = 'book' or $type = 'database' or $type = 'cc'">
+        <xsl:if test="$type =  'ej' or $type = 'book' or $type = 'database' or $type = 'cc'  or $type = 'video' ">
             <xsl:if test="$a != ''"><xsl:value-of select="$a"/></xsl:if>
             <xsl:if test="$a = ''">All</xsl:if>
         </xsl:if>
