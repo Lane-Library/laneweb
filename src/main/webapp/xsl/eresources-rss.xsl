@@ -15,25 +15,31 @@
 
     <xsl:variable name="url">
         <xsl:if test="$type = 'search'">
-            <xsl:text>http://lane.stanford.edu/search.html?q=</xsl:text>
+            <xsl:text>/search.html?q=</xsl:text>
             <xsl:value-of select="$q"/>
         </xsl:if>
-        <xsl:if test="$type = 'ejournals'">
-            <xsl:text>http://lane.stanford.edu/online/ejbrowse.html?</xsl:text>
+        <xsl:if test="$type = 'ej' or $type = 'book' or $type = 'database' or $type = 'cc' ">
+            <xsl:text>/online/</xsl:text>
+            <xsl:choose>
+            	<xsl:when test="$type = 'database'"><xsl:text>db</xsl:text></xsl:when>
+            	<xsl:when test="$type = 'book'"><xsl:text>eb</xsl:text></xsl:when>
+            	<xsl:otherwise><xsl:value-of select="$type"/></xsl:otherwise>
+            </xsl:choose>
+            <xsl:text>browse.html?</xsl:text>
             <xsl:if test="$a != ''"><xsl:text>a=</xsl:text><xsl:value-of select="$a"/></xsl:if>
             <xsl:if test="$a = ''"><xsl:text>all</xsl:text></xsl:if>
         </xsl:if>
         <xsl:if test="$type = 'mesh'">
-            <xsl:text>http://lane-local.stanford.edu/online/ejsubjectbrowse.html?m=</xsl:text>
+            <xsl:text>/online/ejsubjectbrowse.html?m=</xsl:text>
             <xsl:value-of select="$m"/>
         </xsl:if>
     </xsl:variable>
 
 
-    <xsl:variable name="option">
+    <xsl:variable name="query-term">
         <xsl:if test="$type = 'search'"><xsl:value-of select="$q"/></xsl:if>
         <xsl:if test="$type = 'mesh'"><xsl:value-of select="$m"/></xsl:if>
-        <xsl:if test="$type = 'ejournal'">
+        <xsl:if test="$type =  'ej' or $type = 'book' or $type = 'database' or $type = 'cc'">
             <xsl:if test="$a != ''"><xsl:value-of select="$a"/></xsl:if>
             <xsl:if test="$a = ''">All</xsl:if>
         </xsl:if>
@@ -43,14 +49,14 @@
     <xsl:template match="h:html">
         <rss version="2.0"> 
             <channel>
-                <title><xsl:text>LaneConnex Search/Browse Results for </xsl:text><xsl:value-of select="$option"/></title>
+                <title><xsl:text>LaneConnex Search/Browse Results for </xsl:text><xsl:value-of select="$query-term"/></title>
                 <link><xsl:value-of select="$url"/></link>
-                <description><xsl:text>LaneConnex Search/Browse Results for </xsl:text><xsl:value-of select="$option"/></description>
+                <description><xsl:text>LaneConnex Search/Browse Results for </xsl:text><xsl:value-of select="$query-term"/></description>
                 <language>en-us</language>
                 <ttl>1440</ttl>
                 <image>
                     <title><xsl:text>Laneconnex</xsl:text></title>
-                    <url>http://lane.stanford.edu/favicon.ico</url>
+                    <url>/favicon.ico</url>
                     <link><xsl:value-of select="$url"/></link>
                 </image>
                 <xsl:apply-templates select="h:body/h:dl/h:dd/h:ul/h:li"/>
