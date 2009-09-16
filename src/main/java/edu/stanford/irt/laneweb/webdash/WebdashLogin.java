@@ -80,8 +80,14 @@ public class WebdashLogin {
     }
 
     private String getSubGroup(final String affiliation) {
-        return affiliation.substring(affiliation.indexOf(':') + 1);
-    }
+    	String group = affiliation.substring(affiliation.indexOf(':') + 1);
+    	 try {
+             group = URLEncoder.encode(group, "UTF-8");
+         } catch (UnsupportedEncodingException e) {
+             throw new RuntimeException("UTF-8 not supported");
+         }
+    	return group;
+    	}
 
     private String getToken(final String string) {
         byte[] utf8;
