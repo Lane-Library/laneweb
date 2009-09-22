@@ -115,8 +115,8 @@
                       <map:parameter name="query-string" value="${request/queryString}"/>
                   </map:act>
             </map:match>
-            <map:match pattern="mesh-suggest/json" type="wildcard">
-                <map:read type="mesh-suggest">
+            <map:match pattern="suggest/json" type="wildcard">
+                <map:read type="suggest">
                     <map:parameter name="query" value="${request/parameters/q}"/>
                     <map:parameter name="limit" value="${request/parameters/l}"/>
                 </map:read>

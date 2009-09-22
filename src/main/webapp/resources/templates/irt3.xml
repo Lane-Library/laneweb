@@ -127,7 +127,10 @@
                                         value="https://stanfordwho.stanford.edu/lookup?search={search-terms}"
                                         >StanfordWho</option>
                                 </select>
-                                <input name="q" id="searchTerms" type="text"/>
+                                <div class="acContainer">
+                                    <input name="q" id="searchTerms" type="text"/>
+                                    <div style="width:25em;" id="acResults" class="acResults"> <!-- --> </div> 
+                                </div>
                                 <input id="searchSubmit" type="submit" value=""/>
                                 <img id="searchIndicator" alt="[searching]"
                                     src="/images/templates/irt3/indicator.gif"/>
@@ -248,7 +251,7 @@
             <span id="proxyOnTooltip">Click here to log in for full access to all LaneConnex
                 resources.</span>
         </div>
-        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/utilities/utilities.js&amp;2.7.0/build/container/container-min.js&amp;2.7.0/build/json/json-min.js&amp;2.7.0/build/history/history-min.js"> </script>
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/utilities/utilities.js&amp;2.7.0/build/container/container-min.js&amp;2.7.0/build/json/json-min.js&amp;2.7.0/build/history/history-min.js&amp;2.7.0/build/datasource/datasource-min.js&amp;2.7.0/build/animation/animation-min.js&amp;2.7.0/build/autocomplete/autocomplete-min.js"> </script>
         <script src="/javascript/lane-all.js" type="text/javascript"> </script>
     </body>
 </html>

@@ -1,16 +1,16 @@
-package edu.stanford.irt.laneweb.mesh;
+package edu.stanford.irt.laneweb.suggest;
 
 import java.io.Serializable;
 import java.util.Comparator;
 
-public class MeshSuggestComparator implements Comparator<String>, Serializable {
+public class SuggestionComparator implements Comparator<String>, Serializable {
 
     /** for Serializable. */
     private static final long serialVersionUID = 1L;
 
     private String query;
 
-    public MeshSuggestComparator(final String query) {
+    public SuggestionComparator(final String query) {
         this.query = query.toUpperCase();
     }
 

@@ -111,6 +111,7 @@
                                 <include>lane-ie-min.js</include>
                                 <include>lane-forms-min.js</include>
                                 <include>lane-bassett-min.js</include>
+                                <include>lane-suggest-min.js</include>
                             </includes>
                         </aggregation>
                     </aggregations>
@@ -422,27 +423,9 @@
         </dependency>
         <dependency>
             <groupId>edu.stanford.irt</groupId>
-            <artifactId>mesh-export</artifactId>
-            <version>1.0.3</version>
+            <artifactId>suggest</artifactId>
+            <version>0.1.0</version>
             <scope>compile</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>marc4j-jdk15</artifactId>
-                    <groupId>edu.stanford.irt.marc4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>catalog</artifactId>
-                    <groupId>edu.stanford.irt</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>spring-jdbc</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>ojdbc5</artifactId>
-                    <groupId>com.oracle.ojdbc</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
         	<groupId>commons-jxpath</groupId>

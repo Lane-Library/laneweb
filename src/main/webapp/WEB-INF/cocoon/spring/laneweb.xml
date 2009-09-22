@@ -152,8 +152,14 @@
     <bean id="edu.stanford.irt.lane.icd9.ICD9Translator"
         class="edu.stanford.irt.lane.icd9.ICD9Translator"/>
 
-    <bean id="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"
-        class="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
+    <bean id="edu.stanford.irt.suggest.EresourceSuggestionManager"
+        class="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
+
+    <bean id="edu.stanford.irt.suggest.HistorySuggestionManager"
+        class="edu.stanford.irt.suggest.HistorySuggestionManager"/>
+
+    <bean id="edu.stanford.irt.suggest.MeshSuggestionManager"
+        class="edu.stanford.irt.suggest.MeshSuggestionManager"/>
 
     <bean id="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
         class="edu.stanford.irt.laneweb.proxy.ProxyHostManager">
@@ -348,11 +354,15 @@
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
 
-    <bean name="org.apache.cocoon.reading.Reader/mesh-suggest"
-        class="edu.stanford.irt.laneweb.mesh.MeshSuggestReader"
+    <bean name="org.apache.cocoon.reading.Reader/suggest"
+        class="edu.stanford.irt.laneweb.suggest.SuggestionReader"
         scope="prototype">
-        <property name="meshDescriptorManager"
-            ref="edu.stanford.irt.lane.mesh.export.MeshDescriptorManager"/>
+        <property name="eresourceSuggestionManager"
+            ref="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
+        <property name="historySuggestionManager"
+            ref="edu.stanford.irt.suggest.HistorySuggestionManager"/>
+        <property name="meshSuggestionManager"
+            ref="edu.stanford.irt.suggest.MeshSuggestionManager"/>
     </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/ezproxy-servers" scope="prototype"

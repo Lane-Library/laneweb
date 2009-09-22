@@ -1,14 +1,14 @@
-package edu.stanford.irt.laneweb.mesh;
+package edu.stanford.irt.laneweb.suggest;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-public class MeshSuggestComparatorTest {
+public class SuggestionComparatorTest {
 
     @Test
     public void testCompare() {
-        MeshSuggestComparator comparator = new MeshSuggestComparator("TestString");
+      SuggestionComparator comparator = new SuggestionComparator("TestString");
         assertTrue(comparator.compare("TestString foo", "bar") < 0);
         assertTrue(comparator.compare("TestString foo", "foo TestString") < 0);
         assertTrue(comparator.compare("foo TestString", "bar") < 0);
