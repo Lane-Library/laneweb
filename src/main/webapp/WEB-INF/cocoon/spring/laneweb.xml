@@ -538,17 +538,17 @@
         </constructor-arg>
         <constructor-arg ref="edu.stanford.irt.laneweb.user.UserDao"/>
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.ProxyLinks">
+            <bean class="edu.stanford.irt.laneweb.proxy.ProxyLinks">
                 <property name="proxyRegex">
                     <list>
                         <!-- VPN 171.65.16.0 - 171.65.31.255 -->
-                        <value>^171\.66\.(1[6-9]|2[0-9]|3[0-1])\.\S+</value>
+                        <value>^171\.66\.(?:1[6-9]|2[0-9]|3[0-1])\.\S+</value>
                         <!-- hospital 171.65.44.0 - 171.65.44.255 -->
                         <value>^171\.65\.44\.\S+</value>
                         <!-- hospital 171.65.125.0 - 171.65.125.255 -->
                         <value>^171\.65\.125\.\S+</value>
                         <!-- hospital 171.65.128.0 - 171.65.199.255 -->
-                        <value>^171\.65\.1(2[8-9]|[3-9][0-9])\.\S+</value>
+                        <value>^171\.65\.1(?:2[8-9]|[3-9][0-9])\.\S+</value>
                         <!-- hospital 171.65.200.0 - 171.65.255.255 -->
                         <value>^171\.65\.2[0-5][0-9]\.\S+</value>
                     </list>
@@ -556,6 +556,8 @@
                 <property name="noProxyRegex">
                     <list>
                         <value>^171\.6[4-7]\.\S+</value>
+                        <!-- library wireless 10.39.32.1 through 10.39.47.255 -->
+                        <value>^10\.39\.(?:3[2-9]|4[0-7])\.\S+</value>
                     </list>
                 </property>
             </bean>

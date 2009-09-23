@@ -1,9 +1,10 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.proxy;
 
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.User;
 

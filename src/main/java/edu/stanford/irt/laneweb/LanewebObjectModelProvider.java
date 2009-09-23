@@ -10,6 +10,7 @@ import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.Request;
 import org.apache.cocoon.processing.ProcessInfoProvider;
 
+import edu.stanford.irt.laneweb.proxy.ProxyLinks;
 import edu.stanford.irt.laneweb.user.User;
 import edu.stanford.irt.laneweb.user.UserDao;
 
