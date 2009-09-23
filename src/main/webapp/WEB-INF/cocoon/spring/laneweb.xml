@@ -153,7 +153,9 @@
         class="edu.stanford.irt.lane.icd9.ICD9Translator"/>
 
     <bean id="edu.stanford.irt.suggest.EresourceSuggestionManager"
-        class="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
+        class="edu.stanford.irt.suggest.EresourceSuggestionManager">
+        <property name="updateDataSource" ref="javax.sql.DataSource/eresources"/>
+    </bean>
 
     <bean id="edu.stanford.irt.suggest.HistorySuggestionManager"
         class="edu.stanford.irt.suggest.HistorySuggestionManager"/>

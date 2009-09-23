@@ -45,7 +45,7 @@ public class SuggestionReader implements Reader {
         TreeSet<String> suggestionSet = new TreeSet<String>(comparator);
         Collection<?> suggestions = new ArrayList<Suggestion>();
         if ("all".equalsIgnoreCase(l)) {
-          suggestions = this.eresourceSuggestionManager.getAllButBassettSuggestionsForTerm(q);
+          suggestions = this.eresourceSuggestionManager.getLaneconnexSuggestionsForTerm(q);
         } else if ("ej".equalsIgnoreCase(l)) {
           suggestions = this.eresourceSuggestionManager.getJournalSuggestionsForTerm(q);
         } else if ("book".equalsIgnoreCase(l)) {
@@ -58,6 +58,8 @@ public class SuggestionReader implements Reader {
           suggestions = this.eresourceSuggestionManager.getCalcSuggestionsForTerm(q);
         } else if ("video".equalsIgnoreCase(l)) {
           suggestions = this.eresourceSuggestionManager.getVideoSuggestionsForTerm(q);
+        } else if ("lanesite".equalsIgnoreCase(l)) {
+          suggestions = this.eresourceSuggestionManager.getLanesiteSuggestionsForTerm(q);
         } else if ("bassett".equalsIgnoreCase(l)) {
           suggestions = this.eresourceSuggestionManager.getBassettSuggestionsForTerm(q);
         } else if ("history".equalsIgnoreCase(l)) {

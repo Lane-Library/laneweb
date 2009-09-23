@@ -53,12 +53,12 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerate() throws IOException {
-        expect(this.params.getParameter("query", null)).andReturn("laneconnexion");
+        expect(this.params.getParameter("query", null)).andReturn("phospho-proteomics");
         expect(this.params.getParameter("limit", null)).andReturn("all");
         replay(this.params);
         this.reader.setup(null, null, null, this.params);
         this.reader.generate();
-        assertEquals("{\"suggest\":[\"Lane ConneXion\"]}", new String(this.outputStream.toByteArray()));
+        assertEquals("{\"suggest\":[\"Phospho-proteomics\"]}", new String(this.outputStream.toByteArray()));
         verify(this.params);
     }
 
@@ -71,7 +71,7 @@ public class SuggestionReaderTest {
     @Test
     public void testGenerateNull() throws IOException {
         expect(this.params.getParameter("query", null)).andReturn("asdfgh");
-        expect(this.params.getParameter("limit", null)).andReturn("p");
+        expect(this.params.getParameter("limit", null)).andReturn("all");
         replay(this.params);
         this.reader.setup(null, null, null, this.params);
         this.reader.generate();

@@ -23,7 +23,7 @@
 			
 		YAHOO.util.Event.addListener(searchtermsElm, 'focus', function(){
 			acWidget.minQueryLength = 3;
-			if(selectElm.options[selectElm.selectedIndex].value.match(/all|ej|database|book|software|video|cc|bassett|history/)){
+			if(selectElm.options[selectElm.selectedIndex].value.match(/all|ej|database|book|software|video|cc|lanesite|bassett|history/)){
 				acWidget.dataSource.scriptQueryAppend = 'l='+selectElm.options[selectElm.selectedIndex].value;
 			}
 			else if(selectElm.options[selectElm.selectedIndex].value.match(/clinical|peds|anesthesia|cardiology|emergency|hematology|internal-medicine|lpch-cerner|pharmacy|pulmonary/)){
