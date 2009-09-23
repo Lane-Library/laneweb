@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2009-09-28" version="1.9.29" description="1.9.29 bug fix release">
+            <action date="2009-08-23" dev="ceyates" issue="31203" type="add">
+                Allow page authors to control proxy link behavior
+            </action>
+            <action date="2009-08-23" dev="ceyates" issue="31222" type="fix">
+                Off campus login appears on Library wireless
+            </action>
+        </release>
         <release date="2009-09-23" version="1.9.28" description="1.9.28 bug fix release">
             <action date="2009-08-21" dev="alainb" issue="31202" type="fix">
                 webdash login  error
