@@ -43,7 +43,7 @@ public class SuggestionReader implements Reader {
         String l = this.limit;
         SuggestionComparator comparator = new SuggestionComparator(q);
         TreeSet<String> suggestionSet = new TreeSet<String>(comparator);
-        Collection<?> suggestions = new ArrayList<Suggestion>();
+        Collection<? extends Suggestion> suggestions = new ArrayList<Suggestion>();
         if ("all".equalsIgnoreCase(l)) {
           suggestions = this.eresourceSuggestionManager.getLaneconnexSuggestionsForTerm(q);
         } else if ("ej".equalsIgnoreCase(l)) {
@@ -76,7 +76,7 @@ public class SuggestionReader implements Reader {
           suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(q);
         }
         
-        for (Suggestion suggestion : (Collection<Suggestion>) suggestions) {
+        for (Suggestion suggestion : suggestions) {
           suggestionSet.add(suggestion.getSuggestionTitle());
         }
                 

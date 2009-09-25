@@ -424,8 +424,26 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>suggest</artifactId>
-            <version>0.1.2</version>
+            <version>0.1.3</version>
             <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>marc4j-jdk15</artifactId>
+                    <groupId>edu.stanford.irt.marc4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>catalog</artifactId>
+                    <groupId>edu.stanford.irt</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-jdbc</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>ojdbc5</artifactId>
+                    <groupId>com.oracle.ojdbc</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
         	<groupId>commons-jxpath</groupId>
