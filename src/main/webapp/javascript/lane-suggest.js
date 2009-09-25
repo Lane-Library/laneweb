@@ -8,7 +8,7 @@
 		searchtermsElm = document.getElementById('searchTerms');
 		selectElm = document.getElementById('searchSelect');
 		
-		dataSource = new YAHOO.widget.DS_XHR("/apps/suggest/json", ["suggest"]);
+		dataSource = new YAHOO.widget.DS_XHR("/././apps/suggest/json", ["suggest"]);
 		dataSource.responseType = YAHOO.widget.DS_XHR.TYPE_JSON;
 		dataSource.scriptQueryParam = "q";
 		dataSource.connTimeout = 3000; 
