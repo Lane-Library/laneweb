@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2009-10-05" version="1.9.30" description="1.9.30 bug fix release">
+            <action date="2009-10-02" dev="alainb" issue="31403" type="add">
+                ebook RSS by subject
+            </action>
+        </release>
         <release date="2009-09-28" version="1.9.29" description="1.9.29 bug fix release">
             <action date="2009-08-23" dev="ceyates" issue="31203" type="add">
                 Allow page authors to control proxy link behavior
