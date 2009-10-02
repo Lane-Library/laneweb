@@ -276,7 +276,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.5</version>
+            <version>4.6</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -331,8 +331,8 @@
         </dependency>
         <dependency>
             <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>1.5.0</version>
+            <artifactId>ehcache-core</artifactId>
+            <version>1.6.2</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
