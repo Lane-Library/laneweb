@@ -65,19 +65,19 @@
             <map:match pattern="mesh" type="wildcard">
                 <map:generate type="er-mesh">
                     <map:parameter name="mesh" value="${request/parameters/m}"/>
-                    <map:parameter name="type" value="ej"/>
+                    <map:parameter name="type" value="${request/parameters/t}"/>
                 </map:generate>
                 <map:select type="resource-exists">
                     <map:when test="/xsl/eresources-rss.xsl">
                         <map:transform type="saxon" src="/xsl/eresources-rss.xsl">
                             <map:parameter name="m" value="${request/parameters/m}"/>
-                            <map:parameter name="type" value="mesh"/>
+                            <map:parameter name="type" value="mesh-${request/parameters/t}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
                             <map:parameter name="m" value="${request/parameters/m}"/>
-                            <map:parameter name="type" value="mesh"/>
+                            <map:parameter name="type" value="mesh-${request/parameters/t}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>

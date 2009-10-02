@@ -29,8 +29,12 @@
             <xsl:if test="$a != ''"><xsl:text>a=</xsl:text><xsl:value-of select="$a"/></xsl:if>
             <xsl:if test="$a = ''"><xsl:text>all</xsl:text></xsl:if>
         </xsl:if>
-        <xsl:if test="$type = 'mesh'">
+        <xsl:if test="$type = 'mesh-ej'">
             <xsl:text>/online/ejsubjectbrowse.html?m=</xsl:text>
+            <xsl:value-of select="$m"/>
+        </xsl:if>
+        <xsl:if test="$type = 'mesh-book'">
+            <xsl:text>/online/ebsubjectbrowse.html?m=</xsl:text>
             <xsl:value-of select="$m"/>
         </xsl:if>
     </xsl:variable>
