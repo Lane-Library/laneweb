@@ -331,8 +331,8 @@
         </dependency>
         <dependency>
             <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-core</artifactId>
-            <version>1.6.2</version>
+            <artifactId>ehcache</artifactId>
+            <version>1.5.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
