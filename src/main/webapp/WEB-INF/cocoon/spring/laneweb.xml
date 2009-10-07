@@ -243,7 +243,6 @@
             </set>
         </property>
         <property name="subsets">
-            <value>biotools</value>
         </property>
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
