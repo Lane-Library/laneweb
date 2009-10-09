@@ -560,6 +560,8 @@
                 <property name="noProxyRegex">
                     <list>
                         <value>^171\.6[4-7]\.\S+</value>
+                        <!-- campus wireless 10.32.0.0 through 10.33.255.255 -->
+                        <value>^10\.3[2-3]\.\S+</value>
                         <!-- library wireless 10.39.32.1 through 10.39.47.255 -->
                         <value>^10\.39\.(?:3[2-9]|4[0-7])\.\S+</value>
                     </list>
