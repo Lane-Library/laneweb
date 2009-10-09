@@ -10,7 +10,7 @@ import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import edu.stanford.irt.suggest.EresourceSuggestionManager;
+import edu.stanford.irt.suggest.MeshSuggestionManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -24,8 +24,8 @@ import org.junit.Test;
  */
 public class SuggestionReaderTest {
 
-    private EresourceSuggestionManager eresourceSuggestionmanager;
-
+    private MeshSuggestionManager meshSuggestionManager;
+    
     private ByteArrayOutputStream outputStream;
 
     private Parameters params;
@@ -38,8 +38,8 @@ public class SuggestionReaderTest {
     @Before
     public void setUp() throws Exception {
         this.reader = new SuggestionReader();
-        this.eresourceSuggestionmanager = new EresourceSuggestionManager();
-        this.reader.setEresourceSuggestionManager(this.eresourceSuggestionmanager);
+        this.meshSuggestionManager = new MeshSuggestionManager();
+        this.reader.setMeshSuggestionManager(this.meshSuggestionManager);
         this.outputStream = new ByteArrayOutputStream();
         this.reader.setOutputStream(this.outputStream);
         this.params = createMock(Parameters.class);
@@ -53,12 +53,12 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerate() throws IOException {
-        expect(this.params.getParameter("query", null)).andReturn("phospho-proteomics");
-        expect(this.params.getParameter("limit", null)).andReturn("all");
+        expect(this.params.getParameter("query", null)).andReturn("dvt");
+        expect(this.params.getParameter("limit", null)).andReturn("mesh");
         replay(this.params);
         this.reader.setup(null, null, null, this.params);
         this.reader.generate();
-        assertEquals("{\"suggest\":[\"Phospho-proteomics\"]}", new String(this.outputStream.toByteArray()));
+        assertEquals("{\"suggest\":[\"Venous Thrombosis\"]}", new String(this.outputStream.toByteArray()));
         verify(this.params);
     }
 
@@ -71,7 +71,7 @@ public class SuggestionReaderTest {
     @Test
     public void testGenerateNull() throws IOException {
         expect(this.params.getParameter("query", null)).andReturn("asdfgh");
-        expect(this.params.getParameter("limit", null)).andReturn("all");
+        expect(this.params.getParameter("limit", null)).andReturn("mesh");
         replay(this.params);
         this.reader.setup(null, null, null, this.params);
         this.reader.generate();
@@ -81,11 +81,11 @@ public class SuggestionReaderTest {
 
     /**
      * Test method for
-     * {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#setEresourcesSuggestionManager(edu.stanford.irt.lane.suggest.EresourcesSuggestionManager)}
+     * {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#setMeshSuggestionManager(edu.stanford.irt.lane.suggest.MeshSuggestionManager)}
      * .
      */
     @Test
-    public void testSetEresourceSuggestionManager() {
-        assertNotNull(this.eresourceSuggestionmanager);
+    public void testSetMeshSuggestionManager() {
+        assertNotNull(this.meshSuggestionManager);
     }
 }

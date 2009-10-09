@@ -44,34 +44,14 @@ public class SuggestionReader implements Reader {
         SuggestionComparator comparator = new SuggestionComparator(q);
         TreeSet<String> suggestionSet = new TreeSet<String>(comparator);
         Collection<? extends Suggestion> suggestions = new ArrayList<Suggestion>();
-        if ("all".equalsIgnoreCase(l)) {
-          suggestions = this.eresourceSuggestionManager.getLaneconnexSuggestionsForTerm(q);
-        } else if ("ej".equalsIgnoreCase(l)) {
-          suggestions = this.eresourceSuggestionManager.getJournalSuggestionsForTerm(q);
-        } else if ("book".equalsIgnoreCase(l)) {
-          suggestions = this.eresourceSuggestionManager.getBookSuggestionsForTerm(q);
-        } else if ("database".equalsIgnoreCase(l)) {
-          suggestions = this.eresourceSuggestionManager.getDatabaseSuggestionsForTerm(q);
-        } else if ("software".equalsIgnoreCase(l)) {
-          suggestions = this.eresourceSuggestionManager.getSoftwareSuggestionsForTerm(q);
-        } else if ("cc".equalsIgnoreCase(l)) {
-          suggestions = this.eresourceSuggestionManager.getCalcSuggestionsForTerm(q);
-        } else if ("video".equalsIgnoreCase(l)) {
-          suggestions = this.eresourceSuggestionManager.getVideoSuggestionsForTerm(q);
-        } else if ("lanesite".equalsIgnoreCase(l)) {
-          suggestions = this.eresourceSuggestionManager.getLanesiteSuggestionsForTerm(q);
-        } else if ("bassett".equalsIgnoreCase(l)) {
-          suggestions = this.eresourceSuggestionManager.getBassettSuggestionsForTerm(q);
+        if (l.matches("(ej|book|database|software|cc|video|lanesite|bassett)")) {
+          suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(l, q);
         } else if ("history".equalsIgnoreCase(l)) {
           suggestions = this.historySuggestionManager.getSuggestionsForTerm(q);
         } else if ("mesh".equalsIgnoreCase(l)) {
           suggestions = this.meshSuggestionManager.getSuggestionsForTerm(q);
-        } else if ("mesh-d".equalsIgnoreCase(l)||"mesh-p".equalsIgnoreCase(l)) {
-          suggestions = this.meshSuggestionManager.getDiseaseSuggestionsForTerm(q);
-        } else if ("mesh-i".equalsIgnoreCase(l)) {
-          suggestions = this.meshSuggestionManager.getInterventionSuggestionsForTerm(q);
-        } else if ("mesh-di".equalsIgnoreCase(l)) {
-          suggestions = this.meshSuggestionManager.getDiseaseOrInterventionSuggestionsForTerm(q);
+        } else if (l.matches("mesh-(d|i|di)")) {
+          suggestions = this.meshSuggestionManager.getSuggestionsForTerm(l.replaceFirst("mesh-",""), q);
         } else {
           suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(q);
         }

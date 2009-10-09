@@ -424,7 +424,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>suggest</artifactId>
-            <version>0.1.3</version>
+            <version>0.1.4</version>
             <scope>compile</scope>
             <exclusions>
                 <exclusion>
