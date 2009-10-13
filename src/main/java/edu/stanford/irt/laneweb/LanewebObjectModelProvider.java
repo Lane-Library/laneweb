@@ -1,8 +1,11 @@
 package edu.stanford.irt.laneweb;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 
 import org.apache.cocoon.el.objectmodel.ObjectModelProvider;
@@ -24,11 +27,17 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
 
     private UserDao userDao;
 
-    public LanewebObjectModelProvider(final ProcessInfoProvider pip, final Map<String, Object> jndiData, final UserDao userDao, final ProxyLinks proxyLinks) {
+    private Map<String, String> templateConfig;
+
+    private String defaultTemplate;
+
+    public LanewebObjectModelProvider(final ProcessInfoProvider pip, final Map<String, Object> jndiData, final UserDao userDao, final ProxyLinks proxyLinks, final String defaultTemplate, final Map<String, String> templateConfig) {
         this.processInfoProvider = pip;
         this.jndiData = jndiData;
         this.userDao = userDao;
         this.proxyLinks = proxyLinks;
+        this.defaultTemplate = defaultTemplate;
+        this.templateConfig = templateConfig;
     }
 
     @SuppressWarnings("unchecked")
@@ -52,6 +61,34 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);
         cocoonMap.put("context", context);
         cocoonMap.put("jndi", this.jndiData);
+        String query = request.getParameter("q");
+        if (null != query) {
+            try {
+                cocoonMap.put("urlencoded-query", URLEncoder.encode(query,"UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+            }
+        }
+        Cookie[] cookies = request.getCookies();
+        for (int i = 0; i < cookies.length; i++) {
+            if (LanewebConstants.LANE_COOKIE_NAME.equals(cookies[i].getName())) {
+                cocoonMap.put("user-cookie", cookies[i].getValue());
+                break;
+            }
+        }
+        String templateName = request.getParameter("template");
+        if (null == templateName) {
+        String path = request.getPathInfo();
+        for (String key : this.templateConfig.keySet()) {
+            if (path.matches(key)) {
+                templateName = this.templateConfig.get(key);
+                break;
+            }
+        }
+        }
+        if (null == templateName) {
+            templateName = this.defaultTemplate;
+        }
+        cocoonMap.put("template", templateName);
         return cocoonMap;
     }
 }

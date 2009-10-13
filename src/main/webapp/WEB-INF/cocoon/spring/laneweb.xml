@@ -170,26 +170,6 @@
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
 
-    <bean id="org.apache.cocoon.components.modules.input.AbstractInputModule"
-        class="edu.stanford.irt.laneweb.inputmodule.AbstractInputModule" abstract="true">
-        <property name="userDao" ref="edu.stanford.irt.laneweb.user.UserDao"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.components.modules.input.InputModule/template"
-        class="edu.stanford.irt.laneweb.inputmodule.Template"
-        parent="org.apache.cocoon.components.modules.input.AbstractInputModule">
-        <property name="templateConfig">
-            <map key-type="java.lang.String" value-type="java.lang.String">
-                <entry key="^(stage/|)services/spaces/reserve/\S+" value="none"/>
-                <entry key="^(stage/|)bassett/raw/bassettLargerView.html?.*+"
-                    value="bassettLargerView"/>
-            </map>
-        </property>
-    </bean>
-
-    <!--<bean name="org.apache.cocoon.components.modules.input.InputModule/mt-munge"
-        class="edu.stanford.irt.laneweb.inputmodule.MTMungingInputModule"/>-->
-
     <bean name="org.apache.cocoon.generation.Generator/file"
         class="org.apache.cocoon.generation.FileGenerator" scope="prototype">
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
@@ -567,6 +547,13 @@
                     </list>
                 </property>
             </bean>
+        </constructor-arg>
+        <constructor-arg value="irt3"/>
+        <constructor-arg>
+            <map>
+                <entry key="^(stage/|)bassett/raw/bassettLargerView.html"
+                    value="bassettLargerView"/>
+            </map>
         </constructor-arg>
     </bean>
 

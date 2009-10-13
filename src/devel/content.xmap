@@ -84,7 +84,7 @@
                             <map:parameter name="persistent-login" value="${request/parameters/pl}"/>
                             <map:parameter name="remove-persistent-login"
                                 value="${request/parameters/remove-pl}"/>
-                            <map:parameter name="lane-user-cookie" value="{cookie:user}"/>
+                            <map:parameter name="lane-user-cookie" value="${user-cookie}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
@@ -92,7 +92,7 @@
                             <map:parameter name="persistent-login" value="${request/parameters/pl}"/>
                             <map:parameter name="remove-persistent-login"
                                 value="${request/parameters/remove-pl}"/>
-                            <map:parameter name="lane-user-cookie" value="{cookie:user}"/>
+                            <map:parameter name="lane-user-cookie" value="${user-cookie}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>
@@ -231,7 +231,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:generate type="file"
-                            src="context://resources/templates/{defaults:template}.xml"/>
+                            src="context://resources/templates/irt3.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

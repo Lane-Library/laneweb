@@ -92,10 +92,10 @@
             <map:match pattern="sfx/*" type="wildcard">
                 <map:match pattern="sfx/json" type="wildcard">
                     <map:generate type="html"
-                        src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:${request/parameters/q}}&amp;sfx.title_search=exact&amp;sfx.directlink=off"/>
+                        src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${urlencoded-query}&amp;sfx.title_search=exact&amp;sfx.directlink=off"/>
                     <map:transform src="context://xsl/sfx2json.xsl" type="saxon">
                         <map:parameter name="sfx-request"
-                            value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title={urlencode:${request/parameters/q}}&amp;sfx.title_search=exact"
+                            value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${urlencoded-query}&amp;sfx.title_search=exact"
                         />
                     </map:transform>
                     <map:serialize type="text"/>

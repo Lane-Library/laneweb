@@ -187,7 +187,7 @@
                 <map:aggregate element="doc" label="content">
                     <map:part src="cocoon:/content/{1}.html"/>
                     <map:part src="cocoon:/content/sitemap.html"/>
-                    <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
+                    <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
                 <map:transform type="cme-links">
                     <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
@@ -248,7 +248,7 @@
                 <map:aggregate element="doc" label="content">
                     <map:part src="cocoon:/content/error.html"/>
                     <map:part src="cocoon:/content/sitemap.html"/>
-                    <map:part src="cocoon:/content/templates/{chain:template}.xml"/>
+                    <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
                 <map:transform type="cme-links">
                     <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>

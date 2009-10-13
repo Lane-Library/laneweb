@@ -452,6 +452,11 @@
         	<type>jar</type>
         	<scope>compile</scope>
         </dependency>
+        <dependency>
+        	<groupId>org.apache.cocoon</groupId>
+        	<artifactId>cocoon-expression-language-impl</artifactId>
+        	<version>1.0.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

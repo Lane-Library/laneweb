@@ -56,33 +56,6 @@
         <parameter name="incremental-processing" value="false"/>
         <parameter name="transformer-factory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </component>
-
-    <component role="org.apache.cocoon.components.modules.input.InputModuleSelector"
-        class="org.apache.cocoon.core.container.DefaultServiceSelector"/>
-
-    <component role="org.apache.cocoon.components.modules.input.InputModule/chain"
-        class="org.apache.cocoon.components.modules.input.ChainMetaModule">
-        <input-module name="request-param"/>
-        <input-module name="template"/>
-        <input-module name="defaults"/>
-    </component>
-
-    <component role="org.apache.cocoon.components.modules.input.InputModule/defaults"
-        class="org.apache.cocoon.components.modules.input.DefaultsModule">
-        <values>
-            <template>irt3</template>
-            <abstract-count>100</abstract-count>
-        </values>
-    </component>
-
-    <component role="org.apache.cocoon.components.modules.input.InputModule/request-param"
-        class="org.apache.cocoon.components.modules.input.RequestParameterModule"/>
-
-    <component role="org.apache.cocoon.components.modules.input.InputModule/urlencode"
-        class="org.apache.cocoon.components.modules.input.URLEncodeModule"/>
-    
-    <component role="org.apache.cocoon.components.modules.input.InputModule/cookie"
-        class="org.apache.cocoon.components.modules.input.CookieModule"/>
     
     <component role="org.apache.cocoon.matching.MatcherSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
@@ -91,10 +64,6 @@
         class="org.apache.cocoon.matching.WildcardURIMatcher"/>
 
     <component role="org.apache.cocoon.matching.Matcher/regexp"
-        class="org.apache.cocoon.matching.RegexpURIMatcher"/>
-
-    <!-- TODO: remove this in favor of regexp -->
-    <component role="org.apache.cocoon.matching.Matcher/regex"
         class="org.apache.cocoon.matching.RegexpURIMatcher"/>
     
     <component role="org.apache.cocoon.matching.Matcher/regex-parameter"
