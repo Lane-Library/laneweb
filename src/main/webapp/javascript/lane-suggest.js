@@ -3,7 +3,24 @@
 		var dataSource,
 		acWidget,
 		searchtermsElm,
-		selectElm;
+		selectElm,
+		onItemSelect;
+		
+        // when a suggest list item is selected ...
+        //  - track the suggest-selection-event
+        //  - submit the form
+        onItemSelect = function(sType, aArgs) {
+            var item, 
+                form, 
+                trackingObject = {};
+            item = aArgs[2];
+            form = document.getElementById('searchForm');
+    		trackingObject.title = 'suggest-selection-event';
+    		trackingObject.path = item[0];
+    		LANE.tracking.track(trackingObject);
+            LANE.search.startSearch();
+            form.submit();
+        };
 		
 		searchtermsElm = document.getElementById('searchTerms');
 		selectElm = document.getElementById('searchSelect');
@@ -20,6 +37,7 @@
 		acWidget.animHoriz = false;
 		acWidget.animVert = false;
 		acWidget.autoHighlight = false;
+		acWidget.itemSelectEvent.subscribe(onItemSelect);
 			
 		YAHOO.util.Event.addListener(searchtermsElm, 'focus', function(){
 			acWidget.minQueryLength = 3;
