@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import edu.stanford.irt.laneweb.user.User;
 
 public class CMERedirectAction implements Action {
-    
+
     private static final String CME_REDIRECT_KEY = "cme-redirect";
 
     private static final String ERROR_URL = "/cmeRedirectError.html";
@@ -21,13 +21,13 @@ public class CMERedirectAction implements Action {
     private static final String HOST_PARAM = "host";
 
     private static final Logger LOGGER = Logger.getLogger(CMERedirectAction.class);
-    
+
+    private static final String PROXY_LINK = "http://laneproxy.stanford.edu/login?url=";
+
     private static final String QUERY_STRING = "query-string";
 
     // TODO: once more vendors, move UTD strings to collection of host objects
     private static final String UTD_CME_STRING = "http://www.uptodate.com/online/content/search.do?unid=EMRID&srcsys=epic90710&eiv=2.1.0";
-    
-    private static final String PROXY_LINK = "http://laneproxy.stanford.edu/login?url=";
 
     @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters params) {
@@ -35,7 +35,7 @@ public class CMERedirectAction implements Action {
         String host = params.getParameter(HOST_PARAM, null);
         String emrid = params.getParameter(User.EMRID, null);
         if (null != emrid && emrid.length() > 0 && "uptodate".equalsIgnoreCase(host)) {
-            result.put(CME_REDIRECT_KEY,PROXY_LINK + UTD_CME_STRING.replaceFirst("EMRID", emrid));
+            result.put(CME_REDIRECT_KEY, PROXY_LINK + UTD_CME_STRING.replaceFirst("EMRID", emrid));
         } else {
             String queryString = params.getParameter(QUERY_STRING, null);
             result.put(CME_REDIRECT_KEY, null == queryString ? ERROR_URL : ERROR_URL + '?' + queryString);

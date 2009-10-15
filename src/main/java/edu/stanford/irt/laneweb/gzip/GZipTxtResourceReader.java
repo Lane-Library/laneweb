@@ -15,31 +15,21 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.laneweb.TxtResourceReader;
 
 public class GZipTxtResourceReader extends TxtResourceReader {
-    
+
+    private ProcessInfoProvider pip;
+
     @Override
     public void generate() throws IOException {
         super.generate();
-        ((GZIPOutputStream)this.outputStream).finish();
+        ((GZIPOutputStream) this.outputStream).finish();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void setup(SourceResolver resolver, Map objectModel, String src, Parameters par) throws ProcessingException, SAXException, IOException {
-        super.setup(resolver, objectModel, src, par);
-        this.pip.getResponse().setHeader("Content-Encoding", "gzip");
-        this.pip.getResponse().setHeader("Vary", "Accept-Encoding");
-    }
-
-    private ProcessInfoProvider pip;
-    
-    public void setProcessInfoProvider(ProcessInfoProvider pip) {
-        this.pip = pip;
-    }
-
     public Serializable getKey() {
         return super.getKey() + ";gzip";
     }
 
+    @Override
     public void setOutputStream(final OutputStream out) {
         try {
             this.outputStream = new GZIPOutputStream(out);
@@ -48,6 +38,20 @@ public class GZipTxtResourceReader extends TxtResourceReader {
         }
     }
 
+    public void setProcessInfoProvider(final ProcessInfoProvider pip) {
+        this.pip = pip;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
+            IOException {
+        super.setup(resolver, objectModel, src, par);
+        this.pip.getResponse().setHeader("Content-Encoding", "gzip");
+        this.pip.getResponse().setHeader("Vary", "Accept-Encoding");
+    }
+
+    @Override
     public boolean shouldSetContentLength() {
         return true;
     }

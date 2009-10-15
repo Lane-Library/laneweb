@@ -15,7 +15,7 @@ import org.junit.Test;
 public class WebdashActionTest {
 
     private WebdashAction action;
-    
+
     private Parameters params;
 
     private WebdashLogin webdashLogin;

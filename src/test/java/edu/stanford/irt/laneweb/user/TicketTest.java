@@ -14,6 +14,13 @@ public class TicketTest {
 
     private Ticket ticket;
 
+    @Before
+    public void setUp() {
+        this.sunetid = "ceyates";
+        this.ezproxyKey = "boguskey";
+        this.ticket = new Ticket(this.sunetid, this.ezproxyKey);
+    }
+
     @Test
     public void testTicket() {
         try {
@@ -31,12 +38,5 @@ public class TicketTest {
     @Test
     public void testToString() {
         assertEquals(46, this.ticket.toString().length());
-    }
-
-    @Before
-    public void setUp() {
-        this.sunetid = "ceyates";
-        this.ezproxyKey = "boguskey";
-        this.ticket = new Ticket(this.sunetid, this.ezproxyKey);
     }
 }

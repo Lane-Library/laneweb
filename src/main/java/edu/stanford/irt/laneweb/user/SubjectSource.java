@@ -7,7 +7,7 @@ import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 
 public class SubjectSource {
-    
+
     private static final long TWENTYFOUR_HOURS = 1000 * 60 * 60 * 24;
 
     private Date lastAuthentication;

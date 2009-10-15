@@ -15,7 +15,8 @@ public class LoginAction implements Action {
     private static final Logger LOGGER = Logger.getLogger(LoginAction.class);
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters params) throws IOException, ProcessingException {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters params)
+            throws IOException, ProcessingException {
         String sunetid = params.getParameter("sunetid", null);
         String queryString = params.getParameter("query-string", null);
         String ticket = params.getParameter("ticket", null);

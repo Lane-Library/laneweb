@@ -21,13 +21,13 @@ public class TxtResourceReader implements Reader, CacheableProcessingComponent {
 
     private String defaultPath;
 
+    private String valueToSubstitute;
+
     protected OutputStream outputStream;
 
     protected String path;
 
     protected Source source;
-
-    private String valueToSubstitute;
 
     public void generate() throws IOException {
         BufferedReader bf = null;

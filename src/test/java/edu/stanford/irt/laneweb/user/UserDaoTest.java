@@ -44,6 +44,29 @@ public class UserDaoTest {
 
     private UserDao userDao;
 
+    @Before
+    public void setUp() {
+        this.request = createMock(HttpServletRequest.class);
+        this.session = createMock(Session.class);
+        this.subjectSource = createMock(SubjectSource.class);
+        this.ip = "171.65.28.124";
+        this.sunetid = "ceyates";
+        expect(this.request.getSession(true)).andReturn(this.session);
+        expect(this.session.getAttribute(LanewebConstants.USER)).andReturn(null);
+        this.session.setAttribute(isA(String.class), isA(User.class));
+        replay(this.session);
+        expect(this.request.getHeader(LanewebConstants.X_FORWARDED_FOR)).andReturn(null);
+        expect(this.request.getParameter(LanewebConstants.PROXY_LINKS)).andReturn("true");
+        expect(this.request.getParameter(User.EMRID)).andReturn(null);
+        this.userDao = new UserDao();
+        this.userDao.setSubjectSource(this.subjectSource);
+        this.userDao.setLdapTemplate(createMock(LdapTemplate.class));
+        this.userDao.setEzproxyKey(this.ezproxyKey);
+        this.cryptor = new Cryptor();
+        this.cryptor.setKey("testtesttesttesttestt");
+        this.userDao.setCryptor(this.cryptor);
+    }
+
     @Test
     public void testCookieUserInfo() {
         resetCookieTest();
@@ -247,28 +270,5 @@ public class UserDaoTest {
         expect(this.request.getCookies()).andReturn(this.cookies);
         expect(this.request.getRemoteAddr()).andReturn(this.ip).atLeastOnce();
         expect(this.request.getRemoteUser()).andReturn(null);
-    }
-
-    @Before
-    public void setUp() {
-        this.request = createMock(HttpServletRequest.class);
-        this.session = createMock(Session.class);
-        this.subjectSource = createMock(SubjectSource.class);
-        this.ip = "171.65.28.124";
-        this.sunetid = "ceyates";
-        expect(this.request.getSession(true)).andReturn(this.session);
-        expect(this.session.getAttribute(LanewebConstants.USER)).andReturn(null);
-        this.session.setAttribute(isA(String.class), isA(User.class));
-        replay(this.session);
-        expect(this.request.getHeader(LanewebConstants.X_FORWARDED_FOR)).andReturn(null);
-        expect(this.request.getParameter(LanewebConstants.PROXY_LINKS)).andReturn("true");
-        expect(this.request.getParameter(User.EMRID)).andReturn(null);
-        this.userDao = new UserDao();
-        this.userDao.setSubjectSource(this.subjectSource);
-        this.userDao.setLdapTemplate(createMock(LdapTemplate.class));
-        this.userDao.setEzproxyKey(this.ezproxyKey);
-        this.cryptor = new Cryptor();
-        this.cryptor.setKey("testtesttesttesttestt");
-        this.userDao.setCryptor(this.cryptor);
     }
 }

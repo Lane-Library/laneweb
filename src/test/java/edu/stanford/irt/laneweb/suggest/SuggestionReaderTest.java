@@ -10,8 +10,6 @@ import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import edu.stanford.irt.suggest.MeshSuggestionManager;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -19,13 +17,15 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.suggest.MeshSuggestionManager;
+
 /**
  * @author ryanmax
  */
 public class SuggestionReaderTest {
 
     private MeshSuggestionManager meshSuggestionManager;
-    
+
     private ByteArrayOutputStream outputStream;
 
     private Parameters params;

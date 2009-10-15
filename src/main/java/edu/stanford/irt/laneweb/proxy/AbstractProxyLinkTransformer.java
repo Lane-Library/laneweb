@@ -19,7 +19,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
     private static final String URL = "&url=";
 
     private static final String WEBAUTH_LINK = "/secure/login.html?url=";
-    
+
     private String basePath;
 
     private String ipGroup;

@@ -20,7 +20,7 @@ public class WebdashAction implements Action {
         String systemUserId = param.getParameter("system-user-id", null);
         String sunetId = param.getParameter("sunet-id", null);
         String name = param.getParameter("name", null);
-        String affiliation = param.getParameter("affiliation",null);
+        String affiliation = param.getParameter("affiliation", null);
         Map<String, String> result = new HashMap<String, String>(1);
         result.put(RESULT_KEY, this.webDashLogin.getWebdashURL(sunetId, name, affiliation, nonce, systemUserId));
         return result;

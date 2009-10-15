@@ -51,11 +51,6 @@ public class HTTPClientSource implements Source {
     private SourceValidity cachedValidity;
 
     /**
-     * The {@link HttpClient} object.
-     */
-    private final HttpClient httpClient;
-
-    /**
      * The content length of the resource on the server.
      */
     private long contentLength;
@@ -69,6 +64,11 @@ public class HTTPClientSource implements Source {
      * Whether the resource exists on the server.
      */
     private boolean exists;
+
+    /**
+     * The {@link HttpClient} object.
+     */
+    private final HttpClient httpClient;
 
     /**
      * The last modified date of the resource on the server.

@@ -26,9 +26,9 @@ public class LinkScanGenerator implements Generator {
 
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
-    private DataSource dataSource;
-
     private XMLConsumer consumer;
+
+    private DataSource dataSource;
 
     public void generate() throws SAXException, ProcessingException {
         Connection conn = null;
@@ -38,8 +38,8 @@ public class LinkScanGenerator implements Generator {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
             rs = stmt.executeQuery(SQL);
-            consumer.startDocument();
-            XMLUtils.startElement(consumer, XHTML_NS, "ul");
+            this.consumer.startDocument();
+            XMLUtils.startElement(this.consumer, XHTML_NS, "ul");
             int p = 1;
             String position, url, id, title;
             while (rs.next()) {
@@ -47,21 +47,21 @@ public class LinkScanGenerator implements Generator {
                 url = rs.getString(1);
                 id = rs.getString(2) + '-' + rs.getString(3);
                 title = rs.getString(4);
-                XMLUtils.startElement(consumer, XHTML_NS, "li");
-                XMLUtils.data(consumer, position);
-                XMLUtils.startElement(consumer, XHTML_NS, "ul");
-                XMLUtils.startElement(consumer, XHTML_NS, "li");
+                XMLUtils.startElement(this.consumer, XHTML_NS, "li");
+                XMLUtils.data(this.consumer, position);
+                XMLUtils.startElement(this.consumer, XHTML_NS, "ul");
+                XMLUtils.startElement(this.consumer, XHTML_NS, "li");
                 AttributesImpl atts = new AttributesImpl();
                 atts.addAttribute("", "href", "href", "CDATA", url);
-                XMLUtils.startElement(consumer, XHTML_NS, "a", atts);
-                XMLUtils.data(consumer, " id: " + id + " title: " + title);
-                XMLUtils.endElement(consumer, XHTML_NS, "a");
-                XMLUtils.endElement(consumer, XHTML_NS, "li");
-                XMLUtils.endElement(consumer, XHTML_NS, "ul");
-                XMLUtils.endElement(consumer, XHTML_NS, "li");
+                XMLUtils.startElement(this.consumer, XHTML_NS, "a", atts);
+                XMLUtils.data(this.consumer, " id: " + id + " title: " + title);
+                XMLUtils.endElement(this.consumer, XHTML_NS, "a");
+                XMLUtils.endElement(this.consumer, XHTML_NS, "li");
+                XMLUtils.endElement(this.consumer, XHTML_NS, "ul");
+                XMLUtils.endElement(this.consumer, XHTML_NS, "li");
             }
-            XMLUtils.endElement(consumer, XHTML_NS, "ul");
-            consumer.endDocument();
+            XMLUtils.endElement(this.consumer, XHTML_NS, "ul");
+            this.consumer.endDocument();
         } catch (SQLException e) {
             throw new ProcessingException(e);
         } finally {

@@ -13,7 +13,7 @@ import org.junit.Test;
 public class VoyagerActionTest {
 
     private VoyagerAction action;
-    
+
     private Parameters params;
 
     private VoyagerLogin voyagerLogin;

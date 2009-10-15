@@ -14,6 +14,25 @@ public class ProxyLinks {
 
     private List<String> proxyRegex;
 
+    public Boolean proxyLinks(final User user, final HttpServletRequest request) {
+        if (null != user.getProxyLinks()) {
+            return user.getProxyLinks();
+        }
+        IPGroup ipGroup = user.getIPGroup();
+        if (null != ipGroup && (IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup))) {
+            return Boolean.TRUE;
+        }
+        String ip = request.getRemoteAddr();
+        // mod_proxy puts the real remote address in an x-forwarded-for
+        // header
+        // Load balancer also does this
+        String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
+        if (header != null) {
+            ip = header;
+        }
+        return Boolean.valueOf(proxyLinks(ip));
+    }
+
     public void setNoProxyRegex(final List<String> noProxyRegex) {
         this.noProxyRegex = noProxyRegex;
     }
@@ -38,25 +57,6 @@ public class ProxyLinks {
             }
         }
         return false;
-    }
-
-    public Boolean proxyLinks(final User user, final HttpServletRequest request) {
-        if (null != user.getProxyLinks()) {
-            return user.getProxyLinks();
-        }
-        IPGroup ipGroup = user.getIPGroup();
-        if (null != ipGroup && (IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup))) {
-            return Boolean.TRUE;
-        }
-        String ip = request.getRemoteAddr();
-        // mod_proxy puts the real remote address in an x-forwarded-for
-        // header
-        // Load balancer also does this
-        String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
-        if (header != null) {
-            ip = header;
-        }
-        return Boolean.valueOf(proxyLinks(ip));
     }
 
     protected boolean proxyLinks(final String ip) {

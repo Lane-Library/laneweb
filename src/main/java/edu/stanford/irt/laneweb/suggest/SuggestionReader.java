@@ -25,12 +25,12 @@ public class SuggestionReader implements Reader {
 
     private static int JSON_RETURN_LIMIT = 20;
 
-    private String limit;
-
     private EresourceSuggestionManager eresourceSuggestionManager;
 
     private HistorySuggestionManager historySuggestionManager;
-    
+
+    private String limit;
+
     private MeshSuggestionManager meshSuggestionManager;
 
     private OutputStream outputStream;
@@ -45,21 +45,19 @@ public class SuggestionReader implements Reader {
         TreeSet<String> suggestionSet = new TreeSet<String>(comparator);
         Collection<? extends Suggestion> suggestions = new ArrayList<Suggestion>();
         if (l.matches("(ej|book|database|software|cc|video|lanesite|bassett)")) {
-          suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(l, q);
+            suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(l, q);
         } else if ("history".equalsIgnoreCase(l)) {
-          suggestions = this.historySuggestionManager.getSuggestionsForTerm(q);
+            suggestions = this.historySuggestionManager.getSuggestionsForTerm(q);
         } else if ("mesh".equalsIgnoreCase(l)) {
-          suggestions = this.meshSuggestionManager.getSuggestionsForTerm(q);
+            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(q);
         } else if (l.matches("mesh-(d|i|di)")) {
-          suggestions = this.meshSuggestionManager.getSuggestionsForTerm(l.replaceFirst("mesh-",""), q);
+            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(l.replaceFirst("mesh-", ""), q);
         } else {
-          suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(q);
+            suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(q);
         }
-        
         for (Suggestion suggestion : suggestions) {
-          suggestionSet.add(suggestion.getSuggestionTitle());
+            suggestionSet.add(suggestion.getSuggestionTitle());
         }
-                
         Iterator<String> it = suggestionSet.iterator();
         int count = 0;
         try {
@@ -94,19 +92,19 @@ public class SuggestionReader implements Reader {
     }
 
     public void setHistorySuggestionManager(final HistorySuggestionManager historySuggestionManager) {
-      if (null == historySuggestionManager) {
-          throw new IllegalArgumentException("null historySuggestionManager");
-      }
-      this.historySuggestionManager = historySuggestionManager;
-  }
+        if (null == historySuggestionManager) {
+            throw new IllegalArgumentException("null historySuggestionManager");
+        }
+        this.historySuggestionManager = historySuggestionManager;
+    }
 
     public void setMeshSuggestionManager(final MeshSuggestionManager meshSuggestionManager) {
-      if (null == meshSuggestionManager) {
-        throw new IllegalArgumentException("null meshSuggestionManager");
-      }
-      this.meshSuggestionManager = meshSuggestionManager;
+        if (null == meshSuggestionManager) {
+            throw new IllegalArgumentException("null meshSuggestionManager");
+        }
+        this.meshSuggestionManager = meshSuggestionManager;
     }
-    
+
     public void setOutputStream(final OutputStream outputStream) {
         if (null == outputStream) {
             throw new IllegalArgumentException("null outputStream");
@@ -123,21 +121,20 @@ public class SuggestionReader implements Reader {
     public boolean shouldSetContentLength() {
         return false;
     }
-    
+
     private String escapeQuotes(final String string) {
-      String s = string;
-      if ((s.indexOf('\'') > -1) || (s.indexOf('"') > -1)) {
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < s.length(); i++) {
-          char c = s.charAt(i);
-          if ('"' == c) {
-            sb.append("\\");
-          }
-          sb.append(c);
+        String s = string;
+        if ((s.indexOf('\'') > -1) || (s.indexOf('"') > -1)) {
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                if ('"' == c) {
+                    sb.append("\\");
+                }
+                sb.append(c);
+            }
+            s = sb.toString();
         }
-        s = sb.toString();
-      }
-      return s;
+        return s;
     }
-    
 }

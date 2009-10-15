@@ -13,73 +13,73 @@ import org.apache.excalibur.xml.xpath.PrefixResolver;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-
 public class XPathProcessor implements org.apache.excalibur.xml.xpath.XPathProcessor {
-    
+
     private XPathFactory factory = XPathFactory.newInstance();
 
-    public boolean evaluateAsBoolean(Node contextNode, String str) {
+    public boolean evaluateAsBoolean(final Node contextNode, final String str) {
         return (Boolean) evaluate(contextNode, str, XPathConstants.BOOLEAN, null);
     }
 
-    public boolean evaluateAsBoolean(Node contextNode, String str, PrefixResolver resolver) {
+    public boolean evaluateAsBoolean(final Node contextNode, final String str, final PrefixResolver resolver) {
         return (Boolean) evaluate(contextNode, str, XPathConstants.BOOLEAN, resolver);
     }
 
-    public Number evaluateAsNumber(Node contextNode, String str) {
+    public Number evaluateAsNumber(final Node contextNode, final String str) {
         return (Number) evaluate(contextNode, str, XPathConstants.NUMBER, null);
     }
 
-    public Number evaluateAsNumber(Node contextNode, String str, PrefixResolver resolver) {
+    public Number evaluateAsNumber(final Node contextNode, final String str, final PrefixResolver resolver) {
         return (Number) evaluate(contextNode, str, XPathConstants.NUMBER, resolver);
     }
 
-    public String evaluateAsString(Node contextNode, String str) {
+    public String evaluateAsString(final Node contextNode, final String str) {
         return (String) evaluate(contextNode, str, XPathConstants.STRING, null);
     }
 
-    public String evaluateAsString(Node contextNode, String str, PrefixResolver resolver) {
+    public String evaluateAsString(final Node contextNode, final String str, final PrefixResolver resolver) {
         return (String) evaluate(contextNode, str, XPathConstants.STRING, resolver);
     }
 
-    public NodeList selectNodeList(Node contextNode, String str) {
+    public NodeList selectNodeList(final Node contextNode, final String str) {
         return (NodeList) evaluate(contextNode, str, XPathConstants.NODESET, null);
     }
 
-    public NodeList selectNodeList(Node contextNode, String str, PrefixResolver resolver) {
+    public NodeList selectNodeList(final Node contextNode, final String str, final PrefixResolver resolver) {
         return (NodeList) evaluate(contextNode, str, XPathConstants.NODESET, resolver);
     }
 
-    public Node selectSingleNode(Node contextNode, String str) {
+    public Node selectSingleNode(final Node contextNode, final String str) {
         return (Node) evaluate(contextNode, str, XPathConstants.NODE, null);
     }
 
-    public Node selectSingleNode(Node contextNode, String str, PrefixResolver resolver) {
+    public Node selectSingleNode(final Node contextNode, final String str, final PrefixResolver resolver) {
         return (Node) evaluate(contextNode, str, XPathConstants.NODE, resolver);
     }
-    
-    private Object evaluate(Node node, String str, QName returnType, final PrefixResolver resolver) {
+
+    private Object evaluate(final Node node, final String str, final QName returnType, final PrefixResolver resolver) {
         XPath xpath = this.factory.newXPath();
         if (null != resolver) {
-            xpath.setNamespaceContext(new NamespaceContext(){
+            xpath.setNamespaceContext(new NamespaceContext() {
 
-                public String getNamespaceURI(String prefix) {
+                public String getNamespaceURI(final String prefix) {
                     return resolver.prefixToNamespace(prefix);
                 }
 
-                public String getPrefix(String namespaceURI) {
+                public String getPrefix(final String namespaceURI) {
                     throw new UnsupportedOperationException();
                 }
 
                 @SuppressWarnings("unchecked")
-                public Iterator getPrefixes(String namespaceURI) {
+                public Iterator getPrefixes(final String namespaceURI) {
                     throw new UnsupportedOperationException();
-                }});
+                }
+            });
         }
         try {
             return xpath.evaluate(str, node, returnType);
         } catch (XPathExpressionException e) {
-           throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 }

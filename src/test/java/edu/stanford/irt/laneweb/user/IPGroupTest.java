@@ -26,6 +26,11 @@ public class IPGroupTest {
     }
 
     @Test
+    public void testProxyServer() {
+        assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("171.65.65.46"));
+    }
+
+    @Test
     public void testSomBeckmanIps() throws IOException {
         BufferedReader staffIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-beckman-ips.txt")));
         String ip = null;
@@ -82,10 +87,5 @@ public class IPGroupTest {
     @Test
     public void testToString() {
         assertEquals(IPGroup.LPCH.toString(), "LPCH");
-    }
-    
-    @Test
-    public void testProxyServer() {
-        assertEquals(IPGroup.OTHER, IPGroup.getGroupForIP("171.65.65.46"));
     }
 }

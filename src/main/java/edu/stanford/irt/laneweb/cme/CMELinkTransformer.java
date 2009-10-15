@@ -23,19 +23,19 @@ import edu.stanford.irt.laneweb.user.User;
 public class CMELinkTransformer extends AbstractTransformer {
 
     private static final String EMPTY_STRING = "";
-    
+
     private static final String HREF = "href";
 
-    private static final String VALUE = "value";
-    
     private static final String REPLACEMENT_STRING = "{emrid}";
-    
-    private static final String UTD_CME_URL = "http://www.uptodate.com/online/content/search.do?";
-    
+
     private static final String UTD_CME_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
+
+    private static final String UTD_CME_URL = "http://www.uptodate.com/online/content/search.do?";
 
     // TODO: once more vendors, move UTD strings to collection of host objects
     private static final String[] UTD_HOSTS = { "www.utdol.com", "www.uptodate.com" };
+
+    private static final String VALUE = "value";
 
     private String emrid;
 
@@ -64,24 +64,22 @@ public class CMELinkTransformer extends AbstractTransformer {
         this.isSearchUrlElement = false;
         if (!EMPTY_STRING.equals(this.emrid)) {
             if ("a".equals(localName)) {
-              String link = atts.getValue(HREF);
-              if (null != link && link.indexOf("http") == 0 && isCMEHost(link)) {
-                AttributesImpl newAttributes = new AttributesImpl(atts);
-                newAttributes.setValue(newAttributes.getIndex(HREF), createCMELink(link));
-                this.xmlConsumer.startElement(uri, localName, name, newAttributes);
-                return;
-              }
-            }
-            else if ("input".equals(localName)) {
-              String value = atts.getValue(VALUE);
-              if (null != value && REPLACEMENT_STRING.equals(value)) {
-                AttributesImpl newAttributes = new AttributesImpl(atts);
-                newAttributes.setValue(newAttributes.getIndex(VALUE), this.emrid);
-                this.xmlConsumer.startElement(uri, localName, name, newAttributes);
-                return;
-              }
-            }
-            else if ("url".equals(localName)) {
+                String link = atts.getValue(HREF);
+                if (null != link && link.indexOf("http") == 0 && isCMEHost(link)) {
+                    AttributesImpl newAttributes = new AttributesImpl(atts);
+                    newAttributes.setValue(newAttributes.getIndex(HREF), createCMELink(link));
+                    this.xmlConsumer.startElement(uri, localName, name, newAttributes);
+                    return;
+                }
+            } else if ("input".equals(localName)) {
+                String value = atts.getValue(VALUE);
+                if (null != value && REPLACEMENT_STRING.equals(value)) {
+                    AttributesImpl newAttributes = new AttributesImpl(atts);
+                    newAttributes.setValue(newAttributes.getIndex(VALUE), this.emrid);
+                    this.xmlConsumer.startElement(uri, localName, name, newAttributes);
+                    return;
+                }
+            } else if ("url".equals(localName)) {
                 this.isSearchUrlElement = true;
             }
         }
@@ -91,11 +89,11 @@ public class CMELinkTransformer extends AbstractTransformer {
     private String createCMELink(final String link) {
         StringBuffer sb = new StringBuffer();
         if (link.contains("?")) {
-          sb.append(link).append("&").append(UTD_CME_ARGS.replaceFirst("\\?", this.emrid));
+            sb.append(link).append("&").append(UTD_CME_ARGS.replaceFirst("\\?", this.emrid));
         } else if (link.endsWith("/") || link.endsWith("online")) {
-          sb.append(UTD_CME_URL).append(UTD_CME_ARGS.replaceFirst("\\?", this.emrid));
+            sb.append(UTD_CME_URL).append(UTD_CME_ARGS.replaceFirst("\\?", this.emrid));
         } else {
-          sb.append(link);
+            sb.append(link);
         }
         return sb.toString();
     }

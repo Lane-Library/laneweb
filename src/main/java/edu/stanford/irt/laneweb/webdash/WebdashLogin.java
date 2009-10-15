@@ -22,8 +22,8 @@ public class WebdashLogin {
     private static final String REGISTRATION_URL = "https://webda.sh/auth/init_post?";
 
     private Mac mac;
-    
-    public String getWebdashURL(String sunetId, String name, String affiliation, String nonce, String systemUserId) {
+
+    public String getWebdashURL(final String sunetId, final String name, final String affiliation, final String nonce, final String systemUserId) {
         if (null == this.mac) {
             throw new IllegalStateException("webdashKey not set");
         }
@@ -48,8 +48,8 @@ public class WebdashLogin {
         String fullName = encodeParameter(name);
         String encodedAffiliation = getSubGroup(affiliation);
         StringBuffer result = new StringBuffer();
-        result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce).append("&subgroup=").append(encodedAffiliation)
-                .append("&system_short_name=stanford-sunet&system_user_id=").append(encodedId);
+        result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce).append("&subgroup=").append(
+                encodedAffiliation).append("&system_short_name=stanford-sunet&system_user_id=").append(encodedId);
         String token = getToken(result.toString());
         result.append("&token=").append(token);
         result.insert(0, systemUserId == null ? REGISTRATION_URL : LOGIN_URL);
@@ -80,14 +80,14 @@ public class WebdashLogin {
     }
 
     private String getSubGroup(final String affiliation) {
-    	String group = affiliation.substring(affiliation.indexOf(':') + 1);
-    	 try {
-             group = URLEncoder.encode(group, "UTF-8");
-         } catch (UnsupportedEncodingException e) {
-             throw new RuntimeException("UTF-8 not supported");
-         }
-    	return group;
-    	}
+        String group = affiliation.substring(affiliation.indexOf(':') + 1);
+        try {
+            group = URLEncoder.encode(group, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("UTF-8 not supported");
+        }
+        return group;
+    }
 
     private String getToken(final String string) {
         byte[] utf8;

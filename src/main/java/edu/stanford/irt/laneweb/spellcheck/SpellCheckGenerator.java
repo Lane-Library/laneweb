@@ -34,10 +34,10 @@ public class SpellCheckGenerator implements Generator {
         if (null == this.consumer) {
             throw new IllegalStateException("null consumer");
         }
-            XMLizable result = new XMLizableSpellCheckResult(query, this.spellChecker.spellCheck(query));
-            consumer.startDocument();
-            result.toSAX(consumer);
-            consumer.endDocument();
+        XMLizable result = new XMLizableSpellCheckResult(this.query, this.spellChecker.spellCheck(this.query));
+        this.consumer.startDocument();
+        result.toSAX(this.consumer);
+        this.consumer.endDocument();
     }
 
     public void setConsumer(final XMLConsumer consumer) {

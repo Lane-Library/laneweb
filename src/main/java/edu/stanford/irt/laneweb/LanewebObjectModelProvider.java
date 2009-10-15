@@ -19,19 +19,20 @@ import edu.stanford.irt.laneweb.user.UserDao;
 
 public class LanewebObjectModelProvider implements ObjectModelProvider {
 
+    private String defaultTemplate;
+
     private Map<String, Object> jndiData;
 
     private ProcessInfoProvider processInfoProvider;
 
     private ProxyLinks proxyLinks;
 
-    private UserDao userDao;
-
     private Map<String, String> templateConfig;
 
-    private String defaultTemplate;
+    private UserDao userDao;
 
-    public LanewebObjectModelProvider(final ProcessInfoProvider pip, final Map<String, Object> jndiData, final UserDao userDao, final ProxyLinks proxyLinks, final String defaultTemplate, final Map<String, String> templateConfig) {
+    public LanewebObjectModelProvider(final ProcessInfoProvider pip, final Map<String, Object> jndiData, final UserDao userDao, final ProxyLinks proxyLinks,
+            final String defaultTemplate, final Map<String, String> templateConfig) {
         this.processInfoProvider = pip;
         this.jndiData = jndiData;
         this.userDao = userDao;
@@ -49,14 +50,14 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         cocoonMap.put("request", request);
         // cocoon.session
         HttpSession session = request.getSession(true);
-            cocoonMap.put("session", session);
-            User user = (User) session.getAttribute(LanewebConstants.USER);
-            if (null == user) {
-                user = new User();
-                session.setAttribute(LanewebConstants.USER, user);
-            }
-            this.userDao.getUserData(user, request);
-            cocoonMap.put("proxyLinks", this.proxyLinks.proxyLinks(user, request));
+        cocoonMap.put("session", session);
+        User user = (User) session.getAttribute(LanewebConstants.USER);
+        if (null == user) {
+            user = new User();
+            session.setAttribute(LanewebConstants.USER, user);
+        }
+        this.userDao.getUserData(user, request);
+        cocoonMap.put("proxyLinks", this.proxyLinks.proxyLinks(user, request));
         // cocoon.context
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);
         cocoonMap.put("context", context);
@@ -64,26 +65,28 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         String query = request.getParameter("q");
         if (null != query) {
             try {
-                cocoonMap.put("urlencoded-query", URLEncoder.encode(query,"UTF-8"));
+                cocoonMap.put("urlencoded-query", URLEncoder.encode(query, "UTF-8"));
             } catch (UnsupportedEncodingException e) {
             }
         }
         Cookie[] cookies = request.getCookies();
-        for (int i = 0; i < cookies.length; i++) {
-            if (LanewebConstants.LANE_COOKIE_NAME.equals(cookies[i].getName())) {
-                cocoonMap.put("user-cookie", cookies[i].getValue());
-                break;
+        if (null != cookies) {
+            for (Cookie cookie : cookies) {
+                if (LanewebConstants.LANE_COOKIE_NAME.equals(cookie.getName())) {
+                    cocoonMap.put("user-cookie", cookie.getValue());
+                    break;
+                }
             }
         }
         String templateName = request.getParameter("template");
         if (null == templateName) {
-        String path = request.getPathInfo();
-        for (String key : this.templateConfig.keySet()) {
-            if (path.matches(key)) {
-                templateName = this.templateConfig.get(key);
-                break;
+            String path = request.getPathInfo();
+            for (String key : this.templateConfig.keySet()) {
+                if (path.matches(key)) {
+                    templateName = this.templateConfig.get(key);
+                    break;
+                }
             }
-        }
         }
         if (null == templateName) {
             templateName = this.defaultTemplate;

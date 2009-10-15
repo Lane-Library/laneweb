@@ -169,12 +169,14 @@
         </plugins>
     </reporting>
     <dependencies>
+
         <dependency>
             <artifactId>irt-cocoon</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>1.0.4</version>
+            <version>1.0.5</version>
             <type>war</type>
         </dependency>
+
         <dependency>
             <artifactId>cocoon-sitemap-api</artifactId>
             <groupId>org.apache.cocoon</groupId>
@@ -210,6 +212,18 @@
                 <exclusion>
                     <artifactId>excalibur-instrument-api</artifactId>
                     <groupId>org.apache.excalibur.containerkit</groupId>
+                </exclusion>
+                <exclusion>
+                	<artifactId>spring-web</artifactId>
+                	<groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                	<artifactId>spring-web</artifactId>
+                	<groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                	<artifactId>spring-web</artifactId>
+                	<groupId>org.springframework</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -393,7 +407,7 @@
             <groupId>edu.stanford.irt.search</groupId>
             <artifactId>search-spring</artifactId>
             <version>1.5.23</version>
-            <scope>compile</scope>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <artifactId>spring-ldap-core</artifactId>
@@ -450,12 +464,134 @@
         	<artifactId>commons-jxpath</artifactId>
         	<version>1.3</version>
         	<type>jar</type>
-        	<scope>compile</scope>
+        	<scope>runtime</scope>
         </dependency>
         <dependency>
         	<groupId>org.apache.cocoon</groupId>
         	<artifactId>cocoon-expression-language-impl</artifactId>
         	<version>1.0.0</version>
+        	<scope>runtime</scope>
+        	<exclusions>
+        		<exclusion>
+        			<artifactId>js</artifactId>
+        			<groupId>rhino</groupId>
+        		</exclusion>
+        		<exclusion>
+        			<artifactId>commons-jexl</artifactId>
+        			<groupId>commons-jexl</groupId>
+        		</exclusion>
+        		<exclusion>
+        			<artifactId>cocoon-spring-configurator</artifactId>
+        			<groupId>org.apache.cocoon</groupId>
+        		</exclusion>
+        	</exclusions>
+        </dependency>
+        <dependency>
+        	<groupId>xml-apis</groupId>
+        	<artifactId>xml-apis</artifactId>
+        	<version>1.3.04</version>
+        	<type>jar</type>
+        	<scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>edu.stanford.irt</groupId>
+        	<artifactId>eresources-api</artifactId>
+        	<version>1.5.0</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.cocoon</groupId>
+        	<artifactId>cocoon-xml-api</artifactId>
+        	<version>1.0.0</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-context</artifactId>
+        	<version>2.5.6</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.avalon.framework</groupId>
+        	<artifactId>avalon-framework-api</artifactId>
+        	<version>4.3.1</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.excalibur.components</groupId>
+        	<artifactId>excalibur-xmlutil</artifactId>
+        	<version>2.2.1</version>
+        </dependency>
+        <dependency>
+        	<groupId>commons-httpclient</groupId>
+        	<artifactId>commons-httpclient</artifactId>
+        	<version>3.1</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>commons-codec</groupId>
+        	<artifactId>commons-codec</artifactId>
+        	<version>1.2</version>
+        	<type>jar</type>
+        </dependency>
+        <dependency>
+        	<groupId>edu.stanford.irt.search</groupId>
+        	<artifactId>search-core</artifactId>
+        	<version>1.5.11</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-core</artifactId>
+        	<version>2.5.6</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.cocoon</groupId>
+        	<artifactId>cocoon-util</artifactId>
+        	<version>1.0.0</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.cocoon</groupId>
+        	<artifactId>cocoon-expression-language-api</artifactId>
+        	<version>1.0.0</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.excalibur.components</groupId>
+        	<artifactId>excalibur-sourceresolve</artifactId>
+        	<version>2.2.3</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.easymock</groupId>
+        	<artifactId>easymock</artifactId>
+        	<version>2.5.2</version>
+        	<type>jar</type>
+        	<scope>test</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-web</artifactId>
+        	<version>2.5.6</version>
+        	<type>jar</type>
+        	<scope>runtime</scope>
+        </dependency>
+        <dependency>
+        	<groupId>commons-lang</groupId>
+        	<artifactId>commons-lang</artifactId>
+        	<version>2.4</version>
+        	<type>jar</type>
+        	<scope>compile</scope>
         </dependency>
     </dependencies>
     <properties>
