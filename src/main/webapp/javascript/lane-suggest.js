@@ -2,20 +2,23 @@
 	YAHOO.util.Event.addListener(window, 'load', function(){
 		var dataSource,
 		acWidget,
+		searchForm,
 		searchtermsElm,
 		selectElm,
 		onSearchtermsKeyUp,
 		onItemSelect;
 		
+		searchForm = document.getElementById('searchForm');
+
         //submit form if return key hit
         // otherwsie 2 returns required
         onSearchtermsKeyUp = function(e) {
-            var form, keycode;
+            var keycode;
             keycode = e.keyCode;
-            if (13 == keycode){
-                form = document.getElementById('searchForm');
+            searchForm = document.getElementById('searchForm');
+            if (13 == keycode && searchForm.submitted === undefined){
                 LANE.search.startSearch();
-                form.submit();
+                searchForm.submit();
             }
         };
 		
@@ -24,15 +27,14 @@
         //  - submit the form
         onItemSelect = function(sType, aArgs) {
             var item, 
-                form, 
                 trackingObject = {};
             item = aArgs[2];
-            form = document.getElementById('searchForm');
+            searchForm.submitted = true;
     		trackingObject.title = 'suggest-selection-event';
     		trackingObject.path = item[0];
     		LANE.tracking.track(trackingObject);
             LANE.search.startSearch();
-            form.submit();
+            searchForm.submit();
         };
         
 		searchtermsElm = document.getElementById('searchTerms');
