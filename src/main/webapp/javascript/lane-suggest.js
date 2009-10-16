@@ -4,7 +4,20 @@
 		acWidget,
 		searchtermsElm,
 		selectElm,
+		onSearchtermsKeyUp,
 		onItemSelect;
+		
+        //submit form if return key hit
+        // otherwsie 2 returns required
+        onSearchtermsKeyUp = function(e) {
+            var form, keycode;
+            keycode = e.keyCode;
+            if (13 == keycode){
+                form = document.getElementById('searchForm');
+                LANE.search.startSearch();
+                form.submit();
+            }
+        };
 		
         // when a suggest list item is selected ...
         //  - track the suggest-selection-event
@@ -21,8 +34,10 @@
             LANE.search.startSearch();
             form.submit();
         };
-		
+        
 		searchtermsElm = document.getElementById('searchTerms');
+		YAHOO.util.Event.addListener(searchtermsElm, 'keyup', onSearchtermsKeyUp);
+		
 		selectElm = document.getElementById('searchSelect');
 		
 		dataSource = new YAHOO.widget.DS_XHR("/././apps/suggest/json", ["suggest"]);
