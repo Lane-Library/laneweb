@@ -128,8 +128,9 @@
             
             // kick off initial metasearch request
             LANE.search.metasearch.getResultCounts();
-            LANE.search.startSearch();
+            //LANE.search.startSearch(); // not available at onDOMReady
+            document.getElementById('searchIndicator').style.visibility = 'visible';
         }
             
-    });//end addListener
+    });
 })();
