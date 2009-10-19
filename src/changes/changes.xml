@@ -7,6 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2009-10-19" version="1.9.31" description="1.9.31 bug fix release">
+            <action date="2009-10-19" dev="ryanmax" issue="31726" type="fix">
+                search indicator not working on hybrid portals 
+            </action>
+            <action date="2009-10-19" dev="ryanmax" issue="31648" type="fix">
+                querymapping breast cancer mapping 
+            </action>
+            <action date="2009-10-19" dev="ryanmax" issue="31498" type="fix">
+                wireless IPs 
+            </action>
+            <action date="2009-10-19" dev="ryanmax" issue="31217" type="add">
+                autocomplete for LaneConnex
+            </action>
+        </release>
         <release date="2009-10-05" version="1.9.30" description="1.9.30 bug fix release">
             <action date="2009-10-02" dev="ceyates" issue="31448" type="add">
                 update saxon &amp; saxon-dom version to 9.1.0.7
