@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2009-10-21" version="1.9.32" description="1.9.32 bug fix release">
+            <action date="2009-10-21" dev="ryanmax" issue="31785" type="fix">
+                Page not found with search in IE7 
+            </action>
+        </release>
         <release date="2009-10-19" version="1.9.31" description="1.9.31 bug fix release">
             <action date="2009-10-19" dev="ryanmax" issue="31726" type="fix">
                 search indicator not working on hybrid portals 
