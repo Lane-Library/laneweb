@@ -10,18 +10,6 @@
 		
 		searchForm = document.getElementById('searchForm');
 
-        //submit form if return key hit
-        // otherwsie 2 returns required
-        onSearchtermsKeyUp = function(e) {
-            var keycode;
-            keycode = e.keyCode;
-            searchForm = document.getElementById('searchForm');
-            if (13 == keycode && searchForm.submitted === undefined){
-                LANE.search.startSearch();
-                searchForm.submit();
-            }
-        };
-		
         // when a suggest list item is selected ...
         //  - track the suggest-selection-event
         //  - submit the form
@@ -29,7 +17,6 @@
             var item, 
                 trackingObject = {};
             item = aArgs[2];
-            searchForm.submitted = true;
     		trackingObject.title = 'suggest-selection-event';
     		trackingObject.path = item[0];
     		LANE.tracking.track(trackingObject);
@@ -38,7 +25,6 @@
         };
         
 		searchtermsElm = document.getElementById('searchTerms');
-		YAHOO.util.Event.addListener(searchtermsElm, 'keyup', onSearchtermsKeyUp);
 		
 		selectElm = document.getElementById('searchSelect');
 		
