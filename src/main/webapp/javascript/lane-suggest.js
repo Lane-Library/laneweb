@@ -9,6 +9,8 @@
 		onItemSelect;
 		
 		searchForm = document.getElementById('searchForm');
+		searchtermsElm = document.getElementById('searchTerms');
+		selectElm = document.getElementById('searchSelect');
 
         // when a suggest list item is selected ...
         //  - track the suggest-selection-event
@@ -17,16 +19,13 @@
             var item, 
                 trackingObject = {};
             item = aArgs[2];
-    		trackingObject.title = 'suggest-selection-event';
+    		trackingObject.title = selectElm.options[selectElm.selectedIndex].value + '--suggest-selection-event';
     		trackingObject.path = item[0];
     		LANE.tracking.track(trackingObject);
             LANE.search.startSearch();
             searchForm.submit();
         };
         
-		searchtermsElm = document.getElementById('searchTerms');
-		
-		selectElm = document.getElementById('searchSelect');
 		
 		dataSource = new YAHOO.widget.DS_XHR("/././apps/suggest/json", ["suggest"]);
 		dataSource.responseType = YAHOO.widget.DS_XHR.TYPE_JSON;
