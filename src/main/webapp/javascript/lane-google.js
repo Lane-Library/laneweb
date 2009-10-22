@@ -19,7 +19,6 @@ YAHOO.util.Event.addListener(this, 'load', function() {
                 //TODO: remove this for production
                 //pageTracker._setLocalServerMode();
                 pageTracker._setDomainName(".stanford.edu");
-                pageTracker._setAllowHash(false);
                 pageTracker._trackPageview();
                 pageTracker._setVar(LANE.core.getMetaContent('WT.seg_1'));
                 LANE.tracking.addTracker({
