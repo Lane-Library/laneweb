@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
@@ -81,9 +82,9 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         String templateName = request.getParameter("template");
         if (null == templateName) {
             String path = request.getPathInfo();
-            for (String key : this.templateConfig.keySet()) {
-                if (path.matches(key)) {
-                    templateName = this.templateConfig.get(key);
+            for (Entry<String, String> entry : this.templateConfig.entrySet()) {
+                if (path.matches(entry.getKey())) {
+                    templateName = entry.getValue();
                     break;
                 }
             }
