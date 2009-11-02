@@ -548,12 +548,17 @@
                 </property>
             </bean>
         </constructor-arg>
-        <constructor-arg value="irt3"/>
         <constructor-arg>
-            <map>
-                <entry key="^(stage/|)bassett/raw/bassettLargerView.html"
-                    value="bassettLargerView"/>
-            </map>
+            <bean class="edu.stanford.irt.laneweb.TemplateChooser">
+                <constructor-arg value="irt3"/>
+                <constructor-arg>
+                    <!-- TODO: this should be an ordered map if more than one entry -->
+                    <map>
+                        <entry key="^(?:/stage|)/bassett/raw/bassettLargerView.html"
+                            value="bassettLargerView"/>
+                    </map>
+                </constructor-arg>
+            </bean>
         </constructor-arg>
     </bean>
 
