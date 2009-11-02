@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2009-11-01" version="1.9.33" description="1.9.33 bug fix release">
+            <action date="2009-11-01" dev="ceyates" issue="32010" type="fix">
+                bassett larger view not getting the correct template 
+            </action>
+            <action date="2009-10-23" dev="ryanmax" issue="31839" type="fix">
+                suggest causing oracle errors 
+            </action>
+        </release>
         <release date="2009-10-21" version="1.9.32" description="1.9.32 bug fix release">
             <action date="2009-10-21" dev="ryanmax" issue="31785" type="fix">
                 Page not found with search in IE7 
