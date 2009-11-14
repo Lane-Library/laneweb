@@ -5,7 +5,7 @@
 	<xsl:param name="query-string"/>
 
     <xsl:variable name="count">
-        <xsl:value-of select="count(//h:dt)"/>
+        <xsl:value-of select="count(//h:dd)"/>
     </xsl:variable>
 
     <xsl:template match="child::node()">
