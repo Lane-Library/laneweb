@@ -73,9 +73,11 @@
                     <map:aggregate element="doc">
                         <map:part src="cocoon:/apps/search/proxy/xml"/>
                         <map:part src="cocoon:/eresources/count"/>
-                        <map:part src="cocoon:/cached/search/catalog.html"/>
+                        <map:part src="cocoon:/cached/search.html"/>
+                        <map:part src="cocoon:/cached/search/${request/parameters/source}.html"/>
+                        <!--<map:part src="cocoon:/cached/search/catalog.html"/>
                         <map:part
-                            src="cocoon:/cached/search/catalog/${request/parameters/source}.html"/>
+                            src="cocoon:/cached/search/catalog/${request/parameters/source}.html"/>-->
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/search-facets.xsl">
                         <map:parameter name="q" value="${request/parameters/q}"/>
