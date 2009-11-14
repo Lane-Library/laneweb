@@ -25,7 +25,7 @@
                 <map:generate type="html" src="${jndi/stage-base}/content/online/{1}browse.html"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                	<map:parameter name="query-string" value="${request/queryString}"/>
+                    <map:parameter name="query-string" value="${request/queryString}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -76,7 +76,7 @@
             <map:match pattern="ncbi-rss2html-brief/**" type="wildcard">
                 <map:generate type="file" src="{1}"/>
                 <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon">
-                	<map:parameter name="format" value="brief"/>
+                    <map:parameter name="format" value="brief"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>

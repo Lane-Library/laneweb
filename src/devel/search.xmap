@@ -118,12 +118,12 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-post.xsl">
                         <map:transform type="saxon" src="xsl/search-post.xsl">
-                        	<map:parameter name="query-string" value="${request/parameters/q}"/>
+                            <map:parameter name="query-string" value="${request/parameters/q}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        	<map:parameter name="query-string" value="${request/parameters/q}"/>
+                            <map:parameter name="query-string" value="${request/parameters/q}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>

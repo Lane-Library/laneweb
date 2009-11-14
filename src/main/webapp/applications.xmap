@@ -6,7 +6,7 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="url-tester" type="wildcard">
-                <map:read  type="search-url-tester">
+                <map:read type="search-url-tester">
                     <map:parameter name="url" value="${request/parameters/url}"/>
                 </map:read>
             </map:match>
@@ -57,7 +57,7 @@
                 <map:match pattern="search/proxy/json" type="wildcard">
                     <map:generate type="file" src="cocoon:/search/proxy/xml"/>
                     <map:transform type="saxon" src="context://xsl/search2json.xsl">
-                    <map:parameter name="content" value="${request/parameters/content}"/>
+                        <map:parameter name="content" value="${request/parameters/content}"/>
                         <map:parameter name="content-to-display" value="5"/>
                     </map:transform>
                     <map:serialize type="text"/>
@@ -120,12 +120,12 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
-              <map:match pattern="proxy/credential" type="wildcard">
-                  <map:act type="loginAction">
-                      <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                      <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                      <map:parameter name="query-string" value="${request/queryString}"/>
-                  </map:act>
+            <map:match pattern="proxy/credential" type="wildcard">
+                <map:act type="loginAction">
+                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
+                    <map:parameter name="query-string" value="${request/queryString}"/>
+                </map:act>
             </map:match>
             <map:match pattern="icd9" type="wildcard">
                 <map:read type="icd9">
