@@ -5,8 +5,9 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.apache.excalibur.store.Store;
+import org.apache.excalibur.store.StoreJanitor;
 
-public class StoreJanitor implements org.apache.excalibur.store.StoreJanitor {
+public class StoreJanitorImpl implements StoreJanitor {
 
     private Set<Store> stores = new HashSet<Store>();
 

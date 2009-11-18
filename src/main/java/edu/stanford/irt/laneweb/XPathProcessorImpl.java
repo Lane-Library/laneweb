@@ -10,10 +10,11 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.excalibur.xml.xpath.PrefixResolver;
+import org.apache.excalibur.xml.xpath.XPathProcessor;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class XPathProcessor implements org.apache.excalibur.xml.xpath.XPathProcessor {
+public class XPathProcessorImpl implements XPathProcessor {
 
     private XPathFactory factory = XPathFactory.newInstance();
 

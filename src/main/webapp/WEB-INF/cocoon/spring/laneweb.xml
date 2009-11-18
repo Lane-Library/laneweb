@@ -48,10 +48,10 @@
     </bean>
 
     <bean id="org.apache.excalibur.store.StoreJanitor"
-        class="edu.stanford.irt.laneweb.store.StoreJanitor"/>
+        class="edu.stanford.irt.laneweb.store.StoreJanitorImpl"/>
 
     <bean name="org.apache.excalibur.xml.xpath.XPathProcessor"
-        class="edu.stanford.irt.laneweb.XPathProcessor"/>
+        class="edu.stanford.irt.laneweb.XPathProcessorImpl"/>
 
     <bean id="org.apache.commons.httpclient.HttpClient"
         class="org.apache.commons.httpclient.HttpClient">
