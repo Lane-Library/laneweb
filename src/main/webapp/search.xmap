@@ -86,7 +86,7 @@
                         <map:parameter name="query-string" value="${request/parameters/q}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
-                    </map:match>
+                </map:match>
                 <!-\- clinical search pages (parameter is clinical-all, clinical-pubmed, clinical-uptodate, etc)-\->
                 <map:match type="regex-parameter" pattern="^clinical-(all|pubmed|uptodate)$">
                     <map:parameter name="parameter-name" value="source"/>
@@ -129,6 +129,16 @@
                 </map:match>
             </map:match>
             <!-- ajax requests for the tab results uses this, so does the aggregate in the previous match -->
+            <!--<map:match pattern="search/*/*.html" type="wildcard">
+                <map:generate src="cocoon:/cached/search/{1}/{2}.html" type="file"/>
+                <map:transform type="saxon" src="context://xsl/{1}-search.xsl">
+                    <map:parameter name="q" value="${request/parameters/q}"/>
+                    <map:parameter name="source" value="${request/parameters/source}"/>
+                </map:transform>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>-->
             <map:match pattern="search/*.html" type="wildcard">
                 <map:generate src="cocoon:/cached/search/{1}.html" type="file"/>
                 <map:transform type="saxon" src="context://xsl/search.xsl">

@@ -147,6 +147,7 @@
                         <map:generate type="file" src="context://resources/templates/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
+                        <!--<map:generate type="file" src="context://resources/templates/template.xml"/>-->
                         <map:generate type="file" src="context://resources/templates/irt3.xml"/>
                     </map:otherwise>
                 </map:select>
