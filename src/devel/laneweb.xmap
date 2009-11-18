@@ -75,7 +75,8 @@
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                            <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
+                            <map:parameter name="ip-group"
+                                value="${session/attributes/user/IPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
                             <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
@@ -89,11 +90,13 @@
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                             <map:parameter name="request-uri" value="${request/requestURI}"/>
-                            <map:parameter name="base-path" value="${request/contextPath}/your-sunet-id"/>
+                            <map:parameter name="base-path"
+                                value="${request/contextPath}/your-sunet-id"/>
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                            <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
+                            <map:parameter name="ip-group"
+                                value="${session/attributes/user/IPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
                             <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
@@ -128,11 +131,13 @@
                     <map:when test="xsl/laneweb.xsl">
                         <map:transform type="saxon" src="xsl/laneweb.xsl">
                             <map:parameter name="request-uri" value="${request/requestURI}"/>
-                            <map:parameter name="base-path" value="${request/contextPath}/your-sunet-id"/>
+                            <map:parameter name="base-path"
+                                value="${request/contextPath}/your-sunet-id"/>
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                            <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
+                            <map:parameter name="ip-group"
+                                value="${session/attributes/user/IPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
                             <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
@@ -146,11 +151,13 @@
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                             <map:parameter name="request-uri" value="${request/requestURI}"/>
-                            <map:parameter name="base-path" value="${request/contextPath}/your-sunet-id"/>
+                            <map:parameter name="base-path"
+                                value="${request/contextPath}/your-sunet-id"/>
                             <map:parameter name="query-string" value="${request/queryString}"/>
                             <map:parameter name="proxy-links" value="${proxyLinks}"/>
                             <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                            <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
+                            <map:parameter name="ip-group"
+                                value="${session/attributes/user/IPGroup}"/>
                             <map:parameter name="q" value="${request/parameters/q}"/>
                             <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>

@@ -40,7 +40,7 @@
                     <map:parameter name="query" value="${request/parameters/q}"/>
                     <map:parameter name="type" value="${request/parameters/source}"/>
                 </map:generate>
-                   <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
+                <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
                     <map:parameter name="q" value="${request/parameters/q}"/>
                     <map:parameter name="t" value="${request/parameters/source}"/>
                     <map:parameter name="type" value="search"/>

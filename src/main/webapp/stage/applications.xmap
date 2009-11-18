@@ -6,7 +6,7 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="url-tester" type="wildcard">
-                <map:read  type="search-url-tester">
+                <map:read type="search-url-tester">
                     <map:parameter name="url" value="${request/parameters/url}"/>
                 </map:read>
             </map:match>
@@ -44,7 +44,7 @@
                 <!-- result with proxy links (if necessary) in json format -->
                 <map:match pattern="search/proxy/json" type="wildcard">
                     <map:generate type="file" src="cocoon:/search/proxy/xml"/>
-                       <map:transform type="saxon" src="context://xsl/search2json.xsl">
+                    <map:transform type="saxon" src="context://xsl/search2json.xsl">
                         <map:parameter name="content" value="${request/parameters/content}"/>
                         <map:parameter name="content-to-display" value="5"/>
                     </map:transform>

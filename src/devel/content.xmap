@@ -36,7 +36,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                              <map:parameter name="query-string" value="${request/queryString}"/>
+                            <map:parameter name="query-string" value="${request/queryString}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>
@@ -77,8 +77,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:generate type="html"
-                            src="${jndi/live-base}/content/secure/persistentlogin.html"
-                        />
+                            src="${jndi/live-base}/content/secure/persistentlogin.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:select type="resource-exists">
@@ -154,14 +153,14 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ncbi-rss/*" type="wildcard">
-                <map:generate type="file" src="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid={1}"/>
+                <map:generate type="file"
+                    src="http://eutils.ncbi.nlm.nih.gov/entrez/eutils/erss.cgi?rss_guid={1}"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="howto/index.html" type="wildcard">
                 <map:match type="regex-parameter" pattern="_?(\d.+)">
                     <map:parameter name="parameter-name" value="id"/>
-                    <map:generate type="html"
-                        src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
+                    <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/individual-faq.xsl">
                             <map:transform type="saxon" src="xsl/individual-faq.xsl>"/>
@@ -175,8 +174,7 @@
                 </map:match>
                 <map:match type="regex-parameter" pattern="(.+)">
                     <map:parameter name="parameter-name" value="category"/>
-                    <map:generate type="html"
-                        src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
+                    <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/category-faq.xsl">
                             <map:transform type="saxon" src="xsl/category-faq.xsl"/>
@@ -191,8 +189,7 @@
             </map:match>
             <!-- TODO: remove this match after the xincludes are changed to remove .html -->
             <map:match pattern="faq-category-list.html/*" type="wildcard">
-                <map:generate type="html"
-                    src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
+                <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/faq-category-list.xsl">
                         <map:transform type="saxon" src="xsl/faq-category-list.xsl">
@@ -208,8 +205,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="faq-category-list/*" type="wildcard">
-                <map:generate type="html"
-                    src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
+                <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/faq-category-list.xsl">
                         <map:transform type="saxon" src="xsl/faq-category-list.xsl">
@@ -233,8 +229,7 @@
                         <map:generate type="file" src="context://resources/templates/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file"
-                            src="context://resources/templates/irt3.xml"/>
+                        <map:generate type="file" src="context://resources/templates/irt3.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -245,8 +240,7 @@
                         <map:generate type="html" src="content/{1}"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="html" src="${jndi/live-base}/content/{1}"
-                        />
+                        <map:generate type="html" src="${jndi/live-base}/content/{1}"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="xinclude"/>

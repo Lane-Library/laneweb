@@ -5,48 +5,39 @@
     <map:pipelines>
         <map:pipeline type="caching">
             <map:match pattern="**.css" type="wildcard">
-                <map:read src="${jndi/stage-base}/content/tobacco/{1}.css"
-                    type="resource"
+                <map:read src="${jndi/stage-base}/content/tobacco/{1}.css" type="resource"
                     mime-type="text/css"/>
             </map:match>
             <map:match pattern="**.gif" type="wildcard">
-                <map:read src="${jndi/stage-base}/content/tobacco/{1}.gif"
-                    type="resource"
+                <map:read src="${jndi/stage-base}/content/tobacco/{1}.gif" type="resource"
                     mime-type="image/gif"/>
             </map:match>
             <map:match pattern="**.htm" type="wildcard">
-                <map:read src="${jndi/stage-base}/content/tobacco/{1}.htm"
-                    type="resource"
+                <map:read src="${jndi/stage-base}/content/tobacco/{1}.htm" type="resource"
                     mime-type="text/html"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
-                <map:read src="${jndi/stage-base}/content/tobacco/{1}.html"
-                    type="resource"
+                <map:read src="${jndi/stage-base}/content/tobacco/{1}.html" type="resource"
                     mime-type="text/html"/>
             </map:match>
             <map:match pattern="**.jpg" type="wildcard">
-                <map:read src="${jndi/stage-base}/content/tobacco/{1}.jpg"
-                    type="resource"
+                <map:read src="${jndi/stage-base}/content/tobacco/{1}.jpg" type="resource"
                     mime-type="image/jpg"/>
             </map:match>
             <map:match pattern="**.js" type="wildcard">
-                <map:read src="${jndi/stage-base}/content/tobacco/{1}.js"
-                    type="resource"
+                <map:read src="${jndi/stage-base}/content/tobacco/{1}.js" type="resource"
                     mime-type="application/x-javascript"/>
             </map:match>
             <map:match pattern="**.png" type="wildcard">
-                <map:read src="${jndi/stage-base}/content/tobacco/{1}.png"
-                    type="resource"
+                <map:read src="${jndi/stage-base}/content/tobacco/{1}.png" type="resource"
                     mime-type="image/png"/>
             </map:match>
             <map:match pattern="**.swf" type="wildcard">
-                <map:read src="${jndi/stage-base}/content/tobacco/{1}.swf"
-                    type="resource"
+                <map:read src="${jndi/stage-base}/content/tobacco/{1}.swf" type="resource"
                     mime-type="application/x-shockwave-flash"/>
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
-                <map:read src="${jndi/stage-base}/content/tobacco/{1}.xml"
-                    type="resource"
+                <map:read src="${jndi/stage-base}/content/tobacco/{1}.xml" type="resource"
                     mime-type="text/xml"/>
             </map:match>
         </map:pipeline>
