@@ -110,6 +110,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
+            <!--<map:match type="regexp" pattern="^(announcement|error|sitemap)\.html$">-->
             <map:match type="regexp"
                 pattern="^(announcement|error|sitemap|portals/otherportals)\.html$">
                 <map:generate type="html" src="${jndi/live-base}/content/{1}.html"/>
@@ -160,6 +161,7 @@
                         <map:generate type="file" src="context://resources/templates/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
+                        <!--<map:generate type="file" src="context://resources/templates/template.xml"/>-->
                         <map:generate type="file" src="context://resources/templates/irt3.xml"/>
                     </map:otherwise>
                 </map:select>
@@ -172,6 +174,12 @@
                 <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                 <map:serialize type="xml" status-code="403"/>
             </map:match>
+            <!--<map:match pattern="portals/**" type="wildcard">
+                <map:generate type="html" src="${jndi/irt3-base}/content/portals/{1}"/>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>-->
             <map:match pattern="**" type="wildcard">
                 <map:generate type="html" src="${jndi/live-base}/content/{1}"/>
                 <map:transform type="xinclude"/>
