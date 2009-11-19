@@ -421,7 +421,7 @@
     <!-- add back to top for dl lists > 20 -->
     <xsl:template match="h:dl[count(h:dd) &gt; 20]">
         <xsl:copy>
-            <xsl:apply-templates select="attribute::node | child::node()"/>
+            <xsl:apply-templates select="attribute::node() | child::node()"/>
         </xsl:copy>
         <a href="#"><img src="{$base-path}/graphics/icons/arrowUpTransp.gif" alt="up arrow"/> Back to
             top</a>
