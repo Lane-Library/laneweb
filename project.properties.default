@@ -1,5 +1,3 @@
-laneweb.context.docBase=
-laneweb.context.path=
 laneweb.context.eresources.username=
 laneweb.context.eresources.password=
 laneweb.context.eresources.url=
@@ -18,4 +16,3 @@ laneweb.context.environment.live-base=
 laneweb.context.environment.stage-base=
 laneweb.context.environment.medblog-base=
 laneweb.context.environment.metasearch-failed=
-laneweb.log4j.level=

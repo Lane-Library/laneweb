@@ -57,7 +57,7 @@
     <xsl:template match="/">
     	<html xmlns="http://www.w3.org/1999/xhtml">
     		<head>
-    			<title>search content results</title>
+    		    <title>search content results</title>
     		</head>
     		<body>
 		    	<dl>
@@ -66,11 +66,11 @@
 					    <xsl:sort select="s:sortTitle"/>
 					</xsl:apply-templates>
 		    	</dl>
-		    	<div id="search-counts" style="display:none;">
+		    	<div id="search-content-counts" style="display:none;">
 		    		<xsl:for-each select="/s:search/s:engine/s:resource">
-		    			<count id="{@s:id}"><xsl:value-of select="s:hits"/></count>
+		    			<span id="{@s:id}"><xsl:value-of select="s:hits"/></span>
 		    		</xsl:for-each>
-	    			<count id="articles-all"><xsl:value-of select="sum(/s:search/s:engine/s:resource/s:hits)"/></count>
+	    			<span id="all"><xsl:value-of select="sum(/s:search/s:engine/s:resource/s:hits)"/></span>
 		    	</div>
 		    	<xsl:if test="count($results/s:result/s:description[string-length(.) > 0]) > 0">
 				    <div class="tooltips" style="display:none;">
@@ -196,7 +196,12 @@
             <engineUrl><xsl:value-of select="../s:url"/></engineUrl>
             <title><xsl:value-of select="s:title"/></title>
             <sortTitle><xsl:value-of select="replace($norm-title,'^(a|an|the) ','','i')"/></sortTitle>   
-            <description><xsl:value-of select="s:description"/></description>       
+            <description>
+                <xsl:choose>
+                    <xsl:when test="s:description"><xsl:value-of select="s:description"/></xsl:when>
+                    <xsl:otherwise><xsl:value-of select="s:title"/></xsl:otherwise>
+                </xsl:choose>
+            </description>       
             <type><xsl:value-of select="../s:description"/></type>       
             <url><xsl:value-of select="s:url"/></url> 
             <xsl:copy-of select="s:pub-title"/>
