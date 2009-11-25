@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    
+    <bean name="edu.stanford.irt.eresources.CollectionManager/laneconnex"
+        class="edu.stanford.irt.eresources.impl.CollectionManagerImpl">
+        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.generation.Generator/eresources-count"
+        class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator" scope="prototype">
+        <property name="types">
+            <set>
+                <value>ej</value>
+                <value>database</value>
+                <value>video</value>
+                <value>book</value>
+                <value>cc</value>
+                <value>lanesite</value>
+                <value>software</value>
+            </set>
+        </property>
+        <property name="subsets">
+            <set/>
+        </property>
+        <property name="collectionManager"
+            ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.generation.Generator/er-browse"
+        class="edu.stanford.irt.laneweb.eresources.BrowseEresourcesGenerator" scope="prototype">
+        <property name="collectionManager"
+            ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.generation.Generator/er-core"
+        class="edu.stanford.irt.laneweb.eresources.CoreEresourcesGenerator" scope="prototype">
+        <property name="collectionManager"
+            ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.generation.Generator/er-mesh"
+        class="edu.stanford.irt.laneweb.eresources.MeSHEresourcesGenerator" scope="prototype">
+        <property name="collectionManager"
+            ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.generation.Generator/er-search"
+        class="edu.stanford.irt.laneweb.eresources.SearchEresourcesGenerator" scope="prototype">
+        <property name="collectionManager"
+            ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
+    </bean>
+
+</beans>
