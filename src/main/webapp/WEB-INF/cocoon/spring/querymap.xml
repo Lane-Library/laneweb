@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    
+    
+    <bean id="edu.stanford.irt.querymap.QueryMapper" class="edu.stanford.irt.querymap.QueryMapper">
+        <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
+        <property name="queryToDescriptor">
+            <bean class="edu.stanford.irt.querymap.QueryToDescriptor">
+                <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
+                <property name="httpClient" ref="org.apache.commons.httpclient.HttpClient"/>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="edu.stanford.irt.querymap.DescriptorManager"
+        class="edu.stanford.irt.querymap.DescriptorManager"/>
+    
+    
+    <bean name="org.apache.cocoon.generation.Generator/querymap"
+        class="edu.stanford.irt.laneweb.querymap.QueryMapGenerator"
+        scope="prototype">
+        <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.reading.Reader/querymap"
+        class="edu.stanford.irt.laneweb.querymap.QueryMapReader"
+        scope="prototype">
+        <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
+    </bean>
+</beans>

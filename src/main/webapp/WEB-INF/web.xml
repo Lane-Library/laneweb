@@ -14,9 +14,16 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            /WEB-INF/cocoon/spring/bassett.xml
             /WEB-INF/cocoon/spring/cocoon.xml
-            /WEB-INF/cocoon/spring/laneweb.xml
+            /WEB-INF/cocoon/spring/datasources.xml
             /WEB-INF/cocoon/spring/eresources.xml
+            /WEB-INF/cocoon/spring/history.xml
+            /WEB-INF/cocoon/spring/icd9.xml
+            /WEB-INF/cocoon/spring/laneweb.xml
+            /WEB-INF/cocoon/spring/querymap.xml
+            /WEB-INF/cocoon/spring/search.xml
+            /WEB-INF/cocoon/spring/suggest.xml
         </param-value>
     </context-param>
 

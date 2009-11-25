@@ -69,18 +69,6 @@
         <property name="httpClient" ref="org.apache.commons.httpclient.HttpClient"/>
     </bean>
 
-    <bean name="javax.sql.DataSource/eresources"
-        class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="java:comp/env/jdbc/eresources"/>
-    </bean>
-
-    <bean name="javax.sql.DataSource/voyager" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="java:comp/env/jdbc/voyager"/>
-    </bean>
-
-    <bean id="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
-        class="edu.stanford.irt.laneweb.search.MetaSearchManagerSource" destroy-method="dispose"/>
-
     <bean id="edu.stanford.irt.laneweb.user.UserDao" class="edu.stanford.irt.laneweb.user.UserDao">
         <property name="subjectSource">
             <bean class="edu.stanford.irt.laneweb.user.SubjectSource">
@@ -126,40 +114,6 @@
         <property name="key" value="stanfordlanelibraryir"/>
     </bean>
 
-    <bean name="edu.stanford.irt.eresources.CollectionManager/history"
-        class="edu.stanford.irt.laneweb.eresources.HistoryCollectionManager">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
-    </bean>
-
-    <bean id="edu.stanford.irt.querymap.QueryMapper" class="edu.stanford.irt.querymap.QueryMapper">
-        <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
-        <property name="queryToDescriptor">
-            <bean class="edu.stanford.irt.querymap.QueryToDescriptor">
-                <property name="descriptorManager" ref="edu.stanford.irt.querymap.DescriptorManager"/>
-                <property name="httpClient" ref="org.apache.commons.httpclient.HttpClient"/>
-            </bean>
-        </property>
-    </bean>
-
-    <bean id="edu.stanford.irt.querymap.DescriptorManager"
-        class="edu.stanford.irt.querymap.DescriptorManager"/>
-
-    <bean id="edu.stanford.irt.lane.icd9.ICD9Translator"
-        class="edu.stanford.irt.lane.icd9.ICD9Translator"/>
-
-    <bean id="edu.stanford.irt.suggest.EresourceSuggestionManager"
-        class="edu.stanford.irt.suggest.EresourceSuggestionManager">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
-    </bean>
-
-    <bean id="edu.stanford.irt.suggest.HistorySuggestionManager"
-        class="edu.stanford.irt.suggest.HistorySuggestionManager">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
-    </bean>
-
-    <bean id="edu.stanford.irt.suggest.MeshSuggestionManager"
-        class="edu.stanford.irt.suggest.MeshSuggestionManager"/>
-
     <bean id="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
         class="edu.stanford.irt.laneweb.proxy.ProxyHostManager">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
@@ -170,28 +124,8 @@
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
 
-    <bean name="org.apache.cocoon.generation.Generator/search-describe"
-        class="edu.stanford.irt.laneweb.search.DescribeGenerator" scope="prototype">
-        <property name="metaSearchManagerSource"
-            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.generation.Generator/search"
-        class="edu.stanford.irt.laneweb.search.SearchGenerator" scope="prototype">
-        <property name="metaSearchManagerSource"
-            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
-        <property name="defaultTimeout" value="60000"/>
-        <property name="ICD9Translator" ref="edu.stanford.irt.lane.icd9.ICD9Translator"/>
-    </bean>
-
     <bean name="org.apache.cocoon.generation.Generator/html"
         class="edu.stanford.irt.laneweb.HTMLGenerator" scope="prototype"/>
-
-    <bean name="org.apache.cocoon.generation.Generator/querymap"
-        class="edu.stanford.irt.laneweb.querymap.QueryMapGenerator"
-        scope="prototype">
-        <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
-    </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/link-scan"
         class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator"
@@ -205,54 +139,6 @@
         <property name="spellChecker">
             <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
         </property>
-    </bean>
-
-    <bean name="org.apache.cocoon.generation.Generator/bassett"
-        class="edu.stanford.irt.laneweb.eresources.bassett.BassettEresourcesGenerator"
-        scope="prototype">
-        <property name="collectionManager">
-            <bean class="edu.stanford.irt.laneweb.eresources.bassett.BassettCollectionManager">
-                <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
-            </bean>
-        </property>
-    </bean>
-
-    <bean name="org.apache.cocoon.generation.Generator/bassett-accordion"
-        class="edu.stanford.irt.laneweb.eresources.bassett.BassettAccordionEresourcesGenerator"
-        scope="prototype">
-        <property name="collectionManager">
-            <bean class="edu.stanford.irt.laneweb.eresources.bassett.BassettCollectionManager">
-                <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
-            </bean>
-        </property>
-    </bean>
-
-    <bean name="org.apache.cocoon.generation.Generator/history-search"
-        class="edu.stanford.irt.laneweb.eresources.SearchEresourcesGenerator" scope="prototype">
-        <property name="collectionManager"
-            ref="edu.stanford.irt.eresources.CollectionManager/history"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.generation.Generator/history-count"
-        class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator" scope="prototype">
-        <property name="types">
-            <set>
-                <value>book</value>
-                <value>movie</value>
-                <value>serial</value>
-                <value>graphic</value>
-                <value>thesis</value>
-                <value>object</value>
-                <value>people</value>
-                <value>organization</value>
-                <value>article</value>
-                <value>chapter</value>
-                <value>event</value>
-                <value>finding aid</value>
-            </set>
-        </property>
-        <property name="collectionManager"
-            ref="edu.stanford.irt.eresources.CollectionManager/history"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/directory"
@@ -289,17 +175,6 @@
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
 
-    <bean name="org.apache.cocoon.reading.Reader/suggest"
-        class="edu.stanford.irt.laneweb.suggest.SuggestionReader"
-        scope="prototype">
-        <property name="eresourceSuggestionManager"
-            ref="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
-        <property name="historySuggestionManager"
-            ref="edu.stanford.irt.suggest.HistorySuggestionManager"/>
-        <property name="meshSuggestionManager"
-            ref="edu.stanford.irt.suggest.MeshSuggestionManager"/>
-    </bean>
-
     <bean name="org.apache.cocoon.reading.Reader/ezproxy-servers" scope="prototype"
         class="edu.stanford.irt.laneweb.proxy.EzproxyServersReader">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
@@ -319,23 +194,6 @@
         <!-- uses regex so /./. is what is actually substituted -->
         <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"
         />
-    </bean>
-
-    <bean name="org.apache.cocoon.reading.Reader/search-url-tester"
-        class="edu.stanford.irt.laneweb.search.UrlTester" scope="prototype">
-        <property name="metaSearchManagerSource"
-            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.reading.Reader/querymap"
-        class="edu.stanford.irt.laneweb.querymap.QueryMapReader"
-        scope="prototype">
-        <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.reading.Reader/icd9"
-        class="edu.stanford.irt.laneweb.icd9.ICD9JSONReader" scope="prototype">
-        <property name="ICD9Translator" ref="edu.stanford.irt.lane.icd9.ICD9Translator"/>
     </bean>
 
     <bean name="org.apache.cocoon.selection.Selector/gzip"
@@ -379,18 +237,6 @@
 
     <bean name="org.apache.cocoon.acting.Action/cmeRedirectAction"
         class="edu.stanford.irt.laneweb.cme.CMERedirectAction"/>
-
-    <bean name="org.apache.cocoon.acting.Action/search-context-reloader"
-        class="edu.stanford.irt.laneweb.search.SearchContextReloaderAction" scope="singleton">
-        <property name="metaSearchManagerSource"
-            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
-        <property name="svnUrlProject">
-            <value>https://irt-svn.stanford.edu/repos/irt/lane/search/tags/search-spring-</value>
-        </property>
-        <property name="svnUrlPath">
-            <value>/src/main/resources/spring/metasearch.xml</value>
-        </property>
-    </bean>
     
     <bean name="org.apache.cocoon.acting.Action/delete-cookie"
     class="edu.stanford.irt.laneweb.DeleteCookieAction"/>

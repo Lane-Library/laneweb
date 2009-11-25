@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+    
+    
+    <bean name="org.apache.cocoon.generation.Generator/bassett"
+        class="edu.stanford.irt.laneweb.eresources.bassett.BassettEresourcesGenerator"
+        scope="prototype">
+        <property name="collectionManager">
+            <bean class="edu.stanford.irt.laneweb.eresources.bassett.BassettCollectionManager">
+                <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean name="org.apache.cocoon.generation.Generator/bassett-accordion"
+        class="edu.stanford.irt.laneweb.eresources.bassett.BassettAccordionEresourcesGenerator"
+        scope="prototype">
+        <property name="collectionManager">
+            <bean class="edu.stanford.irt.laneweb.eresources.bassett.BassettCollectionManager">
+                <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+            </bean>
+        </property>
+    </bean>
+</beans>

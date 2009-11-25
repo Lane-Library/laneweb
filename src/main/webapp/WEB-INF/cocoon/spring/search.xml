@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
+        class="edu.stanford.irt.laneweb.search.MetaSearchManagerSource" destroy-method="dispose"/>
+
+    <bean name="org.apache.cocoon.generation.Generator/search-describe"
+        class="edu.stanford.irt.laneweb.search.DescribeGenerator" scope="prototype">
+        <property name="metaSearchManagerSource"
+            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.generation.Generator/search"
+        class="edu.stanford.irt.laneweb.search.SearchGenerator" scope="prototype">
+        <property name="metaSearchManagerSource"
+            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+        <property name="defaultTimeout" value="60000"/>
+        <property name="ICD9Translator" ref="edu.stanford.irt.lane.icd9.ICD9Translator"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.reading.Reader/search-url-tester"
+        class="edu.stanford.irt.laneweb.search.UrlTester" scope="prototype">
+        <property name="metaSearchManagerSource"
+            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.acting.Action/search-context-reloader"
+        class="edu.stanford.irt.laneweb.search.SearchContextReloaderAction" scope="singleton">
+        <property name="metaSearchManagerSource"
+            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+        <property name="svnUrlProject"
+            value="https://irt-svn.stanford.edu/repos/irt/lane/search/tags/search-spring-"/>
+        <property name="svnUrlPath" value="/src/main/resources/spring/metasearch.xml"/>
+    </bean>
+
+</beans>
