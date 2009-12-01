@@ -110,8 +110,6 @@
                         </map:transform>
                     </map:otherwise>
                 </map:select>
-
-
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="database" type="wildcard">
