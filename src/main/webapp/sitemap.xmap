@@ -71,6 +71,9 @@
                     <map:parameter name="query-string" value="${request/queryString}"/>
                 </map:act>
             </map:match>
+            <map:match pattern="secure/file/**">
+                <map:read type="resource" mime-type="text/plain" src="file:/{1}"/>
+            </map:match>
             <map:match pattern="logout" type="wildcard">
                 <map:act type="delete-cookie">
                     <map:parameter name="cookie-name" value="user"/>
