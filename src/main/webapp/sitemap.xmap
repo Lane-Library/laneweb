@@ -60,6 +60,9 @@
                 <map:generate type="status"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="secure/file/**" type="wildcard">
+                <map:read type="resource" mime-type="text/plain" src="file:/{1}"/>
+            </map:match>
             <map:match pattern="search/*" type="wildcard">
                 <map:generate type="file" src="cocoon:/error.html"/>
                 <map:serialize type="xhtml" status-code="503"/>
@@ -70,9 +73,6 @@
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                     <map:parameter name="query-string" value="${request/queryString}"/>
                 </map:act>
-            </map:match>
-            <map:match pattern="secure/file/**" type="wildcard">
-                <map:read type="resource" mime-type="text/plain" src="file:/{1}"/>
             </map:match>
             <map:match pattern="logout" type="wildcard">
                 <map:act type="delete-cookie">
