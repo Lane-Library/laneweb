@@ -53,7 +53,7 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerate() throws IOException {
-        expect(this.params.getParameter("query", null)).andReturn("dvt");
+        expect(this.params.getParameter("query", null)).andReturn("venous thrombosis");
         expect(this.params.getParameter("limit", null)).andReturn("mesh");
         replay(this.params);
         this.reader.setup(null, null, null, this.params);
