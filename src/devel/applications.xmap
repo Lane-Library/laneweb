@@ -228,11 +228,6 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
-            <map:match pattern="icd9" type="wildcard">
-                <map:read type="icd9">
-                    <map:parameter name="icd9" value="${request/parameters/icd9}"/>
-                </map:read>
-            </map:match>
             <map:match pattern="cache/search/templates/xml" type="wildcard">
                 <map:aggregate element="search-templates"
                     ns="http://lane.stanford.edu/search-templates/ns">

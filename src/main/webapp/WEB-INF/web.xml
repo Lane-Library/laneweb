@@ -19,7 +19,6 @@
             /WEB-INF/cocoon/spring/datasources.xml
             /WEB-INF/cocoon/spring/eresources.xml
             /WEB-INF/cocoon/spring/history.xml
-            /WEB-INF/cocoon/spring/icd9.xml
             /WEB-INF/cocoon/spring/laneweb.xml
             /WEB-INF/cocoon/spring/querymap.xml
             /WEB-INF/cocoon/spring/search.xml
