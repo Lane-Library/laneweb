@@ -6,6 +6,7 @@ import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.stanford.irt.search.MetaSearchManager;
+import edu.stanford.irt.search.SearchCacheManager;
 
 /**
  * @author ceyates
@@ -20,9 +21,13 @@ public class MetaSearchManagerSource {
 
     private MetaSearchManager manager;
 
-    public MetaSearchManagerSource() {
-        this.context = new ClassPathXmlApplicationContext("spring/metasearch.xml");
+    private SearchCacheManager searchCacheManager;
+
+    
+    public MetaSearchManagerSource(String springFileName) {
+        this.context = new ClassPathXmlApplicationContext(springFileName);
         this.manager = (MetaSearchManager) this.context.getBean("manager");
+        this.searchCacheManager =(SearchCacheManager)this.context.getBean("searchCacheManager");
         this.httpClient = (HttpClient) this.context.getBean("httpClient");
     }
 
@@ -38,6 +43,10 @@ public class MetaSearchManagerSource {
         return this.manager;
     }
 
+    public SearchCacheManager getSearchCacheManager(){
+    	return this.searchCacheManager;
+    }
+    
     public void reload(final String url, final String login, final String password) {
         try {
             AbstractXmlApplicationContext context = new HttpApplicationContext(url, login, password);

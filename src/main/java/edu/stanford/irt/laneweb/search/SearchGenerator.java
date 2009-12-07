@@ -19,7 +19,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
-import edu.stanford.irt.search.impl.CachedMetaSearchManagerImpl;
 import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
 import edu.stanford.irt.search.util.SAXResult;
@@ -30,7 +29,6 @@ import edu.stanford.irt.search.util.SAXable;
  */
 public class SearchGenerator implements Generator {
 
-    private String clearCache;
 
     private long defaultTimeout;
 
@@ -51,12 +49,7 @@ public class SearchGenerator implements Generator {
     private XMLConsumer xmlConsumer;
 
     public void generate() throws IOException, SAXException, ProcessingException {
-        if ("y".equalsIgnoreCase(this.clearCache)) {
-            ((CachedMetaSearchManagerImpl) this.metaSearchManager).clearCache(this.q);
-        }
-        if ("all".equalsIgnoreCase(this.clearCache)) {
-            ((CachedMetaSearchManagerImpl) this.metaSearchManager).clearAllCaches();
-        }
+       
         Result result = null;
         Collection<String> engines = null;
         Collection<String> resources = null;
@@ -173,6 +166,5 @@ public class SearchGenerator implements Generator {
         if(null == this.s){
           this.s = par.getParameter("s", null);
         }
-        this.clearCache = request.getParameter("clearcache");
     }
 }
