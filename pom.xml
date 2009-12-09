@@ -213,10 +213,6 @@
                     <artifactId>excalibur-instrument-api</artifactId>
                     <groupId>org.apache.excalibur.containerkit</groupId>
                 </exclusion>
-                <exclusion>
-                    <artifactId>spring-web</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -421,14 +417,13 @@
             <scope>provided</scope>
         </dependency>
         -->
-        <!--
+        
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>icd9</artifactId>
             <version>1.0.1</version>
             <scope>runtime</scope>
         </dependency>
-        -->
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>suggest</artifactId>
