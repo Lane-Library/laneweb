@@ -73,6 +73,12 @@
                     <map:transform type="saxon" src="context://xsl/describe.xsl"/>
                     <map:serialize type="xhtml"/>
                 </map:match>
+                <map:match pattern="search/clearcache" type="wildcard">
+                    <map:act type="searchCacheManagerAction" >
+                    	<map:parameter name="query" value="${request/parameters/q}"/>
+                    </map:act>
+                    <map:read type="resource" src="robots.txt" mime-type="text/plain"/>
+                </map:match>
             </map:match>
             <map:match pattern="spellcheck/*" type="wildcard">
                 <map:match pattern="spellcheck/xml" type="wildcard">
