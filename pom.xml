@@ -417,13 +417,14 @@
             <scope>provided</scope>
         </dependency>
         -->
-        
+        <!--
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>icd9</artifactId>
             <version>1.0.1</version>
             <scope>runtime</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>suggest</artifactId>
