@@ -9,23 +9,23 @@
             </map:match>
             <map:match pattern="ceyates/**" type="wildcard">
                 <map:mount uri-prefix="ceyates" check-reload="yes"
-                    src="file:/afs/ir/users/c/e/ceyates/laneweb/laneweb.xmap"/>
+                    src="file:/afs/ir.stanford.edu/users/c/e/ceyates/laneweb/laneweb.xmap"/>
             </map:match>
             <map:match pattern="ryanmax/**" type="wildcard">
                 <map:mount uri-prefix="ryanmax" check-reload="yes"
-                    src="file:/afs/ir/users/r/y/ryanmax/laneweb/laneweb.xmap"/>
+                    src="file:/afs/ir.stanford.edu/users/r/y/ryanmax/laneweb/laneweb.xmap"/>
             </map:match>
             <map:match pattern="alainb/**" type="wildcard">
                 <map:mount uri-prefix="alainb" check-reload="yes"
-                    src="file:/afs/ir/users/a/l/alainb/laneweb/laneweb.xmap"/>
+                    src="file:/afs/ir.stanford.edu/users/a/l/alainb/laneweb/laneweb.xmap"/>
             </map:match>
             <map:match pattern="olgary/**" type="wildcard">
                 <map:mount uri-prefix="olgary" check-reload="yes"
-                    src="file:/afs/ir/users/o/l/olgary/laneweb/laneweb.xmap"/>
+                    src="file:/afs/ir.stanford.edu/users/o/l/olgary/laneweb/laneweb.xmap"/>
             </map:match>
             <map:match pattern="rzwies/**" type="wildcard">
                 <map:mount uri-prefix="rzwies" check-reload="yes"
-                    src="file:/afs/ir/users/r/z/rzwies/laneweb/laneweb.xmap"/>
+                    src="file:/afs/ir.stanford.edu/users/r/z/rzwies/laneweb/laneweb.xmap"/>
             </map:match>
             <map:match pattern="extensions/**" type="wildcard">
                 <map:mount uri-prefix="extensions" check-reload="no" src="extensions.xmap"/>
@@ -170,7 +170,7 @@
                     <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                     <map:parameter name="template" value="${request/parameters/template}"/>
                     <map:parameter name="source" value="${request/parameters/source}"/>
-                    <map:parameter name="m" value="${request/parameters/m}"/>
+                    <map:parameter name="mesh-term" value="${request/parameters/m}"/>
                     <map:parameter name="t" value="${request/parameters/t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="${request/headers/referer}"/>
@@ -206,7 +206,7 @@
                     <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                     <map:parameter name="template" value="${request/parameters/template}"/>
                     <map:parameter name="source" value="${request/parameters/source}"/>
-                    <map:parameter name="m" value="${request/parameters/m}"/>
+                    <map:parameter name="mesh-term" value="${request/parameters/m}"/>
                     <map:parameter name="t" value="${request/parameters/t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="${request/headers/referer}"/>
@@ -267,7 +267,7 @@
                     <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                     <map:parameter name="template" value="${request/parameters/template}"/>
                     <map:parameter name="source" value="${request/parameters/source}"/>
-                    <map:parameter name="m" value="${request/parameters/m}"/>
+                    <map:parameter name="mesh-term" value="${request/parameters/m}"/>
                     <map:parameter name="t" value="${request/parameters/t}"/>
                     <map:parameter name="version" value="${pom.version}"/>
                     <map:parameter name="referrer" value="${request/headers/referer}"/>

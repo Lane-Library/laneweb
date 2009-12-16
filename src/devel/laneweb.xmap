@@ -81,7 +81,7 @@
                             <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
                             <map:parameter name="source" value="${request/parameters/source}"/>
-                            <map:parameter name="m" value="${request/parameters/m}"/>
+                            <map:parameter name="mesh-term" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="${request/headers/referer}"/>
                             <map:parameter name="name" value="${session/attributes/user/name}"/>
@@ -101,7 +101,7 @@
                             <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
                             <map:parameter name="source" value="${request/parameters/source}"/>
-                            <map:parameter name="m" value="${request/parameters/m}"/>
+                            <map:parameter name="mesh-term" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="${request/headers/referer}"/>
                             <map:parameter name="name" value="${session/attributes/user/name}"/>
@@ -142,7 +142,7 @@
                             <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
                             <map:parameter name="source" value="${request/parameters/source}"/>
-                            <map:parameter name="m" value="${request/parameters/m}"/>
+                            <map:parameter name="mesh-term" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="${request/headers/referer}"/>
                             <map:parameter name="name" value="${session/attributes/user/name}"/>
@@ -162,7 +162,7 @@
                             <map:parameter name="load-tab" value="${request/parameters/loadTab}"/>
                             <map:parameter name="template" value="${request/parameters/template}"/>
                             <map:parameter name="source" value="${request/parameters/source}"/>
-                            <map:parameter name="m" value="${request/parameters/m}"/>
+                            <map:parameter name="mesh-term" value="${request/parameters/m}"/>
                             <map:parameter name="t" value="${request/parameters/t}"/>
                             <map:parameter name="referrer" value="${request/headers/referer}"/>
                             <map:parameter name="name" value="${session/attributes/user/name}"/>

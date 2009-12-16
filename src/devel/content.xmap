@@ -187,23 +187,6 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
-            <!-- TODO: remove this match after the xincludes are changed to remove .html -->
-            <map:match pattern="faq-category-list.html/*" type="wildcard">
-                <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
-                <map:select type="resource-exists">
-                    <map:when test="xsl/faq-category-list.xsl">
-                        <map:transform type="saxon" src="xsl/faq-category-list.xsl">
-                            <map:parameter name="category" value="{1}"/>
-                        </map:transform>
-                    </map:when>
-                    <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
-                            <map:parameter name="category" value="{1}"/>
-                        </map:transform>
-                    </map:otherwise>
-                </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match pattern="faq-category-list/*" type="wildcard">
                 <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
                 <map:select type="resource-exists">

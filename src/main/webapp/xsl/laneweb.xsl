@@ -27,7 +27,7 @@
     <xsl:param name="sunetid"/>
 
     <!-- m request parameter is a MeSH term -->
-    <xsl:param name="m"/>
+    <xsl:param name="mesh-term"/>
 
     <!-- LPCH and SHC don't require authentication for proxy server -->
     <xsl:param name="ip-group"/>
@@ -181,7 +181,7 @@
                 <xsl:value-of select="$q"/>
             </xsl:when>
             <xsl:when test=".='mesh'">
-                <xsl:value-of select="$m"/>
+                <xsl:value-of select="$mesh-term"/>
             </xsl:when>
             <xsl:when test=".='current-year'">
                 <xsl:value-of select="format-dateTime(current-dateTime(),'[Y,4]')"/>
@@ -768,7 +768,7 @@
     <xsl:template match="h:span[@class='lw_mesh']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:value-of select="$m"/>
+            <xsl:value-of select="$mesh-term"/>
         </xsl:copy>
     </xsl:template>
 
