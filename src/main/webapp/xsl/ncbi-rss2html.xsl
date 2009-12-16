@@ -3,9 +3,9 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:h="http://www.w3.org/1999/xhtml"
     version="2.0">
-	
-	<xsl:param name="format"/>
-	
+    
+    <xsl:param name="format"/>
+    
     <xsl:template match="node()">
         <xsl:copy>
             <xsl:apply-templates select="node()|@*"/>
@@ -17,18 +17,18 @@
     </xsl:template>
     
     <xsl:template match="rss">
-    	<xsl:choose>
-	    	<xsl:when test="$format = 'brief'">
-		        <ul>
-		            <xsl:apply-templates select="channel/item"/>
-		        </ul>
-	    	</xsl:when>
-	    	<xsl:otherwise>
-		        <ol class="citationList">
-		            <xsl:apply-templates select="channel/item"/>
-		        </ol>
-	    	</xsl:otherwise>
-    	</xsl:choose>
+        <xsl:choose>
+            <xsl:when test="$format = 'brief'">
+                <ul>
+                    <xsl:apply-templates select="channel/item"/>
+                </ul>
+            </xsl:when>
+            <xsl:otherwise>
+                <ol class="citationList">
+                    <xsl:apply-templates select="channel/item"/>
+                </ol>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
     
     <xsl:template match="item">
@@ -43,13 +43,13 @@
             </xsl:choose>
             
             <xsl:choose>
-	            <xsl:when test="$format = 'brief'">
-					<xsl:text> </xsl:text>
-					<xsl:value-of select="category"/>
-	            </xsl:when>
-	            <xsl:otherwise>
-		            <xsl:apply-templates select="category|author"/>
-	            </xsl:otherwise>
+                <xsl:when test="$format = 'brief'">
+                    <xsl:text> </xsl:text>
+                    <xsl:value-of select="category"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="category|author"/>
+                </xsl:otherwise>
             </xsl:choose>
         </li>
     </xsl:template>

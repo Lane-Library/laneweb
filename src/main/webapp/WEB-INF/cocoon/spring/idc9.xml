@@ -3,31 +3,31 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-	<bean id="autoProxyCreator" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
-		
-	<bean id="edu.stanford.irt.laneweb.icd9.ICD9Translator" class="edu.stanford.irt.lane.icd9.ICD9Translator"/>
-	
-	<bean id="edu.stanford.irt.laneweb.icd9.methodIcd9Advisor" 	class="edu.stanford.irt.laneweb.icd9.ICD9Advisor">
-		<property name="translator" ref="edu.stanford.irt.laneweb.icd9.ICD9Translator"/>
-	</bean>
-	
-	<bean id="edu.stanford.irt.laneweb.icd9.methodIcd9PointCut" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
-	  <property name="advice">
-	    <ref local="edu.stanford.irt.laneweb.icd9.methodIcd9Advisor"/>
-	  </property>
-	  <property name="patterns">
-	    <list>
-			<value>edu.stanford.irt.laneweb.eresources.SearchEresourcesGenerator.setup</value>
-			<value>edu.stanford.irt.laneweb.eresources.bassett.BassettCollectionManager.setup</value>
-			<value>edu.stanford.irt.laneweb.eresources.bassett.BassettEresourcesGenerator.setup</value>
-			<value>edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator.setup</value>
-			<value>edu.stanford.irt.laneweb.eresources.ExtensionsSuggestReader.setup</value>
-			<value>edu.stanford.irt.laneweb.search.SearchGenerator.setup</value>
-			<value>edu.stanford.irt.laneweb.search.EngineSearchGenerator.setup</value>
-			<value>edu.stanford.irt.laneweb.search.ResourceSearchGenerator.setup</value>
-			
-	    </list>
-	  </property>
-	</bean>
+    <bean id="autoProxyCreator" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+        
+    <bean id="edu.stanford.irt.laneweb.icd9.ICD9Translator" class="edu.stanford.irt.lane.icd9.ICD9Translator"/>
+    
+    <bean id="edu.stanford.irt.laneweb.icd9.methodIcd9Advisor"     class="edu.stanford.irt.laneweb.icd9.ICD9Advisor">
+        <property name="translator" ref="edu.stanford.irt.laneweb.icd9.ICD9Translator"/>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.icd9.methodIcd9PointCut" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+      <property name="advice">
+        <ref local="edu.stanford.irt.laneweb.icd9.methodIcd9Advisor"/>
+      </property>
+      <property name="patterns">
+        <list>
+            <value>edu.stanford.irt.laneweb.eresources.SearchEresourcesGenerator.setup</value>
+            <value>edu.stanford.irt.laneweb.eresources.bassett.BassettCollectionManager.setup</value>
+            <value>edu.stanford.irt.laneweb.eresources.bassett.BassettEresourcesGenerator.setup</value>
+            <value>edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator.setup</value>
+            <value>edu.stanford.irt.laneweb.eresources.ExtensionsSuggestReader.setup</value>
+            <value>edu.stanford.irt.laneweb.search.SearchGenerator.setup</value>
+            <value>edu.stanford.irt.laneweb.search.EngineSearchGenerator.setup</value>
+            <value>edu.stanford.irt.laneweb.search.ResourceSearchGenerator.setup</value>
+            
+        </list>
+      </property>
+    </bean>
 
 </beans>

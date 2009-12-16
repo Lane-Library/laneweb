@@ -18,7 +18,7 @@
         </xsl:choose>
     </xsl:variable>
     
- 	<!-- number of result titles to return per resource -->
+     <!-- number of result titles to return per resource -->
      <xsl:variable name="resultLimit">
         <xsl:choose>
             <xsl:when test="$l">
@@ -45,7 +45,7 @@
     <xsl:variable name="norm-search-terms" select="replace(lower-case($hyphen-replacement),'[^a-zA-Z0-9,-_ ]','')"/>
     
     <!-- search term regex -->
-	<xsl:variable name="search-phrases-pattern" select="replace($norm-search-terms,' and ','|')"/>
+    <xsl:variable name="search-phrases-pattern" select="replace($norm-search-terms,' and ','|')"/>
 
     <!-- content nodes from search that get transformed into result nodes -->
     <xsl:variable name="results">
@@ -55,40 +55,40 @@
     </xsl:variable>
     
     <xsl:template match="/">
-    	<html xmlns="http://www.w3.org/1999/xhtml">
-    		<head>
-    		    <title>search content results</title>
-    		</head>
-    		<body>
-		    	<dl>
-					<xsl:apply-templates select="$results/s:result[not(url=preceding-sibling::node()/s:url)]">
-					    <xsl:sort select="@score" order="descending" data-type="number"/>
-					    <xsl:sort select="s:sortTitle"/>
-					</xsl:apply-templates>
-		    	</dl>
-		    	<div id="search-content-counts" style="display:none;">
-		    		<xsl:for-each select="/s:search/s:engine/s:resource">
-		    			<span id="{@s:id}"><xsl:value-of select="s:hits"/></span>
-		    		</xsl:for-each>
-	    			<span id="all"><xsl:value-of select="sum(/s:search/s:engine/s:resource/s:hits)"/></span>
-		    	</div>
-		    	<xsl:if test="count($results/s:result/s:description[string-length(.) > 0]) > 0">
-				    <div class="tooltips" style="display:none;">
-				        <xsl:for-each select="$results/s:result/s:description[string-length(.) > 0]">
-		        		    <xsl:apply-templates select="."/>
-				        </xsl:for-each>
-				    </div>
-		    	</xsl:if>
-		    	<xsl:if test="count($results/s:result[s:engineName='PubMed']/s:pub-title) > 0">
-				    <ul class="pubmedJournalLinks" style="display:none;">
-				        <xsl:for-each select="distinct-values($results/s:result/s:pub-title)">
-						    <xsl:sort select="." order="ascending" data-type="text"/>
-						    <li><a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND {.}[Journal]"><xsl:value-of select="."/></a></li>
-				        </xsl:for-each>
-				    </ul>
-		    	</xsl:if>
-    		</body>
-		</html>
+        <html xmlns="http://www.w3.org/1999/xhtml">
+            <head>
+                <title>search content results</title>
+            </head>
+            <body>
+                <dl>
+                    <xsl:apply-templates select="$results/s:result[not(url=preceding-sibling::node()/s:url)]">
+                        <xsl:sort select="@score" order="descending" data-type="number"/>
+                        <xsl:sort select="s:sortTitle"/>
+                    </xsl:apply-templates>
+                </dl>
+                <div id="search-content-counts" style="display:none;">
+                    <xsl:for-each select="/s:search/s:engine/s:resource">
+                        <span id="{@s:id}"><xsl:value-of select="s:hits"/></span>
+                    </xsl:for-each>
+                    <span id="all"><xsl:value-of select="sum(/s:search/s:engine/s:resource/s:hits)"/></span>
+                </div>
+                <xsl:if test="count($results/s:result/s:description[string-length(.) > 0]) > 0">
+                    <div class="tooltips" style="display:none;">
+                        <xsl:for-each select="$results/s:result/s:description[string-length(.) > 0]">
+                            <xsl:apply-templates select="."/>
+                        </xsl:for-each>
+                    </div>
+                </xsl:if>
+                <xsl:if test="count($results/s:result[s:engineName='PubMed']/s:pub-title) > 0">
+                    <ul class="pubmedJournalLinks" style="display:none;">
+                        <xsl:for-each select="distinct-values($results/s:result/s:pub-title)">
+                            <xsl:sort select="." order="ascending" data-type="text"/>
+                            <li><a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND {.}[Journal]"><xsl:value-of select="."/></a></li>
+                        </xsl:for-each>
+                    </ul>
+                </xsl:if>
+            </body>
+        </html>
     </xsl:template>
     
     <!-- builds result node from s:content -->
@@ -119,16 +119,16 @@
 
         <xsl:variable name="score">
             <xsl:choose>
-             	<!--  10 exact title match -->
-             	<!--  9  title begins with AND title contains more than one match AND desc contains more than one match-->
-             	<!--  8  title begins with AND title contains more than one match AND desc match-->
-             	<!--  7  title begins with AND title contains more than one match -->
-             	<!--  6  title contains more than one match AND desc contains more than one match-->
-             	<!--  5  title contains more than one match -->
-             	<!--  4  title match AND desc contains more than one match-->
-             	<!--  3  title match AND desc match-->
-             	<!--  2  title match-->
-             	<!--  1  desc match-->
+                 <!--  10 exact title match -->
+                 <!--  9  title begins with AND title contains more than one match AND desc contains more than one match-->
+                 <!--  8  title begins with AND title contains more than one match AND desc match-->
+                 <!--  7  title begins with AND title contains more than one match -->
+                 <!--  6  title contains more than one match AND desc contains more than one match-->
+                 <!--  5  title contains more than one match -->
+                 <!--  4  title match AND desc contains more than one match-->
+                 <!--  3  title match AND desc match-->
+                 <!--  2  title match-->
+                 <!--  1  desc match-->
                 <xsl:when test="$norm-title = $norm-search-terms">10</xsl:when>
                 <xsl:when test="matches($norm-title,concat('^(',$search-phrases-pattern,')')) and $title-hit-count &gt; 1 and $desc-hit-count &gt; 1">9</xsl:when>
                 <xsl:when test="matches($norm-title,concat('^(',$search-phrases-pattern,')')) and $title-hit-count &gt; 1 and $desc-hit-count &gt; 0">8</xsl:when>
@@ -180,13 +180,13 @@
             </xsl:choose>
         </xsl:variable>
 
-		<!-- PubMed engines get simplified, all others use search engine description -->        
-		<xsl:variable name="engineName">
-			<xsl:choose>
-				<xsl:when test="contains($engineId,'pubmed') and $engineId != 'pubmed_guidelines' and $engineId != 'pubmed_cochrane_reviews'">PubMed</xsl:when>
-				<xsl:otherwise><xsl:value-of select="../s:description"/></xsl:otherwise>
-			</xsl:choose>
-		</xsl:variable>
+        <!-- PubMed engines get simplified, all others use search engine description -->        
+        <xsl:variable name="engineName">
+            <xsl:choose>
+                <xsl:when test="contains($engineId,'pubmed') and $engineId != 'pubmed_guidelines' and $engineId != 'pubmed_cochrane_reviews'">PubMed</xsl:when>
+                <xsl:otherwise><xsl:value-of select="../s:description"/></xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         
         <result score="{$score * $weight}">
             <engineId><xsl:value-of select="$engineId"/></engineId>   
@@ -226,39 +226,39 @@
             <ul>
                 <li id="{s:id}">
                     <a score="{@score}" title="{concat('article -- ',s:engineId,' -- ',$title)}" href="{s:url}" id="{s:uniqueId}" target="_blank">
-		                <xsl:copy-of select="$title"/>
-		            </a>
-		            
-		            <xsl:apply-templates select="s:pub-title"/>
-		            <xsl:apply-templates select="s:pub-date"/>
-		            <xsl:apply-templates select="s:pub-volume"/>
-		            <xsl:apply-templates select="s:pub-issue"/>
-		            <xsl:apply-templates select="s:page"/>
-		            <xsl:apply-templates select="s:id"/>
-		            
-					<div class="moreResults">
-					    <span class="sourceLink">
-					        <xsl:value-of select="s:engineName"/>
-					    </span>
-			            <xsl:choose>
-			            	<xsl:when test="s:engineName = 'PubMed'">
-					            <xsl:text> - </xsl:text>
-					            <a href="#" rel="popup local pubmedMoreStrategy">more</a>
-			            	</xsl:when>
-					        <xsl:when test="$resultLimit &lt; number(s:engineHits)">
-					            <xsl:text> - </xsl:text>
-					            <a target="_blank" title="more results from {s:engineName}" href="{s:engineUrl}">
-	        					        <xsl:value-of select="format-number(s:engineHits - 1,'###,###,##0')"/> more results
-	    					    </a>
-			            	</xsl:when>
-			            </xsl:choose>
-					</div>
-            	</li>
+                        <xsl:copy-of select="$title"/>
+                    </a>
+                    
+                    <xsl:apply-templates select="s:pub-title"/>
+                    <xsl:apply-templates select="s:pub-date"/>
+                    <xsl:apply-templates select="s:pub-volume"/>
+                    <xsl:apply-templates select="s:pub-issue"/>
+                    <xsl:apply-templates select="s:page"/>
+                    <xsl:apply-templates select="s:id"/>
+                    
+                    <div class="moreResults">
+                        <span class="sourceLink">
+                            <xsl:value-of select="s:engineName"/>
+                        </span>
+                        <xsl:choose>
+                            <xsl:when test="s:engineName = 'PubMed'">
+                                <xsl:text> - </xsl:text>
+                                <a href="#" rel="popup local pubmedMoreStrategy">more</a>
+                            </xsl:when>
+                            <xsl:when test="$resultLimit &lt; number(s:engineHits)">
+                                <xsl:text> - </xsl:text>
+                                <a target="_blank" title="more results from {s:engineName}" href="{s:engineUrl}">
+                                        <xsl:value-of select="format-number(s:engineHits - 1,'###,###,##0')"/> more results
+                                </a>
+                            </xsl:when>
+                        </xsl:choose>
+                    </div>
+                </li>
             </ul>
         </dd>
-	</xsl:template>
+    </xsl:template>
     
-	
+    
 
     <xsl:template match="*">
         <xsl:copy>
@@ -297,39 +297,39 @@
             </span>
     </xsl:template>
 
-	<xsl:template match="s:pub-title">
-    	<xsl:value-of select="."/>
-    	<xsl:text>. </xsl:text>
-	</xsl:template>
+    <xsl:template match="s:pub-title">
+        <xsl:value-of select="."/>
+        <xsl:text>. </xsl:text>
+    </xsl:template>
     
-	<xsl:template match="s:pub-date">
-    	<xsl:value-of select="."/>
-	</xsl:template>
+    <xsl:template match="s:pub-date">
+        <xsl:value-of select="."/>
+    </xsl:template>
     
-	<xsl:template match="s:pub-volume">
-    	<xsl:text>;</xsl:text>
-    	<xsl:value-of select="."/>
-	</xsl:template>
+    <xsl:template match="s:pub-volume">
+        <xsl:text>;</xsl:text>
+        <xsl:value-of select="."/>
+    </xsl:template>
     
-	<xsl:template match="s:pub-issue">
-    	<xsl:text>(</xsl:text>
-    	<xsl:value-of select="."/>
-    	<xsl:text>)</xsl:text>
-	</xsl:template>
+    <xsl:template match="s:pub-issue">
+        <xsl:text>(</xsl:text>
+        <xsl:value-of select="."/>
+        <xsl:text>)</xsl:text>
+    </xsl:template>
     
-	<xsl:template match="s:page">
-    	<xsl:text>:</xsl:text>
-    	<xsl:value-of select="."/>
-    	<xsl:text>.</xsl:text>
-	</xsl:template>
+    <xsl:template match="s:page">
+        <xsl:text>:</xsl:text>
+        <xsl:value-of select="."/>
+        <xsl:text>.</xsl:text>
+    </xsl:template>
     
-	<xsl:template match="s:id">
-		<small>
-			<xsl:text> </xsl:text>
-	    	<xsl:if test="contains(../engineId,'pubmed')">PMID:</xsl:if>
-	    	<xsl:value-of select="."/>
-		</small>
-	</xsl:template>
+    <xsl:template match="s:id">
+        <small>
+            <xsl:text> </xsl:text>
+            <xsl:if test="contains(../engineId,'pubmed')">PMID:</xsl:if>
+            <xsl:value-of select="."/>
+        </small>
+    </xsl:template>
         
     <xsl:template name="highlight">
         <xsl:param name="term" select="''" />

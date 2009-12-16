@@ -6,7 +6,7 @@
     <bean id="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"
         class="edu.stanford.irt.laneweb.search.MetaSearchManagerSource" destroy-method="dispose">
         <constructor-arg><value>spring/metasearch.xml</value></constructor-arg>
-	</bean>
+    </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/search-describe"
         class="edu.stanford.irt.laneweb.search.DescribeGenerator" scope="prototype">
@@ -51,7 +51,7 @@
         <property name="svnUrlPath" value="/src/main/resources/spring/metasearch.xml"/>
     </bean>
 
-	
+    
     <bean name="org.apache.cocoon.acting.Action/searchCacheManagerAction"
         class="edu.stanford.irt.laneweb.search.SearchCacheManagerAction">
         <property name="metaSearchManagerSource"

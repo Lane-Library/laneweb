@@ -16,23 +16,23 @@ import edu.stanford.irt.search.impl.DefaultResult;
 
 public class ResourceSearchGenerator extends SearchGenerator{
 
-	private Collection<String> resources;
-	
-	public Result doSearch(){
-		Result allResult = super.doSearch(null);
-		Result result = new DefaultResult(allResult.getId());
+    private Collection<String> resources;
+    
+    public Result doSearch(){
+        Result allResult = super.doSearch(null);
+        Result result = new DefaultResult(allResult.getId());
         synchronized (allResult) {
-		 	result.setQuery(allResult.getQuery());
-	        result.setStatus(allResult.getStatus());
+             result.setQuery(allResult.getQuery());
+            result.setStatus(allResult.getStatus());
             Collection<Result> results = allResult.getChildren();
             for (Result engineResult : results) {
                 if ((this.resources != null) && this.resources.contains(engineResult.getId())) {
                     result.addChild(engineResult);
                 } else if (this.resources != null) {
-                	Collection<Result> resourceResults = engineResult.getChildren();
+                    Collection<Result> resourceResults = engineResult.getChildren();
                     for (Result resourceResult : resourceResults) {
                         if (this.resources.contains(resourceResult.getId())) {
-                        	result.addChild(engineResult);
+                            result.addChild(engineResult);
                             break;
                         }
                     }
@@ -40,16 +40,16 @@ public class ResourceSearchGenerator extends SearchGenerator{
             }
         }
         return result;
-	}
-	    
-	
+    }
+        
+    
     @SuppressWarnings("unchecked")
-	public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par){
-    	super.setup(resolver, objectModel, src, par);
-    	HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-    	String[] r = request.getParameterValues("r"); 
-    	Assert.notNull(r, "resource cannot be null");
-    	this.resources =  new HashSet<String>();
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par){
+        super.setup(resolver, objectModel, src, par);
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
+        String[] r = request.getParameterValues("r"); 
+        Assert.notNull(r, "resource cannot be null");
+        this.resources =  new HashSet<String>();
         for (String element : r) {
               this.resources.add(element);
           }

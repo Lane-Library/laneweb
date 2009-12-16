@@ -14,15 +14,15 @@
             <map:match pattern="search/**" type="wildcard">
                 <!-- /apps/search/xml returns the xmlized search result -->
                 <map:match type="wildcard" pattern="search/xml">
-            		 <map:generate type="search">
-            		 	<map:parameter name="query" value="${request/parameters/q}"/>
-            		 </map:generate>
-            		 <map:serialize type="xml"/>
+                     <map:generate type="search">
+                         <map:parameter name="query" value="${request/parameters/q}"/>
+                     </map:generate>
+                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/ranked/xml returns xmlized content results -->
                 <map:match pattern="search/ranked/xml" type="wildcard">
                     <map:generate type="search-engine">
-                    	<map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${request/parameters/q}"/>
                         <map:parameter name="s" value="true"/>
                         <map:parameter name="t" value="20000"/>
                     </map:generate>
@@ -35,7 +35,7 @@
                 <!-- search2json.xsl converts the result xml to json -->
                 <map:match pattern="search/json" type="wildcard">
                     <map:generate type="search-resource">
-                    	<map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${request/parameters/q}"/>
                     </map:generate>
                     <map:transform type="saxon" src="context://xsl/search2json.xsl">
                         <map:parameter name="content" value="${request/parameters/content}"/>
@@ -46,7 +46,7 @@
                 <!-- result with proxy links (if necessary) in xml format -->
                 <map:match pattern="search/proxy/xml" type="wildcard">
                     <map:generate type="search">
-                    	<map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${request/parameters/q}"/>
                     </map:generate>
                     <map:transform type="cme-links">
                         <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
@@ -92,9 +92,9 @@
                     <map:transform type="saxon" src="context://xsl/describe.xsl"/>
                     <map:serialize type="xhtml"/>
                 </map:match>
-				<map:match pattern="search/clearcache" type="wildcard">
+                <map:match pattern="search/clearcache" type="wildcard">
                     <map:act type="searchCacheManagerAction" >
-                    	<map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${request/parameters/q}"/>
                     </map:act>
                     <map:read type="resource" src="robots.txt" mime-type="text/plain"/>
                 </map:match>

@@ -44,7 +44,7 @@ public class MetaSearchManagerSource {
     }
 
     public SearchCacheManager getSearchCacheManager(){
-    	return this.searchCacheManager;
+        return this.searchCacheManager;
     }
     
     public void reload(final String url, final String login, final String password) {

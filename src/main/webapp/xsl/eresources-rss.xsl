@@ -21,9 +21,9 @@
         <xsl:if test="$type = 'ej' or $type = 'book' or $type = 'database' or $type = 'cc'  or $type = 'video' ">
             <xsl:text>/online/</xsl:text>
             <xsl:choose>
-            	<xsl:when test="$type = 'database'"><xsl:text>db</xsl:text></xsl:when>
-            	<xsl:when test="$type = 'book'"><xsl:text>eb</xsl:text></xsl:when>
-            	<xsl:otherwise><xsl:value-of select="$type"/></xsl:otherwise>
+                <xsl:when test="$type = 'database'"><xsl:text>db</xsl:text></xsl:when>
+                <xsl:when test="$type = 'book'"><xsl:text>eb</xsl:text></xsl:when>
+                <xsl:otherwise><xsl:value-of select="$type"/></xsl:otherwise>
             </xsl:choose>
             <xsl:text>browse.html?</xsl:text>
             <xsl:if test="$a != ''"><xsl:text>a=</xsl:text><xsl:value-of select="$a"/></xsl:if>

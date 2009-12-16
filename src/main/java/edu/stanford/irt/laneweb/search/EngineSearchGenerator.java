@@ -18,9 +18,9 @@ public class EngineSearchGenerator extends SearchGenerator{
 
     private String[] e;
 
-	
+    
     public Result doSearch(){
-	  Collection<String> engines = new HashSet<String>();
+      Collection<String> engines = new HashSet<String>();
       if ((this.e != null) && (this.e.length > 0)) {
           for (String element : this.e) {
               engines.add(element);
@@ -31,9 +31,9 @@ public class EngineSearchGenerator extends SearchGenerator{
     
     
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par){
-    	super.setup(resolver, objectModel, src, par);
-    	HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-    	this.e = request.getParameterValues("e"); 
-    	Assert.notNull(this.e, "engines cannot be null");
+        super.setup(resolver, objectModel, src, par);
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
+        this.e = request.getParameterValues("e"); 
+        Assert.notNull(this.e, "engines cannot be null");
     }
 }

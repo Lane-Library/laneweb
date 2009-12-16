@@ -33,11 +33,11 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
     private String s;
     
     public Result doSearch() {
-    	return doSearch(null);
+        return doSearch(null);
     }
     
     public Result doSearch(Collection<String> engines){
-    	Result result = null;
+        Result result = null;
         if ((this.query != null) && (this.query.length() > 0)) {
             long time = this.defaultTimeout;
             if (null != this.t) {
@@ -96,8 +96,8 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par){
-       	super.setup(resolver, objectModel, src, par);
-    	HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
+           super.setup(resolver, objectModel, src, par);
+        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         this.t = request.getParameter("t");
         if(null == this.t){
           this.t = par.getParameter("t", null);
