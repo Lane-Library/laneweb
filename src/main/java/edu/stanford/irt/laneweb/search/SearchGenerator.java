@@ -1,44 +1,30 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
-import org.apache.cocoon.xml.XMLConsumer;
-import org.xml.sax.SAXException;
 
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
-import edu.stanford.irt.search.util.SAXResult;
-import edu.stanford.irt.search.util.SAXable;
 
 /**
  * @author ceyates
  */
-public class SearchGenerator implements Generator {
+public class SearchGenerator extends AbstractSearchGenerator implements Generator {
 
 
     private long defaultTimeout;
 
-    private String[] e;
-
     private MetaSearchManager metaSearchManager;
-
-    private String q;
-
-    private String[] r;
 
     private String t;
 
@@ -46,26 +32,13 @@ public class SearchGenerator implements Generator {
 
     private String s;
     
-    private XMLConsumer xmlConsumer;
-
-    public void generate() throws IOException, SAXException, ProcessingException {
-       
-        Result result = null;
-        Collection<String> engines = null;
-        Collection<String> resources = null;
-        if ((this.e != null) && (this.e.length > 0)) {
-            engines = new HashSet<String>();
-            for (String element : this.e) {
-                engines.add(element);
-            }
-        }
-        if ((this.r != null) && (this.r.length > 0)) {
-            resources = new HashSet<String>();
-            for (String element : this.r) {
-                resources.add(element);
-            }
-        }
-        if ((this.q != null) && (this.q.length() > 0)) {
+    public Result doSearch() {
+    	return doSearch(null);
+    }
+    
+    public Result doSearch(Collection<String> engines){
+    	Result result = null;
+        if ((this.query != null) && (this.query.length() > 0)) {
             long time = this.defaultTimeout;
             if (null != this.t) {
                 try {
@@ -75,11 +48,11 @@ public class SearchGenerator implements Generator {
                 }
             }
             long timeout = time;
-            final SimpleQuery query = new SimpleQuery(this.q);
             boolean synchronous = false;
             if ((this.s != null) && (this.s.length() > 0)) {
               synchronous = Boolean.parseBoolean(this.s);
             }
+            final SimpleQuery query = new SimpleQuery(this.query);
             result = this.metaSearchManager.search(query, timeout, engines, synchronous);
             if (null != this.w) {
                 long wait = 0;
@@ -108,40 +81,11 @@ public class SearchGenerator implements Generator {
         if (result == null) {
             result = new DefaultResult("null");
             result.setStatus(SearchStatus.FAILED);
-        } else if ((engines != null) || (resources != null)) {
-            Result limitedResult = new DefaultResult(result.getId());
-            limitedResult.setQuery(result.getQuery());
-            limitedResult.setStatus(result.getStatus());
-            Collection<Result> selectedResult = new ArrayList<Result>();
-            synchronized (result) {
-                Collection<Result> results = result.getChildren();
-                for (Result engineResult : results) {
-                    if ((engines != null) && engines.contains(engineResult.getId())) {
-                        selectedResult.add(engineResult);
-                    } else if (resources != null) {
-                        Collection<Result> resourceResults = engineResult.getChildren();
-                        for (Result resourceResult : resourceResults) {
-                            if (resources.contains(resourceResult.getId())) {
-                                selectedResult.add(engineResult);
-                                break;
-                            }
-                        }
-                    }
-                }
-                limitedResult.setChildren(selectedResult);
-                result = limitedResult;
-            }
         }
-        SAXable xml = new SAXResult(result);
-        synchronized (result) {
-            xml.toSAX(this.xmlConsumer);
-        }
+        return result;
     }
 
-    public void setConsumer(final XMLConsumer xmlConsumer) {
-        this.xmlConsumer = xmlConsumer;
-    }
-
+    
     public void setDefaultTimeout(final long defaultTimeout) {
         this.defaultTimeout = defaultTimeout;
     }
@@ -151,17 +95,14 @@ public class SearchGenerator implements Generator {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
-            IOException {
-        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        this.q = request.getParameter("q");
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par){
+       	super.setup(resolver, objectModel, src, par);
+    	HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         this.t = request.getParameter("t");
         if(null == this.t){
           this.t = par.getParameter("t", null);
         }
-        this.e = request.getParameterValues("e");
         this.w = request.getParameter("w");
-        this.r = request.getParameterValues("r");
         this.s = request.getParameter("s");
         if(null == this.s){
           this.s = par.getParameter("s", null);

@@ -23,6 +23,7 @@
             /WEB-INF/cocoon/spring/querymap.xml
             /WEB-INF/cocoon/spring/search.xml
             /WEB-INF/cocoon/spring/suggest.xml
+            /WEB-INF/cocoon/spring/idc9.xml
         </param-value>
     </context-param>
 

@@ -6,6 +6,7 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
+import org.springframework.util.Assert;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.search.MetaSearchManager;
@@ -40,10 +41,7 @@ public abstract class AbstractSearchGenerator implements Generator {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         this.query = par.getParameter("query", null);
-        if (this.query == null) {
-            throw new IllegalStateException("null query");
-        }
+        Assert.notNull(this.query, "query cannot be null"); 
     }
-
     protected abstract Result doSearch();
 }
