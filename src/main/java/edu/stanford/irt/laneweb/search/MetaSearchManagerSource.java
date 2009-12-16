@@ -23,11 +23,10 @@ public class MetaSearchManagerSource {
 
     private SearchCacheManager searchCacheManager;
 
-    
-    public MetaSearchManagerSource(String springFileName) {
+    public MetaSearchManagerSource(final String springFileName) {
         this.context = new ClassPathXmlApplicationContext(springFileName);
         this.manager = (MetaSearchManager) this.context.getBean("manager");
-        this.searchCacheManager =(SearchCacheManager)this.context.getBean("searchCacheManager");
+        this.searchCacheManager = (SearchCacheManager) this.context.getBean("searchCacheManager");
         this.httpClient = (HttpClient) this.context.getBean("httpClient");
     }
 
@@ -43,10 +42,10 @@ public class MetaSearchManagerSource {
         return this.manager;
     }
 
-    public SearchCacheManager getSearchCacheManager(){
+    public SearchCacheManager getSearchCacheManager() {
         return this.searchCacheManager;
     }
-    
+
     public void reload(final String url, final String login, final String password) {
         try {
             AbstractXmlApplicationContext context = new HttpApplicationContext(url, login, password);

@@ -21,22 +21,22 @@ import edu.stanford.irt.search.impl.SimpleQuery;
  */
 public class SearchGenerator extends AbstractSearchGenerator implements Generator {
 
-
     private long defaultTimeout;
 
     private MetaSearchManager metaSearchManager;
+
+    private String s;
 
     private String t;
 
     private String w;
 
-    private String s;
-    
+    @Override
     public Result doSearch() {
         return doSearch(null);
     }
-    
-    public Result doSearch(Collection<String> engines){
+
+    public Result doSearch(final Collection<String> engines) {
         Result result = null;
         if ((this.query != null) && (this.query.length() > 0)) {
             long time = this.defaultTimeout;
@@ -50,7 +50,7 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
             long timeout = time;
             boolean synchronous = false;
             if ((this.s != null) && (this.s.length() > 0)) {
-              synchronous = Boolean.parseBoolean(this.s);
+                synchronous = Boolean.parseBoolean(this.s);
             }
             final SimpleQuery query = new SimpleQuery(this.query);
             result = this.metaSearchManager.search(query, timeout, engines, synchronous);
@@ -85,27 +85,28 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
         return result;
     }
 
-    
     public void setDefaultTimeout(final long defaultTimeout) {
         this.defaultTimeout = defaultTimeout;
     }
 
+    @Override
     public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
         this.metaSearchManager = msms.getMetaSearchManager();
     }
 
+    @Override
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par){
-           super.setup(resolver, objectModel, src, par);
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+        super.setup(resolver, objectModel, src, par);
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         this.t = request.getParameter("t");
-        if(null == this.t){
-          this.t = par.getParameter("t", null);
+        if (null == this.t) {
+            this.t = par.getParameter("t", null);
         }
         this.w = request.getParameter("w");
         this.s = request.getParameter("s");
-        if(null == this.s){
-          this.s = par.getParameter("s", null);
+        if (null == this.s) {
+            this.s = par.getParameter("s", null);
         }
     }
 }

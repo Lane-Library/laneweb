@@ -25,9 +25,9 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
 
     private ProxyLinks proxyLinks;
 
-    private UserDao userDao;
-    
     private TemplateChooser templateChooser;
+
+    private UserDao userDao;
 
     public LanewebObjectModelProvider(final ProcessInfoProvider pip, final Map<String, Object> jndiData, final UserDao userDao, final ProxyLinks proxyLinks,
             final TemplateChooser templateChooser) {

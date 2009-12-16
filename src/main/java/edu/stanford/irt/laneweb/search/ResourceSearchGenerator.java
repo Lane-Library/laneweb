@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
-import org.springframework.util.Assert;
 
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.DefaultResult;
 
-public class ResourceSearchGenerator extends SearchGenerator{
+public class ResourceSearchGenerator extends SearchGenerator {
 
     private Collection<String> resources;
-    
-    public Result doSearch(){
+
+    @Override
+    public Result doSearch() {
         Result allResult = super.doSearch(null);
         Result result = new DefaultResult(allResult.getId());
         synchronized (allResult) {
-             result.setQuery(allResult.getQuery());
+            result.setQuery(allResult.getQuery());
             result.setStatus(allResult.getStatus());
             Collection<Result> results = allResult.getChildren();
             for (Result engineResult : results) {
@@ -41,20 +41,19 @@ public class ResourceSearchGenerator extends SearchGenerator{
         }
         return result;
     }
-        
-    
+
+    @Override
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par){
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         super.setup(resolver, objectModel, src, par);
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         String[] rsrcs = request.getParameterValues("r");
         if (null == rsrcs) {
             throw new IllegalArgumentException("null resources");
         }
-        this.resources =  new HashSet<String>();
+        this.resources = new HashSet<String>();
         for (String element : rsrcs) {
-              this.resources.add(element);
-          }
-      }   
-    
+            this.resources.add(element);
+        }
+    }
 }

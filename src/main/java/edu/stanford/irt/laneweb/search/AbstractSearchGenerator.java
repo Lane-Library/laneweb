@@ -18,7 +18,7 @@ public abstract class AbstractSearchGenerator implements Generator {
     private XMLConsumer xmlConsumer;
 
     protected MetaSearchManager metaSearchManager;
-    
+
     protected String query;
 
     public void generate() throws SAXException {
@@ -44,5 +44,6 @@ public abstract class AbstractSearchGenerator implements Generator {
             throw new IllegalArgumentException("null query");
         }
     }
+
     protected abstract Result doSearch();
 }
