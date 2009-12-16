@@ -8,7 +8,6 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceException;
 import org.apache.excalibur.source.SourceFactory;
-import org.springframework.util.Assert;
 
 /**
  * {@link HTTPClientSource} Factory class.
@@ -47,7 +46,9 @@ public class HTTPClientSourceFactory implements SourceFactory {
     }
 
     public void setHttpClient(final HttpClient httpClient) {
-        Assert.notNull(httpClient);
+        if (null == httpClient) {
+            throw new IllegalArgumentException("null httpClient");
+        }
         this.httpClient = httpClient;
     }
 }

@@ -7,7 +7,6 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
-import org.springframework.util.Assert;
 
 import edu.stanford.irt.search.SearchCacheManager;
 
@@ -30,9 +29,13 @@ public class SearchCacheManagerAction implements Action{
 
     
     public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
-        Assert.notNull(msms, "MetaSearchManagerSource  cannot be null");
-        Assert.notNull(msms.getSearchCacheManager(), " searchCacheManager cannot be null");
+        if (null == msms) {
+            throw new IllegalArgumentException("null metaSearchManagerSource");
+        }
         this.searchCache = msms.getSearchCacheManager();
+        if (null == this.searchCache) {
+            throw new IllegalStateException("null searchCacheManager");
+        }
     }
     
 }

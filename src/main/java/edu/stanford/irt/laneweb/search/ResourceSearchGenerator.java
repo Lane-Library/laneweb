@@ -47,10 +47,12 @@ public class ResourceSearchGenerator extends SearchGenerator{
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par){
         super.setup(resolver, objectModel, src, par);
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        String[] r = request.getParameterValues("r"); 
-        Assert.notNull(r, "resource cannot be null");
+        String[] rsrcs = request.getParameterValues("r");
+        if (null == rsrcs) {
+            throw new IllegalArgumentException("null resources");
+        }
         this.resources =  new HashSet<String>();
-        for (String element : r) {
+        for (String element : rsrcs) {
               this.resources.add(element);
           }
       }   
