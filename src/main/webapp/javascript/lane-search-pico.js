@@ -41,7 +41,7 @@
         for (i = 0; i < inputs.length; i++){
         	//TODO: extracting pico values from request ... move to laneweb.xsl?
         	inputs[i].value = H.getQueryStringParameter(inputs[i].name);
-			if(inputs[i].value === ''||inputs[i].value === null){
+			if(inputs[i].value === ''||inputs[i].value === null||inputs[i].value === 'null'){
 				inputs[i].value = inputs[i].title;
 			}
             E.addListener(inputs[i], 'focus', function(){
