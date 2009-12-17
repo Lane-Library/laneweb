@@ -57,10 +57,17 @@ padding-top:1em;
 	display: block;
 	width: 405px;
  padding:0 1em 1em 1em;
- border: 2px solid #cdcfbe;
+ border: 3px solid #cdcfbe;
  position:relative;
  height: 200px; 
 }
+
+
+.alert-box div img {
+
+	float: right;
+}
+
 
 .alert-box div h4 {
 	color:#820000;
