@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb;
 
 import java.io.FileNotFoundException;
 
-import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.log4j.RollingFileAppender;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.spi.ThrowableInformation;
@@ -22,7 +21,7 @@ public class LogAppender extends RollingFileAppender {
             while (t.getCause() != null) {
                 t = t.getCause();
             }
-            if (t instanceof FileNotFoundException || t instanceof SourceNotFoundException) {
+            if (t instanceof FileNotFoundException) {
                 LoggingEvent newEvent = new LoggingEvent(event.fqnOfCategoryClass, event.getLogger(), event.getLevel(), t.toString(), null);
                 super.doAppend(newEvent);
                 return;
