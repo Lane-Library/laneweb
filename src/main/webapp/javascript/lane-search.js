@@ -9,6 +9,7 @@ LANE.search = LANE.search ||  function() {
         source,
         ind = d.getElementById('searchIndicator'),
         initialText,
+        picoInputs = ['p','i','c','o'],
         // publicly available functions:
         o = {
             startSearch: function(){
@@ -81,16 +82,25 @@ LANE.search = LANE.search ||  function() {
             	d.getElementById('searchSource').value = source;
             },
             setActiveTab: function(elm){
+            	var alreadyActive = Dom.hasClass(elm,'active');
             	Dom.getElementsByClassName('active',null,elm.parentNode,function(el){
             		Dom.removeClass(el,'active');
             	});
         		Dom.addClass(elm,'active');
                 o.setSearchSource(elm.id+'-all');
-            	if(form.q.value && form.q.value !== initialText){
-            		o.startSearch();
-            		form.submit();
-            	}
+                // if this is not already active tab and there's a form value, submit search
+                if(!alreadyActive && form.q.value && form.q.value !== initialText){
+                	o.startSearch();
+                	o.submitSearch();
+                	return false;
+                }
             	o.setInitialText();
+            	if(elm.id == 'clinical'){
+            		Dom.addClass(['search','breadcrumb'], 'clinicalSearch');
+            	}
+            	else{
+            		Dom.removeClass(['search','breadcrumb'], 'clinicalSearch');
+            	}
             },
             setInitialText: function(){
             	var oldInitialText = initialText;
@@ -103,25 +113,34 @@ LANE.search = LANE.search ||  function() {
     	        	form.q.value = initialText;
     	        	form.q.title = initialText;
     	        }
+            },
+            submitSearch: function(e){
+            	var i;
+                try {
+                    // strip PICO values if not set
+                    for (i = 0; i < picoInputs.length; i++){
+                    	if (form[picoInputs[i]] && form[picoInputs[i]].value == form[picoInputs[i]].title) {
+                    		form[picoInputs[i]].parentNode.removeChild(form[picoInputs[i]]);
+                    	}
+                    }
+                    o.startSearch();
+                    form.submit();
+                } catch (ex) {
+                    alert(ex);
+                    Event.preventDefault(e);
+                }
             }
         };
 
     Event.onContentReady('search',function(){
         form = this;
         o.setInitialText();
-            Event.addListener(form, 'submit', function(e){
-                try {
-                    o.startSearch();
-                } catch (ex) {
-                    alert(ex);
-                    Event.preventDefault(e);
-                }
-            });
-            Event.addFocusListener(form.q, function(e) {
-                if (this.value == initialText) {
-                    this.value = '';
-                }
-            });
+        Event.addListener(form, 'submit', o.submitSearch);
+        Event.addFocusListener(form.q, function(e) {
+            if (this.value == initialText) {
+                this.value = '';
+            }
+        });
     });
 
     Event.onContentReady('searchTabs',function(){

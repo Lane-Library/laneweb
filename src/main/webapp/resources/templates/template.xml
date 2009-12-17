@@ -280,5 +280,6 @@
         <script type="text/javascript" src="/javascript/lane-popin.js"> </script>
         <script type="text/javascript" src="/javascript/lane-ie.js"> </script>
         <script type="text/javascript" src="/javascript/lane-teletype.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-search-pico.js"> </script>
     </body>
 </html>

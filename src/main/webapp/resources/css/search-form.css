@@ -11,7 +11,7 @@
     color:#2D2D2D;
     font-size:9px;
 }
-#search input {
+#search input#searchTerms {
     border:none;
     position:absolute;
     left:36px;
@@ -44,16 +44,74 @@
     clear:left;
 }
 #searchIndicator {
-	visibility:hidden;
-	padding-right:60px;
+    visibility:hidden;
+    padding-right:60px;
 }
 #search input#searchSubmit{
-	background-color:transparent;
-	border:none;
-	cursor:pointer;
-	position:absolute;
-	width:20px;
-	margin-left:435px;
-	text-indent:20px;
-	padding-left:20px;
+    background-color:transparent;
+    border:none;
+    cursor:pointer;
+    position:absolute;
+    width:20px;
+    margin-left:460px;
+    top:172px;
+    text-indent:20px;
+    padding-left:20px;
+}
+#search.clinicalSearch {
+    background-image:url(/././images/backgr/clini-back-with-fields.jpg);
+    height:120px;
+}
+#search.clinicalSearch input#searchTerms {
+    left:144px;
+    top:208px;
+}
+#search.clinicalSearch input#searchSubmit {
+    margin-left:562px;
+    top:208px;
+}
+#search.clinicalSearch input.picoInput{
+    display:block;
+}
+#breadcrumb.clinicalSearch {
+    top:247px;
+}
+#search input.picoInput{
+    display:none;
+    border:none;
+    position:absolute;
+    border:1px white solid;
+}
+#search input#clinicalP {
+    left:40px;
+    top:175px;
+    width:165px;
+}
+#search input#clinicalI {
+    left:215px;
+    top:175px;
+    width:152px;
+}
+#search input#clinicalC {
+    left:377px;
+    top:175px;
+    width:150px;
+}
+#search input#clinicalO {
+    left:536px;
+    top:175px;
+    width:160px;
+}
+/* width of auto-complete PICO containers */
+#pInput.yui-ac-container {
+    width:167px;
+}
+#iInput.yui-ac-container {
+    width:154px;
+}
+#cInput.yui-ac-container {
+    width:152px;
+}
+#OInput.yui-ac-container {
+    width:162px;
 }

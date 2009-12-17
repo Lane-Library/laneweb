@@ -112,6 +112,7 @@
                                 <include>side-hd-module-min.css</include>
                                 <include>online-resources-min.css</include>
                                 <include>liaisons-min.css</include>
+                                <include>autocomplete-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -139,6 +140,7 @@
                                 <include>lane-popup-min.js</include>
                                 <include>lane-ie-min.js</include>
                                 <include>lane-teletype-min.js</include>
+                                <include>lane-search-pico-min.js</include>
                                 <!--
                                 <include>lane-forms-min.js</include>
                                 <include>lane-bassett-min.js</include>

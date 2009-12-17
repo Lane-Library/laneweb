@@ -430,22 +430,6 @@
             top</a>
     </xsl:template>
 
-    <!-- make current elibraryTab activeTab -->
-    <xsl:template match="h:li[attribute::class='eLibraryTab']">
-        <xsl:copy>
-            <xsl:choose>
-                <xsl:when
-                    test="contains($path,h:a/attribute::href) or $query-string and contains(h:a/attribute::href, $query-string)">
-                    <xsl:attribute name="class">activeTab</xsl:attribute>
-                    <xsl:apply-templates select="h:a/child::node()"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates select="attribute::node () | node()"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:copy>
-    </xsl:template>
-
     <!-- href and src attributes template -->
     <xsl:template match="@href">
         <xsl:choose>
@@ -580,6 +564,19 @@
         </xsl:copy>
     </xsl:template>
 
+    <!-- add clinicalSearch class to search form and breadcrumb elements when clinical is active tab -->
+    <xsl:template match="node()[@id='search' or @id='breadcrumb']">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:if test="$active-search-tab = 'clinical'">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="concat(.,' clinicalSearch')"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
     <!-- add the ip-group to content of the meta element named WT.seg_1 for reporting to webtrends -->
     <xsl:template match="h:meta[@name='WT.seg_1']/@content">
         <xsl:attribute name="content">
