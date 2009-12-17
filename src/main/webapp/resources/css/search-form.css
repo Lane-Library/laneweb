@@ -1,0 +1,59 @@
+#search {
+    background-image:url(/././images/backgr/search-form-background.jpg);
+    background-position:bottom;
+    background-repeat:no-repeat;
+    height:84px;
+    width:720px;
+    margin-bottom: 1.5em;
+}
+#searchTips {
+    float:right;
+    color:#2D2D2D;
+    font-size:9px;
+}
+#search input {
+    border:none;
+    position:absolute;
+    left:36px;
+    top:172px;
+    width:428px;
+    border:1px white solid;
+}
+#searchTabs li {
+    float:left;
+    background-image:url(/././images/backgr/search-form-tabs-background.jpg);
+    background-position:0px -39px;
+    background-repeat:no-repeat;
+    height:27px;
+    width:94px;
+    padding:0;
+}
+#searchTabs .active, #searchTabs li:hover, #searchTabs .hover {
+    background-position:0px -70px;
+}
+#searchTabs li.active:first-child, #searchTabs li:first-child:hover, #searchTabs .hover-first-child {
+    background-position:0px 3px;
+}
+#searchTabs a {
+    border-bottom:none;
+    display:block;
+    padding:6px;
+    text-align:center;
+}
+#search fieldset {
+    clear:left;
+}
+#searchIndicator {
+	visibility:hidden;
+	padding-right:60px;
+}
+#search input#searchSubmit{
+	background-color:transparent;
+	border:none;
+	cursor:pointer;
+	position:absolute;
+	width:20px;
+	margin-left:435px;
+	text-indent:20px;
+	padding-left:20px;
+}

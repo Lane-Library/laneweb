@@ -60,6 +60,18 @@ var LANETrackingTestCase = new YAHOO.tool.TestCase({
         YAHOO.util.Assert.areEqual('www.google.com', trackingData.host);
         YAHOO.util.Assert.areEqual('/path', trackingData.path);
         YAHOO.util.Assert.areEqual('title', trackingData.title);
+    },
+    testExpandyIsTrackable: function() {
+        var expandy = document.getElementById("testTrackExpandy").children[0];
+        YAHOO.util.Assert.isTrue(LANE.tracking.isTrackable({type:'click',target:expandy.firstChild}),'event not trackable');
+    },
+    testTrackExpandy: function() {
+        var expandy = document.getElementById("testTrackExpandy").children[0];
+        var event = {type:'click',target:expandy.firstChild};
+        LANE.tracking.trackEvent(event);
+        YAHOO.util.Assert.areEqual('Expandy:' + expandy.firstChild.textContent, trackingData.title, 'actual:' + trackingData.title);
+        YAHOO.util.Assert.isFalse(trackingData !== undefined && trackingData.external);
+
     }
 });
 

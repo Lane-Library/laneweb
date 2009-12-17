@@ -61,14 +61,16 @@
             </head>
             <body>
                 <dl>
-                    <xsl:apply-templates select="$results/s:result[not(url=preceding-sibling::node()/s:url)]">
+                    <xsl:apply-templates select="$results/s:result[not(s:url=preceding-sibling::node()/s:url)]">
                         <xsl:sort select="@score" order="descending" data-type="number"/>
                         <xsl:sort select="s:sortTitle"/>
                     </xsl:apply-templates>
                 </dl>
                 <div id="search-content-counts" style="display:none;">
-                    <xsl:for-each select="/s:search/s:engine/s:resource">
-                        <span id="{@s:id}"><xsl:value-of select="s:hits"/></span>
+                    <xsl:for-each select="/s:search/s:engine/s:resource[s:hits]">
+                        <span id="{@s:id}">
+                            <a href="{s:url}"><xsl:value-of select="s:hits"/></a>
+                        </span>
                     </xsl:for-each>
                     <span id="all"><xsl:value-of select="sum(/s:search/s:engine/s:resource/s:hits)"/></span>
                 </div>
@@ -80,10 +82,10 @@
                     </div>
                 </xsl:if>
                 <xsl:if test="count($results/s:result[s:engineName='PubMed']/s:pub-title) > 0">
-                    <ul class="pubmedJournalLinks" style="display:none;">
+                    <ul id="pubmedJournalLinks">
                         <xsl:for-each select="distinct-values($results/s:result/s:pub-title)">
                             <xsl:sort select="." order="ascending" data-type="text"/>
-                            <li><a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND {.}[Journal]"><xsl:value-of select="."/></a></li>
+                            <li><a target="_blank" href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND {.}[Journal]"><xsl:value-of select="."/></a></li>
                         </xsl:for-each>
                     </ul>
                 </xsl:if>
@@ -204,6 +206,7 @@
             </description>       
             <type><xsl:value-of select="../s:description"/></type>       
             <url><xsl:value-of select="s:url"/></url> 
+            <xsl:copy-of select="s:author"/>
             <xsl:copy-of select="s:pub-title"/>
             <xsl:copy-of select="s:pub-date"/>
             <xsl:copy-of select="s:pub-volume"/>
@@ -225,16 +228,19 @@
         <dd xmlns="http://www.w3.org/1999/xhtml">
             <ul>
                 <li id="{s:id}">
-                    <a score="{@score}" title="{concat('article -- ',s:engineId,' -- ',$title)}" href="{s:url}" id="{s:uniqueId}" target="_blank">
+                    <a title="{concat('article -- ',s:engineId,' -- ',$title)}" href="{s:url}" id="{s:uniqueId}" target="_blank">
                         <xsl:copy-of select="$title"/>
                     </a>
                     
-                    <xsl:apply-templates select="s:pub-title"/>
-                    <xsl:apply-templates select="s:pub-date"/>
-                    <xsl:apply-templates select="s:pub-volume"/>
-                    <xsl:apply-templates select="s:pub-issue"/>
-                    <xsl:apply-templates select="s:page"/>
-                    <xsl:apply-templates select="s:id"/>
+                    <xsl:apply-templates select="s:author"/>
+                    <div class="pubTitle">
+                        <xsl:apply-templates select="s:pub-title"/>
+                        <xsl:apply-templates select="s:pub-date"/>
+                        <xsl:apply-templates select="s:pub-volume"/>
+                        <xsl:apply-templates select="s:pub-issue"/>
+                        <xsl:apply-templates select="s:page"/>
+                        <xsl:apply-templates select="s:id"/>
+                    </div>
                     
                     <div class="moreResults">
                         <span class="sourceLink">
@@ -297,9 +303,15 @@
             </span>
     </xsl:template>
 
+    <xsl:template match="s:author">
+        <div class="pubAuthor">
+            <xsl:value-of select="."/>
+        </div>
+    </xsl:template>
+    
     <xsl:template match="s:pub-title">
-        <xsl:value-of select="."/>
-        <xsl:text>. </xsl:text>
+            <xsl:value-of select="."/>
+            <xsl:text>. </xsl:text>
     </xsl:template>
     
     <xsl:template match="s:pub-date">
@@ -341,7 +353,7 @@
                     <xsl:with-param name="term" select="$term"/>
                     <xsl:with-param name="text" select="js:replaceFirst(string($text),$reg,'$1')"/>
                 </xsl:call-template>
-                <strong xmlns="http://www.w3.org/1999/xhtml">
+                <strong>
                     <xsl:value-of select="js:replaceFirst(string($text),$reg,'$2')"/>                
                 </strong>
                 <xsl:value-of select="js:replaceFirst(string($text),$reg,'$3')"/>

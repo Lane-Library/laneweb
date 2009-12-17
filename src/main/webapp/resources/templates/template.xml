@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>LaneConnex - Lane Medical Library &amp; Knowledge Management Center - Stanford
+            University School of Medicine</title>
+        <link rel="stylesheet" type="text/css"
+            href="http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css&amp;2.8.0r4/build/container/assets/skins/sam/container.css"/>
+        <link rel="stylesheet" type="text/css" href="/style/lane-all.css"/>
+        <link rel="search" type="application/opensearchdescription+xml" title="LaneConnex"
+            href="/extensions/laneconnex-engine.xml"/>
+        <meta name="WT.seg_1" content="{ipGroup}"/>
+    </head>
+    <body>
+        <div id="custom-doc" class="yui-t7">
+            <div id="sb-rt" class="sb-lr">
+                <div id="sb-lft" class="sb-lr">
+                    <div class="sb-tb">
+                        <div class="sb-c" id="sb-tl"><!-- --></div>
+                        <div class="sb-c" id="sb-tr"><!-- --></div>
+                    </div>
+                    <div id="sb">
+                        <div id="breadcrumb"><a href="http://med.stanford.edu/">School of
+                                Medicine</a> &#xBB; <a href="http://irt.stanford.edu/"
+                                title="IRT...">IRT</a> &#xBB; <?laneweb breadcrumb?></div>
+                        <h1>
+                            <a href="/index.html"><span>Lane</span> Medical Library <span
+                                    id="subHeading">powered by LaneConnex Technology</span></a>
+                        </h1>
+                        <?laneweb content?>
+                        <ul id="login">
+                            <li>
+                                <a href="/secure/login.html">Off Campus Login</a>
+                            </li>
+                            <li>
+                                <a href="/logout">Logout</a>
+                            </li>
+                            <li>
+                                <a href="?proxy-links=false">Guest Access</a>
+                            </li>
+                            <li>
+                                <a href="?proxy-links=true">Stanford Access</a>
+                            </li>
+                        </ul>
+                        <ul id="laneNav">
+                            <li>
+                                <a href="/biomed-resources/index.html">Biomedical Resources</a>
+                            </li>
+                            <li>
+                                <a href="/sumc-specialties/index.html">SUMC Specialties</a>
+                            </li>
+                            <li>
+                                <a href="/info-literacy/index.html">Information Literacy</a>
+                            </li>
+                            <li>
+                                <a href="/services/index.html" class="active">Library Services</a>
+                            </li>
+                            <li>
+                                <a href="/help/index.html">Help</a>
+                            </li>
+                            <li>
+                                <a href="/med-history/index.html">History Center</a>
+                            </li>
+                        </ul>
+                        <ul class="nav2">
+                            <li>
+                                <a href="/index.html" title="LaneConnex..">LaneConnex Home</a>
+                            </li>
+                            <li>
+                                <a href="/howto/index.html?id=_48" title="Hours..">Hours</a>
+                            </li>
+                            <li>
+                                <a href="/services/access/directions.html" title="Directions.."
+                                    >Directions</a>
+                            </li>
+                            <li>
+                                <a href="/services/about/index.html" title="About Us..">About
+                                    Library</a>
+                            </li>
+                            <li>
+                                <a href="/contacts/index.html" title="Contact Us..">Contact Us</a>
+                            </li>
+                            <li>
+                                <a href="/contacts/index.html?loadTab=feedback" title="Feedback.."
+                                    >Feedback</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="sb-tb" id="sb-bot">
+                        <div class="sb-c" id="sb-bl"><!-- --></div>
+                        <div class="sb-c" id="sb-br"><!-- --></div>
+                    </div>
+                </div>
+            </div>
+            <ul id="somNav2" class="nav2">
+                <li>
+                    <a href="http://stanfordmedicine.stanford.edu">&#169;
+                        <?laneweb current-year?> Stanford Medicine</a>
+                </li>
+                <li>
+                    <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
+                </li>
+                <li id="irtBrand">
+                    <a href="http://med.stanford.edu/irt/">a division of <span>IRT</span></a>
+                </li>
+            </ul>
+            <a id="som" href="http://med.stanford.edu/">School of Medicine</a>
+            <ul id="somNav">
+                <li id="stanfordMedicineBrand">
+                    <a href="http://stanfordmedicine.org/">Stanford Medicine</a>
+                </li>
+                <li>
+                    <a href="http://stanfordmedicine.org/getting_care/">Getting Care</a>
+                    <ul>
+                        <li>
+                            <a href="http://stanfordmedicine.org/getting_care/">Overview</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/getting_care/find_physician.html"
+                                >Find a Physician</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/getting_care/fccc.html">Find a
+                                Clinical Care Center</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordhospital.org/">Stanford Hospital &amp;
+                                Clinics</a>
+                        </li>
+                        <li>
+                            <a href="http://www.lpch.org/">Lucile Packard Children's Hospital</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/getting_care/emergency.html"
+                                >Emergency</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://stanfordmedicine.org/research/">Research</a>
+                    <ul>
+                        <li>
+                            <a href="http://stanfordmedicine.org/research/">Overview</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/">School of Medicine</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/research/">News &amp; Resources</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/clinicaltrials/">Clinical Trials</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/guide/">Departments, Institutes
+                                &amp; Centers</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/profiles/">Faculty Profiles</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://stanfordmedicine.org/education_training/">Education &amp;
+                        Training</a>
+                    <ul>
+                        <li>
+                            <a href="http://stanfordmedicine.org/education_training/">Overview</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/">School of Medicine</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/education_training/programs.html"
+                                >Programs</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/admissions/">Admissions</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/cme/">Continuing Medical Education</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/alumni/">Alumni</a>
+                        </li>
+                        <li>
+                            <a href="http://lane.stanford.edu/">Lane Medical Library</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://stanfordmedicine.org/community_connections/">Community</a>
+                    <ul>
+                        <li>
+                            <a href="http://stanfordmedicine.org/community_connections/"
+                                >Overview</a>
+                        </li>
+                        <li>
+                            <a href="http://healthlibrary.stanford.edu/">Stanford Health Library</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/communitymednews/">Community
+                                Newsletter</a>
+                        </li>
+                        <li>
+                            <a
+                                href="http://stanfordmedicine.org/community_connections/volunteering.html"
+                                >Volunteering</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/community_connections/pscp.html"
+                                >Public Service &amp; Community Partnerships</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/community_connections/rnbp.html"
+                                >Renewal &amp; New Building Projects</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://stanfordmedicine.org/about/">About Us</a>
+                    <ul>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/">Overview</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/news.html">News</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/careers.html">Careers</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/ways_to_give.html">Ways to
+                                Give</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/find_person.html">Find a
+                                Person</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/contact.html">Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/maps_directions.html">Maps
+                                &amp; Directions</a>
+                        </li>
+                        <li>
+                            <a href="http://deansnewsletter.stanford.edu/">The Dean's Newsletter</a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="stanfordUniversityBrand">
+                    <a href="http://www.stanford.edu/">Stanford University</a>
+                </li>
+            </ul>
+        </div>
+        <!--<div class="tooltips">
+            <span>Click here to access LaneConnex without logging in for full
+                access to free resources. Licensed content restricted.</span>
+            <span>Click here to log in for full access to all LaneConnex
+                resources.</span>
+                </div>-->
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/utilities/utilities.js&amp;2.8.0r4/build/container/container.js&amp;2.8.0r4/build/json/json.js&amp;2.8.0r4/build/history/history.js&amp;2.8.0r4/build/datasource/datasource.js&amp;2.8.0r4/build/animation/animation.js&amp;2.8.0r4/build/autocomplete/autocomplete.js"> </script>
+        <!--<script type="text/javascript" src="/javascript/lane-all.js"> </script>-->
+        <script type="text/javascript" src="/javascript/lane.js"> </script>
+        <script type="text/javascript" src="/javascript/accordionview.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-expandies.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-search.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-search-history.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-search-facets.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-search-facet-counts.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-metasearch.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-tracking.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-google.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-webtrends.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-popup.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-tooltips.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-spellcheck.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-querymap.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-findit.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-popin.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-ie.js"> </script>
+        <script type="text/javascript" src="/javascript/lane-teletype.js"> </script>
+    </body>
+</html>

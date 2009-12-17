@@ -1,0 +1,32 @@
+.narrowModule .hd {
+    color:#2D2D2D;
+    font-family:Georgia, "Times New Roman", Times, serif;
+    text-transform: uppercase;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #E6E4DB;
+    letter-spacing: 1px;
+    font-size: 11px;
+}
+.narrowModule {
+    border:1px #E6E4DB solid;
+    border-top:none;
+    border-bottom:none;
+}
+.narrowModule.narrowFirst {
+    border-left:none;
+}
+.narrowModule.narrowLast {
+    border-right:none;
+}
+.narrowModule .bd {
+    padding: 4px;
+}
+.narrowModule .bd div {
+    padding:0;
+}
+.narrowModule img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

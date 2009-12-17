@@ -8,7 +8,7 @@
     <xsl:param name="a"/>
     <xsl:param name="q"/>
     <xsl:param name="t"/>
-    <xsl:param name="mesh-term"/>
+    <xsl:param name="m"/>
     <xsl:param name="type"/>
     
 
@@ -31,18 +31,18 @@
         </xsl:if>
         <xsl:if test="$type = 'mesh-ej'">
             <xsl:text>/online/ejsubjectbrowse.html?m=</xsl:text>
-            <xsl:value-of select="$mesh-term"/>
+            <xsl:value-of select="$m"/>
         </xsl:if>
         <xsl:if test="$type = 'mesh-book'">
             <xsl:text>/online/ebsubjectbrowse.html?m=</xsl:text>
-            <xsl:value-of select="$mesh-term"/>
+            <xsl:value-of select="$m"/>
         </xsl:if>
     </xsl:variable>
 
 
     <xsl:variable name="query-term">
         <xsl:if test="$type = 'search'"><xsl:value-of select="$q"/></xsl:if>
-        <xsl:if test="$type = 'mesh'"><xsl:value-of select="$mesh-term"/></xsl:if>
+        <xsl:if test="$type = 'mesh'"><xsl:value-of select="$m"/></xsl:if>
         <xsl:if test="$type =  'ej' or $type = 'book' or $type = 'database' or $type = 'cc'  or $type = 'video' ">
             <xsl:if test="$a != ''"><xsl:value-of select="$a"/></xsl:if>
             <xsl:if test="$a = ''">All</xsl:if>

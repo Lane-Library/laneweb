@@ -16,6 +16,28 @@
                     <map:generate type="search"/>
                     <map:serialize type="xml"/>
                 </map:match>
+                <!-- search/ranked/xml returns xmlized content results -->
+                <map:match pattern="search/ranked/xml" type="wildcard">
+                    <map:generate type="search">
+                        <map:parameter name="s" value="true"/>
+                        <map:parameter name="t" value="20000"/>
+                    </map:generate>
+                    <map:select type="resource-exists">
+                        <map:when test="xsl/search-content-ranked.xsl">
+                            <map:transform type="saxon" src="xsl/search-content-ranked.xsl">
+                                <map:parameter name="q" value="${request/parameters/q}"/>
+                                <map:parameter name="l" value="10"/>
+                            </map:transform>
+                        </map:when>
+                        <map:otherwise>
+                            <map:transform type="saxon" src="context://xsl/search-content-ranked.xsl">
+                                <map:parameter name="q" value="${request/parameters/q}"/>
+                                <map:parameter name="l" value="10"/>
+                            </map:transform>
+                        </map:otherwise>
+                    </map:select>
+                    <map:serialize type="xml"/>
+                </map:match>
                 <!-- search2json.xsl converts the result xml to json -->
                 <map:match pattern="search/json" type="wildcard">
                     <map:generate type="search"/>
@@ -71,16 +93,16 @@
                 </map:match>
                 <!-- search tab results -->
                 <map:match pattern="search/tabs/json" type="wildcard">
-                    <map:aggregate element="search-tab-results">
+                    <map:aggregate element="search-facet-counts">
                         <map:part src="cocoon:/search/xml"/>
                         <map:part src="cocoon:/cache/search/templates/xml"/>
                     </map:aggregate>
                     <map:select type="resource-exists">
-                        <map:when test="xsl/search-tab-results.xsl">
-                            <map:transform type="saxon" src="xsl/search-tab-results.xsl"/>
+                        <map:when test="xsl/search-facet-counts.xsl">
+                            <map:transform type="saxon" src="xsl/search-facet-counts.xsl"/>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-tab-results.xsl"/>
+                            <map:transform type="saxon" src="context://xsl/search-facet-counts.xsl"/>
                         </map:otherwise>
                     </map:select>
                     <map:serialize type="text"/>
@@ -237,19 +259,48 @@
             <map:match pattern="cache/search/templates/xml" type="wildcard">
                 <map:aggregate element="search-templates"
                     ns="http://lane.stanford.edu/search-templates/ns">
-                    <map:part src="cocoon:/cache/search/clinical.html"/>
-                    <map:part src="cocoon:/cache/search/peds.html"/>
-                    <map:part src="cocoon:/cache/search/research.html"/>
-                    <map:part src="cocoon:/cache/search/history.html"/>
-                    <map:part src="cocoon:/cache/portals/anesthesia.html"/>
-                    <map:part src="cocoon:/cache/portals/cardiology.html"/>
-                    <map:part src="cocoon:/cache/portals/hematology.html"/>
-                    <map:part src="cocoon:/cache/portals/internal-medicine.html"/>
-                    <map:part src="cocoon:/cache/portals/lpch-cerner.html"/>
-                    <map:part src="cocoon:/cache/portals/pulmonary.html"/>
-                    <map:part src="cocoon:/cache/portals/ethics.html"/>
-                    <map:part src="cocoon:/cache/portals/ophthalmology.html"/>
-                    <map:part src="cocoon:/cache/portals/emergency.html"/>
+                    <map:part src="cocoon:/cache/search/articles/articles-all.html"/>
+                    <map:part src="cocoon:/cache/search/articles/articles-pubmed.html"/>
+                    <map:part src="cocoon:/cache/search/articles/articles-pubmed_clinicaltrial.html"/>
+                    <map:part src="cocoon:/cache/search/articles/articles-pubmed_systematicreviews.html"/>
+                    <map:part src="cocoon:/cache/search/articles/articles-uptodate.html"/>
+                    <map:part src="cocoon:/cache/search/catalog/catalog-lois.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-aafp_patients.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-acpjc.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-all.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-bmj_clinical_evidence.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-cro_clineguide.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-dare.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-emedicine.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-evidence.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-foundational.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-medlineplus_0.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-patient.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_clinicaltrial.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_cochrane_reviews.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_diagnosis_focused.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_epidemiology_focused.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_etiology_focused.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_guidelines.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_harm_focused.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_prognosis_focused.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_rct.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_recent_reviews.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_systematicreviews.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_treatment_focused.html"/>
+                    <map:part src="cocoon:/cache/search/clinical/clinical-uptodate.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-all.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-anesthesia.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-bioresearch.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-cardiology.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-clinical.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-emergency.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-hematology.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-internal-medicine.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-pediatrics.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-pharmacy.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-pulmonary.html"/>
                 </map:aggregate>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-templates.xsl">

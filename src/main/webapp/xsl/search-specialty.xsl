@@ -8,10 +8,10 @@
     version="2.0">
     
     <xsl:param name="query-string"/>
+    <xsl:param name="request-uri"/>
     <xsl:param name="source"/>
     
     <xsl:variable name="search-terms" select="/doc/s:search/s:query/text()"/>
-    <xsl:variable name="searchMode" select="/doc/h:html/h:head/h:meta[@name='LW.searchMode']/@content"/>
     
     <xsl:template match="*">
         <xsl:copy>
@@ -31,10 +31,11 @@
     
     <xsl:template match="h:body">
         <xsl:copy>
-            <xsl:if test="/doc/s:search/@s:status != 'successful'">
+            <!-- IE browsers cannot import NOSCRIPT elements (LANE.core.importNode) so only display on non-ajax requests -->
+            <xsl:if test="not(contains($request-uri,'/plain/')) and /doc/s:search/@s:status != 'successful'">
                 <noscript>
                     <h2>
-                        Search still running ... <a href="search.html?javascript=false&amp;w=5000&amp;source={$source}&amp;q={$search-terms}">Click to see more hit counts</a>
+                        Search still running ... <a href="search.html?w=2500&amp;source={$source}&amp;q={$search-terms}">Click to see more hit counts</a>
                     </h2>
                 </noscript>
             </xsl:if>
@@ -52,44 +53,41 @@
         </xsl:attribute>
     </xsl:template>
     
-    <xsl:template match="node()[attribute::class = 'metasearch']">
+    <xsl:template match="node()[contains(attribute::class,'metasearch')]">
         <xsl:variable name="id" select="@id"/>
+        <xsl:variable name="status">
+            <xsl:value-of select="/doc/s:search/s:engine/s:resource[@s:id = $id]/@s:status"/>
+        </xsl:variable>
+        <xsl:variable name="success">
+            <xsl:if test="$status = 'successful'">true</xsl:if>
+        </xsl:variable>
+        <xsl:variable name="failure">
+            <xsl:if test="$status = 'failed' or $status = 'canceled'">true</xsl:if>
+        </xsl:variable>
+        
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:attribute name="href">
                 <xsl:value-of select="/doc/s:search/s:engine/s:resource[@s:id = $id]/s:url"/>
             </xsl:attribute>
+            <xsl:if test="$success = 'true' or $failure = 'true'">
+                <xsl:attribute name="class">
+                    <xsl:value-of select="replace(@class,'metasearch ','')"/>
+                </xsl:attribute>
+            </xsl:if>
             <xsl:apply-templates select="node()|child::node()"/>
         </xsl:copy>
-        <xsl:if test="contains($query-string,'javascript=false') and /doc/s:search/s:engine/s:resource[@s:id = $id]/@s:status = 'successful'">
-            <span>: <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id = $id]/s:hits, '###,##0')"/></span>
-        </xsl:if>
-    </xsl:template>
-
-    <!-- hide searchCategory headings in original style search pages -->
-    <xsl:template match="node()[attribute::class = 'searchCategory']/h:h3">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:if test="$searchMode = 'original' and not(contains($query-string,'javascript=false'))">
-                <xsl:attribute name="style">
-                    <xsl:value-of select="'display:none;'"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="child::node()"/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <!-- assuming every metasearch element is nested in a parent element that should be hidden by default -->
-    <xsl:template match="node()[child::node()[attribute::class = 'metasearch']]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:if test="$searchMode = 'original' and not(contains($query-string,'javascript=false'))">
-                <xsl:attribute name="style">
-                    <xsl:value-of select="'display:none;'"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="child::node()"/>
-        </xsl:copy>
+        <span class="searchCount">
+            <xsl:text> </xsl:text>
+            <xsl:choose>
+                <xsl:when test="$success = 'true'">
+                    <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id = $id]/s:hits, '###,##0')"/>
+                </xsl:when>
+                <xsl:when test="$failure = 'true'">
+                    <xsl:text> ? </xsl:text>
+                </xsl:when>
+            </xsl:choose>
+        </span>
     </xsl:template>
     
     <xsl:template match="attribute::node()">

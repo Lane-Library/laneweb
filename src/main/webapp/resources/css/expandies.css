@@ -1,0 +1,209 @@
+.hidden {
+    visibility: hidden;
+    position: absolute;
+}
+.almosthidden {
+    position: absolute;
+    left: -9999px;
+    z-index: -10;
+}
+.yui-accordion-toggle {
+    cursor: pointer;
+}
+.yui-accordion-content {
+    overflow:hidden;
+    _zoom: 1;
+	margin-left: 1em;
+	margin-bottom: .5em;
+	margin-top: .5em;
+}
+/* styles to keep - they correspond to CY YUI grid */
+.expandy li {
+padding:0;
+background-image:none;
+}
+.contentModule .bd .expandy h6  {
+    background-image:url(/././graphics/backgr/exp-backrg-green-plus.gif);
+    background-position:0px 0px;
+    background-repeat:no-repeat;
+    color:#333333;
+    font-weight:bold;
+    font-size: 1.2em;
+    padding:.3em 2em;
+    font-family:Georgia, "Times New Roman", Times, serif;
+}
+.contentModule .bd .expandy h6.active {
+    color:#920000;
+    background-image:url(/././graphics/backgr/exp-backrg-green-minus.gif);
+}
+.expandy ul li {
+/*    background-color:#fff;
+    background-repeat:repeat-x;
+    margin-top: .5em;
+    color:#3B3B3B;*/
+	font-size: 11px;
+}
+
+ .contentModule .bd .expandy ul li  {
+background-image:none;
+     color:#333333;
+    font-size: 1em;
+    list-style:none;
+	margin: 0 0 0 -12px;
+}
+.expandy table ul li {
+    margin: 0;
+    color:#333333;
+    font-size: .9em;
+    list-style:inside;
+}
+
+/* styles for the simpleModule that expands. The rest of the styles are in the simpleModule.css file */
+  .simpleModuleExpandy .bd .expandy li h6,  .simpleModuleExpandyleft .bd .expandy li h6 {
+  background-color:#E3E5D7;
+  background-image:url(/././graphics/buttons/accord-plus-open.gif);
+  background-position:6px 6px;
+  background-repeat:no-repeat;
+  border-bottom:1px solid #fff;/*#CCCCB4;*/
+  color:#3B3B3B;
+  font-weight:bold;
+  font-size:12px;
+  padding:.3em 2em;
+  }
+ .simpleModuleExpandyleft .bd .expandy .noplus {
+    background-color:#E3E5D7;
+	background-image:none;
+  }
+
+  .simpleModule .bd .expandy li h6  {
+  background-color:#E3E5D7;
+  background-image:url(/././graphics/buttons/accord-plus-open.gif);
+  background-position:6px 6px;
+  background-repeat:no-repeat;
+  border-bottom:1px solid #E6E4DB;/*#CCCCB4;*/
+  color:#3B3B3B;
+  font-weight:bold;
+  font-size:12px;
+  padding:.3em 2em;
+  }
+  
+ 
+  
+  
+  
+ .simpleModuleExpandy .bd .expandy li h6.active,  .simpleModuleExpandyleft .bd .expandy li h6.active {
+  background-image:url(/././graphics/buttons/accord-minus-close.gif);
+ }
+ 
+ .simpleModuleExpandy .expandy ul, .simpleModuleExpandy .expandy p, .simpleModuleExpandyleft .expandy ul li, .simpleModuleExpandyleft .expandy p {
+ /*margin: 0.5em 1em 1em 2em;*/
+padding-left: 1em;
+}
+ 
+
+/* styles for the contentModule expandy on on the index page - margins need to be zeroed */
+.contentModuleIndex .bd .expandy h6  {
+    background-image:url(/././graphics/backgr/exp-back-home-plus.jpg);
+    background-position:0px 0px;
+    background-repeat:no-repeat;
+    color:#333333;
+    font-weight:bold;
+    font-size: 1.2em;
+    padding:.3em 2em;
+    font-family:Georgia, "Times New Roman", Times, serif;
+}
+
+
+/*
+  styles for the main column expandies start here - NOTE: there will be two kinds of styles!!!
+  .contentModule .bd .expandy h6 {
+  background-image:url(/././graphics/buttons/accord-plus-open.gif);
+  background-position:10px 10px;
+  background-repeat:no-repeat;
+  color:#333333;
+  font-weight:bold;
+  font-size: 1.3em;
+  padding:.3em 2em;
+  }
+  #main-column-simple .expandy h6 {
+  background-image:url(/././graphics/backgr/exp-backrg-green-plus.gif);
+  background-position:0px 0px;
+  background-repeat:no-repeat;
+  color:#333333;
+  font-weight:bold;
+  font-size: 1.2em;
+  padding:.3em 2em;
+  font-family:Georgia, "Times New Roman", Times, serif;
+/*
+  text-decoration:underline;
+  }
+  #main-column-simple .expandy h6.active {
+  background-image:url(/././graphics/backgr/exp-backrg-green-minus.gif);
+  color: #920000;
+  }
+ */
+/*
+ */
+/*
+  save this for the button-like menus - see the workshops page
+  #main-column .expandy h6 {
+  background-color:#E3E5D7;
+  background-image:url(/././graphics/buttons/accord-plus-open-redpan.gif);
+  background-position:0px;
+  background-repeat:no-repeat;
+  border-bottom:1px solid #CCCCB4;
+  color:#333333;
+  font-weight:bold;
+  font-family:Georgia, "Times New Roman", Times, serif;
+  font-size: 1.2em;
+  height: 31px;
+  padding-left:25px;
+  }
+  #main-column  .expandy h6.active {
+  background-image:url(/././graphics/buttons/accord-minus-close-redpan.gif);
+  }
+ */
+/*
+  styles for the right column expandies start here
+  #right-column .none-expandy li {
+  background-image:url(/././graphics/buttons/menu-arrow.gif);
+  background-position:10px 10px;
+  background-repeat:no-repeat;
+  color:#333333;
+  font-weight:bold;
+  font-size:13px;
+  padding:.3em 2em .5em;
+  }
+  #right-column .none-expandy {
+  padding-top:1em;
+  padding-bottom:1em;
+  }
+  #right-column .none-expandy p {
+  padding-left:1em;
+  padding-bottom:1em;
+  }
+  #right-column .accord {
+  margin-top: 20px;
+  }
+  #right-column  .expandy, #right-column  .none-expandy {
+  border:1px solid #CCCCB4;
+  margin-top:-5px;
+  }
+  .accord h5 {    /* title that appears on the top of right column, below an image. Includes styles for the background and fonts.
+  background-image:url(/././images/backgr/yellow-bar-top.gif);
+  background-repeat:no-repeat;
+  color: #fff;
+  height: 27px;
+  text-align: center;
+  padding-top:.3em;
+  font-weight:bold;
+  font-size:16px;;
+  }
+  #right-column .expandy h6.active, #main-column .expandy h6.active {
+  background-image:url(/././graphics/buttons/accord-minus-close.gif);
+  }
+  .yui-accordion-content li {
+  padding:.3em;
+  padding-left:0;
+  }
+/* styles for the right column expandies end here */

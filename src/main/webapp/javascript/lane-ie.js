@@ -1,6 +1,73 @@
 (function(){
-    if (YAHOO.env.ua.ie) {
-        YAHOO.util.Event.addListener(this, 'load', function(){
+    if (YAHOO.env.ua.ie && YAHOO.env.ua.ie == 6) {
+       //instead of :first-child selector remove background image:
+       YAHOO.util.Event.onAvailable('stanfordMedicineBrand', function() {
+            this.style.backgroundImage = 'none';
+        });
+        //set up hover class on somNav menu:
+        YAHOO.util.Event.onContentReady('somNav', function() {
+            var i, uls = this.getElementsByTagName('UL');
+            for (i = 0; i < uls.length; i++) {
+                uls[i].parentNode.activate = function() {
+                    YAHOO.util.Dom.addClass(this, 'hover');
+                };
+                uls[i].parentNode.deactivate = function() {
+                     YAHOO.util.Dom.removeClass(this, 'hover');
+                };
+            }
+        });
+        //set up hover class on laneNav menu:
+        YAHOO.util.Event.onContentReady('laneNav', function() {
+            var i, uls = this.getElementsByTagName('DIV');
+            for (i = 0; i < uls.length; i++) {
+                uls[i].parentNode.activate = function() {
+                    YAHOO.util.Dom.addClass(this, 'hover');
+                };
+                uls[i].parentNode.deactivate = function() {
+                     YAHOO.util.Dom.removeClass(this, 'hover');
+                };
+            }
+        });
+        //instead of :first-child selector remove left border on .nav2 menus:
+        YAHOO.util.Event.onDOMReady(function() {
+            var i, uls = YAHOO.util.Dom.getElementsByClassName('nav2', 'UL');
+            for (i = 0; i < uls.length; i++) {
+                uls[i].getElementsByTagName('LI')[0].style.border = 'none';
+            }
+        });
+        YAHOO.util.Event.onContentReady('searchTabs', function() {
+            var i, lis = this.getElementsByTagName('LI');
+            for (i = 0; i < lis.length; i++) {
+                if (i === 0 ) {
+                    lis[i].activate = function() {
+                        YAHOO.util.Dom.addClass(this, 'hover-first-child');
+                    };
+                    lis[i].deactivate = function() {
+                         YAHOO.util.Dom.removeClass(this, 'hover-first-child');
+                    };
+                } else {
+                    lis[i].activate = function() {
+                        YAHOO.util.Dom.addClass(this, 'hover');
+                    };
+                    lis[i].deactivate = function() {
+                        YAHOO.util.Dom.removeClass(this, 'hover');
+                    };
+                }
+            }
+        });
+        //set up hover class on liaisonDepartments menu:
+        YAHOO.util.Event.onAvailable('liaisonDepartments', function() {
+            this.activate = function() {
+                YAHOO.util.Dom.addClass(this, 'hover');
+            };
+            this.deactivate = function() {
+                 YAHOO.util.Dom.removeClass(this, 'hover');
+            };
+        });
+    }
+})();
+        /*
+YAHOO.util.Event.addListener(this, 'load', function(){
             var ie = YAHOO.env.ua.ie,
                 lists, i,
                 d = document,
@@ -63,7 +130,6 @@
                             this.className = '';
                         };
                     }
-                    //TODO: use onavailable for this?
                     lists = ['ft', 'gft'];
                     for (i = 0; i < lists.length; i++) {
                         list = d.getElementById(lists[i]);
@@ -91,5 +157,4 @@
                         }
                     }
             });
-        }
-})();
+*/

@@ -1,0 +1,41 @@
+.popups {
+    display:none;
+	
+}
+.yui-panel .container-close {
+    position:absolute;
+    right:4px;
+    top:5px;
+    height:12px;
+    width:12px;
+}
+.yui-panel .hd {
+    border:1px white solid;
+}
+.yui-panel {
+    background-color:#fff;
+}
+.yui-panel .hd {
+    background-color:#cdcfbe;
+   color:#820000;
+   font-family:Georgia, "Times New Roman", Times, serif;
+   font-size: 1.3em;
+    padding: 4px;
+}
+/*TODO: background image for the .container-close element */
+.yui-panel .container-close {
+    background-image: none;
+    background-repeat:no-repeat;
+}
+.yui-panel {
+    text-align:left;
+	border: 4px solid #cdcfbe;
+}
+.yui-panel .hd {
+    font-weight:bold;
+}
+ .yui-panel .bd {
+    padding: 4px;
+    
+    font-size:90%;
+}

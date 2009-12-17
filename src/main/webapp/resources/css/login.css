@@ -1,0 +1,10 @@
+#login {
+    position:absolute;
+    top:0.8em;
+    right:1em;
+}
+#login li {
+   /* visibility:hidden*/
+   font-size: 9px;
+
+}

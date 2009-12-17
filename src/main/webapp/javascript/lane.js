@@ -147,44 +147,18 @@ LANE.core = LANE.core || function() {
     };
 }();
 
+//here is an ugly js hack to get the narrowModule columns on the /index.html page the same height:
 
-
-
-
-/*
-
-window.onerror = handleMessage;
-        
-
-function handleMessage( message, url, line)
-{
-    var parameter = "userAgent="+navigator.userAgent+"&message=".concat(message).concat("&url=").concat(url).concat("&line=").concat(line);
-    if(getMetaContent("LW.debug") == "y")
-    {
-        if (url != null)
-            message = message.concat("\nurl --> ").concat(url);
-        if (line != null)
-            message = message.concat("\nline --> ").concat(line);
-        YAHOO.log(message, "error");
-    }
-    else
-        YAHOO.util.Connect.asyncRequest('GET', '/././javascriptLogger?'+parameter);
-        return true;
-}
-
-
-
-
-function handleFailure(o){
-    handleMessage( "Status: "+o.status+ "statusText: "+o.statusText,  o.argument.file, o.argument.line);
-}
-
-
-function log(message)
-{    
-    handleMessage(message);
-}
-
-
-
- */
+(function(){
+    YAHOO.util.Event.addListener(window, 'load', function(){
+        var region, maxHeight = 0, height, i, narrowModules = YAHOO.util.Dom.getElementsByClassName('narrowModule');
+        for (i = 0; i < narrowModules.length; i++) {
+            region = YAHOO.util.Dom.getRegion(narrowModules[i]);
+            height = region.bottom - region.top;
+            maxHeight = height > maxHeight ? height : maxHeight;
+        }
+        for (i = 0; i < narrowModules.length; i++) {
+            YAHOO.util.Dom.setStyle(narrowModules[i], 'height', maxHeight + 'px');
+        }
+    });
+})();

@@ -1,0 +1,90 @@
+/*
+   This is the shaded border stuff.
+  The markup is like so:
+  <div id="sb-rt" class="sb-lr">
+  <div id="sb-lft" class="sb-lr">
+  <div class="sb-tb">
+  <div class="sb-c" id="sb-tl"><!-- --></div>
+  <div class="sb-c" id="sb-tr"><!-- --></div>
+  </div>
+  <div id="sb">
+  <!-- content here -->
+  </div>
+  <div class="sb-tb" id="sb-bot">
+  <div class="sb-c" id="sb-bl"><!-- --></div>
+  <div class="sb-c" id="sb-br"><!-- --></div>
+  </div>
+  </div>
+  </div>
+ */
+/*
+   .sb-lr are divs that have 6px of padding for the shading image on the left
+  and right respectively.
+  They are nested inside each other and contain all of the other elements.
+ */
+.sb-lr {
+    background-image:url(/././images/lr.gif);
+    background-repeat:repeat-y;
+}
+/* IE6 needs the position:relative for some reason */
+#sb-lft {
+    padding-left:6px;
+    position:relative;
+}
+#sb-rt {
+    padding-right:6px;
+    background-position:right
+}
+/*
+   sb is nested inside .sb-lr with a white background to cover the part of the
+  side shading that needs to be hidden.
+ */
+#sb {
+    background-color:white;
+    position:relative;
+}
+/*
+   .sb-tb are the divs that hold the top and bottom shading image.
+  They need position:relative so corners can be positioned inside them.
+  One comes before and one after the content to be
+  surrounded with a shaded border. They need a z-index to be on top 
+ */
+.sb-tb {
+    position:relative;
+    height:6px;
+    background-image:url(/././images/sprite-vert.gif);
+    background-position:0 -120px;
+    background-repeat:repeat-x;
+    z-index:1;
+}
+/* the bottom just has a different background-position */
+#sb-bot {
+    background-position:0 -126px
+}
+/* .sbc are the corners*/
+.sb-c {
+    height:12px;
+    width:12px;
+    position:absolute;
+    background-image:url(/././images/sprite.gif);
+}
+#sb-tl {
+    top:-1px;
+    left:-7px;
+    background-position:0 -700px;
+}
+#sb-tr {
+    top:-1px;
+    right:-7px;
+    background-position:-12px -700px;
+}
+#sb-bl {
+    bottom:-1px;
+    left:-7px;
+    background-position:0 -712px
+}
+#sb-br {
+    background-position:-12px -712px;
+    bottom:-1px;
+    right:-7px
+}

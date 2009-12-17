@@ -1,0 +1,42 @@
+li, .expandy li li {
+    list-style: none;
+    background-image:url(/././images/sprite.gif);
+    background-position:0 -1194px;
+    background-repeat:no-repeat;
+}
+li, .expandy li li {
+    padding:0.2em 0.25em 0.2em 1em;
+	
+	color: #333;
+
+    }
+ol li {
+    list-style-type:decimal;
+    list-style-position:inside;
+}
+
+
+.contentModule .bd ul li {
+	    background-position:0 -1192px;
+}
+
+
+.contentModule .bd #searchResults ul li{
+	padding-bottom: 1em;
+}
+
+
+.contentModule .bd #searchResults {
+	margin-top: 1em;
+}
+
+#liaisonDepartments li {
+	border: 1px solid black;
+	margin: 0;
+	padding: 0;
+	
+}
+
+.sectionMenu .bd #searchFacets ul li{
+	border: 1px solid black;
+}

@@ -1,0 +1,42 @@
+
+.nav2 {
+    font-size:0.9em;
+}
+.nav2 li {
+    padding:0 14px 0 14px;
+    border-left:1px dotted #C1C1C1;
+}
+.nav2 li:first-child {
+    border-left:none;
+}
+.nav2 {
+    padding:5px 0 5px 0;
+    border-top:1px solid #C1C1C1;
+}
+#somNav2 {
+    border-top:none;
+    padding:0;
+}
+#somNav2 li {
+    border-color:#818181;
+}
+#irtBrand span {
+    background-image:url(/././images/sprite.gif);
+    background-position:-54px -800px;
+    display:inline-block;
+    height:14px;
+    text-indent:-9000px;
+    width:17px;
+}
+.nav2 {
+    padding:5px 0;
+    font-size:0.9em;
+}
+.nav2 li {
+    display:inline;
+background-image:none;
+}
+.nav2 {
+    clear:both;
+    text-align:center
+}

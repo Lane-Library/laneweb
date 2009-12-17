@@ -1,94 +1,141 @@
 (function() {
+	
+	//TODO: move to lane-is.js or lane.js
+	if(!Array.indexOf){
+	    Array.prototype.indexOf = function(obj){
+	        for(var i=0; i<this.length; i++){
+	            if(this[i]==obj){
+	                return i;
+	            }
+	        }
+	        return -1;
+	    }
+	}
+	
     LANE.namespace('search.metasearch');
-    var startTime = new Date().getTime(),
-        url,
-        mergedMode = true,
-        // filter out multiple ovid, mdc and cro requests b/c of IE6's 2048 character limit on requests
-        // this depends on search app returning all resources for engine when one resource requested
-        filterSearchUrl = function(el){
-            var uberEngines = ['cro_','mdc_','ovid-'], i, add = true;
-            for ( i = 0; i < uberEngines.length; i++){
-                if( el.id.match(uberEngines[i]) && url.match(uberEngines[i]) ){
-                    add = false;
-                }
-            }
-            if ( add ){
-                url+='&r='+el.id;
+    LANE.search.metasearch = function(){
+        var searchElms,   // the elements in need of hit counts
+        searchables = [], // all engines to search
+        searchUrl,		  // url to poll search app
+        searchRequests = [], // search timerIds so we can abort sleeping getResultCounts
+        uberEngines = ['cro_','mdc_','ovid-'], // engines with multiple resources
+        i, y,
+        startTime;
+        return {
+            initialize: function(){
+        		searchElms = YAHOO.util.Dom.getElementsBy(
+        			function(el){
+        					return el.className.match("metasearch");
+        				}
+        		);
+        		for(i = 0; i < searchElms.length; i++){
+        			LANE.search.metasearch.addSearchable(searchElms[i])
+        		}
+        		LANE.search.metasearch.abortPendingRequests();
+        		startTime = new Date().getTime();
+            },
+            getStartTime : function(){
+            	return startTime;
+            },
+            getSearchElms : function(){
+            	return searchElms;
+            },
+            getSearchables : function(){
+            	return searchables;
+            },
+            addSearchable : function(el){
+            	if(searchables.indexOf(el.id) == -1){
+            		searchables.push(el.id);
+            	}
+            },
+            getSearchRequests : function(){
+            	return searchRequests;
+            },
+            addSearchRequest : function(id){
+            	searchRequests.push(id);
+            },
+            abortPendingRequests : function(){
+            	searchRequests = LANE.search.metasearch.getSearchRequests();
+            	for (var z = 0; z < searchRequests.length; z++){
+            		clearTimeout(searchRequests[z]);
+            		searchRequests.splice(z,1);
+            	}
+            },
+            getSearchUrl : function(){
+            	searchUrl = '/././apps/search/proxy/json?q=' + LANE.search.getEncodedSearchString();
+            	for ( y = 0; y < searchables.length; y++){
+            		var add = true;
+        			for (i = 0; i < uberEngines.length; i++){
+            			// don't add if: 
+            			// - engine is uber and uber already on url
+            			// - engine already on url
+            			if( searchables[y].match(uberEngines[i]) && searchUrl.match(uberEngines[i]) ) {
+            				add = false;
+            			}
+            			else if (searchUrl.match("r="+searchables[y]+"(&|$)")){
+            				add = false;
+            			}
+            		}
+        			if (add){
+        				searchUrl+='&r='+searchables[y];
+        			}
+            	}
+                searchUrl += '&rd=' + Math.random();
+            	return searchUrl;
             }
         };
-
-    YAHOO.util.Event.onDOMReady(function(){
-        // check for presence of search term and metasearch classNames
-        if( LANE.search.getEncodedSearchString() && YAHOO.util.Dom.getElementsByClassName('metasearch','a').length > 0 ){
-            
-            LANE.search.metasearch.getResultCounts = function() {
-                url = '/././apps/search/proxy/json?q=' + LANE.search.getEncodedSearchString();
-                var metasearchElements = YAHOO.util.Dom.getElementsByClassName('metasearch','a',document,filterSearchUrl);
-                url += '&rd=' + Math.random();
-                
-                // determine if this is a merged page ... matters for result processing later on
-                if( LANE.search.getSearchSource().match(/^(clinical|peds|research|pharmacy|history|test|textbooks)$/) !== null ){
-                    mergedMode = false;
-                }
-                
-                YAHOO.util.Connect.asyncRequest('GET',url, {
-                    success: function(o){
-                        var results = YAHOO.lang.JSON.parse(o.responseText),
-                            i, needMore = false, result, resultSpan, sleepingTime, remainingTime;
+    }();
     
-                        for (i = 0; i < metasearchElements.length; i++) {
-                            result = results.resources[metasearchElements[i].id];
-                            if( result !== undefined ){
-                                if (!result.status) {
-                                    needMore = true;
-                                }
-                                if ( result.url && 
-                                        (mergedMode && result.status == 'successful') ||
-                                        (!mergedMode && result.status && result.status != 'running') ) {
-                                    result.name = (metasearchElements[i].innerHTML) ? metasearchElements[i].innerHTML : '';
-                                    metasearchElements[i].setAttribute('href', result.url);
-                                    // fix for IE7 (@ in text of element will cause element text to be replaced by href value
-                                    // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
-                                    if (YAHOO.env.ua.ie) {
-                                        metasearchElements[i].innerHTML = result.name;
-                                    }
-                                    
-                                    metasearchElements[i].setAttribute('target', '_blank');
-                                    YAHOO.util.Dom.removeClass(metasearchElements[i],'metasearch');
-                                    resultSpan = document.createElement('span');
-                                    // force UpToDate count to 50+ when 150 returned (FB#25141)
-                                    if(metasearchElements[i].id == 'uptodate' && result.hits == 150){
-                                        result.hits = '50+';
-                                    }
-                                    resultSpan.appendChild(document.createTextNode(': ' + result.hits + ' '));
-                                    metasearchElements[i].parentNode.appendChild(resultSpan);
-        
-                                    if ( mergedMode ){
-                                        if (result.status == 'failed' || result.status == 'canceled') {
-                                            YAHOO.util.Dom.removeClass(metasearchElements[i],'metasearch');
-                                        }
-                                    }                            
-                                    else { // original mode (clinical, bioresearch, etc.)
-                                        if (parseInt(result.hits, 10) > 0 || result.status != 'successful') {
-                                            //TODO: check for these elements first?
-                                            YAHOO.util.Dom.getAncestorByClassName(metasearchElements[i].id, 'searchCategory').getElementsByTagName('h3')[0].style.display = 'block';
-                                            YAHOO.util.Dom.getAncestorByTagName(metasearchElements[i].id, 'li').style.display = 'block';
-                                        } else if (parseInt(result.hits, 10) === 0) {
-                                            // add zeroHit class to metasearchElement for toggling
-                                            YAHOO.util.Dom.addClass(YAHOO.util.Dom.getAncestorByTagName(metasearchElements[i].id, 'li'),'zeroHit');
-                                        }
-                                    }
-                                }
+    YAHOO.util.Event.onDOMReady(function(){
+    	LANE.search.metasearch.initialize();
+    	searchElms = LANE.search.metasearch.getSearchElms();
+    	
+        // check for presence of search term and metasearch classNames
+        if( LANE.search.getEncodedSearchString() && searchElms.length > 0 ){
+        	            
+            LANE.search.metasearch.getResultCounts = function() {
+            	searchables = LANE.search.metasearch.getSearchables();
+                
+                YAHOO.util.Connect.asyncRequest('GET',LANE.search.metasearch.getSearchUrl(), {
+                    success: function(o){
+                        var results = YAHOO.lang.JSON.parse(o.responseText).resources,
+                            i, needMore = false, result, updateable, resultSpan, sleepingTime, remainingTime;
+                        
+                        for (i = 0; i < searchables.length; i++) {
+                        	updateable = document.getElementById(searchables[i]);
+                        	result = results[searchables[i]];
+                        	if(result === undefined || !result.status){
+                        		needMore = true;
+                        		continue;
+                        	}
+                            else if(updateable && result.status == 'successful'){
+                            	// process display of each updateable node
+                            	// once all processed, remove id from searchables
+                            	resultSpan = YAHOO.util.Dom.getElementsByClassName('searchCount','span',updateable.parentNode)[0];
+                    			resultSpan.innerHTML = '&#160;' + YAHOO.util.Number.format(result.hits,{thousandsSeparator:","});
+                    			if (!updateable.href){
+                    				updateable.setAttribute('href', result.url);
+                    				updateable.setAttribute('target', '_blank');
+                    			}
+                            	YAHOO.util.Dom.removeClass(updateable,'metasearch');
+                            	searchables.splice(i, 1);
+                            }
+                            else if (updateable && (result.status == 'failed' || result.status == 'canceled')) {
+                            	resultSpan = YAHOO.util.Dom.getElementsByClassName('searchCount','span',updateable.parentNode)[0];
+                            	resultSpan.innerHTML = ' ? ';
+                            	YAHOO.util.Dom.removeClass(updateable,'metasearch');
+                            	searchables.splice(i, 1);
                             }
                         }
-                        
                         sleepingTime = 2000;
-                        remainingTime = (new Date().getTime()) - startTime;
-                        if ( needMore && (remainingTime <= 60 * 1000)) { // at more than 20 seconds the sleeping time becomes 10 seconds
+                        remainingTime = (new Date().getTime()) - LANE.search.metasearch.getStartTime();
+                        if ( needMore 
+                        		&& searchables.length > 0 
+                        		&& (remainingTime <= 60 * 1000) ) { // at more than 20 seconds the sleeping time becomes 10 seconds
                             if (remainingTime > 20 * 1000) {
                                 sleepingTime = 10000;
                             }
-                            setTimeout(LANE.search.metasearch.getResultCounts,sleepingTime);
+                            LANE.search.metasearch.addSearchRequest(setTimeout(LANE.search.metasearch.getResultCounts,sleepingTime));
                         }
                         else{
                             LANE.search.stopSearch();
@@ -97,40 +144,10 @@
                 });// end async request
                 
             };// end getResultCounts
-            
-            // add handler for zeroHit toggle if id=toggleZeros present
-            YAHOO.util.Event.onAvailable('toggleZeros',function() {
-                YAHOO.util.Event.addListener('toggleZeros', 'click', function(event) {
-                    var toggleEl = document.getElementById('toggleZeros'), 
-                        zeroResources = YAHOO.util.Dom.getElementsByClassName('zeroHit'), 
-                        searchCats = YAHOO.util.Dom.getElementsByClassName('searchCategory'),
-                        display, i, y;
-                    if ( toggleEl.innerHTML.match(/Show/) ){
-                        display = "block";
-                        toggleEl.innerHTML = toggleEl.innerHTML.replace("Show","Hide");
-                    }
-                    else {
-                        display = "none";
-                        toggleEl.innerHTML = toggleEl.innerHTML.replace("Hide","Show");
-                    }
-                    for (i = 0 ; i < zeroResources.length; i++) {
-                        YAHOO.util.Dom.setStyle(zeroResources[i], 'display', display);
-                    }
-                    // toggle h3 header as well if all children in searchCat are zeroHit
-                    for (y = 0; y < searchCats.length; y++) {
-                        if (YAHOO.util.Dom.getElementsByClassName('zeroHit', '', searchCats[y]).length == searchCats[y].getElementsByTagName('li').length) {
-                            YAHOO.util.Dom.setStyle(YAHOO.util.Dom.getFirstChild(searchCats[y]), 'display', display);
-                        }
-                    }
-                    YAHOO.util.Event.preventDefault(event);
-                });
-            });
-            
             // kick off initial metasearch request
             LANE.search.metasearch.getResultCounts();
-            //LANE.search.startSearch(); // not available at onDOMReady
-            document.getElementById('searchIndicator').style.visibility = 'visible';
+            LANE.search.startSearch();
         }
             
-    });
+    });//end addListener
 })();

@@ -212,7 +212,40 @@
                         <map:generate type="file" src="context://resources/templates/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="context://resources/templates/irt3.xml"/>
+                        <map:generate type="file" src="context://resources/templates/template.xml"/>
+                    </map:otherwise>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match type="wildcard" pattern="services/liaisons.html">
+                <map:select type="resource-exists">
+                    <map:when test="content/services/liaisons.html">
+                        <map:generate type="html" src="content/services/liaisons.html"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:generate type="html"
+                            src="${jndi/live-base}/content/services/liaisons.html"/>
+                    </map:otherwise>
+                </map:select>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/liaisons.xsl">
+                        <map:transform type="saxon" src="xsl/liaisons.xsl">
+                            <map:parameter name="liaison" value="${request/parameters/liaison}"/>
+                        </map:transform>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="saxon" src="context://xsl/liaisons.xsl">
+                            <map:parameter name="liaison" value="${request/parameters/liaison}"/>
+                        </map:transform>
+                    </map:otherwise>
+                </map:select>
+                <map:transform type="xinclude"/>
+                <map:select type="resource-exists">
+                    <map:when test="xsl/rss2html.xsl">
+                        <map:transform type="saxon" src="xsl/rss2html.xsl"/>
+                    </map:when>
+                    <map:otherwise>
+                        <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

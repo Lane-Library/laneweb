@@ -13,7 +13,7 @@ if (LANE.search.getEncodedSearchString()) {
                     //s.style.display = 'inline';
                     LANE.search.popin.fire(s);
                     a = s.getElementsByTagName('a')[0];
-                    a.href = '/search.html?source=' + LANE.search.getSearchSource() + '&q=' + encodeURIComponent(sc.suggestion);
+                    a.href = document.location.href.replace('q='+LANE.search.getEncodedSearchString(),'q='+encodeURIComponent(sc.suggestion));
                     a.innerHTML = sc.suggestion;
                 }
             //failure:don't do anything

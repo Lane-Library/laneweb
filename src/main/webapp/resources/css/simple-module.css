@@ -1,0 +1,56 @@
+.simpleModule .hd, .simpleModuleExpandy .hd, .simpleModuleExpandyleft .hd {
+    background-image:url(/././images/backgr/simpleModuleHd.gif);
+    background-repeat:repeat-x;
+    border:1px solid #E6E4DB;/*#C0BFA4;*/
+    color:white;
+    background-color:#b1a68c;
+    text-align:center;
+    padding:3px;
+    font-family:Arial;
+    font-size:13px;
+    font-weight:normal;
+    -moz-border-radius-topleft:5px;
+    -moz-border-radius-topright:5px;
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-top-right-radius:5px;
+}
+.simpleModule .bd, .simpleModuleExpandyleft .bd {
+    border: 1px solid #E6E4DB;/*#CCCCB4;*/
+    padding:0.5em 1em;
+}
+.simpleModuleExpandy .bd, .simpleModuleExpandyleft .bd {
+    border: 1px solid #E6E4DB;/*#CCCCB4;*/
+    padding:0;
+}
+.simpleModule li {
+    font-size:11px;
+}
+.simpleModule {
+    margin:2em 1em 0 0;
+}
+.simpleModuleExpandy {
+    margin:2em 1em 0 0;
+}
+.simpleModule img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.simpleModuleExpandyleft {
+	 margin:0;
+}
+.simpleModuleExpandyleft h4{
+	/*margin: 1em auto 1em 1em;*/
+	background-color: #c9cbbb; /*#B3B393;*/
+	padding: .5em;
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-left: auto;
+    margin-right: auto;
+
+}
+
+.top-right-image {
+margin-top: 3em;
+}

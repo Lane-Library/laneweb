@@ -9,7 +9,7 @@
                 underlay: 'none',
                 close: true,
                 visible: false,
-                draggable: false,
+                draggable: true,
                 constraintoviewport: true,
                 modal: false
             });

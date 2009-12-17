@@ -1,0 +1,39 @@
+.events li {
+    padding:0;
+    background-image:none;
+    margin-bottom:1em;
+    float:left;
+}
+.events .time {
+    margin-top:4px;
+    font-size: .8em;
+    color:#3F3C30;
+    white-space:nowrap;
+}
+.events .month {
+    padding-top:.3em;
+}
+.events .day, .new-book .day {
+    color: #820000;
+}
+.new-book .day {
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-size: .9em;
+}
+.events a {
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-size: 11px;
+}
+.events .hd {
+    color:#3f3c30;
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-weight:bold;
+    font-size: 1em;
+}
+.events:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}

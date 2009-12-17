@@ -1,0 +1,83 @@
+#somNav {
+    position:absolute;
+    top:-34px;
+    left:125px;
+    width:750px;
+    font-size:11px;
+    background-image:url(/././images/sprite-vert.gif);
+    background-repeat:repeat-x;
+    z-index:1;
+    white-space:nowrap;
+}
+#somNav li {
+    background-image:url(/././images/sprite-vert.gif);
+    background-position:0 -60px;
+    background-repeat:no-repeat;
+    padding:0;
+    position:relative;
+    float:left;
+}
+#somNav ul {
+    background-color:#D6D5C7;
+    border:1px solid #c6c6c6;
+    border-top:none;
+    display:none;
+    position:absolute;
+    left:0;
+    top:32px;
+}
+#somNav ul li, #somNav ul a, #somNav li:first-child {
+    background-image:none
+}
+#somNav a {
+    display:block;
+    background-image:url(/././images/sprite.gif);
+    background-repeat:no-repeat;
+    background-position:100% -382px;
+    padding:13px 24px 6px 12px;
+    color:#696962;
+    text-decoration:none;
+}
+#somNav a:hover {
+    color:#990000;
+    text-decoration:underline;
+}
+#stanfordMedicineBrand a {
+    width:124px;
+    background-image:url(/././images/sprite.gif);
+    background-repeat:no-repeat;
+    background-position:0 0;
+    text-indent:-9000px;
+}
+#stanfordMedicineBrand a:hover {
+    background-position:0 -100px;
+}
+#stanfordUniversityBrand a {
+    width:62px;
+    background-image:url(/././images/sprite.gif);
+    background-repeat:no-repeat;
+    background-position:8px -191px;
+    text-indent:-9000px;
+}
+#stanfordUniversityBrand a:hover {
+    background-position:8px -291px;
+}
+#somNav ul li {
+    border-top:1px dotted #C6C6C6;
+    float:none;
+    display:block;
+}
+#somNav ul a {
+    padding:6px;
+}
+#somNav ul a:hover {
+    background-color:#b5b5a7;
+    text-decoration:none;
+}
+#somNav li:hover ul, #somNav li.hover ul {
+    display:block;
+}
+#somNav li.hover li {
+/* IE6 seems to need this bottom border or excess space occurs */
+    border-bottom:1px solid #D6D5C7;
+}

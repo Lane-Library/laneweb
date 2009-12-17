@@ -16,7 +16,7 @@ YAHOO.util.Event.addListener(this, 'load', function() {
                 } else {
                     pageTracker = _gat._getTracker("UA-3203486-2");
                 }
-                //TODO: remove this for production
+                //uncomment this for testing/debugging:
                 //pageTracker._setLocalServerMode();
                 pageTracker._setDomainName(".stanford.edu");
                 pageTracker._trackPageview();

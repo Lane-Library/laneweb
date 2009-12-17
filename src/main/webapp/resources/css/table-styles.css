@@ -1,4 +1,60 @@
-  .striped {
+ /*new styles for the new tables! OG Oct 2009 */
+ 
+.expandy table, .contentModule table {
+	 border: 1px solid #CCCCB4;
+	  border-bottom: 3px solid #CCCCB4;
+	 width: 100%;
+	 margin: 0 0 1em 0;
+	 background: #fff;
+
+ }
+ .expandy table colgroup, .contentModule table colgroup {
+	 background: #E4E4C9;
+ }
+ .expandy table td, .expandy table th, .contentModule table td, .contentModule table th {
+  padding: .7em;
+  background-image: url(/././graphics/backgr/table-cell-backgr.gif);
+  background-repeat:repeat-x;
+  
+ }
+ 
+.expandy table th, .contentModule table th {
+	font-weight:bold;
+	text-transform: uppercase;
+	background-color: #fff;
+	color:#333;
+	background-image: url(/././graphics/backgr/table-header-backgr.gif);
+	background-repeat:repeat-x;
+}
+.expandy table tr, .contentModule table tr {
+	 border-bottom: 1px solid #CCCCB4;
+ }
+ 
+ 
+.liaison {
+	 border: 1px solid #CCCCB4;
+	 width: 410px;
+	 margin: 0 0 1em 0;
+	 background: #fff;
+	 padding: 1em;
+}
+
+.liaison img {
+	float:left;
+	margin-right: 1em;
+}
+
+ 
+/* .contentModule table li {
+	 list-style-type:square;
+	 list-style-position:inside;
+	 font-size: .9em;
+ }
+   .odd {
+  background: #f2f3ed;
+}
+
+ .striped {
   border-collapse: collapse;
   background: #dbd9d6;
   width:100%;
@@ -45,7 +101,7 @@ border: 1px solid #cccccc;
 }
 
 
-/* noColorTable appears on Bioresearch page*/
+/* noColorTable appears on Bioresearch page
 
 table.noColorTable {
 margin:0; 
@@ -110,3 +166,4 @@ background-color: #990000;
 .green {
 background-color: #659a00;
 }
+*/

@@ -1,0 +1,29 @@
+.mainModule .ft {
+    background-color:#800000;
+    background-image: url(/././images/backgr/mainModuleFt.gif);
+    background-position:bottom;
+    height:15px;
+    clear:both;
+    -moz-border-radius-bottomleft:5px;
+    -moz-border-radius-bottomright:5px;
+    -webkit-border-bottom-left-radius:5px;
+    -webkit-border-bottom-right-radius:5px;
+}
+.mainModule .bd {
+    border-left:1px solid  #E6E4DB;
+    border-right:1px solid  #E6E4DB;
+    height:100%;
+}
+.mainModule .bd .bd {
+    border:none;
+}
+.mainModule {
+    margin:2.2em 0 1em 1em;
+}
+.mainModule .bd:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}

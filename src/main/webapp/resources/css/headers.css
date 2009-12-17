@@ -1,0 +1,24 @@
+
+h3, h4, h5 {
+    color:#262215;
+}
+h3, h4, h5 {
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-weight:normal;
+}
+h3 {
+    font-size: 1.7em;
+   /* padding-bottom: .5em;*/
+}
+h4 {
+   color:#262215;
+font-family:Georgia,"Times New Roman",Times,serif;
+font-size:1.4em;
+line-height:1.2em;
+margin:1em 0 0.3em;
+}
+h5 {
+    font-size: 1.2em;
+/*	margin:1em 0 0.3em;*/
+   
+}

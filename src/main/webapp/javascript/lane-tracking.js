@@ -48,49 +48,59 @@ LANE.tracking = function(){
             if (!title) {
                 title = 'unknown';
             }
+            if (YAHOO.util.Dom.hasClass(node, 'yui-accordion-toggle')) {
+                title = 'Expandy:' + title;
+            }
             return title;
         },
         getTrackingData = function(event){
             var node = event.srcElement || event.target,
                 host, path, query, external, title, searchTerms, searchSource, children;
                 if (event.type == 'click') {
-                    if (node.nodeName != 'A') {
-                        children = node.getElementsByTagName('a');
-                        if (children.length > 0) {
-                            node = children[0];
-                        }
-                    }
-                    while (node && node.nodeName != 'A') {
-                        node = node.parentNode;
-                            if (node === null) {
-                                throw 'not trackable';
-                            }
-                    }
-                    if (node.pathname.indexOf('secure/login.html') > -1 || node.host.indexOf('laneproxy') === 0) {
-                        host = (node.search.substring(node.search.indexOf('//') + 2));
-                        if (host.indexOf('/') > -1) {
-                            path = host.substring(host.indexOf('/'));
-                            if (path.indexOf('?') > -1) {
-                                path = path.substring(0, path.indexOf('?'));
-                            }
-                            host = host.substring(0, host.indexOf('/'));
-                        } else {
-                            path = '/';
-                        }
-                        query = '';
-                        external = true;
-                    } else if (node.rel && (node.rel.indexOf('popup local') === 0 || node.rel.indexOf('popup faq') === 0)) {
+                    if (YAHOO.util.Dom.hasClass(node, 'yui-accordion-toggle')) {
                         host = document.location.host;
                         path = document.location.pathname;
                         query = document.location.search;
+                        external = false;
                     } else {
-                        host = node.host;
-                        if (host.indexOf(':') > -1) {
-                            host = host.substring(0, host.indexOf(':'));
+                        if (node.nodeName != 'A') {
+                            children = node.getElementsByTagName('a');
+                            if (children.length > 0) {
+                                node = children[0];
+                            }
                         }
-                        path = node.pathname;
-                        external = host != document.location.host;
-                        query = external ? '' : node.search;
+                        while (node && node.nodeName != 'A') {
+                            node = node.parentNode;
+                            if (node === null) {
+                                throw 'not trackable';
+                            }
+                        }
+                        if (node.pathname.indexOf('secure/login.html') > -1 || node.host.indexOf('laneproxy') === 0) {
+                            host = (node.search.substring(node.search.indexOf('//') + 2));
+                            if (host.indexOf('/') > -1) {
+                                path = host.substring(host.indexOf('/'));
+                                if (path.indexOf('?') > -1) {
+                                    path = path.substring(0, path.indexOf('?'));
+                                }
+                                host = host.substring(0, host.indexOf('/'));
+                            } else {
+                                path = '/';
+                            }
+                            query = '';
+                            external = true;
+                        } else if (node.rel && (node.rel.indexOf('popup local') === 0 || node.rel.indexOf('popup faq') === 0)) {
+                            host = document.location.host;
+                            path = document.location.pathname;
+                            query = document.location.search;
+                        } else {
+                            host = node.host;
+                            if (host.indexOf(':') > -1) {
+                                host = host.substring(0, host.indexOf(':'));
+                            }
+                            path = node.pathname;
+                            external = host != document.location.host;
+                            query = external ? '' : node.search;
+                        }
                     }
                 }
                 if (path.indexOf('/') !== 0) {
@@ -126,6 +136,7 @@ LANE.tracking = function(){
             }
         },
         track: function(trackingData) {
+//            var td = trackingData;
 //                alert('host: '+td.host+'\npath: '+td.path+'\nquery: '+td.query+'\ntitle: '+td.title+'\nsearchTerms: '+td.searchTerms+'\nsearchSource: '+td.searchSource+'\nexternal: '+td.external);
                  for (var i = 0; i < trackers.length; i++) {
                      trackers[i].track(trackingData);
@@ -138,7 +149,10 @@ LANE.tracking = function(){
                 documentHost = documentHost.substring(0, documentHost.indexOf(':'));
             }
             if (event.type == 'click') {
-                if (target.className == 'eLibraryTab') {
+                if (YAHOO.util.Dom.hasClass(target, 'searchFacet')) {
+                    return true;
+                }
+                if (YAHOO.util.Dom.hasClass(target, 'yui-accordion-toggle')) {
                     return true;
                 }
                 //find self ancestor that is <a>

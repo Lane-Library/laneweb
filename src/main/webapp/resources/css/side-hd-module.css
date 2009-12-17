@@ -1,0 +1,21 @@
+
+.sideHdModule .hd {
+    float:left;
+    width:25%;
+    text-align:center;
+    padding:0;
+    border:none;
+}
+.sideHdModule .bd {
+    float:left;
+    padding:0;
+    width:70%;
+    margin-left:5%;
+}
+.sideHdModule .bd:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+}

@@ -1,0 +1,25 @@
+
+.legend-drop-down li {
+    display:inline;
+    padding-left:1em;
+}
+.legend-drop-down p {
+    display:none;
+    position:absolute;
+    background-color:#ebecec;
+    color:inherit;
+    font-size: 90%;
+    border: 3px solid #d6d5c7;
+    margin-left: -21.4em;
+    margin-top: 0;
+    width: 25em;
+    padding: .75em;
+}
+.legend-drop-down:hover p, #legend-drop-down.hover p {
+    display:block;
+}
+.legend-drop-down li {
+    white-space:normal;
+    background-image: none;
+    padding:.2em .7em .4em .7em;
+}

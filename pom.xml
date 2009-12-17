@@ -9,7 +9,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>1.9.34-SNAPSHOT</version>
+    <version>1.10.0-SNAPSHOT</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/index.html</url>
     <inceptionYear>2002</inceptionYear>
@@ -48,7 +48,7 @@
         </developer>
     </developers>
     <scm>
-        <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
+        <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/branches/laneweb-1.10</developerConnection>
     </scm>
     <build>
         <defaultGoal>package</defaultGoal>
@@ -84,9 +84,34 @@
                     <aggregations>
                         <aggregation>
                             <removeIncluded>true</removeIncluded>
-                            <output>target/laneweb/resources/css/irt3/irt3.css</output>
+                            <output>target/laneweb/resources/css/lane-all.css</output>
                             <includes>
-                                <include>*-min.css</include>
+                                <include>layout-min.css</include>
+                                <include>colors-min.css</include>
+                                <include>shaded-border-min.css</include>
+                                <include>som-nav-min.css</include>
+                                <include>lane-nav-min.css</include>
+                                <include>footer-min.css</include>
+                                <include>search-form-min.css</include>
+                                <include>section-menu-min.css</include>
+                                <include>expandies-min.css</include>
+                                <include>simple-module-min.css</include>
+                                <include>narrow-module-min.css</include>
+                                <include>content-module-min.css</include>
+                                <include>main-module-min.css</include>
+                                <include>table-styles-min.css</include>
+                                <include>popups-min.css</include>
+                                <include>login-min.css</include>
+                                <include>breadcrumb-min.css</include>
+                                <include>header-min.css</include>
+                                <include>anchors-min.css</include>
+                                <include>headers-min.css</include>
+                                <include>lists-min.css</include>
+                                <include>legend-dropdown-min.css</include>
+                                <include>events-min.css</include>
+                                <include>side-hd-module-min.css</include>
+                                <include>online-resources-min.css</include>
+                                <include>liaisons-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
@@ -94,24 +119,30 @@
                             <output>target/laneweb/javascript/lane-all.js</output>
                             <includes>
                                 <include>lane-min.js</include>
+                                <include>accordionview-min.js</include>
+                                <include>lane-expandies-min.js</include>
                                 <include>lane-search-min.js</include>
                                 <include>lane-tracking-min.js</include>
-                                <include>lane-webtrends-min.js</include>
                                 <include>lane-google-min.js</include>
-                                <include>lane-eresources-min.js</include>
+                                <include>lane-webtrends-min.js</include>
+                                <include>lane-popup-min.js</include>
+                                <include>lane-metasearch-min.js</include>
+                                <include>lane-ie-min.js</include>
+                                <include>lane-search-facets-min.js</include>
+                                <include>lane-search-facet-counts-min.js</include>
+                                <include>lane-search-history-min.js</include>
+                                <include>lane-tooltips-min.js</include>
                                 <include>lane-spellcheck-min.js</include>
-                                <include>lane-searchtabs-min.js</include>
                                 <include>lane-findit-min.js</include>
                                 <include>lane-querymap-min.js</include>
                                 <include>lane-popin-min.js</include>
-                                <include>lane-metasearch-min.js</include>
-                                <include>lane-search-history-min.js</include>
-                                <include>lane-tooltips-min.js</include>
                                 <include>lane-popup-min.js</include>
                                 <include>lane-ie-min.js</include>
+                                <include>lane-teletype-min.js</include>
+                                <!--
                                 <include>lane-forms-min.js</include>
                                 <include>lane-bassett-min.js</include>
-                                <include>lane-suggest-min.js</include>
+                                <include>lane-suggest-min.js</include>-->
                             </includes>
                         </aggregation>
                     </aggregations>
@@ -396,8 +427,8 @@
         <dependency>
             <groupId>edu.stanford.irt.search</groupId>
             <artifactId>search-spring</artifactId>
-            <version>1.5.24-SNAPSHOT</version>
-            <scope>compile</scope>
+            <version>search-content-SNAPSHOT</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <artifactId>spring-ldap-core</artifactId>
@@ -527,15 +558,13 @@
             <version>1.2</version>
             <type>jar</type>
         </dependency>
-        <!--
         <dependency>
             <groupId>edu.stanford.irt.search</groupId>
             <artifactId>search-core</artifactId>
-            <version>1.5.12-SNAPSHOT</version>
+            <version>search-content-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
-        -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
