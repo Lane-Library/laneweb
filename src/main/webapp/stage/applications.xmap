@@ -19,7 +19,7 @@
                 </map:match>
                 <!-- search/ranked/xml returns xmlized content results -->
                 <map:match pattern="search/ranked/xml" type="wildcard">
-                    <map:generate type="search">
+                    <map:generate type="search-engine">
                         <map:parameter name="s" value="true"/>
                         <map:parameter name="t" value="20000"/>
                     </map:generate>
@@ -31,7 +31,7 @@
                 </map:match>
                 <!-- search2json.xsl converts the result xml to json -->
                 <map:match pattern="search/json" type="wildcard">
-                    <map:generate type="search"/>
+                    <map:generate type="search-resource"/>
                     <map:transform type="saxon" src="context://xsl/search2json.xsl">
                         <map:parameter name="content" value="${request/parameters/content}"/>
                         <map:parameter name="content-to-display" value="5"/>
