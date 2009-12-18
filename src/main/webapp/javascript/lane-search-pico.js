@@ -30,6 +30,16 @@
             }
             searchTermsInput.value = qString;
         }
+    },
+    // when a suggest list item is selected ...
+    //  - track the suggest-selection-event
+    onItemSelect = function(sType, aArgs) {
+        var item, 
+            trackingObject = {};
+        item = aArgs[2];
+		trackingObject.title = aArgs[0].getInputEl().id + '--suggest-selection-event';
+		trackingObject.path = item[0];
+		LANE.tracking.track(trackingObject);
     };
     
     E.onContentReady('clinicalP', function() {
@@ -96,6 +106,7 @@
                 acMesh.queryDelay = 0.1;
                 acMesh.setHeader(acInputs[y].title);
                 acMesh.itemSelectEvent.subscribe(function(sType,aArgs){queryBuilder();});
+        		acMesh.itemSelectEvent.subscribe(onItemSelect);
             }
         }
     });
