@@ -141,10 +141,11 @@
                                 <include>lane-ie-min.js</include>
                                 <include>lane-teletype-min.js</include>
                                 <include>lane-search-pico-min.js</include>
+                                <include>lane-suggest-min.js</include>
                                 <!--
                                 <include>lane-forms-min.js</include>
                                 <include>lane-bassett-min.js</include>
-                                <include>lane-suggest-min.js</include>-->
+                                -->
                             </includes>
                         </aggregation>
                     </aggregations>

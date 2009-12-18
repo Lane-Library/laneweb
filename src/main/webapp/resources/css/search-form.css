@@ -103,15 +103,18 @@
     width:160px;
 }
 /* width of auto-complete PICO containers */
-#pInput.yui-ac-container {
+#pAcInput.yui-ac-container {
     width:167px;
 }
-#iInput.yui-ac-container {
+#iAcInput.yui-ac-container {
     width:154px;
 }
-#cInput.yui-ac-container {
+#cAcInput.yui-ac-container {
     width:152px;
 }
-#OInput.yui-ac-container {
+#OAcInput.yui-ac-container {
     width:162px;
+}
+#searchTermsAcInput {
+    width:428px;
 }
