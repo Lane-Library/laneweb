@@ -40,7 +40,9 @@
         searchTermsInput = document.getElementById('searchTerms');
         for (i = 0; i < inputs.length; i++){
         	//TODO: extracting pico values from request ... move to laneweb.xsl?
-        	inputs[i].value = H.getQueryStringParameter(inputs[i].name);
+        	if (H.getQueryStringParameter(inputs[i].name)){
+        		inputs[i].value = H.getQueryStringParameter(inputs[i].name).replace(/\+/g,' ');
+        	}
 			if(inputs[i].value === ''||inputs[i].value === null||inputs[i].value === 'null'){
 				inputs[i].value = inputs[i].title;
 			}
