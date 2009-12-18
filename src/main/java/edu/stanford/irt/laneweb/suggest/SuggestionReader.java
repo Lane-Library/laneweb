@@ -46,12 +46,17 @@ public class SuggestionReader implements Reader {
         Collection<? extends Suggestion> suggestions = new ArrayList<Suggestion>();
         if (l.matches("(ej|book|database|software|cc|video|lanesite|bassett)")) {
             suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(l, q);
-        } else if ("history".equalsIgnoreCase(l)) {
-            suggestions = this.historySuggestionManager.getSuggestionsForTerm(q);
+        } else if (l.matches("ej-mesh")) {
+          ArrayList<Suggestion> combo = new ArrayList<Suggestion>();
+          combo.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm("ej", q));
+          combo.addAll(this.meshSuggestionManager.getSuggestionsForTerm(q));
+          suggestions = combo;
         } else if ("mesh".equalsIgnoreCase(l)) {
             suggestions = this.meshSuggestionManager.getSuggestionsForTerm(q);
         } else if (l.matches("mesh-(d|i|di)")) {
             suggestions = this.meshSuggestionManager.getSuggestionsForTerm(l.replaceFirst("mesh-", ""), q);
+        } else if ("history".equalsIgnoreCase(l)) {
+          suggestions = this.historySuggestionManager.getSuggestionsForTerm(q);
         } else {
             suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(q);
         }
