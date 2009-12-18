@@ -3,7 +3,7 @@
     //  - remove default text values onfocus
     //  - adds auto complete mesh listener on p i c inputs
     //  - ties editing of pico to searchTermsInput for query builder effect
-    var i,y,z,
+    var i,y,
     d = document, 
     picoForm,             //container of all pico input fields
     searchTermsInput,     //input for built query terms
