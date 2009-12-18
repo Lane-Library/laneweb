@@ -5,7 +5,6 @@ YAHOO.util.Event.onContentReady('searchTeletyper', function(){
 	inputElms = YAHOO.util.Dom.getElementsByClassName('teletypeInput',null,this),
 	searchForm = document.getElementById('search'),
 	YE = YAHOO.util.Event,
-	YD =YAHOO.util.Dom,
 	i,
 	teletype = function(inputElm){
         var qString;
