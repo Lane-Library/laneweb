@@ -391,13 +391,14 @@
 
         setupPanel : function(oAttr) {
             var i, t, elPanelLink, elPanelContent, oPanelParent = oAttr.panel;//document.createElement(this.CONFIG.ITEM_WRAPPER_TAG_NAME);
-            while (oPanelParent.childNodes.length > 2) {
-                for (i = 0; i < oPanelParent.childNodes.length; i++) {
-                    if (oPanelParent.childNodes[i].nodeType == Node.TEXT_NODE) {
-                        oPanelParent.removeChild(oPanelParent.childNodes[i]);
-                    }
+
+            for (i = 0; i < oPanelParent.childNodes.length; i++) {
+                if (oPanelParent.childNodes[i].nodeType == Node.TEXT_NODE) {
+                    oPanelParent.removeChild(oPanelParent.childNodes[i]);
+                    i--;
                 }
             }
+                
             YUD.addClass(oPanelParent, this.CLASSES.PANEL);
             
             // single links that have no panel get class link and
