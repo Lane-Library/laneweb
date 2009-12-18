@@ -36,6 +36,10 @@
             <xsl:when test=".='search-terms'">
                 <xsl:value-of select="$search-terms"/>
             </xsl:when>
+            <!-- adds a space to avoid self-closing elements and funny chars from &#160; -->
+            <xsl:when test=".='no-self-close'">
+                <xsl:comment> </xsl:comment>
+            </xsl:when>
         </xsl:choose>
     </xsl:template>
     
