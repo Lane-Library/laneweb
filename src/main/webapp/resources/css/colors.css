@@ -8,13 +8,13 @@ p, span, td {
 }
 p {
    
-	font-size:1em;
+    font-size:1em;
 line-height:1.6em;
 margin:.5em 0 0.8em;
 }
 .red {
-	font-family:Georgia, "Times New Roman", Times, serif;
-	font-size: 1.1em;
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-size: 1.1em;
 }
 .warning, .new-warning {
     color: #820000;

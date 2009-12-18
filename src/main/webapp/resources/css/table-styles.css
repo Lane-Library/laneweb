@@ -1,15 +1,15 @@
  /*new styles for the new tables! OG Oct 2009 */
  
 .expandy table, .contentModule table {
-	 border: 1px solid #CCCCB4;
-	  border-bottom: 3px solid #CCCCB4;
-	 width: 100%;
-	 margin: 0 0 1em 0;
-	 background: #fff;
+     border: 1px solid #CCCCB4;
+      border-bottom: 3px solid #CCCCB4;
+     width: 100%;
+     margin: 0 0 1em 0;
+     background: #fff;
 
  }
  .expandy table colgroup, .contentModule table colgroup {
-	 background: #E4E4C9;
+     background: #E4E4C9;
  }
  .expandy table td, .expandy table th, .contentModule table td, .contentModule table th {
   padding: .7em;
@@ -19,36 +19,36 @@
  }
  
 .expandy table th, .contentModule table th {
-	font-weight:bold;
-	text-transform: uppercase;
-	background-color: #fff;
-	color:#333;
-	background-image: url(/././graphics/backgr/table-header-backgr.gif);
-	background-repeat:repeat-x;
+    font-weight:bold;
+    text-transform: uppercase;
+    background-color: #fff;
+    color:#333;
+    background-image: url(/././graphics/backgr/table-header-backgr.gif);
+    background-repeat:repeat-x;
 }
 .expandy table tr, .contentModule table tr {
-	 border-bottom: 1px solid #CCCCB4;
+     border-bottom: 1px solid #CCCCB4;
  }
  
  
 .liaison {
-	 border: 1px solid #CCCCB4;
-	 width: 410px;
-	 margin: 0 0 1em 0;
-	 background: #fff;
-	 padding: 1em;
+     border: 1px solid #CCCCB4;
+     width: 410px;
+     margin: 0 0 1em 0;
+     background: #fff;
+     padding: 1em;
 }
 
 .liaison img {
-	float:left;
-	margin-right: 1em;
+    float:left;
+    margin-right: 1em;
 }
 
  
 /* .contentModule table li {
-	 list-style-type:square;
-	 list-style-position:inside;
-	 font-size: .9em;
+     list-style-type:square;
+     list-style-position:inside;
+     font-size: .9em;
  }
    .odd {
   background: #f2f3ed;
@@ -86,9 +86,9 @@
   border: 1px solid #03476F;
  }
   .tableSep {
-	background-color: #e6e8d5;
-	font-weight: bold;
-	border-top: 3px solid #999;
+    background-color: #e6e8d5;
+    font-weight: bold;
+    border-top: 3px solid #999;
 }
  .simpleColorTable  {
     border-collapse:separate;

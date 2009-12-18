@@ -9,20 +9,20 @@
                 remainingTime, searchStatus, engineStatus, animation;
             
             for (j = 0; j < facets.length; j++) {
-            	hitSpan = document.getElementById(facets[j].facetId + 'HitSpan');
-            	hitLink = facets[j].getElementsByTagName('a')[0];
+                hitSpan = document.getElementById(facets[j].facetId + 'HitSpan');
+                hitLink = facets[j].getElementsByTagName('a')[0];
                 if (undefined != response.results.facets[facets[j].facetId]) {
-                	hits = response.results.facets[facets[j].facetId].hits;
-                	engineStatus = response.results.facets[facets[j].facetId].status;
+                    hits = response.results.facets[facets[j].facetId].hits;
+                    engineStatus = response.results.facets[facets[j].facetId].status;
                 }
                 if (hitSpan !== null && hits !== 0 && hits !== '') {
                     hitSpan.innerHTML = hits;
                 }
                 // playing with fading animation ... fade when NOT xxx-all facet and zero hits
                 if (!facets[j].facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits == 0) {
-                	animation = new YAHOO.util.ColorAnim(hitLink, {color: { to: '#ffffff' } });
-                	animation.onComplete.subscribe(function() {this.getEl().parentNode.style.display = 'none'});
-                	animation.animate();
+                    animation = new YAHOO.util.ColorAnim(hitLink, {color: { to: '#ffffff' } });
+                    animation.onComplete.subscribe(function() {this.getEl().parentNode.style.display = 'none'});
+                    animation.animate();
                 }
             }
             sleepingTime = 2000;
@@ -41,9 +41,9 @@
         makeRequest = function() {
             facets = YAHOO.util.Dom.getElementsByClassName('searchFacet');
             for (j = 0; j < facets.length; j++) {
-            	facets[j].facetId = facets[j].id.substring(0, facets[j].id.indexOf('Facet'));
-            	hitSpan = document.getElementById(facets[j].facetId + 'HitCount');
-    			YAHOO.util.Dom.addClass(hitSpan,'searching');
+                facets[j].facetId = facets[j].id.substring(0, facets[j].id.indexOf('Facet'));
+                hitSpan = document.getElementById(facets[j].facetId + 'HitCount');
+                YAHOO.util.Dom.addClass(hitSpan,'searching');
             }
             YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/facets/json?q=' + searchString + '&rd=' + Math.random(), responseHandler);
     };

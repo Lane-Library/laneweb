@@ -15,13 +15,13 @@
      H = YAHOO.util.History,
      queryBuilder = function(targetId){ //build query terms from pico inputs
         var qString = '', i;
-		if(targetId == searchTermsInput.id) {
-			return 0;
-		};
+        if(targetId == searchTermsInput.id) {
+            return 0;
+        };
         for (i = 0; i < inputs.length; i++) {
-			if (inputs[i].id != searchTermsInput.id && inputs[i].value !== '' && inputs[i].value != inputs[i].title) {
-				qString += '(' + inputs[i].value + ')';
-			}
+            if (inputs[i].id != searchTermsInput.id && inputs[i].value !== '' && inputs[i].value != inputs[i].title) {
+                qString += '(' + inputs[i].value + ')';
+            }
         }
         if ( qString.length ){
             qString = qString.replace(/\)\(/g, ") AND (");
@@ -37,25 +37,25 @@
         var item, 
             trackingObject = {};
         item = aArgs[2];
-		trackingObject.title = aArgs[0].getInputEl().id + '--suggest-selection-event';
-		trackingObject.path = item[0];
-		LANE.tracking.track(trackingObject);
+        trackingObject.title = aArgs[0].getInputEl().id + '--suggest-selection-event';
+        trackingObject.path = item[0];
+        LANE.tracking.track(trackingObject);
     };
     
     E.onContentReady('clinicalP', function() {
-		// change text of default input values
+        // change text of default input values
         // add event listeners to p,i,c,o inputs for building search terms
-    	picoForm = D.getAncestorByTagName(this,'form');
-    	inputs = D.getElementsByClassName('picoInput',null,picoForm);
+        picoForm = D.getAncestorByTagName(this,'form');
+        inputs = D.getElementsByClassName('picoInput',null,picoForm);
         searchTermsInput = document.getElementById('searchTerms');
         for (i = 0; i < inputs.length; i++){
-        	//TODO: extracting pico values from request ... move to laneweb.xsl?
-        	if (H.getQueryStringParameter(inputs[i].name)){
-        		inputs[i].value = H.getQueryStringParameter(inputs[i].name).replace(/\+/g,' ');
-        	}
-			if(inputs[i].value === ''||inputs[i].value === null||inputs[i].value === 'null'){
-				inputs[i].value = inputs[i].title;
-			}
+            //TODO: extracting pico values from request ... move to laneweb.xsl?
+            if (H.getQueryStringParameter(inputs[i].name)){
+                inputs[i].value = H.getQueryStringParameter(inputs[i].name).replace(/\+/g,' ');
+            }
+            if(inputs[i].value === ''||inputs[i].value === null||inputs[i].value === 'null'){
+                inputs[i].value = inputs[i].title;
+            }
             E.addListener(inputs[i], 'focus', function(){
                 if (this.value == this.title){
                     this.value = '';
@@ -65,7 +65,7 @@
                 if (this.value === ''){
                     this.value = this.title;
                 }
-				queryBuilder(this.id);
+                queryBuilder(this.id);
             });
             E.addListener(inputs[i], 'keyup', function(){
                 queryBuilder(this.id);
@@ -88,7 +88,7 @@
                     acDs.scriptQueryAppend = 'l=mesh-d';
                 }
                 else if(acCont.name === 'i'){
-                	acDs.scriptQueryAppend = 'l=mesh-i';
+                    acDs.scriptQueryAppend = 'l=mesh-i';
                 }
                 else if(acCont.name === 'c'){
                     acDs.scriptQueryAppend = 'l=mesh-di';
@@ -106,7 +106,7 @@
                 acMesh.queryDelay = 0.1;
                 acMesh.setHeader(acInputs[y].title);
                 acMesh.itemSelectEvent.subscribe(function(sType,aArgs){queryBuilder();});
-        		acMesh.itemSelectEvent.subscribe(onItemSelect);
+                acMesh.itemSelectEvent.subscribe(onItemSelect);
             }
         }
     });

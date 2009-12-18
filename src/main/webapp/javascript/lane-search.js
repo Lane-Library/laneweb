@@ -70,7 +70,7 @@ LANE.search = LANE.search ||  function() {
                         }
                     }
                     if (source === undefined) {
-                    	source = d.getElementById('searchSource').value;
+                        source = d.getElementById('searchSource').value;
                     }
                     if (source === undefined) {
                         source = '';
@@ -79,49 +79,49 @@ LANE.search = LANE.search ||  function() {
                 return source;
             },
             setSearchSource: function(source) {
-            	d.getElementById('searchSource').value = source;
+                d.getElementById('searchSource').value = source;
             },
             setActiveTab: function(elm){
-            	var alreadyActive = Dom.hasClass(elm,'active');
-            	Dom.getElementsByClassName('active',null,elm.parentNode,function(el){
-            		Dom.removeClass(el,'active');
-            	});
-        		Dom.addClass(elm,'active');
+                var alreadyActive = Dom.hasClass(elm,'active');
+                Dom.getElementsByClassName('active',null,elm.parentNode,function(el){
+                    Dom.removeClass(el,'active');
+                });
+                Dom.addClass(elm,'active');
                 o.setSearchSource(elm.id+'-all');
                 // if this is not already active tab and there's a form value, submit search
                 if(!alreadyActive && form.q.value && form.q.value !== initialText){
-                	o.startSearch();
-                	o.submitSearch();
-                	return false;
+                    o.startSearch();
+                    o.submitSearch();
+                    return false;
                 }
-            	o.setInitialText();
-            	if(elm.id == 'clinical'){
-            		Dom.addClass(['search','breadcrumb'], 'clinicalSearch');
-            	}
-            	else{
-            		Dom.removeClass(['search','breadcrumb'], 'clinicalSearch');
-            	}
+                o.setInitialText();
+                if(elm.id == 'clinical'){
+                    Dom.addClass(['search','breadcrumb'], 'clinicalSearch');
+                }
+                else{
+                    Dom.removeClass(['search','breadcrumb'], 'clinicalSearch');
+                }
             },
             setInitialText: function(){
-            	var oldInitialText = initialText;
-            	YAHOO.util.Dom.getElementsByClassName('active',null,form,function(el){
-            		if(el.title){
-            			initialText = el.title;
-            		}
-            	});
-    	        if (!form.q.value || form.q.value == oldInitialText){
-    	        	form.q.value = initialText;
-    	        	form.q.title = initialText;
-    	        }
+                var oldInitialText = initialText;
+                YAHOO.util.Dom.getElementsByClassName('active',null,form,function(el){
+                    if(el.title){
+                        initialText = el.title;
+                    }
+                });
+                if (!form.q.value || form.q.value == oldInitialText){
+                    form.q.value = initialText;
+                    form.q.title = initialText;
+                }
             },
             submitSearch: function(e){
-            	var i;
+                var i;
                 try {
                     // strip PICO values if not set
                     for (i = 0; i < picoInputs.length; i++){
-                    	if (form[picoInputs[i]] && form[picoInputs[i]].value == form[picoInputs[i]].title) {
-                    		form[picoInputs[i]].parentNode.removeChild(form[picoInputs[i]]);
-                    	}
+                        if (form[picoInputs[i]] && form[picoInputs[i]].value == form[picoInputs[i]].title) {
+                            form[picoInputs[i]].parentNode.removeChild(form[picoInputs[i]]);
+                        }
                     }
                     o.startSearch();
                     form.submit();
@@ -149,7 +149,7 @@ LANE.search = LANE.search ||  function() {
            tabs[i].clicked = function(e){
                 Event.preventDefault(e);
                 try {
-                	o.setActiveTab(this);
+                    o.setActiveTab(this);
                 } catch (ex) {
                     alert(ex);
                 }

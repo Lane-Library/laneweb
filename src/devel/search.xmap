@@ -188,14 +188,14 @@
                     <map:when test="xsl/search-specialty.xsl">
                         <map:transform type="saxon" src="xsl/search-specialty.xsl">
                             <map:parameter name="q" value="${request/parameters/q}"/>
-		                    <map:parameter name="request-uri" value="${request/requestURI}"/>
+                            <map:parameter name="request-uri" value="${request/requestURI}"/>
                             <map:parameter name="source" value="${request/parameters/source}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/search-specialty.xsl">
                             <map:parameter name="q" value="${request/parameters/q}"/>
-		                    <map:parameter name="request-uri" value="${request/requestURI}"/>
+                            <map:parameter name="request-uri" value="${request/requestURI}"/>
                             <map:parameter name="source" value="${request/parameters/source}"/>
                         </map:transform>
                     </map:otherwise>

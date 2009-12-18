@@ -1,12 +1,12 @@
 #browseTabs li {
     float:left;
     background-image:none;
-	font-family:Georgia, "Times New Roman", Times, serif;
-	font-size: 1.1em;
-	border: 1px solid #cdcfbe;
-	background-color:#E6E7E2;
-	background-image:url(/././graphics/buttons/sprite-but-off.gif);
-	background-position:-26px -370px;
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-size: 1.1em;
+    border: 1px solid #cdcfbe;
+    background-color:#E6E7E2;
+    background-image:url(/././graphics/buttons/sprite-but-off.gif);
+    background-position:-26px -370px;
 background-repeat:repeat-x;
 width: 32px;
 height: 32 px;
@@ -17,27 +17,27 @@ white-space:nowrap;
 
 
 #browseTabs li:hover {
-	border: 1px solid #820000;
-	cursor:pointer;
+    border: 1px solid #820000;
+    cursor:pointer;
 }
 
 
 #browseTabs .browseTabs-long {
-	width: 80px;
+    width: 80px;
 }
 
 #browseTabs li a {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 
 #browseTabs  {
-	  margin: .5em 0 .5em 0;
+      margin: .5em 0 .5em 0;
     width: 450px;
    /* background-image: url(/././graphics/buttons/ej-letters-off.gif);
     background-repeat: no-repeat; background-position: 0;*/
    
   
-	
+    
 }
 /*.all-classes-button:hover {
     background: transparent url(/././graphics/buttons/sprite-but-on.gif);
@@ -47,15 +47,15 @@ white-space:nowrap;
 }*/
 
 .alert-box {
-	display: block;
-	width: 430px;
-	clear:left;
+    display: block;
+    width: 430px;
+    clear:left;
 padding-top:1em;
 }
 
 .alert-box div {
-	display: block;
-	width: 405px;
+    display: block;
+    width: 405px;
  padding:0 1em 1em 1em;
  border: 3px solid #cdcfbe;
  position:relative;
@@ -65,11 +65,11 @@ padding-top:1em;
 
 .alert-box div img {
 
-	float: right;
+    float: right;
 }
 
 
 .alert-box div h4 {
-	color:#820000;
-	
+    color:#820000;
+    
 }

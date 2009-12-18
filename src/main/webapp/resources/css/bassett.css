@@ -1,13 +1,13 @@
-/**********   ACCORDION CSS	  *************/
+/**********   ACCORDION CSS      *************/
 
 #bassettContent p {
-	text-align: justify;
+    text-align: justify;
 }
 
 .myAccordion .yui-cms-accordion .yui-cms-item {
-	border: 1px solid #ccc;
-	border-right: 0px solid #ccc;
-	background-image:url(/images/templates/irt3/boxlabel_bkgnd.jpg);
+    border: 1px solid #ccc;
+    border-right: 0px solid #ccc;
+    background-image:url(/images/templates/irt3/boxlabel_bkgnd.jpg);
 }
 
 #leftColumn .myAccordion .yui-cms-accordion .yui-cms-item h3 {
@@ -16,170 +16,170 @@
 
 
 #leftColumn div.myAccordion .yui-cms-item  h2 {
-	background-image:none;
-	border:0px ;
-	padding-top: 10px;
-	padding-bottom:0px;
+    background-image:none;
+    border:0px ;
+    padding-top: 10px;
+    padding-bottom:0px;
 }
  
 #leftColumn #accordionTitle{
-	background-image:url(/././images/templates/irt3/boxlabel_bkgnd.jpg);
-	padding-top:12px;
-	padding-bottom:7px;
-	text-align: center;
-	font-weight:bold;
-	font-size:1em;
-	border-bottom: 0px;
+    background-image:url(/././images/templates/irt3/boxlabel_bkgnd.jpg);
+    padding-top:12px;
+    padding-bottom:7px;
+    text-align: center;
+    font-weight:bold;
+    font-size:1em;
+    border-bottom: 0px;
 }
     
 .myAccordion .yui-cms-accordion .yui-cms-item .accordionToggleItem {
-	background: url(/././graphics/accordion.gif) no-repeat 0px -197px;
-	color:black;
-	text-decoration: none;
-	padding-bottom: 5px;
-	padding-top:5px;
-	padding-left: 20px;
+    background: url(/././graphics/accordion.gif) no-repeat 0px -197px;
+    color:black;
+    text-decoration: none;
+    padding-bottom: 5px;
+    padding-top:5px;
+    padding-left: 20px;
 }
     
 .myAccordion .yui-cms-accordion .yui-cms-item.selected .accordionToggleItem {
-	background: url(/././graphics/accordion.gif) no-repeat 0px 3px;
+    background: url(/././graphics/accordion.gif) no-repeat 0px 3px;
 }
         
 .myAccordion .yui-cms-accordion .yui-cms-item .bd {
-	height: 0px;
+    height: 0px;
     overflow: hidden;
     background-color: #fff;
 }
     
 .myAccordion .yui-cms-accordion .yui-cms-item .bd .fixed {
-	overflow: hidden;
-	padding: 7px;
-	height: auto;
+    overflow: hidden;
+    padding: 7px;
+    height: auto;
 }
       
 .fixed a{
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #leftColumn div.myAccordion div {
-	border-bottom:0px;
-	border-left:0px;
+    border-bottom:0px;
+    border-left:0px;
 }
 
 
 /*********** Multi IMAGES VIEW CSS **********/
 
 div.bassett-images{
-	clear:both;
+    clear:both;
 }
 
 div.bassett-images div{
-	padding :5px;
-	padding-top: 15px;
-	padding-bottom :30px;
-	float: left;
+    padding :5px;
+    padding-top: 15px;
+    padding-bottom :30px;
+    float: left;
 }
 
 #bassettContent .hr{
-	border-bottom:1px solid #ccc;
-	padding:0px;
-	padding-bottom:7px;
-	float:none;
+    border-bottom:1px solid #ccc;
+    padding:0px;
+    padding-bottom:7px;
+    float:none;
 }
 
 #bassettContent .image-text{
-	padding:0px;
-	padding-top:3px;
+    padding:0px;
+    padding-top:3px;
 }
 
 div.paging{
-	float:right;
-	vertical-align:middle;
-	clear:both;
+    float:right;
+    vertical-align:middle;
+    clear:both;
 }
 
 div.paging img{
-	padding:0px;
-	padding-right:3px;
-	padding-top:1px;
+    padding:0px;
+    padding-right:3px;
+    padding-top:1px;
 }
 
 div.paging #page-number{
-	color:#666;
-	padding-right:5px;
-	padding-left:5px;
+    color:#666;
+    padding-right:5px;
+    padding-left:5px;
 }
 
 /*********** IMAGE VIEW CSS **************/
 
 
 div.bassett-image{
-	clear:both;
-	width:100%;
+    clear:both;
+    width:100%;
 }
 
 div.bassett-image table{
-	margin-right: 5px;
-	margin-bottom :30px;
-	text-align: center;
+    margin-right: 5px;
+    margin-bottom :30px;
+    text-align: center;
 }
 
 div.bassett-image td{
-	vertical-align:middle;
-	padding: 7px;
+    vertical-align:middle;
+    padding: 7px;
 }
 
 div.bassett-image td#image{
-	border-right:1px solid #ccc;
-	border-bottom:1px solid #ccc;
-	padding-right:20px
+    border-right:1px solid #ccc;
+    border-bottom:1px solid #ccc;
+    padding-right:20px
 }
 
 div.bassett-image td#diagram-image{
-	vertical-align: top;
-	border-right:1px solid #ccc;
+    vertical-align: top;
+    border-right:1px solid #ccc;
 }
 
 div.bassett-image td#legend-image{
-	border-bottom:1px solid #ccc;
+    border-bottom:1px solid #ccc;
 }
 
 div.bassett-image table table{
-	margin-left:15px;margin-top:15px;
+    margin-left:15px;margin-top:15px;
 }
 
 div.bassett-image table table table{
-	margin:0px;
+    margin:0px;
 }
 
 div.bassett-image table table td{
-	padding: 0px;
-	padding-top: 3px;
-	padding-left: 2px;
-	text-align: left;
-	vertical-align: top;
+    padding: 0px;
+    padding-top: 3px;
+    padding-left: 2px;
+    text-align: left;
+    vertical-align: top;
 }
 
 div.bassett-image table table td.legend-title{
-	font-weight:bold;
-	text-align: center;
-	padding-bottom :7px;
+    font-weight:bold;
+    text-align: center;
+    padding-bottom :7px;
 }
 
 div.bassett-image table table td.legend-sub-title{
-	text-align: center;
-	padding-bottom :5px;
-	font-style:italic;
+    text-align: center;
+    padding-bottom :5px;
+    font-style:italic;
 }
 
 div.bassett-image table table td.legend-description{
-	text-align: justify;
-	padding-bottom: 15px;
+    text-align: justify;
+    padding-bottom: 15px;
 }
 
 #larger-view-link{
-	padding-right:10px;
-	float:right;
+    padding-right:10px;
+    float:right;
 }
 
 
@@ -189,13 +189,13 @@ float:left;
 
 
 #second-region{
-	padding-top:7px;
-	clear:both
+    padding-top:7px;
+    clear:both
 }
 
 #bassett-subtitle{
-	font-size:0.9em;
-	color:#968672;
+    font-size:0.9em;
+    color:#968672;
 }
 
 .legend-title{
@@ -204,37 +204,37 @@ padding-top:7px;
 /* COMMON TO THE TWO IMAGE VIEW  */
 
 img.newWinIcon{
-	padding-left :3px;
+    padding-left :3px;
 }
 
 #bassettContent hr{
-	border: 0px;
-	background-color: #ccc;
-	height: 1px;
-	clear:both;
+    border: 0px;
+    background-color: #ccc;
+    height: 1px;
+    clear:both;
 }
 
 .choice{
-	float:left;
-	color:#1C4B70;
+    float:left;
+    color:#1C4B70;
 }
 
 .choice a{
-	color:#1C4B70;
+    color:#1C4B70;
 }
 
 .choice span{
-	color:#1C4B70;
-	text-decoration:underline;
+    color:#1C4B70;
+    text-decoration:underline;
 }
 
 
 /********  Larger View ***********/
 
 #new-window a{
-	color:#1C4B70;
-	text-decoration:none;
-	font-size:10px;
-	margin-right: 10px;
-	float:right
-}		
+    color:#1C4B70;
+    text-decoration:none;
+    font-size:10px;
+    margin-right: 10px;
+    float:right
+}        

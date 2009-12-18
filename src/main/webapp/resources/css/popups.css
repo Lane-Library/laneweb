@@ -1,6 +1,6 @@
 .popups {
     display:none;
-	
+    
 }
 .yui-panel .container-close {
     position:absolute;
@@ -29,7 +29,7 @@
 }
 .yui-panel {
     text-align:left;
-	border: 4px solid #cdcfbe;
+    border: 4px solid #cdcfbe;
 }
 .yui-panel .hd {
     font-weight:bold;

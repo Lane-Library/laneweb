@@ -13,9 +13,9 @@
 .yui-accordion-content {
     overflow:hidden;
     _zoom: 1;
-	margin-left: 1em;
-	margin-bottom: .5em;
-	margin-top: .5em;
+    margin-left: 1em;
+    margin-bottom: .5em;
+    margin-top: .5em;
 }
 /* styles to keep - they correspond to CY YUI grid */
 .expandy li {
@@ -41,7 +41,7 @@ background-image:none;
     background-repeat:repeat-x;
     margin-top: .5em;
     color:#3B3B3B;*/
-	font-size: 11px;
+    font-size: 11px;
 }
 
  .contentModule .bd .expandy ul li  {
@@ -49,7 +49,7 @@ background-image:none;
      color:#333333;
     font-size: 1em;
     list-style:none;
-	margin: 0 0 0 -12px;
+    margin: 0 0 0 -12px;
 }
 .expandy table ul li {
     margin: 0;
@@ -72,7 +72,7 @@ background-image:none;
   }
  .simpleModuleExpandyleft .bd .expandy .noplus {
     background-color:#E3E5D7;
-	background-image:none;
+    background-image:none;
   }
 
   .simpleModule .bd .expandy li h6  {

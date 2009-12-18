@@ -6,8 +6,8 @@ li, .expandy li li {
 }
 li, .expandy li li {
     padding:0.2em 0.25em 0.2em 1em;
-	
-	color: #333;
+    
+    color: #333;
 
     }
 ol li {
@@ -17,26 +17,26 @@ ol li {
 
 
 .contentModule .bd ul li {
-	    background-position:0 -1192px;
+        background-position:0 -1192px;
 }
 
 
 .contentModule .bd #searchResults ul li{
-	padding-bottom: 1em;
+    padding-bottom: 1em;
 }
 
 
 .contentModule .bd #searchResults {
-	margin-top: 1em;
+    margin-top: 1em;
 }
 
 #liaisonDepartments li {
-	border: 1px solid black;
-	margin: 0;
-	padding: 0;
-	
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+    
 }
 
 .sectionMenu .bd #searchFacets ul li{
-	border: 1px solid black;
+    border: 1px solid black;
 }

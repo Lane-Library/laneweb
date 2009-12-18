@@ -22,7 +22,7 @@
                     type = facets[i].id.substring(0, facets[i].id.indexOf('-'));
                     source = facets[i].id.substring(0, facets[i].id.indexOf('Facet'));
                     if (type) {
-                    	facets[i].result = new Result(type, source, facets[i], container);
+                        facets[i].result = new Result(type, source, facets[i], container);
                         if (YAHOO.util.Dom.hasClass(facets[i],'current')) {
                             content = [];
                             for (j = 0; j < container.childNodes.length; j++) {
@@ -117,8 +117,8 @@
                 LANE.tooltips.initialize();
                 LANE.popups.initialize(document);
                 if (this._type == 'specialty'){
-                	LANE.search.metasearch.initialize();
-                	LANE.search.metasearch.getResultCounts();
+                    LANE.search.metasearch.initialize();
+                    LANE.search.metasearch.getResultCounts();
                 }
             }
         };
