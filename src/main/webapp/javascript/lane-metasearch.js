@@ -98,7 +98,8 @@
                 
                 YAHOO.util.Connect.asyncRequest('GET',LANE.search.metasearch.getSearchUrl(), {
                     success: function(o){
-                        var results = YAHOO.lang.JSON.parse(o.responseText).resources,
+                        var response = YAHOO.lang.JSON.parse(o.responseText), 
+                        	results = response.resources,
                             i, needMore = false, result, updateable, resultSpan, sleepingTime, remainingTime;
                         
                         for (i = 0; i < searchables.length; i++) {
@@ -129,7 +130,8 @@
                         }
                         sleepingTime = 2000;
                         remainingTime = (new Date().getTime()) - LANE.search.metasearch.getStartTime();
-                        if ( needMore 
+                        if ( response.status != 'successful' 
+                        		&& needMore 
                         		&& searchables.length > 0 
                         		&& (remainingTime <= 60 * 1000) ) { // at more than 20 seconds the sleeping time becomes 10 seconds
                             if (remainingTime > 20 * 1000) {
