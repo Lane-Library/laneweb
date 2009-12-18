@@ -567,11 +567,9 @@
     <!-- add clinicalSearch class to search form and breadcrumb elements when clinical is active tab -->
     <xsl:template match="node()[@id='search' or @id='breadcrumb']">
         <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
             <xsl:if test="$active-search-tab = 'clinical'">
-                <xsl:attribute name="class">
-                    <xsl:value-of select="concat(.,' clinicalSearch')"/>
-                </xsl:attribute>
+                <xsl:attribute name="class">clinicalSearch</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </xsl:copy>
