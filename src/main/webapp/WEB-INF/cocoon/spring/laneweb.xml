@@ -245,7 +245,7 @@
         class="org.apache.cocoon.acting.SessionInvalidatorAction"/>
 
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
-        class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
+        class="edu.stanford.irt.laneweb.XHTMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <pipeline:component mime-type="text/html"/>
         <property name="format">
