@@ -220,14 +220,15 @@
                     <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
-                <map:select type="gzip">
+                <map:serialize type="xhtml"/>
+                <!--<map:select type="gzip">
                     <map:when test="">
                         <map:serialize type="gzipxhtml"/>
                     </map:when>
                     <map:otherwise>
                         <map:serialize type="xhtml"/>
                     </map:otherwise>
-                </map:select>
+                </map:select>-->
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
                 <map:generate type="file" src="${jndi/live-base}/content/{1}.xml"/>

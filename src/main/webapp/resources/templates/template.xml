@@ -15,8 +15,8 @@
             <div id="sb-rt" class="sb-lr">
                 <div id="sb-lft" class="sb-lr">
                     <div class="sb-tb">
-                        <div class="sb-c" id="sb-tl"><!-- --></div>
-                        <div class="sb-c" id="sb-tr"><!-- --></div>
+                        <div class="sb-c" id="sb-tl"></div>
+                        <div class="sb-c" id="sb-tr"></div>
                     </div>
                     <div id="sb">
                         <div id="breadcrumb"><a href="http://med.stanford.edu/">School of
@@ -86,8 +86,8 @@
                         </ul>
                     </div>
                     <div class="sb-tb" id="sb-bot">
-                        <div class="sb-c" id="sb-bl"><!-- --></div>
-                        <div class="sb-c" id="sb-br"><!-- --></div>
+                        <div class="sb-c" id="sb-bl"></div>
+                        <div class="sb-c" id="sb-br"></div>
                     </div>
                 </div>
             </div>
@@ -259,28 +259,28 @@
             <span>Click here to log in for full access to all LaneConnex
                 resources.</span>
                 </div>-->
-        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/utilities/utilities.js&amp;2.8.0r4/build/container/container.js&amp;2.8.0r4/build/json/json.js&amp;2.8.0r4/build/history/history.js&amp;2.8.0r4/build/datasource/datasource.js&amp;2.8.0r4/build/animation/animation.js&amp;2.8.0r4/build/autocomplete/autocomplete.js"> </script>
-        <!--<script type="text/javascript" src="/javascript/lane-all.js"> </script>-->
-        <script type="text/javascript" src="/javascript/lane.js"> </script>
-        <script type="text/javascript" src="/javascript/accordionview.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-expandies.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-search.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-search-history.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-search-facets.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-search-facet-counts.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-metasearch.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-tracking.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-google.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-webtrends.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-popup.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-tooltips.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-spellcheck.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-querymap.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-findit.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-popin.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-ie.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-teletype.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-search-pico.js"> </script>
-        <script type="text/javascript" src="/javascript/lane-suggest.js"> </script>
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/utilities/utilities.js&amp;2.8.0r4/build/container/container.js&amp;2.8.0r4/build/json/json.js&amp;2.8.0r4/build/history/history.js&amp;2.8.0r4/build/datasource/datasource.js&amp;2.8.0r4/build/animation/animation.js&amp;2.8.0r4/build/autocomplete/autocomplete.js"></script>
+        <!--<script type="text/javascript" src="/javascript/lane-all.js"></script>-->
+        <script type="text/javascript" src="/javascript/lane.js"></script>
+        <script type="text/javascript" src="/javascript/accordionview.js"></script>
+        <script type="text/javascript" src="/javascript/lane-expandies.js"></script>
+        <script type="text/javascript" src="/javascript/lane-search.js"></script>
+        <script type="text/javascript" src="/javascript/lane-search-history.js"></script>
+        <script type="text/javascript" src="/javascript/lane-search-facets.js"></script>
+        <script type="text/javascript" src="/javascript/lane-search-facet-counts.js"></script>
+        <script type="text/javascript" src="/javascript/lane-metasearch.js"></script>
+        <script type="text/javascript" src="/javascript/lane-tracking.js"></script>
+        <script type="text/javascript" src="/javascript/lane-google.js"></script>
+        <script type="text/javascript" src="/javascript/lane-webtrends.js"></script>
+        <script type="text/javascript" src="/javascript/lane-popup.js"></script>
+        <script type="text/javascript" src="/javascript/lane-tooltips.js"></script>
+        <script type="text/javascript" src="/javascript/lane-spellcheck.js"></script>
+        <script type="text/javascript" src="/javascript/lane-querymap.js"></script>
+        <script type="text/javascript" src="/javascript/lane-findit.js"></script>
+        <script type="text/javascript" src="/javascript/lane-popin.js"></script>
+        <script type="text/javascript" src="/javascript/lane-ie.js"></script>
+        <script type="text/javascript" src="/javascript/lane-teletype.js"></script>
+        <script type="text/javascript" src="/javascript/lane-search-pico.js"></script>
+        <script type="text/javascript" src="/javascript/lane-suggest.js"></script>
     </body>
 </html>

@@ -173,10 +173,6 @@
             <xsl:when test=".='current-year'">
                 <xsl:value-of select="format-dateTime(current-dateTime(),'[Y,4]')"/>
             </xsl:when>
-            <!-- adds a space to avoid self-closing elements and funny chars from &#160; -->
-            <xsl:when test=".='no-self-close'">
-                <xsl:comment> </xsl:comment>
-            </xsl:when>
         </xsl:choose>
     </xsl:template>
 
