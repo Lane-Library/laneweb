@@ -6,7 +6,7 @@
     <map:pipelines>
         <map:pipeline type="caching">
             <!-- TODO: reenable expires header when we start versioning -->
-            <!--<map:parameter name="expires" value="access plus 31 days"/>-->
+            <map:parameter name="expires" value="access plus 31 days"/>
             <map:match pattern="images/**" type="wildcard">
                 <map:read type="resource" src="${jndi/live-base}/resources/images/{1}"/>
             </map:match>
