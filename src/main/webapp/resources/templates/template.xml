@@ -260,8 +260,8 @@
                 resources.</span>
                 </div>-->
         <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/utilities/utilities.js&amp;2.8.0r4/build/container/container.js&amp;2.8.0r4/build/json/json.js&amp;2.8.0r4/build/history/history.js&amp;2.8.0r4/build/datasource/datasource.js&amp;2.8.0r4/build/animation/animation.js&amp;2.8.0r4/build/autocomplete/autocomplete.js"></script>
-        <script type="text/javascript" src="/javascript/lane-all.js"></script>
-        <!--<script type="text/javascript" src="/javascript/lane.js"></script>
+        <!--<script type="text/javascript" src="/javascript/lane-all.js"></script>-->
+        <script type="text/javascript" src="/javascript/lane.js"></script>
         <script type="text/javascript" src="/javascript/accordionview.js"></script>
         <script type="text/javascript" src="/javascript/lane-expandies.js"></script>
         <script type="text/javascript" src="/javascript/lane-search.js"></script>
@@ -281,6 +281,6 @@
         <script type="text/javascript" src="/javascript/lane-ie.js"></script>
         <script type="text/javascript" src="/javascript/lane-teletype.js"></script>
         <script type="text/javascript" src="/javascript/lane-search-pico.js"></script>
-        <script type="text/javascript" src="/javascript/lane-suggest.js"></script>-->
+        <script type="text/javascript" src="/javascript/lane-suggest.js"></script>
     </body>
 </html>
