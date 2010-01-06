@@ -22,7 +22,7 @@
 padding:0;
 background-image:none;
 }
-.contentModule .bd .expandy h6  {
+.contentModule .bd .expandy h6, .contentModule-wide .bd .expandy h6   {
     background-image:url(/././graphics/backgr/exp-backrg-green-plus.gif);
     background-position:0px 0px;
     background-repeat:no-repeat;
@@ -32,7 +32,7 @@ background-image:none;
     padding:.3em 2em;
     font-family:Georgia, "Times New Roman", Times, serif;
 }
-.contentModule .bd .expandy h6.active {
+.contentModule .bd .expandy h6.active, .contentModule-wide .bd .expandy h6.active {
     color:#920000;
     background-image:url(/././graphics/backgr/exp-backrg-green-minus.gif);
 }
@@ -44,7 +44,7 @@ background-image:none;
     font-size: 11px;
 }
 
- .contentModule .bd .expandy ul li  {
+ .contentModule .bd .expandy ul li,  .contentModule-wide .bd .expandy ul li  {
 background-image:none;
      color:#333333;
     font-size: 1em;

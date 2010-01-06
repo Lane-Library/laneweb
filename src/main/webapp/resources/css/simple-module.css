@@ -1,3 +1,15 @@
+.simpleModule-image .hd {
+	background-image:url(/././images/backgr/simpleModule-imagehd.gif);
+	 background-repeat:no-repeat;
+    border:1px solid #E6E4DB;/*#C0BFA4;*/
+    color:white;
+    background-color:#b1a68c;
+    text-align:center;
+    padding:3px;
+
+   
+}
+
 .simpleModule .hd, .simpleModuleExpandy .hd, .simpleModuleExpandyleft .hd {
     background-image:url(/././images/backgr/simpleModuleHd.gif);
     background-repeat:repeat-x;
@@ -54,3 +66,5 @@
 .top-right-image {
 margin-top: 3em;
 }
+
+

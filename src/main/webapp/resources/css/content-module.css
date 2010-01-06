@@ -1,4 +1,4 @@
-.contentModule .hd, .contentModuleIndex .hd {
+.contentModule .hd, .contentModuleIndex .hd, .contentModule-wide .hd {
     background-color:#800000;
     background-image:url(/././images/sprite-vert.gif);
     background-position:0 -412px;
@@ -14,8 +14,12 @@
     padding:0;
 }
 
-.contentModule .bd {
+.contentModule .bd, .contentModule-wide .bd {
     background-image:url(/././graphics/backgr/left-column-back.gif);
     background-repeat:repeat-x;
     padding:0.5em 1em;
+}
+
+.contentModule-wide {
+	margin-right: 1em;
 }
