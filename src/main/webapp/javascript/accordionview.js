@@ -393,7 +393,7 @@
             var i, t, elPanelLink, elPanelContent, oPanelParent = oAttr.panel;//document.createElement(this.CONFIG.ITEM_WRAPPER_TAG_NAME);
 
             for (i = 0; i < oPanelParent.childNodes.length; i++) {
-                if (oPanelParent.childNodes[i].nodeType == Node.TEXT_NODE) {
+                if (oPanelParent.childNodes[i].nodeType == 3) {//Node.TEXT_NODE not available IE6
                     oPanelParent.removeChild(oPanelParent.childNodes[i]);
                     i--;
                 }
