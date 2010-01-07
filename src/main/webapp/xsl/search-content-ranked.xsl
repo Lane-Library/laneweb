@@ -85,7 +85,7 @@
                     <ul id="pubmedJournalLinks">
                         <xsl:for-each select="distinct-values($results/s:result/s:pub-title)">
                             <xsl:sort select="." order="ascending" data-type="text"/>
-                            <li><a target="_blank" href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND {.}[Journal]"><xsl:value-of select="."/></a></li>
+                            <li><a target="_blank" href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{.}&quot;[Journal]"><xsl:value-of select="."/></a></li>
                         </xsl:for-each>
                     </ul>
                 </xsl:if>
