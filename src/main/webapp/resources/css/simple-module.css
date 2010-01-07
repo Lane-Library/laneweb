@@ -1,15 +1,42 @@
-.simpleModule-image .hd {
-	background-image:url(/././images/backgr/simpleModule-imagehd.gif);
-	 background-repeat:no-repeat;
-    border:1px solid #E6E4DB;/*#C0BFA4;*/
-    color:white;
-    background-color:#b1a68c;
-    text-align:center;
-    padding:3px;
-
-   
+/*styles for simpleModule inside the contentModule (like on the Classroom and Study spaces page). Added to overwrite parent (contentModule) style */
+.contentModule-wide .simpleModule {
+	margin:0em 1em 0 0;
+	background-color: #fff;
+	border-left: 1px solid #E6E4DB;
+	margin-left: -1em;
+	padding-left: 1em;
 }
 
+.contentModule-wide .simpleModule .bd {
+	padding: 0;
+	margin-bottom: 2em;
+}
+
+.contentModule-wide .simpleModule .hd {
+	padding: 0;
+	background-image:url(/././images/backgr/simpleModule-imagehd.gif);
+    background-repeat:repeat-x;
+	-moz-border-radius-topleft:0;
+    -moz-border-radius-topright:0;
+    -webkit-border-top-left-radius:0;
+    -webkit-border-top-right-radius:0;
+	color: black;
+}
+
+.contentModule-wide .simpleModule  h5 {
+	padding: .5em;
+	background-color: #eeefeb;
+	   -moz-border-radius-topleft:5px;
+    -moz-border-radius-topright:5px;
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-top-right-radius:5px;
+}
+
+.contentModule-wide .simpleModule  img {
+	margin-bottom: 1em;
+}
+
+/*styles for regulart simpleModule in the right column*/
 .simpleModule .hd, .simpleModuleExpandy .hd, .simpleModuleExpandyleft .hd {
     background-image:url(/././images/backgr/simpleModuleHd.gif);
     background-repeat:repeat-x;
