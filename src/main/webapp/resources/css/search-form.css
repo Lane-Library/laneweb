@@ -46,9 +46,12 @@
 }
 #searchIndicator {
     visibility:hidden;
-    padding-right:60px;
+    position:relative;
+    height:80px;
+    width:536px;
+    z-index:1;
 }
-#search input#searchSubmit{
+#search input#searchSubmit {
     background-color:transparent;
     border:none;
     cursor:pointer;
@@ -71,13 +74,13 @@
     margin-left:562px;
     top:208px;
 }
-#search.clinicalSearch input.picoInput{
+#search.clinicalSearch input.picoInput {
     display:block;
 }
 #breadcrumb.clinicalSearch {
     top:247px;
 }
-#search input.picoInput{
+#search input.picoInput {
     display:none;
     border:none;
     position:absolute;
