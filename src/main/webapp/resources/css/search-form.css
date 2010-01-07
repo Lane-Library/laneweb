@@ -5,20 +5,11 @@
     height:84px;
     width:720px;
     margin-bottom: 1.5em;
+    position:relative;
 }
-#searchTips {
-    float:right;
-    color:#2D2D2D;
-    font-size:9px;
-    margin-top:12px;
-}
-#search input#searchTerms {
-    border:none;
-    position:absolute;
-    left:36px;
-    top:172px;
-    width:428px;
-    border:1px white solid;
+#search.clinicalSearch {
+    background-image:url(/././images/backgr/clini-back-with-fields.jpg);
+    height:120px;
 }
 #searchTabs li {
     float:left;
@@ -41,72 +32,73 @@
     padding:6px;
     text-align:center;
 }
+#searchTips {
+    float:right;
+    color:#2D2D2D;
+    font-size:9px;
+    margin-top:12px;
+}
+#searchIndicator {
+  z-index:1;
+  position:relative;
+  visibility:hidden;
+}
 #search fieldset {
     clear:left;
 }
-#searchIndicator {
-    visibility:hidden;
-    position:relative;
-    height:80px;
-    width:536px;
-    z-index:1;
+#searchTerms {
+    position:absolute;
+    left:24px;
+    top:48px;
+    width:430px;
+    border:1px white solid;
 }
-.clinicalSearch #searchIndicator {
-    height:106px;
+.clinicalSearch #searchTerms {
+    left:130px;
+    top:84px;
 }
-#search input#searchSubmit {
+#searchSubmit {
     background-color:transparent;
     border:none;
     cursor:pointer;
     position:absolute;
     width:20px;
-    margin-left:460px;
-    top:172px;
+    height:20px;
+    left:458px;
+    top:48px;
     text-indent:20px;
     padding-left:20px;
 }
-#search.clinicalSearch {
-    background-image:url(/././images/backgr/clini-back-with-fields.jpg);
-    height:120px;
+.clinicalSearch #searchSubmit {
+    left:563px;
+    top:83px;
 }
-#search.clinicalSearch input#searchTerms {
-    left:144px;
-    top:208px;
+.picoInput {
+    display:none;
+    border:1px white solid;
+    position:absolute;
+    top:50px;
 }
-#search.clinicalSearch input#searchSubmit {
-    margin-left:562px;
-    top:208px;
-}
-#search.clinicalSearch input.picoInput {
+.clinicalSearch .picoInput {
     display:block;
 }
 #breadcrumb.clinicalSearch {
     top:247px;
 }
-#search input.picoInput {
-    display:none;
-    border:none;
-    position:absolute;
-    border:1px white solid;
-}
-#search input#clinicalP {
-    left:40px;
-    top:175px;
+#clinicalP {
+    left:26px;
     width:165px;
 }
-#search input#clinicalI {
-    left:215px;
-    top:175px;
+#clinicalI {
+    left:202px;
     width:152px;
 }
-#search input#clinicalC {
-    left:377px;
-    top:175px;
+#clinicalC {
+    left:364px;
     width:150px;
 }
-#search input#clinicalO {
-    left:536px;
-    top:175px;
+#clinicalO {
+    left:525px;
     width:160px;
 }
 /* width of auto-complete PICO containers */
