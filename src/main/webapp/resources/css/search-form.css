@@ -51,6 +51,9 @@
     width:536px;
     z-index:1;
 }
+.clinicalSearch #searchIndicator {
+    height:106px;
+}
 #search input#searchSubmit {
     background-color:transparent;
     border:none;
