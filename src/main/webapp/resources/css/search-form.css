@@ -7,6 +7,9 @@
     margin-bottom: 1.5em;
     position:relative;
 }
+#search input {
+      outline-style:none; /* webkit: remove border from active inputs */
+}
 #search.clinicalSearch {
     background-image:url(/././images/backgr/clini-back-with-fields.jpg);
     height:120px;
