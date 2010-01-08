@@ -5,10 +5,6 @@
     height:84px;
     width:720px;
     margin-bottom: 1.5em;
-    position:relative;
-}
-#search input:focus {
-      outline-style:none; /* webkit: remove border from active inputs -- accessibility? */
 }
 #search.clinicalSearch {
     background-image:url(/././images/backgr/clini-back-with-fields.jpg);
@@ -23,9 +19,6 @@
     width:94px;
     padding:0;
 }
-#searchTabs a:focus{
-    outline-style:none; /* mozilla: remove dotted border -- accessibility? */
-}
 #searchTabs .active, #searchTabs li:hover, #searchTabs .hover {
     background-position:0px -70px;
 }
@@ -38,74 +31,79 @@
     padding:6px;
     text-align:center;
 }
+#searchTabs a:focus {
+/* mozilla: remove dotted border -- accessibility? */
+    outline-style:none;
+}
 #searchTips {
     float:right;
     color:#2D2D2D;
     font-size:9px;
     margin-top:12px;
 }
-#searchIndicator {
-  z-index:1;
-  position:relative;
-  visibility:hidden;
-}
 #search fieldset {
     clear:left;
+    padding-left:25px;
+/* IE6 needs this for layout: */
+    _margin-top:-2px;
 }
-#searchTerms {
-    position:absolute;
-    left:24px;
-    top:48px;
-    width:430px;
+#picoFields {
+    display:none;
+    padding-top:24px;
+}
+.clinicalSearch #picoFields {
+    display:block;
+}
+#searchFields {
+    padding-top:21px;
+}
+.clinicalSearch #searchFields {
+    padding-top:14px;
+    padding-left:128px;
+}
+#search input {
     border:1px white solid;
 }
-.clinicalSearch #searchTerms {
-    left:130px;
-    top:84px;
+#search input:focus {
+/* webkit: remove border from active inputs -- accessibility? */
+    outline-style:none;
 }
-#searchSubmit {
-    background-color:transparent;
+#searchTerms {
+    width:426px;
+}
+.clinicalSearch #searchTerms {
+}
+#search #searchSubmit {
     border:none;
+    background-color:transparent;
     cursor:pointer;
-    position:absolute;
     width:20px;
     height:20px;
-    left:458px;
-    top:48px;
     text-indent:20px;
     padding-left:20px;
 }
-.clinicalSearch #searchSubmit {
-    left:563px;
-    top:83px;
-}
 .picoInput {
-    display:none;
-    border:1px white solid;
-    position:absolute;
-    top:50px;
-}
-.clinicalSearch .picoInput {
-    display:block;
+    margin-right:5px;
+/* IE6 needs this for layout: */
+    _margin-right:9px;
 }
 #breadcrumb.clinicalSearch {
     top:247px;
 }
 #clinicalP {
-    left:26px;
     width:165px;
 }
 #clinicalI {
-    left:202px;
     width:152px;
 }
 #clinicalC {
-    left:364px;
     width:150px;
 }
 #clinicalO {
-    left:525px;
     width:160px;
+}
+#search .acContainer, #search .acContainer div {
+    display:inline;
 }
 /* width of auto-complete PICO containers */
 #pAcInput.yui-ac-container {
@@ -122,4 +120,10 @@
 }
 #searchTermsAcInput {
     width:428px;
+}
+#searchIndicator {
+    visibility:hidden;
+    position:absolute;
+    top:144px;
+    left:408px;
 }
