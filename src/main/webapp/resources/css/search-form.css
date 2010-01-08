@@ -7,8 +7,8 @@
     margin-bottom: 1.5em;
     position:relative;
 }
-#search input {
-      outline-style:none; /* webkit: remove border from active inputs */
+#search input:focus {
+      outline-style:none; /* webkit: remove border from active inputs -- accessibility? */
 }
 #search.clinicalSearch {
     background-image:url(/././images/backgr/clini-back-with-fields.jpg);
@@ -22,6 +22,9 @@
     height:27px;
     width:94px;
     padding:0;
+}
+#searchTabs a:focus{
+    outline-style:none; /* mozilla: remove dotted border -- accessibility? */
 }
 #searchTabs .active, #searchTabs li:hover, #searchTabs .hover {
     background-position:0px -70px;
