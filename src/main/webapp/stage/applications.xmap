@@ -14,12 +14,15 @@
             <map:match pattern="search/**" type="wildcard">
                 <!-- /apps/search/xml returns the xmlized search result -->
                 <map:match type="wildcard" pattern="search/xml">
-                    <map:generate type="search"/>
+                     <map:generate type="search">
+                         <map:parameter name="query" value="${request/parameters/q}"/>
+                     </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/ranked/xml returns xmlized content results -->
                 <map:match pattern="search/ranked/xml" type="wildcard">
                     <map:generate type="search-engine">
+                        <map:parameter name="query" value="${request/parameters/q}"/>
                         <map:parameter name="s" value="true"/>
                         <map:parameter name="t" value="20000"/>
                     </map:generate>
@@ -40,7 +43,9 @@
                 </map:match>
                 <!-- result with proxy links (if necessary) in xml format -->
                 <map:match pattern="search/proxy/xml" type="wildcard">
-                    <map:generate type="search"/>
+                     <map:generate type="search">
+                         <map:parameter name="query" value="${request/parameters/q}"/>
+                     </map:generate>
                     <map:transform type="cme-links">
                         <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
                     </map:transform>
