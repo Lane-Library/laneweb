@@ -411,7 +411,9 @@
             }
             else {
                 elPanelLink = oAttr.label;
-                elPanelLink.id = this.get('element').id + '-' + this._idCounter + '-label';
+                // commented out b/c want to retain original element ID
+                // not sure if this will cause other problems ... doesn't look like concat'd ID is used
+                //elPanelLink.id = this.get('element').id + '-' + this._idCounter + '-label';
                 YUD.addClass(elPanelLink, this.CLASSES.TOGGLE);
                 elPanelContent = oAttr.content;
                 YUD.addClass(elPanelContent, this.CLASSES.CONTENT);       
