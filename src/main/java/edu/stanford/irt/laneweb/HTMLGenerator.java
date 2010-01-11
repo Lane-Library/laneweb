@@ -18,8 +18,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * The neko html generator reads HTML from a source, converts it to XHTML and
- * generates SAX Events. It uses the NekoHTML library to do this.
+ * The neko html generator reads HTML from a source, converts it to XHTML and generates SAX Events. It uses the NekoHTML
+ * library to do this.
  */
 public class HTMLGenerator implements Generator, CacheableProcessingComponent {
 
@@ -52,23 +52,19 @@ public class HTMLGenerator implements Generator, CacheableProcessingComponent {
     }
 
     /**
-     * Generate the unique key. This key must be unique inside the space of this
-     * component. This method must be invoked before the generateValidity()
-     * method.
+     * Generate the unique key. This key must be unique inside the space of this component. This method must be invoked
+     * before the generateValidity() method.
      * 
-     * @return The generated key or <code>0</code> if the component is currently
-     *         not cacheable.
+     * @return The generated key or <code>0</code> if the component is currently not cacheable.
      */
     public java.io.Serializable getKey() {
         return this.source.getURI();
     }
 
     /**
-     * Generate the validity object. Before this method can be invoked the
-     * generateKey() method must be invoked.
+     * Generate the validity object. Before this method can be invoked the generateKey() method must be invoked.
      * 
-     * @return The generated validity object or <code>null</code> if the
-     *         component is currently not cacheable.
+     * @return The generated validity object or <code>null</code> if the component is currently not cacheable.
      */
     public SourceValidity getValidity() {
         return this.source.getValidity();
@@ -79,16 +75,15 @@ public class HTMLGenerator implements Generator, CacheableProcessingComponent {
     }
 
     /**
-     * Setup the html generator. Try to get the last modification date of the
-     * source for caching.
+     * Setup the html generator. Try to get the last modification date of the source for caching.
      * 
      * @throws IOException
      * @throws SAXException
      * @throws ProcessingException
      */
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
-            IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         this.source = resolver.resolveURI(src);
     }
 }

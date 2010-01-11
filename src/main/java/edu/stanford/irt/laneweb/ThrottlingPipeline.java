@@ -17,8 +17,7 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
     private static final Logger LOGGER = Logger.getLogger(ThrottlingPipeline.class);
 
     /**
-     * the currently processed host/urls. The superclass is a pooled Component
-     * so this has to be a static variable.
+     * the currently processed host/urls. The superclass is a pooled Component so this has to be a static variable.
      */
     private static final Collection<String> REQUESTS = new HashSet<String>();
 
@@ -36,11 +35,9 @@ public class ThrottlingPipeline extends CachingProcessingPipeline {
     }
 
     /**
-     * Process the given <code>Environment</code>, producing the output. I
-     * created this to keep Denial of Service attacks to the eresources urls.
-     * from bringing down the site. Only one request for a given url from a
-     * given client IP is processed at one time. Others will throw a
-     * ProcessingException
+     * Process the given <code>Environment</code>, producing the output. I created this to keep Denial of Service
+     * attacks to the eresources urls. from bringing down the site. Only one request for a given url from a given client
+     * IP is processed at one time. Others will throw a ProcessingException
      */
     @Override
     protected boolean processXMLPipeline(final Environment environment) throws ProcessingException {

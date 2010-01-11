@@ -111,7 +111,8 @@ public class UserDao {
                     return token.getSunetId();
                 }
             } catch (IllegalArgumentException e) {
-                LOGGER.error("Cookie cannot be decrypted, it was maybe modified by user. IP --> ".concat(getRemoteAddr(request)));
+                LOGGER.error("Cookie cannot be decrypted, it was maybe modified by user. IP --> "
+                        .concat(getRemoteAddr(request)));
             }
         }
         return null;

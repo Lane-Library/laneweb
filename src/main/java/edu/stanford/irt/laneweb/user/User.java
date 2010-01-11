@@ -97,9 +97,11 @@ public class User {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("sunetId=").append(this.sunetId).append(",univid=").append(this.univId).append(",affiliation=").append(
-                this.affiliation).append(",displayname=").append(this.name).append(",iPGroup=").append(this.iPGroup).append(",ticket=").append(this.ticket)
-                .append(",proxyLinks=").append(this.proxyLinks);
+        StringBuffer sb =
+                new StringBuffer("sunetId=").append(this.sunetId).append(",univid=").append(this.univId).append(
+                        ",affiliation=").append(this.affiliation).append(",displayname=").append(this.name).append(
+                        ",iPGroup=").append(this.iPGroup).append(",ticket=").append(this.ticket).append(",proxyLinks=")
+                        .append(this.proxyLinks);
         return sb.toString();
     }
 }

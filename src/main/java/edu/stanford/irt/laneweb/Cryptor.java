@@ -74,7 +74,8 @@ public class Cryptor {
             throw new IllegalArgumentException("invalid encryptedValue");
         }
         try {
-            return new PersistentLoginToken(values[0], Long.parseLong(values[1]), Integer.parseInt(values[2]), encryptedValue);
+            return new PersistentLoginToken(values[0], Long.parseLong(values[1]), Integer.parseInt(values[2]),
+                    encryptedValue);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("invalid encryptedValue", e);
         }

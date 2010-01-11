@@ -76,7 +76,8 @@ public class UserDaoTest {
         cookieValue.append(String.valueOf(new Date().getTime()));
         cookieValue.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
         cookieValue.append("firefox test".hashCode());
-        Cookie sunetIdCookie = new Cookie(LanewebConstants.LANE_COOKIE_NAME, this.cryptor.encrypt(cookieValue.toString()));
+        Cookie sunetIdCookie =
+                new Cookie(LanewebConstants.LANE_COOKIE_NAME, this.cryptor.encrypt(cookieValue.toString()));
         this.cookies[0] = sunetIdCookie;
         expect(this.request.getHeader("User-Agent")).andReturn("firefox test");
         replay(this.request);

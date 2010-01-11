@@ -67,8 +67,8 @@ public class NamespaceFilter implements Transformer {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3) throws ProcessingException, SAXException,
-            IOException {
+    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3)
+            throws ProcessingException, SAXException, IOException {
     }
 
     public void skippedEntity(final String name) throws SAXException {
@@ -87,7 +87,8 @@ public class NamespaceFilter implements Transformer {
         this.consumer.startDTD(name, publicId, systemId);
     }
 
-    public void startElement(final String uri, final String localName, final String name, final Attributes atts) throws SAXException {
+    public void startElement(final String uri, final String localName, final String name, final Attributes atts)
+            throws SAXException {
         this.consumer.startElement(uri, localName, name, atts);
     }
 

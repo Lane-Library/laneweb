@@ -15,8 +15,8 @@ public class LoginAction implements Action {
     private static final Logger LOGGER = Logger.getLogger(LoginAction.class);
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters params)
-            throws IOException, ProcessingException {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,
+            final String source, final Parameters params) throws IOException, ProcessingException {
         String sunetid = params.getParameter("sunetid", null);
         String queryString = params.getParameter("query-string", null);
         String ticket = params.getParameter("ticket", null);
@@ -37,9 +37,11 @@ public class LoginAction implements Action {
             return null;
         }
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("redirecting to proxy server: " + " sunetid = " + sunetid + " ticket = " + " url = " + queryString);
+            LOGGER.debug("redirecting to proxy server: " + " sunetid = " + sunetid + " ticket = " + " url = "
+                    + queryString);
         }
-        String redirectURL = "http://laneproxy.stanford.edu/login?user=" + sunetid + "&ticket=" + ticket + "&" + queryString;
+        String redirectURL =
+                "http://laneproxy.stanford.edu/login?user=" + sunetid + "&ticket=" + ticket + "&" + queryString;
         redirector.redirect(false, redirectURL);
         return null;
     }

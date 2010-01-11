@@ -19,7 +19,8 @@ public class CreateLaneCookieAction implements Action {
     private Cryptor cryptor;
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters parameters) {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,
+            final String source, final Parameters parameters) {
         if (this.cryptor == null) {
             throw new RuntimeException("cryptor is null");
         }
@@ -36,7 +37,7 @@ public class CreateLaneCookieAction implements Action {
         Cookie laneCookie = new Cookie(LanewebConstants.LANE_COOKIE_NAME, token.getEncryptedValue());
         laneCookie.setPath("/");
         laneCookie.setMaxAge(3600 * 24 * 7 * 2); // cookie is available for 2
-                                                 // weeks
+        // weeks
         response.addCookie(laneCookie);
         return Collections.emptyMap();
     }

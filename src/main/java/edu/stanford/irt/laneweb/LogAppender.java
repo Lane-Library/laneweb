@@ -8,8 +8,8 @@ import org.apache.log4j.spi.ThrowableInformation;
 
 // TODO: replace this with something in cocoon RequestProcessor subclass
 /**
- * A log appender that doesn't spew out error stack traces in the log just
- * because someone requested a file that doesn't exist.
+ * A log appender that doesn't spew out error stack traces in the log just because someone requested a file that doesn't
+ * exist.
  */
 public class LogAppender extends RollingFileAppender {
 
@@ -22,7 +22,9 @@ public class LogAppender extends RollingFileAppender {
                 t = t.getCause();
             }
             if (t instanceof FileNotFoundException) {
-                LoggingEvent newEvent = new LoggingEvent(event.fqnOfCategoryClass, event.getLogger(), event.getLevel(), t.toString(), null);
+                LoggingEvent newEvent =
+                        new LoggingEvent(event.fqnOfCategoryClass, event.getLogger(), event.getLevel(), t.toString(),
+                                null);
                 super.doAppend(newEvent);
                 return;
             }

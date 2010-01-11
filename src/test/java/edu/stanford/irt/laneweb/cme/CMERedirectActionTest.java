@@ -25,7 +25,8 @@ public class CMERedirectActionTest {
         expect(parameters.getParameter("host", null)).andReturn("uptodate");
         expect(parameters.getParameter("emrid", null)).andReturn("nobody");
         replay(parameters);
-        assertEquals("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?unid=nobody&srcsys=epic90710&eiv=2.1.0",
+        assertEquals(
+                "http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?unid=nobody&srcsys=epic90710&eiv=2.1.0",
                 this.action.act(null, null, null, null, parameters).get("cme-redirect"));
         verify(parameters);
     }
@@ -37,7 +38,8 @@ public class CMERedirectActionTest {
         expect(parameters.getParameter("emrid", null)).andReturn("");
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
-        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get("cme-redirect"));
+        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
+                "cme-redirect"));
         verify(parameters);
     }
 
@@ -48,7 +50,8 @@ public class CMERedirectActionTest {
         expect(parameters.getParameter("emrid", null)).andReturn("nobody");
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
-        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get("cme-redirect"));
+        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
+                "cme-redirect"));
         verify(parameters);
     }
 
@@ -59,7 +62,8 @@ public class CMERedirectActionTest {
         expect(parameters.getParameter("emrid", null)).andReturn("nobody");
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
-        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get("cme-redirect"));
+        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
+                "cme-redirect"));
         verify(parameters);
     }
 
@@ -70,7 +74,8 @@ public class CMERedirectActionTest {
         expect(parameters.getParameter("emrid", null)).andReturn(null);
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
-        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get("cme-redirect"));
+        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
+                "cme-redirect"));
         verify(parameters);
     }
 
@@ -81,7 +86,8 @@ public class CMERedirectActionTest {
         expect(parameters.getParameter("emrid", null)).andReturn(null);
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
-        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get("cme-redirect"));
+        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
+                "cme-redirect"));
         verify(parameters);
     }
 
@@ -92,7 +98,8 @@ public class CMERedirectActionTest {
         expect(parameters.getParameter("emrid", null)).andReturn("nobody");
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
-        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get("cme-redirect"));
+        assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
+                "cme-redirect"));
         verify(parameters);
     }
 }

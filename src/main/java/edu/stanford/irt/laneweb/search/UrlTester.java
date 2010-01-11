@@ -57,8 +57,8 @@ public class UrlTester implements Reader {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
-            IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         this.url = par.getParameter("url", null);
         if (!this.url.startsWith("http")) {
             this.url = "http://".concat(this.url);

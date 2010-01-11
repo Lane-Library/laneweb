@@ -31,8 +31,8 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
 /**
- * XMLPipe that processes XInclude elements. To perform XInclude processing on
- * included content, this class is instantiated recursively.
+ * XMLPipe that processes XInclude elements. To perform XInclude processing on included content, this class is
+ * instantiated recursively.
  */
 class XIncludePipe extends AbstractXMLPipe {
 
@@ -42,15 +42,14 @@ class XIncludePipe extends AbstractXMLPipe {
     private int fallbackElementLevel;
 
     /**
-     * In case {@link #useFallbackLevel} > 0, then this should contain the
-     * exception that caused fallback to be needed. In the case of nested
-     * include elements it will contain only the deepest exception.
+     * In case {@link #useFallbackLevel} > 0, then this should contain the exception that caused fallback to be needed.
+     * In the case of nested include elements it will contain only the deepest exception.
      */
     private Exception fallBackException;
 
     /**
-     * Value of the href attribute of the xi:include element that caused the
-     * creation of the this XIncludePipe. Used to detect loop inclusions.
+     * Value of the href attribute of the xi:include element that caused the creation of the this XIncludePipe. Used to
+     * detect loop inclusions.
      */
     private String href;
 
@@ -60,14 +59,14 @@ class XIncludePipe extends AbstractXMLPipe {
     private final LanewebXIncludeTransformer lanewebXIncludeTransformer;
 
     /**
-     * Locator of the current stream, stored here so that it can be restored
-     * after another document send its content to the consumer.
+     * Locator of the current stream, stored here so that it can be restored after another document send its content to
+     * the consumer.
      */
     private Locator locator;
 
     /**
-     * Keep a map of namespaces prefix in the source document to pass it to the
-     * XPointerContext for correct namespace identification.
+     * Keep a map of namespaces prefix in the source document to pass it to the XPointerContext for correct namespace
+     * identification.
      */
     private Map<String, String> namespaces = new HashMap<String, String>();
 
@@ -83,8 +82,8 @@ class XIncludePipe extends AbstractXMLPipe {
     private XMLBaseSupport xmlBaseSupport;
 
     /**
-     * Value of the xpointer attribute of the xi:include element that caused the
-     * creation of this XIncludePipe. Used to detect loop inclusions.
+     * Value of the xpointer attribute of the xi:include element that caused the creation of this XIncludePipe. Used to
+     * detect loop inclusions.
      */
     private String xpointer;
 
@@ -193,7 +192,8 @@ class XIncludePipe extends AbstractXMLPipe {
         }
         XIncludePipe parent = getParent();
         while (parent != null) {
-            if (uri.equals(parent.getHref()) && thePointer.equals(parent.getXpointer() == null ? "" : parent.getXpointer())) {
+            if (uri.equals(parent.getHref())
+                    && thePointer.equals(parent.getXpointer() == null ? "" : parent.getXpointer())) {
                 return true;
             }
             parent = parent.getParent();
@@ -231,9 +231,11 @@ class XIncludePipe extends AbstractXMLPipe {
                 }
             }
         } catch (IOException e) {
-            throw new CascadingRuntimeException("Error in XIncludeTransformer while trying to resolve base URL for document", e);
+            throw new CascadingRuntimeException(
+                    "Error in XIncludeTransformer while trying to resolve base URL for document", e);
         } catch (SAXException e) {
-            throw new CascadingRuntimeException("Error in XIncludeTransformer while trying to resolve base URL for document", e);
+            throw new CascadingRuntimeException(
+                    "Error in XIncludeTransformer while trying to resolve base URL for document", e);
         }
         this.locator = locator;
         super.setDocumentLocator(locator);
@@ -258,7 +260,8 @@ class XIncludePipe extends AbstractXMLPipe {
     }
 
     @Override
-    public void startElement(final String uri, final String name, final String raw, final Attributes attr) throws SAXException {
+    public void startElement(final String uri, final String name, final String raw, final Attributes attr)
+            throws SAXException {
         // Track xml:base context:
         this.xmlBaseSupport.startElement(uri, name, raw, attr);
         // Handle elements in xinclude namespace:
@@ -268,8 +271,10 @@ class XIncludePipe extends AbstractXMLPipe {
                 // Process the include, unless in an ignored fallback:
                 if (isEvaluatingContent()) {
                     String href = attr.getValue("", LanewebXIncludeTransformer.XINCLUDE_INCLUDE_ELEMENT_HREF_ATTRIBUTE);
-                    String parse = attr.getValue("", LanewebXIncludeTransformer.XINCLUDE_INCLUDE_ELEMENT_PARSE_ATTRIBUTE);
-                    String xpointer = attr.getValue("", LanewebXIncludeTransformer.XINCLUDE_INCLUDE_ELEMENT_XPOINTER_ATTRIBUTE);
+                    String parse =
+                            attr.getValue("", LanewebXIncludeTransformer.XINCLUDE_INCLUDE_ELEMENT_PARSE_ATTRIBUTE);
+                    String xpointer =
+                            attr.getValue("", LanewebXIncludeTransformer.XINCLUDE_INCLUDE_ELEMENT_XPOINTER_ATTRIBUTE);
                     try {
                         processXIncludeElement(href, parse, xpointer);
                     } catch (ProcessingException e) {
@@ -313,19 +318,20 @@ class XIncludePipe extends AbstractXMLPipe {
         if (this.locator == null) {
             return "unknown location";
         } else {
-            return this.locator.getSystemId() + ":" + this.locator.getColumnNumber() + ":" + this.locator.getLineNumber();
+            return this.locator.getSystemId() + ":" + this.locator.getColumnNumber() + ":"
+                    + this.locator.getLineNumber();
         }
     }
 
     /**
-     * Determine whether the pipe is currently in a state where contents should
-     * be evaluated, i.e. xi:include elements should be resolved and elements in
-     * other namespaces should be copied through. Will return false for fallback
-     * contents within a successful xi:include, and true for contents outside
-     * any xi:include or within an xi:fallback for an unsuccessful xi:include.
+     * Determine whether the pipe is currently in a state where contents should be evaluated, i.e. xi:include elements
+     * should be resolved and elements in other namespaces should be copied through. Will return false for fallback
+     * contents within a successful xi:include, and true for contents outside any xi:include or within an xi:fallback
+     * for an unsuccessful xi:include.
      */
     private boolean isEvaluatingContent() {
-        return (this.xIncludeElementLevel == 0) || ((this.fallbackElementLevel > 0) && (this.fallbackElementLevel == this.useFallbackLevel));
+        return (this.xIncludeElementLevel == 0)
+                || ((this.fallbackElementLevel > 0) && (this.fallbackElementLevel == this.useFallbackLevel));
     }
 
     private void parseText(final String xpointer, final Source url) throws SAXException, IOException {
@@ -376,13 +382,15 @@ class XIncludePipe extends AbstractXMLPipe {
             if ((xpointer != null) && (xpointer.length() > 0)) {
                 XPointer xptr;
                 xptr = XPointerFrameworkParser.parse(NetUtils.decodePath(xpointer));
-                XPointerContext context = new XPointerContext(xpointer, url, subPipe, this.lanewebXIncludeTransformer.manager);
+                XPointerContext context =
+                        new XPointerContext(xpointer, url, subPipe, this.lanewebXIncludeTransformer.manager);
                 for (String prefix : this.namespaces.keySet()) {
                     context.addPrefix(prefix, this.namespaces.get(prefix));
                 }
                 xptr.process(context);
             } else {
-                this.lanewebXIncludeTransformer.parser.parse(new InputSource(url.getInputStream()), new IncludeXMLConsumer(subPipe));
+                this.lanewebXIncludeTransformer.parser.parse(new InputSource(url.getInputStream()),
+                        new IncludeXMLConsumer(subPipe));
             }
             // restore locator on the consumer
             if (this.locator != null) {
@@ -414,9 +422,11 @@ class XIncludePipe extends AbstractXMLPipe {
         }
     }
 
-    protected void processXIncludeElement(final String href, final String parse, final String xpointer) throws SAXException, ProcessingException, IOException {
+    protected void processXIncludeElement(final String href, final String parse, final String xpointer)
+            throws SAXException, ProcessingException, IOException {
         if (getLogger().isDebugEnabled()) {
-            getLogger().debug("Processing XInclude element: href=" + href + ", parse=" + parse + ", xpointer=" + xpointer);
+            getLogger().debug(
+                    "Processing XInclude element: href=" + href + ", parse=" + parse + ", xpointer=" + xpointer);
         }
         // Default for @parse is "xml"
         String p = parse == null ? "xml" : parse;

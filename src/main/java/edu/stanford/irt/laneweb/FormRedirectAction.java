@@ -11,11 +11,9 @@ import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
 
 /**
- * used to redirect form submissions where the source value is a http address.
- * These are normally intercepted by javascript in the client. This is here so
- * that if javascript is off in the client, the user will get to the page
- * anyway. This substitutes the q parameter into the http address and returns
- * the value in the return map.
+ * used to redirect form submissions where the source value is a http address. These are normally intercepted by
+ * javascript in the client. This is here so that if javascript is off in the client, the user will get to the page
+ * anyway. This substitutes the q parameter into the http address and returns the value in the return map.
  * 
  * @author ceyates
  */
@@ -30,7 +28,8 @@ public class FormRedirectAction implements Action {
     private static final String SOURCE = "source";
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String src,
+            final Parameters params) {
         Map<String, String> result = new HashMap<String, String>();
         String q = params.getParameter(Q, null);
         String source = params.getParameter(SOURCE, null);

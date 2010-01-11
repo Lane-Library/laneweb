@@ -44,8 +44,8 @@ public class GZipTxtResourceReader extends TxtResourceReader {
 
     @SuppressWarnings("unchecked")
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
-            IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         super.setup(resolver, objectModel, src, par);
         this.pip.getResponse().setHeader("Content-Encoding", "gzip");
         this.pip.getResponse().setHeader("Vary", "Accept-Encoding");

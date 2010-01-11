@@ -18,8 +18,8 @@ public class PersistentLoginAction implements Action {
     private Cryptor cryptor = null;
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters params)
-            throws Exception {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,
+            final String source, final Parameters params) throws Exception {
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         HttpServletResponse response = ObjectModelHelper.getResponse(objectModel);
         String persistentLogin = request.getParameter("pl");
@@ -48,7 +48,8 @@ public class PersistentLoginAction implements Action {
         this.cryptor = cryptor;
     }
 
-    private void createLaneCookie(final String sunetid, final HttpServletRequest request, final HttpServletResponse response) throws Exception {
+    private void createLaneCookie(final String sunetid, final HttpServletRequest request,
+            final HttpServletResponse response) throws Exception {
         if (sunetid == null) {
             throw new RuntimeException("sunetId is null");
         }

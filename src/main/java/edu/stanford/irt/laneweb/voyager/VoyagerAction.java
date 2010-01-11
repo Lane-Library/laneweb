@@ -15,8 +15,8 @@ public class VoyagerAction implements Action {
     private VoyagerLogin voyagerLogin = null;
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string, final Parameters param)
-            throws Exception {
+    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel,
+            final String string, final Parameters param) throws Exception {
         String pid = param.getParameter("pid", null);
         String queryString = param.getParameter("query-string", null);
         String univId = param.getParameter("univ-id", null);

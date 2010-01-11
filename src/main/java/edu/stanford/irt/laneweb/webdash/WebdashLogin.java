@@ -23,7 +23,8 @@ public class WebdashLogin {
 
     private Mac mac;
 
-    public String getWebdashURL(final String sunetId, final String name, final String affiliation, final String nonce, final String systemUserId) {
+    public String getWebdashURL(final String sunetId, final String name, final String affiliation, final String nonce,
+            final String systemUserId) {
         if (null == this.mac) {
             throw new IllegalStateException("webdashKey not set");
         }
@@ -48,8 +49,9 @@ public class WebdashLogin {
         String fullName = encodeParameter(name);
         String encodedAffiliation = getSubGroup(affiliation);
         StringBuffer result = new StringBuffer();
-        result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce).append("&subgroup=").append(
-                encodedAffiliation).append("&system_short_name=stanford-sunet&system_user_id=").append(encodedId);
+        result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce)
+                .append("&subgroup=").append(encodedAffiliation).append(
+                        "&system_short_name=stanford-sunet&system_user_id=").append(encodedId);
         String token = getToken(result.toString());
         result.append("&token=").append(token);
         result.insert(0, systemUserId == null ? REGISTRATION_URL : LOGIN_URL);

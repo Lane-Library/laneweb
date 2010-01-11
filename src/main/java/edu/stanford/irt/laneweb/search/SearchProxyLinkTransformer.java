@@ -33,7 +33,8 @@ public class SearchProxyLinkTransformer extends AbstractProxyLinkTransformer {
     }
 
     @Override
-    public void startElement(final String uri, final String localName, final String qName, final Attributes atts) throws SAXException {
+    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
+            throws SAXException {
         if (this.proxyLinks && URL.equals(localName)) {
             this.builder.setLength(0);
             this.building = true;

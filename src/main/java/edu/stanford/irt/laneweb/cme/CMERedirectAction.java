@@ -27,10 +27,12 @@ public class CMERedirectAction implements Action {
     private static final String QUERY_STRING = "query-string";
 
     // TODO: once more vendors, move UTD strings to collection of host objects
-    private static final String UTD_CME_STRING = "http://www.uptodate.com/online/content/search.do?unid=EMRID&srcsys=epic90710&eiv=2.1.0";
+    private static final String UTD_CME_STRING =
+            "http://www.uptodate.com/online/content/search.do?unid=EMRID&srcsys=epic90710&eiv=2.1.0";
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters params) {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,
+            final String source, final Parameters params) {
         Map result = new HashMap();
         String host = params.getParameter(HOST_PARAM, null);
         String emrid = params.getParameter(User.EMRID, null);
@@ -59,7 +61,8 @@ public class CMERedirectAction implements Action {
             }
         }
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("redirecting to cme host: host = " + host + " emrid = " + emrid + " redirectUrl = " + result.get(CME_REDIRECT_KEY));
+            LOGGER.debug("redirecting to cme host: host = " + host + " emrid = " + emrid + " redirectUrl = "
+                    + result.get(CME_REDIRECT_KEY));
         }
         return result;
     }

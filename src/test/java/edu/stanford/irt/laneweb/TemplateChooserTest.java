@@ -40,7 +40,8 @@ public class TemplateChooserTest {
 
     @Test
     public void testTemplateMap() {
-        this.templateMap = Collections.singletonMap("^(?:/stage|)/bassett/raw/bassettLargerView.html", "bassettLargerView");
+        this.templateMap =
+                Collections.singletonMap("^(?:/stage|)/bassett/raw/bassettLargerView.html", "bassettLargerView");
         this.templateChooser = new TemplateChooser(this.defaultTemplate, this.templateMap);
         expect(this.request.getParameter("template")).andReturn(null);
         expect(this.request.getRequestURI()).andReturn("/laneweb/stage/bassett/raw/bassettLargerView.html");

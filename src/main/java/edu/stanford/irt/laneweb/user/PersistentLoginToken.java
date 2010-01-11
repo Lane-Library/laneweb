@@ -12,7 +12,8 @@ public class PersistentLoginToken {
 
     private int userAgentHash;
 
-    public PersistentLoginToken(final String sunetId, final long dateValue, final int userAgentHash, final String encryptedValue) {
+    public PersistentLoginToken(final String sunetId, final long dateValue, final int userAgentHash,
+            final String encryptedValue) {
         if (null == sunetId) {
             throw new IllegalArgumentException("null sunetId");
         }

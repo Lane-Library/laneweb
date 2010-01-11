@@ -19,8 +19,8 @@ public class SearchContextReloaderAction implements Action {
     private String svnUrlProject;
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string, final Parameters param)
-            throws Exception {
+    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel,
+            final String string, final Parameters param) throws Exception {
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         String release = request.getParameter("release");
         String userName = request.getParameter("username");

@@ -15,7 +15,8 @@ import org.apache.cocoon.environment.SourceResolver;
 public class DeleteCookieAction implements Action {
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source, final Parameters parameters) {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,
+            final String source, final Parameters parameters) {
         String cookieName = parameters.getParameter("cookie-name", null);
         if (null == cookieName || cookieName.length() == 0) {
             throw new IllegalArgumentException("no cookie-name");

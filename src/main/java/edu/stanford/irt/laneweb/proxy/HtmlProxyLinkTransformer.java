@@ -15,7 +15,8 @@ public class HtmlProxyLinkTransformer extends AbstractProxyLinkTransformer {
     private static final String HTTP_SCHEME = "http";
 
     @Override
-    public void startElement(final String uri, final String localName, final String name, final Attributes atts) throws SAXException {
+    public void startElement(final String uri, final String localName, final String name, final Attributes atts)
+            throws SAXException {
         if (this.proxyLinks) {
             if (ANCHOR.equals(localName)) {
                 String link = atts.getValue(HREF);

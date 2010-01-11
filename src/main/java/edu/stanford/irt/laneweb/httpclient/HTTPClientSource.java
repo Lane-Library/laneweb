@@ -104,8 +104,8 @@ public class HTTPClientSource implements Source {
     /**
      * Method to ascertain whether the given resource actually exists.
      * 
-     * @return <code>true</code> if the resource pointed to by the URI during
-     *         construction exists, <code>false</code> otherwise.
+     * @return <code>true</code> if the resource pointed to by the URI during construction exists, <code>false</code>
+     *         otherwise.
      */
     public boolean exists() {
         updateData();
@@ -115,8 +115,7 @@ public class HTTPClientSource implements Source {
     /**
      * Obtain the content length of the referenced resource.
      * 
-     * @return content length of the referenced resource, or -1 if
-     *         unknown/uncalculatable
+     * @return content length of the referenced resource, or -1 if unknown/uncalculatable
      */
     public long getContentLength() {
         updateData();
@@ -124,8 +123,7 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Method to obtain an {@link InputStream} to read the response from the
-     * server.
+     * Method to obtain an {@link InputStream} to read the response from the server.
      * 
      * @return {@link InputStream} containing data sent from the server.
      * @throws IOException
@@ -178,8 +176,8 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Get the last modification date of this source. This date is measured in
-     * milliseconds since the Epoch (00:00:00 GMT, January 1, 1970).
+     * Get the last modification date of this source. This date is measured in milliseconds since the Epoch (00:00:00
+     * GMT, January 1, 1970).
      * 
      * @return the last modification date or <code>0</code> if unknown.
      */
@@ -199,8 +197,8 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Return the URI scheme identifier, ie. the part preceding the fist ':' in
-     * the URI (see <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396</a>).
+     * Return the URI scheme identifier, ie. the part preceding the fist ':' in the URI (see <a
+     * href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396</a>).
      * 
      * @return the URI scheme identifier
      */
@@ -220,8 +218,7 @@ public class HTTPClientSource implements Source {
     /**
      * Obtain a {@link SourceValidity} object.
      * 
-     * @return a {@link SourceValidity} object, or <code>null</code> if this is
-     *         not possible.
+     * @return a {@link SourceValidity} object, or <code>null</code> if this is not possible.
      */
     public SourceValidity getValidity() {
         // Implementation taken from URLSource.java, Kudos :)
@@ -245,8 +242,7 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Method to update the content length of a resource after executing a
-     * particular {@link HttpMethod}.
+     * Method to update the content length of a resource after executing a particular {@link HttpMethod}.
      * 
      * @param method
      *            {@link HttpMethod} executed
@@ -264,8 +260,7 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Method to make response data available if possible without actually
-     * making an actual request (ie. via HTTP HEAD).
+     * Method to make response data available if possible without actually making an actual request (ie. via HTTP HEAD).
      */
     private void updateData() {
         // no request made so far, attempt to get some response data.
@@ -294,11 +289,9 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Method to update whether a referenced resource exists, after executing a
-     * particular {@link HttpMethod}.
+     * Method to update whether a referenced resource exists, after executing a particular {@link HttpMethod}.
      * <p>
-     * REVISIT: exists() would be better called canRead() or similar, as a
-     * resource can exist but not be readable.
+     * REVISIT: exists() would be better called canRead() or similar, as a resource can exist but not be readable.
      * </p>
      * 
      * @param method
@@ -312,12 +305,12 @@ public class HTTPClientSource implements Source {
         // REVISIT(MC): need a special way to handle 304 (NOT MODIFIED)
         // 204 & 205 in the future
         // resource does not exist if HttpClient returns a 404 or a 410
-        this.exists = ((response == HttpStatus.SC_OK) || (response == HttpStatus.SC_CREATED) || (response == HttpStatus.SC_PARTIAL_CONTENT));
+        this.exists =
+                ((response == HttpStatus.SC_OK) || (response == HttpStatus.SC_CREATED) || (response == HttpStatus.SC_PARTIAL_CONTENT));
     }
 
     /**
-     * Method to update the last modified date of a resource after executing a
-     * particular {@link HttpMethod}.
+     * Method to update the last modified date of a resource after executing a particular {@link HttpMethod}.
      * 
      * @param method
      *            {@link HttpMethod} executed
@@ -333,8 +326,7 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Method to update the mime type of a resource after executing a particular
-     * {@link HttpMethod}.
+     * Method to update the mime type of a resource after executing a particular {@link HttpMethod}.
      * 
      * @param method
      *            {@link HttpMethod} executed
@@ -348,8 +340,7 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Executes a particular {@link HttpMethod} and updates internal data
-     * storage.
+     * Executes a particular {@link HttpMethod} and updates internal data storage.
      * 
      * @param method
      *            {@link HttpMethod} to execute

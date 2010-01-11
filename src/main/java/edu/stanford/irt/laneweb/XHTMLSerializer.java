@@ -19,8 +19,7 @@ public class XHTMLSerializer extends AbstractTextSerializer {
     }
 
     /**
-     * Set the {@link OutputStream} where the requested resource should be
-     * serialized.
+     * Set the {@link OutputStream} where the requested resource should be serialized.
      */
     @Override
     public void setOutputStream(final OutputStream out) throws IOException {

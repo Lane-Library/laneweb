@@ -9,9 +9,8 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * This class contains the logic to determine which template is used. The
- * highest priority is given to the template request parameter. Next priority is
- * a Map with regular expressions matching request URIs as the key with the
+ * This class contains the logic to determine which template is used. The highest priority is given to the template
+ * request parameter. Next priority is a Map with regular expressions matching request URIs as the key with the
  * associated template as the value. Finally, default value is provided.
  * 
  * @author ceyates

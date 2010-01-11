@@ -102,8 +102,8 @@ public class XHTMLizableEresourceList implements XMLizable {
      * @param link
      * @throws SAXException
      */
-    private void handleAnchor(final ContentHandler handler, final Eresource eresource, final Version version, final Link link, final boolean hasGetPassword)
-            throws SAXException {
+    private void handleAnchor(final ContentHandler handler, final Eresource eresource, final Version version,
+            final Link link, final boolean hasGetPassword) throws SAXException {
         AttributesImpl attributes = new AttributesImpl();
         String proxyValue = version.isProxy() ? "proxy" : "noproxy";
         attributes.addAttribute(EMPTY_NS, "class", "class", "CDATA", proxyValue);
@@ -166,8 +166,8 @@ public class XHTMLizableEresourceList implements XMLizable {
         XMLUtils.endElement(handler, XHTML_NS, DD);
     }
 
-    private void handleLink(final ContentHandler handler, final Eresource eresource, final Version version, final Link passwordLink, final Link link)
-            throws SAXException {
+    private void handleLink(final ContentHandler handler, final Eresource eresource, final Version version,
+            final Link passwordLink, final Link link) throws SAXException {
         StringBuffer sb = new StringBuffer();
         XMLUtils.startElement(handler, XHTML_NS, LI);
         handleAnchor(handler, eresource, version, link, passwordLink != null);

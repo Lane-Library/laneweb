@@ -15,7 +15,8 @@ public class WebdashAction implements Action {
     private WebdashLogin webDashLogin;
 
     @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel, final String string, final Parameters param) {
+    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel,
+            final String string, final Parameters param) {
         String nonce = param.getParameter("nonce", null);
         String systemUserId = param.getParameter("system-user-id", null);
         String sunetId = param.getParameter("sunet-id", null);

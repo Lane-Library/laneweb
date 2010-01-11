@@ -46,8 +46,7 @@ public class SuggestionReaderTest {
     }
 
     /**
-     * Test method for
-     * {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#generate()}.
+     * Test method for {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#generate()}.
      * 
      * @throws IOException
      */
@@ -63,8 +62,7 @@ public class SuggestionReaderTest {
     }
 
     /**
-     * Test method for
-     * {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#generate()}.
+     * Test method for {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#generate()}.
      * 
      * @throws IOException
      */

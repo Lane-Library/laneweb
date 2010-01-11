@@ -50,8 +50,8 @@ public class BassettAccordionEresourcesGenerator implements Generator {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
-            IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         String query = request.getParameter(QUERY);
         if (null != query) {

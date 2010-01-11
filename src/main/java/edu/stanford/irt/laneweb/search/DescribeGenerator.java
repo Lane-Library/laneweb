@@ -66,8 +66,8 @@ public class DescribeGenerator implements Generator {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) throws ProcessingException, SAXException,
-            IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         this.q = request.getParameter("q");
         this.e = request.getParameterValues("e");
