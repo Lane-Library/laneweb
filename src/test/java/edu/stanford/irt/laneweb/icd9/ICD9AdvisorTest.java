@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.ICD9;
+package edu.stanford.irt.laneweb.icd9;
 
 import static org.junit.Assert.assertEquals;
 
