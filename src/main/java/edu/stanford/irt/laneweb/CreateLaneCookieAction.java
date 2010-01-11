@@ -46,5 +46,6 @@ public class CreateLaneCookieAction implements Action {
         if (null == cryptor) {
             throw new IllegalArgumentException("null cryptor");
         }
+        this.cryptor = cryptor;
     }
 }

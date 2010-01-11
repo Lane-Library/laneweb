@@ -90,6 +90,12 @@ public class ProxyHostManager {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
