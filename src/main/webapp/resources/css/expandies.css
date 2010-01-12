@@ -129,6 +129,20 @@ padding-left: 1em;
     visibility:hidden;
 }
 
+/* search specific */
+.search .simpleModuleExpandyleft .bd .expandy li h6 {
+    background-color:#fff;
+    width:200px;
+}
+.search .simpleModuleExpandyleft .bd .expandy li h6.current {
+    background-color:#B2A77A;
+    border-bottom:none;
+    width:206px;
+    _width:204px;
+}
+/* end search specific */
+
+
 /*
   styles for the main column expandies start here - NOTE: there will be two kinds of styles!!!
   .contentModule .bd .expandy h6 {

@@ -35,3 +35,16 @@
 }
 
 /*.simpleModuleExpandyleft .bd ul li:hover */
+
+/* search specific */
+.search .sectionMenu .bd {
+      width:254px;
+      _width:252px;
+      border:none;
+}
+.search .sectionMenu .hd{
+    padding-top:5px;
+    border:none;
+    background-image:none;
+}
+/* end search specific */

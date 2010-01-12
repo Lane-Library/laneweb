@@ -23,3 +23,15 @@
 .contentModule-wide {
 	margin-right: 1em;
 }
+
+/* search specific */
+.search .contentModule {
+    width:95%;
+}
+.search .contentModule .bd {
+    border:3px solid #B2A77A;
+    min-height:600px;
+    height:auto !important;
+    height:600px;
+}
+/* end search specific */

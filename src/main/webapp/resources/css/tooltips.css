@@ -1,0 +1,10 @@
+.yui-tt {
+    border:1px solid #CCC;
+    background-color:#F2F3ED;
+    font-size:90%;
+    text-align:left;
+    z-index:3
+}
+.yui-tt .bd {
+    padding:.5em;
+}

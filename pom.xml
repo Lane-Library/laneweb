@@ -113,6 +113,8 @@
                                 <include>online-resources-min.css</include>
                                 <include>liaisons-min.css</include>
                                 <include>autocomplete-min.css</include>
+                                <include>tooltips-min.css</include>
+                                <include>search-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>

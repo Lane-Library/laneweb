@@ -1,0 +1,30 @@
+#yui-history-iframe {
+    position:absolute;
+    top:0; left:0;
+    width:1px; height:1px;
+    visibility:hidden;
+}
+.tooltips, #search-content-counts, span#findIt, #spellCheck, span#queryMapping {
+    display:none;
+}
+.search .current {
+    background-color:#B2A77A;
+    background-image:none;
+    border:none;
+    padding:5px 5px;
+    -moz-border-radius-topleft:5px;
+    -moz-border-radius-bottomleft:5px;
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-bottom-left-radius:5px;
+}
+.search .current a {
+    color:#fff;
+    font-weight:bold;
+}
+.search .current a:focus {
+    border-bottom:none;
+    outline-style:none;
+}
+.search .indent {
+    margin-left:10px;
+}
