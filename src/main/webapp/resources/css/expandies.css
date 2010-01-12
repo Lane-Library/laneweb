@@ -124,6 +124,10 @@ padding-left: 1em;
     font-family:Georgia, "Times New Roman", Times, serif;
 }
 
+/* hide expandies before they are ready to avoid bouncing */
+.expandy{
+    visibility:hidden;
+}
 
 /*
   styles for the main column expandies start here - NOTE: there will be two kinds of styles!!!
