@@ -83,9 +83,11 @@
                 </xsl:if>
                 <xsl:if test="count($results/s:result[s:engineName='PubMed']/s:pub-title) > 0">
                     <ul id="pubmedJournalLinks">
-                        <xsl:for-each select="distinct-values($results/s:result/s:pub-title)">
+                        <xsl:for-each select="distinct-values($results/s:result[s:engineName = 'PubMed']/s:pub-title)">
                             <xsl:sort select="." order="ascending" data-type="text"/>
-                            <li><a target="_blank" href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{.}&quot;[Journal]"><xsl:value-of select="."/></a></li>
+                            <xsl:if test="position() &lt;= 10">
+                                <li><a target="_blank" href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{.}&quot;[Journal]"><xsl:value-of select="."/></a></li>
+                            </xsl:if>
                         </xsl:for-each>
                     </ul>
                 </xsl:if>
@@ -253,9 +255,7 @@
                             </xsl:when>
                             <xsl:when test="$resultLimit &lt; number(s:engineHits)">
                                 <xsl:text> - </xsl:text>
-                                <a target="_blank" title="more results from {s:engineName}" href="{s:engineUrl}">
-                                        <xsl:value-of select="format-number(s:engineHits - 1,'###,###,##0')"/> more results
-                                </a>
+                                <a target="_blank" title="all {format-number(s:engineHits,'###,###,##0')} results from {s:engineName}" href="{s:engineUrl}">more</a>
                             </xsl:when>
                         </xsl:choose>
                     </div>

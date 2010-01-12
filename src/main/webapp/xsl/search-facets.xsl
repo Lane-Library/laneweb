@@ -154,7 +154,8 @@
             <xsl:apply-templates select="attribute::node()" />
             <xsl:attribute name="href"><xsl:value-of select="//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId]/h:a/@href"/></xsl:attribute>
             <xsl:attribute name="target">_blank</xsl:attribute>
-            <xsl:apply-templates select="child::node()" />
+            <xsl:apply-templates select="self::node()" />
+            <xsl:text> </xsl:text>
         </xsl:copy>
     </xsl:template>
     
