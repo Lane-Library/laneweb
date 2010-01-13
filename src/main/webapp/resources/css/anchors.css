@@ -5,10 +5,14 @@ a, #laneNav li li a {
 }
 
 .contentModule .bd #searchResults a {
-    color: #1c4b70;
-    font-weight:bold;
+    color:#2200cc;
+    font-size:16px;
 }
 
+.contentModule .bd #searchResults .moreResults a {
+    color:#7777cc;
+    font-size:13px;
+}
 
 a:hover, #laneNav li li a:hover {
     color:#820000;

@@ -28,3 +28,18 @@
 .search .indent {
     margin-left:10px;
 }
+.search strong {
+    font-weight:bold;
+}
+#searchResults .moreResults .sourceLink {
+    color:#3f8f3e;
+    font-size:1em;
+}
+#searchResults .moreResults a {
+    color:#7777cc;
+    font-size:1em;
+}
+#queryMapping span a, #findIt a, #spellCheck a {
+    margin-left:10px;
+    color:#2200CC;
+}
