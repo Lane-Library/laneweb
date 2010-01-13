@@ -61,9 +61,14 @@
             </head>
             <body>
                 <dl>
-                    <xsl:apply-templates select="$results/s:result[not(s:url=preceding-sibling::node()/s:url)]">
+                    <!-- deduping over URLs misses dups across engines; WoS and PubMed dates, authors and journal titles differ significantly; using title may be too greedy -->
+                    <xsl:variable name="deduped-results">
+                        <xsl:copy-of select="$results/s:result[not(s:dedupTitle=preceding-sibling::node()/s:dedupTitle)]">
+                            <xsl:sort select="s:sortTitle"/>
+                        </xsl:copy-of>
+                    </xsl:variable>
+                    <xsl:apply-templates select="$deduped-results/s:result">
                         <xsl:sort select="@score" order="descending" data-type="number"/>
-                        <xsl:sort select="s:sortTitle"/>
                     </xsl:apply-templates>
                 </dl>
                 <div id="search-content-counts" style="display:none;">
@@ -200,6 +205,7 @@
             <engineUrl><xsl:value-of select="../s:url"/></engineUrl>
             <title><xsl:value-of select="s:title"/></title>
             <sortTitle><xsl:value-of select="replace($norm-title,'^(a|an|the) ','','i')"/></sortTitle>   
+            <dedupTitle><xsl:value-of select="replace($norm-title,'\W','')"/></dedupTitle>   
             <description>
                 <xsl:choose>
                     <xsl:when test="s:description"><xsl:value-of select="s:description"/></xsl:when>
