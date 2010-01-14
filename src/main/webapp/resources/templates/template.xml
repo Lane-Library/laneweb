@@ -15,8 +15,8 @@
             <div id="sb-rt" class="sb-lr">
                 <div id="sb-lft" class="sb-lr">
                     <div class="sb-tb">
-                        <div class="sb-c" id="sb-tl"></div>
-                        <div class="sb-c" id="sb-tr"></div>
+                        <div class="sb-c" id="sb-tl"/>
+                        <div class="sb-c" id="sb-tr"/>
                     </div>
                     <div id="sb">
                         <div id="breadcrumb"><a href="http://med.stanford.edu/">School of
@@ -26,6 +26,63 @@
                             <a href="/index.html"><span>Lane</span> Medical Library <span
                                     id="subHeading">powered by LaneConnex Technology</span></a>
                         </h1>
+                        <form id="search" method="get" action="/search.html">
+                            <ul id="searchTabs">
+                                <li id="articles" title="enter terms to search for articles">
+                                    <a href="/index.html?searchTab=articles"
+                                        title="Lane article search">Articles</a>
+                                </li>
+                                <li id="catalog" title="enter terms to search the catalog">
+                                    <a href="/index.html?searchTab=catalog"
+                                        title="Lane catalog search">Catalog</a>
+                                </li>
+                                <li id="specialty" title="enter terms to search specialty resources">
+                                    <a href="/index.html?searchTab=specialty"
+                                        title="Lane specialty search">Specialty</a>
+                                </li>
+                                <li id="clinical" title="enter terms to search clinical resources">
+                                    <a href="/index.html?searchTab=clinical"
+                                        title="Lane clinical search">Clinical</a>
+                                </li>
+                            </ul>
+                            <div id="searchTips">
+                                <a href="/services/laneconnexSearch.html">Search Tips</a>&#160;&#160;&#160;|&#160;&#160;<a href="/services/laneconnexSearch.html">How Does Our
+                                    Search Work?</a>
+                            </div>
+
+                            <fieldset id="picoFields">
+                                <div class="acContainer">
+                                    <input name="p" class="picoInput" id="clinicalP" type="text"
+                                        title="patient condition"/>
+                                    <div class="acMesh" id="pAcInput" title="Suggested MeSH Terms"/>
+                                </div>
+                                <div class="acContainer">
+                                    <input name="i" class="picoInput" id="clinicalI" type="text"
+                                        title="intervention"/>
+                                    <div class="acMesh" id="iAcInput" title="Suggested MeSH Terms"/>
+                                </div>
+                                <div class="acContainer">
+                                    <input name="c" class="picoInput" id="clinicalC" type="text"
+                                        title="comparison"/>
+                                    <div class="acMesh" id="cAcInput" title="Suggested MeSH Terms"/>
+                                </div>
+                                <div class="acContainer">
+                                    <input name="o" class="picoInput" id="clinicalO" type="text"
+                                        title="outcome"/>
+                                    <div class="acMesh" id="oAcInput" title="Suggested MeSH Terms"/>
+                                </div>
+                            </fieldset>
+                            <fieldset id="searchFields">
+                                <div class="acContainer">
+                                    <input name="q" id="searchTerms" type="text"/>
+                                    <div id="searchTermsAcInput"/>
+                                </div>
+                                <input id="searchSubmit" type="submit" value="search"/>
+                                <input name="source" id="searchSource" type="hidden" value=""/>
+                            </fieldset>
+                            <div id="searchIndicator"><img alt="[searching]"
+                                    src="/images/backgr/search-indicator.gif"/></div>
+                        </form>
                         <?laneweb content?>
                         <ul id="login">
                             <li>
@@ -86,15 +143,15 @@
                         </ul>
                     </div>
                     <div class="sb-tb" id="sb-bot">
-                        <div class="sb-c" id="sb-bl"></div>
-                        <div class="sb-c" id="sb-br"></div>
+                        <div class="sb-c" id="sb-bl"/>
+                        <div class="sb-c" id="sb-br"/>
                     </div>
                 </div>
             </div>
             <ul id="somNav2" class="nav2">
                 <li>
-                    <a href="http://stanfordmedicine.stanford.edu">&#169;
-                        <?laneweb current-year?> Stanford Medicine</a>
+                    <a href="http://stanfordmedicine.stanford.edu">&#169; <?laneweb current-year?>
+                        Stanford Medicine</a>
                 </li>
                 <li>
                     <a href="http://www.stanford.edu/site/terms.html">Terms of Use</a>
@@ -151,8 +208,8 @@
                             <a href="http://med.stanford.edu/clinicaltrials/">Clinical Trials</a>
                         </li>
                         <li>
-                            <a href="http://med.stanford.edu/guide/">Departments, Institutes
-                                &amp; Centers</a>
+                            <a href="http://med.stanford.edu/guide/">Departments, Institutes &amp;
+                                Centers</a>
                         </li>
                         <li>
                             <a href="http://med.stanford.edu/profiles/">Faculty Profiles</a>
@@ -259,28 +316,28 @@
             <span>Click here to log in for full access to all LaneConnex
                 resources.</span>
                 </div>-->
-        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/utilities/utilities.js&amp;2.8.0r4/build/container/container.js&amp;2.8.0r4/build/json/json.js&amp;2.8.0r4/build/history/history.js&amp;2.8.0r4/build/datasource/datasource.js&amp;2.8.0r4/build/animation/animation.js&amp;2.8.0r4/build/autocomplete/autocomplete.js"></script>
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/utilities/utilities.js&amp;2.8.0r4/build/container/container.js&amp;2.8.0r4/build/json/json.js&amp;2.8.0r4/build/history/history.js&amp;2.8.0r4/build/datasource/datasource.js&amp;2.8.0r4/build/animation/animation.js&amp;2.8.0r4/build/autocomplete/autocomplete.js"/>
         <!--<script type="text/javascript" src="/javascript/lane-all.js"></script>-->
-        <script type="text/javascript" src="/javascript/lane.js"></script>
-        <script type="text/javascript" src="/javascript/accordionview.js"></script>
-        <script type="text/javascript" src="/javascript/lane-expandies.js"></script>
-        <script type="text/javascript" src="/javascript/lane-search.js"></script>
-        <script type="text/javascript" src="/javascript/lane-search-history.js"></script>
-        <script type="text/javascript" src="/javascript/lane-search-facets.js"></script>
-        <script type="text/javascript" src="/javascript/lane-search-facet-counts.js"></script>
-        <script type="text/javascript" src="/javascript/lane-metasearch.js"></script>
-        <script type="text/javascript" src="/javascript/lane-tracking.js"></script>
-        <script type="text/javascript" src="/javascript/lane-google.js"></script>
-        <script type="text/javascript" src="/javascript/lane-webtrends.js"></script>
-        <script type="text/javascript" src="/javascript/lane-popup.js"></script>
-        <script type="text/javascript" src="/javascript/lane-tooltips.js"></script>
-        <script type="text/javascript" src="/javascript/lane-spellcheck.js"></script>
-        <script type="text/javascript" src="/javascript/lane-querymap.js"></script>
-        <script type="text/javascript" src="/javascript/lane-findit.js"></script>
-        <script type="text/javascript" src="/javascript/lane-popin.js"></script>
-        <script type="text/javascript" src="/javascript/lane-ie.js"></script>
-        <script type="text/javascript" src="/javascript/lane-teletype.js"></script>
-        <script type="text/javascript" src="/javascript/lane-search-pico.js"></script>
-        <script type="text/javascript" src="/javascript/lane-suggest.js"></script>
+        <script type="text/javascript" src="/javascript/lane.js"/>
+        <script type="text/javascript" src="/javascript/accordionview.js"/>
+        <script type="text/javascript" src="/javascript/lane-expandies.js"/>
+        <script type="text/javascript" src="/javascript/lane-search.js"/>
+        <script type="text/javascript" src="/javascript/lane-search-history.js"/>
+        <script type="text/javascript" src="/javascript/lane-search-facets.js"/>
+        <script type="text/javascript" src="/javascript/lane-search-facet-counts.js"/>
+        <script type="text/javascript" src="/javascript/lane-metasearch.js"/>
+        <script type="text/javascript" src="/javascript/lane-tracking.js"/>
+        <script type="text/javascript" src="/javascript/lane-google.js"/>
+        <script type="text/javascript" src="/javascript/lane-webtrends.js"/>
+        <script type="text/javascript" src="/javascript/lane-popup.js"/>
+        <script type="text/javascript" src="/javascript/lane-tooltips.js"/>
+        <script type="text/javascript" src="/javascript/lane-spellcheck.js"/>
+        <script type="text/javascript" src="/javascript/lane-querymap.js"/>
+        <script type="text/javascript" src="/javascript/lane-findit.js"/>
+        <script type="text/javascript" src="/javascript/lane-popin.js"/>
+        <script type="text/javascript" src="/javascript/lane-ie.js"/>
+        <script type="text/javascript" src="/javascript/lane-teletype.js"/>
+        <script type="text/javascript" src="/javascript/lane-search-pico.js"/>
+        <script type="text/javascript" src="/javascript/lane-suggest.js"/>
     </body>
 </html>

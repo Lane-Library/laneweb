@@ -3,8 +3,7 @@
     background-position:bottom;
     background-repeat:no-repeat;
     height:84px;
-    width:960px;
-    margin-bottom: 1.5em;
+    margin:24px 14px;
 }
 #search.clinicalSearch {
     background-image:url(/././images/backgr/clini-back-with-fields.jpg);
@@ -43,7 +42,7 @@
 }
 #search fieldset {
     clear:left;
-    padding-left:25px;
+    padding-left:150px;
 /* IE6 needs this for layout: */
     _margin-top:-2px;
 }
@@ -55,7 +54,7 @@
     display:block;
 }
 #searchFields {
-    padding-top:21px;
+    padding-top:18px;
 }
 .clinicalSearch #searchFields {
     padding-top:14px;
@@ -69,7 +68,7 @@
     outline-style:none;
 }
 #searchTerms {
-    width:426px;
+    width:586px;
 }
 .clinicalSearch #searchTerms {
 }
