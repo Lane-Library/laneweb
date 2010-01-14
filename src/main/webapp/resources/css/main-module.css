@@ -18,7 +18,7 @@
     border:none;
 }
 .mainModule {
-    margin:2.2em 0 1em 1em;
+    margin:0 0 1em 1em;
 }
 .mainModule .bd:after {
     content:".";
