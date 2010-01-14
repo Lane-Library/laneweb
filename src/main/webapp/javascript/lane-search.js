@@ -123,6 +123,8 @@ LANE.search = LANE.search ||  function() {
                             form[picoInputs[i]].parentNode.removeChild(form[picoInputs[i]]);
                         }
                     }
+                    // hide q input so form doesn't bounce
+                    form.q.style.visibility = 'hidden';
                     o.startSearch();
                     form.submit();
                 } catch (ex) {
