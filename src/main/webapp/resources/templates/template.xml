@@ -69,7 +69,6 @@
                                 <div class="acContainer">
                                     <input name="o" class="picoInput" id="clinicalO" type="text"
                                         title="outcome"/>
-                                    <div class="acMesh" id="oAcInput" title="Suggested MeSH Terms"/>
                                 </div>
                             </fieldset>
                             <fieldset id="searchFields">

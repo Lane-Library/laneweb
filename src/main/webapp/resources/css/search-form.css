@@ -52,13 +52,14 @@
 }
 .clinicalSearch #picoFields {
     display:block;
+    padding-left:68px;
 }
 #searchFields {
     padding-top:18px;
 }
 .clinicalSearch #searchFields {
     padding-top:14px;
-    padding-left:128px;
+    padding-left:148px;
 }
 #search input {
     border:1px white solid;
@@ -90,35 +91,32 @@
     top:247px;
 }
 #clinicalP {
-    width:165px;
+    width:190px;
 }
 #clinicalI {
-    width:152px;
+    width:197px;
 }
 #clinicalC {
-    width:150px;
+    width:197px;
 }
 #clinicalO {
-    width:160px;
+    width:190px;
 }
 #search .acContainer, #search .acContainer div {
     display:inline;
 }
 /* width of auto-complete PICO containers */
 #pAcInput.yui-ac-container {
-    width:167px;
+    width:193px;
 }
 #iAcInput.yui-ac-container {
-    width:154px;
+    width:200px;
 }
 #cAcInput.yui-ac-container {
-    width:152px;
-}
-#OAcInput.yui-ac-container {
-    width:162px;
+    width:198px;
 }
 #searchTermsAcInput {
-    width:428px;
+    width:590px;
 }
 #searchIndicator {
     visibility:hidden;
