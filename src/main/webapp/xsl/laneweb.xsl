@@ -121,6 +121,7 @@
             <xsl:when test="starts-with($path,'/sumc-specialties')">specialty</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/info-literacy')">clinical</xsl:when>
+            <xsl:when test="ends-with($path,'-viaLane.html')">articles</xsl:when>
             <xsl:when test="starts-with($path,'/biomed-resources')">catalog</xsl:when>
             <xsl:when test="starts-with($path,'/services')">catalog</xsl:when>
             <xsl:when test="starts-with($path,'/help')">catalog</xsl:when>
