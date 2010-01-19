@@ -115,6 +115,7 @@
                                 <include>autocomplete-min.css</include>
                                 <include>tooltips-min.css</include>
                                 <include>search-min.css</include>
+                                <include>images-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
