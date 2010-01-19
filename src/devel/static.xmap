@@ -10,7 +10,7 @@
                         <map:read type="resource" src="resources/images/{1}"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="${jndi/live-base}/resources/images/{1}"/>
+                        <map:read type="resource" src="context://resources/images/{1}"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
