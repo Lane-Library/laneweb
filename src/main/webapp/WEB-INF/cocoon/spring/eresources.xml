@@ -20,6 +20,7 @@
                 <value>cc</value>
                 <value>lanesite</value>
                 <value>software</value>
+                <value>statistics</value>
             </set>
         </property>
         <property name="subsets">
