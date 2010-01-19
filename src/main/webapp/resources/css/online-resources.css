@@ -33,6 +33,7 @@ white-space:nowrap;
 #browseTabs  {
       margin: .5em 0 .5em 0;
     width: 450px;
+	padding-bottom: 12em;
    /* background-image: url(/././graphics/buttons/ej-letters-off.gif);
     background-repeat: no-repeat; background-position: 0;*/
    
@@ -56,17 +57,14 @@ padding-top:1em;
 .alert-box div {
     display: block;
     width: 405px;
- padding:0 1em 1em 1em;
+ padding:1em 1em 1em 1em;
  border: 3px solid #cdcfbe;
  position:relative;
  height: 200px; 
+ margin-bottom:2em;
 }
 
 
-.alert-box div img {
-
-    float: right;
-}
 
 
 .alert-box div h4 {

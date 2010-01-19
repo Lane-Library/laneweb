@@ -1,13 +1,13 @@
 
 h3, h4, h5 {
-    color:#262215;
+    color:#565245;
 }
 h3, h4, h5 {
     font-family:Georgia, "Times New Roman", Times, serif;
     font-weight:normal;
 }
 h3 {
-    font-size: 1.7em;
+    font-size: 2em;
    /* padding-bottom: .5em;*/
 }
 h4 {
