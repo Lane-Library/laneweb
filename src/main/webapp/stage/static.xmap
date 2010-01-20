@@ -4,16 +4,16 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
-        <map:pipeline type="noncaching">
+        <map:pipeline type="caching">
             <map:match pattern="images/**" type="wildcard">
-                <map:read type="resource" src="${jndi/stage-base}/resources/images/{1}"/>
+                <map:read type="resource" src="context://resources/images/{1}"/>
             </map:match>
             <map:match pattern="favicon.ico" type="wildcard">
-                <map:read type="resource" src="${jndi/stage-base}/resources/images/favicon.ico"/>
+                <map:read type="resource" src="context://resources/images/favicon.ico"/>
             </map:match>
             <!-- first wildcard will be version for local css and javascript -->
             <map:match pattern="style/*/**.css" type="wildcard">
-                <map:read type="txt-resource" src="${jndi/stage-base}/resources/css/{2}.css">
+                <map:read type="txt-resource" src="context://resources/css/{2}.css">
                     <map:parameter name="path" value="${request/contextPath}/stage"/>
                 </map:read>
             </map:match>
@@ -22,6 +22,8 @@
                     <map:parameter name="path" value="${request/contextPath}/stage"/>
                 </map:read>
             </map:match>
+        </map:pipeline>
+        <map:pipeline type="noncaching">
             <map:match pattern="**.pdf" type="wildcard">
                 <map:read type="resource" src="${jndi/stage-base}/content/{1}.pdf">
                     <map:parameter name="byte-ranges" value="false"/>
