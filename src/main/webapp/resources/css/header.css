@@ -38,3 +38,10 @@ h1 span {
 #som:hover {
     background-position:0 -600px;
 }
+
+#libraryContact {
+position:absolute;
+left: 700px;
+top: 63px;
+font-size: 10px;
+}
