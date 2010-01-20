@@ -60,15 +60,36 @@
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
+               
+                <!-- result with proxy links (if necessary) in xml format -->
+                <map:match pattern="search-resource/proxy/xml" type="wildcard">
+                    <map:generate type="search-resource">
+                        <map:parameter name="query" value="${request/parameters/q}"/>
+                    </map:generate>
+                    <map:transform type="cme-links">
+                        <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
+                    </map:transform>
+                    <map:transform type="search-proxy-links">
+                        <map:parameter name="base-path" value="${request/contextPath}"/>
+                        <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
+                        <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
+                        <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
+                        <map:parameter name="proxy-links" value="${proxyLinks}"/>
+                    </map:transform>
+                    <map:serialize type="xml"/>
+                </map:match>
+               
+                
                 <!-- result with proxy links (if necessary) in json format -->
                 <map:match pattern="search/proxy/json" type="wildcard">
-                    <map:generate type="file" src="cocoon:/search/proxy/xml"/>
+                    <map:generate type="file" src="cocoon:/search-resource/proxy/xml"/>
                     <map:transform type="saxon" src="context://xsl/search2json.xsl">
                         <map:parameter name="content" value="${request/parameters/content}"/>
                         <map:parameter name="content-to-display" value="5"/>
                     </map:transform>
                     <map:serialize type="text"/>
                 </map:match>
+                
                 <!-- search facet counts -->
                 <map:match pattern="search/facets/json" type="wildcard">
                     <map:aggregate element="search-facet-counts">

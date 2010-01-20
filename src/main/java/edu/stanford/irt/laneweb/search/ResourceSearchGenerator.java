@@ -4,10 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 
 import edu.stanford.irt.search.Result;
@@ -46,13 +43,11 @@ public class ResourceSearchGenerator extends SearchGenerator {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         super.setup(resolver, objectModel, src, par);
-        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        String[] rsrcs = request.getParameterValues("r");
-        if (null == rsrcs) {
+        if (null == this.rsrcs) {
             throw new IllegalArgumentException("null resources");
         }
         this.resources = new HashSet<String>();
-        for (String element : rsrcs) {
+        for (String element : this.rsrcs) {
             this.resources.add(element);
         }
     }

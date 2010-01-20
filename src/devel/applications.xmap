@@ -79,7 +79,7 @@
                 </map:match>
                 <!-- result with proxy links (if necessary) in json format -->
                 <map:match pattern="search/proxy/json" type="wildcard">
-                    <map:generate type="file" src="cocoon:/search/proxy/xml"/>
+                    <map:generate type="file" src="cocoon:/search-resource/proxy/xml"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/search2json.xsl">
                             <map:transform type="saxon" src="xsl/search2json.xsl">

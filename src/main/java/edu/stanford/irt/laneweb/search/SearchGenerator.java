@@ -23,7 +23,11 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
 
     private long defaultTimeout;
 
+    protected String[] engines;
+
     private MetaSearchManager metaSearchManager;
+
+    protected String[] rsrcs;
 
     private String s;
 
@@ -33,6 +37,14 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
 
     @Override
     public Result doSearch() {
+        // if you want to use resource parameters please use the resourceSearchGenarator
+        if (this.rsrcs != null) {
+            throw new IllegalArgumentException("not null resource");
+        }
+        // if you want to use engine parameters please use the engineSearchGenarator
+        if (this.engines != null) {
+            throw new IllegalArgumentException("not null engine");
+        }
         return doSearch(null);
     }
 
@@ -99,6 +111,8 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         super.setup(resolver, objectModel, src, par);
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
+        this.rsrcs = request.getParameterValues("r");
+        this.engines = request.getParameterValues("e");
         this.t = request.getParameter("t");
         if (null == this.t) {
             this.t = par.getParameter("t", null);
@@ -108,5 +122,6 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
         if (null == this.s) {
             this.s = par.getParameter("s", null);
         }
+
     }
 }
