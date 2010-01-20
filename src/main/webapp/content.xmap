@@ -17,8 +17,8 @@
             <map:match pattern="rss/**" type="wildcard">
                 <map:mount uri-prefix="rss" check-reload="no" src="rss.xmap"/>
             </map:match>
-            <map:match pattern="online/(.+)browse.html" type="regexp">
-                <map:generate type="html" src="${jndi/live-base}/content/online/{1}browse.html"/>
+            <map:match pattern="biomed-resources/(.+)browse.html" type="regexp">
+                <map:generate type="html" src="${jndi/live-base}/content/biomed-resources/{1}browse.html"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/search-post.xsl">
                     <map:parameter name="query-string" value="${request/queryString}"/>
