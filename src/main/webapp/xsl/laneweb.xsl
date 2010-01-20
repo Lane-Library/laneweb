@@ -205,14 +205,6 @@
         <xsl:apply-templates select="h:body/child::node()"/>
     </xsl:template>
 
-    <!-- make sure there is not an empty <script/> element -->
-    <!--<xsl:template match="h:script[@src]">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:text> </xsl:text>
-        </xsl:copy>
-    </xsl:template>-->
-
     <!-- put version into javascript @src -->
     <xsl:template match="h:script/@src[starts-with(.,'/javascript')]">
         <xsl:attribute name="src">
@@ -226,6 +218,17 @@
         <xsl:attribute name="href">
             <xsl:value-of select="concat($base-path,'/style/',$version,substring-after(.,'/style'))"/>
         </xsl:attribute>
+    </xsl:template>
+
+    <!-- put script text into a comment so saxon won't convert entities -->
+    <xsl:template match="h:script[string-length(normalize-space()) &gt; 0]">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:comment>
+                <xsl:apply-templates select="child::node()"/>
+                <xsl:text>//</xsl:text>
+        </xsl:comment>
+        </xsl:copy>
     </xsl:template>
 
     <xsl:template match="h:a|h:area">
@@ -258,6 +261,7 @@
                     <xsl:text>+'</xsl:text>
                 </xsl:variable>
                 <script type="text/javascript">
+                    <xsl:comment>
                         <xsl:text>&#xD;document.write('&lt;</xsl:text>
                         <xsl:value-of select="name()"/>
                         <xsl:text> href="</xsl:text>
@@ -290,6 +294,7 @@
                         <xsl:text>+'&lt;/</xsl:text>
                         <xsl:value-of select="name()"/>
                         <xsl:text>&gt;');&#xD;</xsl:text>
+                    </xsl:comment>
                 </script>
             </xsl:when>
             <xsl:otherwise>
