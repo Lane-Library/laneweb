@@ -228,18 +228,6 @@
         </xsl:attribute>
     </xsl:template>
 
-    <!-- put script text into a comment so saxon won't convert entities -->
-    <xsl:template match="h:script">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:text>//</xsl:text>
-            <xsl:comment>
-                <xsl:apply-templates select="child::node()"/>
-                <xsl:text>//</xsl:text>
-            </xsl:comment>
-        </xsl:copy>
-    </xsl:template>
-
     <xsl:template match="h:a|h:area">
         <xsl:choose>
             <!-- TODO: rethinking removing current link
