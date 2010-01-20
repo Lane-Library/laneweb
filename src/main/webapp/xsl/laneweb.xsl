@@ -206,12 +206,12 @@
     </xsl:template>
 
     <!-- make sure there is not an empty <script/> element -->
-    <xsl:template match="h:script[@src]">
+    <!--<xsl:template match="h:script[@src]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:text> </xsl:text>
         </xsl:copy>
-    </xsl:template>
+    </xsl:template>-->
 
     <!-- put version into javascript @src -->
     <xsl:template match="h:script/@src[starts-with(.,'/javascript')]">
@@ -334,7 +334,8 @@
     </xsl:template>
     
     <!-- add 'current' class to li with a child a with current href -->
-    <xsl:template match="h:li[h:a/@href = $path][not(parent::h:ul[attribute::id='laneNav'])]">
+    <!-- TODO: reexamine this priority, should this be more specific?  -->
+    <xsl:template match="h:li[h:a/@href = $path][not(parent::h:ul[attribute::id='laneNav'])]" priority="-1">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
             <xsl:attribute name="class">
