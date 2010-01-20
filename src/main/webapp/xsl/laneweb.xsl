@@ -258,7 +258,6 @@
                     <xsl:text>+'</xsl:text>
                 </xsl:variable>
                 <script type="text/javascript">
-                    <xsl:comment>
                         <xsl:text>&#xD;document.write('&lt;</xsl:text>
                         <xsl:value-of select="name()"/>
                         <xsl:text> href="</xsl:text>
@@ -291,7 +290,6 @@
                         <xsl:text>+'&lt;/</xsl:text>
                         <xsl:value-of select="name()"/>
                         <xsl:text>&gt;');&#xD;</xsl:text>
-                    </xsl:comment>
                 </script>
             </xsl:when>
             <xsl:otherwise>
