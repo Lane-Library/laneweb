@@ -29,19 +29,19 @@
                         <form id="search" method="get" action="/search.html">
                             <ul id="searchTabs">
                                 <li id="articles" title="enter terms to search for articles">
-                                    <a href="/index.html?searchTab=articles"
+                                    <a href="?searchTab=articles"
                                         title="Lane article search">Articles</a>
                                 </li>
                                 <li id="catalog" title="enter terms to search the catalog">
-                                    <a href="/index.html?searchTab=catalog"
+                                    <a href="?searchTab=catalog"
                                         title="Lane catalog search">Catalog</a>
                                 </li>
                                 <li id="specialty" title="enter terms to search specialty resources">
-                                    <a href="/index.html?searchTab=specialty"
+                                    <a href="?searchTab=specialty"
                                         title="Lane specialty search">Specialty</a>
                                 </li>
                                 <li id="clinical" title="enter terms to search clinical resources">
-                                    <a href="/index.html?searchTab=clinical"
+                                    <a href="?searchTab=clinical"
                                         title="Lane clinical search">Clinical</a>
                                 </li>
                             </ul>
