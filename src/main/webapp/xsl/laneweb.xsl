@@ -89,15 +89,6 @@
             <xsl:value-of select="encode-for-uri($q)"/>
         </xsl:if>
     </xsl:variable>
-
-    <!-- figure out what class the body should be for yui grids -->
-    <xsl:variable name="yui-grid-class">
-        <xsl:choose>
-            <xsl:when test="$source-doc/h:body/h:div[@id='leftColumn']">yui-t2</xsl:when>
-            <xsl:when test="$source-doc/h:body/h:div[@id='rightColumn']">yui-t4</xsl:when>
-            <!--<xsl:when test="contains($path,'search.html')">yui-t4</xsl:when>-->
-        </xsl:choose>
-    </xsl:variable>
     
     <!-- here is the information associating urls with what is the laneNav active tab -->
     <xsl:variable name="laneNav-tabs">
@@ -177,19 +168,6 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="h:div[@id='custom-doc']">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:if test="$yui-grid-class">
-                <xsl:attribute name="class">
-                    <xsl:value-of select="$yui-grid-class"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="child::node()"/>
-        </xsl:copy>
-    </xsl:template>
-
-
     <!-- persistent login  -->
     <xsl:template match="h:h3[@id='pl']">
         <xsl:copy>
@@ -217,54 +195,6 @@
         </xsl:choose>
     </xsl:template>
     <!-- END persistent login  -->
-
-    <xsl:template
-        match="h:div[@id='leftColumn']|h:div[@id='rightColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:attribute name="class">yui-b</xsl:attribute>
-            <xsl:apply-templates select="child::node()"/>
-        </xsl:copy>
-    </xsl:template>
-
-    <xsl:template match="h:div[@id='rightColumn' and preceding-sibling::h:div[@id='leftColumn']]"/>
-
-    <xsl:template
-        match="h:div[@id='mainColumn' and preceding-sibling::h:div[@id='leftColumn'] and following-sibling::h:div[@id='rightColumn']]">
-        <div id="yui-main">
-            <div class="yui-b yui-ge">
-                <div class="yui-u first">
-                    <xsl:apply-templates select="child::node()"/>
-                </div>
-                <div class="yui-u" id="rightColumn">
-                    <xsl:apply-templates
-                        select="following-sibling::h:div[@id='rightColumn']/child::node()"/>
-                </div>
-            </div>
-        </div>
-    </xsl:template>
-
-    <xsl:template
-        match="h:div[@id='mainColumn' and not(preceding-sibling::h:div[@id='leftColumn'])]">
-        <div id="yui-main">
-            <div class="yui-b">
-                <div style="margin-left:1em">
-                    <xsl:apply-templates/>
-                </div>
-            </div>
-        </div>
-    </xsl:template>
-
-    <xsl:template
-        match="h:div[@id='mainColumn' and not(following-sibling::h:div[@id='rightColumn'])]">
-        <div id="yui-main">
-            <div class="yui-b">
-                <div style="margin-right:1em">
-                    <xsl:apply-templates/>
-                </div>
-            </div>
-        </div>
-    </xsl:template>
 
     <xsl:template match="comment()">
         <xsl:copy-of select="."/>
