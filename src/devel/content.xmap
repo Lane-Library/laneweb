@@ -17,14 +17,14 @@
             <map:match pattern="rss/**" type="wildcard">
                 <map:mount uri-prefix="rss" check-reload="yes" src="rss.xmap"/>
             </map:match>
-            <map:match pattern="online/(ej|db|cc|eb)browse.html" type="regexp">
+            <map:match pattern="biomed-resources/(.+)browse.html" type="regexp">
                 <map:select type="resource-exists">
                     <map:when test="content/online/{1}browse.html">
                         <map:generate type="html" src="content/online/{1}browse.html"/>
                     </map:when>
                     <map:otherwise>
                         <map:generate type="html"
-                            src="${jndi/live-base}/content/online/{1}browse.html"/>
+                            src="${jndi/live-base}/content/biomed-resources/{1}browse.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="xinclude"/>
