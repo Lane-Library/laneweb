@@ -26,6 +26,8 @@
                             <a href="/index.html"><span>Lane</span> Medical Library <span
                                     id="subHeading">powered by LaneConnex Technology</span></a>
                         </h1>
+                        <div id="libraryContact">650-723-6831&#160;&#160;&#160;|&#160;&#160;<a href="mailto: 	 LaneAskUs@Stanford.edu">LaneAskUs@Stanford.edu</a>&#160;&#160;&#160;|&#160;&#160;<a href="/services/hours.html">Library Hours</a></div>
+
                         <form id="search" method="get" action="/search.html">
                             <ul id="searchTabs">
                                 <li id="articles" title="enter terms to search for articles">
