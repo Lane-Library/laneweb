@@ -7,6 +7,20 @@
 	padding-left: 1em;
 }
 
+
+.contentModule .simpleModule {
+	margin: 0 0 2em -1em;
+/*	border-left: 1px solid #E6E4DB;*/
+	
+}
+
+
+.contentModule .simpleModule .bd {
+	background-image:none;
+	height: 10em;
+}
+
+
 .contentModule-wide .simpleModule .bd {
 	padding: 0;
 	margin-bottom: 2em;
