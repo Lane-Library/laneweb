@@ -85,14 +85,9 @@ public class EresourcesCountGenerator implements Generator {
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        String query = par.getParameter(QUERY, null);
-        if (null != query) {
-            this.query = query.trim();
-            if (this.query.length() == 0) {
-                this.query = null;
-            }
-        } else {
-            throw new RuntimeException("null query");
+        this.query = par.getParameter(QUERY, "").trim();
+        if (this.query.length() == 0) {
+            throw new IllegalArgumentException("no query [" + par.getParameter(QUERY, null) + "]");
         }
     }
 }
