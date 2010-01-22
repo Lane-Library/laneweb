@@ -212,9 +212,9 @@
                 </map:transform>
                 <map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="${proxyLinks}"/>
-                    <!-- TODO: revert this back before production environment -->
-                    <map:parameter name="base-path" value="http://lane.stanford.edu"/>
-                    <!--<map:parameter name="base-path" value="${request/contextPath}"/>-->
+                    <!-- use this base-path to redirect proxy auth to lane.stanford.edu -->
+                    <!--<map:parameter name="base-path" value="http://lane.stanford.edu"/>-->
+                    <map:parameter name="base-path" value="${request/contextPath}"/>
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
                     <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
