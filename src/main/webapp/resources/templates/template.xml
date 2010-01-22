@@ -83,6 +83,11 @@
                                     src="/images/backgr/search-indicator.gif"/></div>
                         </form>
                         <?laneweb content?>
+                        <ul id="libraryContact">
+                            <li>650-723-6831</li>
+                            <li><a href="mailto:LaneAskUs@stanford.edu">LaneAskUs@Stanford.edu</a></li>
+                            <li><a href="/services/hours.html">Library Hours</a></li>
+                        </ul>
                         <ul id="login">
                             <li>
                                 <a href="/secure/login.html">Off Campus Login</a>
@@ -160,11 +165,6 @@
                 </li>
             </ul>
             <a id="som" href="http://med.stanford.edu/">School of Medicine</a>
-            <ul id="libraryContact">
-                <li>650-723-6831</li>
-                <li><a href="mailto:LaneAskUs@stanford.edu">LaneAskUs@Stanford.edu</a></li>
-                <li><a href="/services/hours.html">Library Hours</a></li>
-            </ul>
             <ul id="somNav">
                 <li id="stanfordMedicineBrand">
                     <a href="http://stanfordmedicine.org/">Stanford Medicine</a>
