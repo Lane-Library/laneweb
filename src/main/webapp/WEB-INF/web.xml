@@ -211,6 +211,10 @@
         <mime-type>text/html</mime-type>
     </mime-mapping>
     <mime-mapping>
+        <extension>ico</extension>
+        <mime-type>image/x-icon</mime-type>
+    </mime-mapping>
+    <mime-mapping>
         <extension>ief</extension>
         <mime-type>image/ief</mime-type>
     </mime-mapping>
