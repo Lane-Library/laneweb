@@ -103,7 +103,6 @@
                                 <include>main-module-min.css</include>
                                 <include>table-styles-min.css</include>
                                 <include>popups-min.css</include>
-                                <include>login-min.css</include>
                                 <include>breadcrumb-min.css</include>
                                 <include>header-min.css</include>
                                 <include>anchors-min.css</include>
