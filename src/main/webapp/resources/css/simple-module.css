@@ -15,11 +15,15 @@
 }
 
 
-.contentModule .simpleModule .bd {
+.contentModule .yui-g .simpleModule .bd {
 	background-image:none;
 	height: 10em;
 }
 
+
+.contentModule .simpleModule .bd {
+	background-image:none;
+}  
 
 .contentModule-wide .simpleModule .bd {
 	padding: 0;
