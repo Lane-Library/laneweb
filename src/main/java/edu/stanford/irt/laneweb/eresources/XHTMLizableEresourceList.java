@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
+import java.util.TreeSet;
 
 import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
@@ -39,6 +40,8 @@ public class XHTMLizableEresourceList implements XMLizable {
     private static final String XHTML_NS = "http://www.w3.org/1999/xhtml";
 
     private Collection<Eresource> eresources;
+    
+    private static final EresourceVersionComparator VERSION_COMPARATOR = new EresourceVersionComparator();
 
     public XHTMLizableEresourceList(final Collection<Eresource> eresources) {
         if (null == eresources) {
@@ -124,6 +127,7 @@ public class XHTMLizableEresourceList implements XMLizable {
     }
 
     private void handleEresource(final ContentHandler handler, final Eresource eresource) throws SAXException {
+        Collection<Version> versions = new TreeSet<Version>(VERSION_COMPARATOR);
         String title = eresource.getTitle();
         // TODO shouldn't have to check for this here
         if (null == title) {
@@ -135,7 +139,8 @@ public class XHTMLizableEresourceList implements XMLizable {
         XMLUtils.startElement(handler, XHTML_NS, DD);
         XMLUtils.startElement(handler, XHTML_NS, UL);
         Version impactFactor = null;
-        for (Version version : eresource.getVersions()) {
+        versions.addAll(eresource.getVersions());
+        for (Version version : versions) {
             if (null == impactFactor && version.getLinks().size() == 1) {
                 Link link = version.getLinks().iterator().next();
                 if ("Impact Factor".equals(link.getLabel())) {
