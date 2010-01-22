@@ -330,7 +330,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>eresources-impl</artifactId>
-            <version>1.5.0</version>
+            <version>1.5.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -530,7 +530,7 @@
         <dependency>
             <groupId>edu.stanford.irt</groupId>
             <artifactId>eresources-api</artifactId>
-            <version>1.5.0</version>
+            <version>1.5.1-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
