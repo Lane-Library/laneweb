@@ -211,7 +211,7 @@
         <dependency>
             <artifactId>irt-cocoon</artifactId>
             <groupId>edu.stanford.irt</groupId>
-            <version>1.0.5</version>
+            <version>1.1.0</version>
             <type>war</type>
         </dependency>
         <dependency>
@@ -296,6 +296,10 @@
                     <artifactId>excalibur-instrument-api</artifactId>
                     <groupId>org.apache.excalibur.containerkit</groupId>
                 </exclusion>
+                <exclusion>
+                	<artifactId>ehcache</artifactId>
+                	<groupId>net.sf.ehcache</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -357,7 +361,7 @@
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymockclassextension</artifactId>
-            <version>2.4</version>
+            <version>2.5.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -374,8 +378,8 @@
         </dependency>
         <dependency>
             <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>1.5.0</version>
+            <artifactId>ehcache-core</artifactId>
+            <version>1.7.0</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -537,7 +541,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>2.5.6</version>
+            <version>3.0.0.RELEASE</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -576,13 +580,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>2.5.6</version>
+            <version>3.0.0.RELEASE</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>2.5.6</version>
+            <version>3.0.0.RELEASE</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
@@ -617,7 +621,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>2.5.6</version>
+            <version>3.0.0.RELEASE</version>
             <type>jar</type>
             <scope>runtime</scope>
         </dependency>
@@ -627,6 +631,17 @@
             <version>2.4</version>
             <type>jar</type>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-tx</artifactId>
+        	<version>3.0.0.RELEASE</version>
+        	<scope>runtime</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-beans</artifactId>
+        	<version>3.0.0.RELEASE</version>
         </dependency>
     </dependencies>
     <properties>

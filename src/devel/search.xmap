@@ -38,13 +38,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-post.xsl">
                             <map:transform type="saxon" src="xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                                <map:parameter name="query-string" value="${request/parameters/q}"/>
                                 <map:parameter name="source" value="${request/parameters/source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                                <map:parameter name="query-string" value="${request/parameters/q}"/>
                                 <map:parameter name="source" value="${request/parameters/source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -52,8 +52,7 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- catalog search pages (parameter is catalog-all, catalog-ej, catalog-book, etc)-->
-                <map:match type="regex-parameter"
-                    pattern="^catalog-(.*)$">
+                <map:match type="regex-parameter" pattern="^catalog-(.*)$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
                         <map:part src="cocoon:/apps/search/proxy/xml"/>
@@ -80,13 +79,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-post.xsl">
                             <map:transform type="saxon" src="xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                                <map:parameter name="query-string" value="${request/parameters/q}"/>
                                 <map:parameter name="source" value="${request/parameters/source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                                <map:parameter name="query-string" value="${request/parameters/q}"/>
                                 <map:parameter name="source" value="${request/parameters/source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -119,13 +118,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-post.xsl">
                             <map:transform type="saxon" src="xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                                <map:parameter name="query-string" value="${request/parameters/q}"/>
                                 <map:parameter name="source" value="${request/parameters/source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                                <map:parameter name="query-string" value="${request/parameters/q}"/>
                                 <map:parameter name="source" value="${request/parameters/source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -138,8 +137,7 @@
                     <map:aggregate element="doc">
                         <map:part src="cocoon:/apps/search/proxy/xml"/>
                         <map:part src="cocoon:/cached/search/specialty.html"/>
-                        <map:part
-                            src="cocoon:/search/specialty/${request/parameters/source}.html"/>
+                        <map:part src="cocoon:/search/specialty/${request/parameters/source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:select type="resource-exists">
@@ -159,13 +157,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-post.xsl">
                             <map:transform type="saxon" src="xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                                <map:parameter name="query-string" value="${request/parameters/q}"/>
                                 <map:parameter name="source" value="${request/parameters/source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                                <map:parameter name="query-string" value="${request/parameters/q}"/>
                                 <map:parameter name="source" value="${request/parameters/source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -181,8 +179,7 @@
             <map:match pattern="search/specialty/*.html" type="wildcard">
                 <map:aggregate element="doc">
                     <map:part src="cocoon:/apps/search/proxy/xml"/>
-                    <map:part
-                        src="cocoon:/cached/search/specialty/{1}.html"/>
+                    <map:part src="cocoon:/cached/search/specialty/{1}.html"/>
                 </map:aggregate>
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-specialty.xsl">
