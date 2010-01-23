@@ -60,6 +60,9 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <webappDirectory>target/laneweb</webappDirectory>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>ico</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
                     <webResources>
                         <resource>
                             <directory>src/main/webapp</directory>
