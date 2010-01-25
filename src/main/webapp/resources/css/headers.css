@@ -6,7 +6,7 @@ h3, h4, h5 {
     font-family:Georgia, "Times New Roman", Times, serif;
     font-weight:normal;
 }
-h3 {
+h3, .tooltips h3{
     font-size: 2em;
    /* padding-bottom: .5em;*/
 }
@@ -21,4 +21,13 @@ h5 {
     font-size: 1.2em;
 /*    margin:1em 0 0.3em;*/
    
+}
+
+.tooltips p{
+ line-height:1.2em;
+ font-size: 1em;
+}
+
+.tooltips {
+ padding: 1em;
 }

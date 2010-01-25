@@ -17,7 +17,6 @@
 
 .contentModule .yui-g .simpleModule .bd {
 	background-image:none;
-	height: 10em;
 }
 
 
@@ -82,6 +81,14 @@
 .simpleModule li {
     font-size:11px;
 }
+
+
+/*.contentModule .simpleModule li {
+    font-size:12px;
+}*/
+
+
+
 .simpleModule {
     margin:2em 1em 0 0;
 }
