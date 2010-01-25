@@ -9,6 +9,7 @@
                 remainingTime, searchStatus, engineStatus, animation;
             
             for (j = 0; j < facets.length; j++) {
+            	hits = null;
                 hitSpan = document.getElementById(facets[j].facetId + 'HitSpan');
                 hitLink = facets[j].getElementsByTagName('a')[0];
                 if (undefined != response.results.facets[facets[j].facetId]) {
