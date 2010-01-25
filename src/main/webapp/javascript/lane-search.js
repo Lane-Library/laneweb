@@ -126,6 +126,7 @@ LANE.search = LANE.search ||  function() {
                     // hide q input so form doesn't bounce
                     form.q.style.visibility = 'hidden';
                     o.startSearch();
+                    LANE.suggest.collapse();
                     form.submit();
                 } catch (ex) {
                     alert(ex);
