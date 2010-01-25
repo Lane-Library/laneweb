@@ -109,6 +109,16 @@
             <xsl:when test="$search-tab">
                 <xsl:value-of select="$search-tab"/>
             </xsl:when>
+            <xsl:when test="starts-with($path,'/sumc-specialties/consumehealth')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/sumc-specialties/clinical')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/sumc-specialties/globalhealth')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/sumc-specialties/heartctrnurse')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/sumc-specialties/hematology')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/sumc-specialties/multiculhealth')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/sumc-specialties/nursing')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/sumc-specialties/obgyn')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/sumc-specialties/ophthalmology')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/sumc-specialties/picu')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/sumc-specialties')">specialty</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/info-literacy')">clinical</xsl:when>
