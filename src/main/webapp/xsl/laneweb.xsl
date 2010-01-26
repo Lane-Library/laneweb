@@ -561,6 +561,26 @@
                 <xsl:when test="$source">
                     <xsl:value-of select="$source"/>
                 </xsl:when>
+                <xsl:when test="starts-with($request-uri,'/biomed-resources/ej')">catalog-ej</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/biomed-resources/eb')">catalog-book</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/biomed-resources/db')">catalog-database</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/biomed-resources/cc')">catalog-cc</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/biomed-resources/images')">catalog-graphic</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/biomed-resources/video')">catalog-video</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/biomed-resources/software')">catalog-software</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/biomed-resources/statistics')">catalog-statistics</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/sumc-specialties/anesthesia')">specialty-anesthesia</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/sumc-specialties/bioresearch')">specialty-bioresearch</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/sumc-specialties/cardiology')">specialty-cardiology</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/sumc-specialties/emergmed')">specialty-emergency"></xsl:when>
+                <xsl:when test="starts-with($request-uri,'/sumc-specialties/hematology')">specialty-hematology</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/sumc-specialties/internalmed')">specialty-internal-medicine</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/sumc-specialties/pediatrics')">specialty-pediatrics</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/sumc-specialties/pharmacy')">specialty-pharmacy</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/sumc-specialties/pulmonary')">specialty-pulmonary</xsl:when>
+                <xsl:when test="ends-with($request-uri,'pubmed-viaLane.html')">articles-pubmed</xsl:when>
+                <xsl:when test="ends-with($request-uri,'uptodate-viaLane.html')">articles-uptodate</xsl:when>
+                <xsl:when test="ends-with($request-uri,'webofscience-viaLane.html')">articles-sciencecitation</xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="concat($active-search-tab,'-all')"/>
                 </xsl:otherwise>
