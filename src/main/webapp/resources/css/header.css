@@ -58,3 +58,12 @@ h1 span {
 #libraryContact li:first-child {
     border-left:none;
 }
+
+#beta-icon {
+    top: 15px;
+ position:absolute;
+    font-size:.8em;
+	font-weight:bold;
+	left: 455px;
+	color:#0000FF;
+}
