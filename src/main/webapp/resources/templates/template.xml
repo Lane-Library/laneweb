@@ -83,6 +83,10 @@
                                     src="/images/backgr/search-indicator.gif"/></div>
                         </form>
                         <?laneweb content?>
+                        <div id="beta-icon">
+                            BETA
+                        </div>
+
                         <ul id="libraryContact">
                             <li>650-723-6831</li>
                             <li><a href="mailto:LaneAskUs@stanford.edu">LaneAskUs@Stanford.edu</a></li>
