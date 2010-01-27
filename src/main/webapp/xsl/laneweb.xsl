@@ -94,7 +94,7 @@
     <xsl:variable name="laneNav-tabs">
         <div><span>Biomedical Resources</span><span>/biomed-resources</span></div>
         <div><span>SUMC Specialties</span><span>/sumc-specialties</span></div>
-        <div><span>Information Literacy</span><span>/info-literacy</span></div>
+        <div><span>Classes &amp; Consulting</span><span>/info-literacy</span></div>
         <div><span>Library Services</span><span>/services</span></div>
         <div><span>Help</span><span>/help</span></div>
         <div><span>History Center</span><span>/med-history</span></div>
