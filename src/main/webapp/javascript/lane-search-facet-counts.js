@@ -6,7 +6,7 @@
         updateHits = function(o) {
             var response = YAHOO.lang.JSON.parse(o.responseText),
                 hitSpan, hitLink, hits, sleepingTime,
-                remainingTime, searchStatus, engineStatus, animation;
+                remainingTime, searchStatus, engineStatus;
             
             for (j = 0; j < facets.length; j++) {
             	hits = null;
@@ -19,11 +19,10 @@
                 if (hitSpan !== null && hits !== 0 && hits !== '') {
                     hitSpan.innerHTML = hits;
                 }
-                // playing with fading animation ... fade when NOT xxx-all facet and zero hits
                 if (!facets[j].facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits == 0) {
-                    animation = new YAHOO.util.ColorAnim(hitLink, {color: { to: '#C1C1C1' } });
-                    animation.onComplete.subscribe(function() {this.getEl().parentNode.style.backgroundImage = 'none'});
-                    animation.animate();
+                	hitLink.parentNode.style.backgroundImage = 'none';
+                	hitLink.parentNode.innerHTML = hitLink.innerHTML;
+                	hitLink.parentNode.removeChild(hitLink);
                 }
             }
             sleepingTime = 2000;
