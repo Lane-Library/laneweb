@@ -40,3 +40,8 @@ ol li {
 .sectionMenu .bd #searchFacets ul li{
     border: 1px solid black;
 }
+
+#searchFacets ul li .inactiveFacet{
+    background-image:none;
+    color:#C1C1C1;
+}

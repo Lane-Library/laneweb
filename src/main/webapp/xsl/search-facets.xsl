@@ -92,10 +92,10 @@
                     <xsl:apply-templates select="attribute::node()" />
                     <xsl:attribute name="class"><xsl:value-of select="attribute::class" /> current</xsl:attribute>
                 </xsl:when>
-                <!-- hide facet if zero hits and NOT -all facet -->
+                <!-- make facet inactive if zero hits and NOT -all facet -->
                 <xsl:when test="number($hit-count) = 0 and $countFacetId != 'all'">
                     <xsl:apply-templates select="attribute::node()" />
-                    <xsl:attribute name="style">display:none;</xsl:attribute>
+                    <xsl:attribute name="class">inactiveFacet</xsl:attribute>
                 </xsl:when>
             </xsl:choose>
             
@@ -109,6 +109,10 @@
                                 select="format-number(number($hit-count),'###,###,##0')" />
                         </xsl:if>
                     </span>
+                </xsl:when>
+                <!-- remove link when zero hits and NOT -all facet -->
+                <xsl:when test="number($hit-count) = 0 and $countFacetId != 'all'">
+                    <xsl:value-of select="child::node()/text()"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="child::node()" />
