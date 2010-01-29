@@ -110,9 +110,10 @@
                         </xsl:if>
                     </span>
                 </xsl:when>
-                <!-- remove link when zero hits and NOT -all facet -->
                 <xsl:when test="number($hit-count) = 0 and $countFacetId != 'all'">
-                    <xsl:value-of select="child::node()/text()"/>
+                    <a href="{child::node()/@href}" title="no search results for {child::node()/text()}">
+                        <xsl:value-of select="child::node()/text()"/>
+                    </a>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="child::node()" />

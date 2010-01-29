@@ -32,6 +32,9 @@ a:hover, #laneNav li li a:hover {
     text-decoration:underline;
     border-bottom-style:none;
 }
+.inactiveFacet a{
+    border-bottom:none;
+}
 /*
   #sb a:link, #sb a:visited {
   border-bottom: 1px dotted #3f3c30;
