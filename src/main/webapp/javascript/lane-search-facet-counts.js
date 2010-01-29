@@ -20,9 +20,8 @@
                     hitSpan.innerHTML = hits;
                 }
                 if (!facets[j].facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits == 0) {
-                	hitLink.parentNode.style.backgroundImage = 'none';
-                	hitLink.parentNode.innerHTML = hitLink.innerHTML;
-                	hitLink.parentNode.removeChild(hitLink);
+                	YAHOO.util.Dom.addClass(hitLink.parentNode,'inactiveFacet');
+                	hitLink.setAttribute('title','no search results for '+hitLink.innerHTML)
                 }
             }
             sleepingTime = 2000;
