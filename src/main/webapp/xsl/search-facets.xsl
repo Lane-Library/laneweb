@@ -95,7 +95,7 @@
                 <!-- make facet inactive if zero hits and NOT -all facet -->
                 <xsl:when test="number($hit-count) = 0 and $countFacetId != 'all'">
                     <xsl:apply-templates select="attribute::node()" />
-                    <xsl:attribute name="class">inactiveFacet</xsl:attribute>
+                    <xsl:attribute name="class"><xsl:value-of select="attribute::class" /> inactiveFacet</xsl:attribute>
                 </xsl:when>
             </xsl:choose>
             
