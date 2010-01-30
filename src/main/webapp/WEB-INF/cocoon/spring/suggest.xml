@@ -28,4 +28,11 @@
             ref="edu.stanford.irt.suggest.MeshSuggestionManager"/>
     </bean>
     
+    <bean name="org.apache.cocoon.reading.Reader/extensions-suggest"
+        class="edu.stanford.irt.laneweb.suggest.ExtensionsSuggestReader"
+        scope="prototype">
+        <property name="eresourceSuggestionManager"
+            ref="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
+    </bean>
+    
 </beans>
