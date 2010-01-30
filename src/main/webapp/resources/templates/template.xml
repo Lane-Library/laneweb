@@ -108,22 +108,22 @@
                         </ul>
                         <ul id="laneNav">
                             <li>
-                                <a href="/biomed-resources/index.html">Biomed &amp; Clinical Resources</a>
+                                <a href="/biomed-resources/index.html" title="This is an explanation of this area of the site.">Biomed &amp; Clinical Resources</a>
                             </li>
                             <li>
-                                <a href="/sumc-specialties/index.html">Specialty Portals</a>
+                                <a href="/sumc-specialties/index.html" title="This is an explanation of this area of the site.">Specialty Portals</a>
                             </li>
                             <li>
-                                <a href="/info-literacy/index.html">Classes &amp; Consulting</a>
+                                <a href="/info-literacy/index.html" title="This is an explanation of this area of the site.">Classes &amp; Consulting</a>
                             </li>
                             <li>
-                                <a href="/services/index.html">About Library</a>
+                                <a href="/services/index.html" title="This is an explanation of this area of the site.">About Library</a>
                             </li>
                             <li>
-                                <a href="/help/index.html">Help</a>
+                                <a href="/help/index.html" title="This is an explanation of this area of the site.">Help</a>
                             </li>
                             <li>
-                                <a href="/med-history/index.html">History Center</a>
+                                <a href="/med-history/index.html" title="This is an explanation of this area of the site.">History Center</a>
                             </li>
                         </ul>
                         <ul class="nav2">
