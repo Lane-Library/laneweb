@@ -84,7 +84,7 @@
                         </form>
                         <?laneweb content?>
                         <div id="beta-icon">
-                            BETA <p>This site is under construction. We would appreciate your <a href="#">feedback</a>.</p>
+                            BETA <p>This site is under construction. We would appreciate your <a href="mailto:TonyChristopher@Stanford.edu?subject=Beta Site Feedback">feedback</a>.</p>
                         </div>
 
                         <ul id="libraryContact">
