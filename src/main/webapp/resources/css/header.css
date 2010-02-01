@@ -67,3 +67,9 @@ h1 span {
 	left: 455px;
 	color:#0000FF;
 }
+
+#beta-icon p{
+    font-size:.8em;
+	color:#0000FF;
+	margin-top: 0;
+}
