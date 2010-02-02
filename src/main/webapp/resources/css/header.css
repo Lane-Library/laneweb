@@ -60,16 +60,10 @@ h1 span {
 }
 
 #beta-icon {
-    top: 15px;
+    top: 8px;
  position:absolute;
     font-size:.8em;
 	font-weight:bold;
-	left: 455px;
+	left: 500px;
 	color:#0000FF;
-}
-
-#beta-icon p{
-    font-size:.8em;
-	color:#0000FF;
-	margin-top: 0;
 }
