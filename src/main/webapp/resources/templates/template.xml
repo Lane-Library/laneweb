@@ -29,25 +29,27 @@
                         <form id="search" method="get" action="/search.html">
                             <ul id="searchTabs">
                                 <li id="articles" title="enter terms to search for articles">
-                                    <a href="?searchTab=articles"
-                                        title="Lane article search">Articles</a>
+                                    <a href="?searchTab=articles" title="Lane article search"
+                                        >Articles</a>
                                 </li>
                                 <li id="catalog" title="enter terms to search the catalog">
-                                    <a href="?searchTab=catalog"
-                                        title="Lane catalog search">Catalog</a>
+                                    <a href="?searchTab=catalog" title="Lane catalog search"
+                                        >Catalog</a>
                                 </li>
                                 <li id="specialty" title="enter terms to search specialty resources">
-                                    <a href="?searchTab=specialty"
-                                        title="Lane specialty search">Specialty</a>
+                                    <a href="?searchTab=specialty" title="Lane specialty search"
+                                        >Specialty</a>
                                 </li>
                                 <li id="clinical" title="enter terms to search clinical resources">
-                                    <a href="?searchTab=clinical"
-                                        title="Lane clinical search">Clinical</a>
+                                    <a href="?searchTab=clinical" title="Lane clinical search"
+                                        >Clinical</a>
                                 </li>
                             </ul>
                             <div id="searchTips">
-                                <a href="/services/laneconnexSearch.html">Search Tips</a>&#160;&#160;&#160;|&#160;&#160;<a href="/services/laneconnexSearch.html">How Does Our
-                                    Search Work?</a>
+                                <a href="/services/laneconnexSearch.html">Search
+                                    Tips</a>&#160;&#160;&#160;|&#160;&#160;<a
+                                    href="/services/laneconnexSearch.html">How Does Our Search
+                                    Work?</a>
                             </div>
 
                             <fieldset id="picoFields">
@@ -83,13 +85,16 @@
                                     src="/images/backgr/search-indicator.gif"/></div>
                         </form>
                         <?laneweb content?>
-                        <div id="beta-icon">
-                            BETA <p>This site is under construction. We would appreciate your <a href="mailto:TonyChristopher@Stanford.edu?subject=Beta Site Feedback">feedback</a>.</p>
+                        <div id="beta-icon"><a id="betabutton" rel="popup local redesign-feedback"
+                                title="Lane Library Site Redesign ... Tell Us What You Think"
+                                href="#">
+                                <img alt="beta feedback" src="/images/preview-but.gif"/>
+                            </a>
                         </div>
-
                         <ul id="libraryContact">
                             <li>650-723-6831</li>
-                            <li><a href="mailto:LaneAskUs@stanford.edu">LaneAskUs@Stanford.edu</a></li>
+                            <li><a href="mailto:LaneAskUs@stanford.edu"
+                                >LaneAskUs@Stanford.edu</a></li>
                             <li><a href="/services/hours.html">Library Hours</a></li>
                         </ul>
                         <ul id="login">
@@ -108,22 +113,34 @@
                         </ul>
                         <ul id="laneNav">
                             <li>
-                                <a href="/biomed-resources/index.html" title="Articles from these sources: PubMed, UpToDate, Web of Science. All sources available thru Lane: Journals, Books, Databases, Clinical Decision Tools, Images, Videos, Software, Health Statistics">Biomed &amp; Clinical Resources</a>
+                                <a href="/biomed-resources/index.html"
+                                    title="Articles from these sources: PubMed, UpToDate, Web of Science. All sources available thru Lane: Journals, Books, Databases, Clinical Decision Tools, Images, Videos, Software, Health Statistics"
+                                    >Biomed &amp; Clinical Resources</a>
                             </li>
                             <li>
-                                <a href="/sumc-specialties/index.html" title="SUMC specialty departments that have created customized pages - 'portals' – to Lane Library materials they regularly reference.">Specialty Portals</a>
+                                <a href="/sumc-specialties/index.html"
+                                    title="SUMC specialty departments that have created customized pages - 'portals' – to Lane Library materials they regularly reference."
+                                    >Specialty Portals</a>
                             </li>
                             <li>
-                                <a href="/info-literacy/index.html" title="Info on: Classes, Consulting, Tutorials &amp; videos (self paced learning), Webinars, Information Literacy">Classes &amp; Consulting</a>
+                                <a href="/info-literacy/index.html"
+                                    title="Info on: Classes, Consulting, Tutorials &amp; videos (self paced learning), Webinars, Information Literacy"
+                                    >Classes &amp; Consulting</a>
                             </li>
                             <li>
-                                <a href="/services/index.html" title="Info on: Hours &amp; Directions, Library Liaisons, Document Delivery, Public Computing &amp; Software, Access &amp; Privileges, Books &amp; Collections, Study &amp; Group Spaces, Course Reserves, Printing and Photocopying, Contact Us, Info for Grant Writers, Make a Donation, Library Administration">About Library</a>
+                                <a href="/services/index.html"
+                                    title="Info on: Hours &amp; Directions, Library Liaisons, Document Delivery, Public Computing &amp; Software, Access &amp; Privileges, Books &amp; Collections, Study &amp; Group Spaces, Course Reserves, Printing and Photocopying, Contact Us, Info for Grant Writers, Make a Donation, Library Administration"
+                                    >About Library</a>
                             </li>
                             <li>
-                                <a href="/help/index.html" title="Info on: Getting Started, Research and Publishing, Find Your Liaison, Ask Us, Instant Chat, FAQs, Contact Library, Teaching Support, Classroom Scheduling &amp; Support, Video Services, About Library">Help</a>
+                                <a href="/help/index.html"
+                                    title="Info on: Getting Started, Research and Publishing, Find Your Liaison, Ask Us, Instant Chat, FAQs, Contact Library, Teaching Support, Classroom Scheduling &amp; Support, Video Services, About Library"
+                                    >Help</a>
                             </li>
                             <li>
-                                <a href="/med-history/index.html" title="Resources for medical historians, Stanford Medical School historical collection">History Center</a>
+                                <a href="/med-history/index.html"
+                                    title="Resources for medical historians, Stanford Medical School historical collection"
+                                    >History Center</a>
                             </li>
                         </ul>
                         <ul class="nav2">
@@ -318,6 +335,38 @@
                 </li>
             </ul>
         </div>
+        <div class="popups">
+            <div id="redesign-feedback" title="Preview - Next Generation Lane Website">
+                <form action="http://med.stanford.edu/cgi-bin/formmail.pl" method="post">
+                    <fieldset>
+                        <input type="hidden" value="lane-issue@med.stanford.edu" name="recipient"/>
+                        <input type="hidden" value="Preview Feedback" name="subject"/>
+                        <input type="hidden" value="REMOTE_HOST,REMOTE_ADDR,HTTP_USER_AGENT"
+                            name="env_report"/>
+                        <input type="hidden" name="redirect"
+                            value="http://lane.stanford.edu/portals/easyfeedback_response.html"/>
+                        <input type="hidden" name="pageTitle" value="Preview Feedback"/>
+                        <h3>We'd love to know your impressions</h3>
+                        <h4>What questions come up as you tour this still under-construction
+                            site?</h4>
+                        <p>What do you LIKE? What's WRONG? Anything MISSING?</p>
+                        <textarea id="comments" name="comments" rows="10" cols="50"> </textarea>
+                        <p>Did you try any of the new search capabilities?</p>
+                        <span style="padding:10px;"> Yes <input type="radio" name="used-search"
+                                value="yes"/>
+                        </span>
+                        <span style="padding:10px;"> No <input type="radio" name="used-search"
+                                value="no"/>
+                        </span>
+                        <p><a href="/services/laneconnexSearch.html">How Does Our Search
+                            Work?</a></p>
+                        <p>Enter email if you want us to respond (optional) <input size="20"
+                                id="email" name="email"/>
+                            <input style="margin-top:1em;" type="submit" value="Submit"/></p>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
         <!--<div class="tooltips">
             <span>Click here to access LaneConnex without logging in for full
                 access to free resources. Licensed content restricted.</span>
@@ -325,7 +374,7 @@
                 resources.</span>
                 </div>-->
         <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/utilities/utilities.js&amp;2.8.0r4/build/container/container-min.js&amp;2.8.0r4/build/json/json-min.js&amp;2.8.0r4/build/history/history-min.js&amp;2.8.0r4/build/datasource/datasource-min.js&amp;2.8.0r4/build/animation/animation-min.js&amp;2.8.0r4/build/autocomplete/autocomplete-min.js"/>
-        <script type="text/javascript" src="/javascript/lane-all.js"></script>
+        <script type="text/javascript" src="/javascript/lane-all.js"/>
         <!--<script type="text/javascript" src="/javascript/lane.js"/>
         <script type="text/javascript" src="/javascript/accordionview.js"/>
         <script type="text/javascript" src="/javascript/lane-expandies.js"/>
