@@ -350,7 +350,7 @@
                         <h4>What questions come up as you tour this still under-construction
                             site?</h4>
                         <p>What do you LIKE? What's WRONG? Anything MISSING?</p>
-                        <textarea id="comments" name="comments" rows="10" cols="50"> </textarea>
+                        <textarea id="comments" name="comments" rows="10" cols="40"> </textarea>
                         <p>Did you try any of the new search capabilities?</p>
                         <span style="padding:10px;"> Yes <input type="radio" name="used-search"
                                 value="yes"/>
@@ -358,7 +358,7 @@
                         <span style="padding:10px;"> No <input type="radio" name="used-search"
                                 value="no"/>
                         </span>
-                        <p><a href="/services/laneconnexSearch.html">How Does Our Search
+                        <p><a href="/services/laneconnexSearch.html" target="_blank">How Does Our Search
                             Work?</a></p>
                         <p>Enter email if you want us to respond (optional) <input size="20"
                                 id="email" name="email"/>
