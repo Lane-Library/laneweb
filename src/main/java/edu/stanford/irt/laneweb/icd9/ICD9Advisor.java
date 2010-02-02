@@ -19,8 +19,8 @@ public class ICD9Advisor implements MethodBeforeAdvice {
         if (query != null) {
             if (this.tranlastor.isICD9Code(query)) {
                 query = this.tranlastor.getLongName(query);
+                params.setParameter("query", query);
             }
-            params.setParameter("query", query);
         }
     }
 
