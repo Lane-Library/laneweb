@@ -62,7 +62,7 @@
                 </map:match>
                
                 <!-- result with proxy links (if necessary) in xml format -->
-                <map:match pattern="search-resource/proxy/xml" type="wildcard">
+                <map:match pattern="search/resource/proxy/xml" type="wildcard">
                     <map:generate type="search-resource">
                         <map:parameter name="query" value="${request/parameters/q}"/>
                     </map:generate>
@@ -82,7 +82,7 @@
                 
                 <!-- result with proxy links (if necessary) in json format -->
                 <map:match pattern="search/proxy/json" type="wildcard">
-                    <map:generate type="file" src="cocoon:/search-resource/proxy/xml"/>
+                    <map:generate type="file" src="cocoon:/search/resource/proxy/xml"/>
                     <map:transform type="saxon" src="context://xsl/search2json.xsl">
                         <map:parameter name="content" value="${request/parameters/content}"/>
                         <map:parameter name="content-to-display" value="5"/>
