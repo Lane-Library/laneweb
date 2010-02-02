@@ -25,8 +25,6 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
 
     protected String[] engines;
 
-    private MetaSearchManager metaSearchManager;
-
     protected String[] rsrcs;
 
     private String s;
@@ -99,11 +97,6 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
 
     public void setDefaultTimeout(final long defaultTimeout) {
         this.defaultTimeout = defaultTimeout;
-    }
-
-    @Override
-    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
-        this.metaSearchManager = msms.getMetaSearchManager();
     }
 
     @Override

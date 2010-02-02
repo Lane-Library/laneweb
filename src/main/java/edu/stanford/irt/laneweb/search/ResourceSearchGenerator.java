@@ -7,8 +7,9 @@ import java.util.Map;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 
+import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.Result;
-import edu.stanford.irt.search.impl.DefaultResult;
+import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ResourceSearchGenerator extends SearchGenerator {
 
@@ -16,27 +17,19 @@ public class ResourceSearchGenerator extends SearchGenerator {
 
     @Override
     public Result doSearch() {
-        Result allResult = super.doSearch(null);
-        Result result = new DefaultResult(allResult.getId());
-        synchronized (allResult) {
-            result.setQuery(allResult.getQuery());
-            result.setStatus(allResult.getStatus());
-            Collection<Result> results = allResult.getChildren();
-            for (Result engineResult : results) {
-                if ((this.resources != null) && this.resources.contains(engineResult.getId())) {
-                    result.addChild(engineResult);
-                } else if (this.resources != null) {
-                    Collection<Result> resourceResults = engineResult.getChildren();
-                    for (Result resourceResult : resourceResults) {
-                        if (this.resources.contains(resourceResult.getId())) {
-                            result.addChild(engineResult);
-                            break;
-                        }
-                    }
+        Collection<String> engineToRun = new HashSet<String>();
+        Query query = new SimpleQuery(super.query);
+        Result describleResult = metaSearchManager.describe(query, null);
+
+        for (String resource : resources) {
+            for (Result result : describleResult.getChildren()) {
+                if (result.getChild(resource) != null) {
+                    engineToRun.add(result.getId());
+                    break;
                 }
             }
         }
-        return result;
+        return super.doSearch(engineToRun);
     }
 
     @Override
