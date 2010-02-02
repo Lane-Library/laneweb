@@ -15,7 +15,8 @@
             });
         };
         showPanel = function(title, body, X, Y){
-            var width = (title.length * 7 > 250) ? title.length * 7 : 250;
+            //FIXME: Hard coded this width value for beta feedback form.
+            var width = (title.length * 7 > 334) ? title.length * 7 : 334;
             panel.setHeader(title);
             panel.setBody(body);
             panel.cfg.setProperty('width', width + 'px');
