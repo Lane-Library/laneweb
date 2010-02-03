@@ -62,9 +62,11 @@
     background-position:0 -126px
 }
 /* .sbc are the corners*/
+/* font size is for IE6 */
 .sb-c {
     height:12px;
     width:12px;
+    font-size:0;
     position:absolute;
     background-image:url(/././images/sprite.gif);
 }
