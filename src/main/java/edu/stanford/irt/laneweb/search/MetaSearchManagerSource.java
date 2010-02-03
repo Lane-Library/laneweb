@@ -6,7 +6,7 @@ import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.SearchCacheManager;
+import edu.stanford.irt.search.spring.SearchCacheManager;
 
 /**
  * @author ceyates

@@ -2,12 +2,13 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Map;
 
+
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
 
-import edu.stanford.irt.search.SearchCacheManager;
+import edu.stanford.irt.search.spring.SearchCacheManager;
 
 public class SearchCacheManagerAction implements Action {
 
