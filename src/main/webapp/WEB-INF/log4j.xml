@@ -12,6 +12,16 @@
         </layout>
     </appender>
     
+    <appender name="headers" class="edu.stanford.irt.laneweb.LogAppender">
+        <param name="File" value="${catalina.base}/logs/header.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p [%t][%c] - %m%n"/>
+        </layout>
+    </appender>
+    
     <appender name="VOYAGER" class="org.apache.log4j.net.SMTPAppender">
         <param name="Threshold" value="ERROR"/>
         <param name="To" value="ryanmax@stanford.edu"/>
@@ -34,6 +44,11 @@
     <category name="edu.stanford.irt.laneweb.LoginAction" additivity="false">
         <priority value="ERROR"/>
         <appender-ref ref="VOYAGER"/>
+    </category>
+    
+    <category name="httpclient.wire.header" additivity="false">
+        <priority value="DEBUG"/>
+        <appender-ref ref="headers"/>
     </category>
     
     <root>
