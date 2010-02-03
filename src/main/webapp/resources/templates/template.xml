@@ -344,7 +344,7 @@
                         <input type="hidden" value="REMOTE_HOST,REMOTE_ADDR,HTTP_USER_AGENT"
                             name="env_report"/>
                         <input type="hidden" name="redirect"
-                            value="http://lane.stanford.edu/portals/easyfeedback_response.html"/>
+                            value="http://lane-beta.stanford.edu/preview_feedback_response.html"/>
                         <input type="hidden" name="pageTitle" value="Preview Feedback"/>
                         <h3>We'd love to know your impressions</h3>
                         <h4>What questions come up as you tour this still under-construction
