@@ -10,9 +10,6 @@
     height:12px;
     width:12px;
 }
-.yui-panel .hd {
-    border:1px white solid;
-}
 .yui-panel {
     background-color:#fff;
     border:4px solid #B2A77A;
@@ -20,13 +17,15 @@
     -moz-border-radius-topright:5px;
     -webkit-border-top-left-radius:5px;
     -webkit-border-top-right-radius:5px;
+    text-align:left;
 }
 .yui-panel .hd {
     background-color:#cdcfbe;
-   color:#820000;
-   font-family:Georgia, "Times New Roman", Times, serif;
-   font-size: 1.3em;
+    color:#820000;
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-size: 1.3em;
     padding: 4px;
+    font-weight:bold;
 }
 .yui-panel .container-close {
     background-image:url(/././images/backgr/close-button-off.gif);
@@ -36,15 +35,7 @@
 .yui-panel a:hover.container-close {
     background-image:url(/././images/backgr/close-button-on.gif);
 }
-.yui-panel {
-    text-align:left;
-    border: 4px solid #cdcfbe;
-}
-.yui-panel .hd {
-    font-weight:bold;
-}
  .yui-panel .bd {
     padding: 4px;
-    
     font-size:90%;
 }
