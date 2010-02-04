@@ -8,3 +8,6 @@
 .yui-tt .bd {
     padding:.5em;
 }
+.yui-tt strong {
+    font-weight:bold;
+}
