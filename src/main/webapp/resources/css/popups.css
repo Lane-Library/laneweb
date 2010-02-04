@@ -10,6 +10,9 @@
     height:12px;
     width:12px;
 }
+.yui-panel .hd {
+    border:1px solid white;
+}
 .yui-panel {
     background-color:#fff;
     border:4px solid #B2A77A;
