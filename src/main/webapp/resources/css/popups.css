@@ -15,6 +15,11 @@
 }
 .yui-panel {
     background-color:#fff;
+    border:4px solid #B2A77A;
+    -moz-border-radius-topleft:5px;
+    -moz-border-radius-topright:5px;
+    -webkit-border-top-left-radius:5px;
+    -webkit-border-top-right-radius:5px;
 }
 .yui-panel .hd {
     background-color:#cdcfbe;
@@ -23,11 +28,13 @@
    font-size: 1.3em;
     padding: 4px;
 }
-/*TODO: background image for the .container-close element */
 .yui-panel .container-close {
-    border:1px solid #FFF;
-    background-image: none;
-    background-repeat:no-repeat;
+    background-image:url(/././images/backgr/close-button-off.gif);
+    width:22px;
+    height:22px;
+}
+.yui-panel a:hover.container-close {
+    background-image:url(/././images/backgr/close-button-on.gif);
 }
 .yui-panel {
     text-align:left;
