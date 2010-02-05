@@ -108,6 +108,21 @@ font-size:0.9em;
     background-repeat: no-repeat;
     background-position: -23px -267px;
 }
+
+.go-straight-pubmed {
+    background-image: url(/././graphics/buttons/sprite-but-off.gif);
+    background-repeat: no-repeat;
+    background-position: -23px -435px;
+    margin: .5em 0 .5em 0;
+    height: 38px;
+    width: 205px;
+}
+.go-straight-pubmed:hover {
+    background: transparent url(/././graphics/buttons/sprite-but-on.gif);
+    background-repeat: no-repeat;
+    background-position: -23px -435px;
+}
+
 .subscribe-button {
     background-image: url(/././graphics/buttons/sprite-but-off.gif);
     background-repeat: no-repeat;
