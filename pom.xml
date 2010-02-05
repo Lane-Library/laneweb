@@ -272,7 +272,7 @@
       <dependency>
          <artifactId>suggest</artifactId>
          <groupId>edu.stanford.irt</groupId>
-         <version>0.1.8</version>
+         <version>0.1.9</version>
          <exclusions>
             <exclusion>
                <artifactId>ojdbc5</artifactId>
