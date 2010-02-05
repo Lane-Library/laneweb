@@ -1,21 +1,28 @@
 package edu.stanford.irt.laneweb.user;
 
-import java.util.Date;
-
 import javax.security.auth.Subject;
+import javax.security.auth.kerberos.KerberosTicket;
 import javax.security.auth.login.LoginContext;
 import javax.security.auth.login.LoginException;
 
+/**
+ * Provides a Subject with Kerberos authentication.
+ * 
+ * @author ceyates
+ * $Id$
+ */
 public class SubjectSource {
 
-    private static final long TWENTYFOUR_HOURS = 1000 * 60 * 60 * 24;
-
-    private Date lastAuthentication;
-
     private String name;
+    
+    private KerberosTicket ticket;
 
     private Subject subject;
 
+    /**
+     * returns the kerberos authorized Subject
+     * @return the authorized Subject
+     */
     public synchronized Subject getSubject() {
         try {
             authenticateIfNecessary();
@@ -30,11 +37,13 @@ public class SubjectSource {
     }
 
     private void authenticateIfNecessary() throws LoginException {
-        if (null == this.subject || System.currentTimeMillis() > this.lastAuthentication.getTime() + TWENTYFOUR_HOURS) {
+        if (null == this.subject || null == this.ticket || !this.ticket.isCurrent()) {
             LoginContext loginContext = new LoginContext(this.name);
             loginContext.login();
             this.subject = loginContext.getSubject();
-            this.lastAuthentication = new Date();
+            for (KerberosTicket ticket : this.subject.getPrivateCredentials(KerberosTicket.class)) {
+                this.ticket = ticket;
+            }
         }
     }
 }
