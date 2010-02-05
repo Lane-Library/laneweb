@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--$Id$-->
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:pipeline="http://cocoon.apache.org/schema/pipeline"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd">
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <bean id="edu.stanford.irt.cocoon.spring.SitemapRequestHandler"
         class="edu.stanford.irt.cocoon.spring.SitemapRequestHandler">
@@ -241,7 +240,6 @@
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
         class="edu.stanford.irt.laneweb.XHTMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
-        <pipeline:component mime-type="text/html"/>
         <property name="format">
             <props>
                 <prop key="doctype-public">-//W3C//DTD XHTML 1.0 Strict//EN</prop>
@@ -253,29 +251,18 @@
         </property>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
-
-    <bean name="org.apache.cocoon.serialization.Serializer/gzipxhtml"
-        class="edu.stanford.irt.laneweb.gzip.GZipXMLSerializer" scope="prototype"
-        parent="org.apache.cocoon.serialization.AbstractTextSerializer">
-        <pipeline:component mime-type="text/html"/>
-        <property name="format">
-            <props>
-                <prop key="doctype-public">-//W3C//DTD XHTML 1.0 Strict//EN</prop>
-                <prop key="doctype-system">http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd</prop>
-                <prop key="encoding">UTF-8</prop>
-                <prop key="indent">yes</prop>
-                <prop key="omit-xml-declaration">yes</prop>
-            </props>
-        </property>
-        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
-        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"
-        />
+    
+    <bean name="org.apache.cocoon.serialization.Serializer/xhtml/info">
+        <property name="mimeType" value="text/html"/>
     </bean>
 
     <bean name="org.apache.cocoon.serialization.Serializer/text"
         class="org.apache.cocoon.serialization.TextSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
-        <pipeline:component mime-type="text/plain"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.serialization.Serializer/text/info">
+        <property name="mimeType" value="text/plain"/>
     </bean>
 
     <bean id="org.apache.cocoon.el.ExpressionFactory"
