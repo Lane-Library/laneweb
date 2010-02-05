@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  - $Id: web.xml 51550 2008-12-17 19:49:10Z ceyates@stanford.edu $
+  - $Id$
   -->
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
