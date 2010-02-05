@@ -252,7 +252,8 @@
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
     
-    <bean name="org.apache.cocoon.serialization.Serializer/xhtml/info">
+    <bean name="org.apache.cocoon.serialization.Serializer/xhtml/info"
+        class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoInitializer">
         <property name="mimeType" value="text/html"/>
     </bean>
 
@@ -261,7 +262,8 @@
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
     </bean>
     
-    <bean name="org.apache.cocoon.serialization.Serializer/text/info">
+    <bean name="org.apache.cocoon.serialization.Serializer/text/info"
+        class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoInitializer">
         <property name="mimeType" value="text/plain"/>
     </bean>
 
