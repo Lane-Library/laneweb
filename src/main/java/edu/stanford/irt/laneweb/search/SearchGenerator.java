@@ -10,7 +10,6 @@ import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 
-import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.DefaultResult;
@@ -18,6 +17,7 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
  * @author ceyates
+ * $Id$
  */
 public class SearchGenerator extends AbstractSearchGenerator implements Generator {
 
