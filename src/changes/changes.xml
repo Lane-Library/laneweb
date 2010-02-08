@@ -9,6 +9,17 @@
     <body>
         <release date="2010-02-01" version="1.10.beta2" description="1.10.beta2 redesign release"/>
         <release date="2010-01-25" version="1.10.beta1" description="1.10.beta1 redesign release"/>
+        <release date="2010-02-08" version="1.9.34" description="1.9.34 bug fix release">
+            <action date="2010-02-08" dev="ceyates" issue="34109" type="update">
+                upgrade to spring 3.0
+            </action>
+            <action date="2010-02-05" dev="ceyates" issue="34053" type="fix">
+                moderate numbers of kerberos related authentication errors in the log
+            </action>
+            <action date="2010-02-05" dev="ryanmax" issue="34110" type="update">
+                upgrade to suggest-0.1.9
+            </action>
+        </release>
         <release date="2009-11-01" version="1.9.33" description="1.9.33 bug fix release">
             <action date="2009-11-01" dev="ceyates" issue="32010" type="fix">
                 bassett larger view not getting the correct template 
