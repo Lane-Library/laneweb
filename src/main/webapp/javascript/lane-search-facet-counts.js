@@ -2,25 +2,22 @@
 (function() {
     var searchString = LANE.search.getEncodedSearchString(),
         startTime = new Date().getTime(),
-        facets, hitSpan, j,
+        facets, requestString, j,
         updateHits = function(o) {
             var response = YAHOO.lang.JSON.parse(o.responseText),
-                hitSpan, hitLink, hits, sleepingTime,
+                hitLink, hits, sleepingTime,
                 remainingTime, searchStatus, engineStatus;
             
             for (j = 0; j < facets.length; j++) {
             	hits = null;
-                hitSpan = document.getElementById(facets[j].facetId + 'HitSpan');
                 hitLink = facets[j].getElementsByTagName('a')[0];
                 if (undefined != response.results.facets[facets[j].facetId]) {
                     hits = response.results.facets[facets[j].facetId].hits;
                     engineStatus = response.results.facets[facets[j].facetId].status;
                 }
-                if (hitSpan !== null && hits !== 0 && hits !== '') {
-                    hitSpan.innerHTML = hits;
-                }
                 if (!facets[j].facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits == 0) {
                 	YAHOO.util.Dom.addClass(hitLink.parentNode,'inactiveFacet');
+                	YAHOO.util.Dom.removeClass(hitLink.parentNode,'searchableFacet');
                 	hitLink.setAttribute('title','no search results for '+hitLink.innerHTML)
                 }
             }
@@ -39,12 +36,16 @@
         },
         makeRequest = function() {
             facets = YAHOO.util.Dom.getElementsByClassName('searchFacet');
+            requestString = '';
             for (j = 0; j < facets.length; j++) {
                 facets[j].facetId = facets[j].id.substring(0, facets[j].id.indexOf('Facet'));
-                hitSpan = document.getElementById(facets[j].facetId + 'HitCount');
-                YAHOO.util.Dom.addClass(hitSpan,'searching');
+                if(YAHOO.util.Dom.hasClass(facets[j]),'searchableFacet'){
+                	requestString+=facets[j].facetId+',';
+                }
             }
-            YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/facets/json?q=' + searchString + '&rd=' + Math.random(), responseHandler);
+            if(requestString != ''){
+            	YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/facets/json?q=' + searchString + '&f=' + requestString + '&rd=' + Math.random(), responseHandler);
+            }
     };
     if (searchString) {
         YAHOO.util.Event.onAvailable('searchFacets', makeRequest);

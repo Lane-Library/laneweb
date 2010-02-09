@@ -1,11 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:s="http://irt.stanford.edu/search/2.0"
     xmlns:st="http://lane.stanford.edu/search-templates/ns"
     xmlns="http://lane.stanford.edu/search-facet-result/ns"
-    exclude-result-prefixes="st s"
+    exclude-result-prefixes="st"
     version="2.0">
     
+    <!-- 
+        JS: scrapes facetIds from content and builds query: ?f=catalog-all,catalog-lois
+        XSLT: from facetIds, pull list of resources using search-template.xsl
+        fetch counts/status for all unique resources AND engines
+        return per facet count in JSON format
+    -->
+    <xsl:param name="f"/>
+    
+    <xsl:variable name="facets">
+        <xsl:choose>
+            <xsl:when test="$f">
+                <xsl:value-of select="tokenize($f,',')"/>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:variable>
+    
+    <xsl:variable name="engine-ids" select="//st:template[contains($facets,@id)]/st:engine/@idref"/>
+    
+    <xsl:variable name="engines-string">
+        <xsl:for-each select="distinct-values($engine-ids)">
+            <xsl:value-of select="."/>
+            <xsl:if test="position() != last()">
+                <xsl:text>&amp;e=</xsl:text>            
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:variable>
+    
+    <xsl:variable name="search-request">
+        <xsl:if test="count($engine-ids) > 0">
+            <xsl:value-of select="concat('cocoon://apps/search/engine/xml?e=',$engines-string)"/>   
+        </xsl:if>
+    </xsl:variable>
+    
+    <xsl:variable name="resource-ids" select="//st:template[contains($facets,@id)]/st:resource/@idref"/>
+    
+    <xsl:variable name="resources-string">
+        <xsl:for-each select="distinct-values($resource-ids)">
+            <xsl:value-of select="."/>
+            <xsl:if test="position() != last()">
+                <xsl:text>&amp;r=</xsl:text>            
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:variable>
+    
+    <xsl:variable name="search-request">
+        <xsl:choose>
+            <xsl:when test="count($engine-ids) > 0">
+                <xsl:value-of select="concat('cocoon://apps/search/engine/xml?e=',$engines-string)"/>   
+            </xsl:when>
+            <xsl:when test="count($resource-ids) > 0">
+                <xsl:value-of select="concat('cocoon://apps/search/resource/xml?r=',$resources-string)"/>   
+            </xsl:when>
+        </xsl:choose>
+    </xsl:variable>
+    
+    <xsl:variable name="search-node">
+        <xsl:copy-of select="document($search-request)"/>
+    </xsl:variable>
     
     <xsl:template match="search-facet-counts">
         <xsl:apply-templates select="st:search-templates"/>
@@ -13,34 +70,35 @@
     
     <xsl:template match="st:search-templates">
         {"results":{
-        "status": "<xsl:value-of select="//s:search/@s:status"/>",
+        "status": "<xsl:value-of select="$search-node/search/@status"/>",
         "facets": 
-        { 
-        <xsl:apply-templates select="//st:template"/>
+        {
+            <xsl:apply-templates select="//st:template[contains($facets,@id)]"/>
         }
         }
         }
     </xsl:template>
     
     <xsl:template match="st:template">
-        <xsl:variable name="engine-ids" select="st:resource/@idref"/>
-        <xsl:variable name="hits" select="sum(//s:resource[@s:status='successful' and @s:id=$engine-ids]/s:hits[.!=0])"/>
+        <xsl:variable name="my-engine-ids" select="st:engine/@idref"/>
+        <xsl:variable name="my-resource-ids" select="st:resource/@idref"/>
+        <xsl:variable name="hits" select="sum($search-node//engine[@status='successful' and @id=$my-engine-ids]/hits[.!=0]) + sum($search-node//resource[@status='successful' and @id=$my-resource-ids]/hits[.!=0])"/>
+        <xsl:variable name="totalEngineResourceCount" select="count($my-engine-ids) + count($my-resource-ids)"/>
         <xsl:variable name="status">
             <xsl:choose>
-                <xsl:when test="count(//s:resource[@s:id=$engine-ids]) = count(//s:resource[@s:status='successful' and @s:id=$engine-ids])">successful</xsl:when>
-                <xsl:when test="count(//s:resource[@s:id=$engine-ids]) = count(//s:resource[@s:status='failed' and @s:id=$engine-ids])">failed</xsl:when>
-                <xsl:when test="count(//s:resource[@s:id=$engine-ids]) = count(//s:resource[@s:status='canceled' and @s:id=$engine-ids])">canceled</xsl:when>
+                <xsl:when test="$totalEngineResourceCount = count($search-node//engine[@status='successful' and @id=$my-engine-ids]) + count($search-node//resource[@status='successful' and @id=$my-resource-ids])">successful</xsl:when>
+                <xsl:when test="$totalEngineResourceCount = count($search-node//engine[@status='failed' and @id=$my-engine-ids]) + count($search-node//resource[@status='failed' and @id=$my-resource-ids])">failed</xsl:when>
+                <xsl:when test="$totalEngineResourceCount = count($search-node//engine[@status='canceled' and @id=$my-engine-ids]) + count($search-node//resource[@status='canceled' and @id=$my-resource-ids])">canceled</xsl:when>
             </xsl:choose>
-            
         </xsl:variable>
-        "<xsl:value-of  select="@id"/>":
-        {
-        "status":"<xsl:value-of  select="$status"/>",
-        "hits" : "<xsl:value-of  select="format-number($hits, '###,##0')" />"
-        }
-        <xsl:if test="position() != last()">
-            <xsl:text>,</xsl:text>            
-        </xsl:if>
+            "<xsl:value-of  select="@id"/>":
+            {
+            "status":"<xsl:value-of  select="$status"/>",
+            "hits" : "<xsl:value-of  select="format-number($hits, '###,##0')" />"
+            }
+            <xsl:if test="position() != last()">
+                <xsl:text>,</xsl:text>            
+            </xsl:if>
     </xsl:template>
     
 </xsl:stylesheet>

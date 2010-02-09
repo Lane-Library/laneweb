@@ -25,9 +25,10 @@
     
     <xsl:template match="xi:include">
         <xsl:variable name="href" select="replace(@href,'.[e|r]=',' ')"/>
-        <xsl:variable name="engines" select="replace($href,'cocoon:/apps/search/ranked/xml ','')"/>
-        <xsl:for-each select="tokenize(string($engines),' ')">
-            <resource idref="{.}"/>
+        <xsl:for-each select="tokenize(string($href),' ')">
+            <xsl:if test="not(starts-with(.,'cocoon'))">
+                <engine idref="{.}"/>
+            </xsl:if>
         </xsl:for-each>
     </xsl:template>
     

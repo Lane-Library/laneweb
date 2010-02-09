@@ -36,10 +36,6 @@
             <xsl:when test=".='search-terms'">
                 <xsl:value-of select="$search-terms"/>
             </xsl:when>
-            <!-- adds a space to avoid self-closing elements and funny chars from &#160; -->
-            <xsl:when test=".='no-self-close'">
-                <xsl:comment> </xsl:comment>
-            </xsl:when>
         </xsl:choose>
     </xsl:template>
     
@@ -47,13 +43,6 @@
         <xsl:attribute name="href">
             <xsl:value-of select="substring-before(.,'{$keywords}')"/>
             <xsl:value-of select="encode-for-uri($search-terms)"/>
-        </xsl:attribute>
-    </xsl:template>
-    
-    <xsl:template match="attribute::href[contains(.,'{id}')]">
-        <xsl:attribute name="href">
-            <xsl:value-of select="substring-before(.,'{id}')"/>
-            <xsl:value-of select="/doc/s:search/@id"/>
         </xsl:attribute>
     </xsl:template>
     
@@ -71,9 +60,12 @@
         <!-- countFacetId: "all" from "article-allFacet"-->
         <xsl:variable name="countFacetId" select="replace(attribute::id,'\w+-(.*)Facet','$1')"/>
         
-        <!-- get hit count from search app or eresources sql -->
+        <!-- get hit count from search app (s:search OR search-content-counts) or eresources sql -->
         <xsl:variable name="hit-count">
             <xsl:choose>
+                <xsl:when test="//s:search//s:resource[attribute::s:id=$countFacetId]/s:hits">
+                    <xsl:value-of select="number(//s:search//s:resource[attribute::s:id=$countFacetId]/s:hits)"/>
+                </xsl:when>
                 <xsl:when test="//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId]">
                     <xsl:value-of select="number(//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId])"/>
                 </xsl:when>
@@ -89,13 +81,15 @@
             <xsl:choose>
                 <!-- always show requested facet, even if zero hits -->
                 <xsl:when test="$facetId = $source">
-                    <xsl:apply-templates select="attribute::node()" />
                     <xsl:attribute name="class"><xsl:value-of select="attribute::class" /> current</xsl:attribute>
                 </xsl:when>
                 <!-- make facet inactive if zero hits and NOT -all facet -->
                 <xsl:when test="number($hit-count) = 0 and $countFacetId != 'all'">
-                    <xsl:apply-templates select="attribute::node()" />
                     <xsl:attribute name="class"><xsl:value-of select="attribute::class" /> inactiveFacet</xsl:attribute>
+                </xsl:when>
+                <!-- mark facets as "searchableFacet" when hit-count is NaN ... this means JS will check for active/inactive-->
+                <xsl:when test="$hit-count = 'NaN'">
+                    <xsl:attribute name="class"><xsl:value-of select="attribute::class" /> searchableFacet</xsl:attribute>
                 </xsl:when>
             </xsl:choose>
             
