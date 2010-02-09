@@ -16,6 +16,7 @@ import javax.servlet.ServletContextListener;
  * are not System properties they are looked up using JNDI.
  * 
  * @author ceyates
+ * $Id$
  */
 public class LanewebContextListener implements ServletContextListener {
 
@@ -43,6 +44,11 @@ public class LanewebContextListener implements ServletContextListener {
         context.setAttribute(EZPROXY_KEY, getValue(EZPROXY_KEY));
     }
 
+    /**
+     * get the property associated with a name, and failing that a jndi object, and failing that, die.
+     * @param name
+     * @return The property or jndi value
+     */
     private String getValue(String name) {
         String value = System.getProperty(name);
         if (null == value) {
@@ -58,6 +64,11 @@ public class LanewebContextListener implements ServletContextListener {
         return value;
     }
 
+    /**
+     * get a url associated with a name, delegating to getValue() above.
+     * @param name
+     * @return a URL associated with the name
+     */
     private URL getURL(final String name) {
         try {
             return new URL(getValue(name));
