@@ -20,6 +20,7 @@
             /WEB-INF/cocoon/spring/eresources.xml
             /WEB-INF/cocoon/spring/history.xml
             /WEB-INF/cocoon/spring/laneweb.xml
+            /WEB-INF/cocoon/spring/merged-search.xml
             /WEB-INF/cocoon/spring/querymap.xml
             /WEB-INF/cocoon/spring/search.xml
             /WEB-INF/cocoon/spring/suggest.xml

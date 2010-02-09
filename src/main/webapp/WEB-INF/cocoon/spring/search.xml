@@ -21,6 +21,13 @@
         <property name="defaultTimeout" value="60000"/>
     </bean>
 
+    <bean name="org.apache.cocoon.generation.Generator/search-content"
+        class="edu.stanford.irt.laneweb.search.ContentSearchGenerator" scope="prototype">
+        <property name="metaSearchManagerSource"
+            ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
+        <property name="defaultTimeout" value="20000"/>
+        <property name="contentResultLimit" value="10"/>
+    </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/search-engine"
         class="edu.stanford.irt.laneweb.search.EngineSearchGenerator" scope="prototype">

@@ -19,6 +19,25 @@
                     <map:generate src="cocoon://content/bassett/bassettsView.html" type="file"/>
                     <map:serialize type="xhtml"/>
                 </map:match>
+                <!-- all search pages (parameter is all-all, all-pubmed, all-ej, etc)-->
+                <map:match type="regex-parameter" pattern="^all-(.*)$">
+                    <map:parameter name="parameter-name" value="source"/>
+                    <map:aggregate element="doc">
+                        <map:part src="cocoon:/eresources/count"/>
+                        <map:part src="cocoon:/cached/search/all.html"/>
+                        <map:part
+                            src="cocoon:/cached/search/all/${request/parameters/source}.html"/>
+                    </map:aggregate>
+                    <map:transform type="xinclude"/>
+                    <map:transform type="saxon" src="context://xsl/search-facets.xsl">
+                        <map:parameter name="q" value="${request/parameters/q}"/>
+                        <map:parameter name="source" value="${request/parameters/source}"/>
+                    </map:transform>
+                    <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                    </map:transform>
+                    <map:serialize type="xml"/>
+                </map:match>
                 <!-- articles search pages (parameter is articles-all, articles-pubmed, articles-uptodate, etc)-->
                 <map:match type="regex-parameter" pattern="^articles-(.*)$">
                     <map:parameter name="parameter-name" value="source"/>

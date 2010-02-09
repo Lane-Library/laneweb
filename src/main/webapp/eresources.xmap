@@ -13,6 +13,7 @@
                     <map:parameter name="subset" value="${request/parameters/s}"/>
                     <map:parameter name="type" value="${request/parameters/t}"/>
                 </map:generate>
+                <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search/type/*" type="wildcard">
@@ -21,6 +22,7 @@
                     <map:parameter name="subset" value="${request/parameters/s}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
+                <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search/type/*/*" type="wildcard">
@@ -29,6 +31,7 @@
                     <map:parameter name="subset" value="${request/parameters/s}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
+                <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="histdb" type="wildcard">
@@ -37,6 +40,7 @@
                     <map:parameter name="subset" value="${request/parameters/s}"/>
                     <map:parameter name="type" value="${request/parameters/t}"/>
                 </map:generate>
+                <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="history-search" type="wildcard">
@@ -45,6 +49,7 @@
                     <map:parameter name="subset" value="${request/parameters/s}"/>
                     <map:parameter name="type" value="${request/parameters/t}"/>
                 </map:generate>
+                <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="count" type="wildcard">
@@ -73,6 +78,7 @@
                     <map:parameter name="subset" value="${request/parameters/s}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
+                <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="browse/subset/*" type="wildcard">
@@ -82,6 +88,7 @@
                     <map:parameter name="subset" value="{1}"/>
                     <map:parameter name="type" value="${request/parameters/t}"/>
                 </map:generate>
+                <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="mesh/type/*" type="wildcard">
@@ -91,6 +98,7 @@
                     <map:parameter name="subset" value="${request/parameters/s}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
+                <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="core/type/*" type="wildcard">
@@ -100,6 +108,7 @@
                     <map:parameter name="subset" value="${request/parameters/s}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
+                <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>

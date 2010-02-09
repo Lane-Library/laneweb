@@ -7,11 +7,11 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultsList;
 
 public abstract class AbstractEresourcesGenerator implements Generator {
 
@@ -36,7 +36,8 @@ public abstract class AbstractEresourcesGenerator implements Generator {
     protected String type;
 
     public void generate() throws SAXException {
-        XMLizable eresources = new XHTMLizableEresourceList(getEresourceList());
+        XMLizableSearchResultsList eresources = new XMLizableSearchResultsList();
+        eresources.setEresources(getEresourceList());
         this.xmlConsumer.startDocument();
         eresources.toSAX(this.xmlConsumer);
         this.xmlConsumer.endDocument();
