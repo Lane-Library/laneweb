@@ -18,6 +18,18 @@
                      </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>
+                <map:match pattern="search/engine/xml" type="wildcard">
+                    <map:generate type="search-engine">
+                        <map:parameter name="query" value="${request/parameters/q}"/>
+                    </map:generate>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <map:match pattern="search/resource/xml" type="wildcard">
+                    <map:generate type="search-resource">
+                        <map:parameter name="query" value="${request/parameters/q}"/>
+                    </map:generate>
+                    <map:serialize type="xml"/>
+                </map:match>
                 <!-- search/ranked/xml returns xmlized content results -->
                 <map:match pattern="search/ranked/xml" type="wildcard">
                     <map:generate type="search-engine">
@@ -96,18 +108,21 @@
                     </map:select>
                     <map:serialize type="text"/>
                 </map:match>
-                <!-- search tab results -->
-                <map:match pattern="search/tabs/json" type="wildcard">
+                <!-- search facet counts -->
+                <map:match pattern="search/facets/json" type="wildcard">
                     <map:aggregate element="search-facet-counts">
-                        <map:part src="cocoon:/search/xml"/>
                         <map:part src="cocoon:/cache/search/templates/xml"/>
                     </map:aggregate>
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-facet-counts.xsl">
-                            <map:transform type="saxon" src="xsl/search-facet-counts.xsl"/>
+                            <map:transform type="saxon" src="xsl/search-facet-counts.xsl">
+                                <map:parameter name="f" value="${request/parameters/f}"/>
+                            </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-facet-counts.xsl"/>
+                            <map:transform type="saxon" src="xsl/search-facet-counts.xsl">
+                                <map:parameter name="f" value="${request/parameters/f}"/>
+                            </map:transform>
                         </map:otherwise>
                     </map:select>
                     <map:serialize type="text"/>
