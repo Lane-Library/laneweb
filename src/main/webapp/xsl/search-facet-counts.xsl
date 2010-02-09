@@ -32,12 +32,6 @@
         </xsl:for-each>
     </xsl:variable>
     
-    <xsl:variable name="search-request">
-        <xsl:if test="count($engine-ids) > 0">
-            <xsl:value-of select="concat('cocoon://apps/search/engine/xml?e=',$engines-string)"/>   
-        </xsl:if>
-    </xsl:variable>
-    
     <xsl:variable name="resource-ids" select="//st:template[contains($facets,@id)]/st:resource/@idref"/>
     
     <xsl:variable name="resources-string">
