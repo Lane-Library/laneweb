@@ -254,7 +254,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="cache/**.html" type="wildcard">
-                <map:generate src="${jndi/live-base}/content/{1}.html" type="html"/>
+                <map:generate src="${live-base}/content/{1}.html" type="html"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:handle-errors>

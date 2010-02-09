@@ -24,7 +24,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:generate type="html"
-                            src="${jndi/live-base}/content/biomed-resources/{1}browse.html"/>
+                            src="${live-base}/content/biomed-resources/{1}browse.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="xinclude"/>
@@ -77,7 +77,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:generate type="html"
-                            src="${jndi/live-base}/content/secure/persistentlogin.html"/>
+                            src="${live-base}/content/secure/persistentlogin.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:select type="resource-exists">
@@ -106,7 +106,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regexp">
-                <map:generate type="directory" src="${jndi/live-base}/content/{1}">
+                <map:generate type="directory" src="${live-base}/content/{1}">
                     <map:parameter name="depth" value="1"/>
                     <map:parameter name="dateFormat" value="EEE, d MMM yyyy HH:mm:ss Z"/>
                 </map:generate>
@@ -160,7 +160,7 @@
             <map:match pattern="howto/index.html" type="wildcard">
                 <map:match type="regex-parameter" pattern="_?(\d.+)">
                     <map:parameter name="parameter-name" value="id"/>
-                    <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
+                    <map:generate type="html" src="${medblog-base}/lane-faq/archives/{1}.xml"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/individual-faq.xsl">
                             <map:transform type="saxon" src="xsl/individual-faq.xsl>"/>
@@ -174,7 +174,7 @@
                 </map:match>
                 <map:match type="regex-parameter" pattern="(.+)">
                     <map:parameter name="parameter-name" value="category"/>
-                    <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
+                    <map:generate type="html" src="${medblog-base}/lane-faq/archives/{1}.xml"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/category-faq.xsl">
                             <map:transform type="saxon" src="xsl/category-faq.xsl"/>
@@ -188,7 +188,7 @@
                 </map:match>
             </map:match>
             <map:match pattern="faq-category-list/*" type="wildcard">
-                <map:generate type="html" src="${jndi/medblog-base}/lane-faq/archives/{1}.xml"/>
+                <map:generate type="html" src="${medblog-base}/lane-faq/archives/{1}.xml"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/faq-category-list.xsl">
                         <map:transform type="saxon" src="xsl/faq-category-list.xsl">
@@ -224,7 +224,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:generate type="html"
-                            src="${jndi/live-base}/content/services/liaisons.html"/>
+                            src="${live-base}/content/services/liaisons.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:select type="resource-exists">
@@ -256,7 +256,7 @@
                         <map:generate type="html" src="content/{1}"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="html" src="${jndi/live-base}/content/{1}"/>
+                        <map:generate type="html" src="${live-base}/content/{1}"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="xinclude"/>

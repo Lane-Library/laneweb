@@ -32,7 +32,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
-                <map:generate type="file" src="${jndi/stage-base}/content/rss/{1}.xml"/>
+                <map:generate type="file" src="${stage-base}/content/rss/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="eresources" type="wildcard">

@@ -94,7 +94,7 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search.html" type="wildcard">
-                    <map:generate type="html" src="${jndi/stage-base}/content/error.html"/>
+                    <map:generate type="html" src="${stage-base}/content/error.html"/>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
@@ -126,7 +126,7 @@
             </map:match>
             <!-- in live search.xmap this is a caching pipeline, thus the name, needed here for html generator -->
             <map:match pattern="cached/**" type="wildcard">
-                <map:generate src="${jndi/stage-base}/content/{1}" type="html"/>
+                <map:generate src="${stage-base}/content/{1}" type="html"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- pass any unresolved urls (eg from xinclude) to content.xmap -->

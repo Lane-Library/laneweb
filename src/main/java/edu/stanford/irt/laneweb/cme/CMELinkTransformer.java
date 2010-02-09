@@ -12,9 +12,11 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.laneweb.user.User;
 
 /**
- * Transformer to rewrite data when a User.EMRID value is present. Elements to rewrite include: - anchor element href
- * attributes when value is known CME host - url element of metasearch results when value is known CME host - input
- * element value attributes when found value is REPLACEMENT_STRING
+ * Transformer to rewrite data when a User.EMRID value is present. 
+ * Elements to rewrite include: 
+ * - anchor element href attributes when value is known CME host 
+ * - url element of metasearch results when value is known CME host 
+ * - input element value attributes when found value is REPLACEMENT_STRING
  * 
  * @author ryanmax
  */

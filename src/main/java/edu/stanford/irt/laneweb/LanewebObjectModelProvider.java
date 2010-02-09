@@ -19,8 +19,6 @@ import edu.stanford.irt.laneweb.user.UserDao;
 
 public class LanewebObjectModelProvider implements ObjectModelProvider {
 
-    private Map<String, Object> jndiData;
-
     private ProcessInfoProvider processInfoProvider;
 
     private ProxyLinks proxyLinks;
@@ -29,10 +27,9 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
 
     private UserDao userDao;
 
-    public LanewebObjectModelProvider(final ProcessInfoProvider pip, final Map<String, Object> jndiData,
-            final UserDao userDao, final ProxyLinks proxyLinks, final TemplateChooser templateChooser) {
+    public LanewebObjectModelProvider(final ProcessInfoProvider pip, final UserDao userDao, final ProxyLinks proxyLinks,
+            final TemplateChooser templateChooser) {
         this.processInfoProvider = pip;
-        this.jndiData = jndiData;
         this.userDao = userDao;
         this.proxyLinks = proxyLinks;
         this.templateChooser = templateChooser;
@@ -57,8 +54,15 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         cocoonMap.put("proxyLinks", this.proxyLinks.proxyLinks(user, request));
         // cocoon.context
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);
+        cocoonMap.put("live-base", context.getAttribute("laneweb.context.live-base"));
+        cocoonMap.put("stage-base", context.getAttribute("laneweb.context.stage-base"));
+        cocoonMap.put("medblog-base", context.getAttribute("laneweb.context.medblog-base"));
         cocoonMap.put("context", context);
-        cocoonMap.put("jndi", this.jndiData);
+        Map<String, Object> jndiData = new HashMap<String, Object>(3);
+        jndiData.put("live-base", cocoonMap.get("live-base"));
+        jndiData.put("stage-base", cocoonMap.get("stage-base"));
+        jndiData.put("medblog-base", cocoonMap.get("medblog-base"));
+        cocoonMap.put("jndi", jndiData);
         String query = request.getParameter("q");
         if (null != query) {
             try {

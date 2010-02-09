@@ -112,7 +112,7 @@
                 </map:act>
             </map:match>
             <map:match pattern="cookiesFetch.html" type="wildcard">
-                <map:generate type="file" src="${jndi/live-base}/content/cookiesFetch.html"/>
+                <map:generate type="file" src="${live-base}/content/cookiesFetch.html"/>
                 <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
                     <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
                     <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
@@ -231,7 +231,7 @@
                 </map:select>-->
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
-                <map:generate type="file" src="${jndi/live-base}/content/{1}.xml"/>
+                <map:generate type="file" src="${live-base}/content/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="_vti**" type="wildcard">

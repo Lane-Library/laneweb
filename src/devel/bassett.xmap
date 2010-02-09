@@ -15,7 +15,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:aggregate element="doc">
-                            <map:part src="${jndi/live-base}/content/portals/bassett/{1}.html"/>
+                            <map:part src="${live-base}/content/portals/bassett/{1}.html"/>
                             <map:part src="cocoon:/database"/>
                         </map:aggregate>
                     </map:otherwise>
@@ -61,7 +61,7 @@
                     <map:otherwise>
                         <map:aggregate element="doc" label="bassettContent">
                             <map:part
-                                src="${jndi/live-base}/content/portals/bassett/bassettTemplate.html"/>
+                                src="${live-base}/content/portals/bassett/bassettTemplate.html"/>
                             <map:part src="cocoon:/raw/{1}.html"/>
                             <map:part src="cocoon:/accordionMenu"/>
                         </map:aggregate>
@@ -92,7 +92,7 @@
                     <map:otherwise>
                         <map:aggregate element="doc" label="bassettContent">
                             <map:part
-                                src="${jndi/live-base}/content/portals/bassett/accordionMenu.html"/>
+                                src="${live-base}/content/portals/bassett/accordionMenu.html"/>
                             <map:part src="cocoon:/bassett-accordion"/>
                         </map:aggregate>
                     </map:otherwise>

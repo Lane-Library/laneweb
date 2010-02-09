@@ -53,7 +53,7 @@
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="${jndi/live-base}/content/{1}.pdf">
+                        <map:read type="resource" src="${live-base}/content/{1}.pdf">
                             <map:parameter name="byte-ranges" value="false"/>
                         </map:read>
                     </map:otherwise>
@@ -65,7 +65,7 @@
                         <map:read type="resource" src="content/{1}"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="${jndi/live-base}/content/{1}"/>
+                        <map:read type="resource" src="${live-base}/content/{1}"/>
                     </map:otherwise>
                 </map:select>
             </map:match>

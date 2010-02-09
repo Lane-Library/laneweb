@@ -172,7 +172,7 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search.html" type="wildcard">
-                    <map:generate type="html" src="${jndi/live-base}/content/error.html"/>
+                    <map:generate type="html" src="${live-base}/content/error.html"/>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
@@ -240,7 +240,7 @@
                         <map:generate src="content/{1}" type="html"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate src="${jndi/live-base}/content/{1}" type="html"/>
+                        <map:generate src="${live-base}/content/{1}" type="html"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

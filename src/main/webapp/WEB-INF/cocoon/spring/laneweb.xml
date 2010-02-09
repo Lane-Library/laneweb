@@ -293,25 +293,6 @@
     <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
         class="edu.stanford.irt.laneweb.LanewebObjectModelProvider">
         <constructor-arg ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
-        <constructor-arg>
-            <map>
-                <entry key="live-base">
-                    <bean class="org.springframework.jndi.JndiObjectFactoryBean">
-                        <property name="jndiName" value="java:comp/env/live-base"/>
-                    </bean>
-                </entry>
-                <entry key="stage-base">
-                    <bean class="org.springframework.jndi.JndiObjectFactoryBean">
-                        <property name="jndiName" value="java:comp/env/stage-base"/>
-                    </bean>
-                </entry>
-                <entry key="medblog-base">
-                    <bean class="org.springframework.jndi.JndiObjectFactoryBean">
-                        <property name="jndiName" value="java:comp/env/medblog-base"/>
-                    </bean>
-                </entry>
-            </map>
-        </constructor-arg>
         <constructor-arg ref="edu.stanford.irt.laneweb.user.UserDao"/>
         <constructor-arg>
             <bean class="edu.stanford.irt.laneweb.proxy.ProxyLinks">

@@ -26,6 +26,10 @@
             /WEB-INF/cocoon/spring/idc9.xml
         </param-value>
     </context-param>
+    
+    <listener>
+        <listener-class>edu.stanford.irt.laneweb.LanewebContextListener</listener-class>
+    </listener>
 
     <listener>
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
@@ -41,7 +45,7 @@
 
     <filter>
         <filter-name>LanewebHTTPSFilter</filter-name>
-        <filter-class> edu.stanford.irt.laneweb.LanewebHTTPSFilter </filter-class>
+        <filter-class>edu.stanford.irt.laneweb.LanewebHTTPSFilter</filter-class>
     </filter>
 
     <filter-mapping>

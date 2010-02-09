@@ -165,9 +165,9 @@
                     <map:generate type="querymap">
                         <map:parameter name="query" value="${request/parameters/q}"/>
                         <map:parameter name="resource-maps"
-                            value="${jndi/stage-base}/resources/querymap/resource-maps.xml"/>
+                            value="${stage-base}/resources/querymap/resource-maps.xml"/>
                         <map:parameter name="descriptor-weights"
-                            value="${jndi/stage-base}/resources/querymap/descriptor-weights.xml"/>
+                            value="${stage-base}/resources/querymap/descriptor-weights.xml"/>
                         <map:parameter name="abstract-count" value="100"/>
                     </map:generate>
                     <map:serialize type="xml"/>
@@ -176,9 +176,9 @@
                     <map:read type="querymap">
                         <map:parameter name="query" value="${request/parameters/q}"/>
                         <map:parameter name="resource-maps"
-                            value="${jndi/stage-base}/resources/querymap/resource-maps.xml"/>
+                            value="${stage-base}/resources/querymap/resource-maps.xml"/>
                         <map:parameter name="descriptor-weights"
-                            value="${jndi/stage-base}/resources/querymap/descriptor-weights.xml"/>
+                            value="${stage-base}/resources/querymap/descriptor-weights.xml"/>
                         <map:parameter name="abstract-count" value="100"/>
                     </map:read>
                 </map:match>
@@ -234,7 +234,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="cache/**.html" type="wildcard">
-                <map:generate src="${jndi/stage-base}/content/{1}.html" type="html"/>
+                <map:generate src="${stage-base}/content/{1}.html" type="html"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:handle-errors>
