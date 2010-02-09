@@ -149,13 +149,10 @@
     
     <xsl:template match="h:a" mode="pubmedMore-link">
         <xsl:variable name="countFacetId" select="replace(../attribute::id,'\w+-(.*)Facet','$1')"/>
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()" />
-            <xsl:attribute name="href"><xsl:value-of select="//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId]/h:a/@href"/></xsl:attribute>
-            <xsl:attribute name="target">_blank</xsl:attribute>
-            <xsl:apply-templates select="self::node()" />
+        <a href="{//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId]/h:a/@href}" target="_blank">
+            <xsl:value-of select="."/>
             <xsl:text> </xsl:text>
-        </xsl:copy>
+        </a>
     </xsl:template>
     
 </xsl:stylesheet>
