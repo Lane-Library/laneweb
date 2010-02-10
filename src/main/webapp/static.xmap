@@ -14,32 +14,14 @@
             </map:match>
             <!-- first wildcard will be version for local css and javascript -->
             <map:match pattern="style/*/**.css" type="wildcard">
-                <!--<map:select type="gzip">
-                    <map:when test="">
-                        <map:read type="gziptxt-resource" src="context://resources/css/{2}.css">
-                            <map:parameter name="path" value="${request/contextPath}"/>
-                        </map:read>
-                    </map:when>
-                    <map:otherwise>-->
-                        <map:read type="txt-resource" src="context://resources/css/{2}.css">
-                            <map:parameter name="path" value="${request/contextPath}"/>
-                        </map:read>
-                <!--</map:otherwise>
-                </map:select>-->
+                <map:read type="txt-resource" src="context://resources/css/{2}.css">
+                    <map:parameter name="path" value="${base-path}"/>
+                </map:read>
             </map:match>
             <map:match pattern="javascript/*/*.js" type="wildcard">
-                <!--<map:select type="gzip">
-                    <map:when test="">
-                        <map:read type="gziptxt-resource" src="context://javascript/{2}.js">
-                            <map:parameter name="path" value="${request/contextPath}"/>
-                        </map:read>
-                    </map:when>
-                    <map:otherwise>-->
-                        <map:read type="txt-resource" src="context://javascript/{2}.js">
-                            <map:parameter name="path" value="${request/contextPath}"/>
-                        </map:read>
-                <!--</map:otherwise>
-                </map:select>-->
+                <map:read type="txt-resource" src="context://javascript/{2}.js">
+                    <map:parameter name="path" value="${base-path}"/>
+                </map:read>
             </map:match>
             <!-- cocoon reader range handling is broken so don't do it for pdfs where it matters most -->
             <map:match pattern="**.pdf" type="wildcard">

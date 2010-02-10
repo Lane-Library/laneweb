@@ -12,13 +12,13 @@
                 </map:aggregate>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/bassett.xsl">
-                    <map:parameter name="q" value="${request/parameters/q}"/>
-                    <map:parameter name="type" value="${request/parameters/t}"/>
-                    <map:parameter name="region" value="${request/parameters/r}"/>
+                    <map:parameter name="q" value="${q}"/>
+                    <map:parameter name="type" value="${t}"/>
+                    <map:parameter name="region" value="${r}"/>
                     <map:parameter name="images-url"
                         value="http://elane.stanford.edu/public/L254573"/>
                     <map:parameter name="images-per-page" value="30"/>
-                    <map:parameter name="current-page" value="${request/parameters/pageNumber}"/>
+                    <map:parameter name="current-page" value="${pageNumber}"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
@@ -39,7 +39,7 @@
                 </map:aggregate>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/bassettAccordion.xsl">
-                    <map:parameter name="q" value="${request/parameters/q}"/>
+                    <map:parameter name="q" value="${q}"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>

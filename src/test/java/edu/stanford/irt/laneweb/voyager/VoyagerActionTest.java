@@ -29,7 +29,7 @@ public class VoyagerActionTest {
     public void testAct() throws Exception {
         expect(this.params.getParameter("pid", null)).andReturn("123");
         expect(this.params.getParameter("query-string", null)).andReturn("a=b");
-        expect(this.params.getParameter("univ-id", null)).andReturn("1234");
+        expect(this.params.getParameter("univid", null)).andReturn("1234");
         replay(this.params);
         expect(this.voyagerLogin.getVoyagerURL("1234", "123", "a=b")).andReturn("hello");
         replay(this.voyagerLogin);

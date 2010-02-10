@@ -20,21 +20,21 @@
             </map:match>
             <map:match pattern="eresources" type="wildcard">
                 <map:generate type="er-search">
-                    <map:parameter name="query" value="${request/parameters/q}"/>
-                    <map:parameter name="type" value="${request/parameters/source}"/>
+                    <map:parameter name="query" value="${q}"/>
+                    <map:parameter name="type" value="${source}"/>
                 </map:generate>
                 <map:select type="resource-exists">
                     <map:when test="/xsl/eresources-rss.xsl">
                         <map:transform type="saxon" src="/xsl/eresources-rss.xsl">
-                            <map:parameter name="q" value="${request/parameters/q}"/>
-                            <map:parameter name="t" value="${request/parameters/t}"/>
+                            <map:parameter name="q" value="${q}"/>
+                            <map:parameter name="t" value="${t}"/>
                             <map:parameter name="type" value="search"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
-                            <map:parameter name="q" value="${request/parameters/q}"/>
-                            <map:parameter name="t" value="${request/parameters/t}"/>
+                            <map:parameter name="q" value="${q}"/>
+                            <map:parameter name="t" value="${t}"/>
                             <map:parameter name="type" value="search"/>
                         </map:transform>
                     </map:otherwise>
@@ -43,20 +43,20 @@
             </map:match>
             <map:match pattern="browse" type="wildcard">
                 <map:generate type="er-browse">
-                    <map:parameter name="alpha" value="${request/parameters/a}"/>
-                    <map:parameter name="type" value="${request/parameters/t}"/>
+                    <map:parameter name="alpha" value="${a}"/>
+                    <map:parameter name="type" value="${t}"/>
                 </map:generate>
                 <map:select type="resource-exists">
                     <map:when test="/xsl/eresources-rss.xsl">
                         <map:transform type="saxon" src="/xsl/eresources-rss.xsl">
-                            <map:parameter name="a" value="${request/parameters/a}"/>
-                            <map:parameter name="type" value="${request/parameters/t}"/>
+                            <map:parameter name="a" value="${a}"/>
+                            <map:parameter name="type" value="${t}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
-                            <map:parameter name="a" value="${request/parameters/a}"/>
-                            <map:parameter name="type" value="${request/parameters/t}"/>
+                            <map:parameter name="a" value="${a}"/>
+                            <map:parameter name="type" value="${t}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>
@@ -64,20 +64,20 @@
             </map:match>
             <map:match pattern="mesh" type="wildcard">
                 <map:generate type="er-mesh">
-                    <map:parameter name="mesh" value="${request/parameters/m}"/>
-                    <map:parameter name="type" value="${request/parameters/t}"/>
+                    <map:parameter name="mesh" value="${m}"/>
+                    <map:parameter name="type" value="${t}"/>
                 </map:generate>
                 <map:select type="resource-exists">
                     <map:when test="/xsl/eresources-rss.xsl">
                         <map:transform type="saxon" src="/xsl/eresources-rss.xsl">
-                            <map:parameter name="mesh-term" value="${request/parameters/m}"/>
-                            <map:parameter name="type" value="mesh-${request/parameters/t}"/>
+                            <map:parameter name="mesh-term" value="${m}"/>
+                            <map:parameter name="type" value="mesh-${t}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
-                            <map:parameter name="mesh-term" value="${request/parameters/m}"/>
-                            <map:parameter name="type" value="mesh-${request/parameters/t}"/>
+                            <map:parameter name="mesh-term" value="${m}"/>
+                            <map:parameter name="type" value="mesh-${t}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>
@@ -96,18 +96,18 @@
             </map:match>
             <map:match pattern="page2rss" type="wildcard">
                 <map:aggregate element="doc">
-                    <map:part src="cocoon:/content/${request/parameters/page}"/>
-                    <map:part src="cocoon:/content/file-info${request/parameters/page}"/>
+                    <map:part src="cocoon:/content/${page}"/>
+                    <map:part src="cocoon:/content/file-info${page}"/>
                 </map:aggregate>
                 <map:select type="resource-exists">
                     <map:when test="/xsl/page2rss.xsl">
                         <map:transform src="/xsl/page2rss.xsl" type="saxon">
-                            <map:parameter name="page" value="${request/parameters/page}"/>
+                            <map:parameter name="page" value="${page}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform src="context://xsl/page2rss.xsl" type="saxon">
-                            <map:parameter name="page" value="${request/parameters/page}"/>
+                            <map:parameter name="page" value="${page}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>

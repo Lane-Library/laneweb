@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.proxy;
+package edu.stanford.irt.laneweb.model;
 
 import java.util.List;
 
@@ -8,6 +8,11 @@ import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.User;
 
+/**
+ * 
+ * @author ceyates
+ * $Id$
+ */
 public class ProxyLinks {
 
     private List<String> noProxyRegex;

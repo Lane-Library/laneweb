@@ -32,7 +32,7 @@ public class WebdashActionTest {
     public void testError() {
         expect(this.params.getParameter("nonce", null)).andReturn(null);
         expect(this.params.getParameter("system-user-id", null)).andReturn("ceyates");
-        expect(this.params.getParameter("sunet-id", null)).andReturn(null);
+        expect(this.params.getParameter("sunetid", null)).andReturn(null);
         expect(this.params.getParameter("name", null)).andReturn(null);
         expect(this.params.getParameter("affiliation", null)).andReturn(null);
         replay(this.params);
@@ -50,7 +50,7 @@ public class WebdashActionTest {
     public void testLogin() {
         expect(this.params.getParameter("nonce", null)).andReturn("nonce");
         expect(this.params.getParameter("system-user-id", null)).andReturn("ceyates");
-        expect(this.params.getParameter("sunet-id", null)).andReturn(null);
+        expect(this.params.getParameter("sunetid", null)).andReturn(null);
         expect(this.params.getParameter("name", null)).andReturn(null);
         expect(this.params.getParameter("affiliation", null)).andReturn(null);
         replay(this.params);
@@ -68,7 +68,7 @@ public class WebdashActionTest {
     public void testRegister() {
         expect(this.params.getParameter("nonce", null)).andReturn("nonce");
         expect(this.params.getParameter("system-user-id", null)).andReturn(null);
-        expect(this.params.getParameter("sunet-id", null)).andReturn(null);
+        expect(this.params.getParameter("sunetid", null)).andReturn(null);
         expect(this.params.getParameter("name", null)).andReturn(null);
         expect(this.params.getParameter("affiliation", null)).andReturn(null);
         replay(this.params);

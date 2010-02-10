@@ -28,8 +28,13 @@
         </param-value>
     </context-param>
     
+    <context-param>
+        <param-name>laneweb.context.version</param-name>
+        <param-value>${project.version}</param-value>
+    </context-param>
+    
     <listener>
-        <listener-class>edu.stanford.irt.laneweb.LanewebContextListener</listener-class>
+        <listener-class>edu.stanford.irt.laneweb.model.LanewebContextListener</listener-class>
     </listener>
 
     <listener>

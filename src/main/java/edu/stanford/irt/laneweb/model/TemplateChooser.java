@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.model;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
  * associated template as the value. Finally, default value is provided.
  * 
  * @author ceyates
+ * 
+ * $Id$
  */
 public class TemplateChooser {
 

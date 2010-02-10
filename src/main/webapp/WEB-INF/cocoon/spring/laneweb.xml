@@ -183,21 +183,6 @@
         <!-- uses regex so /./. is what is actually substituted -->
     </bean>
 
-    <bean name="org.apache.cocoon.reading.Reader/gziptxt-resource"
-        class="edu.stanford.irt.laneweb.gzip.GZipTxtResourceReader" scope="prototype">
-        <property name="defaultPath" value="/"/>
-        <property name="valueToSubstitute" value="/\./\."/>
-        <!-- uses regex so /./. is what is actually substituted -->
-        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"
-        />
-    </bean>
-
-    <bean name="org.apache.cocoon.selection.Selector/gzip"
-        class="edu.stanford.irt.laneweb.gzip.GZipAcceptEncodingSelector">
-        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"
-        />
-    </bean>
-
     <bean name="org.apache.cocoon.acting.Action/voyager"
         class="edu.stanford.irt.laneweb.voyager.VoyagerAction">
         <property name="voyagerLogin">
@@ -256,24 +241,6 @@
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
 
-    <bean name="org.apache.cocoon.serialization.Serializer/gzipxhtml"
-        class="edu.stanford.irt.laneweb.gzip.GZipXMLSerializer" scope="prototype"
-        parent="org.apache.cocoon.serialization.AbstractTextSerializer">
-        <pipeline:component mime-type="text/html"/>
-        <property name="format">
-            <props>
-                <prop key="doctype-public">-//W3C//DTD XHTML 1.0 Strict//EN</prop>
-                <prop key="doctype-system">http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd</prop>
-                <prop key="encoding">UTF-8</prop>
-                <prop key="indent">yes</prop>
-                <prop key="omit-xml-declaration">yes</prop>
-            </props>
-        </property>
-        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
-        <property name="processInfoProvider" ref="org.apache.cocoon.processing.ProcessInfoProvider"
-        />
-    </bean>
-
     <bean name="org.apache.cocoon.serialization.Serializer/text"
         class="org.apache.cocoon.serialization.TextSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
@@ -285,18 +252,18 @@
         <property name="expressionCompilers">
             <map>
                 <entry key="default">
-                    <bean class="org.apache.cocoon.el.impl.jxpath.JXPathCompiler"/>
+                    <bean class="edu.stanford.irt.laneweb.model.LanewebExpressionCompiler"/>
                 </entry>
             </map>
         </property>
     </bean>
 
     <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
-        class="edu.stanford.irt.laneweb.LanewebObjectModelProvider">
+        class="edu.stanford.irt.laneweb.model.LanewebObjectModelProvider">
         <constructor-arg ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
         <constructor-arg ref="edu.stanford.irt.laneweb.user.UserDao"/>
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.proxy.ProxyLinks">
+            <bean class="edu.stanford.irt.laneweb.model.ProxyLinks">
                 <property name="proxyRegex">
                     <list>
                         <!-- VPN 171.65.16.0 - 171.65.31.255 -->
@@ -323,7 +290,7 @@
             </bean>
         </constructor-arg>
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.TemplateChooser">
+            <bean class="edu.stanford.irt.laneweb.model.TemplateChooser">
                 <constructor-arg value="template"/>
                 <constructor-arg>
                     <!-- TODO: this should be an ordered map if more than one entry -->

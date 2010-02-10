@@ -26,15 +26,15 @@
                         <map:part src="cocoon:/eresources/count"/>
                         <map:part src="cocoon:/cached/search/all.html"/>
                         <map:part
-                            src="cocoon:/cached/search/all/${request/parameters/source}.html"/>
+                            src="cocoon:/cached/search/all/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                        <map:parameter name="q" value="${request/parameters/q}"/>
-                        <map:parameter name="source" value="${request/parameters/source}"/>
+                        <map:parameter name="q" value="${q}"/>
+                        <map:parameter name="source" value="${source}"/>
                     </map:transform>
                     <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                        <map:parameter name="query-string" value="${q}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -45,15 +45,15 @@
                         <map:part src="cocoon:/eresources/count"/>
                         <map:part src="cocoon:/cached/search/articles.html"/>
                         <map:part
-                            src="cocoon:/cached/search/articles/${request/parameters/source}.html"/>
+                            src="cocoon:/cached/search/articles/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                        <map:parameter name="q" value="${request/parameters/q}"/>
-                        <map:parameter name="source" value="${request/parameters/source}"/>
+                        <map:parameter name="q" value="${q}"/>
+                        <map:parameter name="source" value="${source}"/>
                     </map:transform>
                     <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                        <map:parameter name="query-string" value="${q}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -65,15 +65,15 @@
                         <map:part src="cocoon:/eresources/count"/>
                         <map:part src="cocoon:/cached/search/catalog.html"/>
                         <map:part
-                            src="cocoon:/cached/search/catalog/${request/parameters/source}.html"/>
+                            src="cocoon:/cached/search/catalog/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                        <map:parameter name="q" value="${request/parameters/q}"/>
-                        <map:parameter name="source" value="${request/parameters/source}"/>
+                        <map:parameter name="q" value="${q}"/>
+                        <map:parameter name="source" value="${source}"/>
                     </map:transform>
                     <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                        <map:parameter name="query-string" value="${q}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -83,15 +83,15 @@
                     <map:aggregate element="doc">
                         <map:part src="cocoon:/cached/search/clinical.html"/>
                         <map:part
-                            src="cocoon:/cached/search/clinical/${request/parameters/source}.html"/>
+                            src="cocoon:/cached/search/clinical/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                        <map:parameter name="q" value="${request/parameters/q}"/>
-                        <map:parameter name="source" value="${request/parameters/source}"/>
+                        <map:parameter name="q" value="${q}"/>
+                        <map:parameter name="source" value="${source}"/>
                     </map:transform>
                     <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${request/parameters/q}"/>
+                        <map:parameter name="query-string" value="${q}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -102,12 +102,12 @@
                         <map:part src="cocoon:/apps/search/proxy/xml"/>
                         <map:part src="cocoon:/cached/search/specialty.html"/>
                         <map:part
-                            src="cocoon:/search/specialty/${request/parameters/source}.html"/>
+                            src="cocoon:/search/specialty/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                        <map:parameter name="q" value="${request/parameters/q}"/>
-                        <map:parameter name="source" value="${request/parameters/source}"/>
+                        <map:parameter name="q" value="${q}"/>
+                        <map:parameter name="source" value="${source}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -124,9 +124,9 @@
                         src="cocoon:/cached/search/specialty/{1}.html"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/search-specialty.xsl">
-                    <map:parameter name="q" value="${request/parameters/q}"/>
-                    <map:parameter name="request-uri" value="${request/requestURI}"/>
-                    <map:parameter name="source" value="${request/parameters/source}"/>
+                    <map:parameter name="q" value="${q}"/>
+                    <map:parameter name="request-uri" value="${request-uri}"/>
+                    <map:parameter name="source" value="${source}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
@@ -136,8 +136,8 @@
                 <map:generate src="cocoon:/cached/search/{1}/{2}.html" type="file"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                    <map:parameter name="q" value="${request/parameters/q}"/>
-                    <map:parameter name="source" value="${request/parameters/source}"/>
+                    <map:parameter name="q" value="${q}"/>
+                    <map:parameter name="source" value="${source}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>

@@ -69,9 +69,9 @@
             </map:match>
             <map:match pattern="secure/login.html" type="wildcard">
                 <map:act type="loginAction">
-                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="query-string" value="${request/queryString}"/>
+                    <map:parameter name="sunetid" value="${sunetid}"/>
+                    <map:parameter name="ticket" value="${ticket}"/>
+                    <map:parameter name="query-string" value="${query-string}"/>
                 </map:act>
             </map:match>
             <map:match pattern="logout" type="wildcard">
@@ -86,49 +86,49 @@
             </map:match>
             <map:match pattern="secure/webdash.html" type="wildcard">
                 <map:act type="webdash">
-                    <map:parameter name="nonce" value="${request/parameters/nonce}"/>
+                    <map:parameter name="nonce" value="${nonce}"/>
                     <map:parameter name="system-user-id"
-                        value="${request/parameters/system_user_id}"/>
-                    <map:parameter name="sunet-id" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="name" value="${session/attributes/user/name}"/>
-                    <map:parameter name="affiliation" value="${session/attributes/user/affiliation}"/>
+                        value="${system_user_id}"/>
+                    <map:parameter name="sunetid" value="${sunetid}"/>
+                    <map:parameter name="name" value="${name}"/>
+                    <map:parameter name="affiliation" value="${affiliation}"/>
                     <map:redirect-to uri="{webdash-url}"/>
                 </map:act>
             </map:match>
             <map:match pattern="secure/voyager.html" type="wildcard">
                 <map:act type="voyager">
-                    <map:parameter name="pid" value="${request/parameters/PID}"/>
-                    <map:parameter name="query-string" value="${request/queryString}"/>
-                    <map:parameter name="univ-id" value="${session/attributes/user/univId}"/>
+                    <map:parameter name="pid" value="${PID}"/>
+                    <map:parameter name="query-string" value="${query-string}"/>
+                    <map:parameter name="univid" value="${univid}"/>
                     <map:redirect-to uri="{voyager-url}"/>
                 </map:act>
             </map:match>
             <map:match pattern="redirect/cme" type="wildcard">
                 <map:act type="cmeRedirectAction">
-                    <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
-                    <map:parameter name="host" value="${request/parameters/host}"/>
-                    <map:parameter name="query-string" value="${request/queryString}"/>
+                    <map:parameter name="emrid" value="${emrid}"/>
+                    <map:parameter name="host" value="${host}"/>
+                    <map:parameter name="query-string" value="${query-string}"/>
                     <map:redirect-to uri="{cme-redirect}"/>
                 </map:act>
             </map:match>
             <map:match pattern="cookiesFetch.html" type="wildcard">
                 <map:generate type="file" src="${live-base}/content/cookiesFetch.html"/>
                 <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
-                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
-                    <map:parameter name="path" value="${request/parameters/path}"/>
-                    <map:parameter name="entryUrl" value="${request/parameters/entryUrl}"/>
-                    <map:parameter name="title" value="${request/parameters/title}"/>
+                    <map:parameter name="sunetid" value="${sunetid}"/>
+                    <map:parameter name="ticket" value="${ticket}"/>
+                    <map:parameter name="proxy-links" value="${proxy-links}"/>
+                    <map:parameter name="path" value="${path}"/>
+                    <map:parameter name="entryUrl" value="${entryUrl}"/>
+                    <map:parameter name="title" value="${title}"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="postMethodHelper.html" type="wildcard">
                 <map:generate type="request"/>
                 <map:transform type="saxon" src="context://xsl/postMethodHelper.xsl">
-                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
+                    <map:parameter name="sunetid" value="${sunetid}"/>
+                    <map:parameter name="ticket" value="${ticket}"/>
+                    <map:parameter name="proxy-links" value="${proxy-links}"/>
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
@@ -136,8 +136,8 @@
             <map:match pattern="ipGroupFetch" type="wildcard">
                 <map:generate type="request"/>
                 <map:transform type="saxon" src="context://xsl/ipGroupFetch.xsl">
-                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
-                    <map:parameter name="callback" value="${request/parameters/callback}"/>
+                    <map:parameter name="ipgroup" value="${ipgroup}"/>
+                    <map:parameter name="callback" value="${callback}"/>
                 </map:transform>
                 <map:serialize type="text"/>
             </map:match>
@@ -145,8 +145,8 @@
             <map:match pattern="^http" type="regex-parameter">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:act type="form-redirect">
-                    <map:parameter name="q" value="${request/parameters/q}"/>
-                    <map:parameter name="source" value="${request/parameters/source}"/>
+                    <map:parameter name="q" value="${q}"/>
+                    <map:parameter name="source" value="${source}"/>
                     <map:redirect-to uri="{form-redirect-key}"/>
                 </map:act>
             </map:match>
@@ -157,30 +157,30 @@
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
                 <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
+                    <map:parameter name="emrid" value="${emrid}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                    <map:parameter name="request-uri" value="${request/requestURI}"/>
-                    <map:parameter name="base-path" value="${request/contextPath}"/>
-                    <map:parameter name="query-string" value="${request/queryString}"/>
-                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
-                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
-                    <map:parameter name="q" value="${request/parameters/q}"/>
-                    <map:parameter name="template" value="${request/parameters/template}"/>
-                    <map:parameter name="source" value="${request/parameters/source}"/>
-                    <map:parameter name="search-tab" value="${request/parameters/searchTab}"/>
-                    <map:parameter name="mesh-term" value="${request/parameters/m}"/>
-                    <map:parameter name="version" value="${project.version}"/>
-                    <map:parameter name="referrer" value="${request/headers/referer}"/>
-                    <map:parameter name="name" value="${session/attributes/user/name}"/>
+                    <map:parameter name="request-uri" value="${request-uri}"/>
+                    <map:parameter name="base-path" value="${base-path}"/>
+                    <map:parameter name="query-string" value="${query-string}"/>
+                    <map:parameter name="proxy-links" value="${proxy-links}"/>
+                    <map:parameter name="sunetid" value="${sunetid}"/>
+                    <map:parameter name="ipgroup" value="${ipgroup}"/>
+                    <map:parameter name="q" value="${q}"/>
+                    <map:parameter name="template" value="${template}"/>
+                    <map:parameter name="source" value="${source}"/>
+                    <map:parameter name="search-tab" value="${searchTab}"/>
+                    <map:parameter name="mesh-term" value="${m}"/>
+                    <map:parameter name="version" value="${version}"/>
+                    <map:parameter name="referrer" value="${referer}"/>
+                    <map:parameter name="name" value="${name}"/>
                 </map:transform>
                 <map:transform type="proxy-links">
-                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
-                    <map:parameter name="base-path" value="${request/contextPath}"/>
-                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
+                    <map:parameter name="proxy-links" value="${proxy-links}"/>
+                    <map:parameter name="base-path" value="${base-path}"/>
+                    <map:parameter name="sunetid" value="${sunetid}"/>
+                    <map:parameter name="ticket" value="${ticket}"/>
+                    <map:parameter name="ipgroup" value="${ipgroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
@@ -192,43 +192,35 @@
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
                 <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
+                    <map:parameter name="emrid" value="${emrid}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                    <map:parameter name="request-uri" value="${request/requestURI}"/>
-                    <map:parameter name="base-path" value="${request/contextPath}"/>
-                    <map:parameter name="query-string" value="${request/queryString}"/>
-                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
-                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
-                    <map:parameter name="q" value="${request/parameters/q}"/>
-                    <map:parameter name="template" value="${request/parameters/template}"/>
-                    <map:parameter name="source" value="${request/parameters/source}"/>
-                    <map:parameter name="search-tab" value="${request/parameters/searchTab}"/>
-                    <map:parameter name="mesh-term" value="${request/parameters/m}"/>
-                    <map:parameter name="version" value="${project.version}"/>
-                    <map:parameter name="referrer" value="${request/headers/referer}"/>
-                    <map:parameter name="name" value="${session/attributes/user/name}"/>
+                    <map:parameter name="request-uri" value="${request-uri}"/>
+                    <map:parameter name="base-path" value="${base-path}"/>
+                    <map:parameter name="query-string" value="${query-string}"/>
+                    <map:parameter name="proxy-links" value="${proxy-links}"/>
+                    <map:parameter name="sunetid" value="${sunetid}"/>
+                    <map:parameter name="ipgroup" value="${ipgroup}"/>
+                    <map:parameter name="q" value="${q}"/>
+                    <map:parameter name="template" value="${template}"/>
+                    <map:parameter name="source" value="${source}"/>
+                    <map:parameter name="search-tab" value="${searchTab}"/>
+                    <map:parameter name="mesh-term" value="${m}"/>
+                    <map:parameter name="version" value="${version}"/>
+                    <map:parameter name="referrer" value="${referer}"/>
+                    <map:parameter name="name" value="${name}"/>
                 </map:transform>
                 <map:transform type="proxy-links">
-                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
+                    <map:parameter name="proxy-links" value="${proxy-links}"/>
                     <!-- use this base-path to redirect proxy auth to lane.stanford.edu -->
                     <!--<map:parameter name="base-path" value="http://lane.stanford.edu"/>-->
-                    <map:parameter name="base-path" value="${request/contextPath}"/>
-                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
+                    <map:parameter name="base-path" value="${base-path}"/>
+                    <map:parameter name="sunetid" value="${sunetid}"/>
+                    <map:parameter name="ticket" value="${ticket}"/>
+                    <map:parameter name="ipgroup" value="${ipgroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xhtml"/>
-                <!--<map:select type="gzip">
-                    <map:when test="">
-                        <map:serialize type="gzipxhtml"/>
-                    </map:when>
-                    <map:otherwise>
-                        <map:serialize type="xhtml"/>
-                    </map:otherwise>
-                </map:select>-->
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
                 <map:generate type="file" src="${live-base}/content/{1}.xml"/>
@@ -255,30 +247,30 @@
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
                 <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
+                    <map:parameter name="emrid" value="${emrid}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
-                    <map:parameter name="request-uri" value="${request/requestURI}"/>
-                    <map:parameter name="base-path" value="${request/contextPath}"/>
-                    <map:parameter name="query-string" value="${request/queryString}"/>
-                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
-                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
-                    <map:parameter name="q" value="${request/parameters/q}"/>
-                    <map:parameter name="template" value="${request/parameters/template}"/>
-                    <map:parameter name="source" value="${request/parameters/source}"/>
-                    <map:parameter name="search-tab" value="${request/parameters/searchTab}"/>
-                    <map:parameter name="mesh-term" value="${request/parameters/m}"/>
-                    <map:parameter name="version" value="${project.version}"/>
-                    <map:parameter name="referrer" value="${request/headers/referer}"/>
-                    <map:parameter name="name" value="${session/attributes/user/name}"/>
+                    <map:parameter name="request-uri" value="${request-uri}"/>
+                    <map:parameter name="base-path" value="${base-path}"/>
+                    <map:parameter name="query-string" value="${query-string}"/>
+                    <map:parameter name="proxy-links" value="${proxy-links}"/>
+                    <map:parameter name="sunetid" value="${sunetid}"/>
+                    <map:parameter name="ipgroup" value="${ipgroup}"/>
+                    <map:parameter name="q" value="${q}"/>
+                    <map:parameter name="template" value="${template}"/>
+                    <map:parameter name="source" value="${source}"/>
+                    <map:parameter name="search-tab" value="${searchTab}"/>
+                    <map:parameter name="mesh-term" value="${m}"/>
+                    <map:parameter name="version" value="${version}"/>
+                    <map:parameter name="referrer" value="${referer}"/>
+                    <map:parameter name="name" value="${name}"/>
                 </map:transform>
                 <map:transform type="proxy-links">
-                    <map:parameter name="proxy-links" value="${proxyLinks}"/>
-                    <map:parameter name="base-path" value="${request/contextPath}"/>
-                    <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                    <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                    <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
+                    <map:parameter name="proxy-links" value="${proxy-links}"/>
+                    <map:parameter name="base-path" value="${base-path}"/>
+                    <map:parameter name="sunetid" value="${sunetid}"/>
+                    <map:parameter name="ticket" value="${ticket}"/>
+                    <map:parameter name="ipgroup" value="${ipgroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xhtml" status-code="404"/>

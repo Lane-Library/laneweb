@@ -4,7 +4,7 @@ public class User {
 
     public static final String EMRID = "emrid";
 
-    public static final String IPGROUP = "ip-group";
+    public static final String IPGROUP = "ipgroup";
 
     public static final String NAME = "name";
 

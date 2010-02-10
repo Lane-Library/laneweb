@@ -24,11 +24,11 @@ public class CreateLaneCookieAction implements Action {
         if (this.cryptor == null) {
             throw new RuntimeException("cryptor is null");
         }
-        String sunetId = parameters.getParameter("sunet-id", null);
+        String sunetId = parameters.getParameter("sunetid", null);
         String userAgent = parameters.getParameter("user-agent", null);
         HttpServletResponse response = ObjectModelHelper.getResponse(objectModel);
         if (sunetId == null) {
-            throw new IllegalArgumentException("sunet-id is null");
+            throw new IllegalArgumentException("sunetid is null");
         }
         if (userAgent == null) {
             throw new IllegalArgumentException("user-agent is null");

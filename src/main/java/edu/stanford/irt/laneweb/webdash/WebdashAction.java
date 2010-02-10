@@ -19,7 +19,7 @@ public class WebdashAction implements Action {
             final String string, final Parameters param) {
         String nonce = param.getParameter("nonce", null);
         String systemUserId = param.getParameter("system-user-id", null);
-        String sunetId = param.getParameter("sunet-id", null);
+        String sunetId = param.getParameter("sunetid", null);
         String name = param.getParameter("name", null);
         String affiliation = param.getParameter("affiliation", null);
         Map<String, String> result = new HashMap<String, String>(1);

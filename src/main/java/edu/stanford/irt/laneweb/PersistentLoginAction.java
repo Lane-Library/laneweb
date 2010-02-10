@@ -24,7 +24,7 @@ public class PersistentLoginAction implements Action {
         HttpServletResponse response = ObjectModelHelper.getResponse(objectModel);
         String persistentLogin = request.getParameter("pl");
         String removePersistentLogin = request.getParameter("remove-pl");
-        String sunetid = params.getParameter("sunet-id", null);
+        String sunetid = params.getParameter("sunetid", null);
         if ((sunetid == null) && !"logout".equals(persistentLogin)) {
             String secureUrl = request.getContextPath().concat("/secure/persistentlogin.html");
             if (null != request.getQueryString()) {

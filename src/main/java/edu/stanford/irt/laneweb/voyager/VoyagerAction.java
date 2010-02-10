@@ -19,7 +19,7 @@ public class VoyagerAction implements Action {
             final String string, final Parameters param) throws Exception {
         String pid = param.getParameter("pid", null);
         String queryString = param.getParameter("query-string", null);
-        String univId = param.getParameter("univ-id", null);
+        String univId = param.getParameter("univid", null);
         String url = this.voyagerLogin.getVoyagerURL(univId, pid, queryString);
         Map<String, String> result = new HashMap<String, String>(1);
         result.put(VOYAGER_KEY, url);

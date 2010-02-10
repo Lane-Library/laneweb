@@ -62,7 +62,8 @@
                 <configuration>
                     <webappDirectory>target/laneweb</webappDirectory>
                     <nonFilteredFileExtensions>
-                        <nonFilteredFileExtension>ico</nonFilteredFileExtension>
+                       <nonFilteredFileExtension>ico</nonFilteredFileExtension>
+                       <nonFilteredFileExtension>xmap</nonFilteredFileExtension>
                     </nonFilteredFileExtensions>
                     <webResources>
                         <resource>

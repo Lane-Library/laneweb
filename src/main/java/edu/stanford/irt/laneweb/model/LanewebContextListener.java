@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.model;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,7 +13,8 @@ import javax.servlet.ServletContextListener;
 /**
  * Creates URL to various content locations as well as some key Strings and adds them as
  * ServletContext attributes. It first looks at System properties for the values. If any
- * are not System properties they are looked up using JNDI.
+ * are not System properties they are looked for in context init parameters, if not there
+ * they are looked up up using JNDI.
  * 
  * @author ceyates
  * $Id$
@@ -29,34 +30,43 @@ public class LanewebContextListener implements ServletContextListener {
     private static final String WEBDASH_KEY = "laneweb.context.webdash-key";
     
     private static final String EZPROXY_KEY = "laneweb.context.ezproxy-key";
+    
+    private static final String VERSION_KEY = "laneweb.context.version";
 
-    private Context context;
+    private Context namingContext;
+    
+    private ServletContext servletContext;
 
     public void contextDestroyed(final ServletContextEvent sce) {
     }
 
     public void contextInitialized(final ServletContextEvent sce) {
-        ServletContext context = sce.getServletContext();
-        context.setAttribute(LIVE_BASE_KEY, getURL(LIVE_BASE_KEY));
-        context.setAttribute(STAGE_BASE_KEY, getURL(STAGE_BASE_KEY));
-        context.setAttribute(MEDBLOG_BASE_KEY, getURL(MEDBLOG_BASE_KEY));
-        context.setAttribute(WEBDASH_KEY, getValue(WEBDASH_KEY));
-        context.setAttribute(EZPROXY_KEY, getValue(EZPROXY_KEY));
+        this.servletContext = sce.getServletContext();
+        servletContext.setAttribute(LIVE_BASE_KEY, getURL(LIVE_BASE_KEY));
+        servletContext.setAttribute(STAGE_BASE_KEY, getURL(STAGE_BASE_KEY));
+        servletContext.setAttribute(MEDBLOG_BASE_KEY, getURL(MEDBLOG_BASE_KEY));
+        servletContext.setAttribute(WEBDASH_KEY, getValue(WEBDASH_KEY));
+        servletContext.setAttribute(EZPROXY_KEY, getValue(EZPROXY_KEY));
+        servletContext.setAttribute(VERSION_KEY, getValue(VERSION_KEY));
     }
 
     /**
-     * get the property associated with a name, and failing that a jndi object, and failing that, die.
+     * get a System property associated with a name, failing that get a context init parameter
+     * and failing that a jndi object, and failing that, die.
      * @param name
      * @return The property or jndi value
      */
     private String getValue(String name) {
         String value = System.getProperty(name);
         if (null == value) {
+            value = this.servletContext.getInitParameter(name);
+        }
+        if (null == value) {
             try {
-                if (null == this.context) {
-                    this.context = new InitialContext();
+                if (null == this.namingContext) {
+                    this.namingContext = new InitialContext();
                 }
-                value = (String) this.context.lookup("java:comp/env/" + name);
+                value = (String) this.namingContext.lookup("java:comp/env/" + name);
             } catch (NamingException e) {
                 throw new IllegalStateException("unable to determine value for '" + name + "'", e);
             }

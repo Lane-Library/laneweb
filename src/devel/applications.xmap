@@ -7,46 +7,46 @@
         <map:pipeline type="noncaching">
             <map:match pattern="url-tester" type="wildcard">
                 <map:read type="search-url-tester">
-                    <map:parameter name="url" value="${request/parameters/url}"/>
+                    <map:parameter name="url" value="${url}"/>
                 </map:read>
             </map:match>
             <map:match pattern="search/**" type="wildcard">
                 <!-- /apps/search/xml returns the xmlized search result -->
                 <map:match type="wildcard" pattern="search/xml">
                      <map:generate type="search">
-                         <map:parameter name="query" value="${request/parameters/q}"/>
+                         <map:parameter name="query" value="${q}"/>
                      </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search/engine/xml" type="wildcard">
                     <map:generate type="search-engine">
-                        <map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${q}"/>
                     </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search/resource/xml" type="wildcard">
                     <map:generate type="search-resource">
-                        <map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${q}"/>
                     </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/ranked/xml returns xmlized content results -->
                 <map:match pattern="search/ranked/xml" type="wildcard">
                     <map:generate type="search-engine">
-                        <map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${q}"/>
                         <map:parameter name="s" value="true"/>
                         <map:parameter name="t" value="20000"/>
                     </map:generate>
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-content-ranked.xsl">
                             <map:transform type="saxon" src="xsl/search-content-ranked.xsl">
-                                <map:parameter name="q" value="${request/parameters/q}"/>
+                                <map:parameter name="q" value="${q}"/>
                                 <map:parameter name="l" value="10"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-content-ranked.xsl">
-                                <map:parameter name="q" value="${request/parameters/q}"/>
+                                <map:parameter name="q" value="${q}"/>
                                 <map:parameter name="l" value="10"/>
                             </map:transform>
                         </map:otherwise>
@@ -59,13 +59,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search2json.xsl">
                             <map:transform type="saxon" src="xsl/search2json.xsl">
-                                <map:parameter name="content" value="${request/parameters/content}"/>
+                                <map:parameter name="content" value="${content}"/>
                                 <map:parameter name="content-to-display" value="5"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search2json.xsl">
-                                <map:parameter name="content" value="${request/parameters/content}"/>
+                                <map:parameter name="content" value="${content}"/>
                                 <map:parameter name="content-to-display" value="5"/>
                             </map:transform>
                         </map:otherwise>
@@ -75,17 +75,17 @@
                 <!-- result with proxy links (if necessary) in xml format -->
                 <map:match pattern="search/proxy/xml" type="wildcard">
                     <map:generate type="search">
-                        <map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${q}"/>
                     </map:generate>
                     <map:transform type="cme-links">
-                        <map:parameter name="emrid" value="${session/attributes/user/emrId}"/>
+                        <map:parameter name="emrid" value="${emrid}"/>
                     </map:transform>
                     <map:transform type="search-proxy-links">
-                        <map:parameter name="base-path" value="${request/contextPath}/your-sunet-id"/>
-                        <map:parameter name="sunetid" value="${session/attributes/user/sunetId}"/>
-                        <map:parameter name="ticket" value="${session/attributes/user/ticket}"/>
-                        <map:parameter name="ip-group" value="${session/attributes/user/IPGroup}"/>
-                        <map:parameter name="proxy-links" value="${proxyLinks}"/>
+                        <map:parameter name="base-path" value="${base-path}/your-sunetid"/>
+                        <map:parameter name="sunetid" value="${sunetid}"/>
+                        <map:parameter name="ticket" value="${ticket}"/>
+                        <map:parameter name="ipgroup" value="${ipgroup}"/>
+                        <map:parameter name="proxy-links" value="${proxy-links}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -95,13 +95,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search2json.xsl">
                             <map:transform type="saxon" src="xsl/search2json.xsl">
-                                <map:parameter name="content" value="${request/parameters/content}"/>
+                                <map:parameter name="content" value="${content}"/>
                                 <map:parameter name="content-to-display" value="5"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search2json.xsl">
-                                <map:parameter name="content" value="${request/parameters/content}"/>
+                                <map:parameter name="content" value="${content}"/>
                                 <map:parameter name="content-to-display" value="5"/>
                             </map:transform>
                         </map:otherwise>
@@ -116,12 +116,12 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-facet-counts.xsl">
                             <map:transform type="saxon" src="xsl/search-facet-counts.xsl">
-                                <map:parameter name="f" value="${request/parameters/f}"/>
+                                <map:parameter name="f" value="${f}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="xsl/search-facet-counts.xsl">
-                                <map:parameter name="f" value="${request/parameters/f}"/>
+                                <map:parameter name="f" value="${f}"/>
                             </map:transform>
                         </map:otherwise>
                     </map:select>
@@ -150,7 +150,7 @@
                 </map:match>
                 <map:match pattern="search/clearcache" type="wildcard">
                     <map:act type="searchCacheManagerAction" >
-                        <map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${q}"/>
                     </map:act>
                     <map:read type="resource" src="robots.txt" mime-type="text/plain"/>
                 </map:match>
@@ -160,7 +160,7 @@
                     <map:select type="resource-exists">
                         <map:when test="resources/querymap/resource-maps.xml">
                             <map:generate type="querymap">
-                                <map:parameter name="query" value="${request/parameters/q}"/>
+                                <map:parameter name="query" value="${q}"/>
                                 <map:parameter name="resource-maps"
                                     value="resources/querymap/resource-maps.xml"/>
                                 <map:parameter name="descriptor-weights"
@@ -170,7 +170,7 @@
                         </map:when>
                         <map:otherwise>
                             <map:generate type="querymap">
-                                <map:parameter name="query" value="${request/parameters/q}"/>
+                                <map:parameter name="query" value="${q}"/>
                                 <map:parameter name="resource-maps"
                                     value="${live-base}/resources/querymap/resource-maps.xml"/>
                                 <map:parameter name="descriptor-weights"
@@ -212,20 +212,20 @@
                 </map:match>
                 <map:match pattern="querymap/json" type="wildcard">
                     <map:read type="querymap">
-                        <map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${q}"/>
                     </map:read>
                 </map:match>
             </map:match>
             <map:match pattern="spellcheck/*" type="wildcard">
                 <map:match pattern="spellcheck/xml" type="wildcard">
                     <map:generate type="spellcheck">
-                        <map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${q}"/>
                     </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="spellcheck/json" type="wildcard">
                     <map:generate type="spellcheck">
-                        <map:parameter name="query" value="${request/parameters/q}"/>
+                        <map:parameter name="query" value="${q}"/>
                     </map:generate>
                     <map:select type="resource-exists">
                         <map:when test="xsl/spellcheck2json.xsl">
@@ -241,19 +241,19 @@
             <map:match pattern="sfx/*" type="wildcard">
                 <map:match pattern="sfx/json" type="wildcard">
                     <map:generate type="html"
-                        src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${urlencoded-query}&amp;sfx.title_search=exact&amp;sfx.directlink=off"/>
+                        src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${url-encoded-query}&amp;sfx.title_search=exact&amp;sfx.directlink=off"/>
                     <map:select type="resource-exists">
                         <map:when test="xsl/sfx2json.xsl">
                             <map:transform src="xsl/sfx2json.xsl" type="saxon">
                                 <map:parameter name="sfx-request"
-                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${urlencoded-query}&amp;sfx.title_search=exact"
+                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${url-encoded-query}&amp;sfx.title_search=exact"
                                 />
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform src="context://xsl/sfx2json.xsl" type="saxon">
                                 <map:parameter name="sfx-request"
-                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${urlencoded-query}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
+                                    value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${url-encoded-query}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
                                 />
                             </map:transform>
                         </map:otherwise>
@@ -351,11 +351,11 @@
         </map:pipeline>
         <map:pipeline type="throttling">
             <map:parameter name="request-key"
-                value="${request/remoteHost}/${request/requestURI}/${request/queryString}"/>
+                value="${remote-host}/${request-uri}/${query-string}"/>
             <map:match pattern="suggest/json" type="wildcard">
                 <map:read type="suggest">
-                    <map:parameter name="query" value="${request/parameters/q}"/>
-                    <map:parameter name="limit" value="${request/parameters/l}"/>
+                    <map:parameter name="query" value="${q}"/>
+                    <map:parameter name="limit" value="${l}"/>
                 </map:read>
             </map:match>
         </map:pipeline>
