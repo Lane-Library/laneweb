@@ -8,6 +8,7 @@ import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,10 +45,13 @@ public class LanewebObjectModelProviderTest {
     private TemplateChooser templateChooser;
 
     private UserDao userDao;
+    
+    private Enumeration params;
 
     @SuppressWarnings("unchecked")
     @Before
     public void setUp() throws Exception {
+        this.params = createMock(Enumeration.class);
         this.pip = createMock(ProcessInfoProvider.class);
         this.request = createMock(HttpServletRequest.class);
         this.objectModel = new HashMap();
@@ -71,6 +75,8 @@ public class LanewebObjectModelProviderTest {
         this.session.setAttribute(eq(LanewebConstants.USER), isA(User.class));
         expect(this.proxyLinks.proxyLinks(isA(User.class), eq(this.request))).andReturn(Boolean.TRUE);
         expect(this.context.getAttribute(isA(String.class))).andReturn("foo").atLeastOnce();
+        expect(this.request.getParameterNames()).andReturn(this.params);
+        expect(this.params.hasMoreElements()).andReturn(Boolean.FALSE);
         expect(this.request.getParameterMap()).andReturn(Collections.emptyMap());
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getContextPath()).andReturn("");
@@ -86,6 +92,7 @@ public class LanewebObjectModelProviderTest {
     }
 
     private void replayMocks() {
+        replay(this.params);
         replay(this.context);
         replay(this.proxyLinks);
         replay(this.userDao);
@@ -95,6 +102,7 @@ public class LanewebObjectModelProviderTest {
     }
 
     private void verifyMocks() {
+        verify(this.params);
         verify(this.context);
         verify(this.proxyLinks);
         verify(this.userDao);
