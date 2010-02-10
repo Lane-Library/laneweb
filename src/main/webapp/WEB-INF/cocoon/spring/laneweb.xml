@@ -39,6 +39,7 @@
         class="org.apache.cocoon.components.store.impl.EHDefaultStore" init-method="init"
         destroy-method="destroy">
         <property name="maxMemObjects" value="1000"/>
+        <property name="overflowToDisk" value="false"/>
         <property name="useCacheDirectory" value="true"/>
         <property name="settings" ref="org.apache.cocoon.configuration.Settings"/>
     </bean>
