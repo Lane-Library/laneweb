@@ -11,7 +11,7 @@ YAHOO.util.Event.addListener(this, 'load', function() {
                 return escape(value);
             };
             if (_gat !== undefined) {
-                if ("lane.stanford.edu" == host) {
+                if (host.match("lane.stanford.edu")) {
                     pageTracker = _gat._getTracker("UA-3202241-2");
                 } else {
                     pageTracker = _gat._getTracker("UA-3203486-2");
