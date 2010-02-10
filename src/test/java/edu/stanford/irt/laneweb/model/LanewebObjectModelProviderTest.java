@@ -77,7 +77,6 @@ public class LanewebObjectModelProviderTest {
         expect(this.context.getAttribute(isA(String.class))).andReturn("foo").atLeastOnce();
         expect(this.request.getParameterNames()).andReturn(this.params);
         expect(this.params.hasMoreElements()).andReturn(Boolean.FALSE);
-        expect(this.request.getParameterMap()).andReturn(Collections.emptyMap());
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getRequestURI()).andReturn("/index.html");

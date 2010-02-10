@@ -84,7 +84,6 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             String name = (String) params.nextElement();
             model.put(name, request.getParameter(name));
         }
-        model.putAll(request.getParameterMap());
         if (request.getQueryString() != null) {
             model.put("query-string", request.getQueryString());
         }
