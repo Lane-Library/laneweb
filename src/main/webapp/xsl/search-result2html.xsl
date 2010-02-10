@@ -31,9 +31,7 @@
                 </div>
                 <div class="tooltips" style="display:none;">
                     <xsl:for-each select="//s:result/s:description|//s:result[not(s:description)]/s:title">
-                        <xsl:call-template name="tooltip">
-                            <xsl:with-param name="text" select="."/>
-                        </xsl:call-template>
+                        <xsl:call-template name="tooltip"/>
                     </xsl:for-each>
                 </div>
                 <xsl:if test="count(//s:result[s:resourceName='PubMed']/s:pub-title) > 0">
