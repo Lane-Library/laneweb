@@ -110,21 +110,20 @@
     </xsl:template>
     
     <xsl:template match="s:version" mode="first-link">
-        <xsl:text> [</xsl:text>
+        <xsl:text> </xsl:text>
         <xsl:if test="not(s:summaryHoldings or s:publisher or s:dates or s:description)">
-            <span>
-                <xsl:value-of select="s:links/s:link[1]/s:label"/>
-            </span>
+            <xsl:value-of select="s:links/s:link[1]/s:label"/>
         </xsl:if>
         <xsl:for-each select="s:summaryHoldings|s:publisher|s:dates|s:description">
-            <span class="{name()}">
                 <xsl:value-of select="."/>
                 <xsl:if test="position() != last()">
-                    <xsl:text> </xsl:text>
+                    <xsl:text>, </xsl:text>
                 </xsl:if>
-            </span>
         </xsl:for-each>
-        <xsl:text>] </xsl:text>
+        <xsl:if test="s:links/s:link/s:instruction">
+            <xsl:text>, </xsl:text>
+            <xsl:value-of select="s:links/s:link/s:instruction"/>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="s:link" mode="remainder-links">
@@ -141,6 +140,30 @@
         </xsl:if>
     </xsl:template>
 
+    <xsl:template name="linkText">
+        <xsl:param name="link"/>
+        <xsl:param name="type"/>
+        <xsl:param name="version"/>
+        <xsl:choose>
+            <xsl:when test="($type = 'getPassword' and count($version//s:link) = 2) or count($version//s:link) = 1" >
+                <xsl:value-of select="$version/s:summaryHoldings"/>
+                <xsl:text>, </xsl:text>
+                <xsl:value-of select="$version/s:dates"/>
+            </xsl:when>
+            <xsl:when test="$link/s:label">
+                <xsl:value-of select="$link/s:label"/>
+            </xsl:when>
+            <xsl:when test="$link/s:url">
+                <xsl:value-of select="$link/s:url"/>
+            </xsl:when>
+        </xsl:choose>
+        <xsl:value-of select="count($version//s:link)"/>
+        <xsl:if test="$version/s:description">
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="$version/s:description"/>
+        </xsl:if>
+    </xsl:template>
+    
     <xsl:template name="buildAnchor">
         <xsl:param name="link"/>
         <xsl:param name="type"/>
@@ -150,15 +173,20 @@
             <xsl:when test="$type = 'normal'">
                 <div>
                     <a href="{$link/s:url}" title="{$link/s:label}">
-                        <xsl:for-each select="$version/s:summaryHoldings|$version/s:dates|$link/s:label">
-                            <span class="{name()}">
-                                <xsl:value-of select="."/>
-                                <xsl:if test="position() != last()">
-                                    <xsl:text> </xsl:text>
-                                </xsl:if>
-                            </span>
-                        </xsl:for-each>
+                        <xsl:call-template name="linkText">
+                            <xsl:with-param name="type" select="@type"/>
+                            <xsl:with-param name="link">
+                                <xsl:copy-of select="$link"/>
+                            </xsl:with-param>
+                            <xsl:with-param name="version">
+                                <xsl:copy-of select="$version"/>
+                            </xsl:with-param>
+                        </xsl:call-template>
                     </a>
+                    <xsl:if test="$link/s:instruction">
+                        <xsl:text> </xsl:text>
+                        <xsl:value-of select="$link/s:instruction"/>
+                    </xsl:if>
                     <xsl:if test="$version/s:publisher">
                         <xsl:text> </xsl:text>
                         <xsl:value-of select="$version/s:publisher"/>
