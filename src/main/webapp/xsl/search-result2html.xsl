@@ -102,14 +102,14 @@
                     <a title="{concat('eresource -- ',s:title)}" href="{s:versions/s:version[1]/s:links/s:link[@type != 'getPassword' and position() = 1]/s:url}" id="eresource-{s:id}" target="_blank">
                         <xsl:apply-templates select="s:title"/>
                     </a>
-                    <xsl:apply-templates select="s:versions/s:version[position() = 1]" mode="first"/>
-                    <xsl:apply-templates select="s:versions//s:link[position() > 1]"/>
+                    <xsl:apply-templates select="s:versions/s:version[position() = 1]" mode="first-link"/>
+                    <xsl:apply-templates select="s:versions//s:link" mode="remainder-links"/>
                 </li>
             </ul>
         </dd>
     </xsl:template>
     
-    <xsl:template match="s:version" mode="first">
+    <xsl:template match="s:version" mode="first-link">
         <xsl:text> [</xsl:text>
         <xsl:if test="not(s:summaryHoldings or s:publisher or s:dates or s:description)">
             <span>
@@ -127,16 +127,18 @@
         <xsl:text>] </xsl:text>
     </xsl:template>
     
-    <xsl:template match="s:link">
-        <xsl:call-template name="buildAnchor">
-            <xsl:with-param name="type" select="@type"/>
-            <xsl:with-param name="link">
-                <xsl:copy-of select="node()"/>
-            </xsl:with-param>
-            <xsl:with-param name="version">
-                <xsl:copy-of select="../../node()"/>
-            </xsl:with-param>
-        </xsl:call-template>
+    <xsl:template match="s:link" mode="remainder-links">
+        <xsl:if test="position() != 1">
+            <xsl:call-template name="buildAnchor">
+                <xsl:with-param name="type" select="@type"/>
+                <xsl:with-param name="link">
+                    <xsl:copy-of select="node()"/>
+                </xsl:with-param>
+                <xsl:with-param name="version">
+                    <xsl:copy-of select="../../node()"/>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="buildAnchor">
