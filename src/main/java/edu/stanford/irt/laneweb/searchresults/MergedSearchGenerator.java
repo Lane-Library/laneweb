@@ -28,6 +28,8 @@ import org.xml.sax.SAXException;
 
 /**
  * @author ryanmax
+ * 
+ * $Id$
  */
 public class MergedSearchGenerator implements Generator {
 
@@ -45,6 +47,7 @@ public class MergedSearchGenerator implements Generator {
 
     protected MetaSearchManager metaSearchManager;
 
+    @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         this.query = par.getParameter("query", null);
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
