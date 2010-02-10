@@ -30,7 +30,7 @@
     <xsl:param name="mesh-term"/>
 
     <!-- LPCH and SHC don't require authentication for proxy server -->
-    <xsl:param name="ip-group"/>
+    <xsl:param name="ipgroup"/>
 
     <xsl:param name="version"/>
 
@@ -511,7 +511,7 @@
     <!-- add the ip-group to content of the meta element named WT.seg_1 for reporting to webtrends -->
     <xsl:template match="h:meta[@name='WT.seg_1']/@content">
         <xsl:attribute name="content">
-            <xsl:value-of select="$ip-group"/>
+            <xsl:value-of select="$ipgroup"/>
         </xsl:attribute>
     </xsl:template>
 
@@ -622,7 +622,7 @@
     
     <!-- the 3rd #login li is the proxy-off toggle -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[3]">
-        <xsl:if test="matches($ip-group,'^(OTHER|PAVA|ERR)$') and $proxy-links = 'true'">
+        <xsl:if test="matches($ipgroup,'^(OTHER|PAVA|ERR)$') and $proxy-links = 'true'">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()|child::node()"/>
             </xsl:copy>
@@ -631,7 +631,7 @@
     
     <!-- the 4th #login li is the proxy-on toggle -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[4]">
-        <xsl:if test="matches($ip-group,'^(OTHER|PAVA|ERR)$') and $proxy-links = 'false'">
+        <xsl:if test="matches($ipgroup,'^(OTHER|PAVA|ERR)$') and $proxy-links = 'false'">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()|child::node()"/>
             </xsl:copy>
