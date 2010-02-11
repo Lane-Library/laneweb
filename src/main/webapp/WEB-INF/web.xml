@@ -15,16 +15,16 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/cocoon/spring/bassett.xml
-            classpath:/edu/stanford/irt/cocoon/spring/cocoon.xml
+            /WEB-INF/cocoon/spring/cocoon.xml
             /WEB-INF/cocoon/spring/datasources.xml
             /WEB-INF/cocoon/spring/eresources.xml
             /WEB-INF/cocoon/spring/history.xml
+            /WEB-INF/cocoon/spring/idc9.xml
             /WEB-INF/cocoon/spring/laneweb.xml
             /WEB-INF/cocoon/spring/merged-search.xml
             /WEB-INF/cocoon/spring/querymap.xml
             /WEB-INF/cocoon/spring/search.xml
             /WEB-INF/cocoon/spring/suggest.xml
-            /WEB-INF/cocoon/spring/idc9.xml
         </param-value>
     </context-param>
     
@@ -62,13 +62,13 @@
     <servlet>
         <description>SitemapRequestHandler</description>
         <display-name>SitemapRequestHandler</display-name>
-        <servlet-name>edu.stanford.irt.cocoon.spring.SitemapRequestHandler</servlet-name>
+        <servlet-name>edu.stanford.irt.laneweb.SitemapRequestHandler</servlet-name>
         <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>edu.stanford.irt.cocoon.spring.SitemapRequestHandler</servlet-name>
+        <servlet-name>edu.stanford.irt.laneweb.SitemapRequestHandler</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 

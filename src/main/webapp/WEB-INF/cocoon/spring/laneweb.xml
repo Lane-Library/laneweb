@@ -6,8 +6,8 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd">
 
-    <bean id="edu.stanford.irt.cocoon.spring.SitemapRequestHandler"
-        class="edu.stanford.irt.cocoon.spring.SitemapRequestHandler">
+    <bean id="edu.stanford.irt.laneweb.SitemapRequestHandler"
+        class="edu.stanford.irt.laneweb.SitemapRequestHandler">
         <property name="methodsNotAllowed">
             <set>
                 <value>OPTIONS</value>

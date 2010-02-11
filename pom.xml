@@ -1,214 +1,214 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <artifactId>lane</artifactId>
-        <groupId>edu.stanford.irt</groupId>
-        <version>3</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>edu.stanford.irt</groupId>
-    <artifactId>laneweb</artifactId>
-    <packaging>war</packaging>
-    <name>Lane Library Website</name>
-    <version>1.10.beta3-SNAPSHOT</version>
-    <description>The Lane Library web application built with Cocoon</description>
-    <url>http://lane.stanford.edu/index.html</url>
-    <inceptionYear>2002</inceptionYear>
-    <issueManagement>
-        <system>FogBugz</system>
-        <url>http://irt-bugs.stanford.edu/default.php</url>
-    </issueManagement>
-    <ciManagement>
-        <system>Hudson</system>
-        <url>http://irt-integration.stanford.edu/hudson/job/Laneweb/</url>
-    </ciManagement>
-    <developers>
-        <developer>
-            <id>ceyates</id>
-            <name>Charles Yates</name>
-            <email>ceyates@stanford.edu</email>
-            <organization>IRT Systems Development</organization>
-        </developer>
-        <developer>
-            <id>tpod</id>
-            <name>Tanya Podchiyska</name>
-            <email>tpod@stanford.edu</email>
-            <organization>IRT Systems Development</organization>
-        </developer>
-        <developer>
-            <id>ryanmax</id>
-            <name>Ryan Max Steinberg</name>
-            <email>ryanmax@stanford.edu</email>
-            <organization>Lane Medical Library</organization>
-        </developer>
-        <developer>
-            <id>alainb</id>
-            <name>Alain Broussard</name>
-            <email>alainb@stanford.edu</email>
-            <organization>IRT Systems Development</organization>
-        </developer>
-    </developers>
-    <scm>
-        <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
-    </scm>
-    <build>
-        <defaultGoal>package</defaultGoal>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <webappDirectory>target/laneweb</webappDirectory>
-                    <nonFilteredFileExtensions>
-                       <nonFilteredFileExtension>ico</nonFilteredFileExtension>
-                       <nonFilteredFileExtension>xmap</nonFilteredFileExtension>
-                    </nonFilteredFileExtensions>
-                    <webResources>
-                        <resource>
-                            <directory>src/main/webapp</directory>
-                            <filtering>true</filtering>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>net.sf.alchim</groupId>
-                <artifactId>yuicompressor-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compress</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <webappDirectory>target/laneweb</webappDirectory>
-                    <excludes>
-                        <exclude>**/swfobject.js</exclude>
-                    </excludes>
-                    <aggregations>
-                        <aggregation>
-                            <removeIncluded>true</removeIncluded>
-                            <output>target/laneweb/resources/css/lane-all.css</output>
-                            <includes>
-                                <include>layout-min.css</include>
-                                <include>colors-min.css</include>
-                                <include>shaded-border-min.css</include>
-                                <include>som-nav-min.css</include>
-                                <include>lane-nav-min.css</include>
-                                <include>footer-min.css</include>
-                                <include>search-form-min.css</include>
-                                <include>section-menu-min.css</include>
-                                <include>expandies-min.css</include>
-                                <include>simple-module-min.css</include>
-                                <include>narrow-module-min.css</include>
-                                <include>content-module-min.css</include>
-                                <include>main-module-min.css</include>
-                                <include>table-styles-min.css</include>
-                                <include>popups-min.css</include>
-                                <include>breadcrumb-min.css</include>
-                                <include>header-min.css</include>
-                                <include>anchors-min.css</include>
-                                <include>headers-min.css</include>
-                                <include>lists-min.css</include>
-                                <include>legend-dropdown-min.css</include>
-                                <include>events-min.css</include>
-                                <include>side-hd-module-min.css</include>
-                                <include>online-resources-min.css</include>
-                                <include>liaisons-min.css</include>
-                                <include>autocomplete-min.css</include>
-                                <include>tooltips-min.css</include>
-                                <include>search-min.css</include>
-                                <include>images-min.css</include>
-                            </includes>
-                        </aggregation>
-                        <aggregation>
-                            <removeIncluded>true</removeIncluded>
-                            <output>target/laneweb/javascript/lane-all.js</output>
-                            <includes>
-                                <include>lane-min.js</include>
-                                <include>accordionview-min.js</include>
-                                <include>lane-expandies-min.js</include>
-                                <include>lane-search-min.js</include>
-                                <include>lane-tracking-min.js</include>
-                                <include>lane-google-min.js</include>
-                                <include>lane-webtrends-min.js</include>
-                                <include>lane-popup-min.js</include>
-                                <include>lane-metasearch-min.js</include>
-                                <include>lane-ie-min.js</include>
-                                <include>lane-search-facets-min.js</include>
-                                <include>lane-search-facet-counts-min.js</include>
-                                <include>lane-search-history-min.js</include>
-                                <include>lane-tooltips-min.js</include>
-                                <include>lane-spellcheck-min.js</include>
-                                <include>lane-findit-min.js</include>
-                                <include>lane-querymap-min.js</include>
-                                <include>lane-popin-min.js</include>
-                                <include>lane-popup-min.js</include>
-                                <include>lane-ie-min.js</include>
-                                <include>lane-teletype-min.js</include>
-                                <include>lane-search-pico-min.js</include>
-                                <include>lane-suggest-min.js</include>
-                                
-                            </includes>
-                        </aggregation>
-                    </aggregations>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>gr.abiss.mvn.plugins</groupId>
-                <artifactId>maven-jstools-plugin</artifactId>
-                <inherited>false</inherited>
-                <configuration>
-                    <jsDir>src/main/webapp/javascript</jsDir>
-                    <excludes>**/swfobject.js</excludes>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>jslint</report>
-                            <report>jsdoc</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changes-plugin</artifactId>
-                <configuration>
-                    <issueLinkTemplate>%URL%/default.php?%ISSUE%</issueLinkTemplate>
-                    <mailSender>
-                        <name>Release Notification</name>
-                        <email>ceyates@stanford.edu</email>
-                    </mailSender>
-                    <smtpHost>smtp.stanford.edu</smtpHost>
-                    <smtpPort implementation="java.lang.Integer">25</smtpPort>
-                    <toAddresses>
-                        <toAddress implementation="java.lang.String">ceyates@stanford.edu</toAddress>
-                    </toAddresses>
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <parent>
+      <artifactId>lane</artifactId>
+      <groupId>edu.stanford.irt</groupId>
+      <version>3</version>
+   </parent>
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>edu.stanford.irt</groupId>
+   <artifactId>laneweb</artifactId>
+   <packaging>war</packaging>
+   <name>Lane Library Website</name>
+   <version>1.10.beta3-SNAPSHOT</version>
+   <description>The Lane Library web application built with Cocoon</description>
+   <url>http://lane.stanford.edu/index.html</url>
+   <inceptionYear>2002</inceptionYear>
+   <issueManagement>
+      <system>FogBugz</system>
+      <url>http://irt-bugs.stanford.edu/default.php</url>
+   </issueManagement>
+   <ciManagement>
+      <system>Hudson</system>
+      <url>http://irt-integration.stanford.edu/hudson/job/Laneweb/</url>
+   </ciManagement>
+   <developers>
+      <developer>
+         <id>ceyates</id>
+         <name>Charles Yates</name>
+         <email>ceyates@stanford.edu</email>
+         <organization>IRT Systems Development</organization>
+      </developer>
+      <developer>
+         <id>tpod</id>
+         <name>Tanya Podchiyska</name>
+         <email>tpod@stanford.edu</email>
+         <organization>IRT Systems Development</organization>
+      </developer>
+      <developer>
+         <id>ryanmax</id>
+         <name>Ryan Max Steinberg</name>
+         <email>ryanmax@stanford.edu</email>
+         <organization>Lane Medical Library</organization>
+      </developer>
+      <developer>
+         <id>alainb</id>
+         <name>Alain Broussard</name>
+         <email>alainb@stanford.edu</email>
+         <organization>IRT Systems Development</organization>
+      </developer>
+   </developers>
+   <scm>
+      <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
+   </scm>
+   <build>
+      <defaultGoal>package</defaultGoal>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <configuration>
+               <webappDirectory>target/laneweb</webappDirectory>
+               <nonFilteredFileExtensions>
+                  <nonFilteredFileExtension>ico</nonFilteredFileExtension>
+                  <nonFilteredFileExtension>xmap</nonFilteredFileExtension>
+               </nonFilteredFileExtensions>
+               <webResources>
+                  <resource>
+                     <directory>src/main/webapp</directory>
+                     <filtering>true</filtering>
+                  </resource>
+               </webResources>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>net.sf.alchim</groupId>
+            <artifactId>yuicompressor-maven-plugin</artifactId>
+            <executions>
+               <execution>
+                  <goals>
+                     <goal>compress</goal>
+                  </goals>
+               </execution>
+            </executions>
+            <configuration>
+               <webappDirectory>target/laneweb</webappDirectory>
+               <excludes>
+                  <exclude>**/swfobject.js</exclude>
+               </excludes>
+               <aggregations>
+                  <aggregation>
+                     <removeIncluded>true</removeIncluded>
+                     <output>target/laneweb/resources/css/lane-all.css</output>
+                     <includes>
+                        <include>layout-min.css</include>
+                        <include>colors-min.css</include>
+                        <include>shaded-border-min.css</include>
+                        <include>som-nav-min.css</include>
+                        <include>lane-nav-min.css</include>
+                        <include>footer-min.css</include>
+                        <include>search-form-min.css</include>
+                        <include>section-menu-min.css</include>
+                        <include>expandies-min.css</include>
+                        <include>simple-module-min.css</include>
+                        <include>narrow-module-min.css</include>
+                        <include>content-module-min.css</include>
+                        <include>main-module-min.css</include>
+                        <include>table-styles-min.css</include>
+                        <include>popups-min.css</include>
+                        <include>breadcrumb-min.css</include>
+                        <include>header-min.css</include>
+                        <include>anchors-min.css</include>
+                        <include>headers-min.css</include>
+                        <include>lists-min.css</include>
+                        <include>legend-dropdown-min.css</include>
+                        <include>events-min.css</include>
+                        <include>side-hd-module-min.css</include>
+                        <include>online-resources-min.css</include>
+                        <include>liaisons-min.css</include>
+                        <include>autocomplete-min.css</include>
+                        <include>tooltips-min.css</include>
+                        <include>search-min.css</include>
+                        <include>images-min.css</include>
+                     </includes>
+                  </aggregation>
+                  <aggregation>
+                     <removeIncluded>true</removeIncluded>
+                     <output>target/laneweb/javascript/lane-all.js</output>
+                     <includes>
+                        <include>lane-min.js</include>
+                        <include>accordionview-min.js</include>
+                        <include>lane-expandies-min.js</include>
+                        <include>lane-search-min.js</include>
+                        <include>lane-tracking-min.js</include>
+                        <include>lane-google-min.js</include>
+                        <include>lane-webtrends-min.js</include>
+                        <include>lane-popup-min.js</include>
+                        <include>lane-metasearch-min.js</include>
+                        <include>lane-ie-min.js</include>
+                        <include>lane-search-facets-min.js</include>
+                        <include>lane-search-facet-counts-min.js</include>
+                        <include>lane-search-history-min.js</include>
+                        <include>lane-tooltips-min.js</include>
+                        <include>lane-spellcheck-min.js</include>
+                        <include>lane-findit-min.js</include>
+                        <include>lane-querymap-min.js</include>
+                        <include>lane-popin-min.js</include>
+                        <include>lane-popup-min.js</include>
+                        <include>lane-ie-min.js</include>
+                        <include>lane-teletype-min.js</include>
+                        <include>lane-search-pico-min.js</include>
+                        <include>lane-suggest-min.js</include>
 
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>changes-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-        </plugins>
-    </reporting>
-    <dependencies>
+                     </includes>
+                  </aggregation>
+               </aggregations>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-site-plugin</artifactId>
+         </plugin>
+      </plugins>
+   </build>
+   <reporting>
+      <plugins>
+         <plugin>
+            <groupId>gr.abiss.mvn.plugins</groupId>
+            <artifactId>maven-jstools-plugin</artifactId>
+            <inherited>false</inherited>
+            <configuration>
+               <jsDir>src/main/webapp/javascript</jsDir>
+               <excludes>**/swfobject.js</excludes>
+            </configuration>
+            <reportSets>
+               <reportSet>
+                  <reports>
+                     <report>jslint</report>
+                     <report>jsdoc</report>
+                  </reports>
+               </reportSet>
+            </reportSets>
+         </plugin>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-changes-plugin</artifactId>
+            <configuration>
+               <issueLinkTemplate>%URL%/default.php?%ISSUE%</issueLinkTemplate>
+               <mailSender>
+                  <name>Release Notification</name>
+                  <email>ceyates@stanford.edu</email>
+               </mailSender>
+               <smtpHost>smtp.stanford.edu</smtpHost>
+               <smtpPort implementation="java.lang.Integer">25</smtpPort>
+               <toAddresses>
+                  <toAddress implementation="java.lang.String">ceyates@stanford.edu</toAddress>
+               </toAddresses>
+
+            </configuration>
+            <reportSets>
+               <reportSet>
+                  <reports>
+                     <report>changes-report</report>
+                  </reports>
+               </reportSet>
+            </reportSets>
+         </plugin>
+      </plugins>
+   </reporting>
+   <dependencies>
       <dependency>
          <artifactId>commons-codec</artifactId>
          <groupId>commons-codec</groupId>
@@ -234,17 +234,6 @@
          <artifactId>icd9</artifactId>
          <groupId>edu.stanford.irt</groupId>
          <version>1.0.1</version>
-      </dependency>
-      <dependency>
-         <artifactId>irt-cocoon</artifactId>
-         <groupId>edu.stanford.irt</groupId>
-         <version>1.2.0</version>
-         <exclusions>
-            <exclusion>
-               <artifactId>concurrent</artifactId>
-               <groupId>concurrent</groupId>
-            </exclusion>
-         </exclusions>
       </dependency>
       <dependency>
          <artifactId>querymap</artifactId>
@@ -330,10 +319,94 @@
          <artifactId>nekohtml</artifactId>
          <groupId>net.sourceforge.nekohtml</groupId>
          <version>1.9.11</version>
-         <type>jar</type>
+      </dependency>
+      <dependency>
+         <artifactId>cocoon-configuration-api</artifactId>
+         <groupId>org.apache.cocoon</groupId>
+         <version>1.0.2</version>
+      </dependency>
+      <dependency>
+         <artifactId>cocoon-core</artifactId>
+         <groupId>org.apache.cocoon</groupId>
+         <version>2.2.0</version>
+         <exclusions>
+            <exclusion>
+               <artifactId>commons-io</artifactId>
+               <groupId>commons-io</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>commons-jexl</artifactId>
+               <groupId>commons-jexl</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>commons-jxpath</artifactId>
+               <groupId>commons-jxpath</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>commons-lang</artifactId>
+               <groupId>commons-lang</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>commons-logging</artifactId>
+               <groupId>commons-logging</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>concurrent</artifactId>
+               <groupId>concurrent</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>log4j</artifactId>
+               <groupId>log4j</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>ehcache</artifactId>
+               <groupId>net.sf.ehcache</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>cocoon-spring-configurator</artifactId>
+               <groupId>org.apache.cocoon</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>cocoon-thread-api</artifactId>
+               <groupId>org.apache.cocoon</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>cocoon-thread-impl</artifactId>
+               <groupId>org.apache.cocoon</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>excalibur-instrument-api</artifactId>
+               <groupId>org.apache.excalibur.containerkit</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>spring-aop</artifactId>
+               <groupId>org.springframework</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>js</artifactId>
+               <groupId>rhino</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>xalan</artifactId>
+               <groupId>xalan</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>xercesImpl</artifactId>
+               <groupId>xerces</groupId>
+            </exclusion>
+            <exclusion>
+               <artifactId>xml-apis</artifactId>
+               <groupId>xml-apis</groupId>
+            </exclusion>
+         </exclusions>
       </dependency>
       <dependency>
          <artifactId>spring-aop</artifactId>
+         <groupId>org.springframework</groupId>
+         <version>3.0.0.RELEASE</version>
+      </dependency>
+      <dependency>
+         <artifactId>spring-web</artifactId>
          <groupId>org.springframework</groupId>
          <version>3.0.0.RELEASE</version>
       </dependency>
@@ -435,8 +508,8 @@
          <scope>test</scope>
       </dependency>
    </dependencies>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    </properties>
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+   </properties>
 </project>
