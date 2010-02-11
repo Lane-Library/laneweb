@@ -65,16 +65,26 @@ public class XMLizableSearchResultsList implements XMLizable {
         Collection<SearchResult> searchResults = new TreeSet<SearchResult>();
         if (null != this.eresources) {
             for (Eresource eresource : this.eresources) {
-                searchResults.add(new EresourceSearchResult(eresource));
+                EresourceSearchResult ersr = new EresourceSearchResult(eresource);
+                if (null != this.query) {
+                    ersr.setQueryTermPattern(this.query);
+                }
+                searchResults.add(ersr);
             }
         }
         if (null != this.eresourceSearchResults) {
             for (EresourceSearchResult eresource : this.eresourceSearchResults) {
+                if (null != this.query) {
+                    eresource.setQueryTermPattern(this.query);
+                }
                 searchResults.add(eresource);
             }
         }
         if (null != this.contentResultSearchResults) {
             for (ContentResultSearchResult contentResult : this.contentResultSearchResults) {
+                if (null != this.query) {
+                    contentResult.setQueryTermPattern(this.query);
+                }
                 searchResults.add(contentResult);
             }
         }

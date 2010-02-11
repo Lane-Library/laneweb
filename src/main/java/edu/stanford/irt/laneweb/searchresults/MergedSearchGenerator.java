@@ -52,7 +52,7 @@ public class MergedSearchGenerator implements Generator {
         this.query = par.getParameter("query", null);
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         this.engines = request.getParameterValues("e");
-        if (null != this.query && this.query.length() == 0) {
+        if (null == this.query || this.query.length() == 0) {
             throw new IllegalStateException("null query");
         }
         if (null == this.engines) {
@@ -62,6 +62,7 @@ public class MergedSearchGenerator implements Generator {
 
     public void generate() throws SAXException {
         XMLizableSearchResultsList mergedSearchResults = new XMLizableSearchResultsList();
+        mergedSearchResults.setQuery(this.query);
         mergedSearchResults.setEresourceSearchResults(getEresourceList());
         mergedSearchResults.setContentResultSearchResults(getContentResultList());
         this.xmlConsumer.startDocument();
@@ -101,9 +102,7 @@ public class MergedSearchGenerator implements Generator {
     private Collection<EresourceSearchResult> getEresourceList() {
         Collection<EresourceSearchResult> eresourceResults = new LinkedList<EresourceSearchResult>();
         for (Eresource eresource : this.collectionManager.search(this.query)) {
-            EresourceSearchResult esr = new EresourceSearchResult(eresource);
-            esr.setQueryTermPattern(this.query);
-            eresourceResults.add(esr);
+            eresourceResults.add(new EresourceSearchResult(eresource));
         }
         return eresourceResults;
     }
@@ -128,7 +127,6 @@ public class MergedSearchGenerator implements Generator {
                     while (it.hasNext() && count <= this.contentResultLimit){
                         count++;
                         ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next());
-                        crsr.setQueryTermPattern(this.query);
                         crsr.setResourceHits(parentResource.getHits());
                         crsr.setResourceId(parentResource.getId());
                         crsr.setResourceName(parentResource.getDescription());

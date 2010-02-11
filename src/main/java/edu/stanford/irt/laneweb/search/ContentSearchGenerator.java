@@ -50,7 +50,7 @@ public class ContentSearchGenerator implements Generator {
         this.query = par.getParameter("query", null);
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         this.engines = request.getParameterValues("e");
-        if (null != this.query && this.query.length() == 0) {
+        if (null == this.query || this.query.length() == 0) {
             throw new IllegalStateException("null query");
         }
         if (null == this.engines) {
@@ -60,6 +60,7 @@ public class ContentSearchGenerator implements Generator {
 
     public void generate() throws SAXException {
         XMLizableSearchResultsList mergedSearchResults = new XMLizableSearchResultsList();
+        mergedSearchResults.setQuery(this.query);
         mergedSearchResults.setContentResultSearchResults(getContentResultList());
         this.xmlConsumer.startDocument();
         mergedSearchResults.toSAX(this.xmlConsumer);
@@ -108,7 +109,6 @@ public class ContentSearchGenerator implements Generator {
                     while (it.hasNext() && count <= this.contentResultLimit){
                         count++;
                         ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next());
-                        crsr.setQueryTermPattern(this.query);
                         crsr.setResourceHits(parentResource.getHits());
                         crsr.setResourceId(parentResource.getId());
                         crsr.setResourceName(parentResource.getDescription());

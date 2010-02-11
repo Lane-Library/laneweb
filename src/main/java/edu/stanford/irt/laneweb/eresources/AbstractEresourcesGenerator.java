@@ -22,7 +22,9 @@ public abstract class AbstractEresourcesGenerator implements Generator {
     private static final String SUBSET = "subset";
 
     private static final String TYPE = "type";
-
+    
+    private static final String QUERY = "query";
+    
     private XMLConsumer xmlConsumer;
 
     protected String alpha;
@@ -35,8 +37,11 @@ public abstract class AbstractEresourcesGenerator implements Generator {
 
     protected String type;
 
+    protected String query;
+    
     public void generate() throws SAXException {
         XMLizableSearchResultsList eresources = new XMLizableSearchResultsList();
+        eresources.setQuery(this.query);
         eresources.setEresources(getEresourceList());
         this.xmlConsumer.startDocument();
         eresources.toSAX(this.xmlConsumer);
@@ -56,9 +61,13 @@ public abstract class AbstractEresourcesGenerator implements Generator {
         }
         this.xmlConsumer = xmlConsumer;
     }
-
+    
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+        this.query = par.getParameter(QUERY, null);
+        if (null != this.query && this.query.length() == 0) {
+            this.query = null;
+        }
         this.type = par.getParameter(TYPE, null);
         if (null != this.type && this.type.length() == 0) {
             this.type = null;
