@@ -22,6 +22,7 @@
             /WEB-INF/cocoon/spring/idc9.xml
             /WEB-INF/cocoon/spring/laneweb.xml
             /WEB-INF/cocoon/spring/merged-search.xml
+            /WEB-INF/cocoon/spring/model.xml
             /WEB-INF/cocoon/spring/querymap.xml
             /WEB-INF/cocoon/spring/search.xml
             /WEB-INF/cocoon/spring/suggest.xml

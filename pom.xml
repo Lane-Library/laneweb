@@ -447,12 +447,12 @@
          <version>1.4</version>
          <scope>runtime</scope>
       </dependency>
-      <dependency>
+      <!--<dependency>
          <artifactId>commons-jxpath</artifactId>
          <groupId>commons-jxpath</groupId>
          <version>1.3</version>
          <scope>runtime</scope>
-      </dependency>
+      </dependency>-->
       <dependency>
          <artifactId>commons-lang</artifactId>
          <groupId>commons-lang</groupId>

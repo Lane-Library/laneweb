@@ -12,6 +12,6 @@ import org.apache.cocoon.el.ExpressionCompiler;
 public class LanewebExpressionCompiler implements ExpressionCompiler {
 
     public Expression compile(String language, String expression) {
-        return new LanewebExpression(language, expression);
+        return new LanewebExpression(expression);
     }
 }

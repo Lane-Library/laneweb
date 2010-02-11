@@ -5,7 +5,6 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.fail;
 
 import java.util.Collections;
@@ -15,6 +14,9 @@ import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.junit.Before;
 import org.junit.Test;
 
+/*
+ * $Id$
+ */
 public class LanewebExpressionTest {
 
     private LanewebExpression expression;
@@ -24,7 +26,7 @@ public class LanewebExpressionTest {
     @Before
     public void setUp() throws Exception {
         this.objectModel = createMock(ObjectModel.class);
-        this.expression = new LanewebExpression(null, "bar");
+        this.expression = new LanewebExpression("bar");
     }
 
     @Test
@@ -40,7 +42,7 @@ public class LanewebExpressionTest {
 
     @Test
     public void testEvaluate() throws ExpressionException {
-        expect(this.objectModel.get("contextBean")).andReturn(Collections.singletonMap("bar", "foo"));
+        expect(this.objectModel.get("laneweb")).andReturn(Collections.singletonMap("bar", "foo"));
         replayMocks();
         assertEquals("foo", this.expression.evaluate(this.objectModel));
         verifyMocks();
@@ -60,7 +62,11 @@ public class LanewebExpressionTest {
     @Test
     public void testIterate() throws ExpressionException {
         replayMocks();
-        assertFalse(this.expression.iterate(this.objectModel).hasNext());
+        try {
+        this.expression.iterate(this.objectModel);
+        fail();
+        } catch (UnsupportedOperationException e) {
+        }
         verifyMocks();
     }
 
