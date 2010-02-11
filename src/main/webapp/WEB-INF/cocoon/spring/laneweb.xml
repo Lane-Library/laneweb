@@ -219,9 +219,6 @@
     <bean name="org.apache.cocoon.acting.Action/cmeRedirectAction"
         class="edu.stanford.irt.laneweb.cme.CMERedirectAction"/>
     
-    <bean name="org.apache.cocoon.acting.Action/delete-cookie"
-    class="edu.stanford.irt.laneweb.DeleteCookieAction"/>
-    
     <bean name="org.apache.cocoon.acting.Action/invalidate-session"
         class="org.apache.cocoon.acting.SessionInvalidatorAction"/>
 

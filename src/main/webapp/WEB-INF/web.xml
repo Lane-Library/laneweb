@@ -35,7 +35,7 @@
     </context-param>
     
     <listener>
-        <listener-class>edu.stanford.irt.laneweb.model.LanewebContextListener</listener-class>
+        <listener-class>edu.stanford.irt.laneweb.servlet.LanewebContextListener</listener-class>
     </listener>
 
     <listener>
@@ -52,7 +52,7 @@
 
     <filter>
         <filter-name>LanewebHTTPSFilter</filter-name>
-        <filter-class>edu.stanford.irt.laneweb.LanewebHTTPSFilter</filter-class>
+        <filter-class>edu.stanford.irt.laneweb.servlet.LanewebHTTPSFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -67,6 +67,18 @@
         <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
+    <servlet>
+        <description>LogoutServlet</description>
+        <display-name>LogoutServlet</display-name>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-name>
+        <servlet-class>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.SitemapRequestHandler</servlet-name>

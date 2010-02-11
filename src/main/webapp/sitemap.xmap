@@ -74,16 +74,6 @@
                     <map:parameter name="query-string" value="${query-string}"/>
                 </map:act>
             </map:match>
-            <map:match pattern="logout" type="wildcard">
-                <map:act type="delete-cookie">
-                    <map:parameter name="cookie-name" value="user"/>
-                </map:act>
-                <map:act type="delete-cookie">
-                    <map:parameter name="cookie-name" value="webauth_at"/>
-                </map:act>
-                <map:act type="invalidate-session"/>
-                <map:redirect-to uri="https://weblogin.stanford.edu/logout"/>
-            </map:match>
             <map:match pattern="secure/webdash.html" type="wildcard">
                 <map:act type="webdash">
                     <map:parameter name="nonce" value="${nonce}"/>

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.model;
+package edu.stanford.irt.laneweb.servlet;
 
 import java.net.MalformedURLException;
 import java.net.URL;

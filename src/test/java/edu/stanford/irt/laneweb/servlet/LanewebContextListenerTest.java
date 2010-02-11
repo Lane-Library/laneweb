@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.model;
+package edu.stanford.irt.laneweb.servlet;
 
 import static org.easymock.classextension.EasyMock.*;
 
@@ -13,6 +13,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.model.MockInitialContextFactory;
+import edu.stanford.irt.laneweb.servlet.LanewebContextListener;
 
 public class LanewebContextListenerTest {
 

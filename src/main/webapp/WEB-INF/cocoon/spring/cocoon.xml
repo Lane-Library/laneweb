@@ -12,7 +12,11 @@
     
     <bean id="org.apache.cocoon.configuration.Settings"
         class="edu.stanford.irt.laneweb.Settings">
-        <property name="servletContext" ref="javax.servlet.ServletContext"/>
+        <property name="tempDir">
+            <bean class="org.springframework.web.context.support.ServletContextAttributeFactoryBean">
+                <property name="attributeName" value="javax.servlet.context.tempdir"/>
+            </bean>
+        </property>
     </bean>
     
     <bean id="javax.servlet.ServletContext"

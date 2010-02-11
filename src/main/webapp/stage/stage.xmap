@@ -42,16 +42,6 @@
                     <map:parameter name="query-string" value="${query-string}"/>
                 </map:act>
             </map:match>
-            <map:match pattern="logout" type="wildcard">
-                <map:act type="delete-cookie">
-                    <map:parameter name="cookie-name" value="user"/>
-                </map:act>
-                <map:act type="delete-cookie">
-                    <map:parameter name="cookie-name" value="webauth_at"/>
-                </map:act>
-                <map:act type="invalidate-session"/>
-                <map:redirect-to uri="https://weblogin.stanford.edu/logout"/>
-            </map:match>
             <map:match pattern="redirect/cme" type="wildcard">
                 <map:act type="cmeRedirectAction">
                     <map:parameter name="emrid" value="${emrid}"/>
