@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
@@ -8,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
@@ -22,6 +20,12 @@ import edu.stanford.irt.search.impl.SimpleQuery;
 import edu.stanford.irt.search.util.SAXResult;
 import edu.stanford.irt.search.util.SAXable;
 
+/**
+ * 
+ * @author ceyates
+ *
+ * $Id$
+ */
 public class DescribeGenerator implements Generator {
 
     private String[] e;
@@ -66,8 +70,7 @@ public class DescribeGenerator implements Generator {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
         this.q = request.getParameter("q");
         this.e = request.getParameterValues("e");

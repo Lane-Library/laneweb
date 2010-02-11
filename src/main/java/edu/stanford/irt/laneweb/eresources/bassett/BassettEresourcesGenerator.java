@@ -1,14 +1,9 @@
 package edu.stanford.irt.laneweb.eresources.bassett;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -17,6 +12,12 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.Eresource;
 
+/**
+ * 
+ * @author alainb
+ *
+ * $Id$
+ */
 public class BassettEresourcesGenerator implements Generator {
 
     private static final String BASSETT_NUMBER = "bn";
@@ -69,12 +70,10 @@ public class BassettEresourcesGenerator implements Generator {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        String query = request.getParameter(QUERY);
-        this.region = request.getParameter(REGION);
-        this.bassettNumber = request.getParameter(BASSETT_NUMBER);
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+        String query = par.getParameter(QUERY, null);
+        this.region = par.getParameter(REGION, null);
+        this.bassettNumber = par.getParameter(BASSETT_NUMBER, null);
         if (null != query) {
             this.query = query.trim();
             if (this.query.length() == 0) {

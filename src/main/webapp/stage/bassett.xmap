@@ -44,11 +44,17 @@
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="database" type="wildcard">
-                <map:generate type="bassett"/>
+                <map:generate type="bassett">
+                    <map:parameter name="bn" value="${bn}"/>
+                    <map:parameter name="q" value="${q}"/>
+                    <map:parameter name="r" value="${r}"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="bassett-accordion" type="wildcard">
-                <map:generate type="bassett-accordion"/>
+                <map:generate type="bassett-accordion">
+                    <map:parameter name="q" value="${q}"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>

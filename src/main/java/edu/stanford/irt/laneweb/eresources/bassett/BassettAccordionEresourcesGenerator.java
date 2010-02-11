@@ -1,19 +1,20 @@
 package edu.stanford.irt.laneweb.eresources.bassett;
 
-import java.io.IOException;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
+/**
+ * 
+ * @author alainb
+ *
+ * $Id$
+ */
 public class BassettAccordionEresourcesGenerator implements Generator {
 
     private static final String QUERY = "q";
@@ -50,10 +51,8 @@ public class BassettAccordionEresourcesGenerator implements Generator {
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        String query = request.getParameter(QUERY);
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+        String query = par.getParameter(QUERY, null);
         if (null != query) {
             this.query = query.trim();
             if (this.query.length() == 0) {
