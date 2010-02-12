@@ -67,4 +67,10 @@
         </property>
     </bean>
     
+    <bean id="edu.stanford.irt.laneweb.model.AbstractObjectModelAware"
+        class="edu.stanford.irt.laneweb.model.AbstractObjectModelAware"
+        scope="prototype" abstract="true">
+        <property name="objectModel" ref="org.apache.cocoon.el.objectmodel.ObjectModel"/>
+    </bean>
+    
 </beans>

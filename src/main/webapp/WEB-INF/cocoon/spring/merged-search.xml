@@ -5,7 +5,9 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
     <bean name="org.apache.cocoon.generation.Generator/merged-search"
-        class="edu.stanford.irt.laneweb.searchresults.MergedSearchGenerator" scope="prototype">
+        class="edu.stanford.irt.laneweb.searchresults.MergedSearchGenerator"
+        parent="edu.stanford.irt.laneweb.model.AbstractObjectModelAware"
+        scope="prototype">
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
         <property name="metaSearchManagerSource"

@@ -8,14 +8,15 @@ import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.util.SAXResult;
 import edu.stanford.irt.search.util.SAXable;
 
-public abstract class AbstractSearchGenerator implements Generator {
+public abstract class AbstractSearchGenerator extends AbstractObjectModelAware implements Generator {
 
-    private XMLConsumer xmlConsumer;
+    protected XMLConsumer xmlConsumer;
 
     protected MetaSearchManager metaSearchManager;
 

@@ -3,11 +3,9 @@
  */
 package edu.stanford.irt.laneweb.search;
 
-import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
 import edu.stanford.irt.laneweb.searchresults.ContentResultSearchResult;
 import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultsList;
 import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -17,13 +15,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.Generator;
-import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 /**
@@ -31,9 +24,9 @@ import org.xml.sax.SAXException;
  * 
  * $Id$
  */
-public class ContentSearchGenerator implements Generator {
-
-    protected String query;
+public class ContentSearchGenerator extends AbstractSearchGenerator {
+    
+    private static final String[] NO_ENGINES = new String[0];
 
     protected String[] engines;
 
@@ -41,23 +34,13 @@ public class ContentSearchGenerator implements Generator {
 
     private int contentResultLimit;
 
-    private XMLConsumer xmlConsumer;
-
-    protected MetaSearchManager metaSearchManager;
-
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.query = par.getParameter("query", null);
-        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        this.engines = request.getParameterValues("e");
-        if (null == this.query || this.query.length() == 0) {
-            throw new IllegalStateException("null query");
-        }
-        if (null == this.engines) {
-            throw new IllegalArgumentException("null engines");
-        }
+        super.setup(resolver, objectModel, src, par);
+        this.engines = getObject("e", String[].class, NO_ENGINES);
     }
 
+    @Override
     public void generate() throws SAXException {
         XMLizableSearchResultsList mergedSearchResults = new XMLizableSearchResultsList();
         mergedSearchResults.setQuery(this.query);
@@ -65,20 +48,6 @@ public class ContentSearchGenerator implements Generator {
         this.xmlConsumer.startDocument();
         mergedSearchResults.toSAX(this.xmlConsumer);
         this.xmlConsumer.endDocument();
-    }
-
-    public void setConsumer(final XMLConsumer xmlConsumer) {
-        if (null == xmlConsumer) {
-            throw new IllegalArgumentException("null xmlConsumer");
-        }
-        this.xmlConsumer = xmlConsumer;
-    }
-
-    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
-        if (null == msms) {
-            throw new IllegalStateException("null metaSearchManager");
-        }
-        this.metaSearchManager = msms.getMetaSearchManager();
     }
 
     public void setDefaultTimeout(final long defaultTimeout) {
@@ -121,5 +90,10 @@ public class ContentSearchGenerator implements Generator {
             }
         }
         return contentResults;
+    }
+
+    @Override
+    protected Result doSearch() {
+        throw new UnsupportedOperationException();
     }
 }

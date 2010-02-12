@@ -5,6 +5,7 @@ package edu.stanford.irt.laneweb.searchresults;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
 import edu.stanford.irt.laneweb.search.MetaSearchManagerSource;
 import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.MetaSearchManager;
@@ -17,10 +18,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -31,7 +29,9 @@ import org.xml.sax.SAXException;
  * 
  * $Id$
  */
-public class MergedSearchGenerator implements Generator {
+public class MergedSearchGenerator extends AbstractObjectModelAware implements Generator {
+    
+    private static final String[] NO_ENGINES  = new String[0];
 
     protected String query;
 
@@ -50,8 +50,7 @@ public class MergedSearchGenerator implements Generator {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         this.query = par.getParameter("query", null);
-        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        this.engines = request.getParameterValues("e");
+        this.engines = getObject("e", String[].class, NO_ENGINES);
         if (null == this.query || this.query.length() == 0) {
             throw new IllegalStateException("null query");
         }

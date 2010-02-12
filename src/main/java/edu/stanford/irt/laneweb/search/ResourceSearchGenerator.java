@@ -1,7 +1,10 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
@@ -12,17 +15,19 @@ import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 public class ResourceSearchGenerator extends SearchGenerator {
+    
+    private static final String[] EMPTY_RESOURCES = new String[0];
 
-    private Collection<String> resources;
+    private Collection<String> resources = Collections.emptySet();
 
     @Override
     public Result doSearch() {
-        Collection<String> engineToRun = new HashSet<String>();
+        Collection<String> engineToRun = new LinkedList<String>();
         Query query = new SimpleQuery(super.query);
-        Result describleResult = metaSearchManager.describe(query, null);
+        Result describeResult = this.metaSearchManager.describe(query, null);
 
-        for (String resource : resources) {
-            for (Result result : describleResult.getChildren()) {
+        for (String resource : this.resources) {
+            for (Result result : describeResult.getChildren()) {
                 if (result.getChild(resource) != null) {
                     engineToRun.add(result.getId());
                     break;
@@ -36,12 +41,8 @@ public class ResourceSearchGenerator extends SearchGenerator {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         super.setup(resolver, objectModel, src, par);
-        if (null == this.rsrcs) {
-            throw new IllegalArgumentException("null resources");
-        }
-        this.resources = new HashSet<String>();
-        for (String element : this.rsrcs) {
-            this.resources.add(element);
-        }
+        String[] resources = getObject("e", String[].class, EMPTY_RESOURCES);
+        this.resources = new HashSet(resources.length);
+        this.resources.addAll(Arrays.asList(resources));
     }
 }

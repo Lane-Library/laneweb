@@ -3,12 +3,8 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Collection;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.Generator;
 
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
@@ -19,13 +15,9 @@ import edu.stanford.irt.search.impl.SimpleQuery;
  * @author ceyates
  * $Id$
  */
-public class SearchGenerator extends AbstractSearchGenerator implements Generator {
+public class SearchGenerator extends AbstractSearchGenerator {
 
     private long defaultTimeout;
-
-    protected String[] engines;
-
-    protected String[] rsrcs;
 
     private String s;
 
@@ -35,18 +27,10 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
 
     @Override
     public Result doSearch() {
-        // if you want to use resource parameters please use the resourceSearchGenarator
-        if (this.rsrcs != null) {
-            throw new IllegalArgumentException("not null resource");
-        }
-        // if you want to use engine parameters please use the engineSearchGenarator
-        if (this.engines != null) {
-            throw new IllegalArgumentException("not null engine");
-        }
         return doSearch(null);
     }
 
-    public Result doSearch(final Collection<String> engines) {
+    protected Result doSearch(final Collection<String> engines) {
         Result result = null;
         if ((this.query != null) && (this.query.length() > 0)) {
             long time = this.defaultTimeout;
@@ -103,15 +87,12 @@ public class SearchGenerator extends AbstractSearchGenerator implements Generato
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         super.setup(resolver, objectModel, src, par);
-        HttpServletRequest request = ObjectModelHelper.getRequest(objectModel);
-        this.rsrcs = request.getParameterValues("r");
-        this.engines = request.getParameterValues("e");
-        this.t = request.getParameter("t");
+        this.t = getString("t");
         if (null == this.t) {
             this.t = par.getParameter("t", null);
         }
-        this.w = request.getParameter("w");
-        this.s = request.getParameter("s");
+        this.w = getString("w");
+        this.s = getString("s");
         if (null == this.s) {
             this.s = par.getParameter("s", null);
         }
