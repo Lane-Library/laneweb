@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.searchresults;
 
 import java.util.Collection;
 import java.util.TreeSet;
+import java.util.regex.Pattern;
 
 import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
@@ -10,6 +11,13 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.Eresource;
 
+/**
+ * 
+ * @author ryanmax
+ * 
+ * $Id$
+ *
+ */
 public class XMLizableSearchResultsList implements XMLizable {
 
     private static final String RESULTS = "results";
@@ -63,11 +71,12 @@ public class XMLizableSearchResultsList implements XMLizable {
             XMLUtils.endElement(handler, NAMESPACE, QUERY);
         }
         Collection<SearchResult> searchResults = new TreeSet<SearchResult>();
+        Pattern queryTermPattern = Pattern.compile(SearchResultHelper.regexifyQuery(query), Pattern.CASE_INSENSITIVE);
         if (null != this.eresources) {
             for (Eresource eresource : this.eresources) {
                 EresourceSearchResult ersr = new EresourceSearchResult(eresource);
                 if (null != this.query) {
-                    ersr.setQueryTermPattern(this.query);
+                    ersr.setQueryTermPattern(queryTermPattern);
                 }
                 searchResults.add(ersr);
             }
@@ -75,7 +84,7 @@ public class XMLizableSearchResultsList implements XMLizable {
         if (null != this.eresourceSearchResults) {
             for (EresourceSearchResult eresource : this.eresourceSearchResults) {
                 if (null != this.query) {
-                    eresource.setQueryTermPattern(this.query);
+                    eresource.setQueryTermPattern(queryTermPattern);
                 }
                 searchResults.add(eresource);
             }
@@ -83,7 +92,7 @@ public class XMLizableSearchResultsList implements XMLizable {
         if (null != this.contentResultSearchResults) {
             for (ContentResultSearchResult contentResult : this.contentResultSearchResults) {
                 if (null != this.query) {
-                    contentResult.setQueryTermPattern(this.query);
+                    contentResult.setQueryTermPattern(queryTermPattern);
                 }
                 searchResults.add(contentResult);
             }

@@ -19,6 +19,8 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * @author ryanmax
+ * 
+ * $Id$
  */
 public class EresourceSearchResult implements SearchResult, SAXableSearchResult {
 
@@ -27,12 +29,21 @@ public class EresourceSearchResult implements SearchResult, SAXableSearchResult 
     private static final EresourceVersionComparator VERSION_COMPARATOR = new EresourceVersionComparator();
 
     private Pattern queryTermPattern = null;
+    
+    private String sortTitle;
+    
+    private String dedupTitle;
+    
+    private int hashcode;
 
     /**
      * 
      */
     public EresourceSearchResult(Eresource eresource) {
         this.eresource = eresource;
+        this.hashcode = Integer.toString(this.eresource.getId()).hashCode();
+        this.dedupTitle = eresource.getTitle().toLowerCase().replaceAll("\\W", SearchResultHelper.EMPTY);
+        this.sortTitle = SearchResultHelper.NON_FILING_PATTERN.matcher(this.dedupTitle).replaceFirst(SearchResultHelper.EMPTY);
     }
 
     public int getScore() {
@@ -40,16 +51,15 @@ public class EresourceSearchResult implements SearchResult, SAXableSearchResult 
     }
 
     public String getSortTitle() {
-        return SearchResultHelper.NON_FILING_PATTERN.matcher(this.getDedupTitle()).replaceFirst(
-                SearchResultHelper.EMPTY);
+        return this.sortTitle;
     }
 
     public String getDedupTitle() {
-        return this.eresource.getTitle().toLowerCase().replaceAll("\\W", SearchResultHelper.EMPTY);
+        return this.dedupTitle;
     }
 
-    public void setQueryTermPattern(String query) {
-        this.queryTermPattern = Pattern.compile(SearchResultHelper.regexifyQuery(query), Pattern.CASE_INSENSITIVE);
+    public void setQueryTermPattern(Pattern queryTermPattern) {
+        this.queryTermPattern = queryTermPattern;
     }
 
     /*
@@ -67,7 +77,7 @@ public class EresourceSearchResult implements SearchResult, SAXableSearchResult 
 
     @Override
     public int hashCode() {
-        return Integer.toString(this.eresource.getId()).hashCode();
+        return this.hashcode;
     }
 
     @Override

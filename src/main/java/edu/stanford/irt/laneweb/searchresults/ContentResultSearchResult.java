@@ -15,6 +15,8 @@ import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * @author ryanmax
+ * 
+ * $Id$
  */
 public class ContentResultSearchResult implements SearchResult, SAXableSearchResult {
 
@@ -39,25 +41,33 @@ public class ContentResultSearchResult implements SearchResult, SAXableSearchRes
     private String resourceHits;
 
     private String resourceUrl;
+    
+    private String sortTitle;
+    
+    private String dedupTitle;
+    
+    int score;
 
     /**
      * 
      */
     public ContentResultSearchResult(ContentResult contentResult) {
         this.contentResult = contentResult;
+        this.dedupTitle = this.contentResult.getTitle().toLowerCase().replaceAll("\\W", SearchResultHelper.EMPTY);
+        this.sortTitle = SearchResultHelper.NON_FILING_PATTERN.matcher(dedupTitle).replaceFirst(SearchResultHelper.EMPTY);
+        this.score = computeScore();
     }
 
     public String getSortTitle() {
-        return SearchResultHelper.NON_FILING_PATTERN.matcher(this.getDedupTitle()).replaceFirst(
-                SearchResultHelper.EMPTY);
+        return this.sortTitle;
     }
 
     public String getDedupTitle() {
-        return this.contentResult.getTitle().toLowerCase().replaceAll("\\W", SearchResultHelper.EMPTY);
+        return this.dedupTitle;
     }
 
-    public void setQueryTermPattern(String query) {
-        this.queryTermPattern = Pattern.compile(SearchResultHelper.regexifyQuery(query), Pattern.CASE_INSENSITIVE);
+    public void setQueryTermPattern(Pattern queryTermPattern) {
+        this.queryTermPattern = queryTermPattern;
     }
 
     /**
@@ -121,13 +131,13 @@ public class ContentResultSearchResult implements SearchResult, SAXableSearchRes
     }
 
     public int compareTo(SearchResult o) {
-        int scoreCmp = o.getScore() - this.getScore();
-        return (scoreCmp != 0 ? scoreCmp : this.getSortTitle().compareTo(o.getSortTitle()));
+        int scoreCmp = o.getScore() - this.score;
+        return (scoreCmp != 0 ? scoreCmp : this.sortTitle.compareTo(o.getSortTitle()));
     }
 
     @Override
     public int hashCode() {
-        return this.getDedupTitle().hashCode();
+        return this.dedupTitle.hashCode();
     }
 
     @Override
@@ -136,7 +146,11 @@ public class ContentResultSearchResult implements SearchResult, SAXableSearchRes
             return false;
         }
         ContentResultSearchResult scmr = (ContentResultSearchResult) o;
-        return scmr.getDedupTitle().equals(this.getDedupTitle());
+        return scmr.dedupTitle.equals(this.dedupTitle);
+    }
+    
+    public int getScore() {
+        return this.score;
     }
 
     /**
@@ -155,7 +169,7 @@ public class ContentResultSearchResult implements SearchResult, SAXableSearchRes
      *  1
      * </pre>
      */
-    public int getScore() {
+    private int computeScore() {
         int score;
         double weight = computeWeight(ENGINEID_PATTERN.matcher(this.contentResult.getId()).replaceFirst(
                 SearchResultHelper.EMPTY));

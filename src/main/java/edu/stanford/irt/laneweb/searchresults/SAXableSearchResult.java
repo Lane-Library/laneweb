@@ -1,9 +1,15 @@
 package edu.stanford.irt.laneweb.searchresults;
 
-import org.xml.sax.ContentHandler;
-import org.xml.sax.SAXException;
+import org.apache.excalibur.xml.sax.XMLizable;
 
-public interface SAXableSearchResult {
+/**
+ * 
+ * @author ryanmax
+ * 
+ * $Id$
+ *
+ */
+public interface SAXableSearchResult extends XMLizable {
 
     public static final String RESULT = "result";
 
@@ -68,11 +74,5 @@ public interface SAXableSearchResult {
     public static final String PAGES = "pub-pages";
 
     public static final String NAMESPACE = "http://lane.stanford.edu/search-results/1.0";
-
-    /**
-     * @param handler
-     *            the handler that receives the events.
-     * @throws SAXException
-     */
-    void toSAX(ContentHandler handler) throws SAXException;
+    
 }
