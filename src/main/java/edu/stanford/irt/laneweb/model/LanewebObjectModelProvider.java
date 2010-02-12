@@ -82,8 +82,28 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         model.put("version", context.getAttribute("laneweb.context.version"));
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
             String name = (String) params.nextElement();
-            if ("e".equals(name) || "r".equals(name)) {
-                model.put(name, request.getParameterValues(name));
+            if ("q".equals(name)) {
+                String query = request.getParameter(name);
+                model.put("query", query);
+                try {
+                    model.put("url-encoded-query", URLEncoder.encode(query, "UTF-8"));
+                } catch (UnsupportedEncodingException e) {
+                    throw new RuntimeException(e);
+                }
+            } else if ("t".equals(name)) {
+                model.put("type", request.getParameter(name));
+            } else if ("s".equals(name)) {
+                model.put("subset", request.getParameter(name));
+            } else if ("a".equals(name)) {
+                model.put("alpha", request.getParameter(name).substring(0,1));
+            } else if ("f".equals(name)) {
+                model.put("facet", request.getParameter(name));
+            } else if ("l".equals(name)) {
+                model.put("limit", request.getParameter(name));
+            } else if ("r".equals(name)) {
+                model.put("resources", request.getParameterValues(name));
+            } else if ("e".equals(name)) {
+                model.put("engines", request.getParameterValues(name));
             } else {
                 model.put(name, request.getParameter(name));
             }
@@ -96,13 +116,6 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         model.put("remote-host", request.getRemoteHost());
         if (request.getHeader("referer") != null) {
             model.put("referer", request.getHeader("referer"));
-        }
-        String query = request.getParameter("q");
-        if (null != query) {
-            try {
-                model.put("url-encoded-query", URLEncoder.encode(query, "UTF-8"));
-            } catch (UnsupportedEncodingException e) {
-            }
         }
         Cookie[] cookies = request.getCookies();
         if (null != cookies) {

@@ -7,7 +7,6 @@ import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +45,7 @@ public class LanewebObjectModelProviderTest {
 
     private UserDao userDao;
     
+    @SuppressWarnings("unchecked")
     private Enumeration params;
 
     @SuppressWarnings("unchecked")
@@ -82,7 +82,6 @@ public class LanewebObjectModelProviderTest {
         expect(this.request.getRequestURI()).andReturn("/index.html");
         expect(this.request.getRemoteHost()).andReturn("127.0.0.1");
         expect(this.request.getHeader("referer")).andReturn(null);
-        expect(this.request.getParameter("q")).andReturn(null);
         expect(this.request.getCookies()).andReturn(null);
         expect(this.templateChooser.chooseTemplate(this.request)).andReturn("template");
         replayMocks();

@@ -95,7 +95,7 @@
             </map:match>
             <map:match pattern="radiology.html" type="wildcard">
                 <map:redirect-to
-                    uri="http://www.guideline.gov/search/searchresults.aspx?Type=3&amp;num=20&amp;txtSearch=${q}+AND+%22american+college+of+radiology%22"
+                    uri="http://www.guideline.gov/search/searchresults.aspx?Type=3&amp;num=20&amp;txtSearch=${query}+AND+%22american+college+of+radiology%22"
                 />
             </map:match>
             <map:match pattern="surgery-cardiothoracic.html" type="wildcard">

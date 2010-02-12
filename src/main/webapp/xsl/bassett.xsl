@@ -24,7 +24,7 @@
 <xsl:variable name="query-string">
     <xsl:if test="$q != ''">q=<xsl:value-of select="$q"/></xsl:if>
     <xsl:if test="$q != '' and $region != ''"><xsl:text>&amp;</xsl:text></xsl:if>
-    <xsl:if test="$region != ''">r=<xsl:value-of select="$region"/></xsl:if>
+    <xsl:if test="$region != ''">region=<xsl:value-of select="$region"/></xsl:if>
     <xsl:if test="$type != ''">&amp;t=<xsl:value-of select="$type"/></xsl:if>
 </xsl:variable>
 

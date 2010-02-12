@@ -9,16 +9,16 @@
                 value="${remote-host}/${request-uri}/${query-string}"/>
             <map:match pattern="search" type="wildcard">
                 <map:generate type="er-search">
-                    <map:parameter name="query" value="${q}"/>
-                    <map:parameter name="subset" value="${s}"/>
-                    <map:parameter name="type" value="${t}"/>
+                    <map:parameter name="query" value="${query}"/>
+                    <map:parameter name="subset" value="${subset}"/>
+                    <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search/type/*" type="wildcard">
                 <map:generate type="er-search">
-                    <map:parameter name="query" value="${q}"/>
-                    <map:parameter name="subset" value="${s}"/>
+                    <map:parameter name="query" value="${query}"/>
+                    <map:parameter name="subset" value="${subset}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
@@ -26,76 +26,76 @@
             <map:match pattern="search/type/*/*" type="wildcard">
                 <map:generate type="er-search">
                     <map:parameter name="query" value="{2}"/>
-                    <map:parameter name="subset" value="${s}"/>
+                    <map:parameter name="subset" value="${subset}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="histdb" type="wildcard">
                 <map:generate type="history-search">
-                    <map:parameter name="query" value="${q}"/>
-                    <map:parameter name="subset" value="${s}"/>
-                    <map:parameter name="type" value="${t}"/>
+                    <map:parameter name="query" value="${query}"/>
+                    <map:parameter name="subset" value="${subset}"/>
+                    <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="history-search" type="wildcard">
                 <map:generate type="history-search">
-                    <map:parameter name="query" value="${q}"/>
-                    <map:parameter name="subset" value="${s}"/>
-                    <map:parameter name="type" value="${t}"/>
+                    <map:parameter name="query" value="${query}"/>
+                    <map:parameter name="subset" value="${subset}"/>
+                    <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="count" type="wildcard">
                 <map:generate type="eresources-count">
-                    <map:parameter name="query" value="${q}"/>
+                    <map:parameter name="query" value="${query}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="history-count" type="wildcard">
                 <map:generate type="history-count">
-                    <map:parameter name="query" value="${q}"/>
+                    <map:parameter name="query" value="${query}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="extensions-suggest" type="wildcard">
                 <map:read type="extensions-suggest">
-                    <map:parameter name="query" value="${q}"/>
+                    <map:parameter name="query" value="${query}"/>
                 </map:read>
             </map:match>
             <map:match pattern="browse/type/*" type="wildcard">
                 <map:generate type="er-browse">
-                    <map:parameter name="alpha" value="${a}"/>
-                    <map:parameter name="mesh" value="${m}"/>
-                    <map:parameter name="subset" value="${s}"/>
+                    <map:parameter name="alpha" value="${alpha}"/>
+                    <map:parameter name="mesh" value="${mesh}"/>
+                    <map:parameter name="subset" value="${subset}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="browse/subset/*" type="wildcard">
                 <map:generate type="er-browse">
-                    <map:parameter name="alpha" value="${a}"/>
-                    <map:parameter name="mesh" value="${m}"/>
+                    <map:parameter name="alpha" value="${alpha}"/>
+                    <map:parameter name="mesh" value="${mesh}"/>
                     <map:parameter name="subset" value="{1}"/>
-                    <map:parameter name="type" value="${t}"/>
+                    <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="mesh/type/*" type="wildcard">
                 <map:generate type="er-mesh">
-                    <map:parameter name="alpha" value="${a}"/>
-                    <map:parameter name="mesh" value="${m}"/>
-                    <map:parameter name="subset" value="${s}"/>
+                    <map:parameter name="alpha" value="${alpha}"/>
+                    <map:parameter name="mesh" value="${mesh}"/>
+                    <map:parameter name="subset" value="${subset}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="core/type/*" type="wildcard">
                 <map:generate type="er-core">
-                    <map:parameter name="alpha" value="${a}"/>
-                    <map:parameter name="mesh" value="${m}"/>
-                    <map:parameter name="subset" value="${s}"/>
+                    <map:parameter name="alpha" value="${alpha}"/>
+                    <map:parameter name="mesh" value="${mesh}"/>
+                    <map:parameter name="subset" value="${subset}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
