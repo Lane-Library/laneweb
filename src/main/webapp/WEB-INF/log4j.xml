@@ -51,15 +51,15 @@
         <appender-ref ref="headers"/>
     </category>
     
-    <!--<root>
+    <root>
         <priority value="ERROR"/>
         <appender-ref ref="LOG"/>
-    </root>-->
+    </root>
     
-    <root>
+    <!--<root>
         <priority value="INFO"/>
         <appender-ref ref="console"/>
-    </root>
+    </root>-->
     
 </log4j:configuration>
 
