@@ -51,7 +51,7 @@
                 <map:match pattern="search/merged/html" type="wildcard">
                     <map:generate type="merged-search">
                         <map:parameter name="query" value="${query}"/>
-                        <map:parameter name="t" value="20000"/>
+                        <map:parameter name="timeout" value="20000"/>
                     </map:generate>
                     <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
@@ -120,7 +120,7 @@
                         <map:part src="cocoon:/cache/search/templates/xml"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/search-facet-counts.xsl">
-                        <map:parameter name="f" value="${facets}"/>
+                        <map:parameter name="facets" value="${facets}"/>
                     </map:transform>
                     <map:serialize type="text"/>
                 </map:match>

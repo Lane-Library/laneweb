@@ -21,7 +21,7 @@ public class FormRedirectAction implements Action {
 
     private static final String FORM_REDIRECT_KEY = "form-redirect-key";
 
-    private static final String Q = "q";
+    private static final String QUERY = "query";
 
     private static final String REPLACE = "\\{search-terms\\}";
 
@@ -31,9 +31,9 @@ public class FormRedirectAction implements Action {
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String src,
             final Parameters params) {
         Map<String, String> result = new HashMap<String, String>();
-        String q = params.getParameter(Q, null);
+        String query = params.getParameter(QUERY, null);
         String source = params.getParameter(SOURCE, null);
-        if ((null == q) || (q.length() == 0)) {
+        if ((null == query) || (query.length() == 0)) {
             throw new IllegalArgumentException("null or empty query");
         }
         if ((null == source) || (source.length() == 0) || (source.indexOf("http") != 0)) {
@@ -41,7 +41,7 @@ public class FormRedirectAction implements Action {
         }
         String url = null;
         try {
-            url = source.replaceAll(REPLACE, URLEncoder.encode(q, "UTF-8"));
+            url = source.replaceAll(REPLACE, URLEncoder.encode(query, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }

@@ -35,12 +35,12 @@
                 <map:match pattern="search/ranked/xml" type="wildcard">
                     <map:generate type="search-engine">
                         <map:parameter name="query" value="${query}"/>
-                        <map:parameter name="s" value="true"/>
-                        <map:parameter name="t" value="20000"/>
+                        <map:parameter name="synchronous" value="true"/>
+                        <map:parameter name="timeout" value="20000"/>
                     </map:generate>
                     <map:transform type="saxon" src="context://xsl/search-content-ranked.xsl">
-                        <map:parameter name="q" value="${query}"/>
-                        <map:parameter name="l" value="10"/>
+                        <map:parameter name="query" value="${query}"/>
+                        <map:parameter name="limit" value="10"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -101,7 +101,7 @@
                         <map:part src="cocoon:/cache/search/templates/xml"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="context://xsl/search-facet-counts.xsl">
-                        <map:parameter name="f" value="${facets}"/>
+                        <map:parameter name="facets" value="${facets}"/>
                     </map:transform>
                     <map:serialize type="text"/>
                 </map:match>

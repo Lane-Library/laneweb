@@ -31,8 +31,8 @@ public class TransientStore implements Store {
     }
 
     public Enumeration<Object> keys() {
-        Vector<Object> v = new Vector<Object>(this.map.keySet());
-        return v.elements();
+        Vector<Object> vector = new Vector<Object>(this.map.keySet());
+        return vector.elements();
     }
 
     public void remove(final Object key) {

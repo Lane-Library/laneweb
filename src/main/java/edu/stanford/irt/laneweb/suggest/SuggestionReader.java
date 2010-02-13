@@ -39,26 +39,26 @@ public class SuggestionReader implements Reader {
 
     public void generate() throws IOException {
         OutputStream out = this.outputStream;
-        String q = this.query;
-        String l = this.limit;
-        SuggestionComparator comparator = new SuggestionComparator(q);
+        String query = this.query;
+        String limit = this.limit;
+        SuggestionComparator comparator = new SuggestionComparator(query);
         TreeSet<String> suggestionSet = new TreeSet<String>(comparator);
         Collection<? extends Suggestion> suggestions = new ArrayList<Suggestion>();
-        if (l.matches("(ej|book|database|software|cc|video|lanesite|bassett)")) {
-            suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(l, q);
-        } else if (l.matches("ej-mesh")) {
+        if (limit.matches("(ej|book|database|software|cc|video|lanesite|bassett)")) {
+            suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(limit, query);
+        } else if (limit.matches("ej-mesh")) {
             ArrayList<Suggestion> combo = new ArrayList<Suggestion>();
-            combo.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm("ej", q));
-            combo.addAll(this.meshSuggestionManager.getSuggestionsForTerm(q));
+            combo.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm("ej", query));
+            combo.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
             suggestions = combo;
-        } else if ("mesh".equalsIgnoreCase(l)) {
-            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(q);
-        } else if (l.matches("mesh-(d|i|di)")) {
-            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(l.replaceFirst("mesh-", ""), q);
-        } else if ("history".equalsIgnoreCase(l)) {
-            suggestions = this.historySuggestionManager.getSuggestionsForTerm(q);
+        } else if ("mesh".equalsIgnoreCase(limit)) {
+            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(query);
+        } else if (limit.matches("mesh-(d|i|di)")) {
+            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(limit.replaceFirst("mesh-", ""), query);
+        } else if ("history".equalsIgnoreCase(limit)) {
+            suggestions = this.historySuggestionManager.getSuggestionsForTerm(query);
         } else {
-            suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(q);
+            suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
         }
         for (Suggestion suggestion : suggestions) {
             suggestionSet.add(suggestion.getSuggestionTitle());
@@ -128,18 +128,18 @@ public class SuggestionReader implements Reader {
     }
 
     private String escapeQuotes(final String string) {
-        String s = string;
-        if ((s.indexOf('\'') > -1) || (s.indexOf('"') > -1)) {
+        String result = string;
+        if ((result.indexOf('\'') > -1) || (result.indexOf('"') > -1)) {
             StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < s.length(); i++) {
-                char c = s.charAt(i);
+            for (int i = 0; i < result.length(); i++) {
+                char c = result.charAt(i);
                 if ('"' == c) {
                     sb.append("\\");
                 }
                 sb.append(c);
             }
-            s = sb.toString();
+            result = sb.toString();
         }
-        return s;
+        return result;
     }
 }

@@ -66,7 +66,7 @@
             <map:match pattern="^http" type="regex-parameter">
                 <map:parameter name="parameter-name" value="source"/>
                 <map:act type="form-redirect">
-                    <map:parameter name="q" value="${query}"/>
+                    <map:parameter name="query" value="${query}"/>
                     <map:parameter name="source" value="${source}"/>
                     <map:redirect-to uri="{form-redirect-key}"/>
                 </map:act>
@@ -87,11 +87,11 @@
                     <map:parameter name="proxy-links" value="${proxy-links}"/>
                     <map:parameter name="sunetid" value="${sunetid}"/>
                     <map:parameter name="ipgroup" value="${ipgroup}"/>
-                    <map:parameter name="q" value="${query}"/>
+                    <map:parameter name="query" value="${query}"/>
                     <map:parameter name="template" value="${template}"/>
                     <map:parameter name="source" value="${source}"/>
                     <map:parameter name="search-tab" value="${searchTab}"/>
-                    <map:parameter name="mesh-term" value="${mesh}"/>
+                    <map:parameter name="mesh" value="${mesh}"/>
                     <map:parameter name="version" value="${version}"/>
                     <map:parameter name="referrer" value="${referer}"/>
                     <map:parameter name="name" value="${name}"/>
@@ -122,11 +122,11 @@
                     <map:parameter name="proxy-links" value="${proxy-links}"/>
                     <map:parameter name="sunetid" value="${sunetid}"/>
                     <map:parameter name="ipgroup" value="${ipgroup}"/>
-                    <map:parameter name="q" value="${query}"/>
+                    <map:parameter name="query" value="${query}"/>
                     <map:parameter name="template" value="${template}"/>
                     <map:parameter name="source" value="${source}"/>
                     <map:parameter name="search-tab" value="${searchTab}"/>
-                    <map:parameter name="mesh-term" value="${mesh}"/>
+                    <map:parameter name="mesh" value="${mesh}"/>
                     <map:parameter name="version" value="${version}"/>
                     <map:parameter name="referrer" value="${referer}"/>
                     <map:parameter name="name" value="${name}"/>

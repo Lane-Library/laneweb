@@ -24,11 +24,11 @@ public class ExtensionsSuggestReader implements Reader {
     private String query;
 
     public void generate() throws IOException {
-        String q = this.query;
-        SuggestionComparator comparator = new SuggestionComparator(q);
+        String query = this.query;
+        SuggestionComparator comparator = new SuggestionComparator(query);
         TreeSet<String> suggestionSet = new TreeSet<String>(comparator);
         Collection<? extends Suggestion> suggestions = new ArrayList<Suggestion>();
-        suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(q);
+        suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
         for (Suggestion suggestion : suggestions) {
             suggestionSet.add(suggestion.getSuggestionTitle());
         }
@@ -66,19 +66,19 @@ public class ExtensionsSuggestReader implements Reader {
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters params) {
-        String q = params.getParameter("query", null);
+        String query = params.getParameter("query", null);
         // remove quotes and apostrophes
-        if ((q.indexOf('\'') > -1) || (q.indexOf('"') > -1)) {
+        if ((query.indexOf('\'') > -1) || (query.indexOf('"') > -1)) {
             StringBuffer sb = new StringBuffer();
-            for (int i = 0; i < q.length(); i++) {
-                char c = q.charAt(i);
+            for (int i = 0; i < query.length(); i++) {
+                char c = query.charAt(i);
                 if (('\'' != c) && ('"' != c)) {
                     sb.append(c);
                 }
             }
-            q = sb.toString();
+            query = sb.toString();
         }
-        this.query = q;
+        this.query = query;
     }
 
     public boolean shouldSetContentLength() {

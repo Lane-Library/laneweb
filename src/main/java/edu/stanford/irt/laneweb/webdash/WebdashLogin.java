@@ -98,9 +98,9 @@ public class WebdashLogin {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("UTF-8 not supported");
         }
-        byte[] b = this.mac.doFinal(utf8);
+        byte[] bytes = this.mac.doFinal(utf8);
         StringBuffer sb = new StringBuffer();
-        for (byte element : b) {
+        for (byte element : bytes) {
             sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
         }
         return sb.toString();

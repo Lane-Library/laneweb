@@ -11,17 +11,17 @@
         fetch counts/status for all unique resources AND engines
         return per facet count in JSON format
     -->
-    <xsl:param name="f"/>
+    <xsl:param name="facets"/>
     
-    <xsl:variable name="facets">
+    <xsl:variable name="tokenized-facets">
         <xsl:choose>
-            <xsl:when test="$f">
-                <xsl:value-of select="tokenize($f,',')"/>
+            <xsl:when test="$facets">
+                <xsl:value-of select="tokenize($facets,',')"/>
             </xsl:when>
         </xsl:choose>
     </xsl:variable>
     
-    <xsl:variable name="engine-ids" select="//st:template[contains($facets,@id)]/st:engine/@idref"/>
+    <xsl:variable name="engine-ids" select="//st:template[contains($tokenized-facets,@id)]/st:engine/@idref"/>
     
     <xsl:variable name="engines-string">
         <xsl:for-each select="distinct-values($engine-ids)">
@@ -32,7 +32,7 @@
         </xsl:for-each>
     </xsl:variable>
     
-    <xsl:variable name="resource-ids" select="//st:template[contains($facets,@id)]/st:resource/@idref"/>
+    <xsl:variable name="resource-ids" select="//st:template[contains($tokenized-facets,@id)]/st:resource/@idref"/>
     
     <xsl:variable name="resources-string">
         <xsl:for-each select="distinct-values($resource-ids)">
@@ -67,7 +67,7 @@
         "status": "<xsl:value-of select="$search-node/search/@status"/>",
         "facets": 
         {
-            <xsl:apply-templates select="//st:template[contains($facets,@id)]"/>
+            <xsl:apply-templates select="//st:template[contains($tokenized-facets,@id)]"/>
         }
         }
         }

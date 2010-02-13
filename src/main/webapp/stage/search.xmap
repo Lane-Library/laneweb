@@ -30,11 +30,11 @@
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                        <map:parameter name="q" value="${query}"/>
+                        <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
                     <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${query}"/>
+                        <map:parameter name="query" value="${query}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -51,11 +51,11 @@
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                        <map:parameter name="q" value="${query}"/>
+                        <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
                     <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${query}"/>
+                        <map:parameter name="query" value="${query}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -69,11 +69,11 @@
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                        <map:parameter name="q" value="${query}"/>
+                        <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
                     <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                        <map:parameter name="query-string" value="${query}"/>
+                        <map:parameter name="query" value="${query}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -88,7 +88,7 @@
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                        <map:parameter name="q" value="${query}"/>
+                        <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
@@ -106,7 +106,7 @@
                         src="cocoon:/cached/search/specialty/{1}.html"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="context://xsl/search-specialty.xsl">
-                    <map:parameter name="q" value="${query}"/>
+                    <map:parameter name="query" value="${query}"/>
                     <map:parameter name="request-uri" value="${request-uri}"/>
                     <map:parameter name="source" value="${source}"/>
                 </map:transform>
@@ -118,7 +118,7 @@
                 <map:generate src="cocoon:/cached/search/{1}/{2}.html" type="file"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                    <map:parameter name="q" value="${query}"/>
+                    <map:parameter name="query" value="${query}"/>
                     <map:parameter name="source" value="${source}"/>
                 </map:transform>
                 <map:transform type="saxon" src="context://xsl/search-post.xsl"/>

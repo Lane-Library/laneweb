@@ -8,12 +8,12 @@
     version="2.0">
     
     <xsl:param name="source"/>
-    <xsl:param name="q"/>
+    <xsl:param name="query"/>
     
     <xsl:variable name="search-terms">
         <xsl:choose>
-            <xsl:when test="$q">
-                <xsl:value-of select="$q"/>
+            <xsl:when test="$query">
+                <xsl:value-of select="$query"/>
             </xsl:when>
         </xsl:choose>
     </xsl:variable>

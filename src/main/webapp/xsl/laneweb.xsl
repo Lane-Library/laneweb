@@ -18,7 +18,7 @@
     <xsl:param name="query-string"/>
 
     <!-- the search query -->
-    <xsl:param name="q"/>
+    <xsl:param name="query"/>
 
     <xsl:param name="source"/>
 
@@ -27,7 +27,7 @@
     <xsl:param name="sunetid"/>
 
     <!-- a MeSH term -->
-    <xsl:param name="mesh-term"/>
+    <xsl:param name="mesh"/>
 
     <!-- LPCH and SHC don't require authentication for proxy server -->
     <xsl:param name="ipgroup"/>
@@ -72,21 +72,21 @@
 
     <xsl:variable name="search-terms">
         <xsl:choose>
-            <xsl:when test="$q">
-                <xsl:value-of select="$q"/>
+            <xsl:when test="$query">
+                <xsl:value-of select="$query"/>
             </xsl:when>
         </xsl:choose>
     </xsl:variable>
 
     <xsl:variable name="regex-search-terms">
-        <xsl:if test="$q">
-            <xsl:value-of select="replace($q,'(\\|\$)','\\$1')"/>
+        <xsl:if test="$query">
+            <xsl:value-of select="replace($query,'(\\|\$)','\\$1')"/>
         </xsl:if>
     </xsl:variable>
     
     <xsl:variable name="uri-encoded-search-terms">
-        <xsl:if test="$q">
-            <xsl:value-of select="encode-for-uri($q)"/>
+        <xsl:if test="$query">
+            <xsl:value-of select="encode-for-uri($query)"/>
         </xsl:if>
     </xsl:variable>
     
@@ -167,10 +167,10 @@
                 <xsl:call-template name="breadcrumb"/>
             </xsl:when>
             <xsl:when test=".='search-terms'">
-                <xsl:value-of select="$q"/>
+                <xsl:value-of select="$query"/>
             </xsl:when>
             <xsl:when test=".='mesh'">
-                <xsl:value-of select="$mesh-term"/>
+                <xsl:value-of select="$mesh"/>
             </xsl:when>
             <xsl:when test=".='current-year'">
                 <xsl:value-of select="format-dateTime(current-dateTime(),'[Y,4]')"/>

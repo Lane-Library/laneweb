@@ -22,9 +22,9 @@ public class BassettEresourcesGenerator implements Generator {
 
     private static final String BASSETT_NUMBER = "bn";
 
-    private static final String QUERY = "q";
+    private static final String QUERY = "query";
 
-    private static final String REGION = "r";
+    private static final String REGION = "region";
 
     private String bassettNumber;
 

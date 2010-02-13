@@ -141,11 +141,11 @@ public class ContentResultSearchResult implements SearchResult, SAXableSearchRes
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof ContentResultSearchResult)) {
+    public boolean equals(Object other) {
+        if (!(other instanceof ContentResultSearchResult)) {
             return false;
         }
-        ContentResultSearchResult scmr = (ContentResultSearchResult) o;
+        ContentResultSearchResult scmr = (ContentResultSearchResult) other;
         return scmr.dedupTitle.equals(this.dedupTitle);
     }
     

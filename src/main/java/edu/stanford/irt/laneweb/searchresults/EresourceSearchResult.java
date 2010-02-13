@@ -81,11 +81,11 @@ public class EresourceSearchResult implements SearchResult, SAXableSearchResult 
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof EresourceSearchResult)) {
+    public boolean equals(Object other) {
+        if (!(other instanceof EresourceSearchResult)) {
             return false;
         }
-        EresourceSearchResult eres = (EresourceSearchResult) o;
+        EresourceSearchResult eres = (EresourceSearchResult) other;
         return eres.eresource.getId() == this.eresource.getId();
     }
 

@@ -38,12 +38,12 @@
             <map:match pattern="eresources" type="wildcard">
                 <map:generate type="er-search">
                     <map:parameter name="query" value="${query}"/>
-                    <map:parameter name="type" value="${source}"/>
+                    <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
-                    <map:parameter name="q" value="${query}"/>
-                    <map:parameter name="t" value="${source}"/>
-                    <map:parameter name="type" value="search"/>
+                    <map:parameter name="query" value="${query}"/>
+                    <map:parameter name="type" value="${type}"/>
+                    <map:parameter name="mode" value="search"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -53,7 +53,7 @@
                     <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
-                    <map:parameter name="a" value="${alpha}"/>
+                    <map:parameter name="alpha" value="${alpha}"/>
                     <map:parameter name="type" value="${type}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
@@ -64,8 +64,8 @@
                     <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
-                    <map:parameter name="mesh-term" value="${mesh}"/>
-                    <map:parameter name="type" value="mesh-${type}"/>
+                    <map:parameter name="mesh" value="${mesh}"/>
+                    <map:parameter name="type" value="${type}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>

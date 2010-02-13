@@ -1,12 +1,9 @@
 package edu.stanford.irt.laneweb.httpclient;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Map;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.excalibur.source.Source;
-import org.apache.excalibur.source.SourceException;
 import org.apache.excalibur.source.SourceFactory;
 
 /**
@@ -20,20 +17,13 @@ public class HTTPClientSourceFactory implements SourceFactory {
      * Creates a {@link HTTPClientSource} instance.
      */
     @SuppressWarnings("unchecked")
-    public Source getSource(final String uri, final Map sourceParams) throws MalformedURLException, IOException {
-        try {
-            final HTTPClientSource source = new HTTPClientSource(uri, sourceParams, this.httpClient);
-            return source;
-        } catch (final MalformedURLException e) {
-            throw e;
-        } catch (final IOException e) {
-            throw e;
-        } catch (final Exception e) {
-            final StringBuffer message = new StringBuffer();
-            message.append("Exception thrown while creating ");
-            message.append(HTTPClientSource.class.getName());
-            throw new SourceException(message.toString(), e);
-        }
+    public Source getSource(final String uri, final Map sourceParams) {
+            try {
+                return new HTTPClientSource(uri, sourceParams, this.httpClient);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
     }
 
     /**

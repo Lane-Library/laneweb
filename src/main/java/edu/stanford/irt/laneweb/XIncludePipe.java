@@ -429,9 +429,9 @@ class XIncludePipe extends AbstractXMLPipe {
                     "Processing XInclude element: href=" + href + ", parse=" + parse + ", xpointer=" + xpointer);
         }
         // Default for @parse is "xml"
-        String p = parse == null ? "xml" : parse;
+        String localParse = parse == null ? "xml" : parse;
         Source url = null;
-        String h = href;
+        String localHref = href;
         try {
             // An empty or absent href is a reference to the current
             // document -- this can be different than the current base
@@ -440,20 +440,20 @@ class XIncludePipe extends AbstractXMLPipe {
                     throw new SAXException(
                             "XIncludeTransformer: encountered empty href (= href pointing to the current document) but the location of the current document is unknown.");
                 }
-                h = this.href;
+                localHref = this.href;
             }
-            url = this.xmlBaseSupport.makeAbsolute(h);
+            url = this.xmlBaseSupport.makeAbsolute(localHref);
             if (getLogger().isDebugEnabled()) {
                 getLogger().debug("URL: " + url.getURI() + "\nXPointer: " + xpointer);
             }
             // add the source to the SourceValidity
             this.lanewebXIncludeTransformer.validity.addSource(url);
-            if ("text".equals(p)) {
+            if ("text".equals(localParse)) {
                 parseText(xpointer, url);
-            } else if ("xml".equals(p)) {
+            } else if ("xml".equals(localParse)) {
                 parseXML(xpointer, url);
             } else {
-                throw new SAXException("Found 'parse' attribute with unknown value " + p + " at " + getLocation());
+                throw new SAXException("Found 'parse' attribute with unknown value " + localParse + " at " + getLocation());
             }
         } catch (SourceException se) {
             throw SourceUtil.handle(se);

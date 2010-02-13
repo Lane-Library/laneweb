@@ -50,9 +50,9 @@ public class Ticket {
 
     private String getKeyedDigest(final String buffer) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         StringBuffer sb = new StringBuffer();
-        MessageDigest d = MessageDigest.getInstance("MD5");
-        byte[] b = d.digest(buffer.getBytes("UTF-8"));
-        for (byte element : b) {
+        MessageDigest digest = MessageDigest.getInstance("MD5");
+        byte[] bytes = digest.digest(buffer.getBytes("UTF-8"));
+        for (byte element : bytes) {
             sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
         }
         return sb.toString();

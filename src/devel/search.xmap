@@ -25,13 +25,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-facets.xsl">
                             <map:transform type="saxon" src="xsl/search-facets.xsl">
-                                <map:parameter name="q" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                                <map:parameter name="q" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -39,13 +39,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-post.xsl">
                             <map:transform type="saxon" src="xsl/search-post.xsl">
-                                <map:parameter name="query-string" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                                <map:parameter name="query-string" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -66,13 +66,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-facets.xsl">
                             <map:transform type="saxon" src="xsl/search-facets.xsl">
-                                <map:parameter name="q" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                                <map:parameter name="q" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -80,13 +80,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-post.xsl">
                             <map:transform type="saxon" src="xsl/search-post.xsl">
-                                <map:parameter name="query-string" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                                <map:parameter name="query-string" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -105,13 +105,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-facets.xsl">
                             <map:transform type="saxon" src="xsl/search-facets.xsl">
-                                <map:parameter name="q" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                                <map:parameter name="q" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -119,13 +119,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-post.xsl">
                             <map:transform type="saxon" src="xsl/search-post.xsl">
-                                <map:parameter name="query-string" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                                <map:parameter name="query-string" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -144,13 +144,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-facets.xsl">
                             <map:transform type="saxon" src="xsl/search-facets.xsl">
-                                <map:parameter name="q" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                                <map:parameter name="q" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -158,13 +158,13 @@
                     <map:select type="resource-exists">
                         <map:when test="xsl/search-post.xsl">
                             <map:transform type="saxon" src="xsl/search-post.xsl">
-                                <map:parameter name="query-string" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:when>
                         <map:otherwise>
                             <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                                <map:parameter name="query-string" value="${query}"/>
+                                <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
                         </map:otherwise>
@@ -185,14 +185,14 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-specialty.xsl">
                         <map:transform type="saxon" src="xsl/search-specialty.xsl">
-                            <map:parameter name="q" value="${query}"/>
+                            <map:parameter name="query" value="${query}"/>
                             <map:parameter name="request-uri" value="${request-uri}"/>
                             <map:parameter name="source" value="${source}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/search-specialty.xsl">
-                            <map:parameter name="q" value="${query}"/>
+                            <map:parameter name="query" value="${query}"/>
                             <map:parameter name="request-uri" value="${request-uri}"/>
                             <map:parameter name="source" value="${source}"/>
                         </map:transform>
@@ -208,13 +208,13 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-facets.xsl">
                         <map:transform type="saxon" src="xsl/search-facets.xsl">
-                            <map:parameter name="q" value="${query}"/>
+                            <map:parameter name="query" value="${query}"/>
                             <map:parameter name="source" value="${source}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/search-facets.xsl">
-                            <map:parameter name="q" value="${query}"/>
+                            <map:parameter name="query" value="${query}"/>
                             <map:parameter name="source" value="${source}"/>
                         </map:transform>
                     </map:otherwise>
@@ -222,12 +222,12 @@
                 <map:select type="resource-exists">
                     <map:when test="xsl/search-post.xsl">
                         <map:transform type="saxon" src="xsl/search-post.xsl">
-                            <map:parameter name="query-string" value="${query}"/>
+                            <map:parameter name="query" value="${query}"/>
                         </map:transform>
                     </map:when>
                     <map:otherwise>
                         <map:transform type="saxon" src="context://xsl/search-post.xsl">
-                            <map:parameter name="query-string" value="${query}"/>
+                            <map:parameter name="query" value="${query}"/>
                         </map:transform>
                     </map:otherwise>
                 </map:select>

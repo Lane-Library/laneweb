@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:h="http://www.w3.org/1999/xhtml" exclude-result-prefixes="h" version="2.0">
     
-    <xsl:param name="query-string"/>
+    <xsl:param name="query"/>
 
     <xsl:variable name="count">
         <xsl:value-of select="count(//h:dd)"/>
@@ -28,7 +28,7 @@
     
     <xsl:template match="h:link[@type='application/rss+xml']/@href">
        <xsl:attribute name="href">
-              <xsl:value-of select="concat(.,replace($query-string,'source=all',''))"/>
+              <xsl:value-of select="concat(.,replace($query,'source=all',''))"/>
        </xsl:attribute>
     </xsl:template>
     

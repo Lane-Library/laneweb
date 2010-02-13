@@ -29,7 +29,7 @@ public class FormRedirectActionTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testAct() {
-        expect(this.params.getParameter("q", null)).andReturn("cardiology");
+        expect(this.params.getParameter("query", null)).andReturn("cardiology");
         expect(this.params.getParameter("source", null)).andReturn(
                 "http://lane.stanford.edu/search.html?q={search-terms}&source=all");
         replay(this.params);
@@ -41,7 +41,7 @@ public class FormRedirectActionTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testActBackslash() throws UnsupportedEncodingException {
-        expect(this.params.getParameter("q", null)).andReturn("\\cardiology");
+        expect(this.params.getParameter("query", null)).andReturn("\\cardiology");
         expect(this.params.getParameter("source", null)).andReturn(
                 "http://lane.stanford.edu/search.html?q={search-terms}&source=all");
         replay(this.params);
@@ -54,7 +54,7 @@ public class FormRedirectActionTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testActRegexChars() throws UnsupportedEncodingException {
-        expect(this.params.getParameter("q", null)).andReturn("$2cardiology");
+        expect(this.params.getParameter("query", null)).andReturn("$2cardiology");
         expect(this.params.getParameter("source", null)).andReturn(
                 "http://lane.stanford.edu/search.html?q={search-terms}&source=all");
         replay(this.params);

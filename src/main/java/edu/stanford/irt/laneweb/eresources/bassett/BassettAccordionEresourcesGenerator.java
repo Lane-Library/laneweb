@@ -17,7 +17,7 @@ import org.xml.sax.SAXException;
  */
 public class BassettAccordionEresourcesGenerator implements Generator {
 
-    private static final String QUERY = "q";
+    private static final String QUERY = "query";
 
     private BassettCollectionManager collectionManager;
 

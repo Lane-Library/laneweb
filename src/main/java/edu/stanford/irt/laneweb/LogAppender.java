@@ -17,13 +17,13 @@ public class LogAppender extends RollingFileAppender {
     public synchronized void doAppend(final LoggingEvent event) {
         ThrowableInformation ti = event.getThrowableInformation();
         if (null != ti) {
-            Throwable t = ti.getThrowable();
-            while (t.getCause() != null) {
-                t = t.getCause();
+            Throwable throwable = ti.getThrowable();
+            while (throwable.getCause() != null) {
+                throwable = throwable.getCause();
             }
-            if (t instanceof FileNotFoundException) {
+            if (throwable instanceof FileNotFoundException) {
                 LoggingEvent newEvent =
-                        new LoggingEvent(event.fqnOfCategoryClass, event.getLogger(), event.getLevel(), t.toString(),
+                        new LoggingEvent(event.fqnOfCategoryClass, event.getLogger(), event.getLevel(), throwable.toString(),
                                 null);
                 super.doAppend(newEvent);
                 return;

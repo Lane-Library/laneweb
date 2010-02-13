@@ -41,7 +41,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         super.setup(resolver, objectModel, src, par);
-        String[] resources = getObject("r", String[].class, EMPTY_RESOURCES);
+        String[] resources = getObject("resources", String[].class, EMPTY_RESOURCES);
         this.resources = new HashSet(resources.length);
         this.resources.addAll(Arrays.asList(resources));
     }

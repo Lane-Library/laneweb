@@ -19,11 +19,11 @@ public class SearchGenerator extends AbstractSearchGenerator {
 
     private long defaultTimeout;
 
-    private String s;
+    private String synchronous;
 
-    private String t;
+    private String timeout;
 
-    private String w;
+    private String wait;
 
     @Override
     public Result doSearch() {
@@ -34,24 +34,24 @@ public class SearchGenerator extends AbstractSearchGenerator {
         Result result = null;
         if ((this.query != null) && (this.query.length() > 0)) {
             long time = this.defaultTimeout;
-            if (null != this.t) {
+            if (null != this.timeout) {
                 try {
-                    time = Long.parseLong(this.t);
+                    time = Long.parseLong(this.timeout);
                 } catch (NumberFormatException nfe) {
                     ;
                 }
             }
             long timeout = time;
             boolean synchronous = false;
-            if ((this.s != null) && (this.s.length() > 0)) {
-                synchronous = Boolean.parseBoolean(this.s);
+            if ((this.synchronous != null) && (this.synchronous.length() > 0)) {
+                synchronous = Boolean.parseBoolean(this.synchronous);
             }
             final SimpleQuery query = new SimpleQuery(this.query);
             result = this.metaSearchManager.search(query, timeout, engines, synchronous);
-            if (null != this.w) {
+            if (null != this.wait) {
                 long wait = 0;
                 try {
-                    wait = Long.parseLong(this.w);
+                    wait = Long.parseLong(this.wait);
                 } catch (NumberFormatException nfe) {
                     ;
                 }
@@ -87,14 +87,14 @@ public class SearchGenerator extends AbstractSearchGenerator {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         super.setup(resolver, objectModel, src, par);
-        this.t = getString("t");
-        if (null == this.t) {
-            this.t = par.getParameter("t", null);
+        this.timeout = getString("timeout");
+        if (null == this.timeout) {
+            this.timeout = par.getParameter("timeout", null);
         }
-        this.w = getString("w");
-        this.s = getString("s");
-        if (null == this.s) {
-            this.s = par.getParameter("s", null);
+        this.wait = getString("wait");
+        this.synchronous = getString("synchronous");
+        if (null == this.synchronous) {
+            this.synchronous = par.getParameter("synchronous", null);
         }
 
     }
