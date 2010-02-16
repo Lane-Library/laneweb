@@ -1,10 +1,14 @@
 package edu.stanford.irt.laneweb.servlet;
 
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.EasyMock.isA;
+import static org.easymock.classextension.EasyMock.createMock;
+import static org.easymock.classextension.EasyMock.replay;
+import static org.easymock.classextension.EasyMock.verify;
 
 import javax.naming.Context;
 import javax.naming.NamingException;
-import javax.naming.spi.InitialContextFactory;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -14,8 +18,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.model.MockInitialContextFactory;
-import edu.stanford.irt.laneweb.servlet.LanewebContextListener;
 
 public class LanewebContextListenerTest {
 

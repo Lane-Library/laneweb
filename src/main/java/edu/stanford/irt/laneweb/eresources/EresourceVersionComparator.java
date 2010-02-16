@@ -3,13 +3,13 @@
  */
 package edu.stanford.irt.laneweb.eresources;
 
-import edu.stanford.irt.eresources.Version;
-
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import edu.stanford.irt.eresources.Version;
 
 /**
  * @author ryanmax

@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Map;
 
-
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.Redirector;

@@ -81,15 +81,7 @@
             <bean class="org.springframework.ldap.core.LdapTemplate">
                 <constructor-arg>
                     <bean class="org.springframework.ldap.core.support.LdapContextSource">
-                        <property name="urls">
-                            <list>
-                                <value>ldap://ldap.stanford.edu/</value>
-                                <value>ldap://ldap1.stanford.edu/</value>
-                                <value>ldap://ldap2.stanford.edu/</value>
-                                <value>ldap://ldap3.stanford.edu/</value>
-                                <value>ldap://ldap4.stanford.edu/</value>
-                            </list>
-                        </property>
+                        <property name="url" value="ldap://ldap.stanford.edu/"/>
                         <property name="base" value="cn=people,dc=stanford,dc=edu"/>
                         <property name="authenticationStrategy">
                             <bean class="edu.stanford.irt.laneweb.user.GSSAPIAuthenticationStrategy"
@@ -109,11 +101,6 @@
                 <property name="jndiName" value="java:comp/env/ezproxy-key"/>
             </bean>
         </property>
-        <property name="cryptor" ref="edu.stanford.irt.laneweb.Cryptor"/>
-    </bean>
-
-    <bean id="edu.stanford.irt.laneweb.Cryptor" class="edu.stanford.irt.laneweb.Cryptor">
-        <property name="key" value="stanfordlanelibraryir"/>
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
@@ -210,11 +197,6 @@
 
     <bean name="org.apache.cocoon.acting.Action/loginAction"
         class="edu.stanford.irt.laneweb.LoginAction"/>
-
-    <bean name="org.apache.cocoon.acting.Action/persistentLoginAction"
-        class="edu.stanford.irt.laneweb.PersistentLoginAction">
-        <property name="cryptor" ref="edu.stanford.irt.laneweb.Cryptor"/>
-    </bean>
 
     <bean name="org.apache.cocoon.acting.Action/cmeRedirectAction"
         class="edu.stanford.irt.laneweb.cme.CMERedirectAction"/>

@@ -3,11 +3,6 @@
  */
 package edu.stanford.irt.laneweb.searchresults;
 
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.Version;
-import edu.stanford.irt.laneweb.eresources.EresourceVersionComparator;
-
 import java.util.Collection;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
@@ -16,6 +11,11 @@ import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
+
+import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.eresources.Link;
+import edu.stanford.irt.eresources.Version;
+import edu.stanford.irt.laneweb.eresources.EresourceVersionComparator;
 
 /**
  * @author ryanmax

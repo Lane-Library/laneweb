@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
+
 import edu.stanford.irt.eresources.Eresource;
 
 public class SearchEresourcesGenerator extends AbstractEresourcesGenerator {

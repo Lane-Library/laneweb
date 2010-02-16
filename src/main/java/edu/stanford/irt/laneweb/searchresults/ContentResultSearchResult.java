@@ -3,8 +3,6 @@
  */
 package edu.stanford.irt.laneweb.searchresults;
 
-import edu.stanford.irt.search.ContentResult;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +10,8 @@ import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
+
+import edu.stanford.irt.search.ContentResult;
 
 /**
  * @author ryanmax

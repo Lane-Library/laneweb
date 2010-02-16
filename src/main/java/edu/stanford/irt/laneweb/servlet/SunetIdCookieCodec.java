@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.servlet;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -13,13 +13,29 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
+import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.user.PersistentLoginToken;
 
-public class Cryptor {
+public class SunetIdCookieCodec {
+    
+    private static final String KEY = "stanfordlanelibraryir";
 
     private Cipher cipher;
 
     private SecretKey desKey;
+    
+    public SunetIdCookieCodec() {
+        try {
+            this.desKey = new SecretKeySpec(Base64.decodeBase64(KEY.getBytes("UTF-8")), "AES");
+            this.cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        } catch (UnsupportedEncodingException e) {
+            throw new IllegalStateException(e);
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException(e);
+        } catch (NoSuchPaddingException e) {
+            throw new IllegalStateException(e);
+        }
+    }
 
     public PersistentLoginToken createLoginToken(final String sunetId, final int userAgentHash) {
         long now = System.currentTimeMillis();
@@ -34,10 +50,11 @@ public class Cryptor {
         return token;
     }
 
-    public String decrypt(final String codedInput) {
+    private String decrypt(final String codedInput) {
         try {
             this.cipher.init(Cipher.DECRYPT_MODE, this.desKey);
-            byte[] cleartext = this.cipher.doFinal(Base64.decodeBase64(codedInput.getBytes("UTF-8")));
+            byte[] base = Base64.decodeBase64(codedInput.getBytes("UTF-8"));
+            byte[] cleartext = this.cipher.doFinal(base);
             return new String(cleartext, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException(e);
@@ -50,7 +67,7 @@ public class Cryptor {
         }
     }
 
-    public String encrypt(final String input) {
+    private String encrypt(final String input) {
         try {
             this.cipher.init(Cipher.ENCRYPT_MODE, this.desKey);
             byte[] cleartext = input.getBytes("UTF-8");
@@ -78,19 +95,6 @@ public class Cryptor {
                     encryptedValue);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("invalid encryptedValue", e);
-        }
-    }
-
-    public void setKey(final String key) {
-        try {
-            this.desKey = new SecretKeySpec(Base64.decodeBase64(key.getBytes("UTF-8")), "AES");
-            this.cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-        } catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException(e);
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException(e);
-        } catch (NoSuchPaddingException e) {
-            throw new IllegalStateException(e);
         }
     }
 }

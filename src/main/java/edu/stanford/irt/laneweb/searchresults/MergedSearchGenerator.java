@@ -3,13 +3,6 @@
  */
 package edu.stanford.irt.laneweb.searchresults;
 
-import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.search.AbstractSearchGenerator;
-import edu.stanford.irt.search.ContentResult;
-import edu.stanford.irt.search.Result;
-import edu.stanford.irt.search.impl.SimpleQuery;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,6 +12,13 @@ import java.util.Map;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.eresources.CollectionManager;
+import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.search.AbstractSearchGenerator;
+import edu.stanford.irt.search.ContentResult;
+import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
  * @author ryanmax

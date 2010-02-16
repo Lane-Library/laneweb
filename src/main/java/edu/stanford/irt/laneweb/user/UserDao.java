@@ -6,39 +6,23 @@ import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.security.auth.Subject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 
-import edu.stanford.irt.laneweb.Cryptor;
 import edu.stanford.irt.laneweb.LanewebConstants;
 
 public class UserDao {
 
     private static final Logger LOGGER = Logger.getLogger(UserDao.class);
 
-    private Cryptor cryptor;
-
     private String ezproxyKey;
 
     private LdapTemplate ldapTemplate;
 
     private SubjectSource subjectSource;
-
-    public User createOrUpdateUser(final HttpServletRequest request) {
-        HttpSession session = request.getSession(true);
-        User user = (User) session.getAttribute(LanewebConstants.USER);
-        if (null == user) {
-            user = new User();
-            session.setAttribute(LanewebConstants.USER, user);
-        }
-        getUserData(user, request);
-        return user;
-    }
 
     public void getUserData(final User user, final HttpServletRequest request) {
         setIpGroup(user, request);
@@ -47,13 +31,6 @@ public class UserDao {
         setProxyLinks(user, request);
         setLdapData(user);
         setEmrId(user, request);
-    }
-
-    public void setCryptor(final Cryptor cryptor) {
-        if (null == cryptor) {
-            throw new IllegalArgumentException("null cryptor");
-        }
-        this.cryptor = cryptor;
     }
 
     public void setEzproxyKey(final String ezproxyKey) {
@@ -85,37 +62,6 @@ public class UserDao {
             }
         }
         return ip;
-    }
-
-    private String getSunetIdFromCookie(final HttpServletRequest request) {
-        if (this.cryptor == null) {
-            throw new RuntimeException("cryptor is null");
-        }
-        Cookie[] cookies = request.getCookies();
-        if (null == cookies) {
-            return null;
-        }
-        Cookie laneCookie = null;
-        for (Cookie cookie : cookies) {
-            String name = cookie.getName();
-            if (LanewebConstants.LANE_COOKIE_NAME.equals(name)) {
-                laneCookie = cookie;
-                break;
-            }
-        }
-        if (laneCookie != null) {
-            try {
-                PersistentLoginToken token = this.cryptor.restoreLoginToken(laneCookie.getValue());
-                int userAgentHash = request.getHeader("User-Agent").hashCode();
-                if (token.isValidFor(System.currentTimeMillis(), userAgentHash)) {
-                    return token.getSunetId();
-                }
-            } catch (IllegalArgumentException e) {
-                LOGGER.error("Cookie cannot be decrypted, it was maybe modified by user. IP --> "
-                        .concat(getRemoteAddr(request)));
-            }
-        }
-        return null;
     }
 
     private void setEmrId(final User user, final HttpServletRequest request) {
@@ -175,19 +121,7 @@ public class UserDao {
     }
 
     private void setSunetId(final User user, final HttpServletRequest request) {
-        if (user.getSunetId() == null) {
-            String sunetId = request.getRemoteUser();
-            if (sunetId == null) {
-                sunetId = request.getHeader("x-webauth-user");
-                if ("(null)".equals(sunetId)) {
-                    sunetId = null;
-                }
-            }
-            if (sunetId == null) {
-                sunetId = getSunetIdFromCookie(request);
-            }
-            user.setSunetId(sunetId);
-        }
+        user.setSunetId((String) request.getAttribute("sunetid"));
     }
 
     private void setTicket(final User user, final HttpServletRequest request) {

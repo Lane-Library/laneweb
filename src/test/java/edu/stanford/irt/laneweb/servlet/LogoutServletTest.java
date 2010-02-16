@@ -1,7 +1,10 @@
 package edu.stanford.irt.laneweb.servlet;
 
-import static org.junit.Assert.*;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
+import static org.easymock.classextension.EasyMock.createMock;
+import static org.easymock.classextension.EasyMock.replay;
+import static org.easymock.classextension.EasyMock.verify;
 
 import java.io.IOException;
 

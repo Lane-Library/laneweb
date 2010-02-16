@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.model;
+package edu.stanford.irt.laneweb.servlet;
 
 import javax.naming.Context;
 import javax.naming.NamingException;

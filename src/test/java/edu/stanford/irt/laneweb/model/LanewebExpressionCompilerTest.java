@@ -1,10 +1,7 @@
 package edu.stanford.irt.laneweb.model;
 
-import static org.junit.Assert.*;
-
 import org.apache.cocoon.el.ExpressionCompiler;
 import org.apache.cocoon.el.ExpressionException;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
