@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd">
 
-    <bean id="edu.stanford.irt.laneweb.SitemapRequestHandler"
+    <bean id="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler"
         class="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
         <property name="methodsNotAllowed">
             <set>
@@ -164,7 +164,8 @@
     </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/txt-resource"
-        class="edu.stanford.irt.laneweb.TxtResourceReader" scope="prototype">
+        class="edu.stanford.irt.laneweb.TxtResourceReader"
+        parent="edu.stanford.irt.laneweb.model.AbstractObjectModelAware">
         <property name="defaultPath" value="/"/>
         <property name="valueToSubstitute" value="/\./\."/>
         <!-- uses regex so /./. is what is actually substituted -->

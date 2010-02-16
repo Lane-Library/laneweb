@@ -111,7 +111,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         if (request.getQueryString() != null) {
             model.put("query-string", request.getQueryString());
         }
-        model.put("base-path", request.getContextPath());
+        model.put(LanewebObjectModel.BASE_PATH, request.getContextPath());
         model.put("request-uri", request.getRequestURI());
         model.put("remote-host", request.getRemoteHost());
         if (request.getHeader("referer") != null) {

@@ -6,6 +6,7 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.transformation.AbstractTransformer;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.user.User;
 
 public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
@@ -46,7 +47,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
         this.ticket = params.getParameter(User.TICKET, EMPTY_STRING);
         this.proxyLinks = params.getParameterAsBoolean(User.PROXY_LINKS, false);
         this.ipGroup = params.getParameter(User.IPGROUP, "OTHER");
-        this.basePath = params.getParameter("base-path", "");
+        this.basePath = params.getParameter(LanewebObjectModel.BASE_PATH, "");
     }
 
     protected String createProxyLink(final String link) {
