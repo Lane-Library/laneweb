@@ -10,6 +10,8 @@ import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.log4j.Logger;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+
 public class LoginAction implements Action {
 
     private static final Logger LOGGER = Logger.getLogger(LoginAction.class);
@@ -17,7 +19,7 @@ public class LoginAction implements Action {
     @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,
             final String source, final Parameters params) throws IOException, ProcessingException {
-        String sunetid = params.getParameter("sunetid", null);
+        String sunetid = params.getParameter(LanewebObjectModel.SUNETID, null);
         String queryString = params.getParameter("query-string", null);
         String ticket = params.getParameter("ticket", null);
         if (null == sunetid || sunetid.length() == 0) {

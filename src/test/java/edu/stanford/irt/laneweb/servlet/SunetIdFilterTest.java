@@ -24,6 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.user.User;
 
 /**
@@ -57,9 +58,9 @@ public class SunetIdFilterTest {
     
     @Test
     public void testIsInRemoteUser() throws IOException, ServletException {
-        expect(this.request.getRemoteUser()).andReturn("sunetid");
+        expect(this.request.getRemoteUser()).andReturn("ditenus");
         expect(this.request.getParameter(isA(String.class))).andReturn(null).times(2);
-        this.request.setAttribute("sunetid", "sunetid");
+        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);
@@ -69,9 +70,9 @@ public class SunetIdFilterTest {
     @Test
     public void testIsInXWEBAUTHUSER() throws IOException, ServletException {
         expect(this.request.getRemoteUser()).andReturn(null);
-        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn("sunetid");
+        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn("ditenus");
         expect(this.request.getParameter(isA(String.class))).andReturn(null).times(2);
-        this.request.setAttribute("sunetid", "sunetid");
+        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);
@@ -83,10 +84,10 @@ public class SunetIdFilterTest {
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getSession(false)).andReturn(this.session);
-        this.request.setAttribute("sunetid", "sunetid");
+        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
         expect(this.request.getParameter(isA(String.class))).andReturn(null).times(2);
         User user = new User();
-        user.setSunetId("sunetid");
+        user.setSunetId("ditenus");
         expect(this.session.getAttribute(LanewebConstants.USER)).andReturn(user);
         this.chain.doFilter(this.request, this.response);
         replayMocks();
@@ -128,9 +129,9 @@ public class SunetIdFilterTest {
         expect(this.request.getHeader("User-Agent")).andReturn("user agent");
         expect(this.request.getParameter(isA(String.class))).andReturn(null).times(2);
         expect(this.cookie.getName()).andReturn(LanewebConstants.LANE_COOKIE_NAME);
-        String value = this.codec.createLoginToken("sunetid", "user agent".hashCode()).getEncryptedValue();
+        String value = this.codec.createLoginToken("ditenus", "user agent".hashCode()).getEncryptedValue();
         expect(this.cookie.getValue()).andReturn(value);
-        this.request.setAttribute("sunetid", "sunetid");
+        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);
@@ -139,9 +140,9 @@ public class SunetIdFilterTest {
     
     @Test
     public void testAddUserCookie() throws IOException, ServletException {
-        expect(this.request.getRemoteUser()).andReturn("sunetid");
+        expect(this.request.getRemoteUser()).andReturn("ditenus");
         expect(this.request.getParameter("pl")).andReturn("true");
-        this.request.setAttribute("sunetid", "sunetid");
+        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
         expect(this.request.getHeader("User-Agent")).andReturn("user agent");
         this.response.addCookie(and(isA(Cookie.class), capture(this.cookieCapture)));
         this.chain.doFilter(this.request, this.response);
@@ -154,10 +155,10 @@ public class SunetIdFilterTest {
     
     @Test
     public void testRemoveUserCookie() throws IOException, ServletException {
-        expect(this.request.getRemoteUser()).andReturn("sunetid");
+        expect(this.request.getRemoteUser()).andReturn("ditenus");
         expect(this.request.getParameter("pl")).andReturn("false");
         expect(this.request.getParameter("remove-pl")).andReturn("true");
-        this.request.setAttribute("sunetid", "sunetid");
+        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
         this.response.addCookie(and(isA(Cookie.class), capture(this.cookieCapture)));
         this.chain.doFilter(this.request, this.response);
         replayMocks();

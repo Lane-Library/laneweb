@@ -54,7 +54,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         }
         this.userDao.getUserData(user, request);
         if (user.getSunetId() != null) {
-            model.put("sunetid", user.getSunetId());
+            model.put(LanewebObjectModel.SUNETID, user.getSunetId());
         }
         if (user.getIPGroup() != null) {
             model.put("ipgroup", user.getIPGroup());

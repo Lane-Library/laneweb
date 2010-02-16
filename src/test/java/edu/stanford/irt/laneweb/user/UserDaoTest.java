@@ -47,18 +47,18 @@ public class UserDaoTest {
 
     @Test
     public void testGetUserInfo() {
-      expect(this.request.getAttribute("sunetid")).andReturn("sunetid");
+      expect(this.request.getAttribute(LanewebObjectModel.SUNETID)).andReturn("ditenus");
       expect(this.request.getRemoteAddr()).andReturn("127.0.0.1");
       expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
       expect(this.request.getParameter("proxy-links")).andReturn(null);
       expect(this.request.getParameter(LanewebObjectModel.EMRID)).andReturn(null);
       expect(this.subjectSource.getSubject()).andReturn(this.subject);
-      expect(this.ldapTemplate.search(eq(""), eq("susunetid=sunetid"), isA(AttributesMapper.class))).andReturn(null);
+      expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null);
       replayMocks();
         User user = new User();
         this.userDao.getUserData(user, this.request);
         assertEquals(IPGroup.OTHER, user.getIPGroup());
-        assertEquals("sunetid", user.getSunetId());
+        assertEquals("ditenus", user.getSunetId());
         verifyMocks();
     }
 

@@ -8,6 +8,8 @@ import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+
 public class WebdashAction implements Action {
 
     private static final String RESULT_KEY = "webdash-url";
@@ -19,7 +21,7 @@ public class WebdashAction implements Action {
             final String string, final Parameters param) {
         String nonce = param.getParameter("nonce", null);
         String systemUserId = param.getParameter("system-user-id", null);
-        String sunetId = param.getParameter("sunetid", null);
+        String sunetId = param.getParameter(LanewebObjectModel.SUNETID, null);
         String name = param.getParameter("name", null);
         String affiliation = param.getParameter("affiliation", null);
         Map<String, String> result = new HashMap<String, String>(1);

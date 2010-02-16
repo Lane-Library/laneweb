@@ -7,6 +7,7 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.transformation.AbstractTransformer;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.ObjectModelAware;
 import edu.stanford.irt.laneweb.user.User;
 
 public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
@@ -32,18 +33,20 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
     protected ProxyHostManager proxyHostManager;
 
     protected boolean proxyLinks;
-
-    public AbstractProxyLinkTransformer() {
-        super();
-    }
+    
+    protected ObjectModelAware objectModelAware;
 
     public void setProxyHostManager(final ProxyHostManager proxyHostManager) {
         this.proxyHostManager = proxyHostManager;
     }
+    
+    public void setObjectModelAware(final ObjectModelAware objectModelAware) {
+        this.objectModelAware = objectModelAware;
+    }
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
-        this.sunetid = params.getParameter(User.SUNETID, EMPTY_STRING);
+        this.sunetid = this.objectModelAware.getString(LanewebObjectModel.SUNETID);
         this.ticket = params.getParameter(User.TICKET, EMPTY_STRING);
         this.proxyLinks = params.getParameterAsBoolean(User.PROXY_LINKS, false);
         this.ipGroup = params.getParameter(User.IPGROUP, "OTHER");
@@ -54,7 +57,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
         StringBuilder sb = new StringBuilder(128);
         if ("SHC".equals(this.ipGroup) || "LPCH".equals(this.ipGroup)) {
             sb.append("http://laneproxy.stanford.edu/login?url=");
-        } else if (EMPTY_STRING.equals(this.ticket) || EMPTY_STRING.equals(this.sunetid)) {
+        } else if (EMPTY_STRING.equals(this.ticket) || null == this.sunetid) {
             sb.append(this.basePath).append(WEBAUTH_LINK);
         } else {
             sb.append(EZPROXY_LINK).append(this.sunetid).append(TICKET).append(this.ticket).append(URL);

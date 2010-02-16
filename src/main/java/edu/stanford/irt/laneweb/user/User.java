@@ -2,15 +2,11 @@ package edu.stanford.irt.laneweb.user;
 
 public class User {
 
-//    public static final String EMRID = LanewebObjectModel.EMRID;
-
     public static final String IPGROUP = "ipgroup";
 
     public static final String NAME = "name";
 
     public static final String PROXY_LINKS = "proxy-links";
-
-    public static final String SUNETID = "sunetid";
 
     public static final String TICKET = "ticket";
 

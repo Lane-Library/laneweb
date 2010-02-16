@@ -122,7 +122,7 @@ public class UserDao {
     }
 
     private void setSunetId(final User user, final HttpServletRequest request) {
-        user.setSunetId((String) request.getAttribute("sunetid"));
+        user.setSunetId((String) request.getAttribute(LanewebObjectModel.SUNETID));
     }
 
     private void setTicket(final User user, final HttpServletRequest request) {
