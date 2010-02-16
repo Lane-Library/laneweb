@@ -19,7 +19,7 @@
     
     <bean id="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent"
         class="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent"
-        parent="edu.stanford.irt.laneweb.model.AbstractObjectModelAware"
+        parent="edu.stanford.irt.laneweb.model.DefaultObjectModelAware"
         abstract="true">
         <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
     </bean>

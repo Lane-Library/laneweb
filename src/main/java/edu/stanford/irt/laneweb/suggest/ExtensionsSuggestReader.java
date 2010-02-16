@@ -12,12 +12,12 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.reading.Reader;
 
-import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.suggest.EresourceSuggestionManager;
 import edu.stanford.irt.suggest.Suggestion;
 
-public class ExtensionsSuggestReader extends AbstractObjectModelAware implements Reader {
+public class ExtensionsSuggestReader extends DefaultObjectModelAware implements Reader {
 
     private OutputStream outputStream;
 

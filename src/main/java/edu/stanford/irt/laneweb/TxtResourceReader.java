@@ -17,10 +17,10 @@ import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class TxtResourceReader extends AbstractObjectModelAware implements Reader, CacheableProcessingComponent {
+public class TxtResourceReader extends DefaultObjectModelAware implements Reader, CacheableProcessingComponent {
 
     private String defaultPath;
 

@@ -10,6 +10,8 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+
 public class CMERedirectActionTest {
 
     private CMERedirectAction action;
@@ -23,7 +25,7 @@ public class CMERedirectActionTest {
     public void testAct() {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn("uptodate");
-        expect(parameters.getParameter("emrid", null)).andReturn("nobody");
+        expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn("nobody");
         replay(parameters);
         assertEquals(
                 "http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?unid=nobody&srcsys=epic90710&eiv=2.1.0",
@@ -35,7 +37,7 @@ public class CMERedirectActionTest {
     public void testActEmptyEmrid() {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn("uptodate");
-        expect(parameters.getParameter("emrid", null)).andReturn("");
+        expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn("");
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
@@ -47,7 +49,7 @@ public class CMERedirectActionTest {
     public void testActEmptyHost() {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn("");
-        expect(parameters.getParameter("emrid", null)).andReturn("nobody");
+        expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn("nobody");
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
@@ -59,7 +61,7 @@ public class CMERedirectActionTest {
     public void testActNullBadHost() {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn("bad host");
-        expect(parameters.getParameter("emrid", null)).andReturn("nobody");
+        expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn("nobody");
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
@@ -71,7 +73,7 @@ public class CMERedirectActionTest {
     public void testActNullBadHostEmptyEmrid() {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn("bad host");
-        expect(parameters.getParameter("emrid", null)).andReturn(null);
+        expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn(null);
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
@@ -83,7 +85,7 @@ public class CMERedirectActionTest {
     public void testActNullEmrid() {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn("uptodate");
-        expect(parameters.getParameter("emrid", null)).andReturn(null);
+        expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn(null);
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
@@ -95,7 +97,7 @@ public class CMERedirectActionTest {
     public void testActNullHost() {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn(null);
-        expect(parameters.getParameter("emrid", null)).andReturn("nobody");
+        expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn("nobody");
         expect(parameters.getParameter("query-string", null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(

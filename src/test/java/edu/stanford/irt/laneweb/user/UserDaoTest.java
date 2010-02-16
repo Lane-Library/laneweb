@@ -14,6 +14,8 @@ import org.junit.Test;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+
 public class UserDaoTest {
 
     private LdapTemplate ldapTemplate;
@@ -49,7 +51,7 @@ public class UserDaoTest {
       expect(this.request.getRemoteAddr()).andReturn("127.0.0.1");
       expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
       expect(this.request.getParameter("proxy-links")).andReturn(null);
-      expect(this.request.getParameter("emrid")).andReturn(null);
+      expect(this.request.getParameter(LanewebObjectModel.EMRID)).andReturn(null);
       expect(this.subjectSource.getSubject()).andReturn(this.subject);
       expect(this.ldapTemplate.search(eq(""), eq("susunetid=sunetid"), isA(AttributesMapper.class))).andReturn(null);
       replayMocks();

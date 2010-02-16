@@ -12,7 +12,7 @@ import org.apache.cocoon.el.objectmodel.ObjectModel;
  *
  * $Id$
  */
-public class AbstractObjectModelAware implements ObjectModelAware {
+public class DefaultObjectModelAware implements ObjectModelAware {
     
     private Map model;
 

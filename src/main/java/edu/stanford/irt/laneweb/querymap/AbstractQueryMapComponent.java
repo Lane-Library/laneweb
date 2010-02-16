@@ -10,7 +10,7 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.sitemap.SitemapModelComponent;
 import org.apache.excalibur.source.Source;
 
-import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.querymap.DescriptorWeightMap;
 import edu.stanford.irt.querymap.QueryMap;
@@ -18,7 +18,7 @@ import edu.stanford.irt.querymap.QueryMapper;
 import edu.stanford.irt.querymap.Resource;
 import edu.stanford.irt.querymap.StreamResourceMapping;
 
-public abstract class AbstractQueryMapComponent extends AbstractObjectModelAware implements SitemapModelComponent {
+public abstract class AbstractQueryMapComponent extends DefaultObjectModelAware implements SitemapModelComponent {
 
     private static final String ABSTRACT_COUNT = "abstract-count";
 

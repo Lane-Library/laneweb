@@ -17,10 +17,10 @@ import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class EresourcesCountGenerator extends AbstractObjectModelAware implements Generator {
+public class EresourcesCountGenerator extends DefaultObjectModelAware implements Generator {
 
     private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
 

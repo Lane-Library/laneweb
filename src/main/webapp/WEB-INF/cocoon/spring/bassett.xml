@@ -5,7 +5,7 @@
     
     <bean id="edu.stanford.irt.laneweb.eresources.bassett.AbstractBassettGenerator"
         class="edu.stanford.irt.laneweb.eresources.bassett.AbstractBassettGenerator"
-        parent="edu.stanford.irt.laneweb.model.AbstractObjectModelAware"
+        parent="edu.stanford.irt.laneweb.model.DefaultObjectModelAware"
         abstract="true">
         <property name="collectionManager">
             <bean class="edu.stanford.irt.laneweb.eresources.bassett.BassettCollectionManager">

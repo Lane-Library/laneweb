@@ -12,14 +12,14 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.spell.SpellChecker;
 
 /**
  * @author ceyates
  */
-public class SpellCheckGenerator extends AbstractObjectModelAware implements Generator {
+public class SpellCheckGenerator extends DefaultObjectModelAware implements Generator {
 
     private XMLConsumer consumer;
 

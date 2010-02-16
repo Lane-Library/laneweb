@@ -12,10 +12,10 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class UrlTester extends AbstractObjectModelAware implements Reader {
+public class UrlTester extends DefaultObjectModelAware implements Reader {
 
     private HttpClient httpClient;
 

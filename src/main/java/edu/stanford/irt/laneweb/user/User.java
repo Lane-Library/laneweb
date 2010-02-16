@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.user;
 
 public class User {
 
-    public static final String EMRID = "emrid";
+//    public static final String EMRID = LanewebObjectModel.EMRID;
 
     public static final String IPGROUP = "ipgroup";
 

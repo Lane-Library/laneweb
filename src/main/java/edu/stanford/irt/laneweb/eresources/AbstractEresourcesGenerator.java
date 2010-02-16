@@ -11,11 +11,11 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultsList;
 
-public abstract class AbstractEresourcesGenerator extends AbstractObjectModelAware implements Generator {
+public abstract class AbstractEresourcesGenerator extends DefaultObjectModelAware implements Generator {
 
     private static final String ALPHA = "alpha";
 

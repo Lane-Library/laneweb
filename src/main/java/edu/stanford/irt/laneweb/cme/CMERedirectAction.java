@@ -10,6 +10,7 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.user.User;
 
 public class CMERedirectAction implements Action {
@@ -35,7 +36,7 @@ public class CMERedirectAction implements Action {
             final String source, final Parameters params) {
         Map result = new HashMap();
         String host = params.getParameter(HOST_PARAM, null);
-        String emrid = params.getParameter(User.EMRID, null);
+        String emrid = params.getParameter(LanewebObjectModel.EMRID, null);
         if (null != emrid && emrid.length() > 0 && "uptodate".equalsIgnoreCase(host)) {
             result.put(CME_REDIRECT_KEY, PROXY_LINK + UTD_CME_STRING.replaceFirst("EMRID", emrid));
         } else {

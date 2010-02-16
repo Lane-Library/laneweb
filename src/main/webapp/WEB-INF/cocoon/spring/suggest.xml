@@ -19,7 +19,7 @@
     
     <bean name="org.apache.cocoon.reading.Reader/suggest"
         class="edu.stanford.irt.laneweb.suggest.SuggestionReader"
-        parent="edu.stanford.irt.laneweb.model.AbstractObjectModelAware">
+        parent="edu.stanford.irt.laneweb.model.DefaultObjectModelAware">
         <property name="eresourceSuggestionManager"
             ref="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
         <property name="historySuggestionManager"
@@ -30,7 +30,7 @@
     
     <bean name="org.apache.cocoon.reading.Reader/extensions-suggest"
         class="edu.stanford.irt.laneweb.suggest.ExtensionsSuggestReader"
-        parent="edu.stanford.irt.laneweb.model.AbstractObjectModelAware">
+        parent="edu.stanford.irt.laneweb.model.DefaultObjectModelAware">
         <property name="eresourceSuggestionManager"
             ref="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
     </bean>

@@ -63,7 +63,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             model.put("ticket", user.getTicket());
         }
         if (user.getEmrId() != null) {
-            model.put("emrid", user.getEmrId());
+            model.put(LanewebObjectModel.EMRID, user.getEmrId());
         }
         if (user.getName() != null) {
             model.put("name", user.getName());

@@ -21,6 +21,8 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
 
     public static final String QUERY = "query";
     
+    public static final String EMRID = "emrid";
+    
     public void setInitialEntries(Map<String, ObjectModelProvider> initialEntries) {
         for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {
             put(entry.getKey(), entry.getValue().getObject());

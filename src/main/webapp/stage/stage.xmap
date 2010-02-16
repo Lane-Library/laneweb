@@ -77,9 +77,7 @@
             </map:match>
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
-                <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="${emrid}"/>
-                </map:transform>
+                <map:transform type="cme-links"/>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="request-uri" value="${request-uri}"/>
                     <map:parameter name="base-path" value="${base-path}/stage"/>
@@ -112,9 +110,7 @@
                     <map:part src="cocoon:/content/sitemap.html"/>
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
-                <map:transform type="cme-links">
-                    <map:parameter name="emrid" value="${emrid}"/>
-                </map:transform>
+                <map:transform type="cme-links"/>
                 <map:transform type="saxon" src="context://xsl/laneweb.xsl">
                     <map:parameter name="request-uri" value="${request-uri}"/>
                     <map:parameter name="base-path" value="${base-path}/stage"/>

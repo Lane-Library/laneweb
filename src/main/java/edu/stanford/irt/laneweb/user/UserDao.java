@@ -13,6 +13,7 @@ import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
 public class UserDao {
 
@@ -65,8 +66,8 @@ public class UserDao {
     }
 
     private void setEmrId(final User user, final HttpServletRequest request) {
-        if (null == user.getEmrId() || null != request.getParameter(User.EMRID)) {
-            user.setEmrId(request.getParameter(User.EMRID));
+        if (null == user.getEmrId() || null != request.getParameter(LanewebObjectModel.EMRID)) {
+            user.setEmrId(request.getParameter(LanewebObjectModel.EMRID));
         }
     }
 

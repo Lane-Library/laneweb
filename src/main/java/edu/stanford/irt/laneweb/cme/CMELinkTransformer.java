@@ -9,6 +9,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.ObjectModelAware;
 import edu.stanford.irt.laneweb.user.User;
 
 /**
@@ -21,8 +23,6 @@ import edu.stanford.irt.laneweb.user.User;
  * @author ryanmax
  */
 public class CMELinkTransformer extends AbstractTransformer {
-
-    private static final String EMPTY_STRING = "";
 
     private static final String HREF = "href";
 
@@ -39,11 +39,17 @@ public class CMELinkTransformer extends AbstractTransformer {
 
     private String emrid;
 
-    private boolean isSearchUrlElement;
+    private boolean isSearchUrlElement = false;
+    
+    private ObjectModelAware objectModelAware;
+    
+    public void setObjectModelAware(final ObjectModelAware objectModelAware) {
+        this.objectModelAware = objectModelAware;
+    }
 
     @Override
     public void characters(final char ch[], final int start, final int length) throws SAXException {
-        if (!EMPTY_STRING.equals(this.emrid) && this.isSearchUrlElement) {
+        if (null != this.emrid && this.isSearchUrlElement) {
             String value = new String(ch, start, length);
             if (isCMEHost(value)) {
                 value = createCMELink(value);
@@ -56,14 +62,14 @@ public class CMELinkTransformer extends AbstractTransformer {
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
-        this.emrid = params.getParameter(User.EMRID, EMPTY_STRING);
+        this.emrid = this.objectModelAware.getString(LanewebObjectModel.EMRID);
     }
 
     @Override
     public void startElement(final String uri, final String localName, final String name, final Attributes atts)
             throws SAXException {
-        this.isSearchUrlElement = false;
-        if (!EMPTY_STRING.equals(this.emrid)) {
+        if (null != this.emrid) {
+            this.isSearchUrlElement = false;
             if ("a".equals(localName)) {
                 String link = atts.getValue(HREF);
                 if (null != link && link.indexOf("http") == 0 && isCMEHost(link)) {

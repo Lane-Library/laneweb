@@ -124,7 +124,7 @@
 
     <bean name="org.apache.cocoon.generation.Generator/spellcheck"
         class="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator"
-        parent="edu.stanford.irt.laneweb.model.AbstractObjectModelAware">
+        parent="edu.stanford.irt.laneweb.model.DefaultObjectModelAware">
         <property name="spellChecker">
             <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
         </property>
@@ -147,7 +147,13 @@
     </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/cme-links"
-        class="edu.stanford.irt.laneweb.cme.CMELinkTransformer" scope="prototype"> </bean>
+        class="edu.stanford.irt.laneweb.cme.CMELinkTransformer" scope="prototype">
+        <property name="objectModelAware">
+            <bean class="edu.stanford.irt.laneweb.model.DefaultObjectModelAware">
+                <property name="objectModel" ref="org.apache.cocoon.el.objectmodel.ObjectModel"/>
+            </bean>
+        </property>
+    </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/xinclude"
         class="edu.stanford.irt.laneweb.LanewebXIncludeTransformer" scope="prototype">
@@ -165,7 +171,7 @@
 
     <bean name="org.apache.cocoon.reading.Reader/txt-resource"
         class="edu.stanford.irt.laneweb.TxtResourceReader"
-        parent="edu.stanford.irt.laneweb.model.AbstractObjectModelAware">
+        parent="edu.stanford.irt.laneweb.model.DefaultObjectModelAware">
         <property name="defaultPath" value="/"/>
         <property name="valueToSubstitute" value="/\./\."/>
         <!-- uses regex so /./. is what is actually substituted -->
