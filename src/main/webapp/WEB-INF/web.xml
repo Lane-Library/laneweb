@@ -73,7 +73,7 @@
     <servlet>
         <description>SitemapRequestHandler</description>
         <display-name>SitemapRequestHandler</display-name>
-        <servlet-name>edu.stanford.irt.laneweb.SitemapRequestHandler</servlet-name>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.SitemapRequestHandler</servlet-name>
         <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -91,7 +91,7 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.SitemapRequestHandler</servlet-name>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.SitemapRequestHandler</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 

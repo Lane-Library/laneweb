@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.servlet;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.createMock;
@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.cocoon.servlet.RequestProcessor;
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.servlet.SitemapRequestHandler;
 
 public class SitemapRequestHandlerTest {
 

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
 import java.util.Collections;
