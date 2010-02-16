@@ -17,10 +17,10 @@ import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
+import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class EresourcesCountGenerator implements Generator {
-
-    private static final String QUERY = "query";
+public class EresourcesCountGenerator extends AbstractObjectModelAware implements Generator {
 
     private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
 
@@ -85,9 +85,9 @@ public class EresourcesCountGenerator implements Generator {
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.query = par.getParameter(QUERY, "").trim();
-        if (this.query.length() == 0) {
-            throw new IllegalArgumentException("no query [" + par.getParameter(QUERY, null) + "]");
+        this.query = getString(LanewebObjectModel.QUERY);
+        if (null == this.query) {
+            throw new IllegalArgumentException("null query");
         }
     }
 }

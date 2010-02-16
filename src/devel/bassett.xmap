@@ -115,15 +115,12 @@
             <map:match pattern="database" type="wildcard">
                 <map:generate type="bassett">
                     <map:parameter name="bn" value="${bn}"/>
-                    <map:parameter name="query" value="${query}"/>
                     <map:parameter name="region" value="${region}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="bassett-accordion" type="wildcard">
-                <map:generate type="bassett-accordion">
-                    <map:parameter name="query" value="${query}"/>
-                </map:generate>
+                <map:generate type="bassett-accordion"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>

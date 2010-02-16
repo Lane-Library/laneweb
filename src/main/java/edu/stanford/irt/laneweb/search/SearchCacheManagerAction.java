@@ -7,6 +7,7 @@ import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 
 public class SearchCacheManagerAction implements Action {
@@ -16,7 +17,7 @@ public class SearchCacheManagerAction implements Action {
     @SuppressWarnings("unchecked")
     public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel,
             final String string, final Parameters param) {
-        String query = param.getParameter("query", null);
+        String query = param.getParameter(LanewebObjectModel.QUERY, null);
         if (query != null && !"".equals(query.trim())) {
             this.searchCache.clearCache(query);
         } else {

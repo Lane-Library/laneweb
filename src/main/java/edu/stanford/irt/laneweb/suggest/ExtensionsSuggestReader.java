@@ -12,10 +12,12 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.reading.Reader;
 
+import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.suggest.EresourceSuggestionManager;
 import edu.stanford.irt.suggest.Suggestion;
 
-public class ExtensionsSuggestReader implements Reader {
+public class ExtensionsSuggestReader extends AbstractObjectModelAware implements Reader {
 
     private OutputStream outputStream;
 
@@ -66,10 +68,13 @@ public class ExtensionsSuggestReader implements Reader {
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters params) {
-        String query = params.getParameter("query", null);
+        String query = getString(LanewebObjectModel.QUERY);
+        if (null == query) {
+            throw new IllegalArgumentException("null query");
+        }
         // remove quotes and apostrophes
         if ((query.indexOf('\'') > -1) || (query.indexOf('"') > -1)) {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < query.length(); i++) {
                 char c = query.charAt(i);
                 if (('\'' != c) && ('"' != c)) {

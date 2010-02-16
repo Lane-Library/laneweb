@@ -9,6 +9,7 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.util.SAXResult;
@@ -40,7 +41,7 @@ public abstract class AbstractSearchGenerator extends AbstractObjectModelAware i
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.query = par.getParameter("query", null);
+        this.query = getString(LanewebObjectModel.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }

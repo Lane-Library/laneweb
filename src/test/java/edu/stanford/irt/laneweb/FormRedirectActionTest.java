@@ -14,6 +14,8 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+
 public class FormRedirectActionTest {
 
     private FormRedirectAction action;
@@ -29,7 +31,7 @@ public class FormRedirectActionTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testAct() {
-        expect(this.params.getParameter("query", null)).andReturn("cardiology");
+        expect(this.params.getParameter(LanewebObjectModel.QUERY, null)).andReturn("cardiology");
         expect(this.params.getParameter("source", null)).andReturn(
                 "http://lane.stanford.edu/search.html?q={search-terms}&source=all");
         replay(this.params);
@@ -41,7 +43,7 @@ public class FormRedirectActionTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testActBackslash() throws UnsupportedEncodingException {
-        expect(this.params.getParameter("query", null)).andReturn("\\cardiology");
+        expect(this.params.getParameter(LanewebObjectModel.QUERY, null)).andReturn("\\cardiology");
         expect(this.params.getParameter("source", null)).andReturn(
                 "http://lane.stanford.edu/search.html?q={search-terms}&source=all");
         replay(this.params);
@@ -54,7 +56,7 @@ public class FormRedirectActionTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testActRegexChars() throws UnsupportedEncodingException {
-        expect(this.params.getParameter("query", null)).andReturn("$2cardiology");
+        expect(this.params.getParameter(LanewebObjectModel.QUERY, null)).andReturn("$2cardiology");
         expect(this.params.getParameter("source", null)).andReturn(
                 "http://lane.stanford.edu/search.html?q={search-terms}&source=all");
         replay(this.params);

@@ -5,12 +5,11 @@ import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.Generator;
-import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
 /**
  * 
@@ -18,23 +17,17 @@ import edu.stanford.irt.eresources.Eresource;
  *
  * $Id$
  */
-public class BassettEresourcesGenerator implements Generator {
+public class BassettEresourcesGenerator extends AbstractBassettGenerator {
 
     private static final String BASSETT_NUMBER = "bn";
-
-    private static final String QUERY = "query";
 
     private static final String REGION = "region";
 
     private String bassettNumber;
 
-    private BassettCollectionManager collectionManager;
-
     private String query;
 
     private String region;
-
-    private XMLConsumer xmlConsumer;
 
     public void generate() throws SAXException {
         Collection<Eresource> eresources = null;
@@ -55,30 +48,10 @@ public class BassettEresourcesGenerator implements Generator {
         this.xmlConsumer.endDocument();
     }
 
-    public void setCollectionManager(final BassettCollectionManager collectionManager) {
-        if (null == collectionManager) {
-            throw new IllegalArgumentException("null collectionManager");
-        }
-        this.collectionManager = collectionManager;
-    }
-
-    public void setConsumer(final XMLConsumer xmlConsumer) {
-        if (null == xmlConsumer) {
-            throw new IllegalArgumentException("null xmlConsumer");
-        }
-        this.xmlConsumer = xmlConsumer;
-    }
-
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        String query = par.getParameter(QUERY, null);
+        this.query = getString(LanewebObjectModel.QUERY);
         this.region = par.getParameter(REGION, null);
         this.bassettNumber = par.getParameter(BASSETT_NUMBER, null);
-        if (null != query) {
-            this.query = query.trim();
-            if (this.query.length() == 0) {
-                this.query = null;
-            }
-        }
     }
 }

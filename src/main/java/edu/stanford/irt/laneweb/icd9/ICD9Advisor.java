@@ -6,6 +6,7 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.springframework.aop.MethodBeforeAdvice;
 
 import edu.stanford.irt.lane.icd9.ICD9Translator;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
 public class ICD9Advisor implements MethodBeforeAdvice {
 
@@ -15,11 +16,11 @@ public class ICD9Advisor implements MethodBeforeAdvice {
 
     public void before(final Method method, final Object[] arg, final Object claz) throws Throwable {
         Parameters params = (Parameters) arg[3];
-        String query = params.getParameter("query", null);
+        String query = params.getParameter(LanewebObjectModel.QUERY, null);
         if (query != null) {
             if (this.tranlastor.isICD9Code(query)) {
                 query = this.tranlastor.getLongName(query);
-                params.setParameter("query", query);
+                params.setParameter(LanewebObjectModel.QUERY, query);
             }
         }
     }

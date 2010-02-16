@@ -10,19 +10,19 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.sitemap.SitemapModelComponent;
 import org.apache.excalibur.source.Source;
 
+import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.querymap.DescriptorWeightMap;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.QueryMapper;
 import edu.stanford.irt.querymap.Resource;
 import edu.stanford.irt.querymap.StreamResourceMapping;
 
-public abstract class AbstractQueryMapComponent implements SitemapModelComponent {
+public abstract class AbstractQueryMapComponent extends AbstractObjectModelAware implements SitemapModelComponent {
 
     private static final String ABSTRACT_COUNT = "abstract-count";
 
     private static final String DESCRIPTOR_WEIGHTS = "descriptor-weights";
-
-    private static final String QUERY = "query";
 
     private static final String RESOURCE_MAPS = "resource-maps";
 
@@ -51,7 +51,11 @@ public abstract class AbstractQueryMapComponent implements SitemapModelComponent
         if (null == this.queryMapper) {
             throw new IllegalStateException("null queryMapper");
         }
-        String query = params.getParameter(QUERY, null);
+        String query = getString(LanewebObjectModel.QUERY);
+        if (null == query) {
+            throw new IllegalArgumentException("null query");
+        }
+        this.query = query;
         String mapURL = params.getParameter(RESOURCE_MAPS, null);
         String weightURL = params.getParameter(DESCRIPTOR_WEIGHTS, null);
         int abstractCount = params.getParameterAsInteger(ABSTRACT_COUNT, 100);
@@ -68,10 +72,6 @@ public abstract class AbstractQueryMapComponent implements SitemapModelComponent
                 throw new RuntimeException(e);
             }
         }
-        if (null == query) {
-            throw new IllegalArgumentException("null query");
-        }
-        this.query = query;
     }
 
     protected QueryMap getQueryMap() {

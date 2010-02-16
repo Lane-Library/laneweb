@@ -10,6 +10,8 @@ import org.apache.cocoon.acting.Action;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+
 /**
  * used to redirect form submissions where the source value is a http address. These are normally intercepted by
  * javascript in the client. This is here so that if javascript is off in the client, the user will get to the page
@@ -21,8 +23,6 @@ public class FormRedirectAction implements Action {
 
     private static final String FORM_REDIRECT_KEY = "form-redirect-key";
 
-    private static final String QUERY = "query";
-
     private static final String REPLACE = "\\{search-terms\\}";
 
     private static final String SOURCE = "source";
@@ -31,7 +31,7 @@ public class FormRedirectAction implements Action {
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String src,
             final Parameters params) {
         Map<String, String> result = new HashMap<String, String>();
-        String query = params.getParameter(QUERY, null);
+        String query = params.getParameter(LanewebObjectModel.QUERY, null);
         String source = params.getParameter(SOURCE, null);
         if ((null == query) || (query.length() == 0)) {
             throw new IllegalArgumentException("null or empty query");

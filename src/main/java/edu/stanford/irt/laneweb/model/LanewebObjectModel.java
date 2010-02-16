@@ -18,6 +18,8 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
     public static final String BASE_PATH = "base-path";
     
     public static final String URL = "url";
+
+    public static final String QUERY = "query";
     
     public void setInitialEntries(Map<String, ObjectModelProvider> initialEntries) {
         for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {

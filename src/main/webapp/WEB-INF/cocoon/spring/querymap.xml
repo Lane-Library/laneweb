@@ -17,16 +17,21 @@
     <bean id="edu.stanford.irt.querymap.DescriptorManager"
         class="edu.stanford.irt.querymap.DescriptorManager"/>
     
+    <bean id="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent"
+        class="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent"
+        parent="edu.stanford.irt.laneweb.model.AbstractObjectModelAware"
+        abstract="true">
+        <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
+    </bean>
+    
     
     <bean name="org.apache.cocoon.generation.Generator/querymap"
         class="edu.stanford.irt.laneweb.querymap.QueryMapGenerator"
-        scope="prototype">
-        <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
+        parent="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent">
     </bean>
     
     <bean name="org.apache.cocoon.reading.Reader/querymap"
         class="edu.stanford.irt.laneweb.querymap.QueryMapReader"
-        scope="prototype">
-        <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
+        parent="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent">
     </bean>
 </beans>

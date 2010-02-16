@@ -11,9 +11,11 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultsList;
 
-public abstract class AbstractEresourcesGenerator implements Generator {
+public abstract class AbstractEresourcesGenerator extends AbstractObjectModelAware implements Generator {
 
     private static final String ALPHA = "alpha";
 
@@ -22,8 +24,6 @@ public abstract class AbstractEresourcesGenerator implements Generator {
     private static final String SUBSET = "subset";
 
     private static final String TYPE = "type";
-    
-    private static final String QUERY = "query";
     
     private XMLConsumer xmlConsumer;
 
@@ -64,10 +64,7 @@ public abstract class AbstractEresourcesGenerator implements Generator {
     
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.query = par.getParameter(QUERY, null);
-        if (null != this.query && this.query.length() == 0) {
-            this.query = null;
-        }
+        this.query = getString(LanewebObjectModel.QUERY);
         this.type = par.getParameter(TYPE, null);
         if (null != this.type && this.type.length() == 0) {
             this.type = null;

@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.lane.icd9.ICD9Translator;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
 
 public class ICD9AdvisorTest {
@@ -21,22 +22,22 @@ public class ICD9AdvisorTest {
     public void beforeICD9TermTest() throws Throwable {
         String queryTerm = "050";
         Parameters parms = new Parameters();
-        parms.setParameter("query", queryTerm);
+        parms.setParameter(LanewebObjectModel.QUERY, queryTerm);
         Object[] ob = new Object[4];
         ob[3] = parms;
         this.advivor.before(null, ob, null);
-        assertEquals("SMALLPOX", ((Parameters) ob[3]).getParameter("query"));
+        assertEquals("SMALLPOX", ((Parameters) ob[3]).getParameter(LanewebObjectModel.QUERY));
     }
 
     @Test
     public void beforeTest() throws Throwable {
         String queryTerm = "test";
         Parameters parms = new Parameters();
-        parms.setParameter("query", queryTerm);
+        parms.setParameter(LanewebObjectModel.QUERY, queryTerm);
         Object[] ob = new Object[4];
         ob[3] = parms;
         this.advivor.before(null, ob, null);
-        assertEquals(queryTerm, ((Parameters) ob[3]).getParameter("query"));
+        assertEquals(queryTerm, ((Parameters) ob[3]).getParameter(LanewebObjectModel.QUERY));
     }
 
     @Before

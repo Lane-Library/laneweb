@@ -12,43 +12,32 @@
             <map:match pattern="search/**" type="wildcard">
                 <!-- /apps/search/xml returns the xmlized search result -->
                 <map:match type="wildcard" pattern="search/xml">
-                     <map:generate type="search">
-                         <map:parameter name="query" value="${query}"/>
-                     </map:generate>
+                     <map:generate type="search"/>
                      <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search/engine/xml" type="wildcard">
-                    <map:generate type="search-engine">
-                        <map:parameter name="query" value="${query}"/>
-                    </map:generate>
+                    <map:generate type="search-engine"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search/resource/xml" type="wildcard">
-                    <map:generate type="search-resource">
-                        <map:parameter name="query" value="${query}"/>
-                    </map:generate>
+                    <map:generate type="search-resource"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- delete after next release (content will need change to search/content/html) -->
                 <map:match pattern="search/ranked/xml" type="wildcard">
-                    <map:generate type="search-content">
-                        <map:parameter name="query" value="${query}"/>
-                    </map:generate>
+                    <map:generate type="search-content"/>
                     <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/content/html returns xhtmlized metasearch content results -->
                 <map:match pattern="search/content/html" type="wildcard">
-                    <map:generate type="search-content">
-                        <map:parameter name="query" value="${query}"/>
-                    </map:generate>
+                    <map:generate type="search-content"/>
                     <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/merged/html returns xhtmlized merged metasearch and eresources results -->
                 <map:match pattern="search/merged/html" type="wildcard">
                     <map:generate type="merged-search">
-                        <map:parameter name="query" value="${query}"/>
                         <map:parameter name="timeout" value="20000"/>
                     </map:generate>
                     <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
@@ -56,9 +45,7 @@
                 </map:match>
                 <!-- search2json.xsl converts the result xml to json -->
                 <map:match pattern="search/json" type="wildcard">
-                    <map:generate type="search-resource">
-                        <map:parameter name="query" value="${query}"/>
-                    </map:generate>
+                    <map:generate type="search-resource"/>
                     <map:transform type="saxon" src="context://xsl/search2json.xsl">
                         <map:parameter name="content" value="${content}"/>
                         <map:parameter name="content-to-display" value="5"/>
@@ -85,9 +72,7 @@
                
                 <!-- result with proxy links (if necessary) in xml format -->
                 <map:match pattern="search/resource/proxy/xml" type="wildcard">
-                    <map:generate type="search-resource">
-                        <map:parameter name="query" value="${query}"/>
-                    </map:generate>
+                    <map:generate type="search-resource"/>
                     <map:transform type="cme-links">
                         <map:parameter name="emrid" value="${emrid}"/>
                     </map:transform>
@@ -145,15 +130,11 @@
             </map:match>
             <map:match pattern="spellcheck/*" type="wildcard">
                 <map:match pattern="spellcheck/xml" type="wildcard">
-                    <map:generate type="spellcheck">
-                        <map:parameter name="query" value="${query}"/>
-                    </map:generate>
+                    <map:generate type="spellcheck"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="spellcheck/json" type="wildcard">
-                    <map:generate type="spellcheck">
-                        <map:parameter name="query" value="${query}"/>
-                    </map:generate>
+                    <map:generate type="spellcheck"/>
                     <map:transform src="context://xsl/spellcheck2json.xsl" type="saxon"/>
                     <map:serialize type="text"/>
                 </map:match>
@@ -190,7 +171,6 @@
                 value="${remote-host}/${request-uri}/${query-string}"/>
             <map:match pattern="suggest/json" type="wildcard">
                 <map:read type="suggest">
-                    <map:parameter name="query" value="${query}"/>
                     <map:parameter name="limit" value="${limit}"/>
                 </map:read>
             </map:match>
@@ -200,15 +180,11 @@
             <map:parameter name="cache-key" value="${request-uri};q=${query}"/>
             <map:match pattern="querymap/*" type="wildcard">
                 <map:match pattern="querymap/xml" type="wildcard">
-                    <map:generate type="querymap">
-                        <map:parameter name="query" value="${query}"/>
-                    </map:generate>
+                    <map:generate type="querymap"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="querymap/json" type="wildcard">
-                    <map:read type="querymap">
-                        <map:parameter name="query" value="${query}"/>
-                    </map:read>
+                    <map:read type="querymap"/>
                 </map:match>
             </map:match>
         </map:pipeline>

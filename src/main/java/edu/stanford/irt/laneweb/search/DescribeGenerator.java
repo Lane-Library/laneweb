@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -23,8 +24,9 @@ public class DescribeGenerator extends AbstractSearchGenerator {
     private String[] engines;
 
     @SuppressWarnings("unchecked")
+    @Override //because query might be null which throws an exception in the parent class.
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.query = par.getParameter("query", null);
+        this.query = par.getParameter(LanewebObjectModel.QUERY, null);
         this.engines = getObject("engines", String[].class, NO_ENGINES);
     }
 

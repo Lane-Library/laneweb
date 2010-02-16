@@ -84,7 +84,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             String name = (String) params.nextElement();
             if ("q".equals(name)) {
                 String query = request.getParameter(name);
-                model.put("query", query);
+                model.put(LanewebObjectModel.QUERY, query);
                 try {
                     model.put("url-encoded-query", URLEncoder.encode(query, "UTF-8"));
                 } catch (UnsupportedEncodingException e) {

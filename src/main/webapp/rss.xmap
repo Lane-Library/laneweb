@@ -42,11 +42,9 @@
             <map:parameter name="expires" value="access plus 1 hours"/>
             <map:match pattern="eresources" type="wildcard">
                 <map:generate type="er-search">
-                    <map:parameter name="query" value="${query}"/>
                     <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
-                    <map:parameter name="query" value="${query}"/>
                     <map:parameter name="type" value="${type}"/>
                     <map:parameter name="mode" value="search"/>
                 </map:transform>
