@@ -1,21 +1,21 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.reading.Reader;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.excalibur.source.SourceValidity;
 import org.xml.sax.SAXException;
 
-public class UrlTester implements Reader {
+import edu.stanford.irt.laneweb.model.AbstractObjectModelAware;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+
+public class UrlTester extends AbstractObjectModelAware implements Reader {
 
     private HttpClient httpClient;
 
@@ -23,7 +23,7 @@ public class UrlTester implements Reader {
 
     private String url;
 
-    public void generate() throws IOException, SAXException, ProcessingException {
+    public void generate() throws IOException, SAXException {
         GetMethod get = new GetMethod(this.url);
         this.httpClient.executeMethod(get);
         this.outputStream.write(get.getResponseBody());
@@ -37,11 +37,7 @@ public class UrlTester implements Reader {
     }
 
     public String getMimeType() {
-        return null;
-    }
-
-    public SourceValidity getValidity() {
-        return null;
+        return "text/plain";
     }
 
     public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
@@ -49,17 +45,12 @@ public class UrlTester implements Reader {
     }
 
     public void setOutputStream(final OutputStream out) {
-        if ((out instanceof BufferedOutputStream) || (out instanceof org.apache.cocoon.util.BufferedOutputStream)) {
-            this.outputStream = out;
-        } else {
-            this.outputStream = new BufferedOutputStream(out, 1536);
-        }
+        this.outputStream = out;
     }
 
     @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        this.url = par.getParameter("url", null);
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+        this.url = getString(LanewebObjectModel.URL);
         if (!this.url.startsWith("http")) {
             this.url = "http://".concat(this.url);
         }
