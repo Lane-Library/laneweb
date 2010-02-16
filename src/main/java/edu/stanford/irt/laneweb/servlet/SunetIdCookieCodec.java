@@ -14,7 +14,6 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
-import edu.stanford.irt.laneweb.user.PersistentLoginToken;
 
 public class SunetIdCookieCodec {
     

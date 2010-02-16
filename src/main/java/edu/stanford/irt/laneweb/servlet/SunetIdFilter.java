@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
-import edu.stanford.irt.laneweb.user.PersistentLoginToken;
 import edu.stanford.irt.laneweb.user.User;
 
 /**
@@ -24,7 +23,8 @@ import edu.stanford.irt.laneweb.user.User;
  * It also responds to the 'pl' and 'remove-pl' request parameters by setting
  * the lane-user cookie as appropriate.
  * 
- * @author ceyates $Id$
+ * @author ceyates
+ * $Id$
  */
 public class SunetIdFilter implements Filter {
 
