@@ -50,7 +50,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
         this.ticket = this.objectModelAware.getObject(LanewebObjectModel.TICKET, Ticket.class);
         this.proxyLinks = params.getParameterAsBoolean(User.PROXY_LINKS, false);
         this.ipGroup = this.objectModelAware.getObject(LanewebObjectModel.IPGROUP, IPGroup.class, IPGroup.OTHER);
-        this.basePath = params.getParameter(LanewebObjectModel.BASE_PATH, "");
+        this.basePath = params.getParameter(LanewebObjectModel.BASE_PATH, this.objectModelAware.getString(LanewebObjectModel.BASE_PATH));
     }
 
     protected String createProxyLink(final String link) {
