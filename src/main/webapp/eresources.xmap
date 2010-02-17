@@ -52,7 +52,6 @@
         <map:pipeline type="caching">
             <map:match pattern="browse/type/*" type="wildcard">
                 <map:generate type="er-browse">
-                    <map:parameter name="alpha" value="${alpha}"/>
                     <map:parameter name="mesh" value="${mesh}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
@@ -61,7 +60,6 @@
             </map:match>
             <map:match pattern="browse/subset/*" type="wildcard">
                 <map:generate type="er-browse">
-                    <map:parameter name="alpha" value="${alpha}"/>
                     <map:parameter name="mesh" value="${mesh}"/>
                     <map:parameter name="subset" value="{1}"/>
                 </map:generate>
@@ -70,7 +68,6 @@
             </map:match>
             <map:match pattern="mesh/type/*" type="wildcard">
                 <map:generate type="er-mesh">
-                    <map:parameter name="alpha" value="${alpha}"/>
                     <map:parameter name="mesh" value="${mesh}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
@@ -79,7 +76,6 @@
             </map:match>
             <map:match pattern="core/type/*" type="wildcard">
                 <map:generate type="er-core">
-                    <map:parameter name="alpha" value="${alpha}"/>
                     <map:parameter name="mesh" value="${mesh}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>

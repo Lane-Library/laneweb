@@ -17,8 +17,6 @@ import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultsList;
 
 public abstract class AbstractEresourcesGenerator extends DefaultObjectModelAware implements Generator {
 
-    private static final String ALPHA = "alpha";
-
     private static final String MESH = "mesh";
     
     private XMLConsumer xmlConsumer;
@@ -63,10 +61,7 @@ public abstract class AbstractEresourcesGenerator extends DefaultObjectModelAwar
         this.query = getString(LanewebObjectModel.QUERY);
         this.type = par.getParameter(LanewebObjectModel.TYPE, getString(LanewebObjectModel.TYPE));
         this.subset = par.getParameter(LanewebObjectModel.SUBSET, getString(LanewebObjectModel.SUBSET));
-        this.alpha = par.getParameter(ALPHA, null);
-        if (this.alpha != null && this.alpha.length() == 0) {
-            this.alpha = null;
-        }
+        this.alpha = getString(LanewebObjectModel.ALPHA);
         this.mesh = par.getParameter(MESH, null);
         if (this.mesh != null) {
             if (this.mesh.length() == 0) {

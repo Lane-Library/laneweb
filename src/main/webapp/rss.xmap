@@ -49,9 +49,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="browse" type="wildcard">
-                <map:generate type="er-browse">
-                    <map:parameter name="alpha" value="${alpha}"/>
-                </map:generate>
+                <map:generate type="er-browse"/>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
                     <map:parameter name="alpha" value="${alpha}"/>
                     <map:parameter name="type" value="${type}"/>
