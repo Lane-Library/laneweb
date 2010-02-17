@@ -37,19 +37,12 @@
     background-image:url(/././graphics/backgr/exp-backrg-green-minus.gif);
 }
 .expandy ul li {
-/*
-      background-color:#fff;
-  background-repeat:repeat-x;
-  margin-top: .5em;
-  color:#3B3B3B;
- */
     font-size: 11px;
 }
 .contentModule .bd .expandy ul li, .contentModule-wide .bd .expandy ul li {
     background-image:none;
     color:#333333;
     font-size: 1em;
-/* list-style:none; */
     margin: .5em 0 1em 0;
 }
 .contentModule .bd .expandy ul li, .contentModule-wide .bd .expandy ul li {
@@ -73,7 +66,6 @@
     background-position:6px 6px;
     background-repeat:no-repeat;
     border-bottom:1px solid #fff;
-/* #CCCCB4; */
     color:#3B3B3B;
     font-weight:bold;
     font-size:12px;
@@ -89,7 +81,6 @@
     background-position:6px 6px;
     background-repeat:no-repeat;
     border-bottom:1px solid #E6E4DB;
-/* #CCCCB4; */
     color:#3B3B3B;
     font-weight:bold;
     font-size:12px;
@@ -99,7 +90,6 @@
     background-image:url(/././graphics/buttons/accord-minus-close.gif);
 }
 .simpleModuleExpandy .expandy ul, .simpleModuleExpandy .expandy p, .simpleModuleExpandyleft .expandy ul li, .simpleModuleExpandyleft .expandy p {
-/* margin: 0.5em 1em 1em 2em; */
     padding-left: 1em;
 }
 /* styles for the contentModule expandy on on the index page - margins need to be zeroed */
@@ -114,9 +104,9 @@
     font-family:Georgia, "Times New Roman", Times, serif;
 }
 /* hide expandies before they are ready to avoid bouncing */
-.expandy{
+/*.expandy{
     visibility:hidden;
-}
+}*/
 /* search specific */
 .search .simpleModuleExpandyleft .bd .expandy li h6 {
     background-color:#fff;

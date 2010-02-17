@@ -24,7 +24,7 @@
                         }
                     }
                     new YAHOO.widget.AccordionView(expandies[i],{expandItems: expanded});
-                    expandies[i].style.visibility = 'visible';
+//                    expandies[i].style.visibility = 'visible';
                 }
             }
         };
