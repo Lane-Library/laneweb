@@ -1,18 +1,11 @@
 package edu.stanford.irt.laneweb.cme;
 
-import java.util.Map;
-
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.transformation.AbstractTransformer;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
-import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.model.ModelAware;
-import edu.stanford.irt.laneweb.user.User;
 
 /**
  * Transformer to rewrite data when a User.EMRID value is present. 
@@ -23,7 +16,7 @@ import edu.stanford.irt.laneweb.user.User;
  * 
  * @author ryanmax
  */
-public class CMELinkTransformer extends AbstractTransformer implements ModelAware {
+public class CMELinkTransformer extends AbstractTransformer {
 
     private static final String HREF = "href";
 
@@ -41,12 +34,6 @@ public class CMELinkTransformer extends AbstractTransformer implements ModelAwar
     private String emrid;
 
     private boolean isSearchUrlElement = false;
-    
-    private Model model;
-    
-    public void setModel(final Model model) {
-        this.model = model;
-    }
 
     @Override
     public void characters(final char ch[], final int start, final int length) throws SAXException {
@@ -61,8 +48,7 @@ public class CMELinkTransformer extends AbstractTransformer implements ModelAwar
         this.xmlConsumer.characters(ch, start, length);
     }
 
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
+    public void initialize() {
         this.emrid = this.model.getString(LanewebObjectModel.EMRID);
     }
 

@@ -3,17 +3,14 @@ package edu.stanford.irt.laneweb.querymap;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
-import static org.easymock.classextension.EasyMock.reset;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Collections;
-import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,7 +71,7 @@ public class QueryMapGeneratorTest {
         expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
+        expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);
         this.generator.setConsumer(this.consumer);
         replayMocks();
         this.generator.setup(null, null, null, this.parameters);
@@ -107,12 +104,12 @@ public class QueryMapGeneratorTest {
         try {
             this.generator.setup(null, null, null, null);
             fail();
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalStateException e) {
         }
         expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
+        expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);
         replayMocks();
         try {
             this.generator.setup(null, null, null, this.parameters);

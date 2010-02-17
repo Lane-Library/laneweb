@@ -1,28 +1,17 @@
 package edu.stanford.irt.laneweb.eresources.bassett;
 
-import org.apache.cocoon.generation.Generator;
-import org.apache.cocoon.xml.XMLConsumer;
-
-import edu.stanford.irt.laneweb.model.DefaultModelAware;
+import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 
 // $Id$
-public abstract class AbstractBassettGenerator extends DefaultModelAware implements Generator {
+public abstract class AbstractBassettGenerator extends AbstractGenerator {
 
     protected BassettCollectionManager collectionManager;
     protected String query;
-    protected XMLConsumer xmlConsumer;
 
     public void setCollectionManager(final BassettCollectionManager collectionManager) {
         if (null == collectionManager) {
             throw new IllegalArgumentException("null collectionManager");
         }
         this.collectionManager = collectionManager;
-    }
-
-    public void setConsumer(final XMLConsumer xmlConsumer) {
-        if (null == xmlConsumer) {
-            throw new IllegalArgumentException("null xmlConsumer");
-        }
-        this.xmlConsumer = xmlConsumer;
     }
 }

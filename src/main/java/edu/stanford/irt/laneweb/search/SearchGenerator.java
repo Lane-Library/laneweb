@@ -1,10 +1,6 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
-import java.util.Map;
-
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
 
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
@@ -84,18 +80,11 @@ public class SearchGenerator extends AbstractSearchGenerator {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        super.setup(resolver, objectModel, src, par);
-        this.timeout = this.model.getString("timeout");
-        if (null == this.timeout) {
-            this.timeout = par.getParameter("timeout", null);
-        }
+    public void initialize() {
+        super.initialize();
+        this.timeout = this.model.getString("timeout", this.parameterMap.get("timeout"));
         this.wait = this.model.getString("wait");
-        this.synchronous = this.model.getString("synchronous");
-        if (null == this.synchronous) {
-            this.synchronous = par.getParameter("synchronous", null);
-        }
+        this.synchronous = this.model.getString("synchronous", this.parameterMap.get("synchronous"));
 
     }
 }

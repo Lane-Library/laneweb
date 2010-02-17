@@ -6,16 +6,13 @@ package edu.stanford.irt.laneweb.suggest;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
-import static org.easymock.classextension.EasyMock.reset;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Map;
 
-import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,11 +1,8 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.io.Serializable;
-import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.cocoon.environment.SourceResolver;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 
@@ -33,11 +30,12 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
         this.configuredExpires = expires;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        super.setup(resolver, objectModel, src, par);
-        this.expires = par.getParameterAsLong("expires", this.configuredExpires);
+    public void initialize() {
+        super.initialize();
+        this.expires = this.parameterMap.containsKey("expires") ?
+                Long.parseLong(this.parameterMap.get("expires")) :
+                    this.configuredExpires;
     }
 
     private String createKey() {

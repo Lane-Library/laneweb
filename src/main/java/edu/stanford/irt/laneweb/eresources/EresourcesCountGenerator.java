@@ -9,18 +9,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.Generator;
-import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
-import edu.stanford.irt.laneweb.model.DefaultModelAware;
+import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class EresourcesCountGenerator extends DefaultModelAware implements Generator {
+public class EresourcesCountGenerator extends AbstractGenerator {
 
     private static final String SQL_NS = "http://apache.org/cocoon/SQL/2.0";
 
@@ -31,8 +27,6 @@ public class EresourcesCountGenerator extends DefaultModelAware implements Gener
     private Set<String> subsets = Collections.emptySet();
 
     private Set<String> types = Collections.emptySet();
-
-    private XMLConsumer xmlConsumer;
 
     public void generate() throws SAXException {
         Map<String, Integer> results = this.collectionManager.searchCount(this.types, this.subsets, this.query);
@@ -62,13 +56,6 @@ public class EresourcesCountGenerator extends DefaultModelAware implements Gener
         this.collectionManager = collectionManager;
     }
 
-    public void setConsumer(final XMLConsumer xmlConsumer) {
-        if (null == xmlConsumer) {
-            throw new IllegalArgumentException("null xmlConsumer");
-        }
-        this.xmlConsumer = xmlConsumer;
-    }
-
     public void setSubsets(final Set<String> subsets) {
         if (null == subsets) {
             throw new IllegalArgumentException("null subsets");
@@ -83,8 +70,7 @@ public class EresourcesCountGenerator extends DefaultModelAware implements Gener
         this.types = types;
     }
 
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+    public void initialize() {
         this.query = this.model.getString(LanewebObjectModel.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");

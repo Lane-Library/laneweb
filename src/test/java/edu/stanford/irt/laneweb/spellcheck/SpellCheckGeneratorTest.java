@@ -3,15 +3,12 @@ package edu.stanford.irt.laneweb.spellcheck;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
-import static org.easymock.classextension.EasyMock.reset;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
-import java.util.Map;
 
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;

@@ -5,19 +5,14 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.TreeSet;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.reading.Reader;
-
-import edu.stanford.irt.laneweb.model.DefaultModelAware;
+import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.suggest.EresourceSuggestionManager;
 import edu.stanford.irt.suggest.Suggestion;
 
-public class ExtensionsSuggestReader extends DefaultModelAware implements Reader {
+public class ExtensionsSuggestReader extends AbstractReader {
 
     private OutputStream outputStream;
 
@@ -44,10 +39,6 @@ public class ExtensionsSuggestReader extends DefaultModelAware implements Reader
         this.outputStream.write("]]".getBytes());
     }
 
-    public long getLastModified() {
-        return 0;
-    }
-
     public String getMimeType() {
         return "text/plain";
     }
@@ -59,15 +50,7 @@ public class ExtensionsSuggestReader extends DefaultModelAware implements Reader
         this.eresourceSuggestionManager = eresourceSuggestionManager;
     }
 
-    public void setOutputStream(final OutputStream outputStream) throws IOException {
-        if (null == outputStream) {
-            throw new IllegalArgumentException("null outputStream");
-        }
-        this.outputStream = outputStream;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters params) {
+    public void initialize() {
         String query = this.model.getString(LanewebObjectModel.QUERY);
         if (null == query) {
             throw new IllegalArgumentException("null query");
@@ -84,9 +67,5 @@ public class ExtensionsSuggestReader extends DefaultModelAware implements Reader
             query = sb.toString();
         }
         this.query = query;
-    }
-
-    public boolean shouldSetContentLength() {
-        return false;
     }
 }

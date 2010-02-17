@@ -1,13 +1,12 @@
 package edu.stanford.irt.laneweb.querymap;
 
 import static org.easymock.EasyMock.expect;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.classextension.EasyMock.createMock;
+import static org.easymock.classextension.EasyMock.replay;
+import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.fail;
 
-import java.util.Map;
-
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,7 +43,7 @@ public class AbstractQueryMapComponentTest {
         expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
+        expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);
         replayMocks();
         this.component.setup(null, null, null, this.parameters);
         this.component.getQueryMap();
@@ -57,7 +56,7 @@ public class AbstractQueryMapComponentTest {
         expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
+        expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);
         expect(this.queryMapper.getQueryMap("dvt")).andReturn(null);
         replayMocks();
         this.component.setup(null, null, null, this.parameters);
@@ -82,12 +81,12 @@ public class AbstractQueryMapComponentTest {
         try {
             this.component.setup(null, null, null, null);
             fail();
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalStateException e) {
         }
         expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
+        expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);
         replayMocks();
         try {
             this.component.setup(null, null, null, this.parameters);

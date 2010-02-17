@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.querymap;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
-import static org.easymock.classextension.EasyMock.reset;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.fail;
 
@@ -11,10 +10,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.util.Collections;
-import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -72,7 +69,7 @@ public class QueryMapReaderTest {
         expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
+        expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);
         replayMocks();
         this.reader.setOutputStream(this.outputStream);
         this.reader.setup(null, null, null, this.parameters);

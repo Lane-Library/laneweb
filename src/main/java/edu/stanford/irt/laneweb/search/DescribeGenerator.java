@@ -2,10 +2,6 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.Map;
-
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.search.Result;
@@ -23,10 +19,9 @@ public class DescribeGenerator extends AbstractSearchGenerator {
 
     private String[] engines;
 
-    @SuppressWarnings("unchecked")
     @Override //because query might be null which throws an exception in the parent class.
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.query = par.getParameter(LanewebObjectModel.QUERY, null);
+    public void initialize() {
+        this.query = this.parameterMap.get(LanewebObjectModel.QUERY);
         this.engines = this.model.getObject("engines", String[].class, NO_ENGINES);
     }
 

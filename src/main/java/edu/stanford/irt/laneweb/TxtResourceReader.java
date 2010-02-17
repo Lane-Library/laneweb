@@ -1,36 +1,23 @@
 package edu.stanford.irt.laneweb;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.Serializable;
-import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.reading.Reader;
-import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
-import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.DefaultModelAware;
+import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class TxtResourceReader extends DefaultModelAware implements Reader, CacheableProcessingComponent {
+public class TxtResourceReader extends AbstractReader implements CacheableProcessingComponent {
 
     private String defaultPath;
 
     private String valueToSubstitute;
 
-    protected OutputStream outputStream;
-
     protected String path;
-
-    protected Source source;
 
     public void generate() throws IOException {
         BufferedReader bf = null;
@@ -58,10 +45,6 @@ public class TxtResourceReader extends DefaultModelAware implements Reader, Cach
         return this.source.getLastModified();
     }
 
-    public String getMimeType() {
-        return null;
-    }
-
     public SourceValidity getValidity() {
         return this.source.getValidity();
     }
@@ -70,27 +53,14 @@ public class TxtResourceReader extends DefaultModelAware implements Reader, Cach
         this.defaultPath = path;
     }
 
-    public void setOutputStream(final OutputStream out) {
-        if ((out instanceof BufferedOutputStream) || (out instanceof org.apache.cocoon.util.BufferedOutputStream)) {
-            this.outputStream = out;
-        } else {
-            this.outputStream = new BufferedOutputStream(out, 1536);
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
+    public void initialize() {
         //get the path from a sitemap parameter or the base-path from the model, or the default
-        this.path = par.getParameter("path", this.model.getString(LanewebObjectModel.BASE_PATH, this.defaultPath));
-        this.source = resolver.resolveURI(src);
+        this.path = this.parameterMap.containsKey("path") ?
+                this.parameterMap.get("path") :
+                    this.model.getString(LanewebObjectModel.BASE_PATH, this.defaultPath);
     }
 
     public void setValueToSubstitute(final String valueToSubstitute) {
         this.valueToSubstitute = valueToSubstitute;
-    }
-
-    public boolean shouldSetContentLength() {
-        return false;
     }
 }

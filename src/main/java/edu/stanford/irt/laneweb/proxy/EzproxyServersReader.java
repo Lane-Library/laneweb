@@ -1,22 +1,17 @@
 package edu.stanford.irt.laneweb.proxy;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.reading.Reader;
-
 import edu.stanford.irt.laneweb.JdbcUtils;
+import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 
-public class EzproxyServersReader implements Reader {
+public class EzproxyServersReader extends AbstractReader {
 
     private static final byte[] HJ = "HJ ".getBytes();
     
@@ -50,8 +45,6 @@ public class EzproxyServersReader implements Reader {
 
     private DataSource dataSource;
 
-    private OutputStream outputStream;
-
     public void generate() throws IOException {
         Connection conn = null;
         Statement stmt = null;
@@ -76,10 +69,6 @@ public class EzproxyServersReader implements Reader {
         }
     }
 
-    public long getLastModified() {
-        return 0;
-    }
-
     public String getMimeType() {
         return "text/plain";
     }
@@ -89,20 +78,5 @@ public class EzproxyServersReader implements Reader {
             throw new IllegalArgumentException("null dataSource");
         }
         this.dataSource = dataSource;
-    }
-
-    public void setOutputStream(final OutputStream outputStream) {
-        if (null == outputStream) {
-            throw new IllegalArgumentException("null outputStream");
-        }
-        this.outputStream = outputStream;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters arg3) {
-    }
-
-    public boolean shouldSetContentLength() {
-        return false;
     }
 }

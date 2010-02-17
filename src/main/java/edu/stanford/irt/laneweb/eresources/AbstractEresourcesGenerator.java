@@ -1,23 +1,16 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
-import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.Generator;
-import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.model.DefaultModelAware;
+import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultsList;
 
-public abstract class AbstractEresourcesGenerator extends DefaultModelAware implements Generator {
-
-    private XMLConsumer xmlConsumer;
+public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     protected String alpha;
 
@@ -46,19 +39,15 @@ public abstract class AbstractEresourcesGenerator extends DefaultModelAware impl
         }
         this.collectionManager = collectionManager;
     }
-
-    public void setConsumer(final XMLConsumer xmlConsumer) {
-        if (null == xmlConsumer) {
-            throw new IllegalArgumentException("null xmlConsumer");
-        }
-        this.xmlConsumer = xmlConsumer;
-    }
     
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+    public void initialize() {
         this.query = this.model.getString(LanewebObjectModel.QUERY);
-        this.type = par.getParameter(LanewebObjectModel.TYPE, this.model.getString(LanewebObjectModel.TYPE));
-        this.subset = par.getParameter(LanewebObjectModel.SUBSET, this.model.getString(LanewebObjectModel.SUBSET));
+        this.type = this.parameterMap.containsKey(LanewebObjectModel.TYPE) ?
+                this.parameterMap.get(LanewebObjectModel.TYPE) :
+                    this.model.getString(LanewebObjectModel.TYPE);
+        this.subset = this.parameterMap.containsKey(LanewebObjectModel.SUBSET) ?
+                this.parameterMap.get(LanewebObjectModel.SUBSET) :
+                    this.model.getString(LanewebObjectModel.SUBSET);
         this.alpha = this.model.getString(LanewebObjectModel.ALPHA);
         this.mesh = this.model.getString(LanewebObjectModel.MESH);
         if (this.mesh != null) {

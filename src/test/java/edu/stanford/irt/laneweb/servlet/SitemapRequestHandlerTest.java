@@ -17,8 +17,6 @@ import org.apache.cocoon.servlet.RequestProcessor;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.servlet.SitemapRequestHandler;
-
 public class SitemapRequestHandlerTest {
 
     private SitemapRequestHandler handler;

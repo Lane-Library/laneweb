@@ -7,10 +7,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.searchresults.ContentResultSearchResult;
@@ -34,9 +31,7 @@ public class ContentSearchGenerator extends AbstractSearchGenerator {
 
     private int contentResultLimit;
 
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        super.setup(resolver, objectModel, src, par);
+    public void initialize() {
         this.engines = this.model.getObject("engines", String[].class, NO_ENGINES);
     }
 

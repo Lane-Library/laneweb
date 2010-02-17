@@ -2,15 +2,11 @@ package edu.stanford.irt.laneweb.querymap;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.sitemap.SitemapModelComponent;
-import org.apache.excalibur.source.Source;
-
-import edu.stanford.irt.laneweb.model.DefaultModelAware;
+import edu.stanford.irt.laneweb.cocoon.AbstractSitemapModelComponent;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.querymap.DescriptorWeightMap;
 import edu.stanford.irt.querymap.QueryMap;
@@ -18,7 +14,7 @@ import edu.stanford.irt.querymap.QueryMapper;
 import edu.stanford.irt.querymap.Resource;
 import edu.stanford.irt.querymap.StreamResourceMapping;
 
-public abstract class AbstractQueryMapComponent extends DefaultModelAware implements SitemapModelComponent {
+public abstract class AbstractQueryMapComponent extends AbstractSitemapModelComponent {
 
     private static final String ABSTRACT_COUNT = "abstract-count";
 
@@ -43,11 +39,7 @@ public abstract class AbstractQueryMapComponent extends DefaultModelAware implem
         this.queryMapper = queryMapper;
     }
 
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
-        if (null == params) {
-            throw new IllegalArgumentException("null params");
-        }
+    public void initialize() {
         if (null == this.queryMapper) {
             throw new IllegalStateException("null queryMapper");
         }
@@ -56,16 +48,14 @@ public abstract class AbstractQueryMapComponent extends DefaultModelAware implem
             throw new IllegalArgumentException("null query");
         }
         this.query = query;
-        String mapURL = params.getParameter(RESOURCE_MAPS, null);
-        String weightURL = params.getParameter(DESCRIPTOR_WEIGHTS, null);
-        int abstractCount = params.getParameterAsInteger(ABSTRACT_COUNT, 100);
+        String mapURL = this.parameterMap.get(RESOURCE_MAPS);
+        String weightURL = this.parameterMap.get(DESCRIPTOR_WEIGHTS);
+        String abstractCount = this.parameterMap.get(ABSTRACT_COUNT);
         if ((null != mapURL) && (null != weightURL)) {
             try {
-                Source mapSource = resolver.resolveURI(mapURL);
-                this.resourceMaps = new StreamResourceMapping(mapSource.getInputStream());
-                Source weightSource = resolver.resolveURI(weightURL);
-                this.descriptorWeights = new DescriptorWeightMap(weightSource.getInputStream());
-                this.abstractCount = abstractCount;
+                this.resourceMaps = new StreamResourceMapping(new URL(mapURL).openStream());
+                this.descriptorWeights = new DescriptorWeightMap(new URL(weightURL).openStream());
+                this.abstractCount = Integer.parseInt(abstractCount);
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             } catch (IOException e) {

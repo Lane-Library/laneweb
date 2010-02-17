@@ -4,10 +4,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
-
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
 
 import edu.stanford.irt.search.Result;
 
@@ -23,9 +19,8 @@ public class EngineSearchGenerator extends SearchGenerator {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        super.setup(resolver, objectModel, src, par);
+    public void initialize() {
+        super.initialize();
         String[] engines = this.model.getObject("engines", String[].class, EMPTY_ENGINES);
         this.engines = new HashSet(engines.length);
         this.engines.addAll(Arrays.asList(engines));

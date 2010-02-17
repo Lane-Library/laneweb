@@ -5,21 +5,16 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.TreeSet;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.reading.Reader;
-
-import edu.stanford.irt.laneweb.model.DefaultModelAware;
+import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.suggest.EresourceSuggestionManager;
 import edu.stanford.irt.suggest.HistorySuggestionManager;
 import edu.stanford.irt.suggest.MeshSuggestionManager;
 import edu.stanford.irt.suggest.Suggestion;
 
-public class SuggestionReader extends DefaultModelAware implements Reader {
+public class SuggestionReader extends AbstractReader {
 
     private static final byte[] JSON_1 = "{\"suggest\":[".getBytes();
 
@@ -34,8 +29,6 @@ public class SuggestionReader extends DefaultModelAware implements Reader {
     private String limit;
 
     private MeshSuggestionManager meshSuggestionManager;
-
-    private OutputStream outputStream;
 
     private String query;
 
@@ -83,10 +76,6 @@ public class SuggestionReader extends DefaultModelAware implements Reader {
         }
     }
 
-    public long getLastModified() {
-        return 0;
-    }
-
     public String getMimeType() {
         return "text/plain";
     }
@@ -112,21 +101,9 @@ public class SuggestionReader extends DefaultModelAware implements Reader {
         this.meshSuggestionManager = meshSuggestionManager;
     }
 
-    public void setOutputStream(final OutputStream outputStream) {
-        if (null == outputStream) {
-            throw new IllegalArgumentException("null outputStream");
-        }
-        this.outputStream = outputStream;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters params) {
+    public void initialize() {
         this.limit = this.model.getString(LanewebObjectModel.LIMIT);
         this.query = this.model.getString(LanewebObjectModel.QUERY);
-    }
-
-    public boolean shouldSetContentLength() {
-        return false;
     }
 
     private String escapeQuotes(final String string) {

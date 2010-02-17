@@ -1,10 +1,7 @@
 package edu.stanford.irt.laneweb.eresources.bassett;
 
 import java.util.Collection;
-import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
@@ -44,8 +41,7 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
         this.xmlConsumer.endDocument();
     }
 
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+    public void initialize() {
         this.query = this.model.getString(LanewebObjectModel.QUERY);
         this.region = this.model.getString(LanewebObjectModel.REGION);
         this.bassettNumber = this.model.getString(LanewebObjectModel.BASSETT_NUMBER);

@@ -5,10 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Map;
-
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
 
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.Result;
@@ -38,9 +34,8 @@ public class ResourceSearchGenerator extends SearchGenerator {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        super.setup(resolver, objectModel, src, par);
+    public void initialize() {
+        super.initialize();
         String[] resources = this.model.getObject("resources", String[].class, EMPTY_RESOURCES);
         this.resources = new HashSet(resources.length);
         this.resources.addAll(Arrays.asList(resources));

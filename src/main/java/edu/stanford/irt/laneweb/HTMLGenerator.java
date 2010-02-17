@@ -1,27 +1,20 @@
 package edu.stanford.irt.laneweb;
 
 import java.io.IOException;
-import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.generation.Generator;
-import org.apache.cocoon.xml.XMLConsumer;
-import org.apache.excalibur.source.Source;
-import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.cyberneko.html.HTMLConfiguration;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
+
 /**
  * The neko html generator reads HTML from a source, converts it to XHTML and generates SAX Events. It uses the NekoHTML
  * library to do this.
  */
-public class HTMLGenerator implements Generator, CacheableProcessingComponent {
+public class HTMLGenerator extends AbstractGenerator {
 
     private static class HtmlSAXParser extends AbstractSAXParser {
 
@@ -30,19 +23,13 @@ public class HTMLGenerator implements Generator, CacheableProcessingComponent {
         }
     }
 
-    /** The source, if coming from a file */
-    private Source source;
-
-    private XMLConsumer xmlConsumer;
-
     /**
      * Generate XML data.
      * 
      * @throws IOException
-     * @throws SourceNotFoundException
      * @throws SAXException
      */
-    public void generate() throws SourceNotFoundException, IOException, SAXException {
+    public void generate() throws SAXException, IOException {
         HTMLConfiguration conf = new HTMLConfiguration();
         conf.setProperty("http://cyberneko.org/html/properties/default-encoding", "UTF-8");
         conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
@@ -68,22 +55,5 @@ public class HTMLGenerator implements Generator, CacheableProcessingComponent {
      */
     public SourceValidity getValidity() {
         return this.source.getValidity();
-    }
-
-    public void setConsumer(final XMLConsumer xmlConsumer) {
-        this.xmlConsumer = xmlConsumer;
-    }
-
-    /**
-     * Setup the html generator. Try to get the last modification date of the source for caching.
-     * 
-     * @throws IOException
-     * @throws SAXException
-     * @throws ProcessingException
-     */
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
-            throws ProcessingException, SAXException, IOException {
-        this.source = resolver.resolveURI(src);
     }
 }

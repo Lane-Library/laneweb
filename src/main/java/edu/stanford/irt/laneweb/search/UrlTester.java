@@ -1,25 +1,18 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.environment.SourceResolver;
-import org.apache.cocoon.reading.Reader;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.DefaultModelAware;
+import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class UrlTester extends DefaultModelAware implements Reader {
+public class UrlTester extends AbstractReader {
 
     private HttpClient httpClient;
-
-    private OutputStream outputStream;
 
     private String url;
 
@@ -32,10 +25,6 @@ public class UrlTester extends DefaultModelAware implements Reader {
         this.outputStream.flush();
     }
 
-    public long getLastModified() {
-        return 0;
-    }
-
     public String getMimeType() {
         return "text/plain";
     }
@@ -44,20 +33,11 @@ public class UrlTester extends DefaultModelAware implements Reader {
         this.httpClient = msms.getHttpClient();
     }
 
-    public void setOutputStream(final OutputStream out) {
-        this.outputStream = out;
-    }
-
-    @SuppressWarnings("unchecked")
-    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
+    public void initialize() {
         this.url = this.model.getString(LanewebObjectModel.URL);
         if (!this.url.startsWith("http")) {
             this.url = "http://".concat(this.url);
         }
-    }
-
-    public boolean shouldSetContentLength() {
-        return false;
     }
 
     private byte[] getHeaderString(final GetMethod get) {
