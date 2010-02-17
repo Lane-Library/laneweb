@@ -57,9 +57,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="mesh" type="wildcard">
-                <map:generate type="er-mesh">
-                    <map:parameter name="mesh" value="${mesh}"/>
-                </map:generate>
+                <map:generate type="er-mesh"/>
                 <map:select type="resource-exists">
                     <map:when test="/xsl/eresources-rss.xsl">
                         <map:transform type="saxon" src="/xsl/eresources-rss.xsl">

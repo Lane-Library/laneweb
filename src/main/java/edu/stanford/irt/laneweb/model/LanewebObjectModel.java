@@ -43,6 +43,8 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
     
     public static final String ALPHA = "alpha";
     
+    public static final String MESH = "mesh";
+    
     public void setInitialEntries(Map<String, ObjectModelProvider> initialEntries) {
         for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {
             put(entry.getKey(), entry.getValue().getObject());
