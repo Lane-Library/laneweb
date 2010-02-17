@@ -19,10 +19,6 @@ import edu.stanford.irt.laneweb.model.LanewebObjectModel;
  */
 public class BassettEresourcesGenerator extends AbstractBassettGenerator {
 
-    private static final String BASSETT_NUMBER = "bn";
-
-    private static final String REGION = "region";
-
     private String bassettNumber;
 
     private String query;
@@ -51,7 +47,7 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         this.query = getString(LanewebObjectModel.QUERY);
-        this.region = par.getParameter(REGION, null);
-        this.bassettNumber = par.getParameter(BASSETT_NUMBER, null);
+        this.region = getString(LanewebObjectModel.REGION);
+        this.bassettNumber = getString(LanewebObjectModel.BASSETT_NUMBER);
     }
 }

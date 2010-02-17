@@ -100,6 +100,8 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                 model.put("facet", request.getParameter(name));
             } else if ("l".equals(name)) {
                 model.put(LanewebObjectModel.LIMIT, request.getParameter(name));
+            } else if ("bn".equals(name)) {
+                model.put(LanewebObjectModel.BASSETT_NUMBER, request.getParameter(name));
             } else if ("r".equals(name)) {
                 model.put("resources", request.getParameterValues(name));
             } else if ("e".equals(name)) {

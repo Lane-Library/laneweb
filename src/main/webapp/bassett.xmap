@@ -44,10 +44,7 @@
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="database" type="wildcard">
-                <map:generate type="bassett">
-                    <map:parameter name="bn" value="${bn}"/>
-                    <map:parameter name="region" value="${region}"/>
-                </map:generate>
+                <map:generate type="bassett"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="bassett-accordion" type="wildcard">
