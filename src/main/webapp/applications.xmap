@@ -54,13 +54,9 @@
                 </map:match>
                 <!-- result with proxy links (if necessary) in xml format -->
                 <map:match pattern="search/proxy/xml" type="wildcard">
-                    <map:generate type="search">
-                        <map:parameter name="query" value="${query}"/>
-                    </map:generate>
+                    <map:generate type="search"/>
                     <map:transform type="cme-links"/>
-                    <map:transform type="search-proxy-links">
-                        <map:parameter name="proxy-links" value="${proxy-links}"/>
-                    </map:transform>
+                    <map:transform type="search-proxy-links"/>
                     <map:serialize type="xml"/>
                 </map:match>
                
@@ -68,9 +64,7 @@
                 <map:match pattern="search/resource/proxy/xml" type="wildcard">
                     <map:generate type="search-resource"/>
                     <map:transform type="cme-links"/>
-                    <map:transform type="search-proxy-links">
-                        <map:parameter name="proxy-links" value="${proxy-links}"/>
-                    </map:transform>
+                    <map:transform type="search-proxy-links"/>
                     <map:serialize type="xml"/>
                 </map:match>
                

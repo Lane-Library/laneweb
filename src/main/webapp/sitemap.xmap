@@ -163,9 +163,7 @@
                     <map:parameter name="referrer" value="${referer}"/>
                     <map:parameter name="name" value="${name}"/>
                 </map:transform>
-                <map:transform type="proxy-links">
-                    <map:parameter name="proxy-links" value="${proxy-links}"/>
-                </map:transform>
+                <map:transform type="proxy-links"/>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -193,7 +191,6 @@
                     <map:parameter name="name" value="${name}"/>
                 </map:transform>
                 <map:transform type="proxy-links">
-                    <map:parameter name="proxy-links" value="${proxy-links}"/>
                     <!-- use this base-path to redirect proxy auth to lane.stanford.edu -->
                     <!--<map:parameter name="base-path" value="http://lane.stanford.edu"/>-->
                 </map:transform>
@@ -241,9 +238,7 @@
                     <map:parameter name="referrer" value="${referer}"/>
                     <map:parameter name="name" value="${name}"/>
                 </map:transform>
-                <map:transform type="proxy-links">
-                    <map:parameter name="proxy-links" value="${proxy-links}"/>
-                </map:transform>
+                <map:transform type="proxy-links"/>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xhtml" status-code="404"/>
             </map:handle-errors>

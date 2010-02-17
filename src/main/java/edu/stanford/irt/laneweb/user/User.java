@@ -4,8 +4,6 @@ public class User {
 
     public static final String NAME = "name";
 
-    public static final String PROXY_LINKS = "proxy-links";
-
     private String affiliation;
 
     /** the emr user id to pass in for cme authentication requests */

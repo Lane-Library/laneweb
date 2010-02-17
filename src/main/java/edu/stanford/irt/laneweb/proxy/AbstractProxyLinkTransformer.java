@@ -10,7 +10,6 @@ import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.model.ObjectModelAware;
 import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.Ticket;
-import edu.stanford.irt.laneweb.user.User;
 
 public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
@@ -48,7 +47,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
         this.sunetid = this.objectModelAware.getString(LanewebObjectModel.SUNETID);
         this.ticket = this.objectModelAware.getObject(LanewebObjectModel.TICKET, Ticket.class);
-        this.proxyLinks = params.getParameterAsBoolean(User.PROXY_LINKS, false);
+        this.proxyLinks = this.objectModelAware.getObject(LanewebObjectModel.PROXY_LINKS, Boolean.class, Boolean.FALSE);
         this.ipGroup = this.objectModelAware.getObject(LanewebObjectModel.IPGROUP, IPGroup.class, IPGroup.OTHER);
         this.basePath = params.getParameter(LanewebObjectModel.BASE_PATH, this.objectModelAware.getString(LanewebObjectModel.BASE_PATH));
     }

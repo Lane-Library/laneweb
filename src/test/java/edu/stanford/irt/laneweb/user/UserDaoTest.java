@@ -50,7 +50,7 @@ public class UserDaoTest {
       expect(this.request.getAttribute(LanewebObjectModel.SUNETID)).andReturn("ditenus");
       expect(this.request.getRemoteAddr()).andReturn("127.0.0.1");
       expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
-      expect(this.request.getParameter("proxy-links")).andReturn(null);
+      expect(this.request.getParameter(LanewebObjectModel.PROXY_LINKS)).andReturn(null);
       expect(this.request.getParameter(LanewebObjectModel.EMRID)).andReturn(null);
       expect(this.subjectSource.getSubject()).andReturn(this.subject);
       expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null);

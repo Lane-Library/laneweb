@@ -74,7 +74,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         if (user.getAffiliation() != null) {
             model.put("affiliation", user.getAffiliation());
         }
-        model.put("proxy-links", this.proxyLinks.proxyLinks(user, request));
+        model.put(LanewebObjectModel.PROXY_LINKS, this.proxyLinks.proxyLinks(user, request));
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);
         model.put("live-base", context.getAttribute("laneweb.context.live-base"));
         model.put("stage-base", context.getAttribute("laneweb.context.stage-base"));

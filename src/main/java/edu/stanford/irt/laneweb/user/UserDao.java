@@ -115,7 +115,7 @@ public class UserDao {
     }
 
     private void setProxyLinks(final User user, final HttpServletRequest request) {
-        String proxyLinks = request.getParameter(LanewebConstants.PROXY_LINKS);
+        String proxyLinks = request.getParameter(LanewebObjectModel.PROXY_LINKS);
         if (null != proxyLinks) {
             user.setProxyLinks(Boolean.valueOf(proxyLinks));
         }

@@ -29,6 +29,8 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
 
     public static final String IPGROUP = "ipgroup";
     
+    public static final String PROXY_LINKS = "proxy-links";
+    
     public void setInitialEntries(Map<String, ObjectModelProvider> initialEntries) {
         for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {
             put(entry.getKey(), entry.getValue().getObject());
