@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
 
-import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
