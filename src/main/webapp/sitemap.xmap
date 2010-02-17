@@ -166,7 +166,6 @@
                 <map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="${proxy-links}"/>
                     <map:parameter name="base-path" value="${base-path}"/>
-                    <map:parameter name="ticket" value="${ticket}"/>
                     <map:parameter name="ipgroup" value="${ipgroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
@@ -200,7 +199,6 @@
                     <!-- use this base-path to redirect proxy auth to lane.stanford.edu -->
                     <!--<map:parameter name="base-path" value="http://lane.stanford.edu"/>-->
                     <map:parameter name="base-path" value="${base-path}"/>
-                    <map:parameter name="ticket" value="${ticket}"/>
                     <map:parameter name="ipgroup" value="${ipgroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
@@ -250,7 +248,6 @@
                 <map:transform type="proxy-links">
                     <map:parameter name="proxy-links" value="${proxy-links}"/>
                     <map:parameter name="base-path" value="${base-path}"/>
-                    <map:parameter name="ticket" value="${ticket}"/>
                     <map:parameter name="ipgroup" value="${ipgroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>

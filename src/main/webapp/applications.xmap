@@ -60,7 +60,6 @@
                     <map:transform type="cme-links"/>
                     <map:transform type="search-proxy-links">
                         <map:parameter name="base-path" value="${base-path}"/>
-                        <map:parameter name="ticket" value="${ticket}"/>
                         <map:parameter name="ipgroup" value="${ipgroup}"/>
                         <map:parameter name="proxy-links" value="${proxy-links}"/>
                     </map:transform>
@@ -73,7 +72,6 @@
                     <map:transform type="cme-links"/>
                     <map:transform type="search-proxy-links">
                         <map:parameter name="base-path" value="${base-path}"/>
-                        <map:parameter name="ticket" value="${ticket}"/>
                         <map:parameter name="ipgroup" value="${ipgroup}"/>
                         <map:parameter name="proxy-links" value="${proxy-links}"/>
                     </map:transform>

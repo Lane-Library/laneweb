@@ -8,8 +8,6 @@ public class User {
 
     public static final String PROXY_LINKS = "proxy-links";
 
-    public static final String TICKET = "ticket";
-
     private String affiliation;
 
     /** the emr user id to pass in for cme authentication requests */

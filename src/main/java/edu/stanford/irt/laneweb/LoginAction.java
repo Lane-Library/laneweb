@@ -21,7 +21,7 @@ public class LoginAction implements Action {
             final String source, final Parameters params) throws IOException, ProcessingException {
         String sunetid = params.getParameter(LanewebObjectModel.SUNETID, null);
         String queryString = params.getParameter("query-string", null);
-        String ticket = params.getParameter("ticket", null);
+        String ticket = params.getParameter(LanewebObjectModel.TICKET, null);
         if (null == sunetid || sunetid.length() == 0) {
             String redirectUrl = "/secure/login.html";
             if (null != queryString && queryString.length() > 0) {

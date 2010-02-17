@@ -8,6 +8,7 @@ import org.apache.cocoon.transformation.AbstractTransformer;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.model.ObjectModelAware;
+import edu.stanford.irt.laneweb.user.Ticket;
 import edu.stanford.irt.laneweb.user.User;
 
 public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
@@ -28,7 +29,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     private String sunetid;
 
-    private String ticket;
+    private Ticket ticket;
 
     protected ProxyHostManager proxyHostManager;
 
@@ -47,7 +48,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
         this.sunetid = this.objectModelAware.getString(LanewebObjectModel.SUNETID);
-        this.ticket = params.getParameter(User.TICKET, EMPTY_STRING);
+        this.ticket = this.objectModelAware.getObject(LanewebObjectModel.TICKET, Ticket.class);
         this.proxyLinks = params.getParameterAsBoolean(User.PROXY_LINKS, false);
         this.ipGroup = params.getParameter(User.IPGROUP, "OTHER");
         this.basePath = params.getParameter(LanewebObjectModel.BASE_PATH, "");
@@ -57,7 +58,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
         StringBuilder sb = new StringBuilder(128);
         if ("SHC".equals(this.ipGroup) || "LPCH".equals(this.ipGroup)) {
             sb.append("http://laneproxy.stanford.edu/login?url=");
-        } else if (EMPTY_STRING.equals(this.ticket) || null == this.sunetid) {
+        } else if (null == this.ticket || null == this.sunetid) {
             sb.append(this.basePath).append(WEBAUTH_LINK);
         } else {
             sb.append(EZPROXY_LINK).append(this.sunetid).append(TICKET).append(this.ticket).append(URL);
