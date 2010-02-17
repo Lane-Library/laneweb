@@ -96,6 +96,8 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                 model.put(LanewebObjectModel.SUBSET, request.getParameter(name));
             } else if ("a".equals(name)) {
                 model.put(LanewebObjectModel.ALPHA, request.getParameter(name).substring(0,1));
+            } else if ("m".equals(name)) {
+                model.put(LanewebObjectModel.MESH, request.getParameter(name));
             } else if ("f".equals(name)) {
                 model.put("facet", request.getParameter(name));
             } else if ("l".equals(name)) {
