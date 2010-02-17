@@ -12,14 +12,14 @@ import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.spell.SpellChecker;
 
 /**
  * @author ceyates
  */
-public class SpellCheckGenerator extends DefaultObjectModelAware implements Generator {
+public class SpellCheckGenerator extends DefaultModelAware implements Generator {
 
     private XMLConsumer consumer;
 
@@ -53,7 +53,7 @@ public class SpellCheckGenerator extends DefaultObjectModelAware implements Gene
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
-        this.query = getString(LanewebObjectModel.QUERY);
+        this.query = this.model.getString(LanewebObjectModel.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }

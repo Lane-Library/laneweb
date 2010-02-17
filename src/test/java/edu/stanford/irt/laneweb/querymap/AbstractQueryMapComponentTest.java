@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.QueryMapper;
 
@@ -23,9 +24,7 @@ public class AbstractQueryMapComponentTest {
 
     private QueryMapper queryMapper;
     
-    private ObjectModel objectModel;
-    
-    private Map laneweb;
+    private Model model;
 
     @Before
     public void setUp() throws Exception {
@@ -33,12 +32,8 @@ public class AbstractQueryMapComponentTest {
         };
         this.parameters = createMock(Parameters.class);
         this.queryMapper = createMock(QueryMapper.class);
-        this.objectModel = createMock(ObjectModel.class);
-        this.laneweb = createMock(Map.class);
-        expect(this.objectModel.get("laneweb")).andReturn(this.laneweb);
-        replay(this.objectModel);
-        this.component.setObjectModel(this.objectModel);
-        reset(this.objectModel);
+        this.model = createMock(Model.class);
+        this.component.setModel(this.model);
     }
 
     @Test
@@ -46,7 +41,7 @@ public class AbstractQueryMapComponentTest {
         QueryMap queryMap = createMock(QueryMap.class);
         expect(this.queryMapper.getQueryMap("dvt")).andReturn(queryMap);
         this.component.setQueryMapper(this.queryMapper);
-        expect(this.laneweb.get(LanewebObjectModel.QUERY)).andReturn("dvt");
+        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
@@ -59,7 +54,7 @@ public class AbstractQueryMapComponentTest {
     @Test
     public void testReset() {
         this.component.setQueryMapper(this.queryMapper);
-        expect(this.laneweb.get(LanewebObjectModel.QUERY)).andReturn("dvt");
+        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
@@ -89,7 +84,7 @@ public class AbstractQueryMapComponentTest {
             fail();
         } catch (IllegalArgumentException e) {
         }
-        expect(this.laneweb.get(LanewebObjectModel.QUERY)).andReturn("dvt");
+        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
@@ -104,15 +99,13 @@ public class AbstractQueryMapComponentTest {
     }
     
     private void replayMocks() {
-        replay(this.laneweb);
-        replay(this.objectModel);
+        replay(this.model);
         replay(this.parameters);
         replay(this.queryMapper);
     }
     
     private void verifyMocks() {
-        verify(this.laneweb);
-        verify(this.objectModel);
+        verify(this.model);
         verify(this.parameters);
         verify(this.queryMapper);
     }

@@ -17,10 +17,10 @@ import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceValidity;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class TxtResourceReader extends DefaultObjectModelAware implements Reader, CacheableProcessingComponent {
+public class TxtResourceReader extends DefaultModelAware implements Reader, CacheableProcessingComponent {
 
     private String defaultPath;
 
@@ -82,7 +82,7 @@ public class TxtResourceReader extends DefaultObjectModelAware implements Reader
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
         //get the path from a sitemap parameter or the base-path from the model, or the default
-        this.path = par.getParameter("path", getString(LanewebObjectModel.BASE_PATH, this.defaultPath));
+        this.path = par.getParameter("path", this.model.getString(LanewebObjectModel.BASE_PATH, this.defaultPath));
         this.source = resolver.resolveURI(src);
     }
 

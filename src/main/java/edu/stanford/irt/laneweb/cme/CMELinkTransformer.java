@@ -10,7 +10,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
-import edu.stanford.irt.laneweb.model.ObjectModelAware;
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.model.ModelAware;
 import edu.stanford.irt.laneweb.user.User;
 
 /**
@@ -22,7 +23,7 @@ import edu.stanford.irt.laneweb.user.User;
  * 
  * @author ryanmax
  */
-public class CMELinkTransformer extends AbstractTransformer {
+public class CMELinkTransformer extends AbstractTransformer implements ModelAware {
 
     private static final String HREF = "href";
 
@@ -41,10 +42,10 @@ public class CMELinkTransformer extends AbstractTransformer {
 
     private boolean isSearchUrlElement = false;
     
-    private ObjectModelAware objectModelAware;
+    private Model model;
     
-    public void setObjectModelAware(final ObjectModelAware objectModelAware) {
-        this.objectModelAware = objectModelAware;
+    public void setModel(final Model model) {
+        this.model = model;
     }
 
     @Override
@@ -62,7 +63,7 @@ public class CMELinkTransformer extends AbstractTransformer {
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
-        this.emrid = this.objectModelAware.getString(LanewebObjectModel.EMRID);
+        this.emrid = this.model.getString(LanewebObjectModel.EMRID);
     }
 
     @Override

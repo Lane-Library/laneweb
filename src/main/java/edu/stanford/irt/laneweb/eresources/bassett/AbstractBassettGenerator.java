@@ -3,10 +3,10 @@ package edu.stanford.irt.laneweb.eresources.bassett;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
 
-import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultModelAware;
 
 // $Id$
-public abstract class AbstractBassettGenerator extends DefaultObjectModelAware implements Generator {
+public abstract class AbstractBassettGenerator extends DefaultModelAware implements Generator {
 
     protected BassettCollectionManager collectionManager;
     protected String query;

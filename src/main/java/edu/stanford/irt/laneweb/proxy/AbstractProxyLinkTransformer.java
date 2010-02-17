@@ -7,11 +7,12 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.transformation.AbstractTransformer;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
-import edu.stanford.irt.laneweb.model.ObjectModelAware;
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.model.ModelAware;
 import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.Ticket;
 
-public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
+public abstract class AbstractProxyLinkTransformer extends AbstractTransformer implements ModelAware {
 
     private static final String EZPROXY_LINK = "http://laneproxy.stanford.edu/login?user=";
 
@@ -33,23 +34,23 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     protected boolean proxyLinks;
     
-    protected ObjectModelAware objectModelAware;
+    protected Model model;
 
     public void setProxyHostManager(final ProxyHostManager proxyHostManager) {
         this.proxyHostManager = proxyHostManager;
     }
     
-    public void setObjectModelAware(final ObjectModelAware objectModelAware) {
-        this.objectModelAware = objectModelAware;
+    public void setModel(final Model model) {
+        this.model = model;
     }
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters params) {
-        this.sunetid = this.objectModelAware.getString(LanewebObjectModel.SUNETID);
-        this.ticket = this.objectModelAware.getObject(LanewebObjectModel.TICKET, Ticket.class);
-        this.proxyLinks = this.objectModelAware.getObject(LanewebObjectModel.PROXY_LINKS, Boolean.class, Boolean.FALSE);
-        this.ipGroup = this.objectModelAware.getObject(LanewebObjectModel.IPGROUP, IPGroup.class, IPGroup.OTHER);
-        this.basePath = params.getParameter(LanewebObjectModel.BASE_PATH, this.objectModelAware.getString(LanewebObjectModel.BASE_PATH));
+        this.sunetid = this.model.getString(LanewebObjectModel.SUNETID);
+        this.ticket = this.model.getObject(LanewebObjectModel.TICKET, Ticket.class);
+        this.proxyLinks = this.model.getObject(LanewebObjectModel.PROXY_LINKS, Boolean.class, Boolean.FALSE);
+        this.ipGroup = this.model.getObject(LanewebObjectModel.IPGROUP, IPGroup.class, IPGroup.OTHER);
+        this.basePath = params.getParameter(LanewebObjectModel.BASE_PATH, this.model.getString(LanewebObjectModel.BASE_PATH));
     }
 
     protected String createProxyLink(final String link) {

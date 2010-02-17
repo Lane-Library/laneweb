@@ -11,11 +11,11 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultsList;
 
-public abstract class AbstractEresourcesGenerator extends DefaultObjectModelAware implements Generator {
+public abstract class AbstractEresourcesGenerator extends DefaultModelAware implements Generator {
 
     private XMLConsumer xmlConsumer;
 
@@ -56,11 +56,11 @@ public abstract class AbstractEresourcesGenerator extends DefaultObjectModelAwar
     
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.query = getString(LanewebObjectModel.QUERY);
-        this.type = par.getParameter(LanewebObjectModel.TYPE, getString(LanewebObjectModel.TYPE));
-        this.subset = par.getParameter(LanewebObjectModel.SUBSET, getString(LanewebObjectModel.SUBSET));
-        this.alpha = getString(LanewebObjectModel.ALPHA);
-        this.mesh = getString(LanewebObjectModel.MESH);
+        this.query = this.model.getString(LanewebObjectModel.QUERY);
+        this.type = par.getParameter(LanewebObjectModel.TYPE, this.model.getString(LanewebObjectModel.TYPE));
+        this.subset = par.getParameter(LanewebObjectModel.SUBSET, this.model.getString(LanewebObjectModel.SUBSET));
+        this.alpha = this.model.getString(LanewebObjectModel.ALPHA);
+        this.mesh = this.model.getString(LanewebObjectModel.MESH);
         if (this.mesh != null) {
             this.mesh = this.mesh.toLowerCase();
         }

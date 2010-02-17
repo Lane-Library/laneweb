@@ -26,7 +26,7 @@ public class EngineSearchGenerator extends SearchGenerator {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         super.setup(resolver, objectModel, src, par);
-        String[] engines = getObject("engines", String[].class, EMPTY_ENGINES);
+        String[] engines = this.model.getObject("engines", String[].class, EMPTY_ENGINES);
         this.engines = new HashSet(engines.length);
         this.engines.addAll(Arrays.asList(engines));
     }

@@ -10,7 +10,7 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.sitemap.SitemapModelComponent;
 import org.apache.excalibur.source.Source;
 
-import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.querymap.DescriptorWeightMap;
 import edu.stanford.irt.querymap.QueryMap;
@@ -18,7 +18,7 @@ import edu.stanford.irt.querymap.QueryMapper;
 import edu.stanford.irt.querymap.Resource;
 import edu.stanford.irt.querymap.StreamResourceMapping;
 
-public abstract class AbstractQueryMapComponent extends DefaultObjectModelAware implements SitemapModelComponent {
+public abstract class AbstractQueryMapComponent extends DefaultModelAware implements SitemapModelComponent {
 
     private static final String ABSTRACT_COUNT = "abstract-count";
 
@@ -51,7 +51,7 @@ public abstract class AbstractQueryMapComponent extends DefaultObjectModelAware 
         if (null == this.queryMapper) {
             throw new IllegalStateException("null queryMapper");
         }
-        String query = getString(LanewebObjectModel.QUERY);
+        String query = this.model.getString(LanewebObjectModel.QUERY);
         if (null == query) {
             throw new IllegalArgumentException("null query");
         }

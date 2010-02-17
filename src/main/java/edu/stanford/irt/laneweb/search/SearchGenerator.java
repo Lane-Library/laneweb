@@ -87,12 +87,12 @@ public class SearchGenerator extends AbstractSearchGenerator {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         super.setup(resolver, objectModel, src, par);
-        this.timeout = getString("timeout");
+        this.timeout = this.model.getString("timeout");
         if (null == this.timeout) {
             this.timeout = par.getParameter("timeout", null);
         }
-        this.wait = getString("wait");
-        this.synchronous = getString("synchronous");
+        this.wait = this.model.getString("wait");
+        this.synchronous = this.model.getString("synchronous");
         if (null == this.synchronous) {
             this.synchronous = par.getParameter("synchronous", null);
         }

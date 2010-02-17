@@ -8,14 +8,14 @@ import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.util.SAXResult;
 import edu.stanford.irt.search.util.SAXable;
 
-public abstract class AbstractSearchGenerator extends DefaultObjectModelAware implements Generator {
+public abstract class AbstractSearchGenerator extends DefaultModelAware implements Generator {
 
     protected XMLConsumer xmlConsumer;
 
@@ -41,7 +41,7 @@ public abstract class AbstractSearchGenerator extends DefaultObjectModelAware im
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.query = getString(LanewebObjectModel.QUERY);
+        this.query = this.model.getString(LanewebObjectModel.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }

@@ -27,6 +27,6 @@ public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerato
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.query = getString(LanewebObjectModel.QUERY, "bassett");
+        this.query = this.model.getString(LanewebObjectModel.QUERY, "bassett");
     }
 }

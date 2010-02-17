@@ -20,6 +20,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.suggest.MeshSuggestionManager;
 
 /**
@@ -33,9 +34,7 @@ public class SuggestionReaderTest {
 
     private SuggestionReader reader;
     
-    private ObjectModel objectModel;
-    
-    private Map laneweb;
+    private Model model;
 
     /**
      * @throws java.lang.Exception
@@ -47,12 +46,8 @@ public class SuggestionReaderTest {
         this.reader.setMeshSuggestionManager(this.meshSuggestionManager);
         this.outputStream = new ByteArrayOutputStream();
         this.reader.setOutputStream(this.outputStream);
-        this.objectModel = createMock(ObjectModel.class);
-        this.laneweb = createMock(Map.class);
-        expect(this.objectModel.get("laneweb")).andReturn(this.laneweb);
-        replay(this.objectModel);
-        this.reader.setObjectModel(this.objectModel);
-        reset(this.objectModel);
+        this.model = createMock(Model.class);
+        this.reader.setModel(this.model);
     }
 
     /**
@@ -62,8 +57,8 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerate() throws IOException {
-        expect(this.laneweb.get(LanewebObjectModel.QUERY)).andReturn("venous thrombosis");
-        expect(this.laneweb.get(LanewebObjectModel.LIMIT)).andReturn("mesh");
+        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("venous thrombosis");
+        expect(this.model.getString(LanewebObjectModel.LIMIT)).andReturn("mesh");
         replayMocks();
         this.reader.setup(null, null, null, null);
         this.reader.generate();
@@ -78,8 +73,8 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerateNull() throws IOException {
-        expect(this.laneweb.get(LanewebObjectModel.QUERY)).andReturn("asdfgh");
-        expect(this.laneweb.get(LanewebObjectModel.LIMIT)).andReturn("mesh");
+        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("asdfgh");
+        expect(this.model.getString(LanewebObjectModel.LIMIT)).andReturn("mesh");
         replayMocks();
         this.reader.setup(null, null, null, null);
         this.reader.generate();
@@ -98,12 +93,10 @@ public class SuggestionReaderTest {
     }
     
     private void replayMocks() {
-        replay(this.objectModel);
-        replay(this.laneweb);
+        replay(this.model);
     }
     
     private void verifyMocks() {
-        verify(this.objectModel);
-        verify(this.laneweb);
+        verify(this.model);
     }
 }

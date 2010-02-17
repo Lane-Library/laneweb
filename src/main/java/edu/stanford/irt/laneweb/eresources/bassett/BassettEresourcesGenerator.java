@@ -46,8 +46,8 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.query = getString(LanewebObjectModel.QUERY);
-        this.region = getString(LanewebObjectModel.REGION);
-        this.bassettNumber = getString(LanewebObjectModel.BASSETT_NUMBER);
+        this.query = this.model.getString(LanewebObjectModel.QUERY);
+        this.region = this.model.getString(LanewebObjectModel.REGION);
+        this.bassettNumber = this.model.getString(LanewebObjectModel.BASSETT_NUMBER);
     }
 }

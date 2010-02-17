@@ -37,7 +37,7 @@ public class ContentSearchGenerator extends AbstractSearchGenerator {
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         super.setup(resolver, objectModel, src, par);
-        this.engines = getObject("engines", String[].class, NO_ENGINES);
+        this.engines = this.model.getObject("engines", String[].class, NO_ENGINES);
     }
 
     @Override

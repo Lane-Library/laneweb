@@ -12,14 +12,14 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.reading.Reader;
 
-import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.suggest.EresourceSuggestionManager;
 import edu.stanford.irt.suggest.HistorySuggestionManager;
 import edu.stanford.irt.suggest.MeshSuggestionManager;
 import edu.stanford.irt.suggest.Suggestion;
 
-public class SuggestionReader extends DefaultObjectModelAware implements Reader {
+public class SuggestionReader extends DefaultModelAware implements Reader {
 
     private static final byte[] JSON_1 = "{\"suggest\":[".getBytes();
 
@@ -121,8 +121,8 @@ public class SuggestionReader extends DefaultObjectModelAware implements Reader 
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters params) {
-        this.limit = getString(LanewebObjectModel.LIMIT);
-        this.query = getString(LanewebObjectModel.QUERY);
+        this.limit = this.model.getString(LanewebObjectModel.LIMIT);
+        this.query = this.model.getString(LanewebObjectModel.QUERY);
     }
 
     public boolean shouldSetContentLength() {

@@ -2,33 +2,30 @@ package edu.stanford.irt.laneweb.model;
 
 import java.util.Map;
 
-import org.apache.cocoon.el.objectmodel.ObjectModel;
-
 /**
- * Default implementation of {@link:ObjectModelAware}.  Extending this allows a bean
- * to get values of various type, not just String and primitives as from Parameters.
+ * Default implementation of {@link:Model}.
  * 
  * @author ceyates
  *
  * $Id$
  */
-public class DefaultObjectModelAware implements ObjectModelAware {
+public class MapModel implements Model {
     
-    private Map model;
+    private Map<String, Object> map;
+    
+    public MapModel(Map<String, Object> map) {
+        this.map = map;
+    }
 
     public <T> T getObject(String name, Class<T> clazz) {
-        return (T) this.model.get(name);
+        return (T) this.map.get(name);
     }
 
     public <T> T getObject(String name, Class<T> clazz, T defaultValue) {
-        if (!model.containsKey(name)) {
+        if (!map.containsKey(name)) {
             return defaultValue;
         }
         return getObject(name, clazz);
-    }
-
-    public void setObjectModel(ObjectModel objectModel) {
-        this.model = (Map) objectModel.get("laneweb");
     }
     
     public String getString(String name) {

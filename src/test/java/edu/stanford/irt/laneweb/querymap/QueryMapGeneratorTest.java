@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.querymap.Descriptor;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.QueryMapper;
@@ -36,9 +37,7 @@ public class QueryMapGeneratorTest {
 
     private QueryMapper queryMapper;
     
-    private ObjectModel objectModel;
-    
-    private Map laneweb;
+    private Model model;
     
     private Descriptor descriptor;
     
@@ -52,15 +51,11 @@ public class QueryMapGeneratorTest {
         this.parameters = createMock(Parameters.class);
         this.queryMapper = createMock(QueryMapper.class);
         this.consumer = createMock(XMLConsumer.class);
-        this.objectModel = createMock(ObjectModel.class);
-        this.laneweb = createMock(Map.class);
+        this.model = createMock(Model.class);
         this.descriptor = createMock(Descriptor.class);
         this.resourceMap = createMock(ResourceMap.class);
         this.queryMap = createMock(QueryMap.class);
-        expect(this.objectModel.get("laneweb")).andReturn(this.laneweb);
-        replay(this.objectModel);
-        this.generator.setObjectModel(this.objectModel);
-        reset(this.objectModel);
+        this.generator.setModel(this.model);
     }
 
     @Test
@@ -76,7 +71,7 @@ public class QueryMapGeneratorTest {
         expect(queryMap.getFrequencies()).andReturn(null);
         expect(this.queryMapper.getQueryMap("dvt")).andReturn(queryMap);
         this.generator.setQueryMapper(this.queryMapper);
-        expect(this.laneweb.get(LanewebObjectModel.QUERY)).andReturn("dvt");
+        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
@@ -114,7 +109,7 @@ public class QueryMapGeneratorTest {
             fail();
         } catch (IllegalArgumentException e) {
         }
-        expect(this.laneweb.get(LanewebObjectModel.QUERY)).andReturn("dvt");
+        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
@@ -131,8 +126,7 @@ public class QueryMapGeneratorTest {
     private void replayMocks() {
         replay(this.parameters);
         replay(this.queryMapper);
-        replay(this.objectModel);
-        replay(this.laneweb);
+        replay(this.model);
         replay(this.descriptor);
         replay(this.resourceMap);
         replay(this.queryMap);
@@ -141,8 +135,7 @@ public class QueryMapGeneratorTest {
     private void verifyMocks() {
         verify(this.parameters);
         verify(this.queryMapper);
-        verify(this.objectModel);
-        verify(this.laneweb);
+        verify(this.model);
         verify(this.descriptor);
         verify(this.resourceMap);
         verify(this.queryMap);

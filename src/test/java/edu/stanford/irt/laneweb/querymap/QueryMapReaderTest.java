@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.querymap.Descriptor;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.QueryMapper;
@@ -36,9 +37,7 @@ public class QueryMapReaderTest {
 
     private QueryMapReader reader;
     
-    private ObjectModel objectModel;
-    
-    private Map laneweb;
+    private Model model;
     
     private Descriptor descriptor;
     
@@ -52,15 +51,11 @@ public class QueryMapReaderTest {
         this.parameters = createMock(Parameters.class);
         this.queryMapper = createMock(QueryMapper.class);
         this.outputStream = createMock(OutputStream.class);
-        this.objectModel = createMock(ObjectModel.class);
-        this.laneweb = createMock(Map.class);
+        this.model = createMock(Model.class);
         this.descriptor = createMock(Descriptor.class);
         this.resourceMap = createMock(ResourceMap.class);
         this.queryMap = createMock(QueryMap.class);
-        expect(this.objectModel.get("laneweb")).andReturn(this.laneweb);
-        replay(this.objectModel);
-        this.reader.setObjectModel(this.objectModel);
-        reset(this.objectModel);
+        this.reader.setModel(this.model);
     }
 
     @Test
@@ -74,7 +69,7 @@ public class QueryMapReaderTest {
         expect(queryMap.getResourceMap()).andReturn(resourceMap);
         expect(this.queryMapper.getQueryMap("dvt")).andReturn(queryMap);
         this.reader.setQueryMapper(this.queryMapper);
-        expect(this.laneweb.get(LanewebObjectModel.QUERY)).andReturn("dvt");
+        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameterAsInteger("abstract-count", 100)).andReturn(null);
@@ -98,8 +93,7 @@ public class QueryMapReaderTest {
     private void replayMocks() {
         replay(this.parameters);
         replay(this.queryMapper);
-        replay(this.objectModel);
-        replay(this.laneweb);
+        replay(this.model);
         replay(this.descriptor);
         replay(this.resourceMap);
         replay(this.queryMap);
@@ -108,8 +102,7 @@ public class QueryMapReaderTest {
     private void verifyMocks() {
         verify(this.parameters);
         verify(this.queryMapper);
-        verify(this.objectModel);
-        verify(this.laneweb);
+        verify(this.model);
         verify(this.descriptor);
         verify(this.resourceMap);
         verify(this.queryMap);

@@ -12,10 +12,10 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.DefaultObjectModelAware;
+import edu.stanford.irt.laneweb.model.DefaultModelAware;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class UrlTester extends DefaultObjectModelAware implements Reader {
+public class UrlTester extends DefaultModelAware implements Reader {
 
     private HttpClient httpClient;
 
@@ -50,7 +50,7 @@ public class UrlTester extends DefaultObjectModelAware implements Reader {
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
-        this.url = getString(LanewebObjectModel.URL);
+        this.url = this.model.getString(LanewebObjectModel.URL);
         if (!this.url.startsWith("http")) {
             this.url = "http://".concat(this.url);
         }

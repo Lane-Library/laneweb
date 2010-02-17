@@ -67,10 +67,19 @@
         </property>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.model.DefaultObjectModelAware"
-        class="edu.stanford.irt.laneweb.model.DefaultObjectModelAware"
+    <bean id="edu.stanford.irt.laneweb.model.Model"
+        class="edu.stanford.irt.laneweb.model.MapModel"
+        scope="request">
+        <constructor-arg>
+            <bean factory-bean="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
+                factory-method="getObject"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.model.DefaultModelAware"
+        class="edu.stanford.irt.laneweb.model.DefaultModelAware"
         scope="prototype" abstract="true">
-        <property name="objectModel" ref="org.apache.cocoon.el.objectmodel.ObjectModel"/>
+        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
     </bean>
     
 </beans>
