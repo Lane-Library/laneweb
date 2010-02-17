@@ -8,7 +8,6 @@
                 value="${remote-host}/${request-uri}/${query-string}"/>
             <map:match pattern="search" type="wildcard">
                 <map:generate type="er-search">
-                    <map:parameter name="subset" value="${subset}"/>
                     <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
@@ -17,7 +16,6 @@
                 <map:generate type="er-browse">
                     <map:parameter name="alpha" value="${alpha}"/>
                     <map:parameter name="mesh" value="${mesh}"/>
-                    <map:parameter name="subset" value="${subset}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
@@ -35,7 +33,6 @@
                 <map:generate type="er-mesh">
                     <map:parameter name="alpha" value="${alpha}"/>
                     <map:parameter name="mesh" value="${mesh}"/>
-                    <map:parameter name="subset" value="${subset}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
@@ -44,21 +41,18 @@
                 <map:generate type="er-core">
                     <map:parameter name="alpha" value="${alpha}"/>
                     <map:parameter name="mesh" value="${mesh}"/>
-                    <map:parameter name="subset" value="${subset}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="histdb" type="wildcard">
                 <map:generate type="history-search">
-                    <map:parameter name="subset" value="${subset}"/>
                     <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="history-search" type="wildcard">
                 <map:generate type="history-search">
-                    <map:parameter name="subset" value="${subset}"/>
                     <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:serialize type="xml"/>

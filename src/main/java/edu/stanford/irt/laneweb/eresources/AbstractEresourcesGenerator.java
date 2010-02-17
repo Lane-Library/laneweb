@@ -21,8 +21,6 @@ public abstract class AbstractEresourcesGenerator extends DefaultObjectModelAwar
 
     private static final String MESH = "mesh";
 
-    private static final String SUBSET = "subset";
-
     private static final String TYPE = "type";
     
     private XMLConsumer xmlConsumer;
@@ -69,10 +67,7 @@ public abstract class AbstractEresourcesGenerator extends DefaultObjectModelAwar
         if (null != this.type && this.type.length() == 0) {
             this.type = null;
         }
-        this.subset = par.getParameter(SUBSET, null);
-        if (null != this.subset && this.subset.length() == 0) {
-            this.subset = null;
-        }
+        this.subset = par.getParameter(LanewebObjectModel.SUBSET, getString(LanewebObjectModel.SUBSET));
         this.alpha = par.getParameter(ALPHA, null);
         if (this.alpha != null && this.alpha.length() == 0) {
             this.alpha = null;
