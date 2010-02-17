@@ -121,7 +121,7 @@ public class SuggestionReader extends DefaultObjectModelAware implements Reader 
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver arg0, final Map arg1, final String arg2, final Parameters params) {
-        this.limit = params.getParameter("limit", null);
+        this.limit = getString(LanewebObjectModel.LIMIT);
         this.query = getString(LanewebObjectModel.QUERY);
     }
 

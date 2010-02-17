@@ -15,7 +15,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +30,6 @@ public class SuggestionReaderTest {
     private MeshSuggestionManager meshSuggestionManager;
 
     private ByteArrayOutputStream outputStream;
-
-    private Parameters params;
 
     private SuggestionReader reader;
     
@@ -50,7 +47,6 @@ public class SuggestionReaderTest {
         this.reader.setMeshSuggestionManager(this.meshSuggestionManager);
         this.outputStream = new ByteArrayOutputStream();
         this.reader.setOutputStream(this.outputStream);
-        this.params = createMock(Parameters.class);
         this.objectModel = createMock(ObjectModel.class);
         this.laneweb = createMock(Map.class);
         expect(this.objectModel.get("laneweb")).andReturn(this.laneweb);
@@ -67,9 +63,9 @@ public class SuggestionReaderTest {
     @Test
     public void testGenerate() throws IOException {
         expect(this.laneweb.get(LanewebObjectModel.QUERY)).andReturn("venous thrombosis");
-        expect(this.params.getParameter("limit", null)).andReturn("mesh");
+        expect(this.laneweb.get(LanewebObjectModel.LIMIT)).andReturn("mesh");
         replayMocks();
-        this.reader.setup(null, null, null, this.params);
+        this.reader.setup(null, null, null, null);
         this.reader.generate();
         assertEquals("{\"suggest\":[\"Venous Thrombosis\"]}", new String(this.outputStream.toByteArray()));
         verifyMocks();
@@ -83,9 +79,9 @@ public class SuggestionReaderTest {
     @Test
     public void testGenerateNull() throws IOException {
         expect(this.laneweb.get(LanewebObjectModel.QUERY)).andReturn("asdfgh");
-        expect(this.params.getParameter("limit", null)).andReturn("mesh");
+        expect(this.laneweb.get(LanewebObjectModel.LIMIT)).andReturn("mesh");
         replayMocks();
-        this.reader.setup(null, null, null, this.params);
+        this.reader.setup(null, null, null, null);
         this.reader.generate();
         assertEquals("{\"suggest\":[]}", new String(this.outputStream.toByteArray()));
         verifyMocks();
@@ -102,13 +98,11 @@ public class SuggestionReaderTest {
     }
     
     private void replayMocks() {
-        replay(this.params);
         replay(this.objectModel);
         replay(this.laneweb);
     }
     
     private void verifyMocks() {
-        verify(this.params);
         verify(this.objectModel);
         verify(this.laneweb);
     }

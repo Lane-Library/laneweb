@@ -152,9 +152,7 @@
             <map:parameter name="request-key"
                 value="${remote-host}/${request-uri}/${query-string}"/>
             <map:match pattern="suggest/json" type="wildcard">
-                <map:read type="suggest">
-                    <map:parameter name="limit" value="${limit}"/>
-                </map:read>
+                <map:read type="suggest"/>
             </map:match>
         </map:pipeline>
         <!-- trying this out, might fill up cache with a bazillion query maps -->
