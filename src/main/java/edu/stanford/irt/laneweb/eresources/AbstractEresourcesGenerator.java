@@ -20,8 +20,6 @@ public abstract class AbstractEresourcesGenerator extends DefaultObjectModelAwar
     private static final String ALPHA = "alpha";
 
     private static final String MESH = "mesh";
-
-    private static final String TYPE = "type";
     
     private XMLConsumer xmlConsumer;
 
@@ -63,10 +61,7 @@ public abstract class AbstractEresourcesGenerator extends DefaultObjectModelAwar
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         this.query = getString(LanewebObjectModel.QUERY);
-        this.type = par.getParameter(TYPE, null);
-        if (null != this.type && this.type.length() == 0) {
-            this.type = null;
-        }
+        this.type = par.getParameter(LanewebObjectModel.TYPE, getString(LanewebObjectModel.TYPE));
         this.subset = par.getParameter(LanewebObjectModel.SUBSET, getString(LanewebObjectModel.SUBSET));
         this.alpha = par.getParameter(ALPHA, null);
         if (this.alpha != null && this.alpha.length() == 0) {

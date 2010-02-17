@@ -8,9 +8,7 @@
             <map:parameter name="request-key"
                 value="${remote-host}/${request-uri}/${query-string}"/>
             <map:match pattern="search" type="wildcard">
-                <map:generate type="er-search">
-                    <map:parameter name="type" value="${type}"/>
-                </map:generate>
+                <map:generate type="er-search"/>
                 <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -30,16 +28,12 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="histdb" type="wildcard">
-                <map:generate type="history-search">
-                    <map:parameter name="type" value="${type}"/>
-                </map:generate>
+                <map:generate type="history-search"/>
                 <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="history-search" type="wildcard">
-                <map:generate type="history-search">
-                    <map:parameter name="type" value="${type}"/>
-                </map:generate>
+                <map:generate type="history-search"/>
                 <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -70,7 +64,6 @@
                     <map:parameter name="alpha" value="${alpha}"/>
                     <map:parameter name="mesh" value="${mesh}"/>
                     <map:parameter name="subset" value="{1}"/>
-                    <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>

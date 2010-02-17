@@ -41,9 +41,7 @@
             <map:parameter name="cache-key" value="${request-uri};${query-string}"/>
             <map:parameter name="expires" value="access plus 1 hours"/>
             <map:match pattern="eresources" type="wildcard">
-                <map:generate type="er-search">
-                    <map:parameter name="type" value="${type}"/>
-                </map:generate>
+                <map:generate type="er-search"/>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
                     <map:parameter name="type" value="${type}"/>
                     <map:parameter name="mode" value="search"/>
@@ -53,7 +51,6 @@
             <map:match pattern="browse" type="wildcard">
                 <map:generate type="er-browse">
                     <map:parameter name="alpha" value="${alpha}"/>
-                    <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
                     <map:parameter name="alpha" value="${alpha}"/>
@@ -64,7 +61,6 @@
             <map:match pattern="mesh" type="wildcard">
                 <map:generate type="er-mesh">
                     <map:parameter name="mesh" value="${mesh}"/>
-                    <map:parameter name="type" value="${type}"/>
                 </map:generate>
                 <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
                     <map:parameter name="mesh" value="${mesh}"/>

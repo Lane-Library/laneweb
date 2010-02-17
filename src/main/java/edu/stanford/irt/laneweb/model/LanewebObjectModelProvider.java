@@ -91,7 +91,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                     throw new RuntimeException(e);
                 }
             } else if ("t".equals(name)) {
-                model.put("type", request.getParameter(name));
+                model.put(LanewebObjectModel.TYPE, request.getParameter(name));
             } else if ("s".equals(name)) {
                 model.put(LanewebObjectModel.SUBSET, request.getParameter(name));
             } else if ("a".equals(name)) {
