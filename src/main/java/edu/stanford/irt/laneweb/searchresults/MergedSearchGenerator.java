@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.regex.Pattern;
 
 import org.xml.sax.SAXException;
 
@@ -80,6 +81,10 @@ public class MergedSearchGenerator extends AbstractSearchGenerator {
                 engns.add(element);
             }
         }
+        Pattern queryTermPattern = null;
+        if (null != this.query) {
+            queryTermPattern = Pattern.compile(SearchResultHelper.regexifyQuery(this.query), Pattern.CASE_INSENSITIVE);            
+        }
         final SimpleQuery query = new SimpleQuery(this.query);
         Result result = this.metaSearchManager.search(query, this.defaultMetasearchTimeout, engns, true);
         for (Result engine : result.getChildren()) {
@@ -91,7 +96,7 @@ public class MergedSearchGenerator extends AbstractSearchGenerator {
                     int count = 0;
                     while (it.hasNext() && count <= this.contentResultLimit){
                         count++;
-                        ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next());
+                        ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next(), queryTermPattern);
                         crsr.setResourceHits(parentResource.getHits());
                         crsr.setResourceId(parentResource.getId());
                         crsr.setResourceName(parentResource.getDescription());

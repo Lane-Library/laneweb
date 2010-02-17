@@ -51,10 +51,11 @@ public class ContentResultSearchResult implements SearchResult, SAXableSearchRes
     /**
      * 
      */
-    public ContentResultSearchResult(ContentResult contentResult) {
+    public ContentResultSearchResult(ContentResult contentResult, Pattern queryTermPattern) {
         this.contentResult = contentResult;
         this.dedupTitle = this.contentResult.getTitle().toLowerCase().replaceAll("\\W", SearchResultHelper.EMPTY);
         this.sortTitle = SearchResultHelper.NON_FILING_PATTERN.matcher(dedupTitle).replaceFirst(SearchResultHelper.EMPTY);
+        this.queryTermPattern = queryTermPattern;
         this.score = computeScore();
     }
 
@@ -64,10 +65,6 @@ public class ContentResultSearchResult implements SearchResult, SAXableSearchRes
 
     public String getDedupTitle() {
         return this.dedupTitle;
-    }
-
-    public void setQueryTermPattern(Pattern queryTermPattern) {
-        this.queryTermPattern = queryTermPattern;
     }
 
     /**

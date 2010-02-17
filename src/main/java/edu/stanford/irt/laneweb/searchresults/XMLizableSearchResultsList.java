@@ -93,9 +93,6 @@ public class XMLizableSearchResultsList implements XMLizable {
         }
         if (null != this.contentResultSearchResults) {
             for (ContentResultSearchResult contentResult : this.contentResultSearchResults) {
-                if (null != this.query) {
-                    contentResult.setQueryTermPattern(queryTermPattern);
-                }
                 searchResults.add(contentResult);
             }
         }

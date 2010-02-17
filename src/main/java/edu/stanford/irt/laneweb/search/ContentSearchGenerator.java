@@ -7,10 +7,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.regex.Pattern;
 
+import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.searchresults.ContentResultSearchResult;
+import edu.stanford.irt.laneweb.searchresults.SearchResultHelper;
 import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultsList;
 import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.Result;
@@ -33,6 +37,7 @@ public class ContentSearchGenerator extends AbstractSearchGenerator {
 
     public void initialize() {
         this.engines = this.model.getObject("engines", String[].class, NO_ENGINES);
+        this.query = this.model.getString(LanewebObjectModel.QUERY);
     }
 
     @Override
@@ -61,6 +66,10 @@ public class ContentSearchGenerator extends AbstractSearchGenerator {
                 engns.add(element);
             }
         }
+        Pattern queryTermPattern = null;
+        if (null != this.query) {
+            queryTermPattern = Pattern.compile(SearchResultHelper.regexifyQuery(this.query), Pattern.CASE_INSENSITIVE);            
+        }
         final SimpleQuery query = new SimpleQuery(this.query);
         Result result = this.metaSearchManager.search(query, this.defaultTimeout, engns, true);
         for (Result engine : result.getChildren()) {
@@ -72,7 +81,7 @@ public class ContentSearchGenerator extends AbstractSearchGenerator {
                     int count = 0;
                     while (it.hasNext() && count <= this.contentResultLimit){
                         count++;
-                        ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next());
+                        ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next(), queryTermPattern);
                         crsr.setResourceHits(parentResource.getHits());
                         crsr.setResourceId(parentResource.getId());
                         crsr.setResourceName(parentResource.getDescription());
