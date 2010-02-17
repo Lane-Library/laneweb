@@ -8,12 +8,11 @@ import org.apache.cocoon.transformation.AbstractTransformer;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.model.ObjectModelAware;
+import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.Ticket;
 import edu.stanford.irt.laneweb.user.User;
 
 public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
-
-    private static final String EMPTY_STRING = "";
 
     private static final String EZPROXY_LINK = "http://laneproxy.stanford.edu/login?user=";
 
@@ -25,7 +24,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     private String basePath;
 
-    private String ipGroup;
+    private IPGroup ipGroup;
 
     private String sunetid;
 
@@ -50,7 +49,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
         this.sunetid = this.objectModelAware.getString(LanewebObjectModel.SUNETID);
         this.ticket = this.objectModelAware.getObject(LanewebObjectModel.TICKET, Ticket.class);
         this.proxyLinks = params.getParameterAsBoolean(User.PROXY_LINKS, false);
-        this.ipGroup = params.getParameter(User.IPGROUP, "OTHER");
+        this.ipGroup = this.objectModelAware.getObject(LanewebObjectModel.IPGROUP, IPGroup.class, IPGroup.OTHER);
         this.basePath = params.getParameter(LanewebObjectModel.BASE_PATH, "");
     }
 
@@ -58,7 +57,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
         StringBuilder sb = new StringBuilder(128);
         if ("SHC".equals(this.ipGroup) || "LPCH".equals(this.ipGroup)) {
             sb.append("http://laneproxy.stanford.edu/login?url=");
-        } else if (null == this.ticket || null == this.sunetid) {
+        } else if (null == this.ticket || null == this.sunetid ) {
             sb.append(this.basePath).append(WEBAUTH_LINK);
         } else {
             sb.append(EZPROXY_LINK).append(this.sunetid).append(TICKET).append(this.ticket).append(URL);

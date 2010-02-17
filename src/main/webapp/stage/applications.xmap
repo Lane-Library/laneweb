@@ -50,7 +50,6 @@
                     <map:transform type="cme-links"/>
                     <map:transform type="search-proxy-links">
                         <map:parameter name="base-path" value="${base-path}/stage"/>
-                        <map:parameter name="ipgroup" value="${ipgroup}"/>
                         <map:parameter name="proxy-links" value="${proxy-links}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
@@ -60,7 +59,6 @@
                     <map:transform type="cme-links"/>
                     <map:transform type="search-proxy-links">
                         <map:parameter name="base-path" value="${base-path}/stage"/>
-                        <map:parameter name="ipgroup" value="${ipgroup}"/>
                         <map:parameter name="proxy-links" value="${proxy-links}"/>
                     </map:transform>
                     <map:serialize type="xml"/>

@@ -2,8 +2,6 @@ package edu.stanford.irt.laneweb.user;
 
 public class User {
 
-    public static final String IPGROUP = "ipgroup";
-
     public static final String NAME = "name";
 
     public static final String PROXY_LINKS = "proxy-links";

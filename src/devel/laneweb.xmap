@@ -97,7 +97,6 @@
                 <map:transform type="proxy-links">
                     <map:parameter name="base-path" value="${base-path}/your-sunetid"/>
                     <map:parameter name="proxy-links" value="${proxy-links}"/>
-                    <map:parameter name="ipgroup" value="${ipgroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
@@ -152,7 +151,6 @@
                 <map:transform type="proxy-links">
                     <map:parameter name="base-path" value="${base-path}/your-sunetid"/>
                     <map:parameter name="proxy-links" value="${proxy-links}"/>
-                    <map:parameter name="ipgroup" value="${ipgroup}"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xhtml"/>

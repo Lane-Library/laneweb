@@ -26,6 +26,8 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
     public static final String SUNETID = "sunetid";
     
     public static final String TICKET = "ticket";
+
+    public static final String IPGROUP = "ipgroup";
     
     public void setInitialEntries(Map<String, ObjectModelProvider> initialEntries) {
         for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {
