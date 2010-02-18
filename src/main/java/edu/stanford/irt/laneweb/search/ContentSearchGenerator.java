@@ -35,8 +35,17 @@ public class ContentSearchGenerator extends AbstractSearchGenerator {
     private int contentResultLimit;
 
     public void initialize() {
-        this.engines = this.model.getObject("engines", String[].class, NO_ENGINES);
-        this.query = this.model.getString(LanewebObjectModel.QUERY);
+        super.initialize();
+        Object engines = this.model.getObject("engines", Object.class);
+        if (null == engines) {
+            this.engines = NO_ENGINES;
+        } else if (engines instanceof String) {
+            this.engines = new String[]{(String)engines};
+        } else {
+            this.engines = (String[]) engines;
+        }
+        //FIXME: figure out why the model returns a String when only one engine.
+        //this.engines = this.model.getObject("engines", String[].class, NO_ENGINES);
     }
 
     @Override

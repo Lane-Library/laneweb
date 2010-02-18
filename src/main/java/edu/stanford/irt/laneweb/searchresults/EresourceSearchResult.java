@@ -5,7 +5,6 @@ package edu.stanford.irt.laneweb.searchresults;
 
 import java.util.Collection;
 import java.util.TreeSet;
-import java.util.regex.Pattern;
 
 import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.ContentHandler;
@@ -27,8 +26,6 @@ public class EresourceSearchResult implements SearchResult, SAXableSearchResult 
     private Eresource eresource;
 
     private static final EresourceVersionComparator VERSION_COMPARATOR = new EresourceVersionComparator();
-
-    private Pattern queryTermPattern = null;
     
     private String sortTitle;
     
@@ -56,10 +53,6 @@ public class EresourceSearchResult implements SearchResult, SAXableSearchResult 
 
     public String getDedupTitle() {
         return this.dedupTitle;
-    }
-
-    public void setQueryTermPattern(Pattern queryTermPattern) {
-        this.queryTermPattern = queryTermPattern;
     }
 
     /*
@@ -97,7 +90,7 @@ public class EresourceSearchResult implements SearchResult, SAXableSearchResult 
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "eresource");
         XMLUtils.startElement(handler, NAMESPACE, RESULT, atts);
         SearchResultHelper.handleElement(handler, ID, Integer.toString(this.eresource.getId()));
-        SearchResultHelper.handleHighlightedElement(handler, TITLE, this.eresource.getTitle(), this.queryTermPattern);
+        SearchResultHelper.handleElement(handler, TITLE, this.eresource.getTitle());
         SearchResultHelper.handleElement(handler, SORT_TITLE, SearchResultHelper.NON_FILING_PATTERN.matcher(
                 this.eresource.getTitle()).replaceFirst(SearchResultHelper.EMPTY));
         SearchResultHelper.handleElement(handler, DEDUP_TITLE, this.getDedupTitle());

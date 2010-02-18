@@ -77,17 +77,11 @@ public class XMLizableSearchResultsList implements XMLizable {
         if (null != this.eresources) {
             for (Eresource eresource : this.eresources) {
                 EresourceSearchResult ersr = new EresourceSearchResult(eresource);
-                if (null != this.query) {
-                    ersr.setQueryTermPattern(queryTermPattern);
-                }
                 searchResults.add(ersr);
             }
         }
         if (null != this.eresourceSearchResults) {
             for (EresourceSearchResult eresource : this.eresourceSearchResults) {
-                if (null != this.query) {
-                    eresource.setQueryTermPattern(queryTermPattern);
-                }
                 searchResults.add(eresource);
             }
         }

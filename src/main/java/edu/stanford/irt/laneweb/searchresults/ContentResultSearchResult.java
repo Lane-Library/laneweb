@@ -245,15 +245,13 @@ public class ContentResultSearchResult implements SearchResult, SAXableSearchRes
             SearchResultHelper.handleElement(handler, CONTENT_ID, this.contentResult.getContentId());
         }
         if (null != this.contentResult.getTitle()) {
-            SearchResultHelper.handleHighlightedElement(handler, TITLE, this.contentResult.getTitle(),
-                    this.queryTermPattern);
+            SearchResultHelper.handleElement(handler, TITLE, this.contentResult.getTitle());
             SearchResultHelper.handleElement(handler, SORT_TITLE, SearchResultHelper.NON_FILING_PATTERN.matcher(
                     this.contentResult.getTitle()).replaceFirst(SearchResultHelper.EMPTY));
             SearchResultHelper.handleElement(handler, DEDUP_TITLE, this.getDedupTitle());
         }
         if (null != this.contentResult.getDescription()) {
-            SearchResultHelper.handleHighlightedElement(handler, DESCRIPTION, this.contentResult.getDescription(),
-                    this.queryTermPattern);
+            SearchResultHelper.handleElement(handler, DESCRIPTION, this.contentResult.getDescription());
         }
         if (null != this.contentResult.getAuthor()) {
             SearchResultHelper.handleElement(handler, AUTHOR, this.contentResult.getAuthor());

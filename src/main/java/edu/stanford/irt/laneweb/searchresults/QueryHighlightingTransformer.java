@@ -18,36 +18,35 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
 
     private static final Attributes EMPTY_ATTRIBUTES = new AttributesImpl();
 
-    private static final Pattern HYPHEN_PATTERN = Pattern.compile("\\-");
-
-    private static final Pattern INVERT_COMMAS_PATTERN = Pattern.compile("(\\(?((\\w| |-|_)+), ((\\w| |-|_)+)\\)?)");
-
-    private static final String INVERT_REPLACEMENT = "$1 and ($4 $2)";
-
-    private static final String PERIOD = "\\.";
-
-    private static final Pattern UNACCEPTABLE_CHARS_PATTERN = Pattern.compile("[^a-zA-Z0-9,-_ ]");
-
     private CharBuffer chars;
+
+    private int parseLevel = 0;
 
     private Pattern queryPattern;
 
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
-        while (this.chars.remaining() < length) {
-            CharBuffer newChars = CharBuffer.allocate(this.chars.capacity() + 256);
-            int position = this.chars.position();
-            this.chars.rewind();
-            newChars.append(this.chars.subSequence(0, position));
-            this.chars = newChars;
+        if (this.parseLevel > 0) {
+            while (this.chars.remaining() < length) {
+                CharBuffer newChars = CharBuffer.allocate(this.chars.capacity() + 256);
+                int position = this.chars.position();
+                this.chars.rewind();
+                newChars.append(this.chars.subSequence(0, position));
+                this.chars = newChars;
+            }
+            this.chars.put(ch, start, length);
+        } else {
+            this.xmlConsumer.characters(ch, start, length);
         }
-        this.chars.put(ch, start, length);
     }
 
     @Override
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
-        if (this.chars.position() != 0) {
+        if (this.parseLevel > 0) {
             handleMatches();
+        }
+        if ("title".equals(localName) || "description".equals(localName)) {
+            this.parseLevel--;
         }
         this.xmlConsumer.endElement(uri, localName, qName);
     }
@@ -55,8 +54,8 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
     @Override
     public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
             throws SAXException {
-        if (this.chars.position() != 0) {
-            handleMatches();
+        if ("title".equals(localName) || "description".equals(localName)) {
+            ++this.parseLevel;
         }
         this.xmlConsumer.startElement(uri, localName, qName, atts);
     }
@@ -69,7 +68,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
         while (matcher.find()) {
             int start = matcher.start();
             int end = matcher.end();
-            this.xmlConsumer.characters(this.chars.array(), currentInd, start);
+            this.xmlConsumer.characters(this.chars.array(), currentInd, start - currentInd);
             currentInd = end;
             this.xmlConsumer.startElement(SearchResultHelper.NAMESPACE, SearchResultHelper.KEYWORD,
                     SearchResultHelper.KEYWORD, EMPTY_ATTRIBUTES);
@@ -78,7 +77,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
             this.xmlConsumer.endElement(SearchResultHelper.NAMESPACE, SearchResultHelper.KEYWORD,
                     SearchResultHelper.KEYWORD);
         }
-        if (currentInd != position) {
+        if (currentInd < position) {
             this.xmlConsumer.characters(this.chars.array(), currentInd, position - currentInd);
         }
         this.chars.clear();
@@ -90,13 +89,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
         if (null == query) {
             throw new IllegalArgumentException("null query");
         }
-        String normalQuery;
-        normalQuery = query.toLowerCase();
-        normalQuery = INVERT_COMMAS_PATTERN.matcher(normalQuery).replaceAll(INVERT_REPLACEMENT);
-        normalQuery = HYPHEN_PATTERN.matcher(normalQuery).replaceAll(PERIOD);
-        normalQuery = UNACCEPTABLE_CHARS_PATTERN.matcher(normalQuery).replaceAll(EMPTY);
-        normalQuery = normalQuery.replaceAll(" and ", "|");
-        this.queryPattern = Pattern.compile(normalQuery);
+        this.queryPattern = Pattern.compile(SearchResultHelper.regexifyQuery(query), Pattern.CASE_INSENSITIVE);
         this.chars = CharBuffer.allocate(256);
     }
 }

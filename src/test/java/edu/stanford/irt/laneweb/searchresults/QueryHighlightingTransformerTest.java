@@ -40,6 +40,7 @@ public class QueryHighlightingTransformerTest {
     @Test
     public void testCharacters() throws SAXException {
         expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("query");
+        this.xmlConsumer.startElement(SearchResultHelper.NAMESPACE, SAXableSearchResult.TITLE, SAXableSearchResult.TITLE, null);
         this.xmlConsumer.characters(isA(char[].class), eq(0), eq(21));
         this.xmlConsumer.startElement(eq(SearchResultHelper.NAMESPACE), eq(SearchResultHelper.KEYWORD),
                 eq(SearchResultHelper.KEYWORD), isA(Attributes.class));
@@ -47,11 +48,12 @@ public class QueryHighlightingTransformerTest {
         this.xmlConsumer.endElement(eq(SearchResultHelper.NAMESPACE), eq(SearchResultHelper.KEYWORD),
                 eq(SearchResultHelper.KEYWORD));
         this.xmlConsumer.characters(isA(char[].class), eq(26), eq(13));
-        this.xmlConsumer.endElement(null, null, null);
+        this.xmlConsumer.endElement(SearchResultHelper.NAMESPACE, SAXableSearchResult.TITLE, SAXableSearchResult.TITLE);
         replayMocks();
         this.transformer.initialize();
+        this.transformer.startElement(SearchResultHelper.NAMESPACE, SAXableSearchResult.TITLE, SAXableSearchResult.TITLE, null);
         this.transformer.characters(CHARS, 0, CHARS.length);
-        this.transformer.endElement(null, null, null);
+        this.transformer.endElement(SearchResultHelper.NAMESPACE, SAXableSearchResult.TITLE, SAXableSearchResult.TITLE);
         verifyMocks();
     }
 

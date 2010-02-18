@@ -26,12 +26,14 @@
                 <!-- delete after next release (content will need change to search/content/html) -->
                 <map:match pattern="search/ranked/xml" type="wildcard">
                     <map:generate type="search-content"/>
+                    <map:transform type="query-highlighting"/>
                     <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/content/html returns xhtmlized metasearch content results -->
                 <map:match pattern="search/content/html" type="wildcard">
                     <map:generate type="search-content"/>
+                    <map:transform type="query-highlighting"/>
                     <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -40,6 +42,7 @@
                     <map:generate type="merged-search">
                         <map:parameter name="timeout" value="20000"/>
                     </map:generate>
+                    <map:transform type="query-highlighting"/>
                     <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>

@@ -89,28 +89,10 @@ public class SearchResultHelper {
      *            pattern to do keyword highlighting
      * @throws SAXException
      */
-    public static void handleHighlightedElement(final ContentHandler handler, final String name, final String content,
-            final Pattern queryTermPattern) throws SAXException {
+    public static void handleHighlightedElement(final ContentHandler handler, final String name, final String content) throws SAXException {
         if ((content == null) || (content.length() == 0)) {
             return;
         }
-        if (null == queryTermPattern) {
-            handleElement(handler, name, content);
-            return;
-        }
-        XMLUtils.startElement(handler, NAMESPACE, name);
-        Matcher highlightMatcher = queryTermPattern.matcher(content);
-        int currentInd = 0;
-        while (highlightMatcher.find()) {
-            int start = highlightMatcher.start();
-            int end = highlightMatcher.end();
-            XMLUtils.data(handler, content.substring(currentInd, start));
-            currentInd = end;
-            handleElement(handler, KEYWORD, highlightMatcher.group());
-        }
-        if (currentInd != content.length()) {
-            XMLUtils.data(handler, content.substring(currentInd));
-        }
-        XMLUtils.endElement(handler, name);
+        handleElement(handler, name, content);
     }
 }

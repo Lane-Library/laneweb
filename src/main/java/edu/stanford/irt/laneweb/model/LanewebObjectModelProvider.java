@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.model;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -108,8 +109,8 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                 model.put("resources", request.getParameterValues(name));
             } else if ("e".equals(name)) {
                 model.put("engines", request.getParameterValues(name));
-            } else {
-                model.put(name, request.getParameter(name));
+//            } else {
+//                model.put(name, request.getParameter(name));
             }
         }
         if (request.getQueryString() != null) {
@@ -131,6 +132,6 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             }
         }
         model.put("template", this.templateChooser.chooseTemplate(request));
-        return model;
+        return Collections.unmodifiableMap(model);
     }
 }
