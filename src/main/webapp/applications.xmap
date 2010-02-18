@@ -28,8 +28,10 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- delete after next release (content will need change to search/content/html) -->
-                <map:match pattern="search/ranked/xml" type="wildcard">
-                    <map:generate type="search-content"/>
+                <map:match pattern="search/ranked/xml/*" type="wildcard">
+                    <map:generate type="search-content">
+                        <map:parameter name="engine-list" value="{1}"/>
+                    </map:generate>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
