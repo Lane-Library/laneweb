@@ -46,10 +46,10 @@
     <xsl:variable name="search-request">
         <xsl:choose>
             <xsl:when test="count($engine-ids) > 0">
-                <xsl:value-of select="concat('cocoon://apps/search/engine/xml?e=',$engines-string)"/>   
+                <xsl:value-of select="concat('cocoon://apps/search/engine/xml/',$engines-string)"/>   
             </xsl:when>
             <xsl:when test="count($resource-ids) > 0">
-                <xsl:value-of select="concat('cocoon://apps/search/resource/xml?r=',$resources-string)"/>   
+                <xsl:value-of select="concat('cocoon://apps/search/resource/xml/',$resources-string)"/>   
             </xsl:when>
         </xsl:choose>
     </xsl:variable>
