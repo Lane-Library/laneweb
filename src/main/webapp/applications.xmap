@@ -15,12 +15,16 @@
                      <map:generate type="search"/>
                      <map:serialize type="xml"/>
                 </map:match>
-                <map:match pattern="search/engine/xml" type="wildcard">
-                    <map:generate type="search-engine"/>
+                <map:match pattern="search/engine/xml/*" type="wildcard">
+                    <map:generate type="search-engine">
+                        <map:parameter name="engine-list" value="{1}"/>
+                    </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>
-                <map:match pattern="search/resource/xml" type="wildcard">
-                    <map:generate type="search-resource"/>
+                <map:match pattern="search/resource/xml/*" type="wildcard">
+                    <map:generate type="search-resource">
+                        <map:parameter name="resource-list" value="{1}"/>
+                    </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- delete after next release (content will need change to search/content/html) -->

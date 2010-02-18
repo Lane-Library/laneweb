@@ -27,7 +27,7 @@
         <xsl:for-each select="distinct-values($engine-ids)">
             <xsl:value-of select="."/>
             <xsl:if test="position() != last()">
-                <xsl:text>&amp;e=</xsl:text>            
+                <xsl:text>,</xsl:text>            
             </xsl:if>
         </xsl:for-each>
     </xsl:variable>
@@ -38,7 +38,7 @@
         <xsl:for-each select="distinct-values($resource-ids)">
             <xsl:value-of select="."/>
             <xsl:if test="position() != last()">
-                <xsl:text>&amp;r=</xsl:text>            
+                <xsl:text>,</xsl:text>            
             </xsl:if>
         </xsl:for-each>
     </xsl:variable>
