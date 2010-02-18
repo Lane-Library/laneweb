@@ -61,24 +61,28 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
     }
 
     private void handleMatches() throws SAXException {
-        int position = this.chars.position();
+        int charsEnd = this.chars.position();
         this.chars.rewind();
-        Matcher matcher = this.queryPattern.matcher(this.chars);
-        int currentInd = 0;
-        while (matcher.find()) {
-            int start = matcher.start();
-            int end = matcher.end();
-            this.xmlConsumer.characters(this.chars.array(), currentInd, start - currentInd);
-            currentInd = end;
+        Matcher matcher = this.queryPattern.matcher(this.chars.subSequence(0, charsEnd));
+        int current = 0;
+        while (current < charsEnd && matcher.find()) {
+            int matchStart = matcher.start();
+            int matchEnd = matcher.end();
+            if (matchStart > current) {
+                //send chars before match:
+                this.xmlConsumer.characters(this.chars.array(), current, matchStart - current);
+            }
             this.xmlConsumer.startElement(SearchResultHelper.NAMESPACE, SearchResultHelper.KEYWORD,
                     SearchResultHelper.KEYWORD, EMPTY_ATTRIBUTES);
             char[] match = matcher.group().toCharArray();
             this.xmlConsumer.characters(match, 0, match.length);
             this.xmlConsumer.endElement(SearchResultHelper.NAMESPACE, SearchResultHelper.KEYWORD,
                     SearchResultHelper.KEYWORD);
+            current = matchEnd;
         }
-        if (currentInd < position) {
-            this.xmlConsumer.characters(this.chars.array(), currentInd, position - currentInd);
+        if (current < charsEnd) {
+            //send chars after last match:
+            this.xmlConsumer.characters(this.chars.array(), current, charsEnd - current);
         }
         this.chars.clear();
     }
