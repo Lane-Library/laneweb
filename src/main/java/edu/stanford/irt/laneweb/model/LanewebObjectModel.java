@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.model;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.apache.cocoon.el.objectmodel.ObjectModelProvider;
@@ -45,6 +44,10 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
     public static final String ALPHA = "alpha";
     
     public static final String MESH = "mesh";
+    
+    public static final String ENGINES = "engines";
+    
+    public static final String RESOURCES = "resources";
     
     public void setInitialEntries(Map<String, ObjectModelProvider> initialEntries) {
         for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {

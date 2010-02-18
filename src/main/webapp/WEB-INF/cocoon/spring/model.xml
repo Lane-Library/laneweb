@@ -70,10 +70,7 @@
     <bean id="edu.stanford.irt.laneweb.model.Model"
         class="edu.stanford.irt.laneweb.model.MapModel"
         scope="request">
-        <constructor-arg>
-            <bean factory-bean="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
-                factory-method="getObject"/>
-        </constructor-arg>
+        <constructor-arg ref="org.apache.cocoon.el.objectmodel.ObjectModel"/>
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.model.DefaultModelAware"

@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.model;
 
 import java.util.Map;
 
+import org.apache.cocoon.el.objectmodel.ObjectModel;
+
 /**
  * Default implementation of {@link:Model}.
  * 
@@ -13,8 +15,8 @@ public class MapModel implements Model {
     
     private Map<String, Object> map;
     
-    public MapModel(Map<String, Object> map) {
-        this.map = map;
+    public MapModel(ObjectModel objectModel) {
+        this.map = (Map<String, Object>) objectModel.get("laneweb");
     }
 
     public <T> T getObject(String name, Class<T> clazz) {

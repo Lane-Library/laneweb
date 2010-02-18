@@ -4,7 +4,7 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
@@ -25,10 +25,8 @@ import edu.stanford.irt.search.impl.SimpleQuery;
  * $Id$
  */
 public class ContentSearchGenerator extends AbstractSearchGenerator {
-    
-    private static final String[] NO_ENGINES = new String[0];
 
-    protected String[] engines;
+    protected Collection<String> engines;
 
     private long defaultTimeout;
 
@@ -36,16 +34,7 @@ public class ContentSearchGenerator extends AbstractSearchGenerator {
 
     public void initialize() {
         super.initialize();
-        Object engines = this.model.getObject("engines", Object.class);
-        if (null == engines) {
-            this.engines = NO_ENGINES;
-        } else if (engines instanceof String) {
-            this.engines = new String[]{(String)engines};
-        } else {
-            this.engines = (String[]) engines;
-        }
-        //FIXME: figure out why the model returns a String when only one engine.
-        //this.engines = this.model.getObject("engines", String[].class, NO_ENGINES);
+        this.engines = this.model.getObject(LanewebObjectModel.ENGINES, Collection.class, Collections.<String>emptyList());
     }
 
     @Override
@@ -67,19 +56,13 @@ public class ContentSearchGenerator extends AbstractSearchGenerator {
     }
     
     private Collection<ContentResultSearchResult> getContentResultList() {
-        Collection<String> engns = new HashSet<String>();
         Collection<ContentResultSearchResult> contentResults = new LinkedList<ContentResultSearchResult>();
-        if ((this.engines != null) && (this.engines.length > 0)) {
-            for (String element : this.engines) {
-                engns.add(element);
-            }
-        }
         Pattern queryTermPattern = null;
         if (null != this.query) {
             queryTermPattern = Pattern.compile(SearchResultHelper.regexifyQuery(this.query), Pattern.CASE_INSENSITIVE);            
         }
         final SimpleQuery query = new SimpleQuery(this.query);
-        Result result = this.metaSearchManager.search(query, this.defaultTimeout, engns, true);
+        Result result = this.metaSearchManager.search(query, this.defaultTimeout, this.engines, true);
         for (Result engine : result.getChildren()) {
             Result parentResource = null;
             for (Result resource : engine.getChildren()) {

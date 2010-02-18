@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.searchresults;
 
 import java.util.Collection;
 import java.util.TreeSet;
-import java.util.regex.Pattern;
 
 import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
@@ -65,12 +64,10 @@ public class XMLizableSearchResultsList implements XMLizable {
         }
         handler.startPrefixMapping("", NAMESPACE);
         XMLUtils.startElement(handler, NAMESPACE, RESULTS);
-        Pattern queryTermPattern = null;
         if (null != this.query) {
             XMLUtils.startElement(handler, NAMESPACE, QUERY);
             XMLUtils.data(handler, this.query);
             XMLUtils.endElement(handler, NAMESPACE, QUERY);
-            queryTermPattern = Pattern.compile(SearchResultHelper.regexifyQuery(this.query), Pattern.CASE_INSENSITIVE);
             
         }
         Collection<SearchResult> searchResults = new TreeSet<SearchResult>();

@@ -22,7 +22,7 @@ public class DescribeGenerator extends AbstractSearchGenerator {
     @Override //because query might be null which throws an exception in the parent class.
     public void initialize() {
         this.query = this.parameterMap.get(LanewebObjectModel.QUERY);
-        this.engines = this.model.getObject("engines", String[].class, NO_ENGINES);
+        this.engines = this.model.getObject(LanewebObjectModel.ENGINES, String[].class, NO_ENGINES);
     }
 
     @Override
