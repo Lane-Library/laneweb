@@ -44,9 +44,10 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/merged/html returns xhtmlized merged metasearch and eresources results -->
-                <map:match pattern="search/merged/html" type="wildcard">
+                <map:match pattern="search/merged/html/*" type="wildcard">
                     <map:generate type="merged-search">
                         <map:parameter name="timeout" value="20000"/>
+                        <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="saxon" src="context://xsl/search-result2html.xsl"/>
@@ -227,6 +228,7 @@
                     <map:part src="cocoon:/cache/search/specialty/specialty-pharmacy.html"/>
                     <map:part src="cocoon:/cache/search/specialty/specialty-pulmonary.html"/>
                 </map:aggregate>
+                <map:transform type="saxon" src="context://xsl/temp-engine-xinclude-fix.xsl"/>
                 <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>

@@ -13,6 +13,10 @@
         </xsl:copy>
     </xsl:template>
     
+    <xsl:template match="*">
+        <xsl:apply-templates select="*|@*"/>
+    </xsl:template>
+    
     <xsl:template match="h:html">
         <template id="{@id}">
             <xsl:apply-templates/>
@@ -23,15 +27,32 @@
         <resource idref="{@id}"/>
     </xsl:template>
     
-    <xsl:template match="xi:include">
-        <xsl:variable name="href" select="replace(@href,'.[e|r]=',' ')"/>
-        <xsl:for-each select="tokenize(string($href),' ')">
-            <xsl:if test="not(starts-with(.,'cocoon'))">
-                <engine idref="{.}"/>
-            </xsl:if>
+    <xsl:template match="xi:include/@href">
+        <xsl:variable name="engines">
+            <xsl:call-template name="engines">
+                <xsl:with-param name="string" select="."/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:for-each select="tokenize($engines,',')">
+            <engine idref="{.}"/>
         </xsl:for-each>
     </xsl:template>
     
-    <xsl:template match="text()"/>
+    <xsl:template match="text()|@*"/>
+    
+    <xsl:template name="engines">
+        <xsl:param name="string"/>
+        <xsl:choose>
+            <xsl:when test="contains($string,'/')">
+                <xsl:call-template name="engines">
+                    <xsl:with-param name="string" select="substring-after($string,'/')"/>
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$string"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     
 </xsl:stylesheet>
