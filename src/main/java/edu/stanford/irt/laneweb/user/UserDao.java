@@ -9,6 +9,7 @@ import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.ldap.AuthenticationException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 
@@ -86,6 +87,7 @@ public class UserDao {
         if (null != user.getSunetId() && null == user.getName()) {
             Subject subject = this.subjectSource.getSubject();
             if (null != subject) {
+                try {
                 Subject.doAs(subject, new PrivilegedAction<User>() {
 
                     public User run() {
@@ -110,6 +112,9 @@ public class UserDao {
                         return user;
                     }
                 });
+                } catch (AuthenticationException e) {
+                    LOGGER.error(e.getMessage(), e);
+                }
             }
         }
     }
