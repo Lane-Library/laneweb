@@ -5,6 +5,7 @@ import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.Ticket;
 
+// $Id$
 public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     private static final String EZPROXY_LINK = "http://laneproxy.stanford.edu/login?user=";
@@ -43,7 +44,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     protected String createProxyLink(final String link) {
         StringBuilder sb = new StringBuilder(128);
-        if ("SHC".equals(this.ipGroup) || "LPCH".equals(this.ipGroup)) {
+        if (IPGroup.SHC.equals(this.ipGroup) || IPGroup.LPCH.equals(this.ipGroup)) {
             sb.append("http://laneproxy.stanford.edu/login?url=");
         } else if (null == this.ticket || null == this.sunetid ) {
             sb.append(this.basePath).append(WEBAUTH_LINK);
