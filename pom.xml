@@ -502,6 +502,12 @@
          <version>2.5.2</version>
          <scope>test</scope>
       </dependency>
+      <dependency>
+         <artifactId>spring-test</artifactId>
+         <groupId>org.springframework</groupId>
+         <version>3.0.0.RELEASE</version>
+         <scope>test</scope>
+      </dependency>
    </dependencies>
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

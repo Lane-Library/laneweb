@@ -37,6 +37,14 @@ public class LanewebIntegrationBase {
             throw new UnsupportedOperationException();
         }
 
+        public boolean isWrapperFor(Class<?> iface) {
+            throw new UnsupportedOperationException();
+        }
+
+        public <T> T unwrap(Class<T> iface) {
+            throw new UnsupportedOperationException();
+        } 
+
         public PrintWriter getLogWriter() throws SQLException {
             // TODO Auto-generated method stub
             throw new UnsupportedOperationException();
