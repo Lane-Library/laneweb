@@ -101,6 +101,7 @@ public class SunetIdFilterTest {
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getSession(false)).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
+        expect(this.request.getHeader("User-Agent")).andReturn(null);
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);
@@ -113,6 +114,7 @@ public class SunetIdFilterTest {
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getSession(false)).andReturn(this.session);
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
+        expect(this.request.getHeader("User-Agent")).andReturn(null);
         expect(this.session.getAttribute(LanewebConstants.USER)).andReturn(null);
         this.chain.doFilter(this.request, this.response);
         replayMocks();

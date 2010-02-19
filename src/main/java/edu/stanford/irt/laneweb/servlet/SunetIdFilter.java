@@ -68,31 +68,52 @@ public class SunetIdFilter implements Filter {
      * @return the associated sunetid or null;
      */
     private String getSunetId(final HttpServletRequest request) {
+
+        String sunetid = getSunetidFromRequest(request);
+        
+        if (sunetid == null) {
+            sunetid = getSunetidFromSession(request.getSession(false));
+        }
+        
+        if (sunetid == null) {
+            sunetid = getSunetidFromCookie(request.getCookies(), request.getHeader("User-Agent"));
+        }
+        return sunetid;
+    }
+    
+    private String getSunetidFromCookie(Cookie[] cookies, String userAgent) {
         String sunetid = null;
-        // first check remoteUser then the X-WEBAUTH-USER header if set by
-        // apache
-        if ((sunetid = request.getRemoteUser()) == null && (sunetid = request.getHeader("X-WEBAUTH-USER")) == null) {
-            HttpSession session = null;
-            User user = null;
-            // next check User.getSunetId() if it is in an existing session.
-            if ((session = request.getSession(false)) != null && ((user = (User) session.getAttribute(LanewebConstants.USER))) != null) {
+        if (cookies != null && userAgent != null) {
+            for (Cookie cookie : cookies) {
+                if (LanewebConstants.LANE_COOKIE_NAME.equals(cookie.getName())) {
+                    PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue());
+                    if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
+                        sunetid = token.getSunetId();
+                    }
+                    break;
+                }
+            }
+        }
+        return sunetid;
+    }
+
+    private String getSunetidFromSession(HttpSession session) {
+        String sunetid = null;
+        if (session != null) {
+            User user = (User) session.getAttribute(LanewebConstants.USER);
+            if (user != null) {
                 sunetid = user.getSunetId();
             }
-            // finally see if there is a valid persistent login cookie.
-            if (sunetid == null) {
-                Cookie[] cookies = request.getCookies();
-                if (cookies != null) {
-                    for (Cookie cookie : cookies) {
-                        String userAgent = null;
-                        if (LanewebConstants.LANE_COOKIE_NAME.equals(cookie.getName()) && (userAgent = request.getHeader("User-Agent")) != null) {
-                            PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue());
-                            if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
-                                sunetid = token.getSunetId();
-                            }
-                            break;
-                        }
-                    }
-                }
+        }
+        return sunetid;
+    }
+
+    private String getSunetidFromRequest(HttpServletRequest request) {
+        String sunetid = request.getRemoteUser();
+        if (sunetid == null) {
+            sunetid = request.getHeader("X-WEBAUTH-USER");
+            if ("(null)".equals(sunetid)) {
+                sunetid = null;
             }
         }
         return sunetid;
