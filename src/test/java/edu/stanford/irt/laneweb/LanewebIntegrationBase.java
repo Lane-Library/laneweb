@@ -11,7 +11,6 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.ServletException;
 import javax.sql.DataSource;
 
-import org.junit.Test;
 import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.mock.jndi.SimpleNamingContextBuilder;
 import org.springframework.mock.web.MockServletContext;

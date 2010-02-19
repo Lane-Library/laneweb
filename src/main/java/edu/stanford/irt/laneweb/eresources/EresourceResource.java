@@ -1,9 +1,7 @@
-/**
- * 
- */
-package edu.stanford.irt.laneweb.searchresults;
+package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.TreeSet;
 
 import org.apache.cocoon.xml.XMLUtils;
@@ -15,77 +13,25 @@ import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.Link;
 import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.laneweb.AbstractResource;
-import edu.stanford.irt.laneweb.eresources.EresourceVersionComparator;
 import edu.stanford.irt.laneweb.search.QueryTermPattern;
 
-/**
- * @author ryanmax
- * 
- * $Id$
- */
-public class EresourceSearchResult extends AbstractResource implements SearchResult {
 
+public class EresourceResource extends AbstractResource {
+    
+    private static final Comparator<Version> VERSION_COMPARATOR = new EresourceVersionComparator();
+    
     private Eresource eresource;
 
-    private static final EresourceVersionComparator VERSION_COMPARATOR = new EresourceVersionComparator();
-    
-    private String sortTitle;
-    
-    private String dedupTitle;
-    
-    private int hashcode;
-
-    /**
-     * 
-     */
-    public EresourceSearchResult(Eresource eresource) {
+    public EresourceResource(Eresource eresource) {
         this.eresource = eresource;
-        this.hashcode = Integer.toString(this.eresource.getId()).hashCode();
-        this.dedupTitle = eresource.getTitle().toLowerCase().replaceAll("\\W", QueryTermPattern.EMPTY);
-        this.sortTitle = QueryTermPattern.NON_FILING_PATTERN.matcher(this.dedupTitle).replaceFirst(QueryTermPattern.EMPTY);
     }
 
-    public int getScore() {
-        return this.eresource.getScore();
-    }
-
-    public String getSortTitle() {
-        return this.sortTitle;
-    }
-
-    public String getDedupTitle() {
-        return this.dedupTitle;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.laneweb.MetaResult#toSAX(org.xml.sax.ContentHandler)
-     */
     public void toSAX(ContentHandler handler) throws SAXException {
-        this.handleEresource(handler, this.eresource);
+        handleEresource(handler);
     }
 
-    public int compareTo(SearchResult o) {
-        int scoreCmp = o.getScore() - this.eresource.getScore();
-        return (scoreCmp != 0 ? scoreCmp : this.getSortTitle().compareTo(o.getSortTitle()));
-    }
 
-    @Override
-    public int hashCode() {
-        return this.hashcode;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (!(other instanceof EresourceSearchResult)) {
-            return false;
-        }
-        EresourceSearchResult eres = (EresourceSearchResult) other;
-        return eres.eresource.getId() == this.eresource.getId();
-    }
-
-    private void handleEresource(final ContentHandler handler, final Eresource eresource) throws SAXException {
-        Collection<Version> versions = new TreeSet<Version>(VERSION_COMPARATOR);
+    private void handleEresource(final ContentHandler handler) throws SAXException {
         // TODO: returning result element for now ... turn into displayable?
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(this.eresource.getScore()));
@@ -95,8 +41,8 @@ public class EresourceSearchResult extends AbstractResource implements SearchRes
         handleElement(handler, TITLE, this.eresource.getTitle());
         handleElement(handler, SORT_TITLE, QueryTermPattern.NON_FILING_PATTERN.matcher(
                 this.eresource.getTitle()).replaceFirst(QueryTermPattern.EMPTY));
-        handleElement(handler, DEDUP_TITLE, this.getDedupTitle());
         XMLUtils.startElement(handler, NAMESPACE, VERSIONS);
+        Collection<Version> versions = new TreeSet<Version>(VERSION_COMPARATOR);
         versions.addAll(this.eresource.getVersions());
         for (Version version : versions) {
             handleVersion(handler, version);

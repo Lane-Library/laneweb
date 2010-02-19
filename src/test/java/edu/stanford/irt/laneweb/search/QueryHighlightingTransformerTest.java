@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.searchresults;
+package edu.stanford.irt.laneweb.search;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.eq;
@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.Resource;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.model.Model;
 
@@ -40,20 +41,20 @@ public class QueryHighlightingTransformerTest {
     @Test
     public void testCharacters() throws SAXException {
         expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("query");
-        this.xmlConsumer.startElement(SearchResultHelper.NAMESPACE, SAXableSearchResult.TITLE, SAXableSearchResult.TITLE, null);
+        this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE, null);
         this.xmlConsumer.characters(isA(char[].class), eq(0), eq(21));
-        this.xmlConsumer.startElement(eq(SearchResultHelper.NAMESPACE), eq(SearchResultHelper.KEYWORD),
-                eq(SearchResultHelper.KEYWORD), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD),
+                eq(Resource.KEYWORD), isA(Attributes.class));
         this.xmlConsumer.characters(isA(char[].class), eq(0), eq(5));
-        this.xmlConsumer.endElement(eq(SearchResultHelper.NAMESPACE), eq(SearchResultHelper.KEYWORD),
-                eq(SearchResultHelper.KEYWORD));
+        this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD),
+                eq(Resource.KEYWORD));
         this.xmlConsumer.characters(isA(char[].class), eq(26), eq(13));
-        this.xmlConsumer.endElement(SearchResultHelper.NAMESPACE, SAXableSearchResult.TITLE, SAXableSearchResult.TITLE);
+        this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE);
         replayMocks();
         this.transformer.initialize();
-        this.transformer.startElement(SearchResultHelper.NAMESPACE, SAXableSearchResult.TITLE, SAXableSearchResult.TITLE, null);
+        this.transformer.startElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE, null);
         this.transformer.characters(CHARS, 0, CHARS.length);
-        this.transformer.endElement(SearchResultHelper.NAMESPACE, SAXableSearchResult.TITLE, SAXableSearchResult.TITLE);
+        this.transformer.endElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE);
         verifyMocks();
     }
 

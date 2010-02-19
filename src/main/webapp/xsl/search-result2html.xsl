@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:s="http://lane.stanford.edu/search-results/1.0" exclude-result-prefixes="h s"
+    xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s"
     version="2.0">
 
 
     <xsl:variable name="search-terms">
-        <xsl:value-of select="/s:results/s:query"/>
+        <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
 
     <!-- number of result titles to return per resource; not enforced here, only used for when to build "more" links -->

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.searchresults;
+package edu.stanford.irt.laneweb.search;
 
 import java.nio.CharBuffer;
 import java.util.regex.Matcher;
@@ -8,6 +8,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.laneweb.Resource;
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
@@ -72,12 +73,10 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
                 //send chars before match:
                 this.xmlConsumer.characters(this.chars.array(), current, matchStart - current);
             }
-            this.xmlConsumer.startElement(SearchResultHelper.NAMESPACE, SearchResultHelper.KEYWORD,
-                    SearchResultHelper.KEYWORD, EMPTY_ATTRIBUTES);
+            this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD, EMPTY_ATTRIBUTES);
             char[] match = matcher.group().toCharArray();
             this.xmlConsumer.characters(match, 0, match.length);
-            this.xmlConsumer.endElement(SearchResultHelper.NAMESPACE, SearchResultHelper.KEYWORD,
-                    SearchResultHelper.KEYWORD);
+            this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD);
             current = matchEnd;
         }
         if (current < charsEnd) {
@@ -93,7 +92,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
         if (null == query) {
             throw new IllegalArgumentException("null query");
         }
-        this.queryPattern = Pattern.compile(SearchResultHelper.regexifyQuery(query), Pattern.CASE_INSENSITIVE);
+        this.queryPattern = QueryTermPattern.getPattern(query);
         this.chars = CharBuffer.allocate(256);
     }
 }

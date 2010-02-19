@@ -36,7 +36,7 @@ public class SpellCheckGenerator extends AbstractGenerator {
         this.spellChecker = spellChecker;
     }
 
-    public void initialize() {
+    protected void initialize() {
         this.query = this.model.getString(LanewebObjectModel.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");

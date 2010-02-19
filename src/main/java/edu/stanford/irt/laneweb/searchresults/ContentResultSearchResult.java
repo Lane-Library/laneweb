@@ -11,6 +11,8 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.laneweb.AbstractResource;
+import edu.stanford.irt.laneweb.search.QueryTermPattern;
 import edu.stanford.irt.search.ContentResult;
 
 /**
@@ -18,7 +20,7 @@ import edu.stanford.irt.search.ContentResult;
  * 
  * $Id$
  */
-public class ContentResultSearchResult implements SearchResult, SAXableSearchResult {
+public class ContentResultSearchResult extends AbstractResource implements SearchResult {
 
     private ContentResult contentResult;
 
@@ -53,8 +55,8 @@ public class ContentResultSearchResult implements SearchResult, SAXableSearchRes
      */
     public ContentResultSearchResult(ContentResult contentResult, Pattern queryTermPattern) {
         this.contentResult = contentResult;
-        this.dedupTitle = this.contentResult.getTitle().toLowerCase().replaceAll("\\W", SearchResultHelper.EMPTY);
-        this.sortTitle = SearchResultHelper.NON_FILING_PATTERN.matcher(dedupTitle).replaceFirst(SearchResultHelper.EMPTY);
+        this.dedupTitle = this.contentResult.getTitle().toLowerCase().replaceAll("\\W", QueryTermPattern.EMPTY);
+        this.sortTitle = QueryTermPattern.NON_FILING_PATTERN.matcher(dedupTitle).replaceFirst(QueryTermPattern.EMPTY);
         this.queryTermPattern = queryTermPattern;
         this.score = computeScore();
     }
@@ -169,7 +171,7 @@ public class ContentResultSearchResult implements SearchResult, SAXableSearchRes
     private int computeScore() {
         int score;
         double weight = computeWeight(ENGINEID_PATTERN.matcher(this.contentResult.getId()).replaceFirst(
-                SearchResultHelper.EMPTY));
+                QueryTermPattern.EMPTY));
         Pattern titleBeginsWithPattern = Pattern.compile("^(" + this.queryTermPattern.toString() + ").*",
                 Pattern.CASE_INSENSITIVE);
         boolean titleBeginsWithQueryTerms = titleBeginsWithPattern.matcher(this.contentResult.getTitle()).matches();
@@ -227,52 +229,52 @@ public class ContentResultSearchResult implements SearchResult, SAXableSearchRes
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");
         XMLUtils.startElement(handler, NAMESPACE, RESULT, atts);
         if (null != this.getResourceId()) {
-            SearchResultHelper.handleElement(handler, RESOURCE_ID, this.getResourceId());
+            handleElement(handler, RESOURCE_ID, this.getResourceId());
         }
         if (null != this.getResourceName()) {
-            SearchResultHelper.handleElement(handler, RESOURCE_NAME, this.getResourceName());
+            handleElement(handler, RESOURCE_NAME, this.getResourceName());
         }
         if (null != this.getResourceUrl()) {
-            SearchResultHelper.handleElement(handler, RESOURCE_URL, this.getResourceUrl());
+            handleElement(handler, RESOURCE_URL, this.getResourceUrl());
         }
         if (null != this.getResourceHits()) {
-            SearchResultHelper.handleElement(handler, RESOURCE_HITS, this.getResourceHits());
+            handleElement(handler, RESOURCE_HITS, this.getResourceHits());
         }
         if (null != this.contentResult.getId()) {
-            SearchResultHelper.handleElement(handler, ID, this.contentResult.getId());
+            handleElement(handler, ID, this.contentResult.getId());
         }
         if (null != this.contentResult.getContentId()) {
-            SearchResultHelper.handleElement(handler, CONTENT_ID, this.contentResult.getContentId());
+            handleElement(handler, CONTENT_ID, this.contentResult.getContentId());
         }
         if (null != this.contentResult.getTitle()) {
-            SearchResultHelper.handleElement(handler, TITLE, this.contentResult.getTitle());
-            SearchResultHelper.handleElement(handler, SORT_TITLE, SearchResultHelper.NON_FILING_PATTERN.matcher(
-                    this.contentResult.getTitle()).replaceFirst(SearchResultHelper.EMPTY));
-            SearchResultHelper.handleElement(handler, DEDUP_TITLE, this.getDedupTitle());
+            handleElement(handler, TITLE, this.contentResult.getTitle());
+            handleElement(handler, SORT_TITLE, QueryTermPattern.NON_FILING_PATTERN.matcher(
+                    this.contentResult.getTitle()).replaceFirst(QueryTermPattern.EMPTY));
+            handleElement(handler, DEDUP_TITLE, this.getDedupTitle());
         }
         if (null != this.contentResult.getDescription()) {
-            SearchResultHelper.handleElement(handler, DESCRIPTION, this.contentResult.getDescription());
+            handleElement(handler, DESCRIPTION, this.contentResult.getDescription());
         }
         if (null != this.contentResult.getAuthor()) {
-            SearchResultHelper.handleElement(handler, AUTHOR, this.contentResult.getAuthor());
+            handleElement(handler, AUTHOR, this.contentResult.getAuthor());
         }
         if (null != this.contentResult.getPublicationDate()) {
-            SearchResultHelper.handleElement(handler, PUBLICATION_DATE, this.contentResult.getPublicationDate());
+            handleElement(handler, PUBLICATION_DATE, this.contentResult.getPublicationDate());
         }
         if (null != this.contentResult.getPublicationTitle()) {
-            SearchResultHelper.handleElement(handler, PUBLICATION_TITLE, this.contentResult.getPublicationTitle());
+            handleElement(handler, PUBLICATION_TITLE, this.contentResult.getPublicationTitle());
         }
         if (null != this.contentResult.getPublicationVolume()) {
-            SearchResultHelper.handleElement(handler, PUBLICATION_VOLUME, this.contentResult.getPublicationVolume());
+            handleElement(handler, PUBLICATION_VOLUME, this.contentResult.getPublicationVolume());
         }
         if (null != this.contentResult.getPublicationIssue()) {
-            SearchResultHelper.handleElement(handler, PUBLICATION_ISSUE, this.contentResult.getPublicationIssue());
+            handleElement(handler, PUBLICATION_ISSUE, this.contentResult.getPublicationIssue());
         }
         if (null != this.contentResult.getPages()) {
-            SearchResultHelper.handleElement(handler, PAGES, this.contentResult.getPages());
+            handleElement(handler, PAGES, this.contentResult.getPages());
         }
         if (null != this.contentResult.getURL()) {
-            SearchResultHelper.handleElement(handler, URL, this.contentResult.getURL());
+            handleElement(handler, URL, this.contentResult.getURL());
         }
         XMLUtils.endElement(handler, RESULT);
     }

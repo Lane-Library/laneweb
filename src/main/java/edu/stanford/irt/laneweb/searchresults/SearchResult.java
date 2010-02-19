@@ -3,13 +3,12 @@
  */
 package edu.stanford.irt.laneweb.searchresults;
 
-import org.xml.sax.ContentHandler;
-import org.xml.sax.SAXException;
+import edu.stanford.irt.laneweb.Resource;
 
 /**
  * @author ryanmax
  */
-public interface SearchResult extends Comparable<SearchResult> {
+public interface SearchResult extends Resource, Comparable<SearchResult> {
 
     /**
      * @return the search score
@@ -25,6 +24,5 @@ public interface SearchResult extends Comparable<SearchResult> {
      * @return the dedupTitle
      */
     String getDedupTitle();
-
-    void toSAX(ContentHandler handler) throws SAXException;
+    
 }

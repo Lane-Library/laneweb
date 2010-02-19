@@ -33,7 +33,7 @@ public class UrlTester extends AbstractReader {
         this.httpClient = msms.getHttpClient();
     }
 
-    public void initialize() {
+    protected void initialize() {
         this.url = this.model.getString(LanewebObjectModel.URL);
         if (!this.url.startsWith("http")) {
             this.url = "http://".concat(this.url);

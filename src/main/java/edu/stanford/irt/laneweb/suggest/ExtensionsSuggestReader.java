@@ -50,7 +50,7 @@ public class ExtensionsSuggestReader extends AbstractReader {
         this.eresourceSuggestionManager = eresourceSuggestionManager;
     }
 
-    public void initialize() {
+    protected void initialize() {
         String query = this.model.getString(LanewebObjectModel.QUERY);
         if (null == query) {
             throw new IllegalArgumentException("null query");

@@ -101,7 +101,7 @@ public class SuggestionReader extends AbstractReader {
         this.meshSuggestionManager = meshSuggestionManager;
     }
 
-    public void initialize() {
+    protected void initialize() {
         this.limit = this.model.getString(LanewebObjectModel.LIMIT);
         this.query = this.model.getString(LanewebObjectModel.QUERY);
     }

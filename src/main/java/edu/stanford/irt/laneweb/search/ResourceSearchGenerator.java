@@ -32,7 +32,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
     }
 
     @Override
-    public void initialize() {
+    protected void initialize() {
         super.initialize();
         this.resources = this.model.getObject(LanewebObjectModel.RESOURCES, Collection.class, Collections.<String>emptyList());
         if (this.resources.size() == 0) {

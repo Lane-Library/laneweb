@@ -31,7 +31,7 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
     }
 
     @Override
-    public void initialize() {
+    protected void initialize() {
         super.initialize();
         this.expires = this.parameterMap.containsKey("expires") ?
                 Long.parseLong(this.parameterMap.get("expires")) :

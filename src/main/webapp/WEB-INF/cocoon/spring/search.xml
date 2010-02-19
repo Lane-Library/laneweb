@@ -12,6 +12,11 @@
     <bean id="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         class="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         parent="edu.stanford.irt.laneweb.model.DefaultModelAware"
+        abstract="true"/>
+    
+    <bean id="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"
+        class="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         abstract="true">
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
@@ -19,17 +24,24 @@
 
     <bean name="org.apache.cocoon.generation.Generator/search-describe"
         class="edu.stanford.irt.laneweb.search.DescribeGenerator"
-        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"/>
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"/>
 
     <bean name="org.apache.cocoon.generation.Generator/search"
         class="edu.stanford.irt.laneweb.search.SearchGenerator"
-        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
         <property name="defaultTimeout" value="60000"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.generation.Generator/er-search"
+        class="edu.stanford.irt.laneweb.search.EresourcesSearchGenerator"
+        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
+        <property name="collectionManager"
+            ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/search-content"
         class="edu.stanford.irt.laneweb.search.ContentSearchGenerator"
-        parent="edu.stanford.irt.laneweb.search.AbstractSearchGenerator">
+        parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
         <property name="defaultTimeout" value="20000"/>
         <property name="contentResultLimit" value="10"/>
     </bean>

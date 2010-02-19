@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.stanford.irt.laneweb.searchresults;
+package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -15,8 +15,11 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
-import edu.stanford.irt.laneweb.search.AbstractSearchGenerator;
+import edu.stanford.irt.laneweb.searchresults.ContentResultSearchResult;
+import edu.stanford.irt.laneweb.searchresults.EresourceSearchResult;
+import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultSet;
 import edu.stanford.irt.search.ContentResult;
+import edu.stanford.irt.search.MetaSearchManager;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -35,7 +38,9 @@ public class MergedSearchGenerator extends AbstractSearchGenerator {
 
     protected CollectionManager collectionManager;
 
-    public void initialize() {
+    private MetaSearchManager metaSearchManager;
+
+    protected void initialize() {
         super.initialize();
         this.engines = this.model.getObject(LanewebObjectModel.ENGINES, Collection.class, Collections.<String>emptyList());
         if (this.engines.size() == 0) {
@@ -50,10 +55,9 @@ public class MergedSearchGenerator extends AbstractSearchGenerator {
     }
 
     public void generate() throws SAXException {
-        XMLizableSearchResultsList mergedSearchResults = new XMLizableSearchResultsList();
-        mergedSearchResults.setQuery(this.query);
-        mergedSearchResults.setEresourceSearchResults(getEresourceList());
-        mergedSearchResults.setContentResultSearchResults(getContentResultList());
+        XMLizableSearchResultSet mergedSearchResults = new XMLizableSearchResultSet(this.query);
+        mergedSearchResults.addAll(getEresourceList());
+        mergedSearchResults.addAll(getContentResultList());
         this.xmlConsumer.startDocument();
         mergedSearchResults.toSAX(this.xmlConsumer);
         this.xmlConsumer.endDocument();
@@ -64,6 +68,10 @@ public class MergedSearchGenerator extends AbstractSearchGenerator {
             throw new IllegalArgumentException("null collectionManager");
         }
         this.collectionManager = collectionManager;
+    }
+
+    public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
+        this.metaSearchManager = msms.getMetaSearchManager();
     }
 
     public void setDefaultMetasearchTimeout(final long defaultTimeout) {
@@ -84,10 +92,7 @@ public class MergedSearchGenerator extends AbstractSearchGenerator {
 
     private Collection<ContentResultSearchResult> getContentResultList() {
         Collection<ContentResultSearchResult> contentResults = new LinkedList<ContentResultSearchResult>();
-        Pattern queryTermPattern = null;
-        if (null != this.query) {
-            queryTermPattern = Pattern.compile(SearchResultHelper.regexifyQuery(this.query), Pattern.CASE_INSENSITIVE);            
-        }
+        Pattern queryTermPattern = QueryTermPattern.getPattern(this.query);
         final SimpleQuery query = new SimpleQuery(this.query);
         Result result = this.metaSearchManager.search(query, this.defaultMetasearchTimeout, this.engines, true);
         for (Result engine : result.getChildren()) {
@@ -112,10 +117,5 @@ public class MergedSearchGenerator extends AbstractSearchGenerator {
             }
         }
         return contentResults;
-    }
-
-    @Override
-    protected Result doSearch() {
-        throw new UnsupportedOperationException();
     }
 }

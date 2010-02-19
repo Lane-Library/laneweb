@@ -51,8 +51,4 @@
         class="edu.stanford.irt.laneweb.eresources.MeSHEresourcesGenerator"
         parent="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator"/>
 
-    <bean name="org.apache.cocoon.generation.Generator/er-search"
-        class="edu.stanford.irt.laneweb.eresources.SearchEresourcesGenerator"
-        parent="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator"/>
-
 </beans>

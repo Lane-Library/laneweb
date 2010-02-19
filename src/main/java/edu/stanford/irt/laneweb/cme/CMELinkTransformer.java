@@ -48,7 +48,7 @@ public class CMELinkTransformer extends AbstractTransformer {
         this.xmlConsumer.characters(ch, start, length);
     }
 
-    public void initialize() {
+    protected void initialize() {
         this.emrid = this.model.getString(LanewebObjectModel.EMRID);
     }
 

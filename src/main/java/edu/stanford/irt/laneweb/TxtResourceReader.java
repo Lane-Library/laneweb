@@ -53,7 +53,7 @@ public class TxtResourceReader extends AbstractReader implements CacheableProces
         this.defaultPath = path;
     }
 
-    public void initialize() {
+    protected void initialize() {
         //get the path from a sitemap parameter or the base-path from the model, or the default
         this.path = this.parameterMap.containsKey("path") ?
                 this.parameterMap.get("path") :

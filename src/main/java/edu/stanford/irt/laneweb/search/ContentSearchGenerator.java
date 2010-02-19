@@ -14,8 +14,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.searchresults.ContentResultSearchResult;
-import edu.stanford.irt.laneweb.searchresults.SearchResultHelper;
-import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultsList;
+import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultSet;
 import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
@@ -25,7 +24,7 @@ import edu.stanford.irt.search.impl.SimpleQuery;
  * 
  * $Id$
  */
-public class ContentSearchGenerator extends AbstractSearchGenerator {
+public class ContentSearchGenerator extends AbstractMetasearchGenerator {
 
     protected Collection<String> engines;
 
@@ -33,7 +32,7 @@ public class ContentSearchGenerator extends AbstractSearchGenerator {
 
     private int contentResultLimit;
 
-    public void initialize() {
+    protected void initialize() {
         super.initialize();
         this.engines = this.model.getObject(LanewebObjectModel.ENGINES, Collection.class, Collections.<String>emptyList());
         if (this.engines.size() == 0) {
@@ -49,9 +48,8 @@ public class ContentSearchGenerator extends AbstractSearchGenerator {
 
     @Override
     public void generate() throws SAXException {
-        XMLizableSearchResultsList mergedSearchResults = new XMLizableSearchResultsList();
-        mergedSearchResults.setQuery(this.query);
-        mergedSearchResults.setContentResultSearchResults(getContentResultList());
+        XMLizableSearchResultSet mergedSearchResults = new XMLizableSearchResultSet(this.query);
+        mergedSearchResults.addAll(getContentResultList());
         this.xmlConsumer.startDocument();
         mergedSearchResults.toSAX(this.xmlConsumer);
         this.xmlConsumer.endDocument();
@@ -67,10 +65,7 @@ public class ContentSearchGenerator extends AbstractSearchGenerator {
     
     private Collection<ContentResultSearchResult> getContentResultList() {
         Collection<ContentResultSearchResult> contentResults = new LinkedList<ContentResultSearchResult>();
-        Pattern queryTermPattern = null;
-        if (null != this.query) {
-            queryTermPattern = Pattern.compile(SearchResultHelper.regexifyQuery(this.query), Pattern.CASE_INSENSITIVE);            
-        }
+        Pattern queryTermPattern = QueryTermPattern.getPattern(this.query);
         final SimpleQuery query = new SimpleQuery(this.query);
         Result result = this.metaSearchManager.search(query, this.defaultTimeout, this.engines, true);
         for (Result engine : result.getChildren()) {

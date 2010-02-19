@@ -18,7 +18,7 @@ public class EngineSearchGenerator extends SearchGenerator {
     }
 
     @Override
-    public void initialize() {
+    protected void initialize() {
         super.initialize();
         this.engines = this.model.getObject(LanewebObjectModel.ENGINES, Collection.class, Collections.<String>emptyList());
         if (this.engines.size() == 0) {

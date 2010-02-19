@@ -8,7 +8,6 @@ import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
-import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultsList;
 
 public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
@@ -21,16 +20,10 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
     protected String subset;
 
     protected String type;
-
-    protected String query;
     
     public void generate() throws SAXException {
-        XMLizableSearchResultsList eresources = new XMLizableSearchResultsList();
-        eresources.setQuery(this.query);
-        eresources.setEresources(getEresourceList());
-        this.xmlConsumer.startDocument();
+        XMLizableEresourceList eresources = new XMLizableEresourceList(getEresourceList());
         eresources.toSAX(this.xmlConsumer);
-        this.xmlConsumer.endDocument();
     }
 
     public void setCollectionManager(final CollectionManager collectionManager) {
@@ -40,8 +33,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
         this.collectionManager = collectionManager;
     }
     
-    public void initialize() {
-        this.query = this.model.getString(LanewebObjectModel.QUERY);
+    protected void initialize() {
         this.type = this.parameterMap.containsKey(LanewebObjectModel.TYPE) ?
                 this.parameterMap.get(LanewebObjectModel.TYPE) :
                     this.model.getString(LanewebObjectModel.TYPE);

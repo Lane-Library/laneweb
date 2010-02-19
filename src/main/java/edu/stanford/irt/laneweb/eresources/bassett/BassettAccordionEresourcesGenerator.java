@@ -23,7 +23,7 @@ public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerato
         this.xmlConsumer.endDocument();
     }
     
-    public void initialize() {
+    protected void initialize() {
         this.query = this.model.getString(LanewebObjectModel.QUERY, "bassett");
     }
 }

@@ -39,7 +39,7 @@ public abstract class AbstractQueryMapComponent extends AbstractSitemapModelComp
         this.queryMapper = queryMapper;
     }
 
-    public void initialize() {
+    protected void initialize() {
         if (null == this.queryMapper) {
             throw new IllegalStateException("null queryMapper");
         }

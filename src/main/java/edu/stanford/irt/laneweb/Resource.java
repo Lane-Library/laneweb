@@ -1,15 +1,9 @@
-package edu.stanford.irt.laneweb.searchresults;
+package edu.stanford.irt.laneweb;
 
 import org.apache.excalibur.xml.sax.XMLizable;
 
-/**
- * 
- * @author ryanmax
- * 
- * $Id$
- *
- */
-public interface SAXableSearchResult extends XMLizable {
+
+public interface Resource extends XMLizable {
 
     public static final String RESULT = "result";
 
@@ -72,7 +66,12 @@ public interface SAXableSearchResult extends XMLizable {
     public static final String AUTHOR = "pub-author";
 
     public static final String PAGES = "pub-pages";
-
-    public static final String NAMESPACE = "http://lane.stanford.edu/search-results/1.0";
     
+    public static final String RESOURCES = "resources";
+    
+    public static final String QUERY = "query";
+
+//    public static final String NAMESPACE = "http://lane.stanford.edu/search-results/1.0";
+
+    public static final String NAMESPACE = "http://lane.stanford.edu/resources/1.0";
 }

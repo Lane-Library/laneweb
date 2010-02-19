@@ -13,14 +13,14 @@ import edu.stanford.irt.search.impl.SimpleQuery;
  *
  * $Id$
  */
-public class DescribeGenerator extends AbstractSearchGenerator {
+public class DescribeGenerator extends AbstractMetasearchGenerator {
     
     private static final String[] NO_ENGINES = new String[0];
 
     private String[] engines;
 
     @Override //because query might be null which throws an exception in the parent class.
-    public void initialize() {
+    protected void initialize() {
         this.query = this.parameterMap.get(LanewebObjectModel.QUERY);
         this.engines = this.model.getObject(LanewebObjectModel.ENGINES, String[].class, NO_ENGINES);
     }

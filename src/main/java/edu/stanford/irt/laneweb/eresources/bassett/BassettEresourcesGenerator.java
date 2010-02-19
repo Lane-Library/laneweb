@@ -41,7 +41,7 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
         this.xmlConsumer.endDocument();
     }
 
-    public void initialize() {
+    protected void initialize() {
         this.query = this.model.getString(LanewebObjectModel.QUERY);
         this.region = this.model.getString(LanewebObjectModel.REGION);
         this.bassettNumber = this.model.getString(LanewebObjectModel.BASSETT_NUMBER);

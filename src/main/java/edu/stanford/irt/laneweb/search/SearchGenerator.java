@@ -11,7 +11,7 @@ import edu.stanford.irt.search.impl.SimpleQuery;
  * @author ceyates
  * $Id$
  */
-public class SearchGenerator extends AbstractSearchGenerator {
+public class SearchGenerator extends AbstractMetasearchGenerator {
 
     private long defaultTimeout;
 
@@ -80,7 +80,7 @@ public class SearchGenerator extends AbstractSearchGenerator {
     }
 
     @Override
-    public void initialize() {
+    protected void initialize() {
         super.initialize();
         this.timeout = this.model.getString("timeout", this.parameterMap.get("timeout"));
         this.wait = this.model.getString("wait");
