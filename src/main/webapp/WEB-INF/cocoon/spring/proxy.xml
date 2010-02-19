@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    $Id$
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <bean id="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
+        class="edu.stanford.irt.laneweb.proxy.ProxyHostManager">
+        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.proxy.AbstractProxyLinkTransformer"
+        class="edu.stanford.irt.laneweb.proxy.AbstractProxyLinkTransformer"
+        abstract="true" scope="prototype">
+        <property name="proxyHostManager" ref="edu.stanford.irt.laneweb.proxy.ProxyHostManager"/>
+        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.transformation.Transformer/proxy-links"
+        class="edu.stanford.irt.laneweb.proxy.HtmlProxyLinkTransformer"
+        parent="edu.stanford.irt.laneweb.proxy.AbstractProxyLinkTransformer"/>
+    
+    <bean name="org.apache.cocoon.transformation.Transformer/search-proxy-links"
+        class="edu.stanford.irt.laneweb.proxy.ElementProxyLinkTransformer"
+        parent="edu.stanford.irt.laneweb.proxy.AbstractProxyLinkTransformer">
+        <property name="elementName" value="url"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.reading.Reader/ezproxy-servers" scope="prototype"
+        class="edu.stanford.irt.laneweb.proxy.EzproxyServersReader">
+        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+    </bean>
+
+</beans>
