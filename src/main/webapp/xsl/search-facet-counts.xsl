@@ -76,7 +76,7 @@
     <xsl:template match="st:template">
         <xsl:variable name="my-engine-ids" select="st:engine/@idref"/>
         <xsl:variable name="my-resource-ids" select="st:resource/@idref"/>
-        <xsl:variable name="hits" select="sum($search-node//engine[@status='successful' and @id=$my-engine-ids]/hits[.!=0]) + sum($search-node//resource[@status='successful' and @id=$my-resource-ids]/hits[.!=0])"/>
+        <xsl:variable name="hits" select="sum($search-node//engine[@status='successful' and @id=$my-engine-ids]/resource/hits[.!=0]) + sum($search-node//resource[@status='successful' and @id=$my-resource-ids]/hits[.!=0])"/>
         <xsl:variable name="totalEngineResourceCount" select="count($my-engine-ids) + count($my-resource-ids)"/>
         <xsl:variable name="status">
             <xsl:choose>
