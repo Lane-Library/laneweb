@@ -6,6 +6,7 @@ import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.security.auth.Subject;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -28,10 +29,9 @@ public class UserDao {
 
     public void getUserData(final User user, final HttpServletRequest request) {
         setIpGroup(user, request);
-        setSunetId(user, request);
         setTicket(user, request);
         setProxyLinks(user, request);
-        setLdapData(user);
+        setLdapData(user, request);
         setEmrId(user, request);
     }
 
@@ -83,15 +83,15 @@ public class UserDao {
         }
     }
 
-    private void setLdapData(final User user) {
-        if (null != user.getSunetId() && null == user.getName()) {
+    private void setLdapData(final User user, final ServletRequest request) {
+        if (null != request.getAttribute(LanewebObjectModel.SUNETID) && null == user.getName()) {
             Subject subject = this.subjectSource.getSubject();
             if (null != subject) {
                 try {
                 Subject.doAs(subject, new PrivilegedAction<User>() {
 
                     public User run() {
-                        UserDao.this.ldapTemplate.search("", "susunetid=" + user.getSunetId(), new AttributesMapper() {
+                        UserDao.this.ldapTemplate.search("", "susunetid=" + request.getAttribute(LanewebObjectModel.SUNETID), new AttributesMapper() {
 
                             public Object mapFromAttributes(final Attributes attributes) throws NamingException {
                                 Attribute currentAttribute = attributes.get("displayName");
@@ -126,14 +126,10 @@ public class UserDao {
         }
     }
 
-    private void setSunetId(final User user, final HttpServletRequest request) {
-        user.setSunetId((String) request.getAttribute(LanewebObjectModel.SUNETID));
-    }
-
     private void setTicket(final User user, final HttpServletRequest request) {
         Ticket ticket = user.getTicket();
-        if (null != user.getSunetId() && (null == ticket || !ticket.isValid())) {
-            user.setTicket(new Ticket(user.getSunetId(), this.ezproxyKey));
+        if (null != request.getAttribute(LanewebObjectModel.SUNETID) && (null == ticket || !ticket.isValid())) {
+            user.setTicket(new Ticket((String) request.getAttribute(LanewebObjectModel.SUNETID), this.ezproxyKey));
         }
     }
 }

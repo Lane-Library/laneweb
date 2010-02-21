@@ -87,8 +87,7 @@ public class SunetIdFilterTest {
         this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
         expect(this.request.getParameter(isA(String.class))).andReturn(null).times(2);
         User user = new User();
-        user.setSunetId("ditenus");
-        expect(this.session.getAttribute(LanewebConstants.USER)).andReturn(user);
+        expect(this.session.getAttribute(LanewebObjectModel.SUNETID)).andReturn("ditenus");
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);
@@ -115,7 +114,7 @@ public class SunetIdFilterTest {
         expect(this.request.getSession(false)).andReturn(this.session);
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
         expect(this.request.getHeader("User-Agent")).andReturn(null);
-        expect(this.session.getAttribute(LanewebConstants.USER)).andReturn(null);
+        expect(this.session.getAttribute(LanewebObjectModel.SUNETID)).andReturn(null);
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);

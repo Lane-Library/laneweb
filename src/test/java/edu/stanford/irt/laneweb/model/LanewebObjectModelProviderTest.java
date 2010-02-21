@@ -70,6 +70,7 @@ public class LanewebObjectModelProviderTest {
         this.objectModel.put("context", this.context);
         expect(this.pip.getObjectModel()).andReturn(this.objectModel);
         expect(this.request.getSession(true)).andReturn(this.session);
+        expect(this.request.getAttribute(LanewebObjectModel.SUNETID)).andReturn(null);
         expect(this.session.getAttribute(LanewebConstants.USER)).andReturn(null);
         this.userDao.getUserData(isA(User.class), eq(this.request));
         this.session.setAttribute(eq(LanewebConstants.USER), isA(User.class));

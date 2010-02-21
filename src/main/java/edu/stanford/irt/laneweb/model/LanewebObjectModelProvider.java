@@ -48,15 +48,18 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         Map<String, Object> model = new HashMap<String, Object>();
         HttpServletRequest request = (HttpServletRequest) objectModel.get("httprequest");
         HttpSession session = request.getSession(true);
+        //get the sunet id if set in SunetIdFilter and add it to the session and model
+        String sunetid = (String) request.getAttribute(LanewebObjectModel.SUNETID);
+        if (sunetid != null) {
+            model.put(LanewebObjectModel.SUNETID, sunetid);
+            session.setAttribute(LanewebObjectModel.SUNETID, sunetid);
+        }
         User user = (User) session.getAttribute(LanewebConstants.USER);
         if (null == user) {
             user = new User();
             session.setAttribute(LanewebConstants.USER, user);
         }
         this.userDao.getUserData(user, request);
-        if (user.getSunetId() != null) {
-            model.put(LanewebObjectModel.SUNETID, user.getSunetId());
-        }
         if (user.getIPGroup() != null) {
             model.put(LanewebObjectModel.IPGROUP, user.getIPGroup());
         }

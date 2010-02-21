@@ -40,10 +40,10 @@ public class SunetIdFilter implements Filter {
 
     /**
      * doFilter looks up the sunet id from the request, session, and lane-user
-     * cookie in that order. If there is a sunetid and a 'pl' request attribute
-     * of 'true', a lane user cookie is added to the response with a max age of
-     * two weeks. If there is a sunetid and a 'remove-pl' request attribute of
-     * 'true' the lane user cookie is set with a max age of zero.
+     * cookie in that order and sets it as a request attribute. If there is a sunetid
+     * and a 'pl' request parameter of 'true', a lane user cookie is added to the
+     * response with a max age of two weeks. If there is a sunetid and a 'remove-pl'
+     * request parameter of 'true' the lane user cookie is set with a max age of zero.
      */
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
         String sunetid = getSunetId((HttpServletRequest) request);
@@ -100,10 +100,7 @@ public class SunetIdFilter implements Filter {
     private String getSunetidFromSession(HttpSession session) {
         String sunetid = null;
         if (session != null) {
-            User user = (User) session.getAttribute(LanewebConstants.USER);
-            if (user != null) {
-                sunetid = user.getSunetId();
-            }
+            sunetid = (String) session.getAttribute(LanewebObjectModel.SUNETID);
         }
         return sunetid;
     }

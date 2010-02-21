@@ -15,8 +15,6 @@ public class User {
 
     private Boolean proxyLinks;
 
-    private String sunetId;
-
     private Ticket ticket;
 
     private String univId;
@@ -40,11 +38,6 @@ public class User {
     public Boolean getProxyLinks() {
         return this.proxyLinks;
     }
-
-    public String getSunetId() {
-        return this.sunetId;
-    }
-
     public Ticket getTicket() {
         return this.ticket;
     }
@@ -73,10 +66,6 @@ public class User {
         this.proxyLinks = proxyLinks;
     }
 
-    public void setSunetId(final String uId) {
-        this.sunetId = uId;
-    }
-
     public void setTicket(final Ticket ticket) {
         this.ticket = ticket;
     }
@@ -88,7 +77,7 @@ public class User {
     @Override
     public String toString() {
         StringBuffer sb =
-                new StringBuffer("sunetId=").append(this.sunetId).append(",univid=").append(this.univId).append(
+                new StringBuffer("univid=").append(this.univId).append(
                         ",affiliation=").append(this.affiliation).append(",displayname=").append(this.name).append(
                         ",iPGroup=").append(this.iPGroup).append(",ticket=").append(this.ticket).append(",proxyLinks=")
                         .append(this.proxyLinks);
