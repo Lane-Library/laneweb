@@ -31,7 +31,6 @@ public class UserDao {
     public void getUserData(final User user, final HttpServletRequest request) {
         setTicket(user, request);
         setLdapData(user, request);
-        setEmrId(user, request);
     }
 
     public void setEzproxyKey(final String ezproxyKey) {
@@ -63,12 +62,6 @@ public class UserDao {
             }
         }
         return ip;
-    }
-
-    private void setEmrId(final User user, final HttpServletRequest request) {
-        if (null == user.getEmrId() || null != request.getParameter(LanewebObjectModel.EMRID)) {
-            user.setEmrId(request.getParameter(LanewebObjectModel.EMRID));
-        }
     }
 
     private void setLdapData(final User user, final ServletRequest request) {

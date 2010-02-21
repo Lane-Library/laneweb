@@ -70,6 +70,14 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             session.setAttribute(LanewebObjectModel.IPGROUP, ipGroup);
         }
         model.put(LanewebObjectModel.IPGROUP, ipGroup);
+        String emrid = (String) session.getAttribute(LanewebObjectModel.EMRID);
+        if (emrid == null) {
+            emrid = request.getParameter(LanewebObjectModel.EMRID);
+            if (emrid != null) {
+                session.setAttribute(LanewebObjectModel.EMRID, emrid);
+                model.put(LanewebObjectModel.EMRID, emrid);
+            }
+        }
         User user = (User) session.getAttribute(LanewebConstants.USER);
         if (null == user) {
             user = new User();
@@ -78,9 +86,6 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         this.userDao.getUserData(user, request);
         if (user.getTicket() != null) {
             model.put(LanewebObjectModel.TICKET, user.getTicket());
-        }
-        if (user.getEmrId() != null) {
-            model.put(LanewebObjectModel.EMRID, user.getEmrId());
         }
         if (user.getName() != null) {
             model.put("name", user.getName());

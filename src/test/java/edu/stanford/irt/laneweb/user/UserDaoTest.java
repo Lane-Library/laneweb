@@ -51,7 +51,6 @@ public class UserDaoTest {
     @Test
     public void testGetUserInfo() {
       expect(this.request.getAttribute(LanewebObjectModel.SUNETID)).andReturn("ditenus").atLeastOnce();
-      expect(this.request.getParameter(LanewebObjectModel.EMRID)).andReturn(null);
       expect(this.subjectSource.getSubject()).andReturn(this.subject);
       expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null);
       replayMocks();

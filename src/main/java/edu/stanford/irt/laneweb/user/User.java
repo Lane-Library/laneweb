@@ -8,11 +8,6 @@ public class User {
 
     private String affiliation;
 
-    /** the emr user id to pass in for cme authentication requests */
-    private String emrId;
-
-    private IPGroup iPGroup;
-
     private String name;
 
     private Ticket ticket;
@@ -21,14 +16,6 @@ public class User {
 
     public String getAffiliation() {
         return this.affiliation;
-    }
-
-    public String getEmrId() {
-        return this.emrId;
-    }
-
-    public IPGroup getIPGroup() {
-        return this.iPGroup;
     }
 
     public String getName() {
@@ -47,14 +34,6 @@ public class User {
         this.affiliation = affiliation;
     }
 
-    public void setEmrId(final String emrId) {
-        this.emrId = emrId;
-    }
-
-    public void setIPGroup(final IPGroup iPGroup) {
-        this.iPGroup = iPGroup;
-    }
-
     public void setName(final String displayName) {
         this.name = displayName;
     }
@@ -71,8 +50,7 @@ public class User {
     public String toString() {
         StringBuffer sb =
                 new StringBuffer("univid=").append(this.univId).append(
-                        ",affiliation=").append(this.affiliation).append(",displayname=").append(this.name).append(
-                        ",iPGroup=").append(this.iPGroup).append(",ticket=").append(this.ticket);
+                        ",affiliation=").append(this.affiliation).append(",displayname=").append(this.name).append(",ticket=").append(this.ticket);
         return sb.toString();
     }
 }
