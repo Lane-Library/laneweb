@@ -21,6 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
+import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.User;
 import edu.stanford.irt.laneweb.user.UserDao;
 
@@ -71,17 +72,19 @@ public class LanewebObjectModelProviderTest {
         expect(this.pip.getObjectModel()).andReturn(this.objectModel);
         expect(this.request.getSession(true)).andReturn(this.session);
         expect(this.request.getAttribute(LanewebObjectModel.SUNETID)).andReturn(null);
+        expect(this.session.getAttribute(LanewebObjectModel.IPGROUP)).andReturn(null);
         expect(this.session.getAttribute(LanewebConstants.USER)).andReturn(null);
         this.userDao.getUserData(isA(User.class), eq(this.request));
+        this.session.setAttribute(LanewebObjectModel.IPGROUP, IPGroup.OTHER);
         this.session.setAttribute(eq(LanewebConstants.USER), isA(User.class));
-        expect(this.proxyLinks.proxyLinks(isA(User.class), eq(this.request))).andReturn(Boolean.TRUE);
+        expect(this.proxyLinks.proxyLinks(eq(this.request))).andReturn(Boolean.TRUE);
         expect(this.context.getAttribute(isA(String.class))).andReturn("foo").atLeastOnce();
         expect(this.request.getParameterNames()).andReturn(this.params);
         expect(this.params.hasMoreElements()).andReturn(Boolean.FALSE);
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getRequestURI()).andReturn("/index.html");
-        expect(this.request.getRemoteHost()).andReturn("127.0.0.1");
+        expect(this.request.getRemoteAddr()).andReturn("127.0.0.1").times(2);
         expect(this.request.getHeader("referer")).andReturn(null);
         expect(this.request.getCookies()).andReturn(null);
         expect(this.templateChooser.chooseTemplate(this.request)).andReturn("template");

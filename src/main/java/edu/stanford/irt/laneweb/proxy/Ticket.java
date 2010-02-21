@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.stanford.irt.laneweb.user;
+package edu.stanford.irt.laneweb.proxy;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

@@ -16,6 +16,7 @@ import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.processing.ProcessInfoProvider;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
+import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.User;
 import edu.stanford.irt.laneweb.user.UserDao;
 
@@ -54,15 +55,18 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             model.put(LanewebObjectModel.SUNETID, sunetid);
             session.setAttribute(LanewebObjectModel.SUNETID, sunetid);
         }
+        IPGroup ipGroup = (IPGroup) session.getAttribute(LanewebObjectModel.IPGROUP);
+        if (ipGroup == null) {
+            ipGroup = IPGroup.getGroupForIP(request.getRemoteAddr());
+            session.setAttribute(LanewebObjectModel.IPGROUP, ipGroup);
+        }
+        model.put(LanewebObjectModel.IPGROUP, ipGroup);
         User user = (User) session.getAttribute(LanewebConstants.USER);
         if (null == user) {
             user = new User();
             session.setAttribute(LanewebConstants.USER, user);
         }
         this.userDao.getUserData(user, request);
-        if (user.getIPGroup() != null) {
-            model.put(LanewebObjectModel.IPGROUP, user.getIPGroup());
-        }
         if (user.getTicket() != null) {
             model.put(LanewebObjectModel.TICKET, user.getTicket());
         }
@@ -78,7 +82,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         if (user.getAffiliation() != null) {
             model.put("affiliation", user.getAffiliation());
         }
-        model.put(LanewebObjectModel.PROXY_LINKS, this.proxyLinks.proxyLinks(user, request));
+        model.put(LanewebObjectModel.PROXY_LINKS, this.proxyLinks.proxyLinks(request));
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);
         model.put("live-base", context.getAttribute("laneweb.context.live-base"));
         model.put("stage-base", context.getAttribute("laneweb.context.stage-base"));
@@ -121,7 +125,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         }
         model.put(LanewebObjectModel.BASE_PATH, request.getContextPath());
         model.put("request-uri", request.getRequestURI());
-        model.put("remote-host", request.getRemoteHost());
+        model.put("remote-addr", request.getRemoteAddr());
         if (request.getHeader("referer") != null) {
             model.put("referer", request.getHeader("referer"));
         }

@@ -6,7 +6,7 @@
     <map:pipelines>
         <map:pipeline type="throttling">
             <map:parameter name="request-key"
-                value="${remote-host}/${request-uri}/${query-string}"/>
+                value="${remote-addr}/${request-uri}/${query-string}"/>
             <map:match pattern="search" type="wildcard">
                 <map:generate type="er-search"/>
                 <map:transform type="query-highlighting"/>

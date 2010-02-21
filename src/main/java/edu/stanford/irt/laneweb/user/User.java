@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.user;
 
+import edu.stanford.irt.laneweb.proxy.Ticket;
+
 public class User {
 
     public static final String NAME = "name";
@@ -8,8 +10,6 @@ public class User {
 
     /** the emr user id to pass in for cme authentication requests */
     private String emrId;
-
-    private IPGroup iPGroup;
 
     private String name;
 
@@ -25,10 +25,6 @@ public class User {
 
     public String getEmrId() {
         return this.emrId;
-    }
-
-    public IPGroup getIPGroup() {
-        return this.iPGroup;
     }
 
     public String getName() {
@@ -54,10 +50,6 @@ public class User {
         this.emrId = emrId;
     }
 
-    public void setIPGroup(final IPGroup iPGroup) {
-        this.iPGroup = iPGroup;
-    }
-
     public void setName(final String displayName) {
         this.name = displayName;
     }
@@ -78,8 +70,7 @@ public class User {
     public String toString() {
         StringBuffer sb =
                 new StringBuffer("univid=").append(this.univId).append(
-                        ",affiliation=").append(this.affiliation).append(",displayname=").append(this.name).append(
-                        ",iPGroup=").append(this.iPGroup).append(",ticket=").append(this.ticket).append(",proxyLinks=")
+                        ",affiliation=").append(this.affiliation).append(",displayname=").append(this.name).append(",ticket=").append(this.ticket).append(",proxyLinks=")
                         .append(this.proxyLinks);
         return sb.toString();
     }

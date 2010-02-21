@@ -51,8 +51,6 @@ public class UserDaoTest {
     @Test
     public void testGetUserInfo() {
       expect(this.request.getAttribute(LanewebObjectModel.SUNETID)).andReturn("ditenus").atLeastOnce();
-      expect(this.request.getRemoteAddr()).andReturn("127.0.0.1");
-      expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
       expect(this.request.getParameter(LanewebObjectModel.PROXY_LINKS)).andReturn(null);
       expect(this.request.getParameter(LanewebObjectModel.EMRID)).andReturn(null);
       expect(this.subjectSource.getSubject()).andReturn(this.subject);
@@ -60,7 +58,6 @@ public class UserDaoTest {
       replayMocks();
         User user = new User();
         this.userDao.getUserData(user, this.request);
-        assertEquals(IPGroup.OTHER, user.getIPGroup());
         verifyMocks();
     }
 

@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.model;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.user.IPGroup;
@@ -19,11 +20,15 @@ public class ProxyLinks {
 
     private List<String> proxyRegex;
 
-    public Boolean proxyLinks(final User user, final HttpServletRequest request) {
-        if (null != user.getProxyLinks()) {
-            return user.getProxyLinks();
+    public Boolean proxyLinks(final HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            Boolean proxyLinks = (Boolean) session.getAttribute(LanewebObjectModel.PROXY_LINKS);
+            if (proxyLinks != null) {
+                return proxyLinks;
+            }
         }
-        IPGroup ipGroup = user.getIPGroup();
+        IPGroup ipGroup = (IPGroup) session.getAttribute(LanewebObjectModel.IPGROUP);
         if (null != ipGroup && (IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup))) {
             return Boolean.TRUE;
         }

@@ -16,6 +16,7 @@ import org.springframework.ldap.core.LdapTemplate;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.proxy.Ticket;
 
 public class UserDao {
 
@@ -28,7 +29,6 @@ public class UserDao {
     private SubjectSource subjectSource;
 
     public void getUserData(final User user, final HttpServletRequest request) {
-        setIpGroup(user, request);
         setTicket(user, request);
         setProxyLinks(user, request);
         setLdapData(user, request);
@@ -69,17 +69,6 @@ public class UserDao {
     private void setEmrId(final User user, final HttpServletRequest request) {
         if (null == user.getEmrId() || null != request.getParameter(LanewebObjectModel.EMRID)) {
             user.setEmrId(request.getParameter(LanewebObjectModel.EMRID));
-        }
-    }
-
-    private void setIpGroup(final User user, final HttpServletRequest request) {
-        if (user.getIPGroup() == null) {
-            String ip = getRemoteAddr(request);
-            IPGroup iPGroup = IPGroup.getGroupForIP(ip);
-            user.setIPGroup(iPGroup);
-            if (IPGroup.ERR.equals(iPGroup)) {
-                LOGGER.error("error parsing ip for IPGroup: " + ip);
-            }
         }
     }
 

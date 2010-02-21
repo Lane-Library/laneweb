@@ -326,7 +326,7 @@
         </map:pipeline>
         <map:pipeline type="throttling">
             <map:parameter name="request-key"
-                value="${remote-host}/${request-uri}/${query-string}"/>
+                value="${remote-addr}/${request-uri}/${query-string}"/>
             <map:match pattern="suggest/json" type="wildcard">
                 <map:read type="suggest"/>
             </map:match>
