@@ -30,7 +30,6 @@ public class UserDao {
 
     public void getUserData(final User user, final HttpServletRequest request) {
         setTicket(user, request);
-        setProxyLinks(user, request);
         setLdapData(user, request);
         setEmrId(user, request);
     }
@@ -105,13 +104,6 @@ public class UserDao {
                     LOGGER.error(e.getMessage(), e);
                 }
             }
-        }
-    }
-
-    private void setProxyLinks(final User user, final HttpServletRequest request) {
-        String proxyLinks = request.getParameter(LanewebObjectModel.PROXY_LINKS);
-        if (null != proxyLinks) {
-            user.setProxyLinks(Boolean.valueOf(proxyLinks));
         }
     }
 

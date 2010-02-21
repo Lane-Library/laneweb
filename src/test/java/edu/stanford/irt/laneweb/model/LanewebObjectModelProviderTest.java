@@ -72,6 +72,7 @@ public class LanewebObjectModelProviderTest {
         expect(this.pip.getObjectModel()).andReturn(this.objectModel);
         expect(this.request.getSession(true)).andReturn(this.session);
         expect(this.request.getAttribute(LanewebObjectModel.SUNETID)).andReturn(null);
+        expect(this.request.getParameter(LanewebObjectModel.PROXY_LINKS)).andReturn(null);
         expect(this.session.getAttribute(LanewebObjectModel.IPGROUP)).andReturn(null);
         expect(this.session.getAttribute(LanewebConstants.USER)).andReturn(null);
         this.userDao.getUserData(isA(User.class), eq(this.request));

@@ -55,6 +55,15 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             model.put(LanewebObjectModel.SUNETID, sunetid);
             session.setAttribute(LanewebObjectModel.SUNETID, sunetid);
         }
+        Boolean proxyLinks = Boolean.parseBoolean(request.getParameter(LanewebObjectModel.PROXY_LINKS));
+        if (proxyLinks == null) {
+            proxyLinks = (Boolean) session.getAttribute(LanewebObjectModel.PROXY_LINKS);
+            if (proxyLinks == null) {
+                proxyLinks = this.proxyLinks.proxyLinks(request);
+                session.setAttribute(LanewebObjectModel.PROXY_LINKS, proxyLinks);
+            }
+        }
+        model.put(LanewebObjectModel.PROXY_LINKS, proxyLinks);
         IPGroup ipGroup = (IPGroup) session.getAttribute(LanewebObjectModel.IPGROUP);
         if (ipGroup == null) {
             ipGroup = IPGroup.getGroupForIP(request.getRemoteAddr());

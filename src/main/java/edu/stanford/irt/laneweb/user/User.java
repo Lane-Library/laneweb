@@ -11,9 +11,9 @@ public class User {
     /** the emr user id to pass in for cme authentication requests */
     private String emrId;
 
-    private String name;
+    private IPGroup iPGroup;
 
-    private Boolean proxyLinks;
+    private String name;
 
     private Ticket ticket;
 
@@ -27,13 +27,14 @@ public class User {
         return this.emrId;
     }
 
+    public IPGroup getIPGroup() {
+        return this.iPGroup;
+    }
+
     public String getName() {
         return this.name;
     }
-
-    public Boolean getProxyLinks() {
-        return this.proxyLinks;
-    }
+    
     public Ticket getTicket() {
         return this.ticket;
     }
@@ -50,12 +51,12 @@ public class User {
         this.emrId = emrId;
     }
 
-    public void setName(final String displayName) {
-        this.name = displayName;
+    public void setIPGroup(final IPGroup iPGroup) {
+        this.iPGroup = iPGroup;
     }
 
-    public void setProxyLinks(final Boolean proxyLinks) {
-        this.proxyLinks = proxyLinks;
+    public void setName(final String displayName) {
+        this.name = displayName;
     }
 
     public void setTicket(final Ticket ticket) {
@@ -70,8 +71,8 @@ public class User {
     public String toString() {
         StringBuffer sb =
                 new StringBuffer("univid=").append(this.univId).append(
-                        ",affiliation=").append(this.affiliation).append(",displayname=").append(this.name).append(",ticket=").append(this.ticket).append(",proxyLinks=")
-                        .append(this.proxyLinks);
+                        ",affiliation=").append(this.affiliation).append(",displayname=").append(this.name).append(
+                        ",iPGroup=").append(this.iPGroup).append(",ticket=").append(this.ticket);
         return sb.toString();
     }
 }
