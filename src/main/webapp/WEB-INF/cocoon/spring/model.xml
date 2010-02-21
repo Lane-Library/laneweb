@@ -84,4 +84,8 @@
         <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
     </bean>
     
+    <bean name="org.apache.cocoon.reading.Reader/model"
+        class="edu.stanford.irt.laneweb.model.ModelReader"
+        parent="edu.stanford.irt.laneweb.model.DefaultModelAware"/>
+    
 </beans>

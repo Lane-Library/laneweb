@@ -1,5 +1,6 @@
 package edu.stanford.irt.laneweb.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.cocoon.el.objectmodel.ObjectModel;
@@ -11,20 +12,18 @@ import org.apache.cocoon.el.objectmodel.ObjectModel;
  *
  * $Id$
  */
-public class MapModel implements Model {
-    
-    private Map<String, Object> map;
+public class MapModel extends HashMap<String, Object> implements Model {
     
     public MapModel(ObjectModel objectModel) {
-        this.map = (Map<String, Object>) objectModel.get("laneweb");
+        super.putAll((Map<? extends String, ? extends Object>) objectModel.get("laneweb"));
     }
 
     public <T> T getObject(String name, Class<T> clazz) {
-        return (T) this.map.get(name);
+        return (T) get(name);
     }
 
     public <T> T getObject(String name, Class<T> clazz, T defaultValue) {
-        if (!map.containsKey(name)) {
+        if (!containsKey(name)) {
             return defaultValue;
         }
         return getObject(name, clazz);
