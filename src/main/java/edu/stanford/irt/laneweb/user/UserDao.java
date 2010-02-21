@@ -14,30 +14,18 @@ import org.springframework.ldap.AuthenticationException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 
-import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
-import edu.stanford.irt.laneweb.proxy.Ticket;
 
 public class UserDao {
 
     private static final Logger LOGGER = Logger.getLogger(UserDao.class);
-
-    private String ezproxyKey;
 
     private LdapTemplate ldapTemplate;
 
     private SubjectSource subjectSource;
 
     public void getUserData(final User user, final HttpServletRequest request) {
-        setTicket(user, request);
         setLdapData(user, request);
-    }
-
-    public void setEzproxyKey(final String ezproxyKey) {
-        if (null == ezproxyKey) {
-            throw new IllegalArgumentException("null ezproxyKey");
-        }
-        this.ezproxyKey = ezproxyKey;
     }
 
     public void setLdapTemplate(final LdapTemplate ldapTemplate) {
@@ -46,22 +34,6 @@ public class UserDao {
 
     public void setSubjectSource(final SubjectSource subjectSource) {
         this.subjectSource = subjectSource;
-    }
-
-    private String getRemoteAddr(final HttpServletRequest request) {
-        String ip = request.getRemoteAddr();
-        // mod_proxy puts the real remote address in an x-forwarded-for
-        // header
-        // Load balancer also does this
-        String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
-        if (header != null) {
-            if (header.indexOf(",") > 0) {
-                ip = header.substring(header.lastIndexOf(",") + 1, header.length()).trim();
-            } else {
-                ip = header;
-            }
-        }
-        return ip;
     }
 
     private void setLdapData(final User user, final ServletRequest request) {
@@ -97,13 +69,6 @@ public class UserDao {
                     LOGGER.error(e.getMessage(), e);
                 }
             }
-        }
-    }
-
-    private void setTicket(final User user, final HttpServletRequest request) {
-        Ticket ticket = user.getTicket();
-        if (null != request.getAttribute(LanewebObjectModel.SUNETID) && (null == ticket || !ticket.isValid())) {
-            user.setTicket(new Ticket((String) request.getAttribute(LanewebObjectModel.SUNETID), this.ezproxyKey));
         }
     }
 }

@@ -20,8 +20,8 @@ import org.apache.cocoon.processing.ProcessInfoProvider;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.LanewebConstants;
-import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.User;
 import edu.stanford.irt.laneweb.user.UserDao;
 
@@ -61,7 +61,7 @@ public class LanewebObjectModelProviderTest {
         this.proxyLinks = createMock(ProxyLinks.class);
         this.context = createMock(Context.class);
         this.templateChooser = createMock(TemplateChooser.class);
-        this.provider = new LanewebObjectModelProvider(this.pip, this.userDao, this.proxyLinks, this.templateChooser);
+        this.provider = new LanewebObjectModelProvider(this.pip, this.userDao, this.proxyLinks, this.templateChooser,"ezproxyKey");
     }
 
     @SuppressWarnings("unchecked")

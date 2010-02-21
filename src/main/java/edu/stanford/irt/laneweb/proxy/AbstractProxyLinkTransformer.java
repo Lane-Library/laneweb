@@ -1,8 +1,8 @@
 package edu.stanford.irt.laneweb.proxy;
 
+import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
-import edu.stanford.irt.laneweb.user.IPGroup;
 
 // $Id$
 public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {

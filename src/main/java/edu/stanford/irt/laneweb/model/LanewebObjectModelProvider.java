@@ -15,8 +15,9 @@ import org.apache.cocoon.el.objectmodel.ObjectModelProvider;
 import org.apache.cocoon.environment.ObjectModelHelper;
 import org.apache.cocoon.processing.ProcessInfoProvider;
 
+import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.LanewebConstants;
-import edu.stanford.irt.laneweb.user.IPGroup;
+import edu.stanford.irt.laneweb.proxy.Ticket;
 import edu.stanford.irt.laneweb.user.User;
 import edu.stanford.irt.laneweb.user.UserDao;
 
@@ -35,12 +36,15 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
 
     private UserDao userDao;
 
+    private String ezproxyKey;
+
     public LanewebObjectModelProvider(final ProcessInfoProvider pip, final UserDao userDao,
-            final ProxyLinks proxyLinks, final TemplateChooser templateChooser) {
+            final ProxyLinks proxyLinks, final TemplateChooser templateChooser, final String ezproxyKey) {
         this.processInfoProvider = pip;
         this.userDao = userDao;
         this.proxyLinks = proxyLinks;
         this.templateChooser = templateChooser;
+        this.ezproxyKey = ezproxyKey;
     }
 
     @SuppressWarnings("unchecked")
@@ -78,15 +82,19 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                 model.put(LanewebObjectModel.EMRID, emrid);
             }
         }
+        if (proxyLinks && sunetid != null && (ipGroup != IPGroup.SHC && ipGroup != IPGroup.LPCH)) {
+            Ticket ticket = (Ticket) session.getAttribute(LanewebObjectModel.TICKET);
+            if (!ticket.isValid()) {
+                ticket = new Ticket(sunetid, this.ezproxyKey);
+            }
+            model.put(LanewebObjectModel.TICKET, ticket);
+        }
         User user = (User) session.getAttribute(LanewebConstants.USER);
         if (null == user) {
             user = new User();
             session.setAttribute(LanewebConstants.USER, user);
         }
         this.userDao.getUserData(user, request);
-        if (user.getTicket() != null) {
-            model.put(LanewebObjectModel.TICKET, user.getTicket());
-        }
         if (user.getName() != null) {
             model.put("name", user.getName());
         }
@@ -155,4 +163,22 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         model.put("template", this.templateChooser.chooseTemplate(request));
         return model;
     }
+
+
+    private String getRemoteAddr(final HttpServletRequest request) {
+        String ip = request.getRemoteAddr();
+        // mod_proxy puts the real remote address in an x-forwarded-for
+        // header
+        // Load balancer also does this
+        String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
+        if (header != null) {
+            if (header.indexOf(",") > 0) {
+                ip = header.substring(header.lastIndexOf(",") + 1, header.length()).trim();
+            } else {
+                ip = header;
+            }
+        }
+        return ip;
+    }
+    
 }

@@ -5,8 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.LanewebConstants;
-import edu.stanford.irt.laneweb.user.IPGroup;
 import edu.stanford.irt.laneweb.user.User;
 
 /**

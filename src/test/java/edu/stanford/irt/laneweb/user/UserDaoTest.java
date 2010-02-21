@@ -43,7 +43,6 @@ public class UserDaoTest {
         this.ldapTemplate = createMock(LdapTemplate.class);
         this.user = createMock(User.class);
         this.userDao = new UserDao();
-        this.userDao.setEzproxyKey("ezproxy");
         this.userDao.setSubjectSource(this.subjectSource);
         this.userDao.setLdapTemplate(this.ldapTemplate);
     }

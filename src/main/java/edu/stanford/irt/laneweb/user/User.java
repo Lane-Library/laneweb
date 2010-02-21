@@ -10,8 +10,6 @@ public class User {
 
     private String name;
 
-    private Ticket ticket;
-
     private String univId;
 
     public String getAffiliation() {
@@ -20,10 +18,6 @@ public class User {
 
     public String getName() {
         return this.name;
-    }
-    
-    public Ticket getTicket() {
-        return this.ticket;
     }
 
     public String getUnivId() {
@@ -38,10 +32,6 @@ public class User {
         this.name = displayName;
     }
 
-    public void setTicket(final Ticket ticket) {
-        this.ticket = ticket;
-    }
-
     public void setUnivId(final String univId) {
         this.univId = univId;
     }
@@ -50,7 +40,7 @@ public class User {
     public String toString() {
         StringBuffer sb =
                 new StringBuffer("univid=").append(this.univId).append(
-                        ",affiliation=").append(this.affiliation).append(",displayname=").append(this.name).append(",ticket=").append(this.ticket);
+                        ",affiliation=").append(this.affiliation).append(",displayname=").append(this.name);
         return sb.toString();
     }
 }

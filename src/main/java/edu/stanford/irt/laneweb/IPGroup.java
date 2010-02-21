@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.stanford.irt.laneweb.user;
+package edu.stanford.irt.laneweb;
 
 import java.util.regex.Pattern;
 

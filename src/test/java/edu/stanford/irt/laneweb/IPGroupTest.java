@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.user;
+package edu.stanford.irt.laneweb;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.IPGroup;
 
 public class IPGroupTest {
 
