@@ -25,7 +25,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
-import edu.stanford.irt.laneweb.user.LDAPData;
 
 /**
  * 
@@ -86,7 +85,6 @@ public class SunetIdFilterTest {
         expect(this.request.getSession(false)).andReturn(this.session);
         this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
         expect(this.request.getParameter(isA(String.class))).andReturn(null).times(2);
-        LDAPData lDAPData = new LDAPData();
         expect(this.session.getAttribute(LanewebObjectModel.SUNETID)).andReturn("ditenus");
         this.chain.doFilter(this.request, this.response);
         replayMocks();

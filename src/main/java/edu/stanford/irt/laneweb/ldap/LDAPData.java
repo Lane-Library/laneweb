@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.user;
+package edu.stanford.irt.laneweb.ldap;
 
 
 public class LDAPData {

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.user;
+package edu.stanford.irt.laneweb.ldap;
 
 import javax.security.auth.Subject;
 import javax.security.auth.kerberos.KerberosTicket;

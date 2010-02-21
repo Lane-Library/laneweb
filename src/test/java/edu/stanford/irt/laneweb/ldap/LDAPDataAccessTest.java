@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.user;
+package edu.stanford.irt.laneweb.ldap;
 
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;

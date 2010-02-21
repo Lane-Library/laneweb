@@ -22,8 +22,8 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.LanewebConstants;
-import edu.stanford.irt.laneweb.user.LDAPData;
-import edu.stanford.irt.laneweb.user.LDAPDataAccess;
+import edu.stanford.irt.laneweb.ldap.LDAPData;
+import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 
 public class LanewebObjectModelProviderTest {
 

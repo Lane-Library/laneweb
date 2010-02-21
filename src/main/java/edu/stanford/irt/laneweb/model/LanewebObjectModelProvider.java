@@ -17,9 +17,9 @@ import org.apache.cocoon.processing.ProcessInfoProvider;
 
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.LanewebConstants;
+import edu.stanford.irt.laneweb.ldap.LDAPData;
+import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.proxy.Ticket;
-import edu.stanford.irt.laneweb.user.LDAPData;
-import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 
 /**
  * 

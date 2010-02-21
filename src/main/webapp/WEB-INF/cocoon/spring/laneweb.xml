@@ -73,9 +73,9 @@
         <property name="httpClient" ref="org.apache.commons.httpclient.HttpClient"/>
     </bean>
 
-    <bean id="edu.stanford.irt.laneweb.user.LDAPDataAccess" class="edu.stanford.irt.laneweb.user.LDAPDataAccess">
+    <bean id="edu.stanford.irt.laneweb.ldap.LDAPDataAccess" class="edu.stanford.irt.laneweb.ldap.LDAPDataAccess">
         <property name="subjectSource">
-            <bean class="edu.stanford.irt.laneweb.user.SubjectSource">
+            <bean class="edu.stanford.irt.laneweb.ldap.SubjectSource">
                 <property name="name" value="IRT_K5"/>
             </bean>
         </property>
@@ -86,7 +86,7 @@
                         <property name="url" value="ldap://ldap.stanford.edu/"/>
                         <property name="base" value="cn=people,dc=stanford,dc=edu"/>
                         <property name="authenticationStrategy">
-                            <bean class="edu.stanford.irt.laneweb.user.GSSAPIAuthenticationStrategy"
+                            <bean class="edu.stanford.irt.laneweb.ldap.GSSAPIAuthenticationStrategy"
                             />
                         </property>
                         <property name="baseEnvironmentProperties">
