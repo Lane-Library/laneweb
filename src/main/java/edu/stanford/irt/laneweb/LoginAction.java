@@ -30,14 +30,14 @@ public class LoginAction implements Action {
             redirector.redirect(false, redirectUrl);
             return null;
         }
+        if (null == queryString || queryString.length() == 0) {
+            return null;
+        }
         if (null == ticket || ticket.length() == 0) {
             throw new IllegalArgumentException("null ticket");
         }
         // note: url is not just the url, it is the whole query string ie
         // url=http://...
-        if (null == queryString || queryString.length() == 0) {
-            return null;
-        }
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("redirecting to proxy server: " + " sunetid = " + sunetid + " ticket = " + " url = "
                     + queryString);
