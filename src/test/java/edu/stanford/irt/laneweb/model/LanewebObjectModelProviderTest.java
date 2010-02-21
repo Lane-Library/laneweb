@@ -76,7 +76,7 @@ public class LanewebObjectModelProviderTest {
         expect(this.session.getAttribute(LanewebObjectModel.IPGROUP)).andReturn(null);
         expect(this.session.getAttribute(LanewebObjectModel.EMRID)).andReturn(null);
         expect(this.session.getAttribute(LanewebConstants.USER)).andReturn(null);
-        expect(this.proxyLinks.proxyLinks(eq(this.request))).andReturn(Boolean.TRUE);
+        this.session.setAttribute(LanewebObjectModel.PROXY_LINKS, Boolean.FALSE);
         expect(this.context.getAttribute(isA(String.class))).andReturn("foo").atLeastOnce();
         expect(this.request.getParameterNames()).andReturn(this.params);
         expect(this.params.hasMoreElements()).andReturn(Boolean.FALSE);

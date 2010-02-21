@@ -66,6 +66,8 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                 proxyLinks = this.proxyLinks.proxyLinks(request);
                 session.setAttribute(LanewebObjectModel.PROXY_LINKS, proxyLinks);
             }
+        } else {
+            session.setAttribute(LanewebObjectModel.PROXY_LINKS, proxyLinks);
         }
         model.put(LanewebObjectModel.PROXY_LINKS, proxyLinks);
         IPGroup ipGroup = (IPGroup) session.getAttribute(LanewebObjectModel.IPGROUP);
@@ -104,7 +106,6 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         if (lDAPData.getAffiliation() != null) {
             model.put("affiliation", lDAPData.getAffiliation());
         }
-        model.put(LanewebObjectModel.PROXY_LINKS, this.proxyLinks.proxyLinks(request));
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);
         model.put("live-base", context.getAttribute("laneweb.context.live-base"));
         model.put("stage-base", context.getAttribute("laneweb.context.stage-base"));
