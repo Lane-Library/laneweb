@@ -8,7 +8,7 @@ import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
 /**
- * Transformer to rewrite data when a User.EMRID value is present. 
+ * Transformer to rewrite data when a LDAPData.EMRID value is present. 
  * Elements to rewrite include: 
  * - anchor element href attributes when value is known CME host 
  * - url element of metasearch results when value is known CME host 

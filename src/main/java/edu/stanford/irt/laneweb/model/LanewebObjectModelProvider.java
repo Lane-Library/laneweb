@@ -18,8 +18,8 @@ import org.apache.cocoon.processing.ProcessInfoProvider;
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.proxy.Ticket;
-import edu.stanford.irt.laneweb.user.User;
-import edu.stanford.irt.laneweb.user.UserDao;
+import edu.stanford.irt.laneweb.user.LDAPData;
+import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 
 /**
  * 
@@ -34,14 +34,14 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
 
     private TemplateChooser templateChooser;
 
-    private UserDao userDao;
+    private LDAPDataAccess lDAPDataAccess;
 
     private String ezproxyKey;
 
-    public LanewebObjectModelProvider(final ProcessInfoProvider pip, final UserDao userDao,
+    public LanewebObjectModelProvider(final ProcessInfoProvider pip, final LDAPDataAccess lDAPDataAccess,
             final ProxyLinks proxyLinks, final TemplateChooser templateChooser, final String ezproxyKey) {
         this.processInfoProvider = pip;
-        this.userDao = userDao;
+        this.lDAPDataAccess = lDAPDataAccess;
         this.proxyLinks = proxyLinks;
         this.templateChooser = templateChooser;
         this.ezproxyKey = ezproxyKey;
@@ -89,20 +89,20 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             }
             model.put(LanewebObjectModel.TICKET, ticket);
         }
-        User user = (User) session.getAttribute(LanewebConstants.USER);
-        if (null == user) {
-            user = new User();
-            session.setAttribute(LanewebConstants.USER, user);
+        LDAPData lDAPData = (LDAPData) session.getAttribute(LanewebConstants.USER);
+        if (null == lDAPData) {
+            lDAPData = new LDAPData();
+            session.setAttribute(LanewebConstants.USER, lDAPData);
         }
-        this.userDao.getUserData(user, request);
-        if (user.getName() != null) {
-            model.put("name", user.getName());
+        this.lDAPDataAccess.getUserData(lDAPData, request);
+        if (lDAPData.getName() != null) {
+            model.put("name", lDAPData.getName());
         }
-        if (user.getUnivId() != null) {
-            model.put("univid", user.getUnivId());
+        if (lDAPData.getUnivId() != null) {
+            model.put("univid", lDAPData.getUnivId());
         }
-        if (user.getAffiliation() != null) {
-            model.put("affiliation", user.getAffiliation());
+        if (lDAPData.getAffiliation() != null) {
+            model.put("affiliation", lDAPData.getAffiliation());
         }
         model.put(LanewebObjectModel.PROXY_LINKS, this.proxyLinks.proxyLinks(request));
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);

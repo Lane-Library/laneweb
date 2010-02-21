@@ -22,8 +22,8 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.LanewebConstants;
-import edu.stanford.irt.laneweb.user.User;
-import edu.stanford.irt.laneweb.user.UserDao;
+import edu.stanford.irt.laneweb.user.LDAPData;
+import edu.stanford.irt.laneweb.user.LDAPDataAccess;
 
 public class LanewebObjectModelProviderTest {
 
@@ -44,7 +44,7 @@ public class LanewebObjectModelProviderTest {
 
     private TemplateChooser templateChooser;
 
-    private UserDao userDao;
+    private LDAPDataAccess lDAPDataAccess;
     
     @SuppressWarnings("unchecked")
     private Enumeration params;
@@ -57,11 +57,11 @@ public class LanewebObjectModelProviderTest {
         this.request = createMock(HttpServletRequest.class);
         this.objectModel = new HashMap();
         this.session = createMock(HttpSession.class);
-        this.userDao = createMock(UserDao.class);
+        this.lDAPDataAccess = createMock(LDAPDataAccess.class);
         this.proxyLinks = createMock(ProxyLinks.class);
         this.context = createMock(Context.class);
         this.templateChooser = createMock(TemplateChooser.class);
-        this.provider = new LanewebObjectModelProvider(this.pip, this.userDao, this.proxyLinks, this.templateChooser,"ezproxyKey");
+        this.provider = new LanewebObjectModelProvider(this.pip, this.lDAPDataAccess, this.proxyLinks, this.templateChooser,"ezproxyKey");
     }
 
     @SuppressWarnings("unchecked")
@@ -87,9 +87,9 @@ public class LanewebObjectModelProviderTest {
         expect(this.request.getRemoteAddr()).andReturn("127.0.0.1").times(2);
         expect(this.request.getHeader("referer")).andReturn(null);
         expect(this.request.getCookies()).andReturn(null);
-        this.userDao.getUserData(isA(User.class), eq(this.request));
+        this.lDAPDataAccess.getUserData(isA(LDAPData.class), eq(this.request));
         this.session.setAttribute(LanewebObjectModel.IPGROUP, IPGroup.OTHER);
-        this.session.setAttribute(eq(LanewebConstants.USER), isA(User.class));
+        this.session.setAttribute(eq(LanewebConstants.USER), isA(LDAPData.class));
         expect(this.templateChooser.chooseTemplate(this.request)).andReturn("template");
         replayMocks();
         this.provider.getObject();
@@ -100,7 +100,7 @@ public class LanewebObjectModelProviderTest {
         replay(this.params);
         replay(this.context);
         replay(this.proxyLinks);
-        replay(this.userDao);
+        replay(this.lDAPDataAccess);
         replay(this.session);
         replay(this.request);
         replay(this.pip);
@@ -110,7 +110,7 @@ public class LanewebObjectModelProviderTest {
         verify(this.params);
         verify(this.context);
         verify(this.proxyLinks);
-        verify(this.userDao);
+        verify(this.lDAPDataAccess);
         verify(this.session);
         verify(this.request);
         verify(this.pip);

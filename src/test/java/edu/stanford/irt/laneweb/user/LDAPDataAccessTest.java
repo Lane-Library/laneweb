@@ -6,7 +6,6 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
-import static org.junit.Assert.assertEquals;
 
 import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ import org.springframework.ldap.core.LdapTemplate;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class UserDaoTest {
+public class LDAPDataAccessTest {
 
     private LdapTemplate ldapTemplate;
 
@@ -29,11 +28,11 @@ public class UserDaoTest {
 
     private SubjectSource subjectSource;
 
-    private User user;
+    private LDAPData lDAPData;
     
     private Subject subject = new Subject();
 
-    private UserDao userDao;
+    private LDAPDataAccess lDAPDataAccess;
 
     @Before
     public void setUp() {
@@ -41,10 +40,10 @@ public class UserDaoTest {
         this.session = createMock(Session.class);
         this.subjectSource = createMock(SubjectSource.class);
         this.ldapTemplate = createMock(LdapTemplate.class);
-        this.user = createMock(User.class);
-        this.userDao = new UserDao();
-        this.userDao.setSubjectSource(this.subjectSource);
-        this.userDao.setLdapTemplate(this.ldapTemplate);
+        this.lDAPData = createMock(LDAPData.class);
+        this.lDAPDataAccess = new LDAPDataAccess();
+        this.lDAPDataAccess.setSubjectSource(this.subjectSource);
+        this.lDAPDataAccess.setLdapTemplate(this.ldapTemplate);
     }
 
     @Test
@@ -53,13 +52,13 @@ public class UserDaoTest {
       expect(this.subjectSource.getSubject()).andReturn(this.subject);
       expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null);
       replayMocks();
-        User user = new User();
-        this.userDao.getUserData(user, this.request);
+        LDAPData lDAPData = new LDAPData();
+        this.lDAPDataAccess.getUserData(lDAPData, this.request);
         verifyMocks();
     }
 
     private void replayMocks() {
-        replay(this.user);
+        replay(this.lDAPData);
         replay(this.request);
         replay(this.session);
         replay(this.subjectSource);
@@ -68,7 +67,7 @@ public class UserDaoTest {
     }
 
     private void verifyMocks() {
-        verify(this.user);
+        verify(this.lDAPData);
         verify(this.request);
         verify(this.session);
         verify(this.subjectSource);

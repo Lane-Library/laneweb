@@ -25,7 +25,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
-import edu.stanford.irt.laneweb.user.User;
+import edu.stanford.irt.laneweb.user.LDAPData;
 
 /**
  * 
@@ -86,7 +86,7 @@ public class SunetIdFilterTest {
         expect(this.request.getSession(false)).andReturn(this.session);
         this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
         expect(this.request.getParameter(isA(String.class))).andReturn(null).times(2);
-        User user = new User();
+        LDAPData lDAPData = new LDAPData();
         expect(this.session.getAttribute(LanewebObjectModel.SUNETID)).andReturn("ditenus");
         this.chain.doFilter(this.request, this.response);
         replayMocks();
@@ -100,7 +100,7 @@ public class SunetIdFilterTest {
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getSession(false)).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
-        expect(this.request.getHeader("User-Agent")).andReturn(null);
+        expect(this.request.getHeader("LDAPData-Agent")).andReturn(null);
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);
@@ -113,7 +113,7 @@ public class SunetIdFilterTest {
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getSession(false)).andReturn(this.session);
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
-        expect(this.request.getHeader("User-Agent")).andReturn(null);
+        expect(this.request.getHeader("LDAPData-Agent")).andReturn(null);
         expect(this.session.getAttribute(LanewebObjectModel.SUNETID)).andReturn(null);
         this.chain.doFilter(this.request, this.response);
         replayMocks();
@@ -127,7 +127,7 @@ public class SunetIdFilterTest {
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getSession(false)).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[]{this.cookie});
-        expect(this.request.getHeader("User-Agent")).andReturn("user agent");
+        expect(this.request.getHeader("LDAPData-Agent")).andReturn("user agent");
         expect(this.request.getParameter(isA(String.class))).andReturn(null).times(2);
         expect(this.cookie.getName()).andReturn(LanewebConstants.LANE_COOKIE_NAME);
         String value = this.codec.createLoginToken("ditenus", "user agent".hashCode()).getEncryptedValue();
@@ -144,7 +144,7 @@ public class SunetIdFilterTest {
         expect(this.request.getRemoteUser()).andReturn("ditenus");
         expect(this.request.getParameter("pl")).andReturn("true");
         this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
-        expect(this.request.getHeader("User-Agent")).andReturn("user agent");
+        expect(this.request.getHeader("LDAPData-Agent")).andReturn("user agent");
         this.response.addCookie(and(isA(Cookie.class), capture(this.cookieCapture)));
         this.chain.doFilter(this.request, this.response);
         replayMocks();

@@ -73,7 +73,7 @@
         <property name="httpClient" ref="org.apache.commons.httpclient.HttpClient"/>
     </bean>
 
-    <bean id="edu.stanford.irt.laneweb.user.UserDao" class="edu.stanford.irt.laneweb.user.UserDao">
+    <bean id="edu.stanford.irt.laneweb.user.LDAPDataAccess" class="edu.stanford.irt.laneweb.user.LDAPDataAccess">
         <property name="subjectSource">
             <bean class="edu.stanford.irt.laneweb.user.SubjectSource">
                 <property name="name" value="IRT_K5"/>

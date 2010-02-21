@@ -1,8 +1,7 @@
 package edu.stanford.irt.laneweb.user;
 
-import edu.stanford.irt.laneweb.proxy.Ticket;
 
-public class User {
+public class LDAPData {
 
     public static final String NAME = "name";
 

@@ -16,16 +16,16 @@ import org.springframework.ldap.core.LdapTemplate;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class UserDao {
+public class LDAPDataAccess {
 
-    private static final Logger LOGGER = Logger.getLogger(UserDao.class);
+    private static final Logger LOGGER = Logger.getLogger(LDAPDataAccess.class);
 
     private LdapTemplate ldapTemplate;
 
     private SubjectSource subjectSource;
 
-    public void getUserData(final User user, final HttpServletRequest request) {
-        setLdapData(user, request);
+    public void getUserData(final LDAPData lDAPData, final HttpServletRequest request) {
+        setLdapData(lDAPData, request);
     }
 
     public void setLdapTemplate(final LdapTemplate ldapTemplate) {
@@ -36,33 +36,33 @@ public class UserDao {
         this.subjectSource = subjectSource;
     }
 
-    private void setLdapData(final User user, final ServletRequest request) {
-        if (null != request.getAttribute(LanewebObjectModel.SUNETID) && null == user.getName()) {
+    private void setLdapData(final LDAPData lDAPData, final ServletRequest request) {
+        if (null != request.getAttribute(LanewebObjectModel.SUNETID) && null == lDAPData.getName()) {
             Subject subject = this.subjectSource.getSubject();
             if (null != subject) {
                 try {
-                Subject.doAs(subject, new PrivilegedAction<User>() {
+                Subject.doAs(subject, new PrivilegedAction<LDAPData>() {
 
-                    public User run() {
-                        UserDao.this.ldapTemplate.search("", "susunetid=" + request.getAttribute(LanewebObjectModel.SUNETID), new AttributesMapper() {
+                    public LDAPData run() {
+                        LDAPDataAccess.this.ldapTemplate.search("", "susunetid=" + request.getAttribute(LanewebObjectModel.SUNETID), new AttributesMapper() {
 
                             public Object mapFromAttributes(final Attributes attributes) throws NamingException {
                                 Attribute currentAttribute = attributes.get("displayName");
                                 if (null != currentAttribute) {
-                                    user.setName((String) currentAttribute.get());
+                                    lDAPData.setName((String) currentAttribute.get());
                                 }
                                 currentAttribute = attributes.get("suaffiliation");
                                 if (null != currentAttribute) {
-                                    user.setAffiliation((String) currentAttribute.get());
+                                    lDAPData.setAffiliation((String) currentAttribute.get());
                                 }
                                 currentAttribute = attributes.get("suunivid");
                                 if (null != currentAttribute) {
-                                    user.setUnivId((String) currentAttribute.get());
+                                    lDAPData.setUnivId((String) currentAttribute.get());
                                 }
-                                return user;
+                                return lDAPData;
                             }
                         });
-                        return user;
+                        return lDAPData;
                     }
                 });
                 } catch (AuthenticationException e) {

@@ -9,8 +9,6 @@ import java.io.InputStreamReader;
 
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.IPGroup;
-
 public class IPGroupTest {
 
     @Test
