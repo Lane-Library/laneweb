@@ -86,7 +86,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         }
         if (proxyLinks && sunetid != null && (ipGroup != IPGroup.SHC && ipGroup != IPGroup.LPCH)) {
             Ticket ticket = (Ticket) session.getAttribute(LanewebObjectModel.TICKET);
-            if (!ticket.isValid()) {
+            if (ticket == null || !ticket.isValid()) {
                 ticket = new Ticket(sunetid, this.ezproxyKey);
             }
             model.put(LanewebObjectModel.TICKET, ticket);
