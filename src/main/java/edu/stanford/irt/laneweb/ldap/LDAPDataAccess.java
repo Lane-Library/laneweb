@@ -40,34 +40,35 @@ public class LDAPDataAccess {
         if (null != request.getAttribute(LanewebObjectModel.SUNETID) && null == lDAPData.getName()) {
             Subject subject = this.subjectSource.getSubject();
             if (null != subject) {
-                try {
                 Subject.doAs(subject, new PrivilegedAction<LDAPData>() {
 
                     public LDAPData run() {
-                        LDAPDataAccess.this.ldapTemplate.search("", "susunetid=" + request.getAttribute(LanewebObjectModel.SUNETID), new AttributesMapper() {
+                        try {
+                            LDAPDataAccess.this.ldapTemplate.search("", "susunetid="
+                                    + request.getAttribute(LanewebObjectModel.SUNETID), new AttributesMapper() {
 
-                            public Object mapFromAttributes(final Attributes attributes) throws NamingException {
-                                Attribute currentAttribute = attributes.get("displayName");
-                                if (null != currentAttribute) {
-                                    lDAPData.setName((String) currentAttribute.get());
+                                public Object mapFromAttributes(final Attributes attributes) throws NamingException {
+                                    Attribute currentAttribute = attributes.get("displayName");
+                                    if (null != currentAttribute) {
+                                        lDAPData.setName((String) currentAttribute.get());
+                                    }
+                                    currentAttribute = attributes.get("suaffiliation");
+                                    if (null != currentAttribute) {
+                                        lDAPData.setAffiliation((String) currentAttribute.get());
+                                    }
+                                    currentAttribute = attributes.get("suunivid");
+                                    if (null != currentAttribute) {
+                                        lDAPData.setUnivId((String) currentAttribute.get());
+                                    }
+                                    return lDAPData;
                                 }
-                                currentAttribute = attributes.get("suaffiliation");
-                                if (null != currentAttribute) {
-                                    lDAPData.setAffiliation((String) currentAttribute.get());
-                                }
-                                currentAttribute = attributes.get("suunivid");
-                                if (null != currentAttribute) {
-                                    lDAPData.setUnivId((String) currentAttribute.get());
-                                }
-                                return lDAPData;
-                            }
-                        });
+                            });
+                        } catch (AuthenticationException e) {
+                            LOGGER.error(e.getMessage(), e);
+                        }
                         return lDAPData;
                     }
                 });
-                } catch (AuthenticationException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
             }
         }
     }
