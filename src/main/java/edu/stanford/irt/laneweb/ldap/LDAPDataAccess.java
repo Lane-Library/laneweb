@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.ldap;
 
 import java.security.PrivilegedAction;
+import java.util.List;
 
 import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
@@ -53,7 +54,11 @@ public class LDAPDataAccess {
             this.attributesMapper = new LDAPAttributesMapper();
         }
         public LDAPData run() {
-            return (LDAPData) this.ldapTemplate.search("", "susunetid=" + sunetid, this.attributesMapper);
+            List list = this.ldapTemplate.search("", "susunetid=" + sunetid, this.attributesMapper);
+            if (list.size() == 1) {
+                return (LDAPData) list.get(0);
+            }
+            return  null;
         }
     }
     
