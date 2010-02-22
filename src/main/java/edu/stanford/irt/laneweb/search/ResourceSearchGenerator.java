@@ -22,7 +22,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
 
         for (String resource : this.resources) {
             for (Result result : describeResult.getChildren()) {
-                if (result.getChild(resource) != null) {
+                if ( result.getChild(resource) != null  && !engineToRun.contains(result.getId())) {
                     engineToRun.add(result.getId());
                     break;
                 }
