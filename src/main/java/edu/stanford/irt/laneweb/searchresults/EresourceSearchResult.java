@@ -83,6 +83,10 @@ public class EresourceSearchResult extends AbstractResource implements SearchRes
         EresourceSearchResult eres = (EresourceSearchResult) other;
         return eres.eresource.getId() == this.eresource.getId();
     }
+    
+    public String toString() {
+        return this.eresource.toString();
+    }
 
     private void handleEresource(final ContentHandler handler, final Eresource eresource) throws SAXException {
         Collection<Version> versions = new TreeSet<Version>(VERSION_COMPARATOR);

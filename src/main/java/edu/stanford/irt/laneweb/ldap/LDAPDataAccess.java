@@ -53,12 +53,14 @@ public class LDAPDataAccess {
             this.sunetid = sunetid;
             this.attributesMapper = new LDAPAttributesMapper();
         }
+        
+        @SuppressWarnings("unchecked")
         public LDAPData run() {
             List list = this.ldapTemplate.search("", "susunetid=" + sunetid, this.attributesMapper);
-            if (list != null && list.size() == 1) {
-                return (LDAPData) list.get(0);
+            if (list == null || list.size() == 0) {
+                return null;
             }
-            return  null;
+            return (LDAPData) list.get(0);
         }
     }
     
