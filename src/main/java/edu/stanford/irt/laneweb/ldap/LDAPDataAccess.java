@@ -55,7 +55,7 @@ public class LDAPDataAccess {
         }
         public LDAPData run() {
             List list = this.ldapTemplate.search("", "susunetid=" + sunetid, this.attributesMapper);
-            if (list.size() == 1) {
+            if (list != null && list.size() == 1) {
                 return (LDAPData) list.get(0);
             }
             return  null;
