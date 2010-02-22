@@ -160,9 +160,6 @@
         </property>
     </bean>
 
-    <bean name="org.apache.cocoon.acting.Action/form-redirect"
-        class="edu.stanford.irt.laneweb.FormRedirectAction"/>
-
     <bean name="org.apache.cocoon.acting.Action/webdash"
         class="edu.stanford.irt.laneweb.webdash.WebdashAction">
         <property name="webdashLogin">

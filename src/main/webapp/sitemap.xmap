@@ -134,15 +134,6 @@
                 </map:transform>
                 <map:serialize type="text"/>
             </map:match>
-            <!-- external resource searches, normally intercepted by javascript -->
-            <map:match pattern="^http" type="regex-parameter">
-                <map:parameter name="parameter-name" value="source"/>
-                <map:act type="form-redirect">
-                    <map:parameter name="query" value="${query}"/>
-                    <map:parameter name="source" value="${source}"/>
-                    <map:redirect-to uri="{form-redirect-key}"/>
-                </map:act>
-            </map:match>
             <map:match pattern="plain/secure/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/plain/error.html"/>
                 <map:serialize type="xhtml" status-code="403"/>
