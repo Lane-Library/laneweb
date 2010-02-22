@@ -139,6 +139,8 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                 model.put(LanewebObjectModel.RESOURCES, Arrays.asList(request.getParameterValues(name)));
             } else if ("e".equals(name)) {
                 model.put(LanewebObjectModel.ENGINES, Arrays.asList(request.getParameterValues(name)));
+            } else if ("source".equals(name)) {
+                model.put(LanewebObjectModel.SOURCE, request.getParameter(name));
 //            } else {
 //                model.put(name, request.getParameter(name));
             }
