@@ -6,15 +6,11 @@ import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.security.auth.Subject;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.ldap.AuthenticationException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
-
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
 public class LDAPDataAccess {
 
@@ -24,10 +20,6 @@ public class LDAPDataAccess {
 
     private SubjectSource subjectSource;
 
-    public void getUserData(final LDAPData lDAPData, final HttpServletRequest request) {
-        setLdapData(lDAPData, request);
-    }
-
     public void setLdapTemplate(final LdapTemplate ldapTemplate) {
         this.ldapTemplate = ldapTemplate;
     }
@@ -35,41 +27,54 @@ public class LDAPDataAccess {
     public void setSubjectSource(final SubjectSource subjectSource) {
         this.subjectSource = subjectSource;
     }
-
-    private void setLdapData(final LDAPData lDAPData, final ServletRequest request) {
-        if (null != request.getAttribute(LanewebObjectModel.SUNETID) && null == lDAPData.getName()) {
-            Subject subject = this.subjectSource.getSubject();
-            if (null != subject) {
-                Subject.doAs(subject, new PrivilegedAction<LDAPData>() {
-
-                    public LDAPData run() {
-                        try {
-                            LDAPDataAccess.this.ldapTemplate.search("", "susunetid="
-                                    + request.getAttribute(LanewebObjectModel.SUNETID), new AttributesMapper() {
-
-                                public Object mapFromAttributes(final Attributes attributes) throws NamingException {
-                                    Attribute currentAttribute = attributes.get("displayName");
-                                    if (null != currentAttribute) {
-                                        lDAPData.setName((String) currentAttribute.get());
-                                    }
-                                    currentAttribute = attributes.get("suaffiliation");
-                                    if (null != currentAttribute) {
-                                        lDAPData.setAffiliation((String) currentAttribute.get());
-                                    }
-                                    currentAttribute = attributes.get("suunivid");
-                                    if (null != currentAttribute) {
-                                        lDAPData.setUnivId((String) currentAttribute.get());
-                                    }
-                                    return lDAPData;
-                                }
-                            });
-                        } catch (AuthenticationException e) {
-                            LOGGER.error(e.getMessage(), e);
-                        }
-                        return lDAPData;
-                    }
-                });
-            }
+    
+    public LDAPData getLdapData(final String sunetid) {
+        Subject subject = this.subjectSource.getSubject();
+        PrivilegedAction<LDAPData> action = new LDAPPrivilegedAction(this.ldapTemplate, sunetid);
+        try {
+            return (LDAPData) Subject.doAs(subject, action);
+        } catch (AuthenticationException e) {
+            LOGGER.error(e.getMessage(), e);
+            return action.run();
         }
+    }
+    
+    private static class LDAPPrivilegedAction implements PrivilegedAction<LDAPData> {
+        
+        private LdapTemplate ldapTemplate;
+        
+        private String sunetid;
+        
+        private AttributesMapper attributesMapper;
+        
+        private LDAPPrivilegedAction(LdapTemplate ldapTemplate, String sunetid) {
+            this.ldapTemplate = ldapTemplate;
+            this.sunetid = sunetid;
+            this.attributesMapper = new LDAPAttributesMapper();
+        }
+        public LDAPData run() {
+            return (LDAPData) this.ldapTemplate.search("", "susunetid=" + sunetid, this.attributesMapper);
+        }
+    }
+    
+    private static class LDAPAttributesMapper implements AttributesMapper {
+
+        public Object mapFromAttributes(Attributes attributes) throws NamingException {
+            LDAPData ldapData = new LDAPData();
+            Attribute currentAttribute = attributes.get("displayName");
+            if (null != currentAttribute) {
+                ldapData.setName((String) currentAttribute.get());
+            }
+            currentAttribute = attributes.get("suaffiliation");
+            if (null != currentAttribute) {
+                ldapData.setAffiliation((String) currentAttribute.get());
+            }
+            currentAttribute = attributes.get("suunivid");
+            if (null != currentAttribute) {
+                ldapData.setUnivId((String) currentAttribute.get());
+            }
+            return ldapData;
+        }
+        
     }
 }

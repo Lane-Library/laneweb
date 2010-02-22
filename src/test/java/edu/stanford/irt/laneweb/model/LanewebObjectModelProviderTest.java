@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.model;
 
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.classextension.EasyMock.createMock;
@@ -21,8 +20,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.IPGroup;
-import edu.stanford.irt.laneweb.LanewebConstants;
-import edu.stanford.irt.laneweb.ldap.LDAPData;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 
 public class LanewebObjectModelProviderTest {
@@ -75,7 +72,6 @@ public class LanewebObjectModelProviderTest {
         expect(this.request.getParameter(LanewebObjectModel.PROXY_LINKS)).andReturn(null);
         expect(this.session.getAttribute(LanewebObjectModel.IPGROUP)).andReturn(null);
         expect(this.session.getAttribute(LanewebObjectModel.EMRID)).andReturn(null);
-        expect(this.session.getAttribute(LanewebConstants.USER)).andReturn(null);
         this.session.setAttribute(LanewebObjectModel.PROXY_LINKS, Boolean.FALSE);
         expect(this.context.getAttribute(isA(String.class))).andReturn("foo").atLeastOnce();
         expect(this.request.getParameterNames()).andReturn(this.params);
@@ -87,9 +83,7 @@ public class LanewebObjectModelProviderTest {
         expect(this.request.getRemoteAddr()).andReturn("127.0.0.1").times(2);
         expect(this.request.getHeader("referer")).andReturn(null);
         expect(this.request.getCookies()).andReturn(null);
-        this.lDAPDataAccess.getUserData(isA(LDAPData.class), eq(this.request));
         this.session.setAttribute(LanewebObjectModel.IPGROUP, IPGroup.OTHER);
-        this.session.setAttribute(eq(LanewebConstants.USER), isA(LDAPData.class));
         expect(this.templateChooser.chooseTemplate(this.request)).andReturn("template");
         replayMocks();
         this.provider.getObject();

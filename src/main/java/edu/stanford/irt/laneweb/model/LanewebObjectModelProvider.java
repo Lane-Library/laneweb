@@ -58,6 +58,33 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         if (sunetid != null) {
             model.put(LanewebObjectModel.SUNETID, sunetid);
             session.setAttribute(LanewebObjectModel.SUNETID, sunetid);
+            String name = (String) session.getAttribute(LanewebObjectModel.NAME);
+            String univid = (String) session.getAttribute(LanewebObjectModel.UNIVID);
+            String affiliation = (String) session.getAttribute(LanewebObjectModel.AFFILIATION);
+            if (null == name || univid == null  || affiliation == null) {
+                LDAPData ldapData = this.lDAPDataAccess.getLdapData(sunetid);
+                name = ldapData.getName();
+                univid = ldapData.getUnivId();
+                affiliation = ldapData.getAffiliation();
+                if (name != null) {
+                    session.setAttribute(LanewebObjectModel.NAME, name);
+                }
+                if (univid != null) {
+                    session.setAttribute(LanewebObjectModel.UNIVID, univid);
+                }
+                if (affiliation != null) {
+                    session.setAttribute(LanewebObjectModel.AFFILIATION, affiliation);
+                }
+            }
+            if (name != null) {
+                model.put(LanewebObjectModel.NAME, name);
+            }
+            if (univid != null) {
+                model.put(LanewebObjectModel.UNIVID, univid);
+            }
+            if (affiliation != null) {
+                model.put(LanewebObjectModel.AFFILIATION, affiliation);
+            }
         }
         Boolean proxyLinks = Boolean.parseBoolean(request.getParameter(LanewebObjectModel.PROXY_LINKS));
         if (proxyLinks == null) {
@@ -90,21 +117,6 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                 ticket = new Ticket(sunetid, this.ezproxyKey);
             }
             model.put(LanewebObjectModel.TICKET, ticket);
-        }
-        LDAPData lDAPData = (LDAPData) session.getAttribute(LanewebConstants.USER);
-        if (null == lDAPData) {
-            lDAPData = new LDAPData();
-            session.setAttribute(LanewebConstants.USER, lDAPData);
-        }
-        this.lDAPDataAccess.getUserData(lDAPData, request);
-        if (lDAPData.getName() != null) {
-            model.put("name", lDAPData.getName());
-        }
-        if (lDAPData.getUnivId() != null) {
-            model.put("univid", lDAPData.getUnivId());
-        }
-        if (lDAPData.getAffiliation() != null) {
-            model.put("affiliation", lDAPData.getAffiliation());
         }
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);
         model.put("live-base", context.getAttribute("laneweb.context.live-base"));

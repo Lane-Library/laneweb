@@ -52,6 +52,12 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
     public static final String FACETS = "facets";
     
     public static final String SOURCE = "source";
+
+    public static final String NAME = "name";
+
+    public static final String UNIVID = "univid";
+    
+    public static final String AFFILIATION = "affiliation";
     
     public void setInitialEntries(Map<String, ObjectModelProvider> initialEntries) {
         for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {
