@@ -32,11 +32,7 @@
                 <map:mount uri-prefix="" check-reload="no" src="search.xmap"/>
             </map:match>
             <map:match pattern="secure/reloadresources.html" type="wildcard">
-                <map:act type="search-context-reloader">
-                    <map:parameter name="password" value="${password}"/>
-                    <map:parameter name="release" value="${release}"/>
-                    <map:parameter name="username" value="${username}"/>
-                </map:act>
+                <map:act type="search-context-reloader"/>
                 <map:generate type="html"
                     src="${live-base}/content/secure/reloadresources.html"/>
                 <map:serialize type="xml"/>

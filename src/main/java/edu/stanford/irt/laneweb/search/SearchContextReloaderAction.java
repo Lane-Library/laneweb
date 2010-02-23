@@ -2,10 +2,8 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.acting.Action;
-import org.apache.cocoon.environment.Redirector;
-import org.apache.cocoon.environment.SourceResolver;
+import edu.stanford.irt.laneweb.cocoon.AbstractAction;
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
 /**
  * 
@@ -14,7 +12,7 @@ import org.apache.cocoon.environment.SourceResolver;
  * $Id$
  *
  */
-public class SearchContextReloaderAction implements Action {
+public class SearchContextReloaderAction extends AbstractAction {
 
     private MetaSearchManagerSource msms;
 
@@ -22,14 +20,12 @@ public class SearchContextReloaderAction implements Action {
 
     private String svnUrlProject;
 
-    @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel,
-            final String string, final Parameters param) {
-        String release = param.getParameter("release", null);
-        String userName = param.getParameter("username", null);
-        String password = param.getParameter("password", null);
-        if (release != null && userName != null && password != null) {
-            this.msms.reload(this.svnUrlProject.concat(release).concat(this.svnUrlPath), userName, password);
+    public Map doAct() {
+        String release = this.model.getString(LanewebObjectModel.RELEASE);
+        String sunetid = this.model.getString(LanewebObjectModel.SUNETID);
+        String password = this.model.getString(LanewebObjectModel.PASSWORD);
+        if (release != null && sunetid != null && password != null) {
+            this.msms.reload(this.svnUrlProject.concat(release).concat(this.svnUrlPath), sunetid, password);
         }
         return null;
     }
