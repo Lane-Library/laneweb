@@ -8,11 +8,7 @@ package edu.stanford.irt.laneweb;
  */
 public interface LanewebConstants {
 
-    public static final String COOKIE_VALUE_SEPARATOR = "%";
-
     public static final String LANE_COOKIE_NAME = "user";
-
-    public static final String USER = "user";
 
     public static final String X_FORWARDED_FOR = "X-FORWARDED-FOR";
 }

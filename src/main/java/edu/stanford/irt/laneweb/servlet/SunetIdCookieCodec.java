@@ -13,11 +13,11 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
-import edu.stanford.irt.laneweb.LanewebConstants;
-
 public class SunetIdCookieCodec {
     
     private static final String KEY = "stanfordlanelibraryir";
+
+    private static final String COOKIE_VALUE_SEPARATOR = "%";
 
     private Cipher cipher;
 
@@ -40,9 +40,9 @@ public class SunetIdCookieCodec {
         long now = System.currentTimeMillis();
         StringBuilder builder = new StringBuilder();
         builder.append(sunetId);
-        builder.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
+        builder.append(COOKIE_VALUE_SEPARATOR);
         builder.append(now);
-        builder.append(LanewebConstants.COOKIE_VALUE_SEPARATOR);
+        builder.append(COOKIE_VALUE_SEPARATOR);
         builder.append(userAgentHash);
         String encryptedValue = encrypt(builder.toString());
         PersistentLoginToken token = new PersistentLoginToken(sunetId, now, userAgentHash, encryptedValue);
@@ -85,7 +85,7 @@ public class SunetIdCookieCodec {
 
     public PersistentLoginToken restoreLoginToken(final String encryptedValue) {
         String decrypted = decrypt(encryptedValue);
-        String[] values = decrypted.split(LanewebConstants.COOKIE_VALUE_SEPARATOR);
+        String[] values = decrypted.split(COOKIE_VALUE_SEPARATOR);
         if (values.length != 3) {
             throw new IllegalArgumentException("invalid encryptedValue");
         }

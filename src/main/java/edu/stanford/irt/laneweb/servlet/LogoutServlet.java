@@ -18,8 +18,6 @@ public class LogoutServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private static final String USER_COOKIE_NAME = LanewebConstants.USER;
-
     private static final String WEBAUTH_COOKIE_NAME = "webauth_at";
 
     private static final String WEBAUTH_LOGOUT_URL = "https://weblogin.stanford.edu/logout";
@@ -29,7 +27,7 @@ public class LogoutServlet extends HttpServlet {
             IOException {
         for (Cookie cookie : req.getCookies()) {
             String name = cookie.getName();
-            if (USER_COOKIE_NAME.equals(name) || WEBAUTH_COOKIE_NAME.equals(name)) {
+            if (LanewebConstants.LANE_COOKIE_NAME.equals(name) || WEBAUTH_COOKIE_NAME.equals(name)) {
                 cookie.setMaxAge(0);
                 resp.addCookie(cookie);
             }
