@@ -21,10 +21,6 @@ public interface Resource extends XMLizable {
 
     public static final String KEYWORD = "keyword";
 
-    public static final String SORT_TITLE = "sortTitle";
-
-    public static final String DEDUP_TITLE = "dedupTitle";
-
     public static final String VERSIONS = "versions";
 
     public static final String VERSION = "version";

@@ -11,8 +11,6 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.laneweb.AbstractResource;
-import edu.stanford.irt.laneweb.search.QueryTermPattern;
 import edu.stanford.irt.search.ContentResult;
 
 /**
@@ -20,7 +18,7 @@ import edu.stanford.irt.search.ContentResult;
  * 
  * $Id$
  */
-public class ContentResultSearchResult extends AbstractResource implements SearchResult {
+public class ContentResultSearchResult implements SearchResult {
 
     private ContentResult contentResult;
 
@@ -55,8 +53,8 @@ public class ContentResultSearchResult extends AbstractResource implements Searc
      */
     public ContentResultSearchResult(ContentResult contentResult, Pattern queryTermPattern) {
         this.contentResult = contentResult;
-        this.dedupTitle = this.contentResult.getTitle().toLowerCase().replaceAll("\\W", QueryTermPattern.EMPTY);
-        this.sortTitle = QueryTermPattern.NON_FILING_PATTERN.matcher(dedupTitle).replaceFirst(QueryTermPattern.EMPTY);
+        this.dedupTitle = this.contentResult.getTitle().toLowerCase().replaceAll("\\W", "");
+        this.sortTitle = NON_FILING_PATTERN.matcher(dedupTitle).replaceFirst("");
         this.queryTermPattern = queryTermPattern;
         this.score = computeScore();
     }
@@ -134,12 +132,10 @@ public class ContentResultSearchResult extends AbstractResource implements Searc
         return (scoreCmp != 0 ? scoreCmp : this.sortTitle.compareTo(o.getSortTitle()));
     }
 
-    @Override
     public int hashCode() {
         return this.dedupTitle.hashCode();
     }
 
-    @Override
     public boolean equals(Object other) {
         if (!(other instanceof ContentResultSearchResult)) {
             return false;
@@ -170,8 +166,7 @@ public class ContentResultSearchResult extends AbstractResource implements Searc
      */
     private int computeScore() {
         int score;
-        double weight = computeWeight(ENGINEID_PATTERN.matcher(this.contentResult.getId()).replaceFirst(
-                QueryTermPattern.EMPTY));
+        double weight = computeWeight(ENGINEID_PATTERN.matcher(this.contentResult.getId()).replaceFirst(""));
         Pattern titleBeginsWithPattern = Pattern.compile("^(" + this.queryTermPattern.toString() + ").*",
                 Pattern.CASE_INSENSITIVE);
         boolean titleBeginsWithQueryTerms = titleBeginsWithPattern.matcher(this.contentResult.getTitle()).matches();
@@ -229,52 +224,49 @@ public class ContentResultSearchResult extends AbstractResource implements Searc
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");
         XMLUtils.startElement(handler, NAMESPACE, RESULT, atts);
         if (null != this.getResourceId()) {
-            handleElement(handler, RESOURCE_ID, this.getResourceId());
+            XMLUtils.createElementNS(handler, NAMESPACE, RESOURCE_ID, this.getResourceId());
         }
         if (null != this.getResourceName()) {
-            handleElement(handler, RESOURCE_NAME, this.getResourceName());
+            XMLUtils.createElementNS(handler, NAMESPACE, RESOURCE_NAME, this.getResourceName());
         }
         if (null != this.getResourceUrl()) {
-            handleElement(handler, RESOURCE_URL, this.getResourceUrl());
+            XMLUtils.createElementNS(handler, NAMESPACE, RESOURCE_URL, this.getResourceUrl());
         }
         if (null != this.getResourceHits()) {
-            handleElement(handler, RESOURCE_HITS, this.getResourceHits());
+            XMLUtils.createElementNS(handler, NAMESPACE, RESOURCE_HITS, this.getResourceHits());
         }
         if (null != this.contentResult.getId()) {
-            handleElement(handler, ID, this.contentResult.getId());
+            XMLUtils.createElementNS(handler, NAMESPACE, ID, this.contentResult.getId());
         }
         if (null != this.contentResult.getContentId()) {
-            handleElement(handler, CONTENT_ID, this.contentResult.getContentId());
+            XMLUtils.createElementNS(handler, NAMESPACE, CONTENT_ID, this.contentResult.getContentId());
         }
         if (null != this.contentResult.getTitle()) {
-            handleElement(handler, TITLE, this.contentResult.getTitle());
-            handleElement(handler, SORT_TITLE, QueryTermPattern.NON_FILING_PATTERN.matcher(
-                    this.contentResult.getTitle()).replaceFirst(QueryTermPattern.EMPTY));
-            handleElement(handler, DEDUP_TITLE, this.getDedupTitle());
+            XMLUtils.createElementNS(handler, NAMESPACE, TITLE, this.contentResult.getTitle());
         }
         if (null != this.contentResult.getDescription()) {
-            handleElement(handler, DESCRIPTION, this.contentResult.getDescription());
+            XMLUtils.createElementNS(handler, NAMESPACE, DESCRIPTION, this.contentResult.getDescription());
         }
         if (null != this.contentResult.getAuthor()) {
-            handleElement(handler, AUTHOR, this.contentResult.getAuthor());
+            XMLUtils.createElementNS(handler, NAMESPACE, AUTHOR, this.contentResult.getAuthor());
         }
         if (null != this.contentResult.getPublicationDate()) {
-            handleElement(handler, PUBLICATION_DATE, this.contentResult.getPublicationDate());
+            XMLUtils.createElementNS(handler, NAMESPACE, PUBLICATION_DATE, this.contentResult.getPublicationDate());
         }
         if (null != this.contentResult.getPublicationTitle()) {
-            handleElement(handler, PUBLICATION_TITLE, this.contentResult.getPublicationTitle());
+            XMLUtils.createElementNS(handler, NAMESPACE, PUBLICATION_TITLE, this.contentResult.getPublicationTitle());
         }
         if (null != this.contentResult.getPublicationVolume()) {
-            handleElement(handler, PUBLICATION_VOLUME, this.contentResult.getPublicationVolume());
+            XMLUtils.createElementNS(handler, NAMESPACE, PUBLICATION_VOLUME, this.contentResult.getPublicationVolume());
         }
         if (null != this.contentResult.getPublicationIssue()) {
-            handleElement(handler, PUBLICATION_ISSUE, this.contentResult.getPublicationIssue());
+            XMLUtils.createElementNS(handler, NAMESPACE, PUBLICATION_ISSUE, this.contentResult.getPublicationIssue());
         }
         if (null != this.contentResult.getPages()) {
-            handleElement(handler, PAGES, this.contentResult.getPages());
+            XMLUtils.createElementNS(handler, NAMESPACE, PAGES, this.contentResult.getPages());
         }
         if (null != this.contentResult.getURL()) {
-            handleElement(handler, URL, this.contentResult.getURL());
+            XMLUtils.createElementNS(handler, NAMESPACE, URL, this.contentResult.getURL());
         }
         XMLUtils.endElement(handler, RESULT);
     }
