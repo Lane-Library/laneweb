@@ -3,27 +3,21 @@ package edu.stanford.irt.laneweb.webdash;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.acting.Action;
-import org.apache.cocoon.environment.Redirector;
-import org.apache.cocoon.environment.SourceResolver;
-
+import edu.stanford.irt.laneweb.cocoon.AbstractAction;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 
-public class WebdashAction implements Action {
+public class WebdashAction extends AbstractAction {
 
     private static final String RESULT_KEY = "webdash-url";
 
     private WebdashLogin webDashLogin;
 
-    @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel,
-            final String string, final Parameters param) {
-        String nonce = param.getParameter("nonce", null);
-        String systemUserId = param.getParameter("system-user-id", null);
-        String sunetId = param.getParameter(LanewebObjectModel.SUNETID, null);
-        String name = param.getParameter("name", null);
-        String affiliation = param.getParameter("affiliation", null);
+    public Map doAct() {
+        String nonce = this.model.getString(LanewebObjectModel.NONCE);
+        String systemUserId = this.model.getString(LanewebObjectModel.SYSTEM_USER_ID);
+        String sunetId = this.model.getString(LanewebObjectModel.SUNETID);
+        String name = this.model.getString(LanewebObjectModel.NAME);
+        String affiliation = this.model.getString(LanewebObjectModel.AFFILIATION);
         Map<String, String> result = new HashMap<String, String>(1);
         result.put(RESULT_KEY, this.webDashLogin.getWebdashURL(sunetId, name, affiliation, nonce, systemUserId));
         return result;

@@ -53,15 +53,19 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
     
     public static final String SOURCE = "source";
 
-    public static final String NAME = "name";
+    public static final String NAME = LanewebObjectModel.NAME;
 
     public static final String UNIVID = "univid";
     
-    public static final String AFFILIATION = "affiliation";
+    public static final String AFFILIATION = LanewebObjectModel.AFFILIATION;
 
     public static final String QUERY_STRING = "query-string";
 
     public static final String HOST = "host";
+
+    public static final String NONCE = LanewebObjectModel.NONCE;
+
+    public static final String SYSTEM_USER_ID = LanewebObjectModel.SYSTEM_USER_ID;
     
     public void setInitialEntries(Map<String, ObjectModelProvider> initialEntries) {
         for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {

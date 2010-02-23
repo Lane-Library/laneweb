@@ -3,8 +3,6 @@ package edu.stanford.irt.laneweb.ldap;
 
 public class LDAPData {
 
-    public static final String NAME = "name";
-
     private String affiliation;
 
     private String name;

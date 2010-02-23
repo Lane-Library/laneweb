@@ -155,6 +155,10 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                 model.put(LanewebObjectModel.SOURCE, value);
             } else if ("host".equals(name)) {
                 model.put(LanewebObjectModel.HOST, value);
+            } else if (LanewebObjectModel.NONCE.equals(name)) {
+                model.put(LanewebObjectModel.NONCE, value);
+            } else if ("system_user_id".equals(name)) {
+                model.put(LanewebObjectModel.SYSTEM_USER_ID, value);
 //            } else {
 //                model.put(name, request.getParameter(name));
             }
