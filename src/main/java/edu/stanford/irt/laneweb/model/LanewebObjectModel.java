@@ -60,6 +60,8 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
     public static final String AFFILIATION = "affiliation";
 
     public static final String QUERY_STRING = "query-string";
+
+    public static final String HOST = "host";
     
     public void setInitialEntries(Map<String, ObjectModelProvider> initialEntries) {
         for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {

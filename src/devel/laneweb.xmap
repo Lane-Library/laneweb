@@ -24,10 +24,7 @@
                 <map:serialize type="xhtml" status-code="503"/>
             </map:match>
             <map:match pattern="redirect/cme" type="wildcard">
-                <map:act type="cmeRedirectAction">
-                    <map:parameter name="emrid" value="${emrid}"/>
-                    <map:parameter name="host" value="${host}"/>
-                    <map:parameter name="query-string" value="${query-string}"/>
+                <map:act type="cme-redirect">
                     <map:redirect-to uri="{cme-redirect}"/>
                 </map:act>
             </map:match>

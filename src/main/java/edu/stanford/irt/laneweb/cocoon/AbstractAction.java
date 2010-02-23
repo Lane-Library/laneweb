@@ -14,7 +14,7 @@ import edu.stanford.irt.laneweb.model.ModelAware;
 
 public abstract class AbstractAction implements Action, ModelAware {
     
-    protected Map<String, Object> parametersMap;
+    protected Map<String, String> parametersMap;
     
     protected Model model;
 

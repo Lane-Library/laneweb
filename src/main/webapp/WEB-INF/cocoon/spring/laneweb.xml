@@ -130,8 +130,7 @@
 
     <bean name="org.apache.cocoon.transformation.Transformer/cme-links"
         class="edu.stanford.irt.laneweb.cme.CMELinkTransformer" scope="prototype">
-        <property name="model" ref="edu.stanford.irt.laneweb.model.Model">
-        </property>
+        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
     </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/xinclude"
@@ -173,8 +172,10 @@
         </property>
     </bean>
 
-    <bean name="org.apache.cocoon.acting.Action/cmeRedirectAction"
-        class="edu.stanford.irt.laneweb.cme.CMERedirectAction"/>
+    <bean name="org.apache.cocoon.acting.Action/cme-redirect"
+        class="edu.stanford.irt.laneweb.cme.CMERedirectAction" scope="prototype">
+        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
+    </bean>
     
     <bean name="org.apache.cocoon.acting.Action/invalidate-session"
         class="org.apache.cocoon.acting.SessionInvalidatorAction"/>

@@ -125,34 +125,36 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         model.put("version", context.getAttribute("laneweb.context.version"));
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
             String name = (String) params.nextElement();
+            String value = request.getParameter(name);
             if ("q".equals(name)) {
-                String query = request.getParameter(name);
-                model.put(LanewebObjectModel.QUERY, query);
+                model.put(LanewebObjectModel.QUERY, value);
                 try {
-                    model.put("url-encoded-query", URLEncoder.encode(query, "UTF-8"));
+                    model.put("url-encoded-query", URLEncoder.encode(value, "UTF-8"));
                 } catch (UnsupportedEncodingException e) {
                     throw new RuntimeException(e);
                 }
             } else if ("t".equals(name)) {
-                model.put(LanewebObjectModel.TYPE, request.getParameter(name));
+                model.put(LanewebObjectModel.TYPE, value);
             } else if ("s".equals(name)) {
-                model.put(LanewebObjectModel.SUBSET, request.getParameter(name));
+                model.put(LanewebObjectModel.SUBSET, value);
             } else if ("a".equals(name)) {
-                model.put(LanewebObjectModel.ALPHA, request.getParameter(name).substring(0,1));
+                model.put(LanewebObjectModel.ALPHA, value.substring(0,1));
             } else if ("m".equals(name)) {
-                model.put(LanewebObjectModel.MESH, request.getParameter(name));
+                model.put(LanewebObjectModel.MESH, value);
             } else if ("f".equals(name)) {
-                model.put(LanewebObjectModel.FACETS, request.getParameter(name));
+                model.put(LanewebObjectModel.FACETS, value);
             } else if ("l".equals(name)) {
-                model.put(LanewebObjectModel.LIMIT, request.getParameter(name));
+                model.put(LanewebObjectModel.LIMIT, value);
             } else if ("bn".equals(name)) {
-                model.put(LanewebObjectModel.BASSETT_NUMBER, request.getParameter(name));
+                model.put(LanewebObjectModel.BASSETT_NUMBER, value);
             } else if ("r".equals(name)) {
                 model.put(LanewebObjectModel.RESOURCES, Arrays.asList(request.getParameterValues(name)));
             } else if ("e".equals(name)) {
                 model.put(LanewebObjectModel.ENGINES, Arrays.asList(request.getParameterValues(name)));
             } else if ("source".equals(name)) {
-                model.put(LanewebObjectModel.SOURCE, request.getParameter(name));
+                model.put(LanewebObjectModel.SOURCE, value);
+            } else if ("host".equals(name)) {
+                model.put(LanewebObjectModel.HOST, value);
 //            } else {
 //                model.put(name, request.getParameter(name));
             }
