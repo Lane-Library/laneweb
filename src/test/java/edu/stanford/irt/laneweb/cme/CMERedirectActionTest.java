@@ -38,7 +38,7 @@ public class CMERedirectActionTest {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn("uptodate");
         expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn("");
-        expect(parameters.getParameter("query-string", null)).andReturn("yo");
+        expect(parameters.getParameter(LanewebObjectModel.QUERY_STRING, null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
                 "cme-redirect"));
@@ -50,7 +50,7 @@ public class CMERedirectActionTest {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn("");
         expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn("nobody");
-        expect(parameters.getParameter("query-string", null)).andReturn("yo");
+        expect(parameters.getParameter(LanewebObjectModel.QUERY_STRING, null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
                 "cme-redirect"));
@@ -62,7 +62,7 @@ public class CMERedirectActionTest {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn("bad host");
         expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn("nobody");
-        expect(parameters.getParameter("query-string", null)).andReturn("yo");
+        expect(parameters.getParameter(LanewebObjectModel.QUERY_STRING, null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
                 "cme-redirect"));
@@ -74,7 +74,7 @@ public class CMERedirectActionTest {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn("bad host");
         expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn(null);
-        expect(parameters.getParameter("query-string", null)).andReturn("yo");
+        expect(parameters.getParameter(LanewebObjectModel.QUERY_STRING, null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
                 "cme-redirect"));
@@ -86,7 +86,7 @@ public class CMERedirectActionTest {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn("uptodate");
         expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn(null);
-        expect(parameters.getParameter("query-string", null)).andReturn("yo");
+        expect(parameters.getParameter(LanewebObjectModel.QUERY_STRING, null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
                 "cme-redirect"));
@@ -98,7 +98,7 @@ public class CMERedirectActionTest {
         Parameters parameters = createMock(Parameters.class);
         expect(parameters.getParameter("host", null)).andReturn(null);
         expect(parameters.getParameter(LanewebObjectModel.EMRID, null)).andReturn("nobody");
-        expect(parameters.getParameter("query-string", null)).andReturn("yo");
+        expect(parameters.getParameter(LanewebObjectModel.QUERY_STRING, null)).andReturn("yo");
         replay(parameters);
         assertEquals("/cmeRedirectError.html?yo", this.action.act(null, null, null, null, parameters).get(
                 "cme-redirect"));

@@ -10,6 +10,8 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+
 public class VoyagerActionTest {
 
     private VoyagerAction action;
@@ -28,7 +30,7 @@ public class VoyagerActionTest {
     @Test
     public void testAct() throws Exception {
         expect(this.params.getParameter("pid", null)).andReturn("123");
-        expect(this.params.getParameter("query-string", null)).andReturn("a=b");
+        expect(this.params.getParameter(LanewebObjectModel.QUERY_STRING, null)).andReturn("a=b");
         expect(this.params.getParameter("univid", null)).andReturn("1234");
         replay(this.params);
         expect(this.voyagerLogin.getVoyagerURL("1234", "123", "a=b")).andReturn("hello");

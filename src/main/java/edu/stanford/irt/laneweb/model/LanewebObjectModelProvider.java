@@ -158,7 +158,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             }
         }
         if (request.getQueryString() != null) {
-            model.put("query-string", request.getQueryString());
+            model.put(LanewebObjectModel.QUERY_STRING, request.getQueryString());
         }
         model.put(LanewebObjectModel.BASE_PATH, request.getContextPath());
         model.put("request-uri", request.getRequestURI());

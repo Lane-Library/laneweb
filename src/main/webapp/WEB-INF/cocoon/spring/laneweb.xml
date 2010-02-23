@@ -173,9 +173,6 @@
         </property>
     </bean>
 
-    <bean name="org.apache.cocoon.acting.Action/loginAction"
-        class="edu.stanford.irt.laneweb.LoginAction"/>
-
     <bean name="org.apache.cocoon.acting.Action/cmeRedirectAction"
         class="edu.stanford.irt.laneweb.cme.CMERedirectAction"/>
     

@@ -41,11 +41,6 @@
         </layout> 
     </appender>
     
-    <category name="edu.stanford.irt.laneweb.LoginAction" additivity="false">
-        <priority value="ERROR"/>
-        <appender-ref ref="VOYAGER"/>
-    </category>
-    
     <category name="httpclient.wire.header" additivity="false">
         <priority value="DEBUG"/>
         <appender-ref ref="headers"/>

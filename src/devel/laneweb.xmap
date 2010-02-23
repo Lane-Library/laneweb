@@ -23,13 +23,6 @@
                 <map:generate type="file" src="cocoon:/error.html"/>
                 <map:serialize type="xhtml" status-code="503"/>
             </map:match>
-            <map:match pattern="secure/login.html" type="wildcard">
-                <map:act type="loginAction">
-                    <map:parameter name="sunetid" value="${sunetid}"/>
-                    <map:parameter name="ticket" value="${ticket}"/>
-                    <map:parameter name="query-string" value="${query-string}"/>
-                </map:act>
-            </map:match>
             <map:match pattern="redirect/cme" type="wildcard">
                 <map:act type="cmeRedirectAction">
                     <map:parameter name="emrid" value="${emrid}"/>

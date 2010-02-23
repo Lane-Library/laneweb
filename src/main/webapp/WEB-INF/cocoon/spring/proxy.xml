@@ -32,5 +32,11 @@
         class="edu.stanford.irt.laneweb.proxy.EzproxyServersReader">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
+    
+    <bean name="org.apache.cocoon.acting.Action/proxy-credential"
+        class="edu.stanford.irt.laneweb.proxy.ProxyCredentialAction"
+        scope="prototype">
+        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
+    </bean>
 
 </beans>
