@@ -1,9 +1,8 @@
 package edu.stanford.irt.laneweb.search;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.StringTokenizer;
+import java.util.HashSet;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.search.Query;
@@ -16,13 +15,12 @@ public class ResourceSearchGenerator extends SearchGenerator {
 
     @Override
     public Result doSearch() {
-        Collection<String> engineToRun = new LinkedList<String>();
+        Collection<String> engineToRun = new HashSet<String>();
         Query query = new SimpleQuery(super.query);
         Result describeResult = this.metaSearchManager.describe(query, null);
-
         for (String resource : this.resources) {
             for (Result result : describeResult.getChildren()) {
-                if ( result.getChild(resource) != null  && !engineToRun.contains(result.getId())) {
+                if (result.getChild(resource) != null) {
                     engineToRun.add(result.getId());
                     break;
                 }
@@ -34,15 +32,13 @@ public class ResourceSearchGenerator extends SearchGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.resources = this.model.getObject(LanewebObjectModel.RESOURCES, Collection.class, Collections.<String>emptyList());
-        if (this.resources.size() == 0) {
-            String engineList = this.parameterMap.get("resource-list");
-            if (engineList != null) {
-                this.resources = new LinkedList<String>();
-                for (StringTokenizer st = new StringTokenizer(engineList); st.hasMoreTokens();) {
-                    this.resources.add(st.nextToken());
-                }
+        this.resources = this.model.getObject(LanewebObjectModel.RESOURCES, Collection.class);
+        if (this.resources == null) {
+            String resourceList = this.parameterMap.get("resource-list");
+            if (resourceList == null) {
+                throw new IllegalArgumentException("null resource-list");
             }
+            this.resources = Arrays.asList(resourceList.split(","));
         }
     }
 }
