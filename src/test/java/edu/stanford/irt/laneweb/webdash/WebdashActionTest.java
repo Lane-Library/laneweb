@@ -8,78 +8,79 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class WebdashActionTest {
 
     private WebdashAction action;
-
-    private Parameters params;
+    
+    private Model model;
 
     private WebdashLogin webdashLogin;
 
     @Before
     public void setUp() throws Exception {
         this.action = new WebdashAction();
-        this.params = createMock(Parameters.class);
+        this.model = createMock(Model.class);
         this.webdashLogin = createMock(WebdashLogin.class);
+        this.action.setModel(this.model);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testError() {
-        expect(this.params.getParameter("nonce", null)).andReturn(null);
-        expect(this.params.getParameter("system-user-id", null)).andReturn("ceyates");
-        expect(this.params.getParameter(LanewebObjectModel.SUNETID, null)).andReturn(null);
-        expect(this.params.getParameter("name", null)).andReturn(null);
-        expect(this.params.getParameter("affiliation", null)).andReturn(null);
-        replay(this.params);
+        expect(this.model.getString(LanewebObjectModel.NONCE)).andReturn(null);
+        expect(this.model.getString(LanewebObjectModel.SYSTEM_USER_ID)).andReturn("ceyates");
+        expect(this.model.getString(LanewebObjectModel.SUNETID)).andReturn(null);
+        expect(this.model.getString(LanewebObjectModel.NAME)).andReturn(null);
+        expect(this.model.getString(LanewebObjectModel.AFFILIATION)).andReturn(null);
+        replay(this.model);
         expect(this.webdashLogin.getWebdashURL(null, null, null, null, "ceyates")).andReturn("broken");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
-        Map result = this.action.act(null, null, null, null, this.params);
+        Map result = this.action.doAct();
         assertEquals("broken", result.get("webdash-url"));
-        verify(this.params);
+        verify(this.model);
         verify(this.webdashLogin);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testLogin() {
-        expect(this.params.getParameter("nonce", null)).andReturn("nonce");
-        expect(this.params.getParameter("system-user-id", null)).andReturn("ceyates");
-        expect(this.params.getParameter(LanewebObjectModel.SUNETID, null)).andReturn(null);
-        expect(this.params.getParameter("name", null)).andReturn(null);
-        expect(this.params.getParameter("affiliation", null)).andReturn(null);
-        replay(this.params);
-        expect(this.webdashLogin.getWebdashURL(null, null, null, "nonce", "ceyates")).andReturn("login");
+        expect(this.model.getString(LanewebObjectModel.NONCE)).andReturn(LanewebObjectModel.NONCE);
+        expect(this.model.getString(LanewebObjectModel.SYSTEM_USER_ID)).andReturn("ceyates");
+        expect(this.model.getString(LanewebObjectModel.SUNETID)).andReturn(null);
+        expect(this.model.getString(LanewebObjectModel.NAME)).andReturn(null);
+        expect(this.model.getString(LanewebObjectModel.AFFILIATION)).andReturn(null);
+        replay(this.model);
+        expect(this.webdashLogin.getWebdashURL(null, null, null, LanewebObjectModel.NONCE, "ceyates")).andReturn("login");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
-        Map result = this.action.act(null, null, null, null, this.params);
+        Map result = this.action.doAct();
         assertEquals("login", result.get("webdash-url"));
-        verify(this.params);
+        verify(this.model);
         verify(this.webdashLogin);
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testRegister() {
-        expect(this.params.getParameter("nonce", null)).andReturn("nonce");
-        expect(this.params.getParameter("system-user-id", null)).andReturn(null);
-        expect(this.params.getParameter(LanewebObjectModel.SUNETID, null)).andReturn(null);
-        expect(this.params.getParameter("name", null)).andReturn(null);
-        expect(this.params.getParameter("affiliation", null)).andReturn(null);
-        replay(this.params);
-        expect(this.webdashLogin.getWebdashURL(null, null, null, "nonce", null)).andReturn("register");
+        expect(this.model.getString(LanewebObjectModel.NONCE)).andReturn(LanewebObjectModel.NONCE);
+        expect(this.model.getString(LanewebObjectModel.SYSTEM_USER_ID)).andReturn(null);
+        expect(this.model.getString(LanewebObjectModel.SUNETID)).andReturn(null);
+        expect(this.model.getString(LanewebObjectModel.NAME)).andReturn(null);
+        expect(this.model.getString(LanewebObjectModel.AFFILIATION)).andReturn(null);
+        replay(this.model);
+        expect(this.webdashLogin.getWebdashURL(null, null, null, LanewebObjectModel.NONCE, null)).andReturn("register");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
-        Map result = this.action.act(null, null, null, null, this.params);
+        Map result = this.action.doAct();
         assertEquals("register", result.get("webdash-url"));
-        verify(this.params);
+        verify(this.model);
         verify(this.webdashLogin);
     }
 }

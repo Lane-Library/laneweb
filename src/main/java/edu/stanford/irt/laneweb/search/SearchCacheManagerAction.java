@@ -2,23 +2,17 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Map;
 
-import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.cocoon.acting.Action;
-import org.apache.cocoon.environment.Redirector;
-import org.apache.cocoon.environment.SourceResolver;
-
+import edu.stanford.irt.laneweb.cocoon.AbstractAction;
 import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 
-public class SearchCacheManagerAction implements Action {
+public class SearchCacheManagerAction extends AbstractAction {
 
     private SearchCacheManager searchCache;
 
-    @SuppressWarnings("unchecked")
-    public Map act(final Redirector redirector, final SourceResolver sourceResolver, final Map objectModel,
-            final String string, final Parameters param) {
-        String query = param.getParameter(LanewebObjectModel.QUERY, null);
-        if (query != null && !"".equals(query.trim())) {
+    public Map doAct() {
+        String query = this.model.getString(LanewebObjectModel.QUERY);
+        if (query != null) {
             this.searchCache.clearCache(query);
         } else {
             this.searchCache.clearAllCaches();

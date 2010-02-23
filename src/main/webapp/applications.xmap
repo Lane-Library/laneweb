@@ -114,9 +114,7 @@
                     <map:serialize type="xhtml"/>
                 </map:match>
                 <map:match pattern="search/clearcache" type="wildcard">
-                    <map:act type="searchCacheManagerAction" >
-                        <map:parameter name="query" value="${query}"/>
-                    </map:act>
+                    <map:act type="search-cache-manager"/>
                     <map:read type="resource" src="robots.txt" mime-type="text/plain"/>
                 </map:match>
             </map:match>
