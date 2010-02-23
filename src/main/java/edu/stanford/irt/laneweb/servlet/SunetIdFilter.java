@@ -75,7 +75,7 @@ public class SunetIdFilter implements Filter {
         }
         
         if (sunetid == null) {
-            sunetid = getSunetidFromCookie(request.getCookies(), request.getHeader("LDAPData-Agent"));
+            sunetid = getSunetidFromCookie(request.getCookies(), request.getHeader("User-Agent"));
         }
         return sunetid;
     }
@@ -135,7 +135,7 @@ public class SunetIdFilter implements Filter {
      * @param response
      */
     private void setLoginCookie(final String sunetid, final HttpServletRequest request, final HttpServletResponse response) {
-        String userAgent = request.getHeader("LDAPData-Agent");
+        String userAgent = request.getHeader("User-Agent");
         if (null != userAgent) {
             PersistentLoginToken token = this.codec.createLoginToken(sunetid, userAgent.hashCode());
             Cookie cookie = new Cookie(LanewebConstants.LANE_COOKIE_NAME, token.getEncryptedValue());
