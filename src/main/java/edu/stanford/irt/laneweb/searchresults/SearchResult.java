@@ -23,10 +23,5 @@ public interface SearchResult extends Resource, Comparable<SearchResult> {
      * @return the sortTitle
      */
     String getSortTitle();
-
-    /**
-     * @return the dedupTitle
-     */
-    String getDedupTitle();
     
 }

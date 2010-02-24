@@ -13,14 +13,12 @@ import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.Link;
 import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.laneweb.Resource;
-import edu.stanford.irt.laneweb.search.QueryTermPattern;
-
 
 public class EresourceResource implements Resource {
-    
+
     private static final Comparator<Version> VERSION_COMPARATOR = new EresourceVersionComparator();
-    
-    private Eresource eresource;
+
+    protected Eresource eresource;
 
     public EresourceResource(Eresource eresource) {
         this.eresource = eresource;
@@ -30,6 +28,9 @@ public class EresourceResource implements Resource {
         handleEresource(handler);
     }
 
+    public String toString() {
+        return this.eresource.toString();
+    }
 
     private void handleEresource(final ContentHandler handler) throws SAXException {
         // TODO: returning result element for now ... turn into displayable?
@@ -45,30 +46,22 @@ public class EresourceResource implements Resource {
         for (Version version : versions) {
             handleVersion(handler, version);
         }
-        XMLUtils.endElement(handler, VERSIONS);
-        XMLUtils.endElement(handler, RESULT);
+        XMLUtils.endElement(handler, NAMESPACE, VERSIONS);
+        XMLUtils.endElement(handler, NAMESPACE, RESULT);
     }
 
     private void handleVersion(final ContentHandler handler, final Version version) throws SAXException {
         XMLUtils.startElement(handler, NAMESPACE, VERSION);
-        if (null != version.getSummaryHoldings()) {
-            XMLUtils.createElementNS(handler, NAMESPACE, SUMMARY_HOLDINGS, version.getSummaryHoldings());
-        }
-        if (null != version.getDates()) {
-            XMLUtils.createElementNS(handler, NAMESPACE, DATES, version.getDates());
-        }
-        if (null != version.getPublisher()) {
-            XMLUtils.createElementNS(handler, NAMESPACE, PUBLISHER, version.getPublisher());
-        }
-        if (null != version.getDescription()) {
-            XMLUtils.createElementNS(handler, NAMESPACE, DESCRIPTION, version.getDescription());
-        }
+        maybeCreateElement(handler, SUMMARY_HOLDINGS, version.getSummaryHoldings());
+        maybeCreateElement(handler, DATES, version.getDates());
+        maybeCreateElement(handler, PUBLISHER, version.getPublisher());
+        maybeCreateElement(handler, DESCRIPTION, version.getDescription());
         XMLUtils.startElement(handler, NAMESPACE, LINKS);
         for (Link link : version.getLinks()) {
             handleLink(handler, link);
         }
-        XMLUtils.endElement(handler, LINKS);
-        XMLUtils.endElement(handler, VERSION);
+        XMLUtils.endElement(handler, NAMESPACE, LINKS);
+        XMLUtils.endElement(handler, NAMESPACE, VERSION);
     }
 
     private void handleLink(final ContentHandler handler, final Link link) throws SAXException {
@@ -84,15 +77,15 @@ public class EresourceResource implements Resource {
         }
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", type);
         XMLUtils.startElement(handler, NAMESPACE, LINK, atts);
-        if (null != link.getLabel()) {
-            XMLUtils.createElementNS(handler, NAMESPACE, LABEL, label);
+        maybeCreateElement(handler, LABEL, label);
+        maybeCreateElement(handler, URL, link.getUrl());
+        maybeCreateElement(handler, INSTRUCTION, link.getInstruction());
+        XMLUtils.endElement(handler, NAMESPACE, LINK);
+    }
+
+    private void maybeCreateElement(final ContentHandler handler, String name, String value) throws SAXException {
+        if (value != null) {
+            XMLUtils.createElementNS(handler, NAMESPACE, name, value);
         }
-        if (null != link.getUrl()) {
-            XMLUtils.createElementNS(handler, NAMESPACE, URL, link.getUrl());
-        }
-        if (null != link.getInstruction()) {
-            XMLUtils.createElementNS(handler, NAMESPACE, INSTRUCTION, link.getInstruction());
-        }
-        XMLUtils.endElement(handler, LINK);
     }
 }
