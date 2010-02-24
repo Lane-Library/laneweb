@@ -261,31 +261,9 @@
          </exclusions>
       </dependency>
       <dependency>
-         <artifactId>suggest</artifactId>
-         <groupId>edu.stanford.irt</groupId>
-         <version>0.1.9</version>
-         <exclusions>
-            <exclusion>
-               <artifactId>ojdbc5</artifactId>
-               <groupId>com.oracle.ojdbc</groupId>
-            </exclusion>
-            <exclusion>
-               <artifactId>catalog</artifactId>
-               <groupId>edu.stanford.irt</groupId>
-            </exclusion>
-            <exclusion>
-               <artifactId>marc4j-jdk15</artifactId>
-               <groupId>edu.stanford.irt.marc4j</groupId>
-            </exclusion>
-            <exclusion>
-               <artifactId>spring-context</artifactId>
-               <groupId>org.springframework</groupId>
-            </exclusion>
-            <exclusion>
-               <artifactId>spring-jdbc</artifactId>
-               <groupId>org.springframework</groupId>
-            </exclusion>
-         </exclusions>
+         <artifactId>suggest-query</artifactId>
+         <groupId>edu.stanford.irt.suggest</groupId>
+         <version>0.2.0-SNAPSHOT</version>
       </dependency>
       <dependency>
          <artifactId>search-core</artifactId>
