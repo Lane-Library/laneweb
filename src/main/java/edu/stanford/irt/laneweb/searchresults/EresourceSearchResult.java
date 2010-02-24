@@ -17,7 +17,8 @@ public class EresourceSearchResult extends EresourceResource implements SearchRe
 
     public EresourceSearchResult(Eresource eresource) {
         super(eresource);
-        this.sortTitle = NON_FILING_PATTERN.matcher(eresource.getTitle()).replaceFirst("");
+        this.sortTitle = eresource.getTitle().toLowerCase().replaceAll("\\W", "");
+        this.sortTitle = NON_FILING_PATTERN.matcher(this.sortTitle).replaceFirst("");
     }
 
     public int getScore() {

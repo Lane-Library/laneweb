@@ -51,7 +51,8 @@ public class ContentResultSearchResult implements SearchResult {
      */
     public ContentResultSearchResult(ContentResult contentResult, Pattern queryTermPattern) {
         this.contentResult = contentResult;
-        this.sortTitle = NON_FILING_PATTERN.matcher(contentResult.getTitle()).replaceFirst("");
+        this.sortTitle = this.contentResult.getTitle().toLowerCase().replaceAll("\\W", "");
+        this.sortTitle = NON_FILING_PATTERN.matcher(this.sortTitle).replaceFirst("");
         this.queryTermPattern = queryTermPattern;
         this.score = computeScore();
     }
