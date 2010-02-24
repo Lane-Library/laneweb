@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb;
 
 import java.io.IOException;
 
+import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.xerces.parsers.AbstractSAXParser;
 import org.cyberneko.html.HTMLConfiguration;
@@ -14,7 +15,7 @@ import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
  * The neko html generator reads HTML from a source, converts it to XHTML and generates SAX Events. It uses the NekoHTML
  * library to do this.
  */
-public class HTMLGenerator extends AbstractGenerator {
+public class HTMLGenerator extends AbstractGenerator implements CacheableProcessingComponent {
 
     private static class HtmlSAXParser extends AbstractSAXParser {
 
