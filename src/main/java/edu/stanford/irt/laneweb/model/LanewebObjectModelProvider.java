@@ -165,6 +165,8 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                 model.put(LanewebObjectModel.PASSWORD, value);
             } else if ("PID".equals(name)) {
                 model.put(LanewebObjectModel.PID, value);
+            } else if ("liaison".equals(name)) {
+                model.put(LanewebObjectModel.LIAISON, value);
                 
 //            } else {
 //                model.put(name, request.getParameter(name));

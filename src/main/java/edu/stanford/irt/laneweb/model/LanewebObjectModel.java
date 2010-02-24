@@ -72,6 +72,8 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
     public static final String PASSWORD = "password";
 
     public static final String PID = "pid";
+
+    public static final String LIAISON = "liaison";
     
     public void setInitialEntries(Map<String, ObjectModelProvider> initialEntries) {
         for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {
