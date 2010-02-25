@@ -123,7 +123,7 @@
             <xsl:when test="starts-with($path,'/search/clinical')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/info-literacy')">clinical</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all</xsl:when>
-            <xsl:when test="string-length($source-prefix) &gt; 0">
+            <xsl:when test="string-length($source-prefix) &gt; 0 and ($source-prefix = 'clinical' or $source-prefix = 'specialty')">
                 <xsl:value-of select="$source-prefix"/>
             </xsl:when>
             <xsl:otherwise>all</xsl:otherwise>
