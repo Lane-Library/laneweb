@@ -8,30 +8,6 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd">
 
-    <bean id="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler"
-        class="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
-        <property name="methodsNotAllowed">
-            <set>
-                <value>OPTIONS</value>
-                <value>PROPFIND</value>
-            </set>
-        </property>
-        <property name="redirectMap">
-            <map>
-                <entry key="(.*)/" value="$1/index.html"/>
-                <entry key="(.*)/liaisons/index.html" value="$1/contacts/index.html?loadTab=liaisons"/>
-                <entry key="(.*)/classes/index.html" value="$1/services/workshops/laneclasses.html"/>
-                <entry key="(.*)/clinician/index.html" value="$1/portals/clinical.html"/>
-            </map>
-        </property>
-        <lookup-method name="getRequestProcessor" bean="org.apache.cocoon.servlet.RequestProcessor"
-        />
-    </bean>
-
-    <bean id="org.apache.cocoon.processing.ProcessInfoProvider"
-        class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
-        <property name="servletContext" ref="javax.servlet.ServletContext"/>
-    </bean>
 
     <bean name="org.apache.cocoon.caching.Cache" class="org.apache.cocoon.caching.impl.CacheImpl">
         <property name="store" ref="org.apache.excalibur.store.Store"/>

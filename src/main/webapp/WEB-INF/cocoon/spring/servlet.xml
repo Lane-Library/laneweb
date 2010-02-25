@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <bean id="javax.servlet.ServletContext"
+        class="org.apache.cocoon.spring.configurator.impl.ServletContextFactoryBean"/>
+    
+    <bean id="org.apache.cocoon.servlet.RequestProcessor" scope="prototype"
+        class="org.apache.cocoon.servlet.RequestProcessor">
+        <constructor-arg ref="javax.servlet.ServletContext"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.processing.ProcessInfoProvider"
+        class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
+        <property name="servletContext" ref="javax.servlet.ServletContext"/>
+    </bean>
+    
+    <bean id="org.apache.cocoon.configuration.Settings"
+        class="edu.stanford.irt.laneweb.Settings">
+        <property name="tempDir">
+            <bean class="org.springframework.web.context.support.ServletContextAttributeFactoryBean">
+                <property name="attributeName" value="javax.servlet.context.tempdir"/>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler"
+        class="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
+        <property name="methodsNotAllowed">
+            <set>
+                <value>OPTIONS</value>
+                <value>PROPFIND</value>
+            </set>
+        </property>
+        <property name="redirectMap">
+            <map>
+                <entry key="(.*)/" value="$1/index.html"/>
+                <entry key="(.*)/liaisons/index.html" value="$1/contacts/index.html?loadTab=liaisons"/>
+                <entry key="(.*)/classes/index.html" value="$1/services/workshops/laneclasses.html"/>
+                <entry key="(.*)/clinician/index.html" value="$1/portals/clinical.html"/>
+            </map>
+        </property>
+        <lookup-method name="getRequestProcessor" bean="org.apache.cocoon.servlet.RequestProcessor"
+        />
+    </bean>
+    
+</beans>
+    

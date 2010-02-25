@@ -10,23 +10,6 @@
     
     <avalon:bridge location="/WEB-INF/cocoon/avalon/cocoon.xconf"/>
     
-    <bean id="org.apache.cocoon.configuration.Settings"
-        class="edu.stanford.irt.laneweb.Settings">
-        <property name="tempDir">
-            <bean class="org.springframework.web.context.support.ServletContextAttributeFactoryBean">
-                <property name="attributeName" value="javax.servlet.context.tempdir"/>
-            </bean>
-        </property>
-    </bean>
-    
-    <bean id="javax.servlet.ServletContext"
-        class="org.apache.cocoon.spring.configurator.impl.ServletContextFactoryBean"/>
-    
-    <bean id="org.apache.cocoon.servlet.RequestProcessor" scope="prototype"
-        class="org.apache.cocoon.servlet.RequestProcessor">
-        <constructor-arg ref="javax.servlet.ServletContext"/>
-    </bean>
-    
     
     <bean id="org.apache.avalon.framework.context.Context" init-method="init"
         class="org.apache.cocoon.core.container.spring.avalon.AvalonContextFactoryBean">
@@ -41,11 +24,6 @@
     <bean name="org.apache.cocoon.core.xml.SAXParser"
         class="org.apache.cocoon.core.xml.impl.JaxpSAXParser" scope="singleton">
         <property name="validate" value="false"/>
-    </bean>
-
-    <bean name="org.apache.cocoon.processing.ProcessInfoProvider"
-        class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
-        <property name="servletContext" ref="javax.servlet.ServletContext"/>
     </bean>
 
     <bean id="org.apache.cocoon.template.expression.AbstractStringTemplateParser"
