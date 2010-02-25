@@ -61,7 +61,10 @@
             
         YAHOO.util.Event.addListener(searchtermsElm, 'focus', function(){
             acWidget.minQueryLength = 3;
-            if(searchSource.value.match(/^articles-(all|pubmed|sciencecitation)/)){
+            if(searchSource.value.match(/all-all/)){
+            	acWidget.dataSource.scriptQueryAppend = 'l=er-mesh';
+            }
+            else if(searchSource.value.match(/^articles-(all|pubmed|sciencecitation)/)){
             	acWidget.dataSource.scriptQueryAppend = 'l=mesh';
             }
             else if(searchSource.value.match(/^catalog-(all|ej|book|database|software|cc|video)/)){

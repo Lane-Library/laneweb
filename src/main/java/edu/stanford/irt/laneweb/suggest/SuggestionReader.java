@@ -41,6 +41,11 @@ public class SuggestionReader extends AbstractReader {
         Collection<? extends Suggestion> suggestions = new ArrayList<Suggestion>();
         if (limit.matches("(ej|book|database|software|cc|video|lanesite|bassett)")) {
             suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(limit, query);
+        } else if (limit.matches("er-mesh")) {
+            ArrayList<Suggestion> combo = new ArrayList<Suggestion>();
+            combo.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm(query));
+            combo.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
+            suggestions = combo;
         } else if (limit.matches("ej-mesh")) {
             ArrayList<Suggestion> combo = new ArrayList<Suggestion>();
             combo.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm("ej", query));
