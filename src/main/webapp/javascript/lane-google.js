@@ -13,9 +13,11 @@ YAHOO.util.Event.addListener(this, 'load', function() {
             if (_gat !== undefined) {
                 if (host.match("lane.stanford.edu")) {
                     pageTracker = _gat._getTracker("UA-3202241-2");
-                } else {
-                    pageTracker = _gat._getTracker("UA-3203486-2");
-                }
+                } else if (host.match("lane-beta.stanford.edu")) {
+                    pageTracker = _gat._getTracker("UA-3203486-9");
+	            } else {
+	            	pageTracker = _gat._getTracker("UA-3203486-2");
+	            }
                 //uncomment this for testing/debugging:
                 //pageTracker._setLocalServerMode();
                 pageTracker._setDomainName(".stanford.edu");
