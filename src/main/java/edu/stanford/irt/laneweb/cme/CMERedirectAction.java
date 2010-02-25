@@ -18,7 +18,7 @@ public class CMERedirectAction extends AbstractAction {
     private static final String UTD_CME_STRING =
             "http://www.uptodate.com/online/content/search.do?unid=EMRID&srcsys=epic90710&eiv=2.1.0";
     
-    protected Map doAct() {
+    protected Map<String, String> doAct() {
         Map<String, String> result = new HashMap<String, String>(1);
         String host = this.model.getString(LanewebObjectModel.HOST);
         String emrid = this.model.getString(LanewebObjectModel.EMRID);

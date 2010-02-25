@@ -12,7 +12,7 @@ public class WebdashAction extends AbstractAction {
 
     private WebdashLogin webDashLogin;
 
-    public Map doAct() {
+    public Map<String, String> doAct() {
         String nonce = this.model.getString(LanewebObjectModel.NONCE);
         String systemUserId = this.model.getString(LanewebObjectModel.SYSTEM_USER_ID);
         String sunetId = this.model.getString(LanewebObjectModel.SUNETID);

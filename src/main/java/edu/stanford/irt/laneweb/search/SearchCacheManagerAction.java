@@ -10,7 +10,7 @@ public class SearchCacheManagerAction extends AbstractAction {
 
     private SearchCacheManager searchCache;
 
-    public Map doAct() {
+    public Map<String, String> doAct() {
         String query = this.model.getString(LanewebObjectModel.QUERY);
         if (query != null) {
             this.searchCache.clearCache(query);

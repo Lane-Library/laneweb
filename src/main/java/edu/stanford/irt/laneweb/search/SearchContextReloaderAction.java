@@ -20,7 +20,7 @@ public class SearchContextReloaderAction extends AbstractAction {
 
     private String svnUrlProject;
 
-    public Map doAct() {
+    public Map<String, String> doAct() {
         String release = this.model.getString(LanewebObjectModel.RELEASE);
         String sunetid = this.model.getString(LanewebObjectModel.SUNETID);
         String password = this.model.getString(LanewebObjectModel.PASSWORD);

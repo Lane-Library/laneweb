@@ -18,6 +18,7 @@ public abstract class AbstractAction implements Action, ModelAware {
     
     protected Model model;
 
+    @SuppressWarnings("unchecked")
     public Map act(Redirector redirector, SourceResolver resolver, Map objectModel, String source, Parameters parameters)
             throws Exception {
         this.parametersMap = new ParametersMap(parameters);
@@ -28,5 +29,5 @@ public abstract class AbstractAction implements Action, ModelAware {
         this.model = model;
     }
     
-    protected abstract Map doAct();
+    protected abstract Map<String, String> doAct();
 }

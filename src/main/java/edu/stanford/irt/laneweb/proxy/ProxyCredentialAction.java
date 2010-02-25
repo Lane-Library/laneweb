@@ -12,7 +12,7 @@ public class ProxyCredentialAction extends AbstractAction {
     private static final String PROXY_REDIRECT_KEY = "proxy-redirect";
 
     @Override
-    protected Map doAct() {
+    protected Map<String, String> doAct() {
         String queryString = this.model.getString(LanewebObjectModel.QUERY_STRING);
         if (queryString == null) {
             throw new IllegalStateException("null query-string");

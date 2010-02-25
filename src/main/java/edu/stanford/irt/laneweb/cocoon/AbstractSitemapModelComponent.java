@@ -25,6 +25,7 @@ public abstract class AbstractSitemapModelComponent implements SitemapModelCompo
         this.model = model;
     }
 
+    @SuppressWarnings("unchecked")
     public final void setup(SourceResolver resolver, Map objectModel, String src, Parameters par) {
         this.parameterMap = new ParametersMap(par);
         if (null != src) {

@@ -15,7 +15,7 @@ import org.apache.cocoon.el.objectmodel.ObjectModel;
 public class MapModel extends HashMap<String, Object> implements Model {
     
     public MapModel(ObjectModel objectModel) {
-        super.putAll((Map<? extends String, ? extends Object>) objectModel.get("laneweb"));
+        super.putAll((Map<String, Object>) objectModel.get("laneweb"));
     }
 
     public <T> T getObject(String name, Class<T> clazz) {
