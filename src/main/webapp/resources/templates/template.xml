@@ -28,13 +28,9 @@
                         </h1>
                         <form id="search" method="get" action="/search.html">
                             <ul id="searchTabs">
-                                <li id="articles" title="enter terms to search for articles">
-                                    <a href="?searchTab=articles" title="Lane article search"
-                                        >Articles</a>
-                                </li>
-                                <li id="catalog" title="enter terms to search the catalog">
-                                    <a href="?searchTab=catalog" title="Lane catalog search"
-                                        >Catalog</a>
+                                <li id="all" title="enter terms to search for articles and catalog entries">
+                                    <a href="?searchTab=all" title="Lane article and catalog search"
+                                        >Lane Search</a>
                                 </li>
                                 <li id="specialty" title="enter terms to search specialty resources">
                                     <a href="?searchTab=specialty" title="Lane specialty search"
