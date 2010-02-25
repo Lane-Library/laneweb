@@ -122,14 +122,11 @@
             <xsl:when test="starts-with($path,'/sumc-specialties')">specialty</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/info-literacy')">clinical</xsl:when>
-            <xsl:when test="ends-with($path,'-viaLane.html')">articles</xsl:when>
-            <xsl:when test="starts-with($path,'/biomed-resources')">catalog</xsl:when>
-            <xsl:when test="starts-with($path,'/services')">catalog</xsl:when>
-            <xsl:when test="starts-with($path,'/help')">catalog</xsl:when>
+            <xsl:when test="ends-with($path,'-viaLane.html')">all</xsl:when>
             <xsl:when test="string-length($source-prefix) &gt; 0">
                 <xsl:value-of select="$source-prefix"/>
             </xsl:when>
-            <xsl:otherwise>articles</xsl:otherwise>
+            <xsl:otherwise>all</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
 
