@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.proxy;
 
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 // $Id$
 public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
@@ -32,13 +32,13 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
     }
     
     protected void initialize() {
-        this.sunetid = this.model.getString(LanewebObjectModel.SUNETID);
-        this.ticket = this.model.getObject(LanewebObjectModel.TICKET, Ticket.class);
-        this.proxyLinks = this.model.getObject(LanewebObjectModel.PROXY_LINKS, Boolean.class, Boolean.FALSE);
-        this.ipGroup = this.model.getObject(LanewebObjectModel.IPGROUP, IPGroup.class, IPGroup.OTHER);
-        this.basePath = this.parameterMap.containsKey(LanewebObjectModel.BASE_PATH) ? 
-                this.parameterMap.get(LanewebObjectModel.BASE_PATH) :
-                    this.model.getString(LanewebObjectModel.BASE_PATH);
+        this.sunetid = this.model.getString(Model.SUNETID);
+        this.ticket = this.model.getObject(Model.TICKET, Ticket.class);
+        this.proxyLinks = this.model.getObject(Model.PROXY_LINKS, Boolean.class, Boolean.FALSE);
+        this.ipGroup = this.model.getObject(Model.IPGROUP, IPGroup.class, IPGroup.OTHER);
+        this.basePath = this.parameterMap.containsKey(Model.BASE_PATH) ? 
+                this.parameterMap.get(Model.BASE_PATH) :
+                    this.model.getString(Model.BASE_PATH);
     }
 
     protected String createProxyLink(final String link) {

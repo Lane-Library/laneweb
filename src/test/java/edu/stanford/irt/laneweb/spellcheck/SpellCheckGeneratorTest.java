@@ -14,7 +14,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.spell.SpellCheckResult;
 import edu.stanford.irt.spell.SpellChecker;
@@ -42,7 +41,7 @@ public class SpellCheckGeneratorTest {
     @Test
     public void testGenerate() throws ProcessingException, IOException, SAXException {
         expect(this.spellChecker.spellCheck("ibuprophen")).andReturn(new SpellCheckResult("ibuprofen"));
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("ibuprophen");
+        expect(this.model.getString(Model.QUERY)).andReturn("ibuprophen");
         replayMocks();
         this.generator.setup(null, null, null, null);
         this.generator.setConsumer(this.xmlConsumer);
@@ -73,7 +72,7 @@ public class SpellCheckGeneratorTest {
 
     @Test
     public void testSetup() throws ProcessingException, SAXException, IOException {
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("ibuprophen");
+        expect(this.model.getString(Model.QUERY)).andReturn("ibuprophen");
         replayMocks();
         this.generator.setup(null, null, null, null);
         verifyMocks();
@@ -81,7 +80,7 @@ public class SpellCheckGeneratorTest {
 
     @Test
     public void testSetupNullQuery() throws ProcessingException, SAXException, IOException {
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn(null);
+        expect(this.model.getString(Model.QUERY)).andReturn(null);
         replayMocks();
         try {
             this.generator.setup(null, null, null, null);

@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractSitemapModelComponent;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.querymap.DescriptorWeightMap;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.QueryMapper;
@@ -43,7 +43,7 @@ public abstract class AbstractQueryMapComponent extends AbstractSitemapModelComp
         if (null == this.queryMapper) {
             throw new IllegalStateException("null queryMapper");
         }
-        String query = this.model.getString(LanewebObjectModel.QUERY);
+        String query = this.model.getString(Model.QUERY);
         if (null == query) {
             throw new IllegalArgumentException("null query");
         }

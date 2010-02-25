@@ -24,7 +24,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * 
@@ -59,7 +59,7 @@ public class SunetIdFilterTest {
     public void testIsInRemoteUser() throws IOException, ServletException {
         expect(this.request.getRemoteUser()).andReturn("ditenus");
         expect(this.request.getParameter(isA(String.class))).andReturn(null).times(2);
-        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
+        this.request.setAttribute(Model.SUNETID, "ditenus");
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);
@@ -71,7 +71,7 @@ public class SunetIdFilterTest {
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn("ditenus");
         expect(this.request.getParameter(isA(String.class))).andReturn(null).times(2);
-        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
+        this.request.setAttribute(Model.SUNETID, "ditenus");
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);
@@ -83,9 +83,9 @@ public class SunetIdFilterTest {
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getSession(false)).andReturn(this.session);
-        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
+        this.request.setAttribute(Model.SUNETID, "ditenus");
         expect(this.request.getParameter(isA(String.class))).andReturn(null).times(2);
-        expect(this.session.getAttribute(LanewebObjectModel.SUNETID)).andReturn("ditenus");
+        expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);
@@ -112,7 +112,7 @@ public class SunetIdFilterTest {
         expect(this.request.getSession(false)).andReturn(this.session);
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
         expect(this.request.getHeader("User-Agent")).andReturn(null);
-        expect(this.session.getAttribute(LanewebObjectModel.SUNETID)).andReturn(null);
+        expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);
@@ -130,7 +130,7 @@ public class SunetIdFilterTest {
         expect(this.cookie.getName()).andReturn(LanewebConstants.LANE_COOKIE_NAME);
         String value = this.codec.createLoginToken("ditenus", "user agent".hashCode()).getEncryptedValue();
         expect(this.cookie.getValue()).andReturn(value);
-        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
+        this.request.setAttribute(Model.SUNETID, "ditenus");
         this.chain.doFilter(this.request, this.response);
         replayMocks();
         this.filter.doFilter(this.request, this.response, this.chain);
@@ -141,7 +141,7 @@ public class SunetIdFilterTest {
     public void testAddUserCookie() throws IOException, ServletException {
         expect(this.request.getRemoteUser()).andReturn("ditenus");
         expect(this.request.getParameter("pl")).andReturn("true");
-        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
+        this.request.setAttribute(Model.SUNETID, "ditenus");
         expect(this.request.getHeader("User-Agent")).andReturn("user agent");
         this.response.addCookie(and(isA(Cookie.class), capture(this.cookieCapture)));
         this.chain.doFilter(this.request, this.response);
@@ -157,7 +157,7 @@ public class SunetIdFilterTest {
         expect(this.request.getRemoteUser()).andReturn("ditenus");
         expect(this.request.getParameter("pl")).andReturn("false");
         expect(this.request.getParameter("remove-pl")).andReturn("true");
-        this.request.setAttribute(LanewebObjectModel.SUNETID, "ditenus");
+        this.request.setAttribute(Model.SUNETID, "ditenus");
         this.response.addCookie(and(isA(Cookie.class), capture(this.cookieCapture)));
         this.chain.doFilter(this.request, this.response);
         replayMocks();

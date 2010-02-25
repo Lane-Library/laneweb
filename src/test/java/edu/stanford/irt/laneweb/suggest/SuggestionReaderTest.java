@@ -16,7 +16,6 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.suggest.MeshSuggestionManager;
 
@@ -54,8 +53,8 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerate() throws IOException {
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("venous thrombosis");
-        expect(this.model.getString(LanewebObjectModel.LIMIT)).andReturn("mesh");
+        expect(this.model.getString(Model.QUERY)).andReturn("venous thrombosis");
+        expect(this.model.getString(Model.LIMIT)).andReturn("mesh");
         replayMocks();
         this.reader.setup(null, null, null, null);
         this.reader.generate();
@@ -70,8 +69,8 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerateNull() throws IOException {
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("asdfgh");
-        expect(this.model.getString(LanewebObjectModel.LIMIT)).andReturn("mesh");
+        expect(this.model.getString(Model.QUERY)).andReturn("asdfgh");
+        expect(this.model.getString(Model.LIMIT)).andReturn("mesh");
         replayMocks();
         this.reader.setup(null, null, null, null);
         this.reader.generate();

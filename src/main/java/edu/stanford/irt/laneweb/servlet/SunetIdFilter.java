@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import edu.stanford.irt.laneweb.LanewebConstants;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * A servlet Filter that tries to discover the sunetid associated with a
@@ -47,7 +47,7 @@ public class SunetIdFilter implements Filter {
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException, ServletException {
         String sunetid = getSunetId((HttpServletRequest) request);
         if (null != sunetid) {
-            request.setAttribute(LanewebObjectModel.SUNETID, sunetid);
+            request.setAttribute(Model.SUNETID, sunetid);
             if (Boolean.parseBoolean(request.getParameter(("pl")))) {
                 setLoginCookie(sunetid, (HttpServletRequest) request, (HttpServletResponse) response);
             } else if (Boolean.parseBoolean(request.getParameter("remove-pl"))) {
@@ -99,7 +99,7 @@ public class SunetIdFilter implements Filter {
     private String getSunetidFromSession(HttpSession session) {
         String sunetid = null;
         if (session != null) {
-            sunetid = (String) session.getAttribute(LanewebObjectModel.SUNETID);
+            sunetid = (String) session.getAttribute(Model.SUNETID);
         }
         return sunetid;
     }

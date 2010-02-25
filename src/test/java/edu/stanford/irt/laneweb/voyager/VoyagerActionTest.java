@@ -9,7 +9,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class VoyagerActionTest {
@@ -30,9 +29,9 @@ public class VoyagerActionTest {
 
     @Test
     public void testAct() throws Exception {
-        expect(this.model.getString(LanewebObjectModel.PID)).andReturn("123");
-        expect(this.model.getString(LanewebObjectModel.QUERY_STRING)).andReturn("a=b");
-        expect(this.model.getString(LanewebObjectModel.UNIVID)).andReturn("1234");
+        expect(this.model.getString(Model.PID)).andReturn("123");
+        expect(this.model.getString(Model.QUERY_STRING)).andReturn("a=b");
+        expect(this.model.getString(Model.UNIVID)).andReturn("1234");
         replay(this.model);
         expect(this.voyagerLogin.getVoyagerURL("1234", "123", "a=b")).andReturn("hello");
         replay(this.voyagerLogin);

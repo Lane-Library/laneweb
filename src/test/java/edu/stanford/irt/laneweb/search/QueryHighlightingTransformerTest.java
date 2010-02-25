@@ -15,7 +15,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.Resource;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.model.Model;
 
 // $Id$
@@ -40,7 +39,7 @@ public class QueryHighlightingTransformerTest {
 
     @Test
     public void testCharacters() throws SAXException {
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("query");
+        expect(this.model.getString(Model.QUERY)).andReturn("query");
         this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE, null);
         this.xmlConsumer.characters(isA(char[].class), eq(0), eq(21));
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD),
@@ -60,7 +59,7 @@ public class QueryHighlightingTransformerTest {
 
     @Test
     public void testEndElement() throws SAXException {
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("query");
+        expect(this.model.getString(Model.QUERY)).andReturn("query");
         this.xmlConsumer.endElement(null, null, null);
         replayMocks();
         this.transformer.initialize();
@@ -70,7 +69,7 @@ public class QueryHighlightingTransformerTest {
 
     @Test
     public void testInitialize() {
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn(null);
+        expect(this.model.getString(Model.QUERY)).andReturn(null);
         replayMocks();
         try {
             this.transformer.initialize();
@@ -82,7 +81,7 @@ public class QueryHighlightingTransformerTest {
 
     @Test
     public void testStartElement() throws SAXException {
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("query");
+        expect(this.model.getString(Model.QUERY)).andReturn("query");
         this.xmlConsumer.startElement(null, null, null, null);
         replayMocks();
         this.transformer.initialize();

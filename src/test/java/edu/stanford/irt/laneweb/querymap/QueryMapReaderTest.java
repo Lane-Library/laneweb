@@ -16,7 +16,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.querymap.Descriptor;
 import edu.stanford.irt.querymap.QueryMap;
@@ -66,7 +65,7 @@ public class QueryMapReaderTest {
         expect(queryMap.getResourceMap()).andReturn(resourceMap);
         expect(this.queryMapper.getQueryMap("dvt")).andReturn(queryMap);
         this.reader.setQueryMapper(this.queryMapper);
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
+        expect(this.model.getString(Model.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);

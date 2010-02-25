@@ -14,7 +14,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class EresourcesCountGenerator extends AbstractGenerator {
 
@@ -71,7 +71,7 @@ public class EresourcesCountGenerator extends AbstractGenerator {
     }
 
     protected void initialize() {
-        this.query = this.model.getString(LanewebObjectModel.QUERY);
+        this.query = this.model.getString(Model.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }

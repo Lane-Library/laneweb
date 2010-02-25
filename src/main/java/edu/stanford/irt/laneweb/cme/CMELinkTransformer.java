@@ -5,7 +5,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * Transformer to rewrite data when a LDAPData.EMRID value is present. 
@@ -49,7 +49,7 @@ public class CMELinkTransformer extends AbstractTransformer {
     }
 
     protected void initialize() {
-        this.emrid = this.model.getString(LanewebObjectModel.EMRID);
+        this.emrid = this.model.getString(Model.EMRID);
     }
 
     @Override

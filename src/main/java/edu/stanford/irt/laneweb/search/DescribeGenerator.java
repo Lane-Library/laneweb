@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -21,8 +21,8 @@ public class DescribeGenerator extends AbstractMetasearchGenerator {
 
     @Override //because query might be null which throws an exception in the parent class.
     protected void initialize() {
-        this.query = this.parameterMap.get(LanewebObjectModel.QUERY);
-        this.engines = this.model.getObject(LanewebObjectModel.ENGINES, String[].class, NO_ENGINES);
+        this.query = this.parameterMap.get(Model.QUERY);
+        this.engines = this.model.getObject(Model.ENGINES, String[].class, NO_ENGINES);
     }
 
     @Override

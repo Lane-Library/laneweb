@@ -14,7 +14,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.searchresults.ContentResultSearchResult;
 import edu.stanford.irt.laneweb.searchresults.EresourceSearchResult;
 import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultSet;
@@ -42,7 +42,7 @@ public class MergedSearchGenerator extends AbstractSearchGenerator {
 
     protected void initialize() {
         super.initialize();
-        this.engines = this.model.getObject(LanewebObjectModel.ENGINES, Collection.class, Collections.<String>emptyList());
+        this.engines = this.model.getObject(Model.ENGINES, Collection.class, Collections.<String>emptyList());
         if (this.engines.size() == 0) {
             String engineList = this.parameterMap.get("engine-list");
             if (engineList != null) {

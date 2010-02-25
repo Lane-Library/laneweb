@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.suggest.EresourceSuggestionManager;
 import edu.stanford.irt.suggest.HistorySuggestionManager;
 import edu.stanford.irt.suggest.MeshSuggestionManager;
@@ -107,8 +107,8 @@ public class SuggestionReader extends AbstractReader {
     }
 
     protected void initialize() {
-        this.limit = this.model.getString(LanewebObjectModel.LIMIT);
-        this.query = this.model.getString(LanewebObjectModel.QUERY);
+        this.limit = this.model.getString(Model.LIMIT);
+        this.query = this.model.getString(Model.QUERY);
     }
 
     private String escapeQuotes(final String string) {

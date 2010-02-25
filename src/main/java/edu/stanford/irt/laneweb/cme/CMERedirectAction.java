@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractAction;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class CMERedirectAction extends AbstractAction {
 
@@ -20,12 +20,12 @@ public class CMERedirectAction extends AbstractAction {
     
     protected Map<String, String> doAct() {
         Map<String, String> result = new HashMap<String, String>(1);
-        String host = this.model.getString(LanewebObjectModel.HOST);
-        String emrid = this.model.getString(LanewebObjectModel.EMRID);
+        String host = this.model.getString(Model.HOST);
+        String emrid = this.model.getString(Model.EMRID);
         if (null != emrid && "uptodate".equalsIgnoreCase(host)) {
             result.put(CME_REDIRECT_KEY, PROXY_LINK + UTD_CME_STRING.replaceFirst("EMRID", emrid));
         } else {
-            String queryString = this.model.getString(LanewebObjectModel.QUERY_STRING);
+            String queryString = this.model.getString(Model.QUERY_STRING);
             result.put(CME_REDIRECT_KEY, null == queryString ? ERROR_URL : ERROR_URL + '?' + queryString);
         }
         return result;

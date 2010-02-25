@@ -22,12 +22,12 @@ public class ProxyLinks {
     public Boolean proxyLinks(final HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) {
-            Boolean proxyLinks = (Boolean) session.getAttribute(LanewebObjectModel.PROXY_LINKS);
+            Boolean proxyLinks = (Boolean) session.getAttribute(Model.PROXY_LINKS);
             if (proxyLinks != null) {
                 return proxyLinks;
             }
         }
-        IPGroup ipGroup = (IPGroup) session.getAttribute(LanewebObjectModel.IPGROUP);
+        IPGroup ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
         if (null != ipGroup && (IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup))) {
             return Boolean.TRUE;
         }

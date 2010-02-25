@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractAction;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class VoyagerAction extends AbstractAction {
 
@@ -13,9 +13,9 @@ public class VoyagerAction extends AbstractAction {
     private VoyagerLogin voyagerLogin = null;
 
     public Map<String, String> doAct() {
-        String pid = this.model.getString(LanewebObjectModel.PID);
-        String queryString = this.model.getString(LanewebObjectModel.QUERY_STRING);
-        String univId = this.model.getString(LanewebObjectModel.UNIVID);
+        String pid = this.model.getString(Model.PID);
+        String queryString = this.model.getString(Model.QUERY_STRING);
+        String univId = this.model.getString(Model.UNIVID);
         String url = this.voyagerLogin.getVoyagerURL(univId, pid, queryString);
         Map<String, String> result = new HashMap<String, String>(1);
         result.put(VOYAGER_KEY, url);

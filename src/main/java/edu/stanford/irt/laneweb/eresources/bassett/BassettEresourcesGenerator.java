@@ -6,7 +6,7 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * 
@@ -42,8 +42,8 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
     }
 
     protected void initialize() {
-        this.query = this.model.getString(LanewebObjectModel.QUERY);
-        this.region = this.model.getString(LanewebObjectModel.REGION);
-        this.bassettNumber = this.model.getString(LanewebObjectModel.BASSETT_NUMBER);
+        this.query = this.model.getString(Model.QUERY);
+        this.region = this.model.getString(Model.REGION);
+        this.bassettNumber = this.model.getString(Model.BASSETT_NUMBER);
     }
 }

@@ -8,7 +8,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class UrlTester extends AbstractReader {
 
@@ -34,7 +34,7 @@ public class UrlTester extends AbstractReader {
     }
 
     protected void initialize() {
-        this.url = this.model.getString(LanewebObjectModel.URL);
+        this.url = this.model.getString(Model.URL);
         if (!this.url.startsWith("http")) {
             this.url = "http://".concat(this.url);
         }

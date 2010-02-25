@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
@@ -32,7 +32,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.resources = this.model.getObject(LanewebObjectModel.RESOURCES, Collection.class);
+        this.resources = this.model.getObject(Model.RESOURCES, Collection.class);
         if (this.resources == null) {
             String resourceList = this.parameterMap.get("resource-list");
             if (resourceList == null) {

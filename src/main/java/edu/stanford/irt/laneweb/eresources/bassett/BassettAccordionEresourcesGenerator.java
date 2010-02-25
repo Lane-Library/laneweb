@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * 
@@ -24,6 +24,6 @@ public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerato
     }
     
     protected void initialize() {
-        this.query = this.model.getString(LanewebObjectModel.QUERY, "bassett");
+        this.query = this.model.getString(Model.QUERY, "bassett");
     }
 }

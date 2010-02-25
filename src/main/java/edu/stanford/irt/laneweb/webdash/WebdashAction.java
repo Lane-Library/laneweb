@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractAction;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class WebdashAction extends AbstractAction {
 
@@ -13,11 +13,11 @@ public class WebdashAction extends AbstractAction {
     private WebdashLogin webDashLogin;
 
     public Map<String, String> doAct() {
-        String nonce = this.model.getString(LanewebObjectModel.NONCE);
-        String systemUserId = this.model.getString(LanewebObjectModel.SYSTEM_USER_ID);
-        String sunetId = this.model.getString(LanewebObjectModel.SUNETID);
-        String name = this.model.getString(LanewebObjectModel.NAME);
-        String affiliation = this.model.getString(LanewebObjectModel.AFFILIATION);
+        String nonce = this.model.getString(Model.NONCE);
+        String systemUserId = this.model.getString(Model.SYSTEM_USER_ID);
+        String sunetId = this.model.getString(Model.SUNETID);
+        String name = this.model.getString(Model.NAME);
+        String affiliation = this.model.getString(Model.AFFILIATION);
         Map<String, String> result = new HashMap<String, String>(1);
         result.put(RESULT_KEY, this.webDashLogin.getWebdashURL(sunetId, name, affiliation, nonce, systemUserId));
         return result;

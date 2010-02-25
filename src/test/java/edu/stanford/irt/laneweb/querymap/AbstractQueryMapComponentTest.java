@@ -10,7 +10,6 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.QueryMapper;
@@ -40,7 +39,7 @@ public class AbstractQueryMapComponentTest {
         QueryMap queryMap = createMock(QueryMap.class);
         expect(this.queryMapper.getQueryMap("dvt")).andReturn(queryMap);
         this.component.setQueryMapper(this.queryMapper);
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
+        expect(this.model.getString(Model.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);
@@ -53,7 +52,7 @@ public class AbstractQueryMapComponentTest {
     @Test
     public void testReset() {
         this.component.setQueryMapper(this.queryMapper);
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
+        expect(this.model.getString(Model.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);
@@ -83,7 +82,7 @@ public class AbstractQueryMapComponentTest {
             fail();
         } catch (IllegalStateException e) {
         }
-        expect(this.model.getString(LanewebObjectModel.QUERY)).andReturn("dvt");
+        expect(this.model.getString(Model.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);

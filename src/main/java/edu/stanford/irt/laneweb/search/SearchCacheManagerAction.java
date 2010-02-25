@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Map;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractAction;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 
 public class SearchCacheManagerAction extends AbstractAction {
@@ -11,7 +11,7 @@ public class SearchCacheManagerAction extends AbstractAction {
     private SearchCacheManager searchCache;
 
     public Map<String, String> doAct() {
-        String query = this.model.getString(LanewebObjectModel.QUERY);
+        String query = this.model.getString(Model.QUERY);
         if (query != null) {
             this.searchCache.clearCache(query);
         } else {

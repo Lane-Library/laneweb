@@ -11,7 +11,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class WebdashActionTest {
@@ -33,11 +32,11 @@ public class WebdashActionTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testError() {
-        expect(this.model.getString(LanewebObjectModel.NONCE)).andReturn(null);
-        expect(this.model.getString(LanewebObjectModel.SYSTEM_USER_ID)).andReturn("ceyates");
-        expect(this.model.getString(LanewebObjectModel.SUNETID)).andReturn(null);
-        expect(this.model.getString(LanewebObjectModel.NAME)).andReturn(null);
-        expect(this.model.getString(LanewebObjectModel.AFFILIATION)).andReturn(null);
+        expect(this.model.getString(Model.NONCE)).andReturn(null);
+        expect(this.model.getString(Model.SYSTEM_USER_ID)).andReturn("ceyates");
+        expect(this.model.getString(Model.SUNETID)).andReturn(null);
+        expect(this.model.getString(Model.NAME)).andReturn(null);
+        expect(this.model.getString(Model.AFFILIATION)).andReturn(null);
         replay(this.model);
         expect(this.webdashLogin.getWebdashURL(null, null, null, null, "ceyates")).andReturn("broken");
         replay(this.webdashLogin);
@@ -51,13 +50,13 @@ public class WebdashActionTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testLogin() {
-        expect(this.model.getString(LanewebObjectModel.NONCE)).andReturn(LanewebObjectModel.NONCE);
-        expect(this.model.getString(LanewebObjectModel.SYSTEM_USER_ID)).andReturn("ceyates");
-        expect(this.model.getString(LanewebObjectModel.SUNETID)).andReturn(null);
-        expect(this.model.getString(LanewebObjectModel.NAME)).andReturn(null);
-        expect(this.model.getString(LanewebObjectModel.AFFILIATION)).andReturn(null);
+        expect(this.model.getString(Model.NONCE)).andReturn(Model.NONCE);
+        expect(this.model.getString(Model.SYSTEM_USER_ID)).andReturn("ceyates");
+        expect(this.model.getString(Model.SUNETID)).andReturn(null);
+        expect(this.model.getString(Model.NAME)).andReturn(null);
+        expect(this.model.getString(Model.AFFILIATION)).andReturn(null);
         replay(this.model);
-        expect(this.webdashLogin.getWebdashURL(null, null, null, LanewebObjectModel.NONCE, "ceyates")).andReturn("login");
+        expect(this.webdashLogin.getWebdashURL(null, null, null, Model.NONCE, "ceyates")).andReturn("login");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         Map result = this.action.doAct();
@@ -69,13 +68,13 @@ public class WebdashActionTest {
     @SuppressWarnings("unchecked")
     @Test
     public void testRegister() {
-        expect(this.model.getString(LanewebObjectModel.NONCE)).andReturn(LanewebObjectModel.NONCE);
-        expect(this.model.getString(LanewebObjectModel.SYSTEM_USER_ID)).andReturn(null);
-        expect(this.model.getString(LanewebObjectModel.SUNETID)).andReturn(null);
-        expect(this.model.getString(LanewebObjectModel.NAME)).andReturn(null);
-        expect(this.model.getString(LanewebObjectModel.AFFILIATION)).andReturn(null);
+        expect(this.model.getString(Model.NONCE)).andReturn(Model.NONCE);
+        expect(this.model.getString(Model.SYSTEM_USER_ID)).andReturn(null);
+        expect(this.model.getString(Model.SUNETID)).andReturn(null);
+        expect(this.model.getString(Model.NAME)).andReturn(null);
+        expect(this.model.getString(Model.AFFILIATION)).andReturn(null);
         replay(this.model);
-        expect(this.webdashLogin.getWebdashURL(null, null, null, LanewebObjectModel.NONCE, null)).andReturn("register");
+        expect(this.webdashLogin.getWebdashURL(null, null, null, Model.NONCE, null)).andReturn("register");
         replay(this.webdashLogin);
         this.action.setWebdashLogin(this.webdashLogin);
         Map result = this.action.doAct();

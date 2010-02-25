@@ -54,69 +54,69 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
         HttpServletRequest request = (HttpServletRequest) objectModel.get("httprequest");
         HttpSession session = request.getSession(true);
         //get the sunet id if set in SunetIdFilter and add it to the session and model
-        String sunetid = (String) request.getAttribute(LanewebObjectModel.SUNETID);
+        String sunetid = (String) request.getAttribute(Model.SUNETID);
         if (sunetid != null) {
-            model.put(LanewebObjectModel.SUNETID, sunetid);
-            session.setAttribute(LanewebObjectModel.SUNETID, sunetid);
-            String name = (String) session.getAttribute(LanewebObjectModel.NAME);
-            String univid = (String) session.getAttribute(LanewebObjectModel.UNIVID);
-            String affiliation = (String) session.getAttribute(LanewebObjectModel.AFFILIATION);
+            model.put(Model.SUNETID, sunetid);
+            session.setAttribute(Model.SUNETID, sunetid);
+            String name = (String) session.getAttribute(Model.NAME);
+            String univid = (String) session.getAttribute(Model.UNIVID);
+            String affiliation = (String) session.getAttribute(Model.AFFILIATION);
             if (null == name || univid == null  || affiliation == null) {
                 LDAPData ldapData = this.lDAPDataAccess.getLdapData(sunetid);
                 name = ldapData.getName();
                 univid = ldapData.getUnivId();
                 affiliation = ldapData.getAffiliation();
                 if (name != null) {
-                    session.setAttribute(LanewebObjectModel.NAME, name);
+                    session.setAttribute(Model.NAME, name);
                 }
                 if (univid != null) {
-                    session.setAttribute(LanewebObjectModel.UNIVID, univid);
+                    session.setAttribute(Model.UNIVID, univid);
                 }
                 if (affiliation != null) {
-                    session.setAttribute(LanewebObjectModel.AFFILIATION, affiliation);
+                    session.setAttribute(Model.AFFILIATION, affiliation);
                 }
             }
             if (name != null) {
-                model.put(LanewebObjectModel.NAME, name);
+                model.put(Model.NAME, name);
             }
             if (univid != null) {
-                model.put(LanewebObjectModel.UNIVID, univid);
+                model.put(Model.UNIVID, univid);
             }
             if (affiliation != null) {
-                model.put(LanewebObjectModel.AFFILIATION, affiliation);
+                model.put(Model.AFFILIATION, affiliation);
             }
         }
-        Boolean proxyLinks = Boolean.parseBoolean(request.getParameter(LanewebObjectModel.PROXY_LINKS));
+        Boolean proxyLinks = Boolean.parseBoolean(request.getParameter(Model.PROXY_LINKS));
         if (proxyLinks == null) {
-            proxyLinks = (Boolean) session.getAttribute(LanewebObjectModel.PROXY_LINKS);
+            proxyLinks = (Boolean) session.getAttribute(Model.PROXY_LINKS);
             if (proxyLinks == null) {
                 proxyLinks = this.proxyLinks.proxyLinks(request);
-                session.setAttribute(LanewebObjectModel.PROXY_LINKS, proxyLinks);
+                session.setAttribute(Model.PROXY_LINKS, proxyLinks);
             }
         } else {
-            session.setAttribute(LanewebObjectModel.PROXY_LINKS, proxyLinks);
+            session.setAttribute(Model.PROXY_LINKS, proxyLinks);
         }
-        model.put(LanewebObjectModel.PROXY_LINKS, proxyLinks);
-        IPGroup ipGroup = (IPGroup) session.getAttribute(LanewebObjectModel.IPGROUP);
+        model.put(Model.PROXY_LINKS, proxyLinks);
+        IPGroup ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
         if (ipGroup == null) {
             ipGroup = IPGroup.getGroupForIP(request.getRemoteAddr());
-            session.setAttribute(LanewebObjectModel.IPGROUP, ipGroup);
+            session.setAttribute(Model.IPGROUP, ipGroup);
         }
-        model.put(LanewebObjectModel.IPGROUP, ipGroup);
-        String emrid = (String) session.getAttribute(LanewebObjectModel.EMRID);
+        model.put(Model.IPGROUP, ipGroup);
+        String emrid = (String) session.getAttribute(Model.EMRID);
         if (emrid == null) {
-            emrid = request.getParameter(LanewebObjectModel.EMRID);
+            emrid = request.getParameter(Model.EMRID);
             if (emrid != null) {
-                session.setAttribute(LanewebObjectModel.EMRID, emrid);
-                model.put(LanewebObjectModel.EMRID, emrid);
+                session.setAttribute(Model.EMRID, emrid);
+                model.put(Model.EMRID, emrid);
             }
         }
         if (proxyLinks && sunetid != null && (ipGroup != IPGroup.SHC && ipGroup != IPGroup.LPCH)) {
-            Ticket ticket = (Ticket) session.getAttribute(LanewebObjectModel.TICKET);
+            Ticket ticket = (Ticket) session.getAttribute(Model.TICKET);
             if (ticket == null || !ticket.isValid()) {
                 ticket = new Ticket(sunetid, this.ezproxyKey);
             }
-            model.put(LanewebObjectModel.TICKET, ticket);
+            model.put(Model.TICKET, ticket);
         }
         org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);
         model.put("live-base", context.getAttribute("laneweb.context.live-base"));
@@ -127,55 +127,55 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             String name = (String) params.nextElement();
             String value = request.getParameter(name);
             if ("q".equals(name)) {
-                model.put(LanewebObjectModel.QUERY, value);
+                model.put(Model.QUERY, value);
                 try {
                     model.put("url-encoded-query", URLEncoder.encode(value, "UTF-8"));
                 } catch (UnsupportedEncodingException e) {
                     throw new RuntimeException(e);
                 }
             } else if ("t".equals(name)) {
-                model.put(LanewebObjectModel.TYPE, value);
+                model.put(Model.TYPE, value);
             } else if ("s".equals(name)) {
-                model.put(LanewebObjectModel.SUBSET, value);
+                model.put(Model.SUBSET, value);
             } else if ("a".equals(name)) {
-                model.put(LanewebObjectModel.ALPHA, value.substring(0,1));
+                model.put(Model.ALPHA, value.substring(0,1));
             } else if ("m".equals(name)) {
-                model.put(LanewebObjectModel.MESH, value);
+                model.put(Model.MESH, value);
             } else if ("f".equals(name)) {
-                model.put(LanewebObjectModel.FACETS, value);
+                model.put(Model.FACETS, value);
             } else if ("l".equals(name)) {
-                model.put(LanewebObjectModel.LIMIT, value);
+                model.put(Model.LIMIT, value);
             } else if ("bn".equals(name)) {
-                model.put(LanewebObjectModel.BASSETT_NUMBER, value);
+                model.put(Model.BASSETT_NUMBER, value);
             } else if ("r".equals(name)) {
-                model.put(LanewebObjectModel.RESOURCES, Arrays.asList(request.getParameterValues(name)));
+                model.put(Model.RESOURCES, Arrays.asList(request.getParameterValues(name)));
             } else if ("e".equals(name)) {
-                model.put(LanewebObjectModel.ENGINES, Arrays.asList(request.getParameterValues(name)));
+                model.put(Model.ENGINES, Arrays.asList(request.getParameterValues(name)));
             } else if ("source".equals(name)) {
-                model.put(LanewebObjectModel.SOURCE, value);
+                model.put(Model.SOURCE, value);
             } else if ("host".equals(name)) {
-                model.put(LanewebObjectModel.HOST, value);
-            } else if (LanewebObjectModel.NONCE.equals(name)) {
-                model.put(LanewebObjectModel.NONCE, value);
+                model.put(Model.HOST, value);
+            } else if (Model.NONCE.equals(name)) {
+                model.put(Model.NONCE, value);
             } else if ("system_user_id".equals(name)) {
-                model.put(LanewebObjectModel.SYSTEM_USER_ID, value);
+                model.put(Model.SYSTEM_USER_ID, value);
             } else if ("release".equals(name)) {
-                model.put(LanewebObjectModel.RELEASE, value);
+                model.put(Model.RELEASE, value);
             } else if ("password".equals(name)) {
-                model.put(LanewebObjectModel.PASSWORD, value);
+                model.put(Model.PASSWORD, value);
             } else if ("PID".equals(name)) {
-                model.put(LanewebObjectModel.PID, value);
+                model.put(Model.PID, value);
             } else if ("liaison".equals(name)) {
-                model.put(LanewebObjectModel.LIAISON, value);
+                model.put(Model.LIAISON, value);
                 
 //            } else {
 //                model.put(name, request.getParameter(name));
             }
         }
         if (request.getQueryString() != null) {
-            model.put(LanewebObjectModel.QUERY_STRING, request.getQueryString());
+            model.put(Model.QUERY_STRING, request.getQueryString());
         }
-        model.put(LanewebObjectModel.BASE_PATH, request.getContextPath());
+        model.put(Model.BASE_PATH, request.getContextPath());
         model.put("request-uri", request.getRequestURI());
         model.put("remote-addr", request.getRemoteAddr());
         if (request.getHeader("referer") != null) {

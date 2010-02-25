@@ -9,7 +9,7 @@ import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
-import edu.stanford.irt.laneweb.model.LanewebObjectModel;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class TxtResourceReader extends AbstractReader implements CacheableProcessingComponent {
 
@@ -57,7 +57,7 @@ public class TxtResourceReader extends AbstractReader implements CacheableProces
         //get the path from a sitemap parameter or the base-path from the model, or the default
         this.path = this.parameterMap.containsKey("path") ?
                 this.parameterMap.get("path") :
-                    this.model.getString(LanewebObjectModel.BASE_PATH, this.defaultPath);
+                    this.model.getString(Model.BASE_PATH, this.defaultPath);
     }
 
     public void setValueToSubstitute(final String valueToSubstitute) {
