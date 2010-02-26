@@ -43,7 +43,6 @@
             searchForm.submit();
         };
         
-        
         dataSource = new YAHOO.widget.DS_XHR("/././apps/suggest/json", ["suggest"]);
         dataSource.responseType = YAHOO.widget.DS_XHR.TYPE_JSON;
         dataSource.scriptQueryParam = "q";
@@ -58,7 +57,15 @@
         acWidget.animVert = false;
         acWidget.autoHighlight = false;
         acWidget.itemSelectEvent.subscribe(onItemSelect);
-            
+        
+        // for FF, submit form return key strike
+        YAHOO.util.Event.addListener(searchtermsElm, 'keyup', function(e){
+        	if(YAHOO.env.ua.gecko && e.keyCode == '13'){
+                LANE.search.startSearch();
+                searchForm.submit();
+        	}
+        });
+        
         YAHOO.util.Event.addListener(searchtermsElm, 'focus', function(){
             acWidget.minQueryLength = 3;
             if(searchSource.value.match(/all-all/)){

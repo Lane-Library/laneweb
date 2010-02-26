@@ -127,7 +127,7 @@ LANE.search = LANE.search ||  function() {
                     form.q.style.visibility = 'hidden';
                     o.startSearch();
                     LANE.suggest.collapse();
-                    form.submit();
+                    //form.submit();
                 } catch (ex) {
                     alert(ex);
                     Event.preventDefault(e);
