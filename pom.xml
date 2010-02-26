@@ -6,7 +6,7 @@
    <parent>
       <artifactId>lane</artifactId>
       <groupId>edu.stanford.irt</groupId>
-      <version>3</version>
+      <version>4-SNAPSHOT</version>
    </parent>
    <modelVersion>4.0.0</modelVersion>
    <groupId>edu.stanford.irt</groupId>
@@ -60,6 +60,7 @@
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-war-plugin</artifactId>
+            <version>2.1-beta-1</version>
             <configuration>
                <webappDirectory>target/laneweb</webappDirectory>
                <nonFilteredFileExtensions>
@@ -77,6 +78,7 @@
          <plugin>
             <groupId>net.sf.alchim</groupId>
             <artifactId>yuicompressor-maven-plugin</artifactId>
+            <version>0.7.1</version>
             <executions>
                <execution>
                   <goals>
@@ -161,6 +163,7 @@
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-site-plugin</artifactId>
+            <version>2.1</version>
          </plugin>
       </plugins>
    </build>
@@ -169,6 +172,7 @@
          <plugin>
             <groupId>gr.abiss.mvn.plugins</groupId>
             <artifactId>maven-jstools-plugin</artifactId>
+            <version>0.7</version>
             <inherited>false</inherited>
             <configuration>
                <jsDir>src/main/webapp/javascript</jsDir>
@@ -199,6 +203,7 @@
                </toAddresses>
 
             </configuration>
+            <version>2.3</version>
             <reportSets>
                <reportSet>
                   <reports>
@@ -488,7 +493,5 @@
       </dependency>
    </dependencies>
    <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
    </properties>
 </project>
