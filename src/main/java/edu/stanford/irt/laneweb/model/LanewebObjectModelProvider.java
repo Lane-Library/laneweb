@@ -20,6 +20,7 @@ import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.ldap.LDAPData;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.proxy.Ticket;
+import edu.stanford.irt.laneweb.servlet.TemplateChooser;
 
 /**
  * 
@@ -30,17 +31,14 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
 
     private ProcessInfoProvider processInfoProvider;
 
-    private TemplateChooser templateChooser;
-
     private LDAPDataAccess lDAPDataAccess;
 
     private String ezproxyKey;
 
     public LanewebObjectModelProvider(final ProcessInfoProvider pip, final LDAPDataAccess lDAPDataAccess,
-            final TemplateChooser templateChooser, final String ezproxyKey) {
+            final String ezproxyKey) {
         this.processInfoProvider = pip;
         this.lDAPDataAccess = lDAPDataAccess;
-        this.templateChooser = templateChooser;
         this.ezproxyKey = ezproxyKey;
     }
 
@@ -181,7 +179,7 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                 }
             }
         }
-        model.put("template", this.templateChooser.chooseTemplate(request));
+        model.put("template", request.getAttribute("template"));
         return model;
     }
 

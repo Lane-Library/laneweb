@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.model;
+package edu.stanford.irt.laneweb.servlet;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -42,10 +42,7 @@ public class TemplateChooser {
         this.defaultTemplate = defaultTemplate;
     }
 
-    public String chooseTemplate(final HttpServletRequest request) {
-        if (null == request) {
-            throw new IllegalArgumentException("null request");
-        }
+    public void setupTemplate(final HttpServletRequest request) {
         String template = request.getParameter("template");
         if (null == template && this.templateMap.size() > 0) {
             String uri = request.getRequestURI().substring(request.getContextPath().length());
@@ -56,6 +53,6 @@ public class TemplateChooser {
                 }
             }
         }
-        return null == template ? this.defaultTemplate : template;
+        request.setAttribute("template", null == template ? this.defaultTemplate : template);
     }
 }

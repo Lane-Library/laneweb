@@ -21,7 +21,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
-import edu.stanford.irt.laneweb.servlet.ProxyLinks;
 
 public class LanewebObjectModelProviderTest {
 
@@ -34,13 +33,9 @@ public class LanewebObjectModelProviderTest {
 
     private ObjectModelProvider provider;
 
-    private ProxyLinks proxyLinks;
-
     private HttpServletRequest request;
 
     private HttpSession session;
-
-    private TemplateChooser templateChooser;
 
     private LDAPDataAccess lDAPDataAccess;
     
@@ -56,10 +51,8 @@ public class LanewebObjectModelProviderTest {
         this.objectModel = new HashMap();
         this.session = createMock(HttpSession.class);
         this.lDAPDataAccess = createMock(LDAPDataAccess.class);
-        this.proxyLinks = createMock(ProxyLinks.class);
         this.context = createMock(Context.class);
-        this.templateChooser = createMock(TemplateChooser.class);
-        this.provider = new LanewebObjectModelProvider(this.pip, this.lDAPDataAccess, this.templateChooser,"ezproxyKey");
+        this.provider = new LanewebObjectModelProvider(this.pip, this.lDAPDataAccess, "ezproxyKey");
     }
 
     @SuppressWarnings("unchecked")
@@ -71,6 +64,7 @@ public class LanewebObjectModelProviderTest {
         expect(this.request.getSession(true)).andReturn(this.session);
         expect(this.request.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.request.getAttribute(Model.PROXY_LINKS)).andReturn(null);
+        expect(this.request.getAttribute("template")).andReturn(null);
         expect(this.session.getAttribute(Model.IPGROUP)).andReturn(null);
         expect(this.session.getAttribute(Model.EMRID)).andReturn(null);
         expect(this.context.getAttribute(isA(String.class))).andReturn("foo").atLeastOnce();
@@ -84,7 +78,6 @@ public class LanewebObjectModelProviderTest {
         expect(this.request.getHeader("referer")).andReturn(null);
         expect(this.request.getCookies()).andReturn(null);
         this.session.setAttribute(Model.IPGROUP, IPGroup.OTHER);
-        expect(this.templateChooser.chooseTemplate(this.request)).andReturn("template");
         replayMocks();
         this.provider.getObject();
         verifyMocks();
@@ -93,7 +86,6 @@ public class LanewebObjectModelProviderTest {
     private void replayMocks() {
         replay(this.params);
         replay(this.context);
-        replay(this.proxyLinks);
         replay(this.lDAPDataAccess);
         replay(this.session);
         replay(this.request);
@@ -103,7 +95,6 @@ public class LanewebObjectModelProviderTest {
     private void verifyMocks() {
         verify(this.params);
         verify(this.context);
-        verify(this.proxyLinks);
         verify(this.lDAPDataAccess);
         verify(this.session);
         verify(this.request);

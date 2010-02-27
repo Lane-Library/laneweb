@@ -25,6 +25,8 @@ public class SitemapRequestHandlerTest {
     
     private ProxyLinks proxyLinks;
     
+    private TemplateChooser templateChooser;
+    
     private HttpServletRequest request;
 
     private HttpServletResponse response;
@@ -42,7 +44,9 @@ public class SitemapRequestHandlerTest {
         this.request = createMock(HttpServletRequest.class);
         this.proxyLinks = createMock(ProxyLinks.class);
         this.response = createMock(HttpServletResponse.class);
+        this.templateChooser = createMock(TemplateChooser.class);
         this.handler.setProxyLinks(this.proxyLinks);
+        this.handler.setTemplateChooser(this.templateChooser);
     }
 
     @Test
@@ -51,6 +55,7 @@ public class SitemapRequestHandlerTest {
         expect(request.getRequestURI()).andReturn("/");
         this.processor.service(request, response);
         this.proxyLinks.setupProxyLinks(this.request);
+        this.templateChooser.setupTemplate(this.request);
         replayMocks();
         this.handler.handleRequest(request, response);
         verifyMocks();
@@ -133,6 +138,7 @@ public class SitemapRequestHandlerTest {
     }
     
     private void replayMocks() {
+        replay(this.templateChooser);
         replay(this.response);
         replay(this.request);
         replay(this.processor);
@@ -140,6 +146,7 @@ public class SitemapRequestHandlerTest {
     }
     
     private void verifyMocks() {
+        verify(this.templateChooser);
         verify(this.response);
         verify(this.request);
         verify(this.processor);

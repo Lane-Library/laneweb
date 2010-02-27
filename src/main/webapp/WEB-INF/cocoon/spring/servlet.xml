@@ -42,6 +42,7 @@
             </map>
         </property>
         <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.ProxyLinks"/>
+        <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.TemplateChooser"/>
         <lookup-method name="getRequestProcessor" bean="org.apache.cocoon.servlet.RequestProcessor"
         />
     </bean>
@@ -73,4 +74,16 @@
         </property>
     </bean>
 
+    <bean id="edu.stanford.irt.laneweb.servlet.TemplateChooser"
+        class="edu.stanford.irt.laneweb.servlet.TemplateChooser">
+        <constructor-arg value="template"/>
+        <constructor-arg>
+            <!-- TODO: this should be an ordered map if more than one entry -->
+            <map>
+                <entry key="^(?:/\w+|)/bassett/raw/bassettLargerView.html" value="bassettLargerView"
+                />
+            </map>
+        </constructor-arg>
+    </bean>
+    
 </beans>

@@ -27,8 +27,14 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
     
     private ProxyLinks proxyLinks;
     
+    private TemplateChooser templateChooser;
+    
     public void setProxyLinks(final ProxyLinks proxyLinks) {
         this.proxyLinks = proxyLinks;
+    }
+    
+    public void setTemplateChooser(final TemplateChooser templateChooser) {
+        this.templateChooser = templateChooser;
     }
 
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
@@ -45,6 +51,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             }
         }
         this.proxyLinks.setupProxyLinks(request);
+        this.templateChooser.setupTemplate(request);
         getRequestProcessor().service(request, response);
     }
 
