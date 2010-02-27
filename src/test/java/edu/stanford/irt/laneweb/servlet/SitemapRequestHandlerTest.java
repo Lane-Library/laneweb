@@ -1,27 +1,25 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import static org.easymock.EasyMock.expect;
-import static org.easymock.classextension.EasyMock.createMock;
-import static org.easymock.classextension.EasyMock.replay;
-import static org.easymock.classextension.EasyMock.verify;
+import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.Collections;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.cocoon.servlet.RequestProcessor;
+import org.apache.cocoon.Processor;
+import org.apache.cocoon.environment.Environment;
 import org.junit.Before;
 import org.junit.Test;
 
 public class SitemapRequestHandlerTest {
 
     private SitemapRequestHandler handler;
-
-    private RequestProcessor processor;
     
     private ProxyLinks proxyLinks;
     
@@ -30,32 +28,35 @@ public class SitemapRequestHandlerTest {
     private HttpServletRequest request;
 
     private HttpServletResponse response;
+    
+    private Processor processor;
+    
+    private ServletContext servletContext;
 
     @Before
     public void setUp() throws Exception {
-        this.processor = createMock(RequestProcessor.class);
-        this.handler = new SitemapRequestHandler() {
-
-            @Override
-            protected RequestProcessor getRequestProcessor() {
-                return SitemapRequestHandlerTest.this.processor;
-            }
-        };
+        this.handler = new SitemapRequestHandler();
         this.request = createMock(HttpServletRequest.class);
         this.proxyLinks = createMock(ProxyLinks.class);
         this.response = createMock(HttpServletResponse.class);
         this.templateChooser = createMock(TemplateChooser.class);
+        this.processor = createMock(Processor.class);
+        this.servletContext = createMock(ServletContext.class);
         this.handler.setProxyLinks(this.proxyLinks);
         this.handler.setTemplateChooser(this.templateChooser);
+        this.handler.setProcessor(this.processor);
+        this.handler.setServletContext(this.servletContext);
     }
 
     @Test
-    public void testHandleRequest() throws ServletException, IOException {
+    public void testHandleRequest() throws Exception {
         expect(request.getMethod()).andReturn("GET");
         expect(request.getRequestURI()).andReturn("/");
-        this.processor.service(request, response);
+        expect(request.getParameter(isA(String.class))).andReturn(null).times(2);
+        expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptyList()));
         this.proxyLinks.setupProxyLinks(this.request);
         this.templateChooser.setupTemplate(this.request);
+        expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
         replayMocks();
         this.handler.handleRequest(request, response);
         verifyMocks();
@@ -138,6 +139,7 @@ public class SitemapRequestHandlerTest {
     }
     
     private void replayMocks() {
+        replay(this.servletContext);
         replay(this.templateChooser);
         replay(this.response);
         replay(this.request);
@@ -146,10 +148,11 @@ public class SitemapRequestHandlerTest {
     }
     
     private void verifyMocks() {
+        verify(this.servletContext);
+        verify(this.processor);
         verify(this.templateChooser);
         verify(this.response);
         verify(this.request);
-        verify(this.processor);
         verify(this.proxyLinks);
     }
 }

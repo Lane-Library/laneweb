@@ -6,11 +6,6 @@
     <bean id="javax.servlet.ServletContext"
         class="org.apache.cocoon.spring.configurator.impl.ServletContextFactoryBean"/>
 
-    <bean id="org.apache.cocoon.servlet.RequestProcessor" scope="prototype"
-        class="org.apache.cocoon.servlet.RequestProcessor">
-        <constructor-arg ref="javax.servlet.ServletContext"/>
-    </bean>
-
     <bean name="org.apache.cocoon.processing.ProcessInfoProvider"
         class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
         <property name="servletContext" ref="javax.servlet.ServletContext"/>
@@ -54,7 +49,8 @@
         </property>
         <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.ProxyLinks"/>
         <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.TemplateChooser"/>
-        <lookup-method name="getRequestProcessor" bean="org.apache.cocoon.servlet.RequestProcessor"/>
+        <property name="servletContext" ref="javax.servlet.ServletContext"/>
+        <property name="processor" ref="org.apache.cocoon.Processor"/>
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.servlet.ProxyLinks"
