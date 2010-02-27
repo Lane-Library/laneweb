@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import org.apache.cocoon.ProcessingException;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
@@ -50,7 +49,7 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
                     this.model.getString(Model.SUBSET);
     }
 
-    public void generate() throws IOException, SAXException, ProcessingException {
+    public void generate() throws IOException, SAXException {
         XMLizableSearchResultSet eresources = new XMLizableSearchResultSet(this.query);
         eresources.addAll(getEresourceList());
         this.xmlConsumer.startDocument();

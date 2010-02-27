@@ -8,7 +8,6 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
-import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +38,7 @@ public class SpellCheckGeneratorTest {
     }
 
     @Test
-    public void testGenerate() throws ProcessingException, IOException, SAXException {
+    public void testGenerate() throws IOException, SAXException {
         expect(this.spellChecker.spellCheck("ibuprophen")).andReturn(new SpellCheckResult("ibuprofen"));
         expect(this.model.getString(Model.QUERY)).andReturn("ibuprophen");
         replayMocks();
@@ -71,7 +70,7 @@ public class SpellCheckGeneratorTest {
     }
 
     @Test
-    public void testSetup() throws ProcessingException, SAXException, IOException {
+    public void testSetup() throws SAXException, IOException {
         expect(this.model.getString(Model.QUERY)).andReturn("ibuprophen");
         replayMocks();
         this.generator.setup(null, null, null, null);
@@ -79,7 +78,7 @@ public class SpellCheckGeneratorTest {
     }
 
     @Test
-    public void testSetupNullQuery() throws ProcessingException, SAXException, IOException {
+    public void testSetupNullQuery() throws SAXException, IOException {
         expect(this.model.getString(Model.QUERY)).andReturn(null);
         replayMocks();
         try {

@@ -9,13 +9,11 @@
  */
 package edu.stanford.irt.laneweb;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.cocoon.components.source.impl.MultiSourceValidity;
 import org.apache.cocoon.core.xml.SAXParser;
@@ -24,7 +22,6 @@ import org.apache.cocoon.transformation.AbstractTransformer;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.SourceValidity;
 import org.xml.sax.ContentHandler;
-import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
 /**
@@ -94,7 +91,7 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements C
 
     @SuppressWarnings("unchecked")
     public void setup(final SourceResolver resolver, final Map objectModel, final String source,
-            final Parameters parameters) throws ProcessingException, SAXException, IOException {
+            final Parameters parameters) {
         this.resolver = resolver;
         this.validity = new MultiSourceValidity(resolver, MultiSourceValidity.CHECK_ALWAYS);
         this.xIncludePipe = new XIncludePipe(this);
