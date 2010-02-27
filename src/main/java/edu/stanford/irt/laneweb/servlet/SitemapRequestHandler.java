@@ -12,12 +12,9 @@ import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.cocoon.servlet.RequestProcessor;
 import org.springframework.web.HttpRequestHandler;
-
-import edu.stanford.irt.laneweb.model.Model;
 
 public abstract class SitemapRequestHandler implements HttpRequestHandler {
 

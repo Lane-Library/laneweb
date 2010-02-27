@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.model;
+package edu.stanford.irt.laneweb.servlet;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -7,46 +7,47 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.cocoon.el.objectmodel.ObjectModelProvider;
-import org.apache.cocoon.environment.ObjectModelHelper;
-import org.apache.cocoon.processing.ProcessInfoProvider;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.ldap.LDAPData;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
-import edu.stanford.irt.laneweb.servlet.TemplateChooser;
 
 /**
  * 
  * @author ceyates
  * $Id$
  */
-public class LanewebObjectModelProvider implements ObjectModelProvider {
-
-    private ProcessInfoProvider processInfoProvider;
+public class ServletObjectModelProvider implements ObjectModelProvider {
 
     private LDAPDataAccess lDAPDataAccess;
 
     private String ezproxyKey;
+    
+    private ServletContext servletContext;
 
-    public LanewebObjectModelProvider(final ProcessInfoProvider pip, final LDAPDataAccess lDAPDataAccess,
+    public ServletObjectModelProvider(final ServletContext servletContext, final LDAPDataAccess lDAPDataAccess,
             final String ezproxyKey) {
-        this.processInfoProvider = pip;
+        this.servletContext = servletContext;
         this.lDAPDataAccess = lDAPDataAccess;
         this.ezproxyKey = ezproxyKey;
     }
 
     @SuppressWarnings("unchecked")
     public Object getObject() {
-        Map objectModel = this.processInfoProvider.getObjectModel();
         Map<String, Object> model = new HashMap<String, Object>();
-        HttpServletRequest request = (HttpServletRequest) objectModel.get("httprequest");
+        // TODO: introducing Spring dependency here . . .
+        HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession(true);
         //get the sunet id if set in SunetIdFilter and add it to the session and model
         String sunetid = (String) request.getAttribute(Model.SUNETID);
@@ -107,11 +108,10 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
             }
             model.put(Model.TICKET, ticket);
         }
-        org.apache.cocoon.environment.Context context = ObjectModelHelper.getContext(objectModel);
-        model.put("live-base", context.getAttribute("laneweb.context.live-base"));
-        model.put("stage-base", context.getAttribute("laneweb.context.stage-base"));
-        model.put("medblog-base", context.getAttribute("laneweb.context.medblog-base"));
-        model.put("version", context.getAttribute("laneweb.context.version"));
+        model.put("live-base", this.servletContext.getAttribute("laneweb.context.live-base"));
+        model.put("stage-base", this.servletContext.getAttribute("laneweb.context.stage-base"));
+        model.put("medblog-base", this.servletContext.getAttribute("laneweb.context.medblog-base"));
+        model.put("version", this.servletContext.getAttribute("laneweb.context.version"));
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
             String name = (String) params.nextElement();
             String value = request.getParameter(name);

@@ -12,17 +12,6 @@
         </property>
     </bean>
 
-    <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
-        class="edu.stanford.irt.laneweb.model.LanewebObjectModelProvider">
-        <constructor-arg ref="org.apache.cocoon.processing.ProcessInfoProvider"/>
-        <constructor-arg ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
-        <constructor-arg>
-            <bean class="org.springframework.jndi.JndiObjectFactoryBean">
-                <property name="jndiName" value="java:comp/env/ezproxy-key"/>
-            </bean>
-        </constructor-arg>
-    </bean>
-
     <bean id="org.apache.cocoon.el.objectmodel.ObjectModel"
         class="edu.stanford.irt.laneweb.model.LanewebObjectModel" scope="request">
         <property name="initialEntries">

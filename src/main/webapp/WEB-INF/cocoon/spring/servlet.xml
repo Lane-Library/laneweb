@@ -23,6 +23,17 @@
             </bean>
         </property>
     </bean>
+    
+    <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
+        class="edu.stanford.irt.laneweb.servlet.ServletObjectModelProvider">
+        <constructor-arg ref="javax.servlet.ServletContext"/>
+        <constructor-arg ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
+        <constructor-arg>
+            <bean class="org.springframework.jndi.JndiObjectFactoryBean">
+                <property name="jndiName" value="java:comp/env/ezproxy-key"/>
+            </bean>
+        </constructor-arg>
+    </bean>
 
     <bean id="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler"
         class="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
@@ -43,8 +54,7 @@
         </property>
         <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.ProxyLinks"/>
         <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.TemplateChooser"/>
-        <lookup-method name="getRequestProcessor" bean="org.apache.cocoon.servlet.RequestProcessor"
-        />
+        <lookup-method name="getRequestProcessor" bean="org.apache.cocoon.servlet.RequestProcessor"/>
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.servlet.ProxyLinks"

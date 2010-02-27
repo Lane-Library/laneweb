@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.model;
+package edu.stanford.irt.laneweb.servlet;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
@@ -10,26 +10,26 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.cocoon.el.objectmodel.ObjectModelProvider;
-import org.apache.cocoon.environment.Context;
-import org.apache.cocoon.processing.ProcessInfoProvider;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
+import edu.stanford.irt.laneweb.model.Model;
 
-public class LanewebObjectModelProviderTest {
-
-    private Context context;
+public class ServletObjectModelProviderTest {
 
     @SuppressWarnings("unchecked")
     private Map objectModel;
-
-    private ProcessInfoProvider pip;
+    
+    private ServletContext servletContext;
 
     private ObjectModelProvider provider;
 
@@ -46,28 +46,27 @@ public class LanewebObjectModelProviderTest {
     @Before
     public void setUp() throws Exception {
         this.params = createMock(Enumeration.class);
-        this.pip = createMock(ProcessInfoProvider.class);
+        this.servletContext = createMock(ServletContext.class);
         this.request = createMock(HttpServletRequest.class);
         this.objectModel = new HashMap();
         this.session = createMock(HttpSession.class);
         this.lDAPDataAccess = createMock(LDAPDataAccess.class);
-        this.context = createMock(Context.class);
-        this.provider = new LanewebObjectModelProvider(this.pip, this.lDAPDataAccess, "ezproxyKey");
+        this.provider = new ServletObjectModelProvider(this.servletContext, this.lDAPDataAccess, "ezproxyKey");
+
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(this.request));
     }
 
     @SuppressWarnings("unchecked")
     @Test
     public void testGetObject() {
         this.objectModel.put("httprequest", this.request);
-        this.objectModel.put("context", this.context);
-        expect(this.pip.getObjectModel()).andReturn(this.objectModel);
         expect(this.request.getSession(true)).andReturn(this.session);
         expect(this.request.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.request.getAttribute(Model.PROXY_LINKS)).andReturn(null);
         expect(this.request.getAttribute("template")).andReturn(null);
         expect(this.session.getAttribute(Model.IPGROUP)).andReturn(null);
         expect(this.session.getAttribute(Model.EMRID)).andReturn(null);
-        expect(this.context.getAttribute(isA(String.class))).andReturn("foo").atLeastOnce();
+        expect(this.servletContext.getAttribute(isA(String.class))).andReturn("foo").atLeastOnce();
         expect(this.request.getParameterNames()).andReturn(this.params);
         expect(this.params.hasMoreElements()).andReturn(Boolean.FALSE);
         expect(this.request.getParameter(Model.EMRID)).andReturn(null);
@@ -85,19 +84,17 @@ public class LanewebObjectModelProviderTest {
 
     private void replayMocks() {
         replay(this.params);
-        replay(this.context);
         replay(this.lDAPDataAccess);
         replay(this.session);
         replay(this.request);
-        replay(this.pip);
+        replay(this.servletContext);
     }
 
     private void verifyMocks() {
         verify(this.params);
-        verify(this.context);
         verify(this.lDAPDataAccess);
         verify(this.session);
         verify(this.request);
-        verify(this.pip);
+        verify(this.servletContext);
     }
 }
