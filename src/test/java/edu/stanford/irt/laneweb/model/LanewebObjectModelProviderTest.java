@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
+import edu.stanford.irt.laneweb.servlet.ProxyLinks;
 
 public class LanewebObjectModelProviderTest {
 
@@ -58,7 +59,7 @@ public class LanewebObjectModelProviderTest {
         this.proxyLinks = createMock(ProxyLinks.class);
         this.context = createMock(Context.class);
         this.templateChooser = createMock(TemplateChooser.class);
-        this.provider = new LanewebObjectModelProvider(this.pip, this.lDAPDataAccess, this.proxyLinks, this.templateChooser,"ezproxyKey");
+        this.provider = new LanewebObjectModelProvider(this.pip, this.lDAPDataAccess, this.templateChooser,"ezproxyKey");
     }
 
     @SuppressWarnings("unchecked")
@@ -69,10 +70,9 @@ public class LanewebObjectModelProviderTest {
         expect(this.pip.getObjectModel()).andReturn(this.objectModel);
         expect(this.request.getSession(true)).andReturn(this.session);
         expect(this.request.getAttribute(Model.SUNETID)).andReturn(null);
-        expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn(null);
+        expect(this.request.getAttribute(Model.PROXY_LINKS)).andReturn(null);
         expect(this.session.getAttribute(Model.IPGROUP)).andReturn(null);
         expect(this.session.getAttribute(Model.EMRID)).andReturn(null);
-        this.session.setAttribute(Model.PROXY_LINKS, Boolean.FALSE);
         expect(this.context.getAttribute(isA(String.class))).andReturn("foo").atLeastOnce();
         expect(this.request.getParameterNames()).andReturn(this.params);
         expect(this.params.hasMoreElements()).andReturn(Boolean.FALSE);

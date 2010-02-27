@@ -30,8 +30,6 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
 
     private ProcessInfoProvider processInfoProvider;
 
-    private ProxyLinks proxyLinks;
-
     private TemplateChooser templateChooser;
 
     private LDAPDataAccess lDAPDataAccess;
@@ -39,10 +37,9 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
     private String ezproxyKey;
 
     public LanewebObjectModelProvider(final ProcessInfoProvider pip, final LDAPDataAccess lDAPDataAccess,
-            final ProxyLinks proxyLinks, final TemplateChooser templateChooser, final String ezproxyKey) {
+            final TemplateChooser templateChooser, final String ezproxyKey) {
         this.processInfoProvider = pip;
         this.lDAPDataAccess = lDAPDataAccess;
-        this.proxyLinks = proxyLinks;
         this.templateChooser = templateChooser;
         this.ezproxyKey = ezproxyKey;
     }
@@ -86,15 +83,9 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
                 model.put(Model.AFFILIATION, affiliation);
             }
         }
-        Boolean proxyLinks = Boolean.parseBoolean(request.getParameter(Model.PROXY_LINKS));
+        Boolean proxyLinks = (Boolean) request.getAttribute(Model.PROXY_LINKS);
         if (proxyLinks == null) {
-            proxyLinks = (Boolean) session.getAttribute(Model.PROXY_LINKS);
-            if (proxyLinks == null) {
-                proxyLinks = this.proxyLinks.proxyLinks(request);
-                session.setAttribute(Model.PROXY_LINKS, proxyLinks);
-            }
-        } else {
-            session.setAttribute(Model.PROXY_LINKS, proxyLinks);
+            proxyLinks = Boolean.FALSE;
         }
         model.put(Model.PROXY_LINKS, proxyLinks);
         IPGroup ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);

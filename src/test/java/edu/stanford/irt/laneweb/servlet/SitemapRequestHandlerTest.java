@@ -22,6 +22,12 @@ public class SitemapRequestHandlerTest {
     private SitemapRequestHandler handler;
 
     private RequestProcessor processor;
+    
+    private ProxyLinks proxyLinks;
+    
+    private HttpServletRequest request;
+
+    private HttpServletResponse response;
 
     @Before
     public void setUp() throws Exception {
@@ -33,94 +39,76 @@ public class SitemapRequestHandlerTest {
                 return SitemapRequestHandlerTest.this.processor;
             }
         };
+        this.request = createMock(HttpServletRequest.class);
+        this.proxyLinks = createMock(ProxyLinks.class);
+        this.response = createMock(HttpServletResponse.class);
+        this.handler.setProxyLinks(this.proxyLinks);
     }
 
     @Test
     public void testHandleRequest() throws ServletException, IOException {
-        HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andReturn("GET");
         expect(request.getRequestURI()).andReturn("/");
-        replay(request);
-        HttpServletResponse response = createMock(HttpServletResponse.class);
         this.processor.service(request, response);
-        replay(this.processor);
+        this.proxyLinks.setupProxyLinks(this.request);
+        replayMocks();
         this.handler.handleRequest(request, response);
-        verify(this.processor);
+        verifyMocks();
     }
     
     @Test
     public void testHandleRequestRedirect() throws ServletException, IOException {
         this.handler.setRedirectMap(Collections.singletonMap("(.*)/", "$1/index.html"));
-        HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andReturn("GET");
         expect(request.getRequestURI()).andReturn("/foo/");
-        replay(request);
-        HttpServletResponse response = createMock(HttpServletResponse.class);
         response.sendRedirect("/foo/index.html");
-        replay(response);
+        replayMocks();
         this.handler.handleRequest(request, response);
-        verify(request);
-        verify(response);
+        verifyMocks();
     }
     
     @Test
     public void testHandleRequestRedirectSlash() throws ServletException, IOException {
         this.handler.setRedirectMap(Collections.singletonMap("(.*)/", "$1/index.html"));
-        HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andReturn("GET");
         expect(request.getRequestURI()).andReturn("/");
-        replay(request);
-        HttpServletResponse response = createMock(HttpServletResponse.class);
         response.sendRedirect("/index.html");
-        replay(response);
+        replayMocks();
         this.handler.handleRequest(request, response);
-        verify(request);
-        verify(response);
+        verifyMocks();
     }
     
     @Test
     public void testHandleRequestRedirectLiaisons() throws ServletException, IOException {
         this.handler.setRedirectMap(Collections.singletonMap("(.*)/liaisons/index.html", "$1/contacts/index.html?loadTab=liaisons"));
-        HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andReturn("GET");
         expect(request.getRequestURI()).andReturn("/stage/liaisons/index.html");
-        replay(request);
-        HttpServletResponse response = createMock(HttpServletResponse.class);
         response.sendRedirect("/stage/contacts/index.html?loadTab=liaisons");
-        replay(response);
+        replayMocks();
         this.handler.handleRequest(request, response);
-        verify(request);
-        verify(response);
+        verifyMocks();
     }
     
     @Test
     public void testHandleRequestRedirectClasses() throws ServletException, IOException {
         this.handler.setRedirectMap(Collections.singletonMap("(.*)/classes/index.html", "$1/services/workshops/laneclasses.html"));
-        HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andReturn("GET");
         expect(request.getRequestURI()).andReturn("/classes/index.html");
-        replay(request);
-        HttpServletResponse response = createMock(HttpServletResponse.class);
         response.sendRedirect("/services/workshops/laneclasses.html");
-        replay(response);
+        replayMocks();
         this.handler.handleRequest(request, response);
-        verify(request);
-        verify(response);
+        verifyMocks();
     }
     
     @Test
     public void testHandleRequestRedirectClinician() throws ServletException, IOException {
         this.handler.setRedirectMap(Collections.singletonMap("(.*)/clinician/index.html", "$1/portals/clinical.html"));
-        HttpServletRequest request = createMock(HttpServletRequest.class);
         expect(request.getMethod()).andReturn("GET");
         expect(request.getRequestURI()).andReturn("/foo/bar/clinician/index.html");
-        replay(request);
-        HttpServletResponse response = createMock(HttpServletResponse.class);
         response.sendRedirect("/foo/bar/portals/clinical.html");
-        replay(response);
+        replayMocks();
         this.handler.handleRequest(request, response);
-        verify(request);
-        verify(response);
+        verifyMocks();
     }
     
 
@@ -142,5 +130,19 @@ public class SitemapRequestHandlerTest {
         } catch (IllegalArgumentException e) {
         }
         this.handler.setRedirectMap(Collections.<String, String> emptyMap());
+    }
+    
+    private void replayMocks() {
+        replay(this.response);
+        replay(this.request);
+        replay(this.processor);
+        replay(this.proxyLinks);
+    }
+    
+    private void verifyMocks() {
+        verify(this.response);
+        verify(this.request);
+        verify(this.processor);
+        verify(this.proxyLinks);
     }
 }

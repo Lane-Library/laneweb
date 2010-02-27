@@ -12,15 +12,24 @@ import java.util.regex.Pattern;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.cocoon.servlet.RequestProcessor;
 import org.springframework.web.HttpRequestHandler;
+
+import edu.stanford.irt.laneweb.model.Model;
 
 public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private Set<String> methodsNotAllowed = Collections.emptySet();
     
     private Map<Pattern, String> redirectMap = Collections.emptyMap();
+    
+    private ProxyLinks proxyLinks;
+    
+    public void setProxyLinks(final ProxyLinks proxyLinks) {
+        this.proxyLinks = proxyLinks;
+    }
 
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         if (this.methodsNotAllowed.contains(request.getMethod())) {
@@ -35,6 +44,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
                 return;
             }
         }
+        this.proxyLinks.setupProxyLinks(request);
         getRequestProcessor().service(request, response);
     }
 
