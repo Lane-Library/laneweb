@@ -1,11 +1,10 @@
-package edu.stanford.irt.laneweb.model;
+package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map.Entry;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractSitemapModelComponent;
-import edu.stanford.irt.laneweb.cocoon.LanewebReader;
+import edu.stanford.irt.laneweb.model.MapModel;
 
 //$Id$
 public class ModelReader extends AbstractSitemapModelComponent implements LanewebReader {
