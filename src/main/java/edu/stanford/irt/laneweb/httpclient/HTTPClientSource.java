@@ -19,7 +19,8 @@ import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.TimeStampValidity;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HTTPClientSource implements Source {
 
@@ -38,7 +39,7 @@ public class HTTPClientSource implements Source {
      */
     private static final String LAST_MODIFIED = "Last-Modified";
 
-    private static final Logger LOGGER = Logger.getLogger(HTTPClientSource.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HTTPClientSource.class);
 
     /**
      * Cached last modification date.

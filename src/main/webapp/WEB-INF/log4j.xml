@@ -2,7 +2,7 @@
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
     
-    <appender name="LOG" class="edu.stanford.irt.laneweb.LogAppender">
+    <appender name="LOG" class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${catalina.base}/logs/laneweb.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="10MB"/>
@@ -12,7 +12,7 @@
         </layout>
     </appender>
     
-    <appender name="headers" class="edu.stanford.irt.laneweb.LogAppender">
+    <appender name="headers" class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${catalina.base}/logs/header.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="10MB"/>

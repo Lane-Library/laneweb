@@ -7,14 +7,15 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.components.pipeline.impl.CachingProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The ThrottlingPipeline
  */
 public class ThrottlingPipeline extends CachingProcessingPipeline {
 
-    private static final Logger LOGGER = Logger.getLogger(ThrottlingPipeline.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThrottlingPipeline.class);
 
     /**
      * the currently processed host/urls. The superclass is a pooled Component so this has to be a static variable.

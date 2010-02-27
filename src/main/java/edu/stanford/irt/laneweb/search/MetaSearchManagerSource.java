@@ -1,7 +1,8 @@
 package edu.stanford.irt.laneweb.search;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -13,7 +14,7 @@ import edu.stanford.irt.search.spring.SearchCacheManager;
  */
 public class MetaSearchManagerSource {
 
-    private static final Logger LOGGER = Logger.getLogger(MetaSearchManagerSource.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MetaSearchManagerSource.class);
 
     private AbstractXmlApplicationContext context;
 

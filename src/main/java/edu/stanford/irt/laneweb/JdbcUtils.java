@@ -5,7 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * shamelessly stolen from org.springframework.jdbc.support.JdbcUtils
@@ -14,7 +15,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class JdbcUtils {
 
-    private static final Logger LOG = Logger.getLogger(JdbcUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(JdbcUtils.class);
 
     /**
      * Close the given JDBC Connection and ignore any thrown exception. This is useful for typical finally blocks in

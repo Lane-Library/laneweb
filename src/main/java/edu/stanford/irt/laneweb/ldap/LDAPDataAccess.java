@@ -8,14 +8,15 @@ import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.security.auth.Subject;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ldap.AuthenticationException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 
 public class LDAPDataAccess {
 
-    private static final Logger LOGGER = Logger.getLogger(LDAPDataAccess.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LDAPDataAccess.class);
 
     private LdapTemplate ldapTemplate;
 

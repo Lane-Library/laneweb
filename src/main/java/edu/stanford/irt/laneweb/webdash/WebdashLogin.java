@@ -9,13 +9,14 @@ import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WebdashLogin {
 
     private static final String ERROR_URL = "/webdashError.html";
 
-    private static final Logger LOGGER = Logger.getLogger(WebdashLogin.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebdashLogin.class);
 
     private static final String LOGIN_URL = "https://webda.sh/auth/auth_post?";
 
