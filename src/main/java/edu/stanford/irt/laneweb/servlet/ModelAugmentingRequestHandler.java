@@ -50,7 +50,9 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         addToModel(Model.DEBUG, getDebugValue(request, session), model);
         this.persistentLoginProcessor.processSunetid(sunetid, request, response);
         addLdapData(sunetid, session, model);
-        IPGroup ipGroup = getIPGroup(request, session);
+        String remoteAddr = getRemoteAddr(request, session);
+        addToModel(Model.REMOTE_ADDR, remoteAddr, model);
+        IPGroup ipGroup = getIPGroup(remoteAddr, session);
         addToModel(Model.IPGROUP, ipGroup, model);
         Boolean proxyLinks = this.proxyLinks.getProxyLinks(request, session, ipGroup);
         addToModel(Model.PROXY_LINKS, proxyLinks, model);
@@ -61,7 +63,6 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         addToModel(Model.QUERY_STRING, request.getQueryString(), model);
         addToModel(Model.BASE_PATH, request.getContextPath(), model);
         addToModel("request-uri", request.getRequestURI(), model);
-        addToModel("remote-addr", request.getRemoteAddr(), model);
         addToModel("referer", request.getHeader("referer"), model);
         Cookie[] cookies = request.getCookies();
         if (null != cookies) {
@@ -187,28 +188,33 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         this.templateChooser = templateChooser;
     }
     
-    private IPGroup getIPGroup(HttpServletRequest request, HttpSession session) {
+    private IPGroup getIPGroup(String remoteAddr, HttpSession session) {
         IPGroup ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
         if (ipGroup == null) {
-            ipGroup = IPGroup.getGroupForIP(getRemoteAddr(request));
+            ipGroup = IPGroup.getGroupForIP(remoteAddr);
             session.setAttribute(Model.IPGROUP, ipGroup);
         }
         return ipGroup;
     }
 
 
-    private String getRemoteAddr(final HttpServletRequest request) {
-        String ip = request.getRemoteAddr();
-        // mod_proxy puts the real remote address in an x-forwarded-for
-        // header
-        // Load balancer also does this
-        String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
-        if (header != null) {
-            if (header.indexOf(",") > 0) {
-                ip = header.substring(header.lastIndexOf(",") + 1, header.length()).trim();
+    private String getRemoteAddr(final HttpServletRequest request, HttpSession session) {
+        String ip = (String) session.getAttribute(Model.REMOTE_ADDR);
+        if (ip == null) {
+            // mod_proxy puts the real remote address in an x-forwarded-for
+            // header
+            // Load balancer also does this
+            String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
+            if (header == null) {
+                ip = request.getRemoteAddr();
             } else {
-                ip = header;
+                if (header.indexOf(",") > 0) {
+                    ip = header.substring(header.lastIndexOf(",") + 1, header.length()).trim();
+                } else {
+                    ip = header;
+                }
             }
+            session.setAttribute(Model.REMOTE_ADDR, ip);
         }
         return ip;
     }

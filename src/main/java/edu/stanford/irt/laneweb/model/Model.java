@@ -74,6 +74,8 @@ public interface Model {
     public static final String MODEL = "model";
 
     public static final String DEBUG = "debug";
+
+    public static final String REMOTE_ADDR = "remote-addr";
     
     <T> T getObject(String name, Class<T> clazz);
     
