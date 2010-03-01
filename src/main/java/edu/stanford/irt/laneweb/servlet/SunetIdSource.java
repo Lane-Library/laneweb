@@ -1,0 +1,73 @@
+package edu.stanford.irt.laneweb.servlet;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import edu.stanford.irt.laneweb.LanewebConstants;
+import edu.stanford.irt.laneweb.model.Model;
+
+/**
+ * A servlet Filter that tries to discover the sunetid associated with a
+ * request. It does this by looking in a number of places described below. If it
+ * finds it it sets a request attribute 'sunetid' for use later in processing.
+ * It also responds to the 'pl' and 'remove-pl' request parameters by setting
+ * the lane-user cookie as appropriate.
+ * 
+ * @author ceyates
+ * $Id$
+ */
+public class SunetIdSource {
+
+    /**
+     * this codec codes and decodes the cookie value using sunet id, useragent
+     * and time of creation
+     */
+    private SunetIdCookieCodec codec = new SunetIdCookieCodec();
+
+    /**
+     * doFilter looks up the sunet id from the session, request, and lane-user
+     * cookie in that order.  If it is not in the session it is put there.
+     */
+    public String getSunetid(final HttpServletRequest request, HttpSession session) {
+
+        String sessionSunetid = (String) session.getAttribute(Model.SUNETID);
+
+        String sunetid = sessionSunetid == null ? getSunetidFromRequest(request) : sessionSunetid;
+        
+        if (sunetid == null) {
+            sunetid = getSunetidFromCookie(request.getCookies(), request.getHeader("User-Agent"));
+        }
+        if (sunetid != null && sessionSunetid == null) {
+            session.setAttribute(Model.SUNETID, sunetid);
+        }
+        return sunetid;
+    }
+    
+    private String getSunetidFromCookie(Cookie[] cookies, String userAgent) {
+        String sunetid = null;
+        if (cookies != null && userAgent != null) {
+            for (Cookie cookie : cookies) {
+                if (LanewebConstants.LANE_COOKIE_NAME.equals(cookie.getName())) {
+                    PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue());
+                    if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
+                        sunetid = token.getSunetId();
+                    }
+                    break;
+                }
+            }
+        }
+        return sunetid;
+    }
+
+    private String getSunetidFromRequest(HttpServletRequest request) {
+        String sunetid = request.getRemoteUser();
+        if (sunetid == null) {
+            sunetid = request.getHeader("X-WEBAUTH-USER");
+            if ("(null)".equals(sunetid)) {
+                sunetid = null;
+            }
+        }
+        return sunetid;
+    }
+}

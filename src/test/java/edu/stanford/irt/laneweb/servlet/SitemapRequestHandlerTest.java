@@ -21,10 +21,6 @@ public class SitemapRequestHandlerTest {
 
     private SitemapRequestHandler handler;
     
-    private ProxyLinks proxyLinks;
-    
-    private TemplateChooser templateChooser;
-    
     private HttpServletRequest request;
 
     private HttpServletResponse response;
@@ -37,13 +33,9 @@ public class SitemapRequestHandlerTest {
     public void setUp() throws Exception {
         this.handler = new SitemapRequestHandler();
         this.request = createMock(HttpServletRequest.class);
-        this.proxyLinks = createMock(ProxyLinks.class);
         this.response = createMock(HttpServletResponse.class);
-        this.templateChooser = createMock(TemplateChooser.class);
         this.processor = createMock(Processor.class);
         this.servletContext = createMock(ServletContext.class);
-        this.handler.setProxyLinks(this.proxyLinks);
-        this.handler.setTemplateChooser(this.templateChooser);
         this.handler.setProcessor(this.processor);
         this.handler.setServletContext(this.servletContext);
     }
@@ -51,11 +43,9 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequest() throws Exception {
         expect(request.getMethod()).andReturn("GET");
-        expect(request.getRequestURI()).andReturn("/");
+        expect(request.getRequestURI()).andReturn("/").times(2);
         expect(request.getParameter(isA(String.class))).andReturn(null).times(2);
         expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptyList()));
-        this.proxyLinks.setupProxyLinks(this.request);
-        this.templateChooser.setupTemplate(this.request);
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
         replayMocks();
         this.handler.handleRequest(request, response);
@@ -140,19 +130,15 @@ public class SitemapRequestHandlerTest {
     
     private void replayMocks() {
         replay(this.servletContext);
-        replay(this.templateChooser);
         replay(this.response);
         replay(this.request);
         replay(this.processor);
-        replay(this.proxyLinks);
     }
     
     private void verifyMocks() {
         verify(this.servletContext);
         verify(this.processor);
-        verify(this.templateChooser);
         verify(this.response);
         verify(this.request);
-        verify(this.proxyLinks);
     }
 }

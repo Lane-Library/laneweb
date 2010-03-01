@@ -22,21 +22,18 @@ import org.apache.cocoon.environment.http.HttpEnvironment;
 import org.apache.cocoon.environment.internal.EnvironmentHelper;
 import org.springframework.web.HttpRequestHandler;
 
+
 public class SitemapRequestHandler implements HttpRequestHandler {
 
     private Context context;
 
-    private Set<String> methodsNotAllowed = Collections.emptySet();
-
     private Processor processor;
 
-    private ProxyLinks proxyLinks;
+    protected ServletContext servletContext;
 
     private Map<Pattern, String> redirectMap = Collections.emptyMap();
 
-    private ServletContext servletContext;
-
-    private TemplateChooser templateChooser;
+    private Set<String> methodsNotAllowed = Collections.emptySet();
 
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         if (methodNotAllowed(request, response)) {
@@ -46,9 +43,15 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         if (uriGetsRedirect(uri, response)) {
             return;
         }
-        this.proxyLinks.setupProxyLinks(request);
-        this.templateChooser.setupTemplate(request);
-        Environment environment = new HttpEnvironment(uri.substring(1), request, response, this.servletContext, this.context, null, null);
+        process(request, response);
+    }
+    
+    protected void process(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+        String uri = request.getRequestURI();
+        if ("/".equals(uri)) {
+            uri = "";
+        }
+        Environment environment = new HttpEnvironment(uri, request, response, this.servletContext, this.context, null, null);
         try {
             EnvironmentHelper.enterProcessor(this.processor, environment);
             this.processor.process(environment);
@@ -71,10 +74,6 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         this.processor = processor;
     }
 
-    public void setProxyLinks(final ProxyLinks proxyLinks) {
-        this.proxyLinks = proxyLinks;
-    }
-
     public void setRedirectMap(final Map<String, String> redirectMap) {
         if (null == redirectMap) {
             throw new IllegalArgumentException("null redirectMap");
@@ -89,10 +88,6 @@ public class SitemapRequestHandler implements HttpRequestHandler {
     public void setServletContext(final ServletContext servletContext) {
         this.servletContext = servletContext;
         this.context = new HttpContext(servletContext);
-    }
-
-    public void setTemplateChooser(final TemplateChooser templateChooser) {
-        this.templateChooser = templateChooser;
     }
 
     private boolean methodNotAllowed(final HttpServletRequest request, final HttpServletResponse response) throws IOException {

@@ -8,6 +8,8 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import edu.stanford.irt.laneweb.model.Model;
+
 /**
  * This class contains the logic to determine which template is used. The highest priority is given to the template
  * request parameter. Next priority is a Map with regular expressions matching request URIs as the key with the
@@ -42,8 +44,8 @@ public class TemplateChooser {
         this.defaultTemplate = defaultTemplate;
     }
 
-    public void setupTemplate(final HttpServletRequest request) {
-        String template = request.getParameter("template");
+    public String getTemplate(final HttpServletRequest request) {
+        String template = request.getParameter(Model.TEMPLATE);
         if (null == template && this.templateMap.size() > 0) {
             String uri = request.getRequestURI().substring(request.getContextPath().length());
             for (Entry<String, Pattern> entry : this.patternMap.entrySet()) {
@@ -53,6 +55,6 @@ public class TemplateChooser {
                 }
             }
         }
-        request.setAttribute("template", null == template ? this.defaultTemplate : template);
+        return null == template ? this.defaultTemplate : template;
     }
 }

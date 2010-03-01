@@ -1,0 +1,210 @@
+package edu.stanford.irt.laneweb.servlet;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import edu.stanford.irt.laneweb.IPGroup;
+import edu.stanford.irt.laneweb.LanewebConstants;
+import edu.stanford.irt.laneweb.ldap.LDAPData;
+import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.proxy.Ticket;
+
+public class ModelCreatingRequestHandler extends SitemapRequestHandler {
+
+    private ProxyLinks proxyLinks;
+
+    private TemplateChooser templateChooser;
+    
+    private SunetIdSource sunetIdSource = new SunetIdSource();
+    
+    private PersistentLoginProcessor persistentLoginProcessor = new PersistentLoginProcessor();
+    
+    private LDAPDataAccess ldapDataAccess;
+    
+    private String ezproxyKey;
+
+    @Override
+    protected void process(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Map<String, Object> model = new HashMap<String, Object>();
+        HttpSession session = request.getSession();
+        String sunetid = this.sunetIdSource.getSunetid(request, session);
+        addToModel(Model.SUNETID, sunetid, model);
+        this.persistentLoginProcessor.processSunetid(sunetid, request, response);
+        addLdapData(sunetid, session, model);
+        IPGroup ipGroup = getIPGroup(request, session);
+        addToModel(Model.IPGROUP, ipGroup, model);
+        Boolean proxyLinks = this.proxyLinks.getProxyLinks(request, session, ipGroup);
+        addToModel(Model.PROXY_LINKS, proxyLinks, model);
+        addToModel(Model.TEMPLATE, this.templateChooser.getTemplate(request), model);
+        addToModel(Model.EMRID, getEmrid(request, session), model);
+        addToModel(Model.TICKET, getTicket(proxyLinks, sunetid, ipGroup, session), model);        model.put("live-base", this.servletContext.getAttribute("laneweb.context.live-base"));
+        model.put("stage-base", this.servletContext.getAttribute("laneweb.context.stage-base"));
+        model.put("medblog-base", this.servletContext.getAttribute("laneweb.context.medblog-base"));
+        model.put("version", this.servletContext.getAttribute("laneweb.context.version"));
+        addRequestParameters(request, model);
+        addToModel(Model.QUERY_STRING, request.getQueryString(), model);
+        addToModel(Model.BASE_PATH, request.getContextPath(), model);
+        addToModel("request-uri", request.getRequestURI(), model);
+        addToModel("remote-addr", request.getRemoteAddr(), model);
+        addToModel("referer", request.getHeader("referer"), model);
+        Cookie[] cookies = request.getCookies();
+        if (null != cookies) {
+            for (Cookie cookie : cookies) {
+                if (LanewebConstants.LANE_COOKIE_NAME.equals(cookie.getName())) {
+                    addToModel("user-cookie", cookie.getValue(), model);
+                    break;
+                }
+            }
+        }
+        request.setAttribute(Model.MODEL, model);
+        super.process(request, response);
+    }
+    
+    private void addRequestParameters(HttpServletRequest request, Map<String, Object> model) {
+        for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
+        String name = (String) params.nextElement();
+        String value = request.getParameter(name);
+        if ("q".equals(name)) {
+            model.put(Model.QUERY, value);
+            try {
+                model.put("url-encoded-query", URLEncoder.encode(value, "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
+        } else if ("t".equals(name)) {
+            model.put(Model.TYPE, value);
+        } else if ("s".equals(name)) {
+            model.put(Model.SUBSET, value);
+        } else if ("a".equals(name)) {
+            model.put(Model.ALPHA, value.substring(0,1));
+        } else if ("m".equals(name)) {
+            model.put(Model.MESH, value);
+        } else if ("f".equals(name)) {
+            model.put(Model.FACETS, value);
+        } else if ("l".equals(name)) {
+            model.put(Model.LIMIT, value);
+        } else if ("bn".equals(name)) {
+            model.put(Model.BASSETT_NUMBER, value);
+        } else if ("r".equals(name)) {
+            model.put(Model.RESOURCES, Arrays.asList(request.getParameterValues(name)));
+        } else if ("e".equals(name)) {
+            model.put(Model.ENGINES, Arrays.asList(request.getParameterValues(name)));
+        } else if ("source".equals(name)) {
+            model.put(Model.SOURCE, value);
+        } else if ("host".equals(name)) {
+            model.put(Model.HOST, value);
+        } else if (Model.NONCE.equals(name)) {
+            model.put(Model.NONCE, value);
+        } else if ("system_user_id".equals(name)) {
+            model.put(Model.SYSTEM_USER_ID, value);
+        } else if ("release".equals(name)) {
+            model.put(Model.RELEASE, value);
+        } else if ("password".equals(name)) {
+            model.put(Model.PASSWORD, value);
+        } else if ("PID".equals(name)) {
+            model.put(Model.PID, value);
+        } else if ("liaison".equals(name)) {
+            model.put(Model.LIAISON, value);
+            
+//        } else {
+//            model.put(name, request.getParameter(name));
+        }
+    }
+    }
+
+    private Object getTicket(Boolean proxyLinks, String sunetid, IPGroup ipGroup, HttpSession session) {
+        Ticket ticket = null;
+        if (proxyLinks && sunetid != null && (ipGroup != IPGroup.SHC && ipGroup != IPGroup.LPCH)) {
+            ticket = (Ticket) session.getAttribute(Model.TICKET);
+            if (ticket == null || !ticket.isValid()) {
+                ticket = new Ticket(sunetid, this.ezproxyKey);
+                session.setAttribute(Model.TICKET, ticket);
+            }
+        }
+        return ticket;
+    }
+
+    private String getEmrid(HttpServletRequest request, HttpSession session) {
+        String emrid = (String) session.getAttribute(Model.EMRID);
+        if (emrid == null) {
+            emrid = request.getParameter(Model.EMRID);
+            if (emrid != null) {
+                session.setAttribute(Model.EMRID, emrid);
+            }
+        }
+        return emrid;
+    }
+
+    private void addLdapData(String sunetid, HttpSession session, Map<String, Object> model) {
+        String name = (String) session.getAttribute(Model.NAME);
+        String affiliation = null;
+        String univid = null;
+        if (sunetid != null && name == null) {
+            LDAPData ldapData = this.ldapDataAccess.getLdapData(sunetid);
+            name = ldapData.getName();
+            affiliation = ldapData.getAffiliation();
+            univid = ldapData.getUnivId();
+            session.setAttribute(Model.NAME, name);
+            session.setAttribute(Model.AFFILIATION, affiliation);
+            session.setAttribute(Model.UNIVID, univid);
+        }
+        addToModel(Model.NAME, name, model);
+        addToModel(Model.AFFILIATION, affiliation, model);
+        addToModel(Model.UNIVID, univid, model);
+    }
+
+    private void addToModel(String key, Object value, Map<String, Object> model) {
+        if (value != null) {
+            if (model.containsKey(key)) {
+                throw new IllegalStateException("duplicate model key: " + key);
+            }
+            model.put(key, value);
+        }
+    }
+
+    public void setProxyLinks(final ProxyLinks proxyLinks) {
+        this.proxyLinks = proxyLinks;
+    }
+    
+    public void setTemplateChooser(final TemplateChooser templateChooser) {
+        this.templateChooser = templateChooser;
+    }
+    
+    private IPGroup getIPGroup(HttpServletRequest request, HttpSession session) {
+        IPGroup ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
+        if (ipGroup == null) {
+            ipGroup = IPGroup.getGroupForIP(getRemoteAddr(request));
+            session.setAttribute(Model.IPGROUP, ipGroup);
+        }
+        return ipGroup;
+    }
+
+
+    private String getRemoteAddr(final HttpServletRequest request) {
+        String ip = request.getRemoteAddr();
+        // mod_proxy puts the real remote address in an x-forwarded-for
+        // header
+        // Load balancer also does this
+        String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
+        if (header != null) {
+            if (header.indexOf(",") > 0) {
+                ip = header.substring(header.lastIndexOf(",") + 1, header.length()).trim();
+            } else {
+                ip = header;
+            }
+        }
+        return ip;
+    }
+    
+}

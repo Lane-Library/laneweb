@@ -26,21 +26,21 @@ public class ProxyLinks {
         this.proxyRegex = proxyRegex;
     }
 
-    public void setupProxyLinks(final HttpServletRequest request) {
+    public Boolean getProxyLinks(final HttpServletRequest request, HttpSession session, IPGroup ipGroup) {
         Boolean proxyLinks = null;
+        Boolean sessionProxyLinks = null;
         // first see if there is a proxy-links parameter and use that:
         String parameter = request.getParameter(Model.PROXY_LINKS);
         if (parameter != null) {
             proxyLinks = Boolean.parseBoolean(parameter);
         }
         // if not see if it is in the session:
-        HttpSession session = request.getSession(false);
-        if (proxyLinks == null && session != null) {
-            proxyLinks = (Boolean) session.getAttribute(Model.PROXY_LINKS);
+        if (proxyLinks == null) {
+            sessionProxyLinks = (Boolean) session.getAttribute(Model.PROXY_LINKS);
+            proxyLinks = sessionProxyLinks;
         }
         // if not see if the ip group is set to one of the hospital groups
-        if (proxyLinks == null && session != null) {
-            IPGroup ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
+        if (proxyLinks == null) {
             if (null != ipGroup && (IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup))) {
                 proxyLinks = Boolean.TRUE;
             }
@@ -57,12 +57,11 @@ public class ProxyLinks {
             }
             proxyLinks = Boolean.valueOf(proxyLinks(ip));
         }
-        // if there is a session put it there.
-        if (session != null) {
+        // put it in the session if it wasn't there or is different
+        if (!proxyLinks.equals(sessionProxyLinks)) {
             session.setAttribute(Model.PROXY_LINKS, proxyLinks);
         }
-        // put it as a request attribute for later use . . .
-        request.setAttribute(Model.PROXY_LINKS, proxyLinks);
+        return proxyLinks;
     }
 
     private boolean isNoProxy(final String ip) {
