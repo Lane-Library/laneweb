@@ -43,6 +43,7 @@
         <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.TemplateChooser"/>
         <property name="servletContext" ref="javax.servlet.ServletContext"/>
         <property name="processor" ref="org.apache.cocoon.Processor"/>
+        <property name="LDAPDataAccess" ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.servlet.ProxyLinks"
