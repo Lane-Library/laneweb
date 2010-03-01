@@ -208,8 +208,8 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
             if (header == null) {
                 ip = request.getRemoteAddr();
             } else {
-                if (header.indexOf(",") > 0) {
-                    ip = header.substring(header.lastIndexOf(",") + 1, header.length()).trim();
+                if (header.indexOf(',') > 0) {
+                    ip = header.substring(0, header.indexOf(','));
                 } else {
                     ip = header;
                 }
