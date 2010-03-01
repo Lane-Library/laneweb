@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.eq;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
@@ -9,6 +10,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,6 +21,8 @@ import org.apache.cocoon.Processor;
 import org.apache.cocoon.environment.Environment;
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.model.Model;
 
 public class SitemapRequestHandlerTest {
 
@@ -46,9 +50,13 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequest() throws Exception {
         expect(request.getMethod()).andReturn("GET");
-        expect(request.getRequestURI()).andReturn("/").times(2);
-        expect(request.getParameter(isA(String.class))).andReturn(null).times(2);
-        expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptyList()));
+        expect(this.request.getRequestURI()).andReturn("/").times(2);
+        expect(this.request.getContextPath()).andReturn("");
+        expect(this.request.getParameter("cocoon-view")).andReturn(null);
+        expect(this.request.getParameter("cocoon-action")).andReturn(null);
+        expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptySet()));
+        this.request.setAttribute(eq(Model.MODEL), isA(Map.class));
+        expect(this.servletContext.getAttribute(isA(String.class))).andReturn(null).times(4);
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
         replayMocks();
         this.handler.handleRequest(request, response);
