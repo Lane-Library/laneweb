@@ -37,6 +37,10 @@ public class ModelCreatingRequestHandler extends SitemapRequestHandler {
     public void setLDAPDataAccess(final LDAPDataAccess ldapDataAccess) {
         this.ldapDataAccess = ldapDataAccess;
     }
+    
+    public void setEzproxyKey(final String ezproxyKey) {
+        this.ezproxyKey = ezproxyKey;
+    }
 
     @Override
     protected void process(HttpServletRequest request, HttpServletResponse response) throws IOException {

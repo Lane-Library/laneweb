@@ -44,6 +44,12 @@
         <property name="servletContext" ref="javax.servlet.ServletContext"/>
         <property name="processor" ref="org.apache.cocoon.Processor"/>
         <property name="LDAPDataAccess" ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
+        <property name="ezproxyKey">
+            <!-- TODO: get this from servlet context . . .-->
+            <bean class="org.springframework.jndi.JndiObjectFactoryBean">
+                <property name="jndiName" value="java:comp/env/ezproxy-key"/>
+            </bean>
+        </property>
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.servlet.ProxyLinks"
