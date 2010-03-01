@@ -163,8 +163,8 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
 
     private void addLdapData(String sunetid, HttpSession session, Map<String, Object> model) {
         String name = (String) session.getAttribute(Model.NAME);
-        String affiliation = null;
-        String univid = null;
+        String affiliation = (String) session.getAttribute(Model.AFFILIATION);
+        String univid = (String) session.getAttribute(Model.UNIVID);
         if (sunetid != null && name == null) {
             LDAPData ldapData = this.ldapDataAccess.getLdapData(sunetid);
             name = ldapData.getName();
