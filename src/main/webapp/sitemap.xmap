@@ -170,7 +170,7 @@
                 </map:transform>
                 <map:transform type="proxy-links">
                     <!-- use this base-path to redirect proxy auth to lane.stanford.edu -->
-                    <!--<map:parameter name="base-path" value="http://lane.stanford.edu"/>-->
+                    <map:parameter name="base-path" value="http://lane.stanford.edu"/>
                 </map:transform>
                 <map:transform type="namespace-filter"/>
                 <map:transform type="debug"/>
