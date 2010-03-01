@@ -72,6 +72,8 @@ public interface Model {
     public static final String TEMPLATE = "template";
 
     public static final String MODEL = "model";
+
+    public static final String DEBUG = "debug";
     
     <T> T getObject(String name, Class<T> clazz);
     

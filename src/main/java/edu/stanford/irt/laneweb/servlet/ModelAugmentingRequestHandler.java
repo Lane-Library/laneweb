@@ -47,6 +47,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         HttpSession session = request.getSession();
         String sunetid = this.sunetIdSource.getSunetid(request, session);
         addToModel(Model.SUNETID, sunetid, model);
+        addToModel(Model.DEBUG, getDebugValue(request, session), model);
         this.persistentLoginProcessor.processSunetid(sunetid, request, response);
         addLdapData(sunetid, session, model);
         IPGroup ipGroup = getIPGroup(request, session);
@@ -74,6 +75,17 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         super.process(request, response);
     }
     
+    private Boolean getDebugValue(HttpServletRequest request, HttpSession session) {
+        String debugParameter = request.getParameter(Model.DEBUG);
+        if (debugParameter == null) {
+            return (Boolean) session.getAttribute(Model.DEBUG);
+        } else {
+            Boolean debug = Boolean.parseBoolean(debugParameter);
+            session.setAttribute(Model.DEBUG, debug);
+            return debug;
+        }
+    }
+
     private void addRequestParameters(HttpServletRequest request, Map<String, Object> model) {
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
         String name = (String) params.nextElement();

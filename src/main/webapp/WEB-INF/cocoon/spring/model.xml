@@ -38,4 +38,8 @@
         class="edu.stanford.irt.laneweb.cocoon.ModelReader"
         parent="edu.stanford.irt.laneweb.model.DefaultModelAware"/>
     
+    <bean name="org.apache.cocoon.transformation.Transformer/debug"
+        class="edu.stanford.irt.laneweb.cocoon.DebugTransformer"
+        parent="edu.stanford.irt.laneweb.model.DefaultModelAware"/>
+    
 </beans>

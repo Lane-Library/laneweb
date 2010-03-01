@@ -173,6 +173,7 @@
                     <!--<map:parameter name="base-path" value="http://lane.stanford.edu"/>-->
                 </map:transform>
                 <map:transform type="namespace-filter"/>
+                <map:transform type="debug"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
