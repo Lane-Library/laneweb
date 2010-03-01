@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;

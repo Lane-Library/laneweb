@@ -1,9 +1,6 @@
 package edu.stanford.irt.laneweb.servlet;
 
-import static org.easymock.EasyMock.and;
-import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.isA;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
@@ -11,15 +8,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.easymock.Capture;
 import org.junit.Before;
 import org.junit.Test;
 
