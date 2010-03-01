@@ -22,8 +22,22 @@
     <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
         class="edu.stanford.irt.laneweb.servlet.RequestAttributeObjectModelProvider"/>
 
-    <bean id="edu.stanford.irt.laneweb.servlet.ModelCreatingRequestHandler"
-        class="edu.stanford.irt.laneweb.servlet.ModelCreatingRequestHandler">
+    <bean id="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler"
+        class="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
+        <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.ProxyLinks"/>
+        <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.TemplateChooser"/>
+        <property name="LDAPDataAccess" ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
+        <property name="ezproxyKey">
+            <!-- TODO: get this from servlet context . . .-->
+            <bean class="org.springframework.jndi.JndiObjectFactoryBean">
+                <property name="jndiName" value="java:comp/env/ezproxy-key"/>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler"
+        class="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
         <property name="methodsNotAllowed">
             <set>
                 <value>OPTIONS</value>
@@ -39,17 +53,8 @@
                 <entry key="(.*)/clinician/index.html" value="$1/portals/clinical.html"/>
             </map>
         </property>
-        <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.ProxyLinks"/>
-        <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.TemplateChooser"/>
         <property name="servletContext" ref="javax.servlet.ServletContext"/>
         <property name="processor" ref="org.apache.cocoon.Processor"/>
-        <property name="LDAPDataAccess" ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
-        <property name="ezproxyKey">
-            <!-- TODO: get this from servlet context . . .-->
-            <bean class="org.springframework.jndi.JndiObjectFactoryBean">
-                <property name="jndiName" value="java:comp/env/ezproxy-key"/>
-            </bean>
-        </property>
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.servlet.ProxyLinks"

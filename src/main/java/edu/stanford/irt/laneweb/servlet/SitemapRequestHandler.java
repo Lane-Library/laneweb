@@ -22,6 +22,8 @@ import org.apache.cocoon.environment.http.HttpEnvironment;
 import org.apache.cocoon.environment.internal.EnvironmentHelper;
 import org.springframework.web.HttpRequestHandler;
 
+import edu.stanford.irt.laneweb.model.Model;
+
 
 public class SitemapRequestHandler implements HttpRequestHandler {
 
@@ -29,7 +31,7 @@ public class SitemapRequestHandler implements HttpRequestHandler {
 
     private Processor processor;
 
-    protected ServletContext servletContext;
+    private ServletContext servletContext;
 
     private Map<Pattern, String> redirectMap = Collections.emptyMap();
 
@@ -43,15 +45,14 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         if (uriGetsRedirect(uri, response)) {
             return;
         }
+        Map<String, Object> model = createModel();
+        request.setAttribute(Model.MODEL, model);
         process(request, response);
     }
     
     protected void process(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        String uri = request.getRequestURI();
-        if ("/".equals(uri)) {
-            uri = "";
-        }
-        Environment environment = new HttpEnvironment(uri, request, response, this.servletContext, this.context, null, null);
+        String sitemapURI = request.getRequestURI().substring(request.getContextPath().length() + 1);
+        Environment environment = new HttpEnvironment(sitemapURI, request, response, this.servletContext, this.context, null, null);
         try {
             EnvironmentHelper.enterProcessor(this.processor, environment);
             this.processor.process(environment);
@@ -107,5 +108,23 @@ public class SitemapRequestHandler implements HttpRequestHandler {
             }
         }
         return false;
+    }
+    
+    private Map<String, Object> createModel() {
+        Map<String, Object> model = new HashMap<String, Object>();
+        addToModel("live-base", this.servletContext.getAttribute("laneweb.context.live-base"), model);
+        addToModel("stage-base", this.servletContext.getAttribute("laneweb.context.stage-base"), model);
+        addToModel("medblog-base", this.servletContext.getAttribute("laneweb.context.medblog-base"), model);
+        addToModel("version", this.servletContext.getAttribute("laneweb.context.version"), model);
+        return model;
+    }
+
+    protected void addToModel(String key, Object value, Map<String, Object> model) {
+        if (value != null) {
+            if (model.containsKey(key)) {
+                throw new IllegalStateException("duplicate model key: " + key);
+            }
+            model.put(key, value);
+        }
     }
 }

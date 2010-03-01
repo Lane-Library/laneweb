@@ -5,7 +5,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -20,7 +19,7 @@ import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
 
-public class ModelCreatingRequestHandler extends SitemapRequestHandler {
+public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
 
     private ProxyLinks proxyLinks;
 
@@ -44,7 +43,7 @@ public class ModelCreatingRequestHandler extends SitemapRequestHandler {
 
     @Override
     protected void process(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = (Map<String, Object>) request.getAttribute(Model.MODEL);
         HttpSession session = request.getSession();
         String sunetid = this.sunetIdSource.getSunetid(request, session);
         addToModel(Model.SUNETID, sunetid, model);
@@ -56,10 +55,7 @@ public class ModelCreatingRequestHandler extends SitemapRequestHandler {
         addToModel(Model.PROXY_LINKS, proxyLinks, model);
         addToModel(Model.TEMPLATE, this.templateChooser.getTemplate(request), model);
         addToModel(Model.EMRID, getEmrid(request, session), model);
-        addToModel(Model.TICKET, getTicket(proxyLinks, sunetid, ipGroup, session), model);        model.put("live-base", this.servletContext.getAttribute("laneweb.context.live-base"));
-        model.put("stage-base", this.servletContext.getAttribute("laneweb.context.stage-base"));
-        model.put("medblog-base", this.servletContext.getAttribute("laneweb.context.medblog-base"));
-        model.put("version", this.servletContext.getAttribute("laneweb.context.version"));
+        addToModel(Model.TICKET, getTicket(proxyLinks, sunetid, ipGroup, session), model);
         addRequestParameters(request, model);
         addToModel(Model.QUERY_STRING, request.getQueryString(), model);
         addToModel(Model.BASE_PATH, request.getContextPath(), model);
@@ -75,7 +71,6 @@ public class ModelCreatingRequestHandler extends SitemapRequestHandler {
                 }
             }
         }
-        request.setAttribute(Model.MODEL, model);
         super.process(request, response);
     }
     
@@ -170,15 +165,6 @@ public class ModelCreatingRequestHandler extends SitemapRequestHandler {
         addToModel(Model.NAME, name, model);
         addToModel(Model.AFFILIATION, affiliation, model);
         addToModel(Model.UNIVID, univid, model);
-    }
-
-    private void addToModel(String key, Object value, Map<String, Object> model) {
-        if (value != null) {
-            if (model.containsKey(key)) {
-                throw new IllegalStateException("duplicate model key: " + key);
-            }
-            model.put(key, value);
-        }
     }
 
     public void setProxyLinks(final ProxyLinks proxyLinks) {

@@ -15,9 +15,9 @@ import org.apache.cocoon.Processor;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ModelCreatingRequestHandlerTest {
+public class ModelAugmentingRequestHandlerTest {
 
-    private ModelCreatingRequestHandler handler;
+    private ModelAugmentingRequestHandler handler;
     
     private ProxyLinks proxyLinks;
     
@@ -36,7 +36,7 @@ public class ModelCreatingRequestHandlerTest {
     @Before
     public void setUp() throws Exception {
         this.session = createMock(HttpSession.class);
-        this.handler = new ModelCreatingRequestHandler();
+        this.handler = new ModelAugmentingRequestHandler();
         this.request = createMock(HttpServletRequest.class);
         this.proxyLinks = createMock(ProxyLinks.class);
         this.response = createMock(HttpServletResponse.class);
