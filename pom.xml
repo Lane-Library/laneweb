@@ -13,7 +13,7 @@
    <artifactId>laneweb</artifactId>
    <packaging>war</packaging>
    <name>Lane Library Website</name>
-   <version>1.10.beta3-SNAPSHOT</version>
+   <version>1.10.beta3</version>
    <description>The Lane Library web application built with Cocoon</description>
    <url>http://lane.stanford.edu/index.html</url>
    <inceptionYear>2002</inceptionYear>
@@ -52,7 +52,7 @@
       </developer>
    </developers>
    <scm>
-      <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
+      <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/tags/laneweb-1.10.beta3</developerConnection>
    </scm>
    <build>
       <defaultGoal>package</defaultGoal>
@@ -154,7 +154,6 @@
                         <include>lane-teletype-min.js</include>
                         <include>lane-search-pico-min.js</include>
                         <include>lane-suggest-min.js</include>
-
                      </includes>
                   </aggregation>
                </aggregations>
@@ -201,7 +200,6 @@
                <toAddresses>
                   <toAddress implementation="java.lang.String">ceyates@stanford.edu</toAddress>
                </toAddresses>
-
             </configuration>
             <version>2.3</version>
             <reportSets>
@@ -386,6 +384,11 @@
          </exclusions>
       </dependency>
       <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+         <version>1.5.10</version>
+      </dependency>
+      <dependency>
          <artifactId>spring-aop</artifactId>
          <groupId>org.springframework</groupId>
          <version>3.0.0.RELEASE</version>
@@ -463,6 +466,12 @@
          </exclusions>
       </dependency>
       <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-log4j12</artifactId>
+         <version>1.5.10</version>
+         <scope>runtime</scope>
+      </dependency>
+      <dependency>
          <artifactId>spring-tx</artifactId>
          <groupId>org.springframework</groupId>
          <version>3.0.0.RELEASE</version>
@@ -492,18 +501,5 @@
          <version>3.0.0.RELEASE</version>
          <scope>test</scope>
       </dependency>
-      <dependency>
-      	<groupId>org.slf4j</groupId>
-      	<artifactId>slf4j-api</artifactId>
-      	<version>1.5.10</version>
-      </dependency>
-      <dependency>
-      	<groupId>org.slf4j</groupId>
-      	<artifactId>slf4j-log4j12</artifactId>
-      	<version>1.5.10</version>
-      	<scope>runtime</scope>
-      </dependency>
    </dependencies>
-   <properties>
-   </properties>
 </project>
