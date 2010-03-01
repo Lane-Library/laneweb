@@ -106,6 +106,16 @@
     </servlet-mapping>
     
     <servlet-mapping>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler</servlet-name>
+        <url-pattern>/apps/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler</servlet-name>
+        <url-pattern>/eresources/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
