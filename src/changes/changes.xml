@@ -7,6 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-03-01" version="1.10.beta3" description="1.10.beta3 redesign release"/>
         <release date="2010-02-01" version="1.10.beta2" description="1.10.beta2 redesign release"/>
         <release date="2010-01-25" version="1.10.beta1" description="1.10.beta1 redesign release"/>
         <release date="2010-02-08" version="1.9.34" description="1.9.34 bug fix release">
