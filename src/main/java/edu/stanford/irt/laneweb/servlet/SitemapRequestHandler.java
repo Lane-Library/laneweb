@@ -26,6 +26,14 @@ import edu.stanford.irt.laneweb.model.Model;
 
 
 public class SitemapRequestHandler implements HttpRequestHandler {
+    
+    private static final String[][] BASE_MAPPINGS = new String[][] {
+        {"/alainb","file:/afs/ir.stanford.edu/users/a/l/alainb/laneweb"},
+        {"/ceyates","file:/afs/ir.stanford.edu/users/c/e/ceyates/laneweb"},
+        {"/olgary","file:/afs/ir.stanford.edu/users/o/l/olgary/laneweb"},
+        {"/ryanmax","file:/afs/ir.stanford.edu/users/r/y/ryanmax/laneweb"},
+        {"/rzwies","file:/afs/ir.stanford.edu/users/r/z/rzwies/laneweb"}
+    };
 
     private Context context;
 
@@ -36,6 +44,15 @@ public class SitemapRequestHandler implements HttpRequestHandler {
     private Map<Pattern, String> redirectMap = Collections.emptyMap();
 
     private Set<String> methodsNotAllowed = Collections.emptySet();
+    
+    protected Map<String, String> baseMappings;
+    
+    public SitemapRequestHandler() {
+        this.baseMappings = new HashMap<String, String>(BASE_MAPPINGS.length);
+        for (int i = 0; i < BASE_MAPPINGS.length; i++) {
+            this.baseMappings.put(BASE_MAPPINGS[i][0], BASE_MAPPINGS[i][1]);
+        }
+    }
 
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         if (methodNotAllowed(request, response)) {
@@ -45,13 +62,27 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         if (uriGetsRedirect(uri, response)) {
             return;
         }
-        Map<String, Object> model = createModel();
+        uri = request.getRequestURI().substring(request.getContextPath().length());
+        Map<String, Object> model = createModel(uri);
         request.setAttribute(Model.MODEL, model);
         process(request, response);
     }
     
+    private String getSitemapURI(HttpServletRequest request) {
+        String uri = request.getRequestURI().substring(request.getContextPath().length());
+        if (uri.indexOf("/stage") == 0) {
+            return uri.substring("/stage".length());
+        }
+        for (String key : this.baseMappings.keySet()) {
+            if (uri.indexOf(key) == 0) {
+                return uri.substring(key.length());
+            }
+        }
+        return uri;
+    }
+
     protected void process(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        String sitemapURI = request.getRequestURI().substring(request.getContextPath().length() + 1);
+        String sitemapURI = getSitemapURI(request).substring(1);
         Environment environment = new HttpEnvironment(sitemapURI, request, response, this.servletContext, this.context, null, null);
         try {
             EnvironmentHelper.enterProcessor(this.processor, environment);
@@ -110,16 +141,24 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         return false;
     }
     
-    private Map<String, Object> createModel() {
+    private Map<String, Object> createModel(String uri) {
         Map<String, Object> model = new HashMap<String, Object>();
-        addToModel("live-base", this.servletContext.getAttribute("laneweb.context.live-base"), model);
-        addToModel("stage-base", this.servletContext.getAttribute("laneweb.context.stage-base"), model);
-        addToModel("medblog-base", this.servletContext.getAttribute("laneweb.context.medblog-base"), model);
-        addToModel("version", this.servletContext.getAttribute("laneweb.context.version"), model);
-        model.put("content-base", (this.servletContext.getAttribute("laneweb.context.live-base").toString() + "/content/"));
-        model.put("resources-base", this.servletContext.getRealPath("/"));
-        model.put("default-content", model.get("content-base"));
-        model.put("default-resources", model.get("resources-base"));
+        model.put("version", this.servletContext.getAttribute("laneweb.context.version"));
+        model.put("medblog-base", this.servletContext.getAttribute("laneweb.context.medblog-base"));
+        model.put("default-content-base", this.servletContext.getAttribute("laneweb.context.live-base"));
+        model.put("content-base", model.get("default-content-base"));
+        model.put("default-resources-base", this.servletContext.getRealPath("/").toString() + "resources");
+        model.put("resources-base", model.get("default-resources-base"));
+        if (uri.indexOf("/stage") == 0) {
+            model.put("content-base", this.servletContext.getAttribute("laneweb.context.stage-base"));
+        } else {
+            for (Entry<String, String> entry: this.baseMappings.entrySet()) {
+                if (uri.indexOf(entry.getKey()) == 0) {
+                    model.put("content-base", entry.getValue() + "/content");
+                    model.put("resources-base", entry.getValue() + "/resources");
+                }
+            }
+        }
         return model;
     }
 

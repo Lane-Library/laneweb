@@ -28,13 +28,13 @@
                         <map:part
                             src="cocoon:/cached/search/all/${source}.html"/>
                     </map:aggregate>
-                    <map:transform type="saxon" src="${resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
                         <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl">
                         <map:parameter name="query" value="${query}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
@@ -48,13 +48,13 @@
                         <map:part
                             src="cocoon:/cached/search/articles/${source}.html"/>
                     </map:aggregate>
-                    <map:transform type="saxon" src="${resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
                         <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl">
                         <map:parameter name="query" value="${query}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
@@ -69,13 +69,13 @@
                         <map:part
                             src="cocoon:/cached/search/catalog/${source}.html"/>
                     </map:aggregate>
-                    <map:transform type="saxon" src="${resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
                         <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl">
                         <map:parameter name="query" value="${query}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
@@ -88,13 +88,13 @@
                         <map:part
                             src="cocoon:/cached/search/clinical/${source}.html"/>
                     </map:aggregate>
-                    <map:transform type="saxon" src="${resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
                         <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl">
                         <map:parameter name="query" value="${query}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
@@ -108,16 +108,18 @@
                         <map:part
                             src="cocoon:/search/specialty/${source}.html"/>
                     </map:aggregate>
-                    <map:transform type="saxon" src="${resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
                         <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search.html" type="wildcard">
-                    <map:generate type="html" src="${content-base}/error.html"/>
+                    <map:generate type="html" src="${content-base}/error.html">
+                        <map:parameter name="alt-src" value="${default-content-base}/error.html"/>
+                    </map:generate>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
@@ -128,32 +130,34 @@
                     <map:part
                         src="cocoon:/cached/search/specialty/{1}.html"/>
                 </map:aggregate>
-                <map:transform type="saxon" src="${resources-base}/xsl/search-specialty.xsl">
+                <map:transform type="saxon" src="${default-resources-base}/xsl/search-specialty.xsl">
                     <map:parameter name="query" value="${query}"/>
                     <map:parameter name="request-uri" value="${request-uri}"/>
                     <map:parameter name="source" value="${source}"/>
                 </map:transform>
-                <map:transform type="saxon" src="${resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- ajax requests for the tab results uses this, so does the aggregate in the articles, catalog and clinical matchers -->
             <map:match pattern="search/*/*.html" type="wildcard">
                 <map:generate src="cocoon:/cached/search/{1}/{2}.html" type="file"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
+                <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
                     <map:parameter name="query" value="${query}"/>
                     <map:parameter name="source" value="${source}"/>
                 </map:transform>
-                <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl"/>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
         <!-- static documents cached and accessed via html generator -->
         <map:pipeline type="caching">
             <map:match pattern="cached/**" type="wildcard">
-                <map:generate src="${content-base}/{1}" type="html"/>
+                <map:generate src="${content-base}/{1}" type="html">
+                    <map:parameter name="alt-src" value="${default-content-base}/{1}"/>
+                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- pass any unresolved urls (eg from xinclude) to content.xmap -->

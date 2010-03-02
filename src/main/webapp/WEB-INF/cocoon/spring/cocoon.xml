@@ -49,11 +49,6 @@
         </property>
     </bean>
 
-    <bean name="org.apache.cocoon.generation.Generator/file"
-        class="org.apache.cocoon.generation.FileGenerator" scope="prototype">
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
-    </bean>
-
     <bean name="org.apache.cocoon.serialization.AbstractTextSerializer" init-method="init"
         class="org.apache.cocoon.serialization.AbstractTextSerializer" scope="prototype"
         abstract="true">

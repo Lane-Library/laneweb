@@ -131,7 +131,7 @@
                   </aggregation>
                   <aggregation>
                      <removeIncluded>true</removeIncluded>
-                      <output>target/laneweb/javascript/lane-all.js</output>
+                      <output>target/laneweb/resources/javascript/lane-all.js</output>
                      <includes>
                         <include>lane-min.js</include>
                         <include>accordionview-min.js</include>

@@ -4,30 +4,36 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="caching">
-            <map:match pattern="**.ico" type="wildcard">
-                <map:read type="resource" src="${live-base}/resources/extensions/{1}.ico"
+            
+<!--     TODO: make sure web.xml has all these mime types
+    
+    <map:match pattern="**.ico" type="wildcard">
+                <map:read type="resource" src="${resources-base}/extensions/{1}.ico"
                     mime-type="image/x-icon"/>
             </map:match>
             <map:match pattern="**.png" type="wildcard">
-                <map:read type="resource" src="${live-base}/resources/extensions/{1}.png"
+                <map:read type="resource" src="${resources-base}/extensions/{1}.png"
                     mime-type="image/png"/>
             </map:match>
             <map:match pattern="**.rdf" type="wildcard">
-                <map:read type="resource" src="${live-base}/resources/extensions/{1}.rdf"
+                <map:read type="resource" src="${resources-base}/extensions/{1}.rdf"
                     mime-type="text/xml"/>
             </map:match>
             <map:match pattern="**.src" type="wildcard">
-                <map:read type="resource" src="${live-base}/resources/extensions/{1}.src"
+                <map:read type="resource" src="${resources-base}/extensions/{1}.src"
                     mime-type="text/txt"/>
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
-                <map:read type="resource" src="${live-base}/resources/extensions/{1}.xml"
+                <map:read type="resource" src="${resources-base}/extensions/{1}.xml"
                     mime-type="text/xml"/>
             </map:match>
             <map:match pattern="**.xpi" type="wildcard">
-                <map:read type="resource" src="${live-base}/resources/extensions/{1}.xpi"
+                <map:read type="resource" src="${resources-base}/extensions/{1}.xpi"
                     mime-type="application/x-xpinstall"/>
-            </map:match>
+                    </map:match>-->
+            <map:read type="resource" src="${resources-base}/extensions/{1}">
+                <map:parameter name="alt-src" value="${default-resources-base}/extensions/{1}"/>
+            </map:read>
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>

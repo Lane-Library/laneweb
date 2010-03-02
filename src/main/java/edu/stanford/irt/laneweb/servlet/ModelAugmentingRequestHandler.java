@@ -61,7 +61,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         addToModel(Model.TICKET, getTicket(proxyLinks, sunetid, ipGroup, session), model);
         addRequestParameters(request, model);
         addToModel(Model.QUERY_STRING, request.getQueryString(), model);
-        addToModel(Model.BASE_PATH, request.getContextPath(), model);
+        addToModel(Model.BASE_PATH, getBasePath(request), model);
         addToModel("request-uri", request.getRequestURI(), model);
         addToModel("referer", request.getHeader("referer"), model);
         Cookie[] cookies = request.getCookies();
@@ -76,6 +76,22 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         super.process(request, response);
     }
     
+    private String getBasePath(HttpServletRequest request) {
+        StringBuilder builder = new StringBuilder(request.getContextPath());
+        String uri = request.getRequestURI().substring(request.getContextPath().length());
+        if (uri.indexOf("/stage") == 0) {
+            builder.append("/stage");
+        } else {
+            for (String key : this.baseMappings.keySet()) {
+                if (uri.indexOf(key) == 0) {
+                    builder.append(key);
+                    break;
+                }
+            }
+        }
+        return builder.toString();
+    }
+
     private Boolean getDebugValue(HttpServletRequest request, HttpSession session) {
         String debugParameter = request.getParameter(Model.DEBUG);
         if (debugParameter == null) {

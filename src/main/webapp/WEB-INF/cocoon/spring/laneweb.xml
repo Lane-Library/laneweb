@@ -75,9 +75,11 @@
             </bean>
         </property>
     </bean>
-
+    
     <bean name="org.apache.cocoon.generation.Generator/file"
-        class="org.apache.cocoon.generation.FileGenerator" scope="prototype">
+        class="edu.stanford.irt.laneweb.cocoon.URLGenerator"
+        scope="prototype">
+        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
 
@@ -111,7 +113,7 @@
     </bean>
 
     <bean name="org.apache.cocoon.reading.Reader/resource"
-        class="edu.stanford.irt.laneweb.NoCacheBigReader" scope="prototype"/>
+        class="edu.stanford.irt.laneweb.cocoon.NoCacheBigReader" scope="prototype"/>
 
     <bean name="org.apache.cocoon.reading.Reader/txt-resource"
         class="edu.stanford.irt.laneweb.TxtResourceReader"

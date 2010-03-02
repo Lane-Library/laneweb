@@ -872,4 +872,8 @@
         <extension>xltx</extension>
         <mime-type>application/vnd.openxmlformats-officedocument.spreadsheetml.template</mime-type>
     </mime-mapping>
+    <mime-mapping>
+        <extension>xpi</extension>
+        <mime-type>application/x-xpinstall</mime-type>
+    </mime-mapping>
 </web-app>
