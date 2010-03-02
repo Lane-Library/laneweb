@@ -1,8 +1,6 @@
 package edu.stanford.irt.laneweb.suggest;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -14,8 +12,6 @@ import edu.stanford.irt.suggest.Suggestion;
 
 public class ExtensionsSuggestReader extends AbstractReader {
 
-    private OutputStream outputStream;
-
     private EresourceSuggestionManager eresourceSuggestionManager;
 
     private String query;
@@ -24,8 +20,7 @@ public class ExtensionsSuggestReader extends AbstractReader {
         String query = this.query;
         SuggestionComparator comparator = new SuggestionComparator(query);
         TreeSet<String> suggestionSet = new TreeSet<String>(comparator);
-        Collection<? extends Suggestion> suggestions = new ArrayList<Suggestion>();
-        suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
+        Collection<? extends Suggestion> suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
         for (Suggestion suggestion : suggestions) {
             suggestionSet.add(suggestion.getSuggestionTitle());
         }
