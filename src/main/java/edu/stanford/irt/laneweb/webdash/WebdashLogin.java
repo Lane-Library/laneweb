@@ -34,16 +34,20 @@ public class WebdashLogin {
         if (null == nonce) {
             throw new IllegalArgumentException("null nonce");
         }
-        String encodedId = encodeParameter(sunetId);
-        String mail = encodeParameter(sunetId.concat("@stanford.edu"));
-        String fullName = encodeParameter(name);
-        String encodedAffiliation = getSubGroup(affiliation);
         StringBuffer result = new StringBuffer();
-        result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce)
-                .append("&subgroup=").append(encodedAffiliation).append(
-                        "&system_short_name=stanford-sunet&system_user_id=").append(encodedId);
-        String token = getToken(result.toString());
-        result.append("&token=").append(token);
+        try {
+            String encodedId = encodeParameter(sunetId);
+            String mail = encodeParameter(sunetId.concat("@stanford.edu"));
+            String fullName = encodeParameter(name);
+            String encodedAffiliation = getSubGroup(affiliation);
+            result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce)
+                    .append("&subgroup=").append(encodedAffiliation).append(
+                            "&system_short_name=stanford-sunet&system_user_id=").append(encodedId);
+            String token = getToken(result.toString());
+            result.append("&token=").append(token);
+        } catch (UnsupportedEncodingException e) {
+            // won't happen
+        }
         result.insert(0, systemUserId == null ? REGISTRATION_URL : LOGIN_URL);
         return result.toString();
     }
@@ -63,31 +67,17 @@ public class WebdashLogin {
         }
     }
 
-    private String encodeParameter(final String parameter) {
-        try {
-            return URLEncoder.encode(parameter, "UTF-8").replaceAll("\\+", "%20");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("UTF-8 not supported");
-        }
+    private String encodeParameter(final String parameter) throws UnsupportedEncodingException {
+        return URLEncoder.encode(parameter, "UTF-8").replaceAll("\\+", "%20");
     }
 
-    private String getSubGroup(final String affiliation) {
+    private String getSubGroup(final String affiliation) throws UnsupportedEncodingException {
         String group = affiliation.substring(affiliation.indexOf(':') + 1);
-        try {
-            group = URLEncoder.encode(group, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("UTF-8 not supported");
-        }
-        return group;
+        return URLEncoder.encode(group, "UTF-8");
     }
 
-    private String getToken(final String string) {
-        byte[] utf8;
-        try {
-            utf8 = string.getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("UTF-8 not supported");
-        }
+    private String getToken(final String string) throws UnsupportedEncodingException {
+        byte[] utf8 = string.getBytes("UTF-8");
         byte[] bytes = this.mac.doFinal(utf8);
         StringBuffer sb = new StringBuffer();
         for (byte element : bytes) {
