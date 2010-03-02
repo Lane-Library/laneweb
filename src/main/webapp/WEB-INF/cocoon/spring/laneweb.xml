@@ -49,7 +49,8 @@
         <property name="httpClient" ref="org.apache.commons.httpclient.HttpClient"/>
     </bean>
 
-    <bean id="edu.stanford.irt.laneweb.ldap.LDAPDataAccess" class="edu.stanford.irt.laneweb.ldap.LDAPDataAccess">
+    <bean id="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"
+        class="edu.stanford.irt.laneweb.ldap.LDAPDataAccess">
         <property name="subjectSource">
             <bean class="edu.stanford.irt.laneweb.ldap.SubjectSource">
                 <property name="name" value="IRT_K5"/>
@@ -75,10 +76,9 @@
             </bean>
         </property>
     </bean>
-    
+
     <bean name="org.apache.cocoon.generation.Generator/file"
-        class="edu.stanford.irt.laneweb.cocoon.URLGenerator"
-        scope="prototype">
+        class="edu.stanford.irt.laneweb.cocoon.URLGenerator" scope="prototype">
         <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
@@ -87,8 +87,7 @@
         class="edu.stanford.irt.laneweb.HTMLGenerator" scope="prototype"/>
 
     <bean name="org.apache.cocoon.generation.Generator/link-scan"
-        class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator"
-        scope="prototype">
+        class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator" scope="prototype">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
 
@@ -124,8 +123,7 @@
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/voyager"
-        class="edu.stanford.irt.laneweb.voyager.VoyagerAction"
-        scope="prototype">
+        class="edu.stanford.irt.laneweb.voyager.VoyagerAction" scope="prototype">
         <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
         <property name="voyagerLogin">
             <bean class="edu.stanford.irt.laneweb.voyager.VoyagerLogin">
@@ -135,8 +133,7 @@
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/webdash"
-        class="edu.stanford.irt.laneweb.webdash.WebdashAction"
-        scope="prototype">
+        class="edu.stanford.irt.laneweb.webdash.WebdashAction" scope="prototype">
         <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
         <property name="webdashLogin">
             <bean class="edu.stanford.irt.laneweb.webdash.WebdashLogin">
@@ -148,7 +145,7 @@
             </bean>
         </property>
     </bean>
-    
+
     <bean name="org.apache.cocoon.acting.Action/invalidate-session"
         class="org.apache.cocoon.acting.SessionInvalidatorAction"/>
 
@@ -173,15 +170,14 @@
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <pipeline:component mime-type="text/plain"/>
     </bean>
-    
-    <!--<bean name="org.apache.cocoon.transformation.Transformer/saxon"
-        class="edu.stanford.irt.laneweb.LanewebTraxTransformer"
-        scope="prototype">
+
+    <bean name="org.apache.cocoon.transformation.Transformer/saxon"
+        class="edu.stanford.irt.laneweb.LanewebTraxTransformer" scope="prototype">
         <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
         <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"/>
-        </bean>
-    
-    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
+    </bean>
+
+    <!--<bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
         class="edu.stanford.irt.laneweb.cocoon.NoncachingPipeline"
         scope="prototype">
         <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>

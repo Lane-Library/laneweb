@@ -31,11 +31,11 @@
                     <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
-                        <map:parameter name="query" value="${query}"/>
-                        <map:parameter name="source" value="${source}"/>
+                        <!--<map:parameter name="query" value="${query}"/>
+                        <map:parameter name="source" value="${source}"/>-->
                     </map:transform>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl">
-                        <map:parameter name="query" value="${query}"/>
+                        <!--<map:parameter name="query" value="${query}"/>-->
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -51,11 +51,11 @@
                     <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
-                        <map:parameter name="query" value="${query}"/>
-                        <map:parameter name="source" value="${source}"/>
+                        <!--<map:parameter name="query" value="${query}"/>
+                        <map:parameter name="source" value="${source}"/>-->
                     </map:transform>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl">
-                        <map:parameter name="query" value="${query}"/>
+                       <!-- <map:parameter name="query" value="${query}"/>-->
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -72,11 +72,11 @@
                     <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
-                        <map:parameter name="query" value="${query}"/>
-                        <map:parameter name="source" value="${source}"/>
+                        <!--<map:parameter name="query" value="${query}"/>
+                        <map:parameter name="source" value="${source}"/>-->
                     </map:transform>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl">
-                        <map:parameter name="query" value="${query}"/>
+                        <!--<map:parameter name="query" value="${query}"/>-->
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -91,11 +91,11 @@
                     <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
-                        <map:parameter name="query" value="${query}"/>
-                        <map:parameter name="source" value="${source}"/>
+                        <!--<map:parameter name="query" value="${query}"/>
+                        <map:parameter name="source" value="${source}"/>-->
                     </map:transform>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl">
-                        <map:parameter name="query" value="${query}"/>
+                        <!--<map:parameter name="query" value="${query}"/>-->
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -111,8 +111,8 @@
                     <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
-                        <map:parameter name="query" value="${query}"/>
-                        <map:parameter name="source" value="${source}"/>
+                        <!--<map:parameter name="query" value="${query}"/>
+                        <map:parameter name="source" value="${source}"/>-->
                     </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -131,9 +131,9 @@
                         src="cocoon:/cached/search/specialty/{1}.html"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-specialty.xsl">
-                    <map:parameter name="query" value="${query}"/>
+                    <!--<map:parameter name="query" value="${query}"/>
                     <map:parameter name="request-uri" value="${request-uri}"/>
-                    <map:parameter name="source" value="${source}"/>
+                    <map:parameter name="source" value="${source}"/>-->
                 </map:transform>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                 <map:transform type="xinclude"/>
@@ -145,8 +145,8 @@
                 <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl">
-                    <map:parameter name="query" value="${query}"/>
-                    <map:parameter name="source" value="${source}"/>
+                    <!--<map:parameter name="query" value="${query}"/>
+                    <map:parameter name="source" value="${source}"/>-->
                 </map:transform>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>

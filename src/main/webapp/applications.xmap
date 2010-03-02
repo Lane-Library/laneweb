@@ -57,7 +57,7 @@
                 <map:match pattern="search/json" type="wildcard">
                     <map:generate type="search-resource"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search2json.xsl">
-                        <map:parameter name="content" value="${content}"/>
+                        <!--<map:parameter name="content" value="${content}"/>-->
                         <map:parameter name="content-to-display" value="5"/>
                     </map:transform>
                     <map:serialize type="text"/>
@@ -95,7 +95,7 @@
                         <map:part src="cocoon:/cache/search/templates/xml"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-facet-counts.xsl">
-                        <map:parameter name="facets" value="${facets}"/>
+                        <!--<map:parameter name="facets" value="${facets}"/>-->
                     </map:transform>
                     <map:serialize type="text"/>
                 </map:match>

@@ -23,7 +23,7 @@
                 </map:generate>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl">
-                    <map:parameter name="query-string" value="${query-string}"/>
+                    <!--<map:parameter name="query-string" value="${query-string}"/>-->
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -55,10 +55,10 @@
                 <map:generate type="html"
                     src="${content-base}/secure/persistentlogin.html"/>
                 <map:transform src="${default-resources-base}/xsl/persistentlogin.xsl" type="saxon">
-                    <map:parameter name="persistent-login" value="${pl}"/>
+                    <!--<map:parameter name="persistent-login" value="${pl}"/>
                     <map:parameter name="remove-persistent-login"
                         value="${remove-pl}"/>
-                    <map:parameter name="lane-user-cookie" value="${user-cookie}"/>
+                    <map:parameter name="lane-user-cookie" value="${user-cookie}"/>-->
                 </map:transform>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
@@ -117,7 +117,8 @@
                     <map:parameter name="alt-src" value="${default-content-base}/services/liaisons.html"/>
                 </map:generate>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/liaisons.xsl">
-                    <map:parameter name="liaison" value="${liaison}"/>
+                    <map:parameter name="cache-key" value=";liaison=${liaison}"/>
+                    <!--<map:parameter name="liaison" value="${liaison}"/>-->
                 </map:transform>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/rss2html.xsl"/>
@@ -158,7 +159,7 @@
                 <map:generate type="html"
                     src="${medblog-base}/lane-faq/archives/${id}.xml"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/popup-faq.xsl">
-                    <map:parameter name="id" value="${id}"/>
+                    <!--<map:parameter name="id" value="${id}"/>-->
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>

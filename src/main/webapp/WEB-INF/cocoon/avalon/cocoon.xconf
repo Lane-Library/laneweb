@@ -89,14 +89,14 @@
     <component role="org.apache.cocoon.acting.Action/clear-cache"
         class="org.apache.cocoon.acting.ClearCacheAction"/>
     
-    <component role="org.apache.cocoon.transformation.Transformer/saxon"
+    <!--<component role="org.apache.cocoon.transformation.Transformer/saxon"
         class="org.apache.cocoon.transformation.TraxTransformer">
         <use-request-parameters>false</use-request-parameters>
         <use-session-parameters>false</use-session-parameters>
         <use-cookie-parameters>false</use-cookie-parameters>
         <xslt-processor-role>saxon</xslt-processor-role>
         <check-includes>false</check-includes>
-    </component>
+    </component>-->
     
     <component role="org.apache.cocoon.selection.SelectorSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
