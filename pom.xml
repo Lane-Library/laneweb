@@ -89,7 +89,9 @@
             <configuration>
                <webappDirectory>target/laneweb</webappDirectory>
                <excludes>
-                  <exclude>**/swfobject.js</exclude>
+                   <exclude>**/swfobject.js</exclude>
+                   <exclude>**/lane-all.css</exclude>
+                   <exclude>**/lane-all.js</exclude>
                </excludes>
                <aggregations>
                   <aggregation>
@@ -129,7 +131,7 @@
                   </aggregation>
                   <aggregation>
                      <removeIncluded>true</removeIncluded>
-                     <output>target/laneweb/javascript/lane-all.js</output>
+                      <output>target/laneweb/javascript/lane-all.js</output>
                      <includes>
                         <include>lane-min.js</include>
                         <include>accordionview-min.js</include>
