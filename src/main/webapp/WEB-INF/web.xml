@@ -15,6 +15,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/cocoon/spring/bassett.xml
+            /WEB-INF/cocoon/spring/cme.xml
             /WEB-INF/cocoon/spring/cocoon.xml
             /WEB-INF/cocoon/spring/datasources.xml
             /WEB-INF/cocoon/spring/eresources.xml

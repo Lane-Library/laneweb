@@ -47,7 +47,7 @@
                 <!-- result with proxy links (if necessary) in xml format -->
                 <map:match pattern="search/proxy/xml" type="wildcard">
                      <map:generate type="search"/>
-                    <map:transform type="cme-links"/>
+                    <map:transform type="search-cme-links"/>
                     <map:transform type="search-proxy-links">
                         <map:parameter name="base-path" value="${base-path}/stage"/>
                     </map:transform>
@@ -55,7 +55,7 @@
                 </map:match>
                 <map:match pattern="search/resource/proxy/xml" type="wildcard">
                      <map:generate type="search-resource"/>
-                    <map:transform type="cme-links"/>
+                    <map:transform type="search-cme-links"/>
                     <map:transform type="search-proxy-links">
                         <map:parameter name="base-path" value="${base-path}/stage"/>
                     </map:transform>

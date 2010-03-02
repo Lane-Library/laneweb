@@ -34,7 +34,7 @@
             </map:match>
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
-                <map:transform type="cme-links"/>
+                <map:transform type="html-cme-links"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
                         <map:transform type="saxon" src="xsl/laneweb.xsl">
@@ -87,7 +87,7 @@
                     <map:part src="cocoon:/content/sitemap.html"/>
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
-                <map:transform type="cme-links"/>
+                <map:transform type="html-cme-links"/>
                 <map:select type="resource-exists">
                     <map:when test="xsl/laneweb.xsl">
                         <map:transform type="saxon" src="xsl/laneweb.xsl">
