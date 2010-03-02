@@ -9,14 +9,7 @@ import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class WebdashLogin {
-
-    private static final String ERROR_URL = "/webdashError.html";
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebdashLogin.class);
 
     private static final String LOGIN_URL = "https://webda.sh/auth/auth_post?";
 
@@ -29,21 +22,17 @@ public class WebdashLogin {
         if (null == this.mac) {
             throw new IllegalStateException("webdashKey not set");
         }
-        if (null == sunetId || sunetId.length() == 0) {
-            LOGGER.error("null sunetId");
-            return ERROR_URL;
+        if (null == sunetId) {
+            throw new IllegalArgumentException("null sunetId");
         }
-        if (null == name || name.length() == 0) {
-            LOGGER.error("null name");
-            return ERROR_URL;
+        if (null == name) {
+            throw new IllegalArgumentException("null name");
         }
-        if (null == affiliation || affiliation.length() == 0) {
-            LOGGER.error("null affiliation");
-            return ERROR_URL;
+        if (null == affiliation) {
+            throw new IllegalArgumentException("null affiliation");
         }
-        if (null == nonce || nonce.length() == 0) {
-            LOGGER.error("null nonce");
-            return ERROR_URL;
+        if (null == nonce) {
+            throw new IllegalArgumentException("null nonce");
         }
         String encodedId = encodeParameter(sunetId);
         String mail = encodeParameter(sunetId.concat("@stanford.edu"));

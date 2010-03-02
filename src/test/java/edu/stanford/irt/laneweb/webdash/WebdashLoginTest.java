@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.webdash;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +17,15 @@ public class WebdashLoginTest {
     }
 
     @Test
-    public void testErrorURL() {
-        assertEquals("/webdashError.html", this.webdashLogin.getWebdashURL(null, null, null,
-                "4ca14d60146ddff8ca128a7121854933", null));
-        assertEquals("/webdashError.html", this.webdashLogin.getWebdashURL("ceyates", "Charles E Yates",
-                "stanford:staff", null, null));
+    public void testError() {
+        try {
+            this.webdashLogin.getWebdashURL(null, null, null,"4ca14d60146ddff8ca128a7121854933", null);
+            fail();
+        } catch (IllegalArgumentException e) {}
+        try {
+            this.webdashLogin.getWebdashURL("ceyates", "Charles E Yates", "stanford:staff", null, null);
+            fail();
+        } catch (IllegalArgumentException e) {}
     }
 
     @Test
