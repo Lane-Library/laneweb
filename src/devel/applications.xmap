@@ -36,7 +36,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-content-ranked.xsl">
+                            <map:transform type="saxon" src="${resources-base}/xsl/search-content-ranked.xsl">
                                 <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="limit" value="10"/>
                             </map:transform>
@@ -55,7 +55,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search2json.xsl">
+                            <map:transform type="saxon" src="${resources-base}/xsl/search2json.xsl">
                                 <map:parameter name="content" value="${content}"/>
                                 <map:parameter name="content-to-display" value="5"/>
                             </map:transform>
@@ -83,7 +83,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search2json.xsl">
+                            <map:transform type="saxon" src="${resources-base}/xsl/search2json.xsl">
                                 <map:parameter name="content" value="${content}"/>
                                 <map:parameter name="content-to-display" value="5"/>
                             </map:transform>
@@ -126,7 +126,7 @@
                             <map:transform type="saxon" src="xsl/describe.xsl"/>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/describe.xsl"/>
+                            <map:transform type="saxon" src="${resources-base}/xsl/describe.xsl"/>
                         </map:otherwise>
                     </map:select>
                     <map:serialize type="xhtml"/>
@@ -184,7 +184,7 @@
                             <map:transform type="saxon" src="xsl/querymap2html.xsl"/>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/querymap2html.xsl"/>
+                            <map:transform type="saxon" src="${resources-base}/xsl/querymap2html.xsl"/>
                         </map:otherwise>
                     </map:select>
                     <map:serialize type="xml"/>
@@ -205,7 +205,7 @@
                             <map:transform type="saxon" src="xsl/spellcheck2json.xsl"/>
                         </map:when>
                         <map:otherwise>
-                            <map:transform src="context://xsl/spellcheck2json.xsl" type="saxon"/>
+                            <map:transform src="${resources-base}/xsl/spellcheck2json.xsl" type="saxon"/>
                         </map:otherwise>
                     </map:select>
                     <map:serialize type="text"/>
@@ -224,7 +224,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform src="context://xsl/sfx2json.xsl" type="saxon">
+                            <map:transform src="${resources-base}/xsl/sfx2json.xsl" type="saxon">
                                 <map:parameter name="sfx-request"
                                     value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${url-encoded-query}&amp;sfx.title_search=exact&amp;svc.fulltext=yes"
                                 />
@@ -242,7 +242,7 @@
                             <map:transform src="xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>
                         </map:when>
                         <map:otherwise>
-                            <map:transform src="context://xsl/sfx-highly-accessed2rss.xsl"
+                            <map:transform src="${resources-base}/xsl/sfx-highly-accessed2rss.xsl"
                                 type="saxon"/>
                         </map:otherwise>
                     </map:select>
@@ -300,7 +300,7 @@
                         <map:transform src="xsl/search-templates.xsl" type="saxon"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/search-templates.xsl"/>
+                        <map:transform type="saxon" src="${resources-base}/xsl/search-templates.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -312,7 +312,7 @@
                         <map:generate src="content/{1}.html" type="html"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate src="${live-base}/content/{1}.html" type="html"/>
+                        <map:generate src="${content-base}/{1}.html" type="html"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

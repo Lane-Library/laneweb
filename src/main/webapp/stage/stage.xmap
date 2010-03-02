@@ -10,26 +10,26 @@
             </map:match>
             <map:match pattern="extensions/**" type="wildcard">
                 <map:mount uri-prefix="extensions" check-reload="no"
-                    src="context://stage/extensions.xmap"/>
+                    src="${resources-base}/stage/extensions.xmap"/>
             </map:match>
             <map:match pattern="tobacco/**" type="wildcard">
-                <map:mount uri-prefix="tobacco" check-reload="no" src="context://stage/tobacco.xmap"
+                <map:mount uri-prefix="tobacco" check-reload="no" src="${resources-base}/stage/tobacco.xmap"
                 />
             </map:match>
             <map:match pattern="eresources/**" type="wildcard">
                 <map:mount uri-prefix="eresources" check-reload="no"
-                    src="context://stage/eresources.xmap"/>
+                    src="${resources-base}/stage/eresources.xmap"/>
             </map:match>
             <map:match pattern="content/**" type="wildcard">
-                <map:mount uri-prefix="content" check-reload="no" src="context://stage/content.xmap"
+                <map:mount uri-prefix="content" check-reload="no" src="${resources-base}/stage/content.xmap"
                 />
             </map:match>
             <map:match pattern="rss/**" type="wildcard">
-                <map:mount uri-prefix="rss" check-reload="no" src="context://stage/rss.xmap"/>
+                <map:mount uri-prefix="rss" check-reload="no" src="${resources-base}/stage/rss.xmap"/>
             </map:match>
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="no"
-                    src="context://stage/applications.xmap"/>
+                    src="${resources-base}/stage/applications.xmap"/>
             </map:match>
             <map:match pattern="search/*" type="wildcard">
                 <map:generate type="file" src="cocoon:/error.html"/>
@@ -42,7 +42,7 @@
             </map:match>
             <map:match pattern="cookiesFetch.html" type="wildcard">
                 <map:generate type="file" src="${stage-base}/content/cookiesFetch.html"/>
-                <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/cookiesFetch.xsl">
                     <map:parameter name="sunetid" value="${sunetid}"/>
                     <map:parameter name="ticket" value="${ticket}"/>
                     <map:parameter name="proxy-links" value="${proxy-links}"/>
@@ -59,7 +59,7 @@
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
                 <map:transform type="html-cme-links"/>
-                <map:transform type="saxon" src="context://xsl/laneweb.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
                     <map:parameter name="request-uri" value="${request-uri}"/>
                     <map:parameter name="base-path" value="${base-path}/stage"/>
                     <map:parameter name="query-string" value="${query-string}"/>
@@ -88,7 +88,7 @@
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
                 <map:transform type="html-cme-links"/>
-                <map:transform type="saxon" src="context://xsl/laneweb.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
                     <map:parameter name="request-uri" value="${request-uri}"/>
                     <map:parameter name="base-path" value="${base-path}/stage"/>
                     <map:parameter name="query-string" value="${query-string}"/>

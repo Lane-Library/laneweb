@@ -56,7 +56,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/laneweb.xsl">
+                        <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
                             <map:parameter name="request-uri" value="${request-uri}"/>
                             <map:parameter name="base-path"
                                 value="${base-path}/your-sunetid"/>
@@ -109,7 +109,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/laneweb.xsl">
+                        <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
                             <map:parameter name="request-uri" value="${request-uri}"/>
                             <map:parameter name="base-path"
                                 value="${base-path}/your-sunetid"/>
@@ -141,7 +141,7 @@
                         <map:generate type="file" src="content/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="${live-base}/content/{1}.xml"/>
+                        <map:generate type="file" src="${content-base}/{1}.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

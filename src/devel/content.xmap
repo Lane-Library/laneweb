@@ -24,7 +24,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:generate type="html"
-                            src="${live-base}/content/biomed-resources/{1}browse.html"/>
+                            src="${content-base}/biomed-resources/{1}browse.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="xinclude"/>
@@ -35,7 +35,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                        <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
                             <map:parameter name="query-string" value="${query-string}"/>
                         </map:transform>
                     </map:otherwise>
@@ -55,7 +55,7 @@
                         <map:transform type="saxon" src="xsl/random.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/random.xsl"/>
+                        <map:transform type="saxon" src="${resources-base}/xsl/random.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -74,7 +74,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:generate type="html"
-                            src="${live-base}/content/secure/persistentlogin.html"/>
+                            src="${content-base}/secure/persistentlogin.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:select type="resource-exists">
@@ -87,7 +87,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform src="context://xsl/persistentlogin.xsl" type="saxon">
+                        <map:transform src="${resources-base}/xsl/persistentlogin.xsl" type="saxon">
                             <map:parameter name="persistent-login" value="${pl}"/>
                             <map:parameter name="remove-persistent-login"
                                 value="${remove-pl}"/>
@@ -103,7 +103,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regexp">
-                <map:generate type="directory" src="${live-base}/content/{1}">
+                <map:generate type="directory" src="${content-base}/{1}">
                     <map:parameter name="depth" value="1"/>
                     <map:parameter name="dateFormat" value="EEE, d MMM yyyy HH:mm:ss Z"/>
                 </map:generate>
@@ -114,7 +114,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform src="context://xsl/file-info.xsl" type="saxon">
+                        <map:transform src="${resources-base}/xsl/file-info.xsl" type="saxon">
                             <map:parameter name="file" value="{2}"/>
                         </map:transform>
                     </map:otherwise>
@@ -128,7 +128,7 @@
                         <map:transform src="xsl/ncbi-rss2html.xsl" type="saxon"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
+                        <map:transform src="${resources-base}/xsl/ncbi-rss2html.xsl" type="saxon"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -142,7 +142,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon">
+                        <map:transform src="${resources-base}/xsl/ncbi-rss2html.xsl" type="saxon">
                             <map:parameter name="format" value="brief"/>
                         </map:transform>
                     </map:otherwise>
@@ -163,7 +163,7 @@
                             <map:transform type="saxon" src="xsl/individual-faq.xsl>"/>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/individual-faq.xsl"/>
+                            <map:transform type="saxon" src="${resources-base}/xsl/individual-faq.xsl"/>
                         </map:otherwise>
                     </map:select>
                     <map:transform type="xinclude"/>
@@ -177,7 +177,7 @@
                             <map:transform type="saxon" src="xsl/category-faq.xsl"/>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/category-faq.xsl"/>
+                            <map:transform type="saxon" src="${resources-base}/xsl/category-faq.xsl"/>
                         </map:otherwise>
                     </map:select>
                     <map:transform type="xinclude"/>
@@ -193,7 +193,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
+                        <map:transform type="saxon" src="${resources-base}/xsl/faq-category-list.xsl">
                             <map:parameter name="category" value="{1}"/>
                         </map:transform>
                     </map:otherwise>
@@ -205,11 +205,11 @@
                     <map:when test="resources/templates/{1}.xml">
                         <map:generate type="file" src="resources/templates/{1}.xml"/>
                     </map:when>
-                    <map:when test="context://resources/templates/{1}.xml">
-                        <map:generate type="file" src="context://resources/templates/{1}.xml"/>
+                    <map:when test="${resources-base}/resources/templates/{1}.xml">
+                        <map:generate type="file" src="${resources-base}/resources/templates/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="context://resources/templates/template.xml"/>
+                        <map:generate type="file" src="${resources-base}/resources/templates/template.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -221,7 +221,7 @@
                     </map:when>
                     <map:otherwise>
                         <map:generate type="html"
-                            src="${live-base}/content/services/liaisons.html"/>
+                            src="${content-base}/services/liaisons.html"/>
                     </map:otherwise>
                 </map:select>
                 <map:select type="resource-exists">
@@ -231,7 +231,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/liaisons.xsl">
+                        <map:transform type="saxon" src="${resources-base}/xsl/liaisons.xsl">
                             <map:parameter name="liaison" value="${liaison}"/>
                         </map:transform>
                     </map:otherwise>
@@ -242,7 +242,7 @@
                         <map:transform type="saxon" src="xsl/rss2html.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
+                        <map:transform type="saxon" src="${resources-base}/xsl/rss2html.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -253,7 +253,7 @@
                         <map:generate type="html" src="content/{1}"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="html" src="${live-base}/content/{1}"/>
+                        <map:generate type="html" src="${content-base}/{1}"/>
                     </map:otherwise>
                 </map:select>
                 <map:transform type="xinclude"/>
@@ -262,7 +262,7 @@
                         <map:transform type="saxon" src="xsl/rss2html.xsl"/>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
+                        <map:transform type="saxon" src="${resources-base}/xsl/rss2html.xsl"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

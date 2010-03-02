@@ -29,7 +29,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
+                        <map:transform type="saxon" src="${resources-base}/xsl/eresources-rss.xsl">
                             <map:parameter name="query" value="${query}"/>
                             <map:parameter name="type" value="${type}"/>
                             <map:parameter name="mode" value="search"/>
@@ -48,7 +48,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
+                        <map:transform type="saxon" src="${resources-base}/xsl/eresources-rss.xsl">
                             <map:parameter name="alpha" value="${alpha}"/>
                             <map:parameter name="type" value="${type}"/>
                         </map:transform>
@@ -66,7 +66,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/eresources-rss.xsl">
+                        <map:transform type="saxon" src="${resources-base}/xsl/eresources-rss.xsl">
                             <map:parameter name="mesh" value="${mesh}"/>
                             <map:parameter name="type" value="${type}"/>
                         </map:transform>
@@ -80,7 +80,7 @@
                         <map:generate type="file" src="content/rss/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="${live-base}/content/rss/{1}.xml"/>
+                        <map:generate type="file" src="${content-base}/rss/{1}.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -97,7 +97,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform src="context://xsl/page2rss.xsl" type="saxon">
+                        <map:transform src="${resources-base}/xsl/page2rss.xsl" type="saxon">
                             <map:parameter name="page" value="${page}"/>
                         </map:transform>
                     </map:otherwise>

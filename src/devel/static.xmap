@@ -10,7 +10,7 @@
                         <map:read type="resource" src="resources/images/{1}"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="context://resources/images/{1}"/>
+                        <map:read type="resource" src="${resources-base}/resources/images/{1}"/>
                     </map:otherwise>
                 </map:select>
             </map:match>
@@ -24,7 +24,7 @@
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="txt-resource" src="context://resources/css/{1}.css">
+                        <map:read type="txt-resource" src="${resources-base}/resources/css/{1}.css">
                             <map:parameter name="path" value="${base-path}/your-sunetid"
                             />
                         </map:read>
@@ -39,7 +39,7 @@
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="txt-resource" src="context://javascript/{1}.js">
+                        <map:read type="txt-resource" src="${resources-base}/javascript/{1}.js">
                             <map:parameter name="path" value="/your-sunetid"/>
                         </map:read>
                     </map:otherwise>
@@ -53,7 +53,7 @@
                         </map:read>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="${live-base}/content/{1}.pdf">
+                        <map:read type="resource" src="${content-base}/{1}.pdf">
                             <map:parameter name="byte-ranges" value="false"/>
                         </map:read>
                     </map:otherwise>
@@ -65,7 +65,7 @@
                         <map:read type="resource" src="content/{1}"/>
                     </map:when>
                     <map:otherwise>
-                        <map:read type="resource" src="${live-base}/content/{1}"/>
+                        <map:read type="resource" src="${content-base}/{1}"/>
                     </map:otherwise>
                 </map:select>
             </map:match>

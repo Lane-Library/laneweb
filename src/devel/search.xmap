@@ -30,7 +30,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-facets.xsl">
+                            <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
                                 <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
@@ -44,7 +44,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                            <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
                                 <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
@@ -71,7 +71,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-facets.xsl">
+                            <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
                                 <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
@@ -85,7 +85,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                            <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
                                 <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
@@ -110,7 +110,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-facets.xsl">
+                            <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
                                 <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
@@ -124,7 +124,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                            <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
                                 <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
@@ -149,7 +149,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-facets.xsl">
+                            <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
                                 <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
@@ -163,7 +163,7 @@
                             </map:transform>
                         </map:when>
                         <map:otherwise>
-                            <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                            <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
                                 <map:parameter name="query" value="${query}"/>
                                 <map:parameter name="source" value="${source}"/>
                             </map:transform>
@@ -172,7 +172,7 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search.html" type="wildcard">
-                    <map:generate type="html" src="${live-base}/content/error.html"/>
+                    <map:generate type="html" src="${content-base}/error.html"/>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
@@ -191,7 +191,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/search-specialty.xsl">
+                        <map:transform type="saxon" src="${resources-base}/xsl/search-specialty.xsl">
                             <map:parameter name="query" value="${query}"/>
                             <map:parameter name="request-uri" value="${request-uri}"/>
                             <map:parameter name="source" value="${source}"/>
@@ -213,7 +213,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/search-facets.xsl">
+                        <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
                             <map:parameter name="query" value="${query}"/>
                             <map:parameter name="source" value="${source}"/>
                         </map:transform>
@@ -226,7 +226,7 @@
                         </map:transform>
                     </map:when>
                     <map:otherwise>
-                        <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                        <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
                             <map:parameter name="query" value="${query}"/>
                         </map:transform>
                     </map:otherwise>
@@ -240,7 +240,7 @@
                         <map:generate src="content/{1}" type="html"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate src="${live-base}/content/{1}" type="html"/>
+                        <map:generate src="${content-base}/{1}" type="html"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>

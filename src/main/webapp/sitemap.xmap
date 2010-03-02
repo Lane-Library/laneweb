@@ -5,7 +5,7 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="stage/**" type="wildcard">
-                <map:mount uri-prefix="stage" check-reload="no" src="context://stage/stage.xmap"/>
+                <map:mount uri-prefix="stage" check-reload="no" src="${resources-base}/stage/stage.xmap"/>
             </map:match>
             <map:match pattern="ceyates/**" type="wildcard">
                 <map:mount uri-prefix="ceyates" check-reload="yes"
@@ -89,8 +89,8 @@
                 </map:act>
             </map:match>
             <map:match pattern="cookiesFetch.html" type="wildcard">
-                <map:generate type="file" src="${live-base}/content/cookiesFetch.html"/>
-                <map:transform type="saxon" src="context://xsl/cookiesFetch.xsl">
+                <map:generate type="file" src="${content-base}/cookiesFetch.html"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/cookiesFetch.xsl">
                     <map:parameter name="sunetid" value="${sunetid}"/>
                     <map:parameter name="ticket" value="${ticket}"/>
                     <map:parameter name="proxy-links" value="${proxy-links}"/>
@@ -102,7 +102,7 @@
             </map:match>
             <map:match pattern="postMethodHelper.html" type="wildcard">
                 <map:generate type="request"/>
-                <map:transform type="saxon" src="context://xsl/postMethodHelper.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/postMethodHelper.xsl">
                     <map:parameter name="sunetid" value="${sunetid}"/>
                     <map:parameter name="ticket" value="${ticket}"/>
                     <map:parameter name="proxy-links" value="${proxy-links}"/>
@@ -112,7 +112,7 @@
             <!-- used for tracking user IPGroup in interfaces external to laneweb (catalog, elane) -->
             <map:match pattern="ipGroupFetch" type="wildcard">
                 <map:generate type="request"/>
-                <map:transform type="saxon" src="context://xsl/ipGroupFetch.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/ipGroupFetch.xsl">
                     <map:parameter name="ipgroup" value="${ipgroup}"/>
                     <map:parameter name="callback" value="${callback}"/>
                 </map:transform>
@@ -125,7 +125,7 @@
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
                 <map:transform type="html-cme-links"/>
-                <map:transform type="saxon" src="context://xsl/laneweb.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
                     <map:parameter name="request-uri" value="${request-uri}"/>
                     <map:parameter name="base-path" value="${base-path}"/>
                     <map:parameter name="query-string" value="${query-string}"/>
@@ -152,7 +152,7 @@
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
                 <map:transform type="html-cme-links"/>
-                <map:transform type="saxon" src="context://xsl/laneweb.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
                     <map:parameter name="request-uri" value="${request-uri}"/>
                     <map:parameter name="base-path" value="${base-path}"/>
                     <map:parameter name="query-string" value="${query-string}"/>
@@ -177,7 +177,7 @@
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="**.xml" type="wildcard">
-                <map:generate type="file" src="${live-base}/content/{1}.xml"/>
+                <map:generate type="file" src="${content-base}/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="_vti**" type="wildcard">
@@ -201,7 +201,7 @@
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
                 <map:transform type="html-cme-links"/>
-                <map:transform type="saxon" src="context://xsl/laneweb.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
                     <map:parameter name="request-uri" value="${request-uri}"/>
                     <map:parameter name="base-path" value="${base-path}"/>
                     <map:parameter name="query-string" value="${query-string}"/>

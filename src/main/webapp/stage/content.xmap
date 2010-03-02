@@ -7,24 +7,24 @@
         <map:pipeline type="noncaching">
             <map:match pattern="eresources/**" type="wildcard">
                 <map:mount uri-prefix="eresources" check-reload="no"
-                    src="context://stage/eresources.xmap"/>
+                    src="${resources-base}/stage/eresources.xmap"/>
             </map:match>
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="no"
-                    src="context://stage/applications.xmap"/>
+                    src="${resources-base}/stage/applications.xmap"/>
             </map:match>
             <map:match pattern="bassett/**" type="wildcard">
                 <map:mount uri-prefix="bassett" check-reload="yes"
-                    src="context://stage/bassett.xmap"/>
+                    src="${resources-base}/stage/bassett.xmap"/>
             </map:match>
             <map:match pattern="rss/**" type="wildcard">
-                <map:mount uri-prefix="rss" check-reload="yes" src="context://stage/rss.xmap"/>
+                <map:mount uri-prefix="rss" check-reload="yes" src="${resources-base}/stage/rss.xmap"/>
             </map:match>
 
             <map:match pattern="biomed-resources/(.+)browse.html" type="regexp">
                 <map:generate type="html" src="${stage-base}/content/biomed-resources/{1}browse.html"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
                     <map:parameter name="query-string" value="${query-string}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
@@ -43,7 +43,7 @@
             </map:match>
             <map:match pattern="random/**" type="wildcard">
                 <map:generate type="file" src="{1}"/>
-                <map:transform type="saxon" src="context://xsl/random.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/random.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- TODO: deprecate these redirected urls -->
@@ -56,7 +56,7 @@
             <map:match pattern="**persistentlogin.html" type="wildcard">
                 <map:generate type="html"
                     src="${stage-base}/content/secure/persistentlogin.html"/>
-                <map:transform src="context://xsl/persistentlogin.xsl" type="saxon">
+                <map:transform src="${resources-base}/xsl/persistentlogin.xsl" type="saxon">
                     <map:parameter name="persistent-login" value="${pl}"/>
                     <map:parameter name="remove-persistent-login"
                         value="${remove-pl}"/>
@@ -67,12 +67,12 @@
             </map:match>
             <map:match pattern="ncbi-rss2html/**" type="wildcard">
                 <map:generate type="file" src="{1}"/>
-                <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon"/>
+                <map:transform src="${resources-base}/xsl/ncbi-rss2html.xsl" type="saxon"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ncbi-rss2html-brief/**" type="wildcard">
                 <map:generate type="file" src="{1}"/>
-                <map:transform src="context://xsl/ncbi-rss2html.xsl" type="saxon">
+                <map:transform src="${resources-base}/xsl/ncbi-rss2html.xsl" type="saxon">
                     <map:parameter name="format" value="brief"/>
                 </map:transform>
                 <map:serialize type="xml"/>
@@ -87,7 +87,7 @@
                     <map:parameter name="depth" value="1"/>
                     <map:parameter name="dateFormat" value="EEE, d MMM yyyy HH:mm:ss Z"/>
                 </map:generate>
-                <map:transform src="context://xsl/file-info.xsl" type="saxon">
+                <map:transform src="${resources-base}/xsl/file-info.xsl" type="saxon">
                     <map:parameter name="file" value="{2}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
@@ -102,7 +102,7 @@
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="${stage-base}/content/secure/{1}"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
@@ -111,32 +111,32 @@
                 <map:match type="regex-parameter" pattern="_?(\d.+)">
                     <map:parameter name="parameter-name" value="id"/>
                     <map:generate type="html" src="${medblog-base}/lane-faq/archives/{1}.xml"/>
-                    <map:transform type="saxon" src="context://xsl/individual-faq.xsl"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/individual-faq.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match type="regex-parameter" pattern="(.+)">
                     <map:parameter name="parameter-name" value="category"/>
                     <map:generate type="html" src="${medblog-base}/lane-faq/archives/{1}.xml"/>
-                    <map:transform type="saxon" src="context://xsl/category-faq.xsl"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/category-faq.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
             <map:match pattern="faq-category-list/*" type="wildcard">
                 <map:generate type="html" src="${medblog-base}/lane-faq/archives/{1}.xml"/>
-                <map:transform type="saxon" src="context://xsl/faq-category-list.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/faq-category-list.xsl">
                     <map:parameter name="category" value="{1}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="templates/**.xml" type="wildcard">
                 <map:select type="resource-exists">
-                    <map:when test="context://resources/templates/{1}.xml">
-                        <map:generate type="file" src="context://resources/templates/{1}.xml"/>
+                    <map:when test="${resources-base}/resources/templates/{1}.xml">
+                        <map:generate type="file" src="${resources-base}/resources/templates/{1}.xml"/>
                     </map:when>
                     <map:otherwise>
-                        <map:generate type="file" src="context://resources/templates/template.xml"/>
+                        <map:generate type="file" src="${resources-base}/resources/templates/template.xml"/>
                     </map:otherwise>
                 </map:select>
                 <map:serialize type="xml"/>
@@ -145,22 +145,22 @@
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="${stage-base}/content/error.html"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/rss2html.xsl"/>
                 <map:serialize type="xml" status-code="403"/>
             </map:match>
             <map:match type="wildcard" pattern="services/liaisons.html">
                 <map:generate type="html" src="${stage-base}/content/services/liaisons.html"/>
-                <map:transform type="saxon" src="context://xsl/liaisons.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/liaisons.xsl">
                     <map:parameter name="liaison" value="${liaison}"/>
                 </map:transform>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="**" type="wildcard">
                 <map:generate type="html" src="${stage-base}/content/{1}"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="context://xsl/rss2html.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/rss2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>

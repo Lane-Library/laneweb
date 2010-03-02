@@ -116,6 +116,10 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         addToModel("stage-base", this.servletContext.getAttribute("laneweb.context.stage-base"), model);
         addToModel("medblog-base", this.servletContext.getAttribute("laneweb.context.medblog-base"), model);
         addToModel("version", this.servletContext.getAttribute("laneweb.context.version"), model);
+        model.put("content-base", (this.servletContext.getAttribute("laneweb.context.live-base").toString() + "/content/"));
+        model.put("resources-base", this.servletContext.getRealPath("/"));
+        model.put("default-content", model.get("content-base"));
+        model.put("default-resources", model.get("resources-base"));
         return model;
     }
 

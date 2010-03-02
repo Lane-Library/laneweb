@@ -10,21 +10,21 @@
         <map:pipeline type="caching">
             <map:parameter name="expires" value="access plus 31 days"/>
             <map:match pattern="images/**" type="wildcard">
-                <map:read type="resource" src="context://resources/images/{1}"/>
+                <map:read type="resource" src="${resources-base}/resources/images/{1}"/>
             </map:match>
             <map:match pattern="favicon.ico" type="wildcard">
-                <map:read type="resource" src="context://resources/images/favicon.ico"/>
+                <map:read type="resource" src="${resources-base}/resources/images/favicon.ico"/>
             </map:match>
             <!-- first wildcard will be version for local css and javascript -->
             <map:match pattern="style/*/**.css" type="wildcard">
-                <map:read type="txt-resource" src="context://resources/css/{2}.css"/>
+                <map:read type="txt-resource" src="${resources-base}/resources/css/{2}.css"/>
             </map:match>
             <map:match pattern="javascript/*/*.js" type="wildcard">
-                <map:read type="txt-resource" src="context://javascript/{2}.js"/>
+                <map:read type="txt-resource" src="${resources-base}/javascript/{2}.js"/>
             </map:match>
             <!-- cocoon reader range handling is broken so don't do it for pdfs where it matters most -->
             <map:match pattern="**.pdf" type="wildcard">
-                <map:read type="resource" src="${live-base}/content/{1}.pdf">
+                <map:read type="resource" src="${content-base}/{1}.pdf">
                     <map:parameter name="byte-ranges" value="false"/>
                 </map:read>
             </map:match>
@@ -33,7 +33,7 @@
                 <map:read type="resource" src="${live-base}/resources/images/favicon.ico"/>
             </map:match>
             <map:match pattern="**" type="wildcard">
-                <map:read type="resource" src="${live-base}/content/{1}"/>
+                <map:read type="resource" src="${content-base}/{1}"/>
             </map:match>
             <!--<map:handle-errors>
                 <map:generate type="file" src="notfound.xml"/>

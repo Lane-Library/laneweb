@@ -15,6 +15,8 @@ import edu.stanford.irt.laneweb.model.ModelAware;
 
 public abstract class AbstractSitemapModelComponent implements SitemapModelComponent, ModelAware {
     
+    private static final String ALT_SOURCE = "alt-src";
+    
     protected Model model;
     
     protected Map<String, String> parameterMap;
@@ -33,6 +35,13 @@ public abstract class AbstractSitemapModelComponent implements SitemapModelCompo
                 this.source = resolver.resolveURI(src);
             } catch (IOException e) {
                 throw new IllegalArgumentException(e);
+            }
+            if (!this.source.exists() && this.parameterMap.containsKey(ALT_SOURCE)) {
+                try {
+                    this.source = resolver.resolveURI(this.parameterMap.get(ALT_SOURCE));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
         initialize();

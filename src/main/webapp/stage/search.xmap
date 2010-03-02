@@ -29,11 +29,11 @@
                             src="cocoon:/cached/search/articles/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="context://xsl/search-facets.xsl">
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
                         <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
-                    <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
                         <map:parameter name="query" value="${query}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
@@ -50,11 +50,11 @@
                             src="cocoon:/cached/search/catalog/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="context://xsl/search-facets.xsl">
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
                         <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
-                    <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
                         <map:parameter name="query" value="${query}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
@@ -68,11 +68,11 @@
                             src="cocoon:/cached/search/clinical/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="context://xsl/search-facets.xsl">
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
                         <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
-                    <map:transform type="saxon" src="context://xsl/search-post.xsl">
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl">
                         <map:parameter name="query" value="${query}"/>
                     </map:transform>
                     <map:serialize type="xml"/>
@@ -87,7 +87,7 @@
                             src="cocoon:/search/specialty/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="context://xsl/search-facets.xsl">
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
                         <map:parameter name="query" value="${query}"/>
                         <map:parameter name="source" value="${source}"/>
                     </map:transform>
@@ -105,7 +105,7 @@
                     <map:part
                         src="cocoon:/cached/search/specialty/{1}.html"/>
                 </map:aggregate>
-                <map:transform type="saxon" src="context://xsl/search-specialty.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/search-specialty.xsl">
                     <map:parameter name="query" value="${query}"/>
                     <map:parameter name="request-uri" value="${request-uri}"/>
                     <map:parameter name="source" value="${source}"/>
@@ -117,11 +117,11 @@
             <map:match pattern="search/*/*.html" type="wildcard">
                 <map:generate src="cocoon:/cached/search/{1}/{2}.html" type="file"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="context://xsl/search-facets.xsl">
+                <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl">
                     <map:parameter name="query" value="${query}"/>
                     <map:parameter name="source" value="${source}"/>
                 </map:transform>
-                <map:transform type="saxon" src="context://xsl/search-post.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- in live search.xmap this is a caching pipeline, thus the name, needed here for html generator -->
