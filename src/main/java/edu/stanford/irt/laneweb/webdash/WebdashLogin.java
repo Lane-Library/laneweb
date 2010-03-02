@@ -34,7 +34,7 @@ public class WebdashLogin {
         if (null == nonce) {
             throw new IllegalArgumentException("null nonce");
         }
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
         try {
             String encodedId = encodeParameter(sunetId);
             String mail = encodeParameter(sunetId.concat("@stanford.edu"));
@@ -79,7 +79,7 @@ public class WebdashLogin {
     private String getToken(final String string) throws UnsupportedEncodingException {
         byte[] utf8 = string.getBytes("UTF-8");
         byte[] bytes = this.mac.doFinal(utf8);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (byte element : bytes) {
             sb.append(Integer.toHexString((element & 0xf0) >> 4) + Integer.toHexString(element & 0x0f));
         }
