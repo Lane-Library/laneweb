@@ -176,7 +176,7 @@
             <version>0.7</version>
             <inherited>false</inherited>
             <configuration>
-               <jsDir>src/main/webapp/javascript</jsDir>
+               <jsDir>src/main/webapp/resources/javascript</jsDir>
                <excludes>**/swfobject.js</excludes>
             </configuration>
             <reportSets>
@@ -446,13 +446,13 @@
       <dependency>
          <artifactId>saxon</artifactId>
          <groupId>net.sf.saxon</groupId>
-         <version>9.1.0.7</version>
+         <version>9.1.0.8</version>
          <scope>runtime</scope>
       </dependency>
       <dependency>
          <artifactId>saxon-dom</artifactId>
          <groupId>net.sf.saxon</groupId>
-         <version>9.1.0.7</version>
+         <version>9.1.0.8</version>
          <scope>runtime</scope>
       </dependency>
       <dependency>
