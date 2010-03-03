@@ -90,8 +90,8 @@ LANE.search = LANE.search ||  function() {
                 o.setSearchSource(elm.id+'-all');
                 // if this is not already active tab and there's a form value, submit search
                 if(!alreadyActive && form.q.value && form.q.value !== initialText){
-                    o.startSearch();
                     o.submitSearch();
+                    form.submit();
                     return false;
                 }
                 o.setInitialText();
