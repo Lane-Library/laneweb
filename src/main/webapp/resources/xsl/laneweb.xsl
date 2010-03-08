@@ -8,12 +8,12 @@
         elements="h:html h:head h:body h:div h:p h:form h:map h:select h:table h:tr h:td h:ul h:li"/>
 
     <!-- ===========================  PARAMETERS ========================= -->
-    <!-- the template parameter from the request -->
-    <xsl:param name="template"/>
     <!-- the request-uri ( not including parameters ) -->
     <xsl:param name="request-uri"/>
+    
     <!-- the base-path parameter ( i.e. the base url of the webapp ) -->
     <xsl:param name="base-path"/>
+    
     <!-- the query part of the request -->
     <xsl:param name="query-string"/>
 
@@ -42,51 +42,23 @@
     
 
     <!-- ==========================  VARIABLES  ========================== -->
-    <!-- the default template -->
-    <xsl:variable name="default-template" select="'template'"/>
-    <!-- the requested template -->
-    <xsl:variable name="request-template" select="$template"/>
-    <!-- the template that will be used in the response -->
-    <xsl:variable name="response-template">
-        <xsl:choose>
-            <xsl:when test="$request-template = ''">
-                <xsl:value-of select="$default-template"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="$request-template"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-    <!-- whether or not the response template is the default template -->
-    <xsl:variable name="template-is-default" select="$response-template = $default-template"/>
-    <!-- the template document -->
-    <xsl:variable name="template-document" select="/*/h:html[3]"/>
+    
     <!-- the root node of the requested content document -->
     <xsl:variable name="source-doc" select="/*/h:html[1]"/>
+    
     <!-- the sitemap document -->
     <xsl:variable name="sitemap" select="/*/h:html[2]"/>
+    
+    <!-- the template document -->
+    <xsl:variable name="template" select="/*/h:html[3]"/>
     
     <xsl:variable name="path">
         <xsl:value-of select="substring($request-uri,string-length($base-path) + 1)"/>
     </xsl:variable>
 
-    <xsl:variable name="search-terms">
-        <xsl:choose>
-            <xsl:when test="$query">
-                <xsl:value-of select="$query"/>
-            </xsl:when>
-        </xsl:choose>
-    </xsl:variable>
-
-    <xsl:variable name="regex-search-terms">
+    <xsl:variable name="regex-query">
         <xsl:if test="$query">
             <xsl:value-of select="replace($query,'(\\|\$)','\\$1')"/>
-        </xsl:if>
-    </xsl:variable>
-    
-    <xsl:variable name="uri-encoded-search-terms">
-        <xsl:if test="$query">
-            <xsl:value-of select="encode-for-uri($query)"/>
         </xsl:if>
     </xsl:variable>
     
@@ -133,9 +105,10 @@
     <!-- root template applies templates on the template document -->
     <xsl:template match="/">
         <xsl:choose>
-            <xsl:when test="$template-document">
-                <xsl:apply-templates select="$template-document"/>
+            <xsl:when test="$template">
+                <xsl:apply-templates select="$template"/>
             </xsl:when>
+            <!-- when there is not a template (ie the request is for /plain/**.html) process whole document -->
             <xsl:otherwise>
                 <xsl:apply-templates select="child::node()"/>
             </xsl:otherwise>
@@ -173,22 +146,6 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-
-    <!-- persistent login  -->
-    <xsl:template match="h:h3[@id='pl']">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:choose>
-                <xsl:when test="$sunetid and $proxy-links = 'true'">
-                    <xsl:apply-templates select="h:span[@id='pl-login']/node()"/>
-                </xsl:when>
-                <xsl:when test="$proxy-links = 'true'">
-                    <xsl:apply-templates select="h:span[@id='pl-logout']/node()"/>
-                </xsl:when>
-                <xsl:otherwise>&#160;</xsl:otherwise>
-            </xsl:choose>
-        </xsl:copy>
-    </xsl:template>
    
     <xsl:template match="h:span[@id='user-name']">
         <xsl:choose>
@@ -200,13 +157,12 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-    <!-- END persistent login  -->
 
     <xsl:template match="comment()">
         <xsl:copy-of select="."/>
     </xsl:template>
 
-    <!-- xincludes often include html/head and html/body -->
+    <!-- xincludes often include html/head and html/body, this ignores them-->
     <xsl:template match="h:html[ancestor::h:html]">
         <xsl:apply-templates select="h:body/child::node()"/>
     </xsl:template>
@@ -376,12 +332,12 @@
             -->
             <xsl:when test="contains(., '://') and contains(.,'{keywords}')">
                 <xsl:attribute name="href">
-                    <xsl:value-of select="replace(.,'\{keywords\}',$regex-search-terms)"/>
+                    <xsl:value-of select="replace(.,'\{keywords\}',$regex-query)"/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:when test="contains(., '://') and contains(.,'{search-terms}')">
                 <xsl:attribute name="href">
-                    <xsl:value-of select="replace(.,'\{search-terms\}',$regex-search-terms)"/>
+                    <xsl:value-of select="replace(.,'\{search-terms\}',$regex-query)"/>
                 </xsl:attribute>
             </xsl:when>
             <xsl:when test="starts-with(.,'http://') and starts-with($path,'/secure')">
@@ -485,9 +441,9 @@
     <xsl:template match="h:input[@id='searchTerms']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:if test="$search-terms != ''">
+            <xsl:if test="$query != ''">
                 <xsl:attribute name="value">
-                    <xsl:value-of select="$search-terms"/>
+                    <xsl:value-of select="$query"/>
                 </xsl:attribute>
             </xsl:if>
         </xsl:copy>
@@ -667,15 +623,6 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="h:form[attribute::id='searchForm']">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()|child::node()"/>
-            <xsl:if test="not($template-is-default)">
-                <input type="hidden" name="template" value="{$response-template}"/>
-            </xsl:if>
-        </xsl:copy>
-    </xsl:template>
-
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 
 
@@ -683,44 +630,32 @@
     <xsl:template name="make-link">
         <xsl:param name="link"/>
         <xsl:param name="attr"/>
-        <xsl:variable name="param-string">
-            <xsl:if test="not(contains($link,'/secure/login.html')) and not($template-is-default)">
-                <xsl:choose>
-                    <xsl:when test="contains($link, '?')">&amp;</xsl:when>
-                    <xsl:otherwise>?</xsl:otherwise>
-                </xsl:choose>
-                <xsl:if test="not($template-is-default)">
-                    <xsl:text>template=</xsl:text>
-                    <xsl:value-of select="$response-template"/>
-                </xsl:if>
-            </xsl:if>
-        </xsl:variable>
         <xsl:attribute name="{$attr}">
+            <!-- prepend the base-path if it is an absolute link -->
             <xsl:if test="starts-with($link, '/')">
                 <xsl:value-of select="$base-path"/>
             </xsl:if>
+            <!-- replace keywords/search-terms TODO: unify this so only replaceing one thing -->
             <xsl:choose>
                 <xsl:when test="contains($link,'{keywords}')">
-                    <xsl:value-of select="replace($link,'\{keywords\}',$regex-search-terms)"/>
+                    <xsl:value-of select="replace($link,'\{keywords\}',$regex-query)"/>
                 </xsl:when>
                 <xsl:when test="contains($link,'%7Bkeywords%7D')">
-                    <xsl:value-of select="replace($link,'%7Bkeywords%7D',$regex-search-terms)"/>
+                    <xsl:value-of select="replace($link,'%7Bkeywords%7D',$regex-query)"/>
                 </xsl:when>
                 <xsl:when test="contains($link,'{search-terms}')">
-                    <xsl:value-of select="replace($link,'\{search-terms\}',$regex-search-terms)"/>
+                    <xsl:value-of select="replace($link,'\{search-terms\}',$regex-query)"/>
                 </xsl:when>
                 <xsl:when test="contains($link,'%7Bsearch-terms%7D')">
-                    <xsl:value-of select="replace($link,'%7Bsearch-terms%7D',$regex-search-terms)"/>
+                    <xsl:value-of select="replace($link,'%7Bsearch-terms%7D',$regex-query)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="$link"/>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="not($param-string) and ends-with($link,'/')">
+            <!-- replace links ending with / so they end with /index.html -->
+            <xsl:if test="ends-with($link,'/')">
                 <xsl:text>index.html</xsl:text>
-            </xsl:if>
-            <xsl:if test="name(..) != 'link' and name(..) != 'img' and not(starts-with($link,'#'))">
-                <xsl:value-of select="$param-string"/>
             </xsl:if>
         </xsl:attribute>
     </xsl:template>
