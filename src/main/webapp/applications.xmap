@@ -229,7 +229,6 @@
                     <map:part src="cocoon:/cache/search/specialty/specialty-pharmacy.html"/>
                     <map:part src="cocoon:/cache/search/specialty/specialty-pulmonary.html"/>
                 </map:aggregate>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/temp-engine-xinclude-fix.xsl"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
