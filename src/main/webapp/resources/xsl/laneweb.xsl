@@ -111,7 +111,6 @@
             </xsl:when>
             <xsl:when test="starts-with($path,'/sumc-specialties/consumehealth')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/sumc-specialties/clinical')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/sumc-specialties/globalhealth')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/sumc-specialties/heartctrnurse')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/sumc-specialties/hematology')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/sumc-specialties/multiculhealth')">clinical</xsl:when>
