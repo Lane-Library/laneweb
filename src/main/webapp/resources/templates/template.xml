@@ -354,7 +354,7 @@
                         <span style="padding:10px;"> No <input type="radio" name="used-search"
                                 value="no"/>
                         </span>
-                        <p><a href="/services/laneconnexSearch.html" rel="popup standard">How Does Our Search
+                        <p><a href="/services/laneconnexSearch.html" target="_blank">How Does Our Search
                             Work?</a></p>
                         <p>Enter email if you want us to respond (optional) <input size="20"
                                 id="email" name="email"/>
