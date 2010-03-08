@@ -222,6 +222,7 @@
                     <map:part src="cocoon:/cache/search/specialty/specialty-cardiology.html"/>
                     <map:part src="cocoon:/cache/search/specialty/specialty-clinical.html"/>
                     <map:part src="cocoon:/cache/search/specialty/specialty-emergency.html"/>
+                    <map:part src="cocoon:/cache/search/specialty/specialty-globalhealth.html"/>
                     <map:part src="cocoon:/cache/search/specialty/specialty-hematology.html"/>
                     <map:part src="cocoon:/cache/search/specialty/specialty-internal-medicine.html"/>
                     <map:part src="cocoon:/cache/search/specialty/specialty-pediatrics.html"/>

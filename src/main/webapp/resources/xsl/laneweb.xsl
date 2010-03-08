@@ -570,6 +570,7 @@
                 <xsl:when test="starts-with($request-uri,'/sumc-specialties/bioresearch')">specialty-bioresearch</xsl:when>
                 <xsl:when test="starts-with($request-uri,'/sumc-specialties/cardiology')">specialty-cardiology</xsl:when>
                 <xsl:when test="starts-with($request-uri,'/sumc-specialties/emergmed')">specialty-emergency"></xsl:when>
+                <xsl:when test="starts-with($request-uri,'/sumc-specialties/globalhealth')">specialty-globalhealth"></xsl:when>
                 <xsl:when test="starts-with($request-uri,'/sumc-specialties/hematology')">specialty-hematology</xsl:when>
                 <xsl:when test="starts-with($request-uri,'/sumc-specialties/internalmed')">specialty-internal-medicine</xsl:when>
                 <xsl:when test="starts-with($request-uri,'/sumc-specialties/pediatrics')">specialty-pediatrics</xsl:when>
