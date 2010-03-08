@@ -10,16 +10,16 @@ import javax.naming.spi.InitialContextFactory;
  */
 public class MockInitialContextFactory implements InitialContextFactory {
 
-    private static Context MOCK_CONTEXT = null;
+    private static Context mockContext = null;
 
     public static void setMockContext(final Context ctx) {
-        MOCK_CONTEXT = ctx;
+        mockContext = ctx;
     }
 
     public Context getInitialContext(final java.util.Hashtable<?, ?> environment) throws NamingException {
-        if (MOCK_CONTEXT == null) {
+        if (mockContext == null) {
             throw new IllegalStateException("mock context was not set.");
         }
-        return MOCK_CONTEXT;
+        return mockContext;
     }
 }
