@@ -23,7 +23,7 @@ public class ProxyCredentialAction extends AbstractAction {
             String basePath = this.model.getString(Model.BASE_PATH);
             result.put(PROXY_REDIRECT_KEY, basePath + "/secure/apps/proxy/credential?" + queryString);
         } else {
-            String ticket = this.model.getString(Model.TICKET);
+            Ticket ticket = this.model.getObject(Model.TICKET, Ticket.class);
             result.put(PROXY_REDIRECT_KEY, "http://laneproxy.stanford.edu/login?user=" + sunetid + "&ticket=" + ticket
                     + "&" + queryString);
         }
