@@ -12,19 +12,25 @@
             <map:match pattern="search/**" type="wildcard">
                 <!-- /apps/search/xml returns the xmlized search result -->
                 <map:match type="wildcard" pattern="search/xml">
-                     <map:generate type="search"/>
+                    <map:generate type="search"/>
+                    <map:transform type="search-cme-links"/>
+                    <map:transform type="search-proxy-links"/>
                      <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search/engine/xml/*" type="wildcard">
                     <map:generate type="search-engine">
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
+                    <map:transform type="search-cme-links"/>
+                    <map:transform type="search-proxy-links"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search/resource/xml/*" type="wildcard">
                     <map:generate type="search-resource">
                         <map:parameter name="resource-list" value="{1}"/>
                     </map:generate>
+                    <map:transform type="search-cme-links"/>
+                    <map:transform type="search-proxy-links"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- delete after next release (content will need change to search/content/html) -->
@@ -60,32 +66,6 @@
                     <map:generate type="search-resource"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search2json.xsl">
                         <!--<map:parameter name="content" value="${content}"/>-->
-                        <map:parameter name="content-to-display" value="5"/>
-                    </map:transform>
-                    <map:serialize type="text"/>
-                </map:match>
-                <!-- result with proxy links (if necessary) in xml format -->
-                <map:match pattern="search/proxy/xml" type="wildcard">
-                    <map:generate type="search"/>
-                    <map:transform type="search-cme-links"/>
-                    <map:transform type="search-proxy-links"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-               
-                <!-- result with proxy links (if necessary) in xml format -->
-                <map:match pattern="search/resource/proxy/xml" type="wildcard">
-                    <map:generate type="search-resource"/>
-                    <map:transform type="search-cme-links"/>
-                    <map:transform type="search-proxy-links"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-               
-                
-                <!-- result with proxy links (if necessary) in json format -->
-                <map:match pattern="search/proxy/json" type="wildcard">
-                    <map:generate type="file" src="cocoon:/search/resource/proxy/xml"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search2json.xsl">
-                        <map:parameter name="content" value="${content}"/>
                         <map:parameter name="content-to-display" value="5"/>
                     </map:transform>
                     <map:serialize type="text"/>

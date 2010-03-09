@@ -99,7 +99,7 @@
                 <map:match type="regex-parameter" pattern="^specialty-(.*)$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
-                        <map:part src="cocoon:/apps/search/proxy/xml"/>
+                        <map:part src="cocoon:/apps/search/xml"/>
                         <map:part src="cocoon:/cached/search/specialty.html"/>
                         <map:part
                             src="cocoon:/search/specialty/${source}.html"/>
@@ -121,7 +121,7 @@
             <!-- ajax requests for specialty results uses this, so does the aggregate in the specialty search match -->
             <map:match pattern="search/specialty/*.html" type="wildcard">
                 <map:aggregate element="doc">
-                    <map:part src="cocoon:/apps/search/proxy/xml"/>
+                    <map:part src="cocoon:/apps/search/xml"/>
                     <map:part
                         src="cocoon:/cached/search/specialty/{1}.html"/>
                 </map:aggregate>

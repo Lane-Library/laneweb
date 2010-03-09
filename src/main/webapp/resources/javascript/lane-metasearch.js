@@ -62,7 +62,7 @@
                 }
             },
             getSearchUrl : function(){
-                searchUrl = '/././apps/search/proxy/json?q=' + LANE.search.getEncodedSearchString();
+                searchUrl = '/././apps/search/json?q=' + LANE.search.getEncodedSearchString();
                 for ( y = 0; y < searchables.length; y++){
                     var add = true;
                     for (i = 0; i < uberEngines.length; i++){

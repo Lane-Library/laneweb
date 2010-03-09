@@ -9,7 +9,7 @@ if (LANE.search.getEncodedSearchString()) {
                 LANE.search.querymap = YAHOO.lang.JSON.parse(o.responseText);
                 if (LANE.search.querymap.resourceMap) {
                     LANE.search.querymap.getResultCounts = function(){
-                        var url = '/././apps/search/proxy/json?q=' + LANE.search.getEncodedSearchString(), i;
+                        var url = '/././apps/search/json?q=' + LANE.search.getEncodedSearchString(), i;
                         for (i = 0; i < LANE.search.querymap.resourceMap.resources.length; i++) {
                             if (!LANE.search.querymap.resourceMap.resources[i].status) {
                                 url += '&r=' + LANE.search.querymap.resourceMap.resources[i].id;
