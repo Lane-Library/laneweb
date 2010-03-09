@@ -32,6 +32,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
 
     private int contentResultLimit;
 
+    @SuppressWarnings("unchecked")
     protected void initialize() {
         super.initialize();
         this.engines = this.model.getObject(Model.ENGINES, Collection.class, Collections.<String>emptyList());
@@ -49,7 +50,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
     @Override
     public void generate() throws SAXException {
         XMLizableSearchResultSet mergedSearchResults = new XMLizableSearchResultSet(this.query);
-        mergedSearchResults.addAll(getContentResultList());
+        mergedSearchResults.addAll(getContentResultList(doSearch()));
         this.xmlConsumer.startDocument();
         mergedSearchResults.toSAX(this.xmlConsumer);
         this.xmlConsumer.endDocument();
@@ -63,11 +64,9 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
         this.contentResultLimit = contentResultLimit;
     }
     
-    protected Collection<ContentResultSearchResult> getContentResultList() {
+    protected Collection<ContentResultSearchResult> getContentResultList(Result result) {
         Collection<ContentResultSearchResult> contentResults = new LinkedList<ContentResultSearchResult>();
         Pattern queryTermPattern = QueryTermPattern.getPattern(this.query);
-        final SimpleQuery query = new SimpleQuery(this.query);
-        Result result = this.metaSearchManager.search(query, this.defaultTimeout, this.engines, true);
         for (Result engine : result.getChildren()) {
             Result parentResource = null;
             for (Result resource : engine.getChildren()) {
@@ -94,6 +93,6 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
 
     @Override
     protected Result doSearch() {
-        throw new UnsupportedOperationException();
+        return this.metaSearchManager.search(new SimpleQuery(this.query), this.defaultTimeout, this.engines, true);
     }
 }

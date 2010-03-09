@@ -29,6 +29,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
         return super.doSearch(engineToRun);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void initialize() {
         super.initialize();

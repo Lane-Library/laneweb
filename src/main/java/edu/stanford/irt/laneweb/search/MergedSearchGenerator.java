@@ -25,7 +25,7 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
     public void generate() throws SAXException {
         XMLizableSearchResultSet mergedSearchResults = new XMLizableSearchResultSet(this.query);
         mergedSearchResults.addAll(getEresourceList());
-        mergedSearchResults.addAll(getContentResultList());
+        mergedSearchResults.addAll(getContentResultList(doSearch()));
         this.xmlConsumer.startDocument();
         mergedSearchResults.toSAX(this.xmlConsumer);
         this.xmlConsumer.endDocument();
