@@ -303,7 +303,7 @@
       <dependency>
          <artifactId>nekohtml</artifactId>
          <groupId>net.sourceforge.nekohtml</groupId>
-         <version>1.9.11</version>
+         <version>1.9.14</version>
       </dependency>
       <dependency>
          <artifactId>cocoon-configuration-api</artifactId>
@@ -393,12 +393,12 @@
       <dependency>
          <artifactId>spring-aop</artifactId>
          <groupId>org.springframework</groupId>
-         <version>3.0.0.RELEASE</version>
+         <version>3.0.1.RELEASE</version>
       </dependency>
       <dependency>
          <artifactId>spring-web</artifactId>
          <groupId>org.springframework</groupId>
-         <version>3.0.0.RELEASE</version>
+         <version>3.0.1.RELEASE</version>
       </dependency>
       <dependency>
          <artifactId>spring-ldap-core</artifactId>
@@ -476,7 +476,7 @@
       <dependency>
          <artifactId>spring-tx</artifactId>
          <groupId>org.springframework</groupId>
-         <version>3.0.0.RELEASE</version>
+         <version>3.0.1.RELEASE</version>
          <scope>runtime</scope>
       </dependency>
       <dependency>
@@ -500,7 +500,7 @@
       <dependency>
          <artifactId>spring-test</artifactId>
          <groupId>org.springframework</groupId>
-         <version>3.0.0.RELEASE</version>
+         <version>3.0.1.RELEASE</version>
          <scope>test</scope>
       </dependency>
    </dependencies>
