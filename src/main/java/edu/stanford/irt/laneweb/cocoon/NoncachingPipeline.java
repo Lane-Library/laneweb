@@ -373,7 +373,7 @@ public class NoncachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             res.setDateHeader("Expires", System.currentTimeMillis() + expires);
             res.setHeader("Cache-Control", "max-age=" + expires/1000 + ", public");
             environment.getObjectModel().put(ObjectModelHelper.EXPIRES_OBJECT,
-                                             new Long(expires + System.currentTimeMillis()));
+                                             Long.valueOf(expires + System.currentTimeMillis()));
         }
 
         if (this.reader != null) {

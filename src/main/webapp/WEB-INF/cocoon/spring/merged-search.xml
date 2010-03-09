@@ -11,7 +11,7 @@
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
-        <property name="defaultMetasearchTimeout" value="20000"/>
+        <property name="defaultTimeout" value="20000"/>
         <property name="contentResultLimit" value="10"/>
     </bean>
     

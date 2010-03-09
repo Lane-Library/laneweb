@@ -63,7 +63,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
         this.contentResultLimit = contentResultLimit;
     }
     
-    private Collection<ContentResultSearchResult> getContentResultList() {
+    protected Collection<ContentResultSearchResult> getContentResultList() {
         Collection<ContentResultSearchResult> contentResults = new LinkedList<ContentResultSearchResult>();
         Pattern queryTermPattern = QueryTermPattern.getPattern(this.query);
         final SimpleQuery query = new SimpleQuery(this.query);

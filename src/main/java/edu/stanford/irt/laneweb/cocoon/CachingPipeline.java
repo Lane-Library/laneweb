@@ -519,7 +519,7 @@ public class CachingPipeline extends NoncachingPipeline {
                         // it means that the sitemap was modified, and the old expires value is not valid
                         // anymore.
                         if (expires != 0) {
-                            response.setExpires(new Long(expires + System.currentTimeMillis()));
+                            response.setExpires(Long.valueOf(expires + System.currentTimeMillis()));
                         } else {
                            response.setExpires(null);
                         }
@@ -527,7 +527,7 @@ public class CachingPipeline extends NoncachingPipeline {
                 } else {
                     // The response had no expires informations. See if it needs to be set (i.e. because the configuration has changed)
                     if (expires != 0) {
-                        response.setExpires(new Long(expires + System.currentTimeMillis()));
+                        response.setExpires(Long.valueOf(expires + System.currentTimeMillis()));
                     }
                 }
 
