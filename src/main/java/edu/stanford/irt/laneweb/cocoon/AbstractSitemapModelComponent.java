@@ -40,7 +40,7 @@ public abstract class AbstractSitemapModelComponent implements SitemapModelCompo
                 try {
                     this.source = resolver.resolveURI(this.parameterMap.get(ALT_SOURCE));
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    throw new IllegalStateException(e);
                 }
             }
         }

@@ -64,7 +64,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
                         }
                     }
                 } catch (InterruptedException ie) {
-                    throw new RuntimeException(ie);
+                    throw new IllegalStateException(ie);
                 }
             }
         }

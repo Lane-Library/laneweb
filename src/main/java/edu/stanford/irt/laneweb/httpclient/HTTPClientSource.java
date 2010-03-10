@@ -97,7 +97,7 @@ public class HTTPClientSource implements Source {
      *                if an error occurs
      */
     @SuppressWarnings("unchecked")
-    public HTTPClientSource(final String uri, final Map parameters, final HttpClient httpClient) throws Exception {
+    public HTTPClientSource(final String uri, final Map parameters, final HttpClient httpClient) {
         this.uri = uri;
         this.httpClient = httpClient;
     }

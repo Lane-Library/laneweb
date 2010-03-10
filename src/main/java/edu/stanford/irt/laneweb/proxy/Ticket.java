@@ -32,10 +32,8 @@ public class Ticket {
             this.creationTime = System.currentTimeMillis();
         } catch (UnsupportedEncodingException e) {
             // won't happen
-            throw new RuntimeException(e);
         } catch (NoSuchAlgorithmException e) {
             // won't happen
-            throw new RuntimeException(e);
         }
     }
 

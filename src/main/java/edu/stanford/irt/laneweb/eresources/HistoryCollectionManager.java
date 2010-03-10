@@ -414,7 +414,7 @@ public class HistoryCollectionManager implements CollectionManager {
                 result.put(rs.getString(1), Integer.valueOf(rs.getInt(2)));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);
@@ -466,7 +466,7 @@ public class HistoryCollectionManager implements CollectionManager {
             rs = stmt.executeQuery();
             return parseResultSet(rs);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);

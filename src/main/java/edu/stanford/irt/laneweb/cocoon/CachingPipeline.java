@@ -134,6 +134,7 @@ public class CachingPipeline extends NoncachingPipeline {
 
     /**
      * Set the Reader.
+     * @throws ProcessingException 
      */
     public void setReader(String role, String source, Parameters param,
                           String mimeType) throws ProcessingException {
@@ -249,16 +250,12 @@ public class CachingPipeline extends NoncachingPipeline {
             }
 
             // Write response out
-            try {
                 final OutputStream outputStream = environment.getOutputStream(0);
                 final byte[] content = this.cachedResponse.getResponse();
                 if (content.length > 0) {
                     environment.setContentLength(content.length);
                     outputStream.write(content);
                 }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
         } else {
             setMimeTypeForSerializer(environment);
 
@@ -334,14 +331,9 @@ public class CachingPipeline extends NoncachingPipeline {
 //            } catch (Exception e) {
 //                handleException(e);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             } catch (SAXException e) {
-                // TODO Auto-generated catch block
-                throw new RuntimeException(e);
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             } finally {
                 releaseLock(this.toCacheKey);
             }
@@ -895,8 +887,9 @@ public class CachingPipeline extends NoncachingPipeline {
 
     /**
     * Cache longest cacheable key
+     * @throws ProcessingException 
     */
-    protected CachedResponse cacheResults(Environment environment, OutputStream os)  throws Exception {
+    protected CachedResponse cacheResults(Environment environment, OutputStream os) throws ProcessingException {
         if (this.toCacheKey != null) {
             // See if there is an expires object for this resource.
             Long expiresObj = (Long) environment.getObjectModel().get(ObjectModelHelper.EXPIRES_OBJECT);

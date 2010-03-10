@@ -62,7 +62,7 @@ public class ProxyHostManager {
                 add("socrates.stanford.edu");
                 add("library.stanford.edu");
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             } finally {
                 JdbcUtils.closeResultSet(rs);
                 JdbcUtils.closeStatement(stmt);
@@ -89,12 +89,12 @@ public class ProxyHostManager {
                 this.proxyHosts.add(proxyHost);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } finally {
             try {
                 reader.close();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }
     }

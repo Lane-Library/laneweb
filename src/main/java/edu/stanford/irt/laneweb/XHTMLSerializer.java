@@ -31,7 +31,7 @@ public class XHTMLSerializer extends AbstractTextSerializer {
             this.setContentHandler(handler);
             this.setLexicalHandler(handler);
         } catch (TransformerException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 }

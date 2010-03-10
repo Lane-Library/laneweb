@@ -89,7 +89,7 @@ public class SitemapRequestHandler implements HttpRequestHandler {
             this.processor.process(environment);
             environment.commitResponse();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } finally {
             EnvironmentHelper.leaveProcessor();
         }

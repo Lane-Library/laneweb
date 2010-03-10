@@ -148,7 +148,7 @@ public class BassettCollectionManager {
             rs = stmt.executeQuery();
             result = parseCountResultSet(rs);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);
@@ -205,7 +205,7 @@ public class BassettCollectionManager {
             rs = stmt.executeQuery();
             result = parseResultSet(rs, withLegend);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);

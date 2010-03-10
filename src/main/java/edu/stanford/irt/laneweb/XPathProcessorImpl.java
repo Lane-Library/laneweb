@@ -80,7 +80,7 @@ public class XPathProcessorImpl implements XPathProcessor {
         try {
             return xpath.evaluate(str, node, returnType);
         } catch (XPathExpressionException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 }

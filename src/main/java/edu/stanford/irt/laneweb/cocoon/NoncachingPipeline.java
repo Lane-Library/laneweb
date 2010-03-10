@@ -261,22 +261,6 @@ public class NoncachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     }
 
     /**
-     * Sanity check
-     * @return true if the pipeline is 'sane', false otherwise.
-     */
-    protected boolean checkPipeline() {
-        if (this.generator == null && this.reader == null) {
-            return false;
-        }
-
-        if (this.generator != null && this.serializer == null) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Setup pipeline components.
      * @throws IOException 
      * @throws SAXException 
@@ -356,14 +340,9 @@ public class NoncachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             try {
                 preparePipeline(environment);
             } catch (SAXException e) {
-                // TODO Auto-generated catch block
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                throw new RuntimeException(e);
-            } catch (ParameterException e) {
-                // TODO Auto-generated catch block
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             }
         }
 
@@ -384,11 +363,9 @@ public class NoncachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             try {
                 return processReader(environment);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             } catch (SAXException e) {
-                // TODO Auto-generated catch block
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             }
         } else {
             // If this is an internal request, lastConsumer was reset!
@@ -400,11 +377,9 @@ public class NoncachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             try {
                 return processXMLPipeline(environment);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             } catch (SAXException e) {
-                // TODO Auto-generated catch block
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             }
         }
     }
@@ -416,13 +391,13 @@ public class NoncachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * @throws ParameterException 
      */
     protected void preparePipeline(Environment environment)
-    throws ProcessingException, SAXException, IOException, ParameterException {
-        if (!checkPipeline()) {
-            throw new ProcessingException("Attempted to process incomplete pipeline.");
+    throws ProcessingException, SAXException, IOException {
+        if ((this.generator == null && this.reader == null) || (this.generator != null && this.serializer == null)) {
+            throw new IllegalStateException("pipeline not complete");
         }
 
         if (this.prepared) {
-            throw new ProcessingException("Duplicate preparePipeline call caught.");
+            throw new IllegalStateException("Duplicate preparePipeline call caught.");
         }
 
         if (this.reader != null) {
@@ -446,14 +421,9 @@ public class NoncachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         } catch (ProcessingException e) {
             prepareInternalErrorHandler(environment, e);
         } catch (SAXException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
-        } catch (ParameterException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 
@@ -530,18 +500,14 @@ public class NoncachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * @throws ParameterException 
      */
     protected void setupReader(Environment environment)
-    throws ProcessingException, SAXException, IOException, ParameterException {
-//        try {
+    throws ProcessingException, SAXException, IOException {
             this.reader.setup(this.sourceResolver,environment.getObjectModel(),readerSource,readerParam);
 
             // set the expires parameter on the pipeline if the reader is configured with one
             if (readerParam.isParameter("expires")) {
                 // should this checking be done somewhere else??
-                this.expires = readerParam.getParameterAsLong("expires");
+                this.expires = readerParam.getParameterAsLong("expires", 0);
             }
-//        } catch (Exception e){
-//            handleException(e);
-//        }
     }
 
     /**
@@ -722,11 +688,9 @@ public class NoncachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             buffer = null;
             return processErrorHandler(environment, e, consumer);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } catch (SAXException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } finally {
             if (buffer != null) {
                 try {

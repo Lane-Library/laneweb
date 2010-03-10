@@ -61,7 +61,7 @@ public class EzproxyServersReader extends AbstractReader {
             }
             this.outputStream.write(SUL);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } finally {
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(stmt);

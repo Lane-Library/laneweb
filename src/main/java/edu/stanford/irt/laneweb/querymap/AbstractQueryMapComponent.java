@@ -56,10 +56,8 @@ public abstract class AbstractQueryMapComponent extends AbstractSitemapModelComp
                 this.resourceMaps = new StreamResourceMapping(new URL(mapURL).openStream());
                 this.descriptorWeights = new DescriptorWeightMap(new URL(weightURL).openStream());
                 this.abstractCount = Integer.parseInt(abstractCount);
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new IllegalStateException(e);
             }
         }
     }

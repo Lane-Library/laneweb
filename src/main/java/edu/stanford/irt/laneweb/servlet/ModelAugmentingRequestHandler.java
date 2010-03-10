@@ -112,7 +112,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
             try {
                 model.put("url-encoded-query", URLEncoder.encode(value, "UTF-8"));
             } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
+                //won't happen
             }
         } else if ("t".equals(name)) {
             model.put(Model.TYPE, value);

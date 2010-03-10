@@ -61,9 +61,9 @@ public class WebdashLogin {
             this.mac = Mac.getInstance(key.getAlgorithm());
             this.mac.init(key);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         } catch (InvalidKeyException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException(e);
         }
     }
 
