@@ -177,19 +177,7 @@
         <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"/>
     </bean>
 
-    <!--<bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
-        class="edu.stanford.irt.laneweb.cocoon.NoncachingPipeline"
-        scope="prototype">
-        <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
-    </bean>
-    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/caching"
-        class="edu.stanford.irt.laneweb.cocoon.CachingPipeline"
-        scope="prototype">
-        <property name="cache" ref="org.apache.cocoon.caching.Cache"/>
-        <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
-    </bean>
-    
-    <bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
+    <!--<bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
         class="org.apache.cocoon.sitemap.DefaultContentAggregator" scope="prototype"/>-->
 
 </beans>
