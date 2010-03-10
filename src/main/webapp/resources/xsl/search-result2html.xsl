@@ -3,14 +3,46 @@
     xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s"
     version="2.0">
-
+    
+    <xsl:param name="show"/>
 
     <xsl:variable name="search-terms">
         <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
 
+    <xsl:variable name="result-count">
+        <xsl:value-of select="count(//s:result)"/>
+    </xsl:variable>
+    
+    <xsl:variable name="current-set">
+        <xsl:choose>
+            <xsl:when test="$show">
+                <xsl:value-of select="$show"/>
+            </xsl:when>
+            <xsl:otherwise>0</xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    
+    <xsl:variable name="next-set">
+        <xsl:choose>
+            <xsl:when test="number($current-set) + 20 &lt; $result-count">
+                <xsl:value-of select="number($current-set) + 20"/>
+            </xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+    
+    <xsl:variable name="prev-set">
+        <xsl:choose>
+            <xsl:when test="number($current-set) - 20 >= 0">
+                <xsl:value-of select="number($current-set) - 20"/>
+            </xsl:when>
+            <xsl:otherwise>false</xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+        
     <!-- number of result titles to return per resource; not enforced here, only used for when to build "more" links -->
-    <xsl:variable name="resultLimit">10</xsl:variable>
+    <xsl:variable name="moreResultsLimit">10</xsl:variable>
 
     <xsl:template match="/">
         <html xmlns="http://www.w3.org/1999/xhtml">
@@ -19,8 +51,22 @@
             </head>
             <body>
                 <dl>
-                    <xsl:apply-templates select="//s:result"/>
+                    <xsl:choose>
+                        <xsl:when test="$show = 'all'">
+                            <xsl:apply-templates select="//s:result"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:apply-templates select="//s:result[position() &gt;= $current-set and position() &lt;= ($current-set + 20)]"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </dl>
+                <div id="results-nav">
+                    <span class="show"><xsl:value-of select="$current-set"/></span>
+                    <span class="result-count"><xsl:value-of select="$result-count"/></span>
+                    <span class="previous"><xsl:value-of select="$prev-set"/></span>
+                    <span class="next"><xsl:value-of select="$next-set"/></span>
+                    <span class="show-all"><xsl:if test="$result-count > 20 and $show != 'all'">true</xsl:if></span>
+                </div>
                 <div id="search-content-counts" style="display:none;">
                     <xsl:for-each
                         select="//s:result[@type='searchContent' and not(s:resourceId=preceding-sibling::node()/s:resourceId)]">
@@ -95,7 +141,7 @@
                                 <xsl:text> - </xsl:text>
                                 <a href="#" rel="popup local pubmedMoreStrategy">more</a>
                             </xsl:when>
-                            <xsl:when test="$resultLimit &lt; number(s:resourceHits)">
+                            <xsl:when test="$moreResultsLimit &lt; number(s:resourceHits)">
                                 <xsl:text> - </xsl:text>
                                 <a target="_blank"
                                     title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"

@@ -39,7 +39,9 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
+                        <map:parameter name="show" value="${show}"/>
+                    </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/content/html returns xhtmlized metasearch content results -->
@@ -48,7 +50,9 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
+                        <map:parameter name="show" value="${show}"/>
+                    </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/merged/html returns xhtmlized merged metasearch and eresources results -->
@@ -58,7 +62,9 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
+                        <map:parameter name="show" value="${show}"/>
+                    </map:transform>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search2json.xsl converts the result xml to json -->

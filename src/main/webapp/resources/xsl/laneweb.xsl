@@ -306,13 +306,64 @@
     <!-- obfuscated email href (don't copy, processed elsewhere) -->
     <xsl:template match="attribute::href[starts-with(.,'mailto:')]"/>
 
-    <!-- add back to top for dl lists > 20 -->
-    <xsl:template match="h:dl[count(h:dd) &gt; 20]">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node() | child::node()"/>
-        </xsl:copy>
-        <a href="#"><img src="{$base-path}/graphics/icons/arrowUpTransp.gif" alt="up arrow"/> Back to
-            top</a>
+    <!-- add Previous, Next, All toggles to search results -->
+    <xsl:template match="h:div[@id='results-nav']">
+        <xsl:variable name="consumable-request-uri">
+            <xsl:value-of select="replace($request-uri,'/plain.*\.html','/search.html')"/>
+        </xsl:variable>
+        <xsl:variable name="consumable-query-string">
+            <xsl:value-of select="replace($query-string,'&amp;show=\w+','')"/>
+        </xsl:variable>
+        <xsl:variable name="base-link">
+            <xsl:value-of select="concat($consumable-request-uri,'?',$consumable-query-string,'&amp;show=')"/>
+        </xsl:variable>
+        <div class="resultsNav">
+            <xsl:if test="h:span[@class='previous'] != 'false'">
+                <a href="{concat($base-link,h:span[@class='previous'])}">Previous</a>
+            </xsl:if>
+            <xsl:call-template name="search-nav-counts">
+                <xsl:with-param name="show" select="h:span[@class='show']"/>
+                <xsl:with-param name="current" select="0"/>
+                <xsl:with-param name="result-count" select="h:span[@class='result-count']"/>
+                <xsl:with-param name="base-link" select="$base-link"/>
+            </xsl:call-template>
+            <xsl:if test="h:span[@class='next'] != 'false'">
+                <a href="{concat($base-link,h:span[@class='next'])}">Next</a>
+            </xsl:if>
+            <xsl:if test="h:span[@class='show-all'] = 'true'">
+                <a href="{concat($base-link,'all')}">Show All</a>
+            </xsl:if>
+        </div>
+    </xsl:template>
+    
+    <xsl:template name="search-nav-counts">
+        <xsl:param name="base-link"/>
+        <xsl:param name="result-count"/>
+        <xsl:param name="current"/>
+        <xsl:param name="show"/>
+        <xsl:variable name="label">
+            <xsl:choose>
+                <xsl:when test="$current = 0">1</xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="($current div 20) + 1"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xsl:variable name="class">
+            <xsl:if test="$current = number($show)">active</xsl:if>
+        </xsl:variable>
+        <xsl:if test="$result-count > 20 and $current >= 0 and $current &lt;= $result-count and $show != 'all'">
+            <a class="{$class}" href="{concat($base-link,$current)}"><xsl:value-of select="$label"/></a>
+            <xsl:if test="$label &lt; 10">
+                <xsl:call-template name="search-nav-counts">
+                    <xsl:with-param name="show" select="$show"/>
+                    <xsl:with-param name="current" select="$current + 20"/>
+                    <xsl:with-param name="result-count" select="$result-count"/>
+                    <xsl:with-param name="base-link" select="$base-link"/>
+                </xsl:call-template>
+            </xsl:if>
+            <xsl:if test="$label &gt;= 10"> ... </xsl:if>
+        </xsl:if>
     </xsl:template>
 
     <!-- href and src attributes template -->
