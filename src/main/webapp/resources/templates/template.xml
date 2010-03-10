@@ -36,7 +36,7 @@
                                     <a href="?searchTab=specialty" title="Lane specialty search"
                                         >Specialty</a>
                                 </li>
-                                <li id="clinical" title="Find clinical evidence from Cochrane, DARE, ACP J.Club, UpToDate, PubMed, and more ...">
+                                <li id="clinical" title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ...">
                                     <a href="?searchTab=clinical" title="Lane clinical search"
                                         >Clinical</a>
                                 </li>
