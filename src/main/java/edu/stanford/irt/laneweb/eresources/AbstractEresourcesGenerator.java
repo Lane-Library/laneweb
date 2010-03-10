@@ -21,8 +21,6 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     protected String type;
     
-    protected String show;
-    
     public void generate() throws SAXException {
         XMLizableEresourceList eresources = new XMLizableEresourceList(getEresourceList());
         eresources.toSAX(this.xmlConsumer);
@@ -44,7 +42,6 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
                     this.model.getString(Model.SUBSET);
         this.alpha = this.model.getString(Model.ALPHA);
         this.mesh = this.model.getString(Model.MESH);
-        this.show = this.model.getString(Model.SHOW);
         if (this.mesh != null) {
             this.mesh = this.mesh.toLowerCase();
         }
