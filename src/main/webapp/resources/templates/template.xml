@@ -28,15 +28,15 @@
                         </h1>
                         <form id="search" method="get" action="/search.html">
                             <ul id="searchTabs">
-                                <li id="all" title="enter terms to search for articles and catalog entries">
+                                <li id="all" title="Find articles in PubMed, Web of Science, UpToDate PLUS resources in the Lane Catalog">
                                     <a href="?searchTab=all" title="Lane article and catalog search"
                                         >Lane Search</a>
                                 </li>
-                                <li id="specialty" title="enter terms to search specialty resources">
+                                <li id="specialty" title="Search 200+ online resources ... narrow results by specialty ... shows # of results per resource">
                                     <a href="?searchTab=specialty" title="Lane specialty search"
                                         >Specialty</a>
                                 </li>
-                                <li id="clinical" title="enter terms to search clinical resources">
+                                <li id="clinical" title="Find clinical evidence from Cochrane, DARE, ACP J.Club, UpToDate, PubMed, and more ...">
                                     <a href="?searchTab=clinical" title="Lane clinical search"
                                         >Clinical</a>
                                 </li>
