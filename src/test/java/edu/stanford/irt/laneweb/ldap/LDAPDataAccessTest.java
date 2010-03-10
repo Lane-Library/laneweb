@@ -39,7 +39,7 @@ public class LDAPDataAccessTest {
     @Test
     public void testGetUserInfo() {
       expect(this.subjectSource.getSubject()).andReturn(this.subject);
-      expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null);
+      expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null).times(2);
       replayMocks();
         this.lDAPDataAccess.getLdapData("ditenus");
         verifyMocks();

@@ -3,14 +3,13 @@ package edu.stanford.irt.laneweb.ldap;
 import java.security.PrivilegedAction;
 import java.util.List;
 
-import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.security.auth.Subject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ldap.AuthenticationException;
+import org.springframework.ldap.NamingException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 
@@ -31,14 +30,24 @@ public class LDAPDataAccess {
     }
     
     public LDAPData getLdapData(final String sunetid) {
+        LDAPData ldapData = null;
         Subject subject = this.subjectSource.getSubject();
         PrivilegedAction<LDAPData> action = new LDAPPrivilegedAction(this.ldapTemplate, sunetid);
         try {
-            return (LDAPData) Subject.doAs(subject, action);
-        } catch (AuthenticationException e) {
-            LOGGER.error(e.getMessage(), e);
-            return action.run();
+            ldapData = (LDAPData) Subject.doAs(subject, action);
+        } catch (NamingException e) {
+            LOGGER.error("failed to get privileged ldap data, trying anonymous access", e);
         }
+        if (ldapData == null) {
+            try {
+                ldapData = action.run();
+            } catch (NamingException e) {
+                LOGGER.error("failed to get anonymous ldap data, using sunetid for name", e);
+                ldapData = new LDAPData();
+                ldapData.setName(sunetid);
+            }
+        }
+        return ldapData;
     }
     
     private static class LDAPPrivilegedAction implements PrivilegedAction<LDAPData> {
@@ -67,7 +76,7 @@ public class LDAPDataAccess {
     
     private static class LDAPAttributesMapper implements AttributesMapper {
 
-        public Object mapFromAttributes(Attributes attributes) throws NamingException {
+        public Object mapFromAttributes(Attributes attributes) throws javax.naming.NamingException {
             LDAPData ldapData = new LDAPData();
             Attribute currentAttribute = attributes.get("displayName");
             if (null != currentAttribute) {
