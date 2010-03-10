@@ -15,7 +15,7 @@
                     hits = response.results.facets[facets[j].facetId].hits;
                     engineStatus = response.results.facets[facets[j].facetId].status;
                 }
-                if (!facets[j].facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits === 0) {
+                if (!facets[j].facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits == 0) {
                 	YAHOO.util.Dom.addClass(hitLink.parentNode,'inactiveFacet');
                 	YAHOO.util.Dom.removeClass(hitLink.parentNode,'searchableFacet');
                 	hitLink.setAttribute('title','no search results for '+hitLink.innerHTML);
