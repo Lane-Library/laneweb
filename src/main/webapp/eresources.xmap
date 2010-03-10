@@ -11,7 +11,7 @@
                 <map:generate type="er-search"/>
                 <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="show" value="${show}"/>
+                    <map:parameter name="cache-key" value="${show}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -21,7 +21,7 @@
                 </map:generate>
                 <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="show" value="${show}"/>
+                    <map:parameter name="cache-key" value="${show}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -32,7 +32,7 @@
                 </map:generate>
                 <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="show" value="${show}"/>
+                    <map:parameter name="cache-key" value="${show}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -40,7 +40,7 @@
                 <map:generate type="history-search"/>
                 <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="show" value="${show}"/>
+                    <map:parameter name="cache-key" value="${show}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -48,7 +48,7 @@
                 <map:generate type="history-search"/>
                 <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="show" value="${show}"/>
+                    <map:parameter name="cache-key" value="${show}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -70,7 +70,7 @@
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="show" value="${show}"/>
+                    <map:parameter name="cache-key" value="${show}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -79,7 +79,7 @@
                     <map:parameter name="subset" value="{1}"/>
                 </map:generate>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="show" value="${show}"/>
+                    <map:parameter name="cache-key" value="${show}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -88,7 +88,7 @@
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="show" value="${show}"/>
+                    <map:parameter name="cache-key" value="${show}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
@@ -97,7 +97,7 @@
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="show" value="${show}"/>
+                    <map:parameter name="cache-key" value="${show}"/>
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
