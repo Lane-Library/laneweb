@@ -39,6 +39,8 @@ public class EresourceResource implements Resource {
         atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "eresource");
         XMLUtils.startElement(handler, NAMESPACE, RESULT, atts);
         XMLUtils.createElementNS(handler, NAMESPACE, ID, Integer.toString(this.eresource.getId()));
+        XMLUtils.createElementNS(handler, NAMESPACE, RECORD_ID, Integer.toString(this.eresource.getRecordId()));
+        XMLUtils.createElementNS(handler, NAMESPACE, RECORD_TYPE, this.eresource.getRecordType());
         XMLUtils.createElementNS(handler, NAMESPACE, TITLE, this.eresource.getTitle());
         XMLUtils.startElement(handler, NAMESPACE, VERSIONS);
         Collection<Version> versions = new TreeSet<Version>(VERSION_COMPARATOR);
