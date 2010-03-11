@@ -5,14 +5,11 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="throttling">
-            <map:parameter name="request-key"
-                value="${remote-addr}/${request-uri}/${query-string}"/>
+            <map:parameter name="request-key" value="${remote-addr}/${request-uri}/${query-string}"/>
             <map:match pattern="search" type="wildcard">
                 <map:generate type="er-search"/>
                 <map:transform type="query-highlighting"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search/type/*" type="wildcard">
@@ -20,9 +17,7 @@
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:transform type="query-highlighting"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search/type/*/*" type="wildcard">
@@ -31,25 +26,19 @@
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
                 <map:transform type="query-highlighting"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="histdb" type="wildcard">
                 <map:generate type="history-search"/>
                 <map:transform type="query-highlighting"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="history-search" type="wildcard">
                 <map:generate type="history-search"/>
                 <map:transform type="query-highlighting"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="count" type="wildcard">

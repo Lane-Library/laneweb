@@ -1,5 +1,10 @@
 package edu.stanford.irt.laneweb.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.cocoon.el.objectmodel.ObjectModel;
+
 /**
  * Model for sitemap components.
  * 
@@ -7,7 +12,7 @@ package edu.stanford.irt.laneweb.model;
  *
  * $Id$
  */
-public interface Model {
+public class Model extends HashMap<String, Object> {
     
     public static final String BASE_PATH = "base-path";
     
@@ -79,11 +84,29 @@ public interface Model {
 
     public static final String REMOTE_ADDR = "remote-addr";
     
-    <T> T getObject(String name, Class<T> clazz);
+
     
-    <T> T getObject(String name, Class<T> clazz, T defaultValue);
+    public Model(ObjectModel objectModel) {
+        putAll((Map<String, Object>) objectModel.get("laneweb"));
+    }
+
+
+    public <T> T getObject(String name, Class<T> clazz) {
+        return (T) get(name);
+    }
+
+    public <T> T getObject(String name, Class<T> clazz, T defaultValue) {
+        if (!containsKey(name)) {
+            return defaultValue;
+        }
+        return getObject(name, clazz);
+    }
     
-    String getString(String name);
+    public String getString(String name) {
+        return getObject(name, String.class);
+    }
     
-    String getString(String name, String defaultValue);
+    public String getString(String name, String defaultValue) {
+        return getObject(name, String.class, defaultValue);
+    }
 }

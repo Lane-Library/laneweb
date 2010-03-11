@@ -33,9 +33,6 @@
             <map:match pattern="shc/**" type="wildcard">
                 <map:mount uri-prefix="shc" check-reload="no" src="shc.xmap"/>
             </map:match>
-            <map:match pattern="admin/model" type="wildcard">
-                <map:read type="model"/>
-            </map:match>
             <map:match pattern="admin/status" type="wildcard">
                 <map:generate type="status"/>
                 <map:serialize type="xml"/>

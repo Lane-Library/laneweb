@@ -23,7 +23,7 @@
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.model.Model"
-        class="edu.stanford.irt.laneweb.model.MapModel"
+        class="edu.stanford.irt.laneweb.model.Model"
         scope="request">
         <constructor-arg ref="org.apache.cocoon.el.objectmodel.ObjectModel"/>
     </bean>
@@ -33,10 +33,6 @@
         scope="prototype" abstract="true">
         <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
     </bean>
-    
-    <bean name="org.apache.cocoon.reading.Reader/model"
-        class="edu.stanford.irt.laneweb.cocoon.ModelReader"
-        parent="edu.stanford.irt.laneweb.model.DefaultModelAware"/>
     
     <bean name="org.apache.cocoon.transformation.Transformer/debug"
         class="edu.stanford.irt.laneweb.cocoon.DebugTransformer"

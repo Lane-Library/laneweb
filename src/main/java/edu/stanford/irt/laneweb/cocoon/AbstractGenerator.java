@@ -1,9 +1,10 @@
 package edu.stanford.irt.laneweb.cocoon;
 
+import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.xml.XMLConsumer;
 
 
-public abstract class AbstractGenerator extends AbstractSitemapModelComponent implements LanewebGenerator {
+public abstract class AbstractGenerator extends AbstractSitemapModelComponent implements Generator {
     
     protected XMLConsumer xmlConsumer;
 

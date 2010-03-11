@@ -3,11 +3,10 @@ package edu.stanford.irt.laneweb.querymap;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import org.apache.cocoon.reading.Reader;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.cocoon.LanewebReader;
-
-public class QueryMapReader extends AbstractQueryMapComponent implements LanewebReader {
+public class QueryMapReader extends AbstractQueryMapComponent implements Reader {
 
     private static final String MIME_TYPE = "text/plain";
 

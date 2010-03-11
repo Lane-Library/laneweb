@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.components.pipeline.impl.CachingProcessingPipeline;
+import org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 /**
  * The ThrottlingPipeline
  */
-public class ThrottlingPipeline extends CachingProcessingPipeline {
+public class ThrottlingPipeline extends NonCachingProcessingPipeline {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ThrottlingPipeline.class);
 

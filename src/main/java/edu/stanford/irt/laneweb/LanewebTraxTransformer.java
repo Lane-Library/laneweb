@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.Map.Entry;
 
 import javax.xml.transform.Result;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.sax.TransformerHandler;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
+import org.apache.cocoon.transformation.Transformer;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.xml.xslt.XSLTProcessor;
@@ -18,10 +18,8 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractSitemapModelComponent;
-import edu.stanford.irt.laneweb.cocoon.LanewebTransformer;
-import edu.stanford.irt.laneweb.model.MapModel;
 
-public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, LanewebTransformer {
+public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer {
 
     private TransformerHandler transformerHandler;
 
@@ -65,10 +63,6 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         return this.transformerHandler.getSystemId();
     }
 
-    public Transformer getTransformer() {
-        return this.transformerHandler.getTransformer();
-    }
-
     public void ignorableWhitespace(final char[] ch, final int start, final int length) throws SAXException {
         this.transformerHandler.ignorableWhitespace(ch, start, length);
     }
@@ -89,9 +83,8 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
                 throw new IllegalStateException(se);
             }
         }
-        Transformer transformer = this.transformerHandler.getTransformer();
-        MapModel map = (MapModel) this.model;
-        for (Entry<String, Object> entry : map.entrySet()) {
+        javax.xml.transform.Transformer transformer = this.transformerHandler.getTransformer();
+        for (Entry<String, Object> entry : this.model.entrySet()) {
             transformer.setParameter(entry.getKey(), entry.getValue().toString());
         }
         final SAXResult result = new SAXResult(xmlConsumer);
@@ -157,7 +150,7 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
     protected void initialize() {
             this.cacheKey = this.source.getURI();
             if (this.parameterMap.containsKey("cache-key")) {
-                this.cacheKey = this.cacheKey + this.parameterMap.get("cache-key");
+                this.cacheKey = this.cacheKey + ";" + this.parameterMap.get("cache-key");
             }
     }
 
