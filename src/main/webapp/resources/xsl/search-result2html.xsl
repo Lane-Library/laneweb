@@ -201,6 +201,35 @@
                             />
                         </xsl:otherwise>
                     </xsl:choose>
+                    <xsl:choose>
+                        <xsl:when test="s:recordType = 'auth'">
+                            <div class="moreResults">
+                                <span class="sourceLink">Lane Community Info File</span>
+                            </div>
+                        </xsl:when>
+                        <xsl:when test="s:recordType = 'bib'">
+                            <div class="moreResults">
+                                <span class="sourceLink">Lane Catalog</span>
+                                <xsl:text> - </xsl:text>
+                                <a target="_blank" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBRecID={s:recordId}&amp;v2=1">detail</a>
+                            </div>
+                        </xsl:when>
+                        <xsl:when test="s:recordType = 'faq'">
+                            <div class="moreResults">
+                                <span class="sourceLink">Lane FAQ</span>
+                            </div>
+                        </xsl:when>
+                        <xsl:when test="s:recordType = 'news'">
+                            <div class="moreResults">
+                                <span class="sourceLink">Lane News</span>
+                            </div>
+                        </xsl:when>
+                        <xsl:when test="s:recordType = 'web'">
+                            <div class="moreResults">
+                                <span class="sourceLink">Lane Web Page</span>
+                            </div>
+                        </xsl:when>
+                    </xsl:choose>
                 </li>
             </ul>
         </dd>
