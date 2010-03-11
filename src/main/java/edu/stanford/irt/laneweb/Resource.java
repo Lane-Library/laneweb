@@ -9,6 +9,10 @@ public interface Resource extends XMLizable {
 
     public static final String TYPE = "type";
 
+    public static final String RECORD_ID = "recordId";
+    
+    public static final String RECORD_TYPE = "recordType";
+    
     public static final String SCORE = "score";
 
     public static final String ID = "id";
