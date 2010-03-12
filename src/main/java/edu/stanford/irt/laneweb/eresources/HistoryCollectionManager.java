@@ -477,10 +477,12 @@ public class HistoryCollectionManager implements CollectionManager {
     private Collection<Eresource> doGetSearch(final String sql, final Collection<String> params, final String query) {
         LinkedList<Eresource> result = doGet(sql, params);
         LinkedList<Eresource> titleMatches = new LinkedList<Eresource>();
+        String normQuery = query.replaceAll("\\W", "");
         int i = 0;
         for (ListIterator<Eresource> it = result.listIterator(); it.hasNext() && (i < 20); i++) {
             Eresource eresource = it.next();
-            if (query.equalsIgnoreCase(eresource.getTitle())) {
+            String normTitle = eresource.getTitle().replaceAll("\\W", "");
+            if (normQuery.equalsIgnoreCase(normTitle)) {
                 titleMatches.add(eresource);
                 it.remove();
             }
