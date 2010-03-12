@@ -7,6 +7,7 @@ import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.Resource;
@@ -23,7 +24,9 @@ public class XMLizableEresourceList extends LinkedList<Eresource> implements XML
         }
         handler.startDocument();
         handler.startPrefixMapping("", NAMESPACE);
-        XMLUtils.startElement(handler, NAMESPACE, RESOURCES);
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY_NS, SIZE, SIZE, "CDATA", Integer.toString(size()));
+        XMLUtils.startElement(handler, NAMESPACE, RESOURCES, atts);
         for (Eresource eresource : this) {
             new EresourceResource(eresource).toSAX(handler);
         }

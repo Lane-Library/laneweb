@@ -69,6 +69,8 @@ public interface Resource extends XMLizable {
     
     public static final String RESOURCES = "resources";
     
+    public static final String SIZE = "size";
+    
     public static final String QUERY = "query";
 
 //    public static final String NAMESPACE = "http://lane.stanford.edu/search-results/1.0";

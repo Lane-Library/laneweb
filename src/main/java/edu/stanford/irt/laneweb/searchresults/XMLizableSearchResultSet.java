@@ -6,6 +6,7 @@ import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.laneweb.Resource;
 
@@ -29,7 +30,9 @@ public class XMLizableSearchResultSet extends TreeSet<SearchResult> implements R
             throw new IllegalArgumentException("null handler");
         }
         handler.startPrefixMapping("", NAMESPACE);
-        XMLUtils.startElement(handler, NAMESPACE, RESOURCES);
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY_NS, SIZE, SIZE, "CDATA", Integer.toString(size()));
+        XMLUtils.startElement(handler, NAMESPACE, RESOURCES, atts);
         XMLUtils.startElement(handler, NAMESPACE, QUERY);
         XMLUtils.data(handler, this.query);
         XMLUtils.endElement(handler, NAMESPACE, QUERY);
