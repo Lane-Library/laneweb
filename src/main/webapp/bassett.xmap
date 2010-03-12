@@ -12,13 +12,9 @@
                 </map:aggregate>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/bassett.xsl">
-                    <!--<map:parameter name="query" value="${query}"/>
-                    <map:parameter name="type" value="${type}"/>
-                    <map:parameter name="region" value="${region}"/>-->
                     <map:parameter name="images-url"
                         value="http://elane.stanford.edu/public/L254573"/>
                     <map:parameter name="images-per-page" value="30"/>
-                    <!--<map:parameter name="current-page" value="${pageNumber}"/>-->
                 </map:transform>
                 <map:serialize type="xhtml"/>
             </map:match>
@@ -38,9 +34,7 @@
                     <map:part src="cocoon:/bassett-accordion"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/bassettAccordion.xsl">
-                    <!--<map:parameter name="query" value="${query}"/>-->
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/bassettAccordion.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="database" type="wildcard">

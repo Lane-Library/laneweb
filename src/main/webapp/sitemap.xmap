@@ -68,32 +68,18 @@
                 <map:generate type="file" src="${content-base}/cookiesFetch.html">
                     <map:parameter name="alt-src" value="${default-content-base}/cookiesFetch.html"/>
                 </map:generate>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/cookiesFetch.xsl">
-                    <!--<map:parameter name="sunetid" value="${sunetid}"/>
-                    <map:parameter name="ticket" value="${ticket}"/>
-                    <map:parameter name="proxy-links" value="${proxy-links}"/>
-                    <map:parameter name="path" value="${path}"/>
-                    <map:parameter name="entryUrl" value="${entryUrl}"/>
-                    <map:parameter name="title" value="${title}"/>-->
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/cookiesFetch.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="postMethodHelper.html" type="wildcard">
                 <map:generate type="request"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/postMethodHelper.xsl">
-                    <!--<map:parameter name="sunetid" value="${sunetid}"/>
-                    <map:parameter name="ticket" value="${ticket}"/>
-                    <map:parameter name="proxy-links" value="${proxy-links}"/>-->
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/postMethodHelper.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <!-- used for tracking user IPGroup in interfaces external to laneweb (catalog, elane) -->
             <map:match pattern="ipGroupFetch" type="wildcard">
                 <map:generate type="request"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/ipGroupFetch.xsl">
-                    <!--<map:parameter name="ipgroup" value="${ipgroup}"/>
-                    <map:parameter name="callback" value="${callback}"/>-->
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/ipGroupFetch.xsl"/>
                 <map:serialize type="text"/>
             </map:match>
             <map:match pattern="plain/secure/**.html" type="wildcard">
@@ -103,22 +89,7 @@
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
                 <map:transform type="html-cme-links"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl">
-                    <!--<map:parameter name="request-uri" value="${request-uri}"/>
-                    <map:parameter name="base-path" value="${base-path}"/>
-                    <map:parameter name="query-string" value="${query-string}"/>
-                    <map:parameter name="proxy-links" value="${proxy-links}"/>
-                    <map:parameter name="sunetid" value="${sunetid}"/>
-                    <map:parameter name="ipgroup" value="${ipgroup}"/>
-                    <map:parameter name="query" value="${query}"/>
-                    <map:parameter name="template" value="${template}"/>
-                    <map:parameter name="source" value="${source}"/>
-                    <map:parameter name="search-tab" value="${searchTab}"/>
-                    <map:parameter name="mesh" value="${mesh}"/>
-                    <map:parameter name="version" value="${version}"/>
-                    <map:parameter name="referrer" value="${referer}"/>
-                    <map:parameter name="name" value="${name}"/>-->
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl"/>
                 <map:transform type="proxy-links"/>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
@@ -130,22 +101,7 @@
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
                 <map:transform type="html-cme-links"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl">
-                    <!--<map:parameter name="request-uri" value="${request-uri}"/>
-                    <map:parameter name="base-path" value="${base-path}"/>
-                    <map:parameter name="query-string" value="${query-string}"/>
-                    <map:parameter name="proxy-links" value="${proxy-links}"/>
-                    <map:parameter name="sunetid" value="${sunetid}"/>
-                    <map:parameter name="ipgroup" value="${ipgroup}"/>
-                    <map:parameter name="query" value="${query}"/>
-                    <map:parameter name="template" value="${template}"/>
-                    <map:parameter name="source" value="${source}"/>
-                    <map:parameter name="search-tab" value="${searchTab}"/>
-                    <map:parameter name="mesh" value="${mesh}"/>
-                    <map:parameter name="version" value="${version}"/>
-                    <map:parameter name="referrer" value="${referer}"/>
-                    <map:parameter name="name" value="${name}"/>-->
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl"/>
                 <map:transform type="proxy-links">
                     <!-- use this base-path to redirect proxy auth to lane.stanford.edu -->
                     <!--<map:parameter name="base-path" value="http://lane.stanford.edu"/>-->
@@ -181,22 +137,7 @@
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
                 <map:transform type="html-cme-links"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl">
-                    <map:parameter name="request-uri" value="${request-uri}"/>
-                    <map:parameter name="base-path" value="${base-path}"/>
-                    <map:parameter name="query-string" value="${query-string}"/>
-                    <map:parameter name="proxy-links" value="${proxy-links}"/>
-                    <map:parameter name="sunetid" value="${sunetid}"/>
-                    <map:parameter name="ipgroup" value="${ipgroup}"/>
-                    <map:parameter name="query" value="${query}"/>
-                    <map:parameter name="template" value="${template}"/>
-                    <map:parameter name="source" value="${source}"/>
-                    <map:parameter name="search-tab" value="${searchTab}"/>
-                    <map:parameter name="mesh" value="${mesh}"/>
-                    <map:parameter name="version" value="${version}"/>
-                    <map:parameter name="referrer" value="${referer}"/>
-                    <map:parameter name="name" value="${name}"/>
-                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl"/>
                 <map:transform type="proxy-links"/>
                 <map:transform type="namespace-filter"/>
                 <map:transform type="debug"/>
