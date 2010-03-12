@@ -10,26 +10,26 @@ import java.util.regex.Pattern;
  */
 public class QueryTermPattern {
 
-    private static final String EMPTY = "";
-
     private static final Pattern HYPHEN_PATTERN = Pattern.compile("\\-");
 
+    private static final Pattern SPACE_PATTERN = Pattern.compile(" ");
+    
     private static final Pattern UNACCEPTABLE_CHARS_PATTERN = Pattern.compile("[^a-zA-Z0-9,-_ ]");
 
     private static final Pattern INVERT_COMMAS_PATTERN = Pattern.compile("(\\(?((\\w| |-|_)+), ((\\w| |-|_)+)\\)?)");
 
     private static final String INVERT_REPLACEMENT = "$1 and ($4 $2)";
 
-    private static final String PERIOD = "\\.";
-
+    private static final String NONWORD = "\\\\W";
+    
         /**
          * normalize query terms for use in regex pattern, where normal means:
          * 
          * <pre>
          *  lower-case
-         *  invert comma separated terms: Heparin, Low-Molecular-Weight becomes Low-Molecular-Weight Heparin
-         *  replace hyphens with "."
          *  strip [^a-zA-Z0-9,-_ ]
+         *  invert comma separated terms: Heparin, Low-Molecular-Weight becomes Low-Molecular-Weight Heparin
+         *  replace hyphens and spaces with "\W"
          * </pre>
          * 
          * @param query
@@ -38,9 +38,11 @@ public class QueryTermPattern {
     public static Pattern getPattern(String query) {
         String normalQuery;
         normalQuery = query.toLowerCase();
+        normalQuery = UNACCEPTABLE_CHARS_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
         normalQuery = INVERT_COMMAS_PATTERN.matcher(normalQuery).replaceAll(INVERT_REPLACEMENT);
-        normalQuery = HYPHEN_PATTERN.matcher(normalQuery).replaceAll(PERIOD);
-        normalQuery = UNACCEPTABLE_CHARS_PATTERN.matcher(normalQuery).replaceAll(EMPTY);
-        return Pattern.compile(normalQuery.replaceAll(" and ", "|"), Pattern.CASE_INSENSITIVE);
+        normalQuery = normalQuery.replaceAll(" and ", "|");
+        normalQuery = HYPHEN_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
+        normalQuery = SPACE_PATTERN.matcher(normalQuery).replaceAll(NONWORD);
+        return Pattern.compile(normalQuery, Pattern.CASE_INSENSITIVE);
     }
 }
