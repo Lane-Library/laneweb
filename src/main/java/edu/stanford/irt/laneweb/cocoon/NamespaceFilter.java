@@ -1,8 +1,7 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.cocoon;
 
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
 
 public class NamespaceFilter extends AbstractTransformer {
 

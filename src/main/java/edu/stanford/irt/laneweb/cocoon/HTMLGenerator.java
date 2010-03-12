@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
 
@@ -9,7 +9,6 @@ import org.cyberneko.html.HTMLConfiguration;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 
 /**
  * The neko html generator reads HTML from a source, converts it to XHTML and generates SAX Events. It uses the NekoHTML

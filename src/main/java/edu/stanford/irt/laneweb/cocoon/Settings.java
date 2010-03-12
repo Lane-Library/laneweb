@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.File;
 

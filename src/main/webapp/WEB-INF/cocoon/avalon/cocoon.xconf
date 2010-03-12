@@ -37,7 +37,7 @@
     </component>
     
     <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
-        class="edu.stanford.irt.laneweb.ThrottlingPipeline">
+        class="edu.stanford.irt.laneweb.cocoon.ThrottlingPipeline">
         <parameter name="outputBufferSize" value="1049"/>
     </component>
     

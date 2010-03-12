@@ -31,7 +31,7 @@
         class="edu.stanford.irt.laneweb.store.StoreJanitorImpl"/>
 
     <bean name="org.apache.excalibur.xml.xpath.XPathProcessor"
-        class="edu.stanford.irt.laneweb.XPathProcessorImpl"/>
+        class="edu.stanford.irt.laneweb.cocoon.XPathProcessorImpl"/>
 
     <bean id="org.apache.commons.httpclient.HttpClient"
         class="org.apache.commons.httpclient.HttpClient">
@@ -84,7 +84,7 @@
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/html"
-        class="edu.stanford.irt.laneweb.HTMLGenerator" scope="prototype"/>
+        class="edu.stanford.irt.laneweb.cocoon.HTMLGenerator" scope="prototype"/>
 
     <bean name="org.apache.cocoon.generation.Generator/link-scan"
         class="edu.stanford.irt.laneweb.eresources.LinkScanGenerator" scope="prototype">
@@ -103,10 +103,10 @@
         class="org.apache.cocoon.generation.DirectoryGenerator" scope="prototype"/>
 
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
-        class="edu.stanford.irt.laneweb.NamespaceFilter" scope="prototype"/>
+        class="edu.stanford.irt.laneweb.cocoon.NamespaceFilter" scope="prototype"/>
 
     <bean name="org.apache.cocoon.transformation.Transformer/xinclude"
-        class="edu.stanford.irt.laneweb.LanewebXIncludeTransformer" scope="prototype">
+        class="edu.stanford.irt.laneweb.cocoon.LanewebXIncludeTransformer" scope="prototype">
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
         <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
@@ -115,7 +115,7 @@
         class="edu.stanford.irt.laneweb.cocoon.NoCacheBigReader" scope="prototype"/>
 
     <bean name="org.apache.cocoon.reading.Reader/txt-resource"
-        class="edu.stanford.irt.laneweb.TxtResourceReader"
+        class="edu.stanford.irt.laneweb.cocoon.TxtResourceReader"
         parent="edu.stanford.irt.laneweb.model.DefaultModelAware">
         <property name="defaultPath" value="/"/>
         <property name="valueToSubstitute" value="/\./\."/>
@@ -150,7 +150,7 @@
         class="org.apache.cocoon.acting.SessionInvalidatorAction"/>
 
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
-        class="edu.stanford.irt.laneweb.XHTMLSerializer" scope="prototype"
+        class="edu.stanford.irt.laneweb.cocoon.XHTMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <pipeline:component mime-type="text/html"/>
         <property name="format">
@@ -172,13 +172,13 @@
     </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/saxon"
-        class="edu.stanford.irt.laneweb.LanewebTraxTransformer" scope="prototype">
+        class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer" scope="prototype">
         <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
         <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/joost"
-        class="edu.stanford.irt.laneweb.LanewebTraxTransformer" scope="prototype">
+        class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer" scope="prototype">
         <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
         <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"/>
     </bean>

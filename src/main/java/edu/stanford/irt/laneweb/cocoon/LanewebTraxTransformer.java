@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.Serializable;
 import java.util.Map.Entry;
@@ -17,7 +17,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractSitemapModelComponent;
 
 public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer {
 

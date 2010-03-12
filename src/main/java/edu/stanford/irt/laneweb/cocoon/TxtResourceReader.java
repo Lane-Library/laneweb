@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,6 @@ import java.io.Serializable;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class TxtResourceReader extends AbstractReader implements CacheableProcessingComponent {
