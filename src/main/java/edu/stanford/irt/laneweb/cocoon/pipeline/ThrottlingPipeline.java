@@ -1,19 +1,20 @@
-package edu.stanford.irt.laneweb.cocoon;
+package edu.stanford.irt.laneweb.cocoon.pipeline;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline;
+//import org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 /**
  * The ThrottlingPipeline
  */
-public class ThrottlingPipeline extends NonCachingProcessingPipeline {
+public class ThrottlingPipeline extends NonCachingPipeline {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ThrottlingPipeline.class);
 
@@ -25,14 +26,11 @@ public class ThrottlingPipeline extends NonCachingProcessingPipeline {
     private String requestKey;
 
     @Override
-    public void recycle() {
-        super.recycle();
-        this.requestKey = null;
-    }
-
-    @Override
     public void setup(final Parameters params) {
         this.requestKey = params.getParameter("request-key", null);
+        if (this.requestKey == null) {
+            throw new IllegalArgumentException("null request-key parameter");
+        }
     }
 
     /**

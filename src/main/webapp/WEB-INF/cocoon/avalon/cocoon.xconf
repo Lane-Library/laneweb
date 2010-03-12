@@ -25,28 +25,6 @@
     <component role="org.apache.cocoon.components.treeprocessor.TreeBuilder/sitemap-1.0"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapLanguage"/>
     
-    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
-        class="org.apache.cocoon.components.pipeline.impl.NonCachingProcessingPipeline">
-        <parameter name="outputBufferSize" value="1049"/>
-    </component>
-    
-    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/expires"
-        class="org.apache.cocoon.components.pipeline.impl.ExpiresCachingProcessingPipeline">
-        <parameter name="cache-expires" value="300"/>
-        <parameter name="outputBufferSize" value="1049"/>
-    </component>
-    
-    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
-        class="edu.stanford.irt.laneweb.cocoon.ThrottlingPipeline">
-        <parameter name="outputBufferSize" value="1049"/>
-    </component>
-    
-    <component role="org.apache.cocoon.components.pipeline.ProcessingPipeline/caching"
-        class="org.apache.cocoon.components.pipeline.impl.CachingProcessingPipeline">
-        <parameter name="outputBufferSize" value="1049"/>
-    </component>
-    
-    <!-- TODO: maybe this one goes in irt-cocoon? -->
     <component role="org.apache.cocoon.components.notification.NotifyingBuilder"
         class="org.apache.cocoon.components.notification.DefaultNotifyingBuilder"/>
     
@@ -84,9 +62,6 @@
     <component role="org.apache.cocoon.generation.Generator/request"
         class="org.apache.cocoon.generation.RequestGenerator"/>
     
-    <component role="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
-        class="org.apache.cocoon.sitemap.DefaultContentAggregator" model="non-thread-safe-pooled"/>
-    
     <component role="org.apache.cocoon.generation.Generator/exception"
         class="org.apache.cocoon.generation.ExceptionGenerator"/>
     
@@ -95,15 +70,6 @@
     
     <component role="org.apache.cocoon.acting.Action/clear-cache"
         class="org.apache.cocoon.acting.ClearCacheAction"/>
-    
-    <!--<component role="org.apache.cocoon.transformation.Transformer/saxon"
-        class="org.apache.cocoon.transformation.TraxTransformer">
-        <use-request-parameters>false</use-request-parameters>
-        <use-session-parameters>false</use-session-parameters>
-        <use-cookie-parameters>false</use-cookie-parameters>
-        <xslt-processor-role>saxon</xslt-processor-role>
-        <check-includes>false</check-includes>
-    </component>-->
     
     <component role="org.apache.cocoon.selection.SelectorSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>

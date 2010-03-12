@@ -9,7 +9,7 @@
     http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd">
 
 
-    <bean name="org.apache.cocoon.caching.Cache" class="org.apache.cocoon.caching.impl.CacheImpl">
+    <bean id="org.apache.cocoon.caching.Cache" class="org.apache.cocoon.caching.impl.CacheImpl">
         <property name="store" ref="org.apache.excalibur.store.Store"/>
     </bean>
 
@@ -183,7 +183,30 @@
         <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"/>
     </bean>
 
-    <!--<bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
-        class="org.apache.cocoon.sitemap.DefaultContentAggregator" scope="prototype"/>-->
+    <bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
+    class="org.apache.cocoon.sitemap.DefaultContentAggregator" scope="prototype"/>
+    
+    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
+        class="edu.stanford.irt.laneweb.cocoon.pipeline.NonCachingPipeline"
+        scope="prototype">
+    </bean>
+    
+    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/expires"
+        class="edu.stanford.irt.laneweb.cocoon.pipeline.ExpiresCachingPipeline"
+        scope="prototype">
+        <property name="cache" ref="org.apache.cocoon.caching.Cache"/>
+        <property name="cacheExpires" value="300"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
+        class="edu.stanford.irt.laneweb.cocoon.pipeline.ThrottlingPipeline"
+        scope="prototype">
+    </bean>
+    
+    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/caching"
+        class="edu.stanford.irt.laneweb.cocoon.pipeline.CachingPipeline"
+        scope="prototype">
+        <property name="cache" ref="org.apache.cocoon.caching.Cache"/>
+    </bean>
 
 </beans>
