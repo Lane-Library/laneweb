@@ -117,7 +117,7 @@
         <dd xmlns="http://www.w3.org/1999/xhtml">
             <ul>
                 <li>
-                    <a title="{concat('article -- ',s:resourceId,' -- ',s:title)}" href="{s:url}"
+                    <a title="{s:title}" href="{s:url}"
                         id="{s:id}" target="_blank">
                         <xsl:apply-templates select="s:title"/>
                     </a>
@@ -302,7 +302,7 @@
         <xsl:param name="eresourceId"/>
         <xsl:choose>
             <xsl:when test="$type = 'first'">
-                <a title="{concat('eresource -- ',$title)}" href="{$link/s:url}"
+                <a title="{$title}" href="{$link/s:url}"
                     id="eresource-{$eresourceId}" target="_blank">
                     <xsl:apply-templates select="$title"/>
                 </a>
@@ -358,21 +358,18 @@
         <xsl:variable name="tooltip-width">
             <xsl:choose>
                 <xsl:when test="string-length(.) > 500">width:60%</xsl:when>
+                <xsl:otherwise>default</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <span style="{$tooltip-width}" id="{$tooltip-id}">
-            <xsl:apply-templates/>
-        </span>
-    </xsl:template>
-
-    <xsl:template match="s:description">
-        <xsl:variable name="tooltip-width">
-            <xsl:choose>
-                <xsl:when test="string-length(.) > 500">width:60%</xsl:when>
-            </xsl:choose>
-        </xsl:variable>
-        <span style="{$tooltip-width}" id="{concat(parent::node()/s:id,'Tooltip')}">
-            <xsl:apply-templates/>
+        <span id="{$tooltip-id}">
+            <xsl:if test="$tooltip-width != 'default'">
+                <xsl:attribute name="style">
+                    <xsl:value-of select="$tooltip-width"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="name() = 'description'">
+                <xsl:apply-templates select="."/>
+            </xsl:if>
         </span>
     </xsl:template>
 
