@@ -7,6 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-03-15" version="1.10.beta4" description="1.10.beta4 redesign release"/>
         <release date="2010-03-01" version="1.10.beta3" description="1.10.beta3 redesign release">
             <action date="2010-02-03" dev="ceyates" issue="33999" type="fix">
                 IE6 shaded border corners misplaced
