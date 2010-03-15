@@ -7,7 +7,29 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2010-03-15" version="1.10.beta4" description="1.10.beta4 redesign release"/>
+        <release date="2010-03-15" version="1.10.beta4" description="1.10.beta4 redesign release">
+            <action date="2010-03-15" dev="ryanmax" issue="34698" type="add">
+                provide unit tests
+            </action>
+            <action date="2010-03-11" dev="ryanmax" issue="34692" type="fix">
+                keyword highlighting: "Evidence based medicine"
+            </action>
+            <action date="2010-03-10" dev="ryanmax" issue="34625" type="update">
+                change default words in search input fields
+            </action>
+            <action date="2010-03-13" dev="ryanmax" issue="34607" type="add">
+                paged search results
+            </action>
+            <action date="2010-03-10" dev="ryanmax" issue="34578" type="add">
+                make pubmed links go to sfx
+            </action>
+            <action date="2010-03-11" dev="ryanmax" issue="34573" type="fix">
+                hyphenated titles and search
+            </action>
+            <action date="2010-03-10" dev="ryanmax" issue="34514" type="fix">
+                search activeTab broken when search term present
+            </action>
+        </release>
         <release date="2010-03-01" version="1.10.beta3" description="1.10.beta3 redesign release">
             <action date="2010-02-03" dev="ceyates" issue="33999" type="fix">
                 IE6 shaded border corners misplaced
