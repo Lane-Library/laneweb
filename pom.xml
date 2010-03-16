@@ -303,7 +303,7 @@
       <dependency>
          <artifactId>nekohtml</artifactId>
          <groupId>net.sourceforge.nekohtml</groupId>
-         <version>1.9.14</version>
+         <version>1.9.11</version>
       </dependency>
       <dependency>
          <artifactId>cocoon-configuration-api</artifactId>
