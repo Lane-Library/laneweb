@@ -87,17 +87,6 @@ public class SitemapRequestHandlerTest {
     }
     
     @Test
-    public void testHandleRequestRedirectLiaisons() throws ServletException, IOException {
-        this.handler.setRedirectMap(Collections.singletonMap("(.*)/liaisons/index.html", "$1/contacts/index.html?loadTab=liaisons"));
-        expect(request.getMethod()).andReturn("GET");
-        expect(request.getRequestURI()).andReturn("/stage/liaisons/index.html");
-        response.sendRedirect("/stage/contacts/index.html?loadTab=liaisons");
-        replayMocks();
-        this.handler.handleRequest(request, response);
-        verifyMocks();
-    }
-    
-    @Test
     public void testHandleRequestRedirectClasses() throws ServletException, IOException {
         this.handler.setRedirectMap(Collections.singletonMap("(.*)/classes/index.html", "$1/services/workshops/laneclasses.html"));
         expect(request.getMethod()).andReturn("GET");

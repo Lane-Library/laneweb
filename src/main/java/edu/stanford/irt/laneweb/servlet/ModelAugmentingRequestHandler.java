@@ -148,8 +148,6 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
             model.put(Model.PASSWORD, value);
         } else if ("PID".equals(name)) {
             model.put(Model.PID, value);
-        } else if ("liaison".equals(name)) {
-            model.put(Model.LIAISON, value);
             
 //        } else {
 //            model.put(name, request.getParameter(name));

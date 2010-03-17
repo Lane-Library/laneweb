@@ -30,13 +30,6 @@ ol li {
     margin-top: 1em;
 }
 
-#liaisonDepartments li {
-    border: 1px solid black;
-    margin: 0;
-    padding: 0;
-    
-}
-
 .sectionMenu .bd #searchFacets ul li{
     border: 1px solid black;
 }

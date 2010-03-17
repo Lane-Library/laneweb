@@ -74,8 +74,6 @@ public class Model extends HashMap<String, Object> {
 
     public static final String PID = "pid";
 
-    public static final String LIAISON = "liaison";
-
     public static final String TEMPLATE = "template";
 
     public static final String MODEL = "model";

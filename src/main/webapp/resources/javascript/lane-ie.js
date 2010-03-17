@@ -55,15 +55,6 @@
                 }
             }
         });
-        //set up hover class on liaisonDepartments menu:
-        YAHOO.util.Event.onAvailable('liaisonDepartments', function() {
-            this.activate = function() {
-                YAHOO.util.Dom.addClass(this, 'hover');
-            };
-            this.deactivate = function() {
-                 YAHOO.util.Dom.removeClass(this, 'hover');
-            };
-        });
     }
 })();
         /*
