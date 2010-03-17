@@ -24,37 +24,12 @@
     
     <component role="org.apache.cocoon.matching.MatcherSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
-
-    <component role="org.apache.cocoon.matching.Matcher/wildcard"
-        class="org.apache.cocoon.matching.WildcardURIMatcher"/>
-
-    <component role="org.apache.cocoon.matching.Matcher/regexp"
-        class="org.apache.cocoon.matching.RegexpURIMatcher"/>
-    
-    <component role="org.apache.cocoon.matching.Matcher/regex-parameter"
-        class="org.apache.cocoon.matching.RegexpRequestParameterMatcher"/>
-    
-    <component role="org.apache.cocoon.generation.Generator/status"
-        class="org.apache.cocoon.generation.StatusGenerator">
-        <show-continuations>false</show-continuations>
-    </component>
-    
-    <component role="org.apache.cocoon.generation.Generator/request"
-        class="org.apache.cocoon.generation.RequestGenerator"/>
-    
-    <component role="org.apache.cocoon.generation.Generator/exception"
-        class="org.apache.cocoon.generation.ExceptionGenerator"/>
     
     <component role="org.apache.cocoon.acting.ActionSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
     
-    <component role="org.apache.cocoon.acting.Action/clear-cache"
-        class="org.apache.cocoon.acting.ClearCacheAction"/>
-    
     <component role="org.apache.cocoon.selection.SelectorSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
     
-    <component role="org.apache.cocoon.selection.Selector/resource-exists"
-        class="org.apache.cocoon.selection.ResourceExistsSelector"/>
 
 </cocoon>

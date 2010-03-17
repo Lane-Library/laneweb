@@ -134,6 +134,12 @@
                     <map:redirect-to uri="{proxy-redirect}"/>
                 </map:act>
             </map:match>
+            <!-- used for tracking user IPGroup in interfaces external to laneweb (catalog, elane) -->
+            <map:match pattern="ipGroupFetch" type="wildcard">
+                <map:generate type="request"/>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/ipGroupFetch.xsl"/>
+                <map:serialize type="text"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="throttling">
             <map:parameter name="request-key" value="${remote-addr}/${request-uri}/${query-string}"/>
@@ -216,7 +222,7 @@
             </map:match>
             <map:handle-errors>
                 <map:generate type="exception"/>
-                <map:serialize type="xml" status-code="500"/>
+                <map:serialize type="text" status-code="500"/>
             </map:handle-errors>
         </map:pipeline>
     </map:pipelines>

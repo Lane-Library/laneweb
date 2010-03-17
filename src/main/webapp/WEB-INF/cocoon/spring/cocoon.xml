@@ -60,5 +60,122 @@
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
         <pipeline:component mime-type="text/xml"/>
     </bean>
-
+    
+    <bean name="org.apache.cocoon.acting.Action/invalidate-session"
+        class="org.apache.cocoon.acting.SessionInvalidatorAction"/>
+    
+    <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
+        class="edu.stanford.irt.laneweb.cocoon.XHTMLSerializer" scope="prototype"
+        parent="org.apache.cocoon.serialization.AbstractTextSerializer">
+        <pipeline:component mime-type="text/html"/>
+        <property name="format">
+            <props>
+                <prop key="doctype-public">-//W3C//DTD XHTML 1.0 Strict//EN</prop>
+                <prop key="doctype-system">http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd</prop>
+                <prop key="encoding">UTF-8</prop>
+                <prop key="indent">yes</prop>
+                <prop key="omit-xml-declaration">yes</prop>
+            </props>
+        </property>
+        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.serialization.Serializer/text"
+        class="org.apache.cocoon.serialization.TextSerializer" scope="prototype"
+        parent="org.apache.cocoon.serialization.AbstractTextSerializer">
+        <pipeline:component mime-type="text/plain"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.transformation.Transformer/saxon"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer" scope="prototype">
+        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
+        <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.transformation.Transformer/joost"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer" scope="prototype">
+        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
+        <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
+        class="org.apache.cocoon.sitemap.DefaultContentAggregator" scope="prototype"/>
+    
+    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
+        class="edu.stanford.irt.laneweb.cocoon.pipeline.NonCachingPipeline"
+        scope="prototype">
+    </bean>
+    
+    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/expires"
+        class="edu.stanford.irt.laneweb.cocoon.pipeline.ExpiresCachingPipeline"
+        scope="prototype">
+        <property name="cache" ref="org.apache.cocoon.caching.Cache"/>
+        <property name="cacheExpires" value="300"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
+        class="edu.stanford.irt.laneweb.cocoon.pipeline.ThrottlingPipeline"
+        scope="prototype">
+    </bean>
+    
+    <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/caching"
+        class="edu.stanford.irt.laneweb.cocoon.pipeline.CachingPipeline"
+        scope="prototype">
+        <property name="cache" ref="org.apache.cocoon.caching.Cache"/>
+    </bean>
+    
+    <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
+        class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
+        scope="prototype">
+        <constructor-arg ref="org.apache.excalibur.xmlizer.XMLizer"/>
+        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
+    </bean>
+    
+    <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"
+        class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
+        scope="prototype">
+        <constructor-arg ref="org.apache.excalibur.xmlizer.XMLizer"/>
+        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+        <property name="transformerFactory" value="net.sf.joost.trax.TransformerFactoryImpl"/>
+    </bean>
+    
+    <bean id="org.apache.excalibur.xmlizer.XMLizer"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebXMLizer"/>
+    
+    <bean name="org.apache.cocoon.matching.Matcher/wildcard"
+        class="org.apache.cocoon.matching.WildcardURIMatcher"/>
+    
+    
+    <bean name="org.apache.cocoon.matching.Matcher/regexp"
+        class="org.apache.cocoon.matching.RegexpURIMatcher"/>
+    
+    <bean name="org.apache.cocoon.matching.Matcher/regex-parameter"
+        class="org.apache.cocoon.matching.RegexpRequestParameterMatcher"/>
+    
+    <bean id="org.apache.cocoon.components.notification.NotifyingBuilder"
+        class="org.apache.cocoon.components.notification.DefaultNotifyingBuilder"/>
+    
+    <bean name="org.apache.cocoon.generation.Generator/exception"
+        class="org.apache.cocoon.generation.ExceptionGenerator"
+        scope="prototype"/>
+    
+    <bean name="org.apache.cocoon.generation.Generator/request"
+        class="org.apache.cocoon.generation.RequestGenerator"
+        scope="prototype"/>
+    
+    <bean name="org.apache.cocoon.generation.Generator/status"
+        class="edu.stanford.irt.laneweb.cocoon.StatusGenerator"
+        scope="prototype">
+        <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>
+        <constructor-arg ref="org.apache.excalibur.store.StoreJanitor"/>
+        <constructor-arg ref="org.apache.excalibur.store.Store"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.acting.Action/clear-cache"
+        class="edu.stanford.irt.laneweb.cocoon.ClearCacheAction">
+        <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
+    </bean>
 </beans>
