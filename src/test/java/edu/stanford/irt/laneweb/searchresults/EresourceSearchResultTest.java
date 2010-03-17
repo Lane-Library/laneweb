@@ -3,13 +3,13 @@
  */
 package edu.stanford.irt.laneweb.searchresults;
 
-import static org.junit.Assert.*;
-
-import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.eresources.impl.EresourceImpl;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.eresources.impl.EresourceImpl;
 
 
 /**

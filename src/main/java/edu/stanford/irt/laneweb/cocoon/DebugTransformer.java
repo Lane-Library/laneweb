@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import java.util.Map.Entry;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.xml.sax.SAXException;
 

@@ -1,6 +1,10 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import static org.easymock.EasyMock.*;
+import static org.easymock.EasyMock.createMock;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.isA;
+import static org.easymock.EasyMock.replay;
+import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -10,13 +14,10 @@ import java.net.MalformedURLException;
 import javax.xml.transform.Result;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMResult;
-import javax.xml.transform.sax.TemplatesHandler;
-import javax.xml.transform.stream.StreamResult;
 
 import org.apache.avalon.framework.parameters.ParameterException;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.excalibur.source.Source;
-import org.apache.excalibur.source.SourceNotFoundException;
 import org.apache.excalibur.source.SourceResolver;
 import org.apache.excalibur.store.Store;
 import org.apache.excalibur.xml.xslt.XSLTProcessorException;
