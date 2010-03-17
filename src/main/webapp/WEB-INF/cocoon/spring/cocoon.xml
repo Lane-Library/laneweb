@@ -16,7 +16,7 @@
         <property name="settings" ref="org.apache.cocoon.configuration.Settings"/>
     </bean>
     
-    <bean name="org.apache.excalibur.xml.sax.SAXParser"
+    <bean id="org.apache.excalibur.xml.sax.SAXParser"
         class="org.apache.cocoon.core.xml.avalon.DefaultSAXParser" scope="singleton">
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>

@@ -19,14 +19,8 @@
     <component role="org.apache.excalibur.source.SourceFactory/cocoon"
         class="org.apache.cocoon.components.source.impl.SitemapSourceFactory"/>
     
-    <component role="org.apache.excalibur.xmlizer.XMLizer"
-        class="org.apache.excalibur.xmlizer.DefaultXMLizer"/>
-    
     <component role="org.apache.cocoon.components.treeprocessor.TreeBuilder/sitemap-1.0"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapLanguage"/>
-    
-    <component role="org.apache.cocoon.components.notification.NotifyingBuilder"
-        class="org.apache.cocoon.components.notification.DefaultNotifyingBuilder"/>
     
     <component role="org.apache.cocoon.matching.MatcherSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>

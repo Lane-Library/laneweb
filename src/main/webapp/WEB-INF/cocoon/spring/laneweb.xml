@@ -212,17 +212,22 @@
     <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
         class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
         scope="prototype">
+        <constructor-arg ref="org.apache.excalibur.xmlizer.XMLizer"/>
+        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
-        <property name="xmlizer" ref="org.apache.excalibur.xmlizer.XMLizer"/>
-        <property name="store" ref="org.apache.excalibur.store.Store/TransientStore"/>
     </bean>
     
     <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"
         class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
         scope="prototype">
+        <constructor-arg ref="org.apache.excalibur.xmlizer.XMLizer"/>
+        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <property name="transformerFactory" value="net.sf.joost.trax.TransformerFactoryImpl"/>
-        <property name="xmlizer" ref="org.apache.excalibur.xmlizer.XMLizer"/>
-        <property name="store" ref="org.apache.excalibur.store.Store/TransientStore"/>
     </bean>
+    
+    <bean id="org.apache.excalibur.xmlizer.XMLizer"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebXMLizer"/>
 
 </beans>
