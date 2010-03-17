@@ -28,20 +28,6 @@
     <component role="org.apache.cocoon.components.notification.NotifyingBuilder"
         class="org.apache.cocoon.components.notification.DefaultNotifyingBuilder"/>
     
-    <component role="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
-        class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl">
-        <parameter name="use-store" value="true"/>
-        <parameter name="incremental-processing" value="false"/>
-        <parameter name="transformer-factory" value="net.sf.saxon.TransformerFactoryImpl"/>
-    </component>
-    
-    <component role="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"
-        class="org.apache.excalibur.xml.xslt.XSLTProcessorImpl">
-        <parameter name="use-store" value="true"/>
-        <parameter name="incremental-processing" value="false"/>
-        <parameter name="transformer-factory" value="net.sf.joost.trax.TransformerFactoryImpl"/>
-    </component>
-    
     <component role="org.apache.cocoon.matching.MatcherSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
 

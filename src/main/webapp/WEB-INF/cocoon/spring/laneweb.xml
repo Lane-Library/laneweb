@@ -208,5 +208,21 @@
         scope="prototype">
         <property name="cache" ref="org.apache.cocoon.caching.Cache"/>
     </bean>
+    
+    <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
+        class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
+        scope="prototype">
+        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
+        <property name="xmlizer" ref="org.apache.excalibur.xmlizer.XMLizer"/>
+        <property name="store" ref="org.apache.excalibur.store.Store/TransientStore"/>
+    </bean>
+    
+    <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"
+        class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
+        scope="prototype">
+        <property name="transformerFactory" value="net.sf.joost.trax.TransformerFactoryImpl"/>
+        <property name="xmlizer" ref="org.apache.excalibur.xmlizer.XMLizer"/>
+        <property name="store" ref="org.apache.excalibur.store.Store/TransientStore"/>
+    </bean>
 
 </beans>
