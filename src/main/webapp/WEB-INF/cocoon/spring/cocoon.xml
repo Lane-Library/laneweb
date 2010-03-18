@@ -8,7 +8,7 @@
     http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd
     http://cocoon.apache.org/schema/avalon http://cocoon.apache.org/schema/avalon/cocoon-avalon-1.0.xsd">
 
-    <avalon:bridge location="/WEB-INF/cocoon/avalon/cocoon.xconf"/>
+    <!--<avalon:bridge location="/WEB-INF/cocoon/avalon/cocoon.xconf"/>-->
 
 
     <bean id="org.apache.avalon.framework.context.Context" init-method="init"
@@ -214,4 +214,13 @@
         <constructor-arg ref="org.apache.avalon.framework.context.Context"/>
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
+    
+    <bean id="org.apache.avalon.framework.service.ServiceManager"
+        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceManager"/>
+    
+    <bean id="org.apache.cocoon.core.container.spring.avalon.ConfigurationInfo"
+        class="org.apache.cocoon.core.container.spring.avalon.ConfigurationInfo"/>
+    
+    <bean id="org.apache.cocoon.core.container.spring.logger.Log"
+        class="org.apache.cocoon.core.container.spring.logger.LoggerFactoryBean"/>
 </beans>

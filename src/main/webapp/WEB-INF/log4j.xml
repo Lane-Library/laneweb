@@ -41,13 +41,13 @@
         </layout> 
     </appender>
     
-    <category name="httpclient.wire.header" additivity="false">
+    <!--<category name="httpclient.wire.header" additivity="false">
         <priority value="DEBUG"/>
         <appender-ref ref="headers"/>
-    </category>
+    </category>-->
     
     <root>
-        <priority value="ERROR"/>
+        <priority value="INFO"/>
         <appender-ref ref="LOG"/>
     </root>
     
