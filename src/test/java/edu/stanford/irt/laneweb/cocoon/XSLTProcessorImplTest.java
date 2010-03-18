@@ -61,17 +61,6 @@ public class XSLTProcessorImplTest {
     }
 
     @Test
-    public void testDispose() {
-        replay(this.store, this.sourceResolver, this.source);
-        try {
-            this.processor.dispose();
-            fail();
-        } catch (UnsupportedOperationException e) {
-        }
-        verify(this.store, this.sourceResolver, this.source);
-    }
-
-    @Test
     public void testGetTransformerHandlerAndValiditySource() throws Exception {
         expect(this.source.getURI()).andReturn(null).times(2);
         expect(this.source.getValidity()).andReturn(null).times(3);
@@ -124,27 +113,6 @@ public class XSLTProcessorImplTest {
     }
 
     @Test
-    public void testParameterize() throws ParameterException {
-        replay(this.store, this.sourceResolver, this.source);
-        try {
-            this.processor.parameterize(null);
-            fail();
-        } catch (UnsupportedOperationException e) {
-            verify(this.store, this.sourceResolver, this.source);
-        }
-    }
-
-    @Test
-    public void testRecycle() {
-        replay(this.store, this.sourceResolver, this.source);
-        try {
-            this.processor.recycle();
-            fail();
-        } catch (UnsupportedOperationException e) {
-        }
-    }
-
-    @Test
     public void testResolve() throws TransformerException, MalformedURLException, IOException {
         expect(this.sourceResolver.resolveURI(null)).andReturn(this.source);
         this.sourceResolver.release(this.source);
@@ -153,17 +121,6 @@ public class XSLTProcessorImplTest {
         replay(this.store, this.sourceResolver, this.source);
         this.processor.resolve(null, null);
         verify(this.store, this.sourceResolver, this.source);
-    }
-
-    @Test
-    public void testService() throws ServiceException {
-        replay(this.store, this.sourceResolver, this.source);
-        try {
-            this.processor.service(null);
-            fail();
-        } catch (UnsupportedOperationException e) {
-            verify(this.store, this.sourceResolver, this.source);
-        }
     }
 
     @Test

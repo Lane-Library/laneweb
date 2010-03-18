@@ -382,6 +382,10 @@
                <artifactId>xml-apis</artifactId>
                <groupId>xml-apis</groupId>
             </exclusion>
+            <exclusion>
+            	<artifactId>excalibur-logger</artifactId>
+            	<groupId>org.apache.excalibur.containerkit</groupId>
+            </exclusion>
          </exclusions>
       </dependency>
       <dependency>

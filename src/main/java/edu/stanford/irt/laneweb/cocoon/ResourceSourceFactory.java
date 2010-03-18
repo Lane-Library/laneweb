@@ -1,15 +1,21 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import org.apache.avalon.framework.logger.CommonsLogger;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.Map;
+
+import org.apache.excalibur.source.Source;
+import org.apache.excalibur.source.SourceException;
+import org.apache.excalibur.source.SourceFactory;
+import org.apache.excalibur.source.impl.ResourceSource;
 
 
-public class ResourceSourceFactory extends org.apache.excalibur.source.impl.ResourceSourceFactory {
-    
-    private static final Log LOGGER = LogFactory.getLog(ResourceSourceFactory.class);
-    
-    public ResourceSourceFactory() {
-        enableLogging(new CommonsLogger(LOGGER, getClass().getName()));
+public class ResourceSourceFactory implements SourceFactory {
+
+    public Source getSource(String location, Map parameters) throws MalformedURLException, IOException, SourceException {
+        return new ResourceSource(location);
+    }
+
+    public void release(Source source) {
     }
 }
