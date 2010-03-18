@@ -178,4 +178,15 @@
         class="edu.stanford.irt.laneweb.cocoon.ClearCacheAction">
         <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
     </bean>
+    
+    <bean id="org.apache.cocoon.matching.MatcherSelector"
+        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
+        <constructor-arg value="org.apache.cocoon.matching.Matcher"/>
+    </bean>
+    
+    <bean id="org.apache.cocoon.acting.ActionSelector"
+        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
+        <constructor-arg value="org.apache.cocoon.acting.Action"/>
+    </bean>
+    
 </beans>

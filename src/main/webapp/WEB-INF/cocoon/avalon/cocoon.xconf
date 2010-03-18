@@ -22,11 +22,5 @@
     <component role="org.apache.cocoon.components.treeprocessor.TreeBuilder/sitemap-1.0"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapLanguage"/>
     
-    <component role="org.apache.cocoon.matching.MatcherSelector"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
-    
-    <component role="org.apache.cocoon.acting.ActionSelector"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
-    
 
 </cocoon>
