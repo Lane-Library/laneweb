@@ -28,8 +28,5 @@
     <component role="org.apache.cocoon.acting.ActionSelector"
         class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
     
-    <component role="org.apache.cocoon.selection.SelectorSelector"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.ComponentsSelector"/>
-    
 
 </cocoon>
