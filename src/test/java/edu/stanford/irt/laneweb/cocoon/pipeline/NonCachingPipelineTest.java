@@ -44,7 +44,6 @@ public class NonCachingPipelineTest {
 
     @Before
     public void setUp() throws Exception {
-        this.pipeline = new NonCachingPipeline();
         this.parameters = createMock(Parameters.class);
         this.serviceManager = createMock(ServiceManager.class);
         this.generator = createMock(Generator.class);
@@ -52,12 +51,12 @@ public class NonCachingPipelineTest {
         this.serializer = createMock(Serializer.class);
         this.reader = createMock(Reader.class);
         this.environment = createMock(Environment.class);
-        this.pipeline.service(this.serviceManager);
+        this.pipeline = new NonCachingPipeline(this.serviceManager);
     }
 
     @Test
     public void testNonCachingProcessingPipeline() {
-        new NonCachingPipeline();
+        new NonCachingPipeline(null);
     }
 
     @Test
@@ -66,22 +65,8 @@ public class NonCachingPipelineTest {
     }
 
     @Test
-    public void testService() throws ServiceException {
-        this.pipeline.service(null);
-    }
-
-    @Test
     public void testSetProcessorManager() {
         this.pipeline.setProcessorManager(null);
-    }
-
-    @Test
-    public void testParameterize() throws ParameterException {
-        expect(this.parameters.getParameter("expires", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("outputBufferSize", -1)).andReturn(-1);
-        replay(this.parameters);
-        this.pipeline.parameterize(this.parameters);
-        verify(this.parameters);
     }
 
     @Test
@@ -155,16 +140,6 @@ public class NonCachingPipelineTest {
         this.pipeline.setReader("foo", null, this.parameters, null);
         this.pipeline.prepareInternal(this.environment);
         verify(this.serviceManager, this.reader, this.environment, this.parameters);
-    }
-
-    @Test
-    public void testRecycle() {
-        try {
-            this.pipeline.recycle();
-            fail("calling this should fail, has pipline scope in the application");
-        } catch (UnsupportedOperationException e) {
-            //not supported
-        }
     }
 
     @Test

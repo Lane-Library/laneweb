@@ -35,13 +35,12 @@ public class ThrottlingPipelineTest {
 
     @Before
     public void setUp() throws Exception {
-        this.pipeline = new ThrottlingPipeline();
         this.parameters = createMock(Parameters.class);
         this.environment = createMock(Environment.class);
         this.generator = createMock(Generator.class);
         this.serviceManager = createMock(ServiceManager.class);
         this.transformer = createMock(Transformer.class);
-        this.pipeline.service(this.serviceManager);
+        this.pipeline = new ThrottlingPipeline(this.serviceManager);
     }
 
     @Test
