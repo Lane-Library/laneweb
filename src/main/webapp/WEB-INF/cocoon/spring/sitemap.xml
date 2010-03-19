@@ -3,6 +3,53 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
+    
+    <bean id="org.apache.cocoon.Processor" class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
+        <constructor-arg value="context://sitemap.xmap"/>
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
+        <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.components.treeprocessor.TreeBuilder/sitemap-1.0"
+        class="edu.stanford.irt.laneweb.cocoon.SitemapLanguage" scope="prototype">
+        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
+        <constructor-arg ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.acting.Action/invalidate-session"
+        class="org.apache.cocoon.acting.SessionInvalidatorAction"/>
+    <bean id="org.apache.excalibur.xmlizer.XMLizer"
+        class="edu.stanford.irt.laneweb.cocoon.LanewebXMLizer"/>
+    
+    <bean name="org.apache.cocoon.matching.Matcher/wildcard"
+        class="org.apache.cocoon.matching.WildcardURIMatcher"/>
+    
+    
+    <bean name="org.apache.cocoon.matching.Matcher/regexp"
+        class="org.apache.cocoon.matching.RegexpURIMatcher"/>
+    
+    <bean name="org.apache.cocoon.matching.Matcher/regex-parameter"
+        class="org.apache.cocoon.matching.RegexpRequestParameterMatcher"/>
+    
+    <bean id="org.apache.cocoon.components.notification.NotifyingBuilder"
+        class="org.apache.cocoon.components.notification.DefaultNotifyingBuilder"/>
+    
+    <bean name="org.apache.cocoon.acting.Action/clear-cache"
+        class="edu.stanford.irt.laneweb.cocoon.ClearCacheAction">
+        <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
+    </bean>
+    
+    <bean id="org.apache.cocoon.matching.MatcherSelector"
+        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
+        <constructor-arg value="org.apache.cocoon.matching.Matcher"/>
+    </bean>
+    
+    <bean id="org.apache.cocoon.acting.ActionSelector"
+        class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
+        <constructor-arg value="org.apache.cocoon.acting.Action"/>
+    </bean>
+    
     <bean name="sitemap"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapNodeBuilder"/>
     <bean name="pipelines"
@@ -46,21 +93,5 @@
         <property name="stringTemplateParser" ref="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"/>
         <property name="objectModel" ref="org.apache.cocoon.el.objectmodel.ObjectModel"/>
     </bean>
-    <!-- 
-        final ChildBeanDefinition beanDef = new ChildBeanDefinition("org.apache.cocoon.template.expression.AbstractStringTemplateParser");
-        beanDef.setBeanClassName("org.apache.cocoon.components.treeprocessor.variables.LegacySitemapStringTemplateParser");
-        beanDef.setSingleton(true);
-        beanDef.setLazyInit(false);
-        beanDef.getPropertyValues().addPropertyValue("serviceManager", new RuntimeBeanReference("org.apache.avalon.framework.service.ServiceManager"));
-        this.register(beanDef, "org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap", null, registry);
-        
-        final RootBeanDefinition resolverDef = new RootBeanDefinition();
-        resolverDef.setBeanClassName("org.apache.cocoon.components.treeprocessor.variables.StringTemplateParserVariableResolver");
-        resolverDef.setLazyInit(false);
-        resolverDef.setScope("prototype");
-        resolverDef.getPropertyValues().addPropertyValue("stringTemplateParser", new RuntimeBeanReference("org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"));
-        resolverDef.getPropertyValues().addPropertyValue("objectModel", new RuntimeBeanReference("org.apache.cocoon.el.objectmodel.ObjectModel"));
-        this.register(resolverDef, "org.apache.cocoon.components.treeprocessor.variables.VariableResolver", null, registry);
-        
-    -->
+
 </beans>

@@ -7,11 +7,9 @@ import java.util.Map;
 import org.apache.avalon.framework.activity.Initializable;
 import org.apache.avalon.framework.configuration.Configuration;
 import org.apache.avalon.framework.configuration.ConfigurationException;
-import org.apache.avalon.framework.context.Context;
-import org.apache.avalon.framework.context.ContextException;
 import org.apache.avalon.framework.service.ServiceException;
 import org.apache.avalon.framework.service.ServiceManager;
-import org.apache.cocoon.components.LifecycleHelper;
+import org.apache.avalon.framework.service.Serviceable;
 import org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo;
 import org.apache.cocoon.components.treeprocessor.AbstractProcessingNode;
 import org.apache.cocoon.components.treeprocessor.ParameterizableProcessingNode;
@@ -30,20 +28,15 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
 
     private ApplicationContext applicationContext;
 
-    private LifecycleHelper itsLifecycle;
-
     private Map registeredNodes = Collections.emptyMap();
 
     private ServiceManager serviceManager;
 
-    public SitemapLanguage(final Context context, final ServiceManager serviceManager, final PipelineComponentInfo info) throws ContextException,
-            ServiceException {
-        contextualize(context);
+    public SitemapLanguage(final ServiceManager serviceManager, final PipelineComponentInfo info) throws ServiceException {
         service(serviceManager);
         this.serviceManager = serviceManager;
         this.itsNamespace = "http://apache.org/cocoon/sitemap/1.0";
         this.itsComponentInfo = info;
-        this.itsLifecycle = new LifecycleHelper(null, context, serviceManager, null);
     }
 
     /**
@@ -130,7 +123,9 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
             ((AbstractProcessingNode) node).setLocation(location);
             ((AbstractProcessingNode) node).setSitemapExecutor(this.processor.getSitemapExecutor());
         }
-        this.itsLifecycle.setupComponent(node, false);
+        if (node instanceof Serviceable) {
+            ((Serviceable)node).service(this.serviceManager);
+        }
         if (node instanceof ParameterizableProcessingNode) {
             Map params = getParameters(config, location);
             ((ParameterizableProcessingNode) node).setParameters(params);
