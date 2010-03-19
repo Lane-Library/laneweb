@@ -2,11 +2,7 @@
 <!-- $Id$ -->
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:pipeline="http://cocoon.apache.org/schema/pipeline"
-    xmlns:avalon="http://cocoon.apache.org/schema/avalon"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    http://cocoon.apache.org/schema/pipeline http://cocoon.apache.org/schema/pipeline/cocoon-pipeline-1.0.xsd
-    http://cocoon.apache.org/schema/avalon http://cocoon.apache.org/schema/avalon/cocoon-avalon-1.0.xsd">
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
     <!--<avalon:bridge location="/WEB-INF/cocoon/avalon/cocoon.xconf"/>-->
 
@@ -57,7 +53,6 @@
     <bean name="org.apache.cocoon.serialization.Serializer/xml"
         class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
-        <pipeline:component mime-type="text/xml"/>
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/invalidate-session"
@@ -66,7 +61,6 @@
     <bean name="org.apache.cocoon.serialization.Serializer/xhtml"
         class="edu.stanford.irt.laneweb.cocoon.XHTMLSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
-        <pipeline:component mime-type="text/html"/>
         <property name="format">
             <props>
                 <prop key="doctype-public">-//W3C//DTD XHTML 1.0 Strict//EN</prop>
@@ -78,11 +72,38 @@
         </property>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
+    
+    <bean name="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"
+        class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoFactoryBean"
+        init-method="init"/>
+    
+    <bean name="org.apache.cocoon.serialization.Serializer/xhtml/info"
+        class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoInitializer"
+        init-method="init">
+        <property name="componentName" value="org.apache.cocoon.serialization.Serializer/xhtml"/>
+        <property name="info" ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
+        <property name="mimeType" value="text/html"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.serialization.Serializer/text/info"
+        class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoInitializer"
+        init-method="init">
+        <property name="componentName" value="org.apache.cocoon.serialization.Serializer/text"/>
+        <property name="info" ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
+        <property name="mimeType" value="text/plain"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.serialization.Serializer/xml/info"
+        class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoInitializer"
+        init-method="init">
+        <property name="componentName" value="org.apache.cocoon.serialization.Serializer/xml"/>
+        <property name="info" ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
+        <property name="mimeType" value="text/xml"/>
+    </bean>
 
     <bean name="org.apache.cocoon.serialization.Serializer/text"
         class="org.apache.cocoon.serialization.TextSerializer" scope="prototype"
         parent="org.apache.cocoon.serialization.AbstractTextSerializer">
-        <pipeline:component mime-type="text/plain"/>
     </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/saxon"
@@ -217,6 +238,7 @@
         class="edu.stanford.irt.laneweb.cocoon.SitemapLanguage" scope="prototype">
         <constructor-arg ref="org.apache.avalon.framework.context.Context"/>
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
+        <constructor-arg ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
     </bean>
     
     <bean id="org.apache.avalon.framework.service.ServiceManager"

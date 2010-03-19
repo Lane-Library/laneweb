@@ -28,6 +28,7 @@
             /WEB-INF/cocoon/spring/querymap.xml
             /WEB-INF/cocoon/spring/search.xml
             /WEB-INF/cocoon/spring/servlet.xml
+            /WEB-INF/cocoon/spring/sitemap.xml
             /WEB-INF/cocoon/spring/suggest.xml
         </param-value>
     </context-param>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <bean name="sitemap"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapNodeBuilder"/>
+    <bean name="pipelines"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.PipelinesNodeBuilder"/>
+    <bean name="pipeline"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.PipelineNodeBuilder"
+        scope="prototype"/>
+    <bean name="match"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
+    <bean name="mount"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.MountNodeBuilder"/>
+    <bean name="read"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.ReadNodeBuilder"/>
+    <bean name="generate"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.GenerateNodeBuilder"
+        scope="prototype"/>
+    <bean name="serialize"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.SerializeNodeBuilder"
+        scope="prototype"/>
+    <bean name="act"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.ActNodeBuilder"
+        scope="prototype"/>
+    <bean name="aggregate"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.AggregateNodeBuilder"
+        scope="prototype"/>
+    <bean name="redirect-to"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.RedirectToNodeBuilder"
+        scope="prototype"/>
+    <bean name="transform"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.TransformNodeBuilder"
+        scope="prototype"/>
+    <bean name="handle-errors"
+        class="org.apache.cocoon.components.treeprocessor.sitemap.HandleErrorsNodeBuilder"/>
+    <bean name="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"
+        class="org.apache.cocoon.components.treeprocessor.variables.LegacySitemapStringTemplateParser">
+        <property name="serviceManager" ref="org.apache.avalon.framework.service.ServiceManager"/>
+    </bean>
+    <bean id="org.apache.cocoon.components.treeprocessor.variables.VariableResolver"
+        class="org.apache.cocoon.components.treeprocessor.variables.StringTemplateParserVariableResolver"
+        scope="prototype">
+        <property name="stringTemplateParser" ref="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"/>
+        <property name="objectModel" ref="org.apache.cocoon.el.objectmodel.ObjectModel"/>
+    </bean>
+    <!-- 
+        final ChildBeanDefinition beanDef = new ChildBeanDefinition("org.apache.cocoon.template.expression.AbstractStringTemplateParser");
+        beanDef.setBeanClassName("org.apache.cocoon.components.treeprocessor.variables.LegacySitemapStringTemplateParser");
+        beanDef.setSingleton(true);
+        beanDef.setLazyInit(false);
+        beanDef.getPropertyValues().addPropertyValue("serviceManager", new RuntimeBeanReference("org.apache.avalon.framework.service.ServiceManager"));
+        this.register(beanDef, "org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap", null, registry);
+        
+        final RootBeanDefinition resolverDef = new RootBeanDefinition();
+        resolverDef.setBeanClassName("org.apache.cocoon.components.treeprocessor.variables.StringTemplateParserVariableResolver");
+        resolverDef.setLazyInit(false);
+        resolverDef.setScope("prototype");
+        resolverDef.getPropertyValues().addPropertyValue("stringTemplateParser", new RuntimeBeanReference("org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"));
+        resolverDef.getPropertyValues().addPropertyValue("objectModel", new RuntimeBeanReference("org.apache.cocoon.el.objectmodel.ObjectModel"));
+        this.register(resolverDef, "org.apache.cocoon.components.treeprocessor.variables.VariableResolver", null, registry);
+        
+    -->
+</beans>
