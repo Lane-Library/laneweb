@@ -221,7 +221,7 @@ public class NonCachingPipeline implements ProcessingPipeline {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Setting a new Expires object for this resource");
             }
-            environment.getObjectModel().put(ObjectModelHelper.EXPIRES_OBJECT, new Long(this.expires + System.currentTimeMillis()));
+            environment.getObjectModel().put(ObjectModelHelper.EXPIRES_OBJECT, Long.valueOf(this.expires + System.currentTimeMillis()));
         }
         if (this.reader != null) {
             if (checkIfModified(environment, this.reader.getLastModified())) {

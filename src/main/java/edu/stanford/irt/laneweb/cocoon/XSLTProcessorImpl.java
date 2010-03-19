@@ -48,7 +48,7 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
         }
     }
 
-    class TraxErrorHandler implements ErrorListener {
+    private static class TraxErrorHandler implements ErrorListener {
 
         public void error(final TransformerException te) throws TransformerException {
             final String message = getMessage(te);
@@ -82,7 +82,7 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
             final SourceLocator locator = te.getLocator();
             if (null != locator) {
                 // System.out.println("Parser fatal error: "+exception.getMessage());
-                final String id = (locator.getPublicId() != locator.getPublicId()) ? locator.getPublicId() : (null != locator.getSystemId()) ? locator
+                final String id = (locator.getPublicId() != null) ? locator.getPublicId() : (null != locator.getSystemId()) ? locator
                         .getSystemId() : "SystemId Unknown";
                 return new StringBuffer("Error in TraxTransformer: ").append(id).append("; Line ").append(locator.getLineNumber()).append("; Column ").append(
                         locator.getColumnNumber()).append("; ").toString();
@@ -180,9 +180,6 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
                 // TrAX implementations (XSLTC) rely on this in order to obtain
                 // a meaningful identifier for the Templates instances.
                 templatesHandler.setSystemId(this.id);
-                if (filter != null) {
-                    filter.setContentHandler(templatesHandler);
-                }
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("Source = " + stylesheet + ", templatesHandler = " + templatesHandler);
                 }
@@ -194,7 +191,7 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
                 // from here must go recursive!!
                 try {
                     // Process the stylesheet.
-                    sourceToSAX(stylesheet, filter != null ? (ContentHandler) filter : (ContentHandler) templatesHandler);
+                    sourceToSAX(stylesheet, templatesHandler);
                     // Get the Templates object (generated during the parsing of
                     // the stylesheet) from the TemplatesHandler.
                     final Templates template = templatesHandler.getTemplates();
