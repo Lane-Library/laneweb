@@ -14,23 +14,23 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/cocoon/spring/bassett.xml
-            /WEB-INF/cocoon/spring/cme.xml
-            /WEB-INF/cocoon/spring/cocoon.xml
-            /WEB-INF/cocoon/spring/datasources.xml
-            /WEB-INF/cocoon/spring/eresources.xml
-            /WEB-INF/cocoon/spring/history.xml
-            /WEB-INF/cocoon/spring/idc9.xml
-            /WEB-INF/cocoon/spring/laneweb.xml
-            /WEB-INF/cocoon/spring/merged-search.xml
-            /WEB-INF/cocoon/spring/model.xml
-            /WEB-INF/cocoon/spring/pipeline.xml
-            /WEB-INF/cocoon/spring/proxy.xml
-            /WEB-INF/cocoon/spring/querymap.xml
-            /WEB-INF/cocoon/spring/search.xml
-            /WEB-INF/cocoon/spring/servlet.xml
-            /WEB-INF/cocoon/spring/sitemap.xml
-            /WEB-INF/cocoon/spring/suggest.xml
+            /WEB-INF/spring/bassett.xml
+            /WEB-INF/spring/cme.xml
+            /WEB-INF/spring/cocoon.xml
+            /WEB-INF/spring/datasources.xml
+            /WEB-INF/spring/eresources.xml
+            /WEB-INF/spring/history.xml
+            /WEB-INF/spring/idc9.xml
+            /WEB-INF/spring/laneweb.xml
+            /WEB-INF/spring/merged-search.xml
+            /WEB-INF/spring/model.xml
+            /WEB-INF/spring/pipeline.xml
+            /WEB-INF/spring/proxy.xml
+            /WEB-INF/spring/querymap.xml
+            /WEB-INF/spring/search.xml
+            /WEB-INF/spring/servlet.xml
+            /WEB-INF/spring/sitemap.xml
+            /WEB-INF/spring/suggest.xml
         </param-value>
     </context-param>
 
