@@ -17,11 +17,9 @@ public class ICD9Advisor implements MethodBeforeAdvice {
     public void before(final Method method, final Object[] arg, final Object claz) throws Throwable {
         Parameters params = (Parameters) arg[3];
         String query = params.getParameter(Model.QUERY, null);
-        if (query != null) {
-            if (this.tranlastor.isICD9Code(query)) {
-                query = this.tranlastor.getLongName(query);
-                params.setParameter(Model.QUERY, query);
-            }
+        if (query != null && this.tranlastor.isICD9Code(query)) {
+            query = this.tranlastor.getLongName(query);
+            params.setParameter(Model.QUERY, query);
         }
     }
 

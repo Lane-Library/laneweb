@@ -18,7 +18,7 @@ public class HTTPClientSourceFactory implements SourceFactory {
      */
     @SuppressWarnings("unchecked")
     public Source getSource(final String uri, final Map sourceParams) {
-        return new HTTPClientSource(uri, sourceParams, this.httpClient);
+        return new HTTPClientSource(uri, this.httpClient);
     }
 
     /**
