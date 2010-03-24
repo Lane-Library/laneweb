@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.stanford.irt.laneweb.searchresults;
+package edu.stanford.irt.laneweb.search;
 
 import static org.junit.Assert.assertTrue;
 
@@ -38,7 +38,7 @@ public class EresourceSearchResultTest {
     }
 
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.searchresults.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
+     * Test method for {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
      */
     @Test
     public void testCompareToCase() {
@@ -53,7 +53,7 @@ public class EresourceSearchResultTest {
     }
     
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.searchresults.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
+     * Test method for {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
      */
     @Test
     public void testCompareToScore() {
@@ -77,7 +77,7 @@ public class EresourceSearchResultTest {
     }
     
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.searchresults.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
+     * Test method for {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
      */
     @Test
     public void testCompareToNonFiling() {
@@ -110,7 +110,7 @@ public class EresourceSearchResultTest {
     }
     
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.searchresults.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
+     * Test method for {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
      */
     @Test
     public void testCompareToEqual() {
@@ -138,7 +138,7 @@ public class EresourceSearchResultTest {
     }
     
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.searchresults.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
+     * Test method for {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
      */
     @Test
     public void testCompareToUnequal() {
@@ -162,7 +162,7 @@ public class EresourceSearchResultTest {
     }
     
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.searchresults.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
+     * Test method for {@link edu.stanford.irt.laneweb.search.EresourceSearchResult#compareTo(edu.stanford.irt.laneweb.searchresults.SearchResult)}.
      */
     @Test
     public void testCompareToIntransitive() {

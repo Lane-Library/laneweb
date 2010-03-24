@@ -9,9 +9,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.searchresults.EresourceSearchResult;
-import edu.stanford.irt.laneweb.searchresults.SearchResult;
-import edu.stanford.irt.laneweb.searchresults.XMLizableSearchResultSet;
 
 public class EresourcesSearchGenerator extends AbstractSearchGenerator {
 

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.stanford.irt.laneweb.searchresults;
+package edu.stanford.irt.laneweb.search;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.eresources.EresourceResource;

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.searchresults;
+package edu.stanford.irt.laneweb.search;
 
 import java.util.TreeSet;
 

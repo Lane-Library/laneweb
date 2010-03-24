@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.stanford.irt.laneweb.searchresults;
+package edu.stanford.irt.laneweb.search;
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.search.QueryTermPattern;
 import edu.stanford.irt.search.impl.DefaultContentResult;
 
 /**
