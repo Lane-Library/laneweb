@@ -151,6 +151,8 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
             model.put(Model.PID, value);
         } else if (Model.CALLBACK.equals(name)) {
             model.put(Model.CALLBACK, value);
+        } else if (Model.URL.equals(name)) {
+            model.put(Model.URL, value);
             
 //        } else {
 //            model.put(name, request.getParameter(name));
