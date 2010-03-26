@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
@@ -90,7 +89,7 @@ public class SunetIdSourceTest {
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[]{this.cookie});
         expect(this.request.getHeader("User-Agent")).andReturn("user agent");
-        expect(this.cookie.getName()).andReturn(LanewebConstants.LANE_COOKIE_NAME);
+        expect(this.cookie.getName()).andReturn(SunetIdCookieCodec.LANE_COOKIE_NAME);
         expect(this.session.getAttribute("sunetid")).andReturn(null);
         this.session.setAttribute(Model.SUNETID, "ditenus");
         String value = this.codec.createLoginToken("ditenus", "user agent".hashCode()).getEncryptedValue();

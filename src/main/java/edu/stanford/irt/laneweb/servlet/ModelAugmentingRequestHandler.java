@@ -13,13 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import edu.stanford.irt.laneweb.IPGroup;
-import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.ldap.LDAPData;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
 
 public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
+
+    private static final String X_FORWARDED_FOR = "X-FORWARDED-FOR";
 
     private ProxyLinks proxyLinks;
 
@@ -67,7 +68,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         Cookie[] cookies = request.getCookies();
         if (null != cookies) {
             for (Cookie cookie : cookies) {
-                if (LanewebConstants.LANE_COOKIE_NAME.equals(cookie.getName())) {
+                if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(cookie.getName())) {
                     addToModel("user-cookie", cookie.getValue(), model);
                     break;
                 }
@@ -222,7 +223,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
             // mod_proxy puts the real remote address in an x-forwarded-for
             // header
             // Load balancer also does this
-            String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
+            String header = request.getHeader(X_FORWARDED_FOR);
             if (header == null) {
                 ip = request.getRemoteAddr();
             } else {

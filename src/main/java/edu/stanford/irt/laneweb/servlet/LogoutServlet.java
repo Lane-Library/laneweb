@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import edu.stanford.irt.laneweb.LanewebConstants;
-
 /*
  * $Id$
  */
@@ -27,7 +25,7 @@ public class LogoutServlet extends HttpServlet {
             IOException {
         for (Cookie cookie : req.getCookies()) {
             String name = cookie.getName();
-            if (LanewebConstants.LANE_COOKIE_NAME.equals(name) || WEBAUTH_COOKIE_NAME.equals(name)) {
+            if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(name) || WEBAUTH_COOKIE_NAME.equals(name)) {
                 cookie.setMaxAge(0);
                 resp.addCookie(cookie);
             }

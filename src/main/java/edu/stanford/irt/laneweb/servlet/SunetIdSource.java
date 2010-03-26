@@ -4,7 +4,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import edu.stanford.irt.laneweb.LanewebConstants;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
@@ -48,7 +47,7 @@ public class SunetIdSource {
         String sunetid = null;
         if (cookies != null && userAgent != null) {
             for (Cookie cookie : cookies) {
-                if (LanewebConstants.LANE_COOKIE_NAME.equals(cookie.getName())) {
+                if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(cookie.getName())) {
                     PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue());
                     if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
                         sunetid = token.getSunetId();

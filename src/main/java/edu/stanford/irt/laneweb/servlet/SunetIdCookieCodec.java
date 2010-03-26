@@ -14,6 +14,8 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
 public class SunetIdCookieCodec {
+
+    static final String LANE_COOKIE_NAME = "user";
     
     private static final String KEY = "stanfordlanelibraryir";
 
