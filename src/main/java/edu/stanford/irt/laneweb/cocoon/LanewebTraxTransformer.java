@@ -86,6 +86,9 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         for (Entry<String, Object> entry : this.model.entrySet()) {
             transformer.setParameter(entry.getKey(), entry.getValue().toString());
         }
+        for (Entry<String, String> entry : this.parameterMap.entrySet()) {
+            transformer.setParameter(entry.getKey(), entry.getValue());
+        }
         final SAXResult result = new SAXResult(xmlConsumer);
         result.setLexicalHandler(xmlConsumer);
         this.transformerHandler.setResult(result);
