@@ -125,7 +125,7 @@
     
     <servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler</servlet-name>
-        <url-pattern>/secure/apps/*</url-pattern>
+        <url-pattern>/secure/proxy</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
