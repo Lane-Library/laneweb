@@ -13,7 +13,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     private static final String URL = "&url=";
 
-    private static final String WEBAUTH_LINK = "/secure/apps/proxy/credential?url=";
+    private static final String WEBAUTH_LINK = "/secure/proxy?url=";
 
     private String basePath;
 
