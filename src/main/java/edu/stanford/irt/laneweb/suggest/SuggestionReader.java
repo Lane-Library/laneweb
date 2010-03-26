@@ -1,7 +1,6 @@
 package edu.stanford.irt.laneweb.suggest;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -33,54 +32,47 @@ public class SuggestionReader extends AbstractReader {
     private String query;
 
     public void generate() throws IOException {
-        OutputStream out = this.outputStream;
-        String query = this.query;
-        String limit = this.limit;
-        SuggestionComparator comparator = new SuggestionComparator(query);
+        SuggestionComparator comparator = new SuggestionComparator(this.query);
         TreeSet<String> suggestionSet = new TreeSet<String>(comparator);
         Collection<? extends Suggestion> suggestions = new ArrayList<Suggestion>();
-        if (limit.matches("(ej|book|database|software|cc|video|lanesite|bassett)")) {
-            suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(limit, query);
-        } else if (limit.matches("er-mesh")) {
+        if (this.limit.matches("(ej|book|database|software|cc|video|lanesite|bassett)")) {
+            suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(this.limit, this.query);
+        } else if (this.limit.matches("er-mesh")) {
             ArrayList<Suggestion> combo = new ArrayList<Suggestion>();
-            combo.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm(query));
-            combo.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
+            combo.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm(this.query));
+            combo.addAll(this.meshSuggestionManager.getSuggestionsForTerm(this.query));
             suggestions = combo;
-        } else if (limit.matches("ej-mesh")) {
+        } else if (this.limit.matches("ej-mesh")) {
             ArrayList<Suggestion> combo = new ArrayList<Suggestion>();
-            combo.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm("ej", query));
-            combo.addAll(this.meshSuggestionManager.getSuggestionsForTerm(query));
+            combo.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm("ej", this.query));
+            combo.addAll(this.meshSuggestionManager.getSuggestionsForTerm(this.query));
             suggestions = combo;
-        } else if ("mesh".equalsIgnoreCase(limit)) {
-            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(query);
-        } else if (limit.matches("mesh-(d|i|di)")) {
-            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(limit.replaceFirst("mesh-", ""), query);
-        } else if ("history".equalsIgnoreCase(limit)) {
-            suggestions = this.historySuggestionManager.getSuggestionsForTerm(query);
+        } else if ("mesh".equalsIgnoreCase(this.limit)) {
+            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(this.query);
+        } else if (this.limit.matches("mesh-(d|i|di)")) {
+            suggestions =
+                    this.meshSuggestionManager.getSuggestionsForTerm(this.limit.replaceFirst("mesh-", ""), this.query);
+        } else if ("history".equalsIgnoreCase(this.limit)) {
+            suggestions = this.historySuggestionManager.getSuggestionsForTerm(this.query);
         } else {
-            suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
+            suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(this.query);
         }
         for (Suggestion suggestion : suggestions) {
             suggestionSet.add(suggestion.getSuggestionTitle());
         }
         Iterator<String> it = suggestionSet.iterator();
         int count = 0;
-        try {
-            out.write(JSON_1);
-            String maybeComma = "\"";
-            while (it.hasNext() && count < JSON_RETURN_LIMIT) {
-                count++;
-                out.write((maybeComma + escapeQuotes(it.next()) + '"').getBytes());
-                maybeComma = ",\"";
-            }
-            out.write(JSON_2);
-        } finally {
-            this.outputStream = null;
-            this.query = null;
-            this.limit = null;
+        this.outputStream.write(JSON_1);
+        String maybeComma = "\"";
+        while (it.hasNext() && count < JSON_RETURN_LIMIT) {
+            count++;
+            this.outputStream.write((maybeComma + escapeQuotes(it.next()) + '"').getBytes());
+            maybeComma = ",\"";
         }
+        this.outputStream.write(JSON_2);
     }
 
+    @Override
     public String getMimeType() {
         return "text/plain";
     }
@@ -106,11 +98,6 @@ public class SuggestionReader extends AbstractReader {
         this.meshSuggestionManager = meshSuggestionManager;
     }
 
-    protected void initialize() {
-        this.limit = this.model.getString(Model.LIMIT);
-        this.query = this.model.getString(Model.QUERY);
-    }
-
     private String escapeQuotes(final String string) {
         String result = string;
         if ((result.indexOf('\'') > -1) || (result.indexOf('"') > -1)) {
@@ -125,5 +112,11 @@ public class SuggestionReader extends AbstractReader {
             result = sb.toString();
         }
         return result;
+    }
+
+    @Override
+    protected void initialize() {
+        this.limit = this.model.getString(Model.LIMIT, "");
+        this.query = this.model.getString(Model.QUERY);
     }
 }

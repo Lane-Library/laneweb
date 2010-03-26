@@ -54,7 +54,7 @@ public class SuggestionReaderTest {
     @Test
     public void testGenerate() throws IOException {
         expect(this.model.getString(Model.QUERY)).andReturn("venous thrombosis");
-        expect(this.model.getString(Model.LIMIT)).andReturn("mesh");
+        expect(this.model.getString(Model.LIMIT, "")).andReturn("mesh");
         replayMocks();
         this.reader.setup(null, null, null, null);
         this.reader.generate();
@@ -70,7 +70,7 @@ public class SuggestionReaderTest {
     @Test
     public void testGenerateNull() throws IOException {
         expect(this.model.getString(Model.QUERY)).andReturn("asdfgh");
-        expect(this.model.getString(Model.LIMIT)).andReturn("mesh");
+        expect(this.model.getString(Model.LIMIT, "")).andReturn("mesh");
         replayMocks();
         this.reader.setup(null, null, null, null);
         this.reader.generate();
