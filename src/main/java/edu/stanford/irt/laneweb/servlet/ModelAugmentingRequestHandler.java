@@ -54,7 +54,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         addToModel(Model.REMOTE_ADDR, remoteAddr, model);
         IPGroup ipGroup = getIPGroup(remoteAddr, session);
         addToModel(Model.IPGROUP, ipGroup, model);
-        Boolean proxyLinks = this.proxyLinks.getProxyLinks(request, session, ipGroup);
+        Boolean proxyLinks = this.proxyLinks.getProxyLinks(request, session, ipGroup, remoteAddr);
         addToModel(Model.PROXY_LINKS, proxyLinks, model);
         addToModel(Model.TEMPLATE, this.templateChooser.getTemplate(request), model);
         addToModel(Model.EMRID, getEmrid(request, session), model);

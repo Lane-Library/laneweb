@@ -73,7 +73,7 @@ public class ModelAugmentingRequestHandlerTest {
         expect(this.session.getAttribute(isA(String.class))).andReturn(null).atLeastOnce();
         this.session.setAttribute(isA(String.class), isA(Object.class));
         expectLastCall().atLeastOnce();
-        expect(this.proxyLinks.getProxyLinks(this.request, this.session, IPGroup.OTHER)).andReturn(Boolean.FALSE);
+        expect(this.proxyLinks.getProxyLinks(this.request, this.session, IPGroup.OTHER, "127.0.0.1")).andReturn(Boolean.FALSE);
         expect(this.templateChooser.getTemplate(this.request)).andReturn("foo");
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
         replayMocks();

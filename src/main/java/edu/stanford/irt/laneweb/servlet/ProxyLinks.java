@@ -26,7 +26,7 @@ public class ProxyLinks {
         this.proxyRegex = proxyRegex;
     }
 
-    public Boolean getProxyLinks(final HttpServletRequest request, HttpSession session, IPGroup ipGroup) {
+    public Boolean getProxyLinks(final HttpServletRequest request, HttpSession session, IPGroup ipGroup, String remoteAddress) {
         Boolean proxyLinks = null;
         Boolean sessionProxyLinks = null;
         // first see if there is a proxy-links parameter and use that:
@@ -45,17 +45,9 @@ public class ProxyLinks {
                 proxyLinks = Boolean.TRUE;
             }
         }
-        // finally use the ip address
+        // finally use the remote address
         if (proxyLinks == null) {
-            String ip = request.getRemoteAddr();
-            // mod_proxy puts the real remote address in an x-forwarded-for
-            // header
-            // Load balancer also does this
-            String header = request.getHeader(LanewebConstants.X_FORWARDED_FOR);
-            if (header != null) {
-                ip = header;
-            }
-            proxyLinks = Boolean.valueOf(proxyLinks(ip));
+            proxyLinks = Boolean.valueOf(proxyLinks(remoteAddress));
         }
         // put it in the session if it wasn't there or is different
         if (!proxyLinks.equals(sessionProxyLinks)) {
