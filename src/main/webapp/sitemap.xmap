@@ -4,9 +4,6 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match pattern="extensions/**" type="wildcard">
-                <map:mount uri-prefix="extensions" check-reload="no" src="extensions.xmap"/>
-            </map:match>
             <map:match pattern="tobacco/**" type="wildcard">
                 <map:mount uri-prefix="tobacco" check-reload="no" src="tobacco.xmap"/>
             </map:match>
