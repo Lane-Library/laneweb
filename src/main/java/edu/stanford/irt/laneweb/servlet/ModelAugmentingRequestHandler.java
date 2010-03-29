@@ -133,6 +133,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
             model.put(Model.SHOW, value);
         } else if ("r".equals(name)) {
             model.put(Model.RESOURCES, Arrays.asList(request.getParameterValues(name)));
+            model.put(Model.REGION, value);
         } else if ("e".equals(name)) {
             model.put(Model.ENGINES, Arrays.asList(request.getParameterValues(name)));
         } else if ("source".equals(name)) {
@@ -153,6 +154,8 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
             model.put(Model.CALLBACK, value);
         } else if (Model.URL.equals(name)) {
             model.put(Model.URL, value);
+        } else if (Model.BASSETT_NUMBER.equals(name)) {
+            model.put(Model.BASSETT_NUMBER, value);
             
 //        } else {
 //            model.put(name, request.getParameter(name));
