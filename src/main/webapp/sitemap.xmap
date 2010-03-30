@@ -24,6 +24,9 @@
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
             </map:match>
+            <map:match pattern="secure/apps/**" type="wildcard">
+                <map:mount uri-prefix="secure/apps" check-reload="no" src="applications.xmap"/>
+            </map:match>
             <map:match pattern="shc/**" type="wildcard">
                 <map:mount uri-prefix="shc" check-reload="no" src="shc.xmap"/>
             </map:match>
@@ -42,11 +45,6 @@
             <map:match pattern="search/*" type="wildcard">
                 <map:generate type="file" src="cocoon:/error.html"/>
                 <map:serialize type="xhtml" status-code="503"/>
-            </map:match>
-            <map:match pattern="secure/proxy" type="wildcard">
-                <map:act type="proxy-credential">
-                    <map:redirect-to uri="{proxy-redirect}"/>
-                </map:act>
             </map:match>
             <map:match pattern="secure/webdash.html" type="wildcard">
                 <map:act type="webdash">

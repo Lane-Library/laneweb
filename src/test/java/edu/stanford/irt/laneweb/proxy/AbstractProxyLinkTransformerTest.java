@@ -37,7 +37,7 @@ public class AbstractProxyLinkTransformerTest {
     @Test
     public void testCreateProxyLink() {
         replayMocks();
-        assertEquals("null/secure/proxy?url=foo", this.transformer.createProxyLink("foo"));
+        assertEquals("null/secure/apps/proxy/credential?url=foo", this.transformer.createProxyLink("foo"));
         verifyMocks();
     }
 
