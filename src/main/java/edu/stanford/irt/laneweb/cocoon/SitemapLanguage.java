@@ -19,13 +19,47 @@ import org.apache.cocoon.components.treeprocessor.variables.VariableResolver;
 import org.apache.cocoon.components.treeprocessor.variables.VariableResolverFactory;
 import org.apache.cocoon.sitemap.PatternException;
 import org.apache.cocoon.util.location.Location;
+import org.apache.cocoon.util.location.LocationImpl;
+import org.apache.cocoon.util.location.LocationUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.context.WebApplicationContext;
 
 public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.sitemap.SitemapLanguage implements ApplicationContextAware {
-
+    
+    //cut and pasted from AvalonNamespaceHandler which is no longer loaded
+    private static final LocationUtils.LocationFinder confLocFinder = new LocationUtils.LocationFinder() {
+        public Location getLocation(Object obj, String description) {
+            if (obj instanceof Configuration) {
+                Configuration config = (Configuration)obj;
+                String locString = config.getLocation();
+                Location result = LocationUtils.parse(locString);
+                if (LocationUtils.isKnown(result)) {
+                    // Add description
+                    StringBuffer desc = new StringBuffer().append('<');
+                    // Unfortunately Configuration.getPrefix() is not public
+                    try {
+                        if (config.getNamespace().startsWith("http://apache.org/cocoon/sitemap/")) {
+                            desc.append("map:");
+                        }
+                    } catch (ConfigurationException e) {
+                        // no namespace: ignore
+                    }
+                    desc.append(config.getName()).append('>');
+                    return new LocationImpl(desc.toString(), result);
+                } else {
+                    return result;
+                }
+            }
+            // Try next finders.
+            return null;
+        }
+    };
+    
+    static {
+        LocationUtils.addFinder(confLocFinder);
+    }
     private ApplicationContext applicationContext;
 
     private Map registeredNodes = Collections.emptyMap();
