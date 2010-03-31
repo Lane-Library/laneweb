@@ -81,7 +81,7 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         return uri;
     }
 
-    protected void process(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+    protected void process(final HttpServletRequest request, final HttpServletResponse response) throws IOException, ServletException {
         String sitemapURI = getSitemapURI(request).substring(1);
         Environment environment = new HttpEnvironment(sitemapURI, request, response, this.servletContext, this.context, null, null);
         try {
@@ -89,7 +89,7 @@ public class SitemapRequestHandler implements HttpRequestHandler {
             this.processor.process(environment);
             environment.commitResponse();
         } catch (Exception e) {
-            throw new IllegalStateException(e);
+            throw new ServletException(e);
         } finally {
             EnvironmentHelper.leaveProcessor();
         }

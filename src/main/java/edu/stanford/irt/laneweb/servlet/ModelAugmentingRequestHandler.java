@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +44,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
     }
 
     @Override
-    protected void process(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Map<String, Object> model = (Map<String, Object>) request.getAttribute(Model.MODEL);
         HttpSession session = request.getSession();
         String sunetid = this.sunetIdSource.getSunetid(request, session);
