@@ -1,17 +1,17 @@
 (function(){
     YAHOO.util.Event.onAvailable('liaisons',function() {
-        var liaisons = [];
-        for (var i = 0; i < this.childNodes.length; i++) {
+        var liaisons = [], showAll, hideAllBut, i, options;
+        for (i = 0; i < this.childNodes.length; i++) {
             if (this.childNodes[i].nodeType == 1) {
                 liaisons.push(this.childNodes[i]);
             }
         }
-        var showAll = function() {
+        showAll = function() {
             for (var i = 0; i < liaisons.length; i++) {
                 liaisons[i].style.display = 'block';
             }
         };
-        var hideAllBut = function(liaison) {
+        hideAllBut = function(liaison) {
             for (var i = 0; i < liaisons.length; i++) {
                 if (liaisons[i].id == liaison) {
                     liaisons[i].style.display = 'block';
@@ -20,12 +20,15 @@
                 }       
             }
         };
-        YAHOO.util.Event.addListener(document.getElementById('liaisons-select'), 'mouseup',function(event){
-            if (event.target.value === '') {
-                showAll();
-            } else {
-                hideAllBut(event.target.value);
-            }
-        });
+        options = document.getElementById('liaisons-select').getElementsByTagName('option');
+        for (i = 0; i < options.length; i++) {
+            options[i].clicked = function() {
+                if (this.value === '') {
+                    showAll();
+                } else {
+                    hideAllBut(this.value);
+                }
+            };
+        }
     });
 })();
