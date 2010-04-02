@@ -1,6 +1,11 @@
 (function(){
-    YAHOO.util.Event.onAvailable('liaison-form',function() {
-        var liaisons = document.getElementById('liaisons').getElementsByTagName('li');
+    YAHOO.util.Event.onAvailable('liaisons',function() {
+        var liaisons = [];
+        for (var i = 0; i < this.childNodes.length; i++) {
+            if (this.childNodes[i].nodeType == 1) {
+                liaisons.push(this.childNodes[i]);
+            }
+        }
         var showAll = function() {
             for (var i = 0; i < liaisons.length; i++) {
                 liaisons[i].style.display = 'block';
@@ -12,10 +17,10 @@
                     liaisons[i].style.display = 'block';
                 } else {
                     liaisons[i].style.display = 'none';
-                }
+                }       
             }
         };
-        YAHOO.util.Event.addListener(this.getElementsByTagName('select')[0], 'mouseup',function(event){
+        YAHOO.util.Event.addListener(document.getElementById('liaisons-select'), 'mouseup',function(event){
             if (event.target.value === '') {
                 showAll();
             } else {
