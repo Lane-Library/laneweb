@@ -157,6 +157,8 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
             model.put(Model.URL, value);
         } else if (Model.BASSETT_NUMBER.equals(name)) {
             model.put(Model.BASSETT_NUMBER, value);
+        } else if (Model.LIAISON.equals(name)) {
+            model.put(Model.LIAISON, value);
             
 //        } else {
 //            model.put(name, request.getParameter(name));

@@ -104,6 +104,20 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
+            <map:parameter name="cache-key" value="${request-uri};q=${liaison}"/>
+            <map:match type="wildcard" pattern="services/cy-liaisons.html">
+                <map:generate type="html" src="${content-base}/services/cy-liaisons.html">
+                    <map:parameter name="alt-src" value="${default-content-base}/services/liaisons.html"/>
+                </map:generate>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/liaisons.xsl">
+                    <map:parameter name="cache-key" value=";liaison=${liaison}"/>
+                </map:transform>
+                <map:transform type="xinclude"/>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/rss2html.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+        </map:pipeline>
+        <map:pipeline type="caching">
             <map:match type="regexp" pattern="^(announcement|error|sitemap)\.html$">
                 <map:generate type="html" src="${content-base}/{1}.html">
                     <map:parameter name="alt-src" value="${default-content-base}/{1}.html"/>

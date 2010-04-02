@@ -83,6 +83,8 @@ public class Model extends HashMap<String, Object> {
     public static final String REMOTE_ADDR = "remote-addr";
     
     public static final String CALLBACK = "callback";
+
+    public static final String LIAISON = "liaison";
     
 
     
