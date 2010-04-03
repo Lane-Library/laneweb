@@ -4,11 +4,12 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.Environment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import edu.stanford.irt.laneweb.cocoon.SourceResolver;
 
 
 /**
@@ -16,8 +17,8 @@ import org.slf4j.LoggerFactory;
  */
 public class ThrottlingPipeline extends NonCachingPipeline {
 
-    public ThrottlingPipeline(ServiceManager serviceManager) {
-        super(serviceManager);
+    public ThrottlingPipeline(SourceResolver sourceResolver) {
+        super(sourceResolver);
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ThrottlingPipeline.class);

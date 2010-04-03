@@ -82,7 +82,7 @@
 
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
         class="edu.stanford.irt.laneweb.cocoon.pipeline.NonCachingPipeline" scope="prototype">
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
 
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/expires"
@@ -93,12 +93,14 @@
 
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
         class="edu.stanford.irt.laneweb.cocoon.pipeline.ThrottlingPipeline" scope="prototype">
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
 
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/caching"
         class="edu.stanford.irt.laneweb.cocoon.pipeline.CachingPipeline" scope="prototype">
-        <property name="cache" ref="org.apache.cocoon.caching.Cache"/>
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+        <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
+        <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
     </bean>
 
     <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"

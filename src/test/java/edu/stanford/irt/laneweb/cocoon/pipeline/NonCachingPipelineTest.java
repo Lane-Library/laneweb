@@ -8,8 +8,6 @@ import static org.easymock.classextension.EasyMock.verify;
 import java.io.IOException;
 
 import org.apache.avalon.framework.parameters.Parameters;
-import org.apache.avalon.framework.service.ServiceException;
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.components.pipeline.AbstractProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
@@ -19,7 +17,10 @@ import org.apache.cocoon.serialization.Serializer;
 import org.apache.cocoon.transformation.Transformer;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
 import org.xml.sax.SAXException;
+
+import edu.stanford.irt.laneweb.cocoon.SourceResolver;
 
 
 public class NonCachingPipelineTest {
@@ -28,7 +29,7 @@ public class NonCachingPipelineTest {
     
     private Parameters parameters;
     
-    private ServiceManager serviceManager;
+    private BeanFactory beanFactory;
     
     private Generator generator;
     
@@ -39,17 +40,20 @@ public class NonCachingPipelineTest {
     private Reader reader;
     
     private Environment environment;
+    
+    private SourceResolver sourceResolver;
 
     @Before
     public void setUp() throws Exception {
         this.parameters = createMock(Parameters.class);
-        this.serviceManager = createMock(ServiceManager.class);
+        this.beanFactory = createMock(BeanFactory.class);
         this.generator = createMock(Generator.class);
         this.transformer = createMock(Transformer.class);
         this.serializer = createMock(Serializer.class);
         this.reader = createMock(Reader.class);
         this.environment = createMock(Environment.class);
-        this.pipeline = new NonCachingPipeline(this.serviceManager);
+        this.pipeline = new NonCachingPipeline(this.sourceResolver);
+        this.pipeline.setBeanFactory(this.beanFactory);
     }
 
     @Test
@@ -87,39 +91,39 @@ public class NonCachingPipelineTest {
     }
 
     @Test
-    public void testSetGenerator() throws ProcessingException, ServiceException {
-        expect(this.serviceManager.lookup("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        replay(this.serviceManager, this.generator);
+    public void testSetGenerator() throws ProcessingException {
+        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
+        replay(this.beanFactory, this.generator);
         this.pipeline.setGenerator("foo", null, null, null);
-        verify(this.serviceManager, this.generator);
+        verify(this.beanFactory, this.generator);
     }
 
     @Test
-    public void testAddTransformer() throws ProcessingException, ServiceException {
-        expect(this.serviceManager.lookup("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        expect(this.serviceManager.lookup("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
-        replay(this.serviceManager, this.generator, this.transformer);
+    public void testAddTransformer() throws ProcessingException {
+        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
+        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
+        replay(this.beanFactory, this.generator, this.transformer);
         this.pipeline.setGenerator("foo", null, null, null);
         this.pipeline.addTransformer("foo", null, null, null);
-        verify(this.serviceManager, this.generator, this.transformer);
+        verify(this.beanFactory, this.generator, this.transformer);
     }
 
     @Test
-    public void testSetSerializer() throws ProcessingException, ServiceException {
-        expect(this.serviceManager.lookup("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        expect(this.serviceManager.lookup("org.apache.cocoon.serialization.Serializer/foo")).andReturn(this.serializer);
-        replay(this.serviceManager, this.generator, this.serializer);
+    public void testSetSerializer() throws ProcessingException {
+        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
+        expect(this.beanFactory.getBean("org.apache.cocoon.serialization.Serializer/foo")).andReturn(this.serializer);
+        replay(this.beanFactory, this.generator, this.serializer);
         this.pipeline.setGenerator("foo", null, null, null);
         this.pipeline.setSerializer("foo", null, null, null, null);
-        verify(this.serviceManager, this.generator, this.serializer);
+        verify(this.beanFactory, this.generator, this.serializer);
     }
 
     @Test
-    public void testSetReader() throws ProcessingException, ServiceException {
-        expect(this.serviceManager.lookup("org.apache.cocoon.reading.Reader/foo")).andReturn(this.reader);
-        replay(this.serviceManager, this.reader);
+    public void testSetReader() throws ProcessingException {
+        expect(this.beanFactory.getBean("org.apache.cocoon.reading.Reader/foo")).andReturn(this.reader);
+        replay(this.beanFactory, this.reader);
         this.pipeline.setReader("foo", null, null, null);
-        verify(this.serviceManager, this.reader);
+        verify(this.beanFactory, this.reader);
     }
 
     @Test
@@ -128,31 +132,30 @@ public class NonCachingPipelineTest {
     }
 
     @Test
-    public void testPrepareInternal() throws ProcessingException, ServiceException, SAXException, IOException {
-        expect(this.serviceManager.lookup("org.apache.cocoon.reading.Reader/foo")).andReturn(this.reader);
-        expect(this.serviceManager.lookup("org.apache.excalibur.source.SourceResolver")).andReturn(null);
+    public void testPrepareInternal() throws ProcessingException, SAXException, IOException {
+        expect(this.beanFactory.getBean("org.apache.cocoon.reading.Reader/foo")).andReturn(this.reader);
         expect(this.environment.getObjectModel()).andReturn(null);
         this.reader.setup(null, null, null, this.parameters);
         expect(this.parameters.isParameter("expires")).andReturn(false);
-        replay(this.serviceManager, this.reader, this.environment, this.parameters);
+        replay(this.beanFactory, this.reader, this.environment, this.parameters);
         this.pipeline.setReader("foo", null, this.parameters, null);
         this.pipeline.prepareInternal(this.environment);
-        verify(this.serviceManager, this.reader, this.environment, this.parameters);
+        verify(this.beanFactory, this.reader, this.environment, this.parameters);
     }
 
     @Test
-    public void testProcessEnvironmentXMLConsumer() throws ProcessingException, ServiceException, IOException, SAXException {
-        expect(this.serviceManager.lookup("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        expect(this.serviceManager.lookup("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
+    public void testProcessEnvironmentXMLConsumer() throws ProcessingException, IOException, SAXException {
+        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
+        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
         this.generator.setConsumer(this.transformer);
         this.generator.generate();
         this.transformer.setConsumer(null);
         this.environment.setContentType("text/xml");
-        replay(this.environment, this.serviceManager, this.generator, this.transformer);
+        replay(this.environment, this.beanFactory, this.generator, this.transformer);
         this.pipeline.setGenerator("foo", null, null, null);
         this.pipeline.addTransformer("foo", null, null, null);
         this.pipeline.process(this.environment, null);
-        verify(this.environment, this.serviceManager, this.generator, this.transformer);
+        verify(this.environment, this.beanFactory, this.generator, this.transformer);
     }
 
     @Test
