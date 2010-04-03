@@ -3,8 +3,8 @@ package edu.stanford.irt.laneweb.cocoon.pipeline;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.StringTokenizer;
@@ -111,12 +111,12 @@ public class NonCachingPipeline implements ProcessingPipeline {
     /** The current SourceResolver */
     protected SourceResolver sourceResolver;
 
-    protected List transformerParams = new ArrayList();
+    protected List<Parameters> transformerParams = new LinkedList<Parameters>();
 
     // Transformer stuff
-    protected List transformers = new ArrayList();
+    protected List<Transformer> transformers = new LinkedList<Transformer>();
 
-    protected List transformerSources = new ArrayList();
+    protected List<String> transformerSources = new LinkedList<String>();
     
     public NonCachingPipeline(ServiceManager serviceManager) {
         this.manager = serviceManager;
@@ -148,7 +148,7 @@ public class NonCachingPipeline implements ProcessingPipeline {
             throw new ProcessingException("Must set a generator before adding transformer '" + role + "'", getLocation(param));
         }
         try {
-            this.transformers.add(this.newManager.lookup(Transformer.ROLE + '/' + role));
+            this.transformers.add((Transformer)this.newManager.lookup(Transformer.ROLE + '/' + role));
         } catch (ServiceException ce) {
             throw ProcessingException.throwLocated("Lookup of transformer '" + role + "' failed", ce, getLocation(param));
         }
@@ -491,9 +491,9 @@ public class NonCachingPipeline implements ProcessingPipeline {
      */
     protected void connectPipeline(final Environment environment) throws ProcessingException {
         XMLProducer prev = this.generator;
-        Iterator itt = this.transformers.iterator();
+        Iterator<Transformer> itt = this.transformers.iterator();
         while (itt.hasNext()) {
-            Transformer next = (Transformer) itt.next();
+            Transformer next = itt.next();
             connect(environment, prev, next);
             prev = next;
         }
@@ -542,10 +542,10 @@ public class NonCachingPipeline implements ProcessingPipeline {
         // Not a connection reset: add all location information
         if (this.reader == null) {
             // Add all locations in reverse order
-            ArrayList locations = new ArrayList(this.transformers.size() + 2);
+            List<Location> locations = new LinkedList<Location>();
             locations.add(getLocation(this.serializerParam));
             for (int i = this.transformerParams.size() - 1; i >= 0; i--) {
-                locations.add(getLocation((Parameters) this.transformerParams.get(i)));
+                locations.add(getLocation(this.transformerParams.get(i)));
             }
             locations.add(getLocation(this.generatorParam));
             throw ProcessingException.throwLocated("Failed to process pipeline", e, locations);
@@ -750,12 +750,12 @@ public class NonCachingPipeline implements ProcessingPipeline {
         try {
             // setup the generator
             this.generator.setup(this.sourceResolver, environment.getObjectModel(), this.generatorSource, this.generatorParam);
-            Iterator transformerItt = this.transformers.iterator();
-            Iterator transformerSourceItt = this.transformerSources.iterator();
-            Iterator transformerParamItt = this.transformerParams.iterator();
+            Iterator<Transformer> transformerItt = this.transformers.iterator();
+            Iterator<String> transformerSourceItt = this.transformerSources.iterator();
+            Iterator<Parameters> transformerParamItt = this.transformerParams.iterator();
             while (transformerItt.hasNext()) {
-                Transformer trans = (Transformer) transformerItt.next();
-                trans.setup(this.sourceResolver, environment.getObjectModel(), (String) transformerSourceItt.next(), (Parameters) transformerParamItt.next());
+                Transformer trans = transformerItt.next();
+                trans.setup(this.sourceResolver, environment.getObjectModel(), transformerSourceItt.next(), transformerParamItt.next());
             }
             if (this.serializer instanceof SitemapModelComponent) {
                 ((SitemapModelComponent) this.serializer).setup(this.sourceResolver, environment.getObjectModel(), this.serializerSource, this.serializerParam);
