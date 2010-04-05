@@ -69,7 +69,7 @@
                                     <!--<div id="searchTermsAcInput"/>
                                 </div>-->
                                 <input id="searchSubmit" type="submit" value="search"/>
-                                <!--<input name="source" id="searchSource" type="hidden" value=""/>-->
+                                <input name="source" id="searchSource" type="hidden" value=""/>
                             </fieldset>
                             <div id="searchTips">
                                 <a href="/services/laneconnexSearch.html">Search
