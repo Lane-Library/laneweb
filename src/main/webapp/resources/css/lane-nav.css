@@ -1,59 +1,19 @@
 #laneNav {
     position:absolute;
-    top:80px;
+    top:144px;
     width:100%;
+    height:37px;
 /* IE6 doesn't get width 100% right */
     _width:989px;
-    background-color:#820000;
-    background-image:url(/././images/sprite-vert.gif);
-    background-position:0 -400px;
-    z-index:1;
+    background-color:#dad6b1;
     font-weight:bold;
-    white-space:nowrap;
 }
 #laneNav li {
-    padding:7px 20px;
+    padding:10px 20px;
     background-image:none;
     float:left;
 }
-#laneNav li:hover, #laneNav li.hover, #laneNav li.active {
-    background-color:#f6f6ec;
-}
-#laneNav li:hover a, #laneNav li.hover a, #laneNav li.active a {
-    color:#3F3C30;
-}
-#laneNav div {
-    position:absolute;
-    top:30px;
-    left:0;
-    width:100%;
-/* IE6 doesn't get width 100% right */
-    _width:989px;
-    background-color:#f6f6ec;
-    font-size: .8em;
-    font-weight:normal;
-    border:1px solid #C0BFA4;
-    display:none;
-}
-#laneNav li:hover div, #laneNav li.hover div {
-    display:block;
-}
-#laneNav ul {
-    background-color:#f6f6ec;
-    float:left;
-    position:static;
-}
-#laneNav li li {
-    float:none;
-    padding:0.5em 0.5em 0.5em 2em;
-    background-image:url(/././images/sprite.gif);
-    background-position:8px -1190px;
-    background-repeat:no-repeat;
-}
-
-#laneNav li:hover, #laneNav li.hover, #laneNav li.active {
-    background-color:#f6f6ec;
-}
-#laneNav li:hover a, #laneNav li.hover a, #laneNav li.active a {
-    color:#3F3C30;
+#laneNav a, #laneNav a:visited {
+    color:black;
+    text-decoration:none
 }

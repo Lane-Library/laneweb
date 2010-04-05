@@ -1,24 +1,24 @@
 /*
-   This is the shaded border stuff.
+  This is the shaded border stuff.
   The markup is like so:
   <div id="sb-rt" class="sb-lr">
   <div id="sb-lft" class="sb-lr">
   <div class="sb-tb">
-  <div class="sb-c" id="sb-tl"><!-- --></div>
-  <div class="sb-c" id="sb-tr"><!-- --></div>
+  <div class="sb-c" id="sb-tl"></div>
+  <div class="sb-c" id="sb-tr"></div>
   </div>
   <div id="sb">
   <!-- content here -->
   </div>
   <div class="sb-tb" id="sb-bot">
-  <div class="sb-c" id="sb-bl"><!-- --></div>
-  <div class="sb-c" id="sb-br"><!-- --></div>
+  <div class="sb-c" id="sb-bl"></div>
+  <div class="sb-c" id="sb-br"></div>
   </div>
   </div>
   </div>
  */
 /*
-   .sb-lr are divs that have 6px of padding for the shading image on the left
+  .sb-lr are divs that have 6px of padding for the shading image on the left
   and right respectively.
   They are nested inside each other and contain all of the other elements.
  */
@@ -36,7 +36,7 @@
     background-position:right
 }
 /*
-   sb is nested inside .sb-lr with a white background to cover the part of the
+  sb is nested inside .sb-lr with a white background to cover the part of the
   side shading that needs to be hidden.
  */
 #sb {
@@ -44,10 +44,10 @@
     position:relative;
 }
 /*
-   .sb-tb are the divs that hold the top and bottom shading image.
+  .sb-tb are the divs that hold the top and bottom shading image.
   They need position:relative so corners can be positioned inside them.
   One comes before and one after the content to be
-  surrounded with a shaded border. They need a z-index to be on top 
+  surrounded with a shaded border. They need a z-index to be on top
  */
 .sb-tb {
     position:relative;
@@ -61,7 +61,7 @@
 #sb-bot {
     background-position:0 -126px
 }
-/* .sbc are the corners*/
+/* .sbc are the corners */
 /* font size is for IE6 */
 .sb-c {
     height:12px;

@@ -19,36 +19,30 @@
                         <div class="sb-c" id="sb-tr"/>
                     </div>
                     <div id="sb">
-                        <div id="breadcrumb"><a href="http://med.stanford.edu/">School of
+                        <!--<div id="breadcrumb"><a href="http://med.stanford.edu/">School of
                                 Medicine</a> &#xBB; <a href="http://irt.stanford.edu/"
-                                title="IRT...">IRT</a> &#xBB; <?laneweb breadcrumb?></div>
+                                title="IRT...">IRT</a> &#xBB; <?laneweb breadcrumb?></div>-->
                         <h1>
                             <a href="/index.html"><span>Lane</span> Medical Library <span
                                     id="subHeading">powered by LaneConnex Technology</span></a>
                         </h1>
                         <form id="search" method="get" action="/search.html">
                             <ul id="searchTabs">
+                                <li id="clinical" title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ...">
+                                    <a href="?searchTab=clinical" title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ..."
+                                        >Clinical Search</a>
+                                </li>
+                                <li id="specialty" title="Search 200+ online resources ... narrow results by specialty ... shows # of results per resource">
+                                    <a href="?searchTab=specialty" title="Search 200+ online resources ... narrow results by specialty ... shows # of results per resource"
+                                        >Specialty Search</a>
+                                </li>
                                 <li id="all" title="Find articles in PubMed, Web of Science, UpToDate PLUS resources in the Lane Catalog">
                                     <a href="?searchTab=all" title="Find articles AND digital resources from Lane Catalog"
                                         >Lane Search</a>
                                 </li>
-                                <li id="specialty" title="Search 200+ online resources ... narrow results by specialty ... shows # of results per resource">
-                                    <a href="?searchTab=specialty" title="Search 200+ online resources ... narrow results by specialty ... shows # of results per resource"
-                                        >Specialty</a>
-                                </li>
-                                <li id="clinical" title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ...">
-                                    <a href="?searchTab=clinical" title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ..."
-                                        >Clinical</a>
-                                </li>
                             </ul>
-                            <div id="searchTips">
-                                <a href="/services/laneconnexSearch.html">Search
-                                    Tips</a>&#160;&#160;&#160;|&#160;&#160;<a
-                                    href="/services/laneconnexSearch.html">How Does Our Search
-                                    Work?</a>
-                            </div>
 
-                            <fieldset id="picoFields">
+                            <!--<fieldset id="picoFields">
                                 <div class="acContainer">
                                     <input name="p" class="picoInput" id="clinicalP" type="text"
                                         title="patient condition"/>
@@ -68,15 +62,19 @@
                                     <input name="o" class="picoInput" id="clinicalO" type="text"
                                         title="outcome"/>
                                 </div>
-                            </fieldset>
+                            </fieldset>-->
                             <fieldset id="searchFields">
-                                <div class="acContainer">
+                                <!--<div class="acContainer">-->
                                     <input name="q" id="searchTerms" type="text"/>
-                                    <div id="searchTermsAcInput"/>
-                                </div>
+                                    <!--<div id="searchTermsAcInput"/>
+                                </div>-->
                                 <input id="searchSubmit" type="submit" value="search"/>
-                                <input name="source" id="searchSource" type="hidden" value=""/>
+                                <!--<input name="source" id="searchSource" type="hidden" value=""/>-->
                             </fieldset>
+                            <div id="searchTips">
+                                <a href="/services/laneconnexSearch.html">Search
+                                Tips</a>
+                                </div>
                             <div id="searchIndicator"><img alt="[searching]"
                                     src="/images/backgr/search-indicator.gif"/></div>
                         </form>

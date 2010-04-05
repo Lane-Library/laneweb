@@ -1,122 +1,75 @@
 #search {
-    background-image:url(/././images/backgr/search-form-background.jpg);
-    background-position:bottom;
-    background-repeat:no-repeat;
-    height:84px;
-    margin:24px 14px;
+/*
+  background-image:url(/././images/backgr/search-form-background.jpg);
+  background-position:bottom;
+  background-repeat:no-repeat;
+  height:84px;
+  margin:24px 14px;
+ */
+    background-color:#ab1401;
+    height:72px;
+    margin-bottom:44px;
 }
-#search.clinicalSearch {
-    background-image:url(/././images/backgr/clini-back-with-fields.jpg);
-    height:120px;
+/*
+  #search.clinicalSearch {
+  background-image:url(/././images/backgr/clini-back-with-fields.jpg);
+  height:120px;
+  }
+ */
+#searchTabs, #searchTips {
+    font-size:smaller;
+}
+#searchTabs {
+    padding:11px 0 0 28px;
 }
 #searchTabs li {
     float:left;
-    background-image:url(/././images/backgr/search-form-tabs-background.jpg);
-    background-position:0px -39px;
-    background-repeat:no-repeat;
-    height:27px;
-    width:94px;
-    padding:0;
+    padding:0 10px;
+    background-image:none;
+/*
+  background-image:url(/././images/backgr/search-form-tabs-background.jpg);
+  background-position:0px -39px;
+  background-repeat:no-repeat;
+  height:27px;
+  width:94px;
+  padding:0;
+ */
 }
-#searchTabs .active, #searchTabs li:hover, #searchTabs .hover {
+#searchTabs .active {
+    display:none;
     background-position:0px -70px;
 }
-#searchTabs li.active:first-child, #searchTabs li:first-child:hover, #searchTabs .hover-first-child {
-    background-position:0px 3px;
+#searchTips {
+    float:left;
+    padding:10px;
 }
-#searchTabs a {
+/*
+  #searchTabs li.active:first-child, #searchTabs li:first-child:hover, #searchTabs .hover-first-child {
+  background-position:0px 3px;
+  }
+ */
+#searchTabs a, #searchTips a {
+    color:white;
     border-bottom:none;
-    display:block;
-    padding:6px;
-    text-align:center;
+    text-decoration:underline;
+/*
+  border-bottom:none;
+  display:block;
+  padding:6px;
+  text-align:center;
+ */
 }
 #searchTabs a:focus {
 /* mozilla: remove dotted border -- accessibility? */
-    outline-style:none;
-}
-#searchTips {
-    float:right;
-    color:#2D2D2D;
-    font-size:9px;
-    margin-top:12px;
+/* outline-style:none; */
 }
 #search fieldset {
     clear:left;
-    padding-left:150px;
+    float:left;
+    margin:8px 0 0 20px;
+/* padding-left:150px; */
 /* IE6 needs this for layout: */
-    _margin-top:-2px;
-}
-#picoFields {
-    display:none;
-    padding-top:24px;
-}
-.clinicalSearch #picoFields {
-    display:block;
-    padding-left:68px;
-}
-#searchFields {
-    padding-top:18px;
-}
-.clinicalSearch #searchFields {
-    padding-top:14px;
-    padding-left:148px;
-}
-#search input {
-    border:1px white solid;
-}
-#search input:focus {
-/* webkit: remove border from active inputs -- accessibility? */
-    outline-style:none;
-}
-#searchTerms {
-    width:586px;
-}
-.clinicalSearch #searchTerms {
-}
-#search #searchSubmit {
-    border:none;
-    background-color:transparent;
-    cursor:pointer;
-    width:20px;
-    height:20px;
-    text-indent:20px;
-    padding-left:20px;
-}
-.picoInput {
-    margin-right:5px;
-/* IE6 needs this for layout: */
-    _margin-right:9px;
-}
-#breadcrumb.clinicalSearch {
-    top:247px;
-}
-#clinicalP {
-    width:190px;
-}
-#clinicalI {
-    width:197px;
-}
-#clinicalC {
-    width:197px;
-}
-#clinicalO {
-    width:190px;
-}
-#search .acContainer, #search .acContainer div {
-    display:inline;
-}
-/* width of auto-complete PICO containers */
-#pAcInput.yui-ac-container {
-    width:193px;
-}
-#iAcInput.yui-ac-container {
-    width:200px;
-}
-#cAcInput.yui-ac-container {
-    width:198px;
-}
-#searchTermsAcInput {
-    width:590px;
+/* _margin-top:-2px; */
 }
 #searchIndicator {
     visibility:hidden;
@@ -124,3 +77,87 @@
     top:144px;
     left:408px;
 }
+/*
+  #picoFields {
+  display:none;
+  padding-top:24px;
+ */
+/*
+  }
+  .clinicalSearch #picoFields {
+  display:block;
+  padding-left:68px;
+  }
+  #searchFields {
+  padding-top:18px;
+  }
+  .clinicalSearch #searchFields {
+  padding-top:14px;
+  padding-left:148px;
+  }
+  #search input {
+  border:1px white solid;
+  }
+  #search input:focus {
+ */
+/* webkit: remove border from active inputs -- accessibility? */
+/*
+  outline-style:none;
+  }
+ */
+#searchTerms {
+    width:580px;
+}
+/*
+  .clinicalSearch #searchTerms {
+  }
+  #search #searchSubmit {
+  border:none;
+  background-color:transparent;
+  cursor:pointer;
+  width:20px;
+  height:20px;
+  text-indent:20px;
+  padding-left:20px;
+  }
+  .picoInput {
+  margin-right:5px;
+ */
+/* IE6 needs this for layout: */
+/*
+  _margin-right:9px;
+  }
+  #breadcrumb.clinicalSearch {
+  top:247px;
+  }
+  #clinicalP {
+  width:190px;
+  }
+  #clinicalI {
+  width:197px;
+  }
+  #clinicalC {
+  width:197px;
+  }
+  #clinicalO {
+  width:190px;
+  }
+  #search .acContainer, #search .acContainer div {
+  display:inline;
+  }
+ */
+/* width of auto-complete PICO containers */
+/*
+  #pAcInput.yui-ac-container {
+  width:193px;
+  }
+  #iAcInput.yui-ac-container {
+  width:200px;
+  }
+  #cAcInput.yui-ac-container {
+  width:198px;
+  }
+  #searchTermsAcInput {
+  width:590px;
+  }
+ */

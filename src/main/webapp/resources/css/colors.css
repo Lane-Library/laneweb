@@ -4,13 +4,8 @@ html {
 }
 /* styles to keep - they correspond to CY YUI grid */
 p, span, td {
-    color: #333; /*#3f3c30;*/
-}
-p {
-   
-    font-size:1em;
-line-height:1.6em;
-margin:.5em 0 0.8em;
+    color: #333;
+/* #3f3c30; */    
 }
 .red {
     font-family:Georgia, "Times New Roman", Times, serif;
@@ -26,10 +21,9 @@ margin:.5em 0 0.8em;
 .grey {
     color: #999999;
 }
-
 .hours {
     font-family:Georgia,"Times New Roman",Times,serif;
-font-size:0.9em;
+    font-size:0.9em;
 }
 .bold-warning, .weekday {
     font-weight:bold;
@@ -55,142 +49,4 @@ font-size:0.9em;
 .olya-content-notes {
     color:#0C0;
     font-weight: bold;
-}
-/* styles for grey buttons */
-.livechat-button {
-    background-image: url(/././graphics/buttons/sprite-but-off.gif);
-    background-repeat: no-repeat;
-    background-position: 13px -19px;
-    margin: 1em 0 1em 0;
-    height: 27px;
-}
-.livechat-button:hover {
-    background: transparent url(/././graphics/buttons/sprite-but-on.gif);
-    background-repeat: no-repeat;
-    background-position: 13px -19px;
-}
-.directions-maps-button {
-    background-image: url(/././graphics/buttons/sprite-but-off.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -318px;
-    margin: 1em 0 1em 0;
-    height: 27px;
-    width: 147px;
-}
-.directions-maps-button:hover {
-    background: transparent url(/././graphics/buttons/sprite-but-on.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -318px;
-}
-.all-classes-button {
-    background-image: url(/././graphics/buttons/sprite-but-off.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -220px;
-    margin: .5em 0 .5em 0;
-    height: 27px;
-    width: 147px;
-}
-.all-classes-button:hover {
-    background: transparent url(/././graphics/buttons/sprite-but-on.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -220px;
-}
-.biomed-sem-button {
-    background-image: url(/././graphics/buttons/sprite-but-off.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -267px;
-    margin: .5em 0 .5em 0;
-    height: 27px;
-    width: 147px;
-}
-.biomed-sem-button:hover {
-    background: transparent url(/././graphics/buttons/sprite-but-on.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -267px;
-}
-
-.go-straight-pubmed {
-    background-image: url(/././graphics/buttons/sprite-but-off.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -435px;
-    margin: .5em 0 .5em 0;
-    height: 38px;
-    width: 205px;
-}
-.go-straight-pubmed:hover {
-    background: transparent url(/././graphics/buttons/sprite-but-on.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -435px;
-}
-
-.go-straight-uptodate {
-    background-image: url(/././graphics/buttons/sprite-but-off.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -483px;
-    margin: .5em 0 .5em 0;
-    height: 38px;
-    width: 205px;
-}
-.go-straight-uptodate:hover {
-    background: transparent url(/././graphics/buttons/sprite-but-on.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -483px;
-}
-
-.go-straight-webscience {
-    background-image: url(/././graphics/buttons/sprite-but-off.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -529px;
-    margin: .5em 0 .5em 0;
-    height: 38px;
-    width: 253px;
-}
-.go-straight-webscience:hover {
-    background: transparent url(/././graphics/buttons/sprite-but-on.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -529px;
-}
-
-.subscribe-button {
-    background-image: url(/././graphics/buttons/sprite-but-off.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -70px;
-    margin: .5em 0 .5em 0;
-    height: 27px;
-    width: 147px;
-}
-.subscribe-button:hover {
-    background: transparent url(/././graphics/buttons/sprite-but-on.gif);
-    background-repeat: no-repeat;
-    background-position: -23px -70px;
-}
-/* drop down menu on liaisons page - needs revision */
-#choose {
-    position:relative;
-}
-#choose ul {
-    display:none;
-    position:absolute;
-    left:0;
-    z-index:2;
-}
-#choose ul {
-    top:4em;
-}
-#choose h5 {
-    padding:1em;
-    background-color:#CCCCB4;
-    background-image:url(/././images/backgr/sprite-vert.gif);
-    background-repeat:repeat-x;
-    background-position:0 -581px;
-    text-transform: uppercase;
-    border: 1px solid #CCCCB4;
-}
-#choose:hover ul, #choose.hover ul {
-    display:block;
-    background-color:#E6E7E2;
-}
-#choose li {
-    white-space:nowrap;
-    padding-left:1em;
 }

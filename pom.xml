@@ -99,6 +99,7 @@
                      <output>target/laneweb/resources/css/lane-all.css</output>
                      <includes>
                         <include>layout-min.css</include>
+                        <include>buttons-min.css</include>
                         <include>colors-min.css</include>
                         <include>shaded-border-min.css</include>
                         <include>som-nav-min.css</include>
