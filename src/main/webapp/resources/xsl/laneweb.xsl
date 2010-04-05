@@ -303,6 +303,12 @@
     </xsl:template>
 
     <!-- =====================  SPECIAL CASE TEMPLATES ===================== -->
+    
+    <!-- temporarily change yui-gd to yui-gf (33/66 -> 25/75) pending changing content docs-->
+    <xsl:template match="child::h:div/attribute::class[.='yui-gd']">
+        <xsl:attribute name="class">yui-gf</xsl:attribute>
+    </xsl:template>
+    
     <!-- obfuscated email href (don't copy, processed elsewhere) -->
     <xsl:template match="attribute::href[starts-with(.,'mailto:')]"/>
 

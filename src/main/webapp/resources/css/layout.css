@@ -13,6 +13,12 @@
 .yui-ge div.yui-gd .yui-g div.yui-u {
     width:49%;
 }
+.yui-ge .yui-gf .yui-u {
+    width:74.2%;
+}
+.yui-ge .yui-gf div.first {
+    width:24%;
+}
 .yui-u .yui-g {
     width:100%
 }
