@@ -10,7 +10,7 @@
 .yui-gf .yui-gb .yui-u {
     width:32%
 }
-.yui-ge div.yui-gd .yui-g div.yui-u {
+.yui-ge div.yui-gd .yui-g div.yui-u, .yui-ge .yui-gf .yui-g .yui-u {
     width:49%;
 }
 .yui-ge .yui-gf .yui-u {
@@ -21,4 +21,7 @@
 }
 .yui-u .yui-g {
     width:100%
+}
+.content {
+    margin:10px;
 }
