@@ -107,6 +107,7 @@
                         <include>lists-min.css</include>
                         <include>anchors-min.css</include>
                         <include>footer-min.css</include>
+                        <include>headers-min.css</include>
                         <!--<include>buttons-min.css</include>
                         <include>colors-min.css</include>
                         <include>shaded-border-min.css</include>
@@ -119,7 +120,6 @@
                         <include>table-styles-min.css</include>
                         <include>popups-min.css</include>
                         <include>breadcrumb-min.css</include>
-                        <include>headers-min.css</include>
                         <include>legend-dropdown-min.css</include>
                         <include>events-min.css</include>
                         <include>side-hd-module-min.css</include>
