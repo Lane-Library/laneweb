@@ -99,13 +99,17 @@
                      <output>target/laneweb/resources/css/lane-all.css</output>
                      <includes>
                         <include>layout-min.css</include>
-                        <include>buttons-min.css</include>
+                        <include>som-nav-min.css</include>
+                        <include>shaded-border-min.css</include>
+                        <include>header-min.css</include>
+                        <include>search-form-min.css</include>
+                        <include>lane-nav-min.css</include>
+                        <include>lists-min.css</include>
+                        <include>anchors-min.css</include>
+                        <include>footer-min.css</include>
+                        <!--<include>buttons-min.css</include>
                         <include>colors-min.css</include>
                         <include>shaded-border-min.css</include>
-                        <include>som-nav-min.css</include>
-                        <include>lane-nav-min.css</include>
-                        <include>footer-min.css</include>
-                        <include>search-form-min.css</include>
                         <include>section-menu-min.css</include>
                         <include>expandies-min.css</include>
                         <include>simple-module-min.css</include>
@@ -115,10 +119,7 @@
                         <include>table-styles-min.css</include>
                         <include>popups-min.css</include>
                         <include>breadcrumb-min.css</include>
-                        <include>header-min.css</include>
-                        <include>anchors-min.css</include>
                         <include>headers-min.css</include>
-                        <include>lists-min.css</include>
                         <include>legend-dropdown-min.css</include>
                         <include>events-min.css</include>
                         <include>side-hd-module-min.css</include>
@@ -126,7 +127,7 @@
                         <include>autocomplete-min.css</include>
                         <include>tooltips-min.css</include>
                         <include>search-min.css</include>
-                        <include>images-min.css</include>
+                        <include>images-min.css</include>-->
                      </includes>
                   </aggregation>
                   <aggregation>

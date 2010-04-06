@@ -36,10 +36,12 @@
     padding:13px 24px 6px 12px;
     color:#696962;
     text-decoration:none;
+    border-bottom:none;
 }
 #somNav a:hover {
     color:#990000;
     text-decoration:underline;
+    border-bottom-style:none;
 }
 #stanfordMedicineBrand a {
     width:124px;

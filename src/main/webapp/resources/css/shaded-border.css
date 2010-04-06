@@ -17,6 +17,10 @@
   </div>
   </div>
  */
+/*scheme relys on background being this color, so put it here.*/
+html {
+    background-color: #D6D5C7;
+}
 /*
   .sb-lr are divs that have 6px of padding for the shading image on the left
   and right respectively.

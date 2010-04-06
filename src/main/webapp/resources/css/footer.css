@@ -1,4 +1,3 @@
-
 .nav2 {
     font-size:0.9em;
 }
@@ -34,9 +33,19 @@
 }
 .nav2 li {
     display:inline;
-background-image:none;
+    background-image:none;
 }
 .nav2 {
     clear:both;
     text-align:center
+}
+.nav2 a, #somNav2 a {
+    color:#1C4B70;
+}
+.nav2 a, #somNav2 a {
+    border-bottom:none;
+}
+.nav2 a:hover, #somNav2 a:hover {
+    text-decoration:underline;
+    border-bottom-style:none;
 }

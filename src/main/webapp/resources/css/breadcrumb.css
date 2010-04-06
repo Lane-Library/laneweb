@@ -5,5 +5,12 @@
     text-decoration:none;
     position:absolute;
     top:210px;
-    margin-top: .5em 0 .5em 0;
-    }
+}
+#breadcrumb a {
+    color:#1C4B70;
+    border-bottom:none;
+}
+#breadcrumb a:hover {
+    text-decoration:underline;
+    border-bottom-style:none;
+}

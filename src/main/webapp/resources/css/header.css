@@ -19,6 +19,13 @@ h1 span {
     display:block;
     letter-spacing:normal;
 }
+h1 a {
+    border-bottom:none;
+}
+#som, h1 a:hover {
+    text-decoration:underline;
+    border-bottom-style:none;
+}
 #som {
     display:block;
     height:50px;

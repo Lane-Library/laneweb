@@ -78,7 +78,9 @@
                             <div id="searchIndicator"><img alt="[searching]"
                                     src="/images/backgr/search-indicator.gif"/></div>
                         </form>
-                        <?laneweb content?>
+                        <div class="content">
+                            <?laneweb content?>
+                        </div>
                         <ul id="libraryContact">
                             <li>650-723-6831</li>
                             <li><a href="mailto:LaneAskUs@stanford.edu"

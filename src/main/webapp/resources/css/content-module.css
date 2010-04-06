@@ -35,3 +35,7 @@
     height:600px;
 }
 /* end search specific */
+
+.contentModule .bd ul li {
+        background-position:0 -1192px;
+}

@@ -1,92 +1,14 @@
-a, #laneNav li li a {
-    color: #565347; /*#3f3c30;*/
+/* these are the default anchor styles*/
+a {
+    color: #565347;
     text-decoration:none;
     border-bottom:1px dotted #81785A;
 }
-
-.contentModule .bd #searchResults a {
-    color:#2200cc;
-    font-size:16px;
-}
-
-.contentModule .bd #searchResults .moreResults a {
-    color:#7777cc;
-    font-size:13px;
-}
-
-a:hover, #laneNav li li a:hover {
+a:hover {
     color:#820000;
     border-color:#820000;
     border-bottom-style:solid;
 }
-#breadcrumb a, .nav2 a, #somNav2 a {
-    color:#1C4B70;
-}
-#laneNav a {
-    color:white;
-}
-#somNav a, h1 a, #breadcrumb a, .nav2 a, #somNav2 a, #laneNav a {
-    border-bottom:none;
-}
-#somNav a:hover, #som, h1 a:hover, #breadcrumb a:hover,.nav2 a:hover, #somNav2 a:hover {
-    text-decoration:underline;
-    border-bottom-style:none;
-}
-.inactiveFacet a{
-    border-bottom:none;
-}
 a:visited {
     color:#79455C
 }
-/*
-  #sb a:link, #sb a:visited {
-  border-bottom: 1px dotted #3f3c30;
-  text-decoration: none;
-  }
-  a:link {
-  color: #3f3c30;
-  }
-  a:visited {
-  color: #6e6a5c;
-  }
-  a:hover, .simpleModule li a:hover, .simpleModule .new-book a:hover {
-  color:#820000;
-  }
-  .expandy a {
-  border-bottom:1px dotted #81785A;
-  }
-  .sectionMenu a {
-  border-bottom:1px dotted black;
-  color:#3B3B3B;
-  text-decoration:none;
-  font-weight:bold;
-  }
-  .class-list a {
-  font-weight: bold;
-  font-size: 12px;
-  }
-  .narrowModule li a {
-  border-bottom:1px dotted #81785A;
-  color:#3B3B3B;
-  text-decoration:none;
-  font-weight:normal;
-  font-family:Arial,sans-serif;
-  font-size:11px;
-  line-height:133%;
-  }
-  .sectionMenu a {
-  border-bottom:1px dotted black;
-  color:#3B3B3B;
-  text-decoration:none;
-  font-weight:bold;
-  }
-  .simpleModule li a, .simpleModule .new-book a {
-  border-bottom:1px dotted #81785A;
-  color:#3B3B3B;
-  text-decoration:none;
-  font-weight:normal;
-  font-family:Arial,sans-serif;
-  font-size:11px;
-  line-height:133%;
-  }
- */

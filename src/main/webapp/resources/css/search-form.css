@@ -1,19 +1,9 @@
 #search {
-/*
-  background-image:url(/././images/backgr/search-form-background.jpg);
-  background-position:bottom;
-  background-repeat:no-repeat;
-  height:84px;
-  margin:24px 14px;
- */
     background-color:#ab1401;
-    height:72px;
-    margin-bottom:44px;
+    height:109px;
 }
 /*
   #search.clinicalSearch {
-  background-image:url(/././images/backgr/clini-back-with-fields.jpg);
-  height:120px;
   }
  */
 #searchTabs, #searchTips {
@@ -26,14 +16,6 @@
     float:left;
     padding:0 10px;
     background-image:none;
-/*
-  background-image:url(/././images/backgr/search-form-tabs-background.jpg);
-  background-position:0px -39px;
-  background-repeat:no-repeat;
-  height:27px;
-  width:94px;
-  padding:0;
- */
 }
 #searchTabs .active {
     display:none;
@@ -43,21 +25,10 @@
     float:left;
     padding:10px;
 }
-/*
-  #searchTabs li.active:first-child, #searchTabs li:first-child:hover, #searchTabs .hover-first-child {
-  background-position:0px 3px;
-  }
- */
 #searchTabs a, #searchTips a {
     color:white;
     border-bottom:none;
     text-decoration:underline;
-/*
-  border-bottom:none;
-  display:block;
-  padding:6px;
-  text-align:center;
- */
 }
 #searchTabs a:focus {
 /* mozilla: remove dotted border -- accessibility? */
@@ -67,9 +38,11 @@
     clear:left;
     float:left;
     margin:8px 0 0 20px;
-/* padding-left:150px; */
 /* IE6 needs this for layout: */
 /* _margin-top:-2px; */
+}
+#searchTerms {
+    width:580px;
 }
 #searchIndicator {
     visibility:hidden;
@@ -105,9 +78,6 @@
   outline-style:none;
   }
  */
-#searchTerms {
-    width:580px;
-}
 /*
   .clinicalSearch #searchTerms {
   }
