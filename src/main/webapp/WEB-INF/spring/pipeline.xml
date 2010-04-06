@@ -87,8 +87,9 @@
 
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/expires"
         class="edu.stanford.irt.laneweb.cocoon.pipeline.ExpiresCachingPipeline" scope="prototype">
-        <property name="cache" ref="org.apache.cocoon.caching.Cache"/>
-        <property name="cacheExpires" value="300"/>
+        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
+        <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
+        <constructor-arg value="300"/>
     </bean>
 
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/throttling"
