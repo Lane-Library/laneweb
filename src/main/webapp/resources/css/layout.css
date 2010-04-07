@@ -1,3 +1,4 @@
+/*this file contains mostly yui grid customization and nesting error corrections*/
 #custom-doc {
     width:76.92em;
     *width:75.07em;
@@ -19,7 +20,7 @@
 .yui-ge .yui-gf div.first {
     width:24%;
 }
-.yui-u .yui-g {
+.yui-u .yui-g, .yui-u .yui-gd {
     width:100%
 }
 .content {
