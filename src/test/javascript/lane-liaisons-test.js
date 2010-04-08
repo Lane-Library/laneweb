@@ -17,7 +17,7 @@
         },
         testOthersHiddenOnSelect: function() {
             var liaison = options[1].value;
-            YAHOO.util.UserAction.click(options[1],{});
+            YAHOO.util.UserAction.click(options[1], {});
             var othersVisible = false;
             for (var i = 0; i < liaisons.length; i++) {
                 if (liaisons[i].id != liaison) {
@@ -30,7 +30,7 @@
         },
         testAnotherOthersHiddenOnSelect: function() {
             var liaison = options[3].value;
-            YAHOO.util.UserAction.click(options[3],{});
+            YAHOO.util.UserAction.click(options[3], {});
             var othersVisible = false;
             for (var i = 0; i < liaisons.length; i++) {
                 if (liaisons[i].id != liaison) {
@@ -42,7 +42,7 @@
             YAHOO.util.Assert.isTrue(othersVisible === false);
         },
         testAllVisibleOnSelectAll: function() {
-            YAHOO.util.UserAction.click(options[0],{});
+            YAHOO.util.UserAction.click(options[0], {});
             this.testAllVisible();
         }
     });

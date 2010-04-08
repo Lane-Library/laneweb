@@ -23,8 +23,14 @@
                             expanded.push(j);
                         }
                     }
-                    new YAHOO.widget.AccordionView(expandies[i],{expandItems: expanded});
-//                    expandies[i].style.visibility = 'visible';
+                    try {
+                        new YAHOO.widget.AccordionView(expandies[i], {
+                            expandItems: expanded
+                        });
+                    //                    expandies[i].style.visibility = 'visible';
+                    } catch (e) {
+                        alert(e.message);
+                    }
                 }
             }
         };

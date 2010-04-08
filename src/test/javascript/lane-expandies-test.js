@@ -3,7 +3,7 @@
  */
 (function() {
     
-    var LANEExpandiesTestCase = new YAHOO.tool.TestCase({
+    var expandiesTestCase = new YAHOO.tool.TestCase({
         name: "Lane Expandies TestCase",
         panel: {},
         testIsClosed: function() {
@@ -40,10 +40,9 @@
         }
         });
 
-
+    new YAHOO.tool.TestLogger();
+    YAHOO.tool.TestRunner.add(expandiesTestCase);
     YAHOO.util.Event.addListener(this, 'load', function() {
-        new YAHOO.tool.TestLogger();
-        YAHOO.tool.TestRunner.add(LANEExpandiesTestCase);
         YAHOO.tool.TestRunner.run();
     });
 })();

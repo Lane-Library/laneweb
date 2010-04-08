@@ -15,7 +15,7 @@
                     hits = response.results.facets[facets[j].facetId].hits;
                     engineStatus = response.results.facets[facets[j].facetId].status;
                 }
-                if (!facets[j].facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits == 0) {
+                if (!facets[j].facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits === 0) {
                 	YAHOO.util.Dom.addClass(hitLink.parentNode,'inactiveFacet');
                 	YAHOO.util.Dom.removeClass(hitLink.parentNode,'searchableFacet');
                 	hitLink.setAttribute('title','no search results for '+hitLink.innerHTML);
@@ -39,11 +39,11 @@
             requestString = '';
             for (j = 0; j < facets.length; j++) {
                 facets[j].facetId = facets[j].id.substring(0, facets[j].id.indexOf('Facet'));
-                if(YAHOO.util.Dom.hasClass(facets[j]),'searchableFacet'){
+                if(YAHOO.util.Dom.hasClass(facets[j],'searchableFacet')){
                 	requestString+=facets[j].facetId+',';
                 }
             }
-            if(requestString != ''){
+            if(requestString !== ''){
             	YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/facets/json?q=' + searchString + '&f=' + requestString + '&rd=' + Math.random(), responseHandler);
             }
     };

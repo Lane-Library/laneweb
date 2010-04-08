@@ -6,6 +6,7 @@ LANE.search = LANE.search ||  function() {
         searching = false, //searching state
         searchString,
         encodedString,
+        searchTermsInput,
         source,
         ind = d.getElementById('searchIndicator'),
         initialText,
@@ -17,7 +18,7 @@ LANE.search = LANE.search ||  function() {
 //                if (searching) {
 //                    throw('already searching');
 //                }
-                if (!form.q.value || form.q.value == initialText) {
+                if (!searchTermsInput.value || searchTermsInput.value == initialText) {
                     throw('nothing to search for');
                 }
                 searching = true;
@@ -89,7 +90,7 @@ LANE.search = LANE.search ||  function() {
                 Dom.addClass(elm,'active');
                 o.setSearchSource(elm.id+'-all');
                 // if this is not already active tab and there's a form value, submit search
-                if(!alreadyActive && form.q.value && form.q.value !== initialText){
+                if(!alreadyActive && searchTermsInput.value && searchTermsInput.value !== initialText){
                     o.submitSearch();
                     form.submit();
                     return false;
@@ -104,14 +105,9 @@ LANE.search = LANE.search ||  function() {
             },
             setInitialText: function(){
                 var oldInitialText = initialText;
-                YAHOO.util.Dom.getElementsByClassName('active',null,form,function(el){
-                    if(el.title){
-                        initialText = el.title;
-                    }
-                });
-                if (!form.q.value || form.q.value == oldInitialText){
-                    form.q.value = initialText;
-                    form.q.title = initialText;
+                initialText = activeTab = YAHOO.util.Dom.getElementsByClassName('active','LI','searchTabs')[0].title;
+                if (!searchTermsInput.value || searchTermsInput.value == oldInitialText){
+                    searchTermsInput.value = initialText;
                 }
             },
             submitSearch: function(e){
@@ -124,9 +120,9 @@ LANE.search = LANE.search ||  function() {
                         }
                     }
                     // hide q input so form doesn't bounce
-                    form.q.style.visibility = 'hidden';
+                    searchTermsInput.style.visibility = 'hidden';
                     o.startSearch();
-                    LANE.suggest.collapse();
+//                    LANE.suggest.collapse();
                     //form.submit();
                 } catch (ex) {
                     alert(ex);
@@ -135,11 +131,12 @@ LANE.search = LANE.search ||  function() {
             }
         };
 
-    Event.onContentReady('search',function(){
+    Event.onContentReady('searchForm',function(){
         form = this;
+        searchTermsInput = document.getElementById('searchTerms');
         o.setInitialText();
         Event.addListener(form, 'submit', o.submitSearch);
-        Event.addFocusListener(form.q, function(e) {
+        Event.addFocusListener(searchTermsInput, function(e) {
             if (this.value == initialText) {
                 this.value = '';
             }

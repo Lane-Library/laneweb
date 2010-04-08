@@ -1,38 +1,41 @@
 /**
  * @author ceyates
  */
-(function(){
-    var LANESearchTestCase = new YAHOO.tool.TestCase({
-        name: "LaneSearch TestCase",
-/*
-        testStartSearch: function(){
-            var d = document, i, q;
-            q = d.getElementById('p').getElementsByTagName('input')[0];
-            i = d.getElementById('searchIndicator');
-            YAHOO.util.Assert.areEqual('hidden', i.style.visibility);
-            YAHOO.util.Assert.isFalse(s.isSearching());
-            q.value = 'hello';
+(function() {
+    var searchTestCase = new YAHOO.tool.TestCase({
+    
+        testStartSearch: function() {
+            var searchTermsInput = document.getElementById('searchTerms');
+            var searchIndicator = document.getElementById('searchIndicator');
+            var initialValue = searchTermsInput.value;
+            YAHOO.util.Assert.areEqual('hidden', searchIndicator.style.visibility);
+            YAHOO.util.Assert.isFalse(LANE.search.isSearching());
+            searchTermsInput.value = 'hello';
             LANE.search.startSearch();
-            YAHOO.util.Assert.isTrue(s.isSearching());
-            YAHOO.util.Assert.areEqual('visible', i.style.visibility);
+            YAHOO.util.Assert.isTrue(LANE.search.isSearching());
+            YAHOO.util.Assert.areEqual('visible', searchIndicator.style.visibility);
             LANE.search.stopSearch();
-            YAHOO.util.Assert.areEqual('hidden', i.style.visibility);
-            q.value = '';
+            YAHOO.util.Assert.areEqual('hidden', searchIndicator.style.visibility);
+            searchTermsInput.value = initialValue;
         },
-*/
-        testIsSearching: function(){
-            var q = document.getElementsByTagName('input')[0];
-            var initialValue = q.value;
-            q.value = 'foo';
+        testSetInitialText: function() {
+            var searchTermsInput = document.getElementById('searchTerms');
+            LANE.search.setInitialText();
+            YAHOO.util.Assert.areEqual('all tab title', searchTermsInput.value);
+        },
+        testIsSearching: function() {
+            var searchTermsInput = document.getElementById('searchTerms');
+            var initialValue = searchTermsInput.value;
+            searchTermsInput.value = 'foo';
             YAHOO.util.Assert.isFalse(LANE.search.isSearching());
             LANE.search.startSearch();
             YAHOO.util.Assert.isTrue(LANE.search.isSearching());
             LANE.search.stopSearch();
             YAHOO.util.Assert.isFalse(LANE.search.isSearching());
-            q.value = initialValue;
+            searchTermsInput.value = initialValue;
             
         },
-        testStartSearchNoQuery: function(){
+        testStartSearchNoQuery: function() {
             try {
                 LANE.search.startSearch();
                 YAHOO.util.Assert.fail('should cause exception');
@@ -41,15 +44,17 @@
             }
         },
         testResetQValue: function() {
-            var q = document.getElementsByTagName('input')[0];
-            var initialValue = q.value;
-            YAHOO.util.Assert.areNotEqual(0,q.value.length);
-            q.focus();
-            YAHOO.util.Assert.areEqual(0, q.value.length);
-            q.value = initialValue;
+            var searchTermsInput = document.getElementById('searchTerms');
+            var initialValue = searchTermsInput.value;
+            YAHOO.util.Assert.areNotEqual(0, searchTermsInput.value.length);
+            searchTermsInput.focus();
+            YAHOO.util.Assert.areEqual(0, searchTermsInput.value.length);
+            searchTermsInput.value = initialValue;
         }
     });
-    var oLogger = new YAHOO.tool.TestLogger();
-    YAHOO.tool.TestRunner.add(LANESearchTestCase);
-    YAHOO.tool.TestRunner.run();
+    new YAHOO.tool.TestLogger();
+    YAHOO.tool.TestRunner.add(searchTestCase);
+    YAHOO.util.Event.addListener(window, 'load', function() {
+        YAHOO.tool.TestRunner.run();
+    });
 })();
