@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.suggest;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -19,5 +20,22 @@ public class SuggestionComparatorTest {
         assertTrue(comparator.compare("bbb", "aaa") > 0);
         assertTrue(comparator.compare("aaa", "aaa") == 0);
         assertTrue(comparator.compare("foo TestString", "foo TestString") == 0);
+    }
+    
+    @Test
+    public void testNullQuery() {
+        try {
+            new SuggestionComparator(null);
+            fail();
+        } catch (IllegalArgumentException e) {}
+    }
+    
+    @Test
+    public void testNullParameter() {
+        SuggestionComparator comparator = new SuggestionComparator("");
+        try {
+            comparator.compare("", null);
+            fail();
+        } catch (IllegalArgumentException e) {}
     }
 }

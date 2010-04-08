@@ -11,10 +11,16 @@ public class SuggestionComparator implements Comparator<String>, Serializable {
     private String query;
 
     public SuggestionComparator(final String query) {
+        if (query == null) {
+            throw new IllegalArgumentException("null query");
+        }
         this.query = query.toUpperCase();
     }
 
     public int compare(final String heading1, final String heading2) {
+        if (heading1 == null || heading2 == null) {
+            throw new IllegalArgumentException("cannot compare " + heading1 + " to " + heading2);
+        }
         String upper1 = heading1.toUpperCase();
         String upper2 = heading2.toUpperCase();
         int weightDiff = queryWeight(upper2) - queryWeight(upper1);
