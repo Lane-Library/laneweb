@@ -74,8 +74,8 @@
     </servlet>
 
     <servlet>
-        <description>ModelCreatingRequestHandler</description>
-        <display-name>ModelCreatingRequestHandler</display-name>
+        <description>ModelAugmentingRequestHandler</description>
+        <display-name>ModelAugmentingRequestHandler</display-name>
         <servlet-name>edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler</servlet-name>
         <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -89,11 +89,11 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.SitemapRequestHandler</servlet-name>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
+    <!--<servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler</servlet-name>
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
@@ -126,7 +126,7 @@
     <servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler</servlet-name>
         <url-pattern>/secure/apps/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
     
     <servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-name>
