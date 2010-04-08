@@ -2,30 +2,26 @@
  * @author ceyates
  */
 (function(){
-    var Assert = YAHOO.util.Assert;
-    var TestRunner = YAHOO.tool.TestRunner;
-    var TestCase = YAHOO.tool.TestCase;
-    var UserAction = YAHOO.util.UserAction;
-    var LANETestCase = new TestCase({
+    var laneTestCase = new YAHOO.tool.TestCase({
         name: "Lane TestCase",
         testExists: function(){
-            Assert.isObject(LANE);
+            YAHOO.util.Assert.isObject(LANE);
         },
         testNamespaceExists: function(){
-            Assert.isFunction(LANE.namespace);
+            YAHOO.util.Assert.isFunction(LANE.namespace);
         },
         testCoreExists: function(){
-            Assert.isObject(LANE.core);
+            YAHOO.util.Assert.isObject(LANE.core);
         },
         testNamespace: function(){
             var o = LANE.namespace('LANE.newNamespace', 'another.newNamespace');
-            Assert.isObject(LANE.newNamespace);
-            Assert.isObject(LANE.another.newNamespace);
-            Assert.areSame(LANE.another.newNamespace, o);
+            YAHOO.util.Assert.isObject(LANE.newNamespace);
+            YAHOO.util.Assert.isObject(LANE.another.newNamespace);
+            YAHOO.util.Assert.areSame(LANE.another.newNamespace, o);
         },
         testMetaValues: function(){
-            Assert.areEqual('1', LANE.core.getMetaContent('A'));
-            Assert.areEqual('2', LANE.core.getMetaContent('B'));
+            YAHOO.util.Assert.areEqual('1', LANE.core.getMetaContent('A'));
+            YAHOO.util.Assert.areEqual('2', LANE.core.getMetaContent('B'));
         },
         testHandleMouseOver: function(){
             var d = document, p, e;
@@ -35,7 +31,7 @@
                 this.foo = 'bar';
             };
             YAHOO.util.UserAction.mouseover(p);
-            Assert.areEqual('bar', p.foo);
+            YAHOO.util.Assert.areEqual('bar', p.foo);
         },
         testHandleMouseOut: function(){
             var d = document, p, e;
@@ -45,7 +41,7 @@
                 this.foo = 'bar';
             };
             YAHOO.util.UserAction.mouseout(p);
-            Assert.areEqual('bar', p.foo);
+            YAHOO.util.Assert.areEqual('bar', p.foo);
         },
         testHandleClick: function(){
             var d = document, h, p, f, e;
@@ -59,11 +55,11 @@
             p.foo = 'foo';
             p.clicked = f;
             YAHOO.util.UserAction.click(p);
-            Assert.areEqual('bar', h.foo);
-            Assert.areEqual('bar', p.foo);
+            YAHOO.util.Assert.areEqual('bar', h.foo);
+            YAHOO.util.Assert.areEqual('bar', p.foo);
         }
     });
-    var oLogger = new YAHOO.tool.TestLogger();
-    TestRunner.add(LANETestCase);
-    TestRunner.run();
+    new YAHOO.tool.TestLogger();
+    YAHOO.tool.TestRunner.add(laneTestCase);
+    YAHOO.tool.TestRunner.run();
 })();

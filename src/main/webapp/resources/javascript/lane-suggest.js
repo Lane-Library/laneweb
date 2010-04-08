@@ -48,7 +48,7 @@
         //create and add auto complete related elements
         searchTermsAcContainer = document.createElement('DIV');
         YAHOO.util.Dom.addClass(searchTermsAcContainer, 'acContainer');
-        this.insertBefore(searchTermsAcContainer, searchTermsElm);
+        YAHOO.util.Dom.insertBefore(searchTermsAcContainer, searchTermsElm);
         searchTermsAcContainer.appendChild(this.removeChild(searchTermsElm));
         searchTermsAcInput = document.createElement('DIV');
         searchTermsAcInput.id = 'searchTermsAcInput';

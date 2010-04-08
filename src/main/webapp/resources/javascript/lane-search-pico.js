@@ -111,3 +111,27 @@
         }
     });
 })();
+/*
+
+                            <fieldset id="picoFields">
+                                <div class="acContainer">
+                                    <input name="p" class="picoInput" id="clinicalP" type="text"
+                                        title="patient condition"/>
+                                    <div class="acMesh" id="pAcInput" title="Suggested MeSH Terms"/>
+                                </div>
+                                <div class="acContainer">
+                                    <input name="i" class="picoInput" id="clinicalI" type="text"
+                                        title="intervention"/>
+                                    <div class="acMesh" id="iAcInput" title="Suggested MeSH Terms"/>
+                                </div>
+                                <div class="acContainer">
+                                    <input name="c" class="picoInput" id="clinicalC" type="text"
+                                        title="comparison"/>
+                                    <div class="acMesh" id="cAcInput" title="Suggested MeSH Terms"/>
+                                </div>
+                                <div class="acContainer">
+                                    <input name="o" class="picoInput" id="clinicalO" type="text"
+                                        title="outcome"/>
+                                </div>
+                            </fieldset>
+ */
