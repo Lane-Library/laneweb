@@ -17,7 +17,7 @@
         var qString = '', i;
         if(targetId == searchTermsInput.id) {
             return 0;
-        };
+        }
         for (i = 0; i < inputs.length; i++) {
             if (inputs[i].id != searchTermsInput.id && inputs[i].value !== '' && inputs[i].value != inputs[i].title) {
                 qString += '(' + inputs[i].value + ')';
