@@ -2,7 +2,7 @@
     position:absolute;
     top:144px;
     width:100%;
-    height:37px;
+    height:30px;
 /* IE6 doesn't get width 100% right */
     _width:989px;
     background-image:url(/././images/main-nav-bg.gif);
