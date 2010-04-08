@@ -109,6 +109,7 @@
                         <include>footer-min.css</include>
                         <include>headers-min.css</include>
                         <include>module-min.css</include>
+                        <include>autocomplete-min.css</include>
                         <!--<include>buttons-min.css</include>
                         <include>colors-min.css</include>
                         <include>shaded-border-min.css</include>
