@@ -50,6 +50,9 @@
     top:144px;
     left:408px;
 }
+.acContainer, .acContainer div {
+    display:inline;
+}
 /*
   #picoFields {
   display:none;
@@ -111,9 +114,6 @@
   }
   #clinicalO {
   width:190px;
-  }
-  #search .acContainer, #search .acContainer div {
-  display:inline;
   }
  */
 /* width of auto-complete PICO containers */
