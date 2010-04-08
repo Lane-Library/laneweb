@@ -5,7 +5,7 @@
     height:37px;
 /* IE6 doesn't get width 100% right */
     _width:989px;
-    background-color:#dad6b1;
+    background-image:url(/././images/main-nav-bg.gif);
     font-weight:bold;
 }
 #laneNav li {
