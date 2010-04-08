@@ -67,7 +67,7 @@
         acWidget.animHoriz = false;
         acWidget.animVert = false;
         acWidget.autoHighlight = false;
-//        acWidget.itemSelectEvent.subscribe(onItemSelect);
+        acWidget.itemSelectEvent.subscribe(onItemSelect);
         
         // for FF, submit form return key strike
         YAHOO.util.Event.addListener(searchTermsElm, 'keyup', function(e){
