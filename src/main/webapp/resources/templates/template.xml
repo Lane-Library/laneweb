@@ -64,10 +64,7 @@
                                 </div>
                             </fieldset>-->
                             <fieldset id="searchFields">
-                                <!--<div class="acContainer">-->
-                                    <input name="q" id="searchTerms" type="text"/>
-                                    <!--<div id="searchTermsAcInput"/>
-                                </div>-->
+                                <input name="q" id="searchTerms" type="text"/>
                                 <input id="searchSubmit" type="submit" value="search"/>
                                 <input name="source" id="searchSource" type="hidden" value=""/>
                             </fieldset>
@@ -112,8 +109,8 @@
                                     title="SUMC specialty departments that have created customized pages - 'portals' – to Lane Library materials they regularly reference."
                                     >Specialty Portals</a>
                             </li>
-                            <li>
-                                <a href="/info-literacy/index.html"
+							<li>
+								<a href="/info-literacy/index.html"
                                     title="Info on: Classes, Consulting, Tutorials &amp; videos (self paced learning), Webinars, Information Literacy"
                                     >Classes &amp; Consulting</a>
                             </li>
