@@ -53,7 +53,7 @@
                             else{
                                 this.result.show();
                             }
-                            LANE.search.setSearchSource(this.result._source)
+                            LANE.search.setSearchSource(this.result._source);
                             YAHOO.util.Event.preventDefault(event);
                         };
                     }
@@ -66,8 +66,7 @@
         this._source = source;
         this._facet = facet;
         this._container = container;
-        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' +
-        LANE.search.getEncodedSearchString();
+        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + LANE.search.getEncodedSearchString();
         this._state = 'initialized';
         this._callback = {
             success: function(o){

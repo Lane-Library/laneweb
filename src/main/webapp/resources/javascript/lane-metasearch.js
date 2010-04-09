@@ -9,7 +9,7 @@
                 }
             }
             return -1;
-        }
+        };
     }
     
     LANE.namespace('search.metasearch');
@@ -29,7 +29,7 @@
                         }
                 );
                 for(i = 0; i < searchElms.length; i++){
-                    LANE.search.metasearch.addSearchable(searchElms[i])
+                    LANE.search.metasearch.addSearchable(searchElms[i]);
                 }
                 LANE.search.metasearch.abortPendingRequests();
                 startTime = new Date().getTime();
@@ -88,7 +88,7 @@
     
     YAHOO.util.Event.onDOMReady(function(){
         LANE.search.metasearch.initialize();
-        searchElms = LANE.search.metasearch.getSearchElms();
+        var searchElms = LANE.search.metasearch.getSearchElms();
         
         // check for presence of search term and metasearch classNames
         if( LANE.search.getEncodedSearchString() && searchElms.length > 0 ){
