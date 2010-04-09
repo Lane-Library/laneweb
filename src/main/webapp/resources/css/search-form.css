@@ -37,12 +37,22 @@
 #search fieldset {
     clear:left;
     float:left;
-    margin:8px 0 0 20px;
+    margin:9px 0 0 28px;
 /* IE6 needs this for layout: */
 /* _margin-top:-2px; */
 }
 #searchTerms {
-    width:580px;
+    width:587px;
+    border:1px solid white;
+}
+#searchSubmit {
+    background-color:transparent;
+    border:medium none;
+    cursor:pointer;
+    text-indent:20px;
+    width:20px;
+    height:20px;
+    border:none;
 }
 #searchIndicator {
     visibility:hidden;
