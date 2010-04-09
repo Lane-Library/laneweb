@@ -97,7 +97,7 @@ function() {
         },
         setInitialText: function() {
             var oldInitialText = initialText;
-            initialText = activeTab = YAHOO.util.Dom.getElementsByClassName('active', 'LI', 'searchTabs')[0].title;
+            initialText = YAHOO.util.Dom.getElementsByClassName('active', 'LI', 'searchTabs')[0].title;
             if (!searchTermsInput.value || searchTermsInput.value == oldInitialText) {
                 searchTermsInput.value = initialText;
             }
