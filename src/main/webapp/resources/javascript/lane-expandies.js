@@ -1,8 +1,8 @@
-(function(){
+(function() {
     LANE.namespace('expandies');
-    LANE.expandies = function(){
+    LANE.expandies = function() {
         return {
-            initialize: function(){
+            initialize: function() {
                 var i, j, k, items, expanded, anchors, anchor = document.location.hash, expandies = YAHOO.util.Dom.getElementsByClassName('expandy');
                 if (anchor) {
                     anchor = anchor.substring(1);
@@ -23,20 +23,16 @@
                             expanded.push(j);
                         }
                     }
-                    try {
-                        new YAHOO.widget.AccordionView(expandies[i], {
-                            expandItems: expanded
-                        });
+                    new YAHOO.widget.AccordionView(expandies[i], {
+                        expandItems: expanded
+                    });
                     //                    expandies[i].style.visibility = 'visible';
-                    } catch (e) {
-                        alert(e.message);
-                    }
                 }
             }
         };
     }();
-        
-    YAHOO.util.Event.onDOMReady(function(){
+    
+    YAHOO.util.Event.onDOMReady(function() {
         LANE.expandies.initialize();
     });
 })();
