@@ -111,6 +111,7 @@
                         <include>module-min.css</include>
                         <include>autocomplete-min.css</include>
                         <include>search-min.css</include>
+                        <include>popups-min.css</include>
                         <!--<include>buttons-min.css</include>
                         <include>colors-min.css</include>
                         <include>shaded-border-min.css</include>
@@ -121,7 +122,6 @@
                         <include>content-module-min.css</include>
                         <include>main-module-min.css</include>
                         <include>table-styles-min.css</include>
-                        <include>popups-min.css</include>
                         <include>breadcrumb-min.css</include>
                         <include>legend-dropdown-min.css</include>
                         <include>events-min.css</include>

@@ -1,7 +1,5 @@
 .popups {
     display:none;
-	width:500px;
-    
 }
 .yui-panel .container-close {
     position:absolute;
@@ -38,7 +36,7 @@
 .yui-panel a:hover.container-close {
     background-image:url(/././images/backgr/close-button-on.gif);
 }
- .yui-panel .bd {
+.yui-panel .bd {
     padding: 4px;
     font-size:90%;
 }
