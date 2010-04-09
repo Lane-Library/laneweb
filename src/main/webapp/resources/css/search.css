@@ -53,24 +53,24 @@
 }
 
 
-.contentModule .bd #searchResults a {
+#searchResults a {
     color:#2200cc;
     font-size:16px;
 }
 
-.contentModule .bd #searchResults .moreResults a {
+#searchResults .moreResults a {
     color:#7777cc;
     font-size:13px;
 }
 .inactiveFacet a{
     border-bottom:none;
 }
-.contentModule .bd #searchResults ul li{
+#searchResults ul li{
     padding-bottom: 1em;
 }
 
 
-.contentModule .bd #searchResults {
+#searchResults {
     margin-top: 1em;
 }
 

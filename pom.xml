@@ -110,6 +110,7 @@
                         <include>headers-min.css</include>
                         <include>module-min.css</include>
                         <include>autocomplete-min.css</include>
+                        <include>search-min.css</include>
                         <!--<include>buttons-min.css</include>
                         <include>colors-min.css</include>
                         <include>shaded-border-min.css</include>
@@ -128,7 +129,6 @@
                         <include>online-resources-min.css</include>
                         <include>autocomplete-min.css</include>
                         <include>tooltips-min.css</include>
-                        <include>search-min.css</include>
                         <include>images-min.css</include>-->
                      </includes>
                   </aggregation>
