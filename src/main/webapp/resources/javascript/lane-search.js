@@ -1,11 +1,50 @@
 LANE.search = LANE.search ||
 function() {
-    var d = document, form, //the form Element
- Event = YAHOO.util.Event, //shorthand for Event
- Dom = YAHOO.util.Dom, //shorthand for Dom
- searching = false, //searching state
- searchString, encodedString, searchTermsInput, source, ind = d.getElementById('searchIndicator'), initialText, picoInputs = ['p', 'i', 'c', 'o'],    // publicly available functions:
-    o = {
+    var Event = YAHOO.util.Event, //shorthand for Event
+        Dom = YAHOO.util.Dom, //shorthand for Dom
+        searching = false, //searching state
+        searchString,
+        encodedString,
+        form, //the form Element
+        searchTermsInput,
+        searchSourceInput,
+        source,
+        searchIndicator,
+        initialText,
+        picoInputs = ['p', 'i', 'c', 'o'];
+    
+    Event.onContentReady('search', function() {
+        form = this;
+        searchTermsInput = document.getElementById('searchTerms');
+        searchSourceInput = document.getElementById('searchSource');
+        LANE.search.setInitialText();
+        Event.addListener(form, 'submit', function(submitEvent) {
+            Event.preventDefault(submitEvent);
+            try {
+                LANE.search.submitSearch();
+            } catch (e) {
+                alert(e);
+            }
+        });
+        Event.addFocusListener(searchTermsInput, function(e) {
+            if (this.value == initialText) {
+                this.value = '';
+            }
+        });
+        var tabs = document.getElementById('searchTabs').getElementsByTagName('li'), i;
+        for (i = 0; i < tabs.length; i++) {
+            tabs[i].clicked = function(e) {
+                Event.preventDefault(e);
+                LANE.search.setActiveTab(this);
+            };
+        }
+    });
+    
+    Event.onContentReady('searchIndicator', function(){
+        searchIndicator = this;
+    });
+    
+    return {
         startSearch: function() {
             //TODO: revisit this, do we want to prevent a new search when one in progress?
             //                if (searching) {
@@ -15,11 +54,11 @@ function() {
                 throw ('nothing to search for');
             }
             searching = true;
-            ind.style.visibility = 'visible';
+            searchIndicator.style.visibility = 'visible';
         },
         stopSearch: function() {
             searching = false;
-            ind.style.visibility = 'hidden';
+            searchIndicator.style.visibility = 'hidden';
         },
         isSearching: function() {
             return searching;
@@ -64,7 +103,7 @@ function() {
                     }
                 }
                 if (source === undefined) {
-                    source = d.getElementById('searchSource').value;
+                    source = searchSourceInput.value;
                 }
                 if (source === undefined) {
                     source = '';
@@ -73,7 +112,7 @@ function() {
             return source;
         },
         setSearchSource: function(source) {
-            d.getElementById('searchSource').value = source;
+            searchSourceInput.value = source;
         },
         setActiveTab: function(elm) {
             var alreadyActive = Dom.hasClass(elm, 'active');
@@ -81,14 +120,14 @@ function() {
                 Dom.removeClass(el, 'active');
             });
             Dom.addClass(elm, 'active');
-            o.setSearchSource(elm.id + '-all');
+            LANE.search.setSearchSource(elm.id + '-all');
             // if this is not already active tab and there's a form value, submit search
             if (!alreadyActive && searchTermsInput.value && searchTermsInput.value !== initialText) {
-                o.submitSearch();
+                LANE.search.submitSearch();
                 form.submit();
                 return false;
             }
-            o.setInitialText();
+            LANE.search.setInitialText();
             if (elm.id == 'clinical') {
                 Dom.addClass(['search', 'breadcrumb'], 'clinicalSearch');
             } else {
@@ -102,42 +141,19 @@ function() {
                 searchTermsInput.value = initialText;
             }
         },
-        submitSearch: function(e) {
-            var i;
-                // strip PICO values if not set
-                for (i = 0; i < picoInputs.length; i++) {
-                    if (form[picoInputs[i]] && form[picoInputs[i]].value == form[picoInputs[i]].title) {
-                        form[picoInputs[i]].parentNode.removeChild(form[picoInputs[i]]);
-                    }
-                }
-                // hide q input so form doesn't bounce
-//                searchTermsInput.style.visibility = 'hidden';
-                o.startSearch();
-                //                    LANE.suggest.collapse();
-                //form.submit();
+        submitSearch: function() {
+            //                var i;
+            // strip PICO values if not set
+            //                for (i = 0; i < picoInputs.length; i++) {
+            //                    if (form[picoInputs[i]] && form[picoInputs[i]].value == form[picoInputs[i]].title) {
+            //                        form[picoInputs[i]].parentNode.removeChild(form[picoInputs[i]]);
+            //                    }
+            //                }
+            // hide q input so form doesn't bounce
+            //                searchTermsInput.style.visibility = 'hidden';
+            LANE.search.startSearch();
+            //                    LANE.suggest.collapse();
+            form.submit();
         }
     };
-    
-    Event.onContentReady('search', function() {
-        form = this;
-        searchTermsInput = document.getElementById('searchTerms');
-        o.setInitialText();
-        Event.addListener(form, 'submit', o.submitSearch);
-        Event.addFocusListener(searchTermsInput, function(e) {
-            if (this.value == initialText) {
-                this.value = '';
-            }
-        });
-    });
-    
-    Event.onContentReady('searchTabs', function() {
-        var tabs = this.getElementsByTagName('li'), i;
-        for (i = 0; i < tabs.length; i++) {
-            tabs[i].clicked = function(e) {
-                Event.preventDefault(e);
-                o.setActiveTab(this);
-            };
-        }
-    });
-    return o;
 }();
