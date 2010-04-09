@@ -118,7 +118,7 @@ function() {
         }
     };
     
-    Event.onContentReady('searchForm', function() {
+    Event.onContentReady('search', function() {
         form = this;
         searchTermsInput = document.getElementById('searchTerms');
         o.setInitialText();
