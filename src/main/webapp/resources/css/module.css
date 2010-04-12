@@ -1,7 +1,13 @@
 .module {
     margin-bottom:1em;
-    clear:both;
 }
 .bd {
     margin-top:13px;
+}
+.module:after {
+    content: "."; 
+    display: block; 
+    height: 0; 
+    clear: both;
+    visibility:hidden;
 }
