@@ -3,9 +3,10 @@ h3 {
     font-family:Georgia,"Times New Roman",Times,serif;
     font-size:11px;
     font-weight:400;
-    letter-spacing:2px;
-    border-bottom:6px #820000 solid;
-    color:#820000
+    border-bottom:5px #820000 solid;
+    color:#820000;
+    padding-bottom:2px;
+    letter-spacing:1.4px;
 }
 .alt {
     color:#575347;
@@ -15,5 +16,5 @@ h2 {
     color:#575347;
     font-family:Georgia,"Times New Roman",Times,serif;
     font-size:250%;
-    padding:1ex;
+    padding:20px 0;
 }
