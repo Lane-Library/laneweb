@@ -1,6 +1,7 @@
 .module {
     margin-bottom:1em;
+    clear:both;
 }
 .bd {
-    /*margin:1ex;*/
+    margin-top:13px;
 }

@@ -1,11 +1,12 @@
 /*these are the default list styles*/
+ul {
+    font-size:11px;
+}
 li {
-    list-style: none;
     background-image:url(/././images/sprite.gif);
     background-position:0 -1194px;
     background-repeat:no-repeat;
-    padding:0.2em 0.25em 0.2em 1em;
-    color: #333;
+    padding:2px 0 1px 14px;
 }
 ol li {
     list-style-type:decimal;
