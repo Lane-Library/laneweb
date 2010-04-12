@@ -12,7 +12,7 @@
             	hits = null;
                 hitLink = facets[j].getElementsByTagName('a')[0];
                 if (undefined != response.results.facets[facets[j].facetId]) {
-                    hits = response.results.facets[facets[j].facetId].hits;
+                    hits = parseInt(response.results.facets[facets[j].facetId].hits);
                     engineStatus = response.results.facets[facets[j].facetId].status;
                 }
                 if (!facets[j].facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits === 0) {
