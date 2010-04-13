@@ -112,6 +112,7 @@
                         <include>autocomplete-min.css</include>
                         <include>search-min.css</include>
                         <include>popups-min.css</include>
+                        <include>online-resources-min.css</include>
                         <!--<include>buttons-min.css</include>
                         <include>colors-min.css</include>
                         <include>shaded-border-min.css</include>
@@ -126,7 +127,6 @@
                         <include>legend-dropdown-min.css</include>
                         <include>events-min.css</include>
                         <include>side-hd-module-min.css</include>
-                        <include>online-resources-min.css</include>
                         <include>autocomplete-min.css</include>
                         <include>tooltips-min.css</include>
                         <include>images-min.css</include>-->
