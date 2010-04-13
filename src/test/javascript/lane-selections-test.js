@@ -2,26 +2,26 @@
  * @author ceyates
  */
 (function() {
-    var liaisons = document.getElementById('liaisons').getElementsByTagName('li');
+    var selections = document.getElementById('selections').getElementsByTagName('li');
     var options = document.getElementsByTagName('option');
-    var LaneLiaisonTestCase = new YAHOO.tool.TestCase({
-        name: "Lane Liaisons TestCase",
+    var LaneSelectionsTestCase = new YAHOO.tool.TestCase({
+        name: "Lane Selections TestCase",
         testAllVisible: function() {
             var allVisible = true;
-            for (var i = 0; i < liaisons.length; i++) {
-                if (liaisons[i].style.display == 'none') {
+            for (var i = 0; i < selections.length; i++) {
+                if (selections[i].style.display == 'none') {
                     allVisible = false;
                 }
             }
             YAHOO.util.Assert.isTrue(allVisible);
         },
         testOthersHiddenOnSelect: function() {
-            var liaison = options[1].value;
+            var selection = options[1].value;
             YAHOO.util.UserAction.click(options[1], {});
             var othersVisible = false;
-            for (var i = 0; i < liaisons.length; i++) {
-                if (liaisons[i].id != liaison) {
-                    if (liaisons[i].style.display != 'none') {
+            for (var i = 0; i < selections.length; i++) {
+                if (selections[i].id != selection) {
+                    if (selections[i].style.display != 'none') {
                         othersVisible = true;
                     }
                 }
@@ -29,12 +29,12 @@
             YAHOO.util.Assert.isTrue(othersVisible === false);
         },
         testAnotherOthersHiddenOnSelect: function() {
-            var liaison = options[3].value;
+            var selection = options[3].value;
             YAHOO.util.UserAction.click(options[3], {});
             var othersVisible = false;
-            for (var i = 0; i < liaisons.length; i++) {
-                if (liaisons[i].id != liaison) {
-                    if (liaisons[i].style.display != 'none') {
+            for (var i = 0; i < selections.length; i++) {
+                if (selections[i].id != selection) {
+                    if (selections[i].style.display != 'none') {
                         othersVisible = true;
                     }
                 }
@@ -49,6 +49,6 @@
     
     
     new YAHOO.tool.TestLogger();
-    YAHOO.tool.TestRunner.add(LaneLiaisonTestCase);
+    YAHOO.tool.TestRunner.add(LaneSelectionsTestCase);
     YAHOO.tool.TestRunner.run();
 })();

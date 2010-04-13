@@ -84,7 +84,7 @@ public class Model extends HashMap<String, Object> {
     
     public static final String CALLBACK = "callback";
 
-    public static final String LIAISON = "liaison";
+    public static final String SELECTION = "selection";
     
 
     
