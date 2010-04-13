@@ -11,3 +11,7 @@
     clear: both;
     visibility:hidden;
 }
+.module-img {
+    float:left;
+    margin-right:1em;
+}
