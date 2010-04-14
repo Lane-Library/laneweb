@@ -9,6 +9,7 @@
 				    tooltipWidth, // width of tooltip
 				    simpleTooltipIds = [], // array of contexts that need tt made
 										// from their title attribute
+				    tooltipElement,
 				    YUD = YAHOO.util.Dom, YUW = YAHOO.widget, i, j;
 
 				tooltipContainerArray = YUD.getElementsByClassName('tooltips');
@@ -19,11 +20,12 @@
 						if (tooltipContainer[j].nodeType == 1) {
 							tooltipId = tooltipContainer[j].id.replace(/Tooltip$/, '');
 							if (tooltipId && YUD.inDocument(tooltipId)) {
-								document.getElementById(tooltipId).trackable = true;
+								tooltipElement = document.getElementById(tooltipId);
+								tooltipElement.trackable = true;
 								// tooltips where content is in the markup
 								// (abstracts, etc.)
 								if (tooltipContainer[j].innerHTML
-										&& tooltipContainer[j].innerHTML != tooltipId.title) {
+										&& tooltipContainer[j].innerHTML != tooltipElement.title) {
 									if (tooltipContainer[j].style.width) {
 										tooltipWidth = tooltipContainer[j].style.width;
 									} else if (tooltipContainer[j].innerHTML.length > 500) {
@@ -31,8 +33,8 @@
 									} else {
 										tooltipWidth = '25%';
 									}
-									new YUW.Tooltip(tooltipId + "-yuitt", {
-										context : tooltipId,
+									var shat = new YUW.Tooltip(tooltipId + "-yuitt", {
+										context : tooltipElement,
 										width : tooltipWidth,
 										autodismissdelay : 60000,
 										text : tooltipContainer[j].innerHTML
