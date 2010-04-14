@@ -13,7 +13,7 @@
             trackingData = {};
         },
         testExists: function() {
-            YAHOO.util.Assert.isObject(LANE.track);
+            YAHOO.util.Assert.isObject(LANE.tracking);
         },
         testAddTracker: function() {
             try {
