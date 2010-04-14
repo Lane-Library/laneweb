@@ -114,6 +114,7 @@
                         <include>popups-min.css</include>
                         <include>online-resources-min.css</include>
                         <include>tooltips-min.css</include>
+                        <include>accordionview-min.css</include>
                         <!--<include>buttons-min.css</include>
                         <include>colors-min.css</include>
                         <include>shaded-border-min.css</include>

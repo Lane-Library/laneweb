@@ -8,8 +8,24 @@
             type="text/css"/>
         <link href="http://yui.yahooapis.com/2.8.0r4/build/yuitest/assets/testlogger.css"
             rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" type="text/css" href="../../main/webapp/resources/css/expandies.css"
-        />
+        <style type="text/css">
+.yui-acc-hidden {
+    visibility: hidden;
+    position: absolute;
+}
+.yui-acc-almosthidden {
+    position: absolute;
+    left: -9999px;
+    z-index: -10;
+}
+.yui-acc-toggle {
+    cursor: pointer;
+}
+.yui-acc-content {
+    overflow:hidden;
+    _zoom: 1;
+}
+        </style>
     </head>
     <body>
         <ul class="expandy">

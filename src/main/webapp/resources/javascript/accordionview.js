@@ -208,19 +208,21 @@
         
         CLASSES : {
             // the entire accordion
-            ACCORDION : 'yui-accordionview',
+            ACCORDION : 'yui-acc',
             // the wrapper around a toggle + content pair
-            PANEL : 'yui-accordion-panel',
+            PANEL : 'yui-acc-panel',
             // the element that toggles a panel
-            TOGGLE : 'yui-accordion-toggle',
+            TOGGLE : 'yui-acc-toggle',
             // the element that contains the content of a panel
-            CONTENT : 'yui-accordion-content',
+            CONTENT : 'yui-acc-content',
             // to indicate that a toggle is active
-            ACTIVE : 'active',
+            ACTIVE : 'yui-acc-active',
             // to indicate that content is hidden
-            HIDDEN : 'hidden',
+            HIDDEN : 'yui-acc-hidden',
             // the opened/closed indicator
-            INDICATOR : 'indicator'                       
+            INDICATOR : 'yui-acc-indicator',
+            //almost hidden
+            ALMOST_HIDDEN : 'yui-acc-almosthidden'                      
         },
         
         /**
@@ -434,7 +436,7 @@
                     YUD.addClass(elPanelLink, this.CLASSES.ACTIVE);
                 }
                 else {
-                    YUD.addClass(elPanelContent, 'hidden');
+                    YUD.addClass(elPanelContent, this.CLASSES.HIDDEN);
                 }
             }
             t= YAHOO.lang.later(0, this, function(){
@@ -685,14 +687,14 @@
                     if(!bHideAfter) {
                         // this eliminates a flash in Gecko < 1.9
                         if(this._ff2) {
-                            YUD.addClass(el, 'almosthidden');
+                            YUD.addClass(el, this.CLASSES.ALMOST_HIDDEN);
                             YUD.setStyle(el, 'width', this.get('width'));
                             }
                         YUD.removeClass(el, this.CLASSES.HIDDEN);
                         nHeight = el.offsetHeight;
                         YUD.setStyle(el, 'height', 0);
                         if(this._ff2) {
-                            YUD.removeClass(el, 'almosthidden');
+                            YUD.removeClass(el, this.CLASSES.ALMOST_HIDDEN);
                             YUD.setStyle(el, 'width', 'auto');
                             }
                         oOptions = {height: {from: 0, to: nHeight}};

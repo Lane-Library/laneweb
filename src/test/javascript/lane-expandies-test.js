@@ -8,34 +8,34 @@
         panel: {},
         testIsClosed: function() {
             panel = document.getElementById("panel1");
-            YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel,'hidden'), 'className is ' + panel.className);
+            YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
         },
         testExpanded: function() {
             panel = document.getElementById("panel2");
-            YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel,'hidden'), 'className is ' + panel.className);
+            YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
         },
         testExpand: function() {
             panel = document.getElementById("panel1");
-            YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel,'hidden'), 'className is ' + panel.className);
+            YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
             YAHOO.util.UserAction.click(panel.previousSibling);
-            YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel,'hidden'), 'className is ' + panel.className);
-            YAHOO.util.Dom.addClass(panel, 'hidden');
+            YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
+            YAHOO.util.Dom.addClass(panel, 'yui-acc-hidden');
         },
         testClose: function() {
             panel = document.getElementById("panel2");
-            YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel,'hidden'), 'className is ' + panel.className);
+            YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
             YAHOO.util.UserAction.click(panel.previousSibling);
             this.wait(function() {
-            YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel,'hidden'), 'className is ' + panel.className);
-            YAHOO.util.Dom.removeClass(panel, 'hidden');
+            YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
+            YAHOO.util.Dom.removeClass(panel, 'yui-acc-hidden');
             }, 2000);
         },
         testAnchor: function() {
             panel = document.getElementById("panel3");
             if (document.location.hash == '#anchor') {
-                YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel, 'hidden'));
+                YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel, 'yui-acc-hidden'));
             } else {
-                YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel, 'hidden'));
+                YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel, 'yui-acc-hidden'));
             }
         }
         });

@@ -1,19 +1,4 @@
-.hidden {
-    visibility: hidden;
-    position: absolute;
-}
-.almosthidden {
-    position: absolute;
-    left: -9999px;
-    z-index: -10;
-}
-.yui-accordion-toggle {
-    cursor: pointer;
-}
-.yui-accordion-content {
-    overflow:hidden;
-    _zoom: 1;
-}
+
 .expandy li ul {
     margin-left: 1em;
     margin-bottom: 1.2em;

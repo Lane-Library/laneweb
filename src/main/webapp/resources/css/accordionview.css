@@ -1,0 +1,16 @@
+.yui-acc-hidden {
+    visibility: hidden;
+    position: absolute;
+}
+.yui-acc-almosthidden {
+    position: absolute;
+    left: -9999px;
+    z-index: -10;
+}
+.yui-acc-toggle {
+    cursor: pointer;
+}
+.yui-acc-content {
+    overflow:hidden;
+    _zoom: 1;
+}
