@@ -113,7 +113,7 @@
                     this._container.appendChild(this._content[i]);
                 }
                 LANE.search.stopSearch();
-                LANE.tooltips.initialize();
+                LANE.core.getChangeEvent().fire();
                 LANE.popups.initialize(document);
                 if (this._type == 'specialty'){
                     LANE.search.metasearch.initialize();

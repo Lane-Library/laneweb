@@ -27,6 +27,7 @@ LANE.namespace = function(){
 };
 LANE.core = LANE.core || function() {
     var E = YAHOO.util.Event, //shorthand
+        changeEvent =  new YAHOO.util.CustomEvent('change'),
         m = {}; //the meta element name/values
     // initialize on load
     E.addListener(this,'load',function() {
@@ -106,6 +107,9 @@ LANE.core = LANE.core || function() {
         });
     });
     return {
+        getChangeEvent: function() {
+            return changeEvent;
+        },
         getMetaContent: function(name) {
             return m[name] === undefined ? undefined : m[name];
         },
