@@ -45,7 +45,7 @@
     <xsl:variable name="moreResultsLimit">10</xsl:variable>
 
     <xsl:template match="/">
-        <html xmlns="http://www.w3.org/1999/xhtml">
+        <html>
             <head>
                 <title>search results</title>
             </head>
@@ -90,7 +90,7 @@
                             <xsl:sort select="." order="ascending" data-type="text"/>
                             <xsl:if test="position() &lt;= 10">
                                 <li>
-                                    <a target="_blank"
+                                    <a rel="popup standard"
                                         href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{.}&quot;[Journal]">
                                         <xsl:value-of select="."/>
                                     </a>
@@ -114,11 +114,11 @@
             </xsl:choose>
         </xsl:variable>
 
-        <dd xmlns="http://www.w3.org/1999/xhtml">
+        <dd>
             <ul>
                 <li>
                     <a title="{s:title}" href="{s:url}"
-                        id="{s:id}" target="_blank">
+                        id="{s:id}" rel="popup standard">
                         <xsl:apply-templates select="s:title"/>
                     </a>
 
@@ -143,7 +143,7 @@
                             </xsl:when>
                             <xsl:when test="$moreResultsLimit &lt; number(s:resourceHits)">
                                 <xsl:text> - </xsl:text>
-                                <a target="_blank"
+                                <a rel="popup standard"
                                     title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
                                     href="{s:resourceUrl}">more</a>
                             </xsl:when>
@@ -156,7 +156,7 @@
 
     <!-- tranforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
-        <dd xmlns="http://www.w3.org/1999/xhtml">
+        <dd>
             <ul>
                 <li>
                     <xsl:choose>
@@ -211,7 +211,7 @@
                             <div class="moreResults">
                                 <span class="sourceLink">Lane Catalog</span>
                                 <xsl:text> - </xsl:text>
-                                <a target="_blank" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBRecID={s:recordId}&amp;v2=1">detail</a>
+                                <a rel="popup standard" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBRecID={s:recordId}&amp;v2=1">detail</a>
                             </div>
                         </xsl:when>
                         <xsl:when test="s:recordType = 'faq'">
@@ -303,7 +303,7 @@
         <xsl:choose>
             <xsl:when test="$type = 'first'">
                 <a title="{$title}" href="{$link/s:url}"
-                    id="eresource-{$eresourceId}" target="_blank">
+                    id="eresource-{$eresourceId}" rel="popup standard">
                     <xsl:apply-templates select="$title"/>
                 </a>
             </xsl:when>
