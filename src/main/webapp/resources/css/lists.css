@@ -1,12 +1,8 @@
 /* these are the default list styles */
-ul {
-    font-size:11px;
-}
 li {
     background-image:url(/././images/sprite.gif);
     background-position:0 -1194px;
     background-repeat:no-repeat;
-    line-height:12px;
     padding:2px 0 3px 14px;
 }
 ol li {
