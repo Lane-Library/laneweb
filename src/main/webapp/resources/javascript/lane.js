@@ -146,19 +146,3 @@ LANE.core = LANE.core || function() {
         }
     };
 }();
-
-//here is an ugly js hack to get the narrowModule columns on the /index.html page the same height:
-
-(function(){
-    YAHOO.util.Event.addListener(window, 'load', function(){
-        var region, maxHeight = 0, height, i, narrowModules = YAHOO.util.Dom.getElementsByClassName('narrowModule');
-        for (i = 0; i < narrowModules.length; i++) {
-            region = YAHOO.util.Dom.getRegion(narrowModules[i]);
-            height = region.bottom - region.top;
-            maxHeight = height > maxHeight ? height : maxHeight;
-        }
-        for (i = 0; i < narrowModules.length; i++) {
-            YAHOO.util.Dom.setStyle(narrowModules[i], 'height', maxHeight + 'px');
-        }
-    });
-})();
