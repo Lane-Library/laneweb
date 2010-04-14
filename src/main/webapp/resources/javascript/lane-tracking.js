@@ -199,6 +199,3 @@ LANE.tracking = function(){
         }
     };
 }();
-
-//for temporary backwards compatibility:
-LANE.track = LANE.tracking;
