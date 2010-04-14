@@ -73,7 +73,7 @@ YH = YAHOO.util.History;
                 container.appendChild(LANE.core.importNode(content[i], true));
             }
             registerLinksContainer(container);
-            LANE.popups.initialize(container);
+            LANE.core.getChangeEvent().fire();
         }
         YC.asyncRequest("GET", url,
         {

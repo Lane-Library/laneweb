@@ -114,7 +114,6 @@
                 }
                 LANE.search.stopSearch();
                 LANE.core.getChangeEvent().fire();
-                LANE.popups.initialize(document);
                 if (this._type == 'specialty'){
                     LANE.search.metasearch.initialize();
                     LANE.search.metasearch.getResultCounts();

@@ -1,7 +1,8 @@
-(function(){
-    YAHOO.util.Event.addListener(window, 'load', function(){
-        var panel, createPanel, showPanel, popupWindow, showWindow;
-        createPanel = function(){
+(function() {
+    YAHOO.util.Event.onDOMReady(function() {
+        var panel, createPanel, showPanel, popupWindow, showWindow, createEventHandlers,
+            YUE = YAHOO.util.Event;
+        createPanel = function() {
             var container = document.createElement('div');
             container.setAttribute('id', 'popupContainer');
             document.body.appendChild(container);
@@ -14,7 +15,7 @@
                 modal: false
             });
         };
-        showPanel = function(title, body, X, Y){
+        showPanel = function(title, body, X, Y) {
             //FIXME: Hard coded this width value for beta feedback form.
             var width = (title.length * 7 > 334) ? title.length * 7 : 334;
             panel.setHeader(title);
@@ -25,7 +26,7 @@
             panel.render();
             panel.show();
         };
-        showWindow = function(url, type, strWidth, strHeight){
+        showWindow = function(url, type, strWidth, strHeight) {
             if (popupWindow !== undefined && !popupWindow.closed) {
                 popupWindow.close();
             }
@@ -44,65 +45,61 @@
                 tools = 'resizable,toolbar=no,location=no,scrollbars=yes';
             }
             if (strWidth && strHeight) {
-                tools += ',width=' +strWidth + ',height=' + strHeight;
+                tools += ',width=' + strWidth + ',height=' + strHeight;
             }
             popupWindow = window.open(url, 'newWin', tools);
             popupWindow.focus();
         };
-        LANE.namespace('popups');
-        LANE.popups.initialize = function(node){
-            var i, anchors, args;
-            anchors = node.getElementsByTagName('a');
+        createEventHandlers = function() {
+            var i, anchors, args, popupAnchors = [];
+            anchors = document.getElementsByTagName('A');
             for (i = 0; i < anchors.length; i++) {
-                if (anchors[i].rel) {
-                    args = anchors[i].rel.split(' ');
-                    if (args[0] == 'popup') {
-                        if (args[1] == 'standard' || args[1] == 'console'|| args[1] == 'console-with-scrollbars' || args[1] == 'fullscreen') {
-                            anchors[i].clicked = function(e){
-                                var args = this.rel.split(' ');
-                                YAHOO.util.Event.preventDefault(e);
-                                showWindow(this.href, args[1], args[2], args[3]);
-                            };
-                        }
-                        if (args[1] == 'local') {
-                            if (!panel) {
-                                createPanel();
+                if (anchors[i].rel && anchors[i].rel.indexOf('popup') === 0) {
+                    popupAnchors.push(anchors[i]);
+                }
+            }
+            for (i = 0; i < popupAnchors.length; i++) {
+                args = popupAnchors[i].rel.split(' ');
+                if (!panel && (args[1] == 'local' || args[1] == 'faq')) {
+                    createPanel();
+                }
+                if (args[1] == 'standard' || args[1] == 'console' || args[1] == 'console-with-scrollbars' || args[1] == 'fullscreen') {
+                    popupAnchors[i].clicked = function(e) {
+                        var args = this.rel.split(' ');
+                        YUE.preventDefault(e);
+                        showWindow(this.href, args[1], args[2], args[3]);
+                    };
+                } else if (args[1] == 'local') {
+                    popupAnchors[i].clicked = function(e) {
+                        var id, elm, title, body;
+                        YUE.preventDefault(e);
+                        id = this.rel.split(' ')[2];
+                        elm = (document.getElementById(id)) ? document.getElementById(id) : 0;
+                        title = (elm.getAttribute('title')) ? elm.getAttribute('title') : '';
+                        body = (document.getElementById(id)) ? document.getElementById(id).innerHTML : '';
+                        showPanel(title, body, YUE.getPageX(e), YUE.getPageY(e));
+                    };
+                } else if (args[1] == 'faq') {
+                    popupAnchors[i].clicked = function(e) {
+                        var id = this.rel.split(' ')[2];
+                        YUE.preventDefault(e);
+                        YAHOO.util.Connect.asyncRequest('GET', '/././content/popup.html?id=' + id, {
+                            success: function(o) {
+                                var id = o.argument.id, X = o.argument.X, Y = o.argument.Y, f = o.responseXML.documentElement, title = f.getElementsByTagName('a')[0].firstChild.data, body = f.getElementsByTagName('dd')[0].firstChild.data + '&nbsp;<a href="/././howto/index.html?id=' + id + '">More</a>';
+                                o.argument.showPanel(title, body, X, Y);
+                            },
+                            argument: {
+                                showPanel: showPanel,
+                                X: YUE.getPageX(e),
+                                Y: YUE.getPageY(e),
+                                id: id
                             }
-                            anchors[i].clicked = function(e){
-                                var id, elm, title, body, E = YAHOO.util.Event;
-                                E.preventDefault(e);
-                                id = this.rel.split(' ')[2];
-                                elm = (document.getElementById(id)) ? document.getElementById(id) : 0;
-                                title = (elm.getAttribute('title')) ? elm.getAttribute('title') : '';
-                                body = (document.getElementById(id)) ? document.getElementById(id).innerHTML : '';
-                                showPanel(title, body, E.getPageX(e), E.getPageY(e));
-                            };
-                        } else 
-                            if (args[1] == 'faq') {
-                                if (!panel) {
-                                    createPanel();
-                                }
-                                anchors[i].clicked = function(e){
-                                    var id = this.rel.split(' ')[2];
-                                    YAHOO.util.Event.preventDefault(e);
-                                    YAHOO.util.Connect.asyncRequest('GET', '/././content/popup.html?id=' + id, {
-                                        success: function(o){
-                                            var id = o.argument.id, X = o.argument.X, Y = o.argument.Y, f = o.responseXML.documentElement, title = f.getElementsByTagName('a')[0].firstChild.data, body = f.getElementsByTagName('dd')[0].firstChild.data + '&nbsp;<a href="/././howto/index.html?id=' + id + '">More</a>';
-                                            o.argument.showPanel(title, body, X, Y);
-                                        },
-                                        argument: {
-                                            showPanel: showPanel,
-                                            X: YAHOO.util.Event.getPageX(e),
-                                            Y: YAHOO.util.Event.getPageY(e),
-                                            id: id
-                                        }
-                                    });
-                                };
-                            }
-                    }
+                        });
+                    };
                 }
             }
         };
-        LANE.popups.initialize(document);
+        createEventHandlers();
+        LANE.core.getChangeEvent().subscribe(createEventHandlers);
     });
 })();
