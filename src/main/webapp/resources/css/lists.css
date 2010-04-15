@@ -1,20 +1,8 @@
 /* these are the default list styles */
-/*
-  li {
-  background-image:url(/././images/sprite.gif);
-  background-position:0 -1194px;
-  background-repeat:no-repeat;
-  padding:2px 0 3px 14px;
-  }
-  ol li {
-  list-style-type:decimal;
-  list-style-position:inside;
-  }
-  ul {
-  color:#3F3C30;
-  font-size:12px;
-  }
- */
+ol {
+    list-style-type:decimal;
+    list-style-position:inside;
+}
 .content ul {
     margin-bottom:10px;
 }
@@ -24,16 +12,19 @@
     list-style-type:disc;
     margin-left:15px;
 }
+/*this is the first column*/
 div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u.first li {
     font-size:11px;
     line-height:12px;
     padding-bottom:5px;
 }
+/*this is the middle column*/
 div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u li {
     font-size:inherit;
     line-height:inherit;
     padding-bottom:inherit;
 }
+/*this is the right column*/
 div.yui-ge>div.yui-u li {
     font-size:11px;
     line-height:12px;
