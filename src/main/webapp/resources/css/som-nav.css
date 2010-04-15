@@ -75,10 +75,10 @@
     background-color:#b5b5a7;
     text-decoration:none;
 }
-#somNav li:hover ul, #somNav li.hover ul {
+#somNav li:hover ul, #somNav .hover ul {
     display:block;
 }
-#somNav li.hover li {
+#somNav .hover li {
 /* IE6 seems to need this bottom border or excess space occurs */
     border-bottom:1px solid #D6D5C7;
 }
