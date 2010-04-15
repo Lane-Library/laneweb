@@ -1,4 +1,4 @@
-.module, .module ul  {
+.module {
     margin-bottom:1em;
 }
 .module .bd {
@@ -15,7 +15,7 @@
     float:left;
     margin-right:1em;
 }
-.module ul {
+/*.module ul {
     font-size:11px;
     line-height:12px;
-}
+}*/
