@@ -114,10 +114,10 @@
                 }
                 LANE.search.stopSearch();
                 LANE.core.getChangeEvent().fire();
-//                if (this._type == 'specialty'){
-//                    LANE.search.metasearch.initialize();
-//                    LANE.search.metasearch.getResultCounts();
-//                }
+                if (this._type == 'specialty'){
+                    LANE.search.metasearch.initialize();
+                    LANE.search.metasearch.getResultCounts();
+                }
             }
         };
         Result.prototype.getContent = function(){
