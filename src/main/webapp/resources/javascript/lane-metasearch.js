@@ -80,10 +80,8 @@
                         }
                         sleepingTime = 2000;
                         remainingTime = (new Date().getTime()) - startTime;
-                        if (response.status != 'successful' &&
-                        needMore &&
-                        searchables.length > 0 &&
-                        (remainingTime <= 60 * 1000)) { // at more than 20 seconds the sleeping time becomes 10 seconds
+                        if (response.status != 'successful' && needMore && searchables.length > 0 && (remainingTime <= 60 * 1000)) {
+                            // at more than 20 seconds the sleeping time becomes 10 seconds
                             if (remainingTime > 20 * 1000) {
                                 sleepingTime = 10000;
                             }
