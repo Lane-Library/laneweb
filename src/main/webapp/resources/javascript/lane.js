@@ -150,3 +150,15 @@ LANE.core = LANE.core || function() {
         }
     };
 }();
+
+//add Array.indexOf to implementations that don't have it
+if (!Array.indexOf) {
+    Array.prototype.indexOf = function(obj) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] == obj) {
+                return i;
+            }
+        }
+        return -1;
+    };
+}
