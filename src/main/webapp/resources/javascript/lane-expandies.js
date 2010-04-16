@@ -4,7 +4,7 @@
             expanded, anchors,
             anchor = document.location.hash,
             expandies = YAHOO.util.Dom.getElementsByClassName('expandy'),
-            YUD = YAHOO.util.DOM;
+            YUD = YAHOO.util.Dom;
         if (anchor) {
             anchor = anchor.substring(1);
         }
