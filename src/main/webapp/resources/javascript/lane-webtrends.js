@@ -5,9 +5,9 @@
         WT={},
         DCSext={},
         gDomain="irt-sdc.stanford.edu",
-        gDcsId="dcssi6l0t1000004z9mg95sop_9v3k";
+        gDcsId="dcssi6l0t1000004z9mg95sop_9v3k",
 
-    function dcsVar(){
+   dcsVar = function(){
         var i, dCurrent=new Date();
         WT.tz=dCurrent.getTimezoneOffset()/60*-1;
         if (WT.tz===0){
@@ -38,7 +38,7 @@
             }
         }
         WT.fi="No";
-        if (window.ActiveXObject){
+//        if (window.ActiveXObject){
             //gFV is not set, it appears that this script expects it to be set to the
             //flash version in a separate script element, which we have never done
             //so have never recorded the flash version for ie
@@ -46,8 +46,9 @@
 //                WT.fi="Yes";
 //                WT.fv=gFV;
 //            }
-        }
-        else if (navigator.plugins&&navigator.plugins.length){
+//        }
+//        else 
+        if (navigator.plugins&&navigator.plugins.length){
             for (i=0;i<navigator.plugins.length;i++){
                 if (navigator.plugins[i].name.indexOf('Shockwave Flash')!=-1){
                     WT.fi="Yes";
@@ -68,23 +69,23 @@
                 DCS.dcsref=window.document.referrer;
             }
         }
-    }
+    },
 
 
-    function A(N,V){
+    A = function(N,V){
         if (encodeURIComponent) {
             return "&"+N+"="+encodeURIComponent(V);
         }
         return "&"+N+"="+escape(V);
-    }
+    },
     
-    function dcsCreateImage(dcsSrc){
+    dcsCreateImage = function(dcsSrc){
         gImages[gIndex]=new Image();
         gImages[gIndex].src=dcsSrc;
         gIndex++;
-    }
+    },
 
-    function dcsMeta(){
+    dcsMeta = function(){
         var i, elems, meta;
         if (document.all){
             elems=document.all.tags("meta");
@@ -108,9 +109,9 @@
                 }
             }
         }
-    }
+    },
 
-    function dcsTag(){
+    dcsTag = function(){
         var N, P="http"+(window.location.protocol.indexOf('https:')===0?'s':'')+"://"+gDomain+(gDcsId===""?'':'/'+gDcsId)+"/dcs.gif?";
         for (N in DCS){
             if (DCS[N]) {
@@ -131,9 +132,9 @@
             P=P.substring(0,2040)+"&WT.tu=1";
         }
         dcsCreateImage(P);
-    }
+    },
     
-    function dcsMultiTrack(args) {
+    dcsMultiTrack = function(args) {
             var i, dCurrent = new Date();
             for (i=0;i<args.length;i=i+2) {
                 if (args[i].indexOf('WT.')===0 ) {
@@ -154,7 +155,7 @@
             }
             DCS.dcsdat=dCurrent.getTime();
             dcsTag();
-        }
+        };
     dcsVar();
     dcsMeta();
     dcsTag();
