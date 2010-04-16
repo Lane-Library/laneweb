@@ -5,7 +5,8 @@ if (LANE.search.getEncodedSearchString()) {
     YAHOO.util.Event.onAvailable('queryMapping', function(){
         YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/json?q=' + LANE.search.getEncodedSearchString(), {
             success: function(o){
-                var anchor, span, img, i, queryMapContainer = document.getElementById('queryMapping');
+                var anchor, span, img, i,
+                    queryMapContainer = document.getElementById('queryMapping');
                 LANE.search.querymap = YAHOO.lang.JSON.parse(o.responseText);
                 if (LANE.search.querymap.resourceMap) {
                     LANE.search.querymap.getResultCounts = function(){
@@ -18,7 +19,9 @@ if (LANE.search.getEncodedSearchString()) {
                         url += '&rd=' + Math.random();
                         YAHOO.util.Connect.asyncRequest('GET', url, {
                             success: function(o){
-                                var results = YAHOO.lang.JSON.parse(o.responseText), rs = LANE.search.querymap.resourceMap.resources, i, needMore = false, result;
+                                var results = YAHOO.lang.JSON.parse(o.responseText),
+                                    rs = LANE.search.querymap.resourceMap.resources,
+                                    i, needMore = false, result;
                                 for (i = 0; i < rs.length; i++) {
                                     if (!rs[i].status) {
                                         result = results.resources[rs[i].id];

@@ -2,10 +2,11 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.search.Query;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -15,18 +16,22 @@ public class ResourceSearchGenerator extends SearchGenerator {
 
     @Override
     public Result doSearch() {
-        Collection<String> engineToRun = new HashSet<String>();
-        Query query = new SimpleQuery(super.query);
-        Result describeResult = this.metaSearchManager.describe(query, null);
-        for (String resource : this.resources) {
-            for (Result result : describeResult.getChildren()) {
-                if (result.getChild(resource) != null) {
-                    engineToRun.add(result.getId());
-                    break;
-                }
+        Collection<String> enginesToRun = new HashSet<String>();
+        Result describeResult = this.metaSearchManager.describe(new SimpleQuery(this.query), null);
+        Map<String, String> enginesMap = new HashMap<String, String>();
+        for (Result engine : describeResult.getChildren()) {
+            for (Result resource : engine.getChildren()) {
+                enginesMap.put(resource.getId(), engine.getId());
             }
         }
-        return super.doSearch(engineToRun);
+        for (String resource : this.resources) {
+            if (!enginesMap.containsKey(resource)) {
+                throw new IllegalArgumentException("no such resource: " + resource);
+            } else {
+                enginesToRun.add(enginesMap.get(resource));
+            }
+        }
+        return super.doSearch(enginesToRun);
     }
 
     @SuppressWarnings("unchecked")
