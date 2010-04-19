@@ -1,7 +1,7 @@
 .classes li {
     margin-left:0;
     list-style:none;
-    padding:13px !important;
+    font-size:11px !important;
     margin-bottom:5px;
 }
 .classes li:after {
@@ -13,30 +13,39 @@
 }
 .what, .when, .detail-link {
     float:left;
+    line-height:18px;
+    padding:8px 4px 8px 16px;
 }
 .when, .detail-link {
-    width:25%;
+
 }
 .what {
-    width:50%;
+    width:53%;
+    font-size:12px;
 }
 .details {
     clear:left;
-    padding-top:13px;
+    padding:10px;
+    background-color:#dbd2b3;
+}
+.details p {
+    font-size:12px;
+    line-height:18px;
 }
 .new {
-    color:#c42209;
+    color:#cc0000;
     text-transform:uppercase;
 }
 .odd {
     background-color:#fcf9f2;
 }
 .even {
-    background-color:#f6f3e4;
+    background-color:#f6f3e5;
 }
 .date, .what {
     font-weight:bold;
 }
 .author {
     font-weight:normal;
+    font-size:11px;
 }
