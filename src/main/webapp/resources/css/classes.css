@@ -1,0 +1,42 @@
+.classes li {
+    margin-left:0;
+    list-style:none;
+    padding:13px !important;
+    margin-bottom:5px;
+}
+.classes li:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility:hidden;
+}
+.what, .when, .detail-link {
+    float:left;
+}
+.when, .detail-link {
+    width:25%;
+}
+.what {
+    width:50%;
+}
+.details {
+    clear:left;
+    padding-top:13px;
+}
+.new {
+    color:#c42209;
+    text-transform:uppercase;
+}
+.odd {
+    background-color:#fcf9f2;
+}
+.even {
+    background-color:#f6f3e4;
+}
+.date, .what {
+    font-weight:bold;
+}
+.author {
+    font-weight:normal;
+}

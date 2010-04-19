@@ -624,7 +624,15 @@
             if(arg.nodeType === undefined) {
                 ev = YUE.getTarget(arg);
                 if(!YUD.hasClass(ev, this.CLASSES.TOGGLE) && !YUD.hasClass(ev, this.CLASSES.INDICATOR)) {
-                    return false;
+                    //this used to just return false, I walk up the node tree to find the toggle
+                    while (ev && !YUD.hasClass(ev, this.CLASSES.TOGGLE)) {
+                        ev = ev.parentNode;
+                    }
+                    if (!ev) {
+                        return false;
+                    } else {
+                        return this._onClick(ev);
+                    }
                 }
                 if(YUD.hasClass(ev, 'link')) {
                     return true;
