@@ -4,7 +4,7 @@
     width:100%;
     height:30px;
 /* IE6 doesn't get width 100% right */
-    _width:989px;
+    _width:889px;
     background-image:url(/././images/main-nav-bg.gif);
     font-weight:bold;
     font-size:13px;
