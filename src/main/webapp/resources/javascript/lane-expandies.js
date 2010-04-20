@@ -2,7 +2,7 @@
     YAHOO.util.Event.onDOMReady(function() {
         var createExpandies = function() {
             var i, j, k, items,
-                expanded, anchors,
+                expanded, anchors, expandy,
                 anchor = document.location.hash,
                 expandies = YAHOO.util.Dom.getElementsByClassName('expandy'),
                 YUD = YAHOO.util.Dom;
@@ -27,8 +27,14 @@
                             expanded.push(j);
                         }
                     }
-                    new YAHOO.widget.AccordionView(expandies[i], {
+                    expandy = new YAHOO.widget.AccordionView(expandies[i], {
                         expandItems: expanded
+                    });
+                    expandy.addListener('panelOpen', function(object) {
+                        YUD.addClass(object.panel,'expanded');
+                    });
+                    expandy.addListener('afterPanelClose', function(object) {
+                        YUD.removeClass(object.panel,'expanded');
                     });
                 }
             }

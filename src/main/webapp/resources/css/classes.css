@@ -11,14 +11,43 @@
     clear: both;
     visibility:hidden;
 }
+.even.expanded, .odd.expanded {
+    background-color:#DBD2B3;
+}
+.odd {
+    background-color:#fcf9f2;
+}
+.even {
+    background-color:#f6f3e5;
+}
 .what, .when, .detail-link {
     float:left;
     line-height:18px;
     padding:8px 4px 8px 16px;
 }
+.classes .hide {
+    display:none;
+}
+.expanded .show {
+    display:none;
+}
+.expanded .hide {
+    display:inline;
+}
 .what {
     width:53%;
     font-size:12px;
+}
+.new {
+    color:#cc0000;
+    text-transform:uppercase;
+}
+.date, .what {
+    font-weight:bold;
+}
+.author {
+    font-weight:normal;
+    font-size:11px;
 }
 .details {
     background-color:white;
@@ -29,21 +58,4 @@
 .details p {
     font-size:12px;
     line-height:18px;
-}
-.new {
-    color:#cc0000;
-    text-transform:uppercase;
-}
-.odd {
-    background-color:#fcf9f2;
-}
-.even {
-    background-color:#f6f3e5;
-}
-.date, .what {
-    font-weight:bold;
-}
-.author {
-    font-weight:normal;
-    font-size:11px;
 }
