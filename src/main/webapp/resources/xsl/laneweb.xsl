@@ -65,7 +65,7 @@
     <!-- here is the information associating urls with what is the laneNav active tab -->
     <xsl:variable name="laneNav-tabs">
         <div><span>All Resources</span><span>/biomed-resources</span></div>
-        <div><span>Specialty Portals</span><span>/sumc-specialties</span></div>
+        <div><span>Specialty Portals</span><span>/portals</span></div>
         <div><span>Classes &amp; Consulting</span><span>/info-literacy</span></div>
         <div><span>About Library</span><span>/services</span></div>
         <div><span>Help</span><span>/help</span></div>
@@ -81,16 +81,16 @@
             <xsl:when test="$search-tab">
                 <xsl:value-of select="$search-tab"/>
             </xsl:when>
-            <xsl:when test="starts-with($path,'/sumc-specialties/consumehealth')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/sumc-specialties/clinical')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/sumc-specialties/heartctrnurse')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/sumc-specialties/hematology')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/sumc-specialties/multiculhealth')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/sumc-specialties/nursing')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/sumc-specialties/obgyn')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/sumc-specialties/ophthalmology')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/sumc-specialties/picu')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/sumc-specialties')">specialty</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/consumehealth')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/clinical')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/heartctrnurse')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/hematology')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/multiculhealth')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/nursing')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/obgyn')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/ophthalmology')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/picu')">clinical</xsl:when>
+            <xsl:when test="starts-with($path,'/portals')">specialty</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/info-literacy')">clinical</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all</xsl:when>
@@ -573,16 +573,16 @@
                 <xsl:when test="starts-with($request-uri,'/biomed-resources/video')">catalog-video</xsl:when>
                 <xsl:when test="starts-with($request-uri,'/biomed-resources/software')">catalog-software</xsl:when>
                 <xsl:when test="starts-with($request-uri,'/biomed-resources/statistics')">catalog-statistics</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/sumc-specialties/anesthesia')">specialty-anesthesia</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/sumc-specialties/bioresearch')">specialty-bioresearch</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/sumc-specialties/cardiology')">specialty-cardiology</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/sumc-specialties/emergmed')">specialty-emergency"></xsl:when>
-                <xsl:when test="starts-with($request-uri,'/sumc-specialties/globalhealth')">specialty-globalhealth"></xsl:when>
-                <xsl:when test="starts-with($request-uri,'/sumc-specialties/hematology')">specialty-hematology</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/sumc-specialties/internalmed')">specialty-internal-medicine</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/sumc-specialties/pediatrics')">specialty-pediatrics</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/sumc-specialties/pharmacy')">specialty-pharmacy</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/sumc-specialties/pulmonary')">specialty-pulmonary</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/portals/anesthesia')">specialty-anesthesia</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/portals/bioresearch')">specialty-bioresearch</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/portals/cardiology')">specialty-cardiology</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/portals/emergmed')">specialty-emergency"></xsl:when>
+                <xsl:when test="starts-with($request-uri,'/portals/globalhealth')">specialty-globalhealth"></xsl:when>
+                <xsl:when test="starts-with($request-uri,'/portals/hematology')">specialty-hematology</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/portals/internalmed')">specialty-internal-medicine</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/portals/pediatrics')">specialty-pediatrics</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/portals/pharmacy')">specialty-pharmacy</xsl:when>
+                <xsl:when test="starts-with($request-uri,'/portals/pulmonary')">specialty-pulmonary</xsl:when>
                 <xsl:when test="ends-with($request-uri,'pubmed-viaLane.html')">articles-pubmed</xsl:when>
                 <xsl:when test="ends-with($request-uri,'uptodate-viaLane.html')">articles-uptodate</xsl:when>
                 <xsl:when test="ends-with($request-uri,'webofscience-viaLane.html')">articles-sciencecitation</xsl:when>
