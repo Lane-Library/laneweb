@@ -10,12 +10,15 @@
     font-size:13px;
 }
 #laneNav li {
-    padding:7px 20px;
-    background-image:none;
     float:left;
 }
 #laneNav a, #laneNav a:visited {
     color:black;
+    padding:7px 20px;
     text-decoration:none;
     border-bottom:none;
+    display:block;
+}
+#laneNav a:hover, #laneNav .active a {
+    background-color:white;
 }
