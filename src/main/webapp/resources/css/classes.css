@@ -16,17 +16,15 @@
     line-height:18px;
     padding:8px 4px 8px 16px;
 }
-.when, .detail-link {
-
-}
 .what {
     width:53%;
     font-size:12px;
 }
 .details {
+    background-color:white;
+    border:16px solid #DBD2B3;
     clear:left;
-    padding:10px;
-    background-color:#dbd2b3;
+    padding:16px;
 }
 .details p {
     font-size:12px;
