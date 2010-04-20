@@ -17,8 +17,10 @@
         testExpand: function() {
             panel = document.getElementById("panel1");
             YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
+            YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel.parentNode, 'expanded'));
             YAHOO.util.UserAction.click(panel.previousSibling);
             YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
+            YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel.parentNode, 'expanded'));
             YAHOO.util.Dom.addClass(panel, 'yui-acc-hidden');
         },
         testClose: function() {
