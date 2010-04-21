@@ -1,4 +1,4 @@
-YUI().use('yui2-event','yui2-dom','yui2-container','yui2-history', function() {
+YUI().use('yui2-event','yui2-dom','yui2-container','yui2-history', function(Y) {
     // pico form functionality
     //  - remove default text values onfocus
     //  - adds auto complete mesh listener on p i c inputs
