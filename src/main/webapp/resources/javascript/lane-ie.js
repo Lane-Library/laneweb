@@ -1,5 +1,5 @@
-YUI().use('yui2-event', 'yui2-dom', function(){
-    if (YAHOO.env.ua.ie && YAHOO.env.ua.ie == 6) {
+YUI().use('yui2-event', 'yui2-dom', function(Y){
+    if (Y.YUI2.env.ua.ie && Y.YUI2.env.ua.ie == 6) {
        //instead of :first-child selector remove background image:
        Y.YUI2.util.Event.onAvailable('stanfordMedicineBrand', function() {
             this.style.backgroundImage = 'none';
