@@ -627,11 +627,11 @@ YUI().use('yui2-event','yui2-dom','yui2-animation','yui2-element', function(Y) {
                 if(!YUD.hasClass(ev, this.CLASSES.TOGGLE) && !YUD.hasClass(ev, this.CLASSES.INDICATOR)) {
                     //this used to just return false, I walk up the node tree to find the toggle
                     while (ev && !YUD.hasClass(ev, this.CLASSES.TOGGLE)) {
-                        ev = ev.parentNode;
                         //if it has a href, just return false;
                         if (ev.href) {
                             return false;
                         }
+                        ev = ev.parentNode;
                     }
                     if (!ev) {
                         return false;
