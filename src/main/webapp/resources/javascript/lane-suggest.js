@@ -46,8 +46,9 @@ YUI().use('yui2-event','yui2-dom','yui2-autocomplete','yui2-datasource','yui2-co
             searchTermsAcInput.id = 'searchTermsAcInput';
             searchTermsAcContainer.appendChild(searchTermsAcInput);
             
-            dataSource = new Y.YUI2.widget.DS_XHR("/././apps/suggest/json", ["suggest"]);
-            dataSource.responseType = Y.YUI2.widget.DS_XHR.TYPE_JSON;
+            dataSource = new Y.YUI2.util.XHRDataSource("/././apps/suggest/json");
+            dataSource.responseType = Y.YUI2.util.XHRDataSource.TYPE_JSON;
+            dataSource.responseSchema = {resultsList:'suggest'};
             dataSource.scriptQueryParam = "q";
             dataSource.connTimeout = 3000;
             dataSource.maxCacheEntries = 100;
