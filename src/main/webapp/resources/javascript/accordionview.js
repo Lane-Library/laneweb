@@ -1,5 +1,5 @@
 
-YUI({filter:'debug'}).use('yui2-event','yui2-dom','yui2-animation','yui2-element', function(Y) {
+YUI().use('yui2-event','yui2-dom','yui2-animation','yui2-element', function(Y) {
 
     /**
     *
