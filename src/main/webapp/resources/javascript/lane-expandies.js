@@ -1,41 +1,39 @@
-
-YUI().use('yui2-event','yui2-dom', function(Y) {
+YUI().use('yui2-event','node', function(Y) {
     Y.YUI2.util.Event.onDOMReady(function() {
         var createExpandies = function() {
             var i, j, k, items,
                 expanded, anchors, expandy,
                 anchor = document.location.hash,
-                expandies = Y.YUI2.util.Dom.getElementsByClassName('expandy'),
-                YUD = Y.YUI2.util.Dom;
+                expandies = Y.all('.expandy');
             if (anchor) {
                 anchor = anchor.substring(1);
             }
-            for (i = 0; i < expandies.length; i++) {
+            for (i = 0; i < expandies.size(); i++) {
                 //create only if no id (id means already created):
-                if (!expandies[i].id) {
+                if (!expandies.item(i).getAttribute('id')) {
                     expanded = [];
-                    items = YUD.getChildren(expandies[i]);
-                    for (j = 0; j < items.length; j++) {
+                    items = expandies.item(i).get('children');//YUD.getChildren(expandies[i]);
+                    for (j = 0; j < items.size(); j++) {
                         if (anchor) {
-                            anchors = items[j].getElementsByTagName('A');
-                            for (k = 0; k < anchors.length; k++) {
-                                if (anchors[i].name == anchor) {
-                                    YUD.addClass(items[j], 'expanded');
+                            anchors = items.item(j).all('A');
+                            for (k = 0; k < anchors.size(); k++) {
+                                if (anchors.item(k).getAttribute('name') == anchor) {
+                                    items.get(j).addClass('expanded');
                                 }
                             }
                         }
-                        if (YUD.hasClass(items[j], 'expanded')) {
+                        if (items.item(j).hasClass('expanded')) {
                             expanded.push(j);
                         }
                     }
-                    expandy = new LANE.expandy.AccordionView(expandies[i], {
+                    expandy = new LANE.expandy.AccordionView(Y.Node.getDOMNode(expandies.item(i)), {
                         expandItems: expanded
                     });
                     expandy.addListener('panelOpen', function(object) {
-                        YUD.addClass(object.panel,'expanded');
+                        new Y.Node(object.panel).addClass('expanded');
                     });
                     expandy.addListener('afterPanelClose', function(object) {
-                        YUD.removeClass(object.panel,'expanded');
+                        new Y.Node(object.panel).removeClass('expanded');
                     });
                 }
             }
@@ -43,4 +41,4 @@ YUI().use('yui2-event','yui2-dom', function(Y) {
         createExpandies();
         LANE.core.getChangeEvent().subscribe(createExpandies);
     });
-    });
+});

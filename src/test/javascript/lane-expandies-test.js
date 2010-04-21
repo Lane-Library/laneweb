@@ -1,58 +1,61 @@
 /**
  * @author ceyates
  */
-(function() {
+YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','test', function(Y) {
     
-    var expandiesTestCase = new YAHOO.tool.TestCase({
-        name: "Lane Expandies TestCase",
-        panel: {},
+    var expandiesTestCase = new Y.Test.Case({
+        name: 'Lane Expandies TestCase',
         testIsClosed: function() {
-            panel = document.getElementById("panel1");
-            YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
+            var panel = Y.one('#panel1');
+            Y.Assert.isTrue(panel.hasClass('yui-acc-hidden'), 'className is ' + panel.getAttribute('className'));
         },
         testExpanded: function() {
-            panel = document.getElementById("panel2");
-            YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
+            var panel = Y.one('#panel2');
+            Y.Assert.isFalse(panel.hasClass('yui-acc-hidden'), 'className is ' + panel.getAttribute('className'));
         },
         testExpand: function() {
-            panel = document.getElementById("panel1");
-            YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
-            YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel.parentNode, 'expanded'));
-            YAHOO.util.UserAction.click(panel.previousSibling);
-            YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
-            YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel.parentNode, 'expanded'));
-            YAHOO.util.Dom.addClass(panel, 'yui-acc-hidden');
+            var panel = Y.one('#panel1');
+            Y.Assert.isTrue(panel.hasClass('yui-acc-hidden'), 'className is ' + panel.getAttribute('className'));
+            Y.Assert.isFalse(panel.get('parentNode').hasClass('expanded'));
+            panel.get('previousSibling').simulate('click');
+            Y.Assert.isFalse(panel.hasClass('yui-acc-hidden'), 'className is ' + panel.getAttribute('className'));
+            Y.Assert.isTrue(panel.get('parentNode').hasClass('expanded'));
         },
         testClose: function() {
-            panel = document.getElementById("panel2");
-            YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
-            YAHOO.util.UserAction.click(panel.previousSibling);
+            var panel = Y.one('#panel2');
+            Y.Assert.isFalse(panel.hasClass('yui-acc-hidden'), 'className is ' + panel.getAttribute('className'));
+            panel.get('previousSibling').simulate('click');
             //delay this 500ms to allow expandy to close
             this.wait(function() {
-                 YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
-                 YAHOO.util.Dom.removeClass(panel, 'yui-acc-hidden');
+                 Y.Assert.isTrue(panel.hasClass('yui-acc-hidden'), 'className is ' + panel.getAttribute('className'));
                  }, 500);
         },
         testAnchor: function() {
-            panel = document.getElementById("panel3");
+            var panel = Y.one('#panel3');
             if (document.location.hash == '#anchor') {
-                YAHOO.util.Assert.isFalse(YAHOO.util.Dom.hasClass(panel, 'yui-acc-hidden'));
+                Y.Assert.isFalse(panel.hasClass( 'yui-acc-hidden'));
             } else {
-                YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel, 'yui-acc-hidden'));
+                Y.Assert.isTrue(panel.hasClass( 'yui-acc-hidden'));
             }
         },
         testChangeEvent: function() {
-            var panel = document.getElementById('panel4');
-            var notExpandy = YAHOO.util.Dom.getElementsByClassName('not-expandy')[0];
-            YAHOO.util.Dom.addClass(notExpandy, 'expandy');
+            var panel = Y.one('#panel4');
+            var notExpandy = Y.one('.not-expandy');
+            notExpandy.removeClass('not-expandy');
+            notExpandy.addClass('expandy');
             LANE.core.getChangeEvent().fire();
-            YAHOO.util.Assert.isTrue(YAHOO.util.Dom.hasClass(panel,'yui-acc-hidden'), 'className is ' + panel.className);
+            Y.Assert.isTrue(panel.hasClass('yui-acc-hidden'), 'className is ' + panel.getAttribute('className'));
         }
     });
-
-    new YAHOO.tool.TestLogger();
-    YAHOO.tool.TestRunner.add(expandiesTestCase);
-    YAHOO.util.Event.addListener(this, 'load', function() {
-        YAHOO.tool.TestRunner.run();
+    
+    var yconsole = new Y.Console({
+        newestOnTop: false                   
     });
-})();
+    yconsole.render('#log');
+ 
+    
+    Y.on('domready', function() {
+        Y.Test.Runner.add(expandiesTestCase);
+        Y.Test.Runner.run();
+    });
+});
