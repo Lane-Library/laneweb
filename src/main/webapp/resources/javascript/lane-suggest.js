@@ -1,4 +1,4 @@
-YUI().use('yui2-event','yui2-dom','yui2-autocomplete','yui2-datasource', function(Y){
+YUI().use('yui2-event','yui2-dom','yui2-autocomplete','yui2-datasource','yui2-connection', function(Y){
     LANE.namespace('suggest');
     LANE.suggest = function(){
     	var acWidget;
