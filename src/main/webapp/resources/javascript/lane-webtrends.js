@@ -1,4 +1,4 @@
-(function() {
+YUI().use('yui2-dom',function() {
     var gImages=[],
         gIndex=0,
         DCS={},
@@ -198,4 +198,4 @@
             dcsMultiTrack.call(dcsMultiTrack, args);
         }
     });
-})();
+});

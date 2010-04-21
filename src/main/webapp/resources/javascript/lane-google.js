@@ -1,6 +1,7 @@
-YAHOO.util.Event.addListener(this, 'load', function() {
+YUI().use('yui2-event','yui2-get',function(Y) {
+	Y.YUI2.util.Event.onDOMReady(function() {
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    YAHOO.util.Get.script(gaJsHost + "google-analytics.com/ga.js", {
+    Y.YUI2.util.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function(){
             var host = document.location.host, 
             pageTracker,
@@ -35,4 +36,5 @@ YAHOO.util.Event.addListener(this, 'load', function() {
             }
         }
     });
+});
 });

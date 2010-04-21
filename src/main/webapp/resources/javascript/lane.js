@@ -1,6 +1,7 @@
 /**
  * @author ceyates
  */
+YUI().use('yui2-event', function(Y) {
 if (typeof LANE == "undefined" || !LANE) {
     /**
      * The LANE global namespace object.  If LANE is already defined, the
@@ -9,7 +10,7 @@ if (typeof LANE == "undefined" || !LANE) {
      * @class LANE
      * @static
      */
-    var LANE = {};
+    LANE = {};
 }
 LANE.namespace = function(){
     var a = arguments, o = null, i, j, d;
@@ -26,11 +27,11 @@ LANE.namespace = function(){
     return o;
 };
 LANE.core = LANE.core || function() {
-    var E = YAHOO.util.Event, //shorthand
-        changeEvent =  new YAHOO.util.CustomEvent('change'),
+    var E = Y.YUI2.util.Event, //shorthand
+        changeEvent =  new Y.YUI2.util.CustomEvent('change'),
         m = {}; //the meta element name/values
     // initialize on load
-    E.addListener(this,'load',function() {
+    E.onDOMReady(function() {
         var d = document,
             meta, //the meta elements
 //            p, //anchors for finding popup links
@@ -82,7 +83,7 @@ LANE.core = LANE.core || function() {
             if (LANE.tracking) {
                 LANE.tracking.trackEvent(e);
             //put in a delay for safari to make the tracking request:
-            if (YAHOO.env.ua.webkit && LANE.tracking.isTrackable(e)) {
+            if (Y.YUI2.env.ua.webkit && LANE.tracking.isTrackable(e)) {
                     t = e.target;
                     parent = t;
                     while (parent) {
@@ -96,7 +97,7 @@ LANE.core = LANE.core || function() {
                             f = function() {
                                 window.location = t.href;
                             };
-                            YAHOO.util.Event.preventDefault(e);
+                            Y.YUI2.util.Event.preventDefault(e);
                             setTimeout(f, 200);
                             break;
                         }
@@ -115,13 +116,13 @@ LANE.core = LANE.core || function() {
         },
         //TODO: urlencode msg, implement onerror to point to this, etc
         log: function(msg, cat, src) {
-            YAHOO.log(msg, cat, src);
+            Y.YUI2.log(msg, cat, src);
             if (encodeURIComponent) {
                 msg = encodeURIComponent(msg);
             } else {
                 msg = escape(msg);
             }
-            YAHOO.util.Connect.asyncRequest('GET','/././javascriptLogger?' + msg);
+            Y.YUI2.util.Connect.asyncRequest('GET','/././javascriptLogger?' + msg);
         },
         // document.importNode not supported in IE
         importNode: function(importedNode, deep) {
@@ -162,3 +163,4 @@ if (!Array.indexOf) {
         return -1;
     };
 }
+});

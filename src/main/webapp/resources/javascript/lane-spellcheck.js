@@ -1,11 +1,12 @@
 //check if there is a query
+YUI().use('yui2-event','yui2-connection','yui2-json', function(Y) {
 if (LANE.search.getEncodedSearchString()) {
     //wait until id=spellcheck available
-    YAHOO.util.Event.onAvailable('spellCheck',function() {
+    Y.YUI2.util.Event.onAvailable('spellCheck',function() {
         //get the suggestion
-        YAHOO.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q=' + LANE.search.getEncodedSearchString(), {
+        Y.YUI2.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q=' + LANE.search.getEncodedSearchString(), {
             success: function(o){
-                var sc = YAHOO.lang.JSON.parse(o.responseText), s, a;
+                var sc = Y.YUI2.lang.JSON.parse(o.responseText), s, a;
                 if (sc.suggestion) {
                     //if there is a suggestion show the spellcheck markup 
                     //and add the suggestion to the href
@@ -21,5 +22,6 @@ if (LANE.search.getEncodedSearchString()) {
         });
     });
 }
+});
 
 

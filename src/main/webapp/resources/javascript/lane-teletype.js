@@ -1,10 +1,11 @@
 // teletype functionality for PubMed/UTD through Lane pages
 // typing in #searchTeletyper .teletypeInput sends keystrokes to #search #searchTerms
-YAHOO.util.Event.onContentReady('searchTeletyper', function(){
+YUI().use('yui2-event','yui2-dom', function(Y) {
+Y.YUI2.util.Event.onContentReady('searchTeletyper', function(){
     var targetElm = document.getElementById('searchTerms'),
-    inputElms = YAHOO.util.Dom.getElementsByClassName('teletypeInput',null,this),
+    inputElms = Y.YUI2.util.Dom.getElementsByClassName('teletypeInput',null,this),
     searchForm = document.getElementById('search'),
-    YE = YAHOO.util.Event,
+    YE = Y.YUI2.util.Event,
     i,
     teletype = function(inputElm){
         var qString;
@@ -44,4 +45,5 @@ YAHOO.util.Event.onContentReady('searchTeletyper', function(){
             teletype(this);
         });
     }
+});
 });

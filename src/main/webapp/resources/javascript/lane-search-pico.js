@@ -1,4 +1,4 @@
-(function() {
+YUI().use('yui2-event','yui2-dom','yui2-container','yui2-history', function() {
     // pico form functionality
     //  - remove default text values onfocus
     //  - adds auto complete mesh listener on p i c inputs
@@ -9,10 +9,10 @@
     searchTermsInput,     //input for built query terms
     inputs,               //input elements
     acInputs,             //input elements requiring auto complete
-     D = YAHOO.util.Dom,  // shorthand for YUI modules
-     E = YAHOO.util.Event, 
-     W = YAHOO.widget,
-     H = YAHOO.util.History,
+     D = Y.YUI2.util.Dom,  // shorthand for YUI modules
+     E = Y.YUI2.util.Event, 
+     W = Y.YUI2.widget,
+     H = Y.YUI2.util.History,
      queryBuilder = function(targetId){ //build query terms from pico inputs
         var qString = '', i;
         if(targetId == searchTermsInput.id) {
@@ -110,7 +110,7 @@
             }
         }
     });
-})();
+});
 /*
 
                             <fieldset id="picoFields">

@@ -1,4 +1,4 @@
-(function() {
+YUI().use('yui2-dom','yui2-container',function(Y) {
     var tooltips = [],
         destroyTooltips = function() {
             while (tooltips.length > 0) {
@@ -13,8 +13,8 @@
                 simpleTooltipIds = [], // array of contexts that need tt made
                                        // from their title attribute
                 tooltipElement,
-                YUD = YAHOO.util.Dom,
-                YUW = YAHOO.widget,
+                YUD = Y.YUI2.util.Dom,
+                YUW = Y.YUI2.widget,
                 i, j;
             
             tooltipContainerArray = YUD.getElementsByClassName('tooltips');
@@ -65,6 +65,6 @@
        destroyTooltips();
        createTooltips(); 
     });
-    YAHOO.util.Event.onDOMReady(createTooltips);
+    Y.YUI2.util.Event.onDOMReady(createTooltips);
     
-})();
+});

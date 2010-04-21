@@ -1,4 +1,5 @@
-LANE.tracking = function(){
+YUI().use('yui2-dom',function(Y) {
+	LANE.tracking = function(){
     //TODO more descriptive variable names
     //TODO put conditionals into sub-functions
     //TODO more thorough documentation
@@ -48,7 +49,7 @@ LANE.tracking = function(){
             if (!title) {
                 title = 'unknown';
             }
-            if (YAHOO.util.Dom.hasClass(node, 'yui-accordion-toggle')) {
+            if (Y.YUI2.util.Dom.hasClass(node, 'yui-accordion-toggle')) {
                 title = 'Expandy:' + title;
             }
             return title;
@@ -57,7 +58,7 @@ LANE.tracking = function(){
             var node = event.srcElement || event.target,
                 host, path, query, external, title, searchTerms, searchSource, children;
                 if (event.type == 'click') {
-                    if (YAHOO.util.Dom.hasClass(node, 'yui-accordion-toggle')) {
+                    if (Y.YUI2.util.Dom.hasClass(node, 'yui-accordion-toggle')) {
                         host = document.location.host;
                         path = document.location.pathname;
                         query = document.location.search;
@@ -149,10 +150,10 @@ LANE.tracking = function(){
                 documentHost = documentHost.substring(0, documentHost.indexOf(':'));
             }
             if (event.type == 'click') {
-                if (YAHOO.util.Dom.hasClass(target, 'searchFacet')) {
+                if (Y.YUI2.util.Dom.hasClass(target, 'searchFacet')) {
                     return true;
                 }
-                if (YAHOO.util.Dom.hasClass(target, 'yui-accordion-toggle')) {
+                if (Y.YUI2.util.Dom.hasClass(target, 'yui-accordion-toggle')) {
                     return true;
                 }
                 //find self ancestor that is <a>
@@ -199,3 +200,4 @@ LANE.tracking = function(){
         }
     };
 }();
+});

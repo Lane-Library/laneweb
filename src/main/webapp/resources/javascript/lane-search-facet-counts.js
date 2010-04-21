@@ -1,10 +1,10 @@
 //TODO: should this stop polling when all facets are complete? currently polls until search app done or timeout
-(function() {
+YUI().use('yui2-dom','yui2-event','yui2-connection','yui2-json',function(Y) {
     var searchString = LANE.search.getEncodedSearchString(),
         startTime = new Date().getTime(),
         facets, requestString, j,
         updateHits = function(o) {
-            var response = YAHOO.lang.JSON.parse(o.responseText),
+            var response = Y.YUI2.lang.JSON.parse(o.responseText),
                 hitLink, hits, sleepingTime,
                 remainingTime, searchStatus, engineStatus;
             
@@ -16,8 +16,8 @@
                     engineStatus = response.results.facets[facets[j].facetId].status;
                 }
                 if (!facets[j].facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits === 0) {
-                	YAHOO.util.Dom.addClass(hitLink.parentNode,'inactiveFacet');
-                	YAHOO.util.Dom.removeClass(hitLink.parentNode,'searchableFacet');
+                	Y.YUI2.util.Dom.addClass(hitLink.parentNode,'inactiveFacet');
+                	Y.YUI2.util.Dom.removeClass(hitLink.parentNode,'searchableFacet');
                 	hitLink.setAttribute('title','no search results for '+hitLink.innerHTML);
                 }
             }
@@ -35,19 +35,19 @@
             success:updateHits
         },
         makeRequest = function() {
-            facets = YAHOO.util.Dom.getElementsByClassName('searchFacet');
+            facets = Y.YUI2.util.Dom.getElementsByClassName('searchFacet');
             requestString = '';
             for (j = 0; j < facets.length; j++) {
                 facets[j].facetId = facets[j].id.substring(0, facets[j].id.indexOf('Facet'));
-                if(YAHOO.util.Dom.hasClass(facets[j],'searchableFacet')){
+                if(Y.YUI2.util.Dom.hasClass(facets[j],'searchableFacet')){
                 	requestString+=facets[j].facetId+',';
                 }
             }
             if(requestString !== ''){
-            	YAHOO.util.Connect.asyncRequest('GET', '/././apps/search/facets/json?q=' + searchString + '&f=' + requestString + '&rd=' + Math.random(), responseHandler);
+            	Y.YUI2.util.Connect.asyncRequest('GET', '/././apps/search/facets/json?q=' + searchString + '&f=' + requestString + '&rd=' + Math.random(), responseHandler);
             }
     };
     if (searchString) {
-        YAHOO.util.Event.onAvailable('searchFacets', makeRequest);
+        Y.YUI2.util.Event.onAvailable('searchFacets', makeRequest);
     }
-})();
+});

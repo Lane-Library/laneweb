@@ -1,5 +1,5 @@
 // based on lane-eresources.js; renaming for use across articles, catalog, clinical interfaces
-(function(){
+YUI().use('yui2-dom','yui2-event','yui2-history','yui2-connection',function(Y){
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
@@ -12,18 +12,18 @@
             }
         };
     }();
-    YAHOO.util.Event.addListener(this, 'load', function(){
+    Y.YUI2.util.Event.addListener(this, 'load', function(){
         var elt = document.getElementById('searchFacets'), facets, i, j, type, source, container;
         if (elt) {
             container = document.getElementById('searchResults');
-            facets = YAHOO.util.Dom.getElementsByClassName('searchFacet',null,elt);
+            facets = Y.YUI2.util.Dom.getElementsByClassName('searchFacet',null,elt);
             for (i = 0; i < facets.length; i++) {
                 if (facets[i].id.match("Facet$")) {
                     type = facets[i].id.substring(0, facets[i].id.indexOf('-'));
                     source = facets[i].id.substring(0, facets[i].id.indexOf('Facet'));
                     if (type) {
                         facets[i].result = new Result(type, source, facets[i], container);
-                        if (YAHOO.util.Dom.hasClass(facets[i],'current')) {
+                        if (Y.YUI2.util.Dom.hasClass(facets[i],'current')) {
                             content = [];
                             for (j = 0; j < container.childNodes.length; j++) {
                                 content[j] = container.childNodes[j];
@@ -32,7 +32,7 @@
                             LANE.search.facets.setCurrentResult(facets[i].result);
                         }
                         facets[i].activate = function(event){
-                            if (!YAHOO.util.Dom.hasClass(this,'current')) {
+                            if (!Y.YUI2.util.Dom.hasClass(this,'current')) {
 //                                this.style.textDecoration = 'underline';
 //                                this.style.cursor = 'pointer';
                             }
@@ -42,10 +42,10 @@
                             this.style.cursor = 'default';
                         };
                         facets[i].clicked = function(event){
-                            if (YAHOO.util.History) {
+                            if (Y.YUI2.util.History) {
                                 // Browser History Manager may not be initialized (Opera unsupported, hyui-history-iframe not present in content)
                                 try {
-                                    YAHOO.util.History.navigate("facet", this.result._source);
+                                    Y.YUI2.util.History.navigate("facet", this.result._source);
                                 } catch (e) {
                                     //log somewhere ... no need to break/alert
                                 }
@@ -54,7 +54,7 @@
                                 this.result.show();
                             }
                             LANE.search.setSearchSource(this.result._source);
-                            YAHOO.util.Event.preventDefault(event);
+                            Y.YUI2.util.Event.preventDefault(event);
                         };
                     }
                 }
@@ -108,7 +108,7 @@
             } else {
                 LANE.search.facets.getCurrentResult().hide();
                 LANE.search.facets.setCurrentResult(this);
-                YAHOO.util.Dom.addClass(this._facet,'current');
+                Y.YUI2.util.Dom.addClass(this._facet,'current');
                 for (i = 0; i < this._content.length; i++) {
                     this._container.appendChild(this._content[i]);
                 }
@@ -124,7 +124,7 @@
             var request;
             if (this._state == 'initialized') {
                 this._state = 'searching';
-                request = YAHOO.util.Connect.asyncRequest('GET', this._url, this._callback);
+                request = Y.YUI2.util.Connect.asyncRequest('GET', this._url, this._callback);
             } else 
                 if (this._state == 'searched') {
                     this.show();
@@ -137,7 +137,7 @@
             while (this._container.childNodes.length > 0) {
                 this._container.removeChild(this._container.lastChild);
             }
-            YAHOO.util.Dom.removeClass(this._facet,'current');
+            Y.YUI2.util.Dom.removeClass(this._facet,'current');
         };
     }
-})();
+});

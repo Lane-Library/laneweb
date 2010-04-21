@@ -1,5 +1,5 @@
-(function(){
-    YAHOO.util.Event.onAvailable('selections',function() {
+YUI().use('yui2-event', function(Y){
+    Y.YUI2.util.Event.onAvailable('selections',function() {
         var selections = [], showAll, hideAllBut, i, options;
         for (i = 0; i < this.childNodes.length; i++) {
             if (this.childNodes[i].nodeType == 1) {
@@ -31,4 +31,4 @@
             };
         }
     });
-})();
+});

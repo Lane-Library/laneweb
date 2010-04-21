@@ -1,13 +1,14 @@
 //TODO: this needs some cleaning up
 //check if there is a query
+YUI().use('yui2-event','yui2-connection','yui2-json', function(Y) {
 if (LANE.search.getEncodedSearchString()) {
     //check if there is id=queryMapping
-    YAHOO.util.Event.onAvailable('queryMapping', function(){
-        YAHOO.util.Connect.asyncRequest('GET', '/././apps/querymap/json?q=' + LANE.search.getEncodedSearchString(), {
+    Y.YUI2.util.Event.onAvailable('queryMapping', function(){
+        Y.YUI2.util.Connect.asyncRequest('GET', '/././apps/querymap/json?q=' + LANE.search.getEncodedSearchString(), {
             success: function(o){
                 var anchor, span, img, i,
                     queryMapContainer = document.getElementById('queryMapping');
-                LANE.search.querymap = YAHOO.lang.JSON.parse(o.responseText);
+                LANE.search.querymap = Y.YUI2.lang.JSON.parse(o.responseText);
                 if (LANE.search.querymap.resourceMap) {
                     LANE.search.querymap.getResultCounts = function(){
                         var url = '/././apps/search/json?q=' + LANE.search.getEncodedSearchString(), i;
@@ -17,9 +18,9 @@ if (LANE.search.getEncodedSearchString()) {
                             }
                         }
                         url += '&rd=' + Math.random();
-                        YAHOO.util.Connect.asyncRequest('GET', url, {
+                        Y.YUI2.util.Connect.asyncRequest('GET', url, {
                             success: function(o){
-                                var results = YAHOO.lang.JSON.parse(o.responseText),
+                                var results = Y.YUI2.lang.JSON.parse(o.responseText),
                                     rs = LANE.search.querymap.resourceMap.resources,
                                     i, needMore = false, result;
                                 for (i = 0; i < rs.length; i++) {
@@ -68,4 +69,5 @@ if (LANE.search.getEncodedSearchString()) {
         });
     });
 }
+});
 

@@ -1,4 +1,5 @@
-(function() {
+
+YUI({filter:'debug'}).use('yui2-event','yui2-dom','yui2-animation','yui2-element', function(Y) {
 
     /**
     *
@@ -19,13 +20,13 @@
     * @requires yahoo, dom, event, element, animation
     */
     
-    var YUD = YAHOO.util.Dom, YUE = YAHOO.util.Event, YUA = YAHOO.util.Anim,
+    var YUD = Y.YUI2.util.Dom, YUE = Y.YUI2.util.Event, YUA = Y.YUI2.util.Anim,
     
     /**
     * A widget to control accordion views.
-    * @namespace YAHOO.widget
+    * @namespace Y.YUI2.widget
     * @class AccordionView
-    * @extends YAHOO.util.Element
+    * @extends Y.YUI2.util.Element
     * @constructor
     * @param {HTMLElement | String} el The id of the html element that represents the AccordionView. 
     * @param {Object} oAttr (optional) A key map of the AccordionView's 
@@ -43,7 +44,7 @@
             el = document.createElement(this.CONFIG.TAG_NAME);
         }
         if (el.id) {oAttr.id = el.id; }
-        YAHOO.widget.AccordionView.superclass.constructor.call(this, el, oAttr); 
+        Y.YUI2.widget.AccordionView.superclass.constructor.call(this, el, oAttr); 
 
         this.initList(el, oAttr);
                 
@@ -57,9 +58,9 @@
     /**
      * @event panelClose
      * @description Fires before a panel closes.
-     * See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a>
+     * See <a href="Y.YUI2.util.Element.html#addListener">Element.addListener</a>
      * for more information on listening for this event.
-     * @type YAHOO.util.CustomEvent
+     * @type Y.YUI2.util.CustomEvent
      */
     
     panelCloseEvent = 'panelClose',
@@ -67,9 +68,9 @@
     /**
      * @event panelOpen
      * @description Fires before a panel opens.
-     * See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a>
+     * See <a href="Y.YUI2.util.Element.html#addListener">Element.addListener</a>
      * for more information on listening for this event.
-     * @type YAHOO.util.CustomEvent
+     * @type Y.YUI2.util.CustomEvent
      */
     
     panelOpenEvent = 'panelOpen',
@@ -77,9 +78,9 @@
     /**
      * @event afterPanelClose
      * @description Fires after a panel has finished closing.
-     * See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a>
+     * See <a href="Y.YUI2.util.Element.html#addListener">Element.addListener</a>
      * for more information on listening for this event.
-     * @type YAHOO.util.CustomEvent
+     * @type Y.YUI2.util.CustomEvent
      */
     
     afterPanelCloseEvent = 'afterPanelClose',
@@ -87,9 +88,9 @@
     /**
      * @event afterPanelOpen
      * @description Fires after a panel has finished opening.
-     * See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a>
+     * See <a href="Y.YUI2.util.Element.html#addListener">Element.addListener</a>
      * for more information on listening for this event.
-     * @type YAHOO.util.CustomEvent
+     * @type Y.YUI2.util.CustomEvent
      */
     
     afterPanelOpenEvent = 'afterPanelOpen',
@@ -97,9 +98,9 @@
     /**
      * @event stateChanged
      * @description Fires after the accordion has fully changed state (after opening and/or closing (a) panel(s)).
-     * See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a>
+     * See <a href="Y.YUI2.util.Element.html#addListener">Element.addListener</a>
      * for more information on listening for this event.
-     * @type YAHOO.util.CustomEvent
+     * @type Y.YUI2.util.CustomEvent
      */
     
     stateChangedEvent = 'stateChanged',
@@ -108,16 +109,16 @@
      * @event beforeStateChange
      * @description Fires before a state change.
      * This is useful to cancel an entire change operation
-     * See <a href="YAHOO.util.Element.html#addListener">Element.addListener</a>
+     * See <a href="Y.YUI2.util.Element.html#addListener">Element.addListener</a>
      * for more information on listening for this event.
-     * @type YAHOO.util.CustomEvent
+     * @type Y.YUI2.util.CustomEvent
      */
     
     beforeStateChangeEvent = 'beforeStateChange';
 
-    YAHOO.widget.AccordionView = AccordionView;
+    Y.YUI2.widget.AccordionView = AccordionView;
     
-    YAHOO.extend(AccordionView, YAHOO.util.Element, {
+    Y.YUI2.extend(AccordionView, Y.YUI2.util.Element, {
                 
         /**
         * Initialize attributes for the Accordion
@@ -127,7 +128,7 @@
         
         initAttributes: function (oAttr) {
             AccordionView.superclass.initAttributes.call(this, oAttr);
-            var bAnimate = (YAHOO.env.modules.animation) ? true : false;    
+            var bAnimate = (Y.YUI2.env.modules.animation) ? true : false;    
             this.setAttributeConfig('id', {
                 writeOnce: true,
                 validator: function (value) {
@@ -144,28 +145,28 @@
             );
             this.setAttributeConfig('animate', {
                 value: bAnimate,
-                validator: YAHOO.lang.isBoolean
+                validator: Y.YUI2.lang.isBoolean
                 }
             );          
             this.setAttributeConfig('collapsible', {
                 value: true,
-                validator: YAHOO.lang.isBoolean
+                validator: Y.YUI2.lang.isBoolean
                 }
             );
             this.setAttributeConfig('expandable', {
                 value: true,
-                validator: YAHOO.lang.isBoolean
+                validator: Y.YUI2.lang.isBoolean
                 }
             );
             this.setAttributeConfig('effect', {
-                value: YAHOO.util.Easing.easeBoth,
-                validator: YAHOO.lang.isString
+                value: Y.YUI2.util.Easing.easeBoth,
+                validator: Y.YUI2.lang.isString
 
                 }
             );
             this.setAttributeConfig('hoverActivated', {
                     value: false,
-                    validator: YAHOO.lang.isBoolean,
+                    validator: Y.YUI2.lang.isBoolean,
                     method: function (value) {
                             if (value) {
                                     YUE.on(this, 'mouseover', this._onMouseOver, this, true);                        
@@ -176,7 +177,7 @@
             });
             this.setAttributeConfig('_hoverTimeout', {
                 value: 500,
-                validator: YAHOO.lang.isInteger
+                validator: Y.YUI2.lang.isInteger
                 }
             );
         },
@@ -277,7 +278,7 @@
         * @type Boolean
         */
         
-        _ff2 : (YAHOO.env.ua.gecko > 0 && YAHOO.env.ua.gecko < 1.9),
+        _ff2 : (Y.YUI2.env.ua.gecko > 0 && Y.YUI2.env.ua.gecko < 1.9),
 
         /**
         * Whether we're running IE6 or IE7
@@ -286,7 +287,7 @@
         * @type Boolean
         */
 
-        _ie : (YAHOO.env.ua.ie < 8 && YAHOO.env.ua.ie > 0),
+        _ie : (Y.YUI2.env.ua.ie < 8 && Y.YUI2.env.ua.ie > 0),
         
         /**
         * Initialize the list / accordion
@@ -439,7 +440,7 @@
                     YUD.addClass(elPanelContent, this.CLASSES.HIDDEN);
                 }
             }
-            t= YAHOO.lang.later(0, this, function(){
+            t= Y.YUI2.lang.later(0, this, function(){
             this.fireEvent(stateChangedEvent);});
         },
 
@@ -471,7 +472,7 @@
                 }
             }
             this._panels = aNewPanels;
-            t= YAHOO.lang.later(0, this, function(){
+            t= Y.YUI2.lang.later(0, this, function(){
                 this.fireEvent(stateChangedEvent);
             });
         },
@@ -591,7 +592,7 @@
             // must provide the TARGET or IE will destroy the event before we can
             // use it. Thanks Nicholas Zakas for pointing this out to me
             var target = YUE.getTarget(ev);
-            this._hoverTimer = YAHOO.lang.later(this.get('_hoverTimeout'), this, function(){
+            this._hoverTimer = Y.YUI2.lang.later(this.get('_hoverTimeout'), this, function(){
                 this._onClick(target);
              });
         },
@@ -712,7 +713,7 @@
                         oOptions = {height: {from: nHeight, to: 0}};
                     }
                     nSpeed = (this.get('animationSpeed')) ? this.get('animationSpeed') : 0.5;
-                    sEffect = (this.get('effect')) ? this.get('effect') : YAHOO.util.Easing.easeBoth;
+                    sEffect = (this.get('effect')) ? this.get('effect') : Y.YUI2.util.Easing.easeBoth;
                     oAnimator = new YUA(el, oOptions, nSpeed, sEffect);
                     if(bHideAfter) {
                         if (this.fireEvent(panelCloseEvent, el) === false) { return; }
@@ -803,6 +804,8 @@
             var name = this.get('id') || this.get('tagName');
             return "AccordionView " + name; 
         }
-    });    
-})();
-YAHOO.register("accordionview", YAHOO.widget.AccordionView, {version: "0.99", build: "33"});
+    });
+    LANE.namespace('expandy');
+    LANE.expandy.AccordionView = AccordionView;
+//Y.YUI2.register("accordionview", Y.YUI2.widget.AccordionView, {version: "0.99", build: "33"});
+});

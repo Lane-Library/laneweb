@@ -300,8 +300,13 @@
                 </li>
             </ul>
         </div>
-        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/utilities/utilities.js&amp;2.8.0r4/build/container/container-min.js&amp;2.8.0r4/build/json/json-min.js&amp;2.8.0r4/build/history/history-min.js&amp;2.8.0r4/build/datasource/datasource-min.js&amp;2.8.0r4/build/animation/animation-min.js&amp;2.8.0r4/build/autocomplete/autocomplete-min.js"/>
+        <script type="text/javascript" src="http://yui.yahooapis.com/3.1.0/build/yui/yui-min.js"></script>
+<!--        
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/utilities/utilities.js&amp;2.8.0r4/build/container/container.js&amp;2.8.0r4/build/json/json.js&amp;2.8.0r4/build/history/history.js&amp;2.8.0r4/build/datasource/datasource.js&amp;2.8.0r4/build/animation/animation.js&amp;2.8.0r4/build/autocomplete/autocomplete.js"/>
+-->
+
         <script type="text/javascript" src="/javascript/lane-all.js"/>
+
         <!--<script type="text/javascript" src="/javascript/lane.js"/>
         <script type="text/javascript" src="/javascript/accordionview.js"/>
         <script type="text/javascript" src="/javascript/lane-expandies.js"/>
@@ -322,6 +327,7 @@
         <script type="text/javascript" src="/javascript/lane-ie.js"/>
         <script type="text/javascript" src="/javascript/lane-teletype.js"/>
         <script type="text/javascript" src="/javascript/lane-search-pico.js"/>
-        <script type="text/javascript" src="/javascript/lane-suggest.js"/>-->
+        <script type="text/javascript" src="/javascript/lane-suggest.js"/>
+        <script type="text/javascript" src="/javascript/lane-selections.js"/>-->
     </body>
 </html>

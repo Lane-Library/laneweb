@@ -1,4 +1,4 @@
-(function() {
+YUI().use('yui2-event','yui2-dom','yui2-json',function(Y) {
 
     LANE.namespace('search.metasearch');
     LANE.search.metasearch = function() {
@@ -31,7 +31,7 @@
         return {
             initialize: function() {
                 var i;
-                searchElms = YAHOO.util.Dom.getElementsByClassName("metasearch");
+                searchElms = Y.YUI2.util.Dom.getElementsByClassName("metasearch");
                 for (i = 0; i < searchElms.length; i++) {
                     if (searchables.indexOf(searchElms[i].id) == -1) {
                         searchables.push(searchElms[i].id);
@@ -44,9 +44,9 @@
                 startTime = new Date().getTime();
             },
             getResultCounts: function() {
-                YAHOO.util.Connect.asyncRequest('GET', getSearchUrl(), {
+                Y.YUI2.util.Connect.asyncRequest('GET', getSearchUrl(), {
                     success: function(o) {
-                        var response = YAHOO.lang.JSON.parse(o.responseText),
+                        var response = Y.YUI2.lang.JSON.parse(o.responseText),
                             results = response.resources,
                             needMore = false, 
                             i,result, updateable, resultSpan, sleepingTime, remainingTime;
@@ -60,21 +60,21 @@
                             } else if (updateable && result.status == 'successful') {
                                 // process display of each updateable node
                                 // once all processed, remove id from searchables
-                                resultSpan = YAHOO.util.Dom.getElementsByClassName('searchCount', 'span', updateable.parentNode)[0];
+                                resultSpan = Y.YUI2.util.Dom.getElementsByClassName('searchCount', 'span', updateable.parentNode)[0];
                                 resultSpan.innerHTML = '&#160;' +
-                                YAHOO.util.Number.format(result.hits, {
+                                Y.YUI2.util.Number.format(result.hits, {
                                     thousandsSeparator: ","
                                 });
                                 if (!updateable.href) {
                                     updateable.setAttribute('href', result.url);
                                     updateable.setAttribute('target', '_blank');
                                 }
-                                YAHOO.util.Dom.removeClass(updateable, 'metasearch');
+                                Y.YUI2.util.Dom.removeClass(updateable, 'metasearch');
                                 searchables.splice(i, 1);
                             } else if (updateable && (result.status == 'failed' || result.status == 'canceled')) {
-                                resultSpan = YAHOO.util.Dom.getElementsByClassName('searchCount', 'span', updateable.parentNode)[0];
+                                resultSpan = Y.YUI2.util.Dom.getElementsByClassName('searchCount', 'span', updateable.parentNode)[0];
                                 resultSpan.innerHTML = ' ? ';
-                                YAHOO.util.Dom.removeClass(updateable, 'metasearch');
+                                Y.YUI2.util.Dom.removeClass(updateable, 'metasearch');
                                 searchables.splice(i, 1);
                             }
                         }
@@ -95,14 +95,14 @@
         };
     }();
     
-    YAHOO.util.Event.onDOMReady(function() {
+    Y.YUI2.util.Event.onDOMReady(function() {
     
         // check for presence of search term and metasearch classNames
-        if (LANE.search.getEncodedSearchString() && YAHOO.util.Dom.getElementsByClassName('metasearch').length > 0) {
+        if (LANE.search.getEncodedSearchString() && Y.YUI2.util.Dom.getElementsByClassName('metasearch').length > 0) {
             LANE.search.metasearch.initialize();
             LANE.search.metasearch.getResultCounts();
             LANE.search.startSearch();
         }
         
     });//end onDOMReady
-})();
+});

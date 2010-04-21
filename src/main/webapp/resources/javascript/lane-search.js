@@ -1,7 +1,8 @@
-LANE.search = LANE.search ||
+YUI().use('yui2-event','yui2-dom',function(Y) {
+	LANE.search = LANE.search ||
 function() {
-    var Event = YAHOO.util.Event, //shorthand for Event
-        Dom = YAHOO.util.Dom, //shorthand for Dom
+    var Event = Y.YUI2.util.Event, //shorthand for Event
+        Dom = Y.YUI2.util.Dom, //shorthand for Dom
         searching = false, //searching state
         searchString,
         encodedString,
@@ -136,7 +137,7 @@ function() {
         },
         setInitialText: function() {
             var oldInitialText = initialText;
-            initialText = YAHOO.util.Dom.getElementsByClassName('active', 'LI', 'searchTabs')[0].title;
+            initialText = Y.YUI2.util.Dom.getElementsByClassName('active', 'LI', 'searchTabs')[0].title;
             if (!searchTermsInput.value || searchTermsInput.value == oldInitialText) {
                 searchTermsInput.value = initialText;
             }
@@ -157,3 +158,4 @@ function() {
         }
     };
 }();
+});

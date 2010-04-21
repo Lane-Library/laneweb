@@ -1,30 +1,30 @@
-(function(){
+YUI().use('yui2-event', 'yui2-dom', function(){
     if (YAHOO.env.ua.ie && YAHOO.env.ua.ie == 6) {
        //instead of :first-child selector remove background image:
-       YAHOO.util.Event.onAvailable('stanfordMedicineBrand', function() {
+       Y.YUI2.util.Event.onAvailable('stanfordMedicineBrand', function() {
             this.style.backgroundImage = 'none';
         });
         //set up hover class on somNav menu:
-        YAHOO.util.Event.onContentReady('somNav', function() {
+        Y.YUI2.util.Event.onContentReady('somNav', function() {
             var i, uls = this.getElementsByTagName('UL');
             for (i = 0; i < uls.length; i++) {
                 uls[i].parentNode.activate = function() {
-                    YAHOO.util.Dom.addClass(this, 'hover');
+                    Y.YUI2.util.Dom.addClass(this, 'hover');
                 };
                 uls[i].parentNode.deactivate = function() {
-                     YAHOO.util.Dom.removeClass(this, 'hover');
+                     Y.YUI2.util.Dom.removeClass(this, 'hover');
                 };
             }
         });
         //instead of :first-child selector remove left border on .nav2 menus:
-        YAHOO.util.Event.onDOMReady(function() {
-            var i, uls = YAHOO.util.Dom.getElementsByClassName('nav2', 'UL');
+        Y.YUI2.util.Event.onDOMReady(function() {
+            var i, uls = Y.YUI2.util.Dom.getElementsByClassName('nav2', 'UL');
             for (i = 0; i < uls.length; i++) {
                 uls[i].getElementsByTagName('LI')[0].style.border = 'none';
             }
         });
     }
-})();
+});
         /*
 YAHOO.util.Event.addListener(this, 'load', function(){
             var ie = YAHOO.env.ua.ie,

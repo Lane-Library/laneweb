@@ -1,12 +1,12 @@
-(function() {
-    YAHOO.util.Event.onDOMReady(function() {
+YUI().use('yui2-container','yui2-event','yui2-connection',function(Y) {
+    Y.YUI2.util.Event.onDOMReady(function() {
         var panel, createPanel, showPanel, popupWindow, showWindow, createEventHandlers,
-            YUE = YAHOO.util.Event;
+            YUE = Y.YUI2.util.Event;
         createPanel = function() {
             var container = document.createElement('div');
             container.setAttribute('id', 'popupContainer');
             document.body.appendChild(container);
-            panel = new YAHOO.widget.Panel('popupContainer', {
+            panel = new Y.YUI2.widget.Panel('popupContainer', {
                 underlay: 'none',
                 close: true,
                 visible: false,
@@ -83,7 +83,7 @@
                     popupAnchors[i].clicked = function(e) {
                         var id = this.rel.split(' ')[2];
                         YUE.preventDefault(e);
-                        YAHOO.util.Connect.asyncRequest('GET', '/././content/popup.html?id=' + id, {
+                        Y.YUI2.util.Connect.asyncRequest('GET', '/././content/popup.html?id=' + id, {
                             success: function(o) {
                                 var id = o.argument.id, X = o.argument.X, Y = o.argument.Y, f = o.responseXML.documentElement, title = f.getElementsByTagName('a')[0].firstChild.data, body = f.getElementsByTagName('dd')[0].firstChild.data + '&nbsp;<a href="/././howto/index.html?id=' + id + '">More</a>';
                                 o.argument.showPanel(title, body, X, Y);
@@ -102,4 +102,4 @@
         createEventHandlers();
         LANE.core.getChangeEvent().subscribe(createEventHandlers);
     });
-})();
+});

@@ -1,11 +1,12 @@
-(function() {
-    YAHOO.util.Event.onDOMReady(function() {
+
+YUI().use('yui2-event','yui2-dom', function(Y) {
+    Y.YUI2.util.Event.onDOMReady(function() {
         var createExpandies = function() {
             var i, j, k, items,
                 expanded, anchors, expandy,
                 anchor = document.location.hash,
-                expandies = YAHOO.util.Dom.getElementsByClassName('expandy'),
-                YUD = YAHOO.util.Dom;
+                expandies = Y.YUI2.util.Dom.getElementsByClassName('expandy'),
+                YUD = Y.YUI2.util.Dom;
             if (anchor) {
                 anchor = anchor.substring(1);
             }
@@ -27,7 +28,7 @@
                             expanded.push(j);
                         }
                     }
-                    expandy = new YAHOO.widget.AccordionView(expandies[i], {
+                    expandy = new LANE.expandy.AccordionView(expandies[i], {
                         expandItems: expanded
                     });
                     expandy.addListener('panelOpen', function(object) {
@@ -42,4 +43,4 @@
         createExpandies();
         LANE.core.getChangeEvent().subscribe(createExpandies);
     });
-})();
+    });

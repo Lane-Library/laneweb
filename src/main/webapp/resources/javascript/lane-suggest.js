@@ -1,4 +1,4 @@
-(function(){
+YUI().use('yui2-event','yui2-dom','yui2-autocomplete','yui2-datasource', function(Y){
     LANE.namespace('suggest');
     LANE.suggest = function(){
     	var acWidget;
@@ -18,7 +18,7 @@
         };
     }();
     
-    YAHOO.util.Event.onContentReady('searchFields', function(){
+    Y.YUI2.util.Event.onContentReady('searchFields', function(){
             var dataSource, acWidget, searchForm, searchTermsElm, searchSource, onItemSelect, searchTermsAcContainer, searchTermsAcInput;
             searchForm = document.getElementById('search');
             searchTermsElm = document.getElementById('searchTerms');
@@ -39,20 +39,20 @@
             
             //create and add auto complete related elements
             searchTermsAcContainer = document.createElement('DIV');
-            YAHOO.util.Dom.addClass(searchTermsAcContainer, 'acContainer');
-            YAHOO.util.Dom.insertBefore(searchTermsAcContainer, searchTermsElm);
+            Y.YUI2.util.Dom.addClass(searchTermsAcContainer, 'acContainer');
+            Y.YUI2.util.Dom.insertBefore(searchTermsAcContainer, searchTermsElm);
             searchTermsAcContainer.appendChild(this.removeChild(searchTermsElm));
             searchTermsAcInput = document.createElement('DIV');
             searchTermsAcInput.id = 'searchTermsAcInput';
             searchTermsAcContainer.appendChild(searchTermsAcInput);
             
-            dataSource = new YAHOO.widget.DS_XHR("/././apps/suggest/json", ["suggest"]);
-            dataSource.responseType = YAHOO.widget.DS_XHR.TYPE_JSON;
+            dataSource = new Y.YUI2.widget.DS_XHR("/././apps/suggest/json", ["suggest"]);
+            dataSource.responseType = Y.YUI2.widget.DS_XHR.TYPE_JSON;
             dataSource.scriptQueryParam = "q";
             dataSource.connTimeout = 3000;
             dataSource.maxCacheEntries = 100;
             
-            acWidget = new YAHOO.widget.AutoComplete(searchTermsElm, searchTermsAcInput, dataSource);
+            acWidget = new Y.YUI2.widget.AutoComplete(searchTermsElm, searchTermsAcInput, dataSource);
             LANE.suggest.setWidget(acWidget);
             acWidget.minQueryLength = 3;
             acWidget.useShadow = true;
@@ -62,14 +62,14 @@
             acWidget.itemSelectEvent.subscribe(onItemSelect);
             
             // for FF, submit form return key strike
-            YAHOO.util.Event.addListener(searchTermsElm, 'keyup', function(e) {
-                if (YAHOO.env.ua.gecko && e.keyCode == '13') {
+            Y.YUI2.util.Event.addListener(searchTermsElm, 'keyup', function(e) {
+                if (Y.YUI2.env.ua.gecko && e.keyCode == '13') {
                     LANE.search.startSearch();
                     searchForm.submit();
                 }
             });
             
-            YAHOO.util.Event.addListener(searchTermsElm, 'focus', function() {
+            Y.YUI2.util.Event.addListener(searchTermsElm, 'focus', function() {
                 acWidget.minQueryLength = 3;
                 if (searchSource.value.match(/all-all/)) {
                     acWidget.dataSource.scriptQueryAppend = 'l=er-mesh';
@@ -86,4 +86,4 @@
                 }
             });
     });
-})();
+});
