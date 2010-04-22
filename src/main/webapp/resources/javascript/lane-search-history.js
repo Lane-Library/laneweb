@@ -1,21 +1,20 @@
-YUI().use('yui2-dom','yui2-event','yui2-history', function(Y) {
+YUI().use('node','yui2-event','yui2-history', function(Y) {
     var searchString = LANE.search.getEncodedSearchString(),
-        YD = Y.YUI2.util.Dom,
         YE = Y.YUI2.util.Event,
         YH = Y.YUI2.util.History,
         facetChangeHandler = function(facetId){
-            var r = document.getElementById(facetId+'Facet').result;// result facet to make active
+            var result = Y.one('#'+facetId+'Facet').getData('result');// result facet to make active
             //TODO: this reads private attributes from Result ... change?
-            if (r !== undefined){
-                if (r._state == 'initialized') {
-                    r.show();
-                } else if (r._state == 'searched') {
+            if (result !== undefined){
+                if (result._state == 'initialized') {
+                    result.show();
+                } else if (result._state == 'searched') {
                     LANE.search.facets.getCurrentResult().hide();
                     LANE.search.facets.setCurrentResult(r);
-                    r.show();
+                    result.show();
                 } else {
                     // TODO: necessary?
-                    //r._state = 'initialized';
+                    //result._state = 'initialized';
                 }
             }
         },
@@ -28,7 +27,7 @@ YUI().use('yui2-dom','yui2-event','yui2-history', function(Y) {
             YH.initialize("yui-history-field", "yui-history-iframe");
         };
 
-    if ( searchString && YD.inDocument('yui-history-field') && YD.inDocument('yui-history-iframe') ) {
-        YE.addListener(this,'load',initializeHistory);
+    if ( searchString && Y.one('#yui-history-field') && Y.one('#yui-history-iframe') ) {
+        YE.onDOMReady(initializeHistory);
     }
 });
