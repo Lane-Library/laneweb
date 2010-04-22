@@ -25,9 +25,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
             }
         }
         for (String resource : this.resources) {
-            if (!enginesMap.containsKey(resource)) {
-                throw new IllegalArgumentException("no such resource: " + resource);
-            } else {
+            if (enginesMap.containsKey(resource)) {
                 enginesToRun.add(enginesMap.get(resource));
             }
         }
