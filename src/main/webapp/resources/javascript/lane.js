@@ -1,7 +1,8 @@
 /**
  * @author ceyates
  */
-YUI().use('yui2-event', function(Y) {
+//TODO: including all dependencies here so they are loaded only once, will explicity specify in template when finalized
+YUI().use('node','datatype','yui2-dom','yui2-event','yui2-autocomplete','yui2-datasource','yui2-connection','yui2-container','yui2-autocomplete','yui2-history','yui2-json','yui2-animation','yui2-get','yui2-element','yui2-yahoo', function(Y) {
 if (typeof LANE == "undefined" || !LANE) {
     /**
      * The LANE global namespace object.  If LANE is already defined, the
