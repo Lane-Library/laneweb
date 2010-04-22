@@ -33,15 +33,6 @@
                     <map:transform type="search-proxy-links"/>
                     <map:serialize type="xml"/>
                 </map:match>
-                <!-- delete after next release (content will need change to search/content/html) -->
-                <map:match pattern="search/ranked/xml/*" type="wildcard">
-                    <map:generate type="search-content">
-                        <map:parameter name="engine-list" value="{1}"/>
-                    </map:generate>
-                    <map:transform type="query-highlighting"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
-                    <map:serialize type="xml"/>
-                </map:match>
                 <!-- search/content/html returns xhtmlized metasearch content results -->
                 <map:match pattern="search/content/html/*" type="wildcard">
                     <map:generate type="search-content">
@@ -64,6 +55,8 @@
                 <!-- search2json.xsl converts the result xml to json -->
                 <map:match pattern="search/json" type="wildcard">
                     <map:generate type="search-resource"/>
+                    <map:transform type="search-cme-links"/>
+                    <map:transform type="search-proxy-links"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search2json.xsl">
                         <map:parameter name="content-to-display" value="5"/>
                     </map:transform>
