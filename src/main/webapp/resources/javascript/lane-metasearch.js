@@ -45,9 +45,6 @@ YUI().use('yui2-event','node','yui2-json','yui2-connection','datatype',function(
             },
             getResultCounts: function() {
                 Y.YUI2.util.Connect.asyncRequest('GET', getSearchUrl(), {
-                    failure: function(o) {
-                        alert('failure');
-                    },
                     success: function(o) {
                         var response = Y.YUI2.lang.JSON.parse(o.responseText),
                             results = response.resources,
