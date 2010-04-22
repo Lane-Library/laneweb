@@ -100,8 +100,9 @@ YUI({filter:'debug'}).use('node','yui2-event','yui2-history','yui2-connection',f
                 LANE.search.facets.getCurrentResult().hide();
                 LANE.search.facets.setCurrentResult(this);
                 this._facet.addClass('current');
-				//FIXME:this doesn't work:
-                this._container.append(this._content);
+				for(i = 0; i < this._content.size(); i++) {
+					this._container.append(this._content.item(i));
+				}
                 LANE.search.stopSearch();
                 LANE.core.getChangeEvent().fire();
                 if (this._type == 'specialty'){
