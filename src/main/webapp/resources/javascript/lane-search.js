@@ -1,5 +1,5 @@
 YUI().use('yui2-event','yui2-dom',function(Y) {
-	LANE.search = LANE.search ||
+LANE.search = LANE.search ||
 function() {
     var Event = Y.YUI2.util.Event, //shorthand for Event
         Dom = Y.YUI2.util.Dom, //shorthand for Dom
@@ -14,6 +14,34 @@ function() {
         initialText,
         picoInputs = ['p', 'i', 'c', 'o'];
     
+    // TODO: since this acts on all text inputs w/ initial input values
+    // move out of search JS
+    Event.onContentReady('search', function() {
+    	var textInputs, i,
+        YD = Y.YUI2.util.Dom,
+        YE = Y.YUI2.util.Event,
+        filterFormTextInputs = function(el){
+        	if(el.tagName == "INPUT" && el.type == "text"){
+        		return true;
+        	}
+        };
+        textInputs = YD.getElementsBy(filterFormTextInputs,"input",document);
+	    for (i = 0; i < textInputs.length; i++){
+	    	// clear input if it matches title (help text) value
+	    	YE.addListener(textInputs[i], 'focus', function(){
+	    	    if (this.value == this.title){
+	    	        this.value = '';
+	    	    }
+	    	});
+	    	// if input value is blank, set to title (help text)
+	    	YE.addListener(textInputs[i], 'blur', function(){
+	    	    if (this.value === ''){
+	    	        this.value = this.title;
+	    	    }
+	    	});
+	    }
+    });
+    
     Event.onContentReady('search', function() {
         form = this;
         searchTermsInput = document.getElementById('searchTerms');
@@ -25,11 +53,6 @@ function() {
                 LANE.search.submitSearch();
             } catch (e) {
                 alert(e);
-            }
-        });
-        Event.addFocusListener(searchTermsInput, function(e) {
-            if (this.value == initialText) {
-                this.value = '';
             }
         });
         var tabs = document.getElementById('searchTabs').getElementsByTagName('li'), i;
@@ -51,9 +74,9 @@ function() {
             //                if (searching) {
             //                    throw('already searching');
             //                }
-            if (!searchTermsInput.value || searchTermsInput.value == initialText) {
-                throw ('nothing to search for');
-            }
+            //if (!searchTermsInput.value || searchTermsInput.value == initialText) {
+            //    throw ('nothing to search for');
+            //}
             searching = true;
             searchIndicator.style.visibility = 'visible';
         },
@@ -140,6 +163,7 @@ function() {
             initialText = Y.YUI2.util.Dom.getElementsByClassName('active', 'LI', 'searchTabs')[0].title;
             if (!searchTermsInput.value || searchTermsInput.value == oldInitialText) {
                 searchTermsInput.value = initialText;
+                searchTermsInput.title = initialText;
             }
         },
         submitSearch: function() {
@@ -152,6 +176,9 @@ function() {
             //                }
             // hide q input so form doesn't bounce
             //                searchTermsInput.style.visibility = 'hidden';
+            if (!searchTermsInput.value || searchTermsInput.value == initialText) {
+                throw ('nothing to search for');
+            }
             LANE.search.startSearch();
             //                    LANE.suggest.collapse();
             form.submit();

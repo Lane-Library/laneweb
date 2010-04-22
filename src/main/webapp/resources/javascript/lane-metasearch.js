@@ -50,32 +50,37 @@ YUI().use('yui2-event','node','yui2-json','yui2-connection','datatype',function(
                             results = response.resources,
                             needMore = false, 
                             i,result, updateable, resultSpan, sleepingTime, remainingTime;
-                        
+
                         for (i = 0; i < searchables.length; i++) {
                             updateable = Y.one('#' + searchables[i]);
                             result = results[searchables[i]];
                             if (result === undefined || !result.status) {
                                 needMore = true;
                                 continue;
-                            } else if (updateable && result.status == 'successful') {
-                                // process display of each updateable node
-                                // once all processed, remove id from searchables
-                                resultSpan = updateable.get('parentNode').one('.searchCount');
-                                resultSpan.setContent('&#160;' +
-                                    Y.DataType.Number.format(result.hits, {
-                                        thousandsSeparator: ","
-                                    }));
-                                if (!updateable.getAttribute('href')) {
-                                    updateable.setAttribute('href', result.url);
-                                    updateable.setAttribute('target', '_blank');
-                                }
-                                updateable.removeClass('metasearch');
-                                searchables.splice(i, 1);
-                            } else if (updateable && (result.status == 'failed' || result.status == 'canceled')) {
-                                resultSpan = updateable.get('parentNode').one('.searchCount');
-                                resultSpan.setContent(' ? ');
-                                updateable.removeClass('metasearch');
-                                searchables.splice(i, 1);
+                            } else if (updateable){
+                            	resultSpan = updateable.get('parentNode').one('.searchCount');
+                            	if(null == resultSpan){
+                            		resultSpan = Y.Node.create('<span class="searchCount"></span>');
+                            		updateable.insert(resultSpan,'after');
+                            	}
+                            	if (result.status == 'successful') {
+	                                // process display of each updateable node
+	                                // once all processed, remove id from searchables
+	                                resultSpan.setContent('&#160;' +
+	                                    Y.DataType.Number.format(result.hits, {
+	                                        thousandsSeparator: ","
+	                                    }));
+	                                if (!updateable.getAttribute('href')) {
+	                                    updateable.setAttribute('href', result.url);
+	                                    updateable.setAttribute('target', '_blank');
+	                                }
+	                                updateable.removeClass('metasearch');
+	                                searchables.splice(i--, 1);
+	                            } else if (result.status == 'failed' || result.status == 'canceled') {
+	                                resultSpan.setContent('&#160;? ');
+	                                updateable.removeClass('metasearch');
+	                                searchables.splice(i--, 1);
+	                            }
                             }
                         }
                         sleepingTime = 2000;

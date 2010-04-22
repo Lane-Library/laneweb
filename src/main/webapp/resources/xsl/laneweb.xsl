@@ -490,7 +490,7 @@
     <xsl:template match="@proxy"/>
 
     <!-- TODO did the id of the input change? -->
-    <xsl:template match="h:input[@id='searchTerms']">
+    <xsl:template match="h:input[@name='q']">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:if test="$query != ''">

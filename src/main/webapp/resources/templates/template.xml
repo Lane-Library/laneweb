@@ -42,7 +42,7 @@
                                 </li>
                             </ul>
                             <fieldset id="searchFields">
-                                <input name="q" id="searchTerms" type="text"/>
+                                <input name="q" id="searchTerms" class="laneSuggest" type="text"/>
                                 <input id="searchSubmit" type="submit" value="search"/>
                                 <input name="source" id="searchSource" type="hidden" value=""/>
                             </fieldset>
