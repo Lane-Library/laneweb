@@ -1,5 +1,5 @@
 // based on lane-eresources.js; renaming for use across articles, catalog, clinical interfaces
-YUI().use('yui2-dom','yui2-event','yui2-history','yui2-connection',function(Y){
+YUI({filter:'debug'}).use('node','yui2-event','yui2-history','yui2-connection',function(Y){
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
@@ -12,50 +12,49 @@ YUI().use('yui2-dom','yui2-event','yui2-history','yui2-connection',function(Y){
             }
         };
     }();
-    Y.YUI2.util.Event.addListener(this, 'load', function(){
-        var elt = document.getElementById('searchFacets'), facets, i, j, type, source, container;
+    Y.YUI2.util.Event.onDOMReady(function(){
+        var elt = Y.one('#searchFacets'), facets, i, j, type, source, container;
         if (elt) {
-            container = document.getElementById('searchResults');
-            facets = Y.YUI2.util.Dom.getElementsByClassName('searchFacet',null,elt);
-            for (i = 0; i < facets.length; i++) {
-                if (facets[i].id.match("Facet$")) {
-                    type = facets[i].id.substring(0, facets[i].id.indexOf('-'));
-                    source = facets[i].id.substring(0, facets[i].id.indexOf('Facet'));
+            container = Y.one('#searchResults');
+            facets = elt.all('.searchFacet');
+            for (i = 0; i < facets.size(); i++) {
+                if (facets.item(i).getAttribute('id').match("Facet$")) {
+                    type = facets.item(i).getAttribute('id').substring(0, facets.item(i).getAttribute('id').indexOf('-'));
+                    source = facets.item(i).getAttribute('id').substring(0, facets.item(i).getAttribute('id').indexOf('Facet'));
                     if (type) {
-                        facets[i].result = new Result(type, source, facets[i], container);
-                        if (Y.YUI2.util.Dom.hasClass(facets[i],'current')) {
-                            content = [];
-                            for (j = 0; j < container.childNodes.length; j++) {
-                                content[j] = container.childNodes[j];
-                            }
-                            facets[i].result.setContent(content);
-                            LANE.search.facets.setCurrentResult(facets[i].result);
+                        facets.item(i).setData('result', new Result(type, source, facets.item(i), container));
+                        if (facets.item(i).hasClass('current')) {
+                            facets.item(i).getData('result').setContent(container.get('children'));
+                            LANE.search.facets.setCurrentResult(facets.item(i).getData('result'));
                         }
-                        facets[i].activate = function(event){
-                            if (!Y.YUI2.util.Dom.hasClass(this,'current')) {
+//                        Y.Node.getDOMNode(facets.item(i)).activate = function(event){
+//                            if (!Y.YUI2.util.Dom.hasClass(this,'current')) {
 //                                this.style.textDecoration = 'underline';
 //                                this.style.cursor = 'pointer';
-                            }
-                        };
-                        facets[i].deactivate = function(event){
-                            this.style.textDecoration = 'none';
-                            this.style.cursor = 'default';
-                        };
-                        facets[i].clicked = function(event){
+//                            }
+//                        };
+//                        Y.Node.getDOMNode(facets.item(i)).deactivate = function(event){
+//                            this.style.textDecoration = 'none';
+//                            this.style.cursor = 'default';
+//                        };
+                          facets.item(i).on('click',function(event) {
+						  	var result = this.getData('result');
                             if (Y.YUI2.util.History) {
                                 // Browser History Manager may not be initialized (Opera unsupported, hyui-history-iframe not present in content)
+								//TODO: dynamically add history tracking markup
                                 try {
-                                    Y.YUI2.util.History.navigate("facet", this.result._source);
+                                    Y.YUI2.util.History.navigate("facet", this.getData('result').source);
                                 } catch (e) {
                                     //log somewhere ... no need to break/alert
+                                	result.show();
                                 }
                             }
                             else{
-                                this.result.show();
+                                result.show();
                             }
-                            LANE.search.setSearchSource(this.result._source);
+                            LANE.search.setSearchSource(result._source);
                             Y.YUI2.util.Event.preventDefault(event);
-                        };
+                        });
                     }
                 }
             }
@@ -72,12 +71,8 @@ YUI().use('yui2-dom','yui2-event','yui2-history','yui2-connection',function(Y){
             success: function(o){
                 var result, bodyNodes, content, i;
                 result = o.argument.result;
-                bodyNodes = o.responseXML.getElementsByTagName('body')[0].childNodes;
-                content = [];
-                for (i = 0; i < bodyNodes.length; i++) {
-                    content[i] = LANE.core.importNode(bodyNodes[i], true);
-                }
-                result.setContent(content);
+                bodyNodes = new Y.Node(o.responseXML.getElementsByTagName('body')[0]).get('children');
+                result.setContent(bodyNodes);
                 LANE.search.facets.getCurrentResult().hide();
                 LANE.search.facets.setCurrentResult(result);
                 result.show();
@@ -90,11 +85,7 @@ YUI().use('yui2-dom','yui2-event','yui2-history','yui2-connection',function(Y){
             }
         };
         Result.prototype.setContent = function(content){
-            if (this._content === undefined) {
-                this._content = content;
-            } else {
-                this._content = this._content.concat(content);
-            }
+            this._content = content;
             //TODO: is this the best place for this?
             this._state = 'searched';
         };
@@ -108,10 +99,9 @@ YUI().use('yui2-dom','yui2-event','yui2-history','yui2-connection',function(Y){
             } else {
                 LANE.search.facets.getCurrentResult().hide();
                 LANE.search.facets.setCurrentResult(this);
-                Y.YUI2.util.Dom.addClass(this._facet,'current');
-                for (i = 0; i < this._content.length; i++) {
-                    this._container.appendChild(this._content[i]);
-                }
+                this._facet.addClass('current');
+				//FIXME:this doesn't work:
+                this._container.append(this._content);
                 LANE.search.stopSearch();
                 LANE.core.getChangeEvent().fire();
                 if (this._type == 'specialty'){
@@ -134,10 +124,10 @@ YUI().use('yui2-dom','yui2-event','yui2-history','yui2-connection',function(Y){
                     }
         };
         Result.prototype.hide = function(){
-            while (this._container.childNodes.length > 0) {
-                this._container.removeChild(this._container.lastChild);
+            while (this._container.get('childNodes').size() > 0) {
+            	this._container.get('lastChild').remove();
             }
-            Y.YUI2.util.Dom.removeClass(this._facet,'current');
+            this._facet.removeClass('current');
         };
     }
 });

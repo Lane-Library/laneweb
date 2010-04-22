@@ -1,24 +1,25 @@
 //TODO: should this stop polling when all facets are complete? currently polls until search app done or timeout
-YUI().use('yui2-dom','yui2-event','yui2-connection','yui2-json',function(Y) {
+YUI().use('node','yui2-event','yui2-connection','yui2-json',function(Y) {
     var searchString = LANE.search.getEncodedSearchString(),
         startTime = new Date().getTime(),
         facets, requestString, j,
         updateHits = function(o) {
             var response = Y.YUI2.lang.JSON.parse(o.responseText),
                 hitLink, hits, sleepingTime,
-                remainingTime, searchStatus, engineStatus;
+                remainingTime, searchStatus, engineStatus, facetId;
             
-            for (j = 0; j < facets.length; j++) {
+            for (j = 0; j < facets.size(); j++) {
             	hits = null;
-                hitLink = facets[j].getElementsByTagName('a')[0];
-                if (undefined != response.results.facets[facets[j].facetId]) {
-                    hits = parseInt(response.results.facets[facets[j].facetId].hits);
-                    engineStatus = response.results.facets[facets[j].facetId].status;
+                hitLink = facets.item(j).getElementsByTagName('a')[0];
+                facetId = facets.item(j).getAttribute('facetId');
+                if (undefined != response.results.facets[facetId]) {
+                    hits = parseInt(response.results.facets[facetId].hits);
+                    engineStatus = response.results.facets[facetId].status;
                 }
-                if (!facets[j].facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits === 0) {
-                	Y.YUI2.util.Dom.addClass(hitLink.parentNode,'inactiveFacet');
-                	Y.YUI2.util.Dom.removeClass(hitLink.parentNode,'searchableFacet');
-                	hitLink.setAttribute('title','no search results for '+hitLink.innerHTML);
+                if (!facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits === 0) {
+                	hitLink.get('parentNode').addClass('inactiveFacet');
+                	hitLink.get('parentNode').removeClass('searchableFacet');
+                	hitLink.setAttribute('title','no search results for '+hitLink.getContent());
                 }
             }
             sleepingTime = 2000;
@@ -35,12 +36,13 @@ YUI().use('yui2-dom','yui2-event','yui2-connection','yui2-json',function(Y) {
             success:updateHits
         },
         makeRequest = function() {
-            facets = Y.YUI2.util.Dom.getElementsByClassName('searchFacet');
+            facets = Y.all('.searchFacet');
             requestString = '';
-            for (j = 0; j < facets.length; j++) {
-                facets[j].facetId = facets[j].id.substring(0, facets[j].id.indexOf('Facet'));
-                if(Y.YUI2.util.Dom.hasClass(facets[j],'searchableFacet')){
-                	requestString+=facets[j].facetId+',';
+            for (j = 0; j < facets.size(); j++) {
+                var id = facets.item(j).getAttribute('id');
+                facets.item(j).setAttribute('facetId', id.substring(0, id.indexOf('Facet')));
+                if(facets.item(j).hasClass('searchableFacet')){
+                	requestString+=facets.item(j).getAttribute('facetId') + ',';
                 }
             }
             if(requestString !== ''){
