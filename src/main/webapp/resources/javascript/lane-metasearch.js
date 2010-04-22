@@ -70,10 +70,8 @@ YUI().use('yui2-event','node','yui2-json','yui2-connection','datatype',function(
 	                                    Y.DataType.Number.format(result.hits, {
 	                                        thousandsSeparator: ","
 	                                    }));
-	                                if (!updateable.getAttribute('href')) {
-	                                    updateable.setAttribute('href', result.url);
-	                                    updateable.setAttribute('target', '_blank');
-	                                }
+                                    updateable.setAttribute('href', result.url);
+                                    updateable.setAttribute('target', '_blank');
 	                                updateable.removeClass('metasearch');
 	                                searchables.splice(i--, 1);
 	                            } else if (result.status == 'failed' || result.status == 'canceled') {
