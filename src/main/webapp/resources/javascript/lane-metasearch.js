@@ -49,36 +49,38 @@ YUI().use('yui2-event','node','yui2-json','yui2-connection','datatype',function(
                         var response = Y.YUI2.lang.JSON.parse(o.responseText),
                             results = response.resources,
                             needMore = false, 
-                            i,result, updateable, resultSpan, sleepingTime, remainingTime;
+                            i, y, result, updateables, resultSpan, sleepingTime, remainingTime;
 
                         for (i = 0; i < searchables.length; i++) {
-                            updateable = Y.one('#' + searchables[i]);
+                            updateables = Y.all('#' + searchables[i]);
                             result = results[searchables[i]];
                             if (result === undefined || !result.status) {
                                 needMore = true;
                                 continue;
-                            } else if (updateable){
-                            	resultSpan = updateable.get('parentNode').one('.searchCount');
-                            	if(null == resultSpan){
-                            		resultSpan = Y.Node.create('<span class="searchCount"></span>');
-                            		updateable.insert(resultSpan,'after');
+                            } else if (updateables.size() > 0){
+                            	for(y = 0; y < updateables.size(); y++){
+                            		resultSpan = updateables.item(y).get('parentNode').one('.searchCount');
+                            		if(null == resultSpan){
+                            			resultSpan = Y.Node.create('<span class="searchCount"></span>');
+                            			updateables.item(y).insert(resultSpan,'after');
+                            		}
+                            		if (result.status == 'successful') {
+                            			// process display of each updateable node
+                            			// once all processed, remove id from searchables
+                            			resultSpan.setContent('&#160;' +
+                            					Y.DataType.Number.format(result.hits, {
+                            						thousandsSeparator: ","
+                            					}));
+                            			updateables.item(y).setAttribute('href', result.url);
+                            			updateables.item(y).setAttribute('target', '_blank');
+                            			updateables.item(y).removeClass('metasearch');
+                            			searchables.splice(i--, 1);
+                            		} else if (result.status == 'failed' || result.status == 'canceled') {
+                            			resultSpan.setContent('&#160;? ');
+                            			updateables.item(y).removeClass('metasearch');
+                            			searchables.splice(i--, 1);
+                            		}
                             	}
-                            	if (result.status == 'successful') {
-	                                // process display of each updateable node
-	                                // once all processed, remove id from searchables
-	                                resultSpan.setContent('&#160;' +
-	                                    Y.DataType.Number.format(result.hits, {
-	                                        thousandsSeparator: ","
-	                                    }));
-                                    updateable.setAttribute('href', result.url);
-                                    updateable.setAttribute('target', '_blank');
-	                                updateable.removeClass('metasearch');
-	                                searchables.splice(i--, 1);
-	                            } else if (result.status == 'failed' || result.status == 'canceled') {
-	                                resultSpan.setContent('&#160;? ');
-	                                updateable.removeClass('metasearch');
-	                                searchables.splice(i--, 1);
-	                            }
                             }
                         }
                         sleepingTime = 2000;
