@@ -1,8 +1,7 @@
-YUI().use('yui2-event','yui2-dom',function(Y) {
+YUI().use('yui2-event','node',function(Y) {
 LANE.search = LANE.search ||
 function() {
     var Event = Y.YUI2.util.Event, //shorthand for Event
-        Dom = Y.YUI2.util.Dom, //shorthand for Dom
         searching = false, //searching state
         searchString,
         encodedString,
@@ -15,26 +14,25 @@ function() {
         picoInputs = ['p', 'i', 'c', 'o'];
     
     // TODO: since this acts on all text inputs w/ initial input values
-    // move out of search JS
+    // move out of search JS - for now I just made it only work on the search form.
     Event.onContentReady('search', function() {
     	var textInputs, i,
-        YD = Y.YUI2.util.Dom,
         YE = Y.YUI2.util.Event,
         filterFormTextInputs = function(el){
         	if(el.tagName == "INPUT" && el.type == "text"){
         		return true;
         	}
         };
-        textInputs = YD.getElementsBy(filterFormTextInputs,"input",document);
-	    for (i = 0; i < textInputs.length; i++){
+        textInputs = new Y.Node(this).all('input[type="text"]');
+	    for (i = 0; i < textInputs.size(); i++){
 	    	// clear input if it matches title (help text) value
-	    	YE.addListener(textInputs[i], 'focus', function(){
+	    	YE.addListener(Y.Node.getDOMNode(textInputs.item(i)), 'focus', function(){
 	    	    if (this.value == this.title){
 	    	        this.value = '';
 	    	    }
 	    	});
 	    	// if input value is blank, set to title (help text)
-	    	YE.addListener(textInputs[i], 'blur', function(){
+	    	YE.addListener(Y.Node.getDOMNode(textInputs.item(i)), 'blur', function(){
 	    	    if (this.value === ''){
 	    	        this.value = this.title;
 	    	    }
@@ -43,11 +41,11 @@ function() {
     });
     
     Event.onContentReady('search', function() {
-        form = this;
-        searchTermsInput = document.getElementById('searchTerms');
-        searchSourceInput = document.getElementById('searchSource');
+        form = new Y.Node(this);
+        searchTermsInput = Y.one('#searchTerms');
+        searchSourceInput = Y.one('#searchSource');
         LANE.search.setInitialText();
-        Event.addListener(form, 'submit', function(submitEvent) {
+        Event.addListener(this, 'submit', function(submitEvent) {
             Event.preventDefault(submitEvent);
             try {
                 LANE.search.submitSearch();
@@ -55,9 +53,9 @@ function() {
                 alert(e);
             }
         });
-        var tabs = document.getElementById('searchTabs').getElementsByTagName('li'), i;
-        for (i = 0; i < tabs.length; i++) {
-            tabs[i].clicked = function(e) {
+        var tabs = Y.one('#searchTabs').all('li'), i;
+        for (i = 0; i < tabs.size(); i++) {
+            Y.Node.getDOMNode(tabs.item(i)).clicked = function(e) {
                 Event.preventDefault(e);
                 LANE.search.setActiveTab(this);
             };
@@ -65,7 +63,7 @@ function() {
     });
     
     Event.onContentReady('searchIndicator', function(){
-        searchIndicator = this;
+        searchIndicator = new Y.Node(this);
     });
     
     return {
@@ -78,11 +76,11 @@ function() {
             //    throw ('nothing to search for');
             //}
             searching = true;
-            searchIndicator.style.visibility = 'visible';
+            searchIndicator.setStyle('visibility', 'visible');
         },
         stopSearch: function() {
             searching = false;
-            searchIndicator.style.visibility = 'hidden';
+            searchIndicator.setStyle('visibility','hidden');
         },
         isSearching: function() {
             return searching;
@@ -136,34 +134,35 @@ function() {
             return source;
         },
         setSearchSource: function(source) {
-            searchSourceInput.value = source;
+            
+            searchSourceInput.setAttribute('value',source);
         },
         setActiveTab: function(elm) {
-            var alreadyActive = Dom.hasClass(elm, 'active');
-            Dom.getElementsByClassName('active', null, elm.parentNode, function(el) {
-                Dom.removeClass(el, 'active');
-            });
-            Dom.addClass(elm, 'active');
-            LANE.search.setSearchSource(elm.id + '-all');
+            var alreadyActive = elm.hasClass('active');
+            elm.get('parentNode').get('children').removeClass('active');
+            elm.addClass('active');
+            LANE.search.setSearchSource(elm.getAttribute('id') + '-all');
             // if this is not already active tab and there's a form value, submit search
-            if (!alreadyActive && searchTermsInput.value && searchTermsInput.value !== initialText) {
+            if (!alreadyActive && searchTermsInput.hasAttribute('value') && searchTermsInput.getAttribute('value') != initialText) {
                 LANE.search.submitSearch();
                 form.submit();
                 return false;
             }
             LANE.search.setInitialText();
-            if (elm.id == 'clinical') {
-                Dom.addClass(['search', 'breadcrumb'], 'clinicalSearch');
+            if (elm.getAttribute('id') == 'clinical') {
+                Y.one('#search').addClass('clinicalSearch');
+                Y.one('#breadcrumb').addClass('clinicalSearch');
             } else {
-                Dom.removeClass(['search', 'breadcrumb'], 'clinicalSearch');
+                Y.one('#search').removeClass('clinicalSearch');
+                Y.one('#breadcrumb').removeClass('clinicalSearch');
             }
         },
         setInitialText: function() {
             var oldInitialText = initialText;
-            initialText = Y.YUI2.util.Dom.getElementsByClassName('active', 'LI', 'searchTabs')[0].title;
-            if (!searchTermsInput.value || searchTermsInput.value == oldInitialText) {
-                searchTermsInput.value = initialText;
-                searchTermsInput.title = initialText;
+            initialText = Y.one('#searchTabs').one('.active').getAttribute('title');
+            if (!searchTermsInput.hasAttribute('value') || searchTermsInput.getAttribute('value') == oldInitialText) {
+                searchTermsInput.setAttribute('value', initialText);
+                searchTermsInput.setAttribute('title', initialText);
             }
         },
         submitSearch: function() {
@@ -176,7 +175,7 @@ function() {
             //                }
             // hide q input so form doesn't bounce
             //                searchTermsInput.style.visibility = 'hidden';
-            if (!searchTermsInput.value || searchTermsInput.value == initialText) {
+            if (!searchTermsInput.hasAttribute('value') || searchTermsInput.getAttribute('value') == initialText) {
                 throw ('nothing to search for');
             }
             LANE.search.startSearch();
