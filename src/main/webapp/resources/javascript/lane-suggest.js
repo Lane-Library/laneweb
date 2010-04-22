@@ -102,7 +102,7 @@ YUI().use('yui2-event','yui2-dom','yui2-autocomplete','yui2-datasource','yui2-co
 	                acWidget.minQueryLength = 3;
 	                if (searchSource && searchSource.value.match(/^(all|articles|catalog)/)) {
 	                    acWidget.dataSource.scriptQueryAppend = 'l=er-mesh';
-	                } else if (null == searchSource && path.match(/^\/portals\/.*\.html/)) {
+	                } else if (null == searchSource && path.match(/\/portals\/.*\.html/)) {
 	                	acWidget.dataSource.scriptQueryAppend = 'l=mesh-di';
 	                } else {
 	                    acWidget.minQueryLength = -1;
