@@ -13,33 +13,6 @@ function() {
         initialText,
         picoInputs = ['p', 'i', 'c', 'o'];
     
-    // TODO: since this acts on all text inputs w/ initial input values
-    // move out of search JS - for now I just made it only work on the search form.
-    Event.onContentReady('search', function() {
-    	var textInputs, i,
-        YE = Y.YUI2.util.Event,
-        filterFormTextInputs = function(el){
-        	if(el.tagName == "INPUT" && el.type == "text"){
-        		return true;
-        	}
-        };
-        textInputs = new Y.Node(this).all('input[type="text"]');
-	    for (i = 0; i < textInputs.size(); i++){
-	    	// clear input if it matches title (help text) value
-	    	YE.addListener(Y.Node.getDOMNode(textInputs.item(i)), 'focus', function(){
-	    	    if (this.value == this.title){
-	    	        this.value = '';
-	    	    }
-	    	});
-	    	// if input value is blank, set to title (help text)
-	    	YE.addListener(Y.Node.getDOMNode(textInputs.item(i)), 'blur', function(){
-	    	    if (this.value === ''){
-	    	        this.value = this.title;
-	    	    }
-	    	});
-	    }
-    });
-    
     Event.onContentReady('search', function() {
         form = new Y.Node(this);
         searchTermsInput = Y.one('#searchTerms');

@@ -149,5 +149,7 @@
   .breadcrumbForm input {
     width:192px;
   }
- 
+ .inputHint {
+    color:#808080;
+ } 
  

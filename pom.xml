@@ -162,6 +162,7 @@
                         <include>lane-search-pico-min.js</include>
                         <include>lane-suggest-min.js</include>
                         <include>lane-selections-min.js</include>
+                        <include>lane-textinputs-min.js</include>
                      </includes>
                   </aggregation>
                </aggregations>
