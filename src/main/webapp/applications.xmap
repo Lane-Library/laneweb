@@ -165,6 +165,7 @@
             <map:match pattern="cache/search/templates/xml" type="wildcard">
                 <map:aggregate element="search-templates"
                     ns="http://lane.stanford.edu/search-templates/ns">
+                    <map:part src="cocoon:/search/describe/xml"/>
                     <map:part src="cocoon:/cache/search/all/all-all.html"/>
                     <map:part src="cocoon:/cache/search/articles/articles-all.html"/>
                     <map:part src="cocoon:/cache/search/articles/articles-pubmed.html"/>
