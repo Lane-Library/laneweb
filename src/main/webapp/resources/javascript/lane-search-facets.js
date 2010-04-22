@@ -27,16 +27,6 @@ YUI({filter:'debug'}).use('node','yui2-event','yui2-history','yui2-connection',f
                             facets.item(i).getData('result').setContent(container.get('children'));
                             LANE.search.facets.setCurrentResult(facets.item(i).getData('result'));
                         }
-//                        Y.Node.getDOMNode(facets.item(i)).activate = function(event){
-//                            if (!Y.YUI2.util.Dom.hasClass(this,'current')) {
-//                                this.style.textDecoration = 'underline';
-//                                this.style.cursor = 'pointer';
-//                            }
-//                        };
-//                        Y.Node.getDOMNode(facets.item(i)).deactivate = function(event){
-//                            this.style.textDecoration = 'none';
-//                            this.style.cursor = 'default';
-//                        };
                           facets.item(i).on('click',function(event) {
 						  	var result = this.getData('result');
                             if (Y.YUI2.util.History) {

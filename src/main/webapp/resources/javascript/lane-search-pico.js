@@ -1,4 +1,4 @@
-YUI().use('yui2-event','yui2-dom','yui2-container','yui2-history', function(Y) {
+YUI().use('node','yui2-event','yui2-container','yui2-history', function(Y) {
     // pico form functionality
     //  - remove default text values onfocus
     //  - adds auto complete mesh listener on p i c inputs
@@ -9,7 +9,6 @@ YUI().use('yui2-event','yui2-dom','yui2-container','yui2-history', function(Y) {
     searchTermsInput,     //input for built query terms
     inputs,               //input elements
     acInputs,             //input elements requiring auto complete
-     D = Y.YUI2.util.Dom,  // shorthand for YUI modules
      E = Y.YUI2.util.Event, 
      W = Y.YUI2.widget,
      H = Y.YUI2.util.History,
@@ -45,57 +44,57 @@ YUI().use('yui2-event','yui2-dom','yui2-container','yui2-history', function(Y) {
     E.onContentReady('clinicalP', function() {
         // change text of default input values
         // add event listeners to p,i,c,o inputs for building search terms
-        picoForm = D.getAncestorByTagName(this,'form');
-        inputs = D.getElementsByClassName('picoInput',null,picoForm);
-        searchTermsInput = document.getElementById('searchTerms');
-        for (i = 0; i < inputs.length; i++){
+        picoForm = new Y.Node(this).ancestor('form');//D.getAncestorByTagName(this,'form');
+        inputs = picoForm.all('.picoInput');//D.getElementsByClassName('picoInput',null,picoForm);
+        searchTermsInput = Y.one('#searchTerms');//document.getElementById('searchTerms');
+        for (i = 0; i < inputs.size(); i++){
             //TODO: extracting pico values from request ... move to laneweb.xsl?
-            if (H.getQueryStringParameter(inputs[i].name)){
-                inputs[i].value = H.getQueryStringParameter(inputs[i].name).replace(/\+/g,' ');
+            if (H.getQueryStringParameter(inputs.item(i).getAttribute('name'))){
+                inputs.item(i).setAttribute('value', H.getQueryStringParameter(inputs.item(i).getAttribute('name')).replace(/\+/g,' '));
             }
-            if(inputs[i].value === ''||inputs[i].value === null||inputs[i].value === 'null'){
-                inputs[i].value = inputs[i].title;
+            if(!inputs.item(i).getAttribute('value')||inputs.item(i).getAttribute('value') == 'null'){
+                inputs.item(i).setAttribute(inputs.item(i).getAttribute('title'));
             }
-            E.addListener(inputs[i], 'focus', function(){
+            E.addListener(Y.Node.getDOMNode(inputs.item(i)), 'focus', function(){
                 if (this.value == this.title){
                     this.value = '';
                 }
             });
-            E.addListener(inputs[i], 'blur', function(){
+            E.addListener(Y.Node.getDOMNode(inputs.item(i)), 'blur', function(){
                 if (this.value === ''){
                     this.value = this.title;
                 }
                 queryBuilder(this.id);
             });
-            E.addListener(inputs[i], 'keyup', function(){
+            E.addListener(Y.Node.getDOMNode(inputs.item(i)), 'keyup', function(){
                 queryBuilder(this.id);
             });
         }
         
         // auto complete mesh on p, i, c inputs
-        acInputs = D.getElementsByClassName('acMesh',null,picoForm);
-        if(acInputs.length){
-            for (y = 0; y < acInputs.length; y++){
+        acInputs = picoForm.all('.acMesh');
+        if(acInputs.size()){
+            for (y = 0; y < acInputs.size(); y++){
                 var acCont,   // container element to hang the auto complete widget on
                     acMesh,   // auto complete widget
                     acDs;     // data source
-                acCont = d.getElementsByName(acInputs[y].id.substring(0,1))[0];
+                acCont = new Y.Node(d.getElementsByName(acInputs.item(y).getAttribute('id').substring(0,1))[0]);
                 acDs = new W.DS_XHR("/././apps/suggest/json", ["suggest"]);
                 acDs.responseType = W.DS_XHR.TYPE_JSON;
                 acDs.scriptQueryParam = "q";
                 // limit added to patient, intervention, comparison
-                if(acCont.name === 'p'){
+                if(acCont.getAttribute('name') == 'p'){
                     acDs.scriptQueryAppend = 'l=mesh-d';
                 }
-                else if(acCont.name === 'i'){
+                else if(acCont.getAttribute('name') == 'i'){
                     acDs.scriptQueryAppend = 'l=mesh-i';
                 }
-                else if(acCont.name === 'c'){
+                else if(acCont.getAttribute('name') == 'c'){
                     acDs.scriptQueryAppend = 'l=mesh-di';
                 }
                 acDs.connTimeout = 3000; 
                 acDs.maxCacheEntries = 100;
-                acMesh = new W.AutoComplete(acCont, acInputs[y], acDs);
+                acMesh = new W.AutoComplete(acCont, Y.Node.getDOMNode(acInputs.item(y)), acDs);
                 acMesh.minQueryLength = 3;
                 acMesh.maxResultsDisplayed = 20;
                 acMesh.useShadow = true;
@@ -104,7 +103,7 @@ YUI().use('yui2-event','yui2-dom','yui2-container','yui2-history', function(Y) {
                 acMesh.animHoriz = false;
                 acMesh.animVert = false;
                 acMesh.queryDelay = 0.1;
-                acMesh.setHeader(acInputs[y].title);
+                acMesh.setHeader(acInputs.item(y).getAttribute('title'));
                 acMesh.itemSelectEvent.subscribe(function(sType,aArgs){queryBuilder();});
                 acMesh.itemSelectEvent.subscribe(onItemSelect);
             }
