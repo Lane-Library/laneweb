@@ -811,5 +811,8 @@ YUI().use('yui2-event','yui2-dom','yui2-animation','yui2-element', function(Y) {
     });
     LANE.namespace('expandy');
     LANE.expandy.AccordionView = AccordionView;
-//Y.YUI2.register("accordionview", Y.YUI2.widget.AccordionView, {version: "0.99", build: "33"});
+    YUI().use('event-custom', function(Y) {
+        Y.publish('lane:accordionready', {broadcast: 2});
+        Y.fire('lane:accordionready');
+    });
 });

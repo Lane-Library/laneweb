@@ -2,7 +2,7 @@
  * @author ceyates
  */
 //TODO: including all dependencies here so they are loaded only once, will explicity specify in template when finalized
-YUI().use('yui2-event',function(Y) {
+YUI().use('yui2-event','event-custom',function(Y) {
 if (typeof LANE == "undefined" || !LANE) {
     /**
      * The LANE global namespace object.  If LANE is already defined, the
@@ -152,6 +152,10 @@ LANE.core = LANE.core || function() {
         }
     };
 }();
+        Y.publish('lane:ready', {broadcast: 2});
+        Y.fire('lane:ready');
+});
+
 
 //add Array.indexOf to implementations that don't have it
 if (!Array.indexOf) {
@@ -164,4 +168,3 @@ if (!Array.indexOf) {
         return -1;
     };
 }
-});

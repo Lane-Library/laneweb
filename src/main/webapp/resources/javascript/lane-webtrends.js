@@ -1,4 +1,4 @@
-YUI().use('yui2-dom',function() {
+YUI().use('event-custom',function(Y) {
     var gImages=[],
         gIndex=0,
         DCS={},
@@ -6,6 +6,7 @@ YUI().use('yui2-dom',function() {
         DCSext={},
         gDomain="irt-sdc.stanford.edu",
         gDcsId="dcssi6l0t1000004z9mg95sop_9v3k",
+        addTracker,
 
    dcsVar = function(){
         var i, dCurrent=new Date();
@@ -160,42 +161,51 @@ YUI().use('yui2-dom',function() {
     dcsMeta();
     dcsTag();
     
-    LANE.tracking.addTracker({
-        track: function(trackingData){
-            var args = [];
-            if (trackingData.host !== undefined) {
-                args.push('DCS.dcssip');
-                args.push(trackingData.host);
-            }
-            if (trackingData.path !== undefined) {
-                args.push('DCS.dcsuri');
-                args.push(trackingData.path);
-            }
-            if (trackingData.query !== undefined) {
-                args.push('DCS.dcsqry');
-                args.push(trackingData.query);
-            }
-            if (!(/\.html$/).test(trackingData.path) || trackingData.external) {
-                args.push('DCS.dcsref');
-                args.push(document.location.toString());
-            }
-            if (trackingData.title !== undefined) {
-                args.push('WT.ti');
-                args.push(trackingData.title);
-            }
-            if (trackingData.searchTerms !== undefined) {
-                args.push('DCSext.keywords');
-                args.push(trackingData.searchTerms);
-            }
-            if (trackingData.searchSource !== undefined) {
-                args.push('DCSext.search_type');
-                args.push(trackingData.searchSource);
-            }
-            if (trackingData.external) {
-                args.push('DCSext.offsite_link');
-                args.push('1');
-            }
-            dcsMultiTrack.call(dcsMultiTrack, args);
-        }
-    });
+    addTracker = function() {
+            LANE.tracking.addTracker({
+                track: function(trackingData) {
+                    var args = [];
+                    if (trackingData.host !== undefined) {
+                        args.push('DCS.dcssip');
+                        args.push(trackingData.host);
+                    }
+                    if (trackingData.path !== undefined) {
+                        args.push('DCS.dcsuri');
+                        args.push(trackingData.path);
+                    }
+                    if (trackingData.query !== undefined) {
+                        args.push('DCS.dcsqry');
+                        args.push(trackingData.query);
+                    }
+                    if (!(/\.html$/).test(trackingData.path) || trackingData.external) {
+                        args.push('DCS.dcsref');
+                        args.push(document.location.toString());
+                    }
+                    if (trackingData.title !== undefined) {
+                        args.push('WT.ti');
+                        args.push(trackingData.title);
+                    }
+                    if (trackingData.searchTerms !== undefined) {
+                        args.push('DCSext.keywords');
+                        args.push(trackingData.searchTerms);
+                    }
+                    if (trackingData.searchSource !== undefined) {
+                        args.push('DCSext.search_type');
+                        args.push(trackingData.searchSource);
+                    }
+                    if (trackingData.external) {
+                        args.push('DCSext.offsite_link');
+                        args.push('1');
+                    }
+                    dcsMultiTrack.call(dcsMultiTrack, args);
+                }
+            });
+    
+    };
+    
+    if (typeof LANE != 'undefined' && LANE.tracking) {
+        addTracker();
+    } else {
+        Y.Global.on('lane:trackingready', addTracker);
+    }
 });

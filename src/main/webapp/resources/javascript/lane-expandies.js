@@ -1,5 +1,5 @@
-YUI().use('yui2-event','node', function(Y) {
-    Y.YUI2.util.Event.onDOMReady(function() {
+YUI().use('event','node', function(Y) {
+    Y.Global.on('lane:accordionready', function() {
         var createExpandies = function() {
             var i, j, k, items,
                 expanded, anchors, expandy,

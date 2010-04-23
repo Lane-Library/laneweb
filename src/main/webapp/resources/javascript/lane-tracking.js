@@ -1,4 +1,5 @@
-YUI().use('yui2-dom','node-base',function(Y) {
+YUI().use('node','event-custom',function(Y) {
+    Y.Global.on('lane:ready', function(){
 	LANE.tracking = function(){
     //TODO more descriptive variable names
     //TODO put conditionals into sub-functions
@@ -200,4 +201,8 @@ YUI().use('yui2-dom','node-base',function(Y) {
         }
     };
 }();
+
+        Y.publish('lane:trackingready', {broadcast: 2});
+        Y.fire('lane:trackingready');
+});
 });
