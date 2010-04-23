@@ -26,9 +26,12 @@
 .yui-ge div.first {
     width:713px;
 }
-.yui-ge .yui-gf div.first {
+.yui-ge .yui-gf div.first, .content > .yui-gf > .yui-u.first {
     width:156px;
 }
 .yui-ge .yui-gf .yui-u {
     width:521px;
+}
+.content > .yui-gf > .yui-u {
+    width: 760px;
 }
