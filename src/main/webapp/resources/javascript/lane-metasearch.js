@@ -1,4 +1,4 @@
-YUI().use('yui2-event','node','yui2-json','yui2-connection','datatype',function(Y) {
+YUI().use('node','yui2-json','yui2-connection','datatype',function(Y) {
 
     LANE.namespace('search.metasearch');
     LANE.search.metasearch = function() {
@@ -100,14 +100,10 @@ YUI().use('yui2-event','node','yui2-json','yui2-connection','datatype',function(
         };
     }();
     
-    Y.YUI2.util.Event.onDOMReady(function() {
-    
-        // check for presence of search term and metasearch classNames
-        if (LANE.search.getEncodedSearchString() && Y.all('.metasearch').size() > 0) {
-            LANE.search.metasearch.initialize();
-            LANE.search.metasearch.getResultCounts();
-            LANE.search.startSearch();
-        }
-        
-    });//end onDOMReady
+    // check for presence of search term and metasearch classNames
+    if (Y.all('.metasearch').size() > 0 && LANE.search.getEncodedSearchString()) {
+        LANE.search.metasearch.initialize();
+        LANE.search.metasearch.getResultCounts();
+        LANE.search.startSearch();
+    }
 });
