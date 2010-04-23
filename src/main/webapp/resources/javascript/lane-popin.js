@@ -17,7 +17,7 @@ YUI().use('yui2-event','node',function(Y) {
             }
             for (i = 0; i < elms.size(); i++) {
                 if (elms.item(i) !== null) {
-                    if (el[0].id === elms.item(i).getAttribute('id') && i <= activeEl) {
+                    if (el[0].id === elms.item(i).get('id') && i <= activeEl) {
                         activeEl = i;
 						elms.item(i).setStyle('display','inline');
                     } else if (i > activeEl) {

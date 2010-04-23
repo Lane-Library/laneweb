@@ -29,7 +29,7 @@ YUI().use('yui2-event','yui2-autocomplete','yui2-datasource','yui2-connection','
 	        trackItemSelect: function(sType, aArgs) {
 	            var item, trackingObject = {};
 	            item = aArgs[2];
-	            trackingObject.title = searchSource.getAttribute('value') + '--suggest-selection-event';
+	            trackingObject.title = searchSource.get('value') + '--suggest-selection-event';
 	            trackingObject.path = item[0];
 	            LANE.tracking.track(trackingObject);
 	        },
@@ -56,7 +56,7 @@ YUI().use('yui2-event','yui2-autocomplete','yui2-datasource','yui2-connection','
                     searchForm = searchTermsElm.ancestor('form');
                     searchFieldset = searchTermsElm.ancestor('fieldset');
                     searchSourceElm = searchFieldset.one('input[name="source"]');
-                    searchSource = searchSourceElm.getAttribute('value');
+                    searchSource = searchSourceElm.get('value');
                     
                     // create and add auto complete related elements
                     searchTermsAcContainer = Y.Node.create('<div class="acContainer"/>');

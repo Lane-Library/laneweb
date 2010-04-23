@@ -10,7 +10,7 @@ YUI().use('node','yui2-event','yui2-connection','yui2-json',function(Y) {
             
             for (j = 0; j < facets.size(); j++) {
             	hits = null;
-                hitLink = facets.item(j).getElementsByTagName('a')[0];
+                hitLink = facets.item(j).one('a');
                 facetId = facets.item(j).getAttribute('facetId');
                 if (undefined != response.results.facets[facetId]) {
                     hits = parseInt(response.results.facets[facetId].hits);
@@ -19,7 +19,7 @@ YUI().use('node','yui2-event','yui2-connection','yui2-json',function(Y) {
                 if (!facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits === 0) {
                 	hitLink.get('parentNode').addClass('inactiveFacet');
                 	hitLink.get('parentNode').removeClass('searchableFacet');
-                	hitLink.setAttribute('title','no search results for '+hitLink.getContent());
+                	hitLink.set('title','no search results for '+hitLink.getContent());
                 }
             }
             sleepingTime = 2000;
@@ -39,7 +39,7 @@ YUI().use('node','yui2-event','yui2-connection','yui2-json',function(Y) {
             facets = Y.all('.searchFacet');
             requestString = '';
             for (j = 0; j < facets.size(); j++) {
-                var id = facets.item(j).getAttribute('id');
+                var id = facets.item(j).get('id');
                 facets.item(j).setAttribute('facetId', id.substring(0, id.indexOf('Facet')));
                 if(facets.item(j).hasClass('searchableFacet')){
                 	requestString+=facets.item(j).getAttribute('facetId') + ',';

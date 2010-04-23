@@ -108,21 +108,21 @@ function() {
         },
         setSearchSource: function(source) {
             
-            searchSourceInput.setAttribute('value',source);
+            searchSourceInput.set('value',source);
         },
         setActiveTab: function(elm) {
             var alreadyActive = elm.hasClass('active');
             elm.get('parentNode').get('children').removeClass('active');
             elm.addClass('active');
-            LANE.search.setSearchSource(elm.getAttribute('id') + '-all');
+            LANE.search.setSearchSource(elm.get('id') + '-all');
             // if this is not already active tab and there's a form value, submit search
-            if (!alreadyActive && searchTermsInput.hasAttribute('value') && searchTermsInput.getAttribute('value') != initialText) {
+            if (!alreadyActive && searchTermsInput.hasAttribute('value') && searchTermsInput.get('value') != initialText) {
                 LANE.search.submitSearch();
                 form.submit();
                 return false;
             }
             LANE.search.setInitialText();
-            if (elm.getAttribute('id') == 'clinical') {
+            if (elm.get('id') == 'clinical') {
                 Y.one('#search').addClass('clinicalSearch');
                 Y.one('#breadcrumb').addClass('clinicalSearch');
             } else {
@@ -132,10 +132,10 @@ function() {
         },
         setInitialText: function() {
             var oldInitialText = initialText;
-            initialText = Y.one('#searchTabs').one('.active').getAttribute('title');
-            if (!searchTermsInput.hasAttribute('value') || searchTermsInput.getAttribute('value') == oldInitialText) {
-                searchTermsInput.setAttribute('value', initialText);
-                searchTermsInput.setAttribute('title', initialText);
+            initialText = Y.one('#searchTabs').one('.active').get('title');
+            if (!searchTermsInput.hasAttribute('value') || searchTermsInput.get('value') == oldInitialText) {
+                searchTermsInput.set('value', initialText);
+                searchTermsInput.set('title', initialText);
             }
         },
         submitSearch: function() {
@@ -148,7 +148,7 @@ function() {
             //                }
             // hide q input so form doesn't bounce
             //                searchTermsInput.style.visibility = 'hidden';
-            if (!searchTermsInput.hasAttribute('value') || searchTermsInput.getAttribute('value') == initialText) {
+            if (!searchTermsInput.hasAttribute('value') || searchTermsInput.get('value') == initialText) {
                 throw ('nothing to search for');
             }
             LANE.search.startSearch();

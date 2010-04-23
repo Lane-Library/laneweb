@@ -10,14 +10,14 @@ YUI().use('yui2-event','node', function(Y) {
             }
             for (i = 0; i < expandies.size(); i++) {
                 //create only if no id (id means already created):
-                if (!expandies.item(i).getAttribute('id')) {
+                if (!expandies.item(i).get('id')) {
                     expanded = [];
                     items = expandies.item(i).get('children');//YUD.getChildren(expandies[i]);
                     for (j = 0; j < items.size(); j++) {
                         if (anchor) {
                             anchors = items.item(j).all('A');
                             for (k = 0; k < anchors.size(); k++) {
-                                if (anchors.item(k).getAttribute('name') == anchor) {
+                                if (anchors.item(k).get('name') == anchor) {
                                     items.get(j).addClass('expanded');
                                 }
                             }

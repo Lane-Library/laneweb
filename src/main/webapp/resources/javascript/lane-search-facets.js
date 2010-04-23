@@ -18,9 +18,9 @@ YUI({filter:'debug'}).use('node','yui2-event','yui2-history','yui2-connection',f
             container = Y.one('#searchResults');
             facets = elt.all('.searchFacet');
             for (i = 0; i < facets.size(); i++) {
-                if (facets.item(i).getAttribute('id').match("Facet$")) {
-                    type = facets.item(i).getAttribute('id').substring(0, facets.item(i).getAttribute('id').indexOf('-'));
-                    source = facets.item(i).getAttribute('id').substring(0, facets.item(i).getAttribute('id').indexOf('Facet'));
+                if (facets.item(i).get('id').match("Facet$")) {
+                    type = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('-'));
+                    source = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('Facet'));
                     if (type) {
                         facets.item(i).setData('result', new Result(type, source, facets.item(i), container));
                         if (facets.item(i).hasClass('current')) {

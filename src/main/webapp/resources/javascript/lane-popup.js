@@ -4,7 +4,7 @@ YUI().use('yui2-container','yui2-event','yui2-connection',function(Y) {
             YUE = Y.YUI2.util.Event;
         createPanel = function() {
             var container = document.createElement('div');
-            container.setAttribute('id', 'popupContainer');
+            container.set('id', 'popupContainer');
             document.body.appendChild(container);
             panel = new Y.YUI2.widget.Panel('popupContainer', {
                 underlay: 'none',
@@ -75,7 +75,7 @@ YUI().use('yui2-container','yui2-event','yui2-connection',function(Y) {
                         YUE.preventDefault(e);
                         id = this.rel.split(' ')[2];
                         elm = (document.getElementById(id)) ? document.getElementById(id) : 0;
-                        title = (elm.getAttribute('title')) ? elm.getAttribute('title') : '';
+                        title = (elm.get('title')) ? elm.get('title') : '';
                         body = (document.getElementById(id)) ? document.getElementById(id).innerHTML : '';
                         showPanel(title, body, YUE.getPageX(e), YUE.getPageY(e));
                     };

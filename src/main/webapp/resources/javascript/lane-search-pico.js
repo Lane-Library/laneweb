@@ -49,11 +49,11 @@ YUI().use('node','yui2-event','yui2-container','yui2-history', function(Y) {
         searchTermsInput = Y.one('#searchTerms');//document.getElementById('searchTerms');
         for (i = 0; i < inputs.size(); i++){
             //TODO: extracting pico values from request ... move to laneweb.xsl?
-            if (H.getQueryStringParameter(inputs.item(i).getAttribute('name'))){
-                inputs.item(i).setAttribute('value', H.getQueryStringParameter(inputs.item(i).getAttribute('name')).replace(/\+/g,' '));
+            if (H.getQueryStringParameter(inputs.item(i).get('name'))){
+                inputs.item(i).set('value', H.getQueryStringParameter(inputs.item(i).get('name')).replace(/\+/g,' '));
             }
-            if(!inputs.item(i).getAttribute('value')||inputs.item(i).getAttribute('value') == 'null'){
-                inputs.item(i).setAttribute(inputs.item(i).getAttribute('title'));
+            if(!inputs.item(i).get('value')||inputs.item(i).get('value') == 'null'){
+                inputs.item(i).set('value', inputs.item(i).get('title'));
             }
             E.addListener(Y.Node.getDOMNode(inputs.item(i)), 'focus', function(){
                 if (this.value == this.title){
@@ -78,18 +78,18 @@ YUI().use('node','yui2-event','yui2-container','yui2-history', function(Y) {
                 var acCont,   // container element to hang the auto complete widget on
                     acMesh,   // auto complete widget
                     acDs;     // data source
-                acCont = new Y.Node(d.getElementsByName(acInputs.item(y).getAttribute('id').substring(0,1))[0]);
+                acCont = new Y.Node(d.getElementsByName(acInputs.item(y).get('id').substring(0,1))[0]);
                 acDs = new W.DS_XHR("/././apps/suggest/json", ["suggest"]);
                 acDs.responseType = W.DS_XHR.TYPE_JSON;
                 acDs.scriptQueryParam = "q";
                 // limit added to patient, intervention, comparison
-                if(acCont.getAttribute('name') == 'p'){
+                if(acCont.get('name') == 'p'){
                     acDs.scriptQueryAppend = 'l=mesh-d';
                 }
-                else if(acCont.getAttribute('name') == 'i'){
+                else if(acCont.get('name') == 'i'){
                     acDs.scriptQueryAppend = 'l=mesh-i';
                 }
-                else if(acCont.getAttribute('name') == 'c'){
+                else if(acCont.get('name') == 'c'){
                     acDs.scriptQueryAppend = 'l=mesh-di';
                 }
                 acDs.connTimeout = 3000; 
@@ -103,7 +103,7 @@ YUI().use('node','yui2-event','yui2-container','yui2-history', function(Y) {
                 acMesh.animHoriz = false;
                 acMesh.animVert = false;
                 acMesh.queryDelay = 0.1;
-                acMesh.setHeader(acInputs.item(y).getAttribute('title'));
+                acMesh.setHeader(acInputs.item(y).get('title'));
                 acMesh.itemSelectEvent.subscribe(function(sType,aArgs){queryBuilder();});
                 acMesh.itemSelectEvent.subscribe(onItemSelect);
             }
