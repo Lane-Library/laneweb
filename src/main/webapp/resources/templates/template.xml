@@ -109,6 +109,11 @@
                                     title="Resources for medical historians, Stanford Medical School historical collection"
                                     >History Center</a>
                             </li>
+                            <li>
+                                <select style="margin:6px 0 0 80px;">
+                                    <option value="">Quick Links</option>
+                                </select>
+                            </li>
                         </ul>
                         <ul class="nav2">
                             <li>
