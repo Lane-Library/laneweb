@@ -1,5 +1,5 @@
 // based on lane-eresources.js; renaming for use across articles, catalog, clinical interfaces
-YUI({filter:'debug'}).use('node','yui2-event','yui2-history','yui2-connection',function(Y){
+YUI({filter:'debug'}).use('node','yui2-history','yui2-connection',function(Y){
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
@@ -12,44 +12,42 @@ YUI({filter:'debug'}).use('node','yui2-event','yui2-history','yui2-connection',f
             }
         };
     }();
-    Y.YUI2.util.Event.onDOMReady(function(){
-        var elt = Y.one('#searchFacets'), facets, i, j, type, source, container;
-        if (elt) {
-            container = Y.one('#searchResults');
-            facets = elt.all('.searchFacet');
-            for (i = 0; i < facets.size(); i++) {
-                if (facets.item(i).get('id').match("Facet$")) {
-                    type = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('-'));
-                    source = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('Facet'));
-                    if (type) {
-                        facets.item(i).setData('result', new Result(type, source, facets.item(i), container));
-                        if (facets.item(i).hasClass('current')) {
-                            facets.item(i).getData('result').setContent(container.get('children'));
-                            LANE.search.facets.setCurrentResult(facets.item(i).getData('result'));
-                        }
-                          facets.item(i).on('click',function(event) {
-						  	var result = this.getData('result');
-                            if (Y.YUI2.util.History) {
-                                // Browser History Manager may not be initialized (Opera unsupported, hyui-history-iframe not present in content)
-								//TODO: dynamically add history tracking markup
-                                try {
-                                    Y.YUI2.util.History.navigate("facet", this.getData('result').source);
-                                } catch (e) {
-                                    //log somewhere ... no need to break/alert
-                                	result.show();
-                                }
-                            }
-                            else{
-                                result.show();
-                            }
-                            LANE.search.setSearchSource(result._source);
-                            Y.YUI2.util.Event.preventDefault(event);
-                        });
+    var elt = Y.one('#searchFacets'), facets, i, j, type, source, container;
+    if (elt) {
+        container = Y.one('#searchResults');
+        facets = elt.all('.searchFacet');
+        for (i = 0; i < facets.size(); i++) {
+            if (facets.item(i).get('id').match("Facet$")) {
+                type = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('-'));
+                source = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('Facet'));
+                if (type) {
+                    facets.item(i).setData('result', new Result(type, source, facets.item(i), container));
+                    if (facets.item(i).hasClass('current')) {
+                        facets.item(i).getData('result').setContent(container.get('children'));
+                        LANE.search.facets.setCurrentResult(facets.item(i).getData('result'));
                     }
+                      Y.on('click',function(event) {
+					  	var result = this.getData('result');
+                        if (Y.YUI2.util.History) {
+                            // Browser History Manager may not be initialized (Opera unsupported, hyui-history-iframe not present in content)
+							//TODO: dynamically add history tracking markup
+                            try {
+                                Y.YUI2.util.History.navigate("facet", this.getData('result').source);
+                            } catch (e) {
+                                //log somewhere ... no need to break/alert
+                            	result.show();
+                            }
+                        }
+                        else{
+                            result.show();
+                        }
+                        LANE.search.setSearchSource(result._source);
+                        event.preventDefault();
+                    }, facets.item(i));
                 }
             }
         }
-    });
+    }
     function Result(type, source, facet, container){
         this._type = type;
         this._source = source;
