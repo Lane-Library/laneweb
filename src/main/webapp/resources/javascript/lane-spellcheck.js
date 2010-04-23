@@ -1,5 +1,5 @@
 YUI().use('node', 'yui2-connection', 'yui2-json', function(Y) {
-    if (Y.one('#spexllCheck') && LANE.search.getEncodedSearchString()) {
+    if (Y.one('#spellCheck') && LANE.search.getEncodedSearchString()) {
         //get the suggestion
         Y.YUI2.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q=' + LANE.search.getEncodedSearchString(), {
             success: function(o) {
