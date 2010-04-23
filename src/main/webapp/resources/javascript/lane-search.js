@@ -124,10 +124,10 @@ function() {
             LANE.search.setInitialText();
             if (elm.get('id') == 'clinical') {
                 Y.one('#search').addClass('clinicalSearch');
-                Y.one('#breadcrumb').addClass('clinicalSearch');
+                //Y.one('#breadcrumb').addClass('clinicalSearch');
             } else {
                 Y.one('#search').removeClass('clinicalSearch');
-                Y.one('#breadcrumb').removeClass('clinicalSearch');
+                //Y.one('#breadcrumb').removeClass('clinicalSearch');
             }
         },
         setInitialText: function() {
