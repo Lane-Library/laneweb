@@ -60,10 +60,14 @@ YUI().use('node','yui2-container',function(Y) {
                 }
             }
         };
-    LANE.core.getChangeEvent().subscribe(function() {
-       destroyTooltips();
-       createTooltips(); 
+    
+    Y.Global.on('lane:ready', function() {
+        LANE.core.getChangeEvent().subscribe(function() {
+           destroyTooltips();
+           createTooltips(); 
+        });
     });
-    Y.YUI2.util.Event.onDOMReady(createTooltips);
+    
+    createTooltips();
     
 });
