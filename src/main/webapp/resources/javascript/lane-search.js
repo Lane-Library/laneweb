@@ -157,5 +157,8 @@ function() {
         }
     };
 }();
+
+        Y.publish('lane:searchready', {broadcast: 2});
+        Y.fire('lane:searchready');
 });
 });

@@ -1,11 +1,9 @@
-YUI().use('yui2-container','yui2-event','yui2-connection',function(Y) {
-    Y.YUI2.util.Event.onDOMReady(function() {
-        var panel, createPanel, showPanel, popupWindow, showWindow, createEventHandlers,
-            YUE = Y.YUI2.util.Event;
+YUI().use('node', 'event', 'yui2-container','yui2-connection',function(Y) {
+    Y.on('domready', function() {
+        var panel, createPanel, showPanel, popupWindow, showWindow, createEventHandlers;
         createPanel = function() {
-            var container = document.createElement('div');
-            container.set('id', 'popupContainer');
-            document.body.appendChild(container);
+            var container = Y.Node.create('<div id="popupContainer"/>');
+            Y.one('body').append(container);
             panel = new Y.YUI2.widget.Panel('popupContainer', {
                 underlay: 'none',
                 close: true,
@@ -52,50 +50,55 @@ YUI().use('yui2-container','yui2-event','yui2-connection',function(Y) {
         };
         createEventHandlers = function() {
             var i, anchors, args, popupAnchors = [];
-            anchors = document.getElementsByTagName('A');
-            for (i = 0; i < anchors.length; i++) {
-                if (anchors[i].rel && anchors[i].rel.indexOf('popup') === 0) {
-                    popupAnchors.push(anchors[i]);
+            anchors = Y.all('a');
+            for (i = 0; i < anchors.size(); i++) {
+                if (anchors.item(i).get('rel') && anchors.item(i).get('rel').indexOf('popup') === 0) {
+                    popupAnchors.push(anchors.item(i));
                 }
             }
             for (i = 0; i < popupAnchors.length; i++) {
-                args = popupAnchors[i].rel.split(' ');
+                args = popupAnchors[i].get('rel').split(' ');
                 if (!panel && (args[1] == 'local' || args[1] == 'faq')) {
                     createPanel();
                 }
                 if (args[1] == 'standard' || args[1] == 'console' || args[1] == 'console-with-scrollbars' || args[1] == 'fullscreen') {
-                    popupAnchors[i].clicked = function(e) {
-                        var args = this.rel.split(' ');
-                        YUE.preventDefault(e);
-                        showWindow(this.href, args[1], args[2], args[3]);
-                    };
+                    Y.on('click', function(e) {
+                        var args = this.get('rel').split(' ');
+                        e.preventDefault();
+                        showWindow(this.get('href'), args[1], args[2], args[3]);
+                    }, popupAnchors[i]);
                 } else if (args[1] == 'local') {
-                    popupAnchors[i].clicked = function(e) {
+                    Y.on('click', function(e) {
                         var id, elm, title, body;
-                        YUE.preventDefault(e);
-                        id = this.rel.split(' ')[2];
-                        elm = (document.getElementById(id)) ? document.getElementById(id) : 0;
-                        title = (elm.get('title')) ? elm.get('title') : '';
-                        body = (document.getElementById(id)) ? document.getElementById(id).innerHTML : '';
-                        showPanel(title, body, YUE.getPageX(e), YUE.getPageY(e));
-                    };
+                        e.preventDefault();
+                        id = this.get('rel').split(' ')[2];
+                        elm = Y.one('#' + id);
+                        title = elm && elm.get('title') ? elm.get('title') : '';
+                        body = elm ? elm.get('innerHTML') : '';
+                        showPanel(title, body, e.pageX, e.pageY);
+                    }, popupAnchors[i]);
                 } else if (args[1] == 'faq') {
-                    popupAnchors[i].clicked = function(e) {
-                        var id = this.rel.split(' ')[2];
-                        YUE.preventDefault(e);
+                    Y.on('click', function(e) {
+                        var id = this.get('rel').split(' ')[2];
+                        e.preventDefault();
                         Y.YUI2.util.Connect.asyncRequest('GET', '/././content/popup.html?id=' + id, {
                             success: function(o) {
-                                var id = o.argument.id, X = o.argument.X, Y = o.argument.Y, f = o.responseXML.documentElement, title = f.getElementsByTagName('a')[0].firstChild.data, body = f.getElementsByTagName('dd')[0].firstChild.data + '&nbsp;<a href="/././howto/index.html?id=' + id + '">More</a>';
+                                var id = o.argument.id,
+                                    X = o.argument.X,
+                                    Y = o.argument.Y,
+                                    f = o.responseXML.documentElement,
+                                    title = f.getElementsByTagName('a')[0].firstChild.data,
+                                    body = f.getElementsByTagName('dd')[0].firstChild.data + '&nbsp;<a href="/././howto/index.html?id=' + id + '">More</a>';
                                 o.argument.showPanel(title, body, X, Y);
                             },
                             argument: {
                                 showPanel: showPanel,
-                                X: YUE.getPageX(e),
-                                Y: YUE.getPageY(e),
+                                X: e.pageX,
+                                Y: e.pageY,
                                 id: id
                             }
                         });
-                    };
+                    }, popupAnchors[i]);
                 }
             }
         };
