@@ -1,4 +1,4 @@
-YUI().use('yui2-dom',function(Y) {
+YUI().use('yui2-dom','node-base',function(Y) {
 	LANE.tracking = function(){
     //TODO more descriptive variable names
     //TODO put conditionals into sub-functions
@@ -49,7 +49,7 @@ YUI().use('yui2-dom',function(Y) {
             if (!title) {
                 title = 'unknown';
             }
-            if (Y.YUI2.util.Dom.hasClass(node, 'yui-accordion-toggle')) {
+            if (new Y.Node(node).hasClass('yui-accordion-toggle')) {
                 title = 'Expandy:' + title;
             }
             return title;
@@ -58,7 +58,7 @@ YUI().use('yui2-dom',function(Y) {
             var node = event.srcElement || event.target,
                 host, path, query, external, title, searchTerms, searchSource, children;
                 if (event.type == 'click') {
-                    if (Y.YUI2.util.Dom.hasClass(node, 'yui-accordion-toggle')) {
+                    if (new Y.Node(node).hasClass('yui-accordion-toggle')) {
                         host = document.location.host;
                         path = document.location.pathname;
                         query = document.location.search;
@@ -150,10 +150,10 @@ YUI().use('yui2-dom',function(Y) {
                 documentHost = documentHost.substring(0, documentHost.indexOf(':'));
             }
             if (event.type == 'click') {
-                if (Y.YUI2.util.Dom.hasClass(target, 'searchFacet')) {
+                if (new Y.Node(target).hasClass('searchFacet')) {
                     return true;
                 }
-                if (Y.YUI2.util.Dom.hasClass(target, 'yui-accordion-toggle')) {
+                if (new Y.Node(target).hasClass('yui-accordion-toggle')) {
                     return true;
                 }
                 //find self ancestor that is <a>
