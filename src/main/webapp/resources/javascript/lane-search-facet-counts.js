@@ -20,7 +20,7 @@ YUI().use('node','yui2-connection','yui2-json',function(Y) {
                 if (!facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits === 0) {
                 	hitLink.get('parentNode').addClass('inactiveFacet');
                 	hitLink.get('parentNode').removeClass('searchableFacet');
-                	hitLink.set('title','no search results for '+hitLink.getContent());
+                	hitLink.set('title','no search results for '+hitLink.get('innerHTML'));
                 }
             }
             sleepingTime = 2000;
