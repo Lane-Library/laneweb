@@ -1,8 +1,9 @@
 //TODO: should this stop polling when all facets are complete? currently polls until search app done or timeout
-YUI().use('node','yui2-event','yui2-connection','yui2-json',function(Y) {
+YUI().use('node','yui2-connection','yui2-json',function(Y) {
     var searchString = LANE.search.getEncodedSearchString(),
+        facets = Y.all('.searchFacet'),
         startTime = new Date().getTime(),
-        facets, requestString, j,
+        requestString, j,
         updateHits = function(o) {
             var response = Y.YUI2.lang.JSON.parse(o.responseText),
                 hitLink, hits, sleepingTime,
@@ -36,7 +37,6 @@ YUI().use('node','yui2-event','yui2-connection','yui2-json',function(Y) {
             success:updateHits
         },
         makeRequest = function() {
-            facets = Y.all('.searchFacet');
             requestString = '';
             for (j = 0; j < facets.size(); j++) {
                 var id = facets.item(j).get('id');
@@ -49,7 +49,7 @@ YUI().use('node','yui2-event','yui2-connection','yui2-json',function(Y) {
             	Y.YUI2.util.Connect.asyncRequest('GET', '/././apps/search/facets/json?q=' + searchString + '&f=' + requestString + '&rd=' + Math.random(), responseHandler);
             }
     };
-    if (searchString) {
-        Y.YUI2.util.Event.onAvailable('searchFacets', makeRequest);
+    if (searchString && facets.size() > 0) {
+        makeRequest();
     }
 });
