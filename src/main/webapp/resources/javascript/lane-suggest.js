@@ -56,7 +56,7 @@ YUI().use('yui2-event','yui2-autocomplete','yui2-datasource','yui2-connection','
                     searchForm = searchTermsElm.ancestor('form');
                     searchFieldset = searchTermsElm.ancestor('fieldset');
                     searchSourceElm = searchFieldset.one('input[name="source"]');
-                    searchSource = searchSourceElm.get('value');
+                    searchSource = (searchSourceElm) ? searchSourceElm.get('value') : null;
                     
                     // create and add auto complete related elements
                     searchTermsAcContainer = Y.Node.create('<div class="acContainer"/>');
