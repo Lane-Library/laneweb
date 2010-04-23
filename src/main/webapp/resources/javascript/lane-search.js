@@ -30,7 +30,7 @@ function() {
         for (i = 0; i < tabs.size(); i++) {
             Y.Node.getDOMNode(tabs.item(i)).clicked = function(e) {
                 Event.preventDefault(e);
-                LANE.search.setActiveTab(this);
+                LANE.search.setActiveTab(new Y.Node(this));
             };
         }
     });
