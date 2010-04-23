@@ -56,7 +56,6 @@ YUI().use('yui2-event','yui2-autocomplete','yui2-datasource','yui2-connection','
                     searchForm = searchTermsElm.ancestor('form');
                     searchFieldset = searchTermsElm.ancestor('fieldset');
                     searchSourceElm = searchFieldset.one('input[name="source"]');
-                    searchSource = (searchSourceElm) ? searchSourceElm.get('value') : null;
                     
                     // create and add auto complete related elements
                     searchTermsAcContainer = Y.Node.create('<div class="acContainer"/>');
@@ -95,9 +94,10 @@ YUI().use('yui2-event','yui2-autocomplete','yui2-datasource','yui2-connection','
                     
                     YE.addListener(Y.Node.getDOMNode(searchTermsElm), 'focus', function() {
                         acWidget.minQueryLength = 3;
+                        searchSource = (searchSourceElm) ? searchSourceElm.get('value') : null;
                         if (searchSource && searchSource.match(/^(all|articles|catalog)/)) {
                             acWidget.dataSource.scriptQueryAppend = 'l=er-mesh';
-                        } else if (null == searchSource && path.match(/\/portals\/.*\.html/)) {
+                        } else if (null == searchSource) { // assume source-less is metasearch form on peds portal, etc.
                             acWidget.dataSource.scriptQueryAppend = 'l=mesh-di';
                         } else {
                             acWidget.minQueryLength = -1;
