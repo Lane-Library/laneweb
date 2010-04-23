@@ -1,34 +1,28 @@
-YUI().use('yui2-event', function(Y){
-    Y.YUI2.util.Event.onAvailable('selections',function() {
-        var selections = [], showAll, hideAllBut, i, options;
-        for (i = 0; i < this.childNodes.length; i++) {
-            if (this.childNodes[i].nodeType == 1) {
-                selections.push(this.childNodes[i]);
-            }
-        }
+YUI().use('node', function(Y) {
+    var selections = Y.all('#selections > li'),
+        options = Y.all('#selections-select option'),
+        i,
         showAll = function() {
-            for (var i = 0; i < selections.length; i++) {
-                selections[i].style.display = 'block';
+            for (i = 0; i < selections.size(); i++) {
+                selections.item(i).setStyle('display', 'block');
             }
-        };
+        },
         hideAllBut = function(selection) {
-            for (var i = 0; i < selections.length; i++) {
-                if (selections[i].id == selection) {
-                    selections[i].style.display = 'block';
+            for (i = 0; i < selections.size(); i++) {
+                if (selections.item(i).get('id') == selection) {
+                    selections.item(i).setStyle('display', 'block');
                 } else {
-                    selections[i].style.display = 'none';
-                }       
+                    selections.item(i).setStyle('display', 'none');
+                }
             }
         };
-        options = document.getElementById('selections-select').getElementsByTagName('option');
-        for (i = 0; i < options.length; i++) {
-            options[i].clicked = function() {
-                if (this.value === '') {
-                    showAll();
-                } else {
-                    hideAllBut(this.value);
-                }
-            };
-        }
-    });
+    for (i = 0; i < options.size(); i++) {
+        Y.on('click', function() {
+            if (this.get('value') === '') {
+                showAll();
+            } else {
+                hideAllBut(this.get('value'));
+            }
+        }, options.item(i));
+    }
 });
