@@ -1,43 +1,42 @@
-YUI().use('yui2-event','node',function(Y) {
+YUI().use('node',function(Y) {
+    Y.Global.on('lane:ready', function() {
 LANE.search = LANE.search ||
 function() {
-    var Event = Y.YUI2.util.Event, //shorthand for Event
-        searching = false, //searching state
+    var searching = false, //searching state
         searchString,
         encodedString,
-        form, //the form Element
-        searchTermsInput,
-        searchSourceInput,
+        form = Y.one('#search'), //the form Element
+        searchTermsInput = Y.one('#searchTerms'),
+        searchSourceInput = Y.one('#searchSource'),
         source,
-        searchIndicator,
+        searchIndicator = Y.one('#searchIndicator'),
         initialText,
-        picoInputs = ['p', 'i', 'c', 'o'];
+        tabs = Y.all('#searchTabs > li'), i,
+        picoInputs = ['p', 'i', 'c', 'o'],
+        setInitialText = function() {
+            var oldInitialText = initialText;
+            initialText = Y.one('#searchTabs').one('.active').get('title');
+            if (!searchTermsInput.get('value') || searchTermsInput.get('value') == oldInitialText) {
+                searchTermsInput.set('value', initialText);
+                searchTermsInput.set('title', initialText);
+            }
+        };
     
-    Event.onContentReady('search', function() {
-        form = new Y.Node(this);
-        searchTermsInput = Y.one('#searchTerms');
-        searchSourceInput = Y.one('#searchSource');
-        LANE.search.setInitialText();
-        Event.addListener(this, 'submit', function(submitEvent) {
-            Event.preventDefault(submitEvent);
+        setInitialText();
+        Y.on('submit', function(submitEvent) {
+            submitEvent.preventDefault();
             try {
                 LANE.search.submitSearch();
             } catch (e) {
                 alert(e);
             }
         });
-        var tabs = Y.one('#searchTabs').all('li'), i;
         for (i = 0; i < tabs.size(); i++) {
-            Y.Node.getDOMNode(tabs.item(i)).clicked = function(e) {
-                Event.preventDefault(e);
-                LANE.search.setActiveTab(new Y.Node(this));
-            };
+            Y.on('click', function(event) {
+                event.preventDefault();
+                LANE.search.setActiveTab(this);
+            }, tabs.item(i));
         }
-    });
-    
-    Event.onContentReady('searchIndicator', function(){
-        searchIndicator = new Y.Node(this);
-    });
     
     return {
         startSearch: function() {
@@ -130,14 +129,15 @@ function() {
                 //Y.one('#breadcrumb').removeClass('clinicalSearch');
             }
         },
-        setInitialText: function() {
-            var oldInitialText = initialText;
-            initialText = Y.one('#searchTabs').one('.active').get('title');
-            if (!searchTermsInput.get('value') || searchTermsInput.get('value') == oldInitialText) {
-                searchTermsInput.set('value', initialText);
-                searchTermsInput.set('title', initialText);
-            }
-        },
+        setInitialText: setInitialText,
+//        setInitialText: function() {
+//            var oldInitialText = initialText;
+//            initialText = Y.one('#searchTabs').one('.active').get('title');
+//            if (!searchTermsInput.get('value') || searchTermsInput.get('value') == oldInitialText) {
+//                searchTermsInput.set('value', initialText);
+//                searchTermsInput.set('title', initialText);
+//            }
+//        },
         submitSearch: function() {
             //                var i;
             // strip PICO values if not set
@@ -157,4 +157,5 @@ function() {
         }
     };
 }();
+});
 });
