@@ -307,10 +307,7 @@
                 </li>
             </ul>
         </div>
-        <script type="text/javascript" src="http://yui.yahooapis.com/3.1.0/build/yui/yui-min.js"></script>
-<!--        
-        <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/utilities/utilities.js&amp;2.8.0r4/build/container/container.js&amp;2.8.0r4/build/json/json.js&amp;2.8.0r4/build/history/history.js&amp;2.8.0r4/build/datasource/datasource.js&amp;2.8.0r4/build/animation/animation.js&amp;2.8.0r4/build/autocomplete/autocomplete.js"/>
--->
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.1.0/build/yui/yui-min.js&3.1.0/build/oop/oop-min.js&3.1.0/build/event-custom/event-custom-min.js&3.1.0/build/dom/dom-min.js&3.1.0/build/pluginhost/pluginhost-min.js&3.1.0/build/node/node-min.js&3.1.0/build/event/event-min.js"></script>
 
         <script type="text/javascript" src="/javascript/lane-all.js"/>
 
