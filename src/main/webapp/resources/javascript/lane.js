@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI().use('yui2-event','event-custom',function(Y) {
+YUI().use('node','event','event-custom','yui2-event', function(Y) {
 if (typeof LANE == "undefined" || !LANE) {
     /**
      * The LANE global namespace object.  If LANE is already defined, the
