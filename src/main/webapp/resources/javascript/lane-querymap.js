@@ -1,6 +1,6 @@
 //TODO: this needs some cleaning up
 //check if there is a query
-YUI().use('node', 'event-custom', 'yui2-connection', 'yui2-json', function(Y) {
+YUI().use('node', 'event-custom', 'yui2-connection', 'json-parse', function(Y) {
     Y.Global.on('lane:searchready', function() {
         if (LANE.search.getEncodedSearchString()) {
             //check if there is id=queryMapping
@@ -9,7 +9,7 @@ YUI().use('node', 'event-custom', 'yui2-connection', 'yui2-json', function(Y) {
                 Y.YUI2.util.Connect.asyncRequest('GET', '/././apps/querymap/json?q=' + LANE.search.getEncodedSearchString(), {
                     success: function(o) {
                         var anchor, span, img, i, queryMapContainer = document.getElementById('queryMapping');
-                        LANE.search.querymap = Y.YUI2.lang.JSON.parse(o.responseText);
+                        LANE.search.querymap = Y.JSON.parse(o.responseText);
                         if (LANE.search.querymap.resourceMap) {
                             LANE.search.querymap.getResultCounts = function() {
                                 var url = '/././apps/search/json?q=' + LANE.search.getEncodedSearchString(), i;
@@ -21,7 +21,7 @@ YUI().use('node', 'event-custom', 'yui2-connection', 'yui2-json', function(Y) {
                                 url += '&rd=' + Math.random();
                                 Y.YUI2.util.Connect.asyncRequest('GET', url, {
                                     success: function(o) {
-                                        var results = Y.YUI2.lang.JSON.parse(o.responseText), rs = LANE.search.querymap.resourceMap.resources, i, needMore = false, result;
+                                        var results = Y.JSON.parse(o.responseText), rs = LANE.search.querymap.resourceMap.resources, i, needMore = false, result;
                                         for (i = 0; i < rs.length; i++) {
                                             if (!rs[i].status) {
                                                 result = results.resources[rs[i].id];

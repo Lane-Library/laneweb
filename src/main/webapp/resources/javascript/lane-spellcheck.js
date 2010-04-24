@@ -1,9 +1,9 @@
-YUI().use('node', 'yui2-connection', 'yui2-json', function(Y) {
+YUI().use('node', 'yui2-connection', 'json-parse', function(Y) {
     if (Y.one('#spellCheck') && LANE.search.getEncodedSearchString()) {
         //get the suggestion
         Y.YUI2.util.Connect.asyncRequest('GET', '/././apps/spellcheck/json?q=' + LANE.search.getEncodedSearchString(), {
             success: function(o) {
-                var sc = Y.YUI2.lang.JSON.parse(o.responseText), s, a;
+                var sc = Y.JSON.parse(o.responseText), s, a;
                 if (sc.suggestion) {
                     //if there is a suggestion show the spellcheck markup 
                     //and add the suggestion to the href

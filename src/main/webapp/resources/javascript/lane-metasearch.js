@@ -1,4 +1,4 @@
-YUI().use('node','yui2-json','yui2-connection','datatype',function(Y) {
+YUI().use('node','json-parse','yui2-connection','datatype',function(Y) {
     Y.Global.on('lane:searchready', function() {
 
     LANE.namespace('search.metasearch');
@@ -47,7 +47,7 @@ YUI().use('node','yui2-json','yui2-connection','datatype',function(Y) {
             getResultCounts: function() {
                 Y.YUI2.util.Connect.asyncRequest('GET', getSearchUrl(), {
                     success: function(o) {
-                        var response = Y.YUI2.lang.JSON.parse(o.responseText),
+                        var response = Y.JSON.parse(o.responseText),
                             results = response.resources,
                             needMore = false, 
                             i,result, updateable, resultSpan, sleepingTime, remainingTime;
