@@ -1,4 +1,5 @@
 YUI().use('event', 'node', 'yui2-connection', 'yui2-json', function(Y) {
+    Y.Global.on('lane:searchready', function() {
     if (LANE.search.getEncodedSearchString()) {
         //wait until id=findIt available
         var getFindit = function() {
@@ -18,4 +19,5 @@ YUI().use('event', 'node', 'yui2-connection', 'yui2-json', function(Y) {
         };
         Y.on('available', getFindit, 'findIt');
     }
+});
 });
