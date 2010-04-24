@@ -1,5 +1,5 @@
 // based on lane-eresources.js; renaming for use across articles, catalog, clinical interfaces
-YUI({filter:'debug'}).use('node','yui2-history','yui2-connection',function(Y){
+YUI().use('node','yui2-history','yui2-connection',function(Y){
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
