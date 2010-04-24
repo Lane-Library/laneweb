@@ -307,7 +307,7 @@
 	</li>
     </ul>
 </div>
-<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.1.0/build/yui/yui-min.js&amp;3.1.0/build/oop/oop-min.js&amp;3.1.0/build/event-custom/event-custom-min.js&amp;3.1.0/build/dom/dom-min.js&amp;3.1.0/build/pluginhost/pluginhost-min.js&amp;3.1.0/build/node/node-min.js&amp;3.1.0/build/event/event-min.js&amp;2in3.1/2.8.0/build/yui2-event/yui2-event-min.js&amp;2in3.1/2.8.0/build/yui2-dom/yui2-dom-min.js&amp;2in3.1/2.8.0/build/yui2-animation/yui2-animation-min.js&amp;2in3.1/2.8.0/build/yui2-element/yui2-element-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.1.0/build/yui/yui-min.js&amp;3.1.0/build/oop/oop-min.js&amp;3.1.0/build/event-custom/event-custom-min.js&amp;3.1.0/build/dom/dom-min.js&amp;3.1.0/build/pluginhost/pluginhost-min.js&amp;3.1.0/build/node/node-min.js&amp;3.1.0/build/event/event-min.js&amp;2in3.1/2.8.0/build/yui2-event/yui2-event-min.js&amp;2in3.1/2.8.0/build/yui2-dom/yui2-dom-min.js&amp;2in3.1/2.8.0/build/yui2-animation/yui2-animation-min.js&amp;2in3.1/2.8.0/build/yui2-element/yui2-element-min.js&amp;2in3.1/2.8.0/build/yui2-yahoo/yui2-yahoo-min.js&amp;2in3.1/2.8.0/build/yui2-get/yui2-get-min.js&amp;2in3.1/2.8.0/build/yui2-container/yui2-container-min.js&amp;2in3.1/2.8.0/build/yui2-connection/yui2-connection-min.js"></script>
 
         <script type="text/javascript" src="/javascript/lane-all.js"/>
 
