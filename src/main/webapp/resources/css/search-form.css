@@ -57,8 +57,8 @@
 #searchIndicator {
     visibility:hidden;
     position:absolute;
-    top:144px;
-    left:408px;
+    top:78px;
+    left:435px;
     z-index:1;
 }
 .acContainer, .acContainer div {
