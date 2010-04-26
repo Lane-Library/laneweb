@@ -61,11 +61,9 @@ YUI().use('node','yui2-container',function(Y) {
             }
         };
     
-    Y.Global.on('lane:ready', function() {
-        LANE.core.getChangeEvent().subscribe(function() {
+    Y.Global.on('lane:change', function() {
            destroyTooltips();
            createTooltips(); 
-        });
     });
     
     createTooltips();

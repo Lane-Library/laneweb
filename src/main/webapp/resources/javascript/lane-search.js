@@ -44,9 +44,9 @@ function() {
             //                if (searching) {
             //                    throw('already searching');
             //                }
-            //if (!searchTermsInput.value || searchTermsInput.value == initialText) {
-            //    throw ('nothing to search for');
-            //}
+            if (!searchTermsInput.get('value') || searchTermsInput.get('value') == initialText) {
+                throw ('nothing to search for');
+            }
             searching = true;
             searchIndicator.setStyle('visibility', 'visible');
         },
@@ -130,14 +130,6 @@ function() {
             }
         },
         setInitialText: setInitialText,
-//        setInitialText: function() {
-//            var oldInitialText = initialText;
-//            initialText = Y.one('#searchTabs').one('.active').get('title');
-//            if (!searchTermsInput.get('value') || searchTermsInput.get('value') == oldInitialText) {
-//                searchTermsInput.set('value', initialText);
-//                searchTermsInput.set('title', initialText);
-//            }
-//        },
         submitSearch: function() {
             //                var i;
             // strip PICO values if not set
@@ -158,7 +150,7 @@ function() {
     };
 }();
 
-        Y.publish('lane:searchready', {broadcast: 2});
-        Y.fire('lane:searchready');
+        Y.Global.publish('lane:searchready', {broadcast: 2, fireOnce: true});
+        Y.Global.fire('lane:searchready');
 });
 });

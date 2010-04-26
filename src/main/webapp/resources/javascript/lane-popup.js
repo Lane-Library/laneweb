@@ -103,6 +103,6 @@ YUI().use('node', 'event', 'yui2-container','yui2-connection',function(Y) {
             }
         };
         createEventHandlers();
-        LANE.core.getChangeEvent().subscribe(createEventHandlers);
+        Y.Global.on('lane:change', createEventHandlers);
     });
 });

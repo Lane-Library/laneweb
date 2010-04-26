@@ -39,6 +39,6 @@ YUI().use('event','node', function(Y) {
             }
         };
         createExpandies();
-        LANE.core.getChangeEvent().subscribe(createExpandies);
+        Y.Global.on('lane:change', createExpandies);
     });
 });

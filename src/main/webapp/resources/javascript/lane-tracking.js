@@ -202,7 +202,7 @@ YUI().use('node','event-custom',function(Y) {
     };
 }();
 
-        Y.publish('lane:trackingready', {broadcast: 2});
-        Y.fire('lane:trackingready');
+        Y.Global.publish('lane:trackingready', {broadcast: 2, fireOnce: true});
+        Y.Global.fire('lane:trackingready');
 });
 });

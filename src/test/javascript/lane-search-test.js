@@ -1,60 +1,62 @@
 /**
  * @author ceyates
  */
-(function() {
-    var searchTestCase = new YAHOO.tool.TestCase({
+YUI({ logInclude: { TestRunner: true } }).use('console','test', function(Y) {
+    
+    var searchTestCase = new Y.Test.Case({
+        
+        setUp: function() {
+            this.initialText = Y.one('#searchTerms').get('value');
+        },
+        tearDown: function() {
+            Y.one('#searchTerms').set('value', this.initialText);
+        },
     
         testStartSearch: function() {
-            var searchTermsInput = document.getElementById('searchTerms');
-            var searchIndicator = document.getElementById('searchIndicator');
-            var initialValue = searchTermsInput.value;
-            YAHOO.util.Assert.areEqual('hidden', searchIndicator.style.visibility);
-            YAHOO.util.Assert.isFalse(LANE.search.isSearching());
-            searchTermsInput.value = 'hello';
+            var searchTermsInput = Y.one('#searchTerms');
+            var searchIndicator = Y.one('#searchIndicator');
+            Y.Assert.areEqual('hidden', searchIndicator.getStyle('visibility'));
+            Y.Assert.isFalse(LANE.search.isSearching());
+            searchTermsInput.set('value', 'hello');
             LANE.search.startSearch();
-            YAHOO.util.Assert.isTrue(LANE.search.isSearching());
-            YAHOO.util.Assert.areEqual('visible', searchIndicator.style.visibility);
+            Y.Assert.isTrue(LANE.search.isSearching());
+            Y.Assert.areEqual('visible', searchIndicator.getStyle('visibility'));
             LANE.search.stopSearch();
-            YAHOO.util.Assert.areEqual('hidden', searchIndicator.style.visibility);
-            searchTermsInput.value = initialValue;
+            Y.Assert.areEqual('hidden', searchIndicator.getStyle('visibility'));
         },
         testSetInitialText: function() {
-            var searchTermsInput = document.getElementById('searchTerms');
+            var searchTermsInput = Y.one('#searchTerms');
             LANE.search.setInitialText();
-            YAHOO.util.Assert.areEqual('all tab title', searchTermsInput.value);
+            Y.Assert.areEqual('all tab title', searchTermsInput.get('value'));
         },
         testIsSearching: function() {
-            var searchTermsInput = document.getElementById('searchTerms');
-            var initialValue = searchTermsInput.value;
-            searchTermsInput.value = 'foo';
-            YAHOO.util.Assert.isFalse(LANE.search.isSearching());
+            var searchTermsInput = Y.one('#searchTerms');
+            searchTermsInput.set('value','foo');
+            Y.Assert.isFalse(LANE.search.isSearching());
             LANE.search.startSearch();
-            YAHOO.util.Assert.isTrue(LANE.search.isSearching());
+            Y.Assert.isTrue(LANE.search.isSearching());
             LANE.search.stopSearch();
-            YAHOO.util.Assert.isFalse(LANE.search.isSearching());
-            searchTermsInput.value = initialValue;
+            Y.Assert.isFalse(LANE.search.isSearching());
             
         },
         testStartSearchNoQuery: function() {
             try {
                 LANE.search.startSearch();
-                YAHOO.util.Assert.fail('should cause exception');
+                Y.Assert.fail('should cause exception');
             } catch (ex) {
-                YAHOO.util.Assert.areEqual('nothing to search for', ex.toString());
+                Y.Assert.areEqual('nothing to search for', ex.toString());
             }
-        },
-        testResetQValue: function() {
-            var searchTermsInput = document.getElementById('searchTerms');
-            var initialValue = searchTermsInput.value;
-            YAHOO.util.Assert.areNotEqual(0, searchTermsInput.value.length);
-            searchTermsInput.focus();
-            YAHOO.util.Assert.areEqual(0, searchTermsInput.value.length);
-            searchTermsInput.value = initialValue;
         }
     });
-    new YAHOO.tool.TestLogger();
-    YAHOO.tool.TestRunner.add(searchTestCase);
-    YAHOO.util.Event.addListener(window, 'load', function() {
-        YAHOO.tool.TestRunner.run();
+    
+    var yconsole = new Y.Console({
+        newestOnTop: false                   
     });
-})();
+    yconsole.render('#log');
+ 
+    
+    Y.Global.on('lane:searchready', function() {
+        Y.Test.Runner.add(searchTestCase);
+        Y.Test.Runner.run();
+    });
+});
