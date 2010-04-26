@@ -24,11 +24,6 @@ YUI({ logInclude: { TestRunner: true } }).use('console','test', function(Y) {
             LANE.search.stopSearch();
             Y.Assert.areEqual('hidden', searchIndicator.getStyle('visibility'));
         },
-        testSetInitialText: function() {
-            var searchTermsInput = Y.one('#searchTerms');
-            LANE.search.setInitialText();
-            Y.Assert.areEqual('all tab title', searchTermsInput.get('value'));
-        },
         testIsSearching: function() {
             var searchTermsInput = Y.one('#searchTerms');
             searchTermsInput.set('value','foo');

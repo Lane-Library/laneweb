@@ -55,7 +55,7 @@ YUI( {
 						container.append(content.item(i));
 					}
 					registerLinksContainer(container);
-					Y.Global.fire('lane:change');;
+					Y.fire('lane:change');;
 				}
 				Y.io(url, {
 					on : {

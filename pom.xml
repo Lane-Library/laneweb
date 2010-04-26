@@ -138,24 +138,18 @@
                      <removeIncluded>true</removeIncluded>
                       <output>target/laneweb/resources/javascript/lane-all.js</output>
                      <includes>
-                        <include>lane-min.js</include>
-                        <include>accordionview-min.js</include>
                         <include>lane-expandies-min.js</include>
-                        <include>lane-search-min.js</include>
-                        <include>lane-tracking-min.js</include>
                         <include>lane-google-min.js</include>
                         <include>lane-webtrends-min.js</include>
                         <include>lane-popup-min.js</include>
                         <include>lane-metasearch-min.js</include>
                         <include>lane-ie-min.js</include>
-                        <include>lane-search-facets-min.js</include>
                         <include>lane-search-facet-counts-min.js</include>
                         <include>lane-search-history-min.js</include>
                         <include>lane-tooltips-min.js</include>
                         <include>lane-spellcheck-min.js</include>
                         <include>lane-findit-min.js</include>
                         <include>lane-querymap-min.js</include>
-                        <include>lane-popin-min.js</include>
                         <include>lane-popup-min.js</include>
                         <include>lane-ie-min.js</include>
                         <include>lane-teletype-min.js</include>
@@ -163,6 +157,12 @@
                         <include>lane-suggest-min.js</include>
                         <include>lane-selections-min.js</include>
                         <include>lane-textinputs-min.js</include>
+                        <include>lane-tracking-min.js</include>
+                        <include>lane-search-facets-min.js</include>
+                        <include>lane-popin-min.js</include>
+                        <include>accordionview-min.js</include>
+                        <include>lane-search-min.js</include>
+                        <include>lane-min.js</include>
                      </includes>
                   </aggregation>
                </aggregations>

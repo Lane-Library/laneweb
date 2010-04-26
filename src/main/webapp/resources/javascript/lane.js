@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI({filter:'debug'}).use('node', 'event', 'event-custom', function(Y) {
+YUI().use('node', 'event', 'event-custom', function(Y) {
     if (typeof LANE == "undefined" || !LANE) {
         /**
          * The LANE global namespace object.  If LANE is already defined, the
@@ -35,7 +35,7 @@ YUI({filter:'debug'}).use('node', 'event', 'event-custom', function(Y) {
             m[meta.item(i).get('name')] = meta.item(i).get('content');
         }
         //create the change event:
-        Y.Global.publish('lane:change', {broadcast: 2});
+        Y.publish('lane:change', {broadcast: 2});
         Y.on('click', function(e) {
             if (LANE.tracking) {
                 LANE.tracking.trackEvent(e);
@@ -71,11 +71,11 @@ YUI({filter:'debug'}).use('node', 'event', 'event-custom', function(Y) {
         };
     }();
 
-    Y.Global.publish('lane:ready', {
+    Y.publish('lane:ready', {
         broadcast: 2,
         fireOnce: true
     });
-    Y.Global.fire('lane:ready');
+    Y.fire('lane:ready');
 });
 
 

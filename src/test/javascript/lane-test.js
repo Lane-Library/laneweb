@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','test', function(Y) {
+YUI({ logInclude: { TestRunner: true } }).use('event-custom', 'node-event-simulate','console','test', function(Y) {
     
     var laneTestCase = new Y.Test.Case({
         name: "Lane TestCase",

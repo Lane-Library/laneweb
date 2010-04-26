@@ -812,7 +812,7 @@ YUI().use('event-custom', 'yui2-event','yui2-dom','yui2-animation','yui2-element
     Y.Global.on('lane:ready', function() {
         LANE.namespace('expandy');
         LANE.expandy.AccordionView = AccordionView;
-        Y.Global.publish('lane:accordionready', {broadcast: 2, fireOnce: true});
-        Y.Global.fire('lane:accordionready');
+        Y.publish('lane:accordionready', {broadcast: 2, fireOnce: true});
+        Y.fire('lane:accordionready');
     });
 });

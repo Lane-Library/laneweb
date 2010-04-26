@@ -93,7 +93,7 @@ YUI().use('node','yui2-history','yui2-connection',function(Y){
 					this._container.append(this._content.item(i));
 				}
                 LANE.search.stopSearch();
-                Y.Global.fire('lane:change');;
+                Y.fire('lane:change');;
                 if (this._type == 'specialty'){
                     LANE.search.metasearch.initialize();
                     LANE.search.metasearch.getResultCounts();
