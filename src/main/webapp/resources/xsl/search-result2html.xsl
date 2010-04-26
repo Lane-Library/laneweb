@@ -211,7 +211,7 @@
                             <div class="moreResults">
                                 <span class="sourceLink">Lane Catalog</span>
                                 <xsl:text> - </xsl:text>
-                                <a rel="popup standard" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBRecID={s:recordId}&amp;v2=1">detail</a>
+                                <a rel="popup standard" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">details</a>
                             </div>
                         </xsl:when>
                         <xsl:when test="s:recordType = 'faq'">
