@@ -59,6 +59,7 @@
     position:absolute;
     top:144px;
     left:408px;
+    z-index:1;
 }
 .acContainer, .acContainer div {
     display:inline;
