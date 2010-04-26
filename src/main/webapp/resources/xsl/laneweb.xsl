@@ -67,9 +67,9 @@
         <div><span>All Resources</span><span>/biomed-resources</span></div>
         <div><span>Specialty Portals</span><span>/portals</span></div>
         <div><span>Classes &amp; Consulting</span><span>/info-literacy</span></div>
+        <div><span>History Center</span><span>/med-history</span></div>
         <div><span>About Library</span><span>/services</span></div>
         <div><span>Help</span><span>/help</span></div>
-        <div><span>History Center</span><span>/med-history</span></div>
     </xsl:variable>
     
     <xsl:variable name="source-prefix">
