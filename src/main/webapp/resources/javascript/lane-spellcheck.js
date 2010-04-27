@@ -8,12 +8,12 @@ YUI().use('node', 'event-custom', 'yui2-connection', 'json-parse', function(Y) {
                     if (sc.suggestion) {
                         //if there is a suggestion show the spellcheck markup 
                         //and add the suggestion to the href
-                        s = document.getElementById('spellCheck');
+                        s = Y.one('#spellCheck');
                         //s.style.display = 'inline';
-                        LANE.search.popin.fire(s);
-                        a = s.getElementsByTagName('a')[0];
-                        a.href = document.location.href.replace('q=' + LANE.search.getEncodedSearchString(), 'q=' + encodeURIComponent(sc.suggestion));
-                        a.innerHTML = sc.suggestion;
+                        Y.fire('lane:popin', s);
+                        a = s.one('a');
+                        a.set('href', document.location.href.replace('q=' + LANE.search.getEncodedSearchString(), 'q=' + encodeURIComponent(sc.suggestion)));
+                        a.set('innerHTML', sc.suggestion);
                     }
                 }
             });

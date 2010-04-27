@@ -39,7 +39,7 @@ YUI().use('node', 'event-custom', 'yui2-connection', 'json-parse', function(Y) {
                                             setTimeout(LANE.search.querymap.getResultCounts, 2000);
                                         }
                                         //queryMapContainer.style.display = 'inline';
-                                        LANE.search.popin.fire(queryMapContainer);
+                                        Y.fire('lane:popin', queryMapContainer);
                                     }
                                 });
                             };
