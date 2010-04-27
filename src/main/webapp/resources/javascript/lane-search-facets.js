@@ -1,5 +1,5 @@
 // based on lane-eresources.js; renaming for use across articles, catalog, clinical interfaces
-YUI().use('node','yui2-history','yui2-connection',function(Y){
+YUI().use('node','yui2-history','io-base',function(Y){
     Y.Global.on('lane:searchready', function(){
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
@@ -57,17 +57,19 @@ YUI().use('node','yui2-history','yui2-connection',function(Y){
         this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + LANE.search.getEncodedSearchString();
         this._state = 'initialized';
         this._callback = {
-            success: function(o){
-                var result, bodyNodes, content, i;
-                result = o.argument.result;
-                bodyNodes = new Y.Node(o.responseXML.getElementsByTagName('body')[0]).get('children');
-                result.setContent(bodyNodes);
-                LANE.search.facets.getCurrentResult().hide();
-                LANE.search.facets.setCurrentResult(result);
-                result.show();
-            },
-            failure: function(){
-                //TODO: use window.location to set page to href of facet
+            on: {
+                success: function(id, o){
+                    var result, bodyNodes, content, i;
+                    result = o.argument.result;
+                    bodyNodes = new Y.Node(o.responseXML.getElementsByTagName('body')[0]).get('children');
+                    result.setContent(bodyNodes);
+                    LANE.search.facets.getCurrentResult().hide();
+                    LANE.search.facets.setCurrentResult(result);
+                    result.show();
+                },
+                failure: function(){
+                    //TODO: use window.location to set page to href of facet
+                }
             },
             argument: {
                 result: this
@@ -104,7 +106,7 @@ YUI().use('node','yui2-history','yui2-connection',function(Y){
             var request;
             if (this._state == 'initialized') {
                 this._state = 'searching';
-                request = Y.YUI2.util.Connect.asyncRequest('GET', this._url, this._callback);
+                request = Y.io(this._url, this._callback);
             } else 
                 if (this._state == 'searched') {
                     this.show();
