@@ -2,9 +2,7 @@ YUI().use('event-custom','node',function(Y) {
     Y.Global.on('lane:ready', function() {
     LANE.namespace('search.popin');
     
-    // custom onPopin event
-    LANE.search.popin = new Y.YUI2.util.CustomEvent("onPopin");
-    
+    // custom popin event
     Y.publish('lane:popin',{broadcast:2});
     
     // TODO: could make markup order dictate precedence 
