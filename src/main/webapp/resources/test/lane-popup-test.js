@@ -1,17 +1,36 @@
 /**
  * @author ceyates
  */
-(function() {
+YUI({ logInclude: { TestRunner: true } }).use('event-custom', 'node-event-simulate','console','test', function(Y) {
 
-    var lanePopupTestCase = new YAHOO.tool.TestCase({
+    var lanePopupTestCase = new Y.Test.Case({
         name: 'Lane Popup Test Case',
-        testFoo: function() {
-            YAHOO.util.Assert.isTrue(true);
+        testContainerExists: function() {
+            Y.Assert.isTrue(Y.Lang.isObject(Y.one('#popupContainer')));
+        },
+        testConsole: function() {
+            Y.all('a').item(0).simulate('click');
+        },
+        testStandard: function() {
+            Y.all('a').item(1).simulate('click');
+        },
+        testConsoleWithScrollbars: function() {
+            Y.all('a').item(2).simulate('click');
+        },
+        testFullscreen: function() {
+            Y.all('a').item(3).simulate('click');
+        },
+        testLocal: function() {
+            Y.all('a').item(4).simulate('click');
         }
     });
-    YAHOO.tool.TestRunner.add(lanePopupTestCase);
-    new YAHOO.tool.TestLogger();
-    YAHOO.util.Event.addListener(this, 'load', function() {
-        YAHOO.tool.TestRunner.run();
+    
+    Y.one('body').addClass('yui3-skin-sam');
+    var yconsole = new Y.Console({
+        newestOnTop: false                   
     });
-})();
+    yconsole.render('#log');
+    
+    Y.Test.Runner.add(lanePopupTestCase);
+    Y.Test.Runner.run();
+});
