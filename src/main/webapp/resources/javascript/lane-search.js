@@ -23,7 +23,7 @@ YUI().use('node', function(Y) {
                 };
             
             setInitialText();
-            Y.on('submit', function(submitEvent) {
+            form.on('submit', function(submitEvent) {
                 submitEvent.preventDefault();
                 try {
                     LANE.search.submitSearch();
@@ -47,9 +47,6 @@ YUI().use('node', function(Y) {
             
             return {
                 startSearch: function() {
-                    if (!searchTermsInput.get('value') || searchTermsInput.get('value') == initialText) {
-                        throw ('nothing to search for');
-                    }
                     searching = true;
                     searchIndicator.setStyle('visibility', 'visible');
                 },
