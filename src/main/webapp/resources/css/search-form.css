@@ -2,10 +2,10 @@
     background-image:url(/././images/search-bg.jpg);
     height:102px;
 }
-/*
-  #search.clinicalSearch {
-  }
- */
+#search.clinical {
+    background-image:url(/././images/clin-search-bg.jpg);
+    height:132px;
+} 
 #searchTabs, #searchTips {
     font-size:smaller;
 }
@@ -40,6 +40,9 @@
     margin:9px 0 0 28px;
 /* IE6 needs this for layout: */
 /* _margin-top:-2px; */
+}
+#search.clinical fieldset {
+    margin:41px 0 0 184px;
 }
 #searchTerms {
     width:587px;

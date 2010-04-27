@@ -32,7 +32,7 @@
                                     <a href="?searchTab=all" title="Find articles AND digital resources from Lane Catalog"
                                         >Lane Search</a>
                                 </li>
-                                <!-- 
+                                 <!--
                                 <li id="specialty" title="Search 200+ online resources ... narrow results by specialty ... shows # of results per resource">
                                     <a href="?searchTab=specialty" title="Search 200+ online resources ... narrow results by specialty ... shows # of results per resource"
                                         >Specialty Search</a>
@@ -306,32 +306,37 @@
 	    <a href="http://www.stanford.edu/">Stanford University</a>
 	</li>
     </ul>
-</div>
-<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.1.0/build/yui/yui-min.js&amp;3.1.0/build/oop/oop-min.js&amp;3.1.0/build/event-custom/event-custom-min.js&amp;3.1.0/build/dom/dom-min.js&amp;3.1.0/build/pluginhost/pluginhost-min.js&amp;3.1.0/build/node/node-min.js&amp;3.1.0/build/event/event-min.js&amp;2in3.1/2.8.0/build/yui2-event/yui2-event-min.js&amp;2in3.1/2.8.0/build/yui2-dom/yui2-dom-min.js&amp;2in3.1/2.8.0/build/yui2-animation/yui2-animation-min.js&amp;2in3.1/2.8.0/build/yui2-element/yui2-element-min.js&amp;2in3.1/2.8.0/build/yui2-yahoo/yui2-yahoo-min.js&amp;2in3.1/2.8.0/build/yui2-get/yui2-get-min.js&amp;2in3.1/2.8.0/build/yui2-container/yui2-container-min.js&amp;2in3.1/2.8.0/build/yui2-connection/yui2-connection-min.js&amp;3.1.0/build/intl/intl-min.js&amp;3.1.0/build/datatype/lang/datatype.js&amp;3.1.0/build/datatype/lang/datatype-date.js&amp;3.1.0/build/datatype/datatype-min.js&amp;2in3.1/2.8.0/build/yui2-history/yui2-history-min.js&amp;3.1.0/build/loader/loader-min.js&amp;3.1.0/build/json/json-parse-min.js"></script>
-
+        </div>
+        
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.1.0/build/yui/yui-min.js"></script>
+<!--<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.1.0/build/yui/yui-min.js&amp;3.1.0/build/oop/oop-min.js&amp;3.1.0/build/event-custom/event-custom-min.js&amp;3.1.0/build/dom/dom-min.js&amp;3.1.0/build/pluginhost/pluginhost-min.js&amp;3.1.0/build/node/node-min.js&amp;3.1.0/build/event/event-min.js&amp;2in3.1/2.8.0/build/yui2-event/yui2-event-min.js&amp;2in3.1/2.8.0/build/yui2-dom/yui2-dom-min.js&amp;2in3.1/2.8.0/build/yui2-animation/yui2-animation-min.js&amp;2in3.1/2.8.0/build/yui2-element/yui2-element-min.js&amp;2in3.1/2.8.0/build/yui2-yahoo/yui2-yahoo-min.js&amp;2in3.1/2.8.0/build/yui2-get/yui2-get-min.js&amp;2in3.1/2.8.0/build/yui2-container/yui2-container-min.js&amp;2in3.1/2.8.0/build/yui2-connection/yui2-connection-min.js&amp;3.1.0/build/intl/intl-min.js&amp;3.1.0/build/datatype/lang/datatype.js&amp;3.1.0/build/datatype/lang/datatype-date.js&amp;3.1.0/build/datatype/datatype-min.js&amp;2in3.1/2.8.0/build/yui2-history/yui2-history-min.js&amp;3.1.0/build/loader/loader-min.js&amp;3.1.0/build/json/json-parse-min.js"></script>
+-->
         <script type="text/javascript" src="/javascript/lane-all.js"/>
-
-        <!--<script type="text/javascript" src="/javascript/lane.js"/>
-        <script type="text/javascript" src="/javascript/accordionview.js"/>
-        <script type="text/javascript" src="/javascript/lane-expandies.js"/>
-        <script type="text/javascript" src="/javascript/lane-search.js"/>
-        <script type="text/javascript" src="/javascript/lane-search-history.js"/>
-        <script type="text/javascript" src="/javascript/lane-search-facets.js"/>
-        <script type="text/javascript" src="/javascript/lane-search-facet-counts.js"/>
-        <script type="text/javascript" src="/javascript/lane-metasearch.js"/>
-        <script type="text/javascript" src="/javascript/lane-tracking.js"/>
+        
+        <!--<script type="text/javascript" src="/javascript/lane-expandies.js"/>
         <script type="text/javascript" src="/javascript/lane-google.js"/>
         <script type="text/javascript" src="/javascript/lane-webtrends.js"/>
         <script type="text/javascript" src="/javascript/lane-popup.js"/>
+        <script type="text/javascript" src="/javascript/lane-metasearch.js"/>
+        <script type="text/javascript" src="/javascript/lane-ie.js"/>
+        <script type="text/javascript" src="/javascript/lane-search-facet-counts.js"/>
+        <script type="text/javascript" src="/javascript/lane-search-history.js"/>
         <script type="text/javascript" src="/javascript/lane-tooltips.js"/>
         <script type="text/javascript" src="/javascript/lane-spellcheck.js"/>
-        <script type="text/javascript" src="/javascript/lane-querymap.js"/>
         <script type="text/javascript" src="/javascript/lane-findit.js"/>
-        <script type="text/javascript" src="/javascript/lane-popin.js"/>
+        <script type="text/javascript" src="/javascript/lane-querymap.js"/>
+        <script type="text/javascript" src="/javascript/lane-popup.js"/>
         <script type="text/javascript" src="/javascript/lane-ie.js"/>
         <script type="text/javascript" src="/javascript/lane-teletype.js"/>
         <script type="text/javascript" src="/javascript/lane-search-pico.js"/>
         <script type="text/javascript" src="/javascript/lane-suggest.js"/>
-        <script type="text/javascript" src="/javascript/lane-selections.js"/>-->
+        <script type="text/javascript" src="/javascript/lane-selections.js"/>
+        <script type="text/javascript" src="/javascript/lane-textinputs.js"/>
+        <script type="text/javascript" src="/javascript/lane-tracking.js"/>
+        <script type="text/javascript" src="/javascript/lane-search-facets.js"/>
+        <script type="text/javascript" src="/javascript/lane-popin.js"/>
+        <script type="text/javascript" src="/javascript/accordionview.js"/>
+        <script type="text/javascript" src="/javascript/lane-search.js"/>
+        <script type="text/javascript" src="/javascript/lane.js"/>-->
     </body>
 </html>

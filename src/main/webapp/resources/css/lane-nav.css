@@ -9,6 +9,9 @@
     font-weight:bold;
     font-size:13px;
 }
+#laneNav.clinical {
+    top:174px;
+}
 #laneNav li {
     float:left;
 }
