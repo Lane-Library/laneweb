@@ -1,7 +1,7 @@
-YUI().use('event-custom', 'yui2-get', function(Y) {
-    var initialize = function() {
+YUI().use('event-custom', function(Y) {
+    Y.Global.on('lane:trackingready', function() {
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        Y.YUI2.util.Get.script(gaJsHost + "google-analytics.com/ga.js", {
+        Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
             onSuccess: function() {
                 var host = document.location.host, pageTracker, encode = function(value) {
                     if (encodeURIComponent) {
@@ -32,13 +32,7 @@ YUI().use('event-custom', 'yui2-get', function(Y) {
                         }
                     });
                 }
-            },
-            onFailure: function() {alert('failure');}
+            }
         });
-    };
-    if (typeof LANE != 'undefined' && LANE.tracking) {
-        initialize();
-    } else {
-        Y.Global.on('lane:trackingready', initialize);
-    }
+    });
 });
