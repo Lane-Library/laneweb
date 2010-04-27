@@ -1,4 +1,4 @@
-YUI().use('node','json-parse','yui2-connection','datatype',function(Y) {
+YUI().use('node','json-parse','io','datatype',function(Y) {
     Y.Global.on('lane:searchready', function() {
     	
     LANE.namespace('search.metasearch');
@@ -45,58 +45,57 @@ YUI().use('node','json-parse','yui2-connection','datatype',function(Y) {
                 startTime = new Date().getTime();
             },
             getResultCounts: function() {
-                Y.YUI2.util.Connect.asyncRequest('GET', getSearchUrl(), {
-                    success: function(o) {
-                        var response = Y.JSON.parse(o.responseText),
-                            results = response.resources,
-                            needMore = false, 
-                            i, y, result, updateables, resultSpan, sleepingTime, remainingTime;
-
-                        for (i = 0; i < searchables.length; i++) {
-                            updateables = Y.all('#' + searchables[i]); // search content may have more than one element with same ID
-                            result = results[searchables[i]];
-                            if (result === undefined || !result.status) {
-                                needMore = true;
-                                continue;
-                            } else if (updateables.size() > 0){
-                            	for(y = 0; y < updateables.size(); y++){
-                            		resultSpan = updateables.item(y).get('parentNode').one('.searchCount');
-                            	if(null == resultSpan){
-                            		resultSpan = Y.Node.create('<span class="searchCount"></span>');
-                            			updateables.item(y).insert(resultSpan,'after');
-                            	}
-                            	if (result.status == 'successful') {
-	                                // process display of each updateable node
-	                                // once all processed, remove id from searchables
-	                                resultSpan.setContent('&#160;' +
-	                                    Y.DataType.Number.format(result.hits, {
-	                                        thousandsSeparator: ","
-	                                    }));
-                            			updateables.item(y).setAttribute('href', result.url);
-                            			updateables.item(y).setAttribute('target', '_blank');
-                            			updateables.item(y).removeClass('metasearch');
-	                                searchables.splice(i--, 1);
-	                            } else if (result.status == 'failed' || result.status == 'canceled') {
-	                                resultSpan.setContent('&#160;? ');
-                            			updateables.item(y).removeClass('metasearch');
-	                                searchables.splice(i--, 1);
-	                            }
+                Y.io(getSearchUrl(),{
+                    on: {
+                        success: function(o) {
+                            var response = Y.JSON.parse(o.responseText), results = response.resources, needMore = false, i, y, result, updateables, resultSpan, sleepingTime, remainingTime;
+                            
+                            for (i = 0; i < searchables.length; i++) {
+                                updateables = Y.all('#' + searchables[i]); // search content may have more than one element with same ID
+                                result = results[searchables[i]];
+                                if (result === undefined || !result.status) {
+                                    needMore = true;
+                                    continue;
+                                } else if (updateables.size() > 0) {
+                                    for (y = 0; y < updateables.size(); y++) {
+                                        resultSpan = updateables.item(y).get('parentNode').one('.searchCount');
+                                        if (null == resultSpan) {
+                                            resultSpan = Y.Node.create('<span class="searchCount"></span>');
+                                            updateables.item(y).insert(resultSpan, 'after');
+                                        }
+                                        if (result.status == 'successful') {
+                                            // process display of each updateable node
+                                            // once all processed, remove id from searchables
+                                            resultSpan.setContent('&#160;' +
+                                            Y.DataType.Number.format(result.hits, {
+                                                thousandsSeparator: ","
+                                            }));
+                                            updateables.item(y).setAttribute('href', result.url);
+                                            updateables.item(y).setAttribute('target', '_blank');
+                                            updateables.item(y).removeClass('metasearch');
+                                            searchables.splice(i--, 1);
+                                        } else if (result.status == 'failed' || result.status == 'canceled') {
+                                            resultSpan.setContent('&#160;? ');
+                                            updateables.item(y).removeClass('metasearch');
+                                            searchables.splice(i--, 1);
+                                        }
+                                    }
+                                }
                             }
-                        }
-                        }
-                        sleepingTime = 2000;
-                        remainingTime = (new Date().getTime()) - startTime;
-                        if (response.status != 'successful' && needMore && searchables.length > 0 && (remainingTime <= 60 * 1000)) {
-                            // at more than 20 seconds the sleeping time becomes 10 seconds
-                            if (remainingTime > 20 * 1000) {
-                                sleepingTime = 10000;
+                            sleepingTime = 2000;
+                            remainingTime = (new Date().getTime()) - startTime;
+                            if (response.status != 'successful' && needMore && searchables.length > 0 && (remainingTime <= 60 * 1000)) {
+                                // at more than 20 seconds the sleeping time becomes 10 seconds
+                                if (remainingTime > 20 * 1000) {
+                                    sleepingTime = 10000;
+                                }
+                                searchRequests.push(setTimeout(LANE.search.metasearch.getResultCounts, sleepingTime));
+                            } else {
+                                LANE.search.stopSearch();
                             }
-                            searchRequests.push(setTimeout(LANE.search.metasearch.getResultCounts, sleepingTime));
-                        } else {
-                            LANE.search.stopSearch();
-                        }
-                    }// end request success definition
-                });// end async request
+                        }// end request success definition
+                    }//end on
+                });// end io request
             }// end getResultCounts
         };
     }();
