@@ -85,6 +85,9 @@
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="test/*" type="wildcard">
+                <map:read type="txt-resource" src="${default-resources-base}/test/{1}"/>
+            </map:match>
             <map:match pattern="**.html" type="wildcard">
                 <map:aggregate element="doc" label="content">
                     <map:part src="cocoon:/content/{1}.html"/>
