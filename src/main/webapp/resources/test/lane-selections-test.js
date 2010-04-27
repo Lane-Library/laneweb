@@ -11,41 +11,44 @@ YUI({
         name: "Lane Selections TestCase",
         testAllVisible: function() {
             var allVisible = true;
-            for (var i = 0; i < selections.length; i++) {
-                if (selections[i].style.display == 'none') {
+            var selections = Y.all('.selections li');
+            for (var i = 0; i < selections.size(); i++) {
+                if (selections.item(i).getStyle('display') =='none') {
                     allVisible = false;
                 }
             }
-            YAHOO.util.Assert.isTrue(allVisible);
+            Y.Assert.isTrue(allVisible);
         },
         testOthersHiddenOnSelect: function() {
-            var selection = options[1].value;
-            YAHOO.util.UserAction.click(options[1], {});
+            var selections = Y.all('selections');
+            var selection = Y.all('option').item(1).get('value');
+            Y.all('option').item(1).simulate('click');
             var othersVisible = false;
-            for (var i = 0; i < selections.length; i++) {
-                if (selections[i].id != selection) {
-                    if (selections[i].style.display != 'none') {
+            for (var i = 0; i < selections.size(); i++) {
+                if (selections.item(i).get('id') != selection) {
+                    if (selections.item(i).getStyle('display') != 'none') {
                         othersVisible = true;
                     }
                 }
             }
-            YAHOO.util.Assert.isTrue(othersVisible === false);
+            Y.Assert.isTrue(othersVisible === false);
         },
         testAnotherOthersHiddenOnSelect: function() {
-            var selection = options[3].value;
-            YAHOO.util.UserAction.click(options[3], {});
+            var selections = Y.all('selections');
+            var selection = Y.all('option').item(3).get('value');
+            Y.all('option').item(3).simulate('click');
             var othersVisible = false;
-            for (var i = 0; i < selections.length; i++) {
-                if (selections[i].id != selection) {
-                    if (selections[i].style.display != 'none') {
+            for (var i = 0; i < selections.size(); i++) {
+                if (selections.item(i).get('id') != selection) {
+                    if (selections.item(i).getStyle('display') != 'none') {
                         othersVisible = true;
                     }
                 }
             }
-            YAHOO.util.Assert.isTrue(othersVisible === false);
+            Y.Assert.isTrue(othersVisible === false);
         },
         testAllVisibleOnSelectAll: function() {
-            YAHOO.util.UserAction.click(options[0], {});
+            Y.one('option').simulate('click');
             this.testAllVisible();
         }
     });
