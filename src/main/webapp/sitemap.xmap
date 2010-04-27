@@ -85,8 +85,14 @@
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="test/*" type="wildcard">
-                <map:read type="txt-resource" src="${default-resources-base}/test/{1}"/>
+            <!-- javascript unit tests: -->
+            <map:match pattern="test/*.js" type="wildcard">
+                <map:read type="txt-resource" src="${default-resources-base}/test/{1}.js"/>
+            </map:match>
+            <map:match pattern="test/*.html" type="wildcard">
+                <map:generate type="html" src="${default-resources-base}/test/{1}.html"/>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl"/>
+                <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
                 <map:aggregate element="doc" label="content">
