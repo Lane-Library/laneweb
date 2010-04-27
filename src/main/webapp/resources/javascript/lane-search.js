@@ -112,6 +112,7 @@ YUI().use('node', function(Y) {
                     if (!elm.hasClass('active')) {
                         // if this is not already active tab and there's a form value, submit search
                         if (searchTermsInput.get('value') && searchTermsInput.get('value') != initialText) {
+                        	LANE.search.setSearchSource(elm.get('id') + '-all');
                             LANE.search.submitSearch();
                         } else {
                             Y.fire('lane:searchTabChange', elm);

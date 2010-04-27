@@ -61,7 +61,7 @@ YUI().use('node','json-parse','io-base','datatype',function(Y) {
                                         resultSpan = updateables.item(y).get('parentNode').one('.searchCount');
                                         if (null == resultSpan) {
                                             resultSpan = Y.Node.create('<span class="searchCount"></span>');
-                                            updateables.item(y).insert(resultSpan, 'after');
+                                            updateables.item(y).get('parentNode').insert(resultSpan);
                                         }
                                         if (result.status == 'successful') {
                                             // process display of each updateable node
