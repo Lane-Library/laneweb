@@ -7,7 +7,7 @@ YUI().use('event', 'node', 'io', 'json-parse', function(Y) {
             url = '/././apps/sfx/json?q=' + searchString;
             Y.io(url, {
                 on: {
-                    success: function(o) {
+                    success: function(id, o) {
                         var findIt = Y.JSON.parse(o.responseText),
                             findItLink;
                         if (findIt.result) {

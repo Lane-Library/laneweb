@@ -47,7 +47,7 @@ YUI().use('node','json-parse','io','datatype',function(Y) {
             getResultCounts: function() {
                 Y.io(getSearchUrl(),{
                     on: {
-                        success: function(o) {
+                        success: function(id, o) {
                             var response = Y.JSON.parse(o.responseText), results = response.resources, needMore = false, i, y, result, updateables, resultSpan, sleepingTime, remainingTime;
                             
                             for (i = 0; i < searchables.length; i++) {

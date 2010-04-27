@@ -81,15 +81,17 @@ YUI().use('node', 'event', 'yui2-container','yui2-connection',function(Y) {
                     Y.on('click', function(e) {
                         var id = this.get('rel').split(' ')[2];
                         e.preventDefault();
-                        Y.YUI2.util.Connect.asyncRequest('GET', '/././content/popup.html?id=' + id, {
-                            success: function(o) {
-                                var id = o.argument.id,
-                                    X = o.argument.X,
-                                    Y = o.argument.Y,
-                                    f = o.responseXML.documentElement,
-                                    title = f.getElementsByTagName('a')[0].firstChild.data,
-                                    body = f.getElementsByTagName('dd')[0].firstChild.data + '&nbsp;<a href="/././howto/index.html?id=' + id + '">More</a>';
-                                o.argument.showPanel(title, body, X, Y);
+                        Y.io('/././content/popup.html?id=' + id, {
+                            on: {
+                                success: function(tansactionId, o, argument) {
+                                    var id = argument.id,
+                                        X = argument.X,
+                                        Y = argument.Y,
+                                        f = o.responseXML.documentElement,
+                                        title = f.getElementsByTagName('a')[0].firstChild.data,
+                                        body = f.getElementsByTagName('dd')[0].firstChild.data + '&nbsp;<a href="/././howto/index.html?id=' + id + '">More</a>';
+                                    argument.showPanel(title, body, X, Y);
+                                }
                             },
                             argument: {
                                 showPanel: showPanel,
