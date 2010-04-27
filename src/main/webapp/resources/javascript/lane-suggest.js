@@ -1,4 +1,4 @@
-YUI().use('yui2-autocomplete','yui2-datasource','yui2-connection','node', function(Y){
+YUI().use('yui2-autocomplete','yui2-datasource','node', function(Y){
         var suggestElms = Y.all('.laneSuggest'), i,
             acWidgets = [],
             trackItemSelect = function(sType, aArgs) {
@@ -55,6 +55,7 @@ YUI().use('yui2-autocomplete','yui2-datasource','yui2-connection','node', functi
                 acWidget.animVert = false;
                 acWidget.autoHighlight = false;
                 acWidget.itemSelectEvent.subscribe(trackItemSelect);
+                //FIXME: this threw an exception . . .
 //                acWidget.itemSelectEvent.subscribe(onItemSelect);
                 
                 // for FF, submit form return key strike
