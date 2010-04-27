@@ -1,4 +1,4 @@
-YUI().use('yui2-autocomplete','yui2-datasource','node', function(Y){
+YUI().use('yui2-autocomplete','yui2-datasource','yui2-connection','node', function(Y){
         var suggestElms = Y.all('.laneSuggest'), i,
             acWidgets = [],
             trackItemSelect = function(sType, aArgs) {
