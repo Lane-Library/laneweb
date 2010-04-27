@@ -1,6 +1,6 @@
 YUI().use('node','json-parse','yui2-connection','datatype',function(Y) {
     Y.Global.on('lane:searchready', function() {
-
+    	
     LANE.namespace('search.metasearch');
     LANE.search.metasearch = function() {
         var searchElms, // the elements in need of hit counts
@@ -50,19 +50,20 @@ YUI().use('node','json-parse','yui2-connection','datatype',function(Y) {
                         var response = Y.JSON.parse(o.responseText),
                             results = response.resources,
                             needMore = false, 
-                            i,result, updateable, resultSpan, sleepingTime, remainingTime;
+                            i, y, result, updateables, resultSpan, sleepingTime, remainingTime;
 
                         for (i = 0; i < searchables.length; i++) {
-                            updateable = Y.one('#' + searchables[i]);
+                            updateables = Y.all('#' + searchables[i]); // search content may have more than one element with same ID
                             result = results[searchables[i]];
                             if (result === undefined || !result.status) {
                                 needMore = true;
                                 continue;
-                            } else if (updateable){
-                            	resultSpan = updateable.get('parentNode').one('.searchCount');
+                            } else if (updateables.size() > 0){
+                            	for(y = 0; y < updateables.size(); y++){
+                            		resultSpan = updateables.item(y).get('parentNode').one('.searchCount');
                             	if(null == resultSpan){
                             		resultSpan = Y.Node.create('<span class="searchCount"></span>');
-                            		updateable.insert(resultSpan,'after');
+                            			updateables.item(y).insert(resultSpan,'after');
                             	}
                             	if (result.status == 'successful') {
 	                                // process display of each updateable node
@@ -71,18 +72,17 @@ YUI().use('node','json-parse','yui2-connection','datatype',function(Y) {
 	                                    Y.DataType.Number.format(result.hits, {
 	                                        thousandsSeparator: ","
 	                                    }));
-	                                if (!updateable.get('href')) {
-	                                    updateable.set('href', result.url);
-	                                    updateable.set('target', '_blank');
-	                                }
-	                                updateable.removeClass('metasearch');
+                            			updateables.item(y).setAttribute('href', result.url);
+                            			updateables.item(y).setAttribute('target', '_blank');
+                            			updateables.item(y).removeClass('metasearch');
 	                                searchables.splice(i--, 1);
 	                            } else if (result.status == 'failed' || result.status == 'canceled') {
 	                                resultSpan.setContent('&#160;? ');
-	                                updateable.removeClass('metasearch');
+                            			updateables.item(y).removeClass('metasearch');
 	                                searchables.splice(i--, 1);
 	                            }
                             }
+                        }
                         }
                         sleepingTime = 2000;
                         remainingTime = (new Date().getTime()) - startTime;
