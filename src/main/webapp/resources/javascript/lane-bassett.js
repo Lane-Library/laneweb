@@ -1,6 +1,6 @@
 YUI( {
 	filter : "debug"
-}).use('node', 'io', 'event','history',function(Y) {
+}).use('node', 'io-base', 'event','history',function(Y) {
 
 			var diagramDisplay = false;
 

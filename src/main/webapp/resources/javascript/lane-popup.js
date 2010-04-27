@@ -1,4 +1,4 @@
-YUI().use('node', 'event', 'yui2-container','yui2-connection',function(Y) {
+YUI().use('node', 'event', 'yui2-container','io-base',function(Y) {
     Y.on('domready', function() {
         var panel, createPanel, showPanel, popupWindow, showWindow, createEventHandlers;
         createPanel = function() {

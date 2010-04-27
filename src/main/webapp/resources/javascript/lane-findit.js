@@ -1,4 +1,4 @@
-YUI().use('event', 'node', 'io', 'json-parse', function(Y) {
+YUI().use('event', 'node', 'io-base', 'json-parse', function(Y) {
     Y.Global.on('lane:searchready', function() {
         var findItNode = Y.one('#findIt'),
             searchString = LANE.search.getEncodedSearchString(),

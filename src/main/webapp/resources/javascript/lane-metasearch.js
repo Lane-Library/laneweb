@@ -1,4 +1,4 @@
-YUI().use('node','json-parse','io','datatype',function(Y) {
+YUI().use('node','json-parse','io-base','datatype',function(Y) {
     Y.Global.on('lane:searchready', function() {
     	
     LANE.namespace('search.metasearch');
