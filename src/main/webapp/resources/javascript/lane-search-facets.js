@@ -96,10 +96,6 @@ YUI().use('node','yui2-history','io-base',function(Y){
 				}
                 LANE.search.stopSearch();
                 Y.fire('lane:change');;
-                if (this._type == 'specialty'){
-                    LANE.search.metasearch.initialize();
-                    LANE.search.metasearch.getResultCounts();
-                }
             }
         };
         Result.prototype.getContent = function(){

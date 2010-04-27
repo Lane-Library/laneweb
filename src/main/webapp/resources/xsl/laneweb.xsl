@@ -81,12 +81,13 @@
             <xsl:when test="$search-tab">
                 <xsl:value-of select="$search-tab"/>
             </xsl:when>
-            <xsl:when test="matches($path,'/portals/(bioresearch|ethics)')">all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/ethics')">all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/bioresearch')">bioresearch</xsl:when>
             <xsl:when test="starts-with($path,'/portals')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical</xsl:when>
             <xsl:when test="starts-with($path,'/info-literacy')">clinical</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all</xsl:when>
-            <xsl:when test="string-length($source-prefix) &gt; 0 and $source-prefix = 'clinical'">
+            <xsl:when test="string-length($source-prefix) &gt; 0 and ($source-prefix = 'clinical' or $source-prefix = 'bioresearch')">
                 <xsl:value-of select="$source-prefix"/>
             </xsl:when>
             <xsl:otherwise>all</xsl:otherwise>

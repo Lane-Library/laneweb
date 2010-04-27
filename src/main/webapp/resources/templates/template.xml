@@ -32,12 +32,10 @@
                                     <a href="?searchTab=all" title="Find articles AND digital resources from Lane Catalog"
                                         >Lane Search</a>
                                 </li>
-                                 <!--
-                                <li id="specialty" title="Search 200+ online resources ... narrow results by specialty ... shows # of results per resource">
-                                    <a href="?searchTab=specialty" title="Search 200+ online resources ... narrow results by specialty ... shows # of results per resource"
-                                        >Specialty Search</a>
+                                <li id="bioresearch" title="Search 200+ bioresearch resources">
+                                    <a href="?searchTab=bioresearch" title="Search 200+ bioresearch resources"
+                                        >Bioresearch Search</a>
                                 </li>
-                                -->
                                 <li id="clinical" title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ...">
                                     <a href="?searchTab=clinical" title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ..."
                                         >Clinical Search</a>

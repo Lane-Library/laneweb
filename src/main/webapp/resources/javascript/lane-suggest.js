@@ -73,8 +73,10 @@ YUI().use('yui2-autocomplete','yui2-datasource','yui2-connection','node', functi
                     searchSource = (searchSourceElm) ? searchSourceElm.get('value') : null;
                     if (searchSource && searchSource.match(/^(all|articles|catalog)/)) {
                         acWidget.dataSource.scriptQueryAppend = 'l=er-mesh';
+                    } else if (searchSource && searchSource.match(/^bioresearch/)) {
+                        acWidget.dataSource.scriptQueryAppend = 'l=mesh';
                     } else if (null == searchSource) { // assume source-less is metasearch form on peds portal, etc.
-                        acWidget.dataSource.scriptQueryAppend = 'l=mesh-di';
+                    	acWidget.dataSource.scriptQueryAppend = 'l=mesh-di';
                     } else {
                         acWidget.minQueryLength = -1;
                     }

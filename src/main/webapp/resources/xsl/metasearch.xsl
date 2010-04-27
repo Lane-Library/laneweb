@@ -53,8 +53,8 @@
         </xsl:attribute>
     </xsl:template>
     
-    <xsl:template match="node()[contains(attribute::class,'metasearch')]">
-        <xsl:variable name="id" select="@id"/>
+    <xsl:template match="node()[child::node()[contains(attribute::class,'metasearch')]]">
+        <xsl:variable name="id" select="child::node()[contains(attribute::class,'metasearch')]/@id"/>
         <xsl:variable name="status">
             <xsl:value-of select="/doc/s:search/s:engine/s:resource[@s:id = $id]/@s:status"/>
         </xsl:variable>
@@ -67,27 +67,45 @@
         
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:attribute name="href">
-                <xsl:value-of select="/doc/s:search/s:engine/s:resource[@s:id = $id]/s:url"/>
-            </xsl:attribute>
-            <xsl:if test="$success = 'true' or $failure = 'true'">
-                <xsl:attribute name="class">
-                    <xsl:value-of select="replace(@class,'metasearch ','')"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates select="node()|child::node()"/>
+            <xsl:for-each select="child::node()">
+                <xsl:choose>
+                    <xsl:when test="@class='metasearch'">
+                        <xsl:copy>
+                            <xsl:apply-templates select="@*"/>
+                            <xsl:attribute name="href">
+                                <xsl:value-of select="/doc/s:search/s:engine/s:resource[@s:id = $id]/s:url"/>
+                            </xsl:attribute>
+                            <xsl:if test="$success = 'true' or $failure = 'true'">
+                                <xsl:attribute name="class">
+                                    <xsl:value-of select="replace(@class,'metasearch','')"/>
+                                </xsl:attribute>
+                            </xsl:if>
+                            <xsl:apply-templates select="node()"/>
+                        </xsl:copy>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:copy>
+                            <xsl:apply-templates select="@*|node()"/>
+                        </xsl:copy>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each>
+
+            <span class="searchCount">
+                <xsl:text> </xsl:text>
+                <xsl:choose>
+                    <xsl:when test="$success = 'true'">
+                        <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id = $id]/s:hits, '###,##0')"/>
+                    </xsl:when>
+                    <xsl:when test="$failure = 'true'">
+                        <xsl:text> ? </xsl:text>
+                    </xsl:when>
+                </xsl:choose>
+            </span>
         </xsl:copy>
-        <span class="searchCount">
-            <xsl:text> </xsl:text>
-            <xsl:choose>
-                <xsl:when test="$success = 'true'">
-                    <xsl:value-of select="format-number(/doc/s:search/s:engine/s:resource[@s:id = $id]/s:hits, '###,##0')"/>
-                </xsl:when>
-                <xsl:when test="$failure = 'true'">
-                    <xsl:text> ? </xsl:text>
-                </xsl:when>
-            </xsl:choose>
-        </span>
+        
+        
+        
     </xsl:template>
     
     <xsl:template match="attribute::node()">
