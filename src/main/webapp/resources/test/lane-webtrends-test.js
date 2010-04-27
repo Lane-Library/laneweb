@@ -4,9 +4,13 @@
 //this really isn't a unit test, but relys on setting the gDomain variable
 //in the webtrends file to a local server so you can observer the requests
 //by tailing the log.
-(function() {
+YUI({
+    logInclude: {
+        TestRunner: true
+    }
+}).use('node-event-simulate', 'console', 'test', function(Y){
 
-    var LANEWebtrendsTestCase = YAHOO.tool.TestCase({
+    var webtrendsTestCase = new Y.Test.Case({
         name: "Lane Webtrends TestCase",
         testTrack: function() {
             var e = document.body.getElementsByTagName('img'), i;
@@ -24,7 +28,12 @@
         }
     });
     
-    var oLogger = new YAHOO.tool.TestLogger();
-    YAHOO.tool.TestRunner.add(LANEWebtrendsTestCase);
-    YAHOO.tool.TestRunner.run();
-})();
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
+        newestOnTop: false
+    }).render('#log');
+    
+    
+    Y.Test.Runner.add(webtrendsTestCase);
+    Y.Test.Runner.run();
+});

@@ -1,17 +1,26 @@
 /**
  * @author ceyates
  */
-(function() {
-    var suggestTestCase = new YAHOO.tool.TestCase({
+YUI({
+    logInclude: {
+        TestRunner: true
+    }
+}).use('node-event-simulate', 'console', 'test', function(Y){
+
+    var suggestTestCase = new Y.Test.Case({
         name: "Lane Suggest Testcase",
         testAddACElements: function() {
             var searchTermsElm = document.getElementById('searchTerms');
             YAHOO.util.Assert.areEqual('acContainer yui-ac', searchTermsElm.parentNode.className);
         }
     });
-    new YAHOO.tool.TestLogger();
-    YAHOO.tool.TestRunner.add(suggestTestCase);
-    YAHOO.util.Event.addListener(window, 'load', function() {
-        YAHOO.tool.TestRunner.run();
-    });
-})();
+    
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
+        newestOnTop: false
+    }).render('#log');
+    
+    
+    Y.Test.Runner.add(suggestTestCase);
+    Y.Test.Runner.run();
+});

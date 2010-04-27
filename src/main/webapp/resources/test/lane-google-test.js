@@ -4,10 +4,23 @@
 //this really isn't a unit test, but relys on setting pageTracker._setLocalServerMode();
 //in the lane-google file so you can observer the requests
 //by tailing the log.
-(function() {
+    //need to wait for ga.js to load
+//    var timer = function() {
+//        if (typeof _gat === 'undefined') {
+//            setTimeout(timer, 1000);
+//        } else {
+//            YAHOO.tool.TestRunner.run();
+//        }
+//    };
+//    timer();
+YUI({
+    logInclude: {
+        TestRunner: true
+    }
+}).use('node-event-simulate', 'console', 'test', function(Y){
 
-    var LANEWebtrendsTestCase = YAHOO.tool.TestCase({
-        name: "Lane Webtrends TestCase",
+    var googleTestCase = new Y.Test.Case({
+        name: 'Lane Google Test Case',
         testTrack: function() {
             var e = document.body.getElementsByTagName('img'), i;
             for (i = 0; i < e.length; i++) {
@@ -24,15 +37,12 @@
         }
     });
     
-    var oLogger = new YAHOO.tool.TestLogger();
-    YAHOO.tool.TestRunner.add(LANEWebtrendsTestCase);
-    //need to wait for ga.js to load
-    var timer = function() {
-        if (typeof _gat === 'undefined') {
-            setTimeout(timer, 1000);
-        } else {
-            YAHOO.tool.TestRunner.run();
-        }
-    };
-    timer();
-})();
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
+        newestOnTop: false
+    }).render('#log');
+    
+    
+    Y.Test.Runner.add(googleTestCase);
+    Y.Test.Runner.run();
+});

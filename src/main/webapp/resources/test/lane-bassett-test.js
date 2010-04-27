@@ -11,14 +11,12 @@ YUI({
         name: 'Lane Basset Test Case'
     });
     
-    var yconsole = new Y.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false
-    });
-    yconsole.render('#log');
+    }).render('#log');
     
     
-    Y.on('domready', function(){
-        Y.Test.Runner.add(bassettTestCase);
-        Y.Test.Runner.run();
-    });
+    Y.Test.Runner.add(bassettTestCase);
+    Y.Test.Runner.run();
 });

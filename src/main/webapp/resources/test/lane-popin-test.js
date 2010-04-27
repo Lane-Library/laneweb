@@ -1,9 +1,22 @@
 /**
  * @author ceyates
  */
-(function() {
+YUI({
+    logInclude: {
+        TestRunner: true
+    }
+}).use('node-event-simulate', 'console', 'test', function(Y){
 
-    new YAHOO.tool.TestLogger();
+    var popinTestCase = new Y.Test.Case({
+        name: 'Lane Popin Test Case'
+    });
     
-    YAHOO.tool.TestRunner.run();
-})();
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
+        newestOnTop: false
+    }).render('#log');
+    
+    
+    Y.Test.Runner.add(popinTestCase);
+    Y.Test.Runner.run();
+});

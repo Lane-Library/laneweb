@@ -1,9 +1,13 @@
 /**
  * @author ceyates
  */
-(function() {
-	
-	var tooltipTestCase = new YAHOO.tool.TestCase({
+YUI({
+    logInclude: {
+        TestRunner: true
+    }
+}).use('node-event-simulate', 'console', 'test', function(Y){
+
+    var tooltipTestCase = new Y.Test.Case({
 		name: 'Lane Tooltip Test Case',
 		testTooltipPresent: function() {
             YAHOO.util.Assert.isTrue(YAHOO.lang.isObject(document.getElementById('a-yuitt')));
@@ -19,9 +23,13 @@
             YAHOO.util.Assert.isFalse(YAHOO.lang.isObject(document.getElementById('a-yuitt')));
         }
 	});
-    new YAHOO.tool.TestLogger();
-	YAHOO.tool.TestRunner.add(tooltipTestCase);
-	YAHOO.util.Event.addListener(window, 'load', function() {
-    	YAHOO.tool.TestRunner.run();
-	});
-})();
+    
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
+        newestOnTop: false
+    }).render('#log');
+    
+    
+    Y.Test.Runner.add(tooltipTestCase);
+    Y.Test.Runner.run();
+});

@@ -1,10 +1,13 @@
 /**
  * @author ceyates
  */
-(function() {
-    var selections = document.getElementById('selections').getElementsByTagName('li');
-    var options = document.getElementsByTagName('option');
-    var LaneSelectionsTestCase = new YAHOO.tool.TestCase({
+YUI({
+    logInclude: {
+        TestRunner: true
+    }
+}).use('node-event-simulate', 'console', 'test', function(Y){
+
+    var selectionsTestCase = new Y.Test.Case({
         name: "Lane Selections TestCase",
         testAllVisible: function() {
             var allVisible = true;
@@ -47,8 +50,12 @@
         }
     });
     
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
+        newestOnTop: false
+    }).render('#log');
     
-    new YAHOO.tool.TestLogger();
-    YAHOO.tool.TestRunner.add(LaneSelectionsTestCase);
-    YAHOO.tool.TestRunner.run();
-})();
+    
+    Y.Test.Runner.add(selectionsTestCase);
+    Y.Test.Runner.run();
+});

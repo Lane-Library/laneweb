@@ -1,8 +1,11 @@
 /**
  * @author ceyates
- */
-YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','test', function(Y) {
-    
+ */YUI({
+    logInclude: {
+        TestRunner: true
+    }
+}).use('node-event-simulate', 'console', 'test', function(Y){
+
     var expandiesTestCase = new Y.Test.Case({
         name: 'Lane Expandies TestCase',
         testIsClosed: function() {
@@ -48,14 +51,12 @@ YUI({ logInclude: { TestRunner: true } }).use('node-event-simulate','console','t
         }
     });
     
-    var yconsole = new Y.Console({
-        newestOnTop: false                   
-    });
-    yconsole.render('#log');
- 
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
+        newestOnTop: false
+    }).render('#log');
     
-    Y.on('domready', function() {
-        Y.Test.Runner.add(expandiesTestCase);
-        Y.Test.Runner.run();
-    });
+    
+    Y.Test.Runner.add(expandiesTestCase);
+    Y.Test.Runner.run();
 });

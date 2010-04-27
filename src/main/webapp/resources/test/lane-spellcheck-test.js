@@ -1,9 +1,22 @@
 /**
  * @author ceyates
  */
-(function() {
+YUI({
+    logInclude: {
+        TestRunner: true
+    }
+}).use('node-event-simulate', 'console', 'test', function(Y){
 
-    new YAHOO.tool.TestLogger();
+    var spellCheckTestCase = new Y.Test.Case({
+        name: 'Lane Spellcheck Test Case'
+    });
     
-    YAHOO.tool.TestRunner.run();
-})();
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
+        newestOnTop: false
+    }).render('#log');
+    
+    
+    Y.Test.Runner.add(spellCheckTestCase);
+    Y.Test.Runner.run();
+});

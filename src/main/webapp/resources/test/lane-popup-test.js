@@ -1,7 +1,11 @@
 /**
  * @author ceyates
  */
-YUI({ logInclude: { TestRunner: true } }).use('event-custom', 'node-event-simulate','console','test', function(Y) {
+YUI({
+    logInclude: {
+        TestRunner: true
+    }
+}).use('node-event-simulate', 'console', 'test', function(Y) {
 
     var lanePopupTestCase = new Y.Test.Case({
         name: 'Lane Popup Test Case',
@@ -27,9 +31,8 @@ YUI({ logInclude: { TestRunner: true } }).use('event-custom', 'node-event-simula
     
     Y.one('body').addClass('yui3-skin-sam');
     var yconsole = new Y.Console({
-        newestOnTop: false                   
-    });
-    yconsole.render('#log');
+        newestOnTop: false
+    }).render('#log');
     
     Y.Test.Runner.add(lanePopupTestCase);
     Y.Test.Runner.run();

@@ -62,10 +62,10 @@ YUI({ logInclude: { TestRunner: true } }).use('event-custom', 'node-event-simula
     });
     
     
-    var yconsole = new Y.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false                   
-    });
-    yconsole.render('#log');
+    }).render('#log');
  
     
     Y.Global.on('lane:ready', function() {

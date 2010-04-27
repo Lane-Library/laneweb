@@ -1,9 +1,13 @@
 /**
  * @author ceyates
  */
-(function() {
+YUI({
+    logInclude: {
+        TestRunner: true
+    }
+}).use('node-event-simulate', 'console', 'test', function(Y){
 
-    var LANETrackingTestCase = new YAHOO.tool.TestCase({
+    var trackingTestCase = new Y.Test.Case({
         name: "Lane Tracking TestCase",
         trackingData: {},
         track: function(td) {
@@ -84,8 +88,12 @@
         }
     });
     
-    new YAHOO.tool.TestLogger();
-    YAHOO.tool.TestRunner.add(LANETrackingTestCase);
-    YAHOO.tool.TestRunner.run();
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
+        newestOnTop: false
+    }).render('#log');
     
-})();
+    
+    Y.Test.Runner.add(trackingTestCase);
+    Y.Test.Runner.run();
+});

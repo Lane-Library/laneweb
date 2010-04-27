@@ -44,10 +44,10 @@ YUI({ logInclude: { TestRunner: true } }).use('console','test', function(Y) {
         }
     });
     
-    var yconsole = new Y.Console({
+    Y.one('body').addClass('yui3-skin-sam');
+    new Y.Console({
         newestOnTop: false                   
-    });
-    yconsole.render('#log');
+    }).render('#log');
  
     
     Y.Global.on('lane:searchready', function() {
