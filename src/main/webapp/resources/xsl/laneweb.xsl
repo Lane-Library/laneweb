@@ -493,12 +493,12 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- add clinicalSearch class to search form and breadcrumb elements when clinical is active tab -->
-    <xsl:template match="node()[@id='search' or @id='breadcrumb']">
+    <!-- add clinicalSearch class to search form, fieldset and laneNav elements when clinical is active tab -->
+    <xsl:template match="node()[@id='search' or @id='laneNav']|h:form[attribute::id='search']/h:fieldset">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
             <xsl:if test="$active-search-tab = 'clinical'">
-                <xsl:attribute name="class">clinicalSearch</xsl:attribute>
+                <xsl:attribute name="class">clinical</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
         </xsl:copy>
