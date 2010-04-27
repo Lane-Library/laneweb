@@ -9,3 +9,13 @@ body {
 .content {
     color:#3F3C30;
 }
+strong, em {
+    font-weight:bold;
+}
+em {
+    color:#820000;
+}
+/*.yui-ge>.first, .yui-gf>.first {
+    border-right:1px solid gray;
+    padding-right:20px;
+}*/
