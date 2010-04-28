@@ -43,26 +43,14 @@ YUI( {
 			var loadContent = function(url) {
 				url = "/././plain/bassett/raw".concat(url);
 				function successHandler(id, o, args) {
-					var contentNode, content, container, i;
-					content = new Y.Node(o.responseXML
-							.getElementsByTagName('body')[0]).get('children');
+					var content, container;
+					content = new Y.Node(o.responseText);
 					container = Y.one('#bassettContent');
-					contentNode = container.get('children');
-					for (i = 0; i < contentNode.size(); i++) {
-						container.removeChild(contentNode.item(i));
-					}
-					for (i = 0; i < content.size(); i++) {
-						container.append(content.item(i));
-					}
+					container.setContent(content);
 					registerLinksContainer(container);
-					Y.fire('lane:change');;
+					Y.fire('lane:change');
 				}
-				Y.io(url, {
-					on : {
-						success : successHandler
-					}
-				});
-
+				Y.io(url, {	on :{success : successHandler}});
 			}
 
 			var formatAjaxUrl = function(href) {
