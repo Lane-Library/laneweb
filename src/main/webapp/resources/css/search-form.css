@@ -6,33 +6,18 @@
     background-image:url(/././images/clin-search-bg.jpg);
     height:132px;
 } 
-#searchTabs, #searchTips {
-    font-size:smaller;
-}
-#searchTabs {
-    padding:11px 0 0 28px;
-}
-#searchTabs li {
-    float:left;
-    padding:0 10px;
-    background-image:none;
-}
-#searchTabs .active {
-    display:none;
-    background-position:0px -70px;
+#searchSource{
+    display:block;
+    margin-top:-1px;
+    width:140px;
 }
 #searchTips {
-    float:left;
-    padding:10px;
-}
-#searchTabs a, #searchTips a {
+    position:absolute;
+    top:83px;
+    left:180px;
     color:white;
     border-bottom:none;
     text-decoration:underline;
-}
-#searchTabs a:focus {
-/* mozilla: remove dotted border -- accessibility? */
-/* outline-style:none; */
 }
 #search fieldset {
     clear:left;
@@ -41,12 +26,14 @@
 /* IE6 needs this for layout: */
 /* _margin-top:-2px; */
 }
-#search.clinical fieldset {
-    margin:41px 0 0 184px;
-}
 #searchTerms {
+    margin-top:7px;
     width:587px;
     border:1px solid white;
+}
+#search.clinical #searchTerms {
+    margin-top:39px;
+    margin-left:158px;
 }
 #searchSubmit {
     background-color:transparent;
@@ -155,5 +142,5 @@
   }
  .inputHint {
     color:#808080;
- } 
+ }
  
