@@ -1,6 +1,5 @@
 // based on lane-eresources.js; renaming for use across articles, catalog, clinical interfaces
-YUI().use('node','yui2-history','io-base',function(Y){
-    Y.Global.on('lane:searchready', function(){
+YUI().use('lane-search', 'node','yui2-history','io-base',function(Y){
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
@@ -118,5 +117,4 @@ YUI().use('node','yui2-history','io-base',function(Y){
             this._facet.removeClass('current');
         };
     }
-});
 });

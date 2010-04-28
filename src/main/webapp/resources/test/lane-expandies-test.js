@@ -4,7 +4,7 @@
     logInclude: {
         TestRunner: true
     }
-}).use('node-event-simulate', 'console', 'test', function(Y){
+}).use('lane-expandies', 'node-event-simulate', 'console', 'test', function(Y){
 
     var expandiesTestCase = new Y.Test.Case({
         name: 'Lane Expandies TestCase',
@@ -46,7 +46,7 @@
             var notExpandy = Y.one('.not-expandy');
             notExpandy.removeClass('not-expandy');
             notExpandy.addClass('expandy');
-            LANE.core.getChangeEvent().fire();
+            Y.fire('lane:change');
             Y.Assert.isTrue(panel.hasClass('yui-acc-hidden'), 'className is ' + panel.getAttribute('className'));
         }
     });

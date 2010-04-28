@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI().use('node', 'event', 'event-custom', function(Y) {
+YUI({debug:true}).add('lane', function(Y) {
     if (typeof LANE == "undefined" || !LANE) {
         /**
          * The LANE global namespace object.  If LANE is already defined, the
@@ -71,22 +71,4 @@ YUI().use('node', 'event', 'event-custom', function(Y) {
         };
     }();
 
-    Y.publish('lane:ready', {
-        broadcast: 2,
-        fireOnce: true
-    });
-    Y.fire('lane:ready');
-});
-
-
-//add Array.indexOf to implementations that don't have it
-if (!Array.indexOf) {
-    Array.prototype.indexOf = function(obj) {
-        for (var i = 0; i < this.length; i++) {
-            if (this[i] == obj) {
-                return i;
-            }
-        }
-        return -1;
-    };
-}
+}, '1.11.0-SNAPSHOT',{requires:['node']});

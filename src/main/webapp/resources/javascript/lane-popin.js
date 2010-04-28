@@ -1,5 +1,4 @@
-YUI().use('event-custom','node',function(Y) {
-    Y.Global.on('lane:ready', function() {
+YUI().use('lane', 'event-custom','node',function(Y) {
     LANE.namespace('search.popin');
     
     // custom popin event
@@ -28,5 +27,4 @@ YUI().use('event-custom','node',function(Y) {
             }
         };
     Y.Global.on('lane:popin', onPopinHandler);
-});
 });

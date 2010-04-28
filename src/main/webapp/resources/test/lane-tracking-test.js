@@ -5,7 +5,7 @@ YUI({
     logInclude: {
         TestRunner: true
     }
-}).use('node-event-simulate', 'console', 'test', function(Y){
+}).use('lane-tracking', 'node-event-simulate', 'console', 'test', function(Y){
 
     var trackingTestCase = new Y.Test.Case({
         name: "Lane Tracking TestCase",
@@ -17,13 +17,13 @@ YUI({
             trackingData = {};
         },
         testExists: function() {
-            YAHOO.util.Assert.isObject(LANE.tracking);
+            Y.Assert.isObject(LANE.tracking);
         },
         testAddTracker: function() {
             try {
                 LANE.tracking.addTracker({});
             } catch (ex) {
-                YAHOO.util.Assert.areEqual(ex, 'tracker does not implement track()');
+                Y.Assert.areEqual(ex, 'tracker does not implement track()');
             }
             LANE.tracking.addTracker(this);
         },
@@ -34,7 +34,7 @@ YUI({
             for (i = 0; i < anchors.length; i++) {
                 event.target = anchors[i];
                 LANE.tracking.trackEvent(event);
-                YAHOO.util.Assert.areEqual(anchors[i].rel, trackingData.title);
+                Y.Assert.areEqual(anchors[i].rel, trackingData.title);
             }
         },
         testIsTrackable: function() {
@@ -44,17 +44,17 @@ YUI({
             for (i = 0; i < anchors.length; i++) {
                 event.target = anchors[i];
                 if (anchors[i].rel == 'trackable') {
-                    YAHOO.util.Assert.isTrue(LANE.tracking.isTrackable(event));
+                    Y.Assert.isTrue(LANE.tracking.isTrackable(event));
                 } else {
-                    YAHOO.util.Assert.isFalse(LANE.tracking.isTrackable(event));
+                    Y.Assert.isFalse(LANE.tracking.isTrackable(event));
                 }
             }
             for (i = 0; i < images.length; i++) {
                 event.target = images[i];
                 if (images[i].parentNode.rel == 'trackable') {
-                    YAHOO.util.Assert.isTrue(LANE.tracking.isTrackable(event));
+                    Y.Assert.isTrue(LANE.tracking.isTrackable(event));
                 } else {
-                    YAHOO.util.Assert.isFalse(LANE.tracking.isTrackable(event));
+                    Y.Assert.isFalse(LANE.tracking.isTrackable(event));
                 }
             }
         },
@@ -64,13 +64,13 @@ YUI({
                 path: '/path',
                 title: 'title'
             });
-            YAHOO.util.Assert.areEqual('www.google.com', trackingData.host);
-            YAHOO.util.Assert.areEqual('/path', trackingData.path);
-            YAHOO.util.Assert.areEqual('title', trackingData.title);
+            Y.Assert.areEqual('www.google.com', trackingData.host);
+            Y.Assert.areEqual('/path', trackingData.path);
+            Y.Assert.areEqual('title', trackingData.title);
         },
         testExpandyIsTrackable: function() {
             var expandy = document.getElementById("testTrackExpandy").children[0];
-            YAHOO.util.Assert.isTrue(LANE.tracking.isTrackable({
+            Y.Assert.isTrue(LANE.tracking.isTrackable({
                 type: 'click',
                 target: expandy.firstChild
             }), 'event not trackable');
@@ -82,8 +82,8 @@ YUI({
                 target: expandy.firstChild
             };
             LANE.tracking.trackEvent(event);
-            YAHOO.util.Assert.areEqual('Expandy:' + expandy.firstChild.textContent, trackingData.title, 'actual:' + trackingData.title);
-            YAHOO.util.Assert.isFalse(trackingData !== undefined && trackingData.external);
+            Y.Assert.areEqual('Expandy:' + expandy.firstChild.textContent, trackingData.title, 'actual:' + trackingData.title);
+            Y.Assert.isFalse(trackingData !== undefined && trackingData.external);
             
         }
     });

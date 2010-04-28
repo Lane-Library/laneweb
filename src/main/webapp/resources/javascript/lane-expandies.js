@@ -1,5 +1,5 @@
-YUI().use('event','node', function(Y) {
-    Y.Global.on('lane:accordionready', function() {
+YUI().add('lane-expandies', function(Y){
+//YUI().use('accordionview', 'event','node', function(Y) {
         var createExpandies = function() {
             var i, j, k, items,
                 expanded, anchors, expandy,
@@ -40,5 +40,4 @@ YUI().use('event','node', function(Y) {
         };
         createExpandies();
         Y.Global.on('lane:change', createExpandies);
-    });
-});
+},'1.11.0-SNAPSHOT',{requires:['accordionview', 'event','node']});

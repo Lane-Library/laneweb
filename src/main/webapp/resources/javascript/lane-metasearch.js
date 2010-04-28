@@ -1,5 +1,4 @@
-YUI().use('node','json-parse','io-base','datatype',function(Y) {
-    Y.Global.on('lane:searchready', function() {
+YUI().use('lane-search', 'node','json-parse','io-base','datatype',function(Y) {
     	
     LANE.namespace('search.metasearch');
     LANE.search.metasearch = function() {
@@ -106,5 +105,4 @@ YUI().use('node','json-parse','io-base','datatype',function(Y) {
         LANE.search.metasearch.getResultCounts();
         LANE.search.startSearch();
     }
-});
 });

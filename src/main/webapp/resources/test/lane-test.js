@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI({ logInclude: { TestRunner: true } }).use('event-custom', 'node-event-simulate','console','test', function(Y) {
+YUI({ debug:true, filter:'debug', logInclude: { TestRunner: true } }).use('lane','event-custom', 'node-event-simulate','console','test', function(Y) {
     
     var laneTestCase = new Y.Test.Case({
         name: "Lane TestCase",
@@ -68,8 +68,6 @@ YUI({ logInclude: { TestRunner: true } }).use('event-custom', 'node-event-simula
     }).render('#log');
  
     
-    Y.Global.on('lane:ready', function() {
-        Y.Test.Runner.add(laneTestCase);
-        Y.Test.Runner.run();
-    });
+    Y.Test.Runner.add(laneTestCase);
+    Y.Test.Runner.run();
 });

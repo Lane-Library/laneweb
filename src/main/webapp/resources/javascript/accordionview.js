@@ -1,5 +1,5 @@
-
-YUI().use('event-custom', 'yui2-event','yui2-dom','yui2-animation','yui2-element', function(Y) {
+YUI().add('accordionview', function(Y) {
+//YUI().use('lane', 'event-custom', 'yui2-event','yui2-dom','yui2-animation','yui2-element', function(Y) {
 
     /**
     *
@@ -809,10 +809,8 @@ YUI().use('event-custom', 'yui2-event','yui2-dom','yui2-animation','yui2-element
             return "AccordionView " + name; 
         }
     });
-    Y.Global.on('lane:ready', function() {
+    
         LANE.namespace('expandy');
         LANE.expandy.AccordionView = AccordionView;
-        Y.publish('lane:accordionready', {broadcast: 2, fireOnce: true});
-        Y.fire('lane:accordionready');
-    });
-});
+
+}, '1.11.0-SNAPSHOT',{requires:['lane', 'event-custom', 'yui2-event','yui2-dom','yui2-animation','yui2-element']});
