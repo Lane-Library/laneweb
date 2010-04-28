@@ -9,17 +9,16 @@ YUI().add('lane-search', function(Y) {
             source,
             searchIndicator = Y.one('#searchIndicator'),
             initialText,
-            tabs = Y.all('#searchTabs > li'),
             i,
             picoInputs = ['p', 'i', 'c', 'o'],
             setInitialText = function() {
                 var oldInitialText = initialText;
-                initialText = Y.one('#searchTabs').one('.active').get('title');
+                    initialText = Y.one('#searchSource').one('option').get('title');
                 if (!searchTermsInput.get('value') || searchTermsInput.get('value') == oldInitialText) {
                     searchTermsInput.set('value', initialText);
                     searchTermsInput.set('title', initialText);
                 }
-            };
+        };
         
         setInitialText();
         form.on('submit', function(submitEvent) {
@@ -30,18 +29,24 @@ YUI().add('lane-search', function(Y) {
                 alert(e);
             }
         });
-        for (i = 0; i < tabs.size(); i++) {
-            Y.on('click', function(event) {
-                event.preventDefault();
-                LANE.search.setActiveTab(this);
-            }, tabs.item(i));
-        }
-        Y.publish("lane:searchTabChange",{broadcast:2});
-        Y.on('lane:searchTabChange', function(elm) {
-            tabs.removeClass('active');
-            elm.addClass('active');
-            LANE.search.setSearchSource(elm.get('id') + '-all');
-            setInitialText();
+            searchSourceInput.on('change', function(e) {
+            	var options, selectedOption, nav;
+                if (searchTermsInput.get('value') && searchTermsInput.get('value') != searchTermsInput.get('title')) {
+                    LANE.search.submitSearch();
+                } else {
+                    nav = Y.one('#laneNav');
+                	options = e.currentTarget.all('option');
+                	selectedOption = options.item(e.currentTarget.get('selectedIndex'));
+                    searchTermsInput.set('value', selectedOption.get('title'));
+                    searchTermsInput.set('title', selectedOption.get('title'));
+                    if (selectedOption.get('value') == 'clinical-all') {
+                        form.addClass('clinical');
+                        nav.addClass('clinical');
+                    } else {
+                        form.removeClass('clinical');
+                        nav.removeClass('clinical');
+                    }
+                }
         });
         
         return {
