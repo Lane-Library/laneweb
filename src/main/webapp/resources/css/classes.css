@@ -43,11 +43,7 @@
     width:53%;
     font-size:12px;
 }
-.new {
-    color:#cc0000;
-    text-transform:uppercase;
-}
-.date, .what {
+.what {
     font-weight:bold;
 }
 .author {
@@ -63,4 +59,7 @@
 .details p {
     font-size:12px;
     line-height:18px;
+}
+.details img {
+    float:right;
 }
