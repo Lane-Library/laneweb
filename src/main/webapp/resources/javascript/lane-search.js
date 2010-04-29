@@ -1,18 +1,16 @@
 YUI().add('lane-search', function(Y) {
-    LANE.search = function() {
+    LANE.search = LANE.search || function() {
         var searching = false, //searching state
             searchString,
             encodedString,
             form = Y.one('#search'), //the form Element
             searchTermsInput = Y.one('#searchTerms'),
             searchSourceSelect = Y.one('#searchSource'),
-            searchOptions,
-            selectedOption,
+            searchOptions = searchSourceSelect.all('option'),
+            selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
             source,
             searchIndicator = Y.one('#searchIndicator'),
             initialText,
-            i,
-            picoInputs = ['p', 'i', 'c', 'o'],
             setInitialText = function() {
                 var oldInitialText = initialText;
                     initialText = selectedOption.get('title');
@@ -21,8 +19,6 @@ YUI().add('lane-search', function(Y) {
                     searchTermsInput.set('title', initialText);
                 }
         	};
-        searchOptions = searchSourceSelect.all('option');
-        selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
         setInitialText();
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
@@ -32,23 +28,19 @@ YUI().add('lane-search', function(Y) {
                 alert(e);
             }
         });
-        searchSourceSelect.on('change', function(e) {
-        	var nav = Y.one('#laneNav');
+        Y.publish("lane:searchSourceChange",{broadcast:2});
+        Y.on('lane:searchSourceChange', function() {
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
+            searchTermsInput.set('value', selectedOption.get('title'));
+            searchTermsInput.set('title', selectedOption.get('title'));
+        });
+        searchSourceSelect.on('change', function(e) {
             if (searchTermsInput.get('value') && searchTermsInput.get('value') != searchTermsInput.get('title')) {
                 LANE.search.submitSearch();
             } else {
-                searchTermsInput.set('value', selectedOption.get('title'));
-                searchTermsInput.set('title', selectedOption.get('title'));
-                if (selectedOption.get('value') == 'clinical-all') {
-                    form.addClass('clinical');
-                    nav.addClass('clinical');
-                } else {
-                    form.removeClass('clinical');
-                    nav.removeClass('clinical');
-                }
+                Y.fire('lane:searchSourceChange', this.get('value'));
             }
-        });
+        }); 
         
         return {
             startSearch: function() {
@@ -102,21 +94,13 @@ YUI().add('lane-search', function(Y) {
                         }
                     }
                     if (source === undefined) {
-                    	source = searchOptions.item(searchSourceSelect.selectedIndex).value;
+                        source = searchSourceSelect.get('value');
                     }
                     if (source === undefined) {
                         source = '';
                     }
                 }
                 return source;
-            },
-            setSearchSource: function(type) {
-                for (var i = 0; i < searchOptions.size(); i++) {
-                    if (searchOptions.item(i).value == type) {
-                    	searchSourceSelect.selectedIndex = i;
-                        break;
-                    }
-                }
             },
             submitSearch: function() {
                 if (!searchTermsInput.get('value') || searchTermsInput.get('value') == initialText) {
