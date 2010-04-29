@@ -12,7 +12,7 @@ YUI().use('yui2-autocomplete','yui2-datasource','yui2-connection','node', functi
                 var inputElm, searchForm;
                 inputElm = aArgs[0].getInputEl();
                 searchForm = new Y.Node(inputElm).ancestor('form');
-                LANE.search.startSearch();
+                LANE.search.Search.startSearch();
                 Y.Node.getDOMNode(searchForm).submit();
             },
             initialize = function(input) {
@@ -62,7 +62,7 @@ YUI().use('yui2-autocomplete','yui2-datasource','yui2-connection','node', functi
                 if (Y.UA.gecko) {
                     Y.on('keyup', function(event) {
                         if (event.keyCode == '13') {
-                            LANE.search.startSearch();
+                            LANE.search.Search.startSearch();
                             searchForm.submit();
                         }
                     }, searchTermsElm);

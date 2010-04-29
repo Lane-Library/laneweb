@@ -37,24 +37,13 @@ YUI({ logInclude: { TestRunner: true } }).use('lane-search','node-event-simulate
 			this.searchSource.set('selectedIndex',0);
         },
     
-        testStartSearch: function() {
+        testStartStopSearch: function() {
             Y.Assert.areEqual('hidden', this.searchIndicator.getStyle('visibility'));
-            Y.Assert.isFalse(this.search.isSearching());
             this.searchTermsInput.set('value', 'hello');
             this.search.startSearch();
-            Y.Assert.isTrue(this.search.isSearching());
             Y.Assert.areEqual('visible', this.searchIndicator.getStyle('visibility'));
             this.search.stopSearch();
             Y.Assert.areEqual('hidden', this.searchIndicator.getStyle('visibility'));
-        },
-        testIsSearching: function() {
-            this.searchTermsInput.set('value','foo');
-            Y.Assert.isFalse(this.search.isSearching());
-            this.search.startSearch();
-            Y.Assert.isTrue(this.search.isSearching());
-            this.search.stopSearch();
-            Y.Assert.isFalse(this.search.isSearching());
-            
         },
         testSubmitSearchNoQuery: function() {
             try {
@@ -66,8 +55,8 @@ YUI({ logInclude: { TestRunner: true } }).use('lane-search','node-event-simulate
         },
 		testSourceChangeEvent: function() {
 			var theSearchSource = this.searchSource;
-			Y.Global.on('lane:searchSourceChange', function(value) {
-				Y.Assert.areEqual(value, theSearchSource.get('value'));
+			Y.Global.on('lane:searchSourceChange', function(search) {
+				Y.Assert.areEqual(search.getSearchSource(), theSearchSource.get('value'));
 			});
 			this.searchSource.set('selectedIndex',1);
 			this.searchSource.simulate('change');

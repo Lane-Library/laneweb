@@ -41,8 +41,8 @@ YUI().use('node','event','yui2-container','yui2-history', function(Y) {
         picofield = Y.one('#clinicalP'),
         form = Y.one('#search'),
         nav = Y.one('#laneNav'),
-        togglePico = function(value) {
-            if (value == 'clinical-all') {
+        togglePico = function(search) {
+            if (search.getSearchSource() == 'clinical-all') {
                 form.addClass('clinical');
                 nav.addClass('clinical');
             } else {

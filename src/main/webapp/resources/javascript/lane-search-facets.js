@@ -82,7 +82,7 @@ YUI().use('lane-search', 'node','yui2-history','io-base',function(Y){
             var i;
             if (this._state == 'initialized') {
                 this.getContent();
-                LANE.search.startSearch();
+                LANE.search.Search.startSearch();
             } else if (this._state == 'searching') {
                 alert('search in progress');
             } else {

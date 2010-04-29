@@ -68,57 +68,60 @@ YUI().add('lane-search', function(Y) {
                 var initialText = selectedOption.get('title');
                 searchTermsInput.set('value', initialText);
                 searchTermsInput.set('title', initialText);
-        	};
-            if (!searchTermsPresent()) {
-                setInitialText();
-            }
+        	},
+            search = {
+                startSearch: function() {
+                    searching = true;
+                    searchIndicator.setStyle('visibility', 'visible');
+                },
+                stopSearch: function() {
+                    searching = false;
+                    searchIndicator.setStyle('visibility', 'hidden');
+                },
+                getSearchSource: function() {
+                    return searchSourceSelect.get('value');
+                },
+                getSearchTerms: function() {
+                    var value = searchTermsInput.get('value');
+                    return value == searchTermsInput.get('title') ? '' : value;
+                },
+                setSearchTerms: function(searchString) {
+                    searchTermsInput.set('value', searchString);
+                },
+                submitSearch: function() {
+                    if (!searchTermsPresent()) {
+                        throw ('nothing to search for');
+                    }
+                    LANE.search.Search.startSearch();
+                    Y.fire('lane:beforeSearchSubmit', search);
+                    form.submit();
+                }
+            };
+        if (!searchTermsPresent()) {
+            setInitialText();
+        }
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
             try {
-                LANE.search.submitSearch();
+                LANE.search.Search.submitSearch();
+            //TODO: popup instead of alert
             } catch (e) {
                 alert(e);
             }
         });
         Y.publish("lane:searchSourceChange",{broadcast:2});
+        Y.publish('lane:beforeSearchSubmit', {broadcast:2});
         Y.on('lane:searchSourceChange', function() {
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
 			setInitialText();
         });
         searchSourceSelect.on('change', function(e) {
             if (searchTermsPresent()) {
-                LANE.search.submitSearch();
+                LANE.search.Search.submitSearch();
             } else {
-                Y.fire('lane:searchSourceChange', this.get('value'));
+                Y.fire('lane:searchSourceChange', search);
             }
         }); 
-        
-        return {
-            startSearch: function() {
-                searching = true;
-                searchIndicator.setStyle('visibility', 'visible');
-            },
-            stopSearch: function() {
-                searching = false;
-                searchIndicator.setStyle('visibility', 'hidden');
-            },
-            isSearching: function() {
-                return searching;
-            },
-			getSearchTerms: function() {
-				var value = searchTermsInput.get('value');
-				return value == searchTermsInput.get('title') ? '' : value;
-			},
-			setSearchTerms: function(searchString) {
-				searchTermsInput.set('value', searchString);
-			},
-            submitSearch: function() {
-                if (!searchTermsPresent()) {
-                    throw ('nothing to search for');
-                }
-                LANE.search.startSearch();
-                form.submit();
-            }
-        };
+        return search;
     }();
 }, '1.11.0-SNAPSHOT', {requires:['lane', 'node']});

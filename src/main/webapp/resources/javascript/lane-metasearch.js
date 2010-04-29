@@ -103,6 +103,6 @@ YUI().use('lane-search', 'node','json-parse','io-base','datatype',function(Y) {
     if (Y.all('.metasearch').size() > 0 && LANE.search.Result.getEncodedSearchTerms()) {
         LANE.search.metasearch.initialize();
         LANE.search.metasearch.getResultCounts();
-        LANE.search.startSearch();
+        LANE.search.Search.startSearch();
     }
 });
