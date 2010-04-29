@@ -38,9 +38,6 @@
 
     <xsl:param name="name"/>
     
-    <xsl:param name="search-tab"/>
-    
-
     <!-- ==========================  VARIABLES  ========================== -->
     
     <!-- the root node of the requested content document -->
@@ -76,21 +73,18 @@
         <xsl:value-of select="substring-before($source,'-')"/>
     </xsl:variable>
     
-    <xsl:variable name="active-search-tab">
+    <xsl:variable name="search-form-select">
         <xsl:choose>
-            <xsl:when test="$search-tab">
-                <xsl:value-of select="$search-tab"/>
+            <xsl:when test="starts-with($path,'/portals/ethics')">all-all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/bioresearch')">bioresearch-all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals')">clinical-all</xsl:when>
+            <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
+            <xsl:when test="starts-with($path,'/info-literacy')">clinical-all</xsl:when>
+            <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
+            <xsl:when test="string-length($source-prefix) &gt; 0">
+                <xsl:value-of select="concat($source-prefix,'-all')"/>
             </xsl:when>
-            <xsl:when test="starts-with($path,'/portals/ethics')">all</xsl:when>
-            <xsl:when test="starts-with($path,'/portals/bioresearch')">bioresearch</xsl:when>
-            <xsl:when test="starts-with($path,'/portals')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/search/clinical')">clinical</xsl:when>
-            <xsl:when test="starts-with($path,'/info-literacy')">clinical</xsl:when>
-            <xsl:when test="ends-with($path,'-viaLane.html')">all</xsl:when>
-            <xsl:when test="string-length($source-prefix) &gt; 0 and ($source-prefix = 'clinical' or $source-prefix = 'bioresearch')">
-                <xsl:value-of select="$source-prefix"/>
-            </xsl:when>
-            <xsl:otherwise>all</xsl:otherwise>
+            <xsl:otherwise>all-all</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
 
@@ -151,6 +145,18 @@
         </xsl:choose>
     </xsl:template>
 
+    <!-- set the selected option of the search form -->
+    <xsl:template match="h:option[parent::h:select[@id='searchSource']]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
+            <xsl:if test="@value = $search-form-select">
+                <xsl:attribute name="selected">selected</xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    
     <xsl:template match="comment()">
         <xsl:copy-of select="."/>
     </xsl:template>
@@ -498,7 +504,7 @@
     <xsl:template match="node()[@id='search' or @id='laneNav']|h:form[attribute::id='search']/h:fieldset">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
-            <xsl:if test="$active-search-tab = 'clinical'">
+            <xsl:if test="$search-form-select = 'clinical-all'">
                 <xsl:attribute name="class">clinical</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
@@ -540,40 +546,6 @@
             </xsl:if>
             <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
-    </xsl:template>
-    
-    <!-- add class="active" to searchTabs li when it is the active tab -->
-    <xsl:template match="h:ul[attribute::id='searchTabs']/h:li[attribute::id=$active-search-tab]">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:attribute name="class">active</xsl:attribute>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <!-- set the value of the search source hidden input -->
-    <xsl:template match="h:input[attribute::id='searchSource']/attribute::value">
-        <xsl:attribute name="value">
-            <xsl:choose>
-                <xsl:when test="$source">
-                    <xsl:value-of select="$source"/>
-                </xsl:when>
-                <xsl:when test="starts-with($request-uri,'/biomed-resources/ej')">catalog-ej</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/biomed-resources/eb')">catalog-book</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/biomed-resources/db')">catalog-database</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/biomed-resources/cc')">catalog-cc</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/biomed-resources/images')">catalog-graphic</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/biomed-resources/video')">catalog-video</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/biomed-resources/software')">catalog-software</xsl:when>
-                <xsl:when test="starts-with($request-uri,'/biomed-resources/statistics')">catalog-statistics</xsl:when>
-                <xsl:when test="ends-with($request-uri,'pubmed-viaLane.html')">articles-pubmed</xsl:when>
-                <xsl:when test="ends-with($request-uri,'uptodate-viaLane.html')">articles-uptodate</xsl:when>
-                <xsl:when test="ends-with($request-uri,'webofscience-viaLane.html')">articles-sciencecitation</xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="concat($active-search-tab,'-all')"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
     </xsl:template>
     
     <!-- add class="expanded" for the expany menu for the current page -->

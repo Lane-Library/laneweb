@@ -41,7 +41,6 @@ YUI().use('lane-search', 'node','yui2-history','io-base',function(Y){
                         else{
                             result.show();
                         }
-                        LANE.search.setSearchSource(result._source);
                         event.preventDefault();
                     }, facets.item(i));
                 }

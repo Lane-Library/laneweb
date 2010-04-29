@@ -5,7 +5,9 @@ YUI().add('lane-search', function(Y) {
             encodedString,
             form = Y.one('#search'), //the form Element
             searchTermsInput = Y.one('#searchTerms'),
-            searchSourceInput = Y.one('#searchSource'),
+            searchSourceSelect = Y.one('#searchSource'),
+            searchOptions,
+            selectedOption,
             source,
             searchIndicator = Y.one('#searchIndicator'),
             initialText,
@@ -13,13 +15,14 @@ YUI().add('lane-search', function(Y) {
             picoInputs = ['p', 'i', 'c', 'o'],
             setInitialText = function() {
                 var oldInitialText = initialText;
-                    initialText = Y.one('#searchSource').one('option').get('title');
+                    initialText = selectedOption.get('title');
                 if (!searchTermsInput.get('value') || searchTermsInput.get('value') == oldInitialText) {
                     searchTermsInput.set('value', initialText);
                     searchTermsInput.set('title', initialText);
                 }
-        };
-        
+        	};
+        searchOptions = searchSourceSelect.all('option');
+        selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
         setInitialText();
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
@@ -29,24 +32,22 @@ YUI().add('lane-search', function(Y) {
                 alert(e);
             }
         });
-            searchSourceInput.on('change', function(e) {
-            	var options, selectedOption, nav;
-                if (searchTermsInput.get('value') && searchTermsInput.get('value') != searchTermsInput.get('title')) {
-                    LANE.search.submitSearch();
+        searchSourceSelect.on('change', function(e) {
+        	var nav = Y.one('#laneNav');
+            selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
+            if (searchTermsInput.get('value') && searchTermsInput.get('value') != searchTermsInput.get('title')) {
+                LANE.search.submitSearch();
+            } else {
+                searchTermsInput.set('value', selectedOption.get('title'));
+                searchTermsInput.set('title', selectedOption.get('title'));
+                if (selectedOption.get('value') == 'clinical-all') {
+                    form.addClass('clinical');
+                    nav.addClass('clinical');
                 } else {
-                    nav = Y.one('#laneNav');
-                	options = e.currentTarget.all('option');
-                	selectedOption = options.item(e.currentTarget.get('selectedIndex'));
-                    searchTermsInput.set('value', selectedOption.get('title'));
-                    searchTermsInput.set('title', selectedOption.get('title'));
-                    if (selectedOption.get('value') == 'clinical-all') {
-                        form.addClass('clinical');
-                        nav.addClass('clinical');
-                    } else {
-                        form.removeClass('clinical');
-                        nav.removeClass('clinical');
-                    }
+                    form.removeClass('clinical');
+                    nav.removeClass('clinical');
                 }
+            }
         });
         
         return {
@@ -101,7 +102,7 @@ YUI().add('lane-search', function(Y) {
                         }
                     }
                     if (source === undefined) {
-                        source = searchSourceInput.value;
+                    	source = searchOptions.item(searchSourceSelect.selectedIndex).value;
                     }
                     if (source === undefined) {
                         source = '';
@@ -109,17 +110,11 @@ YUI().add('lane-search', function(Y) {
                 }
                 return source;
             },
-            setSearchSource: function(source) {
-                searchSourceInput.set('value', source);
-            },
-            setActiveTab: function(elm) {
-                if (!elm.hasClass('active')) {
-                    // if this is not already active tab and there's a form value, submit search
-                    if (searchTermsInput.get('value') && searchTermsInput.get('value') != initialText) {
-                    	LANE.search.setSearchSource(elm.get('id') + '-all');
-                        LANE.search.submitSearch();
-                    } else {
-                        Y.fire('lane:searchTabChange', elm);
+            setSearchSource: function(type) {
+                for (var i = 0; i < searchOptions.size(); i++) {
+                    if (searchOptions.item(i).value == type) {
+                    	searchSourceSelect.selectedIndex = i;
+                        break;
                     }
                 }
             },

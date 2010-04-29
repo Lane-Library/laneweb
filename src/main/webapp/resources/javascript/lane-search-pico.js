@@ -38,19 +38,8 @@ YUI().use('node','event','yui2-container','yui2-history', function(Y) {
             trackingObject.path = item[0];
             LANE.tracking.track(trackingObject);
         },
-        picofield = Y.one('#clinicalP'),
-        togglePico = function(tab) {
-            var form = Y.one('#search'),
-                nav = Y.one('#laneNav');
-            if (tab.get('id') == 'clinical') {
-                form.addClass('clinical');
-                nav.addClass('clinical');
-            } else {
-                form.removeClass('clinical');
-                nav.removeClass('clinical');
-            }
-        };
-    Y.Global.on('lane:searchTabChange', togglePico);
+        picofield = Y.one('#clinicalP');
+        
     if (picofield) {
         // change text of default input values
         // add event listeners to p,i,c,o inputs for building search terms
