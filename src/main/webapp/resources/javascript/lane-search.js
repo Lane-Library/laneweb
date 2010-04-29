@@ -1,25 +1,24 @@
 YUI().add('lane-search', function(Y) {
     LANE.search = LANE.search || function() {
         var searching = false, //searching state
-            searchString,
-            encodedString,
             form = Y.one('#search'), //the form Element
             searchTermsInput = Y.one('#searchTerms'),
             searchSourceSelect = Y.one('#searchSource'),
             searchOptions = searchSourceSelect.all('option'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
-            source,
             searchIndicator = Y.one('#searchIndicator'),
-            initialText,
+            searchString,
+            encodedSearchString,
+            source,
+			searchTermsPresent = function() {
+				var value = searchTermsInput.get('value');
+				return (value && value != searchTermsInput.get('title'));
+			},
             setInitialText = function() {
-                var oldInitialText = initialText;
-                    initialText = selectedOption.get('title');
-                if (!searchTermsInput.get('value') || searchTermsInput.get('value') == oldInitialText) {
-                    searchTermsInput.set('value', initialText);
-                    searchTermsInput.set('title', initialText);
-                }
+                var initialText = selectedOption.get('title');
+                searchTermsInput.set('value', initialText);
+                searchTermsInput.set('title', initialText);
         	};
-        setInitialText();
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
             try {
@@ -31,11 +30,10 @@ YUI().add('lane-search', function(Y) {
         Y.publish("lane:searchSourceChange",{broadcast:2});
         Y.on('lane:searchSourceChange', function() {
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
-            searchTermsInput.set('value', selectedOption.get('title'));
-            searchTermsInput.set('title', selectedOption.get('title'));
+			setInitialText();
         });
         searchSourceSelect.on('change', function(e) {
-            if (searchTermsInput.get('value') && searchTermsInput.get('value') != searchTermsInput.get('title')) {
+            if (searchTermsPresent()) {
                 LANE.search.submitSearch();
             } else {
                 Y.fire('lane:searchSourceChange', this.get('value'));
@@ -56,30 +54,37 @@ YUI().add('lane-search', function(Y) {
             },
             getSearchString: function() {
                 if (searchString === undefined) {
-                    if (encodedString === undefined) {
+                    if (encodedSearchString === undefined) {
                         this.getEncodedSearchString();
                     }
-                    searchString = decodeURIComponent(encodedString);
+                    searchString = decodeURIComponent(encodedSearchString);
                 }
                 return searchString;
             },
+			getSearchTerms: function() {
+				var value = searchTermsInput.get('value');
+				return value == searchTermsInput.get('title') ? '' : value;
+			},
+			setSearchTerms: function(searchString) {
+				searchTermsInput.set('value', searchString);
+			},
             getEncodedSearchString: function() {
                 var query, vars, pair, i;
-                if (encodedString === undefined) {
+                if (encodedSearchString === undefined) {
                     query = location.search.substring(1);
                     vars = query.split('&');
                     for (i = 0; i < vars.length; i++) {
                         pair = vars[i].split('=');
                         if (pair[0] == 'q') {
-                            encodedString = pair[1];
+                            encodedSearchString = pair[1];
                             break;
                         }
                     }
-                    if (encodedString === undefined) {
-                        encodedString = '';
+                    if (encodedSearchString === undefined) {
+                        encodedSearchString = '';
                     }
                 }
-                return encodedString;
+                return encodedSearchString;
             },
             getSearchSource: function() {
                 var query, vars, pair, i;
@@ -94,16 +99,13 @@ YUI().add('lane-search', function(Y) {
                         }
                     }
                     if (source === undefined) {
-                        source = searchSourceSelect.get('value');
-                    }
-                    if (source === undefined) {
                         source = '';
                     }
                 }
                 return source;
             },
             submitSearch: function() {
-                if (!searchTermsInput.get('value') || searchTermsInput.get('value') == initialText) {
+                if (!searchTermsPresent()) {
                     throw ('nothing to search for');
                 }
                 LANE.search.startSearch();
