@@ -56,9 +56,9 @@ YUI().use('lane-search', 'node','yui2-history','io-base',function(Y){
         this._state = 'initialized';
         this._callback = {
             on: {
-                success: function(id, o){
+                success: function(id, o, arguments){
                     var result, bodyNodes, content, i;
-                    result = o.argument.result;
+                    result = arguments.result;
                     bodyNodes = new Y.Node(o.responseXML.getElementsByTagName('body')[0]).get('children');
                     result.setContent(bodyNodes);
                     LANE.search.facets.getCurrentResult().hide();
@@ -69,7 +69,7 @@ YUI().use('lane-search', 'node','yui2-history','io-base',function(Y){
                     //TODO: use window.location to set page to href of facet
                 }
             },
-            argument: {
+            arguments: {
                 result: this
             }
         };
