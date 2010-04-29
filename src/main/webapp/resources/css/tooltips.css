@@ -1,12 +1,13 @@
-.yui-tt {
+.yui3-tooltip-content {
+    padding:.5em;
+}
+.yui3-tooltip {
+    position:absolute;
     border:1px solid #CCC;
     background-color:#F2F3ED;
     font-size:90%;
     text-align:left;
 }
-.yui-tt .bd {
-    padding:.5em;
-}
-.yui-tt strong {
-    font-weight:bold;
+.yui3-tooltip-hidden {
+    visibility:hidden;
 }

@@ -4,7 +4,7 @@
     logInclude: {
         TestRunner: true
     }
-}).use('lane-expandies', 'node-event-simulate', 'console', 'test', function(Y){
+}).use('accordionview', 'node-event-simulate', 'console', 'test', function(Y){
 
     var expandiesTestCase = new Y.Test.Case({
         name: 'Lane Expandies TestCase',

@@ -10,17 +10,17 @@ YUI({
     var tooltipTestCase = new Y.Test.Case({
 		name: 'Lane Tooltip Test Case',
 		testTooltipPresent: function() {
-            YAHOO.util.Assert.isTrue(YAHOO.lang.isObject(document.getElementById('a-yuitt')));
+            Y.Assert.isTrue(Y.Lang.isObject(Y.one('#a-yuitt')));
 		},
         testSimpleTooltipPresent: function() {
-            YAHOO.util.Assert.isTrue(YAHOO.lang.isObject(document.getElementById('simpleTT-yui')));
+            Y.Assert.isTrue(Y.Lang.isObject(Y.one('#simpleTT-yui')));
         },
         testRemoveAndFireEvent: function() {
-            var aTooltip = document.getElementById('aTooltip');
-            var tooltips = aTooltip.parentNode;
+            var aTooltip = Y.one('#aTooltip');
+            var tooltips = aTooltip.get('parent');
             tooltips.removeChild(aTooltip);
-            LANE.core.getChangeEvent().fire();
-            YAHOO.util.Assert.isFalse(YAHOO.lang.isObject(document.getElementById('a-yuitt')));
+            Y.fire('lane:change');
+            Y.isFalse(Y.isObject(Y.one('#a-yuitt')));
         }
 	});
     
