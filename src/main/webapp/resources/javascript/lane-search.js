@@ -69,6 +69,9 @@ YUI().add('lane-search', function(Y) {
                 searchTermsInput.set('value', initialText);
                 searchTermsInput.set('title', initialText);
         	};
+            if (!searchTermsPresent()) {
+                setInitialText();
+            }
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
             try {
