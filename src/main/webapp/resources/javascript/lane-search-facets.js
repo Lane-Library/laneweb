@@ -52,7 +52,7 @@ YUI().use('lane-search', 'node','yui2-history','io-base',function(Y){
         this._source = source;
         this._facet = facet;
         this._container = container;
-        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + LANE.search.getEncodedSearchString();
+        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + LANE.search.Result.getEncodedSearchTerms();
         this._state = 'initialized';
         this._callback = {
             on: {
@@ -92,7 +92,7 @@ YUI().use('lane-search', 'node','yui2-history','io-base',function(Y){
 				for(i = 0; i < this._content.size(); i++) {
 					this._container.append(this._content.item(i));
 				}
-                LANE.search.stopSearch();
+                LANE.search.Search.stopSearch();
                 Y.fire('lane:change');;
             }
         };

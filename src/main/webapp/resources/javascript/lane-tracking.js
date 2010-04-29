@@ -108,9 +108,9 @@ YUI().add('lane-tracking',function(Y) {
                         path = '/' + path;
                     }
                     title = getTrackedTitle(node);
-                    if (LANE.search && LANE.search.getSearchString()) {
-                        searchTerms = LANE.search.getSearchString();
-                        searchSource = LANE.search.getSearchSource();
+                    if (LANE.search && LANE.search.Result.getSearchTerms()) {
+                        searchTerms = LANE.search.Result.getSearchTerms();
+                        searchSource = LANE.search.Result.getSearchSource();
                     }
                 return {
                     host: host,

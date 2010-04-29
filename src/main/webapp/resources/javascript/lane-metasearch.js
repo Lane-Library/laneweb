@@ -8,7 +8,7 @@ YUI().use('lane-search', 'node','json-parse','io-base','datatype',function(Y) {
             uberEngines = ['cro_', 'mdc_', 'ovid-'], // engines with multiple resources
             startTime,
             getSearchUrl = function() {
-                var i, y, searchUrl = '/././apps/search/json?q=' + LANE.search.getEncodedSearchString();
+                var i, y, searchUrl = '/././apps/search/json?q=' + LANE.search.Result.getEncodedSearchTerms();
                 for (y = 0; y < searchables.length; y++) {
                     var add = true;
                     for (i = 0; i < uberEngines.length; i++) {
@@ -90,7 +90,7 @@ YUI().use('lane-search', 'node','json-parse','io-base','datatype',function(Y) {
                                 }
                                 searchRequests.push(setTimeout(LANE.search.metasearch.getResultCounts, sleepingTime));
                             } else {
-                                LANE.search.stopSearch();
+                                LANE.search.Search.stopSearch();
                             }
                         }// end request success definition
                     }//end on
@@ -100,7 +100,7 @@ YUI().use('lane-search', 'node','json-parse','io-base','datatype',function(Y) {
     }();
     
     // check for presence of search term and metasearch classNames
-    if (Y.all('.metasearch').size() > 0 && LANE.search.getEncodedSearchString()) {
+    if (Y.all('.metasearch').size() > 0 && LANE.search.Result.getEncodedSearchTerms()) {
         LANE.search.metasearch.initialize();
         LANE.search.metasearch.getResultCounts();
         LANE.search.startSearch();

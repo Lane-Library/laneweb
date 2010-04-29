@@ -1,5 +1,58 @@
 YUI().add('lane-search', function(Y) {
-    LANE.search = LANE.search || function() {
+    LANE.namespace('search');
+    LANE.search.Result = LANE.search.Result || function() {
+        var searchString,
+            encodedSearchString,
+            source;
+        return {
+            getSearchTerms: function() {
+                if (searchString === undefined) {
+                    if (encodedSearchString === undefined) {
+                        this.getEncodedSearchTerms();
+                    }
+                    searchString = decodeURIComponent(encodedSearchString).replace('+',' ');
+                }
+                return searchString;
+            },
+            getEncodedSearchTerms: function() {
+                var query, vars, pair, i;
+                if (encodedSearchString === undefined) {
+                    query = location.search.substring(1);
+                    vars = query.split('&');
+                    for (i = 0; i < vars.length; i++) {
+                        pair = vars[i].split('=');
+                        if (pair[0] == 'q') {
+                            encodedSearchString = pair[1];
+                            break;
+                        }
+                    }
+                    if (encodedSearchString === undefined) {
+                        encodedSearchString = '';
+                    }
+                }
+                return encodedSearchString;
+            },
+            getSearchSource: function() {
+                var query, vars, pair, i;
+                if (source === undefined) {
+                    query = location.search.substring(1);
+                    vars = query.split('&');
+                    for (i = 0; i < vars.length; i++) {
+                        pair = vars[i].split('=');
+                        if (pair[0] == 'source') {
+                            source = pair[1];
+                            break;
+                        }
+                    }
+                    if (source === undefined) {
+                        source = '';
+                    }
+                }
+                return source;
+            }
+        };
+    }();
+    LANE.search.Search = LANE.search.Search || function() {
         var searching = false, //searching state
             form = Y.one('#search'), //the form Element
             searchTermsInput = Y.one('#searchTerms'),
@@ -7,9 +60,6 @@ YUI().add('lane-search', function(Y) {
             searchOptions = searchSourceSelect.all('option'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
             searchIndicator = Y.one('#searchIndicator'),
-            searchString,
-            encodedSearchString,
-            source,
 			searchTermsPresent = function() {
 				var value = searchTermsInput.get('value');
 				return (value && value != searchTermsInput.get('title'));
@@ -52,15 +102,6 @@ YUI().add('lane-search', function(Y) {
             isSearching: function() {
                 return searching;
             },
-            getSearchString: function() {
-                if (searchString === undefined) {
-                    if (encodedSearchString === undefined) {
-                        this.getEncodedSearchString();
-                    }
-                    searchString = decodeURIComponent(encodedSearchString);
-                }
-                return searchString;
-            },
 			getSearchTerms: function() {
 				var value = searchTermsInput.get('value');
 				return value == searchTermsInput.get('title') ? '' : value;
@@ -68,42 +109,6 @@ YUI().add('lane-search', function(Y) {
 			setSearchTerms: function(searchString) {
 				searchTermsInput.set('value', searchString);
 			},
-            getEncodedSearchString: function() {
-                var query, vars, pair, i;
-                if (encodedSearchString === undefined) {
-                    query = location.search.substring(1);
-                    vars = query.split('&');
-                    for (i = 0; i < vars.length; i++) {
-                        pair = vars[i].split('=');
-                        if (pair[0] == 'q') {
-                            encodedSearchString = pair[1];
-                            break;
-                        }
-                    }
-                    if (encodedSearchString === undefined) {
-                        encodedSearchString = '';
-                    }
-                }
-                return encodedSearchString;
-            },
-            getSearchSource: function() {
-                var query, vars, pair, i;
-                if (source === undefined) {
-                    query = location.search.substring(1);
-                    vars = query.split('&');
-                    for (i = 0; i < vars.length; i++) {
-                        pair = vars[i].split('=');
-                        if (pair[0] == 'source') {
-                            source = pair[1];
-                            break;
-                        }
-                    }
-                    if (source === undefined) {
-                        source = '';
-                    }
-                }
-                return source;
-            },
             submitSearch: function() {
                 if (!searchTermsPresent()) {
                     throw ('nothing to search for');

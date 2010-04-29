@@ -1,7 +1,7 @@
 //TODO: should this stop polling when all facets are complete? currently polls until search app done or timeout
 YUI().use('lane-search', 'node','io-base','json-parse',function(Y) {
     
-    var searchString = LANE.search.getEncodedSearchString(),
+    var searchString = LANE.search.Result.getEncodedSearchTerms(),
         facets = Y.all('.searchFacet'),
         startTime = new Date().getTime(),
         requestString, j,

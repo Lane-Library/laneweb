@@ -1,11 +1,31 @@
 /**
  * @author ceyates
  */
+if (!window.location.search) {
+    window.location = window.location + '?source=foo&q=bar+baz';
+}
 YUI({ logInclude: { TestRunner: true } }).use('lane-search','node-event-simulate','console','test', function(Y) {
+    
+    var resultTestCase = new Y.Test.Case({
+        
+        name: 'Lane Result Test Case',
+        result: LANE.search.Result,
+        
+        testGetSearchSource: function() {
+            Y.Assert.areEqual('foo', this.result.getSearchSource());
+        },
+        testGetSearchTerms: function() {
+            Y.Assert.areEqual('bar baz', this.result.getSearchTerms());
+        },
+        testGetEncodedSearchTerms: function() {
+            Y.Assert.areEqual('bar+baz', this.result.getEncodedSearchTerms());
+        }
+    });
     
     var searchTestCase = new Y.Test.Case({
 		
 		name: 'Lane Search Test Case',
+        search: LANE.search.Search,
 		
         searchTermsInput: Y.one('#searchTerms'),
         searchIndicator: Y.one('#searchIndicator'),
@@ -19,26 +39,26 @@ YUI({ logInclude: { TestRunner: true } }).use('lane-search','node-event-simulate
     
         testStartSearch: function() {
             Y.Assert.areEqual('hidden', this.searchIndicator.getStyle('visibility'));
-            Y.Assert.isFalse(LANE.search.isSearching());
+            Y.Assert.isFalse(this.search.isSearching());
             this.searchTermsInput.set('value', 'hello');
-            LANE.search.startSearch();
-            Y.Assert.isTrue(LANE.search.isSearching());
+            this.search.startSearch();
+            Y.Assert.isTrue(this.search.isSearching());
             Y.Assert.areEqual('visible', this.searchIndicator.getStyle('visibility'));
-            LANE.search.stopSearch();
+            this.search.stopSearch();
             Y.Assert.areEqual('hidden', this.searchIndicator.getStyle('visibility'));
         },
         testIsSearching: function() {
             this.searchTermsInput.set('value','foo');
-            Y.Assert.isFalse(LANE.search.isSearching());
-            LANE.search.startSearch();
-            Y.Assert.isTrue(LANE.search.isSearching());
-            LANE.search.stopSearch();
-            Y.Assert.isFalse(LANE.search.isSearching());
+            Y.Assert.isFalse(this.search.isSearching());
+            this.search.startSearch();
+            Y.Assert.isTrue(this.search.isSearching());
+            this.search.stopSearch();
+            Y.Assert.isFalse(this.search.isSearching());
             
         },
         testSubmitSearchNoQuery: function() {
             try {
-                LANE.search.submitSearch();
+                this.search.submitSearch();
                 Y.Assert.fail('should cause exception');
             } catch (ex) {
                 Y.Assert.areEqual('nothing to search for', ex.toString());
@@ -53,10 +73,10 @@ YUI({ logInclude: { TestRunner: true } }).use('lane-search','node-event-simulate
 			this.searchSource.simulate('change');
 		},
 		testGetSearchTerms: function() {
-			Y.Assert.areEqual('', LANE.search.getSearchTerms());
+			Y.Assert.areEqual('', this.search.getSearchTerms());
 		},
 		testSetSearchTerms: function() {
-			LANE.search.setSearchTerms('foo');
+			this.search.setSearchTerms('foo');
 			Y.Assert.areEqual('foo', this.searchTermsInput.get('value'));
 		}
     });
@@ -66,6 +86,7 @@ YUI({ logInclude: { TestRunner: true } }).use('lane-search','node-event-simulate
         newestOnTop: false                   
     }).render('#log');
     
+    Y.Test.Runner.add(resultTestCase);
     Y.Test.Runner.add(searchTestCase);
     Y.Test.Runner.run();
 });

@@ -1,18 +1,18 @@
 //TODO: this needs some cleaning up
 //check if there is a query
 YUI().use('lane-search', 'node', 'event-custom', 'io-base', 'json-parse', function(Y) {
-    if (LANE.search.getEncodedSearchString()) {
+    if (LANE.search.Result.getEncodedSearchTerms()) {
         //check if there is id=queryMapping
         var queryMapping = Y.one('#queryMapping');
         if (queryMapping) {
-            Y.io('/././apps/querymap/json?q=' + LANE.search.getEncodedSearchString(), {
+            Y.io('/././apps/querymap/json?q=' + LANE.search.Result.getEncodedSearchTerms(), {
                 on:{
                 success: function(id, o) {
                     var anchor, span, img, i;
                     LANE.search.querymap = Y.JSON.parse(o.responseText);
                     if (LANE.search.querymap.resourceMap) {
                         LANE.search.querymap.getResultCounts = function() {
-                            var url = '/././apps/search/json?q=' + LANE.search.getEncodedSearchString(), i;
+                            var url = '/././apps/search/json?q=' + LANE.search.Result.getEncodedSearchTerms(), i;
                             for (i = 0; i < LANE.search.querymap.resourceMap.resources.length; i++) {
                                 if (!LANE.search.querymap.resourceMap.resources[i].status) {
                                     url += '&r=' + LANE.search.querymap.resourceMap.resources[i].id;
@@ -63,7 +63,7 @@ YUI().use('lane-search', 'node', 'event-custom', 'io-base', 'json-parse', functi
                             // track mapped term and descriptor
                             img = document.createElement('img');
                             img.style.display = "none";
-                            img.src = "/././graphics/spacer.gif?log=QM&d=" + LANE.search.querymap.resourceMap.descriptor + "&k=" + LANE.search.getEncodedSearchString();
+                            img.src = "/././graphics/spacer.gif?log=QM&d=" + LANE.search.querymap.resourceMap.descriptor + "&k=" + LANE.search.Result.getEncodedSearchTerms();
                             queryMapping.appendChild(img);
                             
                             LANE.search.querymap.getResultCounts();

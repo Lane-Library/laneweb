@@ -1,5 +1,5 @@
 YUI().use('lane-search', 'node', 'event-custom', 'yui2-history', function(Y) {
-    var searchString = LANE.search.getEncodedSearchString(),
+    var searchString = LANE.search.Result.getEncodedSearchTerms(),
         YH = Y.YUI2.util.History,
         facetChangeHandler = function(facetId) {
             var result = Y.one('#' + facetId + 'Facet').getData('result');// result facet to make active
