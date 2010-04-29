@@ -1,16 +1,25 @@
 #browseTabs li {
-    background-image:none;
     border:1px solid #CDCFBE;
+    list-style:none outside none;
     float:left;
     font-family:Georgia;
     font-size:14px;
-    padding:10px 21px;
-    width:13.8px;
+    padding:13px;
+    width:12px;
+    margin:0;
+    text-align:center;
 }
 #browseTabs li:hover {
     border: 1px solid #820000;
     cursor:pointer;
 }
-#browseTabs .browseTabs-long {
-    width: 92px;
+#browseTabs .long {
+    width: auto;
+}
+#browseTabs:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility:hidden;
 }
