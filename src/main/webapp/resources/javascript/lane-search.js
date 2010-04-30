@@ -121,7 +121,8 @@ YUI().add('lane-search', function(Y) {
             } else {
                 Y.fire('lane:searchSourceChange', search);
             }
-        }); 
+        });
+        new LANE.suggest.Suggest(searchTermsInput);
         return search;
     }();
-}, '1.11.0-SNAPSHOT', {requires:['lane', 'node']});
+}, '1.11.0-SNAPSHOT', {requires:['lane','lane-suggest', 'node']});
