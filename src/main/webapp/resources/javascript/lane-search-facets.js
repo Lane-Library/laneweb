@@ -1,5 +1,4 @@
-// based on lane-eresources.js; renaming for use across articles, catalog, clinical interfaces
-YUI().use('lane-search', 'node','yui2-history','io-base',function(Y){
+YUI().use('lane-search', 'node','event-custom','history','io-base',function(Y){
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
@@ -9,6 +8,18 @@ YUI().use('lane-search', 'node','yui2-history','io-base',function(Y){
             },
             getCurrentResult: function(){
                 return currentResult;
+            },
+            setActiveFacet: function(facetId){
+            	var result = Y.one('#' + facetId + 'Facet').getData('result');// result facet to make active
+            	if (result !== undefined) {
+            		if (result._state == 'initialized') {
+            			result.show();
+            		} else if (result._state == 'searched') {
+            			LANE.search.facets.getCurrentResult().hide();
+            			LANE.search.facets.setCurrentResult(result);
+            			result.show();
+            		}
+            	}
             }
         };
     }();
@@ -28,24 +39,20 @@ YUI().use('lane-search', 'node','yui2-history','io-base',function(Y){
                     }
                       Y.on('click',function(event) {
 					  	var result = this.getData('result');
-                        if (Y.YUI2.util.History) {
-                            // Browser History Manager may not be initialized (Opera unsupported, hyui-history-iframe not present in content)
-							//TODO: dynamically add history tracking markup
-                            try {
-                                Y.YUI2.util.History.navigate("facet", this.getData('result').source);
-                            } catch (e) {
-                                //log somewhere ... no need to break/alert
-                            	result.show();
-                            }
-                        }
-                        else{
-                            result.show();
+                        // Browser History Manager may not be initialized (Opera unsupported, hyui-history-iframe not present in content)
+                        try {
+                            Y.History.navigate("facet", this.getData('result')._source);
+                        } catch (e) {
+                            //log somewhere ... no need to break/alert
+                        	result.show();
                         }
                         event.preventDefault();
                     }, facets.item(i));
                 }
             }
         }
+        Y.publish("lane:searchFacetsReady",{broadcast:2});
+        Y.fire("lane:searchFacetsReady");
     }
     function Result(type, source, facet, container){
         this._type = type;
