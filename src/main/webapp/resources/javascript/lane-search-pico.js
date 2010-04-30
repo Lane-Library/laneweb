@@ -4,24 +4,38 @@ YUI().use('node-base', function(Y) {
         fields = form.one('#searchFields'),
         searchInput = fields.one('#searchTerms'),
         picoFields,
-        piconOn = false;
-        togglePico = function(search) {
-            if (!piconOn && search.getSearchSource() == 'clinical-all') {
+        picoIsOn = false,
+        piconOn = function() {
+            if (!picoIsOn) {
                 if (!picoFields) {
                     picoFields = Y.Node.create(PICO);
                 }
                 form.addClass('clinical');
                 nav.addClass('clinical');
                 fields.insertBefore(picoFields, searchInput);
-                piconOn = true;
-            } else if (piconOn) {
+                picoIsOn = true;
+            }
+        },
+        picoOff = function() {
+            if (picoIsOn) {
                 fields.one('#picoFields').remove();
                 form.removeClass('clinical');
                 nav.removeClass('clinical');
-                piconOn = false;
+                picoIsOn = false;
+            }
+            
+        },
+        togglePico = function(search) {
+            if (search.getSearchSource() == 'clinical-all') {
+                piconOn();
+            } else {
+                picoOff();
             }
         };
     Y.Global.on('lane:searchSourceChange', togglePico);
+    if (Y.one('#searchSource').get('value') == 'clinical-all') {
+        picoOn();
+    }
     var PICO = '<fieldset id="picoFields">' +
                '<input name="p" class="picoInput" id="clinicalP" type="text" title="patient condition"/>' +
                '<input name="i" class="picoInput" id="clinicalI" type="text" title="intervention"/>' +

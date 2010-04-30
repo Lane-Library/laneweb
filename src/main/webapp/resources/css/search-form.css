@@ -1,39 +1,32 @@
 #search {
     background-image:url(/././images/search-bg.jpg);
-    height:102px;
+    padding-top:8px;
+    padding-left:28px;
+    height:94px;
 }
 #search.clinical {
     background-image:url(/././images/clin-search-bg.jpg);
-    height:132px;
+    height:124px;
 } 
 #searchSource{
     display:block;
-    margin-top:-1px;
     width:140px;
+    margin-bottom:6px;
 }
-#searchTips {
-    position:absolute;
-    top:83px;
-    left:180px;
-    color:white;
-    border-bottom:none;
-    text-decoration:underline;
+#picoFields {
+    margin:10px 0;
 }
-#search fieldset {
-    clear:left;
-    float:left;
-    margin:9px 0 0 28px;
-/* IE6 needs this for layout: */
-/* _margin-top:-2px; */
+#picoFields input {
+    border:1px solid white;
+    margin:0 11px;
+    width:212px;
 }
 #searchTerms {
-    margin-top:7px;
     width:587px;
     border:1px solid white;
 }
-#search.clinical #searchTerms {
-    margin-top:39px;
-    margin-left:158px;
+.clinical #searchTerms {
+    margin-left:160px;
 }
 #searchSubmit {
     background-color:transparent;
@@ -50,6 +43,14 @@
     top:78px;
     left:435px;
     z-index:1;
+}
+#searchTips {
+    position:absolute;
+    top:83px;
+    left:180px;
+    color:white;
+    border-bottom:none;
+    text-decoration:underline;
 }
 .acContainer, .acContainer div {
     display:inline;
