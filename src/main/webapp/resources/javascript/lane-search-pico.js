@@ -2,21 +2,25 @@ YUI().use('node-base', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         fields = form.one('#searchFields'),
+        searchInput = fields.one('#searchTerms'),
         picoFields,
+        piconOn = false;
         togglePico = function(search) {
-            if (search.getSearchSource() == 'clinical-all') {
+            if (!piconOn && search.getSearchSource() == 'clinical-all') {
                 if (!picoFields) {
                     picoFields = Y.Node.create(PICO);
                 }
                 form.addClass('clinical');
                 nav.addClass('clinical');
-                form.insertBefore(picoFields, fields);
-            } else {
-                form.one('#picoFields').remove();
+                fields.insertBefore(picoFields, searchInput);
+                piconOn = true;
+            } else if (piconOn) {
+                fields.one('#picoFields').remove();
                 form.removeClass('clinical');
                 nav.removeClass('clinical');
+                piconOn = false;
             }
-        }
+        };
     Y.Global.on('lane:searchSourceChange', togglePico);
     var PICO = '<fieldset id="picoFields">' +
                '<input name="p" class="picoInput" id="clinicalP" type="text" title="patient condition"/>' +
