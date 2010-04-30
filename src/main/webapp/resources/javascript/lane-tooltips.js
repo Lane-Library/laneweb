@@ -1,4 +1,4 @@
-//YUI().use('node','yui2-container',function(Y) {
+
 //    var tooltips = [],
 //        destroyTooltips = function() {
 //            while (tooltips.length > 0) {

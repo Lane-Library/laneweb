@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>lane-search-pico javascript unit tests</title>
+    </head>
+    <body>
+        <form id="search" method="get" action="">
+            <fieldset id="searchFields">
+                <select name="source" id="searchSource">
+                    <option value="option1" title="title1">Option 1</option>
+                    <option value="option2" title="title2">Option 2</option>
+                    <option value="option3" title="title3">Option 3</option>
+                </select>
+                <input name="q" id="searchTerms" type="text"/>
+                <input id="searchSubmit" type="submit" value="search"/>
+            </fieldset>
+        </form>
+        <div id="laneNav"></div>
+        <script type="text/javascript" charset="utf-8" src="http://yui.yahooapis.com/3.1.0/build/yui/yui-min.js"></script>
+        <script src="/javascript/lane-search-pico.js" type="text/javascript"></script>
+        <script src="lane-search-pico-test.js" type="text/javascript"></script>
+    </body>
+</html>
