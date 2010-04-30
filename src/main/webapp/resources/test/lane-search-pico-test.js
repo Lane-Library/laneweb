@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI().use('console', 'test', function(Y){
+YUI().use('lane-suggest','console', 'test', function(Y){
     
     Y.publish('lane:searchSourceChange',{broadcast:2});
 

@@ -1,14 +1,19 @@
-YUI().use('node-base', function(Y) {
+YUI().use('lane-suggest', 'node-base', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         fields = form.one('#searchFields'),
         searchInput = fields.one('#searchTerms'),
-        picoFields,
-        picoIsOn = false,
+        picoFields = Y.one('#picoFields'),
+        picoIsOn = picoFields && form.hasClass('clinical') && nav.hasClass('clinical'),
         picoOn = function() {
+            var i, inputs;
             if (!picoIsOn) {
                 if (!picoFields) {
                     picoFields = Y.Node.create(PICO);
+                    inputs = picoFields.all('input');
+                    for (i = 0; i < inputs.size(); i++) {
+                        new LANE.suggest.Suggest(inputs.item(i));
+                    }
                 }
                 form.addClass('clinical');
                 nav.addClass('clinical');
@@ -18,7 +23,7 @@ YUI().use('node-base', function(Y) {
         },
         picoOff = function() {
             if (picoIsOn) {
-                fields.one('#picoFields').remove();
+                picoFields.remove();
                 form.removeClass('clinical');
                 nav.removeClass('clinical');
                 picoIsOn = false;
@@ -32,6 +37,9 @@ YUI().use('node-base', function(Y) {
                 picoOff();
             }
         };
+    if (!picoIsOn && picoFields) {
+        picoFields.remove();
+    }
     Y.Global.on('lane:searchSourceChange', togglePico);
     var PICO = '<fieldset id="picoFields">' +
                '<input name="p" class="picoInput" id="clinicalP" type="text" title="patient condition"/>' +
@@ -40,7 +48,6 @@ YUI().use('node-base', function(Y) {
                '<input name="o" class="picoInput" id="clinicalO" type="text" title="outcome"/>' +
                '</fieldset>';
 });
-//YUI().use('node','event','yui2-container','yui2-history', function(Y) {
 //    // pico form functionality
 //    //  - remove default text values onfocus
 //    //  - adds auto complete mesh listener on p i c inputs
