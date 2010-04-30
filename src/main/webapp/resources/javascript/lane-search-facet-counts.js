@@ -19,7 +19,7 @@ YUI().use('lane-search', 'node','io-base','json-parse',function(Y) {
                     on: {
                         success:function(id, o) {
                             var response = Y.JSON.parse(o.responseText),
-                                hitLink, hits, sleepingTime,
+                                hitLink, hitLinkParent, hits, sleepingTime,
                                 remainingTime, searchStatus, engineStatus, facetId;
                             
                             for (j = 0; j < facets.size(); j++) {
@@ -31,8 +31,10 @@ YUI().use('lane-search', 'node','io-base','json-parse',function(Y) {
                                     engineStatus = response.results.facets[facetId].status;
                                 }
                                 if (!facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits === 0) {
-                                    hitLink.get('parentNode').addClass('inactiveFacet');
-                                    hitLink.get('parentNode').removeClass('searchableFacet');
+                                	hitLinkParent = hitLink.get('parentNode');
+                                	hitLinkParent.addClass('inactiveFacet');
+                                	hitLinkParent.removeClass('searchableFacet');
+                                	hitLinkParent.insert(Y.Node.create('<span> (0)</span>'));
                                     hitLink.set('title','no search results for '+hitLink.get('innerHTML'));
                                 }
                             }

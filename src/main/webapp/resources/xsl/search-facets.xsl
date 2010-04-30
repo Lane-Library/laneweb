@@ -107,7 +107,8 @@
                 <xsl:when test="number($hit-count) = 0 and $countFacetId != 'all'">
                     <a href="{child::node()/@href}" title="no search results for {child::node()/text()}">
                         <xsl:value-of select="child::node()/text()"/>
-                    </a>
+                    </a> 
+                    <span> (0)</span>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="child::node()" />
