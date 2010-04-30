@@ -33,9 +33,6 @@ YUI().use('node-base', function(Y) {
             }
         };
     Y.Global.on('lane:searchSourceChange', togglePico);
-    if (Y.one('#searchSource').get('value') == 'clinical-all') {
-        picoOn();
-    }
     var PICO = '<fieldset id="picoFields">' +
                '<input name="p" class="picoInput" id="clinicalP" type="text" title="patient condition"/>' +
                '<input name="i" class="picoInput" id="clinicalI" type="text" title="intervention"/>' +
