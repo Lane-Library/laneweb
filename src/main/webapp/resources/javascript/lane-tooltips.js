@@ -498,36 +498,55 @@ YUI().use("event-mouseenter", "widget", "widget-position", "widget-stack", funct
         }
     });
     
-    var tt;
+    var tt,
     
-    var createTooltips = function() {
-        
-    var tt = new Tooltip({
-        triggerNodes:"a",
-        shim:false,
-        zIndex:2
-    });
-    tt.render();
-
-    tt.on("triggerEnter", function(e) {
-        var width, tooltip, content, node = e.node;
-        if (node && node.get("id")) {
-            tooltip = Y.one('#' + node.get('id') + 'Tooltip');
-            if (tooltip) {
-                content = tooltip.get('innerHTML');
-                width = tooltip.getStyle('width');
-                if (!width) {
-                    width = content.length > 500 ? '60%' : '25%';
+    //tooltip ends up having body with if not specified.
+        bodyWidth = Y.one('body').getStyle('width');
+    
+        createTooltips = function() {
+        var tooltipTriggerIds = '',
+            tooltipContainer, tooltipId, i, j,
+            tooltipContainerNodeList = Y.all('.tooltips');
+        tt = undefined;
+        for (i = 0; i < tooltipContainerNodeList.size(); i++) {
+            tooltipContainer = tooltipContainerNodeList.item(i).get('childNodes');
+            for (j = 0; j < tooltipContainer.size(); j++) {
+                if (tooltipContainer.item(j).get('nodeType') == 1) {
+                    tooltipId = tooltipContainer.item(j).get('id').replace(/Tooltip$/, '');
+                    if (tooltipTriggerIds) {
+                        tooltipTriggerIds += ', ';
+                    }
+                    tooltipTriggerIds += '#' + tooltipId;
                 }
-                this.set('width', tooltip.getStyle('width'));
-                this.setTriggerContent(content);
             }
         }
-    });
+        
+        if (tooltipTriggerIds) {
+            tt = new Tooltip({
+                content: {},
+                triggerNodes: tooltipTriggerIds,
+                shim: false,
+                zIndex: 2,
+                autoHideDelay: 60000
+            });
+            tt.render();
+            
+            tt.on("triggerEnter", function(e) {
+                var width, tooltip, content, node = e.node;
+                if (node && node.get("id")) {
+                    tooltip = Y.one('#' + node.get('id') + 'Tooltip');
+                    if (tooltip && tooltip.get('innerHTML')) {
+                        this.setTriggerContent(tooltip.get('innerHTML'));
+                    }
+                }
+            });
+        }
     };
     Y.Global.on('lane:change', function() {
+        if (tt) {
            tt.destructor();
-           createTooltips(); 
+        }
+        createTooltips(); 
     });
     
     createTooltips();
