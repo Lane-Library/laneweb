@@ -5,7 +5,7 @@ YUI().use('node-base', function(Y) {
         searchInput = fields.one('#searchTerms'),
         picoFields,
         picoIsOn = false,
-        piconOn = function() {
+        picoOn = function() {
             if (!picoIsOn) {
                 if (!picoFields) {
                     picoFields = Y.Node.create(PICO);
@@ -27,7 +27,7 @@ YUI().use('node-base', function(Y) {
         },
         togglePico = function(search) {
             if (search.getSearchSource() == 'clinical-all') {
-                piconOn();
+                picoOn();
             } else {
                 picoOff();
             }
