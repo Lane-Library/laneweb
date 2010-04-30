@@ -50,6 +50,12 @@
     font-weight:normal;
     font-size:11px;
 }
+.yui3-js-enabled .details {
+    display:none;
+}
+.yui3-js-enabled .details.yui-acc-content {
+    display:block;
+}
 .details {
     background-color:white;
     border:16px solid #DBD2B3;
