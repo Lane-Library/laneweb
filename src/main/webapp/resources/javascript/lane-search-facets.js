@@ -1,4 +1,4 @@
-YUI().use('lane-search', 'node','event-custom','history','io-base',function(Y){
+YUI().add('lane-search-facets', function(Y) {
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
@@ -51,8 +51,6 @@ YUI().use('lane-search', 'node','event-custom','history','io-base',function(Y){
                 }
             }
         }
-        Y.publish("lane:searchFacetsReady",{broadcast:2});
-        Y.fire("lane:searchFacetsReady");
     }
     function Result(type, source, facet, container){
         this._type = type;
@@ -66,6 +64,7 @@ YUI().use('lane-search', 'node','event-custom','history','io-base',function(Y){
                 success: function(id, o, arguments){
                     var result, bodyNodes, content, i;
                     result = arguments.result;
+                    //FIXME: doesn't work with webkit (and ie?) ... back to importNode ?
                     bodyNodes = new Y.Node(o.responseXML.getElementsByTagName('body')[0]).get('children');
                     result.setContent(bodyNodes);
                     LANE.search.facets.getCurrentResult().hide();
@@ -123,4 +122,4 @@ YUI().use('lane-search', 'node','event-custom','history','io-base',function(Y){
             this._facet.removeClass('current');
         };
     }
-});
+}, '1.11.0-SNAPSHOT', {requires:['lane-search','node','event-custom','history','io-base']});

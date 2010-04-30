@@ -1,4 +1,4 @@
-YUI().use('lane-search', 'node', 'event-custom', 'history', function(Y) {
+YUI().use('lane-search', 'lane-search-facets', 'node', 'event-custom', 'history', function(Y) {
 	var searchString = LANE.search.Result.getEncodedSearchTerms(),
 	facetNodes = Y.one('#searchFacets'),
 	initializeHistory = function() {
@@ -13,6 +13,6 @@ YUI().use('lane-search', 'node', 'event-custom', 'history', function(Y) {
 	if (searchString && facetNodes) {
 		Y.one('body').insert(Y.Node.create('<iframe id="yui-history-iframe" src="/graphics/spacer.gif"></iframe>'),0);
 		Y.one('body').insert(Y.Node.create('<input id="yui-history-field" type="hidden"/>'),1);
-		Y.Global.on('lane:searchFacetsReady', initializeHistory);
+		initializeHistory();
 	}
 });
