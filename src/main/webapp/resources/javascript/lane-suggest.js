@@ -24,7 +24,6 @@ YUI().use('yui2-autocomplete','yui2-datasource','yui2-connection','node', functi
                 searchSourceElm, 
                 searchSource, 
                 path = document.location.pathname,
-                onItemSelect, 
                 searchTermsAcContainer, 
                 searchTermsAcInput;
                 searchTermsElm = input;
@@ -55,8 +54,7 @@ YUI().use('yui2-autocomplete','yui2-datasource','yui2-connection','node', functi
                 acWidget.animVert = false;
                 acWidget.autoHighlight = false;
                 acWidget.itemSelectEvent.subscribe(trackItemSelect);
-                //FIXME: this threw an exception . . .
-//                acWidget.itemSelectEvent.subscribe(onItemSelect);
+                acWidget.itemSelectEvent.subscribe(onItemSelect);
                 
                 // for FF, submit form return key strike
                 if (Y.UA.gecko) {
