@@ -58,9 +58,10 @@
 }
 .details {
     background-color:#DBD2B3;
-    padding:16px;
+    clear:left;
 }
 .details > div {
+    margin:16px;
     padding:16px;
     background-color:white;
 }
