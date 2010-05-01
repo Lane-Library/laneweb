@@ -4,14 +4,13 @@
     font-size:11px !important;
     margin-bottom:5px;
 }
-/*.classes li:after {
+.classes li > div:first-child:after {
     content: ".";
     display: block;
     height: 0;
     clear: both;
     visibility:hidden;
-}*/
-
+}
 .even.expanded,.odd.expanded, .even.yui3-accordion-item-active, .odd.yui3-accordion-item-active {
     background-color:#DBD2B3;
 }
