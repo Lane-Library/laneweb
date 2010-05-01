@@ -302,7 +302,12 @@
 -->
         <script type="text/javascript" src="/javascript/lane-all.js"/>
         
-        <!--<script type="text/javascript" src="/javascript/lane-expandies.js"/>
+        <!--<script type="text/javascript" src="/javascript/lane.js"/>
+        <script type="text/javascript" src="/javascript/lane-suggest.js"/>
+        <script type="text/javascript" src="/javascript/lane-search-pico.js"/>
+        <script type="text/javascript" src="/javascript/lane-search.js"/>
+        <script type="text/javascript" src="/javascript/lane-tracking.js"/>
+        <script type="text/javascript" src="/javascript/lane-expandies.js"/>
         <script type="text/javascript" src="/javascript/lane-google.js"/>
         <script type="text/javascript" src="/javascript/lane-webtrends.js"/>
         <script type="text/javascript" src="/javascript/lane-popup.js"/>
@@ -317,15 +322,10 @@
         <script type="text/javascript" src="/javascript/lane-popup.js"/>
         <script type="text/javascript" src="/javascript/lane-ie.js"/>
         <script type="text/javascript" src="/javascript/lane-teletype.js"/>
-        <script type="text/javascript" src="/javascript/lane-search-pico.js"/>
-        <script type="text/javascript" src="/javascript/lane-suggest.js"/>
         <script type="text/javascript" src="/javascript/lane-selections.js"/>
         <script type="text/javascript" src="/javascript/lane-textinputs.js"/>
-        <script type="text/javascript" src="/javascript/lane-tracking.js"/>
         <script type="text/javascript" src="/javascript/lane-search-facets.js"/>
-        <script type="text/javascript" src="/javascript/lane-popin.js"/>
-        <script type="text/javascript" src="/javascript/accordionview.js"/>
-        <script type="text/javascript" src="/javascript/lane-search.js"/>
-        <script type="text/javascript" src="/javascript/lane.js"/>-->
+        <script type="text/javascript" src="/javascript/lane-popin.js"/>-->
+        <!--<script type="text/javascript" src="/javascript/accordionview.js"/>-->
     </body>
 </html>

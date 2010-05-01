@@ -1,4 +1,4 @@
-YUI().use('lane-suggest', 'node-base', function(Y) {
+YUI().use('node-base', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         fields = form.one('#searchFields'),
@@ -10,10 +10,10 @@ YUI().use('lane-suggest', 'node-base', function(Y) {
             if (!picoIsOn) {
                 if (!picoFields) {
                     picoFields = Y.Node.create(PICO);
-                    inputs = picoFields.all('input');
-                    for (i = 0; i < inputs.size(); i++) {
-                        new LANE.suggest.Suggest(inputs.item(i));
-                    }
+//                    inputs = picoFields.all('input');
+//                    for (i = 0; i < inputs.size(); i++) {
+//                        new LANE.suggest.Suggest(inputs.item(i));
+//                    }
                 }
                 form.addClass('clinical');
                 nav.addClass('clinical');

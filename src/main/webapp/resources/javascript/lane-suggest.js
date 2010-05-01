@@ -1,6 +1,4 @@
-YUI().add('lane-suggest', function(Y) {
-    LANE.namespace('suggest');
-    LANE.suggest.Suggest = function(input) {};
+YUI().use('yui2-autocomplete','yui2-datasource','yui2-connection','node', function(Y){
         var suggestElms = Y.all('.laneSuggest'), i,
             acWidgets = [],
             trackItemSelect = function(sType, aArgs) {
@@ -82,10 +80,8 @@ YUI().add('lane-suggest', function(Y) {
                     }
                 }, searchTermsElm);
             };
-        if (!LANE.suggest.initialized) {
-            for (i = 0; i < suggestElms.size(); i++) {
-                initialize(suggestElms.item(i));
-            }
+        
+        for (i = 0; i < suggestElms.size(); i++) {
+            initialize(suggestElms.item(i));
         }
-        LANE.suggest.initialized = true;
-}, '1.11.0-SNAPSHOT', {requires:['lane', 'lane-search', 'lane-tracking', 'yui2-autocomplete','yui2-datasource','yui2-connection','node']});
+});

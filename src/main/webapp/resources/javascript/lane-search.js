@@ -65,9 +65,11 @@ YUI().add('lane-search', function(Y) {
 				return (value && value != searchTermsInput.get('title'));
 			},
             setInitialText = function() {
-                var initialText = selectedOption.get('title');
-                searchTermsInput.set('value', initialText);
-                searchTermsInput.set('title', initialText);
+				if (!searchTermsPresent()) {
+					var initialText = selectedOption.get('title');
+					searchTermsInput.set('value', initialText);
+					searchTermsInput.set('title', initialText);
+				}
         	},
             search = {
                 startSearch: function() {
@@ -97,9 +99,6 @@ YUI().add('lane-search', function(Y) {
                     form.submit();
                 }
             };
-        if (!searchTermsPresent()) {
-            setInitialText();
-        }
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
             try {
@@ -115,6 +114,7 @@ YUI().add('lane-search', function(Y) {
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
 			setInitialText();
         });
+		Y.fire('lane:searchSourceChange', search);
         searchSourceSelect.on('change', function(e) {
             if (searchTermsPresent()) {
                 LANE.search.Search.submitSearch();
@@ -122,7 +122,7 @@ YUI().add('lane-search', function(Y) {
                 Y.fire('lane:searchSourceChange', search);
             }
         });
-        new LANE.suggest.Suggest(searchTermsInput);
+//        new LANE.suggest.Suggest(searchTermsInput);
         return search;
     }();
-}, '1.11.0-SNAPSHOT', {requires:['lane','lane-suggest', 'node']});
+}, '1.11.0-SNAPSHOT', {requires:['lane', 'node']});
