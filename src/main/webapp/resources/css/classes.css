@@ -53,7 +53,7 @@
 .yui3-js-enabled .details {
     display:none;
 }
-.yui3-js-enabled .details.yui-acc-content {
+.yui3-js-enabled .details.yui3-accordion-item-bd {
     display:block;
 }
 .details {

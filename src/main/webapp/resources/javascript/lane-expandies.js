@@ -70,8 +70,8 @@ gallery: 'gallery-2010.04.02-17-26'//,
              if (panel.hasClass('expanded')) {
                  panel.addClass(' yui3-accordion-item-active');
              }
-             panel.one('*:first-child').addClass('yui3-accordion-item-trigger yui3-accordion-item-hd');
-             panel.one('*:last-child').addClass('yui3-accordion-item-bd');
+             panel.get('children').item(0).addClass('yui3-accordion-item-trigger yui3-accordion-item-hd');
+             panel.get('children').item(1).addClass('yui3-accordion-item-bd');
          }
          expandy.plug(Y.Plugin.NodeAccordion, { 
                 anim: Y.Easing.backIn
