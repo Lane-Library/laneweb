@@ -4,13 +4,13 @@
     font-size:11px !important;
     margin-bottom:5px;
 }
-.classes li:after {
+/*.classes li:after {
     content: ".";
     display: block;
     height: 0;
     clear: both;
     visibility:hidden;
-}
+}*/
 .even.expanded, .odd.expanded {
     background-color:#DBD2B3;
 }
@@ -57,10 +57,12 @@
     display:block;
 }
 .details {
-    background-color:white;
-    border:16px solid #DBD2B3;
-    clear:left;
+    background-color:#DBD2B3;
     padding:16px;
+}
+.details > div {
+    padding:16px;
+    background-color:white;
 }
 .details p {
     font-size:12px;
