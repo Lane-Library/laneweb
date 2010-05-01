@@ -117,6 +117,7 @@
                         <include>accordionview-min.css</include>
                         <include>miscellaneous-min.css</include>
                         <include>events-min.css</include>
+                        <include>accordionnode-min.css</include>
                         <!--<include>buttons-min.css</include>
                         <include>colors-min.css</include>
                         <include>shaded-border-min.css</include>

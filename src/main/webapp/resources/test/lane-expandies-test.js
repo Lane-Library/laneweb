@@ -1,10 +1,16 @@
 /**
  * @author ceyates
  */YUI({
-    logInclude: {
-        TestRunner: true
+    modules: {
+        'gallery-node-accordion': {
+            fullpath: 'http://yui.yahooapis.com/gallery-2009.10.27-23/build/gallery-node-accordion/gallery-node-accordion-min.js',
+            requires: ['node-base','node-style','plugin','node-event-delegate','classnamemanager'],
+            optional: ['anim'],
+            supersedes: []
+      }
+ 
     }
-}).use('accordionview', 'node-event-simulate', 'console', 'test', function(Y){
+}).use('gallery-node-accordion', 'node-event-simulate', 'console', 'test', function(Y){
 
     var expandiesTestCase = new Y.Test.Case({
         name: 'Lane Expandies TestCase',

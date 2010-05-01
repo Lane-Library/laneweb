@@ -82,8 +82,10 @@ YUI().add('lane-suggest', function(Y) {
                     }
                 }, searchTermsElm);
             };
-        
-        for (i = 0; i < suggestElms.size(); i++) {
-            initialize(suggestElms.item(i));
+        if (!LANE.suggest.initialized) {
+            for (i = 0; i < suggestElms.size(); i++) {
+                initialize(suggestElms.item(i));
+            }
         }
+        LANE.suggest.initialized = true;
 }, '1.11.0-SNAPSHOT', {requires:['lane', 'lane-search', 'lane-tracking', 'yui2-autocomplete','yui2-datasource','yui2-connection','node']});

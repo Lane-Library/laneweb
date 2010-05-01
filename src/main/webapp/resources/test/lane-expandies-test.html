@@ -1,25 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title>lane-expandies javascript unit tests</title>
-        <style type="text/css">
-.yui-acc-hidden {
-    visibility: hidden;
-    position: absolute;
-}
-.yui-acc-almosthidden {
-    position: absolute;
-    left: -9999px;
-    z-index: -10;
-}
-.yui-acc-toggle {
-    cursor: pointer;
-}
-.yui-acc-content {
-    overflow:hidden;
-    _zoom: 1;
-}
-        </style>
+        <title>lane-expandies javascript unit tests</title> 
+        <link rel="stylesheet" href="/style/accordionnode.css" type="text/css"/>
     </head>
     <body>
         <ul class="expandy">
@@ -52,10 +35,55 @@
                 <div id="panel4">body</div>
             </li>
         </ul>
+        <div id="myaccordion" class="yui3-accordion">
+            
+            <div class="yui3-module yui3-accordion-item yui3-accordion-item-active">
+                
+                
+                <div class="yui3-hd yui3-accordion-item-hd">
+                    <a href="#" class="yui3-accordion-item-trigger">item 1</a>
+                </div>
+                <div class="yui3-bd yui3-accordion-item-bd">
+                    <p>
+                        item 1 content here...
+                    </p>
+                </div>
+                
+            </div>
+            
+            <div class="yui3-module yui3-accordion-item">
+                
+                <div class="yui3-hd yui3-accordion-item-hd">
+                    <a href="#" class="yui3-accordion-item-trigger">item 2</a>
+                </div>
+                <div class="yui3-bd yui3-accordion-item-bd">
+                    <p>
+                        item 2 content here...
+                    </p>
+                </div>
+                
+                
+            </div>
+            <div class="yui3-module yui3-accordion-item">
+                
+                <div class="yui3-hd yui3-accordion-item-hd">
+                    <a href="#" class="yui3-accordion-item-trigger">item 3</a>
+                </div>
+                <div class="yui3-bd yui3-accordion-item-bd">
+                    <p>
+                        item 3 content here...
+                    </p>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+        
         <script type="text/javascript" charset="utf-8" src="http://yui.yahooapis.com/3.1.0/build/yui/yui-min.js"></script>
-        <script src="/javascript/accordionview.js" type="text/javascript"></script>
-        <script src="lane-expandies-test.js" type="text/javascript"></script>
+
+        <!--<script src="lane-expandies-test.js" type="text/javascript"></script>-->
         <script src="/javascript/lane-expandies.js" type="text/javascript"></script>
-        <script src="/javascript/lane.js" type="text/javascript"></script>
+        <!--<script src="/javascript/lane.js" type="text/javascript"></script>-->
     </body>
 </html>
