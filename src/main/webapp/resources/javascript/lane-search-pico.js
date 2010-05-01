@@ -66,11 +66,13 @@ YUI({filter:'debug'}).use('node','anim', function(Y) {
     }
 	formAnim = new Y.Anim({
 		node: '#search',
-		easing: Y.Easing.easeOut
+		easing: Y.Easing.easeOut,
+		duration: 0.3
 	});
 	navAnim = new Y.Anim({
 		node: '#laneNav',
-		easing: Y.Easing.easOut
+		easing: Y.Easing.easOut,
+		duration: 0.3
 	})
     Y.Global.on('lane:searchSourceChange', togglePico);
     var PICO = '<fieldset id="picoFields">' +
