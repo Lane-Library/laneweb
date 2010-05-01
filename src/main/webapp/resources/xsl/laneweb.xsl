@@ -38,6 +38,8 @@
 
     <xsl:param name="name"/>
     
+    <xsl:param name="js-enabled"/>
+    
     <!-- ==========================  VARIABLES  ========================== -->
     
     <!-- the root node of the requested content document -->
@@ -165,6 +167,16 @@
     <!-- xincludes often include html/head and html/body, this ignores them-->
     <xsl:template match="h:html[ancestor::h:html]">
         <xsl:apply-templates select="h:body/child::node()"/>
+    </xsl:template>
+    
+    <xsl:template match="h:html">
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <xsl:if test="$js-enabled = 'false'">
+                <xsl:attribute name="class">lane-js-unknown</xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates/>
+        </xsl:copy>
     </xsl:template>
 
     <!-- put version into javascript @src -->

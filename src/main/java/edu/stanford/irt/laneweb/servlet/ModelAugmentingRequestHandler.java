@@ -49,7 +49,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         HttpSession session = request.getSession();
         String sunetid = this.sunetIdSource.getSunetid(request, session);
         addToModel(Model.SUNETID, sunetid, model);
-        addToModel(Model.DEBUG, getDebugValue(request, session), model);
+        addToModel(Model.DEBUG, getBooleanValue(request, session, Model.DEBUG), model);
         this.persistentLoginProcessor.processSunetid(sunetid, request, response);
         addLdapData(sunetid, session, model);
         String remoteAddr = getRemoteAddr(request, session);
@@ -75,6 +75,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
                 }
             }
         }
+        addToModel(Model.JS_ENABLED, getBooleanValue(request, session, Model.JS_ENABLED), model);
         super.process(request, response);
     }
     
@@ -94,13 +95,13 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         return builder.toString();
     }
 
-    private Boolean getDebugValue(HttpServletRequest request, HttpSession session) {
-        String debugParameter = request.getParameter(Model.DEBUG);
+    private Boolean getBooleanValue(HttpServletRequest request, HttpSession session, String key) {
+        String debugParameter = request.getParameter(key);
         if (debugParameter == null) {
-            return (Boolean) session.getAttribute(Model.DEBUG);
+            return (Boolean) session.getAttribute(key);
         } else {
             Boolean debug = Boolean.parseBoolean(debugParameter);
-            session.setAttribute(Model.DEBUG, debug);
+            session.setAttribute(key, debug);
             return debug;
         }
     }
