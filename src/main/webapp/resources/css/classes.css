@@ -11,7 +11,8 @@
     clear: both;
     visibility:hidden;
 }*/
-.even.expanded, .odd.expanded {
+
+.even.expanded,.odd.expanded, .even.yui3-accordion-item-active, .odd.yui3-accordion-item-active {
     background-color:#DBD2B3;
 }
 .odd {
@@ -33,10 +34,10 @@
 .classes .hide {
     display:none;
 }
-.expanded .show {
+.expanded .show, .yui3-accordion-item-active .show {
     display:none;
 }
-.expanded .hide {
+.expanded .hide, .yui3-accordion-item-active .hide {
     display:inline;
 }
 .what {
