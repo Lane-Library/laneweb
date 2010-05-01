@@ -172,7 +172,7 @@
     <xsl:template match="h:html">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
-            <xsl:if test="$js-enabled = 'false'">
+            <xsl:if test="$js-enabled != 'true'">
                 <xsl:attribute name="class">lane-js-unknown</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
