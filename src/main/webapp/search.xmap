@@ -86,6 +86,21 @@
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
+                <!-- history search pages (parameter is history-all, etc)-->
+                <map:match type="regex-parameter"
+                    pattern="^history-(.*)$">
+                    <map:parameter name="parameter-name" value="source"/>
+                    <map:aggregate element="doc">
+                        <map:part src="cocoon:/eresources/history-count"/>
+                        <map:part src="cocoon:/cached/search/history.html"/>
+                        <map:part
+                            src="cocoon:/cached/search/history/${source}.html"/>
+                    </map:aggregate>
+                    <map:transform type="xinclude"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl"/>
+                    <map:serialize type="xml"/>
+                </map:match>
                 <map:match pattern="search.html" type="wildcard">
                     <map:generate type="html" src="${content-base}/error.html">
                         <map:parameter name="alt-src" value="${default-content-base}/error.html"/>

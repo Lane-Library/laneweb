@@ -72,6 +72,10 @@
                 <xsl:when test="/doc/sql:rowset/sql:row[sql:genre=$countFacetId]/sql:hits">
                     <xsl:value-of select="number(/doc/sql:rowset/sql:row[sql:genre=$countFacetId]/sql:hits)"/>
                 </xsl:when>
+                <!-- kludge: findingaid as ID, "finding aid" as type -->
+                <xsl:when test="$countFacetId = 'findingaid' and /doc/sql:rowset/sql:row[sql:genre='finding aid']/sql:hits">
+                    <xsl:value-of select="number(/doc/sql:rowset/sql:row[sql:genre='finding aid']/sql:hits)"/>
+                </xsl:when>
                 <xsl:otherwise>NaN</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>

@@ -32,9 +32,9 @@
                                     <option value="all-all" title="Find articles in PubMed, Web of Science, UpToDate PLUS resources in the Lane Catalog">Lane Search</option>
                                     <option value="clinical-all"  title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ...">Clinical</option>
                                     <option value="bioresearch-all" title="Search 200+ bioresearch resources">Bioresearch</option>
+                                    <option value="history-all" title="Search Lane's historical collection">History</option>
                                     <!-- 
                                     <option value="bassett" title="Find anatomical images from Lane's Bassset Collection">Bassett Images</option>
-                                    <option value="history" title="Search Lane's historical collection">History</option>
                                     -->
                                 </select>
                                 <a id="searchTips" href="/services/laneconnexSearch.html">Search Tips</a>
