@@ -551,6 +551,8 @@ public class HistoryCollectionManager implements CollectionManager {
             Eresource dummyResult = new EresourceImpl();
             dummyResult.setId(i);
             dummyResult.setTitle("Ponce de Leon and the Fountain of Youth");
+            dummyResult.setScore(0);
+            dummyResult.setRecordId(i);
             Version version = new VersionImpl();
             version.setPublisher("Peabody's Improbable History");
             dummyResult.addVersion(version);
