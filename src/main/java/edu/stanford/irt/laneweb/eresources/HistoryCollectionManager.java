@@ -560,6 +560,7 @@ public class HistoryCollectionManager implements CollectionManager {
             Link link = new LinkImpl();
             link.setLabel("video");
             link.setUrl("http://www.youtube.com/watch?v=Kkqn7O1lHFI");
+            version.addLink(link);
             dummyResults.add(dummyResult);
         }
         return dummyResults;
