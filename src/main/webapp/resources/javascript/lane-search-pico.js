@@ -17,7 +17,7 @@ YUI().use('lane-suggest', 'node-base', function(Y) {
                 }
                 form.addClass('clinical');
                 nav.addClass('clinical');
-                fields.insertBefore(picoFields, searchInput);
+				fields.insert(picoFields, 2);
                 picoIsOn = true;
             }
         },
