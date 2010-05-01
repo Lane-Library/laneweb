@@ -64,6 +64,10 @@ YUI().add('lane', function(Y) {
                 //            }
             }
         }, document);
+		//tell the server javascript works if we haven't already.
+		if (Y.one('html.lane-js-unknown')) {
+			Y.io('/././enable-js');
+		}
         return {
             getMetaContent: function(name) {
                 return m[name] === undefined ? undefined : m[name];
@@ -71,4 +75,4 @@ YUI().add('lane', function(Y) {
         };
     }();
 
-}, '1.11.0-SNAPSHOT',{requires:['node']});
+}, '1.11.0-SNAPSHOT',{requires:['node','io']});
