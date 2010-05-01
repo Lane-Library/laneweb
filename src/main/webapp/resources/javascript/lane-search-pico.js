@@ -1,10 +1,11 @@
-YUI().use('node-base', function(Y) {
+YUI({filter:'debug'}).use('node','anim', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         fields = form.one('#searchFields'),
         searchInput = fields.one('#searchTerms'),
         picoFields = Y.one('#picoFields'),
         picoIsOn = picoFields && form.hasClass('clinical') && nav.hasClass('clinical'),
+		formAnim, navAnim,
         picoOn = function() {
             var i, inputs;
             if (!picoIsOn) {
@@ -15,17 +16,40 @@ YUI().use('node-base', function(Y) {
 //                        new LANE.suggest.Suggest(inputs.item(i));
 //                    }
                 }
-                form.addClass('clinical');
-                nav.addClass('clinical');
-				fields.insert(picoFields, 2);
+
+				formAnim.set('to',{height:124});
+				navAnim.set('to',{top:174});
+				formAnim.on('end', function() {
+					form.addClass('clinical');
+				    fields.insert(picoFields, 2);
+				});
+				navAnim.on('end', function() {
+                    nav.addClass('clinical');
+				});
+//				formAnim.set('duration', 0.5);
+//				navAnim.set('duration', 0.4);
+				formAnim.run();
+				navAnim.run();
                 picoIsOn = true;
             }
         },
         picoOff = function() {
             if (picoIsOn) {
-                picoFields.remove();
-                form.removeClass('clinical');
-                nav.removeClass('clinical');
+				formAnim.set('to',{height:94});
+				navAnim.set('to',{top:144});
+				formAnim.on('end', function() {
+                    picoFields.remove();
+					form.removeClass('clinical');
+				});
+				navAnim.on('end', function() {
+                    nav.removeClass('clinical');
+				});
+//				formAnim.set('duration', 0.5);
+//				navAnim.set('duration', 0.5);
+				formAnim.run();
+				navAnim.run();
+//                form.removeClass('clinical');
+//                nav.removeClass('clinical');
                 picoIsOn = false;
             }
             
@@ -40,6 +64,14 @@ YUI().use('node-base', function(Y) {
     if (!picoIsOn && picoFields) {
         picoFields.remove();
     }
+	formAnim = new Y.Anim({
+		node: '#search',
+		easing: Y.Easing.easeOut
+	});
+	navAnim = new Y.Anim({
+		node: '#laneNav',
+		easing: Y.Easing.easOut
+	})
     Y.Global.on('lane:searchSourceChange', togglePico);
     var PICO = '<fieldset id="picoFields">' +
                '<input name="p" class="picoInput" id="clinicalP" type="text" title="patient condition"/>' +
