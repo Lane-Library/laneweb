@@ -302,7 +302,7 @@
 -->
         <script type="text/javascript" src="/javascript/lane-all.js"/>
         
-        <script type="text/javascript" src="/javascript/lane.js"/>
+        <!--<script type="text/javascript" src="/javascript/lane.js"/>
         <script type="text/javascript" src="/javascript/lane-suggest.js"/>
         <script type="text/javascript" src="/javascript/lane-search-pico.js"/>
         <script type="text/javascript" src="/javascript/lane-search.js"/>
@@ -325,7 +325,7 @@
         <script type="text/javascript" src="/javascript/lane-selections.js"/>
         <script type="text/javascript" src="/javascript/lane-textinputs.js"/>
         <script type="text/javascript" src="/javascript/lane-search-facets.js"/>
-        <script type="text/javascript" src="/javascript/lane-popin.js"/>
+        <script type="text/javascript" src="/javascript/lane-popin.js"/>-->
         <!--<script type="text/javascript" src="/javascript/accordionview.js"/>-->
     </body>
 </html>
