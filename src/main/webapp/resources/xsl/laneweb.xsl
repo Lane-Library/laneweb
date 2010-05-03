@@ -513,8 +513,8 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- add clinicalSearch class to search form, fieldset and laneNav elements when clinical is active tab -->
-    <!--<xsl:template match="node()[@id='search' or @id='laneNav']|h:form[attribute::id='search']/h:fieldset">
+    <!-- add clinical class to search form, fieldset and laneNav elements when clinical is active tab -->
+    <xsl:template match="node()[@id='search' or @id='laneNav']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
             <xsl:if test="$search-form-select = 'clinical-all'">
@@ -522,7 +522,7 @@
             </xsl:if>
             <xsl:apply-templates/>
         </xsl:copy>
-    </xsl:template>-->
+    </xsl:template>
     
     <!-- add the ip-group to content of the meta element named WT.seg_1 for reporting to webtrends -->
     <xsl:template match="h:meta[@name='WT.seg_1']/@content">

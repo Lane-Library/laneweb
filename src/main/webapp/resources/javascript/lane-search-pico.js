@@ -3,9 +3,8 @@ YUI({filter:'debug'}).use('node','anim', function(Y) {
         nav = Y.one('#laneNav'),
         fields = form.one('#searchFields'),
         searchInput = fields.one('#searchTerms'),
-        picoFields = Y.one('#picoFields'),
-        picoIsOn = picoFields && form.hasClass('clinical') && nav.hasClass('clinical'),
-		formAnim, navAnim,
+        picoIsOn = false,
+        picoFields, formAnim, navAnim,
         picoOn = function() {
             var i, inputs;
             if (!picoIsOn) {
@@ -60,9 +59,17 @@ YUI({filter:'debug'}).use('node','anim', function(Y) {
             } else {
                 picoOff();
             }
-        };
-    if (!picoIsOn && picoFields) {
-        picoFields.remove();
+        },
+        PICO = '<fieldset id="picoFields">' +
+               '<input name="p" class="picoInput" id="clinicalP" type="text" title="patient condition"/>' +
+               '<input name="i" class="picoInput" id="clinicalI" type="text" title="intervention"/>' +
+               '<input name="c" class="picoInput" id="clinicalC" type="text" title="comparison"/>' +
+               '<input name="o" class="picoInput" id="clinicalO" type="text" title="outcome"/>' +
+               '</fieldset>';
+    if (form.hasClass('clinical')) {
+        picoFields = Y.Node.create(PICO);
+        fields.insert(picoFields, 2);
+        picoIsOn = true;
     }
 	formAnim = new Y.Anim({
 		node: '#search',
@@ -73,14 +80,8 @@ YUI({filter:'debug'}).use('node','anim', function(Y) {
 		node: '#laneNav',
 		easing: Y.Easing.easOut,
 		duration: 0.3
-	})
+	});
     Y.Global.on('lane:searchSourceChange', togglePico);
-    var PICO = '<fieldset id="picoFields">' +
-               '<input name="p" class="picoInput" id="clinicalP" type="text" title="patient condition"/>' +
-               '<input name="i" class="picoInput" id="clinicalI" type="text" title="intervention"/>' +
-               '<input name="c" class="picoInput" id="clinicalC" type="text" title="comparison"/>' +
-               '<input name="o" class="picoInput" id="clinicalO" type="text" title="outcome"/>' +
-               '</fieldset>';
 });
 //    // pico form functionality
 //    //  - remove default text values onfocus

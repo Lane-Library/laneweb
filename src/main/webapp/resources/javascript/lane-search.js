@@ -114,7 +114,7 @@ YUI().add('lane-search', function(Y) {
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
 			setInitialText();
         });
-		Y.fire('lane:searchSourceChange', search);
+//		Y.fire('lane:searchSourceChange', search);
         searchSourceSelect.on('change', function(e) {
             if (searchTermsPresent()) {
                 LANE.search.Search.submitSearch();
