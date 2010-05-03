@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -385,7 +384,6 @@ public class HistoryCollectionManager implements CollectionManager {
     }
 
     public Map<String, Integer> searchCount(final Set<String> types, final Set<String> subsets, final String query) {
-        if (true) return Collections.emptyMap();
         Map<String, Integer> result = new HashMap<String, Integer>();
         StringBuffer stringBuffer = new StringBuffer(COUNT);
         for (int i = 0; i < types.size(); i++) {
@@ -455,7 +453,6 @@ public class HistoryCollectionManager implements CollectionManager {
     }
 
     private LinkedList<Eresource> doGet(final String sql, final Collection<String> params) {
-        if (true) return (LinkedList<Eresource>) getDummyResults();
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -543,26 +540,5 @@ public class HistoryCollectionManager implements CollectionManager {
             }
         }
         return eresources;
-    }
-    
-    private Collection<Eresource> getDummyResults() {
-        Collection<Eresource> dummyResults = new LinkedList<Eresource>();
-        for (int i = 0; i < 30; i++) {
-            Eresource dummyResult = new EresourceImpl();
-            dummyResult.setId(i);
-            dummyResult.setTitle("Ponce de Leon and the Fountain of Youth");
-            dummyResult.setScore(0);
-            dummyResult.setRecordId(i);
-            dummyResult.setRecordType("history");
-            Version version = new VersionImpl();
-            version.setPublisher("Peabody's Improbable History");
-            dummyResult.addVersion(version);
-            Link link = new LinkImpl();
-            link.setLabel("video");
-            link.setUrl("http://www.youtube.com/watch?v=Kkqn7O1lHFI");
-            version.addLink(link);
-            dummyResults.add(dummyResult);
-        }
-        return dummyResults;
     }
 }
