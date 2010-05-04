@@ -72,7 +72,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
                 if (resourceId.matches(".*_content")) {
                     Iterator<Result> it = resource.getChildren().iterator();
                     int count = 0;
-                    while (it.hasNext() && count <= this.contentResultLimit){
+                    while (it.hasNext() && count < this.contentResultLimit){
                         count++;
                         ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next(), queryTermPattern);
                         crsr.setResourceHits(parentResource.getHits());
