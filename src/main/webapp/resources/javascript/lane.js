@@ -25,54 +25,11 @@ YUI().add('lane', function(Y) {
         }
         return o;
     };
-    LANE.core = LANE.core || function() {
-        var m = {}, //the meta element name/values
-            meta, //the meta elements
-            i;
-        //gather the meta elements:
-        meta = Y.all('meta');
-        for (i = 0; i < meta.size(); i++) {
-            m[meta.item(i).get('name')] = meta.item(i).get('content');
-        }
-        //create the change event:
-        Y.publish('lane:change', {broadcast: 2});
-        Y.on('click', function(e) {
-            if (LANE.tracking) {
-                LANE.tracking.trackEvent(e);
-                //put in a delay for safari to make the tracking request:
-                //TODO: revisit this and make sure it actually is useful
-                //            if (Y.UA.webkit && LANE.tracking.isTrackable(e)) {
-                //                    t = e.target;
-                //                    parent = t;
-                //                    while (parent) {
-                //                        if (parent.clicked !== undefined) {
-                //                            return;
-                //                        }
-                //                        parent = parent.parentNode;
-                //                    }
-                //                    while (t) {
-                //                        if (t.href && (!t.rel && !t.target)) {
-                //                            f = function() {
-                //                                window.location = t.href;
-                //                            };
-                //                            Y.YUI2.util.Event.preventDefault(e);
-                //                            setTimeout(f, 200);
-                //                            break;
-                //                        }
-                //                        t = t.parentNode;
-                //                    }
-                //            }
-            }
-        }, document);
-		//tell the server javascript works if we haven't already.
-		if (Y.one('html.lane-js-unknown')) {
-			Y.io('/././enable-js');
-		}
-        return {
-            getMetaContent: function(name) {
-                return m[name] === undefined ? undefined : m[name];
-            }
-        };
-    }();
+    //create the change event:
+    Y.publish('lane:change', {broadcast: 2});
+	//tell the server javascript works if we haven't already.
+	if (Y.one('html.lane-js-unknown')) {
+		Y.io('/././enable-js');
+	}
 
 }, '1.11.0-SNAPSHOT',{requires:['node','io']});

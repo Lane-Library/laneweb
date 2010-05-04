@@ -1,13 +1,9 @@
-YUI().use('lane-tracking', 'event-custom', function(Y) {
+YUI().use('lane-tracking', 'node', function(Y) {
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
-            var host = document.location.host, pageTracker, encode = function(value) {
-                if (encodeURIComponent) {
-                    return encodeURIComponent(value);
-                }
-                return escape(value);
-            };
+            var host = document.location.host,
+                i, l, meta, pageTracker;
             if (_gat !== undefined) {
                 if (host.match("lane.stanford.edu")) {
                     pageTracker = _gat._getTracker("UA-3202241-2");
@@ -20,13 +16,16 @@ YUI().use('lane-tracking', 'event-custom', function(Y) {
                 //pageTracker._setLocalServerMode();
                 pageTracker._setDomainName(".stanford.edu");
                 pageTracker._trackPageview();
-                pageTracker._setVar(LANE.core.getMetaContent('WT.seg_1'));
+                meta = Y.one('html head meta[name="WT.seg_1"]');
+                if (meta) {
+                    pageTracker._setVar(meta.get('content'));
+                }
                 LANE.tracking.addTracker({
                     track: function(trackingData) {
                         if (trackingData.external) {
-                            pageTracker._trackPageview('/OFFSITE/' + encode(trackingData.title));
+                            pageTracker._trackPageview('/OFFSITE/' + encodeURIComponent(trackingData.title));
                         } else {
-                            pageTracker._trackPageview('/ONSITE/' + encode(trackingData.title) + '/' + trackingData.path);
+                            pageTracker._trackPageview('/ONSITE/' + encodeURIComponent(trackingData.title) + '/' + trackingData.path);
                         }
                     }
                 });

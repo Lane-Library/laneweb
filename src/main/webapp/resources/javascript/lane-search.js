@@ -55,11 +55,11 @@ YUI().add('lane-search', function(Y) {
     LANE.search.Search = LANE.search.Search || function() {
         var searching = false, //searching state
             form = Y.one('#search'), //the form Element
-            searchTermsInput = Y.one('#searchTerms'),
-            searchSourceSelect = Y.one('#searchSource'),
+            searchTermsInput = form.one('#searchTerms'),
+            searchSourceSelect = form.one('#searchSource'),
             searchOptions = searchSourceSelect.all('option'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
-            searchIndicator = Y.one('#searchIndicator'),
+            searchIndicator = form.one('#searchIndicator'),
 			searchTermsPresent = function() {
 				var value = searchTermsInput.get('value');
 				return (value && value != searchTermsInput.get('title'));

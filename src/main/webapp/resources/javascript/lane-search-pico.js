@@ -1,4 +1,4 @@
-YUI({filter:'debug'}).use('node','anim', function(Y) {
+YUI().use('node','anim', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         fields = form.one('#searchFields'),
@@ -10,12 +10,7 @@ YUI({filter:'debug'}).use('node','anim', function(Y) {
             if (!picoIsOn) {
                 if (!picoFields) {
                     picoFields = Y.Node.create(PICO);
-//                    inputs = picoFields.all('input');
-//                    for (i = 0; i < inputs.size(); i++) {
-//                        new LANE.suggest.Suggest(inputs.item(i));
-//                    }
                 }
-
 				formAnim.set('to',{height:124});
 				navAnim.set('to',{top:174});
 				formAnim.on('end', function() {
@@ -25,8 +20,6 @@ YUI({filter:'debug'}).use('node','anim', function(Y) {
 				navAnim.on('end', function() {
                     nav.addClass('clinical');
 				});
-//				formAnim.set('duration', 0.5);
-//				navAnim.set('duration', 0.4);
 				formAnim.run();
 				navAnim.run();
                 picoIsOn = true;
@@ -43,12 +36,8 @@ YUI({filter:'debug'}).use('node','anim', function(Y) {
 				navAnim.on('end', function() {
                     nav.removeClass('clinical');
 				});
-//				formAnim.set('duration', 0.5);
-//				navAnim.set('duration', 0.5);
 				formAnim.run();
 				navAnim.run();
-//                form.removeClass('clinical');
-//                nav.removeClass('clinical');
                 picoIsOn = false;
             }
             

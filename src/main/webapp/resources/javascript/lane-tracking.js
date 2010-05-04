@@ -200,4 +200,30 @@ YUI().add('lane-tracking',function(Y) {
             }
         };
     }();
+        Y.on('click', function(e) {
+                LANE.tracking.trackEvent(e);
+                //put in a delay for safari to make the tracking request:
+                //TODO: revisit this and make sure it actually is useful
+                //            if (Y.UA.webkit && LANE.tracking.isTrackable(e)) {
+                //                    t = e.target;
+                //                    parent = t;
+                //                    while (parent) {
+                //                        if (parent.clicked !== undefined) {
+                //                            return;
+                //                        }
+                //                        parent = parent.parentNode;
+                //                    }
+                //                    while (t) {
+                //                        if (t.href && (!t.rel && !t.target)) {
+                //                            f = function() {
+                //                                window.location = t.href;
+                //                            };
+                //                            Y.YUI2.util.Event.preventDefault(e);
+                //                            setTimeout(f, 200);
+                //                            break;
+                //                        }
+                //                        t = t.parentNode;
+                //                    }
+                //            }
+        }, document);
 }, '1.11.0-SNAPSHOT', {requires:['lane', 'node','event-custom']});
