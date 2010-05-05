@@ -99,10 +99,23 @@
                                     >Help</a>
                             </li>
                             <li>
-                                <select id="qlinks" style="margin:6px 0 0 80px;">
+                                <select id="qlinks" style="margin:6px 0 0 70px;">
                                     <option value="">Quick Links</option>
+                                    <option value=""> -------------------------- </option>
                                     <option value="http://laneproxy.stanford.edu/login?url=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M">PubMed</option>
                                     <option value="http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online">UpToDate</option>
+                                    <option value=""> -------------------------- </option>
+                                    <option value="/biomed-resources/eb.html">Books</option>
+                                    <option value="/biomed-resources/db.html">Databases</option>
+                                    <option value="/biomed-resources/ej.html">Journals</option>
+                                    <option value=""> -------------------------- </option>
+                                    <option value="/portals/research.html">Bioresearch Portal</option>
+                                    <option value="/portals/clinical.html">Clinical Portal</option>
+                                    <option value="/portals/peds.html">Pediatrics Portal</option>
+                                    <option value="/portals/pharmacy.html">Pharmacy Portal</option>
+                                    <option value=""> -------------------------- </option>
+                                    <option value="http://docxpress.stanford.edu">DocXpress</option>
+                                    <option value="http://lmldb.stanford.edu">Lane Catalog</option>
                                 </select>
                             </li>
                         </ul>
