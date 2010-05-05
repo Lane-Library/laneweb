@@ -25,6 +25,7 @@ div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u li {
     padding-bottom:inherit;
     list-style-position:inside;
     margin-left:0;
+    padding-bottom:0.2em;
 }
 /*this is the right column*/
 div.yui-ge>div.yui-u li {
