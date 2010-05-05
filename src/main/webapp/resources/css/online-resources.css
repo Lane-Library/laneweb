@@ -1,20 +1,7 @@
 #browseTabs li {
-    border:1px solid #CDCFBE;
     list-style:none outside none;
     float:left;
-    font-family:Georgia;
-    font-size:14px;
-    padding:10px;
-    width:18px;
-    margin:0;
-    text-align:center;
-}
-#browseTabs li:hover {
-    border: 1px solid #820000;
-    cursor:pointer;
-}
-#browseTabs .long {
-    width: auto;
+    padding:0;
 }
 #browseTabs:after {
     content: ".";
@@ -22,4 +9,19 @@
     height: 0;
     clear: both;
     visibility:hidden;
+}
+#browseTabs a {
+    border:1px solid #CDCFBE;
+    font-family:Georgia;
+    font-size:14px;
+    display:block;
+    padding:10px;
+    text-align:center;
+    width:18px;
+}
+#browseTabs .long a {
+    width: auto;
+}
+#browseTabs a:hover {
+    border: 1px solid #820000;
 }
