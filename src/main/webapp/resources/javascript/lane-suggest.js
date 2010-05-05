@@ -26,7 +26,7 @@ YUI().use('gallery-ac-plugin', 'plugin', 'node-base', 'datasource', function (Y)
                     selected = -1;
                 input.insert(contNode,"after");
                 
-                contNode.delegate("click", function (e) {
+                contNode.delegate("mousedown", function (e) {
                     var target = e.currentTarget, index = target.get("className").split('-')[1];
                     acWidget.focus(index).select(e);
                 }, "li");
@@ -74,7 +74,7 @@ YUI().use('gallery-ac-plugin', 'plugin', 'node-base', 'datasource', function (Y)
                         selected = i;
                         if (current) current.removeClass("selected");
                         intent.addClass("selected");
-                        input.ac.set("queryValue", acWidget.getValue());
+                        //input.ac.set("queryValue", acWidget.getValue());
                         return this;
                     },
                     next : function () {
