@@ -65,7 +65,7 @@
     <xsl:variable name="laneNav-tabs">
         <div><span>All Resources</span><span>/biomed-resources</span></div>
         <div><span>Specialty Portals</span><span>/portals</span></div>
-        <div><span>Classes &amp; Consulting</span><span>/info-literacy</span></div>
+        <div><span>Classes &amp; Consulting</span><span>/classes-consult</span></div>
         <div><span>History Center</span><span>/med-history</span></div>
         <div><span>About Library</span><span>/services</span></div>
         <div><span>Help</span><span>/help</span></div>
@@ -81,7 +81,7 @@
             <xsl:when test="starts-with($path,'/portals/bioresearch')">bioresearch-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/info-literacy')">clinical-all</xsl:when>
+            <xsl:when test="starts-with($path,'/classes-consult')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/med-history')">history-all</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
             <xsl:when test="string-length($source-prefix) &gt; 0">
