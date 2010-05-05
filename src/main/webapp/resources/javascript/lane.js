@@ -11,6 +11,14 @@ YUI().add('lane', function(Y) {
          * @static
          */
         LANE = {};
+        
+        LANE.YUI = Y;
+        //create the change event:
+        Y.publish('lane:change', {broadcast: 2});
+        //tell the server javascript works if we haven't already.
+        if (Y.one('html.lane-js-unknown')) {
+            Y.io('/././enable-js');
+        }
     }
     LANE.namespace = function() {
         var a = arguments, o = null, i, j, d;
@@ -25,11 +33,5 @@ YUI().add('lane', function(Y) {
         }
         return o;
     };
-    //create the change event:
-    Y.publish('lane:change', {broadcast: 2});
-	//tell the server javascript works if we haven't already.
-	if (Y.one('html.lane-js-unknown')) {
-		Y.io('/././enable-js');
-	}
 
 }, '1.11.0-SNAPSHOT',{requires:['node','io']});
