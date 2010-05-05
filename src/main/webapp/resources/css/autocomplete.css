@@ -1,68 +1,23 @@
-/* styles for entire auto complete widget */
-.yui-ac {
-    font-family:arial;
-    font-size:100%;
-}
-/* styles for input field */
-.yui-ac-input {
-   /* margin-bottom:4px;
-    vertical-align:middle;*/
-}
-/* styles for results container */
-.yui-ac-container {
+.aclist {
     position:absolute;
-    top:1.6em;
-    width:100%;
-    left:0px;
-    z-index:1;
-}
-/* styles for results container header */
-.yui-ac-hd {
-    font-weight:bold;
-    white-space:nowrap;
-    padding:2px 5px;
-}
-/* styles for header/body/footer wrapper within container */
-.yui-ac-content {
-    font-size:0.9em;
-    position:absolute;
-    text-align:left;
-    width:100%;
-    border:1px solid #808080;
-    background:#fff;
-    overflow:hidden;
-    z-index:1;
-}
-/* styles for container shadow */
-.yui-ac-shadow {
-    position:absolute;
-    margin:.3em;
-    width:100%;
-    background:#000;
-    -moz-opacity: 0.10;
-    opacity:.10;
-    filter:alpha(opacity=10);
-}
-/* styles for results list */
-.yui-ac-content ul {
-    margin:0;
+    display:none;
+    list-style:none;
+    border:1px solid #ccc;
+    border-width:1px 1px 0;
     padding:0;
-    width:100%;
-}
-/* styles for result item */
-.yui-ac-content li {
     margin:0;
-    padding:2px 5px;
-    cursor:default;
-    white-space:nowrap;
-    background: none;
+    background:#fff;
+    z-index:1;
 }
-/* styles for prehighlighted result item */
-.yui-ac-content li.yui-ac-prehighlight {
-    background:#B3D4FF;
+.aclist li {
+    display:block;
+    list-style:none;
+    border-bottom:1px solid #ccc;
+    padding:3px;
+    margin:0;
 }
-/* styles for highlighted result item */
-.yui-ac-content li.yui-ac-highlight {
+.aclist .selected {
     background:#426FD9;
-    color:#FFF;
+    color:#fff;
+    cursor:pointer;
 }
