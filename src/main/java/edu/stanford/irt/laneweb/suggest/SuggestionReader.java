@@ -19,7 +19,7 @@ public class SuggestionReader extends AbstractReader {
 
     private static final byte[] JSON_2 = "]}".getBytes();
 
-    private static final int JSON_RETURN_LIMIT = 20;
+    private static final int JSON_RETURN_LIMIT = 10;
 
     private EresourceSuggestionManager eresourceSuggestionManager;
 
