@@ -103,7 +103,7 @@ YUI().use('gallery-ac-plugin', 'plugin', 'node-base', 'datasource', function (Y)
                         input.focus();
                         e && e.preventDefault();
                         LANE.search.Search.startSearch();
-                        //Y.Node.getDOMNode(input.ancestor("form")).submit();
+                        Y.Node.getDOMNode(input.ancestor("form")).submit();
                     },
                     setWidth : function (w) {
                         if (w) {
