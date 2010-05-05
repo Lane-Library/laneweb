@@ -99,8 +99,10 @@
                                     >Help</a>
                             </li>
                             <li>
-                                <select style="margin:6px 0 0 80px;">
+                                <select id="qlinks" style="margin:6px 0 0 80px;">
                                     <option value="">Quick Links</option>
+                                    <option value="http://laneproxy.stanford.edu/login?url=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M">PubMed</option>
+                                    <option value="http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online">UpToDate</option>
                                 </select>
                             </li>
                         </ul>

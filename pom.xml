@@ -161,6 +161,7 @@
                         <include>lane-textinputs-min.js</include>
                         <include>lane-search-facets-min.js</include>
                         <include>lane-popin-min.js</include>
+                        <include>lane-quicklinks-min.js</include>
                      </includes>
                   </aggregation>
                </aggregations>
