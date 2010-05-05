@@ -25,6 +25,9 @@
     overflow:hidden;
     visibility:hidden;
 }
+.yui3-accordion-item-trigger {
+    cursor:pointer;
+}
 /*.yui3-skin-sam .yui3-accordion {
     font-size:93%;
     line-height:1.5;
