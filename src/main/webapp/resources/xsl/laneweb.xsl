@@ -67,7 +67,7 @@
         <div><span>Specialty Portals</span><span>/portals</span></div>
         <div><span>Classes &amp; Consulting</span><span>/classes-consult</span></div>
         <div><span>History Center</span><span>/med-history</span></div>
-        <div><span>About Library</span><span>/services</span></div>
+        <div><span>About Library</span><span>/about</span></div>
         <div><span>Help</span><span>/help</span></div>
     </xsl:variable>
     
