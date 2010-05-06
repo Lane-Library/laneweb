@@ -95,7 +95,8 @@ public class ContentResultSearchResult implements SearchResult {
 
     public int compareTo(SearchResult o) {
         int scoreCmp = o.getScore() - this.score;
-        return (scoreCmp != 0 ? scoreCmp : this.sortTitle.compareTo(o.getSortTitle()));
+        int titleCmp = this.sortTitle.compareTo(o.getSortTitle());
+        return (titleCmp == 0 ? titleCmp : scoreCmp);
     }
 
     public int hashCode() {
