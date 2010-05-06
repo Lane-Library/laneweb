@@ -69,7 +69,7 @@
 //    createTooltips();
 //    
 //});
-YUI().use("event-mouseenter", "widget", "widget-position", "widget-stack", function(Y) {
+YUI({filter:'debug'}).use("event-mouseenter", "widget", "widget-position", "widget-stack", function(Y) {
     var Lang = Y.Lang,
         Node = Y.Node,
         OX = -10000,
@@ -499,49 +499,52 @@ YUI().use("event-mouseenter", "widget", "widget-position", "widget-stack", funct
     });
     
     var tt,
-    
-    //tooltip ends up having body with if not specified.
-        bodyWidth = Y.one('body').getStyle('width');
-    
         createTooltips = function() {
-        var tooltipTriggerIds = '',
-            tooltipContainer, tooltipId, i, j,
-            tooltipContainerNodeList = Y.all('.tooltips');
-        tt = undefined;
-        for (i = 0; i < tooltipContainerNodeList.size(); i++) {
-            tooltipContainer = tooltipContainerNodeList.item(i).get('childNodes');
-            for (j = 0; j < tooltipContainer.size(); j++) {
-                if (tooltipContainer.item(j).get('nodeType') == 1) {
-                    tooltipId = tooltipContainer.item(j).get('id').replace(/Tooltip$/, '');
-                    if (tooltipTriggerIds) {
-                        tooltipTriggerIds += ', ';
+            var tooltipTriggerIds = '',
+                tooltipContainer, tooltipId, i, j,
+                tooltipContainerNodeList = Y.all('.tooltips');
+            tt = undefined;
+            for (i = 0; i < tooltipContainerNodeList.size(); i++) {
+                tooltipContainer = tooltipContainerNodeList.item(i).get('childNodes');
+                for (j = 0; j < tooltipContainer.size(); j++) {
+                    if (tooltipContainer.item(j).get('nodeType') == 1) {
+                        tooltipId = tooltipContainer.item(j).get('id').replace(/Tooltip$/, '');
+                        if (tooltipTriggerIds) {
+                            tooltipTriggerIds += ', ';
+                        }
+                        tooltipTriggerIds += '#' + tooltipId;
                     }
-                    tooltipTriggerIds += '#' + tooltipId;
                 }
             }
-        }
-        
-        if (tooltipTriggerIds) {
-            tt = new Tooltip({
-                content: {},
-                triggerNodes: tooltipTriggerIds,
-                shim: false,
-                zIndex: 2,
-                autoHideDelay: 60000
-            });
-            tt.render();
             
-            tt.on("triggerEnter", function(e) {
-                var width, tooltip, content, node = e.node;
-                if (node && node.get("id")) {
-                    tooltip = Y.one('#' + node.get('id') + 'Tooltip');
-                    if (tooltip && tooltip.get('innerHTML')) {
-                        this.setTriggerContent(tooltip.get('innerHTML'));
+            if (tooltipTriggerIds) {
+                tt = new Tooltip({
+                    content: {},
+                    triggerNodes: tooltipTriggerIds,
+                    shim: false,
+                    zIndex: 2,
+                    autoHideDelay: 60000
+                });
+                tt.render();
+                
+                tt.on("triggerEnter", function(e) {
+                    var width, tooltip, content, length, node = e.node;
+                    if (node && node.get("id")) {
+                        tooltip = Y.one('#' + node.get('id') + 'Tooltip');
+                        if (tooltip && tooltip.get('innerHTML')) {
+                            this.setTriggerContent(tooltip.get('innerHTML'));
+                        }
                     }
-                }
-            });
-        }
-    };
+                    length = this.get('contentBox').get('innerHTML').length;
+                    this.set('width', length > 500 ? '60%' : '25%');
+                });
+                tt.after('visibleChange', function(e) {
+                    if (e.newVal === false) {
+                        e.target.set('width', 0);
+                    }
+                });
+            }
+        };
     Y.Global.on('lane:change', function() {
         if (tt) {
            tt.destructor();
