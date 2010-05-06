@@ -18,12 +18,12 @@ YUI().use('node', 'event', 'overlay','io-base',function(Y) {
     showPanel = function(title, body, X, Y) {
         //FIXME: Hard coded this width value for beta feedback form.
         var width = (title.length * 7 > 334) ? title.length * 7 : 334;
-        panel.set('headerContent',title + '<a href="#">Close</a>');
+        panel.set('headerContent',title + '<a>Close</a>');
         panel.set('bodyContent', body);
         panel.set('x', X);
         panel.set('y', Y);
         //TODO: set the width somehow.
-        //TODO: set up the close button.
+        
         panel.render();
     };
     showWindow = function(url, type, strWidth, strHeight) {
