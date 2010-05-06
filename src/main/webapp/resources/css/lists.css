@@ -1,4 +1,23 @@
 /* these are the default list styles */
+
+/*this is the first column*/
+div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u.first li {
+    font-size:11px;
+    line-height:12px;
+    padding-bottom:5px;
+}
+/*this is the middle column*/
+div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u li {
+    font-size:inherit;
+    line-height:inherit;
+    padding-bottom:0.2em;
+}
+/*this is the right column*/
+div.yui-ge>div.yui-u li {
+    font-size:11px;
+    line-height:12px;
+    padding-bottom:5px;
+}
 ol {
     list-style-type:decimal;
     list-style-position:inside;
@@ -9,28 +28,6 @@ ol {
 .content li {
     list-style-image:url(/././images/raquo.gif);
     list-style-type:disc;
-}
-/*this is the first column*/
-div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u.first li {
-    font-size:11px;
-    line-height:12px;
-    padding-bottom:5px;
-    margin-left:15px;
     list-style-position:outside;
-}
-/*this is the middle column*/
-div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u li {
-    font-size:inherit;
-    line-height:inherit;
-    padding-bottom:inherit;
-    list-style-position:inside;
-    margin-left:0;
-    padding-bottom:0.2em;
-}
-/*this is the right column*/
-div.yui-ge>div.yui-u li {
-    font-size:11px;
-    line-height:12px;
-    padding-bottom:5px;
     margin-left:15px;
 }

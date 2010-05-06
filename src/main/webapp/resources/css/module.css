@@ -15,7 +15,11 @@
     float:left;
     margin-right:1em;
 }
-/*.module ul {
-    font-size:11px;
-    line-height:12px;
-}*/
+.module-ul {
+    float:left;
+    width:75%;
+}
+.module-ul-narrow {
+    float:left;
+    width:49%;
+}
