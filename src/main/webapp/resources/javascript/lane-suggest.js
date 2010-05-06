@@ -1,7 +1,26 @@
 YUI().use('gallery-ac-plugin', 'plugin', 'node-base', 'datasource', function (Y) {
-
-    var suggestElms = Y.all('.laneSuggest'), i,
+	var suggestElms = Y.all('.laneSuggest'), i,
         baseUrl = '/././apps/suggest/json?',
+		setDSLimit = function(input){
+			//Y.log("set source");
+	    	var sourceElm = input.ancestor("form").one('#searchSource'), searchSource, minQueryLength = 3, limit = null;
+	        searchSource = (sourceElm) ? sourceElm.get('value') : null;
+	        if (searchSource && searchSource.match(/^(all|articles|catalog)/)) {
+	        	limit = baseUrl + "l=er-mesh&";
+	        } else if (searchSource && searchSource.match(/^bioresearch/)) {
+	        	limit = baseUrl + "l=mesh&";
+	        } else if (searchSource && searchSource.match(/^history/)) {
+	        	limit = baseUrl + "l=history&";
+	        } else if (null == searchSource) { // assume source-less is metasearch form on peds portal, etc.
+	        	limit = baseUrl + "l=mesh-di&";
+	        } else {
+	        	minQueryLength = 999;
+	        }
+	        input.ac.set("minQueryLength", minQueryLength);
+	        if(null != limit){
+	        	input.ac.get("dataSource").set("source",limit);
+	        }
+		},
         init = function (input) {
     		var acDS, 
     			acWidget;
@@ -22,18 +41,21 @@ YUI().use('gallery-ac-plugin', 'plugin', 'node-base', 'datasource', function (Y)
             
             acWidget = (function () {
                 var data = [],
-                    contNode = Y.Node.create('<ul class="aclist"> </ul>'),
+                	contNode = Y.Node.create('<ul class="aclist"> </ul>'),
                     selected = -1;
                 input.insert(contNode,"after");
                 
-                contNode.delegate("mousedown", function (e) {
+                contNode.delegate("click", function (e) {
+                	//Y.log("click");
                     var target = e.currentTarget, index = target.get("className").split('-')[1];
                     acWidget.focus(index).select(e);
                 }, "li");
                 contNode.delegate("mouseover", function (e) {
+                	//Y.log("mouseover ");
                     var target = e.currentTarget, index = target.get("className").split('-')[1];
                     acWidget.focus(index);
                 }, "li");
+                Y.on("click", function () { acWidget.hide() }, document);
                 
                 return {
                     setData : function (d) {
@@ -44,19 +66,20 @@ YUI().use('gallery-ac-plugin', 'plugin', 'node-base', 'datasource', function (Y)
                         return this;
                     },
                     render : function () {
+                    	//Y.log("render");
                         if (!data.length){
                             return this;
                         }
                         this.visible = true;
                         contNode.set("innerHTML", "");
                         for (var i = 0, l = data.length; i < l; i ++) {
-                            contNode.appendChild(Y.Node.create('<li class="ac-'+i+'">'+data[i]+"</li>"));
+                        	contNode.appendChild(Y.Node.create('<li class="ac-'+i+'">'+data[i]+"</li>"));
                         }
                         contNode.setStyle("display", "block");
                         return this;
                     },
                     hide : function () {
-                        contNode.setStyle("display", "none");
+                    	contNode.setStyle("display", "none");
                         this.visible = false;
                         selected = -1;
                         return this;
@@ -107,36 +130,22 @@ YUI().use('gallery-ac-plugin', 'plugin', 'node-base', 'datasource', function (Y)
                     },
                     setWidth : function (w) {
                         if (w) {
-                             contNode.setStyle("width",w);
+                        	contNode.setStyle("width",w);
                         }
                     }
                 };
             })();
         	
             input.on("focus", function (e) {
-            	var sourceElm = input.ancestor("form").one('#searchSource'), searchSource, minQueryLength = 3;
-                searchSource = (sourceElm) ? sourceElm.get('value') : null;
-                if (searchSource && searchSource.match(/^(all|articles|catalog)/)) {
-                    input.ac.get("dataSource").set("source",baseUrl+"l=er-mesh&");
-                } else if (searchSource && searchSource.match(/^bioresearch/)) {
-                    input.ac.get("dataSource").set("source",baseUrl+"l=mesh&");
-                } else if (searchSource && searchSource.match(/^history/)) {
-                	input.ac.get("dataSource").set("source",baseUrl+"l=history&");
-                } else if (null == searchSource) { // assume source-less is metasearch form on peds portal, etc.
-                	input.ac.get("dataSource").set("source",baseUrl+"l=mesh-di&");
-                } else {
-                	minQueryLength = 999;
-                }
-                input.ac.set("minQueryLength", minQueryLength);
-            });
-            input.on("blur", function (e) {
-            	acWidget.hide();
+            	setDSLimit(input);
             });
             input.ac.on("ac:load", function (e) {
+            	//Y.log("ac:load");
                 acWidget.setWidth(input.getStyle("width"));
                 acWidget.setData(e.results).render();
             });
             input.ac.on("ac:query", function (e) {
+            	//Y.log("ac:query");
                 if (acWidget.visible && e.value === acWidget.value) {
                     e.halt();
                 }
@@ -150,14 +159,12 @@ YUI().use('gallery-ac-plugin', 'plugin', 'node-base', 'datasource', function (Y)
             input.ac.on("ac:previous", acWidget.previous, acWidget);
             Y.on("key", acWidget.select, input, "down:13,10");
         };
-
+        
         for (i = 0; i < suggestElms.size(); i++) {
             init(suggestElms.item(i));
         }
-
-    
-    
 });
+
 
 
 
