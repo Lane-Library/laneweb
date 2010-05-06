@@ -150,14 +150,14 @@ YUI().add('lane-tracking',function(Y) {
                     documentHost = documentHost.substring(0, documentHost.indexOf(':'));
                 }
                 if (event.type == 'click') {
-                    if (new Y.Node(target).hasClass('searchFacet')) {
+                    if (target.hasClass('searchFacet')) {
                         return true;
                     }
-                    if (new Y.Node(target).hasClass('yui-accordion-toggle')) {
+                    if (target.hasClass('yui-accordion-toggle')) {
                         return true;
                     }
                     //find self ancestor that is <a>
-                    link = target;
+                    link = Y.Node.getDOMNode(target);
                     while (link && link.nodeName != 'A') {
                         link = link.parentNode;
                     }
