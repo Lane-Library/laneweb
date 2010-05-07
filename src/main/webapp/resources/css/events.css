@@ -17,3 +17,20 @@
 .events div div div {
     font-size:11px;
 }
+.all-classes-button, .biomed-sem-button {
+    display:block;
+    text-indent:-2000px;
+    margin: .5em 0;
+    height: 27px;
+    width: 147px;
+    background-image: url(/././graphics/buttons/sprite-but-off.gif);
+}
+.all-classes-button {
+    background-position: -23px -220px;
+}
+.biomed-sem-button {
+    background-position: -23px -267px;
+}
+.all-classes-button:hover, .biomed-sem-button:hover {
+    background-image: url(/././graphics/buttons/sprite-but-on.gif);
+}
