@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI().use('node','anim','console', 'test', function(Y){
+YUI().use('lane-suggest','node','anim','console', 'test', function(Y){
     
     Y.publish('lane:searchSourceChange',{broadcast:2});
 
@@ -20,15 +20,15 @@ YUI().use('node','anim','console', 'test', function(Y){
                 Y.Assert.isTrue(search.hasClass('clinical'), 'search form not class clinical');
                 Y.Assert.isTrue(Y.Lang.isObject(Y.one('#picoFields')), 'no pico fields');
             }, 1000);
-        },
-        testSourceChangeNotClinical : function() {
-            var nav = Y.one('#laneNav');
-            var search = Y.one('#search');
-            Y.fire('lane:searchSourceChange', {getSearchSource:function(){return 'not-clinical';}});
-            this.wait(function() {
-                Y.Assert.isFalse(nav.hasClass('clinical'), 'nav class clinical');
-                Y.Assert.isFalse(search.hasClass('clinical'), 'search form class clinical');
-            }, 1000);
+//        },
+//        testSourceChangeNotClinical : function() {
+//            var nav = Y.one('#laneNav');
+//            var search = Y.one('#search');
+//            Y.fire('lane:searchSourceChange', {getSearchSource:function(){return 'not-clinical';}});
+//            this.wait(function() {
+//                Y.Assert.isFalse(nav.hasClass('clinical'), 'nav class clinical');
+//                Y.Assert.isFalse(search.hasClass('clinical'), 'search form class clinical');
+//            }, 1000);
         }
     });
     

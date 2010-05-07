@@ -1,4 +1,4 @@
-YUI().use('node','anim', function(Y) {
+YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         fields = form.one('#searchFields'),
@@ -6,10 +6,9 @@ YUI().use('node','anim', function(Y) {
         picoIsOn = false,
         picoFields, formAnim, navAnim,
         picoOn = function() {
-            var i, inputs;
             if (!picoIsOn) {
                 if (!picoFields) {
-                    picoFields = Y.Node.create(PICO);
+                    createPicoFields();
                 }
 				formAnim.set('to',{height:124});
 				navAnim.set('to',{top:174});
@@ -50,13 +49,21 @@ YUI().use('node','anim', function(Y) {
             }
         },
         PICO = '<fieldset id="picoFields">' +
-               '<input name="p" class="picoInput" id="clinicalP" type="text" title="patient condition"/>' +
-               '<input name="i" class="picoInput" id="clinicalI" type="text" title="intervention"/>' +
-               '<input name="c" class="picoInput" id="clinicalC" type="text" title="comparison"/>' +
-               '<input name="o" class="picoInput" id="clinicalO" type="text" title="outcome"/>' +
-               '</fieldset>';
+               '<input name="p" id="clinicalP" type="text" title="patient condition" value="patient condition"/>' +
+               '<input name="i" id="clinicalI" type="text" title="intervention" value="intervention"/>' +
+               '<input name="c" id="clinicalC" type="text" title="comparison" value="comparison"/>' +
+               '<input name="o" id="clinicalO" type="text" title="outcome" value="outcome"/>' +
+               '</fieldset>',
+        createPicoFields = function() {
+            var i, inputs;
+            picoFields = Y.Node.create(PICO);
+            inputs = picoFields.all('input');
+            for (i = 0; i < inputs.size(); i++) {
+                new LANE.TextInput(inputs.item(i));
+                new LANE.Suggest(inputs.item(i),"l=mesh&");
+            }
+        };
     if (form.hasClass('clinical')) {
-        picoFields = Y.Node.create(PICO);
         fields.insert(picoFields, 2);
         picoIsOn = true;
     }
