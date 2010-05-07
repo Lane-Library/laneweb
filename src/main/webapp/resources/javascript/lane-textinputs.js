@@ -9,8 +9,12 @@ YUI().add('lane-textinputs', function(Y) {
     var hintStyle = 'inputHint';
     
     LANE.TextInput = LANE.TextInput || function(input) {
-        if (input.get('value') == input.get('title')) {
-            input.setStyle(hintStyle);
+        var reset = function(input) {
+            input.addClass(hintStyle);
+            input.set('value', this.get('title'));
+        };
+        if (input.get('value') === '' || input.get('value') == input.get('title')) {
+            reset(input);
         }
         input.on('focus', function() {
             if (this.get('value') == this.get('title')) {
@@ -20,11 +24,10 @@ YUI().add('lane-textinputs', function(Y) {
         });
         input.on('blur', function() {
             if (this.get('value') === '') {
-                this.addClass(hintStyle);
-                this.set('value', this.get('title'));
+                reset(this);
             }
         });
-    }
+    };
 //    Y.on("domready", function() {
 //    	var textInputs, i,
 //    	hintStyle = 'inputHint';
