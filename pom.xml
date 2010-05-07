@@ -140,6 +140,7 @@
                      <includes>
                         <include>lane-min.js</include>
                         <include>lane-bassett-min.js</include>
+                        <include>lane-textinputs-min.js</include>
                         <include>lane-suggest-min.js</include>
                         <include>lane-search-pico-min.js</include>
                         <include>lane-search-min.js</include>
@@ -160,7 +161,6 @@
                         <include>lane-ie-min.js</include>
                         <include>lane-teletype-min.js</include>
                         <include>lane-selections-min.js</include>
-                        <include>lane-textinputs-min.js</include>
                         <include>lane-search-facets-min.js</include>
                         <include>lane-popin-min.js</include>
                         <include>lane-quicklinks-min.js</include>
