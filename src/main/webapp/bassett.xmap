@@ -7,7 +7,7 @@
         <map:pipeline type="noncaching">
             <map:match pattern="raw/**.html" type="wildcard">
                 <map:aggregate element="doc">
-                    <map:part src="${content-base}/portals/bassett/{1}.html"/>
+                    <map:part src="${content-base}/biomed-resources/bassett/{1}.html"/>
                     <map:part src="cocoon:/database"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
@@ -20,7 +20,7 @@
             </map:match>
             <map:match pattern="**.html" type="wildcard">
                 <map:aggregate element="doc" label="bassettContent">
-                    <map:part src="${content-base}/portals/bassett/bassettTemplate.html"/>
+                    <map:part src="${content-base}/biomed-resources/bassett/bassettTemplate.html"/>
                     <map:part src="cocoon:/raw/{1}.html"/>
                     <map:part src="cocoon:/accordionMenu"/>
                 </map:aggregate>
@@ -30,7 +30,7 @@
             </map:match>
             <map:match pattern="accordionMenu" type="wildcard">
                 <map:aggregate element="doc" label="bassettContent">
-                    <map:part src="${content-base}/portals/bassett/accordionMenu.html"/>
+                    <map:part src="${content-base}/biomed-resources/bassett/accordionMenu.html"/>
                     <map:part src="cocoon:/bassett-accordion"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
