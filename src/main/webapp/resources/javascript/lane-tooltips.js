@@ -69,7 +69,7 @@
 //    createTooltips();
 //    
 //});
-YUI({filter:'debug'}).use("event-mouseenter", "widget", "widget-position", "widget-stack", function(Y) {
+YUI().use("event-mouseenter", "widget", "widget-position", "widget-stack", function(Y) {
     var Lang = Y.Lang,
         Node = Y.Node,
         OX = -10000,
