@@ -1,69 +1,25 @@
-/**********   ACCORDION CSS      *************/
 
 #bassettContent p {
     text-align: justify;
 }
-
-.myAccordion .yui-cms-accordion .yui-cms-item {
-    border: 1px solid #ccc;
-    border-right: 0px solid #ccc;
-    background-image:url(/images/templates/irt3/boxlabel_bkgnd.jpg);
+#bassettContent h1{
+    position: static;
 }
-
-#leftColumn .myAccordion .yui-cms-accordion .yui-cms-item h3 {
-    margin: 7px;
-}
-
-
-#leftColumn div.myAccordion .yui-cms-item  h2 {
-    background-image:none;
-    border:0px ;
-    padding-top: 10px;
-    padding-bottom:0px;
-}
- 
-#leftColumn #accordionTitle{
-    background-image:url(/././images/templates/irt3/boxlabel_bkgnd.jpg);
-    padding-top:12px;
-    padding-bottom:7px;
-    text-align: center;
-    font-weight:bold;
-    font-size:1em;
+#bassettContent a{
     border-bottom: 0px;
 }
-    
-.myAccordion .yui-cms-accordion .yui-cms-item .accordionToggleItem {
-    background: url(/././graphics/accordion.gif) no-repeat 0px -197px;
-    color:black;
-    text-decoration: none;
-    padding-bottom: 5px;
-    padding-top:5px;
-    padding-left: 20px;
-}
-    
-.myAccordion .yui-cms-accordion .yui-cms-item.selected .accordionToggleItem {
-    background: url(/././graphics/accordion.gif) no-repeat 0px 3px;
-}
-        
-.myAccordion .yui-cms-accordion .yui-cms-item .bd {
-    height: 0px;
-    overflow: hidden;
-    background-color: #fff;
-}
-    
-.myAccordion .yui-cms-accordion .yui-cms-item .bd .fixed {
-    overflow: hidden;
-    padding: 7px;
-    height: auto;
+
+.profileImage{
+	clear : both;
+	float : right;
+	height: 175px;
+	margin: 0.5em 1em 1em;
+	position : relative;
+	text-align: center;
 }
       
 .fixed a{
     text-decoration: none;
-}
-
-#leftColumn div.myAccordion div {
-    border-bottom:0px;
-    border-left:0px;
 }
 
 
