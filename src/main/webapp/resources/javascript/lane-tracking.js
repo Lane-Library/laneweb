@@ -9,25 +9,26 @@ YUI().add('lane-tracking',function(Y) {
             //figures out the title string for a node
             getTrackedTitle = function(node) {
                 //if there is a title attribute, use that.
-                var title = node.title, img, i = 0, relTokens;
+                var title = node.get('title'), img, i, rel, relTokens;
                 //if there is rel="popup .." then create a title from it.
-                if (node.rel && node.rel.indexOf('popup') === 0) {
-                    relTokens = node.rel.split(' ');
+                rel = node.get('rel');
+                if (rel && rel.indexOf('popup') === 0) {
+                    relTokens = rel.split(' ');
                     if (relTokens[1] == 'local' || relTokens[1] == 'faq') {
                         title = 'YUI Pop-up [' + relTokens[1] + ']';
                     }
                 }
                 //next try alt attribute.
                 if (!title) {
-                    title = node.alt;
+                    title = node.get('alt');
                 }
                 //next look for alt attributes in any child img.
                 if (!title) {
-                    img = node.getElementsByTagName("IMG");
+                    img = node.all('img');
                     if (img) {
-                        for (i = 0; i < img.length; i++) {
-                            if (img[i].alt) {
-                                title = img[i].alt;
+                        for (i = 0; i < img.size(); i++) {
+                            if (img.item(i).get('alt')) {
+                                title = img.item(i).get('alt');
                                 break;
                             }
                         }
@@ -36,7 +37,7 @@ YUI().add('lane-tracking',function(Y) {
                 //next get the text content before any nested markup
                 //TODO:textContent?
                 if (!title) {
-                    title = node.innerHTML;
+                    title = node.get('innerHTML');
                     if (title && title.indexOf('<') > -1) {
                         title = title.substring(0, title.indexOf('<'));
                     }
@@ -49,35 +50,32 @@ YUI().add('lane-tracking',function(Y) {
                 if (!title) {
                     title = 'unknown';
                 }
-                if (new Y.Node(node).hasClass('yui-accordion-toggle')) {
+                if (node.hasClass('yui-accordion-toggle')) {
                     title = 'Expandy:' + title;
                 }
                 return title;
             },
             getTrackingData = function(event){
-                var node = event.srcElement || event.target,
+                var node = event.target,
                     host, path, query, external, title, searchTerms, searchSource, children;
                     if (event.type == 'click') {
-                        if (new Y.Node(node).hasClass('yui-accordion-toggle')) {
+                        if (node.hasClass('yui-accordion-toggle')) {
                             host = document.location.host;
                             path = document.location.pathname;
                             query = document.location.search;
                             external = false;
                         } else {
-                            if (node.nodeName != 'A') {
-                                children = node.getElementsByTagName('a');
-                                if (children.length > 0) {
-                                    node = children[0];
-                                }
+                            if (node.get('nodeName') != 'A') {
+                                node = node.one('a');
                             }
-                            while (node && node.nodeName != 'A') {
-                                node = node.parentNode;
+                            while (node && node.get('nodeName') != 'A') {
+                                node = node.get('parentNode');
                                 if (node === null) {
                                     throw 'not trackable';
                                 }
                             }
-                            if (node.pathname.indexOf('secure/login.html') > -1 || node.host.indexOf('laneproxy') === 0) {
-                                host = (node.search.substring(node.search.indexOf('//') + 2));
+                            if (node.get('pathname').indexOf('secure/login.html') > -1 || node.get('host').indexOf('laneproxy') === 0) {
+                                host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
                                 if (host.indexOf('/') > -1) {
                                     path = host.substring(host.indexOf('/'));
                                     if (path.indexOf('?') > -1) {
@@ -89,18 +87,18 @@ YUI().add('lane-tracking',function(Y) {
                                 }
                                 query = '';
                                 external = true;
-                            } else if (node.rel && (node.rel.indexOf('popup local') === 0 || node.rel.indexOf('popup faq') === 0)) {
+                            } else if (node.get('rel') && (node.get('rel').indexOf('popup local') === 0 || node.get('rel').indexOf('popup faq') === 0)) {
                                 host = document.location.host;
                                 path = document.location.pathname;
                                 query = document.location.search;
                             } else {
-                                host = node.host;
+                                host = node.get('host');
                                 if (host.indexOf(':') > -1) {
                                     host = host.substring(0, host.indexOf(':'));
                                 }
-                                path = node.pathname;
+                                path = node.get('pathname');
                                 external = host != document.location.host;
-                                query = external ? '' : node.search;
+                                query = external ? '' : node.get('search');
                             }
                         }
                     }
@@ -144,20 +142,20 @@ YUI().add('lane-tracking',function(Y) {
                      }
             },
             isTrackable: function(event){
-                var target = event.srcElement || event.target, link, documentHost, linkHost, relTokens;
+                var link, documentHost, linkHost, relTokens;
                 documentHost = document.location.host;
                 if (documentHost.indexOf(':') > -1) {
                     documentHost = documentHost.substring(0, documentHost.indexOf(':'));
                 }
                 if (event.type == 'click') {
-                    if (target.hasClass('searchFacet')) {
+                    if (event.target.hasClass('searchFacet')) {
                         return true;
                     }
-                    if (target.hasClass('yui-accordion-toggle')) {
+                    if (event.target.hasClass('yui-accordion-toggle')) {
                         return true;
                     }
                     //find self ancestor that is <a>
-                    link = Y.Node.getDOMNode(target);
+                    link = Y.Node.getDOMNode(event.target);
                     while (link && link.nodeName != 'A') {
                         link = link.parentNode;
                     }
