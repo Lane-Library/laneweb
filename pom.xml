@@ -99,6 +99,7 @@
                      <output>target/laneweb/resources/css/lane-all.css</output>
                      <includes>
                         <include>layout-min.css</include>
+                        <include>bassett-min.css</include>
                         <include>som-nav-min.css</include>
                         <include>shaded-border-min.css</include>
                         <include>header-min.css</include>
@@ -138,6 +139,7 @@
                       <output>target/laneweb/resources/javascript/lane-all.js</output>
                      <includes>
                         <include>lane-min.js</include>
+                        <include>lane-bassett-min.js</include>
                         <include>lane-suggest-min.js</include>
                         <include>lane-search-pico-min.js</include>
                         <include>lane-search-min.js</include>
