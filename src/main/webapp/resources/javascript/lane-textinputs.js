@@ -11,7 +11,7 @@ YUI().add('lane-textinputs', function(Y) {
     LANE.TextInput = LANE.TextInput || function(input) {
         var reset = function(input) {
             input.addClass(hintStyle);
-            input.set('value', this.get('title'));
+            input.set('value', input.get('title'));
         };
         if (input.get('value') === '' || input.get('value') == input.get('title')) {
             reset(input);
