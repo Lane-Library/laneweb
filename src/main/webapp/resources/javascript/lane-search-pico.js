@@ -64,6 +64,7 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', function(Y) {
             }
         };
     if (form.hasClass('clinical')) {
+        createPicoFields();
         fields.insert(picoFields, 2);
         picoIsOn = true;
     }
