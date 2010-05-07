@@ -8,22 +8,24 @@ YUI({
     logInclude: {
         TestRunner: true
     }
-}).use('node-event-simulate', 'console', 'test', function(Y){
+}).use('lane-tracking','node-event-simulate', 'console', 'test', function(Y){
 
     var webtrendsTestCase = new Y.Test.Case({
         name: "Lane Webtrends TestCase",
         testTrack: function() {
-            var e = document.body.getElementsByTagName('img'), i;
-            for (i = 0; i < e.length; i++) {
-                if (LANE.tracking.isTrackable(e[i])) {
-                    LANE.tracking.track(e[i]);
+            var event;
+            var handler = function(e) {
+                e.preventDefault();
+                event = e;
+            };
+            var nodes = Y.all('img, a'), i;
+            for (i = 0; i < nodes.size(); i++) {
+                nodes.item(i).on('click', handler);
+                nodes.item(i).simulate('click');
+                if (LANE.tracking.isTrackable(event)) {
+                    LANE.tracking.trackEvent(event);
                 }
-            }
-            e = document.body.getElementsByTagName('a');
-            for (i = 0; i < e.length; i++) {
-                if (LANE.tracking.isTrackable(e[i])) {
-                    LANE.tracking.track(e[i]);
-                }
+                nodes.item(i).detach(handler);
             }
         }
     });
