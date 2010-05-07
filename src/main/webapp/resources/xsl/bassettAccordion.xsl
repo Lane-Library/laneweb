@@ -6,7 +6,7 @@
                 exclude-result-prefixes="h b"
                 version="2.0">
 
-    <xsl:param name="query"/>
+    <xsl:param name="q"/>
     
 
     <xsl:template match="doc">
@@ -15,11 +15,11 @@
     
     <xsl:template match="h:a[not(@rel)]/@href">
       <xsl:choose>
-        <xsl:when test="$query">
+        <xsl:when test="$q">
            <xsl:attribute name="href">
                  <xsl:value-of  select="."/>
                  <xsl:text>&amp;q=</xsl:text>
-                 <xsl:value-of  select="$query"/>
+                 <xsl:value-of  select="$q"/>
            </xsl:attribute>
          </xsl:when>
         <xsl:otherwise>
@@ -30,9 +30,10 @@
     
      
    <xsl:template match="h:span">
-           <xsl:copy>
+         <xsl:copy>
+          <xsl:apply-templates select="attribute::node()|child::node()"/> 
         <xsl:variable name="sub-region-id" select="@id"/>
-        <xsl:variable name="region-id" select="./../../../../h:h2/h:span/@id"/>
+        <xsl:variable name="region-id" select="./../../../../h:h6/h:span/@id"/>
         <xsl:choose>
             <xsl:when test="/doc/b:bassett_count/b:region[@b:name=$region-id]/b:sub_region[@b:name=$sub-region-id]">
                 (<xsl:value-of select="/doc/b:bassett_count/b:region[@b:name=$region-id]/b:sub_region[@b:name=$sub-region-id]"/>)
@@ -41,17 +42,19 @@
                 (<xsl:value-of select="/doc/b:bassett_count/b:region[@b:name=$sub-region-id]//@b:total"/>)
             </xsl:when>
         </xsl:choose>
+                  
         </xsl:copy>
+     
    </xsl:template>
-    
-    <xsl:template match="attribute::node()">
-        <xsl:copy-of select="self::node()"/>
-    </xsl:template>
-
-    <xsl:template match="*">
-         <xsl:copy>
-             <xsl:apply-templates select="attribute::node()|child::node()"/>
-         </xsl:copy>
-    </xsl:template>
+   
+    <xsl:template match="node()">
+    <xsl:copy>
+      <xsl:apply-templates select="node() | @*"/>
+    </xsl:copy>
+  </xsl:template>
+  
+  <xsl:template match="@*">
+    <xsl:copy-of select="."/>
+  </xsl:template>
         
 </xsl:stylesheet>
