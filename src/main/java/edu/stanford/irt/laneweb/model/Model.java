@@ -88,7 +88,7 @@ public class Model extends HashMap<String, Object> {
     
     public static final String JS_ENABLED = "js-enabled";
     
-
+    public static final String PAGE_NUMBER = "pageNumber";
     
     public Model(ObjectModel objectModel) {
         putAll((Map<String, Object>) objectModel.get("laneweb"));

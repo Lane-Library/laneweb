@@ -152,6 +152,8 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
             model.put(Model.PASSWORD, value);
         } else if ("PID".equals(name)) {
             model.put(Model.PID, value);
+        } else if ("page-number".equals(name)) {
+            model.put(Model.PAGE_NUMBER, value);
         } else if (Model.CALLBACK.equals(name)) {
             model.put(Model.CALLBACK, value);
         } else if (Model.URL.equals(name)) {
