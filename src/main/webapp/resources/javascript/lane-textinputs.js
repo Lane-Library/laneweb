@@ -5,65 +5,95 @@
  *  clears default help text on focus and adds back on blur
  */
 YUI().add('lane-textinputs', function(Y) {
-    
+
     var hintStyle = 'inputHint';
     
-    LANE.TextInput = LANE.TextInput || function(input) {
-        var reset = function(input) {
-            input.addClass(hintStyle);
-            input.set('value', input.get('title'));
-        };
-        if (input.get('value') === '' || input.get('value') == input.get('title')) {
-            reset(input);
+    LANE.TextInput = LANE.TextInput || function(input, hintText) {
+        var _hintText = hintText || '',
+            _reset = function(input) {
+                input.addClass(hintStyle);
+                input.set('value', _hintText);
+            },
+            focusHandle = input.on('focus', function() {
+                if (this.get('value') == _hintText) {
+                    this.set('value', '');
+                    this.removeClass(hintStyle);
+                }
+            }),
+            blurHandle = input.on('blur', function() {
+                if (this.get('value') === '') {
+                    _reset(this);
+                }
+            });
+        if (input.get('value') === '' || input.get('value') == _hintText) {
+            _reset(input);
         }
-        input.on('focus', function() {
-            if (this.get('value') == this.get('title')) {
-                this.set('value', '');
-                this.removeClass(hintStyle);
+        return {
+            getValue: function() {
+                var value = input.get('value');
+                return value == _hintText ? '' : value; 
+            },
+            setValue: function(value) {
+                input.set('value', value);
+            },
+            setHintText: function(hintText) {
+                var oldHintText = _hintText;
+                _hintText = hintText;
+                if (input.get('value') === '' || input.get('value') == oldHintText) {
+                    _reset(input);
+                }
+            },
+            destroy: function() {
+                input.detach(focusHandle);
+                input.detach(blurHandle);
+                input.removeClass('inputHint');
+                if (input.get('value') == _hintText) {
+                    input.set('value', '');
+                }
             }
-        });
-        input.on('blur', function() {
-            if (this.get('value') === '') {
-                reset(this);
-            }
-        });
+        };
     };
-//    Y.on("domready", function() {
-//    	var textInputs, i,
-//    	hintStyle = 'inputHint';
-//    	
-//        textInputs = new Y.all('input[type="text"]');
-//        
-//        // default to hintStyle when value and title are same
-//        for (i = 0; i < textInputs.size(); i++){
-//        	if (textInputs.item(i).get('value') == textInputs.item(i).get('title')){
-//        		textInputs.item(i).addClass(hintStyle);
-//        	}
-//        }
-//        // if input value is blank, set to title (help text)
-//        textInputs.on('blur', function(e){
-//    	    if (e.currentTarget.get('value') === ''){
-//    	    	e.currentTarget.set('value',e.currentTarget.get('title'));
-//    	    	e.currentTarget.addClass(hintStyle);
-//    	    }
-//    	});
-//    	// clear input if it matches title (help text) value
-//        textInputs.on('focus', function(e){
-//	    	if (e.currentTarget.get('value') == e.currentTarget.get('title')){
-//	    		e.currentTarget.set('value','');
-//	    		e.currentTarget.removeClass(hintStyle);
-//	    	}
-//    	});
-//    	
-//    });
-}, '1.11.0-SNAPSHOT', {requires:['lane', 'event-base','node-base']});
+    //    Y.on("domready", function() {
+    //    	var textInputs, i,
+    //    	hintStyle = 'inputHint';
+    //    	
+    //        textInputs = new Y.all('input[type="text"]');
+    //        
+    //        // default to hintStyle when value and title are same
+    //        for (i = 0; i < textInputs.size(); i++){
+    //        	if (textInputs.item(i).get('value') == textInputs.item(i).get('title')){
+    //        		textInputs.item(i).addClass(hintStyle);
+    //        	}
+    //        }
+    //        // if input value is blank, set to title (help text)
+    //        textInputs.on('blur', function(e){
+    //    	    if (e.currentTarget.get('value') === ''){
+    //    	    	e.currentTarget.set('value',e.currentTarget.get('title'));
+    //    	    	e.currentTarget.addClass(hintStyle);
+    //    	    }
+    //    	});
+    //    	// clear input if it matches title (help text) value
+    //        textInputs.on('focus', function(e){
+    //	    	if (e.currentTarget.get('value') == e.currentTarget.get('title')){
+    //	    		e.currentTarget.set('value','');
+    //	    		e.currentTarget.removeClass(hintStyle);
+    //	    	}
+    //    	});
+    //    	
+    //    });
+}, '1.11.0-SNAPSHOT', {
+    requires: ['lane', 'event-base', 'node-base']
+});
 
 YUI().use('lane-textinputs', function(Y) {
-    
-    var i, textInputs = new Y.all('input[type="text"]');
+
+    var i, title, textInputs = new Y.all('input[type="text"]');
     
     for (i = 0; i < textInputs.size(); i++) {
-        new LANE.TextInput(textInputs.item(i));
+        title = textInputs.item(i).get('title');
+        if (title) {
+            new LANE.TextInput(textInputs.item(i), title);
+        }
     }
     
 });

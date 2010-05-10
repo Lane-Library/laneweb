@@ -2,7 +2,6 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         fields = form.one('#searchFields'),
-        searchInput = fields.one('#searchTerms'),
         picoIsOn = false,
         picoFields, formAnim, navAnim,
         picoOn = function() {
@@ -49,18 +48,18 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', function(Y) {
             }
         },
         PICO = '<fieldset id="picoFields">' +
-               '<input name="p" id="clinicalP" type="text" title="patient condition" value="patient condition"/>' +
-               '<input name="i" id="clinicalI" type="text" title="intervention" value="intervention"/>' +
-               '<input name="c" id="clinicalC" type="text" title="comparison" value="comparison"/>' +
-               '<input name="o" id="clinicalO" type="text" title="outcome" value="outcome"/>' +
+               '<input name="p" id="clinicalP" type="text" title="patient condition"/>' +
+               '<input name="i" id="clinicalI" type="text" title="intervention"/>' +
+               '<input name="c" id="clinicalC" type="text" title="comparison"/>' +
+               '<input name="o" id="clinicalO" type="text" title="outcome"/>' +
                '</fieldset>',
         createPicoFields = function() {
             var i, inputs;
             picoFields = Y.Node.create(PICO);
             inputs = picoFields.all('input');
             for (i = 0; i < inputs.size(); i++) {
-                new LANE.TextInput(inputs.item(i));
-                new LANE.Suggest(inputs.item(i),"l=mesh&");
+                new LANE.TextInput(inputs.item(i), inputs.item(i).get('title'));
+//                new LANE.Suggest(inputs.item(i),"l=mesh&");
             }
         };
     if (form.hasClass('clinical')) {

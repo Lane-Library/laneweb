@@ -55,22 +55,14 @@ YUI().add('lane-search', function(Y) {
     LANE.search.Search = LANE.search.Search || function() {
         var searching = false, //searching state
             form = Y.one('#search'), //the form Element
-            searchTermsInput = form.one('#searchTerms'),
             searchSourceSelect = form.one('#searchSource'),
             searchOptions = searchSourceSelect.all('option'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
             searchIndicator = form.one('#searchIndicator'),
+            searchTextInput = new LANE.TextInput(form.one('#searchTerms')),
 			searchTermsPresent = function() {
-				var value = searchTermsInput.get('value');
-				return (value && value != searchTermsInput.get('title'));
+				return searchTextInput.getValue() !== '';
 			},
-            setInitialText = function() {
-				if (!searchTermsPresent()) {
-					var initialText = selectedOption.get('title');
-					searchTermsInput.set('value', initialText);
-					searchTermsInput.set('title', initialText);
-				}
-        	},
             search = {
                 startSearch: function() {
                     searching = true;
@@ -84,11 +76,10 @@ YUI().add('lane-search', function(Y) {
                     return searchSourceSelect.get('value');
                 },
                 getSearchTerms: function() {
-                    var value = searchTermsInput.get('value');
-                    return value == searchTermsInput.get('title') ? '' : value;
+                    return searchTextInput.getValue();
                 },
                 setSearchTerms: function(searchString) {
-                    searchTermsInput.set('value', searchString);
+                    searchTextInput.setValue(searchString);
                 },
                 submitSearch: function() {
                     if (!searchTermsPresent()) {
@@ -112,9 +103,9 @@ YUI().add('lane-search', function(Y) {
         Y.publish('lane:beforeSearchSubmit', {broadcast:2});
         Y.on('lane:searchSourceChange', function() {
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
-			setInitialText();
+            searchTextInput.setHintText(selectedOption.get('title'));
         });
-        setInitialText();
+        searchTextInput.setHintText(selectedOption.get('title'));
         searchSourceSelect.on('change', function(e) {
             if (searchTermsPresent()) {
                 LANE.search.Search.submitSearch();
@@ -125,4 +116,4 @@ YUI().add('lane-search', function(Y) {
 //        new LANE.suggest.Suggest(searchTermsInput);
         return search;
     }();
-}, '1.11.0-SNAPSHOT', {requires:['lane', 'node']});
+}, '1.11.0-SNAPSHOT', {requires:['lane','lane-textinputs', 'node']});
