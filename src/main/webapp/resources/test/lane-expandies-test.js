@@ -21,7 +21,7 @@
             panel.previous().simulate('click');
             this.wait(function() {
                 Y.Assert.isFalse(panel.get('clientHeight') === 0, 'height is ' + panel.get('clientHeight'));
-                Y.Assert.isTrue(panel.get('parentNode').hasClass('expanded'), 'parent class is not expanded');
+                Y.Assert.isTrue(panel.get('parentNode').hasClass('yui3-accordion-item-active'), 'parent class is not yui3-accordion-item-active');
             }, 500);
         },
         testClose: function() {
@@ -36,9 +36,9 @@
         testAnchor: function() {
             var panel = Y.one('#panel3');
             if (document.location.hash == '#anchor') {
-                Y.Assert.isFalse(panel.hasClass( 'yui-acc-hidden'));
+                Y.Assert.isTrue(panel.get('parentNode').hasClass( 'yui3-accordion-item-active'));
             } else {
-                Y.Assert.isTrue(panel.hasClass( 'yui-acc-hidden'));
+                Y.Assert.isFalse(panel.get('parentNode').hasClass( 'yui3-accordion-item-active'));
             }
         },
         testChangeEvent: function() {

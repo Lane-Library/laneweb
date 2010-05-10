@@ -5,20 +5,20 @@ YUI({
     logInclude: {
         TestRunner: true
     }
-}).use('lane', 'lane-textinputs', 'node-event-simulate', 'console', 'test', function(Y){
+}).use('lane-textinputs', 'node-event-simulate', 'console', 'test', function(Y){
 
     var textinputsTestCase = new Y.Test.Case({
 		name: 'Lane TextInputs Test Case',
         testConstructorHintText : function() {
             var input = Y.one('input[type="text"]');
-            var textInput = new LANE.TextInput(input, 'hint text');
+            var textInput = new Y.lane.TextInput(input, 'hint text');
             Y.Assert.areEqual(input.get('value'), 'hint text');
             Y.Assert.isTrue(input.hasClass('inputHint'));
             textInput.destroy();
         },
         testSetHintText: function() {
             var input = Y.one('input[type="text"]');
-            var textInput = new LANE.TextInput(input, 'hint text');
+            var textInput = new Y.lane.TextInput(input, 'hint text');
             Y.Assert.areEqual('hint text', input.get('value'));
             textInput.setHintText('new hint text');
             Y.Assert.areEqual('new hint text', input.get('value'));
@@ -27,7 +27,7 @@ YUI({
         },
         testFocus: function() {
             var input = Y.one('input[type="text"]');
-            var textInput = new LANE.TextInput(input, 'hint text');
+            var textInput = new Y.lane.TextInput(input, 'hint text');
             Y.Assert.isTrue(input.hasClass('inputHint'), 'doesn\'t have class inputHint');
             //have to do input.after('focus') safari value is not set on return from simulate.
             var focusHandle = input.after('focus', function() {
@@ -40,7 +40,7 @@ YUI({
         },
         testBlur: function() {
             var input = Y.one('input[type="text"]');
-            var textInput = new LANE.TextInput(input, 'hint text');
+            var textInput = new Y.lane.TextInput(input, 'hint text');
             Y.Assert.isTrue(input.hasClass('inputHint'), 'doesn\'t have class inputHint');
             //have to do input.after('focus') safari value is not set on return from simulate.
             var blurHandle = input.after('blur', function() {
@@ -57,13 +57,13 @@ YUI({
         },
         testDestroy: function() {
             var input = Y.one('input[type="text"]');
-            var textInput = new LANE.TextInput(input, 'hint text');
+            var textInput = new Y.lane.TextInput(input, 'hint text');
             textInput.destroy();
             Y.Assert.areEqual('', input.get('value'), 'value = ' + input.get('value'));
         },
         testNoHintText: function() {
             var input = Y.one('input[type="text"]');
-            var textInput = new LANE.TextInput(input);
+            var textInput = new Y.lane.TextInput(input);
             Y.Assert.areEqual(input.get('value'), '');
             Y.Assert.isTrue(input.hasClass('inputHint'));
             textInput.destroy();

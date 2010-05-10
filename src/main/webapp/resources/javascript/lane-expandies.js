@@ -3,7 +3,12 @@ YUI({
 }).use('gallery-node-accordion', 'plugin', 'node', 'anim', function(Y) {
 
     var expandies = Y.all('.expandy'),
-        expandy, i, j, children, panel;
+        anchor = document.location.hash,
+        anchors, expandy, i, j, k, children, panel;
+        
+    if (anchor) {
+        anchor = anchor.substring(1);
+    }
     for (i = 0; i < expandies.size(); i++) {
         expandy = expandies.item(i);
         expandy.addClass('yui3-accordion');
@@ -11,6 +16,15 @@ YUI({
         for (j = 0; j < children.size(); j++) {
             panel = children.item(j);
             panel.addClass('yui3-accordion-item');
+            if (anchor) {
+                anchors = panel.all('a');
+                for (k = 0; k < anchors.size(); k++) {
+                    if (anchor == anchors.item(k).get('name')) {
+                        panel.addClass('expanded');
+                        break;
+                    }
+                }
+            }
             if (panel.hasClass('expanded')) {
                 panel.addClass(' yui3-accordion-item-active');
             }
