@@ -9,33 +9,33 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', function(Y) {
                 if (!picoFields) {
                     createPicoFields();
                 }
-				formAnim.set('to',{height:124});
-				navAnim.set('to',{top:174});
-				formAnim.on('end', function() {
+//				formAnim.set('to',{height:124});
+//				navAnim.set('to',{top:174});
+//				formAnim.on('end', function() {
 					form.addClass('clinical');
 				    fields.insert(picoFields, 2);
-				});
-				navAnim.on('end', function() {
+//				});
+//				navAnim.on('end', function() {
                     nav.addClass('clinical');
-				});
-				formAnim.run();
-				navAnim.run();
+//				});
+//				formAnim.run();
+//				navAnim.run();
                 picoIsOn = true;
             }
         },
         picoOff = function() {
             if (picoIsOn) {
-				formAnim.set('to',{height:94});
-				navAnim.set('to',{top:144});
-				formAnim.on('end', function() {
-                    picoFields.remove();
+//				formAnim.set('to',{height:94});
+//				navAnim.set('to',{top:144});
+//				formAnim.on('end', function() {
+//                    picoFields.remove();
 					form.removeClass('clinical');
-				});
-				navAnim.on('end', function() {
+//				});
+//				navAnim.on('end', function() {
                     nav.removeClass('clinical');
-				});
-				formAnim.run();
-				navAnim.run();
+//				});
+//				formAnim.run();
+//				navAnim.run();
                 picoIsOn = false;
             }
             
@@ -58,8 +58,8 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', function(Y) {
             picoFields = Y.Node.create(PICO);
             inputs = picoFields.all('input');
             for (i = 0; i < inputs.size(); i++) {
-                new LANE.TextInput(inputs.item(i), inputs.item(i).get('title'));
-//                new LANE.Suggest(inputs.item(i),"l=mesh&");
+                new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title'));
+                new Y.lane.Suggest(inputs.item(i),"l=mesh&");
             }
         };
     if (form.hasClass('clinical')) {
@@ -67,16 +67,16 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', function(Y) {
         fields.insert(picoFields, 2);
         picoIsOn = true;
     }
-	formAnim = new Y.Anim({
-		node: '#search',
-		easing: Y.Easing.easeOut,
-		duration: 0.3
-	});
-	navAnim = new Y.Anim({
-		node: '#laneNav',
-		easing: Y.Easing.easOut,
-		duration: 0.3
-	});
+//	formAnim = new Y.Anim({
+//		node: '#search',
+//		easing: Y.Easing.easeOut,
+//		duration: 0.3
+//	});
+//	navAnim = new Y.Anim({
+//		node: '#laneNav',
+//		easing: Y.Easing.easOut,
+//		duration: 0.3
+//	});
     Y.Global.on('lane:searchSourceChange', togglePico);
 });
 //    // pico form functionality

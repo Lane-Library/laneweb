@@ -5,10 +5,12 @@
  *  clears default help text on focus and adds back on blur
  */
 YUI().add('lane-textinputs', function(Y) {
+    
+    Y.namespace('lane');
 
     var hintStyle = 'inputHint';
     
-    LANE.TextInput = LANE.TextInput || function(input, hintText) {
+    Y.lane.TextInput = function(input, hintText) {
         var _hintText = hintText || '',
             _reset = function(input) {
                 input.addClass(hintStyle);
@@ -35,6 +37,9 @@ YUI().add('lane-textinputs', function(Y) {
             },
             setValue: function(value) {
                 input.set('value', value);
+            },
+            getInput: function() {
+                return input;
             },
             setHintText: function(hintText) {
                 var oldHintText = _hintText;
@@ -92,7 +97,7 @@ YUI().use('lane-textinputs', function(Y) {
     for (i = 0; i < textInputs.size(); i++) {
         title = textInputs.item(i).get('title');
         if (title) {
-            new LANE.TextInput(textInputs.item(i), title);
+            new Y.lane.TextInput(textInputs.item(i), title);
         }
     }
     

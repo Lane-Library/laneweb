@@ -1,18 +1,9 @@
 YUI().use('node', 'io-base', 'event','history',function(Y) {
 
-			var diagramDisplay = false;
+			var bassettContent = Y.one('#bassettContent'),
+                diagramDisplay = false;
 
-			Y.on('available', init, "#bassettContent", Y);
-
-			function init() {
-				var accordion = Y.one('#accordion');
-				if (accordion) // not if largerView.html
-				{
-					registerLinksContainer(accordion);
-					registerLinksContainer(Y.one('#bassettContent'));
-					initializeHistory();
-				}
-			}
+//			Y.on('available', init, "#bassettContent", Y);
 
 			var registerLinksContainer = function(container) {
 				var anchor, i, url;
@@ -36,7 +27,7 @@ YUI().use('node', 'io-base', 'event','history',function(Y) {
 						}
 					}
 				}
-			}
+			};
 
 			var loadContent = function(url) {
 				url = "/././plain/bassett/raw".concat(url);
@@ -49,7 +40,7 @@ YUI().use('node', 'io-base', 'event','history',function(Y) {
 					Y.fire('lane:change');
 				}
 				Y.io(url, {	on :{success : successHandler}});
-			}
+			};
 
 			var formatAjaxUrl = function(href) {
 				var url;
@@ -67,7 +58,7 @@ YUI().use('node', 'io-base', 'event','history',function(Y) {
 					url = url + "&t=diagram";
 				}
 				return url;
-			}
+			};
 
 			function initializeHistory() {
 				var currentState = Y.History.getBookmarkedState("bassett")
@@ -78,5 +69,15 @@ YUI().use('node', 'io-base', 'event','history',function(Y) {
 				Y.History.initialize("#yui-history-field-bassett",
 						"#yui-history-iframe");
 			}
+
+            if (bassettContent) {
+                var accordion = Y.one('#accordion');
+                if (accordion) // not if largerView.html
+                {
+                    registerLinksContainer(accordion);
+                    registerLinksContainer(Y.one('#bassettContent'));
+                    initializeHistory();
+                }
+            }
 
 		});

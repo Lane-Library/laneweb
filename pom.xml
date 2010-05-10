@@ -139,6 +139,7 @@
                       <output>target/laneweb/resources/javascript/lane-all.js</output>
                      <includes>
                         <include>lane-min.js</include>
+                        <include>lane-search-result-min.js</include>
                         <include>lane-bassett-min.js</include>
                         <include>lane-textinputs-min.js</include>
                         <include>lane-suggest-min.js</include>

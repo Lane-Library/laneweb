@@ -1,4 +1,4 @@
-YUI().use('lane-search', 'node', 'event-custom', 'io-base', 'json-parse', function(Y) {
+YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse', function(Y) {
     var spellCheck = Y.one('#spellCheck'),
         searchTerms = LANE.search.Result.getEncodedSearchTerms();
     if (spellCheck && searchTerms) {

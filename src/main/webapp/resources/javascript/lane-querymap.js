@@ -1,6 +1,6 @@
 //TODO: this needs some cleaning up
 //check if there is a query
-YUI().use('lane-search', 'node', 'event-custom', 'io-base', 'json-parse', function(Y) {
+YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse', function(Y) {
     if (LANE.search.Result.getEncodedSearchTerms()) {
         //check if there is id=queryMapping
         var queryMapping = Y.one('#queryMapping');

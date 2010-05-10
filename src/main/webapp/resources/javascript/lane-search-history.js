@@ -1,4 +1,4 @@
-YUI().use('lane-search', 'lane-search-facets', 'node', 'event-custom', 'history', function(Y) {
+YUI().use('lane-search-result', 'lane-search-facets', 'node', 'event-custom', 'history', function(Y) {
 	var searchString = LANE.search.Result.getEncodedSearchTerms(),
 	facetNodes = Y.one('#searchFacets'),
 	initializeHistory = function() {

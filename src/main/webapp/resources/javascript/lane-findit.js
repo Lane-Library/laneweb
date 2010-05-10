@@ -1,4 +1,4 @@
-YUI().use('lane-search','event', 'node', 'io-base', 'json-parse', function(Y) {
+YUI().use('lane-search-result','event', 'node', 'io-base', 'json-parse', function(Y) {
     var findItNode = Y.one('#findIt'),
         searchString = LANE.search.Result.getEncodedSearchTerms(),
         url;

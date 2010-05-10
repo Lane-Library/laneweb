@@ -12,7 +12,6 @@ YUI().add('lane', function(Y) {
          */
         LANE = {};
         
-        LANE.YUI = Y;
         //create the change event:
         Y.publish('lane:change', {broadcast: 2});
         //tell the server javascript works if we haven't already.

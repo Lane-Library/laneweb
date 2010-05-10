@@ -1,4 +1,4 @@
-YUI().use('lane-search', 'node','json-parse','io-base','datatype',function(Y) {
+YUI().use('lane-search-result', 'node','json-parse','io-base','datatype',function(Y) {
     	
     LANE.namespace('search.metasearch');
     LANE.search.metasearch = function() {

@@ -122,4 +122,4 @@ YUI().add('lane-search-facets', function(Y) {
             this._facet.removeClass('current');
         };
     }
-}, '1.11.0-SNAPSHOT', {requires:['lane-search','node','event-custom','history','io-base']});
+}, '1.11.0-SNAPSHOT', {requires:['lane-search-result','node','event-custom','history','io-base']});
