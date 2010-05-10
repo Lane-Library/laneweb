@@ -28,7 +28,7 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', function(Y) {
 //				formAnim.set('to',{height:94});
 //				navAnim.set('to',{top:144});
 //				formAnim.on('end', function() {
-//                    picoFields.remove();
+                    picoFields.remove();
 					form.removeClass('clinical');
 //				});
 //				navAnim.on('end', function() {
