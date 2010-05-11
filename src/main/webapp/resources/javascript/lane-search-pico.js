@@ -59,7 +59,17 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', function(Y) {
             inputs = picoFields.all('input');
             for (i = 0; i < inputs.size(); i++) {
                 new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title'));
-                new Y.lane.Suggest(inputs.item(i),"l=mesh&");
+                switch(inputs.item(i).get('name')){
+                	case 'p':
+                		new Y.lane.Suggest(inputs.item(i),"l=mesh-d&");
+                		break;
+                	case 'i':
+                		new Y.lane.Suggest(inputs.item(i),"l=mesh-i&");
+                		break;
+                	case 'c':
+                		new Y.lane.Suggest(inputs.item(i),"l=mesh-di&");
+                		break;
+                }
             }
         };
     if (form.hasClass('clinical')) {
