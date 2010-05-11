@@ -42,6 +42,7 @@ public class EresourceResource implements Resource {
         XMLUtils.createElementNS(handler, NAMESPACE, RECORD_ID, Integer.toString(this.eresource.getRecordId()));
         XMLUtils.createElementNS(handler, NAMESPACE, RECORD_TYPE, this.eresource.getRecordType());
         XMLUtils.createElementNS(handler, NAMESPACE, TITLE, this.eresource.getTitle());
+        maybeCreateElement(handler, DESCRIPTION, this.eresource.getDescription());
         XMLUtils.startElement(handler, NAMESPACE, VERSIONS);
         Collection<Version> versions = new TreeSet<Version>(VERSION_COMPARATOR);
         versions.addAll(this.eresource.getVersions());

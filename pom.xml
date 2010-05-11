@@ -244,7 +244,7 @@
       <dependency>
          <artifactId>eresources-impl</artifactId>
          <groupId>edu.stanford.irt</groupId>
-         <version>1.5.1-SNAPSHOT</version>
+         <version>1.6.0-SNAPSHOT</version>
       </dependency>
       <dependency>
          <artifactId>icd9</artifactId>
