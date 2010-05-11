@@ -202,6 +202,7 @@
                     <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_systematicreviews.html"/>
                     <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_treatment_focused.html"/>
                     <map:part src="cocoon:/cache/search/clinical/clinical-uptodate.html"/>
+                    <map:part src="cocoon:/cache/search/history/history-wilson_somhistory.html"/>
                 </map:aggregate>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
