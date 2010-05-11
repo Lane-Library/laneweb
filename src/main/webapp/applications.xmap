@@ -52,6 +52,16 @@
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
+                <!-- search/merged/history/html returns xhtmlized merged metasearch and history eresources results -->
+                <map:match pattern="search/merged/history/html/*" type="wildcard">
+                    <map:generate type="merged-history-search">
+                        <map:parameter name="timeout" value="20000"/>
+                        <map:parameter name="engine-list" value="{1}"/>
+                    </map:generate>
+                    <map:transform type="query-highlighting"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
+                    <map:serialize type="xml"/>
+                </map:match>
                 <!-- search2json.xsl converts the result xml to json -->
                 <map:match pattern="search/json" type="wildcard">
                     <map:generate type="search-resource"/>
