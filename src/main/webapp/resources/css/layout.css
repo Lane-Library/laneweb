@@ -12,9 +12,6 @@
     margin:25px 15px 0 20px;
 }
 /*customizations*/
-.content > .yui-ge > .first > .yui-gf > .first {
-    width:156px;
-}
 .content > .yui-ge > .first > .yui-gf > div {
     width:521px;
 }
@@ -23,6 +20,12 @@
 }
 .content > .yui-ge > div {
     width:199px;
+}
+.content > .yui-gf > .yui-u {
+    width: 760px;
+}
+.content > .yui-ge > .first > .yui-gf > .first, .content > .yui-gf > .first {
+    width:156px;
 }
 /*nesting error corrections*/
 .yui-gf .yui-g, .yui-u .yui-g {
