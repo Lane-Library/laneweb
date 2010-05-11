@@ -84,11 +84,12 @@
                     </xsl:for-each>
                 </div>
                 <xsl:if test="count(//s:result[s:resourceName='PubMed']/s:pub-title) > 0">
+                    <span id="showPubMedStrategies" style="display:none;">true</span>
                     <ul id="pubmedJournalLinks">
                         <xsl:for-each
                             select="distinct-values(//s:result[s:resourceName = 'PubMed']/s:pub-title)">
                             <xsl:sort select="." order="ascending" data-type="text"/>
-                            <xsl:if test="position() &lt;= 10">
+                            <xsl:if test="position() &lt;= 15">
                                 <li>
                                     <a rel="popup standard"
                                         href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{.}&quot;[Journal]">
@@ -117,7 +118,7 @@
         <dd>
             <ul>
                 <li>
-                    <a title="{s:title}" href="{s:url}"
+                    <a class="primaryLink" title="{s:title}" href="{s:url}"
                         id="{s:id}" rel="popup standard">
                         <xsl:apply-templates select="s:title"/>
                     </a>
@@ -136,18 +137,12 @@
                         <span class="sourceLink">
                             <xsl:value-of select="$resourceName"/>
                         </span>
-                        <xsl:choose>
-                            <xsl:when test="$resourceName = 'PubMed'">
-                                <xsl:text> - </xsl:text>
-                                <a href="#" rel="popup local pubmedMoreStrategy">more</a>
-                            </xsl:when>
-                            <xsl:when test="$moreResultsLimit &lt; number(s:resourceHits)">
-                                <xsl:text> - </xsl:text>
-                                <a rel="popup standard"
-                                    title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
-                                    href="{s:resourceUrl}">more</a>
-                            </xsl:when>
-                        </xsl:choose>
+                        <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
+                            <xsl:text> - </xsl:text>
+                            <a rel="popup standard"
+                                title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
+                                href="{s:resourceUrl}">more</a>
+                        </xsl:if>
                     </div>
                 </li>
             </ul>
@@ -209,9 +204,7 @@
                         </xsl:when>
                         <xsl:when test="s:recordType = 'bib'">
                             <div class="moreResults">
-                                <span class="sourceLink">Lane Catalog</span>
-                                <xsl:text> - </xsl:text>
-                                <a rel="popup standard" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">details</a>
+                                <a rel="popup standard" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
                             </div>
                         </xsl:when>
                         <xsl:when test="s:recordType = 'faq'">
@@ -302,7 +295,7 @@
         <xsl:param name="eresourceId"/>
         <xsl:choose>
             <xsl:when test="$type = 'first'">
-                <a title="{$title}" href="{$link/s:url}"
+                <a class="primaryLink" title="{$title}" href="{$link/s:url}"
                     id="eresource-{$eresourceId}" rel="popup standard">
                     <xsl:apply-templates select="$title"/>
                 </a>

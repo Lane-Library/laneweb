@@ -63,6 +63,7 @@ YUI().use('lane-search-result', 'node','json-parse','io-base','datatype',functio
                                             updateables.item(y).get('parentNode').insert(resultSpan);
                                         }
                                         if (result.status == 'successful') {
+                                        	updateables.item(y).addClass("searchSuccess");
                                             // process display of each updateable node
                                             // once all processed, remove id from searchables
                                             resultSpan.setContent('&#160;' +

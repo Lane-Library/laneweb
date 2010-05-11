@@ -132,13 +132,28 @@
     </xsl:template>
     
     <xsl:template match="h:span[@id='pubmedMoreStrategies']">
-        <ul>
-            <xsl:for-each select="//node()[contains(attribute::class,'searchFacet') and contains(attribute::id,'pubmed') and not(matches(attribute::id,'pubmed_guidelines|pubmed_cochrane_reviews'))]">
-                <xsl:apply-templates select="self::node()">
-                    <xsl:with-param name="pubmedMore-link">true</xsl:with-param>
-                </xsl:apply-templates>
-            </xsl:for-each>
-        </ul>
+        <xsl:if test="//node()[@id='showPubMedStrategies']">
+            <div class="rightSearchTips">
+                <h4>Additional views of PubMed Results</h4>
+                <img style="padding:20px;" src="/graphics/logos/pubmed.jpg" alt="PubMed Logo"/>
+                
+                <h5>PubMed search strategies</h5>
+                <ul>
+                    <xsl:for-each select="//node()[contains(attribute::class,'searchFacet') and contains(attribute::id,'pubmed') and not(matches(attribute::id,'pubmed_guidelines|pubmed_cochrane_reviews'))]">
+                        <xsl:apply-templates select="self::node()">
+                            <xsl:with-param name="pubmedMore-link">true</xsl:with-param>
+                        </xsl:apply-templates>
+                    </xsl:for-each>
+                </ul>
+                <xsl:if test="//node()[@id='pubmedJournalLinks']">
+                    <h5>Related journals</h5>
+                    <xsl:copy>
+                        <xsl:copy-of select="self::node()" />
+                        <xsl:copy-of select="//node()[@id='pubmedJournalLinks']"/>
+                    </xsl:copy>
+                </xsl:if>
+            </div>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="node()[@id='pubmedJournals']">

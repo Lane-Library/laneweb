@@ -7,77 +7,98 @@
 .tooltips, #search-content-counts, span#findIt, #spellCheck, span#queryMapping {
     display:none;
 }
-.search .current {
-    background-color:#B2A77A;
-    background-image:none;
-    border:none;
-    padding:5px 5px;
-    -moz-border-radius-topleft:5px;
-    -moz-border-radius-bottomleft:5px;
-    -webkit-border-top-left-radius:5px;
-    -webkit-border-bottom-left-radius:5px;
-}
-.search .current a {
-    color:#fff;
-    font-weight:bold;
-}
-.search .current a:focus {
+
+.search a, a:visited {
+    color: #0C4C72;
     border-bottom:none;
-    outline-style:none;
+  }
+#searchFacets {
+    margin-top:10px;
+    padding-right:20px;
+    border-right:1px solid #edecdf;
 }
-.search .indent {
-    margin-left:10px;
-}
-.search strong {
+.search .facetHeader {
+    text-transform:uppercase;
     font-weight:bold;
+    list-style-image:url(/././images/raquo.gif);
+    list-style-type:disc;
 }
-#searchResults .moreResults .sourceLink {
-    color:#3f8f3e;
-    font-size:1em;
+.search .facetIndent {
+    margin-left:30px;
+    list-style-image:none;
+    list-style-type:disc;
 }
-#searchResults .moreResults a {
-    color:#7777cc;
-    font-size:1em;
+.search li {
+    list-style-image:none;
+    list-style-type:none;
 }
-#queryMapping span a, #findIt a, #spellCheck a {
-    margin-left:10px;
-    color:#2200CC;
+.search ul {
+    padding-bottom:10px;
 }
-#searchResults .resultsNav a {
-    padding:5px;
-    border-bottom-style:none;
+li.current a {
+    color:red;
 }
-#searchResults .resultsNav a.active {
-    color:#808080;
-    font-size:20px;
+li.inactiveFacet, li.inactiveFacet a {
+    color:#666666;
 }
-
-
-#searchResults a {
-    color:#2200cc;
-    font-size:16px;
+#searchOptions {
+    background-color:#edecdf;
+    padding:10px;
 }
-
-#searchResults .moreResults a {
-    color:#7777cc;
-    font-size:13px;
+#optionsToggle {
+    background-position:0px 0px;
+    background-repeat:no-repeat;
+    padding-left:15px;
+    margin-left:-5px;
 }
-.inactiveFacet a{
-    border-bottom:none;
+#optionsToggle.closed {
+    background-image:url(/graphics/buttons/accord-minus-close.gif);
 }
-#searchResults ul li{
-    padding-bottom: 1em;
+#optionsToggle.open {
+    background-image:url(/graphics/buttons/accord-plus-open.gif);
 }
-
-
+#optionsToggle a {
+    font-weight:bold;
+    border-bottom:1px dotted #81785A;
+}
+#popInContent span span {
+    font-weight:bold;
+    color:#820000;
+    text-transform:uppercase;
+}
 #searchResults {
-    margin-top: 1em;
+    margin-top:5px;
+    padding-top:5px;
+    border-top:1px solid #edecdf;
+}
+#searchResults li {
+    margin-left:0;
+}
+#searchResults a.primaryLink {
+    font-size:16px;
+    border-bottom:1px dotted #0C4C72;
+}
+#searchResults li div {
+    margin-left:20px;
+}
+.rightSearchTips {
+    padding:20px;
+    background-color:#edecdf;
+}
+.rightSearchTips h4 {
+    text-align:center;
+    color:#333;
+    font-size:18px;
+}
+/* TODO: will need to fiddle with this to make searchFacets decent font as well as hidden results
+div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u.first li {
+font-size:18px;
+line-height:12px;
+padding-bottom:5px;
+} */
+
+/* used for successful metasearch links on hybrid pages */
+.searchSuccess {
+    font-weight:bold;
 }
 
-.sectionMenu .bd #searchFacets ul li{
-    border: 1px solid black;
-}
-
-#searchFacets ul li .inactiveFacet{
-    background-image:none;
-}
