@@ -1,13 +1,13 @@
 /* these are the default list styles */
 
 /*this is the first column*/
-div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u.first li {
+div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u.first li, div.yui-gf>div.yui-u.first li {
     font-size:11px;
     line-height:12px;
     padding-bottom:5px;
 }
 /*this is the middle column*/
-div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u li {
+div.yui-ge>div.yui-u.first>div.yui-gf>div.yui-u li, .content > .yui-gf > .yui-u li {
     font-size:inherit;
     line-height:inherit;
     padding-bottom:0.2em;
