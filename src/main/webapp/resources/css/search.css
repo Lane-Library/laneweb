@@ -36,7 +36,7 @@
     padding-bottom:10px;
 }
 .search li.current a {
-    color:red;
+    color:#9a0003;
 }
 .search li.inactiveFacet, .search li.inactiveFacet a {
     color:#666666;
