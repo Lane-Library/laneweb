@@ -4,7 +4,7 @@
 if (!window.location.search) {
     window.location = window.location + '?source=foo&q=bar+baz';
 }
-YUI({ logInclude: { TestRunner: true } }).use('lane-search-result','lane-search','node-event-simulate','console','test', function(Y) {
+YUI({ logInclude: { TestRunner: true } }).use('lane-search-result','node-event-simulate','console','test', function(Y) {
     
     var resultTestCase = new Y.Test.Case({
         

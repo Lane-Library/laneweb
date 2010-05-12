@@ -45,11 +45,8 @@
     <!-- the root node of the requested content document -->
     <xsl:variable name="source-doc" select="/*/h:html[1]"/>
     
-    <!-- the sitemap document -->
-    <xsl:variable name="sitemap" select="/*/h:html[2]"/>
-    
     <!-- the template document -->
-    <xsl:variable name="template" select="/*/h:html[3]"/>
+    <xsl:variable name="template" select="/*/h:html[2]"/>
     
     <xsl:variable name="path">
         <xsl:value-of select="substring($request-uri,string-length($base-path) + 1)"/>
@@ -121,9 +118,6 @@
         <xsl:choose>
             <xsl:when test=".='content'">
                 <xsl:call-template name="content"/>
-            </xsl:when>
-            <xsl:when test=".='breadcrumb'">
-                <xsl:call-template name="breadcrumb"/>
             </xsl:when>
             <xsl:when test=".='search-terms'">
                 <xsl:value-of select="$query"/>
@@ -699,98 +693,6 @@
                 <xsl:with-param name="string" select="substring($string,2)"/>
             </xsl:call-template>
         </xsl:if>
-    </xsl:template>
-
-    <!-- the breadcrumb -->
-    <xsl:template name="breadcrumb">
-        <xsl:call-template name="breadcrumb-section">
-            <xsl:with-param name="uri-before" select="'/'"/>
-            <xsl:with-param name="uri-remaining">
-                <xsl:choose>
-                    <!-- this is how the breadcrumb is coerced into what it should be based on faq category -->
-                    <xsl:when test="$source-doc/h:head/h:meta[@name='LW.faqCategory']">
-                        <xsl:value-of
-                            select="substring-after($sitemap//h:a[.=$source-doc/h:head/h:meta[@name='LW.faqCategory']/@content]/@href,'/')"
-                        />
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="substring($path,2)"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:with-param>
-            <!--<xsl:with-param name="uri-remaining" select="$path"/>-->
-        </xsl:call-template>
-    </xsl:template>
-    <!-- does most of the breadcrumb work -->
-    <xsl:template name="breadcrumb-section">
-        <xsl:param name="uri-before"/>
-        <xsl:param name="uri-remaining"/>
-        <xsl:variable name="uri-current" select="substring-before($uri-remaining, '/')"/>
-        <xsl:variable name="label-current">
-            <xsl:value-of select="$sitemap//h:a[@href=concat($uri-before,'index.html')]"/>
-        </xsl:variable>
-        <xsl:variable name="uri-next" select="substring-after($uri-remaining, '/')"/>
-        <!--<div>uri-before <xsl:value-of select="$uri-before"/></div>
-        <div>uri-remaining <xsl:value-of select="$uri-remaining"/></div>
-        <div>uri-current <xsl:value-of select="$uri-current"/></div>
-        <div>label-current <xsl:value-of select="$label-current"/></div>
-        <div>uri-next <xsl:value-of select="$uri-next"/></div>-->
-        <xsl:choose>
-            <xsl:when test="contains($uri-remaining, '/')">
-                <!-- here is a hack to prevent the non-existent top level portals/index.html from appearing in breadcrumb in history portal -->
-                <xsl:if test="$uri-before != '/portals/'">
-                    <a>
-                        <xsl:call-template name="make-link">
-                            <xsl:with-param name="link" select="concat($uri-before, 'index.html')"/>
-                            <xsl:with-param name="attr" select="'href'"/>
-                        </xsl:call-template>
-                        <xsl:attribute name="title">
-                            <xsl:value-of select="concat($label-current,'...')"/>
-                        </xsl:attribute>
-                        <xsl:value-of select="$label-current"/>
-                    </a>
-                    <xsl:text>&#160;&#xBB;&#160;</xsl:text>
-                </xsl:if>
-                <xsl:call-template name="breadcrumb-section">
-                    <xsl:with-param name="uri-before"
-                        select="concat($uri-before, $uri-current, '/')"/>
-                    <xsl:with-param name="uri-remaining" select="$uri-next"/>
-                </xsl:call-template>
-            </xsl:when>
-            <xsl:when test="$uri-before = '/' and $uri-remaining='index.html'">
-                <xsl:text>LaneConnex</xsl:text>
-            </xsl:when>
-            <xsl:when test="$uri-remaining = 'index.html'">
-                <xsl:value-of select="$label-current"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <!-- here is a hack to prevent the top level online and portals index.html from appearing in breadcrumb -->
-                <xsl:if test="$uri-before != '/online/' and $uri-before != '/portals/'">
-                    <a>
-                        <xsl:call-template name="make-link">
-                            <xsl:with-param name="link" select="concat($uri-before, 'index.html')"/>
-                            <xsl:with-param name="attr" select="'href'"/>
-                        </xsl:call-template>
-                        <xsl:attribute name="title">
-                            <xsl:value-of select="concat($label-current,'...')"/>
-                        </xsl:attribute>
-                        <xsl:value-of select="$label-current"/>
-                    </a>
-                    <xsl:text>&#160;&#xBB;&#160;</xsl:text>
-                </xsl:if>
-                <xsl:variable name="title">
-                    <xsl:value-of select="$sitemap//h:a[@href=concat($uri-before,$uri-remaining)]"/>
-                </xsl:variable>
-                <xsl:choose>
-                    <xsl:when test="$title = ''">
-                        <xsl:value-of select="$source-doc/h:head/h:title"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:value-of select="$title"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:otherwise>
-        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="js-split">

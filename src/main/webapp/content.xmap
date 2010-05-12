@@ -118,7 +118,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
-            <map:match type="regexp" pattern="^(announcement|error|sitemap)\.html$">
+            <map:match type="regexp" pattern="^(announcement|error)\.html$">
                 <map:generate type="html" src="${content-base}/{1}.html">
                     <map:parameter name="alt-src" value="${default-content-base}/{1}.html"/>
                 </map:generate>

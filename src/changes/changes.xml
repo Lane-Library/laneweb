@@ -7,7 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release>
+            <action date="2010-05-12" dev="ceyates" issue="34175" type="update">
+                eresources description field
+            </action>
+        </release>
+        <release date="2010-05-04" version="1.10.beta5" description="1.10.beta4 redesign release">
+            <action date="2010-05-04" dev="ceyates" issue="35665" type="update">
+                preview and feedback button
+            </action>
+        </release>
         <release date="2010-03-15" version="1.10.beta4" description="1.10.beta4 redesign release">
+            <action date="2010-03-15" dev="ceyates" issue="34733" type="update">
+                remove feedback button from the beta site
+            </action>
             <action date="2010-03-15" dev="ryanmax" issue="34698" type="add">
                 provide unit tests
             </action>

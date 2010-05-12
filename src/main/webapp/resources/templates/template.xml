@@ -19,9 +19,6 @@
                         <div class="sb-c" id="sb-tr"/>
                     </div>
                     <div id="sb">
-                        <!--<div id="breadcrumb"><a href="http://med.stanford.edu/">School of
-                                Medicine</a> &#xBB; <a href="http://irt.stanford.edu/"
-                                title="IRT...">IRT</a> &#xBB; <?laneweb breadcrumb?></div>-->
                         <h1>
                             <a href="/index.html"><span>Lane</span> Medical Library <span
                                     id="subHeading">powered by LaneConnex Technology</span></a>
