@@ -81,6 +81,9 @@
 #searchResults li div {
     margin-left:20px;
 }
+.sourceLink {
+    color:#666666;
+}
 .rightSearchTips {
     padding:20px;
     background-color:#edecdf;
