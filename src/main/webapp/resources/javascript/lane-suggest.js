@@ -43,12 +43,12 @@ YUI().add('lane-suggest', function (Y) {
             input.insert(contNode,"after");
             
             contNode.delegate("click", function (e) {
-                Y.log("click");
+//                Y.log("click");
                 var target = e.currentTarget, index = target.get("className").split('-')[1];
                 acWidget.focus(index).select(e);
             }, "li");
             contNode.delegate("mouseover", function (e) {
-                Y.log("mouseover ");
+//                Y.log("mouseover ");
                 var target = e.currentTarget, index = target.get("className").split('-')[1];
                 acWidget.focus(index);
             }, "li");
@@ -63,7 +63,7 @@ YUI().add('lane-suggest', function (Y) {
                     return this;
                 },
                 render : function () {
-                    Y.log("render");
+//                    Y.log("render");
                     if (!data.length){
                         return this;
                     }
@@ -157,12 +157,12 @@ YUI().add('lane-suggest', function (Y) {
             }
         });
         input.ac.on("ac:load", function (e) {
-            Y.log("ac:load");
+//            Y.log("ac:load");
             acWidget.setWidth(input.getStyle("width"));
             acWidget.setData(e.results).render();
         });
         input.ac.on("ac:query", function (e) {
-            Y.log("ac:query");
+//            Y.log("ac:query");
             if (acWidget.visible && e.value === acWidget.value) {
                 e.halt();
             }
@@ -178,7 +178,7 @@ YUI().add('lane-suggest', function (Y) {
         input.ac.on("ac:previous", acWidget.previous, acWidget);
         Y.on("key", acWidget.select, input, "down:13,10");
     };
-}, '1.11.0-SNAPSHOT', {requires:['dump', 'lane','gallery-ac-plugin', 'plugin', 'node-base', 'datasource']});
+}, '1.11.0-SNAPSHOT', {requires:['lane','gallery-ac-plugin', 'plugin', 'node-base', 'datasource']});
 
 YUI().use('lane-suggest', 'node-base', function(Y) {
 
