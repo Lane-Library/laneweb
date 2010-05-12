@@ -91,7 +91,7 @@ YUI().use('lane-search-result', 'node','json-parse','io-base','datatype',functio
                                 }
                                 searchRequests.push(setTimeout(LANE.search.metasearch.getResultCounts, sleepingTime));
                             } else {
-                                Y.lane.Search.stopSearch();
+                                LANE.Search.stopSearch();
                             }
                         }// end request success definition
                     }//end on

@@ -32,7 +32,7 @@ YUI().use('lane', 'lane-textinputs', 'lane-suggest', 'node', function(Y) {
                     if (!searchTermsPresent()) {
                         throw ('nothing to search for');
                     }
-                    startSearch();
+                    this.startSearch();
                     Y.fire('lane:beforeSearchSubmit', search);
                     form.submit();
                 }
