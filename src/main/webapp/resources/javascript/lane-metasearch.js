@@ -91,7 +91,7 @@ YUI().use('lane-search-result', 'node','json-parse','io-base','datatype',functio
                                 }
                                 searchRequests.push(setTimeout(LANE.search.metasearch.getResultCounts, sleepingTime));
                             } else {
-                                LANE.search.Search.stopSearch();
+                                Y.lane.Search.stopSearch();
                             }
                         }// end request success definition
                     }//end on
@@ -104,6 +104,6 @@ YUI().use('lane-search-result', 'node','json-parse','io-base','datatype',functio
     if (Y.all('.metasearch').size() > 0 && Y.lane.SearchResult.getEncodedSearchTerms()) {
         LANE.search.metasearch.initialize();
         LANE.search.metasearch.getResultCounts();
-        LANE.search.Search.startSearch();
+        Y.lane.Search.startSearch();
     }
 });

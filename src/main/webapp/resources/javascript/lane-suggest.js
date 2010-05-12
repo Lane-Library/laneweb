@@ -137,7 +137,7 @@ YUI().add('lane-suggest', function (Y) {
                     if (e) {
                         e.preventDefault();
                     }
-                    LANE.search.Search.startSearch();
+                    Y.lane.Search.startSearch();
                     Y.Node.getDOMNode(input.ancestor("form")).submit();
                 },
                 setWidth : function (w) {

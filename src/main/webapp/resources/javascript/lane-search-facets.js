@@ -88,7 +88,7 @@ YUI().add('lane-search-facets', function(Y) {
             var i;
             if (this._state == 'initialized') {
                 this.getContent();
-                LANE.search.Search.startSearch();
+                Y.lane.Search.startSearch();
             } else if (this._state == 'searching') {
                 alert('search in progress');
             } else {
@@ -98,7 +98,7 @@ YUI().add('lane-search-facets', function(Y) {
 				for(i = 0; i < this._content.size(); i++) {
 					this._container.append(this._content.item(i));
 				}
-                LANE.search.Search.stopSearch();
+                Y.lane.Search.stopSearch();
                 Y.fire('lane:change');;
             }
         };
