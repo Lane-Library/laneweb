@@ -1,6 +1,6 @@
 YUI().use('lane-search-result','event', 'node', 'io-base', 'json-parse', function(Y) {
     var findItNode = Y.one('#findIt'),
-        searchString = LANE.search.Result.getEncodedSearchTerms(),
+        searchString = Y.lane.SearchResult.getEncodedSearchTerms(),
         url;
     if (findItNode && searchString) {
         url = '/././apps/sfx/json?q=' + searchString;

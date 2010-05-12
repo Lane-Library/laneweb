@@ -1,5 +1,5 @@
 YUI().use('lane-search-result', 'lane-search-facets', 'node', 'event-custom', 'history', function(Y) {
-	var searchString = LANE.search.Result.getEncodedSearchTerms(),
+	var searchString = Y.lane.SearchResult.getEncodedSearchTerms(),
 	facetNodes = Y.one('#searchFacets'),
 	initializeHistory = function() {
 		var initialFacet = Y.History.getBookmarkedState("facet") || Y.History.getQueryStringParameter("source");

@@ -1,6 +1,6 @@
 YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse', function(Y) {
     var spellCheck = Y.one('#spellCheck'),
-        searchTerms = LANE.search.Result.getEncodedSearchTerms();
+        searchTerms = Y.lane.SearchResult.getEncodedSearchTerms();
     if (spellCheck && searchTerms) {
         //get the suggestion
         Y.io('/././apps/spellcheck/json?q=' + searchTerms, {

@@ -1,4 +1,4 @@
-YUI().use('lane', 'lane-textinputs', 'lane-suggest', 'node', function(Y) {
+YUI().add('lane-search', function(Y) {
     LANE.namespace('search');
     LANE.search.Search = LANE.search.Search || function() {
         var searching = false, //searching state
@@ -64,4 +64,4 @@ YUI().use('lane', 'lane-textinputs', 'lane-suggest', 'node', function(Y) {
         new Y.lane.Suggest(searchTextInput.getInput());
         return search;
     }();
-});
+}, '1.11-0-SNAPSHOT', {requires:['lane', 'lane-textinputs', 'lane-suggest', 'node']});

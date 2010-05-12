@@ -1,6 +1,6 @@
 YUI().add('lane-search-result', function(Y) {
-    LANE.namespace('search');
-    LANE.search.Result = LANE.search.Result || function() {
+    Y.namespace('lane');
+    Y.lane.SearchResult = function() {
         var searchString,
             encodedSearchString,
             source;
@@ -52,4 +52,4 @@ YUI().add('lane-search-result', function(Y) {
             }
         };
     }();
-}, '1.11.0-SNAPSHOT', {requires:['lane']});
+}, '1.11.0-SNAPSHOT');

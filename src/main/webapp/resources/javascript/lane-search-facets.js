@@ -57,7 +57,7 @@ YUI().add('lane-search-facets', function(Y) {
         this._source = source;
         this._facet = facet;
         this._container = container;
-        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + LANE.search.Result.getEncodedSearchTerms();
+        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + Y.lane.SearchResult.getEncodedSearchTerms();
         this._state = 'initialized';
         this._callback = {
             on: {
