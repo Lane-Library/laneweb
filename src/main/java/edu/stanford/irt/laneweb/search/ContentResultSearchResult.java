@@ -219,7 +219,7 @@ public class ContentResultSearchResult implements SearchResult {
     }
 
     private void maybeCreateElement(final ContentHandler handler, String name, String value) throws SAXException {
-        if (value != null) {
+        if (value != null && !"".equals(value)) {
             XMLUtils.createElementNS(handler, NAMESPACE, name, value);
         }
     }
