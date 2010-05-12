@@ -8,7 +8,7 @@
     display:none;
 }
 
-.search a, a:visited {
+.search a, .search a:visited {
     color: #0C4C72;
     border-bottom:none;
   }
@@ -35,10 +35,10 @@
 .search ul {
     padding-bottom:10px;
 }
-li.current a {
+.search li.current a {
     color:red;
 }
-li.inactiveFacet, li.inactiveFacet a {
+.search li.inactiveFacet, .search li.inactiveFacet a {
     color:#666666;
 }
 #searchOptions {
@@ -52,10 +52,10 @@ li.inactiveFacet, li.inactiveFacet a {
     margin-left:-5px;
 }
 #optionsToggle.closed {
-    background-image:url(/graphics/buttons/accord-minus-close.gif);
+    background-image:url(/././graphics/buttons/accord-minus-close.gif);
 }
 #optionsToggle.open {
-    background-image:url(/graphics/buttons/accord-plus-open.gif);
+    background-image:url(/././graphics/buttons/accord-plus-open.gif);
 }
 #optionsToggle a {
     font-weight:bold;
