@@ -91,7 +91,7 @@ YUI({
             Y.Assert.areEqual('title', this.trackingData.title);
         },
         testExpandyIsTrackable: function() {
-            var expandy = Y.one('.yui-accordion-toggle');
+            var expandy = Y.one('.yui3-accordion-item-trigger');
             var event;
             var handler = function(e) {
                 event = e;
@@ -102,17 +102,24 @@ YUI({
             expandy.detach(handler);
         },
         testTrackExpandy: function() {
-            var expandy = Y.one('.yui-accordion-toggle');
-            var event;
-            var handler = function(e) {
-                event = e;
-            };
-            expandy.on('click', handler);
+            var expandy = Y.one('.yui3-accordion-item-trigger');
+//            var event;
+//            var handler = function(e) {
+//                event = e;
+//            };
+//            expandy.on('click', handler);
             expandy.simulate('click');
             Y.Assert.areEqual('Expandy:' + expandy.get('textContent'), this.trackingData.title, 'actual:' + this.trackingData.title);
             Y.Assert.isFalse(this.trackingData !== undefined && this.trackingData.external);
-            expandy.detach(handler);
-            
+//            expandy.detach(handler);
+        },
+        testTrackCookiesFetch: function() {
+            var cookiesFetch = Y.one("#testTrackCookiesFetch");
+            cookiesFetch.on('click', function(e) {e.preventDefault();});
+            cookiesFetch.simulate('click');
+            Y.Assert.areEqual("www.thomsonhc.com", this.trackingData.host);
+            Y.Assert.areEqual("/carenotes/librarian/", this.trackingData.path);
+            Y.Assert.areEqual("cookiesFetch", this.trackingData.title);
         }
     });
     

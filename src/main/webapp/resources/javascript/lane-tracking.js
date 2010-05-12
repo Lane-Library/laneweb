@@ -51,7 +51,7 @@ YUI().add('lane-tracking',function(Y) {
                 if (!title) {
                     title = 'unknown';
                 }
-                if (node.hasClass('yui-accordion-toggle')) {
+                if (node.hasClass('yui3-accordion-item-trigger')) {
                     title = 'Expandy:' + title;
                 }
                 return title;
@@ -59,7 +59,7 @@ YUI().add('lane-tracking',function(Y) {
             getTrackingData = function(event) {
                 var node = event.target, host, path, query, external, title, searchTerms, searchSource, children;
                 if (event.type == 'click') {
-                    if (node.hasClass('yui-accordion-toggle')) {
+                    if (node.hasClass('yui3-accordion-item-trigger')) {
                         host = document.location.host;
                         path = document.location.pathname;
                         query = document.location.search;
@@ -74,7 +74,16 @@ YUI().add('lane-tracking',function(Y) {
                                 throw 'not trackable';
                             }
                         }
-                        if (node.get('pathname').indexOf('secure/login.html') > -1 || node.get('host').indexOf('laneproxy') === 0) {
+                        if (node.get('pathname').indexOf('cookiesFetch') > -1) {
+                            host = decodeURIComponent(node.get('search'));
+                            host = host.substring(host.indexOf("path=") + 6);
+                            if (host.indexOf("&") > -1) {
+                                host = host.substring(0, host.indexOf("&"));
+                            }
+                            host = host.substring(host.indexOf("//") + 2);
+                            path = host.substring(host.indexOf("/"));
+                            host = host.substring(0, host.indexOf("/"));
+                        } else if (node.get('pathname').indexOf('secure/login.html') > -1 || node.get('host').indexOf('laneproxy') === 0) {
                             host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
                             if (host.indexOf('/') > -1) {
                                 path = host.substring(host.indexOf('/'));
@@ -151,7 +160,7 @@ YUI().add('lane-tracking',function(Y) {
                         if (event.target.hasClass('searchFacet')) {
                             return true;
                         }
-                        if (event.target.hasClass('yui-accordion-toggle')) {
+                        if (event.target.hasClass('yui3-accordion-item-trigger')) {
                             return true;
                         }
                         //find self ancestor that is <a>
@@ -174,7 +183,12 @@ YUI().add('lane-tracking',function(Y) {
                             }
                             if (linkHost == documentHost) {
                                 //track proxy logins
+                                //FIXME: the path has changed to /secure/proxy/credential or something like that
                                 if ((/secure\/login.html/).test(link.get('pathname')) && link.get('search') && link.get('search').indexOf('url=') > -1) {
+                                    return true;
+                                }
+                                //track cookieFetch.html
+                                if ((/cookiesFetch/).test(link.get('pathname'))) {
                                     return true;
                                 }
                                 //otherwise rely on normal tracking for .html and / unless
