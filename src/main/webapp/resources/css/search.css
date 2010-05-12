@@ -84,6 +84,9 @@
 .sourceLink {
     color:#666666;
 }
+.pmid {
+    font-weight:bold;
+}
 .rightSearchTips {
     padding:20px;
     background-color:#edecdf;

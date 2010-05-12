@@ -125,24 +125,37 @@
 
                     <xsl:apply-templates select="s:author"/>
                     <div class="pubTitle">
-                        <xsl:apply-templates select="s:pub-title"/>
-                        <xsl:apply-templates select="s:pub-date"/>
-                        <xsl:apply-templates select="s:pub-volume"/>
-                        <xsl:apply-templates select="s:pub-issue"/>
-                        <xsl:apply-templates select="s:page"/>
-                        <xsl:apply-templates select="s:contentId"/>
-                    </div>
-
-                    <div class="moreResults">
-                        <span class="sourceLink">
-                            <xsl:value-of select="$resourceName"/>
-                        </span>
-                        <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
-                            <xsl:text> - </xsl:text>
-                            <a rel="popup standard"
-                                title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
-                                href="{s:resourceUrl}">all results from <xsl:value-of select="$resourceName"/></a>
-                        </xsl:if>
+                        <xsl:choose>
+                            <xsl:when test="s:pub-title">
+                                <xsl:apply-templates select="s:pub-title"/>
+                                <xsl:apply-templates select="s:pub-date"/>
+                                <xsl:apply-templates select="s:pub-volume"/>
+                                <xsl:apply-templates select="s:pub-issue"/>
+                                <xsl:apply-templates select="s:page"/>
+                                <span class="sourceLink">
+                                    <xsl:text> - </xsl:text>
+                                    <xsl:value-of select="$resourceName"/>
+                                </span>
+                                <xsl:apply-templates select="s:contentId"/>
+                                <br />
+                                <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
+                                    <a rel="popup standard"
+                                        title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
+                                        href="{s:resourceUrl}">all results from <xsl:value-of select="$resourceName"/></a>
+                                </xsl:if>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <span class="sourceLink">
+                                    <xsl:value-of select="$resourceName"/>
+                                </span>
+                                <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
+                                    <xsl:text> - </xsl:text>
+                                    <a rel="popup standard"
+                                        title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
+                                        href="{s:resourceUrl}">all results from <xsl:value-of select="$resourceName"/></a>
+                                </xsl:if>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </div>
                 </li>
             </ul>
@@ -399,11 +412,12 @@
     </xsl:template>
 
     <xsl:template match="s:contentId">
-        <small>
+        <xsl:text> - </xsl:text>
+        <span class="pmid">
             <xsl:text> </xsl:text>
             <xsl:if test="contains(../s:resourceId,'pubmed')">PMID:</xsl:if>
             <xsl:value-of select="."/>
-        </small>
+        </span>
     </xsl:template>
 
     <xsl:template match="s:keyword">
