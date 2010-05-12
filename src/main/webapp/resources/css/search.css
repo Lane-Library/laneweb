@@ -87,6 +87,18 @@
 .pmid {
     font-weight:bold;
 }
+.resultsNav {
+    text-align:center;
+    padding-bottom:20px;
+}
+.resultsNav a {
+    padding:10px;
+    border-bottom-style:none;
+}
+.resultsNav a.active {
+    color:#808080;
+    font-size:20px;
+}
 .rightSearchTips {
     padding:20px;
     background-color:#edecdf;
