@@ -234,4 +234,4 @@ YUI().add('lane-tracking',function(Y) {
         //            }
         }, document);
     }
-}, '1.11.0-SNAPSHOT', {requires:['lane', 'node','event-custom']});
+}, '1.11.0-SNAPSHOT', {requires:['lane', 'lane-search-result', 'node','event-custom']});
