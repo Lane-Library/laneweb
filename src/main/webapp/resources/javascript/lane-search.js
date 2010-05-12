@@ -1,6 +1,6 @@
 YUI().add('lane-search', function(Y) {
     Y.namespace('lane');
-    Y.lane.Search = function() {
+    Search = function() {
         var searching = false, //searching state
             form = Y.one('#search'), //the form Element
             searchSourceSelect = form.one('#searchSource'),
@@ -63,5 +63,10 @@ YUI().add('lane-search', function(Y) {
         });
         new Y.lane.Suggest(searchTextInput.getInput());
         return search;
-    }();
-}, '1.11-0-SNAPSHOT', {requires:['lane', 'lane-textinputs', 'lane-suggest', 'node']});
+    };
+	Y.lane.Search = Search;
+}, '1.11-0-SNAPSHOT', {requires:['lane-textinputs', 'lane-suggest', 'node']});
+
+YUI().use('lane', 'lane-search', function(Y){
+	LANE.SearchForm = new Y.lane.Search();
+});
