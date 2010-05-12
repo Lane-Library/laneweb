@@ -165,7 +165,7 @@
                         <include>lane-search-facets-min.js</include>
                         <include>lane-popin-min.js</include>
                         <include>lane-quicklinks-min.js</include>
-                        <include>lane-search-results-min.js</include>
+                        <include>lane-search-options-min.js</include>
                      </includes>
                   </aggregation>
                </aggregations>
