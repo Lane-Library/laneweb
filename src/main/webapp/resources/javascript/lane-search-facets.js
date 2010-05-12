@@ -98,6 +98,7 @@ YUI().add('lane-search-facets', function(Y) {
 				for(i = 0; i < this._content.size(); i++) {
 					this._container.append(this._content.item(i));
 				}
+                LANE.Search.stopSearch();
                 Y.fire('lane:change');;
             }
         };
