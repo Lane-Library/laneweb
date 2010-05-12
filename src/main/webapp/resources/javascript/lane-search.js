@@ -1,5 +1,4 @@
-YUI().add('lane-search', function(Y) {
-    Y.namespace('lane');
+YUI().use('lane', 'lane-textinputs', 'lane-suggest', 'node', function(Y) {
     Search = function() {
         var searching = false, //searching state
             form = Y.one('#search'), //the form Element
@@ -33,7 +32,7 @@ YUI().add('lane-search', function(Y) {
                     if (!searchTermsPresent()) {
                         throw ('nothing to search for');
                     }
-                    Y.lane.Search.startSearch();
+                    startSearch();
                     Y.fire('lane:beforeSearchSubmit', search);
                     form.submit();
                 }
@@ -41,7 +40,7 @@ YUI().add('lane-search', function(Y) {
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
             try {
-                Y.lane.Search.submitSearch();
+                search.submitSearch();
             //TODO: popup instead of alert
             } catch (e) {
                 alert(e);
@@ -56,7 +55,7 @@ YUI().add('lane-search', function(Y) {
         searchTextInput.setHintText(selectedOption.get('title'));
         searchSourceSelect.on('change', function(e) {
             if (searchTermsPresent()) {
-                Y.lane.Search.submitSearch();
+                search.submitSearch();
             } else {
                 Y.fire('lane:searchSourceChange', search);
             }
@@ -64,9 +63,6 @@ YUI().add('lane-search', function(Y) {
         new Y.lane.Suggest(searchTextInput.getInput());
         return search;
     };
-	Y.lane.Search = Search;
-}, '1.11-0-SNAPSHOT', {requires:['lane-textinputs', 'lane-suggest', 'node']});
-
-YUI().use('lane', 'lane-search', function(Y){
-	LANE.SearchForm = new Y.lane.Search();
+    
+    LANE.Search = new Search();
 });
