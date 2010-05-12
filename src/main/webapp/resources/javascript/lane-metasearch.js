@@ -104,6 +104,6 @@ YUI().use('lane-search-result', 'node','json-parse','io-base','datatype',functio
     if (Y.all('.metasearch').size() > 0 && Y.lane.SearchResult.getEncodedSearchTerms()) {
         LANE.search.metasearch.initialize();
         LANE.search.metasearch.getResultCounts();
-        Y.lane.Search.startSearch();
+        LANE.Search.startSearch();
     }
 });

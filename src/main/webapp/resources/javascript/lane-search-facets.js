@@ -88,7 +88,7 @@ YUI().add('lane-search-facets', function(Y) {
             var i;
             if (this._state == 'initialized') {
                 this.getContent();
-                Y.lane.Search.startSearch();
+                LANE.Search.startSearch();
             } else if (this._state == 'searching') {
                 alert('search in progress');
             } else {
