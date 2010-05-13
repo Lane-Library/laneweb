@@ -7,9 +7,10 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
             searchIndicator = new Y.lane.SearchIndicator(),
             searchTextInput = new Y.lane.TextInput(form.one('#searchTerms')),
-			searchTermsPresent = function() {
-				return searchTextInput.getValue() !== '';
-			};
+            search,
+            searchTermsPresent = function() {
+                return searchTextInput.getValue() !== '';
+            };
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
             try {
@@ -34,7 +35,7 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
             }
         });
         new Y.lane.Suggest(searchTextInput.getInput());
-        return {
+        search =  {
                 getSearchSource: function() {
                     return searchSourceSelect.get('value');
                 },
@@ -52,6 +53,7 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
                     Y.fire('lane:beforeSearchSubmit', search);
                     form.submit();
                 }
-            };
+        };
+        return search;
     }();
 });
