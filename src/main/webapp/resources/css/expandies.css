@@ -1,107 +1,57 @@
-
-.expandy li ul {
-    margin-left: 1em;
-    margin-bottom: 1.2em;
-    margin-top: .5em;
+.type1 li {
+    margin-left:0;
+    list-style:none;
+    font-size:11px !important;
+    margin-bottom:5px;
 }
-.expandy li {
-    padding:0;
-    background-image:none;
-    height:100%;
+.type1 .even.expanded, .type1 .odd.expanded, .type1 .even.yui3-accordion-item-active, .type1 .odd.yui3-accordion-item-active {
+    background-color:#DBD2B3;
 }
-.contentModule .bd .expandy h6, .contentModule-wide .bd .expandy h6 {
-    background-image:url(/././graphics/backgr/exp-backrg-green-plus.gif);
-    background-position:0px 0px;
-    background-repeat:no-repeat;
-    color:#333333;
-    font-weight:bold;
-    font-size: 1.2em;
-    padding:.3em 2em;
-    font-family:Georgia, "Times New Roman", Times, serif;
+.type1 .odd {
+    background-color:#fcf9f2;
 }
-.contentModule .bd .expandy h6.active, .contentModule-wide .bd .expandy h6.active {
-    color:#920000;
-    background-image:url(/././graphics/backgr/exp-backrg-green-minus.gif);
+.type1 .even {
+    background-color:#f6f3e5;
 }
-.expandy ul li {
-    font-size: 11px;
-}
-.contentModule .bd .expandy ul li, .contentModule-wide .bd .expandy ul li {
-    background-image:none;
-    color:#333333;
-    font-size: 1em;
-    margin: .5em 0 1em 0;
-}
-.contentModule .bd .expandy ul li, .contentModule-wide .bd .expandy ul li {
-    background-image:url(/././images/sprite.gif);
-    background-position:0 -1194px;
-    background-repeat:no-repeat;
-    list-style-image:none;
-    list-style-position:outside;
-    list-style-type:none;
-}
-.expandy table ul li {
-    margin: 0;
-    color:#333333;
-    font-size: .9em;
-    list-style:inside;
-}
-/* styles for the simpleModule that expands. The rest of the styles are in the simpleModule.css file */
-.simpleModuleExpandy .bd .expandy li h6, .simpleModuleExpandyleft .bd .expandy li h6 {
-    background-color:#E3E5D7;
-    background-image:url(/././graphics/buttons/accord-plus-open.gif);
-    background-position:6px 6px;
-    background-repeat:no-repeat;
-    border-bottom:1px solid #fff;
-    color:#3B3B3B;
-    font-weight:bold;
+.type1 h4 {
+    color:#3F3C30;
+    font-family:inherit;
     font-size:12px;
-    padding:.3em 2em;
-}
-.simpleModuleExpandyleft .bd .expandy .noplus {
-    background-color:#E3E5D7;
-    background-image:none;
-}
-.simpleModule .bd .expandy li h6 {
-    background-color:#E3E5D7;
-    background-image:url(/././graphics/buttons/accord-plus-open.gif);
-    background-position:6px 6px;
-    background-repeat:no-repeat;
-    border-bottom:1px solid #E6E4DB;
-    color:#3B3B3B;
     font-weight:bold;
+}
+.type1 .hide, .type1 .show {
+    border-bottom:1px dotted #81785A;
+    color:#565347;
+    cursor:pointer;
+}
+.type1 .hide {
+    display:none;
+}
+.type1 .expanded .show, .type1 .yui3-accordion-item-active .show {
+    display:none;
+}
+.type1 .expanded .hide, .type1 .yui3-accordion-item-active .hide {
+    display:inline;
+}
+.yui3-js-enabled .type1 .details {
+    display:none;
+}
+.yui3-js-enabled .type1 .details.yui3-accordion-item-bd {
+    display:block;
+}
+.type1 .details > div {
+    background-color:white;
+    border:16px solid #DBD2B3;
+    padding:16px;
+}
+.type1 .details p {
     font-size:12px;
-    padding:.3em 2em;
+    line-height:18px;
 }
-.simpleModuleExpandy .bd .expandy li h6.active, .simpleModuleExpandyleft .bd .expandy li h6.active {
-    background-image:url(/././graphics/buttons/accord-minus-close.gif);
+.type1 .details img {
+    float:right;
 }
-.simpleModuleExpandy .expandy ul, .simpleModuleExpandy .expandy p, .simpleModuleExpandyleft .expandy ul li, .simpleModuleExpandyleft .expandy p {
-    padding-left: 1em;
-}
-/* styles for the contentModule expandy on on the index page - margins need to be zeroed */
-.contentModuleIndex .bd .expandy h6 {
-    background-image:url(/././graphics/backgr/exp-back-home-plus.jpg);
-    background-position:0px 0px;
-    background-repeat:no-repeat;
-    color:#333333;
-    font-weight:bold;
-    font-size: 1.2em;
-    padding:.3em 2em;
-    font-family:Georgia, "Times New Roman", Times, serif;
-}
-/* hide expandies before they are ready to avoid bouncing */
-/*.expandy{
-    visibility:hidden;
-}*/
-/* search specific */
-.search .simpleModuleExpandyleft .bd .expandy li h6 {
-    background-color:#fff;
-    width:200px;
-}
-.search .simpleModuleExpandyleft .bd .expandy li h6.current {
-    background-color:#B2A77A;
-    border-bottom:none;
-    width:206px;
-    _width:204px;
+.type1 .yui-ge {
+    line-height:18px;
+    padding:8px 4px 8px 16px;
 }
