@@ -342,6 +342,7 @@
         <script type="text/javascript" src="/javascript/lane-search-facets.js"></script>
         <script type="text/javascript" src="/javascript/lane-popin.js"></script>
         <script type="text/javascript" src="/javascript/lane-quicklinks.js"></script>
-        <script type="text/javascript" src="/javascript/lane-search-results.js"></script>-->
+        <script type="text/javascript" src="/javascript/lane-search-results.js"></script>
+        <script type="text/javascript" src="/javascript/lane-search-indicator.js"></script>-->
     </body>
 </html>

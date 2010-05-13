@@ -166,6 +166,7 @@
                         <include>lane-popin-min.js</include>
                         <include>lane-quicklinks-min.js</include>
                         <include>lane-search-options-min.js</include>
+                        <include>lane-search-indicator-min.js</include>
                      </includes>
                   </aggregation>
                </aggregations>
