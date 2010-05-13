@@ -38,7 +38,7 @@
     border:none;
 }
 #searchIndicator {
-    visibility:hidden;
+    display:none;
     position:absolute;
     top:78px;
     left:435px;
