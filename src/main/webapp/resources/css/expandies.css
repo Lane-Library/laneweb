@@ -1,4 +1,4 @@
-.type1 li {
+.type1 > li {
     margin-left:0;
     list-style:none;
     font-size:11px !important;
