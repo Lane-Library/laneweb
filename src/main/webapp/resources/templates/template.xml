@@ -34,7 +34,7 @@
                                     <option value="bassett" title="Find anatomical images from Lane's Bassset Collection">Bassett Images</option>
                                     -->
                                 </select>
-                                <a id="searchTips" href="/services/laneconnexSearch.html">Search Tips</a>
+                                <a id="searchTips" href="/about/laneconnexSearch.html">Search Tips</a>
                                 <div id="searchIndicator"><img alt="[searching]"
                                         src="/images/backgr/search-indicator.gif"/></div>
                                 <input name="q" id="searchTerms" type="text"/>
@@ -48,7 +48,7 @@
                             <li>650-723-6831</li>
                             <li><a href="mailto:LaneAskUs@stanford.edu"
                                 >LaneAskUs@Stanford.edu</a></li>
-                            <li><a href="/services/hours.html">Library Hours</a></li>
+                            <li><a href="/howto/index.html?id=_48">Library Hours</a></li>
                         </ul>
                         <ul id="login">
                             <li>
@@ -124,11 +124,11 @@
                                 <a href="/howto/index.html?id=_48" title="Hours..">Hours</a>
                             </li>
                             <li>
-                                <a href="/services/access/directions.html" title="Directions.."
+                                <a href="/about/hours-directions.html" title="Directions.."
                                     >Directions</a>
                             </li>
                             <li>
-                                <a href="/services/about/index.html" title="About Us..">About
+                                <a href="/about/index.html" title="About Us..">About
                                     Library</a>
                             </li>
                             <li>
