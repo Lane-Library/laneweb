@@ -317,6 +317,7 @@
         
         <!--<script type="text/javascript" src="/javascript/lane.js"></script>
         <script type="text/javascript" src="/javascript/lane-search-result.js"></script>
+        <script type="text/javascript" src="/javascript/lane-search-indicator.js"></script>
         <script type="text/javascript" src="/javascript/lane-bassett.js"></script>
         <script type="text/javascript" src="/javascript/lane-textinputs.js"></script>
         <script type="text/javascript" src="/javascript/lane-suggest.js"></script>
@@ -342,7 +343,6 @@
         <script type="text/javascript" src="/javascript/lane-search-facets.js"></script>
         <script type="text/javascript" src="/javascript/lane-popin.js"></script>
         <script type="text/javascript" src="/javascript/lane-quicklinks.js"></script>
-        <script type="text/javascript" src="/javascript/lane-search-results.js"></script>
-        <script type="text/javascript" src="/javascript/lane-search-indicator.js"></script>-->
+        <script type="text/javascript" src="/javascript/lane-search-results.js"></script>-->
     </body>
 </html>
