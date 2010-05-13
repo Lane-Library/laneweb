@@ -153,6 +153,7 @@
                         <include>lane-popup-min.js</include>
                         <include>lane-metasearch-min.js</include>
                         <include>lane-ie-min.js</include>
+                        <include>lane-search-facets-min.js</include>
                         <include>lane-search-facet-counts-min.js</include>
                         <include>lane-search-history-min.js</include>
                         <include>lane-tooltips-min.js</include>
@@ -163,7 +164,6 @@
                         <include>lane-ie-min.js</include>
                         <include>lane-teletype-min.js</include>
                         <include>lane-selections-min.js</include>
-                        <include>lane-search-facets-min.js</include>
                         <include>lane-popin-min.js</include>
                         <include>lane-quicklinks-min.js</include>
                         <include>lane-search-options-min.js</include>
