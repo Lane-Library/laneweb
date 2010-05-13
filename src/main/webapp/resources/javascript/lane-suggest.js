@@ -5,7 +5,8 @@ YUI().add('lane-suggest', function (Y) {
     Y.lane.Suggest = function (input, limit) {
         var acWidget, i,
             baseUrl = '/././apps/suggest/json?',
-            acDS  = new Y.DataSource.IO({source:baseUrl});
+            acDS  = new Y.DataSource.IO({source:baseUrl}),
+			searchIndicator = new Y.lane.SearchIndicator();
             setDSLimit = function(input){
 //            Y.log("set source");
                 var sourceElm = input.ancestor("form").one('#searchSource'), searchSource, minQueryLength = 3, limit = null;
@@ -137,7 +138,7 @@ YUI().add('lane-suggest', function (Y) {
                     if (e) {
                         e.preventDefault();
                     }
-                    LANE.Search.startSearch();
+                    searchIndicator.show();
                     Y.Node.getDOMNode(input.ancestor("form")).submit();
                 },
                 setWidth : function (w) {
@@ -178,7 +179,7 @@ YUI().add('lane-suggest', function (Y) {
         input.ac.on("ac:previous", acWidget.previous, acWidget);
         Y.on("key", acWidget.select, input, "down:13,10");
     };
-}, '1.11.0-SNAPSHOT', {requires:['lane','gallery-ac-plugin', 'plugin', 'node-base', 'datasource']});
+}, '1.11.0-SNAPSHOT', {requires:['lane','lane-search-indicator', 'gallery-ac-plugin', 'plugin', 'node-base', 'datasource']});
 
 YUI().use('lane-suggest', 'node-base', function(Y) {
 

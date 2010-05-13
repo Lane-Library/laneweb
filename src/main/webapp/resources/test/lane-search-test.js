@@ -4,7 +4,7 @@
 if (!window.location.search) {
     window.location = window.location + '?source=foo&q=bar+baz';
 }
-YUI({ logInclude: { TestRunner: true } }).use('lane-search-result','node-event-simulate','console','test', function(Y) {
+YUI({ logInclude: { TestRunner: true } }).use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'lane-search-result','node-event-simulate','console','test', function(Y) {
     
     var resultTestCase = new Y.Test.Case({
         
@@ -25,7 +25,7 @@ YUI({ logInclude: { TestRunner: true } }).use('lane-search-result','node-event-s
     var searchTestCase = new Y.Test.Case({
 		
 		name: 'Lane Search Test Case',
-        search: Y.lane.Search,
+        search: LANE.Search,
 		
         searchTermsInput: Y.one('#searchTerms'),
         searchIndicator: Y.one('#searchIndicator'),
@@ -35,15 +35,6 @@ YUI({ logInclude: { TestRunner: true } }).use('lane-search-result','node-event-s
             this.searchTermsInput.set('value', '');
             this.searchTermsInput.set('title', '');
 			this.searchSource.set('selectedIndex',0);
-        },
-    
-        testStartStopSearch: function() {
-            Y.Assert.areEqual('hidden', this.searchIndicator.getStyle('visibility'));
-            this.searchTermsInput.set('value', 'hello');
-            this.search.startSearch();
-            Y.Assert.areEqual('visible', this.searchIndicator.getStyle('visibility'));
-            this.search.stopSearch();
-            Y.Assert.areEqual('hidden', this.searchIndicator.getStyle('visibility'));
         },
         testSubmitSearchNoQuery: function() {
             try {

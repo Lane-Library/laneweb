@@ -1,4 +1,4 @@
-YUI().use('lane-search-result', 'node','json-parse','io-base','datatype',function(Y) {
+YUI().use('lane-search-indicator', 'lane-search-result', 'node','json-parse','io-base','datatype',function(Y) {
     	
     LANE.namespace('search.metasearch');
     LANE.search.metasearch = function() {
@@ -7,6 +7,7 @@ YUI().use('lane-search-result', 'node','json-parse','io-base','datatype',functio
             searchRequests = [], // search timerIds so we can abort sleeping getResultCounts
             uberEngines = ['cro_', 'mdc_', 'ovid-'], // engines with multiple resources
             startTime,
+			searchIndicator = new Y.lane.SearchIndicator();
             getSearchUrl = function() {
                 var i, y, searchUrl = '/././apps/search/json?q=' + Y.lane.SearchResult.getEncodedSearchTerms();
                 for (y = 0; y < searchables.length; y++) {
@@ -91,7 +92,7 @@ YUI().use('lane-search-result', 'node','json-parse','io-base','datatype',functio
                                 }
                                 searchRequests.push(setTimeout(LANE.search.metasearch.getResultCounts, sleepingTime));
                             } else {
-                                LANE.Search.stopSearch();
+                                searchIndicator.hide();
                             }
                         }// end request success definition
                     }//end on
@@ -104,6 +105,6 @@ YUI().use('lane-search-result', 'node','json-parse','io-base','datatype',functio
     if (Y.all('.metasearch').size() > 0 && Y.lane.SearchResult.getEncodedSearchTerms()) {
         LANE.search.metasearch.initialize();
         LANE.search.metasearch.getResultCounts();
-        LANE.Search.startSearch();
+		new Y.lane.SearchIndicator().show();
     }
 });

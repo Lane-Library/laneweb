@@ -23,7 +23,9 @@ YUI().add('lane-search-facets', function(Y) {
             }
         };
     }();
-    var elt = Y.one('#searchFacets'), facets, i, j, type, source, container;
+    var elt = Y.one('#searchFacets'),
+	    searchIndicator = new Y.lane.SearchIndicator(),
+		facets, i, j, type, source, container;
     if (elt) {
         container = Y.one('#searchResults');
         facets = elt.all('.searchFacet');
@@ -88,7 +90,7 @@ YUI().add('lane-search-facets', function(Y) {
             var i;
             if (this._state == 'initialized') {
                 this.getContent();
-                LANE.Search.startSearch();
+                searchIndicator.show();
             } else if (this._state == 'searching') {
                 alert('search in progress');
             } else {
@@ -98,7 +100,7 @@ YUI().add('lane-search-facets', function(Y) {
 				for(i = 0; i < this._content.size(); i++) {
 					this._container.append(this._content.item(i));
 				}
-                LANE.Search.stopSearch();
+                searchIndicator.hide();
                 Y.fire('lane:change');;
             }
         };

@@ -1,42 +1,15 @@
-YUI().use('lane', 'lane-textinputs', 'lane-suggest', 'node', function(Y) {
-    Search = function() {
+YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'node', function(Y) {
+    LANE.Search = function() {
         var searching = false, //searching state
             form = Y.one('#search'), //the form Element
             searchSourceSelect = form.one('#searchSource'),
             searchOptions = searchSourceSelect.all('option'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
-            searchIndicator = form.one('#searchIndicator'),
+            searchIndicator = new Y.lane.SearchIndicator(),
             searchTextInput = new Y.lane.TextInput(form.one('#searchTerms')),
 			searchTermsPresent = function() {
 				return searchTextInput.getValue() !== '';
-			},
-            search = {
-                startSearch: function() {
-                    searching = true;
-                    searchIndicator.setStyle('visibility', 'visible');
-                },
-                stopSearch: function() {
-                    searching = false;
-                    searchIndicator.setStyle('visibility', 'hidden');
-                },
-                getSearchSource: function() {
-                    return searchSourceSelect.get('value');
-                },
-                getSearchTerms: function() {
-                    return searchTextInput.getValue();
-                },
-                setSearchTerms: function(searchString) {
-                    searchTextInput.setValue(searchString);
-                },
-                submitSearch: function() {
-                    if (!searchTermsPresent()) {
-                        throw ('nothing to search for');
-                    }
-                    this.startSearch();
-                    Y.fire('lane:beforeSearchSubmit', search);
-                    form.submit();
-                }
-            };
+			};
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
             try {
@@ -61,8 +34,24 @@ YUI().use('lane', 'lane-textinputs', 'lane-suggest', 'node', function(Y) {
             }
         });
         new Y.lane.Suggest(searchTextInput.getInput());
-        return search;
-    };
-    
-    LANE.Search = new Search();
+        return {
+                getSearchSource: function() {
+                    return searchSourceSelect.get('value');
+                },
+                getSearchTerms: function() {
+                    return searchTextInput.getValue();
+                },
+                setSearchTerms: function(searchString) {
+                    searchTextInput.setValue(searchString);
+                },
+                submitSearch: function() {
+                    if (!searchTermsPresent()) {
+                        throw ('nothing to search for');
+                    }
+                    searchIndicator.show();
+                    Y.fire('lane:beforeSearchSubmit', search);
+                    form.submit();
+                }
+            };
+    }();
 });
