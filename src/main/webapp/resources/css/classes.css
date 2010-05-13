@@ -13,6 +13,12 @@
 .even {
     background-color:#f6f3e5;
 }
+.classes h4 {
+    color:#3F3C30;
+    font-family:inherit;
+    font-size:12px;
+    font-weight:bold;
+}
 .hide, .show {
     border-bottom:1px dotted #81785A;
     color:#565347;
