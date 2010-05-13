@@ -66,8 +66,7 @@ YUI().use('lane-search-result',"lane-search-indicator", 'node','event-custom','h
                 success: function(id, o, arguments){
                     var result, bodyNodes, content, i;
                     result = arguments.result;
-                    //FIXME: doesn't work with webkit (and ie?) ... back to importNode ?
-                    bodyNodes = new Y.Node(o.responseXML.getElementsByTagName('body')[0]).get('children');
+                    bodyNodes = new Y.Node(o.responseXML.getElementsByTagName('body')[0]).cloneNode(true).get('children');
                     result.setContent(bodyNodes);
                     LANE.search.facets.getCurrentResult().hide();
                     LANE.search.facets.setCurrentResult(result);
