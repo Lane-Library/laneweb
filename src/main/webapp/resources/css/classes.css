@@ -4,13 +4,6 @@
     font-size:11px !important;
     margin-bottom:5px;
 }
-.classes li > div:first-child:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility:hidden;
-}
 .even.expanded,.odd.expanded, .even.yui3-accordion-item-active, .odd.yui3-accordion-item-active {
     background-color:#DBD2B3;
 }
@@ -19,11 +12,6 @@
 }
 .even {
     background-color:#f6f3e5;
-}
-.what, .when, .detail-link {
-    float:left;
-    line-height:18px;
-    padding:8px 4px 8px 16px;
 }
 .hide, .show {
     border-bottom:1px dotted #81785A;
@@ -39,31 +27,16 @@
 .expanded .hide, .yui3-accordion-item-active .hide {
     display:inline;
 }
-.what {
-    width:53%;
-    font-size:12px;
-}
-.what {
-    font-weight:bold;
-}
-.author {
-    font-weight:normal;
-    font-size:11px;
-}
 .yui3-js-enabled .details {
     display:none;
 }
 .yui3-js-enabled .details.yui3-accordion-item-bd {
     display:block;
 }
-.details {
-    background-color:#DBD2B3;
-    clear:left;
-}
 .details > div {
-    margin:16px;
-    padding:16px;
     background-color:white;
+    border:16px solid #DBD2B3;
+    padding:16px;
 }
 .details p {
     font-size:12px;
@@ -71,4 +44,8 @@
 }
 .details img {
     float:right;
+}
+.classes .yui-ge {
+    line-height:18px;
+    padding:8px 4px 8px 16px;
 }

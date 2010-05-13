@@ -31,6 +31,19 @@
 .yui-gf .yui-g, .yui-u .yui-g {
     width:100%
 }
+.yui-ge .yui-gf div.first {
+    width:74.2%;
+}
+/*
+.yui-ge .yui-gf .yui-u {
+    width:74.2%;
+}
+.yui-gf .yui-gc div.first {
+    width:66%;
+}
+.yui-gf .yui-gc .yui-u {
+    width:32%;
+}*/
 /*
 .yui-gf .yui-gb .yui-u {
     width:32%
