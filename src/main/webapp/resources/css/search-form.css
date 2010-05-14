@@ -4,7 +4,7 @@
     padding-left:28px;
     height:94px;
 }
-#search.clinical {
+.yui3-js-enabled #search.clinical {
     background-image:url(/././images/clin-search-bg.jpg);
     height:124px;
 } 
@@ -25,7 +25,7 @@
     width:587px;
     border:1px solid white;
 }
-.clinical #searchTerms {
+.yui3-js-enabled .clinical #searchTerms {
     margin-left:160px;
 }
 #searchSubmit {

@@ -9,7 +9,7 @@
     font-weight:bold;
     font-size:13px;
 }
-#laneNav.clinical {
+.yui3-js-enabled #laneNav.clinical {
     top:174px;
 }
 #laneNav li {
