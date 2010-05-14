@@ -42,7 +42,7 @@ YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse',
                                                 setTimeout(LANE.search.querymap.getResultCounts, 2000);
                                             }
                                             //queryMapping.style.display = 'inline';
-                                            Y.fire('lane:popin', queryMapping);
+                                            Y.Global.fire('lane:popin', queryMapping);
                                         }
                                     }
                                 });

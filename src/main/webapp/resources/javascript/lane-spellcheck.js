@@ -13,7 +13,7 @@ YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse',
                         a = spellCheck.one('a');
                         a.set('href', document.location.href.replace('q=' + searchTerms, 'q=' + encodeURIComponent(sc.suggestion)));
                         a.set('innerHTML', sc.suggestion);
-                        Y.fire('lane:popin', spellCheck);
+                        Y.Global.fire('lane:popin', spellCheck);
                     }
                 }
             }

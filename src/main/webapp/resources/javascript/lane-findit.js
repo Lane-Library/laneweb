@@ -13,7 +13,7 @@ YUI().use('lane-search-result','event', 'node', 'io-base', 'json-parse', functio
                         findItLink = findItNode.one('a');
                         findItLink.set('href', findIt.openurl);
                         findItLink.set('innerHTML', findIt.result);
-                        Y.fire('lane:popin', findItNode);
+                        Y.Global.fire('lane:popin', findItNode);
                     }
                 }
             }

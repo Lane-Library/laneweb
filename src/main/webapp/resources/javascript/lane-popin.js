@@ -7,7 +7,7 @@ YUI().use('lane', 'event-custom','node',function(Y) {
     // TODO: could make markup order dictate precedence 
     //       (find elm and then fetch parent of elm to see if other popin children
     //       popInContent id NOT always present when popin required)
-        onPopinHandler = function(type, el) {
+        onPopinHandler = function(el) {
 			//FIXME: are elms returned in the right order? probably not.
             var i, activeEl = 99, elms = Y.all('#spellCheck, #queryMapping, #findIt');
             for (i = 0; i < elms.size(); i++) {
@@ -17,8 +17,9 @@ YUI().use('lane', 'event-custom','node',function(Y) {
             }
             for (i = 0; i < elms.size(); i++) {
                 if (elms.item(i) !== null) {
-                    if (el[0].id === elms.item(i).get('id') && i <= activeEl) {
+                    if (el.get('id') === elms.item(i).get('id') && i <= activeEl) {
                         activeEl = i;
+                        elms.item(i).get('parentNode').setStyle('display','inline');
 						elms.item(i).setStyle('display','inline');
                     } else if (i > activeEl) {
 						elms.item(i).setStyle('display','none');
