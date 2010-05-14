@@ -1,16 +1,17 @@
 .module {
     margin-bottom:1em;
+    clear:left;
 }
 .module .bd {
     margin-top:13px;
 }
-.module:after {
+/*.module:after {
     content: "."; 
     display: block; 
     height: 0; 
     clear: both;
     visibility:hidden;
-}
+}*/
 .module-img {
     float:left;
     margin-right:1em;

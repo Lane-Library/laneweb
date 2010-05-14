@@ -712,5 +712,48 @@
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
+    
+    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']/h:div[@class='yui-gf']/h:div[@class='yui-u first']">
+        <xsl:copy>
+            <xsl:attribute name="class" select="concat(@class, ' leftColumn')"/>
+            <!--<xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>-->
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:body/h:div[@class='yui-gf']/h:div[@class='yui-u first']">
+        <xsl:copy>
+            <xsl:attribute name="class" select="concat(@class, ' leftColumn')"/>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']/h:div[@class='yui-gf']/h:div[@class='yui-u']">
+        <xsl:copy>
+            <xsl:attribute name="class" select="concat(@class, ' middleColumn')"/>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u']">
+        <xsl:copy>
+            <xsl:attribute name="class" select="concat(@class, ' rightColumn')"/>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']">
+        <xsl:copy>
+            <xsl:attribute name="class" select="concat(@class, ' leftGrids')"/>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:body/h:div[@class='yui-gf']/h:div[@class='yui-u']">
+        <xsl:copy>
+            <xsl:attribute name="class" select="concat(@class, ' rightGrids')"/>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
 
 </xsl:stylesheet>

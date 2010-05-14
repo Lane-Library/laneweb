@@ -12,7 +12,7 @@
     margin:25px 15px 0 20px;
 }
 /*customizations*/
-.content > .yui-ge > .first > .yui-gf > div {
+/*.content > .yui-ge > .first > .yui-gf > div {
     width:521px;
 }
 .content > .yui-ge > .first {
@@ -26,6 +26,21 @@
 }
 .content > .yui-ge > .first > .yui-gf > .first, .content > .yui-gf > .first {
     width:156px;
+}*/
+.yui-ge .yui-u .leftColumn, .content .yui-gf .leftColumn {
+    width:156px;
+}
+.yui-ge .yui-u .middleColumn {
+    width:521px;
+}
+.content .yui-ge .rightColumn {
+    width:199px;
+}
+.content .yui-ge .leftGrids {
+    width:713px;
+}
+.content .yui-gf .rightGrids {
+    width:760px;
 }
 /*nesting error corrections*/
 .yui-gf .yui-g, .yui-u .yui-g {
