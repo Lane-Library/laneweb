@@ -13,14 +13,6 @@ YUI().use('node-base','anim', function(Y) {
 				marginLeft : '-185px'
 			}
 		}),
-		closeFacetsAnim = new Y.Anim( {
-			node : '#searchFacets',
-			easing : Y.Easing.easeOut,
-			duration : 0.3,
-			to : {
-				opacity : 0
-			}
-		}),
 		openResultsAnim = new Y.Anim( {
 			node : '#searchResults',
 			easing : Y.Easing.easeOut,
@@ -28,6 +20,30 @@ YUI().use('node-base','anim', function(Y) {
 			to : {
 				marginLeft : 0
 			}
+		}),
+		closePopinAnim = new Y.Anim( {
+			node : '#popInContent',
+			easing : Y.Easing.easeOut,
+			duration : 0.3,
+			to : {
+			marginLeft : '-185px'
+		}
+		}),
+		openPopinAnim = new Y.Anim( {
+			node : '#popInContent',
+			easing : Y.Easing.easeOut,
+			duration : 0.3,
+			to : {
+			marginLeft : 0
+		}
+		}),
+		closeFacetsAnim = new Y.Anim( {
+			node : '#searchFacets',
+			easing : Y.Easing.easeOut,
+			duration : 0.3,
+			to : {
+			opacity : 0
+		}
 		}),
 		openFacetsAnim = new Y.Anim( {
 			node : '#searchFacets',
@@ -46,6 +62,7 @@ YUI().use('node-base','anim', function(Y) {
 				parent.addClass("open");
 			} else {
 				openResultsAnim.run();
+				openPopinAnim.run();
 				parent.removeClass("open");
 				this.set('innerHTML', 'Hide Options');
 				parent.addClass("closed");
@@ -54,6 +71,7 @@ YUI().use('node-base','anim', function(Y) {
 		};
 
 	closeFacetsAnim.on('end', function() {
+		closePopinAnim.run();
 		closeResultsAnim.run();
 	});
 
