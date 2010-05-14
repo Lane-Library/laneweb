@@ -38,7 +38,7 @@
 
     <xsl:param name="name"/>
     
-    <xsl:param name="js-enabled"/>
+    <!--<xsl:param name="js-enabled"/>-->
     
     <!-- ==========================  VARIABLES  ========================== -->
     
@@ -163,7 +163,7 @@
         <xsl:apply-templates select="h:body/child::node()"/>
     </xsl:template>
     
-    <xsl:template match="h:html">
+    <!--<xsl:template match="h:html">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:if test="$js-enabled != 'true'">
@@ -171,7 +171,7 @@
             </xsl:if>
             <xsl:apply-templates/>
         </xsl:copy>
-    </xsl:template>
+    </xsl:template>-->
 
     <!-- put version into javascript @src -->
     <xsl:template match="h:script/@src[starts-with(.,'/javascript')]">

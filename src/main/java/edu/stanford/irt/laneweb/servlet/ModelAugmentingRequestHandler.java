@@ -75,7 +75,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
                 }
             }
         }
-        addToModel(Model.JS_ENABLED, getBooleanValue(request, session, Model.JS_ENABLED), model);
+//        addToModel(Model.JS_ENABLED, getBooleanValue(request, session, Model.JS_ENABLED), model);
         super.process(request, response);
     }
     

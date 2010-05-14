@@ -17,10 +17,10 @@ public class JavascriptEnableServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
-        if (session != null) {
-            session.setAttribute(Model.JS_ENABLED, Boolean.TRUE);
-        }
+//        HttpSession session = req.getSession(false);
+//        if (session != null) {
+//            session.setAttribute(Model.JS_ENABLED, Boolean.TRUE);
+//        }
     }
     
     

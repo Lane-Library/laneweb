@@ -88,12 +88,12 @@
         <servlet-class>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-class>
     </servlet>
 
-    <servlet>
+    <!--<servlet>
         <description>JavascriptEnableServlet</description>
         <display-name>JavascriptEnableServlet</display-name>
         <servlet-name>edu.stanford.irt.laneweb.servlet.JavascriptEnableServlet</servlet-name>
         <servlet-class>edu.stanford.irt.laneweb.servlet.JavascriptEnableServlet</servlet-class>
-    </servlet>
+    </servlet>-->
 
     <servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler</servlet-name>
@@ -140,10 +140,10 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     
-    <servlet-mapping>
+    <!--<servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.JavascriptEnableServlet</servlet-name>
         <url-pattern>/enable-js</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
 
     <mime-mapping>
         <extension>abs</extension>

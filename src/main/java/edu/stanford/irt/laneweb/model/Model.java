@@ -86,7 +86,7 @@ public class Model extends HashMap<String, Object> {
 
     public static final String SELECTION = "selection";
     
-    public static final String JS_ENABLED = "js-enabled";
+//    public static final String JS_ENABLED = "js-enabled";
     
     public static final String PAGE_NUMBER = "pageNumber";
     
