@@ -1,4 +1,4 @@
-YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'node', function(Y) {
+YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'node','event-custom', function(Y) {
     LANE.Search = function() {
         var searching = false, //searching state
             form = Y.one('#search'), //the form Element
@@ -7,6 +7,7 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
             searchIndicator = new Y.lane.SearchIndicator(),
             searchTextInput = new Y.lane.TextInput(form.one('#searchTerms')),
+            searchTermsSuggest = new Y.lane.Suggest(searchTextInput.getInput()),
             search,
             searchTermsPresent = function() {
                 return searchTextInput.getValue() !== '';
@@ -34,7 +35,9 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
                 Y.fire('lane:searchSourceChange', search);
             }
         });
-        new Y.lane.Suggest(searchTextInput.getInput());
+        searchTermsSuggest.on("lane:suggestSelect",function(e){
+        	LANE.Search.submitSearch();
+        });
         search =  {
                 getSearchSource: function() {
                     return searchSourceSelect.get('value');

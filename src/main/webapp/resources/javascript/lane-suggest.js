@@ -3,10 +3,9 @@ YUI().add('lane-suggest', function (Y) {
     Y.namespace('lane');
     
     Y.lane.Suggest = function (input, limit) {
-        var acWidget, i,
+        var self = this, acWidget, i,
             baseUrl = '/././apps/suggest/json?',
             acDS  = new Y.DataSource.IO({source:baseUrl}),
-			searchIndicator = new Y.lane.SearchIndicator();
             setDSLimit = function(input){
 //            Y.log("set source");
                 var sourceElm = input.ancestor("form").one('#searchSource'), searchSource, minQueryLength = 3, limit = null;
@@ -27,6 +26,10 @@ YUI().add('lane-suggest', function (Y) {
                     input.ac.get("dataSource").set("source",limit);
                 }
             };
+        	this.publish("lane:suggestSelect",{
+        		broadcast:2,
+        		suggestion:null
+        		});
             acDS.plug({fn : Y.Plugin.DataSourceJSONSchema, cfg : {
                 schema : { resultListLocator : "suggest" }
             }});
@@ -138,8 +141,7 @@ YUI().add('lane-suggest', function (Y) {
                     if (e) {
                         e.preventDefault();
                     }
-                    searchIndicator.show();
-                    Y.Node.getDOMNode(input.ancestor("form")).submit();
+                    self.fire("lane:suggestSelect",{suggestion:input.ac.get("queryValue")});
                 },
                 setWidth : function (w) {
                     if (w) {
@@ -179,12 +181,19 @@ YUI().add('lane-suggest', function (Y) {
         input.ac.on("ac:previous", acWidget.previous, acWidget);
         Y.on("key", acWidget.select, input, "down:13,10");
     };
-}, '1.11.0-SNAPSHOT', {requires:['lane','lane-search-indicator', 'gallery-ac-plugin', 'plugin', 'node-base', 'datasource']});
+    Y.augment(Y.lane.Suggest,Y.EventTarget);
+}, '1.11.0-SNAPSHOT', {requires:['lane', 'gallery-ac-plugin', 'plugin', 'node-base', 'datasource','event-custom']});
 
-YUI().use('lane-suggest', 'node-base', function(Y) {
-
-    var i, suggestElms = Y.all('.laneSuggest');
+YUI().use('lane-suggest', 'node-base', 'lane-metasearch', function(Y) {
+	// hybrid metasearch pages will have .laneSuggest elements 
+    var i, suggestElms = Y.all('.laneSuggest'), laneSuggest;
     for (i = 0; i < suggestElms.size(); i++) {
-        new Y.lane.Suggest(suggestElms.item(i));
+        laneSuggest = new Y.lane.Suggest(suggestElms.item(i));
+        laneSuggest.on("lane:suggestSelect",function(e){
+        	//FIXME: need to setSearchTerms before running metasearch
+        	Y.log(e.suggestion);
+            LANE.search.metasearch.initialize();
+            LANE.search.metasearch.getResultCounts();
+        });
     }
 });

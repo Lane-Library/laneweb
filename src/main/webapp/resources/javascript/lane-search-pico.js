@@ -1,4 +1,4 @@
-YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', function(Y) {
+YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         fields = form.one('#searchFields'),
@@ -54,20 +54,32 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', function(Y) {
                '<input name="o" id="clinicalO" type="text" title="outcome"/>' +
                '</fieldset>',
         createPicoFields = function() {
-            var i, inputs;
+            var i, inputs, picoSuggest;
             picoFields = Y.Node.create(PICO);
             inputs = picoFields.all('input');
             for (i = 0; i < inputs.size(); i++) {
                 new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title'));
                 switch(inputs.item(i).get('name')){
                 	case 'p':
-                		new Y.lane.Suggest(inputs.item(i),"l=mesh-d&");
+                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-d&");
+                		picoSuggest.on("lane:suggestSelect",function(e){
+                			Y.log("p->"+e.suggestion);
+                			//picoSearchTerms.setP(e.suggestion);
+                        });
                 		break;
                 	case 'i':
-                		new Y.lane.Suggest(inputs.item(i),"l=mesh-i&");
+                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-i&");
+                		picoSuggest.on("lane:suggestSelect",function(e){
+                   			Y.log("i->"+e.suggestion);
+                   			//picoSearchTerms.setI(e.suggestion);
+                        });
                 		break;
                 	case 'c':
-                		new Y.lane.Suggest(inputs.item(i),"l=mesh-di&");
+                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-di&");
+                		picoSuggest.on("lane:suggestSelect",function(e){
+                   			Y.log("c->"+e.suggestion);
+                   			//picoSearchTerms.setC(e.suggestion);
+                        });
                 		break;
                 }
             }
