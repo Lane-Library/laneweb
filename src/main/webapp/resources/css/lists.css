@@ -20,7 +20,5 @@ ol {
 }
 /*this is the middle column*/
 .content .middleColumn li {
-    font-size:inherit;
-    line-height:inherit;
     padding-bottom:0.2em;
 }

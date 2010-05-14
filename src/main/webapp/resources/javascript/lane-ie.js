@@ -21,7 +21,7 @@ YUI().use('node', function(Y) {
         //instead of :first-child selector remove left border on .nav2 menus:
         nodes = Y.all('.nav2, #libraryContact');
         for (i = 0; i < nodes.size(); i++) {
-            nodes.item(i).one('li').setStyle('backgroundColor', 'blue');
+            nodes.item(i).one('li').setStyle('borderLeft', 'none');
         }
     }
 });
