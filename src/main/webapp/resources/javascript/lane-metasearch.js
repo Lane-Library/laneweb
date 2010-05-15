@@ -1,7 +1,7 @@
-YUI().use('lane-search-indicator', 'lane-search-result', 'node','json-parse','io-base','datatype',function(Y) {
+YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node','json-parse','io-base','datatype',function(Y) {
     	
-    LANE.namespace('search.metasearch');
-    LANE.search.metasearch = function() {
+    LANE.namespace('metasearch');
+    LANE.metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search
             searchRequests = [], // search timerIds so we can abort sleeping getResultCounts
@@ -90,7 +90,7 @@ YUI().use('lane-search-indicator', 'lane-search-result', 'node','json-parse','io
                                 if (remainingTime > 20 * 1000) {
                                     sleepingTime = 10000;
                                 }
-                                searchRequests.push(setTimeout(LANE.search.metasearch.getResultCounts, sleepingTime));
+                                searchRequests.push(setTimeout(LANE.metasearch.getResultCounts, sleepingTime));
                             } else {
                                 searchIndicator.hide();
                             }
@@ -103,8 +103,17 @@ YUI().use('lane-search-indicator', 'lane-search-result', 'node','json-parse','io
     
     // check for presence of search term and metasearch classNames
     if (Y.all('.metasearch').size() > 0 && Y.lane.SearchResult.getEncodedSearchTerms()) {
-        LANE.search.metasearch.initialize();
-        LANE.search.metasearch.getResultCounts();
+        LANE.metasearch.initialize();
+        LANE.metasearch.getResultCounts();
 		new Y.lane.SearchIndicator().show();
+    }
+    // hybrid search page inputs
+    var i, hybridInputs = Y.all('.laneSuggest'), laneSuggest;
+    for (i = 0; i < hybridInputs.size(); i++) {
+        laneSuggest = new Y.lane.Suggest(hybridInputs.item(i));
+        laneSuggest.on("lane:suggestSelect",function(e){
+        	new Y.lane.SearchIndicator().show();
+        	e.parentForm.submit();
+        });
     }
 });
