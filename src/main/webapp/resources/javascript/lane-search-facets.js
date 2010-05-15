@@ -71,6 +71,7 @@ YUI().use('lane-search-result',"lane-search-indicator", 'node','event-custom','h
                     LANE.search.facets.getCurrentResult().hide();
                     LANE.search.facets.setCurrentResult(result);
                     result.show();
+                    Y.Global.fire('lane:change');
                 },
                 failure: function(){
                     //TODO: use window.location to set page to href of facet
