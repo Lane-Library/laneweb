@@ -7,7 +7,6 @@ YUI().add('lane-suggest', function (Y) {
             baseUrl = '/././apps/suggest/json?',
             acDS  = new Y.DataSource.IO({source:baseUrl}),
             setDSLimit = function(input){
-//            Y.log("set source");
                 var sourceElm = input.ancestor("form").one('#searchSource'), searchSource, minQueryLength = 3, limit = null;
                 searchSource = (sourceElm) ? sourceElm.get('value') : null;
                 if (searchSource && searchSource.match(/^(all|articles|catalog)/)) {
@@ -30,7 +29,7 @@ YUI().add('lane-suggest', function (Y) {
         		broadcast:2,
         		suggestion:null,
         		parentForm:null
-        		});
+    		});
             acDS.plug({fn : Y.Plugin.DataSourceJSONSchema, cfg : {
                 schema : { resultListLocator : "suggest" }
             }});
@@ -48,12 +47,10 @@ YUI().add('lane-suggest', function (Y) {
             input.insert(contNode,"after");
             
             contNode.delegate("click", function (e) {
-//                Y.log("click");
                 var target = e.currentTarget, index = target.get("className").split('-')[1];
                 acWidget.focus(index).select(e);
             }, "li");
             contNode.delegate("mouseover", function (e) {
-//                Y.log("mouseover ");
                 var target = e.currentTarget, index = target.get("className").split('-')[1];
                 acWidget.focus(index);
             }, "li");
@@ -68,7 +65,6 @@ YUI().add('lane-suggest', function (Y) {
                     return this;
                 },
                 render : function () {
-//                    Y.log("render");
                     if (!data.length){
                         return this;
                     }
@@ -108,7 +104,6 @@ YUI().add('lane-suggest', function (Y) {
                         current.removeClass("selected");
                     }
                     intent.addClass("selected");
-                    //input.ac.set("queryValue", acWidget.getValue());
                     return this;
                 },
                 next : function () {
@@ -164,12 +159,10 @@ YUI().add('lane-suggest', function (Y) {
             }
         });
         input.ac.on("ac:load", function (e) {
-//            Y.log("ac:load");
             acWidget.setWidth(input.getStyle("width"));
             acWidget.setData(e.results).render();
         });
         input.ac.on("ac:query", function (e) {
-//            Y.log("ac:query");
             if (acWidget.visible && e.value === acWidget.value) {
                 e.halt();
             }
