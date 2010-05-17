@@ -58,7 +58,11 @@ YUI({ logInclude: { TestRunner: true } }).use('lane', "lane-search-indicator", '
 		testSetSearchTerms: function() {
 			this.search.setSearchTerms('foo');
 			Y.Assert.areEqual('foo', this.searchTermsInput.get('value'));
-		}
+		},
+        testSuggestSelect: function() {
+            Y.publish("lane:suggestSelect",{broadcast:2});
+            Y.fire("lane:suggestSelect");
+        }
     });
     
     Y.one('body').addClass('yui3-skin-sam');

@@ -32,11 +32,11 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
             if (searchTermsPresent()) {
                 search.submitSearch();
             } else {
-                Y.fire('lane:searchSourceChange', search);
+                Y.fire('lane:searchSourceChange', {newVal:this.get("value")});
             }
         });
-        searchTermsSuggest.on("lane:suggestSelect",function(e){
-        	LANE.Search.submitSearch();
+        Y.Global.on("lane:suggestSelect",function(e){
+        	search.submitSearch();
         });
         search =  {
                 getSearchSource: function() {

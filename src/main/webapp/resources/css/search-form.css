@@ -7,14 +7,17 @@
 .yui3-js-enabled #search.clinical {
     background-image:url(/././images/clin-search-bg.jpg);
     height:124px;
-} 
-#searchSource{
+}
+#searchSource {
     display:block;
     width:140px;
     margin-bottom:6px;
 }
 #picoFields {
-    margin:10px 0;
+    display:none;
+    left:27px;
+    position:absolute;
+    top:108px;
 }
 #picoFields input {
     border:1px solid white;
@@ -27,6 +30,7 @@
 }
 .yui3-js-enabled .clinical #searchTerms {
     margin-left:160px;
+    margin-top:32px;
 }
 #searchSubmit {
     background-color:transparent;
@@ -133,15 +137,14 @@
   width:590px;
   }
  */
- /* form on portal pages for hybrid metasearch ... NOT finalized */
-  .breadcrumbForm {
+/* form on portal pages for hybrid metasearch ... NOT finalized */
+.breadcrumbForm {
     margin-top:15px;
     float:right;
-  }
-  .breadcrumbForm input {
+}
+.breadcrumbForm input {
     width:192px;
-  }
- .inputHint {
+}
+.inputHint {
     color:#808080;
- }
- 
+}
