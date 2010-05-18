@@ -155,7 +155,7 @@
                                     <xsl:text> - </xsl:text>
                                     <a rel="popup standard"
                                         title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
-                                        href="{s:resourceUrl}">all results from <xsl:value-of select="$resourceName"/></a>
+                                        href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
                                 </xsl:if>
                             </xsl:otherwise>
                         </xsl:choose>
