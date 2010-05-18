@@ -6,7 +6,7 @@
                 exclude-result-prefixes="h b"
                 version="2.0">
 
-<xsl:param name="q"/>
+<xsl:param name="query"/>
 <xsl:param name="type"/> 
 <xsl:param name="region"/>
 <xsl:param name="images-url"/>
@@ -22,14 +22,14 @@
 <xsl:variable name="imgs-per-page"><xsl:value-of select="number($images-per-page)"/></xsl:variable>
 
 <xsl:variable name="query-string">
-    <xsl:if test="$q != ''">q=<xsl:value-of select="$q"/></xsl:if>
-    <xsl:if test="$q != '' and $region != ''"><xsl:text>&amp;</xsl:text></xsl:if>
+    <xsl:if test="$query != ''">q=<xsl:value-of select="$query"/></xsl:if>
+    <xsl:if test="$query != '' and $region != ''"><xsl:text>&amp;</xsl:text></xsl:if>
     <xsl:if test="$region != ''">r=<xsl:value-of select="$region"/></xsl:if>
     <xsl:if test="$type != ''">&amp;t=<xsl:value-of select="$type"/></xsl:if>
 </xsl:variable>
 
 
-<xsl:variable name="query"><xsl:value-of select="replace($query-string,'&amp;t=diagram','')"/> </xsl:variable>
+<xsl:variable name="query-str"><xsl:value-of select="replace($query-string,'&amp;t=diagram','')"/> </xsl:variable>
     <xsl:template match="*">
          <xsl:copy>
              <xsl:apply-templates select="attribute::node()|child::node()"/>
@@ -46,9 +46,9 @@
           <xsl:copy>
              <xsl:apply-templates select="attribute::node()|child::node()"/>
               <xsl:choose>
-                <xsl:when test="$q">
+                <xsl:when test="$query">
                     <xsl:text>Search Term: </xsl:text>
-                    <xsl:value-of select="$q"/>
+                    <xsl:value-of select="$query"/>
                 </xsl:when>
                 <xsl:when test="$region">
                     <xsl:value-of select="replace($region,'--',': ')"/>
@@ -109,7 +109,7 @@
     <xsl:template match="h:a[@id='photo-choice']/@href">
         <xsl:attribute name="href">
               <xsl:value-of select="."/>
-                 <xsl:value-of select="$query"/>        
+                 <xsl:value-of select="$query-str"/>        
                  <xsl:text>&amp;pageNumber=</xsl:text>
                  <xsl:value-of select="$page-number"/>
           </xsl:attribute> 
@@ -118,7 +118,7 @@
     <xsl:template match="h:a[@id='diagram-choice']/@href">
         <xsl:attribute name="href">
               <xsl:value-of select="."/>
-                 <xsl:value-of select="$query"/>
+                 <xsl:value-of select="$query-str"/>
                  <xsl:text>&amp;t=diagram&amp;pageNumber=</xsl:text>
                  <xsl:value-of select="$page-number"/>
           </xsl:attribute>

@@ -6,7 +6,7 @@
                 exclude-result-prefixes="h b"
                 version="2.0">
 
-    <xsl:param name="q"/>
+    <xsl:param name="query"/>
     
 
     <xsl:template match="doc">
@@ -15,11 +15,11 @@
     
     <xsl:template match="h:a[not(@rel)]/@href">
       <xsl:choose>
-        <xsl:when test="$q">
+        <xsl:when test="$query">
            <xsl:attribute name="href">
                  <xsl:value-of  select="."/>
                  <xsl:text>&amp;q=</xsl:text>
-                 <xsl:value-of  select="$q"/>
+                 <xsl:value-of  select="$query"/>
            </xsl:attribute>
          </xsl:when>
         <xsl:otherwise>
