@@ -13,7 +13,7 @@
     text-transform:uppercase;
 }
 #queryMapping span {
-    padding-right:5px;
+    padding-right:10px;
 }
 .search a, .search a:visited {
     color: #0C4C72;
