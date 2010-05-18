@@ -46,6 +46,8 @@
     
     <!-- don't pass on meta elements only required here -->
     <xsl:template match="h:meta[not(attribute::name='LW.faqCategory')]"/>
+    
+    <xsl:template match="h:h1|h:h2|h:div[@class='extra']"/>
 
     <xsl:template match="h:div[@id='leftColumn']//xi:include/attribute::href">
         <xsl:variable name="root-category-string"
@@ -64,19 +66,63 @@
         </xsl:attribute>
     </xsl:template>
     
-    <xsl:template match="h:dl">
+    <xsl:template match="h:body">
         <xsl:copy>
-            <xsl:apply-templates select="h:dt">
-                <xsl:sort select="upper-case(.)"/>
-            </xsl:apply-templates>
+            <h2><xsl:value-of select="descendant::h:h1"/></h2>
+            <div class="yui-ge">
+                <div class="yui-u first">
+                    <div class="yui-gf">
+                        <div class="yui-u">
+                            <xsl:apply-templates select="descendant::h:div[@id='mainColumn']"/>
+                        </div>
+                    </div>
+                    <div class="yui-u first">
+                        <xsl:apply-templates select="descendant::h:div[@id='leftColumn']"/>
+                    </div>
+                </div>
+                <div class="yui-u">
+                    <xsl:apply-templates select="descendant::h:div[@id='rightColumn']/h:div"/>
+                </div>
+            </div>
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="h:dt">
-        <xsl:copy>
-            <xsl:apply-templates select="h:a"/>
-        </xsl:copy>
-        <xsl:apply-templates select="following-sibling::h:dd[1]"/>
+    <xsl:template match="h:div[@id='mainColumn']">
+        <div class="module">
+            <h3>&#160;</h3>
+            <div class="bd">
+                <xsl:apply-templates/>
+            </div>
+        </div>
     </xsl:template>
+    
+    <xsl:template match="h:div[@id='leftColumn']">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="h:div[@id='rightColumn']/h:div">
+        <div class="module">
+            <h3><xsl:value-of select="h:h2"/></h3>
+            <div class="bd">
+                <xsl:apply-templates/>
+            </div>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="h:dl">
+        <ul>
+            <xsl:apply-templates select="h:dt">
+                <xsl:sort select="upper-case(.)"/>
+            </xsl:apply-templates>
+        </ul>
+    </xsl:template>
+    
+    <xsl:template match="h:dt">
+        <li>
+            <xsl:apply-templates select="h:a"/>
+        </li>
+        <!--<xsl:apply-templates select="following-sibling::h:dd[1]"/>-->
+    </xsl:template>
+    
 
 </xsl:stylesheet>
