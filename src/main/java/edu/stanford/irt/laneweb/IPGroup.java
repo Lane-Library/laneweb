@@ -30,8 +30,12 @@ public final class IPGroup {
 
     public static final IPGroup SOM_LANE = new IPGroup("SOM_LANE");
 
-    public static final IPGroup SOM_OTHER = new IPGroup("SOM_OTHER");
+    public static final IPGroup SOM_LKSC = new IPGroup("SOM_LKSC");
 
+    public static final IPGroup SOM_SIM1 = new IPGroup("SOM_SIM1");
+    
+    public static final IPGroup SOM_OTHER = new IPGroup("SOM_OTHER");
+    
     public static final IPGroup STAFF = new IPGroup("STAFF");
 
     public static final IPGroup SU = new IPGroup("SU");
@@ -110,13 +114,17 @@ public final class IPGroup {
 
     private static final Pattern SOM_LPCH_PATTERN = Pattern.compile("^(?:112|126)" + DOT + _0_TO_255 + "$");
 
+    private static final Pattern SOM_LKSC_PATTERN = Pattern.compile("^(?:16[4-7])" + DOT + _0_TO_255 + "$");
+
     private static final Pattern SOM_PATTERN = Pattern.compile("^171" + DOT + "65" + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
 
     private static final Pattern SOM_PAVA_PATTERN = Pattern.compile("^44" + DOT + _0_TO_255 + "$");
     
+    private static final Pattern SOM_SIM1_PATTERN = Pattern.compile("^(?:16[0-3])" + DOT + _0_TO_255 + "$");
+    
     private static final Pattern EZPROXY_SERVER_PATTERN = Pattern.compile("^65.46$");
 
-    private static final Pattern SOM_SHC_PATTERN = Pattern.compile("^(?:(?:1[12]5|12[7-9]|1[3-9][0-9]|25[0-5]|2[0-4][0-9])|4[6-7])" + DOT + _0_TO_255 + "$");
+    private static final Pattern SOM_SHC_PATTERN = Pattern.compile("^(?:(?:1[12]5|12[7-9]|1[3-57-9][0-9]|16[8-9]|25[0-5]|2[0-4][0-9])|4[6-7])" + DOT + _0_TO_255 + "$");
 
     private static final Pattern STANFORD_10_PATTERN = Pattern.compile("^10" + DOT + _0_TO_255 + DOT + _0_TO_255 + DOT + _0_TO_255 + "$");
 
@@ -198,11 +206,17 @@ public final class IPGroup {
         if (SOM_LPCH_PATTERN.matcher(ip).matches()) {
             return IPGroup.LPCH;
         }
+        if (SOM_LKSC_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SOM_LKSC;
+        }
         if (SOM_PAVA_PATTERN.matcher(ip).matches()) {
             return IPGroup.PAVA;
         }
         if (SOM_SHC_PATTERN.matcher(ip).matches()) {
             return IPGroup.SHC;
+        }
+        if (SOM_SIM1_PATTERN.matcher(ip).matches()) {
+            return IPGroup.SOM_SIM1;
         }
         if (EZPROXY_SERVER_PATTERN.matcher(ip).matches()) {
             return IPGroup.OTHER;

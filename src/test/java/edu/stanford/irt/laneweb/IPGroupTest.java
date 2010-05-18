@@ -82,6 +82,36 @@ public class IPGroupTest {
     }
 
     @Test
+    public void testSomLKSCIps() throws IOException {
+        BufferedReader staffIps =
+            new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-lksc-ips.txt")));
+        String ip = null;
+        while ((ip = staffIps.readLine()) != null) {
+            assertEquals(ip, IPGroup.SOM_LKSC, IPGroup.getGroupForIP(ip));
+        }
+    }
+    
+    @Test
+    public void testSomSIM1Ips() throws IOException {
+        BufferedReader staffIps =
+            new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-sim1-ips.txt")));
+        String ip = null;
+        while ((ip = staffIps.readLine()) != null) {
+            assertEquals(ip, IPGroup.SOM_SIM1, IPGroup.getGroupForIP(ip));
+        }
+    }
+    
+    @Test
+    public void testSomSHCIps() throws IOException {
+        BufferedReader staffIps =
+            new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-shc-ips.txt")));
+        String ip = null;
+        while ((ip = staffIps.readLine()) != null) {
+            assertEquals(ip, IPGroup.SHC, IPGroup.getGroupForIP(ip));
+        }
+    }
+    
+    @Test
     public void testStaffIps() throws IOException {
         BufferedReader staffIps =
                 new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("staff-ips.txt")));
