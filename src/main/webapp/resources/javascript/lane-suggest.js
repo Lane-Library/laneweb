@@ -15,6 +15,8 @@ YUI().add('lane-suggest', function (Y) {
                     limit = baseUrl + "l=mesh&";
                 } else if (searchSource && searchSource.match(/^history/)) {
                     limit = baseUrl + "l=history&";
+                } else if (searchSource && searchSource.match(/^bassett/)) {
+                	limit = baseUrl + "l=bassett&";
                 } else if (null == searchSource) { // assume source-less is metasearch form on peds portal, etc.
                     limit = baseUrl + "l=mesh-di&";
                 } else {

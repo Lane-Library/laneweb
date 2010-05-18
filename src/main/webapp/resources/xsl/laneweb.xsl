@@ -80,9 +80,13 @@
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/classes-consult')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/med-history')">history-all</xsl:when>
+            <xsl:when test="starts-with($path,'/bassett')">bassett</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
             <xsl:when test="string-length($source-prefix) &gt; 0">
                 <xsl:value-of select="concat($source-prefix,'-all')"/>
+            </xsl:when>
+            <xsl:when test="$source">
+                <xsl:value-of select="$source"/>
             </xsl:when>
             <xsl:otherwise>all-all</xsl:otherwise>
         </xsl:choose>
