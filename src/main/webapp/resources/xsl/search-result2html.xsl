@@ -285,7 +285,7 @@
         <xsl:param name="version"/>
         <xsl:choose>
             <xsl:when
-                test="($type = 'getPassword' and count($version//s:link) = 2) or count($version//s:link) = 1">
+                test="($type = 'getPassword' and count($version//s:link) = 2) or ($version/s:summaryHoldings and count($version//s:link) = 1)">
                 <xsl:value-of select="$version/s:summaryHoldings"/>
                 <xsl:text>, </xsl:text>
                 <xsl:value-of select="$version/s:dates"/>
