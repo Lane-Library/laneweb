@@ -22,7 +22,7 @@ YUI({
                         success: function(id, o, arguments) {
                             var content = new Y.Node(o.responseXML),
                                 panel = arguments.panel;
-                            content = content.one("#mainColumn");
+                            content = content.one(".middleColumn .bd");
                             panel.append(content);
                         },
                         failure: function(id, o, arguments) {

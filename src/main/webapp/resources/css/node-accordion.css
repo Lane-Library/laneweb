@@ -3,7 +3,7 @@
     zoom:1;
 }
 .yui3-accordion .yui3-accordion-item {
-    display:block;
+/*    display:list-item;*/
 }
 .yui3-accordion .yui3-accordion-item .yui3-accordion-item-bd {
     height:0;
