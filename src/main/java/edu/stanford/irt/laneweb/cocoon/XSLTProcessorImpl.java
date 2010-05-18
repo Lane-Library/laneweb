@@ -251,7 +251,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
      */
     public void initialize() throws Exception {
         this.errorHandler = new TraxErrorHandler();
-        this.factory = getTransformerFactory(this.transformerFactory);
+//        this.factory = getTransformerFactory(this.transformerFactory);
+        this.factory.setErrorListener(this.errorHandler);
         this.defaultFactory = this.factory;
     }
 
@@ -499,7 +500,7 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
                 _factory = (SAXTransformerFactory) TransformerFactory.newInstance();
             }
         }
-        _factory.setErrorListener(this.errorHandler);
+//        _factory.setErrorListener(this.errorHandler);
         _factory.setURIResolver(this);
         return _factory;
     }

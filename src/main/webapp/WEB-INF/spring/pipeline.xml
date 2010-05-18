@@ -64,13 +64,15 @@
     </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/saxon"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer" scope="prototype">
+        class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer"
+        scope="prototype">
         <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
         <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"/>
     </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/joost"
-        class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer" scope="prototype">
+        class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer"
+        scope="prototype">
         <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
         <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"/>
     </bean>
@@ -105,7 +107,9 @@
     </bean>
 
     <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"
-        class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl" scope="prototype">
+        class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
+        init-method="initialize"
+        scope="prototype">
         <constructor-arg ref="org.apache.excalibur.xmlizer.XMLizer"/>
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
@@ -113,7 +117,9 @@
     </bean>
 
     <bean name="org.apache.excalibur.xml.xslt.XSLTProcessor/joost"
-        class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl" scope="prototype">
+        class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
+        init-method="initialize"
+        scope="prototype">
         <constructor-arg ref="org.apache.excalibur.xmlizer.XMLizer"/>
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>

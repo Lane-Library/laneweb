@@ -129,6 +129,7 @@
                     <map:parameter name="parameter-name" value="id"/>
                     <map:generate type="html" src="${medblog-base}/lane-faq/archives/{1}.xml"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/individual-faq.xsl"/>
+                    <map:transform type="joost" src="${default-resources-base}/xsl/old-faq.stx"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>

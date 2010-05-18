@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    version="1.0"
+    pass-through="all">
+    
+    <stx:template match="h:h1">
+        <h4><stx:process-children/></h4>
+    </stx:template>
+    
+</stx:transform>

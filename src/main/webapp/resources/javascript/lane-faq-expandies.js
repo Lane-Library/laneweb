@@ -20,14 +20,12 @@ YUI({
                 Y.io("/././plain/howto/index.html?id=" + faqId, {
                     on: {
                         success: function(id, o, arguments) {
-                            var content = new Y.Node(o.responseXML), panel = arguments.panel;
+                            var content = new Y.Node(o.responseXML),
+                                panel = arguments.panel;
                             content = content.one("#mainColumn");
-                                if (content.one("h1")) {
-                                    content.one("h1").remove();
-                                }
                             panel.append(content);
                         },
-                        failure: function() {
+                        failure: function(id, o, arguments) {
                             arguments.panel.set("innerHTML", "faq not found");
                         }
                     },
