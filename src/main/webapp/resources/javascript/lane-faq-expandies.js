@@ -39,10 +39,24 @@ YUI({
                     Y.io("/././plain/howto/index.html?" + href.substring(href.indexOf("?") + 1), {
                         on: {
                             success: function(id, o, arguments) {
-                                var item = arguments.anchor.get("parentNode");
-                                arguments.anchor.remove();
-                                var content = new Y.Node(o.responseXML);
-                                item.append(content.one("dl"));
+                                var i, items, j, present,
+                                    item = arguments.anchor.get("parentNode"),
+                                    list = item.get("parentNode"),
+                                    initialItems = list.all("li");
+                                var items = new Y.Node(o.responseXML).all(".middleColumn .bd li");
+                                item.remove();
+                                for (i = 0; i < items.size(); i++) {
+                                    present = false;
+                                    item = items.item(i);
+                                    for (j = 0; j < initialItems.size() -1; j++) {
+                                        if (initialItems.item(j).one("a").get("href") == item.one("a").get("href")) {
+                                            present = true;
+                                            break;
+                                        }
+                                    } if (!present) {
+                                        list.append(items.item(i));
+                                    }
+                                }
                             },
                             failure: function() {
                                 document.location = argument.anchor.get("href");
