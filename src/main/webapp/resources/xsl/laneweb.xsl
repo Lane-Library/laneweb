@@ -348,23 +348,24 @@
         <xsl:param name="result-count"/>
         <xsl:param name="current"/>
         <xsl:param name="show"/>
+        <xsl:variable name="resultLimit" select="20"/>
         <xsl:variable name="label">
             <xsl:choose>
                 <xsl:when test="$current = 0">1</xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="($current div 20) + 1"/>
+                    <xsl:value-of select="($current div $resultLimit) + 1"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="class">
             <xsl:if test="$current = number($show)">active</xsl:if>
         </xsl:variable>
-        <xsl:if test="$result-count > 20 and $current >= 0 and $current &lt;= $result-count and $show != 'all'">
+        <xsl:if test="$result-count > $resultLimit and $current >= 0 and $current &lt;= $result-count and $show != 'all'">
             <a class="{$class}" href="{concat($base-link,$current)}"><xsl:value-of select="$label"/></a>
             <xsl:if test="$label &lt; 10">
                 <xsl:call-template name="search-nav-counts">
                     <xsl:with-param name="show" select="$show"/>
-                    <xsl:with-param name="current" select="$current + 20"/>
+                    <xsl:with-param name="current" select="$current + $resultLimit"/>
                     <xsl:with-param name="result-count" select="$result-count"/>
                     <xsl:with-param name="base-link" select="$base-link"/>
                 </xsl:call-template>
