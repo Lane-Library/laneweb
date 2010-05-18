@@ -134,7 +134,7 @@
     <xsl:template match="h:span[@id='pubmedMoreStrategies']">
         <xsl:if test="//node()[@id='showPubMedStrategies']">
             <div class="rightSearchTips">
-                <h4>Additional views of PubMed Results</h4>
+                <h4>Additional Views of PubMed Results</h4>
                 <img style="padding:20px;" src="/graphics/logos/pubmed.jpg" alt="PubMed Logo"/>
                 
                 <h5>PubMed search strategies</h5>

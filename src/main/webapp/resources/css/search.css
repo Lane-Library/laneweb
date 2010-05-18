@@ -35,28 +35,28 @@
     padding-right:20px;
     border-right:1px solid #edecdf;
 }
-.search .facetHeader {
+#searchFacets .facetHeader {
     text-transform:uppercase;
     font-weight:bold;
     list-style-image:url(/././images/raquo.gif);
     list-style-type:disc;
 }
-.search .facetIndent {
+#searchFacets .facetIndent {
     margin-left:30px;
     list-style-image:none;
     list-style-type:disc;
 }
-.search li {
+#searchFacets li, #searchResults li {
     list-style-image:none;
     list-style-type:none;
 }
-.search ul {
+#searchFacets ul, #searchResults ul {
     padding-bottom:10px;
 }
-.search li.current a {
+#searchFacets li.current a {
     color:#9a0003;
 }
-.search li.inactiveFacet, .search li.inactiveFacet a {
+#searchFacets li.inactiveFacet, #searchFacets li.inactiveFacet a {
     color:#666666;
 }
 #searchOptions {
@@ -85,7 +85,7 @@
     display:none;
 }
 #searchResults {
-    margin-top:15px;
+    margin-top:20px;
 }
 #searchResults li {
     margin-left:0;
@@ -112,6 +112,7 @@
     font-size:20px;
 }
 .rightSearchTips {
+    margin-top:20px;
     padding:20px;
     background-color:#edecdf;
 }
