@@ -560,11 +560,11 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- add class="expanded" for the expany menu for the current page -->
-    <xsl:template match="h:div[@class='sectionMenu']//h:ul[@class='expandy']/h:li[descendant::h:a/@href=$path]">
+    <!-- add class="selected" for the menu item for the current page -->
+    <xsl:template match="h:ul[@class='sectionMenu']/h:li[child::h:a/@href=$path]">
         <xsl:copy>
-            <xsl:attribute name="class">expanded</xsl:attribute>
-            <xsl:apply-templates select="attribute::node()|child::node()"/>
+            <xsl:attribute name="class">selected</xsl:attribute>
+            <xsl:apply-templates select="attribute::node()|child::node()/text()"/>
         </xsl:copy>
     </xsl:template>
     
