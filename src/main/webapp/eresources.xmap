@@ -74,19 +74,6 @@
                 </map:transform>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="browse/installedSoftware/*" type="wildcard">
-                <map:generate type="er-browse">
-                    <map:parameter name="type" value="software, installed"/>
-                </map:generate>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/installed-software.xsl">
-                    <map:parameter name="cache-key" value="{1}"/>
-                    <map:parameter name="room" value="{1}"/>
-                </map:transform>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match pattern="mesh/type/*" type="wildcard">
                 <map:generate type="er-mesh">
                     <map:parameter name="type" value="{1}"/>
