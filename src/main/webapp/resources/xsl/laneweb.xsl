@@ -560,11 +560,10 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- add class="selected" for the menu item for the current page -->
+    <!-- replace <a> with <em> for the menu item for the current page -->
     <xsl:template match="h:ul[@class='sectionMenu']/h:li[child::h:a/@href=$path]">
         <xsl:copy>
-            <xsl:attribute name="class">selected</xsl:attribute>
-            <xsl:apply-templates select="attribute::node()|child::node()/text()"/>
+            <em><xsl:value-of select="."/></em>
         </xsl:copy>
     </xsl:template>
     
