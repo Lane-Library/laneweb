@@ -16,7 +16,7 @@ ol {
 .content .leftColumn li, .content .rightColumn li {
     font-size:11px;
     line-height:12px;
-    padding-bottom:5px;
+    padding:2.5px 0;
 }
 /*this is the middle column*/
 .content .middleColumn li {
