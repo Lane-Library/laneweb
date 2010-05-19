@@ -119,8 +119,8 @@
                         <include>events-min.css</include>
                         <include>node-accordion-min.css</include>
                         <include>expandies-min.css</include>
-                        <!--<include>buttons-min.css</include>
-                        <include>colors-min.css</include>
+                        <include>buttons-min.css</include>
+                        <!--<include>colors-min.css</include>
                         <include>section-menu-min.css</include>
                         <include>simple-module-min.css</include>
                         <include>narrow-module-min.css</include>
