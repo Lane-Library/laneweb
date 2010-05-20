@@ -2,7 +2,9 @@ YUI({
     gallery: 'gallery-2010.04.02-17-26'
 }).use('gallery-node-accordion', 'plugin', 'node', 'anim', "io", function(Y) {
 
-    var expandies = Y.all('.faq-expandy'), expandy, i, j, anchor, href, faqId, children, panel;
+    var expandies = Y.all('.faq-expandy'),
+        expandy, i, j, anchor, href, faqId,
+        children, panel, eventHandle;
     
     for (i = 0; i < expandies.size(); i++) {
         expandy = expandies.item(i).one("ul");
@@ -34,7 +36,7 @@ YUI({
                     }
                 });
             } else {
-                anchor.on("click", function(e) {
+                eventHandle = anchor.on("click", function(e) {
                     e.preventDefault();
                     Y.io("/././plain/howto/index.html?" + href.substring(href.indexOf("?") + 1), {
                         on: {
@@ -43,8 +45,8 @@ YUI({
                                     item = arguments.anchor.get("parentNode"),
                                     list = item.get("parentNode"),
                                     initialItems = list.all("li");
-                                var items = new Y.Node(o.responseXML).all(".middleColumn .bd li");
-                                item.remove();
+                                arguments.anchor.detach(eventHandle);
+                                items = new Y.Node(o.responseXML).all(".middleColumn .bd li");
                                 for (i = 0; i < items.size(); i++) {
                                     present = false;
                                     item = items.item(i);
