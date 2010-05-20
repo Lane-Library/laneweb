@@ -3,36 +3,48 @@ YUI({
 }).use('gallery-node-accordion', 'plugin', 'node', 'anim', function(Y) {
 
     var expandies = Y.all('.expandy'),
-        anchor = document.location.hash,
-        anchors, expandy, i, j, k, children, panel;
-        
-    if (anchor) {
-        anchor = anchor.substring(1);
-    }
-    for (i = 0; i < expandies.size(); i++) {
-        expandy = expandies.item(i);
-        expandy.addClass('yui3-accordion');
-        children = expandy.get('children');
-        for (j = 0; j < children.size(); j++) {
-            panel = children.item(j);
-            panel.addClass('yui3-accordion-item');
-            if (anchor) {
-                anchors = panel.all('a');
-                for (k = 0; k < anchors.size(); k++) {
-                    if (anchor == anchors.item(k).get('name')) {
-                        panel.addClass('expanded');
-                        break;
+        anchor = document.location.hash ? document.location.hash.substring(1) : false,
+        i,
+        ExpandyList = function(list) {
+            var items, item, anchors, i, j, containsAnchor;
+            list.addClass("yui3-accordion");
+            items = list.get("children");
+            for (i = 0; i < items.size(); i++) {
+                item = items.item(i);
+                if (item.get("children").size() == 2) {
+                    containsAnchor = false;
+                    if (anchor) {
+                        anchors = item.all('a');
+                        for (j = 0; j < anchors.size(); j++) {
+                            if (anchor == anchors.item(j).get('name')) {
+                                containsAnchor = true;
+                                break;
+                            }
+                        }
                     }
+                    new ExpandyItem(item, item.hasClass("expanded") || containsAnchor);
                 }
             }
-            if (panel.hasClass('expanded')) {
-                panel.addClass(' yui3-accordion-item-active');
+            return list;
+        },
+        ExpandyItem = function(item, expanded) {
+            var i, anchor, anchors, children = item.get("children"),
+                trigger = children.item(0);
+            item.addClass("yui3-accordion-item");
+            if (expanded) {
+                item.addClass("yui3-accordion-item-active");
             }
-            panel.get('children').item(0).addClass('yui3-accordion-item-trigger yui3-accordion-item-hd');
-            panel.get('children').item(1).addClass('yui3-accordion-item-bd');
-        }
-        expandy.plug(Y.Plugin.NodeAccordion, {
-            anim: Y.Easing.backIn
-        });
+            trigger.addClass("yui3-accordion-item-trigger yui3-accordion-item-hd");
+            anchors = trigger.all("a");
+            for (i = 0; i < anchors.size(); i++) {
+                anchor = anchors.item(i);
+                if (anchor.get("href")) {
+                    anchor.on("click", function(event) {event.stopPropagation()});
+                }
+            }
+            children.item(1).addClass("yui3-accordion-item-bd");
+        };
+    for (i = 0; i < expandies.size(); i++) {
+        new ExpandyList(expandies.item(i)).plug(Y.Plugin.NodeAccordion, { anim: Y.Easing.backIn });
     }
 });

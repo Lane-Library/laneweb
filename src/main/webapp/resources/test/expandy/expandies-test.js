@@ -47,7 +47,15 @@
             notExpandy.removeClass('not-expandy');
             notExpandy.addClass('expandy');
             Y.fire('lane:change');
-            Y.Assert.isTrue(panel.hasClass('yui-acc-hidden'), 'className is ' + panel.getAttribute('className'));
+            Y.Assert.isTrue(panel.get('parentNode').hasClass('yui3-accordion-item-active'), 'className is ' +panel.get('parentNode').get("className"));
+        },
+        testTriggerLinkIsNotTrigger: function() {
+            var panel = Y.one("#panel5");
+            var link = Y.one("#testLink");
+            link.on("click", function(event) {event.preventDefault();});
+            link.simulate("click");
+            Y.Assert.isFalse(panel.get('parentNode').hasClass('yui3-accordion-item-active'), "className is " + panel.get('parentNode').get("className"));
+            
         }
     });
     
