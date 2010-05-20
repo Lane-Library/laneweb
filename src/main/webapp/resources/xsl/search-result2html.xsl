@@ -11,7 +11,7 @@
     </xsl:variable>
 
     <!-- number of results to display per screen -->
-    <xsl:variable name="resultLimit">20</xsl:variable>
+    <xsl:variable name="resultLimit" select="20"/>
 
     <xsl:variable name="result-count">
         <xsl:value-of select="count(//s:result)"/>
@@ -28,8 +28,8 @@
     
     <xsl:variable name="next-set">
         <xsl:choose>
-            <xsl:when test="number($current-set) + $resultLimit &lt; $result-count">
-                <xsl:value-of select="number($current-set) + $resultLimit"/>
+            <xsl:when test="number($current-set) + number($resultLimit) &lt; number($result-count)">
+                <xsl:value-of select="number($current-set) + number($resultLimit)"/>
             </xsl:when>
             <xsl:otherwise>false</xsl:otherwise>
         </xsl:choose>
@@ -37,8 +37,8 @@
     
     <xsl:variable name="prev-set">
         <xsl:choose>
-            <xsl:when test="number($current-set) - $resultLimit >= 0">
-                <xsl:value-of select="number($current-set) - $resultLimit"/>
+            <xsl:when test="number($current-set) - number($resultLimit) >= 0">
+                <xsl:value-of select="number($current-set) - number($resultLimit)"/>
             </xsl:when>
             <xsl:otherwise>false</xsl:otherwise>
         </xsl:choose>
@@ -59,7 +59,7 @@
                             <xsl:apply-templates select="//s:result"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:apply-templates select="//s:result[position() &gt;= $current-set and position() &lt;= ($current-set + $resultLimit)]"/>
+                            <xsl:apply-templates select="//s:result[position() &gt;= number($current-set) and position() &lt;= (number($current-set) + number($resultLimit))]"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </dl>
@@ -68,7 +68,7 @@
                     <span class="result-count"><xsl:value-of select="$result-count"/></span>
                     <span class="previous"><xsl:value-of select="$prev-set"/></span>
                     <span class="next"><xsl:value-of select="$next-set"/></span>
-                    <span class="show-all"><xsl:if test="$result-count > $resultLimit and $show != 'all'">true</xsl:if></span>
+                    <span class="show-all"><xsl:if test="number($result-count) > number($resultLimit) and $show != 'all'">true</xsl:if></span>
                 </div>
                 <div id="search-content-counts" style="display:none;">
                     <xsl:for-each
