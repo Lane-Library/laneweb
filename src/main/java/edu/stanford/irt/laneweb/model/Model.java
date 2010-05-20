@@ -90,6 +90,11 @@ public class Model extends HashMap<String, Object> {
     
     public static final String PAGE_NUMBER = "pageNumber";
     
+    public static final String TITLE = "title";
+    
+    public static final String ENTRY_URL = "entry-url";
+    
+    
     public Model(ObjectModel objectModel) {
         putAll((Map<String, Object>) objectModel.get("laneweb"));
     }

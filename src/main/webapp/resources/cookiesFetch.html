@@ -5,7 +5,6 @@
 <body>
 <script type="text/javascript">
 <!--
-document.write("<p>Please wait while this page redirects you. If the redirect fails, please let us know: <a href=\"\/contacts\/index.html?loadTab=askus\">Contact us<\/a>.<\/p>");
 
 var userAgent = navigator.userAgent;
   if(userAgent.indexOf("Firefox")>-1)
@@ -25,9 +24,10 @@ var userAgent = navigator.userAgent;
   }
 
   function redirect(){
-        document.location.href= path.replace(/&amp;/g,"&"); 
+        document.location.href= url.replace(/&amp;/g,"&"); 
   }
 -->
 </script>
+<p>Please wait while this page redirects you. If the redirect fails, please let us know: <a href="/contacts/index.html?loadTab=askus">Contact us</a>.</p>
 </body>
 </html>

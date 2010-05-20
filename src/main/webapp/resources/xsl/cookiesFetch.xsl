@@ -3,8 +3,8 @@
     xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="h" version="2.0">
 
-    <xsl:param name="path"/>
-    <xsl:param name="entryUrl"/>
+    <xsl:param name="url"/>
+    <xsl:param name="entry-url"/>
     <xsl:param name="sunetid"/>
     <xsl:param name="ticket"/>
     <xsl:param name="title"/>
@@ -39,7 +39,7 @@
             <xsl:apply-templates/>
             <script type="text/javascript">
                <xsl:text>
-            var path ="</xsl:text>
+            var url ="</xsl:text>
                <xsl:choose>
                    <xsl:when test="$proxy-links = 'true' and $sunetid != '' and $ticket != ''">
                        <xsl:value-of select="$proxy-url"/>
@@ -48,10 +48,10 @@
                        <xsl:text>&amp;ticket=</xsl:text>
                        <xsl:value-of select="$ticket"/>
                        <xsl:text>&amp;url=</xsl:text>
-                       <xsl:value-of select="$path"/>
+                       <xsl:value-of select="$url"/>
                    </xsl:when>
                    <xsl:otherwise>
-                       <xsl:value-of select="$path"/>
+                       <xsl:value-of select="$url"/>
                    </xsl:otherwise>
            </xsl:choose>
          <xsl:text>";
@@ -65,10 +65,10 @@
                        <xsl:text>&amp;ticket=</xsl:text>
                        <xsl:value-of select="$ticket"/>
                        <xsl:text>&amp;url=</xsl:text>
-                       <xsl:value-of select="$entryUrl"/>
+                       <xsl:value-of select="$entry-url"/>
                    </xsl:when>
                    <xsl:otherwise>
-                       <xsl:value-of select="$entryUrl"/>
+                       <xsl:value-of select="$entry-url"/>
                    </xsl:otherwise>
                </xsl:choose>
             <xsl:text>";
