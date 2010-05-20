@@ -23,7 +23,7 @@ YUI({
                             var content = new Y.Node(o.responseXML),
                                 panel = arguments.panel;
                             content = content.one(".middleColumn .bd");
-                            panel.append(content);
+                            panel.append(content.cloneNode(true));
                         },
                         failure: function(id, o, arguments) {
                             arguments.panel.set("innerHTML", "faq not found");
@@ -54,7 +54,7 @@ YUI({
                                             break;
                                         }
                                     } if (!present) {
-                                        list.append(items.item(i));
+                                        list.append(items.item(i).cloneNode(true));
                                     }
                                 }
                             },
