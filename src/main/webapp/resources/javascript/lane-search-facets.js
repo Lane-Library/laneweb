@@ -69,7 +69,12 @@ YUI().use('lane-search-result',"lane-search-indicator", 'node','event-custom','h
                     bodyNodes = o.responseXML.getElementsByTagName('body')[0].childNodes;
                     content = Y.Node.create("<span></span>");
                     for (i = 0; i < bodyNodes.length; i++) {
-                        content.append(LANE.helper.importNode(bodyNodes[i], true));
+                    	//content.append(LANE.helper.importNode(bodyNodes[i], true));
+                        if (document.importNode) {
+                            content.append(document.importNode(bodyNodes[i], true));
+                        } else  {
+                            content.append(document._importNode(bodyNodes[i], true));
+                        }
                     }
                     result.setContent(content);
                     LANE.search.facets.getCurrentResult().hide();
