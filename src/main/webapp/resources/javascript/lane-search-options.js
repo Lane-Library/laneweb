@@ -5,12 +5,28 @@
 YUI().use('node-base','anim', function(Y) {
 	var options = Y.Node.create('<span id="optionsToggle" class="closed"><a href="">Hide Options</a></span>'),
 		optionsNode = Y.one("#searchOptions"),
+		closeResultsContainerAnim = new Y.Anim( {
+			node : '.search',
+			easing : Y.Easing.easeOut,
+			duration : 0.3,
+			to : {
+				marginLeft : '-185px'
+			}
+		}),
+		openResultsContainerAnim = new Y.Anim( {
+			node : '.search',
+			easing : Y.Easing.easeOut,
+			duration : 0.3,
+			to : {
+				marginLeft : 0
+			}
+		}),
 		closeResultsAnim = new Y.Anim( {
 			node : '#searchResults',
 			easing : Y.Easing.easeOut,
 			duration : 0.3,
 			to : {
-				marginLeft : '-185px'
+				marginRight : '-185px'
 			}
 		}),
 		openResultsAnim = new Y.Anim( {
@@ -18,24 +34,8 @@ YUI().use('node-base','anim', function(Y) {
 			easing : Y.Easing.easeOut,
 			duration : 0.3,
 			to : {
-				marginLeft : 0
+				marginRight : 0
 			}
-		}),
-		closePopinAnim = new Y.Anim( {
-			node : '#popInContent',
-			easing : Y.Easing.easeOut,
-			duration : 0.3,
-			to : {
-			marginLeft : '-185px'
-		}
-		}),
-		openPopinAnim = new Y.Anim( {
-			node : '#popInContent',
-			easing : Y.Easing.easeOut,
-			duration : 0.3,
-			to : {
-			marginLeft : 0
-		}
 		}),
 		closeFacetsAnim = new Y.Anim( {
 			node : '#searchFacets',
@@ -61,8 +61,8 @@ YUI().use('node-base','anim', function(Y) {
 				this.set('innerHTML', 'Show Options');
 				parent.addClass("open");
 			} else {
+				openResultsContainerAnim.run();
 				openResultsAnim.run();
-				openPopinAnim.run();
 				parent.removeClass("open");
 				this.set('innerHTML', 'Hide Options');
 				parent.addClass("closed");
@@ -71,11 +71,11 @@ YUI().use('node-base','anim', function(Y) {
 		};
 
 	closeFacetsAnim.on('end', function() {
-		closePopinAnim.run();
+		closeResultsContainerAnim.run();
 		closeResultsAnim.run();
 	});
 
-	openResultsAnim.on('end', function() {
+	openResultsContainerAnim.on('end', function() {
 		openFacetsAnim.run();
 	});
 	
