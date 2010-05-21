@@ -72,7 +72,9 @@ YUI().use('node-base','anim', function(Y) {
 
 	closeFacetsAnim.on('end', function() {
 		closeResultsContainerAnim.run();
-		closeResultsAnim.run();
+		if (!Y.UA.ie){ //FIXME: can't get IE to overflow text properly
+			closeResultsAnim.run();
+		}
 	});
 
 	openResultsContainerAnim.on('end', function() {
