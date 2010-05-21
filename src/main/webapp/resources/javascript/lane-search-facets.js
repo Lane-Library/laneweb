@@ -66,8 +66,12 @@ YUI().use('lane-search-result',"lane-search-indicator", 'node','event-custom','h
                 success: function(id, o, arguments){
                     var result, bodyNodes, content, i;
                     result = arguments.result;
-                    bodyNodes = new Y.Node(o.responseXML.getElementsByTagName('body')[0]).cloneNode(true).get('children');
-                    result.setContent(bodyNodes);
+                    bodyNodes = o.responseXML.getElementsByTagName('body')[0].childNodes;
+                    content = Y.Node.create("<span></span>");
+                    for (i = 0; i < bodyNodes.length; i++) {
+                        content.append(LANE.helper.importNode(bodyNodes[i], true));
+                    }
+                    result.setContent(content);
                     LANE.search.facets.getCurrentResult().hide();
                     LANE.search.facets.setCurrentResult(result);
                     result.show();
