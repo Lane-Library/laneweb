@@ -49,9 +49,9 @@ YUI({
                                 arguments.anchor.detach(eventHandle);
                                 items = o.responseXML.documentElement;
                                 if (document.importNode) {
-                                    items = document.importNode(result, true);
+                                    items = document.importNode(items, true);
                                 } else  {
-                                    items = document._importNode(result, true);
+                                    items = document._importNode(items, true);
                                 }
 								items = items.all("li");
                                 for (i = 0; i < items.size(); i++) {
