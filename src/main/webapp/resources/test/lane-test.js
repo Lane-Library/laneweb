@@ -16,6 +16,9 @@ YUI({ debug:true, filter:'debug', logInclude: { TestRunner: true } }).use('lane'
             Y.Assert.isObject(LANE.newNamespace);
             Y.Assert.isObject(LANE.another.newNamespace);
             Y.Assert.areSame(LANE.another.newNamespace, o);
+        },
+        testImportNode: function() {
+            Y.Assert.isFunction(document.importNode);
         }
     });
     

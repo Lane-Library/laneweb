@@ -1,4 +1,4 @@
-YUI().use('node','io-base','event','history', function(Y) {
+YUI().use("lane", 'node','io-base','event','history', function(Y) {
 
 		var bassettContent = Y.one('#bassettContent'), diagramDisplay = false;
 
@@ -39,9 +39,8 @@ YUI().use('node','io-base','event','history', function(Y) {
 			url = "/././plain/bassett/raw".concat(url);
 			function successHandler(id, o, args) {
 				var contentNode, content, container, i;
-				content = new Y.Node(o.responseXML
-						.getElementsByTagName('body')[0])
-						.cloneNode(true).get('children');
+                content = document.importNode(o.responseXML.getElementsByTagName("body")[0], true);
+				content = new Y.Node(content).get('children');
 				container = Y.one('#bassettContent');
 				contentNode = container.get('children');
 				for (i = 0; i < contentNode.size(); i++) {
@@ -75,15 +74,13 @@ YUI().use('node','io-base','event','history', function(Y) {
 		};
 
 		function initializeHistory() {
-			var currentState = Y.History
-					.getBookmarkedState("bassett")
-					|| formatAjaxUrl(window.location.toString());
-			Y.History.register('bassett', currentState).on(
-					'history:moduleStateChange', loadContent);
-			Y.History
-					.on('history:ready', loadContent(currentState));
-			Y.History.initialize("#yui-history-field-bassett",
-					"#yui-history-iframe");
+            if (Y.one("#yui-history-field-bassett") && Y.one("#yui-history-iframe")) {
+                var currentState = Y.History.getBookmarkedState("bassett") ||
+                formatAjaxUrl(window.location.toString());
+                Y.History.register('bassett', currentState).on('history:moduleStateChange', loadContent);
+                Y.History.on('history:ready', loadContent(currentState));
+                Y.History.initialize("#yui-history-field-bassett", "#yui-history-iframe");
+            }
 		}
 
 		if (bassettContent) {

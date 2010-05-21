@@ -20,16 +20,11 @@ YUI({
                 Y.io("/././plain/howto/index.html?id=" + faqId, {
                     on: {
                         success: function(id, o, arguments) {
-                            var result;
-                                result = o.responseXML.documentElement;
-                                if (document.importNode) {
-                                    result = document.importNode(result, true);
-                                } else  {
-                                    result = document._importNode(result, true);
-                                }
-                                result = new Y.Node(result);
-                                result = result.all("div").item(5);
-                                arguments.panel.append(result);
+                            var result = o.responseXML.documentElement;
+                            result = document.importNode(result, true);
+                            result = new Y.Node(result);
+                            result = result.all("div").item(5);
+                            arguments.panel.append(result);
                         },
                         failure: function(id, o, arguments) {
                             arguments.panel.set("innerHTML", "faq not found");
@@ -48,11 +43,7 @@ YUI({
                                 var i, items, j, present, item = arguments.anchor.get("parentNode"), list = item.get("parentNode"), initialItems = list.all("li");
                                 arguments.anchor.detach(eventHandle);
                                 items = o.responseXML.documentElement;
-                                if (document.importNode) {
-                                    items = document.importNode(items, true);
-                                } else  {
-                                    items = document._importNode(items, true);
-                                }
+                                items = document.importNode(items, true);
 								items = new Y.Node(items);
 								items = items.all("li");
                                 for (i = 0; i < items.size(); i++) {

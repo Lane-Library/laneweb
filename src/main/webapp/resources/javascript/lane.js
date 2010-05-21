@@ -48,7 +48,7 @@ YUI().add('lane', function(Y) {
 	    document.NOTATION_NODE = 12;
 	}
 	if (!document.importNode) {
-		document._importNode = function(node, allChildren) {
+		document.importNode = function(node, allChildren) {
 		    /* find the node type to import */
 		    switch (node.nodeType) {
 		        case document.ELEMENT_NODE:
@@ -64,7 +64,7 @@ YUI().add('lane', function(Y) {
 		            if (allChildren && node.childNodes && node.childNodes.length > 0)
 		                /* recursively get all of the child nodes */
 		                for (var i = 0, il = node.childNodes.length; i < il;)
-		                    newNode.appendChild(document._importNode(node.childNodes[i++], allChildren));
+		                    newNode.appendChild(document.importNode(node.childNodes[i++], allChildren));
 		            return newNode;
 		            break;
 		        case document.TEXT_NODE:

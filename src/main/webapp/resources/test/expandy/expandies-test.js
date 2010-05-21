@@ -56,6 +56,19 @@
             link.simulate("click");
             Y.Assert.isFalse(panel.get('parentNode').hasClass('yui3-accordion-item-active'), "className is " + panel.get('parentNode').get("className"));
             
+        },
+        testTriggerLinkWithRel: function() {
+            var panel = Y.one("#panel6");
+            var link = Y.one("#testLinkRel");
+            var clicked = false;
+            link.on("click", function(event) {
+                event.preventDefault();
+                clicked = true;
+            });
+            link.simulate("click");
+            Y.Assert.isTrue(clicked);
+            Y.Assert.isFalse(panel.get('parentNode').hasClass('yui3-accordion-item-active'), "className is " + panel.get('parentNode').get("className"));
+            
         }
     });
     

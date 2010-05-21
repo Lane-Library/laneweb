@@ -38,8 +38,8 @@ YUI({
             anchors = trigger.all("a");
             for (i = 0; i < anchors.size(); i++) {
                 anchor = anchors.item(i);
-                if (anchor.get("href")) {
-                    anchor.on("click", function(event) {event.stopPropagation()});
+                if (anchor.get("href") && !anchor.get("rel")) {
+                    anchor.on("click", function(event) {event.stopPropagation();});
                 }
             }
             children.item(1).addClass("yui3-accordion-item-bd");

@@ -1,4 +1,4 @@
-YUI().use('lane-search-result',"lane-search-indicator", 'node','event-custom','history','io-base', function(Y) {
+YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-custom','history','io-base', function(Y) {
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
@@ -67,11 +67,7 @@ YUI().use('lane-search-result',"lane-search-indicator", 'node','event-custom','h
                     var result, bodyNodes, content, i;
                     result = arguments.result;
                     bodyNodes = o.responseXML.getElementsByTagName('body')[0];
-                    if (document.importNode) {
-                        content = new Y.Node(document.importNode(bodyNodes, true));
-                    } else  {
-                        content = new Y.Node(document._importNode(bodyNodes, true));
-                    }
+                    content = new Y.Node(document.importNode(bodyNodes, true));
                     result.setContent(content.get('children'));
                     LANE.search.facets.getCurrentResult().hide();
                     LANE.search.facets.setCurrentResult(result);

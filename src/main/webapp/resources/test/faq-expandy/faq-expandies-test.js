@@ -4,7 +4,7 @@
 YUI({
      filter:"debug",
      gallery: 'gallery-2010.04.02-17-26'
-}).use('gallery-node-accordion', 'node', 'node-event-simulate', 'console', 'test', function(Y){
+}).use("lane", 'gallery-node-accordion', 'node', 'node-event-simulate', 'console', 'test', function(Y){
 
     var faqExpandiesTestCase = new Y.Test.Case({
         name: 'FAQ Expandies TestCase'
