@@ -4,6 +4,9 @@
     font-size:11px !important;
     margin-bottom:5px;
 }
+.type1 li li {
+    font-size:12px;
+}
 .type1 .even.expanded, .type1 .odd.expanded, .type1 .even.yui3-accordion-item-active, .type1 .odd.yui3-accordion-item-active {
     background-color:#DBD2B3;
 }
@@ -56,14 +59,16 @@
 .type1 .details > div {
     background-color:white;
     border:16px solid #DBD2B3;
-    padding:16px;
+    padding:16px 16px 0;
 }
 .type1 .details p {
     font-size:12px;
     line-height:18px;
 }
-.type1 .details img {
+.type1 .details .extra {
     float:right;
+    width:25%;
+    font-size:larger;
 }
 .type1 .yui-ge, .type1 .yui-gc {
     line-height:18px;
