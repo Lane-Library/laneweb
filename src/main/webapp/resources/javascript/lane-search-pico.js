@@ -1,7 +1,9 @@
 YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
+        searchTerms = new Y.lane.TextInput(Y.one("#searchTerms")),
         picoIsOn = false,
+        picoTextInputs = [],
         picoFields, formAnim, navAnim,
         picoOn = function() {
             if (!picoIsOn) {
@@ -50,34 +52,51 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
             picoFields = Y.Node.create(PICO);
             inputs = picoFields.all('input');
             for (i = 0; i < inputs.size(); i++) {
-                new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title'));
+                picoTextInputs.push(new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title')));
                 switch(inputs.item(i).get('name')){
                 	case 'p':
                 		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-d&");
-                		picoSuggest.on("lane:suggestSelect",function(e){
-                			Y.log("p->"+e.suggestion);
-                			//picoSearchTerms.setP(e.suggestion);
-                        });
+//                		picoSuggest.on("lane:suggestSelect",function(e){
+//                			Y.log("p->"+e.suggestion);
+//                			//picoSearchTerms.setP(e.suggestion);
+//                        });
                 		break;
                 	case 'i':
                 		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-i&");
-                		picoSuggest.on("lane:suggestSelect",function(e){
-                   			Y.log("i->"+e.suggestion);
-                   			//picoSearchTerms.setI(e.suggestion);
-                        });
+//                		picoSuggest.on("lane:suggestSelect",function(e){
+//                   			Y.log("i->"+e.suggestion);
+//                   			//picoSearchTerms.setI(e.suggestion);
+//                        });
                 		break;
                 	case 'c':
                 		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-di&");
-                		picoSuggest.on("lane:suggestSelect",function(e){
-                   			Y.log("c->"+e.suggestion);
-                   			//picoSearchTerms.setC(e.suggestion);
-                        });
+//                		picoSuggest.on("lane:suggestSelect",function(e){
+//                   			Y.log("c->"+e.suggestion);
+//                   			//picoSearchTerms.setC(e.suggestion);
+//                        });
                 		break;
                 }
             }
             nav.get('parentNode').insert(picoFields, nav);
-//            Y.one('body').append(picoFields);
+        },
+         getPicoQuery = function(){ //build query terms from pico inputs
+            var qString = '', i;
+            for (i = 0; i < picoTextInputs.length; i++) {
+                if (picoTextInputs[i].getValue()) {
+                    qString += '(' + picoTextInputs[i].getValue() + ')';
+                }
+            }
+            if ( qString.length ){
+                qString = qString.replace(/\)\(/g, ") AND (");
+                if (qString.indexOf('(') === 0 && qString.indexOf(')') == qString.length - 1) {
+                    qString = qString.replace(/(\(|\))/g, '');
+                }
+            }
+            return qString;
         };
+    Y.Global.on("lane:suggestSelect",  function(event) {
+        searchTerms.setValue(getPicoQuery());
+    });
     if (form.hasClass('clinical')) {
         picoOn();
     }

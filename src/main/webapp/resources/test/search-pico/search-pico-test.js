@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI().use('lane-textinput','lane-suggest','node','anim','console', 'test', function(Y){
+YUI({filter:"debug"}).use('lane-textinputs','lane-suggest','node','anim','console', 'test', function(Y){
     
     Y.publish('lane:searchSourceChange',{broadcast:2});
 
@@ -33,6 +33,20 @@ YUI().use('lane-textinput','lane-suggest','node','anim','console', 'test', funct
                 Y.Assert.isFalse(search.hasClass('clinical'), 'search form class clinical');
                 Y.Assert.areEqual("none", picoFields.getStyle("display"));
 //            }, 1000);
+        },
+        testSetPatientCondition: function() {
+            var clinicalP = Y.one("#clinicalP");
+            var clinicalI = Y.one("#clinicalI");
+            var searchTerms = Y.one("#searchTerms");
+            Y.publish("lane:suggestSelect",{
+                broadcast:2
+            });
+            clinicalP.set("value", "foo");
+            Y.fire("lane:suggestSelect");
+            Y.Assert.areEqual("foo", searchTerms.get("value"));
+            clinicalI.set("value", "bar");
+            Y.fire("lane:suggestSelect");
+            Y.Assert.areEqual("(foo) AND (bar)", searchTerms.get("value"));
         }
     });
     

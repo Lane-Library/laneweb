@@ -37,6 +37,7 @@ YUI().add('lane-textinputs', function(Y) {
             },
             setValue: function(value) {
                 input.set('value', value);
+                input.removeClass("inputHint");
             },
             getInput: function() {
                 return input;
