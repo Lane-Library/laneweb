@@ -28,14 +28,16 @@ YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse',
                                             for (i = 0; i < rs.length; i++) {
                                                 if (!rs[i].status) {
                                                     result = results.resources[rs[i].id];
-                                                    if (!result.status) {
+                                                    if (result == undefined || !result.status) {
                                                         needMore = true;
                                                     }
-                                                    rs[i].status = result.status;
-                                                    if (result.status == 'successful') {
-                                                        rs[i].anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
+                                                    else{
+                                                    	rs[i].status = result.status;
+                                                    	if (result.status == 'successful') {
+                                                    		rs[i].anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
+                                                    	}
+                                                    	rs[i].anchor.href = result.url;
                                                     }
-                                                    rs[i].anchor.href = result.url;
                                                 }
                                             }
                                             if (needMore) {
