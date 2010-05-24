@@ -33,6 +33,7 @@ YUI().add('lane', function(Y) {
         return o;
     };
 	
+    // add document.importNode functionality if native not present (IE)
 	if (!document.ELEMENT_NODE) {
 	    document.ELEMENT_NODE = 1;
 	    document.ATTRIBUTE_NODE = 2;
@@ -75,5 +76,17 @@ YUI().add('lane', function(Y) {
 		    }
 		};
 	}
+	
+	// add .indexOf functionality to Array if native not present (IE)
+    if(!Array.indexOf){
+        Array.prototype.indexOf = function(obj){
+            for(var i=0; i<this.length; i++){
+                if(this[i]==obj){
+                    return i;
+                }
+            }
+            return -1;
+        }
+    }
 
 }, '1.11.0-SNAPSHOT',{requires:['node','io']});
