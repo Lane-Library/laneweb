@@ -13,7 +13,7 @@
         <xsl:apply-templates select="h:html"/>
     </xsl:template>
     
-    <xsl:template match="h:a[not(@rel)]/@href">
+    <xsl:template match="h:a/@href">
       <xsl:choose>
         <xsl:when test="$query">
            <xsl:attribute name="href">
