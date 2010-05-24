@@ -133,7 +133,7 @@
                                 <a href="/contacts/index.html" title="Contact Us..">Contact Us</a>
                             </li>
                             <li>
-                                <a href="/contacts/index.html?loadTab=feedback" title="Feedback.."
+                                <a href="/help/feedback.html" title="Feedback.."
                                     >Feedback</a>
                             </li>
                         </ul>
