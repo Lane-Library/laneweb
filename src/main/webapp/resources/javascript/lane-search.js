@@ -35,7 +35,7 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
                 Y.fire('lane:searchSourceChange', {newVal:this.get("value")});
             }
         });
-        Y.Global.on("lane:suggestSelect",function(e){
+        searchTermsSuggest.on("lane:suggestSelect",function(e){
         	search.submitSearch();
         });
         search =  {
