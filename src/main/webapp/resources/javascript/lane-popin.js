@@ -4,9 +4,6 @@ YUI().use('lane', 'event-custom','node',function(Y) {
     // custom popin event
     Y.publish('lane:popin',{broadcast:2});
     
-    // TODO: could make markup order dictate precedence 
-    //       (find elm and then fetch parent of elm to see if other popin children
-    //       popInContent id NOT always present when popin required)
         onPopinHandler = function(el) {
 			//FIXME: are elms returned in the right order? probably not.
             var i, activeEl = 99, elms = Y.all('#spellCheck, #queryMapping, #findIt');
