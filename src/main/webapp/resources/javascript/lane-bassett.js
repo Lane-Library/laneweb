@@ -8,28 +8,19 @@ YUI().use("lane", 'node','io-base','event','history', function(Y) {
 			if (container) {
 				anchor = container.all('a');
 				for (i = 0; i < anchor.size(); i++) {
-					if (anchor.item(i).get('rel') === null
-							|| anchor.item(i).get('rel') === "") {
-						anchor
-								.item(i)
-								.on(
-										'click',
-										function(ev) {
-											if (this.get('id') == "diagram-choice") {
-												diagramDisplay = true;
-											}
-											if (this.get('id') == "photo-choice") {
-												diagramDisplay = false;
-											}
-											url = formatAjaxUrl(this
-													.get('href'));
-											if (!Y.History
-													.navigate(
-															"bassett",
-															url))
-												loadContent(url);
-											ev.preventDefault();
-										});
+					if (anchor.item(i).get('rel') === null || anchor.item(i).get('rel') === "" ||  anchor.item(i).get('rel') === "propagation") {
+						anchor.item(i).on('click',function(ev) {
+							if (this.get('id') == "diagram-choice") {
+								diagramDisplay = true;
+							}
+							if (this.get('id') == "photo-choice") {
+								diagramDisplay = false;
+							}
+							url = formatAjaxUrl(this.get('href'));
+							if (!Y.History.navigate("bassett",url))
+								loadContent(url);
+							ev.preventDefault();
+						});
 					}
 				}
 			}
