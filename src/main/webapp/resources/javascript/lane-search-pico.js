@@ -53,6 +53,12 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
             inputs = picoFields.all('input');
             for (i = 0; i < inputs.size(); i++) {
                 picoTextInputs.push(new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title')));
+                inputs.item(i).on("blur",function(){
+                    searchTerms.setValue(getPicoQuery());
+                });
+                inputs.item(i).on("keyup",function(){
+                	searchTerms.setValue(getPicoQuery());
+                });
                 switch(inputs.item(i).get('name')){
                 	case 'p':
                 		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-d&", "pAcInput");
