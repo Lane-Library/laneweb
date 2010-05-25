@@ -12,3 +12,6 @@ a:hover {
 a:visited {
     color:#79455C
 }
+.image-link, .image-link:hover {
+    border-bottom:none;
+}
