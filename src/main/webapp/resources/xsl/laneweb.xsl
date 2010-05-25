@@ -134,17 +134,6 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-   
-    <xsl:template match="h:span[@id='user-name']">
-        <xsl:choose>
-            <xsl:when test="$name">
-                <xsl:value-of select="$name"/>
-            </xsl:when>
-            <xsl:when test="$sunetid">
-                <xsl:value-of select="$sunetid"/>
-            </xsl:when>
-        </xsl:choose>
-    </xsl:template>
 
     <!-- set the selected option of the search form -->
     <xsl:template match="h:option[parent::h:select[@id='searchSource']]">
@@ -574,6 +563,9 @@
             <xsl:choose>
                 <xsl:when test="string-length($name) &gt; 0">
                     <xsl:value-of select="$name"/>
+                </xsl:when>
+                <xsl:when test="string-length($sunetid) &gt; 0">
+                    <xsl:value-of select="$sunetid"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="child::node()"/>
