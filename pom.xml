@@ -168,6 +168,7 @@
                         <include>lane-quicklinks-min.js</include>
                         <include>lane-search-options-min.js</include>
                         <include>lane-faq-expandies-min.js</include>
+                        <include>lane-column-height-min.js</include>
                      </includes>
                   </aggregation>
                </aggregations>
