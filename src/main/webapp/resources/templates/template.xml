@@ -53,6 +53,9 @@
                                 <a href="/secure/login.html">Off Campus Login</a>
                             </li>
                             <li>
+                                <a href="/persistentlogin.html">Account</a> 
+                            </li>
+                            <li>
                                 <a href="/logout">Logout</a>
                             </li>
                             <li>

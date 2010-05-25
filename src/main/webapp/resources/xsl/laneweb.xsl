@@ -574,7 +574,7 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- the 2nd #login li is the logout link -->
+    <!-- the 2nd #login li is the account link -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[2]">
         <xsl:if test="string-length($name) &gt; 0">
             <xsl:copy>
@@ -583,8 +583,18 @@
         </xsl:if>
     </xsl:template>
     
-    <!-- the 3rd #login li is the proxy-off toggle -->
+    
+    <!-- the 3nd #login li is the logout link -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[3]">
+        <xsl:if test="string-length($name) &gt; 0">
+            <xsl:copy>
+                <xsl:apply-templates select="attribute::node() | child::node()"/>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>
+    
+    <!-- the 4rd #login li is the proxy-off toggle -->
+    <xsl:template match="h:ul[attribute::id='login']/h:li[4]">
         <xsl:if test="matches($ipgroup,'^(OTHER|PAVA|ERR)$') and $proxy-links = 'true'">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()|child::node()"/>
@@ -592,8 +602,8 @@
         </xsl:if>
     </xsl:template>
     
-    <!-- the 4th #login li is the proxy-on toggle -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[4]">
+    <!-- the 5th #login li is the proxy-on toggle -->
+    <xsl:template match="h:ul[attribute::id='login']/h:li[5]">
         <xsl:if test="matches($ipgroup,'^(OTHER|PAVA|ERR)$') and $proxy-links = 'false'">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()|child::node()"/>
@@ -606,7 +616,7 @@
             <xsl:choose>
                 <xsl:when test="parent::h:li/attribute::id = 'proxyOn'">true</xsl:when>
                 <xsl:otherwise>false</xsl:otherwise>
-            </xsl:choose>
+            </xsl:choose>   
         </xsl:variable>
         <xsl:copy>
             <xsl:attribute name="href">
