@@ -1,4 +1,4 @@
-YUI().add("lane-search-indicator", function(Y) {
+YUI.add("lane-search-indicator", function(Y) {
     Y.namespace("lane");
     Y.lane.SearchIndicator = function() {
 		var indicator = Y.one("#searchIndicator");

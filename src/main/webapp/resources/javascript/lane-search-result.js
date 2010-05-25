@@ -1,4 +1,4 @@
-YUI().add('lane-search-result', function(Y) {
+YUI.add('lane-search-result', function(Y) {
     Y.namespace('lane');
     Y.lane.SearchResult = function() {
         var searchString,

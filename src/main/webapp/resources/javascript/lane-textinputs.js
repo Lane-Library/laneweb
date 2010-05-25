@@ -4,7 +4,7 @@
  * 	applies hintStyle only to default help text
  *  clears default help text on focus and adds back on blur
  */
-YUI().add('lane-textinputs', function(Y) {
+YUI.add('lane-textinputs', function(Y) {
     
     Y.namespace('lane');
 

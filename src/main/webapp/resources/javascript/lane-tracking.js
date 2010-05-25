@@ -1,4 +1,4 @@
-YUI().add('lane-tracking',function(Y) {
+YUI.add('lane-tracking',function(Y) {
     
     if (!LANE.tracking) {
         LANE.tracking = function() {

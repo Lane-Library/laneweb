@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI().add('lane', function(Y) {
+YUI.add('lane', function(Y) {
     if (typeof LANE == "undefined" || !LANE) {
         /**
          * The LANE global namespace object.  If LANE is already defined, the
