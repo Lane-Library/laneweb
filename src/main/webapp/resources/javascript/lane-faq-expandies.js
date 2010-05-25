@@ -34,42 +34,43 @@ YUI({
                         panel: panel.one(".yui3-accordion-item-bd")
                     }
                 });
-            } else {
-                eventHandle = anchor.on("click", function(e) {
-                    e.preventDefault();
-                    Y.io("/././plain/howto/index.html?" + href.substring(href.indexOf("?") + 1), {
-                        on: {
-                            success: function(id, o, arguments) {
-                                var i, items, j, present, item = arguments.anchor.get("parentNode"), list = item.get("parentNode"), initialItems = list.all("li");
-                                arguments.anchor.detach(eventHandle);
-                                items = o.responseXML.documentElement;
-                                items = document.importNode(items, true);
-								items = new Y.Node(items);
-								items = items.all("li");
-                                for (i = 0; i < items.size(); i++) {
-                                    present = false;
-                                    item = items.item(i);
-                                    for (j = 0; j < initialItems.size() - 1; j++) {
-                                        if (initialItems.item(j).one("a").get("href") == item.one("a").get("href")) {
-                                            present = true;
-                                            break;
-                                        }
-                                    }
-                                    if (!present) {
-                                        list.append(items.item(i));
-                                    }
-                                }
-                            },
-                            failure: function() {
-                                document.location = argument.anchor.get("href");
-                            }
-                        },
-                        arguments: {
-                            anchor: this
-                        }
-                    });
-                });
             }
+//            else {
+//                eventHandle = anchor.on("click", function(e) {
+//                    e.preventDefault();
+//                    Y.io("/././plain/howto/index.html?" + href.substring(href.indexOf("?") + 1), {
+//                        on: {
+//                            success: function(id, o, arguments) {
+//                                var i, items, j, present, item = arguments.anchor.get("parentNode"), list = item.get("parentNode"), initialItems = list.all("li");
+//                                arguments.anchor.detach(eventHandle);
+//                                items = o.responseXML.documentElement;
+//                                items = document.importNode(items, true);
+//								items = new Y.Node(items);
+//								items = items.all("li");
+//                                for (i = 0; i < items.size(); i++) {
+//                                    present = false;
+//                                    item = items.item(i);
+//                                    for (j = 0; j < initialItems.size() - 1; j++) {
+//                                        if (initialItems.item(j).one("a").get("href") == item.one("a").get("href")) {
+//                                            present = true;
+//                                            break;
+//                                        }
+//                                    }
+//                                    if (!present) {
+//                                        list.append(items.item(i));
+//                                    }
+//                                }
+//                            },
+//                            failure: function() {
+//                                document.location = argument.anchor.get("href");
+//                            }
+//                        },
+//                        arguments: {
+//                            anchor: this
+//                        }
+//                    });
+//                });
+//            }
         }
         expandy.plug(Y.Plugin.NodeAccordion, {
             anim: Y.Easing.backIn
