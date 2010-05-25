@@ -59,6 +59,12 @@
 .acContainer, .acContainer div {
     display:inline;
 }
+#iAcInput {
+    left:249px;
+}
+#cAcInput {
+    left:487px;
+}
 /*
   #picoFields {
   display:none;
@@ -137,14 +143,3 @@
   width:590px;
   }
  */
-/* form on portal pages for hybrid metasearch ... NOT finalized */
-.breadcrumbForm {
-    margin-top:15px;
-    float:right;
-}
-.breadcrumbForm input {
-    width:192px;
-}
-.inputHint {
-    color:#808080;
-}

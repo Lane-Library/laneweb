@@ -55,25 +55,13 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
                 picoTextInputs.push(new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title')));
                 switch(inputs.item(i).get('name')){
                 	case 'p':
-                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-d&");
-//                		picoSuggest.on("lane:suggestSelect",function(e){
-//                			Y.log("p->"+e.suggestion);
-//                			//picoSearchTerms.setP(e.suggestion);
-//                        });
+                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-d&", "pAcInput");
                 		break;
                 	case 'i':
-                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-i&");
-//                		picoSuggest.on("lane:suggestSelect",function(e){
-//                   			Y.log("i->"+e.suggestion);
-//                   			//picoSearchTerms.setI(e.suggestion);
-//                        });
+                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-i&", "iAcInput");
                 		break;
                 	case 'c':
-                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-di&");
-//                		picoSuggest.on("lane:suggestSelect",function(e){
-//                   			Y.log("c->"+e.suggestion);
-//                   			//picoSearchTerms.setC(e.suggestion);
-//                        });
+                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-di&", "cAcInput");
                 		break;
                 }
             }

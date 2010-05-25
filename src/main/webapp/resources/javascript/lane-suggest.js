@@ -317,14 +317,14 @@ function handleQueryResponse (e) {
 };
 
 
-}, '@VERSION@' ,{requires:['node', 'plugin', 'gallery-value-change', 'event-key'], optional:['event-custom']});
+}, '1.11.0-SNAPSHOT' ,{requires:['node', 'plugin', 'gallery-value-change', 'event-key'], optional:['event-custom']});
 
 
 YUI().add('lane-suggest', function (Y) {
     
     Y.namespace('lane');
     
-    Y.lane.Suggest = function (input, limit) {
+    Y.lane.Suggest = function (input, limit, id) {
         var self = this, acWidget, i,
             baseUrl = '/././apps/suggest/json?',
             acDS  = new Y.DataSource.IO({source:baseUrl}),
@@ -366,8 +366,15 @@ YUI().add('lane-suggest', function (Y) {
             
         acWidget = (function () {
             var data = [],
-                contNode = Y.Node.create('<ul class="aclist"> </ul>'),
+                contNode,
                 selected = -1;
+            //some ac elements need id for positioning:
+            if (id) {
+                contNode = Y.Node.create('<ul id=' + id + ' class="aclist"> </ul>');
+            } else {
+                contNode = Y.Node.create('<ul class="aclist"> </ul>')
+            }
+            
             input.insert(contNode,"after");
             
             contNode.delegate("click", function (e) {
