@@ -32,12 +32,16 @@
 }
 .yui-ge .yui-u .middleColumn {
     width:521px;
+    border-left:1px solid #E6E4DB;
+    padding-left:18px;
 }
 .content .yui-ge .rightColumn {
     width:199px;
 }
 .content .yui-ge .leftGrids {
     width:713px;
+    border-right:1px solid #E6E4DB;
+    padding-right:20px;
 }
 .content .yui-gf .rightGrids {
     width:760px;
