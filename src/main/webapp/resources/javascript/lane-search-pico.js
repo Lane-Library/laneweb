@@ -1,4 +1,4 @@
-YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom', function(Y) {
+YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom', 'querystring-parse-simple', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         searchTerms = new Y.lane.TextInput(Y.one("#searchTerms")),
@@ -48,10 +48,14 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
                '<input name="o" id="clinicalO" type="text" title="outcome"/>' +
                '</fieldset>',
         createPicoFields = function() {
-            var i, inputs, picoSuggest;
+            var i, inputs, picoSuggest, queryString = Y.QueryString.parse(location.search);
             picoFields = Y.Node.create(PICO);
             inputs = picoFields.all('input');
             for (i = 0; i < inputs.size(); i++) {
+            	// set input value if found in query string
+            	if(queryString[inputs.item(i).get('name')] != undefined){
+            		inputs.item(i).set('value',queryString[inputs.item(i).get('name')])
+            	}
                 picoTextInputs.push(new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title')));
                 inputs.item(i).on("blur",function(){
                     searchTerms.setValue(getPicoQuery());
@@ -71,7 +75,7 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
                 		break;
                 }
             }
-            nav.get('parentNode').insert(picoFields, nav);
+            form.insert(picoFields);
         },
          getPicoQuery = function(){ //build query terms from pico inputs
             var qString = '', i;
