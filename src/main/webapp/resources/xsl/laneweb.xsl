@@ -78,7 +78,7 @@
             <xsl:when test="starts-with($path,'/portals/bioresearch')">bioresearch-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
-            <xsl:when test="starts-with($path,'/classes-consult')">clinical-all</xsl:when>
+            <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/med-history')">history-all</xsl:when>
             <xsl:when test="starts-with($path,'/bassett')">bassett</xsl:when>
             <xsl:when test="ends-with($path,'-viaLane.html')">all-all</xsl:when>
