@@ -10,6 +10,8 @@
     
     <stx:param name="page"/>
     
+    <stx:param name="base-path"/>
+    
     <stx:template match="h:meta/@content">
         <stx:attribute name="content">
             <stx:value-of select="concat(.,';',$page)"/>
@@ -19,6 +21,13 @@
     <stx:template match="h:meta">
         <stx:copy>
             <stx:process-attributes/>
+        </stx:copy>
+    </stx:template>
+    
+    <stx:template match="h:a">
+        <stx:copy>
+            <stx:attribute name="href" select="substring-after($page,$base-path)"/>
+            <stx:text><stx:value-of select="$page"/></stx:text>
         </stx:copy>
     </stx:template>
     
