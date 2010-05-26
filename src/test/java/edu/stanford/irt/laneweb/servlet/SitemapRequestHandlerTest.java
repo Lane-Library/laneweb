@@ -51,6 +51,7 @@ public class SitemapRequestHandlerTest {
     public void testHandleRequest() throws Exception {
         expect(request.getMethod()).andReturn("GET");
         expect(this.request.getRequestURI()).andReturn("/").times(3);
+        expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getContextPath()).andReturn("").times(2);
         expect(this.request.getParameter("cocoon-view")).andReturn(null);
         expect(this.request.getParameter("cocoon-action")).andReturn(null);
@@ -69,6 +70,7 @@ public class SitemapRequestHandlerTest {
         this.handler.setRedirectMap(Collections.singletonMap("(.*)/", "$1/index.html"));
         expect(request.getMethod()).andReturn("GET");
         expect(request.getRequestURI()).andReturn("/foo/");
+        expect(this.request.getQueryString()).andReturn(null);
         response.sendRedirect("/foo/index.html");
         replayMocks();
         this.handler.handleRequest(request, response);
@@ -80,6 +82,7 @@ public class SitemapRequestHandlerTest {
         this.handler.setRedirectMap(Collections.singletonMap("(.*)/", "$1/index.html"));
         expect(request.getMethod()).andReturn("GET");
         expect(request.getRequestURI()).andReturn("/");
+        expect(this.request.getQueryString()).andReturn(null);
         response.sendRedirect("/index.html");
         replayMocks();
         this.handler.handleRequest(request, response);
@@ -91,6 +94,7 @@ public class SitemapRequestHandlerTest {
         this.handler.setRedirectMap(Collections.singletonMap("(.*)/classes/index.html", "$1/services/workshops/laneclasses.html"));
         expect(request.getMethod()).andReturn("GET");
         expect(request.getRequestURI()).andReturn("/classes/index.html");
+        expect(this.request.getQueryString()).andReturn(null);
         response.sendRedirect("/services/workshops/laneclasses.html");
         replayMocks();
         this.handler.handleRequest(request, response);
@@ -102,6 +106,7 @@ public class SitemapRequestHandlerTest {
         this.handler.setRedirectMap(Collections.singletonMap("(.*)/clinician/index.html", "$1/portals/clinical.html"));
         expect(request.getMethod()).andReturn("GET");
         expect(request.getRequestURI()).andReturn("/foo/bar/clinician/index.html");
+        expect(this.request.getQueryString()).andReturn(null);
         response.sendRedirect("/foo/bar/portals/clinical.html");
         replayMocks();
         this.handler.handleRequest(request, response);
