@@ -465,7 +465,7 @@
     </xsl:template>
 
     <!-- remove http-equiv meta elements-->
-    <xsl:template match="h:meta[@http-equiv]"/>
+    <xsl:template match="h:meta[@http-equiv != 'refresh']"/>
 
     <!-- combines the template title value with the value of the title of the source document -->
     <xsl:template match="h:title">
@@ -556,6 +556,7 @@
         </xsl:copy>
     </xsl:template>
     
+    <!-- the next 5 template matches handle the login state and show links depending on that state -->
     <!-- the 1st #login li is the login link or the users name -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[1]">
         <xsl:copy>
@@ -576,7 +577,7 @@
     
     <!-- the 2nd #login li is the account link -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[2]">
-        <xsl:if test="string-length($name) &gt; 0">
+        <xsl:if test="string-length($name) &gt; 0 or string-length($sunetid) &gt; 0">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node() | child::node()"/>
             </xsl:copy>
@@ -584,9 +585,9 @@
     </xsl:template>
     
     
-    <!-- the 3nd #login li is the logout link -->
+    <!-- the 3rd #login li is the logout link -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[3]">
-        <xsl:if test="string-length($name) &gt; 0">
+        <xsl:if test="string-length($name) &gt; 0 or string-length($sunetid) &gt; 0">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node() | child::node()"/>
             </xsl:copy>
@@ -611,7 +612,8 @@
         </xsl:if>
     </xsl:template>
     
-    <xsl:template match="h:li[starts-with(attribute::id,'proxyO')]/h:a">
+    <!-- TODO: this is obsoleted by the above login list framework? -->
+    <!--<xsl:template match="h:li[starts-with(attribute::id,'proxyO')]/h:a">
         <xsl:variable name="parameter-value">
             <xsl:choose>
                 <xsl:when test="parent::h:li/attribute::id = 'proxyOn'">true</xsl:when>
@@ -641,7 +643,7 @@
             </xsl:attribute>
             <xsl:apply-templates/>
         </xsl:copy>
-    </xsl:template>
+    </xsl:template>-->
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 

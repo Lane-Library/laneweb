@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.servlet;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -60,6 +61,9 @@ public class SitemapRequestHandler implements HttpRequestHandler {
             return;
         }
         String uri = request.getRequestURI();
+        if (request.getQueryString() != null) {
+            uri = uri + '?' + request.getQueryString();
+        }
         if (uriGetsRedirect(uri, response)) {
             return;
         }
@@ -111,7 +115,7 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         if (null == redirectMap) {
             throw new IllegalArgumentException("null redirectMap");
         }
-        Map<Pattern, String> newRedirectMap = new HashMap<Pattern, String>();
+        Map<Pattern, String> newRedirectMap = new LinkedHashMap<Pattern, String>();
         for (Entry<String, String> entry : redirectMap.entrySet()) {
             newRedirectMap.put(Pattern.compile(entry.getKey()), entry.getValue());
         }
@@ -141,7 +145,7 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         }
         return false;
     }
-    
+
     private Map<String, Object> createModel(String uri) {
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("version", this.servletContext.getAttribute("laneweb.context.version"));

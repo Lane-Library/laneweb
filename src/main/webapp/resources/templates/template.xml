@@ -26,13 +26,23 @@
                         <form id="search" method="get" action="/search.html">
                             <fieldset id="searchFields">
                                 <select name="source" id="searchSource">
-                                    <option value="all-all" title="Find articles in PubMed, Web of Science, UpToDate PLUS resources in the Lane Catalog">Lane Search</option>
-                                    <option value="clinical-all"  title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ...">Clinical</option>
-                                    <option value="bioresearch-all" title="Search 200+ bioresearch resources">Bioresearch</option>
-                                    <option value="history-all" title="Search Lane's historical collection">History</option>
-                                    <option value="bassett" title="Find anatomical images from Lane's Bassset Collection">Bassett Images</option>
+                                    <option value="all-all"
+                                        title="Find articles in PubMed, Web of Science, UpToDate PLUS resources in the Lane Catalog"
+                                        >Lane Search</option>
+                                    <option value="clinical-all"
+                                        title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ..."
+                                        >Clinical</option>
+                                    <option value="bioresearch-all"
+                                        title="Search 200+ bioresearch resources"
+                                        >Bioresearch</option>
+                                    <option value="history-all"
+                                        title="Search Lane's historical collection">History</option>
+                                    <option value="bassett"
+                                        title="Find anatomical images from Lane's Bassset Collection"
+                                        >Bassett Images</option>
                                 </select>
-                                <a id="searchTips" href="/about/laneconnexSearch.html">Search Tips</a>
+                                <a id="searchTips" href="/about/laneconnexSearch.html">Search
+                                    Tips</a>
                                 <div id="searchIndicator"><img alt="[searching]"
                                         src="/images/backgr/search-indicator.gif"/></div>
                                 <input name="q" id="searchTerms" type="text"/>
@@ -53,7 +63,7 @@
                                 <a href="/secure/login.html">Off Campus Login</a>
                             </li>
                             <li>
-                                <a href="/persistentlogin.html">Account</a> 
+                                <a href="/persistentlogin.html">Account</a>
                             </li>
                             <li>
                                 <a href="/logout">Logout</a>
@@ -70,62 +80,73 @@
                                 <a href="/biomed-resources/index.html"
                                     title="Articles from these sources: PubMed, UpToDate, Web of Science. All sources available thru Lane: Journals, Books, Databases, Clinical Decision Tools, Images, Videos, Software, Health Statistics"
                                     >All Resources</a>
-                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/leftmenu-resources.html">
-                                    <xi:fallback></xi:fallback>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="cocoon:/includes/leftmenu-resources.html">
+                                    <xi:fallback/>
                                 </xi:include>
                             </li>
                             <li>
                                 <a href="/portals/index.html"
                                     title="SUMC specialty departments that have created customized pages - 'portals' – to Lane Library materials they regularly reference."
                                     >Specialty Portals</a>
-                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/leftmenu-specialties.html">
-                                    <xi:fallback></xi:fallback>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="cocoon:/includes/leftmenu-specialties.html">
+                                    <xi:fallback/>
                                 </xi:include>
                             </li>
-							<li>
-							    <a href="/classes-consult/index.html"
+                            <li>
+                                <a href="/classes-consult/index.html"
                                     title="Info on: Classes, Consulting, Tutorials &amp; videos (self paced learning), Webinars, Information Literacy"
-							        >Classes &amp; Consulting</a>
-							    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/leftmenu-classes.html">
-							        <xi:fallback></xi:fallback>
-							    </xi:include>
+                                    >Classes &amp; Consulting</a>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="cocoon:/includes/leftmenu-classes.html">
+                                    <xi:fallback/>
+                                </xi:include>
                             </li>
                             <li>
                                 <a href="/med-history/index.html"
                                     title="Resources for medical historians, Stanford Medical School historical collection"
                                     >History Center</a>
-                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/leftmenu-medhistory.html">
-                                    <xi:fallback></xi:fallback>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="cocoon:/includes/leftmenu-medhistory.html">
+                                    <xi:fallback/>
                                 </xi:include>
                             </li>
                             <li>
                                 <a href="/about/index.html"
                                     title="Info on: Hours &amp; Directions, Library Liaisons, Document Delivery, Public Computing &amp; Software, Access &amp; Privileges, Books &amp; Collections, Study &amp; Group Spaces, Course Reserves, Printing and Photocopying, Contact Us, Info for Grant Writers, Make a Donation, Library Administration"
                                     >About Library</a>
-                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/leftmenu-about.html">
-                                    <xi:fallback></xi:fallback>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="cocoon:/includes/leftmenu-about.html">
+                                    <xi:fallback/>
                                 </xi:include>
                             </li>
                             <li>
                                 <a href="/help/index.html"
                                     title="Info on: Getting Started, Research and Publishing, Find Your Liaison, Ask Us, Instant Chat, FAQs, Contact Library, Teaching Support, Classroom Scheduling &amp; Support, Video Services, About Library"
                                     >Help</a>
-                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/leftmenu-help.html">
-                                    <xi:fallback></xi:fallback>
+                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                    href="cocoon:/includes/leftmenu-help.html">
+                                    <xi:fallback/>
                                 </xi:include>
                             </li>
                             <li>
                                 <select id="qlinks" style="margin:6px 0 0 70px;">
                                     <option value="">Quick Links</option>
                                     <option value=""> ---------------- </option>
-                                    <option value="http://laneproxy.stanford.edu/login?url=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M">PubMed</option>
-                                    <option value="http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online">UpToDate</option>
+                                    <option
+                                        value="http://laneproxy.stanford.edu/login?url=http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?otool=stanford&amp;holding=F1000,F1000M"
+                                        >PubMed</option>
+                                    <option
+                                        value="http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online"
+                                        >UpToDate</option>
                                     <option value=""> ---------------- </option>
                                     <option value="/biomed-resources/eb.html">Books</option>
                                     <option value="/biomed-resources/db.html">Databases</option>
                                     <option value="/biomed-resources/ej.html">Journals</option>
                                     <option value=""> ---------------- </option>
-                                    <option value="/portals/bioresearch.html">Bioresearch Portal</option>
+                                    <option value="/portals/bioresearch.html">Bioresearch
+                                        Portal</option>
                                     <option value="/portals/clinical.html">Clinical Portal</option>
                                     <option value="/portals/peds.html">Pediatrics Portal</option>
                                     <option value="/portals/pharmacy.html">Pharmacy Portal</option>
@@ -147,15 +168,13 @@
                                     >Directions</a>
                             </li>
                             <li>
-                                <a href="/about/index.html" title="About Us..">About
-                                    Library</a>
+                                <a href="/about/index.html" title="About Us..">About Library</a>
                             </li>
                             <li>
                                 <a href="/contacts/index.html" title="Contact Us..">Contact Us</a>
                             </li>
                             <li>
-                                <a href="/help/feedback.html" title="Feedback.."
-                                    >Feedback</a>
+                                <a href="/help/feedback.html" title="Feedback..">Feedback</a>
                             </li>
                         </ul>
                     </div>
@@ -197,143 +216,143 @@
                                 Clinical Care Center</a>
                         </li>
                         <li>
-		    <a href="http://stanfordhospital.org/">Stanford Hospital &amp;
-			Clinics</a>
-		</li>
-		<li>
-		    <a href="http://www.lpch.org/">Lucile Packard Children's Hospital</a>
-		</li>
-		<li>
-		    <a href="http://stanfordmedicine.org/getting_care/emergency.html"
-			>Emergency</a>
-		</li>
-	    </ul>
-	</li>
-	<li>
-	    <a href="http://stanfordmedicine.org/research/">Research</a>
-	    <ul>
-		<li>
-		    <a href="http://stanfordmedicine.org/research/">Overview</a>
-		</li>
-		<li>
-		    <a href="http://med.stanford.edu/">School of Medicine</a>
-		</li>
-		<li>
-		    <a href="http://med.stanford.edu/research/">News &amp; Resources</a>
-		</li>
-		<li>
-		    <a href="http://med.stanford.edu/clinicaltrials/">Clinical Trials</a>
-		</li>
-		<li>
-		    <a href="http://med.stanford.edu/guide/">Departments, Institutes &amp;
-			Centers</a>
-		</li>
-		<li>
-		    <a href="http://med.stanford.edu/profiles/">Faculty Profiles</a>
-		</li>
-	    </ul>
-	</li>
-	<li>
-	    <a href="http://stanfordmedicine.org/education_training/">Education &amp;
-		Training</a>
-	    <ul>
-		<li>
-		    <a href="http://stanfordmedicine.org/education_training/">Overview</a>
-		</li>
-		<li>
-		    <a href="http://med.stanford.edu/">School of Medicine</a>
-		</li>
-		<li>
-		    <a href="http://stanfordmedicine.org/education_training/programs.html"
-			>Programs</a>
-		</li>
-		<li>
-		    <a href="http://med.stanford.edu/admissions/">Admissions</a>
-		</li>
-		<li>
-		    <a href="http://med.stanford.edu/cme/">Continuing Medical Education</a>
-		</li>
-		<li>
-		    <a href="http://med.stanford.edu/alumni/">Alumni</a>
-		</li>
-		<li>
-		    <a href="http://lane.stanford.edu/">Lane Medical Library</a>
-		</li>
-	    </ul>
-	</li>
-	<li>
-	    <a href="http://stanfordmedicine.org/community_connections/">Community</a>
-	    <ul>
-		<li>
-		    <a href="http://stanfordmedicine.org/community_connections/"
-			>Overview</a>
-		</li>
-		<li>
-		    <a href="http://healthlibrary.stanford.edu/">Stanford Health Library</a>
-		</li>
-		<li>
-		    <a href="http://med.stanford.edu/communitymednews/">Community
-			Newsletter</a>
-		</li>
-		<li>
-		    <a
-			href="http://stanfordmedicine.org/community_connections/volunteering.html"
-			>Volunteering</a>
-		</li>
-		<li>
-		    <a href="http://stanfordmedicine.org/community_connections/pscp.html"
-			>Public Service &amp; Community Partnerships</a>
-		</li>
-		<li>
-		    <a href="http://stanfordmedicine.org/community_connections/rnbp.html"
-			>Renewal &amp; New Building Projects</a>
-		</li>
-	    </ul>
-	</li>
-	<li>
-	    <a href="http://stanfordmedicine.org/about/">About Us</a>
-	    <ul>
-		<li>
-		    <a href="http://stanfordmedicine.org/about/">Overview</a>
-		</li>
-		<li>
-		    <a href="http://stanfordmedicine.org/about/news.html">News</a>
-		</li>
-		<li>
-		    <a href="http://stanfordmedicine.org/about/careers.html">Careers</a>
-		</li>
-		<li>
-		    <a href="http://stanfordmedicine.org/about/ways_to_give.html">Ways to
-			Give</a>
-		</li>
-		<li>
-		    <a href="http://stanfordmedicine.org/about/find_person.html">Find a
-			Person</a>
-		</li>
-		<li>
-		    <a href="http://stanfordmedicine.org/about/contact.html">Contact Us</a>
-		</li>
-		<li>
-		    <a href="http://stanfordmedicine.org/about/maps_directions.html">Maps
-			&amp; Directions</a>
-		</li>
-		<li>
-		    <a href="http://deansnewsletter.stanford.edu/">The Dean's Newsletter</a>
-		</li>
-	    </ul>
-	</li>
-	<li id="stanfordUniversityBrand">
-	    <a href="http://www.stanford.edu/">Stanford University</a>
-	</li>
-    </ul>
+                            <a href="http://stanfordhospital.org/">Stanford Hospital &amp;
+                                Clinics</a>
+                        </li>
+                        <li>
+                            <a href="http://www.lpch.org/">Lucile Packard Children's Hospital</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/getting_care/emergency.html"
+                                >Emergency</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://stanfordmedicine.org/research/">Research</a>
+                    <ul>
+                        <li>
+                            <a href="http://stanfordmedicine.org/research/">Overview</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/">School of Medicine</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/research/">News &amp; Resources</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/clinicaltrials/">Clinical Trials</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/guide/">Departments, Institutes &amp;
+                                Centers</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/profiles/">Faculty Profiles</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://stanfordmedicine.org/education_training/">Education &amp;
+                        Training</a>
+                    <ul>
+                        <li>
+                            <a href="http://stanfordmedicine.org/education_training/">Overview</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/">School of Medicine</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/education_training/programs.html"
+                                >Programs</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/admissions/">Admissions</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/cme/">Continuing Medical Education</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/alumni/">Alumni</a>
+                        </li>
+                        <li>
+                            <a href="http://lane.stanford.edu/">Lane Medical Library</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://stanfordmedicine.org/community_connections/">Community</a>
+                    <ul>
+                        <li>
+                            <a href="http://stanfordmedicine.org/community_connections/"
+                                >Overview</a>
+                        </li>
+                        <li>
+                            <a href="http://healthlibrary.stanford.edu/">Stanford Health Library</a>
+                        </li>
+                        <li>
+                            <a href="http://med.stanford.edu/communitymednews/">Community
+                                Newsletter</a>
+                        </li>
+                        <li>
+                            <a
+                                href="http://stanfordmedicine.org/community_connections/volunteering.html"
+                                >Volunteering</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/community_connections/pscp.html"
+                                >Public Service &amp; Community Partnerships</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/community_connections/rnbp.html"
+                                >Renewal &amp; New Building Projects</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="http://stanfordmedicine.org/about/">About Us</a>
+                    <ul>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/">Overview</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/news.html">News</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/careers.html">Careers</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/ways_to_give.html">Ways to
+                                Give</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/find_person.html">Find a
+                                Person</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/contact.html">Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="http://stanfordmedicine.org/about/maps_directions.html">Maps
+                                &amp; Directions</a>
+                        </li>
+                        <li>
+                            <a href="http://deansnewsletter.stanford.edu/">The Dean's Newsletter</a>
+                        </li>
+                    </ul>
+                </li>
+                <li id="stanfordUniversityBrand">
+                    <a href="http://www.stanford.edu/">Stanford University</a>
+                </li>
+            </ul>
         </div>
-        
-        
-        <!--<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.1.1/build/yui/yui-min.js"></script>-->
-        <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.1.1/build/yui/yui-min.js&amp;3.1.1/build/loader/loader-min.js&amp;3.1.1/build/oop/oop-min.js&amp;3.1.1/build/event-custom/event-custom-min.js&amp;3.1.1/build/dom/dom-min.js&amp;3.1.1/build/event/event-min.js&amp;3.1.1/build/pluginhost/pluginhost-min.js&amp;3.1.1/build/node/node-min.js&amp;3.1.1/build/intl/intl-min.js&amp;3.1.1/build/datatype/lang/datatype.js&amp;3.1.1/build/datatype/lang/datatype-date.js&amp;3.1.1/build/datatype/datatype-min.js&amp;3.1.1/build/querystring/querystring-stringify-simple-min.js&amp;3.1.1/build/queue-promote/queue-promote-min.js&amp;3.1.1/build/io/io-min.js&amp;3.1.1/build/history/history-min.js&amp;3.1.1/build/attribute/attribute-min.js&amp;3.1.1/build/base/base-min.js&amp;3.1.1/build/plugin/plugin-min.js&amp;3.1.1/build/anim/anim-min.js&amp;3.1.1/build/json/json-parse-min.js&amp;3.1.1/build/classnamemanager/classnamemanager-min.js&amp;3.1.1/build/widget/widget-min.js&amp;3.1.1/build/widget/widget-position-min.js&amp;3.1.1/build/widget/widget-stack-min.js&amp;3.1.1/build/widget/widget-stdmod-min.js&amp;3.1.1/build/widget/widget-position-align-min.js&amp;3.1.1/build/widget/widget-position-constrain-min.js&amp;3.1.1/build/overlay/overlay-min.js&amp;gallery-2010.04.02-17-26/build/gallery-node-accordion/gallery-node-accordion-min.js&amp;gallery-2010.03.30-17-26/build/gallery-value-change/gallery-value-change-min.js&amp;3.1.1/build/cache/cache-min.js&amp;3.1.1/build/json/json-min.js&amp;3.1.1/build/dataschema/dataschema-min.js&amp;3.1.1/build/datasource/datasource-min.js"></script>
 
-        <script type="text/javascript" src="/javascript/lane-all.js"></script>        
-        
+
+        <!--<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.1.1/build/yui/yui-min.js"></script>-->
+        <script type="text/javascript" src="http://yui.yahooapis.com/combo?3.1.1/build/yui/yui-min.js&amp;3.1.1/build/loader/loader-min.js&amp;3.1.1/build/oop/oop-min.js&amp;3.1.1/build/event-custom/event-custom-min.js&amp;3.1.1/build/dom/dom-min.js&amp;3.1.1/build/event/event-min.js&amp;3.1.1/build/pluginhost/pluginhost-min.js&amp;3.1.1/build/node/node-min.js&amp;3.1.1/build/intl/intl-min.js&amp;3.1.1/build/datatype/lang/datatype.js&amp;3.1.1/build/datatype/lang/datatype-date.js&amp;3.1.1/build/datatype/datatype-min.js&amp;3.1.1/build/querystring/querystring-stringify-simple-min.js&amp;3.1.1/build/queue-promote/queue-promote-min.js&amp;3.1.1/build/io/io-min.js&amp;3.1.1/build/history/history-min.js&amp;3.1.1/build/attribute/attribute-min.js&amp;3.1.1/build/base/base-min.js&amp;3.1.1/build/plugin/plugin-min.js&amp;3.1.1/build/anim/anim-min.js&amp;3.1.1/build/json/json-parse-min.js&amp;3.1.1/build/classnamemanager/classnamemanager-min.js&amp;3.1.1/build/widget/widget-min.js&amp;3.1.1/build/widget/widget-position-min.js&amp;3.1.1/build/widget/widget-stack-min.js&amp;3.1.1/build/widget/widget-stdmod-min.js&amp;3.1.1/build/widget/widget-position-align-min.js&amp;3.1.1/build/widget/widget-position-constrain-min.js&amp;3.1.1/build/overlay/overlay-min.js&amp;gallery-2010.04.02-17-26/build/gallery-node-accordion/gallery-node-accordion-min.js&amp;gallery-2010.03.30-17-26/build/gallery-value-change/gallery-value-change-min.js&amp;3.1.1/build/cache/cache-min.js&amp;3.1.1/build/json/json-min.js&amp;3.1.1/build/dataschema/dataschema-min.js&amp;3.1.1/build/datasource/datasource-min.js"/>
+
+        <script type="text/javascript" src="/javascript/lane-all.js"/>
+
         <!--<script type="text/javascript" src="/javascript/lane.js"></script>
         <script type="text/javascript" src="/javascript/lane-search-result.js"></script>
         <script type="text/javascript" src="/javascript/lane-search-indicator.js"></script>

@@ -94,6 +94,8 @@ public class Model extends HashMap<String, Object> {
     
     public static final String ENTRY_URL = "entry-url";
     
+    public static final String PAGE = "page";
+    
     
     public Model(ObjectModel objectModel) {
         putAll((Map<String, Object>) objectModel.get("laneweb"));

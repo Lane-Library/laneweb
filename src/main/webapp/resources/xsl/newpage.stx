@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    put the proper meta refresh content and link url into the newpage redirect page
+-->
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    version="1.0"
+    pass-through="all">
+    
+    <stx:param name="page"/>
+    
+    <stx:template match="h:meta/@content">
+        <stx:attribute name="content">
+            <stx:value-of select="concat(.,';',$page)"/>
+        </stx:attribute>
+    </stx:template>
+    
+    <stx:template match="h:meta">
+        <stx:copy>
+            <stx:process-attributes/>
+        </stx:copy>
+    </stx:template>
+    
+</stx:transform>
