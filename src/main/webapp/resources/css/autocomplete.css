@@ -1,13 +1,11 @@
 .aclist {
     position:absolute;
-    display:none;
     list-style:none;
     border:1px solid #ccc;
     border-width:1px 1px 0;
     padding:0;
     margin:0;
     background:#fff;
-    z-index:2;
 }
 .aclist li {
     display:block;
@@ -21,3 +19,44 @@
     color:#fff;
     cursor:pointer;
 }
+
+/* styles for entire auto complete widget */
+.yui3-acwidget {
+    display:inline;
+}
+/* styles for results container */
+.yui3-acwidget-container {
+    display:none;
+    position:absolute;
+    top:50px;
+    width:100%;
+    left:0px;
+    z-index:3;
+}
+#picoFields .yui3-acwidget-container {
+    top:19px;
+}
+/* styles for results container header */
+.yui3-acwidget-hd {
+    font-weight:bold;
+    white-space:nowrap;
+    padding:2px 5px;
+}
+/* styles for header/body/footer wrapper within container */
+.yui3-acwidget-content {
+    position:absolute;
+    text-align:left;
+    width:100%;
+    background:#fff;
+}
+/* styles for container shadow 
+.yui3-acwidget-shadow {
+    position:absolute;
+    margin:.3em;
+    width:100%;
+    background:#000;
+    -moz-opacity: 0.10;
+    opacity:.10;
+    filter:alpha(opacity=10);
+}
+*/

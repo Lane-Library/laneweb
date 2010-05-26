@@ -65,13 +65,13 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
                 });
                 switch(inputs.item(i).get('name')){
                 	case 'p':
-                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-d&", "pAcInput");
+                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-d&");
                 		break;
                 	case 'i':
-                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-i&", "iAcInput");
+                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-i&");
                 		break;
                 	case 'c':
-                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-di&", "cAcInput");
+                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-di&");
                 		break;
                 }
             }

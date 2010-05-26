@@ -13,6 +13,11 @@
     width:140px;
     margin-bottom:6px;
 }
+#searchFields {
+    position:absolute;
+    left:27px;
+    top:78px;
+}
 #picoFields {
     display:none;
     left:27px;
@@ -21,8 +26,7 @@
 }
 #picoFields input {
     border:1px solid white;
-    margin:0 11px;
-    width:212px;
+    position:absolute;
 }
 #searchTerms {
     width:587px;
@@ -45,28 +49,41 @@
 #searchIndicator {
     display:none;
     position:absolute;
-    top:78px;
-    left:435px;
+    top:0px;
+    left:405px;
     z-index:1;
 }
 #searchTips {
     position:absolute;
-    top:83px;
-    left:180px;
+    top:3px;
+    left:155px;
     color:white;
     border-bottom:none;
     text-decoration:underline;
 }
-.acContainer, .acContainer div {
-    display:inline;
+#clinicalP {
+    left:0px;
+    width:230px;
 }
-#iAcInput {
-    left:249px;
+#clinicalI {
+    left:246px;
+    width:219px;
 }
-#cAcInput {
-    left:487px;
+#clinicalC {
+    left:483px;
+    width:219px;
+}
+#clinicalO {
+    left:720px;
+    width:212px;
 }
 /*
+#iAcInput {
+    left:245px;
+}
+#cAcInput {
+    left:482px;
+}
   #picoFields {
   display:none;
   padding-top:24px;

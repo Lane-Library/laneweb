@@ -324,7 +324,7 @@ YUI().add('lane-suggest', function (Y) {
     
     Y.namespace('lane');
     
-    Y.lane.Suggest = function (input, limit, id) {
+    Y.lane.Suggest = function (input, limit) {
         var self = this, acWidget, i,
             baseUrl = '/././apps/suggest/json?',
             acDS  = new Y.DataSource.IO({source:baseUrl}),
@@ -366,22 +366,24 @@ YUI().add('lane-suggest', function (Y) {
             
         acWidget = (function () {
             var data = [],
-                contNode,
+            	widgetNode,
+                containerNode,
+                contentNode,
+                inputParent = input.get("parentNode"),
                 selected = -1;
-            //some ac elements need id for positioning:
-            if (id) {
-                contNode = Y.Node.create('<ul id=' + id + ' class="aclist"> </ul>');
-            } else {
-                contNode = Y.Node.create('<ul class="aclist"> </ul>')
-            }
-            
-            input.insert(contNode,"after");
-            
-            contNode.delegate("click", function (e) {
+            input.insert(containerNode,"after");
+
+            widgetNode = Y.Node.create('<div class="yui3-acwidget"/>');
+            inputParent.insert(widgetNode, input);
+            widgetNode.appendChild(inputParent.removeChild(input));
+            containerNode = Y.Node.create('<div class="yui3-acwidget-container"><div class="yui3-acwidget-content"><div class="yui-acwidget-hd"> </div><div class="yui-acwidget-bd"><ul class="aclist"> </ul></div></div></div>');
+            widgetNode.appendChild(containerNode);
+            contentNode = containerNode.one(".aclist");
+            contentNode.delegate("click", function (e) {
                 var target = e.currentTarget, index = target.get("className").split('-')[1];
                 acWidget.focus(index).select(e);
             }, "li");
-            contNode.delegate("mouseover", function (e) {
+            contentNode.delegate("mouseover", function (e) {
                 var target = e.currentTarget, index = target.get("className").split('-')[1];
                 acWidget.focus(index);
             }, "li");
@@ -400,15 +402,15 @@ YUI().add('lane-suggest', function (Y) {
                         return this;
                     }
                     this.visible = true;
-                    contNode.set("innerHTML", "");
+                    contentNode.set("innerHTML", "");
                     for (var i = 0, l = data.length; i < l; i ++) {
-                        contNode.appendChild(Y.Node.create('<li class="ac-'+i+'">'+data[i]+"</li>"));
+                    	contentNode.appendChild(Y.Node.create('<li class="ac-'+i+'">'+data[i]+"</li>"));
                     }
-                    contNode.setStyle("display", "block");
+                    containerNode.setStyle("display", "block");
                     return this;
                 },
                 hide : function () {
-                    contNode.setStyle("display", "none");
+                    containerNode.setStyle("display", "none");
                     this.visible = false;
                     selected = -1;
                     return this;
@@ -424,8 +426,8 @@ YUI().add('lane-suggest', function (Y) {
                     if (i < 0) {
                         i = data.length - 1;
                     }
-                    var list = contNode.all("li"),
-                        current = contNode.one(".selected"),
+                    var list = contentNode.all("li"),
+                        current = contentNode.one(".selected"),
                         intent = list.item(i);
                     if (!intent || intent === current) {
                         return this;
@@ -473,10 +475,16 @@ YUI().add('lane-suggest', function (Y) {
                     	parentForm:Y.Node.getDOMNode(input.ancestor("form"))
                     });
                 },
-                setWidth : function (w) {
-                    if (w) {
-                        contNode.setStyle("width",w);
-                    }
+                syncUI : function () {
+                	var width = input.getStyle("width"), left = input.getStyle("left");
+                	if(width){
+	                    widgetNode.setStyle("width",width);
+	                    contentNode.setStyle("width",width);
+                	}
+                	if(left){
+                		widgetNode.setStyle("left",left);
+                		contentNode.setStyle("left",left);
+                	}
                 }
             };
         })();
@@ -490,7 +498,7 @@ YUI().add('lane-suggest', function (Y) {
             }
         });
         input.ac.on("ac:load", function (e) {
-            acWidget.setWidth(input.getStyle("width"));
+            acWidget.syncUI();
             acWidget.setData(e.results).render();
         });
         input.ac.on("ac:query", function (e) {
