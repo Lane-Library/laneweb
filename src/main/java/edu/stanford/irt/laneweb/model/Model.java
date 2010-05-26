@@ -96,6 +96,11 @@ public class Model extends HashMap<String, Object> {
     
     public static final String PAGE = "page";
     
+    public static final String USER_COOKIE = "user-cookie";
+    
+    public static final String PERSISTENT_LOGIN = "persistent-login";
+    
+    public static final String REMOVE_PERSISTENT_LOGIN = "remove-persistent-login";
     
     public Model(ObjectModel objectModel) {
         putAll((Map<String, Object>) objectModel.get("laneweb"));

@@ -3,7 +3,7 @@
     xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     exclude-result-prefixes="h" version="2.0">
 
-    <xsl:param name="lane-user-cookie"/>
+    <xsl:param name="user-cookie"/>
     <xsl:param name="persistent-login"/>
     <xsl:param name="remove-persistent-login"/>
 
@@ -21,7 +21,7 @@
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:if
-                test="$persistent-login = 'true' or ($lane-user-cookie != '' and $remove-persistent-login != 'true')">
+                test="$persistent-login = 'true' or ($user-cookie != '' and $remove-persistent-login != 'true')">
                 <xsl:attribute name="checked">true</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="child::node()"/>

@@ -70,7 +70,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         if (null != cookies) {
             for (Cookie cookie : cookies) {
                 if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(cookie.getName())) {
-                    addToModel("user-cookie", cookie.getValue(), model);
+                    addToModel(Model.USER_COOKIE, cookie.getValue(), model);
                     break;
                 }
             }
@@ -168,6 +168,11 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
             model.put(Model.ENTRY_URL, value);
         } else if (Model.PAGE.equals(name)) {
             model.put(Model.PAGE, value);
+        } else if ("pl".equals(name)) {
+            model.put(Model.PERSISTENT_LOGIN, value);
+        } else if ("remove-pl".equals(name)) {
+            model.put(Model.REMOVE_PERSISTENT_LOGIN, value);
+     
 
 //        } else {
 //            model.put(name, request.getParameter(name));
