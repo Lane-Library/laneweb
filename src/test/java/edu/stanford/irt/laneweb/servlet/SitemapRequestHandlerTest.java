@@ -46,6 +46,13 @@ public class SitemapRequestHandlerTest {
         this.handler.setProcessor(this.processor);
         this.handler.setServletContext(this.servletContext);
     }
+    
+    @Test
+    public void foo() {
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("((?!.*/biomed-resources.*).*)/bassett/(.*)");
+        java.util.regex.Matcher matcher = pattern.matcher("/biomed-resources/bassett/index.html");
+        org.junit.Assert.assertFalse(matcher.matches());
+    }
 
     @Test
     public void testHandleRequest() throws Exception {
