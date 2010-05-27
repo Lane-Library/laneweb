@@ -17,6 +17,7 @@
         <property name="maxMemObjects" value="1000"/>
         <property name="overflowToDisk" value="false"/>
         <property name="useCacheDirectory" value="true"/>
+        <property name="diskPersistent" value="false"/>
         <property name="settings" ref="org.apache.cocoon.configuration.Settings"/>
     </bean>
 
