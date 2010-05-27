@@ -65,7 +65,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         addToModel(Model.QUERY_STRING, request.getQueryString(), model);
         addToModel(Model.BASE_PATH, getBasePath(request), model);
         addToModel("request-uri", request.getRequestURI(), model);
-        addToModel("referer", request.getHeader("referer"), model);
+        addToModel("referrer", request.getHeader("referer"), model);
         Cookie[] cookies = request.getCookies();
         if (null != cookies) {
             for (Cookie cookie : cookies) {
