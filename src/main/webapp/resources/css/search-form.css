@@ -23,6 +23,7 @@
     display:none;
     left:27px;
     position:absolute;
+    z-index:1;
     top:108px;
 }
 #picoFields input {
