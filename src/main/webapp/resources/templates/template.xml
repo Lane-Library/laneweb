@@ -41,7 +41,7 @@
                                         title="Find anatomical images from Lane's Bassset Collection"
                                         >Bassett Images</option>
                                 </select>
-                                <a id="searchTips" href="/about/laneconnexSearch.html">Search
+                                <a id="searchTips" href="/tools/laneconnexSearch.html">Search
                                     Tips</a>
                                 <div id="searchIndicator"><img alt="[searching]"
                                         src="/images/backgr/search-indicator.gif"/></div>
@@ -171,7 +171,7 @@
                                 <a href="/about/index.html" title="About Us..">About Library</a>
                             </li>
                             <li>
-                                <a href="/contacts/index.html" title="Contact Us..">Contact Us</a>
+                                <a href="/about/contact.html" title="Contact Us..">Contact Us</a>
                             </li>
                             <li>
                                 <a href="/help/feedback.html" title="Feedback..">Feedback</a>
