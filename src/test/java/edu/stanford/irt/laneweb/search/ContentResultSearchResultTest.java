@@ -85,22 +85,22 @@ public class ContentResultSearchResultTest {
     public void testCompareToDescriptionHits() {
         this.queryTermPattern = QueryTermPattern.getPattern("foo");
         this.contentResult1 = new DefaultContentResult("pubmed");
-        this.contentResult1.setTitle("bar");
+        this.contentResult1.setTitle("bar1");
         this.contentResult1.setDescription("bar");
         this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
         this.contentResult2 = new DefaultContentResult("pubmed");
-        this.contentResult2.setTitle("bar");
+        this.contentResult2.setTitle("bar2");
         this.contentResult2.setDescription("foo");
         this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) > 0);
         
         // title hits and description hits
         this.contentResult1 = new DefaultContentResult("pubmed");
-        this.contentResult1.setTitle("title foo bar");
+        this.contentResult1.setTitle("title foo bar1");
         this.contentResult1.setDescription("just bar");
         this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
         this.contentResult2 = new DefaultContentResult("pubmed");
-        this.contentResult2.setTitle("title foo bar");
+        this.contentResult2.setTitle("title foo bar2");
         this.contentResult2.setDescription("i contain foo");
         this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) > 0);
@@ -114,7 +114,7 @@ public class ContentResultSearchResultTest {
         this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
         // double weight
         this.contentResult2 = new DefaultContentResult("pubmed_cochrane_reviews");
-        this.contentResult2.setTitle("foo");
+        this.contentResult2.setTitle("foo bar");
         this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) > 0);
         
@@ -123,7 +123,7 @@ public class ContentResultSearchResultTest {
         this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
         // half weight
         this.contentResult2 = new DefaultContentResult("pubmed_recent_reviews");
-        this.contentResult2.setTitle("foo");
+        this.contentResult2.setTitle("foo bar");
         this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) < 0);
         
@@ -132,14 +132,14 @@ public class ContentResultSearchResultTest {
         this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
         // quarter weight
         this.contentResult2 = new DefaultContentResult("medlineplus_0");
-        this.contentResult2.setTitle("foo");
+        this.contentResult2.setTitle("foo bar");
         this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
         assertTrue(this.contentResultSearchResult1.compareTo(this.contentResultSearchResult2) < 0);
         
         this.contentResult1 = new DefaultContentResult("xxxx");
         this.contentResult1.setTitle("foo");
         this.contentResultSearchResult1 = new ContentResultSearchResult(this.contentResult1, this.queryTermPattern);
-        // equal weight
+        // equal weight, equal title
         this.contentResult2 = new DefaultContentResult("yyyy");
         this.contentResult2.setTitle("foo");
         this.contentResultSearchResult2 = new ContentResultSearchResult(this.contentResult2, this.queryTermPattern);
