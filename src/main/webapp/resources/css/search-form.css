@@ -15,6 +15,7 @@
 }
 #searchFields {
     position:absolute;
+    z-index:1;
     left:27px;
     top:78px;
 }
