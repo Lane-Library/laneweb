@@ -24,18 +24,23 @@
                 </ul>
             </xsl:when>
             <xsl:otherwise>
-                <ol class="citationList">
-                    <xsl:apply-templates select="channel/item"/>
-                </ol>
+                <span>
+                    <ol class="citationList">
+                        <xsl:apply-templates select="channel/item"/>
+                    </ol>
+                    <div class="tooltips" style="display:none;">
+                        <xsl:apply-templates select="channel/item" mode="tooltips"/>
+                    </div>
+                </span>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="item">
+    <xsl:template match="item" mode="#all">
         <li>
             <xsl:choose>
                 <xsl:when test="starts-with(guid,'PubMed:')">
-                    <a href="{concat('http://www.ncbi.nlm.nih.gov/pubmed/',substring-after(guid,':'),'?otool=stanford&amp;holding=F1000,F1000M')}" title="feed link---{../../channel/title}---{title}"><xsl:value-of select="title"/></a>
+                    <a id="pubmed_{substring-after(guid,':')}" href="{concat('http://www.ncbi.nlm.nih.gov/pubmed/',substring-after(guid,':'),'?otool=stanford&amp;holding=F1000,F1000M')}" title="feed link---{../../channel/title}---{title}"><xsl:value-of select="title"/></a>
                 </xsl:when>
                 <xsl:otherwise>
                     <a href="{link}" title="feed link---{../../channel/title}---{title}"><xsl:value-of select="title"/></a>
@@ -57,4 +62,21 @@
     <xsl:template match="category|author">
         <div><xsl:value-of select="."/></div>
     </xsl:template>
+    
+    <xsl:template match="item" mode="tooltips">
+            <xsl:choose>
+                <xsl:when test="starts-with(guid,'PubMed:') and description">
+                    <span id="pubmed_{substring-after(guid,':')}Tooltip" style="width:60%">
+                        <!-- WARNING: brittle replacement of escaped HTML markup ... if PubMed feed markup changes, this will break -->
+                        <xsl:value-of select="replace(normalize-space(description), '(.*&lt;p&gt;&lt;b&gt;|&lt;/?[pb]&gt;)','','m')"/>
+                    </span>
+                </xsl:when>
+                <xsl:when test="starts-with(guid,'PubMed:')">
+                    <span id="pubmed_{substring-after(guid,':')}Tooltip">
+                        <xsl:value-of select="title"/>
+                    </span>
+                </xsl:when>
+            </xsl:choose>
+    </xsl:template>
+
 </xsl:stylesheet>
