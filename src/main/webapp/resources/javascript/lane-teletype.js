@@ -20,26 +20,17 @@ YUI().use('node', function(Y) {
             targetElm.set('value', qString);
         };
 
-    // send #searchTeletyper submit events to #search
-    if (searchTeletyper) {
-        Y.on('submit', searchForm.submit, searchTeletyper);
-    }
+        // send #searchTeletyper submit events to #search
+        searchTeletyper.on("submit",function(e){
+        	e.halt();
+        	searchForm.submit();
+        });
     
     for (i = 0; i < inputElms.size(); i++){
-        // clear #teletypeInput input if it matches title (help text) value
-        inputElms.item(i).on('focus', function(){
-            if (this.get('value') == this.get('title')){
-                this.set('value', '');
-            }
-        });
         inputElms.item(i).on( 'keyup', function(){
             teletype(this);
         });
-        // if #teletypeInput input value is blank, set to title (help text)
         inputElms.item(i).on( 'blur', function(){
-            if (this.get('value') === ''){
-                this.set('value', this.get('title'));
-            }
             teletype(this);
         });
     }
