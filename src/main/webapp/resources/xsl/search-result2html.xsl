@@ -86,21 +86,21 @@
                         <xsl:call-template name="tooltip"/>
                     </xsl:for-each>
                 </div>
-                <xsl:if test="count(//s:result[s:resourceName='PubMed']/s:pub-title) > 0">
+                <xsl:if test="count(//s:result[starts-with(s:resourceName,'PubMed')]/s:pub-title) > 0">
                     <span id="showPubMedStrategies" style="display:none;">true</span>
                     <ul id="pubmedJournalLinks">
-                        <xsl:for-each
-                            select="distinct-values(//s:result[s:resourceName = 'PubMed']/s:pub-title)">
-                            <xsl:sort select="." order="ascending" data-type="text"/>
-                            <xsl:if test="position() &lt;= 15">
+                        <xsl:for-each-group select="//s:result[starts-with(s:resourceName,'PubMed')]" group-by="s:pub-title">
+                            <xsl:sort select="count(//s:result/s:pub-title[. = current-grouping-key()])" order="descending" data-type="number"/>
+                            <xsl:sort select="current-grouping-key()" order="ascending" data-type="text"/>
+                            <xsl:if test="position() &lt;= 10">
                                 <li>
                                     <a rel="popup standard"
-                                        href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{.}&quot;[Journal]">
-                                        <xsl:value-of select="."/>
+                                        href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{current-grouping-key()}&quot;[Journal]">
+                                        <xsl:value-of select="current-grouping-key()"/>
                                     </a>
                                 </li>
                             </xsl:if>
-                        </xsl:for-each>
+                        </xsl:for-each-group>
                     </ul>
                 </xsl:if>
             </body>
