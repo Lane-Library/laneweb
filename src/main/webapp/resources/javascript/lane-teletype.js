@@ -21,10 +21,12 @@ YUI().use('node', function(Y) {
         };
 
         // send #searchTeletyper submit events to #search
-        searchTeletyper.on("submit",function(e){
-        	e.halt();
-        	searchForm.submit();
-        });
+        if (searchTeletyper) {
+	        searchTeletyper.on("submit",function(e){
+	        	e.halt();
+	        	searchForm.submit();
+	        });
+        }
     
     for (i = 0; i < inputElms.size(); i++){
         inputElms.item(i).on( 'keyup', function(){
