@@ -168,7 +168,9 @@
                         <include>lane-quicklinks-min.js</include>
                         <include>lane-search-options-min.js</include>
                         <include>lane-faq-expandies-min.js</include>
+                        <!--  pending solution to expandies falling off page
                         <include>lane-column-height-min.js</include>
+                         -->
                      </includes>
                   </aggregation>
                </aggregations>
