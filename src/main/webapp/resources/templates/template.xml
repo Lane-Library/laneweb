@@ -79,7 +79,7 @@
                             <li>
                                 <a href="/biomed-resources/index.html"
                                     title="Articles from these sources: PubMed, UpToDate, Web of Science. All sources available thru Lane: Journals, Books, Databases, Clinical Decision Tools, Images, Videos, Software, Health Statistics"
-                                    >All Resources</a>
+                                    >Biomed Resources</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                     href="cocoon:/includes/leftmenu-resources.html">
                                     <xi:fallback/>
@@ -131,7 +131,7 @@
                                 </xi:include>
                             </li>
                             <li>
-                                <select id="qlinks" style="margin:6px 0 0 70px;">
+                                <select id="qlinks" style="margin:6px 0 0 40px;">
                                     <option value="">Quick Links</option>
                                     <option value=""> ---------------- </option>
                                     <option

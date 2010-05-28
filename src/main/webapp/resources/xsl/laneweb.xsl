@@ -60,7 +60,7 @@
     
     <!-- here is the information associating urls with what is the laneNav active tab -->
     <xsl:variable name="laneNav-tabs">
-        <div><span>All Resources</span><span>/biomed-resources</span></div>
+        <div><span>Biomed Resources</span><span>/biomed-resources</span></div>
         <div><span>Specialty Portals</span><span>/portals</span></div>
         <div><span>Classes &amp; Consulting</span><span>/classes-consult</span></div>
         <div><span>History Center</span><span>/med-history</span></div>
