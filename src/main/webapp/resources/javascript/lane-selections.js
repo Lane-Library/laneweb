@@ -1,6 +1,6 @@
 YUI().use('node', function(Y) {
     var selections = Y.all('#selections > li'),
-        options = Y.all('#selections-select option'),
+        select = Y.one('#selections-select'),
         i,
         showAll = function() {
             for (i = 0; i < selections.size(); i++) {
@@ -16,13 +16,11 @@ YUI().use('node', function(Y) {
                 }
             }
         };
-    for (i = 0; i < options.size(); i++) {
-        Y.on('click', function() {
-            if (this.get('value') === '') {
-                showAll();
-            } else {
-                hideAllBut(this.get('value'));
-            }
-        }, options.item(i));
-    }
+	    Y.on('change', function() {
+	        if (this.get('value') === '') {
+	            showAll();
+	        } else {
+	            hideAllBut(this.get('value'));
+	        }
+	    }, select );
 });
