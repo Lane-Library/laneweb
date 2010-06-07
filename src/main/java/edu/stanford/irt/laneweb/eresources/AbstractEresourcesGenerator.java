@@ -41,6 +41,13 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
                 this.parameterMap.get(Model.SUBSET) :
                     this.model.getString(Model.SUBSET);
         this.alpha = this.model.getString(Model.ALPHA);
+        if (this.alpha != null && this.alpha.length() > 1) {
+            if ("all".equals(this.alpha)) {
+                this.alpha = null;
+            } else {
+                this.alpha = this.alpha.substring(0, 1);
+            }
+        }
         this.mesh = this.model.getString(Model.MESH);
         if (this.mesh != null) {
             this.mesh = this.mesh.toLowerCase();
