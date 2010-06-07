@@ -1,7 +1,9 @@
 YUI().use('node', function(Y) {
     if (Y.UA.ie && Y.UA.ie < 7) {
         //instead of :first-child selector remove background image:
-        var node = Y.one('#stanfordMedicineBrand'), i, nodes;
+        var i, nodes,
+            node = Y.one('#stanfordMedicineBrand'),
+            afterSpan = "<span class='after'/>";
         if (node) {
             node.setStyle('backgroundImage', 'none');
         }
@@ -22,6 +24,11 @@ YUI().use('node', function(Y) {
         nodes = Y.all('.nav2, #libraryContact');
         for (i = 0; i < nodes.size(); i++) {
             nodes.item(i).one('li').setStyle('borderLeft', 'none');
+        }
+        //mimic .module:after so subsequent elements are cleared
+        nodes = Y.all(".module");
+        for (i = 0; i < nodes.size(); i++) {
+            nodes.item(i).append(Y.Node.create(afterSpan));
         }
     }
 });
