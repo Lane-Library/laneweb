@@ -78,7 +78,6 @@
                         <ul id="laneNav">
                             <li>
                                 <a href="/biomed-resources/index.html"
-                                    title="Articles from these sources: PubMed, UpToDate, Web of Science. All sources available thru Lane: Journals, Books, Databases, Clinical Decision Tools, Images, Videos, Software, Health Statistics"
                                     >Biomed Resources</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                     href="cocoon:/includes/leftmenu-resources.html">
@@ -87,7 +86,6 @@
                             </li>
                             <li>
                                 <a href="/portals/index.html"
-                                    title="SUMC specialty departments that have created customized pages - 'portals' – to Lane Library materials they regularly reference."
                                     >Specialty Portals</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                     href="cocoon:/includes/leftmenu-specialties.html">
@@ -96,7 +94,6 @@
                             </li>
                             <li>
                                 <a href="/classes-consult/index.html"
-                                    title="Info on: Classes, Consulting, Tutorials &amp; videos (self paced learning), Webinars, Information Literacy"
                                     >Classes &amp; Consulting</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                     href="cocoon:/includes/leftmenu-classes.html">
@@ -105,7 +102,6 @@
                             </li>
                             <li>
                                 <a href="/med-history/index.html"
-                                    title="Resources for medical historians, Stanford Medical School historical collection"
                                     >History Center</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                     href="cocoon:/includes/leftmenu-medhistory.html">
@@ -114,7 +110,6 @@
                             </li>
                             <li>
                                 <a href="/about/index.html"
-                                    title="Info on: Hours &amp; Directions, Library Liaisons, Document Delivery, Public Computing &amp; Software, Access &amp; Privileges, Books &amp; Collections, Study &amp; Group Spaces, Course Reserves, Printing and Photocopying, Contact Us, Info for Grant Writers, Make a Donation, Library Administration"
                                     >About Library</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                     href="cocoon:/includes/leftmenu-about.html">
@@ -123,7 +118,6 @@
                             </li>
                             <li>
                                 <a href="/help/index.html"
-                                    title="Info on: Getting Started, Research and Publishing, Find Your Liaison, Ask Us, Instant Chat, FAQs, Contact Library, Teaching Support, Classroom Scheduling &amp; Support, Video Services, About Library"
                                     >Help</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                     href="cocoon:/includes/leftmenu-help.html">
