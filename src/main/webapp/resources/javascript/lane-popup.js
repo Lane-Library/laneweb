@@ -1,7 +1,7 @@
-YUI().use('node', 'event', 'overlay','io-base',function(Y) {
-    var panel, createPanel, showPanel, popupWindow, showWindow, createEventHandlers;
+YUI().use('node', 'event', 'overlay','io-base','dd-plugin', function(Y) {
+    var panel, container, createPanel, showPanel, popupWindow, showWindow, createEventHandlers;
     createPanel = function() {
-        var container = Y.Node.create('<div id="popupContainer"/>');
+        container = Y.Node.create('<div id="popupContainer"/>');
         Y.one('body').append(container);
         panel = new Y.Overlay({
             srcNode: container
@@ -15,16 +15,25 @@ YUI().use('node', 'event', 'overlay','io-base',function(Y) {
 //                modal: false
 //            });
     };
-    showPanel = function(title, body, X, Y) {
+    showPanel = function(title, body, cX, cY) {
         //FIXME: Hard coded this width value for beta feedback form.
         var width = (title.length * 7 > 334) ? title.length * 7 : 334;
         panel.set('headerContent',title + '<a>Close</a>');
         panel.set('bodyContent', body);
-        panel.set('x', X);
-        panel.set('y', Y);
+        panel.set('x', cX);
+        panel.set('y', cY);
         //TODO: set the width somehow.
-        
+        panel.set('width',width);
         panel.render();
+        panel.show();
+        container.setStyle('visibility','visible');
+        container.plug(Y.Plugin.Drag);
+        container.dd.addHandle(Y.one('#popupContainer .yui3-widget-hd'));
+        Y.on("click",function(){
+        	panel.hide();
+            container.setStyle('visibility','hidden');
+        },Y.one('#popupContainer .yui3-widget-hd a'));
+        
     };
     showWindow = function(url, type, strWidth, strHeight) {
         if (popupWindow !== undefined && !popupWindow.closed) {
@@ -87,12 +96,12 @@ YUI().use('node', 'event', 'overlay','io-base',function(Y) {
                         on: {
                             success: function(tansactionId, o, argument) {
                                 var id = argument.id,
-                                    X = argument.X,
-                                    Y = argument.Y,
+                                    cX = argument.X,
+                                    cY = argument.Y,
                                     f = o.responseXML.documentElement,
                                     title = f.getElementsByTagName('a')[0].firstChild.data,
                                     body = f.getElementsByTagName('dd')[0].firstChild.data + '&nbsp;<a href="/././howto/index.html?id=' + id + '">More</a>';
-                                argument.showPanel(title, body, X, Y);
+                                argument.showPanel(title, body, cX, cY);
                             }
                         },
                         argument: {
