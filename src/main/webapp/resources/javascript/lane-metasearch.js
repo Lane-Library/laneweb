@@ -71,7 +71,14 @@ YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node',
                                             Y.DataType.Number.format(result.hits, {
                                                 thousandsSeparator: ","
                                             }));
+                                            result.name = (updateables.item(y).get('innerHTML')) ? updateables.item(y).get('innerHTML') : '';
                                             updateables.item(y).setAttribute('href', result.url);
+                                            // fix for IE: @ in text of element will cause element text to be replaced by href value
+                                            // relies on result.name being set before url is changed 
+                                            // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
+                                            if (Y.UA.ie) {
+                                            	updateables.item(y).set('innerHTML',result.name);
+                                            }
                                             updateables.item(y).setAttribute('target', '_blank');
                                             updateables.item(y).removeClass('metasearch');
                                             searchables.splice(i--, 1);
