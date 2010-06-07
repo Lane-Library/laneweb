@@ -122,7 +122,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         } else if ("s".equals(name)) {
             model.put(Model.SUBSET, value);
         } else if ("a".equals(name)) {
-            model.put(Model.ALPHA, value.substring(0,1));
+            model.put(Model.ALPHA, value);
         } else if ("m".equals(name)) {
             model.put(Model.MESH, value);
         } else if ("f".equals(name)) {
