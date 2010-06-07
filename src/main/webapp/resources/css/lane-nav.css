@@ -6,16 +6,16 @@
 /* IE6 doesn't get width 100% right */
     _width:989px;
     background-image:url(/././images/main-nav-bg.gif);
-    font-weight:bold;
-    font-size:13px;
 }
 .yui3-js-enabled #laneNav.clinical {
     top:174px;
 }
 #laneNav li {
     float:left;
+    font-weight:bold;
+    font-size:13px;
 }
-#laneNav a, #laneNav a:visited {
+#laneNav a {
     color:black;
     padding:7px 20px;
     text-decoration:none;
@@ -29,10 +29,18 @@
     display:none;
     background-color:white;
     position:absolute;
+    border:1px black solid;
+    border-top:none;
+}
+#laneNav li:hover ul, #laneNav .hover ul {
+    display:block;
 }
 #laneNav ul li {
     float:none;
+    font-weight:normal;
+    font-size:12px;
 }
-#laneNav li:hover ul {
-    display:block;
+#laneNav ul a {
+    padding:2px 10px;
+    color:#3F3C30;
 }
