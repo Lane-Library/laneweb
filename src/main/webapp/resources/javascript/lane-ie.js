@@ -1,5 +1,5 @@
 YUI().use('node', function(Y) {
-    var i, nodes, node, afterSpan;
+    var i, nodes, node;
     if (Y.UA.ie && Y.UA.ie < 7) {
         //instead of :first-child selector remove background image:
         node = Y.one('#stanfordMedicineBrand');
@@ -29,7 +29,7 @@ YUI().use('node', function(Y) {
         //mimic .module:after so subsequent elements are cleared
         nodes = Y.all(".module");
         for (i = 0; i < nodes.size(); i++) {
-            nodes.item(i).append(Y.Node.create(afterSpan));
+            nodes.item(i).append(Y.Node.create("<span class='after'/>"));
         }
     }
 });
