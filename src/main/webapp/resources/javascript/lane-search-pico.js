@@ -96,7 +96,9 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
             return qString;
         };
     Y.Global.on("lane:suggestSelect",  function(event) {
-        searchTerms.setValue(getPicoQuery());
+    	if(picoIsOn && getPicoQuery()){
+    		searchTerms.setValue(getPicoQuery());
+    	}
     });
     if (form.hasClass('clinical')) {
         picoOn();
