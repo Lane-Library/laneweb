@@ -18,7 +18,7 @@ YUI().use('node', 'event', 'overlay','io-base','dd-plugin', function(Y) {
     showPanel = function(title, body, cX, cY) {
         //FIXME: Hard coded this width value for beta feedback form.
         var width = (title.length * 7 > 334) ? title.length * 7 : 334;
-        panel.set('headerContent',title + '<a>Close</a>');
+        panel.set('headerContent',title + '<a href="#">Close</a>');
         panel.set('bodyContent', body);
         panel.set('x', cX);
         panel.set('y', cY);
@@ -27,8 +27,8 @@ YUI().use('node', 'event', 'overlay','io-base','dd-plugin', function(Y) {
         panel.render();
         panel.show();
         container.setStyle('visibility','visible');
-        container.plug(Y.Plugin.Drag);
-        container.dd.addHandle(Y.one('#popupContainer .yui3-widget-hd'));
+    	container.plug(Y.Plugin.Drag);
+    	container.dd.addHandle(Y.one('#popupContainer .yui3-widget-hd'));
         Y.on("click",function(){
         	panel.hide();
             container.setStyle('visibility','hidden');
