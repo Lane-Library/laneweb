@@ -288,12 +288,12 @@
       <dependency>
          <artifactId>search-core</artifactId>
          <groupId>edu.stanford.irt.search</groupId>
-         <version>1.6.2-SNAPSHOT</version>
+         <version>1.6.3-SNAPSHOT</version>
       </dependency>
       <dependency>
          <artifactId>search-lane</artifactId>
          <groupId>edu.stanford.irt.search</groupId>
-         <version>1.6.2-SNAPSHOT</version>
+         <version>1.6.3-SNAPSHOT</version>
       </dependency>
       <dependency>
          <artifactId>log4j</artifactId>
