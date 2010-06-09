@@ -130,7 +130,7 @@
                         <xsl:apply-templates select="s:title"/>
                     </a>
 
-                    <xsl:apply-templates select="s:author"/>
+                    <xsl:apply-templates select="s:pub-author"/>
                     <div class="pubTitle">
                         <xsl:choose>
                             <xsl:when test="s:pub-title">
@@ -386,7 +386,7 @@
         </span>
     </xsl:template>
 
-    <xsl:template match="s:author">
+    <xsl:template match="s:pub-author">
         <div class="pubAuthor">
             <xsl:value-of select="."/>
         </div>
