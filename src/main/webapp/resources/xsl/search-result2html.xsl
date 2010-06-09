@@ -47,6 +47,17 @@
     <!-- number of result titles to return per resource; not enforced here, only used for when to build "more" links -->
     <xsl:variable name="moreResultsLimit">10</xsl:variable>
 
+    <xsl:variable name="viewableResults">
+        <xsl:choose>
+            <xsl:when test="$show = 'all'">
+                <xsl:copy-of select="//s:result"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy-of select="//s:result[position() &gt;= number($current-set) and position() &lt;= (number($current-set) + number($resultLimit))]"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:variable>
+
     <xsl:template match="/">
         <html>
             <head>
@@ -54,14 +65,7 @@
             </head>
             <body>
                 <dl>
-                    <xsl:choose>
-                        <xsl:when test="$show = 'all'">
-                            <xsl:apply-templates select="//s:result"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:apply-templates select="//s:result[position() &gt;= number($current-set) and position() &lt;= (number($current-set) + number($resultLimit))]"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
+                    <xsl:apply-templates select="$viewableResults/s:result"/>
                 </dl>
                 <div id="results-nav">
                     <span class="show"><xsl:value-of select="$current-set"/></span>
@@ -82,7 +86,7 @@
                 </div>
                 <div class="tooltips" style="display:none;">
                     <xsl:for-each
-                        select="//s:result/s:description|//s:result[not(s:description)]/s:title">
+                        select="$viewableResults/s:result/s:description|$viewableResults/s:result[not(s:description)]/s:title">
                         <xsl:call-template name="tooltip"/>
                     </xsl:for-each>
                 </div>
