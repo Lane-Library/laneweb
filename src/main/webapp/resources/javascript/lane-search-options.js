@@ -5,9 +5,9 @@
 YUI().use('node-base','anim', function(Y) {
 	var options = Y.Node.create('<span id="optionsToggle" class="closed"><a href="">Hide Options</a></span>'),
 		optionsNode = Y.one("#searchOptions"),
-		leftGrids = Y.one(".leftGrids"),
-		middleColumn = Y.one(".middleColumn"),
-		borderReset = '1px solid #E6E4DB',
+//		leftGrids = Y.one(".leftGrids"),
+//		middleColumn = Y.one(".middleColumn"),
+//		borderReset = '1px solid #E6E4DB',
 		closeResultsContainerAnim = new Y.Anim( {
 			node : '.search',
 			easing : Y.Easing.easeOut,
@@ -71,16 +71,16 @@ YUI().use('node-base','anim', function(Y) {
 				parent.addClass("closed");
 			}
 			e.preventDefault();
-		},
-		toggleColumnBorders = function(direction){
-			if(direction == 'close'){
-				leftGrids.setStyle("borderRight","none");
-				middleColumn.setStyle("borderLeft","none");
-			}
-			else{
-				leftGrids.setStyle("borderRight",borderReset);
-				middleColumn.setStyle("borderLeft",borderReset);
-			}
+//		},
+//		toggleColumnBorders = function(direction){
+//			if(direction == 'close'){
+//				leftGrids.setStyle("borderRight","none");
+//				middleColumn.setStyle("borderLeft","none");
+//			}
+//			else{
+//				leftGrids.setStyle("borderRight",borderReset);
+//				middleColumn.setStyle("borderLeft",borderReset);
+//			}
 		};
 
 	closeFacetsAnim.on('end', function() {
@@ -88,12 +88,12 @@ YUI().use('node-base','anim', function(Y) {
 		if (!Y.UA.ie){ //FIXME: can't get IE to overflow text properly
 			closeResultsAnim.run();
 		}
-		toggleColumnBorders('close');
+		//toggleColumnBorders('close');
 	});
 
 	openResultsContainerAnim.on('end', function() {
 		openFacetsAnim.run();
-		toggleColumnBorders();
+		//toggleColumnBorders();
 	});
 	
 	if(optionsNode){
