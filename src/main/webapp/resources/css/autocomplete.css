@@ -36,6 +36,12 @@
 #picoFields .yui3-acwidget-container {
     top:19px;
 }
+
+.breadcrumbForm .yui3-acwidget-container {
+    position:relative;
+    margin-top:-50px;
+}
+
 /* styles for results container header */
 .yui3-acwidget-hd {
     font-weight:bold;
