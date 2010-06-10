@@ -39,7 +39,7 @@
 
 .breadcrumbForm .yui3-acwidget-container {
     position:relative;
-    margin-top:-50px;
+    top:0;
 }
 
 /* styles for results container header */
