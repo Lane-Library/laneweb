@@ -63,9 +63,6 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
                 inputs.item(i).on("keyup",function(){
                 	searchTerms.setValue(getPicoQuery());
                 });
-                inputs.item(i).on("key",function(e){
-                	form.submit();
-                },"down:13,10"); // 10 is "enter" for iphone
                 switch(inputs.item(i).get('name')){
                 	case 'p':
                 		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-d&");
