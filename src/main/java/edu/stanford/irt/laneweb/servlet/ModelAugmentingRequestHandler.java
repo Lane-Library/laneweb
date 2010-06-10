@@ -140,6 +140,8 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
             model.put(Model.ENGINES, Arrays.asList(request.getParameterValues(name)));
         } else if ("source".equals(name)) {
             model.put(Model.SOURCE, value);
+        } else if ("sourceid".equals(name)) {
+            model.put(Model.SOURCEID, value);
         } else if ("host".equals(name)) {
             model.put(Model.HOST, value);
         } else if (Model.NONCE.equals(name)) {

@@ -38,6 +38,9 @@
 
     <xsl:param name="name"/>
     
+    <!-- sourceid used for tracking to ID request origin: shc, cerner, laneconnex-engine, etc. -->
+    <xsl:param name="sourceid"/>
+    
     <!--<xsl:param name="js-enabled"/>-->
     
     <!-- ==========================  VARIABLES  ========================== -->
@@ -512,6 +515,16 @@
         </xsl:copy>
     </xsl:template>
     
+    <!-- add sourceid input to search form if sourceid param present -->
+    <xsl:template match="h:fieldset[@id='searchFields' or parent::h:form[@class='breadcrumbForm']]">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+            <xsl:if test="$sourceid">
+                <input type="hidden" name="sourceid" value="{$sourceid}"/>
+            </xsl:if>
+        </xsl:copy>
+    </xsl:template>
+    
     <!-- add the ip-group to content of the meta element named WT.seg_1 for reporting to webtrends -->
     <xsl:template match="h:meta[@name='WT.seg_1']/@content">
         <xsl:attribute name="content">
@@ -652,6 +665,18 @@
     <xsl:template name="make-link">
         <xsl:param name="link"/>
         <xsl:param name="attr"/>
+        <xsl:variable name="param-string">
+            <xsl:if test="not(contains($link,'/secure/login.html'))">
+                <xsl:choose>
+                    <xsl:when test="contains($link, '?')">&amp;</xsl:when>
+                    <xsl:otherwise>?</xsl:otherwise>
+                </xsl:choose>
+                <xsl:if test="$sourceid">
+                    <xsl:text>sourceid=</xsl:text>
+                    <xsl:value-of select="$sourceid"/>
+                </xsl:if>
+            </xsl:if>
+        </xsl:variable>
         <xsl:attribute name="{$attr}">
             <!-- prepend the base-path if it is an absolute link -->
             <xsl:if test="starts-with($link, '/')">
@@ -678,6 +703,9 @@
             <!-- replace links ending with / so they end with /index.html -->
             <xsl:if test="ends-with($link,'/')">
                 <xsl:text>index.html</xsl:text>
+            </xsl:if>
+            <xsl:if test="$sourceid and name(..) != 'link' and name(..) != 'img' and not(starts-with($link,'#'))">
+                <xsl:value-of select="$param-string"/>
             </xsl:if>
         </xsl:attribute>
     </xsl:template>

@@ -63,6 +63,7 @@
                 <entry key="(.*)/portals/medgrandrounds\.html" value="$1/newpage.html?page=$1/biomed-resources/medgrandrounds.html"/>
                 <entry key="(.*)/portals/pedsgrandrounds\.html" value="$1/newpage.html?page=$1/biomed-resources/pedsgrandrounds.html"/>
                 <entry key="(.*)/portals/ihealth\.html" value="$1/newpage.html?page=$1/portals/ihealth/index.html"/>
+                <entry key="(.*)/index\.html\?template=shc(.*)" value="$1/index\.html\?sourceid=shc$2"/>
             </map>
         </property>
         <property name="servletContext" ref="javax.servlet.ServletContext"/>

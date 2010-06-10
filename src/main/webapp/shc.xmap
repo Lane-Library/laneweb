@@ -6,91 +6,91 @@
         <map:pipeline type="noncaching">
             <map:match pattern="anesthesia.html" type="wildcard">
                 <map:redirect-to
-                    uri="/portals/anesthesia.html?template=shc&amp;source=%2Fportals%2Fanesthesia.html&amp;${query-string}"
+                    uri="/portals/anesthesia.html?sourceid=shc&amp;source=%2Fportals%2Fanesthesia.html&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="cardiology.html" type="wildcard">
                 <map:redirect-to
-                    uri="/portals/cardiology.html?template=shc&amp;source=%2Fportals%2Fcardiology.html&amp;${query-string}"
+                    uri="/portals/cardiology.html?sourceid=shc&amp;source=%2Fportals%2Fcardiology.html&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="clinical.html" type="wildcard">
                 <map:redirect-to
-                    uri="/search.html?template=shc&amp;source=clinical&amp;${query-string}"
+                    uri="/search.html?sourceid=shc&amp;source=clinical&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="ear-nose-throat.html" type="wildcard">
                 <map:redirect-to
-                    uri="/search.html?template=shc&amp;source=clinical&amp;${query-string}"
+                    uri="/search.html?sourceid=shc&amp;source=clinical&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="emergency.html" type="wildcard">
                 <map:redirect-to
-                    uri="/search.html?template=shc&amp;source=clinical&amp;${query-string}"
+                    uri="/search.html?sourceid=shc&amp;source=clinical&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="gastroenterology.html" type="wildcard">
                 <map:redirect-to
-                    uri="/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
+                    uri="/portals/internal-medicine.html?sourceid=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="hematology.html" type="wildcard">
                 <map:redirect-to
-                    uri="/portals/hematology.html?template=shc&amp;${query-string}"/>
+                    uri="/portals/hematology.html?sourceid=shc&amp;${query-string}"/>
             </map:match>
             <map:match pattern="hepatology.html" type="wildcard">
                 <map:redirect-to
-                    uri="/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
+                    uri="/portals/internal-medicine.html?sourceid=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="icu.html" type="wildcard">
                 <map:redirect-to
-                    uri="/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
+                    uri="/portals/internal-medicine.html?sourceid=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="infectious-disease.html" type="wildcard">
                 <map:redirect-to
-                    uri="/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
+                    uri="/portals/internal-medicine.html?sourceid=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="internal-medicine.html" type="wildcard">
                 <map:redirect-to
-                    uri="/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
+                    uri="/portals/internal-medicine.html?sourceid=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="neurology.html" type="wildcard">
                 <map:redirect-to
-                    uri="/search.html?template=shc&amp;source=clinical&amp;${query-string}"
+                    uri="/search.html?sourceid=shc&amp;source=clinical&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="ob-gyn.html" type="wildcard">
                 <map:redirect-to
-                    uri="/search.html?template=shc&amp;source=clinical&amp;${query-string}"
+                    uri="/search.html?sourceid=shc&amp;source=clinical&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="oncology.html" type="wildcard">
                 <map:redirect-to
-                    uri="/portals/internal-medicine.html?template=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
+                    uri="/portals/internal-medicine.html?sourceid=shc&amp;source=%2Fportals%2Finternal-medicine.html&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="ophthalmology.html" type="wildcard">
                 <map:redirect-to
-                    uri="/search.html?template=shc&amp;source=clinical&amp;${query-string}"
+                    uri="/search.html?sourceid=shc&amp;source=clinical&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="orthopedics.html" type="wildcard">
                 <map:redirect-to
-                    uri="/search.html?template=shc&amp;source=clinical&amp;${query-string}"
+                    uri="/search.html?sourceid=shc&amp;source=clinical&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="psychiatry.html" type="wildcard">
                 <map:redirect-to
-                    uri="/search.html?template=shc&amp;source=clinical&amp;${query-string}"
+                    uri="/search.html?sourceid=shc&amp;source=clinical&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="pulmonary.html" type="wildcard">
                 <map:redirect-to
-                    uri="/portals/pulmonary.html?template=shc&amp;source=%2Fportals%2Fpulmonary.html&amp;${query-string}"
+                    uri="/portals/pulmonary.html?sourceid=shc&amp;source=%2Fportals%2Fpulmonary.html&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="radiology.html" type="wildcard">
@@ -100,16 +100,16 @@
             </map:match>
             <map:match pattern="surgery-cardiothoracic.html" type="wildcard">
                 <map:redirect-to
-                    uri="/search.html?template=shc&amp;source=clinical&amp;${query-string}"
+                    uri="/search.html?sourceid=shc&amp;source=clinical&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="surgery-general.html" type="wildcard">
                 <map:redirect-to
-                    uri="/search.html?template=shc&amp;source=clinical&amp;${query-string}"
+                    uri="/search.html?sourceid=shc&amp;source=clinical&amp;${query-string}"
                 />
             </map:match>
             <map:match pattern="portals/shc.html" type="wildcard">
-                <map:redirect-to uri="/portals/shc.html?template=shc&amp;${query-string}"
+                <map:redirect-to uri="/portals/shc.html?sourceid=shc&amp;${query-string}"
                 />
             </map:match>
         </map:pipeline>
