@@ -23,7 +23,7 @@
                     <link><xsl:value-of select="concat('http://lane.stanford.edu',$page)"/></link>
                 </image>
                 
-                <xsl:variable name="content-table" select="/doc/h:html//h:h2[contains(@class, 'activeTab')]/following-sibling::h:table[contains(@class, 'striped')]"/>
+                <xsl:variable name="content-table" select="/doc/h:html//h:table[contains(@class, 'striped')]"/>
                 
                 <!-- will only generate item list from grandrounds and laneclasses pages -->
                 <xsl:choose>
