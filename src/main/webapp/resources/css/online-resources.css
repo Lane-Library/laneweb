@@ -21,7 +21,7 @@
     width:18px;
 }
 #browseTabs .long a {
-    width: auto;
+    width: 98px;
 }
 #browseTabs a:hover {
     border: 1px solid #820000;
