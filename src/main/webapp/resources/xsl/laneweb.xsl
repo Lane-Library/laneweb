@@ -525,6 +525,24 @@
         </xsl:copy>
     </xsl:template>
     
+    <!-- add sourceid input to quick link options if sourceid param present -->
+    <xsl:template match="h:option[parent::h:select[@id='qlinks']]">
+        <xsl:copy>
+            <xsl:choose>
+                <xsl:when test="$sourceid and starts-with(@value,'/')">
+                    <xsl:apply-templates select="attribute::node()[not(name()='value')]"/>
+                    <xsl:attribute name="value">
+                        <xsl:value-of select="concat(@value,'?sourceid=',$sourceid)"/>
+                    </xsl:attribute>
+                    <xsl:apply-templates/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:apply-templates select="@*|node()"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:copy>
+    </xsl:template>
+    
     <!-- add the ip-group to content of the meta element named WT.seg_1 for reporting to webtrends -->
     <xsl:template match="h:meta[@name='WT.seg_1']/@content">
         <xsl:attribute name="content">
