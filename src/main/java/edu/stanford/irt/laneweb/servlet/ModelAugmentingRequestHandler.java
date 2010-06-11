@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.ldap.LDAPData;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
@@ -20,6 +23,9 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
 
 public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
+    
+    //TODO: temporary session creation logger
+    private static Logger SESSION_LOG = LoggerFactory.getLogger(HttpSession.class);
 
     private static final String X_FORWARDED_FOR = "X-FORWARDED-FOR";
 
@@ -46,7 +52,14 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
     @Override
     protected void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Map<String, Object> model = (Map<String, Object>) request.getAttribute(Model.MODEL);
-        HttpSession session = request.getSession();
+
+        //TODO: temporarily commenting out while logging session creation
+//        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            SESSION_LOG.info("creating session, remoteAddr = " + request.getRemoteAddr() + ", uri = " + request.getRequestURI());
+            session = request.getSession();
+        }
         String sunetid = this.sunetIdSource.getSunetid(request, session);
         addToModel(Model.SUNETID, sunetid, model);
         addToModel(Model.DEBUG, getBooleanValue(request, session, Model.DEBUG), model);
