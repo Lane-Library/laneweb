@@ -57,7 +57,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
 //        HttpSession session = request.getSession();
         HttpSession session = request.getSession(false);
         if (session == null) {
-            SESSION_LOG.info("creating session, remoteAddr = " + request.getRemoteAddr() + ", uri = " + request.getRequestURI());
+            SESSION_LOG.info("creating session, xForwardedFor = " + request.getHeader(X_FORWARDED_FOR) + ", uri = " + request.getRequestURI());
             session = request.getSession();
         }
         String sunetid = this.sunetIdSource.getSunetid(request, session);
