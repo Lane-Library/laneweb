@@ -23,6 +23,9 @@
 #browseTabs .long a {
     width: 98px;
 }
+#browseTabs .longer a {
+    width: 218px;
+}
 #browseTabs a:hover {
     border: 1px solid #820000;
 }
