@@ -30,9 +30,9 @@
                 <div id="search-content-counts" style="display:none;">
                     <xsl:for-each
                         select="/s:resources/s:contentHitCounts/s:resource">
-                        <span id="{s:resourceId}">
-                            <a href="{s:resourceUrl}">
-                                <xsl:value-of select="s:resourceHits"/>
+                        <span id="{@resourceId}">
+                            <a href="{@resourceUrl}">
+                                <xsl:value-of select="@resourceHits"/>
                             </a>
                         </span>
                     </xsl:for-each>
