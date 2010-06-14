@@ -48,7 +48,7 @@ public class XMLizableSearchResultSet extends TreeSet<SearchResult> implements R
         XMLUtils.startElement(handler, NAMESPACE, CONTENT_HIT_COUNTS);
         ArrayList<String> countedResources = new ArrayList<String>();
         for (SearchResult resource : this) {
-            if (resource.getClass() == ContentResultSearchResult.class) {
+            if (resource instanceof ContentResultSearchResult) {
                 ContentResultSearchResult cr = (ContentResultSearchResult) resource;
                 if (null != cr.getResourceId() && !countedResources.contains(cr.getResourceId())) {
                     countedResources.add(cr.getResourceId());
@@ -68,7 +68,7 @@ public class XMLizableSearchResultSet extends TreeSet<SearchResult> implements R
         Map<String, Integer> journalCountMap = new HashMap<String, Integer>();
         Map<String, String> journalResourceMap = new HashMap<String, String>();
         for (SearchResult resource : this) {
-            if (resource.getClass() == ContentResultSearchResult.class) {
+            if (resource instanceof ContentResultSearchResult) {
                 ContentResultSearchResult cr = (ContentResultSearchResult) resource;
                 if (null != cr.getPublicationTitle()) {
                     journalResourceMap.put(cr.getPublicationTitle(), cr.getResourceId());
