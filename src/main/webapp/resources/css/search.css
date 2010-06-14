@@ -128,4 +128,8 @@
 .searchSuccess {
     font-weight:bold;
 }
-
+.searchTerms {
+    text-transform:none;
+    font-weight:bold;
+    font-style:italic;
+}
