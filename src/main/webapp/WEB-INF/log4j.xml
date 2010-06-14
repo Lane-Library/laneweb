@@ -12,7 +12,7 @@
         </layout>
     </appender>
     
-    <appender name="headers" class="org.apache.log4j.RollingFileAppender">
+    <!--<appender name="headers" class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${catalina.base}/logs/header.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="10MB"/>
@@ -20,7 +20,7 @@
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d %p [%t][%c] - %m%n"/>
         </layout>
-    </appender>
+    </appender>-->
     
     <!-- temporary appender for session creation log -->
     <appender name="sessions" class="org.apache.log4j.RollingFileAppender">
@@ -33,7 +33,7 @@
         </layout>
     </appender>
     
-    <appender name="VOYAGER" class="org.apache.log4j.net.SMTPAppender">
+    <!--<appender name="VOYAGER" class="org.apache.log4j.net.SMTPAppender">
         <param name="Threshold" value="ERROR"/>
         <param name="To" value="ryanmax@stanford.edu"/>
         <param name="From" value="laneweb@stanford.edu"/>
@@ -43,7 +43,7 @@
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="[%d{ISO8601}] %-5p %c %m %n"/>
         </layout>
-    </appender>
+    </appender>-->
     
     <appender name="console" class="org.apache.log4j.ConsoleAppender"> 
         <param name="Target" value="System.out"/> 
