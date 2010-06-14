@@ -29,7 +29,7 @@
     display:none;
     background-color:white;
     position:absolute;
-    border:1px black solid;
+    border:1px #D6D5C7 solid;
     border-top:none;
 }
 #laneNav li:hover ul, #laneNav .hover ul {
@@ -39,6 +39,7 @@
     float:none;
     font-weight:normal;
     font-size:12px;
+    width:190px;
 }
 #laneNav ul a {
     padding:2px 10px;
