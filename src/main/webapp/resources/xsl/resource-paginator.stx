@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
     xmlns:s="http://lane.stanford.edu/resources/1.0"
+    xmlns="http://lane.stanford.edu/resources/1.0"
     version="1.0"
     pass-through="all">
     
@@ -8,16 +9,55 @@
     
     <stx:variable name="count" select="0"/>
     
+    <stx:variable name="resultLimit" select="20"/>
+    
+    <stx:variable name="startIndex">
+        <stx:choose>
+            <stx:when test="$show = ''">0</stx:when>
+            <stx:otherwise><stx:value-of select="$show"/></stx:otherwise>            
+        </stx:choose>
+    </stx:variable>
+    
     <stx:template match="s:resources">
+        <stx:variable name="next">
+            <stx:choose>
+                <stx:when test="number($startIndex) + number($resultLimit) &lt; number(/s:resources/@size)">
+                    <stx:value-of select="number($startIndex) + number($resultLimit)"/>
+                </stx:when>
+                <stx:otherwise>false</stx:otherwise>
+            </stx:choose>
+        </stx:variable>
+        <stx:variable name="previous">
+            <stx:choose>
+                <stx:when test="number($startIndex) - number($resultLimit) >= 0">
+                    <stx:value-of select="number($startIndex) - number($resultLimit)"/>
+                </stx:when>
+                <stx:otherwise>false</stx:otherwise>
+            </stx:choose>
+        </stx:variable>
+        <stx:variable name="showAll">
+            <stx:choose>
+                <stx:when test="number(/s:resources/@size) > number($resultLimit) and $show != 'all'">true</stx:when>
+                <stx:otherwise>false</stx:otherwise>
+            </stx:choose>
+        </stx:variable>
         <stx:copy>
+            <stx:process-attributes/>
+            <stx:element name="pagination">
+                <stx:attribute name="currentIndex" select="$startIndex"/>                
+                <stx:attribute name="next" select="$next"/>                
+                <stx:attribute name="previous" select="$previous"/>                
+                <stx:attribute name="showAll" select="$showAll"/>                
+            </stx:element>
             <stx:process-children/>
         </stx:copy>
     </stx:template>
     
     <stx:template match="s:result">
         <stx:assign name="count" select="$count + 1"/>
-        <stx:if test="$show = '' or $show = 'all' or ($count &gt; number($show) and $count &lt; number($show) + 20)">
+        <stx:if test="$show = 'all' or ($count &gt; number($startIndex) and $count &lt;= number($startIndex) + $resultLimit)">
             <stx:copy>
+                <stx:process-attributes/>
                 <stx:process-children/>
             </stx:copy>
         </stx:if>

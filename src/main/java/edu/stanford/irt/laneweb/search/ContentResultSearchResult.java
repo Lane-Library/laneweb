@@ -70,6 +70,13 @@ public class ContentResultSearchResult implements SearchResult {
     }
 
     /**
+     * @return the resourceId
+     */
+    public String getResourceId() {
+        return this.resourceId;
+    }
+    
+    /**
      * @param resourceName
      *            the resourceName to set
      */
@@ -77,6 +84,13 @@ public class ContentResultSearchResult implements SearchResult {
         this.resourceName = resourceName;
     }
 
+    /**
+     * @return the resourceName
+     */
+    public String getResourceName() {
+        return this.resourceName;
+    }
+    
     /**
      * @param resourceHits
      *            the resourceHits to set
@@ -86,6 +100,13 @@ public class ContentResultSearchResult implements SearchResult {
     }
 
     /**
+     * @return the resourceHits
+     */
+    public String getResourceHits() {
+        return this.resourceHits;
+    }
+    
+    /**
      * @param resourceUrl
      *            the resourceUrl to set
      */
@@ -93,6 +114,20 @@ public class ContentResultSearchResult implements SearchResult {
         this.resourceUrl = resourceUrl;
     }
 
+    /**
+     * @return the resourceUrl
+     */
+    public String getResourceUrl() {
+        return this.resourceUrl;
+    }
+    
+    /**
+     * @return the publicationTitle from contentResult
+     */
+    public String getPublicationTitle() {
+        return this.contentResult.getPublicationTitle();
+    }
+    
     public int compareTo(SearchResult o) {
         int scoreCmp = o.getScore() - this.score;
         int titleCmp = this.sortTitle.compareTo(o.getSortTitle());

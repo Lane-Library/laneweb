@@ -39,6 +39,7 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
+                    <map:transform type="joost" src="${default-resources-base}/xsl/resource-paginator.stx"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -49,6 +50,7 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
+                    <map:transform type="joost" src="${default-resources-base}/xsl/resource-paginator.stx"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -59,6 +61,7 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
+                    <map:transform type="joost" src="${default-resources-base}/xsl/resource-paginator.stx"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>

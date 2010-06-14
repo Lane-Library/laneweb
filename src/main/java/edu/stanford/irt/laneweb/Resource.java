@@ -47,6 +47,8 @@ public interface Resource extends XMLizable {
 
     public static final String INSTRUCTION = "instruction";
 
+    public static final String RESOURCE = "resource";
+    
     public static final String RESOURCE_ID = "resourceId";
 
     public static final String RESOURCE_NAME = "resourceName";
@@ -73,7 +75,12 @@ public interface Resource extends XMLizable {
     
     public static final String QUERY = "query";
 
-//    public static final String NAMESPACE = "http://lane.stanford.edu/search-results/1.0";
-
     public static final String NAMESPACE = "http://lane.stanford.edu/resources/1.0";
+        
+    public static final String CONTENT_HIT_COUNTS = "contentHitCounts";
+    
+    public static final String JOURNALS = "journals";
+    
+    public static final String JOURNAL = "journal";
+    
 }

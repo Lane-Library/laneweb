@@ -3,60 +3,15 @@
     xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s"
     version="2.0">
-    
+
     <xsl:param name="show"/>
 
     <xsl:variable name="search-terms">
         <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
 
-    <!-- number of results to display per screen -->
-    <xsl:variable name="resultLimit" select="20"/>
-
-    <xsl:variable name="result-count">
-        <xsl:value-of select="count(//s:result)"/>
-    </xsl:variable>
-    
-    <xsl:variable name="current-set">
-        <xsl:choose>
-            <xsl:when test="$show">
-                <xsl:value-of select="$show"/>
-            </xsl:when>
-            <xsl:otherwise>0</xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-    
-    <xsl:variable name="next-set">
-        <xsl:choose>
-            <xsl:when test="number($current-set) + number($resultLimit) &lt; number($result-count)">
-                <xsl:value-of select="number($current-set) + number($resultLimit)"/>
-            </xsl:when>
-            <xsl:otherwise>false</xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-    
-    <xsl:variable name="prev-set">
-        <xsl:choose>
-            <xsl:when test="number($current-set) - number($resultLimit) >= 0">
-                <xsl:value-of select="number($current-set) - number($resultLimit)"/>
-            </xsl:when>
-            <xsl:otherwise>false</xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
-        
     <!-- number of result titles to return per resource; not enforced here, only used for when to build "more" links -->
     <xsl:variable name="moreResultsLimit">10</xsl:variable>
-
-    <xsl:variable name="viewableResults">
-        <xsl:choose>
-            <xsl:when test="$show = 'all'">
-                <xsl:copy-of select="//s:result"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:copy-of select="//s:result[position() &gt;= number($current-set) and position() &lt;= (number($current-set) + number($resultLimit))]"/>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:variable>
 
     <xsl:template match="/">
         <html>
@@ -65,18 +20,18 @@
             </head>
             <body>
                 <dl>
-                    <xsl:apply-templates select="$viewableResults/s:result"/>
+                    <xsl:apply-templates select="//s:result"/>
                 </dl>
                 <div id="results-nav">
-                    <span class="show"><xsl:value-of select="$current-set"/></span>
-                    <span class="result-count"><xsl:value-of select="$result-count"/></span>
-                    <span class="previous"><xsl:value-of select="$prev-set"/></span>
-                    <span class="next"><xsl:value-of select="$next-set"/></span>
-                    <span class="show-all"><xsl:if test="number($result-count) > number($resultLimit) and $show != 'all'">true</xsl:if></span>
+                    <span class="show"><xsl:value-of select="/s:resources/s:pagination/@currentIndex"/></span>
+                    <span class="result-count"><xsl:value-of select="/s:resources/@size"/></span>
+                    <span class="previous"><xsl:value-of select="/s:resources/s:pagination/@previous"/></span>
+                    <span class="next"><xsl:value-of select="/s:resources/s:pagination/@next"/></span>
+                    <span class="show-all"><xsl:value-of select="/s:resources/s:pagination/@showAll"/></span>
                 </div>
                 <div id="search-content-counts" style="display:none;">
                     <xsl:for-each
-                        select="//s:result[@type='searchContent' and not(s:resourceId=preceding-sibling::node()/s:resourceId)]">
+                        select="/s:resources/s:contentHitCounts/s:resource">
                         <span id="{s:resourceId}">
                             <a href="{s:resourceUrl}">
                                 <xsl:value-of select="s:resourceHits"/>
@@ -86,25 +41,25 @@
                 </div>
                 <div class="tooltips" style="display:none;">
                     <xsl:for-each
-                        select="$viewableResults/s:result/s:description|$viewableResults/s:result[not(s:description)]/s:title">
+                        select="//s:result/s:description|//s:result[not(s:description)]/s:title">
                         <xsl:call-template name="tooltip"/>
                     </xsl:for-each>
                 </div>
-                <xsl:if test="count(//s:result[starts-with(s:resourceName,'PubMed')]/s:pub-title) > 0">
+                <xsl:if test="count(/s:resources/s:journals/s:journal) > 0">
                     <span id="showPubMedStrategies" style="display:none;">true</span>
                     <ul id="pubmedJournalLinks">
-                        <xsl:for-each-group select="//s:result[starts-with(s:resourceName,'PubMed')]" group-by="s:pub-title">
-                            <xsl:sort select="count(//s:result/s:pub-title[. = current-grouping-key()])" order="descending" data-type="number"/>
-                            <xsl:sort select="current-grouping-key()" order="ascending" data-type="text"/>
+                        <xsl:for-each select="/s:resources/s:journals/s:journal[contains(@resourceId,'pubmed')]">
+                            <xsl:sort select="@resourceHits" order="descending" data-type="number"/>
+                            <xsl:sort select="@title" order="ascending" data-type="text"/>
                             <xsl:if test="position() &lt;= 10">
                                 <li>
                                     <a rel="popup standard"
-                                        href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{current-grouping-key()}&quot;[Journal]">
-                                        <xsl:value-of select="current-grouping-key()"/>
+                                        href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{@title}&quot;[Journal]">
+                                        <xsl:value-of select="@title"/>
                                     </a>
                                 </li>
                             </xsl:if>
-                        </xsl:for-each-group>
+                        </xsl:for-each>
                     </ul>
                 </xsl:if>
             </body>
