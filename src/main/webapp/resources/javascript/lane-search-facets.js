@@ -30,7 +30,7 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
         container = Y.one('#searchResults');
         facets = elt.all('.searchFacet');
         for (i = 0; i < facets.size(); i++) {
-            if (facets.item(i).get('id').match("Facet$")) {
+            if (facets.item(i).get('id').match("Facet$") && !facets.item(i).hasClass('inactiveFacet')) {
                 type = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('-'));
                 source = facets.item(i).get('id').substring(0, facets.item(i).get('id').indexOf('Facet'));
                 if (type) {

@@ -34,8 +34,8 @@ YUI().use('lane-search-result', 'node','io-base','json-parse',function(Y) {
                                 	hitLinkParent = hitLink.get('parentNode');
                                 	hitLinkParent.addClass('inactiveFacet');
                                 	hitLinkParent.removeClass('searchableFacet');
-                                	hitLinkParent.insert(Y.Node.create('<span> (0)</span>'));
-                                    hitLink.set('title','no search results for '+hitLink.get('innerHTML'));
+                                	hitLinkParent.insert(Y.Node.create(hitLink.get('innerHTML')));
+                                	hitLink.remove();
                                 }
                             }
                             sleepingTime = 2000;

@@ -109,35 +109,19 @@
                     </span>
                 </xsl:when>
                 <xsl:when test="number($hit-count) = 0 and $countFacetId != 'all'">
-                    <a href="{child::node()/@href}" title="no search results for {child::node()/text()}">
-                        <xsl:value-of select="child::node()/text()"/>
-                    </a> 
-                    <span> (0)</span>
+                    <xsl:value-of select="child::node()/text()"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="child::node()" />
                 </xsl:otherwise>
             </xsl:choose>
-            
-            <!-- uncomment to turn hit counts back on; also need to remove previous facetIdHitSpan
-                <span id="{$facetId}HitSpan">
-                <xsl:text> </xsl:text>
-                <xsl:if test="$hit-count !='NaN' and number($hit-count) != 0">
-                <xsl:value-of
-                select="format-number(number($hit-count),'###,###,##0')" />
-                </xsl:if>
-                </span>
-            -->            
         </xsl:copy>
     </xsl:template>
     
     <xsl:template match="h:span[@id='pubmedMoreStrategies']">
         <xsl:if test="//node()[@id='showPubMedStrategies']">
             <div class="rightSearchTips">
-                <h4>Additional Views of PubMed Results</h4>
-                <img style="padding:20px;" src="/graphics/logos/pubmed.jpg" alt="PubMed Logo"/>
-                
-                <h5>PubMed search strategies</h5>
+                <strong>PubMed searches</strong>
                 <ul>
                     <xsl:for-each select="//node()[contains(attribute::class,'searchFacet') and contains(attribute::id,'pubmed') and not(matches(attribute::id,'pubmed_guidelines|pubmed_cochrane_reviews'))]">
                         <xsl:apply-templates select="self::node()">
@@ -146,7 +130,7 @@
                     </xsl:for-each>
                 </ul>
                 <xsl:if test="//node()[@id='pubmedJournalLinks']">
-                    <h5>Related journals</h5>
+                    <strong>Related PubMed journals</strong>
                     <xsl:copy>
                         <xsl:copy-of select="self::node()" />
                         <xsl:copy-of select="//node()[@id='pubmedJournalLinks']"/>
