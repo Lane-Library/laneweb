@@ -125,7 +125,7 @@
                                 </xi:include>
                             </li>
                             <li>
-                                <select id="qlinks" style="margin:6px 0 0 40px;">
+                                <select id="qlinks">
                                     <option value="">Quick Links</option>
                                     <option value=""> ---------------- </option>
                                     <option
