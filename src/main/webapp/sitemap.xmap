@@ -100,7 +100,10 @@
                 <map:transform type="html-cme-links"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl"/>
                 <map:select type="ipgroup">
-                    <map:when test="ERR">
+                    <map:when test="PAVA">
+                        <map:transform type="joost" src="${default-resources-base}/xsl/proxy-yui.stx"/>
+                    </map:when>
+                    <map:when test="STAFF">
                         <map:transform type="joost" src="${default-resources-base}/xsl/proxy-yui.stx"/>
                     </map:when>
                 </map:select>
