@@ -8,10 +8,6 @@
     version="1.0"
     pass-through="all">
     
-    <stx:param name="base-path"/>
-    
-    <stx:param name="version"/>
-    
     <stx:template match="h:script[starts-with(@src,'http://yui')]">
         <stx:copy>
             <stx:process-attributes/>
@@ -27,11 +23,11 @@
     </stx:template>
     
     <stx:template match="@src">
-        <stx:attribute name="src"><stx:value-of select="concat($base-path,'/javascript/',$version,'/yui.js')"/></stx:attribute>
+        <stx:attribute name="src">/javascript/yui.js</stx:attribute>
     </stx:template>
     
     <stx:template match="@href">
-        <stx:attribute name="href"><stx:value-of select="concat($base-path,'/style/',$version,'/yui.css')"/></stx:attribute>
+        <stx:attribute name="href">/style/yui.css</stx:attribute>
     </stx:template>
     
 </stx:transform>
