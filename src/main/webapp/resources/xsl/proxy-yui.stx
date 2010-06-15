@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    rewrite yui urls to a local proxy
+-->
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    version="1.0"
+    pass-through="all">
+    
+    <stx:param name="base-path"/>
+    
+    <stx:param name="version"/>
+    
+    <stx:template match="h:script[starts-with(@src,'http://yui')]">
+        <stx:copy>
+            <stx:process-attributes/>
+            <stx:process-children/>
+        </stx:copy>
+    </stx:template>
+    
+    <stx:template match="h:link[starts-with(@href,'http://yui')]">
+        <stx:copy>
+            <stx:process-attributes/>
+            <stx:process-children/>
+        </stx:copy>
+    </stx:template>
+    
+    <stx:template match="@src">
+        <stx:attribute name="src"><stx:value-of select="concat($base-path,'/javascript/',$version,'/yui.js')"/></stx:attribute>
+    </stx:template>
+    
+    <stx:template match="@href">
+        <stx:attribute name="href"><stx:value-of select="concat($base-path,'/style/',$version,'/yui.css')"/></stx:attribute>
+    </stx:template>
+    
+</stx:transform>
