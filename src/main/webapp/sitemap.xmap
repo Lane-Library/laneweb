@@ -106,6 +106,9 @@
                     <map:when test="STAFF">
                         <map:transform type="joost" src="${default-resources-base}/xsl/proxy-yui.stx"/>
                     </map:when>
+                    <map:when test="SOM_OTHER">
+                        <map:transform type="joost" src="${default-resources-base}/xsl/proxy-yui.stx"/>
+                    </map:when>
                 </map:select>
                 <map:transform type="proxy-links">
                     <!-- use this base-path to redirect proxy auth to lane.stanford.edu -->
