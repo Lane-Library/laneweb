@@ -12,8 +12,6 @@
 }
 #laneNav li {
     float:left;
-    font-weight:bold;
-    font-size:13px;
 }
 #laneNav a {
     color:black;
@@ -21,8 +19,10 @@
     text-decoration:none;
     border-bottom:none;
     display:block;
+    font-weight:bold;
+    font-size:13px;
 }
-#laneNav a:hover, #laneNav .active a {
+#laneNav li:hover a, #laneNav .active a {
     background-color:white;
 }
 #laneNav ul {
@@ -37,13 +37,21 @@
 }
 #laneNav ul li {
     float:none;
-    font-weight:normal;
-    font-size:12px;
     width:190px;
+    padding:2px 10px;
 }
 #laneNav ul a {
-    padding:2px 10px;
-    color:#3F3C30;
+    display:inline;
+    font-weight:normal;
+    font-size:12px;
+    padding:0;
+    color: #565347;
+    border-bottom:1px dotted #81785A;
+}
+#laneNav ul a:hover {
+    color:#820000;
+    border-color:#820000;
+    border-bottom-style:solid;
 }
 #qlinks {
     margin:6px 0 0 40px;
