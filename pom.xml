@@ -121,6 +121,7 @@
                         <include>expandies-min.css</include>
                         <include>buttons-min.css</include>
                         <include>breadcrumb-form-min.css</include>
+                        <include>tutorials-min.css</include>
                         <!--<include>colors-min.css</include>
                         <include>simple-module-min.css</include>
                         <include>narrow-module-min.css</include>

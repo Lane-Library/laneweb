@@ -1,0 +1,49 @@
+.tutorial li {
+    list-style:none;
+    border-top:1px #DBD3C3 solid;
+    margin-left:0px;
+    padding-top:16px;
+}
+.tutorial li:after {
+    content:".";
+    display:block;
+    clear:both;
+    visibility:hidden;
+}
+.tutorial li:first-child {
+    border-top:none;
+}
+.tutorial .item-number {
+    color:#DBD3C3;
+    font-size:30px;
+    font-weight:bold;
+    font-family:Georgia,"Times New Roman",Times,serif;
+    float:left;
+    width:30px;
+    margin-top: -11px;
+}
+.tutorial .item {
+    float:left;
+    width:491px;
+}
+.tutorial .yui-u.first {
+    width:59%;
+}
+.tutorial .yui-u {
+    width:39%;
+}
+.tutorial h4 {
+    line-height:12px;
+    margin-bottom:10px;
+}
+.tutorial li li {
+    border-top:none;
+    list-style:disc outside url("/././images/raquo.gif");
+    margin-left:15px;
+    padding-top:0;
+}
+.tutorial li li:after {
+    content:"";
+    display:none;
+    clear:none;
+}
