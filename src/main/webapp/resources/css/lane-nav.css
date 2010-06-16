@@ -31,6 +31,7 @@
     position:absolute;
     border:1px #D6D5C7 solid;
     border-top:none;
+    padding-bottom:6px;
 }
 #laneNav li:hover ul, #laneNav .hover ul {
     display:block;
@@ -55,4 +56,11 @@
 }
 #qlinks {
     margin:6px 0 0 40px;
+}
+#laneNav #specialties-menu {
+    width:340px;
+}
+#laneNav #specialties-menu li {
+    float:left;
+    width:150px;
 }
