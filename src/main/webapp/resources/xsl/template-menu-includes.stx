@@ -16,12 +16,18 @@
         
         <stx:template match="h:ul[@class='sectionMenu']">
             <stx:copy>
+                <stx:process-attributes group="include"/>
                 <stx:process-children group="include"/>
             </stx:copy>
         </stx:template>
         
     </stx:group>
     
-    <stx:group name="include" pass-through="all"/>
+    <stx:group name="include" pass-through="all">
+        
+        <!-- remove class="sectionMenu" -->
+        <stx:template match="h:ul/@class"/>
+        
+    </stx:group>
     
 </stx:transform>
