@@ -23,11 +23,11 @@
     </stx:template>
     
     <stx:template match="@src">
-        <stx:attribute name="src">/javascript/yui.js</stx:attribute>
+        <stx:attribute name="src">/javascript/yui.js?<stx:value-of select="substring-after(.,'?')"/></stx:attribute>
     </stx:template>
     
     <stx:template match="@href">
-        <stx:attribute name="href">/style/yui.css</stx:attribute>
+        <stx:attribute name="href">/style/yui.css?<stx:value-of select="substring-after(.,'?')"/></stx:attribute>
     </stx:template>
     
 </stx:transform>

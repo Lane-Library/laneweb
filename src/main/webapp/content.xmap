@@ -186,7 +186,7 @@
                     <map:when test="PAVA">
                         <map:transform type="joost" src="${default-resources-base}/xsl/proxy-yui.stx"/>
                     </map:when>
-                    <map:when test="STAFF">
+                    <map:when test="SHC">
                         <map:transform type="joost" src="${default-resources-base}/xsl/proxy-yui.stx"/>
                     </map:when>
                 </map:select>
