@@ -4,7 +4,7 @@
         <title>LaneConnex - Lane Medical Library &amp; Knowledge Management Center - Stanford
             University School of Medicine</title>
         <link rel="stylesheet" type="text/css"
-            href="http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css&amp;2.8.0r4/build/container/assets/skins/sam/container.css"/>
+            href="http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css"/>
         <link rel="stylesheet" type="text/css" href="/style/lane-all.css"/>
         <link rel="search" type="application/opensearchdescription+xml" title="LaneConnex"
             href="/extensions/laneconnex-engine.xml"/>
