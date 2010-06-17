@@ -377,7 +377,7 @@
             <a rel="popup standard" href="http://www.ncbi.nlm.nih.gov/pubmed/{.}?otool=stanford"><xsl:value-of select="."/></a>
         </span>
     </xsl:template>
-    
+
     <xsl:template match="s:keyword">
         <strong>
             <xsl:value-of select="."/>
@@ -389,6 +389,7 @@
             <div class="results-nav">
                 <span class="show"><xsl:value-of select="/s:resources/s:pagination/@currentIndex"/></span>
                 <span class="result-count"><xsl:value-of select="/s:resources/@size"/></span>
+                <span class="result-limit"><xsl:value-of select="/s:resources/s:pagination/@resultLimit"/></span>
                 <span class="previous"><xsl:value-of select="/s:resources/s:pagination/@previous"/></span>
                 <span class="next"><xsl:value-of select="/s:resources/s:pagination/@next"/></span>
                 <span class="show-all"><xsl:value-of select="/s:resources/s:pagination/@showAll"/></span>
