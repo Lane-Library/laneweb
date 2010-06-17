@@ -370,15 +370,14 @@
         <xsl:text>.</xsl:text>
     </xsl:template>
 
-    <xsl:template match="s:contentId">
+    <xsl:template match="s:contentId[contains(../s:resourceId,'pubmed')]">
         <xsl:text> - </xsl:text>
         <span class="pmid">
-            <xsl:text> </xsl:text>
-            <xsl:if test="contains(../s:resourceId,'pubmed')">PMID:</xsl:if>
-            <xsl:value-of select="."/>
+            <xsl:text> PMID:</xsl:text>
+            <a rel="popup standard" href="http://www.ncbi.nlm.nih.gov/pubmed/{.}?otool=stanford"><xsl:value-of select="."/></a>
         </span>
     </xsl:template>
-
+    
     <xsl:template match="s:keyword">
         <strong>
             <xsl:value-of select="."/>
