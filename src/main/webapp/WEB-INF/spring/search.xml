@@ -43,7 +43,7 @@
         class="edu.stanford.irt.laneweb.search.ContentSearchGenerator"
         parent="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator">
         <property name="defaultTimeout" value="20000"/>
-        <property name="contentResultLimit" value="10"/>
+        <property name="contentResultLimit" value="20"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/search-engine"

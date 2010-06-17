@@ -12,7 +12,7 @@
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
         <property name="defaultTimeout" value="20000"/>
-        <property name="contentResultLimit" value="10"/>
+        <property name="contentResultLimit" value="20"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/merged-history-search"
@@ -23,7 +23,7 @@
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
         <property name="defaultTimeout" value="20000"/>
-        <property name="contentResultLimit" value="10"/>
+        <property name="contentResultLimit" value="20"/>
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/query-highlighting"
