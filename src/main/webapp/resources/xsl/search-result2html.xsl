@@ -386,7 +386,7 @@
     </xsl:template>
 
     <xsl:template name="paginationLinks">
-        <xsl:if test="/s:resources/@size > /s:resources/s:pagination/@resultLimit">
+        <xsl:if test="number(/s:resources/@size) > number(/s:resources/s:pagination/@resultLimit)">
             <div class="results-nav">
                 <span class="show"><xsl:value-of select="/s:resources/s:pagination/@currentIndex"/></span>
                 <span class="result-count"><xsl:value-of select="/s:resources/@size"/></span>
