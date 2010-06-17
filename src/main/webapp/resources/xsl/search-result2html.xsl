@@ -3,6 +3,8 @@
     xmlns:h="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml"
     xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s"
     version="2.0">
+    
+    <xsl:param name="request-uri"/>
 
     <xsl:variable name="search-terms">
         <xsl:value-of select="/s:resources/s:query"/>
@@ -17,16 +19,13 @@
                 <title>search results</title>
             </head>
             <body>
+                <xsl:if test="contains($request-uri,'biomed-resources')">
+                    <xsl:call-template name="paginationLinks"/>
+                </xsl:if>
                 <dl>
                     <xsl:apply-templates select="//s:result"/>
                 </dl>
-                <div id="results-nav">
-                    <span class="show"><xsl:value-of select="/s:resources/s:pagination/@currentIndex"/></span>
-                    <span class="result-count"><xsl:value-of select="/s:resources/@size"/></span>
-                    <span class="previous"><xsl:value-of select="/s:resources/s:pagination/@previous"/></span>
-                    <span class="next"><xsl:value-of select="/s:resources/s:pagination/@next"/></span>
-                    <span class="show-all"><xsl:value-of select="/s:resources/s:pagination/@showAll"/></span>
-                </div>
+                <xsl:call-template name="paginationLinks"/>
                 <div id="search-content-counts" style="display:none;">
                     <xsl:for-each
                         select="/s:resources/s:contentHitCounts/s:resource">
@@ -384,6 +383,18 @@
         <strong>
             <xsl:value-of select="."/>
         </strong>
+    </xsl:template>
+
+    <xsl:template name="paginationLinks">
+        <xsl:if test="/s:resources/@size > /s:resources/s:pagination/@resultLimit">
+            <div class="results-nav">
+                <span class="show"><xsl:value-of select="/s:resources/s:pagination/@currentIndex"/></span>
+                <span class="result-count"><xsl:value-of select="/s:resources/@size"/></span>
+                <span class="previous"><xsl:value-of select="/s:resources/s:pagination/@previous"/></span>
+                <span class="next"><xsl:value-of select="/s:resources/s:pagination/@next"/></span>
+                <span class="show-all"><xsl:value-of select="/s:resources/s:pagination/@showAll"/></span>
+            </div>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>

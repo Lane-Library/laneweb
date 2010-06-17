@@ -310,7 +310,7 @@
     <xsl:template match="attribute::href[starts-with(.,'mailto:')]"/>
 
     <!-- add Previous, Next, All toggles to search results -->
-    <xsl:template match="h:div[@id='results-nav']">
+    <xsl:template match="h:div[@class='results-nav']">
         <xsl:variable name="consumable-request-uri">
             <xsl:value-of select="replace($request-uri,'/plain.*\.html','/search.html')"/>
         </xsl:variable>

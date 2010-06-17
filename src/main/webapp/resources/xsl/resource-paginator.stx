@@ -44,6 +44,7 @@
         <stx:copy>
             <stx:process-attributes/>
             <stx:element name="pagination">
+                <stx:attribute name="resultLimit" select="$resultLimit"/>                
                 <stx:attribute name="currentIndex" select="$startIndex"/>                
                 <stx:attribute name="next" select="$next"/>                
                 <stx:attribute name="previous" select="$previous"/>                
