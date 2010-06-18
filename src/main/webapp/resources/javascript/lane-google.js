@@ -39,7 +39,12 @@ YUI().use('lane-tracking','lane-suggest','node', function(Y) {
     });
     Y.Global.on("lane:searchOptions",  function(event) {
     	if (gaPageTracker !== undefined) {
-    		gaPageTracker._trackEvent(event.type, "Options", event.action);
+    		gaPageTracker._trackEvent(event.type, "changeOptions", event.action);
+    	}
+    });
+    Y.Global.on("lane:searchFacets",  function(event) {
+    	if (gaPageTracker !== undefined) {
+    		gaPageTracker._trackEvent(event.type, "facetClick", event.facetName);
     	}
     });
 

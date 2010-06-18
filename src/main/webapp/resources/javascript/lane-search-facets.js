@@ -1,5 +1,10 @@
 YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-custom','history','io-base', function(Y) {
     LANE.namespace('search.facets');
+	Y.publish("lane:searchFacets",{
+		broadcast:2,
+		emitFacade: true,
+		facetName:null
+	});
     LANE.search.facets = function(){
         var currentResult;
         return {
@@ -49,6 +54,9 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
                         	result.show();
                         }
                         event.preventDefault();
+        		        Y.fire("lane:searchFacets",{
+        		        	facetName:this.get('textContent')
+        		        });
                     }, facets.item(i));
                 }
             }
