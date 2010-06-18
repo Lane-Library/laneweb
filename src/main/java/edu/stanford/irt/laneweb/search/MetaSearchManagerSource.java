@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractXmlApplicationContext;
@@ -50,10 +51,9 @@ public class MetaSearchManagerSource {
     public void reload(final String url, final String login, final String password) {
         try {
             AbstractXmlApplicationContext context = new HttpApplicationContext(url, login, password);
-            this.manager = (MetaSearchManager) context.getBean("manager");
-            this.httpClient = (HttpClient) context.getBean("httpClient");
-            this.context.destroy();
-            this.context = context;
+            this.manager = (MetaSearchManager)context.getBean("manager");
+            this.httpClient.setState(new HttpState());
+            
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }

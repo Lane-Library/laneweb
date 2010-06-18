@@ -68,8 +68,8 @@
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
         <property name="svnUrlProject"
-            value="https://irt-svn.stanford.edu/repos/irt/lane/search/tags/search-spring-"/>
-        <property name="svnUrlPath" value="/src/main/resources/spring/metasearch.xml"/>
+            value="https://irt-svn.stanford.edu/repos/irt/lane/search/tags/search-lane-"/>
+        <property name="svnUrlPath" value="/src/main/resources/spring/engines.xml"/>
     </bean>
 
     
