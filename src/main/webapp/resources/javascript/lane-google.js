@@ -1,35 +1,41 @@
-YUI().use('lane-tracking', 'node', function(Y) {
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+YUI().use('lane-tracking','lane-suggest','node', function(Y) {
+    var gaPageTracker, gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
             var host = document.location.host,
-                i, l, meta, pageTracker;
+                i, l, meta;
             if (_gat !== undefined) {
                 if (host.match("lane.stanford.edu")) {
-                    pageTracker = _gat._getTracker("UA-3202241-2");
+                	gaPageTracker = _gat._createTracker("UA-3202241-2","gaPageTracker");
                 } else if (host.match("lane-beta.stanford.edu")) {
-                    pageTracker = _gat._getTracker("UA-3203486-9");
+                	gaPageTracker = _gat._createTracker("UA-3203486-9","gaPageTracker");
                 } else {
-                    pageTracker = _gat._getTracker("UA-3203486-2");
+                	gaPageTracker = _gat._createTracker("UA-3203486-2","gaPageTracker");
                 }
                 //uncomment this for testing/debugging:
-                //pageTracker._setLocalServerMode();
-                pageTracker._setDomainName(".stanford.edu");
-                pageTracker._trackPageview();
+                //gaPageTracker._setLocalServerMode();
+                gaPageTracker._setDomainName(".stanford.edu");
+                gaPageTracker._trackPageview();
                 meta = Y.one('html head meta[name="WT.seg_1"]');
                 if (meta) {
-                    pageTracker._setVar(meta.get('content'));
+                	gaPageTracker._setVar(meta.get('content'));
                 }
                 LANE.tracking.addTracker({
                     track: function(trackingData) {
                         if (trackingData.external) {
-                            pageTracker._trackPageview('/OFFSITE/' + encodeURIComponent(trackingData.title));
+                        	gaPageTracker._trackPageview('/OFFSITE/' + encodeURIComponent(trackingData.title));
                         } else {
-                            pageTracker._trackPageview('/ONSITE/' + encodeURIComponent(trackingData.title) + '/' + trackingData.path);
+                        	gaPageTracker._trackPageview('/ONSITE/' + encodeURIComponent(trackingData.title) + '/' + trackingData.path);
                         }
                     }
                 });
             }
         }
     });
+    Y.Global.on("lane:suggestSelect",  function(event) {
+        if (gaPageTracker !== undefined) {
+        	gaPageTracker._trackEvent(event.type, event.parentForm.source.value, event.suggestion);
+        }
+    });
+
 });

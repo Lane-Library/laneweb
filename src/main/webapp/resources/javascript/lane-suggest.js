@@ -351,6 +351,7 @@ YUI().add('lane-suggest', function (Y) {
             };
         	this.publish("lane:suggestSelect",{
         		broadcast:2,
+        		emitFacade: true,
         		suggestion:null,
         		parentForm:null
     		});
