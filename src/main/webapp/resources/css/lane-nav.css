@@ -39,7 +39,7 @@
 #laneNav ul li {
     float:none;
     width:190px;
-    padding:2px 2px 2px 18px;
+    padding:2px 0 2px 20px;
 }
 #laneNav ul a {
     display:inline;
