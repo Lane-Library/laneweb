@@ -2,7 +2,12 @@
  * adds and animates show/hide toggle for search results
  * 
  */
-YUI().use('node-base','anim', function(Y) {
+YUI().use('node-base','anim','event-custom', function(Y) {
+	Y.publish("lane:searchOptions",{
+		broadcast:2,
+		emitFacade: true,
+		action:null
+	});
 	var options = Y.Node.create('<span id="optionsToggle" class="closed"><a href="">Hide Options</a></span>'),
 		optionsNode = Y.one("#searchOptions"),
 //		leftGrids = Y.one(".leftGrids"),
@@ -63,12 +68,18 @@ YUI().use('node-base','anim', function(Y) {
 				parent.removeClass("closed");
 				this.set('innerHTML', 'Show Options');
 				parent.addClass("open");
+		        Y.fire("lane:searchOptions",{
+		        	action:"hide"
+		        });
 			} else {
 				openResultsContainerAnim.run();
 				openResultsAnim.run();
 				parent.removeClass("open");
 				this.set('innerHTML', 'Hide Options');
 				parent.addClass("closed");
+		        Y.fire("lane:searchOptions",{
+		        	action:"show"
+		        });
 			}
 			e.preventDefault();
 //		},
@@ -100,4 +111,5 @@ YUI().use('node-base','anim', function(Y) {
 		optionsNode.insert(options);
 		options.one("a").on("click", onControlClick);
 	}
+
 });

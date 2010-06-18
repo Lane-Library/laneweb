@@ -37,5 +37,10 @@ YUI().use('lane-tracking','lane-suggest','node', function(Y) {
         	gaPageTracker._trackEvent(event.type, event.parentForm.source.value, event.suggestion);
         }
     });
+    Y.Global.on("lane:searchOptions",  function(event) {
+    	if (gaPageTracker !== undefined) {
+    		gaPageTracker._trackEvent(event.type, "Options", event.action);
+    	}
+    });
 
 });
