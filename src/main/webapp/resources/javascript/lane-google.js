@@ -47,5 +47,10 @@ YUI().use('lane-tracking','lane-suggest','node', function(Y) {
     		gaPageTracker._trackEvent(event.type, "facetClick", event.facetName);
     	}
     });
+    Y.Global.on("lane:quickLinks",  function(event) {
+    	if (gaPageTracker !== undefined) {
+    		gaPageTracker._trackEvent(event.type, "quickLinkClick", event.linkName);
+    	}
+    });
 
 });

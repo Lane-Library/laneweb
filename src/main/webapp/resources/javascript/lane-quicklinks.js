@@ -1,10 +1,20 @@
-YUI().use('node', function(Y) {
+YUI().use('node','event-custom', function(Y) {
+	Y.publish("lane:quickLinks",{
+		broadcast:2,
+		emitFacade: true,
+		linkName:null
+	});
 	var qlNode = Y.one('#qlinks'), qlOptions = qlNode.all("option");
 	qlNode.on('change', function() {
 		var i = qlNode.get('selectedIndex'), v = qlOptions.item(i).get('value');
 		if (i && v) {
-			// TODO: add tracking
-			window.location = v;
+	        function f(){
+	        	window.location.href = v;
+	        }
+	        Y.fire("lane:quickLinks",{
+	        	linkName:qlOptions.item(i).get('textContent')
+	        });
+	        setTimeout(f,200); // delay for tracking
 		}
 	});
 });
