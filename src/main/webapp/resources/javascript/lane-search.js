@@ -4,6 +4,7 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
             form = Y.one('#search'), //the form Element
             searchSourceSelect = form.one('#searchSource'),
             searchOptions = searchSourceSelect.all('option'),
+            searchTipsLink = Y.one('#searchTips'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
             searchIndicator = new Y.lane.SearchIndicator(),
             searchTextInput = new Y.lane.TextInput(form.one('#searchTerms')),
@@ -26,7 +27,9 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
         Y.on('lane:searchSourceChange', function() {
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex'));
             searchTextInput.setHintText(selectedOption.get('title'));
+            searchTipsLink.set('href',searchTipsLink.get('href').replace(/#.*/,'#'+searchSourceSelect.get('value')));
         });
+    	searchTipsLink.set('href',searchTipsLink.get('href')+'#'+searchSourceSelect.get('value'));
         searchTextInput.setHintText(selectedOption.get('title'));
         searchSourceSelect.on('change', function(e) {
             if (searchTermsPresent()) {
