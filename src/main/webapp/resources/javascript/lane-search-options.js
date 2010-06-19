@@ -3,7 +3,7 @@
  * 
  */
 YUI().use('node-base','anim','event-custom', function(Y) {
-	Y.publish("lane:searchOptions",{
+	Y.publish("lane:searchOptionsChange",{
 		broadcast:2,
 		emitFacade: true,
 		action:null
@@ -68,7 +68,7 @@ YUI().use('node-base','anim','event-custom', function(Y) {
 				parent.removeClass("closed");
 				this.set('innerHTML', 'Show Options');
 				parent.addClass("open");
-		        Y.fire("lane:searchOptions",{
+		        Y.fire("lane:searchOptionsChange",{
 		        	action:"hide"
 		        });
 			} else {
@@ -77,7 +77,7 @@ YUI().use('node-base','anim','event-custom', function(Y) {
 				parent.removeClass("open");
 				this.set('innerHTML', 'Hide Options');
 				parent.addClass("closed");
-		        Y.fire("lane:searchOptions",{
+		        Y.fire("lane:searchOptionsChange",{
 		        	action:"show"
 		        });
 			}

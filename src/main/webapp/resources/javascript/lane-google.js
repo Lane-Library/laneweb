@@ -37,19 +37,24 @@ YUI().use('lane-tracking','lane-suggest','node', function(Y) {
         	gaPageTracker._trackEvent(event.type, event.parentForm.source.value, event.suggestion);
         }
     });
-    Y.Global.on("lane:searchOptions",  function(event) {
+    Y.Global.on("lane:searchOptionsChange",  function(event) {
     	if (gaPageTracker !== undefined) {
-    		gaPageTracker._trackEvent(event.type, "changeOptions", event.action);
+    		gaPageTracker._trackEvent(event.type, event.action);
     	}
     });
-    Y.Global.on("lane:searchFacets",  function(event) {
+    Y.Global.on("lane:searchFacetClick",  function(event) {
     	if (gaPageTracker !== undefined) {
-    		gaPageTracker._trackEvent(event.type, "facetClick", event.facetName);
+    		gaPageTracker._trackEvent(event.type, event.facetName, event.searchTerms);
     	}
     });
-    Y.Global.on("lane:quickLinks",  function(event) {
+    Y.Global.on("lane:quickLinkClick",  function(event) {
     	if (gaPageTracker !== undefined) {
-    		gaPageTracker._trackEvent(event.type, "quickLinkClick", event.linkName);
+    		gaPageTracker._trackEvent(event.type, event.linkName);
+    	}
+    });
+    Y.Global.on("lane:searchResultClick",  function(event) {
+    	if (gaPageTracker !== undefined) {
+    		gaPageTracker._trackEvent(event.type, event.searchTerms, event.resultTitle, event.resultPosition);
     	}
     });
 

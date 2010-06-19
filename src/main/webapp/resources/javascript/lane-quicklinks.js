@@ -1,5 +1,5 @@
 YUI().use('node','event-custom', function(Y) {
-	Y.publish("lane:quickLinks",{
+	Y.publish("lane:quickLinkClick",{
 		broadcast:2,
 		emitFacade: true,
 		linkName:null
@@ -11,7 +11,7 @@ YUI().use('node','event-custom', function(Y) {
 	        function f(){
 	        	window.location.href = v;
 	        }
-	        Y.fire("lane:quickLinks",{
+	        Y.fire("lane:quickLinkClick",{
 	        	linkName:qlOptions.item(i).get('textContent')
 	        });
 	        setTimeout(f,200); // delay for tracking

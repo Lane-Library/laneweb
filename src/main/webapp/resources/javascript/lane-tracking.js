@@ -157,9 +157,9 @@ YUI.add('lane-tracking',function(Y) {
                         documentHost = documentHost.substring(0, documentHost.indexOf(':'));
                     }
                     if (event.type == 'click') {
-                        if (event.target.hasClass('searchFacet')) {
-                            return true;
-                        }
+//                        if (event.target.hasClass('searchFacet')) {
+//                            return true;
+//                        }
                         if (event.target.hasClass('yui3-accordion-item-trigger')) {
                             return true;
                         }
@@ -169,6 +169,22 @@ YUI.add('lane-tracking',function(Y) {
                             link = link.get('parentNode');
                         }
                         if (link) {
+                        	// for search result event tracking
+                        	if(link.ancestor(".lwSearchResults")){
+                            	Y.publish("lane:searchResultClick",{
+                            		broadcast:2,
+                            		emitFacade: true,
+                            		searchTerms:null,
+                            		resultTitle:null,
+                            		resultPosition:null
+                            	});
+                		        Y.fire("lane:searchResultClick",{
+                		        	searchTerms:Y.lane.SearchResult.getSearchTerms(),
+                		        	resultTitle:getTrackedTitle(link),
+                		        	resultPosition:parseInt(link.ancestor('dd').get('className').replace(/r-/,''))
+                		        });
+
+                        	}
                             //for popups:
                             rel = link.get('rel');
                             if (rel && rel.indexOf('popup ') === 0) {

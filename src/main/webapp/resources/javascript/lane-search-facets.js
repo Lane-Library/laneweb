@@ -1,8 +1,9 @@
 YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-custom','history','io-base', function(Y) {
     LANE.namespace('search.facets');
-	Y.publish("lane:searchFacets",{
+	Y.publish("lane:searchFacetClick",{
 		broadcast:2,
 		emitFacade: true,
+		searchTerms:null,
 		facetName:null
 	});
     LANE.search.facets = function(){
@@ -54,8 +55,9 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
                         	result.show();
                         }
                         event.preventDefault();
-        		        Y.fire("lane:searchFacets",{
-        		        	facetName:this.get('textContent')
+        		        Y.fire("lane:searchFacetClick",{
+        		        	facetName:this.get('textContent'),
+        		        	searchTerms:Y.lane.SearchResult.getSearchTerms()
         		        });
                     }, facets.item(i));
                 }

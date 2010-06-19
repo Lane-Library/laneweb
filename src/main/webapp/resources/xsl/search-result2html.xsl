@@ -22,7 +22,7 @@
                 <xsl:if test="contains($request-uri,'biomed-resources')">
                     <xsl:call-template name="paginationLinks"/>
                 </xsl:if>
-                <dl>
+                <dl class="lwSearchResults">
                     <xsl:apply-templates select="//s:result"/>
                 </dl>
                 <xsl:call-template name="paginationLinks"/>
@@ -74,7 +74,7 @@
             </xsl:choose>
         </xsl:variable>
 
-        <dd>
+        <dd class="r-{/s:resources/s:pagination/@currentIndex + position()}">
             <ul>
                 <li>
                     <a class="primaryLink" title="{s:title}" href="{s:url}"
@@ -123,7 +123,7 @@
 
     <!-- tranforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
-        <dd>
+        <dd class="r-{/s:resources/s:pagination/@currentIndex + position()}">
             <ul>
                 <li>
                     <xsl:choose>
