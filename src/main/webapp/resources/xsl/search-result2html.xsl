@@ -74,8 +74,8 @@
             </xsl:choose>
         </xsl:variable>
 
-        <dd class="r-{/s:resources/s:pagination/@currentIndex + position()}">
-            <ul>
+        <dd>
+            <ul class="r-{/s:resources/s:pagination/@currentIndex + position()}">
                 <li>
                     <a class="primaryLink" title="{s:title}" href="{s:url}"
                         id="{s:id}" rel="popup standard">
@@ -123,8 +123,8 @@
 
     <!-- tranforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
-        <dd class="r-{/s:resources/s:pagination/@currentIndex + position()}">
-            <ul>
+        <dd><!--FIXME not sure why <dd> is stripped only for eresoruces ... search-post? -->
+            <ul class="r-{/s:resources/s:pagination/@currentIndex + position()}">
                 <li>
                     <xsl:choose>
                         <xsl:when

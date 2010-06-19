@@ -181,7 +181,7 @@ YUI.add('lane-tracking',function(Y) {
                 		        Y.fire("lane:searchResultClick",{
                 		        	searchTerms:Y.lane.SearchResult.getSearchTerms(),
                 		        	resultTitle:getTrackedTitle(link),
-                		        	resultPosition:parseInt(link.ancestor('dd').get('className').replace(/r-/,''))
+                		        	resultPosition:parseInt(link.ancestor('ul').get('className').replace(/r-/,''))
                 		        });
 
                         	}
