@@ -54,7 +54,7 @@ YUI().use('lane-tracking','lane-suggest','node', function(Y) {
     });
     Y.Global.on("lane:searchResultClick",  function(event) {
     	if (gaPageTracker !== undefined) {
-    		gaPageTracker._trackEvent(event.type, event.searchTerms, event.resultTitle, event.resultPosition);
+    		gaPageTracker._trackEvent(event.type, event.searchTerms||"browse", event.resultTitle, event.resultPosition);
     	}
     });
 
