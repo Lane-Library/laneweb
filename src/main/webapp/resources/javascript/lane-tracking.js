@@ -36,12 +36,8 @@ YUI.add('lane-tracking',function(Y) {
                     }
                 }
                 //next get the text content before any nested markup
-                //TODO:textContent?
                 if (!title) {
-                    title = node.get('innerHTML');
-                    if (title && title.indexOf('<') > -1) {
-                        title = title.substring(0, title.indexOf('<'));
-                    }
+                    title = node.get('textContent');
                 }
                 if (title) {
                     //trim and normalize:
@@ -49,7 +45,7 @@ YUI.add('lane-tracking',function(Y) {
                 }
                 //finally:
                 if (!title) {
-                    title = 'unknown';
+                	title = 'unknown';
                 }
                 if (node.hasClass('yui3-accordion-item-trigger')) {
                     title = 'Expandy:' + title;
