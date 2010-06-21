@@ -22,17 +22,6 @@
         </layout>
     </appender>-->
     
-    <!-- temporary appender for session creation log -->
-    <appender name="sessions" class="org.apache.log4j.RollingFileAppender">
-        <param name="File" value="${catalina.base}/logs/sessions.log"/>
-        <param name="Append" value="true"/>
-        <param name="MaxFileSize" value="10MB"/>
-        <param name="MaxBackupIndex" value="10"/>
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d %p [%t][%c] - %m%n"/>
-        </layout>
-    </appender>
-    
     <!--<appender name="VOYAGER" class="org.apache.log4j.net.SMTPAppender">
         <param name="Threshold" value="ERROR"/>
         <param name="To" value="ryanmax@stanford.edu"/>
@@ -57,14 +46,8 @@
         <appender-ref ref="headers"/>
         </category>-->
     
-    <!-- temporary category for session creation log -->
-    <category name="javax.servlet.http.HttpSession" additivity="false">
-        <priority value="INFO"/>
-        <appender-ref ref="sessions"/>
-    </category>
-    
     <root>
-        <priority value="INFO"/>
+        <priority value="ERROR"/>
         <appender-ref ref="LOG"/>
     </root>
     
