@@ -336,7 +336,7 @@
                 <a href="{concat($base-link,h:span[@class='next'])}">Next</a>
             </xsl:if>
             <xsl:if test="h:span[@class='show-all'] = 'true'">
-                <a href="{concat($base-link,'all')}">Show All</a>
+                <a href="{concat($base-link,'all')}">Show All <xsl:value-of select="format-number(h:span[@class='result-count'], '###,##0')"/> Results</a>
             </xsl:if>
         </div>
     </xsl:template>
