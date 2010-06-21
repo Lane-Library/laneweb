@@ -13,7 +13,9 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     private static final String URL = "&url=";
 
-    private static final String WEBAUTH_LINK = "/secure/apps/proxy/credential?url=";
+    //FIXME: temporarily route proxy links through prod; revert before going live or once lane-beta cert in place 
+    //private static final String WEBAUTH_LINK = "/secure/apps/proxy/credential?url=";
+    private static final String WEBAUTH_LINK = "http://lane.stanford.edu/secure/login.html?url=";
 
     private String basePath;
 
