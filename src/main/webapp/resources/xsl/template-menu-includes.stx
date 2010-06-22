@@ -28,6 +28,18 @@
         <!-- remove class="sectionMenu" -->
         <stx:template match="h:ul/@class"/>
         
+        <stx:template match="h:a">
+            <stx:copy>
+                <stx:attribute name="href">
+                    <stx:value-of select="@href"/>
+                    <stx:if test="starts-with(@href,'/')">
+                        <stx:value-of select="'?laneNav=1'"/>
+                    </stx:if>
+                </stx:attribute>
+                <stx:process-children/>
+            </stx:copy>
+        </stx:template>
+        
     </stx:group>
     
 </stx:transform>

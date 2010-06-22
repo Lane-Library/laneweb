@@ -32,6 +32,45 @@ YUI().use('lane-tracking','lane-suggest','node', function(Y) {
             }
         }
     });
+        
+        // for search result event tracking
+    Y.publish("lane:searchResultClick",{
+        broadcast:2,
+        emitFacade: true,
+        searchTerms:null,
+        resultTitle:null,
+        resultPosition:null
+    });
+    Y.publish("lane:browseResultClick",{
+        broadcast:2,
+        emitFacade: true,
+        resultTitle:null,
+        resultPosition:null
+    });
+    Y.on("click", function(event) {
+        
+        var link = event.target;
+        while (link && link.get('nodeName') != 'A') {
+            link = link.get('parentNode');
+        }
+        if (link) {
+            if (link.ancestor(".lwSearchResults")) {
+                if (Y.lane.SearchResult.getSearchTerms()) {
+                    Y.fire("lane:searchResultClick", {
+                        searchTerms: Y.lane.SearchResult.getSearchTerms(),
+                        resultTitle: getTrackedTitle(link),
+                        resultPosition: parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10)
+                    });
+                } else {
+                    Y.fire("lane:browseResultClick", {
+                        resultTitle: getTrackedTitle(link),
+                        resultPosition: parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10)
+                    });
+                }
+            }
+        }
+    }, document);
+        
     Y.Global.on("lane:suggestSelect",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.type, event.parentForm.source.value, event.suggestion);

@@ -48,6 +48,8 @@ YUI.add('lane-tracking',function(Y) {
                 }
                 if (node.hasClass('yui3-accordion-item-trigger')) {
                     title = 'Expandy:' + title;
+                } else if (node.ancestor("#laneNav")) {
+                    title = "laneNav: " + title;
                 }
                 return title;
             },
@@ -155,19 +157,6 @@ YUI.add('lane-tracking',function(Y) {
                         if (event.target.hasClass('searchFacet')) {
                             return true;
                         }
-                        if (event.target.ancestor('#laneNav')) {
-                            if(getTrackingData(event).external == true){
-                                event.target.set('title','laneNav: '+getTrackingData(event).title);
-                                return true;
-                            }
-                            else if(event.target.get('href').indexOf('?') > -1){
-                                event.target.set('href',event.target.get('href')+'&laneNav=1')
-                            }
-                            else{
-                                event.target.set('href',event.target.get('href')+'?laneNav=1')
-                            }
-                            return false;
-                        }
                         if (event.target.hasClass('yui3-accordion-item-trigger')) {
                             return true;
                         }
@@ -177,36 +166,6 @@ YUI.add('lane-tracking',function(Y) {
                             link = link.get('parentNode');
                         }
                         if (link) {
-                            // for search result event tracking
-                            if(link.ancestor(".lwSearchResults")){
-                                Y.publish("lane:searchResultClick",{
-                                    broadcast:2,
-                                    emitFacade: true,
-                                    searchTerms:null,
-                                    resultTitle:null,
-                                    resultPosition:null
-                                });
-                                Y.publish("lane:browseResultClick",{
-                                    broadcast:2,
-                                    emitFacade: true,
-                                    resultTitle:null,
-                                    resultPosition:null
-                                });
-                                if(Y.lane.SearchResult.getSearchTerms()){
-                                    Y.fire("lane:searchResultClick",{
-                                        searchTerms:Y.lane.SearchResult.getSearchTerms(),
-                                        resultTitle:getTrackedTitle(link),
-                                        resultPosition:parseInt(link.ancestor('ul').get('className').replace(/r-/,''))
-                                    });
-                                }
-                                else{
-                                    Y.fire("lane:browseResultClick",{
-                                        resultTitle:getTrackedTitle(link),
-                                        resultPosition:parseInt(link.ancestor('ul').get('className').replace(/r-/,''))
-                                    });
-                                }
-
-                            }
                             //for popups:
                             rel = link.get('rel');
                             if (rel && rel.indexOf('popup ') === 0) {
