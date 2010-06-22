@@ -152,9 +152,22 @@ YUI.add('lane-tracking',function(Y) {
                         documentHost = documentHost.substring(0, documentHost.indexOf(':'));
                     }
                     if (event.type == 'click') {
-//                        if (event.target.hasClass('searchFacet')) {
-//                            return true;
-//                        }
+                        if (event.target.hasClass('searchFacet')) {
+                            return true;
+                        }
+                        if (event.target.ancestor('#laneNav')) {
+                            if(getTrackingData(event).external == true){
+                                event.target.set('title','laneNav: '+getTrackingData(event).title);
+                                return true;
+                            }
+                            else if(event.target.get('href').indexOf('?') > -1){
+                                event.target.set('href',event.target.get('href')+'&laneNav=1')
+                            }
+                            else{
+                                event.target.set('href',event.target.get('href')+'?laneNav=1')
+                            }
+                            return false;
+                        }
                         if (event.target.hasClass('yui3-accordion-item-trigger')) {
                             return true;
                         }

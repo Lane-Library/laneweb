@@ -42,11 +42,6 @@ YUI().use('lane-tracking','lane-suggest','node', function(Y) {
             gaPageTracker._trackEvent(event.type, event.action);
         }
     });
-    Y.Global.on("lane:searchFacetClick",  function(event) {
-        if (gaPageTracker !== undefined) {
-            gaPageTracker._trackEvent(event.type, event.facetName, event.searchTerms);
-        }
-    });
     Y.Global.on("lane:quickLinkClick",  function(event) {
         if (gaPageTracker !== undefined) {
             gaPageTracker._trackEvent(event.type, event.linkName);
