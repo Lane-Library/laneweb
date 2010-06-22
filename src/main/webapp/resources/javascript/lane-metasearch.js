@@ -1,5 +1,5 @@
 YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node','json-parse','io-base','datatype',function(Y) {
-    	
+        
     LANE.namespace('metasearch');
     LANE.metasearch = function() {
         var searchElms, // the elements in need of hit counts
@@ -7,7 +7,7 @@ YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node',
             searchRequests = [], // search timerIds so we can abort sleeping getResultCounts
             uberEngines = ['cro_', 'mdc_', 'ovid-'], // engines with multiple resources
             startTime,
-			searchIndicator = new Y.lane.SearchIndicator();
+            searchIndicator = new Y.lane.SearchIndicator();
             getSearchUrl = function() {
                 var i, y, searchUrl = '/././apps/search/json?q=' + Y.lane.SearchResult.getEncodedSearchTerms();
                 for (y = 0; y < searchables.length; y++) {
@@ -64,7 +64,7 @@ YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node',
                                             updateables.item(y).get('parentNode').insert(resultSpan);
                                         }
                                         if (result.status == 'successful') {
-                                        	updateables.item(y).addClass("searchSuccess");
+                                            updateables.item(y).addClass("searchSuccess");
                                             // process display of each updateable node
                                             // once all processed, remove id from searchables
                                             resultSpan.setContent('&#160;' +
@@ -77,7 +77,7 @@ YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node',
                                             // relies on result.name being set before url is changed 
                                             // http://www.quirksmode.org/bugreports/archives/2005/10/Replacing_href_in_links_may_also_change_content_of.html
                                             if (Y.UA.ie) {
-                                            	updateables.item(y).set('innerHTML',result.name);
+                                                updateables.item(y).set('innerHTML',result.name);
                                             }
                                             updateables.item(y).setAttribute('target', '_blank');
                                             updateables.item(y).removeClass('metasearch');
@@ -112,15 +112,15 @@ YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node',
     if (Y.all('.metasearch').size() > 0 && Y.lane.SearchResult.getEncodedSearchTerms()) {
         LANE.metasearch.initialize();
         LANE.metasearch.getResultCounts();
-		new Y.lane.SearchIndicator().show();
+        new Y.lane.SearchIndicator().show();
     }
     // hybrid search page inputs
     var i, hybridInputs = Y.all('.laneSuggest'), laneSuggest;
     for (i = 0; i < hybridInputs.size(); i++) {
         laneSuggest = new Y.lane.Suggest(hybridInputs.item(i));
         laneSuggest.on("lane:suggestSelect",function(e){
-        	new Y.lane.SearchIndicator().show();
-        	e.parentForm.submit();
+            new Y.lane.SearchIndicator().show();
+            e.parentForm.submit();
         });
     }
 });

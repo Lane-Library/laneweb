@@ -45,8 +45,8 @@ YUI({
 //                                arguments.anchor.detach(eventHandle);
 //                                items = o.responseXML.documentElement;
 //                                items = document.importNode(items, true);
-//								items = new Y.Node(items);
-//								items = items.all("li");
+//                                items = new Y.Node(items);
+//                                items = items.all("li");
 //                                for (i = 0; i < items.size(); i++) {
 //                                    present = false;
 //                                    item = items.item(i);

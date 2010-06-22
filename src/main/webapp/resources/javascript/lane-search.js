@@ -29,7 +29,7 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
             searchTextInput.setHintText(selectedOption.get('title'));
             searchTipsLink.set('href',searchTipsLink.get('href').replace(/#.*/,'#'+searchSourceSelect.get('value')));
         });
-    	searchTipsLink.set('href',searchTipsLink.get('href')+'#'+searchSourceSelect.get('value'));
+        searchTipsLink.set('href',searchTipsLink.get('href')+'#'+searchSourceSelect.get('value'));
         searchTextInput.setHintText(selectedOption.get('title'));
         searchSourceSelect.on('change', function(e) {
             if (searchTermsPresent()) {
@@ -39,7 +39,7 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
             }
         });
         searchTermsSuggest.on("lane:suggestSelect",function(e){
-        	search.submitSearch();
+            search.submitSearch();
         });
         search =  {
                 getSearchSource: function() {

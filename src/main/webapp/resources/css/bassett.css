@@ -10,12 +10,12 @@
 }
 
 .profileImage{
-	clear : both;
-	float : right;
-	height: 175px;
-	margin: 0.5em 1em 1em;
-	position : relative;
-	text-align: center;
+    clear : both;
+    float : right;
+    height: 175px;
+    margin: 0.5em 1em 1em;
+    position : relative;
+    text-align: center;
 }
       
 .fixed a{

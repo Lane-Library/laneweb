@@ -152,23 +152,23 @@ Y.Plugin.ACPlugin = Y.extend(
                 validator : YLang.isNumber
             },
             
-        	/**
-        	 * The amount of time in seconds to delay before submitting the query.
-        	 *
-        	 * @attribute queryDelay
-        	 * @default 0.2
-        	 * @type Number
-        	 */
-        	queryDelay: {
-        		value: 0.2,
-        		getter: function(value) {
-        			return value * 1000;
-        		}
-        	},
-        	_delayId : {
-        		value: -1
-        	},
-        	
+            /**
+             * The amount of time in seconds to delay before submitting the query.
+             *
+             * @attribute queryDelay
+             * @default 0.2
+             * @type Number
+             */
+            queryDelay: {
+                value: 0.2,
+                getter: function(value) {
+                    return value * 1000;
+                }
+            },
+            _delayId : {
+                value: -1
+            },
+            
             /**
              * Attribute used to convert a value into a request for the
              * DataSource.  Can be a string containing "{query}" somewhere,
@@ -200,7 +200,7 @@ Y.Plugin.ACPlugin = Y.extend(
                     );
                 }
             }
-        	
+            
         } // end attrs
     } // end statics
 );
@@ -239,15 +239,15 @@ function valueChangeHandler (e) {
     if (value === this._cachedValue || value.length < this.get("minQueryLength")) return;
 
     if (this._delayId != -1) {
-		clearTimeout(this._delayId);
-	}
+        clearTimeout(this._delayId);
+    }
     instance._delayId = setTimeout(
-		function() {
-			instance._cachedValue = value;
-			instance.fire( "ac:query", { value : e.value });
-		},
-		instance.get('queryDelay')
-	);
+        function() {
+            instance._cachedValue = value;
+            instance.fire( "ac:query", { value : e.value });
+        },
+        instance.get('queryDelay')
+    );
 };
 
 
@@ -306,13 +306,13 @@ function handleQueryResponse (e) {
     
     // if there is a result, and it's not an empty array
     if (res && !(res && ("length" in res) && res.length === 0)){
-    	this.fire("ac:load", {
-	        results : res,
-	        query : this.get("queryValue")
-	    });
+        this.fire("ac:load", {
+            results : res,
+            query : this.get("queryValue")
+        });
     }
     else{
-    	this.fire("ac:hide");
+        this.fire("ac:hide");
     }
 };
 
@@ -338,7 +338,7 @@ YUI().add('lane-suggest', function (Y) {
                 } else if (searchSource && searchSource.match(/^history/)) {
                     limit = baseUrl + "l=history&";
                 } else if (searchSource && searchSource.match(/^bassett/)) {
-                	limit = baseUrl + "l=bassett&";
+                    limit = baseUrl + "l=bassett&";
                 } else if (null == searchSource) { // assume source-less is metasearch form on peds portal, etc.
                     limit = baseUrl + "l=mesh-di&";
                 } else {
@@ -349,12 +349,12 @@ YUI().add('lane-suggest', function (Y) {
                     input.ac.get("dataSource").set("source",limit);
                 }
             };
-        	this.publish("lane:suggestSelect",{
-        		broadcast:2,
-        		emitFacade: true,
-        		suggestion:null,
-        		parentForm:null
-    		});
+            this.publish("lane:suggestSelect",{
+                broadcast:2,
+                emitFacade: true,
+                suggestion:null,
+                parentForm:null
+            });
             acDS.plug({fn : Y.Plugin.DataSourceJSONSchema, cfg : {
                 schema : { resultListLocator : "suggest" }
             }});
@@ -367,7 +367,7 @@ YUI().add('lane-suggest', function (Y) {
             
         acWidget = (function () {
             var data = [],
-            	widgetNode,
+                widgetNode,
                 containerNode,
                 contentNode,
                 inputParent = input.get("parentNode"),
@@ -405,7 +405,7 @@ YUI().add('lane-suggest', function (Y) {
                     this.visible = true;
                     contentNode.set("innerHTML", "");
                     for (var i = 0, l = data.length; i < l; i ++) {
-                    	contentNode.appendChild(Y.Node.create('<li class="ac-'+i+'">'+data[i]+"</li>"));
+                        contentNode.appendChild(Y.Node.create('<li class="ac-'+i+'">'+data[i]+"</li>"));
                     }
                     containerNode.setStyle("display", "block");
                     return this;
@@ -472,20 +472,20 @@ YUI().add('lane-suggest', function (Y) {
                         e.preventDefault();
                     }
                     self.fire("lane:suggestSelect",{
-                    	suggestion:input.ac.get("queryValue"),
-                    	parentForm:Y.Node.getDOMNode(input.ancestor("form"))
+                        suggestion:input.ac.get("queryValue"),
+                        parentForm:Y.Node.getDOMNode(input.ancestor("form"))
                     });
                 },
                 syncUI : function () {
-                	var width = input.getStyle("width"), left = input.getStyle("left");
-                	if(width){
-	                    widgetNode.setStyle("width",width);
-	                    contentNode.setStyle("width",width);
-                	}
-                	if(left){
-                		widgetNode.setStyle("left",left);
-                		contentNode.setStyle("left",left);
-                	}
+                    var width = input.getStyle("width"), left = input.getStyle("left");
+                    if(width){
+                        widgetNode.setStyle("width",width);
+                        contentNode.setStyle("width",width);
+                    }
+                    if(left){
+                        widgetNode.setStyle("left",left);
+                        contentNode.setStyle("left",left);
+                    }
                 }
             };
         })();

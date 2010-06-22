@@ -32,11 +32,11 @@ YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse',
                                                         needMore = true;
                                                     }
                                                     else{
-                                                    	rs[i].status = result.status;
-                                                    	if (result.status == 'successful') {
-                                                    		rs[i].anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
-                                                    	}
-                                                    	rs[i].anchor.href = result.url;
+                                                        rs[i].status = result.status;
+                                                        if (result.status == 'successful') {
+                                                            rs[i].anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
+                                                        }
+                                                        rs[i].anchor.href = result.url;
                                                     }
                                                 }
                                             }

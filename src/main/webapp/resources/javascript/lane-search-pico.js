@@ -11,32 +11,32 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
                     createPicoFields();
                 }
                 picoFields.setStyle("display", "block");
-//				formAnim.set('to',{height:124});
-//				navAnim.set('to',{top:174});
-//				formAnim.on('end', function() {
-					form.addClass('clinical');
-//				});
-//				navAnim.on('end', function() {
+//                formAnim.set('to',{height:124});
+//                navAnim.set('to',{top:174});
+//                formAnim.on('end', function() {
+                    form.addClass('clinical');
+//                });
+//                navAnim.on('end', function() {
                     nav.addClass('clinical');
-//				});
-//				formAnim.run();
-//				navAnim.run();
+//                });
+//                formAnim.run();
+//                navAnim.run();
                 picoIsOn = true;
             }
         },
         picoOff = function() {
             if (picoIsOn) {
                 picoFields.setStyle("display", "none");
-//				formAnim.set('to',{height:94});
-//				navAnim.set('to',{top:144});
-//				formAnim.on('end', function() {
-					form.removeClass('clinical');
-//				});
-//				navAnim.on('end', function() {
+//                formAnim.set('to',{height:94});
+//                navAnim.set('to',{top:144});
+//                formAnim.on('end', function() {
+                    form.removeClass('clinical');
+//                });
+//                navAnim.on('end', function() {
                     nav.removeClass('clinical');
-//				});
-//				formAnim.run();
-//				navAnim.run();
+//                });
+//                formAnim.run();
+//                navAnim.run();
                 picoIsOn = false;
             }
             
@@ -52,27 +52,27 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
             picoFields = Y.Node.create(PICO);
             inputs = picoFields.all('input');
             for (i = 0; i < inputs.size(); i++) {
-            	// set input value if found in query string
-            	if(queryString[inputs.item(i).get('name')] != undefined){
-            		inputs.item(i).set('value',queryString[inputs.item(i).get('name')])
-            	}
+                // set input value if found in query string
+                if(queryString[inputs.item(i).get('name')] != undefined){
+                    inputs.item(i).set('value',queryString[inputs.item(i).get('name')])
+                }
                 picoTextInputs.push(new Y.lane.TextInput(inputs.item(i), inputs.item(i).get('title')));
                 inputs.item(i).on("blur",function(){
                     searchTerms.setValue(getPicoQuery());
                 });
                 inputs.item(i).on("keyup",function(){
-                	searchTerms.setValue(getPicoQuery());
+                    searchTerms.setValue(getPicoQuery());
                 });
                 switch(inputs.item(i).get('name')){
-                	case 'p':
-                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-d&");
-                		break;
-                	case 'i':
-                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-i&");
-                		break;
-                	case 'c':
-                		picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-di&");
-                		break;
+                    case 'p':
+                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-d&");
+                        break;
+                    case 'i':
+                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-i&");
+                        break;
+                    case 'c':
+                        picoSuggest = new Y.lane.Suggest(inputs.item(i),"l=mesh-di&");
+                        break;
                 }
             }
             form.insert(picoFields);
@@ -93,23 +93,23 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
             return qString;
         };
     Y.Global.on("lane:suggestSelect",  function(event) {
-    	if(picoIsOn && getPicoQuery()){
-    		searchTerms.setValue(getPicoQuery());
-    	}
+        if(picoIsOn && getPicoQuery()){
+            searchTerms.setValue(getPicoQuery());
+        }
     });
     if (form.hasClass('clinical')) {
         picoOn();
     }
-//	formAnim = new Y.Anim({
-//		node: '#search',
-//		easing: Y.Easing.easeOut,
-//		duration: 0.3
-//	});
-//	navAnim = new Y.Anim({
-//		node: '#laneNav',
-//		easing: Y.Easing.easOut,
-//		duration: 0.3
-//	});
+//    formAnim = new Y.Anim({
+//        node: '#search',
+//        easing: Y.Easing.easeOut,
+//        duration: 0.3
+//    });
+//    navAnim = new Y.Anim({
+//        node: '#laneNav',
+//        easing: Y.Easing.easOut,
+//        duration: 0.3
+//    });
     Y.Global.on('lane:searchSourceChange', function(event) {
         if (event.newVal == 'clinical-all') {
             picoOn();

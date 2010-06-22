@@ -45,7 +45,7 @@ YUI.add('lane-tracking',function(Y) {
                 }
                 //finally:
                 if (!title) {
-                	title = 'unknown';
+                    title = 'unknown';
                 }
                 if (node.hasClass('yui3-accordion-item-trigger')) {
                     title = 'Expandy:' + title;
@@ -165,22 +165,22 @@ YUI.add('lane-tracking',function(Y) {
                             link = link.get('parentNode');
                         }
                         if (link) {
-                        	// for search result event tracking
-                        	if(link.ancestor(".lwSearchResults")){
-                            	Y.publish("lane:searchResultClick",{
-                            		broadcast:2,
-                            		emitFacade: true,
-                            		searchTerms:null,
-                            		resultTitle:null,
-                            		resultPosition:null
-                            	});
-                		        Y.fire("lane:searchResultClick",{
-                		        	searchTerms:Y.lane.SearchResult.getSearchTerms(),
-                		        	resultTitle:getTrackedTitle(link),
-                		        	resultPosition:parseInt(link.ancestor('ul').get('className').replace(/r-/,''))
-                		        });
+                            // for search result event tracking
+                            if(link.ancestor(".lwSearchResults")){
+                                Y.publish("lane:searchResultClick",{
+                                    broadcast:2,
+                                    emitFacade: true,
+                                    searchTerms:null,
+                                    resultTitle:null,
+                                    resultPosition:null
+                                });
+                                Y.fire("lane:searchResultClick",{
+                                    searchTerms:Y.lane.SearchResult.getSearchTerms(),
+                                    resultTitle:getTrackedTitle(link),
+                                    resultPosition:parseInt(link.ancestor('ul').get('className').replace(/r-/,''))
+                                });
 
-                        	}
+                            }
                             //for popups:
                             rel = link.get('rel');
                             if (rel && rel.indexOf('popup ') === 0) {

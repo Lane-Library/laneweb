@@ -1,11 +1,11 @@
 YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-custom','history','io-base', function(Y) {
     LANE.namespace('search.facets');
-	Y.publish("lane:searchFacetClick",{
-		broadcast:2,
-		emitFacade: true,
-		searchTerms:null,
-		facetName:null
-	});
+    Y.publish("lane:searchFacetClick",{
+        broadcast:2,
+        emitFacade: true,
+        searchTerms:null,
+        facetName:null
+    });
     LANE.search.facets = function(){
         var currentResult;
         return {
@@ -16,22 +16,22 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
                 return currentResult;
             },
             setActiveFacet: function(facetId){
-            	var result = Y.one('#' + facetId + 'Facet').getData('result');// result facet to make active
-            	if (result !== undefined) {
-            		if (result._state == 'initialized') {
-            			result.show();
-            		} else if (result._state == 'searched') {
-            			LANE.search.facets.getCurrentResult().hide();
-            			LANE.search.facets.setCurrentResult(result);
-            			result.show();
-            		}
-            	}
+                var result = Y.one('#' + facetId + 'Facet').getData('result');// result facet to make active
+                if (result !== undefined) {
+                    if (result._state == 'initialized') {
+                        result.show();
+                    } else if (result._state == 'searched') {
+                        LANE.search.facets.getCurrentResult().hide();
+                        LANE.search.facets.setCurrentResult(result);
+                        result.show();
+                    }
+                }
             }
         };
     }();
     var elt = Y.one('#searchFacets'),
-	    searchIndicator = new Y.lane.SearchIndicator(),
-		facets, i, j, type, source, container;
+        searchIndicator = new Y.lane.SearchIndicator(),
+        facets, i, j, type, source, container;
     if (elt) {
         container = Y.one('#searchResults');
         facets = elt.all('.searchFacet');
@@ -46,19 +46,19 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
                         LANE.search.facets.setCurrentResult(facets.item(i).getData('result'));
                     }
                       Y.on('click',function(event) {
-					  	var result = this.getData('result');
+                          var result = this.getData('result');
                         // Browser History Manager may not be initialized (Opera unsupported, hyui-history-iframe not present in content)
                         try {
                             Y.History.navigate("facet", this.getData('result')._source);
                         } catch (e) {
                             //log somewhere ... no need to break/alert
-                        	result.show();
+                            result.show();
                         }
                         event.preventDefault();
-        		        Y.fire("lane:searchFacetClick",{
-        		        	facetName:this.get('textContent'),
-        		        	searchTerms:Y.lane.SearchResult.getSearchTerms()
-        		        });
+                        Y.fire("lane:searchFacetClick",{
+                            facetName:this.get('textContent'),
+                            searchTerms:Y.lane.SearchResult.getSearchTerms()
+                        });
                     }, facets.item(i));
                 }
             }
@@ -108,9 +108,9 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
                 LANE.search.facets.getCurrentResult().hide();
                 LANE.search.facets.setCurrentResult(this);
                 this._facet.addClass('current');
-				for(i = 0; i < this._content.size(); i++) {
-					this._container.append(this._content.item(i));
-				}
+                for(i = 0; i < this._content.size(); i++) {
+                    this._container.append(this._content.item(i));
+                }
                 searchIndicator.hide();
                 Y.fire('lane:change');;
             }
@@ -130,7 +130,7 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
         };
         Result.prototype.hide = function(){
             while (this._container.get('childNodes').size() > 0) {
-            	this._container.get('lastChild').remove();
+                this._container.get('lastChild').remove();
             }
             this._facet.removeClass('current');
         };

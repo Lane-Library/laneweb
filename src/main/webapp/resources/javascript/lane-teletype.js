@@ -22,10 +22,10 @@ YUI().use('node', function(Y) {
 
         // send #searchTeletyper submit events to #search
         if (searchTeletyper) {
-	        searchTeletyper.on("submit",function(e){
-	        	e.halt();
-	        	searchForm.submit();
-	        });
+            searchTeletyper.on("submit",function(e){
+                e.halt();
+                searchForm.submit();
+            });
         }
     
     for (i = 0; i < inputElms.size(); i++){

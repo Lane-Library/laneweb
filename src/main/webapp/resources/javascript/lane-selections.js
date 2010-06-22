@@ -16,11 +16,11 @@ YUI().use('node', function(Y) {
                 }
             }
         };
-	    Y.on('change', function() {
-	        if (this.get('value') === '') {
-	            showAll();
-	        } else {
-	            hideAllBut(this.get('value'));
-	        }
-	    }, select );
+        Y.on('change', function() {
+            if (this.get('value') === '') {
+                showAll();
+            } else {
+                hideAllBut(this.get('value'));
+            }
+        }, select );
 });

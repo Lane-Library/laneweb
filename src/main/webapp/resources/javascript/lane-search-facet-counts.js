@@ -11,7 +11,7 @@ YUI().use('lane-search-result', 'node','io-base','json-parse',function(Y) {
                 var id = facets.item(j).get('id');
                 facets.item(j).setAttribute('facetId', id.substring(0, id.indexOf('Facet')));
                 if(facets.item(j).hasClass('searchableFacet')){
-                	requestString+=facets.item(j).getAttribute('facetId') + ',';
+                    requestString+=facets.item(j).getAttribute('facetId') + ',';
                 }
             }
             if(requestString !== ''){
@@ -31,11 +31,11 @@ YUI().use('lane-search-result', 'node','io-base','json-parse',function(Y) {
                                     engineStatus = response.results.facets[facetId].status;
                                 }
                                 if (!facetId.match("-all") && engineStatus == 'successful' && hitLink !== null && hits === 0) {
-                                	hitLinkParent = hitLink.get('parentNode');
-                                	hitLinkParent.addClass('inactiveFacet');
-                                	hitLinkParent.removeClass('searchableFacet');
-                                	hitLinkParent.insert(Y.Node.create(hitLink.get('innerHTML')));
-                                	hitLink.remove();
+                                    hitLinkParent = hitLink.get('parentNode');
+                                    hitLinkParent.addClass('inactiveFacet');
+                                    hitLinkParent.removeClass('searchableFacet');
+                                    hitLinkParent.insert(Y.Node.create(hitLink.get('innerHTML')));
+                                    hitLink.remove();
                                 }
                             }
                             sleepingTime = 2000;

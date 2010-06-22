@@ -27,10 +27,10 @@ YUI().use('node', 'event', 'overlay','io-base','dd-plugin', function(Y) {
         panel.render();
         panel.show();
         container.setStyle('visibility','visible');
-    	container.plug(Y.Plugin.Drag);
-    	container.dd.addHandle(Y.one('#popupContainer .yui3-widget-hd'));
+        container.plug(Y.Plugin.Drag);
+        container.dd.addHandle(Y.one('#popupContainer .yui3-widget-hd'));
         Y.on("click",function(){
-        	panel.hide();
+            panel.hide();
             container.setStyle('visibility','hidden');
         },Y.one('#popupContainer .yui3-widget-hd a'));
         

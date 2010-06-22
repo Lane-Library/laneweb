@@ -8,10 +8,10 @@ YUI({
 }).use('node-event-simulate', 'console', 'test', function(Y){
 
     var tooltipTestCase = new Y.Test.Case({
-		name: 'Lane Tooltip Test Case',
-		testTooltipPresent: function() {
+        name: 'Lane Tooltip Test Case',
+        testTooltipPresent: function() {
             Y.Assert.isTrue(Y.Lang.isObject(Y.one('#a-yuitt')));
-		},
+        },
         testSimpleTooltipPresent: function() {
             Y.Assert.isTrue(Y.Lang.isObject(Y.one('#simpleTT-yui')));
         },
@@ -22,7 +22,7 @@ YUI({
             Y.fire('lane:change');
             Y.isFalse(Y.isObject(Y.one('#a-yuitt')));
         }
-	});
+    });
     
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
