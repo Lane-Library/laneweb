@@ -1,5 +1,4 @@
 YUI.add('lane-tracking',function(Y) {
-    
     if (!LANE.tracking) {
         LANE.tracking = function() {
             //TODO more descriptive variable names
@@ -174,11 +173,25 @@ YUI.add('lane-tracking',function(Y) {
                                     resultTitle:null,
                                     resultPosition:null
                                 });
-                                Y.fire("lane:searchResultClick",{
-                                    searchTerms:Y.lane.SearchResult.getSearchTerms(),
-                                    resultTitle:getTrackedTitle(link),
-                                    resultPosition:parseInt(link.ancestor('ul').get('className').replace(/r-/,''))
+                                Y.publish("lane:browseResultClick",{
+                                    broadcast:2,
+                                    emitFacade: true,
+                                    resultTitle:null,
+                                    resultPosition:null
                                 });
+                                if(Y.lane.SearchResult.getSearchTerms()){
+                                    Y.fire("lane:searchResultClick",{
+                                        searchTerms:Y.lane.SearchResult.getSearchTerms(),
+                                        resultTitle:getTrackedTitle(link),
+                                        resultPosition:parseInt(link.ancestor('ul').get('className').replace(/r-/,''))
+                                    });
+                                }
+                                else{
+                                    Y.fire("lane:browseResultClick",{
+                                        resultTitle:getTrackedTitle(link),
+                                        resultPosition:parseInt(link.ancestor('ul').get('className').replace(/r-/,''))
+                                    });
+                                }
 
                             }
                             //for popups:
