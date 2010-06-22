@@ -58,12 +58,12 @@ YUI().use('lane-tracking','lane-suggest','node', function(Y) {
                 if (Y.lane.SearchResult.getSearchTerms()) {
                     Y.fire("lane:searchResultClick", {
                         searchTerms: Y.lane.SearchResult.getSearchTerms(),
-                        resultTitle: getTrackedTitle(link),
+                        resultTitle: link.get('textContent'),
                         resultPosition: parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10)
                     });
                 } else {
                     Y.fire("lane:browseResultClick", {
-                        resultTitle: getTrackedTitle(link),
+                        resultTitle: link.get('textContent'),
                         resultPosition: parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10)
                     });
                 }
