@@ -68,16 +68,16 @@
     
     <xsl:template match="h:body">
         <xsl:copy>
-            <h2><xsl:value-of select="descendant::h:h1"/></h2>
+            <h2><a href="/help/index.html">Help</a> &#xBB; <xsl:value-of select="descendant::h:h1"/></h2>
             <div class="yui-ge">
                 <div class="yui-u first">
                     <div class="yui-gf">
                         <div class="yui-u">
                             <xsl:apply-templates select="descendant::h:div[@id='mainColumn']"/>
                         </div>
-                    </div>
-                    <div class="yui-u first">
-                        <xsl:apply-templates select="descendant::h:div[@id='leftColumn']"/>
+                        <div class="yui-u first">
+                            <xsl:apply-templates select="descendant::h:div[@id='leftColumn']"/>
+                        </div>
                     </div>
                 </div>
                 <div class="yui-u">
@@ -97,7 +97,9 @@
     </xsl:template>
     
     <xsl:template match="h:div[@id='leftColumn']">
-        <xsl:apply-templates/>
+        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/leftmenu-help.html">
+            <xi:fallback></xi:fallback>
+        </xi:include>
     </xsl:template>
     
     <xsl:template match="h:div[@id='rightColumn']/h:div">
