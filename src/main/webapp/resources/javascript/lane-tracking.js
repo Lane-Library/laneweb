@@ -154,7 +154,7 @@ YUI.add('lane-tracking',function(Y) {
                         documentHost = documentHost.substring(0, documentHost.indexOf(':'));
                     }
                     if (event.type == 'click') {
-                        if (event.target.hasClass('searchFacet')) {
+                        if (event.target.ancestor('.searchFacet')) {
                             return true;
                         }
                         if (event.target.hasClass('yui3-accordion-item-trigger')) {
