@@ -18,10 +18,12 @@
         </stx:attribute>
     </stx:template>
     
-    <stx:template match="h:meta">
-        <stx:copy>
-            <stx:process-attributes/>
-        </stx:copy>
+    <stx:template match="h:meta[@http-equiv]">
+        <stx:if test="string-length($page) &gt; 0">
+            <stx:copy>
+                <stx:process-attributes/>
+            </stx:copy>
+        </stx:if>
     </stx:template>
     
     <stx:template match="h:a[@id='newpage']">
