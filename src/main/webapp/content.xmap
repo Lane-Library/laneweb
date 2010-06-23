@@ -113,9 +113,9 @@
         </map:pipeline>
         <map:pipeline type="caching">
             <map:parameter name="cache-key" value="${request-uri};selection=${liaison}"/>
-            <map:match type="wildcard" pattern="services/liaisons.html">
-                <map:generate type="html" src="${content-base}/services/liaisons.html">
-                    <map:parameter name="alt-src" value="${default-content-base}/services/liaisons.html"/>
+            <map:match type="wildcard" pattern="about/liaisons.html">
+                <map:generate type="html" src="${content-base}/about/liaisons.html">
+                    <map:parameter name="alt-src" value="${default-content-base}/about/liaisons.html"/>
                 </map:generate>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/selections.xsl">
                     <map:parameter name="cache-key" value=";selection=${selection}"/>
