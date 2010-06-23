@@ -1,73 +1,35 @@
-fieldset {
-  padding: 1em;
-  margin-bottom: 1.2em; 
+.contentForm legend  {
+    border:1px solid #C1C1C1;
+    color:#444444;
+    font-size:95%;
+    font-weight:bold;
+    padding:0.3em 1em;
+    text-align:left;
 }
-.required-in-form {
-  color:#990000;
-  font-size:80%;
-  font-weight:bolder;
+.contentForm fieldset  {
+    margin-bottom:1.2em;
+    padding:1em;
+    border:1px solid #C1C1C1;
 }
-.internal-label  {
-  float:left;
-  width:30%;
-  margin-right:.7em;
-  padding-top:0.2em;
-  padding-bottom:0.3em;
-  padding-right: 0.5em;
-  text-align:right;
-  font-weight:normal;
-  overflow: visible;
-  border-top: 1px dotted #c1c1c1;
-  border-bottom: 1px dotted #c1c1c1;
-  background: #f2f3ed;
-  /*display: block;*/
+.fieldLabel  {
+    background:none repeat scroll 0 0 #F2F3ED;
+    border:1px dotted #C1C1C1;
+    float:left;
+    margin-right:10px;
+    padding:5px;
+    text-align:right;
+    width:30%;
 }
-legend {
-  padding: 0.3em 1em;
-  border: 1px solid #c1c1c1;
-  color:#444;
-  font-size:95%;
-  text-align:left;
-  font-weight:bold;
+.requiredField  {
+    color:#990000;
+    font-weight:bolder;
 }
- p.in-legend{
-  float:left;
+.validatedField  {
+    color:green;
+    font-weight:bolder;
 }
-div.fieldRow {
+.fieldRow {
   display:block;
   margin-top:1em;
   clear:both;
 }
-div.fieldRow input {
-  margin-top:0.3em;
-}
-.wrapperbox-form-pages {
-  border: 1px solid #c1c1c1;
-  padding: 1em;
-  margin-bottom: 1.2em; 
-  margin-top: 2.4em;
-}
- 
-.invalid-label {
-  background: #b00202;
-  color: #fff;
-}
-fieldset p {
-margin-top:3em;
-clear:both;
-}
-fieldset [type="submit"] {
-margin-top:1em;
-}
-form#feedback {
-width:725px;
-background-color:#fff;
-margin:1em;
-padding:1em;
-}
-/* styles for submit button
- style="width:7em; height:24px; border:1px solid #ccc; padding:0;"
- 
-.invalid-field { background: #faa; }
-
-*/

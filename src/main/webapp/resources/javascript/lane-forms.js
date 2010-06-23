@@ -2983,7 +2983,7 @@ YUI.add('lane-formvalidator', function(Y) {
 
 YUI().use('lane-formvalidator',function(Y){
     Y.on("domready", function() {
-        var forms = Y.all('form[class="formvalidator"]'), i;
+        var forms = Y.all('.formvalidator'), i;
         for (i = 0; i < forms.size(); i++) {
             new Y.Validator( {
                 form : forms.item(i).get('id'),
