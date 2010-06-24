@@ -182,14 +182,6 @@
                 </map:generate>
                 <map:transform type="xinclude"/>
                 <map:transform type="joost" src="${default-resources-base}/xsl/template-menu-includes.stx"/>
-                <map:select type="ipgroup">
-                    <map:when test="PAVA">
-                        <map:transform type="joost" src="${default-resources-base}/xsl/proxy-yui.stx"/>
-                    </map:when>
-                    <map:when test="SHC">
-                        <map:transform type="joost" src="${default-resources-base}/xsl/proxy-yui.stx"/>
-                    </map:when>
-                </map:select>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- secure/** generates an error unless used from a pipeline -->
