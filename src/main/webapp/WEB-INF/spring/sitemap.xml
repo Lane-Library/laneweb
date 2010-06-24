@@ -46,6 +46,12 @@
         <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
     </bean>
     
+    <bean name="org.apache.cocoon.selection.Selector/requestScheme"
+        class="edu.stanford.irt.laneweb.cocoon.RequestSchemeSelector"
+        scope="prototype">
+        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
+    </bean>
+    
     <bean id="org.apache.cocoon.matching.MatcherSelector"
         class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
         <constructor-arg value="org.apache.cocoon.matching.Matcher"/>

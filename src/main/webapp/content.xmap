@@ -190,6 +190,11 @@
                         <map:transform type="joost" src="${default-resources-base}/xsl/proxy-yui.stx"/>
                     </map:when>
                 </map:select>
+                <map:select type="requestScheme">
+                    <map:when test="http">
+                        <map:transform type="joost" src="${default-resources-base}/xsl/proxy-yui.stx"/>
+                    </map:when>
+                </map:select>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- secure/** generates an error unless used from a pipeline -->
