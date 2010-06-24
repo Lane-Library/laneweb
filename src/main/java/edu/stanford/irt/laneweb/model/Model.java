@@ -104,8 +104,6 @@ public class Model extends HashMap<String, Object> {
     
     public static final String REMOVE_PERSISTENT_LOGIN = "remove-persistent-login";
     
-    public static final String REQUEST_SCHEME = "requestScheme";
-    
     public Model(ObjectModel objectModel) {
         putAll((Map<String, Object>) objectModel.get("laneweb"));
     }
