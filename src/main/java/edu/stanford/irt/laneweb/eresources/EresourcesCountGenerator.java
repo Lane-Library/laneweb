@@ -6,8 +6,8 @@ package edu.stanford.irt.laneweb.eresources;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.SAXException;

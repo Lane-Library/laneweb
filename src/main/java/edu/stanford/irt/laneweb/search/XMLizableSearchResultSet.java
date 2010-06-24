@@ -3,8 +3,8 @@ package edu.stanford.irt.laneweb.search;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeSet;
 import java.util.Map.Entry;
+import java.util.TreeSet;
 
 import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
