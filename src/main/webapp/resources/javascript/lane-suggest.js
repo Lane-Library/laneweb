@@ -389,6 +389,7 @@ YUI().add('lane-suggest', function (Y) {
                 acWidget.focus(index);
             }, "li");
             Y.on("click", function () { acWidget.hide(); }, document);
+            Y.on("key", function () { acWidget.hide(); }, document, "down:9,13,10");
             
             return {
                 setData : function (d) {
@@ -462,19 +463,17 @@ YUI().add('lane-suggest', function (Y) {
                 select : function (e) {
                     if(acWidget.getValue()){
                         input.ac.set("queryValue", acWidget.getValue());
+                        self.fire("lane:suggestSelect",{
+                            suggestion:input.ac.get("queryValue"),
+                            parentForm:Y.Node.getDOMNode(input.ancestor("form"))
+                        });
+                        e.preventDefault();
                     }
                     else{
                         input.ac.set("queryValue", input.get("value"));
                     }
                     acWidget.hide();
                     input.focus();
-                    if (e) {
-                        e.preventDefault();
-                    }
-                    self.fire("lane:suggestSelect",{
-                        suggestion:input.ac.get("queryValue"),
-                        parentForm:Y.Node.getDOMNode(input.ancestor("form"))
-                    });
                 },
                 syncUI : function () {
                     var width = input.getStyle("width"), left = input.getStyle("left");
