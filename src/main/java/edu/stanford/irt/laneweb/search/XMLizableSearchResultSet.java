@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
+import java.util.Map.Entry;
 
 import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
@@ -81,11 +82,11 @@ public class XMLizableSearchResultSet extends TreeSet<SearchResult> implements R
             }
         }
         XMLUtils.startElement(handler, NAMESPACE, JOURNALS);
-        for (String journal : journalCountMap.keySet()) {
+        for (Entry<String, Integer> journalEntry : journalCountMap.entrySet()) {
             AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, TITLE, TITLE, "CDATA", journal);
-            atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_ID, "CDATA", journalResourceMap.get(journal).toString());
-            atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, "CDATA", journalCountMap.get(journal).toString());
+            atts.addAttribute(EMPTY_NS, TITLE, TITLE, "CDATA", journalEntry.getKey());
+            atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_ID, "CDATA", journalResourceMap.get(journalEntry.getKey()).toString());
+            atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, "CDATA", journalCountMap.get(journalEntry.getKey()).toString());
             XMLUtils.startElement(handler, NAMESPACE, JOURNAL, atts);
             XMLUtils.endElement(handler, NAMESPACE, JOURNAL);
         }
