@@ -191,7 +191,7 @@
                     </map:when>
                 </map:select>
                 <map:select type="requestScheme">
-                    <map:when test="http">
+                    <map:when test="https">
                         <map:transform type="joost" src="${default-resources-base}/xsl/proxy-yui.stx"/>
                     </map:when>
                 </map:select>
