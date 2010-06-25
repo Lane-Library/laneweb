@@ -124,6 +124,7 @@
                         <include>tutorials-min.css</include>
                         <include>forms-min.css</include>
                         <include>section-menu-min.css</include>
+                        <include>liaisons-min.css</include>
                         <!--<include>colors-min.css</include>
                         <include>simple-module-min.css</include>
                         <include>narrow-module-min.css</include>
