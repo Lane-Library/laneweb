@@ -1,3 +1,7 @@
-.sectionMenu .selected {
-    color:#820000;
+.sectionMenu em a {
+  border:none;
+  color:inherit;
+}
+.sectionMenu em a:hover {
+  border-bottom:1px #820000 solid;
 }
