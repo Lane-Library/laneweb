@@ -586,11 +586,9 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- replace <a> with <em> for the menu item for the current page -->
-    <xsl:template match="h:ul[@class='sectionMenu']/h:li[child::h:a/@href=$path]">
-        <xsl:copy>
-            <em><xsl:value-of select="."/></em>
-        </xsl:copy>
+    <!-- surround <a> with <em> for the menu item for the current page -->
+    <xsl:template match="h:ul[@class='sectionMenu']/h:li/h:a[@href=$path]">
+      <em><xsl:apply-templates select="attribute::node() | child::node()"/></em>
     </xsl:template>
     
     <!-- the next 5 template matches handle the login state and show links depending on that state -->
