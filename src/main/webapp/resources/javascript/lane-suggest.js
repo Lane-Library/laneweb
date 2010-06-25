@@ -390,6 +390,7 @@ YUI().add('lane-suggest', function (Y) {
             }, "li");
             Y.on("click", function () { acWidget.hide(); }, document);
             Y.on("key", function () { acWidget.hide(); }, document, "down:9,13,10");
+            Y.Global.on("lane:beforeSearchSubmit", function () { acWidget.destroy(); });
             
             return {
                 setData : function (d) {
@@ -474,6 +475,10 @@ YUI().add('lane-suggest', function (Y) {
                     }
                     acWidget.hide();
                     input.focus();
+                },
+                destroy : function () {
+                    input.ac.destructor();
+                    acWidget.render = function(){};
                 },
                 syncUI : function () {
                     var width = input.getStyle("width"), left = input.getStyle("left");
