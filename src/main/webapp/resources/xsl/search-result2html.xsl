@@ -174,7 +174,8 @@
                                 <span class="sourceLink">Lane Community Info File</span>
                             </div>
                         </xsl:when>
-                        <xsl:when test="s:recordType = 'bib'">
+                        <!-- add catalog link to all bibs except those that already have one (history) -->
+                        <xsl:when test="s:recordType = 'bib' and not(s:versions//s:label[.='catalog record'])">
                             <div class="moreResults">
                                 <a rel="popup standard" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
                             </div>
