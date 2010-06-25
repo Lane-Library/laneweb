@@ -22,3 +22,8 @@ ol {
 .content .middleColumn li {
     padding-bottom:0.2em;
 }
+/* used for pubmed and highly accessed article lists */
+.citationList li{
+    list-style: decimal;
+    margin-bottom:1em;
+}
