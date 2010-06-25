@@ -22,7 +22,7 @@
     font-weight:bold;
     font-size:13px;
 }
-#laneNav li:hover a, #laneNav .active a {
+#laneNav li:hover a, #laneNav .hover a, #laneNav .active a {
     background-color:white;
 }
 #laneNav ul {
