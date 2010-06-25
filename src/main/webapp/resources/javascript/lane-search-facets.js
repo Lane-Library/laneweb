@@ -39,17 +39,19 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
                         facets.item(i).getData('result').setContent(container.get('children'));
                         LANE.search.facets.setCurrentResult(facets.item(i).getData('result'));
                     }
-                      Y.on('click',function(event) {
-                          var result = this.getData('result');
-                        // Browser History Manager may not be initialized (Opera unsupported, hyui-history-iframe not present in content)
-                        try {
-                            Y.History.navigate("facet", this.getData('result')._source);
-                        } catch (e) {
-                            //log somewhere ... no need to break/alert
-                            result.show();
-                        }
-                        event.preventDefault();
-                    }, facets.item(i));
+                    if (!(Y.UA.ie && Y.UA.ie < 8)) { // TODO: fix IE < 8 rendering of tooltips after import
+                        Y.on('click',function(event) {
+                            var result = this.getData('result');
+                            // Browser History Manager may not be initialized (Opera unsupported, hyui-history-iframe not present in content)
+                            try {
+                                Y.History.navigate("facet", this.getData('result')._source);
+                            } catch (e) {
+                                //log somewhere ... no need to break/alert
+                                result.show();
+                            }
+                            event.preventDefault();
+                        }, facets.item(i));
+                    }
                 }
             }
         }
