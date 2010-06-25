@@ -1,4 +1,4 @@
-.type1 > li {
+.type1 .even, .type1 .odd {
     margin-left:0;
     list-style:none;
     font-size:11px !important;
@@ -55,6 +55,12 @@
 }
 .yui3-js-enabled .type1 .details.yui3-accordion-item-bd {
     display:block;
+}
+/*for IE6 doen't know about .details > div*/
+.type1 .details .child {
+    background-color:white;
+    border:16px solid #DBD2B3;
+    padding:16px 16px 0;
 }
 .type1 .details > div {
     background-color:white;

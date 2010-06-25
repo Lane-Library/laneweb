@@ -25,6 +25,10 @@ YUI().use('node', function(Y) {
         for (i = 0; i < nodes.size(); i++) {
             nodes.item(i).one('li').setStyle('borderLeft', 'none');
         }
+        nodes = Y.all(".type1 .details > div");
+        for (i = 0; i < nodes.size(); i++) {
+        	nodes.item(i).addClass("child");
+        }
     }
     if (Y.UA.ie && Y.UA.ie <= 8) {
         //mimic .module:after so subsequent elements are cleared
