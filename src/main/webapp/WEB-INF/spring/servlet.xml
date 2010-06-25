@@ -49,7 +49,9 @@
                 <entry key="(.*)/" value="$1/index.html"/>
                 <entry key="(.*)/classes/index\.html" value="$1/services/workshops/laneclasses.html"/>
                 <entry key="(.*)/clinician/index\.html" value="$1/portals/clinical.html"/>
+                <entry key="(.*)/index\.html\?template=shc(.*)" value="$1/index\.html\?sourceid=shc$2"/>
                 <entry key="(.*)/services/index\.html" value="$1/newpage.html?page=$1/about/index.html"/>
+                <entry key="(.*)/(?:content|rss)/page2rss\?page=/services/workshops/laneclasses\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/classes-consult/laneclasses\.html"/>
                 <entry key="(.*)/services/workshops/laneclasses\.html" value="$1/newpage.html?page=$1/classes-consult/laneclasses.html"/>
                 <entry key="(.*)/howto/index\.html\?id=48" value="$1/newpage.html?page=$1/about/hours-directions.html"/>
                 <entry key="(.*)/contacts/index\.html\?loadTab=askus" value="$1/newpage.html?page=$1/help/ask-us.html"/>
@@ -59,11 +61,14 @@
                 <entry key="(.*)/portals/bassett/(.*)" value="$1/newpage.html?page=$1/biomed-resources/bassett/$2"/>
                 <entry key="((?!.*/(?:biomed-resources|raw).*).*)/bassett/(.*)" value="$1/newpage.html?page=$1/biomed-resources/bassett/$2"/>
                 <entry key="(.*)/portals/history/index\.html" value="$1/newpage.html?page=$1/med-history/index.html"/>
+                <entry key="(.*)/(?:content|rss)/page2rss\?page=/portals/emgrandrounds\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/biomed-resources/emgrandrounds\.html"/>
+                <entry key="(.*)/(?:content|rss)/page2rss\?page=/portals/medgrandrounds\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/biomed-resources/medgrandrounds\.html"/>
+                <entry key="(.*)/(?:content|rss)/page2rss\?page=/portals/pedsgrandrounds\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/biomed-resources/pedsgrandrounds\.html"/>
+                <entry key="(.*)/rss/services/tools/highly-accessed-articles\.xml" value="$1/newpage.html?page=$1/rss/highly-accessed-articles.xml"/>
                 <entry key="(.*)/portals/emgrandrounds\.html" value="$1/newpage.html?page=$1/biomed-resources/emgrandrounds.html"/>
                 <entry key="(.*)/portals/medgrandrounds\.html" value="$1/newpage.html?page=$1/biomed-resources/medgrandrounds.html"/>
                 <entry key="(.*)/portals/pedsgrandrounds\.html" value="$1/newpage.html?page=$1/biomed-resources/pedsgrandrounds.html"/>
                 <entry key="(.*)/portals/ihealth\.html" value="$1/newpage.html?page=$1/portals/ihealth/index.html"/>
-                <entry key="(.*)/index\.html\?template=shc(.*)" value="$1/index\.html\?sourceid=shc$2"/>
             </map>
         </property>
         <property name="servletContext" ref="javax.servlet.ServletContext"/>
