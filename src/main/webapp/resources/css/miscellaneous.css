@@ -31,8 +31,9 @@ em {
 }
 #beta-heading {
   color:#333333;
-  font-size:14pt;
+  font-size:14px;
   font-weight:bold;
   position:relative;
   top:-7px;
+  font-family:arial;
 }
