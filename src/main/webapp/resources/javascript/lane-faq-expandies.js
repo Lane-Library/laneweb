@@ -1,6 +1,5 @@
 YUI({
-    gallery: 'gallery-2010.04.02-17-26',
-    filter:"debug"
+    gallery: 'gallery-2010.04.02-17-26'
 }).use("lane", 'gallery-node-accordion', 'plugin', 'node', 'anim', "io", function(Y) {
 
     var expandies = Y.all('.faq-expandy'),
