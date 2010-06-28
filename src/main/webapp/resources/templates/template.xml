@@ -20,7 +20,7 @@
                     </div>
                     <div id="sb">
                         <h1>
-                            <a href="/index.html"><span>Lane</span> Medical Library <span
+                            <a href="/index.html"><span>Lane</span> Medical Library <span id="beta-heading">BETA</span><span
                                     id="subHeading">powered by LaneConnex Technology</span></a>
                         </h1>
                         <form id="search" method="get" action="/search.html">
