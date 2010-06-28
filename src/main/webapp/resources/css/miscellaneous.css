@@ -29,12 +29,3 @@ em {
 .more a {
   border:none;
 }
-#beta-heading {
-  color:#333333;
-  font-size:14px;
-  font-weight:bold;
-  position:relative;
-  top:-10px;
-  font-family:arial;
-  letter-spacing:normal;
-}
