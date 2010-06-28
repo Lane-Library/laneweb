@@ -12,7 +12,7 @@
     border:1px solid #C1C1C1;
 }
 .fieldLabel  {
-    background:none repeat scroll 0 0 #F2F3ED;
+    background-color:#F2F3ED;
     border:1px dotted #C1C1C1;
     float:left;
     margin-right:10px;
@@ -29,7 +29,5 @@
     font-weight:bolder;
 }
 .fieldRow {
-  display:block;
-  margin-top:1em;
   clear:both;
 }
