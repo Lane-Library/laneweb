@@ -36,7 +36,7 @@
         </xsl:choose>
     </xsl:template>
     
-    <xsl:template match="item" mode="#all">
+    <xsl:template match="item">
         <li>
             <xsl:choose>
                 <xsl:when test="starts-with(guid,'PubMed:')">
