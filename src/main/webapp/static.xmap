@@ -8,7 +8,7 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="caching">
-            <map:parameter name="expires" value="access plus 31 days"/>
+            <map:parameter name="expires" value="access plus 1 years"/>
             <map:match pattern="images/**" type="wildcard">
                 <map:read type="resource" src="${resources-base}/images/{1}">
                     <map:parameter name="alt-src" value="${default-resources-base}/images/{1}"/>
