@@ -21,10 +21,10 @@
             </map:match>
             <!-- proxy yui files -->
             <map:match pattern="style/*/yui.css" type="wildcard">
-                <map:read type="always-valid" src="http://yui.yahooapis.com/combo?${query-string}"/>
+                <map:read type="yui-proxy" src="http://yui.yahooapis.com/combo?${query-string}"/>
             </map:match>
             <map:match pattern="javascript/*/yui.js" type="wildcard">
-                <map:read type="always-valid" src="http://yui.yahooapis.com/combo?${query-string}"/>
+                <map:read type="yui-proxy" src="http://yui.yahooapis.com/combo?${query-string}"/>
             </map:match>
             <!-- first wildcard will be version for local css and javascript -->
             <map:match pattern="style/*/**.css" type="wildcard">

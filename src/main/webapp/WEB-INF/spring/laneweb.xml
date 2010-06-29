@@ -113,8 +113,8 @@
     <bean name="org.apache.cocoon.reading.Reader/resource"
         class="edu.stanford.irt.laneweb.cocoon.NoCacheBigReader" scope="prototype"/>
     
-    <bean name="org.apache.cocoon.reading.Reader/always-valid"
-        class="edu.stanford.irt.laneweb.cocoon.CacheAlwaysValidReader" scope="prototype"/>
+    <bean name="org.apache.cocoon.reading.Reader/yui-proxy"
+        class="edu.stanford.irt.laneweb.cocoon.YUIProxyReader" scope="prototype"/>
 
     <bean name="org.apache.cocoon.reading.Reader/txt-resource"
         class="edu.stanford.irt.laneweb.cocoon.TxtResourceReader"
