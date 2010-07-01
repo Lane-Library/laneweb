@@ -20,13 +20,15 @@
     text-align:right;
     width:30%;
 }
+.requiredField, .validatedField {
+    padding:5px;
+    font-size:1.5em;
+}
 .requiredField  {
     color:#990000;
-    font-weight:bolder;
 }
 .validatedField  {
     color:green;
-    font-weight:bolder;
 }
 .fieldRow {
   clear:both;
