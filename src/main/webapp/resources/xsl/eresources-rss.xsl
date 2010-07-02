@@ -90,7 +90,7 @@
                         <xsl:value-of select="$url"/>
                     </link>
                 </image>
-                <xsl:apply-templates select="h:body/h:dl/h:dd/h:ul/h:li"/>
+                <xsl:apply-templates select="//h:dl/h:dd/h:ul/h:li"/>
             </channel>
         </rss>
     </xsl:template>
@@ -99,14 +99,11 @@
     <xsl:template match="h:li">
         <item>
             <title>
-                <xsl:value-of select="../../preceding-sibling::h:dt[1]/text()"/>: <xsl:value-of
-                    select="h:a"/> - <xsl:value-of select="text()"/>
+                 <xsl:value-of select="h:a"/>
             </title>
-            <link>http://lane.stanford.edu/secure/proxy?url=<xsl:value-of
-                    select="h:a[1]/@href"/></link>
+            <link>http://lane.stanford.edu/secure/login.html?url=<xsl:value-of select="h:a[1]/@href"/></link>
             <description>
-                <xsl:value-of select="../../preceding-sibling::h:dt[1]/text()"/>: <xsl:value-of
-                    select="h:a"/> - <xsl:value-of select="text()"/>
+            <xsl:value-of  select="h:a"/> - <xsl:value-of select="text()"/>
             </description>
         </item>
     </xsl:template>
