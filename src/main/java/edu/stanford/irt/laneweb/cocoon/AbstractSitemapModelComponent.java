@@ -36,7 +36,7 @@ public abstract class AbstractSitemapModelComponent implements SitemapModelCompo
             } catch (IOException e) {
                 throw new IllegalArgumentException(e);
             }
-            if (!this.source.exists() && this.parameterMap.containsKey(ALT_SOURCE)) {
+            if (this.parameterMap.containsKey(ALT_SOURCE) && !this.source.exists()) {
                 try {
                     this.source = resolver.resolveURI(this.parameterMap.get(ALT_SOURCE));
                 } catch (IOException e) {
