@@ -21,7 +21,7 @@ public class ProxyCredentialAction extends AbstractAction {
         String sunetid = this.model.getString(Model.SUNETID);
         if (sunetid == null) {
             String basePath = this.model.getString(Model.BASE_PATH);
-            result.put(PROXY_REDIRECT_KEY, basePath + "/apps/secure/proxy/credential?" + queryString);
+            result.put(PROXY_REDIRECT_KEY, basePath + "/secure/apps/proxy/credential?" + queryString);
         } else {
             Ticket ticket = this.model.getObject(Model.TICKET, Ticket.class);
             result.put(PROXY_REDIRECT_KEY, "http://laneproxy.stanford.edu/login?user=" + sunetid + "&ticket=" + ticket
