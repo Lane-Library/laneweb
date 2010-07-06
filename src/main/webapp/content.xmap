@@ -24,7 +24,7 @@
                 <map:transform type="joost" src="${default-resources-base}/xsl/eresources-index-browse.stx"/>
                 <map:transform type="xinclude"/>
                 <map:transform type="joost" src="${default-resources-base}/xsl/eresources-count.stx"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/rss-post.xsl"/>
+                <map:transform type="joost" src="${default-resources-base}/xsl/eresources-rss-link.stx"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="biomed-resources/(.+(browse|core)).html" type="regexp">
@@ -33,7 +33,7 @@
                 </map:generate>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/rss-post.xsl"/>
+                <map:transform type="joost" src="${default-resources-base}/xsl/eresources-rss-link.stx"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="search.html" type="wildcard">

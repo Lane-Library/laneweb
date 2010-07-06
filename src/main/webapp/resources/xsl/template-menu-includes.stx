@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
     This cleans up the xincluded left menus to remove parent elements of the sectionMenu class
+    and add ?laneNav=1 to the links
 -->
 <stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
     xmlns:h="http://www.w3.org/1999/xhtml"
