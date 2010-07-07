@@ -30,6 +30,7 @@
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl"/>
                     <map:transform type="joost" src="${default-resources-base}/xsl/eresources-rss-link.stx"/>
                     <map:serialize type="xml"/>
                 </map:match>
