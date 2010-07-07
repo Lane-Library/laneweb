@@ -33,6 +33,9 @@
     border-top:none;
     padding-bottom:6px;
     z-index:2;
+    background-image: url(/././images/menu-bg.gif);
+    background-position: 0 100%;
+    background-repeat: repeat-x;
 }
 #laneNav li:hover ul, #laneNav .hover ul {
     display:block;
