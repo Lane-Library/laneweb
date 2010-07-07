@@ -25,6 +25,9 @@
 #laneNav li:hover a, #laneNav .hover a, #laneNav .active a {
     background-color:white;
 }
+#laneNav li:hover ul a, #laneNav .hover ul a, #laneNav .active ul a {
+    background-color:transparent;
+}
 #laneNav ul {
     display:none;
     background-color:white;
