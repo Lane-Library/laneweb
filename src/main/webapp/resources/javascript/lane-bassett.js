@@ -29,27 +29,18 @@ YUI().use("lane", 'node','io-base','event','history', function(Y) {
         var loadContent = function(url) {
             url = "/././plain/bassett/raw".concat(url);
             function successHandler(id, o, args) {
-                var contentNode, content, container, i;
-                content = document.importNode(o.responseXML.getElementsByTagName("body")[0], true);
-                content = new Y.Node(content).get('children');
-                container = Y.one('#bassettContent');
-                contentNode = container.get('children');
-                for (i = 0; i < contentNode.size(); i++) {
-                    container.removeChild(contentNode.item(i));
-                }
-                for (i = 0; i < content.size(); i++) {
-                    container.append(content.item(i));
-                }
-                registerLinksContainer(container);
-                Y.fire('lane:change');
-            }
+                var contentNode, container,	
+                content = new Y.Node(o.responseText);
+				container = Y.one('#bassettContent');
+				container.setContent(content);
+				registerLinksContainer(container);
+	        }
             Y.io(url, {on : {success : successHandler}});
         }
 
         var formatAjaxUrl = function(href) {
             var url;
-            href = href.replace("search.html",
-                    "/bassett/bassettsView.html");
+            href = href.replace("search.html", "/bassett/bassettsView.html");
             href = href.substr(href.indexOf("/bassett/") + 8);
             href = href.split("?");
             if (href.length == 1) {
