@@ -591,7 +591,16 @@
       <em><xsl:copy><xsl:apply-templates select="attribute::node() | child::node()"/></xsl:copy></em>
     </xsl:template>
     
-    <!-- the next 5 template matches handle the login state and show links depending on that state -->
+    <!-- the next 6 template matches handle the login state and show links depending on that state -->
+    <!-- process the list only if off campus -->
+    <xsl:template match="h:ul[attribute::id='login']">
+        <xsl:if test="matches($ipgroup,'^(OTHER|PAVA|ERR)$')">
+            <xsl:copy>
+                <xsl:apply-templates select="attribute::node() | child::node()"/>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>
+    
     <!-- the 1st #login li is the login link or the users name -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[1]">
         <xsl:copy>
@@ -603,9 +612,9 @@
                 <xsl:when test="string-length($sunetid) &gt; 0">
                     <xsl:value-of select="$sunetid"/>
                 </xsl:when>
-                <xsl:when test="$proxy-links = 'true'">
+                <xsl:otherwise>
                     <xsl:apply-templates select="child::node()"/>
-                </xsl:when>
+                </xsl:otherwise>
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
@@ -631,7 +640,7 @@
     
     <!-- the 4rd #login li is the proxy-off toggle -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[4]">
-      <xsl:if test="string-length($sunetid) = 0 and matches($ipgroup,'^(OTHER|PAVA|ERR)$') and $proxy-links = 'true'">
+      <xsl:if test="string-length($sunetid) = 0 and $proxy-links = 'true'">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()|child::node()"/>
             </xsl:copy>
@@ -640,7 +649,7 @@
     
     <!-- the 5th #login li is the proxy-on toggle -->
     <xsl:template match="h:ul[attribute::id='login']/h:li[5]">
-      <xsl:if test="string-length($sunetid) = 0 and matches($ipgroup,'^(OTHER|PAVA|ERR)$') and $proxy-links = 'false'">
+      <xsl:if test="string-length($sunetid) = 0 and $proxy-links = 'false'">
             <xsl:copy>
                 <xsl:apply-templates select="attribute::node()|child::node()"/>
             </xsl:copy>
