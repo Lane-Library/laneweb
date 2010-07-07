@@ -603,9 +603,9 @@
                 <xsl:when test="string-length($sunetid) &gt; 0">
                     <xsl:value-of select="$sunetid"/>
                 </xsl:when>
-                <xsl:otherwise>
+                <xsl:when test="$proxy-links = 'true'">
                     <xsl:apply-templates select="child::node()"/>
-                </xsl:otherwise>
+                </xsl:when>
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
