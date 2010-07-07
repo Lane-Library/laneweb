@@ -39,6 +39,10 @@
     background-image: url(/././images/menu-bg.gif);
     background-position: 0 100%;
     background-repeat: repeat-x;
+    -moz-border-radius-bottomleft:5px;
+    -moz-border-radius-bottomright:5px;
+    -webkit-border-bottom-left-radius:5px;
+    -webkit-border-bottom-right-radius:5px;
 }
 #laneNav li:hover ul, #laneNav .hover ul {
     display:block;
