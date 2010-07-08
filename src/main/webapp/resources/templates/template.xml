@@ -88,10 +88,32 @@
                             <li>
                                 <a href="/portals/index.html"
                                     >Specialty Portals</a>
-                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                    href="cocoon:/includes/leftmenu-specialties.html">
-                                    <xi:fallback/>
-                                </xi:include>
+                                <ul id="specialties-menu">
+                                    <li><a href="/portals/anesthesia.html">Anesthesia</a></li>
+                                    <li><a href="/portals/cultural.html">Multicultural Health</a></li>
+                                    <li><a href="/portals/ethics.html">Biomedical Ethics</a></li>
+                                    <li><a href="/portals/neurology.html">Neurology</a></li>
+                                    <li><a href="/portals/bioresearch.html">Bioresearch</a></li>
+                                    <li><a href="/portals/nursing.html">Nursing</a></li>
+                                    <li><a href="/portals/cardiology.html">Cardiology</a></li>
+                                    <li><a href="/portals/obgyn.html">Obstetrics &amp; Gynecology</a></li>
+                                    <li><a href="/portals/clinical.html">Clinical</a></li>
+                                    <li><a href="/portals/oncology.html">Oncology</a></li>
+                                    <li><a href="/portals/patient.html">Consumer Health</a></li>
+                                    <li><a href="/portals/ophthalmology.html">Ophthalmology</a></li>
+                                    <li><a href="/portals/emergency.html">Emergency Medicine</a></li>
+                                    <li><a href="http://trachea.stanford.edu/">Otolaryngology</a></li>
+                                    <li><a href="/portals/ihealth/index.html">Global Health</a></li>
+                                    <li><a href="/portals/peds.html">Pediatrics</a></li>
+                                    <li><a href="/portals/hematology.html">Hematology</a></li>
+                                    <li><a href="/portals/pharmacy.html">Pharmacy</a></li>
+                                    <li><a href="/portals/internal-medicine.html">Internal Medicine</a></li>
+                                    <li><a href="/portals/picu.html">PICU</a></li>
+                                    <li><a href="/portals/cvicu.html">LPCH Heart Center Nursing</a></li>
+                                    <li><a href="/portals/pulmonary.html">Pulmonary</a></li>
+                                    <li><a href="/portals/medicalEd.html">Medical Education</a></li>
+                                    <li><a href="/classes-consult/infoliteracy.html">Student</a></li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="/classes-consult/index.html"
