@@ -24,8 +24,10 @@
     
     <bean name="org.apache.cocoon.matching.Matcher/wildcard"
         class="org.apache.cocoon.matching.WildcardURIMatcher"/>
-    
-    
+        
+    <bean name="org.apache.cocoon.matching.Matcher/url-decoding-wildcard"
+        class="edu.stanford.irt.laneweb.cocoon.URLDecodingWildcardURIMatcher"/>
+        
     <bean name="org.apache.cocoon.matching.Matcher/regexp"
         class="org.apache.cocoon.matching.RegexpURIMatcher"/>
     
