@@ -33,6 +33,8 @@
         parent="edu.stanford.irt.laneweb.model.DefaultModelAware">
         <property name="eresourceSuggestionManager"
             ref="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
+        <property name="meshSuggestionManager"
+            ref="edu.stanford.irt.suggest.MeshSuggestionManager"/>
     </bean>
     
 </beans>

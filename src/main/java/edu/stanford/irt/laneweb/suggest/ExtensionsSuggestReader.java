@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.suggest;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -8,19 +9,23 @@ import java.util.TreeSet;
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.suggest.EresourceSuggestionManager;
+import edu.stanford.irt.suggest.MeshSuggestionManager;
 import edu.stanford.irt.suggest.Suggestion;
 
 public class ExtensionsSuggestReader extends AbstractReader {
 
     private EresourceSuggestionManager eresourceSuggestionManager;
 
+    private MeshSuggestionManager meshSuggestionManager;
+
     private String query;
 
     public void generate() throws IOException {
-        String query = this.query;
-        SuggestionComparator comparator = new SuggestionComparator(query);
+        SuggestionComparator comparator = new SuggestionComparator(this.query);
         TreeSet<String> suggestionSet = new TreeSet<String>(comparator);
-        Collection<? extends Suggestion> suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(query);
+        Collection<Suggestion> suggestions = new ArrayList<Suggestion>();
+        suggestions.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm(this.query));
+        suggestions.addAll(this.meshSuggestionManager.getSuggestionsForTerm(this.query));
         for (Suggestion suggestion : suggestions) {
             suggestionSet.add(suggestion.getSuggestionTitle());
         }
@@ -45,6 +50,13 @@ public class ExtensionsSuggestReader extends AbstractReader {
         this.eresourceSuggestionManager = eresourceSuggestionManager;
     }
 
+    public void setMeshSuggestionManager(final MeshSuggestionManager meshSuggestionManager) {
+        if (null == meshSuggestionManager) {
+            throw new IllegalArgumentException("null meshSuggestionManager");
+        }
+        this.meshSuggestionManager = meshSuggestionManager;
+    }
+    
     protected void initialize() {
         String query = this.model.getString(Model.QUERY);
         if (null == query) {
