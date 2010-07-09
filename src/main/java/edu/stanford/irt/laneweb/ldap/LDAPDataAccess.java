@@ -9,6 +9,7 @@ import javax.security.auth.Subject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ldap.CommunicationException;
 import org.springframework.ldap.NamingException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
@@ -35,17 +36,19 @@ public class LDAPDataAccess {
         PrivilegedAction<LDAPData> action = new LDAPPrivilegedAction(this.ldapTemplate, sunetid);
         try {
             ldapData = (LDAPData) Subject.doAs(subject, action);
+        } catch (CommunicationException e) {
+            LOGGER.error("unable to connect to ldap server, using sunetid for name", e);
         } catch (NamingException e) {
             LOGGER.error("failed to get privileged ldap data, trying anonymous access", e);
-        }
-        if (ldapData == null) {
             try {
                 ldapData = action.run();
-            } catch (NamingException e) {
-                LOGGER.error("failed to get anonymous ldap data, using sunetid for name", e);
-                ldapData = new LDAPData();
-                ldapData.setName(sunetid);
+            } catch (NamingException ne) {
+                LOGGER.error("failed to get anonymous ldap data, using sunetid for name", ne);
             }
+        }
+        if (ldapData == null) {
+            ldapData = new LDAPData();
+            ldapData.setName(sunetid);
         }
         return ldapData;
     }

@@ -6,11 +6,13 @@ import static org.easymock.EasyMock.isA;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 
 import javax.security.auth.Subject;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.ldap.CommunicationException;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 
@@ -19,8 +21,6 @@ public class LDAPDataAccessTest {
     private LdapTemplate ldapTemplate;
 
     private SubjectSource subjectSource;
-
-    private LDAPData lDAPData;
     
     private Subject subject = new Subject();
 
@@ -30,7 +30,6 @@ public class LDAPDataAccessTest {
     public void setUp() {
         this.subjectSource = createMock(SubjectSource.class);
         this.ldapTemplate = createMock(LdapTemplate.class);
-        this.lDAPData = createMock(LDAPData.class);
         this.lDAPDataAccess = new LDAPDataAccess();
         this.lDAPDataAccess.setSubjectSource(this.subjectSource);
         this.lDAPDataAccess.setLdapTemplate(this.ldapTemplate);
@@ -39,22 +38,19 @@ public class LDAPDataAccessTest {
     @Test
     public void testGetUserInfo() {
       expect(this.subjectSource.getSubject()).andReturn(this.subject);
-      expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null).times(2);
-      replayMocks();
-        this.lDAPDataAccess.getLdapData("ditenus");
-        verifyMocks();
+      expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null);
+      replay(this.subjectSource, this.ldapTemplate);
+      this.lDAPDataAccess.getLdapData("ditenus");
+      verify(this.subjectSource, this.ldapTemplate);
     }
 
-    private void replayMocks() {
-        replay(this.lDAPData);
-        replay(this.subjectSource);
-        replay(this.ldapTemplate);
-        
-    }
-
-    private void verifyMocks() {
-        verify(this.lDAPData);
-        verify(this.subjectSource);
-        verify(this.ldapTemplate);
+    @Test
+    public void testThrowCommunicationException() {
+      expect(this.subjectSource.getSubject()).andReturn(this.subject);
+      expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andThrow(new CommunicationException(null));
+      replay(this.subjectSource, this.ldapTemplate);
+      LDAPData data = this.lDAPDataAccess.getLdapData("ditenus");
+      assertEquals("ditenus", data.getName());
+      verify(this.subjectSource, this.ldapTemplate);
     }
 }
