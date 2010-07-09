@@ -1,12 +1,12 @@
 /* these are the default list styles */
-ol {
+ol li {
     list-style-type:decimal;
     list-style-position:inside;
 }
 .content ul {
     margin-bottom:10px;
 }
-.content li {
+.content ul li {
     list-style-image:url(/././images/raquo.gif);
     list-style-type:disc;
     list-style-position:outside;
@@ -21,9 +21,4 @@ ol {
 /*this is the middle column*/
 .content .middleColumn li {
     padding-bottom:0.2em;
-}
-/* used for pubmed and highly accessed article lists */
-.citationList li{
-    list-style: decimal;
-    margin-bottom:1em;
 }
