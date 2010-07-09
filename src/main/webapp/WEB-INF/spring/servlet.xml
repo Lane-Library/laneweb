@@ -69,6 +69,9 @@
                 <entry key="(.*)/portals/medgrandrounds\.html" value="$1/newpage.html?page=$1/biomed-resources/medgrandrounds.html"/>
                 <entry key="(.*)/portals/pedsgrandrounds\.html" value="$1/newpage.html?page=$1/biomed-resources/pedsgrandrounds.html"/>
                 <entry key="(.*)/portals/ihealth\.html" value="$1/newpage.html?page=$1/portals/ihealth/index.html"/>
+                <entry key="(.*)/search\.html\?source=(?:all|ej|database|book|software|video|cc|lanesite)&amp;(.*)" value="$1/newpage.html?page=$1/search\.html\?source=all-all%26$2"/>
+                <entry key="(.*)/search\.html\?source=(clinical|history)&amp;(.*)" value="$1/newpage.html?page=$1/search\.html\?source=$2-all%26$3"/>
+                <entry key="(.*)/search\.html\?source=research&amp;(.*)" value="$1/newpage.html?page=$1/search\.html\?source=bioresearch-all%26$2"/>
             </map>
         </property>
         <property name="servletContext" ref="javax.servlet.ServletContext"/>
