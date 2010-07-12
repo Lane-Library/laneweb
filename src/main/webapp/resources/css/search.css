@@ -106,6 +106,7 @@
 .resultsNav {
     text-align:center;
     padding-bottom:20px;
+    white-space:nowrap;
 }
 .resultsNav a {
     padding:10px;
