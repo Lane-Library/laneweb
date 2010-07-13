@@ -44,6 +44,8 @@
     background-position: -25px -529px;
     width: 253px;
 }
-.button.subscribe, .button.subscribe:hover {
+.button.subscribe {
     background-position: -25px -70px;
+    background-color:transparent;
+    cursor:pointer;
 }
