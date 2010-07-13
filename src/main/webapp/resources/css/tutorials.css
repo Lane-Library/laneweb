@@ -36,13 +36,13 @@
     line-height:12px;
     margin-bottom:10px;
 }
-.tutorial li li {
+.content .tutorial li li {
     border-top:none;
     list-style:disc outside url("/././images/raquo.gif");
     margin-left:15px;
     padding-top:0;
 }
-.tutorial li li:after {
+.content .tutorial li li:after {
     content:"";
     display:none;
     clear:none;
