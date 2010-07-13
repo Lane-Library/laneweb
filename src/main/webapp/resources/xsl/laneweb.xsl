@@ -275,6 +275,7 @@
             <xsl:attribute name="classid">clsid:D27CDB6E-AE6D-11cf-96B8-444553540000</xsl:attribute>
             <xsl:apply-templates select="@*[not(name()='type' or name() = 'data')]"/>
             <param name="movie" value="{@data}"/>
+            <param name="wmode" value="transparent"/>
             <xsl:apply-templates select="h:param"/>
             <xsl:comment>[if !IE]></xsl:comment>
             <xsl:copy>
