@@ -16,7 +16,7 @@
                 <!-- bassett search pages -->
                 <map:match type="regex-parameter" pattern="bassett">
                     <map:parameter name="parameter-name" value="source"/>
-                    <map:generate src="cocoon://content/bassett/bassettsView.html" type="file"/>
+                    <map:generate src="cocoon://content/biomed-resources/bassett/bassettsView.html" type="file"/>
                     <map:serialize type="xhtml"/>
                 </map:match>
                 <!-- all search pages (parameter is all-all, all-pubmed, all-ej, etc)-->

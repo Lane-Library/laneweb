@@ -27,7 +27,7 @@ YUI().use("lane", 'node','io-base','event','history', function(Y) {
         };
 
         var loadContent = function(url) {
-            url = "/././plain/bassett/raw".concat(url);
+            url = "/././plain/biomed-resources/bassett/raw".concat(url);
             function successHandler(id, o, args) {
                 var contentNode, container,	
                 content = new Y.Node(o.responseText);
@@ -40,7 +40,7 @@ YUI().use("lane", 'node','io-base','event','history', function(Y) {
 
         var formatAjaxUrl = function(href) {
             var url;
-            href = href.replace("search.html", "/bassett/bassettsView.html");
+            href = href.replace("search.html", "/biomed-resources/bassett/bassettsView.html");
             href = href.substr(href.indexOf("/bassett/") + 8);
             href = href.split("?");
             if (href.length == 1) {

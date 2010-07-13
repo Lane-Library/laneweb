@@ -11,8 +11,8 @@
             <map:match pattern="apps/**" type="wildcard">
                 <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
             </map:match>
-            <map:match pattern="bassett/**" type="wildcard">
-                <map:mount uri-prefix="bassett" check-reload="no" src="bassett.xmap"/>
+            <map:match pattern="biomed-resources/bassett/**" type="wildcard">
+                <map:mount uri-prefix="biomed-resources/bassett" check-reload="no" src="bassett.xmap"/>
             </map:match>
             <map:match pattern="rss/**" type="wildcard">
                 <map:mount uri-prefix="rss" check-reload="no" src="rss.xmap"/>
