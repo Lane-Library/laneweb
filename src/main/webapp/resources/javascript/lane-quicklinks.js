@@ -1,4 +1,5 @@
 YUI().use('node','event-custom', function(Y) {
+	if (Y.one("#qlinks")) {
     Y.publish("lane:quickLinkClick",{
         broadcast:2,
         emitFacade: true,
@@ -17,4 +18,5 @@ YUI().use('node','event-custom', function(Y) {
             setTimeout(f,200); // delay for tracking
         }
     });
+	}
 });

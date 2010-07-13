@@ -1,4 +1,5 @@
 YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'node','event-custom', function(Y) {
+	if (Y.one("search")) {
     LANE.Search = function() {
         var searching = false, //searching state
             form = Y.one('#search'), //the form Element
@@ -62,4 +63,5 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
         };
         return search;
     }();
+	}
 });

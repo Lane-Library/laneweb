@@ -1,7 +1,7 @@
 YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom', 'querystring-parse-simple', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
-        searchTerms = new Y.lane.TextInput(Y.one("#searchTerms")),
+        searchTerms,
         picoIsOn = false,
         picoTextInputs = [],
         picoFields, formAnim, navAnim,
@@ -92,31 +92,34 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
             }
             return qString;
         };
-    Y.Global.on("lane:suggestSelect",  function(event) {
-        if(picoIsOn && getPicoQuery()){
-            searchTerms.setValue(getPicoQuery());
-        }
-    });
-    if (form.hasClass('clinical')) {
-        picoOn();
-    }
-//    formAnim = new Y.Anim({
-//        node: '#search',
-//        easing: Y.Easing.easeOut,
-//        duration: 0.3
-//    });
-//    navAnim = new Y.Anim({
-//        node: '#laneNav',
-//        easing: Y.Easing.easOut,
-//        duration: 0.3
-//    });
-    Y.Global.on('lane:searchSourceChange', function(event) {
-        if (event.newVal == 'clinical-all') {
+    if (form) {
+    	searchTerms = new Y.lane.TextInput(Y.one("#searchTerms"))
+        Y.Global.on("lane:suggestSelect",  function(event) {
+            if(picoIsOn && getPicoQuery()){
+                searchTerms.setValue(getPicoQuery());
+            }
+        });
+        if (form.hasClass('clinical')) {
             picoOn();
-        } else {
-            picoOff();
         }
-    });
+//        formAnim = new Y.Anim({
+//            node: '#search',
+//            easing: Y.Easing.easeOut,
+//            duration: 0.3
+//        });
+//        navAnim = new Y.Anim({
+//            node: '#laneNav',
+//            easing: Y.Easing.easOut,
+//            duration: 0.3 
+//        });
+        Y.Global.on('lane:searchSourceChange', function(event) {
+            if (event.newVal == 'clinical-all') {
+                picoOn();
+            } else {
+                picoOff();
+            }
+        });
+    }
 });
 //    // pico form functionality
 //    //  - remove default text values onfocus
