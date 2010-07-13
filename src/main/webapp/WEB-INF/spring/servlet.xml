@@ -58,8 +58,6 @@
                 <entry key="((?!.*/about.*).*)/contacts/(.*)" value="$1/newpage.html?page=$1/about/contacts/$2"/>
                 <entry key="(.*)/online/(.*)browse\.html(.*)" value="$1/newpage.html?page=$1/biomed-resources/$2.html$3"/>
                 <entry key="(.*)/online/(.*)" value="$1/newpage.html?page=$1/biomed-resources/$2"/>
-                <entry key="(.*)/portals/bassett/(.*)" value="$1/newpage.html?page=$1/biomed-resources/bassett/$2"/>
-                <entry key="((?!.*/(?:biomed-resources|raw).*).*)/bassett/(.*)" value="$1/newpage.html?page=$1/biomed-resources/bassett/$2"/>
                 <entry key="(.*)/portals/history/index\.html" value="$1/newpage.html?page=$1/med-history/index.html"/>
                 <entry key="(.*)/(?:content|rss)/page2rss\?page=/portals/emgrandrounds\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/biomed-resources/emgrandrounds\.html"/>
                 <entry key="(.*)/(?:content|rss)/page2rss\?page=/portals/medgrandrounds\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/biomed-resources/medgrandrounds\.html"/>
