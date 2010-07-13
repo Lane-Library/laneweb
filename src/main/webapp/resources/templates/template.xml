@@ -43,8 +43,7 @@
                                         title="Find anatomical images from Lane's Bassset Collection"
                                         >Bassett Images</option>
                                 </select>
-                                <a id="searchTips" href="/help/tools/search-tips.html">Search
-                                    Tips</a>
+                                <a id="searchTips" href="/help/tools/choose-search.html">How to Search</a>
                                 <div id="searchIndicator"><img alt="[searching]"
                                         src="/images/backgr/search-indicator.gif"/></div>
                                 <input name="q" id="searchTerms" type="text"/>
