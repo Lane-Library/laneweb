@@ -22,17 +22,17 @@
                 <xsl:choose>
                     <xsl:when test="starts-with($request-uri, '/rss/browse/')">
                         <xsl:choose>
-                            <xsl:when test="substring-after($request-uri, '/rss/browse/') = 'database'">
+                            <xsl:when test="substring-after($request-uri, '/rss/browse/type/') = 'database'">
                                 <xsl:text>db.html</xsl:text>
                             </xsl:when>
-                            <xsl:when test="substring-after($request-uri, '/rss/browse/') = 'book'">
+                            <xsl:when test="substring-after($request-uri, '/rss/browse/type/') = 'book'">
                                 <xsl:text>eb.html</xsl:text>
                             </xsl:when>
-                            <xsl:when test="substring-after($request-uri, '/rss/browse/') = 'atlases,%20pictorial'">
+                            <xsl:when test="substring-after($request-uri, '/rss/browse/type/') = 'atlases,%20pictorial'">
                                 <xsl:text>images.html</xsl:text>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="substring-after($request-uri, '/rss/browse/') " />
+                                <xsl:value-of select="substring-after($request-uri, '/rss/browse/type/') " />
                                 <xsl:text>.html</xsl:text>
                             </xsl:otherwise>
                         </xsl:choose>
