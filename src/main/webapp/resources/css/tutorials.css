@@ -1,16 +1,16 @@
-.tutorial li {
+.tutorial ul li {
     list-style:none;
     border-top:1px #DBD3C3 solid;
     margin-left:0px;
     padding-top:16px;
 }
-.tutorial li:after {
+.tutorial ul li:after {
     content:".";
     display:block;
     clear:both;
     visibility:hidden;
 }
-.tutorial li:first-child {
+.tutorial ul li:first-child {
     border-top:none;
 }
 .tutorial .item-number {
