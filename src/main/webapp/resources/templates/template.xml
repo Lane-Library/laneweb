@@ -33,7 +33,7 @@
                                         >Lane Search</option>
                                     <option value="clinical-all"
                                         title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ..."
-                                        >Clinical</option>
+                                        >Clinical/PICO</option>
                                     <option value="bioresearch-all"
                                         title="Search 200+ bioresearch resources"
                                         >Bioresearch</option>
