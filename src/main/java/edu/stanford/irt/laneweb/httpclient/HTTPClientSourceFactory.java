@@ -1,6 +1,8 @@
 package edu.stanford.irt.laneweb.httpclient;
 
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.excalibur.source.Source;
@@ -12,13 +14,15 @@ import org.apache.excalibur.source.SourceFactory;
 public class HTTPClientSourceFactory implements SourceFactory {
 
     private HttpClient httpClient;
+    
+    private Executor executor = Executors.newFixedThreadPool(5);
 
     /**
      * Creates a {@link HTTPClientSource} instance.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Source getSource(final String uri, final Map sourceParams) {
-        return new HTTPClientSource(uri, this.httpClient);
+        return new HTTPClientSource(uri, this.httpClient, this.executor);
     }
 
     /**

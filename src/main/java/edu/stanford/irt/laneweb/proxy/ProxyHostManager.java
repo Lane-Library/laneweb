@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import javax.sql.DataSource;
 
@@ -79,6 +81,8 @@ public class ProxyHostManager {
     private long lastUpdate = 0;
 
     private Set<String> proxyHosts;
+    
+    private Executor executor = Executors.newSingleThreadExecutor();
 
     public ProxyHostManager() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ezproxy-servers.txt")));
@@ -127,14 +131,13 @@ public class ProxyHostManager {
         long now = System.currentTimeMillis();
         if (now > this.lastUpdate + UPDATE_INTERVAL) {
             this.lastUpdate = now;
-            new Thread() {
+            this.executor.execute(new Runnable() {
 
-                @Override
                 public void run() {
                     Set<String> newSet = new DatabaseProxyHostSet(ProxyHostManager.this.dataSource);
                     ProxyHostManager.this.proxyHosts = newSet;
                 }
-            }.start();
+            });
         }
     }
 }

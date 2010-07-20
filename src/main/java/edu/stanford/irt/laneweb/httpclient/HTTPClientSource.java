@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+import java.util.concurrent.Executor;
 
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HttpClient;
@@ -60,6 +61,8 @@ public class HTTPClientSource implements Source {
      */
     private boolean dataValid;
 
+    private Executor executor;
+
     /**
      * Whether the resource exists on the server.
      */
@@ -95,9 +98,31 @@ public class HTTPClientSource implements Source {
      * @exception Exception
      *                if an error occurs
      */
-    public HTTPClientSource(final String uri, final HttpClient httpClient) {
+    public HTTPClientSource(final String uri, final HttpClient httpClient, final Executor executor) {
         this.uri = uri;
         this.httpClient = httpClient;
+        this.executor = executor;
+    }
+
+    /**
+     * Executes a particular {@link HttpMethod} and updates internal data storage.
+     * 
+     * @param method
+     *            {@link HttpMethod} to execute
+     * @return response code from server
+     * @throws IOException
+     * @throws HttpException
+     * @exception IOException
+     *                if an error occurs
+     */
+    protected int executeMethod(final HttpMethod method) throws HttpException, IOException {
+        final int response = this.httpClient.executeMethod(method);
+        updateExists(method);
+        updateMimeType(method);
+        updateContentLength(method);
+        updateLastModified(method);
+        // all finished, return response code to the caller.
+        return response;
     }
 
     /**
@@ -148,9 +173,8 @@ public class HTTPClientSource implements Source {
         }
         final PipedOutputStream output = new PipedOutputStream();
         PipedInputStream resultStream = new PipedInputStream(output);
-        new Thread() {
+        this.executor.execute(new Runnable() {
 
-            @Override
             public void run() {
                 try {
                     InputStream in = method.getResponseBodyAsStream();
@@ -170,7 +194,7 @@ public class HTTPClientSource implements Source {
                     method.releaseConnection();
                 }
             }
-        }.start();
+        });
         return resultStream;
     }
 
@@ -304,8 +328,7 @@ public class HTTPClientSource implements Source {
         // REVISIT(MC): need a special way to handle 304 (NOT MODIFIED)
         // 204 & 205 in the future
         // resource does not exist if HttpClient returns a 404 or a 410
-        this.exists =
-                ((response == HttpStatus.SC_OK) || (response == HttpStatus.SC_CREATED) || (response == HttpStatus.SC_PARTIAL_CONTENT));
+        this.exists = ((response == HttpStatus.SC_OK) || (response == HttpStatus.SC_CREATED) || (response == HttpStatus.SC_PARTIAL_CONTENT));
     }
 
     /**
@@ -336,26 +359,5 @@ public class HTTPClientSource implements Source {
         // returns the Content-Type, so we'll follow that for now.
         final Header header = method.getResponseHeader(CONTENT_TYPE);
         this.mimeType = header == null ? null : header.getValue();
-    }
-
-    /**
-     * Executes a particular {@link HttpMethod} and updates internal data storage.
-     * 
-     * @param method
-     *            {@link HttpMethod} to execute
-     * @return response code from server
-     * @throws IOException
-     * @throws HttpException
-     * @exception IOException
-     *                if an error occurs
-     */
-    protected int executeMethod(final HttpMethod method) throws HttpException, IOException {
-        final int response = this.httpClient.executeMethod(method);
-        updateExists(method);
-        updateMimeType(method);
-        updateContentLength(method);
-        updateLastModified(method);
-        // all finished, return response code to the caller.
-        return response;
     }
 }
