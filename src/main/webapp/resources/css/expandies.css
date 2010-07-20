@@ -74,6 +74,7 @@
 .type1 .details .extra {
     float:right;
     font-size:larger;
+    margin-left:10px
 }
 .type1 .yui-ge, .type1 .yui-gc {
     line-height:18px;
