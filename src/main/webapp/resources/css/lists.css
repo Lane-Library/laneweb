@@ -3,6 +3,10 @@ ol li {
     list-style-type:decimal;
     list-style-position:inside;
 }
+dt {
+    margin-top:.5em;
+    font-weight:bold;
+}
 .content ul {
     margin-bottom:10px;
 }
