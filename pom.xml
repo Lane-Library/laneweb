@@ -143,6 +143,7 @@
                       <output>target/laneweb/resources/javascript/lane-all.js</output>
                      <includes>
                         <include>lane-min.js</include>
+                        <include>lane-ie-min.js</include>
                         <include>lane-search-result-min.js</include>
                         <include>lane-search-indicator-min.js</include>
                         <include>lane-bassett-min.js</include>
@@ -156,7 +157,6 @@
                         <include>lane-webtrends-min.js</include>
                         <include>lane-popup-min.js</include>
                         <include>lane-metasearch-min.js</include>
-                        <include>lane-ie-min.js</include>
                         <include>lane-search-facets-min.js</include>
                         <include>lane-search-facet-counts-min.js</include>
                         <include>lane-search-history-min.js</include>
@@ -560,6 +560,20 @@
     	<groupId>net.bull.javamelody</groupId>
     	<artifactId>javamelody-core</artifactId>
     	<version>1.17.0</version>
+    	<scope>runtime</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-oxm</artifactId>
+    	<version>3.0.3.RELEASE</version>
+    	<type>jar</type>
+    	<scope>runtime</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-webmvc</artifactId>
+    	<version>3.0.3.RELEASE</version>
+    	<type>jar</type>
     	<scope>runtime</scope>
     </dependency>
    </dependencies>
