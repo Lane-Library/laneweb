@@ -100,7 +100,7 @@
               <xsl:otherwise>
                   <xsl:text>No images for search term </xsl:text>
                   <b><xsl:value-of select="$query"/></b>
-                  <xsl:text> were found in this region.</xsl:text>
+                  <xsl:text> were found.</xsl:text>
               </xsl:otherwise>
           </xsl:choose>
     </xsl:template> 
