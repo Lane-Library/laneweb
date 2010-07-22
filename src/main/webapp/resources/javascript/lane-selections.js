@@ -1,4 +1,6 @@
-YUI().use('node', function(Y) {
+YUI().use("lane", 'node', function(Y) {
+
+	var time = new Date().getTime();
     var selections = Y.all('#selections > li'),
         select = Y.one('#selections-select'),
         i,
@@ -23,4 +25,6 @@ YUI().use('node', function(Y) {
                 hideAllBut(this.get('value'));
             }
         }, select );
+
+        LANE.log("lane-selections.js:use() " + (new Date().getTime() - time));
 });

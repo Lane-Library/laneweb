@@ -2,6 +2,8 @@
    This code makes the columns the same height so that their borders are the same.
 */
 YUI().use("node", function(Y) {
+
+	var time = new Date().getTime();
     
     Y.on("domready", function() {
         var i, height, region, maxHeight = 0,
@@ -13,5 +15,7 @@ YUI().use("node", function(Y) {
         }
         columns.setStyle("height", maxHeight + "px");
     });
+
+    LANE.log("lane-column-height.js:use() " + (new Date().getTime() - time));
     
 });

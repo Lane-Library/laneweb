@@ -1,4 +1,6 @@
 YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node','json-parse','io-base','datatype',function(Y) {
+
+	var time = new Date().getTime();
         
     LANE.namespace('metasearch');
     LANE.metasearch = function() {
@@ -123,4 +125,6 @@ YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node',
             e.parentForm.submit();
         });
     }
+
+    LANE.log("lane-metasearch.js:use() " + (new Date().getTime() - time));
 });

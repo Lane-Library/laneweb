@@ -2,6 +2,8 @@ YUI({
     gallery: 'gallery-2010.04.02-17-26'
 }).use("lane", 'gallery-node-accordion', 'plugin', 'node', 'anim', "io", function(Y) {
 
+	var time = new Date().getTime();
+
     var expandies = Y.all('.faq-expandy'),
         expandy, i, j, anchor, href, faqId,
         children, panel, eventHandle;
@@ -41,4 +43,6 @@ YUI({
             anim: Y.Easing.backIn
         });
     }
+
+    LANE.log("lane-faq-expandies.js:use() " + (new Date().getTime() - time));
 });

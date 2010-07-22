@@ -1,5 +1,7 @@
 YUI().use("lane", 'node','io-base','event','history', function(Y) {
 
+	var time = new Date().getTime();
+
         var bassettContent = Y.one('#bassettContent'), diagramDisplay = false;
 
         
@@ -75,5 +77,7 @@ YUI().use("lane", 'node','io-base','event','history', function(Y) {
                 initializeHistory();
             }
         }
+
+        LANE.log("lane-bassett.js:use() " + (new Date().getTime() - time));
 
     });

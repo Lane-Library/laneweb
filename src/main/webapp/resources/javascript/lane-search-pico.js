@@ -1,4 +1,6 @@
 YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom', 'querystring-parse-simple', function(Y) {
+
+	var time = new Date().getTime();
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         searchTerms,
@@ -120,6 +122,8 @@ YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom
             }
         });
     }
+
+    LANE.log("lane-search-pico.js:use() " + (new Date().getTime() - time));
 });
 //    // pico form functionality
 //    //  - remove default text values onfocus

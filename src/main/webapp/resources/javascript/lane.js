@@ -1,7 +1,8 @@
 /**
  * @author ceyates
  */
-YUI.add('lane', function(Y) {
+YUI.add("lane", function(Y) {
+	var time = new Date().getTime();
     if (typeof LANE == "undefined" || !LANE) {
         /**
          * The LANE global namespace object.  If LANE is already defined, the
@@ -18,6 +19,10 @@ YUI.add('lane', function(Y) {
 //        if (Y.one('html.lane-js-unknown')) {
 //            Y.io('/././enable-js');
 //        }
+        Y.one("body").addClass("yui3-skin-sam");
+        new Y.Console().render();
+
+        LANE.log = Y.log;
     }
     LANE.namespace = function() {
         var a = arguments, o = null, i, j, d;
@@ -89,4 +94,5 @@ YUI.add('lane', function(Y) {
         }
     }
 
-}, '1.11.0-SNAPSHOT',{requires:['node','io']});
+    LANE.log("lane.js:add() " + (new Date().getTime() - time));
+}, "1.11.0-SNAPSHOT",{requires:["node","io","console"]});

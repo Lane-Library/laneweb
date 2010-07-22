@@ -1,4 +1,6 @@
 YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'node','event-custom', function(Y) {
+
+	var time = new Date().getTime();
 	if (Y.one("#search")) {
     LANE.Search = function() {
         var searching = false, //searching state
@@ -64,4 +66,6 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
         return search;
     }();
 	}
+
+    LANE.log("lane-search.js:use() " + (new Date().getTime() - time));
 });

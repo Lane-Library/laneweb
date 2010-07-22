@@ -70,6 +70,8 @@
 //    
 //});
 YUI().use("event-mouseenter", "widget", "widget-position", "widget-stack", function(Y) {
+
+	var time = new Date().getTime();
     var Lang = Y.Lang,
         Node = Y.Node,
         OX = -10000,
@@ -553,5 +555,7 @@ YUI().use("event-mouseenter", "widget", "widget-position", "widget-stack", funct
     });
     
     createTooltips();
+
+    LANE.log("lane-tooltips.js:use() " + (new Date().getTime() - time));
 
 });

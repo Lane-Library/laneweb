@@ -1,4 +1,6 @@
 YUI().use('lane-tracking', 'event-custom',function(Y) {
+
+	var time = new Date().getTime();
     var gImages=[],
         gIndex=0,
         DCS={},
@@ -199,4 +201,6 @@ YUI().use('lane-tracking', 'event-custom',function(Y) {
             dcsMultiTrack.call(dcsMultiTrack, args);
         }
     });
+
+    LANE.log("lane-webtrends.js:use() " + (new Date().getTime() - time));
 });

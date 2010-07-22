@@ -1,7 +1,9 @@
 YUI({
     gallery: 'gallery-2010.04.02-17-26'
-}).use('gallery-node-accordion', 'plugin', 'node', 'anim', function(Y) {
+}).use("lane",'gallery-node-accordion', 'plugin', 'node', 'anim', function(Y) {
 
+	var time = new Date().getTime();
+	
     var expandies = Y.all('.expandy'),
         anchor = document.location.hash ? document.location.hash.substring(1) : false,
         i,
@@ -47,4 +49,6 @@ YUI({
     for (i = 0; i < expandies.size(); i++) {
         new ExpandyList(expandies.item(i)).plug(Y.Plugin.NodeAccordion, { anim: Y.Easing.backIn });
     }
+
+    LANE.log("lane-expandies.js:use() " + (new Date().getTime() - time));
 });

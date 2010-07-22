@@ -2,7 +2,9 @@
  * adds and animates show/hide toggle for search results
  * 
  */
-YUI().use('node-base','anim','event-custom', function(Y) {
+YUI().use("lane", 'node-base','anim','event-custom', function(Y) {
+
+	var time = new Date().getTime();
     Y.publish("lane:searchOptionsChange",{
         broadcast:2,
         emitFacade: true,
@@ -111,5 +113,7 @@ YUI().use('node-base','anim','event-custom', function(Y) {
         optionsNode.insert(options);
         options.one("a").on("click", onControlClick);
     }
+
+    LANE.log("lane-search-options.js:use() " + (new Date().getTime() - time));
 
 });

@@ -1,4 +1,6 @@
 YUI.add('lane-search-result', function(Y) {
+
+	var time = new Date().getTime();
     Y.namespace('lane');
     Y.lane.SearchResult = function() {
         var searchString,
@@ -52,4 +54,6 @@ YUI.add('lane-search-result', function(Y) {
             }
         };
     }();
-}, '1.11.0-SNAPSHOT');
+
+    LANE.log("lane-search-result.js:add() " + (new Date().getTime() - time));
+}, '1.11.0-SNAPSHOT', {requires:['lane']});
