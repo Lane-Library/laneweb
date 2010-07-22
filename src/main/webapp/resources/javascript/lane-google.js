@@ -1,6 +1,4 @@
 YUI().use('lane-tracking','lane-suggest','node', function(Y) {
-
-	var time = new Date().getTime();
     var gaPageTracker, gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
@@ -99,6 +97,4 @@ YUI().use('lane-tracking','lane-suggest','node', function(Y) {
         }
     });
 
-
-    LANE.log("lane-google.js:use() " + (new Date().getTime() - time));
 });

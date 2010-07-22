@@ -1,6 +1,4 @@
 YUI.add('lane-ac-plugin', function(Y) {
-
-	var time = new Date().getTime();
 /**
  * copy of http://yui.yahooapis.com/combo?gallery-2010.03.30-17-26/build/gallery-ac-plugin/gallery-ac-plugin.js
  * lane modifications: query delay, hiding on zero results
@@ -318,14 +316,11 @@ function handleQueryResponse (e) {
     }
 };
 
-LANE.log("lane-suggest.js:add('lane-ac-plugin') " + (new Date().getTime() - time));
 
 }, '1.11.0-SNAPSHOT' ,{requires:['node', 'plugin', 'gallery-value-change', 'event-key'], optional:['event-custom']});
 
 
 YUI().add('lane-suggest', function (Y) {
-
-	var time = new Date().getTime();
     
     Y.namespace('lane');
     
@@ -528,6 +523,4 @@ YUI().add('lane-suggest', function (Y) {
         Y.on("key", acWidget.select, input, "down:13,10");
     };
     Y.augment(Y.lane.Suggest,Y.EventTarget);
-
-    LANE.log("lane-suggest.js:add('lane-suggest') " + (new Date().getTime() - time));
 }, '1.11.0-SNAPSHOT', {requires:['lane', 'lane-ac-plugin', 'plugin', 'node-base', 'datasource','event-custom']});

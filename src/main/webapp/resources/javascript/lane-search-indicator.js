@@ -1,6 +1,4 @@
 YUI.add("lane-search-indicator", function(Y) {
-
-	var time = new Date().getTime();
     Y.namespace("lane");
     Y.lane.SearchIndicator = function() {
         var indicator = Y.one("#searchIndicator");
@@ -18,6 +16,4 @@ YUI.add("lane-search-indicator", function(Y) {
             }
         }
     };
-
-    LANE.log("lane-search-indicator.js:add() " + (new Date().getTime() - time));
 },"1.11.0-SNAPSHOT");

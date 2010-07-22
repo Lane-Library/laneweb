@@ -1,6 +1,4 @@
-YUI().use("lane", 'node', function(Y) {
-
-	var time = new Date().getTime();
+YUI().use('node', function(Y) {
     var i, j, menus, nodes, node;
     if (Y.UA.ie && Y.UA.ie < 7) {
         //instead of :first-child selector remove background image:
@@ -39,6 +37,4 @@ YUI().use("lane", 'node', function(Y) {
             nodes.item(i).append(Y.Node.create("<span class='after'/>"));
         }
     }
-
-    LANE.log("lane-ie.js:use() " + (new Date().getTime() - time));
 });

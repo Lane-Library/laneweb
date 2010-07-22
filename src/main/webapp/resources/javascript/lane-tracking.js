@@ -1,6 +1,4 @@
 YUI.add('lane-tracking',function(Y) {
-
-	var time = new Date().getTime();
     if (!LANE.tracking) {
         LANE.tracking = function() {
             //TODO more descriptive variable names
@@ -233,6 +231,4 @@ YUI.add('lane-tracking',function(Y) {
         //            }
         }, document);
     }
-
-    LANE.log("lane-tracking.js:add() " + (new Date().getTime() - time));
 }, '1.11.0-SNAPSHOT', {requires:['lane', 'lane-search-result', 'node','event-custom']});

@@ -1,6 +1,4 @@
 YUI().use('lane', 'event-custom','node',function(Y) {
-
-	var time = new Date().getTime();
     LANE.namespace('search.popin');
     
     // custom popin event
@@ -27,6 +25,4 @@ YUI().use('lane', 'event-custom','node',function(Y) {
             }
         };
     Y.Global.on('lane:popin', onPopinHandler);
-
-    LANE.log("lane-popin.js:use() " + (new Date().getTime() - time));
 });

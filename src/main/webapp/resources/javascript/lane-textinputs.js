@@ -5,8 +5,6 @@
  *  clears default help text on focus and adds back on blur
  */
 YUI.add('lane-textinputs', function(Y) {
-
-	var time = new Date().getTime();
     
     Y.namespace('lane');
 
@@ -89,15 +87,11 @@ YUI.add('lane-textinputs', function(Y) {
     //        });
     //        
     //    });
-    
-    LANE.log("lane-textinputs.js:add() " + (new Date().getTime() - time));
 }, '1.11.0-SNAPSHOT', {
     requires: ['lane', 'event-base', 'node-base']
 });
 
 YUI().use('lane-textinputs', function(Y) {
-	
-	var time = new Date().getTime();
 
     var i, title, textInputs = new Y.all('input[type="text"]');
     
@@ -107,7 +101,5 @@ YUI().use('lane-textinputs', function(Y) {
             new Y.lane.TextInput(textInputs.item(i), title);
         }
     }
-    
-    LANE.log("lane-textinputs.js:use() " + (new Date().getTime() - time));
     
 });

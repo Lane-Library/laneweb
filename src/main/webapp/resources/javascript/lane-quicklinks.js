@@ -1,6 +1,4 @@
-YUI().use("lane", 'node','event-custom', function(Y) {
-
-	var time = new Date().getTime();
+YUI().use('node','event-custom', function(Y) {
 	if (Y.one("#qlinks")) {
     Y.publish("lane:quickLinkClick",{
         broadcast:2,
@@ -21,6 +19,4 @@ YUI().use("lane", 'node','event-custom', function(Y) {
         }
     });
 	}
-
-    LANE.log("lane-quicklinks.js:use() " + (new Date().getTime() - time));
 });

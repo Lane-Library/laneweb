@@ -1,6 +1,4 @@
 YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse', function(Y) {
-
-	var time = new Date().getTime();
     var spellCheck = Y.one('#spellCheck'),
         searchTerms = Y.lane.SearchResult.getEncodedSearchTerms();
     if (spellCheck && searchTerms) {
@@ -21,7 +19,5 @@ YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse',
             }
         });
     }
-
-    LANE.log("lane-spellcheck.js:use() " + (new Date().getTime() - time));
 });
 

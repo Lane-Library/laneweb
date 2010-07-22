@@ -1,8 +1,6 @@
 //TODO: this needs some cleaning up
 //check if there is a query
 YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse', function(Y) {
-
-	var time = new Date().getTime();
     if (Y.lane.SearchResult.getEncodedSearchTerms()) {
         //check if there is id=queryMapping
         var queryMapping = Y.one('#queryMapping');
@@ -77,7 +75,5 @@ YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse',
             });
         }
     }
-
-    LANE.log("lane-querymap.js:use() " + (new Date().getTime() - time));
 });
 

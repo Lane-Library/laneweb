@@ -1,6 +1,4 @@
 YUI().use('lane-search-result','event', 'node', 'io-base', 'json-parse', function(Y) {
-
-	var time = new Date().getTime();
     var findItNode = Y.one('#findIt'),
         searchString = Y.lane.SearchResult.getEncodedSearchTerms(),
         url;
@@ -21,6 +19,4 @@ YUI().use('lane-search-result','event', 'node', 'io-base', 'json-parse', functio
             }
         });
     }
-
-    LANE.log("lane-findit.js:use() " + (new Date().getTime() - time));
 });

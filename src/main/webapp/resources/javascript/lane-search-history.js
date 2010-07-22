@@ -1,6 +1,4 @@
 YUI().use('lane-search-result', 'node', 'event-custom', 'history', function(Y) {
-
-	var time = new Date().getTime();
     var searchString = Y.lane.SearchResult.getEncodedSearchTerms(),
     facetNodes = Y.one('#searchFacets'),
     initializeHistory = function() {
@@ -17,6 +15,4 @@ YUI().use('lane-search-result', 'node', 'event-custom', 'history', function(Y) {
         Y.one('body').insert(Y.Node.create('<input id="yui-history-field" type="hidden"/>'),1);
         initializeHistory();
     }
-
-    LANE.log("lane-search-history.js:use() " + (new Date().getTime() - time));
 });

@@ -1,6 +1,4 @@
 YUI.add('lane-formvalidator', function(Y) {
-	
-	var time = new Date().getTime();
 
 /**
      * @module Validator
@@ -2981,13 +2979,9 @@ YUI.add('lane-formvalidator', function(Y) {
     Y.SelectField = _SelectField;
 
 
-    LANE.log("lane-forms.js:add() " + (new Date().getTime() - time));
+}, '1.11.0-SNAPSHOT' ,{requires:['node', 'event', 'dom', 'base']});
 
-}, '1.11.0-SNAPSHOT' ,{requires:["lane", 'node', 'event', 'dom', 'base']});
-
-YUI().use("lane", 'lane-formvalidator',function(Y){
-
-	var time = new Date().getTime();
+YUI().use('lane-formvalidator',function(Y){
     Y.on("domready", function() {
         var forms = Y.all('.formvalidator'), i;
         for (i = 0; i < forms.size(); i++) {
@@ -2999,6 +2993,4 @@ YUI().use("lane", 'lane-formvalidator',function(Y){
             });
         }
     });
-
-    LANE.log("lane-forms.js:use() " + (new Date().getTime() - time));
 });

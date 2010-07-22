@@ -1,6 +1,4 @@
 YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-custom','history','io-base', function(Y) {
-
-	var time = new Date().getTime();
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
@@ -129,6 +127,4 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
             this._facet.removeClass('current');
         };
     }
-
-    LANE.log("lane-search-facets.js:use() " + (new Date().getTime() - time));
 });
