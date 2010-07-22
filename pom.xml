@@ -164,8 +164,6 @@
                         <include>lane-spellcheck-min.js</include>
                         <include>lane-findit-min.js</include>
                         <include>lane-querymap-min.js</include>
-                        <include>lane-popup-min.js</include>
-                        <include>lane-ie-min.js</include>
                         <include>lane-teletype-min.js</include>
                         <include>lane-selections-min.js</include>
                         <include>lane-popin-min.js</include>
