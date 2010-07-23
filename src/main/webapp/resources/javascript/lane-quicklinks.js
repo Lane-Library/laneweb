@@ -1,22 +1,22 @@
 YUI().use('node','event-custom', function(Y) {
-	if (Y.one("#qlinks")) {
-    Y.publish("lane:quickLinkClick",{
-        broadcast:2,
-        emitFacade: true,
-        linkName:null
-    });
-    var qlNode = Y.one('#qlinks'), qlOptions = qlNode.all("option");
-    qlNode.on('change', function() {
-        var i = qlNode.get('selectedIndex'), v = qlOptions.item(i).get('value');
-        if (i && v) {
-            function f(){
-                window.location.href = v;
+    Y.on('available',function(){
+        Y.publish("lane:quickLinkClick",{
+            broadcast:2,
+            emitFacade: true,
+            linkName:null
+        });
+        var qlNode = this, qlOptions = qlNode.all("option");
+        qlNode.on('change', function() {
+            var i = qlNode.get('selectedIndex'), v = qlOptions.item(i).get('value');
+            if (i && v) {
+                function f(){
+                    window.location.href = v;
+                }
+                Y.fire("lane:quickLinkClick",{
+                    linkName:qlOptions.item(i).get('textContent')
+                });
+                setTimeout(f,200); // delay for tracking
             }
-            Y.fire("lane:quickLinkClick",{
-                linkName:qlOptions.item(i).get('textContent')
-            });
-            setTimeout(f,200); // delay for tracking
-        }
-    });
-	}
+        });
+	},'#qlinks');
 });
