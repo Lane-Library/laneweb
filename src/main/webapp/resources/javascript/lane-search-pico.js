@@ -1,4 +1,4 @@
-YUI().use('lane-suggest','lane-textinputs', 'lane', 'node','anim', 'event-custom', 'querystring-parse-simple', function(Y) {
+YUI().use('lane-suggest','lane-textinputs', 'node','anim', 'event-custom', 'querystring-parse-simple', function(Y) {
     var form = Y.one('#search'),
         nav = Y.one('#laneNav'),
         searchTerms,
