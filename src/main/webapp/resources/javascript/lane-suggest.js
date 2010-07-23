@@ -523,4 +523,4 @@ YUI().add('lane-suggest', function (Y) {
         Y.on("key", acWidget.select, input, "down:13,10");
     };
     Y.augment(Y.lane.Suggest,Y.EventTarget);
-}, '1.11.0-SNAPSHOT', {requires:['lane', 'lane-ac-plugin', 'plugin', 'node-base', 'datasource','event-custom']});
+}, '1.11.0-SNAPSHOT', {requires:['lane-ac-plugin', 'plugin', 'node-base', 'datasource','event-custom']});

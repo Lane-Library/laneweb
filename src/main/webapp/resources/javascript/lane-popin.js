@@ -1,7 +1,6 @@
-YUI().use('lane', 'event-custom','node',function(Y) {
-    LANE.namespace('search.popin');
-    
+YUI().use('event-custom','node',function(Y) {
     // custom popin event
+    
     Y.publish('lane:popin',{broadcast:2});
     
         onPopinHandler = function(el) {

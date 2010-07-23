@@ -1,4 +1,4 @@
-YUI().use("lane", 'node','io-base','event','history', function(Y) {
+YUI().use('node','io-base','event','history', function(Y) {
 
         var bassettContent = Y.one('#bassettContent'), diagramDisplay = false;
 
