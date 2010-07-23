@@ -502,7 +502,7 @@ YUI().use("event-mouseenter", "widget", "widget-position", "widget-stack", funct
         createTooltips = function() {
             var tooltipTriggerIds = '',
                 tooltipContainer, tooltipId, i, j,
-                tooltipContainerNodeList = Y.all('a.tooltips');
+                tooltipContainerNodeList = Y.all('.tooltips');
             tt = undefined;
             for (i = 0; i < tooltipContainerNodeList.size(); i++) {
                 tooltipContainer = tooltipContainerNodeList.item(i).get('childNodes');
