@@ -1,8 +1,8 @@
 YUI({
     gallery: 'gallery-2010.04.02-17-26'
-}).use("lane", 'gallery-node-accordion', 'plugin', 'node', 'anim', "io", function(Y) {
+}).use('gallery-node-accordion', 'plugin', 'node', 'anim', "io", function(Y) {
 
-    var expandies = Y.all('.faq-expandy'),
+    var expandies = Y.all('div.faq-expandy'),
         expandy, i, j, anchor, href, faqId,
         children, panel, eventHandle;
     for (i = 0; i < expandies.size(); i++) {
