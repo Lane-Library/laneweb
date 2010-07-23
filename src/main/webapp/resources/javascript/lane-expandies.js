@@ -2,7 +2,7 @@ YUI({
     gallery: 'gallery-2010.04.02-17-26'
 }).use('gallery-node-accordion', 'plugin', 'node', 'anim', function(Y) {
 
-    var expandies = Y.all('.expandy'),
+    var expandies = Y.all('ul.expandy'),
         anchor = document.location.hash ? document.location.hash.substring(1) : false,
         i,
         ExpandyList = function(list) {
