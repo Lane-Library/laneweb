@@ -87,6 +87,8 @@
     border-bottom:1px solid #edecdf;
     white-space:nowrap;
     display:none;
+    _white-space:wrap;
+    _border-bottom:none;
 }
 #searchResults {
     margin-top:20px;
