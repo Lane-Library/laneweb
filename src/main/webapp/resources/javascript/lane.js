@@ -14,10 +14,6 @@ YUI.add('lane', function(Y) {
         
         //create the change event:
         Y.publish('lane:change', {broadcast: 2});
-        //tell the server javascript works if we haven't already.
-//        if (Y.one('html.lane-js-unknown')) {
-//            Y.io('/././enable-js');
-//        }
     }
     LANE.namespace = function() {
         var a = arguments, o = null, i, j, d;
@@ -50,21 +46,22 @@ YUI.add('lane', function(Y) {
     }
     if (!document.importNode) {
         document.importNode = function(node, allChildren) {
+        	var i, il, newNode;
             /* find the node type to import */
             switch (node.nodeType) {
                 case document.ELEMENT_NODE:
                     /* create a new element */
-                    var newNode = document.createElement(node.nodeName);
+                    newNode = document.createElement(node.nodeName);
                     /* does the node have any attributes to add? */
                     if (node.attributes && node.attributes.length > 0)
                         /* add all of the attributes */
-                        for (var i = 0, il = node.attributes.length; i < il;) {
+                        for (i = 0, il = node.attributes.length; i < il;) {
                             newNode.setAttribute(node.attributes[i].nodeName, node.getAttribute(node.attributes[i++].nodeName));
                         }
                     /* are we going after children too, and does the node have any? */
                     if (allChildren && node.childNodes && node.childNodes.length > 0)
                         /* recursively get all of the child nodes */
-                        for (var i = 0, il = node.childNodes.length; i < il;)
+                        for (i = 0, il = node.childNodes.length; i < il;)
                             newNode.appendChild(document.importNode(node.childNodes[i++], allChildren));
                     return newNode;
                     break;
@@ -89,4 +86,4 @@ YUI.add('lane', function(Y) {
         }
     }
 
-}, '1.11.0-SNAPSHOT',{requires:['node','io']});
+}, '1.11.0-SNAPSHOT',{requires:['node']});
