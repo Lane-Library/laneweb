@@ -177,6 +177,7 @@
                     <map:part src="cocoon:/cache/search/articles/articles-pubmed_systematicreviews.html"/>
                     <map:part src="cocoon:/cache/search/articles/articles-sciencecitation.html"/>
                     <map:part src="cocoon:/cache/search/articles/articles-uptodate.html"/>
+                    <map:part src="cocoon:/cache/search/articles/articles-scopus.html"/>
                     <map:part src="cocoon:/cache/search/catalog/catalog-lois.html"/>
                     <map:part src="cocoon:/cache/search/clinical/clinical-aafp_patients.html"/>
                     <map:part src="cocoon:/cache/search/clinical/clinical-acpjc.html"/>
