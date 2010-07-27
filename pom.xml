@@ -124,13 +124,13 @@
                         <include>tutorials-min.css</include>
                         <include>forms-min.css</include>
                         <include>section-menu-min.css</include>
-                        <include>liaisons-min.css</include>
+                         <include>liaisons-min.css</include>
+                         <include>table-styles-min.css</include>
                         <!--<include>colors-min.css</include>
                         <include>simple-module-min.css</include>
                         <include>narrow-module-min.css</include>
                         <include>content-module-min.css</include>
                         <include>main-module-min.css</include>
-                        <include>table-styles-min.css</include>
                         <include>breadcrumb-min.css</include>
                         <include>legend-dropdown-min.css</include>
                         <include>side-hd-module-min.css</include>
