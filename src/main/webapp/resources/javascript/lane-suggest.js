@@ -1,4 +1,4 @@
-YUI.add('lane-ac-plugin', function(Y) {
+(function() {
 /**
  * copy of http://yui.yahooapis.com/combo?gallery-2010.03.30-17-26/build/gallery-ac-plugin/gallery-ac-plugin.js
  * lane modifications: query delay, hiding on zero results
@@ -16,6 +16,7 @@ function ACPlugin () { ACPlugin.superclass.constructor.apply(this, arguments) };
 
 // shorthands
 var autocomplete = "autocomplete",
+    Y = LANE.Y,
     YLang = Y.Lang,
     YArrayeach = Y.Array.each,
     eventDefaultBehavior = {
@@ -315,16 +316,8 @@ function handleQueryResponse (e) {
         this.fire("ac:hide");
     }
 };
-
-
-}, '1.11.0-SNAPSHOT' ,{requires:['node', 'plugin', 'gallery-value-change', 'event-key'], optional:['event-custom']});
-
-
-YUI().add('lane-suggest', function (Y) {
     
-    Y.namespace('lane');
-    
-    Y.lane.Suggest = function (input, limit) {
+    LANE.Suggest = function (input, limit) {
         var self = this, acWidget, i,
             baseUrl = '/././apps/suggest/json?',
             acDS  = new Y.DataSource.IO({source:baseUrl}),
@@ -522,5 +515,5 @@ YUI().add('lane-suggest', function (Y) {
         input.ac.on("ac:previous", acWidget.previous, acWidget);
         Y.on("key", acWidget.select, input, "down:13,10");
     };
-    Y.augment(Y.lane.Suggest,Y.EventTarget);
-}, '1.11.0-SNAPSHOT', {requires:['lane-ac-plugin', 'plugin', 'node-base', 'datasource','event-custom']});
+    Y.augment(LANE.Suggest,Y.EventTarget);
+})();

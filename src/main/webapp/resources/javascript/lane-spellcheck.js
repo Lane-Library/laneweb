@@ -1,6 +1,7 @@
-YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse', function(Y) {
-    var spellCheck = Y.one('#spellCheck'),
-        searchTerms = Y.lane.SearchResult.getEncodedSearchTerms();
+(function() {
+    var Y = LANE.Y,
+        spellCheck = Y.one('#spellCheck'),
+        searchTerms = LANE.SearchResult.getEncodedSearchTerms();
     if (spellCheck && searchTerms) {
         //get the suggestion
         Y.io('/././apps/spellcheck/json?q=' + searchTerms, {
@@ -19,5 +20,5 @@ YUI().use('lane-search-result', 'node', 'event-custom', 'io-base', 'json-parse',
             }
         });
     }
-});
+})();
 

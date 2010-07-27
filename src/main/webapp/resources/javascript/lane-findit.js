@@ -1,6 +1,7 @@
-YUI().use('lane-search-result','event', 'node', 'io-base', 'json-parse', function(Y) {
-    var findItNode = Y.one('#findIt'),
-        searchString = Y.lane.SearchResult.getEncodedSearchTerms(),
+(function() {
+    var Y = LANE.Y,
+        findItNode = Y.one('#findIt'),
+        searchString = LANE.SearchResult.getEncodedSearchTerms(),
         url;
     if (findItNode && searchString) {
         url = '/././apps/sfx/json?q=' + searchString;
@@ -19,4 +20,4 @@ YUI().use('lane-search-result','event', 'node', 'io-base', 'json-parse', functio
             }
         });
     }
-});
+})();

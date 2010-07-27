@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI.add('lane', function(Y) {
+YUI({fetchCSS:false}).use("*", function(Y) {
     if (typeof LANE == "undefined" || !LANE) {
         /**
          * The LANE global namespace object.  If LANE is already defined, the
@@ -11,8 +11,7 @@ YUI.add('lane', function(Y) {
          * @static
          */
         LANE = {};
-        
-        //create the change event:
+        LANE.Y = Y;
         Y.publish('lane:change', {broadcast: 2});
     }
     LANE.namespace = function() {
@@ -46,7 +45,7 @@ YUI.add('lane', function(Y) {
     }
     if (!document.importNode) {
         document.importNode = function(node, allChildren) {
-        	var i, il, newNode;
+            var i, il, newNode;
             /* find the node type to import */
             switch (node.nodeType) {
                 case document.ELEMENT_NODE:
@@ -85,5 +84,4 @@ YUI.add('lane', function(Y) {
             return -1;
         }
     }
-
-}, '1.11.0-SNAPSHOT',{requires:['node']});
+});

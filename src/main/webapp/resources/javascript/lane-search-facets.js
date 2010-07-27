@@ -1,4 +1,8 @@
-YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-custom','history','io-base', function(Y) {
+(function() {
+    var Y = LANE.Y,
+        elt = Y.one('#searchFacets'),
+        searchIndicator = new LANE.SearchIndicator(),
+        facets, i, j, type, source, container;
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
@@ -23,9 +27,6 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
             }
         };
     }();
-    var elt = Y.one('#searchFacets'),
-        searchIndicator = new Y.lane.SearchIndicator(),
-        facets, i, j, type, source, container;
     if (elt) {
         container = Y.one('#searchResults');
         facets = elt.all('.searchFacet');
@@ -61,7 +62,7 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
         this._source = source;
         this._facet = facet;
         this._container = container;
-        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + Y.lane.SearchResult.getEncodedSearchTerms();
+        this._url = '/././plain/search/' + this._type + '/' + this._source + '.html?source=' + this._source + '&q=' + LANE.SearchResult.getEncodedSearchTerms();
         this._state = 'initialized';
         this._callback = {
             on: {
@@ -127,4 +128,4 @@ YUI().use("lane", 'lane-search-result',"lane-search-indicator", 'node','event-cu
             this._facet.removeClass('current');
         };
     }
-});
+})();

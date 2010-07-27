@@ -1,7 +1,8 @@
 // teletype functionality for PubMed/UTD through Lane pages
 // typing in #searchTeletyper .teletypeInput sends keystrokes to #search #searchTerms
-YUI().use('node', function(Y) {
-    var targetElm = Y.one('#searchTerms'),
+(function() {
+    var Y = LANE.Y,
+        targetElm = Y.one('#searchTerms'),
         inputElms = Y.all('.teletypeInput'),
         searchForm = Y.one('#search'),
         searchTeletyper = Y.one('#searchTeletyper'),
@@ -36,4 +37,4 @@ YUI().use('node', function(Y) {
             teletype(this);
         });
     }
-});
+})();

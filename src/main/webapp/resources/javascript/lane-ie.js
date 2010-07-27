@@ -1,5 +1,5 @@
-YUI().use('node', function(Y) {
-    var i, j, menus, nodes, node;
+(function() {
+    var Y = LANE.Y, i, j, menus, nodes, node;
     if (Y.UA.ie && Y.UA.ie < 7) {
         //instead of :first-child selector remove background image:
         node = Y.one('#stanfordMedicineBrand');
@@ -9,7 +9,7 @@ YUI().use('node', function(Y) {
         //set up hover class on somNav and laneNav menus:
         menus = Y.all("#somNav, #laneNav");
         for (j = 0; j < menus.size(); j++) {
-        	node = menus.item(j);
+            node = menus.item(j);
             nodes = node.all('ul');
             for (i = 0; i < nodes.size(); i++) {
                 nodes.item(i).get('parentNode').on('mouseover', function() {
@@ -27,7 +27,7 @@ YUI().use('node', function(Y) {
         }
         nodes = Y.all(".type1 .details > div");
         for (i = 0; i < nodes.size(); i++) {
-        	nodes.item(i).addClass("child");
+            nodes.item(i).addClass("child");
         }
     }
     if (Y.UA.ie && Y.UA.ie <= 8) {
@@ -37,4 +37,4 @@ YUI().use('node', function(Y) {
             nodes.item(i).append(Y.Node.create("<span class='after'/>"));
         }
     }
-});
+})();

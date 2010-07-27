@@ -1,11 +1,14 @@
-YUI().use('node','event-custom', function(Y) {
-    Y.on('available',function(){
+(function() {
+    var Y = LANE.Y,
+        qlNode = Y.one('#qlinks'),
+        qlOptions;
+    if (qlNode) {
         Y.publish("lane:quickLinkClick",{
             broadcast:2,
             emitFacade: true,
             linkName:null
         });
-        var qlNode = this, qlOptions = qlNode.all("option");
+        qlOptions = qlNode.all("option");
         qlNode.on('change', function() {
             var i = qlNode.get('selectedIndex'), v = qlOptions.item(i).get('value');
             if (i && v) {
@@ -18,5 +21,5 @@ YUI().use('node','event-custom', function(Y) {
                 setTimeout(f,200); // delay for tracking
             }
         });
-	},'#qlinks');
-});
+    }
+})();

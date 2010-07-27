@@ -1,6 +1,9 @@
-YUI().use('node','io-base','event','history', function(Y) {
+(function() {
+    
+    
 
-        var bassettContent = Y.one('#bassettContent'), diagramDisplay = false;
+
+        var Y = LANE.Y, bassettContent = Y.one('#bassettContent'), diagramDisplay = false;
 
         
         var registerLinksContainer = function(container) {
@@ -29,13 +32,13 @@ YUI().use('node','io-base','event','history', function(Y) {
         var loadContent = function(url) {
             url = "/././plain/biomed-resources/bassett/raw".concat(url);
             function successHandler(id, o, args) {
-                var contentNode, container,	
+                var contentNode, container,    
                 content = new Y.Node(o.responseText);
-				container = Y.one('#bassettContent');
-				container.setContent(content);
-				registerLinksContainer(container);
-				Y.fire('lane:change');
-	        }
+                container = Y.one('#bassettContent');
+                container.setContent(content);
+                registerLinksContainer(container);
+                Y.fire('lane:change');
+            }
             Y.io(url, {on : {success : successHandler}});
         }
 
@@ -75,5 +78,4 @@ YUI().use('node','io-base','event','history', function(Y) {
                 initializeHistory();
             }
         }
-
-    });
+    })();

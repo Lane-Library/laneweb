@@ -1,5 +1,4 @@
-YUI.add('lane-tracking',function(Y) {
-    if (!LANE.tracking) {
+(function() {
         LANE.tracking = function() {
             //TODO more descriptive variable names
             //TODO put conditionals into sub-functions
@@ -112,9 +111,9 @@ YUI.add('lane-tracking',function(Y) {
                     path = '/' + path;
                 }
                 title = getTrackedTitle(node);
-                if (LANE.search && Y.lane.SearchResult.getSearchTerms()) {
-                    searchTerms = Y.lane.SearchResult.getSearchTerms();
-                    searchSource = Y.lane.SearchResult.getSearchSource();
+                if (LANE.search && LANE.SearchResult.getSearchTerms()) {
+                    searchTerms = LANE.SearchResult.getSearchTerms();
+                    searchSource = LANE.SearchResult.getSearchSource();
                 }
                 return {
                     host: host,
@@ -204,7 +203,7 @@ YUI.add('lane-tracking',function(Y) {
                 }
             };
         }();
-        Y.on('click', function(e) {
+        LANE.Y.on('click', function(e) {
             LANE.tracking.trackEvent(e);
         //put in a delay for safari to make the tracking request:
         //TODO: revisit this and make sure it actually is useful
@@ -230,5 +229,4 @@ YUI.add('lane-tracking',function(Y) {
         //                    }
         //            }
         }, document);
-    }
-}, '1.11.0-SNAPSHOT', {requires:['lane', 'lane-search-result', 'node','event-custom']});
+})();

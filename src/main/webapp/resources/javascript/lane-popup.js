@@ -1,5 +1,5 @@
-YUI().use('node', 'event', 'overlay','io-base','dd-plugin', function(Y) {
-    var panel, container, createPanel, showPanel, popupWindow, showWindow, createEventHandlers;
+(function() {
+    var Y = LANE.Y, panel, container, createPanel, showPanel, popupWindow, showWindow, createEventHandlers;
     createPanel = function() {
         container = Y.Node.create('<div id="popupContainer"/>');
         Y.one('body').append(container);
@@ -117,4 +117,4 @@ YUI().use('node', 'event', 'overlay','io-base','dd-plugin', function(Y) {
     };
     createEventHandlers();
     Y.Global.on('lane:change', createEventHandlers);
-});
+})();

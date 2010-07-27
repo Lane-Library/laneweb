@@ -1,4 +1,4 @@
-YUI.add('lane-formvalidator', function(Y) {
+(function() {
 
 /**
      * @module Validator
@@ -10,7 +10,7 @@ YUI.add('lane-formvalidator', function(Y) {
      * invalid inputs gracefully and improve user experience.
      * @class Form
      */
-    var YL = Y.Lang, S4 = function() {
+    var Y = LANE.Y, YL = Y.Lang, S4 = function() {
         return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
     },
     /**
@@ -2978,12 +2978,8 @@ YUI.add('lane-formvalidator', function(Y) {
     });
     Y.SelectField = _SelectField;
 
-
-}, '1.11.0-SNAPSHOT' ,{requires:['node', 'event', 'dom', 'base']});
-
-YUI().use('lane-formvalidator',function(Y){
     Y.on("domready", function() {
-        var forms = Y.all('form.formvalidator'), i;
+        var forms = Y.all('.formvalidator'), i;
         for (i = 0; i < forms.size(); i++) {
             new Y.Validator( {
                 form : forms.item(i).get('id'),
@@ -2993,4 +2989,4 @@ YUI().use('lane-formvalidator',function(Y){
             });
         }
     });
-});
+})();

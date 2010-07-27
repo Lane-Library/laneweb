@@ -1,5 +1,7 @@
-YUI().use('lane-tracking','lane-suggest','node', function(Y) {
-    var gaPageTracker, gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+(function() {
+    var Y = LANE.Y,
+        gaPageTracker,
+        gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
             var host = document.location.host,
@@ -55,9 +57,9 @@ YUI().use('lane-tracking','lane-suggest','node', function(Y) {
         }
         if (link) {
             if (link.ancestor(".lwSearchResults")) {
-                if (Y.lane.SearchResult.getSearchTerms()) {
+                if (LANE.SearchResult.getSearchTerms()) {
                     Y.fire("lane:searchResultClick", {
-                        searchTerms: Y.lane.SearchResult.getSearchTerms(),
+                        searchTerms: LANE.SearchResult.getSearchTerms(),
                         resultTitle: link.get('textContent'),
                         resultPosition: parseInt(link.ancestor('ul').get('className').replace(/r-/, ''), 10)
                     });
@@ -96,5 +98,4 @@ YUI().use('lane-tracking','lane-suggest','node', function(Y) {
             gaPageTracker._trackEvent(event.type, document.location.pathname, event.resultTitle, event.resultPosition);
         }
     });
-
-});
+})();

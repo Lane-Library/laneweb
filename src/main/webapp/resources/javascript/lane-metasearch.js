@@ -1,14 +1,15 @@
-YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node','json-parse','io-base','datatype',function(Y) {
-    Y.namespace("lane");
-    Y.lane.Metasearch = function() {
+(function() {
+    LANE.namespace('metasearch');
+    var Y = LANE.Y;
+    LANE.metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search
             searchRequests = [], // search timerIds so we can abort sleeping getResultCounts
             uberEngines = ['cro_', 'mdc_', 'ovid-'], // engines with multiple resources
             startTime,
-            searchIndicator = new Y.lane.SearchIndicator();
+            searchIndicator = new LANE.SearchIndicator();
             getSearchUrl = function() {
-                var i, y, searchUrl = '/././apps/search/json?q=' + Y.lane.SearchResult.getEncodedSearchTerms();
+                var i, y, searchUrl = '/././apps/search/json?q=' + LANE.SearchResult.getEncodedSearchTerms();
                 for (y = 0; y < searchables.length; y++) {
                     var add = true;
                     for (i = 0; i < uberEngines.length; i++) {
@@ -31,7 +32,7 @@ YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node',
         return {
             initialize: function() {
                 var i;
-                searchElms = Y.all("a.metasearch");
+                searchElms = Y.all(".metasearch");
                 for (i = 0; i < searchElms.size(); i++) {
                     if (searchables.indexOf(searchElms.item(i).get('id')) == -1) {
                         searchables.push(searchElms.item(i).get('id'));
@@ -96,7 +97,7 @@ YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node',
                                 if (remainingTime > 20 * 1000) {
                                     sleepingTime = 10000;
                                 }
-                                searchRequests.push(setTimeout(Y.lane.Metasearch.getResultCounts, sleepingTime));
+                                searchRequests.push(setTimeout(LANE.metasearch.getResultCounts, sleepingTime));
                             } else {
                                 searchIndicator.hide();
                             }
@@ -108,18 +109,18 @@ YUI().use('lane-search-indicator', 'lane-search-result', 'lane-suggest', 'node',
     }();
     
     // check for presence of search term and metasearch classNames
-    if (Y.all('a.metasearch').size() > 0 && Y.lane.SearchResult.getEncodedSearchTerms()) {
-        Y.lane.Metasearch.initialize();
-        Y.lane.Metasearch.getResultCounts();
-        new Y.lane.SearchIndicator().show();
+    if (Y.all('.metasearch').size() > 0 && LANE.SearchResult.getEncodedSearchTerms()) {
+        LANE.metasearch.initialize();
+        LANE.metasearch.getResultCounts();
+        new LANE.SearchIndicator().show();
     }
     // hybrid search page inputs
-    var i, hybridInputs = Y.all('input.laneSuggest'), laneSuggest;
+    var i, hybridInputs = Y.all('.laneSuggest'), laneSuggest;
     for (i = 0; i < hybridInputs.size(); i++) {
-        laneSuggest = new Y.lane.Suggest(hybridInputs.item(i));
+        laneSuggest = new LANE.Suggest(hybridInputs.item(i));
         laneSuggest.on("lane:suggestSelect",function(e){
-            new Y.lane.SearchIndicator().show();
+            new LANE.SearchIndicator().show();
             e.parentForm.submit();
         });
     }
-});
+})();

@@ -1,15 +1,16 @@
-YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'node','event-custom', function(Y) {
-	if (Y.one("#search")) {
+(function() {
+    var Y = LANE.Y,
+        form = Y.one("#search");//the form Element
+    if (form) {
     LANE.Search = function() {
         var searching = false, //searching state
-            form = Y.one('#search'), //the form Element
             searchSourceSelect = form.one('#searchSource'),
             searchOptions = searchSourceSelect.all('option'),
             searchTipsLink = Y.one('#searchTips'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),
-            searchIndicator = new Y.lane.SearchIndicator(),
-            searchTextInput = new Y.lane.TextInput(form.one('#searchTerms')),
-            searchTermsSuggest = new Y.lane.Suggest(searchTextInput.getInput()),
+            searchIndicator = new LANE.SearchIndicator(),
+            searchTextInput = new LANE.TextInput(form.one('#searchTerms')),
+            searchTermsSuggest = new LANE.Suggest(searchTextInput.getInput()),
             search,
             searchTermsPresent = function() {
                 return searchTextInput.getValue() !== '';
@@ -63,5 +64,5 @@ YUI().use('lane', "lane-search-indicator", 'lane-textinputs', 'lane-suggest', 'n
         };
         return search;
     }();
-	}
-});
+    }
+})();

@@ -1,8 +1,8 @@
-YUI({
-    gallery: 'gallery-2010.04.02-17-26'
-}).use('gallery-node-accordion', 'plugin', 'node', 'anim', "io", function(Y) {
+(function() {
+    
 
-    var expandies = Y.all('div.faq-expandy'),
+    var Y = LANE.Y,
+        expandies = Y.all('.faq-expandy'),
         expandy, i, j, anchor, href, faqId,
         children, panel, eventHandle;
     for (i = 0; i < expandies.size(); i++) {
@@ -41,4 +41,4 @@ YUI({
             anim: Y.Easing.backIn
         });
     }
-});
+})();

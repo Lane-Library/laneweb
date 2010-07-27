@@ -1,4 +1,4 @@
-YUI().use('lane-tracking', 'event-custom',function(Y) {
+(function() {
     var gImages=[],
         gIndex=0,
         DCS={},
@@ -199,4 +199,4 @@ YUI().use('lane-tracking', 'event-custom',function(Y) {
             dcsMultiTrack.call(dcsMultiTrack, args);
         }
     });
-});
+})();

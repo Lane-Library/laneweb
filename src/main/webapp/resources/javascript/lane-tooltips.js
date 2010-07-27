@@ -69,13 +69,14 @@
 //    createTooltips();
 //    
 //});
-YUI().use("event-mouseenter", "widget", "widget-position", "widget-stack", function(Y) {
-    var Lang = Y.Lang,
+(function() {
+    var Y = LANE.Y,
+        Lang = Y.Lang,
         Node = Y.Node,
         OX = -10000,
-        OY = -10000;
+        OY = -10000,
 
-    var Tooltip = Y.Base.create("tooltip", Y.Widget, [Y.WidgetPosition, Y.WidgetStack], {
+        Tooltip = Y.Base.create("tooltip", Y.Widget, [Y.WidgetPosition, Y.WidgetStack], {
 
         // PROTOTYPE METHODS/PROPERTIES
 
@@ -553,5 +554,4 @@ YUI().use("event-mouseenter", "widget", "widget-position", "widget-stack", funct
     });
     
     createTooltips();
-
-});
+})();

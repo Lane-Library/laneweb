@@ -1,5 +1,6 @@
-YUI().use('node', function(Y) {
-    var selections = Y.all('#selections > li'),
+(function() {
+    var Y = LANE.Y,
+        selections = Y.all('#selections > li'),
         select = Y.one('#selections-select'),
         i,
         showAll = function() {
@@ -16,11 +17,11 @@ YUI().use('node', function(Y) {
                 }
             }
         };
-        Y.on('change', function() {
-            if (this.get('value') === '') {
-                showAll();
-            } else {
-                hideAllBut(this.get('value'));
-            }
-        }, select );
-});
+    Y.on('change', function() {
+        if (this.get('value') === '') {
+            showAll();
+        } else {
+            hideAllBut(this.get('value'));
+        }
+    }, select );
+})();
