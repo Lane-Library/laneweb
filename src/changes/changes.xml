@@ -7,7 +7,28 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release>
+        <release date="2010-07-29" version="1.11.beta4" description="1.11.beta4 redesign release">
+            <action date="2010-07-27" dev="ceyates" issue="39402" type="add">
+                CSS: Basic table
+            </action>
+            <action date="2010-07-27" dev="ceyates" issue="39338" type="fix">
+                lane.js has unnecessary dependency on io module
+            </action>
+            <action date="2010-07-27" dev="ceyates" issue="39284" type="fix">
+                unnecessary requests for css
+            </action>
+            <action date="2010-07-27" dev="ceyates" issue="39252" type="fix">
+                YUI().use("node") callback takes about 5 seconds to be invoked in IE6
+            </action>
+            <action date="2010-07-27" dev="ceyates" issue="39083" type="fix">
+                Header/gold nav links not working initially, delayed in IE
+            </action>
+            <action date="2010-07-27" dev="ceyates" issue="39052" type="fix">
+                Page loading stalls in IE
+            </action>
+            <action date="2010-07-23" dev="ryanmax" issue="39055" type="fix">
+                Cardiology page titles on IE 6 start further down page
+            </action>
             <action date="2010-05-12" dev="ceyates" issue="30148" type="fix">
                 not tracking cookiesFetch.html redirected links
             </action>
