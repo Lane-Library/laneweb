@@ -14,7 +14,7 @@
     
     <stx:template match="h:meta/@content">
         <stx:attribute name="content">
-            <stx:value-of select="concat(.,';',$page)"/>
+            <stx:value-of select="concat(.,';url=',$page)"/>
         </stx:attribute>
     </stx:template>
     
