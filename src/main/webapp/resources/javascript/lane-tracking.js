@@ -30,12 +30,19 @@
                                 title = img.item(i).get('alt');
                                 break;
                             }
+                            else if (img.item(i).get('src')) {
+                                title = img.item(i).get('src');
+                                break;
+                            }
                         }
                     }
                 }
                 //next get the text content before any nested markup
                 if (!title) {
                     title = node.get('textContent');
+                }
+                if (!title) {
+                    title = node.get('innerText');
                 }
                 if (title) {
                     //trim and normalize:
