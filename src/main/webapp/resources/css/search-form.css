@@ -29,14 +29,22 @@
 #picoFields input {
     border:1px solid white;
     position:absolute;
+    /* Mobile Safari: remove rounded corners and input shadow */
+    -webkit-appearance: none;
 }
 #searchTerms {
     width:587px;
     border:1px solid white;
+    /* Mobile Safari: remove rounded corners and input shadow */
+    -webkit-appearance: none;
+}
+#search input:focus {
+/* webkit: remove border from active inputs */
+    outline-style:none;
 }
 .yui3-js-enabled .clinical #searchTerms {
     margin-left:160px;
-    margin-top:32px;
+    margin-top:34px;
 }
 #searchSubmit {
     background-color:transparent;
