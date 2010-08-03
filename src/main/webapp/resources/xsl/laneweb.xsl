@@ -658,38 +658,54 @@
         </xsl:if>
     </xsl:template>
     
-    <!-- TODO: this is obsoleted by the above login list framework? -->
-    <!--<xsl:template match="h:li[starts-with(attribute::id,'proxyO')]/h:a">
-        <xsl:variable name="parameter-value">
-            <xsl:choose>
-                <xsl:when test="parent::h:li/attribute::id = 'proxyOn'">true</xsl:when>
-                <xsl:otherwise>false</xsl:otherwise>
-            </xsl:choose>   
-        </xsl:variable>
+    <!-- the following several templates add class to yui grid divs for custom widths -->
+    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']/h:div[@class='yui-gf']/h:div[@class='yui-u first']">
         <xsl:copy>
-            <xsl:attribute name="href">
-                <xsl:value-of select="$request-uri"/>
-                <xsl:choose>
-                    <xsl:when test="$query-string = ''">
-                        <xsl:text>?proxy-links=</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="not(contains($query-string,'proxy-links='))">
-                        <xsl:text>?</xsl:text>
-                        <xsl:value-of select="$query-string"/>
-                        <xsl:text>&amp;proxy-links=</xsl:text>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:text>?</xsl:text>
-                        <xsl:value-of
-                            select="substring-before($query-string,'proxy-links=')"/>
-                        <xsl:text>proxy-links=</xsl:text>
-                    </xsl:otherwise>
-                </xsl:choose>
-                <xsl:value-of select="$parameter-value"/>
-            </xsl:attribute>
+            <xsl:attribute name="class" select="concat(@class, ' leftColumn')"/>
+            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
             <xsl:apply-templates/>
         </xsl:copy>
-    </xsl:template>-->
+    </xsl:template>
+    
+    <xsl:template match="h:body/h:div[@class='yui-gf']/h:div[@class='yui-u first']">
+        <xsl:copy>
+            <xsl:attribute name="class" select="concat(@class, ' leftColumn')"/>
+            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']/h:div[@class='yui-gf']/h:div[@class='yui-u']">
+        <xsl:copy>
+            <xsl:attribute name="class" select="concat(@class, ' middleColumn')"/>
+            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u']">
+        <xsl:copy>
+            <xsl:attribute name="class" select="concat(@class, ' rightColumn')"/>
+            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']">
+        <xsl:copy>
+            <xsl:attribute name="class" select="concat(@class, ' leftGrids')"/>
+            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="h:body/h:div[@class='yui-gf']/h:div[@class='yui-u']">
+        <xsl:copy>
+            <xsl:attribute name="class" select="concat(@class, ' rightGrids')"/>
+            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
 
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 
@@ -780,54 +796,6 @@
                 <xsl:with-param name="string" select="substring($string,2)"/>
             </xsl:call-template>
         </xsl:if>
-    </xsl:template>
-    
-    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']/h:div[@class='yui-gf']/h:div[@class='yui-u first']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' leftColumn')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:body/h:div[@class='yui-gf']/h:div[@class='yui-u first']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' leftColumn')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']/h:div[@class='yui-gf']/h:div[@class='yui-u']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' middleColumn')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' rightColumn')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' leftGrids')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:body/h:div[@class='yui-gf']/h:div[@class='yui-u']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' rightGrids')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
     </xsl:template>
 
 </xsl:stylesheet>
