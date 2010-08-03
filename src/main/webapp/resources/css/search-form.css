@@ -11,7 +11,6 @@
 #searchSource {
     display:block;
     width:140px;
-    margin-bottom:6px;
 }
 #searchFields {
     position:absolute;
@@ -35,6 +34,8 @@
 #searchTerms {
     width:587px;
     border:1px solid white;
+    position:absolute;
+    top:29px;
     /* Mobile Safari: remove rounded corners and input shadow */
     -webkit-appearance: none;
 }
@@ -70,6 +71,7 @@
     color:white;
     border-bottom:none;
     text-decoration:underline;
+    white-space:nowrap;
 }
 #clinicalP {
     left:0px;
