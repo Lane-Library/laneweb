@@ -43,11 +43,14 @@
 /* webkit: remove border from active inputs */
     outline-style:none;
 }
-.yui3-js-enabled .clinical #searchTerms {
+.yui3-js-enabled .clinical #searchTerms, .yui3-js-enabled .clinical #searchSubmit {
     margin-left:160px;
     margin-top:34px;
 }
 #searchSubmit {
+    position:absolute;
+    top:27px;
+    left:593px;
     background-color:transparent;
     border:medium none;
     cursor:pointer;
