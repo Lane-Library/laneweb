@@ -29,7 +29,7 @@
                             <fieldset id="searchFields">
                                 <select name="source" id="searchSource">
                                     <option value="all-all"
-                                      title="Search: PubMed + Lane Catalog + Web of Science + UpToDate"
+                                        title="Enter eJournal or Article Title, PMID, ISSN, or Author"
                                         >Lane Search</option>
                                     <option value="clinical-all"
                                         title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ..."
@@ -43,7 +43,7 @@
                                         title="Find anatomical images from Lane's Bassset Collection"
                                         >Bassett Images</option>
                                 </select>
-                                <a id="searchTips" href="/help/tools/choose-search.html">How to Search</a>
+                                <a id="searchTips" href="/help/tools/choose-search.html">Choose Best Search for You</a>
                                 <div id="searchIndicator"><img alt="[searching]"
                                         src="/images/backgr/search-indicator.gif"/></div>
                                 <input name="q" id="searchTerms" type="text"/>
