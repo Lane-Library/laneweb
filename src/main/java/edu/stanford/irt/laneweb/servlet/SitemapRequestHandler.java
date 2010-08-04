@@ -3,12 +3,9 @@ package edu.stanford.irt.laneweb.servlet;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -25,7 +22,6 @@ import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-
 public class SitemapRequestHandler implements HttpRequestHandler {
     
     private static final String[][] BASE_MAPPINGS = new String[][] {
@@ -40,10 +36,10 @@ public class SitemapRequestHandler implements HttpRequestHandler {
     private Context context;
 
     private Processor processor;
+    
+    private RedirectProcessor redirectProcessor;
 
     private ServletContext servletContext;
-
-    private Map<Pattern, String> redirectMap = Collections.emptyMap();
 
     private Set<String> methodsNotAllowed = Collections.emptySet();
     
@@ -110,16 +106,12 @@ public class SitemapRequestHandler implements HttpRequestHandler {
     public void setProcessor(final Processor processor) {
         this.processor = processor;
     }
-
-    public void setRedirectMap(final Map<String, String> redirectMap) {
-        if (null == redirectMap) {
-            throw new IllegalArgumentException("null redirectMap");
+    
+    public void setRedirectProcessor(RedirectProcessor redirectProcessor) {
+        if (redirectProcessor == null) {
+            throw new IllegalArgumentException("null redirectProcessor");
         }
-        Map<Pattern, String> newRedirectMap = new LinkedHashMap<Pattern, String>();
-        for (Entry<String, String> entry : redirectMap.entrySet()) {
-            newRedirectMap.put(Pattern.compile(entry.getKey()), entry.getValue());
-        }
-        this.redirectMap = newRedirectMap;
+        this.redirectProcessor = redirectProcessor;
     }
 
     public void setServletContext(final ServletContext servletContext) {
@@ -136,14 +128,12 @@ public class SitemapRequestHandler implements HttpRequestHandler {
     }
 
     private boolean uriGetsRedirect(final String uri, final HttpServletResponse response) throws IOException {
-        for (Entry<Pattern, String> entry : this.redirectMap.entrySet()) {
-            Matcher matcher = entry.getKey().matcher(uri);
-            if (matcher.matches()) {
-                response.sendRedirect(matcher.replaceAll(entry.getValue()));
-                return true;
-            }
+        String redirectURI = this.redirectProcessor.getRedirectURL(uri);
+        if (RedirectProcessor.NO_REDIRECT.equals(redirectURI)) {
+            return false;
         }
-        return false;
+        response.sendRedirect(redirectURI);
+        return true;
     }
 
     private Map<String, Object> createModel(String uri) {

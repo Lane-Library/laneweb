@@ -36,6 +36,8 @@ public class SitemapRequestHandlerTest {
     
     private ServletContext servletContext;
 
+    private RedirectProcessor redirectProcessor;
+
     @Before
     public void setUp() throws Exception {
         this.handler = new SitemapRequestHandler();
@@ -43,20 +45,16 @@ public class SitemapRequestHandlerTest {
         this.response = createMock(HttpServletResponse.class);
         this.processor = createMock(Processor.class);
         this.servletContext = createMock(ServletContext.class);
+        this.redirectProcessor = createMock(RedirectProcessor.class);
         this.handler.setProcessor(this.processor);
         this.handler.setServletContext(this.servletContext);
-    }
-    
-    @Test
-    public void foo() {
-        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("((?!.*/biomed-resources.*).*)/bassett/(.*)");
-        java.util.regex.Matcher matcher = pattern.matcher("/biomed-resources/bassett/index.html");
-        org.junit.Assert.assertFalse(matcher.matches());
+        this.handler.setRedirectProcessor(this.redirectProcessor);
     }
 
     @Test
     public void testHandleRequest() throws Exception {
         expect(request.getMethod()).andReturn("GET");
+        expect(this.redirectProcessor.getRedirectURL("/")).andReturn(RedirectProcessor.NO_REDIRECT);
         expect(this.request.getRequestURI()).andReturn("/").times(3);
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getContextPath()).andReturn("").times(2);
@@ -67,54 +65,6 @@ public class SitemapRequestHandlerTest {
         expect(this.servletContext.getAttribute(isA(String.class))).andReturn("foo").times(3);
         expect(this.servletContext.getRealPath("/")).andReturn("/tmp");
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
-        replayMocks();
-        this.handler.handleRequest(request, response);
-        verifyMocks();
-    }
-    
-    @Test
-    public void testHandleRequestRedirect() throws ServletException, IOException {
-        this.handler.setRedirectMap(Collections.singletonMap("(.*)/", "$1/index.html"));
-        expect(request.getMethod()).andReturn("GET");
-        expect(request.getRequestURI()).andReturn("/foo/");
-        expect(this.request.getQueryString()).andReturn(null);
-        response.sendRedirect("/foo/index.html");
-        replayMocks();
-        this.handler.handleRequest(request, response);
-        verifyMocks();
-    }
-    
-    @Test
-    public void testHandleRequestRedirectSlash() throws ServletException, IOException {
-        this.handler.setRedirectMap(Collections.singletonMap("(.*)/", "$1/index.html"));
-        expect(request.getMethod()).andReturn("GET");
-        expect(request.getRequestURI()).andReturn("/");
-        expect(this.request.getQueryString()).andReturn(null);
-        response.sendRedirect("/index.html");
-        replayMocks();
-        this.handler.handleRequest(request, response);
-        verifyMocks();
-    }
-    
-    @Test
-    public void testHandleRequestRedirectClasses() throws ServletException, IOException {
-        this.handler.setRedirectMap(Collections.singletonMap("(.*)/classes/index.html", "$1/services/workshops/laneclasses.html"));
-        expect(request.getMethod()).andReturn("GET");
-        expect(request.getRequestURI()).andReturn("/classes/index.html");
-        expect(this.request.getQueryString()).andReturn(null);
-        response.sendRedirect("/services/workshops/laneclasses.html");
-        replayMocks();
-        this.handler.handleRequest(request, response);
-        verifyMocks();
-    }
-    
-    @Test
-    public void testHandleRequestRedirectClinician() throws ServletException, IOException {
-        this.handler.setRedirectMap(Collections.singletonMap("(.*)/clinician/index.html", "$1/portals/clinical.html"));
-        expect(request.getMethod()).andReturn("GET");
-        expect(request.getRequestURI()).andReturn("/foo/bar/clinician/index.html");
-        expect(this.request.getQueryString()).andReturn(null);
-        response.sendRedirect("/foo/bar/portals/clinical.html");
         replayMocks();
         this.handler.handleRequest(request, response);
         verifyMocks();
@@ -132,13 +82,13 @@ public class SitemapRequestHandlerTest {
     }
 
     @Test
-    public void testSetRedirectMap() {
+    public void testSetRedirectProcessor() {
         try {
-            this.handler.setRedirectMap(null);
+            this.handler.setRedirectProcessor(null);
             fail();
         } catch (IllegalArgumentException e) {
         }
-        this.handler.setRedirectMap(Collections.<String, String> emptyMap());
+        this.handler.setRedirectProcessor(this.redirectProcessor);
     }
     
     private void replayMocks() {
@@ -146,6 +96,7 @@ public class SitemapRequestHandlerTest {
         replay(this.response);
         replay(this.request);
         replay(this.processor);
+        replay(this.redirectProcessor);
     }
     
     private void verifyMocks() {
@@ -153,5 +104,6 @@ public class SitemapRequestHandlerTest {
         verify(this.processor);
         verify(this.response);
         verify(this.request);
+        verify(this.redirectProcessor);
     }
 }
