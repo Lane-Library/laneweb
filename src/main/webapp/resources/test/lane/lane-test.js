@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI({ debug:true, filter:'debug', logInclude: { TestRunner: true } }).use('lane','console','test', function(Y) {
+YUI({logInclude: { TestRunner: true } }).use('console','test', function(Y) {
     
     var laneTestCase = new Y.Test.Case({
         name: "Lane TestCase",
