@@ -48,6 +48,7 @@
                                         src="/images/backgr/search-indicator.gif"/></div>
                                 <input name="q" id="searchTerms" type="text"/>
                                 <input id="searchSubmit" type="submit" value="search"/>
+                                <a id="searchReset" href="/">Clear Search</a>
                             </fieldset>
                         </form>
                         <div class="content">

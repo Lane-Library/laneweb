@@ -91,8 +91,10 @@
                     qString = qString.replace(/(\(|\))/g, '');
                 }
             }
+            Y.fire('lane:searchPicoChange');
             return qString;
         };
+        Y.publish("lane:searchPicoChange",{broadcast:2});
     if (form) {
         searchTerms = new LANE.TextInput(Y.one("#searchTerms"))
         Y.Global.on("lane:suggestSelect",  function(event) {

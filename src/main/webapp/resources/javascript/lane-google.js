@@ -98,4 +98,9 @@
             gaPageTracker._trackEvent(event.type, document.location.pathname, event.resultTitle, event.resultPosition);
         }
     });
+    Y.Global.on("lane:searchFormReset",  function(event) {
+        if (gaPageTracker !== undefined) {
+            gaPageTracker._trackEvent(event.type, document.location.pathname);
+        }
+    });
 })();

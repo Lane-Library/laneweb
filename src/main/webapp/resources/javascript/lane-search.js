@@ -11,10 +11,7 @@
             searchIndicator = new LANE.SearchIndicator(),
             searchTextInput = new LANE.TextInput(form.one('#searchTerms')),
             searchTermsSuggest = new LANE.Suggest(searchTextInput.getInput()),
-            search,
-            searchTermsPresent = function() {
-                return searchTextInput.getValue() !== '';
-            };
+            search;
         form.on('submit', function(submitEvent) {
             submitEvent.preventDefault();
             try {
@@ -34,7 +31,7 @@
         searchTipsLink.set('href',searchTipsLink.get('href')+'#'+searchSourceSelect.get('value'));
         searchTextInput.setHintText(selectedOption.get('title'));
         searchSourceSelect.on('change', function(e) {
-            if (searchTermsPresent()) {
+            if (search.searchTermsPresent()) {
                 search.submitSearch();
             } else {
                 Y.fire('lane:searchSourceChange', {newVal:this.get("value")});
@@ -54,12 +51,15 @@
                     searchTextInput.setValue(searchString);
                 },
                 submitSearch: function() {
-                    if (!searchTermsPresent()) {
+                    if (!search.searchTermsPresent()) {
                         throw ('nothing to search for');
                     }
                     searchIndicator.show();
                     Y.fire('lane:beforeSearchSubmit', search);
                     form.submit();
+                },
+                searchTermsPresent : function() {
+                    return searchTextInput.getValue() !== '';
                 }
         };
         return search;

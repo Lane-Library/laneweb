@@ -43,7 +43,7 @@
 /* webkit: remove border from active inputs */
     outline-style:none;
 }
-.yui3-js-enabled .clinical #searchTerms, .yui3-js-enabled .clinical #searchSubmit {
+.yui3-js-enabled .clinical #searchTerms, .yui3-js-enabled .clinical #searchSubmit, .yui3-js-enabled .clinical #searchReset {
     margin-left:160px;
     margin-top:34px;
 }
@@ -59,6 +59,16 @@
     height:20px;
     border:none;
     padding-left:20px;
+}
+#searchReset {
+    display:none;
+    position:absolute;
+    top:28px;
+    left:625px;
+    color:white;
+    border-bottom:none;
+    text-decoration:underline;
+    white-space:nowrap;
 }
 #searchIndicator {
     display:none;
