@@ -53,18 +53,37 @@ public class SitemapRequestHandler implements HttpRequestHandler {
     }
 
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-        if (methodNotAllowed(request, response)) {
+        if (this.methodsNotAllowed.contains(request.getMethod())) {
+            response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             return;
         }
-        String uri = request.getRequestURI();
-        if (request.getQueryString() != null) {
-            uri = uri + '?' + request.getQueryString();
+        String requestURI = request.getRequestURI();
+        String contextPath = request.getContextPath();
+        requestURI = requestURI.substring(contextPath.length());
+        String queryString = request.getQueryString();
+        if (queryString != null) {
+            requestURI = requestURI + '?' + queryString;
         }
-        if (uriGetsRedirect(uri, response)) {
+        String strippedURI = requestURI;
+        String redirectBase = contextPath;
+        if (strippedURI.indexOf("/stage") == 0) {
+            strippedURI = strippedURI.substring(6);
+            redirectBase += "/stage";
+        } else {
+            for (String key : this.baseMappings.keySet()) {
+                if (strippedURI.indexOf(key) == 0) {
+                    strippedURI = strippedURI.substring(key.length());
+                    redirectBase += key;
+                    break;
+                }
+            }
+        }
+        String redirectURI = this.redirectProcessor.getRedirectURL(strippedURI);
+        if (!RedirectProcessor.NO_REDIRECT.equals(redirectURI)) {
+            response.sendRedirect(redirectBase + redirectURI);
             return;
         }
-        uri = request.getRequestURI().substring(request.getContextPath().length());
-        Map<String, Object> model = createModel(uri);
+        Map<String, Object> model = createModel(requestURI);
         request.setAttribute(Model.MODEL, model);
         process(request, response);
     }
@@ -117,23 +136,6 @@ public class SitemapRequestHandler implements HttpRequestHandler {
     public void setServletContext(final ServletContext servletContext) {
         this.servletContext = servletContext;
         this.context = new HttpContext(servletContext);
-    }
-
-    private boolean methodNotAllowed(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        if (this.methodsNotAllowed.contains(request.getMethod())) {
-            response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean uriGetsRedirect(final String uri, final HttpServletResponse response) throws IOException {
-        String redirectURI = this.redirectProcessor.getRedirectURL(uri);
-        if (RedirectProcessor.NO_REDIRECT.equals(redirectURI)) {
-            return false;
-        }
-        response.sendRedirect(redirectURI);
-        return true;
     }
 
     private Map<String, Object> createModel(String uri) {

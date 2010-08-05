@@ -8,12 +8,10 @@ import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.fail;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -55,8 +53,8 @@ public class SitemapRequestHandlerTest {
     public void testHandleRequest() throws Exception {
         expect(request.getMethod()).andReturn("GET");
         expect(this.redirectProcessor.getRedirectURL("/")).andReturn(RedirectProcessor.NO_REDIRECT);
-        expect(this.request.getRequestURI()).andReturn("/").times(3);
-        expect(this.request.getQueryString()).andReturn(null);
+        expect(this.request.getRequestURI()).andReturn("/").times(2);
+        expect(this.request.getQueryString()).andReturn(null).times(1);
         expect(this.request.getContextPath()).andReturn("").times(2);
         expect(this.request.getParameter("cocoon-view")).andReturn(null);
         expect(this.request.getParameter("cocoon-action")).andReturn(null);
