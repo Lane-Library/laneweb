@@ -50,8 +50,7 @@
                             <xsl:sort select="@title" order="ascending" data-type="text"/>
                             <xsl:if test="position() &lt;= 10">
                                 <li>
-                                    <a rel="popup standard"
-                                        href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{@title}&quot;[Journal]">
+                                    <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{@title}&quot;[Journal]">
                                         <xsl:value-of select="@title"/>
                                     </a>
                                 </li>
@@ -78,7 +77,7 @@
             <ul class="r-{/s:resources/s:pagination/@currentIndex + position()}">
                 <li>
                     <a class="primaryLink" title="{s:title}" href="{s:url}"
-                        id="{s:id}" rel="popup standard">
+                        id="{s:id}">
                         <xsl:apply-templates select="s:title"/>
                     </a>
 
@@ -98,8 +97,7 @@
                                 <xsl:apply-templates select="s:contentId"/>
                                 <br />
                                 <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
-                                    <a rel="popup standard"
-                                        title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
+                                    <a title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
                                         href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
                                 </xsl:if>
                             </xsl:when>
@@ -109,8 +107,7 @@
                                 </span>
                                 <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
                                     <xsl:text> - </xsl:text>
-                                    <a rel="popup standard"
-                                        title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
+                                    <a title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
                                         href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
                                 </xsl:if>
                             </xsl:otherwise>
@@ -177,7 +174,7 @@
                         <!-- add catalog link to all bibs except those that already have one (history) -->
                         <xsl:when test="s:recordType = 'bib' and not(s:versions//s:label[.='catalog record'])">
                             <div class="moreResults">
-                                <a rel="popup standard" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
+                                <a href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
                             </div>
                         </xsl:when>
                         <xsl:when test="s:recordType = 'faq'">
@@ -269,7 +266,7 @@
         <xsl:choose>
             <xsl:when test="$type = 'first'">
                 <a class="primaryLink" title="{$title}" href="{$link/s:url}"
-                    id="eresource-{$eresourceId}" rel="popup standard">
+                    id="eresource-{$eresourceId}">
                     <xsl:apply-templates select="$title"/>
                 </a>
             </xsl:when>
@@ -375,7 +372,7 @@
         <xsl:text> - </xsl:text>
         <span class="pmid">
             <xsl:text> PMID:</xsl:text>
-            <a rel="popup standard" href="http://www.ncbi.nlm.nih.gov/pubmed/{.}?otool=stanford"><xsl:value-of select="."/></a>
+            <a href="http://www.ncbi.nlm.nih.gov/pubmed/{.}?otool=stanford"><xsl:value-of select="."/></a>
         </span>
     </xsl:template>
 

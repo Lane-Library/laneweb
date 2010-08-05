@@ -75,7 +75,14 @@
                             <xsl:attribute name="href">
                                 <xsl:value-of select="/doc/s:search/s:engine/s:resource[@s:id = $id]/s:url"/>
                             </xsl:attribute>
-                            <xsl:if test="$success = 'true' or $failure = 'true'">
+                            <xsl:if test="$success = 'true'">
+                                <xsl:attribute name="class">
+                                    <xsl:value-of select="replace(@class,'metasearch','searchSuccess')"/>
+                                </xsl:attribute>
+                                <!-- using target _blank here for consistency w/ JS-built links -->
+                                <xsl:attribute name="target">_blank</xsl:attribute>
+                            </xsl:if>
+                            <xsl:if test="$failure = 'true'">
                                 <xsl:attribute name="class">
                                     <xsl:value-of select="replace(@class,'metasearch','')"/>
                                 </xsl:attribute>
