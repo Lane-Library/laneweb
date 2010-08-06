@@ -62,7 +62,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
     }
     private ApplicationContext applicationContext;
 
-    private Map registeredNodes = Collections.emptyMap();
+    private Map<String, ProcessingNode> registeredNodes = Collections.emptyMap();
 
     private ServiceManager serviceManager;
 
@@ -93,6 +93,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
         return builder;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public Map getHintsForStatement(final String role, final String hint, final Configuration statement) throws Exception {
         return Collections.emptyMap();
@@ -123,6 +124,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
         return type;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public Collection getViewsForStatement(final String role, final String hint, final Configuration statement) throws Exception {
         return Collections.emptyList();
@@ -150,6 +152,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
         this.applicationContext = applicationContext;
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public ProcessingNode setupNode(final ProcessingNode node, final Configuration config) throws Exception {
         Location location = getLocation(config);

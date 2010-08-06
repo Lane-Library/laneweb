@@ -14,7 +14,7 @@ public class GSSAPIAuthenticationStrategy implements DirContextAuthenticationStr
         return ctx;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void setupEnvironment(final Hashtable env, final String userDn, final String password) {
         env.put(Context.SECURITY_AUTHENTICATION, "GSSAPI");
         env.put(Sasl.QOP, "auth-conf");

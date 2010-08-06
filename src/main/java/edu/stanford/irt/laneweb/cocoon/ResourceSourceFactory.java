@@ -12,6 +12,7 @@ import org.apache.excalibur.source.impl.ResourceSource;
 
 public class ResourceSourceFactory implements SourceFactory {
 
+    @SuppressWarnings("rawtypes")
     public Source getSource(String location, Map parameters) throws MalformedURLException, IOException, SourceException {
         return new ResourceSource(location);
     }

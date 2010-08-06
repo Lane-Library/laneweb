@@ -41,6 +41,7 @@ public class AbstractProxyLinkTransformerTest {
         verifyMocks();
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testHospitalIP() {
         expect(this.model.getString(isA(String.class))).andReturn(null).atLeastOnce();

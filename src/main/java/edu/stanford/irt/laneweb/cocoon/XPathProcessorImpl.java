@@ -71,7 +71,7 @@ public class XPathProcessorImpl implements XPathProcessor {
                     throw new UnsupportedOperationException();
                 }
 
-                @SuppressWarnings("unchecked")
+                @SuppressWarnings("rawtypes")
                 public Iterator getPrefixes(final String namespaceURI) {
                     throw new UnsupportedOperationException();
                 }

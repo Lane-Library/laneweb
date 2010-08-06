@@ -12,6 +12,7 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class IPGroupSelector extends DefaultModelAware implements Selector {
 
+    @SuppressWarnings("rawtypes")
     public boolean select(String expression, Map objectModel, Parameters parameters) {
         IPGroup group = this.model.getObject(Model.IPGROUP, IPGroup.class);
         return expression.equals(group.toString());

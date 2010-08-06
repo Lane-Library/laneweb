@@ -2,7 +2,6 @@ package edu.stanford.irt.laneweb.model;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.apache.cocoon.el.objectmodel.ObjectModelProvider;
@@ -14,8 +13,10 @@ import org.apache.commons.collections.MultiMap;
  *
  * $Id$
  */
+@SuppressWarnings({ "rawtypes", "serial" })
 public class LanewebObjectModel extends HashMap implements ObjectModel {
     
+    @SuppressWarnings("unchecked")
     public void setInitialEntries(Map<String, ObjectModelProvider> initialEntries) {
         for (Entry<String, ObjectModelProvider> entry : initialEntries.entrySet()) {
             put(entry.getKey(), entry.getValue().getObject());
@@ -36,6 +37,7 @@ public class LanewebObjectModel extends HashMap implements ObjectModel {
     public void markLocalContext() {
     }
 
+    @SuppressWarnings("unchecked")
     public void putAt(String path, Object value) {
         put(path, value);
     }

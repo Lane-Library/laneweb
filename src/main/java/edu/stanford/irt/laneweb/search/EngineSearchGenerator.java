@@ -15,6 +15,7 @@ public class EngineSearchGenerator extends SearchGenerator {
         return super.doSearch(this.engines);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void initialize() {
         super.initialize();

@@ -80,7 +80,7 @@ public class LanewebXIncludeTransformer extends AbstractTransformer implements C
         this.manager = serviceManager;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public void setup(final SourceResolver resolver, final Map objectModel, final String source,
             final Parameters parameters) {
         this.resolver = resolver;

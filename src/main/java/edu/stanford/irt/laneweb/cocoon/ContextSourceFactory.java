@@ -22,6 +22,7 @@ public class ContextSourceFactory implements SourceFactory {
         this.sourceResolver = sourceResolver;
     }
 
+    @SuppressWarnings("rawtypes")
     public Source getSource(final String location, final Map arg1) throws IOException, MalformedURLException {
         // Remove the protocol and the first '/'
         final int pos = location.indexOf(":/");

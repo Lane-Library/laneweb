@@ -29,7 +29,7 @@ public class WebdashActionTest {
         this.action.setModel(this.model);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     @Test
     public void testError() {
         expect(this.model.getString(Model.NONCE)).andReturn(null);
@@ -47,7 +47,7 @@ public class WebdashActionTest {
         verify(this.webdashLogin);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     @Test
     public void testLogin() {
         expect(this.model.getString(Model.NONCE)).andReturn(Model.NONCE);
@@ -65,7 +65,7 @@ public class WebdashActionTest {
         verify(this.webdashLogin);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     @Test
     public void testRegister() {
         expect(this.model.getString(Model.NONCE)).andReturn(Model.NONCE);

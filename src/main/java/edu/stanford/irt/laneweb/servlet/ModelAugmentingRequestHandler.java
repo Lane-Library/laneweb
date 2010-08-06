@@ -43,6 +43,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         this.ezproxyKey = ezproxyKey;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void process(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Map<String, Object> model = (Map<String, Object>) request.getAttribute(Model.MODEL);
@@ -106,6 +107,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     private void addRequestParameters(HttpServletRequest request, Map<String, Object> model) {
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
         String name = (String) params.nextElement();

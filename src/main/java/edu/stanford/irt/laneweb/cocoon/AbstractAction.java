@@ -18,7 +18,7 @@ public abstract class AbstractAction implements Action, ModelAware {
     
     protected Model model;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public Map act(Redirector redirector, SourceResolver resolver, Map objectModel, String source, Parameters parameters)
             throws Exception {
         this.parametersMap = new ParametersMap(parameters);

@@ -12,6 +12,7 @@ import org.apache.cocoon.el.objectmodel.ObjectModel;
  *
  * $Id$
  */
+@SuppressWarnings("serial")
 public class Model extends HashMap<String, Object> {
     
     public static final String BASE_PATH = "base-path";
@@ -104,11 +105,13 @@ public class Model extends HashMap<String, Object> {
     
     public static final String REMOVE_PERSISTENT_LOGIN = "remove-persistent-login";
     
+    @SuppressWarnings("unchecked")
     public Model(ObjectModel objectModel) {
         putAll((Map<String, Object>) objectModel.get("laneweb"));
     }
 
 
+    @SuppressWarnings("unchecked")
     public <T> T getObject(String name, Class<T> clazz) {
         return (T) get(name);
     }

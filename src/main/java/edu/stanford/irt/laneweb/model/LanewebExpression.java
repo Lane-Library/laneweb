@@ -24,7 +24,7 @@ public class LanewebExpression implements Expression {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Object evaluate(final ObjectModel objectModel) throws ExpressionException {
 //        for (Map map : (Collection<Map>) objectModel.values()) {
 //            if (map.containsKey(this.expression)) {
@@ -48,7 +48,7 @@ public class LanewebExpression implements Expression {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public Iterator iterate(final ObjectModel objectModel) throws ExpressionException {
         throw new UnsupportedOperationException();
     }

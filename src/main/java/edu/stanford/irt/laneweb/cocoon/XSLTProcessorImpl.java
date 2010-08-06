@@ -298,7 +298,7 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
                 } else {
                     File parent = new File(base.substring(5));
                     File parent2 = new File(parent.getParentFile(), href);
-                    xslSource = this.resolver.resolveURI(parent2.toURL().toExternalForm());
+                    xslSource = this.resolver.resolveURI(parent2.toURI().toURL().toExternalForm());
                 }
             }
             InputSource is = getInputSource(xslSource);
@@ -386,6 +386,7 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private TransformerHandlerAndValidity getTemplates(final Source stylesheet, final String id) throws IOException, SourceException, TransformerException {
         // we must augment the template ID with the factory classname since one
         // transformer implementation cannot handle the instances of a

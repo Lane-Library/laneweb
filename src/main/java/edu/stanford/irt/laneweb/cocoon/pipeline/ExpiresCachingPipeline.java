@@ -120,6 +120,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
     /**
      * Prepare the pipeline
      */
+    @SuppressWarnings("rawtypes")
     @Override
     protected void preparePipeline(final Environment environment) throws ProcessingException {
         // get the key and the expires info

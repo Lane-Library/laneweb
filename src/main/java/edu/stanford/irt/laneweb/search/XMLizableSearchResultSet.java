@@ -17,6 +17,7 @@ import edu.stanford.irt.laneweb.Resource;
 /**
  * @author ryanmax $Id$
  */
+@SuppressWarnings("serial")
 public class XMLizableSearchResultSet extends TreeSet<SearchResult> implements Resource, XMLizable {
 
     private String query = null;

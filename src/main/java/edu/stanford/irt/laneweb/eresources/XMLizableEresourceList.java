@@ -12,6 +12,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.Resource;
 
+@SuppressWarnings("serial")
 public class XMLizableEresourceList extends LinkedList<Eresource> implements XMLizable, Resource {
 
     public XMLizableEresourceList(Collection<Eresource> eresources) {

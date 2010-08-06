@@ -17,6 +17,7 @@ public class SitemapSourceFactory implements SourceFactory {
         this.factory.service(serviceManager);
     }
 
+    @SuppressWarnings("rawtypes")
     public Source getSource(final String location, final Map parameters) throws IOException {
         return this.factory.getSource(location, parameters);
     }

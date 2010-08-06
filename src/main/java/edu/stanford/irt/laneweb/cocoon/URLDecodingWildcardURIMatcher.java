@@ -8,6 +8,7 @@ import org.apache.cocoon.matching.WildcardURIMatcher;
 
 public class URLDecodingWildcardURIMatcher extends WildcardURIMatcher {
 
+    @SuppressWarnings("rawtypes")
     @Override
     protected String getMatchString(final Map objectModel, final Parameters parameters) {
         try {

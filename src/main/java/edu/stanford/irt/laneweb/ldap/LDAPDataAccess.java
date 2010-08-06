@@ -67,7 +67,7 @@ public class LDAPDataAccess {
             this.attributesMapper = new LDAPAttributesMapper();
         }
         
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings("rawtypes")
         public LDAPData run() {
             List list = this.ldapTemplate.search("", "susunetid=" + sunetid, this.attributesMapper);
             if (list == null || list.size() == 0) {
