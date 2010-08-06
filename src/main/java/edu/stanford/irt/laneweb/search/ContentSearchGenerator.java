@@ -28,11 +28,15 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
 
     private long defaultTimeout;
 
+    private String timeout;
+    
     private int contentResultLimit;
 
+    @Override
     @SuppressWarnings("unchecked")
     protected void initialize() {
         super.initialize();
+        this.timeout = this.model.getString("timeout", this.parameterMap.get("timeout"));
         this.engines = this.model.getObject(Model.ENGINES, Collection.class, Collections.<String>emptyList());
         if (this.engines.size() == 0) {
             String engineList = this.parameterMap.get("engine-list");
@@ -91,6 +95,14 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
 
     @Override
     protected Result doSearch() {
-        return this.metaSearchManager.search(new SimpleQuery(this.query), this.defaultTimeout, this.engines, true);
+        long time = this.defaultTimeout;
+        if (null != this.timeout) {
+            try {
+                time = Long.parseLong(this.timeout);
+            } catch (NumberFormatException nfe) {
+                ;
+            }
+        }
+        return this.metaSearchManager.search(new SimpleQuery(this.query), time, this.engines, true);
     }
 }
