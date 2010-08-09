@@ -99,6 +99,18 @@
 #searchResults li div {
     margin-left:20px;
 }
+#searchResults ul {
+    padding:5px;
+}
+#searchResults .showAbstract{
+    margin-left:20px;
+}
+#searchResults .hvrTarg {
+    display:none;
+    margin-top:5px;
+    padding:2px;
+    border-top:1px dotted #CCCCCC;
+}
 .sourceLink {
     color:#666666;
 }

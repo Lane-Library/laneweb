@@ -36,12 +36,6 @@
                         </span>
                     </xsl:for-each>
                 </div>
-                <div class="tooltips" style="display:none;">
-                    <xsl:for-each
-                        select="//s:result/s:description|//s:result[not(s:description)]/s:title">
-                        <xsl:call-template name="tooltip"/>
-                    </xsl:for-each>
-                </div>
                 <xsl:if test="count(/s:resources/s:journals/s:journal) > 0">
                     <span id="showPubMedStrategies" style="display:none;">true</span>
                     <ul id="pubmedJournalLinks">
@@ -76,8 +70,7 @@
         <dd>
             <ul class="r-{/s:resources/s:pagination/@currentIndex + position()}">
                 <li>
-                    <a class="primaryLink" title="{s:title}" href="{s:url}"
-                        id="{s:id}">
+                    <a class="primaryLink" title="{s:title}" href="{s:url}">
                         <xsl:apply-templates select="s:title"/>
                     </a>
 
@@ -114,6 +107,7 @@
                         </xsl:choose>
                     </div>
                 </li>
+                <xsl:apply-templates select="s:description"/>
             </ul>
         </dd>
     </xsl:template>
@@ -133,7 +127,6 @@
                                         select="s:versions/s:version[1]/s:links/s:link[2]/node()"/>
                                 </xsl:with-param>
                                 <xsl:with-param name="title" select="s:title"/>
-                                <xsl:with-param name="eresourceId" select="s:id"/>
                             </xsl:call-template>
                             <xsl:call-template name="firstLinkText">
                                 <xsl:with-param name="version" select="s:versions/s:version[1]"/>
@@ -156,7 +149,6 @@
                                         select="s:versions/s:version[1]/s:links/s:link[1]/node()"/>
                                 </xsl:with-param>
                                 <xsl:with-param name="title" select="s:title"/>
-                                <xsl:with-param name="eresourceId" select="s:id"/>
                             </xsl:call-template>
                             <xsl:call-template name="firstLinkText">
                                 <xsl:with-param name="version" select="s:versions/s:version[1]"/>
@@ -194,6 +186,7 @@
                         </xsl:when>
                     </xsl:choose>
                 </li>
+                <xsl:apply-templates select="s:description"/>
             </ul>
         </dd>
     </xsl:template>
@@ -262,11 +255,9 @@
         <xsl:param name="link"/>
         <xsl:param name="version"/>
         <xsl:param name="title"/>
-        <xsl:param name="eresourceId"/>
         <xsl:choose>
             <xsl:when test="$type = 'first'">
-                <a class="primaryLink" title="{$title}" href="{$link/s:url}"
-                    id="eresource-{$eresourceId}">
+                <a class="primaryLink" title="{$title}" href="{$link/s:url}">
                     <xsl:apply-templates select="$title"/>
                 </a>
             </xsl:when>
@@ -307,33 +298,22 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template name="tooltip">
-        <xsl:variable name="tooltip-id">
+    <xsl:template match="s:description">
+        <!-- 
+        <li class="showAbstract">
             <xsl:choose>
-                <xsl:when test="parent::node()/@type = 'eresource'">
-                    <xsl:value-of select="concat('eresource-',parent::node()/s:id,'Tooltip')"/>
+                <xsl:when test="starts-with(parent::node()/s:resourceName,'PubMed')">
+                    [<a href="#"><span>Show</span> Abstract</a>]
                 </xsl:when>
-                <xsl:when test="parent::node()/@type = 'searchContent'">
-                    <xsl:value-of select="concat(parent::node()/s:id,'Tooltip')"/>
-                </xsl:when>
+                <xsl:otherwise>
+                    [<a href="#"><span>Show</span> Description</a>]
+                </xsl:otherwise>
             </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="tooltip-width">
-            <xsl:choose>
-                <xsl:when test="string-length(.) > 500">width:60%</xsl:when>
-                <xsl:otherwise>default</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <span id="{$tooltip-id}">
-            <xsl:if test="$tooltip-width != 'default'">
-                <xsl:attribute name="style">
-                    <xsl:value-of select="$tooltip-width"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="name() = 'description'">
-                <xsl:apply-templates select="."/>
-            </xsl:if>
-        </span>
+        </li>
+        -->
+        <li class="hvrTarg">
+            <xsl:apply-templates/>
+        </li>
     </xsl:template>
 
     <xsl:template match="s:pub-author">
