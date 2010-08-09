@@ -55,6 +55,7 @@
                         new LANE.TextInput(inputs.item(i), title);
                     }
                 }
+                inputs.item(0).focus();
                 reset.syncUI();
                 Y.fire('lane:searchFormReset');
                 event.preventDefault();
