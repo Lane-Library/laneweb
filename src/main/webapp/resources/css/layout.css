@@ -63,6 +63,13 @@
 .yui-u .yui-gb .yui-u {
     width:32%;
 }
+/* next two rules for a specific case laneclasses.html, two column nested grid*/
+.type1 .yui-gf .yui-u {
+    width:74.2%;
+}
+.type1 .yui-gf div.first {
+    width:24%;
+}
 /*
 .yui-ge .yui-gf .yui-u {
     width:74.2%;
