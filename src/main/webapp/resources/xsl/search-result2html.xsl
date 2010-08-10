@@ -70,7 +70,7 @@
         <dd>
             <ul class="r-{/s:resources/s:pagination/@currentIndex + position()}">
                 <li>
-                    <a class="primaryLink" title="{s:title}" href="{s:url}">
+                    <a class="primaryLink" href="{s:url}">
                         <xsl:apply-templates select="s:title"/>
                     </a>
 
@@ -90,8 +90,7 @@
                                 <xsl:apply-templates select="s:contentId"/>
                                 <br />
                                 <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
-                                    <a title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
-                                        href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
+                                    <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
                                 </xsl:if>
                             </xsl:when>
                             <xsl:otherwise>
@@ -100,8 +99,7 @@
                                 </span>
                                 <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
                                     <xsl:text> - </xsl:text>
-                                    <a title="all {format-number(s:resourceHits,'###,###,##0')} results from {s:resourceName}"
-                                        href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
+                                    <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
                                 </xsl:if>
                             </xsl:otherwise>
                         </xsl:choose>
@@ -257,7 +255,7 @@
         <xsl:param name="title"/>
         <xsl:choose>
             <xsl:when test="$type = 'first'">
-                <a class="primaryLink" title="{$title}" href="{$link/s:url}">
+                <a class="primaryLink" href="{$link/s:url}">
                     <xsl:apply-templates select="$title"/>
                 </a>
             </xsl:when>
@@ -292,25 +290,13 @@
             </xsl:when>
             <xsl:when test="$type = 'impactFactor'">
                 <div>
-                    <a href="{$link/s:url}" title="{$link/s:label}">Impact Factor</a>
+                    <a href="{$link/s:url}">Impact Factor</a>
                 </div>
             </xsl:when>
         </xsl:choose>
     </xsl:template>
 
     <xsl:template match="s:description">
-        <!-- 
-        <li class="showAbstract">
-            <xsl:choose>
-                <xsl:when test="starts-with(parent::node()/s:resourceName,'PubMed')">
-                    [<a href="#"><span>Show</span> Abstract</a>]
-                </xsl:when>
-                <xsl:otherwise>
-                    [<a href="#"><span>Show</span> Description</a>]
-                </xsl:otherwise>
-            </xsl:choose>
-        </li>
-        -->
         <li class="hvrTarg">
             <xsl:apply-templates/>
         </li>
