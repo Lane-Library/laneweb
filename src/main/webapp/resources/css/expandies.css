@@ -65,16 +65,32 @@
 .type1 .details > div {
     background-color:white;
     border:16px solid #DBD2B3;
-    padding:16px 16px 0;
+    padding:8px 16px 0;
 }
 .type1 .details p {
     font-size:12px;
     line-height:18px;
 }
+/* the following to make sure class="weak" takes precedence:*/
+.type1 .details .weak {
+    font-size:11px;
+    line-height:normal;
+}
 .type1 .details .extra {
     float:right;
     font-size:larger;
-    margin-left:10px
+    margin-left:30px
+}
+.type1 .extra p {
+    line-height:8px;
+}
+.type1 .extra div {
+    font-size:150%;
+    font-weight:bold;
+}
+.type1 .extra img {
+    float:left;
+    margin-right:10px;
 }
 .type1 .yui-ge, .type1 .yui-gc, .type1 .yui-gf {
     line-height:18px;
