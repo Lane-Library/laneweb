@@ -597,7 +597,7 @@
     <xsl:template match="h:ul[contains(@class,'sectionMenu')]/h:li[h:div/h:a[@href=$path]]">
         <xsl:copy>
             <xsl:attribute name="class">expanded</xsl:attribute>
-            <div><em><xsl:apply-templates select="child::h:a"/></em></div>
+            <div><em><xsl:apply-templates select="child::h:div/h:a"/></em></div>
             <xsl:apply-templates select="child::h:ul"/>
         </xsl:copy>
     </xsl:template>
