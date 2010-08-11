@@ -594,7 +594,7 @@
     </xsl:template>
     
     <!-- add class="expanded" to sectionMenu li that are links to the current page and are expandies -->
-    <xsl:template match="h:ul[@class='sectionMenu']/h:li[h:div/h:a[@href=$path]]">
+    <xsl:template match="h:ul[@class='sectionMenu expandy']/h:li[h:div/h:a[@href=$path]]">
         <xsl:copy>
             <xsl:attribute name="class">expanded</xsl:attribute>
             <xsl:apply-templates select="child::node()"/>
