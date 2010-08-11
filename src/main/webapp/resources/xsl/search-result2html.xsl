@@ -74,7 +74,7 @@
                         <xsl:apply-templates select="s:title"/>
                     </a>
 
-                    <xsl:apply-templates select="s:pub-author"/>
+                    <xsl:apply-templates select="s:pub-author[string-length(.) > 1]"/>
                     <div class="pubTitle">
                         <xsl:choose>
                             <xsl:when test="s:pub-title">
