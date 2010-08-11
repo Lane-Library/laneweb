@@ -61,6 +61,10 @@ public class ContentResultSearchResult implements SearchResult {
         return this.sortTitle;
     }
 
+    public String getContentUrl() {
+        return this.contentResult.getURL();
+    }
+    
     /**
      * @param resourceId
      *            the resourceId to set

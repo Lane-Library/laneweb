@@ -5,8 +5,10 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
@@ -68,6 +70,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
     
     protected Collection<ContentResultSearchResult> getContentResultList(Result result) {
         Collection<ContentResultSearchResult> contentResults = new LinkedList<ContentResultSearchResult>();
+        Map<String, ContentResultSearchResult> resultTitles = new HashMap<String, ContentResultSearchResult>();
         Pattern queryTermPattern = QueryTermPattern.getPattern(this.query);
         for (Result engine : result.getChildren()) {
             Result parentResource = null;
@@ -83,7 +86,16 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
                         crsr.setResourceId(parentResource.getId());
                         crsr.setResourceName(parentResource.getDescription());
                         crsr.setResourceUrl(parentResource.getURL());
-                        contentResults.add(crsr);
+                        if(!resultTitles.containsKey(crsr.getContentUrl()) ){
+                            resultTitles.put(crsr.getContentUrl(),crsr);
+                            contentResults.add(crsr);
+                        }
+                        else if(crsr.getScore() > resultTitles.get(crsr.getContentUrl()).getScore() ){
+                                contentResults.remove(resultTitles.get(crsr.getContentUrl()));
+                                contentResults.add(crsr);
+                                resultTitles.remove(crsr.getContentUrl());
+                                resultTitles.put(crsr.getContentUrl(),crsr);
+                        }
                     }
                 } else if (!"article_ids".equals(resource.getId())) {
                     parentResource = resource;
