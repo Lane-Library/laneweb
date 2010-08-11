@@ -1,7 +1,26 @@
 .sectionMenu em a {
-  border:none;
-  color:inherit;
+    border:none;
+    color:inherit;
 }
 .sectionMenu em a:hover {
-  border-bottom:1px #820000 solid;
+    border-bottom:1px #820000 solid;
+}
+.sectionMenu.expandy ul {
+     margin-bottom:0 
+}
+.sectionMenu .yui3-accordion-item {
+    list-style:none outside none;
+    margin-left:-5px;
+}
+.sectionMenu .yui3-accordion-item div {
+    padding-left:20px;
+    background-image:url(/././images/plus.png);
+    background-repeat:no-repeat;
+    background-position:3px 2px
+}
+.sectionMenu .yui3-accordion-item ul {
+    margin-left:15px;
+}
+.sectionMenu .yui3-accordion-item-active div {
+    background-image:url(/././images/minus.png);
 }
