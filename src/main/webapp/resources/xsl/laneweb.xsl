@@ -593,6 +593,14 @@
       <em><xsl:copy><xsl:apply-templates select="attribute::node() | child::node()"/></xsl:copy></em>
     </xsl:template>
     
+    <!-- add class="expanded" to sectionMenu li that are links to the current page and are expandies -->
+    <xsl:template match="h:ul[@class='sectionMenu']/h:li[h:div/h:a[@href=$path]]">
+        <xsl:copy>
+            <xsl:attribute name="class">expanded</xsl:attribute>
+            <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
     <!-- the next 6 template matches handle the login state and show links depending on that state -->
     <!-- process the list only if off campus -->
     <xsl:template match="h:ul[attribute::id='login']">
