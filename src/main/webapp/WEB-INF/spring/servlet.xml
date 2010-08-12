@@ -3,6 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
+    <bean id="javax.servlet.ServletContext"
+        class="org.apache.cocoon.spring.configurator.impl.ServletContextFactoryBean"/>
+
     <bean name="org.apache.cocoon.processing.ProcessInfoProvider"
         class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
         <property name="servletContext" ref="servletContext"/>
