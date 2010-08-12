@@ -153,7 +153,7 @@
     
     <xsl:template match="h:a" mode="pubmedMore-link">
         <xsl:variable name="countFacetId" select="replace(../attribute::id,'\w+-(.*)Facet','$1')"/>
-        <a href="{//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId]/h:a/@href}" rel="popup standard">
+        <a href="{//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId]/h:a/@href}">
             <xsl:value-of select="."/>
             <xsl:text> </xsl:text>
         </a>
