@@ -124,9 +124,12 @@
                 <strong>PubMed searches</strong>
                 <ul>
                     <xsl:for-each select="//node()[contains(attribute::class,'searchFacet') and contains(attribute::id,'pubmed') and not(matches(attribute::id,'pubmed_guidelines|pubmed_cochrane_reviews'))]">
-                        <xsl:apply-templates select="self::node()">
-                            <xsl:with-param name="pubmedMore-link">true</xsl:with-param>
-                        </xsl:apply-templates>
+                        <xsl:variable name="countFacetId" select="replace(attribute::id,'\w+-(.*)Facet','$1')"/>
+                        <xsl:if test="//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId]">
+                            <xsl:apply-templates select="self::node()">
+                                <xsl:with-param name="pubmedMore-link">true</xsl:with-param>
+                            </xsl:apply-templates>
+                        </xsl:if>
                     </xsl:for-each>
                 </ul>
                 <xsl:if test="//node()[@id='pubmedJournalLinks']">
