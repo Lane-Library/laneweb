@@ -29,13 +29,13 @@
 
     <bean id="org.apache.excalibur.source.SourceResolver"
         class="edu.stanford.irt.laneweb.cocoon.SourceResolver">
-        <constructor-arg ref="javax.servlet.ServletContext"/>
+        <constructor-arg ref="servletContext"/>
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
 
     <bean name="org.apache.excalibur.source.SourceFactory/context"
         class="edu.stanford.irt.laneweb.cocoon.ContextSourceFactory">
-        <constructor-arg ref="javax.servlet.ServletContext"/>
+        <constructor-arg ref="servletContext"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
 
