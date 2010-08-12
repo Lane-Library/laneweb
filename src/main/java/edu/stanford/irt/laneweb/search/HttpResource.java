@@ -11,6 +11,7 @@ import org.springframework.core.io.UrlResource;
 
 import sun.misc.BASE64Encoder;
 
+@SuppressWarnings("restriction")
 public class HttpResource extends UrlResource {
 
     private String authorization;
