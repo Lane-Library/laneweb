@@ -7,33 +7,26 @@ import javax.servlet.http.HttpSession;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * A servlet Filter that tries to discover the sunetid associated with a
- * request. It does this by looking in a number of places described below. If it
- * finds it it sets a request attribute 'sunetid' for use later in processing.
- * It also responds to the 'pl' and 'remove-pl' request parameters by setting
- * the lane-user cookie as appropriate.
+ * A servlet Filter that tries to discover the sunetid associated with a request. It does this by looking in a number of
+ * places described below. If it finds it it sets a request attribute 'sunetid' for use later in processing. It also
+ * responds to the 'pl' and 'remove-pl' request parameters by setting the lane-user cookie as appropriate.
  * 
- * @author ceyates
- * $Id$
+ * @author ceyates $Id$
  */
 public class SunetIdSource {
 
     /**
-     * this codec codes and decodes the cookie value using sunet id, useragent
-     * and time of creation
+     * this codec codes and decodes the cookie value using sunet id, useragent and time of creation
      */
     private SunetIdCookieCodec codec = new SunetIdCookieCodec();
 
     /**
-     * doFilter looks up the sunet id from the session, request, and lane-user
-     * cookie in that order.  If it is not in the session it is put there.
+     * doFilter looks up the sunet id from the session, request, and lane-user cookie in that order. If it is not in the
+     * session it is put there.
      */
-    public String getSunetid(final HttpServletRequest request, HttpSession session) {
-
+    public String getSunetid(final HttpServletRequest request, final HttpSession session) {
         String sessionSunetid = (String) session.getAttribute(Model.SUNETID);
-
         String sunetid = sessionSunetid == null ? getSunetidFromRequest(request) : sessionSunetid;
-        
         if (sunetid == null) {
             sunetid = getSunetidFromCookie(request.getCookies(), request.getHeader("User-Agent"));
         }
@@ -42,8 +35,8 @@ public class SunetIdSource {
         }
         return sunetid;
     }
-    
-    private String getSunetidFromCookie(Cookie[] cookies, String userAgent) {
+
+    private String getSunetidFromCookie(final Cookie[] cookies, final String userAgent) {
         String sunetid = null;
         if (cookies != null && userAgent != null) {
             for (Cookie cookie : cookies) {
@@ -59,7 +52,7 @@ public class SunetIdSource {
         return sunetid;
     }
 
-    private String getSunetidFromRequest(HttpServletRequest request) {
+    private String getSunetidFromRequest(final HttpServletRequest request) {
         String sunetid = request.getRemoteUser();
         if (sunetid == null) {
             sunetid = request.getHeader("X-WEBAUTH-USER");

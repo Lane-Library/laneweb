@@ -6,6 +6,7 @@ import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 public abstract class AbstractBassettGenerator extends AbstractGenerator {
 
     protected BassettCollectionManager collectionManager;
+
     protected String query;
 
     public void setCollectionManager(final BassettCollectionManager collectionManager) {

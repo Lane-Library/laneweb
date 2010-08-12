@@ -36,16 +36,12 @@ public class LanewebIntegrationBase {
             throw new UnsupportedOperationException();
         }
 
-        public boolean isWrapperFor(Class<?> iface) {
+        public PrintWriter getLogWriter() throws SQLException {
+            // TODO Auto-generated method stub
             throw new UnsupportedOperationException();
         }
 
-        public <T> T unwrap(Class<T> iface) {
-            throw new UnsupportedOperationException();
-        } 
-
-        public PrintWriter getLogWriter() throws SQLException {
-            // TODO Auto-generated method stub
+        public boolean isWrapperFor(final Class<?> iface) {
             throw new UnsupportedOperationException();
         }
 
@@ -58,6 +54,10 @@ public class LanewebIntegrationBase {
             // TODO Auto-generated method stub
             throw new UnsupportedOperationException();
         }
+
+        public <T> T unwrap(final Class<T> iface) {
+            throw new UnsupportedOperationException();
+        }
     }
 
     /**
@@ -67,7 +67,7 @@ public class LanewebIntegrationBase {
      * @throws NamingException
      * @throws IllegalStateException
      */
-    //@Test
+    // @Test
     public void run() throws ServletException, IOException, IllegalStateException, NamingException {
         final SimpleNamingContextBuilder builder = new SimpleNamingContextBuilder();
         DataSource ds = new DS();

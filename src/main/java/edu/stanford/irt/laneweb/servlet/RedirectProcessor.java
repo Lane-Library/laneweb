@@ -7,14 +7,13 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 public class RedirectProcessor {
-    
+
     public static final String NO_REDIRECT = "";
 
     private Map<Pattern, String> redirectMap = Collections.emptyMap();
-    
-    public String getRedirectURL(String uri) {
+
+    public String getRedirectURL(final String uri) {
         for (Entry<Pattern, String> entry : this.redirectMap.entrySet()) {
             Matcher matcher = entry.getKey().matcher(uri);
             if (matcher.matches()) {

@@ -105,27 +105,6 @@ public class HTTPClientSource implements Source {
     }
 
     /**
-     * Executes a particular {@link HttpMethod} and updates internal data storage.
-     * 
-     * @param method
-     *            {@link HttpMethod} to execute
-     * @return response code from server
-     * @throws IOException
-     * @throws HttpException
-     * @exception IOException
-     *                if an error occurs
-     */
-    protected int executeMethod(final HttpMethod method) throws HttpException, IOException {
-        final int response = this.httpClient.executeMethod(method);
-        updateExists(method);
-        updateMimeType(method);
-        updateContentLength(method);
-        updateLastModified(method);
-        // all finished, return response code to the caller.
-        return response;
-    }
-
-    /**
      * Method to ascertain whether the given resource actually exists.
      * 
      * @return <code>true</code> if the resource pointed to by the URI during construction exists, <code>false</code>
@@ -359,5 +338,26 @@ public class HTTPClientSource implements Source {
         // returns the Content-Type, so we'll follow that for now.
         final Header header = method.getResponseHeader(CONTENT_TYPE);
         this.mimeType = header == null ? null : header.getValue();
+    }
+
+    /**
+     * Executes a particular {@link HttpMethod} and updates internal data storage.
+     * 
+     * @param method
+     *            {@link HttpMethod} to execute
+     * @return response code from server
+     * @throws IOException
+     * @throws HttpException
+     * @exception IOException
+     *                if an error occurs
+     */
+    protected int executeMethod(final HttpMethod method) throws HttpException, IOException {
+        final int response = this.httpClient.executeMethod(method);
+        updateExists(method);
+        updateMimeType(method);
+        updateContentLength(method);
+        updateLastModified(method);
+        // all finished, return response code to the caller.
+        return response;
     }
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 import edu.stanford.irt.laneweb.cocoon.AbstractAction;
 import edu.stanford.irt.laneweb.model.Model;
 
-//$Id$
+// $Id$
 public class ProxyCredentialAction extends AbstractAction {
 
     private static final String PROXY_REDIRECT_KEY = "proxy-redirect";

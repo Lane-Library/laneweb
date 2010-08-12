@@ -20,14 +20,15 @@ public class EresourceResource implements Resource {
 
     protected Eresource eresource;
 
-    public EresourceResource(Eresource eresource) {
+    public EresourceResource(final Eresource eresource) {
         this.eresource = eresource;
     }
 
-    public void toSAX(ContentHandler handler) throws SAXException {
+    public void toSAX(final ContentHandler handler) throws SAXException {
         handleEresource(handler);
     }
 
+    @Override
     public String toString() {
         return this.eresource.toString();
     }
@@ -53,20 +54,6 @@ public class EresourceResource implements Resource {
         XMLUtils.endElement(handler, NAMESPACE, RESULT);
     }
 
-    private void handleVersion(final ContentHandler handler, final Version version) throws SAXException {
-        XMLUtils.startElement(handler, NAMESPACE, VERSION);
-        maybeCreateElement(handler, SUMMARY_HOLDINGS, version.getSummaryHoldings());
-        maybeCreateElement(handler, DATES, version.getDates());
-        maybeCreateElement(handler, PUBLISHER, version.getPublisher());
-        maybeCreateElement(handler, DESCRIPTION, version.getDescription());
-        XMLUtils.startElement(handler, NAMESPACE, LINKS);
-        for (Link link : version.getLinks()) {
-            handleLink(handler, link);
-        }
-        XMLUtils.endElement(handler, NAMESPACE, LINKS);
-        XMLUtils.endElement(handler, NAMESPACE, VERSION);
-    }
-
     private void handleLink(final ContentHandler handler, final Link link) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
         String label = link.getLabel();
@@ -86,7 +73,22 @@ public class EresourceResource implements Resource {
         XMLUtils.endElement(handler, NAMESPACE, LINK);
     }
 
-    private void maybeCreateElement(final ContentHandler handler, String name, String value) throws SAXException {
+    private void handleVersion(final ContentHandler handler, final Version version) throws SAXException {
+        XMLUtils.startElement(handler, NAMESPACE, VERSION);
+        maybeCreateElement(handler, SUMMARY_HOLDINGS, version.getSummaryHoldings());
+        maybeCreateElement(handler, DATES, version.getDates());
+        maybeCreateElement(handler, PUBLISHER, version.getPublisher());
+        maybeCreateElement(handler, DESCRIPTION, version.getDescription());
+        XMLUtils.startElement(handler, NAMESPACE, LINKS);
+        for (Link link : version.getLinks()) {
+            handleLink(handler, link);
+        }
+        XMLUtils.endElement(handler, NAMESPACE, LINKS);
+        XMLUtils.endElement(handler, NAMESPACE, VERSION);
+    }
+
+    private void maybeCreateElement(final ContentHandler handler, final String name, final String value)
+            throws SAXException {
         if (value != null && !"".equals(value)) {
             XMLUtils.createElementNS(handler, NAMESPACE, name, value);
         }

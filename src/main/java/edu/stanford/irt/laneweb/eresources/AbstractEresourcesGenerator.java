@@ -20,7 +20,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
     protected String subset;
 
     protected String type;
-    
+
     public void generate() throws SAXException {
         XMLizableEresourceList eresources = new XMLizableEresourceList(getEresourceList());
         eresources.toSAX(this.xmlConsumer);
@@ -32,14 +32,15 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
         }
         this.collectionManager = collectionManager;
     }
-    
+
+    protected abstract Collection<Eresource> getEresourceList();
+
+    @Override
     protected void initialize() {
-        this.type = this.parameterMap.containsKey(Model.TYPE) ?
-                this.parameterMap.get(Model.TYPE) :
-                    this.model.getString(Model.TYPE);
-        this.subset = this.parameterMap.containsKey(Model.SUBSET) ?
-                this.parameterMap.get(Model.SUBSET) :
-                    this.model.getString(Model.SUBSET);
+        this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : this.model
+                .getString(Model.TYPE);
+        this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : this.model
+                .getString(Model.SUBSET);
         this.alpha = this.model.getString(Model.ALPHA);
         if (this.alpha != null && this.alpha.length() > 1) {
             if ("all".equals(this.alpha)) {
@@ -53,6 +54,4 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
             this.mesh = this.mesh.toLowerCase();
         }
     }
-
-    protected abstract Collection<Eresource> getEresourceList();
 }

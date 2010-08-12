@@ -5,24 +5,22 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 /**
- * Transformer to rewrite data when a LDAPData.EMRID value is present. 
- * Elements to rewrite include: 
- * - anchor element href attributes when value is known CME host 
- * - input element value attributes when found value is REPLACEMENT_STRING
+ * Transformer to rewrite data when a LDAPData.EMRID value is present. Elements to rewrite include: - anchor element
+ * href attributes when value is known CME host - input element value attributes when found value is REPLACEMENT_STRING
  * 
  * @author ryanmax
  */
 public class HTMLCMELinkTransformer extends AbstractCMELinkTransformer {
 
-    private static final String REPLACEMENT_STRING = "{emrid}";
+    private static final String ANCHOR = "a";
 
     private static final String HREF = "href";
 
-    private static final String VALUE = "value";
-    
-    private static final String ANCHOR = "a";
-    
     private static final String INPUT = "input";
+
+    private static final String REPLACEMENT_STRING = "{emrid}";
+
+    private static final String VALUE = "value";
 
     @Override
     public void startElement(final String uri, final String localName, final String name, final Attributes atts)

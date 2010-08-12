@@ -8,8 +8,7 @@ import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
- * @author ceyates
- * $Id$
+ * @author ceyates $Id$
  */
 public class SearchGenerator extends AbstractMetasearchGenerator {
 
@@ -24,6 +23,10 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
     @Override
     public Result doSearch() {
         return doSearch(null);
+    }
+
+    public void setDefaultTimeout(final long defaultTimeout) {
+        this.defaultTimeout = defaultTimeout;
     }
 
     protected Result doSearch(final Collection<String> engines) {
@@ -75,16 +78,11 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
         return result;
     }
 
-    public void setDefaultTimeout(final long defaultTimeout) {
-        this.defaultTimeout = defaultTimeout;
-    }
-
     @Override
     protected void initialize() {
         super.initialize();
         this.timeout = this.model.getString("timeout", this.parameterMap.get("timeout"));
         this.wait = this.model.getString("wait");
         this.synchronous = this.model.getString("synchronous", this.parameterMap.get("synchronous"));
-
     }
 }

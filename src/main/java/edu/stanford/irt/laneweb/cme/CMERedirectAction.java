@@ -15,9 +15,9 @@ public class CMERedirectAction extends AbstractAction {
     private static final String PROXY_LINK = "http://laneproxy.stanford.edu/login?url=";
 
     // TODO: once more vendors, move UTD strings to collection of host objects
-    private static final String UTD_CME_STRING =
-            "http://www.uptodate.com/online/content/search.do?unid=EMRID&srcsys=epic90710&eiv=2.1.0";
-    
+    private static final String UTD_CME_STRING = "http://www.uptodate.com/online/content/search.do?unid=EMRID&srcsys=epic90710&eiv=2.1.0";
+
+    @Override
     protected Map<String, String> doAct() {
         Map<String, String> result = new HashMap<String, String>(1);
         String host = this.model.getString(Model.HOST);

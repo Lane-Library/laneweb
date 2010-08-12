@@ -35,8 +35,8 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
 /**
- * XMLPipe that processes XInclude elements. To perform XInclude processing on
- * included content, this class is instantiated recursively.
+ * XMLPipe that processes XInclude elements. To perform XInclude processing on included content, this class is
+ * instantiated recursively.
  */
 class XIncludePipe extends AbstractXMLPipe {
 
@@ -58,27 +58,26 @@ class XIncludePipe extends AbstractXMLPipe {
     private int fallbackElementLevel;
 
     /**
-     * In case {@link #useFallbackLevel} > 0, then this should contain the
-     * exception that caused fallback to be needed. In the case of nested
-     * include elements it will contain only the deepest exception.
+     * In case {@link #useFallbackLevel} > 0, then this should contain the exception that caused fallback to be needed.
+     * In the case of nested include elements it will contain only the deepest exception.
      */
     private Exception fallBackException;
 
     /**
-     * Value of the href attribute of the xi:include element that caused the
-     * creation of the this XIncludePipe. Used to detect loop inclusions.
+     * Value of the href attribute of the xi:include element that caused the creation of the this XIncludePipe. Used to
+     * detect loop inclusions.
      */
     private String href;
 
     /**
-     * Locator of the current stream, stored here so that it can be restored
-     * after another document send its content to the consumer.
+     * Locator of the current stream, stored here so that it can be restored after another document send its content to
+     * the consumer.
      */
     private Locator locator;
 
     /**
-     * Keep a map of namespaces prefix in the source document to pass it to the
-     * XPointerContext for correct namespace identification.
+     * Keep a map of namespaces prefix in the source document to pass it to the XPointerContext for correct namespace
+     * identification.
      */
     private Map<String, String> namespaces = new HashMap<String, String>();
 
@@ -102,8 +101,8 @@ class XIncludePipe extends AbstractXMLPipe {
     private XMLBaseSupport xmlBaseSupport;
 
     /**
-     * Value of the xpointer attribute of the xi:include element that caused the
-     * creation of this XIncludePipe. Used to detect loop inclusions.
+     * Value of the xpointer attribute of the xi:include element that caused the creation of this XIncludePipe. Used to
+     * detect loop inclusions.
      */
     private String xpointer;
 
@@ -348,11 +347,10 @@ class XIncludePipe extends AbstractXMLPipe {
     }
 
     /**
-     * Determine whether the pipe is currently in a state where contents should
-     * be evaluated, i.e. xi:include elements should be resolved and elements in
-     * other namespaces should be copied through. Will return false for fallback
-     * contents within a successful xi:include, and true for contents outside
-     * any xi:include or within an xi:fallback for an unsuccessful xi:include.
+     * Determine whether the pipe is currently in a state where contents should be evaluated, i.e. xi:include elements
+     * should be resolved and elements in other namespaces should be copied through. Will return false for fallback
+     * contents within a successful xi:include, and true for contents outside any xi:include or within an xi:fallback
+     * for an unsuccessful xi:include.
      */
     private boolean isEvaluatingContent() {
         return (this.xIncludeElementLevel == 0)
@@ -399,8 +397,7 @@ class XIncludePipe extends AbstractXMLPipe {
         if (isLoopInclusion(url.getURI(), xpointer)) {
             throw new ProcessingException("Detected loop inclusion of href=" + url.getURI() + ", xpointer=" + xpointer);
         }
-        XIncludePipe subPipe =
-                new XIncludePipe(this.sourceResolver, this.validity, this.serviceManager, this.saxParser);
+        XIncludePipe subPipe = new XIncludePipe(this.sourceResolver, this.validity, this.serviceManager, this.saxParser);
         subPipe.init(url.getURI(), xpointer);
         subPipe.setConsumer(this.xmlConsumer);
         subPipe.setParent(this);

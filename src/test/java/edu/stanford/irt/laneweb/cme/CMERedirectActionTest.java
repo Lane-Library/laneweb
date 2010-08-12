@@ -14,7 +14,7 @@ import edu.stanford.irt.laneweb.model.Model;
 public class CMERedirectActionTest {
 
     private CMERedirectAction action;
-    
+
     private Model model;
 
     @Before
@@ -26,8 +26,8 @@ public class CMERedirectActionTest {
 
     @Test
     public void testAct() throws Exception {
-        expect(model.getString("host")).andReturn("uptodate");
-        expect(model.getString(Model.EMRID)).andReturn("nobody");
+        expect(this.model.getString("host")).andReturn("uptodate");
+        expect(this.model.getString(Model.EMRID)).andReturn("nobody");
         replayMocks();
         assertEquals(
                 "http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?unid=nobody&srcsys=epic90710&eiv=2.1.0",
@@ -37,9 +37,9 @@ public class CMERedirectActionTest {
 
     @Test
     public void testActEmptyEmrid() throws Exception {
-        expect(model.getString("host")).andReturn("uptodate");
-        expect(model.getString(Model.EMRID)).andReturn(null);
-        expect(model.getString(Model.QUERY_STRING)).andReturn("yo");
+        expect(this.model.getString("host")).andReturn("uptodate");
+        expect(this.model.getString(Model.EMRID)).andReturn(null);
+        expect(this.model.getString(Model.QUERY_STRING)).andReturn("yo");
         replayMocks();
         assertEquals("/cmeRedirectError.html?yo", this.action.doAct().get("cme-redirect"));
         verifyMocks();
@@ -47,9 +47,9 @@ public class CMERedirectActionTest {
 
     @Test
     public void testActEmptyHost() throws Exception {
-        expect(model.getString("host")).andReturn("");
-        expect(model.getString(Model.EMRID)).andReturn("nobody");
-        expect(model.getString(Model.QUERY_STRING)).andReturn("yo");
+        expect(this.model.getString("host")).andReturn("");
+        expect(this.model.getString(Model.EMRID)).andReturn("nobody");
+        expect(this.model.getString(Model.QUERY_STRING)).andReturn("yo");
         replayMocks();
         assertEquals("/cmeRedirectError.html?yo", this.action.doAct().get("cme-redirect"));
         verifyMocks();
@@ -57,9 +57,9 @@ public class CMERedirectActionTest {
 
     @Test
     public void testActNullBadHost() throws Exception {
-        expect(model.getString("host")).andReturn("bad host");
-        expect(model.getString(Model.EMRID)).andReturn("nobody");
-        expect(model.getString(Model.QUERY_STRING)).andReturn("yo");
+        expect(this.model.getString("host")).andReturn("bad host");
+        expect(this.model.getString(Model.EMRID)).andReturn("nobody");
+        expect(this.model.getString(Model.QUERY_STRING)).andReturn("yo");
         replayMocks();
         assertEquals("/cmeRedirectError.html?yo", this.action.doAct().get("cme-redirect"));
         verifyMocks();
@@ -67,9 +67,9 @@ public class CMERedirectActionTest {
 
     @Test
     public void testActNullBadHostEmptyEmrid() throws Exception {
-        expect(model.getString("host")).andReturn("bad host");
-        expect(model.getString(Model.EMRID)).andReturn(null);
-        expect(model.getString(Model.QUERY_STRING)).andReturn("yo");
+        expect(this.model.getString("host")).andReturn("bad host");
+        expect(this.model.getString(Model.EMRID)).andReturn(null);
+        expect(this.model.getString(Model.QUERY_STRING)).andReturn("yo");
         replayMocks();
         assertEquals("/cmeRedirectError.html?yo", this.action.doAct().get("cme-redirect"));
         verifyMocks();
@@ -77,9 +77,9 @@ public class CMERedirectActionTest {
 
     @Test
     public void testActNullEmrid() throws Exception {
-        expect(model.getString("host")).andReturn("uptodate");
-        expect(model.getString(Model.EMRID)).andReturn(null);
-        expect(model.getString(Model.QUERY_STRING)).andReturn("yo");
+        expect(this.model.getString("host")).andReturn("uptodate");
+        expect(this.model.getString(Model.EMRID)).andReturn(null);
+        expect(this.model.getString(Model.QUERY_STRING)).andReturn("yo");
         replayMocks();
         assertEquals("/cmeRedirectError.html?yo", this.action.doAct().get("cme-redirect"));
         verifyMocks();
@@ -87,18 +87,18 @@ public class CMERedirectActionTest {
 
     @Test
     public void testActNullHost() throws Exception {
-        expect(model.getString("host")).andReturn(null);
-        expect(model.getString(Model.EMRID)).andReturn("nobody");
-        expect(model.getString(Model.QUERY_STRING)).andReturn("yo");
+        expect(this.model.getString("host")).andReturn(null);
+        expect(this.model.getString(Model.EMRID)).andReturn("nobody");
+        expect(this.model.getString(Model.QUERY_STRING)).andReturn("yo");
         replayMocks();
         assertEquals("/cmeRedirectError.html?yo", this.action.doAct().get("cme-redirect"));
         verifyMocks();
     }
-    
+
     private void replayMocks() {
         replay(this.model);
     }
-    
+
     private void verifyMocks() {
         verify(this.model);
     }

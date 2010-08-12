@@ -11,15 +11,10 @@ import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.cocoon.SourceResolver;
 
-
 /**
  * The ThrottlingPipeline
  */
 public class ThrottlingPipeline extends NonCachingPipeline {
-
-    public ThrottlingPipeline(SourceResolver sourceResolver) {
-        super(sourceResolver);
-    }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ThrottlingPipeline.class);
 
@@ -29,6 +24,10 @@ public class ThrottlingPipeline extends NonCachingPipeline {
     private static final Collection<String> REQUESTS = new HashSet<String>();
 
     private String requestKey;
+
+    public ThrottlingPipeline(final SourceResolver sourceResolver) {
+        super(sourceResolver);
+    }
 
     @Override
     public void setup(final Parameters params) {

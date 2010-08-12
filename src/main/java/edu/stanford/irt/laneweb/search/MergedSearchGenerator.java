@@ -12,14 +12,13 @@ import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 
 /**
- * @author ryanmax
- * 
- * $Id$
+ * @author ryanmax $Id$
  */
 public class MergedSearchGenerator extends ContentSearchGenerator {
 
     private CollectionManager collectionManager;
 
+    @Override
     public void generate() throws SAXException {
         XMLizableSearchResultSet mergedSearchResults = new XMLizableSearchResultSet(this.query);
         mergedSearchResults.addAll(getEresourceList());
@@ -35,7 +34,7 @@ public class MergedSearchGenerator extends ContentSearchGenerator {
         }
         this.collectionManager = collectionManager;
     }
-    
+
     private Collection<EresourceSearchResult> getEresourceList() {
         Collection<EresourceSearchResult> eresourceResults = new LinkedList<EresourceSearchResult>();
         for (Eresource eresource : this.collectionManager.search(this.query)) {

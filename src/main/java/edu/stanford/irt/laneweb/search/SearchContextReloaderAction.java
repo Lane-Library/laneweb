@@ -6,11 +6,7 @@ import edu.stanford.irt.laneweb.cocoon.AbstractAction;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * 
- * @author alainb
- * 
- * $Id$
- *
+ * @author alainb $Id$
  */
 public class SearchContextReloaderAction extends AbstractAction {
 
@@ -20,6 +16,7 @@ public class SearchContextReloaderAction extends AbstractAction {
 
     private String svnUrlProject;
 
+    @Override
     public Map<String, String> doAct() {
         String release = this.model.getString(Model.RELEASE);
         String sunetid = this.model.getString(Model.SUNETID);

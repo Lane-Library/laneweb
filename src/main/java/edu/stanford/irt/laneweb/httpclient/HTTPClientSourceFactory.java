@@ -13,9 +13,9 @@ import org.apache.excalibur.source.SourceFactory;
  */
 public class HTTPClientSourceFactory implements SourceFactory {
 
-    private HttpClient httpClient;
-    
     private Executor executor = Executors.newFixedThreadPool(5);
+
+    private HttpClient httpClient;
 
     /**
      * Creates a {@link HTTPClientSource} instance.

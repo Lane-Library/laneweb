@@ -15,9 +15,7 @@ import edu.stanford.irt.laneweb.model.Model;
  * request parameter. Next priority is a Map with regular expressions matching request URIs as the key with the
  * associated template as the value. Finally, default value is provided.
  * 
- * @author ceyates
- * 
- * $Id$
+ * @author ceyates $Id$
  */
 public class TemplateChooser {
 

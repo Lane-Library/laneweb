@@ -18,11 +18,11 @@ public class AbstractQueryMapComponentTest {
 
     private AbstractQueryMapComponent component;
 
+    private Model model;
+
     private Parameters parameters;
 
     private QueryMapper queryMapper;
-    
-    private Model model;
 
     @Before
     public void setUp() throws Exception {
@@ -95,13 +95,13 @@ public class AbstractQueryMapComponentTest {
         this.component.setup(null, null, null, this.parameters);
         verifyMocks();
     }
-    
+
     private void replayMocks() {
         replay(this.model);
         replay(this.parameters);
         replay(this.queryMapper);
     }
-    
+
     private void verifyMocks() {
         verify(this.model);
         verify(this.parameters);

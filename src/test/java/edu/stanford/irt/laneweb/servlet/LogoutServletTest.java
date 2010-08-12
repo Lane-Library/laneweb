@@ -18,13 +18,16 @@ import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class LogoutServletTest {
-    
-    private HttpServlet servlet;
-    private HttpServletRequest request;
-    private HttpServletResponse response;
+
     private Cookie cookie;
+
+    private HttpServletRequest request;
+
+    private HttpServletResponse response;
+
+    private HttpServlet servlet;
+
     private HttpSession session;
 
     @Before
@@ -38,7 +41,7 @@ public class LogoutServletTest {
         this.response = createMock(HttpServletResponse.class);
         this.cookie = createMock(Cookie.class);
         this.session = createMock(HttpSession.class);
-        expect(this.request.getCookies()).andReturn(new Cookie[]{this.cookie, this.cookie, this.cookie});
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie, this.cookie, this.cookie });
         expect(this.cookie.getName()).andReturn("user");
         expect(this.cookie.getName()).andReturn("webauth_at");
         expect(this.cookie.getName()).andReturn("something else");

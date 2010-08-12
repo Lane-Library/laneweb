@@ -70,7 +70,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
             int matchStart = matcher.start();
             int matchEnd = matcher.end();
             if (matchStart > current) {
-                //send chars before match:
+                // send chars before match:
                 this.xmlConsumer.characters(this.chars.array(), current, matchStart - current);
             }
             this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.KEYWORD, Resource.KEYWORD, EMPTY_ATTRIBUTES);
@@ -80,7 +80,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
             current = matchEnd;
         }
         if (current < charsEnd) {
-            //send chars after last match:
+            // send chars after last match:
             this.xmlConsumer.characters(this.chars.array(), current, charsEnd - current);
         }
         this.chars.clear();

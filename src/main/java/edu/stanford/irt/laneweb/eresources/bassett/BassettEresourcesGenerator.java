@@ -9,10 +9,7 @@ import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * 
- * @author alainb
- *
- * $Id$
+ * @author alainb $Id$
  */
 public class BassettEresourcesGenerator extends AbstractBassettGenerator {
 
@@ -41,6 +38,7 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
         this.xmlConsumer.endDocument();
     }
 
+    @Override
     protected void initialize() {
         this.query = this.model.getString(Model.QUERY);
         this.region = this.model.getString(Model.REGION);

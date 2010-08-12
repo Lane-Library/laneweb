@@ -8,7 +8,7 @@ public class MeSHEresourcesGenerator extends CacheableEresourcesGenerator {
 
     @Override
     protected Collection<Eresource> getEresourceList() {
-        if (null == this.mesh){
+        if (null == this.mesh) {
             throw new IllegalStateException("null mesh");
         }
         if (null == this.type) {

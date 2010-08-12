@@ -51,8 +51,8 @@ public class JSONableQueryMap {
                     sb.append(COMMA_QUOTE).append("resources\":[");
                     for (Iterator<Resource> it = resources.iterator(); it.hasNext();) {
                         Resource resource = it.next();
-                        sb.append("{\"id").append(COLON_QUOTE).append(resource.getId()).append(COMMA_QUOTE).append(
-                                "label").append(COLON_QUOTE);
+                        sb.append("{\"id").append(COLON_QUOTE).append(resource.getId()).append(COMMA_QUOTE)
+                                .append("label").append(COLON_QUOTE);
                         escapeForJS(sb, resource.getLabel());
                         sb.append("\"}");
                         if (it.hasNext()) {

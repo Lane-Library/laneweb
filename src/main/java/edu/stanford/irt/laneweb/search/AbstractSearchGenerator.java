@@ -7,6 +7,7 @@ public abstract class AbstractSearchGenerator extends AbstractGenerator {
 
     protected String query;
 
+    @Override
     protected void initialize() {
         this.query = this.model.getString(Model.QUERY);
         this.query = PMIDNormalizer.normalize(this.query);

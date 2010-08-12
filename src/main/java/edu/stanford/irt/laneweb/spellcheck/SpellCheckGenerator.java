@@ -36,6 +36,7 @@ public class SpellCheckGenerator extends AbstractGenerator {
         this.spellChecker = spellChecker;
     }
 
+    @Override
     protected void initialize() {
         this.query = this.model.getString(Model.QUERY);
         if (null == this.query) {

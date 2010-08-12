@@ -15,7 +15,7 @@ import edu.stanford.irt.laneweb.Resource;
 @SuppressWarnings("serial")
 public class XMLizableEresourceList extends LinkedList<Eresource> implements XMLizable, Resource {
 
-    public XMLizableEresourceList(Collection<Eresource> eresources) {
+    public XMLizableEresourceList(final Collection<Eresource> eresources) {
         super(eresources);
     }
 
@@ -36,4 +36,3 @@ public class XMLizableEresourceList extends LinkedList<Eresource> implements XML
         handler.endDocument();
     }
 }
-

@@ -26,11 +26,11 @@ public class SuggestionReaderTest {
 
     private MeshSuggestionManager meshSuggestionManager;
 
+    private Model model;
+
     private ByteArrayOutputStream outputStream;
 
     private SuggestionReader reader;
-    
-    private Model model;
 
     /**
      * @throws java.lang.Exception
@@ -87,11 +87,11 @@ public class SuggestionReaderTest {
     public void testSetMeshSuggestionManager() {
         assertNotNull(this.meshSuggestionManager);
     }
-    
+
     private void replayMocks() {
         replay(this.model);
     }
-    
+
     private void verifyMocks() {
         verify(this.model);
     }

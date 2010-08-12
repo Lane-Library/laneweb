@@ -29,6 +29,7 @@ public class BassettEresource extends EresourceImpl {
         return this.bassettNumber;
     }
 
+    @Override
     public String getDescription() {
         return this.description;
     }
@@ -57,6 +58,7 @@ public class BassettEresource extends EresourceImpl {
         this.bassettNumber = bassettNumber;
     }
 
+    @Override
     public void setDescription(final String description) {
         this.description = description;
     }

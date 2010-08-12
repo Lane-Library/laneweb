@@ -77,8 +77,8 @@ public class VoyagerLoginTest {
         expect(this.dataSource.getConnection()).andReturn(this.connection);
         replay(this.dataSource);
         this.voyagerLogin.setDataSource(this.dataSource);
-        assertEquals("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?a=b&authenticate=Y", this.voyagerLogin
-                .getVoyagerURL("999", "123", "a=b"));
+        assertEquals("http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?a=b&authenticate=Y",
+                this.voyagerLogin.getVoyagerURL("999", "123", "a=b"));
         verify(this.dataSource);
         verify(this.connection);
         verify(this.statement);

@@ -16,7 +16,7 @@ import edu.stanford.irt.laneweb.model.Model;
 public class WebdashActionTest {
 
     private WebdashAction action;
-    
+
     private Model model;
 
     private WebdashLogin webdashLogin;

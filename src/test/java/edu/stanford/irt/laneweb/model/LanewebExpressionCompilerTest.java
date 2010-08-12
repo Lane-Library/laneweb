@@ -5,9 +5,8 @@ import org.apache.cocoon.el.ExpressionException;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class LanewebExpressionCompilerTest {
-    
+
     private ExpressionCompiler compiler;
 
     @Before

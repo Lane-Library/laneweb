@@ -14,42 +14,40 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.search.ContentResult;
 
 /**
- * @author ryanmax
- * 
- * $Id$
+ * @author ryanmax $Id$
  */
 public class ContentResultSearchResult implements SearchResult {
 
     private static final Pattern DOUBLE_WEIGHT_PATTERN = Pattern
             .compile("pubmed_cochrane_reviews|dare|acpjc|bmj_clinical_evidence|jama_rce");
 
+    private static final Pattern ENGINEID_PATTERN = Pattern.compile("_content_\\d+");
+
     private static final Pattern HALF_WEIGHT_PATTERN = Pattern
             .compile("^pubmed_(clinicaltrial|recent_reviews|treatment_focused|diagnosis_focused|prognosis_focused|harm_focused|etiology_focused|epidemiology_focused)");
 
     private static final Pattern QUARTER_WEIGHT_PATTERN = Pattern.compile("aafp_patients|medlineplus_0");
 
-    private static final Pattern ENGINEID_PATTERN = Pattern.compile("_content_\\d+");
-
     private ContentResult contentResult;
 
     private Pattern queryTermPattern;
+
+    private String resourceHits;
 
     private String resourceId;
 
     private String resourceName;
 
-    private String resourceHits;
-
     private String resourceUrl;
-    
-    private String sortTitle;
-    
+
     private int score;
+
+    private String sortTitle;
 
     /**
      * 
      */
-    public ContentResultSearchResult(ContentResult contentResult, Pattern queryTermPattern) {
+    public ContentResultSearchResult(final ContentResult contentResult, final Pattern queryTermPattern) {
         this.contentResult = contentResult;
         this.sortTitle = NON_FILING_PATTERN.matcher(this.contentResult.getTitle()).replaceFirst("");
         this.sortTitle = this.sortTitle.toLowerCase().replaceAll("\\W", "");
@@ -57,50 +55,33 @@ public class ContentResultSearchResult implements SearchResult {
         this.score = computeScore();
     }
 
-    public String getSortTitle() {
-        return this.sortTitle;
+    public int compareTo(final SearchResult o) {
+        int scoreCmp = o.getScore() - this.score;
+        int titleCmp = this.sortTitle.compareTo(o.getSortTitle());
+        if (titleCmp == 0) {
+            return titleCmp;
+        }
+        return (scoreCmp != 0 ? scoreCmp : this.sortTitle.compareTo(o.getSortTitle()));
+    }
+
+    @Override
+    public boolean equals(final Object other) {
+        if (!(other instanceof ContentResultSearchResult)) {
+            return false;
+        }
+        ContentResultSearchResult scmr = (ContentResultSearchResult) other;
+        return scmr.getSortTitle().equals(this.sortTitle);
     }
 
     public String getContentUrl() {
         return this.contentResult.getURL();
     }
-    
-    /**
-     * @param resourceId
-     *            the resourceId to set
-     */
-    public void setResourceId(String resourceId) {
-        this.resourceId = resourceId;
-    }
 
     /**
-     * @return the resourceId
+     * @return the publicationTitle from contentResult
      */
-    public String getResourceId() {
-        return this.resourceId;
-    }
-    
-    /**
-     * @param resourceName
-     *            the resourceName to set
-     */
-    public void setResourceName(String resourceName) {
-        this.resourceName = resourceName;
-    }
-
-    /**
-     * @return the resourceName
-     */
-    public String getResourceName() {
-        return this.resourceName;
-    }
-    
-    /**
-     * @param resourceHits
-     *            the resourceHits to set
-     */
-    public void setResourceHits(String resourceHits) {
-        this.resourceHits = resourceHits;
+    public String getPublicationTitle() {
+        return this.contentResult.getPublicationTitle();
     }
 
     /**
@@ -109,13 +90,19 @@ public class ContentResultSearchResult implements SearchResult {
     public String getResourceHits() {
         return this.resourceHits;
     }
-    
+
     /**
-     * @param resourceUrl
-     *            the resourceUrl to set
+     * @return the resourceId
      */
-    public void setResourceUrl(String resourceUrl) {
-        this.resourceUrl = resourceUrl;
+    public String getResourceId() {
+        return this.resourceId;
+    }
+
+    /**
+     * @return the resourceName
+     */
+    public String getResourceName() {
+        return this.resourceName;
     }
 
     /**
@@ -124,37 +111,78 @@ public class ContentResultSearchResult implements SearchResult {
     public String getResourceUrl() {
         return this.resourceUrl;
     }
-    
-    /**
-     * @return the publicationTitle from contentResult
-     */
-    public String getPublicationTitle() {
-        return this.contentResult.getPublicationTitle();
-    }
-    
-    public int compareTo(SearchResult o) {
-        int scoreCmp = o.getScore() - this.score;
-        int titleCmp = this.sortTitle.compareTo(o.getSortTitle());
-        if(titleCmp == 0){
-            return titleCmp;
-        }
-        return (scoreCmp != 0 ? scoreCmp : this.sortTitle.compareTo(o.getSortTitle()));
+
+    public int getScore() {
+        return this.score;
     }
 
+    public String getSortTitle() {
+        return this.sortTitle;
+    }
+
+    @Override
     public int hashCode() {
         return this.sortTitle.hashCode();
     }
 
-    public boolean equals(Object other) {
-        if (!(other instanceof ContentResultSearchResult)) {
-            return false;
-        }
-        ContentResultSearchResult scmr = (ContentResultSearchResult) other;
-        return scmr.getSortTitle().equals(this.sortTitle);
+    /**
+     * @param resourceHits
+     *            the resourceHits to set
+     */
+    public void setResourceHits(final String resourceHits) {
+        this.resourceHits = resourceHits;
     }
-    
-    public int getScore() {
-        return this.score;
+
+    /**
+     * @param resourceId
+     *            the resourceId to set
+     */
+    public void setResourceId(final String resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    /**
+     * @param resourceName
+     *            the resourceName to set
+     */
+    public void setResourceName(final String resourceName) {
+        this.resourceName = resourceName;
+    }
+
+    /**
+     * @param resourceUrl
+     *            the resourceUrl to set
+     */
+    public void setResourceUrl(final String resourceUrl) {
+        this.resourceUrl = resourceUrl;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see edu.stanford.irt.laneweb.searchresults.SearchResult#toSAX(org.xml.sax.ContentHandler)
+     */
+    public void toSAX(final ContentHandler handler) throws SAXException {
+        // TODO: returning result element for now ... turn into displayable?
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(this.getScore()));
+        atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");
+        XMLUtils.startElement(handler, NAMESPACE, RESULT, atts);
+        maybeCreateElement(handler, RESOURCE_ID, this.resourceId);
+        maybeCreateElement(handler, RESOURCE_NAME, this.resourceName);
+        maybeCreateElement(handler, RESOURCE_URL, this.resourceUrl);
+        maybeCreateElement(handler, RESOURCE_HITS, this.resourceHits);
+        maybeCreateElement(handler, ID, this.contentResult.getId());
+        maybeCreateElement(handler, CONTENT_ID, this.contentResult.getContentId());
+        maybeCreateElement(handler, TITLE, this.contentResult.getTitle());
+        maybeCreateElement(handler, DESCRIPTION, this.contentResult.getDescription());
+        maybeCreateElement(handler, AUTHOR, this.contentResult.getAuthor());
+        maybeCreateElement(handler, PUBLICATION_DATE, this.contentResult.getPublicationDate());
+        maybeCreateElement(handler, PUBLICATION_TITLE, this.contentResult.getPublicationTitle());
+        maybeCreateElement(handler, PUBLICATION_VOLUME, this.contentResult.getPublicationVolume());
+        maybeCreateElement(handler, PUBLICATION_ISSUE, this.contentResult.getPublicationIssue());
+        maybeCreateElement(handler, PAGES, this.contentResult.getPages());
+        maybeCreateElement(handler, URL, this.contentResult.getURL());
+        XMLUtils.endElement(handler, NAMESPACE, RESULT);
     }
 
     /**
@@ -222,35 +250,7 @@ public class ContentResultSearchResult implements SearchResult {
         return (int) (score * weight);
     }
 
-    /*
-     * (non-Javadoc)
-     * @see edu.stanford.irt.laneweb.searchresults.SearchResult#toSAX(org.xml.sax.ContentHandler)
-     */
-    public void toSAX(ContentHandler handler) throws SAXException {
-        // TODO: returning result element for now ... turn into displayable?
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, SCORE, SCORE, "CDATA", Integer.toString(this.getScore()));
-        atts.addAttribute(EMPTY_NS, TYPE, TYPE, "CDATA", "searchContent");
-        XMLUtils.startElement(handler, NAMESPACE, RESULT, atts);
-        maybeCreateElement(handler, RESOURCE_ID, this.resourceId);
-        maybeCreateElement(handler, RESOURCE_NAME, this.resourceName);
-        maybeCreateElement(handler, RESOURCE_URL, this.resourceUrl);
-        maybeCreateElement(handler, RESOURCE_HITS, this.resourceHits);
-        maybeCreateElement(handler, ID, this.contentResult.getId());
-        maybeCreateElement(handler, CONTENT_ID, this.contentResult.getContentId());
-        maybeCreateElement(handler, TITLE, this.contentResult.getTitle());
-        maybeCreateElement(handler, DESCRIPTION, this.contentResult.getDescription());
-        maybeCreateElement(handler, AUTHOR, this.contentResult.getAuthor());
-        maybeCreateElement(handler, PUBLICATION_DATE, this.contentResult.getPublicationDate());
-        maybeCreateElement(handler, PUBLICATION_TITLE, this.contentResult.getPublicationTitle());
-        maybeCreateElement(handler, PUBLICATION_VOLUME, this.contentResult.getPublicationVolume());
-        maybeCreateElement(handler, PUBLICATION_ISSUE, this.contentResult.getPublicationIssue());
-        maybeCreateElement(handler, PAGES, this.contentResult.getPages());
-        maybeCreateElement(handler, URL, this.contentResult.getURL());
-        XMLUtils.endElement(handler, NAMESPACE, RESULT);
-    }
-
-    private double computeWeight(String engineId) {
+    private double computeWeight(final String engineId) {
         if (DOUBLE_WEIGHT_PATTERN.matcher(engineId).matches()) {
             return 2;
         } else if (HALF_WEIGHT_PATTERN.matcher(engineId).matches()) {
@@ -261,7 +261,8 @@ public class ContentResultSearchResult implements SearchResult {
         return 1;
     }
 
-    private void maybeCreateElement(final ContentHandler handler, String name, String value) throws SAXException {
+    private void maybeCreateElement(final ContentHandler handler, final String name, final String value)
+            throws SAXException {
         if (value != null && !"".equals(value)) {
             XMLUtils.createElementNS(handler, NAMESPACE, name, value);
         }

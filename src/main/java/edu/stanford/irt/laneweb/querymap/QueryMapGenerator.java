@@ -6,7 +6,7 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 public class QueryMapGenerator extends AbstractQueryMapComponent implements Generator {
-    
+
     private XMLConsumer consumer;
 
     public void generate() throws SAXException {

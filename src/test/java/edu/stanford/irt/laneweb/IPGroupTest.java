@@ -18,8 +18,8 @@ public class IPGroupTest {
 
     @Test
     public void testNotStaffIps() throws IOException {
-        BufferedReader notStaffIps =
-                new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("not-staff-ips.txt")));
+        BufferedReader notStaffIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "not-staff-ips.txt")));
         String ip = null;
         while ((ip = notStaffIps.readLine()) != null) {
             assertNotSame(ip, IPGroup.STAFF, IPGroup.getGroupForIP(ip));
@@ -33,8 +33,8 @@ public class IPGroupTest {
 
     @Test
     public void testSomBeckmanIps() throws IOException {
-        BufferedReader staffIps =
-                new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-beckman-ips.txt")));
+        BufferedReader staffIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "som-beckman-ips.txt")));
         String ip = null;
         while ((ip = staffIps.readLine()) != null) {
             assertEquals(ip, IPGroup.SOM_BECKMAN, IPGroup.getGroupForIP(ip));
@@ -43,8 +43,8 @@ public class IPGroupTest {
 
     @Test
     public void testSomCCSRIps() throws IOException {
-        BufferedReader staffIps =
-                new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-ccsr-ips.txt")));
+        BufferedReader staffIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "som-ccsr-ips.txt")));
         String ip = null;
         while ((ip = staffIps.readLine()) != null) {
             assertEquals(ip, IPGroup.SOM_CCSR, IPGroup.getGroupForIP(ip));
@@ -53,8 +53,8 @@ public class IPGroupTest {
 
     @Test
     public void testSomClarkIps() throws IOException {
-        BufferedReader staffIps =
-                new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-clark-ips.txt")));
+        BufferedReader staffIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "som-clark-ips.txt")));
         String ip = null;
         while ((ip = staffIps.readLine()) != null) {
             assertEquals(ip, IPGroup.SOM_CLARK, IPGroup.getGroupForIP(ip));
@@ -63,8 +63,8 @@ public class IPGroupTest {
 
     @Test
     public void testSomGrantIps() throws IOException {
-        BufferedReader staffIps =
-                new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-grant-ips.txt")));
+        BufferedReader staffIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "som-grant-ips.txt")));
         String ip = null;
         while ((ip = staffIps.readLine()) != null) {
             assertEquals(ip, IPGroup.SOM_GRANT, IPGroup.getGroupForIP(ip));
@@ -73,8 +73,8 @@ public class IPGroupTest {
 
     @Test
     public void testSomLaneIps() throws IOException {
-        BufferedReader staffIps =
-                new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-lane-ips.txt")));
+        BufferedReader staffIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "som-lane-ips.txt")));
         String ip = null;
         while ((ip = staffIps.readLine()) != null) {
             assertEquals(ip, IPGroup.SOM_LANE, IPGroup.getGroupForIP(ip));
@@ -83,38 +83,38 @@ public class IPGroupTest {
 
     @Test
     public void testSomLKSCIps() throws IOException {
-        BufferedReader staffIps =
-            new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-lksc-ips.txt")));
+        BufferedReader staffIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "som-lksc-ips.txt")));
         String ip = null;
         while ((ip = staffIps.readLine()) != null) {
             assertEquals(ip, IPGroup.SOM_LKSC, IPGroup.getGroupForIP(ip));
         }
     }
-    
-    @Test
-    public void testSomSIM1Ips() throws IOException {
-        BufferedReader staffIps =
-            new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-sim1-ips.txt")));
-        String ip = null;
-        while ((ip = staffIps.readLine()) != null) {
-            assertEquals(ip, IPGroup.SOM_SIM1, IPGroup.getGroupForIP(ip));
-        }
-    }
-    
+
     @Test
     public void testSomSHCIps() throws IOException {
-        BufferedReader staffIps =
-            new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("som-shc-ips.txt")));
+        BufferedReader staffIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "som-shc-ips.txt")));
         String ip = null;
         while ((ip = staffIps.readLine()) != null) {
             assertEquals(ip, IPGroup.SHC, IPGroup.getGroupForIP(ip));
         }
     }
-    
+
+    @Test
+    public void testSomSIM1Ips() throws IOException {
+        BufferedReader staffIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "som-sim1-ips.txt")));
+        String ip = null;
+        while ((ip = staffIps.readLine()) != null) {
+            assertEquals(ip, IPGroup.SOM_SIM1, IPGroup.getGroupForIP(ip));
+        }
+    }
+
     @Test
     public void testStaffIps() throws IOException {
-        BufferedReader staffIps =
-                new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("staff-ips.txt")));
+        BufferedReader staffIps = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "staff-ips.txt")));
         String ip = null;
         while ((ip = staffIps.readLine()) != null) {
             assertEquals(ip, IPGroup.STAFF, IPGroup.getGroupForIP(ip));

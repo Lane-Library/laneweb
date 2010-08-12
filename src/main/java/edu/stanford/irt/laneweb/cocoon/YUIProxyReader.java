@@ -6,7 +6,7 @@ import org.apache.excalibur.source.impl.validity.NOPValidity;
 public class YUIProxyReader extends NoCacheBigReader {
 
     /*
-     * determines mimetype from end of parameters 
+     * determines mimetype from end of parameters
      */
     @Override
     public String getMimeType() {

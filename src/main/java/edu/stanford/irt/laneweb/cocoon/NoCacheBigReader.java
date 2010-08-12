@@ -35,12 +35,13 @@ public class NoCacheBigReader extends AbstractReader implements CacheableProcess
         if (this.source.getContentLength() > 1000000) {
             return null;
         }
-        return source.getURI();
+        return this.source.getURI();
     }
 
     /**
      * @return the time the read source was last modified or 0 if it is not possible to detect
      */
+    @Override
     public long getLastModified() {
         return this.source.getLastModified();
     }

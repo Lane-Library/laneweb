@@ -10,13 +10,12 @@ import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.excalibur.source.SourceValidity;
 import org.xml.sax.SAXException;
 
-
 public class URLGenerator extends AbstractGenerator implements CacheableProcessingComponent {
-    
+
     private SAXParser saxParser;
-    
-    public void setParser(SAXParser saxParser) {
-        this.saxParser = saxParser;
+
+    public void generate() throws IOException, SAXException, ProcessingException {
+        SourceUtil.parse(this.saxParser, this.source, this.xmlConsumer);
     }
 
     public Serializable getKey() {
@@ -27,7 +26,7 @@ public class URLGenerator extends AbstractGenerator implements CacheableProcessi
         return this.source.getValidity();
     }
 
-    public void generate() throws IOException, SAXException, ProcessingException {
-        SourceUtil.parse(this.saxParser, this.source, this.xmlConsumer);
+    public void setParser(final SAXParser saxParser) {
+        this.saxParser = saxParser;
     }
 }

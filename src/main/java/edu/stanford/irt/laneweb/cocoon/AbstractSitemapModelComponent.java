@@ -12,23 +12,22 @@ import org.apache.excalibur.source.Source;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelAware;
 
-
 public abstract class AbstractSitemapModelComponent implements SitemapModelComponent, ModelAware {
-    
+
     private static final String ALT_SOURCE = "alt-src";
-    
+
     protected Model model;
-    
+
     protected Map<String, String> parameterMap;
-    
+
     protected Source source;
 
-    public final void setModel(Model model) {
+    public final void setModel(final Model model) {
         this.model = model;
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public final void setup(SourceResolver resolver, Map objectModel, String src, Parameters par) {
+    public final void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par) {
         this.parameterMap = new ParametersMap(par);
         if (null != src) {
             try {
@@ -46,7 +45,7 @@ public abstract class AbstractSitemapModelComponent implements SitemapModelCompo
         }
         initialize();
     }
-    
+
     protected void initialize() {
     }
 }

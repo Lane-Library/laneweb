@@ -4,15 +4,14 @@ import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
 import edu.stanford.irt.laneweb.model.Model;
 
 public abstract class AbstractCMELinkTransformer extends AbstractTransformer {
-    
-    private static final String UTD_CME_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
-    private static final String UTD_CME_URL = "http://www.uptodate.com/online/content/search.do?";
-    private static final String[] UTD_HOSTS = { "www.utdol.com", "www.uptodate.com" };
-    protected String emrid;
 
-    protected void initialize() {
-        this.emrid = this.model.getString(Model.EMRID);
-    }
+    private static final String UTD_CME_ARGS = "unid=?&srcsys=epic90710&eiv=2.1.0";
+
+    private static final String UTD_CME_URL = "http://www.uptodate.com/online/content/search.do?";
+
+    private static final String[] UTD_HOSTS = { "www.utdol.com", "www.uptodate.com" };
+
+    protected String emrid;
 
     protected String createCMELink(final String link) {
         StringBuffer sb = new StringBuffer();
@@ -24,6 +23,11 @@ public abstract class AbstractCMELinkTransformer extends AbstractTransformer {
             sb.append(link);
         }
         return sb.toString();
+    }
+
+    @Override
+    protected void initialize() {
+        this.emrid = this.model.getString(Model.EMRID);
     }
 
     protected boolean isCMEHost(final String link) {

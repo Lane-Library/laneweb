@@ -17,7 +17,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.spell.SpellCheckResult;
 import edu.stanford.irt.spell.SpellChecker;
 
-//$Id$
+// $Id$
 public class SpellCheckGeneratorTest {
 
     private SpellCheckGenerator generator;

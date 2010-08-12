@@ -6,7 +6,8 @@ import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 
-public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGenerator implements CacheableProcessingComponent {
+public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGenerator implements
+        CacheableProcessingComponent {
 
     private long configuredExpires = 1000 * 60 * 5;
 
@@ -29,17 +30,17 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
         this.configuredExpires = expires;
     }
 
+    private String createKey() {
+        return new StringBuilder("t=").append(null == super.type ? "" : super.type).append(";s=")
+                .append(null == super.subset ? "" : super.subset).append(";a=")
+                .append(null == super.alpha ? "" : super.alpha).append(";m=")
+                .append(null == super.mesh ? "" : super.mesh).toString();
+    }
+
     @Override
     protected void initialize() {
         super.initialize();
-        this.expires = this.parameterMap.containsKey("expires") ?
-                Long.parseLong(this.parameterMap.get("expires")) :
-                    this.configuredExpires;
-    }
-
-    private String createKey() {
-        return new StringBuilder("t=").append(null == super.type ? "" : super.type).append(";s=").append(
-                null == super.subset ? "" : super.subset).append(";a=").append(null == super.alpha ? "" : super.alpha)
-                .append(";m=").append(null == super.mesh ? "" : super.mesh).toString();
+        this.expires = this.parameterMap.containsKey("expires") ? Long.parseLong(this.parameterMap.get("expires"))
+                : this.configuredExpires;
     }
 }

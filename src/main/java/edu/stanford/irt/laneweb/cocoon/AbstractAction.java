@@ -11,23 +11,22 @@ import org.apache.cocoon.objectmodel.helper.ParametersMap;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelAware;
 
-
 public abstract class AbstractAction implements Action, ModelAware {
-    
-    protected Map<String, String> parametersMap;
-    
+
     protected Model model;
 
+    protected Map<String, String> parametersMap;
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public Map act(Redirector redirector, SourceResolver resolver, Map objectModel, String source, Parameters parameters)
-            throws Exception {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,
+            final String source, final Parameters parameters) throws Exception {
         this.parametersMap = new ParametersMap(parameters);
         return doAct();
     }
 
-    public void setModel(Model model) {
+    public void setModel(final Model model) {
         this.model = model;
     }
-    
+
     protected abstract Map<String, String> doAct();
 }

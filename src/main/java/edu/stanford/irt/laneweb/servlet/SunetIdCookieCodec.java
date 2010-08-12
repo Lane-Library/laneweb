@@ -15,16 +15,16 @@ import org.apache.commons.codec.binary.Base64;
 
 public class SunetIdCookieCodec {
 
-    static final String LANE_COOKIE_NAME = "user";
-    
+    private static final String COOKIE_VALUE_SEPARATOR = "%";
+
     private static final String KEY = "stanfordlanelibraryir";
 
-    private static final String COOKIE_VALUE_SEPARATOR = "%";
+    static final String LANE_COOKIE_NAME = "user";
 
     private Cipher cipher;
 
     private SecretKey desKey;
-    
+
     public SunetIdCookieCodec() {
         try {
             this.desKey = new SecretKeySpec(Base64.decodeBase64(KEY.getBytes("UTF-8")), "AES");
@@ -49,6 +49,20 @@ public class SunetIdCookieCodec {
         String encryptedValue = encrypt(builder.toString());
         PersistentLoginToken token = new PersistentLoginToken(sunetId, now, userAgentHash, encryptedValue);
         return token;
+    }
+
+    public PersistentLoginToken restoreLoginToken(final String encryptedValue) {
+        String decrypted = decrypt(encryptedValue);
+        String[] values = decrypted.split(COOKIE_VALUE_SEPARATOR);
+        if (values.length != 3) {
+            throw new IllegalArgumentException("invalid encryptedValue");
+        }
+        try {
+            return new PersistentLoginToken(values[0], Long.parseLong(values[1]), Integer.parseInt(values[2]),
+                    encryptedValue);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("invalid encryptedValue", e);
+        }
     }
 
     private String decrypt(final String codedInput) {
@@ -82,20 +96,6 @@ public class SunetIdCookieCodec {
             throw new IllegalStateException(e);
         } catch (BadPaddingException e) {
             throw new IllegalStateException(e);
-        }
-    }
-
-    public PersistentLoginToken restoreLoginToken(final String encryptedValue) {
-        String decrypted = decrypt(encryptedValue);
-        String[] values = decrypted.split(COOKIE_VALUE_SEPARATOR);
-        if (values.length != 3) {
-            throw new IllegalArgumentException("invalid encryptedValue");
-        }
-        try {
-            return new PersistentLoginToken(values[0], Long.parseLong(values[1]), Integer.parseInt(values[2]),
-                    encryptedValue);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("invalid encryptedValue", e);
         }
     }
 }

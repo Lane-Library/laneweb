@@ -79,8 +79,7 @@ public class BassettCollectionManager {
             + "union all "
             + "SELECT  br.region, '0' as SUB_REGION, count(distinct(b.bassett_number)) as SUB_REGION_COUNT "
             + "FROM FOUND f,  BASSETT b , BASSETT_REGION br "
-            + "where f.record_id = b.record_id  and br.bassett_id = b.bassett_id group by  br.region "
-            + "order by 1,2";
+            + "where f.record_id = b.record_id  and br.bassett_id = b.bassett_id group by  br.region " + "order by 1,2";
 
     private DataSource dataSource;
 

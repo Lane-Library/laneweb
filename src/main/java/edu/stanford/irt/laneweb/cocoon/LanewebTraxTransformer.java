@@ -17,14 +17,14 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
+public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent,
+        Transformer {
 
-public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer {
+    private Serializable cacheKey;
 
     private TransformerHandler transformerHandler;
 
     private XSLTProcessor xsltProcessor;
-
-    private Serializable cacheKey;
 
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
         this.transformerHandler.characters(ch, start, length);
@@ -58,8 +58,16 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         this.transformerHandler.endPrefixMapping(prefix);
     }
 
+    public Serializable getKey() {
+        return this.cacheKey;
+    }
+
     public String getSystemId() {
         return this.transformerHandler.getSystemId();
+    }
+
+    public SourceValidity getValidity() {
+        return this.source.getValidity();
     }
 
     public void ignorableWhitespace(final char[] ch, final int start, final int length) throws SAXException {
@@ -144,19 +152,11 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         this.transformerHandler.unparsedEntityDecl(name, publicId, systemId, notationName);
     }
 
-    public Serializable getKey() {
-        return this.cacheKey;
-    }
-
     @Override
     protected void initialize() {
-            this.cacheKey = this.source.getURI();
-            if (this.parameterMap.containsKey("cache-key")) {
-                this.cacheKey = this.cacheKey + ";" + this.parameterMap.get("cache-key");
-            }
-    }
-
-    public SourceValidity getValidity() {
-        return this.source.getValidity();
+        this.cacheKey = this.source.getURI();
+        if (this.parameterMap.containsKey("cache-key")) {
+            this.cacheKey = this.cacheKey + ";" + this.parameterMap.get("cache-key");
+        }
     }
 }

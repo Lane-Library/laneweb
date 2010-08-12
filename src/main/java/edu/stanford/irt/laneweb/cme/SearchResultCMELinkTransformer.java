@@ -4,10 +4,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 /**
- * Transformer to rewrite data when a LDAPData.EMRID value is present. Elements
- * to rewrite include:
- * 
- * - url element of metasearch results when value is known CME host
+ * Transformer to rewrite data when a LDAPData.EMRID value is present. Elements to rewrite include: - url element of
+ * metasearch results when value is known CME host
  * 
  * @author ryanmax
  */
@@ -42,7 +40,8 @@ public class SearchResultCMELinkTransformer extends AbstractCMELinkTransformer {
     }
 
     @Override
-    public void startElement(final String uri, final String localName, final String qName, final Attributes atts) throws SAXException {
+    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
+            throws SAXException {
         if (this.emrid != null && URL.equals(localName)) {
             this.isSearchUrlElement = true;
             this.characters.setLength(0);

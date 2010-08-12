@@ -22,11 +22,11 @@ public class ServletObjectModelProviderTest {
     private ObjectModelProvider provider;
 
     private HttpServletRequest request;
+
     @Before
     public void setUp() throws Exception {
         this.request = createMock(HttpServletRequest.class);
         this.provider = new RequestAttributeObjectModelProvider();
-
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(this.request));
     }
 

@@ -9,7 +9,6 @@ import org.cyberneko.html.HTMLConfiguration;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-
 /**
  * The neko html generator reads HTML from a source, converts it to XHTML and generates SAX Events. It uses the NekoHTML
  * library to do this.

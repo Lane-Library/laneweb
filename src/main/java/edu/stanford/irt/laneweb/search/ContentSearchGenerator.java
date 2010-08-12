@@ -20,36 +20,17 @@ import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
- * @author ryanmax
- * 
- * $Id$
+ * @author ryanmax $Id$
  */
 public class ContentSearchGenerator extends AbstractMetasearchGenerator {
 
-    protected Collection<String> engines;
+    private int contentResultLimit;
 
     private long defaultTimeout;
 
     private String timeout;
-    
-    private int contentResultLimit;
 
-    @Override
-    @SuppressWarnings("unchecked")
-    protected void initialize() {
-        super.initialize();
-        this.timeout = this.model.getString("timeout", this.parameterMap.get("timeout"));
-        this.engines = this.model.getObject(Model.ENGINES, Collection.class, Collections.<String>emptyList());
-        if (this.engines.size() == 0) {
-            String engineList = this.parameterMap.get("engine-list");
-            if (engineList != null) {
-                this.engines = new LinkedList<String>();
-                for (StringTokenizer st = new StringTokenizer(engineList,","); st.hasMoreTokens();) {
-                    this.engines.add(st.nextToken());
-                }
-            }
-        }
-    }
+    protected Collection<String> engines;
 
     @Override
     public void generate() throws SAXException {
@@ -60,49 +41,12 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
         this.xmlConsumer.endDocument();
     }
 
-    public void setDefaultTimeout(final long defaultTimeout) {
-        this.defaultTimeout = defaultTimeout;
-    }
-
     public void setContentResultLimit(final int contentResultLimit) {
         this.contentResultLimit = contentResultLimit;
     }
-    
-    protected Collection<ContentResultSearchResult> getContentResultList(Result result) {
-        Collection<ContentResultSearchResult> contentResults = new LinkedList<ContentResultSearchResult>();
-        Map<String, ContentResultSearchResult> resultTitles = new HashMap<String, ContentResultSearchResult>();
-        Pattern queryTermPattern = QueryTermPattern.getPattern(this.query);
-        for (Result engine : result.getChildren()) {
-            Result parentResource = null;
-            for (Result resource : engine.getChildren()) {
-                String resourceId = resource.getId();
-                if (resourceId.matches(".*_content")) {
-                    Iterator<Result> it = resource.getChildren().iterator();
-                    int count = 0;
-                    while (it.hasNext() && count < this.contentResultLimit){
-                        count++;
-                        ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next(), queryTermPattern);
-                        crsr.setResourceHits(parentResource.getHits());
-                        crsr.setResourceId(parentResource.getId());
-                        crsr.setResourceName(parentResource.getDescription());
-                        crsr.setResourceUrl(parentResource.getURL());
-                        if(!resultTitles.containsKey(crsr.getContentUrl()) ){
-                            resultTitles.put(crsr.getContentUrl(),crsr);
-                            contentResults.add(crsr);
-                        }
-                        else if(crsr.getScore() > resultTitles.get(crsr.getContentUrl()).getScore() ){
-                                contentResults.remove(resultTitles.get(crsr.getContentUrl()));
-                                contentResults.add(crsr);
-                                resultTitles.remove(crsr.getContentUrl());
-                                resultTitles.put(crsr.getContentUrl(),crsr);
-                        }
-                    }
-                } else if (!"article_ids".equals(resource.getId())) {
-                    parentResource = resource;
-                }
-            }
-        }
-        return contentResults;
+
+    public void setDefaultTimeout(final long defaultTimeout) {
+        this.defaultTimeout = defaultTimeout;
     }
 
     @Override
@@ -116,5 +60,59 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
             }
         }
         return this.metaSearchManager.search(new SimpleQuery(this.query), time, this.engines, true);
+    }
+
+    protected Collection<ContentResultSearchResult> getContentResultList(final Result result) {
+        Collection<ContentResultSearchResult> contentResults = new LinkedList<ContentResultSearchResult>();
+        Map<String, ContentResultSearchResult> resultTitles = new HashMap<String, ContentResultSearchResult>();
+        Pattern queryTermPattern = QueryTermPattern.getPattern(this.query);
+        for (Result engine : result.getChildren()) {
+            Result parentResource = null;
+            for (Result resource : engine.getChildren()) {
+                String resourceId = resource.getId();
+                if (resourceId.matches(".*_content")) {
+                    Iterator<Result> it = resource.getChildren().iterator();
+                    int count = 0;
+                    while (it.hasNext() && count < this.contentResultLimit) {
+                        count++;
+                        ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next(),
+                                queryTermPattern);
+                        crsr.setResourceHits(parentResource.getHits());
+                        crsr.setResourceId(parentResource.getId());
+                        crsr.setResourceName(parentResource.getDescription());
+                        crsr.setResourceUrl(parentResource.getURL());
+                        if (!resultTitles.containsKey(crsr.getContentUrl())) {
+                            resultTitles.put(crsr.getContentUrl(), crsr);
+                            contentResults.add(crsr);
+                        } else if (crsr.getScore() > resultTitles.get(crsr.getContentUrl()).getScore()) {
+                            contentResults.remove(resultTitles.get(crsr.getContentUrl()));
+                            contentResults.add(crsr);
+                            resultTitles.remove(crsr.getContentUrl());
+                            resultTitles.put(crsr.getContentUrl(), crsr);
+                        }
+                    }
+                } else if (!"article_ids".equals(resource.getId())) {
+                    parentResource = resource;
+                }
+            }
+        }
+        return contentResults;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    protected void initialize() {
+        super.initialize();
+        this.timeout = this.model.getString("timeout", this.parameterMap.get("timeout"));
+        this.engines = this.model.getObject(Model.ENGINES, Collection.class, Collections.<String> emptyList());
+        if (this.engines.size() == 0) {
+            String engineList = this.parameterMap.get("engine-list");
+            if (engineList != null) {
+                this.engines = new LinkedList<String>();
+                for (StringTokenizer st = new StringTokenizer(engineList, ","); st.hasMoreTokens();) {
+                    this.engines.add(st.nextToken());
+                }
+            }
+        }
     }
 }

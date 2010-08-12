@@ -78,14 +78,15 @@ public class ProxyHostManager {
 
     private DataSource dataSource;
 
+    private Executor executor = Executors.newSingleThreadExecutor();
+
     private long lastUpdate = 0;
 
     private Set<String> proxyHosts;
-    
-    private Executor executor = Executors.newSingleThreadExecutor();
 
     public ProxyHostManager() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ezproxy-servers.txt")));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "ezproxy-servers.txt")));
         this.proxyHosts = new HashSet<String>();
         String proxyHost = null;
         try {

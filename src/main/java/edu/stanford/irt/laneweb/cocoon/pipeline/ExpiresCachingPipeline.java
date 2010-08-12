@@ -62,6 +62,27 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
         this.cacheExpires = cacheExpires;
     }
 
+    /*
+     * (non-Javadoc)
+     * @seeorg.apache.cocoon.components.pipeline.ProcessingPipeline# getKeyForEventPipeline()
+     */
+    @Override
+    public String getKeyForEventPipeline() {
+        if (this.cacheKey != null && this.cacheValidity != null) {
+            return this.cacheKey.toString();
+        }
+        return null;
+    }
+
+    /**
+     * Return valid validity objects for the event pipeline If the "event pipeline" (= the complete pipeline without the
+     * serializer) is cacheable and valid, return all validity objects. Otherwise return <code>null</code>
+     */
+    @Override
+    public SourceValidity getValidityForEventPipeline() {
+        return this.cacheValidity;
+    }
+
     /**
      * Connect the XML pipeline.
      */
@@ -91,30 +112,6 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                 super.connectPipeline(environment);
             }
         }
-    }
-
-    /*
-     * (non-Javadoc)
-     * @seeorg.apache.cocoon.components.pipeline.ProcessingPipeline#
-     * getKeyForEventPipeline()
-     */
-    @Override
-    public String getKeyForEventPipeline() {
-        if (this.cacheKey != null && this.cacheValidity != null) {
-            return this.cacheKey.toString();
-        }
-        return null;
-    }
-
-    /**
-     * Return valid validity objects for the event pipeline If the
-     * "event pipeline" (= the complete pipeline without the serializer) is
-     * cacheable and valid, return all validity objects. Otherwise return
-     * <code>null</code>
-     */
-    @Override
-    public SourceValidity getValidityForEventPipeline() {
-        return this.cacheValidity;
     }
 
     /**
@@ -204,7 +201,8 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                     environment.setContentLength(cachedData.length);
                     os.write(cachedData);
                 } else {
-                    final CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(this.outputBufferSize));
+                    final CachingOutputStream os = new CachingOutputStream(
+                            environment.getOutputStream(this.outputBufferSize));
                     // set the output stream
                     this.reader.setOutputStream(os);
                     this.reader.generate();
@@ -270,7 +268,8 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                         environment.setContentLength(cachedData.length);
                         os.write(cachedData);
                     } else {
-                        CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(this.outputBufferSize));
+                        CachingOutputStream os = new CachingOutputStream(
+                                environment.getOutputStream(this.outputBufferSize));
                         // set the output stream
                         this.serializer.setOutputStream(os);
                         this.generator.generate();

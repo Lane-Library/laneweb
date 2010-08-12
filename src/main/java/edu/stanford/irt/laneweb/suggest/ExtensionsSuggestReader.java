@@ -39,6 +39,7 @@ public class ExtensionsSuggestReader extends AbstractReader {
         this.outputStream.write("]]".getBytes());
     }
 
+    @Override
     public String getMimeType() {
         return "text/plain";
     }
@@ -56,7 +57,8 @@ public class ExtensionsSuggestReader extends AbstractReader {
         }
         this.meshSuggestionManager = meshSuggestionManager;
     }
-    
+
+    @Override
     protected void initialize() {
         String query = this.model.getString(Model.QUERY);
         if (null == query) {

@@ -22,7 +22,7 @@ public class XMLizableSearchResultSet extends TreeSet<SearchResult> implements R
 
     private String query = null;
 
-    public XMLizableSearchResultSet(String query) {
+    public XMLizableSearchResultSet(final String query) {
         this.query = query;
     }
 
@@ -46,6 +46,37 @@ public class XMLizableSearchResultSet extends TreeSet<SearchResult> implements R
         handler.endPrefixMapping("");
     }
 
+    private void handleJournalsList(final ContentHandler handler) throws SAXException {
+        Map<String, Integer> journalCountMap = new HashMap<String, Integer>();
+        Map<String, String> journalResourceMap = new HashMap<String, String>();
+        for (SearchResult resource : this) {
+            if (resource instanceof ContentResultSearchResult) {
+                ContentResultSearchResult cr = (ContentResultSearchResult) resource;
+                if (null != cr.getPublicationTitle()) {
+                    journalResourceMap.put(cr.getPublicationTitle(), cr.getResourceId());
+                    if (journalCountMap.containsKey(cr.getPublicationTitle())) {
+                        journalCountMap
+                                .put(cr.getPublicationTitle(), journalCountMap.get(cr.getPublicationTitle()) + 1);
+                    } else {
+                        journalCountMap.put(cr.getPublicationTitle(), Integer.valueOf(1));
+                    }
+                }
+            }
+        }
+        XMLUtils.startElement(handler, NAMESPACE, JOURNALS);
+        for (Entry<String, Integer> journalEntry : journalCountMap.entrySet()) {
+            AttributesImpl atts = new AttributesImpl();
+            atts.addAttribute(EMPTY_NS, TITLE, TITLE, "CDATA", journalEntry.getKey());
+            atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_ID, "CDATA",
+                    journalResourceMap.get(journalEntry.getKey()).toString());
+            atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, "CDATA",
+                    journalCountMap.get(journalEntry.getKey()).toString());
+            XMLUtils.startElement(handler, NAMESPACE, JOURNAL, atts);
+            XMLUtils.endElement(handler, NAMESPACE, JOURNAL);
+        }
+        XMLUtils.endElement(handler, NAMESPACE, JOURNALS);
+    }
+
     private void handleSearchContentCounts(final ContentHandler handler) throws SAXException {
         XMLUtils.startElement(handler, NAMESPACE, CONTENT_HIT_COUNTS);
         ArrayList<String> countedResources = new ArrayList<String>();
@@ -64,33 +95,5 @@ public class XMLizableSearchResultSet extends TreeSet<SearchResult> implements R
             }
         }
         XMLUtils.endElement(handler, NAMESPACE, CONTENT_HIT_COUNTS);
-    }
-
-    private void handleJournalsList(final ContentHandler handler) throws SAXException {
-        Map<String, Integer> journalCountMap = new HashMap<String, Integer>();
-        Map<String, String> journalResourceMap = new HashMap<String, String>();
-        for (SearchResult resource : this) {
-            if (resource instanceof ContentResultSearchResult) {
-                ContentResultSearchResult cr = (ContentResultSearchResult) resource;
-                if (null != cr.getPublicationTitle()) {
-                    journalResourceMap.put(cr.getPublicationTitle(), cr.getResourceId());
-                    if (journalCountMap.containsKey(cr.getPublicationTitle())) {
-                        journalCountMap.put(cr.getPublicationTitle(), journalCountMap.get(cr.getPublicationTitle()) + 1);
-                    } else {
-                        journalCountMap.put(cr.getPublicationTitle(), Integer.valueOf(1));
-                    }
-                }
-            }
-        }
-        XMLUtils.startElement(handler, NAMESPACE, JOURNALS);
-        for (Entry<String, Integer> journalEntry : journalCountMap.entrySet()) {
-            AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute(EMPTY_NS, TITLE, TITLE, "CDATA", journalEntry.getKey());
-            atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_ID, "CDATA", journalResourceMap.get(journalEntry.getKey()).toString());
-            atts.addAttribute(EMPTY_NS, RESOURCE_HITS, RESOURCE_HITS, "CDATA", journalCountMap.get(journalEntry.getKey()).toString());
-            XMLUtils.startElement(handler, NAMESPACE, JOURNAL, atts);
-            XMLUtils.endElement(handler, NAMESPACE, JOURNAL);
-        }
-        XMLUtils.endElement(handler, NAMESPACE, JOURNALS);
     }
 }

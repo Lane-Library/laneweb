@@ -17,15 +17,8 @@ public class ProxyLinks {
 
     private List<String> proxyRegex;
 
-    public void setNoProxyRegex(final List<String> noProxyRegex) {
-        this.noProxyRegex = noProxyRegex;
-    }
-
-    public void setProxyRegex(final List<String> proxyRegex) {
-        this.proxyRegex = proxyRegex;
-    }
-
-    public Boolean getProxyLinks(final HttpServletRequest request, HttpSession session, IPGroup ipGroup, String remoteAddress) {
+    public Boolean getProxyLinks(final HttpServletRequest request, final HttpSession session, final IPGroup ipGroup,
+            final String remoteAddress) {
         Boolean proxyLinks = null;
         Boolean sessionProxyLinks = null;
         // first see if there is a proxy-links parameter and use that:
@@ -53,6 +46,14 @@ public class ProxyLinks {
             session.setAttribute(Model.PROXY_LINKS, proxyLinks);
         }
         return proxyLinks;
+    }
+
+    public void setNoProxyRegex(final List<String> noProxyRegex) {
+        this.noProxyRegex = noProxyRegex;
+    }
+
+    public void setProxyRegex(final List<String> proxyRegex) {
+        this.proxyRegex = proxyRegex;
     }
 
     private boolean isNoProxy(final String ip) {

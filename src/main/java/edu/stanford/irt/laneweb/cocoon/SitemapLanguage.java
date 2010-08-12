@@ -26,13 +26,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.web.context.WebApplicationContext;
 
-public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.sitemap.SitemapLanguage implements ApplicationContextAware {
-    
-    //cut and pasted from AvalonNamespaceHandler which is no longer loaded
+public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.sitemap.SitemapLanguage implements
+        ApplicationContextAware {
+
+    // cut and pasted from AvalonNamespaceHandler which is no longer loaded
     private static final LocationUtils.LocationFinder confLocFinder = new LocationUtils.LocationFinder() {
-        public Location getLocation(Object obj, String description) {
+
+        public Location getLocation(final Object obj, final String description) {
             if (obj instanceof Configuration) {
-                Configuration config = (Configuration)obj;
+                Configuration config = (Configuration) obj;
                 String locString = config.getLocation();
                 Location result = LocationUtils.parse(locString);
                 if (LocationUtils.isKnown(result)) {
@@ -56,17 +58,18 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
             return null;
         }
     };
-    
     static {
         LocationUtils.addFinder(confLocFinder);
     }
+
     private ApplicationContext applicationContext;
 
     private Map<String, ProcessingNode> registeredNodes = Collections.emptyMap();
 
     private ServiceManager serviceManager;
 
-    public SitemapLanguage(final ServiceManager serviceManager, final PipelineComponentInfo info) throws ServiceException {
+    public SitemapLanguage(final ServiceManager serviceManager, final PipelineComponentInfo info)
+            throws ServiceException {
         service(serviceManager);
         this.serviceManager = serviceManager;
         this.itsNamespace = "http://apache.org/cocoon/sitemap/1.0";
@@ -95,7 +98,8 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
 
     @SuppressWarnings("rawtypes")
     @Override
-    public Map getHintsForStatement(final String role, final String hint, final Configuration statement) throws Exception {
+    public Map getHintsForStatement(final String role, final String hint, final Configuration statement)
+            throws Exception {
         return Collections.emptyMap();
     }
 
@@ -104,7 +108,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
      */
     @Override
     public ProcessingNode getRegisteredNode(final String name) {
-        return (ProcessingNode) this.registeredNodes.get(name);
+        return this.registeredNodes.get(name);
     }
 
     @Override
@@ -115,18 +119,21 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
             type = this.itsComponentInfo.getDefaultType(role);
         }
         if (type == null) {
-            throw new ConfigurationException("No default type exists for 'map:" + statement.getName() + "' at " + statement.getLocation());
+            throw new ConfigurationException("No default type exists for 'map:" + statement.getName() + "' at "
+                    + statement.getLocation());
         }
         final String beanName = role + '/' + type;
         if (!this.applicationContext.containsBean(beanName)) {
-            throw new ConfigurationException("Type '" + type + "' does not exist for 'map:" + statement.getName() + "' at " + statement.getLocation());
+            throw new ConfigurationException("Type '" + type + "' does not exist for 'map:" + statement.getName()
+                    + "' at " + statement.getLocation());
         }
         return type;
     }
 
     @SuppressWarnings("rawtypes")
     @Override
-    public Collection getViewsForStatement(final String role, final String hint, final Configuration statement) throws Exception {
+    public Collection getViewsForStatement(final String role, final String hint, final Configuration statement)
+            throws Exception {
         return Collections.emptyList();
     }
 
@@ -161,7 +168,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
             ((AbstractProcessingNode) node).setSitemapExecutor(this.processor.getSitemapExecutor());
         }
         if (node instanceof Serviceable) {
-            ((Serviceable)node).service(this.serviceManager);
+            ((Serviceable) node).service(this.serviceManager);
         }
         if (node instanceof ParameterizableProcessingNode) {
             Map params = getParameters(config, location);

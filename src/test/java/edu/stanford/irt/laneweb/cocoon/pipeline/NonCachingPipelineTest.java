@@ -22,26 +22,25 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.cocoon.SourceResolver;
 
-
 public class NonCachingPipelineTest {
-    
-    private NonCachingPipeline pipeline;
-    
-    private Parameters parameters;
-    
+
     private BeanFactory beanFactory;
-    
-    private Generator generator;
-    
-    private Transformer transformer;
-    
-    private Serializer serializer;
-    
-    private Reader reader;
-    
+
     private Environment environment;
-    
+
+    private Generator generator;
+
+    private Parameters parameters;
+
+    private NonCachingPipeline pipeline;
+
+    private Reader reader;
+
+    private Serializer serializer;
+
     private SourceResolver sourceResolver;
+
+    private Transformer transformer;
 
     @Before
     public void setUp() throws Exception {
@@ -57,32 +56,20 @@ public class NonCachingPipelineTest {
     }
 
     @Test
-    public void testNonCachingProcessingPipeline() {
-        new NonCachingPipeline(null);
-    }
-
-    @Test
     public void testAbstractProcessingPipeline() {
-        new AbstractProcessingPipeline(){};
+        new AbstractProcessingPipeline() {
+        };
     }
 
     @Test
-    public void testSetProcessorManager() {
-        this.pipeline.setProcessorManager(null);
-    }
-
-    @Test
-    public void testSetup() {
-        expect(this.parameters.getParameter("expires", null)).andReturn(null);
-        expect(this.parameters.getParameterAsInteger("outputBufferSize", 0)).andReturn(0);
-        replay(this.parameters);
-        this.pipeline.setup(this.parameters);
-        verify(this.parameters);
-    }
-
-    @Test
-    public void testInformBranchPoint() {
-        this.pipeline.informBranchPoint();
+    public void testAddTransformer() throws ProcessingException {
+        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
+        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo"))
+                .andReturn(this.transformer);
+        replay(this.beanFactory, this.generator, this.transformer);
+        this.pipeline.setGenerator("foo", null, null, null);
+        this.pipeline.addTransformer("foo", null, null, null);
+        verify(this.beanFactory, this.generator, this.transformer);
     }
 
     @Test
@@ -91,44 +78,23 @@ public class NonCachingPipelineTest {
     }
 
     @Test
-    public void testSetGenerator() throws ProcessingException {
-        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        replay(this.beanFactory, this.generator);
-        this.pipeline.setGenerator("foo", null, null, null);
-        verify(this.beanFactory, this.generator);
+    public void testGetKeyForEventPipeline() {
+        this.pipeline.getKeyForEventPipeline();
     }
 
     @Test
-    public void testAddTransformer() throws ProcessingException {
-        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
-        replay(this.beanFactory, this.generator, this.transformer);
-        this.pipeline.setGenerator("foo", null, null, null);
-        this.pipeline.addTransformer("foo", null, null, null);
-        verify(this.beanFactory, this.generator, this.transformer);
+    public void testGetValidityForEventPipeline() {
+        this.pipeline.getValidityForEventPipeline();
     }
 
     @Test
-    public void testSetSerializer() throws ProcessingException {
-        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        expect(this.beanFactory.getBean("org.apache.cocoon.serialization.Serializer/foo")).andReturn(this.serializer);
-        replay(this.beanFactory, this.generator, this.serializer);
-        this.pipeline.setGenerator("foo", null, null, null);
-        this.pipeline.setSerializer("foo", null, null, null, null);
-        verify(this.beanFactory, this.generator, this.serializer);
+    public void testInformBranchPoint() {
+        this.pipeline.informBranchPoint();
     }
 
     @Test
-    public void testSetReader() throws ProcessingException {
-        expect(this.beanFactory.getBean("org.apache.cocoon.reading.Reader/foo")).andReturn(this.reader);
-        replay(this.beanFactory, this.reader);
-        this.pipeline.setReader("foo", null, null, null);
-        verify(this.beanFactory, this.reader);
-    }
-
-    @Test
-    public void testSetErrorHandler() {
-        this.pipeline.setErrorHandler(null);
+    public void testNonCachingProcessingPipeline() {
+        new NonCachingPipeline(null);
     }
 
     @Test
@@ -146,7 +112,8 @@ public class NonCachingPipelineTest {
     @Test
     public void testProcessEnvironmentXMLConsumer() throws ProcessingException, IOException, SAXException {
         expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
+        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo"))
+                .andReturn(this.transformer);
         this.generator.setConsumer(this.transformer);
         this.generator.generate();
         this.transformer.setConsumer(null);
@@ -159,12 +126,47 @@ public class NonCachingPipelineTest {
     }
 
     @Test
-    public void testGetValidityForEventPipeline() {
-        this.pipeline.getValidityForEventPipeline();
+    public void testSetErrorHandler() {
+        this.pipeline.setErrorHandler(null);
     }
 
     @Test
-    public void testGetKeyForEventPipeline() {
-        this.pipeline.getKeyForEventPipeline();
+    public void testSetGenerator() throws ProcessingException {
+        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
+        replay(this.beanFactory, this.generator);
+        this.pipeline.setGenerator("foo", null, null, null);
+        verify(this.beanFactory, this.generator);
+    }
+
+    @Test
+    public void testSetProcessorManager() {
+        this.pipeline.setProcessorManager(null);
+    }
+
+    @Test
+    public void testSetReader() throws ProcessingException {
+        expect(this.beanFactory.getBean("org.apache.cocoon.reading.Reader/foo")).andReturn(this.reader);
+        replay(this.beanFactory, this.reader);
+        this.pipeline.setReader("foo", null, null, null);
+        verify(this.beanFactory, this.reader);
+    }
+
+    @Test
+    public void testSetSerializer() throws ProcessingException {
+        expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
+        expect(this.beanFactory.getBean("org.apache.cocoon.serialization.Serializer/foo")).andReturn(this.serializer);
+        replay(this.beanFactory, this.generator, this.serializer);
+        this.pipeline.setGenerator("foo", null, null, null);
+        this.pipeline.setSerializer("foo", null, null, null, null);
+        verify(this.beanFactory, this.generator, this.serializer);
+    }
+
+    @Test
+    public void testSetup() {
+        expect(this.parameters.getParameter("expires", null)).andReturn(null);
+        expect(this.parameters.getParameterAsInteger("outputBufferSize", 0)).andReturn(0);
+        replay(this.parameters);
+        this.pipeline.setup(this.parameters);
+        verify(this.parameters);
     }
 }

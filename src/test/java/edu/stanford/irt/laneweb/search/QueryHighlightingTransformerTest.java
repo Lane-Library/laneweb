@@ -42,11 +42,10 @@ public class QueryHighlightingTransformerTest {
         expect(this.model.getString(Model.QUERY)).andReturn("query");
         this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE, null);
         this.xmlConsumer.characters(isA(char[].class), eq(0), eq(21));
-        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD),
-                eq(Resource.KEYWORD), isA(Attributes.class));
+        this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD),
+                isA(Attributes.class));
         this.xmlConsumer.characters(isA(char[].class), eq(0), eq(5));
-        this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD),
-                eq(Resource.KEYWORD));
+        this.xmlConsumer.endElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD));
         this.xmlConsumer.characters(isA(char[].class), eq(26), eq(13));
         this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE);
         replayMocks();

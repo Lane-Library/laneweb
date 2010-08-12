@@ -30,27 +30,27 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
     public void setProxyHostManager(final ProxyHostManager proxyHostManager) {
         this.proxyHostManager = proxyHostManager;
     }
-    
-    protected void initialize() {
-        this.sunetid = this.model.getString(Model.SUNETID);
-        this.ticket = this.model.getObject(Model.TICKET, Ticket.class);
-        this.proxyLinks = this.model.getObject(Model.PROXY_LINKS, Boolean.class, Boolean.FALSE);
-        this.ipGroup = this.model.getObject(Model.IPGROUP, IPGroup.class, IPGroup.OTHER);
-        this.basePath = this.parameterMap.containsKey(Model.BASE_PATH) ? 
-                this.parameterMap.get(Model.BASE_PATH) :
-                    this.model.getString(Model.BASE_PATH);
-    }
 
     protected String createProxyLink(final String link) {
         StringBuilder sb = new StringBuilder(128);
         if (IPGroup.SHC.equals(this.ipGroup) || IPGroup.LPCH.equals(this.ipGroup)) {
             sb.append("http://laneproxy.stanford.edu/login?url=");
-        } else if (null == this.ticket || null == this.sunetid ) {
+        } else if (null == this.ticket || null == this.sunetid) {
             sb.append(this.basePath).append(WEBAUTH_LINK);
         } else {
             sb.append(EZPROXY_LINK).append(this.sunetid).append(TICKET).append(this.ticket).append(URL);
         }
         sb.append(link);
         return sb.toString();
+    }
+
+    @Override
+    protected void initialize() {
+        this.sunetid = this.model.getString(Model.SUNETID);
+        this.ticket = this.model.getObject(Model.TICKET, Ticket.class);
+        this.proxyLinks = this.model.getObject(Model.PROXY_LINKS, Boolean.class, Boolean.FALSE);
+        this.ipGroup = this.model.getObject(Model.IPGROUP, IPGroup.class, IPGroup.OTHER);
+        this.basePath = this.parameterMap.containsKey(Model.BASE_PATH) ? this.parameterMap.get(Model.BASE_PATH)
+                : this.model.getString(Model.BASE_PATH);
     }
 }

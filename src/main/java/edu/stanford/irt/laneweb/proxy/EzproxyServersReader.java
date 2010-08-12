@@ -14,8 +14,6 @@ import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 public class EzproxyServersReader extends AbstractReader {
 
     private static final byte[] HJ = "HJ ".getBytes();
-    
-    private static final byte[] SUL = "HJ jensen.stanford.edu\nHJ socrates.stanford.edu\nHJ library.stanford.edu".getBytes();
 
     private static final String SQL =
         "with urls as ( "
@@ -43,6 +41,9 @@ public class EzproxyServersReader extends AbstractReader {
         + "select substr(url, 8) as server from urls "
         + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
 
+    private static final byte[] SUL = "HJ jensen.stanford.edu\nHJ socrates.stanford.edu\nHJ library.stanford.edu"
+            .getBytes();
+
     private DataSource dataSource;
 
     public void generate() throws IOException {
@@ -69,6 +70,7 @@ public class EzproxyServersReader extends AbstractReader {
         }
     }
 
+    @Override
     public String getMimeType() {
         return "text/plain";
     }

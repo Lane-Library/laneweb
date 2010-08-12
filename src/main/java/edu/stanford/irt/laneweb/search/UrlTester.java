@@ -25,19 +25,13 @@ public class UrlTester extends AbstractReader {
         this.outputStream.flush();
     }
 
+    @Override
     public String getMimeType() {
         return "text/plain";
     }
 
     public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {
         this.httpClient = msms.getHttpClient();
-    }
-
-    protected void initialize() {
-        this.url = this.model.getString(Model.URL);
-        if (!this.url.startsWith("http")) {
-            this.url = "http://".concat(this.url);
-        }
     }
 
     private byte[] getHeaderString(final GetMethod get) {
@@ -58,5 +52,13 @@ public class UrlTester extends AbstractReader {
             result.append("\n");
         }
         return result.toString();
+    }
+
+    @Override
+    protected void initialize() {
+        this.url = this.model.getString(Model.URL);
+        if (!this.url.startsWith("http")) {
+            this.url = "http://".concat(this.url);
+        }
     }
 }

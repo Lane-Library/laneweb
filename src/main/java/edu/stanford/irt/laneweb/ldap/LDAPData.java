@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.ldap;
 
-
 public class LDAPData {
 
     private String affiliation;
@@ -35,9 +34,8 @@ public class LDAPData {
 
     @Override
     public String toString() {
-        StringBuffer sb =
-                new StringBuffer("univid=").append(this.univId).append(
-                        ",affiliation=").append(this.affiliation).append(",displayname=").append(this.name);
+        StringBuffer sb = new StringBuffer("univid=").append(this.univId).append(",affiliation=")
+                .append(this.affiliation).append(",displayname=").append(this.name);
         return sb.toString();
     }
 }

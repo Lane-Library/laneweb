@@ -10,6 +10,7 @@ public class SearchCacheManagerAction extends AbstractAction {
 
     private SearchCacheManager searchCache;
 
+    @Override
     public Map<String, String> doAct() {
         String query = this.model.getString(Model.QUERY);
         if (query != null) {

@@ -19,13 +19,15 @@ public class WebdashLoginTest {
     @Test
     public void testError() {
         try {
-            this.webdashLogin.getWebdashURL(null, null, null,"4ca14d60146ddff8ca128a7121854933", null);
+            this.webdashLogin.getWebdashURL(null, null, null, "4ca14d60146ddff8ca128a7121854933", null);
             fail();
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
         try {
             this.webdashLogin.getWebdashURL("ceyates", "Charles E Yates", "stanford:staff", null, null);
             fail();
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
     }
 
     @Test

@@ -12,6 +12,7 @@ public class VoyagerAction extends AbstractAction {
 
     private VoyagerLogin voyagerLogin = null;
 
+    @Override
     public Map<String, String> doAct() {
         String pid = this.model.getString(Model.PID);
         String queryString = this.model.getString(Model.QUERY_STRING);

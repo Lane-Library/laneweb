@@ -41,8 +41,8 @@ public class WebdashLogin {
             String fullName = encodeParameter(name);
             String encodedAffiliation = getSubGroup(affiliation);
             result.append("email=").append(mail).append("&fullname=").append(fullName).append("&nonce=").append(nonce)
-                    .append("&subgroup=").append(encodedAffiliation).append(
-                            "&system_short_name=stanford-sunet&system_user_id=").append(encodedId);
+                    .append("&subgroup=").append(encodedAffiliation)
+                    .append("&system_short_name=stanford-sunet&system_user_id=").append(encodedId);
             String token = getToken(result.toString());
             result.append("&token=").append(token);
         } catch (UnsupportedEncodingException e) {

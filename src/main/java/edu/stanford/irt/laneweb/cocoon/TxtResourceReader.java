@@ -40,6 +40,7 @@ public class TxtResourceReader extends AbstractReader implements CacheableProces
         return this.source.getURI() + ";path=" + this.path;
     }
 
+    @Override
     public long getLastModified() {
         return this.source.getLastModified();
     }
@@ -52,14 +53,14 @@ public class TxtResourceReader extends AbstractReader implements CacheableProces
         this.defaultPath = path;
     }
 
-    protected void initialize() {
-        //get the path from a sitemap parameter or the base-path from the model, or the default
-        this.path = this.parameterMap.containsKey("path") ?
-                this.parameterMap.get("path") :
-                    this.model.getString(Model.BASE_PATH, this.defaultPath);
-    }
-
     public void setValueToSubstitute(final String valueToSubstitute) {
         this.valueToSubstitute = valueToSubstitute;
+    }
+
+    @Override
+    protected void initialize() {
+        // get the path from a sitemap parameter or the base-path from the model, or the default
+        this.path = this.parameterMap.containsKey("path") ? this.parameterMap.get("path") : this.model.getString(
+                Model.BASE_PATH, this.defaultPath);
     }
 }

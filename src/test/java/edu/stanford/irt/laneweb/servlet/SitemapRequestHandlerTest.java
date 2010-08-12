@@ -25,16 +25,16 @@ import edu.stanford.irt.laneweb.model.Model;
 public class SitemapRequestHandlerTest {
 
     private SitemapRequestHandler handler;
-    
+
+    private Processor processor;
+
+    private RedirectProcessor redirectProcessor;
+
     private HttpServletRequest request;
 
     private HttpServletResponse response;
-    
-    private Processor processor;
-    
-    private ServletContext servletContext;
 
-    private RedirectProcessor redirectProcessor;
+    private ServletContext servletContext;
 
     @Before
     public void setUp() throws Exception {
@@ -51,7 +51,7 @@ public class SitemapRequestHandlerTest {
 
     @Test
     public void testHandleRequest() throws Exception {
-        expect(request.getMethod()).andReturn("GET");
+        expect(this.request.getMethod()).andReturn("GET");
         expect(this.redirectProcessor.getRedirectURL("/")).andReturn(RedirectProcessor.NO_REDIRECT);
         expect(this.request.getRequestURI()).andReturn("/").times(2);
         expect(this.request.getQueryString()).andReturn(null).times(1);
@@ -64,10 +64,9 @@ public class SitemapRequestHandlerTest {
         expect(this.servletContext.getRealPath("/")).andReturn("/tmp");
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
         replayMocks();
-        this.handler.handleRequest(request, response);
+        this.handler.handleRequest(this.request, this.response);
         verifyMocks();
     }
-    
 
     @Test
     public void testSetMethodsNotAllowed() {
@@ -88,7 +87,7 @@ public class SitemapRequestHandlerTest {
         }
         this.handler.setRedirectProcessor(this.redirectProcessor);
     }
-    
+
     private void replayMocks() {
         replay(this.servletContext);
         replay(this.response);
@@ -96,7 +95,7 @@ public class SitemapRequestHandlerTest {
         replay(this.processor);
         replay(this.redirectProcessor);
     }
-    
+
     private void verifyMocks() {
         verify(this.servletContext);
         verify(this.processor);

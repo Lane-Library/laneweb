@@ -38,6 +38,19 @@ public abstract class AbstractQueryMapComponent extends AbstractSitemapModelComp
         this.queryMapper = queryMapper;
     }
 
+    protected QueryMap getQueryMap() {
+        if (null == this.query) {
+            throw new IllegalStateException("null query");
+        }
+        if (null == this.resourceMaps) {
+            return this.queryMapper.getQueryMap(this.query);
+        } else {
+            return this.queryMapper.getQueryMap(this.query, this.resourceMaps, this.descriptorWeights,
+                    this.abstractCount);
+        }
+    }
+
+    @Override
     protected void initialize() {
         if (null == this.queryMapper) {
             throw new IllegalStateException("null queryMapper");
@@ -58,18 +71,6 @@ public abstract class AbstractQueryMapComponent extends AbstractSitemapModelComp
             } catch (IOException e) {
                 throw new IllegalStateException(e);
             }
-        }
-    }
-
-    protected QueryMap getQueryMap() {
-        if (null == this.query) {
-            throw new IllegalStateException("null query");
-        }
-        if (null == this.resourceMaps) {
-            return this.queryMapper.getQueryMap(this.query);
-        } else {
-            return this.queryMapper.getQueryMap(this.query, this.resourceMaps, this.descriptorWeights,
-                    this.abstractCount);
         }
     }
 }

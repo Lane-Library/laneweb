@@ -8,19 +8,19 @@ import javax.security.auth.login.LoginException;
 /**
  * Provides a Subject with Kerberos authentication.
  * 
- * @author ceyates
- * $Id$
+ * @author ceyates $Id$
  */
 public class SubjectSource {
 
     private String name;
-    
-    private KerberosTicket ticket;
 
     private Subject subject;
 
+    private KerberosTicket ticket;
+
     /**
      * returns the kerberos authorized Subject
+     * 
      * @return the authorized Subject
      */
     public synchronized Subject getSubject() {

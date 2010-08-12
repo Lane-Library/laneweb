@@ -18,13 +18,13 @@ import org.springframework.ldap.core.LdapTemplate;
 
 public class LDAPDataAccessTest {
 
+    private LDAPDataAccess lDAPDataAccess;
+
     private LdapTemplate ldapTemplate;
 
-    private SubjectSource subjectSource;
-    
     private Subject subject = new Subject();
 
-    private LDAPDataAccess lDAPDataAccess;
+    private SubjectSource subjectSource;
 
     @Before
     public void setUp() {
@@ -37,20 +37,21 @@ public class LDAPDataAccessTest {
 
     @Test
     public void testGetUserInfo() {
-      expect(this.subjectSource.getSubject()).andReturn(this.subject);
-      expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null);
-      replay(this.subjectSource, this.ldapTemplate);
-      this.lDAPDataAccess.getLdapData("ditenus");
-      verify(this.subjectSource, this.ldapTemplate);
+        expect(this.subjectSource.getSubject()).andReturn(this.subject);
+        expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andReturn(null);
+        replay(this.subjectSource, this.ldapTemplate);
+        this.lDAPDataAccess.getLdapData("ditenus");
+        verify(this.subjectSource, this.ldapTemplate);
     }
 
     @Test
     public void testThrowCommunicationException() {
-      expect(this.subjectSource.getSubject()).andReturn(this.subject);
-      expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andThrow(new CommunicationException(null));
-      replay(this.subjectSource, this.ldapTemplate);
-      LDAPData data = this.lDAPDataAccess.getLdapData("ditenus");
-      assertEquals("ditenus", data.getName());
-      verify(this.subjectSource, this.ldapTemplate);
+        expect(this.subjectSource.getSubject()).andReturn(this.subject);
+        expect(this.ldapTemplate.search(eq(""), eq("susunetid=ditenus"), isA(AttributesMapper.class))).andThrow(
+                new CommunicationException(null));
+        replay(this.subjectSource, this.ldapTemplate);
+        LDAPData data = this.lDAPDataAccess.getLdapData("ditenus");
+        assertEquals("ditenus", data.getName());
+        verify(this.subjectSource, this.ldapTemplate);
     }
 }

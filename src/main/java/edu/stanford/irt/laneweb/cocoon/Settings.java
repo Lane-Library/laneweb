@@ -14,10 +14,9 @@ public class Settings extends MutableSettings {
         super.setFormEncoding("UTF-8");
         super.setReloadingEnabled(false);
     }
-    
-    public void setTempDir(File tempDir) {
+
+    public void setTempDir(final File tempDir) {
         super.setCacheDirectory(tempDir.getAbsolutePath());
         super.setWorkDirectory(tempDir.getAbsolutePath());
     }
-    
 }

@@ -27,19 +27,19 @@ public class QueryMapGeneratorTest {
 
     private XMLConsumer consumer;
 
+    private Descriptor descriptor;
+
     private QueryMapGenerator generator;
+
+    private Model model;
 
     private Parameters parameters;
 
-    private QueryMapper queryMapper;
-    
-    private Model model;
-    
-    private Descriptor descriptor;
-    
-    private ResourceMap resourceMap;
-    
     private QueryMap queryMap;
+
+    private QueryMapper queryMapper;
+
+    private ResourceMap resourceMap;
 
     @Before
     public void setUp() throws Exception {
@@ -56,16 +56,16 @@ public class QueryMapGeneratorTest {
 
     @Test
     public void testGenerate() throws SAXException, MalformedURLException, IOException {
-        expect(descriptor.getDescriptorName()).andReturn("yomama");
-        expect(descriptor.getDescriptorName()).andReturn("mama");
-        expect(resourceMap.getDescriptor()).andReturn(descriptor);
-        expect(resourceMap.getResources()).andReturn(Collections.<Resource> singleton(new Resource("a", "b")));
-        expect(queryMap.getQuery()).andReturn("dvt");
-        expect(queryMap.getDescriptor()).andReturn(descriptor);
-        expect(queryMap.getResourceMap()).andReturn(resourceMap);
-        expect(queryMap.getTreePath()).andReturn(null);
-        expect(queryMap.getFrequencies()).andReturn(null);
-        expect(this.queryMapper.getQueryMap("dvt")).andReturn(queryMap);
+        expect(this.descriptor.getDescriptorName()).andReturn("yomama");
+        expect(this.descriptor.getDescriptorName()).andReturn("mama");
+        expect(this.resourceMap.getDescriptor()).andReturn(this.descriptor);
+        expect(this.resourceMap.getResources()).andReturn(Collections.<Resource> singleton(new Resource("a", "b")));
+        expect(this.queryMap.getQuery()).andReturn("dvt");
+        expect(this.queryMap.getDescriptor()).andReturn(this.descriptor);
+        expect(this.queryMap.getResourceMap()).andReturn(this.resourceMap);
+        expect(this.queryMap.getTreePath()).andReturn(null);
+        expect(this.queryMap.getFrequencies()).andReturn(null);
+        expect(this.queryMapper.getQueryMap("dvt")).andReturn(this.queryMap);
         this.generator.setQueryMapper(this.queryMapper);
         expect(this.model.getString(Model.QUERY)).andReturn("dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
@@ -118,7 +118,7 @@ public class QueryMapGeneratorTest {
         this.generator.setup(null, null, null, this.parameters);
         verifyMocks();
     }
-    
+
     private void replayMocks() {
         replay(this.parameters);
         replay(this.queryMapper);
@@ -127,7 +127,7 @@ public class QueryMapGeneratorTest {
         replay(this.resourceMap);
         replay(this.queryMap);
     }
-    
+
     private void verifyMocks() {
         verify(this.parameters);
         verify(this.queryMapper);

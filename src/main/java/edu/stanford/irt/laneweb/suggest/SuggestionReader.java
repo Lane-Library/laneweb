@@ -50,8 +50,8 @@ public class SuggestionReader extends AbstractReader {
         } else if ("mesh".equalsIgnoreCase(this.limit)) {
             suggestions = this.meshSuggestionManager.getSuggestionsForTerm(this.query);
         } else if (this.limit.matches("mesh-(d|i|di)")) {
-            suggestions =
-                    this.meshSuggestionManager.getSuggestionsForTerm(this.limit.replaceFirst("mesh-", ""), this.query);
+            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(this.limit.replaceFirst("mesh-", ""),
+                    this.query);
         } else if ("history".equalsIgnoreCase(this.limit)) {
             suggestions = this.historySuggestionManager.getSuggestionsForTerm(this.query);
         } else {

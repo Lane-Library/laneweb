@@ -33,27 +33,28 @@ public class XSLTProcessorImplTest {
 
     private XSLTProcessorImpl processor;
 
+    private Source source;
+
     private SourceResolver sourceResolver;
 
     private Store store;
 
     private XMLizer xmlizer;
-    
-    private Source source;
 
     @Before
     public void setUp() throws Exception {
         this.source = createMock(Source.class);
         this.store = createMock(Store.class);
-//        this.xmlizer = createMock(XMLizer.class);
+        // this.xmlizer = createMock(XMLizer.class);
         this.xmlizer = new XMLizer() {
 
-            public void toSAX(InputStream stream, String mimeType, String systemID, ContentHandler handler)
-                    throws SAXException, IOException {
+            public void toSAX(final InputStream stream, final String mimeType, final String systemID,
+                    final ContentHandler handler) throws SAXException, IOException {
                 XMLReader reader = XMLReaderFactory.createXMLReader();
                 reader.setContentHandler(handler);
                 reader.parse(new InputSource(stream));
-            }};
+            }
+        };
         this.sourceResolver = createMock(SourceResolver.class);
         this.processor = new XSLTProcessorImpl(this.xmlizer, this.store, this.sourceResolver);
     }
@@ -77,7 +78,8 @@ public class XSLTProcessorImplTest {
         try {
             this.processor.getTransformerHandler(null, createMock(XMLFilter.class));
             fail();
-        } catch (UnsupportedOperationException e) {}
+        } catch (UnsupportedOperationException e) {
+        }
         verify(this.store, this.sourceResolver, this.source);
     }
 
@@ -100,7 +102,8 @@ public class XSLTProcessorImplTest {
         try {
             this.processor.getTransformerHandler(null, createMock(XMLFilter.class));
             fail();
-        } catch (UnsupportedOperationException e) {}
+        } catch (UnsupportedOperationException e) {
+        }
     }
 
     @Test

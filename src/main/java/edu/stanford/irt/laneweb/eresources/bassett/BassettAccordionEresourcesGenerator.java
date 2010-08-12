@@ -8,10 +8,7 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * 
- * @author alainb
- *
- * $Id$
+ * @author alainb $Id$
  */
 public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerator {
 
@@ -22,7 +19,8 @@ public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerato
         xml.toSAX(this.xmlConsumer);
         this.xmlConsumer.endDocument();
     }
-    
+
+    @Override
     protected void initialize() {
         this.query = this.model.getString(Model.QUERY, "bassett");
     }

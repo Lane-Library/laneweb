@@ -35,9 +35,8 @@ public class LanewebHTTPSFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String queryString = req.getQueryString();
-        String url =
-                queryString == null ? req.getRequestURL().toString() : req.getRequestURL().append('?').append(
-                        queryString).toString();
+        String url = queryString == null ? req.getRequestURL().toString() : req.getRequestURL().append('?')
+                .append(queryString).toString();
         int colonIndex = url.indexOf(':');
         if ((req.getHeader("gohttps") != null) || "https".equals(req.getScheme())) {
             chain.doFilter(request, response);

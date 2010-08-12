@@ -9,17 +9,17 @@ import org.apache.cocoon.caching.Cache;
 import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
 
-
 public class ClearCacheAction implements Action {
-    
+
     private Cache cache;
 
-    public ClearCacheAction(Cache cache) {
+    public ClearCacheAction(final Cache cache) {
         this.cache = cache;
     }
 
     @SuppressWarnings("rawtypes")
-    public Map act(Redirector redirector, SourceResolver resolver, Map objectModel, String source, Parameters parameters) {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,
+            final String source, final Parameters parameters) {
         this.cache.clear();
         return Collections.emptyMap();
     }

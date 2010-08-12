@@ -16,11 +16,11 @@ import edu.stanford.irt.eresources.Version;
  */
 public class EresourceVersionComparator implements Comparator<Version>, Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final Pattern CLOSED_DATE_PATTERN = Pattern.compile("(\\d{4})\\-(\\d{4})\\.");
 
     private static final Pattern OPEN_DATE_PATTERN = Pattern.compile(".*(\\d{4})\\-");
 
-    private static final Pattern CLOSED_DATE_PATTERN = Pattern.compile("(\\d{4})\\-(\\d{4})\\.");
+    private static final long serialVersionUID = 1L;
 
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
@@ -32,11 +32,11 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
             score1 = score1 + getYearsCovered(v1);
             score2 = score2 + getYearsCovered(v2);
         }
-        if(score1 != score2){
+        if (score1 != score2) {
             return score2 - score1;
         }
         return 1;
-//        return (v1.getId() < v2.getId() ? -1 : (v1.getId() == v2.getId() ? 0 : 1));
+        // return (v1.getId() < v2.getId() ? -1 : (v1.getId() == v2.getId() ? 0 : 1));
     }
 
     /**
@@ -52,7 +52,7 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
      * @param v
      * @return score
      */
-    private int calculateScore(Version v) {
+    private int calculateScore(final Version v) {
         int score = 0;
         if (v.getLinks().size() > 0 && "Impact Factor".equals(v.getLinks().iterator().next().getLabel())) {
             return -99;
@@ -77,7 +77,7 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
         return score;
     }
 
-    private int getYearsCovered(Version v) {
+    private int getYearsCovered(final Version v) {
         if (null != v.getDates()) {
             Matcher closedMatcher = CLOSED_DATE_PATTERN.matcher(v.getDates());
             Matcher openMatcher = OPEN_DATE_PATTERN.matcher(v.getDates());

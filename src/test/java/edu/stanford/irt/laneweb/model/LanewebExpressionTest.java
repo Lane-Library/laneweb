@@ -63,8 +63,8 @@ public class LanewebExpressionTest {
     public void testIterate() throws ExpressionException {
         replayMocks();
         try {
-        this.expression.iterate(this.objectModel);
-        fail();
+            this.expression.iterate(this.objectModel);
+            fail();
         } catch (UnsupportedOperationException e) {
         }
         verifyMocks();

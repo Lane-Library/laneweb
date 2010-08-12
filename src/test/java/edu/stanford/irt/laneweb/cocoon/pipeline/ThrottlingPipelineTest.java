@@ -19,22 +19,21 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.cocoon.SourceResolver;
 
-
 public class ThrottlingPipelineTest {
-    
-    private ThrottlingPipeline pipeline;
-    
-    private Parameters parameters;
-    
+
+    private BeanFactory beanFactory;
+
     private Environment environment;
 
     private Generator generator;
 
-    private BeanFactory beanFactory;
+    private Parameters parameters;
+
+    private ThrottlingPipeline pipeline;
+
+    private SourceResolver sourceResolver;
 
     private Transformer transformer;
-    
-    private SourceResolver sourceResolver;
 
     @Before
     public void setUp() throws Exception {
@@ -49,18 +48,11 @@ public class ThrottlingPipelineTest {
     }
 
     @Test
-    public void testSetupParameters() {
-        expect(this.parameters.getParameter("request-key", null)).andReturn("foo");
-        replay(this.parameters);
-        this.pipeline.setup(this.parameters);
-        verify(this.parameters);
-    }
-
-    @Test
     public void testProcessXMLPipelineEnvironment() throws ProcessingException, IOException, SAXException {
         expect(this.parameters.getParameter("request-key", null)).andReturn("foo");
         expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
+        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo"))
+                .andReturn(this.transformer);
         this.generator.generate();
         this.environment.setContentType("text/xml");
         replay(this.environment, this.beanFactory, this.generator, this.transformer, this.parameters);
@@ -69,5 +61,13 @@ public class ThrottlingPipelineTest {
         this.pipeline.setup(this.parameters);
         this.pipeline.processXMLPipeline(this.environment);
         verify(this.environment, this.beanFactory, this.generator, this.transformer, this.parameters);
+    }
+
+    @Test
+    public void testSetupParameters() {
+        expect(this.parameters.getParameter("request-key", null)).andReturn("foo");
+        replay(this.parameters);
+        this.pipeline.setup(this.parameters);
+        verify(this.parameters);
     }
 }

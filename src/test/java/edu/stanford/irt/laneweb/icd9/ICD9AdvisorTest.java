@@ -11,7 +11,6 @@ import org.junit.Test;
 import edu.stanford.irt.lane.icd9.ICD9Translator;
 import edu.stanford.irt.laneweb.model.Model;
 
-
 public class ICD9AdvisorTest {
 
     ICD9Advisor advivor;

@@ -51,9 +51,8 @@ public class MetaSearchManagerSource {
     public void reload(final String url, final String login, final String password) {
         try {
             AbstractXmlApplicationContext context = new HttpApplicationContext(url, login, password);
-            this.manager = (MetaSearchManager)context.getBean("manager");
+            this.manager = (MetaSearchManager) context.getBean("manager");
             this.httpClient.setState(new HttpState());
-            
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }

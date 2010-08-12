@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.cocoon;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Map;
+
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.matching.WildcardURIMatcher;
 
