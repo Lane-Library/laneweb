@@ -7,6 +7,8 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-08-16" version="1.11.beta5" description="1.11.beta5 redesign release">
+        </release>
         <release date="2010-07-29" version="1.11.beta4" description="1.11.beta4 redesign release">
             <action date="2010-07-27" dev="ceyates" issue="39402" type="add">
                 CSS: Basic table
