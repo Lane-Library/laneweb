@@ -320,6 +320,12 @@
             <artifactId>nekohtml</artifactId>
             <groupId>net.sourceforge.nekohtml</groupId>
             <version>1.9.11</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>xml-apis</artifactId>
+            		<groupId>xml-apis</groupId>
+            	</exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <artifactId>cocoon-configuration-api</artifactId>
