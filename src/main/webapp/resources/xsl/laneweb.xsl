@@ -41,7 +41,8 @@
     <!-- sourceid used for tracking to ID request origin: shc, cerner, laneconnex-engine, etc. -->
     <xsl:param name="sourceid"/>
     
-    <!--<xsl:param name="js-enabled"/>-->
+    <!-- this is the a= parameter for the online resources -->
+    <xsl:param name="alpha"/>
     
     <!-- ==========================  VARIABLES  ========================== -->
     
@@ -585,6 +586,14 @@
                 <xsl:attribute name="class">active</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="child::node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <!-- add class="active" to online resource alpha browse links if link is for current page -->
+    <xsl:template match="h:ul[attribute::id='']/h:li/h:a[ends-with(@href,'?a='+ $alpha)]">
+        <xsl:copy>
+            <xsl:attribute name="class">active</xsl:attribute>
+            <xsl:apply-templates select="attribute::node() | child::node()"/>
         </xsl:copy>
     </xsl:template>
     
