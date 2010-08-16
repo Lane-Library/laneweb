@@ -29,3 +29,8 @@
 #browseTabs a:hover {
     border: 1px solid #820000;
 }
+#browseTabs .active {
+    background-color:#920000;
+    border-color:#920000;
+    color:white;
+}
