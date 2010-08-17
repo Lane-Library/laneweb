@@ -8,10 +8,8 @@ import java.util.TreeSet;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.suggest.EresourceSuggestionManager;
-import edu.stanford.irt.suggest.HistorySuggestionManager;
-import edu.stanford.irt.suggest.MeshSuggestionManager;
 import edu.stanford.irt.suggest.Suggestion;
+import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SuggestionReader extends AbstractReader {
 
@@ -21,13 +19,13 @@ public class SuggestionReader extends AbstractReader {
 
     private static final int JSON_RETURN_LIMIT = 10;
 
-    private EresourceSuggestionManager eresourceSuggestionManager;
+    private SuggestionManager eresourceSuggestionManager;
 
-    private HistorySuggestionManager historySuggestionManager;
+    private SuggestionManager historySuggestionManager;
 
     private String limit;
 
-    private MeshSuggestionManager meshSuggestionManager;
+    private SuggestionManager meshSuggestionManager;
 
     private String query;
 
@@ -77,21 +75,21 @@ public class SuggestionReader extends AbstractReader {
         return "text/plain";
     }
 
-    public void setEresourceSuggestionManager(final EresourceSuggestionManager eresourceSuggestionManager) {
+    public void setEresourceSuggestionManager(final SuggestionManager eresourceSuggestionManager) {
         if (null == eresourceSuggestionManager) {
             throw new IllegalArgumentException("null eresourceSuggestionManager");
         }
         this.eresourceSuggestionManager = eresourceSuggestionManager;
     }
 
-    public void setHistorySuggestionManager(final HistorySuggestionManager historySuggestionManager) {
+    public void setHistorySuggestionManager(final SuggestionManager historySuggestionManager) {
         if (null == historySuggestionManager) {
             throw new IllegalArgumentException("null historySuggestionManager");
         }
         this.historySuggestionManager = historySuggestionManager;
     }
 
-    public void setMeshSuggestionManager(final MeshSuggestionManager meshSuggestionManager) {
+    public void setMeshSuggestionManager(final SuggestionManager meshSuggestionManager) {
         if (null == meshSuggestionManager) {
             throw new IllegalArgumentException("null meshSuggestionManager");
         }

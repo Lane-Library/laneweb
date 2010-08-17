@@ -8,15 +8,14 @@ import java.util.TreeSet;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.suggest.EresourceSuggestionManager;
-import edu.stanford.irt.suggest.MeshSuggestionManager;
 import edu.stanford.irt.suggest.Suggestion;
+import edu.stanford.irt.suggest.SuggestionManager;
 
 public class ExtensionsSuggestReader extends AbstractReader {
 
-    private EresourceSuggestionManager eresourceSuggestionManager;
+    private SuggestionManager eresourceSuggestionManager;
 
-    private MeshSuggestionManager meshSuggestionManager;
+    private SuggestionManager meshSuggestionManager;
 
     private String query;
 
@@ -44,14 +43,14 @@ public class ExtensionsSuggestReader extends AbstractReader {
         return "text/plain";
     }
 
-    public void setEresourceSuggestionManager(final EresourceSuggestionManager eresourceSuggestionManager) {
+    public void setEresourceSuggestionManager(final SuggestionManager eresourceSuggestionManager) {
         if (null == eresourceSuggestionManager) {
             throw new IllegalArgumentException("null eresourceSuggestionManager");
         }
         this.eresourceSuggestionManager = eresourceSuggestionManager;
     }
 
-    public void setMeshSuggestionManager(final MeshSuggestionManager meshSuggestionManager) {
+    public void setMeshSuggestionManager(final SuggestionManager meshSuggestionManager) {
         if (null == meshSuggestionManager) {
             throw new IllegalArgumentException("null meshSuggestionManager");
         }
