@@ -13,6 +13,13 @@
                 if (this.one(".showAbstract")) {
                     this.one(".showAbstract").setStyle("display", "none");
                 }
+                if(!Y.UA.ie && !Y.DOM.inViewportRegion(Y.Node.getDOMNode(this),true)){
+                    // scroll abstract/description into viewport for all but IE
+                    // scrollIntoView in IE makes for bouncy experience b/c IE scrolls to top of window
+                    // IE even bouncy with:
+                    //scrollTo(0,Y.DOM.docScrollY() + this.get('offsetHeight'));
+                    this.scrollIntoView();
+                }
             });
             parentUl.on("mouseleave", function(e) {
                 this.setStyle("backgroundColor", "#fff");
