@@ -79,6 +79,17 @@
         </release>
         <release date="2010-02-01" version="1.10.beta2" description="1.10.beta2 redesign release"/>
         <release date="2010-01-25" version="1.10.beta1" description="1.10.beta1 redesign release"/>
+        <release date="2010-08-05" version="1.9.37" description="1.9.37 bug fix release">
+            <action date="2010-08-03" dev="ceyates" issue="39824" type="add">
+                add javamelody to laneweb-1.9 branch of application
+            </action>
+            <action date="2010-08-03" dev="ryanmax" issue="39787" type="update">
+                iPad: line below superheader
+            </action>
+            <action date="2010-07-29" dev="ryanmax" issue="30942" type="update">
+                animated indicator and IE
+            </action>
+        </release>
         <release date="2010-07-19" version="1.9.36" description="1.9.36 bug fix release">
             <action date="2010-07-19" dev="ceyates" issue="38769" type="update">
                 add preview button

@@ -19,14 +19,6 @@
         <property name="expressionFactory" ref="org.apache.cocoon.el.ExpressionFactory"/>
     </bean>
 
-    <bean id="org.apache.cocoon.el.ExpressionFactory"
-        class="org.apache.cocoon.el.impl.DefaultExpressionFactory">
-        <property name="expressionCompilers">
-            <map/>
-        </property>
-    </bean>
-
-
     <bean id="org.apache.excalibur.source.SourceResolver"
         class="edu.stanford.irt.laneweb.cocoon.SourceResolver">
         <constructor-arg ref="servletContext"/>

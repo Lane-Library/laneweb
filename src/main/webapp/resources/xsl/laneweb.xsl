@@ -160,16 +160,6 @@
     <xsl:template match="h:html[ancestor::h:html]">
         <xsl:apply-templates select="h:body/child::node()"/>
     </xsl:template>
-    
-    <!--<xsl:template match="h:html">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:if test="$js-enabled != 'true'">
-                <xsl:attribute name="class">lane-js-unknown</xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>-->
 
     <!-- put version into javascript @src -->
     <xsl:template match="h:script/@src[starts-with(.,'/javascript')]">
@@ -193,32 +183,14 @@
             <xsl:comment>
                 <xsl:apply-templates select="child::node()"/>
                 <xsl:text>//</xsl:text>
-        </xsl:comment>
+            </xsl:comment>
         </xsl:copy>
     </xsl:template>
 
     <xsl:template match="h:a|h:area">
         <xsl:choose>
-            <!-- TODO: rethinking removing current link
-                <xsl:when test="starts-with(@href, '/')">
-                <xsl:choose>
-                    <xsl:when test="$query-string='' and @href = $path">
-                        <xsl:apply-templates select="node()"/>
-                    </xsl:when>
-                    <xsl:when
-                        test="$query-string != '' and @href = concat($path,'?',$query-string)">
-                        <xsl:apply-templates select="node()"/>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:copy>
-                            <xsl:apply-templates select="@*|node()"/>
-                        </xsl:copy>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>-->
             <!-- obfuscate email addresses with javascript -->
             <xsl:when test="starts-with(@href, 'mailto:')">
-                <xsl:variable name="apostrophe">'</xsl:variable>
                 <xsl:variable name="address">
                     <xsl:text>'+'ma'+''+'il'+'to'+':'</xsl:text>
                     <xsl:call-template name="js-split">
@@ -492,14 +464,6 @@
             </xsl:choose>
         </xsl:copy>
     </xsl:template>
-
-    <!-- remove class="lw_...." and id="lw_...." -->
-    <xsl:template match="@class[starts-with(.,'lw_')]|@id[starts-with(.,'lw_')]"/>
-
-    <!-- remove class="proxy" -->
-    <xsl:template match="@class[.='proxy']"/>
-
-    <xsl:template match="@proxy"/>
 
     <!-- TODO did the id of the input change? -->
     <xsl:template match="h:input[@name='q']">
