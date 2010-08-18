@@ -13,6 +13,9 @@ strong, em {
 em {
   color:#820000;
 }
+.term {
+  font-style:italic
+}
 .inputHint {
   color:#808080;
 }
