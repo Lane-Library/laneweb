@@ -44,6 +44,14 @@
 .type1 .hide {
     display:none;
 }
+.type1 .yui3-accordion-item-trigger {
+  background-image:url(/././images/plus.png);
+  background-repeat:no-repeat;
+  background-position:18px 12px;
+}
+.type1 .yui3-accordion-item-active .yui3-accordion-item-trigger {
+  background-image:url(/././images/minus.png);
+}
 .type1 .expanded .show, .type1 .yui3-accordion-item-active .show {
     display:none;
 }
@@ -94,5 +102,5 @@
 }
 .type1 .yui-ge, .type1 .yui-gc, .type1 .yui-gf, .type1 .lane-gg {
     line-height:18px;
-    padding:8px 4px 8px 16px;
+    padding:8px 4px 8px 34px;
 }
