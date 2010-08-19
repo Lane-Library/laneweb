@@ -30,7 +30,7 @@
                                                 if (!rs[i].status) {
                                                     result = results.resources[rs[i].id];
                                                     if (result == undefined || !result.status) {
-                                                        needMore = true;
+                                                        needMore = (results.status != 'successful');
                                                     }
                                                     else{
                                                         rs[i].status = result.status;
