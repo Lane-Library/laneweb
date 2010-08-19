@@ -30,7 +30,7 @@
                                     hits = parseInt(response.results.facets[facetId].hits);
                                     engineStatus = response.results.facets[facetId].status;
                                 }
-                                if (!facetId.match("-all") && engineStatus.match(/successful|canceled/) && hitLink !== null && hits === 0) {
+                                if (!facetId.match("-all") && (engineStatus == 'successful' || engineStatus == 'canceled') && hitLink !== null && hits === 0) {
                                     hitLinkParent = hitLink.get('parentNode');
                                     hitLinkParent.addClass('inactiveFacet');
                                     hitLinkParent.removeClass('searchableFacet');
