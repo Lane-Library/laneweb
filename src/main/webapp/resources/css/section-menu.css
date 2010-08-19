@@ -1,26 +1,30 @@
+/* IE seems to need this to make the trigger item work */
+.sectionMenu .yui3-accordion-item-trigger {
+  position:relative;
+}
 .sectionMenu em a {
-    border:none;
-    color:inherit;
+  border:none;
+  color:inherit;
 }
 .sectionMenu em a:hover {
-    border-bottom:1px #820000 solid;
+  border-bottom:1px #820000 solid;
 }
 .sectionMenu.expandy ul {
-     margin-bottom:0 
+  margin-bottom:0
 }
 .sectionMenu .yui3-accordion-item {
-    list-style:none outside none;
-    margin-left:-5px;
+  list-style:none outside none;
+  margin-left:0;
 }
 .sectionMenu .yui3-accordion-item div {
-    padding-left:20px;
-    background-image:url(/././images/plus.png);
-    background-repeat:no-repeat;
-    background-position:3px 2px
+  padding-left:15px;
+  background-image:url(/././images/plus.png);
+  background-repeat:no-repeat;
+  background-position:0 1px
 }
 .sectionMenu .yui3-accordion-item ul {
-    margin-left:15px;
+  margin-left:13px;
 }
 .sectionMenu .yui3-accordion-item-active div {
-    background-image:url(/././images/minus.png);
+  background-image:url(/././images/minus.png);
 }
