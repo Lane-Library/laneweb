@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.sql.DataSource;
@@ -78,7 +78,7 @@ public class ProxyHostManager {
 
     private DataSource dataSource;
 
-    private Executor executor = Executors.newSingleThreadExecutor();
+    private ExecutorService executor = Executors.newSingleThreadExecutor();
 
     private long lastUpdate = 0;
 
@@ -102,6 +102,10 @@ public class ProxyHostManager {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public void destroy() {
+        this.executor.shutdownNow();
     }
 
     public boolean isProxyableHost(final String host) {

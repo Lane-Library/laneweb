@@ -7,7 +7,8 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
     <bean id="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
-        class="edu.stanford.irt.laneweb.proxy.ProxyHostManager">
+        class="edu.stanford.irt.laneweb.proxy.ProxyHostManager"
+        destroy-method="destroy">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
     

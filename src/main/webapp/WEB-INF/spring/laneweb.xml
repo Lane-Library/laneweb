@@ -44,7 +44,8 @@
     </bean>
 
     <bean name="org.apache.excalibur.source.SourceFactory/http"
-        class="edu.stanford.irt.laneweb.httpclient.HTTPClientSourceFactory">
+        class="edu.stanford.irt.laneweb.httpclient.HTTPClientSourceFactory"
+        destroy-method="destroy">
         <property name="httpClient" ref="org.apache.commons.httpclient.HttpClient"/>
     </bean>
 

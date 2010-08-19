@@ -1,8 +1,7 @@
 /**
  * @author ceyates
- */YUI({
-     gallery: 'gallery-2010.04.02-17-26'
-}).use('gallery-node-accordion', 'node', 'node-event-simulate', 'console', 'test', function(Y){
+ */
+YUI().use('node', 'node-event-simulate', 'console', 'test', function(Y){
 
     var expandiesTestCase = new Y.Test.Case({
         name: 'Lane Expandies TestCase',
@@ -41,14 +40,15 @@
                 Y.Assert.isFalse(panel.get('parentNode').hasClass( 'yui3-accordion-item-active'));
             }
         },
-        testChangeEvent: function() {
-            var panel = Y.one('#panel4');
-            var notExpandy = Y.one('.not-expandy');
-            notExpandy.removeClass('not-expandy');
-            notExpandy.addClass('expandy');
-            Y.fire('lane:change');
-            Y.Assert.isTrue(panel.get('parentNode').hasClass('yui3-accordion-item-active'), 'className is ' +panel.get('parentNode').get("className"));
-        },
+        //TODO: disabling, do we need initialize on lane:change event?  any expandies in lane:change content?
+//        testChangeEvent: function() {
+//            var panel = Y.one('#panel4');
+//            var notExpandy = Y.one('.not-expandy');
+//            notExpandy.removeClass('not-expandy');
+//            notExpandy.addClass('expandy');
+//            Y.fire('lane:change');
+//            Y.Assert.isTrue(panel.get('parentNode').hasClass('yui3-accordion-item-active'), 'className is ' +panel.get('parentNode').get("className"));
+//        },
         testTriggerLinkIsNotTrigger: function() {
             var panel = Y.one("#panel5");
             var link = Y.one("#testLink");
