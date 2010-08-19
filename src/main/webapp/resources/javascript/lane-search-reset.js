@@ -63,8 +63,10 @@
         };
         return reset;
     };
-    self = new LANE.SearchReset();
-    self.syncUI();
+    if (Y.one("#search")) {
+        self = new LANE.SearchReset();
+        self.syncUI();
+    }
 })();
 
 
