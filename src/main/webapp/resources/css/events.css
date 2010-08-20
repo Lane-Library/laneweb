@@ -1,19 +1,27 @@
-.events > div {
-    margin-bottom:10px;
+.yui-ge div.first .events .yui-gd div.first {
+  font-family:Georgia, "Times New Roman", Times, serif;
+  text-align:center;
+  width:22px;
+  border-left:none;
+  margin-top:0;
 }
-.events .first {
-    text-align:center;
-    font-family:Georgia, "Times New Roman", Times, serif;
-    font-size:14px
+.yui-ge div.first .events .yui-gd .yui-u {
+  border-left:1px solid #EAE9E6;
+  font-size:11px;
+  line-height:15px;
+  margin-bottom:10px;
+  margin-top:5px;
+  padding-left:11px;
 }
-.events em {
-    display:block;
+.events .month {
+  font-size:11px;
+  color:#820000;
+  text-transform:uppercase;
 }
-.events a {
-    font-family:Georgia, "Times New Roman", Times, serif;
-    border:none;
-    color:#0C4C72;
+.events .day {
+  font-size:21px;
+  color:#565347;
 }
-.events div div div {
-    font-size:11px;
+.events .time {
+  color:#820000;
 }
