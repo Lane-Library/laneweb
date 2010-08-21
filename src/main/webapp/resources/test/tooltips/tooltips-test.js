@@ -9,18 +9,58 @@ YUI({
 
     var tooltipTestCase = new Y.Test.Case({
         name: 'Lane Tooltip Test Case',
-        testTooltipPresent: function() {
-            Y.Assert.isTrue(Y.Lang.isObject(Y.one('#a-yuitt')));
+        testRestoresHeightWidth: function() {
+            var a = Y.one('#a');
+            var tooltip = Y.one(".yui3-tooltip");
+            Y.Assert.areEqual(0, tooltip.get("clientWidth"));
+            Y.Assert.areEqual(0, tooltip.get("clientHeight"));
+            var eventHandle1 = a.after("mouseover", function() {
+                Y.Assert.areNotEqual(0, tooltip.get("clientWidth"));
+                Y.Assert.areNotEqual(0, tooltip.get("clientHeight"));
+            });
+            var eventHandle2 = a.after("mouseout", function() {
+                Y.Assert.areEqual(0, tooltip.get("clientWidth"));
+                Y.Assert.areEqual(0, tooltip.get("clientHeight"));
+            });
+            a.simulate("mouseover");
+            a.simulate("mouseout");
+            eventHandle1.detach();
+            eventHandle2.detach();
         },
-        testSimpleTooltipPresent: function() {
-            Y.Assert.isTrue(Y.Lang.isObject(Y.one('#simpleTT-yui')));
+        testMouseover: function() {
+            var a = Y.one('#a');
+            var tooltip = Y.one(".yui3-tooltip");
+            Y.Assert.isTrue(tooltip.hasClass("yui3-tooltip-hidden"));
+            var eventHandle = a.after("mouseover", function() {
+                Y.Assert.isFalse(tooltip.hasClass("yui3-tooltip-hidden"));
+            });
+            a.simulate("mouseover");
+            a.simulate("mouseout");
+            eventHandle.detach();
         },
         testRemoveAndFireEvent: function() {
-            var aTooltip = Y.one('#aTooltip');
-            var tooltips = aTooltip.get('parent');
-            tooltips.removeChild(aTooltip);
+            var a = Y.one('#a');
+            var tooltip = Y.one(".yui3-tooltip");
+            Y.one('#aTooltip').remove();
             Y.fire('lane:change');
-            Y.isFalse(Y.isObject(Y.one('#a-yuitt')));
+            Y.Assert.isTrue(tooltip.hasClass("yui3-tooltip-hidden"));
+            var eventHandle = a.after("mouseover", function() {
+                Y.Assert.isTrue(tooltip.hasClass("yui3-tooltip-hidden"));
+            });
+            a.simulate("mouseover");
+            a.simulate("mouseout");
+            eventHandle.detach();
+        },
+        testStaysOnPage: function() {
+        	var b = Y.one("#b");
+        	var tooltip = Y.one(".yui3-tooltip");
+        	var right = Y.DOM.viewportRegion().right;
+            var eventHandle = b.after("mouseover", function(e) {
+            	//TODO:???
+            });
+            b.simulate("mouseover", {pageX:right,clientX:right});
+            eventHandle.detach();
+            b.simulate("mouseout");
         }
     });
     
