@@ -5,7 +5,7 @@
         OX = -10000,
         OY = -10000,
 
-        Tooltip = Y.Base.create("tooltip", Y.Widget, [Y.WidgetPosition, Y.WidgetStack], {
+        Tooltip = Y.Base.create("tooltip", Y.Overlay, [Y.WidgetPosition, Y.WidgetStack], {
 
         // PROTOTYPE METHODS/PROPERTIES
 
@@ -461,7 +461,8 @@
                     triggerNodes: tooltipTriggerIds,
                     shim: false,
                     zIndex: 2,
-                    autoHideDelay: 60000
+                    autoHideDelay: 60000,
+                    constrain:true
                 });
                 tt.render();
                 
