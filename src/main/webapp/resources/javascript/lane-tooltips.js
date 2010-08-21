@@ -227,6 +227,15 @@
             var x = this._currTrigger.mouseX;
             var y = this._currTrigger.mouseY;
 
+//    		var boundingBox = this.get("boundingBox");
+//    		var width = boundingBox.get("clientWidth");
+//        	var right = Y.DOM.viewportRegion().right;
+//    		var diff = right - (x + width);
+//    		
+//    		if (diff < 0) {
+//    			x += diff;
+//    		}
+
             this.move(x + Tooltip.OFFSET_X, y + Tooltip.OFFSET_Y);
 
             this.show();
@@ -428,10 +437,9 @@
         }
     });
     
-    var tt,
-        createTooltips = function() {
+    var createTooltips = function() {
             var tooltipTriggerIds = '',
-                tooltipContainer, tooltipId, i, j,
+                tt, tooltipContainer, tooltipId, i, j,
                 tooltipContainerNodeList = Y.all('.tooltips');
             tt = undefined;
             for (i = 0; i < tooltipContainerNodeList.size(); i++) {
@@ -465,19 +473,21 @@
                             this.setTriggerContent(tooltip.get('innerHTML'));
                         }
                     }
-                    length = this.get('contentBox').get('innerHTML').length;
-                    this.set('width', length > 500 ? '60%' : '25%');
+//                    length = this.get('contentBox').get('innerHTML').length;
+//                    this.set('width', length > 500 ? '60%' : '25%');
                 });
                 tt.after('visibleChange', function(e) {
                     if (e.newVal === false) {
                         e.target.reset();
                     }
                 });
+                LANE.ToolTips = tt;
             }
         };
     Y.Global.on('lane:change', function() {
-        if (tt) {
-           tt.destructor();
+        if (LANE.ToolTips) {
+           LANE.ToolTips.destructor();
+           LANE.ToolTips = undefined;
         }
         createTooltips(); 
     });

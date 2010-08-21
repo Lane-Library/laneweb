@@ -5,7 +5,7 @@ YUI({
     logInclude: {
         TestRunner: true
     }
-}).use('node-event-simulate', 'console', 'test', function(Y){
+}).use("widget", 'node-event-simulate', 'console', 'test', function(Y){
 
     var tooltipTestCase = new Y.Test.Case({
         name: 'Lane Tooltip Test Case',
@@ -53,22 +53,24 @@ YUI({
         },
         testStaysOnPage: function() {
         	var b = Y.one("#b");
-        	var tooltip = Y.one(".yui3-tooltip");
         	var right = Y.DOM.viewportRegion().right;
-            var eventHandle = b.after("mouseover", function(e) {
-            	//TODO:???
-            });
-            b.simulate("mouseover", {pageX:right,clientX:right});
-            eventHandle.detach();
-            b.simulate("mouseout");
+        	var inside;
+        	var eventHandle = LANE.ToolTips.after("visibleChange", function(e) {
+        		var boundingBox = this.get("boundingBox");
+        		inside = Y.DOM.inViewportRegion(Y.Node.getDOMNode(boundingBox));
+                eventHandle.detach();
+                b.simulate("mouseout");
+        	});
+            b.simulate("mouseover",{clientX:right,pageX:right});
+            this.wait(function() {
+            	Y.Assert.isTrue(inside);
+            }, 500);
         }
     });
-    
     Y.one('body').addClass('yui3-skin-sam');
     new Y.Console({
         newestOnTop: false
     }).render('#log');
-    
     
     Y.Test.Runner.add(tooltipTestCase);
     Y.Test.Runner.run();
