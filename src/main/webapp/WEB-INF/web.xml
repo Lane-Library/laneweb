@@ -14,6 +14,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            classpath:net/bull/javamelody/monitoring-spring.xml
             /WEB-INF/spring/bassett.xml
             /WEB-INF/spring/cme.xml
             /WEB-INF/spring/cocoon.xml
@@ -62,6 +63,10 @@
     <filter>
         <filter-name>monitoring</filter-name>
         <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+        <init-param>
+            <param-name>displayed-counters</param-name>
+            <param-value>http,sql,error,log,spring</param-value>
+        </init-param>
     </filter>
     
     <filter>
