@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.ldap.LDAPData;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
@@ -259,7 +262,16 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
                 }
             }
         }
-        // addToModel(Model.JS_ENABLED, getBooleanValue(request, session, Model.JS_ENABLED), model);
+        //get the parent path (eg /a/b.html for /a/b-sub.html)
+        String basePath = (String) model.get(Model.BASE_PATH);
+        String path = request.getRequestURI().substring(basePath.length());
+        if (path.indexOf(".html") > -1 && path.indexOf('-') > -1) {
+            int dashIndex = path.lastIndexOf('-');
+            if (dashIndex > -1) {
+                String parentPath = path.substring(0, dashIndex) + ".html";
+                model.put("parent-path", parentPath);
+            }
+        }
         super.process(request, response);
     }
 }
