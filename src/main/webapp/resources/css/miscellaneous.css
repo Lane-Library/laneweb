@@ -37,3 +37,6 @@ em {
     list-style: decimal;
     margin-bottom:1em;
 }
+.divider {
+    text-align:center;
+}
