@@ -55,7 +55,9 @@
             <a target="_blank" href="{s:url}">
                 <xsl:apply-templates select="s:title"/>
             </a>
-            <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="moreInfo">more info</a>
+            <xsl:if test="s:description">
+                <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="moreInfo">more info</a>
+            </xsl:if>
         </li>
     </xsl:template>
     
@@ -146,7 +148,9 @@
                     </xsl:call-template>
                 </xsl:otherwise>
             </xsl:choose>
-            <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="moreInfo">more info</a>
+            <xsl:if test="s:description or count(s:versions/s:version) > 1">
+                <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="moreInfo">more info</a>
+            </xsl:if>
         </li>
     </xsl:template>
     
