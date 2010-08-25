@@ -38,14 +38,20 @@
     }, true);
     
     LANE.laneSearchForm.addEventListener("submit", function(e) {
-        iui.laneSubmitForm(e.target);
         e.preventDefault();
+        if(!LANE.searchInput.value){
+            alert('nothing to search for');
+        }
+        else{
+            iui.laneSubmitForm(e.target);
+        }
     }, true);
     
     LANE.picoForm.addEventListener("submit", function(e) {
         var inputs, qString = '', i,
         inputs = e.target.getElementsByTagName('input'),
         qInput;
+        e.preventDefault();
         for (i = 0; i < inputs.length; i++) {
             if (inputs[i].name.match(/(p|i|c|o)/) && inputs[i].value) {
                 qString += '(' + inputs[i].value + ')';
@@ -61,8 +67,12 @@
             }
         }
         qInput.value = qString;
-        iui.laneSubmitForm(e.target);
-        e.preventDefault();
+        if(!qInput.value){
+            alert('nothing to search for');
+        }
+        else{
+            iui.laneSubmitForm(e.target);
+        }
     }, true);
     
     addEventListener("afterinsert", function(event){
