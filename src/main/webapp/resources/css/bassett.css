@@ -8,6 +8,10 @@
 #bassettContent a{
     border-bottom: 0px;
 }
+#bassettContent td{
+    border:none;
+}
+
 
 .profileImage{
     clear : both;
