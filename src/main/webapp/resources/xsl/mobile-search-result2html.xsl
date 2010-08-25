@@ -57,10 +57,10 @@
             </a>
             <xsl:choose>
                 <xsl:when test="s:description and starts-with(s:resourceName,'PubMed')">
-                    <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="moreInfo">abstract</a>
+                    <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="more">abstract</a>
                 </xsl:when>
                 <xsl:when test="s:description">
-                    <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="moreInfo">more info</a>
+                    <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="more">more info</a>
                 </xsl:when>
             </xsl:choose>
         </li>
@@ -154,7 +154,7 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:if test="s:description or count(s:versions/s:version) > 1">
-                <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="moreInfo">more info</a>
+                <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="more">more info</a>
             </xsl:if>
         </li>
     </xsl:template>
@@ -396,7 +396,7 @@
 
     <!-- add Next toggle to search results -->
     <xsl:template name="paginationLinks">
-        <li class="resultsNav">
+        <li class="more resultsNav">
             <xsl:if test="/s:resources/s:pagination/@next != 'false'">
                 <xsl:variable name="n">
                     <xsl:choose>
