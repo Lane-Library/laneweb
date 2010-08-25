@@ -55,9 +55,14 @@
             <a target="_blank" href="{s:url}">
                 <xsl:apply-templates select="s:title"/>
             </a>
-            <xsl:if test="s:description">
-                <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="moreInfo">more info</a>
-            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="s:description and starts-with(s:resourceName,'PubMed')">
+                    <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="moreInfo">abstract</a>
+                </xsl:when>
+                <xsl:when test="s:description">
+                    <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="moreInfo">more info</a>
+                </xsl:when>
+            </xsl:choose>
         </li>
     </xsl:template>
     
