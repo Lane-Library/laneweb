@@ -51,10 +51,26 @@
     </xsl:template>
 
     <xsl:template match="s:result[@type='searchContent']" mode="brief">
+        <xsl:variable name="resourceName">
+            <xsl:choose>
+                <xsl:when test="starts-with(s:resourceName,'PubMed')">PubMed</xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="s:resourceName"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         <li>
             <a target="_blank" href="{s:url}">
                 <xsl:apply-templates select="s:title"/>
             </a>
+            <xsl:apply-templates select="s:pub-title"/>
+            <xsl:apply-templates select="s:pub-date"/>
+            <xsl:apply-templates select="s:pub-volume"/>
+            <xsl:apply-templates select="s:pub-issue"/>
+            <xsl:apply-templates select="s:page"/>
+            <div class="sourceLink">
+                <xsl:value-of select="$resourceName"/>
+            </div>
             <xsl:choose>
                 <xsl:when test="s:description and starts-with(s:resourceName,'PubMed')">
                     <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="more">abstract</a>
