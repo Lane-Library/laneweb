@@ -212,28 +212,28 @@
         }();
         LANE.Y.on('click', function(e) {
             LANE.tracking.trackEvent(e);
-        //put in a delay for safari to make the tracking request:
-        //TODO: revisit this and make sure it actually is useful
-        if (LANE.Y.UA.webkit && LANE.tracking.isTrackable(e)) {
-                t = e.target;
-                parent = t;
-                while (parent) {
-                    if (parent.get('clicked') !== undefined) {
-                        return;
+            //put in a delay for safari to make the tracking request:
+            //TODO: revisit this and make sure it actually is useful
+            if (LANE.Y.UA.webkit && LANE.tracking.isTrackable(e)) {
+                    t = e.target;
+                    parent = t;
+                    while (parent) {
+                        if (parent.get('clicked') !== undefined) {
+                            return;
+                        }
+                        parent = parent.get('parentNode');
                     }
-                    parent = parent.get('parentNode');
-                }
-                while (t) {
-                    if (t.get('href') && (!t.get('rel') && !t.get('target'))) {
-                        f = function() {
-                            window.location = t.get('href');
-                        };
-                        e.preventDefault();
-                        setTimeout(f, 200);
-                        break;
+                    while (t) {
+                        if (t.get('href') && (!t.get('rel') && !t.get('target'))) {
+                            f = function() {
+                                window.location = t.get('href');
+                            };
+                            e.preventDefault();
+                            setTimeout(f, 200);
+                            break;
+                        }
+                        t = t.get('parentNode');
                     }
-                    t = t.get('parentNode');
-                }
-        }
+            }
         }, document);
 })();
