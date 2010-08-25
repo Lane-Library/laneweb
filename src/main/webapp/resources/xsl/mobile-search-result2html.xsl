@@ -28,15 +28,17 @@
     <xsl:template match="/">
 
         <xsl:choose>
+            <!-- abstract/info view of a single record -->
             <xsl:when test="contains($query-string,'rid=')">
                 <xsl:apply-templates select="//s:result[s:id = $rid]" mode="full"/>
             </xsl:when>
+            <!-- fragment for populating "next" content -->
             <xsl:when test="contains($query-string,'show=')">
                 <xsl:apply-templates select="//s:result" mode="brief"/>
                 <xsl:call-template name="paginationLinks"/>
             </xsl:when>
             <xsl:otherwise>
-                <ul class="panel" style="padding:0px;" id="results" title="Results" selected="true">
+                <ul id="results" title="Results" selected="true">
                     <li class="rHead">
                         <xsl:value-of select="format-number(/s:resources/@size, '###,##0')"/> results
                         <xsl:if test="string-length($search-terms)">
@@ -91,7 +93,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <div class="panel">
+        <div class="absInfo">
             <a target="_blank" href="{s:url}">
                 <xsl:apply-templates select="s:title"/>
             </a>
@@ -176,78 +178,76 @@
     </xsl:template>
     
     <xsl:template match="s:result[@type='eresource']" mode="full">
-        <div class="panel">
-                <div>
-                    <xsl:choose>
-                        <xsl:when
-                            test="s:versions/s:version[1]/s:links/s:link[1]/@type = 'getPassword'">
-                            <xsl:call-template name="buildAnchor">
-                                <xsl:with-param name="type">first</xsl:with-param>
-                                <xsl:with-param name="link">
-                                    <xsl:copy-of
-                                        select="s:versions/s:version[1]/s:links/s:link[2]/node()"/>
-                                </xsl:with-param>
-                                <xsl:with-param name="title" select="s:title"/>
-                            </xsl:call-template>
-                            <xsl:call-template name="firstLinkText">
-                                <xsl:with-param name="version" select="s:versions/s:version[1]"/>
-                            </xsl:call-template>
-                            <xsl:call-template name="buildAnchor">
-                                <xsl:with-param name="type">getPassword</xsl:with-param>
-                                <xsl:with-param name="link">
-                                    <xsl:copy-of
-                                        select="s:versions/s:version[1]/s:links/s:link[1]/node()"/>
-                                </xsl:with-param>
-                            </xsl:call-template>
-                            <xsl:apply-templates select="s:versions//s:link[@type!='getPassword']"
-                                mode="remainder-links"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:call-template name="buildAnchor">
-                                <xsl:with-param name="type">first</xsl:with-param>
-                                <xsl:with-param name="link">
-                                    <xsl:copy-of
-                                        select="s:versions/s:version[1]/s:links/s:link[1]/node()"/>
-                                </xsl:with-param>
-                                <xsl:with-param name="title" select="s:title"/>
-                            </xsl:call-template>
-                            <xsl:call-template name="firstLinkText">
-                                <xsl:with-param name="version" select="s:versions/s:version[1]"/>
-                            </xsl:call-template>
-                            <xsl:apply-templates select="s:versions//s:link" mode="remainder-links"
-                            />
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    <xsl:choose>
-                        <xsl:when test="s:recordType = 'auth'">
-                            <div class="moreResults">
-                                <span class="sourceLink">Lane Community Info File</span>
-                            </div>
-                        </xsl:when>
-                        <!-- add catalog link to all bibs except those that already have one (history) -->
-                        <xsl:when test="s:recordType = 'bib' and not(s:versions//s:label[.='catalog record'])">
-                            <div class="moreResults">
-                                <a target="_blank" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
-                            </div>
-                        </xsl:when>
-                        <xsl:when test="s:recordType = 'faq'">
-                            <div class="moreResults">
-                                <span class="sourceLink">Lane FAQ</span>
-                            </div>
-                        </xsl:when>
-                        <xsl:when test="s:recordType = 'news'">
-                            <div class="moreResults">
-                                <span class="sourceLink">Lane News</span>
-                            </div>
-                        </xsl:when>
-                        <xsl:when test="s:recordType = 'web'">
-                            <div class="moreResults">
-                                <span class="sourceLink">Lane Web Page</span>
-                            </div>
-                        </xsl:when>
-                    </xsl:choose>
-                </div>
-                <xsl:apply-templates select="s:description"/>
+        <div class="absInfo">
+            <xsl:choose>
+                <xsl:when
+                    test="s:versions/s:version[1]/s:links/s:link[1]/@type = 'getPassword'">
+                    <xsl:call-template name="buildAnchor">
+                        <xsl:with-param name="type">first</xsl:with-param>
+                        <xsl:with-param name="link">
+                            <xsl:copy-of
+                                select="s:versions/s:version[1]/s:links/s:link[2]/node()"/>
+                        </xsl:with-param>
+                        <xsl:with-param name="title" select="s:title"/>
+                    </xsl:call-template>
+                    <xsl:call-template name="firstLinkText">
+                        <xsl:with-param name="version" select="s:versions/s:version[1]"/>
+                    </xsl:call-template>
+                    <xsl:call-template name="buildAnchor">
+                        <xsl:with-param name="type">getPassword</xsl:with-param>
+                        <xsl:with-param name="link">
+                            <xsl:copy-of
+                                select="s:versions/s:version[1]/s:links/s:link[1]/node()"/>
+                        </xsl:with-param>
+                    </xsl:call-template>
+                    <xsl:apply-templates select="s:versions//s:link[@type!='getPassword']"
+                        mode="remainder-links"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:call-template name="buildAnchor">
+                        <xsl:with-param name="type">first</xsl:with-param>
+                        <xsl:with-param name="link">
+                            <xsl:copy-of
+                                select="s:versions/s:version[1]/s:links/s:link[1]/node()"/>
+                        </xsl:with-param>
+                        <xsl:with-param name="title" select="s:title"/>
+                    </xsl:call-template>
+                    <xsl:call-template name="firstLinkText">
+                        <xsl:with-param name="version" select="s:versions/s:version[1]"/>
+                    </xsl:call-template>
+                    <xsl:apply-templates select="s:versions//s:link" mode="remainder-links"
+                    />
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:choose>
+                <xsl:when test="s:recordType = 'auth'">
+                    <div class="moreResults">
+                        <span class="sourceLink">Lane Community Info File</span>
+                    </div>
+                </xsl:when>
+                <!-- add catalog link to all bibs except those that already have one (history) -->
+                <xsl:when test="s:recordType = 'bib' and not(s:versions//s:label[.='catalog record'])">
+                    <div class="moreResults">
+                        <a target="_blank" href="http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?BBID={s:recordId}">Lane Catalog record</a>
+                    </div>
+                </xsl:when>
+                <xsl:when test="s:recordType = 'faq'">
+                    <div class="moreResults">
+                        <span class="sourceLink">Lane FAQ</span>
+                    </div>
+                </xsl:when>
+                <xsl:when test="s:recordType = 'news'">
+                    <div class="moreResults">
+                        <span class="sourceLink">Lane News</span>
+                    </div>
+                </xsl:when>
+                <xsl:when test="s:recordType = 'web'">
+                    <div class="moreResults">
+                        <span class="sourceLink">Lane Web Page</span>
+                    </div>
+                </xsl:when>
+            </xsl:choose>
+        <xsl:apply-templates select="s:description"/>
         </div>  
     </xsl:template>
 

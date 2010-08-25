@@ -82,6 +82,9 @@ body > ul > li a {
     padding-left:140px;
 }
 
+#results {
+    padding:0;
+}
 #results li {
     color:gray;
     font-size:14px;
@@ -102,6 +105,12 @@ body > ul > li a {
     font-size:10px;
     background:url('/././images/m/listArrow.png') no-repeat scroll right center transparent;
 }
+div.absInfo {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 20px;
+}
 .a2z li {
-    font-size:18px;
+    font-size:20px;
 }
