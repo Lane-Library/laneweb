@@ -8,6 +8,7 @@
     LANE.laneSearchForm = document.getElementById('laneSearch');
     LANE.searchCancel = document.getElementById('searchCancel');
     LANE.picoForm = document.getElementById('pico');
+    LANE.backButton = document.getElementById('backButton');
     
     LANE.searchInput.addEventListener("focus", function(e) {
         if (LANE.searchTag.innerHTML == e.target.title) {
@@ -81,12 +82,24 @@
             scrollTo(100,0);
         }
     }, true);
+
+    document.addEventListener("click", function(e) {
+        if(e.target != LANE.backButton){
+            LANE.backButton.scroll = window.pageYOffset;
+        }
+    }, true);
+
+    /* override iui.goBack() with scrolling memory */
+    /* do this in pageHistory array instead? */
+    LANE.iuiGoBack = iui.goBack;
+    iui.goBack = function(){
+        LANE.iuiGoBack();
+        if(LANE.backButton.scroll){
+            var f = function(){
+                scrollTo(0,LANE.backButton.scroll);
+            }
+            setTimeout(f,100);
+        }
+    };
     
-    /*
-    if (!Get_Cookie('mode')) {
-        Set_Cookie('mode', 'default', '365');
-    } else {
-        // alert(Get_Cookie('mode'));
-    }
-    */
 })();
