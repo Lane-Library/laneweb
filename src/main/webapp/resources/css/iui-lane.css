@@ -76,6 +76,7 @@ body > ul > li a {
 }
 #pico input {
     padding-left:2px;
+    margin:0 0 10px 0;
 }
 #login .row span {
     padding-left:140px;
