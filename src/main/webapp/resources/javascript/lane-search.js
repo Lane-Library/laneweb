@@ -31,11 +31,11 @@
         searchTipsLink.set('href',searchTipsLink.get('href')+'#'+searchSourceSelect.get('value'));
         searchTextInput.setHintText(selectedOption.get('title'));
         searchSourceSelect.on('change', function(e) {
-            if (search.searchTermsPresent()) {
-                search.submitSearch();
-            } else {
+//            if (search.searchTermsPresent()) {
+//                search.submitSearch();
+//            } else {
                 Y.fire('lane:searchSourceChange', {newVal:this.get("value")});
-            }
+//            }
         });
         searchTermsSuggest.on("lane:suggestSelect",function(e){
             search.submitSearch();
