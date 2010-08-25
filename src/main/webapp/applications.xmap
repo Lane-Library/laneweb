@@ -43,6 +43,16 @@
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
+                <!-- return xhtmlized metasearch content results suitable for mobile display -->
+                <map:match pattern="search/mobile/content/html/*" type="wildcard">
+                    <map:generate type="search-content">
+                        <map:parameter name="engine-list" value="{1}"/>
+                    </map:generate>
+                    <map:transform type="joost" src="${default-resources-base}/xsl/resource-paginator.stx"/>
+                    <map:transform type="query-highlighting"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-search-result2html.xsl"/>
+                    <map:serialize type="xml"/>
+                </map:match>
                 <!-- search/merged/html returns xhtmlized merged metasearch and eresources results -->
                 <map:match pattern="search/merged/html/*" type="wildcard">
                     <map:generate type="merged-search">
@@ -52,6 +62,17 @@
                     <map:transform type="joost" src="${default-resources-base}/xsl/resource-paginator.stx"/>
                     <map:transform type="query-highlighting"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
+                    <map:serialize type="xml"/>
+                </map:match>
+                <!-- return xhtmlized merged metasearch and eresources results suitable for mobile display -->
+                <map:match pattern="search/mobile/merged/html/*" type="wildcard">
+                    <map:generate type="merged-search">
+                        <map:parameter name="timeout" value="5000"/>
+                        <map:parameter name="engine-list" value="{1}"/>
+                    </map:generate>
+                    <map:transform type="joost" src="${default-resources-base}/xsl/resource-paginator.stx"/>
+                    <map:transform type="query-highlighting"/>
+                    <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/merged/history/html returns xhtmlized merged metasearch and history eresources results -->

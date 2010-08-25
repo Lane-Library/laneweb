@@ -92,6 +92,8 @@
                         <exclude>**/swfobject.js</exclude>
                         <exclude>**/lane-all.css</exclude>
                         <exclude>**/lane-all.js</exclude>
+                        <exclude>**/lane-mobile.css</exclude>
+                        <exclude>**/lane-mobile.js</exclude>
                     </excludes>
                     <aggregations>
                         <aggregation>
@@ -166,6 +168,23 @@
                                 <!--  pending solution to expandies falling off page
                         <include>lane-column-height-min.js</include>
                          -->
+                            </includes>
+                        </aggregation>
+                        <aggregation>
+                            <removeIncluded>true</removeIncluded>
+                            <output>target/laneweb/resources/css/lane-mobile.css</output>
+                            <includes>
+                                <include>iui-min.css</include>
+                                <include>iui-lane-min.css</include>
+                                <include>iui-default-theme-min.css</include>
+                            </includes>
+                        </aggregation>
+                        <aggregation>
+                            <removeIncluded>true</removeIncluded>
+                            <output>target/laneweb/resources/javascript/lane-mobile.js</output>
+                            <includes>
+                                <include>iui-default-min.js</include>
+                                <include>iui-lane-min.js</include>
                             </includes>
                         </aggregation>
                     </aggregations>

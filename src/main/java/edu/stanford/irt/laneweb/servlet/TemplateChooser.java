@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
@@ -26,7 +27,7 @@ public class TemplateChooser {
     private Map<String, Pattern> patternMap;
 
     /** a Map of regular expressions associated with templates */
-    private Map<String, String> templateMap = Collections.emptyMap();
+    private Map<String, String> templateMap = new LinkedHashMap<String, String>();
 
     public TemplateChooser(final String defaultTemplate, final Map<String, String> templateMap) {
         if (null == defaultTemplate) {

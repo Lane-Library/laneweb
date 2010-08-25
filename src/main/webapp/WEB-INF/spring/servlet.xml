@@ -114,10 +114,10 @@
         class="edu.stanford.irt.laneweb.servlet.TemplateChooser">
         <constructor-arg value="template"/>
         <constructor-arg>
-            <!-- TODO: this should be an ordered map if more than one entry -->
             <map>
                 <entry key="^(?:/\w+|)/biomed-resources/bassett/raw/bassettLargerView.html" value="bassettLargerView"
                 />
+                <entry key="^(?:/\w+|)/m/(?:.*)" value="mobile"/>
             </map>
         </constructor-arg>
     </bean>

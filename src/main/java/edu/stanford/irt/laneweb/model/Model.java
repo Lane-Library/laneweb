@@ -73,6 +73,8 @@ public class Model extends HashMap<String, Object> {
 
     public static final String RESOURCES = "resources";
 
+    public static final String RESOURCE_ID = "rid";
+    
     public static final String SELECTION = "selection";
 
     public static final String SHOW = "show";

@@ -1,0 +1,109 @@
+/** LANE additions to iui **/
+body {
+    background:url('/././images/m/lane-bg.png');
+    background-position-x: 0;
+    background-position-y: 102px;
+    background-repeat: no-repeat;
+}
+
+body > ul > li {
+    font-size: 18px;
+}
+
+body > ul > li a {
+    color:#0C4C72;
+    /*color:SteelBlue*/;
+}
+    
+
+.loadingMask {
+    opacity: .1;
+}
+
+#loading {
+    position: absolute;
+    overflow: hidden;
+    display:none;
+    top: 12px;
+    right: 60px;
+}
+
+#laneSearch fieldset {
+    padding-top:0;    
+}
+
+#searchLink {
+    position: absolute;
+    top: 16px;
+    left: 10px;
+}
+#searchLink img {
+    width:20px;
+}
+
+.footer {
+    border:none;
+    font-size:10px;
+    color:gray;
+}
+
+.footer  a {
+    background:none;
+    display: inline;
+}
+
+.suCopy {
+    position:absolute;
+    bottom:0;
+    left:10px;
+    font-size:6px;
+}
+
+#searchInput {
+    padding-left:24px;
+    padding-right:24px;
+}
+
+#searchCancel {
+    position:absolute;
+    top:16px;
+    right:12px;
+    display:none;
+}
+
+#searchTag {
+    padding-left:22px;
+}
+#pico input {
+    padding-left:2px;
+}
+#login .row span {
+    padding-left:140px;
+}
+
+#results li {
+    color:gray;
+    font-size:14px;
+}
+#results li a {
+    background:none;
+}
+#results li.rHead {
+    font-size:12px;
+    text-align:center;
+}
+#results li.rHead strong {
+    color:black;
+    font-style:italic;
+}
+#results li .moreInfo {
+    font-size:10px;
+    background:url('/././images/m/listArrow.png') no-repeat scroll right center transparent;
+}
+.more {
+    font-size:12px;
+}
+
+.a2z li {
+    font-size:18px;
+}
