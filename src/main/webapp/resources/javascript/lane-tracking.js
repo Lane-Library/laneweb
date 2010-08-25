@@ -224,7 +224,12 @@
                         parent = parent.get('parentNode');
                     }
                     while (t) {
-                        if (t.get('href') && (!t.get('rel') && !t.get('target'))) {
+                        // have safari follow link if it's not:
+                        //  - popup or facet
+                        //    (can't halt facet click propagation b/c they need to be tracked)
+                        if (t.get('href') 
+                                && (!t.get('rel') && !t.get('target'))
+                                && !t.get('parentNode').hasClass('searchFacet') ){
                             f = function() {
                                 window.location = t.get('href');
                             };
