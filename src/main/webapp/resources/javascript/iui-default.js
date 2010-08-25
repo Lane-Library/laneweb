@@ -564,7 +564,7 @@ function slide1(fromPage, toPage, backwards, axis, cb)
 	else
 		toPage.style.left = "100%";
 
-	scrollTo(0, 1);
+	//scrollTo(0, 1);
 	toPage.setAttribute("selected", "true");
 	var percent = 100;
 	slide();

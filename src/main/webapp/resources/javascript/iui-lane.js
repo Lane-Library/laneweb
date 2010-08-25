@@ -79,7 +79,9 @@
     addEventListener("afterinsert", function(event){
         // scroll panels into viewport after page load
         if(event.insertedNode.className=="panel"){
-            scrollTo(100,0);
+            setTimeout(function(){
+                scrollTo(0,1);
+            }, 200);
         }
     }, true);
 
@@ -95,10 +97,9 @@
     iui.goBack = function(){
         LANE.iuiGoBack();
         if(LANE.backButton.scroll){
-            var f = function(){
+            setTimeout(function(){
                 scrollTo(0,LANE.backButton.scroll);
-            }
-            setTimeout(f,100);
+            }, 30);
         }
     };
     
