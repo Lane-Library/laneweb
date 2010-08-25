@@ -78,7 +78,7 @@
     
     addEventListener("afterinsert", function(event){
         // scroll panels into viewport after page load
-        if(event.insertedNode.className=="panel"){
+        if(event.insertedNode.className=="absInfo"){
             setTimeout(function(){
                 scrollTo(0,1);
             }, 200);

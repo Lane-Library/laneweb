@@ -109,7 +109,16 @@ div.absInfo {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
-    padding: 20px;
+    padding: 10px;
+}
+.pubAuthor, .pubInfo {
+    font-size:10px;
+}
+.pubInfo {
+    font-weight:bold;
+}
+.rDesc {
+    padding-top:10px;
 }
 .a2z li {
     font-size:20px;

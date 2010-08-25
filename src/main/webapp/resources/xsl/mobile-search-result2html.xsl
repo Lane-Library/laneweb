@@ -97,39 +97,37 @@
             <a target="_blank" href="{s:url}">
                 <xsl:apply-templates select="s:title"/>
             </a>
-            <div class="more">
-                <xsl:apply-templates select="s:pub-author[string-length(.) > 1]"/>
-                <div class="pubTitle">
-                    <xsl:choose>
-                        <xsl:when test="s:pub-title">
-                            <xsl:apply-templates select="s:pub-title"/>
-                            <xsl:apply-templates select="s:pub-date"/>
-                            <xsl:apply-templates select="s:pub-volume"/>
-                            <xsl:apply-templates select="s:pub-issue"/>
-                            <xsl:apply-templates select="s:page"/>
-                            <span class="sourceLink">
-                                <xsl:text> - </xsl:text>
-                                <xsl:value-of select="$resourceName"/>
-                            </span>
-                            <xsl:apply-templates select="s:contentId"/>
-                            <br />
-                            <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
-                                <a target="_blank" href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
-                            </xsl:if>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <span class="sourceLink">
-                                <xsl:value-of select="$resourceName"/>
-                            </span>
-                            <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
-                                <xsl:text> - </xsl:text>
-                                <a target="_blank" href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
-                            </xsl:if>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </div>
-                <xsl:apply-templates select="s:description"/>
+            <xsl:apply-templates select="s:pub-author[string-length(.) > 1]"/>
+            <div class="pubInfo">
+                <xsl:choose>
+                    <xsl:when test="s:pub-title">
+                        <xsl:apply-templates select="s:pub-title"/>
+                        <xsl:apply-templates select="s:pub-date"/>
+                        <xsl:apply-templates select="s:pub-volume"/>
+                        <xsl:apply-templates select="s:pub-issue"/>
+                        <xsl:apply-templates select="s:page"/>
+                        <span class="sourceLink">
+                            <xsl:text> - </xsl:text>
+                            <xsl:value-of select="$resourceName"/>
+                        </span>
+                        <xsl:apply-templates select="s:contentId"/>
+                        <br />
+                        <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
+                            <a target="_blank" href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
+                        </xsl:if>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <span class="sourceLink">
+                            <xsl:value-of select="$resourceName"/>
+                        </span>
+                        <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
+                            <xsl:text> - </xsl:text>
+                            <a target="_blank" href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
+                        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>
             </div>
+            <xsl:apply-templates select="s:description"/>
         </div>
     </xsl:template>
 
@@ -359,7 +357,7 @@
     </xsl:template>
 
     <xsl:template match="s:description">
-        <div class="resInfo">
+        <div class="rDesc">
             <xsl:apply-templates/>
         </div>
     </xsl:template>
