@@ -394,22 +394,20 @@
         </strong>
     </xsl:template>
 
-    <!-- add Previous, Next, All toggles to search results -->
+    <!-- add Next toggle to search results -->
     <xsl:template name="paginationLinks">
         <li class="resultsNav">
-            <!-- 
-            <xsl:if test="/s:resources/s:pagination/@previous != 'false'">
-                <a href="{concat($base-link,/s:resources/s:pagination/@previous)}">Previous</a>
-            </xsl:if>
-            -->
             <xsl:if test="/s:resources/s:pagination/@next != 'false'">
-                <a target="_replace" href="{concat($base-link,'&amp;show=',/s:resources/s:pagination/@next)}">more ...</a>
+                <xsl:variable name="n">
+                    <xsl:choose>
+                        <xsl:when test="/s:resources/@size - /s:resources/s:pagination/@next &lt; 20">
+                            <xsl:value-of select="/s:resources/@size - /s:resources/s:pagination/@next"/>
+                        </xsl:when>
+                        <xsl:otherwise>20</xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <a target="_replace" href="{concat($base-link,'&amp;show=',/s:resources/s:pagination/@next)}">next <xsl:value-of select="$n"/></a>
             </xsl:if>
-            <!-- 
-                <xsl:if test="/s:resources/s:pagination/@showAll = 'true'">
-                <a href="{concat($base-link,'all')}">Show All <xsl:value-of select="format-number(/s:resources/@size, '###,##0')"/> Results</a>
-            </xsl:if>
-            -->
         </li>
     </xsl:template>
 
