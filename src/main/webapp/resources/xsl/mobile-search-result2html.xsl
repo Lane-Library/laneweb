@@ -74,7 +74,7 @@
                 <xsl:value-of select="$resourceName"/>
             </div>
             <xsl:choose>
-                <xsl:when test="s:description and starts-with(s:resourceName,'PubMed')">
+                <xsl:when test="s:description and contains(s:resourceId,'pubmed')">
                     <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="more">abstract</a>
                 </xsl:when>
                 <xsl:when test="s:description">
