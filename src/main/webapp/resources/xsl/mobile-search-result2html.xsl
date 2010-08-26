@@ -394,14 +394,14 @@
         <xsl:text>.</xsl:text>
     </xsl:template>
 
-    <xsl:template match="s:contentId[contains(../s:resourceId,'pubmed')]">
+    <xsl:template match="s:contentId[starts-with(.,'PMID:')]">
         <xsl:text> - </xsl:text>
         <span class="pmid">
-            <xsl:text> PMID:</xsl:text>
-            <a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/{.}?otool=stanford"><xsl:value-of select="."/></a>
+            <xsl:text> PMID: </xsl:text>
+            <a target="_blank" href="http://www.ncbi.nlm.nih.gov/pubmed/{substring-after(.,'PMID:')}?otool=stanford"><xsl:value-of select="substring-after(.,'PMID:')"/></a>
         </span>
     </xsl:template>
-
+    
     <xsl:template match="s:keyword">
         <strong>
             <xsl:value-of select="."/>
