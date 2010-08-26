@@ -225,11 +225,11 @@ window.iui =
 		return false;
 	},
 	nativeUrlPatterns: [
-		new RegExp("^http:\/\/maps.google.com\/maps\?"),
+//		new RegExp("^http:\/\/maps.google.com\/maps\?"),
 		new RegExp("^mailto:"),
 		new RegExp("^tel:"),
-		new RegExp("^http:\/\/www.youtube.com\/watch\\?v="),
-		new RegExp("^http:\/\/www.youtube.com\/v\/"),
+//		new RegExp("^http:\/\/www.youtube.com\/watch\\?v="),
+//		new RegExp("^http:\/\/www.youtube.com\/v\/"),
 		new RegExp("^javascript:"),
 
 	],
@@ -250,7 +250,9 @@ window.iui =
 		  var reg = new RegExp('(\\s|^)'+name+'(\\s|$)');
 		self.className=self.className.replace(reg,' ');
 	  }
-	}
+	},
+	
+	$ : $
 
 };
 

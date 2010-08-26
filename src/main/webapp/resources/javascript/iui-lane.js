@@ -1,12 +1,11 @@
 (function() {
     LANE = function() {
-        var searchInput = document.getElementById('searchInput'),
-        searchTag = document.getElementById('searchTag'),
-        laneSearchForm = document.getElementById('laneSearch'),
-        searchCancel = document.getElementById('searchCancel'),
-        picoForm = document.getElementById('pico'),
-        backButton = document.getElementById('backButton'),
-        loadingElm = document.getElementById('loading'),
+        var $ = iui.$, 
+        searchInput = $('searchInput'),
+        searchTag = $('searchTag'),
+        searchCancel = $('searchCancel'),
+        backButton = $('backButton'),
+        loadingElm = $('loading'),
         iuiGoBack;
 
         searchInput.addEventListener("focus", function(e) {
@@ -37,7 +36,7 @@
             e.preventDefault();
         }, true);
         
-        laneSearchForm.addEventListener("submit", function(e) {
+        $('laneSearch').addEventListener("submit", function(e) {
             e.preventDefault();
             if(!searchInput.value){
                 alert('nothing to search for');
@@ -47,7 +46,7 @@
             }
         }, true);
         
-        picoForm.addEventListener("submit", function(e) {
+        $('pico').addEventListener("submit", function(e) {
             var inputs, qString = '', i,
             inputs = e.target.getElementsByTagName('input'),
             qInput;
@@ -122,5 +121,4 @@
             }, 30);
         }
     };
-    
 })();
