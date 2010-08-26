@@ -46,7 +46,8 @@ em {
     height:13px;
     width:13px;
     background-repeat:no-repeat;
-    font-size:0
+    font-size:0;
+    text-indent:-1000px
 }
 .rss-link:hover {
     background-image:url(/././graphics/icons/rss_over.png);
