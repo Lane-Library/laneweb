@@ -41,17 +41,14 @@ em {
     text-align:center;
 }
 .rss-link {
-    display:block;
     float:right;
     background-image:url(/././graphics/icons/rss.png);
     height:13px;
     width:13px;
-    background-repeat:no-repeat
+    background-repeat:no-repeat;
+    font-size:0
 }
 .rss-link:hover {
     background-image:url(/././graphics/icons/rss_over.png);
     border-bottom:none;
-}
-.rss-link span {
-    display:none;
 }

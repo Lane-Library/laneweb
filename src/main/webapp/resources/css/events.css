@@ -1,27 +1,31 @@
+/*this is the month/date box*/
 .yui-ge div.first .events .yui-gd div.first {
-  font-family:Georgia, "Times New Roman", Times, serif;
-  text-align:center;
-  width:22px;
-  border-left:none;
-  margin-top:0;
+    font-family:Georgia, "Times New Roman", Times, serif;
+    text-align:center;
+    width:22px;
+    border-left:none;
+    margin-top:0;
+    padding-bottom:5px;
 }
-.yui-ge div.first .events .yui-gd .yui-u {
-  border-left:1px solid #EAE9E6;
-  font-size:11px;
-  line-height:15px;
-  margin-bottom:10px;
-  margin-top:5px;
-  padding-left:11px;
-}
+
 .events .month {
-  font-size:11px;
-  color:#820000;
-  text-transform:uppercase;
+    font-size:11px;
+    color:#820000;
+    text-transform:uppercase;
 }
 .events .day {
-  font-size:21px;
-  color:#565347;
+    font-size:21px;
+    color:#565347;
+}
+/* this is the box on the right with the course link*/
+.yui-ge div.first .events .yui-gd .yui-u {
+    border-left:1px solid #EAE9E6;
+    font-size:11px;
+    line-height:15px;
+    margin-bottom:10px;
+    margin-top:5px;
+    padding-left:11px;
 }
 .events .time {
-  color:#820000;
+    color:#820000;
 }
