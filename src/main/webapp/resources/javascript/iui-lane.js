@@ -9,7 +9,26 @@
     LANE.searchCancel = document.getElementById('searchCancel');
     LANE.picoForm = document.getElementById('pico');
     LANE.backButton = document.getElementById('backButton');
+    LANE.loadingElm = document.getElementById('loading');
     
+    LANE.submitForm = function(form)
+    {
+        iui.addClass(form.parentNode, "loadingMask");
+        LANE.loadingElm.style.display = 'block';
+        for (i = 0; i < form.elements.length; ++i)
+        {
+            if (form.elements[i].type == 'text'){
+                form.elements[i].blur();
+            }
+        }
+        function clear() {
+            iui.removeClass(form.parentNode, "loadingMask"); 
+            LANE.loadingElm.style.display = 'none';
+            //scrollTo(0, 1);
+        }
+        iui.showPageByHref(form.action, form, form.method || "GET", null, clear);
+    };
+
     LANE.searchInput.addEventListener("focus", function(e) {
         if (LANE.searchTag.innerHTML == e.target.title) {
             LANE.searchTag.innerHTML = '';
@@ -44,7 +63,7 @@
             alert('nothing to search for');
         }
         else{
-            iui.laneSubmitForm(e.target);
+            LANE.submitForm(e.target);
         }
     }, true);
     
@@ -72,7 +91,7 @@
             alert('nothing to search for');
         }
         else{
-            iui.laneSubmitForm(e.target);
+            LANE.submitForm(e.target);
         }
     }, true);
     

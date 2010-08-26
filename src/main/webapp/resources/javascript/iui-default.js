@@ -104,7 +104,7 @@ window.iui =
 		iui.showPage(page, true);
 	},
 
-	showPageByHref: function(href, args, method, replace, cb)
+	showPageByHref: function(href, form, method, replace, cb)
 	{
 	  // I don't think we need onerror, because readstate will still go to 4 in that case
 	  function spbhCB(xhr) 
@@ -128,7 +128,8 @@ window.iui =
 			setTimeout(cb, 1000, true);
 		}
 	  };
-	  iui.ajax(href, args, method, spbhCB);
+	  form = (form) ? encodeForm(form) : null;
+	  iui.ajax(href, form, method, spbhCB);
 	},
 	
 	// Callback function gets a single argument, the XHR
@@ -249,27 +250,7 @@ window.iui =
 		  var reg = new RegExp('(\\s|^)'+name+'(\\s|$)');
 		self.className=self.className.replace(reg,' ');
 	  }
-	},
-	
-	/**TODO: move this out of default file */
-	laneSubmitForm: function(form)
-	{
-	    iui.addClass(form.parentNode, "loadingMask");
-	    $('loading').style.display = 'block';
-	    for (i = 0; i < form.elements.length; ++i)
-	    {
-	        if (form.elements[i].type == 'text'){
-	            form.elements[i].blur();
-	        }
-	    }
-	    function clear() {
-	        iui.removeClass(form.parentNode, "loadingMask"); 
-	        $('loading').style.display = 'none';
-	        //scrollTo(0, 1);
-	    }
-	    iui.showPageByHref(form.action, encodeForm(form), form.method || "GET", null, clear);
 	}
-
 
 };
 
@@ -624,7 +605,7 @@ function preloadImages()
 function submitForm(form)
 {
     iui.addClass(form, "progress");
-    iui.showPageByHref(form.action, encodeForm(form), form.method || "GET", null, clear);
+    iui.showPageByHref(form.action, form, form.method || "GET", null, clear);
     function clear() {   iui.removeClass(form, "progress"); }
 }
 
