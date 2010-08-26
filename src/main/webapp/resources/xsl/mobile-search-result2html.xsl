@@ -38,7 +38,7 @@
                 <xsl:call-template name="paginationLinks"/>
             </xsl:when>
             <xsl:otherwise>
-                <ul id="results" title="Results" selected="true">
+                <ul id="results" title="Results">
                     <li class="rHead">
                         <xsl:value-of select="format-number(/s:resources/@size, '###,##0')"/> results
                         <xsl:if test="string-length($search-terms)">
