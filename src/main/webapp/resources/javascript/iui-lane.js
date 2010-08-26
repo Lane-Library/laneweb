@@ -1,99 +1,100 @@
 (function() {
+    LANE = function() {
+        var searchInput = document.getElementById('searchInput'),
+        searchTag = document.getElementById('searchTag'),
+        laneSearchForm = document.getElementById('laneSearch'),
+        searchCancel = document.getElementById('searchCancel'),
+        picoForm = document.getElementById('pico'),
+        backButton = document.getElementById('backButton'),
+        loadingElm = document.getElementById('loading'),
+        iuiGoBack;
 
-    if (typeof LANE == "undefined" || !LANE) {
-        LANE = {};
-    }
-    LANE.searchInput = document.getElementById('searchInput');
-    LANE.searchTag = document.getElementById('searchTag');
-    LANE.laneSearchForm = document.getElementById('laneSearch');
-    LANE.searchCancel = document.getElementById('searchCancel');
-    LANE.picoForm = document.getElementById('pico');
-    LANE.backButton = document.getElementById('backButton');
-    LANE.loadingElm = document.getElementById('loading');
-    
-    LANE.submitForm = function(form)
-    {
-        iui.addClass(form.parentNode, "loadingMask");
-        LANE.loadingElm.style.display = 'block';
-        for (i = 0; i < form.elements.length; ++i)
-        {
-            if (form.elements[i].type == 'text'){
-                form.elements[i].blur();
+        searchInput.addEventListener("focus", function(e) {
+            if (searchTag.innerHTML == e.target.title) {
+                searchTag.innerHTML = '';
             }
-        }
-        function clear() {
-            iui.removeClass(form.parentNode, "loadingMask"); 
-            LANE.loadingElm.style.display = 'none';
-            //scrollTo(0, 1);
-        }
-        iui.showPageByHref(form.action, form, form.method || "GET", null, clear);
-    };
+        }, true);
 
-    LANE.searchInput.addEventListener("focus", function(e) {
-        if (LANE.searchTag.innerHTML == e.target.title) {
-            LANE.searchTag.innerHTML = '';
-        }
-    }, true);
+        searchInput.addEventListener("blur", function(e) {
+            if (!e.target.value) {
+                searchTag.innerHTML = e.target.title;
+            }
+        }, true);
 
-    LANE.searchInput.addEventListener("blur", function(e) {
-        if (!e.target.value) {
-            LANE.searchTag.innerHTML = e.target.title;
-        }
-    }, true);
-
-    LANE.searchInput.addEventListener("keyup", function(e) {
-        if (!e.target.value) {
-            LANE.searchCancel.style.display = 'none';
-        }
-        else{
-            LANE.searchCancel.style.display = 'block';
-        }
-    }, true);
-    
-    LANE.searchCancel.addEventListener("click", function(e) {
-        LANE.searchCancel.style.display = 'none';
-        LANE.searchInput.value = '';
-        LANE.searchInput.focus();
-        e.preventDefault();
-    }, true);
-    
-    LANE.laneSearchForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        if(!LANE.searchInput.value){
-            alert('nothing to search for');
-        }
-        else{
-            LANE.submitForm(e.target);
-        }
-    }, true);
-    
-    LANE.picoForm.addEventListener("submit", function(e) {
-        var inputs, qString = '', i,
-        inputs = e.target.getElementsByTagName('input'),
-        qInput;
-        e.preventDefault();
-        for (i = 0; i < inputs.length; i++) {
-            if (inputs[i].name.match(/(p|i|c|o)/) && inputs[i].value) {
-                qString += '(' + inputs[i].value + ')';
+        searchInput.addEventListener("keyup", function(e) {
+            if (!e.target.value) {
+                searchCancel.style.display = 'none';
             }
-            else if(inputs[i].name == 'q'){
-                qInput = inputs[i];
+            else{
+                searchCancel.style.display = 'block';
             }
-        }
-        if ( qString.length ){
-            qString = qString.replace(/\)\(/g, ") AND (");
-            if (qString.indexOf('(') === 0 && qString.indexOf(')') == qString.length - 1) {
-                qString = qString.replace(/(\(|\))/g, '');
+        }, true);
+        
+        searchCancel.addEventListener("click", function(e) {
+            searchCancel.style.display = 'none';
+            searchInput.value = '';
+            searchInput.focus();
+            e.preventDefault();
+        }, true);
+        
+        laneSearchForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            if(!searchInput.value){
+                alert('nothing to search for');
             }
-        }
-        qInput.value = qString;
-        if(!qInput.value){
-            alert('nothing to search for');
-        }
-        else{
-            LANE.submitForm(e.target);
-        }
-    }, true);
+            else{
+                LANE.submitForm(e.target);
+            }
+        }, true);
+        
+        picoForm.addEventListener("submit", function(e) {
+            var inputs, qString = '', i,
+            inputs = e.target.getElementsByTagName('input'),
+            qInput;
+            e.preventDefault();
+            for (i = 0; i < inputs.length; i++) {
+                if (inputs[i].name.match(/(p|i|c|o)/) && inputs[i].value) {
+                    qString += '(' + inputs[i].value + ')';
+                }
+                else if(inputs[i].name == 'q'){
+                    qInput = inputs[i];
+                }
+            }
+            if ( qString.length ){
+                qString = qString.replace(/\)\(/g, ") AND (");
+                if (qString.indexOf('(') === 0 && qString.indexOf(')') == qString.length - 1) {
+                    qString = qString.replace(/(\(|\))/g, '');
+                }
+            }
+            qInput.value = qString;
+            if(!qInput.value){
+                alert('nothing to search for');
+            }
+            else{
+                LANE.submitForm(e.target);
+            }
+        }, true);
+        
+        return {
+            submitForm : function(form) {
+                iui.addClass(form.parentNode, "loadingMask");
+                loadingElm.style.display = 'block';
+                for (i = 0; i < form.elements.length; ++i)
+                {
+                    if (form.elements[i].type == 'text'){
+                        form.elements[i].blur();
+                    }
+                }
+                function clear() {
+                    iui.removeClass(form.parentNode, "loadingMask"); 
+                    loadingElm.style.display = 'none';
+                    //scrollTo(0, 1);
+                }
+                iui.showPageByHref(form.action, form, form.method || "GET", null, clear);
+            },
+            backButton : backButton
+        };
+    }();
     
     addEventListener("afterinsert", function(event){
         // scroll panels into viewport after page load
@@ -112,9 +113,9 @@
 
     /* override iui.goBack() with scrolling memory */
     /* do this in pageHistory array instead? */
-    LANE.iuiGoBack = iui.goBack;
+    iuiGoBack = iui.goBack;
     iui.goBack = function(){
-        LANE.iuiGoBack();
+        iuiGoBack();
         if(LANE.backButton.scroll){
             setTimeout(function(){
                 scrollTo(0,LANE.backButton.scroll);
