@@ -194,8 +194,7 @@
                                 if ((/cookiesFetch/).test(link.get('pathname'))) {
                                     return true;
                                 }
-                                //otherwise rely on normal tracking for .html and / unless
-                                //a parent has a clicked function
+                                //otherwise rely on normal tracking for .html
                                 if ((/\.html$/).test(link.get('pathname')) || (/\/$/).test(link.get('pathname'))) {
                                     return false;
                                 }
@@ -215,14 +214,7 @@
             //put in a delay for safari to make the tracking request:
             //TODO: revisit this and make sure it actually is useful
             if (LANE.Y.UA.webkit && LANE.tracking.isTrackable(e)) {
-                    t = e.target;
-                    parent = t;
-                    while (parent) {
-                        if (parent.get('clicked') !== undefined) {
-                            return;
-                        }
-                        parent = parent.get('parentNode');
-                    }
+                    var t = e.target;
                     while (t) {
                         // have safari follow link if it's not:
                         //  - popup or facet
