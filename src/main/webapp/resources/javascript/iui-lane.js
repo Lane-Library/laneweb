@@ -74,6 +74,24 @@
             }
         }, true);
         
+        /* override iui.goBack() with scrolling memory */
+        /* do this in pageHistory array instead? */
+        iuiGoBack = iui.goBack;
+        iui.goBack = function(){
+            iuiGoBack();
+            if(backButton.scroll){
+                setTimeout(function(){
+                    scrollTo(0,backButton.scroll);
+                }, 30);
+            }
+        };
+        document.addEventListener("click", function(e) {
+            if(e.target != backButton){
+                backButton.scroll = window.pageYOffset;
+            }
+        }, true);
+
+        
         return {
             submitForm : function(form) {
                 iui.addClass(form.parentNode, "loadingMask");
@@ -90,8 +108,7 @@
                     //scrollTo(0, 1);
                 }
                 iui.showPageByHref(form.action, form, form.method || "GET", null, clear);
-            },
-            backButton : backButton
+            }
         };
     }();
     
@@ -104,21 +121,4 @@
         }
     }, true);
 
-    document.addEventListener("click", function(e) {
-        if(e.target != LANE.backButton){
-            LANE.backButton.scroll = window.pageYOffset;
-        }
-    }, true);
-
-    /* override iui.goBack() with scrolling memory */
-    /* do this in pageHistory array instead? */
-    iuiGoBack = iui.goBack;
-    iui.goBack = function(){
-        iuiGoBack();
-        if(LANE.backButton.scroll){
-            setTimeout(function(){
-                scrollTo(0,LANE.backButton.scroll);
-            }, 30);
-        }
-    };
 })();
