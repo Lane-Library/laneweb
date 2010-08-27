@@ -15,6 +15,9 @@ body > ul > li a {
     /*color:SteelBlue*/;
 }
     
+.panel > ul li  {
+    list-style: none;
+}
 
 .loadingMask {
     opacity: .1;
