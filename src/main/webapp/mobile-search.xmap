@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
+    <!-- publishable paths for mobile search and browse -->
+    <map:pipelines>
+        <map:pipeline type="noncaching">
+            <!-- Merged Search Content (er and metasearch) -->
+            <map:match pattern="msc/**" type="wildcard">
+                <map:generate type="file" src="cocoon://apps/search/mobile/merged/html/{1}"/>
+                <map:transform type="proxy-links"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- Search Content (metasearch) -->
+            <map:match pattern="sc/**" type="wildcard">
+                <map:generate type="file" src="cocoon://apps/search/mobile/content/html/{1}"/>
+                <map:transform type="proxy-links"/>
+                <map:serialize type="xml"/>
+            </map:match>
+        </map:pipeline>
+        <map:pipeline type="caching">
+            <!-- EResources Browse -->
+            <map:match pattern="erb/**" type="wildcard">
+                <map:generate type="file" src="cocoon://eresources/browse/mobile/{1}"/>
+                <map:transform type="proxy-links"/>
+                <map:serialize type="xml"/>
+            </map:match>
+        </map:pipeline>
+    </map:pipelines>
+</map:sitemap>
