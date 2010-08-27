@@ -132,7 +132,7 @@
                             </li>
                             <li>
                                 <a href="/about/index.html"
-                                    >About Library</a>
+                                    >About Lane</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                     href="cocoon:/includes/leftmenu-about.html">
                                     <xi:fallback/>
@@ -140,7 +140,7 @@
                             </li>
                             <li>
                                 <a href="/help/index.html"
-                                    >Help</a>
+                                    >How To</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
                                     href="cocoon:/includes/leftmenu-help.html">
                                     <xi:fallback/>
