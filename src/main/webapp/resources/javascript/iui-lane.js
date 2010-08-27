@@ -98,7 +98,7 @@
                 loadingElm.style.display = 'block';
                 for (i = 0; i < form.elements.length; ++i)
                 {
-                    if (form.elements[i].type == 'text'){
+                    if (form.elements[i].type == 'search'){
                         form.elements[i].blur();
                     }
                 }
