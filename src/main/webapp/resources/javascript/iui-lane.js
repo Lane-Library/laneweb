@@ -2,23 +2,10 @@
     LANE = function() {
         var $ = iui.$, 
         searchInput = $('searchInput'),
-        searchTag = $('searchTag'),
         searchCancel = $('searchCancel'),
         backButton = $('backButton'),
         loadingElm = $('loading'),
         iuiGoBack;
-
-        searchInput.addEventListener("focus", function(e) {
-            if (searchTag.innerHTML == e.target.title) {
-                searchTag.innerHTML = '';
-            }
-        }, true);
-
-        searchInput.addEventListener("blur", function(e) {
-            if (!e.target.value) {
-                searchTag.innerHTML = e.target.title;
-            }
-        }, true);
 
         searchInput.addEventListener("keyup", function(e) {
             if (!e.target.value) {
