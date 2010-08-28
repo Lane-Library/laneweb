@@ -569,6 +569,19 @@
       <em><xsl:copy><xsl:apply-templates select="attribute::node() | child::node()"/></xsl:copy></em>
     </xsl:template>
     
+    <!-- ugly hack to get all the resource pages to cause the main menu link to highlight -->
+    <xsl:template match="h:ul[contains(@class, 'sectionMenu')]/h:li/h:a[starts-with(@href, '/biomed-resources/')]">
+        <xsl:variable name="href-base" select="substring-before(@href, '.html')"/>
+        <xsl:choose>
+            <xsl:when test="starts-with($path, $href-base)">
+                <em><xsl:copy><xsl:apply-templates select="attribute::node()|child::node()"/></xsl:copy></em>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:copy><xsl:apply-templates select="attribute::node()|child::node()"/></xsl:copy>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <!-- add class="expanded" to sectionMenu li that are links to the current page and are expandies -->
     <xsl:template match="h:ul[contains(@class,'sectionMenu')]/h:li[h:div/h:a[@href=$path or @href=$parent-path]]">
         <xsl:copy>
