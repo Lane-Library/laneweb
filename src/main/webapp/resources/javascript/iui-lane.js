@@ -5,6 +5,7 @@
         searchCancel = $('searchCancel'),
         backButton = $('backButton'),
         loadingElm = $('loading'),
+        fullscreenMessage = $('fsMsg'),
         d = document,
         iuiGoBack;
 
@@ -86,6 +87,11 @@
                     inputs[i].setAttribute('autocorrect','off');
                     inputs[i].setAttribute('autocapitalize','off');
                 }
+            }
+            
+            // hide full screen message if we're in standalone app mode
+            if(fullscreenMessage){
+                fullscreenMessage.style.display = (window.navigator.standalone) ? 'none' : 'block';
             }
         }, true);
 
