@@ -5,6 +5,7 @@
         searchCancel = $('searchCancel'),
         backButton = $('backButton'),
         loadingElm = $('loading'),
+        d = document,
         iuiGoBack;
 
         searchInput.addEventListener("keyup", function(e) {
@@ -72,9 +73,19 @@
                 }, 30);
             }
         };
-        document.addEventListener("click", function(e) {
+        d.addEventListener("click", function(e) {
             if(e.target != backButton){
                 backButton.scroll = window.pageYOffset;
+            }
+        }, true);
+        d.addEventListener("load", function() {
+            // turn off autocorrect and autocapitalize on all search inputs
+            var i, inputs = d.getElementsByTagName("input");
+            for (i = 0; inputs.length > i; i++ ){
+                if(inputs[i].type == "search"){
+                    inputs[i].setAttribute('autocorrect','off');
+                    inputs[i].setAttribute('autocapitalize','off');
+                }
             }
         }, true);
 

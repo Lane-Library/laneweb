@@ -110,6 +110,7 @@ body > ul > li a {
 }
 div.absInfo {
     box-sizing: border-box;
+    -webkit-user-select: text;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     padding: 10px;
