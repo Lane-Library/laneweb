@@ -22,7 +22,7 @@
                     </div>
                     <div id="sb">
                         <h1>
-                            <a href="/index.html"><span>Lane</span> Medical Library <span id="beta-heading">BETA</span><span
+                            <a href="/index.html"><span>Lane</span> Medical Library <!--<span id="beta-heading">BETA</span>--><span
                                     id="subHeading">powered by LaneConnex Technology</span></a>
                         </h1>
                         <form id="search" method="get" action="/search.html">
@@ -54,6 +54,7 @@
                         <div class="content">
                             <?laneweb content?>
                         </div>
+                        <a id="back-old-site" href="http://lane-old.stanford.edu/index.html"><img alt="back to old site" src="/images/back-old-site.gif"/></a>
                         <ul id="libraryContact">
                             <li>650-723-6831</li>
                             <li><a href="/help/ask-us.html">Ask Us</a></li>

@@ -53,3 +53,9 @@ em {
     background-image:url(/././graphics/icons/rss_over.png);
     border-bottom:none;
 }
+#back-old-site {
+    position:absolute;
+    top:20px;
+    left:500px;
+    border-bottom:none;
+}

@@ -22,7 +22,7 @@ h1 span {
 h1 a {
     border-bottom:none;
 }
-#beta-heading {
+/*#beta-heading {
   color:#333333;
   font-size:12px;
   font-weight:bold;
@@ -31,7 +31,7 @@ h1 a {
   left:-6px;
   font-family:arial;
   letter-spacing:normal;
-}
+}*/
 #som, h1 a:hover {
     text-decoration:underline;
     border-bottom-style:none;
