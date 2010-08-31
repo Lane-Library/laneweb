@@ -91,7 +91,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
                             resultTitles.put(crsr.getContentUrl(), crsr);
                         }
                     }
-                } else if (!"article_ids".equals(resource.getId())) {
+                } else{
                     parentResource = resource;
                 }
             }
