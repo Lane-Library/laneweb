@@ -67,10 +67,18 @@ body > ul > li a {
     padding-right:24px;
 }
 
-#searchCancel {
+#laneSearch .clear {
     position:absolute;
     top:16px;
     right:12px;
+    display:none;
+}
+
+#pico .clear {
+    position:relative;
+    top:30px;
+    maring-top:0;
+    left:245px;
     display:none;
 }
 
@@ -126,4 +134,30 @@ div.absInfo {
 }
 .a2z li {
     font-size:20px;
+}
+
+.sgstCnt {
+    display:none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border: 1px solid #000000;
+    background:white;
+    margin-top:1px;
+}
+.sgstCnt ul {
+    width:95%;
+    margin: 0;
+    position:relative;
+    left:-35px;
+}
+.sgstCnt li {
+    font-size:10pt;
+    padding-top:5px;
+    padding-bottom:5px;
+    list-style: none;
+    border-bottom: 1px solid lightgray;
+}
+#pico .sgstCnt {
+    margin-top:-9px;
+    margin-bottom:10px;
 }

@@ -181,8 +181,9 @@
                             <removeIncluded>true</removeIncluded>
                             <output>target/laneweb/resources/javascript/lane-mobile.js</output>
                             <includes>
-                                <include>iui-default-min.js</include>
-                                <include>iui-lane-min.js</include>
+                                <include>m-iui-min.js</include>
+                                <include>m-lane-min.js</include>
+                                <include>m-suggest-min.js</include>
                             </includes>
                         </aggregation>
                     </aggregations>
