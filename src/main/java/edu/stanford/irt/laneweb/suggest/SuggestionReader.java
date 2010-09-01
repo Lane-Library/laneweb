@@ -17,6 +17,10 @@ public class SuggestionReader extends AbstractReader {
 
     private static final byte[] JSON_2 = "]}".getBytes();
 
+    private static final byte[] OPEN_CALLBACK = "(".getBytes();
+
+    private static final byte[] CLOSE_CALLBACK = ");".getBytes();
+
     private static final int JSON_RETURN_LIMIT = 10;
 
     private SuggestionManager eresourceSuggestionManager;
@@ -24,6 +28,8 @@ public class SuggestionReader extends AbstractReader {
     private SuggestionManager historySuggestionManager;
 
     private String limit;
+
+    private String callback;
 
     private SuggestionManager meshSuggestionManager;
 
@@ -60,6 +66,10 @@ public class SuggestionReader extends AbstractReader {
         }
         Iterator<String> it = suggestionSet.iterator();
         int count = 0;
+        if (!"".equals(this.callback)) {
+            this.outputStream.write(this.callback.getBytes());
+            this.outputStream.write(OPEN_CALLBACK);
+        }
         this.outputStream.write(JSON_1);
         String maybeComma = "\"";
         while (it.hasNext() && count < JSON_RETURN_LIMIT) {
@@ -68,6 +78,9 @@ public class SuggestionReader extends AbstractReader {
             maybeComma = ",\"";
         }
         this.outputStream.write(JSON_2);
+        if (!"".equals(this.callback)) {
+            this.outputStream.write(CLOSE_CALLBACK);
+        }
     }
 
     @Override
@@ -114,6 +127,7 @@ public class SuggestionReader extends AbstractReader {
 
     @Override
     protected void initialize() {
+        this.callback = this.model.getString(Model.CALLBACK, "");
         this.limit = this.model.getString(Model.LIMIT, "");
         this.query = this.model.getString(Model.QUERY);
     }

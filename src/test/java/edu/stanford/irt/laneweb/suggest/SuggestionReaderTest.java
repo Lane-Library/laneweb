@@ -53,6 +53,7 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerate() throws IOException {
+        expect(this.model.getString(Model.CALLBACK, "")).andReturn("");
         expect(this.model.getString(Model.QUERY)).andReturn("venous thrombosis");
         expect(this.model.getString(Model.LIMIT, "")).andReturn("mesh");
         replayMocks();
@@ -69,12 +70,30 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerateNull() throws IOException {
+        expect(this.model.getString(Model.CALLBACK, "")).andReturn("");
         expect(this.model.getString(Model.QUERY)).andReturn("asdfgh");
         expect(this.model.getString(Model.LIMIT, "")).andReturn("mesh");
         replayMocks();
         this.reader.setup(null, null, null, null);
         this.reader.generate();
         assertEquals("{\"suggest\":[]}", new String(this.outputStream.toByteArray()));
+        verifyMocks();
+    }
+
+    /**
+     * Test method for {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#generate()}.
+     * 
+     * @throws IOException
+     */
+    @Test
+    public void testGenerateCallback() throws IOException {
+        expect(this.model.getString(Model.CALLBACK, "")).andReturn("foo");
+        expect(this.model.getString(Model.QUERY)).andReturn("asdfgh");
+        expect(this.model.getString(Model.LIMIT, "")).andReturn("mesh");
+        replayMocks();
+        this.reader.setup(null, null, null, null);
+        this.reader.generate();
+        assertEquals("foo({\"suggest\":[]});", new String(this.outputStream.toByteArray()));
         verifyMocks();
     }
 
