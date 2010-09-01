@@ -2,12 +2,29 @@
     LANE = function() {
         var $ = iui.$, 
         searchInput = $('searchInput'),
+        searchCancel = $('searchCancel'),
         backButton = $('backButton'),
         loadingElm = $('loading'),
         fullscreenMessage = $('fsMsg'),
         d = document,
         iuiGoBack;
 
+        searchInput.addEventListener("keyup", function(e) {
+            if (!e.target.value) {
+                searchCancel.style.display = 'none';
+            }
+            else{
+                searchCancel.style.display = 'block';
+            }
+        }, true);
+        
+        searchCancel.addEventListener("click", function(e) {
+            searchCancel.style.display = 'none';
+            searchInput.value = '';
+            searchInput.focus();
+            e.preventDefault();
+        }, true);
+        
         $('laneSearch').addEventListener("submit", function(e) {
             e.preventDefault();
             if(!searchInput.value){
@@ -93,26 +110,6 @@
                             requestLimit : l,
                             suggestUrl : '/././apps/suggest/json'
                         });
-                    }
-                    
-                    // add listeners for clearing input values
-                    if(inputs[i].previousElementSibling.className == 'clear'){
-                        inputs[i].addEventListener("keyup", function(e) {
-                            console.log("inut keyup");
-                            console.log(e);
-                            if (!e.target.value) {
-                                e.target.previousElementSibling.style.display = 'none';
-                            }
-                            else{
-                                e.target.previousElementSibling.style.display = 'block';
-                            }
-                        }, true);
-                        inputs[i].previousElementSibling.addEventListener("click", function(e) {
-                            e.target.parentNode.style.display = 'none';
-                            e.target.parentNode.nextElementSibling.value = '';
-                            e.target.parentNode.nextElementSibling.focus();
-                            e.preventDefault();
-                        }, true);
                     }
                 }
             }
