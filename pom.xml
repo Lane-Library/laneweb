@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Id$ -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>lane</artifactId>
         <groupId>edu.stanford.irt</groupId>
@@ -13,7 +11,7 @@
     <artifactId>laneweb</artifactId>
     <packaging>war</packaging>
     <name>Lane Library Website</name>
-    <version>1.11.RC1-SNAPSHOT</version>
+    <version>1.11.RC1</version>
     <description>The Lane Library web application built with Cocoon</description>
     <url>http://lane.stanford.edu/index.html</url>
     <inceptionYear>2002</inceptionYear>
@@ -52,7 +50,7 @@
         </developer>
     </developers>
     <scm>
-        <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/trunk</developerConnection>
+        <developerConnection>scm:svn:https://irt-svn.stanford.edu/repos/irt/lane/laneweb/tags/laneweb-1.11.RC1</developerConnection>
     </scm>
     <build>
         <defaultGoal>package</defaultGoal>
@@ -229,8 +227,7 @@
                     <smtpHost>smtp.stanford.edu</smtpHost>
                     <smtpPort implementation="java.lang.Integer">25</smtpPort>
                     <toAddresses>
-                        <toAddress implementation="java.lang.String"
-                            >ceyates@stanford.edu</toAddress>
+                        <toAddress implementation="java.lang.String">ceyates@stanford.edu</toAddress>
                     </toAddresses>
                 </configuration>
                 <version>2.3</version>
