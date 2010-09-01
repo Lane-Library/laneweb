@@ -81,6 +81,10 @@ body > ul > li a {
     padding-left:2px;
     margin:0 0 10px 0;
 }
+#picoClr {
+    width:65px;
+    float:right;
+}
 #login .row span {
     padding-left:140px;
 }
