@@ -68,16 +68,16 @@
     padding:10px;
 }
 #optionsToggle {
-    background-position:0px 0px;
+    background-position:0px 2px;
     background-repeat:no-repeat;
     padding-left:15px;
     margin-left:-5px;
 }
 #optionsToggle.closed {
-    background-image:url(/././graphics/buttons/accord-minus-close.gif);
+    background-image:url(/././images/minus.png);
 }
 #optionsToggle.open {
-    background-image:url(/././graphics/buttons/accord-plus-open.gif);
+    background-image:url(/././images/plus.png);
 }
 #optionsToggle a {
     font-weight:bold;
