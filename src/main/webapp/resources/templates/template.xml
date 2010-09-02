@@ -118,10 +118,12 @@
                             <li>
                                 <a href="/classes-consult/index.html"
                                     >Classes &amp; Consulting</a>
-                                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                    href="cocoon:/includes/leftmenu-classes.html">
-                                    <xi:fallback/>
-                                </xi:include>
+                                <ul>
+                                    <li><a href="/classes-consult/laneclasses.html?laneNav=1">Classes</a></li>
+                                    <li><a href="/classes-consult/tutorials.html?laneNav=1">eTutorials</a></li>
+                                    <li><a href="/classes-consult/consulting.html?laneNav=1">Consulting</a></li>
+                                    <li><a href="/classes-consult/infoliteracy.html?laneNav=1">Information Literacy</a></li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="/med-history/index.html"
