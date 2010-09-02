@@ -15,7 +15,7 @@
     
     <stx:group name="dont-include" pass-through="none">
         
-        <stx:template match="h:ul[@class='sectionMenu']">
+        <stx:template match="h:ul[contains(@class,'sectionMenu')]">
             <stx:copy>
                 <stx:process-attributes group="include"/>
                 <stx:process-children group="include"/>
@@ -26,8 +26,15 @@
     
     <stx:group name="include" pass-through="all">
         
-        <!-- remove class="sectionMenu" -->
-        <stx:template match="h:ul/@class"/>
+        <!-- remove class="sectionMenu" but keep specialtiesMenu if present -->
+        <stx:template match="h:ul/@class">
+                <stx:attribute name="class">
+                    <stx:if test="contains(.,'specialtiesMenu')">specialtiesMenu</stx:if>
+                </stx:attribute>
+        </stx:template>
+        
+        <!-- remove child ul's ... these are expandy children -->
+        <stx:template match="h:ul/h:li/h:ul"/>
         
         <stx:template match="h:a">
             <stx:copy>
