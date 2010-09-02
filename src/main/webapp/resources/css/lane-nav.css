@@ -68,10 +68,10 @@
 #qlinks {
     margin:6px 0 0 32px;
 }
-#laneNav .specialtiesMenu {
+#laneNav #specialties-menu {
     width:340px;
 }
-#laneNav .specialtiesMenu li {
+#laneNav #specialties-menu li {
     float:left;
     width:150px;
 }
