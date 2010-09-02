@@ -157,3 +157,13 @@ div.absInfo {
     margin-top:-9px;
     margin-bottom:10px;
 }
+#homeButton {
+    padding:0 3px;
+    position:absolute;
+    right:6px;
+    top:8px;
+    display:none;
+}
+#homeButton img {
+    border:none;
+}

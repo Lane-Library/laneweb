@@ -502,7 +502,18 @@ function updatePage(page, fromPage)
 		}
 		else
 			backButton.style.display = "none";
-	}	 
+	}
+    var homeButton = $("homeButton");
+    if (homeButton)
+    {
+        var prevPage = $(pageHistory[pageHistory.length-2]);
+        if (prevPage && page.id != 'home')
+        {
+            homeButton.style.display = "inline";
+        }
+        else
+            homeButton.style.display = "none";
+    }    
 }
 
 function slidePages(fromPage, toPage, backwards)
