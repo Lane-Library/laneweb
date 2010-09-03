@@ -45,9 +45,9 @@
                         <xsl:value-of select="replace(@href,'http.*lane(-beta)?.stanford.edu/',concat($base-path,'/mobile/'))"/>
                     </xsl:attribute>
                 </xsl:when>
-                <xsl:when test="starts-with(@href,$base-path) and contains(@href,'.html') and not(contains(@href,'/m/'))">
+                <xsl:when test="starts-with(@href,'/') and contains(@href,'.html') and not(contains(@href,'/m/'))">
                     <xsl:attribute name="href">
-                        <xsl:value-of select="replace(@href,$base-path,concat($base-path,'/mobile'))"/>
+                        <xsl:value-of select="replace(@href,'/',concat($base-path,'/mobile'))"/>
                     </xsl:attribute>
                 </xsl:when>
                 <xsl:when test="not(@target) and starts-with(@href,'http')">
