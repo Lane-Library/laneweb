@@ -101,30 +101,6 @@
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="browse/mobile/type/*" type="wildcard">
-                <map:generate type="er-browse">
-                    <map:parameter name="type" value="{1}"/>
-                </map:generate>
-                <map:transform type="joost" src="${default-resources-base}/xsl/resource-paginator.stx">
-                    <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${rid}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="browse/mobile/subset/*" type="wildcard">
-                <map:generate type="er-browse">
-                    <map:parameter name="subset" value="{1}"/>
-                </map:generate>
-                <map:transform type="joost" src="${default-resources-base}/xsl/resource-paginator.stx">
-                    <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-search-result2html.xsl">
-                    <map:parameter name="cache-key" value="${rid}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching">
             <map:match pattern="ezproxy-servers.txt" type="wildcard">

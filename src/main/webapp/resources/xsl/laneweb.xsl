@@ -726,7 +726,7 @@
         </xsl:variable>
         <xsl:attribute name="{$attr}">
             <!-- prepend the base-path if it is an absolute link -->
-            <xsl:if test="starts-with($link, '/')">
+            <xsl:if test="starts-with($link, '/') and not(starts-with($link,$base-path))">
                 <xsl:value-of select="$base-path"/>
             </xsl:if>
             <!-- replace keywords/search-terms TODO: unify this so only replaceing one thing -->

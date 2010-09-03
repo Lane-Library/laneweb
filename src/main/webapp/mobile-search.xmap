@@ -7,21 +7,48 @@
         <map:pipeline type="noncaching">
             <!-- Merged Search Content (er and metasearch) -->
             <map:match pattern="msc/**" type="wildcard">
-                <map:generate type="file" src="cocoon://apps/search/mobile/merged/html/{1}"/>
+                <map:generate type="file" src="cocoon://apps/search/merged/xml/{1}"/>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-search-result2html.xsl"/>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-content.xsl"/>
                 <map:transform type="proxy-links"/>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- Search Content (metasearch) -->
             <map:match pattern="sc/**" type="wildcard">
-                <map:generate type="file" src="cocoon://apps/search/mobile/content/html/{1}"/>
+                <map:generate type="file" src="cocoon://apps/search/content/xml/{1}"/>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-search-result2html.xsl"/>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-content.xsl"/>
                 <map:transform type="proxy-links"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
-            <!-- EResources Browse -->
-            <map:match pattern="erb/**" type="wildcard">
-                <map:generate type="file" src="cocoon://eresources/browse/mobile/{1}"/>
+            <!-- EResources browse -->
+            <map:match pattern="er/browse/type/*" type="wildcard">
+                <map:generate type="er-browse">
+                    <map:parameter name="type" value="{1}"/>
+                </map:generate>
+                <map:transform type="joost" src="${default-resources-base}/xsl/resource-paginator.stx">
+                    <map:parameter name="cache-key" value="${show}"/>
+                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-search-result2html.xsl">
+                    <map:parameter name="cache-key" value="${rid}"/>
+                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-content.xsl"/>
+                <map:transform type="proxy-links"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="er/browse/subset/*" type="wildcard">
+                <map:generate type="er-browse">
+                    <map:parameter name="subset" value="{1}"/>
+                </map:generate>
+                <map:transform type="joost" src="${default-resources-base}/xsl/resource-paginator.stx">
+                    <map:parameter name="cache-key" value="${show}"/>
+                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-search-result2html.xsl">
+                    <map:parameter name="cache-key" value="${rid}"/>
+                </map:transform>
+                <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-content.xsl"/>
                 <map:transform type="proxy-links"/>
                 <map:serialize type="xml"/>
             </map:match>
