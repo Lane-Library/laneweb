@@ -75,6 +75,7 @@
                         <entry key="(.*)/search\.html\?source=(ej|database|book|software|video|cc|lanesite)&amp;(.*)" value="$1/newpage.html?page=$1/search\.html\?source=catalog-$2%26$3"/>
                         <entry key="(.*)/search\.html\?source=(clinical|history)&amp;(.*)" value="$1/newpage.html?page=$1/search\.html\?source=$2-all%26$3"/>
                         <entry key="(.*)/search\.html\?source=research&amp;(.*)" value="$1/newpage.html?page=$1/search\.html\?source=bioresearch-all%26$2"/>
+                        <entry key="(.*)/search\.html\?source=peds&amp;(.*)" value="$1/newpage.html?page=$1/portals\/peds\.html\?$2"/>
                     </map>
                 </property>
             </bean>
