@@ -40,9 +40,9 @@
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:choose>
-                <xsl:when test="matches(@href,'http.*lane(-beta)?.stanford.edu/')">
+                <xsl:when test="matches(@href,'http.*lane(-beta|-stage)?.stanford.edu/')">
                     <xsl:attribute name="href">
-                        <xsl:value-of select="replace(@href,'http.*lane(-beta)?.stanford.edu/',concat($base-path,'/mobile/'))"/>
+                        <xsl:value-of select="replace(@href,'http.*lane(-beta|-stage)?.stanford.edu/',concat($base-path,'/mobile/'))"/>
                     </xsl:attribute>
                 </xsl:when>
                 <xsl:when test="starts-with(@href,'/') and contains(@href,'.html') and not(contains(@href,'/m/'))">
