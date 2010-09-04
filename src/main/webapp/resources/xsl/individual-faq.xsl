@@ -92,7 +92,7 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="h:h1|h:div[@class='extra']"/>
+    <xsl:template match="h:h1|h:div[@class='extra']|h:script[@src='http://medblog.stanford.edu/lane-faq/archives/diggthis.js']"/>
     
     <xsl:template match="h:h2">
         <h3 class="alt">
