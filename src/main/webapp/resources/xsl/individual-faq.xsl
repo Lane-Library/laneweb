@@ -92,11 +92,17 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="h:h1|h:h2|h:div[@class='extra']"/>
+    <xsl:template match="h:h1|h:div[@class='extra']"/>
+    
+    <xsl:template match="h:h2">
+        <h3 class="alt">
+            <xsl:apply-templates/>
+        </h3>        
+    </xsl:template>
     
     <xsl:template match="h:div[@id='mainColumn']">
         <div class="module">
-            <h3>&#160;</h3>
+            <h3 class="alt">&#160;</h3>
             <div class="bd">
                 <xsl:apply-templates/>
             </div>
@@ -113,7 +119,7 @@
         <div class="module">
             <h3><xsl:value-of select="h:h2"/></h3>
             <div class="bd">
-                <xsl:apply-templates/>
+                <xsl:apply-templates select="node()[name()!='h2']"/>
             </div>
         </div>
     </xsl:template>
