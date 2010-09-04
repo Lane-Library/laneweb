@@ -47,7 +47,7 @@
                 </xsl:when>
                 <xsl:when test="starts-with(@href,'/') and contains(@href,'.html') and not(contains(@href,'/m/'))">
                     <xsl:attribute name="href">
-                        <xsl:value-of select="replace(@href,'/',concat($base-path,'/mobile'))"/>
+                        <xsl:value-of select="replace(@href,'^/',concat($base-path,'/mobile/'))"/>
                     </xsl:attribute>
                 </xsl:when>
                 <xsl:when test="not(@target) and starts-with(@href,'http')">
