@@ -6,6 +6,7 @@
         <link rel="icon" type="image/png" href="/images/m/lane-favicon.ico" />
         <link rel="apple-touch-icon" href="/images/m/lane-touch-icon.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta id="ipGroup" name="WT.seg_1" content="{ipGroup}"/>
         <link rel="stylesheet" href="/style/lane-mobile.css" type="text/css" />
     </head>
 

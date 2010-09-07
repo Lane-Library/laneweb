@@ -6,20 +6,18 @@
         backButton = $('backButton'),
         loadingElm = $('loading'),
         fullscreenMessage = $('fsMsg'),
+        ipGroup = $('ipGroup'),
         d = document,
+        DISPLAY_BLOCK = 'block',
+        DISPLAY_NONE = 'none',
         iuiGoBack;
 
         searchInput.addEventListener("keyup", function(e) {
-            if (!e.target.value) {
-                searchCancel.style.display = 'none';
-            }
-            else{
-                searchCancel.style.display = 'block';
-            }
+            searchCancel.style.display = (!e.target.value) ? DISPLAY_NONE : DISPLAY_BLOCK;
         }, true);
         
         searchCancel.addEventListener("click", function(e) {
-            searchCancel.style.display = 'none';
+            searchCancel.style.display = DISPLAY_NONE;
             searchInput.value = '';
             searchInput.focus();
             e.preventDefault();
@@ -81,6 +79,12 @@
         }, true);
         d.addEventListener("load", function() {
             var i, inputs = d.getElementsByTagName("input"),l;
+            
+            // display login link if needed
+            if(ipGroup.content.match(/^(OTHER|PAVA|ERR)/)){
+                $('loginLink').style.display = DISPLAY_BLOCK;
+            }
+            
             for (i = 0; inputs.length > i; i++ ){
                 if(inputs[i].type == "search"){
                     
@@ -116,7 +120,7 @@
             
             // hide full screen message if we're in standalone app mode
             if(fullscreenMessage){
-                fullscreenMessage.style.display = (window.navigator.standalone) ? 'none' : 'block';
+                fullscreenMessage.style.display = (window.navigator.standalone) ? DISPLAY_NONE : DISPLAY_BLOCK;
             }
         }, true);
 
@@ -124,7 +128,7 @@
         return {
             submitForm : function(form) {
                 iui.addClass(form.parentNode, "loadingMask");
-                loadingElm.style.display = 'block';
+                loadingElm.style.display = DISPLAY_BLOCK;
                 for (i = 0; i < form.elements.length; ++i)
                 {
                     if (form.elements[i].type == 'search'){
@@ -133,7 +137,7 @@
                 }
                 function clear() {
                     iui.removeClass(form.parentNode, "loadingMask"); 
-                    loadingElm.style.display = 'none';
+                    loadingElm.style.display = DISPLAY_NONE;
                     //scrollTo(0, 1);
                 }
                 iui.showPageByHref(form.action, form, form.method || "GET", null, clear);
