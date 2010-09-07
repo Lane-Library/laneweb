@@ -21,7 +21,7 @@
     
     <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
         class="edu.stanford.irt.laneweb.servlet.RequestAttributeObjectModelProvider"/>
-
+    
     <bean id="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler"
         class="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
@@ -33,6 +33,15 @@
             <bean class="org.springframework.jndi.JndiObjectFactoryBean">
                 <property name="jndiName" value="java:comp/env/ezproxy-key"/>
             </bean>
+        </property>
+    </bean>
+    
+    <bean id="edu.stanford.irt.laneweb.servlet.MobileRequestHandler"
+        class="edu.stanford.irt.laneweb.servlet.MobileRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler">
+        <property name="proxyLinks">
+            <bean class="edu.stanford.irt.laneweb.servlet.MobileProxyLinks"
+                parent="edu.stanford.irt.laneweb.servlet.ProxyLinks"/>
         </property>
     </bean>
     

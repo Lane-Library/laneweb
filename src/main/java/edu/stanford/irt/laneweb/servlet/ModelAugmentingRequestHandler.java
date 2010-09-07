@@ -21,7 +21,7 @@ import edu.stanford.irt.laneweb.proxy.Ticket;
 
 public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
 
-    private static final String X_FORWARDED_FOR = "X-FORWARDED-FOR";
+    protected static final String X_FORWARDED_FOR = "X-FORWARDED-FOR";
 
     private String ezproxyKey;
 
@@ -184,14 +184,14 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         return emrid;
     }
 
-    private IPGroup getIPGroup(final String remoteAddr, final HttpSession session) {
+    protected IPGroup getIPGroup(final String remoteAddr, final HttpSession session) {
         IPGroup ipGroup = null;
         ipGroup = IPGroup.getGroupForIP(remoteAddr);
         session.setAttribute(Model.IPGROUP, ipGroup);
         return ipGroup;
     }
 
-    private String getRemoteAddr(final HttpServletRequest request, final HttpSession session) {
+    protected String getRemoteAddr(final HttpServletRequest request, final HttpSession session) {
         String ip = null;
         // mod_proxy puts the real remote address in an x-forwarded-for
         // header
