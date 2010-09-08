@@ -569,8 +569,9 @@
       <em><xsl:copy><xsl:apply-templates select="attribute::node() | child::node()"/></xsl:copy></em>
     </xsl:template>
     
-    <!-- ugly hack to get all the resource pages to cause the main menu link to highlight -->
-    <xsl:template match="h:ul[contains(@class, 'sectionMenu')]/h:li/h:a[starts-with(@href, '/biomed-resources/')]">
+    <!-- ugly hack to get all the resource pages to cause the main menu link to highlight,
+        gets a priority=1 because ambiguous with the preceding template-->
+    <xsl:template match="h:ul[contains(@class, 'sectionMenu')]/h:li/h:a[starts-with(@href, '/biomed-resources/')]" priority="1">
         <xsl:variable name="href-base" select="substring-before(@href, '.html')"/>
         <xsl:choose>
             <xsl:when test="starts-with($path, $href-base)">
