@@ -27,12 +27,10 @@ public class MobileRequestHandler extends ModelAugmentingRequestHandler {
         String header = request.getHeader(X_FORWARDED_FOR);
         if (header == null) {
             return request.getRemoteAddr();
-        } else {
-            if (header.indexOf(',') > 0) {
-                return header.substring(0, header.indexOf(','));
-            } else {
-                return header;
-            }
         }
+        else if (header.indexOf(',') > 0) {
+            return header.substring(0, header.indexOf(','));
+        }
+        return header;
     }
 }
