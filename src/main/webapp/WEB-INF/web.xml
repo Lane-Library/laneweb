@@ -92,13 +92,13 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     
-    <!--<servlet>
+    <servlet>
         <description>MobileRequestHandler</description>
         <display-name>ModelAugmentingRequestHandler</display-name>
         <servlet-name>edu.stanford.irt.laneweb.servlet.MobileRequestHandler</servlet-name>
         <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
-    </servlet>-->
+    </servlet>
 
     <servlet>
         <description>LogoutServlet</description>
@@ -112,10 +112,20 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     
-    <!--<servlet-mapping>
+    <servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.MobileRequestHandler</servlet-name>
         <url-pattern>/m/*</url-pattern>
-    </servlet-mapping>-->
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.MobileRequestHandler</servlet-name>
+        <url-pattern>/mobile/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.MobileRequestHandler</servlet-name>
+        <url-pattern>/ms/*</url-pattern>
+    </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-name>
