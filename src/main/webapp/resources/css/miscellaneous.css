@@ -7,11 +7,17 @@ p {
     color:#3F3C30;
     font-size:12px;
 }
-strong, em {
+/*strong, em {
     font-weight:bold;
 }
 em {
     color:#820000;
+}*/
+strong {
+    font-weight:bold;
+}
+em {
+    font-style:italic
 }
 .term {
     font-style:italic
