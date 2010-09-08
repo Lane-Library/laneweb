@@ -2,6 +2,11 @@
 .sectionMenu .yui3-accordion-item-trigger {
   position:relative;
 }
+.sectionMenu em {
+    font-style:normal;
+    font-weight:bold;
+    color:#820000;
+}
 .sectionMenu em a {
   border:none;
   color:inherit;
