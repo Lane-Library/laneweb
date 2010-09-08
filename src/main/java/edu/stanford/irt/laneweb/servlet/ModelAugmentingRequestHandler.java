@@ -185,28 +185,32 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
     }
 
     protected IPGroup getIPGroup(final String remoteAddr, final HttpSession session) {
-        IPGroup ipGroup = null;
-        ipGroup = IPGroup.getGroupForIP(remoteAddr);
-        session.setAttribute(Model.IPGROUP, ipGroup);
+        IPGroup ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
+        if (ipGroup == null) {
+            ipGroup = IPGroup.getGroupForIP(remoteAddr);
+            session.setAttribute(Model.IPGROUP, ipGroup);
+        }
         return ipGroup;
     }
 
     protected String getRemoteAddr(final HttpServletRequest request, final HttpSession session) {
-        String ip = null;
-        // mod_proxy puts the real remote address in an x-forwarded-for
-        // header
-        // Load balancer also does this
-        String header = request.getHeader(X_FORWARDED_FOR);
-        if (header == null) {
-            ip = request.getRemoteAddr();
-        } else {
-            if (header.indexOf(',') > 0) {
-                ip = header.substring(0, header.indexOf(','));
+        String ip = (String) session.getAttribute(Model.REMOTE_ADDR);
+        if (ip == null) {
+            // mod_proxy puts the real remote address in an x-forwarded-for
+            // header
+            // Load balancer also does this
+            String header = request.getHeader(X_FORWARDED_FOR);
+            if (header == null) {
+                ip = request.getRemoteAddr();
             } else {
-                ip = header;
+                if (header.indexOf(',') > 0) {
+                    ip = header.substring(0, header.indexOf(','));
+                } else {
+                    ip = header;
+                }
             }
+            session.setAttribute(Model.REMOTE_ADDR, ip);
         }
-        session.setAttribute(Model.REMOTE_ADDR, ip);
         return ip;
     }
 
