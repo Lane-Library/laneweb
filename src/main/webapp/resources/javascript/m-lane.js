@@ -30,6 +30,7 @@
             }
             else{
                 LANE.submitForm(e.target);
+                LANE.track(e);
             }
         }, true);
         
@@ -58,6 +59,7 @@
             }
             else{
                 LANE.submitForm(e.target);
+                LANE.track(e);
             }
         }, true);
         
@@ -76,6 +78,7 @@
             if(e.target != backButton){
                 backButton.scroll = window.pageYOffset;
             }
+            LANE.track(e);
         }, true);
         d.addEventListener("load", function() {
             var i, inputs = d.getElementsByTagName("input"),l;
@@ -141,7 +144,8 @@
                     //scrollTo(0, 1);
                 }
                 iui.showPageByHref(form.action, form, form.method || "GET", null, clear);
-            }
+            },
+            ipGroup : ipGroup.content
         };
     }();
     

@@ -184,6 +184,7 @@
                                 <include>m-iui-min.js</include>
                                 <include>m-lane-min.js</include>
                                 <include>m-suggest-min.js</include>
+                                <include>m-tracking-min.js</include>
                             </includes>
                         </aggregation>
                     </aggregations>
