@@ -51,7 +51,7 @@
                     </xsl:attribute>
                 </xsl:when>
                 <xsl:when test="not(@target) and starts-with(@href,'http')">
-                    <xsl:attribute name="target">_self</xsl:attribute>
+                    <xsl:attribute name="target">_blank</xsl:attribute>
                 </xsl:when>
             </xsl:choose>
             <xsl:apply-templates select="child::node()"/>
