@@ -34,6 +34,9 @@ _gaq.push(['_setVar',LANE.ipGroup]);
         else if (e.type == 'submit' && node.nodeName == 'FORM') {
             _gaq.push(['_trackPageview', LANE.encode("/search/"+node.id+"/"+node.elements['q'].value)]);
         }
+        else if (e.inputElement && node.nodeName == 'LI') {
+            _gaq.push(['_trackPageview', LANE.encode("/suggestSelect/"+e.inputElement.form.id+"/"+e.inputElement.id+"/"+node.textContent)]);
+        }
     };
     
     LANE.getTrackingTitle = function(node) {

@@ -59,6 +59,7 @@
                     li.addEventListener("click",function(e){
                         e.inputElement = inputElement;
                         LANE.suggestSelect(e);
+                        LANE.track(e);
                         //console.log("inner click");
                         //console.log(inputElement.id);
                         //console.log(e.target.innerHTML);
@@ -126,8 +127,8 @@
         //console.log(e.target.innerHTML);
         //if this is the laneSearch form then submit, otherwise assume pico and just update input
         e.inputElement.value = e.target.textContent;
-        if(e.inputElement.id == 'searchInput'){
-            LANE.submitForm(iui.$('laneSearch'));
+        if(e.inputElement.form.id == 'laneSearch'){
+            LANE.submitForm(e.inputElement.form);
         }else{
             var ul = iui.$(e.inputElement.id+"Sgst");
             ul.parentNode.style.display = 'none';
