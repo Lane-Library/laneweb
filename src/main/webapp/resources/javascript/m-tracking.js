@@ -27,16 +27,41 @@ _gaq.push(['_setVar',LANE.ipGroup]);
     };
     
     LANE.track = function(e) {
-        var node = e.srcElement || e.target;
+        var node = e.srcElement || e.target, basePath;
+        // find parent A for IMG nodes if possible
+        if(node.nodeName == 'IMG'){
+            while (node && node.nodeName != 'A') {
+                node = node.parentNode;
+                if (node === null) {
+                    node = e.srcElement || e.target;
+                    break;
+                }
+            }
+        }
+        basePath = LANE.isExternal(node) ? '/OFFSITE/' : '/ONSITE/';
         if (e.type == 'click' && (node.nodeName == 'A'||node.nodeName == 'IMG')) {
-            _gaq.push(['_trackPageview', LANE.encode(LANE.getTrackingTitle(node))]);
+            _gaq.push(['_trackPageview', basePath + LANE.encode(LANE.getTrackingTitle(node))]);
         }
         else if (e.type == 'submit' && node.nodeName == 'FORM') {
             _gaq.push(['_trackPageview', "/search/"+node.id+"/"+LANE.encode(node.elements['q'].value)]);
         }
+        // inelegant way to track suggestSelect; if laneSearch, also tracks as a search event
         else if (e.inputElement && node.nodeName == 'LI') {
             _gaq.push(['_trackPageview', "/suggestSelect/"+e.inputElement.form.id+"/"+e.inputElement.id+"/"+LANE.encode(node.textContent)]);
+            if("laneSearch" == e.inputElement.form.id){
+                _gaq.push(['_trackPageview', "/search/"+e.inputElement.form.id+"/"+LANE.encode(node.textContent)]);
+            }
         }
+    };
+    
+    LANE.isExternal = function(node) {
+        if(node.nodeName != 'A'){
+            return false;
+        }
+        else if (node.pathname.indexOf('secure/apps/proxy/credential') > -1 || node.host.indexOf('laneproxy') === 0 || node.host != document.location.host) {
+            return true;
+        }
+        return false;
     };
     
     LANE.getTrackingTitle = function(node) {
