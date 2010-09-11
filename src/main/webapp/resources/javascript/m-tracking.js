@@ -8,8 +8,8 @@ else {
 }
 //_gaq.push(['_setLocalServerMode']);
 _gaq.push(['_setDomainName', '.stanford.edu']);
-_gaq.push(['_trackPageview']);
 _gaq.push(['_setCustomVar', 1, 'ipGroup', LANE.ipGroup, 2]);
+_gaq.push(['_trackPageview']);
 
 (function() {
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

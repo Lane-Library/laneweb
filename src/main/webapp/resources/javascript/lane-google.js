@@ -20,11 +20,11 @@
                 //uncomment this for testing/debugging:
                 //gaPageTracker._setLocalServerMode();
                 gaPageTracker._setDomainName(".stanford.edu");
-                gaPageTracker._trackPageview();
                 meta = Y.one('html head meta[name="WT.seg_1"]');
                 if (meta) {
                     gaPageTracker._setCustomVar(1,'ipGroup',meta.get('content'),2);
                 }
+                gaPageTracker._trackPageview();
                 LANE.tracking.addTracker({
                     track: function(trackingData) {
                         if (trackingData.external) {
