@@ -1,6 +1,6 @@
 /* IE seems to need this to make the trigger item work */
 .sectionMenu .yui3-accordion-item-trigger {
-  position:relative;
+  _position:relative;
 }
 .sectionMenu em {
     font-style:normal;
