@@ -111,7 +111,7 @@ public class SuggestionReader extends AbstractReader {
 
     private String escapeQuotes(final String string) {
         String result = string;
-        if ((result.indexOf('\'') > -1) || (result.indexOf('"') > -1)) {
+        if (result.indexOf('"') > -1) {
             StringBuffer sb = new StringBuffer();
             for (int i = 0; i < result.length(); i++) {
                 char c = result.charAt(i);
