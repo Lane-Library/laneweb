@@ -86,7 +86,7 @@
                             host = host.substring(host.indexOf("//") + 2);
                             path = host.substring(host.indexOf("/"));
                             host = host.substring(0, host.indexOf("/"));
-                        } else if (node.get('pathname').indexOf('secure/login.html') > -1 || node.get('host').indexOf('laneproxy') === 0) {
+                        } else if (node.get('pathname').indexOf('/secure/apps/proxy/credential') > -1 || node.get('host').indexOf('laneproxy') === 0) {
                             host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
                             if (host.indexOf('/') > -1) {
                                 path = host.substring(host.indexOf('/'));
@@ -186,8 +186,7 @@
                             }
                             if (linkHost == documentHost) {
                                 //track proxy logins
-                                //FIXME: the path has changed to /secure/proxy/credential or something like that
-                                if ((/secure\/login.html/).test(link.get('pathname')) && link.get('search') && link.get('search').indexOf('url=') > -1) {
+                                if ((/secure\/apps\/proxy\/credential\?/).test(link.get('pathname')) && link.get('search') && link.get('search').indexOf('url=') > -1) {
                                     return true;
                                 }
                                 //track cookieFetch.html
