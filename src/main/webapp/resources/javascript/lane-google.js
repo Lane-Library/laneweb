@@ -22,6 +22,7 @@
                 gaPageTracker._setDomainName(".stanford.edu");
                 meta = Y.one('html head meta[name="WT.seg_1"]');
                 if (meta) {
+                    gaPageTracker._setVar(meta.get('content'));
                     gaPageTracker._setCustomVar(1,'ipGroup',meta.get('content'),2);
                 }
                 gaPageTracker._trackPageview();
