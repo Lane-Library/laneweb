@@ -20,7 +20,7 @@
     <xsl:template match="h:div[contains(@class,'leftColumn')]"/>
 
     <xsl:template match="h:body/h:h2[1]">
-        <div>Lane Medical Library text version | <a href="{concat(replace($request-uri,'/mobile',''),'?',$query-string)}">Desktop version available here</a></div>
+        <div>Lane Medical Library text version | <a href="{concat(replace($request-uri,'/mobile',''),'?',$query-string)}">Full version available here</a></div>
         <xsl:copy>
             <xsl:copy-of select="node()[name()!='a']"></xsl:copy-of>
         </xsl:copy>
