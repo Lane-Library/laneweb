@@ -17,6 +17,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.suggest.EresourceSuggestionManager;
+import edu.stanford.irt.suggest.HistorySuggestionManager;
 import edu.stanford.irt.suggest.MeshSuggestionManager;
 
 /**
@@ -24,6 +26,10 @@ import edu.stanford.irt.suggest.MeshSuggestionManager;
  */
 public class SuggestionReaderTest {
 
+    private HistorySuggestionManager historySuggestionManager;
+    
+    private EresourceSuggestionManager eresourceSuggestionManager;
+    
     private MeshSuggestionManager meshSuggestionManager;
 
     private Model model;
@@ -38,7 +44,11 @@ public class SuggestionReaderTest {
     @Before
     public void setUp() throws Exception {
         this.reader = new SuggestionReader();
+        this.historySuggestionManager = new HistorySuggestionManager();
+        this.eresourceSuggestionManager = new EresourceSuggestionManager();
         this.meshSuggestionManager = new MeshSuggestionManager();
+        this.reader.setHistorySuggestionManager(this.historySuggestionManager);
+        this.reader.setEresourceSuggestionManager(this.eresourceSuggestionManager);
         this.reader.setMeshSuggestionManager(this.meshSuggestionManager);
         this.outputStream = new ByteArrayOutputStream();
         this.reader.setOutputStream(this.outputStream);
@@ -105,6 +115,22 @@ public class SuggestionReaderTest {
     @Test
     public void testSetMeshSuggestionManager() {
         assertNotNull(this.meshSuggestionManager);
+    }
+
+    /**
+     * Test method for {@link edu.stanford.irt.laneweb.suggest.SuggestionReader#setEresourceSuggestionManager(edu.stanford.irt.suggest.SuggestionManager)}.
+     */
+    @Test
+    public void testSetEresourceSuggestionManager() {
+        assertNotNull(this.eresourceSuggestionManager);
+    }
+
+    /**
+     * Test method for {@link edu.stanford.irt.laneweb.suggest.SuggestionReader#setHistorySuggestionManager(edu.stanford.irt.suggest.SuggestionManager)}.
+     */
+    @Test
+    public void testSetHistorySuggestionManager() {
+        assertNotNull(this.historySuggestionManager);
     }
 
     private void replayMocks() {
