@@ -13,16 +13,17 @@ import edu.stanford.irt.eresources.impl.VersionImpl;
 import org.junit.Before;
 import org.junit.Test;
 
-
 /**
  * @author ryanmax
- *
  */
 public class EresourceVersionComparatorTest {
-    
+
     Version v1;
+
     Version v2;
+
     Link link;
+
     EresourceVersionComparator comparator;
 
     /**
@@ -37,15 +38,17 @@ public class EresourceVersionComparatorTest {
     }
 
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.eresources.EresourceVersionComparator#compare(edu.stanford.irt.eresources.Version, edu.stanford.irt.eresources.Version)}.
+     * Test method for
+     * {@link edu.stanford.irt.laneweb.eresources.EresourceVersionComparator#compare(edu.stanford.irt.eresources.Version, edu.stanford.irt.eresources.Version)}
+     * .
      */
     @Test
     public void testCompare() {
         this.v1.setDates("1999.");
         this.v2.setDates("1999.");
-        assertEquals(1,this.comparator.compare(this.v1, this.v2));
+        assertEquals(1, this.comparator.compare(this.v1, this.v2));
     }
-    
+
     @Test
     public void testCompareOpenDates() {
         this.v1.setDates("1999-");
@@ -55,7 +58,7 @@ public class EresourceVersionComparatorTest {
         this.v2.setDates("1999-");
         assertTrue(this.comparator.compare(this.v1, this.v2) > 0);
     }
-    
+
     @Test
     public void testCompareClosedDates() {
         this.v1.setDates("1999-2000.");
@@ -65,7 +68,7 @@ public class EresourceVersionComparatorTest {
         this.v2.setDates("1999-2000.");
         assertTrue(this.comparator.compare(this.v1, this.v2) < 0);
     }
-    
+
     @Test
     public void testCompareHoldings() {
         this.v1.setSummaryHoldings("v. 1-");
@@ -75,7 +78,7 @@ public class EresourceVersionComparatorTest {
         this.v2.setSummaryHoldings("v. 10-");
         assertTrue(this.comparator.compare(this.v1, this.v2) > 0);
     }
-    
+
     @Test
     public void testCompareDelayedHoldings() {
         this.v1.setSummaryHoldings("v. 1-");
@@ -83,7 +86,7 @@ public class EresourceVersionComparatorTest {
         this.v2.setDescription("foo delayed bar");
         assertTrue(this.comparator.compare(this.v1, this.v2) < 0);
     }
-    
+
     @Test
     public void testCompareImpactFactorHoldings() {
         this.v1.setSummaryHoldings("v. 1.");
@@ -92,6 +95,25 @@ public class EresourceVersionComparatorTest {
         this.v2.setDates("1999-2000.");
         this.link.setLabel("Impact Factor");
         this.v2.addLink(this.link);
+        assertTrue(this.comparator.compare(this.v1, this.v2) < 0);
+    }
+
+    @Test
+    public void testComparePublishers() {
+        this.v1.setDates("1999.");
+        this.v1.setPublisher("ScienceDirect");
+        this.v2.setDates("1999.");
+        this.v2.setPublisher("Karger");
+        assertTrue(this.comparator.compare(this.v1, this.v2) < 0);
+        this.v1.setDates("1999.");
+        this.v1.setPublisher("Karger");
+        this.v2.setDates("1999.");
+        this.v2.setPublisher("ScienceDirect");
+        assertTrue(this.comparator.compare(this.v1, this.v2) > 0);
+        this.v1.setDates("1999.");
+        this.v1.setPublisher("PubMed Central");
+        this.v2.setDates("1999.");
+        this.v2.setPublisher("");
         assertTrue(this.comparator.compare(this.v1, this.v2) < 0);
     }
 }

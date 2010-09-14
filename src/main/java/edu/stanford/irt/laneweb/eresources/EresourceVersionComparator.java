@@ -4,8 +4,10 @@
 package edu.stanford.irt.laneweb.eresources;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,14 +26,23 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
 
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
 
+    private static final List<String> favoredPublishers = Arrays.asList("sciencedirect", "wiley", "springer",
+            "highwire", "ovid", "nature", "liebert", "informaworld", "karger", "pubmed central");
+
     public int compare(final Version v1, final Version v2) {
-        int score1 = calculateScore(v1);
-        int score2 = calculateScore(v2);
+        int score1 = calculateHoldingsScore(v1);
+        int score2 = calculateHoldingsScore(v2);
         // factor in years covered only if available in both versions
         if (getYearsCovered(v1) != -1 && getYearsCovered(v2) != -1) {
             score1 = score1 + getYearsCovered(v1);
             score2 = score2 + getYearsCovered(v2);
         }
+        if (score1 != score2) {
+            return score2 - score1;
+        }
+        // only factor in publisher score if holding scores are equal
+        score1 = calculatePublisherScore(v1);
+        score2 = calculatePublisherScore(v2);
         if (score1 != score2) {
             return score2 - score1;
         }
@@ -52,7 +63,7 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
      * @param v
      * @return score
      */
-    private int calculateScore(final Version v) {
+    private int calculateHoldingsScore(final Version v) {
         int score = 0;
         if (v.getLinks().size() > 0 && "Impact Factor".equals(v.getLinks().iterator().next().getLabel())) {
             return -99;
@@ -73,6 +84,20 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
         }
         if (null != v.getDescription() && v.getDescription().contains("delayed")) {
             score--;
+        }
+        return score;
+    }
+
+    /**
+     * Calculate score for select list of publishers
+     * 
+     * @param v
+     * @return score
+     */
+    private int calculatePublisherScore(final Version v) {
+        int score = 1;
+        if (null != v.getPublisher() && favoredPublishers.contains(v.getPublisher().toLowerCase())) {
+            score = score + (10 - favoredPublishers.indexOf(v.getPublisher().toLowerCase()));
         }
         return score;
     }
