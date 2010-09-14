@@ -43,13 +43,13 @@ _gaq.push(['_trackPageview']);
             _gaq.push(['_trackPageview', basePath + LANE.encode(LANE.getTrackingTitle(node))]);
         }
         else if (e.type == 'submit' && node.nodeName == 'FORM') {
-            _gaq.push(['_trackPageview', "/search/"+node.id+"/"+LANE.encode(node.elements['q'].value)]);
+            _gaq.push(['_trackPageview', "/search?source="+node.id+"&q="+LANE.encode(node.elements['q'].value)]);
         }
         // inelegant way to track suggestSelect; if laneSearch, also tracks as a search event
         else if (e.inputElement && node.nodeName == 'LI') {
             _gaq.push(['_trackPageview', "/suggestSelect/"+e.inputElement.form.id+"/"+e.inputElement.id+"/"+LANE.encode(node.textContent)]);
             if("laneSearch" == e.inputElement.form.id){
-                _gaq.push(['_trackPageview', "/search/"+e.inputElement.form.id+"/"+LANE.encode(node.textContent)]);
+                _gaq.push(['_trackPageview', "/search?source="+e.inputElement.form.id+"&q="+LANE.encode(node.textContent)]);
             }
         }
     };
