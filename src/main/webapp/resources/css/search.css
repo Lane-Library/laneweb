@@ -111,6 +111,9 @@
     padding:2px;
     border-top:1px dotted #CCCCCC;
 }
+.hvrTrig, .hvrTrig a {
+    cursor:help;
+}
 .sourceLink {
     color:#666666;
 }
