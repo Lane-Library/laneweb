@@ -19,7 +19,7 @@ import javax.servlet.ServletContextListener;
  */
 public class LanewebContextListener implements ServletContextListener {
 
-    private static final String EZPROXY_KEY = "laneweb.context.ezproxy-key";
+    private static final String EZPROXY_KEY = "ezproxy-key";
 
     private static final String LIVE_BASE_KEY = "laneweb.context.live-base";
 
@@ -29,7 +29,7 @@ public class LanewebContextListener implements ServletContextListener {
 
     private static final String VERSION_KEY = "laneweb.context.version";
 
-    private static final String WEBDASH_KEY = "laneweb.context.webdash-key";
+    private static final String WEBDASH_KEY = "webdash-key";
 
     private Context namingContext;
 
