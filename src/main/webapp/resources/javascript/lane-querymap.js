@@ -29,6 +29,9 @@
                                             for (i = 0; i < rs.length; i++) {
                                                 if (!rs[i].status) {
                                                     result = results.resources[rs[i].id];
+                                                    if (result != undefined && result.url) {
+                                                        rs[i].anchor.href = result.url;
+                                                    }
                                                     if (result == undefined || !result.status) {
                                                         needMore = (results.status != 'successful');
                                                     }
@@ -37,7 +40,6 @@
                                                         if (result.status == 'successful') {
                                                             rs[i].anchor.parentNode.appendChild(document.createTextNode(': ' + result.hits + ' '));
                                                         }
-                                                        rs[i].anchor.href = result.url;
                                                     }
                                                 }
                                             }
