@@ -38,3 +38,7 @@
     height:0;
     overflow:hidden;
 }
+/* except expanded ones*/
+.yui3-js-enabled .sectionMenu .expanded ul {
+    height:auto;
+}
