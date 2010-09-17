@@ -29,7 +29,7 @@
     <xsl:template match="h:a[@id and contains(@class,'metasearch')]">
         <xsl:variable name="res-id" select="@id"/>
         <xsl:if test="count(//s:resource[@s:id = $res-id]) > 0">
-            <resource idref="{@id}"/>
+            <engine idref="{@id}"/>
         </xsl:if>
     </xsl:template>
     

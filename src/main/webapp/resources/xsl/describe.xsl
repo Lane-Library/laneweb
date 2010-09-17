@@ -69,7 +69,7 @@
       <xsl:param name="resource"/>
           <table class="portal">
           <tr>
-          <xsl:for-each select="//st:search-templates/st:template/st:resource[@idref=$resource]">
+          <xsl:for-each select="//st:search-templates/st:template/st:engine[@idref=$resource]">
           <td><xsl:value-of select="../@id"/></td>
           </xsl:for-each>
           </tr>
