@@ -34,7 +34,7 @@
     background-image:url(/././images/minus.png);
 }
 /*hide expandies on load*/
-/*.yui3-js-enabled .sectionMenu ul {
+.yui3-js-enabled .sectionMenu ul {
     height:0;
     overflow:hidden;
-}*/
+}
