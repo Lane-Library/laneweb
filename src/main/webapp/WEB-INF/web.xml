@@ -63,10 +63,10 @@
     <filter>
         <filter-name>monitoring</filter-name>
         <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
-        <init-param>
+<!--        <init-param>
             <param-name>displayed-counters</param-name>
             <param-value>http,sql,error,log,spring</param-value>
-        </init-param>
+        </init-param>-->
     </filter>
     
     <filter>
