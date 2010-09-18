@@ -66,23 +66,32 @@ public class LDAPDataAccess {
 
     private SubjectSource subjectSource;
 
+    private LDAPData getAnonymousData(final PrivilegedAction<LDAPData> action) {
+        try {
+            return action.run();
+        } catch (NamingException ne) {
+            LOGGER.warn("failed to get anonymous ldap data", ne);
+            return null;
+        }
+    }
+
     public LDAPData getLdapData(final String sunetid) {
         LDAPData ldapData = null;
-        Subject subject = this.subjectSource.getSubject();
         PrivilegedAction<LDAPData> action = new LDAPPrivilegedAction(this.ldapTemplate, sunetid);
         try {
+            Subject subject = this.subjectSource.getSubject();
             ldapData = Subject.doAs(subject, action);
+        } catch (SecurityException e) {
+            LOGGER.warn("unable to authenticate, trying anonymous access", e);
+            ldapData = getAnonymousData(action);
         } catch (CommunicationException e) {
-            LOGGER.error("unable to connect to ldap server, using sunetid for name", e);
+            LOGGER.warn("unable to connect to ldap server, using sunetid for name", e);
         } catch (NamingException e) {
-            LOGGER.error("failed to get privileged ldap data, trying anonymous access", e);
-            try {
-                ldapData = action.run();
-            } catch (NamingException ne) {
-                LOGGER.error("failed to get anonymous ldap data, using sunetid for name", ne);
-            }
+            LOGGER.warn("failed to get privileged ldap data, trying anonymous access", e);
+            ldapData = getAnonymousData(action);
         }
         if (ldapData == null) {
+            LOGGER.warn("using sunetid for name");
             ldapData = new LDAPData();
             ldapData.setName(sunetid);
         }
