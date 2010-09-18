@@ -3,7 +3,7 @@
     var Y = LANE.Y, registerHoverTriggers = function() {
         var hoverTargets = Y.all('.hvrTarg'), parentUl, label, i;
         for (i = 0; i < hoverTargets.size(); i++) {
-            parentUl = hoverTargets.item(i).ancestor('ul');
+            parentUl = hoverTargets.item(i).get('parentNode');
             parentUl.addClass('hvrTrig');
             parentUl.on("mouseenter", function(e) {
                 this.addClass('active');
