@@ -73,11 +73,11 @@ public class LDAPDataAccess {
             Subject subject = this.subjectSource.getSubject();
             ldapData = Subject.doAs(subject, action);
         } catch (SecurityException e) {
-            LOGGER.warn("unable to authenticate", e);
+            LOGGER.error("unable to authenticate", e);
         } catch (CommunicationException e) {
-            LOGGER.warn("unable to connect to ldap server", e);
+            LOGGER.error("unable to connect to ldap server", e);
         } catch (NamingException e) {
-            LOGGER.warn("failed to get ldap data", e);
+            LOGGER.error("failed to get ldap data", e);
         }
         if (ldapData == null) {
             LOGGER.warn("using sunetid for name");
