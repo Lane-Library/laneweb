@@ -29,6 +29,7 @@ import org.apache.cocoon.xml.XMLBaseSupport;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceException;
 import org.apache.excalibur.source.SourceNotFoundException;
+import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
@@ -409,6 +410,8 @@ class XIncludePipe extends AbstractXMLPipe {
                     context.addPrefix(prefix, this.namespaces.get(prefix));
                 }
                 xptr.process(context);
+            } else if (url instanceof XMLizable) {
+                ((XMLizable)url).toSAX(new IncludeXMLConsumer(subPipe));
             } else {
                 this.saxParser.parse(new InputSource(url.getInputStream()), new IncludeXMLConsumer(subPipe));
             }
