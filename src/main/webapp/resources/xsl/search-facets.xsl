@@ -69,7 +69,7 @@
                 <xsl:when test="//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId]">
                     <xsl:value-of select="number(//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId])"/>
                 </xsl:when>
-                <xsl:when test="/doc/sql:rowset/sql:row[sql:genre=$countFacetId]/sql:hits">
+                <xsl:when test="/doc/sql:rowset/sql:row[sql:genre=$countFacetId]/sql:hits and ($countFacetId !='all' or $facetId = 'catalog-all')">
                     <xsl:value-of select="number(/doc/sql:rowset/sql:row[sql:genre=$countFacetId]/sql:hits)"/>
                 </xsl:when>
                 <!-- kludge: findingaid as ID, "finding aid" as type -->
@@ -87,8 +87,8 @@
                 <xsl:when test="$facetId = $source">
                     <xsl:attribute name="class"><xsl:value-of select="attribute::class" /> current</xsl:attribute>
                 </xsl:when>
-                <!-- make facet inactive if zero hits and NOT -all facet -->
-                <xsl:when test="number($hit-count) = 0 and $countFacetId != 'all'">
+                <!-- make facet inactive if zero hits -->
+                <xsl:when test="number($hit-count) = 0">
                     <xsl:attribute name="class"><xsl:value-of select="attribute::class" /> inactiveFacet</xsl:attribute>
                 </xsl:when>
                 <!-- mark facets as "searchableFacet" when hit-count is NaN ... this means JS will check for active/inactive-->
@@ -108,7 +108,7 @@
                         </xsl:if>
                     </span>
                 </xsl:when>
-                <xsl:when test="number($hit-count) = 0 and $countFacetId != 'all'">
+                <xsl:when test="number($hit-count) = 0">
                     <xsl:value-of select="child::node()/text()"/>
                 </xsl:when>
                 <xsl:otherwise>
