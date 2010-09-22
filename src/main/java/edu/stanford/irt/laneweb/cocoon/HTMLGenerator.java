@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
@@ -34,7 +35,10 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
         conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
         AbstractSAXParser parser = new HtmlSAXParser(conf);
         parser.setContentHandler(this.xmlConsumer);
-        parser.parse(new InputSource(this.source.getInputStream()));
+        InputStream input = this.source.getInputStream();
+        parser.parse(new InputSource(input));
+        input.close();
+       
     }
 
     /**
