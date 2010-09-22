@@ -35,10 +35,16 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
         conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
         AbstractSAXParser parser = new HtmlSAXParser(conf);
         parser.setContentHandler(this.xmlConsumer);
-        InputStream input = this.source.getInputStream();
-        parser.parse(new InputSource(input));
-        input.close();
-       
+        InputStream input = null;
+        try{
+            input = this.source.getInputStream();
+            parser.parse(new InputSource(input));
+        }
+        finally{
+            if(input != null){
+                input.close();
+            }
+        }
     }
 
     /**

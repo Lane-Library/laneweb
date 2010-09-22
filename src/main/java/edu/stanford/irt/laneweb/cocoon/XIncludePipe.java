@@ -413,7 +413,16 @@ class XIncludePipe extends AbstractXMLPipe {
             } else if (url instanceof XMLizable) {
                 ((XMLizable)url).toSAX(new IncludeXMLConsumer(subPipe));
             } else {
-                this.saxParser.parse(new InputSource(url.getInputStream()), new IncludeXMLConsumer(subPipe));
+                InputStream input = null;
+                try{
+                    input = url.getInputStream();
+                    this.saxParser.parse(new InputSource(input), new IncludeXMLConsumer(subPipe));
+                }
+                finally{
+                    if(input != null)
+                        input.close();
+                }
+                    
             }
             // restore locator on the consumer
             if (this.locator != null) {

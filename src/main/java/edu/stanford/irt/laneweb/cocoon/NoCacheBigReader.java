@@ -19,15 +19,22 @@ public class NoCacheBigReader extends AbstractReader implements CacheableProcess
      * Generates the requested resource.
      */
     public void generate() throws IOException {
-        InputStream input = this.source.getInputStream();
-        int i = 0;
-        byte[] buffer = new byte[1024];
-        while (true) {
-            i = input.read(buffer);
-            if (i == -1) {
-                break;
+        InputStream input = null; 
+        try{
+            input = this.source.getInputStream();
+            int i = 0;
+            byte[] buffer = new byte[1024];
+            while (true) {
+                i = input.read(buffer);
+                if (i == -1) {
+                    break;
+                }
+                this.outputStream.write(buffer, 0, i);
             }
-            this.outputStream.write(buffer, 0, i);
+        }
+        finally{
+            if(input != null)
+                input.close();
         }
     }
 
