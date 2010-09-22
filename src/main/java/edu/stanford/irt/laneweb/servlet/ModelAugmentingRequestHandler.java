@@ -217,7 +217,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
     private Object getTicket(final Boolean proxyLinks, final String sunetid, final IPGroup ipGroup,
             final HttpSession session) {
         Ticket ticket = null;
-        if (proxyLinks && sunetid != null && (ipGroup != IPGroup.SHC && ipGroup != IPGroup.LPCH)) {
+        if (sunetid != null) {
             ticket = (Ticket) session.getAttribute(Model.TICKET);
             if (ticket == null || !ticket.isValid()) {
                 ticket = new Ticket(sunetid, this.ezproxyKey);
