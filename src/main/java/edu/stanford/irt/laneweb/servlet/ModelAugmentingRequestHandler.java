@@ -214,8 +214,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         return ip;
     }
 
-    private Object getTicket(final Boolean proxyLinks, final String sunetid, final IPGroup ipGroup,
-            final HttpSession session) {
+    private Object getTicket(final String sunetid, final HttpSession session) {
         Ticket ticket = null;
         if (sunetid != null) {
             ticket = (Ticket) session.getAttribute(Model.TICKET);
@@ -246,7 +245,7 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
         addToModel(Model.PROXY_LINKS, proxyLinks, model);
         addToModel(Model.TEMPLATE, this.templateChooser.getTemplate(request), model);
         addToModel(Model.EMRID, getEmrid(request, session), model);
-        addToModel(Model.TICKET, getTicket(proxyLinks, sunetid, ipGroup, session), model);
+        addToModel(Model.TICKET, getTicket(sunetid, session), model);
         addRequestParameters(request, model);
         addToModel(Model.QUERY_STRING, request.getQueryString(), model);
         addToModel(Model.BASE_PATH, getBasePath(request), model);
