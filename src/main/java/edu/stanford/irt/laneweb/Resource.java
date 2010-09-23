@@ -19,11 +19,7 @@ public interface Resource extends XMLizable {
     public static final String ID = "id";
 
     public static final String INSTRUCTION = "instruction";
-
-    public static final String JOURNAL = "journal";
-
-    public static final String JOURNALS = "journals";
-
+    
     public static final String KEYWORD = "keyword";
 
     public static final String LABEL = "label";

@@ -121,7 +121,7 @@
     <xsl:template match="h:span[@id='pubmedMoreStrategies']">
         <xsl:if test="//node()[@id='showPubMedStrategies']">
             <div class="rightSearchTips">
-                <strong>PubMed searches</strong>
+                <strong>PubMed Searches</strong>
                 <ul>
                     <xsl:for-each select="//node()[contains(attribute::class,'searchFacet') and contains(attribute::id,'pubmed') and not(matches(attribute::id,'pubmed_guidelines|pubmed_cochrane_reviews'))]">
                         <xsl:variable name="countFacetId" select="replace(attribute::id,'\w+-(.*)Facet','$1')"/>
@@ -132,28 +132,10 @@
                         </xsl:if>
                     </xsl:for-each>
                 </ul>
-                <xsl:if test="//node()[@id='pubmedJournalLinks']">
-                    <strong>Related PubMed journals</strong>
-                    <xsl:copy>
-                        <xsl:copy-of select="self::node()" />
-                        <xsl:copy-of select="//node()[@id='pubmedJournalLinks']"/>
-                    </xsl:copy>
-                </xsl:if>
             </div>
         </xsl:if>
     </xsl:template>
-    
-    <xsl:template match="node()[@id='pubmedJournals']">
-        <xsl:if test="//node()[@id='pubmedJournalLinks']">
-            <xsl:copy>
-                <xsl:copy-of select="self::node()" />
-                <xsl:copy-of select="//node()[@id='pubmedJournalLinks']"/>
-            </xsl:copy>
-        </xsl:if>
-    </xsl:template>
-    
-    <xsl:template match="node()[@id='pubmedJournalLinks']"/>
-    
+        
     <xsl:template match="h:a" mode="pubmedMore-link">
         <xsl:variable name="countFacetId" select="replace(../attribute::id,'\w+-(.*)Facet','$1')"/>
         <a href="{//h:div[attribute::id='search-content-counts']/h:span[attribute::id=$countFacetId]/h:a/@href}">

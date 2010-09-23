@@ -5,7 +5,9 @@
     version="2.0">
     
     <xsl:param name="request-uri"/>
-
+    
+    <xsl:param name="source"/>
+    
     <xsl:variable name="search-terms">
         <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
@@ -36,21 +38,8 @@
                         </span>
                     </xsl:for-each>
                 </div>
-                <xsl:if test="count(/s:resources/s:journals/s:journal) > 0">
+                <xsl:if test="/s:resources/s:contentHitCounts/s:resource[contains(@resourceId,'pubmed')]">
                     <span id="showPubMedStrategies" style="display:none;">true</span>
-                    <ul id="pubmedJournalLinks">
-                        <xsl:for-each select="/s:resources/s:journals/s:journal[contains(@resourceId,'pubmed')]">
-                            <xsl:sort select="@resourceHits" order="descending" data-type="number"/>
-                            <xsl:sort select="@title" order="ascending" data-type="text"/>
-                            <xsl:if test="position() &lt;= 10">
-                                <li>
-                                    <a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=pubmed&amp;otool=stanford&amp;term={$search-terms} AND &quot;{@title}&quot;[Journal]">
-                                        <xsl:value-of select="@title"/>
-                                    </a>
-                                </li>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </ul>
                 </xsl:if>
             </body>
         </html>
@@ -73,8 +62,12 @@
                     <a class="primaryLink" href="{s:url}">
                         <xsl:apply-templates select="s:title"/>
                     </a>
-
-                    <xsl:apply-templates select="s:pub-author[string-length(.) > 1]"/>
+                    
+                    <!-- display authors if NOT the clinical interface -->
+                    <xsl:if test="not(starts-with($source,'clinical')) and string-length(s:pub-author) > 1">
+                        <xsl:apply-templates select="s:pub-author"/>
+                    </xsl:if>
+                    
                     <div class="pubTitle">
                         <xsl:choose>
                             <xsl:when test="s:pub-title">
