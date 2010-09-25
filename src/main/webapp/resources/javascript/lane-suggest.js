@@ -369,9 +369,9 @@ function handleQueryResponse (e) {
 
             widgetNode = Y.Node.create('<div class="yui3-acwidget"/>');
             inputParent.insert(widgetNode, input);
-            widgetNode.appendChild(inputParent.removeChild(input));
+            widgetNode.append(Y.Node.getDOMNode(inputParent).removeChild(Y.Node.getDOMNode(input)));
             containerNode = Y.Node.create('<div class="yui3-acwidget-container"><div class="yui3-acwidget-content"><div class="yui-acwidget-hd"> </div><div class="yui-acwidget-bd"><ul class="aclist"> </ul></div></div></div>');
-            widgetNode.appendChild(containerNode);
+            widgetNode.append(containerNode);
             contentNode = containerNode.one(".aclist");
             contentNode.delegate("click", function (e) {
                 var target = e.currentTarget, index = target.get("className").split('-')[1];
@@ -400,7 +400,7 @@ function handleQueryResponse (e) {
                     this.visible = true;
                     contentNode.set("innerHTML", "");
                     for (var i = 0, l = data.length; i < l; i ++) {
-                        contentNode.appendChild(Y.Node.create('<li class="ac-'+i+'">'+data[i]+"</li>"));
+                        contentNode.append(Y.Node.create('<li class="ac-'+i+'">'+data[i]+"</li>"));
                     }
                     containerNode.setStyle("display", "block");
                     return this;
