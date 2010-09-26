@@ -50,7 +50,13 @@ public class RedirectProcessorTest {
 
     @Test
     public void testHandleRequestRedirectSlash() throws ServletException, IOException {
-        this.redirectProcessor.setRedirectMap(Collections.singletonMap("(.*)/", "$1/index.html"));
+        this.redirectProcessor.setRedirectMap(Collections.singletonMap("((?!.*\\?.*).*)/", "$1/index.html"));
         assertEquals("/index.html", this.redirectProcessor.getRedirectURL("/"));
+    }
+    
+    @Test
+    public void testHandleParameterEndsWithSlash() {
+        this.redirectProcessor.setRedirectMap(Collections.singletonMap("((?!.*\\?.*).*)/","$1/index.html"));
+        assertEquals(RedirectProcessor.NO_REDIRECT, this.redirectProcessor.getRedirectURL("/l?u=/r/"));
     }
 }
