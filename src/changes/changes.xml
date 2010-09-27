@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-09-29" version="1.11.2" description="1.11.2 bug fix release">
+            <action date="2010-09-24" dev="ryanmax" issue="42673" type="fix">
+                partial fix for Epic/IE 6.0.3790.1830 problems
+            </action>
+            <action date="2010-09-23" dev="ryanmax" issue="42542" type="fix">
+                search -> remove "PubMed related journals"; hide authors in clinical results
+            </action>
+        </release>
         <release date="2010-09-22" version="1.11.1" description="1.11.1 bug fix release"/>
         <release date="2010-09-20" version="1.11.0" description="1.11.0 redesign release"/>
         <release date="2010-09-08" version="1.11.RC2" description="1.11.RC2 redesign release"/>
