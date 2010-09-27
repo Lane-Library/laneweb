@@ -58,7 +58,7 @@
                 <property name="redirectMap">
                     <map>
                         <!-- had to add NOT question mark because some proxy urls end with slash -->
-                        <entry key="((?!.*\\?.*).*)/" value="$1/index.html"/>
+                        <entry key="((?!.*\?.*).*)/" value="$1/index.html"/>
                         <entry key="(.*)/classes/index\.html" value="$1/services/workshops/laneclasses.html"/>
                         <entry key="(.*)/clinician/index\.html" value="$1/portals/clinical.html"/>
                         <entry key="(.*)/index\.html\?template=shc(.*)" value="$1/index\.html\?sourceid=shc$2"/>
