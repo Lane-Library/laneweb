@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2010-09-27" version="1.11.2" description="1.11.2 bug fix release">
+            <action date="2010-09-27" dev="ceyates" issue="42803" type="fix">
+                encoding problems
+            </action>
             <action date="2010-09-27" dev="ryanmax" issue="42774" type="add">
                 Bio res: New Antibiogram redirects
             </action>
