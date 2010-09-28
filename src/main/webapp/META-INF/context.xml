@@ -31,9 +31,6 @@
     <Environment name="ezproxy-key"
         type="java.lang.String"
         value="${laneweb.context.ezproxy-key}"/>
-    <Environment name="webdash-key"
-        type="java.lang.String"
-        value="${laneweb.context.webdash-key}"/>
     <Environment name="metasearch-failed"
         type="java.lang.String"
         value="${laneweb.context.metasearch-failed}"/>

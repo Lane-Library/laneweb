@@ -74,7 +74,6 @@ public class LanewebIntegrationBase {
         builder.bind("java:comp/env/jdbc/voyager", ds);
         builder.bind("java:comp/env/jdbc/eresources", ds);
         builder.bind("java:comp/env/ezproxy-key", "foo");
-        builder.bind("java:comp/env/webdash-key", "foo");
         builder.activate();
         MockServletContext servletContext = new MockServletContext("src/main/webapp", new FileSystemResourceLoader());
         servletContext.addInitParameter("contextConfigLocation", "/WEB-INF/cocoon/spring/bassett.xml "

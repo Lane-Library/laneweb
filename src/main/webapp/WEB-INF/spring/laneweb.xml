@@ -135,18 +135,4 @@
         </property>
     </bean>
 
-    <bean name="org.apache.cocoon.acting.Action/webdash"
-        class="edu.stanford.irt.laneweb.webdash.WebdashAction" scope="prototype">
-        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
-        <property name="webdashLogin">
-            <bean class="edu.stanford.irt.laneweb.webdash.WebdashLogin">
-                <property name="webdashKey">
-                    <bean class="org.springframework.jndi.JndiObjectFactoryBean">
-                        <property name="jndiName" value="java:comp/env/webdash-key"/>
-                    </bean>
-                </property>
-            </bean>
-        </property>
-    </bean>
-    
 </beans>

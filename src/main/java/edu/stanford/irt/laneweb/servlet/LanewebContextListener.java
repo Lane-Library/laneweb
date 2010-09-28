@@ -29,8 +29,6 @@ public class LanewebContextListener implements ServletContextListener {
 
     private static final String VERSION_KEY = "laneweb.context.version";
 
-    private static final String WEBDASH_KEY = "webdash-key";
-
     private Context namingContext;
 
     private ServletContext servletContext;
@@ -43,7 +41,6 @@ public class LanewebContextListener implements ServletContextListener {
         this.servletContext.setAttribute(LIVE_BASE_KEY, getURL(LIVE_BASE_KEY));
         this.servletContext.setAttribute(STAGE_BASE_KEY, getURL(STAGE_BASE_KEY));
         this.servletContext.setAttribute(MEDBLOG_BASE_KEY, getURL(MEDBLOG_BASE_KEY));
-        this.servletContext.setAttribute(WEBDASH_KEY, getValue(WEBDASH_KEY));
         this.servletContext.setAttribute(EZPROXY_KEY, getValue(EZPROXY_KEY));
         this.servletContext.setAttribute(VERSION_KEY, getValue(VERSION_KEY));
     }
