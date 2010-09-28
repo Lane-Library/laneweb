@@ -2,15 +2,9 @@ package edu.stanford.irt.laneweb.ldap;
 
 public class LDAPData {
 
-    private String affiliation;
-
     private String name;
 
     private String univId;
-
-    public String getAffiliation() {
-        return this.affiliation;
-    }
 
     public String getName() {
         return this.name;
@@ -18,10 +12,6 @@ public class LDAPData {
 
     public String getUnivId() {
         return this.univId;
-    }
-
-    public void setAffiliation(final String affiliation) {
-        this.affiliation = affiliation;
     }
 
     public void setName(final String displayName) {
@@ -34,8 +24,7 @@ public class LDAPData {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer("univid=").append(this.univId).append(",affiliation=")
-                .append(this.affiliation).append(",displayname=").append(this.name);
-        return sb.toString();
+        return new StringBuilder("univid=").append(this.univId)
+                .append(",displayname=").append(this.name).toString();
     }
 }

@@ -13,7 +13,7 @@ import org.apache.cocoon.el.objectmodel.ObjectModel;
 @SuppressWarnings("serial")
 public class Model extends HashMap<String, Object> {
 
-    public static final String AFFILIATION = "affiliation";
+//    public static final String AFFILIATION = "affiliation";
 
     public static final String ALPHA = "alpha";
 

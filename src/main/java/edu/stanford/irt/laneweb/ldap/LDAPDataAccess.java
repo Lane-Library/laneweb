@@ -24,10 +24,6 @@ public class LDAPDataAccess {
             if (null != currentAttribute) {
                 ldapData.setName((String) currentAttribute.get());
             }
-            currentAttribute = attributes.get("suaffiliation");
-            if (null != currentAttribute) {
-                ldapData.setAffiliation((String) currentAttribute.get());
-            }
             currentAttribute = attributes.get("suunivid");
             if (null != currentAttribute) {
                 ldapData.setUnivId((String) currentAttribute.get());
