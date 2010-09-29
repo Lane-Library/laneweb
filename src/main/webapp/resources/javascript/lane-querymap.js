@@ -59,7 +59,7 @@
                                 anchor.title = 'QueryMapping: ' + LANE.search.querymap.resourceMap.resources[i].label;
                                 span.appendChild(anchor);
                                 anchor.appendChild(document.createTextNode(LANE.search.querymap.resourceMap.resources[i].label));
-                                queryMapping.appendChild(span);
+                                queryMapping.append(span);
                                 LANE.search.querymap.resourceMap.resources[i].anchor = anchor;
                             }
                             if (document.getElementById('queryMappingDescriptor')) {
@@ -69,7 +69,7 @@
                             img = document.createElement('img');
                             img.style.display = "none";
                             img.src = "/././graphics/spacer.gif?log=QM&d=" + LANE.search.querymap.resourceMap.descriptor + "&k=" + LANE.SearchResult.getEncodedSearchTerms();
-                            queryMapping.appendChild(img);
+                            queryMapping.append(img);
                             
                             LANE.search.querymap.getResultCounts();
                         }
