@@ -227,15 +227,6 @@
             var x = this._currTrigger.mouseX;
             var y = this._currTrigger.mouseY;
 
-//    		var boundingBox = this.get("boundingBox");
-//    		var width = boundingBox.get("clientWidth");
-//        	var right = Y.DOM.viewportRegion().right;
-//    		var diff = right - (x + width);
-//    		
-//    		if (diff < 0) {
-//    			x += diff;
-//    		}
-
             this.move(x + Tooltip.OFFSET_X, y + Tooltip.OFFSET_Y);
 
             this.show();
