@@ -19,8 +19,9 @@
 .type1 h4 {
     color:#3F3C30;
     font-family:inherit;
-    font-size:12px;
+    font-size:13px;
     font-weight:bold;
+    letter-spacing:normal;
 }
 .type1 h5 {
     text-transform:uppercase;
