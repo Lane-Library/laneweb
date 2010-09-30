@@ -1,7 +1,7 @@
 /**
  * @author ceyates
  */
-YUI({filter:"debug"}).use('lane-textinputs','lane-suggest','node','anim','console', 'test', function(Y){
+YUI().use('node','console', 'test', function(Y){
     
     Y.publish('lane:searchSourceChange',{broadcast:2});
 
