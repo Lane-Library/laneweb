@@ -9,7 +9,7 @@ YUI({ logInclude: { TestRunner: true } }).use('lane', "lane-search-indicator", '
     var resultTestCase = new Y.Test.Case({
         
         name: 'Lane Result Test Case',
-        result: Y.lane.SearchResult,
+        result: LANE.Y.SearchResult,
         
         testGetSearchSource: function() {
             Y.Assert.areEqual('foo', this.result.getSearchSource());
