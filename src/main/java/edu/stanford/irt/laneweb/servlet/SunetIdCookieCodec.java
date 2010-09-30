@@ -52,6 +52,9 @@ public class SunetIdCookieCodec {
     }
 
     public PersistentLoginToken restoreLoginToken(final String encryptedValue) {
+        if (encryptedValue == null) {
+            throw new IllegalArgumentException("null encryptedValue");
+        }
         String decrypted = decrypt(encryptedValue);
         String[] values = decrypted.split(COOKIE_VALUE_SEPARATOR);
         if (values.length != 3) {

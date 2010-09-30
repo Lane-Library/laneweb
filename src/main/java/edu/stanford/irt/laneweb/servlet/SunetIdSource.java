@@ -4,6 +4,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
@@ -19,6 +22,8 @@ public class SunetIdSource {
      * this codec codes and decodes the cookie value using sunet id, useragent and time of creation
      */
     private SunetIdCookieCodec codec = new SunetIdCookieCodec();
+
+    private Logger log = LoggerFactory.getLogger(SunetIdSource.class);
 
     /**
      * doFilter looks up the sunet id from the session, request, and lane-user cookie in that order. If it is not in the
@@ -41,9 +46,13 @@ public class SunetIdSource {
         if (cookies != null && userAgent != null) {
             for (Cookie cookie : cookies) {
                 if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(cookie.getName())) {
-                    PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue());
-                    if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
-                        sunetid = token.getSunetId();
+                    try {
+                        PersistentLoginToken token = this.codec.restoreLoginToken(cookie.getValue());
+                        if (token.isValidFor(System.currentTimeMillis(), userAgent.hashCode())) {
+                            sunetid = token.getSunetId();
+                        }
+                    } catch (IllegalStateException e) {
+                        this.log.warn("failed to decode sunetid from: " + cookie.getValue(), e);
                     }
                     break;
                 }
