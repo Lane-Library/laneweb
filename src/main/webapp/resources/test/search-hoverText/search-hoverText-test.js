@@ -12,18 +12,16 @@ YUI({
         testHoverTriggerPresent: function() {
             Y.Assert.isNotNull(Y.one(".hvrTrig"));
         },
-        testHoverTargetVisible: function() {
-            var trigger = Y.one(".hvrTrig"),
-                target = trigger.one(".hvrTarg");
-            trigger.simulate('mouseover');
-            Y.Assert.areEqual("block", target.getStyle("display"));
-        },
         testHoverTargetVisibleThenHidden: function() {
             var trigger = Y.one(".hvrTrig"),
-            target = trigger.one(".hvrTarg");
+                target = trigger.one(".hvrTarg"),
+                afterTimeout = function() {
+                    Y.Assert.areEqual("block", target.getStyle("display"));
+                    trigger.simulate('mouseout');
+                    Y.Assert.areEqual("none", target.getStyle("display"));
+                };
             trigger.simulate('mouseover');
-            trigger.simulate('mouseout');
-            Y.Assert.areEqual("none", target.getStyle("display"));
+            setTimeout(afterTimeout, 1500);
         }
     });
     
