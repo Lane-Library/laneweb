@@ -16,12 +16,12 @@ import edu.stanford.irt.laneweb.cocoon.SourceResolver;
  */
 public class ThrottlingPipeline extends NonCachingPipeline {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThrottlingPipeline.class);
+
     /**
      * the currently processed host/urls. The superclass is a pooled Component so this has to be a static variable.
      */
     private static final Collection<String> REQUESTS = new HashSet<String>();
-
-    private final Logger log = LoggerFactory.getLogger(ThrottlingPipeline.class);
 
     private String requestKey;
 
@@ -47,8 +47,8 @@ public class ThrottlingPipeline extends NonCachingPipeline {
         if (null == this.requestKey) {
             throw new IllegalStateException("null requestKey");
         }
-        if (this.log.isDebugEnabled()) {
-            this.log.debug("requestKey = " + this.requestKey);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("requestKey = " + this.requestKey);
         }
         synchronized (REQUESTS) {
             if (REQUESTS.contains(this.requestKey)) {
