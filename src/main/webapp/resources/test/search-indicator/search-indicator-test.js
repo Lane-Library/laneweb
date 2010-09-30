@@ -5,7 +5,7 @@ YUI({
     logInclude: {
         TestRunner: true
     }
-}).use("lane-search-indicator", "node-event-simulate", "console", "test", function(Y){
+}).use("node-event-simulate", "console", "test", function(Y){
 
     var searchIndicatorTestCase = new Y.Test.Case({
         name: "Lane Search Indicator Test Case",
