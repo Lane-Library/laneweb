@@ -102,6 +102,8 @@ public class Model extends HashMap<String, Object> {
 
     public static final String URL = "url";
 
+    public static final String SYNCHRONOUS = "synchronous";
+    
     public static final String USER_COOKIE = "user-cookie";
 
     @SuppressWarnings("unchecked")

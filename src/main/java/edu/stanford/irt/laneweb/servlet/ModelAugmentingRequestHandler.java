@@ -136,6 +136,8 @@ public class ModelAugmentingRequestHandler extends SitemapRequestHandler {
                 model.put(Model.REMOVE_PERSISTENT_LOGIN, value);
             } else if ("rid".equals(name)) {
                 model.put(Model.RESOURCE_ID, value);
+            } else if ("synchronous".equals(name)) {
+                model.put(Model.SYNCHRONOUS, value);
                 // } else {
                 // model.put(name, request.getParameter(name));
             }
