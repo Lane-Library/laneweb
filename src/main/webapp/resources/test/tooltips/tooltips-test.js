@@ -2,7 +2,6 @@
  * @author ceyates
  */
 YUI({
-	filter:"debug",
     logInclude: {
         TestRunner: true
     }
