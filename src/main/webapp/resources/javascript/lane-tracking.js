@@ -86,7 +86,7 @@
                             host = host.substring(host.indexOf("//") + 2);
                             path = host.substring(host.indexOf("/"));
                             host = host.substring(0, host.indexOf("/"));
-                        } else if (node.get('pathname').indexOf('/secure/apps/proxy/credential') > -1 || node.get('host').indexOf('laneproxy') === 0) {
+                        } else if (node.get('pathname').indexOf('secure/apps/proxy/credential') > -1 || node.get('host').indexOf('laneproxy') === 0) {
                             host = (node.get('search').substring(node.get('search').indexOf('//') + 2));
                             if (host.indexOf('/') > -1) {
                                 path = host.substring(host.indexOf('/'));
@@ -211,7 +211,6 @@
         LANE.Y.on('click', function(e) {
             LANE.tracking.trackEvent(e);
             //put in a delay for safari to make the tracking request:
-            //TODO: revisit this and make sure it actually is useful
             if (LANE.Y.UA.webkit && LANE.tracking.isTrackable(e)) {
                     var t = e.target;
                     while (t) {
