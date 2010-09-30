@@ -52,7 +52,7 @@ public class SunetIdSource {
                             sunetid = token.getSunetId();
                         }
                     } catch (IllegalStateException e) {
-                        this.log.warn("failed to decode sunetid from: " + cookie.getValue(), e);
+                        this.log.error("failed to decode sunetid from: " + cookie.getValue(), e);
                     }
                     break;
                 }
