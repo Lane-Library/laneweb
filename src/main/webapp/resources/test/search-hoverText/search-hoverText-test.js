@@ -14,14 +14,13 @@ YUI({
         },
         testHoverTargetVisibleThenHidden: function() {
             var trigger = Y.one(".hvrTrig"),
-                target = trigger.one(".hvrTarg"),
-                afterTimeout = function() {
-                    Y.Assert.areEqual("block", target.getStyle("display"));
-                    trigger.simulate('mouseout');
-                    Y.Assert.areEqual("none", target.getStyle("display"));
-                };
+                target = trigger.one(".hvrTarg");
             trigger.simulate('mouseover');
-            setTimeout(afterTimeout, 1500);
+            this.wait(function() {
+                Y.Assert.areEqual("block", target.getStyle("display"));
+                trigger.simulate('mouseout');
+                Y.Assert.areEqual("none", target.getStyle("display"));
+            }, 1500);
         }
     });
     

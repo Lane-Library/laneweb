@@ -41,6 +41,10 @@ YUI().use('node','console', 'test', function(Y){
             Y.publish("lane:suggestSelect",{
                 broadcast:2
             });
+            Y.fire('lane:searchSourceChange', {
+                newVal:'clinical-all',
+                oldVal:'all-all'
+            });
             clinicalP.set("value", "foo");
             Y.fire("lane:suggestSelect");
             Y.Assert.areEqual("foo", searchTerms.get("value"));
