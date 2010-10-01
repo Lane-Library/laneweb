@@ -110,7 +110,9 @@
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
                 <map:transform type="html-cme-links"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
+                    <map:parameter name="alt-src" value="${default-resources-base}/xsl/laneweb.xsl"/>
+                </map:transform>
                 <map:transform type="proxy-links"/>
                 <map:transform type="namespace-filter"/>
                 <map:transform type="debug"/>
