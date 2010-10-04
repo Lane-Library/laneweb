@@ -8,9 +8,9 @@
     </properties>
     <body>
         <release date="2010-10-04" version="1.11.3" description="1.11.3 bug fix release">
-            <action date="2010-09-30" dev="ceyates" issue="43008" type="update">
+            <!--<action date="2010-09-30" dev="ceyates" issue="43008" type="update">
                 change link color to #1C4B70
-            </action>
+            </action>-->
             <action date="2010-09-30" dev="ryanmax" issue="42987" type="fix">
                 tracking: IE reporting /ONSITE/XXX//secure/apps/proxy/credential for some OFFSITE links
             </action>
