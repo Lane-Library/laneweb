@@ -289,34 +289,53 @@
 
     <!-- add Previous, Next, All toggles to search results -->
     <xsl:template match="h:div[@class='results-nav']">
-        <xsl:variable name="consumable-request-uri">
-            <xsl:value-of select="replace($request-uri,'/plain.*\.html','/search.html')"/>
-        </xsl:variable>
-        <xsl:variable name="consumable-query-string">
-            <xsl:value-of select="replace($query-string,'&amp;show=\w+','')"/>
-        </xsl:variable>
-        <xsl:variable name="base-link">
-            <xsl:value-of select="concat($consumable-request-uri,'?',$consumable-query-string,'&amp;show=')"/>
-        </xsl:variable>
-        <div class="resultsNav">
-            <xsl:if test="h:span[@class='previous'] != 'false'">
-                <a href="{concat($base-link,h:span[@class='previous'])}">Previous</a>
-            </xsl:if>
-            <xsl:call-template name="search-nav-counts">
-                <xsl:with-param name="show" select="h:span[@class='show']"/>
-                <xsl:with-param name="result-limit" select="h:span[@class='result-limit']"/>
-                <xsl:with-param name="current" select="0"/>
-                <xsl:with-param name="currentIndex" select="h:span[@class='currentIndex']"/>
-                <xsl:with-param name="result-count" select="h:span[@class='result-count']"/>
-                <xsl:with-param name="base-link" select="$base-link"/>
-            </xsl:call-template>
-            <xsl:if test="h:span[@class='next'] != 'false'">
-                <a href="{concat($base-link,h:span[@class='next'])}">Next</a>
-            </xsl:if>
-            <xsl:if test="h:span[@class='show-all'] = 'true'">
-                <a href="{concat($base-link,'all')}">Show All <xsl:value-of select="format-number(h:span[@class='result-count'], '###,##0')"/> Results</a>
-            </xsl:if>
-        </div>
+        <xsl:copy>
+            <xsl:apply-templates select="attribute::node()"/>
+            <div style="display:none">
+                <xsl:apply-templates select="child::node()"/>
+            </div>
+            <xsl:variable name="consumable-request-uri">
+                <xsl:value-of select="replace($request-uri,'/plain.*\.html','/search.html')"/>
+            </xsl:variable>
+            <xsl:variable name="consumable-query-string">
+                <xsl:value-of select="replace($query-string,'&amp;show=\w+','')"/>
+            </xsl:variable>
+            <xsl:variable name="base-link">
+                <xsl:value-of select="concat($consumable-request-uri,'?',$consumable-query-string,'&amp;show=')"/>
+            </xsl:variable>
+            <xsl:variable name="last-item">
+                <xsl:choose>
+                    <xsl:when test="h:span[@class='currentIndex'] + h:span[@class='result-limit'] &gt; h:span[@class='result-count']">
+                        <xsl:value-of select="h:span[@class='result-count']"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="h:span[@class='currentIndex'] + h:span[@class='result-limit']"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:variable>
+            Displaying <xsl:value-of select="h:span[@class='currentIndex'] + 1"/> to
+            <xsl:value-of select="$last-item"/>
+            of <xsl:value-of select="h:span[@class='result-count']"/> matches.
+                <!--<xsl:if test="h:span[@class='previous'] != 'false'">
+                    <a href="{concat($base-link,h:span[@class='previous'])}">Previous</a>
+                    </xsl:if>-->
+            <span style="float:right">
+                <xsl:call-template name="search-nav-counts">
+                    <xsl:with-param name="show" select="h:span[@class='show']"/>
+                    <xsl:with-param name="result-limit" select="h:span[@class='result-limit']"/>
+                    <xsl:with-param name="current" select="0"/>
+                    <xsl:with-param name="currentIndex" select="h:span[@class='currentIndex']"/>
+                    <xsl:with-param name="result-count" select="h:span[@class='result-count']"/>
+                    <xsl:with-param name="base-link" select="$base-link"/>
+                </xsl:call-template>
+                <!--<xsl:if test="h:span[@class='next'] != 'false'">
+                    <a href="{concat($base-link,h:span[@class='next'])}">Next</a>
+                </xsl:if>-->
+                <xsl:if test="h:span[@class='show-all'] = 'true'">
+                    <a id="seeAll" href="{concat($base-link,'all')}">See All</a>
+                </xsl:if>
+                </span>
+        </xsl:copy>
     </xsl:template>
     
     <xsl:template name="search-nav-counts">
@@ -341,6 +360,7 @@
         <xsl:if test="$result-count > $resultLimit and $current >= 0 and $current &lt; $result-count and $show != 'all'">
             <a class="{$class}" href="{concat($base-link,$current)}"><xsl:value-of select="$label"/></a>
             <xsl:if test="$label &lt; 10">
+                <xsl:text> | </xsl:text>
                 <xsl:call-template name="search-nav-counts">
                     <xsl:with-param name="show" select="$show"/>
                     <xsl:with-param name="current" select="$current + $resultLimit"/>

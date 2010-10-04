@@ -1,57 +1,73 @@
 /* styles for grey buttons */
 .button {
-    display:block;
-    font-size:0;
-    color:white;
+    display: block;
+    font-size: 0;
+    color: white;
     background-image: url(/././graphics/buttons/sprite-but-off.gif);
     background-repeat: no-repeat;
     height: 27px;
-    width:147px;
+    width: 147px;
     margin: 5px 0;
-    border:none;
+    border: none;
 }
-.events .button {
-    color:white;
+.events.button {
+    color: white;
 }
 .button:hover {
     background: transparent url(/././graphics/buttons/sprite-but-on.gif);
-    border:none;
-    color:white;
+    border: none;
+    color: white;
 }
-.button.livechat, .button.livechat:hover {
+.button.livechat,.button.livechat:hover {
     background-position: 13px -19px;
     margin: 10px 0;
 }
-.button.directions-maps, .button.direction-maps:hover {
+.button.directions-maps,.button.direction-maps:hover {
     background-position: -25px -318px;
     margin: 10px 0;
 }
-.button.all-classes, .button.all-classes:hover  {
+.button.all-classes,.button.all-classes:hover {
     background-position: -25px -220px;
 }
-.button.biomed-sem, .button.biomed-sem:hover {
+.button.biomed-sem,.button.biomed-sem:hover {
     background-position: -25px -267px;
 }
-.button.go-straight-pubmed, .button.go-straight-pubmed:hover {
+.button.go-straight-pubmed,.button.go-straight-pubmed:hover {
     background-position: -25px -435px;
     width: 205px;
 }
-.button.go-straight-uptodate, .button.go-straight-uptodate:hover {
+.button.go-straight-uptodate,.button.go-straight-uptodate:hover {
     background-position: -25px -483px;
     width: 205px;
 }
-.button.go-straight-webscience, .button.go-straight-webscience:hover {
+.button.go-straight-webscience,.button.go-straight-webscience:hover {
     background-position: -25px -529px;
     width: 253px;
 }
 .button.subscribe {
     background-position: -25px -70px;
-    background-color:transparent;
-    cursor:pointer;
+    background-color: transparent;
+    cursor: pointer;
 }
-.button.sched-support, .button.sched-support:hover {
+.button.sched-support,.button.sched-support:hover {
     background-position: -25px -318px;
     width: 162px;
     margin: 7px 0 0 0;
     height: 48px;
+}
+/*see all button on ej and search pages*/
+#seeAll {
+    background-image: url(/././graphics/buttons/seeall-but-off.gif);
+    border-bottom: medium none;
+    display: block;
+    float: right;
+    height: 26px;
+    position: relative;
+    text-indent: -1000px;
+    top: -6px;
+    left:  -2px;
+    width: 95px;
+}
+#seeAll:hover {
+    background-image: url(/././graphics/buttons/seeall-but-on.gif);
 }
