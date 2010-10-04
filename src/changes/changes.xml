@@ -8,8 +8,23 @@
     </properties>
     <body>
         <release date="2010-10-04" version="1.11.3" description="1.11.3 bug fix release">
+            <action date="2010-09-30" dev="ceyates" issue="43008" type="update">
+                change link color to #1C4B70
+            </action>
             <action date="2010-09-30" dev="ryanmax" issue="42987" type="fix">
                 tracking: IE reporting /ONSITE/XXX//secure/apps/proxy/credential for some OFFSITE links
+            </action>
+            <action date="2010-09-30" dev="alainb" issue="42805" type="remove">
+                remove Webdash
+            </action>
+            <action date="2010-09-29" dev="ceyates" issue="42955" type="update">
+                margin bottom for h4
+            </action>
+            <action date="2010-09-29" dev="ceyates" issue="42900" type="add">
+                prevent logging of stack traces when file not found
+            </action>
+            <action date="2010-09-29" dev="ceyates" issue="42623" type="update">
+                some table fine tuning
             </action>
         </release>
         <release date="2010-09-27" version="1.11.2" description="1.11.2 bug fix release">
