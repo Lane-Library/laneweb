@@ -9,9 +9,11 @@
     
     <stx:variable name="count" select="0"/>
     
-    <stx:variable name="resultLimit" select="50"/>
+    <stx:variable name="default-result-limit" select="20"/>
     
-    <stx:variable name="currentIndex">
+    <stx:variable name="result-limit"/>
+    
+    <stx:variable name="current-index">
         <stx:choose>
             <stx:when test="$show = '' or $show = 'all'">0</stx:when>
             <stx:otherwise><stx:value-of select="$show"/></stx:otherwise>            
@@ -19,46 +21,48 @@
     </stx:variable>
     
     <stx:template match="s:resources">
+        <!-- dynamically create page size as 1/10 of total size if it would be greater than the default -->
+        <stx:assign name="result-limit">
+            <stx:choose>
+                <stx:when test="@size > $default-result-limit * 10">
+                    <stx:value-of select="round(@size div 10) + 1"/>
+                </stx:when>
+                <stx:otherwise>
+                    <stx:value-of select="$default-result-limit"/>
+                </stx:otherwise>
+            </stx:choose>
+        </stx:assign>
         <!--<stx:variable name="next">
             <stx:choose>
-                <stx:when test="number($currentIndex) + number($resultLimit) &lt; number(/s:resources/@size) and $show != 'all'">
-                    <stx:value-of select="number($currentIndex) + number($resultLimit)"/>
+                <stx:when test="number($current-index) + number($result-limit) &lt; number(/s:resources/@size) and $show != 'all'">
+                    <stx:value-of select="number($current-index) + number($result-limit)"/>
                 </stx:when>
                 <stx:otherwise>false</stx:otherwise>
             </stx:choose>
         </stx:variable>
         <stx:variable name="previous">
             <stx:choose>
-                <stx:when test="number($currentIndex) - number($resultLimit) >= 0">
-                    <stx:value-of select="number($currentIndex) - number($resultLimit)"/>
+                <stx:when test="number($current-index) - number($result-limit) >= 0">
+                    <stx:value-of select="number($current-index) - number($result-limit)"/>
                 </stx:when>
                 <stx:otherwise>false</stx:otherwise>
             </stx:choose>
         </stx:variable>-->
-        <stx:variable name="showAll">
+        <stx:variable name="show-all">
             <stx:choose>
-                <stx:when test="number(/s:resources/@size) > number($resultLimit) and $show != 'all'">true</stx:when>
+                <stx:when test="number(/s:resources/@size) > number($result-limit) and $show != 'all'">true</stx:when>
                 <stx:otherwise>false</stx:otherwise>
             </stx:choose>
         </stx:variable>
         <stx:copy>
             <stx:process-attributes/>
             <stx:element name="pagination">
-                <stx:attribute name="resultLimit">
-                    <stx:choose>
-                        <stx:when test="@size > $resultLimit * 10">
-                            <stx:value-of select="round(@size div 10) + 1"/>
-                        </stx:when>
-                        <stx:otherwise>
-                            <stx:value-of select="$resultLimit"/>
-                        </stx:otherwise>
-                    </stx:choose>
-                </stx:attribute>                
+                <stx:attribute name="resultLimit" select="$result-limit"/>              
                 <stx:attribute name="show" select="$show"/>                
-                <stx:attribute name="currentIndex" select="$currentIndex"/>                
+                <stx:attribute name="currentIndex" select="$current-index"/>                
                 <!--<stx:attribute name="next" select="$next"/>                
                 <stx:attribute name="previous" select="$previous"/>  -->              
-                <stx:attribute name="showAll" select="$showAll"/>                
+                <stx:attribute name="showAll" select="$show-all"/>                
             </stx:element>
             <stx:process-children/>
         </stx:copy>
@@ -66,7 +70,7 @@
     
     <stx:template match="s:result">
         <stx:assign name="count" select="$count + 1"/>
-        <stx:if test="$show = 'all' or ($count &gt; number($currentIndex) and $count &lt;= number($currentIndex) + $resultLimit)">
+        <stx:if test="$show = 'all' or ($count &gt; number($current-index) and $count &lt;= number($current-index) + $result-limit)">
             <stx:copy>
                 <stx:process-attributes/>
                 <stx:process-children/>
