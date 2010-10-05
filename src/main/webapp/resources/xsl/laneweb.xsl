@@ -313,9 +313,15 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
-            Displaying <xsl:value-of select="h:span[@class='currentIndex'] + 1"/> to
-            <xsl:value-of select="$last-item"/>
-            of <xsl:value-of select="h:span[@class='result-count']"/> matches.
+            Displaying
+            <xsl:choose>
+                <xsl:when test="h:span[@class='show-all'] = 'true'">
+                    <xsl:value-of select="h:span[@class='currentIndex'] + 1"/> to
+                    <xsl:value-of select="$last-item"/> of
+                </xsl:when>
+                <xsl:otherwise>all </xsl:otherwise>
+            </xsl:choose>
+            <xsl:value-of select="h:span[@class='result-count']"/> matches.
                 <!--<xsl:if test="h:span[@class='previous'] != 'false'">
                     <a href="{concat($base-link,h:span[@class='previous'])}">Previous</a>
                     </xsl:if>-->
