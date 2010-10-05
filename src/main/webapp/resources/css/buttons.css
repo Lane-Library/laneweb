@@ -58,14 +58,15 @@
 /*see all button on ej and search pages*/
 #seeAll {
     background-image: url(/././graphics/buttons/seeall-but-off.gif);
-    border-bottom: medium none;
+    border-bottom: none;
     display: block;
     float: right;
     height: 26px;
     position: relative;
-    text-indent: -1000px;
+    color:white;
+    font-size:0;
     top: -6px;
-    left:  -2px;
+    margin-left:5px;
     width: 95px;
 }
 #seeAll:hover {
