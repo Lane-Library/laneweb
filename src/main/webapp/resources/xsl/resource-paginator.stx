@@ -47,7 +47,7 @@
                 <stx:attribute name="resultLimit">
                     <stx:choose>
                         <stx:when test="@size > $resultLimit * 10">
-                            <stx:value-of select="@size div 10"/>
+                            <stx:value-of select="round(@size div 10)"/>
                         </stx:when>
                         <stx:otherwise>
                             <stx:value-of select="$resultLimit"/>
