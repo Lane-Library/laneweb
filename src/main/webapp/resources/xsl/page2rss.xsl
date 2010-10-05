@@ -23,127 +23,45 @@
                     <link><xsl:value-of select="concat('http://lane.stanford.edu',$page)"/></link>
                 </image>
                 
-                <xsl:variable name="content-table" select="/doc/h:html//h:table[contains(@class, 'striped')]"/>
+                <xsl:apply-templates select="/doc/h:html//h:ul[@class='type1']/h:li"/>
                 
-                <!-- will only generate item list from grandrounds and laneclasses pages -->
-                <xsl:choose>
-                    <xsl:when test="contains($page,'grandrounds.html')">
-                        <xsl:apply-templates select="$content-table[1]/h:tr[not(@class='tableHeader') and count(h:td) = count($content-table[1]/h:tr[@class='tableHeader']/h:td)]">
-                            <xsl:with-param name="type" select="'grandrounds'"/>
-                            <xsl:sort data-type="text" order="descending" select="h:td[@class='updateDate']"/>
-                        </xsl:apply-templates>
-                    </xsl:when>
-                    <xsl:when test="contains($page,'workshops/laneclasses.html')">
-                        <xsl:apply-templates select="$content-table[1]/h:tr[not(h:td[.='inactive']) and not(@class='tableHeader') and count(h:td) = count($content-table[1]/h:tr[@class='tableHeader']/h:td)]">
-                            <xsl:with-param name="type" select="'workshops'"/>
-                            <xsl:sort data-type="text" order="ascending" select="h:td[@class='updateDate']"/>
-                        </xsl:apply-templates>
-                    </xsl:when>
-                </xsl:choose>
             </channel>
         </rss>
     </xsl:template>
     
-    <xsl:template match="h:tr">
-        <xsl:param name="type"/>
-        <xsl:variable name="header" select="../h:tr[@class='tableHeader']/h:td[not(@class='updateDate')]"/>
-        <xsl:variable name="tds" select="h:td[not(@class='updateDate')]"/>
-        
+    <xsl:template match="h:li">
         <xsl:variable name="link">
-            <xsl:choose>
-                <xsl:when test="$type = 'grandrounds'">
-                    <xsl:call-template name="process-link">
-                        <xsl:with-param name="link" select="$tds[5]/h:a/@href"/>
-                    </xsl:call-template>
-                </xsl:when>
-                <xsl:when test="$type = 'workshops'">
-                    <xsl:call-template name="process-link">
-                        <xsl:with-param name="link" select="$tds[2]/h:a/@href"/>
-                    </xsl:call-template>
-                </xsl:when>
-            </xsl:choose>
+            <xsl:call-template name="process-link">
+                <xsl:with-param name="link" select="./h:div/h:h4/h:a/@href"/>
+            </xsl:call-template>
         </xsl:variable>
         
-        <xsl:variable name="title">
-            <xsl:choose>
-                <xsl:when test="$type = 'grandrounds'">
-                    <xsl:value-of select="$tds[2]/text()"/>
-                </xsl:when>
-                <xsl:when test="$type = 'workshops'">
-                    <xsl:value-of select="$tds[2]/h:a/text()"/>
-                </xsl:when>
-            </xsl:choose>
-        </xsl:variable>
         
         <item>
-            <title><xsl:value-of select="$title"/></title>
+            <title><xsl:value-of select="./h:div/h:h4/h:a/text()"/></title>
             <link><xsl:value-of select="$link"/></link>
             <description>
-                <xsl:for-each select="$tds">
-                    <xsl:variable name="pos" select="position()"/>
-                    <xsl:choose>
-                        <!-- simple text for td's w/o child nodes -->
-                        <xsl:when test="count(*) = 0 and string-length(normalize-space()) &gt; 1">
-                            <xsl:text><![CDATA[<b>]]></xsl:text><xsl:value-of select="$header[$pos = position()]"/><xsl:text><![CDATA[</b>: ]]></xsl:text>
-                            <xsl:value-of select="."/>
-                            <xsl:text><![CDATA[<br />]]></xsl:text>
-                        </xsl:when>
-                        <!-- td's w/ a elements in them -->
-                        <xsl:when test="count(h:a) &gt; 0">
-                            <xsl:for-each select="h:a">
-                                <xsl:variable name="link">
-                                    <xsl:call-template name="process-link">
-                                        <xsl:with-param name="link" select="@href"/>
-                                    </xsl:call-template>
-                                </xsl:variable>
-                                <xsl:text><![CDATA[<b>]]></xsl:text><xsl:value-of select="$header[$pos = position()]"/><xsl:text><![CDATA[</b>: <a href="]]></xsl:text>
-                                <xsl:value-of select="$link"/>
-                                <xsl:text><![CDATA[">]]></xsl:text>
-                                <xsl:choose>
-                                    <xsl:when test="string-length(normalize-space()) &gt; 1">
-                                        <xsl:value-of select="."/>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <xsl:value-of select="$link"/>
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                                <xsl:text><![CDATA[</a><br />]]></xsl:text>
-                            </xsl:for-each>
-                        </xsl:when>
-                        <!-- td's w/ spans or brs  -->
-                        <xsl:when test="count(h:span) &gt; 0 or count(h:br) &gt; 0">
-                            <xsl:text><![CDATA[<b>]]></xsl:text><xsl:value-of select="$header[$pos = position()]"/><xsl:text><![CDATA[</b>: ]]></xsl:text>
-                            <xsl:value-of select="."/>
-                            <xsl:text><![CDATA[<br />]]></xsl:text>
-                        </xsl:when>
-                    </xsl:choose>
-                </xsl:for-each>
+                <xsl:text><![CDATA[<b>]]>Date<![CDATA[</b>: ]]></xsl:text><xsl:value-of select="./h:div[contains(@class,'yui-u first')]"/><xsl:text><![CDATA[<br/>]]></xsl:text>
+                <xsl:text><![CDATA[<b>]]>Presentation<![CDATA[</b>: ]]></xsl:text><xsl:value-of select="./h:div/h:h4/h:a/text()"/><xsl:text><![CDATA[<br/>]]></xsl:text>
+                <xsl:text><![CDATA[<b>]]>Speaker<![CDATA[</b>: ]]></xsl:text>
+                 <xsl:choose>
+                    <xsl:when test="./h:div/h:div[@class='lecturer']/h:a">
+                        <xsl:text><![CDATA[<a href="]]></xsl:text><xsl:value-of select="./h:div/h:div[@class='lecturer']/h:a/@href"/><xsl:text><![CDATA[">]]></xsl:text>
+                            <xsl:value-of select="./h:div/h:div[@class='lecturer']/h:a/text()"/><xsl:text><![CDATA[<br/>]]></xsl:text>
+                        <xsl:text><![CDATA[</a>]]></xsl:text>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="./h:div/h:div[@class='lecturer']/text()"/><xsl:text><![CDATA[<br/>]]></xsl:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:if test="./h:div/h:div[@class='affiliation']/text()">
+                    <xsl:text><![CDATA[<b>]]>Speaker's Title<![CDATA[</b>: ]]></xsl:text><xsl:value-of select="./h:div/h:div[@class='affiliation']/text()"/><xsl:text><![CDATA[<br/>]]></xsl:text>
+                </xsl:if>
+                <xsl:text><![CDATA[<b>]]>QuickTime Video<![CDATA[</b>: <a href="]]></xsl:text><xsl:value-of select="$link"/><xsl:text><![CDATA["/>]]></xsl:text> <xsl:value-of select="$link"/><xsl:text> <![CDATA[</a><br/><br/>]]></xsl:text>
             </description>
-            <!-- link isn't unique enough for guid ... <guid><xsl:value-of select="$link"/></guid>-->
-            <xsl:apply-templates select="h:td[@class='updateDate']"/>
         </item>
     </xsl:template>
     
-    <xsl:template match="h:td[@class='updateDate']">
-        <!--
-            expecting input in one of two formats:
-            1: 2008-09-04
-            2: Thu, 07 Aug 2008 17:00:15 -0700
-        -->
-        <xsl:variable name="updateDate">
-            <xsl:choose>
-                <xsl:when test="string-length(.) = 10">
-                    <xsl:value-of select="concat(format-date(.,'[FNn,*-3], [D01] [MNn,*-3] [Y]'),' 00:00:00 -0700')"/>
-                </xsl:when>
-                <xsl:when test="string-length(.) = 31">
-                    <xsl:value-of select="."/>
-                </xsl:when>
-            </xsl:choose>
-        </xsl:variable>
-        <pubDate>
-            <xsl:value-of select="$updateDate"/>
-        </pubDate>
-    </xsl:template>
     
     <xsl:template name="process-link">
         <xsl:param name="link"/>
