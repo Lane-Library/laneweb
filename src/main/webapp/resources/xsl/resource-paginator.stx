@@ -9,7 +9,7 @@
     
     <stx:variable name="count" select="0"/>
     
-    <stx:variable name="resultLimit" select="20"/>
+    <stx:variable name="resultLimit" select="50"/>
     
     <stx:variable name="currentIndex">
         <stx:choose>
