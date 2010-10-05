@@ -19,7 +19,7 @@
     </stx:variable>
     
     <stx:template match="s:resources">
-        <stx:variable name="next">
+        <!--<stx:variable name="next">
             <stx:choose>
                 <stx:when test="number($currentIndex) + number($resultLimit) &lt; number(/s:resources/@size) and $show != 'all'">
                     <stx:value-of select="number($currentIndex) + number($resultLimit)"/>
@@ -34,7 +34,7 @@
                 </stx:when>
                 <stx:otherwise>false</stx:otherwise>
             </stx:choose>
-        </stx:variable>
+        </stx:variable>-->
         <stx:variable name="showAll">
             <stx:choose>
                 <stx:when test="number(/s:resources/@size) > number($resultLimit) and $show != 'all'">true</stx:when>
@@ -44,11 +44,20 @@
         <stx:copy>
             <stx:process-attributes/>
             <stx:element name="pagination">
-                <stx:attribute name="resultLimit" select="$resultLimit"/>                
+                <stx:attribute name="resultLimit">
+                    <stx:choose>
+                        <stx:when test="@size > $resultLimit * 10">
+                            <stx:value-of select="@size mod 10"/>
+                        </stx:when>
+                        <stx:otherwise>
+                            <stx:value-of select="$resultLimit"/>
+                        </stx:otherwise>
+                    </stx:choose>
+                </stx:attribute>                
                 <stx:attribute name="show" select="$show"/>                
                 <stx:attribute name="currentIndex" select="$currentIndex"/>                
-                <stx:attribute name="next" select="$next"/>                
-                <stx:attribute name="previous" select="$previous"/>                
+                <!--<stx:attribute name="next" select="$next"/>                
+                <stx:attribute name="previous" select="$previous"/>  -->              
                 <stx:attribute name="showAll" select="$showAll"/>                
             </stx:element>
             <stx:process-children/>
