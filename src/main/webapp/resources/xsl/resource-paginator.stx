@@ -9,7 +9,7 @@
     
     <stx:variable name="count" select="0"/>
     
-    <stx:variable name="default-result-limit" select="20"/>
+    <stx:variable name="default-result-limit" select="100"/>
     
     <stx:variable name="result-limit"/>
     
@@ -24,8 +24,8 @@
         <!-- dynamically create page size as 1/10 of total size if it would be greater than the default -->
         <stx:assign name="result-limit">
             <stx:choose>
-                <stx:when test="@size > $default-result-limit * 10">
-                    <stx:value-of select="round(@size div 10) + 1"/>
+                <stx:when test="@size > $default-result-limit * 4">
+                    <stx:value-of select="round(@size div 4) + 1"/>
                 </stx:when>
                 <stx:otherwise>
                     <stx:value-of select="$default-result-limit"/>
