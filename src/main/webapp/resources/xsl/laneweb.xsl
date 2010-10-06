@@ -313,15 +313,19 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:variable>
-            Displaying
+            <xsl:variable name="result-count" select="number(h:span[@class='result-count'])"/>
+            <xsl:text>Displaying </xsl:text>
             <xsl:choose>
                 <xsl:when test="h:span[@class='show-all'] = 'true'">
-                    <xsl:value-of select="h:span[@class='currentIndex'] + 1"/> to
-                    <xsl:value-of select="$last-item"/> of
+                    <xsl:value-of select="h:span[@class='currentIndex'] + 1"/>
+                    <xsl:text> to </xsl:text>
+                    <xsl:value-of select="$last-item"/>
+                    <xsl:text> of </xsl:text>
+                    <a href="{concat($base-link,'all')}"><xsl:value-of select="$result-count"/> matches.</a>
                 </xsl:when>
-                <xsl:otherwise>all </xsl:otherwise>
+                <xsl:otherwise>all <xsl:value-of select="$result-count"/> matches.</xsl:otherwise>
             </xsl:choose>
-            <xsl:value-of select="h:span[@class='result-count']"/> matches.
+            
                 <!--<xsl:if test="h:span[@class='previous'] != 'false'">
                     <a href="{concat($base-link,h:span[@class='previous'])}">Previous</a>
                     </xsl:if>-->
@@ -331,7 +335,7 @@
                     <xsl:with-param name="result-limit" select="number(h:span[@class='result-limit'])"/>
                     <xsl:with-param name="current" select="0"/>
                     <xsl:with-param name="current-index" select="number(h:span[@class='currentIndex'])"/>
-                    <xsl:with-param name="result-count" select="number(h:span[@class='result-count'])"/>
+                    <xsl:with-param name="result-count" select="$result-count"/>
                     <xsl:with-param name="base-link" select="$base-link"/>
                 </xsl:call-template>
                 <!--<xsl:if test="h:span[@class='next'] != 'false'">

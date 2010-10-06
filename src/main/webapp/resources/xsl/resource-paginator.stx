@@ -11,6 +11,8 @@
     
     <stx:variable name="default-result-limit" select="100"/>
     
+    <stx:variable name="max-pages" select="4"/>
+    
     <stx:variable name="result-limit"/>
     
     <stx:variable name="current-index">
@@ -21,11 +23,11 @@
     </stx:variable>
     
     <stx:template match="s:resources">
-        <!-- dynamically create page size as 1/10 of total size if it would be greater than the default -->
+        <!-- dynamically create page size as 1/$max-pages of total size if it would be greater than the default -->
         <stx:assign name="result-limit">
             <stx:choose>
-                <stx:when test="@size > $default-result-limit * 4">
-                    <stx:value-of select="round(@size div 4) + 1"/>
+                <stx:when test="@size > $default-result-limit * $max-pages">
+                    <stx:value-of select="round(@size div $max-pages) + 1"/>
                 </stx:when>
                 <stx:otherwise>
                     <stx:value-of select="$default-result-limit"/>
