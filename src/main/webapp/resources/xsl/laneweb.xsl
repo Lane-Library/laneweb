@@ -321,9 +321,9 @@
                     <xsl:text> to </xsl:text>
                     <xsl:value-of select="$last-item"/>
                     <xsl:text> of </xsl:text>
-                    <a href="{concat($base-link,'all')}"><xsl:value-of select="$result-count"/> matches.</a>
+                    <a href="{concat($base-link,'all')}"><xsl:value-of select="$result-count"/> matches</a>
                 </xsl:when>
-                <xsl:otherwise>all <xsl:value-of select="$result-count"/> matches.</xsl:otherwise>
+                <xsl:otherwise>all <xsl:value-of select="$result-count"/> matches</xsl:otherwise>
             </xsl:choose>
             
                 <!--<xsl:if test="h:span[@class='previous'] != 'false'">
