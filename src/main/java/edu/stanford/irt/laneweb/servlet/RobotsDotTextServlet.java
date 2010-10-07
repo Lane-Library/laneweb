@@ -8,7 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ * sends Dissallow: / if not production server.
+ * @author ceyates
+ *
+ */
 public class RobotsDotTextServlet extends HttpServlet {
     
     private byte[] production =
@@ -20,7 +24,10 @@ public class RobotsDotTextServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String hostHeader = req.getHeader("Host");
+        String hostHeader = req.getHeader("X-Forwarded-Host");
+        if (hostHeader == null) {
+            hostHeader = req.getHeader("Host");
+        }
         ServletOutputStream outputStream = resp.getOutputStream();
         if ("irt-lane-stage.stanford.edu".equals(hostHeader)) {
             outputStream.write(this.production);
