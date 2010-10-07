@@ -22,7 +22,7 @@ public class RobotsDotTextServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String hostHeader = req.getHeader("Host");
         ServletOutputStream outputStream = resp.getOutputStream();
-        if ("lane.stanford.edu".equals(hostHeader)) {
+        if ("irt-lane-stage.stanford.edu".equals(hostHeader)) {
             outputStream.write(this.production);
         } else {
             outputStream.write(this.nonproduction);
