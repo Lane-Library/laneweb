@@ -59,14 +59,13 @@
 #seeAll {
     background-image: url(/././graphics/buttons/seeall-but-off.gif);
     border-bottom: none;
-    display: block;
     float: right;
     height: 26px;
     position: relative;
     color:white;
     font-size:0;
     top: -6px;
-    margin-left:5px;
+    margin:0 0 -12px 5px;
     width: 95px;
 }
 #seeAll:hover {
