@@ -32,13 +32,11 @@ public class RobotsDotTextServlet extends HttpServlet {
             hostHeader = hostHeader.substring(0, hostHeader.indexOf(','));
         }
         ServletOutputStream outputStream = resp.getOutputStream();
-        if ("irt-lane-stage.stanford.edu".equals(hostHeader)) {
+        if ("lane.stanford.edu".equals(hostHeader)) {
             outputStream.write(this.production);
         } else {
             outputStream.write(this.nonproduction);
         }
-        outputStream.write("\n".getBytes());
-        outputStream.write(hostHeader.getBytes());
         outputStream.close();
     }
 
