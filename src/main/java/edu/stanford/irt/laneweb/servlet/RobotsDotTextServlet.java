@@ -27,6 +27,8 @@ public class RobotsDotTextServlet extends HttpServlet {
         } else {
             outputStream.write(this.nonproduction);
         }
+        outputStream.write("\n".getBytes());
+        outputStream.write(hostHeader.getBytes());
         outputStream.close();
     }
 
