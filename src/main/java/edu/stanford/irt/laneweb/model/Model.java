@@ -13,8 +13,7 @@ import org.apache.cocoon.el.objectmodel.ObjectModel;
 @SuppressWarnings("serial")
 public class Model extends HashMap<String, Object> {
 
-//    public static final String AFFILIATION = "affiliation";
-
+    // public static final String AFFILIATION = "affiliation";
     public static final String ALPHA = "alpha";
 
     public static final String BASE_PATH = "base-path";
@@ -71,10 +70,10 @@ public class Model extends HashMap<String, Object> {
 
     public static final String REMOVE_PERSISTENT_LOGIN = "remove-persistent-login";
 
+    public static final String RESOURCE_ID = "rid";
+
     public static final String RESOURCES = "resources";
 
-    public static final String RESOURCE_ID = "rid";
-    
     public static final String SELECTION = "selection";
 
     public static final String SHOW = "show";
@@ -87,9 +86,10 @@ public class Model extends HashMap<String, Object> {
 
     public static final String SUNETID = "sunetid";
 
+    public static final String SYNCHRONOUS = "synchronous";
+
     public static final String SYSTEM_USER_ID = "system_user_id";
 
-    // public static final String JS_ENABLED = "js-enabled";
     public static final String TEMPLATE = "template";
 
     public static final String TICKET = "ticket";
@@ -102,8 +102,6 @@ public class Model extends HashMap<String, Object> {
 
     public static final String URL = "url";
 
-    public static final String SYNCHRONOUS = "synchronous";
-    
     public static final String USER_COOKIE = "user-cookie";
 
     @SuppressWarnings("unchecked")
