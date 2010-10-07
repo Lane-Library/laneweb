@@ -290,8 +290,7 @@
     <!-- add Previous, Next, All toggles to search results -->
     <xsl:template match="h:div[@class='results-nav']">
         <xsl:copy>
-            <!--<xsl:apply-templates select="attribute::node()"/>-->
-            <xsl:attribute name="class">results-nav yui-g</xsl:attribute>
+            <xsl:apply-templates select="attribute::node()"/>
             <xsl:variable name="consumable-request-uri">
                 <xsl:value-of select="replace($request-uri,'/plain.*\.html','/search.html')"/>
             </xsl:variable>
@@ -312,31 +311,33 @@
                 </xsl:choose>
             </xsl:variable>
             <xsl:variable name="result-count" select="number(h:span[@class='result-count'])"/>
-            <div class="yui-u first">
-                <xsl:text>Displaying </xsl:text>
-                <xsl:choose>
-                    <xsl:when test="h:span[@class='show-all'] = 'true'">
-                        <xsl:value-of select="h:span[@class='currentIndex'] + 1"/>
-                        <xsl:text> to </xsl:text>
-                        <xsl:value-of select="$last-item"/>
-                        <xsl:text> of </xsl:text>
-                        <a href="{concat($base-link,'all')}"><xsl:value-of select="$result-count"/> matches</a>
-                    </xsl:when>
-                    <xsl:otherwise>all <xsl:value-of select="$result-count"/> matches</xsl:otherwise>
-                </xsl:choose>
-            </div>
-            <div class="yui-u" style="text-align:right">
-                <xsl:if test="h:span[@class='show-all'] = 'true'">
-                    <a id="seeAll" href="{concat($base-link,'all')}">See All</a>
-                </xsl:if>
-                <xsl:call-template name="search-nav-counts">
-                    <xsl:with-param name="show" select="h:span[@class='show']"/>
-                    <xsl:with-param name="result-limit" select="number(h:span[@class='result-limit'])"/>
-                    <xsl:with-param name="current" select="0"/>
-                    <xsl:with-param name="current-index" select="number(h:span[@class='currentIndex'])"/>
-                    <xsl:with-param name="result-count" select="$result-count"/>
-                    <xsl:with-param name="base-link" select="$base-link"/>
-                </xsl:call-template>
+            <div class="yui-g">            
+                <div class="yui-u first">
+                    <xsl:text>Displaying </xsl:text>
+                    <xsl:choose>
+                        <xsl:when test="h:span[@class='show-all'] = 'true'">
+                            <xsl:value-of select="h:span[@class='currentIndex'] + 1"/>
+                            <xsl:text> to </xsl:text>
+                            <xsl:value-of select="$last-item"/>
+                            <xsl:text> of </xsl:text>
+                            <a href="{concat($base-link,'all')}"><xsl:value-of select="$result-count"/> matches</a>
+                        </xsl:when>
+                        <xsl:otherwise>all <xsl:value-of select="$result-count"/> matches</xsl:otherwise>
+                    </xsl:choose>
+                </div>
+                <div class="yui-u" style="text-align:right">
+                    <xsl:if test="h:span[@class='show-all'] = 'true'">
+                        <a id="seeAll" href="{concat($base-link,'all')}">See All</a>
+                    </xsl:if>
+                    <xsl:call-template name="search-nav-counts">
+                        <xsl:with-param name="show" select="h:span[@class='show']"/>
+                        <xsl:with-param name="result-limit" select="number(h:span[@class='result-limit'])"/>
+                        <xsl:with-param name="current" select="0"/>
+                        <xsl:with-param name="current-index" select="number(h:span[@class='currentIndex'])"/>
+                        <xsl:with-param name="result-count" select="$result-count"/>
+                        <xsl:with-param name="base-link" select="$base-link"/>
+                    </xsl:call-template>
+                </div>
             </div>
         </xsl:copy>
     </xsl:template>
