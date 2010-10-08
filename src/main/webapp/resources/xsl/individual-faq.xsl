@@ -78,7 +78,7 @@
                 <div class="yui-u first">
                     <div class="yui-gf">
                         <div class="yui-u">
-                            <xsl:apply-templates select="descendant::h:div[@id='mainColumn']/child::node()"/>
+                            <xsl:apply-templates select="descendant::h:div[@id='mainColumn']"/>
                         </div>
                         <div class="yui-u first">
                             <xsl:apply-templates select="descendant::h:div[@id='leftColumn']"/>
@@ -95,19 +95,19 @@
     <xsl:template match="h:h1|h:div[@class='extra']|h:script[@src='http://medblog.stanford.edu/lane-faq/archives/diggthis.js']"/>
     
     <xsl:template match="h:h2">
-        <h3 class="alt">
+        <h4>
             <xsl:apply-templates/>
-        </h3>        
+        </h4>        
     </xsl:template>
     
-    <!--<xsl:template match="h:div[@id='mainColumn']">
+    <xsl:template match="h:div[@id='mainColumn']">
         <div class="module">
             <h3 class="alt">&#160;</h3>
             <div class="bd">
                 <xsl:apply-templates/>
             </div>
         </div>
-    </xsl:template>-->
+    </xsl:template>
     
     <xsl:template match="h:div[@id='leftColumn']">
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/leftmenu-help.html">
