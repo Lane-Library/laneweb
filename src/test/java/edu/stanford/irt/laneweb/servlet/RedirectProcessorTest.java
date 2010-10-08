@@ -60,11 +60,11 @@ public class RedirectProcessorTest {
         assertEquals(RedirectProcessor.NO_REDIRECT, this.redirectProcessor.getRedirectURL("/l?u=/r/"));
     }
     
-    @Test
-    public void testUniprintRedirect() {
-        this.redirectProcessor.setRedirectMap(Collections.singletonMap("((?!.*/secure.*).*)/uniprint/(.*)", "$1/secure/uniprint/$2"));
-        assertEquals("/secure/uniprint/index.html", this.redirectProcessor.getRedirectURL("/uniprint/index.html"));
-        assertEquals(RedirectProcessor.NO_REDIRECT, this.redirectProcessor.getRedirectURL("/secure/uniprint/index.html"));
-        assertEquals("/foo/secure/uniprint/index.html", this.redirectProcessor.getRedirectURL("/foo/uniprint/index.html"));
-    }
+//    @Test
+//    public void testUniprintRedirect() {
+//        this.redirectProcessor.setRedirectMap(Collections.singletonMap("((?!.*/secure.*).*)/uniprint/(.*)", "$1/secure/uniprint/$2"));
+//        assertEquals("/secure/uniprint/index.html", this.redirectProcessor.getRedirectURL("/uniprint/index.html"));
+//        assertEquals(RedirectProcessor.NO_REDIRECT, this.redirectProcessor.getRedirectURL("/secure/uniprint/index.html"));
+//        assertEquals("/foo/secure/uniprint/index.html", this.redirectProcessor.getRedirectURL("/foo/uniprint/index.html"));
+//    }
 }
