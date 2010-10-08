@@ -41,7 +41,7 @@
             <title><xsl:value-of select="./h:div/h:h4/h:a/text()"/></title>
             <link><xsl:value-of select="$link"/></link>
             <description>
-                <xsl:text><![CDATA[<b>]]>Date<![CDATA[</b>: ]]></xsl:text><xsl:value-of select="./h:div[contains(@class,'yui-u first')]"/><xsl:text><![CDATA[<br/>]]></xsl:text>
+                <xsl:text><![CDATA[<b>]]>Date<![CDATA[</b>: ]]></xsl:text><xsl:value-of select="./h:div[contains(@class,'yui-u first date')]"/><xsl:text><![CDATA[<br/>]]></xsl:text>
                 <xsl:text><![CDATA[<b>]]>Presentation<![CDATA[</b>: ]]></xsl:text><xsl:value-of select="./h:div/h:h4/h:a/text()"/><xsl:text><![CDATA[<br/>]]></xsl:text>
                 <xsl:text><![CDATA[<b>]]>Speaker<![CDATA[</b>: ]]></xsl:text>
                  <xsl:choose>
