@@ -13,7 +13,6 @@ import org.apache.cocoon.el.objectmodel.ObjectModel;
 @SuppressWarnings("serial")
 public class Model extends HashMap<String, Object> {
 
-    // public static final String AFFILIATION = "affiliation";
     public static final String ALPHA = "alpha";
 
     public static final String BASE_PATH = "base-path";
@@ -43,8 +42,6 @@ public class Model extends HashMap<String, Object> {
     public static final String MODEL = "model";
 
     public static final String NAME = "name";
-
-    public static final String NONCE = "nonce";
 
     public static final String PAGE = "page";
 
@@ -87,8 +84,6 @@ public class Model extends HashMap<String, Object> {
     public static final String SUNETID = "sunetid";
 
     public static final String SYNCHRONOUS = "synchronous";
-
-    public static final String SYSTEM_USER_ID = "system_user_id";
 
     public static final String TEMPLATE = "template";
 
