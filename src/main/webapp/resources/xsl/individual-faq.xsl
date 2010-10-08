@@ -78,7 +78,7 @@
                 <div class="yui-u first">
                     <div class="yui-gf">
                         <div class="yui-u">
-                            <xsl:apply-templates select="descendant::h:div[@id='mainColumn']"/>
+                            <xsl:apply-templates select="descendant::h:div[@id='mainColumn']/child::node()"/>
                         </div>
                         <div class="yui-u first">
                             <xsl:apply-templates select="descendant::h:div[@id='leftColumn']"/>
@@ -100,14 +100,14 @@
         </h3>        
     </xsl:template>
     
-    <xsl:template match="h:div[@id='mainColumn']">
+    <!--<xsl:template match="h:div[@id='mainColumn']">
         <div class="module">
             <h3 class="alt">&#160;</h3>
             <div class="bd">
                 <xsl:apply-templates/>
             </div>
         </div>
-    </xsl:template>
+    </xsl:template>-->
     
     <xsl:template match="h:div[@id='leftColumn']">
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/leftmenu-help.html">
@@ -119,7 +119,7 @@
         <div class="module">
             <h3><xsl:value-of select="h:h2"/></h3>
             <div class="bd">
-                <xsl:apply-templates select="node()[name()!='h2']"/>
+                <xsl:apply-templates select="node()[not(self::h:h2)]"/>
             </div>
         </div>
     </xsl:template>
