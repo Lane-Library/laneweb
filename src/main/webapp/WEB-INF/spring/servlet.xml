@@ -62,6 +62,7 @@
                         <entry key="(.*)/classes/index\.html" value="$1/services/workshops/laneclasses.html"/>
                         <entry key="(.*)/clinician/index\.html" value="$1/portals/clinical.html"/>
                         <entry key="(.*)/index\.html\?template=shc(.*)" value="$1/index\.html\?sourceid=shc$2"/>
+                        <entry key="((?!.*/secure.*).*)/uniprint/(.*)" value="$1/secure/uniprint/$2"/>
                         <entry key="(.*)/services/index\.html" value="$1/newpage.html?page=$1/about/index.html"/>
                         <entry key="(.*)/(?:content|rss)/page2rss\?page=/services/workshops/laneclasses\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/classes-consult/laneclasses\.html"/>
                         <entry key="(.*)/services/workshops/laneclasses\.html" value="$1/newpage.html?page=$1/classes-consult/laneclasses.html"/>
