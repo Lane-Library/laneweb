@@ -23,6 +23,9 @@ h1 a {
     border-bottom:none;
     color: #820000;
 }
+h1 a:visited {
+    color: #820000;
+}
 #som, h1 a:hover {
     text-decoration:underline;
     border-bottom-style:none;
