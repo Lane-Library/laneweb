@@ -88,6 +88,7 @@ public class SitemapRequestHandler implements HttpRequestHandler {
             return;
         }
         Map<String, Object> model = new HashMap<String, Object>();
+        doBind(model, request);
         request.setAttribute(Model.MODEL, model);
         process(model, request, response);
     }
