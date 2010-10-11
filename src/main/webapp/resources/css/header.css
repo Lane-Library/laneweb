@@ -21,6 +21,7 @@ h1 span {
 }
 h1 a {
     border-bottom:none;
+    color: #820000;
 }
 #som, h1 a:hover {
     text-decoration:underline;
