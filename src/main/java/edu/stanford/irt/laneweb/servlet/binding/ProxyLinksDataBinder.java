@@ -17,7 +17,7 @@ public class ProxyLinksDataBinder extends BooleanSessionParameterDataBinder {
     @Override
     public void bind(Map<String, Object> model, HttpServletRequest request) {
         super.bind(model, request);
-        if (!model.containsKey(Model.PROXY_LINKS)) {
+        if (model.get(Model.PROXY_LINKS) == null) {
             HttpSession session = request.getSession();
             IPGroup ipGroup = (IPGroup) model.get(Model.IPGROUP);
             String remoteAddress = (String) model.get(Model.REMOTE_ADDR);
