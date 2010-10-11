@@ -48,6 +48,7 @@ public class ModelAugmentingRequestHandlerTest {
         expect(this.request.getContextPath()).andReturn("/").atLeastOnce();
         expect(this.request.getRequestURI()).andReturn("/index.html").atLeastOnce();
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
+        this.request.setAttribute("model", null);
         replay(this.servletContext, this.response, this.request, this.processor);
         this.handler.process(null, this.request, this.response);
         verify(this.servletContext, this.processor, this.response, this.request);

@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet;
 
 import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
@@ -60,6 +61,7 @@ public class SitemapRequestHandlerTest {
         expect(this.request.getParameter("cocoon-action")).andReturn(null);
         expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptySet()));
         this.request.setAttribute(eq(Model.MODEL), isA(Map.class));
+        expectLastCall().times(2);
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
         replayMocks();
         this.handler.handleRequest(this.request, this.response);

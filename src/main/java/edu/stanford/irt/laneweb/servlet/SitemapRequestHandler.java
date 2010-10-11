@@ -152,6 +152,7 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         String sitemapURI = getSitemapURI(request).substring(1);
         Environment environment = new HttpEnvironment(sitemapURI, request, response, this.servletContext, this.context,
                 null, null);
+        request.setAttribute(Model.MODEL, model);
         try {
             EnvironmentHelper.enterProcessor(this.processor, environment);
             this.processor.process(environment);
