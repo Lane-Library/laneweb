@@ -7,10 +7,24 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2010-10-04" version="1.11.3" description="1.11.3 bug fix release">
-            <!--<action date="2010-09-30" dev="ceyates" issue="43008" type="update">
+        <release date="2010-10-11" version="1.11.4" description="1.11.4 bug fix release">
+            <action date="2010-10-08" dev="ceyates" issue="43464" type="fix">
                 change link color to #1C4B70
-            </action>-->
+            </action>
+            <action date="2010-10-07" dev="ceyates" issue="43411" type="add">
+                automatically toggle restrictive robots.txt for non-production servers
+            </action>
+            <action date="2010-10-07" dev="ceyates" issue="43405" type="update">
+                add Disallow: to directories that are no longer present in robots.txt
+            </action>
+            <action date="2010-10-06" dev="ceyates" issue="43052" type="update">
+                refactor paging links on resources and search result pages
+            </action>
+            <action date="2010-09-30" dev="ceyates" issue="43008" type="update">
+                change link color to #1C4B70
+            </action>
+        </release>
+        <release date="2010-10-04" version="1.11.3" description="1.11.3 bug fix release">
             <action date="2010-09-30" dev="ryanmax" issue="42987" type="fix">
                 tracking: IE reporting /ONSITE/XXX//secure/apps/proxy/credential for some OFFSITE links
             </action>
