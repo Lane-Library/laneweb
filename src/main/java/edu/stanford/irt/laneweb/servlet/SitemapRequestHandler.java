@@ -46,7 +46,7 @@ public class SitemapRequestHandler implements HttpRequestHandler {
 
     protected Map<String, String> baseMappings;
 
-    private List<DataBinder> dataBinders;
+    private List<DataBinder> dataBinders = Collections.emptyList();
 
     public SitemapRequestHandler() {
         this.baseMappings = new HashMap<String, String>(BASE_MAPPINGS.length);
