@@ -21,7 +21,13 @@ public class Model extends HashMap<String, Object> {
 
     public static final String CALLBACK = "callback";
 
+    public static final String CONTENT_BASE = "content-base";
+
     public static final String DEBUG = "debug";
+
+    public static final String DEFAULT_CONTENT_BASE = "default-content-base";
+
+    public static final String DEFAULT_RESOURCES_BASE = "default-resources-base";
 
     public static final String EMRID = "emrid";
 
@@ -37,6 +43,8 @@ public class Model extends HashMap<String, Object> {
 
     public static final String LIMIT = "limit";
 
+    public static final String MEDBLOG_BASE = "medblog-base";
+
     public static final String MESH = "mesh";
 
     public static final String MODEL = "model";
@@ -46,6 +54,8 @@ public class Model extends HashMap<String, Object> {
     public static final String PAGE = "page";
 
     public static final String PAGE_NUMBER = "pageNumber";
+
+    public static final String PARENT_PATH = "parent-path";
 
     public static final String PASSWORD = "password";
 
@@ -59,6 +69,8 @@ public class Model extends HashMap<String, Object> {
 
     public static final String QUERY_STRING = "query-string";
 
+    public static final String REFERRER = "referrer";
+
     public static final String REGION = "region";
 
     public static final String RELEASE = "release";
@@ -67,9 +79,13 @@ public class Model extends HashMap<String, Object> {
 
     public static final String REMOVE_PERSISTENT_LOGIN = "remove-persistent-login";
 
+    public static final String REQUEST_URI = "request-uri";
+
     public static final String RESOURCE_ID = "rid";
 
     public static final String RESOURCES = "resources";
+
+    public static final String RESOURCES_BASE = "resources-base";
 
     public static final String SELECTION = "selection";
 
@@ -98,6 +114,8 @@ public class Model extends HashMap<String, Object> {
     public static final String URL = "url";
 
     public static final String USER_COOKIE = "user-cookie";
+
+    public static final String VERSION = "version";
 
     @SuppressWarnings("unchecked")
     public Model(final ObjectModel objectModel) {

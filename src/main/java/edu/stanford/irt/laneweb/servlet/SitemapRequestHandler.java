@@ -3,8 +3,9 @@ package edu.stanford.irt.laneweb.servlet;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -21,6 +22,7 @@ import org.apache.cocoon.environment.internal.EnvironmentHelper;
 import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public class SitemapRequestHandler implements HttpRequestHandler {
 
@@ -43,6 +45,8 @@ public class SitemapRequestHandler implements HttpRequestHandler {
     private ServletContext servletContext;
 
     protected Map<String, String> baseMappings;
+
+    private List<DataBinder> dataBinders;
 
     public SitemapRequestHandler() {
         this.baseMappings = new HashMap<String, String>(BASE_MAPPINGS.length);
@@ -83,9 +87,24 @@ public class SitemapRequestHandler implements HttpRequestHandler {
             response.sendRedirect(redirectBase + redirectURI);
             return;
         }
-        Map<String, Object> model = createModel(requestURI);
+        Map<String, Object> model = new HashMap<String, Object>();
         request.setAttribute(Model.MODEL, model);
-        process(request, response);
+        process(model, request, response);
+    }
+    
+    protected void doBind(Map<String, Object> model, HttpServletRequest request) {
+        for (DataBinder binder: this.dataBinders) {
+            binder.bind(model, request);
+        }
+        Set<String> keys = new HashSet<String>();
+        for (String key : model.keySet()) {
+            if (model.get(key) == null) {
+                keys.add(key);
+            }
+        }
+        for (String key: keys) {
+            model.remove(key);
+        }
     }
 
     public void setMethodsNotAllowed(final Set<String> methodsNotAllowed) {
@@ -111,25 +130,8 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         this.context = new HttpContext(servletContext);
     }
 
-    private Map<String, Object> createModel(final String uri) {
-        Map<String, Object> model = new HashMap<String, Object>();
-        model.put("version", this.servletContext.getAttribute("laneweb.context.version"));
-        model.put("medblog-base", this.servletContext.getAttribute("laneweb.context.medblog-base"));
-        model.put("default-content-base", this.servletContext.getAttribute("laneweb.context.live-base"));
-        model.put("content-base", model.get("default-content-base"));
-        model.put("default-resources-base", this.servletContext.getRealPath("/").toString() + "resources");
-        model.put("resources-base", model.get("default-resources-base"));
-        if (uri.indexOf("/stage") == 0) {
-            model.put("content-base", this.servletContext.getAttribute("laneweb.context.stage-base"));
-        } else {
-            for (Entry<String, String> entry : this.baseMappings.entrySet()) {
-                if (uri.indexOf(entry.getKey()) == 0) {
-                    model.put("content-base", entry.getValue() + "/content");
-                    model.put("resources-base", entry.getValue() + "/resources");
-                }
-            }
-        }
-        return model;
+    public void setDataBinders(List<DataBinder> dataBinders) {
+        this.dataBinders = dataBinders;
     }
 
     private String getSitemapURI(final HttpServletRequest request) {
@@ -145,16 +147,7 @@ public class SitemapRequestHandler implements HttpRequestHandler {
         return uri;
     }
 
-    protected void addToModel(final String key, final Object value, final Map<String, Object> model) {
-        if (value != null) {
-            if (model.containsKey(key)) {
-                throw new IllegalStateException("duplicate model key: " + key);
-            }
-            model.put(key, value);
-        }
-    }
-
-    protected void process(final HttpServletRequest request, final HttpServletResponse response) throws IOException,
+    protected void process(Map<String, Object> model, final HttpServletRequest request, final HttpServletResponse response) throws IOException,
             ServletException {
         String sitemapURI = getSitemapURI(request).substring(1);
         Environment environment = new HttpEnvironment(sitemapURI, request, response, this.servletContext, this.context,

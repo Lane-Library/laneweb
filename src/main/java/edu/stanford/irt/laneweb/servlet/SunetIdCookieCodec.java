@@ -19,7 +19,7 @@ public class SunetIdCookieCodec {
 
     private static final String KEY = "stanfordlanelibraryir";
 
-    static final String LANE_COOKIE_NAME = "user";
+    public static final String LANE_COOKIE_NAME = "user";
 
     private Cipher cipher;
 

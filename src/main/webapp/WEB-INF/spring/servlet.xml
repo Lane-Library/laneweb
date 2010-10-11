@@ -25,23 +25,94 @@
     <bean id="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler"
         class="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
-        <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.ProxyLinks"/>
-        <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.TemplateChooser"/>
-        <property name="LDAPDataAccess" ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
-        <property name="ezproxyKey">
-            <!-- TODO: get this from servlet context . . .-->
-            <bean class="org.springframework.jndi.JndiObjectFactoryBean">
-                <property name="jndiName" value="java:comp/env/ezproxy-key"/>
-            </bean>
+        <property name="dataBinders">
+            <list>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.SunetIdDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder">
+                    <property name="parameterName" value="debug"/>
+                    <property name="modelKey" value="debug"/>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder">
+                    <property name="LDAPDataAccess" ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.RemoteAddressDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.IPGroupDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.ProxyLinksDataBinder">
+                    <property name="parameterName" value="proxy-links"/>
+                    <property name="modelKey" value="proxy-links"/>
+                    <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.ProxyLinks"/>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.TemplateDataBinder">
+                    <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.TemplateChooser"/>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.StringSessionParameterDataBinder">
+                    <property name="parameterName" value="emrid"/>
+                    <property name="modelKey" value="emrid"/>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.TicketDataBinder">
+                    <property name="ezproxyKey">
+                        <!-- TODO: get this from servlet context . . .-->
+                        <bean class="org.springframework.jndi.JndiObjectFactoryBean">
+                            <property name="jndiName" value="java:comp/env/ezproxy-key"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.RequestParameterDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.RequestMethodDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.ParentPathDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.ServletContextDataBinder">
+                    <property name="servletContext" ref="servletContext"/>
+                </bean>
+            </list>
         </property>
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.servlet.MobileRequestHandler"
         class="edu.stanford.irt.laneweb.servlet.MobileRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler">
-        <property name="proxyLinks">
-            <bean class="edu.stanford.irt.laneweb.servlet.MobileProxyLinks"
-                parent="edu.stanford.irt.laneweb.servlet.ProxyLinks"/>
+        <property name="dataBinders">
+            <list>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.SunetIdDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder">
+                    <property name="parameterName" value="debug"/>
+                    <property name="modelKey" value="debug"/>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder">
+                    <property name="LDAPDataAccess" ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.MobileRemoteAddressDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.MobileIPGroupDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.ProxyLinksDataBinder">
+                    <property name="parameterName" value="proxy-links"/>
+                    <property name="modelKey" value="proxy-links"/>
+                    <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.ProxyLinks"/>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.TemplateDataBinder">
+                    <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.TemplateChooser"/>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.StringSessionParameterDataBinder">
+                    <property name="parameterName" value="emrid"/>
+                    <property name="modelKey" value="emrid"/>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.TicketDataBinder">
+                    <property name="ezproxyKey">
+                        <!-- TODO: get this from servlet context . . .-->
+                        <bean class="org.springframework.jndi.JndiObjectFactoryBean">
+                            <property name="jndiName" value="java:comp/env/ezproxy-key"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.RequestParameterDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.RequestMethodDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.ParentPathDataBinder"/>
+                <bean class="edu.stanford.irt.laneweb.servlet.binding.ServletContextDataBinder">
+                    <property name="servletContext" ref="servletContext"/>
+                </bean>
+            </list>
         </property>
     </bean>
     
@@ -62,8 +133,6 @@
                         <entry key="(.*)/classes/index\.html" value="$1/services/workshops/laneclasses.html"/>
                         <entry key="(.*)/clinician/index\.html" value="$1/portals/clinical.html"/>
                         <entry key="(.*)/index\.html\?template=shc(.*)" value="$1/index\.html\?sourceid=shc$2"/>
-                        <!-- /uniprint/ requires sunetid, so redirect to /secure/uniprint/ content.xmap gets files from /uniprint/ -->
-                        <!--<entry key="((?!.*/secure.*).*)/uniprint/(.*)" value="$1/secure/uniprint/$2"/>-->
                         <entry key="(.*)/services/index\.html" value="$1/newpage.html?page=$1/about/index.html"/>
                         <entry key="(.*)/(?:content|rss)/page2rss\?page=/services/workshops/laneclasses\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/classes-consult/laneclasses\.html"/>
                         <entry key="(.*)/services/workshops/laneclasses\.html" value="$1/newpage.html?page=$1/classes-consult/laneclasses.html"/>
