@@ -21,6 +21,7 @@ import org.apache.cocoon.environment.http.HttpEnvironment;
 import org.apache.cocoon.environment.internal.EnvironmentHelper;
 import org.springframework.web.HttpRequestHandler;
 
+import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
@@ -89,7 +90,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         }
         Map<String, Object> model = getModel();
         doBind(model, request);
-        process(request, response);
+        process(model, request, response);
     }
     
     protected void doBind(Map<String, Object> model, HttpServletRequest request) {
@@ -138,11 +139,10 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         return uri;
     }
 
-    protected void process(final HttpServletRequest request, final HttpServletResponse response) throws IOException,
+    protected void process(Map<String, Object> model, final HttpServletRequest request, final HttpServletResponse response) throws IOException,
             ServletException {
         String sitemapURI = getSitemapURI(request).substring(1);
-        Environment environment = new HttpEnvironment(sitemapURI, request, response, this.servletContext, this.context,
-                null, null);
+        Environment environment = new LanewebEnvironment(sitemapURI, model, request, response, this.servletContext, this.context);
         try {
             EnvironmentHelper.enterProcessor(this.processor, environment);
             this.processor.process(environment);

@@ -63,9 +63,9 @@ public class SitemapRequestHandlerTest {
         expect(this.request.getRequestURI()).andReturn("/").times(2);
         expect(this.request.getQueryString()).andReturn(null).times(1);
         expect(this.request.getContextPath()).andReturn("").times(2);
-        expect(this.request.getParameter("cocoon-view")).andReturn(null);
-        expect(this.request.getParameter("cocoon-action")).andReturn(null);
-        expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptySet()));
+//        expect(this.request.getParameter("cocoon-view")).andReturn(null);
+//        expect(this.request.getParameter("cocoon-action")).andReturn(null);
+//        expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptySet()));
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
         replayMocks();
         this.handler.handleRequest(this.request, this.response);
