@@ -96,9 +96,6 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         for (DataBinder binder: this.dataBinders) {
             binder.bind(model, request);
         }
-        if (model.get(Model.SUNETID) != null && model.get(Model.TICKET) == null) {
-            throw new IllegalStateException();
-        }
     }
 
     public void setMethodsNotAllowed(final Set<String> methodsNotAllowed) {

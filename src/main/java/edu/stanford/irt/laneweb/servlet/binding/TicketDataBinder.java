@@ -24,6 +24,9 @@ public class TicketDataBinder implements DataBinder {
                 model.put(Model.TICKET, ticket);
             }
         }
+        if (model.get(Model.SUNETID) != null && model.get(Model.TICKET) == null) {
+            throw new IllegalStateException();
+        }
     }
     
     public void setEzproxyKey(String ezproxyKey) {
