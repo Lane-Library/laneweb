@@ -20,8 +20,6 @@ public class TicketDataBinder implements DataBinder {
             Ticket ticket = (Ticket) session.getAttribute(Model.TICKET);
             if (ticket == null || !ticket.isValid()) {
                 ticket = new Ticket(sunetid, this.ezproxyKey);
-                session.setAttribute(Model.TICKET, ticket);
-                model.put(Model.TICKET, ticket);
             }
             session.setAttribute(Model.TICKET, ticket);
             model.put(Model.TICKET, ticket);
