@@ -24,7 +24,7 @@ import org.springframework.web.HttpRequestHandler;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
-public class SitemapRequestHandler implements HttpRequestHandler {
+public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private static final String[][] BASE_MAPPINGS = new String[][] {
             { "/alainb", "file:/afs/ir.stanford.edu/users/a/l/alainb/laneweb" },
@@ -87,7 +87,7 @@ public class SitemapRequestHandler implements HttpRequestHandler {
             response.sendRedirect(redirectBase + redirectURI);
             return;
         }
-        Map<String, Object> model = new HashMap<String, Object>();
+        Map<String, Object> model = getModel();
         doBind(model, request);
         request.setAttribute(Model.MODEL, model);
         process(model, request, response);
@@ -164,4 +164,6 @@ public class SitemapRequestHandler implements HttpRequestHandler {
             EnvironmentHelper.leaveProcessor();
         }
     }
+    
+    protected abstract Map<String, Object> getModel();
 }

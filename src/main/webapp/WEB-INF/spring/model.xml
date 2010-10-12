@@ -16,8 +16,12 @@
         class="edu.stanford.irt.laneweb.model.LanewebObjectModel" scope="request">
         <property name="initialEntries">
             <map>
-                <entry key="laneweb"
-                    value-ref="org.apache.cocoon.el.objectmodel.ObjectModelProvider"/>
+                <entry key="laneweb">
+                    <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
+                        class="edu.stanford.irt.laneweb.model.LanewebObjectModelProvider">
+                        <property name="objectModel" ref="edu.stanford.irt.laneweb.model.Model"/>
+                    </bean>
+                </entry>
             </map>
         </property>
     </bean>
@@ -25,7 +29,6 @@
     <bean id="edu.stanford.irt.laneweb.model.Model"
         class="edu.stanford.irt.laneweb.model.Model"
         scope="request">
-        <constructor-arg ref="org.apache.cocoon.el.objectmodel.ObjectModel"/>
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.model.DefaultModelAware"

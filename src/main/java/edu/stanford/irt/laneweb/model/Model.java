@@ -118,11 +118,6 @@ public class Model extends HashMap<String, Object> {
     public static final String VERSION = "version";
 
     @SuppressWarnings("unchecked")
-    public Model(final ObjectModel objectModel) {
-        putAll((Map<String, Object>) objectModel.get("laneweb"));
-    }
-
-    @SuppressWarnings("unchecked")
     public <T> T getObject(final String name, final Class<T> clazz) {
         return (T) get(name);
     }

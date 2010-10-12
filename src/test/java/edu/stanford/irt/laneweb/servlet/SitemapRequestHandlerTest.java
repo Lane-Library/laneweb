@@ -10,6 +10,7 @@ import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.fail;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -39,7 +40,12 @@ public class SitemapRequestHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.handler = new SitemapRequestHandler();
+        this.handler = new SitemapRequestHandler(){
+
+            @Override
+            protected Map<String, Object> getModel() {
+                return new HashMap<String, Object>();
+            }};
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.processor = createMock(Processor.class);

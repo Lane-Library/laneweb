@@ -7,5 +7,5 @@ package edu.stanford.irt.laneweb.servlet;
  * @author ceyates
  *
  */
-public class MobileRequestHandler extends ModelAugmentingRequestHandler {
+public abstract class MobileRequestHandler extends ModelAugmentingRequestHandler {
 }

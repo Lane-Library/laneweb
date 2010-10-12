@@ -19,9 +19,6 @@
         </property>
     </bean>
     
-    <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
-        class="edu.stanford.irt.laneweb.servlet.RequestAttributeObjectModelProvider"/>
-    
     <bean id="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler"
         class="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
@@ -71,7 +68,7 @@
     
     <bean id="edu.stanford.irt.laneweb.servlet.MobileRequestHandler"
         class="edu.stanford.irt.laneweb.servlet.MobileRequestHandler"
-        parent="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler">
+        parent="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
         <property name="dataBinders">
             <list>
                 <bean class="edu.stanford.irt.laneweb.servlet.binding.SunetIdDataBinder"/>
@@ -165,6 +162,7 @@
         </property>
         <property name="servletContext" ref="servletContext"/>
         <property name="processor" ref="org.apache.cocoon.Processor"/>
+        <lookup-method bean="edu.stanford.irt.laneweb.model.Model" name="getModel"/>
     </bean>
 
     <bean id="edu.stanford.irt.laneweb.servlet.ProxyLinks"
