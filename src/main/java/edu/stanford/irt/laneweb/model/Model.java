@@ -13,6 +13,14 @@ import org.apache.cocoon.el.objectmodel.ObjectModel;
 @SuppressWarnings("serial")
 public class Model extends HashMap<String, Object> {
 
+    @Override
+    public Object put(String key, Object value) {
+        if (value == null) {
+            throw new IllegalArgumentException("null value for " + key);
+        }
+        return super.put(key, value);
+    }
+
     public static final String ALPHA = "alpha";
 
     public static final String BASE_PATH = "base-path";
