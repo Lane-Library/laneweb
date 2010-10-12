@@ -89,8 +89,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         }
         Map<String, Object> model = getModel();
         doBind(model, request);
-        request.setAttribute(Model.MODEL, model);
-        process(model, request, response);
+        process(request, response);
     }
     
     protected void doBind(Map<String, Object> model, HttpServletRequest request) {
@@ -148,12 +147,11 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         return uri;
     }
 
-    protected void process(Map<String, Object> model, final HttpServletRequest request, final HttpServletResponse response) throws IOException,
+    protected void process(final HttpServletRequest request, final HttpServletResponse response) throws IOException,
             ServletException {
         String sitemapURI = getSitemapURI(request).substring(1);
         Environment environment = new HttpEnvironment(sitemapURI, request, response, this.servletContext, this.context,
                 null, null);
-        request.setAttribute(Model.MODEL, model);
         try {
             EnvironmentHelper.enterProcessor(this.processor, environment);
             this.processor.process(environment);
