@@ -23,9 +23,8 @@ public class TicketDataBinder implements DataBinder {
                 session.setAttribute(Model.TICKET, ticket);
                 model.put(Model.TICKET, ticket);
             }
-        }
-        if (model.get(Model.SUNETID) != null && model.get(Model.TICKET) == null) {
-            throw new IllegalStateException();
+            session.setAttribute(Model.TICKET, ticket);
+            model.put(Model.TICKET, ticket);
         }
     }
     
