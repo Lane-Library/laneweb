@@ -8,29 +8,28 @@ import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Collections;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.suggest.EresourceSuggestionManager;
-import edu.stanford.irt.suggest.HistorySuggestionManager;
-import edu.stanford.irt.suggest.MeshSuggestionManager;
+import edu.stanford.irt.suggest.Suggestion;
+import edu.stanford.irt.suggest.SuggestionManager;
 
 /**
  * @author ryanmax
  */
 public class SuggestionReaderTest {
 
-    private HistorySuggestionManager historySuggestionManager;
+    private SuggestionManager history;
     
-    private EresourceSuggestionManager eresourceSuggestionManager;
+    private SuggestionManager eresource;
     
-    private MeshSuggestionManager meshSuggestionManager;
+    private SuggestionManager mesh;
 
     private Model model;
 
@@ -44,12 +43,12 @@ public class SuggestionReaderTest {
     @Before
     public void setUp() throws Exception {
         this.reader = new SuggestionReader();
-        this.historySuggestionManager = new HistorySuggestionManager();
-        this.eresourceSuggestionManager = new EresourceSuggestionManager();
-        this.meshSuggestionManager = new MeshSuggestionManager();
-        this.reader.setHistorySuggestionManager(this.historySuggestionManager);
-        this.reader.setEresourceSuggestionManager(this.eresourceSuggestionManager);
-        this.reader.setMeshSuggestionManager(this.meshSuggestionManager);
+      this.history = createMock(SuggestionManager.class);
+      this.eresource = createMock(SuggestionManager.class);
+      this.mesh = createMock(SuggestionManager.class);
+        this.reader.setHistorySuggestionManager(this.history);
+        this.reader.setEresourceSuggestionManager(this.eresource);
+        this.reader.setMeshSuggestionManager(this.mesh);
         this.outputStream = new ByteArrayOutputStream();
         this.reader.setOutputStream(this.outputStream);
         this.model = createMock(Model.class);
@@ -63,14 +62,17 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerate() throws IOException {
+        Suggestion suggestion = createMock(Suggestion.class);
+        expect(suggestion.getSuggestionTitle()).andReturn("Venous Thrombosis");
         expect(this.model.getString(Model.CALLBACK, "")).andReturn("");
         expect(this.model.getString(Model.QUERY)).andReturn("venous thrombosis");
         expect(this.model.getString(Model.LIMIT, "")).andReturn("mesh");
-        replayMocks();
+        expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion));
+        replay(suggestion, this.eresource, this.history, this.mesh, this.model);
         this.reader.setup(null, null, null, null);
         this.reader.generate();
         assertEquals("{\"suggest\":[\"Venous Thrombosis\"]}", new String(this.outputStream.toByteArray()));
-        verifyMocks();
+        verify(suggestion, this.eresource, this.history, this.mesh, this.model);
     }
 
     /**
@@ -83,11 +85,12 @@ public class SuggestionReaderTest {
         expect(this.model.getString(Model.CALLBACK, "")).andReturn("");
         expect(this.model.getString(Model.QUERY)).andReturn("asdfgh");
         expect(this.model.getString(Model.LIMIT, "")).andReturn("mesh");
-        replayMocks();
+        expect(this.mesh.getSuggestionsForTerm("asdfgh")).andReturn(Collections.<Suggestion>emptyList());
+        replay(this.eresource, this.history, this.mesh, this.model);
         this.reader.setup(null, null, null, null);
         this.reader.generate();
         assertEquals("{\"suggest\":[]}", new String(this.outputStream.toByteArray()));
-        verifyMocks();
+        verify(this.eresource, this.history, this.mesh, this.model);
     }
 
     /**
@@ -100,44 +103,11 @@ public class SuggestionReaderTest {
         expect(this.model.getString(Model.CALLBACK, "")).andReturn("foo");
         expect(this.model.getString(Model.QUERY)).andReturn("asdfgh");
         expect(this.model.getString(Model.LIMIT, "")).andReturn("mesh");
-        replayMocks();
+        expect(this.mesh.getSuggestionsForTerm("asdfgh")).andReturn(Collections.<Suggestion>emptyList());
+        replay(this.eresource, this.history, this.mesh, this.model);
         this.reader.setup(null, null, null, null);
         this.reader.generate();
         assertEquals("foo({\"suggest\":[]});", new String(this.outputStream.toByteArray()));
-        verifyMocks();
-    }
-
-    /**
-     * Test method for
-     * {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#setMeshSuggestionManager(edu.stanford.irt.lane.suggest.MeshSuggestionManager)}
-     * .
-     */
-    @Test
-    public void testSetMeshSuggestionManager() {
-        assertNotNull(this.meshSuggestionManager);
-    }
-
-    /**
-     * Test method for {@link edu.stanford.irt.laneweb.suggest.SuggestionReader#setEresourceSuggestionManager(edu.stanford.irt.suggest.SuggestionManager)}.
-     */
-    @Test
-    public void testSetEresourceSuggestionManager() {
-        assertNotNull(this.eresourceSuggestionManager);
-    }
-
-    /**
-     * Test method for {@link edu.stanford.irt.laneweb.suggest.SuggestionReader#setHistorySuggestionManager(edu.stanford.irt.suggest.SuggestionManager)}.
-     */
-    @Test
-    public void testSetHistorySuggestionManager() {
-        assertNotNull(this.historySuggestionManager);
-    }
-
-    private void replayMocks() {
-        replay(this.model);
-    }
-
-    private void verifyMocks() {
-        verify(this.model);
+        verify(this.eresource, this.history, this.mesh, this.model);
     }
 }
