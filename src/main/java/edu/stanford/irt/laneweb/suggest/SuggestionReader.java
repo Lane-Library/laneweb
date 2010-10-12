@@ -38,7 +38,7 @@ public class SuggestionReader extends AbstractReader {
     public void generate() throws IOException {
         SuggestionComparator comparator = new SuggestionComparator(this.query);
         TreeSet<String> suggestionSet = new TreeSet<String>(comparator);
-        Collection<? extends Suggestion> suggestions = new ArrayList<Suggestion>();
+        Collection<? extends Suggestion> suggestions;
         if (this.limit.matches("(ej|book|database|software|cc|video|lanesite|bassett)")) {
             suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(this.limit, this.query);
         } else if (this.limit.matches("er-mesh")) {
