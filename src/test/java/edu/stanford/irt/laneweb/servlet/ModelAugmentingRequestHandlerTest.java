@@ -49,14 +49,14 @@ public class ModelAugmentingRequestHandlerTest {
 
     @Test
     public void testProcess() throws Exception {
-//        expect(this.request.getParameter(isA(String.class))).andReturn(null).atLeastOnce();
-//        expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptyList()))
-//                .atLeastOnce();
+        expect(this.request.getParameter(isA(String.class))).andReturn(null).atLeastOnce();
+        expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptyList()))
+                .atLeastOnce();
         expect(this.request.getContextPath()).andReturn("/").atLeastOnce();
         expect(this.request.getRequestURI()).andReturn("/index.html").atLeastOnce();
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
         replay(this.servletContext, this.response, this.request, this.processor);
-        this.handler.process(null, this.request, this.response);
+        this.handler.process(new HashMap<String, Object>(), this.request, this.response);
         verify(this.servletContext, this.processor, this.response, this.request);
     }
 }
