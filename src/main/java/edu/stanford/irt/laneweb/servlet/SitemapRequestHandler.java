@@ -141,7 +141,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     protected void process(Map<String, Object> model, final HttpServletRequest request, final HttpServletResponse response) throws IOException,
             ServletException {
-        String sitemapURI = getSitemapURI(request).substring(1);
+        String sitemapURI = getSitemapURI(request);
         Environment environment = new LanewebEnvironment(sitemapURI, model, request, response, this.servletContext, this.context);
         try {
             EnvironmentHelper.enterProcessor(this.processor, environment);
