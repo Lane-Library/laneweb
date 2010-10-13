@@ -31,14 +31,7 @@
         scope="request">
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.model.DefaultModelAware"
-        class="edu.stanford.irt.laneweb.model.DefaultModelAware"
-        scope="prototype" abstract="true">
-        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
-    </bean>
-    
     <bean name="org.apache.cocoon.transformation.Transformer/debug"
-        class="edu.stanford.irt.laneweb.cocoon.DebugTransformer"
-        parent="edu.stanford.irt.laneweb.model.DefaultModelAware"/>
+        class="edu.stanford.irt.laneweb.cocoon.DebugTransformer"/>
     
 </beans>

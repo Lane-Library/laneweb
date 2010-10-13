@@ -11,7 +11,6 @@
     
     <bean id="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
         class="edu.stanford.irt.laneweb.search.AbstractSearchGenerator"
-        parent="edu.stanford.irt.laneweb.model.DefaultModelAware"
         abstract="true"/>
     
     <bean id="edu.stanford.irt.laneweb.search.AbstractMetasearchGenerator"
@@ -55,8 +54,7 @@
         parent="org.apache.cocoon.generation.Generator/search"/>
 
     <bean name="org.apache.cocoon.reading.Reader/search-url-tester"
-        class="edu.stanford.irt.laneweb.search.UrlTester"
-        parent="edu.stanford.irt.laneweb.model.DefaultModelAware">
+        class="edu.stanford.irt.laneweb.search.UrlTester">
         <property name="metaSearchManagerSource"
             ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
     </bean>

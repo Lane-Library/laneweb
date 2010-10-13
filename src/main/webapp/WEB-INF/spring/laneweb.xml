@@ -91,8 +91,7 @@
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/spellcheck"
-        class="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator"
-        parent="edu.stanford.irt.laneweb.model.DefaultModelAware">
+        class="edu.stanford.irt.laneweb.spellcheck.SpellCheckGenerator">
         <property name="spellChecker">
             <bean class="edu.stanford.irt.spell.GoogleToolbarSpellChecker"/>
         </property>
@@ -117,8 +116,7 @@
         class="edu.stanford.irt.laneweb.cocoon.YUIProxyReader" scope="prototype"/>
 
     <bean name="org.apache.cocoon.reading.Reader/txt-resource"
-        class="edu.stanford.irt.laneweb.cocoon.TxtResourceReader"
-        parent="edu.stanford.irt.laneweb.model.DefaultModelAware">
+        class="edu.stanford.irt.laneweb.cocoon.TxtResourceReader">
         <property name="defaultPath" value="/"/>
         <property name="valueToSubstitute" value="/\./\."/>
         <!-- uses regex so /./. is what is actually substituted -->

@@ -16,7 +16,6 @@
         class="edu.stanford.irt.laneweb.proxy.AbstractProxyLinkTransformer"
         abstract="true" scope="prototype">
         <property name="proxyHostManager" ref="edu.stanford.irt.laneweb.proxy.ProxyHostManager"/>
-        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
     </bean>
 
     <bean name="org.apache.cocoon.transformation.Transformer/proxy-links"

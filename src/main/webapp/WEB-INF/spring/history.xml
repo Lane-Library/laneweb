@@ -9,15 +9,13 @@
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/history-search"
-        class="edu.stanford.irt.laneweb.search.EresourcesSearchGenerator"
-        parent="edu.stanford.irt.laneweb.model.DefaultModelAware">
+        class="edu.stanford.irt.laneweb.search.EresourcesSearchGenerator">
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/history"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/history-count"
-        class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
-        parent="edu.stanford.irt.laneweb.model.DefaultModelAware">
+        class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator">
         <property name="types">
             <set>
                 <value>book</value>
