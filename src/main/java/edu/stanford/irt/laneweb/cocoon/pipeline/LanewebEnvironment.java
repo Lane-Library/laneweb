@@ -17,5 +17,8 @@ public class LanewebEnvironment extends HttpEnvironment {
         super(uri, req, res, servletContext, context, null, null);
         model.putAll(this.objectModel);
         this.objectModel = model;
+        super.setContentType(servletContext.getMimeType(uri));
     }
+    
+    
 }
