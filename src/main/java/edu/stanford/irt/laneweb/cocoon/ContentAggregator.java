@@ -1,19 +1,22 @@
 package edu.stanford.irt.laneweb.cocoon;
 
 import java.io.IOException;
+import java.io.InputStream;
 
-import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.components.source.util.SourceUtil;
+import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.cocoon.sitemap.DefaultContentAggregator;
 import org.apache.cocoon.xml.XMLUtils;
 import org.apache.excalibur.xml.sax.XMLizable;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class ContentAggregator extends DefaultContentAggregator {
+    
+    private SAXParser saxParser;
 
-    public ContentAggregator(final ServiceManager serviceManager) {
-        this.manager = serviceManager;
+    public ContentAggregator(final SAXParser saxParser) {
+        this.saxParser = saxParser;
     }
     
     public void generate()
@@ -36,7 +39,13 @@ public class ContentAggregator extends DefaultContentAggregator {
             if (part.source instanceof XMLizable) {
                 ((XMLizable)part.source).toSAX(this);
             } else {
-                SourceUtil.parse(this.manager, part.source, this);
+                InputStream input = null;
+                try {
+                    input = part.source.getInputStream();
+                    this.saxParser.parse(new InputSource(input), this, this);
+                } finally {
+                    input.close();
+                }
             }
             if (part.element != null) {
                 endElem(part.element);

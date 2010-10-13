@@ -10,8 +10,6 @@ import org.apache.cocoon.sitemap.SitemapModelComponent;
 import org.apache.excalibur.source.Source;
 
 import edu.stanford.irt.laneweb.model.DefaultModelAware;
-import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.model.ModelAware;
 
 public abstract class AbstractSitemapModelComponent extends DefaultModelAware implements SitemapModelComponent {
 

@@ -1,9 +1,6 @@
 package edu.stanford.irt.laneweb.model;
 
 import java.util.HashMap;
-import java.util.Map;
-
-import org.apache.cocoon.el.objectmodel.ObjectModel;
 
 /**
  * Model for sitemap components.

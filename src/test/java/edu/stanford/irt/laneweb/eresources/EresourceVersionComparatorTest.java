@@ -3,15 +3,16 @@
  */
 package edu.stanford.irt.laneweb.eresources;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import edu.stanford.irt.eresources.Link;
 import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.VersionImpl;
-
-import org.junit.Before;
-import org.junit.Test;
 
 /**
  * @author ryanmax

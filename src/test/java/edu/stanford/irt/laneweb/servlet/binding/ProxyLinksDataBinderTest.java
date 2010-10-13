@@ -1,7 +1,10 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
-import static org.junit.Assert.*;
-import static org.easymock.classextension.EasyMock.*;
+import static org.easymock.EasyMock.expect;
+import static org.easymock.classextension.EasyMock.createMock;
+import static org.easymock.classextension.EasyMock.replay;
+import static org.easymock.classextension.EasyMock.verify;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +12,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;

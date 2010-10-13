@@ -9,8 +9,6 @@ import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.objectmodel.helper.ParametersMap;
 
 import edu.stanford.irt.laneweb.model.DefaultModelAware;
-import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.model.ModelAware;
 
 public abstract class AbstractAction extends DefaultModelAware implements Action {
 

@@ -4,10 +4,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="org.apache.excalibur.xml.sax.SAXParser"
+    <!--<bean id="org.apache.excalibur.xml.sax.SAXParser"
         class="org.apache.cocoon.core.xml.avalon.DefaultSAXParser">
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
-    </bean>
+    </bean>-->
 
     <bean name="org.apache.cocoon.core.xml.SAXParser"
         class="org.apache.cocoon.core.xml.impl.JaxpSAXParser">

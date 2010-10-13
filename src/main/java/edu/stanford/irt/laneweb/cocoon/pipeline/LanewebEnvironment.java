@@ -12,6 +12,7 @@ import org.apache.cocoon.environment.http.HttpEnvironment;
 
 public class LanewebEnvironment extends HttpEnvironment {
 
+    @SuppressWarnings("unchecked")
     public LanewebEnvironment(final String uri, Map<String, Object> model, final HttpServletRequest req, final HttpServletResponse res, final ServletContext servletContext,
             final Context context) throws IOException {
         super(uri, req, res, servletContext, context, null, null);

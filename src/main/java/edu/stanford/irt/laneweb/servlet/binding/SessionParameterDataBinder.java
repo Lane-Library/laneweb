@@ -11,6 +11,7 @@ public abstract class SessionParameterDataBinder<T> implements DataBinder {
 
     private String modelKey;
 
+    @SuppressWarnings("unchecked")
     public void bind(Map<String, Object> model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         String parameterValue = request.getParameter(this.parameterName);

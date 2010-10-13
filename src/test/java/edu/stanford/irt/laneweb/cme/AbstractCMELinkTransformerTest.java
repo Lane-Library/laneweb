@@ -3,19 +3,17 @@
  */
 package edu.stanford.irt.laneweb.cme;
 
-import static org.easymock.EasyMock.expect;
-import static org.easymock.classextension.EasyMock.createMock;
-import static org.easymock.classextension.EasyMock.replay;
-import static org.easymock.classextension.EasyMock.verify;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.stanford.irt.laneweb.model.Model;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.model.Model;
 
 
 /**

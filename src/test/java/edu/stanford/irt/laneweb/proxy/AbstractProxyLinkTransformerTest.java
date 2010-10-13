@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.proxy;
 
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.isNull;

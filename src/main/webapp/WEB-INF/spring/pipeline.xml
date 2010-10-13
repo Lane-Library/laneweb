@@ -77,7 +77,7 @@
 
     <bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
         class="edu.stanford.irt.laneweb.cocoon.ContentAggregator" scope="prototype">
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
 
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"

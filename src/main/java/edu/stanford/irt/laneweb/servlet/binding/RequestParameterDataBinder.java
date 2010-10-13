@@ -12,6 +12,7 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class RequestParameterDataBinder implements DataBinder {
 
+    @SuppressWarnings("rawtypes")
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         for (Enumeration params = request.getParameterNames(); params.hasMoreElements();) {
             String name = (String) params.nextElement();

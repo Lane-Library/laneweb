@@ -1,8 +1,6 @@
 package edu.stanford.irt.laneweb.servlet;
 
-import static org.easymock.EasyMock.eq;
 import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
@@ -21,8 +19,6 @@ import org.apache.cocoon.Processor;
 import org.apache.cocoon.environment.Environment;
 import org.junit.Before;
 import org.junit.Test;
-
-import edu.stanford.irt.laneweb.model.Model;
 
 public class SitemapRequestHandlerTest {
 

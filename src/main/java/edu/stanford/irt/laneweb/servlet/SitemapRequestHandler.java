@@ -3,7 +3,6 @@ package edu.stanford.irt.laneweb.servlet;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,12 +16,10 @@ import org.apache.cocoon.Processor;
 import org.apache.cocoon.environment.Context;
 import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.http.HttpContext;
-import org.apache.cocoon.environment.http.HttpEnvironment;
 import org.apache.cocoon.environment.internal.EnvironmentHelper;
 import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public abstract class SitemapRequestHandler implements HttpRequestHandler {
