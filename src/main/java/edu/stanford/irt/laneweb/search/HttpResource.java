@@ -46,4 +46,8 @@ public class HttpResource extends UrlResource {
         con.setUseCaches(false);
         return con.getInputStream();
     }
+    
+    public boolean exists(){
+        return true;
+    }
 }
