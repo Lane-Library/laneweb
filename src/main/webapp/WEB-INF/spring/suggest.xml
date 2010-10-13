@@ -18,7 +18,8 @@
         class="edu.stanford.irt.suggest.MeshSuggestionManager"/>
     
     <bean name="org.apache.cocoon.reading.Reader/suggest"
-        class="edu.stanford.irt.laneweb.suggest.SuggestionReader">
+        class="edu.stanford.irt.laneweb.suggest.SuggestionReader"
+        scope="prototype">
         <property name="eresourceSuggestionManager"
             ref="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
         <property name="historySuggestionManager"
@@ -28,7 +29,8 @@
     </bean>
     
     <bean name="org.apache.cocoon.reading.Reader/extensions-suggest"
-        class="edu.stanford.irt.laneweb.suggest.ExtensionsSuggestReader">
+        class="edu.stanford.irt.laneweb.suggest.ExtensionsSuggestReader"
+        scope="prototype">
         <property name="eresourceSuggestionManager"
             ref="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
         <property name="meshSuggestionManager"

@@ -32,6 +32,7 @@
     </bean>
     
     <bean name="org.apache.cocoon.transformation.Transformer/debug"
-        class="edu.stanford.irt.laneweb.cocoon.DebugTransformer"/>
+        class="edu.stanford.irt.laneweb.cocoon.DebugTransformer"
+        scope="prototype"/>
     
 </beans>

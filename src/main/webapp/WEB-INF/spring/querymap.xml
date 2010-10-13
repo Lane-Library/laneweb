@@ -19,6 +19,7 @@
     
     <bean id="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent"
         class="edu.stanford.irt.laneweb.querymap.AbstractQueryMapComponent"
+        scope="prototype"
         abstract="true">
         <property name="queryMapper" ref="edu.stanford.irt.querymap.QueryMapper"/>
     </bean>

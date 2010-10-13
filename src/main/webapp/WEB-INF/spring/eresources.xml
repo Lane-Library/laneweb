@@ -10,13 +10,15 @@
     
     <bean id="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator"
         class="edu.stanford.irt.laneweb.eresources.AbstractEresourcesGenerator"
+        scope="prototype"
         abstract="true">
         <property name="collectionManager"
             ref="edu.stanford.irt.eresources.CollectionManager/laneconnex"/>
     </bean>
 
     <bean name="org.apache.cocoon.generation.Generator/eresources-count"
-        class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator">
+        class="edu.stanford.irt.laneweb.eresources.EresourcesCountGenerator"
+        scope="prototype">
         <property name="types">
             <set>
                 <value>ej</value>

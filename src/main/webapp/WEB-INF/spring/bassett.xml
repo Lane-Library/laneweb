@@ -5,6 +5,7 @@
     
     <bean id="edu.stanford.irt.laneweb.eresources.bassett.AbstractBassettGenerator"
         class="edu.stanford.irt.laneweb.eresources.bassett.AbstractBassettGenerator"
+        scope="prototype"
         abstract="true">
         <property name="collectionManager">
             <bean class="edu.stanford.irt.laneweb.eresources.bassett.BassettCollectionManager">
