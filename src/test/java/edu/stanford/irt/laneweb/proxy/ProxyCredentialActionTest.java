@@ -6,6 +6,9 @@ import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.fail;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,26 +18,22 @@ public class ProxyCredentialActionTest {
 
     private ProxyCredentialAction action;
 
-    private Model model;
+    private Map<String, Object> model;
 
     @Before
     public void setUp() {
         this.action = new ProxyCredentialAction();
-        this.model = createMock(Model.class);
+        this.model = new HashMap<String, Object>();
     }
 
     @Test
-    public void testDoAct() {
-        this.action.setModel(this.model);
-        expect(this.model.getString(Model.QUERY_STRING)).andReturn("foo");
-        expect(this.model.getString(Model.SUNETID)).andReturn("foo");
-        expect(this.model.getObject(Model.TICKET, Ticket.class)).andReturn(null);
-        replay(this.model);
+    public void testDoAct() throws Exception {
+        this.model.put(Model.QUERY_STRING, "foo");
+        this.model.put(Model.SUNETID, "foo");
         try {
-            this.action.doAct();
+            this.action.act(null, null, this.model, null, null);
             fail("should throw IllegalStateException, null ticket");
         } catch (IllegalStateException e) {
         }
-        verify(this.model);
     }
 }

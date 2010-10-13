@@ -9,6 +9,8 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.xml.XMLConsumer;
@@ -31,7 +33,7 @@ public class QueryMapGeneratorTest {
 
     private QueryMapGenerator generator;
 
-    private Model model;
+    private Map<String, Object> model;
 
     private Parameters parameters;
 
@@ -47,11 +49,10 @@ public class QueryMapGeneratorTest {
         this.parameters = createMock(Parameters.class);
         this.queryMapper = createMock(QueryMapper.class);
         this.consumer = createMock(XMLConsumer.class);
-        this.model = createMock(Model.class);
+        this.model = new HashMap<String, Object>();
         this.descriptor = createMock(Descriptor.class);
         this.resourceMap = createMock(ResourceMap.class);
         this.queryMap = createMock(QueryMap.class);
-        this.generator.setModel(this.model);
     }
 
     @Test
@@ -67,13 +68,13 @@ public class QueryMapGeneratorTest {
         expect(this.queryMap.getFrequencies()).andReturn(null);
         expect(this.queryMapper.getQueryMap("dvt")).andReturn(this.queryMap);
         this.generator.setQueryMapper(this.queryMapper);
-        expect(this.model.getString(Model.QUERY)).andReturn("dvt");
+        this.model.put(Model.QUERY, "dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);
         this.generator.setConsumer(this.consumer);
         replayMocks();
-        this.generator.setup(null, null, null, this.parameters);
+        this.generator.setup(null, this.model, null, this.parameters);
         this.generator.generate();
         verifyMocks();
     }
@@ -105,24 +106,23 @@ public class QueryMapGeneratorTest {
             fail();
         } catch (IllegalStateException e) {
         }
-        expect(this.model.getString(Model.QUERY)).andReturn("dvt");
+        this.model.put(Model.QUERY, "dvt");
         expect(this.parameters.getParameter("resource-maps", null)).andReturn(null);
         expect(this.parameters.getParameter("descriptor-weights", null)).andReturn(null);
         expect(this.parameters.getParameter("abstract-count", null)).andReturn(null);
         replayMocks();
         try {
-            this.generator.setup(null, null, null, this.parameters);
+            this.generator.setup(null, this.model, null, this.parameters);
         } catch (IllegalStateException e) {
         }
         this.generator.setQueryMapper(this.queryMapper);
-        this.generator.setup(null, null, null, this.parameters);
+        this.generator.setup(null, this.model, null, this.parameters);
         verifyMocks();
     }
 
     private void replayMocks() {
         replay(this.parameters);
         replay(this.queryMapper);
-        replay(this.model);
         replay(this.descriptor);
         replay(this.resourceMap);
         replay(this.queryMap);
@@ -131,7 +131,6 @@ public class QueryMapGeneratorTest {
     private void verifyMocks() {
         verify(this.parameters);
         verify(this.queryMapper);
-        verify(this.model);
         verify(this.descriptor);
         verify(this.resourceMap);
         verify(this.queryMap);

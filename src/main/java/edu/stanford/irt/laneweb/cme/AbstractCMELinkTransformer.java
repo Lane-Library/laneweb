@@ -27,7 +27,7 @@ public abstract class AbstractCMELinkTransformer extends AbstractTransformer {
 
     @Override
     protected void initialize() {
-        this.emrid = this.model.getString(Model.EMRID);
+        this.emrid = getString(this.model, Model.EMRID);
     }
 
     protected boolean isCMEHost(final String link) {

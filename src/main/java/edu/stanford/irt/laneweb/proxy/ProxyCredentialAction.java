@@ -13,17 +13,17 @@ public class ProxyCredentialAction extends AbstractAction {
 
     @Override
     protected Map<String, String> doAct() {
-        String queryString = this.model.getString(Model.QUERY_STRING);
+        String queryString = getString(this.model, Model.QUERY_STRING);
         if (queryString == null) {
             throw new IllegalStateException("null query-string");
         }
         Map<String, String> result = new HashMap<String, String>(1);
-        String sunetid = this.model.getString(Model.SUNETID);
+        String sunetid = getString(this.model, Model.SUNETID);
         if (sunetid == null) {
-            String basePath = this.model.getString(Model.BASE_PATH);
+            String basePath = getString(this.model, Model.BASE_PATH);
             result.put(PROXY_REDIRECT_KEY, basePath + "/secure/apps/proxy/credential?" + queryString);
         } else {
-            Ticket ticket = this.model.getObject(Model.TICKET, Ticket.class);
+            Ticket ticket = getObject(this.model, Model.TICKET, Ticket.class);
             if (ticket == null) {
                 throw new IllegalStateException("null ticket with sunetid");
             }

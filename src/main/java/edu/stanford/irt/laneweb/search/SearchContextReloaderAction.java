@@ -18,9 +18,9 @@ public class SearchContextReloaderAction extends AbstractAction {
 
     @Override
     public Map<String, String> doAct() {
-        String release = this.model.getString(Model.RELEASE);
-        String sunetid = this.model.getString(Model.SUNETID);
-        String password = this.model.getString(Model.PASSWORD);
+        String release = getString(this.model, Model.RELEASE);
+        String sunetid = getString(this.model, Model.SUNETID);
+        String password = getString(this.model, Model.PASSWORD);
         if (release != null && sunetid != null && password != null) {
             this.msms.reload(this.svnUrlProject.concat(release).concat(this.svnUrlPath), sunetid, password);
         }

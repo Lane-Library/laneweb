@@ -8,12 +8,11 @@ import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.objectmodel.helper.ParametersMap;
 
+import edu.stanford.irt.laneweb.model.DefaultModelAware;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelAware;
 
-public abstract class AbstractAction implements Action, ModelAware {
-
-    protected Model model;
+public abstract class AbstractAction extends DefaultModelAware implements Action {
 
     protected Map<String, String> parametersMap;
 
@@ -21,11 +20,8 @@ public abstract class AbstractAction implements Action, ModelAware {
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,
             final String source, final Parameters parameters) throws Exception {
         this.parametersMap = new ParametersMap(parameters);
+        this.model = objectModel;
         return doAct();
-    }
-
-    public void setModel(final Model model) {
-        this.model = model;
     }
 
     protected abstract Map<String, String> doAct();

@@ -56,7 +56,7 @@ public class UrlTester extends AbstractReader {
 
     @Override
     protected void initialize() {
-        this.url = this.model.getString(Model.URL);
+        this.url = getString(this.model, Model.URL);
         if (!this.url.startsWith("http")) {
             this.url = "http://".concat(this.url);
         }

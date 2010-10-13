@@ -127,8 +127,8 @@ public class SuggestionReader extends AbstractReader {
 
     @Override
     protected void initialize() {
-        this.callback = this.model.getString(Model.CALLBACK, "");
-        this.limit = this.model.getString(Model.LIMIT, "");
-        this.query = this.model.getString(Model.QUERY);
+        this.callback = getString(this.model, Model.CALLBACK, "");
+        this.limit = getString(this.model, Model.LIMIT, "");
+        this.query = getString(this.model, Model.QUERY);
     }
 }

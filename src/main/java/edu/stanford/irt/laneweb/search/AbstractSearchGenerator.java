@@ -9,7 +9,7 @@ public abstract class AbstractSearchGenerator extends AbstractGenerator {
 
     @Override
     protected void initialize() {
-        this.query = this.model.getString(Model.QUERY);
+        this.query = getString(this.model, Model.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }

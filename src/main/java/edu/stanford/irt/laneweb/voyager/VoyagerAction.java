@@ -14,9 +14,9 @@ public class VoyagerAction extends AbstractAction {
 
     @Override
     public Map<String, String> doAct() {
-        String pid = this.model.getString(Model.PID);
-        String queryString = this.model.getString(Model.QUERY_STRING);
-        String univId = this.model.getString(Model.UNIVID);
+        String pid = getString(this.model, Model.PID);
+        String queryString = getString(this.model, Model.QUERY_STRING);
+        String univId = getString(this.model, Model.UNIVID);
         String url = this.voyagerLogin.getVoyagerURL(univId, pid, queryString);
         Map<String, String> result = new HashMap<String, String>(1);
         result.put(VOYAGER_KEY, url);

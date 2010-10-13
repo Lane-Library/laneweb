@@ -9,6 +9,9 @@ import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import edu.stanford.irt.laneweb.model.Model;
 
 import org.junit.Before;
@@ -23,7 +26,7 @@ public class AbstractCMELinkTransformerTest {
 
     private AbstractCMELinkTransformer transformer;
     
-    private Model model;
+    private Map<String, Object> model;
     
     /**
      * @throws java.lang.Exception
@@ -33,8 +36,7 @@ public class AbstractCMELinkTransformerTest {
         this.transformer = new AbstractCMELinkTransformer() {
             //
         };
-        this.model = createMock(Model.class);
-        this.transformer.setModel(this.model);
+        this.model = new HashMap<String, Object>();
     }
 
     /**
@@ -42,14 +44,12 @@ public class AbstractCMELinkTransformerTest {
      */
     @Test
     public void testCreateCMELink() {
-        expect(this.model.getString(Model.EMRID)).andReturn("epic-123456");
-        replayMocks();
-        this.transformer.initialize();
+        this.model.put(Model.EMRID, "epic-123456");
+        this.transformer.setup(null, this.model, null, null);
         assertEquals("http://www.uptodate.com/online/content/search.do?unid=epic-123456&srcsys=epic90710&eiv=2.1.0", this.transformer.createCMELink("http://www.uptodate.com/online"));
         assertEquals("http://www.uptodate.com/foo?bar=true&unid=epic-123456&srcsys=epic90710&eiv=2.1.0", this.transformer.createCMELink("http://www.uptodate.com/foo?bar=true"));
         assertEquals("http://www.uptodate.com/online/content/search.do?unid=epic-123456&srcsys=epic90710&eiv=2.1.0", this.transformer.createCMELink("http://www.uptodate.com/"));
         assertEquals("http://www.uptodate.com", this.transformer.createCMELink("http://www.uptodate.com"));
-        verifyMocks();
     }
 
     /**
@@ -66,14 +66,6 @@ public class AbstractCMELinkTransformerTest {
     @Test
     public void testIsNotCMEHost() {
         assertFalse(this.transformer.isCMEHost("http://www.google.com/"));
-    }
-    
-    private void replayMocks() {
-        replay(this.model);
-    }
-
-    private void verifyMocks() {
-        verify(this.model);
     }
 
 }

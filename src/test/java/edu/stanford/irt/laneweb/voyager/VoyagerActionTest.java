@@ -6,6 +6,9 @@ import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +18,7 @@ public class VoyagerActionTest {
 
     private VoyagerAction action;
 
-    private Model model;
+    private Map<String, Object> model;
 
     private VoyagerLogin voyagerLogin;
 
@@ -23,21 +26,18 @@ public class VoyagerActionTest {
     public void setUp() throws Exception {
         this.action = new VoyagerAction();
         this.voyagerLogin = createMock(VoyagerLogin.class);
-        this.model = createMock(Model.class);
-        this.action.setModel(this.model);
+        this.model = new HashMap<String, Object>();
     }
 
     @Test
     public void testAct() throws Exception {
-        expect(this.model.getString(Model.PID)).andReturn("123");
-        expect(this.model.getString(Model.QUERY_STRING)).andReturn("a=b");
-        expect(this.model.getString(Model.UNIVID)).andReturn("1234");
-        replay(this.model);
+        this.model.put(Model.PID, "123");
+        this.model.put(Model.QUERY_STRING, "a=b");
+        this.model.put(Model.UNIVID, "1234");
         expect(this.voyagerLogin.getVoyagerURL("1234", "123", "a=b")).andReturn("hello");
         replay(this.voyagerLogin);
         this.action.setVoyagerLogin(this.voyagerLogin);
-        assertEquals(this.action.doAct().get("voyager-url"), "hello");
-        verify(this.model);
+        assertEquals(this.action.act(null, null, this.model, null, null).get("voyager-url"), "hello");
         verify(this.voyagerLogin);
     }
 }

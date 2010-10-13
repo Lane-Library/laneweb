@@ -9,6 +9,9 @@ import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +22,7 @@ import edu.stanford.irt.laneweb.model.Model;
 // $Id$
 public class AbstractProxyLinkTransformerTest {
 
-    private Model model;
+    private Map<String, Object> model;
 
     private Parameters parameters;
 
@@ -29,39 +32,24 @@ public class AbstractProxyLinkTransformerTest {
     public void setUp() throws Exception {
         this.transformer = new AbstractProxyLinkTransformer() {
         };
-        this.model = createMock(Model.class);
+        this.model = new HashMap<String, Object>();
         this.parameters = createMock(Parameters.class);
-        this.transformer.setModel(this.model);
     }
 
     @Test
     public void testCreateProxyLink() {
-        replayMocks();
+        replay(this.parameters);
         assertEquals("null/secure/apps/proxy/credential?url=foo", this.transformer.createProxyLink("foo"));
-        verifyMocks();
+        verify(this.parameters);
     }
 
-    @SuppressWarnings("unchecked")
     @Test
     public void testHospitalIP() {
-        expect(this.model.getString(isA(String.class))).andReturn(null).atLeastOnce();
-        expect(this.model.getObject(isA(String.class), isA(Class.class))).andReturn(null);
-        expect(this.model.getObject(isA(String.class), isA(Class.class), eq(Boolean.FALSE))).andReturn(true);
-        expect(this.model.getObject(isA(String.class), isA(Class.class), eq(IPGroup.OTHER))).andReturn(IPGroup.SHC);
+        this.model.put(Model.IPGROUP, IPGroup.SHC);
         expect(this.parameters.getParameter(isA(String.class), (String) isNull())).andReturn(null).atLeastOnce();
-        replayMocks();
-        this.transformer.setup(null, null, null, this.parameters);
-        assertEquals("http://laneproxy.stanford.edu/login?url=foo", this.transformer.createProxyLink("foo"));
-        verifyMocks();
-    }
-
-    private void replayMocks() {
-        replay(this.model);
         replay(this.parameters);
-    }
-
-    private void verifyMocks() {
-        verify(this.model);
+        this.transformer.setup(null, this.model, null, this.parameters);
+        assertEquals("http://laneproxy.stanford.edu/login?url=foo", this.transformer.createProxyLink("foo"));
         verify(this.parameters);
     }
 }

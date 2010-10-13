@@ -12,6 +12,8 @@ import static org.junit.Assert.assertEquals;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +33,7 @@ public class SuggestionReaderTest {
     
     private SuggestionManager mesh;
 
-    private Model model;
+    private Map<String, Object> model;
 
     private ByteArrayOutputStream outputStream;
 
@@ -51,8 +53,7 @@ public class SuggestionReaderTest {
         this.reader.setMeshSuggestionManager(this.mesh);
         this.outputStream = new ByteArrayOutputStream();
         this.reader.setOutputStream(this.outputStream);
-        this.model = createMock(Model.class);
-        this.reader.setModel(this.model);
+        this.model = new HashMap<String, Object>();
     }
 
     /**
@@ -64,15 +65,15 @@ public class SuggestionReaderTest {
     public void testGenerate() throws IOException {
         Suggestion suggestion = createMock(Suggestion.class);
         expect(suggestion.getSuggestionTitle()).andReturn("Venous Thrombosis");
-        expect(this.model.getString(Model.CALLBACK, "")).andReturn("");
-        expect(this.model.getString(Model.QUERY)).andReturn("venous thrombosis");
-        expect(this.model.getString(Model.LIMIT, "")).andReturn("mesh");
+        this.model.put(Model.CALLBACK, "");
+        this.model.put(Model.QUERY, "venous thrombosis");
+        this.model.put(Model.LIMIT, "mesh");
         expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion));
-        replay(suggestion, this.eresource, this.history, this.mesh, this.model);
-        this.reader.setup(null, null, null, null);
+        replay(suggestion, this.eresource, this.history, this.mesh );
+        this.reader.setup(null, this.model, null, null);
         this.reader.generate();
         assertEquals("{\"suggest\":[\"Venous Thrombosis\"]}", new String(this.outputStream.toByteArray()));
-        verify(suggestion, this.eresource, this.history, this.mesh, this.model);
+        verify(suggestion, this.eresource, this.history, this.mesh );
     }
 
     /**
@@ -82,15 +83,15 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerateNull() throws IOException {
-        expect(this.model.getString(Model.CALLBACK, "")).andReturn("");
-        expect(this.model.getString(Model.QUERY)).andReturn("asdfgh");
-        expect(this.model.getString(Model.LIMIT, "")).andReturn("mesh");
+        this.model.put(Model.CALLBACK, "");
+        this.model.put(Model.QUERY, "asdfgh");
+        this.model.put(Model.LIMIT, "mesh");
         expect(this.mesh.getSuggestionsForTerm("asdfgh")).andReturn(Collections.<Suggestion>emptyList());
-        replay(this.eresource, this.history, this.mesh, this.model);
-        this.reader.setup(null, null, null, null);
+        replay(this.eresource, this.history, this.mesh );
+        this.reader.setup(null, this.model, null, null);
         this.reader.generate();
         assertEquals("{\"suggest\":[]}", new String(this.outputStream.toByteArray()));
-        verify(this.eresource, this.history, this.mesh, this.model);
+        verify(this.eresource, this.history, this.mesh );
     }
 
     /**
@@ -100,14 +101,14 @@ public class SuggestionReaderTest {
      */
     @Test
     public void testGenerateCallback() throws IOException {
-        expect(this.model.getString(Model.CALLBACK, "")).andReturn("foo");
-        expect(this.model.getString(Model.QUERY)).andReturn("asdfgh");
-        expect(this.model.getString(Model.LIMIT, "")).andReturn("mesh");
+        this.model.put(Model.CALLBACK, "foo");
+        this.model.put(Model.QUERY, "asdfgh");
+        this.model.put(Model.LIMIT, "mesh");
         expect(this.mesh.getSuggestionsForTerm("asdfgh")).andReturn(Collections.<Suggestion>emptyList());
-        replay(this.eresource, this.history, this.mesh, this.model);
-        this.reader.setup(null, null, null, null);
+        replay(this.eresource, this.history, this.mesh );
+        this.reader.setup(null, this.model, null, null);
         this.reader.generate();
         assertEquals("foo({\"suggest\":[]});", new String(this.outputStream.toByteArray()));
-        verify(this.eresource, this.history, this.mesh, this.model);
+        verify(this.eresource, this.history, this.mesh );
     }
 }

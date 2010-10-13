@@ -37,11 +37,9 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     @Override
     protected void initialize() {
-        this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : this.model
-                .getString(Model.TYPE);
-        this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : this.model
-                .getString(Model.SUBSET);
-        this.alpha = this.model.getString(Model.ALPHA);
+        this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : getString(this.model, Model.TYPE);
+        this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : getString(this.model, Model.SUBSET);
+        this.alpha = getString(this.model, Model.ALPHA);
         if (this.alpha != null && this.alpha.length() > 1) {
             if ("all".equals(this.alpha)) {
                 this.alpha = null;
@@ -49,7 +47,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
                 this.alpha = this.alpha.substring(0, 1);
             }
         }
-        this.mesh = this.model.getString(Model.MESH);
+        this.mesh = getString(this.model, Model.MESH);
         if (this.mesh != null) {
             this.mesh = this.mesh.toLowerCase();
         }

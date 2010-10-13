@@ -45,7 +45,6 @@
     <bean name="org.apache.cocoon.selection.Selector/ipgroup"
         class="edu.stanford.irt.laneweb.cocoon.IPGroupSelector"
         scope="prototype">
-        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
     </bean>
     
     <bean id="org.apache.cocoon.matching.MatcherSelector"

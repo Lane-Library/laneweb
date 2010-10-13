@@ -7,6 +7,8 @@ import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
@@ -22,7 +24,7 @@ public class SpellCheckGeneratorTest {
 
     private SpellCheckGenerator generator;
 
-    private Model model;
+    private Map<String, Object> model;
 
     private SpellChecker spellChecker;
 
@@ -33,16 +35,15 @@ public class SpellCheckGeneratorTest {
         this.generator = new SpellCheckGenerator();
         this.spellChecker = createMock(SpellChecker.class);
         this.xmlConsumer = createMock(XMLConsumer.class);
-        this.model = createMock(Model.class);
-        this.generator.setModel(this.model);
+        this.model = new HashMap<String, Object>();
     }
 
     @Test
     public void testGenerate() throws IOException, SAXException {
         expect(this.spellChecker.spellCheck("ibuprophen")).andReturn(new SpellCheckResult("ibuprofen"));
-        expect(this.model.getString(Model.QUERY)).andReturn("ibuprophen");
+        this.model.put(Model.QUERY, "ibuprophen");
         replayMocks();
-        this.generator.setup(null, null, null, null);
+        this.generator.setup(null, this.model, null, null);
         this.generator.setConsumer(this.xmlConsumer);
         this.generator.setSpellChecker(this.spellChecker);
         this.generator.generate();
@@ -71,18 +72,17 @@ public class SpellCheckGeneratorTest {
 
     @Test
     public void testSetup() throws SAXException, IOException {
-        expect(this.model.getString(Model.QUERY)).andReturn("ibuprophen");
+        this.model.put(Model.QUERY, "ibuprophen");
         replayMocks();
-        this.generator.setup(null, null, null, null);
+        this.generator.setup(null, this.model, null, null);
         verifyMocks();
     }
 
     @Test
     public void testSetupNullQuery() throws SAXException, IOException {
-        expect(this.model.getString(Model.QUERY)).andReturn(null);
         replayMocks();
         try {
-            this.generator.setup(null, null, null, null);
+            this.generator.setup(null, this.model, null, null);
             fail();
         } catch (IllegalArgumentException e) {
         }
@@ -91,11 +91,9 @@ public class SpellCheckGeneratorTest {
 
     private void replayMocks() {
         replay(this.spellChecker);
-        replay(this.model);
     }
 
     private void verifyMocks() {
         verify(this.spellChecker);
-        verify(this.model);
     }
 }

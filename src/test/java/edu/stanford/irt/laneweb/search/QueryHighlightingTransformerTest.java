@@ -8,6 +8,9 @@ import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.fail;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.cocoon.xml.XMLConsumer;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +25,7 @@ public class QueryHighlightingTransformerTest {
 
     private static final char[] CHARS = "some characters with query inside of it".toCharArray();
 
-    private Model model;
+    private Map<String, Object> model;
 
     private QueryHighlightingTransformer transformer;
 
@@ -30,16 +33,15 @@ public class QueryHighlightingTransformerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.model = createMock(Model.class);
+        this.model = new HashMap<String, Object>();
         this.xmlConsumer = createMock(XMLConsumer.class);
         this.transformer = new QueryHighlightingTransformer();
-        this.transformer.setModel(this.model);
         this.transformer.setConsumer(this.xmlConsumer);
     }
 
     @Test
     public void testCharacters() throws SAXException {
-        expect(this.model.getString(Model.QUERY)).andReturn("query");
+        this.model.put(Model.QUERY, "query");
         this.xmlConsumer.startElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE, null);
         this.xmlConsumer.characters(isA(char[].class), eq(0), eq(21));
         this.xmlConsumer.startElement(eq(Resource.NAMESPACE), eq(Resource.KEYWORD), eq(Resource.KEYWORD),
@@ -49,7 +51,7 @@ public class QueryHighlightingTransformerTest {
         this.xmlConsumer.characters(isA(char[].class), eq(26), eq(13));
         this.xmlConsumer.endElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE);
         replayMocks();
-        this.transformer.initialize();
+        this.transformer.setup(null, this.model, null, null);
         this.transformer.startElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE, null);
         this.transformer.characters(CHARS, 0, CHARS.length);
         this.transformer.endElement(Resource.NAMESPACE, Resource.TITLE, Resource.TITLE);
@@ -58,20 +60,19 @@ public class QueryHighlightingTransformerTest {
 
     @Test
     public void testEndElement() throws SAXException {
-        expect(this.model.getString(Model.QUERY)).andReturn("query");
+        this.model.put(Model.QUERY, "query");
         this.xmlConsumer.endElement(null, null, null);
         replayMocks();
-        this.transformer.initialize();
+        this.transformer.setup(null, this.model, null, null);
         this.transformer.endElement(null, null, null);
         verifyMocks();
     }
 
     @Test
     public void testInitialize() {
-        expect(this.model.getString(Model.QUERY)).andReturn(null);
         replayMocks();
         try {
-            this.transformer.initialize();
+            this.transformer.setup(null, this.model, null, null);
             fail();
         } catch (IllegalArgumentException e) {
         }
@@ -80,21 +81,19 @@ public class QueryHighlightingTransformerTest {
 
     @Test
     public void testStartElement() throws SAXException {
-        expect(this.model.getString(Model.QUERY)).andReturn("query");
+        this.model.put(Model.QUERY, "query");
         this.xmlConsumer.startElement(null, null, null, null);
         replayMocks();
-        this.transformer.initialize();
+        this.transformer.setup(null, this.model, null, null);
         this.transformer.startElement(null, null, null, null);
         verifyMocks();
     }
 
     private void replayMocks() {
         replay(this.xmlConsumer);
-        replay(this.model);
     }
 
     private void verifyMocks() {
         verify(this.xmlConsumer);
-        verify(this.model);
     }
 }

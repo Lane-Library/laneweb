@@ -29,6 +29,6 @@ public class DebugTransformer extends AbstractTransformer {
 
     @Override
     protected void initialize() {
-        this.debug = this.model.getObject("debug", Boolean.class, Boolean.FALSE);
+        this.debug = getObject(this.model, "debug", Boolean.class, Boolean.FALSE);
     }
 }

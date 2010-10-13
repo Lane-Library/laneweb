@@ -55,9 +55,9 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : this.model
-                .getString(Model.TYPE);
-        this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : this.model
-                .getString(Model.SUBSET);
+        this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : 
+                getString(this.model, Model.TYPE);
+        this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : 
+                getString(this.model, Model.SUBSET);
     }
 }

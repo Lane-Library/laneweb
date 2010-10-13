@@ -12,7 +12,7 @@ public class SearchCacheManagerAction extends AbstractAction {
 
     @Override
     public Map<String, String> doAct() {
-        String query = this.model.getString(Model.QUERY);
+        String query = getString(this.model, Model.QUERY);
         if (query != null) {
             this.searchCache.clearCache(query);
         } else {

@@ -124,24 +124,4 @@ public class Model extends HashMap<String, Object> {
     public static final String USER_COOKIE = "user-cookie";
 
     public static final String VERSION = "version";
-
-    @SuppressWarnings("unchecked")
-    public <T> T getObject(final String name, final Class<T> clazz) {
-        return (T) get(name);
-    }
-
-    public <T> T getObject(final String name, final Class<T> clazz, final T defaultValue) {
-        if (!containsKey(name)) {
-            return defaultValue;
-        }
-        return getObject(name, clazz);
-    }
-
-    public String getString(final String name) {
-        return getObject(name, String.class);
-    }
-
-    public String getString(final String name, final String defaultValue) {
-        return getObject(name, String.class, defaultValue);
-    }
 }

@@ -46,11 +46,11 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     @Override
     protected void initialize() {
-        this.sunetid = this.model.getString(Model.SUNETID);
-        this.ticket = this.model.getObject(Model.TICKET, Ticket.class);
-        this.proxyLinks = this.model.getObject(Model.PROXY_LINKS, Boolean.class, Boolean.FALSE);
-        this.ipGroup = this.model.getObject(Model.IPGROUP, IPGroup.class, IPGroup.OTHER);
+        this.sunetid = getString(this.model, Model.SUNETID);
+        this.ticket = getObject(this.model, Model.TICKET, Ticket.class);
+        this.proxyLinks = getObject(this.model, Model.PROXY_LINKS, Boolean.class, Boolean.FALSE);
+        this.ipGroup = getObject(this.model, Model.IPGROUP, IPGroup.class, IPGroup.OTHER);
         this.basePath = this.parameterMap.containsKey(Model.BASE_PATH) ? this.parameterMap.get(Model.BASE_PATH)
-                : this.model.getString(Model.BASE_PATH);
+                : getString(this.model, Model.BASE_PATH);
     }
 }

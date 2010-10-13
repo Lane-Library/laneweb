@@ -40,8 +40,8 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
 
     @Override
     protected void initialize() {
-        this.query = this.model.getString(Model.QUERY);
-        this.region = this.model.getString(Model.REGION);
-        this.bassettNumber = this.model.getString(Model.BASSETT_NUMBER);
+        this.query = getString(this.model, Model.QUERY);
+        this.region = getString(this.model, Model.REGION);
+        this.bassettNumber = getString(this.model, Model.BASSETT_NUMBER);
     }
 }

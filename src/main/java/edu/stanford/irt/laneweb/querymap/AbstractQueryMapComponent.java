@@ -55,7 +55,7 @@ public abstract class AbstractQueryMapComponent extends AbstractSitemapModelComp
         if (null == this.queryMapper) {
             throw new IllegalStateException("null queryMapper");
         }
-        String query = this.model.getString(Model.QUERY);
+        String query = getString(this.model, Model.QUERY);
         if (null == query) {
             throw new IllegalArgumentException("null query");
         }

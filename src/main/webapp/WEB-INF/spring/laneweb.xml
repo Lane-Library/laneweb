@@ -79,7 +79,6 @@
 
     <bean name="org.apache.cocoon.generation.Generator/file"
         class="edu.stanford.irt.laneweb.cocoon.URLGenerator" scope="prototype">
-        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
         <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
 
@@ -127,7 +126,6 @@
 
     <bean name="org.apache.cocoon.acting.Action/voyager"
         class="edu.stanford.irt.laneweb.voyager.VoyagerAction" scope="prototype">
-        <property name="model" ref="edu.stanford.irt.laneweb.model.Model"/>
         <property name="voyagerLogin">
             <bean class="edu.stanford.irt.laneweb.voyager.VoyagerLogin">
                 <property name="dataSource" ref="javax.sql.DataSource/voyager"/>
