@@ -126,14 +126,14 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
     private String getSitemapURI(final HttpServletRequest request) {
         String uri = request.getRequestURI().substring(request.getContextPath().length());
         if (uri.indexOf("/stage") == 0) {
-            return uri.substring("/stage".length());
+            return uri.substring("/stage".length() + 1);
         }
         for (String key : this.baseMappings.keySet()) {
             if (uri.indexOf(key) == 0) {
-                return uri.substring(key.length());
+                return uri.substring(key.length() + 1);
             }
         }
-        return uri;
+        return uri.substring(1);
     }
 
     protected void process(Map<String, Object> model, final HttpServletRequest request, final HttpServletResponse response) throws IOException,
