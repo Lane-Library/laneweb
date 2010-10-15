@@ -52,7 +52,7 @@ public class ModelAugmentingRequestHandlerTest {
         expect(this.request.getParameter(isA(String.class))).andReturn(null).atLeastOnce();
         expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptyList()))
                 .atLeastOnce();
-        expect(this.request.getContextPath()).andReturn("/").atLeastOnce();
+        expect(this.request.getContextPath()).andReturn("").atLeastOnce();
         expect(this.request.getRequestURI()).andReturn("/index.html").atLeastOnce();
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
         expect(this.servletContext.getMimeType("index.html")).andReturn(null);

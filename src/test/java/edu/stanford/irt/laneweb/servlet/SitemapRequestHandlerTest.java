@@ -63,7 +63,7 @@ public class SitemapRequestHandlerTest {
         expect(this.request.getParameter("cocoon-action")).andReturn(null);
         expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptySet()));
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
-        expect(this.servletContext.getMimeType("/")).andReturn(null);
+        expect(this.servletContext.getMimeType("")).andReturn(null);
         this.response.setContentType(null);
         replayMocks();
         this.handler.handleRequest(this.request, this.response);
