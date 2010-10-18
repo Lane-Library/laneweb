@@ -27,7 +27,9 @@ public class LDAPDataBinder implements DataBinder {
                 session.setAttribute(Model.UNIVID, univid);
             }
             model.put(Model.NAME, name);
-            model.put(Model.UNIVID, univid);
+            if (univid != null) {
+                model.put(Model.UNIVID, univid);
+            }
         }
     }
     
