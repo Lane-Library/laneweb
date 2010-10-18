@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.servlet;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
@@ -21,6 +22,8 @@ public class TemplateChooser {
 
     /** the name of the default template */
     private String defaultTemplate;
+    
+    private List<String> existingTemplates;
 
     /** a Map used internally that contains the compiled regular expressions */
     private Map<String, Pattern> patternMap;
@@ -28,7 +31,7 @@ public class TemplateChooser {
     /** a Map of regular expressions associated with templates */
     private Map<String, String> templateMap = Collections.emptyMap();
 
-    public TemplateChooser(final String defaultTemplate, final Map<String, String> templateMap) {
+    public TemplateChooser(final String defaultTemplate, List<String> existingTemplates, final Map<String, String> templateMap) {
         if (null == defaultTemplate) {
             throw new IllegalArgumentException("null defaultTemplate");
         }
@@ -40,10 +43,14 @@ public class TemplateChooser {
             }
         }
         this.defaultTemplate = defaultTemplate;
+        this.existingTemplates = existingTemplates;
     }
 
     public String getTemplate(final HttpServletRequest request) {
         String template = request.getParameter(Model.TEMPLATE);
+        if (!this.existingTemplates.contains(template)) {
+            template = null;
+        }
         if (null == template && this.templateMap.size() > 0) {
             String uri = request.getRequestURI().substring(request.getContextPath().length());
             for (Entry<String, Pattern> entry : this.patternMap.entrySet()) {
@@ -54,5 +61,9 @@ public class TemplateChooser {
             }
         }
         return null == template ? this.defaultTemplate : template;
+    }
+
+    public String getDefaultTemplate() {
+        return this.defaultTemplate;
     }
 }

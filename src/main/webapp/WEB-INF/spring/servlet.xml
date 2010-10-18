@@ -196,6 +196,9 @@
         class="edu.stanford.irt.laneweb.servlet.TemplateChooser">
         <constructor-arg value="template"/>
         <constructor-arg>
+            <value>template, bassettLargetView, mobile, none</value>
+        </constructor-arg>
+        <constructor-arg>
             <map>
                 <entry key="^(?:/\w+|)/biomed-resources/bassett/raw/bassettLargerView.html" value="bassettLargerView"
                 />

@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2010-10-18" version="1.11.5" description="1.11.5 bug fix release">
+            <action date="2010-10-18" dev="ceyates" issue="43716" type="fix">
+                500 errors for requests with ?template=nonexistenttemplate
+            </action>
             <action date="2010-10-18" dev="ceyates" issue="43713" type="add">
                 unify sitemap and expression language object models
             </action>
