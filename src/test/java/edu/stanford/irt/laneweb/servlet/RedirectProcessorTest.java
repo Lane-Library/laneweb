@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -59,12 +61,4 @@ public class RedirectProcessorTest {
         this.redirectProcessor.setRedirectMap(Collections.singletonMap("((?!.*\\?.*).*)/","$1/index.html"));
         assertEquals(RedirectProcessor.NO_REDIRECT, this.redirectProcessor.getRedirectURL("/l?u=/r/"));
     }
-    
-//    @Test
-//    public void testUniprintRedirect() {
-//        this.redirectProcessor.setRedirectMap(Collections.singletonMap("((?!.*/secure.*).*)/uniprint/(.*)", "$1/secure/uniprint/$2"));
-//        assertEquals("/secure/uniprint/index.html", this.redirectProcessor.getRedirectURL("/uniprint/index.html"));
-//        assertEquals(RedirectProcessor.NO_REDIRECT, this.redirectProcessor.getRedirectURL("/secure/uniprint/index.html"));
-//        assertEquals("/foo/secure/uniprint/index.html", this.redirectProcessor.getRedirectURL("/foo/uniprint/index.html"));
-//    }
 }

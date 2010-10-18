@@ -66,32 +66,35 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         if (queryString != null) {
             requestURI = requestURI + '?' + queryString;
         }
-        String strippedURI = requestURI;
-        String redirectBase = contextPath;
-        if (strippedURI.indexOf("/stage") == 0) {
-            strippedURI = strippedURI.substring(6);
-            redirectBase += "/stage";
-        } else {
-            for (String key : this.baseMappings.keySet()) {
-                if (strippedURI.indexOf(key) == 0) {
-                    strippedURI = strippedURI.substring(key.length());
-                    redirectBase += key;
-                    break;
+        //only .html and .xml potentially get redirects.
+        if (requestURI.indexOf(".html") > 0 || requestURI.indexOf(".xml") > 0) {
+            String strippedURI = requestURI;
+            String redirectBase = contextPath;
+            if (strippedURI.indexOf("/stage") == 0) {
+                strippedURI = strippedURI.substring(6);
+                redirectBase += "/stage";
+            } else {
+                for (String key : this.baseMappings.keySet()) {
+                    if (strippedURI.indexOf(key) == 0) {
+                        strippedURI = strippedURI.substring(key.length());
+                        redirectBase += key;
+                        break;
+                    }
                 }
             }
-        }
-        String redirectURI = this.redirectProcessor.getRedirectURL(strippedURI);
-        if (!RedirectProcessor.NO_REDIRECT.equals(redirectURI)) {
-            response.sendRedirect(redirectBase + redirectURI);
-            return;
+            String redirectURI = this.redirectProcessor.getRedirectURL(strippedURI);
+            if (!RedirectProcessor.NO_REDIRECT.equals(redirectURI)) {
+                response.sendRedirect(redirectBase + redirectURI);
+                return;
+            }
         }
         Map<String, Object> model = getModel();
         doBind(model, request);
         process(model, request, response);
     }
-    
+
     protected void doBind(Map<String, Object> model, HttpServletRequest request) {
-        for (DataBinder binder: this.dataBinders) {
+        for (DataBinder binder : this.dataBinders) {
             binder.bind(model, request);
         }
     }
@@ -136,10 +139,11 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         return uri.substring(1);
     }
 
-    protected void process(Map<String, Object> model, final HttpServletRequest request, final HttpServletResponse response) throws IOException,
-            ServletException {
+    protected void process(Map<String, Object> model, final HttpServletRequest request,
+            final HttpServletResponse response) throws IOException, ServletException {
         String sitemapURI = getSitemapURI(request);
-        Environment environment = new LanewebEnvironment(sitemapURI, model, request, response, this.servletContext, this.context);
+        Environment environment = new LanewebEnvironment(sitemapURI, model, request, response, this.servletContext,
+                this.context);
         try {
             EnvironmentHelper.enterProcessor(this.processor, environment);
             this.processor.process(environment);
@@ -150,6 +154,6 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             EnvironmentHelper.leaveProcessor();
         }
     }
-    
+
     protected abstract Map<String, Object> getModel();
 }
