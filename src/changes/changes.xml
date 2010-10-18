@@ -7,9 +7,20 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-10-18" version="1.11.5" description="1.11.5 bug fix release">
+            <action date="2010-14-08" dev="ceyates" issue="43613" type="fix">
+                Spec. Portals Dropdown: Add Reference Desk
+            </action>
+            <action date="2010-10-13" dev="ceyates" issue="43574" type="add">
+                add mime-type for .dmg
+            </action>
+            <action date="2010-10-12" dev="ceyates" issue="43243" type="remove">
+                remove back to lane-old button
+            </action>
+        </release>
         <release date="2010-10-11" version="1.11.4" description="1.11.4 bug fix release">
             <action date="2010-10-08" dev="ceyates" issue="43464" type="fix">
-                change link color to #1C4B70
+                FAQs: fix ugly nested h3 borders
             </action>
             <action date="2010-10-07" dev="ceyates" issue="43411" type="add">
                 automatically toggle restrictive robots.txt for non-production servers
