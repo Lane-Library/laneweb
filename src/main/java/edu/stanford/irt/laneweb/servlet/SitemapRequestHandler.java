@@ -66,8 +66,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         if (queryString != null) {
             requestURI = requestURI + '?' + queryString;
         }
-        //only .html and .xml potentially get redirects.
-        if (requestURI.indexOf(".html") > 0 || requestURI.indexOf(".xml") > 0) {
+        //only .html and .xml or ending in / potentially get redirects.
+        if (requestURI.indexOf(".html") > 0 || requestURI.indexOf(".xml") > 0 || requestURI.lastIndexOf('/') == requestURI.length() - 1) {
             String strippedURI = requestURI;
             String redirectBase = contextPath;
             if (strippedURI.indexOf("/stage") == 0) {
