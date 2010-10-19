@@ -20,6 +20,8 @@ import org.apache.cocoon.environment.Environment;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
+
 public class SitemapRequestHandlerTest {
 
     private SitemapRequestHandler handler;
@@ -33,6 +35,8 @@ public class SitemapRequestHandlerTest {
     private HttpServletResponse response;
 
     private ServletContext servletContext;
+    
+    private DataBinder dataBinder;
 
     @Before
     public void setUp() throws Exception {
@@ -47,9 +51,11 @@ public class SitemapRequestHandlerTest {
         this.processor = createMock(Processor.class);
         this.servletContext = createMock(ServletContext.class);
         this.redirectProcessor = createMock(RedirectProcessor.class);
+        this.dataBinder = createMock(DataBinder.class);
         this.handler.setProcessor(this.processor);
         this.handler.setServletContext(this.servletContext);
         this.handler.setRedirectProcessor(this.redirectProcessor);
+        this.handler.setDataBinder(this.dataBinder);
     }
 
     @Test
@@ -64,6 +70,7 @@ public class SitemapRequestHandlerTest {
         expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptySet()));
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
         expect(this.servletContext.getMimeType("")).andReturn(null);
+        this.dataBinder.bind(isA(Map.class), isA(HttpServletRequest.class));
         this.response.setContentType(null);
         replayMocks();
         this.handler.handleRequest(this.request, this.response);
