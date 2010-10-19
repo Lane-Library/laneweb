@@ -16,6 +16,7 @@
         <param-value>
             classpath:net/bull/javamelody/monitoring-spring.xml
             /WEB-INF/spring/bassett.xml
+            /WEB-INF/spring/binding.xml
             /WEB-INF/spring/cme.xml
             /WEB-INF/spring/cocoon.xml
             /WEB-INF/spring/datasources.xml
