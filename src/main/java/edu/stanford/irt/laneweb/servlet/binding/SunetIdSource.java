@@ -12,9 +12,8 @@ import edu.stanford.irt.laneweb.servlet.PersistentLoginToken;
 import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 
 /**
- * A servlet Filter that tries to discover the sunetid associated with a request. It does this by looking in a number of
- * places described below. If it finds it it sets a request attribute 'sunetid' for use later in processing. It also
- * responds to the 'pl' and 'remove-pl' request parameters by setting the lane-user cookie as appropriate.
+ * This tries to discover the sunetid associated with a request. It does this by looking in a number of
+ * places described below. If it finds it it puts it in the session if it wasn't there already.
  * 
  * @author ceyates $Id$
  */
