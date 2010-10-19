@@ -27,7 +27,7 @@ public class SunetIdSource {
     private Logger log = LoggerFactory.getLogger(SunetIdSource.class);
 
     /**
-     * doFilter looks up the sunet id from the session, request, and lane-user cookie in that order. If it is not in the
+     * looks up the sunet id from the session, request, and lane-user cookie in that order. If it is not in the
      * session it is put there.
      */
     public String getSunetid(final HttpServletRequest request, final HttpSession session) {
