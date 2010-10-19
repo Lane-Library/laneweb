@@ -12,9 +12,16 @@
                         <map>
                             <!-- had to add NOT question mark because some proxy urls end with slash -->
                             <entry key="((?!.*\?.*).*)/" value="$1/index.html"/>
-                            <entry key="(.*)/classes/index\.html" value="$1/services/workshops/laneclasses.html"/>
+                            <entry key="(.*)/classes/index\.html" value="$1/classes-consult/laneclasses.html"/>
                             <entry key="(.*)/clinician/index\.html" value="$1/portals/clinical.html"/>
                             <entry key="(.*)/index\.html\?template=shc(.*)" value="$1/index\.html\?sourceid=shc$2"/>
+                        </map>
+                    </property>
+                </bean>
+                <!-- newpage redirects, remove sometime in November -->
+                <bean class="edu.stanford.irt.laneweb.servlet.redirect.DefaultRedirectProcessor">
+                    <property name="redirectMap">
+                        <map>
                             <entry key="(.*)/services/index\.html" value="$1/newpage.html?page=$1/about/index.html"/>
                             <entry key="(.*)/(?:content|rss)/page2rss\?page=/services/workshops/laneclasses\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/classes-consult/laneclasses\.html"/>
                             <entry key="(.*)/services/workshops/laneclasses\.html" value="$1/newpage.html?page=$1/classes-consult/laneclasses.html"/>
