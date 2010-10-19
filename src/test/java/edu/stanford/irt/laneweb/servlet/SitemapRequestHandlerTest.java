@@ -21,6 +21,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
+import edu.stanford.irt.laneweb.servlet.redirect.DefaultRedirectProcessor;
+import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
 public class SitemapRequestHandlerTest {
 
@@ -50,7 +52,7 @@ public class SitemapRequestHandlerTest {
         this.response = createMock(HttpServletResponse.class);
         this.processor = createMock(Processor.class);
         this.servletContext = createMock(ServletContext.class);
-        this.redirectProcessor = createMock(RedirectProcessor.class);
+        this.redirectProcessor = createMock(DefaultRedirectProcessor.class);
         this.dataBinder = createMock(DataBinder.class);
         this.handler.setProcessor(this.processor);
         this.handler.setServletContext(this.servletContext);
@@ -61,7 +63,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequest() throws Exception {
         expect(this.request.getMethod()).andReturn("GET");
-        expect(this.redirectProcessor.getRedirectURL("/")).andReturn(RedirectProcessor.NO_REDIRECT);
+        expect(this.redirectProcessor.getRedirectURL("/")).andReturn(null);
         expect(this.request.getRequestURI()).andReturn("/").times(2);
         expect(this.request.getQueryString()).andReturn(null).times(1);
         expect(this.request.getContextPath()).andReturn("").times(2);

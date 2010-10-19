@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.servlet.redirect;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,9 +12,11 @@ import javax.servlet.ServletException;
 import org.junit.Before;
 import org.junit.Test;
 
-public class RedirectProcessorTest {
+import edu.stanford.irt.laneweb.servlet.redirect.DefaultRedirectProcessor;
 
-    private RedirectProcessor redirectProcessor;
+public class DefaultRedirectProcessorTest {
+
+    private DefaultRedirectProcessor redirectProcessor;
 
     @Test
     public void foo() {
@@ -25,7 +27,7 @@ public class RedirectProcessorTest {
 
     @Before
     public void setUp() throws Exception {
-        this.redirectProcessor = new RedirectProcessor();
+        this.redirectProcessor = new DefaultRedirectProcessor();
     }
 
     @Test
@@ -59,6 +61,6 @@ public class RedirectProcessorTest {
     @Test
     public void testHandleParameterEndsWithSlash() {
         this.redirectProcessor.setRedirectMap(Collections.singletonMap("((?!.*\\?.*).*)/","$1/index.html"));
-        assertEquals(RedirectProcessor.NO_REDIRECT, this.redirectProcessor.getRedirectURL("/l?u=/r/"));
+        assertEquals(null, this.redirectProcessor.getRedirectURL("/l?u=/r/"));
     }
 }

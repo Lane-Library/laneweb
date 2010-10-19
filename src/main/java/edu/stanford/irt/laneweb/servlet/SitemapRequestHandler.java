@@ -21,6 +21,7 @@ import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
+import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
 public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
@@ -83,7 +84,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
                 }
             }
             String redirectURI = this.redirectProcessor.getRedirectURL(strippedURI);
-            if (!RedirectProcessor.NO_REDIRECT.equals(redirectURI)) {
+            if (redirectURI != null) {
                 response.sendRedirect(redirectBase + redirectURI);
                 return;
             }

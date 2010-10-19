@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor"
+        class="edu.stanford.irt.laneweb.servlet.redirect.CompositeRedirectProcessor">
+        <property name="redirectProcessors">
+            <list>
+                <bean class="edu.stanford.irt.laneweb.servlet.redirect.DefaultRedirectProcessor">
+                    <property name="redirectMap">
+                        <map>
+                            <!-- had to add NOT question mark because some proxy urls end with slash -->
+                            <entry key="((?!.*\?.*).*)/" value="$1/index.html"/>
+                            <entry key="(.*)/classes/index\.html" value="$1/services/workshops/laneclasses.html"/>
+                            <entry key="(.*)/clinician/index\.html" value="$1/portals/clinical.html"/>
+                            <entry key="(.*)/index\.html\?template=shc(.*)" value="$1/index\.html\?sourceid=shc$2"/>
+                            <entry key="(.*)/services/index\.html" value="$1/newpage.html?page=$1/about/index.html"/>
+                            <entry key="(.*)/(?:content|rss)/page2rss\?page=/services/workshops/laneclasses\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/classes-consult/laneclasses\.html"/>
+                            <entry key="(.*)/services/workshops/laneclasses\.html" value="$1/newpage.html?page=$1/classes-consult/laneclasses.html"/>
+                            <entry key="(.*)/howto/index\.html\?id=48" value="$1/newpage.html?page=$1/about/hours-directions.html"/>
+                            <entry key="(.*)/contacts/index\.html\?loadTab=askus" value="$1/newpage.html?page=$1/help/ask-us.html"/>
+                            <entry key="((?!.*/about.*).*)/contacts/(.*)" value="$1/newpage.html?page=$1/about/contacts/$2"/>
+                            <entry key="(.*)/online/(.*)browse\.html(.*)" value="$1/newpage.html?page=$1/biomed-resources/$2.html$3"/>
+                            <entry key="(.*)/online/(.*)" value="$1/newpage.html?page=$1/biomed-resources/$2"/>
+                            <entry key="(.*)/portals/bassett/(.*)" value="$1/newpage.html?page=$1/biomed-resources/bassett/$2"/>
+                            <entry key="((?!.*/(?:biomed-resources|raw).*).*)/bassett/(.*)" value="$1/newpage.html?page=$1/biomed-resources/bassett/$2"/>
+                            <entry key="(.*)/portals/history/index\.html" value="$1/newpage.html?page=$1/med-history/index.html"/>
+                            <entry key="(.*)/(?:content|rss)/page2rss\?page=/portals/emgrandrounds\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/biomed-resources/emgrandrounds\.html"/>
+                            <entry key="(.*)/(?:content|rss)/page2rss\?page=/portals/medgrandrounds\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/biomed-resources/medgrandrounds\.html"/>
+                            <entry key="(.*)/(?:content|rss)/page2rss\?page=/portals/pedsgrandrounds\.html" value="$1/newpage.html?page=$1/rss/page2rss?page=/biomed-resources/pedsgrandrounds\.html"/>
+                            <entry key="(.*)/rss/services/tools/highly-accessed-articles\.xml" value="$1/newpage.html?page=$1/rss/highly-accessed-articles.xml"/>
+                            <entry key="(.*)/portals/emgrandrounds\.html" value="$1/newpage.html?page=$1/biomed-resources/emgrandrounds.html"/>
+                            <entry key="(.*)/portals/medgrandrounds\.html" value="$1/newpage.html?page=$1/biomed-resources/medgrandrounds.html"/>
+                            <entry key="(.*)/portals/pedsgrandrounds\.html" value="$1/newpage.html?page=$1/biomed-resources/pedsgrandrounds.html"/>
+                            <entry key="(.*)/search\.html\?source=all&amp;(.*)" value="$1/newpage.html?page=$1/search\.html\?source=all-all%26$2"/>
+                            <entry key="(.*)/search\.html\?source=(ej|database|book|software|video|cc|lanesite)&amp;(.*)" value="$1/newpage.html?page=$1/search\.html\?source=catalog-$2%26$3"/>
+                            <entry key="(.*)/search\.html\?source=(clinical|history)&amp;(.*)" value="$1/newpage.html?page=$1/search\.html\?source=$2-all%26$3"/>
+                            <entry key="(.*)/search\.html\?source=research&amp;(.*)" value="$1/newpage.html?page=$1/search\.html\?source=bioresearch-all%26$2"/>
+                            <entry key="(.*)/search\.html\?source=peds&amp;(.*)" value="$1/newpage.html?page=$1/portals\/peds\.html\?$2"/>
+                            <entry key="(.*)/local/antibiogram/index\.html" value="$1/newpage.html?page=$1/biomed-resources/antibiograms-shc.html"/>
+                            <entry key="(.*)/local/antibiogramLPCH/index\.html" value="$1/newpage.html?page=$1/biomed-resources/antibiograms-lpch.html"/>
+                            <entry key="(.*)/local/(antibiogram(?:LPCH)?)/(.*)" value="$1/newpage.html?page=$1/biomed-resources/$2/$3"/>
+                        </map>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+</beans>

@@ -29,6 +29,7 @@
             /WEB-INF/spring/pipeline.xml
             /WEB-INF/spring/proxy.xml
             /WEB-INF/spring/querymap.xml
+            /WEB-INF/spring/redirect.xml
             /WEB-INF/spring/search.xml
             /WEB-INF/spring/servlet.xml
             /WEB-INF/spring/sitemap.xml
