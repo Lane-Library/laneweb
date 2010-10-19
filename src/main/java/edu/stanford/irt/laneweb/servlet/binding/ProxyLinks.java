@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.servlet.binding;
 
 import java.util.List;
 

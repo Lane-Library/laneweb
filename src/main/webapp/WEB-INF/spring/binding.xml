@@ -71,11 +71,11 @@
         class="edu.stanford.irt.laneweb.servlet.binding.ProxyLinksDataBinder">
         <property name="parameterName" value="proxy-links"/>
         <property name="modelKey" value="proxy-links"/>
-        <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.ProxyLinks"/>
+        <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"/>
     </bean>
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"
         class="edu.stanford.irt.laneweb.servlet.binding.TemplateDataBinder">
-        <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.TemplateChooser"/>
+        <property name="templateChooser" ref="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"/>
     </bean>
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"
         class="edu.stanford.irt.laneweb.servlet.binding.StringSessionParameterDataBinder">
@@ -112,8 +112,8 @@
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/mobile-ip-group"
         class="edu.stanford.irt.laneweb.servlet.binding.MobileIPGroupDataBinder"/>
 
-    <bean id="edu.stanford.irt.laneweb.servlet.ProxyLinks"
-        class="edu.stanford.irt.laneweb.servlet.ProxyLinks">
+    <bean id="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"
+        class="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks">
         <property name="proxyRegex">
             <list>
                 <!-- VPN 171.65.16.0 - 171.65.31.255 -->
@@ -139,8 +139,8 @@
         </property>
     </bean>
 
-    <bean id="edu.stanford.irt.laneweb.servlet.TemplateChooser"
-        class="edu.stanford.irt.laneweb.servlet.TemplateChooser">
+    <bean id="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser"
+        class="edu.stanford.irt.laneweb.servlet.binding.TemplateChooser">
         <constructor-arg value="template"/>
         <constructor-arg>
             <value>template, bassettLargetView, mobile, none</value>

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.servlet.binding;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.PersistentLoginToken;
+import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 
 /**
  * A servlet Filter that tries to discover the sunetid associated with a request. It does this by looking in a number of

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.servlet.mvc;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
@@ -18,6 +18,8 @@ import org.apache.cocoon.Processor;
 import org.apache.cocoon.environment.Environment;
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.servlet.mvc.ModelAugmentingRequestHandler;
 
 public class ModelAugmentingRequestHandlerTest {
 

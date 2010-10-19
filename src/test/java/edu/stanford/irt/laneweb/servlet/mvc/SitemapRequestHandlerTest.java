@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.servlet.mvc;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
@@ -23,6 +23,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
+import edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler;
 import edu.stanford.irt.laneweb.servlet.redirect.DefaultRedirectProcessor;
 import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 

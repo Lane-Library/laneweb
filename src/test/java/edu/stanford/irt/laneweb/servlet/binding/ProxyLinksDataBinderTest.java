@@ -17,7 +17,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
-import edu.stanford.irt.laneweb.servlet.ProxyLinks;
 
 
 public class ProxyLinksDataBinderTest {

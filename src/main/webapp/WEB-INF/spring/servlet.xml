@@ -19,20 +19,20 @@
         </property>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler"
-        class="edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler"
-        parent="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
+    <bean id="edu.stanford.irt.laneweb.servlet.mvc.ModelAugmentingRequestHandler"
+        class="edu.stanford.irt.laneweb.servlet.mvc.ModelAugmentingRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
         <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder/html"/>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.servlet.MobileRequestHandler"
-        class="edu.stanford.irt.laneweb.servlet.MobileRequestHandler"
-        parent="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
+    <bean id="edu.stanford.irt.laneweb.servlet.mvc.MobileRequestHandler"
+        class="edu.stanford.irt.laneweb.servlet.mvc.MobileRequestHandler"
+        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
         <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder/mobile"/>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler"
-        class="edu.stanford.irt.laneweb.servlet.SitemapRequestHandler">
+    <bean id="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
+        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
         <property name="methodsNotAllowed">
             <set>
                 <value>OPTIONS</value>

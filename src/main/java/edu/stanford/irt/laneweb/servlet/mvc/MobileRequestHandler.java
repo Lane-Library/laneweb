@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.servlet.mvc;
 
 /**
  * This subclass of ModelAugmentingRequestHandler doesn't put stuff that can change

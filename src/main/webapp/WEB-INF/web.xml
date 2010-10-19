@@ -85,7 +85,7 @@
     <servlet>
         <description>ModelAugmentingRequestHandler</description>
         <display-name>ModelAugmentingRequestHandler</display-name>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler</servlet-name>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.ModelAugmentingRequestHandler</servlet-name>
         <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -93,7 +93,7 @@
     <servlet>
         <description>MobileRequestHandler</description>
         <display-name>ModelAugmentingRequestHandler</display-name>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.MobileRequestHandler</servlet-name>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.MobileRequestHandler</servlet-name>
         <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -111,22 +111,22 @@
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.ModelAugmentingRequestHandler</servlet-name>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.ModelAugmentingRequestHandler</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.MobileRequestHandler</servlet-name>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.MobileRequestHandler</servlet-name>
         <url-pattern>/m/*</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.MobileRequestHandler</servlet-name>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.MobileRequestHandler</servlet-name>
         <url-pattern>/mobile/*</url-pattern>
     </servlet-mapping>
     
     <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.MobileRequestHandler</servlet-name>
+        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.MobileRequestHandler</servlet-name>
         <url-pattern>/ms/*</url-pattern>
     </servlet-mapping>
     

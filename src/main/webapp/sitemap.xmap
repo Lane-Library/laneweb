@@ -22,9 +22,6 @@
             <map:match pattern="secure/apps/**" type="wildcard">
                 <map:mount uri-prefix="secure/apps" check-reload="no" src="context://applications.xmap"/>
             </map:match>
-            <map:match pattern="shc/**" type="wildcard">
-                <map:mount uri-prefix="shc" check-reload="no" src="context://shc.xmap"/>
-            </map:match>
             <map:match pattern="ms/**" type="wildcard">
                 <map:mount uri-prefix="ms" check-reload="no" src="context://mobile-search.xmap"/>
             </map:match>
