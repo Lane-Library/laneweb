@@ -15,7 +15,7 @@ public class PersistentLoginProcessor {
 
     public void processSunetid(final String sunetid, final HttpServletRequest request,
             final HttpServletResponse response) {
-        if (null != sunetid) {
+        if (sunetid != null) {
             request.setAttribute(Model.SUNETID, sunetid);
             if (Boolean.parseBoolean(request.getParameter(("pl")))) {
                 setLoginCookie(sunetid, request, response);

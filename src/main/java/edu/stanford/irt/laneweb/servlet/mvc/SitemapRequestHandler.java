@@ -20,6 +20,8 @@ import org.apache.cocoon.environment.internal.EnvironmentHelper;
 import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.PersistentLoginProcessor;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
@@ -48,6 +50,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
     protected Map<String, String> baseMappings;
 
     private DataBinder dataBinder;
+    
+    private PersistentLoginProcessor persistentLoginProcessor;
 
     public SitemapRequestHandler() {
         this.baseMappings = new HashMap<String, String>(BASE_MAPPINGS.length);
@@ -87,6 +91,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         }
         Map<String, Object> model = getModel();
         this.dataBinder.bind(model, request);
+        String sunetid = (String) model.get(Model.SUNETID);
+        this.persistentLoginProcessor.processSunetid(sunetid, request, response);
         process(sitemapURI, model, request, response);
     }
 
@@ -115,6 +121,10 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     public void setDataBinder(DataBinder dataBinder) {
         this.dataBinder = dataBinder;
+    }
+    
+    public void setPersistentLoginProcessor(PersistentLoginProcessor persistentLoginProcessor) {
+        this.persistentLoginProcessor = persistentLoginProcessor;
     }
     
     private String getBasePath(final String requestURI, final String contextPath) {
