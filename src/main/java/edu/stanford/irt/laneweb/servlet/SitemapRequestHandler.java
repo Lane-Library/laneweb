@@ -44,7 +44,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     protected Map<String, String> baseMappings;
 
-    private List<DataBinder> dataBinders = Collections.emptyList();
+    private DataBinder dataBinder;
 
     public SitemapRequestHandler() {
         this.baseMappings = new HashMap<String, String>(BASE_MAPPINGS.length);
@@ -89,14 +89,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             }
         }
         Map<String, Object> model = getModel();
-        doBind(model, request);
+        this.dataBinder.bind(model, request);
         process(model, request, response);
-    }
-
-    protected void doBind(Map<String, Object> model, HttpServletRequest request) {
-        for (DataBinder binder : this.dataBinders) {
-            binder.bind(model, request);
-        }
     }
 
     public void setMethodsNotAllowed(final Set<String> methodsNotAllowed) {
@@ -122,8 +116,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         this.context = new HttpContext(servletContext);
     }
 
-    public void setDataBinders(List<DataBinder> dataBinders) {
-        this.dataBinders = dataBinders;
+    public void setDataBinder(DataBinder dataBinder) {
+        this.dataBinder = dataBinder;
     }
 
     private String getSitemapURI(final HttpServletRequest request) {

@@ -18,7 +18,7 @@ public class ServletContextDataBinder extends BasePathDataBinder {
         model.put(Model.MEDBLOG_BASE, this.servletContext.getAttribute("laneweb.context.medblog-base"));
         model.put(Model.DEFAULT_CONTENT_BASE, this.servletContext.getAttribute("laneweb.context.live-base"));
         model.put(Model.CONTENT_BASE, model.get("default-content-base"));
-        model.put(Model.DEFAULT_RESOURCES_BASE, this.servletContext.getRealPath("/").toString() + "resources");
+        model.put(Model.DEFAULT_RESOURCES_BASE, "file:" + this.servletContext.getRealPath("/").toString() + "resources");
         model.put(Model.RESOURCES_BASE, model.get("default-resources-base"));
         String uri = (String) model.get(Model.BASE_PATH);
         if (uri.indexOf("/stage") == 0) {
