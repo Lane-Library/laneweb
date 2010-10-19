@@ -51,6 +51,35 @@
                         </map>
                     </property>
                 </bean>
+                <bean class="edu.stanford.irt.laneweb.servlet.redirect.SHCRedirectProcessor">
+                    <property name="redirectMap">
+                        <map>
+                            <entry key="/shc/anesthesia.html(?:\\??)(.*)" value="/portals/anesthesia.html?sourceid=shc&amp;source=/portals/anesthesia.html&amp;$1"/>
+                            <entry key="/shc/cardiology.html(?:\\??)(.*)" value="/portals/cardiology.html?sourceid=shc&amp;source=/portals/cardiology.html&amp;$1"/>
+                            <entry key="/shc/clinical.html(?:\\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
+                            <entry key="/shc/ear-nose-throat.html(?:\\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
+                            <entry key="/shc/emergency.html(?:\\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
+                            <entry key="/shc/gastroenterology.html(?:\\??)(.*)" value="/portals/internal-medicine.html?sourceid=shc&amp;source=/portals/internal-medicine.html&amp;$1"/>
+                            <entry key="/shc/hematology.html(?:\\??)(.*)" value="/portals/hematology.html?sourceid=shc&amp;$1"/>
+                            <entry key="/shc/hepatology.html(?:\\??)(.*)" value="/portals/internal-medicine.html?sourceid=shc&amp;source=/portals/internal-medicine.html&amp;$1"/>
+                            <entry key="/shc/icu.html(?:\\??)(.*)" value="/portals/internal-medicine.html?sourceid=shc&amp;source=/portals/internal-medicine.html&amp;$1"/>
+                            <entry key="/shc/infectious-disease.html(?:\\??)(.*)" value="/portals/internal-medicine.html?sourceid=shc&amp;source=/portals/internal-medicine.html&amp;$1"/>
+                            <entry key="/shc/internal-medicine.html(?:\\??)(.*)" value="/portals/internal-medicine.html?sourceid=shc&amp;source=/portals/internal-medicine.html&amp;$1"/>
+                            <entry key="/shc/neurology.html(?:\\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
+                            <entry key="/shc/ob-gyn.html(?:\\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
+                            <entry key="/shc/oncology.html(?:\\??)(.*)" value="/portals/internal-medicine.html?sourceid=shc&amp;source=/portals/internal-medicine.html&amp;$1"/>
+                            <entry key="/shc/ophthalmology.html(?:\\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
+                            <entry key="/shc/orthopedics.html(?:\\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
+                            <entry key="/shc/psychiatry.html(?:\\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
+                            <entry key="/shc/pulmonary.html(?:\\??)(.*)" value="/portals/pulmonary.html?sourceid=shc&amp;source=/portals/pulmonary.html&amp;$1"/>
+                            <!-- this one won't work :-(
+                            <entry key="/shc/radiology.html(?:\\??)(.*)" value="http://www.guideline.gov/search/searchresults.aspx?Type=3&amp;num=20&amp;txtSearch=${url-encoded-query}+AND+%22american+college+of+radiology%22"/>-->
+                            <entry key="/shc/surgery-cardiothoracic.html(?:\\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
+                            <entry key="/shc/surgery-general.html(?:\\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
+                            <entry key="/shc/portals/shc.html(?:\\??)(.*)" value="/portals/shc.html?sourceid=shc&amp;$1"/>
+                        </map>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
