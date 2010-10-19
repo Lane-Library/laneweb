@@ -63,20 +63,20 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequest() throws Exception {
         expect(this.request.getMethod()).andReturn("GET");
-        expect(this.redirectProcessor.getRedirectURL("/")).andReturn(null);
-        expect(this.request.getRequestURI()).andReturn("/").times(2);
-        expect(this.request.getQueryString()).andReturn(null).times(1);
-        expect(this.request.getContextPath()).andReturn("").times(2);
+        expect(this.redirectProcessor.getRedirectURL("/index.html")).andReturn(null);
+        expect(this.request.getRequestURI()).andReturn("/index.html").times(2);
+        expect(this.request.getQueryString()).andReturn(null);
+        expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getParameter("cocoon-view")).andReturn(null);
         expect(this.request.getParameter("cocoon-action")).andReturn(null);
         expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptySet()));
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
-        expect(this.servletContext.getMimeType("")).andReturn(null);
+        expect(this.servletContext.getMimeType("/index.html")).andReturn(null);
         this.dataBinder.bind(isA(Map.class), isA(HttpServletRequest.class));
         this.response.setContentType(null);
-        replayMocks();
+        replay(this.servletContext, this.response, this.request, this.processor, this.redirectProcessor);
         this.handler.handleRequest(this.request, this.response);
-        verifyMocks();
+        verify(this.servletContext, this.processor, this.response, this.request, this.redirectProcessor);
     }
 
     @Test
@@ -97,21 +97,5 @@ public class SitemapRequestHandlerTest {
         } catch (IllegalArgumentException e) {
         }
         this.handler.setRedirectProcessor(this.redirectProcessor);
-    }
-
-    private void replayMocks() {
-        replay(this.servletContext);
-        replay(this.response);
-        replay(this.request);
-        replay(this.processor);
-        replay(this.redirectProcessor);
-    }
-
-    private void verifyMocks() {
-        verify(this.servletContext);
-        verify(this.processor);
-        verify(this.response);
-        verify(this.request);
-        verify(this.redirectProcessor);
     }
 }

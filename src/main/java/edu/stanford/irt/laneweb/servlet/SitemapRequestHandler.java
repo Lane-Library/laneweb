@@ -60,38 +60,25 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             return;
         }
-        String requestURI = request.getRequestURI();
-        String contextPath = request.getContextPath();
-        requestURI = requestURI.substring(contextPath.length());
-        String queryString = request.getQueryString();
-        if (queryString != null) {
-            requestURI = requestURI + '?' + queryString;
-        }
+        String basePath = getBasePath(request);
+        String sitemapURI = request.getRequestURI().substring(basePath.length());
         //only .html and .xml or ending in / potentially get redirects.
-        if (requestURI.indexOf(".html") > 0 || requestURI.indexOf(".xml") > 0 || requestURI.lastIndexOf('/') == requestURI.length() - 1) {
-            String strippedURI = requestURI;
-            String redirectBase = contextPath;
-            if (strippedURI.indexOf("/stage") == 0) {
-                strippedURI = strippedURI.substring(6);
-                redirectBase += "/stage";
+        if (sitemapURI.indexOf(".html") > 0 || sitemapURI.indexOf(".xml") > 0 || sitemapURI.lastIndexOf('/') == sitemapURI.length() - 1) {
+            String redirectURL = null;
+            String queryString = request.getQueryString();
+            if (queryString != null) {
+                redirectURL = this.redirectProcessor.getRedirectURL(sitemapURI + '?' + queryString);
             } else {
-                for (String key : this.baseMappings.keySet()) {
-                    if (strippedURI.indexOf(key) == 0) {
-                        strippedURI = strippedURI.substring(key.length());
-                        redirectBase += key;
-                        break;
-                    }
-                }
+                redirectURL = this.redirectProcessor.getRedirectURL(sitemapURI);
             }
-            String redirectURI = this.redirectProcessor.getRedirectURL(strippedURI);
-            if (redirectURI != null) {
-                response.sendRedirect(redirectBase + redirectURI);
+            if (redirectURL != null) {
+                response.sendRedirect(basePath + redirectURL);
                 return;
             }
         }
         Map<String, Object> model = getModel();
         this.dataBinder.bind(model, request);
-        process(model, request, response);
+        process(sitemapURI, model, request, response);
     }
 
     public void setMethodsNotAllowed(final Set<String> methodsNotAllowed) {
@@ -120,23 +107,23 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
     public void setDataBinder(DataBinder dataBinder) {
         this.dataBinder = dataBinder;
     }
-
-    private String getSitemapURI(final HttpServletRequest request) {
-        String uri = request.getRequestURI().substring(request.getContextPath().length());
-        if (uri.indexOf("/stage") == 0) {
-            return uri.substring("/stage".length() + 1);
+    
+    private String getBasePath(final HttpServletRequest request) {
+        String contextPath = request.getContextPath();
+        String servletPath = request.getRequestURI().substring(contextPath.length());
+        if (servletPath.indexOf("/stage") ==0) {
+            return contextPath + "/stage";
         }
         for (String key : this.baseMappings.keySet()) {
-            if (uri.indexOf(key) == 0) {
-                return uri.substring(key.length() + 1);
+            if (servletPath.indexOf(key) == 0) {
+                return contextPath + key;
             }
         }
-        return uri.substring(1);
+        return contextPath;
     }
 
-    protected void process(Map<String, Object> model, final HttpServletRequest request,
+    protected void process(String sitemapURI, Map<String, Object> model, final HttpServletRequest request,
             final HttpServletResponse response) throws IOException, ServletException {
-        String sitemapURI = getSitemapURI(request);
         Environment environment = new LanewebEnvironment(sitemapURI, model, request, response, this.servletContext,
                 this.context);
         try {

@@ -52,13 +52,11 @@ public class ModelAugmentingRequestHandlerTest {
         expect(this.request.getParameter(isA(String.class))).andReturn(null).atLeastOnce();
         expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptyList()))
                 .atLeastOnce();
-        expect(this.request.getContextPath()).andReturn("").atLeastOnce();
-        expect(this.request.getRequestURI()).andReturn("/index.html").atLeastOnce();
         expect(this.processor.process(isA(Environment.class))).andReturn(Boolean.TRUE);
-        expect(this.servletContext.getMimeType("index.html")).andReturn(null);
+        expect(this.servletContext.getMimeType("/index.html")).andReturn(null);
         this.response.setContentType(null);
         replay(this.servletContext, this.response, this.request, this.processor);
-        this.handler.process(new HashMap<String, Object>(), this.request, this.response);
+        this.handler.process("/index.html", new HashMap<String, Object>(), this.request, this.response);
         verify(this.servletContext, this.processor, this.response, this.request);
     }
 }
