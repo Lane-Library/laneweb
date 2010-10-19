@@ -7,11 +7,13 @@ import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -64,7 +66,7 @@ public class SitemapRequestHandlerTest {
     public void testHandleRequest() throws Exception {
         expect(this.request.getMethod()).andReturn("GET");
         expect(this.redirectProcessor.getRedirectURL("/index.html")).andReturn(null);
-        expect(this.request.getRequestURI()).andReturn("/index.html").times(2);
+        expect(this.request.getRequestURI()).andReturn("/index.html");
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getParameter("cocoon-view")).andReturn(null);
@@ -77,6 +79,20 @@ public class SitemapRequestHandlerTest {
         replay(this.servletContext, this.response, this.request, this.processor, this.redirectProcessor);
         this.handler.handleRequest(this.request, this.response);
         verify(this.servletContext, this.processor, this.response, this.request, this.redirectProcessor);
+    }
+    
+    @Test
+    public void testAddBasePathToNewPageRedirect() throws ServletException, IOException {
+        expect(this.request.getMethod()).andReturn("GET");
+        expect(this.request.getContextPath()).andReturn("/baz");
+        expect(this.request.getRequestURI()).andReturn("/bas/foo.html");
+        expect(this.request.getQueryString()).andReturn(null);
+        expect(this.redirectProcessor.getRedirectURL("/foo.html")).andReturn("/newpage.html?page=/bar/foo.html");
+        this.response.sendRedirect("/baz/newpage.html?page=/baz/bar/foo.html");
+        replay(this.servletContext, this.response, this.request, this.processor, this.redirectProcessor);
+        this.handler.handleRequest(this.request, this.response);
+        verify(this.servletContext, this.processor, this.response, this.request, this.redirectProcessor);
+        
     }
 
     @Test

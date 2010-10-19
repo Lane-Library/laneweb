@@ -32,6 +32,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             { "/ryanmax", "file:/afs/ir.stanford.edu/users/r/y/ryanmax/laneweb" },
             { "/ajchrist", "file:/afs/ir.stanford.edu/users/a/j/ajchrist/laneweb" },
             { "/rzwies", "file:/afs/ir.stanford.edu/users/r/z/rzwies/laneweb" } };
+    
+    private static final String NEW_PAGE_BASE_URL = "/newpage.html?page=";
 
     private Context context;
 
@@ -60,8 +62,9 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             return;
         }
-        String basePath = getBasePath(request);
-        String sitemapURI = request.getRequestURI().substring(basePath.length());
+        String requestURI = request.getRequestURI();
+        String basePath = getBasePath(requestURI, request.getContextPath());
+        String sitemapURI = requestURI.substring(basePath.length());
         //only .html and .xml or ending in / potentially get redirects.
         if (sitemapURI.indexOf(".html") > 0 || sitemapURI.indexOf(".xml") > 0 || sitemapURI.lastIndexOf('/') == sitemapURI.length() - 1) {
             String redirectURL = null;
@@ -72,6 +75,12 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
                 redirectURL = this.redirectProcessor.getRedirectURL(sitemapURI);
             }
             if (redirectURL != null) {
+                //TODO:remove after 11/10
+                //add basePath to the page parameter of the newpage.html url
+                int newPage = redirectURL.indexOf(NEW_PAGE_BASE_URL);
+                if (newPage == 0) {
+                    redirectURL = NEW_PAGE_BASE_URL + basePath + redirectURL.substring(NEW_PAGE_BASE_URL.length());
+                }
                 response.sendRedirect(basePath + redirectURL);
                 return;
             }
@@ -108,9 +117,8 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         this.dataBinder = dataBinder;
     }
     
-    private String getBasePath(final HttpServletRequest request) {
-        String contextPath = request.getContextPath();
-        String servletPath = request.getRequestURI().substring(contextPath.length());
+    private String getBasePath(final String requestURI, final String contextPath) {
+        String servletPath = requestURI.substring(contextPath.length());
         if (servletPath.indexOf("/stage") ==0) {
             return contextPath + "/stage";
         }
