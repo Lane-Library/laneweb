@@ -33,7 +33,7 @@ public class DefaultRedirectProcessorTest {
     @Test
     public void testHandleRequestRedirect() throws ServletException, IOException {
         this.redirectProcessor.setRedirectMap(Collections.singletonMap("(.*)/", "$1/index.html"));
-        assertEquals("/foo/index.html", this.redirectProcessor.getRedirectURL("/foo/"));
+        assertEquals("/foo/index.html", this.redirectProcessor.getRedirectURL("/foo/", "", null));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class DefaultRedirectProcessorTest {
         this.redirectProcessor.setRedirectMap(Collections.singletonMap("(.*)/classes/index.html",
                 "$1/services/workshops/laneclasses.html"));
         assertEquals("/services/workshops/laneclasses.html",
-                this.redirectProcessor.getRedirectURL("/classes/index.html"));
+                this.redirectProcessor.getRedirectURL("/classes/index.html", "", null));
     }
 
     @Test
@@ -49,18 +49,18 @@ public class DefaultRedirectProcessorTest {
         this.redirectProcessor.setRedirectMap(Collections.singletonMap("(.*)/clinician/index.html",
                 "$1/portals/clinical.html"));
         assertEquals("/foo/bar/portals/clinical.html",
-                this.redirectProcessor.getRedirectURL("/foo/bar/clinician/index.html"));
+                this.redirectProcessor.getRedirectURL("/foo/bar/clinician/index.html", "", null));
     }
 
     @Test
     public void testHandleRequestRedirectSlash() throws ServletException, IOException {
         this.redirectProcessor.setRedirectMap(Collections.singletonMap("((?!.*\\?.*).*)/", "$1/index.html"));
-        assertEquals("/index.html", this.redirectProcessor.getRedirectURL("/"));
+        assertEquals("/index.html", this.redirectProcessor.getRedirectURL("/", "", null));
     }
     
     @Test
     public void testHandleParameterEndsWithSlash() {
         this.redirectProcessor.setRedirectMap(Collections.singletonMap("((?!.*\\?.*).*)/","$1/index.html"));
-        assertEquals(null, this.redirectProcessor.getRedirectURL("/l?u=/r/"));
+        assertEquals(null, this.redirectProcessor.getRedirectURL("/l", "", "u=/r/"));
     }
 }

@@ -72,8 +72,7 @@
                             <entry key="/shc/orthopedics.html(?:\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
                             <entry key="/shc/psychiatry.html(?:\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
                             <entry key="/shc/pulmonary.html(?:\??)(.*)" value="/portals/pulmonary.html?sourceid=shc&amp;source=/portals/pulmonary.html&amp;$1"/>
-                            <!-- this one won't work :-(
-                            <entry key="/shc/radiology.html(?:\??)(.*)" value="http://www.guideline.gov/search/searchresults.aspx?Type=3&amp;num=20&amp;txtSearch=${url-encoded-query}+AND+%22american+college+of+radiology%22"/>-->
+                            <entry key="/shc/radiology.html(?:\??)(.*)" value="http://www.guideline.gov/search/results.aspx?113=666&amp;term=$1"/>
                             <entry key="/shc/surgery-cardiothoracic.html(?:\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
                             <entry key="/shc/surgery-general.html(?:\??)(.*)" value="/search.html?sourceid=shc&amp;source=clinical&amp;$1"/>
                             <entry key="/shc/portals/shc.html(?:\??)(.*)" value="/portals/shc.html?sourceid=shc&amp;$1"/>

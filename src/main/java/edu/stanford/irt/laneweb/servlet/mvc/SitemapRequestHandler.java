@@ -20,7 +20,6 @@ import org.apache.cocoon.environment.internal.EnvironmentHelper;
 import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
@@ -33,8 +32,6 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             { "/ryanmax", "file:/afs/ir.stanford.edu/users/r/y/ryanmax/laneweb" },
             { "/ajchrist", "file:/afs/ir.stanford.edu/users/a/j/ajchrist/laneweb" },
             { "/rzwies", "file:/afs/ir.stanford.edu/users/r/z/rzwies/laneweb" } };
-    
-    private static final String NEW_PAGE_BASE_URL = "/newpage.html?page=";
 
     private Context context;
 
@@ -68,21 +65,9 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         String sitemapURI = requestURI.substring(basePath.length());
         //only .html and .xml or ending in / potentially get redirects.
         if (sitemapURI.indexOf(".html") > 0 || sitemapURI.indexOf(".xml") > 0 || sitemapURI.lastIndexOf('/') == sitemapURI.length() - 1) {
-            String redirectURL = null;
-            String queryString = request.getQueryString();
-            if (queryString != null) {
-                redirectURL = this.redirectProcessor.getRedirectURL(sitemapURI + '?' + queryString);
-            } else {
-                redirectURL = this.redirectProcessor.getRedirectURL(sitemapURI);
-            }
+            String redirectURL = this.redirectProcessor.getRedirectURL(sitemapURI, basePath, request.getQueryString());
             if (redirectURL != null) {
-                //TODO:remove after 11/10
-                //add basePath to the page parameter of the newpage.html url
-                int newPage = redirectURL.indexOf(NEW_PAGE_BASE_URL);
-                if (newPage == 0) {
-                    redirectURL = NEW_PAGE_BASE_URL + basePath + redirectURL.substring(NEW_PAGE_BASE_URL.length());
-                }
-                response.sendRedirect(basePath + redirectURL);
+                response.sendRedirect(redirectURL);
                 return;
             }
         }

@@ -66,7 +66,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequest() throws Exception {
         expect(this.request.getMethod()).andReturn("GET");
-        expect(this.redirectProcessor.getRedirectURL("/index.html")).andReturn(null);
+        expect(this.redirectProcessor.getRedirectURL("/index.html", "", null)).andReturn(null);
         expect(this.request.getRequestURI()).andReturn("/index.html");
         expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getContextPath()).andReturn("");
@@ -86,9 +86,9 @@ public class SitemapRequestHandlerTest {
     public void testAddBasePathToNewPageRedirect() throws ServletException, IOException {
         expect(this.request.getMethod()).andReturn("GET");
         expect(this.request.getContextPath()).andReturn("/baz");
-        expect(this.request.getRequestURI()).andReturn("/bas/foo.html");
+        expect(this.request.getRequestURI()).andReturn("/baz/foo.html");
         expect(this.request.getQueryString()).andReturn(null);
-        expect(this.redirectProcessor.getRedirectURL("/foo.html")).andReturn("/newpage.html?page=/bar/foo.html");
+        expect(this.redirectProcessor.getRedirectURL("/foo.html", "/baz", null)).andReturn("/baz/newpage.html?page=/baz/bar/foo.html");
         this.response.sendRedirect("/baz/newpage.html?page=/baz/bar/foo.html");
         replay(this.servletContext, this.response, this.request, this.processor, this.redirectProcessor);
         this.handler.handleRequest(this.request, this.response);

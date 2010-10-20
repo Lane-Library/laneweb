@@ -11,14 +11,17 @@ public class DefaultRedirectProcessor implements RedirectProcessor {
 
     private Map<Pattern, String> redirectMap = Collections.emptyMap();
 
-    /**
-     * @see edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor#getRedirectURL(java.lang.String)
-     */
-    public String getRedirectURL(final String uri) {
+    public String getRedirectURL(final String uri, final String basePath, final String queryString) {
+        String testURI = queryString == null ? uri : uri + '?' + queryString;
         for (Entry<Pattern, String> entry : this.redirectMap.entrySet()) {
-            Matcher matcher = entry.getKey().matcher(uri);
+            Matcher matcher = entry.getKey().matcher(testURI);
             if (matcher.matches()) {
-                return matcher.replaceAll(entry.getValue());
+                String result = matcher.replaceAll(entry.getValue());
+                if (result.charAt(0) == '/') {
+                    return basePath + result;
+                } else {
+                    return result;
+                }
             }
         }
         return null;
