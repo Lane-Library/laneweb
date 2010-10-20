@@ -1,24 +1,31 @@
 package edu.stanford.irt.laneweb.search;
 
-import java.util.Map;
+import java.io.IOException;
 
-import edu.stanford.irt.laneweb.cocoon.AbstractAction;
+import org.apache.cocoon.ProcessingException;
+import org.xml.sax.SAXException;
+
+import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 
-public class SearchCacheManagerAction extends AbstractAction {
+public class SearchCacheManagerReader extends AbstractReader {
 
     private SearchCacheManager searchCache;
 
-    @Override
-    public Map<String, String> doAct() {
+    public void generate() throws IOException, SAXException, ProcessingException {
         String query = getString(this.model, Model.QUERY);
         if (query != null) {
             this.searchCache.clearCache(query);
         } else {
             this.searchCache.clearAllCaches();
         }
-        return null;
+        this.outputStream.write("OK".getBytes());
+    }
+
+    @Override
+    public String getMimeType() {
+        return "text/plain";
     }
 
     public void setMetaSearchManagerSource(final MetaSearchManagerSource msms) {

@@ -72,8 +72,8 @@
     </bean>
 
     
-    <bean name="org.apache.cocoon.acting.Action/search-cache-manager"
-        class="edu.stanford.irt.laneweb.search.SearchCacheManagerAction"
+    <bean name="org.apache.cocoon.reading.Reader/search-cache-manager"
+        class="edu.stanford.irt.laneweb.search.SearchCacheManagerReader"
         scope="prototype">
         <property name="metaSearchManagerSource"
           ref="edu.stanford.irt.laneweb.search.MetaSearchManagerSource"/>
