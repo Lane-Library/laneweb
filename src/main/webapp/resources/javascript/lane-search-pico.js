@@ -5,7 +5,7 @@
         searchTerms,
         picoIsOn = false,
         picoTextInputs = [],
-        picoFields, formAnim, navAnim,
+        picoFields, //formAnim, navAnim,
         picoOn = function() {
             if (!picoIsOn) {
                 if (!picoFields) {

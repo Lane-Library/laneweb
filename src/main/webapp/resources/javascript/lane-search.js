@@ -3,8 +3,7 @@
         form = Y.one("#search");//the form Element
     if (form) {
     LANE.Search = function() {
-        var searching = false, //searching state
-            searchSourceSelect = form.one('#searchSource'),
+        var searchSourceSelect = form.one('#searchSource'),
             searchOptions = searchSourceSelect.all('option'),
             searchTipsLink = Y.one('#searchTips'),
             selectedOption = searchOptions.item(searchSourceSelect.get('selectedIndex')),

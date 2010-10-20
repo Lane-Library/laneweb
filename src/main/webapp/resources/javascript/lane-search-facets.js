@@ -2,7 +2,7 @@
     var Y = LANE.Y,
         elt = Y.one('#searchFacets'),
         searchIndicator = new LANE.SearchIndicator(),
-        facets, i, j, type, source, container;
+        facets, i, type, source, container;
     LANE.namespace('search.facets');
     LANE.search.facets = function(){
         var currentResult;
@@ -67,7 +67,7 @@
         this._callback = {
             on: {
                 success: function(id, o, arguments){
-                    var result, bodyNodes, content, i;
+                    var result, bodyNodes, content;
                     result = arguments.result;
                     bodyNodes = o.responseXML.getElementsByTagName('body')[0];
                     content = new Y.Node(document.importNode(bodyNodes, true));

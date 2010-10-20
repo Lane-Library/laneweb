@@ -5,7 +5,7 @@
     Y.Get.script(gaJsHost + "google-analytics.com/ga.js", {
         onSuccess: function() {
             var host = document.location.host,
-                i, l, meta;
+                meta;
             if (_gat !== undefined) {
                 if (host.match("lane.stanford.edu")) {
                     gaPageTracker = _gat._createTracker("UA-3202241-2","gaPageTracker");

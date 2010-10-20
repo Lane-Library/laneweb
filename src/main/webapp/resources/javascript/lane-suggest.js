@@ -318,7 +318,7 @@ function handleQueryResponse (e) {
 };
     
     LANE.Suggest = function (input, limit) {
-        var self = this, acWidget, i,
+        var self = this, acWidget,
             baseUrl = '/././apps/suggest/json?',
             acDS  = new Y.DataSource.IO({source:baseUrl}),
             setDSLimit = function(input){

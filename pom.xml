@@ -92,6 +92,7 @@
                         <exclude>**/lane-all.js</exclude>
                         <exclude>**/lane-mobile.css</exclude>
                         <exclude>**/lane-mobile.js</exclude>
+                        <exclude>**/test/*/*.js</exclude>
                     </excludes>
                     <aggregations>
                         <aggregation>

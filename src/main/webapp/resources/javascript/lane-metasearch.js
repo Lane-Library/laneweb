@@ -1,6 +1,6 @@
 (function() {
     LANE.namespace('metasearch');
-    var Y = LANE.Y;
+    var Y = LANE.Y, i, hybridInputs, laneSuggest;
     LANE.metasearch = function() {
         var searchElms, // the elements in need of hit counts
             searchables = [], // all engines to search
@@ -9,9 +9,9 @@
             startTime,
             searchIndicator = new LANE.SearchIndicator();
             getSearchUrl = function() {
-                var i, y, searchUrl = '/././apps/search/json?q=' + LANE.SearchResult.getEncodedSearchTerms();
+                var add, i, y, searchUrl = '/././apps/search/json?q=' + LANE.SearchResult.getEncodedSearchTerms();
                 for (y = 0; y < searchables.length; y++) {
-                    var add = true;
+                    add = true;
                     for (i = 0; i < uberEngines.length; i++) {
                         // don't add if: 
                         // - engine is uber and uber already on url
@@ -115,7 +115,7 @@
         new LANE.SearchIndicator().show();
     }
     // hybrid search page inputs
-    var i, hybridInputs = Y.all('.laneSuggest'), laneSuggest;
+    hybridInputs = Y.all('.laneSuggest');
     for (i = 0; i < hybridInputs.size(); i++) {
         laneSuggest = new LANE.Suggest(hybridInputs.item(i));
         laneSuggest.on("lane:suggestSelect",function(e){

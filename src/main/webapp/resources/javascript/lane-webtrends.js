@@ -6,7 +6,6 @@
         DCSext={},
         gDomain="irt-sdc.stanford.edu",
         gDcsId="dcssi6l0t1000004z9mg95sop_9v3k",
-        addTracker,
 
    dcsVar = function(){
         var i, dCurrent=new Date();

@@ -60,7 +60,7 @@
                 return title;
             },
             getTrackingData = function(event) {
-                var node = event.target, host, path, query, external, title, searchTerms, searchSource, children;
+                var node = event.target, host, path, query, external, title, searchTerms, searchSource;
                 if (event.type == 'click') {
                     if (node.hasClass('yui3-accordion-item-trigger')) {
                         host = document.location.host;
@@ -212,7 +212,7 @@
             LANE.tracking.trackEvent(e);
             //put in a delay for safari to make the tracking request:
             if (LANE.Y.UA.webkit && LANE.tracking.isTrackable(e)) {
-                    var t = e.target;
+                    var t = e.target, f;
                     while (t) {
                         // have safari follow link if it's not:
                         //  - popup or facet

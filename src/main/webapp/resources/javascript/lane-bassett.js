@@ -3,10 +3,11 @@
     
 
 
-        var Y = LANE.Y, bassettContent = Y.one('#bassettContent'), diagramDisplay = false;
-
-        
-        var registerLinksContainer = function(container) {
+        var Y = LANE.Y,
+            bassettContent = Y.one('#bassettContent'),
+            diagramDisplay = false,
+            accordion,
+            registerLinksContainer = function(container) {
             var anchor, i, url;
             if (container) {
                 anchor = container.all('a');
@@ -27,22 +28,21 @@
                     }
                 }
             }
-        };
+        },
 
-        var loadContent = function(url) {
+        loadContent = function(url) {
             url = "/././plain/biomed-resources/bassett/raw".concat(url);
             function successHandler(id, o, args) {
-                var contentNode, container,    
-                content = new Y.Node(o.responseText);
-                container = Y.one('#bassettContent');
+                var content = new Y.Node(o.responseText),
+                    container = Y.one('#bassettContent');
                 container.setContent(content);
                 registerLinksContainer(container);
                 Y.fire('lane:change');
             }
             Y.io(url, {on : {success : successHandler}});
-        }
+        },
 
-        var formatAjaxUrl = function(href) {
+        formatAjaxUrl = function(href) {
             var url;
             href = href.replace("search.html", "/biomed-resources/bassett/bassettsView.html");
             href = href.substr(href.indexOf("/bassett/") + 8);
@@ -57,9 +57,9 @@
                 url = url + "&t=diagram";
             }
             return url;
-        };
+        },
 
-        function initializeHistory() {
+        initializeHistory = function() {
             if (Y.one("#yui-history-field-bassett") && Y.one("#yui-history-iframe")) {
                 var currentState = Y.History.getBookmarkedState("bassett") ||
                 formatAjaxUrl(window.location.toString());
@@ -67,10 +67,10 @@
                 Y.History.on('history:ready', loadContent(currentState));
                 Y.History.initialize("#yui-history-field-bassett", "#yui-history-iframe");
             }
-        }
+        };
 
         if (bassettContent) {
-            var accordion = Y.one('#accordion');
+            accordion = Y.one('#accordion');
             if (accordion) // not if largerView.html
             {
                 registerLinksContainer(accordion);

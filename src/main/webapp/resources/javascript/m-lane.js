@@ -35,7 +35,7 @@
         }, true);
         
         $('pico').addEventListener("submit", function(e) {
-            var inputs, qString = '', i,
+            var qString = '', i,
             inputs = e.target.getElementsByTagName('input'),
             qInput;
             e.preventDefault();
@@ -130,6 +130,7 @@
         
         return {
             submitForm : function(form) {
+            	var i;
                 iui.addClass(form.parentNode, "loadingMask");
                 loadingElm.style.display = DISPLAY_BLOCK;
                 for (i = 0; i < form.elements.length; ++i)

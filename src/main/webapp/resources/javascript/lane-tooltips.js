@@ -458,15 +458,13 @@
                 tt.render();
                 
                 tt.on("triggerEnter", function(e) {
-                    var width, tooltip, content, length, node = e.node;
+                    var tooltip, node = e.node;
                     if (node && node.get("id")) {
                         tooltip = Y.one('#' + node.get('id') + 'Tooltip');
                         if (tooltip && tooltip.get('innerHTML')) {
                             this.setTriggerContent(tooltip.get('innerHTML'));
                         }
                     }
-//                    length = this.get('contentBox').get('innerHTML').length;
-//                    this.set('width', length > 500 ? '60%' : '25%');
                 });
                 tt.after('visibleChange', function(e) {
                     if (e.newVal === false) {
