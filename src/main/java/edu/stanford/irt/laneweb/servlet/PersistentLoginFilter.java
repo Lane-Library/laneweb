@@ -12,7 +12,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.stanford.irt.laneweb.servlet.binding.SunetIdSource;
 
 public class PersistentLoginFilter implements Filter {
 

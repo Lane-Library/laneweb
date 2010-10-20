@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet.binding;
+package edu.stanford.irt.laneweb.servlet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
