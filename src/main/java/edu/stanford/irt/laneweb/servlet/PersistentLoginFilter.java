@@ -63,7 +63,9 @@ public class PersistentLoginFilter implements Filter {
         if (Boolean.parseBoolean(request.getParameter(("pl")))) {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
             String sunetid = this.sunetIdSource.getSunetid(httpRequest);
-            setLoginCookie(sunetid, httpRequest, httpResponse);
+            if (sunetid != null) {
+                setLoginCookie(sunetid, httpRequest, httpResponse);
+            }
         } else if (Boolean.parseBoolean(request.getParameter("remove-pl"))) {
             removeLoginCookie(httpResponse);
         }
