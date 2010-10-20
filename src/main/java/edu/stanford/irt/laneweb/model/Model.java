@@ -1,22 +1,12 @@
 package edu.stanford.irt.laneweb.model;
 
-import java.util.HashMap;
 
 /**
  * Model for sitemap components.
  * 
  * @author ceyates $Id$
  */
-@SuppressWarnings("serial")
-public class Model extends HashMap<String, Object> {
-
-    @Override
-    public Object put(String key, Object value) {
-        if (value == null) {
-            throw new IllegalArgumentException("null value for " + key);
-        }
-        return super.put(key, value);
-    }
+public interface Model {
 
     public static final String ALPHA = "alpha";
 

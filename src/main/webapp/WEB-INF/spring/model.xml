@@ -27,7 +27,7 @@
     </bean>
     
     <bean id="edu.stanford.irt.laneweb.model.Model"
-        class="edu.stanford.irt.laneweb.model.Model"
+        class="java.util.HashMap"
         scope="request">
     </bean>
     
