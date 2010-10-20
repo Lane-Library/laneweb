@@ -42,9 +42,6 @@
         <property name="redirectProcessor" ref="edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor"/>
         <property name="servletContext" ref="servletContext"/>
         <property name="processor" ref="org.apache.cocoon.Processor"/>
-        <property name="persistentLoginProcessor">
-            <bean class="edu.stanford.irt.laneweb.servlet.PersistentLoginProcessor"/>
-        </property>
         <lookup-method bean="edu.stanford.irt.laneweb.model.Model" name="getModel"/>
     </bean>
     

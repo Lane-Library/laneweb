@@ -43,8 +43,6 @@ public class SitemapRequestHandlerTest {
     private ServletContext servletContext;
     
     private DataBinder dataBinder;
-    
-    private PersistentLoginProcessor persistentLoginProcessor;
 
     @Before
     public void setUp() throws Exception {
@@ -60,12 +58,10 @@ public class SitemapRequestHandlerTest {
         this.servletContext = createMock(ServletContext.class);
         this.redirectProcessor = createMock(DefaultRedirectProcessor.class);
         this.dataBinder = createMock(DataBinder.class);
-        this.persistentLoginProcessor = createMock(PersistentLoginProcessor.class);
         this.handler.setProcessor(this.processor);
         this.handler.setServletContext(this.servletContext);
         this.handler.setRedirectProcessor(this.redirectProcessor);
         this.handler.setDataBinder(this.dataBinder);
-        this.handler.setPersistentLoginProcessor(this.persistentLoginProcessor);
     }
 
     @Test

@@ -51,7 +51,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private DataBinder dataBinder;
     
-    private PersistentLoginProcessor persistentLoginProcessor;
+    private PersistentLoginProcessor persistentLoginProcessor = new PersistentLoginProcessor();
 
     public SitemapRequestHandler() {
         this.baseMappings = new HashMap<String, String>(BASE_MAPPINGS.length);
@@ -121,10 +121,6 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     public void setDataBinder(DataBinder dataBinder) {
         this.dataBinder = dataBinder;
-    }
-    
-    public void setPersistentLoginProcessor(PersistentLoginProcessor persistentLoginProcessor) {
-        this.persistentLoginProcessor = persistentLoginProcessor;
     }
     
     private String getBasePath(final String requestURI, final String contextPath) {
