@@ -12,7 +12,7 @@ public class SunetIdDataBinder implements DataBinder {
     private SunetIdSource sunetIdSource = new SunetIdSource();
 
     public void bind(Map<String, Object> model, HttpServletRequest request) {
-        String sunetid = this.sunetIdSource.getSunetid(request, request.getSession());
+        String sunetid = this.sunetIdSource.getSunetid(request);
         if (sunetid != null) {
             model.put(Model.SUNETID, sunetid);
         }

@@ -1,29 +1,27 @@
 package edu.stanford.irt.laneweb.servlet;
 
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.binding.SunetIdSource;
 
-public class PersistentLoginProcessor {
+public class PersistentLoginFilter implements Filter {
 
     /**
      * this codec codes and decodes the cookie value using sunet id, useragent and time of creation
      */
     private SunetIdCookieCodec codec = new SunetIdCookieCodec();
-
-    public void processSunetid(final String sunetid, final HttpServletRequest request,
-            final HttpServletResponse response) {
-        if (sunetid != null) {
-            request.setAttribute(Model.SUNETID, sunetid);
-            if (Boolean.parseBoolean(request.getParameter(("pl")))) {
-                setLoginCookie(sunetid, request, response);
-            } else if (Boolean.parseBoolean(request.getParameter("remove-pl"))) {
-                removeLoginCookie(response);
-            }
-        }
-    }
+    
+    private SunetIdSource sunetIdSource = new SunetIdSource();
 
     /**
      * set the lane-user cookie max age to zero.
@@ -55,5 +53,23 @@ public class PersistentLoginProcessor {
                                                  // weeks
             response.addCookie(cookie);
         }
+    }
+
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        if (Boolean.parseBoolean(request.getParameter(("pl")))) {
+            HttpServletRequest httpRequest = (HttpServletRequest) request;
+            String sunetid = this.sunetIdSource.getSunetid(httpRequest);
+            setLoginCookie(sunetid, httpRequest, httpResponse);
+        } else if (Boolean.parseBoolean(request.getParameter("remove-pl"))) {
+            removeLoginCookie(httpResponse);
+        }
+        chain.doFilter(request, response);
+    }
+
+    public void destroy() {
     }
 }

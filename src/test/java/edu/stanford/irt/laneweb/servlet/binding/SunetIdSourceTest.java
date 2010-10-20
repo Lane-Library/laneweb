@@ -47,6 +47,7 @@ public class SunetIdSourceTest {
 
     @Test
     public void testInCookie() throws IOException, ServletException {
+        expect(this.request.getSession()).andReturn(this.session);
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
@@ -57,53 +58,58 @@ public class SunetIdSourceTest {
         String value = this.codec.createLoginToken("ditenus", "user agent".hashCode()).getEncryptedValue();
         expect(this.cookie.getValue()).andReturn(value);
         replay(this.request, this.session, this.cookie);
-        assertEquals("ditenus", this.sunetidSource.getSunetid(this.request, this.session));
+        assertEquals("ditenus", this.sunetidSource.getSunetid(this.request));
         verify(this.request, this.session, this.cookie);
     }
 
     @Test
     public void testIsInRemoteUser() throws IOException, ServletException {
+        expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.request.getRemoteUser()).andReturn("ditenus");
         this.session.setAttribute(Model.SUNETID, "ditenus");
         replay(this.request, this.session, this.cookie);
-        assertEquals("ditenus", this.sunetidSource.getSunetid(this.request, this.session));
+        assertEquals("ditenus", this.sunetidSource.getSunetid(this.request));
         verify(this.request, this.session, this.cookie);
     }
 
     @Test
     public void testIsInSession() throws IOException, ServletException {
+        expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
         replay(this.request, this.session, this.cookie);
-        assertEquals("ditenus", this.sunetidSource.getSunetid(this.request, this.session));
+        assertEquals("ditenus", this.sunetidSource.getSunetid(this.request));
         verify(this.request, this.session, this.cookie);
     }
 
     @Test
     public void testIsInXWEBAUTHUSER() throws IOException, ServletException {
+        expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn("ditenus");
         this.session.setAttribute(Model.SUNETID, "ditenus");
         replay(this.request, this.session, this.cookie);
-        assertEquals("ditenus", this.sunetidSource.getSunetid(this.request, this.session));
+        assertEquals("ditenus", this.sunetidSource.getSunetid(this.request));
         verify(this.request, this.session, this.cookie);
     }
 
     @Test
     public void testNoUserNoCookies() throws IOException, ServletException {
+        expect(this.request.getSession()).andReturn(this.session);
         expect(this.session.getAttribute(Model.SUNETID)).andReturn(null);
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[0]);
         expect(this.request.getHeader("User-Agent")).andReturn(null);
         replay(this.request, this.session, this.cookie);
-        this.sunetidSource.getSunetid(this.request, this.session);
+        this.sunetidSource.getSunetid(this.request);
         verify(this.request, this.session, this.cookie);
     }
     
     @Test
     public void testBadCookie() {
+        expect(this.request.getSession()).andReturn(this.session);
         expect(this.request.getRemoteUser()).andReturn(null);
         expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
         expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
@@ -112,7 +118,7 @@ public class SunetIdSourceTest {
         expect(this.session.getAttribute("sunetid")).andReturn(null);
         expect(this.cookie.getValue()).andReturn("abc").times(2);
         replay(this.request, this.session, this.cookie);
-        assertEquals(null, this.sunetidSource.getSunetid(this.request, this.session));
+        assertEquals(null, this.sunetidSource.getSunetid(this.request));
         verify(this.request, this.session, this.cookie);
     }
 

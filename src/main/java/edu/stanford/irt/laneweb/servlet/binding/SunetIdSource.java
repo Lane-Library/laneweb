@@ -30,7 +30,8 @@ public class SunetIdSource {
      * looks up the sunet id from the session, request, and lane-user cookie in that order. If it is not in the
      * session it is put there.
      */
-    public String getSunetid(final HttpServletRequest request, final HttpSession session) {
+    public String getSunetid(final HttpServletRequest request) {
+        HttpSession session = request.getSession();
         String sessionSunetid = (String) session.getAttribute(Model.SUNETID);
         String sunetid = sessionSunetid == null ? getSunetidFromRequest(request) : sessionSunetid;
         if (sunetid == null) {

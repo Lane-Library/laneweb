@@ -22,7 +22,6 @@ import org.apache.cocoon.environment.Environment;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.servlet.PersistentLoginProcessor;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler;
 import edu.stanford.irt.laneweb.servlet.redirect.DefaultRedirectProcessor;
