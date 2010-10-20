@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.servlet.binding;
 
 import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.createMock;
@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 import edu.stanford.irt.laneweb.servlet.binding.SunetIdSource;
 
 /**

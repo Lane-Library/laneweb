@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.servlet;
+package edu.stanford.irt.laneweb.servlet.binding;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
