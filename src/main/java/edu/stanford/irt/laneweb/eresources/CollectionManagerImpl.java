@@ -174,7 +174,6 @@ public class CollectionManagerImpl implements CollectionManager {
                     + "FROM ERESOURCE "
                     + "WHERE CONTAINS(TEXT,?,1) > 0 "
                     + "AND CORE IS NULL "
-                    + "UNION "
                     + ") "
                     + "SELECT FOUND.ERESOURCE_ID, FOUND.RECORD_TYPE, FOUND.RECORD_ID, VERSION.VERSION_ID, LINK_ID, TYPE, SUBSET, TITLE, PUBLISHER, "
                     + "HOLDINGS, DATES,   DESCRIPTION, LABEL, URL, INSTRUCTION, "
@@ -309,7 +308,7 @@ public class CollectionManagerImpl implements CollectionManager {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 4; i++) {
             params.add(translatedQuery);
         }
         params.add(subset);
@@ -320,7 +319,7 @@ public class CollectionManagerImpl implements CollectionManager {
         QueryTranslator translator = new QueryTranslator();
         String translatedQuery = translator.translate(query);
         Collection<String> params = new LinkedList<String>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 4; i++) {
             params.add(translatedQuery);
         }
         params.add(type);
