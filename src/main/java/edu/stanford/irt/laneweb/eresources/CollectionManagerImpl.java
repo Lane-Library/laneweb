@@ -21,6 +21,7 @@ import edu.stanford.irt.eresources.impl.EresourceImpl;
 import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
+import edu.stanford.irt.laneweb.JdbcUtils;
 
 public class CollectionManagerImpl implements CollectionManager {
 
@@ -199,7 +200,7 @@ public class CollectionManagerImpl implements CollectionManager {
     
     private static final String DESCRIPTION = "SELECT DESCRIPTION FROM DESCRIPTION WHERE ERESOURCE_ID = ?";
 
-    private DataSource dataSource;
+    protected DataSource dataSource;
 
     public Collection<Eresource> getCore(final String type) {
         Collection<String> params = new LinkedList<String>();
@@ -296,19 +297,9 @@ public class CollectionManagerImpl implements CollectionManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            try {
-                if (null != conn) {
-                    conn.close();
-                }
-                if (null != stmt) {
-                    stmt.close();
-                }
-                if (null != rs) {
-                    rs.close();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
     }
 
@@ -357,19 +348,9 @@ public class CollectionManagerImpl implements CollectionManager {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            try {
-                if (null != conn) {
-                    conn.close();
-                }
-                if (null != stmt) {
-                    stmt.close();
-                }
-                if (null != rs) {
-                    rs.close();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
     }
 
@@ -459,9 +440,7 @@ public class CollectionManagerImpl implements CollectionManager {
                 eresource.setDescription(rs.getString(1));
             }
         } finally {
-            if (null != rs) {
-                rs.close();
-            }
+            JdbcUtils.closeResultSet(rs);
         }
     }
 }

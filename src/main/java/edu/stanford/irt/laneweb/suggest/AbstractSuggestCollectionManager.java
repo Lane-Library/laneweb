@@ -7,16 +7,13 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import javax.sql.DataSource;
-
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.impl.EresourceImpl;
+import edu.stanford.irt.laneweb.JdbcUtils;
 import edu.stanford.irt.laneweb.eresources.CollectionManagerImpl;
 import edu.stanford.irt.suggest.QueryNormalizer;
 
 public abstract class AbstractSuggestCollectionManager extends CollectionManagerImpl {
-    
-    private DataSource dataSource;
 
     @Override
     public Collection<Eresource> search(String query) {
@@ -29,10 +26,6 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
         Collection<String> params = searchStringToParams(query);
         params.add(type);
         return doSearch(getSearchTypeSQL(), params);
-    }
-    
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
     }
     
     protected abstract String getSearchSQL();
@@ -55,19 +48,9 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            try {
-                if (null != conn) {
-                    conn.close();
-                }
-                if (null != stmt) {
-                    stmt.close();
-                }
-                if (null != rs) {
-                    rs.close();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            JdbcUtils.closeResultSet(rs);
+            JdbcUtils.closeStatement(stmt);
+            JdbcUtils.closeConnection(conn);
         }
     }
 
