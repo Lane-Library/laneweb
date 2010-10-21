@@ -1,5 +1,8 @@
 package edu.stanford.irt.laneweb.suggest;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 public class HistoryCollectionManager extends AbstractSuggestCollectionManager {
 
     private static final String SEARCH =
@@ -34,5 +37,14 @@ public class HistoryCollectionManager extends AbstractSuggestCollectionManager {
     @Override
     protected String getSearchTypeSQL() {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    protected Collection<String> searchStringToParams(final String query) {
+        Collection<String> params = new LinkedList<String>();
+        String normalizedQuery = this.queryNormalizer.normalizeForContains(query);
+        params.add(normalizedQuery);
+        params.add(normalizedQuery);
+        return params;
     }
 }

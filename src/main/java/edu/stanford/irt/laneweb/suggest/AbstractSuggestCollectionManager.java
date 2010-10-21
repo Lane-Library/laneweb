@@ -28,6 +28,8 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
         return doSearch(getSearchTypeSQL(), params);
     }
     
+    protected QueryNormalizer queryNormalizer = new QueryNormalizer();
+    
     protected abstract String getSearchSQL();
     
     protected abstract String getSearchTypeSQL();
@@ -73,15 +75,6 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
         }
         return suggestions;
     }
-
-    private Collection<String> searchStringToParams(final String term) {
-        Collection<String> params = new LinkedList<String>();
-        QueryNormalizer normalizer = new QueryNormalizer();
-        String likeSearchString = normalizer.normalizeForLike(term);
-        String titleSearchString = normalizer.normalizeForWildcardContains(term);
-        params.add(likeSearchString);
-        params.add(titleSearchString);
-        params.add(normalizer.normalizeForContains(term));
-        return params;
-    }
+    
+    protected abstract Collection<String> searchStringToParams(String query);
 }
