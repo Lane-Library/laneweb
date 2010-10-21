@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
     <bean name="edu.stanford.irt.eresources.CollectionManager/laneconnex"
-        class="edu.stanford.irt.eresources.impl.CollectionManagerImpl">
+        class="edu.stanford.irt.laneweb.eresources.CollectionManagerImpl">
         <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
     </bean>
     

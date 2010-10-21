@@ -63,6 +63,7 @@ public class SitemapRequestHandlerTest {
         this.handler.setDataBinder(this.dataBinder);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testHandleRequest() throws Exception {
         expect(this.request.getMethod()).andReturn("GET");
