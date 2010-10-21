@@ -78,7 +78,7 @@
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- bioresearch -->
-                <map:match type="regex-parameter" pattern="(^bioresearch-all$) || (^textbooks-all$)">
+                <map:match type="regex-parameter" pattern="^(bioresearch|textbooks)-all$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
                         <map:part src="cocoon:/apps/search/xml"/>
