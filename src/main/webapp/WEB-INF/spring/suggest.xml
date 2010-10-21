@@ -4,14 +4,22 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
     
-    <bean id="edu.stanford.irt.suggest.EresourceSuggestionManager"
+    <bean name="edu.stanford.irt.suggest.EresourceSuggestionManager/eresource"
         class="edu.stanford.irt.suggest.EresourceSuggestionManager">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+        <property name="collectionManager">
+            <bean class="edu.stanford.irt.laneweb.suggest.EresourceCollectionManager">
+                <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+            </bean>
+        </property>
     </bean>
     
-    <bean id="edu.stanford.irt.suggest.HistorySuggestionManager"
-        class="edu.stanford.irt.suggest.HistorySuggestionManager">
-        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+    <bean name="edu.stanford.irt.suggest.EresourceSuggestionManager/history"
+        class="edu.stanford.irt.suggest.EresourceSuggestionManager">
+        <property name="collectionManager">
+            <bean class="edu.stanford.irt.laneweb.suggest.HistoryCollectionManager">
+                <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+            </bean>
+        </property>
     </bean>
     
     <bean id="edu.stanford.irt.suggest.MeshSuggestionManager"
@@ -21,9 +29,9 @@
         class="edu.stanford.irt.laneweb.suggest.SuggestionReader"
         scope="prototype">
         <property name="eresourceSuggestionManager"
-            ref="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
+            ref="edu.stanford.irt.suggest.EresourceSuggestionManager/eresource"/>
         <property name="historySuggestionManager"
-            ref="edu.stanford.irt.suggest.HistorySuggestionManager"/>
+            ref="edu.stanford.irt.suggest.EresourceSuggestionManager/history"/>
         <property name="meshSuggestionManager"
             ref="edu.stanford.irt.suggest.MeshSuggestionManager"/>
     </bean>
@@ -32,7 +40,7 @@
         class="edu.stanford.irt.laneweb.suggest.ExtensionsSuggestReader"
         scope="prototype">
         <property name="eresourceSuggestionManager"
-            ref="edu.stanford.irt.suggest.EresourceSuggestionManager"/>
+            ref="edu.stanford.irt.suggest.EresourceSuggestionManager/eresource"/>
         <property name="meshSuggestionManager"
             ref="edu.stanford.irt.suggest.MeshSuggestionManager"/>
     </bean>
