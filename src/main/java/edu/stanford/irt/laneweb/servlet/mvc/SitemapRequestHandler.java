@@ -64,7 +64,7 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         String basePath = getBasePath(requestURI, request.getContextPath());
         String sitemapURI = requestURI.substring(basePath.length());
         //only .html and .xml or ending in / potentially get redirects.
-        if (sitemapURI.indexOf(".html") > 0 || sitemapURI.indexOf(".xml") > 0 || sitemapURI.lastIndexOf('/') == sitemapURI.length() - 1) {
+        if (isRedirectable(sitemapURI)) {
             String redirectURL = this.redirectProcessor.getRedirectURL(sitemapURI, basePath, request.getQueryString());
             if (redirectURL != null) {
                 response.sendRedirect(redirectURL);
@@ -74,6 +74,14 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         Map<String, Object> model = getModel();
         this.dataBinder.bind(model, request);
         process(sitemapURI, model, request, response);
+    }
+
+    private boolean isRedirectable(String sitemapURI) {
+        return sitemapURI.indexOf(".html") > 0 
+            || sitemapURI.indexOf(".xml") > 0 
+            || sitemapURI.lastIndexOf('/') == sitemapURI.length() - 1
+            || sitemapURI.indexOf("page2rss") > 0
+            || sitemapURI.indexOf("/lksc-print") == 0;
     }
 
     public void setMethodsNotAllowed(final Set<String> methodsNotAllowed) {

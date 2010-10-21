@@ -15,7 +15,7 @@
                             <entry key="/classes/index\.html" value="/classes-consult/laneclasses.html"/>
                             <entry key="/clinician/index\.html" value="/portals/clinical.html"/>
                             <entry key="/index\.html\?template=shc(.*)" value="/index\.html\?sourceid=shc$1"/>
-                            <entry key="/lksc-print/index\.html" value="/help/lksc-print.html"/>
+                            <entry key="/lksc-print" value="/help/lksc-print.html"/>
                         </map>
                     </property>
                 </bean>
