@@ -74,14 +74,6 @@
         </map:pipeline>
         <map:pipeline type="caching" internal-only="true">
             <!-- secure/** generates an error unless used from a pipeline -->
-            <!-- requests for /uniprint/ get redirected to /secure/uniprint/ -->
-            <!--<map:match pattern="secure/uniprint/**" type="wildcard">
-                <map:generate type="html" src="${content-base}/uniprint/{1}">
-                    <map:parameter name="alt-src" value="${default-content-base}/uniprint/{1}"/>
-                </map:generate>
-                <map:transform type="xinclude"/>
-                <map:serialize type="xml"/>
-            </map:match>-->
             <map:match pattern="secure/**" type="wildcard">
                 <map:generate type="html" src="${content-base}/secure/{1}">
                     <map:parameter name="alt-src" value="${default-content-base}/secure/{1}"/>
@@ -92,6 +84,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
+            <!-- this is so the liaisons selectin by department works without javascript enabled -->
             <map:parameter name="cache-key" value="${request-uri};selection=${liaison}"/>
             <map:match type="wildcard" pattern="about/liaisons.html">
                 <map:generate type="html" src="${content-base}/about/liaisons.html">
@@ -106,11 +99,6 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
-            <!--<map:match type="wildcard" pattern="foo.html">
-                <map:generate type="html" src="http://medblog.stanford.edu/lane-faq/archives/workshops-training/index.html"/>
-                <map:transform type="joost" src="${default-resources-base}/xsl/blog-to-classes.stx"/>
-                <map:serialize type="xml"/>
-            </map:match>-->
             <map:match type="regexp" pattern="^(announcement|error)\.html$">
                 <map:generate type="html" src="${content-base}/{1}.html">
                     <map:parameter name="alt-src" value="${default-content-base}/{1}.html"/>
@@ -131,7 +119,6 @@
                     <map:parameter name="parameter-name" value="id"/>
                     <map:generate type="html" src="${medblog-base}/lane-faq/archives/{1}.xml"/>
                     <map:transform type="saxon" src="${default-resources-base}/xsl/individual-faq.xsl"/>
-                    <!--<map:transform type="joost" src="${default-resources-base}/xsl/old-faq.stx"/>-->
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>

@@ -22,6 +22,7 @@
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <!-- TODO: is this next match being used at all? I dont't think so -->
             <map:match pattern="search/type/*/*" type="wildcard">
                 <map:generate type="er-search">
                     <map:parameter name="query" value="{2}"/>
