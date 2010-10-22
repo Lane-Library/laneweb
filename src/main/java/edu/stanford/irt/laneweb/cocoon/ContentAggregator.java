@@ -44,7 +44,9 @@ public class ContentAggregator extends DefaultContentAggregator {
                     input = part.source.getInputStream();
                     this.saxParser.parse(new InputSource(input), this, this);
                 } finally {
-                    input.close();
+                    if (input != null) {
+                        input.close();
+                    }
                 }
             }
             if (part.element != null) {
