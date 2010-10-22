@@ -57,6 +57,9 @@ public class UrlTester extends AbstractReader {
     @Override
     protected void initialize() {
         this.url = getString(this.model, Model.URL);
+        if (this.url == null) {
+            throw new IllegalStateException(Model.URL + " is null");
+        }
         if (!this.url.startsWith("http")) {
             this.url = "http://".concat(this.url);
         }
