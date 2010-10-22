@@ -3,7 +3,19 @@ package edu.stanford.irt.laneweb.suggest;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.CodingErrorAction;
+
 import org.junit.Test;
+
+import com.ibm.icu.text.Normalizer;
+import com.ibm.icu.text.UTF16;
+import com.lowagie.text.pdf.ByteBuffer;
 
 public class SuggestionComparatorTest {
 
@@ -20,6 +32,7 @@ public class SuggestionComparatorTest {
         assertTrue(comparator.compare("bbb", "aaa") > 0);
         assertTrue(comparator.compare("aaa", "aaa") == 0);
         assertTrue(comparator.compare("foo TestString", "foo TestString") == 0);
+        assertTrue(comparator.compare("Zeitschrift für allgemeine Mikrobiologie", "zeitschrift fur allgemeine Mikrobiologie") == 0);
     }
 
     @Test
@@ -40,4 +53,5 @@ public class SuggestionComparatorTest {
         } catch (IllegalArgumentException e) {
         }
     }
+
 }
