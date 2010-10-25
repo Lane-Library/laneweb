@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-10-25" version="1.11.6" description="1.11.6 bug fix release">
+            <action date="2010-10-21" dev="ceyates" issue="43875" type="fix">
+                history search fails
+            </action>
+            <action date="2010-10-21" dev="ceyates" issue="43874" type="update">
+                Simplify eresources queries by removing preferred_title column
+            </action>
+            <action date="2010-10-21" dev="ceyates" issue="43832" type="add">
+                Redirect for LKSC printing pages
+            </action>
+            <action date="2010-10-21" dev="ceyates" issue="43804" type="fix">
+                persistent login/logout not functioning correctly
+            </action>
+            <action date="2010-10-22" dev="ceyates" issue="42639" type="fix">
+                Autocomplete: selections w diacritics may not be seen?
+            </action>
+        </release>
         <release date="2010-10-18" version="1.11.5" description="1.11.5 bug fix release">
             <action date="2010-10-18" dev="ceyates" issue="43716" type="fix">
                 500 errors for requests with ?template=nonexistenttemplate
