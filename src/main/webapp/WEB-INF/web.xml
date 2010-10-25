@@ -2,9 +2,9 @@
 <!--
   - $Id$
   -->
-<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
     <context-param>
         <param-name>log4jConfigLocation</param-name>
@@ -22,7 +22,6 @@
             /WEB-INF/spring/datasources.xml
             /WEB-INF/spring/eresources.xml
             /WEB-INF/spring/history.xml
-            <!--/WEB-INF/spring/idc9.xml-->
             /WEB-INF/spring/laneweb.xml
             /WEB-INF/spring/merged-search.xml
             /WEB-INF/spring/model.xml
@@ -31,8 +30,8 @@
             /WEB-INF/spring/querymap.xml
             /WEB-INF/spring/redirect.xml
             /WEB-INF/spring/search.xml
-            /WEB-INF/spring/servlet.xml
             /WEB-INF/spring/sitemap.xml
+            /WEB-INF/spring/source.xml
             /WEB-INF/spring/suggest.xml
         </param-value>
     </context-param>
@@ -93,20 +92,19 @@
     </filter-mapping>
     
     <servlet>
-        <description>ModelAugmentingRequestHandler</description>
-        <display-name>ModelAugmentingRequestHandler</display-name>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.ModelAugmentingRequestHandler</servlet-name>
-        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
+        <servlet-name>laneweb</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/laneweb-servlet.xml</param-value>
+        </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     
-    <servlet>
-        <description>MobileRequestHandler</description>
-        <display-name>ModelAugmentingRequestHandler</display-name>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.MobileRequestHandler</servlet-name>
-        <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+    <servlet-mapping>
+        <servlet-name>laneweb</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <description>LogoutServlet</description>
@@ -119,26 +117,6 @@
         <servlet-name>edu.stanford.irt.laneweb.servlet.RobotsDotTextServlet</servlet-name>
         <servlet-class>edu.stanford.irt.laneweb.servlet.RobotsDotTextServlet</servlet-class>
     </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.ModelAugmentingRequestHandler</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.MobileRequestHandler</servlet-name>
-        <url-pattern>/m/*</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.MobileRequestHandler</servlet-name>
-        <url-pattern>/mobile/*</url-pattern>
-    </servlet-mapping>
-    
-    <servlet-mapping>
-        <servlet-name>edu.stanford.irt.laneweb.servlet.mvc.MobileRequestHandler</servlet-name>
-        <url-pattern>/ms/*</url-pattern>
-    </servlet-mapping>
     
     <servlet-mapping>
         <servlet-name>edu.stanford.irt.laneweb.servlet.LogoutServlet</servlet-name>

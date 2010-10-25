@@ -3,11 +3,22 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-
-    <!--<bean id="org.apache.excalibur.xml.sax.SAXParser"
-        class="org.apache.cocoon.core.xml.avalon.DefaultSAXParser">
-        <property name="parser" ref="org.apache.cocoon.core.xml.SAXParser"/>
-    </bean>-->
+    
+    <bean id="javax.servlet.ServletContext"
+        class="org.apache.cocoon.spring.configurator.impl.ServletContextFactoryBean"/>
+    
+    <bean name="org.apache.cocoon.processing.ProcessInfoProvider"
+        class="org.apache.cocoon.processing.impl.ProcessInfoProviderImpl">
+        <property name="servletContext" ref="servletContext"/>
+    </bean>
+    
+    <bean id="org.apache.cocoon.configuration.Settings" class="edu.stanford.irt.laneweb.cocoon.Settings">
+        <property name="tempDir">
+            <bean class="org.springframework.web.context.support.ServletContextAttributeFactoryBean">
+                <property name="attributeName" value="javax.servlet.context.tempdir"/>
+            </bean>
+        </property>
+    </bean>
 
     <bean name="org.apache.cocoon.core.xml.SAXParser"
         class="org.apache.cocoon.core.xml.impl.JaxpSAXParser">
@@ -17,30 +28,6 @@
     <bean id="org.apache.cocoon.template.expression.AbstractStringTemplateParser"
         class="org.apache.cocoon.template.expression.AbstractStringTemplateParser" abstract="true">
         <property name="expressionFactory" ref="org.apache.cocoon.el.ExpressionFactory"/>
-    </bean>
-
-    <bean id="org.apache.excalibur.source.SourceResolver"
-        class="edu.stanford.irt.laneweb.cocoon.SourceResolver">
-        <constructor-arg ref="servletContext"/>
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
-    </bean>
-
-    <bean name="org.apache.excalibur.source.SourceFactory/context"
-        class="edu.stanford.irt.laneweb.cocoon.ContextSourceFactory">
-        <constructor-arg ref="servletContext"/>
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
-    </bean>
-
-    <bean name="org.apache.excalibur.source.SourceFactory/resource"
-        class="edu.stanford.irt.laneweb.cocoon.ResourceSourceFactory"/>
-
-    <bean name="org.apache.excalibur.source.SourceFactory/file"
-        class="org.apache.excalibur.source.impl.FileSourceFactory"/>
-
-
-    <bean name="org.apache.excalibur.source.SourceFactory/cocoon"
-        class="edu.stanford.irt.laneweb.cocoon.SitemapSourceFactory">
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
     
     <bean id="org.apache.avalon.framework.service.ServiceManager"

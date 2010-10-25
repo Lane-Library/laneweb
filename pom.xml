@@ -431,12 +431,12 @@
         <dependency>
             <artifactId>spring-aop</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.4.RELEASE</version>
+            <version>3.0.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-web</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.4.RELEASE</version>
+            <version>3.0.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-ldap-core</artifactId>
@@ -514,7 +514,7 @@
         <dependency>
             <artifactId>spring-tx</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.4.RELEASE</version>
+            <version>3.0.5.RELEASE</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -538,7 +538,7 @@
         <dependency>
             <artifactId>spring-test</artifactId>
             <groupId>org.springframework</groupId>
-            <version>3.0.4.RELEASE</version>
+            <version>3.0.5.RELEASE</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -588,6 +588,12 @@
         	<version>4.0.1</version>
         	<type>jar</type>
         	<scope>compile</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework</groupId>
+        	<artifactId>spring-webmvc</artifactId>
+        	<version>3.0.5.RELEASE</version>
+        	<scope>runtime</scope>
         </dependency>
     </dependencies>
 </project>
