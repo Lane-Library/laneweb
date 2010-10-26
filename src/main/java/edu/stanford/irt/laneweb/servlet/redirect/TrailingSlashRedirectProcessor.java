@@ -1,0 +1,16 @@
+package edu.stanford.irt.laneweb.servlet.redirect;
+
+
+public class TrailingSlashRedirectProcessor implements RedirectProcessor {
+
+    public String getRedirectURL(String uri, String basePath, String queryString) {
+        if (uri.endsWith("/")) {
+            StringBuilder sb = new StringBuilder(basePath).append(uri).append("index.html");
+            if (queryString != null) {
+                sb.append('?').append(queryString);
+            }
+            return sb.toString();
+        }
+        return null;
+    }
+}

@@ -33,8 +33,6 @@ public class SitemapRequestHandlerTest {
 
     private Processor processor;
 
-    private RedirectProcessor redirectProcessor;
-
     private HttpServletRequest request;
 
     private HttpServletResponse response;
@@ -55,11 +53,9 @@ public class SitemapRequestHandlerTest {
         this.response = createMock(HttpServletResponse.class);
         this.processor = createMock(Processor.class);
         this.servletContext = createMock(ServletContext.class);
-        this.redirectProcessor = createMock(DefaultRedirectProcessor.class);
         this.dataBinder = createMock(DataBinder.class);
         this.handler.setProcessor(this.processor);
         this.handler.setServletContext(this.servletContext);
-        this.handler.setRedirectProcessor(this.redirectProcessor);
         this.handler.setDataBinder(this.dataBinder);
     }
 
@@ -67,9 +63,7 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequest() throws Exception {
         expect(this.request.getMethod()).andReturn("GET");
-        expect(this.redirectProcessor.getRedirectURL("/index.html", "", null)).andReturn(null);
         expect(this.request.getRequestURI()).andReturn("/index.html");
-        expect(this.request.getQueryString()).andReturn(null);
         expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getParameter("cocoon-view")).andReturn(null);
         expect(this.request.getParameter("cocoon-action")).andReturn(null);
@@ -78,23 +72,9 @@ public class SitemapRequestHandlerTest {
         expect(this.servletContext.getMimeType("/index.html")).andReturn(null);
         this.dataBinder.bind(isA(Map.class), isA(HttpServletRequest.class));
         this.response.setContentType(null);
-        replay(this.servletContext, this.response, this.request, this.processor, this.redirectProcessor);
+        replay(this.servletContext, this.response, this.request, this.processor);
         this.handler.handleRequest(this.request, this.response);
-        verify(this.servletContext, this.processor, this.response, this.request, this.redirectProcessor);
-    }
-    
-    @Test
-    public void testAddBasePathToNewPageRedirect() throws ServletException, IOException {
-        expect(this.request.getMethod()).andReturn("GET");
-        expect(this.request.getContextPath()).andReturn("/baz");
-        expect(this.request.getRequestURI()).andReturn("/baz/foo.html");
-        expect(this.request.getQueryString()).andReturn(null);
-        expect(this.redirectProcessor.getRedirectURL("/foo.html", "/baz", null)).andReturn("/baz/newpage.html?page=/baz/bar/foo.html");
-        this.response.sendRedirect("/baz/newpage.html?page=/baz/bar/foo.html");
-        replay(this.servletContext, this.response, this.request, this.processor, this.redirectProcessor);
-        this.handler.handleRequest(this.request, this.response);
-        verify(this.servletContext, this.processor, this.response, this.request, this.redirectProcessor);
-        
+        verify(this.servletContext, this.processor, this.response, this.request);
     }
 
     @Test
@@ -105,15 +85,5 @@ public class SitemapRequestHandlerTest {
         } catch (IllegalArgumentException e) {
         }
         this.handler.setMethodsNotAllowed(Collections.<String> emptySet());
-    }
-
-    @Test
-    public void testSetRedirectProcessor() {
-        try {
-            this.handler.setRedirectProcessor(null);
-            fail();
-        } catch (IllegalArgumentException e) {
-        }
-        this.handler.setRedirectProcessor(this.redirectProcessor);
     }
 }

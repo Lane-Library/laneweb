@@ -5,6 +5,13 @@
     
     <bean id="handlerMapping"
         class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <bean class="edu.stanford.irt.laneweb.servlet.mvc.RedirectHandlerInterceptor">
+                    <property name="redirectProcessor" ref="edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor"/>
+                </bean>
+            </list>
+        </property>
         <property name="urlMap">
             <map>
                 <entry key="/m/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
@@ -23,7 +30,6 @@
                 <value>PROPFIND</value>
             </set>
         </property>
-        <property name="redirectProcessor" ref="edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor"/>
         <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder/html"/>
         <property name="servletContext" ref="servletContext"/>
         <property name="processor" ref="org.apache.cocoon.Processor"/>

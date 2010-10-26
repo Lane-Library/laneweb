@@ -20,7 +20,6 @@ import org.springframework.web.HttpRequestHandler;
 
 import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
-import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
 public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
@@ -37,8 +36,6 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
     private Set<String> methodsNotAllowed = Collections.emptySet();
 
     private Processor processor;
-
-    private RedirectProcessor redirectProcessor;
 
     private ServletContext servletContext;
 
@@ -62,25 +59,9 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         String requestURI = request.getRequestURI();
         String basePath = getBasePath(requestURI, request.getContextPath());
         String sitemapURI = requestURI.substring(basePath.length());
-        //only .html and .xml or ending in / potentially get redirects.
-        if (isRedirectable(sitemapURI)) {
-            String redirectURL = this.redirectProcessor.getRedirectURL(sitemapURI, basePath, request.getQueryString());
-            if (redirectURL != null) {
-                response.sendRedirect(redirectURL);
-                return;
-            }
-        }
         Map<String, Object> model = getModel();
         this.dataBinder.bind(model, request);
         process(sitemapURI, model, request, response);
-    }
-
-    private boolean isRedirectable(String sitemapURI) {
-        return sitemapURI.indexOf(".html") > 0 
-            || sitemapURI.indexOf(".xml") > 0 
-            || sitemapURI.lastIndexOf('/') == sitemapURI.length() - 1
-            || sitemapURI.indexOf("page2rss") > 0
-            || sitemapURI.indexOf("/lksc-print") == 0;
     }
 
     public void setMethodsNotAllowed(final Set<String> methodsNotAllowed) {
@@ -92,13 +73,6 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     public void setProcessor(final Processor processor) {
         this.processor = processor;
-    }
-
-    public void setRedirectProcessor(final RedirectProcessor redirectProcessor) {
-        if (redirectProcessor == null) {
-            throw new IllegalArgumentException("null redirectProcessor");
-        }
-        this.redirectProcessor = redirectProcessor;
     }
 
     public void setServletContext(final ServletContext servletContext) {

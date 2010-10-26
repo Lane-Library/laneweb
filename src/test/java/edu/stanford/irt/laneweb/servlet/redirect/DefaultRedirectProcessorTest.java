@@ -49,16 +49,4 @@ public class DefaultRedirectProcessorTest {
         assertEquals("/foo/bar/portals/clinical.html",
                 this.redirectProcessor.getRedirectURL("/foo/bar/clinician/index.html", "", null));
     }
-
-    @Test
-    public void testHandleRequestRedirectSlash() throws ServletException, IOException {
-        this.redirectProcessor.setRedirectMap(Collections.singletonMap("((?!.*\\?.*).*)/", "$1/index.html"));
-        assertEquals("/index.html", this.redirectProcessor.getRedirectURL("/", "", null));
-    }
-    
-    @Test
-    public void testHandleParameterEndsWithSlash() {
-        this.redirectProcessor.setRedirectMap(Collections.singletonMap("((?!.*\\?.*).*)/","$1/index.html"));
-        assertEquals(null, this.redirectProcessor.getRedirectURL("/l", "", "u=/r/"));
-    }
 }
