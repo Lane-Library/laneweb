@@ -80,6 +80,11 @@
         <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
 
+
+    <bean name="org.apache.cocoon.generation.Generator/search-template-generator"
+        class="edu.stanford.irt.laneweb.search.SearchContentAggregator" scope="prototype">
+    </bean>
+
     <bean name="org.apache.cocoon.components.pipeline.ProcessingPipeline/noncaching"
         class="edu.stanford.irt.laneweb.cocoon.pipeline.NonCachingPipeline" scope="prototype">
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>

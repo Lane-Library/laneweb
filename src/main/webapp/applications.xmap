@@ -8,7 +8,7 @@
             <map:match pattern="url-tester" type="wildcard">
                 <map:read type="search-url-tester"/>
             </map:match>
-            <!-- matches /apps/search/ requests -->
+             <!-- matches /apps/search/ requests -->
             <map:match pattern="search/**" type="wildcard">
                 <!-- /apps/search/xml returns the xmlized search result -->
                 <map:match type="wildcard" pattern="search/xml">
@@ -174,8 +174,7 @@
                     src="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${url-encoded-query}&amp;sfx.title_search=exact&amp;sfx.directlink=off"/>
                 <map:transform src="${default-resources-base}/xsl/sfx2json.xsl" type="saxon">
                     <map:parameter name="sfx-request"
-                        value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${url-encoded-query}&amp;sfx.title_search=exact"
-                    />
+                        value="http://sfx.stanford.edu/local?sid=stanford:laneweb&amp;genre=journal&amp;sfx.ignore_date_threshold=1&amp;title=${url-encoded-query}&amp;sfx.title_search=exact"/>
                 </map:transform>
                 <map:serialize type="text"/>
             </map:match>
@@ -183,56 +182,9 @@
         <!-- caching pipeline for static documents -->
         <map:pipeline type="caching">
             <map:match pattern="cache/search/templates/xml" type="wildcard">
-                <map:aggregate element="search-templates"
-                    ns="http://lane.stanford.edu/search-templates/ns">
-                    <map:part src="cocoon:/search/describe/xml"/>
-                    <map:part src="cocoon:/cache/portals/anesthesia.html"/>
-                    <map:part src="cocoon:/cache/portals/cardiology.html"/>
-                    <map:part src="cocoon:/cache/portals/emergency.html"/>
-                    <map:part src="cocoon:/cache/portals/ethics.html"/>
-                    <map:part src="cocoon:/cache/portals/hematology.html"/>
-                    <map:part src="cocoon:/cache/portals/internal-medicine.html"/>
-                    <map:part src="cocoon:/cache/portals/lpch-cerner.html"/>
-                    <map:part src="cocoon:/cache/portals/peds.html"/>
-                    <map:part src="cocoon:/cache/portals/pharmacy.html"/>
-                    <map:part src="cocoon:/cache/portals/pulmonary.html"/>
-                    <map:part src="cocoon:/cache/search/bioresearch-all.html"/>
-                    <map:part src="cocoon:/cache/search/all/all-all.html"/>
-                    <map:part src="cocoon:/cache/search/articles/articles-all.html"/>
-                    <map:part src="cocoon:/cache/search/articles/articles-pubmed.html"/>
-                    <map:part src="cocoon:/cache/search/articles/articles-pubmed_clinicaltrial.html"/>
-                    <map:part src="cocoon:/cache/search/articles/articles-pubmed_systematicreviews.html"/>
-                    <map:part src="cocoon:/cache/search/articles/articles-sciencecitation.html"/>
-                    <map:part src="cocoon:/cache/search/articles/articles-uptodate.html"/>
-                    <map:part src="cocoon:/cache/search/articles/articles-scopus.html"/>
-                    <map:part src="cocoon:/cache/search/catalog/catalog-lois.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-aafp_patients.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-acpjc.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-all.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-bmj_clinical_evidence.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-cro_clineguide.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-dare.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-emedicine.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-evidence.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-foundational.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-medlineplus_0.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-patient.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_clinicaltrial.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_cochrane_reviews.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_diagnosis_focused.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_epidemiology_focused.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_etiology_focused.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_guidelines.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_harm_focused.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_prognosis_focused.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_rct.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_recent_reviews.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_systematicreviews.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-pubmed_treatment_focused.html"/>
-                    <map:part src="cocoon:/cache/search/clinical/clinical-uptodate.html"/>
-                    <map:part src="cocoon:/cache/search/history/history-wilson_somhistory.html"/>
-                </map:aggregate>
+                <map:generate type="search-template-generator" src="cocoon:/search/describe/xml">
+                        <map:parameter name="content-directory" value="search,portals"/>
+                </map:generate>
                 <map:transform type="saxon" src="${default-resources-base}/xsl/search-templates.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
