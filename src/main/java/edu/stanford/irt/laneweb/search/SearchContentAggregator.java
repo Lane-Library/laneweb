@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.excalibur.source.SourceValidity;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -18,7 +16,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.Model;
 
-public class SearchContentAggregator extends AbstractGenerator implements CacheableProcessingComponent{
+public class SearchContentAggregator extends AbstractGenerator{
 
     String ns = "http://lane.stanford.edu/search-templates/ns";
     String rootElement = "search-templates";
@@ -76,25 +74,6 @@ public class SearchContentAggregator extends AbstractGenerator implements Cachea
                 files.add(file);
             }
         }
-    }
-    
+    }    
 
-    /**
-     * Generate the unique key. This key must be unique inside the space of this component. This method must be invoked
-     * before the generateValidity() method.
-     * 
-     * @return The generated key or <code>0</code> if the component is currently not cacheable.
-     */
-    public java.io.Serializable getKey() {
-        return this.source.getURI();
-    }
-
-    /**
-     * Generate the validity object. Before this method can be invoked the generateKey() method must be invoked.
-     * 
-     * @return The generated validity object or <code>null</code> if the component is currently not cacheable.
-     */
-    public SourceValidity getValidity() {
-        return this.source.getValidity();
-    }
 }
