@@ -7,6 +7,11 @@
         class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="interceptors">
             <list>
+                <bean class="edu.stanford.irt.laneweb.servlet.mvc.LanewebPathInterceptor">
+                    <property name="defaultContentBase" value="#{contextAttributes['laneweb.context.live-base']}"/>
+                    <property name="stageBase" value="#{contextAttributes['laneweb.context.stage-base']}"/>
+                    <property name="defaultResourcesBase" value="#{servletContext.getResource('/resources')}"/>
+                </bean>
                 <bean class="edu.stanford.irt.laneweb.servlet.mvc.RedirectHandlerInterceptor">
                     <property name="redirectProcessor" ref="edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor"/>
                 </bean>

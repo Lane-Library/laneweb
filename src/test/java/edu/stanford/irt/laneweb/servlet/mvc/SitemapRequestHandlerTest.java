@@ -22,6 +22,7 @@ import org.apache.cocoon.environment.Environment;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler;
 import edu.stanford.irt.laneweb.servlet.redirect.DefaultRedirectProcessor;
@@ -63,8 +64,8 @@ public class SitemapRequestHandlerTest {
     @Test
     public void testHandleRequest() throws Exception {
         expect(this.request.getMethod()).andReturn("GET");
+        expect(this.request.getAttribute(Model.BASE_PATH)).andReturn("");
         expect(this.request.getRequestURI()).andReturn("/index.html");
-        expect(this.request.getContextPath()).andReturn("");
         expect(this.request.getParameter("cocoon-view")).andReturn(null);
         expect(this.request.getParameter("cocoon-action")).andReturn(null);
         expect(this.request.getParameterNames()).andReturn(Collections.enumeration(Collections.emptySet()));

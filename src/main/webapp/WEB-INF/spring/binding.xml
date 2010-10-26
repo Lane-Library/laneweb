@@ -99,7 +99,7 @@
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"
         class="edu.stanford.irt.laneweb.servlet.binding.UserCookieDataBinder"/>
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"
-        class="edu.stanford.irt.laneweb.servlet.binding.BasePathDataBinder"/>
+        class="edu.stanford.irt.laneweb.servlet.binding.RequestAttributeDataBinder"/>
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/parent-path"
         class="edu.stanford.irt.laneweb.servlet.binding.ParentPathDataBinder"/>
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"
