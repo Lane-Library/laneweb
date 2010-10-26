@@ -10,21 +10,26 @@
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/context"
-        class="edu.stanford.irt.laneweb.cocoon.ContextSourceFactory">
+        class="edu.stanford.irt.laneweb.cocoon.source.ContextSourceFactory">
         <constructor-arg ref="servletContext"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
     
     <bean name="org.apache.excalibur.source.SourceFactory/resource"
-        class="edu.stanford.irt.laneweb.cocoon.ResourceSourceFactory"/>
+        class="edu.stanford.irt.laneweb.cocoon.source.ResourceSourceFactory"/>
     
     <bean name="org.apache.excalibur.source.SourceFactory/file"
         class="org.apache.excalibur.source.impl.FileSourceFactory"/>
     
     
     <bean name="org.apache.excalibur.source.SourceFactory/cocoon"
-        class="edu.stanford.irt.laneweb.cocoon.SitemapSourceFactory">
+        class="edu.stanford.irt.laneweb.cocoon.source.SitemapSourceFactory">
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
+    </bean>
+    
+    
+    <bean name="org.apache.excalibur.source.SourceFactory/jndi"
+        class="edu.stanford.irt.laneweb.cocoon.source.URLSourceFactory">
     </bean>
 
 </beans>

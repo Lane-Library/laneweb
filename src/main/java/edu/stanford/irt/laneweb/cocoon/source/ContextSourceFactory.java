@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.cocoon;
+package edu.stanford.irt.laneweb.cocoon.source;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +10,8 @@ import javax.servlet.ServletContext;
 
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceFactory;
+
+import edu.stanford.irt.laneweb.cocoon.SourceResolver;
 
 public class ContextSourceFactory implements SourceFactory {
 
