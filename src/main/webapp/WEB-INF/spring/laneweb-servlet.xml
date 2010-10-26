@@ -17,6 +17,7 @@
                 <entry key="/m/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
                 <entry key="/mobile/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
                 <entry key="/ms/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
+                <entry key="/tobacco/**" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/tobacco"/>
             </map>
         </property>
         <property name="defaultHandler" ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"/>
@@ -40,6 +41,17 @@
         class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
         parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
         <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder/mobile"/>
+    </bean>
+    
+    <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/tobacco"
+        class="org.springframework.web.servlet.resource.ResourceHttpRequestHandler">
+        <property name="locations">
+            <list>
+                <value>${laneweb.context.live-base}/tobacco/</value>
+            </list>
+        </property>
+        <property name="cacheSeconds" value="31536000"/>
+        <property name="supportedMethods" value="HEAD,GET"/>
     </bean>
     
     <bean class="org.springframework.web.servlet.DispatcherServlet">
