@@ -593,7 +593,6 @@
         	<groupId>org.springframework</groupId>
         	<artifactId>spring-webmvc</artifactId>
         	<version>3.0.5.RELEASE</version>
-        	<scope>runtime</scope>
         </dependency>
     </dependencies>
 </project>
