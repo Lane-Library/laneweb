@@ -79,9 +79,14 @@ public class RequestParameterDataBinder implements DataBinder {
                 model.put(Model.REMOVE_PERSISTENT_LOGIN, value);
             } else if ("rid".equals(name)) {
                 model.put(Model.RESOURCE_ID, value);
+            } else if (Model.SYNCHRONOUS.equals(name)) {
+                    model.put(Model.SYNCHRONOUS, value);
+            } else if (Model.TIMEOUT.equals(name)) {
+                model.put(Model.TIMEOUT, value);
+            }
                 // } else {
                 // model.put(name, request.getParameter(name));
-            }
+            
         }
     }
 }

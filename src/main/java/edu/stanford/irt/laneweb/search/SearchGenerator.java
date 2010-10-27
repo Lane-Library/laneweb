@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Collection;
 
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.DefaultResult;
@@ -46,7 +47,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
                 synchronous = Boolean.parseBoolean(this.synchronous);
             }
             final SimpleQuery query = new SimpleQuery(this.query);
-            result = this.metaSearchManager.search(query, timeout, engines, synchronous);
+            result =  this.metaSearchManager.search(query, timeout, engines, synchronous);
             if (null != this.wait) {
                 long wait = 0;
                 try {
@@ -81,8 +82,8 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.timeout = getString(this.model, "timeout", this.parameterMap.get("timeout"));
+        this.timeout = getString(this.model, Model.TIMEOUT, this.parameterMap.get(Model.TIMEOUT));
         this.wait = getString(this.model, "wait");
-        this.synchronous = getString(this.model, "synchronous", this.parameterMap.get("synchronous"));
+        this.synchronous = getString(this.model, Model.SYNCHRONOUS, this.parameterMap.get(Model.SYNCHRONOUS));
     }
 }

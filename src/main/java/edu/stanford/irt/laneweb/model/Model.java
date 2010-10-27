@@ -100,6 +100,8 @@ public interface Model {
 
     public static final String TICKET = "ticket";
 
+    public static final String TIMEOUT = "timeout";
+    
     public static final String TITLE = "title";
 
     public static final String TYPE = "type";
