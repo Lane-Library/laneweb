@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.cocoon.ProcessingException;
+import org.apache.cocoon.caching.CacheableProcessingComponent;
+import org.apache.excalibur.source.SourceValidity;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
@@ -16,18 +18,19 @@ import org.xml.sax.helpers.XMLReaderFactory;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.Model;
 
-public class SearchContentAggregator extends AbstractGenerator{
+public class SearchContentAggregator extends AbstractGenerator implements CacheableProcessingComponent{
 
     String ns = "http://lane.stanford.edu/search-templates/ns";
     String rootElement = "search-templates";
     
     
     private List<File> files = null;
+    
+    private SearchContentValidity validities;
 
     public void generate() throws IOException, SAXException, ProcessingException {
         super.xmlConsumer.startDocument();
         super.xmlConsumer.startElement(this.ns, this.rootElement,this.rootElement, new AttributesImpl());
-        
         
         XMLReader domReader = XMLReaderFactory.createXMLReader();
         SearchContentXMLFilter domParser = new SearchContentXMLFilter(domReader);
@@ -62,6 +65,7 @@ public class SearchContentAggregator extends AbstractGenerator{
         for (String directory : directories) {
             setFiles(path.concat("/").concat(directory));
         }
+        this.validities = new SearchContentValidity(this.files);
     }
 
     private void setFiles(String path) {
@@ -74,6 +78,14 @@ public class SearchContentAggregator extends AbstractGenerator{
                 files.add(file);
             }
         }
-    }    
+    }
 
+    
+    public java.io.Serializable getKey() {
+        return this.source.getURI();
+    }
+
+    public SourceValidity getValidity() {
+        return this.validities;
+    }
 }
