@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet.binding;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -17,7 +18,7 @@ public class ServletContextDataBinder implements DataBinder {
         model.put(Model.MEDBLOG_BASE, this.servletContext.getAttribute("laneweb.context.medblog-base"));
         model.put(Model.DEFAULT_CONTENT_BASE, this.servletContext.getAttribute("laneweb.context.live-base"));
             try {
-                model.put(Model.DEFAULT_RESOURCES_BASE, this.servletContext.getResource("/resources"));
+                model.put(Model.DEFAULT_RESOURCES_BASE, new URL("file:" + this.servletContext.getRealPath("/resources")));
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
