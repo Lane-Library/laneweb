@@ -53,6 +53,8 @@ public class MetaSearchManagerSource {
             AbstractXmlApplicationContext context = new HttpApplicationContext(url, login, password);
             this.manager = (MetaSearchManager) context.getBean("manager");
             this.httpClient.setState(new HttpState());
+            this.searchCacheManager.shutdown();
+            this.searchCacheManager = (SearchCacheManager)context.getBean("searchCacheManager");
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }
