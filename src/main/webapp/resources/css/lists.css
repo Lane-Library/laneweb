@@ -11,7 +11,7 @@ dt {
     margin-bottom:10px;
 }
 .content ul li {
-    list-style-image:url(/././images/raquo.gif);
+    list-style-image:url(/././resources/images/raquo.gif);
     list-style-type:disc;
     list-style-position:outside;
     margin-left:15px;

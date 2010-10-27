@@ -41,7 +41,7 @@
 #searchFacets .facetHeader {
     text-transform:uppercase;
     font-weight:bold;
-    list-style-image:url(/././images/raquo.gif);
+    list-style-image:url(/././resources/images/raquo.gif);
     list-style-type:disc;
 }
 #searchFacets .facetIndent {
@@ -74,10 +74,10 @@
     margin-left:-5px;
 }
 #optionsToggle.closed {
-    background-image:url(/././images/minus.png);
+    background-image:url(/././resources/images/minus.png);
 }
 #optionsToggle.open {
-    background-image:url(/././images/plus.png);
+    background-image:url(/././resources/images/plus.png);
 }
 #optionsToggle a {
     font-weight:bold;

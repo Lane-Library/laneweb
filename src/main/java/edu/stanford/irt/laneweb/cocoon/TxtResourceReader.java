@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.util.regex.Pattern;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
@@ -11,12 +12,12 @@ import org.apache.excalibur.source.SourceValidity;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class TxtResourceReader extends AbstractReader implements CacheableProcessingComponent {
+    
+    private static final Pattern PATTERN = Pattern.compile("\\/\\.\\/\\.");
 
-    private String defaultPath;
+    private static final String SUBSTITUTE = "/./.";
 
-    private String valueToSubstitute;
-
-    protected String path;
+    private String basePath;
 
     public void generate() throws IOException {
         BufferedReader bf = null;
@@ -24,7 +25,9 @@ public class TxtResourceReader extends AbstractReader implements CacheableProces
             bf = new BufferedReader(new InputStreamReader(this.source.getInputStream()));
             String line = null;
             while ((line = bf.readLine()) != null) {
-                line = line.replaceAll(this.valueToSubstitute, this.path);
+                if (line.indexOf(SUBSTITUTE) > -1) {
+                    line = PATTERN.matcher(line).replaceAll(this.basePath);
+                }
                 this.outputStream.write(line.getBytes());
                 this.outputStream.write('\n');
             }
@@ -37,7 +40,7 @@ public class TxtResourceReader extends AbstractReader implements CacheableProces
     }
 
     public Serializable getKey() {
-        return this.source.getURI() + ";path=" + this.path;
+        return this.source.getURI() + '?' + this.basePath;
     }
 
     @Override
@@ -49,18 +52,8 @@ public class TxtResourceReader extends AbstractReader implements CacheableProces
         return this.source.getValidity();
     }
 
-    public void setDefaultPath(final String path) {
-        this.defaultPath = path;
-    }
-
-    public void setValueToSubstitute(final String valueToSubstitute) {
-        this.valueToSubstitute = valueToSubstitute;
-    }
-
     @Override
     protected void initialize() {
-        // get the path from a sitemap parameter or the base-path from the model, or the default
-        this.path = this.parameterMap.containsKey("path") ? this.parameterMap.get("path") : getString(this.model, 
-                Model.BASE_PATH, this.defaultPath);
+        this.basePath = getString(this.model, Model.BASE_PATH);
     }
 }

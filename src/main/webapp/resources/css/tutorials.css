@@ -38,7 +38,7 @@
 }
 .content .tutorial li li {
     border-top:none;
-    list-style:disc outside url("/././images/raquo.gif");
+    list-style:disc outside url("/././resources/images/raquo.gif");
     margin-left:15px;
     padding-top:0;
 }

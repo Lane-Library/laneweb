@@ -119,9 +119,6 @@
     <bean name="org.apache.cocoon.reading.Reader/txt-resource"
         class="edu.stanford.irt.laneweb.cocoon.TxtResourceReader"
         scope="prototype">
-        <property name="defaultPath" value="/"/>
-        <property name="valueToSubstitute" value="/\./\."/>
-        <!-- uses regex so /./. is what is actually substituted -->
     </bean>
 
     <bean name="org.apache.cocoon.acting.Action/voyager"

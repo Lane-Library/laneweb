@@ -47,12 +47,12 @@
     display:none;
 }
 .type1 .yui3-accordion-item-trigger {
-  background-image:url(/././images/plus.png);
+  background-image:url(/././resources/images/plus.png);
   background-repeat:no-repeat;
   background-position:18px 11px;
 }
 .type1 .yui3-accordion-item-active .yui3-accordion-item-trigger {
-  background-image:url(/././images/minus.png);
+  background-image:url(/././resources/images/minus.png);
 }
 .type1 .expanded .show, .type1 .yui3-accordion-item-active .show {
     display:none;

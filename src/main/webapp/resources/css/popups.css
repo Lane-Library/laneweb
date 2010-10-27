@@ -18,7 +18,7 @@
     cursor:move;
 }
 .yui3-widget-hd a {
-    background-image:url(/././images/backgr/close-button-off.gif);
+    background-image:url(/././resources/images/backgr/close-button-off.gif);
     width:22px;
     height:22px;
     position:absolute;
@@ -27,7 +27,7 @@
     text-indent:-2000px;
 }
 .yui3-widget-hd a:hover {
-    background-image:url(/././images/backgr/close-button-on.gif);
+    background-image:url(/././resources/images/backgr/close-button-on.gif);
     cursor:pointer;
 }
 .yui3-widget-bd {

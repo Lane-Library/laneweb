@@ -165,17 +165,17 @@
     </xsl:template>
 
     <!-- put version into javascript @src -->
-    <xsl:template match="h:script/@src[starts-with(.,'/javascript')]">
+    <xsl:template match="@src[starts-with(.,'/resources')]">
         <xsl:attribute name="src">
             <xsl:value-of
-                select="concat($base-path,'/javascript/',$version,substring-after(.,'/javascript'))"/>
+                select="concat($base-path,'/resources/',$version,substring-after(.,'/resources'))"/>
         </xsl:attribute>
     </xsl:template>
 
     <!-- put version into css href -->
-    <xsl:template match="h:link/@href[starts-with(.,'/style')]">
+    <xsl:template match="@href[starts-with(.,'/resources/css')]">
         <xsl:attribute name="href">
-            <xsl:value-of select="concat($base-path,'/style/',$version,substring-after(.,'/style'))"/>
+            <xsl:value-of select="concat($base-path,'/resources/',$version,'/css',substring-after(.,'/css'))"/>
         </xsl:attribute>
     </xsl:template>
 

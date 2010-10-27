@@ -23,7 +23,7 @@
 }
 .sectionMenu .yui3-accordion-item div {
     padding-left:15px;
-    background-image:url(/././images/plus.png);
+    background-image:url(/././resources/images/plus.png);
     background-repeat:no-repeat;
     background-position:0 1px
 }
@@ -31,7 +31,7 @@
     margin-left:13px;
 }
 .sectionMenu .yui3-accordion-item-active div {
-    background-image:url(/././images/minus.png);
+    background-image:url(/././resources/images/minus.png);
 }
 /*hide expandies on load*/
 .yui3-js-enabled .sectionMenu ul {

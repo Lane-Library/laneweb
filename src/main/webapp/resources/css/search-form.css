@@ -1,11 +1,11 @@
 #search {
-    background-image:url(/././images/search-bg.jpg);
+    background-image:url(/././resources/images/search-bg.jpg);
     padding-top:8px;
     padding-left:28px;
     height:94px;
 }
 .yui3-js-enabled #search.clinical {
-    background-image:url(/././images/clin-search-bg.jpg);
+    background-image:url(/././resources/images/clin-search-bg.jpg);
     height:124px;
 }
 #searchSource {

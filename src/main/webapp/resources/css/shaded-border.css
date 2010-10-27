@@ -27,7 +27,7 @@ html {
   They are nested inside each other and contain all of the other elements.
  */
 .sb-lr {
-    background-image:url(/././images/lr.gif);
+    background-image:url(/././resources/images/lr.gif);
     background-repeat:repeat-y;
 }
 /* IE6 needs the position:relative for some reason */
@@ -56,7 +56,7 @@ html {
 .sb-tb {
     position:relative;
     height:6px;
-    background-image:url(/././images/sprite-vert.gif);
+    background-image:url(/././resources/images/sprite-vert.gif);
     background-position:0 -120px;
     background-repeat:repeat-x;
     z-index:1;
@@ -72,7 +72,7 @@ html {
     width:12px;
     font-size:0;
     position:absolute;
-    background-image:url(/././images/sprite.gif);
+    background-image:url(/././resources/images/sprite.gif);
 }
 #sb-tl {
     top:-1px;

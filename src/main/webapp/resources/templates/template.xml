@@ -4,8 +4,8 @@
         <title>Lane Medical Library &amp; Knowledge Management Center - Stanford
             University School of Medicine</title>
         <link rel="stylesheet" type="text/css"
-            href="/style/yui.css"/>
-        <link rel="stylesheet" type="text/css" href="/style/lane-all.css"/>
+            href="/resources/css/yui.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
         <link rel="alternate" type="application/rss+xml" title="Lane RSS News"
@@ -45,7 +45,7 @@
                                 </select>
                                 <a id="searchTips" href="/help/choose-search.html">Choose Best Search for You</a>
                                 <div id="searchIndicator"><img alt="[searching]"
-                                        src="/images/backgr/search-indicator.gif"/></div>
+                                        src="/resources/images/backgr/search-indicator.gif"/></div>
                                 <input name="q" id="searchTerms" type="text"/>
                                 <input id="searchSubmit" type="submit" value="search"/>
                                 <a id="searchReset" href="/">Clear Search</a>
@@ -361,7 +361,7 @@
                 </li>
             </ul>
         </div>
-        <script type="text/javascript" src="/javascript/yui.js"></script>
-        <script type="text/javascript" src="/javascript/lane-all.js"></script>
+        <script type="text/javascript" src="/resources/javascript/yui.js"></script>
+        <script type="text/javascript" src="/resources/javascript/lane-all.js"></script>
     </body>
 </html>

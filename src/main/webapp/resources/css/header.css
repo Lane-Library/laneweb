@@ -43,7 +43,7 @@ h1 a:visited {
     background-position:0 -600px;
 }
 #som {
-    background-image:url(/././images/sprite.gif);
+    background-image:url(/././resources/images/sprite.gif);
     background-position:0 -500px;
 }
 #som:hover {

@@ -1,6 +1,6 @@
 /** LANE additions to iui **/
 body {
-    background:url('/././images/m/lane-bg.png');
+    background:url('/././resources/images/m/lane-bg.png');
     background-position-x: 0;
     background-position-y: 102px;
     background-repeat: no-repeat;
@@ -110,7 +110,7 @@ body > ul > li a {
 #results li a.more, li.more {
     text-align:right;
     font-size:10px;
-    background:url('/././images/m/listArrow.png') no-repeat scroll right center transparent;
+    background:url('/././resources/images/m/listArrow.png') no-repeat scroll right center transparent;
 }
 div.absInfo {
     box-sizing: border-box;

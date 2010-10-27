@@ -5,7 +5,7 @@
     height:30px;
 /* IE6 doesn't get width 100% right */
     _width:989px;
-    background-image:url(/././images/main-nav-bg.gif);
+    background-image:url(/././resources/images/main-nav-bg.gif);
 }
 .yui3-js-enabled #laneNav.clinical {
     top:174px;
@@ -36,7 +36,7 @@
     border-top:none;
     padding-bottom:6px;
     z-index:2;
-    background-image: url(/././images/menu-bg.gif);
+    background-image: url(/././resources/images/menu-bg.gif);
     background-position: 0 100%;
     background-repeat: repeat-x;
     -moz-border-radius-bottomleft:5px;

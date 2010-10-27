@@ -3,13 +3,13 @@
     top:-34px;
     left:125px;
     font-size:11px;
-    background-image:url(/././images/sprite-vert.gif);
+    background-image:url(/././resources/images/sprite-vert.gif);
     background-repeat:repeat-x;
     z-index:1;
     white-space:nowrap;
 }
 #somNav li {
-    background-image:url(/././images/sprite-vert.gif);
+    background-image:url(/././resources/images/sprite-vert.gif);
     background-position:0 -60px;
     background-repeat:no-repeat;
     padding:0;
@@ -30,7 +30,7 @@
 }
 #somNav a {
     display:block;
-    background-image:url(/././images/sprite.gif);
+    background-image:url(/././resources/images/sprite.gif);
     background-repeat:no-repeat;
     background-position:100% -382px;
     padding:13px 24px 6px 12px;
@@ -45,7 +45,7 @@
 }
 #stanfordMedicineBrand a {
     width:124px;
-    background-image:url(/././images/sprite.gif);
+    background-image:url(/././resources/images/sprite.gif);
     background-repeat:no-repeat;
     background-position:0 0;
     text-indent:-9000px;
@@ -55,7 +55,7 @@
 }
 #stanfordUniversityBrand a {
     width:62px;
-    background-image:url(/././images/sprite.gif);
+    background-image:url(/././resources/images/sprite.gif);
     background-repeat:no-repeat;
     background-position:8px -191px;
     text-indent:-9000px;
