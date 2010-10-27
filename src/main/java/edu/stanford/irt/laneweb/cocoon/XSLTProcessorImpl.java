@@ -22,6 +22,7 @@ import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.avalon.framework.parameters.Parameters;
+import org.apache.cocoon.core.xml.SAXParser;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceException;
 import org.apache.excalibur.source.SourceResolver;
@@ -31,7 +32,6 @@ import org.apache.excalibur.store.Store;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.apache.excalibur.xml.xslt.XSLTProcessor;
 import org.apache.excalibur.xml.xslt.XSLTProcessorException;
-import org.apache.excalibur.xmlizer.XMLizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.ContentHandler;
@@ -135,10 +135,10 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
     /** The configured transformer factory to use */
     protected String transformerFactory;
 
-    protected XMLizer xmlizer;
+    private SAXParser saxParser;
 
-    public XSLTProcessorImpl(final XMLizer xmlizer, final Store store, final SourceResolver sourceResolver) {
-        this.xmlizer = xmlizer;
+    public XSLTProcessorImpl(final SAXParser saxParser, final Store store, final SourceResolver sourceResolver) {
+        this.saxParser = saxParser;
         this.store = store;
         this.resolver = sourceResolver;
     }
@@ -537,9 +537,12 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
             ((XMLizable) source).toSAX(handler);
         } else {
             final InputStream inputStream = source.getInputStream();
-            final String mimeType = source.getMimeType();
-            final String systemId = source.getURI();
-            this.xmlizer.toSAX(inputStream, mimeType, systemId, handler);
+            InputSource input = new InputSource(inputStream);
+            try {
+                this.saxParser.parse(input, handler);
+            } finally {
+                inputStream.close();
+            }
         }
     }
 }

@@ -7,13 +7,11 @@ import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
 import static org.junit.Assert.fail;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,8 +23,6 @@ import org.junit.Test;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 import edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler;
-import edu.stanford.irt.laneweb.servlet.redirect.DefaultRedirectProcessor;
-import edu.stanford.irt.laneweb.servlet.redirect.RedirectProcessor;
 
 public class SitemapRequestHandlerTest {
 

@@ -113,7 +113,7 @@
         class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
         init-method="initialize"
         scope="prototype">
-        <constructor-arg ref="org.apache.excalibur.xmlizer.XMLizer"/>
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
@@ -123,7 +123,7 @@
         class="edu.stanford.irt.laneweb.cocoon.XSLTProcessorImpl"
         init-method="initialize"
         scope="prototype">
-        <constructor-arg ref="org.apache.excalibur.xmlizer.XMLizer"/>
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
         <constructor-arg ref="org.apache.excalibur.store.Store/TransientStore"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <property name="transformerFactory" value="net.sf.joost.trax.TransformerFactoryImpl"/>
