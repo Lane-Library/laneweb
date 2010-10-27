@@ -12,7 +12,6 @@ public class ServletContextDataBinder implements DataBinder {
 
     private ServletContext servletContext;
 
-    @Override
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         model.put(Model.VERSION, this.servletContext.getAttribute("laneweb.context.version"));
         model.put(Model.MEDBLOG_BASE, this.servletContext.getAttribute("laneweb.context.medblog-base"));

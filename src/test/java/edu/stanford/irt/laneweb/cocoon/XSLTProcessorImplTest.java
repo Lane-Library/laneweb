@@ -48,7 +48,6 @@ public class XSLTProcessorImplTest {
         // this.xmlizer = createMock(XMLizer.class);
         this.saxParser = new SAXParser() {
 
-            @Override
             public void parse(InputSource in, ContentHandler consumer) throws SAXException, IOException {
                 XMLReader reader = XMLReaderFactory.createXMLReader();
                 reader.setContentHandler(consumer);
