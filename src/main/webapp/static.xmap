@@ -32,7 +32,7 @@
                     <map:parameter name="alt-src" value="${default-resources-base}/{2}.css"/>
                 </map:read>
             </map:match>
-            <map:match pattern="resources/**.manifest" type="wildcard">
+            <map:match pattern="**.manifest" type="wildcard">
                 <map:read type="txt-resource" src="${resources-base}/{1}.manifest" mime-type="text/cache-manifest">
                     <map:parameter name="alt-src" value="${default-resources-base}/{1}.manifest"/>
                 </map:read>
