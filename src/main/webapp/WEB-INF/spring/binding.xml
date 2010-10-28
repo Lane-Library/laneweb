@@ -84,13 +84,7 @@
     </bean>
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ticket"
         class="edu.stanford.irt.laneweb.servlet.binding.TicketDataBinder">
-        <property name="ezproxyKey">
-            <!-- TODO: get this from servlet context . . .-->
-            <bean id="org.springframework.jndi.JndiObjectFactoryBean"
-                class="org.springframework.jndi.JndiObjectFactoryBean">
-                <property name="jndiName" value="java:comp/env/ezproxy-key"/>
-            </bean>
-        </property>
+        <property name="ezproxyKey" value="#{contextAttributes['laneweb.context.ezproxy-key']}"/>
     </bean>
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-parameter"
         class="edu.stanford.irt.laneweb.servlet.binding.RequestParameterDataBinder"/>

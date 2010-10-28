@@ -165,22 +165,15 @@
     </xsl:template>
 
     <!-- put version into /resources @src -->
-    <xsl:template match="@src[starts-with(.,'/resources')]">
+    <xsl:template match="h:script/@src[starts-with(.,'/resources')]">
         <xsl:attribute name="src">
             <xsl:value-of
                 select="concat($base-path,'/resources/',$version,substring-after(.,'/resources'))"/>
         </xsl:attribute>
     </xsl:template>
-    
-    <!-- but not for /resources/images/m @src FIXME: . . . .-->
-    <xsl:template match="@src[starts-with(.,'/resources/images/m')]">
-        <xsl:attribute name="src">
-            <xsl:value-of select="concat($base-path, .)"/>
-        </xsl:attribute>
-    </xsl:template>
 
     <!-- put version into css href -->
-    <xsl:template match="@href[starts-with(.,'/resources/css')]">
+    <xsl:template match="h:link/@href[starts-with(.,'/resources/css')]">
         <xsl:attribute name="href">
             <xsl:value-of select="concat($base-path,'/resources/',$version,'/css',substring-after(.,'/css'))"/>
         </xsl:attribute>

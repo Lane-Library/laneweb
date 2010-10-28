@@ -19,15 +19,15 @@ import javax.servlet.ServletContextListener;
  */
 public class LanewebContextListener implements ServletContextListener {
 
-    private static final String EZPROXY_KEY = "ezproxy-key";
+    public static final String EZPROXY = "laneweb.context.ezproxy-key";
 
-    private static final String LIVE_BASE_KEY = "laneweb.context.live-base";
+    public static final String LIVE_BASE = "laneweb.context.live-base";
 
-    private static final String MEDBLOG_BASE_KEY = "laneweb.context.medblog-base";
+    public static final String MEDBLOG_BASE = "laneweb.context.medblog-base";
 
-    private static final String STAGE_BASE_KEY = "laneweb.context.stage-base";
+    public static final String STAGE_BASE = "laneweb.context.stage-base";
 
-    private static final String VERSION_KEY = "laneweb.context.version";
+    public static final String VERSION = "laneweb.context.version";
 
     private Context namingContext;
 
@@ -38,11 +38,11 @@ public class LanewebContextListener implements ServletContextListener {
 
     public void contextInitialized(final ServletContextEvent sce) {
         this.servletContext = sce.getServletContext();
-        this.servletContext.setAttribute(LIVE_BASE_KEY, getURL(LIVE_BASE_KEY));
-        this.servletContext.setAttribute(STAGE_BASE_KEY, getURL(STAGE_BASE_KEY));
-        this.servletContext.setAttribute(MEDBLOG_BASE_KEY, getURL(MEDBLOG_BASE_KEY));
-        this.servletContext.setAttribute(EZPROXY_KEY, getValue(EZPROXY_KEY));
-        this.servletContext.setAttribute(VERSION_KEY, getValue(VERSION_KEY));
+        this.servletContext.setAttribute(LIVE_BASE, getURL(LIVE_BASE));
+        this.servletContext.setAttribute(STAGE_BASE, getURL(STAGE_BASE));
+        this.servletContext.setAttribute(MEDBLOG_BASE, getURL(MEDBLOG_BASE));
+        this.servletContext.setAttribute(EZPROXY, getValue(EZPROXY));
+        this.servletContext.setAttribute(VERSION, getValue(VERSION));
     }
 
     /**
