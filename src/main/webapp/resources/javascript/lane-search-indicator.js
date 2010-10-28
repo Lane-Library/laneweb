@@ -3,7 +3,7 @@
         var Y = LANE.Y,
             indicator = Y.one("#searchIndicator");
         if (!indicator) {
-            indicator = Y.Node.create("<div id='searchIndicator'><img src='/././images/backgr/search-indicator.gif'/></div>");
+            indicator = Y.Node.create("<div id='searchIndicator'><img src='/././images/search-indicator.gif'/></div>");
             indicator.setStyle("display","none");
             Y.one("body").append(indicator);
         }

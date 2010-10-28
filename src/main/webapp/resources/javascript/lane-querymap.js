@@ -68,7 +68,7 @@
                             // track mapped term and descriptor
                             img = document.createElement('img');
                             img.style.display = "none";
-                            img.src = "/././graphics/spacer.gif?log=QM&d=" + LANE.search.querymap.resourceMap.descriptor + "&k=" + LANE.SearchResult.getEncodedSearchTerms();
+                            img.src = "/././resources/images/spacer.gif?log=QM&d=" + LANE.search.querymap.resourceMap.descriptor + "&k=" + LANE.SearchResult.getEncodedSearchTerms();
                             queryMapping.append(img);
                             
                             LANE.search.querymap.getResultCounts();

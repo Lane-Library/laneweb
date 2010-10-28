@@ -45,7 +45,7 @@
                                 </select>
                                 <a id="searchTips" href="/help/choose-search.html">Choose Best Search for You</a>
                                 <div id="searchIndicator"><img alt="[searching]"
-                                        src="/resources/images/backgr/search-indicator.gif"/></div>
+                                        src="/resources/images/search-indicator.gif"/></div>
                                 <input name="q" id="searchTerms" type="text"/>
                                 <input id="searchSubmit" type="submit" value="search"/>
                                 <a id="searchReset" href="/">Clear Search</a>

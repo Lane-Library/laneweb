@@ -48,7 +48,7 @@ em {
 }
 .rss-link {
     float:right;
-    background-image:url(/././graphics/icons/rss.png);
+    background-image:url(/././resources/images/rss.png);
     height:13px;
     width:13px;
     background-repeat:no-repeat;
@@ -56,7 +56,7 @@ em {
     text-indent:-1000px
 }
 .rss-link:hover {
-    background-image:url(/././graphics/icons/rss_over.png);
+    background-image:url(/././resources/images/rss_over.png);
     border-bottom:none;
 }
 #back-old-site {

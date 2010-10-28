@@ -3,7 +3,7 @@
     display: block;
     font-size: 0;
     color: white;
-    background-image: url(/././graphics/buttons/sprite-but-off.gif);
+    background-image: url(/././resources/images/sprite-but-off.gif);
     background-repeat: no-repeat;
     height: 27px;
     width: 147px;
@@ -14,7 +14,7 @@
     color: white;
 }
 .button:hover {
-    background: transparent url(/././graphics/buttons/sprite-but-on.gif);
+    background: transparent url(/././resources/images/sprite-but-on.gif);
     border: none;
     color: white;
 }
@@ -57,7 +57,7 @@
 }
 /*see all button on ej and search pages*/
 #seeAll {
-    background-image: url(/././graphics/buttons/seeall-but-off.gif);
+    background-image: url(/././resources/images/seeall-but-off.gif);
     border-bottom: none;
     float: right;
     height: 26px;
@@ -69,5 +69,5 @@
     width: 95px;
 }
 #seeAll:hover {
-    background-image: url(/././graphics/buttons/seeall-but-on.gif);
+    background-image: url(/././resources/images/seeall-but-on.gif);
 }
