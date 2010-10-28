@@ -1,8 +1,6 @@
 CACHE MANIFEST
 #/././resources/javascript/${project.version}/lane-mobile.js
 #/././resources/css/${project.version}/lane-mobile.css
-#/././resources/javascript/1.11.RC2-SNAPSHOT/lane-mobile.js
-#/././resources/css/1.11.RC2-SNAPSHOT/lane-mobile.css
 http://www.google-analytics.com/ga.js
 /././resources/images/m/backButton.png
 /././resources/images/m/backButtonBack.png
