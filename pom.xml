@@ -93,6 +93,8 @@
                         <exclude>**/lane-mobile.css</exclude>
                         <exclude>**/lane-mobile.js</exclude>
                         <exclude>**/test/*/*.js</exclude>
+                        <exclude>**/yui.js</exclude>
+                        <exclude>**/yui.css</exclude>
                     </excludes>
                     <aggregations>
                         <aggregation>
