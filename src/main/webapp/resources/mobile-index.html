@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" manifest="/resources/lane.manifest">
+    <head>
+        <title>Express Lane</title>
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+        <!-- 
+            <link rel="icon" type="image/png" href="/resources/images/m/lane-favicon.ico" />
+            <link rel="apple-touch-icon" href="/resources/images/m/lane-touch-icon.png" />
+        -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta id="ipGroup" name="WT.seg_1" content="{ipGroup}"/>
+        <link rel="stylesheet" href="/resources/css/lane-mobile.css" type="text/css" />
+        <style type="text/css">body{background:none;}</style>
+    </head>
+
+    <body>
+        <div class="toolbar">
+            <h1 id="pageTitle"> </h1>
+            <a id="backButton" class="button" href="#"> </a>
+            <a id="homeButton" href="#home"> <img src="/resources/images/m/home.png" alt="home"/></a>
+            <img id="loading" alt="loading" src="/resources/images/m/loading.gif"/>
+        </div>
+        
+        <ul id="home" title="Express Lane 	&#946;" selected="true">
+            <form id="laneSearch" class="dialog" action="/ms/msc/pubmed,pubmed_systematicreviews,pubmed_clinicaltrial,scopus" method="get">
+                <fieldset>
+                    <span id="searchLink">
+                        <img alt="search" src="/resources/images/m/search.png"/>
+                    </span>
+                    <span id="searchCancel">
+                        <img alt="cancel" src="/resources/images/m/cancel.png"/>
+                    </span>
+                    <input id="searchInput" title="Search ... " type="search" placeholder="Lane Search" name="q"/>
+                    <div class="sgstCnt">
+                        <ul id="searchInputSgst"> </ul>
+                    </div>
+                </fieldset>
+            </form>
+            
+            <li><a href="#clinical">Clinical/PICO Search</a></li>
+            <li><a href="top.html">Mobile Essentials</a></li>
+            <li><a href="ej.html">Journals</a></li>
+            <li><a href="book.html">Books</a></li>
+            <li><a href="tips.html">Configuration Tips</a></li>
+            <li><a href="#info">Hours &amp; Contact Info</a></li>
+            <li><a href="fb.html">Feedback</a></li>
+            <li id="loginLink"><a href="login.html">Login</a></li>
+            <li class="footer">Go to <a target="_self" href="/">desktop version of Lane Medical Library</a> <span class="suCopy">&#169; Stanford University</span></li>
+        </ul>
+        
+        <div id="info" class="panel" title="Lane Info">
+            <ul>
+                <li style="text-align:left;padding-left:10px;"><h3>Hours</h3></li>
+                <li style="padding:10px;">Mon&#8211;Thu 8:00 am &#8211; 10:00 pm 
+                    <br/>Fri 8:00 am &#8211; 8:00 pm 
+                    <br/>Sat 10:00 am &#8211; 8:00 pm 
+                    <br/>Sun 12:00 pm &#8211; 12:00 am </li>
+            </ul>
+            <ul>
+                <li style="text-align:left;padding-left:10px;"><h3>Contact Us</h3></li>
+                <li style="padding:10px;"><a href="mailto:LaneAskUs@stanford.edu"
+                    >LaneAskUs@stanford.edu</a></li>
+                <li style="padding:10px;"><a href="tel:650-723-6831">650-723-6831</a></li>
+            </ul>
+        </div>
+        
+        <div id="clinical" title="PICO Search" class="panel">
+            <form id="pico" action="/ms/sc/pubmed,pubmed_systematicreviews,pubmed_clinicaltrial,pubmed_guidelines,pubmed_recent_reviews,pubmed_treatment_focused,pubmed_diagnosis_focused,pubmed_prognosis_focused,pubmed_harm_focused,pubmed_etiology_focused,pubmed_epidemiology_focused,pubmed_rct,pubmed_cochrane_reviews,acpjc,dare,uptodate,bmj_clinical_evidence,clinicalresource,emedicine,aafp_patients,medlineplus" method="get">
+                <fieldset>
+                    <input type="search" id="p" name="p" placeholder="patient condition"/>
+                    <div class="sgstCnt">
+                        <ul id="pSgst"> </ul>
+                    </div>
+                    
+                    <input type="search" id="i" name="i" placeholder="intervention"/>
+                    <div class="sgstCnt">
+                        <ul id="iSgst"> </ul>
+                    </div>
+                    
+                    <input type="search" id="c" name="c" placeholder="comparison"/>
+                    <div class="sgstCnt">
+                        <ul id="cSgst"> </ul>
+                    </div>
+                    
+                    <input type="search" id="o" name="o" placeholder="outcome"/>
+                    <div class="sgstCnt">
+                        <ul id="oSgst"> </ul>
+                    </div>
+                    <input type="hidden" name="q" value=""/>
+                    <input type="submit" value="Search"/>
+                    <input id="picoClr" type="reset" value="clear"/>
+                </fieldset>
+            </form>
+        </div>
+        
+        <div id="fbr" class="panel" title="Feedback">
+            <div>Thank you for your feedback!</div>
+        </div>
+        <script type="text/javascript" src="/resources/javascript/lane-mobile.js"></script>
+    </body>
+</html>

@@ -164,11 +164,18 @@
         <xsl:apply-templates select="h:body/child::node()"/>
     </xsl:template>
 
-    <!-- put version into javascript @src -->
+    <!-- put version into /resources @src -->
     <xsl:template match="@src[starts-with(.,'/resources')]">
         <xsl:attribute name="src">
             <xsl:value-of
                 select="concat($base-path,'/resources/',$version,substring-after(.,'/resources'))"/>
+        </xsl:attribute>
+    </xsl:template>
+    
+    <!-- but not for /resources/images/m @src FIXME: . . . .-->
+    <xsl:template match="@src[starts-with(.,'/resources/images/m')]">
+        <xsl:attribute name="src">
+            <xsl:value-of select="concat($base-path, .)"/>
         </xsl:attribute>
     </xsl:template>
 
