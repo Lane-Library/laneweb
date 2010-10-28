@@ -27,7 +27,7 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
     
     private URL defaultContentBase;
     
-    private URL defaultResourcesBase;
+    private URL resourcesBase;
     
     private URL stageBase;
     
@@ -57,7 +57,7 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
         String servletPath = requestURI.substring(contextPath.length());
         request.setAttribute(Model.BASE_PATH, getBasePath(servletPath, contextPath));
         request.setAttribute(Model.CONTENT_BASE, getContentBase(servletPath, contextPath));
-        request.setAttribute(Model.RESOURCES_BASE, getResourcesBase(servletPath, contextPath));
+        request.setAttribute(Model.RESOURCES_BASE, this.resourcesBase);
         return true;
     }
 
@@ -67,17 +67,8 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
     }
 
     
-    public void setDefaultResourcesBase(URL defaultResourcesBase) {
-        this.defaultResourcesBase = defaultResourcesBase;
-    }
-
-    private URL getResourcesBase(String servletPath, String contextPath) throws MalformedURLException {
-        for (String key : this.baseMappings.keySet()) {
-            if (servletPath.indexOf(key) == 0) {
-                return new URL(this.baseMappings.get(key) + "/resources");
-            }
-        }
-        return this.defaultResourcesBase;
+    public void setResourcesBase(URL resourcesBase) {
+        this.resourcesBase = resourcesBase;
     }
 
     private URL getContentBase(String servletPath, String contextPath) throws MalformedURLException {

@@ -18,7 +18,7 @@ public class LanewebPathInterceptorTest {
 
     private URL defaultContentBase;
 
-    private URL defaultResourcesBase;
+    private URL resourcesBase;
 
     private LanewebPathInterceptor interceptor;
 
@@ -27,19 +27,16 @@ public class LanewebPathInterceptorTest {
     private URL stageBase;
     
     private URL ceyatesContent;
-    
-    private URL ceyatesResources;
 
     @Before
     public void setUp() throws Exception {
         this.interceptor = new LanewebPathInterceptor();
         this.defaultContentBase = new URL("file:/afs/ir.stanford.edu/groups/lane/beta2/live");
-        this.defaultResourcesBase = new URL("file:/resources");
+        this.resourcesBase = new URL("file:/resources");
         this.stageBase = new URL("file:/afs/ir.stanford.edu/groups/lane/beta2/stage");
         this.ceyatesContent = new URL("file:/afs/ir.stanford.edu/users/c/e/ceyates/laneweb/content");
-        this.ceyatesResources = new URL("file:/afs/ir.stanford.edu/users/c/e/ceyates/laneweb/resources");
         this.interceptor.setDefaultContentBase(this.defaultContentBase);
-        this.interceptor.setDefaultResourcesBase(this.defaultResourcesBase);
+        this.interceptor.setResourcesBase(this.resourcesBase);
         this.interceptor.setStageBase(this.stageBase);
         this.request = createMock(HttpServletRequest.class);
     }
@@ -50,7 +47,7 @@ public class LanewebPathInterceptorTest {
         expect(this.request.getContextPath()).andReturn("");
         this.request.setAttribute(Model.BASE_PATH, "");
         this.request.setAttribute(Model.CONTENT_BASE, this.defaultContentBase);
-        this.request.setAttribute(Model.RESOURCES_BASE, this.defaultResourcesBase);
+        this.request.setAttribute(Model.RESOURCES_BASE, this.resourcesBase);
         replay(this.request);
         this.interceptor.preHandle(this.request, null, null);
         verify(this.request);
@@ -62,7 +59,7 @@ public class LanewebPathInterceptorTest {
         expect(this.request.getContextPath()).andReturn("");
         this.request.setAttribute(Model.BASE_PATH, "/stage");
         this.request.setAttribute(Model.CONTENT_BASE, this.stageBase);
-        this.request.setAttribute(Model.RESOURCES_BASE, this.defaultResourcesBase);
+        this.request.setAttribute(Model.RESOURCES_BASE, this.resourcesBase);
         replay(this.request);
         this.interceptor.preHandle(this.request, null, null);
         verify(this.request);
@@ -74,7 +71,7 @@ public class LanewebPathInterceptorTest {
         expect(this.request.getContextPath()).andReturn("/laneweb");
         this.request.setAttribute(Model.BASE_PATH, "/laneweb");
         this.request.setAttribute(Model.CONTENT_BASE, this.defaultContentBase);
-        this.request.setAttribute(Model.RESOURCES_BASE, this.defaultResourcesBase);
+        this.request.setAttribute(Model.RESOURCES_BASE, this.resourcesBase);
         replay(this.request);
         this.interceptor.preHandle(this.request, null, null);
         verify(this.request);
@@ -86,7 +83,7 @@ public class LanewebPathInterceptorTest {
         expect(this.request.getContextPath()).andReturn("/laneweb");
         this.request.setAttribute(Model.BASE_PATH, "/laneweb/stage");
         this.request.setAttribute(Model.CONTENT_BASE, this.stageBase);
-        this.request.setAttribute(Model.RESOURCES_BASE, this.defaultResourcesBase);
+        this.request.setAttribute(Model.RESOURCES_BASE, this.resourcesBase);
         replay(this.request);
         this.interceptor.preHandle(this.request, null, null);
         verify(this.request);
@@ -98,7 +95,7 @@ public class LanewebPathInterceptorTest {
         expect(this.request.getContextPath()).andReturn("");
         this.request.setAttribute(Model.BASE_PATH, "/ceyates");
         this.request.setAttribute(Model.CONTENT_BASE, this.ceyatesContent);
-        this.request.setAttribute(Model.RESOURCES_BASE, this.ceyatesResources);
+        this.request.setAttribute(Model.RESOURCES_BASE, this.resourcesBase);
         replay(this.request);
         this.interceptor.preHandle(this.request, null, null);
         verify(this.request);
@@ -110,7 +107,7 @@ public class LanewebPathInterceptorTest {
         expect(this.request.getContextPath()).andReturn("/laneweb");
         this.request.setAttribute(Model.BASE_PATH, "/laneweb/ceyates");
         this.request.setAttribute(Model.CONTENT_BASE, this.ceyatesContent);
-        this.request.setAttribute(Model.RESOURCES_BASE, this.ceyatesResources);
+        this.request.setAttribute(Model.RESOURCES_BASE, this.resourcesBase);
         replay(this.request);
         this.interceptor.preHandle(this.request, null, null);
         verify(this.request);

@@ -49,13 +49,13 @@
                 </map:act>
             </map:match>
             <map:match pattern="cookiesFetch.html" type="wildcard">
-                <map:generate type="file" src="${default-resources-base}/cookiesFetch.html"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/cookiesFetch.xsl"/>
+                <map:generate type="file" src="${resources-base}/cookiesFetch.html"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/cookiesFetch.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="postMethodHelper.html" type="wildcard">
                 <map:generate type="request"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/postMethodHelper.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/postMethodHelper.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <!-- TODO: remove this once catalog, elane, sfx, illiad, etc. links updated -->
@@ -70,7 +70,7 @@
             <map:match pattern="plain/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
                 <map:transform type="html-cme-links"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl"/>
                 <map:transform type="proxy-links"/>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
@@ -78,8 +78,8 @@
             <!-- mobile content -->
             <map:match pattern="mobile/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon:/content/{1}.html"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/mobile-content.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/mobile-content.xsl"/>
                 <map:transform type="proxy-links"/>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
@@ -90,7 +90,7 @@
             </map:match>
             <map:match pattern="test/**.html" type="wildcard">
                 <map:generate type="html" src="${resources-base}/test/{1}.html"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
@@ -100,7 +100,7 @@
                 </map:aggregate>
                 <map:transform type="html-cme-links"/>
                 <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
-                    <map:parameter name="alt-src" value="${default-resources-base}/xsl/laneweb.xsl"/>
+                    <map:parameter name="alt-src" value="${resources-base}/xsl/laneweb.xsl"/>
                 </map:transform>
                 <map:transform type="proxy-links"/>
                 <map:transform type="namespace-filter"/>
@@ -125,7 +125,7 @@
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
                 </map:aggregate>
                 <map:transform type="html-cme-links"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/laneweb.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl"/>
                 <map:transform type="proxy-links"/>
                 <map:transform type="namespace-filter"/>
                 <map:transform type="debug"/>

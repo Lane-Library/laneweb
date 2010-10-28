@@ -29,9 +29,9 @@
                             src="cocoon:/cached/search/all/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl"/>
-                    <map:transform type="joost" src="${default-resources-base}/xsl/eresources-rss-link.stx"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl"/>
+                    <map:transform type="joost" src="${resources-base}/xsl/eresources-rss-link.stx"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- articles search pages (parameter is articles-all, articles-pubmed, articles-uptodate, etc)-->
@@ -44,8 +44,8 @@
                             src="cocoon:/cached/search/articles/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- catalog search pages (parameter is catalog-all, catalog-ej, catalog-book, etc)-->
@@ -59,8 +59,8 @@
                             src="cocoon:/cached/search/catalog/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- clinical search pages (parameter is clinical-all, clinical-pubmed, clinical-uptodate, etc)-->
@@ -72,9 +72,9 @@
                             src="cocoon:/cached/search/clinical/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl"/>
-                    <map:transform type="joost" src="${default-resources-base}/xsl/eresources-rss-link.stx"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl"/>
+                    <map:transform type="joost" src="${resources-base}/xsl/eresources-rss-link.stx"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- bioresearch -->
@@ -84,7 +84,7 @@
                         <map:part src="cocoon:/apps/search/xml"/>
                         <map:part src="cocoon:/cached/search/${source}.html"/>
                     </map:aggregate>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/metasearch.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/metasearch.xsl"/>
                     <map:transform type="xinclude"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -99,9 +99,9 @@
                             src="cocoon:/cached/search/history/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl"/>
-                    <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl"/>
-                    <map:transform type="joost" src="${default-resources-base}/xsl/eresources-rss-link.stx"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl"/>
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl"/>
+                    <map:transform type="joost" src="${resources-base}/xsl/eresources-rss-link.stx"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search.html" type="wildcard">
@@ -115,8 +115,8 @@
             <map:match pattern="search/*/*.html" type="wildcard">
                 <map:generate src="cocoon:/cached/search/{1}/{2}.html" type="file"/>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/search-facets.xsl"/>
-                <map:transform type="saxon" src="${default-resources-base}/xsl/search-post.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/search-facets.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/search-post.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
