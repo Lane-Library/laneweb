@@ -6,6 +6,7 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.isA;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -22,16 +23,16 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
 
 
-public class TicketDataBinderTest {
+public class SunetIdAndTicketDataBinderTest {
     
-    private TicketDataBinder dataBinder;
+    private SunetIdAndTicketDataBinder dataBinder;
     private HttpServletRequest request;
     private Map<String, Object> model;
     private HttpSession session;
 
     @Before
     public void setUp() throws Exception {
-        this.dataBinder = new TicketDataBinder();
+        this.dataBinder = new SunetIdAndTicketDataBinder();
         this.dataBinder.setEzproxyKey("foo");
         this.model = new HashMap<String, Object>();
         this.request = createMock(HttpServletRequest.class);
@@ -40,7 +41,8 @@ public class TicketDataBinderTest {
 
     @Test
     public void testBind() {
-        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.request.getSession()).andReturn(this.session).times(2);
+        expect(this.session.getAttribute(Model.SUNETID)).andReturn("ditenus");
         expect(this.session.getAttribute(Model.TICKET)).andReturn(null);
         this.session.setAttribute(eq(Model.TICKET), isA(Ticket.class));
         replay(this.request, this.session);
@@ -49,6 +51,7 @@ public class TicketDataBinderTest {
         Ticket ticket = (Ticket) this.model.get(Model.TICKET);
         assertNotNull(ticket);
         assertTrue(ticket.isValid());
+        assertEquals("ditenus", this.model.get(Model.SUNETID));
         verify(this.request, this.session);
     }
 }

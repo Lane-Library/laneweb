@@ -13,7 +13,6 @@
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ticket"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-parameter"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-method"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"/>
@@ -26,7 +25,9 @@
 
 
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"
-        class="edu.stanford.irt.laneweb.servlet.binding.SunetIdDataBinder"/>
+        class="edu.stanford.irt.laneweb.servlet.binding.SunetIdAndTicketDataBinder">
+        <property name="ezproxyKey" value="#{contextAttributes['laneweb.context.ezproxy-key']}"/>
+    </bean>
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"
         class="edu.stanford.irt.laneweb.servlet.binding.BooleanSessionParameterDataBinder">
         <property name="parameterName" value="debug"/>
@@ -48,10 +49,6 @@
         class="edu.stanford.irt.laneweb.servlet.binding.StringSessionParameterDataBinder">
         <property name="parameterName" value="emrid"/>
         <property name="modelKey" value="emrid"/>
-    </bean>
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ticket"
-        class="edu.stanford.irt.laneweb.servlet.binding.TicketDataBinder">
-        <property name="ezproxyKey" value="#{contextAttributes['laneweb.context.ezproxy-key']}"/>
     </bean>
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-parameter"
         class="edu.stanford.irt.laneweb.servlet.binding.RequestParameterDataBinder"/>

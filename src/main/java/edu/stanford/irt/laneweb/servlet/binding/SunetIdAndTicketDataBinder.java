@@ -7,15 +7,18 @@ import javax.servlet.http.HttpSession;
 
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
+import edu.stanford.irt.laneweb.servlet.SunetIdSource;
 
+public class SunetIdAndTicketDataBinder implements DataBinder {
 
-public class TicketDataBinder implements DataBinder {
-    
     private String ezproxyKey;
 
-    public void bind(Map<String, Object> model, HttpServletRequest request) {
-        String sunetid = (String) model.get(Model.SUNETID);
+    private SunetIdSource sunetIdSource = new SunetIdSource();
+
+    public void bind(final Map<String, Object> model, final HttpServletRequest request) {
+        String sunetid = this.sunetIdSource.getSunetid(request);
         if (sunetid != null) {
+            model.put(Model.SUNETID, sunetid);
             HttpSession session = request.getSession();
             Ticket ticket = (Ticket) session.getAttribute(Model.TICKET);
             if (ticket == null || !ticket.isValid()) {
