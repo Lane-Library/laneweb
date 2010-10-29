@@ -38,8 +38,6 @@
     </bean>
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"
         class="edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder">
-        <property name="parameterName" value="proxy-links"/>
-        <property name="modelKey" value="proxy-links"/>
         <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"/>
     </bean>
     <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"

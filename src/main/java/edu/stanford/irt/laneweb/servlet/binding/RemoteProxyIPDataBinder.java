@@ -14,7 +14,7 @@ import edu.stanford.irt.laneweb.model.Model;
  * @author ceyates
  *
  */
-public class RemoteProxyIPDataBinder extends BooleanSessionParameterDataBinder {
+public class RemoteProxyIPDataBinder implements DataBinder {
 
     private static final String X_FORWARDED_FOR = "X-FORWARDED-FOR";
     
@@ -35,12 +35,17 @@ public class RemoteProxyIPDataBinder extends BooleanSessionParameterDataBinder {
             session.setAttribute(Model.IPGROUP, ipGroup);
         }
         model.put(Model.IPGROUP, ipGroup);
-        super.bind(model, request);
-        if (model.get(Model.PROXY_LINKS) == null || !isSameIP) {
-            Boolean proxyLinks = this.proxyLinks.getProxyLinks(request, session, ipGroup, currentIP);
+        Boolean proxyLinks = null;
+        String requestParameter = request.getParameter(Model.PROXY_LINKS);
+        if (requestParameter != null) {
+            proxyLinks = Boolean.parseBoolean(requestParameter);
+        } else if (isSameIP) {
+            proxyLinks = (Boolean) session.getAttribute(Model.PROXY_LINKS);
+        } else {
+            proxyLinks = this.proxyLinks.getProxyLinks(request, session, ipGroup, currentIP);
             session.setAttribute(Model.PROXY_LINKS, proxyLinks);
-            model.put(Model.PROXY_LINKS, proxyLinks);
         }
+        model.put(Model.PROXY_LINKS, proxyLinks);
     }
     
     public void setProxyLinks(ProxyLinks proxyLinks) {

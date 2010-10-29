@@ -4,6 +4,8 @@ import static org.easymock.EasyMock.expect;
 import static org.easymock.classextension.EasyMock.createMock;
 import static org.easymock.classextension.EasyMock.replay;
 import static org.easymock.classextension.EasyMock.verify;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
@@ -30,8 +32,6 @@ public class RemoteProxyIPDataBinderTest {
     @Before
     public void setUp() {
         this.dataBinder = new RemoteProxyIPDataBinder();
-        this.dataBinder.setModelKey(Model.PROXY_LINKS);
-        this.dataBinder.setParameterName(Model.PROXY_LINKS);
         this.model = new HashMap<String, Object>();
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
@@ -40,36 +40,59 @@ public class RemoteProxyIPDataBinderTest {
     }
 
     @Test
-    public void testBindSameIP() {
-        expect(this.request.getRemoteAddr()).andReturn("174.31.153.109");
-        expect(this.request.getSession()).andReturn(this.session).times(2);
+    public void testBindNoPreviousIPOther() {
+        expect(this.request.getRemoteAddr()).andReturn("97.126.62.121");
+        expect(this.request.getSession()).andReturn(this.session);
         expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
-        expect(this.session.getAttribute(Model.REMOTE_ADDR)).andReturn("174.31.153.109");
-        expect(this.session.getAttribute(Model.IPGROUP)).andReturn(IPGroup.OTHER);
         expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn(null);
-        expect(this.session.getAttribute(Model.PROXY_LINKS)).andReturn(null);
+        expect(this.session.getAttribute(Model.REMOTE_ADDR)).andReturn(null);
+        expect(this.session.getAttribute(Model.IPGROUP)).andReturn(null);
+        this.session.setAttribute(Model.REMOTE_ADDR, "97.126.62.121");
         this.session.setAttribute(Model.PROXY_LINKS, Boolean.TRUE);
-        expect(this.proxyLinks.getProxyLinks(this.request, this.session, IPGroup.OTHER, "174.31.153.109")).andReturn(Boolean.TRUE);
+        this.session.setAttribute(Model.IPGROUP, IPGroup.OTHER);
+        expect(this.proxyLinks.getProxyLinks(this.request, this.session, IPGroup.OTHER, "97.126.62.121")).andReturn(Boolean.TRUE);
         replay(this.request, this.session, this.proxyLinks);
         this.dataBinder.bind(this.model, this.request);
         assertTrue((Boolean)this.model.get(Model.PROXY_LINKS));
+        assertEquals(IPGroup.OTHER, this.model.get(Model.IPGROUP));
+        assertEquals("97.126.62.121", this.model.get(Model.REMOTE_ADDR));
         verify(this.request, this.session, this.proxyLinks);
     }
 
-//    @Test
-//    public void testBindDifferentIP() {
-//        expect(this.request.getRemoteAddr()).andReturn("174.31.153.109");
-//        expect(this.request.getSession()).andReturn(this.session).times(2);
-//        expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
-//        expect(this.session.getAttribute(Model.REMOTE_ADDR)).andReturn("171.65.65.2");
-//        expect(this.session.getAttribute(Model.IPGROUP)).andReturn(IPGroup.OTHER);
-//        expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn(null);
-//        expect(this.session.getAttribute(Model.PROXY_LINKS)).andReturn(null);
-//        this.session.setAttribute(Model.PROXY_LINKS, Boolean.TRUE);
-//        expect(this.proxyLinks.getProxyLinks(this.request, this.session, IPGroup.OTHER, "174.31.153.109")).andReturn(Boolean.TRUE);
-//        replay(this.request, this.session, this.proxyLinks);
-//        this.dataBinder.bind(this.model, this.request);
-//        assertTrue((Boolean)this.model.get(Model.PROXY_LINKS));
-//        verify(this.request, this.session, this.proxyLinks);
-//    }
+    @Test
+    public void testBindSameIP() {
+        expect(this.request.getRemoteAddr()).andReturn("97.126.62.121");
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
+        expect(this.session.getAttribute(Model.REMOTE_ADDR)).andReturn("97.126.62.121");
+        expect(this.session.getAttribute(Model.IPGROUP)).andReturn(IPGroup.OTHER);
+        expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn(null);
+        expect(this.session.getAttribute(Model.PROXY_LINKS)).andReturn(Boolean.TRUE);
+        replay(this.request, this.session, this.proxyLinks);
+        this.dataBinder.bind(this.model, this.request);
+        assertTrue((Boolean)this.model.get(Model.PROXY_LINKS));
+        assertEquals(IPGroup.OTHER, this.model.get(Model.IPGROUP));
+        assertEquals("97.126.62.121", this.model.get(Model.REMOTE_ADDR));
+        verify(this.request, this.session, this.proxyLinks);
+    }
+
+    @Test
+    public void testBindDifferentIP() {
+        expect(this.request.getRemoteAddr()).andReturn("171.65.1.202");
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
+        expect(this.session.getAttribute(Model.REMOTE_ADDR)).andReturn("97.126.62.121");
+        expect(this.session.getAttribute(Model.IPGROUP)).andReturn(IPGroup.OTHER);
+        expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn(null);
+        expect(this.proxyLinks.getProxyLinks(this.request, this.session, IPGroup.SOM_OTHER, "171.65.1.202")).andReturn(Boolean.FALSE);
+        this.session.setAttribute(Model.REMOTE_ADDR, "171.65.1.202");
+        this.session.setAttribute(Model.IPGROUP, IPGroup.SOM_OTHER);
+        this.session.setAttribute(Model.PROXY_LINKS, Boolean.FALSE);
+        replay(this.request, this.session, this.proxyLinks);
+        this.dataBinder.bind(this.model, this.request);
+        assertFalse((Boolean)this.model.get(Model.PROXY_LINKS));
+        assertEquals(IPGroup.SOM_OTHER, this.model.get(Model.IPGROUP));
+        assertEquals("171.65.1.202", this.model.get(Model.REMOTE_ADDR));
+        verify(this.request, this.session, this.proxyLinks);
+    }
 }
