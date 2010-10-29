@@ -42,14 +42,10 @@ public class RemoteProxyIPDataBinder implements DataBinder {
         } else if (isSameIP) {
             proxyLinks = (Boolean) session.getAttribute(Model.PROXY_LINKS);
         } else {
-            proxyLinks = this.proxyLinks.getProxyLinks(request, session, ipGroup, currentIP);
+            proxyLinks = this.proxyLinks.getProxyLinks(ipGroup, currentIP);
             session.setAttribute(Model.PROXY_LINKS, proxyLinks);
         }
         model.put(Model.PROXY_LINKS, proxyLinks);
-    }
-    
-    public void setProxyLinks(ProxyLinks proxyLinks) {
-        this.proxyLinks = proxyLinks;
     }
     
     protected String getRemoteAddress(HttpServletRequest request) {
@@ -66,5 +62,9 @@ public class RemoteProxyIPDataBinder implements DataBinder {
                 return header;
             }
         }
+    }
+
+    public void setProxyLinks(ProxyLinks proxyLinks) {
+        this.proxyLinks = proxyLinks;
     }
 }
