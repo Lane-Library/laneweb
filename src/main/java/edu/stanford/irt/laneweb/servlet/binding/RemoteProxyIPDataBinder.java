@@ -10,7 +10,7 @@ import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * This DataBinder handles Model attributes that are related to the remote ip address
- * combined here in order to accomodate a change in the clients ip during a sessionl
+ * combined here in order to accommodate a change in the clients ip during a session
  * @author ceyates
  *
  */
