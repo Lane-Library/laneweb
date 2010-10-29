@@ -19,9 +19,6 @@
         </property>
         <property name="urlMap">
             <map>
-                <entry key="/m/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
-                <entry key="/mobile/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
-                <entry key="/ms/**" value-ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"/>
                 <entry key="/tobacco/**" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/tobacco"/>
             </map>
         </property>
@@ -36,16 +33,10 @@
                 <value>PROPFIND</value>
             </set>
         </property>
-        <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder/html"/>
+        <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder"/>
         <property name="servletContext" ref="servletContext"/>
         <property name="processor" ref="org.apache.cocoon.Processor"/>
         <lookup-method bean="edu.stanford.irt.laneweb.model.Model" name="getModel"/>
-    </bean>
-    
-    <bean name="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler/mobile"
-        class="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"
-        parent="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler">
-        <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder/mobile"/>
     </bean>
     
     <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/tobacco"

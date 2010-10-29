@@ -3,41 +3,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/html"
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder"
         class="edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder">
         <property name="dataBinders">
             <list>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-address"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ip-group"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/proxy-links"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ticket"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-parameter"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/request-method"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/user-cookie"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/parent-path"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"/>
-            </list>
-        </property>
-    </bean>
-    
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/mobile"
-        class="edu.stanford.irt.laneweb.servlet.binding.CompositeDataBinder">
-        <property name="dataBinders">
-            <list>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/sunetid"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/debug"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ldap"/>
-                <!-- these next two are different from the html above becase mobile more likely to 
-                    change ip address during a session -->
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/mobile-remote-address"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/mobile-ip-group"/>
-                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/proxy-links"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/template"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/emrid"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ticket"/>
@@ -63,12 +36,8 @@
         class="edu.stanford.irt.laneweb.servlet.binding.LDAPDataBinder">
         <property name="LDAPDataAccess" ref="edu.stanford.irt.laneweb.ldap.LDAPDataAccess"/>
     </bean>
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-address"
-        class="edu.stanford.irt.laneweb.servlet.binding.RemoteAddressDataBinder"/>
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/ip-group"
-        class="edu.stanford.irt.laneweb.servlet.binding.IPGroupDataBinder"/>
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/proxy-links"
-        class="edu.stanford.irt.laneweb.servlet.binding.ProxyLinksDataBinder">
+    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/remote-proxy-ip"
+        class="edu.stanford.irt.laneweb.servlet.binding.RemoteProxyIPDataBinder">
         <property name="parameterName" value="proxy-links"/>
         <property name="modelKey" value="proxy-links"/>
         <property name="proxyLinks" ref="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"/>
@@ -100,11 +69,6 @@
         class="edu.stanford.irt.laneweb.servlet.binding.ServletContextDataBinder">
         <property name="servletContext" ref="servletContext"/>
     </bean>
-
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/mobile-remote-address"
-        class="edu.stanford.irt.laneweb.servlet.binding.MobileRemoteAddressDataBinder"/>
-    <bean name="edu.stanford.irt.laneweb.servlet.binding.DataBinder/mobile-ip-group"
-        class="edu.stanford.irt.laneweb.servlet.binding.MobileIPGroupDataBinder"/>
 
     <bean id="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks"
         class="edu.stanford.irt.laneweb.servlet.binding.ProxyLinks">

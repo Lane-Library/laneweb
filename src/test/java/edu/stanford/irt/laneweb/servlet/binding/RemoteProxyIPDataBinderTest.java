@@ -19,9 +19,9 @@ import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 
 
-public class ProxyLinksDataBinderTest {
+public class RemoteProxyIPDataBinderTest {
     
-    private ProxyLinksDataBinder dataBinder;
+    private RemoteProxyIPDataBinder dataBinder;
     private Map<String, Object> model;
     private HttpServletRequest request;
     private HttpSession session;
@@ -29,7 +29,7 @@ public class ProxyLinksDataBinderTest {
     
     @Before
     public void setUp() {
-        this.dataBinder = new ProxyLinksDataBinder();
+        this.dataBinder = new RemoteProxyIPDataBinder();
         this.dataBinder.setModelKey(Model.PROXY_LINKS);
         this.dataBinder.setParameterName(Model.PROXY_LINKS);
         this.model = new HashMap<String, Object>();
@@ -40,17 +40,36 @@ public class ProxyLinksDataBinderTest {
     }
 
     @Test
-    public void testBind() {
+    public void testBindSameIP() {
+        expect(this.request.getRemoteAddr()).andReturn("174.31.153.109");
         expect(this.request.getSession()).andReturn(this.session).times(2);
+        expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
+        expect(this.session.getAttribute(Model.REMOTE_ADDR)).andReturn("174.31.153.109");
+        expect(this.session.getAttribute(Model.IPGROUP)).andReturn(IPGroup.OTHER);
         expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn(null);
         expect(this.session.getAttribute(Model.PROXY_LINKS)).andReturn(null);
         this.session.setAttribute(Model.PROXY_LINKS, Boolean.TRUE);
         expect(this.proxyLinks.getProxyLinks(this.request, this.session, IPGroup.OTHER, "174.31.153.109")).andReturn(Boolean.TRUE);
         replay(this.request, this.session, this.proxyLinks);
-        this.model.put(Model.IPGROUP, IPGroup.OTHER);
-        this.model.put(Model.REMOTE_ADDR, "174.31.153.109");
         this.dataBinder.bind(this.model, this.request);
         assertTrue((Boolean)this.model.get(Model.PROXY_LINKS));
         verify(this.request, this.session, this.proxyLinks);
     }
+
+//    @Test
+//    public void testBindDifferentIP() {
+//        expect(this.request.getRemoteAddr()).andReturn("174.31.153.109");
+//        expect(this.request.getSession()).andReturn(this.session).times(2);
+//        expect(this.request.getHeader("X-FORWARDED-FOR")).andReturn(null);
+//        expect(this.session.getAttribute(Model.REMOTE_ADDR)).andReturn("171.65.65.2");
+//        expect(this.session.getAttribute(Model.IPGROUP)).andReturn(IPGroup.OTHER);
+//        expect(this.request.getParameter(Model.PROXY_LINKS)).andReturn(null);
+//        expect(this.session.getAttribute(Model.PROXY_LINKS)).andReturn(null);
+//        this.session.setAttribute(Model.PROXY_LINKS, Boolean.TRUE);
+//        expect(this.proxyLinks.getProxyLinks(this.request, this.session, IPGroup.OTHER, "174.31.153.109")).andReturn(Boolean.TRUE);
+//        replay(this.request, this.session, this.proxyLinks);
+//        this.dataBinder.bind(this.model, this.request);
+//        assertTrue((Boolean)this.model.get(Model.PROXY_LINKS));
+//        verify(this.request, this.session, this.proxyLinks);
+//    }
 }
