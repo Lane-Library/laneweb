@@ -10,7 +10,7 @@ import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * This DataBinder handles Model attributes that are related to the remote ip address
- * combined here in order to accommodate a change in the clients ip during a session
+ * combined here in order to accommodate a change in the client's ip during a session
  * @author ceyates
  *
  */
@@ -20,7 +20,6 @@ public class RemoteProxyIPDataBinder implements DataBinder {
     
     private ProxyLinks proxyLinks;
 
-    @Override
     public void bind(Map<String, Object> model, HttpServletRequest request) {
         String currentIP = getRemoteAddress(request);
         HttpSession session = request.getSession();
