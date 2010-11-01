@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-11-01" version="1.11.7" description="1.11.7 bug fix release">
+            <action date="2010-11-01" dev="ceyates" issue="44258" type="fix">
+                guest access link causes 404 page not found
+            </action>
+            <action date="2010-10-29" dev="ceyates" issue="44210" type="update">
+                redirect /lksc-print.html to /help/lksc-print.html
+            </action>
+        </release>
         <release date="2010-10-25" version="1.11.6" description="1.11.6 bug fix release">
             <action date="2010-10-21" dev="ceyates" issue="43875" type="fix">
                 history search fails
