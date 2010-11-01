@@ -47,7 +47,7 @@
         </category>-->
     
     <root>
-        <priority value="ERROR"/>
+        <priority value="DEBUG"/>
         <appender-ref ref="LOG"/>
     </root>
     
