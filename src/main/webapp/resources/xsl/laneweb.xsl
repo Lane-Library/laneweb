@@ -187,16 +187,14 @@
     <xsl:template match="h:script/@src[starts-with(.,'/resources')]">
         <xsl:attribute name="src">
             <xsl:value-of
-                select="concat($base-path,'/resources/',$version,substring-after(.,'/resources'))"/>
+                select="concat($base-path,.,'?',$version)"/>
         </xsl:attribute>
     </xsl:template>
 
     <!-- put version into css href -->
     <xsl:template match="h:link/@href[starts-with(.,'/resources/css')]">
         <xsl:attribute name="href">
-            <xsl:value-of
-                select="concat($base-path,'/resources/',$version,'/css',substring-after(.,'/css'))"
-            />
+            <xsl:value-of select="concat($base-path,.,'?',$version)"/>
         </xsl:attribute>
     </xsl:template>
 
