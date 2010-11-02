@@ -120,7 +120,7 @@
             <title>
                 <xsl:value-of select="h:a" />
             </title>
-            <link>http://lane-beta.stanford.edu/secure/apps/proxy/credential?url=<xsl:value-of select="h:a[1]/@href"/></link>
+            <link>http://lane.stanford.edu/secure/apps/proxy/credential?url=<xsl:value-of select="h:a[1]/@href"/></link>
             <description>
                 <xsl:value-of select="h:a" />
                 -
