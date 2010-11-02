@@ -55,6 +55,10 @@
     margin: 7px 0 0 0;
     height: 48px;
 }
+.button.sul, .button.sul:hover {
+    background-position:-24px -529px;
+    height: 48px;
+}
 /*see all button on ej and search pages*/
 #seeAll {
     background-image: url(/././resources/images/seeall-but-off.gif);
