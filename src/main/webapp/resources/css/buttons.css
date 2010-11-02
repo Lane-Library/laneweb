@@ -14,7 +14,7 @@
     color: white;
 }
 .button:hover {
-    background: transparent url(/././resources/images/sprite-but-on.gif${project.version});
+    background: transparent url(/././resources/images/sprite-but-on.gif?${project.version});
     border: none;
     color: white;
 }
