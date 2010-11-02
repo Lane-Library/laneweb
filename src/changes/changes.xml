@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-11-02" version="1.11.8" description="1.11.8 emergency release">
+            <action date="2010-11-02" dev="ceyates" issue="44312" type="fix">
+                stack trace instead of error.html page
+            </action>
+        </release>
         <release date="2010-11-01" version="1.11.7" description="1.11.7 bug fix release">
             <action date="2010-11-01" dev="ceyates" issue="44258" type="fix">
                 guest access link causes 404 page not found
