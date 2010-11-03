@@ -27,7 +27,7 @@
             <map:match pattern="m/lane.manifest" type="wildcard">
                 <map:read type="txt-resource" src="${resources-base}/lane.manifest" mime-type="text/cache-manifest"/>
             </map:match>
-            <map:match pattern="resources/images/*" type="wildcard">
+            <map:match pattern="resources/images/**" type="wildcard">
                 <map:read type="resource" src="${resources-base}/images/{1}"/>
             </map:match>
             <!-- we're getting requests for /bassett/favicon.ico and /tobacco/favicon.ico from google toolbar -->
