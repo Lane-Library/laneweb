@@ -13,10 +13,10 @@
                 <map:read type="resource" src="${resources-base}/images/favicon.ico"/>
             </map:match>
             <map:match pattern="resources/css/yui.css" type="wildcard">
-                <map:read type="yui-proxy" src="${resources-base}/css/yui.css"/>
+                <map:read type="resource" src="${resources-base}/css/yui.css"/>
             </map:match>
             <map:match pattern="resources/javascript/yui.js" type="wildcard">
-                <map:read type="yui-proxy" src="${resources-base}/javascript/yui.js"/>
+                <map:read type="resource" src="${resources-base}/javascript/yui.js"/>
             </map:match>
             <map:match pattern="resources/javascript/*.js" type="wildcard">
                 <map:read type="txt-resource" src="${resources-base}/javascript/{1}.js"/>
