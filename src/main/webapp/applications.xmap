@@ -5,6 +5,26 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
+        
+            <map:match pattern="classes-thisweek" type="wildcard">
+                <map:generate type="file" src="cocoon:/classes-data.xml"/>
+                <map:transform  type="saxon"  src="${resources-base}/xsl/classes-thisweek.xsl"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            
+            <map:match pattern="laneclasses" type="wildcard">
+                <map:generate type="file" src="cocoon:/classes-data.xml"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/laneclasses.xsl"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
+            
+            <map:match pattern="classes-data.xml" type="wildcard">
+                <map:generate type="file" src="${content-base}/classes-consult/laneclasses-data.xml"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/classes-data.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
+      
+      
             <map:match pattern="url-tester" type="wildcard">
                 <map:read type="search-url-tester"/>
             </map:match>
