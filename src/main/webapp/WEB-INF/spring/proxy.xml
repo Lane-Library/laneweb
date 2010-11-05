@@ -37,5 +37,8 @@
         class="edu.stanford.irt.laneweb.proxy.ProxyCredentialAction"
         scope="prototype">
     </bean>
+    
+    <bean name="org.apache.cocoon.selection.Selector/proxy-links"
+        class="edu.stanford.irt.laneweb.proxy.ProxyLinkSelector"/>
 
 </beans>

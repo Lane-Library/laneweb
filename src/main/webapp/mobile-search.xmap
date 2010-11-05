@@ -10,7 +10,11 @@
                 <map:generate type="file" src="cocoon://apps/search/merged/xml/{1}"/>
                 <map:transform type="saxon" src="${resources-base}/xsl/mobile-search-result2html.xsl"/>
                 <map:transform type="saxon" src="${resources-base}/xsl/mobile-content.xsl"/>
-                <map:transform type="proxy-links"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
                 <map:serialize type="xml"/>
             </map:match>
             <!-- Search Content (metasearch) -->
@@ -18,7 +22,11 @@
                 <map:generate type="file" src="cocoon://apps/search/content/xml/{1}"/>
                 <map:transform type="saxon" src="${resources-base}/xsl/mobile-search-result2html.xsl"/>
                 <map:transform type="saxon" src="${resources-base}/xsl/mobile-content.xsl"/>
-                <map:transform type="proxy-links"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
@@ -35,7 +43,11 @@
                     <map:parameter name="cache-key" value="${rid}"/>
                 </map:transform>
                 <map:transform type="saxon" src="${resources-base}/xsl/mobile-content.xsl"/>
-                <map:transform type="proxy-links"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="er/browse/subset/*" type="wildcard">
@@ -49,7 +61,11 @@
                     <map:parameter name="cache-key" value="${rid}"/>
                 </map:transform>
                 <map:transform type="saxon" src="${resources-base}/xsl/mobile-content.xsl"/>
-                <map:transform type="proxy-links"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>

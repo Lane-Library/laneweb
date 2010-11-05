@@ -33,32 +33,64 @@
                 <!-- /apps/search/xml returns the xmlized search result -->
                 <map:match type="wildcard" pattern="search/xml">
                     <map:generate type="search"/>
-                    <map:transform type="search-cme-links"/>
-                    <map:transform type="search-proxy-links"/>
+                    <map:select type="cme-links">
+                        <map:when test="true">
+                            <map:transform type="search-cme-links"/>
+                        </map:when>
+                    </map:select>
+                    <map:select type="proxy-links">
+                        <map:when test="true">
+                            <map:transform type="search-proxy-links"/>
+                        </map:when>
+                    </map:select>
                      <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search/engine/xml/*" type="wildcard">
                     <map:generate type="search-engine">
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
-                    <map:transform type="search-cme-links"/>
-                    <map:transform type="search-proxy-links"/>
+                    <map:select type="cme-links">
+                        <map:when test="true">
+                            <map:transform type="search-cme-links"/>
+                        </map:when>
+                    </map:select>
+                    <map:select type="proxy-links">
+                        <map:when test="true">
+                            <map:transform type="search-proxy-links"/>
+                        </map:when>
+                    </map:select>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search/engine/xml" type="wildcard">
                     <map:generate type="search-engine">
                         <map:parameter name="engine-list" value="{$engines}"/>
                     </map:generate>
-                    <map:transform type="search-cme-links"/>
-                    <map:transform type="search-proxy-links"/>
+                    <map:select type="cme-links">
+                        <map:when test="true">
+                            <map:transform type="search-cme-links"/>
+                        </map:when>
+                    </map:select>
+                    <map:select type="proxy-links">
+                        <map:when test="true">
+                            <map:transform type="search-proxy-links"/>
+                        </map:when>
+                    </map:select>
                     <map:serialize type="xml"/>
                 </map:match>
                 <map:match pattern="search/resource/xml/*" type="wildcard">
                     <map:generate type="search-resource">
                         <map:parameter name="resource-list" value="{1}"/>
                     </map:generate>
-                    <map:transform type="search-cme-links"/>
-                    <map:transform type="search-proxy-links"/>
+                    <map:select type="cme-links">
+                        <map:when test="true">
+                            <map:transform type="search-cme-links"/>
+                        </map:when>
+                    </map:select>
+                    <map:select type="proxy-links">
+                        <map:when test="true">
+                            <map:transform type="search-proxy-links"/>
+                        </map:when>
+                    </map:select>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search/content/html returns xhtmlized metasearch content results -->
@@ -115,8 +147,16 @@
                 <!-- search2json.xsl converts the result xml to json -->
                 <map:match pattern="search/json" type="wildcard">
                     <map:generate type="search-resource"/>
-                    <map:transform type="search-cme-links"/>
-                    <map:transform type="search-proxy-links"/>
+                    <map:select type="cme-links">
+                        <map:when test="true">
+                            <map:transform type="search-cme-links"/>
+                        </map:when>
+                    </map:select>
+                    <map:select type="proxy-links">
+                        <map:when test="true">
+                            <map:transform type="search-proxy-links"/>
+                        </map:when>
+                    </map:select>
                     <map:transform type="saxon" src="${resources-base}/xsl/search2json.xsl">
                         <map:parameter name="content-to-display" value="5"/>
                     </map:transform>

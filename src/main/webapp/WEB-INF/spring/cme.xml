@@ -18,4 +18,7 @@
         scope="prototype">
     </bean>
     
+    <bean name="org.apache.cocoon.selection.Selector/cme-links"
+        class="edu.stanford.irt.laneweb.cme.CMELinkSelector"/>
+    
 </beans>
