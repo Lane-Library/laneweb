@@ -12,7 +12,7 @@ public class NewPageRedirectProcessor extends DefaultRedirectProcessor {
             // add basePath to the page parameter of the newpage.html url
             int newPage = redirectURL.indexOf(NEW_PAGE_BASE_URL);
             if (newPage == 0) {
-                redirectURL = NEW_PAGE_BASE_URL + basePath + redirectURL.substring(NEW_PAGE_BASE_URL.length());
+                redirectURL = basePath + NEW_PAGE_BASE_URL + basePath + redirectURL.substring(NEW_PAGE_BASE_URL.length());
             }
         }
         return redirectURL;

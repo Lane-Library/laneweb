@@ -7,7 +7,6 @@ public class SHCRedirectProcessor extends DefaultRedirectProcessor {
         if (uri.indexOf("/shc") != 0) {
             return null;
         }
-        String redirectURL = super.getRedirectURL(uri, basePath, queryString);
-        return redirectURL;
+        return super.getRedirectURL(uri, basePath, queryString);
     }
 }

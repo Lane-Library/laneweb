@@ -28,7 +28,7 @@
     
     <stx:template match="h:a[@id='newpage']">
         <stx:copy>
-            <stx:attribute name="href" select="substring-after($page,$base-path)"/>
+            <stx:attribute name="href" select="$page"/>
             <stx:text><stx:value-of select="$page"/></stx:text>
         </stx:copy>
     </stx:template>
