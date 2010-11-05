@@ -6,6 +6,10 @@
         <xsl:value-of select="format-dateTime(current-dateTime(), '[Y][M01][D01][H01][m01]')" />
     </xsl:variable>
 
+   <xsl:variable name="delayToDisplay">
+        <xsl:value-of select="number(0100)" />
+    </xsl:variable>
+
 
 
     <xsl:template match="/">
@@ -19,13 +23,13 @@
       
         <xsl:variable name="time">
             <xsl:if test="contains(./time-end, 'pm')">
-                <xsl:value-of select="format-number( number( translate(substring-before(./time-end , 'pm'), '\:', ''))+1200 , '0000')" />
+                <xsl:value-of select="format-number( number( translate(substring-before(./time-end , 'pm'), '\:', ''))+1200 +$delayToDisplay, '0000')" />
             </xsl:if>
             <xsl:if test="contains(./time-end, 'am')">
-                <xsl:value-of select="format-number( number( translate(substring-before(./time-end , 'am'), '\:', '')) , '0000')" />
+                <xsl:value-of select="format-number( number( translate(substring-before(./time-end , 'am'), '\:', '') ) +$delayToDisplay, '0000')" />
             </xsl:if>
             <xsl:if test="contains(./time-end, 'Noon')">
-                <xsl:value-of select="number(1200)"/>
+                <xsl:value-of select="number(1200)+$delayToDisplay"/>
             </xsl:if>
         </xsl:variable>
         
@@ -33,6 +37,7 @@
             <xsl:value-of
                 select="format-number(number(./day/text()), '00')" />
         </xsl:variable>
+        
         <xsl:variable name="month">
             <xsl:value-of select="./month" />
         </xsl:variable>
