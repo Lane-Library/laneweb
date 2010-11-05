@@ -33,9 +33,6 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private DataBinder dataBinder;
 
-    public SitemapRequestHandler() {
-    }
-
     public void handleRequest(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
         if (this.methodsNotAllowed.contains(request.getMethod())) {
