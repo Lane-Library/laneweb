@@ -45,6 +45,14 @@
                     <map:transform type="search-proxy-links"/>
                     <map:serialize type="xml"/>
                 </map:match>
+                <map:match pattern="search/engine/xml" type="wildcard">
+                    <map:generate type="search-engine">
+                        <map:parameter name="engine-list" value="{$engines}"/>
+                    </map:generate>
+                    <map:transform type="search-cme-links"/>
+                    <map:transform type="search-proxy-links"/>
+                    <map:serialize type="xml"/>
+                </map:match>
                 <map:match pattern="search/resource/xml/*" type="wildcard">
                     <map:generate type="search-resource">
                         <map:parameter name="resource-list" value="{1}"/>
