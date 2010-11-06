@@ -14,7 +14,6 @@ public class CMELinkSelector extends DefaultModelAware implements Selector {
     private static final String EMPTY_STRING = "";
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    @Override
     public boolean select(String expression, Map objectModel, Parameters parameters) {
         return !EMPTY_STRING.equals(getString(objectModel, Model.EMRID, EMPTY_STRING));
     }
