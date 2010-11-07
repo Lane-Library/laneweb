@@ -40,6 +40,10 @@ private static final String SHOW = "show";
 
 private static final String SHOW_ALL = "showAll";
 
+private static final String CURRENT_INDEX = "currentIndex";
+
+private static final String ALL = "all";
+
 //    private int page;
 
     private int pageSize;
@@ -74,20 +78,25 @@ private static final String SHOW_ALL = "showAll";
 //    }
     
     public PagingXMLizableEresourceList(final Collection<Eresource> eresources, final int show) {
-        this.start = show;
         this.total = eresources.size();
         this.pageSize = this.total / MAX_PAGE_COUNT;
         this.pageSize = this.pageSize % MAX_PAGE_COUNT != 0 ? this.pageSize + 1 : this.pageSize;
         this.pageSize = this.pageSize < DEFAULT_PAGE_SIZE ? DEFAULT_PAGE_SIZE : this.pageSize;
-        int i = 0;
-        int j = this.start + this.pageSize;
-        for (Eresource eresource : eresources) {
-            if (i >= this.start && i < j) {
-                add(eresource);
-            } else if (i == j) {
-                break;
+        if (show == -1 || this.total <= this.pageSize) {
+            addAll(eresources);
+            this.start = 0;
+        } else {
+            this.start = show;
+            int i = 0;
+            int j = this.start + this.pageSize;
+            for (Eresource eresource : eresources) {
+                if (i >= this.start && i < j) {
+                    add(eresource);
+                } else if (i == j) {
+                    break;
+                }
+                i++;
             }
-            i++;
         }
     }
 
@@ -107,9 +116,14 @@ private static final String SHOW_ALL = "showAll";
         XMLUtils.startElement(handler, NAMESPACE, RESOURCES, atts);
         atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, RESULT_LIMIT, RESULT_LIMIT, CDATA, Integer.toString(this.pageSize));
-        atts.addAttribute(EMPTY_NS, SHOW, SHOW, CDATA, Integer.toString(this.start));
+        if (this.total == this.size()) {
+            atts.addAttribute(EMPTY_NS, SHOW, SHOW, CDATA, ALL);
+        } else {
+            atts.addAttribute(EMPTY_NS, SHOW, SHOW, CDATA, Integer.toString(this.start));
+        }
+        atts.addAttribute(EMPTY_NS, CURRENT_INDEX, CURRENT_INDEX, CDATA, Integer.toString(this.start));
         atts.addAttribute(EMPTY_NS, SHOW_ALL, SHOW_ALL, CDATA, Boolean.toString(this.total != this.size()));
-        XMLUtils.createElement(handler, PAGINATION, atts);
+        XMLUtils.createElementNS(handler, NAMESPACE, PAGINATION, atts);
         for (Eresource eresource : this) {
             new EresourceResource(eresource).toSAX(handler);
         }

@@ -34,7 +34,9 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
         return new StringBuilder("t=").append(null == super.type ? "" : super.type).append(";s=")
                 .append(null == super.subset ? "" : super.subset).append(";a=")
                 .append(null == super.alpha ? "" : super.alpha).append(";m=")
-                .append(null == super.mesh ? "" : super.mesh).toString();
+                .append(null == super.mesh ? "" : super.mesh)
+//                .append(";show=").append(this.show)
+                .toString();
     }
 
     @Override
