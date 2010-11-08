@@ -79,7 +79,7 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
         }
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, RESULT_LIMIT, RESULT_LIMIT, CDATA, Integer.toString(pageSize));
-        if (start > 0 || total > pageSize) {
+        if (total > pageSize) {
             atts.addAttribute(EMPTY_NS, SHOW, SHOW, CDATA, ALL);
         } else {
             atts.addAttribute(EMPTY_NS, SHOW, SHOW, CDATA, Integer.toString(start));
