@@ -19,7 +19,8 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
     private String type;
 
     public void generate() throws IOException, SAXException {
-        XMLizableSearchResultSet eresources = new XMLizableSearchResultSet(this.query);
+//        XMLizableSearchResultSet eresources = new XMLizableSearchResultSet(this.query);
+        PagingXMLizableSearchResultSet eresources = new PagingXMLizableSearchResultSet(this.query, this.show);
         eresources.addAll(getEresourceList());
         this.xmlConsumer.startDocument();
         eresources.toSAX(this.xmlConsumer);

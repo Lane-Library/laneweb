@@ -36,9 +36,9 @@
                 <map:generate type="er-browse">
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
-                <map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
+                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
                     <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
+                </map:transform>-->
                 <map:transform type="saxon" src="${resources-base}/xsl/mobile-search-result2html.xsl">
                     <map:parameter name="cache-key" value="${rid}"/>
                 </map:transform>
@@ -54,9 +54,9 @@
                 <map:generate type="er-browse">
                     <map:parameter name="subset" value="{1}"/>
                 </map:generate>
-                <map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
+                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
                     <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
+                </map:transform>-->
                 <map:transform type="saxon" src="${resources-base}/xsl/mobile-search-result2html.xsl">
                     <map:parameter name="cache-key" value="${rid}"/>
                 </map:transform>

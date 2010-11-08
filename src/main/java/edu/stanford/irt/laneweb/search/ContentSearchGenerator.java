@@ -36,7 +36,8 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
 
     @Override
     public void generate() throws SAXException {
-        XMLizableSearchResultSet mergedSearchResults = new XMLizableSearchResultSet(this.query);
+//        XMLizableSearchResultSet mergedSearchResults = new XMLizableSearchResultSet(this.query);
+        PagingXMLizableSearchResultSet mergedSearchResults = new PagingXMLizableSearchResultSet(this.query, this.show);
         mergedSearchResults.addAll(getContentResultList(doSearch()));
         this.xmlConsumer.startDocument();
         mergedSearchResults.toSAX(this.xmlConsumer);

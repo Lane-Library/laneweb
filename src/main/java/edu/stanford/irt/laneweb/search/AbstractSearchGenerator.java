@@ -6,6 +6,8 @@ import edu.stanford.irt.laneweb.model.Model;
 public abstract class AbstractSearchGenerator extends AbstractGenerator {
 
     protected String query;
+    
+    protected int show;
 
     @Override
     protected void initialize() {
@@ -13,5 +15,7 @@ public abstract class AbstractSearchGenerator extends AbstractGenerator {
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }
+        String show = getString(this.model, Model.SHOW, "0");
+        this.show = "all".equals(show) ? -1 : Integer.parseInt(show);
     }
 }
