@@ -129,6 +129,7 @@
                                 <include>section-menu-min.css</include>
                                 <include>liaisons-min.css</include>
                                 <include>table-styles-min.css</include>
+                                <include>follow-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>

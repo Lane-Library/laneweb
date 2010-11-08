@@ -1,0 +1,31 @@
+#follow ul {
+    margin-left: -15px
+}
+#follow li {
+    padding: 4px 0 0 25px;
+    background-repeat: no-repeat;
+    list-style-type: none;
+    list-style-image: none
+}
+#follow input {
+    float: left
+}
+#follow input[type='text'] {
+    margin: 5px 5px 10px 0
+}
+#follow input[type='submit'] {
+    width: 100px;
+    margin: 0
+}
+#followFBLane,#followFBSoM {
+    background-image: url(/././resources/images/share_face.png)
+}
+#followScope {
+    background-image: url(/././resources/images/share_scope.png)
+}
+#followFBLane:hover,#followFBSoM:hover {
+    background-image: url(/././resources/images/share_facebook_over.png)
+}
+#followScope:hover {
+    background-image: url(/././resources/images/share_scope_over.png)
+}
