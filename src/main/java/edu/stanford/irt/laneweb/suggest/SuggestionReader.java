@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.TreeSet;
+import java.util.regex.Pattern;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.Model;
@@ -12,6 +13,8 @@ import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SuggestionReader extends AbstractReader {
+    
+    private static final Pattern ER_PATTERN = Pattern.compile("(?:ej|book|database|software|cc|video|lanesite|bassett)");
 
     private static final byte[] JSON_1 = "{\"suggest\":[".getBytes();
 
@@ -39,24 +42,23 @@ public class SuggestionReader extends AbstractReader {
         SuggestionComparator comparator = new SuggestionComparator(this.query);
         TreeSet<String> suggestionSet = new TreeSet<String>(comparator);
         Collection<? extends Suggestion> suggestions;
-        if (this.limit.matches("(ej|book|database|software|cc|video|lanesite|bassett)")) {
+        if (ER_PATTERN.matcher(this.limit).matches()) {
             suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(this.limit, this.query);
-        } else if (this.limit.matches("er-mesh")) {
+        } else if ("er-mesh".equals(this.limit)) {
             ArrayList<Suggestion> combo = new ArrayList<Suggestion>();
             combo.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm(this.query));
             combo.addAll(this.meshSuggestionManager.getSuggestionsForTerm(this.query));
             suggestions = combo;
-        } else if (this.limit.matches("ej-mesh")) {
+        } else if ("ej-mesh".equals(this.limit)) {
             ArrayList<Suggestion> combo = new ArrayList<Suggestion>();
             combo.addAll(this.eresourceSuggestionManager.getSuggestionsForTerm("ej", this.query));
             combo.addAll(this.meshSuggestionManager.getSuggestionsForTerm(this.query));
             suggestions = combo;
-        } else if ("mesh".equalsIgnoreCase(this.limit)) {
+        } else if ("mesh".equals(this.limit)) {
             suggestions = this.meshSuggestionManager.getSuggestionsForTerm(this.query);
-        } else if (this.limit.matches("mesh-(d|i|di)")) {
-            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(this.limit.replaceFirst("mesh-", ""),
-                    this.query);
-        } else if ("history".equalsIgnoreCase(this.limit)) {
+        } else if (this.limit.indexOf("mesh-") == 0) {
+            suggestions = this.meshSuggestionManager.getSuggestionsForTerm(this.limit.substring(5), this.query);
+        } else if ("history".equals(this.limit)) {
             suggestions = this.historySuggestionManager.getSuggestionsForTerm(this.query);
         } else {
             suggestions = this.eresourceSuggestionManager.getSuggestionsForTerm(this.query);

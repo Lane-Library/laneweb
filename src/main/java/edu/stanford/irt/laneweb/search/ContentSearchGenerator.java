@@ -23,6 +23,8 @@ import edu.stanford.irt.search.impl.SimpleQuery;
  * @author ryanmax $Id$
  */
 public class ContentSearchGenerator extends AbstractMetasearchGenerator {
+    
+    private static final Pattern CONTENT_PATTERN = Pattern.compile(".*_content");
 
     private int contentResultLimit;
 
@@ -70,7 +72,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
             Result parentResource = null;
             for (Result resource : engine.getChildren()) {
                 String resourceId = resource.getId();
-                if (resourceId.matches(".*_content")) {
+                if (CONTENT_PATTERN.matcher(resourceId).matches()) {
                     Iterator<Result> it = resource.getChildren().iterator();
                     int count = 0;
                     while (it.hasNext() && count < this.contentResultLimit) {

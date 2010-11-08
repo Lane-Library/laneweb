@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.voyager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
 
@@ -12,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import edu.stanford.irt.laneweb.JdbcUtils;
 
 public class VoyagerLogin {
+    
+    private static final Pattern PID_PATTERN = Pattern.compile("[\\w0-9-_]+");
 
     private static final String BASE_URL = "http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?";
 
@@ -26,14 +29,13 @@ public class VoyagerLogin {
     private DataSource dataSource;
 
     public String getVoyagerURL(final String univId, final String pid, final String queryString) {
-        String url = ERROR_URL;
-        if (null == pid || !pid.matches("[\\w0-9-_]+")) {
+        if (null == pid || !PID_PATTERN.matcher(pid).matches()) {
             LOGGER.error("bad pid: " + pid);
-            return url;
+            return ERROR_URL;
         }
         if (null == univId || univId.length() == 0) {
             LOGGER.error("bad univId: " + univId);
-            return url;
+            return ERROR_URL;
         }
         String voyagerUnivId = "0" + univId; // voyager data prepends 0
         Connection conn = null;
@@ -49,15 +51,15 @@ public class VoyagerLogin {
             createStmt.setString(1, voyagerUnivId);
             createStmt.setString(2, pid);
             createStmt.executeUpdate();
-            url = BASE_URL.concat(queryString).concat("&authenticate=Y");
+            return BASE_URL.concat(queryString).concat("&authenticate=Y");
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
+            return ERROR_URL;
         } finally {
             JdbcUtils.closeStatement(clearStmt);
             JdbcUtils.closeStatement(createStmt);
             JdbcUtils.closeConnection(conn);
         }
-        return url;
     }
 
     public void setDataSource(final DataSource dataSource) {
