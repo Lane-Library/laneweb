@@ -7,6 +7,17 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-11-08" version="1.11.9" description="1.11.9 bug fix release">
+            <action date="2010-11-05" dev="ryanmax" issue="44445" type="add">
+                EZproxy: automatically configure SSL hosts from the catalog
+            </action>
+            <action date="2010-11-03" dev="ryanmax" issue="44351" type="fix">
+                images missing from mobile site
+            </action>
+            <action date="2010-11-03" dev="ceyates" issue="43359" type="add">
+                Feedback  - Add SU libraries link
+            </action>
+        </release>
         <release date="2010-11-02" version="1.11.8" description="1.11.8 emergency release">
             <action date="2010-11-02" dev="ceyates" issue="44312" type="fix">
                 stack trace instead of error.html page
