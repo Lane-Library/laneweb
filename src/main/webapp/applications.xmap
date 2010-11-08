@@ -80,7 +80,7 @@
                     </map:generate>
                     <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                     <map:transform type="query-highlighting"/>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
+                    <!--<map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>-->
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- return raw xml metasearch content results -->
@@ -100,7 +100,7 @@
                     </map:generate>
                     <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                     <map:transform type="query-highlighting"/>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
+                    <!--<map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>-->
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- return raw xml merged metasearch and eresources results -->
@@ -121,7 +121,7 @@
                     </map:generate>
                     <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                     <map:transform type="query-highlighting"/>
-                    <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
+                    <!--<map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>-->
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- search2json.xsl converts the result xml to json -->
