@@ -8,7 +8,7 @@
             <map:parameter name="request-key" value="${remote-addr}/${request-uri}/${query-string}"/>
             <map:match pattern="search" type="wildcard">
                 <map:generate type="er-search"/>
-                <map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>
+                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                 <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
@@ -17,7 +17,7 @@
                 <map:generate type="er-search">
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
-                <map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>
+                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                 <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
@@ -28,14 +28,14 @@
                     <map:parameter name="query" value="{2}"/>
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
-                <map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>
+                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                 <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="histdb" type="wildcard">
                 <map:generate type="history-search"/>
-                <map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>
+                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                 <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
@@ -44,7 +44,7 @@
                 <map:generate type="history-search">
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
-                <map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>
+                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                 <map:transform type="query-highlighting"/>
                 <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
@@ -66,9 +66,9 @@
                 <map:generate type="er-browse">
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
-                <map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
+                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
                     <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
+                </map:transform>-->
                 <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -76,9 +76,9 @@
                 <map:generate type="er-browse">
                     <map:parameter name="subset" value="{1}"/>
                 </map:generate>
-                <map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
+                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
                     <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
+                </map:transform>-->
                 <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -86,9 +86,9 @@
                 <map:generate type="er-mesh">
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
-                <map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
+                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
                     <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
+                </map:transform>-->
                 <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
@@ -96,9 +96,9 @@
                 <map:generate type="er-core">
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
-                <map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
+                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
                     <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>
+                </map:transform>-->
                 <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
