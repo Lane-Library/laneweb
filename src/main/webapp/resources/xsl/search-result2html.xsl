@@ -25,7 +25,7 @@
                     <xsl:call-template name="paginationLinks"/>
                 </xsl:if>
                 <dl class="lwSearchResults">
-                    <xsl:apply-templates select="attribute::node()"/>
+                    <xsl:copy-of select="attribute::node()"/>
                     <xsl:apply-templates select="//s:result"/>
                 </dl>
                 <xsl:call-template name="paginationLinks"/>
