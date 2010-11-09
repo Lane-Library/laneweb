@@ -66,7 +66,7 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, SIZE, SIZE, CDATA, Integer.toString(totalSize));
         atts.addAttribute(EMPTY_NS, START, START, CDATA, Integer.toString(start));
-        atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(start + pageSize));
+        atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(pageSize));
         XMLUtils.startElement(handler, NAMESPACE, RESOURCES, atts);
         XMLUtils.startElement(handler, NAMESPACE, QUERY);
         XMLUtils.data(handler, this.query);
