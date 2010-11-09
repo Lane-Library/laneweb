@@ -8,6 +8,8 @@
     
     <xsl:param name="source"/>
     
+    <xsl:param name="query-string"/>
+    
     <xsl:variable name="search-terms">
         <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
@@ -21,14 +23,15 @@
                 <title>search results</title>
             </head>
             <body>
-                <xsl:if test="contains($request-uri,'biomed-resources')">
+                <xsl:if test="contains($request-uri,'biomed-resources') and number(@size) &gt; 100">
                     <xsl:call-template name="paginationLinks"/>
                 </xsl:if>
                 <dl class="lwSearchResults">
-                    <xsl:copy-of select="attribute::node()"/>
                     <xsl:apply-templates select="//s:result"/>
                 </dl>
-                <xsl:call-template name="paginationLinks"/>
+                <xsl:if test="number(@size) &gt; 100">
+                    <xsl:call-template name="paginationLinks"/>
+                </xsl:if>
                 <div id="search-content-counts" style="display:none;">
                     <xsl:for-each
                         select="/s:resources/s:contentHitCounts/s:resource">
@@ -341,16 +344,63 @@
             <xsl:value-of select="."/>
         </strong>
     </xsl:template>
-
+    
     <xsl:template name="paginationLinks">
-        <xsl:if test="number(/s:resources/@size) &gt;= number(/s:resources/@length)">
-            <div class="results-nav">
-                <span class="show"><xsl:value-of select="/s:resources/@start"/></span>
-                <span class="currentIndex"><xsl:value-of select="/s:resources/@start"/></span>
-                <span class="result-count"><xsl:value-of select="/s:resources/@size"/></span>
-                <span class="result-limit"><xsl:value-of select="/s:resources/@length"/></span>
-                <span class="show-all"><xsl:value-of select="number(/s:resources/@size) &gt; number(/s:resources/@length)"/></span>
+        <xsl:variable name="no-page-query-string">
+            <xsl:choose>
+                <xsl:when test="contains($query-string, 'page=')">
+                    <xsl:value-of select="substring-before($query-string, 'page=')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="concat($query-string,'&amp;')"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <div class="results-nav">
+            <div class="yui-g">
+                <div class="yui-u first">
+                    <xsl:text>Displaying </xsl:text>
+                    <xsl:choose>
+                        <xsl:when test="number(/s:resources/@size) &gt; number(/s:resources/@length)">
+                            <xsl:value-of select="number(/s:resources/@start) + 1"/>
+                            <xsl:text> to </xsl:text>
+                            <xsl:value-of select="number(/s:resources/@start) + number(/s:resources/@length)"/>
+                            <xsl:text> of </xsl:text>
+                            <a href="?{$no-page-query-string}page=all"><xsl:value-of select="/s:resources/@size"/> matches</a>
+                        </xsl:when>
+                        <xsl:otherwise>all <xsl:value-of select="/s:resources/@size"/> matches</xsl:otherwise>
+                    </xsl:choose>
+                </div>
+                <div class="yui-u" style="text-align:right">
+                    <xsl:if test="number(/s:resources/@size) &gt; number(/s:resources/@length)">
+                        <a id="seeAll" href="?{$no-page-query-string}page=all">See All</a>
+                        <xsl:call-template name="pageLinks">
+                            <xsl:with-param name="page" select="number(0)"/>
+                            <xsl:with-param name="query" select="$no-page-query-string"/>
+                        </xsl:call-template>
+                    </xsl:if>
+                </div>
             </div>
+        </div>
+    </xsl:template>
+    
+    <xsl:template name="pageLinks">
+        <xsl:param name="page"/>
+        <xsl:param name="query"/>
+        <xsl:choose>
+            <xsl:when test="number($page) = number(/s:resources/@page)">
+                <xsl:value-of select="number($page) + 1"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <a href="?{$query}page={number($page) + 1}"><xsl:value-of select="number($page) + 1"/></a>
+            </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="number($page + 1) != number(/s:resources/@pages)">
+            <xsl:text> | </xsl:text>
+            <xsl:call-template name="pageLinks">
+                <xsl:with-param name="page" select="number($page + 1)"/>
+                <xsl:with-param name="query" select="$query"/>
+            </xsl:call-template>
         </xsl:if>
     </xsl:template>
 

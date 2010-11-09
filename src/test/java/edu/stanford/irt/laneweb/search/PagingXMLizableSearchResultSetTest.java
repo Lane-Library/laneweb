@@ -32,7 +32,7 @@ public class PagingXMLizableSearchResultSetTest {
     }
     
     @Test
-    public void testToSAX() throws SAXException {
+    public void testPage0ToSAX() throws SAXException {
         expect(this.results.size()).andReturn(Integer.valueOf(256));
         expect(this.results.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(Boolean.TRUE).times(256);
@@ -60,11 +60,13 @@ public class PagingXMLizableSearchResultSetTest {
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("0", atts.getValue().getValue("start"));
         assertEquals("100", atts.getValue().getValue("length"));
+        assertEquals("0", atts.getValue().getValue("page"));
+        assertEquals("3", atts.getValue().getValue("pages"));
         verify(this.results, this.handler, this.result, this.iterator);
     }
     
     @Test
-    public void testTo100SAX() throws SAXException {
+    public void testPage1ToSAX() throws SAXException {
         expect(this.results.size()).andReturn(Integer.valueOf(256));
         expect(this.results.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(Boolean.TRUE).times(256);
@@ -86,17 +88,19 @@ public class PagingXMLizableSearchResultSetTest {
         this.handler.endPrefixMapping("");
         this.handler.endDocument();
         replay(this.results, this.handler, this.result, this.iterator);
-        PagingXMLizableSearchResultSet set = new PagingXMLizableSearchResultSet("1", 100);
+        PagingXMLizableSearchResultSet set = new PagingXMLizableSearchResultSet("1", 1);
         set.addAll(this.results);
         set.toSAX(this.handler);
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("100", atts.getValue().getValue("start"));
         assertEquals("100", atts.getValue().getValue("length"));
+        assertEquals("1", atts.getValue().getValue("page"));
+        assertEquals("3", atts.getValue().getValue("pages"));
         verify(this.results, this.handler, this.result, this.iterator);
     }
     
     @Test
-    public void testTo200SAX() throws SAXException {
+    public void testPage2ToSAX() throws SAXException {
         expect(this.results.size()).andReturn(Integer.valueOf(256));
         expect(this.results.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(Boolean.TRUE).times(256);
@@ -118,17 +122,19 @@ public class PagingXMLizableSearchResultSetTest {
         this.handler.endPrefixMapping("");
         this.handler.endDocument();
         replay(this.results, this.handler, this.result, this.iterator);
-        PagingXMLizableSearchResultSet set = new PagingXMLizableSearchResultSet("1", 200);
+        PagingXMLizableSearchResultSet set = new PagingXMLizableSearchResultSet("1", 2);
         set.addAll(this.results);
         set.toSAX(this.handler);
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("200", atts.getValue().getValue("start"));
         assertEquals("56", atts.getValue().getValue("length"));
+        assertEquals("2", atts.getValue().getValue("page"));
+        assertEquals("3", atts.getValue().getValue("pages"));
         verify(this.results, this.handler, this.result, this.iterator);
     }
     
     @Test
-    public void testToAllSAX() throws SAXException {
+    public void testAllPagesToSAX() throws SAXException {
         expect(this.results.size()).andReturn(Integer.valueOf(256));
         expect(this.results.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(Boolean.TRUE).times(256);
@@ -156,11 +162,13 @@ public class PagingXMLizableSearchResultSetTest {
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("0", atts.getValue().getValue("start"));
         assertEquals("256", atts.getValue().getValue("length"));
+        assertEquals("-1", atts.getValue().getValue("page"));
+        assertEquals("3", atts.getValue().getValue("pages"));
         verify(this.results, this.handler, this.result, this.iterator);
     }
     
     @Test
-    public void testToAll539SAX() throws SAXException {
+    public void testAllPages539ToSAX() throws SAXException {
         expect(this.results.size()).andReturn(Integer.valueOf(539));
         expect(this.results.iterator()).andReturn(this.iterator);
         expect(this.iterator.hasNext()).andReturn(Boolean.TRUE).times(539);
@@ -188,6 +196,8 @@ public class PagingXMLizableSearchResultSetTest {
         assertEquals("539", atts.getValue().getValue("size"));
         assertEquals("0", atts.getValue().getValue("start"));
         assertEquals("539", atts.getValue().getValue("length"));
+        assertEquals("-1", atts.getValue().getValue("page"));
+        assertEquals("4", atts.getValue().getValue("pages"));
         verify(this.results, this.handler, this.result, this.iterator);
     }
 }

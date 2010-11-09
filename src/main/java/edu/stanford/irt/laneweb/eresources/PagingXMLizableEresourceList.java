@@ -39,6 +39,10 @@ public class PagingXMLizableEresourceList extends LinkedList<Eresource> implemen
 
     private static final String START = "start";
 
+    private static final String PAGE = "page";
+
+    private static final String PAGES = "pages";
+
 //    private int page;
 
     private int pageSize;
@@ -49,46 +53,33 @@ public class PagingXMLizableEresourceList extends LinkedList<Eresource> implemen
 
     private int length;
 
+    private int page;
+
+    private int pages;
+
     public PagingXMLizableEresourceList(final Collection<Eresource> eresources) {
         this(eresources, 0);
     }
-
-    // public PagingXMLizableEresourceList(final Collection<Eresource>
-    // eresources, final int page) {
-    // this.page = page;
-    // int size = eresources.size();
-    // this.pageSize = size / MAX_PAGE_COUNT;
-    // this.pageSize = this.pageSize % MAX_PAGE_COUNT != 0 ? this.pageSize + 1 :
-    // this.pageSize;
-    // this.pageSize = this.pageSize < DEFAULT_PAGE_SIZE ? DEFAULT_PAGE_SIZE :
-    // this.pageSize;
-    // int start = (page - 1) * this.pageSize;
-    // this.total = eresources.size();
-    // this.start = start;
-    // int i = 0;
-    // int j = start + this.pageSize;
-    // for (Eresource eresource : eresources) {
-    // if (i >= start && i < j) {
-    // add(eresource);
-    // } else if (i == j) {
-    // break;
-    // }
-    // i++;
-    // }
-    // }
-    public PagingXMLizableEresourceList(final Collection<Eresource> eresources, final int show) {
+    
+    public PagingXMLizableEresourceList(final Collection<Eresource> eresources, final int page) {
         super(eresources);
+        if (page >= MAX_PAGE_COUNT) {
+            throw new IllegalArgumentException("not so many pages: " + page);
+        }
+        this.page = page;
         this.size = eresources.size();
         this.pageSize = this.size / MAX_PAGE_COUNT;
         this.pageSize = this.pageSize % MAX_PAGE_COUNT != 0 ? this.pageSize + 1 : this.pageSize;
         this.pageSize = this.pageSize < DEFAULT_PAGE_SIZE ? DEFAULT_PAGE_SIZE : this.pageSize;
-        if (show == -1 || this.size <= this.pageSize) {
+        if (page < 0 || this.size <= this.pageSize) {
             this.start = 0;
             this.length = this.size;
         } else {
-            this.start = show;
+            this.start = page * this.pageSize;
             this.length = this.size - this.start < this.pageSize ? this.size - this.start : this.pageSize;
         }
+        this.pages = this.size / this.pageSize;
+        this.pages = this.size % this.pageSize != 0 ? this.pages + 1 : this.pages;
     }
 
     public void toSAX(final ContentHandler handler) throws SAXException {
@@ -101,6 +92,8 @@ public class PagingXMLizableEresourceList extends LinkedList<Eresource> implemen
         atts.addAttribute(EMPTY_NS, SIZE, SIZE, CDATA, Integer.toString(this.size));
         atts.addAttribute(EMPTY_NS, START, START, CDATA, Integer.toString(this.start));
         atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(this.length));
+        atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(this.page));
+        atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(this.pages));
         XMLUtils.startElement(handler, NAMESPACE, RESOURCES, atts);
         int i = 0;
         for (ListIterator<Eresource> it = listIterator(this.start); it.hasNext() && i < this.length; i++) {

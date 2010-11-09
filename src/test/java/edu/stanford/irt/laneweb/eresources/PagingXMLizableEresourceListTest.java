@@ -44,7 +44,7 @@ public class PagingXMLizableEresourceListTest {
     }
     
     @Test
-    public void testToSAX() throws SAXException {
+    public void testPage0ToSAX() throws SAXException {
         expect(this.eresources.toArray()).andReturn(this.eresourceArray);
         expect(this.eresources.size()).andReturn(Integer.valueOf(256));
         this.handler.startDocument();
@@ -71,11 +71,13 @@ public class PagingXMLizableEresourceListTest {
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("0", atts.getValue().getValue("start"));
         assertEquals("100", atts.getValue().getValue("length"));
+        assertEquals("0", atts.getValue().getValue("page"));
+        assertEquals("3", atts.getValue().getValue("pages"));
         verify(this.eresources, this.handler, this.eresource);
     }
     
     @Test
-    public void testTo100SAX() throws SAXException {
+    public void testPage1ToSAX() throws SAXException {
         expect(this.eresources.toArray()).andReturn(this.eresourceArray);
         expect(this.eresources.size()).andReturn(Integer.valueOf(256));
         this.handler.startDocument();
@@ -98,15 +100,17 @@ public class PagingXMLizableEresourceListTest {
         this.handler.endPrefixMapping("");
         this.handler.endDocument();
         replay(this.eresources, this.handler, this.eresource);
-        new PagingXMLizableEresourceList(this.eresources, 100).toSAX(this.handler);
+        new PagingXMLizableEresourceList(this.eresources, 1).toSAX(this.handler);
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("100", atts.getValue().getValue("start"));
         assertEquals("100", atts.getValue().getValue("length"));
+        assertEquals("1", atts.getValue().getValue("page"));
+        assertEquals("3", atts.getValue().getValue("pages"));
         verify(this.eresources, this.handler, this.eresource);
     }
     
     @Test
-    public void testTo200SAX() throws SAXException {
+    public void testPage2ToSAX() throws SAXException {
         expect(this.eresources.toArray()).andReturn(this.eresourceArray);
         expect(this.eresources.size()).andReturn(Integer.valueOf(256));
         this.handler.startDocument();
@@ -129,15 +133,17 @@ public class PagingXMLizableEresourceListTest {
         this.handler.endPrefixMapping("");
         this.handler.endDocument();
         replay(this.eresources, this.handler, this.eresource);
-        new PagingXMLizableEresourceList(this.eresources, 200).toSAX(this.handler);
+        new PagingXMLizableEresourceList(this.eresources, 2).toSAX(this.handler);
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("200", atts.getValue().getValue("start"));
         assertEquals("56", atts.getValue().getValue("length"));
+        assertEquals("2", atts.getValue().getValue("page"));
+        assertEquals("3", atts.getValue().getValue("pages"));
         verify(this.eresources, this.handler, this.eresource);
     }
     
     @Test
-    public void testToAllSAX() throws SAXException {
+    public void testAllPagesToSAX() throws SAXException {
         expect(this.eresources.toArray()).andReturn(this.eresourceArray);
         expect(this.eresources.size()).andReturn(Integer.valueOf(256));
         this.handler.startDocument();
@@ -164,6 +170,43 @@ public class PagingXMLizableEresourceListTest {
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("0", atts.getValue().getValue("start"));
         assertEquals("256", atts.getValue().getValue("length"));
+        assertEquals("-1", atts.getValue().getValue("page"));
+        assertEquals("3", atts.getValue().getValue("pages"));
+        verify(this.eresources, this.handler, this.eresource);
+    }
+    
+    @Test
+    public void testPage3With596ToSAX() throws SAXException {
+        this.eresourceArray = new Eresource[596];
+        Arrays.fill(this.eresourceArray, this.eresource);
+        expect(this.eresources.toArray()).andReturn(this.eresourceArray);
+        expect(this.eresources.size()).andReturn(Integer.valueOf(596));
+        this.handler.startDocument();
+        this.handler.startPrefixMapping("", Resource.NAMESPACE);
+        Capture<Attributes> atts = new Capture<Attributes>();
+        this.handler.startElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES), capture(atts));
+        this.handler.startElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class), isA(Attributes.class));
+        expectLastCall().times(1022);
+        this.handler.characters(isA(char[].class), eq(0), eq(1));
+        expectLastCall().times(730);
+        this.handler.endElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class));
+        expectLastCall().times(1023);
+        expect(this.eresource.getScore()).andReturn(Integer.valueOf(0)).times(146);
+        expect(this.eresource.getId()).andReturn(Integer.valueOf(0)).times(146);
+        expect(this.eresource.getRecordId()).andReturn(Integer.valueOf(0)).times(146);
+        expect(this.eresource.getRecordType()).andReturn("0").times(146);
+        expect(this.eresource.getTitle()).andReturn("0").times(146);
+        expect(this.eresource.getDescription()).andReturn("0").times(146);
+        expect(this.eresource.getVersions()).andReturn(Collections.<Version>emptySet()).times(146);
+        this.handler.endPrefixMapping("");
+        this.handler.endDocument();
+        replay(this.eresources, this.handler, this.eresource);
+        new PagingXMLizableEresourceList(this.eresources, 3).toSAX(this.handler);
+        assertEquals("596", atts.getValue().getValue("size"));
+        assertEquals("450", atts.getValue().getValue("start"));
+        assertEquals("146", atts.getValue().getValue("length"));
+        assertEquals("3", atts.getValue().getValue("page"));
+        assertEquals("4", atts.getValue().getValue("pages"));
         verify(this.eresources, this.handler, this.eresource);
     }
 }

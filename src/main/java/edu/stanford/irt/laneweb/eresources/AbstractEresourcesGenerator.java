@@ -21,11 +21,11 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     protected String type;
     
-    protected int show;
+    protected int page;
 
     public void generate() throws SAXException {
 //        new XMLizableEresourceList(getEresourceList()).toSAX(this.xmlConsumer);
-        new PagingXMLizableEresourceList(getEresourceList(), this.show).toSAX(this.xmlConsumer);
+        new PagingXMLizableEresourceList(getEresourceList(), this.page).toSAX(this.xmlConsumer);
     }
 
     public void setCollectionManager(final CollectionManager collectionManager) {
@@ -53,7 +53,7 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
         if (this.mesh != null) {
             this.mesh = this.mesh.toLowerCase();
         }
-        String show = getString(this.model, Model.SHOW, "0");
-        this.show = "all".equals(show) ? -1 : Integer.parseInt(show);
+        String page = getString(this.model, Model.PAGE, "1");
+        this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
     }
 }

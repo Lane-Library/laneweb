@@ -20,7 +20,7 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
      private static final String LENGTH = "length";
 //    private static final String CURRENT_INDEX = "currentIndex";
 
-    // private static final String PAGE = "page";
+     private static final String PAGE = "page";
     // private static final String PAGE_SIZE = "pageSize";
     private static final int DEFAULT_PAGE_SIZE = 100;
 
@@ -38,14 +38,16 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
 
 //    private static final String SHOW_ALL = "showAll";
 
+    private static final String PAGES = "pages";
+
     private String query;
 
-    private int show;
+    private int page;
 
     // private int page;
-    public PagingXMLizableSearchResultSet(final String query, final int show) {
+    public PagingXMLizableSearchResultSet(final String query, final int page) {
         this.query = query;
-        this.show = show;
+        this.page = page;
     }
 
     public void toSAX(final ContentHandler handler) throws SAXException {
@@ -54,22 +56,26 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
         }
         handler.startDocument();
         handler.startPrefixMapping("", NAMESPACE);
-        int totalSize = size();
-        int pageSize = totalSize / MAX_PAGE_COUNT;
+        int size = size();
+        int pageSize = size / MAX_PAGE_COUNT;
         pageSize = pageSize % MAX_PAGE_COUNT != 0 ? pageSize + 1 : pageSize;
         pageSize = pageSize < DEFAULT_PAGE_SIZE ? DEFAULT_PAGE_SIZE : pageSize;
         int start, length;
-        if (this.show == -1 || totalSize <= pageSize) {
+        if (this.page == -1 || size <= pageSize) {
             start = 0;
-            length = totalSize;
+            length = size;
         } else {
-            start = this.show;
-            length = totalSize - start < pageSize ? totalSize - start : pageSize;
+            start = this.page * pageSize;
+            length = size - start < pageSize ? size - start : pageSize;
         }
+        int pages = size / pageSize;
+        pages = size % pageSize != 0 ? pages + 1 : pages;
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, SIZE, SIZE, CDATA, Integer.toString(totalSize));
+        atts.addAttribute(EMPTY_NS, SIZE, SIZE, CDATA, Integer.toString(size));
         atts.addAttribute(EMPTY_NS, START, START, CDATA, Integer.toString(start));
         atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(length));
+        atts.addAttribute(EMPTY_NS, PAGE, PAGE, CDATA, Integer.toString(this.page));
+        atts.addAttribute(EMPTY_NS, PAGES, PAGES, CDATA, Integer.toString(pages));
         XMLUtils.startElement(handler, NAMESPACE, RESOURCES, atts);
         XMLUtils.startElement(handler, NAMESPACE, QUERY);
         XMLUtils.data(handler, this.query);
