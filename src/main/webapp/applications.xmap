@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- this is the live applications.xmap -->
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
@@ -78,7 +77,6 @@
                     <map:generate type="search-content">
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
-                    <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                     <map:transform type="query-highlighting"/>
                     <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
@@ -88,7 +86,6 @@
                     <map:generate type="search-content">
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
-                    <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                     <map:transform type="query-highlighting"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -98,7 +95,6 @@
                         <map:parameter name="timeout" value="5000"/>
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
-                    <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                     <map:transform type="query-highlighting"/>
                     <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
@@ -109,7 +105,6 @@
                         <map:parameter name="timeout" value="5000"/>
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
-                    <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                     <map:transform type="query-highlighting"/>
                     <map:serialize type="xml"/>
                 </map:match>
@@ -119,7 +114,6 @@
                         <map:parameter name="timeout" value="20000"/>
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
-                    <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx"/>-->
                     <map:transform type="query-highlighting"/>
                     <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>

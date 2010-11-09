@@ -9,7 +9,6 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.Resource;
 
 public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implements Resource, XMLizable {
@@ -67,25 +66,25 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
     }
 
     private void handleResultsPage(final ContentHandler handler) throws SAXException {
-        int total = size();
-        int pageSize = total / MAX_PAGE_COUNT;
+        int totalSize = size();
+        int pageSize = totalSize / MAX_PAGE_COUNT;
         pageSize = pageSize % MAX_PAGE_COUNT != 0 ? pageSize + 1 : pageSize;
         pageSize = pageSize < DEFAULT_PAGE_SIZE ? DEFAULT_PAGE_SIZE : pageSize;
         int start;
-        if (this.show == -1 || total <= pageSize) {
+        if (this.show == -1 || totalSize <= pageSize) {
             start = 0;
         } else {
             start = this.show;
         }
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, RESULT_LIMIT, RESULT_LIMIT, CDATA, Integer.toString(pageSize));
-        if (total <= pageSize) {
+        if (totalSize <= pageSize) {
             atts.addAttribute(EMPTY_NS, SHOW, SHOW, CDATA, ALL);
         } else {
             atts.addAttribute(EMPTY_NS, SHOW, SHOW, CDATA, Integer.toString(start));
         }
         atts.addAttribute(EMPTY_NS, CURRENT_INDEX, CURRENT_INDEX, CDATA, Integer.toString(start));
-        atts.addAttribute(EMPTY_NS, SHOW_ALL, SHOW_ALL, CDATA, Boolean.toString(total > pageSize));
+        atts.addAttribute(EMPTY_NS, SHOW_ALL, SHOW_ALL, CDATA, Boolean.toString(totalSize > pageSize));
         XMLUtils.createElementNS(handler, NAMESPACE, PAGINATION, atts);
         int i = 0;
         int j = start + pageSize;
