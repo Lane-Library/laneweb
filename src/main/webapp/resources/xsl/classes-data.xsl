@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns="http://lane.stanford.edu/laneclasses"
+    xmlns:lc="http://lane.stanford.edu/laneclasses"
+    exclude-result-prefixes="lc"
     version="2.0">
 
     <xsl:variable name="now">
@@ -14,36 +17,36 @@
 
     <xsl:template match="/">
         <classes>
-            <xsl:apply-templates select="/classes" />
+            <xsl:apply-templates select="/lc:classes" />
          </classes>
     </xsl:template>
 
 
-    <xsl:template match="class">
+    <xsl:template match="lc:class">
       
         <xsl:variable name="time">
-            <xsl:if test="contains(./time-end, 'pm')">
-                <xsl:value-of select="format-number( number( translate(substring-before(./time-end , 'pm'), '\:', ''))+1200 +$delayToDisplay, '0000')" />
+            <xsl:if test="contains(./lc:time-end, 'pm')">
+                <xsl:value-of select="format-number( number( translate(substring-before(./lc:time-end , 'pm'), '\:', ''))+1200 +$delayToDisplay, '0000')" />
             </xsl:if>
-            <xsl:if test="contains(./time-end, 'am')">
-                <xsl:value-of select="format-number( number( translate(substring-before(./time-end , 'am'), '\:', '') ) +$delayToDisplay, '0000')" />
+            <xsl:if test="contains(./lc:time-end, 'am')">
+                <xsl:value-of select="format-number( number( translate(substring-before(./lc:time-end , 'am'), '\:', '') ) +$delayToDisplay, '0000')" />
             </xsl:if>
-            <xsl:if test="contains(./time-end, 'Noon')">
+            <xsl:if test="contains(./lc:time-end, 'Noon')">
                 <xsl:value-of select="number(1200)+$delayToDisplay"/>
             </xsl:if>
         </xsl:variable>
         
         <xsl:variable name="day">
             <xsl:value-of
-                select="format-number(number(./day/text()), '00')" />
+                select="format-number(number(./lc:day/text()), '00')" />
         </xsl:variable>
         
         <xsl:variable name="month">
-            <xsl:value-of select="./month" />
+            <xsl:value-of select="./lc:month" />
         </xsl:variable>
 
         <xsl:variable name="year">
-            <xsl:value-of select="./year/text()"/>
+            <xsl:value-of select="./lc:year/text()"/>
         </xsl:variable>
         
 
