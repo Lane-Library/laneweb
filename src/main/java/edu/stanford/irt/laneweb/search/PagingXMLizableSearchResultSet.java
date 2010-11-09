@@ -13,30 +13,30 @@ import edu.stanford.irt.laneweb.Resource;
 
 public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implements Resource, XMLizable {
 
-    private static final String ALL = "all";
+//    private static final String ALL = "all";
 
     private static final String CDATA = "CDATA";
 
-    // private static final String LENGTH = "length";
-    private static final String CURRENT_INDEX = "currentIndex";
+     private static final String LENGTH = "length";
+//    private static final String CURRENT_INDEX = "currentIndex";
 
     // private static final String PAGE = "page";
     // private static final String PAGE_SIZE = "pageSize";
     private static final int DEFAULT_PAGE_SIZE = 100;
 
-    // private static final String START = "start";
+     private static final String START = "start";
     // private static final String TOTAL = "total";
     private static final int MAX_PAGE_COUNT = 4;
 
-    private static final String PAGINATION = "pagination";
+//    private static final String PAGINATION = "pagination";
 
-    private static final String RESULT_LIMIT = "resultLimit";
+//    private static final String RESULT_LIMIT = "resultLimit";
 
     private static final long serialVersionUID = 1L;
 
-    private static final String SHOW = "show";
+//    private static final String SHOW = "show";
 
-    private static final String SHOW_ALL = "showAll";
+//    private static final String SHOW_ALL = "showAll";
 
     private String query;
 
@@ -53,19 +53,6 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
             throw new IllegalArgumentException("null handler");
         }
         handler.startPrefixMapping("", NAMESPACE);
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, SIZE, SIZE, "CDATA", Integer.toString(size()));
-        XMLUtils.startElement(handler, NAMESPACE, RESOURCES, atts);
-        XMLUtils.startElement(handler, NAMESPACE, QUERY);
-        XMLUtils.data(handler, this.query);
-        XMLUtils.endElement(handler, NAMESPACE, QUERY);
-        handleSearchContentCounts(handler);
-        handleResultsPage(handler);
-        XMLUtils.endElement(handler, NAMESPACE, RESOURCES);
-        handler.endPrefixMapping("");
-    }
-
-    private void handleResultsPage(final ContentHandler handler) throws SAXException {
         int totalSize = size();
         int pageSize = totalSize / MAX_PAGE_COUNT;
         pageSize = pageSize % MAX_PAGE_COUNT != 0 ? pageSize + 1 : pageSize;
@@ -77,15 +64,14 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
             start = this.show;
         }
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute(EMPTY_NS, RESULT_LIMIT, RESULT_LIMIT, CDATA, Integer.toString(pageSize));
-        if (totalSize <= pageSize) {
-            atts.addAttribute(EMPTY_NS, SHOW, SHOW, CDATA, ALL);
-        } else {
-            atts.addAttribute(EMPTY_NS, SHOW, SHOW, CDATA, Integer.toString(start));
-        }
-        atts.addAttribute(EMPTY_NS, CURRENT_INDEX, CURRENT_INDEX, CDATA, Integer.toString(start));
-        atts.addAttribute(EMPTY_NS, SHOW_ALL, SHOW_ALL, CDATA, Boolean.toString(totalSize > pageSize));
-        XMLUtils.createElementNS(handler, NAMESPACE, PAGINATION, atts);
+        atts.addAttribute(EMPTY_NS, SIZE, SIZE, CDATA, Integer.toString(totalSize));
+        atts.addAttribute(EMPTY_NS, START, START, CDATA, Integer.toString(start));
+        atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(start + pageSize));
+        XMLUtils.startElement(handler, NAMESPACE, RESOURCES, atts);
+        XMLUtils.startElement(handler, NAMESPACE, QUERY);
+        XMLUtils.data(handler, this.query);
+        XMLUtils.endElement(handler, NAMESPACE, QUERY);
+        handleSearchContentCounts(handler);
         int i = 0;
         int j = start + pageSize;
         for (SearchResult result : this) {
@@ -96,7 +82,42 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
             }
             i++;
         }
+        XMLUtils.endElement(handler, NAMESPACE, RESOURCES);
+        handler.endPrefixMapping("");
     }
+
+//    private void handleResultsPage(final ContentHandler handler) throws SAXException {
+//        int totalSize = size();
+//        int pageSize = totalSize / MAX_PAGE_COUNT;
+//        pageSize = pageSize % MAX_PAGE_COUNT != 0 ? pageSize + 1 : pageSize;
+//        pageSize = pageSize < DEFAULT_PAGE_SIZE ? DEFAULT_PAGE_SIZE : pageSize;
+//        int start;
+//        if (this.show == -1 || totalSize <= pageSize) {
+//            start = 0;
+//        } else {
+//            start = this.show;
+//        }
+//        AttributesImpl atts = new AttributesImpl();
+//        atts.addAttribute(EMPTY_NS, RESULT_LIMIT, RESULT_LIMIT, CDATA, Integer.toString(pageSize));
+//        if (totalSize <= pageSize) {
+//            atts.addAttribute(EMPTY_NS, SHOW, SHOW, CDATA, ALL);
+//        } else {
+//            atts.addAttribute(EMPTY_NS, SHOW, SHOW, CDATA, Integer.toString(start));
+//        }
+//        atts.addAttribute(EMPTY_NS, CURRENT_INDEX, CURRENT_INDEX, CDATA, Integer.toString(start));
+//        atts.addAttribute(EMPTY_NS, SHOW_ALL, SHOW_ALL, CDATA, Boolean.toString(totalSize > pageSize));
+//        XMLUtils.createElementNS(handler, NAMESPACE, PAGINATION, atts);
+//        int i = 0;
+//        int j = start + pageSize;
+//        for (SearchResult result : this) {
+//            if (i >= start && i < j) {
+//                result.toSAX(handler);
+//            } else if (i == j) {
+//                break;
+//            }
+//            i++;
+//        }
+//    }
 
     private void handleSearchContentCounts(final ContentHandler handler) throws SAXException {
         XMLUtils.startElement(handler, NAMESPACE, CONTENT_HIT_COUNTS);

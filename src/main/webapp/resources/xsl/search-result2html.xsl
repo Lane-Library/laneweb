@@ -57,7 +57,7 @@
         </xsl:variable>
 
         <dd>
-            <ul class="r-{/s:resources/s:pagination/@currentIndex + position()}">
+            <ul class="r-{/s:resources/@start + position()}">
                 <li>
                     <a class="primaryLink" href="{s:url}">
                         <xsl:apply-templates select="s:title"/>
@@ -106,7 +106,7 @@
     <!-- tranforms eresource result node into displayable -->
     <xsl:template match="s:result[@type='eresource']">
         <dd><!--FIXME not sure why <dd> is stripped only for eresoruces ... search-post? -->
-            <ul class="r-{/s:resources/s:pagination/@currentIndex + position()}">
+            <ul class="r-{/s:resources/@start + position()}">
                 <li>
                     <xsl:choose>
                         <xsl:when
@@ -342,15 +342,13 @@
     </xsl:template>
 
     <xsl:template name="paginationLinks">
-        <xsl:if test="number(/s:resources/@size) > number(/s:resources/s:pagination/@resultLimit)">
+        <xsl:if test="number(/s:resources/@size) &gt;= number(/s:resources/@length)">
             <div class="results-nav">
-                <span class="show"><xsl:value-of select="/s:resources/s:pagination/@show"/></span>
-                <span class="currentIndex"><xsl:value-of select="/s:resources/s:pagination/@currentIndex"/></span>
+                <span class="show"><xsl:value-of select="/s:resources/@start"/></span>
+                <span class="currentIndex"><xsl:value-of select="/s:resources/@start"/></span>
                 <span class="result-count"><xsl:value-of select="/s:resources/@size"/></span>
-                <span class="result-limit"><xsl:value-of select="/s:resources/s:pagination/@resultLimit"/></span>
-                <span class="previous"><xsl:value-of select="/s:resources/s:pagination/@previous"/></span>
-                <span class="next"><xsl:value-of select="/s:resources/s:pagination/@next"/></span>
-                <span class="show-all"><xsl:value-of select="/s:resources/s:pagination/@showAll"/></span>
+                <span class="result-limit"><xsl:value-of select="/s:resources/@length"/></span>
+                <span class="show-all"><xsl:value-of select="number(/s:resources/@size) &gt; number(/s:resources/@length)"/></span>
             </div>
         </xsl:if>
     </xsl:template>

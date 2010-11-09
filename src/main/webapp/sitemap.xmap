@@ -139,7 +139,7 @@
             <map:match pattern="**" type="wildcard">
                 <map:redirect-to uri="/{1}/index.html"/>
             </map:match>
-            <map:handle-errors>
+            <!--<map:handle-errors>
                 <map:aggregate element="doc" label="content">
                     <map:part src="cocoon:/content/error.html"/>
                     <map:part src="cocoon:/content/templates/${template}.xml"/>
@@ -158,7 +158,7 @@
                 <map:transform type="namespace-filter"/>
                 <map:transform type="debug"/>
                 <map:serialize type="xhtml" status-code="404"/>
-            </map:handle-errors>
+            </map:handle-errors>-->
         </map:pipeline>
     </map:pipelines>
 </map:sitemap>
