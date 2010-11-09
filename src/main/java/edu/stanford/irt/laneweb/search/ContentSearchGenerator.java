@@ -39,9 +39,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
 //        XMLizableSearchResultSet mergedSearchResults = new XMLizableSearchResultSet(this.query);
         PagingXMLizableSearchResultSet mergedSearchResults = new PagingXMLizableSearchResultSet(this.query, this.show);
         mergedSearchResults.addAll(getContentResultList(doSearch()));
-        this.xmlConsumer.startDocument();
         mergedSearchResults.toSAX(this.xmlConsumer);
-        this.xmlConsumer.endDocument();
     }
 
     public void setContentResultLimit(final int contentResultLimit) {

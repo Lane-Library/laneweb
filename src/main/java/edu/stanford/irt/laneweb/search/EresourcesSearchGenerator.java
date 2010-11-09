@@ -22,9 +22,7 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
 //        XMLizableSearchResultSet eresources = new XMLizableSearchResultSet(this.query);
         PagingXMLizableSearchResultSet eresources = new PagingXMLizableSearchResultSet(this.query, this.show);
         eresources.addAll(getEresourceList());
-        this.xmlConsumer.startDocument();
         eresources.toSAX(this.xmlConsumer);
-        this.xmlConsumer.endDocument();
     }
 
     public void setCollectionManager(final CollectionManager collectionManager) {

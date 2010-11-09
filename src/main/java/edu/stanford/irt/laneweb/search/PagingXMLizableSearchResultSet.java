@@ -52,21 +52,24 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
         if (null == handler) {
             throw new IllegalArgumentException("null handler");
         }
+        handler.startDocument();
         handler.startPrefixMapping("", NAMESPACE);
         int totalSize = size();
         int pageSize = totalSize / MAX_PAGE_COUNT;
         pageSize = pageSize % MAX_PAGE_COUNT != 0 ? pageSize + 1 : pageSize;
         pageSize = pageSize < DEFAULT_PAGE_SIZE ? DEFAULT_PAGE_SIZE : pageSize;
-        int start;
+        int start, length;
         if (this.show == -1 || totalSize <= pageSize) {
             start = 0;
+            length = totalSize;
         } else {
             start = this.show;
+            length = totalSize - start < pageSize ? totalSize - start : pageSize;
         }
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute(EMPTY_NS, SIZE, SIZE, CDATA, Integer.toString(totalSize));
         atts.addAttribute(EMPTY_NS, START, START, CDATA, Integer.toString(start));
-        atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(pageSize));
+        atts.addAttribute(EMPTY_NS, LENGTH, LENGTH, CDATA, Integer.toString(length));
         XMLUtils.startElement(handler, NAMESPACE, RESOURCES, atts);
         XMLUtils.startElement(handler, NAMESPACE, QUERY);
         XMLUtils.data(handler, this.query);
@@ -84,6 +87,7 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
         }
         XMLUtils.endElement(handler, NAMESPACE, RESOURCES);
         handler.endPrefixMapping("");
+        handler.endDocument();
     }
 
 //    private void handleResultsPage(final ContentHandler handler) throws SAXException {
