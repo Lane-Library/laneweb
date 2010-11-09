@@ -7,7 +7,7 @@ public abstract class AbstractSearchGenerator extends AbstractGenerator {
 
     protected String query;
     
-    protected int show;
+    protected int page;
 
     @Override
     protected void initialize() {
@@ -15,7 +15,7 @@ public abstract class AbstractSearchGenerator extends AbstractGenerator {
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }
-        String show = getString(this.model, Model.SHOW, "0");
-        this.show = "all".equals(show) ? -1 : Integer.parseInt(show);
+        String page = getString(this.model, Model.PAGE, "1");
+        this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
     }
 }
