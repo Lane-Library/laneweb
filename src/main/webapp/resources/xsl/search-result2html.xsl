@@ -15,7 +15,7 @@
     <!-- number of result titles to return per resource; not enforced here, only used for when to build "more" links -->
     <xsl:variable name="moreResultsLimit">10</xsl:variable>
 
-    <xsl:template match="/">
+    <xsl:template match="/s:resources">
         <html>
             <head>
                 <title>search results</title>
@@ -25,6 +25,7 @@
                     <xsl:call-template name="paginationLinks"/>
                 </xsl:if>
                 <dl class="lwSearchResults">
+                    <xsl:apply-templates select="attribute::node()"/>
                     <xsl:apply-templates select="//s:result"/>
                 </dl>
                 <xsl:call-template name="paginationLinks"/>

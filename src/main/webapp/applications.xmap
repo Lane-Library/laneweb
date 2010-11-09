@@ -96,7 +96,7 @@
                         <map:parameter name="engine-list" value="{1}"/>
                     </map:generate>
                     <map:transform type="query-highlighting"/>
-                    <!--<map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>-->
+                    <map:transform type="saxon" src="${resources-base}/xsl/search-result2html.xsl"/>
                     <map:serialize type="xml"/>
                 </map:match>
                 <!-- return raw xml merged metasearch and eresources results -->
