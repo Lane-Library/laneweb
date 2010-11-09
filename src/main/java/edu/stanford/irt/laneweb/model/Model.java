@@ -82,8 +82,6 @@ public interface Model {
 
     public static final String SELECTION = "selection";
 
-    public static final String SHOW = "show";
-
     public static final String SOURCE = "source";
 
     public static final String SOURCEID = "sourceid";
