@@ -146,7 +146,7 @@ public class PagingXMLizableSearchResultSetTest {
         expectLastCall().times(3);
         expect(this.result.compareTo(this.result)).andReturn(Integer.valueOf(1)).atLeastOnce();
         this.result.toSAX(this.handler);
-        expectLastCall().times(100);
+        expectLastCall().times(256);
         this.handler.endPrefixMapping("");
         this.handler.endDocument();
         replay(this.results, this.handler, this.result, this.iterator);
@@ -156,6 +156,38 @@ public class PagingXMLizableSearchResultSetTest {
         assertEquals("256", atts.getValue().getValue("size"));
         assertEquals("0", atts.getValue().getValue("start"));
         assertEquals("256", atts.getValue().getValue("length"));
+        verify(this.results, this.handler, this.result, this.iterator);
+    }
+    
+    @Test
+    public void testToAll539SAX() throws SAXException {
+        expect(this.results.size()).andReturn(Integer.valueOf(539));
+        expect(this.results.iterator()).andReturn(this.iterator);
+        expect(this.iterator.hasNext()).andReturn(Boolean.TRUE).times(539);
+        expect(this.iterator.hasNext()).andReturn(Boolean.FALSE);
+        expect(this.iterator.next()).andReturn(this.result).times(539);
+        this.handler.startDocument();
+        this.handler.startPrefixMapping("", Resource.NAMESPACE);
+        Capture<Attributes> atts = new Capture<Attributes>();
+        this.handler.startElement(eq(Resource.NAMESPACE), eq(Resource.RESOURCES), eq(Resource.RESOURCES), capture(atts));
+        this.handler.startElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class), isA(Attributes.class));
+        expectLastCall().times(2);
+        this.handler.characters(isA(char[].class), eq(0), eq(1));
+        expectLastCall().once();
+        this.handler.endElement(eq(Resource.NAMESPACE), isA(String.class), isA(String.class));
+        expectLastCall().times(3);
+        expect(this.result.compareTo(this.result)).andReturn(Integer.valueOf(1)).atLeastOnce();
+        this.result.toSAX(this.handler);
+        expectLastCall().times(539);
+        this.handler.endPrefixMapping("");
+        this.handler.endDocument();
+        replay(this.results, this.handler, this.result, this.iterator);
+        PagingXMLizableSearchResultSet set = new PagingXMLizableSearchResultSet("1", -1);
+        set.addAll(this.results);
+        set.toSAX(this.handler);
+        assertEquals("539", atts.getValue().getValue("size"));
+        assertEquals("0", atts.getValue().getValue("start"));
+        assertEquals("539", atts.getValue().getValue("length"));
         verify(this.results, this.handler, this.result, this.iterator);
     }
 }

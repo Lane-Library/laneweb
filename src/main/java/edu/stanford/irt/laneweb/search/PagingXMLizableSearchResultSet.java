@@ -76,7 +76,7 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
         XMLUtils.endElement(handler, NAMESPACE, QUERY);
         handleSearchContentCounts(handler);
         int i = 0;
-        int j = start + pageSize;
+        int j = start + length;
         for (SearchResult result : this) {
             if (i >= start && i < j) {
                 result.toSAX(handler);
