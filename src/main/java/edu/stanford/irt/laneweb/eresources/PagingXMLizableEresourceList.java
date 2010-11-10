@@ -15,11 +15,7 @@ import edu.stanford.irt.laneweb.Resource;
 
 public class PagingXMLizableEresourceList extends LinkedList<Eresource> implements XMLizable, Resource {
 
-//    private static final String ALL = "all";
-
     private static final String CDATA = "CDATA";
-
-//    private static final String CURRENT_INDEX = "currentIndex";
 
     private static final int DEFAULT_PAGE_SIZE = 100;
 
@@ -27,29 +23,13 @@ public class PagingXMLizableEresourceList extends LinkedList<Eresource> implemen
 
     private static final int MAX_PAGE_COUNT = 4;
 
-//    private static final String PAGINATION = "pagination";
-
-//    private static final String RESULT_LIMIT = "resultLimit";
-
-    private static final long serialVersionUID = 1L;
-
-//    private static final String SHOW = "show";
-
-//    private static final String SHOW_ALL = "showAll";
-
-    private static final String START = "start";
-
     private static final String PAGE = "page";
 
     private static final String PAGES = "pages";
 
-//    private int page;
+    private static final long serialVersionUID = 1L;
 
-    private int pageSize;
-
-    private int start;
-
-    private int size;
+    private static final String START = "start";
 
     private int length;
 
@@ -57,10 +37,16 @@ public class PagingXMLizableEresourceList extends LinkedList<Eresource> implemen
 
     private int pages;
 
+    private int pageSize;
+
+    private int size;
+
+    private int start;
+
     public PagingXMLizableEresourceList(final Collection<Eresource> eresources) {
         this(eresources, 0);
     }
-    
+
     public PagingXMLizableEresourceList(final Collection<Eresource> eresources, final int page) {
         super(eresources);
         if (page >= MAX_PAGE_COUNT) {

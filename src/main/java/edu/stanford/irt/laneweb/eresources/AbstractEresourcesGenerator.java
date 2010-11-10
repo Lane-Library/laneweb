@@ -24,7 +24,6 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
     protected int page;
 
     public void generate() throws SAXException {
-//        new XMLizableEresourceList(getEresourceList()).toSAX(this.xmlConsumer);
         new PagingXMLizableEresourceList(getEresourceList(), this.page).toSAX(this.xmlConsumer);
     }
 

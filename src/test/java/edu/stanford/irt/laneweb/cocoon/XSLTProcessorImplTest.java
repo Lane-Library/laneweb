@@ -45,7 +45,6 @@ public class XSLTProcessorImplTest {
     public void setUp() throws Exception {
         this.source = createMock(Source.class);
         this.store = createMock(Store.class);
-        // this.xmlizer = createMock(XMLizer.class);
         this.saxParser = new SAXParser() {
 
             public void parse(InputSource in, ContentHandler consumer) throws SAXException, IOException {

@@ -24,12 +24,6 @@ public class LanewebExpression implements Expression {
 
     @SuppressWarnings("rawtypes")
     public Object evaluate(final ObjectModel objectModel) throws ExpressionException {
-        // for (Map map : (Collection<Map>) objectModel.values()) {
-        // if (map.containsKey(this.expression)) {
-        // return map.get(this.expression);
-        // }
-        // }
-        // return null;
         Map model = (Map) objectModel.get("laneweb");
         return model.get(getExpression());
     }

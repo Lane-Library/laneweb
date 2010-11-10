@@ -82,9 +82,6 @@ public class RequestParameterDataBinder implements DataBinder {
             } else if (Model.TIMEOUT.equals(name)) {
                 model.put(Model.TIMEOUT, value);
             }
-                // } else {
-                // model.put(name, request.getParameter(name));
-            
         }
     }
 }

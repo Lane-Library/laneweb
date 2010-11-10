@@ -22,22 +22,18 @@ public class LanewebIntegrationBase {
     private static class DS implements DataSource {
 
         public Connection getConnection() throws SQLException {
-            // TODO Auto-generated method stub
             throw new UnsupportedOperationException();
         }
 
         public Connection getConnection(final String username, final String password) throws SQLException {
-            // TODO Auto-generated method stub
             throw new UnsupportedOperationException();
         }
 
         public int getLoginTimeout() throws SQLException {
-            // TODO Auto-generated method stub
             throw new UnsupportedOperationException();
         }
 
         public PrintWriter getLogWriter() throws SQLException {
-            // TODO Auto-generated method stub
             throw new UnsupportedOperationException();
         }
 
@@ -46,12 +42,10 @@ public class LanewebIntegrationBase {
         }
 
         public void setLoginTimeout(final int seconds) throws SQLException {
-            // TODO Auto-generated method stub
             throw new UnsupportedOperationException();
         }
 
         public void setLogWriter(final PrintWriter out) throws SQLException {
-            // TODO Auto-generated method stub
             throw new UnsupportedOperationException();
         }
 

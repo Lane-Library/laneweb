@@ -23,7 +23,6 @@ public class JSONableQueryMapTest {
 
     private static final String JSON_2 = "{\"query\":\"borderline personality\",\"descriptor\":\"Borderline Personality Disorder\",\"resourceMap\":{\"descriptor\":\"Mental Disorders\",\"resources\":[{\"id\":\"ovid-kaplan\",\"label\":\"Kaplan's Comprehensive Psychiatry\"},{\"id\":\"am_ebert\",\"label\":\"Current Dx & Tx: Psychiatry\"}]}}";
 
-    // "{\"query\":\"tetralogy of fallot\",\"descriptor\":\"Tetralogy of Fallot\",\"resourceMap\":{\"descriptor\":\"Heart Defects, Congenital\",\"resources\":[{\"id\":\"mdc_park\"}]}}";
     @Test
     public void testNoDescriptor() {
         QueryMap qm = createMock(QueryMap.class);

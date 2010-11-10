@@ -27,7 +27,6 @@ public class SunetIdSourceTest {
 
     private SunetIdCookieCodec codec = new SunetIdCookieCodec();
 
-    // private Capture<Cookie> cookieCapture;
     private Cookie cookie;
 
     private HttpServletRequest request;
@@ -42,7 +41,6 @@ public class SunetIdSourceTest {
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
         this.cookie = createMock(Cookie.class);
-        // this.cookieCapture = new Capture<Cookie>();
     }
 
     @Test
@@ -121,29 +119,4 @@ public class SunetIdSourceTest {
         assertEquals(null, this.sunetidSource.getSunetid(this.request));
         verify(this.request, this.session, this.cookie);
     }
-
-    // @Test
-    // public void testAddUserCookie() throws IOException, ServletException {
-    // expect(this.request.getRemoteUser()).andReturn("ditenus");
-    // expect(this.request.getParameter("pl")).andReturn("true");
-    // expect(this.request.getHeader("User-Agent")).andReturn("user agent");
-    // replayMocks();
-    // assertEquals("ditenus", this.sunetidSource.getSunetid(this.request, this.session));
-    // assertEquals(LanewebConstants.LANE_COOKIE_NAME, this.cookieCapture.getValue().getName());
-    // assertEquals(3600 * 24 * 7 * 2, this.cookieCapture.getValue().getMaxAge());
-    // verifyMocks();
-    // }
-    //
-    // @Test
-    // public void testRemoveUserCookie() throws IOException, ServletException {
-    // expect(this.request.getRemoteUser()).andReturn("ditenus");
-    // expect(this.request.getParameter("pl")).andReturn("false");
-    // expect(this.request.getParameter("remove-pl")).andReturn("true");
-    // this.request.setAttribute(Model.SUNETID, "ditenus");
-    // replayMocks();
-    // this.sunetidSource.getSunetid(this.request, this.session);
-    // assertEquals(LanewebConstants.LANE_COOKIE_NAME, this.cookieCapture.getValue().getName());
-    // assertEquals(0, this.cookieCapture.getValue().getMaxAge());
-    // verifyMocks();
-    // }
 }
