@@ -21,7 +21,7 @@ public class TemporaryLinkTableCreator {
         try {
             conn = this.dataSource.getConnection();
             stmt = conn.createStatement();
-            stmt.executeQuery("CREATE TABLE USER_LINKS (USER VARCHAR2(32) PRIMARY KEY, URL VARCHAR2(356), LABEL VARCHAR2(64), ORDER NUMBER(2))");
+            stmt.executeQuery("CREATE TABLE USER_LINKS (SUNETID VARCHAR2(32) PRIMARY KEY, URL VARCHAR2(356), LABEL VARCHAR2(64), ORD NUMBER(2))");
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
         } finally {
