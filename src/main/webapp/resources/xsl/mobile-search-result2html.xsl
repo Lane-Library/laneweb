@@ -11,7 +11,7 @@
     <xsl:param name="rid"/>
 
     <xsl:variable name="consumable-query-string">
-        <xsl:value-of select="replace($query-string,'&amp;show=\w+','')"/>
+        <xsl:value-of select="replace($query-string,'&amp;page=\w+','')"/>
     </xsl:variable>
     
     <xsl:variable name="base-link">
@@ -33,7 +33,7 @@
                 <xsl:apply-templates select="//s:result[s:id = $rid]" mode="full"/>
             </xsl:when>
             <!-- fragment for populating "next" content -->
-            <xsl:when test="contains($query-string,'show=')">
+            <xsl:when test="contains($query-string,'page=')">
                 <xsl:apply-templates select="//s:result" mode="brief"/>
                 <xsl:call-template name="paginationLinks"/>
             </xsl:when>
@@ -75,10 +75,10 @@
             </div>
             <xsl:choose>
                 <xsl:when test="s:description and contains(s:resourceId,'pubmed')">
-                    <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="more">abstract</a>
+                    <a href="{concat($base-link,'&amp;rid=',s:id)}" class="more">abstract</a>
                 </xsl:when>
                 <xsl:when test="s:description">
-                    <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="more">more info</a>
+                    <a href="{concat($base-link,'&amp;rid=',s:id)}" class="more">more info</a>
                 </xsl:when>
             </xsl:choose>
         </li>
@@ -170,7 +170,7 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:if test="s:description or count(s:versions/s:version) > 1">
-                <a href="{concat($base-link,'&amp;show=all&amp;rid=',s:id)}" class="more">more info</a>
+                <a href="{concat($base-link,'&amp;rid=',s:id)}" class="more">more info</a>
             </xsl:if>
         </li>
     </xsl:template>
@@ -410,19 +410,11 @@
 
     <!-- add Next toggle to search results -->
     <xsl:template name="paginationLinks">
-            <xsl:if test="/s:resources/s:pagination/@next != 'false'">
-                <li class="more resultsNav">
-                    <xsl:variable name="n">
-                        <xsl:choose>
-                            <xsl:when test="/s:resources/@size - /s:resources/s:pagination/@next &lt; 20">
-                                <xsl:value-of select="/s:resources/@size - /s:resources/s:pagination/@next"/>
-                            </xsl:when>
-                            <xsl:otherwise>20</xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <a target="_replace" href="{concat($base-link,'&amp;show=',/s:resources/s:pagination/@next)}">next <xsl:value-of select="$n"/></a>
-                </li>
-            </xsl:if>
+        <xsl:if test="number(/s:resources/@pages) &gt; 1 and number(/s:resources/@page) &lt; 3">
+            <li class="more resultsNav">
+                <a target="_replace" href="{concat($base-link,'&amp;page=',number(/s:resources/@page) + 2)}">next</a>
+            </li>
+        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>
