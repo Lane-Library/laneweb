@@ -79,8 +79,12 @@
         class="edu.stanford.irt.laneweb.cocoon.ContentAggregator" scope="prototype">
         <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
-
-
+    
+    <!--<bean name="org.apache.cocoon.generation.Generator/search-template-generator"
+        class="edu.stanford.irt.laneweb.search.SearchContentAggregator" scope="prototype">
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
+        </bean>-->
+    
     <bean name="org.apache.cocoon.generation.Generator/search-template-generator"
         class="edu.stanford.irt.laneweb.search.SearchContentAggregator" scope="prototype">
     </bean>
