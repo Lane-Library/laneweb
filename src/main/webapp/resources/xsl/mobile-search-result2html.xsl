@@ -75,10 +75,10 @@
             </div>
             <xsl:choose>
                 <xsl:when test="s:description and contains(s:resourceId,'pubmed')">
-                    <a href="{concat($base-link,'&amp;rid=',s:id)}" class="more">abstract</a>
+                    <a href="{concat($base-link,'&amp;page=all&amp;rid=',s:id)}" class="more">abstract</a>
                 </xsl:when>
                 <xsl:when test="s:description">
-                    <a href="{concat($base-link,'&amp;rid=',s:id)}" class="more">more info</a>
+                    <a href="{concat($base-link,'&amp;page=all&amp;rid=',s:id)}" class="more">more info</a>
                 </xsl:when>
             </xsl:choose>
         </li>
@@ -170,7 +170,7 @@
                 </xsl:otherwise>
             </xsl:choose>
             <xsl:if test="s:description or count(s:versions/s:version) > 1">
-                <a href="{concat($base-link,'&amp;rid=',s:id)}" class="more">more info</a>
+                <a href="{concat($base-link,'&amp;page=all&amp;rid=',s:id)}" class="more">more info</a>
             </xsl:if>
         </li>
     </xsl:template>
