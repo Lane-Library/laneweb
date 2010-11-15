@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2010-11-02" version="1.11.10" description="1.11.10 bug fix release">
+        <release date="2010-11-15" version="1.11.10" description="1.11.10 bug fix release">
             <action date="2010-11-11" dev="ceyates" issue="42141" type="add">
                 images backgrounds css
             </action>
