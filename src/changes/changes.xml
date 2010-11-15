@@ -7,6 +7,14 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-11-02" version="1.11.10" description="1.11.10 bug fix release">
+            <action date="2010-11-11" dev="ceyates" issue="42141" type="add">
+                images backgrounds css
+            </action>
+            <action date="2010-11-08" dev="ceyates" issue="42129" type="add">
+                subscribe button css and follow us buttons
+            </action>
+        </release>
         <release date="2010-11-08" version="1.11.9" description="1.11.9 bug fix release">
             <action date="2010-11-05" dev="ryanmax" issue="44445" type="add">
                 EZproxy: automatically configure SSL hosts from the catalog
