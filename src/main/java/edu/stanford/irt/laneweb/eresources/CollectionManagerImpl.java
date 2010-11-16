@@ -292,7 +292,7 @@ public class CollectionManagerImpl implements CollectionManager {
             }
             rs = stmt.executeQuery();
             while (rs.next()) {
-                result.put(rs.getString(1), new Integer(rs.getInt(2)));
+                result.put(rs.getString(1), Integer.valueOf(rs.getInt(2)));
             }
             return result;
         } catch (SQLException e) {

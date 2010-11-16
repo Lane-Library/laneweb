@@ -781,7 +781,7 @@ public class CachingPipeline extends NonCachingPipeline {
                             if (LOGGER.isDebugEnabled()) {
                                 LOGGER.debug("Refreshing expires informations");
                             }
-                            response.setExpires(new Long(this.expires + System.currentTimeMillis()));
+                            response.setExpires(Long.valueOf(this.expires + System.currentTimeMillis()));
                         } else {
                             if (LOGGER.isDebugEnabled()) {
                                 LOGGER.debug("No expires defined anymore for this object, setting it to no expires");
@@ -796,7 +796,7 @@ public class CachingPipeline extends NonCachingPipeline {
                         if (LOGGER.isDebugEnabled()) {
                             LOGGER.debug("Setting a new expires object for this resource");
                         }
-                        response.setExpires(new Long(this.expires + System.currentTimeMillis()));
+                        response.setExpires(Long.valueOf(this.expires + System.currentTimeMillis()));
                     }
                 }
                 SourceValidity[] fromCacheValidityObjects = response.getValidityObjects();
