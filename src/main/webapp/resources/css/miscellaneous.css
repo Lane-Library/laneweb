@@ -1,70 +1,76 @@
 /* This file has rules that don't seem to fit anywhere else */
 p {
-    line-height:18px;
-    margin-bottom:10px;
+    line-height: 18px;
+    margin-bottom: 10px;
 }
 .content {
-    color:#3F3C30;
-    font-size:12px;
+    color: #3F3C30;
+    font-size: 12px;
 }
-/*strong, em {
-    font-weight:bold;
-}
-em {
-    color:#820000;
-}*/
+/*
+  strong, em {
+  font-weight:bold;
+  }
+  em {
+  color:#820000;
+  }
+ */
 strong {
-    font-weight:bold;
+    font-weight: bold;
 }
 em {
-    font-style:italic
+    font-style: italic
 }
 .term {
-    font-style:italic
+    font-style: italic
 }
 .inputHint {
-    color:#808080;
+    color: #808080;
 }
 .more {
-    text-transform:uppercase;
-    text-align:right;
-    border-bottom:1px solid #EAE9E6;
-    border-top:1px solid #EAE9E6;
-    clear:left;
-    font-size:9px;
-    letter-spacing:1px;
-    padding:3px;
+    text-transform: uppercase;
+    text-align: right;
+    border-bottom: 1px solid #EAE9E6;
+    border-top: 1px solid #EAE9E6;
+    clear: left;
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 3px;
 }
 .more a {
-    border:none;
+    border: none;
 }
 /* used for pubmed and highly accessed article lists */
 .citationList li {
     list-style: decimal;
-    margin-bottom:1em;
+    margin-bottom: 1em;
 }
 .divider {
-    text-align:center;
+    text-align: center;
 }
 .rss-link {
-    float:right;
-    background-image:url(/././resources/images/rss.png);
-    height:13px;
-    width:13px;
-    background-repeat:no-repeat;
-    font-size:0;
-    text-indent:-1000px
+    float: right;
+    background-image: url(/././resources/images/rss.png);
+    height: 13px;
+    width: 13px;
+    background-repeat: no-repeat;
+    font-size: 0;
+    text-indent: -1000px
 }
 .rss-link:hover {
-    background-image:url(/././resources/images/rss_over.png);
-    border-bottom:none;
-}
-#back-old-site {
-    position:absolute;
-    top:20px;
-    left:500px;
-    border-bottom:none;
+    background-image: url(/././resources/images/rss_over.png);
+    border-bottom: none;
 }
 .red-text {
-    color:#820000
+    color: #820000
+}
+.announce {
+    color: #820000;
+    font-family: Georgia,'Times New Roman',Times,serif;
+    font-size: 1.3em;
+    line-height: 1.5em;
+    background-color: #F6F3E5;
+    border: 1px solid #EEE3C1;
+    margin: 0 0 20px;
+    padding: 20px;
 }
