@@ -31,14 +31,16 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
+            <map:match pattern="lane.manifest" type="wildcard">
+                <map:read type="txt-resource" src="${content-base}/m/lane.manifest">
+                    <map:parameter name="alt-src" value="${default-content-base}/m/lane.manifest"/>
+                </map:read>
+            </map:match>
             <!-- EResources browse -->
             <map:match pattern="er/browse/type/*" type="wildcard">
                 <map:generate type="er-browse">
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
-                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
-                    <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>-->
                 <map:transform type="saxon" src="${resources-base}/xsl/mobile-search-result2html.xsl">
                     <map:parameter name="cache-key" value="${rid}"/>
                 </map:transform>
@@ -54,9 +56,6 @@
                 <map:generate type="er-browse">
                     <map:parameter name="subset" value="{1}"/>
                 </map:generate>
-                <!--<map:transform type="joost" src="${resources-base}/xsl/resource-paginator.stx">
-                    <map:parameter name="cache-key" value="${show}"/>
-                </map:transform>-->
                 <map:transform type="saxon" src="${resources-base}/xsl/mobile-search-result2html.xsl">
                     <map:parameter name="cache-key" value="${rid}"/>
                 </map:transform>
@@ -67,6 +66,33 @@
                     </map:when>
                 </map:select>
                 <map:serialize type="xml"/>
+            </map:match>
+            <!-- text version of laneweb content -->
+            <map:match pattern="lc2txt/**.html" type="wildcard">
+                <map:generate type="file" src="cocoon://content/{1}.html"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/mobile-content.xsl"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:transform type="namespace-filter"/>
+                <map:serialize type="xml"/>
+            </map:match>
+            <map:match pattern="**.html" type="wildcard">
+                <map:generate type="file" src="cocoon://content/m/{1}.html"/>
+                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
+                    <map:parameter name="alt-src" value="${resources-base}/xsl/laneweb.xsl"/>
+                </map:transform>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:transform type="namespace-filter"/>
+                <map:transform type="debug"/>
+                <map:serialize type="xhtml"/>
             </map:match>
         </map:pipeline>
     </map:pipelines>

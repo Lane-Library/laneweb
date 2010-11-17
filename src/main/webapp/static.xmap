@@ -24,11 +24,6 @@
             <map:match pattern="resources/css/*.css" type="wildcard">
                 <map:read type="txt-resource" src="${resources-base}/css/{1}.css"/>
             </map:match>
-            <map:match pattern="m/lane.manifest" type="wildcard">
-                <map:read type="txt-resource" src="${content-base}/m/lane.manifest">
-                    <map:parameter name="alt-src" value="${default-content-base}/m/lane.manifest"/>
-                </map:read>
-            </map:match>
             <map:match pattern="resources/images/**" type="wildcard">
                 <map:read type="resource" src="${resources-base}/images/{1}"/>
             </map:match>

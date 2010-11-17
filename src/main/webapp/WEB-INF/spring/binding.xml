@@ -102,7 +102,6 @@
             <map>
                 <entry key="^(?:/\w+|)/biomed-resources/bassett/raw/bassettLargerView.html"
                     value="bassettLargerView"/>
-                <entry key="^(?:/\w+|)/m/(?:.*)" value="mobile"/>
             </map>
         </constructor-arg>
     </bean>
