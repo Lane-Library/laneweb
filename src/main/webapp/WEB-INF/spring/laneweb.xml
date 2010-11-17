@@ -6,6 +6,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
+    <bean class="edu.stanford.irt.laneweb.TemporaryLinkTableCreator"
+        init-method="initialize">
+        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+    </bean>
+
     <bean id="org.apache.cocoon.caching.Cache" class="org.apache.cocoon.caching.impl.CacheImpl">
         <property name="store" ref="org.apache.excalibur.store.Store"/>
     </bean>
