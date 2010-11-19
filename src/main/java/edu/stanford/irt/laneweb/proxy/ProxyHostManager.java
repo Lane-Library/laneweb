@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 
 import javax.sql.DataSource;
 
-import edu.stanford.irt.laneweb.JdbcUtils;
+import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class ProxyHostManager {
 

@@ -18,7 +18,7 @@ import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.Version;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
-import edu.stanford.irt.laneweb.JdbcUtils;
+import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class BassettCollectionManager {
 

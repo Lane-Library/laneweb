@@ -11,8 +11,8 @@ import org.apache.cocoon.xml.XMLUtils;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.laneweb.JdbcUtils;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
+import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class LinkScanGenerator extends AbstractGenerator {
 

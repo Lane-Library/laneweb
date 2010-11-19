@@ -21,7 +21,7 @@ import edu.stanford.irt.eresources.impl.EresourceImpl;
 import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.eresources.impl.QueryTranslator;
 import edu.stanford.irt.eresources.impl.VersionImpl;
-import edu.stanford.irt.laneweb.JdbcUtils;
+import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class HistoryCollectionManager implements CollectionManager {
 

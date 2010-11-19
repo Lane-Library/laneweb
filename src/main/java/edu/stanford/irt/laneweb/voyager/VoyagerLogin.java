@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.stanford.irt.laneweb.JdbcUtils;
+import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class VoyagerLogin {
     

@@ -9,8 +9,8 @@ import java.util.LinkedList;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.impl.EresourceImpl;
-import edu.stanford.irt.laneweb.JdbcUtils;
 import edu.stanford.irt.laneweb.eresources.CollectionManagerImpl;
+import edu.stanford.irt.laneweb.util.JdbcUtils;
 import edu.stanford.irt.suggest.QueryNormalizer;
 
 public abstract class AbstractSuggestCollectionManager extends CollectionManagerImpl {

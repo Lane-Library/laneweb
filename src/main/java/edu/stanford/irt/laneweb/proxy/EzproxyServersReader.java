@@ -8,8 +8,8 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
-import edu.stanford.irt.laneweb.JdbcUtils;
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
+import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class EzproxyServersReader extends AbstractReader {
 

@@ -2,7 +2,7 @@
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
     
-    <appender name="LOG" class="edu.stanford.irt.laneweb.LogAppender">
+    <appender name="LOG" class="edu.stanford.irt.laneweb.util.LogAppender">
         <param name="File" value="${catalina.base}/logs/laneweb.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="10MB"/>
