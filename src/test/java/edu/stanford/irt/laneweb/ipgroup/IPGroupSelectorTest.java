@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.cocoon;
+package edu.stanford.irt.laneweb.ipgroup;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

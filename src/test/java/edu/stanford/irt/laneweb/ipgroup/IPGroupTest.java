@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.ipgroup;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
