@@ -1,11 +1,10 @@
-package edu.stanford.irt.laneweb.cocoon;
+package edu.stanford.irt.laneweb.ipgroup;
 
 import java.util.Map;
 
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.selection.Selector;
 
-import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.model.DefaultModelAware;
 import edu.stanford.irt.laneweb.model.Model;
 

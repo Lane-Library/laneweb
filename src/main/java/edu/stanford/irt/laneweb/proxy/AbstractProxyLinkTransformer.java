@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.proxy;
 
-import edu.stanford.irt.laneweb.IPGroup;
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
+import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 
 // $Id$

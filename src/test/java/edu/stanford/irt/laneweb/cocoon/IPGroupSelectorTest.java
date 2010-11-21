@@ -9,7 +9,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.IPGroup;
+import edu.stanford.irt.laneweb.ipgroup.IPGroup;
+import edu.stanford.irt.laneweb.ipgroup.IPGroupSelector;
 import edu.stanford.irt.laneweb.model.Model;
 
 public class IPGroupSelectorTest {

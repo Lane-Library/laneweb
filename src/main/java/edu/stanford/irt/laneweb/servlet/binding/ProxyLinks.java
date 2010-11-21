@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import edu.stanford.irt.laneweb.IPGroup;
+import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 
 /**
  * @author ceyates $Id$

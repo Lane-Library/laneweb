@@ -15,7 +15,7 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.IPGroup;
+import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 
 // $Id$

@@ -43,7 +43,7 @@
     </bean>
     
     <bean name="org.apache.cocoon.selection.Selector/ipgroup"
-        class="edu.stanford.irt.laneweb.cocoon.IPGroupSelector"
+        class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector"
         scope="prototype">
     </bean>
     
