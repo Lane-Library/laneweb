@@ -3,12 +3,11 @@ package edu.stanford.irt.laneweb.model;
 import java.util.Map;
 
 /**
- * Default implementation of {@link:ModelAware}. Extending this allows a bean to get values of various type, not just
- * String and primitives as from Parameters.
+ * Provides type casting and default values when accessing map values
  * 
  * @author ceyates $Id$
  */
-public abstract class DefaultModelAware implements ModelAware {
+public abstract class DefaultModelAware {
 
     protected Map<String, Object> model;
 
