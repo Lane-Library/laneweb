@@ -5,6 +5,8 @@ import java.util.Map.Entry;
 
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.util.ModelUtil;
+
 /**
  * This transformer puts a comment with all model attributes at the top of a document.
  * 
@@ -29,6 +31,6 @@ public class DebugTransformer extends AbstractTransformer {
 
     @Override
     protected void initialize() {
-        this.debug = getObject(this.model, "debug", Boolean.class, Boolean.FALSE);
+        this.debug = ModelUtil.getObject(this.model, "debug", Boolean.class, Boolean.FALSE);
     }
 }

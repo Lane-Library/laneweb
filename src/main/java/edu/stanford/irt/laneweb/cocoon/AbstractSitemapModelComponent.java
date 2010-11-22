@@ -9,13 +9,15 @@ import org.apache.cocoon.objectmodel.helper.ParametersMap;
 import org.apache.cocoon.sitemap.SitemapModelComponent;
 import org.apache.excalibur.source.Source;
 
-import edu.stanford.irt.laneweb.model.DefaultModelAware;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
-public abstract class AbstractSitemapModelComponent extends DefaultModelAware implements SitemapModelComponent {
+public abstract class AbstractSitemapModelComponent implements SitemapModelComponent {
 
     private static final String ALT_SOURCE = "alt-src";
 
     protected Map<String, String> parameterMap;
+
+    protected Map<String, Object> model;
 
     protected Source source;
 

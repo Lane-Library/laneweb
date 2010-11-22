@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 import edu.stanford.irt.spell.SpellChecker;
 
 /**
@@ -38,7 +39,7 @@ public class SpellCheckGenerator extends AbstractGenerator {
 
     @Override
     protected void initialize() {
-        this.query = getString(this.model, Model.QUERY);
+        this.query = ModelUtil.getString(this.model, Model.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }

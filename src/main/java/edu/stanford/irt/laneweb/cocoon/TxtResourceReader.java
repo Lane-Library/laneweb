@@ -10,6 +10,7 @@ import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public class TxtResourceReader extends AbstractReader implements CacheableProcessingComponent {
     
@@ -54,6 +55,6 @@ public class TxtResourceReader extends AbstractReader implements CacheableProces
 
     @Override
     protected void initialize() {
-        this.basePath = getString(this.model, Model.BASE_PATH);
+        this.basePath = ModelUtil.getString(this.model, Model.BASE_PATH);
     }
 }

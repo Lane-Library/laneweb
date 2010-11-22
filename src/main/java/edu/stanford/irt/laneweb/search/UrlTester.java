@@ -9,6 +9,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public class UrlTester extends AbstractReader {
 
@@ -56,7 +57,7 @@ public class UrlTester extends AbstractReader {
 
     @Override
     protected void initialize() {
-        this.url = getString(this.model, Model.URL);
+        this.url = ModelUtil.getString(this.model, Model.URL);
         if (this.url == null) {
             throw new IllegalStateException(Model.URL + " is null");
         }

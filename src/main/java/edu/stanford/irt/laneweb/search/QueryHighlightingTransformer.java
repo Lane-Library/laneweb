@@ -11,6 +11,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.laneweb.Resource;
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
 // $Id$
 public class QueryHighlightingTransformer extends AbstractTransformer {
@@ -88,7 +89,7 @@ public class QueryHighlightingTransformer extends AbstractTransformer {
 
     @Override
     protected void initialize() {
-        String query = getString(this.model, Model.QUERY);
+        String query = ModelUtil.getString(this.model, Model.QUERY);
         if (null == query) {
             throw new IllegalArgumentException("null query");
         }

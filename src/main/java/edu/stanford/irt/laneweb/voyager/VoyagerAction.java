@@ -5,6 +5,7 @@ import java.util.Map;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractAction;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public class VoyagerAction extends AbstractAction {
 
@@ -14,9 +15,9 @@ public class VoyagerAction extends AbstractAction {
 
     @Override
     public Map<String, String> doAct() {
-        String pid = getString(this.model, Model.PID);
-        String queryString = getString(this.model, Model.QUERY_STRING);
-        String univId = getString(this.model, Model.UNIVID);
+        String pid = ModelUtil.getString(this.model, Model.PID);
+        String queryString = ModelUtil.getString(this.model, Model.QUERY_STRING);
+        String univId = ModelUtil.getString(this.model, Model.UNIVID);
         String url = this.voyagerLogin.getVoyagerURL(univId, pid, queryString);
         Map<String, String> result = new HashMap<String, String>(1);
         result.put(VOYAGER_KEY, url);

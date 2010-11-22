@@ -7,6 +7,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
 /**
  * @author alainb $Id$
@@ -40,8 +41,8 @@ public class BassettEresourcesGenerator extends AbstractBassettGenerator {
 
     @Override
     protected void initialize() {
-        this.query = getString(this.model, Model.QUERY);
-        this.region = getString(this.model, Model.REGION);
-        this.bassettNumber = getString(this.model, Model.BASSETT_NUMBER);
+        this.query = ModelUtil.getString(this.model, Model.QUERY);
+        this.region = ModelUtil.getString(this.model, Model.REGION);
+        this.bassettNumber = ModelUtil.getString(this.model, Model.BASSETT_NUMBER);
     }
 }

@@ -9,6 +9,7 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public class EresourcesSearchGenerator extends AbstractSearchGenerator {
 
@@ -54,8 +55,8 @@ public class EresourcesSearchGenerator extends AbstractSearchGenerator {
     protected void initialize() {
         super.initialize();
         this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : 
-                getString(this.model, Model.TYPE);
+            ModelUtil.getString(this.model, Model.TYPE);
         this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : 
-                getString(this.model, Model.SUBSET);
+            ModelUtil.getString(this.model, Model.SUBSET);
     }
 }

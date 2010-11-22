@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.search;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public abstract class AbstractSearchGenerator extends AbstractGenerator {
 
@@ -11,11 +12,11 @@ public abstract class AbstractSearchGenerator extends AbstractGenerator {
 
     @Override
     protected void initialize() {
-        this.query = getString(this.model, Model.QUERY);
+        this.query = ModelUtil.getString(this.model, Model.QUERY);
         if (null == this.query) {
             throw new IllegalArgumentException("null query");
         }
-        String page = getString(this.model, Model.PAGE, "1");
+        String page = ModelUtil.getString(this.model, Model.PAGE, "1");
         this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
     }
 }

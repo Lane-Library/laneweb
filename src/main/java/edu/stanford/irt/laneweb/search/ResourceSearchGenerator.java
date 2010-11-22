@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
@@ -36,7 +37,7 @@ public class ResourceSearchGenerator extends SearchGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.resources = getObject(this.model, Model.RESOURCES, Collection.class);
+        this.resources = ModelUtil.getObject(this.model, Model.RESOURCES, Collection.class);
         if (this.resources == null) {
             String resourceList = this.parameterMap.get("resource-list");
             if (resourceList == null) {

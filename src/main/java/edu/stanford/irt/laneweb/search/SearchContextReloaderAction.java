@@ -4,6 +4,7 @@ import java.util.Map;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractAction;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
 /**
  * @author alainb $Id$
@@ -18,9 +19,9 @@ public class SearchContextReloaderAction extends AbstractAction {
 
     @Override
     public Map<String, String> doAct() {
-        String release = getString(this.model, Model.RELEASE);
-        String sunetid = getString(this.model, Model.SUNETID);
-        String password = getString(this.model, Model.PASSWORD);
+        String release = ModelUtil.getString(this.model, Model.RELEASE);
+        String sunetid = ModelUtil.getString(this.model, Model.SUNETID);
+        String password = ModelUtil.getString(this.model, Model.PASSWORD);
         if (release != null && sunetid != null && password != null) {
             this.msms.reload(this.svnUrlProject.concat(release).concat(this.svnUrlPath), sunetid, password);
         }

@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 import edu.stanford.irt.search.ContentResult;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
@@ -103,8 +104,8 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
     @SuppressWarnings("unchecked")
     protected void initialize() {
         super.initialize();
-        this.timeout = getString(this.model, "timeout", this.parameterMap.get("timeout"));
-        this.engines = getObject(this.model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
+        this.timeout = ModelUtil.getString(this.model, "timeout", this.parameterMap.get("timeout"));
+        this.engines = ModelUtil.getObject(this.model, Model.ENGINES, Collection.class, Collections.<String> emptyList());
         if (this.engines.size() == 0) {
             String engineList = this.parameterMap.get("engine-list");
             if (engineList != null) {

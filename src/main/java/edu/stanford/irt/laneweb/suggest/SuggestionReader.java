@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
 
@@ -129,8 +130,8 @@ public class SuggestionReader extends AbstractReader {
 
     @Override
     protected void initialize() {
-        this.callback = getString(this.model, Model.CALLBACK, "");
-        this.limit = getString(this.model, Model.LIMIT, "");
-        this.query = getString(this.model, Model.QUERY);
+        this.callback = ModelUtil.getString(this.model, Model.CALLBACK, "");
+        this.limit = ModelUtil.getString(this.model, Model.LIMIT, "");
+        this.query = ModelUtil.getString(this.model, Model.QUERY);
     }
 }

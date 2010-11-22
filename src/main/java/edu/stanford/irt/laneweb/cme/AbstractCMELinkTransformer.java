@@ -2,6 +2,7 @@ package edu.stanford.irt.laneweb.cme;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public abstract class AbstractCMELinkTransformer extends AbstractTransformer {
 
@@ -27,7 +28,7 @@ public abstract class AbstractCMELinkTransformer extends AbstractTransformer {
 
     @Override
     protected void initialize() {
-        this.emrid = getString(this.model, Model.EMRID);
+        this.emrid = ModelUtil.getString(this.model, Model.EMRID);
     }
 
     protected boolean isCMEHost(final String link) {

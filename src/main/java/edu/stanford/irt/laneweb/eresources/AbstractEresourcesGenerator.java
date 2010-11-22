@@ -8,6 +8,7 @@ import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
@@ -38,9 +39,9 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     @Override
     protected void initialize() {
-        this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : getString(this.model, Model.TYPE);
-        this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : getString(this.model, Model.SUBSET);
-        this.alpha = getString(this.model, Model.ALPHA);
+        this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : ModelUtil.getString(this.model, Model.TYPE);
+        this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : ModelUtil.getString(this.model, Model.SUBSET);
+        this.alpha = ModelUtil.getString(this.model, Model.ALPHA);
         if (this.alpha != null && this.alpha.length() > 1) {
             if ("all".equals(this.alpha)) {
                 this.alpha = null;
@@ -48,11 +49,11 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
                 this.alpha = this.alpha.substring(0, 1);
             }
         }
-        this.mesh = getString(this.model, Model.MESH);
+        this.mesh = ModelUtil.getString(this.model, Model.MESH);
         if (this.mesh != null) {
             this.mesh = this.mesh.toLowerCase();
         }
-        String page = getString(this.model, Model.PAGE, "1");
+        String page = ModelUtil.getString(this.model, Model.PAGE, "1");
         this.page = "all".equals(page) ? -1 : Integer.parseInt(page) - 1;
     }
 }

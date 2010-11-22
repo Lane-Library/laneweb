@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.model;
+package edu.stanford.irt.laneweb.util;
 
 import java.util.Map;
 
@@ -7,27 +7,25 @@ import java.util.Map;
  * 
  * @author ceyates $Id$
  */
-public abstract class DefaultModelAware {
-
-    protected Map<String, Object> model;
+public abstract class ModelUtil {
 
     @SuppressWarnings("unchecked")
-    public <T> T getObject(Map<String, Object> map, String name, Class<T> clazz) {
+    public static <T> T getObject(Map<String, Object> map, String name, Class<T> clazz) {
         return (T) map.get(name);
     }
 
-    public <T> T getObject(Map<String, Object> map, String name, Class<T> clazz, T defaultValue) {
+    public static <T> T getObject(Map<String, Object> map, String name, Class<T> clazz, T defaultValue) {
         if (!map.containsKey(name)) {
             return defaultValue;
         }
         return getObject(map, name, clazz);
     }
     
-    public String getString(Map<String, Object> map, String name) {
+    public static String getString(Map<String, Object> map, String name) {
         return getObject(map, name, String.class);
     }
     
-    public String getString(Map<String, Object> map, String name, String defaultValue) {
+    public static String getString(Map<String, Object> map, String name, String defaultValue) {
         return getObject(map, name, String.class, defaultValue);
     }
 }

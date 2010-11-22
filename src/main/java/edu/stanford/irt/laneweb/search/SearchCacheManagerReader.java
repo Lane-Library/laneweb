@@ -7,6 +7,7 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 
 public class SearchCacheManagerReader extends AbstractReader {
@@ -14,7 +15,7 @@ public class SearchCacheManagerReader extends AbstractReader {
     private SearchCacheManager searchCache;
 
     public void generate() throws IOException, SAXException, ProcessingException {
-        String query = getString(this.model, Model.QUERY);
+        String query = ModelUtil.getString(this.model, Model.QUERY);
         if (query != null) {
             this.searchCache.clearCache(query);
         } else {

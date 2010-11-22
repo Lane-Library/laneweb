@@ -8,11 +8,13 @@ import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.objectmodel.helper.ParametersMap;
 
-import edu.stanford.irt.laneweb.model.DefaultModelAware;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
-public abstract class AbstractAction extends DefaultModelAware implements Action {
+public abstract class AbstractAction implements Action {
 
     protected Map<String, String> parametersMap;
+
+    protected Map<String, Object> model;
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,

@@ -6,6 +6,7 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 
 /**
  * @author alainb $Id$
@@ -22,6 +23,6 @@ public class BassettAccordionEresourcesGenerator extends AbstractBassettGenerato
 
     @Override
     protected void initialize() {
-        this.query = getString(this.model, Model.QUERY, "bassett");
+        this.query = ModelUtil.getString(this.model, Model.QUERY, "bassett");
     }
 }

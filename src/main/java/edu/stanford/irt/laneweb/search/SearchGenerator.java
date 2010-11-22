@@ -3,6 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Collection;
 
 import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.util.ModelUtil;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.DefaultResult;
@@ -82,8 +83,8 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
     @Override
     protected void initialize() {
         super.initialize();
-        this.timeout = getString(this.model, Model.TIMEOUT, this.parameterMap.get(Model.TIMEOUT));
-        this.wait = getString(this.model, "wait");
-        this.synchronous = getString(this.model, Model.SYNCHRONOUS, this.parameterMap.get(Model.SYNCHRONOUS));
+        this.timeout = ModelUtil.getString(this.model, Model.TIMEOUT, this.parameterMap.get(Model.TIMEOUT));
+        this.wait = ModelUtil.getString(this.model, "wait");
+        this.synchronous = ModelUtil.getString(this.model, Model.SYNCHRONOUS, this.parameterMap.get(Model.SYNCHRONOUS));
     }
 }
