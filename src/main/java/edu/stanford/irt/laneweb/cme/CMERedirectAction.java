@@ -3,8 +3,8 @@ package edu.stanford.irt.laneweb.cme;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.AbstractAction;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public class CMERedirectAction extends AbstractAction {

@@ -1,9 +1,11 @@
-package edu.stanford.irt.laneweb.model;
+package edu.stanford.irt.laneweb.cocoon.expression;
 
 import org.apache.cocoon.el.ExpressionCompiler;
 import org.apache.cocoon.el.ExpressionException;
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.cocoon.expression.LanewebExpressionCompiler;
 
 public class LanewebExpressionCompilerTest {
 

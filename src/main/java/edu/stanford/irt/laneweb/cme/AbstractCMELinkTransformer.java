@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.cme;
 
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public abstract class AbstractCMELinkTransformer extends AbstractTransformer {

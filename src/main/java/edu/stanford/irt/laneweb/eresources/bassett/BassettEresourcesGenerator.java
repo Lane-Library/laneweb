@@ -6,7 +6,7 @@ import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 
 /**

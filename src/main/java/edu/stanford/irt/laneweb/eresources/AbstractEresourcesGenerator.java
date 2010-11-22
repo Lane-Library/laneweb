@@ -6,8 +6,8 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public abstract class AbstractEresourcesGenerator extends AbstractGenerator {

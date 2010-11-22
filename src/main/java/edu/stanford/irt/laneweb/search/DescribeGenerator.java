@@ -3,7 +3,7 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;

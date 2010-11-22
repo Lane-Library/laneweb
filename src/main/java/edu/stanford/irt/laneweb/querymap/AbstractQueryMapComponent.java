@@ -5,8 +5,8 @@ import java.net.URL;
 import java.util.Map;
 import java.util.Set;
 
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.AbstractSitemapModelComponent;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 import edu.stanford.irt.querymap.DescriptorWeightMap;
 import edu.stanford.irt.querymap.QueryMap;

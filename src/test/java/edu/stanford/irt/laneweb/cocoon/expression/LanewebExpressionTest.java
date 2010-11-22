@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.model;
+package edu.stanford.irt.laneweb.cocoon.expression;
 
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
@@ -13,6 +13,8 @@ import org.apache.cocoon.el.ExpressionException;
 import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.stanford.irt.laneweb.cocoon.expression.LanewebExpression;
 
 /*
  * $Id$

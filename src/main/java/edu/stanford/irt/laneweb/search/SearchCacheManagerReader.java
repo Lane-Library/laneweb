@@ -5,8 +5,8 @@ import java.io.IOException;
 import org.apache.cocoon.ProcessingException;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 import edu.stanford.irt.search.spring.SearchCacheManager;
 

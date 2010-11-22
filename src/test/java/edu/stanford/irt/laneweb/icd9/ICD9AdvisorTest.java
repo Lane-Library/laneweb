@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.stanford.irt.lane.icd9.ICD9Translator;
-import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.Model;
 
 public class ICD9AdvisorTest {
 

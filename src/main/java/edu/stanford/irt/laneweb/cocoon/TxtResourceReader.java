@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
 
-import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public class TxtResourceReader extends AbstractReader implements CacheableProcessingComponent {

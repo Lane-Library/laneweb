@@ -6,8 +6,8 @@ package edu.stanford.irt.laneweb.spellcheck;
 import org.apache.excalibur.xml.sax.XMLizable;
 import org.xml.sax.SAXException;
 
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 import edu.stanford.irt.spell.SpellChecker;
 

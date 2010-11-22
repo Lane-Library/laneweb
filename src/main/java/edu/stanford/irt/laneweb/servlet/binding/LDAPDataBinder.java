@@ -5,9 +5,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.ldap.LDAPData;
 import edu.stanford.irt.laneweb.ldap.LDAPDataAccess;
-import edu.stanford.irt.laneweb.model.Model;
 
 public class LDAPDataBinder implements DataBinder {
 

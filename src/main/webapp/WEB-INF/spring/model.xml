@@ -6,27 +6,27 @@
 
 
     <bean id="org.apache.cocoon.el.ExpressionFactory"
-        class="edu.stanford.irt.laneweb.model.LanewebExpressionFactory">
+        class="edu.stanford.irt.laneweb.cocoon.expression.LanewebExpressionFactory">
         <property name="expressionCompiler">
-            <bean class="edu.stanford.irt.laneweb.model.LanewebExpressionCompiler"/>
+            <bean class="edu.stanford.irt.laneweb.cocoon.expression.LanewebExpressionCompiler"/>
         </property>
     </bean>
 
     <bean id="org.apache.cocoon.el.objectmodel.ObjectModel"
-        class="edu.stanford.irt.laneweb.model.LanewebObjectModel" scope="request">
+        class="edu.stanford.irt.laneweb.cocoon.expression.LanewebObjectModel" scope="request">
         <property name="initialEntries">
             <map>
                 <entry key="laneweb">
                     <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
-                        class="edu.stanford.irt.laneweb.model.LanewebObjectModelProvider">
-                        <property name="objectModel" ref="edu.stanford.irt.laneweb.model.Model"/>
+                        class="edu.stanford.irt.laneweb.cocoon.expression.LanewebObjectModelProvider">
+                        <property name="objectModel" ref="edu.stanford.irt.laneweb.Model"/>
                     </bean>
                 </entry>
             </map>
         </property>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.model.Model"
+    <bean id="edu.stanford.irt.laneweb.Model"
         class="java.util.HashMap"
         scope="request">
     </bean>

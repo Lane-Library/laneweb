@@ -15,8 +15,8 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.XMLReaderFactory;
 
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
-import edu.stanford.irt.laneweb.model.Model;
 
 public class SearchContentAggregator extends AbstractGenerator implements CacheableProcessingComponent{
 

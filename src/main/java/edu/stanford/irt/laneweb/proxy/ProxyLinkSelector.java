@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.selection.Selector;
 
-import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 
 

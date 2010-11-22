@@ -1,7 +1,7 @@
 package edu.stanford.irt.laneweb.search;
 
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public abstract class AbstractSearchGenerator extends AbstractGenerator {

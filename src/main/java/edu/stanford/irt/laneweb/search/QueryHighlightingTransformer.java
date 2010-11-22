@@ -8,9 +8,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.Resource;
 import edu.stanford.irt.laneweb.cocoon.AbstractTransformer;
-import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 
 // $Id$

@@ -5,8 +5,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
-import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * This DataBinder handles Model attributes that are related to the remote ip address

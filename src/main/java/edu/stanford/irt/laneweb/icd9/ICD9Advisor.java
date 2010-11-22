@@ -6,7 +6,7 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.springframework.aop.MethodBeforeAdvice;
 
 import edu.stanford.irt.lane.icd9.ICD9Translator;
-import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.Model;
 
 public class ICD9Advisor implements MethodBeforeAdvice {
 
