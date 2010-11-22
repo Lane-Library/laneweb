@@ -7,6 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-11-22" version="1.11.11" description="1.11.11 bug fix release">
+            <action date="2010-11-16" dev="ceyates" issue="44750" type="add">
+                alert message styles
+            </action>
+        </release>
         <release date="2010-11-15" version="1.11.10" description="1.11.10 bug fix release">
             <action date="2010-11-11" dev="ceyates" issue="42141" type="add">
                 images backgrounds css
