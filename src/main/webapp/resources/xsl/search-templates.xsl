@@ -4,10 +4,11 @@
     xmlns:st="http://lane.stanford.edu/search-templates/ns"
     xmlns="http://lane.stanford.edu/search-templates/ns"
     xmlns:xi="http://www.w3.org/2001/XInclude"
-    exclude-result-prefixes="h st xi"
+    xmlns:s="http://irt.stanford.edu/search/2.0"
+    exclude-result-prefixes="h s st xi"
     version="2.0">
     
-    <xsl:variable name="all-engines" select="//search/engine"/>
+    <xsl:variable name="all-engines" select="//s:search/s:engine"/>
     
     <xsl:template match="st:search-templates">
         <xsl:copy>
@@ -19,17 +20,15 @@
         <xsl:apply-templates select="*|@*"/>
     </xsl:template>
     
-    <xsl:template match="h:html">
-        <xsl:if test="@id != ''">
+    <xsl:template match="h:html[@id]">
         <template id="{@id}">
             <xsl:apply-templates/>
         </template>
-        </xsl:if>
     </xsl:template>
     
     <xsl:template match="h:a[@id and contains(@class,'metasearch')]">
         <xsl:variable name="res-id" select="@id"/>
-        <xsl:if test="count(//resource[@id = $res-id]) > 0">
+        <xsl:if test="count(//s:resource[@s:id = $res-id]) > 0">
             <engine idref="{@id}"/>
         </xsl:if>
     </xsl:template>
@@ -42,7 +41,7 @@
         </xsl:variable>
         <xsl:for-each select="tokenize($engines,',')">
             <xsl:variable name="eng-id" select="."/>
-            <xsl:if test="count($all-engines[@id = $eng-id]) > 0">
+            <xsl:if test="count($all-engines[@s:id = $eng-id]) > 0">
                 <engine idref="{.}"/>
             </xsl:if>
         </xsl:for-each>

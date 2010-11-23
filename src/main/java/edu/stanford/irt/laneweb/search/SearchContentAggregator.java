@@ -1,91 +1,53 @@
 package edu.stanford.irt.laneweb.search;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URL;
+import java.util.Map;
 
+import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
-import org.apache.cocoon.caching.CacheableProcessingComponent;
-import org.apache.excalibur.source.SourceValidity;
-import org.xml.sax.InputSource;
+import org.apache.cocoon.core.xml.SAXParser;
 import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.AttributesImpl;
-import org.xml.sax.helpers.XMLReaderFactory;
 
 import edu.stanford.irt.laneweb.Model;
-import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
+import edu.stanford.irt.laneweb.cocoon.ContentAggregator;
 
-public class SearchContentAggregator extends AbstractGenerator implements CacheableProcessingComponent{
+public class SearchContentAggregator extends ContentAggregator {
 
-    String ns = "http://lane.stanford.edu/search-templates/ns";
-    String rootElement = "search-templates";
-    
-    
-    private List<File> files = null;
-    
-    private SearchContentValidity validities;
+    private static final String NAMESPACE = "http://lane.stanford.edu/search-templates/ns";
 
-    public void generate() throws IOException, SAXException, ProcessingException {
-        super.xmlConsumer.startDocument();
-        super.xmlConsumer.startElement(this.ns, this.rootElement,this.rootElement, new AttributesImpl());
-        
-        XMLReader domReader = XMLReaderFactory.createXMLReader();
-        SearchContentXMLFilter domParser = new SearchContentXMLFilter(domReader);
-        domParser.setContentHandler(this.xmlConsumer);
-        InputSource in = new InputSource(this.source.getInputStream());
-        domParser.parse(in);
-        
-        XMLReader htmlReader = XMLReaderFactory.createXMLReader("org.cyberneko.html.parsers.SAXParser");
-        htmlReader.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
-        SearchContentXMLFilter parser = new SearchContentXMLFilter(htmlReader);
-        parser.setContentHandler(this.xmlConsumer);
-        FileInputStream fileInput = null;
-        try {
-            for (File file : files) {
-                fileInput = new FileInputStream(file);
-                in = new InputSource(fileInput);
-                parser.parse(in);
-            }
-        } finally {
-            if (fileInput != null)
-                fileInput.close();
-        }
-        super.xmlConsumer.endElement(this.ns, this.rootElement, this.rootElement);
-        super.xmlConsumer.endDocument();
+    private static final String SEARCH_TEMPLATES = "search-templates";
+
+    public SearchContentAggregator(final SAXParser saxParser) {
+        super(saxParser);
+        setRootElement(SEARCH_TEMPLATES, NAMESPACE, "");
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
-    protected void initialize() {
-        this.files = new ArrayList<File>();
-        String path =  model.get(Model.DEFAULT_CONTENT_BASE).toString().substring(5);
-        String[] directories = this.parameterMap.get("content-directory").split(",");
+    public void setup(final org.apache.cocoon.environment.SourceResolver resolver, final Map objectModel,
+            final String src, final Parameters par) throws ProcessingException, SAXException, IOException {
+        addPart(src, "", "", "false", "");
+        URL contentBase = (URL) objectModel.get(Model.DEFAULT_CONTENT_BASE);
+        String basePath = contentBase.getPath();
+        String[] directories = par.getParameter("content-directory", "").split(",");
         for (String directory : directories) {
-            setFiles(path.concat("/").concat(directory));
+            setFiles(basePath.length(), basePath.concat("/").concat(directory));
         }
-        this.validities = new SearchContentValidity(this.files);
+        super.setup(resolver, objectModel, src, par);
     }
 
-    private void setFiles(String path) {
-        File directory = new File(path);
+    private void setFiles(final int basePathLength, final String filePath) throws IOException {
+        File directory = new File(filePath);
         File[] f = directory.listFiles();
         for (File file : f) {
-            if (file.isDirectory())
-                setFiles(file.getPath());
-            if (file.isFile() && file.canRead() && file.getName().endsWith(".html")) {
-                files.add(file);
+            if (file.isDirectory() && !".svn".equals(file.getName())) {
+                setFiles(basePathLength, file.getPath());
+            } else if (file.isFile() && file.canRead() && file.getName().endsWith(".html")) {
+                String cocoonSourceString = "cocoon://apps/cache" + file.getAbsolutePath().substring(basePathLength);
+                addPart(cocoonSourceString, "", "", "false", "");
             }
         }
-    }
-
-    
-    public java.io.Serializable getKey() {
-        return this.source.getURI();
-    }
-
-    public SourceValidity getValidity() {
-        return this.validities;
     }
 }
