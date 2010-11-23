@@ -74,9 +74,4 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
     @Override
     public void release(Source source) {
     }
-    
-    public static void main(String[] args) throws MalformedURLException, IOException {
-        LanewebSourceResolver lsr = new LanewebSourceResolver();
-        lsr.resolveURI("jndi:/localhost/laneweb/");
-    }
 }
