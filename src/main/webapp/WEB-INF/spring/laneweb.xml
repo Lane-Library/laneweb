@@ -97,9 +97,6 @@
         </property>
     </bean>
 
-    <bean name="org.apache.cocoon.generation.Generator/directory"
-        class="org.apache.cocoon.generation.DirectoryGenerator" scope="prototype"/>
-
     <bean name="org.apache.cocoon.transformation.Transformer/namespace-filter"
         class="edu.stanford.irt.laneweb.cocoon.NamespaceFilter" scope="prototype"/>
 

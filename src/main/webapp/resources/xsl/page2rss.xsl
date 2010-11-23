@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:dir="http://apache.org/cocoon/directory/2.0"
     xmlns:h="http://www.w3.org/1999/xhtml"
-    exclude-result-prefixes="dir h"
+    exclude-result-prefixes="h"
     version="2.0">
     
     <xsl:param name="page"/>
     
-    <xsl:template match="/">
+    <xsl:template match="/h:html">
         <rss version="2.0">
             <channel>
-                <title><xsl:value-of select="/doc/h:html/h:head/h:title"/></title>
+                <title><xsl:value-of select="h:head/h:title"/></title>
                 <link><xsl:value-of select="concat('http://lane.stanford.edu',$page)"/></link>
-                <description><xsl:value-of select="/doc/h:html/h:head/h:title"/></description>
+                <description><xsl:value-of select="h:head/h:title"/></description>
                 <language>en-us</language>
-                <lastBuildDate><xsl:value-of select="/doc/dir:file/@date"/></lastBuildDate>
                 <ttl>1440</ttl>
                 <image>
-                    <title><xsl:value-of select="/doc/h:html/h:head/h:title"/></title>
+                    <title><xsl:value-of select="h:head/h:title"/></title>
                     <url>http://lane.stanford.edu/favicon.ico</url>
                     <link><xsl:value-of select="concat('http://lane.stanford.edu',$page)"/></link>
                 </image>
                 
-                <xsl:apply-templates select="/doc/h:html//h:ul[@class='type1']/h:li"/>
+                <xsl:apply-templates select="descendant::h:ul[@class='type1']/h:li"/>
                 
             </channel>
         </rss>

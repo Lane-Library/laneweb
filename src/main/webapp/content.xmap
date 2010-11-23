@@ -60,18 +60,6 @@
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>
-        <map:pipeline type="expires">
-            <map:match pattern="^file-info/(.*\/)?(.*\.html)$" type="regexp">
-                <map:generate type="directory" src="${content-base}/{1}">
-                    <map:parameter name="depth" value="1"/>
-                    <map:parameter name="dateFormat" value="EEE, d MMM yyyy HH:mm:ss Z"/>
-                </map:generate>
-                <map:transform src="resources/xsl/file-info.xsl" type="saxon">
-                    <map:parameter name="file" value="{2}"/>
-                </map:transform>
-                <map:serialize type="xml"/>
-            </map:match>
-        </map:pipeline>
         <map:pipeline type="caching" internal-only="true">
             <!-- secure/** generates an error unless used from a pipeline -->
             <map:match pattern="secure/**" type="wildcard">
