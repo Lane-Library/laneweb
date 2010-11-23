@@ -49,13 +49,13 @@
                 </map:act>
             </map:match>
             <map:match pattern="cookiesFetch.html" type="wildcard">
-                <map:generate type="file" src="${resources-base}/cookiesFetch.html"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/cookiesFetch.xsl"/>
+                <map:generate type="file" src="resources/cookiesFetch.html"/>
+                <map:transform type="saxon" src="resources/xsl/cookiesFetch.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="postMethodHelper.html" type="wildcard">
                 <map:generate type="request"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/postMethodHelper.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/postMethodHelper.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <!-- TODO: remove this once catalog, elane, sfx, illiad, etc. links updated -->
@@ -74,7 +74,7 @@
                         <map:transform type="html-cme-links"/>
                     </map:when>
                 </map:select>
-                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="proxy-links"/>
@@ -85,11 +85,11 @@
             </map:match>
             <!-- javascript unit tests: -->
             <map:match pattern="test/**.js" type="wildcard">
-              <map:read type="txt-resource" src="${resources-base}/test/{1}.js"/>
+              <map:read type="txt-resource" src="resources/test/{1}.js"/>
             </map:match>
             <map:match pattern="test/**.html" type="wildcard">
-                <map:generate type="html" src="${resources-base}/test/{1}.html"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl"/>
+                <map:generate type="html" src="resources/test/{1}.html"/>
+                <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
@@ -102,8 +102,8 @@
                         <map:transform type="html-cme-links"/>
                     </map:when>
                 </map:select>
-                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
-                    <map:parameter name="alt-src" value="${resources-base}/xsl/laneweb.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/laneweb.xsl">
+                    <map:parameter name="alt-src" value="resources/xsl/laneweb.xsl"/>
                 </map:transform>
                 <map:select type="proxy-links">
                     <map:when test="true">
@@ -136,7 +136,7 @@
                         <map:transform type="html-cme-links"/>
                     </map:when>
                 </map:select>
-                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="proxy-links"/>

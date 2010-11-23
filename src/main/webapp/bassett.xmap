@@ -11,7 +11,7 @@
                     <map:part src="cocoon:/database"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/bassett.xsl">
+                <map:transform type="saxon" src="resources/xsl/bassett.xsl">
                     <map:parameter name="images-url"
                         value="http://elane.stanford.edu/public/L254573"/>
                     <map:parameter name="images-per-page" value="30"/>
@@ -25,7 +25,7 @@
                     <map:part src="cocoon:/accordionMenu"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/bassettTemplate.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/bassettTemplate.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="accordionMenu" type="wildcard">
@@ -34,7 +34,7 @@
                     <map:part src="cocoon:/bassett-accordion"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/bassettAccordion.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/bassettAccordion.xsl"/>
                 <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="database" type="wildcard">

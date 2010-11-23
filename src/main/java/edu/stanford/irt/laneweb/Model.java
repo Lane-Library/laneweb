@@ -78,8 +78,6 @@ public interface Model {
 
     public static final String RESOURCES = "resources";
 
-    public static final String RESOURCES_BASE = "resources-base";
-
     public static final String SELECTION = "selection";
 
     public static final String SOURCE = "source";

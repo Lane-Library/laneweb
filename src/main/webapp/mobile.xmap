@@ -8,8 +8,8 @@
             <!-- Merged Search Content (er and metasearch) -->
             <map:match pattern="msc/**" type="wildcard">
                 <map:generate type="file" src="cocoon://apps/search/merged/xml/{1}"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/mobile-search-result2html.xsl"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/mobile-content.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="proxy-links"/>
@@ -20,8 +20,8 @@
             <!-- Search Content (metasearch) -->
             <map:match pattern="sc/**" type="wildcard">
                 <map:generate type="file" src="cocoon://apps/search/content/xml/{1}"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/mobile-search-result2html.xsl"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/mobile-content.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="proxy-links"/>
@@ -41,10 +41,10 @@
                 <map:generate type="er-browse">
                     <map:parameter name="type" value="{1}"/>
                 </map:generate>
-                <map:transform type="saxon" src="${resources-base}/xsl/mobile-search-result2html.xsl">
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl">
                     <map:parameter name="cache-key" value="${rid}"/>
                 </map:transform>
-                <map:transform type="saxon" src="${resources-base}/xsl/mobile-content.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="proxy-links"/>
@@ -56,10 +56,10 @@
                 <map:generate type="er-browse">
                     <map:parameter name="subset" value="{1}"/>
                 </map:generate>
-                <map:transform type="saxon" src="${resources-base}/xsl/mobile-search-result2html.xsl">
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl">
                     <map:parameter name="cache-key" value="${rid}"/>
                 </map:transform>
-                <map:transform type="saxon" src="${resources-base}/xsl/mobile-content.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="proxy-links"/>
@@ -70,8 +70,8 @@
             <!-- text version of laneweb content -->
             <map:match pattern="lc2txt/**.html" type="wildcard">
                 <map:generate type="file" src="cocoon://content/{1}.html"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/mobile-content.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="proxy-links"/>
@@ -82,8 +82,8 @@
             </map:match>
             <map:match pattern="**.html" type="wildcard">
                 <map:generate type="file" src="cocoon://content/m/{1}.html"/>
-                <map:transform type="saxon" src="${resources-base}/xsl/laneweb.xsl">
-                    <map:parameter name="alt-src" value="${resources-base}/xsl/laneweb.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/laneweb.xsl">
+                    <map:parameter name="alt-src" value="resources/xsl/laneweb.xsl"/>
                 </map:transform>
                 <map:select type="proxy-links">
                     <map:when test="true">

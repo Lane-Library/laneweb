@@ -12,6 +12,5 @@ public class RequestAttributeDataBinder implements DataBinder {
     public void bind(Map<String, Object> model, HttpServletRequest request) {
         model.put(Model.BASE_PATH, request.getAttribute(Model.BASE_PATH));
         model.put(Model.CONTENT_BASE, request.getAttribute(Model.CONTENT_BASE));
-        model.put(Model.RESOURCES_BASE, request.getAttribute(Model.RESOURCES_BASE));
     }
 }
