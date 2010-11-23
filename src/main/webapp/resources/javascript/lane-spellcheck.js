@@ -11,8 +11,9 @@
                     if (sc.suggestion) {
                         //if there is a suggestion show the spellcheck markup 
                         //and add the suggestion to the href
+                        //and add laneSpellCorrected=<old term> for tracking
                         a = spellCheck.one('a');
-                        a.set('href', document.location.href.replace('q=' + searchTerms, 'q=' + encodeURIComponent(sc.suggestion)));
+                        a.set('href', document.location.href.replace('q=' + searchTerms, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + searchTerms));
                         a.set('innerHTML', sc.suggestion);
                         Y.Global.fire('lane:popin', spellCheck);
                     }
