@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.ServletContext;
+
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceFactory;
 import org.apache.cocoon.environment.SourceResolver;
@@ -17,8 +19,9 @@ import org.springframework.core.io.ResourceLoader;
 
 
 public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAware {
-    
-    private Pattern TOMCAT_URL_PATTERN = Pattern.compile("jndi:/\\w+/\\w+(/.*)");
+
+    // This part is necessary because EnvironmentHelper constructor uses a jndi:/localhost/ url string
+    private Pattern tomcatURLPattern;
     
     private Map<String, SourceFactory> sourceFactories = Collections.emptyMap();
     
@@ -32,12 +35,19 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
     public void setSourceFactories(Map<String, SourceFactory> sourceFactories) {
         this.sourceFactories = sourceFactories;
     }
+    
+    public void setContextPath(String contextPath) {
+        this.tomcatURLPattern = Pattern.compile("jndi:/localhost" + contextPath + "(/.*)");
+    }
+    
+    public void setServletContext(ServletContext servletContext) {
+        setContextPath(servletContext.getContextPath());
+    }
 
     @Override
     public Source resolveURI(String location) throws MalformedURLException, IOException {
         String modifiedLocation = location;
-        // This part is necessary because EnvironmentHelper constructor uses a jndi:/localhost/ url string
-        Matcher matcher = TOMCAT_URL_PATTERN.matcher(location);
+        Matcher matcher = this.tomcatURLPattern.matcher(location);
         if (matcher.matches()) {
             modifiedLocation = matcher.group(1);
         }

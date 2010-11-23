@@ -15,6 +15,7 @@
                 <entry key="cocoon" value-ref="org.apache.excalibur.source.SourceFactory/cocoon"/>
             </map>
         </property>
+        <property name="servletContext" ref="servletContext"/>
     </bean>
 
 </beans>
