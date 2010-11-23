@@ -74,7 +74,7 @@ public class SpringResourceSource implements Source {
         try {
             return this.resource.lastModified();
         } catch (IOException e) {
-            return -1;
+            return 0;
         }
     }
 }

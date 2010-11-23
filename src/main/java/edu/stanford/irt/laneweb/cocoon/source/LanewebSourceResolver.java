@@ -39,6 +39,7 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
         if (modifiedLocation.indexOf("context://") == 0) {
             modifiedLocation = location.substring("context://".length());
         } else {
+            //This part is necessary because EnvironmentHelper constructor uses a jndi:/localhost/ url string 
             Matcher matcher = TOMCAT_URL_PATTERN.matcher(location);
             if (matcher.matches()) {
                 modifiedLocation = matcher.group(1);
