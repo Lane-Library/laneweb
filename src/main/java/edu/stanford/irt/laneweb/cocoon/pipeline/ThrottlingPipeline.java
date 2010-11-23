@@ -6,10 +6,9 @@ import java.util.HashSet;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.Environment;
+import org.apache.cocoon.environment.SourceResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import edu.stanford.irt.laneweb.cocoon.SourceResolver;
 
 /**
  * The ThrottlingPipeline

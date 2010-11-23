@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
     <bean id="org.apache.excalibur.source.SourceResolver"
-        class="edu.stanford.irt.laneweb.cocoon.SourceResolver">
+        class="edu.stanford.irt.laneweb.cocoon.source.SourceResolver">
         <constructor-arg ref="servletContext"/>
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
     </bean>
@@ -19,17 +19,21 @@
         class="edu.stanford.irt.laneweb.cocoon.source.ResourceSourceFactory"/>
     
     <bean name="org.apache.excalibur.source.SourceFactory/file"
-        class="org.apache.excalibur.source.impl.FileSourceFactory"/>
+    class="org.apache.excalibur.source.impl.FileSourceFactory"/>
     
     
     <bean name="org.apache.excalibur.source.SourceFactory/cocoon"
         class="edu.stanford.irt.laneweb.cocoon.source.SitemapSourceFactory">
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
-    </bean>
+        </bean>
     
-    
-    <!--<bean name="org.apache.excalibur.source.SourceFactory/jndi"
-        class="edu.stanford.irt.laneweb.cocoon.source.URLSourceFactory">
-        </bean>-->
+    <!--<bean id="org.apache.excalibur.source.SourceResolver"
+        class="edu.stanford.irt.laneweb.cocoon.source.LanewebSourceResolver">
+        <property name="sourceFactories">
+            <map>
+                <entry key="cocoon" value-ref="org.apache.excalibur.source.SourceFactory/cocoon"/>
+            </map>
+        </property>
+    </bean>-->
 
 </beans>

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.cocoon;
+package edu.stanford.irt.laneweb.cocoon.source;
 
 import java.net.MalformedURLException;
 

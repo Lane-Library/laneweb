@@ -2,6 +2,8 @@ package edu.stanford.irt.laneweb.cocoon;
 
 import org.apache.avalon.framework.service.ServiceManager;
 import org.apache.cocoon.components.source.impl.DelayedRefreshSourceWrapper;
+import org.apache.cocoon.environment.SourceResolver;
+
 
 public class TreeProcessor extends org.apache.cocoon.components.treeprocessor.TreeProcessor {
 

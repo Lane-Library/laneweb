@@ -10,14 +10,13 @@ import java.io.IOException;
 import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.Environment;
+import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.transformation.Transformer;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.xml.sax.SAXException;
-
-import edu.stanford.irt.laneweb.cocoon.SourceResolver;
 
 public class ThrottlingPipelineTest {
 

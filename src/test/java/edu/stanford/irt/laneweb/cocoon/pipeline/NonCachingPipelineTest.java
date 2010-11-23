@@ -11,6 +11,7 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.components.pipeline.AbstractProcessingPipeline;
 import org.apache.cocoon.environment.Environment;
+import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.generation.Generator;
 import org.apache.cocoon.reading.Reader;
 import org.apache.cocoon.serialization.Serializer;
@@ -19,8 +20,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.xml.sax.SAXException;
-
-import edu.stanford.irt.laneweb.cocoon.SourceResolver;
 
 public class NonCachingPipelineTest {
 

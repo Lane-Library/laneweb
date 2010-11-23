@@ -11,15 +11,14 @@ import javax.servlet.ServletContext;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceFactory;
 
-import edu.stanford.irt.laneweb.cocoon.SourceResolver;
 
 public class ContextSourceFactory implements SourceFactory {
 
     private ServletContext servletContext;
 
-    private SourceResolver sourceResolver;
+    private org.apache.cocoon.environment.SourceResolver sourceResolver;
 
-    public ContextSourceFactory(final ServletContext servletContext, final SourceResolver sourceResolver) {
+    public ContextSourceFactory(final ServletContext servletContext, final org.apache.cocoon.environment.SourceResolver sourceResolver) {
         this.servletContext = servletContext;
         this.sourceResolver = sourceResolver;
     }
