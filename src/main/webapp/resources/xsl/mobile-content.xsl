@@ -20,7 +20,7 @@
     <xsl:template match="h:div[contains(@class,'leftColumn')]"/>
 
     <xsl:template match="h:body/h:h2[1]">
-        <div>Lane Medical Library text version | <a href="{concat(replace($request-uri,'/mobile',''),'?',$query-string)}">Full version available here</a></div>
+        <div>Lane Medical Library text version | <a href="{concat(replace($request-uri,'/m/lc2txt',''),'?',$query-string)}">Full version available here</a></div>
         <xsl:copy>
             <xsl:copy-of select="node()[name()!='a']"></xsl:copy-of>
         </xsl:copy>
@@ -40,14 +40,14 @@
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:choose>
-                <xsl:when test="matches(@href,'http.*lane(-beta|-stage)?.stanford.edu/')">
+                <xsl:when test="matches(@href,'http.*lane(-local|-stage)?.stanford.edu/')">
                     <xsl:attribute name="href">
-                        <xsl:value-of select="replace(@href,'http.*lane(-beta|-stage)?.stanford.edu/',concat($base-path,'/mobile/'))"/>
+                        <xsl:value-of select="replace(@href,'http.*lane(-local|-stage)?.stanford.edu/',concat($base-path,'/m/lc2txt/'))"/>
                     </xsl:attribute>
                 </xsl:when>
                 <xsl:when test="starts-with(@href,'/') and contains(@href,'.html') and not(contains(@href,'/m/'))">
                     <xsl:attribute name="href">
-                        <xsl:value-of select="replace(@href,'^/',concat($base-path,'/mobile/'))"/>
+                        <xsl:value-of select="replace(@href,'^/',concat($base-path,'/m/lc2txt/'))"/>
                     </xsl:attribute>
                 </xsl:when>
                 <xsl:when test="not(@target) and starts-with(@href,'http')">
