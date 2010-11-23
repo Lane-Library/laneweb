@@ -5,7 +5,7 @@
     
     
     <bean id="org.apache.cocoon.Processor" class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
-        <constructor-arg value="context://sitemap.xmap"/>
+        <constructor-arg value="sitemap.xmap"/>
         <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
         <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>

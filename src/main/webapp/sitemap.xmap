@@ -5,22 +5,22 @@
     <map:pipelines>
         <map:pipeline type="noncaching">
             <map:match pattern="rss/**" type="wildcard">
-                <map:mount uri-prefix="rss" check-reload="no" src="context://rss.xmap"/>
+                <map:mount uri-prefix="rss" check-reload="no" src="rss.xmap"/>
             </map:match>
             <map:match pattern="eresources/**" type="wildcard">
-                <map:mount uri-prefix="eresources" check-reload="no" src="context://eresources.xmap"/>
+                <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
             </map:match>
             <map:match pattern="content/**" type="wildcard">
-                <map:mount uri-prefix="content" check-reload="no" src="context://content.xmap"/>
+                <map:mount uri-prefix="content" check-reload="no" src="content.xmap"/>
             </map:match>
             <map:match pattern="apps/**" type="wildcard">
-                <map:mount uri-prefix="apps" check-reload="no" src="context://applications.xmap"/>
+                <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
             </map:match>
             <map:match pattern="secure/apps/**" type="wildcard">
-                <map:mount uri-prefix="secure/apps" check-reload="no" src="context://applications.xmap"/>
+                <map:mount uri-prefix="secure/apps" check-reload="no" src="applications.xmap"/>
             </map:match>
             <map:match pattern="m/**" type="wildcard">
-                <map:mount uri-prefix="m" check-reload="no" src="context://mobile.xmap"/>
+                <map:mount uri-prefix="m" check-reload="no" src="mobile.xmap"/>
             </map:match>
             <map:match pattern="secure/admin/status" type="wildcard">
                 <map:generate type="status"/>
@@ -121,7 +121,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="**.*" type="wildcard">
-                <map:mount uri-prefix="" check-reload="no" src="context://static.xmap"/>
+                <map:mount uri-prefix="" check-reload="no" src="static.xmap"/>
             </map:match>
             <map:match pattern="**" type="wildcard">
                 <map:redirect-to uri="/{1}/index.html"/>
