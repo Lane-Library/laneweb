@@ -27,7 +27,6 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
     
     private ResourceLoader resourceLoader;
 
-    @Override
     public void setResourceLoader(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
@@ -44,7 +43,6 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
         setContextPath(servletContext.getContextPath());
     }
 
-    @Override
     public Source resolveURI(String location) throws MalformedURLException, IOException {
         String modifiedLocation = location;
         Matcher matcher = this.tomcatURLPattern.matcher(location);
@@ -65,13 +63,12 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
         return new SpringResourceSource(this.resourceLoader.getResource(uri.toString()));
     }
 
-    @Override
+    @SuppressWarnings("rawtypes")
     public Source resolveURI(String location, String base, Map parameters) throws MalformedURLException, IOException {
         //TODO: really implement this . . .
         return resolveURI(location);
     }
 
-    @Override
     public void release(Source source) {
     }
 }
