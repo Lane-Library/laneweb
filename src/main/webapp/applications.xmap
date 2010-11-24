@@ -139,9 +139,7 @@
                 
                 <!-- search facet counts -->
                 <map:match pattern="search/facets/json" type="wildcard">
-                    <map:aggregate element="search-facet-counts">
-                        <map:part src="cocoon:/cache/search/templates/xml"/>
-                    </map:aggregate>
+                    <map:generate type="file" src="cocoon:/cache/search/templates/xml"/>
                     <map:transform type="saxon" src="resources/xsl/search-facet-counts.xsl"/>
                     <map:serialize type="text"/>
                 </map:match>
