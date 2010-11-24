@@ -5,15 +5,6 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
         <map:pipeline type="noncaching">
-            <map:match pattern="eresources/**" type="wildcard">
-                <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
-            </map:match>
-            <map:match pattern="apps/**" type="wildcard">
-                <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
-            </map:match>
-            <map:match pattern="biomed-resources/bassett/**" type="wildcard">
-                <map:mount uri-prefix="biomed-resources/bassett" check-reload="no" src="bassett.xmap"/>
-            </map:match>
             <map:match pattern="biomed-resources/(ej|eb|cc|db|video|images|statistics|software).html" type="regexp">
                 <map:generate type="html" src="${content-base}/biomed-resources/{1}.html">
                     <map:parameter name="alt-src" value="${default-content-base}/biomed-resources/{1}.html"/>
@@ -32,12 +23,6 @@
                 <map:transform type="saxon" src="resources/xsl/search-post.xsl"/>
                 <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
                 <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="search.html" type="wildcard">
-                <map:mount uri-prefix="" check-reload="no" src="search.xmap"/>
-            </map:match>
-            <map:match pattern="search/**.html" type="wildcard">
-                <map:mount uri-prefix="" check-reload="no" src="search.xmap"/>
             </map:match>
             <map:match pattern="secure/reloadresources.html" type="wildcard">
                 <map:act type="search-context-reloader"/>
