@@ -8,8 +8,6 @@ import org.apache.cocoon.environment.Redirector;
 import org.apache.cocoon.environment.SourceResolver;
 import org.apache.cocoon.objectmodel.helper.ParametersMap;
 
-import edu.stanford.irt.laneweb.util.ModelUtil;
-
 public abstract class AbstractAction implements Action {
 
     protected Map<String, String> parametersMap;
