@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- this is the live rss.xmap -->
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <map:pipelines>
-        <map:pipeline type="noncaching">
-            <map:match pattern="eresources/**" type="wildcard">
-                <map:mount uri-prefix="eresources" check-reload="no" src="eresources.xmap"/>
-            </map:match>
-            <map:match pattern="content/**" type="wildcard">
-                <map:mount uri-prefix="content" check-reload="no" src="content.xmap"/>
-            </map:match>
-            <map:match pattern="apps/**" type="wildcard">
-                <map:mount uri-prefix="apps" check-reload="no" src="applications.xmap"/>
-            </map:match>
-        </map:pipeline>
         <map:pipeline type="expires">
             <map:match pattern="highly-accessed-articles.xml" type="wildcard">
-                <map:generate src="cocoon:/apps/sfx/highly-accessed2rss" type="file"/>
+                <map:generate src="cocoon://apps/sfx/highly-accessed2rss" type="file"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ncbi-rss2html/**" type="wildcard">
@@ -66,12 +54,12 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="browse/**" type="url-decoding-wildcard">
-                <map:generate type="html" src="cocoon:/eresources/browse/{1}"/>
+                <map:generate type="html" src="cocoon://eresources/browse/{1}"/>
                 <map:transform type="saxon" src="resources/xsl/eresources-rss.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="mesh/*" type="wildcard">
-                <map:generate type="html"  src="cocoon:/eresources/mesh/type/{1}"/>
+                <map:generate type="html"  src="cocoon://eresources/mesh/type/{1}"/>
                 <map:transform type="saxon" src="resources/xsl/eresources-rss.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>

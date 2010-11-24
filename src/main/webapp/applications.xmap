@@ -139,7 +139,7 @@
                 
                 <!-- search facet counts -->
                 <map:match pattern="search/facets/json" type="wildcard">
-                    <map:generate type="file" src="cocoon:/cache/search/templates/xml"/>
+                    <map:generate type="file" src="cocoon://apps/cache/search/templates/xml"/>
                     <map:transform type="saxon" src="resources/xsl/search-facet-counts.xsl"/>
                     <map:serialize type="text"/>
                 </map:match>
@@ -151,8 +151,8 @@
                 <!-- search describe html output -->
                 <map:match pattern="search/describe/html" type="wildcard">
                     <map:aggregate element="portals" ns="http://lane.stanford.edu/describe/ns">
-                        <map:part src="cocoon:/search/describe/xml"/>
-                        <map:part src="cocoon:/cache/search/templates/xml"/>
+                        <map:part src="cocoon://apps/search/describe/xml"/>
+                        <map:part src="cocoon://apps/cache/search/templates/xml"/>
                     </map:aggregate>
                     <map:transform type="saxon" src="resources/xsl/describe.xsl"/>
                     <map:serialize type="xhtml"/>
@@ -192,12 +192,12 @@
             </map:match>
             <map:match type="wildcard" pattern="classes/*">
                 <map:match pattern="classes/thisweek" type="wildcard">
-                    <map:generate type="file" src="cocoon:/classes/data.xml"/>
+                    <map:generate type="file" src="cocoon://apps/classes/data.xml"/>
                     <map:transform  type="saxon"  src="resources/xsl/classes-thisweek.xsl"/>
                     <map:serialize type="xhtml"/>
                 </map:match>
                 <map:match pattern="classes/all" type="wildcard">
-                    <map:generate type="file" src="cocoon:/classes/data.xml"/>
+                    <map:generate type="file" src="cocoon://apps/classes/data.xml"/>
                     <map:transform type="saxon" src="resources/xsl/laneclasses.xsl"/>
                     <map:serialize type="xhtml"/>
                 </map:match>
@@ -239,16 +239,10 @@
         <!-- caching pipeline for static documents -->
         <map:pipeline type="caching">
             <map:match pattern="cache/search/templates/xml" type="wildcard">
-                <map:generate type="search-template-generator" src="cocoon:/search/describe/xml">
-                        <map:parameter name="content-directory" value="search,portals"/>
+                <map:generate type="search-template-generator" src="cocoon://apps/search/describe/xml">
+                    <map:parameter name="directories" value="search,portals"/>
                 </map:generate>
                 <map:transform type="saxon" src="resources/xsl/search-templates.xsl"/>
-                <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="cache/**.html" type="wildcard">
-                <map:generate src="${content-base}/{1}.html" type="html">
-                    <map:parameter name="alt-src" value="${default-content-base}/{1}.html"/>
-                </map:generate>
                 <map:serialize type="xml"/>
             </map:match>
             <map:handle-errors>

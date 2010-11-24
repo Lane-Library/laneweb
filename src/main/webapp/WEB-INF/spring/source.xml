@@ -6,7 +6,7 @@
     <bean name="org.apache.excalibur.source.SourceFactory/cocoon"
         class="edu.stanford.irt.laneweb.cocoon.source.SitemapSourceFactory">
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
-        </bean>
+    </bean>
     
     <bean id="org.apache.excalibur.source.SourceResolver"
         class="edu.stanford.irt.laneweb.cocoon.source.LanewebSourceResolver">

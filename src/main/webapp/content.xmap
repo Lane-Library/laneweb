@@ -72,7 +72,7 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
-            <!-- this is so the liaisons selectin by department works without javascript enabled -->
+            <!-- this is so the liaisons selection by department works without javascript enabled -->
             <map:parameter name="cache-key" value="${request-uri};selection=${liaison}"/>
             <map:match type="wildcard" pattern="about/liaisons.html">
                 <map:generate type="html" src="${content-base}/about/liaisons.html">
@@ -90,6 +90,13 @@
             <map:match type="regexp" pattern="^(announcement|error)\.html$">
                 <map:generate type="html" src="${content-base}/{1}.html">
                     <map:parameter name="alt-src" value="${default-content-base}/{1}.html"/>
+                </map:generate>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- static documents cached and accessed via html generator -->
+            <map:match type="wildcard" pattern="cached/**">
+                <map:generate src="${content-base}/{1}" type="html">
+                    <map:parameter name="alt-src" value="${default-content-base}/{1}"/>
                 </map:generate>
                 <map:serialize type="xml"/>
             </map:match>

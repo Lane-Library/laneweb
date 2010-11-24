@@ -31,7 +31,7 @@ public class SearchContentAggregator extends ContentAggregator {
         addPart(src, "", "", "false", "");
         URL contentBase = (URL) objectModel.get(Model.DEFAULT_CONTENT_BASE);
         String basePath = contentBase.getPath();
-        String[] directories = par.getParameter("content-directory", "").split(",");
+        String[] directories = par.getParameter("directories", "").split(",");
         for (String directory : directories) {
             setFiles(basePath.length(), basePath.concat("/").concat(directory));
         }
@@ -45,7 +45,7 @@ public class SearchContentAggregator extends ContentAggregator {
             if (file.isDirectory() && !".svn".equals(file.getName())) {
                 setFiles(basePathLength, file.getPath());
             } else if (file.isFile() && file.canRead() && file.getName().endsWith(".html")) {
-                String cocoonSourceString = "cocoon://apps/cache" + file.getAbsolutePath().substring(basePathLength);
+                String cocoonSourceString = "cocoon://content/cached" + file.getAbsolutePath().substring(basePathLength);
                 addPart(cocoonSourceString, "", "", "false", "");
             }
         }

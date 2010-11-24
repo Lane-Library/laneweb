@@ -48,23 +48,6 @@
     <xsl:template match="h:meta[not(attribute::name='LW.faqCategory')]"/>
     
     <xsl:template match="h:h1|h:h2|h:div[@class='extra']"/>
-
-    <xsl:template match="h:div[@id='leftColumn']//xi:include/attribute::href">
-        <xsl:variable name="root-category-string"
-            select="$category-map/child::node()[attribute::name = $root-category]/attribute::label"/>
-        <xsl:attribute name="href">
-            <xsl:choose>
-                <xsl:when test="$root-category-string">
-                    <xsl:value-of
-                        select="concat('cocoon:/services/',$root-category-string,'/leftmenu_',$root-category-string,'.html')"
-                    />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="."/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
-    </xsl:template>
     
     <xsl:template match="h:body">
         <xsl:copy>
@@ -76,7 +59,9 @@
                             <xsl:apply-templates select="descendant::h:div[@id='mainColumn']"/>
                         </div>
                         <div class="yui-u first">
-                            <xsl:apply-templates select="descendant::h:div[@id='leftColumn']"/>
+                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
+                                <xi:fallback></xi:fallback>
+                            </xi:include>
                         </div>
                     </div>
                 </div>
@@ -94,12 +79,6 @@
                 <xsl:apply-templates/>
             </div>
         </div>
-    </xsl:template>
-    
-    <xsl:template match="h:div[@id='leftColumn']">
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/leftmenu-help.html">
-            <xi:fallback></xi:fallback>
-        </xi:include>
     </xsl:template>
     
     <xsl:template match="h:div[@id='rightColumn']/h:div">
@@ -123,7 +102,6 @@
         <li>
             <xsl:apply-templates select="h:a"/>
         </li>
-        <!--<xsl:apply-templates select="following-sibling::h:dd[1]"/>-->
     </xsl:template>
     
 

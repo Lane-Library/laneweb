@@ -12,9 +12,7 @@
     <xsl:variable name="root-category">
         <xsl:choose>
             <xsl:when test="/h:html/h:head/h:meta[attribute::name='root-category']">
-                <xsl:value-of
-                    select="/h:html/h:head/h:meta[attribute::name='root-category']/attribute::content"
-                />
+                <xsl:value-of select="/h:html/h:head/h:meta[attribute::name='root-category']/attribute::content"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$primary-category"/>
@@ -46,23 +44,6 @@
     
     <!-- don't pass on meta elements only required here -->
     <xsl:template match="h:meta[not(attribute::name='LW.faqCategory')]"/>
-
-    <xsl:template match="h:div[@id='leftColumn']//xi:include/attribute::href">
-        <xsl:variable name="root-category-string"
-            select="$category-map/child::node()[attribute::name = $root-category]/attribute::label"/>
-        <xsl:attribute name="href">
-            <xsl:choose>
-                <xsl:when test="$root-category-string">
-                    <xsl:value-of
-                        select="concat('cocoon:/services/',$root-category-string,'/leftmenu_',$root-category-string,'.html')"
-                    />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="."/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
-    </xsl:template>
     
     <xsl:template match="h:div[@id='rightColumn']//xi:include/attribute::href">
         <xsl:attribute name="href">
@@ -81,7 +62,9 @@
                             <xsl:apply-templates select="descendant::h:div[@id='mainColumn']"/>
                         </div>
                         <div class="yui-u first">
-                            <xsl:apply-templates select="descendant::h:div[@id='leftColumn']"/>
+                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
+                                <xi:fallback></xi:fallback>
+                            </xi:include>
                         </div>
                     </div>
                 </div>
@@ -109,12 +92,6 @@
         </div>
     </xsl:template>
     
-    <xsl:template match="h:div[@id='leftColumn']">
-        <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon:/includes/leftmenu-help.html">
-            <xi:fallback></xi:fallback>
-        </xi:include>
-    </xsl:template>
-    
     <xsl:template match="h:div[@id='rightColumn']/h:div">
         <div class="module">
             <h3><xsl:value-of select="h:h2"/></h3>
@@ -123,30 +100,5 @@
             </div>
         </div>
     </xsl:template>
-
-    <!--<xsl:template match="h:div[@id='mainColumn']">
-        <xsl:for-each-group select="child::node()" group-adjacent="lw:inline(.)">
-            <xsl:choose>
-                <xsl:when test="current-grouping-key()">
-                    <p>
-                        <xsl:apply-templates select="current-group()"/>
-                    </p>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates select="current-group()"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each-group>
-    </xsl:template>
-
-
-    <xsl:function name="lw:inline" as="xs:boolean">
-        <xsl:param name="node" as="node()"/>
-        <xsl:sequence
-            select="($node instance of text() and string-length(normalize-space($node)) > 0) or
-            $node[self::h:u|self::h:b|self::h:i|self::h:strong|self::h:span|self::h:em
-            |self::h:br|self::h:a]"
-        />
-    </xsl:function>-->
 
 </xsl:stylesheet>

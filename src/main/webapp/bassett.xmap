@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- this is the live bassett.xmap -->
 <map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
@@ -8,7 +7,7 @@
             <map:match pattern="raw/**.html" type="wildcard">
                 <map:aggregate element="doc">
                     <map:part src="${content-base}/biomed-resources/bassett/{1}.html"/>
-                    <map:part src="cocoon:/database"/>
+                    <map:part src="cocoon://content/biomed-resources/bassett/database"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="resources/xsl/bassett.xsl">
@@ -21,8 +20,8 @@
             <map:match pattern="**.html" type="wildcard">
                 <map:aggregate element="doc" label="bassettContent">
                     <map:part src="${content-base}/biomed-resources/bassett/bassettTemplate.html"/>
-                    <map:part src="cocoon:/raw/{1}.html"/>
-                    <map:part src="cocoon:/accordionMenu"/>
+                    <map:part src="cocoon://content/biomed-resources/bassett/raw/{1}.html"/>
+                    <map:part src="cocoon://content/biomed-resources/bassett/accordionMenu"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="resources/xsl/bassettTemplate.xsl"/>
@@ -31,7 +30,7 @@
             <map:match pattern="accordionMenu" type="wildcard">
                 <map:aggregate element="doc" label="bassettContent">
                     <map:part src="${content-base}/biomed-resources/bassett/accordionMenu.html"/>
-                    <map:part src="cocoon:/bassett-accordion"/>
+                    <map:part src="cocoon://content/biomed-resources/bassett/bassett-accordion"/>
                 </map:aggregate>
                 <map:transform type="xinclude"/>
                 <map:transform type="saxon" src="resources/xsl/bassettAccordion.xsl"/>
