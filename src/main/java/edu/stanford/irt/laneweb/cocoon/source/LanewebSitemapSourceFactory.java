@@ -10,17 +10,12 @@ import org.apache.excalibur.source.SourceFactory;
 public class LanewebSitemapSourceFactory implements SourceFactory {
     
     private Processor processor;
+    
+    private SitemapSourceLocationModifier locationModifier = new SitemapSourceLocationModifier();
 
     @SuppressWarnings("rawtypes")
     public Source getSource(final String location, final Map parameters) throws IOException {
-        String modifiedLocation = location;
-        if (modifiedLocation.indexOf("cocoon://") == 0) {
-            modifiedLocation = "cocoon:/" + modifiedLocation.substring("cocoon://".length());
-        }
-        if (modifiedLocation.indexOf(".html") > 0 && modifiedLocation.indexOf("cocoon:/content") != 0) {
-            modifiedLocation = "cocoon:/content/" + modifiedLocation.substring("cocoon:/".length());
-        }
-        return new LanewebSitemapSource(modifiedLocation, this.processor);
+        return new LanewebSitemapSource(this.locationModifier.modify(location), this.processor);
     }
 
     public void release(final Source source) {
