@@ -6,13 +6,22 @@ import org.apache.cocoon.environment.SourceResolver;
 
 
 public class TreeProcessor extends org.apache.cocoon.components.treeprocessor.TreeProcessor {
+    
+    private String filename;
 
-    public TreeProcessor(final String fileName, final SourceResolver sourceResolver,
-            final ServiceManager serviceManager, final Settings settings) throws Exception {
-        this.resolver = sourceResolver;
+    public TreeProcessor(final String filename, final ServiceManager serviceManager, final Settings settings) {
+        this.filename = filename;
         this.manager = serviceManager;
         this.settings = settings;
-        this.source = new DelayedRefreshSourceWrapper(this.resolver.resolveURI(fileName), this.lastModifiedDelay);
-        initialize();
+    }
+    
+    public void setSourceResolver(SourceResolver sourceResolver) {
+        this.resolver = sourceResolver;
+    }
+    
+    @Override
+    public void initialize() throws Exception {
+        this.source = new DelayedRefreshSourceWrapper(this.resolver.resolveURI(this.filename), this.lastModifiedDelay);
+        super.initialize();
     }
 }

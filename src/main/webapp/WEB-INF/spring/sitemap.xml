@@ -5,11 +5,12 @@
     
     
     <bean name="org.apache.cocoon.Processor/sitemap"
-        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor">
+        class="edu.stanford.irt.laneweb.cocoon.TreeProcessor"
+        init-method="initialize">
         <constructor-arg value="sitemap.xmap"/>
-        <constructor-arg ref="org.apache.excalibur.source.SourceResolver"/>
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
         <constructor-arg ref="org.apache.cocoon.configuration.Settings"/>
+        <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
     
     <bean name="org.apache.cocoon.components.treeprocessor.TreeBuilder/sitemap-1.0"
