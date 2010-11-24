@@ -172,13 +172,6 @@
                     <map:serialize type="text"/>
                 </map:match>
             </map:match>
-            <map:match pattern="sfx/highly-accessed2rss" type="wildcard">
-                <map:generate
-                    src="http://sfx.stanford.edu/local/cgi/public/get_file.cgi?file=highly-accessed.xml"
-                    type="file"/>
-                <map:transform src="resources/xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>
-                <map:serialize type="xml"/>
-            </map:match>
             <map:match pattern="proxy/credential" type="wildcard">
                 <map:act type="proxy-credential">
                     <map:redirect-to uri="{proxy-redirect}"/>

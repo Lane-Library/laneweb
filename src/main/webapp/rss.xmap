@@ -5,7 +5,10 @@
     <map:pipelines>
         <map:pipeline type="expires">
             <map:match pattern="highly-accessed-articles.xml" type="wildcard">
-                <map:generate src="cocoon://apps/sfx/highly-accessed2rss" type="file"/>
+                <map:generate
+                    src="http://sfx.stanford.edu/local/cgi/public/get_file.cgi?file=highly-accessed.xml"
+                    type="file"/>
+                <map:transform src="resources/xsl/sfx-highly-accessed2rss.xsl" type="saxon"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="ncbi-rss2html/**" type="wildcard">
