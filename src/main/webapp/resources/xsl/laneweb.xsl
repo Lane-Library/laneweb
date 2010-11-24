@@ -736,12 +736,6 @@
         <xsl:apply-templates select="$source-doc/h:body/node()"/>
     </xsl:template>
 
-    <xsl:template name="meta-data">
-        <xsl:if test="$source">
-            <meta name="LW.source" content="{$source}"/>
-        </xsl:if>
-    </xsl:template>
-
     <xsl:template name="tokenize-email">
         <xsl:param name="string"/>
         <xsl:value-of select="concat('|',substring($string,1,1))"/>
