@@ -380,7 +380,6 @@
                     </xsl:for-each>
                 </script>
             </xsl:if>
-            <xsl:call-template name="meta-data"/>
         </xsl:copy>
     </xsl:template>
 
