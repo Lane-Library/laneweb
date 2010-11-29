@@ -15,6 +15,14 @@ body > ul > li a {
     /*color:SteelBlue*/;
 }
     
+body > .toolbar {
+    border-top: 1px solid #2D3642;
+}
+
+li > a[selected], li > a:active {
+    background-color: #beb4a2 !important;
+}
+
 .panel > ul li  {
     list-style: none;
 }
@@ -27,8 +35,13 @@ body > ul > li a {
     position: absolute;
     overflow: hidden;
     display:none;
-    top: 12px;
-    right: 60px;
+    top: 8px;
+    right: 55px;
+}
+
+.dialog > fieldset {
+    background: url(/././resources/images/m/toolbar.png) #8b0000 repeat-x;
+    border-top: 1px solid #8b0000;
 }
 
 #laneSearch fieldset {
@@ -45,21 +58,38 @@ body > ul > li a {
 }
 
 .footer {
-    border:none;
-    font-size:10px;
-    color:gray;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-size: 12px;
+    border-bottom: 50px solid beige;
+    font-size: 12px;
+    background-color:beige;
 }
 
-.footer  a {
-    background:none;
+.footer a {
+    background: none;
     display: inline;
+    text-decoration: none;
 }
 
-.suCopy {
-    position:absolute;
-    bottom:0;
-    left:10px;
-    font-size:6px;
+.fCopy {
+    position: absolute;
+    bottom: 20;
+    left: 10px;
+    color: gray;
+    color: gray;
+}
+
+.fContact {
+    position: absolute;
+    bottom: 20;
+    left: 130px;
+}
+
+.fFV {
+    position: absolute;
+    bottom: 20;
+    right: 10px;
 }
 
 #searchInput {
@@ -109,7 +139,7 @@ body > ul > li a {
 }
 #results li a.more, li.more {
     text-align:right;
-    font-size:10px;
+    font-size:14px;
     background:url('/././resources/images/m/listArrow.png') no-repeat scroll right center transparent;
 }
 div.absInfo {
