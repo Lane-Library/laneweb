@@ -99,6 +99,13 @@
             <xsl:otherwise>all-all</xsl:otherwise>
         </xsl:choose>
     </xsl:variable>
+    
+    <!-- ====================  INCLUDED TEMPLATES ============================= -->
+    <xsl:include href="laneweb-email.xsl"/>
+    <xsl:include href="laneweb-forms.xsl"/>
+    <xsl:include href="laneweb-links.xsl"/>
+    <xsl:include href="laneweb-login.xsl"/>
+    <xsl:include href="laneweb-yui-grid.xsl"/>
 
     <!-- ====================  DEFAULT TEMPLATES ============================= -->
     <!-- root template applies templates on the template document -->
@@ -143,18 +150,6 @@
         </xsl:choose>
     </xsl:template>
 
-    <!-- set the selected option of the search form -->
-    <xsl:template match="h:option[parent::h:select[@id='searchSource']]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:if test="@value = $search-form-select">
-                <xsl:attribute name="selected">selected</xsl:attribute>
-            </xsl:if>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-
-
     <xsl:template match="comment()">
         <xsl:copy-of select="."/>
     </xsl:template>
@@ -162,21 +157,6 @@
     <!-- xincludes often include html/head and html/body, this ignores them-->
     <xsl:template match="h:html[ancestor::h:html]">
         <xsl:apply-templates select="h:body/child::node()"/>
-    </xsl:template>
-
-    <!-- put version into /resources @src -->
-    <xsl:template match="h:script/@src[starts-with(.,'/resources')]">
-        <xsl:attribute name="src">
-            <xsl:value-of
-                select="concat($base-path,.,'?',$version)"/>
-        </xsl:attribute>
-    </xsl:template>
-
-    <!-- put version into css href -->
-    <xsl:template match="h:link/@href[starts-with(.,'/resources/css')]">
-        <xsl:attribute name="href">
-            <xsl:value-of select="concat($base-path,.,'?',$version)"/>
-        </xsl:attribute>
     </xsl:template>
 
     <!-- put script text into a comment so saxon won't convert entities -->
@@ -188,62 +168,6 @@
                 <xsl:text>//</xsl:text>
             </xsl:comment>
         </xsl:copy>
-    </xsl:template>
-
-    <xsl:template match="h:a|h:area">
-        <xsl:choose>
-            <!-- obfuscate email addresses with javascript -->
-            <xsl:when test="starts-with(@href, 'mailto:')">
-                <xsl:variable name="address">
-                    <xsl:text>'+'ma'+''+'il'+'to'+':'</xsl:text>
-                    <xsl:call-template name="js-split">
-                        <xsl:with-param name="string" select="substring-after(@href,'mailto:')"/>
-                    </xsl:call-template>
-                    <xsl:text>+'</xsl:text>
-                </xsl:variable>
-                <script type="text/javascript">
-                    <xsl:comment>
-                        <xsl:text>&#xD;document.write('&lt;</xsl:text>
-                        <xsl:value-of select="name()"/>
-                        <xsl:text> href="</xsl:text>
-                        <xsl:value-of select="$address"/>
-                        <xsl:text>"</xsl:text>
-                        <xsl:for-each select="attribute::node()[not(name() = 'href')]">
-                            <xsl:text> </xsl:text>
-                            <xsl:value-of select="name()"/>
-                            <xsl:text>="</xsl:text>
-                            <xsl:value-of select="."/>
-                            <xsl:text>"</xsl:text>
-                        </xsl:for-each>
-                        <xsl:text>&gt;</xsl:text>
-                        <xsl:for-each select="*">
-                            <xsl:text>'+'&lt;</xsl:text>
-                            <xsl:value-of select="name()"/>
-                            <xsl:for-each select="attribute::node()">
-                                <xsl:text> </xsl:text>
-                                <xsl:value-of select="name()"/>
-                                <xsl:text>="</xsl:text>
-                                <xsl:value-of select="."/>
-                                <xsl:text>"</xsl:text>
-                            </xsl:for-each>
-                            <xsl:text>&gt;</xsl:text>
-                        </xsl:for-each>
-                        <xsl:text>'</xsl:text>
-                        <xsl:call-template name="js-split">
-                            <xsl:with-param name="string" select="normalize-space()"/>
-                        </xsl:call-template>
-                        <xsl:text>+'&lt;/</xsl:text>
-                        <xsl:value-of select="name()"/>
-                        <xsl:text>&gt;');&#xD;</xsl:text>
-                    </xsl:comment>
-                </script>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:copy>
-                    <xsl:apply-templates select="attribute::node()|child::node()"/>
-                </xsl:copy>
-            </xsl:otherwise>
-        </xsl:choose>
     </xsl:template>
 
     <!-- setup flash object, using swfobject -->
@@ -283,78 +207,6 @@
     </xsl:template>
 
     <!-- =====================  SPECIAL CASE TEMPLATES ===================== -->
-
-    <!-- obfuscated email href (don't copy, processed elsewhere) -->
-    <xsl:template match="attribute::href[starts-with(.,'mailto:')]"/>
-
-    <!-- href and src attributes template -->
-    <xsl:template match="@href">
-        <xsl:choose>
-            <!-- 
-                //FIXME: uncomment before putting into production
-                
-            <xsl:when
-                test="starts-with(.,'http://lane.stanford.edu') and not(contains(.,'cookiesFetch'))">
-                <xsl:call-template name="make-link">
-                    <xsl:with-param name="link"
-                        select="substring-after(.,'http://lane.stanford.edu')"/>
-                    <xsl:with-param name="attr" select="'href'"/>
-                </xsl:call-template>
-            </xsl:when>
-            -->
-            <xsl:when test="contains(., '://') and contains(.,'{keywords}')">
-                <xsl:attribute name="href">
-                    <xsl:value-of select="replace(.,'\{keywords\}',$regex-query)"/>
-                </xsl:attribute>
-            </xsl:when>
-            <xsl:when test="contains(., '://') and contains(.,'{search-terms}')">
-                <xsl:attribute name="href">
-                    <xsl:value-of select="replace(.,'\{search-terms\}',$regex-query)"/>
-                </xsl:attribute>
-            </xsl:when>
-            <xsl:when test="starts-with(.,'http://') and starts-with($path,'/secure')">
-                <xsl:attribute name="href">
-                    <xsl:value-of select="."/>
-                </xsl:attribute>
-            </xsl:when>
-            <xsl:when test="contains(., '://') and not(ancestor::h:head) and starts-with(.,'http')">
-                <xsl:attribute name="href">
-                    <xsl:value-of select="."/>
-                </xsl:attribute>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:call-template name="make-link">
-                    <xsl:with-param name="link" select="."/>
-                    <xsl:with-param name="attr" select="'href'"/>
-                </xsl:call-template>
-            </xsl:otherwise>
-        </xsl:choose>
-    </xsl:template>
-
-    <xsl:template match="@action | @src">
-        <xsl:attribute name="{name()}">
-            <xsl:choose>
-                <xsl:when test="starts-with(.,'/')">
-                    <xsl:value-of select="concat($base-path,.)"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="."/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
-    </xsl:template>
-
-    <xsl:template match="@*[.='{referrer}']">
-        <xsl:attribute name="{name()}">
-            <xsl:value-of select="$referrer"/>
-        </xsl:attribute>
-    </xsl:template>
-
-    <xsl:template match="@*[.='{request-uri}']">
-        <xsl:attribute name="{name()}">
-            <xsl:value-of select="$path"/>
-        </xsl:attribute>
-    </xsl:template>
 
     <!-- get all the head elements from template and all non title head elements from source (with some exceptions)-->
     <!-- and add the swfobject.js stuff if necessary -->
@@ -400,18 +252,6 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- TODO did the id of the input change? -->
-    <xsl:template match="h:input[@name='q']">
-        <xsl:copy>
-            <xsl:apply-templates select="@*"/>
-            <xsl:if test="$query != ''">
-                <xsl:attribute name="value">
-                    <xsl:value-of select="$query"/>
-                </xsl:attribute>
-            </xsl:if>
-        </xsl:copy>
-    </xsl:template>
-
     <!-- add clinical class to search form, fieldset and laneNav elements when clinical is active tab -->
     <xsl:template match="node()[@id='search' or @id='laneNav']">
         <xsl:copy>
@@ -420,34 +260,6 @@
                 <xsl:attribute name="class">clinical</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- add sourceid input to search form if sourceid param present -->
-    <xsl:template match="h:fieldset[@id='searchFields' or parent::h:form[@class='breadcrumbForm']]">
-        <xsl:copy>
-            <xsl:apply-templates select="@*|node()"/>
-            <xsl:if test="$sourceid">
-                <input type="hidden" name="sourceid" value="{$sourceid}"/>
-            </xsl:if>
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- add sourceid input to quick link options if sourceid param present -->
-    <xsl:template match="h:option[parent::h:select[@id='qlinks']]">
-        <xsl:copy>
-            <xsl:choose>
-                <xsl:when test="$sourceid and starts-with(@value,'/')">
-                    <xsl:apply-templates select="attribute::node()[not(name()='value')]"/>
-                    <xsl:attribute name="value">
-                        <xsl:value-of select="concat(@value,'?sourceid=',$sourceid)"/>
-                    </xsl:attribute>
-                    <xsl:apply-templates/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates select="@*|node()"/>
-                </xsl:otherwise>
-            </xsl:choose>
         </xsl:copy>
     </xsl:template>
 
@@ -524,243 +336,12 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- the next 6 template matches handle the login state and show links depending on that state -->
-    <!-- process the list only if off campus -->
-    <xsl:template match="h:ul[attribute::id='login']">
-        <xsl:if test="matches($ipgroup,'^(OTHER|PAVA|LPCH|SHC|ERR)$')">
-            <xsl:copy>
-                <xsl:apply-templates select="attribute::node() | child::node()"/>
-            </xsl:copy>
-        </xsl:if>
-    </xsl:template>
-
-    <!-- the 1st #login li is the login link or the users name -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[1]">
-        <xsl:copy>
-            <xsl:apply-templates select="attribute::node()"/>
-            <xsl:choose>
-                <xsl:when test="string-length($name) &gt; 0">
-                    <xsl:value-of select="$name"/>
-                </xsl:when>
-                <xsl:when test="string-length($sunetid) &gt; 0">
-                    <xsl:value-of select="$sunetid"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates select="child::node()"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:copy>
-    </xsl:template>
-
-    <!-- the 2nd #login li is the account link -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[2]">
-        <xsl:if test="string-length($sunetid) &gt; 0">
-            <xsl:copy>
-                <xsl:apply-templates select="attribute::node() | child::node()"/>
-            </xsl:copy>
-        </xsl:if>
-    </xsl:template>
-
-
-    <!-- the 3rd #login li is the logout link -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[3]">
-        <xsl:if test="string-length($sunetid) &gt; 0">
-            <xsl:copy>
-                <xsl:apply-templates select="attribute::node() | child::node()"/>
-            </xsl:copy>
-        </xsl:if>
-    </xsl:template>
-
-    <!-- the 4rd #login li is the proxy-off toggle -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[4]">
-        <xsl:if test="string-length($sunetid) = 0 and $proxy-links = 'true'">
-            <xsl:copy>
-                <a>
-                    <xsl:attribute name="href">
-                        <xsl:choose>
-                            <xsl:when
-                                test="string-length($query-string) = 0 or $query-string = 'proxy-links=true'">
-                                <xsl:text>?proxy-links=false</xsl:text>
-                            </xsl:when>
-                            <xsl:when test="ends-with($query-string, 'proxy-links=true')">
-                                <xsl:text>?</xsl:text>
-                                <xsl:value-of
-                                    select="substring-before($query-string,'proxy-links=true')"/>
-                                <xsl:text>proxy-links=false</xsl:text>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of
-                                    select="concat('?',$query-string,'&amp;proxy-links=false')"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:attribute>
-                    <xsl:value-of select="."/>
-                </a>
-            </xsl:copy>
-        </xsl:if>
-    </xsl:template>
-
-    <!-- the 5th #login li is the proxy-on toggle -->
-    <xsl:template match="h:ul[attribute::id='login']/h:li[5]">
-        <xsl:if test="string-length($sunetid) = 0 and $proxy-links = 'false'">
-            <xsl:copy>
-                <a>
-                    <xsl:attribute name="href">
-                        <xsl:choose>
-                            <xsl:when
-                                test="string-length($query-string) = 0 or $query-string = 'proxy-links=false'">
-                                <xsl:text>?proxy-links=true</xsl:text>
-                            </xsl:when>
-                            <xsl:when test="ends-with($query-string, 'proxy-links=false')">
-                                <xsl:text>?</xsl:text>
-                                <xsl:value-of
-                                    select="substring-before($query-string,'proxy-links=false')"/>
-                                <xsl:text>proxy-links=true</xsl:text>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <xsl:value-of
-                                    select="concat('?',$query-string,'&amp;proxy-links=true')"/>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </xsl:attribute>
-                    <xsl:value-of select="."/>
-                </a>
-            </xsl:copy>
-        </xsl:if>
-    </xsl:template>
-
-    <!-- the following several templates add class to yui grid divs for custom widths -->
-    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']/h:div[@class='yui-gf']/h:div[@class='yui-u first']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' leftColumn')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-
-    <xsl:template match="h:body/h:div[@class='yui-gf']/h:div[@class='yui-u first']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' leftColumn')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']/h:div[@class='yui-gf']/h:div[@class='yui-u']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' middleColumn')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' rightColumn')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-    
-    <xsl:template match="h:body/h:div[@class='yui-ge' or @class='yui-ge search']/h:div[@class='yui-u first']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' leftGrids')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-
-    <xsl:template match="h:body/h:div[@class='yui-gf']/h:div[@class='yui-u']">
-        <xsl:copy>
-            <xsl:attribute name="class" select="concat(@class, ' rightGrids')"/>
-            <xsl:apply-templates select="attribute::node()[not(name() = 'class')]"/>
-            <xsl:apply-templates/>
-        </xsl:copy>
-    </xsl:template>
-
     <!-- ======================  NAMED TEMPLATES  =========================== -->
 
-
-    <!-- adds parameters to href attributes depending on various parameter states -->
-    <xsl:template name="make-link">
-        <xsl:param name="link"/>
-        <xsl:param name="attr"/>
-        <xsl:variable name="param-string">
-            <xsl:if test="not(contains($link,'/secure/login.html'))">
-                <xsl:choose>
-                    <xsl:when test="contains($link, '?')">&amp;</xsl:when>
-                    <xsl:otherwise>?</xsl:otherwise>
-                </xsl:choose>
-                <xsl:if test="$sourceid">
-                    <xsl:text>sourceid=</xsl:text>
-                    <xsl:value-of select="$sourceid"/>
-                </xsl:if>
-            </xsl:if>
-        </xsl:variable>
-        <xsl:attribute name="{$attr}">
-            <!-- prepend the base-path if it is an absolute link -->
-            <xsl:if test="starts-with($link, '/') and not(starts-with($link,$base-path))">
-                <xsl:value-of select="$base-path"/>
-            </xsl:if>
-            <!-- replace keywords/search-terms TODO: unify this so only replaceing one thing -->
-            <xsl:choose>
-                <xsl:when test="contains($link,'{keywords}')">
-                    <xsl:value-of select="replace($link,'\{keywords\}',$regex-query)"/>
-                </xsl:when>
-                <xsl:when test="contains($link,'%7Bkeywords%7D')">
-                    <xsl:value-of select="replace($link,'%7Bkeywords%7D',$regex-query)"/>
-                </xsl:when>
-                <xsl:when test="contains($link,'{search-terms}')">
-                    <xsl:value-of select="replace($link,'\{search-terms\}',$regex-query)"/>
-                </xsl:when>
-                <xsl:when test="contains($link,'%7Bsearch-terms%7D')">
-                    <xsl:value-of select="replace($link,'%7Bsearch-terms%7D',$regex-query)"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$link"/>
-                </xsl:otherwise>
-            </xsl:choose>
-            <!-- replace links ending with / so they end with /index.html -->
-            <xsl:if test="ends-with($link,'/')">
-                <xsl:text>index.html</xsl:text>
-            </xsl:if>
-            <xsl:if test="$sourceid and name(..) != 'link' and name(..) != 'img' and not(starts-with($link,'#'))">
-                <xsl:value-of select="$param-string"/>
-            </xsl:if>
-        </xsl:attribute>
-    </xsl:template>
 
     <!-- the content -->
     <xsl:template name="content">
         <xsl:apply-templates select="$source-doc/h:body/node()"/>
-    </xsl:template>
-
-    <xsl:template name="tokenize-email">
-        <xsl:param name="string"/>
-        <xsl:value-of select="concat('|',substring($string,1,1))"/>
-        <xsl:if test="string-length($string) &gt; 1">
-            <xsl:call-template name="tokenize-email">
-                <xsl:with-param name="string" select="substring($string,2)"/>
-            </xsl:call-template>
-        </xsl:if>
-    </xsl:template>
-
-    <xsl:template name="js-split">
-        <xsl:param name="string"/>
-        <xsl:variable name="char">
-            <xsl:value-of select="substring($string,1,1)"/>
-        </xsl:variable>
-        <xsl:text>+'</xsl:text>
-        <xsl:if test="$char = &quot;'&quot;">
-            <xsl:text>\</xsl:text>
-        </xsl:if>
-        <xsl:value-of select="$char"/>
-        <xsl:text>'</xsl:text>
-        <xsl:if test="string-length($string) &gt; 1">
-            <xsl:call-template name="js-split">
-                <xsl:with-param name="string" select="substring($string,2)"/>
-            </xsl:call-template>
-        </xsl:if>
     </xsl:template>
 
 </xsl:stylesheet>
