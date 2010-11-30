@@ -5,8 +5,8 @@
         device = RegExp.$1;
         advert = new Y.Overlay({
             id : (device == 'iPad') ? 'ipadAd' : 'mphoneAd',
-            width : "984px",
-            height : (device == 'iPad') ? '45px' : '107px',
+            width : "988px",
+            height : (device == 'iPad') ? '45px' : '112px',
             bodyContent : "Try <a href='/././m/'>Express Lane</a> for your "+device+" &raquo;",
             xy:[6,0],
             zIndex : 2

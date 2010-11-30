@@ -77,7 +77,6 @@ em {
 #mphoneAd, #ipadAd {
     text-align:center;
     background-color:#d5672e;
-    border:2px solid red;
 }
 #mphoneAd a, #ipadAd a {
     color:#fff;
@@ -92,5 +91,5 @@ em {
 #ipadAd div {
     color:#fff;
     margin-top: -5px;
-    font-size:165%;
+    font-size:150%;
 }
