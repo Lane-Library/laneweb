@@ -74,3 +74,23 @@ em {
     margin: 0 0 20px;
     padding: 20px;
 }
+#mphoneAd, #ipadAd {
+    text-align:center;
+    background-color:#d5672e;
+    border:2px solid red;
+}
+#mphoneAd a, #ipadAd a {
+    color:#fff;
+    font-weight:bold;
+    border-bottom:none;
+}
+#mphoneAd div {
+    color:#fff;
+    padding-top:10px;
+    font-size:200%;
+}
+#ipadAd div {
+    color:#fff;
+    margin-top: -5px;
+    font-size:165%;
+}
