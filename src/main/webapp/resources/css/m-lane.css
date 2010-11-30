@@ -197,3 +197,6 @@ div.absInfo {
 #homeButton img {
     border:none;
 }
+#loginLink {
+    visibility:hidden;
+}

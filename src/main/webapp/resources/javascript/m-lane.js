@@ -83,6 +83,11 @@
         d.addEventListener("load", function() {
             var i, inputs = d.getElementsByTagName("input"),l;
             
+            // display login link if needed
+            if(ipGroup.content.match(/^(OTHER|PAVA|ERR)/)){
+                $('loginLink').style.visibility = 'visible';
+            }
+            
             for (i = 0; inputs.length > i; i++ ){
                 if(inputs[i].type == "search"){
                     
