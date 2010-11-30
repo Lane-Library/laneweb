@@ -199,8 +199,8 @@
                             <output>target/laneweb/resources/css/lane-mobile.css</output>
                             <includes>
                                 <include>m-iui-min.css</include>
-                                <include>m-lane-min.css</include>
                                 <include>m-iui-default-theme-min.css</include>
+                                <include>m-lane-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>
