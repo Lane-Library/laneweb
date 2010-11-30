@@ -81,10 +81,9 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
-                <map:generate type="file" src="cocoon://content/m/{1}.html"/>
-                <map:transform type="saxon" src="resources/xsl/laneweb.xsl">
-                    <map:parameter name="alt-src" value="resources/xsl/laneweb.xsl"/>
-                </map:transform>
+                <map:generate type="html" src="${content-base}/m/{1}.html"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:transform type="xinclude"/>
                 <map:select type="proxy-links">
                     <map:when test="true">
                         <map:transform type="proxy-links"/>

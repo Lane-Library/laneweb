@@ -3,7 +3,8 @@
     xmlns:h="http://www.w3.org/1999/xhtml"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="h">
-
+    
+    <!-- ===========================  PARAMETERS ========================= -->
     <!-- the request-uri ( not including parameters ) -->
     <xsl:param name="request-uri"/>
     
@@ -13,29 +14,72 @@
     <!-- the query part of the request -->
     <xsl:param name="query-string"/>
     
+    <!-- the search query -->
+    <xsl:param name="query"/>
+    
+    <xsl:param name="proxy-links"/>
+    
+    <xsl:param name="sunetid"/>
+    
+    <!-- LPCH and SHC don't require authentication for proxy server -->
+    <xsl:param name="ipgroup"/>
+    
+    <xsl:param name="version"/>
+    
+    <xsl:param name="referrer"/>
+    
+    <xsl:param name="name"/>
+    
+    <!-- sourceid used for tracking to ID request origin: shc, cerner, laneconnex-engine, etc. -->
+    <xsl:param name="sourceid"/>
+    
+    <xsl:variable name="path">
+        <xsl:value-of select="substring($request-uri,string-length($base-path) + 1)"/>
+    </xsl:variable>
+    
+    <xsl:variable name="regex-query">
+        <xsl:if test="$query">
+            <xsl:value-of select="replace($query,'(\\|\$)','\\$1')"/>
+        </xsl:if>
+    </xsl:variable>
+    
+    <!-- ====================  INCLUDED TEMPLATES ============================= -->
+    <xsl:include href="laneweb-links.xsl"/>
+    <xsl:include href="laneweb-login.xsl"/>
+    
     <xsl:template match="/">
         <xsl:apply-templates select="child::node()"/>
     </xsl:template>
-
+    
+    <xsl:template match="*">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="@*">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+    
+    <!-- remove left column for lwc2txt --> 
     <xsl:template match="h:div[contains(@class,'leftColumn')]"/>
-
+    
+    <!-- replace h2 with link to full version for lwc2txt --> 
     <xsl:template match="h:body/h:h2[1]">
         <div>Lane Medical Library text version | <a href="{concat(replace($request-uri,'/m/lc2txt',''),'?',$query-string)}">Full version available here</a></div>
         <xsl:copy>
             <xsl:copy-of select="node()[name()!='a']"></xsl:copy-of>
         </xsl:copy>
     </xsl:template>
-
-    <xsl:template match="*">
-        <xsl:copy>
-            <xsl:apply-templates select="@*|node()"/>
-        </xsl:copy>
+    
+    <!-- add the ip-group to content of the meta element for reporting -->
+    <xsl:template match="h:meta[@id='ipGroup']/@content">
+        <xsl:attribute name="content">
+            <xsl:value-of select="$ipgroup"/>
+        </xsl:attribute>
     </xsl:template>
-
-    <xsl:template match="@*">
-        <xsl:copy-of select="."/>
-    </xsl:template>
-
+    
+    <!-- transform search result links -->
     <xsl:template match="h:a">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
@@ -57,5 +101,5 @@
             <xsl:apply-templates select="child::node()"/>
         </xsl:copy>
     </xsl:template>
-
+    
 </xsl:stylesheet>
