@@ -32,9 +32,7 @@
         </map:pipeline>
         <map:pipeline type="caching">
             <map:match pattern="lane.manifest" type="wildcard">
-                <map:read type="txt-resource" src="${content-base}/m/lane.manifest">
-                    <map:parameter name="alt-src" value="${default-content-base}/m/lane.manifest"/>
-                </map:read>
+                <map:read type="txt-resource" src="${content-base}/m/lane.manifest"/>
             </map:match>
             <!-- EResources browse -->
             <map:match pattern="er/browse/type/*" type="wildcard">

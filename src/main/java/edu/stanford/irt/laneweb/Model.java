@@ -20,8 +20,6 @@ public interface Model {
 
     public static final String DEBUG = "debug";
 
-    public static final String DEFAULT_CONTENT_BASE = "default-content-base";
-
     public static final String EMRID = "emrid";
 
     public static final String ENGINES = "engines";

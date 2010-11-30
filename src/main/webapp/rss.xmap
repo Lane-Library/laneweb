@@ -38,9 +38,7 @@
         </map:pipeline>
         <map:pipeline type="noncaching">
             <map:match pattern="**.xml" type="wildcard">
-                <map:generate type="file" src="${content-base}/rss/{1}.xml">
-                    <map:parameter name="alt-src" value="${default-content-base}/rss/{1}.xml"/>
-                </map:generate>
+                <map:generate type="file" src="${content-base}/rss/{1}.xml"/>
                 <map:serialize type="xml"/>
             </map:match>
         </map:pipeline>

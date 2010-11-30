@@ -12,7 +12,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import edu.stanford.irt.laneweb.Model;
 
-
 public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
 
     private static final String[][] BASE_MAPPINGS = new String[][] {
@@ -22,22 +21,41 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
             { "/ryanmax", "file:/afs/ir.stanford.edu/users/r/y/ryanmax/laneweb" },
             { "/ajchrist", "file:/afs/ir.stanford.edu/users/a/j/ajchrist/laneweb" },
             { "/rzwies", "file:/afs/ir.stanford.edu/users/r/z/rzwies/laneweb" } };
-    
+
     private Map<String, URL> baseMappings;
-    
+
     private URL defaultContentBase;
-    
+
     private URL stageBase;
-    
+
     public LanewebPathInterceptor() throws MalformedURLException {
         this.baseMappings = new HashMap<String, URL>(BASE_MAPPINGS.length);
         for (String[] element : BASE_MAPPINGS) {
             this.baseMappings.put(element[0], new URL(element[1]));
         }
     }
-    
+
+    @Override
+    public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
+            throws Exception {
+        String requestURI = request.getRequestURI();
+        String contextPath = request.getContextPath();
+        String servletPath = requestURI.substring(contextPath.length());
+        request.setAttribute(Model.BASE_PATH, getBasePath(servletPath, contextPath));
+        request.setAttribute(Model.CONTENT_BASE, getContentBase(servletPath, contextPath));
+        return true;
+    }
+
+    public void setDefaultContentBase(final URL defaultContentBase) {
+        this.defaultContentBase = defaultContentBase;
+    }
+
+    public void setStageBase(final URL stageBase) {
+        this.stageBase = stageBase;
+    }
+
     private String getBasePath(final String servletPath, final String contextPath) {
-        if (servletPath.indexOf("/stage") ==0) {
+        if (servletPath.indexOf("/stage") == 0) {
             return contextPath + "/stage";
         }
         for (String key : this.baseMappings.keySet()) {
@@ -48,22 +66,7 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
         return contextPath;
     }
 
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String requestURI = request.getRequestURI();
-        String contextPath = request.getContextPath();
-        String servletPath = requestURI.substring(contextPath.length());
-        request.setAttribute(Model.BASE_PATH, getBasePath(servletPath, contextPath));
-        request.setAttribute(Model.CONTENT_BASE, getContentBase(servletPath, contextPath));
-        return true;
-    }
-
-    
-    public void setDefaultContentBase(URL defaultContentBase) {
-        this.defaultContentBase = defaultContentBase;
-    }
-
-    private URL getContentBase(String servletPath, String contextPath) throws MalformedURLException {
+    private URL getContentBase(final String servletPath, final String contextPath) throws MalformedURLException {
         if (servletPath.indexOf("/stage") == 0) {
             return this.stageBase;
         }
@@ -74,9 +77,4 @@ public class LanewebPathInterceptor extends HandlerInterceptorAdapter {
         }
         return this.defaultContentBase;
     }
-
-    public void setStageBase(URL stageBase) {
-        this.stageBase = stageBase;
-    }
-    
 }

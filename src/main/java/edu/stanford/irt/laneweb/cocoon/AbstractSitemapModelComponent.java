@@ -11,8 +11,6 @@ import org.apache.excalibur.source.Source;
 
 public abstract class AbstractSitemapModelComponent implements SitemapModelComponent {
 
-    private static final String ALT_SOURCE = "alt-src";
-
     protected Map<String, String> parameterMap;
 
     protected Map<String, Object> model;
@@ -28,13 +26,6 @@ public abstract class AbstractSitemapModelComponent implements SitemapModelCompo
                 this.source = resolver.resolveURI(src);
             } catch (IOException e) {
                 throw new IllegalArgumentException(e);
-            }
-            if (this.parameterMap.containsKey(ALT_SOURCE) && !this.source.exists()) {
-                try {
-                    this.source = resolver.resolveURI(this.parameterMap.get(ALT_SOURCE));
-                } catch (IOException e) {
-                    throw new IllegalStateException(e);
-                }
             }
         }
         initialize();
