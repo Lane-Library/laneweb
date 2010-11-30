@@ -34,9 +34,8 @@
                 <map:transform type="saxon" src="resources/xsl/random.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
-            <map:match pattern="**persistentlogin.html" type="wildcard">
-                <map:generate type="html"
-                    src="${content-base}/secure/persistentlogin.html"/>
+            <map:match pattern="persistentlogin.html" type="wildcard">
+                <map:generate type="html" src="${content-base}/persistentlogin.html"/>
                 <map:transform src="resources/xsl/persistentlogin.xsl" type="saxon"/>
                 <map:transform type="xinclude"/>
                 <map:serialize type="xml"/>
@@ -115,8 +114,7 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="popup.html" type="wildcard">
-                <map:generate type="html"
-                    src="${medblog-base}/lane-faq/archives/${id}.xml"/>
+                <map:generate type="html" src="${medblog-base}/lane-faq/archives/${id}.xml"/>
                 <map:transform type="saxon" src="resources/xsl/popup-faq.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
