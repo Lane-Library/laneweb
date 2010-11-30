@@ -7,6 +7,23 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
+        <release date="2010-12-06" version="1.11.12" description="1.11.12 bug fix release">
+            <action date="2010-11-29" dev="ryanmax" issue="44933" type="add">
+                banner to advertise mobile interface
+            </action>
+            <action date="2010-11-29" dev="ryanmax" issue="45001" type="update">
+                change color scheme of mobile interface
+            </action>
+            <action date="2010-11-29" dev="ryanmax" issue="44986" type="fix">
+                email obfuscation removing mail links in mobile content
+            </action>
+            <action date="2010-11-23" dev="ryanmax" issue="44974" type="fix">
+                path error in mobile search results
+            </action>
+            <action date="2010-11-22" dev="ryanmax" issue="44954" type="add">
+                make spelling suggestions trackable: search URLs to include "laneSpellCorrected="
+            </action>
+        </release>
         <release date="2010-11-22" version="1.11.11" description="1.11.11 bug fix release">
             <action date="2010-11-16" dev="ceyates" issue="44750" type="add">
                 alert message styles
