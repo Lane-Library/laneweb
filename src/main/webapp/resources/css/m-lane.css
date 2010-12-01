@@ -7,7 +7,9 @@ body {
 }
 
 body > ul > li {
-    font-size: 18px;
+    font-size: 16px;
+    background:url(/././resources/images/m/listBg.png) repeat-x;
+    border-bottom:1px solid darkgray;
 }
 
 body > ul > li a {
@@ -19,8 +21,16 @@ body > .toolbar {
     border-top: 1px solid #2D3642;
 }
 
+.toolbar > h1 {
+    font-size: 14px;
+}
+
 li > a[selected], li > a:active {
     background-color: #beb4a2 !important;
+}
+
+ul.panel>li{
+    background:none;
 }
 
 .panel > ul li  {
@@ -40,8 +50,9 @@ li > a[selected], li > a:active {
 }
 
 .dialog > fieldset {
-    background: url(/././resources/images/m/toolbar.png) #8b0000 repeat-x;
+    background:#c9d3d7;
     border-top: 1px solid #8b0000;
+    border-bottom: 1px solid #000;
 }
 
 #laneSearch fieldset {
@@ -57,13 +68,22 @@ li > a[selected], li > a:active {
     width:20px;
 }
 
+.listSpacer{
+    height:50px;
+    border-bottom:none;
+    background:#e5ebed;
+}
+
 .footer {
-    padding-top: 10px;
-    padding-bottom: 20px;
-    font-size: 11px;
-    border-bottom: 50px solid beige;
-    background-color:beige;
+    padding-top:10px;
+    padding-bottom:20px;
+    font-size:11px;
+    /*
+    background:url(/././resources/images/m/footerBg.png) repeat-x;
+    */
+    background:#c2cbd0;
     text-align:center;
+    border-bottom:70px solid #414649;
 }
 
 .footer a {
@@ -87,8 +107,15 @@ li > a[selected], li > a:active {
 }
 
 #searchInput {
-    padding-left:24px;
+    padding-left:28px;
     padding-right:24px;
+    width:100%;
+    margin-top:10px;
+    height:30px;
+    font-size:16px;
+    -webkit-border-radius:15px;
+    /*border-top:2px inset darkgray;*/
+    border:2px solid darkgray;
 }
 
 #searchCancel {
@@ -104,6 +131,9 @@ li > a[selected], li > a:active {
 #pico input {
     padding-left:2px;
     margin:0 0 10px 0;
+    font-size:14px;
+    height:30px;
+    width:100%;
 }
 #picoClr {
     width:65px;
@@ -131,10 +161,16 @@ li > a[selected], li > a:active {
     color:black;
     font-style:italic;
 }
-#results li a.more, li.more {
+li.more {
+    border-bottom:4px solid #7a8792;
+}
+#results li a.more{
     text-align:right;
     font-size:14px;
     background:url('/././resources/images/m/listArrow.png') no-repeat scroll right center transparent;
+}
+#results li{
+    background-color:#dfe6e9;
 }
 div.absInfo {
     box-sizing: border-box;
