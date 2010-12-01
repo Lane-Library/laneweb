@@ -35,12 +35,8 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
         this.sourceFactories = sourceFactories;
     }
     
-    public void setContextPath(String contextPath) {
-        this.tomcatURLPattern = Pattern.compile("jndi:/localhost" + contextPath + "(/.*)");
-    }
-    
     public void setServletContext(ServletContext servletContext) {
-        setContextPath(servletContext.getContextPath());
+        this.tomcatURLPattern = Pattern.compile("jndi:/localhost" + servletContext.getContextPath() + "(/.*)");
     }
 
     public Source resolveURI(String location) throws MalformedURLException, IOException {
