@@ -331,6 +331,22 @@
     </reporting>
     <dependencies>
         <dependency>
+            <artifactId>commons-codec</artifactId>
+            <groupId>commons-codec</groupId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <artifactId>commons-httpclient</artifactId>
+            <groupId>commons-httpclient</groupId>
+            <version>3.1</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <artifactId>eresources-impl</artifactId>
             <groupId>edu.stanford.irt</groupId>
             <version>1.6.0</version>
