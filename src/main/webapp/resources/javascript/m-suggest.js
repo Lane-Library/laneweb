@@ -7,6 +7,7 @@
     };
     LANE.Suggest.prototype = {
         _keyupPid : null,
+        //TODO: is this too long? 50 ms?
         idleDelay : 800,
         requestLimit : "er-mesh",
         minChars : 3,
