@@ -2,8 +2,6 @@ package edu.stanford.irt.laneweb.cocoon.source;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.Map;
 import java.util.regex.Matcher;

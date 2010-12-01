@@ -46,7 +46,7 @@ public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implem
         handler.startPrefixMapping("", NAMESPACE);
         int size = size();
         int pageSize = size / MAX_PAGE_COUNT;
-        pageSize = pageSize % MAX_PAGE_COUNT != 0 ? pageSize + 1 : pageSize;
+        pageSize = size % MAX_PAGE_COUNT != 0 ? pageSize + 1 : pageSize;
         pageSize = pageSize < DEFAULT_PAGE_SIZE ? DEFAULT_PAGE_SIZE : pageSize;
         int start, length;
         if (this.page == -1 || size <= pageSize) {

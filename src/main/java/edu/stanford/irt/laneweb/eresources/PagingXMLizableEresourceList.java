@@ -55,7 +55,7 @@ public class PagingXMLizableEresourceList extends LinkedList<Eresource> implemen
         this.page = page;
         this.size = eresources.size();
         this.pageSize = this.size / MAX_PAGE_COUNT;
-        this.pageSize = this.pageSize % MAX_PAGE_COUNT != 0 ? this.pageSize + 1 : this.pageSize;
+        this.pageSize = this.size % MAX_PAGE_COUNT != 0 ? this.pageSize + 1 : this.pageSize;
         this.pageSize = this.pageSize < DEFAULT_PAGE_SIZE ? DEFAULT_PAGE_SIZE : this.pageSize;
         if (page < 0 || this.size <= this.pageSize) {
             this.start = 0;
