@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.cocoon.caching.CacheableProcessingComponent;
@@ -13,12 +14,18 @@ import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.util.ModelUtil;
 
 public class TxtResourceReader extends AbstractReader implements CacheableProcessingComponent {
-    
-    private static final Pattern PATTERN = Pattern.compile("\\/\\.\\/\\.");
 
-    private static final String SUBSTITUTE = "/./.";
+    private static final String BASEPATH_SUBSTITUTE = "/./.";
+
+    private static final Pattern BASEPATH_PATTERN = Pattern.compile(BASEPATH_SUBSTITUTE, Pattern.LITERAL);
+
+    private static final String VERSION_SUBSTITUTE = "$laneweb.version";
+
+    private static final Pattern VERSION_PATTERN = Pattern.compile(VERSION_SUBSTITUTE, Pattern.LITERAL);
 
     private String basePath;
+
+    private String version;
 
     public void generate() throws IOException {
         BufferedReader bf = null;
@@ -26,8 +33,11 @@ public class TxtResourceReader extends AbstractReader implements CacheableProces
             bf = new BufferedReader(new InputStreamReader(this.source.getInputStream()));
             String line = null;
             while ((line = bf.readLine()) != null) {
-                if (line.indexOf(SUBSTITUTE) > -1) {
-                    line = PATTERN.matcher(line).replaceAll(this.basePath);
+                if (line.indexOf(BASEPATH_SUBSTITUTE) > -1) {
+                    line = BASEPATH_PATTERN.matcher(line).replaceAll(this.basePath);
+                }
+                if (line.indexOf(VERSION_SUBSTITUTE) > -1) {
+                    line = VERSION_PATTERN.matcher(line).replaceAll(Matcher.quoteReplacement(this.version));
                 }
                 this.outputStream.write(line.getBytes());
                 this.outputStream.write('\n');
@@ -56,5 +66,6 @@ public class TxtResourceReader extends AbstractReader implements CacheableProces
     @Override
     protected void initialize() {
         this.basePath = ModelUtil.getString(this.model, Model.BASE_PATH);
+        this.version = ModelUtil.getString(this.model, Model.VERSION);
     }
 }
