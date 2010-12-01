@@ -26,7 +26,7 @@ body > .toolbar {
 }
 
 li > a[selected], li > a:active {
-    background-color: #beb4a2 !important;
+    background-color: #6e0000 !important;
 }
 
 ul.panel>li{
