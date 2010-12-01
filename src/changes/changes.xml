@@ -8,6 +8,9 @@
     </properties>
     <body>
         <release date="2010-12-13" version="1.11.12" description="1.11.12 bug fix release">
+            <action date="2010-12-01" dev="ceyates" issue="45176" type="fix">
+                biomed-resource browse pages erroneously provide 5th page link
+            </action>
             <action date="2010-11-29" dev="ryanmax" issue="44933" type="add">
                 banner to advertise mobile interface
             </action>
