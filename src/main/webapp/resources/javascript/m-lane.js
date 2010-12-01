@@ -6,7 +6,7 @@
         backButton = $('backButton'),
         loadingElm = $('loading'),
         fullscreenMessage = $('fsMsg'),
-        ipGroup = $('ipGroup'),
+        ipGroup,
         d = document,
         DISPLAY_BLOCK = 'block',
         DISPLAY_NONE = 'none',
@@ -83,11 +83,6 @@
         d.addEventListener("load", function() {
             var i, inputs = d.getElementsByTagName("input"),l;
             
-            // display login link if needed
-            if(ipGroup.content.match(/^(OTHER|PAVA|ERR)/)){
-                $('loginLink').style.visibility = 'visible';
-            }
-            
             for (i = 0; inputs.length > i; i++ ){
                 if(inputs[i].type == "search"){
                     
@@ -146,7 +141,16 @@
                 }
                 iui.showPageByHref(form.action, form, form.method || "GET", null, clear);
             },
-            ipGroup : ipGroup.content
+            setIpGroup : function(group) {
+                ipGroup = group;
+                // display login link if needed
+                if(ipGroup.match(/^(OTHER|PAVA|ERR)/)){
+                    $('loginLink').style.visibility = 'visible';
+                }
+            },
+            getIpGroup : function() {
+                return ipGroup;  
+            }
         };
     }();
     

@@ -72,13 +72,6 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- add the ip-group to content of the meta element for reporting -->
-    <xsl:template match="h:meta[@id='ipGroup']/@content">
-        <xsl:attribute name="content">
-            <xsl:value-of select="$ipgroup"/>
-        </xsl:attribute>
-    </xsl:template>
-    
     <!-- transform search result links -->
     <xsl:template match="h:a">
         <xsl:copy>
