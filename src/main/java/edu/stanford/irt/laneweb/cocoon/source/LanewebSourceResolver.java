@@ -45,18 +45,15 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
         if (matcher.matches()) {
             modifiedLocation = matcher.group(1);
         }
-        URI uri;
-        try {
-            uri = new URI(modifiedLocation);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+        int colonPosition = modifiedLocation.indexOf(':');
+        if (colonPosition > 0) {
+            String scheme = modifiedLocation.substring(0, colonPosition);
+            SourceFactory factory = this.sourceFactories.get(scheme);
+            if (factory != null) {
+                return factory.getSource(location, null);
+            }
         }
-        String scheme = uri.getScheme();
-        SourceFactory factory = this.sourceFactories.get(scheme);
-        if (factory != null) {
-            return factory.getSource(location, null);
-        }
-        return new SpringResourceSource(this.resourceLoader.getResource(uri.toString()));
+        return new SpringResourceSource(this.resourceLoader.getResource(modifiedLocation));
     }
 
     @SuppressWarnings("rawtypes")
