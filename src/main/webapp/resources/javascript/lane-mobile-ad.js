@@ -1,6 +1,6 @@
 // advertise existence of mobile interface to iPad, iPhone, iPod and Android clients
 (function() {
-    var Y = LANE.Y, advert, device, id, height;
+    var Y = LANE.Y, advert, device;
     if(navigator.userAgent.match(/(iPhone|iP.d|Android)/)){
         device = RegExp.$1;
         advert = new Y.Overlay({

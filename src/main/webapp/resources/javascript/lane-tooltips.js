@@ -81,12 +81,12 @@
          * to set the content of the tooltip for the current trigger node
          */
         setTriggerContent : function(content) {
-            var contentBox = this.get("contentBox");
+            var i, l, contentBox = this.get("contentBox");
             contentBox.set("innerHTML", "");
 
             if (content) {
                 if (content instanceof Node) {
-                    for (var i = 0, l = content.size(); i < l; ++i) {
+                    for (i = 0, l = content.size(); i < l; ++i) {
                         contentBox.appendChild(content.item(i));
                     }
                 } else if (Lang.isString(content)) {
@@ -187,10 +187,10 @@
          * if the default handler has not been prevented.
          */
         _defTriggerEnterFn : function(e) {
-            var node = e.node;
+            var delay, node = e.node;
             if (!this.get("disabled")) {
                 this._clearTimers();
-                var delay = (this.get("visible")) ? 0 : this.get("showDelay");
+                delay = (this.get("visible")) ? 0 : this.get("showDelay");
                 this._timers.show = Y.later(delay, this, this._showTooltip, [node]);
             }
         },
@@ -224,8 +224,8 @@
          * position.
          */
         _showTooltip : function(node) {
-            var x = this._currTrigger.mouseX;
-            var y = this._currTrigger.mouseY;
+            var x = this._currTrigger.mouseX,
+                y = this._currTrigger.mouseY;
 
             this.move(x + Tooltip.OFFSET_X, y + Tooltip.OFFSET_Y);
 
@@ -267,14 +267,15 @@
         _setCurrentTrigger : function(node, x, y) {
 
             var currTrigger = this._currTrigger,
-                triggerHandles = this._eventHandles.trigger;
+                triggerHandles = this._eventHandles.trigger,
+                title;
 
             this._setTriggerContent(node);
 
             triggerHandles.mouseMove = Y.on("mousemove", Y.bind(this._onNodeMouseMove, this), node);
             triggerHandles.mouseOut = Y.on("mouseleave", Y.bind(this._onNodeMouseLeave, this), node);
 
-            var title = node.getAttribute("title");
+            title = node.getAttribute("title");
             node.setAttribute("title", "");
 
             currTrigger.mouseX = x;
@@ -291,11 +292,13 @@
         _clearCurrentTrigger : function() {
 
             var currTrigger = this._currTrigger,
-                triggerHandles = this._eventHandles.trigger;
+                triggerHandles = this._eventHandles.trigger,
+                node,
+                title;
 
             if (currTrigger.node) {
-                var node = currTrigger.node;
-                var title = currTrigger.title || "";
+                node = currTrigger.node;
+                title = currTrigger.title || "";
 
                 currTrigger.node = null;
                 currTrigger.title = "";
@@ -426,9 +429,9 @@
                 value:[OX, OY]
             }
         }
-    });
+    }),
     
-    var createTooltips = function() {
+    createTooltips = function() {
             var tooltipTriggerIds = '',
                 tt, tooltipContainer, tooltipId, i, j,
                 tooltipContainerNodeList = Y.all('.tooltips');

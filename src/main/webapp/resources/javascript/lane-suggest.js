@@ -44,7 +44,8 @@ Y.Plugin.ACPlugin = Y.extend(
     { // prototype
         initializer : function () {
             var self = this,
-                host = self.get("host");
+                host = self.get("host"),
+                defaults = eventDefaultBehavior;
             attachHandles(self, host);
 
             // publish events:
@@ -52,7 +53,6 @@ Y.Plugin.ACPlugin = Y.extend(
             // "load" for when data returns.
             // "show" for when it's time to show something
             // "hide" for when it's time to hide
-            var defaults = eventDefaultBehavior;
             YArrayeach([
                 "query",
                 "load",
@@ -281,12 +281,13 @@ function manageBrowserAC (host) {
     // turn off the browser's autocomplete, but take note of it to turn
     // it back on later.
     var domnode = Y.Node.getDOMNode(host),
-        bac = domnode.getAttribute(autocomplete);
+        bac = domnode.getAttribute(autocomplete),
+        bacf;
 
     // turn the autocomplete back on so back button works, but only
     // if the user hasn't disabled it in the first place.
     if ((bac && bac !== "off") || bac === null || bac === undefined) {
-        var bacf = browserACFixer(domnode);
+        bacf = browserACFixer(domnode);
         // hook onto both.  Concession to browser craziness.
         Y.on("beforeunload", bacf, window);
         Y.on("unload", bacf, window);
