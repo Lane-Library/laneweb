@@ -31,8 +31,18 @@
             </map:match>
         </map:pipeline>
         <map:pipeline type="caching">
+            <!-- static content -->
             <map:match pattern="lane.manifest" type="wildcard">
-                <map:read type="txt-resource" src="${content-base}/m/lane.manifest"/>
+                <map:read type="txt-resource" src="resources/mobile/{0}"/>
+            </map:match>
+            <map:match pattern="*.js" type="wildcard">
+                <map:read type="txt-resource" src="resources/mobile/javascript/{1}.js"/>
+            </map:match>
+            <map:match pattern="*.css" type="wildcard">
+                <map:read type="txt-resource" src="resources/mobile/css/{1}.css"/>
+            </map:match>
+            <map:match pattern="images/*" type="wildcard">
+                <map:read type="resource" src="resources/mobile/images/{1}"/>
             </map:match>
             <!-- EResources browse -->
             <map:match pattern="er/browse/type/*" type="wildcard">
@@ -78,6 +88,18 @@
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="index.html" type="wildcard">
+                <map:generate type="html" src="resources/mobile/index.html"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:transform type="namespace-filter"/>
+                <map:transform type="debug"/>
+                <map:serialize type="xhtml"/>
+            </map:match>
             <map:match pattern="**.html" type="wildcard">
                 <map:generate type="html" src="${content-base}/m/{1}.html"/>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl">
@@ -92,6 +114,9 @@
                 <map:transform type="namespace-filter"/>
                 <map:transform type="debug"/>
                 <map:serialize type="xhtml"/>
+            </map:match>
+            <map:match pattern="**" type="wildcard">
+                <map:read type="resource" src="${content-base}/m/{1}"/>
             </map:match>
         </map:pipeline>
     </map:pipelines>

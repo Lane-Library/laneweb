@@ -199,7 +199,7 @@
                         </aggregation>
                         <aggregation>
                             <removeIncluded>true</removeIncluded>
-                            <output>target/laneweb/resources/css/lane-mobile.css</output>
+                            <output>target/laneweb/resources/mobile/css/lane-mobile.css</output>
                             <includes>
                                 <include>m-iui-min.css</include>
                                 <include>m-iui-default-theme-min.css</include>
@@ -208,7 +208,7 @@
                         </aggregation>
                         <aggregation>
                             <removeIncluded>true</removeIncluded>
-                            <output>target/laneweb/resources/javascript/lane-mobile.js</output>
+                            <output>target/laneweb/resources/mobile/javascript/lane-mobile.js</output>
                             <includes>
                                 <include>m-iui-min.js</include>
                                 <include>m-lane-min.js</include>

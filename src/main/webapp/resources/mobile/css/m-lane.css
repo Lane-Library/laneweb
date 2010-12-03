@@ -1,6 +1,8 @@
 /** LANE additions to iui **/
 body {
-    background:url('/././resources/images/m/lane-bg.png');
+    /*
+    background:url('/././m/images/lane-bg.png');
+    */
     background-position-x: 0;
     background-position-y: 102px;
     background-repeat: no-repeat;
@@ -8,7 +10,7 @@ body {
 
 body > ul > li {
     font-size: 16px;
-    background:url(/././resources/images/m/listBg.png) repeat-x;
+    background:url(/././m/images/listBg.png) repeat-x;
     border-bottom:1px solid darkgray;
 }
 
@@ -49,6 +51,9 @@ ul.panel>li{
     display:none;
     top: 8px;
     right: 55px;
+    background: url(/././m/images/loading.gif) repeat-x;
+    width:32px;
+    height:32px;
 }
 
 .dialog > fieldset {
@@ -81,7 +86,7 @@ ul.panel>li{
     padding-bottom:20px;
     font-size:11px;
     /*
-    background:url(/././resources/images/m/footerBg.png) repeat-x;
+    background:url(/././m/images/footerBg.png) repeat-x;
     */
     background:#c2cbd0;
     text-align:center;
@@ -171,7 +176,7 @@ li.more {
 #results li a.more{
     text-align:right;
     font-size:14px;
-    background:url('/././resources/images/m/listArrow.png') no-repeat scroll right center transparent;
+    background:url('/././m/images/listArrow.png') no-repeat scroll right center transparent;
 }
 #results li{
     background-color:#dfe6e9;

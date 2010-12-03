@@ -1,0 +1,43 @@
+CACHE MANIFEST
+# uncomment next 2 lines to turn on js, css caching for production
+#/././m/lane-mobile.js?$laneweb.version
+#/././m/lane-mobile.css?$laneweb.version
+http://www.google-analytics.com/ga.js
+/././m/graphics/cancel.png
+/././m/graphics/home.png
+/././m/graphics/search.png
+/././m/images/backButton.png
+/././m/images/backButtonBack.png
+/././m/images/backButtonBrdr.png
+/././m/images/blueButton.png
+/././m/images/fieldsetBg.png
+/././m/images/footerBg.png
+/././m/images/grayButton.png
+/././m/images/info.png
+#/././m/images/lane-bg.png
+#/././m/images/lane-favicon.ico
+#/././m/images/lane-touch-icon.png
+/././m/images/listArrow.png
+/././m/images/listArrowSel.png
+/././m/images/listBg.png
+/././m/images/listGroup.png
+/././m/images/loading.gif
+/././m/images/pinstripes.png
+/././m/images/redButton.png
+/././m/images/selection.png
+/././m/images/thumb.png
+/././m/images/title-img.png
+/././m/images/toggle.png
+/././m/images/toggleOn.png
+/././m/images/toolbar.png
+/././m/images/toolButton.png
+/././m/images/whiteButton.png
+
+NETWORK:
+/././m/
+/././m/index.html
+http://www.google-analytics.com/__utm.gif
+/././apps/
+# remove next 2 lines to turn on js, css caching for production
+/././lane-mobile.css
+/././lane-mobile.js

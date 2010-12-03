@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" manifest="lane.manifest">
+        <head>
+            <title>Express Lane - Beta</title>
+            <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+            <!-- 
+            <link rel="icon" type="image/png" href="/m/images/lane-favicon.ico" />
+            <link rel="apple-touch-icon" href="/m/images/lane-touch-icon.png" />
+             -->
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <link rel="stylesheet" href="/m/lane-mobile.css" type="text/css" />
+            <style type="text/css">body{background:none;}</style>
+            <script type="text/javascript">
+                // force fresh content because paths have changed
+                // TODO: remove after 12/1 release
+                var d=new Date(), m = "td="+d.getDate()+d.getMonth();
+                if(!document.location.search.match(m)){
+                    document.location.href = document.location.protocol+"//"+document.location.hostname+document.location.pathname+"?td="+d.getDate()+d.getMonth();
+                }
+            </script> 
+        </head>
+    <body>
+        <div class="toolbar">
+            <h1 id="pageTitle"> </h1>
+            <a id="backButton" class="button" href="#"> </a>
+            <a id="homeButton" href="#home"> <img src="graphics/home.png" alt="home"/></a>
+            <span id="loading">&nbsp;</span>
+        </div>
+        
+        <ul id="home" title="Express Lane &beta;" selected="true">
+            <form id="laneSearch" class="dialog" action="/m/msc/pubmed,pubmed_systematicreviews,pubmed_clinicaltrial,scopus" method="get">
+                <fieldset>
+                    <span id="searchLink">
+                        <img alt="search" src="graphics/search.png"/>
+                    </span>
+                    <span id="searchCancel">
+                        <img alt="cancel" src="graphics/cancel.png"/>
+                    </span>
+                    <input id="searchInput" title="Search ... " type="search" placeholder="Title, Author, PMID, ISSN" name="q"/>
+                    <div class="sgstCnt">
+                        <ul id="searchInputSgst"> </ul>
+                    </div>
+                </fieldset>
+            </form>
+            
+            <li><a href="#clinical">Clinical Search</a></li>
+            <li><a href="http://pubmedhh.nlm.nih.gov/nlmd/index_out.php?outid=1999" target="_blank">PubMed for Handhelds</a></li>
+            <li><a href="http://www.uptodate.com/online" target="_blank">UpToDate</a></li>
+            <li class="more"><a href="top.html">More Resources</a></li>
+            <li><a href="hours.html">Hours/Directions</a></li>
+            <li><a id="loginLink" href="login.html">Login</a></li>
+            <li class="listSpacer"> </li>
+            <li class="footer"><span class="fCopy">&copy; Stanford</span> <a href="hours.html">CONTACT</a> <span class="fFV"><a target="_self" href="/">FULL VERSION</a></span></li>
+        </ul>
+        
+        <div id="clinical" title="Clinical Search" class="panel">
+            <form id="pico" action="/m/sc/pubmed,pubmed_systematicreviews,pubmed_clinicaltrial,pubmed_guidelines,pubmed_recent_reviews,pubmed_treatment_focused,pubmed_diagnosis_focused,pubmed_prognosis_focused,pubmed_harm_focused,pubmed_etiology_focused,pubmed_epidemiology_focused,pubmed_rct,pubmed_cochrane_reviews,acpjc,dare,uptodate,bmj_clinical_evidence,clinicalresource,emedicine,aafp_patients,medlineplus" method="get">
+                <fieldset>
+                    <input type="search" id="p" name="p" placeholder="patient condition"/>
+                    <div class="sgstCnt">
+                        <ul id="pSgst"> </ul>
+                    </div>
+                    
+                    <input type="search" id="i" name="i" placeholder="intervention"/>
+                    <div class="sgstCnt">
+                        <ul id="iSgst"> </ul>
+                    </div>
+                    
+                    <input type="search" id="c" name="c" placeholder="comparison"/>
+                    <div class="sgstCnt">
+                        <ul id="cSgst"> </ul>
+                    </div>
+                    
+                    <input type="search" id="o" name="o" placeholder="outcome"/>
+                    <div class="sgstCnt">
+                        <ul id="oSgst"> </ul>
+                    </div>
+                    <input type="hidden" name="q" value=""/>
+                    <input type="submit" value="Search"/>
+                    <input id="picoClr" type="reset" value="Clear"/>
+                </fieldset>
+            </form>
+        </div>
+        
+        <div id="fbr" class="panel" title="Feedback">
+            <div>Thank you for your feedback!</div>
+        </div>
+        
+        <script type="text/javascript" src="/m/lane-mobile.js"></script>
+        <script src="/apps/ipGroupFetch?callback=LANE.setIpGroup"></script>
+    </body>
+</html>
