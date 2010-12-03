@@ -19,6 +19,9 @@
         <property name="urlMap">
             <map>
                 <entry key="/tobacco/**" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/tobacco"/>
+                <entry key="/BingSiteAuth.xml" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/verify-bing"/>
+                <entry key="/google708f1eef3c6d1e52.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/verify-google"/>
+                <entry key="/y_key_01fe447429961ab5.html" value-ref="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/verify-yahoo"/>
             </map>
         </property>
         <property name="defaultHandler" ref="edu.stanford.irt.laneweb.servlet.mvc.SitemapRequestHandler"/>
@@ -43,6 +46,39 @@
         <property name="locations">
             <list>
                 <value>${laneweb.context.live-base}/tobacco/</value>
+            </list>
+        </property>
+        <property name="cacheSeconds" value="31536000"/>
+        <property name="supportedMethods" value="HEAD,GET"/>
+    </bean>
+    
+    <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/verify-bing"
+        class="org.springframework.web.servlet.resource.ResourceHttpRequestHandler">
+        <property name="locations">
+            <list>
+                <value>resources/site-verification/BingSiteAuth.xml</value>
+            </list>
+        </property>
+        <property name="cacheSeconds" value="31536000"/>
+        <property name="supportedMethods" value="HEAD,GET"/>
+    </bean>
+    
+    <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/verify-google"
+        class="org.springframework.web.servlet.resource.ResourceHttpRequestHandler">
+        <property name="locations">
+            <list>
+                <value>resources/site-verification/google708f1eef3c6d1e52.html</value>
+            </list>
+        </property>
+        <property name="cacheSeconds" value="31536000"/>
+        <property name="supportedMethods" value="HEAD,GET"/>
+    </bean>
+    
+    <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/verify-yahoo"
+        class="org.springframework.web.servlet.resource.ResourceHttpRequestHandler">
+        <property name="locations">
+            <list>
+                <value>resources/site-verification/y_key_01fe447429961ab5.html</value>
             </list>
         </property>
         <property name="cacheSeconds" value="31536000"/>
