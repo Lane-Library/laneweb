@@ -72,22 +72,6 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- put version into /resources @src -->
-    <xsl:template match="h:script/@src[contains(.,'/m/lane-mobile')]">
-        <xsl:attribute name="src">
-            <xsl:value-of
-                select="concat($base-path,.,'?',$version)"/>
-        </xsl:attribute>
-    </xsl:template>
-    
-    <!-- put version into css href -->
-    <xsl:template match="h:link/@href[starts-with(.,'/m/lane-mobile')]">
-        <xsl:attribute name="href">
-            <xsl:value-of select="concat($base-path,.,'?',$version)"/>
-        </xsl:attribute>
-    </xsl:template>
-    
-    
     <!-- transform search result links -->
     <xsl:template match="h:a">
         <xsl:copy>
