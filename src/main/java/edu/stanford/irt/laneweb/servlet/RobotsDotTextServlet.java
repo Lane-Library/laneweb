@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * sends Dissallow: / if not production server.
+ * sends Disallow: / if not production server.
  * @author ceyates
  *
  */
