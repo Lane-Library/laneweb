@@ -1,7 +1,6 @@
 CACHE MANIFEST
-# uncomment next 2 lines to turn on js, css caching for production
-#/././m/lane-mobile.js?${project.version}
-#/././m/lane-mobile.css?${project.version}
+/././m/lane-mobile.js?${project.version}
+/././m/lane-mobile.css?${project.version}
 http://www.google-analytics.com/ga.js
 /././m/graphics/cancel.png
 /././m/graphics/home.png
