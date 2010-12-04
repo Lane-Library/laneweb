@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.eresources.bassett;
+package edu.stanford.irt.laneweb.bassett;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

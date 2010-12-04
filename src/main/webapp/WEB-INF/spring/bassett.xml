@@ -3,25 +3,25 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
-    <bean id="edu.stanford.irt.laneweb.eresources.bassett.AbstractBassettGenerator"
-        class="edu.stanford.irt.laneweb.eresources.bassett.AbstractBassettGenerator"
+    <bean id="edu.stanford.irt.laneweb.bassett.AbstractBassettGenerator"
+        class="edu.stanford.irt.laneweb.bassett.AbstractBassettGenerator"
         scope="prototype"
         abstract="true">
         <property name="collectionManager">
-            <bean class="edu.stanford.irt.laneweb.eresources.bassett.BassettCollectionManager">
+            <bean class="edu.stanford.irt.laneweb.bassett.BassettCollectionManager">
                 <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
             </bean>
         </property>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/bassett"
-        class="edu.stanford.irt.laneweb.eresources.bassett.BassettEresourcesGenerator"
-        parent="edu.stanford.irt.laneweb.eresources.bassett.AbstractBassettGenerator">
+        class="edu.stanford.irt.laneweb.bassett.BassettEresourcesGenerator"
+        parent="edu.stanford.irt.laneweb.bassett.AbstractBassettGenerator">
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/bassett-accordion"
-        class="edu.stanford.irt.laneweb.eresources.bassett.BassettAccordionEresourcesGenerator"
-        parent="edu.stanford.irt.laneweb.eresources.bassett.AbstractBassettGenerator">
+        class="edu.stanford.irt.laneweb.bassett.BassettAccordionEresourcesGenerator"
+        parent="edu.stanford.irt.laneweb.bassett.AbstractBassettGenerator">
     </bean>
     
 </beans>
