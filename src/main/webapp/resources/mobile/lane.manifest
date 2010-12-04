@@ -1,6 +1,9 @@
 CACHE MANIFEST
-/././m/lane-mobile.js?${project.version}
-/././m/lane-mobile.css?${project.version}
+# swap comments on next 4 lines to turn on js, css caching for production
+#/././m/lane-mobile.js?${project.version}
+#/././m/lane-mobile.css?${project.version}
+/././m/lane-mobile.js
+/././m/lane-mobile.css
 http://www.google-analytics.com/ga.js
 /././m/graphics/cancel.png
 /././m/graphics/home.png
@@ -37,3 +40,6 @@ NETWORK:
 /././m/index.html
 http://www.google-analytics.com/__utm.gif
 /././apps/
+# comment next 2 lines to turn on js, css caching for production
+/././m/lane-mobile.css?${project.version}
+/././m/lane-mobile.js?${project.version}
