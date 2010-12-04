@@ -3,19 +3,16 @@
         <head>
             <title>Express Lane - Beta</title>
             <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
-            <!-- 
             <link rel="icon" type="image/png" href="/m/images/lane-favicon.ico" />
+            <!-- 
             <link rel="apple-touch-icon" href="/m/images/lane-touch-icon.png" />
              -->
             <meta name="apple-mobile-web-app-capable" content="yes" />
             <link rel="stylesheet" href="/m/lane-mobile.css?${project.version}" type="text/css" />
-            <style type="text/css">body{background:none;}</style>
             <script type="text/javascript">
-                // force fresh content because paths have changed
-                // TODO: remove after 12/1 release
-                var d=new Date(), m = "td="+d.getDate()+d.getMonth();
-                if(!document.location.search.match(m)){
-                    document.location.href = document.location.protocol+"//"+document.location.hostname+document.location.pathname+"?td="+d.getDate()+d.getMonth();
+                var v = "${project.version}";
+                if(document.location.search.indexOf(v) == -1){
+                    document.location.href = document.location.protocol+"//"+document.location.hostname+document.location.pathname+"?"+v;
                 }
             </script> 
         </head>
@@ -87,6 +84,6 @@
         </div>
         
         <script type="text/javascript" src="/m/lane-mobile.js?${project.version}"></script>
-        <script src="/apps/ipGroupFetch?callback=LANE.setIpGroup"></script>
+        <script type="text/javascript" src="/apps/ipGroupFetch?callback=LANE.setIpGroup"></script>
     </body>
 </html>
