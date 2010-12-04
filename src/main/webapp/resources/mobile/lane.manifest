@@ -14,7 +14,7 @@ http://www.google-analytics.com/ga.js
 /././m/images/grayButton.png
 /././m/images/info.png
 #/././m/images/lane-bg.png
-#/././m/images/lane-favicon.ico
+/././m/images/lane-favicon.ico
 #/././m/images/lane-touch-icon.png
 /././m/images/listArrow.png
 /././m/images/listArrowSel.png
@@ -37,6 +37,3 @@ NETWORK:
 /././m/index.html
 http://www.google-analytics.com/__utm.gif
 /././apps/
-# remove next 2 lines to turn on js, css caching for production
-/././m/lane-mobile.css?${project.version}
-/././m/lane-mobile.js?${project.version}
