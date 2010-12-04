@@ -181,6 +181,10 @@ li.more {
 #results li{
     background-color:#dfe6e9;
 }
+#results strong {
+    color:#00E;
+    /*color:#6e0000;*/
+}
 div.absInfo {
     box-sizing: border-box;
     -webkit-user-select: text;
