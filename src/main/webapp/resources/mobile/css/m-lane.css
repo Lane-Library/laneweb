@@ -26,7 +26,7 @@ body > .toolbar {
 }
 
 .toolbar > h1 {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 li > a[selected], li > a:active {
@@ -68,7 +68,7 @@ ul.panel>li{
 
 #searchLink {
     position: absolute;
-    top: 16px;
+    top: 18px;
     left: 10px;
 }
 #searchLink img {
@@ -118,7 +118,7 @@ ul.panel>li{
     padding-right:24px;
     width:100%;
     margin-top:10px;
-    height:32px;
+    height:34px;
     font-size:16px;
     -webkit-border-radius:15px;
     /*border-top:2px inset darkgray;*/
@@ -127,7 +127,7 @@ ul.panel>li{
 
 #searchCancel {
     position:absolute;
-    top:16px;
+    top:18px;
     right:12px;
     display:none;
 }
