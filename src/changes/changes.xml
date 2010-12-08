@@ -7,13 +7,11 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <!-- 
-        <release date="" version="1.11." description="1.11. bug fix release">
+        <release date="" version="1.11.13" description="1.11. bug fix release">
             <action date="2010-11-29" dev="ryanmax" issue="44933" type="add">
                 banner to advertise mobile interface
             </action>
         </release>
-        -->
         <release date="2010-12-06" version="1.11.12" description="1.11.12 bug fix release">
             <action date="2010-12-01" dev="ceyates" issue="45176" type="fix">
                 biomed-resource browse pages erroneously provide 5th page link
