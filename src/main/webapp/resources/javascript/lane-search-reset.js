@@ -28,7 +28,7 @@
         });
         Y.Global.on("lane:beforeSearchSubmit", function(){
             reset.hide();
-            Y.detach(eventHandle);
+//            Y.detach(eventHandle);
         });
         reset = {
             show: function() {
