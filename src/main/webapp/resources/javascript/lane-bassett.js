@@ -7,6 +7,7 @@
             bassettContent = Y.one('#bassettContent'),
             diagramDisplay = false,
             accordion,
+            history,
             registerLinksContainer = function(container) {
             var anchor, i, url;
             if (container) {
@@ -21,8 +22,11 @@
                                 diagramDisplay = false;
                             }
                             url = formatAjaxUrl(this.get('href'));
-                            if (!Y.History.navigate("bassett",url))
+                            try {
+                                history.addValue("bassett",url);
+                            } catch (e) {
                                 loadContent(url);
+                            }
                             ev.preventDefault();
                         });
                     }
@@ -60,13 +64,16 @@
         },
 
         initializeHistory = function() {
-            if (Y.one("#yui-history-field-bassett") && Y.one("#yui-history-iframe")) {
-                var currentState = Y.History.getBookmarkedState("bassett") ||
-                formatAjaxUrl(window.location.toString());
-                Y.History.register('bassett', currentState).on('history:moduleStateChange', loadContent);
-                Y.History.on('history:ready', loadContent(currentState));
-                Y.History.initialize("#yui-history-field-bassett", "#yui-history-iframe");
+            history = new Y.HistoryHash();
+            if(history.get('bassett')){
+                loadContent(history.get('bassett'));
             }
+            history.on("bassettChange",function(e) {
+                loadContent(e.newVal);
+            });
+            history.on("bassettRemove",function(e) {
+                loadContent(formatAjaxUrl(window.location.toString()));
+            });
         };
 
         if (bassettContent) {

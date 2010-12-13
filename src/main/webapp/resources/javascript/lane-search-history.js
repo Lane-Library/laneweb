@@ -1,19 +1,22 @@
 (function() {
     var Y = LANE.Y,
-        searchString = LANE.SearchResult.getEncodedSearchTerms(),
-        facetNodes = Y.one('#searchFacets'),
-        initializeHistory = function() {
-            var initialFacet = Y.History.getBookmarkedState("facet") || Y.History.getQueryStringParameter("source");
-            Y.History.register("facet", initialFacet).on("history:moduleStateChange", LANE.search.facets.setActiveFacet);
-            Y.History.on("history:ready",function() {
-                LANE.search.facets.setActiveFacet(Y.History.getCurrentState("facet"));
+        history,
+        searchFacets = Y.one('#searchFacets');
+    LANE.Search.History = function(){
+        if(searchFacets){
+            history = new Y.HistoryHash();        
+            if(history.get('facet')){
+                LANE.search.facets.setActiveFacet(history.get('facet'));
+            }
+            history.on("facetChange",function(e) {
+                LANE.search.facets.setActiveFacet(e.newVal);
             });
-            Y.History.initialize("#yui-history-field", "#yui-history-iframe");
-        };
-    
-    if (searchString && facetNodes) {
-        Y.one('body').insert(Y.Node.create('<iframe id="yui-history-iframe" src="/graphics/spacer.gif"></iframe>'),0);
-        Y.one('body').insert(Y.Node.create('<input id="yui-history-field" type="hidden"/>'),1);
-        initializeHistory();
-    }
+            history.on("facetRemove",function(e) {
+                LANE.search.facets.setActiveFacet(LANE.Search.getSearchSource());
+            });
+        }
+        return history;
+        
+    }();
+        
 })();
