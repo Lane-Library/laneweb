@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Lane Medical Library, Stanford University Medical Center</title>
-    <link rel="stylesheet" type="text/css" href="/resources/css/yui.css"/>
-    <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}"/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
 </head>
 <body>
     <?laneweb content?>
-    <script type="text/javascript" src="/resources/javascript/yui.js"></script>
-    <script type="text/javascript" src="/resources/javascript/lane-all.js"></script>
+    <script type="text/javascript" src="/resources/javascript/yui.js?${project.version}"></script>
+    <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}"></script>
 </body>
 </html>

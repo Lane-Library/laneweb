@@ -3,9 +3,8 @@
     <head>
         <title>Lane Medical Library &amp; Knowledge Management Center - Stanford
             University School of Medicine</title>
-        <link rel="stylesheet" type="text/css"
-            href="/resources/css/yui.css"/>
-        <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/yui.css?${project.version}"/>
+        <link rel="stylesheet" type="text/css" href="/resources/css/lane-all.css?${project.version}"/>
         <link rel="search" type="application/opensearchdescription+xml" title="Lane Medical Library"
             href="/extensions/laneconnex-engine.xml"/>
         <link rel="alternate" type="application/rss+xml" title="Lane RSS News"
@@ -361,7 +360,7 @@
                 </li>
             </ul>
         </div>
-        <script type="text/javascript" src="/resources/javascript/yui.js"></script>
-        <script type="text/javascript" src="/resources/javascript/lane-all.js"></script>
+        <script type="text/javascript" src="/resources/javascript/yui.js?${project.version}"></script>
+        <script type="text/javascript" src="/resources/javascript/lane-all.js?${project.version}"></script>
     </body>
 </html>

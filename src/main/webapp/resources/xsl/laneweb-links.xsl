@@ -4,22 +4,6 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     exclude-result-prefixes="h">
 
-    <!-- put version into /resources @src -->
-    <xsl:template match="h:script/@src[starts-with(.,'/resources')]">
-        <xsl:attribute name="src">
-            <xsl:value-of
-                select="concat($base-path,.,'?',$version)"/>
-        </xsl:attribute>
-    </xsl:template>
-
-    <!-- put version into css href -->
-    <xsl:template match="h:link/@href[starts-with(.,'/resources/css')]">
-        <xsl:attribute name="href">
-            <xsl:value-of select="concat($base-path,.,'?',$version)"/>
-        </xsl:attribute>
-    </xsl:template>
-
-
     <!-- href and src attributes template -->
     <xsl:template match="@href">
         <xsl:choose>
