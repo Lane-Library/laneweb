@@ -75,8 +75,19 @@ em {
     padding: 20px;
 }
 #mphoneAd, #ipadAd {
+    width: 988px; 
+    position: absolute; 
+    left: 6px; 
+    top: -35px; 
+    z-index: 2;
     text-align:center;
     background-color:#d5672e;
+}
+#mphoneAd {
+    height:114px;
+}
+#ipadAd {
+    height:45px;
 }
 #mphoneAd a, #ipadAd a {
     color:#fff;
@@ -90,6 +101,6 @@ em {
 }
 #ipadAd div {
     color:#fff;
-    margin-top: -5px;
+    margin-top: 4px;
     font-size:150%;
 }
