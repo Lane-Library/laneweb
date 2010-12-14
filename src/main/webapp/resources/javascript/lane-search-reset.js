@@ -24,7 +24,7 @@
         });
         form.on("submit", function(){
             reset.hide();
-            Y.detach(eventHandle);
+//            Y.detach(eventHandle);
         });
         Y.Global.on("lane:beforeSearchSubmit", function(){
             reset.hide();
