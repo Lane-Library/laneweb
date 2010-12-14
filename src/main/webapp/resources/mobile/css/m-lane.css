@@ -23,6 +23,7 @@ body > ul > li a {
     
 body > .toolbar {
     border-top: 1px solid #2D3642;
+    background: url(/././m/images/toolbar.png) #6E0000 repeat-x;
 }
 
 .toolbar > h1 {
@@ -49,8 +50,8 @@ ul.panel>li{
     position: absolute;
     overflow: hidden;
     display:none;
-    top: 8px;
-    right: 55px;
+    top: 6px;
+    right: 60px;
     background: url(/././m/images/loading.gif) repeat-x;
     width:32px;
     height:32px;
@@ -130,6 +131,9 @@ ul.panel>li{
     top:18px;
     right:12px;
     display:none;
+    background: url(/././m/images/cancel.png) no-repeat;
+    height:20px;
+    width:20px;
 }
 
 #searchTag {
@@ -232,9 +236,9 @@ div.absInfo {
     right:6px;
     top:8px;
     display:none;
-}
-#homeButton img {
-    border:none;
+    background: url(/././m/images/home.png) no-repeat;
+    width:38px;
+    height:30px;
 }
 #loginLink {
     visibility:hidden;
