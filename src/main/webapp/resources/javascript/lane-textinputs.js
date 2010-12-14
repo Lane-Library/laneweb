@@ -14,6 +14,9 @@
                 input.set('value', _hintText);
             },
             focusHandle = input.on('focus', function() {
+                if (_hintText === '') {
+                    _reset(this);
+                }
                 if (this.get('value') == _hintText) {
                     this.set('value', '');
                     this.removeClass(hintStyle);
