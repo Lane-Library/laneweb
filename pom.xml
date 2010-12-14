@@ -352,11 +352,6 @@
             <version>1.6.0</version>
         </dependency>
         <dependency>
-            <artifactId>icd9</artifactId>
-            <groupId>edu.stanford.irt</groupId>
-            <version>1.0.1</version>
-        </dependency>
-        <dependency>
             <artifactId>querymap</artifactId>
             <groupId>edu.stanford.irt</groupId>
             <version>1.2.2</version>
@@ -512,11 +507,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.5.10</version>
-        </dependency>
-        <dependency>
-            <artifactId>spring-aop</artifactId>
-            <groupId>org.springframework</groupId>
-            <version>3.0.5.RELEASE</version>
         </dependency>
         <dependency>
             <artifactId>spring-web</artifactId>
