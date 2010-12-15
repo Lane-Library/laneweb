@@ -3,8 +3,8 @@ package edu.stanford.irt.laneweb.search;
 import java.util.Arrays;
 import java.util.Collection;
 
-import edu.stanford.irt.laneweb.Model;
-import edu.stanford.irt.laneweb.util.ModelUtil;
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.Result;
 
 public class EngineSearchGenerator extends SearchGenerator {

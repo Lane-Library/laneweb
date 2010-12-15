@@ -4,7 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import edu.stanford.irt.laneweb.Model;
+import edu.stanford.irt.laneweb.model.Model;
 
 
 public class RequestAttributeDataBinder implements DataBinder {

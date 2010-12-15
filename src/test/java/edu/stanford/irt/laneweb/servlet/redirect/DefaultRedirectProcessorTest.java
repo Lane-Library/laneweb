@@ -10,8 +10,6 @@ import javax.servlet.ServletException;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.servlet.redirect.DefaultRedirectProcessor;
-
 public class DefaultRedirectProcessorTest {
 
     private DefaultRedirectProcessor redirectProcessor;

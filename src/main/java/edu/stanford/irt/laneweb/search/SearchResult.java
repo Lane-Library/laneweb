@@ -5,7 +5,7 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.regex.Pattern;
 
-import edu.stanford.irt.laneweb.Resource;
+import edu.stanford.irt.laneweb.resource.Resource;
 
 /**
  * @author ryanmax

@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.util;
+package edu.stanford.irt.laneweb.model;
 
 import java.util.Map;
 

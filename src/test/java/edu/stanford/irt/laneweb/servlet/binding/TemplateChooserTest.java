@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.Model;
-import edu.stanford.irt.laneweb.servlet.binding.TemplateChooser;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class TemplateChooserTest {
 

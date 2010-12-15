@@ -32,7 +32,7 @@
         </xsl:for-each>
     </xsl:variable>
     
-    <xsl:variable name="resource-ids" select="//st:template[contains($tokenized-facets,@id)]/st:resource/@idref"/>
+    <!--<xsl:variable name="resource-ids" select="//st:template[contains($tokenized-facets,@id)]/st:resource/@idref"/>
     
     <xsl:variable name="resources-string">
         <xsl:for-each select="distinct-values($resource-ids)">
@@ -46,16 +46,17 @@
     <xsl:variable name="search-request">
         <xsl:choose>
             <xsl:when test="count($engine-ids) > 0">
-                <xsl:value-of select="concat('cocoon://apps/search/engine/xml/',$engines-string)"/>   
+                <xsl:value-of select="concat('apps:/search/engine/xml/',$engines-string)"/>   
             </xsl:when>
             <xsl:when test="count($resource-ids) > 0">
-                <xsl:value-of select="concat('cocoon://apps/search/resource/xml/',$resources-string)"/>   
+                <xsl:value-of select="concat('apps:/search/resource/xml/',$resources-string)"/>   
             </xsl:when>
         </xsl:choose>
-    </xsl:variable>
+    </xsl:variable>-->
     
     <xsl:variable name="search-node">
-        <xsl:copy-of select="document($search-request)"/>
+        <xsl:copy-of select="document(concat('apps:/search/engine/xml/',$engines-string))"/>
+        <!--<xsl:copy-of select="document($search-request)"/>-->
     </xsl:variable>
     
     <xsl:template match="search-facet-counts">

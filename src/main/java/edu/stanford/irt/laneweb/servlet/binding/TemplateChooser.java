@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
-import edu.stanford.irt.laneweb.Model;
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * This class contains the logic to determine which template is used. The highest priority is given to the template

@@ -39,7 +39,7 @@ public class LanewebSourceResolverTest {
      * test for a bug when using new URI(location) with spaces in location.
      */
     public void testSpaceInLocation() throws MalformedURLException, IOException {
-        expect(this.resourceLoader.getResource("cocoon://apps/search/xml/foo bar")).andReturn(null);
+        expect(this.resourceLoader.getResource("apps:/search/xml/foo bar")).andReturn(null);
         replay(this.resourceLoader);
         assertNotNull(this.sourceResolver.resolveURI("cocoon://apps/search/xml/foo bar"));
         verify(this.servletContext, this.resourceLoader);

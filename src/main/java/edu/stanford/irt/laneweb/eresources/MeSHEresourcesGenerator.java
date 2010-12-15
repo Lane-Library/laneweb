@@ -14,6 +14,6 @@ public class MeSHEresourcesGenerator extends CacheableEresourcesGenerator {
         if (null == this.type) {
             throw new IllegalStateException("null type");
         }
-        return this.collectionManager.getMesh(this.type, this.mesh);
+        return (Collection<Eresource>) this.collectionManager.getMesh(this.type, this.mesh);
     }
 }

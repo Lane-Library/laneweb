@@ -10,12 +10,10 @@ import org.apache.excalibur.source.SourceFactory;
 public class LanewebSitemapSourceFactory implements SourceFactory {
     
     private Processor processor;
-    
-    private SitemapSourceLocationModifier locationModifier = new SitemapSourceLocationModifier();
 
     @SuppressWarnings("rawtypes")
     public Source getSource(final String location, final Map parameters) throws IOException {
-        return new LanewebSitemapSource(this.locationModifier.modify(location), this.processor);
+        return new LanewebSitemapSource(location, this.processor);
     }
 
     public void release(final Source source) {

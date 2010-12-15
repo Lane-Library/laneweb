@@ -3,9 +3,9 @@ package edu.stanford.irt.laneweb.proxy;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.AbstractAction;
-import edu.stanford.irt.laneweb.util.ModelUtil;
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.model.ModelUtil;
 
 // $Id$
 public class ProxyCredentialAction extends AbstractAction {

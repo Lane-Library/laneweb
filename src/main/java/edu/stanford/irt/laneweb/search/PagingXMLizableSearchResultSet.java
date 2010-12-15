@@ -9,7 +9,7 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.laneweb.Resource;
+import edu.stanford.irt.laneweb.resource.Resource;
 
 public class PagingXMLizableSearchResultSet extends TreeSet<SearchResult> implements Resource, XMLizable {
 

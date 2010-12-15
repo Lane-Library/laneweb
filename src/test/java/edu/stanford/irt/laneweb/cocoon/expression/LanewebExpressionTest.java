@@ -14,8 +14,6 @@ import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.cocoon.expression.LanewebExpression;
-
 /*
  * $Id$
  */

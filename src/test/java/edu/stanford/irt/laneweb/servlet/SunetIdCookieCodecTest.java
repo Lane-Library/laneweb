@@ -6,9 +6,6 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.servlet.PersistentLoginToken;
-import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
-
 public class SunetIdCookieCodecTest {
 
     private SunetIdCookieCodec codec;

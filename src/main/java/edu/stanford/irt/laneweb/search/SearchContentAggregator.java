@@ -10,8 +10,8 @@ import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.core.xml.SAXParser;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.ContentAggregator;
+import edu.stanford.irt.laneweb.model.Model;
 
 public class SearchContentAggregator extends ContentAggregator {
 
@@ -45,7 +45,7 @@ public class SearchContentAggregator extends ContentAggregator {
             if (file.isDirectory() && !".svn".equals(file.getName())) {
                 setFiles(basePathLength, file.getPath());
             } else if (file.isFile() && file.canRead() && file.getName().endsWith(".html")) {
-                String cocoonSourceString = "cocoon://content/cached" + file.getAbsolutePath().substring(basePathLength);
+                String cocoonSourceString = "content:/cached" + file.getAbsolutePath().substring(basePathLength);
                 addPart(cocoonSourceString, "", "", "false", "");
             }
         }

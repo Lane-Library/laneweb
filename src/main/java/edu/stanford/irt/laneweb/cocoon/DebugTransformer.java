@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.util.ModelUtil;
+import edu.stanford.irt.laneweb.model.ModelUtil;
 
 /**
  * This transformer puts a comment with all model attributes at the top of a document.

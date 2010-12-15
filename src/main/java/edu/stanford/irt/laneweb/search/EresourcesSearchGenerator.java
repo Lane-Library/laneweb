@@ -8,8 +8,8 @@ import org.xml.sax.SAXException;
 
 import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.Model;
-import edu.stanford.irt.laneweb.util.ModelUtil;
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class EresourcesSearchGenerator extends AbstractSearchGenerator {
 

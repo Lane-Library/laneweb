@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb;
+package edu.stanford.irt.laneweb.resource;
 
 import org.apache.excalibur.xml.sax.XMLizable;
 

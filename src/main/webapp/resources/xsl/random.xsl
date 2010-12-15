@@ -10,7 +10,7 @@
      return a random div element from a node set of divs
      Use:
         <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-           href="cocoon://random?source=cocoon://content/random-data.html"><xi:fallback/>
+           href="content:/random?source=content:/random-data.html"><xi:fallback/>
         </xi:include
         where random-data.html is a simple html doc with n child divs of the body tag
     -->    

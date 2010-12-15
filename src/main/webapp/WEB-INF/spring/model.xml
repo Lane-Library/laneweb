@@ -19,14 +19,14 @@
                 <entry key="laneweb">
                     <bean id="org.apache.cocoon.el.objectmodel.ObjectModelProvider"
                         class="edu.stanford.irt.laneweb.cocoon.expression.LanewebObjectModelProvider">
-                        <property name="objectModel" ref="edu.stanford.irt.laneweb.Model"/>
+                        <property name="objectModel" ref="edu.stanford.irt.laneweb.model.Model"/>
                     </bean>
                 </entry>
             </map>
         </property>
     </bean>
     
-    <bean id="edu.stanford.irt.laneweb.Model"
+    <bean id="edu.stanford.irt.laneweb.model.Model"
         class="java.util.HashMap"
         scope="request">
     </bean>

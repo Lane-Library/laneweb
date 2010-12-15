@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.httpclient;
+package edu.stanford.irt.laneweb.querymap;
 
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 

@@ -2,9 +2,9 @@ package edu.stanford.irt.laneweb.search;
 
 import java.util.Map;
 
-import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.AbstractAction;
-import edu.stanford.irt.laneweb.util.ModelUtil;
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.model.ModelUtil;
 
 /**
  * @author alainb $Id$

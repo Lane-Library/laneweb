@@ -62,7 +62,7 @@
                             <xsl:apply-templates select="descendant::h:div[@id='mainColumn']"/>
                         </div>
                         <div class="yui-u first">
-                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="cocoon://content/includes/leftmenu-help.html">
+                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="content:/includes/leftmenu-help.html">
                                 <xi:fallback></xi:fallback>
                             </xi:include>
                         </div>

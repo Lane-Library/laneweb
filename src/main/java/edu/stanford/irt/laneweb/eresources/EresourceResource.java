@@ -12,7 +12,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.eresources.Link;
 import edu.stanford.irt.eresources.Version;
-import edu.stanford.irt.laneweb.Resource;
+import edu.stanford.irt.laneweb.resource.Resource;
 
 public class EresourceResource implements Resource {
 

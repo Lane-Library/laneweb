@@ -18,7 +18,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.Model;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.querymap.Descriptor;
 import edu.stanford.irt.querymap.QueryMap;
 import edu.stanford.irt.querymap.QueryMapper;

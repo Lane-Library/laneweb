@@ -19,7 +19,6 @@ import org.apache.cocoon.components.source.impl.SitemapSourceInfo;
 import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.internal.EnvironmentHelper;
 import org.apache.cocoon.environment.wrapper.EnvironmentWrapper;
-import org.apache.cocoon.environment.wrapper.MutableEnvironmentFacade;
 import org.apache.cocoon.xml.ContentHandlerWrapper;
 import org.apache.cocoon.xml.XMLConsumer;
 import org.apache.excalibur.source.Source;
@@ -100,20 +99,21 @@ public class LanewebSitemapSource implements Source, XMLizable {
      * Construct a new object
      */
     public LanewebSitemapSource(final String uri, final Processor processor) throws MalformedURLException {
+        this.systemId = uri;
         this.processor = processor;
-        this.environment = EnvironmentHelper.getCurrentEnvironment();
-        SitemapSourceInfo info = SitemapSourceInfo.parseURI(this.environment, uri);
-        this.protocol = info.protocol;
-        this.systemId = info.systemId;
+//        SitemapSourceInfo info = SitemapSourceInfo.parseURI(this.environment, uri);
+//        this.protocol = info.protocol;
         // create a new validity holder
         this.validity = new SitemapSourceValidity();
         // initialize
 
         // create environment...
-        final EnvironmentWrapper wrapper = new EnvironmentWrapper(this.environment, info);
+        SitemapSourceInfo info = new SitemapSourceInfo();
+        info.uri = uri.substring(uri.indexOf(":/") + 2);
+        this.environment = new EnvironmentWrapper(EnvironmentHelper.getCurrentEnvironment(), info);
 
         // The environment is a facade whose delegate can be changed in case of internal redirects
-        this.environment = new MutableEnvironmentFacade(wrapper);
+//        this.environment = new MutableEnvironmentFacade(wrapper);
         try {
             this.init();
         } catch (Exception e) {

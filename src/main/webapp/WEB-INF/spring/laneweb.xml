@@ -21,12 +21,12 @@
     </bean>
 
     <bean name="org.apache.excalibur.store.Store/TransientStore"
-        class="edu.stanford.irt.laneweb.store.TransientStore">
+        class="edu.stanford.irt.laneweb.cocoon.store.TransientStore">
         <property name="storeJanitor" ref="org.apache.excalibur.store.StoreJanitor"/>
     </bean>
 
     <bean id="org.apache.excalibur.store.StoreJanitor"
-        class="edu.stanford.irt.laneweb.store.StoreJanitorImpl"/>
+        class="edu.stanford.irt.laneweb.cocoon.store.StoreJanitorImpl"/>
 
     <bean name="org.apache.excalibur.xml.xpath.XPathProcessor"
         class="edu.stanford.irt.laneweb.cocoon.XPathProcessorImpl"/>

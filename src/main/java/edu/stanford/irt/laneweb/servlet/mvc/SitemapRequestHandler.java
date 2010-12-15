@@ -17,8 +17,8 @@ import org.apache.cocoon.environment.http.HttpContext;
 import org.apache.cocoon.environment.internal.EnvironmentHelper;
 import org.springframework.web.HttpRequestHandler;
 
-import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.pipeline.LanewebEnvironment;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public abstract class SitemapRequestHandler implements HttpRequestHandler {

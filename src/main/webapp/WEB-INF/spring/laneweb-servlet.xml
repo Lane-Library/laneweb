@@ -38,7 +38,7 @@
         <property name="dataBinder" ref="edu.stanford.irt.laneweb.servlet.binding.DataBinder"/>
         <property name="servletContext" ref="servletContext"/>
         <property name="processor" ref="org.apache.cocoon.Processor/sitemap"/>
-        <lookup-method bean="edu.stanford.irt.laneweb.Model" name="getModel"/>
+        <lookup-method bean="edu.stanford.irt.laneweb.model.Model" name="getModel"/>
     </bean>
     
     <bean name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler/tobacco"

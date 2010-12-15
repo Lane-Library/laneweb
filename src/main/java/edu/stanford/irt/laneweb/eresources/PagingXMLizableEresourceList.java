@@ -11,7 +11,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 import edu.stanford.irt.eresources.Eresource;
-import edu.stanford.irt.laneweb.Resource;
+import edu.stanford.irt.laneweb.resource.Resource;
 
 public class PagingXMLizableEresourceList extends LinkedList<Eresource> implements XMLizable, Resource {
 

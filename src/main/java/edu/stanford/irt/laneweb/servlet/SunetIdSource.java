@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.stanford.irt.laneweb.Model;
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * This tries to discover the sunetid associated with a request. It does this by looking in a number of

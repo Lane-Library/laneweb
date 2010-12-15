@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
 
 import javax.servlet.ServletContext;
 
+import org.apache.cocoon.environment.SourceResolver;
 import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceFactory;
-import org.apache.cocoon.environment.SourceResolver;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
 
@@ -24,6 +24,8 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
     private Map<String, SourceFactory> sourceFactories = Collections.emptyMap();
     
     private ResourceLoader resourceLoader;
+    
+    private SitemapSourceLocationModifier locationModifier = new SitemapSourceLocationModifier();
 
     public void setResourceLoader(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
@@ -45,10 +47,12 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
         }
         int colonPosition = modifiedLocation.indexOf(':');
         if (colonPosition > 0) {
+            modifiedLocation = this.locationModifier.modify(modifiedLocation);
+            colonPosition = modifiedLocation.indexOf(':');
             String scheme = modifiedLocation.substring(0, colonPosition);
             SourceFactory factory = this.sourceFactories.get(scheme);
             if (factory != null) {
-                return factory.getSource(location, null);
+                return factory.getSource(modifiedLocation, null);
             }
         }
         return new SpringResourceSource(this.resourceLoader.getResource(modifiedLocation));

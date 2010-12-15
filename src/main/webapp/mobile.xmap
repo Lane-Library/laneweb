@@ -7,7 +7,7 @@
         <map:pipeline type="noncaching">
             <!-- Merged Search Content (er and metasearch) -->
             <map:match pattern="msc/**" type="wildcard">
-                <map:generate type="file" src="cocoon://apps/search/merged/xml/{1}"/>
+                <map:generate type="file" src="apps:/search/merged/xml/{1}"/>
                 <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:select type="proxy-links">
@@ -19,7 +19,7 @@
             </map:match>
             <!-- Search Content (metasearch) -->
             <map:match pattern="sc/**" type="wildcard">
-                <map:generate type="file" src="cocoon://apps/search/content/xml/{1}"/>
+                <map:generate type="file" src="apps:/search/content/xml/{1}"/>
                 <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:select type="proxy-links">
@@ -77,7 +77,7 @@
             </map:match>
             <!-- text version of laneweb content -->
             <map:match pattern="lc2txt/**.html" type="wildcard">
-                <map:generate type="file" src="cocoon://content/{1}.html"/>
+                <map:generate type="file" src="content:/{1}.html"/>
                 <map:transform type="saxon" src="resources/xsl/laneweb.xsl"/>
                 <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
                 <map:select type="proxy-links">

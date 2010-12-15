@@ -38,7 +38,7 @@
     <bean id="org.apache.commons.httpclient.HttpClient"
         class="org.apache.commons.httpclient.HttpClient">
         <constructor-arg>
-            <bean class="edu.stanford.irt.laneweb.httpclient.ConnectionManager">
+            <bean class="edu.stanford.irt.laneweb.querymap.ConnectionManager">
                 <property name="maxTotalConnections" value="30"/>
                 <property name="defaultMaxConnectionsPerHost" value="10"/>
                 <property name="connectionTimeout" value="20000"/>

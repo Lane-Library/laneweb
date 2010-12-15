@@ -7,9 +7,9 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.Model;
 import edu.stanford.irt.laneweb.cocoon.AbstractReader;
-import edu.stanford.irt.laneweb.util.ModelUtil;
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class UrlTester extends AbstractReader {
 

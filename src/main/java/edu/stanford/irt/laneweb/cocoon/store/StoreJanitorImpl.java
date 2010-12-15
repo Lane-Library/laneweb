@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.store;
+package edu.stanford.irt.laneweb.cocoon.store;
 
 import java.util.HashSet;
 import java.util.Iterator;

@@ -16,9 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.stanford.irt.laneweb.Model;
-import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
-import edu.stanford.irt.laneweb.servlet.SunetIdSource;
+import edu.stanford.irt.laneweb.model.Model;
 
 /**
  * @author ceyates $Id$

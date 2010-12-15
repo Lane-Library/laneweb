@@ -16,8 +16,8 @@ import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.Model;
-import edu.stanford.irt.laneweb.Resource;
+import edu.stanford.irt.laneweb.model.Model;
+import edu.stanford.irt.laneweb.resource.Resource;
 
 // $Id$
 public class QueryHighlightingTransformerTest {

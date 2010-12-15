@@ -3,19 +3,37 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     
-    <bean name="org.apache.excalibur.source.SourceFactory/cocoon"
-        class="edu.stanford.irt.laneweb.cocoon.source.SitemapSourceFactory">
-        <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
+    <bean name="org.apache.excalibur.source.SourceFactory/content"
+        class="edu.stanford.irt.laneweb.cocoon.source.LanewebSitemapSourceFactory">
+        <property name="processor" ref="org.apache.cocoon.Processor/content"/>
+    </bean>
+    
+    <bean name="org.apache.excalibur.source.SourceFactory/eresources"
+        class="edu.stanford.irt.laneweb.cocoon.source.LanewebSitemapSourceFactory">
+        <property name="processor" ref="org.apache.cocoon.Processor/eresources"/>
+    </bean>
+    
+    <bean name="org.apache.excalibur.source.SourceFactory/applications"
+        class="edu.stanford.irt.laneweb.cocoon.source.LanewebSitemapSourceFactory">
+        <property name="processor" ref="org.apache.cocoon.Processor/applications"/>
+    </bean>
+    
+    <bean name="org.apache.excalibur.source.SourceFactory/rss"
+        class="edu.stanford.irt.laneweb.cocoon.source.LanewebSitemapSourceFactory">
+        <property name="processor" ref="org.apache.cocoon.Processor/rss"/>
     </bean>
     
     <bean id="org.apache.excalibur.source.SourceResolver"
         class="edu.stanford.irt.laneweb.cocoon.source.LanewebSourceResolver">
+        <property name="servletContext" ref="servletContext"/>
         <property name="sourceFactories">
             <map>
-                <entry key="cocoon" value-ref="org.apache.excalibur.source.SourceFactory/cocoon"/>
+                <entry key="content" value-ref="org.apache.excalibur.source.SourceFactory/content"/>
+                <entry key="apps" value-ref="org.apache.excalibur.source.SourceFactory/applications"/>
+                <entry key="eresources" value-ref="org.apache.excalibur.source.SourceFactory/eresources"/>
+                <entry key="rss" value-ref="org.apache.excalibur.source.SourceFactory/rss"/>
             </map>
         </property>
-        <property name="servletContext" ref="servletContext"/>
     </bean>
 
 </beans>

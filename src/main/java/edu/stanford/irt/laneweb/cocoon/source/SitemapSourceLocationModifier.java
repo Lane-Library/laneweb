@@ -3,16 +3,24 @@ package edu.stanford.irt.laneweb.cocoon.source;
 public class SitemapSourceLocationModifier {
 
     public String modify(String location) {
-        String modifiedLocation = location;
-        // remove double slash:
-        if (modifiedLocation.indexOf("cocoon://") == 0) {
-            modifiedLocation = "cocoon:/" + modifiedLocation.substring("cocoon://".length());
+        if (location.indexOf("cocoon://eresources") == 0) {
+            return "eresources:" + location.substring("cocoon://eresources".length());
         }
-        if (modifiedLocation.indexOf("cocoon:/cached/search/") == 0) {
-            modifiedLocation = "cocoon:/content/search/" + modifiedLocation.substring("cocoon:/content/search/".length());
-        } else if (modifiedLocation.indexOf(".html") > 0 && modifiedLocation.indexOf("cocoon:/content") != 0) {
-            modifiedLocation = "cocoon:/content/" + modifiedLocation.substring("cocoon:/".length());
+        if (location.indexOf("cocoon://apps") == 0) {
+            return "apps:" + location.substring("cocoon://apps".length());
         }
-        return modifiedLocation;
+        if (location.indexOf("cocoon://content") == 0) {
+            return "content:" + location.substring("cocoon://content".length());
+        }
+        if (location.indexOf("cocoon://rss/ncbi-rss2html") == 0) {
+            return "content:" + location.substring("cocoon://rss".length());
+        }
+        if (location.indexOf("cocoon://rss") == 0) {
+            return "rss:" + location.substring("cocoon://rss".length());
+        }
+        if (location.indexOf("cocoon:") == 0) {
+            return "content:" + location.substring("cocoon:".length());
+        }
+        return location;
     }
 }

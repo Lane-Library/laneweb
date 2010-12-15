@@ -47,7 +47,7 @@
             <map:parameter name="expires" value="access plus 1 hours"/>
             <map:match pattern="search/**" type="wildcard">
                 <map:parameter name="parameter-name" value="source"/>
-                <map:generate type="html" src="cocoon://content/search/{1}/${source}.html"/>
+                <map:generate type="file" src="content:/search/{1}/${source}.html"/>
                 <map:transform type="namespace-filter"/>
                 <map:transform type="saxon" src="resources/xsl/eresources-rss.xsl">
                     <map:parameter name="mode" value="search"/>
@@ -55,12 +55,12 @@
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="browse/**" type="url-decoding-wildcard">
-                <map:generate type="html" src="cocoon://eresources/browse/{1}"/>
+                <map:generate type="file" src="eresources:/browse/{1}"/>
                 <map:transform type="saxon" src="resources/xsl/eresources-rss.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>
             <map:match pattern="mesh/*" type="wildcard">
-                <map:generate type="html"  src="cocoon://eresources/mesh/type/{1}"/>
+                <map:generate type="file"  src="eresources:/mesh/type/{1}"/>
                 <map:transform type="saxon" src="resources/xsl/eresources-rss.xsl"/>
                 <map:serialize type="xml"/>
             </map:match>

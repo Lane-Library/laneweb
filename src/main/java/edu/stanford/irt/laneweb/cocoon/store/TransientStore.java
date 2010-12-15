@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.store;
+package edu.stanford.irt.laneweb.cocoon.store;
 
 import java.io.IOException;
 import java.util.Collections;
