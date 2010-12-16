@@ -5,6 +5,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 
@@ -19,21 +22,29 @@ public class RemoteProxyIPDataBinder implements DataBinder {
     private static final String X_FORWARDED_FOR = "X-FORWARDED-FOR";
     
     private ProxyLinks proxyLinks;
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(RemoteProxyIPDataBinder.class);
+
 
     public void bind(Map<String, Object> model, HttpServletRequest request) {
         String currentIP = getRemoteAddress(request);
         HttpSession session = request.getSession();
         boolean isSameIP = currentIP.equals(session.getAttribute(Model.REMOTE_ADDR));
+        LOGGER.info("currentIP:"+currentIP);
+        LOGGER.info("isSameIP:"+isSameIP);
         if (!isSameIP) {
             session.setAttribute(Model.REMOTE_ADDR, currentIP);
         }
         model.put(Model.REMOTE_ADDR, currentIP);
         IPGroup ipGroup = (IPGroup) session.getAttribute(Model.IPGROUP);
+        LOGGER.info("session ipGroup:"+ipGroup);
         if (ipGroup == null || !isSameIP) {
             ipGroup = IPGroup.getGroupForIP(currentIP);
             session.setAttribute(Model.IPGROUP, ipGroup);
+            LOGGER.info("new session ipGroup:"+ipGroup);
         }
         model.put(Model.IPGROUP, ipGroup);
+        LOGGER.info("model ipGroup:"+model.get(Model.IPGROUP));
         Boolean proxyLinks = null;
         String requestParameter = request.getParameter(Model.PROXY_LINKS);
         if (requestParameter != null) {
