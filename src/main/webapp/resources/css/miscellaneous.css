@@ -7,14 +7,6 @@ p {
     color: #3F3C30;
     font-size: 12px;
 }
-/*
-  strong, em {
-  font-weight:bold;
-  }
-  em {
-  color:#820000;
-  }
- */
 strong {
     font-weight: bold;
 }
@@ -55,7 +47,8 @@ em {
     width: 13px;
     background-repeat: no-repeat;
     font-size: 0;
-    text-indent: -1000px
+    text-indent: -1000px;
+    display:block;
 }
 .rss-link:hover {
     background-image: url(/././resources/images/rss_over.png);
