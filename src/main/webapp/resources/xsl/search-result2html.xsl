@@ -10,6 +10,8 @@
     
     <xsl:param name="query-string"/>
     
+    <xsl:param name="emrid"/>
+    
     <xsl:variable name="search-terms">
         <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
@@ -97,6 +99,7 @@
                                 <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
                                     <xsl:text> - </xsl:text>
                                     <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
+                                    <xsl:if test="$emrid and $resourceName = 'UpToDate'"> <span class="utdCMEnote"> &#8592; use this link for CME</span></xsl:if>
                                 </xsl:if>
                             </xsl:otherwise>
                         </xsl:choose>
