@@ -99,7 +99,7 @@
                                 <xsl:if test="$resourceName != 'PubMed' and $moreResultsLimit &lt; number(s:resourceHits)">
                                     <xsl:text> - </xsl:text>
                                     <a href="{s:resourceUrl}">All results from <xsl:value-of select="$resourceName"/></a>
-                                    <xsl:if test="$emrid and $resourceName = 'UpToDate'"> <span class="utdCMEnote"> &#8592; use this link for CME</span></xsl:if>
+                                    <xsl:if test="$emrid and $resourceName = 'UpToDate'"> <span class="utdCMEnote"> &#8592; Use this link for CME</span></xsl:if>
                                 </xsl:if>
                             </xsl:otherwise>
                         </xsl:choose>
