@@ -70,13 +70,13 @@
                     <map:generate src="content:/biomed-resources/bassett/bassettsView.html" type="file"/>
                     <map:serialize type="xhtml"/>
                 </map:match>
-                <!-- all search pages (parameter is all-all, all-pubmed, all-ej, etc)-->
-                <map:match type="regex-parameter" pattern="^all-(.*)$">
+                <!-- all search pages (parameter is all-all, all-pubmed, articles-all, articles-pubmed, catalog-all, catalog-ej, etc)-->
+                <map:match type="regex-parameter" pattern="^(all|articles|catalog)-.*$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
                         <map:part src="eresources:/count"/>
-                        <map:part src="content:/cached/search/all.html"/>
-                        <map:part src="content:/cached/search/all/${source}.html"/>
+                        <map:part src="content:/cached/search/{1}.html"/>
+                        <map:part src="content:/cached/search/{1}/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="resources/xsl/search-facets.xsl"/>
@@ -84,39 +84,12 @@
                     <map:transform type="joost" src="resources/xsl/eresources-rss-link.stx"/>
                     <map:serialize type="xml"/>
                 </map:match>
-                <!-- articles search pages (parameter is articles-all, articles-pubmed, articles-uptodate, etc)-->
-                <map:match type="regex-parameter" pattern="^articles-(.*)$">
+                <!-- clinical and peds search pages (parameter is clinical-all, clinical-pubmed, clinical-uptodate, peds-all, peds-pubmed, peds-uptodate, pedschild-all, pedschild-pubmed,etc)-->
+                <map:match type="regex-parameter" pattern="^(clinical|peds.*)-.*$">
                     <map:parameter name="parameter-name" value="source"/>
                     <map:aggregate element="doc">
-                        <map:part src="eresources:/count"/>
-                        <map:part src="content:/cached/search/articles.html"/>
-                        <map:part src="content:/cached/search/articles/${source}.html"/>
-                    </map:aggregate>
-                    <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="resources/xsl/search-facets.xsl"/>
-                    <map:transform type="saxon" src="resources/xsl/search-post.xsl"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <!-- catalog search pages (parameter is catalog-all, catalog-ej, catalog-book, etc)-->
-                <map:match type="regex-parameter"
-                    pattern="^catalog-(.*)$">
-                    <map:parameter name="parameter-name" value="source"/>
-                    <map:aggregate element="doc">
-                        <map:part src="eresources:/count"/>
-                        <map:part src="content:/cached/search/catalog.html"/>
-                        <map:part src="content:/cached/search/catalog/${source}.html"/>
-                    </map:aggregate>
-                    <map:transform type="xinclude"/>
-                    <map:transform type="saxon" src="resources/xsl/search-facets.xsl"/>
-                    <map:transform type="saxon" src="resources/xsl/search-post.xsl"/>
-                    <map:serialize type="xml"/>
-                </map:match>
-                <!-- clinical search pages (parameter is clinical-all, clinical-pubmed, clinical-uptodate, etc)-->
-                <map:match type="regex-parameter" pattern="^clinical-(.*)$">
-                    <map:parameter name="parameter-name" value="source"/>
-                    <map:aggregate element="doc">
-                        <map:part src="content:/cached/search/clinical.html"/>
-                        <map:part src="content:/cached/search/clinical/${source}.html"/>
+                        <map:part src="content:/cached/search/{1}.html"/>
+                        <map:part src="content:/cached/search/{1}/${source}.html"/>
                     </map:aggregate>
                     <map:transform type="xinclude"/>
                     <map:transform type="saxon" src="resources/xsl/search-facets.xsl"/>

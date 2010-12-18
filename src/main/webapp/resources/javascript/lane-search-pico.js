@@ -116,7 +116,7 @@
 //            duration: 0.3 
 //        });
         Y.Global.on('lane:searchSourceChange', function(event) {
-            if (event.newVal == 'clinical-all') {
+            if (event.newVal == 'clinical-all'||event.newVal.indexOf('peds') == 0) {
                 picoOn();
             } else {
                 picoOff();

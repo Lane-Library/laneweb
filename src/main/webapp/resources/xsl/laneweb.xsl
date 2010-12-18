@@ -83,6 +83,7 @@
         <xsl:choose>
             <xsl:when test="starts-with($path,'/portals/ethics')">all-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals/bioresearch')">bioresearch-all</xsl:when>
+            <xsl:when test="starts-with($path,'/portals/peds')">peds-all</xsl:when>
             <xsl:when test="starts-with($path,'/portals') and not(starts-with($path,'/portals/lpch-cerner'))">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/search/clinical')">clinical-all</xsl:when>
             <xsl:when test="starts-with($path,'/classes-consult/infoliteracy')">clinical-all</xsl:when>
@@ -252,11 +253,11 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- add clinical class to search form, fieldset and laneNav elements when clinical is active tab -->
+    <!-- add clinical class to search form, fieldset and laneNav elements when clinical or peds is active -->
     <xsl:template match="node()[@id='search' or @id='laneNav']">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()[not(name()='class')]"/>
-            <xsl:if test="$search-form-select = 'clinical-all'">
+            <xsl:if test="$search-form-select = 'clinical-all' or starts-with($search-form-select,'peds')">
                 <xsl:attribute name="class">clinical</xsl:attribute>
             </xsl:if>
             <xsl:apply-templates/>
