@@ -65,8 +65,10 @@ public class RemoteProxyIPDataBinder implements DataBinder {
         // Load balancer also does this
         String header = request.getHeader(X_FORWARDED_FOR);
         if (header == null) {
+            LOGGER.info("x-forwarded-for header null:"+request.getRemoteAddr());
             return request.getRemoteAddr();
         } else {
+            LOGGER.info("x-forwarded-for header:"+header);
             if (header.indexOf(',') > 0) {
                 return header.substring(0, header.indexOf(','));
             } else {
