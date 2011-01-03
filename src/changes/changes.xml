@@ -8,6 +8,12 @@
     </properties>
     <body>
         <release date="" version="1.11.13" description="1.11.13 bug fix release">
+            <action date="2011-01-03" dev="ryanmax" issue="44419" type="fix">
+                large decrease in reported PAVA traffic
+            </action>
+            <action date="2010-12-16" dev="ryanmax" issue="45417" type="add">
+                add note to UpToDate results when EMRID present (for CME)
+            </action>
             <action date="2010-11-29" dev="ryanmax" issue="44933" type="add">
                 banner to advertise mobile interface
             </action>
