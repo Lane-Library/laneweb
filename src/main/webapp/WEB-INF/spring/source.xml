@@ -23,6 +23,11 @@
         <property name="processor" ref="org.apache.cocoon.Processor/rss"/>
     </bean>
     
+    <bean name="org.apache.excalibur.source.SourceFactory/mobile"
+        class="edu.stanford.irt.laneweb.cocoon.source.LanewebSitemapSourceFactory">
+        <property name="processor" ref="org.apache.cocoon.Processor/mobile"/>
+    </bean>
+    
     <bean id="org.apache.excalibur.source.SourceResolver"
         class="edu.stanford.irt.laneweb.cocoon.source.LanewebSourceResolver">
         <property name="servletContext" ref="servletContext"/>
@@ -32,6 +37,7 @@
                 <entry key="apps" value-ref="org.apache.excalibur.source.SourceFactory/applications"/>
                 <entry key="eresources" value-ref="org.apache.excalibur.source.SourceFactory/eresources"/>
                 <entry key="rss" value-ref="org.apache.excalibur.source.SourceFactory/rss"/>
+                <entry key="mobile" value-ref="org.apache.excalibur.source.SourceFactory/mobile"/>
             </map>
         </property>
     </bean>
