@@ -10,9 +10,13 @@
             <meta name="apple-mobile-web-app-capable" content="yes" />
             <link rel="stylesheet" href="/m/lane-mobile.css?${project.version}" type="text/css" />
             <script type="text/javascript">
-                var v = "${project.version}";
-                if(document.location.search.indexOf(v) == -1){
-                    document.location.href = document.location.protocol+"//"+document.location.hostname+document.location.pathname+"?"+v;
+                var v = "${project.version}",b = document.location.protocol+"//"+document.location.hostname;
+                if(!navigator.userAgent.match(/AppleWebKit/)){
+                    alert('Express Lane runs on iPhone, iPad, iPod touch, Android and other WebKit-based browsers.');
+                    document.location.href = b+'/help/cool-tools-express-lane.html';
+                }
+                else if(document.location.search.indexOf(v) == -1){
+                    document.location.href = b+document.location.pathname+"?"+v;
                 }
             </script> 
         </head>
