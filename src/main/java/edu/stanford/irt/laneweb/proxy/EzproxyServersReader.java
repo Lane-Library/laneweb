@@ -41,7 +41,7 @@ public class EzproxyServersReader extends AbstractReader {
         + "select url as server from urls "
         + "where url like 'http://%' and instr(url,'/',1,3) = 0 ";
 
-    private static final byte[] SUL = "HJ jensen.stanford.edu\nHJ socrates.stanford.edu\nHJ library.stanford.edu"
+    private static final byte[] SUL = "HJ jenson.stanford.edu\nHJ socrates.stanford.edu\nHJ library.stanford.edu\nHJ searchworks.stanford.edu"
             .getBytes();
 
     private DataSource dataSource;
