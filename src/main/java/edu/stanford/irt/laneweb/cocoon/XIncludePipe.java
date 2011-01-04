@@ -59,12 +59,6 @@ class XIncludePipe extends AbstractXMLPipe {
     private int fallbackElementLevel;
 
     /**
-     * In case {@link #useFallbackLevel} > 0, then this should contain the exception that caused fallback to be needed.
-     * In the case of nested include elements it will contain only the deepest exception.
-     */
-    private Exception fallBackException;
-
-    /**
      * Value of the href attribute of the xi:include element that caused the creation of the this XIncludePipe. Used to
      * detect loop inclusions.
      */
@@ -377,7 +371,6 @@ class XIncludePipe extends AbstractXMLPipe {
             }
         } catch (SourceNotFoundException e) {
             this.useFallbackLevel++;
-            this.fallBackException = new CascadingException("Resource not found: " + url.getURI());
             getLogger().error("xIncluded resource not found: " + url.getURI(), e);
         } finally {
             if (reader != null) {
@@ -428,28 +421,32 @@ class XIncludePipe extends AbstractXMLPipe {
             if (this.locator != null) {
                 this.xmlConsumer.setDocumentLocator(this.locator);
             }
-        } catch (ResourceNotFoundException e) {
+//        } catch (ResourceNotFoundException e) {
+//            this.useFallbackLevel++;
+//            this.fallBackException = new CascadingException("Resource not found: " + url.getURI());
+//            getLogger().error("xIncluded resource not found: " + url.getURI(), e);
+//        } catch (ParseException e) {
+//            // this exception is thrown in case of an invalid
+//            // xpointer expression
+//            this.useFallbackLevel++;
+//            this.fallBackException = new CascadingException("Error parsing xPointer expression", e);
+//            this.fallBackException.fillInStackTrace();
+//            getLogger().error("Error parsing XPointer expression, will try to use fallback.", e);
+//        } catch (SAXException e) {
+//            this.useFallbackLevel++;
+//            this.fallBackException = e;
+//            getLogger().error("Error processing an xInclude, will try to use fallback.", e);
+//        } catch (MalformedURLException e) {
+//            this.useFallbackLevel++;
+//            this.fallBackException = e;
+//            getLogger().error("Error processing an xInclude, will try to use fallback.", e);
+//        } catch (IOException e) {
+//            this.useFallbackLevel++;
+//            this.fallBackException = e;
+//            getLogger().error("Error processing an xInclude, will try to use fallback.", e);
+//        }
+        } catch (Exception e) {
             this.useFallbackLevel++;
-            this.fallBackException = new CascadingException("Resource not found: " + url.getURI());
-            getLogger().error("xIncluded resource not found: " + url.getURI(), e);
-        } catch (ParseException e) {
-            // this exception is thrown in case of an invalid
-            // xpointer expression
-            this.useFallbackLevel++;
-            this.fallBackException = new CascadingException("Error parsing xPointer expression", e);
-            this.fallBackException.fillInStackTrace();
-            getLogger().error("Error parsing XPointer expression, will try to use fallback.", e);
-        } catch (SAXException e) {
-            this.useFallbackLevel++;
-            this.fallBackException = e;
-            getLogger().error("Error processing an xInclude, will try to use fallback.", e);
-        } catch (MalformedURLException e) {
-            this.useFallbackLevel++;
-            this.fallBackException = e;
-            getLogger().error("Error processing an xInclude, will try to use fallback.", e);
-        } catch (IOException e) {
-            this.useFallbackLevel++;
-            this.fallBackException = e;
             getLogger().error("Error processing an xInclude, will try to use fallback.", e);
         }
     }
