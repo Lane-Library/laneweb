@@ -72,8 +72,8 @@
         </xsl:copy>
     </xsl:template>
     
-    <!-- transform search result links -->
-    <xsl:template match="h:a">
+    <!-- internal links should refer to /m/lc2txt, external links get blank target, exclude login links  -->
+    <xsl:template match="h:a[not(//h:ul[@id='login'])]">
         <xsl:copy>
             <xsl:apply-templates select="attribute::node()"/>
             <xsl:choose>
