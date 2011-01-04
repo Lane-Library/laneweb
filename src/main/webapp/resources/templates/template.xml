@@ -54,6 +54,10 @@
                             </fieldset>
                         </form>
                         <div class="content">
+                            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                                href="content:/global-announcement.html">
+                                <xi:fallback/>
+                            </xi:include>
                             <?laneweb content?>
                         </div>
                         <ul id="libraryContact">
@@ -83,7 +87,7 @@
                                 <a href="/biomed-resources/index.html"
                                     >Biomed Resources</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                    href="cocoon://content/includes/leftmenu-resources.html">
+                                    href="content:/includes/leftmenu-resources.html">
                                     <xi:fallback/>
                                 </xi:include>
                             </li>
@@ -123,7 +127,7 @@
                                 <a href="/classes-consult/index.html"
                                     >Classes &amp; Consulting</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                    href="cocoon://content/includes/leftmenu-classes.html">
+                                    href="content:/includes/leftmenu-classes.html">
                                     <xi:fallback/>
                                 </xi:include>
                             </li>
@@ -131,7 +135,7 @@
                                 <a href="/med-history/index.html"
                                     >History Center</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                    href="cocoon://content/includes/leftmenu-medhistory.html">
+                                    href="content:/includes/leftmenu-medhistory.html">
                                     <xi:fallback/>
                                 </xi:include>
                             </li>
@@ -139,7 +143,7 @@
                                 <a href="/about/index.html"
                                     >About Lane</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                    href="cocoon://content/includes/leftmenu-about.html">
+                                    href="content:/includes/leftmenu-about.html">
                                     <xi:fallback/>
                                 </xi:include>
                             </li>
@@ -147,7 +151,7 @@
                                 <a href="/help/index.html"
                                     >How To</a>
                                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                                    href="cocoon://content/includes/leftmenu-help.html">
+                                    href="content:/includes/leftmenu-help.html">
                                     <xi:fallback/>
                                 </xi:include>
                             </li>
