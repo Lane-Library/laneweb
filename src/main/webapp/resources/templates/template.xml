@@ -34,7 +34,7 @@
                                         title="Find clinical evidence from Cochrane, DARE, ACP Journal Club, UpToDate, PubMed, and more ..."
                                         >Clinical/PICO</option>
                                     <option value="peds-all"
-                                        title="Find pediatrics evidence from UpToDate, PubMed, and more ..."
+                                        title="Find pediatric evidence from UpToDate, PubMed, and more ..."
                                         >Pediatrics</option>
                                     <option value="bioresearch-all"
                                         title="Search 200+ bioresearch resources"
