@@ -9,6 +9,8 @@ package edu.stanford.irt.laneweb.cocoon.source;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -16,7 +18,6 @@ import java.net.MalformedURLException;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.Processor;
 import org.apache.cocoon.components.source.impl.SitemapSourceInfo;
-import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.internal.EnvironmentHelper;
 import org.apache.cocoon.environment.wrapper.EnvironmentWrapper;
 import org.apache.cocoon.xml.ContentHandlerWrapper;
@@ -73,7 +74,7 @@ public class LanewebSitemapSource implements Source, XMLizable {
     }
 
     /** The environment */
-    private Environment environment;
+    private EnvironmentWrapper environment;
 
     private String mimeType;
 
@@ -101,19 +102,17 @@ public class LanewebSitemapSource implements Source, XMLizable {
     public LanewebSitemapSource(final String uri, final Processor processor) throws MalformedURLException {
         this.systemId = uri;
         this.processor = processor;
-//        SitemapSourceInfo info = SitemapSourceInfo.parseURI(this.environment, uri);
-//        this.protocol = info.protocol;
+        // SitemapSourceInfo info = SitemapSourceInfo.parseURI(this.environment, uri);
+        // this.protocol = info.protocol;
         // create a new validity holder
         this.validity = new SitemapSourceValidity();
         // initialize
-
         // create environment...
         SitemapSourceInfo info = new SitemapSourceInfo();
         info.uri = uri.substring(uri.indexOf(":/") + 2);
         this.environment = new EnvironmentWrapper(EnvironmentHelper.getCurrentEnvironment(), info);
-
         // The environment is a facade whose delegate can be changed in case of internal redirects
-//        this.environment = new MutableEnvironmentFacade(wrapper);
+        // this.environment = new MutableEnvironmentFacade(wrapper);
         try {
             this.init();
         } catch (Exception e) {
@@ -141,7 +140,17 @@ public class LanewebSitemapSource implements Source, XMLizable {
      * Return an <code>InputStream</code> object to read from the source.
      */
     public InputStream getInputStream() throws IOException {
-        throw new UnsupportedOperationException();
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        this.environment.setOutputStream(os);
+        try {
+            EnvironmentHelper.enterProcessor(this.pipelineDescription.processor, this.environment);
+            this.pipelineDescription.processingPipeline.process(this.environment);
+        } catch (ProcessingException e) {
+            throw new RuntimeException(e);
+        } finally {
+            EnvironmentHelper.leaveProcessor();
+        }
+        return new ByteArrayInputStream(os.toByteArray());
     }
 
     /**
