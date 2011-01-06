@@ -4,32 +4,6 @@
     xsi:schemaLocation="http://apache.org/cocoon/sitemap/1.0 http://cocoon.apache.org/schema/sitemap/cocoon-sitemap-1.0.xsd">
     <!-- publishable paths for mobile search and browse -->
     <map:pipelines>
-        <map:pipeline type="noncaching">
-            <!-- Merged Search Content (er and metasearch) -->
-            <map:match pattern="msc/**" type="wildcard">
-                <map:generate type="file" src="apps:/search/merged/xml/{1}"/>
-                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
-                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
-                <map:select type="proxy-links">
-                    <map:when test="true">
-                        <map:transform type="proxy-links"/>
-                    </map:when>
-                </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
-            <!-- Search Content (metasearch) -->
-            <map:match pattern="sc/**" type="wildcard">
-                <map:generate type="file" src="apps:/search/content/xml/{1}"/>
-                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
-                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
-                <map:select type="proxy-links">
-                    <map:when test="true">
-                        <map:transform type="proxy-links"/>
-                    </map:when>
-                </map:select>
-                <map:serialize type="xml"/>
-            </map:match>
-        </map:pipeline>
         <map:pipeline type="caching">
             <!-- static content -->
             <map:match pattern="lane.manifest" type="wildcard">
@@ -43,6 +17,13 @@
             </map:match>
             <map:match pattern="images/*" type="wildcard">
                 <map:read type="resource" src="resources/mobile/images/{1}"/>
+            </map:match>
+            <map:match pattern="index.html" type="wildcard">
+                <map:generate type="html" src="resources/mobile/index.html"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:transform type="namespace-filter"/>
+                <map:transform type="debug"/>
+                <map:serialize type="xhtml"/>
             </map:match>
             <!-- EResources browse -->
             <map:match pattern="er/browse/type/*" type="wildcard">
@@ -75,6 +56,32 @@
                 </map:select>
                 <map:serialize type="xml"/>
             </map:match>
+        </map:pipeline>
+        <map:pipeline type="noncaching">
+            <!-- Merged Search Content (er and metasearch) -->
+            <map:match pattern="msc/**" type="wildcard">
+                <map:generate type="file" src="apps:/search/merged/xml/{1}"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
+            <!-- Search Content (metasearch) -->
+            <map:match pattern="sc/**" type="wildcard">
+                <map:generate type="file" src="apps:/search/content/xml/{1}"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-search-result2html.xsl"/>
+                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
+                <map:select type="proxy-links">
+                    <map:when test="true">
+                        <map:transform type="proxy-links"/>
+                    </map:when>
+                </map:select>
+                <map:serialize type="xml"/>
+            </map:match>
             <!-- text version of laneweb content -->
             <map:match pattern="lc2txt/**.html" type="wildcard">
                 <map:generate type="file" src="content:/{1}.html"/>
@@ -87,18 +94,6 @@
                 </map:select>
                 <map:transform type="namespace-filter"/>
                 <map:serialize type="xml"/>
-            </map:match>
-            <map:match pattern="index.html" type="wildcard">
-                <map:generate type="html" src="resources/mobile/index.html"/>
-                <map:transform type="saxon" src="resources/xsl/mobile-content.xsl"/>
-                <map:select type="proxy-links">
-                    <map:when test="true">
-                        <map:transform type="proxy-links"/>
-                    </map:when>
-                </map:select>
-                <map:transform type="namespace-filter"/>
-                <map:transform type="debug"/>
-                <map:serialize type="xhtml"/>
             </map:match>
             <map:match pattern="**.html" type="wildcard">
                 <map:generate type="html" src="${content-base}/m/{1}.html"/>
@@ -115,6 +110,8 @@
                 <map:transform type="debug"/>
                 <map:serialize type="xhtml"/>
             </map:match>
+        </map:pipeline>
+        <map:pipeline type="caching">
             <map:match pattern="**" type="wildcard">
                 <map:read type="resource" src="${content-base}/m/{1}"/>
             </map:match>
