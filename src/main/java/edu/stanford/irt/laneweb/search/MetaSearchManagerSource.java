@@ -8,7 +8,10 @@ import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.stanford.irt.search.MetaSearchManager;
+import edu.stanford.irt.search.Result;
+import edu.stanford.irt.search.impl.SimpleQuery;
 import edu.stanford.irt.search.spring.SearchCacheManager;
+import edu.stanford.irt.search.spring.impl.aop.SearchCacheAdvisor;
 
 /**
  * @author ceyates
@@ -52,9 +55,10 @@ public class MetaSearchManagerSource {
         try {
             AbstractXmlApplicationContext context = new HttpApplicationContext(url, login, password);
             this.manager = (MetaSearchManager) context.getBean("manager");
-            this.httpClient.setState(new HttpState());
-            this.searchCacheManager.shutdown();
-            this.searchCacheManager = (SearchCacheManager)context.getBean("searchCacheManager");
+            this.httpClient = (HttpClient)context.getBean("httpClient");
+            this.searchCacheManager = (SearchCacheManager) context.getBean("searchCacheManager");
+            this.context.destroy();
+            this.context = context;
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }
