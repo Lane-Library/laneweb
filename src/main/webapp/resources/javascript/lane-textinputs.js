@@ -13,15 +13,15 @@
                 input.addClass(hintStyle);
                 input.set('value', _hintText);
             },
-            focusHandle = input.on('focus', function() {
-                if (this.get('value') == _hintText) {
-                    this.set('value', '');
-                    this.removeClass(hintStyle);
+            focusHandle = input.on('focus', function(event) {
+                if (event.target.get('value') == _hintText) {
+                    event.target.set('value', '');
+                    event.target.removeClass(hintStyle);
                 }
             }),
-            blurHandle = input.on('blur', function() {
-                if (this.get('value') === '') {
-                    _reset(this);
+            blurHandle = input.on('blur', function(event) {
+                if (event.target.get('value') === '') {
+                    _reset(event.target);
                 }
             });
         if (input.get('value') === '' || input.get('value') == _hintText) {
