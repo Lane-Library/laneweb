@@ -1,17 +1,13 @@
 package edu.stanford.irt.laneweb.search;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import edu.stanford.irt.search.MetaSearchManager;
-import edu.stanford.irt.search.Result;
-import edu.stanford.irt.search.impl.SimpleQuery;
 import edu.stanford.irt.search.spring.SearchCacheManager;
-import edu.stanford.irt.search.spring.impl.aop.SearchCacheAdvisor;
 
 /**
  * @author ceyates
