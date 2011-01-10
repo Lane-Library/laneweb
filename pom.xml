@@ -383,7 +383,7 @@
         <dependency>
             <artifactId>search-lane</artifactId>
             <groupId>edu.stanford.irt.search</groupId>
-            <version>1.6.19-SNAPSHOT</version>
+            <version>1.6.19</version>
         </dependency>
         <dependency>
             <artifactId>log4j</artifactId>
