@@ -1,7 +1,7 @@
 (function() {
     var Y = LANE.Y,
         spellCheck = Y.one('#spellCheck'),
-        searchTerms = LANE.SearchResult.getEncodedSearchTerms();
+        searchTerms = LANE.SearchResult.getEncodedSearchTerms(), trackingImg;
     if (spellCheck && searchTerms) {
         //get the suggestion
         Y.io('/././apps/spellcheck/json?q=' + searchTerms, {
@@ -16,6 +16,11 @@
                         a.set('href', document.location.href.replace('q=' + searchTerms, 'q=' + encodeURIComponent(sc.suggestion) + '&laneSpellCorrected=' + searchTerms));
                         a.set('innerHTML', sc.suggestion);
                         Y.Global.fire('lane:popin', spellCheck);
+                        // track spelling suggestion and original term
+                        trackingImg = document.createElement('img');
+                        trackingImg.style.display = "none";
+                        trackingImg.src = "/././resources/images/spacer.gif?log=laneSpellSuggest&q=" + searchTerms + "&s=" + sc.suggestion;
+                        spellCheck.append(trackingImg);
                     }
                 }
             }
