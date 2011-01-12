@@ -21,7 +21,7 @@
     </issueManagement>
     <ciManagement>
         <system>Hudson</system>
-        <url>http://irt-integration.stanford.edu/hudson/job/Laneweb/</url>
+        <url>https://irt-dev.stanford.edu/hudson/job/Laneweb/</url>
     </ciManagement>
     <developers>
         <developer>
