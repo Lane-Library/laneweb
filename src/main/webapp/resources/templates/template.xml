@@ -42,7 +42,7 @@
                                     <option value="history-all"
                                         title="Search Lane's historical collection">History</option>
                                     <option value="bassett"
-                                        title="Find anatomical images from Lane's Bassset Collection"
+                                        title="Find anatomical images from Lane's Bassett Collection"
                                         >Bassett Images</option>
                                 </select>
                                 <a id="searchTips" href="/help/choose-search.html">Choose Best Search for You</a>
