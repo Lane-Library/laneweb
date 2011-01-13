@@ -69,8 +69,8 @@
                         <xsl:apply-templates select="s:title"/>
                     </a>
                     
-                    <!-- display authors if NOT the clinical interface -->
-                    <xsl:if test="not(starts-with($source,'clinical')) and string-length(s:pub-author) > 1">
+                    <!-- display authors if NOT clinical or peds interface -->
+                    <xsl:if test="not(starts-with($source,'clinical') or starts-with($source,'peds')) and string-length(s:pub-author) > 1">
                         <xsl:apply-templates select="s:pub-author"/>
                     </xsl:if>
                     
