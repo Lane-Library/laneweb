@@ -496,7 +496,8 @@ function updatePage(page, fromPage)
 		if (prevPage && !page.getAttribute("hideBackButton"))
 		{
 			backButton.style.display = "inline";
-			backButton.innerHTML = prevPage.title ? prevPage.title : "Back";
+			//backButton.innerHTML = prevPage.title ? prevPage.title : "Back";
+			backButton.innerHTML = "Back";
 			var bbClass = prevPage.getAttribute("bbclass");
 			backButton.className = (bbClass) ? 'button ' + bbClass : 'button';
 		}
