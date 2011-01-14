@@ -7,24 +7,24 @@
     xmlns="http://www.w3.org/1999/xhtml"
     version="2.0">
 
+    <xsl:import href="laneclasses-common.xsl"/>    
 
     <xsl:template match="/lc:classes">
         <html>
             <body>
-     
-                    <xsl:apply-templates />
+                <xsl:apply-templates />
             </body>
         </html>
     </xsl:template>
 
 
-    <xsl:template match="lc:class">
-        <xsl:if test="position() mod 4 !=0 ">
+    <xsl:template match="lc:event_data">
+        <xsl:if test="position() mod 2 !=0 ">
             <li class="odd yui-gf">
                 <xsl:call-template name="decorator" />
             </li>
         </xsl:if>
-        <xsl:if test="position() mod 4  = 0 ">
+        <xsl:if test="position() mod 2  = 0 ">
             <li class="even yui-gf">
                 <xsl:call-template name="decorator" />
             </li>
@@ -34,27 +34,32 @@
     <xsl:template name="decorator">
         <div class="yui-u">
             <h4>
-                <xsl:apply-templates select="./lc:title" />
+                <a>
+                    <xsl:attribute name="href">
+                        <xsl:text>/classe-consult/laneclasse.html?class-id=</xsl:text>
+                        <xsl:value-of select="lc:module_id/text()"/>
+                    </xsl:attribute>
+                    <xsl:value-of select="./lc:event_name" />
+                </a> 
             </h4>
             <div class="lecturer">
-                <xsl:value-of select="./lc:lecturer/text()" />
+                <xsl:value-of select="./lc:speaker/text()" />
             </div>
         </div>
         <div class="yui-u first date">
             <strong>
-                <xsl:value-of select="./lc:month/text()" />
+                <xsl:call-template name="month" />
                 <xsl:text> </xsl:text>
-                <xsl:value-of select="./lc:day/text()" />
+                <xsl:call-template name="day" />
             </strong>
             <br />
-            <xsl:value-of select="replace(replace(./lc:time-begin/text(), 'am',''), 'pm','')" />
-            <xsl:text>-</xsl:text>
-            <xsl:value-of select="./lc:time-end/text()" />
+            <xsl:call-template name="start-time" />
+                <xsl:text>–</xsl:text>
+            <xsl:call-template name="end-time" />
+
         </div>
     </xsl:template>
 
-    <xsl:template match="lc:title">
-        <xsl:copy-of select="attribute::node()|child::node()" />
-    </xsl:template>
+    
 
 </xsl:stylesheet>
