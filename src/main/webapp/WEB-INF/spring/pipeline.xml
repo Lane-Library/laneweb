@@ -69,6 +69,11 @@
         <property name="xsltProcessor" ref="org.apache.excalibur.xml.xslt.XSLTProcessor/saxon"/>
     </bean>
 
+     <bean name="org.apache.cocoon.transformation.Transformer/textNodeParser"
+        class="edu.stanford.irt.laneweb.cocoon.TextNodeParsingTransformer"   scope="prototype">
+    </bean>
+
+    
     <bean name="org.apache.cocoon.transformation.Transformer/joost"
         class="edu.stanford.irt.laneweb.cocoon.LanewebTraxTransformer"
         scope="prototype">
@@ -78,6 +83,16 @@
     <bean name="org.apache.cocoon.generation.Generator/&lt;aggregator&gt;"
         class="edu.stanford.irt.laneweb.cocoon.ContentAggregator" scope="prototype">
         <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
+    </bean>
+
+    <bean name="org.apache.cocoon.generation.Generator/classes-aggregator"
+        class="edu.stanford.irt.laneweb.classes.ClassesAggregator" scope="prototype">
+        <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.generation.Generator/classes"
+        class="edu.stanford.irt.laneweb.classes.ClassesGenerator" scope="prototype">
+      <constructor-arg ref="org.apache.cocoon.core.xml.SAXParser"/>
     </bean>
     
     <bean name="org.apache.cocoon.generation.Generator/search-template-generator"
