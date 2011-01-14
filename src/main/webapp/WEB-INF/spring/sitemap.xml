@@ -82,6 +82,12 @@
         class="edu.stanford.irt.laneweb.cocoon.ClearCacheAction">
         <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
     </bean>
+
+    <bean name="org.apache.cocoon.acting.Action/clear-laneclasses-cache"
+        class="edu.stanford.irt.laneweb.classes.ClearClasseCacheAction">
+        <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
+    </bean>
+
     
     <bean name="org.apache.cocoon.selection.Selector/ipgroup"
         class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector"
