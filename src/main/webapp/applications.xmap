@@ -235,7 +235,6 @@
                     <map:serialize type="xml"/>
                 </map:match>
             </map:match>
-         </map:pipeline>
             <map:match pattern="cache/search/templates/xml" type="wildcard">
                 <map:generate type="search-template-generator" src="apps:/search/describe/xml">
                     <map:parameter name="directories" value="search,portals"/>
