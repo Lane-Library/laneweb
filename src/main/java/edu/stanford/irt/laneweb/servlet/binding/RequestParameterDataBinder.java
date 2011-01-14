@@ -81,6 +81,8 @@ public class RequestParameterDataBinder implements DataBinder {
                     model.put(Model.SYNCHRONOUS, value);
             } else if (Model.TIMEOUT.equals(name)) {
                 model.put(Model.TIMEOUT, value);
+            }else if (Model.CLASS_ID.equals(name)) {
+                model.put(Model.CLASS_ID, value);
             }
         }
     }

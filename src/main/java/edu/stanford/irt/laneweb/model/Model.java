@@ -16,6 +16,8 @@ public interface Model {
 
     public static final String CALLBACK = "callback";
 
+    public static final String CLASS_ID = "class-id";
+
     public static final String CONTENT_BASE = "content-base";
 
     public static final String DEBUG = "debug";
