@@ -30,7 +30,7 @@
             <div class="yui-u">
                 <a>
                     <xsl:attribute name="href">
-                        <xsl:text>/classe-consult/laneclasse.html?class-id=</xsl:text>
+                        <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
                         <xsl:value-of select="lc:module_id/text()"/>
                     </xsl:attribute>
                     <xsl:value-of select="./lc:event_name" />
