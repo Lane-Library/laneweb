@@ -72,15 +72,17 @@
                 <xsl:call-template  name="end-time"/>
             </h4>    
             <h4> 
-                <xsl:attribute name="class">weak</xsl:attribute> 
+                <xsl:attribute name="class">weak</xsl:attribute>
+                <xsl:variable name="link"><xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ text() = $class-id]/../lc:venue/lc:venue_website"></xsl:value-of> </xsl:variable> 
                 <xsl:choose>
-                    <xsl:when test="/doc/lc:classes/lc:event_data/lc:module_id[ text() = $class-id]/../lc:venue/lc:venue_website != ''">
+                    <xsl:when test="$link != ''">
                         <a>
                             <xsl:attribute name="href">
                     <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ text() = $class-id]/../lc:venue/lc:venue_website/text()" />
                     </xsl:attribute>
                             <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ text() = $class-id]/../lc:venue/lc:venue_name" />
                         </a>
+                        <xsl:if test="ends-with($link, '.pdf')"> <xsl:text> (.pdf)</xsl:text></xsl:if>
                     </xsl:when>
                     <xsl:otherwise>
                         <xsl:value-of select="/doc/lc:classes/lc:event_data/lc:module_id[ text() = $class-id]/../lc:venue/lc:venue_name" />
