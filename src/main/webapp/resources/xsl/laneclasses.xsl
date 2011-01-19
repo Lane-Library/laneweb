@@ -32,6 +32,8 @@
     </xsl:template>
 
     <xsl:template name="decorator">
+    
+    <div class="yui-ge">
         <div class="yui-u">
             <h4>
                 <a>
@@ -58,6 +60,27 @@
             <xsl:call-template name="end-time" />
 
         </div>
+        </div>
+        <div class="details">
+            <div class="module">
+                <div>
+                    <xsl:copy-of select="./lc:event_description/child::node()"/>
+                </div>
+                <a>
+                    <xsl:attribute name="href">
+                        <xsl:text>https://www.onlineregistrationcenter.com/register.asp?m=257&amp;c=</xsl:text>
+                        <xsl:value-of select="./lc:module_id"/>
+                    </xsl:attribute>
+                    <xsl:attribute name="class">image-link</xsl:attribute>
+                        
+                    <img>
+                        <xsl:attribute name="class">module-img</xsl:attribute>
+                        <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>
+                     </img> 
+                 </a>
+            </div>
+        </div>
+     
     </xsl:template>
 
     
