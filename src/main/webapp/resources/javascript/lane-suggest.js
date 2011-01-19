@@ -366,12 +366,12 @@ function handleQueryResponse (e) {
                 contentNode,
                 inputParent = input.get("parentNode"),
                 selected = -1;
-            input.insert(containerNode,"after");
 
             widgetNode = Y.Node.create('<div class="yui3-acwidget"/>');
             inputParent.insert(widgetNode, input);
             widgetNode.append(Y.Node.getDOMNode(inputParent).removeChild(Y.Node.getDOMNode(input)));
             containerNode = Y.Node.create('<div class="yui3-acwidget-container"><div class="yui3-acwidget-content"><div class="yui-acwidget-hd"> </div><div class="yui-acwidget-bd"><ul class="aclist"> </ul></div></div></div>');
+            input.insert(containerNode,"after");
             widgetNode.append(containerNode);
             contentNode = containerNode.one(".aclist");
             contentNode.delegate("click", function (e) {
