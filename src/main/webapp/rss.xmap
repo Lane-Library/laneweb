@@ -35,6 +35,11 @@
                 <map:transform src="resources/xsl/page2rss.xsl" type="saxon"/>
                 <map:serialize type="xml"/>
             </map:match>
+            <map:match pattern="classes.rss" type="wildcard">
+                <map:generate type="classes"  src="apps:/classes/data.xml"/>
+                <map:transform type="saxon" src="resources/xsl/classes-rss.xsl"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="noncaching">
             <map:match pattern="**.xml" type="wildcard">
