@@ -1,26 +1,54 @@
 .module {
-    margin-bottom:1em;
+    margin-bottom : 1em;
 }
 .module .bd {
-    margin-top:13px;
+    margin-top : 13px;
 }
-.module:after, .module .after {
-    content: "."; 
-    display: block; 
-    height: 0;
-    font-size:0;
-    clear: both;
-    visibility:hidden;
+.module:after,
+.module .after {
+    content : ".";
+    display : block;
+    height : 0;
+    font-size : 0;
+    clear : both;
+    visibility : hidden;
 }
 .module-img {
-    float:left;
-    margin-right:1em;
+    float : left;
+    margin-right : 1em;
 }
 .module-ul {
-    float:left;
-    width:75%;
+    float : left;
+    width : 75%;
 }
 .module-ul-narrow {
-    float:left;
-    width:49%;
+    float : left;
+    width : 49%;
+}
+.popular {
+    background-color : #F6F3E5;
+    border : 1px solid #EEE3C1;
+    border-top : none
+}
+.popular h3 {
+    background-color : white;
+    margin : 0 -1px
+}
+.popular ul {
+    margin : 10px 20px 20px;
+}
+.core-covers {
+    margin-bottom : 15px;
+    font-family : Georgia, "Times New Roman", Times, serif;
+    font-size : 1.1em;
+    letter-spacing : 0.05em;
+}
+.core-covers .module-img {
+    margin-right : 0.5em
+}
+.core-covers strong {
+    display : block;
+    font-size : 12px;
+    letter-spacing : normal;
+    font-family : arial, helvetica, clean, sans-serif
 }
