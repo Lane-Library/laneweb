@@ -668,5 +668,11 @@
         	<artifactId>spring-webmvc</artifactId>
         	<version>3.0.5.RELEASE</version>
         </dependency>
+        <dependency>
+        	<groupId>org.codehaus.jackson</groupId>
+        	<artifactId>jackson-mapper-asl</artifactId>
+        	<version>1.7.1</version>
+        	<scope>runtime</scope>
+        </dependency>
     </dependencies>
 </project>
