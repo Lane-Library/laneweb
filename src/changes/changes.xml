@@ -7,7 +7,18 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2011-11-10" version="1.11.13" description="1.11.13 bug fix release">
+        <release date="2011-01-24" version="1.11.13" description="1.11.14 bug fix release">
+            <action date="2011-01-21" dev="ceyates" issue="46521" type="add">
+                Border for liaison's list
+            </action>
+            <action date="2011-01-13" dev="ryanmax" issue="46251" type="add">
+                Back button in mobile UI
+            </action>
+            <action date="2011-01-10" dev="ryanmax" issue="46128" type="add">
+                make all spelling suggestions trackable
+            </action>
+        </release>
+        <release date="2011-01-10" version="1.11.13" description="1.11.13 bug fix release">
             <action date="2011-01-04" dev="ryanmax" issue="45963" type="add">
                 mobile redirect for non-webkit browsers
             </action>
