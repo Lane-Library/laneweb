@@ -45,7 +45,7 @@ public class Links {
     @ExceptionHandler(IndexOutOfBoundsException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public String handleMissingParameter(final IndexOutOfBoundsException ex, final HttpServletRequest request) {
+    public String handleIndexOutOfBounds(final IndexOutOfBoundsException ex, final HttpServletRequest request) {
         return ex.toString();
     }
 
