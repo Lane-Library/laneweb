@@ -11,6 +11,9 @@
             <action date="2011-01-21" dev="ceyates" issue="46521" type="add">
                 Border for liaison's list
             </action>
+            <action date="2011-01-21" dev="ryanmax" issue="46476" type="add">
+                improve guest access feature
+            </action>
             <action date="2011-01-13" dev="ryanmax" issue="46251" type="add">
                 Back button in mobile UI
             </action>
