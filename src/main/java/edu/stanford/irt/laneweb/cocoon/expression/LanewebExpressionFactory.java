@@ -8,8 +8,6 @@ import org.apache.cocoon.el.ExpressionFactory;
 /**
  * A simplified expression factory, only knows one language, ignores language
  * parameter.
- * 
- * @author ceyates $Id$
  */
 public class LanewebExpressionFactory implements ExpressionFactory {
 

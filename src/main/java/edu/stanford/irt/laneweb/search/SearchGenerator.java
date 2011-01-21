@@ -9,10 +9,6 @@ import edu.stanford.irt.search.SearchStatus;
 import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-/**
- * @author ceyates $Id: SearchGenerator.java 80764 2010-12-15 21:47:39Z
- *         ceyates@stanford.edu $
- */
 public class SearchGenerator extends AbstractMetasearchGenerator {
 
     private long defaultTimeout;

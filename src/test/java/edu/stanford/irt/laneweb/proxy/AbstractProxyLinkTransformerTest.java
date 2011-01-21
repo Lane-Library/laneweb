@@ -18,8 +18,6 @@ import org.junit.Test;
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 
-// $Id: AbstractProxyLinkTransformerTest.java 80764 2010-12-15 21:47:39Z
-// ceyates@stanford.edu $
 public class AbstractProxyLinkTransformerTest {
 
     private Map<String, Object> model;

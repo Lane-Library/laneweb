@@ -3,8 +3,6 @@ package edu.stanford.irt.laneweb.proxy;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-// $Id: ElementProxyLinkTransformer.java 75982 2010-08-12 20:21:05Z
-// ceyates@stanford.edu $
 public class ElementProxyLinkTransformer extends AbstractProxyLinkTransformer {
 
     private StringBuilder builder = new StringBuilder(256);

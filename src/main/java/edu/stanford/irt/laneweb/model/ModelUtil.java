@@ -4,9 +4,6 @@ import java.util.Map;
 
 /**
  * Provides type casting and default values when accessing map values
- * 
- * @author ceyates $Id: ModelUtil.java 80764 2010-12-15 21:47:39Z
- *         ceyates@stanford.edu $
  */
 public abstract class ModelUtil {
 

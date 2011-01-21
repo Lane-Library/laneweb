@@ -13,9 +13,6 @@ import edu.stanford.irt.laneweb.model.Model;
  * This tries to discover the sunetid associated with a request. It does this by
  * looking in a number of places described below. If it finds it it puts it in
  * the session if it wasn't there already.
- * 
- * @author ceyates $Id: SunetIdSource.java 80764 2010-12-15 21:47:39Z
- *         ceyates@stanford.edu $
  */
 public class SunetIdSource {
 

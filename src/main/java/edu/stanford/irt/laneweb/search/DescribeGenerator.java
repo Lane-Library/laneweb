@@ -8,10 +8,6 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
-/**
- * @author ceyates $Id: DescribeGenerator.java 80764 2010-12-15 21:47:39Z
- *         ceyates@stanford.edu $
- */
 public class DescribeGenerator extends AbstractMetasearchGenerator {
 
     private static final String[] NO_ENGINES = new String[0];

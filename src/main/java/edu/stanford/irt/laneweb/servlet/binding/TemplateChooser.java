@@ -16,9 +16,6 @@ import edu.stanford.irt.laneweb.model.Model;
  * highest priority is given to the template request parameter. Next priority is
  * a Map with regular expressions matching request URIs as the key with the
  * associated template as the value. Finally, default value is provided.
- * 
- * @author ceyates $Id: TemplateChooser.java 80764 2010-12-15 21:47:39Z
- *         ceyates@stanford.edu $
  */
 public class TemplateChooser {
 

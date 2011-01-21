@@ -13,8 +13,6 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 import edu.stanford.irt.laneweb.resource.Resource;
 
-// $Id: QueryHighlightingTransformer.java 80764 2010-12-15 21:47:39Z
-// ceyates@stanford.edu $
 public class QueryHighlightingTransformer extends AbstractTransformer {
 
     public static final String EMPTY = "";

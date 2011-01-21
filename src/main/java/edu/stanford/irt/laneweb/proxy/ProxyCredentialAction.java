@@ -7,8 +7,6 @@ import edu.stanford.irt.laneweb.cocoon.AbstractAction;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-// $Id: ProxyCredentialAction.java 80764 2010-12-15 21:47:39Z
-// ceyates@stanford.edu $
 public class ProxyCredentialAction extends AbstractAction {
 
     private static final String PROXY_REDIRECT_KEY = "proxy-redirect";

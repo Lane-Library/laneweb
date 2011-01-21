@@ -10,8 +10,7 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 /**
- * @author alainb $Id: BassettEresourcesGenerator.java 80764 2010-12-15
- *         21:47:39Z ceyates@stanford.edu $
+ * @author alainb
  */
 public class BassettEresourcesGenerator extends AbstractBassettGenerator {
 

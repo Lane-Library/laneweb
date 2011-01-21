@@ -40,10 +40,6 @@ import org.xml.sax.SAXException;
  * This is the base for all implementations of a <code>ProcessingPipeline</code>
  * . It is advisable to inherit from this base class instead of doing a complete
  * own implementation!
- * 
- * @since 2.1
- * @version $Id: AbstractProcessingPipeline.java 606540 2007-12-23 05:44:54Z
- *          vgritsenko $
  */
 public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware {
 

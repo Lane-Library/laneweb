@@ -19,8 +19,6 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.resource.Resource;
 
-// $Id: QueryHighlightingTransformerTest.java 80764 2010-12-15 21:47:39Z
-// ceyates@stanford.edu $
 public class QueryHighlightingTransformerTest {
 
     private static final char[] CHARS = "some characters with query inside of it".toCharArray();

@@ -18,10 +18,6 @@ import org.junit.Test;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-/**
- * @author ceyates $Id: SunetIdSourceTest.java 80764 2010-12-15 21:47:39Z
- *         ceyates@stanford.edu $
- */
 public class SunetIdSourceTest {
 
     private SunetIdCookieCodec codec = new SunetIdCookieCodec();

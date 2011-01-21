@@ -11,9 +11,6 @@ import org.apache.commons.collections.MultiMap;
 /**
  * A simplified version of the Cocoon ObjectModel, doesn't keep track of a bunch
  * of stuff. But it works
- * 
- * @author ceyates $Id: LanewebObjectModel.java 80185 2010-11-22 22:01:29Z
- *         ceyates@stanford.edu $
  */
 @SuppressWarnings({ "rawtypes", "serial" })
 public class LanewebObjectModel extends HashMap implements ObjectModel {

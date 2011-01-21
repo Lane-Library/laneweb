@@ -2,9 +2,6 @@ package edu.stanford.irt.laneweb.model;
 
 /**
  * Model for sitemap components.
- * 
- * @author ceyates $Id: Model.java 81118 2011-01-14 18:22:20Z
- *         alainb@stanford.edu $
  */
 public interface Model {
 

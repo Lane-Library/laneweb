@@ -16,8 +16,6 @@ import org.springframework.mock.jndi.SimpleNamingContextBuilder;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.ContextLoaderListener;
 
-// $Id: LanewebIntegrationBase.java 79899 2010-11-10 15:50:17Z
-// ceyates@stanford.edu $
 public class LanewebIntegrationBase {
 
     private static class DS implements DataSource {

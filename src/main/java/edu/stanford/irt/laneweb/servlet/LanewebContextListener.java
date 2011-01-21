@@ -15,9 +15,6 @@ import javax.servlet.ServletContextListener;
  * them as ServletContext attributes. It first looks at System properties for
  * the values. If any are not System properties they are looked for in context
  * init parameters, if not there they are looked up up using JNDI.
- * 
- * @author ceyates $Id: LanewebContextListener.java 79369 2010-10-28 18:02:33Z
- *         ceyates@stanford.edu $
  */
 public class LanewebContextListener implements ServletContextListener {
 

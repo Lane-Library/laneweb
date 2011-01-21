@@ -14,8 +14,7 @@ import org.xml.sax.helpers.AttributesImpl;
 import edu.stanford.irt.search.ContentResult;
 
 /**
- * @author ryanmax $Id: ContentResultSearchResult.java 75982 2010-08-12
- *         20:21:05Z ceyates@stanford.edu $
+ * @author ryanmax
  */
 public class ContentResultSearchResult implements SearchResult {
 

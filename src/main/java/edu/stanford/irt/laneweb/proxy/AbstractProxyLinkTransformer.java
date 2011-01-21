@@ -5,8 +5,6 @@ import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-// $Id: AbstractProxyLinkTransformer.java 80764 2010-12-15 21:47:39Z
-// ceyates@stanford.edu $
 public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     private static final String EZPROXY_LINK = "http://laneproxy.stanford.edu/login?user=";

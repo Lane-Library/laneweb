@@ -9,9 +9,6 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 /**
  * This transformer puts a comment with all model attributes at the top of a
  * document.
- * 
- * @author ceyates $Id: DebugTransformer.java 80764 2010-12-15 21:47:39Z
- *         ceyates@stanford.edu $
  */
 public class DebugTransformer extends AbstractTransformer {
 
