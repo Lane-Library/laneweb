@@ -8,6 +8,10 @@
     
     <xsl:param name="source"/>
     
+    <xsl:param name="proxy-links"/>
+    
+    <xsl:param name="ipgroup"/>
+    
     <xsl:param name="query-string"/>
     
     <xsl:param name="emrid"/>
@@ -15,6 +19,12 @@
     <xsl:variable name="search-terms">
         <xsl:value-of select="/s:resources/s:query"/>
     </xsl:variable>
+
+    <xsl:variable name="guest-mode">
+        <xsl:if test="$ipgroup = 'GUEST' and $proxy-links = 'false'">true</xsl:if>
+    </xsl:variable>
+
+    <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
 
     <!-- number of result titles to return per resource; not enforced here, only used for when to build "more" links -->
     <xsl:variable name="moreResultsLimit">10</xsl:variable>
@@ -61,11 +71,22 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
+        <xsl:variable name="primaryLink">
+            <xsl:choose>
+                <!-- point to PubMed directly instead of SFX when in guest mode -->
+                <xsl:when test="$resourceName = 'PubMed' and $guest-mode = 'true'">
+                    <xsl:value-of select="concat($pubmed-baseUrl,substring-after(s:contentId,'PMID:'))"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of select="s:url"/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
 
         <dd>
             <ul class="r-{/s:resources/@start + position()}">
                 <li>
-                    <a class="primaryLink" href="{s:url}">
+                    <a class="primaryLink" href="{$primaryLink}">
                         <xsl:apply-templates select="s:title"/>
                     </a>
                     
@@ -335,10 +356,13 @@
     </xsl:template>
 
     <xsl:template match="s:contentId[starts-with(.,'PMID:')]">
+        <xsl:variable name="pmid">
+            <xsl:value-of select="substring-after(.,'PMID:')"/>
+        </xsl:variable>
         <xsl:text> - </xsl:text>
         <span class="pmid">
             <xsl:text> PMID: </xsl:text>
-            <a href="http://www.ncbi.nlm.nih.gov/pubmed/{substring-after(.,'PMID:')}?otool=stanford"><xsl:value-of select="substring-after(.,'PMID:')"/></a>
+            <a href="{concat($pubmed-baseUrl,$pmid,'?otool=stanford')}"><xsl:value-of select="$pmid"/></a>
         </span>
     </xsl:template>
     
