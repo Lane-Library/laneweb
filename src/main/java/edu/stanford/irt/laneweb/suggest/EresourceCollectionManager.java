@@ -73,6 +73,7 @@ public class EresourceCollectionManager extends AbstractSuggestCollectionManager
         return SEARCH_TYPE;
     }
 
+    @Override
     protected Collection<String> searchStringToParams(final String term) {
         Collection<String> params = new LinkedList<String>();
         String likeSearchString = this.queryNormalizer.normalizeForLike(term);
@@ -82,5 +83,4 @@ public class EresourceCollectionManager extends AbstractSuggestCollectionManager
         params.add(this.queryNormalizer.normalizeForContains(term));
         return params;
     }
-  
 }

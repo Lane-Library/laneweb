@@ -85,8 +85,7 @@ public class ProxyHostManager {
     private Set<String> proxyHosts;
 
     public ProxyHostManager() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
-                "ezproxy-servers.txt")));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("ezproxy-servers.txt")));
         this.proxyHosts = new HashSet<String>();
         String proxyHost = null;
         try {
@@ -103,7 +102,7 @@ public class ProxyHostManager {
             }
         }
     }
-    
+
     public void destroy() {
         this.executor.shutdownNow();
     }

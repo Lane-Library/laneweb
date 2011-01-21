@@ -333,6 +333,19 @@ public class CollectionManagerImpl implements CollectionManager {
         this.dataSource = dataSource;
     }
 
+    private void addDescription(final Eresource eresource, final int id, final PreparedStatement stmt) throws SQLException {
+        ResultSet rs = null;
+        try {
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                eresource.setDescription(rs.getString(1));
+            }
+        } finally {
+            JdbcUtils.closeResultSet(rs);
+        }
+    }
+
     private LinkedList<Eresource> doGet(final String sql, final Collection<String> params, final boolean scores) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -430,18 +443,5 @@ public class CollectionManagerImpl implements CollectionManager {
         }
         descriptionStatement.close();
         return eresources;
-    }
-
-    private void addDescription(Eresource eresource, int id, PreparedStatement stmt) throws SQLException {
-        ResultSet rs = null;
-        try {
-            stmt.setInt(1, id);
-            rs = stmt.executeQuery();
-            if (rs.next()) {
-                eresource.setDescription(rs.getString(1));
-            }
-        } finally {
-            JdbcUtils.closeResultSet(rs);
-        }
     }
 }
