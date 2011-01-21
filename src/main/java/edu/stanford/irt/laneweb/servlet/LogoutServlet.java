@@ -21,8 +21,7 @@ public class LogoutServlet extends HttpServlet {
     private static final String WEBAUTH_LOGOUT_URL = "https://weblogin.stanford.edu/logout";
 
     @Override
-    protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException,
-            IOException {
+    protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         for (Cookie cookie : req.getCookies()) {
             String name = cookie.getName();
             if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(name) || WEBAUTH_COOKIE_NAME.equals(name)) {

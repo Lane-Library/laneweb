@@ -13,8 +13,6 @@ import org.slf4j.LoggerFactory;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class VoyagerLogin {
-    
-    private static final Pattern PID_PATTERN = Pattern.compile("[\\w0-9-_]+");
 
     private static final String BASE_URL = "http://lmldb.stanford.edu/cgi-bin/Pwebrecon.cgi?";
 
@@ -25,6 +23,8 @@ public class VoyagerLogin {
     private static final String ERROR_URL = "/voyagerError.html";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VoyagerLogin.class);
+
+    private static final Pattern PID_PATTERN = Pattern.compile("[\\w0-9-_]+");
 
     private DataSource dataSource;
 

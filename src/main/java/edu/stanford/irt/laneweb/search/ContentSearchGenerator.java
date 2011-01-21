@@ -21,10 +21,11 @@ import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
- * @author ryanmax $Id$
+ * @author ryanmax $Id: ContentSearchGenerator.java 80764 2010-12-15 21:47:39Z
+ *         ceyates@stanford.edu $
  */
 public class ContentSearchGenerator extends AbstractMetasearchGenerator {
-    
+
     private static final Pattern CONTENT_PATTERN = Pattern.compile(".*_content");
 
     private int contentResultLimit;
@@ -76,8 +77,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
                     int count = 0;
                     while (it.hasNext() && count < this.contentResultLimit) {
                         count++;
-                        ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next(),
-                                queryTermPattern);
+                        ContentResultSearchResult crsr = new ContentResultSearchResult((ContentResult) it.next(), queryTermPattern);
                         crsr.setResourceHits(parentResource.getHits());
                         crsr.setResourceId(parentResource.getId());
                         crsr.setResourceName(parentResource.getDescription());
@@ -92,7 +92,7 @@ public class ContentSearchGenerator extends AbstractMetasearchGenerator {
                             resultTitles.put(crsr.getContentUrl(), crsr);
                         }
                     }
-                } else{
+                } else {
                     parentResource = resource;
                 }
             }

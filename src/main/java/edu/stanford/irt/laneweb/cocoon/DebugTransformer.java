@@ -1,6 +1,5 @@
 package edu.stanford.irt.laneweb.cocoon;
 
-import java.util.Map;
 import java.util.Map.Entry;
 
 import org.xml.sax.SAXException;
@@ -8,9 +7,11 @@ import org.xml.sax.SAXException;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
 /**
- * This transformer puts a comment with all model attributes at the top of a document.
+ * This transformer puts a comment with all model attributes at the top of a
+ * document.
  * 
- * @author ceyates $Id$
+ * @author ceyates $Id: DebugTransformer.java 80764 2010-12-15 21:47:39Z
+ *         ceyates@stanford.edu $
  */
 public class DebugTransformer extends AbstractTransformer {
 
@@ -21,7 +22,7 @@ public class DebugTransformer extends AbstractTransformer {
         super.startDocument();
         if (this.debug) {
             StringBuilder sb = new StringBuilder();
-            for (Entry<String, Object> entry : ((Map<String, Object>) this.model).entrySet()) {
+            for (Entry<String, Object> entry : (this.model).entrySet()) {
                 sb.append('\n').append(entry.getKey()).append(": ").append(entry.getValue());
             }
             sb.append('\n');

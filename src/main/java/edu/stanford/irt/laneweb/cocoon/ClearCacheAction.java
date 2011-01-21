@@ -18,8 +18,8 @@ public class ClearCacheAction implements Action {
     }
 
     @SuppressWarnings("rawtypes")
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,
-            final String source, final Parameters parameters) {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source,
+            final Parameters parameters) {
         this.cache.clear();
         return Collections.emptyMap();
     }

@@ -69,8 +69,7 @@ public class JSONableQueryMapTest {
         replay(descriptor);
         ResourceMap map = createMock(ResourceMap.class);
         expect(map.getDescriptor()).andReturn(descriptor);
-        expect(map.getResources()).andReturn(
-                Collections.<Resource> singleton(new Resource("mdc_park", "Pediatric Cardiology")));
+        expect(map.getResources()).andReturn(Collections.<Resource> singleton(new Resource("mdc_park", "Pediatric Cardiology")));
         replay(map);
         QueryMap qm = createMock(QueryMap.class);
         expect(qm.getQuery()).andReturn("tetralogy of fallot");

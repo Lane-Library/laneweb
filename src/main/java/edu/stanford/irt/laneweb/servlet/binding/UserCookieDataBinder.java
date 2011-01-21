@@ -8,10 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.SunetIdCookieCodec;
 
-
 public class UserCookieDataBinder implements DataBinder {
 
-    public void bind(Map<String, Object> model, HttpServletRequest request) {
+    public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {

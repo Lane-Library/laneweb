@@ -68,8 +68,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
 
     private ServiceManager serviceManager;
 
-    public SitemapLanguage(final ServiceManager serviceManager, final PipelineComponentInfo info)
-            throws ServiceException {
+    public SitemapLanguage(final ServiceManager serviceManager, final PipelineComponentInfo info) throws ServiceException {
         service(serviceManager);
         this.serviceManager = serviceManager;
         this.itsNamespace = "http://apache.org/cocoon/sitemap/1.0";
@@ -98,8 +97,7 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
 
     @SuppressWarnings("rawtypes")
     @Override
-    public Map getHintsForStatement(final String role, final String hint, final Configuration statement)
-            throws Exception {
+    public Map getHintsForStatement(final String role, final String hint, final Configuration statement) throws Exception {
         return Collections.emptyMap();
     }
 
@@ -124,16 +122,15 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
         }
         final String beanName = role + '/' + type;
         if (!this.applicationContext.containsBean(beanName)) {
-            throw new ConfigurationException("Type '" + type + "' does not exist for 'map:" + statement.getName()
-                    + "' at " + statement.getLocation());
+            throw new ConfigurationException("Type '" + type + "' does not exist for 'map:" + statement.getName() + "' at "
+                    + statement.getLocation());
         }
         return type;
     }
 
     @SuppressWarnings("rawtypes")
     @Override
-    public Collection getViewsForStatement(final String role, final String hint, final Configuration statement)
-            throws Exception {
+    public Collection getViewsForStatement(final String role, final String hint, final Configuration statement) throws Exception {
         return Collections.emptyList();
     }
 

@@ -40,14 +40,15 @@ public class HttpResource extends UrlResource {
     }
 
     @Override
+    public boolean exists() {
+        return true;
+    }
+
+    @Override
     public InputStream getInputStream() throws IOException {
         URLConnection con = super.getURL().openConnection();
         con.setRequestProperty("Authorization", "Basic " + this.authorization);
         con.setUseCaches(false);
         return con.getInputStream();
-    }
-    
-    public boolean exists(){
-        return true;
     }
 }

@@ -87,8 +87,7 @@ public class EresourceResource implements Resource {
         XMLUtils.endElement(handler, NAMESPACE, VERSION);
     }
 
-    private void maybeCreateElement(final ContentHandler handler, final String name, final String value)
-            throws SAXException {
+    private void maybeCreateElement(final ContentHandler handler, final String name, final String value) throws SAXException {
         if (value != null && !"".equals(value)) {
             XMLUtils.createElementNS(handler, NAMESPACE, name, value);
         }

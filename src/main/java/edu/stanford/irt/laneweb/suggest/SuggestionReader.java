@@ -14,26 +14,26 @@ import edu.stanford.irt.suggest.Suggestion;
 import edu.stanford.irt.suggest.SuggestionManager;
 
 public class SuggestionReader extends AbstractReader {
-    
+
+    private static final byte[] CLOSE_CALLBACK = ");".getBytes();
+
     private static final Pattern ER_PATTERN = Pattern.compile("(?:ej|book|database|software|cc|video|lanesite|bassett)");
 
     private static final byte[] JSON_1 = "{\"suggest\":[".getBytes();
 
     private static final byte[] JSON_2 = "]}".getBytes();
 
+    private static final int JSON_RETURN_LIMIT = 10;
+
     private static final byte[] OPEN_CALLBACK = "(".getBytes();
 
-    private static final byte[] CLOSE_CALLBACK = ");".getBytes();
-
-    private static final int JSON_RETURN_LIMIT = 10;
+    private String callback;
 
     private SuggestionManager eresourceSuggestionManager;
 
     private SuggestionManager historySuggestionManager;
 
     private String limit;
-
-    private String callback;
 
     private SuggestionManager meshSuggestionManager;
 

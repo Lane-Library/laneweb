@@ -7,7 +7,8 @@ import edu.stanford.irt.eresources.Eresource;
 import edu.stanford.irt.laneweb.eresources.EresourceResource;
 
 /**
- * @author ryanmax $Id$
+ * @author ryanmax $Id: EresourceSearchResult.java 75982 2010-08-12 20:21:05Z
+ *         ceyates@stanford.edu $
  */
 public class EresourceSearchResult extends EresourceResource implements SearchResult {
 

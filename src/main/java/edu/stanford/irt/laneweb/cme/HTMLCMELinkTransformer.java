@@ -5,8 +5,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
 /**
- * Transformer to rewrite data when a LDAPData.EMRID value is present. Elements to rewrite include: - anchor element
- * href attributes when value is known CME host - input element value attributes when found value is REPLACEMENT_STRING
+ * Transformer to rewrite data when a LDAPData.EMRID value is present. Elements
+ * to rewrite include: - anchor element href attributes when value is known CME
+ * host - input element value attributes when found value is REPLACEMENT_STRING
  * 
  * @author ryanmax
  */

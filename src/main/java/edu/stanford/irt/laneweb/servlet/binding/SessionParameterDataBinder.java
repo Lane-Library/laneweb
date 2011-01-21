@@ -7,12 +7,12 @@ import javax.servlet.http.HttpSession;
 
 public abstract class SessionParameterDataBinder<T> implements DataBinder {
 
-    private String parameterName;
-
     private String modelKey;
 
+    private String parameterName;
+
     @SuppressWarnings("unchecked")
-    public void bind(Map<String, Object> model, HttpServletRequest request) {
+    public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         HttpSession session = request.getSession();
         String parameterValue = request.getParameter(this.parameterName);
         T value = null;
@@ -27,12 +27,12 @@ public abstract class SessionParameterDataBinder<T> implements DataBinder {
         }
     }
 
-    public void setParameterName(String parameterName) {
-        this.parameterName = parameterName;
+    public void setModelKey(final String modelKey) {
+        this.modelKey = modelKey;
     }
 
-    public void setModelKey(String modelKey) {
-        this.modelKey = modelKey;
+    public void setParameterName(final String parameterName) {
+        this.parameterName = parameterName;
     }
 
     protected abstract T getParameterAsObject(String parameterValue);

@@ -12,7 +12,8 @@ import edu.stanford.irt.eresources.CollectionManager;
 import edu.stanford.irt.eresources.Eresource;
 
 /**
- * @author ryanmax $Id$
+ * @author ryanmax $Id: MergedSearchGenerator.java 79899 2010-11-10 15:50:17Z
+ *         ceyates@stanford.edu $
  */
 public class MergedSearchGenerator extends ContentSearchGenerator {
 

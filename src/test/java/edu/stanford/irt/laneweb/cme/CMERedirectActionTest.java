@@ -20,14 +20,14 @@ public class CMERedirectActionTest {
     public void setUp() throws Exception {
         this.action = new CMERedirectAction();
         this.model = new HashMap<String, Object>();
-        
     }
 
     @Test
     public void testAct() throws Exception {
         this.model.put("host", "uptodate");
         this.model.put(Model.EMRID, "nobody");
-        assertEquals("http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?unid=nobody&srcsys=epic90710&eiv=2.1.0",
+        assertEquals(
+                "http://laneproxy.stanford.edu/login?url=http://www.uptodate.com/online/content/search.do?unid=nobody&srcsys=epic90710&eiv=2.1.0",
                 this.action.act(null, null, this.model, null, null).get("cme-redirect"));
     }
 

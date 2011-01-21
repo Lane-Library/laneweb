@@ -28,8 +28,8 @@ public class SunetIdAndTicketDataBinder implements DataBinder {
             model.put(Model.TICKET, ticket);
         }
     }
-    
-    public void setEzproxyKey(String ezproxyKey) {
+
+    public void setEzproxyKey(final String ezproxyKey) {
         this.ezproxyKey = ezproxyKey;
     }
 }

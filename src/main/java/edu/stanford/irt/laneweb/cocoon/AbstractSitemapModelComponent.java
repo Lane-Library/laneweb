@@ -11,9 +11,9 @@ import org.apache.excalibur.source.Source;
 
 public abstract class AbstractSitemapModelComponent implements SitemapModelComponent {
 
-    protected Map<String, String> parameterMap;
-
     protected Map<String, Object> model;
+
+    protected Map<String, String> parameterMap;
 
     protected Source source;
 
@@ -33,5 +33,4 @@ public abstract class AbstractSitemapModelComponent implements SitemapModelCompo
 
     protected void initialize() {
     }
-
 }

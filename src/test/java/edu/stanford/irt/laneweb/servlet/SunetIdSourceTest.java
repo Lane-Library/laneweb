@@ -19,7 +19,8 @@ import org.junit.Test;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * @author ceyates $Id$
+ * @author ceyates $Id: SunetIdSourceTest.java 80764 2010-12-15 21:47:39Z
+ *         ceyates@stanford.edu $
  */
 public class SunetIdSourceTest {
 
@@ -39,6 +40,21 @@ public class SunetIdSourceTest {
         this.request = createMock(HttpServletRequest.class);
         this.session = createMock(HttpSession.class);
         this.cookie = createMock(Cookie.class);
+    }
+
+    @Test
+    public void testBadCookie() {
+        expect(this.request.getSession()).andReturn(this.session);
+        expect(this.request.getRemoteUser()).andReturn(null);
+        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
+        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
+        expect(this.request.getHeader("User-Agent")).andReturn("user agent");
+        expect(this.cookie.getName()).andReturn(SunetIdCookieCodec.LANE_COOKIE_NAME);
+        expect(this.session.getAttribute("sunetid")).andReturn(null);
+        expect(this.cookie.getValue()).andReturn("abc").times(2);
+        replay(this.request, this.session, this.cookie);
+        assertEquals(null, this.sunetidSource.getSunetid(this.request));
+        verify(this.request, this.session, this.cookie);
     }
 
     @Test
@@ -100,21 +116,6 @@ public class SunetIdSourceTest {
         expect(this.request.getHeader("User-Agent")).andReturn(null);
         replay(this.request, this.session, this.cookie);
         this.sunetidSource.getSunetid(this.request);
-        verify(this.request, this.session, this.cookie);
-    }
-    
-    @Test
-    public void testBadCookie() {
-        expect(this.request.getSession()).andReturn(this.session);
-        expect(this.request.getRemoteUser()).andReturn(null);
-        expect(this.request.getHeader("X-WEBAUTH-USER")).andReturn(null);
-        expect(this.request.getCookies()).andReturn(new Cookie[] { this.cookie });
-        expect(this.request.getHeader("User-Agent")).andReturn("user agent");
-        expect(this.cookie.getName()).andReturn(SunetIdCookieCodec.LANE_COOKIE_NAME);
-        expect(this.session.getAttribute("sunetid")).andReturn(null);
-        expect(this.cookie.getValue()).andReturn("abc").times(2);
-        replay(this.request, this.session, this.cookie);
-        assertEquals(null, this.sunetidSource.getSunetid(this.request));
         verify(this.request, this.session, this.cookie);
     }
 }

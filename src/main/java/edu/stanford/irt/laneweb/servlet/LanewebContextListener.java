@@ -11,11 +11,13 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
- * Creates URL to various content locations as well as some key Strings and adds them as ServletContext attributes. It
- * first looks at System properties for the values. If any are not System properties they are looked for in context init
- * parameters, if not there they are looked up up using JNDI.
+ * Creates URL to various content locations as well as some key Strings and adds
+ * them as ServletContext attributes. It first looks at System properties for
+ * the values. If any are not System properties they are looked for in context
+ * init parameters, if not there they are looked up up using JNDI.
  * 
- * @author ceyates $Id$
+ * @author ceyates $Id: LanewebContextListener.java 79369 2010-10-28 18:02:33Z
+ *         ceyates@stanford.edu $
  */
 public class LanewebContextListener implements ServletContextListener {
 
@@ -60,8 +62,8 @@ public class LanewebContextListener implements ServletContextListener {
     }
 
     /**
-     * get a System property associated with a name, failing that get a context init parameter and failing that a jndi
-     * object, and failing that, die.
+     * get a System property associated with a name, failing that get a context
+     * init parameter and failing that a jndi object, and failing that, die.
      * 
      * @param name
      * @return The property or jndi value

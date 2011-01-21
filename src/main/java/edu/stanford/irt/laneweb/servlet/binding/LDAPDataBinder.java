@@ -32,8 +32,8 @@ public class LDAPDataBinder implements DataBinder {
             }
         }
     }
-    
-    public void setLDAPDataAccess(LDAPDataAccess ldapDataAccess) {
+
+    public void setLDAPDataAccess(final LDAPDataAccess ldapDataAccess) {
         this.ldapDataAccess = ldapDataAccess;
     }
 }

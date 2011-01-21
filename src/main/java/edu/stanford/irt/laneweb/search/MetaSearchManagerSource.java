@@ -51,7 +51,7 @@ public class MetaSearchManagerSource {
         try {
             AbstractXmlApplicationContext context = new HttpApplicationContext(url, login, password);
             this.manager = (MetaSearchManager) context.getBean("manager");
-            this.httpClient = (HttpClient)context.getBean("httpClient");
+            this.httpClient = (HttpClient) context.getBean("httpClient");
             this.searchCacheManager = (SearchCacheManager) context.getBean("searchCacheManager");
             this.context.destroy();
             this.context = context;

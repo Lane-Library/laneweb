@@ -32,17 +32,7 @@ public class SuggestionComparator implements Comparator<String>, Serializable {
         return upper1.compareTo(upper2);
     }
 
-    private int queryWeight(final String heading) {
-        int index = heading.indexOf(this.query);
-        if (index == 0) {
-            return 2;
-        } else if (index > 0) {
-            return 1;
-        }
-        return 0;
-    }
-    
-    private String normalize(String string) {
+    private String normalize(final String string) {
         String decomposed = Normalizer.decompose(string, false);
         StringBuilder sb = new StringBuilder(decomposed.length());
         char theChar;
@@ -53,5 +43,15 @@ public class SuggestionComparator implements Comparator<String>, Serializable {
             }
         }
         return sb.toString().toUpperCase();
+    }
+
+    private int queryWeight(final String heading) {
+        int index = heading.indexOf(this.query);
+        if (index == 0) {
+            return 2;
+        } else if (index > 0) {
+            return 1;
+        }
+        return 0;
     }
 }

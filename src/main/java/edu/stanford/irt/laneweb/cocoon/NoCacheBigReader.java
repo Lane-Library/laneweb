@@ -8,8 +8,8 @@ import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
 
 /**
- * To prevent caching of large files this Reader returns a null key if the source size is greater than 1000000 bytes
- * (~1.2M).
+ * To prevent caching of large files this Reader returns a null key if the
+ * source size is greater than 1000000 bytes (~1.2M).
  * 
  * @author ceyates
  */
@@ -19,8 +19,8 @@ public class NoCacheBigReader extends AbstractReader implements CacheableProcess
      * Generates the requested resource.
      */
     public void generate() throws IOException {
-        InputStream input = null; 
-        try{
+        InputStream input = null;
+        try {
             input = this.source.getInputStream();
             int i = 0;
             byte[] buffer = new byte[1024];
@@ -31,10 +31,10 @@ public class NoCacheBigReader extends AbstractReader implements CacheableProcess
                 }
                 this.outputStream.write(buffer, 0, i);
             }
-        }
-        finally{
-            if(input != null)
+        } finally {
+            if (input != null) {
                 input.close();
+            }
         }
     }
 
@@ -46,7 +46,8 @@ public class NoCacheBigReader extends AbstractReader implements CacheableProcess
     }
 
     /**
-     * @return the time the read source was last modified or 0 if it is not possible to detect
+     * @return the time the read source was last modified or 0 if it is not
+     *         possible to detect
      */
     @Override
     public long getLastModified() {

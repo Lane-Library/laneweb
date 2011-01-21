@@ -1,12 +1,16 @@
 package edu.stanford.irt.laneweb.cocoon.source;
 
 /*
- * Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE
- * file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file
- * to You under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
- * License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by
- * applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements. See the NOTICE file distributed with this
+ * work for additional information regarding copyright ownership. The ASF
+ * licenses this file to You under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law
+ * or agreed to in writing, software distributed under the License is
+ * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
 import java.io.ByteArrayInputStream;
@@ -30,7 +34,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.ext.LexicalHandler;
 
 /**
- * Implementation of a {@link Source} that gets its content by invoking a pipeline.
+ * Implementation of a {@link Source} that gets its content by invoking a
+ * pipeline.
  * 
  * @version $Id: SitemapSource.java 606651 2007-12-24 01:21:51Z vgritsenko $
  */
@@ -62,8 +67,8 @@ public class LanewebSitemapSource implements Source, XMLizable {
 
         public int isValid(final SourceValidity validity) {
             if (validity instanceof SitemapSourceValidity) {
-                return (this.validity != null ? this.validity.isValid(((SitemapSourceValidity) validity)
-                        .getNestedValidity()) : SourceValidity.INVALID);
+                return (this.validity != null ? this.validity.isValid(((SitemapSourceValidity) validity).getNestedValidity())
+                        : SourceValidity.INVALID);
             }
             return SourceValidity.INVALID;
         }
@@ -102,7 +107,8 @@ public class LanewebSitemapSource implements Source, XMLizable {
     public LanewebSitemapSource(final String uri, final Processor processor) throws MalformedURLException {
         this.systemId = uri;
         this.processor = processor;
-        // SitemapSourceInfo info = SitemapSourceInfo.parseURI(this.environment, uri);
+        // SitemapSourceInfo info = SitemapSourceInfo.parseURI(this.environment,
+        // uri);
         // this.protocol = info.protocol;
         // create a new validity holder
         this.validity = new SitemapSourceValidity();
@@ -111,7 +117,8 @@ public class LanewebSitemapSource implements Source, XMLizable {
         SitemapSourceInfo info = new SitemapSourceInfo();
         info.uri = uri.substring(uri.indexOf(":/") + 2);
         this.environment = new EnvironmentWrapper(EnvironmentHelper.getCurrentEnvironment(), info);
-        // The environment is a facade whose delegate can be changed in case of internal redirects
+        // The environment is a facade whose delegate can be changed in case of
+        // internal redirects
         // this.environment = new MutableEnvironmentFacade(wrapper);
         try {
             this.init();
@@ -130,7 +137,8 @@ public class LanewebSitemapSource implements Source, XMLizable {
     }
 
     /**
-     * Get the content length of the source or -1 if it is not possible to determine the length.
+     * Get the content length of the source or -1 if it is not possible to
+     * determine the length.
      */
     public long getContentLength() {
         return -1;
@@ -156,15 +164,16 @@ public class LanewebSitemapSource implements Source, XMLizable {
     /**
      * Get the last modification date.
      * 
-     * @return The last modification in milliseconds since January 1, 1970 GMT or 0 if it is unknown
+     * @return The last modification in milliseconds since January 1, 1970 GMT
+     *         or 0 if it is unknown
      */
     public long getLastModified() {
         return 0;
     }
 
     /**
-     * The mime-type of the content described by this object. If the source is not able to determine the mime-type by
-     * itself this can be null.
+     * The mime-type of the content described by this object. If the source is
+     * not able to determine the mime-type by itself this can be null.
      */
     public String getMimeType() {
         return this.mimeType;
@@ -185,8 +194,8 @@ public class LanewebSitemapSource implements Source, XMLizable {
     }
 
     /**
-     * Get the validity object. This wraps validity of the enclosed event pipeline. If pipeline is not cacheable,
-     * <code>null</code> is returned.
+     * Get the validity object. This wraps validity of the enclosed event
+     * pipeline. If pipeline is not cacheable, <code>null</code> is returned.
      */
     public SourceValidity getValidity() {
         return this.validity.getNestedValidity() == null ? null : this.validity;

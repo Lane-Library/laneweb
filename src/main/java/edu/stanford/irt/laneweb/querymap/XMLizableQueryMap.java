@@ -56,8 +56,7 @@ public class XMLizableQueryMap implements XMLizable {
             ResourceMap resourceMap = this.queryMap.getResourceMap();
             if (null != resourceMap) {
                 XMLUtils.startElement(consumer, NAMESPACE, RESOURCE_MAP);
-                XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR, resourceMap.getDescriptor()
-                        .getDescriptorName());
+                XMLUtils.createElementNS(consumer, NAMESPACE, DESCRIPTOR, resourceMap.getDescriptor().getDescriptorName());
                 for (Resource resource : resourceMap.getResources()) {
                     AttributesImpl atts = new AttributesImpl();
                     atts.addAttribute("", IDREF, IDREF, "IDREF", resource.getId());

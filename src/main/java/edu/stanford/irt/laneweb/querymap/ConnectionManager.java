@@ -29,4 +29,3 @@ public class ConnectionManager extends MultiThreadedHttpConnectionManager {
         super.getParams().setMaxTotalConnections(maxTotalConnections);
     }
 }
-

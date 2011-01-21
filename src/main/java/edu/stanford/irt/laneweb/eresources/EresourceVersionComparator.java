@@ -20,14 +20,14 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
 
     private static final Pattern CLOSED_DATE_PATTERN = Pattern.compile("(\\d{4})\\-(\\d{4})\\.");
 
+    private static final List<String> favoredPublishers = Arrays.asList("sciencedirect", "wiley", "springer", "highwire", "ovid",
+            "nature", "liebert", "informaworld", "karger", "pubmed central");
+
     private static final Pattern OPEN_DATE_PATTERN = Pattern.compile(".*(\\d{4})\\-");
 
     private static final long serialVersionUID = 1L;
 
     private static final int THIS_YEAR = Calendar.getInstance().get(Calendar.YEAR);
-
-    private static final List<String> favoredPublishers = Arrays.asList("sciencedirect", "wiley", "springer",
-            "highwire", "ovid", "nature", "liebert", "informaworld", "karger", "pubmed central");
 
     public int compare(final Version v1, final Version v2) {
         int score1 = calculateHoldingsScore(v1);
@@ -47,7 +47,8 @@ public class EresourceVersionComparator implements Comparator<Version>, Serializ
             return score2 - score1;
         }
         return 1;
-        // return (v1.getId() < v2.getId() ? -1 : (v1.getId() == v2.getId() ? 0 : 1));
+        // return (v1.getId() < v2.getId() ? -1 : (v1.getId() == v2.getId() ? 0
+        // : 1));
     }
 
     /**

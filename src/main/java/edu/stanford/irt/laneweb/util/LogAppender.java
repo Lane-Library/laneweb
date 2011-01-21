@@ -21,7 +21,8 @@ public class LogAppender extends RollingFileAppender {
                 t = t.getCause();
             }
             if (t instanceof FileNotFoundException) {
-                LoggingEvent newEvent = new LoggingEvent(event.fqnOfCategoryClass, event.getLogger(), event.getLevel(), t.toString(), null);
+                LoggingEvent newEvent = new LoggingEvent(event.fqnOfCategoryClass, event.getLogger(), event.getLevel(),
+                        t.toString(), null);
                 super.doAppend(newEvent);
                 return;
             }

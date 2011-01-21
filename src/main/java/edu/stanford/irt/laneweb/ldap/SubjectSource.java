@@ -8,7 +8,8 @@ import javax.security.auth.login.LoginException;
 /**
  * Provides a Subject with Kerberos authentication.
  * 
- * @author ceyates $Id$
+ * @author ceyates $Id: SubjectSource.java 75982 2010-08-12 20:21:05Z
+ *         ceyates@stanford.edu $
  */
 public class SubjectSource {
 

@@ -33,13 +33,13 @@ public class XSLTProcessorImplTest {
 
     private XSLTProcessorImpl processor;
 
+    private SAXParser saxParser;
+
     private Source source;
 
     private SourceResolver sourceResolver;
 
     private Store store;
-
-    private SAXParser saxParser;
 
     @Before
     public void setUp() throws Exception {
@@ -47,13 +47,13 @@ public class XSLTProcessorImplTest {
         this.store = createMock(Store.class);
         this.saxParser = new SAXParser() {
 
-            public void parse(InputSource in, ContentHandler consumer) throws SAXException, IOException {
+            public void parse(final InputSource in, final ContentHandler consumer) throws SAXException, IOException {
                 XMLReader reader = XMLReaderFactory.createXMLReader();
                 reader.setContentHandler(consumer);
                 reader.parse(in);
             }
 
-            public void parse(InputSource in, ContentHandler contentHandler, LexicalHandler lexicalHandler)
+            public void parse(final InputSource in, final ContentHandler contentHandler, final LexicalHandler lexicalHandler)
                     throws SAXException, IOException {
             }
         };

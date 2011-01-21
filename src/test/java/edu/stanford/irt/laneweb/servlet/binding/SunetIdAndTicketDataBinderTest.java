@@ -22,12 +22,14 @@ import org.junit.Test;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.proxy.Ticket;
 
-
 public class SunetIdAndTicketDataBinderTest {
-    
+
     private SunetIdAndTicketDataBinder dataBinder;
-    private HttpServletRequest request;
+
     private Map<String, Object> model;
+
+    private HttpServletRequest request;
+
     private HttpSession session;
 
     @Before
