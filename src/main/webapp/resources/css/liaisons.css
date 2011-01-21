@@ -1,13 +1,17 @@
-.type2 .even, .type2 .odd {
-    margin-left:0;
-    list-style:none;
-    font-size:11px !important;
-    margin-bottom:5px;
-    padding:20px;
+.type2 {
+    border : 1px solid #EEE3C1;
+}
+.type2 .even,
+.type2 .odd {
+    margin-left : 0;
+    list-style : none;
+    font-size : 11px !important;
+    margin-bottom : 5px;
+    padding : 20px;
 }
 .type2 .odd {
-    background-color:#fcf9f2;
+    background-color : #fcf9f2;
 }
 .type2 .even {
-    background-color:#f6f3e5;
+    background-color : #f6f3e5;
 }
