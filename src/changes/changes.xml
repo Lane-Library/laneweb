@@ -7,7 +7,7 @@
         <title>Laneweb Releases</title>
     </properties>
     <body>
-        <release date="2011-01-24" version="1.11.13" description="1.11.14 bug fix release">
+        <release date="2011-01-24" version="1.11.14" description="1.11.14 bug fix release">
             <action date="2011-01-21" dev="ceyates" issue="46521" type="add">
                 Border for liaison's list
             </action>
