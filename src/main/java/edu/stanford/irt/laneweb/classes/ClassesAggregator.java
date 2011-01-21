@@ -46,6 +46,7 @@ public class ClassesAggregator extends ContentAggregator implements CacheablePro
         return new ClassesValidity();
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
     public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
             throws ProcessingException, SAXException, IOException {
