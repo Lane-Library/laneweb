@@ -5,7 +5,8 @@ import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-// $Id$
+// $Id: AbstractProxyLinkTransformer.java 80764 2010-12-15 21:47:39Z
+// ceyates@stanford.edu $
 public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
 
     private static final String EZPROXY_LINK = "http://laneproxy.stanford.edu/login?user=";
@@ -51,7 +52,7 @@ public abstract class AbstractProxyLinkTransformer extends AbstractTransformer {
         this.ticket = ModelUtil.getObject(this.model, Model.TICKET, Ticket.class);
         this.proxyLinks = ModelUtil.getObject(this.model, Model.PROXY_LINKS, Boolean.class, Boolean.FALSE);
         this.ipGroup = ModelUtil.getObject(this.model, Model.IPGROUP, IPGroup.class, IPGroup.OTHER);
-        this.basePath = this.parameterMap.containsKey(Model.BASE_PATH) ? this.parameterMap.get(Model.BASE_PATH)
-                : ModelUtil.getString(this.model, Model.BASE_PATH);
+        this.basePath = this.parameterMap.containsKey(Model.BASE_PATH) ? this.parameterMap.get(Model.BASE_PATH) : ModelUtil
+                .getString(this.model, Model.BASE_PATH);
     }
 }

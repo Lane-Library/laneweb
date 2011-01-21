@@ -13,13 +13,11 @@ import org.apache.cocoon.environment.http.HttpEnvironment;
 public class LanewebEnvironment extends HttpEnvironment {
 
     @SuppressWarnings("unchecked")
-    public LanewebEnvironment(final String uri, Map<String, Object> model, final HttpServletRequest req, final HttpServletResponse res, final ServletContext servletContext,
-            final Context context) throws IOException {
+    public LanewebEnvironment(final String uri, final Map<String, Object> model, final HttpServletRequest req,
+            final HttpServletResponse res, final ServletContext servletContext, final Context context) throws IOException {
         super(uri.substring(1), req, res, servletContext, context, null, null);
         model.putAll(this.objectModel);
         this.objectModel = model;
         super.setContentType(servletContext.getMimeType(uri));
     }
-    
-    
 }

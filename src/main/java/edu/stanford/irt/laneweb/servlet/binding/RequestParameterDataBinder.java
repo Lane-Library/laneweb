@@ -78,10 +78,10 @@ public class RequestParameterDataBinder implements DataBinder {
             } else if ("rid".equals(name)) {
                 model.put(Model.RESOURCE_ID, value);
             } else if (Model.SYNCHRONOUS.equals(name)) {
-                    model.put(Model.SYNCHRONOUS, value);
+                model.put(Model.SYNCHRONOUS, value);
             } else if (Model.TIMEOUT.equals(name)) {
                 model.put(Model.TIMEOUT, value);
-            }else if (Model.CLASS_ID.equals(name)) {
+            } else if (Model.CLASS_ID.equals(name)) {
                 model.put(Model.CLASS_ID, value);
             }
         }

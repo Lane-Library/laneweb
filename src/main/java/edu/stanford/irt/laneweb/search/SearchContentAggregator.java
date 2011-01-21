@@ -26,8 +26,8 @@ public class SearchContentAggregator extends ContentAggregator {
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void setup(final org.apache.cocoon.environment.SourceResolver resolver, final Map objectModel,
-            final String src, final Parameters par) throws ProcessingException, SAXException, IOException {
+    public void setup(final org.apache.cocoon.environment.SourceResolver resolver, final Map objectModel, final String src,
+            final Parameters par) throws ProcessingException, SAXException, IOException {
         addPart(src, "", "", "false", "");
         URL contentBase = (URL) objectModel.get(Model.CONTENT_BASE);
         String basePath = contentBase.getPath();

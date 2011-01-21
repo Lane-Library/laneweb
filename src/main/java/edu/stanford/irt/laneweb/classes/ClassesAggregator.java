@@ -24,27 +24,37 @@ import edu.stanford.irt.laneweb.cocoon.ContentAggregator;
 
 public class ClassesAggregator extends ContentAggregator implements CacheableProcessingComponent {
 
-    private XPath xpath = null;
+    private String detailClasseUrl = "http://onlineregistrationcenter.com/registerxml.asp?m=257&c=";
 
     private String src;
 
-    private String detailClasseUrl = "http://onlineregistrationcenter.com/registerxml.asp?m=257&c=";
+    private XPath xpath = null;
 
-    public ClassesAggregator(SAXParser saxParser) {
+    public ClassesAggregator(final SAXParser saxParser) {
         super(saxParser);
         super.rootElement = new Element("classes", "http://lane.stanford.edu/laneclasses", "");
-        xpath = XPathFactory.newInstance().newXPath();
+        this.xpath = XPathFactory.newInstance().newXPath();
     }
 
-    public void setup(SourceResolver resolver, Map objectModel, String src, Parameters par) throws ProcessingException,
-            SAXException, IOException {
+    @Override
+    public java.io.Serializable getKey() {
+        return this.src;
+    }
+
+    @Override
+    public SourceValidity getValidity() {
+        return new ClassesValidity();
+    }
+
+    @Override
+    public void setup(final SourceResolver resolver, final Map objectModel, final String src, final Parameters par)
+            throws ProcessingException, SAXException, IOException {
         this.resolver = resolver;
         this.src = src;
         Source source = resolver.resolveURI(src);
         InputSource domContent = new InputSource(source.getInputStream());
         try {
-            NodeList nodeList = (NodeList) this.xpath.evaluate("/eventlist/event/eventid", domContent,
-                    XPathConstants.NODESET);
+            NodeList nodeList = (NodeList) this.xpath.evaluate("/eventlist/event/eventid", domContent, XPathConstants.NODESET);
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Node node = nodeList.item(i);
                 String uri = this.detailClasseUrl.concat(node.getTextContent());
@@ -57,15 +67,5 @@ public class ClassesAggregator extends ContentAggregator implements CacheablePro
         } catch (XPathExpressionException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public java.io.Serializable getKey() {
-        return this.src;
-    }
-
-    @Override
-    public SourceValidity getValidity() {
-        return new ClassesValidity();
     }
 }

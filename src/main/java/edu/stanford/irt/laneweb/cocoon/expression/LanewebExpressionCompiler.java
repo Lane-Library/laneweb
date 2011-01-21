@@ -4,7 +4,8 @@ import org.apache.cocoon.el.Expression;
 import org.apache.cocoon.el.ExpressionCompiler;
 
 /**
- * @author ceyates $Id$
+ * @author ceyates $Id: LanewebExpressionCompiler.java 80185 2010-11-22
+ *         22:01:29Z ceyates@stanford.edu $
  */
 public class LanewebExpressionCompiler implements ExpressionCompiler {
 

@@ -8,17 +8,12 @@ import edu.stanford.irt.laneweb.cocoon.URLGenerator;
 
 public class ClassesGenerator extends URLGenerator implements CacheableProcessingComponent {
 
-    
-   
-    public ClassesGenerator(SAXParser saxParser){
-        super.setParser(saxParser);        
+    public ClassesGenerator(final SAXParser saxParser) {
+        super.setParser(saxParser);
     }
-    
-      
+
+    @Override
     public SourceValidity getValidity() {
         return new ClassesValidity();
     }
-
-
-    
 }

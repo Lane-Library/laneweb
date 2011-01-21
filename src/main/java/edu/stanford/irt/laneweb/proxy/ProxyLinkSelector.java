@@ -8,11 +8,10 @@ import org.apache.cocoon.selection.Selector;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-
 public class ProxyLinkSelector implements Selector {
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    public boolean select(String expression, Map objectModel, Parameters parameters) {
+    public boolean select(final String expression, final Map objectModel, final Parameters parameters) {
         return ModelUtil.getObject(objectModel, Model.PROXY_LINKS, Boolean.class, Boolean.FALSE).booleanValue();
     }
 }

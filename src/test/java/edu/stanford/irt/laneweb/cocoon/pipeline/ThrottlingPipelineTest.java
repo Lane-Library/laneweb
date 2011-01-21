@@ -50,8 +50,7 @@ public class ThrottlingPipelineTest {
     public void testProcessXMLPipelineEnvironment() throws ProcessingException, IOException, SAXException {
         expect(this.parameters.getParameter("request-key", null)).andReturn("foo");
         expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo"))
-                .andReturn(this.transformer);
+        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
         this.generator.generate();
         this.environment.setContentType("text/xml");
         replay(this.environment, this.beanFactory, this.generator, this.transformer, this.parameters);

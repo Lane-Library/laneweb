@@ -7,7 +7,8 @@ import edu.stanford.irt.laneweb.cocoon.AbstractAction;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-// $Id$
+// $Id: ProxyCredentialAction.java 80764 2010-12-15 21:47:39Z
+// ceyates@stanford.edu $
 public class ProxyCredentialAction extends AbstractAction {
 
     private static final String PROXY_REDIRECT_KEY = "proxy-redirect";
@@ -28,8 +29,8 @@ public class ProxyCredentialAction extends AbstractAction {
             if (ticket == null) {
                 throw new IllegalStateException("null ticket with sunetid");
             }
-            result.put(PROXY_REDIRECT_KEY, "http://laneproxy.stanford.edu/login?user=" + sunetid + "&ticket=" + ticket
-                    + "&" + queryString);
+            result.put(PROXY_REDIRECT_KEY, "http://laneproxy.stanford.edu/login?user=" + sunetid + "&ticket=" + ticket + "&"
+                    + queryString);
         }
         return result;
     }

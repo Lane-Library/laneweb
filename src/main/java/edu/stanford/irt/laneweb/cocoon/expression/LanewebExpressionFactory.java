@@ -6,7 +6,8 @@ import org.apache.cocoon.el.ExpressionException;
 import org.apache.cocoon.el.ExpressionFactory;
 
 /**
- * A simplified expression factory, only knows one language, ignores language parameter.
+ * A simplified expression factory, only knows one language, ignores language
+ * parameter.
  * 
  * @author ceyates $Id$
  */

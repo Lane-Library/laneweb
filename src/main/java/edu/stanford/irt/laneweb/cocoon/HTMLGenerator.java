@@ -11,8 +11,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * The neko html generator reads HTML from a source, converts it to XHTML and generates SAX Events. It uses the NekoHTML
- * library to do this.
+ * The neko html generator reads HTML from a source, converts it to XHTML and
+ * generates SAX Events. It uses the NekoHTML library to do this.
  */
 public class HTMLGenerator extends AbstractGenerator implements CacheableProcessingComponent {
 
@@ -36,31 +36,34 @@ public class HTMLGenerator extends AbstractGenerator implements CacheableProcess
         AbstractSAXParser parser = new HtmlSAXParser(conf);
         parser.setContentHandler(this.xmlConsumer);
         InputStream input = null;
-        try{
+        try {
             input = this.source.getInputStream();
             parser.parse(new InputSource(input));
-        }
-        finally{
-            if(input != null){
+        } finally {
+            if (input != null) {
                 input.close();
             }
         }
     }
 
     /**
-     * Generate the unique key. This key must be unique inside the space of this component. This method must be invoked
-     * before the generateValidity() method.
+     * Generate the unique key. This key must be unique inside the space of this
+     * component. This method must be invoked before the generateValidity()
+     * method.
      * 
-     * @return The generated key or <code>0</code> if the component is currently not cacheable.
+     * @return The generated key or <code>0</code> if the component is currently
+     *         not cacheable.
      */
     public java.io.Serializable getKey() {
         return this.source.getURI();
     }
 
     /**
-     * Generate the validity object. Before this method can be invoked the generateKey() method must be invoked.
+     * Generate the validity object. Before this method can be invoked the
+     * generateKey() method must be invoked.
      * 
-     * @return The generated validity object or <code>null</code> if the component is currently not cacheable.
+     * @return The generated validity object or <code>null</code> if the
+     *         component is currently not cacheable.
      */
     public SourceValidity getValidity() {
         return this.source.getValidity();

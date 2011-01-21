@@ -9,7 +9,8 @@ import edu.stanford.irt.search.Result;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
- * @author ceyates $Id$
+ * @author ceyates $Id: DescribeGenerator.java 80764 2010-12-15 21:47:39Z
+ *         ceyates@stanford.edu $
  */
 public class DescribeGenerator extends AbstractMetasearchGenerator {
 
@@ -34,7 +35,8 @@ public class DescribeGenerator extends AbstractMetasearchGenerator {
     }
 
     @Override
-    // because query might be null which throws an exception in the parent class.
+    // because query might be null which throws an exception in the parent
+    // class.
     protected void initialize() {
         this.query = this.parameterMap.get(Model.QUERY);
         this.engines = ModelUtil.getObject(this.model, Model.ENGINES, String[].class, NO_ENGINES);

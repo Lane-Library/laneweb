@@ -2,7 +2,7 @@ package edu.stanford.irt.laneweb.cocoon.source;
 
 public class SitemapSourceLocationModifier {
 
-    public String modify(String location) {
+    public String modify(final String location) {
         if (location.indexOf("cocoon://eresources") == 0) {
             return "eresources:" + location.substring("cocoon://eresources".length());
         }

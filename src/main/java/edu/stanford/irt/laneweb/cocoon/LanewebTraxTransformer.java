@@ -17,8 +17,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 
-public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent,
-        Transformer {
+public class LanewebTraxTransformer extends AbstractSitemapModelComponent implements CacheableProcessingComponent, Transformer {
 
     private Serializable cacheKey;
 
@@ -147,8 +146,8 @@ public class LanewebTraxTransformer extends AbstractSitemapModelComponent implem
         this.transformerHandler.startPrefixMapping(prefix, uri);
     }
 
-    public void unparsedEntityDecl(final String name, final String publicId, final String systemId,
-            final String notationName) throws SAXException {
+    public void unparsedEntityDecl(final String name, final String publicId, final String systemId, final String notationName)
+            throws SAXException {
         this.transformerHandler.unparsedEntityDecl(name, publicId, systemId, notationName);
     }
 

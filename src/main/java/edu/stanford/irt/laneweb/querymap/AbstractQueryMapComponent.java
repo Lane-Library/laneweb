@@ -46,8 +46,7 @@ public abstract class AbstractQueryMapComponent extends AbstractSitemapModelComp
         if (null == this.resourceMaps) {
             return this.queryMapper.getQueryMap(this.query);
         } else {
-            return this.queryMapper.getQueryMap(this.query, this.resourceMaps, this.descriptorWeights,
-                    this.abstractCount);
+            return this.queryMapper.getQueryMap(this.query, this.resourceMaps, this.descriptorWeights, this.abstractCount);
         }
     }
 

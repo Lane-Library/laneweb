@@ -5,8 +5,9 @@ import javax.naming.NamingException;
 import javax.naming.spi.InitialContextFactory;
 
 /**
- * Provides a JNDI initial context factory for the MockContext. $Id: MockInitialContextFactory.java 67820 2010-03-08
- * 19:49:36Z ceyates@stanford.edu $
+ * Provides a JNDI initial context factory for the MockContext. $Id:
+ * MockInitialContextFactory.java 67820 2010-03-08 19:49:36Z
+ * ceyates@stanford.edu $
  */
 public class MockInitialContextFactory implements InitialContextFactory {
 

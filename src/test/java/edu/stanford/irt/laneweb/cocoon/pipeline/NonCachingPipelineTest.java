@@ -63,8 +63,7 @@ public class NonCachingPipelineTest {
     @Test
     public void testAddTransformer() throws ProcessingException {
         expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo"))
-                .andReturn(this.transformer);
+        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
         replay(this.beanFactory, this.generator, this.transformer);
         this.pipeline.setGenerator("foo", null, null, null);
         this.pipeline.addTransformer("foo", null, null, null);
@@ -111,8 +110,7 @@ public class NonCachingPipelineTest {
     @Test
     public void testProcessEnvironmentXMLConsumer() throws ProcessingException, IOException, SAXException {
         expect(this.beanFactory.getBean("org.apache.cocoon.generation.Generator/foo")).andReturn(this.generator);
-        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo"))
-                .andReturn(this.transformer);
+        expect(this.beanFactory.getBean("org.apache.cocoon.transformation.Transformer/foo")).andReturn(this.transformer);
         this.generator.setConsumer(this.transformer);
         this.generator.generate();
         this.transformer.setConsumer(null);

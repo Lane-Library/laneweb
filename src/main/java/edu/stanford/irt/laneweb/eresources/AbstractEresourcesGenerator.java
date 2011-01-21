@@ -17,11 +17,11 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     protected String mesh;
 
+    protected int page;
+
     protected String subset;
 
     protected String type;
-    
-    protected int page;
 
     public void generate() throws SAXException {
         new PagingXMLizableEresourceList(getEresourceList(), this.page).toSAX(this.xmlConsumer);
@@ -38,8 +38,10 @@ public abstract class AbstractEresourcesGenerator extends AbstractGenerator {
 
     @Override
     protected void initialize() {
-        this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : ModelUtil.getString(this.model, Model.TYPE);
-        this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : ModelUtil.getString(this.model, Model.SUBSET);
+        this.type = this.parameterMap.containsKey(Model.TYPE) ? this.parameterMap.get(Model.TYPE) : ModelUtil.getString(this.model,
+                Model.TYPE);
+        this.subset = this.parameterMap.containsKey(Model.SUBSET) ? this.parameterMap.get(Model.SUBSET) : ModelUtil.getString(
+                this.model, Model.SUBSET);
         this.alpha = ModelUtil.getString(this.model, Model.ALPHA);
         if (this.alpha != null && this.alpha.length() > 1) {
             if ("all".equals(this.alpha)) {

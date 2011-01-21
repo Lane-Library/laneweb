@@ -12,17 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * This class contains the logic to determine which template is used. The highest priority is given to the template
- * request parameter. Next priority is a Map with regular expressions matching request URIs as the key with the
+ * This class contains the logic to determine which template is used. The
+ * highest priority is given to the template request parameter. Next priority is
+ * a Map with regular expressions matching request URIs as the key with the
  * associated template as the value. Finally, default value is provided.
  * 
- * @author ceyates $Id$
+ * @author ceyates $Id: TemplateChooser.java 80764 2010-12-15 21:47:39Z
+ *         ceyates@stanford.edu $
  */
 public class TemplateChooser {
 
     /** the name of the default template */
     private String defaultTemplate;
-    
+
     private List<String> existingTemplates;
 
     /** a Map used internally that contains the compiled regular expressions */
@@ -31,7 +33,7 @@ public class TemplateChooser {
     /** a Map of regular expressions associated with templates */
     private Map<String, String> templateMap = Collections.emptyMap();
 
-    public TemplateChooser(final String defaultTemplate, List<String> existingTemplates, final Map<String, String> templateMap) {
+    public TemplateChooser(final String defaultTemplate, final List<String> existingTemplates, final Map<String, String> templateMap) {
         if (null == defaultTemplate) {
             throw new IllegalArgumentException("null defaultTemplate");
         }
@@ -44,6 +46,10 @@ public class TemplateChooser {
         }
         this.defaultTemplate = defaultTemplate;
         this.existingTemplates = existingTemplates;
+    }
+
+    public String getDefaultTemplate() {
+        return this.defaultTemplate;
     }
 
     public String getTemplate(final HttpServletRequest request) {
@@ -61,9 +67,5 @@ public class TemplateChooser {
             }
         }
         return null == template ? this.defaultTemplate : template;
-    }
-
-    public String getDefaultTemplate() {
-        return this.defaultTemplate;
     }
 }

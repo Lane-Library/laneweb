@@ -7,12 +7,12 @@ import org.apache.excalibur.source.SourceValidity;
 
 public class ClassesValidity implements SourceValidity {
 
+    private static final long DELAY = 3600 * 1000;
+
     private static final long serialVersionUID = 1L;
-    private static final long DELAY = 3600*1000;
+
     private long expires;
-    
-    
-    
+
     public ClassesValidity() {
         this.expires = System.currentTimeMillis() + DELAY;
     }
@@ -24,12 +24,13 @@ public class ClassesValidity implements SourceValidity {
         }
         GregorianCalendar cal = new GregorianCalendar();
         int hour = cal.get(Calendar.HOUR_OF_DAY);
-        if(hour == 23)
+        if (hour == 23) {
             return SourceValidity.INVALID;
+        }
         return SourceValidity.VALID;
     }
 
-    public int isValid(SourceValidity newValidity){ 
+    public int isValid(final SourceValidity newValidity) {
         return SourceValidity.INVALID;
     }
 }

@@ -8,7 +8,8 @@ import org.apache.cocoon.el.ExpressionException;
 import org.apache.cocoon.el.objectmodel.ObjectModel;
 
 /**
- * @author ceyates $Id$
+ * @author ceyates $Id: LanewebExpression.java 80185 2010-11-22 22:01:29Z
+ *         ceyates@stanford.edu $
  */
 public class LanewebExpression implements Expression {
 

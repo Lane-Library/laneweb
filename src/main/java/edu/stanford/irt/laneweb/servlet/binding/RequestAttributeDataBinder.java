@@ -6,10 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-
 public class RequestAttributeDataBinder implements DataBinder {
 
-    public void bind(Map<String, Object> model, HttpServletRequest request) {
+    public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         model.put(Model.BASE_PATH, request.getAttribute(Model.BASE_PATH));
         model.put(Model.CONTENT_BASE, request.getAttribute(Model.CONTENT_BASE));
     }

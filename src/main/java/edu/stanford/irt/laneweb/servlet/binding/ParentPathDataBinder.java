@@ -6,10 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import edu.stanford.irt.laneweb.model.Model;
 
-
 public class ParentPathDataBinder implements DataBinder {
 
-    public void bind(Map<String, Object> model, HttpServletRequest request) {
+    public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String basePath = (String) model.get(Model.BASE_PATH);
         String path = request.getRequestURI().substring(basePath.length());
         if (path.indexOf(".html") > -1 && path.indexOf('-') > -1) {

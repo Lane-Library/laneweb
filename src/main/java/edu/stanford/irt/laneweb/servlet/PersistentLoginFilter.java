@@ -12,15 +12,36 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 public class PersistentLoginFilter implements Filter {
 
     /**
-     * this codec codes and decodes the cookie value using sunet id, useragent and time of creation
+     * this codec codes and decodes the cookie value using sunet id, useragent
+     * and time of creation
      */
     private SunetIdCookieCodec codec = new SunetIdCookieCodec();
-    
+
     private SunetIdSource sunetIdSource = new SunetIdSource();
+
+    public void destroy() {
+    }
+
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException,
+            ServletException {
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        if (Boolean.parseBoolean(request.getParameter(("pl")))) {
+            HttpServletRequest httpRequest = (HttpServletRequest) request;
+            String sunetid = this.sunetIdSource.getSunetid(httpRequest);
+            if (sunetid != null) {
+                setLoginCookie(sunetid, httpRequest, httpResponse);
+            }
+        } else if (Boolean.parseBoolean(request.getParameter("remove-pl"))) {
+            removeLoginCookie(httpResponse);
+        }
+        chain.doFilter(request, response);
+    }
+
+    public void init(final FilterConfig filterConfig) throws ServletException {
+    }
 
     /**
      * set the lane-user cookie max age to zero.
@@ -41,8 +62,7 @@ public class PersistentLoginFilter implements Filter {
      * @param request
      * @param response
      */
-    private void setLoginCookie(final String sunetid, final HttpServletRequest request,
-            final HttpServletResponse response) {
+    private void setLoginCookie(final String sunetid, final HttpServletRequest request, final HttpServletResponse response) {
         String userAgent = request.getHeader("User-Agent");
         if (null != userAgent) {
             PersistentLoginToken token = this.codec.createLoginToken(sunetid, userAgent.hashCode());
@@ -52,25 +72,5 @@ public class PersistentLoginFilter implements Filter {
                                                  // weeks
             response.addCookie(cookie);
         }
-    }
-
-    public void init(FilterConfig filterConfig) throws ServletException {
-    }
-
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
-        if (Boolean.parseBoolean(request.getParameter(("pl")))) {
-            HttpServletRequest httpRequest = (HttpServletRequest) request;
-            String sunetid = this.sunetIdSource.getSunetid(httpRequest);
-            if (sunetid != null) {
-                setLoginCookie(sunetid, httpRequest, httpResponse);
-            }
-        } else if (Boolean.parseBoolean(request.getParameter("remove-pl"))) {
-            removeLoginCookie(httpResponse);
-        }
-        chain.doFilter(request, response);
-    }
-
-    public void destroy() {
     }
 }

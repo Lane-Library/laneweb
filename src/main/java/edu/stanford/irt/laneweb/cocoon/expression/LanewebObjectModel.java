@@ -2,15 +2,18 @@ package edu.stanford.irt.laneweb.cocoon.expression;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.cocoon.el.objectmodel.ObjectModel;
 import org.apache.cocoon.el.objectmodel.ObjectModelProvider;
 import org.apache.commons.collections.MultiMap;
 
 /**
- * A simplified version of the Cocoon ObjectModel, doesn't keep track of a bunch of stuff. But it works
+ * A simplified version of the Cocoon ObjectModel, doesn't keep track of a bunch
+ * of stuff. But it works
  * 
- * @author ceyates $Id$
+ * @author ceyates $Id: LanewebObjectModel.java 80185 2010-11-22 22:01:29Z
+ *         ceyates@stanford.edu $
  */
 @SuppressWarnings({ "rawtypes", "serial" })
 public class LanewebObjectModel extends HashMap implements ObjectModel {

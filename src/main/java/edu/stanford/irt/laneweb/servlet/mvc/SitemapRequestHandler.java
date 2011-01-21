@@ -25,16 +25,16 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
 
     private Context context;
 
+    private DataBinder dataBinder;
+
     private Set<String> methodsNotAllowed = Collections.emptySet();
 
     private Processor processor;
 
     private ServletContext servletContext;
 
-    private DataBinder dataBinder;
-
-    public void handleRequest(final HttpServletRequest request, final HttpServletResponse response)
-            throws ServletException, IOException {
+    public void handleRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException,
+            IOException {
         if (this.methodsNotAllowed.contains(request.getMethod())) {
             response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             return;
@@ -45,6 +45,10 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         String basePath = (String) request.getAttribute(Model.BASE_PATH);
         String sitemapURI = requestURI.substring(basePath.length());
         process(sitemapURI, model, request, response);
+    }
+
+    public void setDataBinder(final DataBinder dataBinder) {
+        this.dataBinder = dataBinder;
     }
 
     public void setMethodsNotAllowed(final Set<String> methodsNotAllowed) {
@@ -63,14 +67,11 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
         this.context = new HttpContext(servletContext);
     }
 
-    public void setDataBinder(DataBinder dataBinder) {
-        this.dataBinder = dataBinder;
-    }
+    protected abstract Map<String, Object> getModel();
 
-    protected void process(String sitemapURI, Map<String, Object> model, final HttpServletRequest request,
+    protected void process(final String sitemapURI, final Map<String, Object> model, final HttpServletRequest request,
             final HttpServletResponse response) throws IOException, ServletException {
-        Environment environment = new LanewebEnvironment(sitemapURI, model, request, response, this.servletContext,
-                this.context);
+        Environment environment = new LanewebEnvironment(sitemapURI, model, request, response, this.servletContext, this.context);
         try {
             EnvironmentHelper.enterProcessor(this.processor, environment);
             this.processor.process(environment);
@@ -81,6 +82,4 @@ public abstract class SitemapRequestHandler implements HttpRequestHandler {
             EnvironmentHelper.leaveProcessor();
         }
     }
-
-    protected abstract Map<String, Object> getModel();
 }

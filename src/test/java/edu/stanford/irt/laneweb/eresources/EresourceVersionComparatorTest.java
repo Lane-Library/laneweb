@@ -19,13 +19,13 @@ import edu.stanford.irt.eresources.impl.VersionImpl;
  */
 public class EresourceVersionComparatorTest {
 
-    Version v1;
-
-    Version v2;
+    EresourceVersionComparator comparator;
 
     Link link;
 
-    EresourceVersionComparator comparator;
+    Version v1;
+
+    Version v2;
 
     /**
      * @throws java.lang.Exception
@@ -51,22 +51,20 @@ public class EresourceVersionComparatorTest {
     }
 
     @Test
-    public void testCompareOpenDates() {
-        this.v1.setDates("1999-");
-        this.v2.setDates("1999-2000.");
-        assertTrue(this.comparator.compare(this.v1, this.v2) < 0);
-        this.v1.setDates("1999.");
-        this.v2.setDates("1999-");
-        assertTrue(this.comparator.compare(this.v1, this.v2) > 0);
-    }
-
-    @Test
     public void testCompareClosedDates() {
         this.v1.setDates("1999-2000.");
         this.v2.setDates("1999-2000.");
         assertTrue(this.comparator.compare(this.v1, this.v2) == 1);
         this.v1.setDates("1999-2010.");
         this.v2.setDates("1999-2000.");
+        assertTrue(this.comparator.compare(this.v1, this.v2) < 0);
+    }
+
+    @Test
+    public void testCompareDelayedHoldings() {
+        this.v1.setSummaryHoldings("v. 1-");
+        this.v2.setSummaryHoldings("v. 1-");
+        this.v2.setDescription("foo delayed bar");
         assertTrue(this.comparator.compare(this.v1, this.v2) < 0);
     }
 
@@ -81,14 +79,6 @@ public class EresourceVersionComparatorTest {
     }
 
     @Test
-    public void testCompareDelayedHoldings() {
-        this.v1.setSummaryHoldings("v. 1-");
-        this.v2.setSummaryHoldings("v. 1-");
-        this.v2.setDescription("foo delayed bar");
-        assertTrue(this.comparator.compare(this.v1, this.v2) < 0);
-    }
-
-    @Test
     public void testCompareImpactFactorHoldings() {
         this.v1.setSummaryHoldings("v. 1.");
         this.v2.setSummaryHoldings("v. 1.");
@@ -97,6 +87,16 @@ public class EresourceVersionComparatorTest {
         this.link.setLabel("Impact Factor");
         this.v2.addLink(this.link);
         assertTrue(this.comparator.compare(this.v1, this.v2) < 0);
+    }
+
+    @Test
+    public void testCompareOpenDates() {
+        this.v1.setDates("1999-");
+        this.v2.setDates("1999-2000.");
+        assertTrue(this.comparator.compare(this.v1, this.v2) < 0);
+        this.v1.setDates("1999.");
+        this.v2.setDates("1999-");
+        assertTrue(this.comparator.compare(this.v1, this.v2) > 0);
     }
 
     @Test

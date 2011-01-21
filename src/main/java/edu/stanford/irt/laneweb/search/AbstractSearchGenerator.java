@@ -6,9 +6,9 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public abstract class AbstractSearchGenerator extends AbstractGenerator {
 
-    protected String query;
-    
     protected int page;
+
+    protected String query;
 
     @Override
     protected void initialize() {

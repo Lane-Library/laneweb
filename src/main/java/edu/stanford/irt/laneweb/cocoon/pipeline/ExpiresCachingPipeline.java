@@ -64,7 +64,8 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
 
     /*
      * (non-Javadoc)
-     * @seeorg.apache.cocoon.components.pipeline.ProcessingPipeline# getKeyForEventPipeline()
+     * @seeorg.apache.cocoon.components.pipeline.ProcessingPipeline#
+     * getKeyForEventPipeline()
      */
     @Override
     public String getKeyForEventPipeline() {
@@ -75,8 +76,10 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
     }
 
     /**
-     * Return valid validity objects for the event pipeline If the "event pipeline" (= the complete pipeline without the
-     * serializer) is cacheable and valid, return all validity objects. Otherwise return <code>null</code>
+     * Return valid validity objects for the event pipeline If the
+     * "event pipeline" (= the complete pipeline without the serializer) is
+     * cacheable and valid, return all validity objects. Otherwise return
+     * <code>null</code>
      */
     @Override
     public SourceValidity getValidityForEventPipeline() {
@@ -201,8 +204,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                     environment.setContentLength(cachedData.length);
                     os.write(cachedData);
                 } else {
-                    final CachingOutputStream os = new CachingOutputStream(
-                            environment.getOutputStream(this.outputBufferSize));
+                    final CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(this.outputBufferSize));
                     // set the output stream
                     this.reader.setOutputStream(os);
                     this.reader.generate();
@@ -268,8 +270,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
                         environment.setContentLength(cachedData.length);
                         os.write(cachedData);
                     } else {
-                        CachingOutputStream os = new CachingOutputStream(
-                                environment.getOutputStream(this.outputBufferSize));
+                        CachingOutputStream os = new CachingOutputStream(environment.getOutputStream(this.outputBufferSize));
                         // set the output stream
                         this.serializer.setOutputStream(os);
                         this.generator.generate();

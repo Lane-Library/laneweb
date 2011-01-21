@@ -24,7 +24,6 @@ public class LDAPData {
 
     @Override
     public String toString() {
-        return new StringBuilder("univid=").append(this.univId)
-                .append(",displayname=").append(this.name).toString();
+        return new StringBuilder("univid=").append(this.univId).append(",displayname=").append(this.name).toString();
     }
 }

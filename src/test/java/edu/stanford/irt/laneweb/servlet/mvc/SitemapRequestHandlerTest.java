@@ -25,6 +25,8 @@ import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public class SitemapRequestHandlerTest {
 
+    private DataBinder dataBinder;
+
     private SitemapRequestHandler handler;
 
     private Processor processor;
@@ -34,17 +36,16 @@ public class SitemapRequestHandlerTest {
     private HttpServletResponse response;
 
     private ServletContext servletContext;
-    
-    private DataBinder dataBinder;
 
     @Before
     public void setUp() throws Exception {
-        this.handler = new SitemapRequestHandler(){
+        this.handler = new SitemapRequestHandler() {
 
             @Override
             protected Map<String, Object> getModel() {
                 return new HashMap<String, Object>();
-            }};
+            }
+        };
         this.request = createMock(HttpServletRequest.class);
         this.response = createMock(HttpServletResponse.class);
         this.processor = createMock(Processor.class);

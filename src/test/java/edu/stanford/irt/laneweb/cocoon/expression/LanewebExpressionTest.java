@@ -15,7 +15,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /*
- * $Id$
+ * $Id: LanewebExpressionTest.java 80764 2010-12-15 21:47:39Z
+ * ceyates@stanford.edu $
  */
 public class LanewebExpressionTest {
 

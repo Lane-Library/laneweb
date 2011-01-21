@@ -10,13 +10,13 @@ import org.apache.cocoon.objectmodel.helper.ParametersMap;
 
 public abstract class AbstractAction implements Action {
 
-    protected Map<String, String> parametersMap;
-
     protected Map<String, Object> model;
 
+    protected Map<String, String> parametersMap;
+
     @SuppressWarnings({ "unchecked", "rawtypes" })
-    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel,
-            final String source, final Parameters parameters) throws Exception {
+    public Map act(final Redirector redirector, final SourceResolver resolver, final Map objectModel, final String source,
+            final Parameters parameters) throws Exception {
         this.parametersMap = new ParametersMap(parameters);
         this.model = objectModel;
         return doAct();

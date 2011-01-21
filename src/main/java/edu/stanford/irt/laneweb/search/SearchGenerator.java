@@ -10,7 +10,8 @@ import edu.stanford.irt.search.impl.DefaultResult;
 import edu.stanford.irt.search.impl.SimpleQuery;
 
 /**
- * @author ceyates $Id$
+ * @author ceyates $Id: SearchGenerator.java 80764 2010-12-15 21:47:39Z
+ *         ceyates@stanford.edu $
  */
 public class SearchGenerator extends AbstractMetasearchGenerator {
 
@@ -48,7 +49,7 @@ public class SearchGenerator extends AbstractMetasearchGenerator {
                 synchronous = Boolean.parseBoolean(this.synchronous);
             }
             final SimpleQuery query = new SimpleQuery(this.query);
-            result =  this.metaSearchManager.search(query, timeout, engines, synchronous);
+            result = this.metaSearchManager.search(query, timeout, engines, synchronous);
             if (null != this.wait) {
                 long wait = 0;
                 try {

@@ -15,31 +15,22 @@ import org.apache.excalibur.source.SourceFactory;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
 
-
 public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAware {
 
-    // This part is necessary because EnvironmentHelper constructor uses a jndi:/localhost/ url string
-    private Pattern tomcatURLPattern;
-    
-    private Map<String, SourceFactory> sourceFactories = Collections.emptyMap();
-    
-    private ResourceLoader resourceLoader;
-    
     private SitemapSourceLocationModifier locationModifier = new SitemapSourceLocationModifier();
 
-    public void setResourceLoader(ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
-    }
-    
-    public void setSourceFactories(Map<String, SourceFactory> sourceFactories) {
-        this.sourceFactories = sourceFactories;
-    }
-    
-    public void setServletContext(ServletContext servletContext) {
-        this.tomcatURLPattern = Pattern.compile("jndi:/localhost" + servletContext.getContextPath() + "(/.*)");
+    private ResourceLoader resourceLoader;
+
+    private Map<String, SourceFactory> sourceFactories = Collections.emptyMap();
+
+    // This part is necessary because EnvironmentHelper constructor uses a
+    // jndi:/localhost/ url string
+    private Pattern tomcatURLPattern;
+
+    public void release(final Source source) {
     }
 
-    public Source resolveURI(String location) throws MalformedURLException, IOException {
+    public Source resolveURI(final String location) throws MalformedURLException, IOException {
         String modifiedLocation = location;
         Matcher matcher = this.tomcatURLPattern.matcher(location);
         if (matcher.matches()) {
@@ -59,11 +50,21 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
     }
 
     @SuppressWarnings("rawtypes")
-    public Source resolveURI(String location, String base, Map parameters) throws MalformedURLException, IOException {
-        //TODO: really implement this . . .
+    public Source resolveURI(final String location, final String base, final Map parameters) throws MalformedURLException,
+            IOException {
+        // TODO: really implement this . . .
         return resolveURI(location);
     }
 
-    public void release(Source source) {
+    public void setResourceLoader(final ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
+
+    public void setServletContext(final ServletContext servletContext) {
+        this.tomcatURLPattern = Pattern.compile("jndi:/localhost" + servletContext.getContextPath() + "(/.*)");
+    }
+
+    public void setSourceFactories(final Map<String, SourceFactory> sourceFactories) {
+        this.sourceFactories = sourceFactories;
     }
 }

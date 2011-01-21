@@ -15,24 +15,20 @@ import edu.stanford.irt.suggest.QueryNormalizer;
 
 public abstract class AbstractSuggestCollectionManager extends CollectionManagerImpl {
 
+    protected QueryNormalizer queryNormalizer = new QueryNormalizer();
+
     @Override
-    public Collection<Eresource> search(String query) {
+    public Collection<Eresource> search(final String query) {
         Collection<String> params = searchStringToParams(query);
         return doSearch(getSearchSQL(), params);
     }
 
     @Override
-    public Collection<Eresource> searchType(String type, String query) {
+    public Collection<Eresource> searchType(final String type, final String query) {
         Collection<String> params = searchStringToParams(query);
         params.add(type);
         return doSearch(getSearchTypeSQL(), params);
     }
-    
-    protected QueryNormalizer queryNormalizer = new QueryNormalizer();
-    
-    protected abstract String getSearchSQL();
-    
-    protected abstract String getSearchTypeSQL();
 
     private Collection<Eresource> doSearch(final String sql, final Collection<String> params) {
         Connection conn = null;
@@ -75,6 +71,10 @@ public abstract class AbstractSuggestCollectionManager extends CollectionManager
         }
         return suggestions;
     }
-    
+
+    protected abstract String getSearchSQL();
+
+    protected abstract String getSearchTypeSQL();
+
     protected abstract Collection<String> searchStringToParams(String query);
 }

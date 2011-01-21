@@ -101,15 +101,16 @@ public class CachingPipeline extends NonCachingPipeline {
      * Add a transformer.
      */
     @Override
-    public void addTransformer(final String role, final String source, final Parameters param,
-            final Parameters hintParam) throws ProcessingException {
+    public void addTransformer(final String role, final String source, final Parameters param, final Parameters hintParam)
+            throws ProcessingException {
         super.addTransformer(role, source, param, hintParam);
         this.transformerRoles.add(role);
     }
 
     /*
      * (non-Javadoc)
-     * @seeorg.apache.cocoon.components.pipeline.ProcessingPipeline# getKeyForEventPipeline()
+     * @seeorg.apache.cocoon.components.pipeline.ProcessingPipeline#
+     * getKeyForEventPipeline()
      */
     @Override
     public String getKeyForEventPipeline() {
@@ -128,8 +129,9 @@ public class CachingPipeline extends NonCachingPipeline {
     }
 
     /**
-     * Return valid validity objects for the event pipeline. If the event pipeline (the complete pipeline without the
-     * serializer) is cacheable and valid, return all validity objects. Otherwise, return <code>null</code>.
+     * Return valid validity objects for the event pipeline. If the event
+     * pipeline (the complete pipeline without the serializer) is cacheable and
+     * valid, return all validity objects. Otherwise, return <code>null</code>.
      */
     @Override
     public SourceValidity getValidityForEventPipeline() {
@@ -197,8 +199,8 @@ public class CachingPipeline extends NonCachingPipeline {
      * Set the serializer.
      */
     @Override
-    public void setSerializer(final String role, final String source, final Parameters param,
-            final Parameters hintParam, final String mimeType) throws ProcessingException {
+    public void setSerializer(final String role, final String source, final Parameters param, final Parameters hintParam,
+            final String mimeType) throws ProcessingException {
         super.setSerializer(role, source, param, hintParam, mimeType);
         this.serializerRole = role;
     }
@@ -212,12 +214,11 @@ public class CachingPipeline extends NonCachingPipeline {
             Long expiresObj = (Long) environment.getObjectModel().get(ObjectModelHelper.EXPIRES_OBJECT);
             CachedResponse response;
             if (this.cacheCompleteResponse) {
-                response = new CachedResponse(this.toCacheSourceValidities, ((CachingOutputStream) os).getContent(),
-                        expiresObj);
+                response = new CachedResponse(this.toCacheSourceValidities, ((CachingOutputStream) os).getContent(), expiresObj);
                 response.setContentType(environment.getContentType());
             } else {
-                response = new CachedResponse(this.toCacheSourceValidities,
-                        (byte[]) this.xmlSerializer.getSAXFragment(), expiresObj);
+                response = new CachedResponse(this.toCacheSourceValidities, (byte[]) this.xmlSerializer.getSAXFragment(),
+                        expiresObj);
             }
             this.cache.store(this.toCacheKey, response);
             return response;
@@ -229,12 +230,12 @@ public class CachingPipeline extends NonCachingPipeline {
      * Connect the pipeline.
      */
     protected void connectCachingPipeline(final Environment environment) throws ProcessingException {
-        //TODO:make sure these modifications don't break anything:
+        // TODO:make sure these modifications don't break anything:
         XMLByteStreamCompiler localXMLSerializer = null;
-//        if (!this.cacheCompleteResponse) {
-//            this.xmlSerializer = new XMLByteStreamCompiler();
-//            localXMLSerializer = this.xmlSerializer;
-//        }
+        // if (!this.cacheCompleteResponse) {
+        // this.xmlSerializer = new XMLByteStreamCompiler();
+        // localXMLSerializer = this.xmlSerializer;
+        // }
         if (this.cachedResponse == null) {
             this.xmlSerializer = new XMLByteStreamCompiler();
             localXMLSerializer = this.xmlSerializer;
@@ -271,8 +272,7 @@ public class CachingPipeline extends NonCachingPipeline {
             while (itt.hasNext()) {
                 next = itt.next();
                 if (cacheableTransformerCount >= this.firstProcessedTransformerIndex) {
-                    if (localXMLSerializer != null
-                            && cacheableTransformerCount == this.firstNotCacheableTransformerIndex) {
+                    if (localXMLSerializer != null && cacheableTransformerCount == this.firstNotCacheableTransformerIndex) {
                         next = new XMLTeePipe(next, localXMLSerializer);
                         localXMLSerializer = null;
                     }
@@ -282,10 +282,10 @@ public class CachingPipeline extends NonCachingPipeline {
                 cacheableTransformerCount++;
             }
             next = super.lastConsumer;
-//            if (localXMLSerializer != null) {
-//                next = new XMLTeePipe(next, localXMLSerializer);
-//                localXMLSerializer = null;
-//            }
+            // if (localXMLSerializer != null) {
+            // next = new XMLTeePipe(next, localXMLSerializer);
+            // localXMLSerializer = null;
+            // }
             connect(environment, prev, next);
         }
     }
@@ -323,8 +323,7 @@ public class CachingPipeline extends NonCachingPipeline {
         }
         if (key != null) {
             this.toCacheKey = new PipelineCacheKey();
-            this.toCacheKey.addKey(newComponentCacheKey(ComponentCacheKey.ComponentType_Generator, this.generatorRole,
-                    key));
+            this.toCacheKey.addKey(newComponentCacheKey(ComponentCacheKey.ComponentType_Generator, this.generatorRole, key));
             // now testing transformers
             final int transformerSize = super.transformers.size();
             boolean continueTest = true;
@@ -350,8 +349,8 @@ public class CachingPipeline extends NonCachingPipeline {
                     key = ((CacheableProcessingComponent) this.serializer).getKey();
                 }
                 if (key != null) {
-                    this.toCacheKey.addKey(newComponentCacheKey(ComponentCacheKey.ComponentType_Serializer,
-                            this.serializerRole, key));
+                    this.toCacheKey.addKey(newComponentCacheKey(ComponentCacheKey.ComponentType_Serializer, this.serializerRole,
+                            key));
                     this.cacheCompleteResponse = true;
                 }
             }
@@ -447,8 +446,7 @@ public class CachingPipeline extends NonCachingPipeline {
                             }
                             if (valid == SourceValidity.VALID) {
                                 if (LOGGER.isDebugEnabled()) {
-                                    LOGGER.debug("processReader: using valid cached content for '"
-                                            + environment.getURI() + "'.");
+                                    LOGGER.debug("processReader: using valid cached content for '" + environment.getURI() + "'.");
                                 }
                                 byte[] response = cachedObject.getResponse();
                                 if (response.length > 0) {
@@ -464,8 +462,7 @@ public class CachingPipeline extends NonCachingPipeline {
                                 }
                             } else {
                                 if (LOGGER.isDebugEnabled()) {
-                                    LOGGER.debug("processReader: cached content is invalid for '"
-                                            + environment.getURI() + "'.");
+                                    LOGGER.debug("processReader: cached content is invalid for '" + environment.getURI() + "'.");
                                 }
                                 // remove invalid cached object
                                 this.cache.remove(pcKey);
@@ -485,8 +482,7 @@ public class CachingPipeline extends NonCachingPipeline {
                 try {
                     if (pcKey != null) {
                         if (LOGGER.isDebugEnabled()) {
-                            LOGGER.debug("processReader: caching content for further requests of '"
-                                    + environment.getURI() + "'.");
+                            LOGGER.debug("processReader: caching content for further requests of '" + environment.getURI() + "'.");
                         }
                         generateLock(pcKey);
                         if (readerValidity == null) {
@@ -566,8 +562,8 @@ public class CachingPipeline extends NonCachingPipeline {
         } else {
             setMimeTypeForSerializer(environment);
             if (LOGGER.isDebugEnabled() && this.toCacheKey != null) {
-                LOGGER.debug("processXMLPipeline: caching content for further" + " requests of '"
-                        + environment.getURI() + "' using key " + this.toCacheKey);
+                LOGGER.debug("processXMLPipeline: caching content for further" + " requests of '" + environment.getURI()
+                        + "' using key " + this.toCacheKey);
             }
             generateLock(this.toCacheKey);
             try {
@@ -671,7 +667,8 @@ public class CachingPipeline extends NonCachingPipeline {
     }
 
     /**
-     * Setup the evenet pipeline. The components of the pipeline are checked if they are Cacheable.
+     * Setup the evenet pipeline. The components of the pipeline are checked if
+     * they are Cacheable.
      */
     @Override
     protected void setupPipeline(final Environment environment) throws ProcessingException {
@@ -734,7 +731,8 @@ public class CachingPipeline extends NonCachingPipeline {
     }
 
     /**
-     * Calculate the key that can be used to get something from the cache, and handle expires properly.
+     * Calculate the key that can be used to get something from the cache, and
+     * handle expires properly.
      */
     protected void validatePipeline(final Environment environment) throws ProcessingException {
         this.completeResponseIsCached = this.cacheCompleteResponse;
@@ -747,8 +745,7 @@ public class CachingPipeline extends NonCachingPipeline {
             // now test validity
             if (response != null) {
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Found cached response for '" + environment.getURI() + "' using key: "
-                            + this.fromCacheKey);
+                    LOGGER.debug("Found cached response for '" + environment.getURI() + "' using key: " + this.fromCacheKey);
                 }
                 boolean responseIsValid = true;
                 boolean responseIsUsable = true;
@@ -769,8 +766,7 @@ public class CachingPipeline extends NonCachingPipeline {
                         return;
                     } else {
                         if (LOGGER.isDebugEnabled()) {
-                            LOGGER.debug("Expires time has expired for " + environment.getURI()
-                                    + ", regenerating content.");
+                            LOGGER.debug("Expires time has expired for " + environment.getURI() + ", regenerating content.");
                         }
                         // If an expires parameter was provided, use it. If this
                         // parameter is not available
@@ -822,8 +818,7 @@ public class CachingPipeline extends NonCachingPipeline {
                         if (validity == null) {
                             responseIsUsable = false;
                             if (LOGGER.isDebugEnabled()) {
-                                LOGGER.debug("validatePipeline: responseIsUsable is false, valid=" + valid
-                                        + " at index " + i);
+                                LOGGER.debug("validatePipeline: responseIsUsable is false, valid=" + valid + " at index " + i);
                             }
                         } else {
                             if (LOGGER.isDebugEnabled()) {
@@ -885,8 +880,7 @@ public class CachingPipeline extends NonCachingPipeline {
                 }
                 // no cached response found
                 if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Cached response not found for '" + environment.getURI() + "' using key: "
-                            + this.fromCacheKey);
+                    LOGGER.debug("Cached response not found for '" + environment.getURI() + "' using key: " + this.fromCacheKey);
                 }
                 finished = setupFromCacheKey();
                 this.completeResponseIsCached = false;

@@ -13,14 +13,21 @@ import org.xml.sax.SAXException;
 
 public class TextNodeParsingTransformer extends AbstractTransformer {
 
-    private StringBuilder content = new StringBuilder();
+    private static class HtmlSAXParser extends AbstractSAXParser {
 
-    private boolean inElement = false;
+        protected HtmlSAXParser(final HTMLConfiguration conf) {
+            super(conf);
+        }
+    }
+
+    private StringBuilder content = new StringBuilder();
 
     private final String elementName = "event_description";
 
+    private boolean inElement = false;
+
     private final String namespace = "http://www.w3.org/1999/xhtml";
-    
+
     AbstractSAXParser htmlParser;
 
     public TextNodeParsingTransformer() {
@@ -29,38 +36,24 @@ public class TextNodeParsingTransformer extends AbstractTransformer {
         conf.setProperty("http://cyberneko.org/html/properties/names/elems", "lower");
         conf.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
         conf.setFeature("http://cyberneko.org/html/features/insert-namespaces", true);
-        conf.setProperty("http://cyberneko.org/html/properties/namespaces-uri", namespace); 
+        conf.setProperty("http://cyberneko.org/html/properties/namespaces-uri", this.namespace);
         this.htmlParser = new HtmlSAXParser(conf);
-    }
-    
-    public void startDocument()
-    throws SAXException {
-        this.xmlConsumer.startDocument();
-    }
-
-
-    @Override
-    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
-            throws SAXException {
-        this.xmlConsumer.startElement(uri, localName, qName, atts);
-        if (this.elementName.equals(qName)) 
-            inElement = true;
     }
 
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
-        if (inElement)
-            content.append(ch, start, length);
-        else
+        if (this.inElement) {
+            this.content.append(ch, start, length);
+        } else {
             this.xmlConsumer.characters(ch, start, length);
+        }
     }
 
-        
     @Override
     public void endElement(final String uri, final String localName, final String qName) throws SAXException {
-        if(this.elementName.equals(qName)) {
-            inElement = false;
-            StringReader stringReader = new StringReader(content.toString());
+        if (this.elementName.equals(qName)) {
+            this.inElement = false;
+            StringReader stringReader = new StringReader(this.content.toString());
             InputSource inputSource = new InputSource(stringReader);
             XMLConsumer xmlConsumer = new ContentHandlerWrapper(this.xmlConsumer) {
 
@@ -70,13 +63,12 @@ public class TextNodeParsingTransformer extends AbstractTransformer {
                 }
 
                 @Override
+                public void processingInstruction(final String target, final String data) {
+                }
+
+                @Override
                 public void startDocument() {
                 }
-                
-                @Override
-                public void processingInstruction(String target, String data){
-                }
-                
             };
             try {
                 this.htmlParser.setContentHandler(xmlConsumer);
@@ -89,21 +81,24 @@ public class TextNodeParsingTransformer extends AbstractTransformer {
         this.xmlConsumer.endElement(uri, localName, qName);
     }
 
-    
-    private static class HtmlSAXParser extends AbstractSAXParser {
-        protected HtmlSAXParser(final HTMLConfiguration conf) {
-            super(conf);
-        }
-    }
-
-
-    
     /**
      * @return the elementname
      */
-    public  String getElementName() {
-        return elementName;
+    public String getElementName() {
+        return this.elementName;
     }
 
-    
- }
+    @Override
+    public void startDocument() throws SAXException {
+        this.xmlConsumer.startDocument();
+    }
+
+    @Override
+    public void startElement(final String uri, final String localName, final String qName, final Attributes atts)
+            throws SAXException {
+        this.xmlConsumer.startElement(uri, localName, qName, atts);
+        if (this.elementName.equals(qName)) {
+            this.inElement = true;
+        }
+    }
+}

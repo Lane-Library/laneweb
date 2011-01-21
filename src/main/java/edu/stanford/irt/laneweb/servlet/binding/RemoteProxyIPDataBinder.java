@@ -9,8 +9,9 @@ import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 import edu.stanford.irt.laneweb.model.Model;
 
 /**
- * This DataBinder handles Model attributes that are related to the remote ip address combined here in order to
- * accommodate a change in the client's ip during a session
+ * This DataBinder handles Model attributes that are related to the remote ip
+ * address combined here in order to accommodate a change in the client's ip
+ * during a session
  * 
  * @author ceyates
  */
@@ -20,7 +21,7 @@ public class RemoteProxyIPDataBinder implements DataBinder {
 
     private ProxyLinks proxyLinks;
 
-    public void bind(Map<String, Object> model, HttpServletRequest request) {
+    public void bind(final Map<String, Object> model, final HttpServletRequest request) {
         String currentIP = getRemoteAddress(request);
         HttpSession session = request.getSession();
         boolean isSameIP = currentIP.equals(session.getAttribute(Model.REMOTE_ADDR));
@@ -48,7 +49,11 @@ public class RemoteProxyIPDataBinder implements DataBinder {
         model.put(Model.PROXY_LINKS, proxyLinks);
     }
 
-    protected String getRemoteAddress(HttpServletRequest request) {
+    public void setProxyLinks(final ProxyLinks proxyLinks) {
+        this.proxyLinks = proxyLinks;
+    }
+
+    protected String getRemoteAddress(final HttpServletRequest request) {
         // mod_proxy puts the real remote address in an x-forwarded-for
         // header
         // Load balancer also does this
@@ -60,9 +65,5 @@ public class RemoteProxyIPDataBinder implements DataBinder {
         } else {
             return header;
         }
-    }
-
-    public void setProxyLinks(ProxyLinks proxyLinks) {
-        this.proxyLinks = proxyLinks;
     }
 }

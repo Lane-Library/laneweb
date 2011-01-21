@@ -8,7 +8,7 @@ import org.apache.excalibur.source.Source;
 import org.apache.excalibur.source.SourceFactory;
 
 public class LanewebSitemapSourceFactory implements SourceFactory {
-    
+
     private Processor processor;
 
     @SuppressWarnings("rawtypes")
@@ -18,8 +18,8 @@ public class LanewebSitemapSourceFactory implements SourceFactory {
 
     public void release(final Source source) {
     }
-    
-    public void setProcessor(Processor processor) {
+
+    public void setProcessor(final Processor processor) {
         this.processor = processor;
     }
 }

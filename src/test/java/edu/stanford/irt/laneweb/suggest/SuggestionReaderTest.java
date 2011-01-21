@@ -27,10 +27,10 @@ import edu.stanford.irt.suggest.SuggestionManager;
  */
 public class SuggestionReaderTest {
 
-    private SuggestionManager history;
-    
     private SuggestionManager eresource;
-    
+
+    private SuggestionManager history;
+
     private SuggestionManager mesh;
 
     private Map<String, Object> model;
@@ -45,9 +45,9 @@ public class SuggestionReaderTest {
     @Before
     public void setUp() throws Exception {
         this.reader = new SuggestionReader();
-      this.history = createMock(SuggestionManager.class);
-      this.eresource = createMock(SuggestionManager.class);
-      this.mesh = createMock(SuggestionManager.class);
+        this.history = createMock(SuggestionManager.class);
+        this.eresource = createMock(SuggestionManager.class);
+        this.mesh = createMock(SuggestionManager.class);
         this.reader.setHistorySuggestionManager(this.history);
         this.reader.setEresourceSuggestionManager(this.eresource);
         this.reader.setMeshSuggestionManager(this.mesh);
@@ -57,7 +57,8 @@ public class SuggestionReaderTest {
     }
 
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#generate()}.
+     * Test method for
+     * {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#generate()}.
      * 
      * @throws IOException
      */
@@ -69,33 +70,16 @@ public class SuggestionReaderTest {
         this.model.put(Model.QUERY, "venous thrombosis");
         this.model.put(Model.LIMIT, "mesh");
         expect(this.mesh.getSuggestionsForTerm("venous thrombosis")).andReturn(Collections.singleton(suggestion));
-        replay(suggestion, this.eresource, this.history, this.mesh );
+        replay(suggestion, this.eresource, this.history, this.mesh);
         this.reader.setup(null, this.model, null, null);
         this.reader.generate();
         assertEquals("{\"suggest\":[\"Venous Thrombosis\"]}", new String(this.outputStream.toByteArray()));
-        verify(suggestion, this.eresource, this.history, this.mesh );
+        verify(suggestion, this.eresource, this.history, this.mesh);
     }
 
     /**
-     * Test method for {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#generate()}.
-     * 
-     * @throws IOException
-     */
-    @Test
-    public void testGenerateNull() throws IOException {
-        this.model.put(Model.CALLBACK, "");
-        this.model.put(Model.QUERY, "asdfgh");
-        this.model.put(Model.LIMIT, "mesh");
-        expect(this.mesh.getSuggestionsForTerm("asdfgh")).andReturn(Collections.<Suggestion>emptyList());
-        replay(this.eresource, this.history, this.mesh );
-        this.reader.setup(null, this.model, null, null);
-        this.reader.generate();
-        assertEquals("{\"suggest\":[]}", new String(this.outputStream.toByteArray()));
-        verify(this.eresource, this.history, this.mesh );
-    }
-
-    /**
-     * Test method for {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#generate()}.
+     * Test method for
+     * {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#generate()}.
      * 
      * @throws IOException
      */
@@ -104,11 +88,30 @@ public class SuggestionReaderTest {
         this.model.put(Model.CALLBACK, "foo");
         this.model.put(Model.QUERY, "asdfgh");
         this.model.put(Model.LIMIT, "mesh");
-        expect(this.mesh.getSuggestionsForTerm("asdfgh")).andReturn(Collections.<Suggestion>emptyList());
-        replay(this.eresource, this.history, this.mesh );
+        expect(this.mesh.getSuggestionsForTerm("asdfgh")).andReturn(Collections.<Suggestion> emptyList());
+        replay(this.eresource, this.history, this.mesh);
         this.reader.setup(null, this.model, null, null);
         this.reader.generate();
         assertEquals("foo({\"suggest\":[]});", new String(this.outputStream.toByteArray()));
-        verify(this.eresource, this.history, this.mesh );
+        verify(this.eresource, this.history, this.mesh);
+    }
+
+    /**
+     * Test method for
+     * {@link edu.stanford.irt.laneweb.suggestion.SuggestionReader#generate()}.
+     * 
+     * @throws IOException
+     */
+    @Test
+    public void testGenerateNull() throws IOException {
+        this.model.put(Model.CALLBACK, "");
+        this.model.put(Model.QUERY, "asdfgh");
+        this.model.put(Model.LIMIT, "mesh");
+        expect(this.mesh.getSuggestionsForTerm("asdfgh")).andReturn(Collections.<Suggestion> emptyList());
+        replay(this.eresource, this.history, this.mesh);
+        this.reader.setup(null, this.model, null, null);
+        this.reader.generate();
+        assertEquals("{\"suggest\":[]}", new String(this.outputStream.toByteArray()));
+        verify(this.eresource, this.history, this.mesh);
     }
 }

@@ -16,6 +16,8 @@ import edu.stanford.irt.laneweb.model.Model;
 
 public class LanewebPathInterceptorTest {
 
+    private URL ceyatesContent;
+
     private URL defaultContentBase;
 
     private LanewebPathInterceptor interceptor;
@@ -23,8 +25,6 @@ public class LanewebPathInterceptorTest {
     private HttpServletRequest request;
 
     private URL stageBase;
-    
-    private URL ceyatesContent;
 
     @Before
     public void setUp() throws Exception {
@@ -35,6 +35,50 @@ public class LanewebPathInterceptorTest {
         this.interceptor.setDefaultContentBase(this.defaultContentBase);
         this.interceptor.setStageBase(this.stageBase);
         this.request = createMock(HttpServletRequest.class);
+    }
+
+    @Test
+    public void testAFS() throws Exception {
+        expect(this.request.getRequestURI()).andReturn("/ceyates/index.html");
+        expect(this.request.getContextPath()).andReturn("");
+        this.request.setAttribute(Model.BASE_PATH, "/ceyates");
+        this.request.setAttribute(Model.CONTENT_BASE, this.ceyatesContent);
+        replay(this.request);
+        this.interceptor.preHandle(this.request, null, null);
+        verify(this.request);
+    }
+
+    @Test
+    public void testContextPath() throws Exception {
+        expect(this.request.getRequestURI()).andReturn("/laneweb/index.html");
+        expect(this.request.getContextPath()).andReturn("/laneweb");
+        this.request.setAttribute(Model.BASE_PATH, "/laneweb");
+        this.request.setAttribute(Model.CONTENT_BASE, this.defaultContentBase);
+        replay(this.request);
+        this.interceptor.preHandle(this.request, null, null);
+        verify(this.request);
+    }
+
+    @Test
+    public void testContextPathAndAFS() throws Exception {
+        expect(this.request.getRequestURI()).andReturn("/laneweb/ceyates/index.html");
+        expect(this.request.getContextPath()).andReturn("/laneweb");
+        this.request.setAttribute(Model.BASE_PATH, "/laneweb/ceyates");
+        this.request.setAttribute(Model.CONTENT_BASE, this.ceyatesContent);
+        replay(this.request);
+        this.interceptor.preHandle(this.request, null, null);
+        verify(this.request);
+    }
+
+    @Test
+    public void testContextPathAndStage() throws Exception {
+        expect(this.request.getRequestURI()).andReturn("/laneweb/stage/index.html");
+        expect(this.request.getContextPath()).andReturn("/laneweb");
+        this.request.setAttribute(Model.BASE_PATH, "/laneweb/stage");
+        this.request.setAttribute(Model.CONTENT_BASE, this.stageBase);
+        replay(this.request);
+        this.interceptor.preHandle(this.request, null, null);
+        verify(this.request);
     }
 
     @Test
@@ -54,50 +98,6 @@ public class LanewebPathInterceptorTest {
         expect(this.request.getContextPath()).andReturn("");
         this.request.setAttribute(Model.BASE_PATH, "/stage");
         this.request.setAttribute(Model.CONTENT_BASE, this.stageBase);
-        replay(this.request);
-        this.interceptor.preHandle(this.request, null, null);
-        verify(this.request);
-    }
-
-    @Test
-    public void testContextPath() throws Exception {
-        expect(this.request.getRequestURI()).andReturn("/laneweb/index.html");
-        expect(this.request.getContextPath()).andReturn("/laneweb");
-        this.request.setAttribute(Model.BASE_PATH, "/laneweb");
-        this.request.setAttribute(Model.CONTENT_BASE, this.defaultContentBase);
-        replay(this.request);
-        this.interceptor.preHandle(this.request, null, null);
-        verify(this.request);
-    }
-
-    @Test
-    public void testContextPathAndStage() throws Exception {
-        expect(this.request.getRequestURI()).andReturn("/laneweb/stage/index.html");
-        expect(this.request.getContextPath()).andReturn("/laneweb");
-        this.request.setAttribute(Model.BASE_PATH, "/laneweb/stage");
-        this.request.setAttribute(Model.CONTENT_BASE, this.stageBase);
-        replay(this.request);
-        this.interceptor.preHandle(this.request, null, null);
-        verify(this.request);
-    }
-
-    @Test
-    public void testAFS() throws Exception {
-        expect(this.request.getRequestURI()).andReturn("/ceyates/index.html");
-        expect(this.request.getContextPath()).andReturn("");
-        this.request.setAttribute(Model.BASE_PATH, "/ceyates");
-        this.request.setAttribute(Model.CONTENT_BASE, this.ceyatesContent);
-        replay(this.request);
-        this.interceptor.preHandle(this.request, null, null);
-        verify(this.request);
-    }
-
-    @Test
-    public void testContextPathAndAFS() throws Exception {
-        expect(this.request.getRequestURI()).andReturn("/laneweb/ceyates/index.html");
-        expect(this.request.getContextPath()).andReturn("/laneweb");
-        this.request.setAttribute(Model.BASE_PATH, "/laneweb/ceyates");
-        this.request.setAttribute(Model.CONTENT_BASE, this.ceyatesContent);
         replay(this.request);
         this.interceptor.preHandle(this.request, null, null);
         verify(this.request);

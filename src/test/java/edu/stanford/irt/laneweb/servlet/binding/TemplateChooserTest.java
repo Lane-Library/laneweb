@@ -22,13 +22,13 @@ public class TemplateChooserTest {
 
     private String defaultTemplate = "default";
 
+    private List<String> existingTemplates = Arrays.asList(new String[] { "default", "foo" });
+
     private HttpServletRequest request;
 
     private TemplateChooser templateChooser;
 
     private Map<String, String> templateMap;
-    
-    private List<String> existingTemplates = Arrays.asList(new String[]{"default", "foo"});
 
     @Before
     public void setUp() throws Exception {
@@ -46,8 +46,7 @@ public class TemplateChooserTest {
 
     @Test
     public void testTemplateMap() {
-        this.templateMap = Collections.singletonMap("^(?:/stage|)/bassett/raw/bassettLargerView.html",
-                "bassettLargerView");
+        this.templateMap = Collections.singletonMap("^(?:/stage|)/bassett/raw/bassettLargerView.html", "bassettLargerView");
         this.templateChooser = new TemplateChooser(this.defaultTemplate, this.existingTemplates, this.templateMap);
         expect(this.request.getParameter(Model.TEMPLATE)).andReturn(null);
         expect(this.request.getRequestURI()).andReturn("/laneweb/stage/bassett/raw/bassettLargerView.html");

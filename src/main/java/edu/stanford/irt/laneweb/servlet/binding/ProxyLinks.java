@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 import edu.stanford.irt.laneweb.ipgroup.IPGroup;
 
 /**
- * @author ceyates $Id$
+ * @author ceyates $Id: ProxyLinks.java 80142 2010-11-21 21:27:38Z
+ *         ceyates@stanford.edu $
  */
 public class ProxyLinks {
 
@@ -15,11 +16,11 @@ public class ProxyLinks {
 
     private List<Pattern> proxyRegex;
 
-    public Boolean getProxyLinks(final IPGroup ipGroup, final String remoteAddress) { 
-            if (null != ipGroup && (IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup))) {
-                return Boolean.TRUE;
-            }
-            return Boolean.valueOf(proxyLinks(remoteAddress));
+    public Boolean getProxyLinks(final IPGroup ipGroup, final String remoteAddress) {
+        if (null != ipGroup && (IPGroup.SHC.equals(ipGroup) || IPGroup.LPCH.equals(ipGroup))) {
+            return Boolean.TRUE;
+        }
+        return Boolean.valueOf(proxyLinks(remoteAddress));
     }
 
     public void setNoProxyRegex(final List<String> noProxyRegex) {

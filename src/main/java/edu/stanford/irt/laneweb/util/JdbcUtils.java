@@ -18,8 +18,8 @@ public abstract class JdbcUtils {
     private static final Logger LOG = LoggerFactory.getLogger(JdbcUtils.class);
 
     /**
-     * Close the given JDBC Connection and ignore any thrown exception. This is useful for typical finally blocks in
-     * manual JDBC code.
+     * Close the given JDBC Connection and ignore any thrown exception. This is
+     * useful for typical finally blocks in manual JDBC code.
      * 
      * @param con
      *            the JDBC Connection to close (may be <code>null</code>)
@@ -39,8 +39,8 @@ public abstract class JdbcUtils {
     }
 
     /**
-     * Close the given JDBC ResultSet and ignore any thrown exception. This is useful for typical finally blocks in
-     * manual JDBC code.
+     * Close the given JDBC ResultSet and ignore any thrown exception. This is
+     * useful for typical finally blocks in manual JDBC code.
      * 
      * @param rs
      *            the JDBC ResultSet to close (may be <code>null</code>)
@@ -60,8 +60,8 @@ public abstract class JdbcUtils {
     }
 
     /**
-     * Close the given JDBC Statement and ignore any thrown exception. This is useful for typical finally blocks in
-     * manual JDBC code.
+     * Close the given JDBC Statement and ignore any thrown exception. This is
+     * useful for typical finally blocks in manual JDBC code.
      * 
      * @param stmt
      *            the JDBC Statement to close (may be <code>null</code>)

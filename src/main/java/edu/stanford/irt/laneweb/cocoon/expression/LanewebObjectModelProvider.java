@@ -11,8 +11,8 @@ public class LanewebObjectModelProvider implements ObjectModelProvider {
     public Object getObject() {
         return this.objectModel;
     }
-    
-    public void setObjectModel(Map<String, Object> objectModel) {
+
+    public void setObjectModel(final Map<String, Object> objectModel) {
         this.objectModel = objectModel;
     }
 }

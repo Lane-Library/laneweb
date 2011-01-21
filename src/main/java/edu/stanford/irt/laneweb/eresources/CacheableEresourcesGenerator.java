@@ -6,8 +6,7 @@ import org.apache.cocoon.caching.CacheableProcessingComponent;
 import org.apache.excalibur.source.SourceValidity;
 import org.apache.excalibur.source.impl.validity.ExpiresValidity;
 
-public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGenerator implements
-        CacheableProcessingComponent {
+public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGenerator implements CacheableProcessingComponent {
 
     private long configuredExpires = 1000 * 60 * 5;
 
@@ -32,11 +31,8 @@ public abstract class CacheableEresourcesGenerator extends AbstractEresourcesGen
 
     private String createKey() {
         return new StringBuilder("t=").append(null == super.type ? "" : super.type).append(";s=")
-                .append(null == super.subset ? "" : super.subset).append(";a=")
-                .append(null == super.alpha ? "" : super.alpha).append(";m=")
-                .append(null == super.mesh ? "" : super.mesh)
-                .append(";page=").append(this.page)
-                .toString();
+                .append(null == super.subset ? "" : super.subset).append(";a=").append(null == super.alpha ? "" : super.alpha)
+                .append(";m=").append(null == super.mesh ? "" : super.mesh).append(";page=").append(this.page).toString();
     }
 
     @Override

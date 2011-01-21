@@ -4,8 +4,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 /**
- * Transformer to rewrite data when a LDAPData.EMRID value is present. Elements to rewrite include: - url element of
- * metasearch results when value is known CME host
+ * Transformer to rewrite data when a LDAPData.EMRID value is present. Elements
+ * to rewrite include: - url element of metasearch results when value is known
+ * CME host
  * 
  * @author ryanmax
  */

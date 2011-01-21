@@ -19,7 +19,8 @@ import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.spell.SpellCheckResult;
 import edu.stanford.irt.spell.SpellChecker;
 
-// $Id$
+// $Id: SpellCheckGeneratorTest.java 80764 2010-12-15 21:47:39Z
+// ceyates@stanford.edu $
 public class SpellCheckGeneratorTest {
 
     private SpellCheckGenerator generator;

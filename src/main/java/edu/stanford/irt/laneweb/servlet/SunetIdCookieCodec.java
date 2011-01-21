@@ -15,11 +15,11 @@ import org.apache.commons.codec.binary.Base64;
 
 public class SunetIdCookieCodec {
 
+    public static final String LANE_COOKIE_NAME = "user";
+
     private static final String COOKIE_VALUE_SEPARATOR = "%";
 
     private static final String KEY = "stanfordlanelibraryir";
-
-    public static final String LANE_COOKIE_NAME = "user";
 
     private Cipher cipher;
 
@@ -61,8 +61,7 @@ public class SunetIdCookieCodec {
             throw new IllegalArgumentException("invalid encryptedValue");
         }
         try {
-            return new PersistentLoginToken(values[0], Long.parseLong(values[1]), Integer.parseInt(values[2]),
-                    encryptedValue);
+            return new PersistentLoginToken(values[0], Long.parseLong(values[1]), Integer.parseInt(values[2]), encryptedValue);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("invalid encryptedValue", e);
         }

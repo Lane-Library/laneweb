@@ -37,11 +37,13 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import org.xml.sax.SAXException;
 
 /**
- * This is the base for all implementations of a <code>ProcessingPipeline</code> . It is advisable to inherit from this
- * base class instead of doing a complete own implementation!
+ * This is the base for all implementations of a <code>ProcessingPipeline</code>
+ * . It is advisable to inherit from this base class instead of doing a complete
+ * own implementation!
  * 
  * @since 2.1
- * @version $Id: AbstractProcessingPipeline.java 606540 2007-12-23 05:44:54Z vgritsenko $
+ * @version $Id: AbstractProcessingPipeline.java 606540 2007-12-23 05:44:54Z
+ *          vgritsenko $
  */
 public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware {
 
@@ -75,8 +77,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     protected String generatorSource;
 
     /**
-     * This is the last component in the pipeline, either the serializer or a custom XML consumer in case of internal
-     * processing.
+     * This is the last component in the pipeline, either the serializer or a
+     * custom XML consumer in case of internal processing.
      */
     protected XMLConsumer lastConsumer;
 
@@ -119,29 +121,29 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     }
 
     /**
-     * Add a transformer at the end of the pipeline. The transformer role is given : the actual <code>Transformer</code>
-     * is fetched from the latest <code>ServiceManager</code>.
+     * Add a transformer at the end of the pipeline. The transformer role is
+     * given : the actual <code>Transformer</code> is fetched from the latest
+     * <code>ServiceManager</code>.
      * 
      * @param role
      *            the transformer role in the component manager.
      * @param source
-     *            the source used to setup the transformer (e.g. XSL file), or <code>null</code> if no source is given.
+     *            the source used to setup the transformer (e.g. XSL file), or
+     *            <code>null</code> if no source is given.
      * @param param
      *            the parameters for the transfomer.
      * @throws ProcessingException
      *             if the generator couldn't be obtained.
      */
-    public void addTransformer(final String role, final String source, final Parameters param,
-            final Parameters hintParam) throws ProcessingException {
+    public void addTransformer(final String role, final String source, final Parameters param, final Parameters hintParam)
+            throws ProcessingException {
         if (this.reader != null) {
             // Should normally never happen as setting a reader starts pipeline
             // processing
-            throw new ProcessingException("Reader already set. Cannot add transformer '" + role + "'",
-                    getLocation(param));
+            throw new ProcessingException("Reader already set. Cannot add transformer '" + role + "'", getLocation(param));
         }
         if (this.generator == null) {
-            throw new ProcessingException("Must set a generator before adding transformer '" + role + "'",
-                    getLocation(param));
+            throw new ProcessingException("Must set a generator before adding transformer '" + role + "'", getLocation(param));
         }
         this.transformers.add((Transformer) this.beanFactory.getBean(Transformer.ROLE + '/' + role));
         this.transformerSources.add(source);
@@ -156,23 +158,27 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     }
 
     /**
-     * Return the key for the event pipeline If the "event pipeline" (= the complete pipeline without the serializer) is
-     * cacheable and valid, return a key. Otherwise return <code>null</code>
+     * Return the key for the event pipeline If the "event pipeline" (= the
+     * complete pipeline without the serializer) is cacheable and valid, return
+     * a key. Otherwise return <code>null</code>
      */
     public String getKeyForEventPipeline() {
         return null;
     }
 
     /**
-     * Return valid validity objects for the event pipeline If the "event pipeline" (= the complete pipeline without the
-     * serializer) is cacheable and valid, return all validity objects. Otherwise return <code>null</code>
+     * Return valid validity objects for the event pipeline If the
+     * "event pipeline" (= the complete pipeline without the serializer) is
+     * cacheable and valid, return all validity objects. Otherwise return
+     * <code>null</code>
      */
     public SourceValidity getValidityForEventPipeline() {
         return null;
     }
 
     /**
-     * Informs pipeline we have come across a branch point. Default behaviour is do nothing.
+     * Informs pipeline we have come across a branch point. Default behaviour is
+     * do nothing.
      */
     public void informBranchPoint() {
         // this can be overwritten in subclasses
@@ -229,8 +235,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     }
 
     /**
-     * Process the given <code>Environment</code>, but do not use the serializer. Instead all SAX events are streamed to
-     * the XMLConsumer.
+     * Process the given <code>Environment</code>, but do not use the
+     * serializer. Instead all SAX events are streamed to the XMLConsumer.
      */
     public boolean process(final Environment environment, final XMLConsumer consumer) throws ProcessingException {
         if (this.reader != null) {
@@ -265,7 +271,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     }
 
     /**
-     * Sets error handler for this pipeline. Used for handling errors in the internal pipelines.
+     * Sets error handler for this pipeline. Used for handling errors in the
+     * internal pipelines.
      * 
      * @param errorHandler
      *            error handler
@@ -275,13 +282,15 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     }
 
     /**
-     * Set the generator that will be used as the initial step in the pipeline. The generator role is given : the actual
-     * <code>Generator</code> is fetched from the latest <code>ServiceManager</code>.
+     * Set the generator that will be used as the initial step in the pipeline.
+     * The generator role is given : the actual <code>Generator</code> is
+     * fetched from the latest <code>ServiceManager</code>.
      * 
      * @param role
      *            the generator role in the component manager.
      * @param source
-     *            the source where to produce XML from, or <code>null</code> if no source is given.
+     *            the source where to produce XML from, or <code>null</code> if
+     *            no source is given.
      * @param param
      *            the parameters for the generator.
      * @throws ProcessingException
@@ -290,8 +299,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     public void setGenerator(final String role, final String source, final Parameters param, final Parameters hintParam)
             throws ProcessingException {
         if (this.generator != null) {
-            throw new ProcessingException("Generator already set. Cannot set generator '" + role + "'",
-                    getLocation(param));
+            throw new ProcessingException("Generator already set. Cannot set generator '" + role + "'", getLocation(param));
         }
         if (this.reader != null) {
             throw new ProcessingException("Reader already set. Cannot set generator '" + role + "'", getLocation(param));
@@ -337,23 +345,20 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
      * @param mimeType
      *            Can be null
      */
-    public void setSerializer(final String role, final String source, final Parameters param,
-            final Parameters hintParam, final String mimeType) throws ProcessingException {
+    public void setSerializer(final String role, final String source, final Parameters param, final Parameters hintParam,
+            final String mimeType) throws ProcessingException {
         if (this.serializer != null) {
             // Should normally not happen as adding a serializer starts pipeline
             // processing
-            throw new ProcessingException("Serializer already set. Cannot set serializer '" + role + "'",
-                    getLocation(param));
+            throw new ProcessingException("Serializer already set. Cannot set serializer '" + role + "'", getLocation(param));
         }
         if (this.reader != null) {
             // Should normally never happen as setting a reader starts pipeline
             // processing
-            throw new ProcessingException("Reader already set. Cannot set serializer '" + role + "'",
-                    getLocation(param));
+            throw new ProcessingException("Reader already set. Cannot set serializer '" + role + "'", getLocation(param));
         }
         if (this.generator == null) {
-            throw new ProcessingException("Must set a generator before setting serializer '" + role + "'",
-                    getLocation(param));
+            throw new ProcessingException("Must set a generator before setting serializer '" + role + "'", getLocation(param));
         }
         this.serializer = (Serializer) this.beanFactory.getBean(Serializer.ROLE + '/' + role);
         this.serializerSource = source;
@@ -384,8 +389,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         // get <base>
         String current = tokens.nextToken();
         if (current.equals("modification")) {
-            LOGGER.warn("the \"modification\" keyword is not yet"
-                    + " implemented. Assuming \"now\" as the base attribute");
+            LOGGER.warn("the \"modification\" keyword is not yet" + " implemented. Assuming \"now\" as the base attribute");
             current = "now";
         }
         if (!current.equals("now") && !current.equals("access")) {
@@ -413,8 +417,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             try {
                 current = tokens.nextToken();
             } catch (NoSuchElementException nsee) {
-                LOGGER.error("State violation: expecting a modifier"
-                        + " but no one found: Expires header will not be set");
+                LOGGER.error("State violation: expecting a modifier" + " but no one found: Expires header will not be set");
             }
             if (current.equals("years")) {
                 modifier = 365L * 24L * 60L * 60L * 1000L;
@@ -439,8 +442,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         return expires;
     }
 
-    protected boolean checkIfModified(final Environment environment, final long lastModified)
-            throws ProcessingException {
+    protected boolean checkIfModified(final Environment environment, final long lastModified) throws ProcessingException {
         // has the read resource been modified?
         if (!environment.isResponseModified(lastModified)) {
             // environment supports this, so we are finished
@@ -501,8 +503,9 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     }
 
     /**
-     * Handles exception which can happen during pipeline processing. If this not a connection reset, then all locations
-     * for pipeline components are added to the exception.
+     * Handles exception which can happen during pipeline processing. If this
+     * not a connection reset, then all locations for pipeline components are
+     * added to the exception.
      * 
      * @throws ConnectionResetException
      *             if connection reset detected
@@ -592,8 +595,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         this.prepared = true;
     }
 
-    protected boolean processErrorHandler(final Environment environment, final ProcessingException e,
-            final XMLConsumer consumer) throws ProcessingException {
+    protected boolean processErrorHandler(final Environment environment, final ProcessingException e, final XMLConsumer consumer)
+            throws ProcessingException {
         if (this.errorHandler != null) {
             try {
                 this.errorPipeline = this.errorHandler.prepareErrorPipeline(e);
@@ -717,8 +720,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
                     environment.setContentType(mimeType);
                 } else {
                     // No mimeType available
-                    String message = "Unable to determine MIME type for " + environment.getURIPrefix() + "/"
-                            + environment.getURI();
+                    String message = "Unable to determine MIME type for " + environment.getURIPrefix() + "/" + environment.getURI();
                     throw new ProcessingException(message);
                 }
             }
@@ -731,8 +733,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
     protected void setupPipeline(final Environment environment) throws ProcessingException {
         try {
             // setup the generator
-            this.generator.setup(this.sourceResolver, environment.getObjectModel(), this.generatorSource,
-                    this.generatorParam);
+            this.generator.setup(this.sourceResolver, environment.getObjectModel(), this.generatorSource, this.generatorParam);
             Iterator<Transformer> transformerItt = this.transformers.iterator();
             Iterator<String> transformerSourceItt = this.transformerSources.iterator();
             Iterator<Parameters> transformerParamItt = this.transformerParams.iterator();
