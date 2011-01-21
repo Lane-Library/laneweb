@@ -21,7 +21,7 @@
     </xsl:variable>
 
     <xsl:variable name="guest-mode">
-        <xsl:if test="$ipgroup = 'GUEST' and $proxy-links = 'false'">true</xsl:if>
+        <xsl:if test="$ipgroup = 'OTHER' and $proxy-links = 'false'">true</xsl:if>
     </xsl:variable>
 
     <xsl:variable name="pubmed-baseUrl">http://www.ncbi.nlm.nih.gov/pubmed/</xsl:variable>
