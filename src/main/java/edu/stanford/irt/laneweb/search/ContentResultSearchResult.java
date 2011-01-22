@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.search;
 
 import java.util.regex.Matcher;
@@ -44,9 +41,6 @@ public class ContentResultSearchResult implements SearchResult {
 
     private String sortTitle;
 
-    /**
-     * 
-     */
     public ContentResultSearchResult(final ContentResult contentResult, final Pattern queryTermPattern) {
         this.contentResult = contentResult;
         this.sortTitle = NON_FILING_PATTERN.matcher(this.contentResult.getTitle()).replaceFirst("");
@@ -157,12 +151,6 @@ public class ContentResultSearchResult implements SearchResult {
         this.resourceUrl = resourceUrl;
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * edu.stanford.irt.laneweb.searchresults.SearchResult#toSAX(org.xml.sax
-     * .ContentHandler)
-     */
     public void toSAX(final ContentHandler handler) throws SAXException {
         // TODO: returning result element for now ... turn into displayable?
         AttributesImpl atts = new AttributesImpl();

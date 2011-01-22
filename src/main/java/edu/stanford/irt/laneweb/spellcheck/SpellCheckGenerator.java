@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.spellcheck;
 
 import org.apache.excalibur.xml.sax.XMLizable;

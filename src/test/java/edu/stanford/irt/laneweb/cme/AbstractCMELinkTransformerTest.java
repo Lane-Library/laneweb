@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.cme;
 
 import static org.junit.Assert.assertEquals;

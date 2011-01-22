@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.eresources;
 
 import java.io.Serializable;

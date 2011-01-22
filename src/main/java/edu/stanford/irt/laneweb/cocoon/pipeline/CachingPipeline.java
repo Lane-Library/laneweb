@@ -107,11 +107,7 @@ public class CachingPipeline extends NonCachingPipeline {
         this.transformerRoles.add(role);
     }
 
-    /*
-     * (non-Javadoc)
-     * @seeorg.apache.cocoon.components.pipeline.ProcessingPipeline#
-     * getKeyForEventPipeline()
-     */
+
     @Override
     public String getKeyForEventPipeline() {
         if (isInternalError()) {

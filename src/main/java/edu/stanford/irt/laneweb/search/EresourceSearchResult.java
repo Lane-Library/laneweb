@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.search;
 
 import edu.stanford.irt.eresources.Eresource;

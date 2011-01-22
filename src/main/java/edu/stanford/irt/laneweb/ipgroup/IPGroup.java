@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.ipgroup;
 
 import java.util.regex.Pattern;

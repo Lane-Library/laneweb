@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.search;
 
 import static org.junit.Assert.assertTrue;

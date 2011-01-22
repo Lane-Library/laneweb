@@ -19,7 +19,7 @@ public class DebugTransformer extends AbstractTransformer {
         super.startDocument();
         if (this.debug) {
             StringBuilder sb = new StringBuilder();
-            for (Entry<String, Object> entry : (this.model).entrySet()) {
+            for (Entry<String, Object> entry : this.model.entrySet()) {
                 sb.append('\n').append(entry.getKey()).append(": ").append(entry.getValue());
             }
             sb.append('\n');

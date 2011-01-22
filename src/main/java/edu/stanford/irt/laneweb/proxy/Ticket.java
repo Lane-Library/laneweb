@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.proxy;
 
 import java.io.UnsupportedEncodingException;

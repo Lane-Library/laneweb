@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.stanford.irt.laneweb.suggest;
 
 import static org.easymock.EasyMock.expect;

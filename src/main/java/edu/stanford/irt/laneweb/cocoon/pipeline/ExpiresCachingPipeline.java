@@ -62,11 +62,7 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
         this.cacheExpires = cacheExpires;
     }
 
-    /*
-     * (non-Javadoc)
-     * @seeorg.apache.cocoon.components.pipeline.ProcessingPipeline#
-     * getKeyForEventPipeline()
-     */
+
     @Override
     public String getKeyForEventPipeline() {
         if (this.cacheKey != null && this.cacheValidity != null) {
@@ -169,11 +165,6 @@ public class ExpiresCachingPipeline extends NonCachingPipeline {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @seeorg.apache.cocoon.components.pipeline.AbstractProcessingPipeline#
-     * processReader(org.apache.cocoon.environment.Environment)
-     */
     @Override
     protected boolean processReader(final Environment environment) throws ProcessingException {
         try {

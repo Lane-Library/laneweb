@@ -27,11 +27,6 @@ public class SQLLinkListDAO implements LinkListDAO {
 
     private Logger log = LoggerFactory.getLogger(SQLLinkListDAO.class);
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * edu.stanford.irt.laneweb.links.LinkListDAO#getLinks(java.lang.String)
-     */
     public LinkList getLinks(final String sunetid) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -58,12 +53,6 @@ public class SQLLinkListDAO implements LinkListDAO {
         }
     }
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * edu.stanford.irt.laneweb.links.LinkListDAO#saveLinks(java.lang.String,
-     * java.util.List)
-     */
     public void saveLinks(final String sunetid, final List<Link> links) {
         Connection conn = null;
         PreparedStatement stmt = null;

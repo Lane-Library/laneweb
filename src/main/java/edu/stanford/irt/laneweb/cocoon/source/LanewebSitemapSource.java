@@ -44,9 +44,6 @@ public class LanewebSitemapSource implements Source, XMLizable {
      */
     public static class SitemapSourceValidity implements SourceValidity {
 
-        /**
-         * 
-         */
         private static final long serialVersionUID = 1L;
 
         private SourceValidity validity;
