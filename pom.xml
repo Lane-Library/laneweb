@@ -219,7 +219,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>2.1.1</version>
+                <version>3.0-beta-3</version>
             </plugin>
         </plugins>
     </build>
@@ -228,7 +228,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.6</version>
+                <version>2.7.1</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -297,7 +297,7 @@
                     <reportSet>
                         <reports>
                             <report>jslint</report>
-                            <report>jsdoc</report>
+                            <!--report>jsdoc</report-->
                         </reports>
                     </reportSet>
                 </reportSets>
