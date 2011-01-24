@@ -10,38 +10,36 @@
     <xsl:template match="/lc:classes">
         <html>
             <body>
-                <ul class="type1">
-                    <xsl:apply-templates  select="lc:event_data[position() &lt; 4]"/>
-                </ul>
+                <xsl:apply-templates  select="lc:event_data[position() &lt; 4]"/>
             </body>
         </html>
     </xsl:template>
 
     <xsl:template match="lc:event_data">
-        <div class="yui-gd">
-            <div class="yui-u first">
-                <div class="month">
-                    <xsl:call-template name="month" />
+            <div class="yui-gd" id="laneclass">
+                <div class="yui-u first">
+                    <div class="month">
+                        <xsl:call-template name="month" />
+                    </div>
+                    <div class="day">
+                        <xsl:call-template name="day" />
+                    </div>
                 </div>
-                <div class="day">
-                    <xsl:call-template name="day" />
+                <div class="yui-u">
+                    <a>
+                        <xsl:attribute name="href">
+                            <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
+                            <xsl:value-of select="lc:module_id/text()"/>
+                        </xsl:attribute>
+                        <xsl:value-of select="./lc:event_name" />
+                    </a>
+                    <div class="time">
+                        <xsl:call-template name="start-time" />
+                        <xsl:text>–</xsl:text>
+                        <xsl:call-template name="end-time" />
+                    </div>
                 </div>
             </div>
-            <div class="yui-u">
-                <a>
-                    <xsl:attribute name="href">
-                        <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
-                        <xsl:value-of select="lc:module_id/text()"/>
-                    </xsl:attribute>
-                    <xsl:value-of select="./lc:event_name" />
-                </a>
-                <div class="time">
-                    <xsl:call-template name="start-time" />
-                    <xsl:text>–</xsl:text>
-                    <xsl:call-template name="end-time" />
-                </div>
-            </div>
-        </div>
     </xsl:template>
 
 </xsl:stylesheet>
