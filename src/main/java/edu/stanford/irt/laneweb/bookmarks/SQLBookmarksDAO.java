@@ -29,7 +29,7 @@ public class SQLBookmarksDAO implements BookmarksDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            Bookmarks bookmarks = new Bookmarks();
+            Bookmarks bookmarks = new Bookmarks(emrid);
             conn = this.dataSource.getConnection();
             stmt = conn.prepareStatement(GET_LINKS);
             stmt.setString(1, emrid);

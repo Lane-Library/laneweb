@@ -24,6 +24,16 @@ public class Bookmarks extends LinkedList<Bookmark> implements XMLizable {
 
     private static final String XHTMLNS = "http://www.w3.org/1999/xhtml";
 
+    private String emrid;
+
+    public Bookmarks(final String emrid) {
+        this.emrid = emrid;
+    }
+
+    public String getEmrid() {
+        return this.emrid;
+    }
+
     public void toSAX(final ContentHandler handler) throws SAXException {
         handler.startDocument();
         if (size() > 0) {
