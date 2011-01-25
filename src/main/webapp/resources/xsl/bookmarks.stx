@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stx:transform xmlns:stx="http://stx.sourceforge.net/2002/ns"
+    xmlns:h="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    version="1.0"
+    pass-through="all">
+    
+    <stx:param name="emrid"/>
+    
+    <stx:template match="h:div[@class='yui-ge']/h:div[@class='yui-u']">
+        <stx:copy>
+            <stx:process-attributes/>
+            <stx:if test="$emrid">
+                <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
+                    href="content:/includes/bookmarks/bookmarks.html">
+                    <xi:fallback/>
+                </xi:include>
+            </stx:if>
+            <stx:process-children/>
+        </stx:copy>
+    </stx:template>
+    
+</stx:transform>
