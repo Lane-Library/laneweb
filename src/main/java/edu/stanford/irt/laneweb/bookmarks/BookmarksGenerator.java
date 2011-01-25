@@ -4,21 +4,16 @@ import java.io.IOException;
 
 import org.xml.sax.SAXException;
 
-import edu.stanford.irt.laneweb.cocoon.HTMLGenerator;
+import edu.stanford.irt.laneweb.cocoon.AbstractGenerator;
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public class BookmarksGenerator extends HTMLGenerator {
+public class BookmarksGenerator extends AbstractGenerator {
 
     private Bookmarks bookmarks;
 
-    @Override
     public void generate() throws SAXException, IOException {
-        if (this.bookmarks == null) {
-            super.generate();
-        } else {
-            this.bookmarks.toSAX(this.xmlConsumer);
-        }
+        this.bookmarks.toSAX(this.xmlConsumer);
     }
 
     @Override

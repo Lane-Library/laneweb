@@ -5,11 +5,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.servlet.binding.DataBinder;
 
 public class BookmarksDataBinder implements DataBinder {
 
+    @Autowired
     private BookmarksDAO bookmarksDAO;
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
@@ -30,9 +33,5 @@ public class BookmarksDataBinder implements DataBinder {
                 model.put(Model.BOOKMARKS, bookmarks);
             }
         }
-    }
-
-    public void setBookmarksDAO(final BookmarksDAO bookmarksDAO) {
-        this.bookmarksDAO = bookmarksDAO;
     }
 }

@@ -183,6 +183,10 @@
                 <map:transform type="saxon" src="resources/xsl/ipGroupFetch.xsl"/>
                 <map:serialize type="text"/>
             </map:match>
+            <map:match pattern="bookmarks" type="wildcard">
+                <map:generate type="bookmarks"/>
+                <map:serialize type="xml"/>
+            </map:match>
         </map:pipeline>
         <map:pipeline type="throttling">
             <map:parameter name="request-key" value="${remote-addr}/${request-uri}/${query-string}"/>

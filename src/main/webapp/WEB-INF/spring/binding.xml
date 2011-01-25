@@ -19,6 +19,7 @@
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/base-path"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/parent-path"/>
                 <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/servlet-context"/>
+                <ref bean="edu.stanford.irt.laneweb.servlet.binding.DataBinder/bookmarks"/>
             </list>
         </property>
     </bean>
