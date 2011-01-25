@@ -104,18 +104,18 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>links</servlet-name>
+        <servlet-name>bookmarks</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/spring/links-servlet.xml</param-value>
+            <param-value>/WEB-INF/spring/bookmarks-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>links</servlet-name>
-        <url-pattern>/links/*</url-pattern>
+        <servlet-name>bookmarks</servlet-name>
+        <url-pattern>/bookmarks/*</url-pattern>
     </servlet-mapping>
 
     <servlet>
