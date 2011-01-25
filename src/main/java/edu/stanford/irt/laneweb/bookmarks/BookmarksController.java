@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.links;
+package edu.stanford.irt.laneweb.bookmarks;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,32 +14,28 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.impl.LinkImpl;
+import edu.stanford.irt.laneweb.model.Model;
 
 @Controller
-@SessionAttributes("links")
-public class Links {
+@SessionAttributes(Model.BOOKMARKS)
+public class BookmarksController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public void addLink(@RequestParam final String label, @RequestParam final String url,
-            @ModelAttribute("links") final LinkList links) {
-        Link link = new LinkImpl();
-        link.setLabel(label);
-        link.setUrl(url);
-        links.add(link);
+            @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+        bookmarks.add(new Bookmark(label, url));
     }
 
-    @ModelAttribute("links")
-    public LinkList getLinks() {
-        return new LinkList();
+    @ModelAttribute(Model.BOOKMARKS)
+    public Bookmarks getBookmarks() {
+        return new Bookmarks();
     }
 
     @RequestMapping(value = "get")
     @ResponseBody
-    public LinkList getLinks(@ModelAttribute("links") final LinkList links) {
-        return links;
+    public Bookmarks getBookmarks(@ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+        return bookmarks;
     }
 
     @ExceptionHandler(IndexOutOfBoundsException.class)
@@ -58,7 +54,7 @@ public class Links {
 
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public void removeLink(@RequestParam final int position, @ModelAttribute("links") final LinkList links) {
-        links.remove(position);
+    public void removeBookmark(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+        bookmarks.remove(position);
     }
 }

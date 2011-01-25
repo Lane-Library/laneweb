@@ -1,21 +1,18 @@
-package edu.stanford.irt.laneweb.links;
+package edu.stanford.irt.laneweb.bookmarks;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.stanford.irt.eresources.Link;
-import edu.stanford.irt.eresources.impl.LinkImpl;
 import edu.stanford.irt.laneweb.util.JdbcUtils;
 
-public class SQLLinkListDAO implements LinkListDAO {
+public class SQLBookmarksDAO implements BookmarksDAO {
 
     private static final String ADD_LINK = "INSERT INTO USER_LINKS (SUNETID, URL, LABEL, ORD) VALUES(?,?,?,?)";
 
@@ -25,24 +22,22 @@ public class SQLLinkListDAO implements LinkListDAO {
 
     private DataSource dataSource;
 
-    private Logger log = LoggerFactory.getLogger(SQLLinkListDAO.class);
+    private Logger log = LoggerFactory.getLogger(SQLBookmarksDAO.class);
 
-    public LinkList getLinks(final String sunetid) {
+    public Bookmarks getBookmarks(final String sunetid) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            LinkList links = new LinkList();
+            Bookmarks bookmarks = new Bookmarks();
             conn = this.dataSource.getConnection();
             stmt = conn.prepareStatement(GET_LINKS);
             stmt.setString(1, sunetid);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                LinkImpl link = new LinkImpl();
-                link.setUrl(rs.getString("URL"));
-                link.setLabel(rs.getString("LABEL"));
+                bookmarks.add(new Bookmark(rs.getString("LABEL"), rs.getString("URL")));
             }
-            return links;
+            return bookmarks;
         } catch (SQLException e) {
             this.log.error(e.getMessage(), e);
             return null;
@@ -53,7 +48,7 @@ public class SQLLinkListDAO implements LinkListDAO {
         }
     }
 
-    public void saveLinks(final String sunetid, final List<Link> links) {
+    public void saveBookmarks(final String sunetid, final Bookmarks bookmarks) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -65,10 +60,10 @@ public class SQLLinkListDAO implements LinkListDAO {
             stmt.executeUpdate();
             stmt = conn.prepareStatement(ADD_LINK);
             int i = 0;
-            for (Link link : links) {
+            for (Bookmark bookmark : bookmarks) {
                 stmt.setString(1, sunetid);
-                stmt.setString(2, link.getUrl());
-                stmt.setString(3, link.getLabel());
+                stmt.setString(2, bookmark.getUrl());
+                stmt.setString(3, bookmark.getLabel());
                 stmt.setInt(4, i++);
                 stmt.addBatch();
             }

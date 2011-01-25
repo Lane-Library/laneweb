@@ -1,4 +1,4 @@
-package edu.stanford.irt.laneweb.links;
+package edu.stanford.irt.laneweb.bookmarks;
 
 import java.util.LinkedList;
 
@@ -8,9 +8,7 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
-import edu.stanford.irt.eresources.Link;
-
-public class LinkList extends LinkedList<Link> implements XMLizable {
+public class Bookmarks extends LinkedList<Bookmark> implements XMLizable {
 
     private static final String A = "a";
 
@@ -30,11 +28,11 @@ public class LinkList extends LinkedList<Link> implements XMLizable {
         handler.startDocument();
         if (size() > 0) {
             XMLUtils.startElement(handler, XHTMLNS, UL);
-            for (Link link : this) {
+            for (Bookmark bookmark : this) {
                 XMLUtils.startElement(handler, XHTMLNS, LI);
                 AttributesImpl atts = new AttributesImpl();
-                atts.addAttribute("", HREF, HREF, CDATA, link.getUrl());
-                XMLUtils.createElementNS(handler, XHTMLNS, A, atts, link.getLabel());
+                atts.addAttribute("", HREF, HREF, CDATA, bookmark.getUrl());
+                XMLUtils.createElementNS(handler, XHTMLNS, A, atts, bookmark.getLabel());
                 XMLUtils.endElement(handler, XHTMLNS, LI);
             }
             XMLUtils.endElement(handler, XHTMLNS, UL);

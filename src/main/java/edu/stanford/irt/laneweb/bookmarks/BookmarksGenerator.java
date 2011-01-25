@@ -1,28 +1,29 @@
-package edu.stanford.irt.laneweb.links;
+package edu.stanford.irt.laneweb.bookmarks;
 
 import java.io.IOException;
 
 import org.xml.sax.SAXException;
 
 import edu.stanford.irt.laneweb.cocoon.HTMLGenerator;
+import edu.stanford.irt.laneweb.model.Model;
 import edu.stanford.irt.laneweb.model.ModelUtil;
 
-public class LinkListGenerator extends HTMLGenerator {
+public class BookmarksGenerator extends HTMLGenerator {
 
-    private LinkList links;
+    private Bookmarks bookmarks;
 
     @Override
     public void generate() throws SAXException, IOException {
-        if (this.links == null) {
+        if (this.bookmarks == null) {
             super.generate();
         } else {
-            this.links.toSAX(this.xmlConsumer);
+            this.bookmarks.toSAX(this.xmlConsumer);
         }
     }
 
     @Override
     protected void initialize() {
         super.initialize();
-        this.links = ModelUtil.getObject(this.model, "link-list", LinkList.class);
+        this.bookmarks = ModelUtil.getObject(this.model, Model.BOOKMARKS, Bookmarks.class);
     }
 }

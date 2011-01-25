@@ -11,6 +11,8 @@ public interface Model {
 
     public static final String BASSETT_NUMBER = "basset-number";
 
+    public static final String BOOKMARKS = "bookmarks";
+
     public static final String CALLBACK = "callback";
 
     public static final String CLASS_ID = "class-id";
