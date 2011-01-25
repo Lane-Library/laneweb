@@ -46,7 +46,7 @@ public class BookmarksGenerator extends AbstractGenerator {
         XMLUtils.startElement(this.xmlConsumer, XHTMLNS, DIV, atts);
         XMLUtils.startElement(this.xmlConsumer, XHTMLNS, H3);
         XMLUtils.data(this.xmlConsumer, "bookmarks");
-        String href = this.requestUri.equals("editBookmarks.html") ? "bookmarks.html" : "editBookmarks.html";
+        String href = this.requestUri.equals("edit-bookmarks.html") ? "bookmarks.html" : "edit-bookmarks.html";
         String label = href.equals("bookmarks.html") ? "done" : "edit";
         atts = new AttributesImpl();
         atts.addAttribute("", HREF, HREF, CDATA, href);
