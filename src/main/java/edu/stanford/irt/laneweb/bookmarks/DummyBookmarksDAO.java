@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 public class DummyBookmarksDAO implements BookmarksDAO {
 
     @Override
-    public Bookmarks getBookmarks(final String sunetid) {
+    public Bookmarks getBookmarks(final String emrid) {
         return new Bookmarks();
     }
 
     @Override
-    public void saveBookmarks(final String sunetid, final Bookmarks bookmarks) {
+    public void saveBookmarks(final String emrid, final Bookmarks bookmarks) {
     }
 }

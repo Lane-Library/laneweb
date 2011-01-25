@@ -14,17 +14,17 @@ import edu.stanford.irt.laneweb.util.JdbcUtils;
 
 public class SQLBookmarksDAO implements BookmarksDAO {
 
-    private static final String ADD_LINK = "INSERT INTO USER_LINKS (SUNETID, URL, LABEL, ORD) VALUES(?,?,?,?)";
+    private static final String ADD_LINK = "INSERT INTO BOOKMARKS (EMRID, URL, LABEL, ORD) VALUES(?,?,?,?)";
 
-    private static final String GET_LINKS = "SELECT * FROM USER_LINKS WHERE SUNETID = ? ORDER BY ORD";
+    private static final String GET_LINKS = "SELECT * FROM BOOKMARKS WHERE EMRID = ? ORDER BY ORD";
 
-    private static final String REMOVE_LINKS = "DELETE FROM USER_LINKS WHERE SUNETID = ?";
+    private static final String REMOVE_LINKS = "DELETE FROM BOOKMARKS WHERE EMRID = ?";
 
     private DataSource dataSource;
 
     private Logger log = LoggerFactory.getLogger(SQLBookmarksDAO.class);
 
-    public Bookmarks getBookmarks(final String sunetid) {
+    public Bookmarks getBookmarks(final String emrid) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -32,7 +32,7 @@ public class SQLBookmarksDAO implements BookmarksDAO {
             Bookmarks bookmarks = new Bookmarks();
             conn = this.dataSource.getConnection();
             stmt = conn.prepareStatement(GET_LINKS);
-            stmt.setString(1, sunetid);
+            stmt.setString(1, emrid);
             rs = stmt.executeQuery();
             while (rs.next()) {
                 bookmarks.add(new Bookmark(rs.getString("LABEL"), rs.getString("URL")));
@@ -48,7 +48,7 @@ public class SQLBookmarksDAO implements BookmarksDAO {
         }
     }
 
-    public void saveBookmarks(final String sunetid, final Bookmarks bookmarks) {
+    public void saveBookmarks(final String emrid, final Bookmarks bookmarks) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -56,12 +56,12 @@ public class SQLBookmarksDAO implements BookmarksDAO {
             conn = this.dataSource.getConnection();
             conn.setAutoCommit(false);
             stmt = conn.prepareStatement(REMOVE_LINKS);
-            stmt.setString(1, sunetid);
+            stmt.setString(1, emrid);
             stmt.executeUpdate();
             stmt = conn.prepareStatement(ADD_LINK);
             int i = 0;
             for (Bookmark bookmark : bookmarks) {
-                stmt.setString(1, sunetid);
+                stmt.setString(1, emrid);
                 stmt.setString(2, bookmark.getUrl());
                 stmt.setString(3, bookmark.getLabel());
                 stmt.setInt(4, i++);

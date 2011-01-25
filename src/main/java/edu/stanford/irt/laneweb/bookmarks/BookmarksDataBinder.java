@@ -13,13 +13,13 @@ public class BookmarksDataBinder implements DataBinder {
     private BookmarksDAO bookmarksDAO;
 
     public void bind(final Map<String, Object> model, final HttpServletRequest request) {
-        String sunetid = (String) model.get(Model.SUNETID);
-        if (sunetid != null) {
+        String emrid = (String) model.get(Model.EMRID);
+        if (emrid != null) {
             Bookmarks bookmarks = null;
             HttpSession session = request.getSession();
             Bookmarks sessionBookmarks = (Bookmarks) session.getAttribute(Model.BOOKMARKS);
             if (sessionBookmarks == null) {
-                bookmarks = this.bookmarksDAO.getBookmarks(sunetid);
+                bookmarks = this.bookmarksDAO.getBookmarks(emrid);
             } else {
                 bookmarks = sessionBookmarks;
             }

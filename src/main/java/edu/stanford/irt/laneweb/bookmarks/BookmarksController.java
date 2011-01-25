@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import edu.stanford.irt.laneweb.model.Model;
 
 @Controller
-@SessionAttributes({ Model.BOOKMARKS, Model.SUNETID })
+@SessionAttributes({ Model.BOOKMARKS, Model.EMRID })
 @RequestMapping( value = "/bookmarks" )
 public class BookmarksController {
 
@@ -35,8 +35,8 @@ public class BookmarksController {
     }
 
     @ModelAttribute(Model.BOOKMARKS)
-    public Bookmarks getBookmarks(@ModelAttribute(Model.SUNETID) final String sunetid) {
-        return this.bookmarksDAO.getBookmarks(sunetid);
+    public Bookmarks getBookmarks(@ModelAttribute(Model.EMRID) final String emrid) {
+        return this.bookmarksDAO.getBookmarks(emrid);
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.GET)
