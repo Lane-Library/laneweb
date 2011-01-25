@@ -1,6 +1,10 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
-public class Bookmark {
+import java.io.Serializable;
+
+public class Bookmark implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String label;
 

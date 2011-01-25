@@ -151,6 +151,7 @@
                                 <include>table-styles-min.css</include>
                                 <include>follow-min.css</include>
                                 <include>images-min.css</include>
+                                <include>bookmarks-min.css</include>
                             </includes>
                         </aggregation>
                         <aggregation>

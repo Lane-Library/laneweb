@@ -12,7 +12,7 @@
             <stx:process-attributes/>
             <stx:if test="$emrid">
                 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude"
-                    href="content:/includes/bookmarks/bookmarks.html">
+                    href="apps:/bookmarks">
                     <xi:fallback/>
                 </xi:include>
             </stx:if>
