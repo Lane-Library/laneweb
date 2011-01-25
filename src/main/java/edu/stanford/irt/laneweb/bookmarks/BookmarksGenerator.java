@@ -39,6 +39,7 @@ public class BookmarksGenerator extends AbstractGenerator {
     private String requestUri;
 
     public void generate() throws SAXException, IOException {
+        boolean editing = this.requestUri.equals("edit-bookmarks.html");
         this.xmlConsumer.startDocument();
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute("", CLASS, CLASS, CDATA, "module");
@@ -46,8 +47,8 @@ public class BookmarksGenerator extends AbstractGenerator {
         XMLUtils.startElement(this.xmlConsumer, XHTMLNS, DIV, atts);
         XMLUtils.startElement(this.xmlConsumer, XHTMLNS, H3);
         XMLUtils.data(this.xmlConsumer, "bookmarks");
-        String href = this.requestUri.equals("edit-bookmarks.html") ? "bookmarks.html" : "edit-bookmarks.html";
-        String label = href.equals("bookmarks.html") ? "done" : "edit";
+        String href = editing ? "bookmarks.html" : "edit-bookmarks.html";
+        String label = editing ? "done" : "edit";
         atts = new AttributesImpl();
         atts.addAttribute("", HREF, HREF, CDATA, href);
         XMLUtils.createElementNS(this.xmlConsumer, XHTMLNS, A, atts, label);
