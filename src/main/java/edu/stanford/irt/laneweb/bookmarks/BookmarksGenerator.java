@@ -29,6 +29,10 @@ public class BookmarksGenerator extends AbstractGenerator {
     @Resource
     private BookmarksController controller;
 
+    private String label;
+
+    private String url;
+
     public void generate() throws SAXException, IOException {
         if (this.editing) {
             if ("delete".equals(this.action)) {
@@ -37,6 +41,8 @@ public class BookmarksGenerator extends AbstractGenerator {
                 this.controller.moveUp(this.position, this.bookmarks);
             } else if ("down".equals(this.action)) {
                 this.controller.moveDown(this.position, this.bookmarks);
+            } else if ("add".equals(this.action)){
+                this.controller.addLink(this.label, this.url, this.position, this.bookmarks);
             }
             if ("insertBefore".equals(this.action) || "insertAfter".equals(this.action)) {
                 int formPosition = "insertBefore".equals(this.action) ? this.position : this.position + 1;
@@ -56,5 +62,7 @@ public class BookmarksGenerator extends AbstractGenerator {
         this.editing = ModelUtil.getString(this.model, Model.REQUEST_URI).endsWith("edit-bookmarks.html");
         this.position = Integer.parseInt(ModelUtil.getString(this.model, "bookmarks:position", "0"));
         this.action = ModelUtil.getString(this.model, "bookmarks:action");
+        this.label = ModelUtil.getString(this.model, "bookmarks:label");
+        this.url = ModelUtil.getString(this.model, "bookmarks:url");
     }
 }

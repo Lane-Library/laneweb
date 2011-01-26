@@ -17,7 +17,7 @@ public class EditingXMLizableBookmarksView extends DefaultXMLizableBookmarksView
         int i = 0;
         for (Bookmark bookmark : bookmarks) {
             if (i == formPosition) {
-                XMLUtils.createElementNS(contentHandler, XHTMLNS, LI, "new item would go here");
+                createAddForm(contentHandler, i);
             }
             XMLUtils.startElement(contentHandler, XHTMLNS, LI);
             AttributesImpl atts = new AttributesImpl();
@@ -51,9 +51,35 @@ public class EditingXMLizableBookmarksView extends DefaultXMLizableBookmarksView
             XMLUtils.endElement(contentHandler, XHTMLNS, LI);
         }
         if (i != 0 && i == formPosition) {
-            XMLUtils.createElementNS(contentHandler, XHTMLNS, LI, "new item would go here");
+            createAddForm(contentHandler, i);
         }
         XMLUtils.endElement(contentHandler, XHTMLNS, UL);
+    }
+    
+    private void createAddForm(ContentHandler contentHandler, int position) throws SAXException {
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute("", "method", "method", CDATA, "get");
+        XMLUtils.startElement(contentHandler, XHTMLNS, "form", atts);
+        atts = new AttributesImpl();
+        atts.addAttribute("", "name", "name", CDATA, "url");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts = new AttributesImpl();
+        atts.addAttribute("", "name", "name", CDATA, "label");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts = new AttributesImpl();
+        atts.addAttribute("", "name", "name", CDATA, "action");
+        atts.addAttribute("", "value", "value", CDATA, "add");
+        atts.addAttribute("", "type", "type", CDATA, "hidden");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts = new AttributesImpl();
+        atts.addAttribute("", "name", "name", CDATA, "position");
+        atts.addAttribute("", "value", "value", CDATA, Integer.toString(position));
+        atts.addAttribute("", "type", "type", CDATA, "hidden");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts = new AttributesImpl();
+        atts.addAttribute("", "type", "type", CDATA, "submit");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        XMLUtils.endElement(contentHandler, XHTMLNS, "form");
     }
 
     @Override
