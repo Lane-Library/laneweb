@@ -1,5 +1,7 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -24,8 +26,8 @@ public class BookmarksController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public void addLink(@RequestParam final String label, @RequestParam final String url,
-            @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
-        bookmarks.add(new Bookmark(label, url));
+            @RequestParam(required = false) int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+        bookmarks.add(position, new Bookmark(label, url));
     }
 
     @RequestMapping(value = "get")
@@ -43,6 +45,18 @@ public class BookmarksController {
     @ResponseStatus(value = HttpStatus.OK)
     public void removeBookmark(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
         bookmarks.remove(position);
+    }
+
+    @RequestMapping(value = "/moveUp", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void moveUp(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+        Collections.swap(bookmarks, position, position - 1);
+    }
+
+    @RequestMapping(value = "/moveDown", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void moveDown(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+        Collections.swap(bookmarks, position, position + 1);
     }
 
 //    @ExceptionHandler(IndexOutOfBoundsException.class)
