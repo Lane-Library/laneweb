@@ -17,7 +17,7 @@ import edu.stanford.irt.laneweb.model.Model;
 
 @Controller
 @SessionAttributes({ Model.BOOKMARKS, Model.EMRID })
-@RequestMapping( value = "/bookmarks" )
+@RequestMapping(value = "/bookmarks")
 public class BookmarksController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class BookmarksController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public void addLink(@RequestParam final String label, @RequestParam final String url,
-            @RequestParam(required = false) int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+            @RequestParam(required = false) final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
         bookmarks.add(position, new Bookmark(label, url));
     }
 
@@ -41,10 +41,10 @@ public class BookmarksController {
         return this.bookmarksDAO.getBookmarks(emrid);
     }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.GET)
+    @RequestMapping(value = "/moveDown", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public void removeBookmark(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
-        bookmarks.remove(position);
+    public void moveDown(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+        Collections.swap(bookmarks, position, position + 1);
     }
 
     @RequestMapping(value = "/moveUp", method = RequestMethod.GET)
@@ -53,10 +53,10 @@ public class BookmarksController {
         Collections.swap(bookmarks, position, position - 1);
     }
 
-    @RequestMapping(value = "/moveDown", method = RequestMethod.GET)
+    @RequestMapping(value = "/remove", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
-    public void moveDown(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
-        Collections.swap(bookmarks, position, position + 1);
+    public void removeBookmark(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+        bookmarks.remove(position);
     }
 
 //    @ExceptionHandler(IndexOutOfBoundsException.class)

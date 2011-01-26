@@ -12,24 +12,24 @@ import edu.stanford.irt.laneweb.model.ModelUtil;
 
 public class BookmarksGenerator extends AbstractGenerator {
 
+    private String action;
+
     private Bookmarks bookmarks;
 
-    private boolean editing;
-    
-    private int position;
-    
-    private String action;
-    
-    @Resource(name = "defaultXMLizableBookmarksView")
-    private DefaultXMLizableBookmarksView defaultView;
-    
-    @Resource
-    private EditingXMLizableBookmarksView editingView;
-    
     @Resource
     private BookmarksController controller;
 
+    @Resource(name = "defaultXMLizableBookmarksView")
+    private DefaultXMLizableBookmarksView defaultView;
+
+    private boolean editing;
+
+    @Resource
+    private EditingXMLizableBookmarksView editingView;
+
     private String label;
+
+    private int position;
 
     private String url;
 
@@ -41,17 +41,17 @@ public class BookmarksGenerator extends AbstractGenerator {
                 this.controller.moveUp(this.position, this.bookmarks);
             } else if ("down".equals(this.action)) {
                 this.controller.moveDown(this.position, this.bookmarks);
-            } else if ("add".equals(this.action)){
+            } else if ("add".equals(this.action)) {
                 this.controller.addLink(this.label, this.url, this.position, this.bookmarks);
             }
             if ("insertBefore".equals(this.action) || "insertAfter".equals(this.action)) {
                 int formPosition = "insertBefore".equals(this.action) ? this.position : this.position + 1;
                 this.editingView.toSAX(this.bookmarks, this.xmlConsumer, formPosition);
             } else {
-                this.editingView.toSAX(bookmarks, this.xmlConsumer, -1);
+                this.editingView.toSAX(this.bookmarks, this.xmlConsumer, -1);
             }
         } else {
-            this.defaultView.toSAX(bookmarks, this.xmlConsumer, -1);
+            this.defaultView.toSAX(this.bookmarks, this.xmlConsumer, -1);
         }
     }
 

@@ -11,8 +11,35 @@ public class EditingXMLizableBookmarksView extends DefaultXMLizableBookmarksView
 
     private static final String STYLE = "style";
 
+    private void createAddForm(final ContentHandler contentHandler, final int position) throws SAXException {
+        AttributesImpl atts = new AttributesImpl();
+        atts.addAttribute("", "method", "method", CDATA, "get");
+        XMLUtils.startElement(contentHandler, XHTMLNS, "form", atts);
+        atts = new AttributesImpl();
+        atts.addAttribute("", "name", "name", CDATA, "url");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts = new AttributesImpl();
+        atts.addAttribute("", "name", "name", CDATA, "label");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts = new AttributesImpl();
+        atts.addAttribute("", "name", "name", CDATA, "action");
+        atts.addAttribute("", "value", "value", CDATA, "add");
+        atts.addAttribute("", "type", "type", CDATA, "hidden");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts = new AttributesImpl();
+        atts.addAttribute("", "name", "name", CDATA, "position");
+        atts.addAttribute("", "value", "value", CDATA, Integer.toString(position));
+        atts.addAttribute("", "type", "type", CDATA, "hidden");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts = new AttributesImpl();
+        atts.addAttribute("", "type", "type", CDATA, "submit");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        XMLUtils.endElement(contentHandler, XHTMLNS, "form");
+    }
+
     @Override
-    protected void createBookmarksUL(final Bookmarks bookmarks, final ContentHandler contentHandler, final int formPosition) throws SAXException {
+    protected void createBookmarksUL(final Bookmarks bookmarks, final ContentHandler contentHandler, final int formPosition)
+            throws SAXException {
         XMLUtils.startElement(contentHandler, XHTMLNS, UL);
         int i = 0;
         for (Bookmark bookmark : bookmarks) {
@@ -54,32 +81,6 @@ public class EditingXMLizableBookmarksView extends DefaultXMLizableBookmarksView
             createAddForm(contentHandler, i);
         }
         XMLUtils.endElement(contentHandler, XHTMLNS, UL);
-    }
-    
-    private void createAddForm(ContentHandler contentHandler, int position) throws SAXException {
-        AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute("", "method", "method", CDATA, "get");
-        XMLUtils.startElement(contentHandler, XHTMLNS, "form", atts);
-        atts = new AttributesImpl();
-        atts.addAttribute("", "name", "name", CDATA, "url");
-        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
-        atts = new AttributesImpl();
-        atts.addAttribute("", "name", "name", CDATA, "label");
-        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
-        atts = new AttributesImpl();
-        atts.addAttribute("", "name", "name", CDATA, "action");
-        atts.addAttribute("", "value", "value", CDATA, "add");
-        atts.addAttribute("", "type", "type", CDATA, "hidden");
-        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
-        atts = new AttributesImpl();
-        atts.addAttribute("", "name", "name", CDATA, "position");
-        atts.addAttribute("", "value", "value", CDATA, Integer.toString(position));
-        atts.addAttribute("", "type", "type", CDATA, "hidden");
-        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
-        atts = new AttributesImpl();
-        atts.addAttribute("", "type", "type", CDATA, "submit");
-        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
-        XMLUtils.endElement(contentHandler, XHTMLNS, "form");
     }
 
     @Override

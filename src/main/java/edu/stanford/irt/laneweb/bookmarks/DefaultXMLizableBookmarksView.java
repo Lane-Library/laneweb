@@ -55,8 +55,9 @@ public class DefaultXMLizableBookmarksView {
         XMLUtils.endElement(contentHandler, XHTMLNS, DIV);
         contentHandler.endDocument();
     }
-    
-    protected void createBookmarksUL(final Bookmarks bookmarks, final ContentHandler contentHandler, final int formPosition) throws SAXException {
+
+    protected void createBookmarksUL(final Bookmarks bookmarks, final ContentHandler contentHandler, final int formPosition)
+            throws SAXException {
         XMLUtils.startElement(contentHandler, XHTMLNS, UL);
         for (Bookmark bookmark : bookmarks) {
             XMLUtils.startElement(contentHandler, XHTMLNS, LI);
