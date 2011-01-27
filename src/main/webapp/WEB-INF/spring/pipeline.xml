@@ -29,6 +29,21 @@
         <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
     </bean>
     
+    <bean name="org.apache.cocoon.serialization.Serializer/html5"
+        class="org.apache.cocoon.serialization.XMLSerializer" scope="prototype"
+        parent="org.apache.cocoon.serialization.AbstractTextSerializer">
+        <property name="format">
+            <props>
+                <prop key="doctype-public"></prop>
+                <prop key="doctype-system"></prop>
+                <prop key="encoding">UTF-8</prop>
+                <prop key="indent">yes</prop>
+                <prop key="omit-xml-declaration">yes</prop>
+            </props>
+        </property>
+        <property name="transformerFactory" value="net.sf.saxon.TransformerFactoryImpl"/>
+    </bean>
+    
     <bean name="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"
         class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoFactoryBean"
         init-method="init"/>
@@ -37,6 +52,14 @@
         class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoInitializer"
         init-method="init">
         <property name="componentName" value="org.apache.cocoon.serialization.Serializer/xhtml"/>
+        <property name="info" ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
+        <property name="mimeType" value="text/html"/>
+    </bean>
+    
+    <bean name="org.apache.cocoon.serialization.Serializer/html5/info"
+        class="org.apache.cocoon.core.container.spring.pipeline.PipelineComponentInfoInitializer"
+        init-method="init">
+        <property name="componentName" value="org.apache.cocoon.serialization.Serializer/html5"/>
         <property name="info" ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
         <property name="mimeType" value="text/html"/>
     </bean>
