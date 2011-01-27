@@ -189,9 +189,6 @@
                                 <include>lane-forms-min.js</include>
                                 <include>lane-search-reset-min.js</include>
                                 <include>lane-search-hoverText-min.js</include>
-                                <!--  pending solution to expandies falling off page
-                        <include>lane-column-height-min.js</include>
-                         -->
                             </includes>
                         </aggregation>
                         <aggregation>

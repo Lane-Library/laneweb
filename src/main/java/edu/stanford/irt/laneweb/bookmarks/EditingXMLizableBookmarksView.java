@@ -9,32 +9,42 @@ import org.xml.sax.helpers.AttributesImpl;
 @Component
 public class EditingXMLizableBookmarksView extends DefaultXMLizableBookmarksView {
 
-    private static final String STYLE = "style";
+    private static final String FORM = "form";
+
+    private static final String INPUT = "input";
+
+    private static final String METHOD = "method";
+
+    private static final String NAME = "name";
+
+    private static final String TYPE = "type";
+
+    private static final String VALUE = "value";
 
     private void createAddForm(final ContentHandler contentHandler, final int position) throws SAXException {
         AttributesImpl atts = new AttributesImpl();
-        atts.addAttribute("", "method", "method", CDATA, "get");
-        XMLUtils.startElement(contentHandler, XHTMLNS, "form", atts);
+        atts.addAttribute("", METHOD, METHOD, CDATA, "get");
+        XMLUtils.startElement(contentHandler, XHTMLNS, FORM, atts);
         atts = new AttributesImpl();
-        atts.addAttribute("", "name", "name", CDATA, "url");
-        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts.addAttribute("", NAME, NAME, CDATA, "url");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, INPUT, atts);
         atts = new AttributesImpl();
-        atts.addAttribute("", "name", "name", CDATA, "label");
-        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts.addAttribute("", NAME, NAME, CDATA, "label");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, INPUT, atts);
         atts = new AttributesImpl();
-        atts.addAttribute("", "name", "name", CDATA, "action");
-        atts.addAttribute("", "value", "value", CDATA, "add");
-        atts.addAttribute("", "type", "type", CDATA, "hidden");
-        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts.addAttribute("", NAME, NAME, CDATA, "action");
+        atts.addAttribute("", VALUE, VALUE, CDATA, "add");
+        atts.addAttribute("", TYPE, TYPE, CDATA, "hidden");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, INPUT, atts);
         atts = new AttributesImpl();
-        atts.addAttribute("", "name", "name", CDATA, "position");
-        atts.addAttribute("", "value", "value", CDATA, Integer.toString(position));
-        atts.addAttribute("", "type", "type", CDATA, "hidden");
-        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
+        atts.addAttribute("", NAME, NAME, CDATA, "position");
+        atts.addAttribute("", VALUE, VALUE, CDATA, Integer.toString(position));
+        atts.addAttribute("", TYPE, TYPE, CDATA, "hidden");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, INPUT, atts);
         atts = new AttributesImpl();
-        atts.addAttribute("", "type", "type", CDATA, "submit");
-        XMLUtils.createElementNS(contentHandler, XHTMLNS, "input", atts);
-        XMLUtils.endElement(contentHandler, XHTMLNS, "form");
+        atts.addAttribute("", TYPE, TYPE, CDATA, "submit");
+        XMLUtils.createElementNS(contentHandler, XHTMLNS, INPUT, atts);
+        XMLUtils.endElement(contentHandler, XHTMLNS, FORM);
     }
 
     @Override
@@ -52,27 +62,27 @@ public class EditingXMLizableBookmarksView extends DefaultXMLizableBookmarksView
             XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, bookmark.getLabel());
             atts = new AttributesImpl();
             atts.addAttribute("", HREF, HREF, CDATA, "?action=delete&position=" + i);
-            atts.addAttribute("", CLASS, STYLE, STYLE, "float:right");
+            atts.addAttribute("", CLASS, CLASS, CDATA, "nav");
             XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, "delete");
             if (bookmarks.size() > 1 && i < bookmarks.size() - 1) {
                 atts = new AttributesImpl();
                 atts.addAttribute("", HREF, HREF, CDATA, "?action=down&position=" + i);
-                atts.addAttribute("", CLASS, STYLE, STYLE, "float:right");
+                atts.addAttribute("", CLASS, CLASS, CDATA, "nav");
                 XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, "down");
             }
             if (bookmarks.size() > 1 && i > 0) {
                 atts = new AttributesImpl();
                 atts.addAttribute("", HREF, HREF, CDATA, "?action=up&position=" + i);
-                atts.addAttribute("", CLASS, STYLE, STYLE, "float:right");
+                atts.addAttribute("", CLASS, CLASS, CDATA, "nav");
                 XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, "up");
             }
             atts = new AttributesImpl();
             atts.addAttribute("", HREF, HREF, CDATA, "?action=insertBefore&position=" + i);
-            atts.addAttribute("", CLASS, STYLE, STYLE, "float:right");
+            atts.addAttribute("", CLASS, CLASS, CDATA, "nav");
             XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, "insertBefore");
             atts = new AttributesImpl();
             atts.addAttribute("", HREF, HREF, CDATA, "?action=insertAfter&position=" + i);
-            atts.addAttribute("", CLASS, STYLE, STYLE, "float:right");
+            atts.addAttribute("", CLASS, CLASS, CDATA, "nav");
             XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, "insertAfter");
             i++;
             XMLUtils.endElement(contentHandler, XHTMLNS, LI);
