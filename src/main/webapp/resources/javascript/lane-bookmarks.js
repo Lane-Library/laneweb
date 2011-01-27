@@ -9,6 +9,15 @@ YUI().add("bookmarks", function(Y) {
         },
         bookmarks: {
             value: null
+        },
+        strings: {
+        	value: {
+        		editing:"edit",
+        		notEditing:"done"
+        	}
+        },
+        toggle: {
+        	value: null
         }
     };
     Bookmarks.HTML_PARSER = {
@@ -20,9 +29,27 @@ YUI().add("bookmarks", function(Y) {
                 	values.push({label:node.get("textContent"), url:node.get("href")});
                 }
                 return values;
-            }
+            },
+    		toggle : function(contentBox) {
+    			return contentBox.one("h3 a");
+    		}
         };
     Y.extend(Bookmarks, Y.Widget, {
+    	renderUI : function() {
+    		this.get("toggle").on("click", this._toggleEdit, this);
+    	},
+    	bindUI : function() {
+    		this.after("editingChange", this._afterEditingChange);
+    	},
+    	_afterEditingChange : function(e) {
+    		var strings = this.get("strings");
+    		this.get("toggle").set("innerHTML", e.newVal ? strings.editing : strings.notEditing);
+    	},
+    	_toggleEdit : function(e) {
+    		e.preventDefault();
+    		var editing = this.get("editing");
+    		this.set("editing", !editing);
+    	}
     });
     Y.Bookmarks = Bookmarks;
 }, "${project.version}", {requires:["widget", "substitute"]});
