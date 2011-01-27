@@ -44,6 +44,16 @@ YUI().add("bookmarks", function(Y) {
     		this.get("bookmarks").splice(position, 1);
     		this._redrawBookmarks();
     	},
+    	moveUp : function(position) {
+    		var bookmarks = this.get("bookmarks");
+    		bookmarks.splice(position - 1, 2, bookmarks[position], bookmarks[position - 1]);
+    		this._redrawBookmarks();
+    	},
+    	moveDown : function(position) {
+    		var bookmarks = this.get("bookmarks");
+    		bookmarks.splice(position, 2, bookmarks[position + 1], bookmarks[position]);
+    		this._redrawBookmarks();
+    	},
     	renderUI : function() {
     		this.get("toggle").on("click", this._toggleEdit, this);
     	},

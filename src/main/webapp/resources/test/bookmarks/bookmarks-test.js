@@ -39,6 +39,26 @@ YUI({
         	var size = Y.all("li").size();
         	bookmarks.removeBookmark(1);
         	Y.Assert.areEqual(size - 1, Y.all("li").size());
+        },
+        
+        testMoveUp : function() {
+        	var li = Y.all("li");
+        	var first = li.item(0).get("textContent");
+        	var second = li.item(1).get("textContent");
+        	bookmarks.moveUp(1);
+        	li = Y.all("li");
+        	Y.Assert.areEqual(second, li.item(0).get("textContent"));
+        	Y.Assert.areEqual(first, li.item(1).get("textContent"));
+        },
+
+        testMoveDown : function() {
+        	var li = Y.all("li");
+        	var first = li.item(0).get("textContent");
+        	var second = li.item(1).get("textContent");
+        	bookmarks.moveDown(0);
+        	li = Y.all("li");
+        	Y.Assert.areEqual(second, li.item(0).get("textContent"));
+        	Y.Assert.areEqual(first, li.item(1).get("textContent"));
         }
     });
     
