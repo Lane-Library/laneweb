@@ -19,6 +19,7 @@ YUI().add("bookmarks", function(Y) {
                 	var node = nodes.item(i);
                 	values.push({label:node.get("textContent"), url:node.get("href")});
                 }
+                return values;
             }
         };
     Y.extend(Bookmarks, Y.Widget, {

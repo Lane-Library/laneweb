@@ -19,8 +19,7 @@ YUI({
         },
         
         testBookmarkLabel : function() {
-        	alert(bookmarks.get("editing"));
-        	alert(bookmarks.get("bookmarks")[0].label)
+        	Y.Assert.areEqual("Google", bookmarks.get("bookmarks")[0].label);
         }
     });
     
