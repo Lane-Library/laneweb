@@ -1,4 +1,37 @@
 YUI().add("bookmarks", function(Y) {
+	function Bookmark(config) {
+		Bookmark.superclass.constructor.apply(this, arguments);
+	}
+	Bookmark.NAME = "bookmark";
+	Bookmark.ATTRS = {
+	    editing : {
+	    	value:false
+	    },
+	    label : {
+	    	value: null
+	    },
+	    url : {
+	    	value : null
+	    }
+	};
+	Bookmark.HTML_PARSER = {
+			label : function(contentBox) {
+				return contentBox.get("textContent");
+			},
+			url : function(contentBox) {
+				return contentBox.one("a").get("href");
+			}
+	};
+	Bookmark.CREATE_TEMPLATE = "<li><a></a></li>";
+  Bookmark.EDIT_TEMPLATE = '<a class="nav">delete</a><a class="nav">up</a><a class="nav">insertBefore</a><a class="nav">insertAfter</a>'
+	Y.extend(Bookmark, Y.Widget, {
+		renderUI : function() {
+			var contentBox = this.get("contentBox");
+			contentBox.set("innerHTML", this.get("srcNode").get("innerHTML") + Bookmark.EDIT_TEMPLATE);
+		}
+	});
+	Y.Bookmark = Bookmark;
+	
     function Bookmarks(config) {
         Bookmarks.superclass.constructor.apply(this, arguments);
     }
@@ -8,7 +41,13 @@ YUI().add("bookmarks", function(Y) {
             value: false
         },
         bookmarks: {
-            value: null
+            valueFn : function() {
+            	var i, b, value = [], lis = this.get("contentBox").all("li");
+            	for (i = 0; i < lis.size(); i++) {
+            		value.push(new Y.Bookmark({srcNode:lis.item(i), render:true}));
+            	}
+            	return value;
+            }
         },
         strings: {
         	value: {
@@ -21,15 +60,6 @@ YUI().add("bookmarks", function(Y) {
         }
     };
     Bookmarks.HTML_PARSER = {
-            bookmarks : function (contentBox) {
-                var nodes = contentBox.all("ul li a");
-                var values = [];
-                for (var i = 0; i < nodes.size(); i++) {
-                	var node = nodes.item(i);
-                	values.push({label:node.get("textContent"), url:node.get("href")});
-                }
-                return values;
-            },
     		toggle : function(contentBox) {
     			return contentBox.one("h3 a");
     		}
@@ -37,22 +67,29 @@ YUI().add("bookmarks", function(Y) {
     Y.extend(Bookmarks, Y.Widget, {
     	addBookmark : function(bookmark, position) {
     		position = position === undefined ? 0 : position;
-    		this.get("bookmarks").splice(position, 0, bookmark);
-    		this._redrawBookmarks();
+    		if (bookmark.label && bookmark.url) {
+    			var node = Y.Node.create(Bookmark.CREATE_TEMPLATE);
+    			node.one("a").set("innerHTML", bookmark.label);
+    			node.one("a").set("href", bookmark.url);
+        		this.get("contentBox").one("ul").appendChild(node);
+        		this.get("bookmarks").splice(position, 0, new Y.Bookmark({srcNode:node,render:true}));
+    		}
     	},
     	removeBookmark : function(position) {
+    		this.get("bookmarks")[position].destroy();
     		this.get("bookmarks").splice(position, 1);
-    		this._redrawBookmarks();
     	},
     	moveUp : function(position) {
     		var bookmarks = this.get("bookmarks");
     		bookmarks.splice(position - 1, 2, bookmarks[position], bookmarks[position - 1]);
-    		this._redrawBookmarks();
+    		var nodeList = this.get("contentBox").all("li");
+    		nodeList.item(position).swap(nodeList.item(position - 1));
     	},
     	moveDown : function(position) {
     		var bookmarks = this.get("bookmarks");
     		bookmarks.splice(position, 2, bookmarks[position + 1], bookmarks[position]);
-    		this._redrawBookmarks();
+    		var nodeList = this.get("contentBox").all("li");
+    		nodeList.item(position).swap(nodeList.item(position + 1));
     	},
     	renderUI : function() {
     		this.get("toggle").on("click", this._toggleEdit, this);
@@ -68,15 +105,6 @@ YUI().add("bookmarks", function(Y) {
     		e.preventDefault();
     		var editing = this.get("editing");
     		this.set("editing", !editing);
-    	},
-    	_redrawBookmarks : function() {
-    		var bd = this.get("contentBox").one(".bd");
-    		var newUl = "<ul>";
-    		var bookmarks = this.get("bookmarks");
-    		for (var i = 0; i < bookmarks.length; i++) {
-    			newUl += ("<li><a href=\"" + bookmarks[i].url + "\">" + bookmarks[i].label + "</a></li>");
-    		}
-    		bd.set("innerHTML", newUl)
     	}
     });
     Y.Bookmarks = Bookmarks;

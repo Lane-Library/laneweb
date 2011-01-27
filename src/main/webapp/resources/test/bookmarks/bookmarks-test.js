@@ -7,9 +7,15 @@ YUI({
     }
 }).use("test", "console", "node-event-simulate", "bookmarks",  function(Y){
 	
-    var bookmarks = new Y.Bookmarks({srcNode:"#bookmarks"});
-    
-    bookmarks.render();
+//	var bookmarkTestCase = new Y.Test.Case({
+//		name: "Lane Bookmark Test Case"
+//	});
+//	
+//	bookmarkTestCase.bookmark = new Y.Bookmark({srcNode:Y.one("li")});
+//	bookmarkTestCase.bookmark.render();
+	
+	
+    var bookmarks = new Y.Bookmarks({srcNode:"#bookmarks", render:true});
     
     var bookmarksTestCase = new Y.Test.Case({
         name: "Lane Bookmarks Test Case",
@@ -18,8 +24,12 @@ YUI({
         	Y.Assert.isFalse(bookmarks.get("editing"));
         },
         
+        testForTwoBookmarks : function() {
+        	Y.Assert.areEqual(2, bookmarks.get("bookmarks").length);
+        },
+        
         testBookmarkLabel : function() {
-        	Y.Assert.areEqual("Google", bookmarks.get("bookmarks")[0].label);
+        	Y.Assert.areEqual("Google", bookmarks.get("bookmarks")[0].get("label"));
         },
         
         testSetEditing : function() {
@@ -67,6 +77,7 @@ YUI({
         newestOnTop: false
     }).render("#log");
 
-    Y.Test.Runner.add(bookmarksTestCase);
+//  Y.Test.Runner.add(bookmarkTestCase);
+  Y.Test.Runner.add(bookmarksTestCase);
     Y.Test.Runner.run();
 });
