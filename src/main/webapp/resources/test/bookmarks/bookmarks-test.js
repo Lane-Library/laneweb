@@ -27,6 +27,18 @@ YUI({
         	var toggle = Y.one("h3 a");
         	toggle.simulate("click");
         	Y.Assert.isFalse(editing === bookmarks.get("editing"));
+        },
+        
+        testAddBookmark : function() {
+        	var size = Y.all("li").size();
+        	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
+        	Y.Assert.areEqual(size + 1, Y.all("li").size());
+        },
+        
+        testRemoveBookmark : function() {
+        	var size = Y.all("li").size();
+        	bookmarks.removeBookmark(1);
+        	Y.Assert.areEqual(size - 1, Y.all("li").size());
         }
     });
     

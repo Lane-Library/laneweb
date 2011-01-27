@@ -35,6 +35,15 @@ YUI().add("bookmarks", function(Y) {
     		}
         };
     Y.extend(Bookmarks, Y.Widget, {
+    	addBookmark : function(bookmark, position) {
+    		position = position === undefined ? 0 : position;
+    		this.get("bookmarks").splice(position, 0, bookmark);
+    		this._redrawBookmarks();
+    	},
+    	removeBookmark : function(position) {
+    		this.get("bookmarks").splice(position, 1);
+    		this._redrawBookmarks();
+    	},
     	renderUI : function() {
     		this.get("toggle").on("click", this._toggleEdit, this);
     	},
@@ -49,6 +58,15 @@ YUI().add("bookmarks", function(Y) {
     		e.preventDefault();
     		var editing = this.get("editing");
     		this.set("editing", !editing);
+    	},
+    	_redrawBookmarks : function() {
+    		var bd = this.get("contentBox").one(".bd");
+    		var newUl = "<ul>";
+    		var bookmarks = this.get("bookmarks");
+    		for (var i = 0; i < bookmarks.length; i++) {
+    			newUl += ("<li><a href=\"" + bookmarks[i].url + "\">" + bookmarks[i].label + "</a></li>");
+    		}
+    		bd.set("innerHTML", newUl)
     	}
     });
     Y.Bookmarks = Bookmarks;
