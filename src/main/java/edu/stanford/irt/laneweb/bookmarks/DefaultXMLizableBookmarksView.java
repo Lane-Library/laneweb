@@ -38,12 +38,12 @@ public class DefaultXMLizableBookmarksView {
         atts.addAttribute("", ID, ID, ID, "bookmarks");
         XMLUtils.startElement(contentHandler, XHTMLNS, DIV, atts);
         XMLUtils.startElement(contentHandler, XHTMLNS, H3);
-        XMLUtils.data(contentHandler, "bookmarks");
         String href = getEditHref();
         String label = getEditLabel();
         atts = new AttributesImpl();
         atts.addAttribute("", HREF, HREF, CDATA, href);
         XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, label);
+        XMLUtils.data(contentHandler, "bookmarks");
         XMLUtils.endElement(contentHandler, XHTMLNS, H3);
         atts = new AttributesImpl();
         atts.addAttribute("", CLASS, CLASS, CDATA, "bd");
@@ -66,8 +66,10 @@ public class DefaultXMLizableBookmarksView {
         if (bookmarks.size() > 0) {
             XMLUtils.startElement(contentHandler, XHTMLNS, UL);
             for (Bookmark bookmark : bookmarks) {
-                XMLUtils.startElement(contentHandler, XHTMLNS, LI);
                 AttributesImpl atts = new AttributesImpl();
+                atts.addAttribute("", CLASS, CLASS, CDATA, "bookmark");
+                XMLUtils.startElement(contentHandler, XHTMLNS, LI, atts);
+                atts = new AttributesImpl();
                 atts.addAttribute("", HREF, HREF, CDATA, bookmark.getUrl());
                 XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, bookmark.getLabel());
                 XMLUtils.endElement(contentHandler, XHTMLNS, LI);

@@ -1,23 +1,37 @@
 #bookmarks h3 a {
     text-transform : none;
-    float : right
+    float : right;
+    display : block
 }
+#bookmarks .delete input {
+    background : none;
+    border : none;
+    border-bottom : 1px dotted #81785A;
+    float : right;
+    color : #1C4B70;
+    clear : right
+}
+#bookmarks .delete input:hover {
+    color : #820000;
+    border-color : #820000;
+    border-bottom-style : solid;
+    cursor : pointer
+}
+/* IE 6 needs this to retain list bullets . . .
+#bookmarks .delete {
+    border : 1px solid white
+}*/
 #bookmarks h4 {
     text-align : center;
     font-size : 1.1em
 }
-#bookmarks .nav {
-    float : right
+#bookmarks .add {
+    text-align : right
 }
-#bookmarks form {
-    position : relative;
-    height : 80px
+#bookmarks label {
+    float : left
 }
-#bookmarks form div div {
-    height : 22px
-}
-#bookmarks input {
+#bookmarks input[type = "text"] {
     width : 80%;
-    position : absolute;
-    right : 0
+    margin-bottom : 2px
 }
