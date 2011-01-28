@@ -17,10 +17,10 @@
     border-bottom-style : solid;
     cursor : pointer
 }
-/* IE 6 needs this to retain list bullets . . .
+/* IE 6 needs this to retain list bullets . . . */
 #bookmarks .delete {
-    border : 1px solid white
-}*/
+    _border : 1px solid white
+}
 #bookmarks h4 {
     text-align : center;
     font-size : 1.1em
