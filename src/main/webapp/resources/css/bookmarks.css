@@ -19,7 +19,7 @@
 }
 /* IE 6 needs this to retain list bullets . . . */
 #bookmarks .delete {
-    _border : 1px solid white
+    border : 1px solid white
 }
 #bookmarks h4 {
     text-align : center;
