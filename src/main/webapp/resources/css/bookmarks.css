@@ -12,6 +12,9 @@
 #bookmarks form {
     position:relative
 }
+#bookmarks form div div {
+    height:30px
+}
 #bookmarks input {
     width:80%;
     position:absolute;
