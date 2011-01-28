@@ -4,13 +4,16 @@
 }
 #bookmarks h4 {
     text-align:center;
-    font-size: 1.1em;
+    font-size: 1.1em
 }
-#bookmarks nav {
-    float:right;
+#bookmarks .nav {
+    float:right
+}
+#bookmarks form {
+    position:relative
 }
 #bookmarks input {
     width:80%;
-    position:relative;
-    left:10%;
+    position:absolute;
+    right:0
 }
