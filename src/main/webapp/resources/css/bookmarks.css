@@ -2,6 +2,10 @@
     text-transform:none;
     float:right
 }
-#bookmarks nav {
+#bookmarks h4 {
+    text-align:center;
+    font-size: 1.1em;
+}
+#bookmarks nav, #bookmarks input {
     float:right;
 }

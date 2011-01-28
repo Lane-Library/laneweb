@@ -44,14 +44,17 @@ public class BookmarksGenerator extends AbstractGenerator {
             } else if ("add".equals(this.action)) {
                 this.controller.addLink(this.label, this.url, this.position, this.bookmarks);
             }
-            if ("insertBefore".equals(this.action) || "insertAfter".equals(this.action)) {
-                int formPosition = "insertBefore".equals(this.action) ? this.position : this.position + 1;
-                this.editingView.toSAX(this.bookmarks, this.xmlConsumer, formPosition);
-            } else {
-                this.editingView.toSAX(this.bookmarks, this.xmlConsumer, -1);
-            }
+            // if ("insertBefore".equals(this.action) ||
+            // "insertAfter".equals(this.action)) {
+            // int formPosition = "insertBefore".equals(this.action) ?
+            // this.position : this.position + 1;
+            // this.editingView.toSAX(this.bookmarks, this.xmlConsumer,
+            // formPosition);
+            // } else {
+            this.editingView.toSAX(this.bookmarks, this.xmlConsumer);
+            // }
         } else {
-            this.defaultView.toSAX(this.bookmarks, this.xmlConsumer, -1);
+            this.defaultView.toSAX(this.bookmarks, this.xmlConsumer);
         }
     }
 

@@ -31,7 +31,7 @@ public class DefaultXMLizableBookmarksView {
 
     static final String XHTMLNS = "http://www.w3.org/1999/xhtml";
 
-    public void toSAX(final Bookmarks bookmarks, final ContentHandler contentHandler, final int formPosition) throws SAXException {
+    public void toSAX(final Bookmarks bookmarks, final ContentHandler contentHandler) throws SAXException {
         contentHandler.startDocument();
         AttributesImpl atts = new AttributesImpl();
         atts.addAttribute("", CLASS, CLASS, CDATA, "module");
@@ -48,25 +48,10 @@ public class DefaultXMLizableBookmarksView {
         atts = new AttributesImpl();
         atts.addAttribute("", CLASS, CLASS, CDATA, "bd");
         XMLUtils.startElement(contentHandler, XHTMLNS, DIV, atts);
-        if (bookmarks.size() > 0) {
-            createBookmarksUL(bookmarks, contentHandler, formPosition);
-        }
+        maybeCreateBookmarksUL(bookmarks, contentHandler);
         XMLUtils.endElement(contentHandler, XHTMLNS, DIV);
         XMLUtils.endElement(contentHandler, XHTMLNS, DIV);
         contentHandler.endDocument();
-    }
-
-    protected void createBookmarksUL(final Bookmarks bookmarks, final ContentHandler contentHandler, final int formPosition)
-            throws SAXException {
-        XMLUtils.startElement(contentHandler, XHTMLNS, UL);
-        for (Bookmark bookmark : bookmarks) {
-            XMLUtils.startElement(contentHandler, XHTMLNS, LI);
-            AttributesImpl atts = new AttributesImpl();
-            atts.addAttribute("", HREF, HREF, CDATA, bookmark.getUrl());
-            XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, bookmark.getLabel());
-            XMLUtils.endElement(contentHandler, XHTMLNS, LI);
-        }
-        XMLUtils.endElement(contentHandler, XHTMLNS, UL);
     }
 
     protected String getEditHref() {
@@ -75,5 +60,19 @@ public class DefaultXMLizableBookmarksView {
 
     protected String getEditLabel() {
         return "edit";
+    }
+
+    protected void maybeCreateBookmarksUL(final Bookmarks bookmarks, final ContentHandler contentHandler) throws SAXException {
+        if (bookmarks.size() > 0) {
+            XMLUtils.startElement(contentHandler, XHTMLNS, UL);
+            for (Bookmark bookmark : bookmarks) {
+                XMLUtils.startElement(contentHandler, XHTMLNS, LI);
+                AttributesImpl atts = new AttributesImpl();
+                atts.addAttribute("", HREF, HREF, CDATA, bookmark.getUrl());
+                XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, bookmark.getLabel());
+                XMLUtils.endElement(contentHandler, XHTMLNS, LI);
+            }
+            XMLUtils.endElement(contentHandler, XHTMLNS, UL);
+        }
     }
 }

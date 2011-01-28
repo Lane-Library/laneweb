@@ -36,10 +36,10 @@ public class BookmarksDataBinder implements DataBinder {
             String action = request.getParameter("action");
             String url = request.getParameter("url");
             String label = request.getParameter("label");
-            if (position != null) {
+            if (action != null) {
                 model.put("bookmarks:action", action);
             }
-            if (action != null) {
+            if (position != null) {
                 model.put("bookmarks:position", position);
             }
             if (url != null) {
