@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context>
+<Context clearReferencesThreadLocals="true">
     <Resource name="jdbc/eresources" auth="Container"
         type="javax.sql.DataSource"
         driverClassName="oracle.jdbc.driver.OracleDriver"

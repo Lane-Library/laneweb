@@ -17,7 +17,7 @@
     border-bottom-style : solid;
     cursor : pointer
 }
-/* IE 6 needs this to retain list bullets . . . */
+/* IE 6 & 7 need this to retain list bullets . . . */
 #bookmarks .delete {
     border : 1px solid white
 }
