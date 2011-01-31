@@ -4,6 +4,8 @@
     xmlns:s="http://lane.stanford.edu/resources/1.0" exclude-result-prefixes="h s"
     version="2.0">
     
+    <xsl:param name="alpha"/>
+
     <xsl:param name="request-uri"/>
     
     <xsl:param name="source"/>
@@ -12,7 +14,7 @@
     
     <xsl:param name="ipgroup"/>
     
-    <xsl:param name="query-string"/>
+    <xsl:param name="query"/>
     
     <xsl:param name="emrid"/>
     
@@ -375,12 +377,12 @@
     <xsl:template name="paginationLinks">
         <xsl:variable name="no-page-query-string">
             <xsl:choose>
-                <xsl:when test="contains($query-string, 'page=')">
-                    <xsl:value-of select="substring-before($query-string, 'page=')"/>
+                <xsl:when test="$query and $source">
+                    <xsl:value-of select="concat('source=', $source, '&amp;q=', $query, '&amp;')"/>
                 </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="concat($query-string,'&amp;')"/>
-                </xsl:otherwise>
+                <xsl:when test="$alpha">
+                    <xsl:value-of select="concat('a=', $alpha, '&amp;')"/>
+                </xsl:when>
             </xsl:choose>
         </xsl:variable>
         <div class="results-nav">
@@ -403,7 +405,7 @@
                         <a id="seeAll" href="?{$no-page-query-string}page=all">See All</a>
                         <xsl:call-template name="pageLinks">
                             <xsl:with-param name="page" select="number(0)"/>
-                            <xsl:with-param name="query" select="$no-page-query-string"/>
+                            <xsl:with-param name="query-string" select="$no-page-query-string"/>
                         </xsl:call-template>
                     </xsl:if>
                 </div>
@@ -413,7 +415,7 @@
     
     <xsl:template name="pageLinks">
         <xsl:param name="page"/>
-        <xsl:param name="query"/>
+        <xsl:param name="query-string"/>
         <xsl:choose>
             <xsl:when test="number($page) = number(/s:resources/@page)">
                 <xsl:value-of select="number($page) + 1"/>
@@ -426,7 +428,7 @@
             <xsl:text> | </xsl:text>
             <xsl:call-template name="pageLinks">
                 <xsl:with-param name="page" select="number($page + 1)"/>
-                <xsl:with-param name="query" select="$query"/>
+                <xsl:with-param name="query-string" select="$query-string"/>
             </xsl:call-template>
         </xsl:if>
     </xsl:template>
