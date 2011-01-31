@@ -421,7 +421,7 @@
                 <xsl:value-of select="number($page) + 1"/>
             </xsl:when>
             <xsl:otherwise>
-                <a href="?{$query}page={number($page) + 1}"><xsl:value-of select="number($page) + 1"/></a>
+                <a href="?{$query-string}page={number($page) + 1}"><xsl:value-of select="number($page) + 1"/></a>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:if test="number($page + 1) != number(/s:resources/@pages)">
