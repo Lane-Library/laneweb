@@ -14,11 +14,11 @@ import edu.stanford.irt.search.spring.SearchCacheManager;
  */
 public class MetaSearchManagerSource {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MetaSearchManagerSource.class);
-
     private AbstractXmlApplicationContext context;
 
     private HttpClient httpClient;
+
+    private final Logger log = LoggerFactory.getLogger(MetaSearchManagerSource.class);
 
     private MetaSearchManager manager;
 
@@ -56,7 +56,7 @@ public class MetaSearchManagerSource {
             this.context.destroy();
             this.context = context;
         } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
+            this.log.error(e.getMessage(), e);
         }
     }
 }

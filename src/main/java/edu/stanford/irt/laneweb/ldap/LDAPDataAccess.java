@@ -56,9 +56,9 @@ public class LDAPDataAccess {
         }
     }
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LDAPDataAccess.class);
-
     private LdapTemplate ldapTemplate;
+
+    private final Logger log = LoggerFactory.getLogger(LDAPDataAccess.class);
 
     private SubjectSource subjectSource;
 
@@ -69,14 +69,14 @@ public class LDAPDataAccess {
             Subject subject = this.subjectSource.getSubject();
             ldapData = Subject.doAs(subject, action);
         } catch (SecurityException e) {
-            LOGGER.error("unable to authenticate", e);
+            this.log.error("unable to authenticate", e);
         } catch (CommunicationException e) {
-            LOGGER.error("unable to connect to ldap server", e);
+            this.log.error("unable to connect to ldap server", e);
         } catch (NamingException e) {
-            LOGGER.error("failed to get ldap data", e);
+            this.log.error("failed to get ldap data", e);
         }
         if (ldapData == null) {
-            LOGGER.warn("using sunetid for name");
+            this.log.warn("using sunetid for name");
             ldapData = new LDAPData();
             ldapData.setName(sunetid);
         }

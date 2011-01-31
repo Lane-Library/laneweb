@@ -43,12 +43,12 @@ import org.xml.sax.SAXException;
  */
 public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NonCachingPipeline.class);
-
     // Error handler stuff
     private SitemapErrorHandler errorHandler;
 
     private ProcessingPipeline errorPipeline;
+
+    private final Logger log = LoggerFactory.getLogger(NonCachingPipeline.class);
 
     /** True when pipeline has been prepared. */
     private boolean prepared;
@@ -209,8 +209,8 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             Response res = ObjectModelHelper.getResponse(environment.getObjectModel());
             res.setDateHeader("Expires", System.currentTimeMillis() + this.expires);
             res.setHeader("Cache-Control", "max-age=" + this.expires / 1000 + ", public");
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Setting a new Expires object for this resource");
+            if (this.log.isDebugEnabled()) {
+                this.log.debug("Setting a new Expires object for this resource");
             }
             environment.getObjectModel().put(ObjectModelHelper.EXPIRES_OBJECT,
                     Long.valueOf(this.expires + System.currentTimeMillis()));
@@ -385,11 +385,11 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
         // get <base>
         String current = tokens.nextToken();
         if (current.equals("modification")) {
-            LOGGER.warn("the \"modification\" keyword is not yet" + " implemented. Assuming \"now\" as the base attribute");
+            this.log.warn("the \"modification\" keyword is not yet" + " implemented. Assuming \"now\" as the base attribute");
             current = "now";
         }
         if (!current.equals("now") && !current.equals("access")) {
-            LOGGER.error("bad <base> attribute, Expires header will not be set");
+            this.log.error("bad <base> attribute, Expires header will not be set");
             return -1;
         }
         long number;
@@ -406,14 +406,14 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             try {
                 number = Long.parseLong(current);
             } catch (NumberFormatException nfe) {
-                LOGGER.error("state violation: a number was expected here");
+                this.log.error("state violation: a number was expected here");
                 return -1;
             }
             // now get <modifier>
             try {
                 current = tokens.nextToken();
             } catch (NoSuchElementException nsee) {
-                LOGGER.error("State violation: expecting a modifier" + " but no one found: Expires header will not be set");
+                this.log.error("State violation: expecting a modifier" + " but no one found: Expires header will not be set");
             }
             if (current.equals("years")) {
                 modifier = 365L * 24L * 60L * 60L * 1000L;
@@ -430,7 +430,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             } else if (current.equals("seconds")) {
                 modifier = 1000L;
             } else {
-                LOGGER.error("Bad modifier (" + current + "): ignoring expires configuration");
+                this.log.error("Bad modifier (" + current + "): ignoring expires configuration");
                 return -1;
             }
             expires += number * modifier;
@@ -564,11 +564,11 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
             }
         } catch (ProcessingException e) {
             // Log the original exception
-            LOGGER.error("Failed to process error handler for exception", ex);
+            this.log.error("Failed to process error handler for exception", ex);
             throw e;
         } catch (Exception e) {
             // Log the original exception
-            LOGGER.error("Failed to process error handler for exception", ex);
+            this.log.error("Failed to process error handler for exception", ex);
             throw new ProcessingException("Failed to handle exception <" + ex.getMessage() + ">", e);
         }
     }
@@ -601,7 +601,7 @@ public class NonCachingPipeline implements ProcessingPipeline, BeanFactoryAware 
                     return this.errorPipeline.process(environment, consumer);
                 }
             } catch (Exception ignored) {
-                LOGGER.debug("Exception in error handler", ignored);
+                this.log.debug("Exception in error handler", ignored);
             }
         }
         throw e;

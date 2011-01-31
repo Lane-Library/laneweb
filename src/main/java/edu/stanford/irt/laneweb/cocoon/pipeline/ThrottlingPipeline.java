@@ -7,15 +7,11 @@ import org.apache.avalon.framework.parameters.Parameters;
 import org.apache.cocoon.ProcessingException;
 import org.apache.cocoon.environment.Environment;
 import org.apache.cocoon.environment.SourceResolver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * The ThrottlingPipeline
  */
 public class ThrottlingPipeline extends NonCachingPipeline {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ThrottlingPipeline.class);
 
     /**
      * the currently processed host/urls. The superclass is a pooled Component
@@ -48,9 +44,6 @@ public class ThrottlingPipeline extends NonCachingPipeline {
     protected boolean processXMLPipeline(final Environment environment) throws ProcessingException {
         if (null == this.requestKey) {
             throw new IllegalStateException("null requestKey");
-        }
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("requestKey = " + this.requestKey);
         }
         synchronized (REQUESTS) {
             if (REQUESTS.contains(this.requestKey)) {

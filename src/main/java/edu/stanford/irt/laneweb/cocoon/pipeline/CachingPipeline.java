@@ -41,7 +41,7 @@ public class CachingPipeline extends NonCachingPipeline {
 
     public static final String PIPELOCK_PREFIX = "PIPELOCK:";
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CachingPipeline.class);
+    private final Logger log = LoggerFactory.getLogger(CachingPipeline.class);
 
     /** This is the Cache holding cached responses */
     protected Cache cache;
@@ -106,7 +106,6 @@ public class CachingPipeline extends NonCachingPipeline {
         super.addTransformer(role, source, param, hintParam);
         this.transformerRoles.add(role);
     }
-
 
     @Override
     public String getKeyForEventPipeline() {
@@ -359,13 +358,13 @@ public class CachingPipeline extends NonCachingPipeline {
     protected void generateLock(final Object key) {
         if (this.transientStore != null && key != null) {
             final String lockKey = PIPELOCK_PREFIX + key;
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Adding Lock '" + lockKey + "'");
+            if (this.log.isDebugEnabled()) {
+                this.log.debug("Adding Lock '" + lockKey + "'");
             }
             synchronized (this.transientStore) {
                 if (this.transientStore.containsKey(lockKey)) {
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Lock EXISTS: '" + lockKey + "'");
+                    if (this.log.isDebugEnabled()) {
+                        this.log.debug("Lock EXISTS: '" + lockKey + "'");
                     }
                 } else {
                     Object lock = RequestContextHolder.getRequestAttributes();
@@ -414,16 +413,16 @@ public class CachingPipeline extends NonCachingPipeline {
                     // now we have the key to get the cached object
                     CachedResponse cachedObject = this.cache.get(pcKey);
                     if (cachedObject != null) {
-                        if (LOGGER.isDebugEnabled()) {
-                            LOGGER.debug("Found cached response for '" + environment.getURI() + "' using key: " + pcKey);
+                        if (this.log.isDebugEnabled()) {
+                            this.log.debug("Found cached response for '" + environment.getURI() + "' using key: " + pcKey);
                         }
                         SourceValidity[] validities = cachedObject.getValidityObjects();
                         if (validities == null || validities.length != 1) {
                             // to avoid getting here again and again, we delete
                             // it
                             this.cache.remove(pcKey);
-                            if (LOGGER.isDebugEnabled()) {
-                                LOGGER.debug("Cached response for '" + environment.getURI() + "' using key: " + pcKey
+                            if (this.log.isDebugEnabled()) {
+                                this.log.debug("Cached response for '" + environment.getURI() + "' using key: " + pcKey
                                         + " is invalid.");
                             }
                             this.cachedResponse = null;
@@ -441,8 +440,8 @@ public class CachingPipeline extends NonCachingPipeline {
                                 }
                             }
                             if (valid == SourceValidity.VALID) {
-                                if (LOGGER.isDebugEnabled()) {
-                                    LOGGER.debug("processReader: using valid cached content for '" + environment.getURI() + "'.");
+                                if (this.log.isDebugEnabled()) {
+                                    this.log.debug("processReader: using valid cached content for '" + environment.getURI() + "'.");
                                 }
                                 byte[] response = cachedObject.getResponse();
                                 if (response.length > 0) {
@@ -457,8 +456,8 @@ public class CachingPipeline extends NonCachingPipeline {
                                     outputStream.write(response);
                                 }
                             } else {
-                                if (LOGGER.isDebugEnabled()) {
-                                    LOGGER.debug("processReader: cached content is invalid for '" + environment.getURI() + "'.");
+                                if (this.log.isDebugEnabled()) {
+                                    this.log.debug("processReader: cached content is invalid for '" + environment.getURI() + "'.");
                                 }
                                 // remove invalid cached object
                                 this.cache.remove(pcKey);
@@ -477,8 +476,8 @@ public class CachingPipeline extends NonCachingPipeline {
                 // make sure lock will be released
                 try {
                     if (pcKey != null) {
-                        if (LOGGER.isDebugEnabled()) {
-                            LOGGER.debug("processReader: caching content for further requests of '" + environment.getURI() + "'.");
+                        if (this.log.isDebugEnabled()) {
+                            this.log.debug("processReader: caching content for further requests of '" + environment.getURI() + "'.");
                         }
                         generateLock(pcKey);
                         if (readerValidity == null) {
@@ -557,8 +556,8 @@ public class CachingPipeline extends NonCachingPipeline {
             }
         } else {
             setMimeTypeForSerializer(environment);
-            if (LOGGER.isDebugEnabled() && this.toCacheKey != null) {
-                LOGGER.debug("processXMLPipeline: caching content for further" + " requests of '" + environment.getURI()
+            if (this.log.isDebugEnabled() && this.toCacheKey != null) {
+                this.log.debug("processXMLPipeline: caching content for further" + " requests of '" + environment.getURI()
                         + "' using key " + this.toCacheKey);
             }
             generateLock(this.toCacheKey);
@@ -639,14 +638,14 @@ public class CachingPipeline extends NonCachingPipeline {
     protected void releaseLock(final Object key) {
         if (this.transientStore != null && key != null) {
             final String lockKey = PIPELOCK_PREFIX + key;
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Releasing Lock '" + lockKey + "'");
+            if (this.log.isDebugEnabled()) {
+                this.log.debug("Releasing Lock '" + lockKey + "'");
             }
             Object lock = null;
             synchronized (this.transientStore) {
                 if (!this.transientStore.containsKey(lockKey)) {
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Lock MISSING: '" + lockKey + "'");
+                    if (this.log.isDebugEnabled()) {
+                        this.log.debug("Lock MISSING: '" + lockKey + "'");
                     }
                 } else {
                     lock = this.transientStore.get(lockKey);
@@ -740,8 +739,8 @@ public class CachingPipeline extends NonCachingPipeline {
             final CachedResponse response = this.cache.get(this.fromCacheKey);
             // now test validity
             if (response != null) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Found cached response for '" + environment.getURI() + "' using key: " + this.fromCacheKey);
+                if (this.log.isDebugEnabled()) {
+                    this.log.debug("Found cached response for '" + environment.getURI() + "' using key: " + this.fromCacheKey);
                 }
                 boolean responseIsValid = true;
                 boolean responseIsUsable = true;
@@ -749,20 +748,20 @@ public class CachingPipeline extends NonCachingPipeline {
                 // and if it's still fresh, we're done.
                 Long responseExpires = response.getExpires();
                 if (responseExpires != null) {
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Expires time found for " + environment.getURI());
+                    if (this.log.isDebugEnabled()) {
+                        this.log.debug("Expires time found for " + environment.getURI());
                     }
                     if (responseExpires.longValue() > System.currentTimeMillis()) {
-                        if (LOGGER.isDebugEnabled()) {
-                            LOGGER.debug("Expires time still fresh for " + environment.getURI()
+                        if (this.log.isDebugEnabled()) {
+                            this.log.debug("Expires time still fresh for " + environment.getURI()
                                     + ", ignoring all other cache settings. This entry expires on "
                                     + new Date(responseExpires.longValue()));
                         }
                         this.cachedResponse = response;
                         return;
                     } else {
-                        if (LOGGER.isDebugEnabled()) {
-                            LOGGER.debug("Expires time has expired for " + environment.getURI() + ", regenerating content.");
+                        if (this.log.isDebugEnabled()) {
+                            this.log.debug("Expires time has expired for " + environment.getURI() + ", regenerating content.");
                         }
                         // If an expires parameter was provided, use it. If this
                         // parameter is not available
@@ -770,13 +769,13 @@ public class CachingPipeline extends NonCachingPipeline {
                         // expires value is not valid
                         // anymore.
                         if (this.expires != 0) {
-                            if (LOGGER.isDebugEnabled()) {
-                                LOGGER.debug("Refreshing expires informations");
+                            if (this.log.isDebugEnabled()) {
+                                this.log.debug("Refreshing expires informations");
                             }
                             response.setExpires(Long.valueOf(this.expires + System.currentTimeMillis()));
                         } else {
-                            if (LOGGER.isDebugEnabled()) {
-                                LOGGER.debug("No expires defined anymore for this object, setting it to no expires");
+                            if (this.log.isDebugEnabled()) {
+                                this.log.debug("No expires defined anymore for this object, setting it to no expires");
                             }
                             response.setExpires(null);
                         }
@@ -785,8 +784,8 @@ public class CachingPipeline extends NonCachingPipeline {
                     // The response had no expires informations. See if it needs
                     // to be set (i.e. because the configuration has changed)
                     if (this.expires != 0) {
-                        if (LOGGER.isDebugEnabled()) {
-                            LOGGER.debug("Setting a new expires object for this resource");
+                        if (this.log.isDebugEnabled()) {
+                            this.log.debug("Setting a new expires object for this resource");
                         }
                         response.setExpires(Long.valueOf(this.expires + System.currentTimeMillis()));
                     }
@@ -813,12 +812,12 @@ public class CachingPipeline extends NonCachingPipeline {
                         // update validity
                         if (validity == null) {
                             responseIsUsable = false;
-                            if (LOGGER.isDebugEnabled()) {
-                                LOGGER.debug("validatePipeline: responseIsUsable is false, valid=" + valid + " at index " + i);
+                            if (this.log.isDebugEnabled()) {
+                                this.log.debug("validatePipeline: responseIsUsable is false, valid=" + valid + " at index " + i);
                             }
                         } else {
-                            if (LOGGER.isDebugEnabled()) {
-                                LOGGER.debug("validatePipeline: responseIsValid is false due to " + validity);
+                            if (this.log.isDebugEnabled()) {
+                                this.log.debug("validatePipeline: responseIsValid is false due to " + validity);
                             }
                         }
                     } else {
@@ -826,15 +825,15 @@ public class CachingPipeline extends NonCachingPipeline {
                     }
                 }
                 if (responseIsValid) {
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("validatePipeline: using valid cached content for '" + environment.getURI() + "'.");
+                    if (this.log.isDebugEnabled()) {
+                        this.log.debug("validatePipeline: using valid cached content for '" + environment.getURI() + "'.");
                     }
                     // we are valid, ok that's it
                     this.cachedResponse = response;
                     this.toCacheSourceValidities = fromCacheValidityObjects;
                 } else {
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("validatePipeline: cached content is invalid for '" + environment.getURI() + "'.");
+                    if (this.log.isDebugEnabled()) {
+                        this.log.debug("validatePipeline: cached content is invalid for '" + environment.getURI() + "'.");
                     }
                     // we are not valid!
                     if (!responseIsUsable) {
@@ -875,8 +874,8 @@ public class CachingPipeline extends NonCachingPipeline {
                     continue;
                 }
                 // no cached response found
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Cached response not found for '" + environment.getURI() + "' using key: " + this.fromCacheKey);
+                if (this.log.isDebugEnabled()) {
+                    this.log.debug("Cached response not found for '" + environment.getURI() + "' using key: " + this.fromCacheKey);
                 }
                 finished = setupFromCacheKey();
                 this.completeResponseIsCached = false;
@@ -900,15 +899,15 @@ public class CachingPipeline extends NonCachingPipeline {
             // Avoid deadlock with self (see JIRA COCOON-1985).
             Object current = RequestContextHolder.getRequestAttributes();
             if (lock != null && lock != current) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Waiting on Lock '" + lockKey + "'");
+                if (this.log.isDebugEnabled()) {
+                    this.log.debug("Waiting on Lock '" + lockKey + "'");
                 }
                 try {
                     synchronized (lock) {
                         lock.wait();
                     }
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("Notified on Lock '" + lockKey + "'");
+                    if (this.log.isDebugEnabled()) {
+                        this.log.debug("Notified on Lock '" + lockKey + "'");
                     }
                 } catch (InterruptedException e) {
                     /* ignored */
@@ -922,7 +921,7 @@ public class CachingPipeline extends NonCachingPipeline {
     SourceValidity getValidityForInternalPipeline(final int index) {
         final SourceValidity validity;
         // if debugging try to tell why something is not cacheable
-        final boolean debug = LOGGER.isDebugEnabled();
+        final boolean debug = this.log.isDebugEnabled();
         String msg = null;
         if (debug) {
             msg = "getValidityForInternalPipeline(" + index + "): ";
@@ -949,7 +948,7 @@ public class CachingPipeline extends NonCachingPipeline {
         }
         if (debug) {
             msg += ", validity==" + validity;
-            LOGGER.debug(msg);
+            this.log.debug(msg);
         }
         return validity;
     }

@@ -22,19 +22,19 @@ public class VoyagerLogin {
 
     private static final String ERROR_URL = "/voyagerError.html";
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(VoyagerLogin.class);
-
     private static final Pattern PID_PATTERN = Pattern.compile("[\\w0-9-_]+");
 
     private DataSource dataSource;
 
+    private final Logger log = LoggerFactory.getLogger(VoyagerLogin.class);
+
     public String getVoyagerURL(final String univId, final String pid, final String queryString) {
         if (null == pid || !PID_PATTERN.matcher(pid).matches()) {
-            LOGGER.error("bad pid: " + pid);
+            this.log.error("bad pid: " + pid);
             return ERROR_URL;
         }
         if (null == univId || univId.length() == 0) {
-            LOGGER.error("bad univId: " + univId);
+            this.log.error("bad univId: " + univId);
             return ERROR_URL;
         }
         String voyagerUnivId = "0" + univId; // voyager data prepends 0
@@ -53,7 +53,7 @@ public class VoyagerLogin {
             createStmt.executeUpdate();
             return BASE_URL.concat(queryString).concat("&authenticate=Y");
         } catch (SQLException e) {
-            LOGGER.error(e.getMessage(), e);
+            this.log.error(e.getMessage(), e);
             return ERROR_URL;
         } finally {
             JdbcUtils.closeStatement(clearStmt);

@@ -51,10 +51,16 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
 
     private static class TraxErrorHandler implements ErrorListener {
 
+        private Logger log;
+
+        TraxErrorHandler(final Logger log) {
+            this.log = log;
+        }
+
         public void error(final TransformerException te) throws TransformerException {
             final String message = getMessage(te);
-            if (null != LOGGER) {
-                LOGGER.error(message, te);
+            if (null != this.log) {
+                this.log.error(message, te);
             } else {
                 System.out.println("ERROR: " + message);
             }
@@ -62,8 +68,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
 
         public void fatalError(final TransformerException te) throws TransformerException {
             final String message = getMessage(te);
-            if (null != LOGGER) {
-                LOGGER.error(message, te);
+            if (null != this.log) {
+                this.log.error(message, te);
             } else {
                 System.out.println("FATAL-ERROR: " + message);
             }
@@ -72,8 +78,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
 
         public void warning(final TransformerException te) throws TransformerException {
             final String message = getMessage(te);
-            if (null != LOGGER) {
-                LOGGER.warn(message, te);
+            if (null != this.log) {
+                this.log.warn(message, te);
             } else {
                 System.out.println("WARNING: " + message);
             }
@@ -92,8 +98,6 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
         }
     }
 
-    private static Logger LOGGER = LoggerFactory.getLogger(XSLTProcessor.class);
-
     /**
      * Return a new <code>InputSource</code> object that uses the
      * <code>InputStream</code> and the system ID of the <code>Source</code>
@@ -110,6 +114,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
 
     /** Hold the System ID of the main/base stylesheet */
     private String id;
+
+    private Logger log = LoggerFactory.getLogger(XSLTProcessor.class);
 
     private SAXParser saxParser;
 
@@ -172,8 +178,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
             this.id = stylesheet.getURI();
             TransformerHandlerAndValidity handlerAndValidity = getTemplates(stylesheet, this.id);
             if (null == handlerAndValidity) {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Creating new Templates for " + this.id);
+                if (this.log.isDebugEnabled()) {
+                    this.log.debug("Creating new Templates for " + this.id);
                 }
                 // Create a Templates ContentHandler to handle parsing of the
                 // stylesheet.
@@ -182,8 +188,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
                 // TrAX implementations (XSLTC) rely on this in order to obtain
                 // a meaningful identifier for the Templates instances.
                 templatesHandler.setSystemId(this.id);
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Source = " + stylesheet + ", templatesHandler = " + templatesHandler);
+                if (this.log.isDebugEnabled()) {
+                    this.log.debug("Source = " + stylesheet + ", templatesHandler = " + templatesHandler);
                 }
                 // Initialize List for included validities
                 SourceValidity validity = stylesheet.getValidity();
@@ -226,8 +232,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
                     }
                 }
             } else {
-                if (LOGGER.isDebugEnabled()) {
-                    LOGGER.debug("Reusing Templates for " + this.id);
+                if (this.log.isDebugEnabled()) {
+                    this.log.debug("Reusing Templates for " + this.id);
                 }
             }
             return handlerAndValidity;
@@ -239,8 +245,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
              * if( e.getException() == null ) { throw new
              * XSLTProcessorException(
              * "Exception in creating Transform Handler", e ); } else {
-             * LOGGER.debug( "Got SAXException. Rethrowing cause exception.", e
-             * ); throw new XSLTProcessorException(
+             * log.debug( "Got SAXException. Rethrowing cause exception.", e );
+             * throw new XSLTProcessorException(
              * "Exception in creating Transform Handler", e.getException() ); }
              */
         } catch (Exception e) {
@@ -252,7 +258,7 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
      * Initialize
      */
     public void initialize() throws Exception {
-        this.errorHandler = new TraxErrorHandler();
+        this.errorHandler = new TraxErrorHandler(this.log);
         if (this.factory == null) {
             this.factory = getTransformerFactory(this.transformerFactory);
         }
@@ -275,8 +281,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
      *             if an error occurs when trying to resolve the URI.
      */
     public javax.xml.transform.Source resolve(final String href, final String base) throws TransformerException {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("resolve(href = " + href + ", base = " + base + "); resolver = " + this.resolver);
+        if (this.log.isDebugEnabled()) {
+            this.log.debug("resolve(href = " + href + ", base = " + base + "); resolver = " + this.resolver);
         }
         Source xslSource = null;
         try {
@@ -304,8 +310,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
                 }
             }
             InputSource is = getInputSource(xslSource);
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("xslSource = " + xslSource + ", system id = " + xslSource.getURI());
+            if (this.log.isDebugEnabled()) {
+                this.log.debug("xslSource = " + xslSource + ", system id = " + xslSource.getURI());
             }
             if (this.checkIncludes) {
                 // Populate included validities
@@ -322,20 +328,20 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
             }
             return new StreamSource(is.getByteStream(), is.getSystemId());
         } catch (SourceException e) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Failed to resolve " + href + "(base = " + base + "), return null", e);
+            if (this.log.isDebugEnabled()) {
+                this.log.debug("Failed to resolve " + href + "(base = " + base + "), return null", e);
             }
             // CZ: To obtain the same behaviour as when the resource is
             // transformed by the XSLT Transformer we should return null here.
             return null;
         } catch (java.net.MalformedURLException mue) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Failed to resolve " + href + "(base = " + base + "), return null", mue);
+            if (this.log.isDebugEnabled()) {
+                this.log.debug("Failed to resolve " + href + "(base = " + base + "), return null", mue);
             }
             return null;
         } catch (IOException ioe) {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Failed to resolve " + href + "(base = " + base + "), return null", ioe);
+            if (this.log.isDebugEnabled()) {
+                this.log.debug("Failed to resolve " + href + "(base = " + base + "), return null", ioe);
             }
             return null;
         } finally {
@@ -353,8 +359,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
     public void transform(final Source source, final Source stylesheet, final Parameters params, final Result result)
             throws XSLTProcessorException {
         try {
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Transform source = " + source + ", stylesheet = " + stylesheet + ", parameters = " + params
+            if (this.log.isDebugEnabled()) {
+                this.log.debug("Transform source = " + source + ", stylesheet = " + stylesheet + ", parameters = " + params
                         + ", result = " + result);
             }
             final TransformerHandler handler = getTransformerHandler(stylesheet);
@@ -368,8 +374,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
             }
             handler.setResult(result);
             sourceToSAX(source, handler);
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Transform done");
+            if (this.log.isDebugEnabled()) {
+                this.log.debug("Transform done");
             }
         } catch (SAXException e) {
             // Unwrapping the exception will "remove" the real cause with
@@ -381,7 +387,7 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
              * "Error in running Transformation"; throw new
              * XSLTProcessorException( message, e ); } else { final String
              * message = "Got SAXException. Rethrowing cause exception.";
-             * LOGGER.debug( message, e ); throw new XSLTProcessorException(
+             * log.debug( message, e ); throw new XSLTProcessorException(
              * "Error in running Transformation", e.getException() ); }
              */
         } catch (Exception e) {
@@ -397,8 +403,8 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
         // transformer implementation cannot handle the instances of a
         // template created by another one.
         String key = "XSLTTemplate: " + id + '(' + this.factory.getClass().getName() + ')';
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("getTemplates: stylesheet " + id);
+        if (this.log.isDebugEnabled()) {
+            this.log.debug("getTemplates: stylesheet " + id);
         }
         SourceValidity newValidity = stylesheet.getValidity();
         // Only stylesheets with validity are stored
@@ -488,21 +494,21 @@ public class XSLTProcessorImpl implements XSLTProcessor, URIResolver {
                 }
                 _factory = (SAXTransformerFactory) loader.loadClass(factoryName).newInstance();
             } catch (ClassNotFoundException cnfe) {
-                LOGGER.error("Cannot find the requested TrAX factory '" + factoryName
+                this.log.error("Cannot find the requested TrAX factory '" + factoryName
                         + "'. Using default TrAX Transformer Factory instead.");
                 if (this.factory != null) {
                     return this.factory;
                 }
                 _factory = (SAXTransformerFactory) TransformerFactory.newInstance();
             } catch (ClassCastException cce) {
-                LOGGER.error("The indicated class '" + factoryName
+                this.log.error("The indicated class '" + factoryName
                         + "' is not a TrAX Transformer Factory. Using default TrAX Transformer Factory instead.");
                 if (this.factory != null) {
                     return this.factory;
                 }
                 _factory = (SAXTransformerFactory) TransformerFactory.newInstance();
             } catch (Exception e) {
-                LOGGER.error("Error found loading the requested TrAX Transformer Factory '" + factoryName
+                this.log.error("Error found loading the requested TrAX Transformer Factory '" + factoryName
                         + "'. Using default TrAX Transformer Factory instead.");
                 if (this.factory != null) {
                     return this.factory;
