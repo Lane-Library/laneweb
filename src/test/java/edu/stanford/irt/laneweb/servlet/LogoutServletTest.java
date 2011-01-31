@@ -45,6 +45,8 @@ public class LogoutServletTest {
         expect(this.cookie.getName()).andReturn("user");
         expect(this.cookie.getName()).andReturn("webauth_at");
         expect(this.cookie.getName()).andReturn("something else");
+        this.cookie.setValue(null);
+        expectLastCall().times(2);
         this.cookie.setMaxAge(0);
         expectLastCall().times(2);
         this.response.addCookie(this.cookie);

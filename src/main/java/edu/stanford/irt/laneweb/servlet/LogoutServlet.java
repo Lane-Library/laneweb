@@ -22,7 +22,7 @@ public class LogoutServlet extends HttpServlet {
         for (Cookie cookie : req.getCookies()) {
             String name = cookie.getName();
             if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(name) || WEBAUTH_COOKIE_NAME.equals(name)) {
-                cookie.setValue("");
+                cookie.setValue(null);
                 cookie.setMaxAge(0);
                 resp.addCookie(cookie);
             }
