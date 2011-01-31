@@ -23,7 +23,7 @@ YUI().add("bookmarks", function(Y) {
 			}
 	};
 	Bookmark.CREATE_TEMPLATE = "<li><a></a></li>";
-  Bookmark.EDIT_TEMPLATE = '<a class="nav">delete</a><a class="nav">up</a><a class="nav">insertBefore</a><a class="nav">insertAfter</a>'
+    Bookmark.EDIT_TEMPLATE = '<a class="nav">delete</a>'
 	Y.extend(Bookmark, Y.Widget, {
 		renderUI : function() {
 			var contentBox = this.get("contentBox");
@@ -64,6 +64,7 @@ YUI().add("bookmarks", function(Y) {
     			return contentBox.one("h3 a");
     		}
         };
+    Bookmarks.ADD_BOOKMARK_TEMPLATE = '<div><h4>add a bookmark</h4><div><label>url:</label><input name="url" type="text" /></div><div><label>label:</label><input name="label" type="text" /></div><input type="submit" value="add" /></div>'
     Y.extend(Bookmarks, Y.Widget, {
     	addBookmark : function(bookmark, position) {
     		position = position === undefined ? 0 : position;
@@ -73,29 +74,41 @@ YUI().add("bookmarks", function(Y) {
     			node.one("a").set("href", bookmark.url);
         		this.get("contentBox").one("ul").appendChild(node);
         		this.get("bookmarks").splice(position, 0, new Y.Bookmark({srcNode:node,render:true}));
+        		node.on("click", this._handleDeleteClick, this);
     		}
     	},
     	removeBookmark : function(position) {
     		this.get("bookmarks")[position].destroy();
     		this.get("bookmarks").splice(position, 1);
     	},
-    	moveUp : function(position) {
-    		var bookmarks = this.get("bookmarks");
-    		bookmarks.splice(position - 1, 2, bookmarks[position], bookmarks[position - 1]);
-    		var nodeList = this.get("contentBox").all("li");
-    		nodeList.item(position).swap(nodeList.item(position - 1));
-    	},
-    	moveDown : function(position) {
-    		var bookmarks = this.get("bookmarks");
-    		bookmarks.splice(position, 2, bookmarks[position + 1], bookmarks[position]);
-    		var nodeList = this.get("contentBox").all("li");
-    		nodeList.item(position).swap(nodeList.item(position + 1));
-    	},
+//    	moveUp : function(position) {
+//    		var bookmarks = this.get("bookmarks");
+//    		bookmarks.splice(position - 1, 2, bookmarks[position], bookmarks[position - 1]);
+//    		var nodeList = this.get("contentBox").all("li");
+//    		nodeList.item(position).swap(nodeList.item(position - 1));
+//    	},
+//    	moveDown : function(position) {
+//    		var bookmarks = this.get("bookmarks");
+//    		bookmarks.splice(position, 2, bookmarks[position + 1], bookmarks[position]);
+//    		var nodeList = this.get("contentBox").all("li");
+//    		nodeList.item(position).swap(nodeList.item(position + 1));
+//    	},
     	renderUI : function() {
-    		this.get("toggle").on("click", this._toggleEdit, this);
+    		this.get("contentBox").appendChild(Y.Node.create(Bookmarks.ADD_BOOKMARK_TEMPLATE));
     	},
     	bindUI : function() {
     		this.after("editingChange", this._afterEditingChange);
+    		this.get("toggle").on("click", this._toggleEdit, this);
+    		this.get("contentBox").all(".nav").on("click", this._handleDeleteClick, this);
+    	},
+    	_handleDeleteClick : function(e) {
+    		var ul = e.target.ancestor("ul").all(".nav");
+    		for (var i = 0; i < ul.size(); i++) {
+    			if (ul.item(i) === e.target) {
+    				this.removeBookmark(i);
+    				break;
+    			}
+    		}
     	},
     	_afterEditingChange : function(e) {
     		var strings = this.get("strings");
