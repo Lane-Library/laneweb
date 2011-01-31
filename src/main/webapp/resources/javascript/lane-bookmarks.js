@@ -23,7 +23,7 @@ YUI().add("bookmarks", function(Y) {
 			}
 	};
 	Bookmark.CREATE_TEMPLATE = "<li><a></a></li>";
-    Bookmark.EDIT_TEMPLATE = '<a class="nav">delete</a>'
+    Bookmark.EDIT_TEMPLATE = '<a class="yui3-bookmark-edit">delete</a>'
 	Y.extend(Bookmark, Y.Widget, {
 		renderUI : function() {
 			var contentBox = this.get("contentBox");
@@ -64,7 +64,7 @@ YUI().add("bookmarks", function(Y) {
     			return contentBox.one("h3 a");
     		}
         };
-    Bookmarks.ADD_BOOKMARK_TEMPLATE = '<div><h4>add a bookmark</h4><div><label>url:</label><input name="url" type="text" /></div><div><label>label:</label><input name="label" type="text" /></div><input type="submit" value="add" /></div>'
+    Bookmarks.ADD_BOOKMARK_TEMPLATE = '<div class="yui3-bookmarks-edit"><h4>add a bookmark</h4><div><label>url:</label><input name="url" type="text" /></div><div><label>label:</label><input name="label" type="text" /></div><input type="submit" value="add" /></div>'
     Y.extend(Bookmarks, Y.Widget, {
     	addBookmark : function(bookmark, position) {
     		position = position === undefined ? 0 : position;
@@ -99,10 +99,10 @@ YUI().add("bookmarks", function(Y) {
     	bindUI : function() {
     		this.after("editingChange", this._afterEditingChange);
     		this.get("toggle").on("click", this._toggleEdit, this);
-    		this.get("contentBox").all(".nav").on("click", this._handleDeleteClick, this);
+    		this.get("contentBox").all(".yui3-bookmark-edit").on("click", this._handleDeleteClick, this);
     	},
     	_handleDeleteClick : function(e) {
-    		var ul = e.target.ancestor("ul").all(".nav");
+    		var ul = e.target.ancestor("ul").all(".yui3-bookmark-edit");
     		for (var i = 0; i < ul.size(); i++) {
     			if (ul.item(i) === e.target) {
     				this.removeBookmark(i);

@@ -53,7 +53,7 @@ YUI({
         
         testClickDeleteBookmark : function() {
         	var size = Y.all("li").size();
-        	Y.one(".nav").simulate("click");
+        	Y.one(".yui3-bookmark-edit").simulate("click");
         	Y.Assert.areEqual(size - 1, Y.all("li").size());
         }
         
