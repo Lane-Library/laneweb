@@ -27,7 +27,7 @@ YUI().add("bookmarks", function(Y) {
 	Y.extend(Bookmark, Y.Widget, {
 		renderUI : function() {
 			var contentBox = this.get("contentBox");
-			contentBox.set("innerHTML", this.get("srcNode").get("innerHTML") + Bookmark.EDIT_TEMPLATE);
+			contentBox.set("innerHTML",  Bookmark.EDIT_TEMPLATE + this.get("srcNode").get("innerHTML"));
 		}
 	});
 	Y.Bookmark = Bookmark;
