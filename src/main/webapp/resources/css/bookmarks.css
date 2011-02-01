@@ -3,7 +3,8 @@
     float : right;
     display : block
 }
-#bookmarks .delete input {
+#bookmarks .delete input,
+.yui3-bookmark-edit {
     background : none;
     border : none;
     border-bottom : 1px dotted #81785A;
@@ -11,7 +12,8 @@
     color : #1C4B70;
     clear : right
 }
-#bookmarks .delete input:hover {
+#bookmarks .delete input:hover,
+.yui3-bookmark-edit:hover {
     color : #820000;
     border-color : #820000;
     border-bottom-style : solid;
@@ -25,7 +27,8 @@
     text-align : center;
     font-size : 1.1em
 }
-#bookmarks .add {
+#bookmarks .add,
+#bookmarks .yui3-bookmarks-edit {
     text-align : right
 }
 #bookmarks label {
@@ -34,4 +37,7 @@
 #bookmarks input[type = "text"] {
     width : 80%;
     margin-bottom : 2px
+}
+.yui3-bookmarks-hide {
+    display : none
 }

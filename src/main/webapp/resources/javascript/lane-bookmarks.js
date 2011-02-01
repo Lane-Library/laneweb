@@ -23,7 +23,7 @@ YUI().add("bookmarks", function(Y) {
 			}
 	};
 	Bookmark.CREATE_TEMPLATE = "<li><a></a></li>";
-    Bookmark.EDIT_TEMPLATE = '<a class="yui3-bookmark-edit">delete</a>'
+    Bookmark.EDIT_TEMPLATE = '<a class="yui3-bookmark-edit">delete</a>';
 	Y.extend(Bookmark, Y.Widget, {
 		renderUI : function() {
 			var contentBox = this.get("contentBox");
@@ -51,8 +51,8 @@ YUI().add("bookmarks", function(Y) {
         },
         strings: {
         	value: {
-        		editing:"edit",
-        		notEditing:"done"
+        		editing:"done",
+        		notEditing:"edit"
         	}
         },
         toggle: {
@@ -64,7 +64,7 @@ YUI().add("bookmarks", function(Y) {
     			return contentBox.one("h3 a");
     		}
         };
-    Bookmarks.ADD_BOOKMARK_TEMPLATE = '<div class="yui3-bookmarks-edit"><h4>add a bookmark</h4><div><label>url:</label><input name="url" type="text" /></div><div><label>label:</label><input name="label" type="text" /></div><input type="submit" value="add" /></div>'
+    Bookmarks.ADD_BOOKMARK_TEMPLATE = '<div class="yui3-bookmarks-edit"><h4>add a bookmark</h4><div><label>url:</label><input name="url" type="text" /></div><div><label>label:</label><input name="label" type="text" /></div><input type="submit" value="add" /></div>';
     Y.extend(Bookmarks, Y.Widget, {
     	addBookmark : function(bookmark, position) {
     		position = position === undefined ? 0 : position;
@@ -95,6 +95,7 @@ YUI().add("bookmarks", function(Y) {
 //    	},
     	renderUI : function() {
     		this.get("contentBox").appendChild(Y.Node.create(Bookmarks.ADD_BOOKMARK_TEMPLATE));
+    		this.get("contentBox").all(".yui3-bookmark-edit, .yui3-bookmarks-edit").addClass("yui3-bookmarks-hide");
     	},
     	bindUI : function() {
     		this.after("editingChange", this._afterEditingChange);
@@ -122,6 +123,12 @@ YUI().add("bookmarks", function(Y) {
     	_afterEditingChange : function(e) {
     		var strings = this.get("strings");
     		this.get("toggle").set("innerHTML", e.newVal ? strings.editing : strings.notEditing);
+    		var editables = this.get("contentBox").all(".yui3-bookmark-edit, .yui3-bookmarks-edit");
+    		if (e.newVal) {
+    			editables.removeClass("yui3-bookmarks-hide");
+    		} else {
+    			editables.addClass("yui3-bookmarks-hide");
+    		}
     	},
     	_toggleEdit : function(e) {
     		e.preventDefault();
@@ -130,8 +137,8 @@ YUI().add("bookmarks", function(Y) {
     	}
     });
     Y.Bookmarks = Bookmarks;
-}, "${project.version}", {requires:["widget", "substitute"]});
+}, "${project.version}", {requires:["widget"]});
 
-//YUI().use("bookmarks", function(Y) {
-//    var bookmarks = new Y.Bookmarks({srcNode:"#bookmarks"});
-//});
+YUI().use("bookmarks", function(Y) {
+    var bookmarks = new Y.Bookmarks({srcNode:"#bookmarks", render:true});
+});
