@@ -69,7 +69,7 @@
                                 <a href="/persistentlogin.html">Account</a>
                             </li>
                             <li>
-                                <a href="/logout">Logout</a>
+                                <a id="logout" href="/logout">Logout</a>
                             </li>
                             <li>
                                 <a href="?proxy-links=false">Guest Access</a>
