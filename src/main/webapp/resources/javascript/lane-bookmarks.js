@@ -137,8 +137,10 @@ YUI().add("bookmarks", function(Y) {
     	}
     });
     Y.Bookmarks = Bookmarks;
-}, "${project.version}", {requires:["widget"]});
+}, "${project.version}", {requires:["widget", "substitution"]});
 
 YUI().use("bookmarks", function(Y) {
-    var bookmarks = new Y.Bookmarks({srcNode:"#bookmarks", render:true});
+	if (Y.one("#bookmarks")) {
+		new Y.Bookmarks({srcNode:"#bookmarks", render:true});
+	}
 });
