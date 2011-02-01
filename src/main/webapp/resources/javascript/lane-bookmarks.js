@@ -72,7 +72,7 @@ YUI().add("bookmarks", function(Y) {
     			var node = Y.Node.create(Bookmark.CREATE_TEMPLATE);
     			node.one("a").set("innerHTML", bookmark.label);
     			node.one("a").set("href", bookmark.url);
-        		this.get("contentBox").one("ul").appendChild(node);
+        		this.get("contentBox").one("ul").insert(node, position);
         		this.get("bookmarks").splice(position, 0, new Y.Bookmark({srcNode:node,render:true}));
         		node.on("click", this._handleDeleteClick, this);
     		}
@@ -100,6 +100,15 @@ YUI().add("bookmarks", function(Y) {
     		this.after("editingChange", this._afterEditingChange);
     		this.get("toggle").on("click", this._toggleEdit, this);
     		this.get("contentBox").all(".yui3-bookmark-edit").on("click", this._handleDeleteClick, this);
+    		this.get("contentBox").one("input[type='submit']").on("click", this._handleAddClick, this);
+    	},
+    	_handleAddClick: function(e) {
+    		var div = e.target.ancestor(".yui3-bookmarks-edit");
+    		var label = div.one("input[name='label']");
+    		var url = div.one("input[name='url']");
+    		this.addBookmark({label:label.get("value"),url:url.get("value")});
+    		label.set("value","");
+    		url.set("value","");
     	},
     	_handleDeleteClick : function(e) {
     		var ul = e.target.ancestor("ul").all(".yui3-bookmark-edit");

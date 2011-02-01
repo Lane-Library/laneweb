@@ -55,6 +55,20 @@ YUI({
         	var size = Y.all("li").size();
         	Y.one(".yui3-bookmark-edit").simulate("click");
         	Y.Assert.areEqual(size - 1, Y.all("li").size());
+        },
+        
+        testClickAddBookmark : function() {
+        	var size = Y.all("li").size();
+        	Y.one("input[name='label']").set("value","SlashDot");
+        	Y.one("input[name='url']").set("value","http://slashdot.org/");
+        	Y.one("input[type='submit']").simulate("click");
+        	Y.Assert.areEqual(size + 1, Y.all("li").size());
+        },
+        
+        testCorrectBookmarkDeleted : function() {
+        	var label = Y.one("li").get("textContent");
+        	Y.all(".yui3-bookmark-edit").item(1).simulate("click");
+        	Y.Assert.areEqual(label, Y.one("li").get("textContent"));
         }
         
 //        testMoveUp : function() {
