@@ -58,7 +58,7 @@
     
     <category name="cookies" additivity="false">
         <priority value="DEBUG"/>
-        <appender-ref ref="headers"/>
+        <appender-ref ref="cookies"/>
     </category>
     
     <root>
