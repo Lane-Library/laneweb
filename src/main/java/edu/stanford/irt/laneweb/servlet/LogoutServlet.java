@@ -35,7 +35,7 @@ public class LogoutServlet extends HttpServlet {
                 cookie.setMaxAge(0);
                 resp.addCookie(cookie);
                 if (isIphone) {
-                    this.log.info("removing cookie: " + cookie);
+                    this.log.info("removing cookie: " + cookie.getName() + ", " + cookie.getValue());
                 }
             }
         }
