@@ -23,17 +23,23 @@ public class SunetIdSource {
     private SunetIdCookieCodec codec = new SunetIdCookieCodec();
 
     private Logger log = LoggerFactory.getLogger(SunetIdSource.class);
+    
+    private Logger cookieLog = LoggerFactory.getLogger("cookies");
 
     /**
      * looks up the sunet id from the session, request, and lane-user cookie in
      * that order. If it is not in the session it is put there.
      */
     public String getSunetid(final HttpServletRequest request) {
+        boolean isIphone = request.getHeader("user-agent").indexOf("iPhone") > -1;
         HttpSession session = request.getSession();
         String sessionSunetid = (String) session.getAttribute(Model.SUNETID);
         String sunetid = sessionSunetid == null ? getSunetidFromRequest(request) : sessionSunetid;
         if (sunetid == null) {
             sunetid = getSunetidFromCookie(request.getCookies(), request.getHeader("User-Agent"));
+            if (isIphone && sunetid != null) {
+                this.cookieLog.info("retrieved sunetid from cookie");
+            }
         }
         if (sunetid != null && sessionSunetid == null) {
             session.setAttribute(Model.SUNETID, sunetid);

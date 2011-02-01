@@ -12,6 +12,16 @@
         </layout>
     </appender>
     
+    <appender name="cookies" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${catalina.base}/logs/cookies.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="10MB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %p [%t][%c] - %m%n"/>
+        </layout>
+    </appender>
+    
     <!--<appender name="headers" class="org.apache.log4j.RollingFileAppender">
         <param name="File" value="${catalina.base}/logs/header.log"/>
         <param name="Append" value="true"/>
@@ -45,6 +55,11 @@
         <priority value="DEBUG"/>
         <appender-ref ref="headers"/>
         </category>-->
+    
+    <category name="cookies" additivity="false">
+        <priority value="DEBUG"/>
+        <appender-ref ref="headers"/>
+    </category>
     
     <root>
         <priority value="${laneweb.log4j.root.priority.value}"/>
