@@ -43,9 +43,13 @@
 /* webkit: remove border from active inputs */
     outline-style:none;
 }
-.yui3-js-enabled .clinical #searchTerms, .yui3-js-enabled .clinical #searchSubmit, .yui3-js-enabled .clinical #searchReset {
+.yui3-js-enabled .clinical #searchTerms, .yui3-js-enabled .clinical #searchSubmit{
     margin-left:160px;
     margin-top:34px;
+}
+.yui3-js-enabled .clinical #searchReset {
+    margin-left:157px;
+    margin-top:32px;
 }
 #searchSubmit {
     position:absolute;
@@ -63,12 +67,15 @@
 #searchReset {
     display:none;
     position:absolute;
-    top:28px;
-    left:670px;
-    color:white;
+    top:24px;
+    left:575px;
+    color:#A1B9ED;
     border-bottom:none;
-    text-decoration:underline;
-    white-space:nowrap;
+    font-size:175%;
+    /*font:24px Arial,sans-serif;*/
+}
+#searchReset:hover {
+    color:#79455C;
 }
 #searchIndicator {
     display:none;

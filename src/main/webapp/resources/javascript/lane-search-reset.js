@@ -8,7 +8,7 @@
         eventHandle,
         reset;
         if (!searchReset) {
-            searchReset = Y.Node.create("<a id='searchReset' href='/'>Clear Search</a>");
+            searchReset = Y.Node.create("<a id='searchReset' title='Clear Search' href='/'>×</a>");
             searchReset.setStyle("display","none");
             form.one("fieldset").append(searchReset);
         }
