@@ -8,7 +8,7 @@ YUI({
 }).use('node-event-simulate', 'console', 'test', function(Y){
 	
 	LANE.bassett.set("io", function(a, b, c) { 
-		b.on.success(0, {responseText:"<a href='?foo=bar'>foo</a>"});
+		b.on.success(0, {responseText:"<a href='?foo=bar'>foo</a>"}, b.arguments);
 		});
 
 	var bassettTestCase = new Y.Test.Case({
