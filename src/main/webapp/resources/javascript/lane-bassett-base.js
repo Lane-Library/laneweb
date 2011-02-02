@@ -74,7 +74,8 @@
 			this.get("io").call(this, url, {
 				on : {
 					success : this._successHandler,
-					failure : this._failureHandler
+					failure : this._failureHandler,
+					basset : this
 				}
 			});
 
@@ -109,7 +110,7 @@
 		},
 		_successHandler : function(id, o, args) {
 			var content = new Y.Node(o.responseText),
-			    container = this.get("content");
+			    container = o.bassett.get("content");
 			container.setContent(content);
 			_registerLinksContainer(container);
 			Y.fire('lane:change');
