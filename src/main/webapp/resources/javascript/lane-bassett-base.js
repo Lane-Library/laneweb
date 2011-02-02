@@ -114,7 +114,7 @@
 			var content = new Y.Node(o.responseText),
 			    container = args.bassett.get("content");
 			container.setContent(content);
-			args.bassett_registerLinksContainer(container);
+			args.bassett._registerLinksContainer(container);
 			Y.fire('lane:change');
 		}
 	});
