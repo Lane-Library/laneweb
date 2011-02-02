@@ -74,9 +74,9 @@
 			this.get("io").call(this, url, {
 				on : {
 					success : this._successHandler,
-					failure : this._failureHandler,
-					basset : this
-				}
+					failure : this._failureHandler
+					},
+				basset : this
 			});
 
 		},
