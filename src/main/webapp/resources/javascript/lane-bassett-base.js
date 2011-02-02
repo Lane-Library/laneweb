@@ -112,7 +112,7 @@
 		},
 		_successHandler : function(id, o, args) {
 			var content = new Y.Node(o.responseText),
-			    container = o.bassett.get("content");
+			    container = args.bassett.get("content");
 			container.setContent(content);
 			_registerLinksContainer(container);
 			Y.fire('lane:change');
