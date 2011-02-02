@@ -1,7 +1,8 @@
-YUI().add("bookmarks", function(Y) {
+(function() {
+	var Y = LANE.Y;
 	function Bookmark(config) {
 		Bookmark.superclass.constructor.apply(this, arguments);
-	}
+	};
 	Bookmark.NAME = "bookmark";
 	Bookmark.ATTRS = {
 	    editing : {
@@ -137,10 +138,4 @@ YUI().add("bookmarks", function(Y) {
     	}
     });
     Y.Bookmarks = Bookmarks;
-}, "${project.version}", {requires:["widget", "substitution"]});
-
-YUI().use("bookmarks", function(Y) {
-	if (Y.one("#bookmarks")) {
-		new Y.Bookmarks({srcNode:"#bookmarks", render:true});
-	}
-});
+})();

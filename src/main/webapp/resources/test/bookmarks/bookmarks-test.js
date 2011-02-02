@@ -15,7 +15,7 @@ YUI({
 //	bookmarkTestCase.bookmark.render();
 	
 	
-    var bookmarks = new Y.Bookmarks({srcNode:"#bookmarks", render:true});
+    var bookmarks = new LANE.Y.Bookmarks({srcNode:"#bookmarks", render:true});
     
     var bookmarksTestCase = new Y.Test.Case({
         name: "Lane Bookmarks Test Case",
