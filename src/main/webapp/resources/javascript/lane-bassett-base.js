@@ -108,8 +108,8 @@
 			}
 		},
 		_successHandler : function(id, o, args) {
-			var content = new Y.Node(o.responseText), container = this
-					.get("content");
+			var content = new Y.Node(o.responseText),
+			    container = this.get("content");
 			container.setContent(content);
 			_registerLinksContainer(container);
 			Y.fire('lane:change');
