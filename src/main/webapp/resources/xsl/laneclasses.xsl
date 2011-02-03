@@ -62,7 +62,7 @@
                 <div>
                     <xsl:param name="description-text" select="./lc:event_description" />
                     <xsl:choose>
-                        <xsl:when test="string-length($description-text)  &gt; 120">
+                        <xsl:when test="string-length($description-text)  &gt; 135">
                             <xsl:value-of select="substring($description-text, 1, 135)" />
                             <xsl:text>........</xsl:text>
                             <a>
