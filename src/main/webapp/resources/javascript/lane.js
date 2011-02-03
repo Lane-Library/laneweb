@@ -2,6 +2,13 @@
  * @author ceyates
  */
 YUI({fetchCSS:false}).use("*", function(Y) {
+	
+	//keep a global reference of this YUI object
+	window.Y = Y;
+	
+	//create the lane namespace
+	Y.namespace("lane");
+	
     if (typeof LANE == "undefined" || !LANE) {
         /**
          * The LANE global namespace object.  If LANE is already defined, the

@@ -5,99 +5,91 @@ YUI({
     logInclude: {
         TestRunner: true
     }
-}).use("test", "console", "node-event-simulate", "bookmarks",  function(Y){
+}).use("test", "console", "node-event-simulate", function(T){
 	
-//	var bookmarkTestCase = new Y.Test.Case({
-//		name: "Lane Bookmark Test Case"
-//	});
-//	
-//	bookmarkTestCase.bookmark = new Y.Bookmark({srcNode:Y.one("li")});
-//	bookmarkTestCase.bookmark.render();
-	
-	
-    var bookmarks = new LANE.Y.Bookmarks({srcNode:"#bookmarks", render:true});
+	var bookmarks = Y.lane.Bookmarks;
     
-    var bookmarksTestCase = new Y.Test.Case({
+    var bookmarksTestCase = new T.Test.Case({
         name: "Lane Bookmarks Test Case",
         
         testNotEditing : function() {
-        	Y.Assert.isFalse(bookmarks.get("editing"));
+        	T.Assert.isFalse(bookmarks.get("editing"));
         },
         
         testForTwoBookmarks : function() {
-        	Y.Assert.areEqual(2, bookmarks.get("bookmarks").length);
+        	T.Assert.areEqual(2, bookmarks.get("bookmarks").length);
         },
         
         testBookmarkLabel : function() {
-        	Y.Assert.areEqual("Google", bookmarks.get("bookmarks")[0].get("label"));
+        	T.Assert.areEqual("Google", bookmarks.get("bookmarks")[0].get("label"));
         },
         
         testSetEditing : function() {
         	var editing = bookmarks.get("editing");
-        	var toggle = Y.one("h3 a");
+        	var toggle = T.one("h3 a");
         	toggle.simulate("click");
-        	Y.Assert.isFalse(editing === bookmarks.get("editing"));
+        	T.Assert.isFalse(editing === bookmarks.get("editing"));
         },
         
         testAddBookmark : function() {
-        	var size = Y.all("li").size();
+        	var size = T.all("li").size();
         	bookmarks.addBookmark({label:"MDConsult",url:"http://mdconsult.com"});
-        	Y.Assert.areEqual(size + 1, Y.all("li").size());
+        	T.Assert.areEqual(size + 1, T.all("li").size());
         },
         
         testRemoveBookmark : function() {
-        	var size = Y.all("li").size();
+        	var size = T.all("li").size();
         	bookmarks.removeBookmark(1);
-        	Y.Assert.areEqual(size - 1, Y.all("li").size());
+        	T.Assert.areEqual(size - 1, T.all("li").size());
         },
         
         testClickDeleteBookmark : function() {
-        	var size = Y.all("li").size();
-        	Y.one(".yui3-bookmark-edit").simulate("click");
-        	Y.Assert.areEqual(size - 1, Y.all("li").size());
+        	var size = T.all("li").size();
+        	T.one(".yui3-bookmark-edit").simulate("click");
+        	T.Assert.areEqual(size - 1, T.all("li").size());
         },
         
         testClickAddBookmark : function() {
-        	var size = Y.all("li").size();
-        	Y.one("input[name='label']").set("value","SlashDot");
-        	Y.one("input[name='url']").set("value","http://slashdot.org/");
-        	Y.one("input[type='submit']").simulate("click");
-        	Y.Assert.areEqual(size + 1, Y.all("li").size());
+        	var size = T.all("li").size();
+        	T.one("input[name='label']").set("value","SlashDot");
+        	T.one("input[name='url']").set("value","http://slashdot.org/");
+        	T.one("input[type='submit']").simulate("click");
+        	T.Assert.areEqual(size + 1, T.all("li").size());
         },
         
         testCorrectBookmarkDeleted : function() {
-        	var label = Y.one("li").get("textContent");
-        	Y.all(".yui3-bookmark-edit").item(1).simulate("click");
-        	Y.Assert.areEqual(label, Y.one("li").get("textContent"));
+        	var label = T.one("li").get("textContent");
+        	T.all(".yui3-bookmark-edit").item(1).simulate("click");
+        	T.Assert.areEqual(label, T.one("li").get("textContent"));
         }
         
 //        testMoveUp : function() {
-//        	var li = Y.all("li");
+//        	var li = T.all("li");
 //        	var first = li.item(0).get("textContent");
 //        	var second = li.item(1).get("textContent");
 //        	bookmarks.moveUp(1);
-//        	li = Y.all("li");
-//        	Y.Assert.areEqual(second, li.item(0).get("textContent"));
-//        	Y.Assert.areEqual(first, li.item(1).get("textContent"));
+//        	li = T.all("li");
+//        	T.Assert.areEqual(second, li.item(0).get("textContent"));
+//        	T.Assert.areEqual(first, li.item(1).get("textContent"));
 //        },
 //
 //        testMoveDown : function() {
-//        	var li = Y.all("li");
+//        	var li = T.all("li");
 //        	var first = li.item(0).get("textContent");
 //        	var second = li.item(1).get("textContent");
 //        	bookmarks.moveDown(0);
-//        	li = Y.all("li");
-//        	Y.Assert.areEqual(second, li.item(0).get("textContent"));
-//        	Y.Assert.areEqual(first, li.item(1).get("textContent"));
+//        	li = T.all("li");
+//        	T.Assert.areEqual(second, li.item(0).get("textContent"));
+//        	T.Assert.areEqual(first, li.item(1).get("textContent"));
 //        }
     });
     
-    Y.one("body").addClass("yui3-skin-sam");
-    new Y.Console({
+    T.one("body").addClass("yui3-skin-sam");
+    new T.Console({
         newestOnTop: false
     }).render("#log");
 
-//  Y.Test.Runner.add(bookmarkTestCase);
-  Y.Test.Runner.add(bookmarksTestCase);
-    Y.Test.Runner.run();
+//  T.Test.Runner.add(bookmarkTestCase);
+  T.Test.Runner.add(bookmarksTestCase);
+    T.Test.Runner.run();
 });

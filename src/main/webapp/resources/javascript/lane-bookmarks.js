@@ -1,5 +1,5 @@
 (function() {
-	var Y = LANE.Y;
+	if (Y.one("#bookmarks")) {
 	function Bookmark(config) {
 		Bookmark.superclass.constructor.apply(this, arguments);
 	};
@@ -11,27 +11,29 @@
 	    label : {
 	    	value: null
 	    },
+	    srcNode : {
+	    	value : null
+	    },
 	    url : {
 	    	value : null
 	    }
 	};
-	Bookmark.HTML_PARSER = {
-			label : function(contentBox) {
-				return contentBox.get("textContent");
-			},
-			url : function(contentBox) {
-				return contentBox.one("a").get("href");
-			}
-	};
 	Bookmark.CREATE_TEMPLATE = "<li><a></a></li>";
     Bookmark.EDIT_TEMPLATE = '<a class="yui3-bookmark-edit">delete</a>';
-	Y.extend(Bookmark, Y.Widget, {
-		renderUI : function() {
-			var contentBox = this.get("contentBox");
-			contentBox.set("innerHTML",  Bookmark.EDIT_TEMPLATE + this.get("srcNode").get("innerHTML"));
-		}
+	Y.extend(Bookmark, Y.Base, {
+		initializer : function() {
+			var srcNode = this.get("srcNode");
+			this.set("label", srcNode.get("textContent"));
+			this.set("url", srcNode.one("a").get("href"));
+			srcNode.append(Bookmark.EDIT_TEMPLATE);
+		},
+		destructor : function() {
+			var srcNode = this.get("srcNode");
+	        Y.Event.purgeElement(srcNode);
+	        srcNode.get("parentNode").removeChild(srcNode);
+	    }
+
 	});
-	Y.Bookmark = Bookmark;
 	
     function Bookmarks(config) {
         Bookmarks.superclass.constructor.apply(this, arguments);
@@ -45,11 +47,19 @@
             valueFn : function() {
             	var i, b, value = [], lis = this.get("contentBox").all("li");
             	for (i = 0; i < lis.size(); i++) {
-            		value.push(new Y.Bookmark({srcNode:lis.item(i), render:true}));
+            		value.push(new Bookmark({srcNode:lis.item(i)}));
             	}
             	return value;
             }
         },
+	    render : {
+	    	value : true
+	    },
+	    srcNode : {
+	    	valueFn : function() {
+	    		return Y.one("#bookmarks");
+	    	}
+	    },
         strings: {
         	value: {
         		editing:"done",
@@ -57,14 +67,11 @@
         	}
         },
         toggle: {
-        	value: null
+        	valueFn: function() {
+    			return Y.one("#bookmarks h3 a");
+    		}
         }
     };
-    Bookmarks.HTML_PARSER = {
-    		toggle : function(contentBox) {
-    			return contentBox.one("h3 a");
-    		}
-        };
     Bookmarks.ADD_BOOKMARK_TEMPLATE = '<div class="yui3-bookmarks-edit"><h4>add a bookmark</h4><div><label>url:</label><input name="url" type="text" /></div><div><label>label:</label><input name="label" type="text" /></div><input type="submit" value="add" /></div>';
     Y.extend(Bookmarks, Y.Widget, {
     	addBookmark : function(bookmark, position) {
@@ -74,7 +81,7 @@
     			node.one("a").set("innerHTML", bookmark.label);
     			node.one("a").set("href", bookmark.url);
         		this.get("contentBox").one("ul").insert(node, position);
-        		this.get("bookmarks").splice(position, 0, new Y.Bookmark({srcNode:node,render:true}));
+        		this.get("bookmarks").splice(position, 0, new Bookmark({srcNode:node}));
         		node.on("click", this._handleDeleteClick, this);
     		}
     	},
@@ -137,5 +144,6 @@
     		this.set("editing", !editing);
     	}
     });
-    Y.Bookmarks = Bookmarks;
+    Y.lane.Bookmarks = new Bookmarks();
+	}
 })();
