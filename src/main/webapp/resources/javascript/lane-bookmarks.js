@@ -29,7 +29,7 @@
 		},
 		destructor : function() {
 			var srcNode = this.get("srcNode");
-	        Y.Event.purgeElement(srcNode);
+	        Y.Event.purgeElement(srcNode, true);
 	        srcNode.get("parentNode").removeChild(srcNode);
 	    }
 
@@ -128,13 +128,16 @@
     			}
     		}
     	},
+    	_pageLinkEventHandle : null,
     	_afterEditingChange : function(e) {
     		var strings = this.get("strings");
     		this.get("toggle").set("innerHTML", e.newVal ? strings.editing : strings.notEditing);
     		var editables = this.get("contentBox").all(".yui3-bookmark-edit, .yui3-bookmarks-edit");
     		if (e.newVal) {
+    			this._pageLinkEventHandle = Y.one("document").on("click", this._pageLinkHandler, this);
     			editables.removeClass("yui3-bookmarks-hide");
     		} else {
+    			this._pageLinkEventHandle.detach();
     			editables.addClass("yui3-bookmarks-hide");
     		}
     	},
@@ -142,6 +145,19 @@
     		e.preventDefault();
     		var editing = this.get("editing");
     		this.set("editing", !editing);
+    	},
+    	_pageLinkHandler : function(event) {
+    		event.preventDefault();
+    		var target = event.target;
+    		if (target.get("nodeName") === "A" && target.inDoc() && target.ancestor("#bookmarks") === null) {
+    			var div = this.get("contentBox");
+    			var label = target.get("textContent");
+    			var url = target.get("href");
+    			var labelInput = div.one("input[name='label']");
+    			var urlInput = div.one("input[name='url']");
+    			labelInput.set("value",label);
+    			urlInput.set("value",url);
+    		}
     	}
     });
     Y.lane.Bookmarks = new Bookmarks();

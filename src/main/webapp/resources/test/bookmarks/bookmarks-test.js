@@ -8,6 +8,10 @@ YUI({
 }).use("test", "console", "node-event-simulate", function(T){
 	
 	var bookmarks = Y.lane.Bookmarks;
+	
+	var bookmarkables = T.all("#bookmarkables a");
+	
+//	bookmarkables.on("click", function(e) { e.preventDefault();});
     
     var bookmarksTestCase = new T.Test.Case({
         name: "Lane Bookmarks Test Case",
@@ -61,6 +65,13 @@ YUI({
         	var label = T.one("li").get("textContent");
         	T.all(".yui3-bookmark-edit").item(1).simulate("click");
         	T.Assert.areEqual(label, T.one("li").get("textContent"));
+        }, 
+        
+        testClickAddedToForm : function() {
+        	bookmarks.set("editable", true);
+        	var bookmarkable = bookmarkables.item(0);
+        	bookmarkable.simulate("click");
+        	T.Assert.areEqual(bookmarkable.get("href"), Y.one("input[type='text']").get("value"));
         }
         
 //        testMoveUp : function() {
