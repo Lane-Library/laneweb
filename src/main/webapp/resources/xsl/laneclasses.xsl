@@ -61,23 +61,47 @@
             <div class="module">
                 <div>
                     <xsl:param name="description-text" select="./lc:event_description" />
+                    <xsl:param name="firstParagraphDescription" select="substring-before($description-text, '.')" />
+                    <xsl:param name="first-words">
+                        <xsl:call-template name="firstWords">
+                            <xsl:with-param name="value" select="$description-text" />
+                            <xsl:with-param name="count" select="50" />
+                        </xsl:call-template>
+                    </xsl:param>
                     <xsl:choose>
-                        <xsl:when test="string-length($description-text)  &gt; 135">
-                            <xsl:value-of select="substring($description-text, 1, 135)" />
-                            <xsl:text>........</xsl:text>
-                            <a>
-                                <xsl:attribute name="href">
-                                <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
-                                <xsl:value-of select="lc:module_id/text()" />
-                                 </xsl:attribute>
-                                <xsl:text>  more</xsl:text>
-                            </a>
+                        <xsl:when test="count(tokenize($description-text, '\W+')[. != ''])  &gt; 50">
+                            <xsl:choose>
+                                <xsl:when  test="count(tokenize($firstParagraphDescription, '\W+')[. != ''])  &gt; 50 and count(tokenize($firstParagraphDescription, '\W+')[. != '']) &lt; 100">
+                                    <xsl:value-of select="$firstParagraphDescription" />
+                                    <xsl:text>.  </xsl:text>
+                                    <xsl:if test="count(tokenize($description-text, '\W+')[. != '']) != count(tokenize($firstParagraphDescription, '\W+')[. != ''])">
+                                        <xsl:text>........</xsl:text>
+                                        <a>
+                                            <xsl:attribute name="href">
+                                            <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
+                                            <xsl:value-of select="lc:module_id/text()" />
+                                            </xsl:attribute>
+                                            <xsl:text>more</xsl:text>
+                                        </a>
+                                    </xsl:if>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:value-of select="normalize-space($first-words)" />
+                                    <xsl:text>........</xsl:text>
+                                    <a>
+                                        <xsl:attribute name="href">
+                                        <xsl:text>/classes-consult/laneclass.html?class-id=</xsl:text>
+                                        <xsl:value-of select="lc:module_id/text()" />
+                                        </xsl:attribute>
+                                        <xsl:text>more</xsl:text>
+                                    </a>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:value-of select="$description-text"></xsl:value-of>
                         </xsl:otherwise>
                     </xsl:choose>
-
                 </div>
                 <a>
                     <xsl:attribute name="href">
@@ -85,7 +109,6 @@
                         <xsl:value-of select="./lc:module_id" />
                     </xsl:attribute>
                     <xsl:attribute name="class">image-link</xsl:attribute>
-
                     <img>
                         <xsl:attribute name="class">module-img</xsl:attribute>
                         <xsl:attribute name="src">/graphics/buttons/sign-up.png</xsl:attribute>
@@ -95,6 +118,26 @@
         </div>
 
     </xsl:template>
+
+
+    <xsl:template name="firstWords">
+        <xsl:param name="value" />
+        <xsl:param name="count" />
+
+        <xsl:if test="number($count) >= 1">
+            <xsl:value-of select="concat(substring-before($value,' '),' ')" />
+        </xsl:if>
+        <xsl:if test="number($count) > 1">
+            <xsl:variable name="remaining" select="substring-after($value,' ')" />
+            <xsl:if test="string-length($remaining) > 0">
+                <xsl:call-template name="firstWords">
+                    <xsl:with-param name="value" select="$remaining" />
+                    <xsl:with-param name="count" select="number($count)-1" />
+                </xsl:call-template>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+
 
 
 
