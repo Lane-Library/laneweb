@@ -26,12 +26,13 @@ public class BookmarksDataBinder implements DataBinder {
             } else {
                 bookmarks = sessionBookmarks;
             }
-            if (bookmarks != null) {
-                if (sessionBookmarks == null) {
-                    session.setAttribute(Model.BOOKMARKS, bookmarks);
-                }
-                model.put(Model.BOOKMARKS, bookmarks);
+            if (bookmarks == null) {
+                bookmarks = new Bookmarks(emrid);
             }
+            if (sessionBookmarks == null) {
+                session.setAttribute(Model.BOOKMARKS, bookmarks);
+            }
+            model.put(Model.BOOKMARKS, bookmarks);
             String position = request.getParameter("position");
             String action = request.getParameter("action");
             String url = request.getParameter("url");

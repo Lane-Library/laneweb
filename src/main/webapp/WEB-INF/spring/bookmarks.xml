@@ -13,5 +13,10 @@
     <bean name="org.apache.cocoon.generation.Generator/bookmarks"
         class="edu.stanford.irt.laneweb.bookmarks.BookmarksGenerator"
         scope="prototype"/>
+    
+    <bean name="edu.stanford.irt.laneweb.bookmarks.BookmarksDAO"
+        class="edu.stanford.irt.laneweb.bookmarks.SQLBookmarksDAO">
+        <property name="dataSource" ref="javax.sql.DataSource/eresources"/>
+    </bean>
 
 </beans>

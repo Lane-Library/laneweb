@@ -1,8 +1,5 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class DummyBookmarksDAO implements BookmarksDAO {
 
     @Override
@@ -14,6 +11,6 @@ public class DummyBookmarksDAO implements BookmarksDAO {
     }
 
     @Override
-    public void saveBookmarks(final String emrid, final Bookmarks bookmarks) {
+    public void saveBookmarks(final Bookmarks bookmarks) {
     }
 }

@@ -73,6 +73,7 @@ public class EditingXMLizableBookmarksView extends DefaultXMLizableBookmarksView
 
     @Override
     protected void maybeCreateBookmarksUL(final Bookmarks bookmarks, final ContentHandler contentHandler) throws SAXException {
+        if (bookmarks != null && bookmarks.size() > 0) {
         XMLUtils.startElement(contentHandler, XHTMLNS, UL);
         int i = 0;
         for (Bookmark bookmark : bookmarks) {
@@ -142,6 +143,7 @@ public class EditingXMLizableBookmarksView extends DefaultXMLizableBookmarksView
         // createAddForm(contentHandler, i);
         // }
         XMLUtils.endElement(contentHandler, XHTMLNS, UL);
+        }
         createAddForm(contentHandler);
     }
 }

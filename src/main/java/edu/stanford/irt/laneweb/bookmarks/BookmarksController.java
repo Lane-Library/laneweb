@@ -28,6 +28,7 @@ public class BookmarksController {
     public void addLink(@RequestParam final String label, @RequestParam final String url,
             @RequestParam(required = false) final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
         bookmarks.add(position, new Bookmark(label, url));
+        this.bookmarksDAO.saveBookmarks(bookmarks);
     }
 
     @RequestMapping(value = "get")
