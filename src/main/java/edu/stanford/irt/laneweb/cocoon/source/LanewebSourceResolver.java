@@ -52,8 +52,7 @@ public class LanewebSourceResolver implements SourceResolver, ResourceLoaderAwar
     @SuppressWarnings("rawtypes")
     public Source resolveURI(final String location, final String base, final Map parameters) throws MalformedURLException,
             IOException {
-        // TODO: really implement this . . .
-        return resolveURI(location);
+        return this.resolveURI(location);
     }
 
     public void setResourceLoader(final ResourceLoader resourceLoader) {

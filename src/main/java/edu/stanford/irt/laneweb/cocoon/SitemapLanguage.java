@@ -85,7 +85,6 @@ public class SitemapLanguage extends org.apache.cocoon.components.treeprocessor.
 
     @Override
     public ProcessingNodeBuilder createNodeBuilder(final Configuration config) throws Exception {
-        // FIXME : check namespace
         String nodeName = config.getName();
         if (getLogger().isDebugEnabled()) {
             getLogger().debug("Creating node builder for " + nodeName);

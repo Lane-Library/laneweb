@@ -225,12 +225,7 @@ public class CachingPipeline extends NonCachingPipeline {
      * Connect the pipeline.
      */
     protected void connectCachingPipeline(final Environment environment) throws ProcessingException {
-        // TODO:make sure these modifications don't break anything:
         XMLByteStreamCompiler localXMLSerializer = null;
-        // if (!this.cacheCompleteResponse) {
-        // this.xmlSerializer = new XMLByteStreamCompiler();
-        // localXMLSerializer = this.xmlSerializer;
-        // }
         if (this.cachedResponse == null) {
             this.xmlSerializer = new XMLByteStreamCompiler();
             localXMLSerializer = this.xmlSerializer;
@@ -277,10 +272,6 @@ public class CachingPipeline extends NonCachingPipeline {
                 cacheableTransformerCount++;
             }
             next = super.lastConsumer;
-            // if (localXMLSerializer != null) {
-            // next = new XMLTeePipe(next, localXMLSerializer);
-            // localXMLSerializer = null;
-            // }
             connect(environment, prev, next);
         }
     }
