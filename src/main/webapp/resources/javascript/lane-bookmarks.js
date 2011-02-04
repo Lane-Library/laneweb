@@ -56,6 +56,12 @@
     			var node = Y.Node.create(Bookmarks.CREATE_TEMPLATE);
     			node.one("a").set("innerHTML", bookmark.label);
     			node.one("a").set("href", bookmark.url);
+    			var ULNode = this.get("contentBox").one("ul");
+    			if (!ULNode) {
+    				ULNode = Y.Node.create("<ul/>")
+    				this.get("contentBox").one(".bd").set("innerHTML","<ul/>");
+    				ULNode = this.get("contentBox").one("ul");
+    			}
         		this.get("contentBox").one("ul").insert(node, position);
         		this.get("bookmarks").splice(position, 0, node);
         		node.one(".yui3-bookmark-edit").on("click", this._handleDeleteClick, this);
