@@ -97,11 +97,11 @@
     		var form = div.one("form");
     		this.addBookmark({label:label.get("value"),url:url.get("value")});
     		this.get("io")("/././bookmarks/add", {
-    			method : "get",
+    			method : "post",
     			form : form
     		});
-//    		label.set("value","");
-//    		url.set("value","");
+    		label.set("value","");
+    		url.set("value","");
     	},
     	_handleDeleteClick : function(e) {
     		var i, ul = e.target.ancestor("ul").all(".yui3-bookmark-edit");
@@ -109,7 +109,7 @@
     			if (ul.item(i) === e.target) {
     				this.removeBookmark(i);
     				this.get("io")("/././bookmarks/delete", {
-    					method : "get",
+    					method : "post",
     					data : "postion=" + i
     				});
     				break;
