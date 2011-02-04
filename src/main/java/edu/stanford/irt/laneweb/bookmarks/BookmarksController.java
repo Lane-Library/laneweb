@@ -1,6 +1,6 @@
 package edu.stanford.irt.laneweb.bookmarks;
 
-import java.util.Collections;
+//import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class BookmarksController {
     @Autowired
     private BookmarksDAO bookmarksDAO;
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void addLink(@RequestParam final String label, @RequestParam final String url,
             @RequestParam(required = false) final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
@@ -42,22 +42,23 @@ public class BookmarksController {
         return this.bookmarksDAO.getBookmarks(emrid);
     }
 
-    @RequestMapping(value = "/moveDown", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void moveDown(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
-        Collections.swap(bookmarks, position, position + 1);
-    }
+//    @RequestMapping(value = "/moveDown", method = RequestMethod.GET)
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public void moveDown(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+//        Collections.swap(bookmarks, position, position + 1);
+//    }
+//
+//    @RequestMapping(value = "/moveUp", method = RequestMethod.GET)
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public void moveUp(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+//        Collections.swap(bookmarks, position, position - 1);
+//    }
 
-    @RequestMapping(value = "/moveUp", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    public void moveUp(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
-        Collections.swap(bookmarks, position, position - 1);
-    }
-
-    @RequestMapping(value = "/remove", method = RequestMethod.GET)
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void removeBookmark(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
         bookmarks.remove(position);
+        this.bookmarksDAO.saveBookmarks(bookmarks);
     }
 
 //    @ExceptionHandler(IndexOutOfBoundsException.class)

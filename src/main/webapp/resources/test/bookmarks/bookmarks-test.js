@@ -9,10 +9,20 @@ YUI({
 	
 	var bookmarks = Y.lane.Bookmarks;
 	
+	var io = false;
+	
+	bookmarks.set("io", function() {
+	    ioOccurred = true;
+	});
+	
 	var bookmarkables = T.all("#bookmarkables a");
     
     var bookmarksTestCase = new T.Test.Case({
         name: "Lane Bookmarks Test Case",
+        
+        setUp : function() {
+        	ioOccurred = false;
+        },
         
         testNotEditing : function() {
         	T.Assert.isFalse(bookmarks.get("editing"));
@@ -70,6 +80,11 @@ YUI({
         	var bookmarkable = bookmarkables.item(0);
         	bookmarkable.simulate("click");
         	T.Assert.areEqual(bookmarkable.get("href"), Y.one("input[type='text']").get("value"));
+        },
+        
+        testIOSent : function () {
+        	T.one("input[type='submit']").simulate("click");
+        	T.Assert.isTrue(ioOccurred);
         }
         
 //        testMoveUp : function() {

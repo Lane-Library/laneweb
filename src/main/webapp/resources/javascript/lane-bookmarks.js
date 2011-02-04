@@ -23,6 +23,9 @@
             	return value;
             }
         },
+		io : {
+			value : Y.io
+		},
 	    render : {
 	    	value : true
 	    },
@@ -92,14 +95,22 @@
     		var label = div.one("input[name='label']");
     		var url = div.one("input[name='url']");
     		this.addBookmark({label:label.get("value"),url:url.get("value")});
+    		this.get("io")("/././bookmarks/add", {
+    			method : "post",
+    			form : form
+    		});
     		label.set("value","");
     		url.set("value","");
     	},
     	_handleDeleteClick : function(e) {
-    		var ul = e.target.ancestor("ul").all(".yui3-bookmark-edit");
-    		for (var i = 0; i < ul.size(); i++) {
+    		var i, ul = e.target.ancestor("ul").all(".yui3-bookmark-edit");
+    		for (i = 0; i < ul.size(); i++) {
     			if (ul.item(i) === e.target) {
     				this.removeBookmark(i);
+    				this.get("io")("/././bookmarks/delete", {
+    					method : "post",
+    					data : "postion=" + i
+    				});
     				break;
     			}
     		}
