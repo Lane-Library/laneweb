@@ -26,7 +26,7 @@ public class BookmarksController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
     public void addBookmark(@RequestParam final String label, @RequestParam final String url,
-            @RequestParam(required = false) final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+            @RequestParam(required = false) final Integer position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
         bookmarks.add(position, new Bookmark(label, url));
         this.bookmarksDAO.saveBookmarks(bookmarks);
     }
