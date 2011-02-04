@@ -10,8 +10,6 @@ YUI({
 	var bookmarks = Y.lane.Bookmarks;
 	
 	var bookmarkables = T.all("#bookmarkables a");
-	
-//	bookmarkables.on("click", function(e) { e.preventDefault();});
     
     var bookmarksTestCase = new T.Test.Case({
         name: "Lane Bookmarks Test Case",
@@ -25,7 +23,7 @@ YUI({
         },
         
         testBookmarkLabel : function() {
-        	T.Assert.areEqual("Google", bookmarks.get("bookmarks")[0].get("label"));
+        	T.Assert.areEqual("Google", bookmarks.get("bookmarks")[0].one("a").get("textContent"));
         },
         
         testSetEditing : function() {
@@ -42,9 +40,9 @@ YUI({
         },
         
         testRemoveBookmark : function() {
-        	var size = T.all("li").size();
+        	var size = T.all("#bookmarks li").size();
         	bookmarks.removeBookmark(1);
-        	T.Assert.areEqual(size - 1, T.all("li").size());
+        	T.Assert.areEqual(size - 1, T.all("#bookmarks li").size());
         },
         
         testClickDeleteBookmark : function() {

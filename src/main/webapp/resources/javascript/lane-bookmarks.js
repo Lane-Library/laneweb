@@ -1,39 +1,5 @@
 (function() {
 	if (Y.one("#bookmarks")) {
-	function Bookmark(config) {
-		Bookmark.superclass.constructor.apply(this, arguments);
-	};
-	Bookmark.NAME = "bookmark";
-	Bookmark.ATTRS = {
-	    editing : {
-	    	value:false
-	    },
-	    label : {
-	    	value: null
-	    },
-	    srcNode : {
-	    	value : null
-	    },
-	    url : {
-	    	value : null
-	    }
-	};
-	Bookmark.CREATE_TEMPLATE = "<li><a></a></li>";
-    Bookmark.EDIT_TEMPLATE = '<a class="yui3-bookmark-edit">delete</a>';
-	Y.extend(Bookmark, Y.Base, {
-		initializer : function() {
-			var srcNode = this.get("srcNode");
-			this.set("label", srcNode.get("textContent"));
-			this.set("url", srcNode.one("a").get("href"));
-			srcNode.append(Bookmark.EDIT_TEMPLATE);
-		},
-		destructor : function() {
-			var srcNode = this.get("srcNode");
-	        Y.Event.purgeElement(srcNode, true);
-	        srcNode.get("parentNode").removeChild(srcNode);
-	    }
-
-	});
 	
     function Bookmarks(config) {
         Bookmarks.superclass.constructor.apply(this, arguments);
@@ -45,9 +11,14 @@
         },
         bookmarks: {
             valueFn : function() {
-            	var i, b, value = [], lis = this.get("contentBox").all("li");
-            	for (i = 0; i < lis.size(); i++) {
-            		value.push(new Bookmark({srcNode:lis.item(i)}));
+            	var i, b, size, node,
+            	    value = [],
+            	    lis = this.get("contentBox").all("li"),
+            	    size = lis.size();
+            	for (i = 0; i < size; i++) {
+            		node = lis.item(i);
+            		node.insert(Y.Node.create(Bookmarks.DELETE_TEMPLATE));
+            		value.push(node);
             	}
             	return value;
             }
@@ -72,22 +43,27 @@
     		}
         }
     };
+    Bookmarks.DELETE_TEMPLATE = "<a class=\"yui3-bookmark-edit\">delete</a>";
+    Bookmarks.CREATE_TEMPLATE = "<li><a></a>" + Bookmarks.DELETE_TEMPLATE + "</li>";
     Bookmarks.ADD_BOOKMARK_TEMPLATE = '<div class="yui3-bookmarks-edit"><h4>add a bookmark</h4><div><label>url:</label><input name="url" type="text" /></div><div><label>label:</label><input name="label" type="text" /></div><input type="submit" value="add" /></div>';
     Y.extend(Bookmarks, Y.Widget, {
     	addBookmark : function(bookmark, position) {
     		position = position === undefined ? 0 : position;
     		if (bookmark.label && bookmark.url) {
-    			var node = Y.Node.create(Bookmark.CREATE_TEMPLATE);
+    			var node = Y.Node.create(Bookmarks.CREATE_TEMPLATE);
     			node.one("a").set("innerHTML", bookmark.label);
     			node.one("a").set("href", bookmark.url);
         		this.get("contentBox").one("ul").insert(node, position);
-        		this.get("bookmarks").splice(position, 0, new Bookmark({srcNode:node}));
-        		node.on("click", this._handleDeleteClick, this);
+        		this.get("bookmarks").splice(position, 0, node);
+        		node.one(".yui3-bookmark-edit").on("click", this._handleDeleteClick, this);
     		}
     	},
     	removeBookmark : function(position) {
-    		this.get("bookmarks")[position].destroy();
-    		this.get("bookmarks").splice(position, 1);
+    		var bookmarks = this.get("bookmarks"),
+    		    node = bookmarks[position];
+    		Y.Event.purgeElement(node, true);
+    		node.get("parentNode").removeChild(node);
+    		bookmarks.splice(position, 1);
     	},
 //    	moveUp : function(position) {
 //    		var bookmarks = this.get("bookmarks");
