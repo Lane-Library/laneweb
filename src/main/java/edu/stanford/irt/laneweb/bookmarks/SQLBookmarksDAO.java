@@ -78,25 +78,24 @@ public class SQLBookmarksDAO implements BookmarksDAO {
         String emrid = bookmarks.getEmrid();
         try {
             conn = this.dataSource.getConnection();
-            if (bookmarks.size() == 0) {
-                pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL);
-                pstmt.setString(1, emrid);
-                pstmt.execute();
-            } else {
             conn.setAutoCommit(false);
-            cstmt = conn.prepareCall(WRITE_BOOKMARKS_SQL);
-            cstmt.setString(1, emrid);
-            cstmt.registerOutParameter(2, java.sql.Types.BLOB);
-            cstmt.executeUpdate();
-            BLOB blob = (BLOB) cstmt.getBlob(2);
-            OutputStream os = blob.getBinaryOutputStream();
-            ObjectOutputStream oop = new ObjectOutputStream(os);
-            oop.writeObject(bookmarks);
-            oop.flush();
-            oop.close();
-            os.close();
-            conn.commit();
+            pstmt = conn.prepareStatement(DELETE_BOOKMARKS_SQL);
+            pstmt.setString(1, emrid);
+            pstmt.execute();
+            if (bookmarks.size() > 0) {
+                cstmt = conn.prepareCall(WRITE_BOOKMARKS_SQL);
+                cstmt.setString(1, emrid);
+                cstmt.registerOutParameter(2, java.sql.Types.BLOB);
+                cstmt.executeUpdate();
+                BLOB blob = (BLOB) cstmt.getBlob(2);
+                OutputStream os = blob.getBinaryOutputStream();
+                ObjectOutputStream oop = new ObjectOutputStream(os);
+                oop.writeObject(bookmarks);
+                oop.flush();
+                oop.close();
+                os.close();
             }
+            conn.commit();
         } catch (SQLException e) {
             this.log.error(e.getMessage(), e);
             try {
