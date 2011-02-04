@@ -42,7 +42,7 @@ public class BookmarksGenerator extends AbstractGenerator {
 //            } else if ("down".equals(this.action)) {
 //                this.controller.moveDown(this.position, this.bookmarks);
             } else if ("add".equals(this.action)) {
-                this.controller.addBookmark(this.label, this.url, this.position, this.bookmarks);
+                this.controller.addBookmark(this.label, this.url, this.bookmarks);
             }
             // if ("insertBefore".equals(this.action) ||
             // "insertAfter".equals(this.action)) {
