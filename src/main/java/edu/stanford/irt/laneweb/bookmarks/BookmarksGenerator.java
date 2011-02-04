@@ -36,13 +36,13 @@ public class BookmarksGenerator extends AbstractGenerator {
     public void generate() throws SAXException, IOException {
         if (this.editing) {
             if ("delete".equals(this.action)) {
-                this.controller.removeBookmark(this.position, this.bookmarks);
+                this.controller.deleteBookmark(this.position, this.bookmarks);
 //            } else if ("up".equals(this.action)) {
 //                this.controller.moveUp(this.position, this.bookmarks);
 //            } else if ("down".equals(this.action)) {
 //                this.controller.moveDown(this.position, this.bookmarks);
             } else if ("add".equals(this.action)) {
-                this.controller.addLink(this.label, this.url, this.position, this.bookmarks);
+                this.controller.addBookmark(this.label, this.url, this.position, this.bookmarks);
             }
             // if ("insertBefore".equals(this.action) ||
             // "insertAfter".equals(this.action)) {

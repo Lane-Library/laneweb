@@ -94,6 +94,7 @@
     		var div = e.target.ancestor(".yui3-bookmarks-edit");
     		var label = div.one("input[name='label']");
     		var url = div.one("input[name='url']");
+    		var form = div.one("form");
     		this.addBookmark({label:label.get("value"),url:url.get("value")});
     		this.get("io")("/././bookmarks/add", {
     			method : "post",

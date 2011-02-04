@@ -25,7 +25,7 @@ public class BookmarksController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void addLink(@RequestParam final String label, @RequestParam final String url,
+    public void addBookmark(@RequestParam final String label, @RequestParam final String url,
             @RequestParam(required = false) final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
         bookmarks.add(position, new Bookmark(label, url));
         this.bookmarksDAO.saveBookmarks(bookmarks);
@@ -54,9 +54,9 @@ public class BookmarksController {
 //        Collections.swap(bookmarks, position, position - 1);
 //    }
 
-    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.OK)
-    public void removeBookmark(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
+    public void deleteBookmark(@RequestParam final int position, @ModelAttribute(Model.BOOKMARKS) final Bookmarks bookmarks) {
         bookmarks.remove(position);
         this.bookmarksDAO.saveBookmarks(bookmarks);
     }
