@@ -95,10 +95,11 @@
     		var label = div.one("input[name='label']");
     		var url = div.one("input[name='url']");
     		var form = div.one("form");
+    		var data = "url=" + url.get("value") + "&label=" + label.get("value");
     		this.addBookmark({label:label.get("value"),url:url.get("value")});
     		this.get("io")("/././bookmarks/add", {
     			method : "post",
-    			form : form
+    			data : data
     		});
     		label.set("value","");
     		url.set("value","");
@@ -110,7 +111,7 @@
     				this.removeBookmark(i);
     				this.get("io")("/././bookmarks/delete", {
     					method : "post",
-    					data : "postion=" + i
+    					data : "position=" + i
     				});
     				break;
     			}
