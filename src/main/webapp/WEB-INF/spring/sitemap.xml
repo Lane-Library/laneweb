@@ -52,6 +52,14 @@
         <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
     
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="propertyEditorRegistrars">
+            <list>
+                <bean class="edu.stanford.irt.laneweb.cocoon.source.SourceEditorRegistrar"/>
+            </list>
+        </property>
+    </bean>
+    
     <bean name="org.apache.cocoon.components.treeprocessor.TreeBuilder/sitemap-1.0"
         class="edu.stanford.irt.laneweb.cocoon.SitemapLanguage" scope="prototype">
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
@@ -88,27 +96,25 @@
         <constructor-arg ref="org.apache.cocoon.caching.Cache"/>
     </bean>
 
-    
+
     <bean name="org.apache.cocoon.selection.Selector/ipgroup"
-        class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector"
-        scope="prototype">
-    </bean>
-    
+        class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector" scope="prototype"> </bean>
+
     <bean id="org.apache.cocoon.matching.MatcherSelector"
         class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
         <constructor-arg value="org.apache.cocoon.matching.Matcher"/>
     </bean>
-    
+
     <bean id="org.apache.cocoon.acting.ActionSelector"
         class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
         <constructor-arg value="org.apache.cocoon.acting.Action"/>
     </bean>
-    
+
     <bean id="org.apache.cocoon.selection.SelectorSelector"
         class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
         <constructor-arg value="org.apache.cocoon.selection.Selector"/>
     </bean>
-    
+
     <bean name="sitemap"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SitemapNodeBuilder"/>
     <bean name="pipelines"
@@ -116,20 +122,16 @@
     <bean name="pipeline"
         class="org.apache.cocoon.components.treeprocessor.sitemap.PipelineNodeBuilder"
         scope="prototype"/>
-    <bean name="match"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
-    <bean name="mount"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.MountNodeBuilder"/>
-    <bean name="read"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.ReadNodeBuilder"/>
+    <bean name="match" class="org.apache.cocoon.components.treeprocessor.sitemap.MatchNodeBuilder"/>
+    <bean name="mount" class="org.apache.cocoon.components.treeprocessor.sitemap.MountNodeBuilder"/>
+    <bean name="read" class="org.apache.cocoon.components.treeprocessor.sitemap.ReadNodeBuilder"/>
     <bean name="generate"
         class="org.apache.cocoon.components.treeprocessor.sitemap.GenerateNodeBuilder"
         scope="prototype"/>
     <bean name="serialize"
         class="org.apache.cocoon.components.treeprocessor.sitemap.SerializeNodeBuilder"
         scope="prototype"/>
-    <bean name="act"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.ActNodeBuilder"
+    <bean name="act" class="org.apache.cocoon.components.treeprocessor.sitemap.ActNodeBuilder"
         scope="prototype"/>
     <bean name="aggregate"
         class="org.apache.cocoon.components.treeprocessor.sitemap.AggregateNodeBuilder"
@@ -140,8 +142,7 @@
     <bean name="transform"
         class="org.apache.cocoon.components.treeprocessor.sitemap.TransformNodeBuilder"
         scope="prototype"/>
-    <bean name="select"
-        class="org.apache.cocoon.components.treeprocessor.sitemap.SelectNodeBuilder"
+    <bean name="select" class="org.apache.cocoon.components.treeprocessor.sitemap.SelectNodeBuilder"
         scope="prototype"/>
     <bean name="handle-errors"
         class="org.apache.cocoon.components.treeprocessor.sitemap.HandleErrorsNodeBuilder"/>
@@ -152,7 +153,8 @@
     <bean id="org.apache.cocoon.components.treeprocessor.variables.VariableResolver"
         class="org.apache.cocoon.components.treeprocessor.variables.StringTemplateParserVariableResolver"
         scope="prototype">
-        <property name="stringTemplateParser" ref="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"/>
+        <property name="stringTemplateParser"
+            ref="org.apache.cocoon.el.parsing.StringTemplateParser/legacySitemap"/>
         <property name="objectModel" ref="org.apache.cocoon.el.objectmodel.ObjectModel"/>
     </bean>
 
