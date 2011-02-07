@@ -31,7 +31,8 @@ public class SunetIdSource {
      * that order. If it is not in the session it is put there.
      */
     public String getSunetid(final HttpServletRequest request) {
-        boolean isIphone = request.getHeader("user-agent").indexOf("iPhone") > -1;
+        String userAgent = request.getHeader("user-agent");
+        boolean isIphone = userAgent != null && userAgent.indexOf("iPhone") > -1;
         HttpSession session = request.getSession();
         String sessionSunetid = (String) session.getAttribute(Model.SUNETID);
         String sunetid = sessionSunetid == null ? getSunetidFromRequest(request) : sessionSunetid;

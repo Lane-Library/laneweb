@@ -32,7 +32,8 @@ public class PersistentLoginFilter implements Filter {
 
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain chain) throws IOException,
             ServletException {
-        boolean isIphone = ((HttpServletRequest) request).getHeader("user-agent").indexOf("iPhone") > -1;
+        String userAgent = ((HttpServletRequest) request).getHeader("user-agent");
+        boolean isIphone = userAgent != null && userAgent.indexOf("iPhone") > -1;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         if (Boolean.parseBoolean(request.getParameter(("pl")))) {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
