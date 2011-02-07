@@ -52,14 +52,6 @@
         <property name="sourceResolver" ref="org.apache.excalibur.source.SourceResolver"/>
     </bean>
     
-    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
-        <property name="propertyEditorRegistrars">
-            <list>
-                <bean class="edu.stanford.irt.laneweb.cocoon.source.SourceEditorRegistrar"/>
-            </list>
-        </property>
-    </bean>
-    
     <bean name="org.apache.cocoon.components.treeprocessor.TreeBuilder/sitemap-1.0"
         class="edu.stanford.irt.laneweb.cocoon.SitemapLanguage" scope="prototype">
         <constructor-arg ref="org.apache.avalon.framework.service.ServiceManager"/>
