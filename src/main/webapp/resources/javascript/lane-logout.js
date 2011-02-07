@@ -1,7 +1,7 @@
 (function() {
 
 	var Y = LANE.Y,
-        logout = Y.one('#logout');
+        logout = Y.one('#logout'),
 	    pl_button = Y.one('#persistence-login'),
 	    pl = Y.one('#pl');
 	    
