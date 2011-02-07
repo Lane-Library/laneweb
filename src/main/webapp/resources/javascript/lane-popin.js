@@ -20,6 +20,7 @@
                         activeEl = i;
                         elms.item(i).get('parentNode').setStyle('display','inline');
                         elms.item(i).setStyle('display','inline');
+                        Y.one('#searchResults').setStyle('marginTop','5px');
                     } else if (i > activeEl) {
                         elms.item(i).setStyle('display','none');
                     }
