@@ -592,7 +592,7 @@
             <artifactId>spring-tx</artifactId>
             <groupId>org.springframework</groupId>
             <version>3.0.5.RELEASE</version>
-            <scope>runtime</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <artifactId>junit</artifactId>
