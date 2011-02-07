@@ -31,12 +31,12 @@ public class LogoutServlet extends HttpServlet {
         for (Cookie cookie : req.getCookies()) {
             String name = cookie.getName();
             if (SunetIdCookieCodec.LANE_COOKIE_NAME.equals(name) || WEBAUTH_COOKIE_NAME.equals(name)) {
+                if (isIphone) {
+                    this.log.info("removing cookie: " + cookie.getName()+ "   value: "+cookie.getValue());
+                }
                 cookie.setValue(null);
                 cookie.setMaxAge(0);
                 resp.addCookie(cookie);
-                if (isIphone) {
-                    this.log.info("removing cookie: " + cookie.getName());
-                }
             }
         }
         HttpSession session = req.getSession(false);
