@@ -58,8 +58,6 @@
         <constructor-arg ref="org.apache.cocoon.components.pipeline.impl.PipelineComponentInfo"/>
     </bean>
     
-    <bean name="org.apache.cocoon.acting.Action/invalidate-session"
-        class="org.apache.cocoon.acting.SessionInvalidatorAction"/>
     <bean id="org.apache.excalibur.xmlizer.XMLizer"
         class="edu.stanford.irt.laneweb.cocoon.LanewebXMLizer"/>
     
@@ -90,7 +88,7 @@
 
 
     <bean name="org.apache.cocoon.selection.Selector/ipgroup"
-        class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector" scope="prototype"> </bean>
+        class="edu.stanford.irt.laneweb.ipgroup.IPGroupSelector" scope="prototype"/>
 
     <bean id="org.apache.cocoon.matching.MatcherSelector"
         class="org.apache.cocoon.core.container.spring.avalon.AvalonServiceSelector">
