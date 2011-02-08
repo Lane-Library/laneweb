@@ -5,20 +5,22 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.4.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<http auto-config="true">
-		<custom-filter position="PRE_AUTH_FILTER" ref="webauthFilter"/>
-		<intercept-url pattern="/secure/**" access="ROLE_USER" requires-channel="https"/>
-		<intercept-url pattern="/spring_security_login" access="IS_AUTHENTICATED_ANONYMOUSLY"
+	<http auto-config="false" entry-point-ref="foo">
+	    <custom-filter position="PRE_AUTH_FILTER" ref="webauthFilter" />
+	    <intercept-url pattern="/secure/**" access="ROLE_USER" requires-channel="https"/>
+	    <intercept-url pattern="/**" filters="none"/>
+		<!--<intercept-url pattern="/spring_security_login" access="IS_AUTHENTICATED_ANONYMOUSLY"
 			requires-channel="https"/>
 		<intercept-url pattern="/j_spring_security_check" access="IS_AUTHENTICATED_ANONYMOUSLY"
-			requires-channel="https"/>
-		<remember-me key="lanewebRememberMeKey"/>
+			requires-channel="https"/>-->
+		<!--<remember-me key="lanewebRememberMeKey"/>-->
 	</http>
 
 	<beans:bean id="webauthFilter"
 		class="org.springframework.security.web.authentication.preauth.RequestHeaderAuthenticationFilter">
 		<beans:property name="principalRequestHeader" value="X-WEBAUTH-USER"/>
 		<beans:property name="authenticationManager" ref="authenticationManager"/>
+	    <beans:property name="exceptionIfHeaderMissing" value="false"/>
 	</beans:bean>
 
 	<beans:bean id="preauthAuthProvider"
@@ -26,7 +28,11 @@
 		<beans:property name="preAuthenticatedUserDetailsService">
 			<beans:bean id="userDetailsServiceWrapper"
 				class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
-				<beans:property name="userDetailsService" ref="userDetailsService"/>
+				<beans:property name="userDetailsService">
+				    <beans:bean class="edu.stanford.irt.laneweb.security.WebAuthUserDetailsService">
+				        <beans:property name="adminUsers" value="ceyates,ryanmax,alainb"/>
+				    </beans:bean>
+				</beans:property>
 			</beans:bean>
 		</beans:property>
 	</beans:bean>
@@ -34,6 +40,8 @@
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider ref="preauthAuthProvider"/>
 	</authentication-manager>
+    
+    <beans:bean id="foo" class="edu.stanford.irt.laneweb.security.WebAuthEntryPoint"/>
 
 
 </beans:beans>
