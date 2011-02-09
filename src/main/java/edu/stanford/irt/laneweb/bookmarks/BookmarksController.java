@@ -39,7 +39,11 @@ public class BookmarksController {
 
     @ModelAttribute(Model.BOOKMARKS)
     public Bookmarks getBookmarks(@ModelAttribute(Model.EMRID) final String emrid) {
-        return this.bookmarksDAO.getBookmarks(emrid);
+        Bookmarks bookmarks =  this.bookmarksDAO.getBookmarks(emrid);
+        if (bookmarks == null) {
+            bookmarks = new Bookmarks(emrid);
+        }
+        return bookmarks;
     }
 
 //    @RequestMapping(value = "/moveDown", method = RequestMethod.GET)
