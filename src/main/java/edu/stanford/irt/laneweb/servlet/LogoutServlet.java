@@ -46,6 +46,8 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
         }
         OutputStream out =  resp.getOutputStream();
+        resp.setContentType ("text/html");
+
         out.write(page.getBytes());
         out.flush();
     }
