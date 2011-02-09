@@ -35,8 +35,8 @@ public class BookmarksGenerator extends AbstractGenerator {
 
     public void generate() throws SAXException, IOException {
         if (this.editing) {
-            if ("delete".equals(this.action)) {
-                this.controller.deleteBookmark(this.position, this.bookmarks);
+            if ("remove".equals(this.action)) {
+                this.controller.removeBookmark(this.position, this.bookmarks);
 //            } else if ("up".equals(this.action)) {
 //                this.controller.moveUp(this.position, this.bookmarks);
 //            } else if ("down".equals(this.action)) {

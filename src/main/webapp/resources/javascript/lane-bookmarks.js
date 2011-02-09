@@ -46,7 +46,7 @@
     		}
         }
     };
-    Bookmarks.DELETE_TEMPLATE = "<a class=\"yui3-bookmark-edit\">delete</a>";
+    Bookmarks.DELETE_TEMPLATE = "<a class=\"yui3-bookmark-edit\">remove</a>";
     Bookmarks.CREATE_TEMPLATE = "<li><a></a>" + Bookmarks.DELETE_TEMPLATE + "</li>";
     Bookmarks.ADD_BOOKMARK_TEMPLATE = '<form class="yui3-bookmarks-edit"><h4>add a bookmark</h4><div><label>url:</label><input name="url" type="text" /></div><div><label>label:</label><input name="label" type="text" /></div><input type="submit" value="add" /></form>';
     Y.extend(Bookmarks, Y.Widget, {
@@ -64,7 +64,7 @@
     			}
         		this.get("contentBox").one("ul").insert(node, position);
         		this.get("bookmarks").splice(position, 0, node);
-        		node.one(".yui3-bookmark-edit").on("click", this._handleDeleteClick, this);
+        		node.one(".yui3-bookmark-edit").on("click", this._handleRemoveClick, this);
     		}
     	},
     	removeBookmark : function(position) {
@@ -93,7 +93,7 @@
     	bindUI : function() {
     		this.after("editingChange", this._afterEditingChange);
     		this.get("toggle").on("click", this._toggleEdit, this);
-    		this.get("contentBox").all(".yui3-bookmark-edit").on("click", this._handleDeleteClick, this);
+    		this.get("contentBox").all(".yui3-bookmark-edit").on("click", this._handleRemoveClick, this);
     		this.get("contentBox").one("input[type='submit']").on("click", this._handleAddClick, this);
     	},
     	_handleAddClick: function(e) {
@@ -110,12 +110,12 @@
     		label.set("value","");
     		url.set("value","");
     	},
-    	_handleDeleteClick : function(e) {
+    	_handleRemoveClick : function(e) {
     		var i, ul = e.target.ancestor("ul").all(".yui3-bookmark-edit");
     		for (i = 0; i < ul.size(); i++) {
     			if (ul.item(i) === e.target) {
     				this.removeBookmark(i);
-    				this.get("io")("/././bookmarks/delete", {
+    				this.get("io")("/././bookmarks/remove", {
     					method : "post",
     					data : "position=" + i
     				});

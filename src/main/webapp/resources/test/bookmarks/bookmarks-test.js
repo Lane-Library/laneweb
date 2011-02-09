@@ -55,7 +55,7 @@ YUI({
         	T.Assert.areEqual(size - 1, T.all("#bookmarks li").size());
         },
         
-        testClickDeleteBookmark : function() {
+        testClickRemoveBookmark : function() {
         	var size = T.all("li").size();
         	T.one(".yui3-bookmark-edit").simulate("click");
         	T.Assert.areEqual(size - 1, T.all("li").size());
@@ -69,7 +69,7 @@ YUI({
         	T.Assert.areEqual(size + 1, T.all("li").size());
         },
         
-        testCorrectBookmarkDeleted : function() {
+        testCorrectBookmarkRemoved : function() {
         	var label = T.one("li").get("textContent");
         	T.all(".yui3-bookmark-edit").item(1).simulate("click");
         	T.Assert.areEqual(label, T.one("li").get("textContent"));

@@ -83,19 +83,19 @@ public class EditingXMLizableBookmarksView extends DefaultXMLizableBookmarksView
             XMLUtils.startElement(contentHandler, XHTMLNS, LI);
             AttributesImpl atts = new AttributesImpl();
             atts.addAttribute("", METHOD, METHOD, CDATA, "post");
-            atts.addAttribute("", CLASS, CLASS, CDATA, "delete");
+            atts.addAttribute("", CLASS, CLASS, CDATA, "remove");
             XMLUtils.startElement(contentHandler, XHTMLNS, FORM, atts);
             XMLUtils.startElement(contentHandler, XHTMLNS, DIV);
             atts = new AttributesImpl();
             atts.addAttribute("", TYPE, TYPE, CDATA, "submit");
-            atts.addAttribute("", VALUE, VALUE, CDATA, "delete");
+            atts.addAttribute("", VALUE, VALUE, CDATA, "remove");
             XMLUtils.createElementNS(contentHandler, XHTMLNS, INPUT, atts);
             atts = new AttributesImpl();
             atts.addAttribute("", HREF, HREF, CDATA, bookmark.getUrl());
             XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, bookmark.getLabel());
             atts = new AttributesImpl();
             atts.addAttribute("", NAME, NAME, CDATA, "action");
-            atts.addAttribute("", VALUE, VALUE, CDATA, "delete");
+            atts.addAttribute("", VALUE, VALUE, CDATA, "remove");
             atts.addAttribute("", TYPE, TYPE, CDATA, "hidden");
             XMLUtils.createElementNS(contentHandler, XHTMLNS, INPUT, atts);
             atts = new AttributesImpl();
@@ -106,9 +106,9 @@ public class EditingXMLizableBookmarksView extends DefaultXMLizableBookmarksView
             XMLUtils.endElement(contentHandler, XHTMLNS, DIV);
             XMLUtils.endElement(contentHandler, XHTMLNS, FORM);
             
-//            atts.addAttribute("", HREF, HREF, CDATA, "?action=delete&position=" + i);
+//            atts.addAttribute("", HREF, HREF, CDATA, "?action=remove&position=" + i);
 //            atts.addAttribute("", CLASS, CLASS, CDATA, "nav");
-//            XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, "delete");
+//            XMLUtils.createElementNS(contentHandler, XHTMLNS, A, atts, "remove");
             // if (bookmarks.size() > 1 && i < bookmarks.size() - 1) {
             // atts = new AttributesImpl();
             // atts.addAttribute("", HREF, HREF, CDATA, "?action=down&position="
