@@ -5,6 +5,7 @@
         var searchTerms = Y.one('#searchTerms'),
         searchReset = Y.one('#searchReset'),
         form = Y.one("#search"),
+        searchContent = Y.one('.search'),
         eventHandle,
         reset;
         if (!searchReset) {
@@ -43,6 +44,9 @@
                 }
                 else{
                     reset.hide();
+                    if(searchContent){
+                        searchContent.setStyle('visibility','hidden');
+                    }
                 }
             },
             resetSearch : function(event) {
