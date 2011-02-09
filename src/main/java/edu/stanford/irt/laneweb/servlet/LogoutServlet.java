@@ -1,6 +1,7 @@
 package edu.stanford.irt.laneweb.servlet;
 
 import java.io.IOException;
+import java.io.OutputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -44,6 +45,10 @@ public class LogoutServlet extends HttpServlet {
         if (null != session) {
             session.invalidate();
         }
-        resp.sendRedirect(WEBAUTH_LOGOUT_URL);
+        OutputStream out =  resp.getOutputStream();
+        out.write(page.getBytes());
+        out.flush();
     }
+    
+    String page = "<html><head><meta http-equiv=\"refresh\" content=\"0;url=".concat(WEBAUTH_LOGOUT_URL).concat("\"></head></html>");
 }
