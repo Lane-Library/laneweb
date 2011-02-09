@@ -44,9 +44,6 @@
                 }
                 else{
                     reset.hide();
-                    if(searchContent){
-                        searchContent.setStyle('visibility','hidden');
-                    }
                 }
             },
             resetSearch : function(event) {
@@ -61,6 +58,9 @@
                 }
                 inputs.item(0).focus();
                 reset.syncUI();
+                if(searchContent){
+                    searchContent.setStyle('visibility','hidden');
+                }
                 Y.fire('lane:searchFormReset');
                 event.preventDefault();
             }        
